@@ -23,5 +23,5 @@ script:
 
 after_success:
   - if [ "${COVERAGE}" == "1" ]; then
-      coveralls --root .. --exclude build --exclude examples --exclude lib --exclude tests --gcov-options '\-lp';
-    fi
+      coveralls --exclude build --exclude examples --exclude lib --exclude tests --gcov-options '\-lp';
+    fi  

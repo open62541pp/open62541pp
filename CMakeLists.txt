@@ -15,7 +15,7 @@ target_include_directories(project_options INTERFACE include lib)
 if(MSVC)
     target_compile_options(project_options INTERFACE /permissive- /W4 /w14640)
 else()
-    option(ENABLE_COVERAGE "Enable coverage reporting for gcc/clang" FALSE)
+    option(ENABLE_COVERAGE "Enable coverage reporting for gcc/clang" OFF)
 
     if(ENABLE_COVERAGE)
         target_compile_options(project_options INTERFACE --coverage -O0 -g)
