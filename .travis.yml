@@ -1,0 +1,13 @@
+language: cpp
+
+dist: bionic
+sudo: required
+
+compiler:
+  - clang
+  - gcc
+
+script:
+  - mkdir build && cd build
+  - cmake ..
+  - cmake --build .
