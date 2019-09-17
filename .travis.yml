@@ -23,5 +23,5 @@ script:
 
 after_success:
   - if [ "${COVERAGE}" == "1" ]; then
-      coveralls --root .. --exclude examples --exclude lib --exclude tests --gcov-options '\-lp';
-    fi  
+      coveralls --root .. --exclude build/CMakeFiles --exclude build/lib --exclude examples --exclude lib --exclude tests --gcov-options '\-lp';
+    fi
