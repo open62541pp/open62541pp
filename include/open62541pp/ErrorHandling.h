@@ -1,0 +1,37 @@
+#pragma once
+
+#include <string>
+#include <string_view>
+#include <stdexcept>
+
+#include "open62541/types.h"
+
+namespace opcua {
+
+class Exception : public std::runtime_error {
+public:
+    explicit Exception(uint32_t statusCode)
+        : std::runtime_error(getStatusMessage(statusCode)) {}
+    
+    explicit Exception(std::string_view message)
+        : std::runtime_error(message.data()) {}  
+    
+    inline std::string getStatusMessage(uint32_t statusCode) const noexcept {
+        std::string msg {"OPC UA error: "};
+        msg += UA_StatusCode_name(statusCode);
+        return msg;
+    }
+};
+
+inline bool checkStatusCode(UA_StatusCode code) noexcept {
+    if (code != UA_STATUSCODE_GOOD)
+        return false;
+    return true;
+}
+
+inline void checkStatusCodeException(UA_StatusCode code) {
+    if (code != UA_STATUSCODE_GOOD)
+        throw Exception(code);
+}
+
+} // namespace opcua
