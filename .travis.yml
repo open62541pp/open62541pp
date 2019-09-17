@@ -3,17 +3,25 @@ language: cpp
 dist: bionic
 sudo: required
 
-compiler:
-  - clang
-  - gcc
+matrix:
+  include:
+    - name: "default gcc with coverage"
+      compiler: gcc
+      env:
+        - COVERAGE=1
+        - CMAKE_OPTS="-DENABLE_COVERAGE=ON"
+    - name: "default clang"
+      compiler: clang
 
 before_install:
   - pip install --user cpp-coveralls
 
 script:
   - mkdir build && cd build
-  - cmake -DENABLE_COVERAGE=On ..
+  - cmake $CMAKE_OPTS ..
   - cmake --build .
 
 after_success:
-  - coveralls --root .. --exclude build --exclude examples --exclude lib --exclude tests --gcov-options '\-lp'
+  - if [ "${COVERAGE}" == "1" ]; then
+      coveralls --root .. --exclude build --exclude examples --exclude lib --exclude tests --gcov-options '\-lp';
+    fi
