@@ -7,7 +7,13 @@ compiler:
   - clang
   - gcc
 
+before_install:
+  - pip install --user cpp-coveralls
+
 script:
   - mkdir build && cd build
-  - cmake ..
+  - cmake -DENABLE_COVERAGE=On ..
   - cmake --build .
+
+after_success:
+  - coveralls --root .. --exclude examples --exclude lib --exclude tests --gcov-options '\-lp'
