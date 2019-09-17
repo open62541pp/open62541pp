@@ -16,4 +16,4 @@ script:
   - cmake --build .
 
 after_success:
-  - coveralls --root .. --exclude examples --exclude lib --exclude tests --gcov-options '\-lp'
+  - coveralls --root .. --exclude build --exclude examples --exclude lib --exclude tests --gcov-options '\-lp'
