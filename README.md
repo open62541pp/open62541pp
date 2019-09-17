@@ -1,5 +1,9 @@
 # open62541++
 
+[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-blue.svg)](https://github.com/open62541pp/open62541pp/blob/master/LICENSE)
+[![Build Status](https://travis-ci.org/open62541pp/open62541pp.svg?branch=master)](https://travis-ci.org/open62541pp/open62541pp)
+[![Coverage Status](https://coveralls.io/repos/github/open62541pp/open62541pp/badge.svg)](https://coveralls.io/github/open62541pp/open62541pp)
+
 open62541++ is a C++ wrapper built on top of the amazing [open62541](https://open62541.org) OPC UA (OPC Unified Architecture) library.
 
 It aims to:
