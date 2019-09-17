@@ -18,6 +18,7 @@ else()
     option(ENABLE_COVERAGE "Enable coverage reporting for gcc/clang" OFF)
 
     if(ENABLE_COVERAGE)
+        message(STATUS "Coverage enabled")
         target_compile_options(project_options INTERFACE --coverage -O0 -g)
         target_link_libraries(project_options INTERFACE --coverage)
     endif()
