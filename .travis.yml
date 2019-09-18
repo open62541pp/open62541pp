@@ -4,13 +4,15 @@ dist: bionic
 
 matrix:
   include:
-    - name: "default gcc with coverage"
-      compiler: gcc
+    # default gcc with coverage
+    - compiler: gcc
       env:
         - COVERAGE=1
         - CMAKE_OPTS="-DENABLE_COVERAGE=ON"
-    - name: "default clang"
-      compiler: clang
+    # default clang with clang-tidy checks
+    - compiler: clang
+      env:
+        - CMAKE_OPTS="-DENABLE_CLANG_TIDY=ON"
 
 before_install:
   - pip install --user cpp-coveralls
