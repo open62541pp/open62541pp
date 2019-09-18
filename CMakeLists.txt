@@ -22,7 +22,7 @@ else()
         target_link_libraries(project_options INTERFACE --coverage)
     endif()
 
-    option(ENABLE_CLANG_TIDY "Enable testing with clang-tidy" ON)
+    option(ENABLE_CLANG_TIDY "Enable testing with clang-tidy" OFF)
     if(ENABLE_CLANG_TIDY)
         message(STATUS "Static code analysis with clang-tidy enabled")
         find_program(CLANGTIDY clang-tidy)
