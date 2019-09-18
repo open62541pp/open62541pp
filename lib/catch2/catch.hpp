@@ -4285,7 +4285,7 @@ namespace Catch {
     {
         if( !IMutableContext::currentContext )
             IMutableContext::createContext();
-        return *IMutableContext::currentContext;
+        return *IMutableContext::currentContext; // NOLINT
     }
 
     inline IContext& getCurrentContext()
