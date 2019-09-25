@@ -1,14 +1,11 @@
-cmake_minimum_required(VERSION 3.10)
-
-project(open62541pp-examples)
-
-# find all cpp source files in sandbox
+# find all example source files
 file(GLOB examples_sources "*.cpp")
 foreach(source ${examples_sources})
     # extract filename
     get_filename_component(name ${source} NAME_WE)
-    # create executeable
-    add_executable(${name} ${source})
-    # link to core library
-    target_link_libraries(${name} open62541pp::open62541pp project_options)
+    # use open62541pp_example_ prefix for target to prevent naming collisions
+    set(target_name "open62541pp_examples_${name}")
+    add_executable(${target_name} ${source})
+    target_link_libraries(${target_name} open62541pp::open62541pp project_options)
+    set_target_properties(${target_name} PROPERTIES OUTPUT_NAME ${name})
 endforeach(source ${sandbox_sources})
