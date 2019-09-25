@@ -8,18 +8,18 @@ matrix:
     - compiler: gcc
       env:
         - COVERAGE=1
-        - CMAKE_OPTS="-DENABLE_COVERAGE=ON"
+        - CMAKE_OPTS="-DUAPP_ENABLE_COVERAGE=ON"
     # default clang with clang-tidy checks
     - compiler: clang
       env:
-        - CMAKE_OPTS="-DENABLE_CLANG_TIDY=ON"
+        - CMAKE_OPTS="-DUAPP_ENABLE_CLANG_TIDY=ON"
 
 before_install:
   - pip install --user cpp-coveralls
 
 script:
   - mkdir build && cd build
-  - cmake $CMAKE_OPTS ..
+  - cmake -DUAPP_BUILD_TESTS=ON -DUAPP_BUILD_EXAMPLES=ON $CMAKE_OPTS ..
   - cmake --build .
 
 after_success:
