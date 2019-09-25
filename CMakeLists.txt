@@ -67,11 +67,13 @@ target_link_libraries(open62541pp
 # tests
 option(UAPP_BUILD_TESTS "Build unit tests" OFF)
 if(UAPP_BUILD_TESTS)
+    message(STATUS "Unit tests enabled")
     add_subdirectory(tests)
 endif()
 
 # examples
 option(UAPP_BUILD_EXAMPLES "Build examples" OFF)
 if(UAPP_BUILD_EXAMPLES)
+    message(STATUS "Examples enabled")
     add_subdirectory(examples)
 endif()
