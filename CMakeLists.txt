@@ -47,6 +47,9 @@ else()
                                      -Wpedantic)
 endif()
 
+# options
+option(BUILD_SHARED_LIBS "Enable building of shared libraries (dll/so)" OFF)
+
 # threads
 find_package(Threads REQUIRED)
 
@@ -55,14 +58,14 @@ add_subdirectory(lib/open62541) # target open62541::open62541
 
 # open62541pp library
 file(GLOB_RECURSE sources "src/*.cpp")
-add_library(open62541pp SHARED ${sources})
+add_library(open62541pp ${sources}) # static / shared depending on option BUILD_SHARED_LIBS
 add_library(open62541pp::open62541pp ALIAS open62541pp)
 
 target_include_directories(open62541pp PUBLIC include)
 
 target_link_libraries(open62541pp
                       PUBLIC open62541::open62541
-                      PRIVATE project_options)
+                      PRIVATE Threads::Threads project_options)
 
 # tests
 option(UAPP_BUILD_TESTS "Build unit tests" OFF)
