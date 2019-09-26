@@ -80,3 +80,6 @@ if(UAPP_BUILD_EXAMPLES)
     message(STATUS "Examples enabled")
     add_subdirectory(examples)
 endif()
+
+# documentation
+add_subdirectory(doc)
