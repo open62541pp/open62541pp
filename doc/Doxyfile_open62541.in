@@ -1,0 +1,22 @@
+PROJECT_NAME           = open62541
+GENERATE_LATEX         = NO
+GENERATE_MAN           = NO
+GENERATE_RTF           = NO
+GENERATE_HTML          = YES
+GENERATE_XML           = NO
+INPUT                  = "@OPEN62541_DOXYGEN_INPUT_DIR@"
+FILE_PATTERNS          = *.h \
+                         *.c
+RECURSIVE              = YES
+OUTPUT_DIRECTORY       = "@OPEN62541_DOXYGEN_OUTPUT_DIR@"
+QUIET                  = YES
+JAVADOC_AUTOBRIEF      = YES
+AUTOLINK_SUPPORT       = NO
+EXTRACT_ALL            = YES
+EXTRACT_STATIC         = YES
+ALPHABETICAL_INDEX     = NO
+INCLUDE_GRAPH          = NO
+INCLUDED_BY_GRAPH      = NO
+MACRO_EXPANSION        = YES
+WARN_IF_UNDOCUMENTED   = NO
+OPTIMIZE_OUTPUT_FOR_C  = YES
