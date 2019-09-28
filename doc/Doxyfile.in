@@ -2,15 +2,17 @@ PROJECT_NAME         = open62541pp
 GENERATE_LATEX       = NO
 GENERATE_MAN         = NO
 GENERATE_RTF         = NO
-CASE_SENSE_NAMES     = NO
-INPUT                = "@DOXYGEN_INPUT_DIR@"
-QUIET                = YES
-JAVADOC_AUTOBRIEF    = YES
-AUTOLINK_SUPPORT     = NO
 GENERATE_HTML        = NO
 GENERATE_XML         = YES
+INPUT                = "@DOXYGEN_INPUT_DIR@"
+FILE_PATTERNS        = *.h \
+                       *.cpp
+RECURSIVE            = YES
 OUTPUT_DIRECTORY     = "@DOXYGEN_OUTPUT_DIR@"
 ALIASES              = "rst=\verbatim embed:rst"
 ALIASES             += "endrst=\endverbatim"
+JAVADOC_AUTOBRIEF    = YES
+AUTOLINK_SUPPORT     = NO
 MACRO_EXPANSION      = YES
+QUIET                = YES
 WARN_IF_UNDOCUMENTED = NO
