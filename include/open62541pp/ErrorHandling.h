@@ -10,13 +10,13 @@ namespace opcua {
 
 class Exception : public std::runtime_error {
 public:
-    explicit Exception(uint32_t statusCode)
+    explicit Exception(UA_StatusCode statusCode)
         : std::runtime_error(getStatusMessage(statusCode)) {}
     
     explicit Exception(std::string_view message)
         : std::runtime_error(message.data()) {}  
     
-    inline std::string getStatusMessage(uint32_t statusCode) const noexcept {
+    inline std::string getStatusMessage(UA_StatusCode statusCode) const noexcept {
         std::string msg {"OPC UA error: "};
         msg += UA_StatusCode_name(statusCode);
         return msg;
