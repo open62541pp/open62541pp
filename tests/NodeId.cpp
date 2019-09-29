@@ -4,7 +4,7 @@
 
 using namespace opcua;
 
-TEST_CASE("NodeId", "[opcua]") {
+TEST_CASE("NodeId") {
     NodeId nodeNumeric1(1, 0);
     NodeId nodeNumeric2(1, 0);
     NodeId nodeNumeric3(2, 0);

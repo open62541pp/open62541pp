@@ -4,7 +4,7 @@
 
 using namespace opcua;
 
-TEST_CASE("String conversion", "[opcua]") {
+TEST_CASE("String conversion") {
     UA_String testString = UA_STRING_ALLOC("test123");
     REQUIRE(uaStringToString(testString) == "test123");
     REQUIRE(uaStringToString(testString) != "test321");
