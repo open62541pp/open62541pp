@@ -23,10 +23,10 @@ static bool compareNodes(NodeId id, uint16_t numericId) {
     return UA_NodeId_equal(id.handle(), &uaNode);
 }
 
-TEST_CASE("Server", "[opcua]") {
+TEST_CASE("Server") {
     Server server;
 
-    SECTION("Start / stop server", "[opcua]") {
+    SECTION("Start / stop server") {
         REQUIRE_FALSE(server.isRunning());
         REQUIRE_NOTHROW(server.start());
         REQUIRE_THROWS(server.start()); // already started
@@ -50,7 +50,7 @@ TEST_CASE("Server", "[opcua]") {
         REQUIRE(uaStringToString(config->applicationDescription.productUri) == "http://product.com");
     }
 
-    SECTION("Get default nodes", "[opcua]") {
+    SECTION("Get default nodes") {
         REQUIRE(compareNodes(server.getRootNode().getNodeId(),           UA_NS0ID_ROOTFOLDER));
         REQUIRE(compareNodes(server.getObjectsNode().getNodeId(),        UA_NS0ID_OBJECTSFOLDER));
         REQUIRE(compareNodes(server.getTypesNode().getNodeId(),          UA_NS0ID_TYPESFOLDER));
@@ -61,7 +61,7 @@ TEST_CASE("Server", "[opcua]") {
         REQUIRE(compareNodes(server.getReferenceTypesNode().getNodeId(), UA_NS0ID_REFERENCETYPESFOLDER));
     }
 
-    SECTION("Register namespace", "[opcua]") {
+    SECTION("Register namespace") {
         // namespace 0 reserved, but why starting at 2?
         REQUIRE(server.registerNamespace("testnamespaceuri1") == 2);
         REQUIRE(server.registerNamespace("testnamespaceuri2") == 3);

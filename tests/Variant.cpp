@@ -5,7 +5,7 @@
 
 using namespace opcua;
 
-TEST_CASE("Variant", "[opcua]") {
+TEST_CASE("Variant") {
     SECTION("Empty variant") {
         Variant varEmpty;
 
