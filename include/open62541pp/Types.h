@@ -1,8 +1,5 @@
 #pragma once
 
-#include <string>
-#include <string_view>
-
 #include "open62541/types.h"
 #include "open62541/types_generated.h"
 #include "open62541/nodeids.h"
@@ -24,17 +21,17 @@ enum class Type : uint16_t {
     String          = UA_TYPES_STRING,
     DateTime        = UA_TYPES_DATETIME,
     Guid            = UA_TYPES_GUID,
-    // ByteString      = UA_TYPES_BYTESTRING,
-    // XmlElement      = UA_TYPES_XMLELEMENT,
-    // NodeId          = UA_TYPES_NODEID,
-    // ExpanededNodeId = UA_TYPES_EXPANDEDNODEID,
-    // StatusCode      = UA_TYPES_STATUSCODE,
-    // QualifiedName   = UA_TYPES_QUALIFIEDNAME,
-    // LocalizedText   = UA_TYPES_LOCALIZEDTEXT,
-    // ExtensionObject = UA_TYPES_EXTENSIONOBJECT,
-    // DataValue       = UA_TYPES_DATAVALUE,
-    // Variant         = UA_TYPES_VARIANT,
-    // DiagnosticInfo  = UA_TYPES_DIAGNOSTICINFO
+    ByteString      = UA_TYPES_BYTESTRING,
+    XmlElement      = UA_TYPES_XMLELEMENT,
+    NodeId          = UA_TYPES_NODEID,
+    ExpanededNodeId = UA_TYPES_EXPANDEDNODEID,
+    StatusCode      = UA_TYPES_STATUSCODE,
+    QualifiedName   = UA_TYPES_QUALIFIEDNAME,
+    LocalizedText   = UA_TYPES_LOCALIZEDTEXT,
+    ExtensionObject = UA_TYPES_EXTENSIONOBJECT,
+    DataValue       = UA_TYPES_DATAVALUE,
+    Variant         = UA_TYPES_VARIANT,
+    DiagnosticInfo  = UA_TYPES_DIAGNOSTICINFO
 };
 
 enum class NodeClass : uint16_t {
@@ -79,28 +76,41 @@ enum class ReferenceType : uint16_t {
 };
 
 template <typename> inline constexpr Type getType();
-template <> inline constexpr Type getType<bool>()     { return Type::Boolean; }
-template <> inline constexpr Type getType<int16_t>()  { return Type::Int16; }
-template <> inline constexpr Type getType<uint16_t>() { return Type::UInt16; }
-template <> inline constexpr Type getType<int32_t>()  { return Type::Int32; }
-template <> inline constexpr Type getType<uint32_t>() { return Type::UInt32; }
-template <> inline constexpr Type getType<int64_t>()  { return Type::Int64; }
-template <> inline constexpr Type getType<uint64_t>() { return Type::UInt64; }
-template <> inline constexpr Type getType<float>()    { return Type::Float; }
-template <> inline constexpr Type getType<double>()   { return Type::Double; }
-template <> inline constexpr Type getType<std::string>()      { return Type::String; }
-template <> inline constexpr Type getType<std::string_view>() { return Type::String; }
-template <> inline constexpr Type getType<const char*>()      { return Type::String; }
+template <> inline constexpr Type getType<UA_Boolean>()         { return Type::Boolean; }
+template <> inline constexpr Type getType<UA_SByte>()           { return Type::SByte; }
+template <> inline constexpr Type getType<UA_Byte>()            { return Type::Byte; }
+template <> inline constexpr Type getType<UA_Int16>()           { return Type::Int16; }
+template <> inline constexpr Type getType<UA_UInt16>()          { return Type::UInt16; }
+template <> inline constexpr Type getType<UA_Int32>()           { return Type::Int32; }
+template <> inline constexpr Type getType<UA_UInt32>()          { return Type::UInt32; }
+template <> inline constexpr Type getType<UA_Int64>()           { return Type::Int64; }
+template <> inline constexpr Type getType<UA_UInt64>()          { return Type::UInt64; }
+template <> inline constexpr Type getType<UA_Float>()           { return Type::Float; }
+template <> inline constexpr Type getType<UA_Double>()          { return Type::Double; }
+template <> inline constexpr Type getType<UA_String>()          { return Type::String; }
+// template <> inline constexpr Type getType<UA_DateTime>()        { return Type::DateTime; }
+template <> inline constexpr Type getType<UA_Guid>()            { return Type::Guid; }
+// template <> inline constexpr Type getType<UA_ByteString>()      { return Type::ByteString; }
+// template <> inline constexpr Type getType<UA_XmlElement>()      { return Type::XmlElement; }
+template <> inline constexpr Type getType<UA_NodeId>()          { return Type::NodeId; }
+// template <> inline constexpr Type getType<UA_ExpanededNodeId>() { return Type::ExpanededNodeId; }
+// template <> inline constexpr Type getType<UA_StatusCode>()      { return Type::StatusCode; }
+template <> inline constexpr Type getType<UA_QualifiedName>()   { return Type::QualifiedName; }
+template <> inline constexpr Type getType<UA_LocalizedText>()   { return Type::LocalizedText; }
+template <> inline constexpr Type getType<UA_ExtensionObject>() { return Type::ExtensionObject; }
+template <> inline constexpr Type getType<UA_DataValue>()       { return Type::DataValue; }
+template <> inline constexpr Type getType<UA_Variant>()         { return Type::Variant; }
+template <> inline constexpr Type getType<UA_DiagnosticInfo>()  { return Type::DiagnosticInfo; }
 
-// get UA_DataType* by template argument
+// Get UA_DataType by template argument
 template <typename T>
 inline const UA_DataType* getUaDataType() {
     return &UA_TYPES[static_cast<uint16_t>(getType<T>())];
 }
 
-// get UA_DataType* by Type enum
+// Get UA_DataType by Type enum
 inline const UA_DataType* getUaDataType(Type type) {
     return &UA_TYPES[static_cast<uint16_t>(type)];
 }
 
-} // namespace opc ua
+} // namespace opcua
