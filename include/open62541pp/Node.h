@@ -26,7 +26,7 @@ class EventTypeNode;
 
 class Node {
 public:
-    Node(Server& server, const NodeId& id);
+    Node(const Server& server, const NodeId& id);
 
     inline NodeId getNodeId() const { return nodeId_; }
 

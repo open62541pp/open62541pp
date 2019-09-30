@@ -17,8 +17,7 @@ TEST_CASE("NodeId") {
     NodeId nodeString4("b", 1);
 
     SECTION("Copy") {
-        NodeId tmp(nodeNumeric1);
-        REQUIRE(tmp == nodeNumeric1);
+        REQUIRE(NodeId(nodeNumeric1) == nodeNumeric1);
     }
 
     SECTION("Assignment") {
