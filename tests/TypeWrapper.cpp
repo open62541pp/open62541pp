@@ -59,5 +59,5 @@ TEST_CASE("Guid wrapper") {
     REQUIRE(wrapper.handle()->data2 == data2);
     REQUIRE(wrapper.handle()->data3 == data3);
     for (int i = 0; i < 8; ++i)
-        REQUIRE(wrapper.handle()->data4[i] == data4[i]);
+        REQUIRE(wrapper.handle()->data4[i] == data4[i]); // NOLINT
 }
