@@ -1,5 +1,7 @@
 #include "catch2/catch.hpp"
 
+#include "open62541/types.h"
+
 #include "open62541pp/NodeId.h"
 
 using namespace opcua;
@@ -15,7 +17,7 @@ TEST_CASE("NodeId") {
     NodeId nodeString4("b", 1);
 
     SECTION("Copy") {
-        NodeId tmp(nodeNumeric1); // NOLINT
+        NodeId tmp(nodeNumeric1);
         REQUIRE(tmp == nodeNumeric1);
     }
 
@@ -54,5 +56,34 @@ TEST_CASE("NodeId") {
         REQUIRE(nodeString1.hash()  == nodeString2.hash());
         REQUIRE(nodeString2.hash()  != nodeString3.hash());
         REQUIRE(nodeString3.hash()  != nodeString4.hash());
+    }
+
+    SECTION("Get properties (getIdentifierType, getNamespaceInex, getIdentifier") {
+        {
+            NodeId id(UA_NODEID_NUMERIC(1, 111));
+            REQUIRE(id.getIdentifierType() == UA_NODEIDTYPE_NUMERIC);
+            REQUIRE(id.getNamespaceIndex() == 1);
+            REQUIRE(std::get<0>(id.getIdentifier()) == 111);
+        }
+        {
+            NodeId id(UA_NODEID_STRING_ALLOC(2, "Test123"));
+            REQUIRE(id.getIdentifierType() == UA_NODEIDTYPE_STRING);
+            REQUIRE(id.getNamespaceIndex() == 2);
+            REQUIRE(std::get<String>(id.getIdentifier()).get() == "Test123");
+        }
+        {
+            Guid guid(11, 22, 33, {1, 2, 3, 4, 5, 6, 7, 8});
+            NodeId id(guid, 3);
+            REQUIRE(id.getIdentifierType() == UA_NODEIDTYPE_GUID);
+            REQUIRE(id.getNamespaceIndex() == 3);
+            REQUIRE(std::get<Guid>(id.getIdentifier()) == guid);
+        }
+        {
+            ByteString byteString("Test456");
+            NodeId id(byteString, 4);
+            REQUIRE(id.getIdentifierType() == UA_NODEIDTYPE_BYTESTRING);
+            REQUIRE(id.getNamespaceIndex() == 4);
+            REQUIRE(std::get<ByteString>(id.getIdentifier()) == byteString);
+        }
     }
 }
