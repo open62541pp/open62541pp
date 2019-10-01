@@ -73,7 +73,7 @@ TEST_CASE("Variant") {
     SECTION("Read / write scalar") {
         Variant var;
         int32_t value = 5;
-        var.writeScalar(value);
+        var.setScalar(value);
 
         REQUIRE(var.isScalar());
         REQUIRE(var.isType(Type::Int32));
@@ -89,20 +89,20 @@ TEST_CASE("Variant") {
     SECTION("Read / write mixed scalar types") {
         Variant var;
 
-        var.writeScalar(static_cast<int>(11));
+        var.setScalar(static_cast<int>(11));
         REQUIRE(var.readScalar<int>() == 11);
 
-        var.writeScalar(static_cast<float>(11.11));
+        var.setScalar(static_cast<float>(11.11));
         REQUIRE(var.readScalar<float>() == 11.11f);
 
-        var.writeScalar(static_cast<short>(1));
+        var.setScalar(static_cast<short>(1));
         REQUIRE(var.readScalar<short>() == 1);
     }
 
     SECTION("Read / write array") {
         Variant var;
         std::vector<float> value {0, 1, 2, 3, 4, 5};
-        var.writeArray(value);
+        var.setArray(value);
 
         REQUIRE(var.isArray());
         REQUIRE(var.isType(Type::Float));
@@ -118,7 +118,7 @@ TEST_CASE("Variant") {
     SECTION("Write array no copy") {
         Variant var;
         std::vector<float> value {0, 1, 2};
-        var.writeArrayNoCopy(value);
+        var.setArrayNoCopy(value);
 
         REQUIRE(var.readArray<float>() == value);
 
