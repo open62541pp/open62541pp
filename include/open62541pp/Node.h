@@ -88,9 +88,9 @@ public:
     }
 
     template <typename T>
-    void writeVector(const std::vector<T>& vector) {
+    void writeArray(const std::vector<T>& array) {
         Variant var;
-        var.writeArray(vector);
+        var.writeArray(array);
         writeVariantToServer(var);
     }
 
@@ -98,20 +98,14 @@ public:
     T read() {
         Variant var;
         readVariantFromServer(var);
-        auto result = var.readScalar<T>();
-        if (!result)
-            return {}; // or exception?
-        return result.value();
+        return var.readScalar<T>();
     }
 
     template <typename T>
-    std::vector<T> readVector() {
+    std::vector<T> readArray() {
         Variant var;
         readVariantFromServer(var);
-        auto result = var.readArray<T>();
-        if (!result)
-            return {}; // or exception?
-        return result.value();
+        return var.readArray<T>();
     }
 private:
     void writeVariantToServer(Variant& var); // should be const Variant&

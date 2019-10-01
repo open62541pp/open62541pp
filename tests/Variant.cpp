@@ -1,6 +1,7 @@
 #include <vector>
 
 #include "catch2/catch.hpp"
+
 #include "open62541pp/Variant.h"
 
 using namespace opcua;
@@ -22,7 +23,8 @@ TEST_CASE("Variant") {
             REQUIRE_FALSE(varEmpty.isType(Type::Int64));
             REQUIRE_FALSE(varEmpty.isType(Type::UInt64));
             REQUIRE_FALSE(varEmpty.isType(Type::Float));
-            REQUIRE_FALSE(varEmpty.isType(Type::Double));       
+            REQUIRE_FALSE(varEmpty.isType(Type::Double));
+            // ...
 
             REQUIRE_FALSE(varEmpty.isType<bool>());
             REQUIRE_FALSE(varEmpty.isType<int16_t>());
@@ -33,30 +35,39 @@ TEST_CASE("Variant") {
             REQUIRE_FALSE(varEmpty.isType<uint64_t>());
             REQUIRE_FALSE(varEmpty.isType<float>());
             REQUIRE_FALSE(varEmpty.isType<double>());
+            // ...
         }
     }
 
     SECTION("Constructors for different types") {
         {
-            Variant var(static_cast<bool>(true));
+            bool value = true;
+            Variant var(value);
             REQUIRE(var.isScalar());
             REQUIRE(var.isType<bool>());
+            REQUIRE(var.readScalar<bool>() == value);
         }
         {
-            Variant var(static_cast<int>(5));
+            int value = 5;
+            Variant var(value);
             REQUIRE(var.isScalar());
             REQUIRE(var.isType<int>());
+            REQUIRE(var.readScalar<int>() == value);
         }
         {
-            Variant var(static_cast<double>(11.11));
+            double value = 11.11;
+            Variant var(value);
             REQUIRE(var.isScalar());
             REQUIRE(var.isType<double>());
+            REQUIRE(var.readScalar<double>() == value);
         }
-        // {
-        //     Variant var(std::vector<float>({1, 2, 3}));
-        //     REQUIRE(var.isArray());
-        //     REQUIRE(var.isType<float>());
-        // }
+        {
+            std::vector<float> value({1, 2, 3});
+            Variant var(value);
+            REQUIRE(var.isArray());
+            REQUIRE(var.isType<float>());
+            REQUIRE(var.readArray<float>() == value);
+        }
     }
 
     SECTION("Read / write scalar") {
@@ -68,11 +79,11 @@ TEST_CASE("Variant") {
         REQUIRE(var.isType(Type::Int32));
         REQUIRE(var.isType<int32_t>());
 
-        REQUIRE(var.readScalar<int32_t>());
-        REQUIRE_FALSE(var.readArray<int32_t>());
-        REQUIRE_FALSE(var.readScalar<bool>());
+        REQUIRE_NOTHROW(var.readScalar<int32_t>());
+        REQUIRE_THROWS(var.readArray<int32_t>());
+        REQUIRE_THROWS(var.readScalar<bool>());
         
-        REQUIRE(var.readScalar<int32_t>().value() == value);
+        REQUIRE(var.readScalar<int32_t>() == value);
     }
 
     SECTION("Read / write mixed scalar types") {
@@ -97,39 +108,23 @@ TEST_CASE("Variant") {
         REQUIRE(var.isType(Type::Float));
         REQUIRE(var.isType<float>());
 
-        REQUIRE(var.readArray<float>());
-        REQUIRE_FALSE(var.readArray<int32_t>());
-        REQUIRE_FALSE(var.readArray<bool>());
+        REQUIRE_NOTHROW(var.readArray<float>());
+        REQUIRE_THROWS(var.readArray<int32_t>());
+        REQUIRE_THROWS(var.readArray<bool>());
         
-        REQUIRE(var.readArray<float>().value() == value);
+        REQUIRE(var.readArray<float>() == value);
     }
 
-    SECTION("Copy / assignment") {
-        int value = 43;
-        Variant var(value);
-        REQUIRE(var.readScalar<int>() == value);
+    SECTION("Write array no copy") {
+        Variant var;
+        std::vector<float> value({0, 1, 2});
+        var.writeArrayNoCopy(value);
 
-        Variant varCopy(var);
-        REQUIRE(varCopy.readScalar<int>() == value);
-        REQUIRE(var.handle()->data != varCopy.handle()->data); // require deep copy
+        REQUIRE(var.readArray<float>() == value);
 
-        Variant varCopyAssignment = var;
-        REQUIRE(varCopyAssignment.readScalar<int>() == value);
-        REQUIRE(var.handle()->data != varCopyAssignment.handle()->data); // require deep copy
+        std::vector<float> valueChanged({3, 4, 5});
+        value = valueChanged;
 
-        SECTION("Write new value to original variant") {
-            float newValue = 11.11f;
-            var.writeScalar(newValue);
-            REQUIRE(var.readScalar<float>()             == newValue);
-            REQUIRE(varCopy.readScalar<int>()           == value);
-            REQUIRE(varCopyAssignment.readScalar<int>() == value);
-        }
+        REQUIRE(var.readArray<float>() == valueChanged);
     }
-
-    // SECTION("Operator overloading for easy reading") {
-    //     Variant var(static_cast<double>(11.11));
-
-    //     double value = var;
-    //     REQUIRE(value == 11.11);
-    // }
 }
