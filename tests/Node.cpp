@@ -60,3 +60,35 @@ TEST_CASE("Node") {
         REQUIRE_NOTHROW(node.remove());
     }
 }
+
+TEST_CASE("VariableNode") {
+    Server server;
+
+    SECTION("Read/write scalar") {
+        auto node = server.getRootNode().addVariable(
+            NodeId("testScalar"), "testScalar", Type::Float);
+
+        // Writes with wrong data type
+        REQUIRE_THROWS(node.write<bool>({}));
+        REQUIRE_THROWS(node.write<int>({}));
+
+        // Writes with correct data type
+        float value = 11.11;
+        REQUIRE_NOTHROW(node.write(value));
+        REQUIRE(node.read<float>() == value);
+    }
+
+    SECTION("Read/write scalar") {
+        auto node = server.getRootNode().addVariable(
+            NodeId("testArray"), "testArray", Type::Float);
+
+        // Writes with wrong data type
+        REQUIRE_THROWS(node.writeArray<int>({}));
+        REQUIRE_THROWS(node.writeArray<double>({}));
+
+        // Writes with correct data type
+        std::vector<float> value {11.11, 22.22, 33.33};
+        REQUIRE_NOTHROW(node.writeArray(value));
+        REQUIRE(node.readArray<float>() == value);
+    }
+}

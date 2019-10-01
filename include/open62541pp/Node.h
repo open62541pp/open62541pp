@@ -81,16 +81,15 @@ public:
      * Historizing
      */
 
-    template <typename T>
-    void write(T value) {
-        Variant var(value);
+    template <typename Arg> // perfect forwarding
+    void write(Arg&& arg) {
+        Variant var(std::forward<Arg>(arg));
         writeVariantToServer(var);
     }
 
-    template <typename T>
-    void writeArray(const std::vector<T>& array) {
-        Variant var;
-        var.writeArray(array);
+    template <typename Arg> // perfect forwarding
+    void writeArray(Arg&& arg) {
+        Variant var(std::forward<Arg>(arg));
         writeVariantToServer(var);
     }
 
