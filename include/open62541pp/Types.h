@@ -1,5 +1,7 @@
 #pragma once
 
+#include <type_traits>
+
 #include "open62541/types.h"
 #include "open62541/types_generated.h"
 #include "open62541/nodeids.h"
@@ -75,7 +77,16 @@ enum class ReferenceType : uint16_t {
     HasComponent = UA_NS0ID_HASCOMPONENT
 };
 
-template <typename> inline constexpr Type getType();
+// helper trait
+template <typename...> struct always_false : std::false_type {};
+
+template <typename T> inline constexpr Type getType() {
+    static_assert(always_false<T>::value,
+                  "Type mapping not possible (maybe not existing or not unique). \
+                   Please specify type manually.");
+    return {}; // TODO: Type::Undefined?
+}
+
 template <> inline constexpr Type getType<UA_Boolean>()         { return Type::Boolean; }
 template <> inline constexpr Type getType<UA_SByte>()           { return Type::SByte; }
 template <> inline constexpr Type getType<UA_Byte>()            { return Type::Byte; }
