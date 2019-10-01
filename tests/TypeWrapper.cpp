@@ -51,7 +51,7 @@ TEST_CASE("Guid wrapper") {
     UA_UInt32 data1 {11};
     UA_UInt16 data2 {22};
     UA_UInt16 data3 {33};
-    std::array<UA_Byte, 8> data4({1, 2, 3, 4, 5, 6, 7, 8});
+    std::array<UA_Byte, 8> data4 {1, 2, 3, 4, 5, 6, 7, 8};
 
     Guid wrapper(data1, data2, data3, data4);
 
