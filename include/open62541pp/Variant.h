@@ -1,7 +1,6 @@
 #pragma once
 
-#include <optional>
-#include <memory>
+#include <vector>
 
 #include "open62541/types.h"
 #include "open62541/types_generated_handling.h"
@@ -30,16 +29,20 @@ public:
     inline bool isType(Type type) const noexcept { return data_.type == getUaDataType(type); }
 
     template <typename T>
-    std::optional<T> readScalar() const noexcept {
-        if (!isScalar() || !isType<T>())
-            return {};
+    T readScalar() const {
+        if (!isScalar())
+            throw Exception("Variant is not a scalar");
+        if (!isType<T>())
+            throw Exception("Variant does not contain a scalar of specified return type");
         return *static_cast<T*>(data_.data); // copy on purpose
     }
 
     template <typename T>
-    std::optional<std::vector<T>> readArray() const noexcept {
-        if (!isArray() || !isType<T>())
-            return {};
+    std::vector<T> readArray() const {
+        if (!isArray())
+            throw Exception("Variant is not an array");
+        if (!isType<T>())
+            throw Exception("Variant does not contain an array of specified return type");
 
         // TODO: check dimensions?
         // size_t arrayDimensionsSize;   /* The number of dimensions */
@@ -59,23 +62,23 @@ public:
     }
 
     template <typename T>
-    void writeArray(const std::vector<T>& vector) {
+    void writeArray(const std::vector<T>& array) {
         clear();
         auto status = UA_Variant_setArrayCopy(&data_,
-            vector.data(),
-            vector.size(), 
+            array.data(),
+            array.size(), 
             getUaDataType<T>());
         checkStatusCodeException(status);
         data_.storageType = UA_VARIANT_DATA;
     }
 
     template <typename T>
-    void writeArrayNoCopy(const std::vector<T>& vector) noexcept {
+    void writeArrayNoCopy(std::vector<T>& array) noexcept {
         clear();
         // UA_Variant_setArray will borrow the vector data compared to UA_Variant_setArrayCopy
         UA_Variant_setArray(&data_,
-            const_cast<T*>(vector.data()), // convert from const void* to void*
-            vector.size(), 
+            array.data(),
+            array.size(), 
             getUaDataType<T>());
         data_.storageType = UA_VARIANT_DATA_NODELETE;
     }
