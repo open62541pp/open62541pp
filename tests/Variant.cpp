@@ -70,7 +70,7 @@ TEST_CASE("Variant") {
         }
     }
 
-    SECTION("Read / write scalar") {
+    SECTION("Write/read scalar") {
         Variant var;
         int32_t value = 5;
         var.setScalar(value);
@@ -86,7 +86,7 @@ TEST_CASE("Variant") {
         REQUIRE(var.readScalar<int32_t>() == value);
     }
 
-    SECTION("Read / write mixed scalar types") {
+    SECTION("Write/read mixed scalar types") {
         Variant var;
 
         var.setScalar(static_cast<int>(11));
@@ -99,7 +99,7 @@ TEST_CASE("Variant") {
         REQUIRE(var.readScalar<short>() == 1);
     }
 
-    SECTION("Read / write array") {
+    SECTION("Write/read array") {
         Variant var;
         std::vector<float> value {0, 1, 2, 3, 4, 5};
         var.setArray(value);
@@ -126,5 +126,21 @@ TEST_CASE("Variant") {
         value = valueChanged;
 
         REQUIRE(var.readArray<float>() == valueChanged);
+    }
+
+    SECTION("Write/read wrapped types") {
+        Variant var;
+        
+        {
+            TypeWrapper<int> value(10);
+            var.setScalar(value);
+            REQUIRE(var.readScalar<int>() == 10);
+        }
+
+        {
+            String value("Test");
+            var.setScalar(value);
+            REQUIRE(var.readScalar<String>() == value);
+        }
     }
 }
