@@ -2,6 +2,7 @@
 
 #include <array>
 #include <algorithm> // copy
+#include <type_traits>
 
 #include "open62541pp/Types.h"
 #include "open62541pp/Helper.h"
@@ -9,15 +10,21 @@
 
 namespace opcua {
 
+class TypeWrapperBase {
+public:
+    virtual ~TypeWrapperBase() {};
+};
+
 /**
  * Template base class to wrap UA_* type objects.
  * 
  * The derived classes should implement specific constructors to convert from other data types.
  */
 template <typename T, Type type = getType<T>()>
-class TypeWrapper {
+class TypeWrapper : public TypeWrapperBase {
 public:
     using BaseClass = TypeWrapper<T, type>;
+    using UaType = T;
 
     TypeWrapper() { init(); }
 
@@ -34,9 +41,9 @@ public:
     TypeWrapper& operator=(const TypeWrapper& other) { clear(); copy(other.data_); return *this; }
 
     /// Return type enum
-    inline Type               getType()     const { return type; }
+    constexpr inline static Type               getType()     { return type; }
     /// Return UA_DataType object
-    inline const UA_DataType* getDataType() const { return getUaDataType(type); }
+    constexpr inline static const UA_DataType* getDataType() { return getUaDataType(type); }
 
     /// Return pointer to wrapped UA data type
     inline T*       handle()       { return &data_; }
@@ -55,6 +62,8 @@ protected:
     T data_ {};
 };
 
+// template <typename T>
+// using isTypeWrapper = std::is_convertible<T*, TypeWrapper<T::UaType, T::getType()>*>;
 
 /**
  * UA_String wrapper class
