@@ -1,8 +1,10 @@
 #include "open62541pp/Server.h"
 
-// turn off the -Wunused-parameter warning for open62541
+// turn off the -Wunused-parameter warning for open62541 (only for gcc/clang)
+#ifndef _MSC_VER
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wunused-parameter"
+#endif
 
 #include "open62541/types.h"
 #include "open62541/types_generated_handling.h"
@@ -11,7 +13,9 @@
 #include "open62541/server_config_default.h"
 #include "open62541/plugin/accesscontrol_default.h"
 
+#ifndef _MSC_VER
 #pragma GCC diagnostic pop
+#endif
 
 #include "open62541pp/Node.h"
 #include "open62541pp/NodeId.h"
