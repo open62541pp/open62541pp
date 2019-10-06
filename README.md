@@ -2,6 +2,7 @@
 
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-blue.svg)](https://github.com/open62541pp/open62541pp/blob/master/LICENSE)
 [![Build Status](https://travis-ci.org/open62541pp/open62541pp.svg?branch=master)](https://travis-ci.org/open62541pp/open62541pp)
+[![Build status](https://ci.appveyor.com/api/projects/status/802vyxytdii4tc3v/branch/master?svg=true)](https://ci.appveyor.com/project/lukasberbuer/open62541pp/branch/master)
 [![Coverage Status](https://coveralls.io/repos/github/open62541pp/open62541pp/badge.svg)](https://coveralls.io/github/open62541pp/open62541pp)
 [![Documentation Status](https://readthedocs.org/projects/open62541pp/badge/?version=latest)](https://open62541pp.readthedocs.io/en/latest/?badge=latest)
 
