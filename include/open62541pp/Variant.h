@@ -53,7 +53,8 @@ public:
     template <typename T>
     inline std::enable_if_t<std::is_convertible_v<T*, TypeWrapperBase*>, T>
     readScalar() const {
-        return T(readScalar<typename T::UaType>()); // construct type wrapper with result
+        auto result = readScalar<typename T::UaType>();
+        return T(result);
     }
 
     /// Read array with given template type and return is as a std::vector-
