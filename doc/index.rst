@@ -9,5 +9,5 @@ open62541++ Documentation
    node
    api
 
-.. mdinclude:: ../README.md
+.. include:: ../README.rst
    :start-line: 2
