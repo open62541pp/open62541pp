@@ -35,7 +35,7 @@ TEST_CASE("Server") {
     }
 
     SECTION("Set hostname / application name / uris") {
-        auto config = UA_Server_getConfig(server.handle());
+        auto* config = UA_Server_getConfig(server.handle());
 
         server.setCustomHostname("customhost");
         REQUIRE(uaStringToString(config->customHostname) == "customhost");

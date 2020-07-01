@@ -80,9 +80,9 @@ void Server::setLogin(const std::vector<Login>& logins, bool allowAnonymous) {
         loginsUa[i].password = UA_STRING_ALLOC(logins[i].password.c_str());
     }
 
-    auto config = connection_->getConfig();
-    if (config->accessControl.deleteMembers != nullptr)
-        config->accessControl.deleteMembers(&config->accessControl);
+    auto* config = connection_->getConfig();
+    if (config->accessControl.clear != nullptr)
+        config->accessControl.clear(&config->accessControl);
 
     auto status = UA_AccessControl_default(
         config,
@@ -114,7 +114,7 @@ Server::Connection::Connection()
     UA_ServerConfig_setDefault(getConfig());
 
     // change default parameters
-    auto config = getConfig();
+    auto* config = getConfig();
     config->publishingIntervalLimits.min = 10; // ms
     config->samplingIntervalLimits.min = 10; // ms
 }

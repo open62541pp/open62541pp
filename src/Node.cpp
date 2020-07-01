@@ -18,7 +18,7 @@ Node::Node(const Server& server, const NodeId& id) // NOLINT
 }
 
 NodeClass Node::getNodeClass() {
-    UA_NodeClass nodeClass;
+    UA_NodeClass nodeClass = UA_NODECLASS_UNSPECIFIED;
     auto status = UA_Server_readNodeClass(server_.handle(), *nodeId_.handle(), &nodeClass);
     checkStatusCodeException(status);
     return static_cast<NodeClass>(nodeClass);
@@ -46,17 +46,17 @@ std::string Node::getDescription() {
 }
 
 uint32_t Node::getWriteMask() {
-    uint32_t writeMask;
+    uint32_t writeMask = 0;
     auto status = UA_Server_readWriteMask(server_.handle(), *nodeId_.handle(), &writeMask);
     checkStatusCodeException(status);
     return writeMask;
 }
 
-void Node::setBrowseName(std::string_view name) {
-    auto status = UA_Server_writeBrowseName(server_.handle(), *nodeId_.handle(),
-        *QualifiedName(nodeId_.getNamespaceIndex(), name).handle());
-    checkStatusCodeException(status);
-}
+// void Node::setBrowseName(std::string_view name) {
+//     auto status = UA_Server_writeBrowseName(server_.handle(), *nodeId_.handle(),
+//         *QualifiedName(nodeId_.getNamespaceIndex(), name).handle());
+//     checkStatusCodeException(status);
+// }
 
 void Node::setDisplayName(std::string_view name, std::string_view locale) {
     auto status = UA_Server_writeDisplayName(server_.handle(), *nodeId_.handle(),

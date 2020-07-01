@@ -41,7 +41,9 @@ public:
     // uint32_t    getUserWriteMask();
     // Type getDataType();
 
-    void setBrowseName(std::string_view name);
+    // writeBrowseName disabled for performance reasons:
+    // https://github.com/open62541/open62541/issues/3545
+    // void setBrowseName(std::string_view name);
     void setDisplayName(std::string_view name, std::string_view locale = "en");
     void setDescription(std::string_view name, std::string_view locale = "en");
     void setWriteMask(uint32_t mask);
