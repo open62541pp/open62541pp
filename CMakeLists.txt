@@ -13,18 +13,18 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 # interface "library" to set the c++ standard / compile-time options requested
-add_library(project_options INTERFACE)
-target_compile_features(project_options INTERFACE cxx_std_17)
-target_include_directories(project_options INTERFACE include lib)
+add_library(open62541pp_project_options INTERFACE)
+target_compile_features(open62541pp_project_options INTERFACE cxx_std_17)
+target_include_directories(open62541pp_project_options INTERFACE include lib)
 
 if(MSVC)
-    target_compile_options(project_options INTERFACE /permissive- /W4 /w14640)
+    target_compile_options(open62541pp_project_options INTERFACE /permissive- /W4 /w14640)
 else()
     option(UAPP_ENABLE_COVERAGE "Enable coverage reporting for gcc/clang" OFF)
     if(UAPP_ENABLE_COVERAGE)
         message(STATUS "Coverage enabled")
-        target_compile_options(project_options INTERFACE --coverage -O0 -g)
-        target_link_libraries(project_options INTERFACE --coverage)
+        target_compile_options(open62541pp_project_options INTERFACE --coverage -O0 -g)
+        target_link_libraries(open62541pp_project_options INTERFACE --coverage)
     endif()
 
     option(UAPP_ENABLE_CLANG_TIDY "Enable testing with clang-tidy" OFF)
@@ -39,7 +39,7 @@ else()
         endif()
     endif()
 
-    target_compile_options(project_options
+    target_compile_options(open62541pp_project_options
                            INTERFACE -Wall
                                      -Wextra
                                      -Wshadow
@@ -65,7 +65,7 @@ target_include_directories(open62541pp PUBLIC include)
 
 target_link_libraries(open62541pp
                       PUBLIC open62541::open62541
-                      PRIVATE Threads::Threads project_options)
+                      PRIVATE Threads::Threads open62541pp_project_options)
 
 # tests
 option(UAPP_BUILD_TESTS "Build unit tests" OFF)

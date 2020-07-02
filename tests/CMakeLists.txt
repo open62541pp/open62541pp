@@ -2,7 +2,7 @@ enable_testing()
 
 file(GLOB test_sources "*.cpp")
 add_executable(open62541pp_tests ${test_sources})
-target_link_libraries(open62541pp_tests PUBLIC open62541pp::open62541pp project_options)
+target_link_libraries(open62541pp_tests PUBLIC open62541pp::open62541pp open62541pp_project_options)
 set_target_properties(open62541pp_tests PROPERTIES OUTPUT_NAME tests)
 
 # parse catch tests for ctest
