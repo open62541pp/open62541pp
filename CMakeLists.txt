@@ -54,6 +54,7 @@ option(BUILD_SHARED_LIBS "Enable building of shared libraries (dll/so)" OFF)
 find_package(Threads REQUIRED)
 
 # open62541
+set(UA_MULTITHREADING 100 CACHE STRING "") # enable thread-safe API (100-199)
 add_subdirectory(lib/open62541) # target open62541::open62541
 
 # open62541pp library
