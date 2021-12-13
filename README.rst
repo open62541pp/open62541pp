@@ -1,18 +1,14 @@
 open62541++
 ===========
 
-|license badge| |travis badge| |appveyor badge| |coveralls badge| |rtd badge|
+|license badge| |ci badge| |coveralls badge| |rtd badge|
 
 .. |license badge| image:: https://img.shields.io/badge/License-MPL%202.0-blue.svg
     :target: https://github.com/open62541pp/open62541pp/blob/master/LICENSE
     :alt: License: MPL 2.0
 
-.. |travis badge| image:: https://travis-ci.org/open62541pp/open62541pp.svg?branch=master
-    :target: https://travis-ci.org/open62541pp/open62541pp
-    :alt: Build Status
-
-.. |appveyor badge| image:: https://ci.appveyor.com/api/projects/status/802vyxytdii4tc3v/branch/master?svg=true
-    :target: https://ci.appveyor.com/project/lukasberbuer/open62541pp/branch/master
+.. |ci badge| image:: https://github.com/open62541pp/open62541pp/actions/workflows/ci.yml/badge.svg
+    :target: https://github.com/open62541pp/open62541pp/actions/workflows/ci.yml
     :alt: Build Status
 
 .. |coveralls badge| image:: https://coveralls.io/repos/github/open62541pp/open62541pp/badge.svg
