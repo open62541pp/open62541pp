@@ -1,0 +1,40 @@
+name: CI
+
+on: [push]
+
+jobs:
+  linux:
+    name: ${{ matrix.os }}.${{ matrix.compiler.CXX }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        compiler:
+          - { CC: gcc-8, CXX: g++-8 }
+          - { CC: gcc-9, CXX: g++-9 }
+          - { CC: gcc-10, CXX: g++-10 }
+          - { CC: clang-7, CXX: clang++-7 }
+          - { CC: clang-8, CXX: clang++-8 }
+          - { CC: clang-9, CXX: clang++-9 }
+          - { CC: clang-10, CXX: clang++-10 }
+    steps:
+      - name: Install requirements
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            cmake \
+            clang-tidy \
+            ${{matrix.compiler.CC}} \
+            ${{matrix.compiler.CXX}}
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Compile and run tests
+        env:
+          CC: ${{ matrix.compiler.CC }}
+          CXX: ${{ matrix.compiler.CXX }}
+        run: |
+          mkdir build && cd build
+          cmake -DUAPP_BUILD_TESTS=ON -DUAPP_BUILD_EXAMPLES=ON ..
+          cmake --build .
