@@ -16,7 +16,7 @@ else()
     message(WARNING "IPO is not supported: ${check_ipo_output}")
 endif()
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
 # compiled binaries folders (same as open62541)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -77,7 +77,7 @@ option(UAPP_OPEN62541_INTERNAL "Use internal open62541 library" ON)
 
 set(UA_MULTITHREADING 100 CACHE STRING "") # enable thread-safe API (100-199)
 if(UAPP_OPEN62541_INTERNAL)
-    add_subdirectory(lib/open62541) # target open62541::open62541
+    add_subdirectory(3rdparty/open62541) # target open62541::open62541
 else()
     find_package(open62541 REQUIRED)
 endif()
@@ -102,6 +102,7 @@ target_link_libraries(
 option(UAPP_BUILD_TESTS "Build unit tests" OFF)
 if(UAPP_BUILD_TESTS)
     message(STATUS "Unit tests enabled")
+    enable_testing()
     add_subdirectory(tests)
 endif()
 
