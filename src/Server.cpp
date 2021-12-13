@@ -9,7 +9,9 @@
 #include "open62541/types.h"
 #include "open62541/types_generated_handling.h"
 #include "open62541/server.h"
+#if __has_include("open62541/server_config.h")  // merged into server.h in v1.2
 #include "open62541/server_config.h"
+#endif
 #include "open62541/server_config_default.h"
 #include "open62541/plugin/accesscontrol_default.h"
 
@@ -34,10 +36,10 @@ static void copyApplicationDescriptionToEndpoints(UA_ServerConfig* config) {
         auto& refApplicationUri  = config->endpoints[i].server.applicationUri;  // NOLINT
         auto& refProductUri      = config->endpoints[i].server.productUri;      // NOLINT
 
-        UA_LocalizedText_deleteMembers(&refApplicationName);
-        UA_String_deleteMembers(&refApplicationUri);
-        UA_String_deleteMembers(&refProductUri);
-        
+        UA_LocalizedText_clear(&refApplicationName);
+        UA_String_clear(&refApplicationUri);
+        UA_String_clear(&refProductUri);
+
         UA_LocalizedText_copy(&config->applicationDescription.applicationName, &refApplicationName);
         UA_String_copy(&config->applicationDescription.applicationUri,         &refApplicationUri);
         UA_String_copy(&config->applicationDescription.productUri,             &refProductUri);
@@ -46,27 +48,27 @@ static void copyApplicationDescriptionToEndpoints(UA_ServerConfig* config) {
 
 void Server::setCustomHostname(std::string_view hostname) {
     auto& ref = connection_->getConfig()->customHostname;
-    UA_String_deleteMembers(&ref);
+    UA_String_clear(&ref);
     ref = UA_STRING_ALLOC(hostname.data());
 }
 
 void Server::setApplicationName(std::string_view name) {
     auto& ref = connection_->getConfig()->applicationDescription.applicationName;
-    UA_LocalizedText_deleteMembers(&ref);
+    UA_LocalizedText_clear(&ref);
     ref = UA_LOCALIZEDTEXT_ALLOC("", name.data());
     copyApplicationDescriptionToEndpoints(connection_->getConfig());
 }
 
 void Server::setApplicationUri(std::string_view uri) {
     auto& ref = connection_->getConfig()->applicationDescription.applicationUri;
-    UA_String_deleteMembers(&ref);
+    UA_String_clear(&ref);
     ref = UA_STRING_ALLOC(uri.data());
     copyApplicationDescriptionToEndpoints(connection_->getConfig());
 }
 
 void Server::setProductUri(std::string_view uri) {
     auto& ref = connection_->getConfig()->applicationDescription.productUri;
-    UA_String_deleteMembers(&ref);
+    UA_String_clear(&ref);
     ref = UA_STRING_ALLOC(uri.data());
     copyApplicationDescriptionToEndpoints(connection_->getConfig());
 }
@@ -92,8 +94,8 @@ void Server::setLogin(const std::vector<Login>& logins, bool allowAnonymous) {
         loginsUa.data());
 
     for (size_t i = 0; i < number; ++i) {
-        UA_String_deleteMembers(&loginsUa[i].username);
-        UA_String_deleteMembers(&loginsUa[i].password);
+        UA_String_clear(&loginsUa[i].username);
+        UA_String_clear(&loginsUa[i].password);
     }
 
     checkStatusCodeException(status);

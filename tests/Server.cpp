@@ -7,7 +7,9 @@
 #include "open62541/types.h"
 #include "open62541/nodeids.h"
 #include "open62541/server.h"
+#if __has_include("open62541/server_config.h")  // merged into server.h in v1.2
 #include "open62541/server_config.h"
+#endif
 
 #pragma GCC diagnostic pop
 

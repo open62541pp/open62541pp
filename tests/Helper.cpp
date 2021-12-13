@@ -8,7 +8,7 @@ TEST_CASE("String conversion") {
     UA_String testString = UA_STRING_ALLOC("test123");
     REQUIRE(uaStringToString(testString) == "test123");
     REQUIRE(uaStringToString(testString) != "test321");
-    UA_String_deleteMembers(&testString);
+    UA_String_clear(&testString);
 
     SECTION("Null string") {
         UA_String nullString {};
@@ -18,6 +18,6 @@ TEST_CASE("String conversion") {
     SECTION("Empty string") {
         UA_String emptyString = UA_STRING_ALLOC("");
         REQUIRE(uaStringToString(emptyString).empty());
-        UA_String_deleteMembers(&emptyString);
+        UA_String_clear(&emptyString);
     }
 }
