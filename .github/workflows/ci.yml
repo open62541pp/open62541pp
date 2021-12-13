@@ -3,48 +3,50 @@ name: CI
 on: [push]
 
 jobs:
-  # linux:
-  #   name: Linux ${{ matrix.config.name }}
-  #   runs-on: ubuntu-20.04
-  #   strategy:
-  #     fail-fast: false
-  #     matrix:
-  #       config:
-  #         - { name: "GCC 8",      CC: gcc-8,    CXX: g++-8,      flags: ""}
-  #         - { name: "GCC 9",      CC: gcc-9,    CXX: g++-9,      flags: ""}
-  #         - { name: "GCC 10",     CC: gcc-10,   CXX: g++-10,     flags: ""}
-  #         - { name: "Clang 7",    CC: clang-7,  CXX: clang++-7,  flags: "" }
-  #         - { name: "Clang 8",    CC: clang-8,  CXX: clang++-8,  flags: "" }
-  #         - { name: "Clang 9",    CC: clang-9,  CXX: clang++-9,  flags: "" }
-  #         - { name: "Clang 10",   CC: clang-10, CXX: clang++-10, flags: "" }
-  #         - { name: "Clang-Tidy", CC: clang-10, CXX: clang++-10, flags: "-DUAPP_ENABLE_CLANG_TIDY=ON" }
-  #         - { name: "ASan",       CC: clang-10, CXX: clang++-10, flags: "-DUAPP_ENABLE_SANITIZER_ADDRESS=ON" }
-  #         - { name: "TSan",       CC: clang-10, CXX: clang++-10, flags: "-DUAPP_ENABLE_SANITIZER_THREAD=ON" }
-  #         - { name: "LSan",       CC: clang-10, CXX: clang++-10, flags: "-DUAPP_ENABLE_SANITIZER_LEAK=ON" }
-  #         - { name: "UBSan",      CC: clang-10, CXX: clang++-10, flags: "-DUAPP_ENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON" }
-  #   steps:
-  #     - name: Install requirements
-  #       run: |
-  #         sudo apt-get update
-  #         sudo apt-get install -y \
-  #           ${{ matrix.config.CC }} \
-  #           ${{ matrix.config.CXX }}
-  #     - uses: actions/checkout@v2
-  #       with:
-  #         submodules: recursive
-  #     - name: Compile and run tests
-  #       env:
-  #         CC: ${{ matrix.config.CC }}
-  #         CXX: ${{ matrix.config.CXX }}
-  #       run: |
-  #         mkdir build
-  #         cd build
-  #         cmake -DUAPP_BUILD_TESTS=ON -DUAPP_BUILD_EXAMPLES=ON ${{ matrix.config.flags }} ..
-  #         cmake --build .
+  linux:
+    name: Linux ${{ matrix.config.name }}
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { name: GCC 9,      CC: gcc-9,    CXX: g++-9,      flags: ""}
+          - { name: GCC 10,     CC: gcc-10,   CXX: g++-10,     flags: ""}
+          - { name: Clang 10,   CC: clang-10, CXX: clang++-10, flags: "" }
+          - { name: Clang 11,   CC: clang-11, CXX: clang++-11, flags: "" }
+          - { name: Clang 12,   CC: clang-12, CXX: clang++-12, flags: "" }
+          - { name: Clang-Tidy, CC: clang-12, CXX: clang++-12, flags: "-DUAPP_ENABLE_CLANG_TIDY=ON" }
+          - { name: ASan,       CC: clang-12, CXX: clang++-12, flags: "-DUAPP_ENABLE_SANITIZER_ADDRESS=ON" }
+          - { name: TSan,       CC: clang-12, CXX: clang++-12, flags: "-DUAPP_ENABLE_SANITIZER_THREAD=ON" }
+          - { name: LSan,       CC: clang-12, CXX: clang++-12, flags: "-DUAPP_ENABLE_SANITIZER_LEAK=ON" }
+          - { name: UBSan,      CC: clang-12, CXX: clang++-12, flags: "-DUAPP_ENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON" }
+    steps:
+      - name: Install requirements
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang-tidy
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Compile and run tests
+        env:
+          CC: ${{ matrix.config.CC }}
+          CXX: ${{ matrix.config.CXX }}
+        run: |
+          mkdir build
+          cd build
+          cmake -DUAPP_BUILD_TESTS=ON -DUAPP_BUILD_EXAMPLES=ON ${{ matrix.config.flags }} ..
+          cmake --build .
 
   windows:
-    name: Windows
-    runs-on: windows-latest
+    name: Windows ${{ matrix.config.name }}
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { name: Visual Studio 16 2019, os: windows-2019 }
+          - { name: Visual Studio 17 2022, os: windows-2022 }
     steps:
       - uses: actions/checkout@v2
         with:
@@ -54,4 +56,3 @@ jobs:
           mkdir build
           cd build
           cmake -DUAPP_BUILD_TESTS=ON -DUAPP_BUILD_EXAMPLES=ON ..
-          cmake --build .
