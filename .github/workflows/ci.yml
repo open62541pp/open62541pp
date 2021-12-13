@@ -20,11 +20,13 @@ jobs:
           - { name: TSan,       CC: clang-12, CXX: clang++-12, flags: "-DUAPP_ENABLE_SANITIZER_THREAD=ON" }
           - { name: LSan,       CC: clang-12, CXX: clang++-12, flags: "-DUAPP_ENABLE_SANITIZER_LEAK=ON" }
           - { name: UBSan,      CC: clang-12, CXX: clang++-12, flags: "-DUAPP_ENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON" }
+          - { name: Coverage,   CC: gcc,      CXX: g++,        flags: "-DUAPP_ENABLE_COVERAGE=ON" }
     steps:
       - name: Install requirements
         run: |
           sudo apt-get update
           sudo apt-get install -y clang-tidy
+          pip install --user cpp-coveralls
       - uses: actions/checkout@v2
         with:
           submodules: recursive
@@ -37,6 +39,18 @@ jobs:
           cd build
           cmake -DUAPP_BUILD_TESTS=ON -DUAPP_BUILD_EXAMPLES=ON ${{ matrix.config.flags }} ..
           cmake --build .
+      - name: Upload coverage results to coveralls.io
+        if: ${{ github.ref == 'refs/heads/master' && matrix.config.name == 'Coverage' }}
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        run: |
+          coveralls \
+            -E '.*/build/CMakeFiles/.*' \
+            -E '.*/build/lib/.*' \
+            -E '.*/examples/.*' \
+            -E '.*/lib/.*' \
+            -E '.*/tests/.*' \
+            --gcov-options '\-lp';
 
   windows:
     name: Windows ${{ matrix.config.name }}
