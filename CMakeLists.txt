@@ -67,6 +67,8 @@ else()
     )
 endif()
 
+include(cmake/Sanitizers.cmake)
+
 # threads
 find_package(Threads REQUIRED)
 
