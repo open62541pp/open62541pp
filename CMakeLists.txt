@@ -7,6 +7,15 @@ endif()
 
 project(open62541pp)
 
+include(CheckIPOSupported)
+check_ipo_supported(RESULT ipo_supported OUTPUT check_ipo_output)
+if(ipo_supported)
+    message(STATUS "IPO enabled")
+    set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)
+else()
+    message(WARNING "IPO is not supported: ${check_ipo_output}")
+endif()
+
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
 
 # compiled binaries folders (same as open62541)
