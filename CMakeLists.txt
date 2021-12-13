@@ -7,6 +7,8 @@ endif()
 
 project(open62541pp)
 
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
+
 # compiled binaries folders (same as open62541)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -18,7 +20,13 @@ target_compile_features(open62541pp_project_options INTERFACE cxx_std_17)
 target_include_directories(open62541pp_project_options INTERFACE include lib)
 
 if(MSVC)
-    target_compile_options(open62541pp_project_options INTERFACE /permissive- /W4 /w14640)
+    target_compile_options(
+        open62541pp_project_options
+        INTERFACE
+            /permissive-
+            /W4
+            /w14640
+    )
 else()
     option(UAPP_ENABLE_COVERAGE "Enable coverage reporting for gcc/clang" OFF)
     if(UAPP_ENABLE_COVERAGE)
@@ -39,23 +47,29 @@ else()
         endif()
     endif()
 
-    target_compile_options(open62541pp_project_options
-                           INTERFACE -Wall
-                                     -Wextra
-                                     -Wshadow
-                                     -Wnon-virtual-dtor
-                                     -Wpedantic)
+    target_compile_options(
+        open62541pp_project_options
+        INTERFACE
+            -Wall
+            -Wextra
+            -Wshadow
+            -Wnon-virtual-dtor
+            -Wpedantic
+    )
 endif()
-
-# options
-option(BUILD_SHARED_LIBS "Enable building of shared libraries (dll/so)" OFF)
 
 # threads
 find_package(Threads REQUIRED)
 
 # open62541
+option(UAPP_OPEN62541_INTERNAL "Use internal open62541 library" ON)
+
 set(UA_MULTITHREADING 100 CACHE STRING "") # enable thread-safe API (100-199)
-add_subdirectory(lib/open62541) # target open62541::open62541
+if(UAPP_OPEN62541_INTERNAL)
+    add_subdirectory(lib/open62541) # target open62541::open62541
+else()
+    find_package(open62541 REQUIRED)
+endif()
 
 # open62541pp library
 file(GLOB_RECURSE sources "src/*.cpp")
@@ -64,9 +78,14 @@ add_library(open62541pp::open62541pp ALIAS open62541pp)
 
 target_include_directories(open62541pp PUBLIC include)
 
-target_link_libraries(open62541pp
-                      PUBLIC open62541::open62541
-                      PRIVATE Threads::Threads open62541pp_project_options)
+target_link_libraries(
+    open62541pp
+    PUBLIC
+        open62541::open62541
+    PRIVATE
+        Threads::Threads
+        open62541pp_project_options
+)
 
 # tests
 option(UAPP_BUILD_TESTS "Build unit tests" OFF)
