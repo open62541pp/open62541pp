@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.12)
 
 find_program(CCACHE ccache)
 if(CCACHE)
@@ -77,6 +77,7 @@ option(UAPP_INTERNAL_OPEN62541 "Use internal open62541 library" ON)
 
 set(UA_MULTITHREADING 100 CACHE STRING "") # enable thread-safe API (100-199)
 if(UAPP_INTERNAL_OPEN62541)
+    set(OPEN62541_VERSION v1.2.3)  # set manually for CI
     add_subdirectory(3rdparty/open62541) # target open62541::open62541
 else()
     find_package(open62541 REQUIRED)

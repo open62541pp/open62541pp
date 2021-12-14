@@ -23,6 +23,8 @@
 #include "open62541pp/NodeId.h"
 #include "open62541pp/ErrorHandling.h"
 
+#include "version.h"
+
 namespace opcua {
 
 uint16_t Server::registerNamespace(std::string_view name) {
@@ -83,8 +85,13 @@ void Server::setLogin(const std::vector<Login>& logins, bool allowAnonymous) {
     }
 
     auto* config = connection_->getConfig();
+#if UAPP_OPEN62541_VER_GE(1, 1)
     if (config->accessControl.clear != nullptr)
         config->accessControl.clear(&config->accessControl);
+#else
+    if (config->accessControl.deleteMembers != nullptr)
+        config->accessControl.deleteMembers(&config->accessControl);
+#endif
 
     auto status = UA_AccessControl_default(
         config,
