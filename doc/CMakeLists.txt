@@ -53,7 +53,7 @@ add_custom_target(
 )
 
 # DOXYGEN OPEN62541 (for development purpose - easy to browse through the open62541 API)
-if(UAPP_OPEN62541_INTERNAL)
+if(UAPP_INTERNAL_OPEN62541)
     set(OPEN62541_DOXYGEN_INPUT_DIR  ${CMAKE_CURRENT_BINARY_DIR}/open62541-api)  # public header files are copied and processed here
     set(OPEN62541_DOXYGEN_OUTPUT_DIR ${PROJECT_BINARY_DIR}/doxygen_open62541)
     set(OPEN62541_DOXYGEN_INDEX_FILE ${DOXYGEN_OUTPUT_DIR}/html/index.html)
@@ -96,9 +96,12 @@ if(UAPP_OPEN62541_INTERNAL)
     )
 
     add_custom_target(doxygen-open62541 DEPENDS ${OPEN62541_DOXYGEN_INDEX_FILE})
-    add_dependencies(doxygen-open62541 open62541-generator-ids-ns0
-                                       open62541-generator-namespace
-                                       open62541-generator-statuscode
-                                       open62541-generator-transport
-                                       open62541-generator-types)
+    add_dependencies(
+        doxygen-open62541
+        open62541-generator-ids-ns0
+        open62541-generator-namespace
+        open62541-generator-statuscode
+        open62541-generator-transport
+        open62541-generator-types
+    )
 endif()

@@ -64,7 +64,7 @@ Please check out the open62541 build options here: https://open62541.org/doc/cur
 
 open62541++ provides additional build options:
 
-- `UAPP_OPEN62541_INTERNAL`: Use internal open62541 library if `ON` or search for installed open62541 library if `OFF`
+- `UAPP_INTERNAL_OPEN62541`: Use internal open62541 library if `ON` or search for installed open62541 library if `OFF`
 - `UAPP_BUILD_EXAMPLES`: Build examples for `examples` directory
 - `UAPP_BUILD_TESTS`: Build an run tests
 - `UAPP_ENABLE_CLANG_TIDY`: Enable static code analysis with Clang-Tidy
