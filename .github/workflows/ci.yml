@@ -51,37 +51,6 @@ jobs:
             -E '.*/tests/.*' \
             --gcov-options '\-lp';
 
-  linux-external-open62541:
-    name: Linux external open62541 ${{ matrix.version }}
-    runs-on: ubuntu-20.04
-    strategy:
-      fail-fast: false
-      matrix:
-        version: [v1.0, v1.1, v1.2]
-    steps:
-      - uses: actions/checkout@v2
-      - name: Checkout open62541 version ${{ matrix.version }}
-        uses: actions/checkout@v2
-        with:
-          repository: open62541/open62541
-          ref: ${{ matrix.version }}
-          path: open62541
-          submodules: recursive
-      - name: Install open62541
-        run: |
-          cd open62541
-          mkdir build
-          cd build
-          cmake ..
-          cmake --build .
-          sudo cmake --install .
-      - name: Compile and run tests
-        run: |
-          mkdir build
-          cd build
-          cmake -DUAPP_BUILD_TESTS=ON -DUAPP_BUILD_EXAMPLES=ON -DUAPP_OPEN62541_INTERNAL=OFF ..
-          cmake --build .
-
   windows:
     name: Windows ${{ matrix.config.name }}
     runs-on: ${{ matrix.config.os }}
