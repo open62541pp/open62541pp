@@ -4,6 +4,7 @@
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/Helper.h" // uaStringToString
 
+using namespace Catch::Matchers;
 using namespace opcua;
 
 TEST_CASE("TypeWrapper") {
@@ -30,10 +31,10 @@ TEST_CASE("TypeWrapper") {
         TypeWrapper<UA_String> wrapper2(UA_STRING_ALLOC("String2"));
 
         TypeWrapper<UA_String> wrapperCopy(wrapper1);
-        REQUIRE(uaStringToString(*wrapperCopy.handle()) == "String1");
+        REQUIRE_THAT(uaStringToString(*wrapperCopy.handle()), Equals("String1"));
 
         TypeWrapper<UA_String> wrapperAssignmnet = wrapper2;
-        REQUIRE(uaStringToString(*wrapperAssignmnet.handle()) == "String2");
+        REQUIRE_THAT(uaStringToString(*wrapperAssignmnet.handle()), Equals("String2"));
     }
 
     SECTION("Get type") {
@@ -45,6 +46,19 @@ TEST_CASE("TypeWrapper") {
         REQUIRE(wrapperString.getType()     == Type::String);
         REQUIRE(wrapperString.getDataType() == getUaDataType(Type::String));
     }
+}
+
+TEST_CASE("String") {
+    String s("test");
+    REQUIRE(s.handle()->length == 4);
+    REQUIRE_THAT(s.get(), Equals("test"));
+}
+
+TEST_CASE("String from non-null-terminated view") {
+    std::string      str("test123");
+    std::string_view sv(str.c_str(), 4);
+    String           s(sv);
+    REQUIRE_THAT(s.get(), Equals("test"));
 }
 
 TEST_CASE("Guid wrapper") {

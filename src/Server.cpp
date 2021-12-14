@@ -19,6 +19,7 @@
 #pragma GCC diagnostic pop
 #endif
 
+#include "open62541pp/Helper.h"
 #include "open62541pp/Node.h"
 #include "open62541pp/NodeId.h"
 #include "open62541pp/ErrorHandling.h"
@@ -51,7 +52,7 @@ static void copyApplicationDescriptionToEndpoints(UA_ServerConfig* config) {
 void Server::setCustomHostname(std::string_view hostname) {
     auto& ref = connection_->getConfig()->customHostname;
     UA_String_clear(&ref);
-    ref = UA_STRING_ALLOC(hostname.data());
+    ref = allocUaString(hostname);
 }
 
 void Server::setApplicationName(std::string_view name) {
@@ -64,14 +65,14 @@ void Server::setApplicationName(std::string_view name) {
 void Server::setApplicationUri(std::string_view uri) {
     auto& ref = connection_->getConfig()->applicationDescription.applicationUri;
     UA_String_clear(&ref);
-    ref = UA_STRING_ALLOC(uri.data());
+    ref = allocUaString(uri);
     copyApplicationDescriptionToEndpoints(connection_->getConfig());
 }
 
 void Server::setProductUri(std::string_view uri) {
     auto& ref = connection_->getConfig()->applicationDescription.productUri;
     UA_String_clear(&ref);
-    ref = UA_STRING_ALLOC(uri.data());
+    ref = allocUaString(uri);
     copyApplicationDescriptionToEndpoints(connection_->getConfig());
 }
 
@@ -80,8 +81,8 @@ void Server::setLogin(const std::vector<Login>& logins, bool allowAnonymous) {
     auto   loginsUa = std::vector<UA_UsernamePasswordLogin>(number);
 
     for (size_t i = 0; i < number; ++i) {
-        loginsUa[i].username = UA_STRING_ALLOC(logins[i].username.c_str());
-        loginsUa[i].password = UA_STRING_ALLOC(logins[i].password.c_str());
+        loginsUa[i].username = allocUaString(logins[i].username);
+        loginsUa[i].password = allocUaString(logins[i].password);
     }
 
     auto* config = connection_->getConfig();

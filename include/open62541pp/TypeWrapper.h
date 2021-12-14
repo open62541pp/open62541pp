@@ -12,7 +12,7 @@ namespace opcua {
 
 class TypeWrapperBase {
 public:
-    virtual ~TypeWrapperBase() {};
+    virtual ~TypeWrapperBase(){};
 };
 
 /**
@@ -49,17 +49,18 @@ public:
     inline T*       handle()       { return &data_; }
     /// Return const pointer to wrapped UA data type
     inline const T* handle() const { return &data_; };
+
 protected:
     inline void init()  { UA_init(&data_, getDataType()); }
     inline void clear() { UA_clear(&data_, getDataType()); }
-    
+
     /// Deep copy of data
     inline void copy(const T& data) {
         auto status = UA_copy(&data, &data_, getDataType());
         checkStatusCodeException(status);
     }
 
-    T data_ {};
+    T data_{};
 };
 
 // template <typename T>
@@ -73,13 +74,14 @@ public:
     using BaseClass::BaseClass; // inherit contructors
 
     explicit String(std::string_view str) {
-        data_ = UA_STRING_ALLOC(str.data());
+        data_ = allocUaString(str);
     }
 
     inline bool operator==(const String& other) const { return UA_String_equal(&data_, other.handle()); }
     inline bool operator!=(const String& other) const { return !operator==(other); }
 
-    inline std::string get() const { return uaStringToString(data_); }
+    inline std::string      get() const { return uaStringToString(data_); }
+    inline std::string_view getView() const { return uaStringToStringView(data_); }
 };
 
 
@@ -91,7 +93,7 @@ public:
     using BaseClass::BaseClass; // inherit contructors
 
     Guid(UA_UInt32 data1, UA_UInt16 data2, UA_UInt16 data3, std::array<UA_Byte, 8> data4) {
-        data_.data1 = data1; 
+        data_.data1 = data1;
         data_.data2 = data2;
         data_.data3 = data3;
         std::copy(data4.begin(), data4.end(), data_.data4);
@@ -113,7 +115,9 @@ public:
     using BaseClass::BaseClass; // inherit contructors
 
     explicit ByteString(std::string_view str) {
-        data_ = UA_BYTESTRING_ALLOC(str.data());
+        auto tmp = allocUaString(str);
+        data_.data   = tmp.data;
+        data_.length = tmp.length;
     }
 
     inline bool operator==(const ByteString& other) const { return UA_ByteString_equal(&data_, other.handle()); }
@@ -131,14 +135,15 @@ public:
     using BaseClass::BaseClass; // inherit contructors
 
     QualifiedName(uint16_t namespaceIndex, std::string_view name) {
-        data_ = UA_QUALIFIEDNAME_ALLOC(namespaceIndex, name.data());
+        data_.namespaceIndex = namespaceIndex;
+        data_.name           = allocUaString(name);
     }
 
     inline bool operator==(const QualifiedName& other) const { return UA_QualifiedName_equal(&data_, other.handle()); }
     inline bool operator!=(const QualifiedName& other) const { return !operator==(other); }
 
-    inline uint16_t    getNamespaceIndex() const { return data_.namespaceIndex; } 
-    inline std::string getName()           const { return uaStringToString(data_.name); } 
+    inline uint16_t    getNamespaceIndex() const { return data_.namespaceIndex; }
+    inline std::string getName() const { return uaStringToString(data_.name); }
 };
 
 
@@ -150,11 +155,12 @@ public:
     using BaseClass::BaseClass; // inherit contructors
 
     LocalizedText(std::string_view text, std::string_view locale = "") {
-        data_ = UA_LOCALIZEDTEXT_ALLOC(locale.data(), text.data());
+        data_.locale = allocUaString(locale);
+        data_.text   = allocUaString(text);
     }
 
-    inline std::string getText()   const { return uaStringToString(data_.text); } 
-    inline std::string getLocale() const { return uaStringToString(data_.locale); } 
+    inline std::string getText() const { return uaStringToString(data_.text); }
+    inline std::string getLocale() const { return uaStringToString(data_.locale); }
 };
 
 } // namespace opcua
