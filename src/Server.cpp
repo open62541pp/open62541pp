@@ -137,7 +137,7 @@ void Server::Connection::start() {
     running_.store(true);
     thread_  = std::thread([this] {
         while (this->running_.load()) {
-            // reference: https://open62541.org/doc/0.2/server.html#server-lifecycle
+            // reference: https://open62541.org/doc/current/server.html#server-lifecycle
             UA_Server_run_iterate(this->server_, true);
         }
     });

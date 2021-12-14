@@ -1,5 +1,5 @@
-open62541++ Documentation
-#########################
+open62541++ documentation
+=========================
 
 .. toctree::
    :hidden:
@@ -9,5 +9,6 @@ open62541++ Documentation
    node
    api
 
-.. include:: ../README.rst
+.. include:: ../README.md
+   :parser: myst_parser.sphinx_
    :start-line: 2
