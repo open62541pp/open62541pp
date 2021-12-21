@@ -37,7 +37,7 @@ public:
 
     void setLogin(const std::vector<Login>& logins, bool allowAnonymous = true);
 
-    inline void start()           { connection_->start(); }
+    inline void run()             { connection_->run(); }
     inline void stop()            { connection_->stop(); }
     inline bool isRunning() const { return connection_->isRunning(); }
 
@@ -61,7 +61,7 @@ private:
         Connection();
         ~Connection();
 
-        void start();
+        void run();
         void stop();
 
         inline bool isRunning() const { return running_.load(); }
@@ -71,7 +71,6 @@ private:
         inline       UA_Server* handle()       { return server_; }
         inline const UA_Server* handle() const { return server_; }
     private:
-        // UA_ServerConfig*  config_;
         UA_Server*        server_;
         std::thread       thread_;
         std::atomic<bool> running_ {false};

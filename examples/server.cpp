@@ -22,7 +22,7 @@ int main() {
     // read value
     std::cout << "The answer is: " << myIntegerNode.read<int>() << std::endl;
 
-    server.start();
+    server.run();
 
     return 0;
 }

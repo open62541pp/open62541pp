@@ -30,8 +30,8 @@ TEST_CASE("Server") {
 
     SECTION("Start / stop server") {
         REQUIRE_FALSE(server.isRunning());
-        REQUIRE_NOTHROW(server.start());
-        REQUIRE_THROWS(server.start()); // already started
+        REQUIRE_NOTHROW(server.run());
+        REQUIRE_THROWS(server.run()); // already running
         REQUIRE(server.isRunning());
         REQUIRE_NOTHROW(server.stop());
     }

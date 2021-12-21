@@ -134,7 +134,7 @@ Server::Connection::~Connection() {
     UA_Server_delete(server_);
 }
 
-void Server::Connection::start() {
+void Server::Connection::run() {
     if (running_.load())
         throw Exception("OPC UA Server already started");
 
