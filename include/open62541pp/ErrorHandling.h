@@ -4,7 +4,7 @@
 #include <string_view>
 #include <stdexcept>
 
-#include "open62541/types.h"
+#include "open62541pp/open62541.h"
 
 namespace opcua {
 

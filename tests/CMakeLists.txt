@@ -16,6 +16,7 @@ target_link_libraries(
         open62541pp::open62541pp
         open62541pp_project_options
 )
+target_include_directories(open62541pp_tests PRIVATE ../src)
 set_target_properties(open62541pp_tests PROPERTIES OUTPUT_NAME tests)
 
 # parse catch tests for ctest

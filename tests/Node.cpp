@@ -1,4 +1,4 @@
-#include "catch2/catch.hpp"
+#include <catch2/catch.hpp>
 
 #include "open62541pp/Server.h"
 #include "open62541pp/Node.h"

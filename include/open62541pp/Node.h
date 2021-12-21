@@ -4,10 +4,10 @@
 #include <string_view>
 #include <vector>
 
-#include "Server.h"
-#include "NodeId.h"
-#include "Variant.h"
-#include "Types.h"
+#include "open62541pp/Server.h"
+#include "open62541pp/NodeId.h"
+#include "open62541pp/Variant.h"
+#include "open62541pp/Types.h"
 
 namespace opcua {
 

@@ -1,8 +1,8 @@
-#include "catch2/catch.hpp"
+#include <catch2/catch.hpp>
 
+#include "open62541pp/Helper.h"  // uaStringToString
 #include "open62541pp/Types.h"
 #include "open62541pp/TypeWrapper.h"
-#include "open62541pp/Helper.h" // uaStringToString
 
 using namespace Catch::Matchers;
 using namespace opcua;

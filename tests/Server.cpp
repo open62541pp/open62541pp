@@ -3,23 +3,12 @@
 
 #include <catch2/catch.hpp>
 
-// turn off the -Wunused-parameter warning for open62541
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-parameter"
-
-#include "open62541/types.h"
-#include "open62541/nodeids.h"
-#include "open62541/server.h"
-#if __has_include("open62541/server_config.h")  // merged into server.h in v1.2
-#include "open62541/server_config.h"
-#endif
-
-#pragma GCC diagnostic pop
-
-#include "open62541pp/Server.h"
+#include "open62541pp/Helper.h"
 #include "open62541pp/Node.h"
 #include "open62541pp/NodeId.h"
-#include "open62541pp/Helper.h"
+#include "open62541pp/Server.h"
+
+#include "open62541_impl.h"
 
 using namespace std::chrono_literals;
 using namespace opcua;

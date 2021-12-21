@@ -1,6 +1,6 @@
 #include <cstring>
 
-#include "catch2/catch.hpp"
+#include <catch2/catch.hpp>
 
 #include "open62541pp/Helper.h"
 

@@ -3,12 +3,10 @@
 #include <type_traits>
 #include <vector>
 
-#include "open62541/types.h"
-#include "open62541/types_generated_handling.h"
-
-#include "Types.h"
-#include "TypeWrapper.h"
-#include "ErrorHandling.h"
+#include "open62541pp/open62541.h"
+#include "open62541pp/ErrorHandling.h"
+#include "open62541pp/Types.h"
+#include "open62541pp/TypeWrapper.h"
 
 namespace opcua {
 

@@ -2,9 +2,7 @@
 
 #include <type_traits>
 
-#include "open62541/types.h"
-#include "open62541/types_generated.h"
-#include "open62541/nodeids.h"
+#include "open62541pp/open62541.h"
 
 namespace opcua {
 

@@ -1,6 +1,4 @@
-#include "catch2/catch.hpp"
-
-#include "open62541/types.h"
+#include <catch2/catch.hpp>
 
 #include "open62541pp/NodeId.h"
 
