@@ -1,3 +1,6 @@
+#include <chrono>
+#include <thread>
+
 #include "open62541pp/Server.h"
 
 // turn off the -Wunused-parameter warning for open62541 (only for gcc/clang)
@@ -136,19 +139,21 @@ Server::Connection::~Connection() {
 
 void Server::Connection::run() {
     if (running_.load())
-        throw Exception("OPC UA Server already started");
+        throw Exception("OPC UA Server already running");
 
     auto status = UA_Server_run_startup(server_);
     if (status != UA_STATUSCODE_GOOD)
         throw Exception(status);
 
     running_.store(true);
-    thread_  = std::thread([this] {
-        while (this->running_.load()) {
-            // reference: https://open62541.org/doc/current/server.html#server-lifecycle
-            UA_Server_run_iterate(this->server_, true);
-        }
-    });
+
+    while (this->running_.load()) {
+        // references: 
+        // https://open62541.org/doc/current/server.html#server-lifecycle
+        // https://github.com/open62541/open62541/blob/master/examples/server_mainloop.c
+        const auto waitInterval = UA_Server_run_iterate(this->server_, true);
+        std::this_thread::sleep_for(std::chrono::milliseconds(waitInterval));
+    }
 }
 
 void Server::Connection::stop() {
@@ -156,9 +161,8 @@ void Server::Connection::stop() {
         return;
 
     running_.store(false);
-    thread_.join();
 
-    auto status = UA_Server_run_shutdown(server_);
+    auto status = UA_Server_run_shutdown(this->server_);
     if (status != UA_STATUSCODE_GOOD)
         throw Exception(status);
 }

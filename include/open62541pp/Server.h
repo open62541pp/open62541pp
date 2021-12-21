@@ -1,7 +1,6 @@
 #pragma once
 
 #include <memory>
-#include <thread>
 #include <atomic>
 #include <string>
 #include <string_view>
@@ -72,7 +71,6 @@ private:
         inline const UA_Server* handle() const { return server_; }
     private:
         UA_Server*        server_;
-        std::thread       thread_;
         std::atomic<bool> running_ {false};
     };
 

@@ -1,4 +1,7 @@
-#include "catch2/catch.hpp"
+#include <chrono>
+#include <thread>
+
+#include <catch2/catch.hpp>
 
 // turn off the -Wunused-parameter warning for open62541
 #pragma GCC diagnostic push
@@ -18,6 +21,7 @@
 #include "open62541pp/NodeId.h"
 #include "open62541pp/Helper.h"
 
+using namespace std::chrono_literals;
 using namespace opcua;
 
 static bool compareNodes(NodeId id, uint16_t numericId) {
@@ -30,10 +34,16 @@ TEST_CASE("Server") {
 
     SECTION("Start / stop server") {
         REQUIRE_FALSE(server.isRunning());
-        REQUIRE_NOTHROW(server.run());
-        REQUIRE_THROWS(server.run()); // already running
+
+        auto t = std::thread([&] { server.run(); });
+
+        std::this_thread::sleep_for(100ms);  // wait for thread to execute run method
+
         REQUIRE(server.isRunning());
+        REQUIRE_THROWS(server.run()); // already running
         REQUIRE_NOTHROW(server.stop());
+
+        t.join();  // wait until stopped
     }
 
     SECTION("Set hostname / application name / uris") {
