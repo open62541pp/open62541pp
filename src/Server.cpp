@@ -111,6 +111,7 @@ Server::Connection::Connection()
     auto* config = getConfig();
     config->publishingIntervalLimits.min = 10; // ms
     config->samplingIntervalLimits.min = 10; // ms
+    config->allowEmptyVariables = UA_RULEHANDLING_ACCEPT;  // allow empty varaibles
 }
 
 Server::Connection::~Connection() {
