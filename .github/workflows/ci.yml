@@ -69,6 +69,7 @@ jobs:
           mkdir build
           cd build
           cmake -DUAPP_BUILD_TESTS=ON -DUAPP_BUILD_EXAMPLES=ON ..
+          cmake --build . --config RelWithDebInfo
 
   # macos:
   #   name: macOS ${{ matrix.config.name }}
