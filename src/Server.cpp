@@ -6,11 +6,41 @@
 #include "open62541pp/Node.h"
 #include "open62541pp/NodeId.h"
 #include "open62541pp/Server.h"
+#include "open62541pp/TypeWrapper.h"
 
 #include "open62541_impl.h"
 #include "version.h"
 
 namespace opcua {
+
+static void applyDefaults(UA_ServerConfig* config) {
+    config->publishingIntervalLimits.min = 10; // ms
+    config->samplingIntervalLimits.min = 10; // ms
+    config->allowEmptyVariables = UA_RULEHANDLING_ACCEPT;  // allow empty varaibles
+}
+
+Server::Server()
+    : connection_(std::make_shared<Connection>()) {
+    const auto status = UA_ServerConfig_setDefault(getConfig());
+    checkStatusCodeException(status);
+    applyDefaults(getConfig());
+}
+
+Server::Server(uint16_t port)
+    : connection_(std::make_shared<Connection>()) {
+    const auto status = UA_ServerConfig_setMinimal(getConfig(), port, nullptr);
+    checkStatusCodeException(status);
+    applyDefaults(getConfig());
+}
+
+Server::Server(uint16_t port, std::string_view certificate)
+    : connection_(std::make_shared<Connection>()) {
+    const auto status = UA_ServerConfig_setMinimal(
+        getConfig(), port, ByteString(certificate).handle()
+    );
+    checkStatusCodeException(status);
+    applyDefaults(getConfig());
+}
 
 uint16_t Server::registerNamespace(std::string_view name) {
     return UA_Server_addNamespace(handle(), name.data());
@@ -103,17 +133,7 @@ ObjectNode Server::getVariableTypesNode()    { return ObjectNode(*this, UA_NS0ID
 ObjectNode Server::getDataTypesNode()        { return ObjectNode(*this, UA_NS0ID_DATATYPESFOLDER); }
 ObjectNode Server::getReferenceTypesNode()   { return ObjectNode(*this, UA_NS0ID_REFERENCETYPESFOLDER); }
 
-Server::Connection::Connection()
-    : server_(UA_Server_new()) {
-    const auto status = UA_ServerConfig_setDefault(getConfig());
-    checkStatusCodeException(status);
-
-    // change default parameters
-    auto* config = getConfig();
-    config->publishingIntervalLimits.min = 10; // ms
-    config->samplingIntervalLimits.min = 10; // ms
-    config->allowEmptyVariables = UA_RULEHANDLING_ACCEPT;  // allow empty varaibles
-}
+Server::Connection::Connection() : server_(UA_Server_new()) {}
 
 Server::Connection::~Connection() {
     stop();

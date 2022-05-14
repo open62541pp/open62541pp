@@ -19,6 +19,18 @@ static bool compareNodes(NodeId id, uint16_t numericId) {
 }
 
 TEST_CASE("Server") {
+    SECTION("Constructors") {
+        SECTION("Default") {
+            Server server;
+        }
+        SECTION("Custom port") {
+            Server server(4850);
+        }
+        SECTION("Custom port and certificate") {
+            Server server(4850, "certificate...");
+        }
+    }
+
     Server server;
 
     SECTION("Start / stop server") {

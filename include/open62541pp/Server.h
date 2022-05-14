@@ -24,8 +24,12 @@ struct Login {
 
 class Server {
 public:
-    Server()
-        : connection_(std::make_shared<Connection>()) {}
+    /// Create server with default config
+    Server();
+    /// Create server with custom port
+    Server(uint16_t port);
+    /// Create server with custom port and a server certificate
+    Server(uint16_t port, std::string_view certificate);
 
     uint16_t registerNamespace(std::string_view name);
 
