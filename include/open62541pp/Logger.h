@@ -1,0 +1,71 @@
+#pragma once
+
+#include <functional>
+#include <string_view>
+
+namespace opcua {
+
+enum class LogLevel {
+    Trace = 0,
+    Debug,
+    Info,
+    Warning,
+    Error,
+    Fatal,
+};
+
+enum class LogCategory {
+    Network = 0,
+    SecureChannel,
+    Session,
+    Server,
+    Client,
+    Userland,
+    SecurityPolicy,
+};
+
+using Logger = std::function<void(LogLevel, LogCategory, std::string_view msg)>;
+
+/* -------------------------------------- Utility functions ------------------------------------- */
+
+constexpr std::string_view getLogLevelName(LogLevel level) {
+    switch (level) {
+    case LogLevel::Trace:
+        return "trace";
+    case LogLevel::Debug:
+        return "debug";
+    case LogLevel::Info:
+        return "info";
+    case LogLevel::Warning:
+        return "warning";
+    case LogLevel::Error:
+        return "error";
+    case LogLevel::Fatal:
+        return "fatal";
+    default:
+        return "unknown";
+    }
+}
+
+constexpr std::string_view getLogCategoryName(LogCategory category) {
+    switch (category) {
+    case LogCategory::Network:
+        return "network";
+    case LogCategory::SecureChannel:
+        return "channel";
+    case LogCategory::Session:
+        return "session";
+    case LogCategory::Server:
+        return "server";
+    case LogCategory::Client:
+        return "client";
+    case LogCategory::Userland:
+        return "userland";
+    case LogCategory::SecurityPolicy:
+        return "securitypolicy";
+    default:
+        return "unknown";
+    }
+}
+
+}  // namespace opcua

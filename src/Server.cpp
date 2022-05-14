@@ -1,5 +1,8 @@
+#include <cassert>
 #include <chrono>
+#include <cstdio>
 #include <thread>
+#include <utility>  // move
 
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Helper.h"
@@ -12,7 +15,6 @@
 #include "version.h"
 
 namespace opcua {
-
 
 /* ----------------------------------------- Connection ----------------------------------------- */
 
@@ -30,6 +32,13 @@ public:
     Connection(Connection&&) noexcept = delete;
     Connection& operator=(const Connection&) = delete;
     Connection& operator=(Connection&&) noexcept = delete;
+
+    void applyDefaults() {
+        auto* config = getConfig();
+        config->publishingIntervalLimits.min = 10; // ms
+        config->samplingIntervalLimits.min = 10; // ms
+        config->allowEmptyVariables = UA_RULEHANDLING_ACCEPT;  // allow empty variables
+    }
 
     void run() {
         if (running_.load()) {
@@ -59,34 +68,57 @@ public:
 
     bool isRunning() const { return running_.load(); }
 
+    void setLogger(Logger logger) {
+        logger_ = std::move(logger);
+        auto* config = getConfig();
+        config->logger.log     = log;
+        config->logger.context = this;
+        config->logger.clear   = nullptr;
+    }
+
+    static void log(
+        void* context, UA_LogLevel level, UA_LogCategory category, const char* msg, va_list args
+    ) {
+        assert(context != nullptr);  // NOLINT
+
+        const auto* instance = static_cast<Connection*>(context);
+        assert(instance->logger_ != nullptr);  // NOLINT
+
+        // convert printf format + args to string_view
+        va_list tmp;
+        va_copy(tmp, args);  // NOLINT
+        const int bufferSize = std::vsnprintf(nullptr, 0, msg, tmp);  // NOLINT
+        va_end(tmp);  // NOLINT
+        std::vector<char> buffer(bufferSize + 1);
+        std::vsnprintf(buffer.data(), buffer.size(), msg, args);
+        const std::string_view sv(buffer.data(), buffer.size());
+
+        instance->logger_(static_cast<LogLevel>(level), static_cast<LogCategory>(category), sv);
+    }
+
     UA_ServerConfig* getConfig() { return UA_Server_getConfig(server_); }
     UA_Server*       handle()    { return server_; }
 
 private:
     UA_Server*        server_;
     std::atomic<bool> running_ {false};
+    Logger            logger_{nullptr};
 };
 
 /* ------------------------------------------- Server ------------------------------------------- */
-
-static void applyDefaults(UA_ServerConfig* config) {
-    config->publishingIntervalLimits.min = 10; // ms
-    config->samplingIntervalLimits.min = 10; // ms
-    config->allowEmptyVariables = UA_RULEHANDLING_ACCEPT;  // allow empty varaibles
-}
 
 Server::Server()
     : connection_(std::make_shared<Connection>()) {
     const auto status = UA_ServerConfig_setDefault(getConfig());
     checkStatusCodeException(status);
-    applyDefaults(getConfig());
+    connection_->applyDefaults();
 }
 
 Server::Server(uint16_t port)
     : connection_(std::make_shared<Connection>()) {
     const auto status = UA_ServerConfig_setMinimal(getConfig(), port, nullptr);
     checkStatusCodeException(status);
-    applyDefaults(getConfig());
+    connection_->applyDefaults();
 }
 
 Server::Server(uint16_t port, std::string_view certificate)
@@ -95,11 +127,11 @@ Server::Server(uint16_t port, std::string_view certificate)
         getConfig(), port, ByteString(certificate).handle()
     );
     checkStatusCodeException(status);
-    applyDefaults(getConfig());
+    connection_->applyDefaults();
 }
 
-uint16_t Server::registerNamespace(std::string_view name) {
-    return UA_Server_addNamespace(handle(), name.data());
+void Server::setLogger(Logger logger) {
+    connection_->setLogger(std::move(logger));
 }
 
 // copy to endpoints needed, see: https://github.com/open62541/open62541/issues/1175
@@ -183,6 +215,10 @@ void Server::setLogin(const std::vector<Login>& logins, bool allowAnonymous) {
 void Server::run()             { connection_->run(); }
 void Server::stop()            { connection_->stop(); }
 bool Server::isRunning() const { return connection_->isRunning(); }
+
+uint16_t Server::registerNamespace(std::string_view name) {
+    return UA_Server_addNamespace(handle(), name.data());
+}
 
 Node       Server::getNode(const NodeId& id) { return Node(*this, id); }
 ObjectNode Server::getRootNode()             { return ObjectNode(*this, UA_NS0ID_ROOTFOLDER); }
