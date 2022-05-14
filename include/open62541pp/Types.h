@@ -46,40 +46,68 @@ enum class NodeClass : uint16_t {
     View          = UA_NODECLASS_VIEW,
 };
 
-// #define UA_NS0ID_REFERENCES 31 // ReferenceType
-// #define UA_NS0ID_NONHIERARCHICALREFERENCES 32 // ReferenceType
-// #define UA_NS0ID_HIERARCHICALREFERENCES 33 // ReferenceType
-// #define UA_NS0ID_HASCHILD 34 // ReferenceType
-// #define UA_NS0ID_ORGANIZES 35 // ReferenceType
-// #define UA_NS0ID_HASEVENTSOURCE 36 // ReferenceType
-// #define UA_NS0ID_HASMODELLINGRULE 37 // ReferenceType
-// #define UA_NS0ID_HASENCODING 38 // ReferenceType
-// #define UA_NS0ID_HASDESCRIPTION 39 // ReferenceType
-// #define UA_NS0ID_HASTYPEDEFINITION 40 // ReferenceType
-// #define UA_NS0ID_GENERATESEVENT 41 // ReferenceType
-// #define UA_NS0ID_AGGREGATES 44 // ReferenceType
-// #define UA_NS0ID_HASSUBTYPE 45 // ReferenceType
-// #define UA_NS0ID_HASPROPERTY 46 // ReferenceType
-// #define UA_NS0ID_HASCOMPONENT 47 // ReferenceType
-// #define UA_NS0ID_HASNOTIFIER 48 // ReferenceType
-// #define UA_NS0ID_HASORDEREDCOMPONENT 49 // ReferenceType
-// #define UA_NS0ID_FROMSTATE 51 // ReferenceType
-// #define UA_NS0ID_TOSTATE 52 // ReferenceType
-// #define UA_NS0ID_HASCAUSE 53 // ReferenceType
-// #define UA_NS0ID_HASEFFECT 54 // ReferenceType
-// #define UA_NS0ID_HASHISTORICALCONFIGURATION 56 // ReferenceType
-
+/**
+ * Reference types.
+ * 
+ * List in standard: https://reference.opcfoundation.org/v104/Core/ReferenceTypes/
+ * Missing reference types in open62541?
+ * - AliasFor
+ * - HasReaderGroup
+ * - HasWriterGroup
+ */
 enum class ReferenceType : uint16_t {
-    Organizes    = UA_NS0ID_ORGANIZES,
-    HasSubtype   = UA_NS0ID_HASSUBTYPE,
-    HasComponent = UA_NS0ID_HASCOMPONENT
+    References                          = UA_NS0ID_REFERENCES,
+    NonHierarchicalReferences           = UA_NS0ID_NONHIERARCHICALREFERENCES,
+    HierarchicalReferences              = UA_NS0ID_HIERARCHICALREFERENCES,
+    HasChild                            = UA_NS0ID_HASCHILD,
+    Organizes                           = UA_NS0ID_ORGANIZES,
+    HasEventSource                      = UA_NS0ID_HASEVENTSOURCE,
+    HasModellingRule                    = UA_NS0ID_HASMODELLINGRULE,
+    HasEncoding                         = UA_NS0ID_HASENCODING,
+    HasDescription                      = UA_NS0ID_HASDESCRIPTION,
+    HasTypeDefinition                   = UA_NS0ID_HASTYPEDEFINITION,
+    GeneratesEvent                      = UA_NS0ID_GENERATESEVENT,
+    Aggregates                          = UA_NS0ID_AGGREGATES,
+    HasSubtype                          = UA_NS0ID_HASSUBTYPE,
+    HasProperty                         = UA_NS0ID_HASPROPERTY,
+    HasComponent                        = UA_NS0ID_HASCOMPONENT,
+    HasNotifier                         = UA_NS0ID_HASNOTIFIER,
+    HasOrderedComponent                 = UA_NS0ID_HASORDEREDCOMPONENT,
+    FromState                           = UA_NS0ID_FROMSTATE,
+    ToState                             = UA_NS0ID_TOSTATE,
+    HasCause                            = UA_NS0ID_HASCAUSE,
+    HasEffect                           = UA_NS0ID_HASEFFECT,
+    HasHistoricalConfiguration          = UA_NS0ID_HASHISTORICALCONFIGURATION,
+    HasSubStateMachine                  = UA_NS0ID_HASSUBSTATEMACHINE,
+    HasArgumentDescription              = UA_NS0ID_HASARGUMENTDESCRIPTION,
+    HasOptionalInputArgumentDescription = UA_NS0ID_HASOPTIONALINPUTARGUMENTDESCRIPTION,
+    AlwaysGeneratesEvent                = UA_NS0ID_ALWAYSGENERATESEVENT,
+    HasTrueSubState                     = UA_NS0ID_HASTRUESUBSTATE,
+    HasFalseSubState                    = UA_NS0ID_HASFALSESUBSTATE,
+    HasCondition                        = UA_NS0ID_HASCONDITION,
+    HasPubSubConnection                 = UA_NS0ID_HASPUBSUBCONNECTION,
+    DataSetToWriter                     = UA_NS0ID_DATASETTOWRITER,
+    HasGuard                            = UA_NS0ID_HASGUARD,
+    HasDataSetWriter                    = UA_NS0ID_HASDATASETWRITER,
+    HasDataSetReader                    = UA_NS0ID_HASDATASETREADER,
+    HasAlarmSuppressionGroup            = UA_NS0ID_HASALARMSUPPRESSIONGROUP,
+    AlarmGroupMember                    = UA_NS0ID_ALARMGROUPMEMBER,
+    HasEffectDisable                    = UA_NS0ID_HASEFFECTDISABLE,
+    HasDictionaryEntry                  = UA_NS0ID_HASDICTIONARYENTRY,
+    HasInterface                        = UA_NS0ID_HASINTERFACE,
+    HasAddIn                            = UA_NS0ID_HASADDIN,
+    HasEffectEnable                     = UA_NS0ID_HASEFFECTENABLE,
+    HasEffectSuppressed                 = UA_NS0ID_HASEFFECTSUPPRESSED,
+    HasEffectUnsuppressed               = UA_NS0ID_HASEFFECTUNSUPPRESSED,
 };
 
 // helper trait
+namespace detail {
 template <typename...> struct always_false : std::false_type {};
+}  // namespace detail
 
 template <typename T> inline constexpr Type getType() {
-    static_assert(always_false<T>::value,
+    static_assert(detail::always_false<T>::value,
                   "Type mapping not possible (maybe not existing or not unique). \
                    Please specify type manually.");
     return {}; // TODO: Type::Undefined?
