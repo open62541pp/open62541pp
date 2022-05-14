@@ -78,7 +78,7 @@ void Server::setLogin(const std::vector<Login>& logins, bool allowAnonymous) {
         config->accessControl.deleteMembers(&config->accessControl);
 #endif
 
-    auto status = UA_AccessControl_default(
+    const auto status = UA_AccessControl_default(
         config,
         allowAnonymous,
         &config->securityPolicies[config->securityPoliciesSize-1].policyUri, // NOLINT
@@ -105,7 +105,8 @@ ObjectNode Server::getReferenceTypesNode()   { return ObjectNode(*this, UA_NS0ID
 
 Server::Connection::Connection()
     : server_(UA_Server_new()) {
-    UA_ServerConfig_setDefault(getConfig());
+    const auto status = UA_ServerConfig_setDefault(getConfig());
+    checkStatusCodeException(status);
 
     // change default parameters
     auto* config = getConfig();
@@ -120,12 +121,12 @@ Server::Connection::~Connection() {
 }
 
 void Server::Connection::run() {
-    if (running_.load())
+    if (running_.load()) {
         throw Exception("OPC UA Server already running");
+    }
 
-    auto status = UA_Server_run_startup(server_);
-    if (status != UA_STATUSCODE_GOOD)
-        throw Exception(status);
+    const auto status = UA_Server_run_startup(server_);
+    checkStatusCodeException(status);
 
     running_.store(true);
 
@@ -139,14 +140,14 @@ void Server::Connection::run() {
 }
 
 void Server::Connection::stop() {
-    if (!running_.load())
+    if (!running_.load()) {
         return;
+    }
 
     running_.store(false);
 
-    auto status = UA_Server_run_shutdown(this->server_);
-    if (status != UA_STATUSCODE_GOOD)
-        throw Exception(status);
+    const auto status = UA_Server_run_shutdown(this->server_);
+    checkStatusCodeException(status);
 }
 
 UA_ServerConfig* Server::Connection::getConfig() {

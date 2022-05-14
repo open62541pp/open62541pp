@@ -24,14 +24,16 @@ public:
 };
 
 inline bool checkStatusCode(UA_StatusCode code) noexcept {
-    if (code != UA_STATUSCODE_GOOD)
+    if (code != UA_STATUSCODE_GOOD) {
         return false;
+    }
     return true;
 }
 
 inline void checkStatusCodeException(UA_StatusCode code) {
-    if (code != UA_STATUSCODE_GOOD)
+    if (code != UA_STATUSCODE_GOOD) {
         throw Exception(code);
+    }
 }
 
 } // namespace opcua

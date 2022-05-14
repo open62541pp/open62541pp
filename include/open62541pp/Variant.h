@@ -59,10 +59,12 @@ public:
     /// An exception is thrown if the variant is not an array or not of the given type.
     template <typename T>
     std::vector<T> readArray() const {
-        if (!isArray())
+        if (!isArray()) {
             throw Exception("Variant is not an array");
-        if (!isType<T>())
+        }
+        if (!isType<T>()) {
             throw Exception("Variant does not contain an array of specified return type");
+        }
 
         // TODO: check dimensions?
         // size_t arrayDimensionsSize;   /* The number of dimensions */
@@ -78,7 +80,7 @@ public:
               typename = std::enable_if_t<!std::is_convertible_v<T*, TypeWrapperBase*>>>
     void setScalar(T value) {
         clear();
-        auto status = UA_Variant_setScalarCopy(&data_, &value, getUaDataType<T>());
+        const auto status = UA_Variant_setScalarCopy(&data_, &value, getUaDataType<T>());
         checkStatusCodeException(status);
         data_.storageType = UA_VARIANT_DATA;
     }
@@ -93,10 +95,10 @@ public:
     template <typename T>
     void setArray(const std::vector<T>& array) {
         clear();
-        auto status = UA_Variant_setArrayCopy(&data_,
-                                              array.data(),
-                                              array.size(),
-                                              getUaDataType<T>());
+        const auto status = UA_Variant_setArrayCopy(&data_,
+                                                    array.data(),
+                                                    array.size(),
+                                                    getUaDataType<T>());
         checkStatusCodeException(status);
         data_.storageType = UA_VARIANT_DATA;
     }

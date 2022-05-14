@@ -54,6 +54,7 @@ public:
 
     inline       UA_Server* handle()       { return connection_->handle(); }
     inline const UA_Server* handle() const { return connection_->handle(); }
+
 private:
     class Connection {
     public:
