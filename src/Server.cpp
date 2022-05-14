@@ -34,30 +34,30 @@ static void copyApplicationDescriptionToEndpoints(UA_ServerConfig* config) {
 }
 
 void Server::setCustomHostname(std::string_view hostname) {
-    auto& ref = connection_->getConfig()->customHostname;
+    auto& ref = getConfig()->customHostname;
     UA_String_clear(&ref);
     ref = allocUaString(hostname);
 }
 
 void Server::setApplicationName(std::string_view name) {
-    auto& ref = connection_->getConfig()->applicationDescription.applicationName;
+    auto& ref = getConfig()->applicationDescription.applicationName;
     UA_LocalizedText_clear(&ref);
     ref = UA_LOCALIZEDTEXT_ALLOC("", name.data());
-    copyApplicationDescriptionToEndpoints(connection_->getConfig());
+    copyApplicationDescriptionToEndpoints(getConfig());
 }
 
 void Server::setApplicationUri(std::string_view uri) {
-    auto& ref = connection_->getConfig()->applicationDescription.applicationUri;
+    auto& ref = getConfig()->applicationDescription.applicationUri;
     UA_String_clear(&ref);
     ref = allocUaString(uri);
-    copyApplicationDescriptionToEndpoints(connection_->getConfig());
+    copyApplicationDescriptionToEndpoints(getConfig());
 }
 
 void Server::setProductUri(std::string_view uri) {
-    auto& ref = connection_->getConfig()->applicationDescription.productUri;
+    auto& ref = getConfig()->applicationDescription.productUri;
     UA_String_clear(&ref);
     ref = allocUaString(uri);
-    copyApplicationDescriptionToEndpoints(connection_->getConfig());
+    copyApplicationDescriptionToEndpoints(getConfig());
 }
 
 void Server::setLogin(const std::vector<Login>& logins, bool allowAnonymous) {
@@ -69,7 +69,7 @@ void Server::setLogin(const std::vector<Login>& logins, bool allowAnonymous) {
         loginsUa[i].password = allocUaString(logins[i].password);
     }
 
-    auto* config = connection_->getConfig();
+    auto* config = getConfig();
 #if UAPP_OPEN62541_VER_GE(1, 1)
     if (config->accessControl.clear != nullptr)
         config->accessControl.clear(&config->accessControl);
