@@ -40,9 +40,9 @@ public:
 
     void setLogin(const std::vector<Login>& logins, bool allowAnonymous = true);
 
-    inline void run()             { connection_->run(); }
-    inline void stop()            { connection_->stop(); }
-    inline bool isRunning() const { return connection_->isRunning(); }
+    void run();
+    void stop();
+    bool isRunning() const;
 
     Node       getNode(const NodeId& id);
     ObjectNode getRootNode();
@@ -56,32 +56,14 @@ public:
 
     void removeNode(const NodeId& id);
 
-    inline       UA_Server* handle()       { return connection_->handle(); }
-    inline const UA_Server* handle() const { return connection_->handle(); }
+    UA_Server*       handle();
+    const UA_Server* handle() const;
 
-    inline       UA_ServerConfig* getConfig()       { return connection_->getConfig(); }
-    inline const UA_ServerConfig* getConfig() const { return connection_->getConfig(); }
+    UA_ServerConfig*       getConfig();
+    const UA_ServerConfig* getConfig() const;
 
 private:
-    class Connection {
-    public:
-        Connection();
-        ~Connection();
-
-        void run();
-        void stop();
-
-        inline bool isRunning() const { return running_.load(); }
-
-        UA_ServerConfig* getConfig();
-
-        inline       UA_Server* handle()       { return server_; }
-        inline const UA_Server* handle() const { return server_; }
-    private:
-        UA_Server*        server_;
-        std::atomic<bool> running_ {false};
-    };
-
+    class Connection;
     std::shared_ptr<Connection> connection_;
 };
 

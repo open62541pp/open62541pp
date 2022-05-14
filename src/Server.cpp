@@ -13,6 +13,62 @@
 
 namespace opcua {
 
+
+/* ----------------------------------------- Connection ----------------------------------------- */
+
+class Server::Connection {
+public:
+    Connection() : server_(UA_Server_new()) {}
+
+    ~Connection() {
+        stop();
+        UA_Server_delete(server_);
+    }
+
+    // prevent copy & move
+    Connection(const Connection&) = delete;
+    Connection(Connection&&) noexcept = delete;
+    Connection& operator=(const Connection&) = delete;
+    Connection& operator=(Connection&&) noexcept = delete;
+
+    void run() {
+        if (running_.load()) {
+            throw Exception("OPC UA Server already running");
+        }
+
+        const auto status = UA_Server_run_startup(server_);
+        checkStatusCodeException(status);
+
+        running_.store(true);
+        while (this->running_.load()) {
+            // references: 
+            // https://open62541.org/doc/current/server.html#server-lifecycle
+            // https://github.com/open62541/open62541/blob/master/examples/server_mainloop.c
+            const auto waitInterval = UA_Server_run_iterate(this->server_, true);
+            std::this_thread::sleep_for(std::chrono::milliseconds(waitInterval));
+        }
+    }
+
+    void stop() {
+        if (!running_.load()) return;
+
+        running_.store(false);
+        const auto status = UA_Server_run_shutdown(this->server_);
+        checkStatusCodeException(status);
+    }
+
+    bool isRunning() const { return running_.load(); }
+
+    UA_ServerConfig* getConfig() { return UA_Server_getConfig(server_); }
+    UA_Server*       handle()    { return server_; }
+
+private:
+    UA_Server*        server_;
+    std::atomic<bool> running_ {false};
+};
+
+/* ------------------------------------------- Server ------------------------------------------- */
+
 static void applyDefaults(UA_ServerConfig* config) {
     config->publishingIntervalLimits.min = 10; // ms
     config->samplingIntervalLimits.min = 10; // ms
@@ -113,7 +169,8 @@ void Server::setLogin(const std::vector<Login>& logins, bool allowAnonymous) {
         allowAnonymous,
         &config->securityPolicies[config->securityPoliciesSize-1].policyUri, // NOLINT
         number,
-        loginsUa.data());
+        loginsUa.data()
+    );
 
     for (size_t i = 0; i < number; ++i) {
         UA_String_clear(&loginsUa[i].username);
@@ -122,6 +179,10 @@ void Server::setLogin(const std::vector<Login>& logins, bool allowAnonymous) {
 
     checkStatusCodeException(status);
 }
+
+void Server::run()             { connection_->run(); }
+void Server::stop()            { connection_->stop(); }
+bool Server::isRunning() const { return connection_->isRunning(); }
 
 Node       Server::getNode(const NodeId& id) { return Node(*this, id); }
 ObjectNode Server::getRootNode()             { return ObjectNode(*this, UA_NS0ID_ROOTFOLDER); }
@@ -133,45 +194,10 @@ ObjectNode Server::getVariableTypesNode()    { return ObjectNode(*this, UA_NS0ID
 ObjectNode Server::getDataTypesNode()        { return ObjectNode(*this, UA_NS0ID_DATATYPESFOLDER); }
 ObjectNode Server::getReferenceTypesNode()   { return ObjectNode(*this, UA_NS0ID_REFERENCETYPESFOLDER); }
 
-Server::Connection::Connection() : server_(UA_Server_new()) {}
+UA_Server*       Server::handle()       { return connection_->handle(); }
+const UA_Server* Server::handle() const { return connection_->handle(); }
 
-Server::Connection::~Connection() {
-    stop();
-    UA_Server_delete(server_);
-}
-
-void Server::Connection::run() {
-    if (running_.load()) {
-        throw Exception("OPC UA Server already running");
-    }
-
-    const auto status = UA_Server_run_startup(server_);
-    checkStatusCodeException(status);
-
-    running_.store(true);
-
-    while (this->running_.load()) {
-        // references: 
-        // https://open62541.org/doc/current/server.html#server-lifecycle
-        // https://github.com/open62541/open62541/blob/master/examples/server_mainloop.c
-        const auto waitInterval = UA_Server_run_iterate(this->server_, true);
-        std::this_thread::sleep_for(std::chrono::milliseconds(waitInterval));
-    }
-}
-
-void Server::Connection::stop() {
-    if (!running_.load()) {
-        return;
-    }
-
-    running_.store(false);
-
-    const auto status = UA_Server_run_shutdown(this->server_);
-    checkStatusCodeException(status);
-}
-
-UA_ServerConfig* Server::Connection::getConfig() {
-    return UA_Server_getConfig(server_);
-}
+UA_ServerConfig*       Server::getConfig()       { return connection_->getConfig(); }
+const UA_ServerConfig* Server::getConfig() const { return connection_->getConfig(); }
 
 } // namespace opcua

@@ -4,7 +4,7 @@ Checks:
     clang-analyzer*, -clang-analyzer-osx*
     llvm*, -llvm-include-order, -llvm-namespace-comment,
     misc*,
-    modernize*, -modernize-use-trailing-return-type,
+    modernize*, -modernize-use-trailing-return-type, -modernize-use-nodiscard,
     performance*,
     readability*, -readability-braces-around-statements, -readability-magic-numbers, -readability-uppercase-literal-suffix
 
