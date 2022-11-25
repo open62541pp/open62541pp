@@ -1,4 +1,4 @@
-name: open62541 compatibility
+name: Compatibility
 
 on: [push]
 

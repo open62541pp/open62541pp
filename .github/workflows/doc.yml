@@ -1,0 +1,29 @@
+name: Doc
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  doc:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Install requirements
+        run: |
+          sudo apt update
+          sudo apt install -y doxygen graphviz
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - name: Build doc with CMake
+        run: |
+          mkdir build
+          cd build
+          cmake -DUAPP_BUILD_DOCUMENTATION=ON ..
+          cmake --build . --target open62541pp-doc
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build/doc_html

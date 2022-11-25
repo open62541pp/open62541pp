@@ -1,18 +1,63 @@
-PROJECT_NAME         = open62541pp
-GENERATE_LATEX       = NO
-GENERATE_MAN         = NO
-GENERATE_RTF         = NO
-GENERATE_HTML        = NO
-GENERATE_XML         = YES
-INPUT                = "@DOXYGEN_INPUT_DIR@"
-FILE_PATTERNS        = *.h \
-                       *.cpp
-RECURSIVE            = YES
-OUTPUT_DIRECTORY     = "@DOXYGEN_OUTPUT_DIR@"
-ALIASES              = "rst=\verbatim embed:rst"
-ALIASES             += "endrst=\endverbatim"
-JAVADOC_AUTOBRIEF    = YES
-AUTOLINK_SUPPORT     = NO
-MACRO_EXPANSION      = YES
-QUIET                = YES
-WARN_IF_UNDOCUMENTED = NO
+# Project related configuration options
+PROJECT_NAME           = ${PROJECT_NAME}
+PROJECT_NUMBER         = ${PROJECT_VERSION}
+PROJECT_BRIEF          = ${PROJECT_DESCRIPTION}
+PROJECT_LOGO           =
+
+OUTPUT_DIRECTORY       = ${DOXYGEN_OUTPUT_DIR}
+OUTPUT_LANGUAGE        = English
+JAVADOC_AUTOBRIEF      = YES
+AUTOLINK_SUPPORT       = YES
+MARKDOWN_SUPPORT       = YES
+USE_MDFILE_AS_MAINPAGE = "${PROJECT_SOURCE_DIR}/README.md"
+ALIASES                = "rst=\verbatim embed:rst"
+ALIASES               += "endrst=\endverbatim"
+
+# Build-related options
+EXTRACT_ALL            = YES
+DISABLE_INDEX          = NO
+GENERATE_TREEVIEW      = NO
+TREEVIEW_WIDTH         = 300
+SHOW_FILES             = YES
+SHOW_NAMESPACES        = YES
+LAYOUT_FILE            = "${CMAKE_CURRENT_SOURCE_DIR}/DoxygenLayout.xml"
+
+# Input files
+INPUT                  = "${doxygen_input_dir}" \
+                         "${PROJECT_SOURCE_DIR}/README.md"
+FILE_PATTERNS          = *.h *.hpp
+RECURSIVE              = YES
+EXAMPLE_PATH           = ${PROJECT_SOURCE_DIR}/examples
+EXAMPLE_PATTERNS       = *.cpp *.h *.hpp
+EXAMPLE_RECURSIVE      = YES
+
+# Source browsing
+SOURCE_BROWSER         = YES
+REFERENCED_BY_RELATION = YES
+REFERENCES_RELATION    = YES
+REFERENCES_LINK_SOURCE = YES
+
+# Output
+GENERATE_LATEX         = NO
+GENERATE_MAN           = NO
+GENERATE_RTF           = NO
+GENERATE_HTML          = YES
+GENERATE_XML           = NO
+
+HTML_EXTRA_STYLESHEET  = "${CMAKE_CURRENT_SOURCE_DIR}/doxygen-awesome-css/doxygen-awesome.css"
+HTML_DYNAMIC_MENUS     = YES
+HTML_DYNAMIC_SECTIONS  = NO
+HTML_OUTPUT            = "${doxygen_html_dir}"
+
+# Dot diagrams
+HAVE_DOT               = YES
+DOT_FONTNAME           = Helvetica
+DOT_FONTSIZE           = 10
+DOT_IMAGE_FORMAT       = svg
+DOT_TRANSPARENT        = YES
+CLASS_GRAPH            = YES
+COLLABORATION_GRAPH    = NO
+
+# External references
+# open62541 html documentation in "open62541" subdirectory
+TAGFILES               = ${doxygen_open62541_tagfile}=open62541
