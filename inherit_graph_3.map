@@ -1,0 +1,11 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classopcua_1_1Node.html" title=" " alt="" coords="5,183,108,209"/>
+<area shape="rect" id="node2" href="$classopcua_1_1DataTypeNode.html" title=" " alt="" coords="173,5,337,32"/>
+<area shape="rect" id="node3" href="$classopcua_1_1MethodeNode.html" title=" " alt="" coords="175,56,335,83"/>
+<area shape="rect" id="node4" href="$classopcua_1_1ObjectNode.html" title=" " alt="" coords="183,107,328,133"/>
+<area shape="rect" id="node5" href="$classopcua_1_1ObjectTypeNode.html" title=" " alt="" coords="168,157,343,184"/>
+<area shape="rect" id="node6" href="$classopcua_1_1ReferenceTypeNode.html" title=" " alt="" coords="156,208,355,235"/>
+<area shape="rect" id="node7" href="$classopcua_1_1VariableNode.html" title=" " alt="" coords="177,259,333,285"/>
+<area shape="rect" id="node8" href="$classopcua_1_1VariableTypeNode.html" title=" " alt="" coords="162,309,349,336"/>
+<area shape="rect" id="node9" href="$classopcua_1_1ViewNode.html" title=" " alt="" coords="188,360,323,387"/>
+</map>
