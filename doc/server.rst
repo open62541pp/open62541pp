@@ -1,4 +1,0 @@
-Server
-======
-
-.. doxygenclass:: opcua::Server

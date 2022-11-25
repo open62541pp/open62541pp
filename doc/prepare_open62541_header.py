@@ -1,17 +1,11 @@
 #!/usr/bin/env python
 
 import sys
-import os
 import re
+from pathlib import Path
 
-# Remove restructured text documentation from open62541 header files
-# (all text in /** */ comments is restructured text)
 
-if len(sys.argv) < 1:
-    print("Usage: python prepare_open62541_header.py input.c/h")
-    exit(0)
-
-remove_keyword = [
+REMOVE_KEYWORDS = [
     " UA_EXPORT",
     " UA_INLINE",
     " UA_FUNC_ATTR_WARN_UNUSED_RESULT",
@@ -20,24 +14,29 @@ remove_keyword = [
 ]
 
 
-def recursive_glob(rootdir=".", suffix=""):
-    return [os.path.join(looproot, filename)
-            for looproot, _, filenames in os.walk(rootdir)
-            for filename in filenames if filename.endswith(suffix)]
+def process_header(headerfile: Path):
+    """
+    Remove reStructuredText documentation from open62541 header file.
+
+    All text in /** */ comments is reStructuredText.
+    """
+    content = headerfile.read_text("utf-8")
+
+    # remove rst comment blocks
+    content = re.sub("/\*\*[\s\S]+?\*/$", "", content, flags = re.M)  # /** ... */
+
+    # transform /* ... */ comments to doxygen style /** ... */
+    content = re.sub("^/\* ", "/** ", content, flags = re.M)
+
+    for keyword in REMOVE_KEYWORDS:
+        content = content.replace(keyword, "")
+
+    headerfile.write_text(content, "utf-8")
 
 
-for filename in recursive_glob(rootdir=sys.argv[1], suffix=".h"):
-    with open(filename, "r") as f:
-        content = f.read()
-
-        # remove rst comment blocks
-        content = re.sub("/\*\*[\s\S]+?\*/$", "", content, flags = re.M) # /** ... */
-
-        # transform /* ... */ comments to doxygen style /** ... */
-        content = re.sub("^/\* ", "/** ", content, flags = re.M)
-
-        for keyword in remove_keyword:
-            content = content.replace(keyword, "")
-    
-    with open(filename, "w") as f:
-        f.write(content)
+if __name__ == "__main__":
+    if len(sys.argv) == 2:
+        for headerfile in Path(sys.argv[1]).rglob("*.h"):
+            process_header(headerfile)
+    else:
+        print("Usage: python prepare_open62541_header.py <dir>")

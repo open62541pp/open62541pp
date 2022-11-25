@@ -5,7 +5,13 @@ if(CCACHE)
     set(CMAKE_CXX_COMPILER_LAUNCHER ${CCACHE})
 endif()
 
-project(open62541pp)
+project(
+    open62541++
+    VERSION 0.1.0
+    DESCRIPTION "C++ wrapper for open62541"
+    HOMEPAGE_URL "https://github.com/open62541pp/open62541pp"
+    LANGUAGES CXX
+)
 
 include(CheckIPOSupported)
 check_ipo_supported(RESULT ipo_supported OUTPUT check_ipo_output)
@@ -115,4 +121,8 @@ if(UAPP_BUILD_EXAMPLES)
 endif()
 
 # documentation
-add_subdirectory(doc)
+option(UAPP_BUILD_DOCUMENTATION "Build documentation" OFF)
+if(UAPP_BUILD_DOCUMENTATION)
+    message(STATUS "Documentation enabled")
+    add_subdirectory(doc)
+endif()

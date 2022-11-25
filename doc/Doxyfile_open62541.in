@@ -1,22 +1,58 @@
+# Project related configuration options
 PROJECT_NAME           = open62541
+PROJECT_NUMBER         = ${open62541_version}
+PROJECT_BRIEF          = "Open source implementation of OPC UA"
+PROJECT_LOGO           =
+
+OUTPUT_DIRECTORY       = "${doxygen_open62541_output_dir}"
+OUTPUT_LANGUAGE        = English
+JAVADOC_AUTOBRIEF      = YES
+AUTOLINK_SUPPORT       = YES
+MARKDOWN_SUPPORT       = YES
+USE_MDFILE_AS_MAINPAGE = "${doxygen_open62541_input_dir}/README.md"
+OPTIMIZE_OUTPUT_FOR_C  = YES
+
+# Build-related options
+EXTRACT_ALL            = YES
+DISABLE_INDEX          = NO
+GENERATE_TREEVIEW      = NO
+TREEVIEW_WIDTH         = 300
+SHOW_FILES             = YES
+SHOW_NAMESPACES        = YES
+LAYOUT_FILE            = "${CMAKE_CURRENT_SOURCE_DIR}/DoxygenLayout_open62541.xml"
+
+# Input files
+INPUT                  = "${doxygen_open62541_input_dir}" \
+                         "${doxygen_open62541_input_dir}/README.md"
+FILE_PATTERNS          = *.h
+RECURSIVE              = YES
+
+# Source browsing
+SOURCE_BROWSER         = YES
+REFERENCED_BY_RELATION = YES
+REFERENCES_RELATION    = YES
+REFERENCES_LINK_SOURCE = YES
+
+# Output
 GENERATE_LATEX         = NO
 GENERATE_MAN           = NO
 GENERATE_RTF           = NO
 GENERATE_HTML          = YES
 GENERATE_XML           = NO
-INPUT                  = "@OPEN62541_DOXYGEN_INPUT_DIR@"
-FILE_PATTERNS          = *.h \
-                         *.c
-RECURSIVE              = YES
-OUTPUT_DIRECTORY       = "@OPEN62541_DOXYGEN_OUTPUT_DIR@"
-QUIET                  = YES
-JAVADOC_AUTOBRIEF      = YES
-AUTOLINK_SUPPORT       = NO
-EXTRACT_ALL            = YES
-EXTRACT_STATIC         = YES
-ALPHABETICAL_INDEX     = NO
-INCLUDE_GRAPH          = NO
-INCLUDED_BY_GRAPH      = NO
-MACRO_EXPANSION        = YES
-WARN_IF_UNDOCUMENTED   = NO
-OPTIMIZE_OUTPUT_FOR_C  = YES
+
+HTML_EXTRA_STYLESHEET  = "${CMAKE_CURRENT_SOURCE_DIR}/doxygen-awesome-css/doxygen-awesome.css"
+HTML_DYNAMIC_MENUS     = YES
+HTML_DYNAMIC_SECTIONS  = NO
+HTML_OUTPUT            = "${doxygen_open62541_html_dir}"
+
+# Dot diagrams
+HAVE_DOT               = YES
+DOT_FONTNAME           = Helvetica
+DOT_FONTSIZE           = 10
+DOT_IMAGE_FORMAT       = svg
+DOT_TRANSPARENT        = YES
+CLASS_GRAPH            = NO
+COLLABORATION_GRAPH    = NO
+
+# External references
+GENERATE_TAGFILE       = "${doxygen_open62541_tagfile}"
