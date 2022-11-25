@@ -13,15 +13,6 @@ project(
     LANGUAGES CXX
 )
 
-include(CheckIPOSupported)
-check_ipo_supported(RESULT ipo_supported OUTPUT check_ipo_output)
-if(ipo_supported)
-    message(STATUS "IPO enabled")
-    set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)
-else()
-    message(WARNING "IPO is not supported: ${check_ipo_output}")
-endif()
-
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
 # compiled binaries folders (same as open62541)
@@ -32,7 +23,6 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 # interface "library" to set the c++ standard / compile-time options requested
 add_library(open62541pp_project_options INTERFACE)
 target_compile_features(open62541pp_project_options INTERFACE cxx_std_17)
-target_include_directories(open62541pp_project_options INTERFACE include lib)
 
 if(MSVC)
     target_compile_options(
@@ -89,9 +79,18 @@ else()
     find_package(open62541 REQUIRED)
 endif()
 
+# enable IPO if open62541 is compiled with IPO
+get_target_property(open62541_ipo open62541::open62541 INTERPROCEDURAL_OPTIMIZATION)
+if(open62541_ipo)
+    message(STATUS "IPO enabled")
+    set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)
+else()
+    message(STATUS "IPO not enabled")
+endif()
+
 # open62541pp library
 file(GLOB_RECURSE sources "src/*.cpp")
-add_library(open62541pp ${sources}) # static / shared depending on option BUILD_SHARED_LIBS
+add_library(open62541pp ${sources})  # static / shared depending on option BUILD_SHARED_LIBS
 add_library(open62541pp::open62541pp ALIAS open62541pp)
 
 target_include_directories(open62541pp PUBLIC include)
