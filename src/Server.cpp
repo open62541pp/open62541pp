@@ -37,7 +37,9 @@ public:
         auto* config = getConfig();
         config->publishingIntervalLimits.min = 10; // ms
         config->samplingIntervalLimits.min = 10; // ms
+#if UAPP_OPEN62541_VER_GE(1, 2)
         config->allowEmptyVariables = UA_RULEHANDLING_ACCEPT;  // allow empty variables
+#endif
     }
 
     void run() {
@@ -199,6 +201,9 @@ void Server::setLogin(const std::vector<Login>& logins, bool allowAnonymous) {
     const auto status = UA_AccessControl_default(
         config,
         allowAnonymous,
+#if UAPP_OPEN62541_VER_GE(1, 3)
+        nullptr,  // UA_CertificateVerification
+#endif
         &config->securityPolicies[config->securityPoliciesSize-1].policyUri, // NOLINT
         number,
         loginsUa.data()
