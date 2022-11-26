@@ -12,9 +12,9 @@ jobs:
         version: [v1.0, v1.1, v1.2]
         build: ["static", "shared"]
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Checkout open62541 version ${{ matrix.version }}
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: open62541/open62541
           ref: ${{ matrix.version }}
