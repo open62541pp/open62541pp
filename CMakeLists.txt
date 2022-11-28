@@ -71,7 +71,7 @@ find_package(Threads REQUIRED)
 # open62541
 # overwrite default open62541 options
 if(NOT UA_MULTITHREADING)
-set(UA_MULTITHREADING 100 CACHE STRING "") # enable thread-safe API (100-199)
+    set(UA_MULTITHREADING 100 CACHE STRING "") # enable thread-safe API (100-199)
 endif()
 if(NOT UA_ENABLE_DEBUG_SANITIZER)
     set(UA_ENABLE_DEBUG_SANITIZER CACHE BOOL OFF)  # disable sanitizers in debug build
@@ -79,8 +79,8 @@ endif()
 
 option(UAPP_INTERNAL_OPEN62541 "Use internal open62541 library" ON)
 if(UAPP_INTERNAL_OPEN62541)
-    set(OPEN62541_VERSION v1.2.3)  # set manually for CI
-    add_subdirectory(3rdparty/open62541) # target open62541::open62541
+    set(OPEN62541_VERSION v1.2.6)  # set manually for CI
+    add_subdirectory(3rdparty/open62541)  # target open62541::open62541
 else()
     find_package(open62541 REQUIRED)
 endif()
