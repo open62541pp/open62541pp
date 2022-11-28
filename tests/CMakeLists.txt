@@ -8,6 +8,7 @@ if(NOT Catch2_FOUND)
         GIT_TAG        v3.2.0
     )
     FetchContent_MakeAvailable(Catch2)
+    set_target_properties(Catch2 Catch2WithMain PROPERTIES CXX_CLANG_TIDY "")  # disable clang-tidy
     list(APPEND CMAKE_MODULE_PATH ${Catch2_SOURCE_DIR}/contrib)
 endif()
 
