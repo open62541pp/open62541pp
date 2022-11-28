@@ -1,10 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
 
-find_program(CCACHE ccache)
-if(CCACHE)
-    set(CMAKE_CXX_COMPILER_LAUNCHER ${CCACHE})
-endif()
-
 project(
     open62541++
     VERSION 0.1.0
