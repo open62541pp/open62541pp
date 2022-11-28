@@ -1,18 +1,22 @@
-Include(FetchContent)
-FetchContent_Declare(
-    Catch2
-    GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-    GIT_TAG        v2.13.7
-)
-FetchContent_MakeAvailable(Catch2)
-list(APPEND CMAKE_MODULE_PATH ${Catch2_SOURCE_DIR}/contrib)
+find_package(Catch2 3)
+if(NOT Catch2_FOUND)
+    message(STATUS "Catch2 not found. Download with FetchContent module")
+    Include(FetchContent)
+    FetchContent_Declare(
+        Catch2
+        GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+        GIT_TAG        v3.2.0
+    )
+    FetchContent_MakeAvailable(Catch2)
+    list(APPEND CMAKE_MODULE_PATH ${Catch2_SOURCE_DIR}/contrib)
+endif()
 
 file(GLOB test_sources "*.cpp")
 add_executable(open62541pp_tests ${test_sources})
 target_link_libraries(
     open62541pp_tests
     PRIVATE
-        Catch2::Catch2
+        Catch2::Catch2WithMain
         open62541pp::open62541pp
         open62541pp_project_options
 )

@@ -1,7 +1,7 @@
 #include <chrono>
 #include <thread>
 
-#include <catch2/catch.hpp>
+#include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/Helper.h"
 #include "open62541pp/Node.h"

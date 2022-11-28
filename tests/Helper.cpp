@@ -1,10 +1,9 @@
 #include <cstring>
 
-#include <catch2/catch.hpp>
+#include <catch2/catch_test_macros.hpp>
 
 #include "open62541pp/Helper.h"
 
-using namespace Catch::Matchers;
 using namespace opcua;
 
 TEST_CASE("String conversion UA_String -> string") {
