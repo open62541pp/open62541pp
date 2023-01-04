@@ -32,10 +32,10 @@ It aims to:
 int main() {
     opcua::Server server;
 
-    const auto        myIntegerNodeId = opcua::NodeId("the.answer", 1);
-    const std::string myIntegerName   = "the answer";
+    const opcua::NodeId myIntegerNodeId{"the.answer", 1};
+    const std::string   myIntegerName{"the answer"};
 
-    // create node
+    // add variable node
     auto parentNode    = server.getObjectsNode();
     auto myIntegerNode = parentNode.addVariable(myIntegerNodeId, myIntegerName, opcua::Type::Int32);
 
@@ -50,8 +50,6 @@ int main() {
     std::cout << "The answer is: " << myIntegerNode.read<int>() << std::endl;
 
     server.run();
-
-    return 0;
 }
 ```
 
