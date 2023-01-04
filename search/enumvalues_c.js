@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['qualifiedname_3920',['QualifiedName',['../namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966ab4a75c1b2cfd3cb752898835cad346b0',1,'opcua']]]
+  ['object_4004',['Object',['../namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6da497031794414a552435f90151ac3b54b',1,'opcua']]],
+  ['objecttype_4005',['ObjectType',['../namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6dab74c375731dc50c662d6ce08befe2db0',1,'opcua']]],
+  ['organizes_4006',['Organizes',['../namespaceopcua.html#a807c61ccff66808c3559158c33d5463bae622d4cc7fb9a55a3a096e239b63664e',1,'opcua']]]
 ];

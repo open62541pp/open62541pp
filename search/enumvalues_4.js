@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['fatal_3904',['Fatal',['../namespaceopcua.html#a016225e750f216587c011ea43f212d8da882384ec38ce8d9582b57e70861730e4',1,'opcua']]],
-  ['float_3905',['Float',['../namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966a22ae0e2b89e5e3d477f988cc36d3272b',1,'opcua']]]
+  ['error_3954',['Error',['../namespaceopcua.html#a016225e750f216587c011ea43f212d8da902b0d55fddef6f8d651fe1035b7d4bd',1,'opcua']]],
+  ['expanedednodeid_3955',['ExpanededNodeId',['../namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966aeab6d2e56a3cbec68472f4ead232f77d',1,'opcua']]],
+  ['extensionobject_3956',['ExtensionObject',['../namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966a1adf19f65f9aa28f3b51d77b73f6b688',1,'opcua']]]
 ];

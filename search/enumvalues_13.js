@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['xmlelement_3940',['XmlElement',['../namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966a91f376fef4cd337471b267d0e39d51a9',1,'opcua']]]
+  ['warning_4028',['Warning',['../namespaceopcua.html#a016225e750f216587c011ea43f212d8da0eaadb4fcb48a0a0ed7bc9868be9fbaa',1,'opcua']]]
 ];

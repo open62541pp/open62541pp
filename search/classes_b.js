@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['objectnode_2205',['ObjectNode',['../classopcua_1_1ObjectNode.html',1,'opcua']]],
-  ['objecttypenode_2206',['ObjectTypeNode',['../classopcua_1_1ObjectTypeNode.html',1,'opcua']]]
+  ['node_2249',['Node',['../classopcua_1_1Node.html',1,'opcua']]],
+  ['nodeid_2250',['NodeId',['../classopcua_1_1NodeId.html',1,'opcua']]]
 ];

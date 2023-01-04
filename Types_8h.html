@@ -96,12 +96,14 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1always__false.html">opcua::always_false&lt;... &gt;</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1always__false.html">opcua::detail::always_false&lt;... &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespaceopcua"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html">opcua</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespaceopcua_1_1detail"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html">opcua::detail</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
@@ -156,14 +158,69 @@ Enumerations</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="separator:a6dbdabe373cb5094cafbeede49c4df6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a807c61ccff66808c3559158c33d5463b"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463b">opcua::ReferenceType</a> : uint16_t { <a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463bae622d4cc7fb9a55a3a096e239b63664e">opcua::ReferenceType::Organizes</a> = UA_NS0ID_ORGANIZES, 
-<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba79d00b2a3fd425da35a27ef5f903b18f">opcua::ReferenceType::HasSubtype</a> = UA_NS0ID_HASSUBTYPE, 
-<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463baded9b3813b9f642b7166ee3000a3e14f">opcua::ReferenceType::HasComponent</a> = UA_NS0ID_HASCOMPONENT
+<tr class="memitem:a807c61ccff66808c3559158c33d5463b"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463b">opcua::ReferenceType</a> : uint16_t { <br />
+&#160;&#160;<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463bad95867deadfe690e40f42068d6b59df8">opcua::ReferenceType::References</a> = UA_NS0ID_REFERENCES, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba4fae204a369c3bdb12096d8a01b50a9f">opcua::ReferenceType::NonHierarchicalReferences</a> = UA_NS0ID_NONHIERARCHICALREFERENCES, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba74725a3eeb8377d46fea7eec9515ab63">opcua::ReferenceType::HierarchicalReferences</a> = UA_NS0ID_HIERARCHICALREFERENCES, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba92da4876ccae3464caa608ab7b3301ed">opcua::ReferenceType::HasChild</a> = UA_NS0ID_HASCHILD, 
+<br />
+&#160;&#160;<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463bae622d4cc7fb9a55a3a096e239b63664e">opcua::ReferenceType::Organizes</a> = UA_NS0ID_ORGANIZES, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba0ec475b52a836b3f9067be56dfc3eada">opcua::ReferenceType::HasEventSource</a> = UA_NS0ID_HASEVENTSOURCE, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba6af8b39ae758e192e6d87241277db2e3">opcua::ReferenceType::HasModellingRule</a> = UA_NS0ID_HASMODELLINGRULE, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463baaa1d266b844067308a2ff2c18daba64b">opcua::ReferenceType::HasEncoding</a> = UA_NS0ID_HASENCODING, 
+<br />
+&#160;&#160;<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba0456c42ea376a4084789d63c2fc29cfe">opcua::ReferenceType::HasDescription</a> = UA_NS0ID_HASDESCRIPTION, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba3aa5cbdb62e3b8fec36e2505ce7394b2">opcua::ReferenceType::HasTypeDefinition</a> = UA_NS0ID_HASTYPEDEFINITION, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba5e41840f4b2f20e0065ccce26ee9e91c">opcua::ReferenceType::GeneratesEvent</a> = UA_NS0ID_GENERATESEVENT, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463bad5350d8759b1ec84607e47908809058e">opcua::ReferenceType::Aggregates</a> = UA_NS0ID_AGGREGATES, 
+<br />
+&#160;&#160;<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba79d00b2a3fd425da35a27ef5f903b18f">opcua::ReferenceType::HasSubtype</a> = UA_NS0ID_HASSUBTYPE, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba8b309f07b67be0b48023832ffd24f860">opcua::ReferenceType::HasProperty</a> = UA_NS0ID_HASPROPERTY, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463baded9b3813b9f642b7166ee3000a3e14f">opcua::ReferenceType::HasComponent</a> = UA_NS0ID_HASCOMPONENT, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba6889078bd2a83a7deb9b560de6cfb050">opcua::ReferenceType::HasNotifier</a> = UA_NS0ID_HASNOTIFIER, 
+<br />
+&#160;&#160;<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba1b5627d600003f565680baebb76362b4">opcua::ReferenceType::HasOrderedComponent</a> = UA_NS0ID_HASORDEREDCOMPONENT, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463baf972837b8d16f8067de6b1566dbc6165">opcua::ReferenceType::FromState</a> = UA_NS0ID_FROMSTATE, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463bae478e80852172945bddea29bca2c2694">opcua::ReferenceType::ToState</a> = UA_NS0ID_TOSTATE, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463bae2e9e749251216989ebced15aad78f53">opcua::ReferenceType::HasCause</a> = UA_NS0ID_HASCAUSE, 
+<br />
+&#160;&#160;<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba49f487a4a65e114a59d037ab1bccedc8">opcua::ReferenceType::HasEffect</a> = UA_NS0ID_HASEFFECT, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba9fa1e3fe12e27bf7e61b10eaee8001cb">opcua::ReferenceType::HasHistoricalConfiguration</a> = UA_NS0ID_HASHISTORICALCONFIGURATION, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba4b0787b4f411dc5e383b85db87571799">opcua::ReferenceType::HasSubStateMachine</a> = UA_NS0ID_HASSUBSTATEMACHINE, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba928f9fb0f589e650a055b5c0ee33ea73">opcua::ReferenceType::HasArgumentDescription</a> = UA_NS0ID_HASARGUMENTDESCRIPTION, 
+<br />
+&#160;&#160;<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba622a02438588f1a52182f9ef1acc4f02">opcua::ReferenceType::HasOptionalInputArgumentDescription</a> = UA_NS0ID_HASOPTIONALINPUTARGUMENTDESCRIPTION, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba2eaf36a48a17651caa9d1fe7dd1ecf18">opcua::ReferenceType::AlwaysGeneratesEvent</a> = UA_NS0ID_ALWAYSGENERATESEVENT, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463badc49a9377478f6a0d64e770c532b7a5f">opcua::ReferenceType::HasTrueSubState</a> = UA_NS0ID_HASTRUESUBSTATE, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463baa8f675edb76f8a45e1c6979bcd4c3c02">opcua::ReferenceType::HasFalseSubState</a> = UA_NS0ID_HASFALSESUBSTATE, 
+<br />
+&#160;&#160;<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463bac08bc8d354e4a53978c0b1c91ece52c4">opcua::ReferenceType::HasCondition</a> = UA_NS0ID_HASCONDITION, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba3182112a716ae39cafbfa47ee9a5831c">opcua::ReferenceType::HasPubSubConnection</a> = UA_NS0ID_HASPUBSUBCONNECTION, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba5b9aa8d4fb939538b834a2a06687635b">opcua::ReferenceType::DataSetToWriter</a> = UA_NS0ID_DATASETTOWRITER, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463bab3e0f815b9e524551dae240a0a794966">opcua::ReferenceType::HasGuard</a> = UA_NS0ID_HASGUARD, 
+<br />
+&#160;&#160;<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba86ae9c3ce8e09263b130fed584358169">opcua::ReferenceType::HasDataSetWriter</a> = UA_NS0ID_HASDATASETWRITER, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463babfc7ed21a2237bd3440bcd8c701405c7">opcua::ReferenceType::HasDataSetReader</a> = UA_NS0ID_HASDATASETREADER, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba28eca1ad03e4e1e148f2c7a11011573e">opcua::ReferenceType::HasAlarmSuppressionGroup</a> = UA_NS0ID_HASALARMSUPPRESSIONGROUP, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba6e86c0c4714da329893d3882af602e31">opcua::ReferenceType::AlarmGroupMember</a> = UA_NS0ID_ALARMGROUPMEMBER, 
+<br />
+&#160;&#160;<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba0ca2c5606cc3040dac20e9233e963ef8">opcua::ReferenceType::HasEffectDisable</a> = UA_NS0ID_HASEFFECTDISABLE, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba3603dba907e23b13b485feb66fef6707">opcua::ReferenceType::HasDictionaryEntry</a> = UA_NS0ID_HASDICTIONARYENTRY, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba7edc7052791032606c779d4ef4efb1c6">opcua::ReferenceType::HasInterface</a> = UA_NS0ID_HASINTERFACE, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba059f3503c76ca1e3e7c58bb5f481f99b">opcua::ReferenceType::HasAddIn</a> = UA_NS0ID_HASADDIN, 
+<br />
+&#160;&#160;<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba8e0e8af2e9bd846e83b239bcd04f184a">opcua::ReferenceType::HasEffectEnable</a> = UA_NS0ID_HASEFFECTENABLE, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463bab1a6cb7cbeec115e61081ec3e1e50c59">opcua::ReferenceType::HasEffectSuppressed</a> = UA_NS0ID_HASEFFECTSUPPRESSED, 
+<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba49813e4966306950e1f133245c4ad1c8">opcua::ReferenceType::HasEffectUnsuppressed</a> = UA_NS0ID_HASEFFECTUNSUPPRESSED
+<br />
  }</td></tr>
+<tr class="memdesc:a807c61ccff66808c3559158c33d5463b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference types.  <a href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463b">More...</a><br /></td></tr>
 <tr class="separator:a807c61ccff66808c3559158c33d5463b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:ad182a23245c77059754cdcf093309a69"><td class="memItemLeft" align="right" valign="top">constexpr std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#ad182a23245c77059754cdcf093309a69">opcua::getNodeClassName</a> (NodeClass nodeClass)</td></tr>
+<tr class="separator:ad182a23245c77059754cdcf093309a69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeea482e2aea224762179e33569a0f08e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:aeea482e2aea224762179e33569a0f08e"><td class="memTemplItemLeft" align="right" valign="top">constexpr Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#aeea482e2aea224762179e33569a0f08e">opcua::getType</a> ()</td></tr>
 <tr class="separator:aeea482e2aea224762179e33569a0f08e"><td class="memSeparator" colspan="2">&#160;</td></tr>

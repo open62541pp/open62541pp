@@ -94,12 +94,12 @@ Example</h1>
 <div class="line"><span class="keywordtype">int</span> main() {</div>
 <div class="line">    <a class="code" href="classopcua_1_1Server.html">opcua::Server</a> server;</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span>        myIntegerNodeId = <a class="code" href="classopcua_1_1NodeId.html">opcua::NodeId</a>(<span class="stringliteral">&quot;the.answer&quot;</span>, 1);</div>
-<div class="line">    <span class="keyword">const</span> std::string myIntegerName   = <span class="stringliteral">&quot;the answer&quot;</span>;</div>
+<div class="line">    <span class="keyword">const</span> <a class="code" href="classopcua_1_1NodeId.html">opcua::NodeId</a> myIntegerNodeId{<span class="stringliteral">&quot;the.answer&quot;</span>, 1};</div>
+<div class="line">    <span class="keyword">const</span> std::string   myIntegerName{<span class="stringliteral">&quot;the answer&quot;</span>};</div>
 <div class="line"> </div>
-<div class="line">    <span class="comment">// create node</span></div>
-<div class="line">    <span class="keyword">auto</span> parentNode    = server.<a class="code" href="classopcua_1_1Server.html#a92eef21e38240ab364d13e22c2f2620b">getObjectsNode</a>();</div>
-<div class="line">    <span class="keyword">auto</span> myIntegerNode = parentNode.<a class="code" href="classopcua_1_1Node.html#a3ffdd798d0b2defe3062c6d81568281e">addVariable</a>(myIntegerNodeId, myIntegerName, <a class="code" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966ac06129f6e6e15c09328365e553f1dc31">opcua::Type::Int32</a>);</div>
+<div class="line">    <span class="comment">// add variable node</span></div>
+<div class="line">    <span class="keyword">auto</span> parentNode    = server.<a class="code" href="classopcua_1_1Server.html#a9ffc192335325305fe4ab1b6924ebaf7">getObjectsNode</a>();</div>
+<div class="line">    <span class="keyword">auto</span> myIntegerNode = parentNode.<a class="code" href="classopcua_1_1Node.html#aea34d8db292529557333db65e1bf2fc8">addVariable</a>(myIntegerNodeId, myIntegerName, <a class="code" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966ac06129f6e6e15c09328365e553f1dc31">opcua::Type::Int32</a>);</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// set node attributes</span></div>
 <div class="line">    myIntegerNode.<a class="code" href="classopcua_1_1Node.html#a9413e49909faea23e2b0843fe3dbd3c4">setDisplayName</a>(<span class="stringliteral">&quot;the answer&quot;</span>);</div>
@@ -112,8 +112,6 @@ Example</h1>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;The answer is: &quot;</span> &lt;&lt; myIntegerNode.read&lt;<span class="keywordtype">int</span>&gt;() &lt;&lt; std::endl;</div>
 <div class="line"> </div>
 <div class="line">    server.<a class="code" href="classopcua_1_1Server.html#a7346a714c85e2d99fc8bc9fd1dd31d6d">run</a>();</div>
-<div class="line"> </div>
-<div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md2"></a>
 Build</h1>
@@ -142,10 +140,10 @@ Dependencies</h2>
 <div class="ttc" id="aclassopcua_1_1Server_html_a7346a714c85e2d99fc8bc9fd1dd31d6d"><div class="ttname"><a href="classopcua_1_1Server.html#a7346a714c85e2d99fc8bc9fd1dd31d6d">opcua::Server::run</a></div><div class="ttdeci">void run()</div></div>
 <div class="ttc" id="aclassopcua_1_1Node_html_a9413e49909faea23e2b0843fe3dbd3c4"><div class="ttname"><a href="classopcua_1_1Node.html#a9413e49909faea23e2b0843fe3dbd3c4">opcua::Node::setDisplayName</a></div><div class="ttdeci">void setDisplayName(std::string_view name, std::string_view locale=&quot;en&quot;)</div></div>
 <div class="ttc" id="aopen62541pp_8h_html"><div class="ttname"><a href="open62541pp_8h.html">open62541pp.h</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Server_html"><div class="ttname"><a href="classopcua_1_1Server.html">opcua::Server</a></div><div class="ttdef"><b>Definition:</b> <a href="Server_8h_source.html#l00028">Server.h:28</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Node_html_a3ffdd798d0b2defe3062c6d81568281e"><div class="ttname"><a href="classopcua_1_1Node.html#a3ffdd798d0b2defe3062c6d81568281e">opcua::Node::addVariable</a></div><div class="ttdeci">VariableNode addVariable(const NodeId &amp;id, std::string_view browseName, Type type)</div></div>
+<div class="ttc" id="aclassopcua_1_1Server_html"><div class="ttname"><a href="classopcua_1_1Server.html">opcua::Server</a></div><div class="ttdef"><b>Definition:</b> <a href="Server_8h_source.html#l00027">Server.h:27</a></div></div>
 <div class="ttc" id="aclassopcua_1_1NodeId_html"><div class="ttname"><a href="classopcua_1_1NodeId.html">opcua::NodeId</a></div><div class="ttdef"><b>Definition:</b> <a href="NodeId_8h_source.html#l00012">NodeId.h:12</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Server_html_a92eef21e38240ab364d13e22c2f2620b"><div class="ttname"><a href="classopcua_1_1Server.html#a92eef21e38240ab364d13e22c2f2620b">opcua::Server::getObjectsNode</a></div><div class="ttdeci">ObjectNode getObjectsNode()</div></div>
+<div class="ttc" id="aclassopcua_1_1Server_html_a9ffc192335325305fe4ab1b6924ebaf7"><div class="ttname"><a href="classopcua_1_1Server.html#a9ffc192335325305fe4ab1b6924ebaf7">opcua::Server::getObjectsNode</a></div><div class="ttdeci">Node getObjectsNode()</div></div>
+<div class="ttc" id="aclassopcua_1_1Node_html_aea34d8db292529557333db65e1bf2fc8"><div class="ttname"><a href="classopcua_1_1Node.html#aea34d8db292529557333db65e1bf2fc8">opcua::Node::addVariable</a></div><div class="ttdeci">Node addVariable(const NodeId &amp;id, std::string_view browseName, Type type)</div></div>
 <div class="ttc" id="anamespaceopcua_html_adc25953f10b26dc1213b1033d44f5966ac06129f6e6e15c09328365e553f1dc31"><div class="ttname"><a href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966ac06129f6e6e15c09328365e553f1dc31">opcua::Type::Int32</a></div><div class="ttdeci">@ Int32</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
