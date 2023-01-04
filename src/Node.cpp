@@ -10,16 +10,22 @@ namespace opcua {
 Node::Node(const Server& server, const NodeId& id) // NOLINT
     : server_(server), nodeId_(id) {
     // check if node exists
-    NodeId outputNode(UA_NODEID_NULL);
-    const auto status = UA_Server_readNodeId(server_.handle(), *nodeId_.handle(), outputNode.handle());
-    checkStatusCodeException(status);
+    {
+        NodeId outputNode(UA_NODEID_NULL);
+        const auto status = UA_Server_readNodeId(server_.handle(), *nodeId_.handle(), outputNode.handle());
+        checkStatusCodeException(status);
+    }
+    // store node class
+    {
+        UA_NodeClass nodeClass = UA_NODECLASS_UNSPECIFIED;
+        const auto status = UA_Server_readNodeClass(server_.handle(), *nodeId_.handle(), &nodeClass);
+        checkStatusCodeException(status);
+        nodeClass_ = static_cast<NodeClass>(nodeClass);
+    }
 }
 
 NodeClass Node::getNodeClass() {
-    UA_NodeClass nodeClass = UA_NODECLASS_UNSPECIFIED;
-    const auto status = UA_Server_readNodeClass(server_.handle(), *nodeId_.handle(), &nodeClass);
-    checkStatusCodeException(status);
-    return static_cast<NodeClass>(nodeClass);
+    return nodeClass_;
 }
 
 std::string Node::getBrowseName() {
@@ -79,7 +85,7 @@ void Node::setWriteMask(uint32_t mask) {
 //     checkStatusCodeException(status);
 // }
 
-ObjectNode Node::addFolder(const NodeId& id, std::string_view browseName) {
+Node Node::addFolder(const NodeId& id, std::string_view browseName) {
     auto attr = UA_ObjectAttributes_default;
 
     const auto ns     = id.handle()->namespaceIndex;
@@ -95,11 +101,10 @@ ObjectNode Node::addFolder(const NodeId& id, std::string_view browseName) {
         nullptr                                     // output new node id
     );
     checkStatusCodeException(status);
-
-    return ObjectNode(server_, id);
+    return Node(server_, id);
 }
 
-ObjectNode Node::addObject(const NodeId& id, std::string_view browseName) {
+Node Node::addObject(const NodeId& id, std::string_view browseName) {
     auto attr = UA_ObjectAttributes_default;
 
     const auto ns     = id.handle()->namespaceIndex;
@@ -115,11 +120,10 @@ ObjectNode Node::addObject(const NodeId& id, std::string_view browseName) {
         nullptr                                        // output new node id
     );
     checkStatusCodeException(status);
-
-    return ObjectNode(server_, id);
+    return Node(server_, id);
 }
 
-VariableNode Node::addVariable(const NodeId& id, std::string_view browseName, Type type) {
+Node Node::addVariable(const NodeId& id, std::string_view browseName, Type type) {
     auto attr        = UA_VariableAttributes_default;
     attr.dataType    = UA_TYPES[static_cast<uint16_t>(type)].typeId; // NOLINT
     attr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
@@ -137,11 +141,31 @@ VariableNode Node::addVariable(const NodeId& id, std::string_view browseName, Ty
         nullptr                                              // output new node id
     );
     checkStatusCodeException(status);
-
-    return VariableNode(server_, id);
+    return Node(server_, id);
 }
 
-ObjectTypeNode Node::addObjectType(const NodeId& id, std::string_view browseName) {
+Node Node::addProperty(const NodeId& id, std::string_view browseName, Type type) {
+    auto attr        = UA_VariableAttributes_default;
+    attr.dataType    = UA_TYPES[static_cast<uint16_t>(type)].typeId; // NOLINT
+    attr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
+
+    const auto ns     = id.handle()->namespaceIndex;
+    const auto status = UA_Server_addVariableNode(
+        server_.handle(),                            // server
+        *id.handle(),                                // new requested id
+        *nodeId_.handle(),                           // parent id
+        UA_NODEID_NUMERIC(0, UA_NS0ID_HASPROPERTY),  // reference id
+        *QualifiedName(ns, browseName).handle(),     // browse name
+        UA_NODEID_NUMERIC(0, UA_NS0ID_PROPERTYTYPE), // type definition
+        attr,                                        // variable attributes
+        nullptr,                                     // node context
+        nullptr                                      // output new node id
+    );
+    checkStatusCodeException(status);
+    return Node(server_, id);
+}
+
+Node Node::addObjectType(const NodeId& id, std::string_view browseName) {
     auto attr = UA_ObjectTypeAttributes_default;
 
     const auto ns     = id.handle()->namespaceIndex;
@@ -156,11 +180,10 @@ ObjectTypeNode Node::addObjectType(const NodeId& id, std::string_view browseName
         nullptr                                        // output new node id
     );
     checkStatusCodeException(status);
-
-    return ObjectTypeNode(server_, id);
+    return Node(server_, id);
 }
 
-VariableTypeNode Node::addVariableType(const NodeId& id, std::string_view browseName, Type type) {
+Node Node::addVariableType(const NodeId& id, std::string_view browseName, Type type) {
     auto attr       = UA_VariableTypeAttributes_default;
     attr.dataType   = UA_TYPES[static_cast<uint16_t>(type)].typeId; // NOLINT
     attr.isAbstract = false;
@@ -178,22 +201,21 @@ VariableTypeNode Node::addVariableType(const NodeId& id, std::string_view browse
         nullptr                                              // output new node id
     );
     checkStatusCodeException(status);
-
-    return VariableTypeNode(server_, id);
-}
-
-void VariableNode::writeVariantToServer(Variant& var) {
-    const auto status = UA_Server_writeValue(server_.handle(), *nodeId_.handle(), *var.handle());
-    checkStatusCodeException(status);
-}
-
-void VariableNode::readVariantFromServer(Variant& var) noexcept {
-    UA_Server_readValue(server_.handle(), *nodeId_.handle(), var.handle());
+    return Node(server_, id);
 }
 
 void Node::remove() {
     const auto status = UA_Server_deleteNode(server_.handle(), *nodeId_.handle(), true); // remove all references
     checkStatusCodeException(status);
+}
+
+void Node::writeVariantToServer(Variant& var) {
+    const auto status = UA_Server_writeValue(server_.handle(), *nodeId_.handle(), *var.handle());
+    checkStatusCodeException(status);
+}
+
+void Node::readVariantFromServer(Variant& var) noexcept {
+    UA_Server_readValue(server_.handle(), *nodeId_.handle(), var.handle());
 }
 
 } // namespace opcua

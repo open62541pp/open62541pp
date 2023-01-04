@@ -4,25 +4,13 @@
 #include <string_view>
 #include <vector>
 
+#include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/NodeId.h"
 #include "open62541pp/Variant.h"
 #include "open62541pp/Types.h"
 
 namespace opcua {
-
-// forward declaration
-class ObjectNode;
-class VariableNode;
-class MethodNode;
-class ViewNode;
-
-class DataTypeNode;
-class ObjectTypeNode;
-class VariableTypeNode;
-class ReferenceTypeNode;
-class EventTypeNode;
-
 
 class Node {
 public:
@@ -50,30 +38,16 @@ public:
     // void setUserWriteMask(uint32_t mask);
     // void setDataType(Type type);
 
-    ObjectNode       addFolder(const NodeId& id,       std::string_view browseName);
-    ObjectNode       addObject(const NodeId& id,       std::string_view browseName);
-    VariableNode     addVariable(const NodeId& id,     std::string_view browseName, Type type);
-    ObjectTypeNode   addObjectType(const NodeId& id,   std::string_view browseName);
-    VariableTypeNode addVariableType(const NodeId& id, std::string_view browseName, Type type);
+    Node addFolder(const NodeId& id,       std::string_view browseName);
+    Node addObject(const NodeId& id,       std::string_view browseName);
+    Node addVariable(const NodeId& id,     std::string_view browseName, Type type);
+    Node addProperty(const NodeId& id,     std::string_view browseName, Type type);
+    Node addObjectType(const NodeId& id,   std::string_view browseName);
+    Node addVariableType(const NodeId& id, std::string_view browseName, Type type);
 
-    void remove();
-protected:
-    Server server_;
-    NodeId nodeId_;
-};
-
-
-class ObjectNode : public Node { 
-public:
-    using Node::Node; // inherit constructors
-};
-
-
-class VariableNode: public Node {
-public:
-    using Node::Node; // inherit constructors
-
-    /** get/set
+    /*
+     * VariableNode specific methods
+     * get/set
      * Value -> read / write
      * DataType
      * ValueRank
@@ -91,6 +65,7 @@ public:
 
     template <typename Arg> // perfect forwarding
     void writeArray(Arg&& arg) {
+        requireNodeClass(NodeClass::Variable);
         Variant var(std::forward<Arg>(arg));
         writeVariantToServer(var);
     }
@@ -104,43 +79,38 @@ public:
 
     template <typename T>
     std::vector<T> readArray() {
+        requireNodeClass(NodeClass::Variable);
         Variant var;
         readVariantFromServer(var);
         return var.readArray<T>();
     }
-private:
+
+    void remove();
+
+protected:
+    Server    server_;
+    NodeId    nodeId_;
+    NodeClass nodeClass_;
+
+    template <typename... Ts>
+    constexpr bool isNodeClass(Ts&&... classes) {
+        const auto isSame = [&](NodeClass c) { return nodeClass_ == c; };
+        return (isSame(classes) || ...);
+    }
+
+    template <typename... Ts>
+    void requireNodeClass(Ts&&... classes) {
+        const bool isAnyOf = isNodeClass(std::forward<Ts>(classes)...);
+        if (!isAnyOf) {
+            const auto nodeClassName = getNodeClassName(nodeClass_);
+            throw InvalidNodeClass(
+                std::string("Operation not allowed for nodes of class ").append(nodeClassName)
+            );
+        }
+    }
+
     void writeVariantToServer(Variant& var); // should be const Variant&
     void readVariantFromServer(Variant& var) noexcept;
-};
-
-class MethodeNode : public Node {
-public:
-    using Node::Node; // inherit constructors
-};
-
-class ViewNode : public Node {
-public:
-    using Node::Node; // inherit constructors
-};
-
-class DataTypeNode : public Node { 
-public:
-    using Node::Node; // inherit constructors
-};
-
-class ObjectTypeNode : public Node { 
-public:
-    using Node::Node; // inherit constructors
-};
-
-class VariableTypeNode : public Node { 
-public:
-    using Node::Node; // inherit constructors
-};
-
-class ReferenceTypeNode : public Node { 
-public:
-    using Node::Node; // inherit constructors
 };
 
 } // namespace opcua

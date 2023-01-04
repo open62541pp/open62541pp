@@ -18,7 +18,6 @@ namespace opcua {
 // forward declaration
 class NodeId;
 class Node;
-class ObjectNode;
 
 struct Login {
     std::string username;
@@ -49,15 +48,15 @@ public:
 
     uint16_t registerNamespace(std::string_view name);
 
-    Node       getNode(const NodeId& id);
-    ObjectNode getRootNode();
-    ObjectNode getObjectsNode();
-    ObjectNode getTypesNode();
-    ObjectNode getViewsNode();
-    ObjectNode getObjectTypesNode();
-    ObjectNode getVariableTypesNode();
-    ObjectNode getDataTypesNode();
-    ObjectNode getReferenceTypesNode();
+    Node getNode(const NodeId& id);
+    Node getRootNode();
+    Node getObjectsNode();
+    Node getTypesNode();
+    Node getViewsNode();
+    Node getObjectTypesNode();
+    Node getVariableTypesNode();
+    Node getDataTypesNode();
+    Node getReferenceTypesNode();
 
     void removeNode(const NodeId& id);
 

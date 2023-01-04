@@ -46,6 +46,29 @@ enum class NodeClass : uint16_t {
     View          = UA_NODECLASS_VIEW,
 };
 
+constexpr std::string_view getNodeClassName(NodeClass nodeClass) {
+    switch (nodeClass) {
+    case NodeClass::Object:
+        return "Object";
+    case NodeClass::Variable:
+        return "Variable";
+    case NodeClass::Method:
+        return "Method";
+    case NodeClass::ObjectType:
+        return "ObjectType";
+    case NodeClass::VariableType:
+        return "VariableType";
+    case NodeClass::ReferenceType:
+        return "ReferenceType";
+    case NodeClass::DataType:
+        return "DataType";
+    case NodeClass::View:
+        return "View";
+    default:
+        return "Unknown";
+    }
+}
+
 /**
  * Reference types.
  * 

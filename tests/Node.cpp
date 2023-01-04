@@ -8,6 +8,17 @@ using namespace opcua;
 TEST_CASE("Node") {
     Server server;
 
+    SECTION("Node class of default nodes") {
+        CHECK(server.getRootNode().getNodeClass()           == NodeClass::Object);
+        CHECK(server.getObjectsNode().getNodeClass()        == NodeClass::Object);
+        CHECK(server.getTypesNode().getNodeClass()          == NodeClass::Object);
+        CHECK(server.getViewsNode().getNodeClass()          == NodeClass::Object);
+        CHECK(server.getObjectTypesNode().getNodeClass()    == NodeClass::Object);
+        CHECK(server.getVariableTypesNode().getNodeClass()  == NodeClass::Object);
+        CHECK(server.getDataTypesNode().getNodeClass()      == NodeClass::Object);
+        CHECK(server.getReferenceTypesNode().getNodeClass() == NodeClass::Object);
+    }
+
     SECTION("Constructor") {
         REQUIRE_THROWS(Node(server, NodeId("DoesNotExist")));
     }
@@ -64,6 +75,11 @@ TEST_CASE("Node") {
 TEST_CASE("VariableNode") {
     Server server;
 
+    SECTION("Try read/write with node classes other than VariableNode") {
+        REQUIRE_THROWS(server.getRootNode().read<int>());
+        REQUIRE_THROWS(server.getRootNode().write<int>({}));
+    }
+
     SECTION("Read/write scalar") {
         auto node = server.getRootNode().addVariable(
             NodeId("testScalar"), "testScalar", Type::Float);
@@ -78,7 +94,7 @@ TEST_CASE("VariableNode") {
         REQUIRE(node.read<float>() == value);
     }
 
-    SECTION("Read/write scalar") {
+    SECTION("Read/write array") {
         auto node = server.getRootNode().addVariable(
             NodeId("testArray"), "testArray", Type::Float);
 

@@ -225,15 +225,15 @@ uint16_t Server::registerNamespace(std::string_view name) {
     return UA_Server_addNamespace(handle(), name.data());
 }
 
-Node       Server::getNode(const NodeId& id) { return Node(*this, id); }
-ObjectNode Server::getRootNode()             { return ObjectNode(*this, UA_NS0ID_ROOTFOLDER); }
-ObjectNode Server::getObjectsNode()          { return ObjectNode(*this, UA_NS0ID_OBJECTSFOLDER); }
-ObjectNode Server::getTypesNode()            { return ObjectNode(*this, UA_NS0ID_TYPESFOLDER); }
-ObjectNode Server::getViewsNode()            { return ObjectNode(*this, UA_NS0ID_VIEWSFOLDER); }
-ObjectNode Server::getObjectTypesNode()      { return ObjectNode(*this, UA_NS0ID_OBJECTTYPESFOLDER); }
-ObjectNode Server::getVariableTypesNode()    { return ObjectNode(*this, UA_NS0ID_VARIABLETYPESFOLDER); }
-ObjectNode Server::getDataTypesNode()        { return ObjectNode(*this, UA_NS0ID_DATATYPESFOLDER); }
-ObjectNode Server::getReferenceTypesNode()   { return ObjectNode(*this, UA_NS0ID_REFERENCETYPESFOLDER); }
+Node Server::getNode(const NodeId& id) { return Node(*this, id); }
+Node Server::getRootNode()             { return Node(*this, UA_NS0ID_ROOTFOLDER); }
+Node Server::getObjectsNode()          { return Node(*this, UA_NS0ID_OBJECTSFOLDER); }
+Node Server::getTypesNode()            { return Node(*this, UA_NS0ID_TYPESFOLDER); }
+Node Server::getViewsNode()            { return Node(*this, UA_NS0ID_VIEWSFOLDER); }
+Node Server::getObjectTypesNode()      { return Node(*this, UA_NS0ID_OBJECTTYPESFOLDER); }
+Node Server::getVariableTypesNode()    { return Node(*this, UA_NS0ID_VARIABLETYPESFOLDER); }
+Node Server::getDataTypesNode()        { return Node(*this, UA_NS0ID_DATATYPESFOLDER); }
+Node Server::getReferenceTypesNode()   { return Node(*this, UA_NS0ID_REFERENCETYPESFOLDER); }
 
 UA_Server*       Server::handle()       { return connection_->handle(); }
 const UA_Server* Server::handle() const { return connection_->handle(); }

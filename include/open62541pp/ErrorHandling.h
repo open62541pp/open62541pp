@@ -23,6 +23,11 @@ public:
     }
 };
 
+class InvalidNodeClass : public Exception {
+public:
+    explicit InvalidNodeClass(std::string_view message) : Exception(message) {}
+};
+
 inline bool checkStatusCode(UA_StatusCode code) noexcept {
     if (code != UA_STATUSCODE_GOOD) {
         return false;
