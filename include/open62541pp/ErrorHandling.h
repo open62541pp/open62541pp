@@ -1,8 +1,7 @@
 #pragma once
 
-#include <string>
-#include <string_view>
 #include <stdexcept>
+#include <string>
 
 #include "open62541pp/open62541.h"
 
@@ -10,29 +9,25 @@ namespace opcua {
 
 class Exception : public std::runtime_error {
 public:
+    using std::runtime_error::runtime_error;  // inherit contructors
+
     explicit Exception(UA_StatusCode statusCode)
         : std::runtime_error(getStatusMessage(statusCode)) {}
-    
-    explicit Exception(std::string_view message)
-        : std::runtime_error(message.data()) {}  
-    
+
+private:
     inline std::string getStatusMessage(UA_StatusCode statusCode) const noexcept {
-        std::string msg {"OPC UA error: "};
-        msg += UA_StatusCode_name(statusCode);
-        return msg;
+        static const std::string msg{"OPC UA error: "};
+        return msg + UA_StatusCode_name(statusCode);
     }
 };
 
-class InvalidNodeClass : public Exception {
+class InvalidNodeClass : public std::runtime_error {
 public:
-    explicit InvalidNodeClass(std::string_view message) : Exception(message) {}
+    using std::runtime_error::runtime_error;  // inherit contructors
 };
 
-inline bool checkStatusCode(UA_StatusCode code) noexcept {
-    if (code != UA_STATUSCODE_GOOD) {
-        return false;
-    }
-    return true;
+inline constexpr bool checkStatusCode(UA_StatusCode code) noexcept {
+    return code == UA_STATUSCODE_GOOD;
 }
 
 inline void checkStatusCodeException(UA_StatusCode code) {
@@ -41,4 +36,4 @@ inline void checkStatusCodeException(UA_StatusCode code) {
     }
 }
 
-} // namespace opcua
+}  // namespace opcua
