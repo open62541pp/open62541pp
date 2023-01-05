@@ -138,7 +138,7 @@ struct always_false : std::false_type {};
 }  // namespace detail
 
 template <typename T>
-inline constexpr Type getType() {
+constexpr Type getType() {
     static_assert(
         detail::always_false<T>::value,
         "Type mapping not possible (maybe not existing or not unique). "
@@ -148,31 +148,31 @@ inline constexpr Type getType() {
 }
 
 // clang-format off
-template <> inline constexpr Type getType<UA_Boolean>()         { return Type::Boolean; }
-template <> inline constexpr Type getType<UA_SByte>()           { return Type::SByte; }
-template <> inline constexpr Type getType<UA_Byte>()            { return Type::Byte; }
-template <> inline constexpr Type getType<UA_Int16>()           { return Type::Int16; }
-template <> inline constexpr Type getType<UA_UInt16>()          { return Type::UInt16; }
-template <> inline constexpr Type getType<UA_Int32>()           { return Type::Int32; }
-template <> inline constexpr Type getType<UA_UInt32>()          { return Type::UInt32; }
-template <> inline constexpr Type getType<UA_Int64>()           { return Type::Int64; }
-template <> inline constexpr Type getType<UA_UInt64>()          { return Type::UInt64; }
-template <> inline constexpr Type getType<UA_Float>()           { return Type::Float; }
-template <> inline constexpr Type getType<UA_Double>()          { return Type::Double; }
-template <> inline constexpr Type getType<UA_String>()          { return Type::String; }
-// template <> inline constexpr Type getType<UA_DateTime>()        { return Type::DateTime; }
-template <> inline constexpr Type getType<UA_Guid>()            { return Type::Guid; }
-// template <> inline constexpr Type getType<UA_ByteString>()      { return Type::ByteString; }
-// template <> inline constexpr Type getType<UA_XmlElement>()      { return Type::XmlElement; }
-template <> inline constexpr Type getType<UA_NodeId>()          { return Type::NodeId; }
-// template <> inline constexpr Type getType<UA_ExpanededNodeId>() { return Type::ExpanededNodeId; }
-// template <> inline constexpr Type getType<UA_StatusCode>()      { return Type::StatusCode; }
-template <> inline constexpr Type getType<UA_QualifiedName>()   { return Type::QualifiedName; }
-template <> inline constexpr Type getType<UA_LocalizedText>()   { return Type::LocalizedText; }
-template <> inline constexpr Type getType<UA_ExtensionObject>() { return Type::ExtensionObject; }
-template <> inline constexpr Type getType<UA_DataValue>()       { return Type::DataValue; }
-template <> inline constexpr Type getType<UA_Variant>()         { return Type::Variant; }
-template <> inline constexpr Type getType<UA_DiagnosticInfo>()  { return Type::DiagnosticInfo; }
+template <> constexpr Type getType<UA_Boolean>()         { return Type::Boolean; }
+template <> constexpr Type getType<UA_SByte>()           { return Type::SByte; }
+template <> constexpr Type getType<UA_Byte>()            { return Type::Byte; }
+template <> constexpr Type getType<UA_Int16>()           { return Type::Int16; }
+template <> constexpr Type getType<UA_UInt16>()          { return Type::UInt16; }
+template <> constexpr Type getType<UA_Int32>()           { return Type::Int32; }
+template <> constexpr Type getType<UA_UInt32>()          { return Type::UInt32; }
+template <> constexpr Type getType<UA_Int64>()           { return Type::Int64; }
+template <> constexpr Type getType<UA_UInt64>()          { return Type::UInt64; }
+template <> constexpr Type getType<UA_Float>()           { return Type::Float; }
+template <> constexpr Type getType<UA_Double>()          { return Type::Double; }
+template <> constexpr Type getType<UA_String>()          { return Type::String; }
+// template <> constexpr Type getType<UA_DateTime>()        { return Type::DateTime; }
+template <> constexpr Type getType<UA_Guid>()            { return Type::Guid; }
+// template <> constexpr Type getType<UA_ByteString>()      { return Type::ByteString; }
+// template <> constexpr Type getType<UA_XmlElement>()      { return Type::XmlElement; }
+template <> constexpr Type getType<UA_NodeId>()          { return Type::NodeId; }
+// template <> constexpr Type getType<UA_ExpanededNodeId>() { return Type::ExpanededNodeId; }
+// template <> constexpr Type getType<UA_StatusCode>()      { return Type::StatusCode; }
+template <> constexpr Type getType<UA_QualifiedName>()   { return Type::QualifiedName; }
+template <> constexpr Type getType<UA_LocalizedText>()   { return Type::LocalizedText; }
+template <> constexpr Type getType<UA_ExtensionObject>() { return Type::ExtensionObject; }
+template <> constexpr Type getType<UA_DataValue>()       { return Type::DataValue; }
+template <> constexpr Type getType<UA_Variant>()         { return Type::Variant; }
+template <> constexpr Type getType<UA_DiagnosticInfo>()  { return Type::DiagnosticInfo; }
 
 // clang-format on
 

@@ -53,24 +53,24 @@ public:
     }
 
     /// Return type enum
-    constexpr inline static Type getType() { return type; }
+    constexpr static Type getType() { return type; }
 
     /// Return UA_DataType object
-    constexpr inline static const UA_DataType* getDataType() { return getUaDataType(type); }
+    constexpr static const UA_DataType* getDataType() { return getUaDataType(type); }
 
     /// Return pointer to wrapped UA data type
-    inline T* handle() { return &data_; }
+    T* handle() { return &data_; }
 
     /// Return const pointer to wrapped UA data type
-    inline const T* handle() const { return &data_; };
+    const T* handle() const { return &data_; };
 
 protected:
-    inline void init() { UA_init(&data_, getDataType()); }
+    void init() { UA_init(&data_, getDataType()); }
 
-    inline void clear() { UA_clear(&data_, getDataType()); }
+    void clear() { UA_clear(&data_, getDataType()); }
 
     /// Deep copy of data
-    inline void copy(const T& data) {
+    void copy(const T& data) {
         auto status = UA_copy(&data, &data_, getDataType());
         checkStatusCodeException(status);
     }
@@ -90,15 +90,13 @@ public:
 
     explicit String(std::string_view str) { data_ = allocUaString(str); }
 
-    inline bool operator==(const String& other) const {
-        return UA_String_equal(&data_, other.handle());
-    }
+    bool operator==(const String& other) const { return UA_String_equal(&data_, other.handle()); }
 
-    inline bool operator!=(const String& other) const { return !operator==(other); }
+    bool operator!=(const String& other) const { return !operator==(other); }
 
-    inline std::string get() const { return uaStringToString(data_); }
+    std::string get() const { return uaStringToString(data_); }
 
-    inline std::string_view getView() const { return uaStringToStringView(data_); }
+    std::string_view getView() const { return uaStringToStringView(data_); }
 };
 
 /**
@@ -115,11 +113,9 @@ public:
         std::copy(data4.begin(), data4.end(), data_.data4);
     }
 
-    inline bool operator==(const Guid& other) const {
-        return UA_Guid_equal(&data_, other.handle());
-    }
+    bool operator==(const Guid& other) const { return UA_Guid_equal(&data_, other.handle()); }
 
-    inline bool operator!=(const Guid& other) const { return !operator==(other); }
+    bool operator!=(const Guid& other) const { return !operator==(other); }
 };
 
 /**
@@ -138,13 +134,13 @@ public:
         data_.length = tmp.length;
     }
 
-    inline bool operator==(const ByteString& other) const {
+    bool operator==(const ByteString& other) const {
         return UA_ByteString_equal(&data_, other.handle());
     }
 
-    inline bool operator!=(const ByteString& other) const { return !operator==(other); }
+    bool operator!=(const ByteString& other) const { return !operator==(other); }
 
-    inline std::string get() const { return uaStringToString(data_); }
+    std::string get() const { return uaStringToString(data_); }
 };
 
 /**
@@ -159,15 +155,15 @@ public:
         data_.name = allocUaString(name);
     }
 
-    inline bool operator==(const QualifiedName& other) const {
+    bool operator==(const QualifiedName& other) const {
         return UA_QualifiedName_equal(&data_, other.handle());
     }
 
-    inline bool operator!=(const QualifiedName& other) const { return !operator==(other); }
+    bool operator!=(const QualifiedName& other) const { return !operator==(other); }
 
-    inline uint16_t getNamespaceIndex() const { return data_.namespaceIndex; }
+    uint16_t getNamespaceIndex() const { return data_.namespaceIndex; }
 
-    inline std::string getName() const { return uaStringToString(data_.name); }
+    std::string getName() const { return uaStringToString(data_.name); }
 };
 
 /**
@@ -182,9 +178,9 @@ public:
         data_.text = allocUaString(text);
     }
 
-    inline std::string getText() const { return uaStringToString(data_.text); }
+    std::string getText() const { return uaStringToString(data_.text); }
 
-    inline std::string getLocale() const { return uaStringToString(data_.locale); }
+    std::string getLocale() const { return uaStringToString(data_.locale); }
 };
 
 }  // namespace opcua

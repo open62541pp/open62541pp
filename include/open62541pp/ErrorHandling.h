@@ -15,7 +15,7 @@ public:
         : std::runtime_error(getStatusMessage(statusCode)) {}
 
 private:
-    inline std::string getStatusMessage(UA_StatusCode statusCode) const noexcept {
+    std::string getStatusMessage(UA_StatusCode statusCode) const {
         static const std::string msg{"OPC UA error: "};
         return msg + UA_StatusCode_name(statusCode);
     }
@@ -26,7 +26,7 @@ public:
     using std::runtime_error::runtime_error;  // inherit contructors
 };
 
-inline constexpr bool checkStatusCode(UA_StatusCode code) noexcept {
+constexpr bool checkStatusCode(UA_StatusCode code) noexcept {
     return code == UA_STATUSCODE_GOOD;
 }
 

@@ -20,7 +20,7 @@ public:
     // getChildNodes?
 
     /// Get node id.
-    inline NodeId getNodeId() const { return nodeId_; }
+    NodeId getNodeId() const { return nodeId_; }
 
     /// Get node class.
     NodeClass getNodeClass();

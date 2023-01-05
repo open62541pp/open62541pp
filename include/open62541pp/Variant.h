@@ -27,24 +27,24 @@ public:
     }
 
     /// Check if variant is empty
-    inline bool isEmpty() const noexcept { return UA_Variant_isEmpty(&data_); }
+    bool isEmpty() const noexcept { return UA_Variant_isEmpty(&data_); }
 
     /// Check if variant is a scalar
-    inline bool isScalar() const noexcept { return UA_Variant_isScalar(&data_); }
+    bool isScalar() const noexcept { return UA_Variant_isScalar(&data_); }
 
     /// Check if variant is a array
-    inline bool isArray() const noexcept {
+    bool isArray() const noexcept {
         return (data_.arrayLength > 0 && data_.data != UA_EMPTY_ARRAY_SENTINEL);
     }
 
     /// Check if variant type is equal to template type
     template <typename T>
-    inline bool isType() const noexcept {
+    bool isType() const noexcept {
         return data_.type == getUaDataType<T>();
     }
 
     /// Check if variant type is equal to type argument (enum)
-    inline bool isType(Type type) const noexcept { return data_.type == getUaDataType(type); }
+    bool isType(Type type) const noexcept { return data_.type == getUaDataType(type); }
 
     /// Read scalar value with given template type.
     /// An exception is thrown if the variant is not a scalar or not of the given type.
@@ -61,7 +61,7 @@ public:
 
     /// Overload to read scalar values into wrapper objects.
     template <typename T>
-    inline std::enable_if_t<std::is_convertible_v<T*, TypeWrapperBase*>, T> readScalar() const {
+    std::enable_if_t<std::is_convertible_v<T*, TypeWrapperBase*>, T> readScalar() const {
         auto result = readScalar<typename T::UaType>();
         return T(result);
     }
@@ -96,7 +96,7 @@ public:
 
     /// Overload to write scalar values from wrapper objects to variant.
     template <typename T, Type type>
-    inline void setScalar(const TypeWrapper<T, type>& value) {
+    void setScalar(const TypeWrapper<T, type>& value) {
         setScalar<T>(*value.handle());
     }
 
