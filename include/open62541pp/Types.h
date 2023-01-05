@@ -73,6 +73,18 @@ constexpr std::string_view getNodeClassName(NodeClass nodeClass) {
     }
 }
 
+enum class ValueRank : int32_t {
+    // clang-format off
+    ScalarOrOneDimension = UA_VALUERANK_SCALAR_OR_ONE_DIMENSION,
+    Any                  = UA_VALUERANK_ANY,
+    Scalar               = UA_VALUERANK_SCALAR,
+    OneOrMoreDimensions  = UA_VALUERANK_ONE_OR_MORE_DIMENSIONS,
+    OneDimension         = UA_VALUERANK_ONE_DIMENSION,
+    TwoDimensions        = UA_VALUERANK_TWO_DIMENSIONS,
+    ThreeDimensions      = UA_VALUERANK_THREE_DIMENSIONS,
+    // clang-format on
+};
+
 /**
  * Reference types.
  *

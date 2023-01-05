@@ -47,6 +47,7 @@ TEST_CASE("Node") {
         // built-in type boolean has NodeId(1, 0)
         // https://reference.opcfoundation.org/v104/Core/docs/Part6/5.1.2/
         REQUIRE(node.getDataType() == NodeId(1, 0));
+        REQUIRE(node.getValueRank() == ValueRank::Any);
         REQUIRE(node.getAccessLevel() == UA_ACCESSLEVELMASK_READ);
 
         // set new attributes
@@ -54,6 +55,7 @@ TEST_CASE("Node") {
         REQUIRE_NOTHROW(node.setDescription("newDescription"));
         REQUIRE_NOTHROW(node.setWriteMask(11));
         REQUIRE_NOTHROW(node.setDataType(NodeId(2, 0)));
+        REQUIRE_NOTHROW(node.setValueRank(ValueRank::Scalar));
         REQUIRE_NOTHROW(node.setAccessLevel(UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE));
 
         // get new attributes
@@ -61,6 +63,7 @@ TEST_CASE("Node") {
         REQUIRE(node.getDescription() == "newDescription");
         REQUIRE(node.getWriteMask() == 11);
         REQUIRE(node.getDataType() == NodeId(2, 0));
+        REQUIRE(node.getValueRank() == ValueRank::Scalar);
         REQUIRE(node.getAccessLevel() == (UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE));
     }
 

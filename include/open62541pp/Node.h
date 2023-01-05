@@ -37,6 +37,8 @@ public:
 
     /// Get data type of variable (type) node as NodeId.
     NodeId getDataType();
+    /// Get value rank of variable (type) node.
+    ValueRank getValueRank();
     /// Get access level mask of variable node, e.g. `::UA_ACCESSLEVELMASK_READ`.
     uint8_t getAccessLevel();
 
@@ -56,6 +58,8 @@ public:
     void setDataType(Type type);
     /// Set data type of variable (type) node by node id.
     void setDataType(const NodeId& typeId);
+    /// Set value rank of variable (type) node.
+    void setValueRank(ValueRank valueRank);
     /// Set access level mask of variable node,
     /// e.g. `::UA_ACCESSLEVELMASK_READ | ::UA_ACCESSLEVELMASK_WRITE`.
     void setAccessLevel(uint8_t mask);

@@ -75,6 +75,13 @@ NodeId Node::getDataType() {
     return nodeId;
 }
 
+ValueRank Node::getValueRank() {
+    int32_t valueRank = 0;
+    const auto status = UA_Server_readValueRank(server_.handle(), *nodeId_.handle(), &valueRank);
+    checkStatusCodeException(status);
+    return static_cast<ValueRank>(valueRank);
+}
+
 uint8_t Node::getAccessLevel() {
     uint8_t mask = 0;
     const auto status = UA_Server_readAccessLevel(server_.handle(), *nodeId_.handle(), &mask);
@@ -111,6 +118,13 @@ void Node::setDataType(Type type) {
 void Node::setDataType(const NodeId& typeId) {
     const auto status = UA_Server_writeDataType(
         server_.handle(), *nodeId_.handle(), *typeId.handle()
+    );
+    checkStatusCodeException(status);
+}
+
+void Node::setValueRank(ValueRank valueRank) {
+    const auto status = UA_Server_writeValueRank(
+        server_.handle(), *nodeId_.handle(), static_cast<int32_t>(valueRank)
     );
     checkStatusCodeException(status);
 }
