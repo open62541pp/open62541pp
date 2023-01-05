@@ -39,6 +39,8 @@ public:
     NodeId getDataType();
     /// Get value rank of variable (type) node.
     ValueRank getValueRank();
+    /// Get array dimensions of variable (type) node.
+    std::vector<uint32_t> getArrayDimensions();
     /// Get access level mask of variable node, e.g. `::UA_ACCESSLEVELMASK_READ`.
     uint8_t getAccessLevel();
 
@@ -60,6 +62,11 @@ public:
     void setDataType(const NodeId& typeId);
     /// Set value rank of variable (type) node.
     void setValueRank(ValueRank valueRank);
+    /// Set array dimensions of variable (type) node.
+    /// Should be unspecified if ValueRank is <= 0 (ValueRank::Any, ValueRank::Scalar,
+    /// ValueRank::ScalarOrOneDimension, ValueRank::OneOrMoreDimensions). The dimension zero is a
+    /// wildcard and the actual value may have any length in this dimension.
+    void setArrayDimensions(const std::vector<uint32_t>& dimensions);
     /// Set access level mask of variable node,
     /// e.g. `::UA_ACCESSLEVELMASK_READ | ::UA_ACCESSLEVELMASK_WRITE`.
     void setAccessLevel(uint8_t mask);
@@ -70,18 +77,6 @@ public:
     Node addProperty(const NodeId& id, std::string_view browseName, Type type);
     Node addObjectType(const NodeId& id, std::string_view browseName);
     Node addVariableType(const NodeId& id, std::string_view browseName, Type type);
-
-    /*
-     * VariableNode specific methods
-     * get/set
-     * Value -> read / write
-     * DataType
-     * ValueRank
-     * ArrayDimensions
-     * AccessLevel
-     * MinimumSamplingFrequency
-     * Historizing
-     */
 
     template <typename Arg>  // perfect forwarding
     void write(Arg&& arg) {

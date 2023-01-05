@@ -1,4 +1,7 @@
 #include "open62541pp/Node.h"
+
+#include <cassert>
+
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Helper.h"
 #include "open62541pp/TypeWrapper.h"
@@ -82,6 +85,18 @@ ValueRank Node::getValueRank() {
     return static_cast<ValueRank>(valueRank);
 }
 
+std::vector<uint32_t> Node::getArrayDimensions() {
+    Variant variant;
+    const auto status = UA_Server_readArrayDimensions(
+        server_.handle(), *nodeId_.handle(), variant.handle()
+    );
+    checkStatusCodeException(status);
+    if (variant.isArray()) {
+        return variant.readArray<uint32_t>();
+    }
+    return {};
+}
+
 uint8_t Node::getAccessLevel() {
     uint8_t mask = 0;
     const auto status = UA_Server_readAccessLevel(server_.handle(), *nodeId_.handle(), &mask);
@@ -125,6 +140,15 @@ void Node::setDataType(const NodeId& typeId) {
 void Node::setValueRank(ValueRank valueRank) {
     const auto status = UA_Server_writeValueRank(
         server_.handle(), *nodeId_.handle(), static_cast<int32_t>(valueRank)
+    );
+    checkStatusCodeException(status);
+}
+
+void Node::setArrayDimensions(const std::vector<uint32_t>& dimensions) {  // NOLINT
+    Variant variant;
+    variant.setArray(dimensions);
+    const auto status = UA_Server_writeArrayDimensions(
+        server_.handle(), *nodeId_.handle(), *variant.handle()
     );
     checkStatusCodeException(status);
 }

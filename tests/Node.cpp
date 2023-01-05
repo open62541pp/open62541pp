@@ -1,4 +1,5 @@
 #include <catch2/catch_test_macros.hpp>
+#include <catch2/generators/catch_generators.hpp>
 
 #include "open62541pp/Node.h"
 #include "open62541pp/Server.h"
@@ -8,29 +9,9 @@ using namespace opcua;
 TEST_CASE("Node") {
     Server server;
 
-    SECTION("Node class of default nodes") {
-        CHECK(server.getRootNode().getNodeClass() == NodeClass::Object);
-        CHECK(server.getObjectsNode().getNodeClass() == NodeClass::Object);
-        CHECK(server.getTypesNode().getNodeClass() == NodeClass::Object);
-        CHECK(server.getViewsNode().getNodeClass() == NodeClass::Object);
-        CHECK(server.getObjectTypesNode().getNodeClass() == NodeClass::Object);
-        CHECK(server.getVariableTypesNode().getNodeClass() == NodeClass::Object);
-        CHECK(server.getDataTypesNode().getNodeClass() == NodeClass::Object);
-        CHECK(server.getReferenceTypesNode().getNodeClass() == NodeClass::Object);
-    }
-
     SECTION("Constructor") {
+        REQUIRE_NOTHROW(Node(server, NodeId(1, 0) /* boolean */));
         REQUIRE_THROWS(Node(server, NodeId("DoesNotExist")));
-    }
-
-    SECTION("Add/remove node") {
-        const NodeId nodeId{"testObj"};
-
-        auto node = server.getObjectsNode().addObject(nodeId, "obj");
-        REQUIRE_NOTHROW(Node(server, nodeId));
-
-        node.remove();
-        REQUIRE_THROWS(Node(server, nodeId));
     }
 
     SECTION("Get/set node attributes") {
@@ -48,6 +29,7 @@ TEST_CASE("Node") {
         // https://reference.opcfoundation.org/v104/Core/docs/Part6/5.1.2/
         REQUIRE(node.getDataType() == NodeId(1, 0));
         REQUIRE(node.getValueRank() == ValueRank::Any);
+        REQUIRE(node.getArrayDimensions().empty());
         REQUIRE(node.getAccessLevel() == UA_ACCESSLEVELMASK_READ);
 
         // set new attributes
@@ -55,7 +37,8 @@ TEST_CASE("Node") {
         REQUIRE_NOTHROW(node.setDescription("newDescription"));
         REQUIRE_NOTHROW(node.setWriteMask(11));
         REQUIRE_NOTHROW(node.setDataType(NodeId(2, 0)));
-        REQUIRE_NOTHROW(node.setValueRank(ValueRank::Scalar));
+        REQUIRE_NOTHROW(node.setValueRank(ValueRank::TwoDimensions));
+        REQUIRE_NOTHROW(node.setArrayDimensions({3, 2}));
         REQUIRE_NOTHROW(node.setAccessLevel(UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE));
 
         // get new attributes
@@ -63,17 +46,67 @@ TEST_CASE("Node") {
         REQUIRE(node.getDescription() == "newDescription");
         REQUIRE(node.getWriteMask() == 11);
         REQUIRE(node.getDataType() == NodeId(2, 0));
-        REQUIRE(node.getValueRank() == ValueRank::Scalar);
+        REQUIRE(node.getValueRank() == ValueRank::TwoDimensions);
+        REQUIRE(node.getArrayDimensions().size() == 2);
+        REQUIRE(node.getArrayDimensions().at(0) == 3);
+        REQUIRE(node.getArrayDimensions().at(1) == 2);
         REQUIRE(node.getAccessLevel() == (UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE));
     }
 
-    SECTION("Add/remove node") {
-        auto node = server.getRootNode().addObject({"testObj"}, "testObj");
+    SECTION("Value rank and array dimension combinations") {
+        auto node = server.getObjectsNode().addVariable(
+            {"testDimensions"}, "testDimensions", Type::Float
+        );
 
-        REQUIRE(node.getNodeClass() == NodeClass::Object);
-        REQUIRE(node.getBrowseName() == "testObj");
-        // REQUIRE(node.getDisplayName() == "testObj");
-        REQUIRE_NOTHROW(node.remove());
+        SECTION("Unspecified dimension (ValueRank <= 0)") {
+            auto valueRank = GENERATE(
+                ValueRank::Any,
+                ValueRank::Scalar,
+                ValueRank::ScalarOrOneDimension,
+                ValueRank::OneOrMoreDimensions
+            );
+            CAPTURE(valueRank);
+            node.setValueRank(valueRank);
+            CHECK_NOTHROW(node.setArrayDimensions({}));
+            CHECK_THROWS(node.setArrayDimensions({1}));
+            CHECK_THROWS(node.setArrayDimensions({1, 2}));
+            CHECK_THROWS(node.setArrayDimensions({1, 2, 3}));
+        }
+
+        SECTION("OneDimension") {
+            node.setValueRank(ValueRank::OneDimension);
+            node.setArrayDimensions({1});
+            CHECK_THROWS(node.setArrayDimensions({}));
+            CHECK_THROWS(node.setArrayDimensions({1, 2}));
+            CHECK_THROWS(node.setArrayDimensions({1, 2, 3}));
+        }
+
+        SECTION("TwoDimensions") {
+            node.setValueRank(ValueRank::TwoDimensions);
+            node.setArrayDimensions({1, 2});
+            CHECK_THROWS(node.setArrayDimensions({}));
+            CHECK_THROWS(node.setArrayDimensions({1}));
+            CHECK_THROWS(node.setArrayDimensions({1, 2, 3}));
+        }
+
+        SECTION("ThreeDimensions") {
+            node.setValueRank(ValueRank::ThreeDimensions);
+            node.setArrayDimensions({1, 2, 3});
+            CHECK_THROWS(node.setArrayDimensions({}));
+            CHECK_THROWS(node.setArrayDimensions({1}));
+            CHECK_THROWS(node.setArrayDimensions({1, 2}));
+        }
+    }
+
+    SECTION("Node class of default nodes") {
+        CHECK(server.getRootNode().getNodeClass() == NodeClass::Object);
+        CHECK(server.getObjectsNode().getNodeClass() == NodeClass::Object);
+        CHECK(server.getTypesNode().getNodeClass() == NodeClass::Object);
+        CHECK(server.getViewsNode().getNodeClass() == NodeClass::Object);
+        CHECK(server.getObjectTypesNode().getNodeClass() == NodeClass::Object);
+        CHECK(server.getVariableTypesNode().getNodeClass() == NodeClass::Object);
+        CHECK(server.getDataTypesNode().getNodeClass() == NodeClass::Object);
+        CHECK(server.getReferenceTypesNode().getNodeClass() == NodeClass::Object);
     }
 
     SECTION("Try read/write with node classes other than Variable") {
@@ -107,5 +140,15 @@ TEST_CASE("Node") {
         std::vector<float> value{11.11, 22.22, 33.33};
         REQUIRE_NOTHROW(node.writeArray(value));
         REQUIRE(node.readArray<float>() == value);
+    }
+
+    SECTION("Remove node") {
+        const NodeId nodeId{"testObj"};
+
+        auto node = server.getObjectsNode().addObject(nodeId, "obj");
+        REQUIRE_NOTHROW(Node(server, nodeId));
+
+        node.remove();
+        REQUIRE_THROWS(Node(server, nodeId));
     }
 }

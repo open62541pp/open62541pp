@@ -100,15 +100,19 @@ public:
         setScalar<T>(*value.handle());
     }
 
+    /// Write array (raw) to variant.
+    template <typename T>
+    void setArray(const T* array, size_t size) {
+        clear();
+        const auto status = UA_Variant_setArrayCopy(&data_, array, size, getUaDataType<T>());
+        checkStatusCodeException(status);
+        data_.storageType = UA_VARIANT_DATA;
+    }
+
     /// Write array (std::vector) to variant.
     template <typename T>
     void setArray(const std::vector<T>& array) {
-        clear();
-        const auto status = UA_Variant_setArrayCopy(
-            &data_, array.data(), array.size(), getUaDataType<T>()
-        );
-        checkStatusCodeException(status);
-        data_.storageType = UA_VARIANT_DATA;
+        setArray(array.data(), array.size());
     }
 
     /// Write array (std::vector) to variant by passing it's address to the variant (no copy).
