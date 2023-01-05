@@ -1,5 +1,5 @@
-# find all example source files
-file(GLOB examples_sources "*.cpp")
+set(examples_sources server.cpp)
+
 foreach(source ${examples_sources})
     # extract filename
     get_filename_component(name ${source} NAME_WE)

@@ -21,7 +21,7 @@ jobs:
           mkdir build
           cd build
           cmake -DUAPP_BUILD_DOCUMENTATION=ON ..
-          cmake --build . --target open62541pp-doc
+          cmake --build . --target open62541pp_doc
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:

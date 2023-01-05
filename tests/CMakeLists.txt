@@ -12,8 +12,15 @@ if(NOT Catch2_FOUND)
     list(APPEND CMAKE_MODULE_PATH ${Catch2_SOURCE_DIR}/contrib)
 endif()
 
-file(GLOB test_sources "*.cpp")
-add_executable(open62541pp_tests ${test_sources})
+add_executable(
+    open62541pp_tests
+    Helper.cpp
+    Node.cpp
+    NodeId.cpp
+    Server.cpp
+    TypeWrapper.cpp
+    Variant.cpp
+)
 target_link_libraries(
     open62541pp_tests
     PRIVATE

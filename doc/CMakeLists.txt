@@ -48,14 +48,14 @@ foreach(dir ${open62541_include_dir})
 endforeach()
 
 add_custom_target(
-    open62541pp-doc-open62541
+    open62541pp_doc_open62541
     COMMAND Doxygen::doxygen
     COMMENT "Build open62541 Doxygen documentation"
     DEPENDS ${open62541_copy_list}
     WORKING_DIRECTORY ${doxygen_open62541_output_dir}
 )
 add_dependencies(
-    open62541pp-doc-open62541
+    open62541pp_doc_open62541
     open62541-generator-ids-ns0
     open62541-generator-namespace
     open62541-generator-statuscode
@@ -76,10 +76,10 @@ configure_file(
 )
 
 add_custom_target(
-    open62541pp-doc
+    open62541pp_doc
     ALL
     COMMAND Doxygen::doxygen
     COMMENT "Build open62541pp Doxygen documentation"
     WORKING_DIRECTORY ${doxygen_output_dir}
 )
-add_dependencies(open62541pp-doc open62541pp-doc-open62541)
+add_dependencies(open62541pp_doc open62541pp_doc_open62541)
