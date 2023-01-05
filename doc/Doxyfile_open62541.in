@@ -46,13 +46,7 @@ HTML_DYNAMIC_SECTIONS  = NO
 HTML_OUTPUT            = "${doxygen_open62541_html_dir}"
 
 # Dot diagrams
-HAVE_DOT               = YES
-DOT_FONTNAME           = Helvetica
-DOT_FONTSIZE           = 10
-DOT_IMAGE_FORMAT       = svg
-DOT_TRANSPARENT        = YES
-CLASS_GRAPH            = NO
-COLLABORATION_GRAPH    = NO
+HAVE_DOT               = NO
 
 # External references
 GENERATE_TAGFILE       = "${doxygen_open62541_tagfile}"

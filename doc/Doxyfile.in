@@ -55,8 +55,11 @@ DOT_FONTNAME           = Helvetica
 DOT_FONTSIZE           = 10
 DOT_IMAGE_FORMAT       = svg
 DOT_TRANSPARENT        = YES
+CALL_GRAPH             = NO
+CALLER_GRAP            = NO
 CLASS_GRAPH            = YES
-COLLABORATION_GRAPH    = NO
+COLLABORATION_GRAPH    = YES
+DIRECTORY_GRAPH        = NO
 
 # External references
 # open62541 html documentation in "open62541" subdirectory
