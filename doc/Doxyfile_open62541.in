@@ -20,6 +20,7 @@ TREEVIEW_WIDTH         = 300
 SHOW_FILES             = YES
 SHOW_NAMESPACES        = YES
 LAYOUT_FILE            = "${CMAKE_CURRENT_SOURCE_DIR}/DoxygenLayout_open62541.xml"
+QUIET                  = YES
 
 # Input files
 INPUT                  = "${doxygen_open62541_input_dir}" \

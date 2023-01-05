@@ -21,6 +21,7 @@ TREEVIEW_WIDTH         = 300
 SHOW_FILES             = YES
 SHOW_NAMESPACES        = YES
 LAYOUT_FILE            = "${CMAKE_CURRENT_SOURCE_DIR}/DoxygenLayout.xml"
+QUIET                  = YES
 
 # Input files
 INPUT                  = "${doxygen_input_dir}" \
@@ -56,7 +57,7 @@ DOT_FONTSIZE           = 10
 DOT_IMAGE_FORMAT       = svg
 DOT_TRANSPARENT        = YES
 CALL_GRAPH             = NO
-CALLER_GRAP            = NO
+CALLER_GRAPH           = NO
 CLASS_GRAPH            = YES
 COLLABORATION_GRAPH    = YES
 DIRECTORY_GRAPH        = NO

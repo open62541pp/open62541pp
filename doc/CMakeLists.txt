@@ -5,7 +5,8 @@ endif()
 find_package(Doxygen REQUIRED dot)
 find_package(Python3 REQUIRED Interpreter)
 
-# open62541
+# --------------------------------------- Doxygen open62541 -------------------------------------- #
+
 set(doxygen_open62541_input_dir  ${CMAKE_CURRENT_BINARY_DIR}/open62541)  # generated files are copied and processed here
 set(doxygen_open62541_output_dir ${PROJECT_BINARY_DIR}/doxygen_open62541)
 set(doxygen_open62541_html_dir   ${PROJECT_BINARY_DIR}/doc_html/open62541)  # subdirectory of main documentation
@@ -47,23 +48,28 @@ foreach(dir ${open62541_include_dir})
     list(APPEND open62541_copy_list ${dir_target})
 endforeach()
 
-add_custom_target(
-    open62541pp_doc_open62541
+add_custom_command(
+    OUTPUT ${doxygen_open62541_html_dir}/index.html  # as dummy dependency for target
     COMMAND Doxygen::doxygen
     COMMENT "Build open62541 Doxygen documentation"
-    DEPENDS ${open62541_copy_list}
+    DEPENDS
+        Doxyfile_open62541.in
+        DoxygenLayout_open62541.xml
+        open62541-generator-ids-ns0
+        open62541-generator-namespace
+        open62541-generator-statuscode
+        open62541-generator-transport
+        open62541-generator-types
+        ${open62541_copy_list}
     WORKING_DIRECTORY ${doxygen_open62541_output_dir}
 )
-add_dependencies(
+add_custom_target(
     open62541pp_doc_open62541
-    open62541-generator-ids-ns0
-    open62541-generator-namespace
-    open62541-generator-statuscode
-    open62541-generator-transport
-    open62541-generator-types
+    DEPENDS ${doxygen_open62541_html_dir}/index.html
 )
 
-# open62541++
+# -------------------------------------- Doxygen open62541++ ------------------------------------- #
+
 set(doxygen_input_dir  ${PROJECT_SOURCE_DIR}/include/open62541pp)
 set(doxygen_output_dir ${PROJECT_BINARY_DIR}/doxygen)
 set(doxygen_html_dir   ${PROJECT_BINARY_DIR}/doc_html)
@@ -75,11 +81,19 @@ configure_file(
     ${doxygen_output_dir}/Doxyfile
 )
 
-add_custom_target(
-    open62541pp_doc
-    ALL
+add_custom_command(
+    OUTPUT ${doxygen_html_dir}/index.html  # as dummy dependency for target
     COMMAND Doxygen::doxygen
     COMMENT "Build open62541pp Doxygen documentation"
+    DEPENDS
+        Doxyfile.in
+        DoxygenLayout.xml
+        open62541pp  # TODO: only header files?
     WORKING_DIRECTORY ${doxygen_output_dir}
+)
+add_custom_target(
+    open62541pp_doc
+    ALL  # add to default build target
+    DEPENDS ${doxygen_html_dir}/index.html
 )
 add_dependencies(open62541pp_doc open62541pp_doc_open62541)
