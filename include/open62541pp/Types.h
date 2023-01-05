@@ -165,12 +165,12 @@ template <> inline constexpr Type getType<UA_DiagnosticInfo>()  { return Type::D
 // Get UA_DataType by template argument
 template <typename T>
 inline const UA_DataType* getUaDataType() {
-    return &UA_TYPES[static_cast<uint16_t>(getType<T>())];
+    return &UA_TYPES[static_cast<uint16_t>(getType<T>())]; // NOLINT
 }
 
 // Get UA_DataType by Type enum
 inline const UA_DataType* getUaDataType(Type type) {
-    return &UA_TYPES[static_cast<uint16_t>(type)];
+    return &UA_TYPES[static_cast<uint16_t>(type)]; // NOLINT
 }
 
 } // namespace opcua
