@@ -1,0 +1,6 @@
+<map id="opcua::ByteString" name="opcua::ByteString">
+<area shape="rect" id="node1" title="UA_ByteString wrapper class." alt="" coords="110,200,247,227"/>
+<area shape="rect" id="node2" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="94,95,263,151"/>
+<area shape="rect" id="node3" href="$classopcua_1_1TypeWrapperBase.html" title=" " alt="" coords="5,5,192,32"/>
+<area shape="rect" id="node4" href="/home/runner/work/open62541pp/open62541pp/build/doxygen_open62541/open62541.tag$structUA__String.html" title=" " alt="" coords="217,5,303,32"/>
+</map>

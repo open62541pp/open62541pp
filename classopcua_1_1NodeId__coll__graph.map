@@ -1,0 +1,8 @@
+<map id="opcua::NodeId" name="opcua::NodeId">
+<area shape="rect" id="node1" title=" " alt="" coords="63,289,177,316"/>
+<area shape="rect" id="node2" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="43,199,197,240"/>
+<area shape="rect" id="node3" href="$classopcua_1_1TypeWrapperBase.html" title=" " alt="" coords="5,109,192,136"/>
+<area shape="rect" id="node4" href="/home/runner/work/open62541pp/open62541pp/build/doxygen_open62541/open62541.tag$structUA__NodeId.html" title=" " alt="" coords="217,109,311,136"/>
+<area shape="rect" id="node5" href="/home/runner/work/open62541pp/open62541pp/build/doxygen_open62541/open62541.tag$structUA__String.html" title=" " alt="" coords="167,5,254,32"/>
+<area shape="rect" id="node6" href="/home/runner/work/open62541pp/open62541pp/build/doxygen_open62541/open62541.tag$structUA__Guid.html" title=" " alt="" coords="278,5,357,32"/>
+</map>

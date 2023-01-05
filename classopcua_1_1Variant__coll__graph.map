@@ -1,0 +1,11 @@
+<map id="opcua::Variant" name="opcua::Variant">
+<area shape="rect" id="node1" title=" " alt="" coords="63,483,177,509"/>
+<area shape="rect" id="node2" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="43,392,197,433"/>
+<area shape="rect" id="node3" href="$classopcua_1_1TypeWrapperBase.html" title=" " alt="" coords="5,303,192,329"/>
+<area shape="rect" id="node4" href="/home/runner/work/open62541pp/open62541pp/build/doxygen_open62541/open62541.tag$structUA__Variant.html" title=" " alt="" coords="217,303,311,329"/>
+<area shape="rect" id="node5" href="/home/runner/work/open62541pp/open62541pp/build/doxygen_open62541/open62541.tag$structUA__DataType.html" title=" " alt="" coords="209,213,319,240"/>
+<area shape="rect" id="node6" href="/home/runner/work/open62541pp/open62541pp/build/doxygen_open62541/open62541.tag$structUA__NodeId.html" title=" " alt="" coords="139,109,234,136"/>
+<area shape="rect" id="node7" href="/home/runner/work/open62541pp/open62541pp/build/doxygen_open62541/open62541.tag$structUA__String.html" title=" " alt="" coords="90,5,177,32"/>
+<area shape="rect" id="node8" href="/home/runner/work/open62541pp/open62541pp/build/doxygen_open62541/open62541.tag$structUA__Guid.html" title=" " alt="" coords="201,5,279,32"/>
+<area shape="rect" id="node9" href="/home/runner/work/open62541pp/open62541pp/build/doxygen_open62541/open62541.tag$structUA__DataTypeMember.html" title=" " alt="" coords="259,109,421,136"/>
+</map>
