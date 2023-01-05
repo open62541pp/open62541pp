@@ -136,6 +136,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac26d17f399a591456b789d22612be0b3"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html#ac26d17f399a591456b789d22612be0b3">setScalar</a> (const <a class="el" href="classopcua_1_1TypeWrapper.html">TypeWrapper</a>&lt; T, type &gt; &amp;value)</td></tr>
 <tr class="memdesc:ac26d17f399a591456b789d22612be0b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload to write scalar values from wrapper objects to variant.  <a href="classopcua_1_1Variant.html#ac26d17f399a591456b789d22612be0b3">More...</a><br /></td></tr>
 <tr class="separator:ac26d17f399a591456b789d22612be0b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a234aa27bdbc07fc59340876ac81560ae"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a234aa27bdbc07fc59340876ac81560ae"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html#a234aa27bdbc07fc59340876ac81560ae">setArray</a> (const T *array, size_t size)</td></tr>
+<tr class="memdesc:a234aa27bdbc07fc59340876ac81560ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write array (raw) to variant.  <a href="classopcua_1_1Variant.html#a234aa27bdbc07fc59340876ac81560ae">More...</a><br /></td></tr>
+<tr class="separator:a234aa27bdbc07fc59340876ac81560ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a165aa1548a6d98f79f4a07484889ff6a"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a165aa1548a6d98f79f4a07484889ff6a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html#a165aa1548a6d98f79f4a07484889ff6a">setArray</a> (const std::vector&lt; T &gt; &amp;array)</td></tr>
 <tr class="memdesc:a165aa1548a6d98f79f4a07484889ff6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write array (std::vector) to variant.  <a href="classopcua_1_1Variant.html#a165aa1548a6d98f79f4a07484889ff6a">More...</a><br /></td></tr>
@@ -424,7 +428,7 @@ template&lt;typename T &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00047">47</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
-<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00078">opcua::TypeWrapper&lt; UA_Variant &gt;::data_</a>, <a class="el" href="Types_8h_source.html#l00181">opcua::getUaDataType()</a>, and <a class="elRef" href="open62541/structUA__Variant.html#ab246eb2c59043a7e5df0c75edd3f538f">UA_Variant::type</a>.</p>
+<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00078">opcua::TypeWrapper&lt; UA_Variant &gt;::data_</a>, <a class="el" href="Types_8h_source.html#l00193">opcua::getUaDataType()</a>, and <a class="elRef" href="open62541/structUA__Variant.html#ab246eb2c59043a7e5df0c75edd3f538f">UA_Variant::type</a>.</p>
 
 </div>
 </div>
@@ -460,7 +464,7 @@ template&lt;typename T &gt; </div>
 
 <p class="reference">References <a class="elRef" href="open62541/structUA__Variant.html#ad67091bb86efe71a8b798cbd5c4f61d1">UA_Variant::arrayLength</a>, <a class="elRef" href="open62541/structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">UA_Variant::data</a>, <a class="el" href="TypeWrapper_8h_source.html#l00078">opcua::TypeWrapper&lt; UA_Variant &gt;::data_</a>, and <a class="el" href="Variant_8h_source.html#l00036">isArray()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00103">opcua::Node::readArray()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00102">opcua::Node::readArray()</a>.</p>
 
 </div>
 </div>
@@ -496,7 +500,7 @@ template&lt;typename T &gt; </div>
 
 <p class="reference">References <a class="elRef" href="open62541/structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">UA_Variant::data</a>, <a class="el" href="TypeWrapper_8h_source.html#l00078">opcua::TypeWrapper&lt; UA_Variant &gt;::data_</a>, and <a class="el" href="Variant_8h_source.html#l00033">isScalar()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00096">opcua::Node::read()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00095">opcua::Node::read()</a>.</p>
 
 </div>
 </div>
@@ -532,7 +536,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a165aa1548a6d98f79f4a07484889ff6a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a165aa1548a6d98f79f4a07484889ff6a">&#9670;&nbsp;</a></span>setArray()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a165aa1548a6d98f79f4a07484889ff6a">&#9670;&nbsp;</a></span>setArray() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -559,9 +563,55 @@ template&lt;typename T &gt; </div>
 
 <p>Write array (std::vector) to variant. </p>
 
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00114">114</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+
+<p class="reference">References <a class="el" href="Variant_8h_source.html#l00105">setArray()</a>.</p>
+
+</div>
+</div>
+<a id="a234aa27bdbc07fc59340876ac81560ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a234aa27bdbc07fc59340876ac81560ae">&#9670;&nbsp;</a></span>setArray() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::Variant::setArray </td>
+          <td>(</td>
+          <td class="paramtype">const T *&#160;</td>
+          <td class="paramname"><em>array</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write array (raw) to variant. </p>
+
 <p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00105">105</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
-<p class="reference">References <a class="el" href="ErrorHandling_8h_source.html#l00033">opcua::checkStatusCodeException()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00070">opcua::TypeWrapper&lt; UA_Variant &gt;::clear()</a>, <a class="elRef" href="open62541/structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">UA_Variant::data</a>, <a class="el" href="TypeWrapper_8h_source.html#l00078">opcua::TypeWrapper&lt; UA_Variant &gt;::data_</a>, <a class="elRef" href="open62541/structUA__Variant.html#a09ff1e93e291d5b9db1ae5faa2c14780">UA_Variant::storageType</a>, <a class="elRef" href="open62541/types_8h.html#aa1478e00bedf1421f5f5462e8263c522a2b3eb8fafea49ba7e9b24ee4eaced395">UA_VARIANT_DATA</a>, and <a class="elRef" href="open62541/types_8h.html#aedcb0807aecd86b4aaed8bb993123b0f">UA_Variant_setArrayCopy()</a>.</p>
+<p class="reference">References <a class="el" href="ErrorHandling_8h_source.html#l00033">opcua::checkStatusCodeException()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00070">opcua::TypeWrapper&lt; UA_Variant &gt;::clear()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00078">opcua::TypeWrapper&lt; UA_Variant &gt;::data_</a>, <a class="elRef" href="open62541/structUA__Variant.html#a09ff1e93e291d5b9db1ae5faa2c14780">UA_Variant::storageType</a>, <a class="elRef" href="open62541/types_8h.html#aa1478e00bedf1421f5f5462e8263c522a2b3eb8fafea49ba7e9b24ee4eaced395">UA_VARIANT_DATA</a>, and <a class="elRef" href="open62541/types_8h.html#aedcb0807aecd86b4aaed8bb993123b0f">UA_Variant_setArrayCopy()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Variant_8h_source.html#l00114">setArray()</a>.</p>
 
 </div>
 </div>
@@ -594,7 +644,7 @@ template&lt;typename T &gt; </div>
 <p>Write array (std::vector) to variant by passing it's address to the variant (no copy). </p>
 <p>If the array values change, the variant values change as well. Take care of the vectors lifttime. If it gets deconstructed while the variant is still used, data get's corrupted. </p>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00119">119</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00123">123</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
 <p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00070">opcua::TypeWrapper&lt; UA_Variant &gt;::clear()</a>, <a class="elRef" href="open62541/structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">UA_Variant::data</a>, <a class="el" href="TypeWrapper_8h_source.html#l00078">opcua::TypeWrapper&lt; UA_Variant &gt;::data_</a>, <a class="elRef" href="open62541/structUA__Variant.html#a09ff1e93e291d5b9db1ae5faa2c14780">UA_Variant::storageType</a>, <a class="elRef" href="open62541/types_8h.html#aa1478e00bedf1421f5f5462e8263c522ae8998cef426fb827da4c155c6791bc16">UA_VARIANT_DATA_NODELETE</a>, and <a class="elRef" href="open62541/types_8h.html#a6202f2a1788fd254f46832e62544fe54">UA_Variant_setArray()</a>.</p>
 
