@@ -47,6 +47,7 @@ jobs:
           coveralls \
             -E '.*/3rdparty/.*' \
             -E '.*/build/.*' \
+            -E '.*/doc/.*' \
             -E '.*/examples/.*' \
             -E '.*/tests/.*' \
             --gcov-options '\-lp';
