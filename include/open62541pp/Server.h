@@ -19,6 +19,7 @@ namespace opcua {
 class NodeId;
 class Node;
 
+/// Login credentials.
 struct Login {
     std::string username;
     std::string password;
@@ -26,27 +27,35 @@ struct Login {
 
 class Server {
 public:
-    /// Create server with default config
+    /// Create server with default config.
     Server();
-    /// Create server with custom port
+    /// Create server with custom port.
     Server(uint16_t port);
-    /// Create server with custom port and a server certificate
+    /// Create server with custom port and a server certificate.
     Server(uint16_t port, std::string_view certificate);
 
-    /// Set custom logger
+    /// Set custom logging function.
     void setLogger(Logger logger);
-
+    /// Set custom hostname, default: system's host name.
     void setCustomHostname(std::string_view hostname);
+    /// Set application name, default: `open62541-based OPC UA Application`.
     void setApplicationName(std::string_view name);
+    /// Set application URI, default: `urn:open62541.server.application`.
     void setApplicationUri(std::string_view uri);
+    /// Set product URI, default: `http://open62541.org`.
     void setProductUri(std::string_view uri);
 
+    /// Set login credentials (username/password) and anonymous login.
     void setLogin(const std::vector<Login>& logins, bool allowAnonymous = true);
 
+    /// Run server. This method will block until Server::stop is called.
     void run();
+    /// Stop server.
     void stop();
+    /// Check if server is running.
     bool isRunning() const;
 
+    /// Register namespace. The new namespace index will be returned.
     uint16_t registerNamespace(std::string_view name);
 
     Node getNode(const NodeId& id);
@@ -61,10 +70,10 @@ public:
 
     void removeNode(const NodeId& id);
 
-    UA_Server*       handle();
+    UA_Server* handle();
     const UA_Server* handle() const;
 
-    UA_ServerConfig*       getConfig();
+    UA_ServerConfig* getConfig();
     const UA_ServerConfig* getConfig() const;
 
 private:
@@ -72,4 +81,4 @@ private:
     std::shared_ptr<Connection> connection_;
 };
 
-} // namespace opcua
+}  // namespace opcua

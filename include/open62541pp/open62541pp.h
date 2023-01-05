@@ -6,6 +6,6 @@
 #include "open62541pp/Node.h"
 #include "open62541pp/NodeId.h"
 #include "open62541pp/Server.h"
-#include "open62541pp/Types.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/Types.h"
 #include "open62541pp/Variant.h"

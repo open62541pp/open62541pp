@@ -12,7 +12,7 @@ TEST_CASE("String conversion UA_String -> string") {
     UA_String_clear(&testString);
 
     SECTION("Null string") {
-        UA_String nullString {};
+        UA_String nullString{};
         REQUIRE(uaStringToString(nullString).empty());
     }
 
@@ -25,26 +25,26 @@ TEST_CASE("String conversion UA_String -> string") {
 
 TEST_CASE("Alloc UA_String from string") {
     std::string str("test123");
-    auto        uaString = allocUaString(str);
+    auto uaString = allocUaString(str);
     REQUIRE(uaString.length == 7);
-    REQUIRE(std::strncmp((char*) uaString.data, str.c_str(), 7) == 0);  // NOLINT
+    REQUIRE(std::strncmp((char*)uaString.data, str.c_str(), 7) == 0);  // NOLINT
     UA_String_clear(&uaString);
 }
 
 TEST_CASE("Alloc UA_String from string_view") {
-    const char*      str = "test123";
+    const char* str = "test123";
     std::string_view sv(str);
-    auto             uaString = allocUaString(sv);
+    auto uaString = allocUaString(sv);
     REQUIRE(uaString.length == 7);
-    REQUIRE(std::strncmp((char*) uaString.data, sv.data(), 7) == 0);  // NOLINT
+    REQUIRE(std::strncmp((char*)uaString.data, sv.data(), 7) == 0);  // NOLINT
     UA_String_clear(&uaString);
 }
 
 TEST_CASE("Alloc UA_String from non-null-terminated string_view") {
-    std::string      str("test123");
+    std::string str("test123");
     std::string_view sv(str.c_str(), 4);
-    auto             uaString = allocUaString(sv);
+    auto uaString = allocUaString(sv);
     REQUIRE(uaString.length == 4);
-    REQUIRE(std::strncmp((char*) uaString.data, sv.data(), 4) == 0);  // NOLINT
+    REQUIRE(std::strncmp((char*)uaString.data, sv.data(), 4) == 0);  // NOLINT
     UA_String_clear(&uaString);
 }

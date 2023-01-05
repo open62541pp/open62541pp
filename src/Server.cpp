@@ -35,8 +35,8 @@ public:
 
     void applyDefaults() {
         auto* config = getConfig();
-        config->publishingIntervalLimits.min = 10; // ms
-        config->samplingIntervalLimits.min = 10; // ms
+        config->publishingIntervalLimits.min = 10;  // ms
+        config->samplingIntervalLimits.min = 10;  // ms
 #if UAPP_OPEN62541_VER_GE(1, 2)
         config->allowEmptyVariables = UA_RULEHANDLING_ACCEPT;  // allow empty variables
 #endif
@@ -52,7 +52,7 @@ public:
 
         running_.store(true);
         while (this->running_.load()) {
-            // references: 
+            // references:
             // https://open62541.org/doc/current/server.html#server-lifecycle
             // https://github.com/open62541/open62541/blob/master/examples/server_mainloop.c
             const auto waitInterval = UA_Server_run_iterate(this->server_, true);
@@ -61,7 +61,9 @@ public:
     }
 
     void stop() {
-        if (!running_.load()) return;
+        if (!running_.load()) {
+            return;
+        }
 
         running_.store(false);
         const auto status = UA_Server_run_shutdown(this->server_);
@@ -73,9 +75,9 @@ public:
     void setLogger(Logger logger) {
         logger_ = std::move(logger);
         auto* config = getConfig();
-        config->logger.log     = log;
+        config->logger.log = log;
         config->logger.context = this;
-        config->logger.clear   = nullptr;
+        config->logger.clear = nullptr;
     }
 
     static void log(
@@ -99,25 +101,24 @@ public:
     }
 
     UA_ServerConfig* getConfig() { return UA_Server_getConfig(server_); }
-    UA_Server*       handle()    { return server_; }
+
+    UA_Server* handle() { return server_; }
 
 private:
-    UA_Server*        server_;
-    std::atomic<bool> running_ {false};
-    Logger            logger_{nullptr};
+    UA_Server* server_;
+    std::atomic<bool> running_{false};
+    Logger logger_{nullptr};
 };
 
 /* ------------------------------------------- Server ------------------------------------------- */
 
-Server::Server()
-    : connection_(std::make_shared<Connection>()) {
+Server::Server() : connection_(std::make_shared<Connection>()) {
     const auto status = UA_ServerConfig_setDefault(getConfig());
     checkStatusCodeException(status);
     connection_->applyDefaults();
 }
 
-Server::Server(uint16_t port)
-    : connection_(std::make_shared<Connection>()) {
+Server::Server(uint16_t port) : connection_(std::make_shared<Connection>()) {
     const auto status = UA_ServerConfig_setMinimal(getConfig(), port, nullptr);
     checkStatusCodeException(status);
     connection_->applyDefaults();
@@ -139,17 +140,17 @@ void Server::setLogger(Logger logger) {
 // copy to endpoints needed, see: https://github.com/open62541/open62541/issues/1175
 static void copyApplicationDescriptionToEndpoints(UA_ServerConfig* config) {
     for (size_t i = 0; i < config->endpointsSize; ++i) {
-        auto& refApplicationName = config->endpoints[i].server.applicationName; // NOLINT
-        auto& refApplicationUri  = config->endpoints[i].server.applicationUri;  // NOLINT
-        auto& refProductUri      = config->endpoints[i].server.productUri;      // NOLINT
+        auto& refApplicationName = config->endpoints[i].server.applicationName;  // NOLINT
+        auto& refApplicationUri = config->endpoints[i].server.applicationUri;  // NOLINT
+        auto& refProductUri = config->endpoints[i].server.productUri;  // NOLINT
 
         UA_LocalizedText_clear(&refApplicationName);
         UA_String_clear(&refApplicationUri);
         UA_String_clear(&refProductUri);
 
         UA_LocalizedText_copy(&config->applicationDescription.applicationName, &refApplicationName);
-        UA_String_copy(&config->applicationDescription.applicationUri,         &refApplicationUri);
-        UA_String_copy(&config->applicationDescription.productUri,             &refProductUri);
+        UA_String_copy(&config->applicationDescription.applicationUri, &refApplicationUri);
+        UA_String_copy(&config->applicationDescription.productUri, &refProductUri);
     }
 }
 
@@ -181,8 +182,8 @@ void Server::setProductUri(std::string_view uri) {
 }
 
 void Server::setLogin(const std::vector<Login>& logins, bool allowAnonymous) {
-    size_t number   = logins.size();
-    auto   loginsUa = std::vector<UA_UsernamePasswordLogin>(number);
+    const size_t number = logins.size();
+    auto loginsUa = std::vector<UA_UsernamePasswordLogin>(number);
 
     for (size_t i = 0; i < number; ++i) {
         loginsUa[i].username = allocUaString(logins[i].username);
@@ -191,11 +192,13 @@ void Server::setLogin(const std::vector<Login>& logins, bool allowAnonymous) {
 
     auto* config = getConfig();
 #if UAPP_OPEN62541_VER_GE(1, 1)
-    if (config->accessControl.clear != nullptr)
+    if (config->accessControl.clear != nullptr) {
         config->accessControl.clear(&config->accessControl);
+    }
 #else
-    if (config->accessControl.deleteMembers != nullptr)
+    if (config->accessControl.deleteMembers != nullptr) {
         config->accessControl.deleteMembers(&config->accessControl);
+    }
 #endif
 
     const auto status = UA_AccessControl_default(
@@ -204,7 +207,7 @@ void Server::setLogin(const std::vector<Login>& logins, bool allowAnonymous) {
 #if UAPP_OPEN62541_VER_GE(1, 3)
         nullptr,  // UA_CertificateVerification
 #endif
-        &config->securityPolicies[config->securityPoliciesSize-1].policyUri, // NOLINT
+        &config->securityPolicies[config->securityPoliciesSize - 1].policyUri,  // NOLINT
         number,
         loginsUa.data()
     );
@@ -217,28 +220,72 @@ void Server::setLogin(const std::vector<Login>& logins, bool allowAnonymous) {
     checkStatusCodeException(status);
 }
 
-void Server::run()             { connection_->run(); }
-void Server::stop()            { connection_->stop(); }
-bool Server::isRunning() const { return connection_->isRunning(); }
+void Server::run() {
+    connection_->run();
+}
+
+void Server::stop() {
+    connection_->stop();
+}
+
+bool Server::isRunning() const {
+    return connection_->isRunning();
+}
 
 uint16_t Server::registerNamespace(std::string_view name) {
     return UA_Server_addNamespace(handle(), name.data());
 }
 
-Node Server::getNode(const NodeId& id) { return Node(*this, id); }
-Node Server::getRootNode()             { return Node(*this, UA_NS0ID_ROOTFOLDER); }
-Node Server::getObjectsNode()          { return Node(*this, UA_NS0ID_OBJECTSFOLDER); }
-Node Server::getTypesNode()            { return Node(*this, UA_NS0ID_TYPESFOLDER); }
-Node Server::getViewsNode()            { return Node(*this, UA_NS0ID_VIEWSFOLDER); }
-Node Server::getObjectTypesNode()      { return Node(*this, UA_NS0ID_OBJECTTYPESFOLDER); }
-Node Server::getVariableTypesNode()    { return Node(*this, UA_NS0ID_VARIABLETYPESFOLDER); }
-Node Server::getDataTypesNode()        { return Node(*this, UA_NS0ID_DATATYPESFOLDER); }
-Node Server::getReferenceTypesNode()   { return Node(*this, UA_NS0ID_REFERENCETYPESFOLDER); }
+Node Server::getNode(const NodeId& id) {
+    return Node(*this, id);
+}
 
-UA_Server*       Server::handle()       { return connection_->handle(); }
-const UA_Server* Server::handle() const { return connection_->handle(); }
+Node Server::getRootNode() {
+    return Node(*this, UA_NS0ID_ROOTFOLDER);
+}
 
-UA_ServerConfig*       Server::getConfig()       { return connection_->getConfig(); }
-const UA_ServerConfig* Server::getConfig() const { return connection_->getConfig(); }
+Node Server::getObjectsNode() {
+    return Node(*this, UA_NS0ID_OBJECTSFOLDER);
+}
 
-} // namespace opcua
+Node Server::getTypesNode() {
+    return Node(*this, UA_NS0ID_TYPESFOLDER);
+}
+
+Node Server::getViewsNode() {
+    return Node(*this, UA_NS0ID_VIEWSFOLDER);
+}
+
+Node Server::getObjectTypesNode() {
+    return Node(*this, UA_NS0ID_OBJECTTYPESFOLDER);
+}
+
+Node Server::getVariableTypesNode() {
+    return Node(*this, UA_NS0ID_VARIABLETYPESFOLDER);
+}
+
+Node Server::getDataTypesNode() {
+    return Node(*this, UA_NS0ID_DATATYPESFOLDER);
+}
+
+Node Server::getReferenceTypesNode() {
+    return Node(*this, UA_NS0ID_REFERENCETYPESFOLDER);
+}
+
+UA_Server* Server::handle() {
+    return connection_->handle();
+}
+
+const UA_Server* Server::handle() const {
+    return connection_->handle();
+}
+
+UA_ServerConfig* Server::getConfig() {
+    return connection_->getConfig();
+}
+
+const UA_ServerConfig* Server::getConfig() const {
+    return connection_->getConfig();
+}
+
+}  // namespace opcua

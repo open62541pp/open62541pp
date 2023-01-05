@@ -11,7 +11,7 @@ namespace opcua {
 
 class NodeId : public TypeWrapper<UA_NodeId> {
 public:
-    using BaseClass::BaseClass; // inherit contructors
+    using BaseClass::BaseClass;  // inherit contructors
 
     /// Create NodeId with numeric identifier
     NodeId(UA_UInt32 identifier, UA_UInt16 namespaceIndex = 0) {
@@ -38,14 +38,26 @@ public:
         data_ = UA_NODEID_BYTESTRING_ALLOC(namespaceIndex, identifier.get().data());
     }
 
-    inline bool operator==(const NodeId& other) const { return UA_NodeId_order(&data_, other.handle()) == UA_ORDER_EQ; }
-    inline bool operator!=(const NodeId& other) const { return UA_NodeId_order(&data_, other.handle()) != UA_ORDER_EQ; }
-    inline bool operator< (const NodeId& other) const { return UA_NodeId_order(&data_, other.handle()) == UA_ORDER_LESS; }
-    inline bool operator> (const NodeId& other) const { return UA_NodeId_order(&data_, other.handle()) == UA_ORDER_MORE; }
+    inline bool operator==(const NodeId& other) const {
+        return UA_NodeId_order(&data_, other.handle()) == UA_ORDER_EQ;
+    }
+
+    inline bool operator!=(const NodeId& other) const {
+        return UA_NodeId_order(&data_, other.handle()) != UA_ORDER_EQ;
+    }
+
+    inline bool operator<(const NodeId& other) const {
+        return UA_NodeId_order(&data_, other.handle()) == UA_ORDER_LESS;
+    }
+
+    inline bool operator>(const NodeId& other) const {
+        return UA_NodeId_order(&data_, other.handle()) == UA_ORDER_MORE;
+    }
 
     inline UA_UInt32 hash() const { return UA_NodeId_hash(&data_); }
 
-    inline UA_UInt16     getNamespaceIndex() const { return data_.namespaceIndex; }
+    inline UA_UInt16 getNamespaceIndex() const { return data_.namespaceIndex; }
+
     inline UA_NodeIdType getIdentifierType() const { return data_.identifierType; }
 
     std::variant<UA_UInt32, String, Guid, ByteString> getIdentifier() const {
@@ -64,4 +76,4 @@ public:
     }
 };
 
-} // namespace opc ua
+}  // namespace opcua

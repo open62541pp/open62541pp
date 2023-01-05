@@ -1,64 +1,38 @@
 ﻿---
+# Documentation: https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+# LLVM defaults: https://github.com/llvm/llvm-project/blob/main/clang/lib/Format/Format.cpp#L1248
+BasedOnStyle: LLVM
+
 AccessModifierOffset: -4
-AlignAfterOpenBracket: BlockIndent
-AlignConsecutiveAssignments: true
-AlignConsecutiveDeclarations: true
-AlignEscapedNewlines: Right
-AlignOperands: true
-AlignTrailingComments: true
-AllowAllParametersOfDeclarationOnNextLine: false
-AllowShortBlocksOnASingleLine: true
-AllowShortCaseLabelsOnASingleLine: false
-AllowShortFunctionsOnASingleLine: true
-AllowShortIfStatementsOnASingleLine: true
-AllowShortLoopsOnASingleLine: true
-AlwaysBreakAfterDefinitionReturnType: None
-AlwaysBreakAfterReturnType: None
-AlwaysBreakBeforeMultilineStrings: false
-AlwaysBreakTemplateDeclarations: false
-BinPackArguments: true
-BinPackParameters: true
-BreakAfterJavaFieldAnnotations: false
-BreakBeforeBinaryOperators: NonAssignment
-BreakBeforeBraces: Attach
-BreakBeforeInheritanceComma: true
-BreakBeforeTernaryOperators: true
-BreakConstructorInitializers: BeforeColon
-BreakStringLiterals: true
-ColumnLimit: 0
-CompactNamespaces: false
-ConstructorInitializerAllOnOneLineOrOnePerLine: false
-ConstructorInitializerIndentWidth: 4
-ContinuationIndentWidth: 4
-Cpp11BracedListStyle: true
-DerivePointerAlignment: false
+AlignAfterOpenBracket: BlockIndent # version >= 14required
+# AlignConsecutiveAssignments: true
+# AlignConsecutiveDeclarations: true
+AlignTrailingComments: false
+AllowShortFunctionsOnASingleLine: InlineOnly
+AlwaysBreakTemplateDeclarations: Yes
+BinPackArguments: false
+BinPackParameters: false
+ColumnLimit: 100
 FixNamespaceComments: true
-IncludeBlocks: Regroup
-IndentCaseLabels: true
-IndentPPDirectives: None
 IndentWidth: 4
-IndentWrappedFunctionNames: false
-JavaScriptQuotes: Leave
-JavaScriptWrapImports: true
-KeepEmptyLinesAtTheStartOfBlocks: true
+InsertBraces: true
+InsertTrailingCommas: Wrapped # currently only available for JavaScript
 Language: Cpp
-MaxEmptyLinesToKeep: 3
-NamespaceIndentation: None
 PointerAlignment: Left
-ReflowComments: false
-SortIncludes: false
-SortUsingDeclarations: true
-SpaceAfterCStyleCast: true
-SpaceAfterTemplateKeyword: true
-SpaceBeforeAssignmentOperators: true
-SpaceBeforeParens: ControlStatements
-SpaceInEmptyParentheses: false
-SpacesInAngles: false
-SpacesInCStyleCastParentheses: false
-SpacesInContainerLiterals: false
-SpacesInParentheses: false
-SpacesInSquareBrackets: false
-Standard: Cpp11
-TabWidth: 4
-UseTab: Never
+QualifierAlignment: Left
+ReferenceAlignment: Left
+SeparateDefinitionBlocks: Always # version >= 14 required
+SpacesBeforeTrailingComments: 2
+
+# Adjust penalties to prefer break after open bracket
+PenaltyBreakAssignment: 100             # default: ?
+PenaltyBreakBeforeFirstCallParameter: 0 # default: 19
+PenaltyBreakComment: 300                # default: 300
+PenaltyBreakFirstLessLess: 120          # default: 120
+PenaltyBreakOpenParenthesis: 0          # default: 0
+PenaltyBreakString: 1000                # default: 1000
+PenaltyBreakTemplateDeclaration: 0      # default: ?
+PenaltyExcessCharacter: 1000000         # default: 1000000
+PenaltyIndentedWhitespace: 0            # default: 0
+PenaltyReturnTypeOnItsOwnLine: 200      # default: 60
 ...

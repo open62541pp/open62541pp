@@ -7,17 +7,15 @@ int main() {
 
     server.setApplicationName("open62541pp server example");
     server.setLogger([](auto level, auto category, auto msg) {
-        std::cout
-            << "[" << opcua::getLogLevelName(level) << "] "
-            << "[" << opcua::getLogCategoryName(category) << "] "
-            << msg << std::endl;
+        std::cout << "[" << opcua::getLogLevelName(level) << "] "
+                  << "[" << opcua::getLogCategoryName(category) << "] " << msg << std::endl;
     });
 
     const opcua::NodeId myIntegerNodeId{"the.answer", 1};
-    const std::string   myIntegerName{"the answer"};
+    const std::string myIntegerName{"the answer"};
 
     // add variable node
-    auto parentNode    = server.getObjectsNode();
+    auto parentNode = server.getObjectsNode();
     auto myIntegerNode = parentNode.addVariable(myIntegerNodeId, myIntegerName, opcua::Type::Int32);
 
     // set node attributes

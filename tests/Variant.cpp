@@ -62,7 +62,7 @@ TEST_CASE("Variant") {
             REQUIRE(var.readScalar<double>() == value);
         }
         {
-            std::vector<float> value {1, 2, 3};
+            std::vector<float> value{1, 2, 3};
             Variant var(value);
             REQUIRE(var.isArray());
             REQUIRE(var.isType<float>());
@@ -82,7 +82,7 @@ TEST_CASE("Variant") {
         REQUIRE_NOTHROW(var.readScalar<int32_t>());
         REQUIRE_THROWS(var.readArray<int32_t>());
         REQUIRE_THROWS(var.readScalar<bool>());
-        
+
         REQUIRE(var.readScalar<int32_t>() == value);
     }
 
@@ -101,7 +101,7 @@ TEST_CASE("Variant") {
 
     SECTION("Write/read array") {
         Variant var;
-        std::vector<float> value {0, 1, 2, 3, 4, 5};
+        std::vector<float> value{0, 1, 2, 3, 4, 5};
         var.setArray(value);
 
         REQUIRE(var.isArray());
@@ -111,13 +111,13 @@ TEST_CASE("Variant") {
         REQUIRE_NOTHROW(var.readArray<float>());
         REQUIRE_THROWS(var.readArray<int32_t>());
         REQUIRE_THROWS(var.readArray<bool>());
-        
+
         REQUIRE(var.readArray<float>() == value);
     }
 
     SECTION("Write array no copy") {
         Variant var;
-        std::vector<float> value {0, 1, 2};
+        std::vector<float> value{0, 1, 2};
         var.setArrayNoCopy(value);
 
         REQUIRE(var.readArray<float>() == value);
@@ -130,7 +130,7 @@ TEST_CASE("Variant") {
 
     SECTION("Write/read wrapped types") {
         Variant var;
-        
+
         {
             TypeWrapper<int> value(10);
             var.setScalar(value);

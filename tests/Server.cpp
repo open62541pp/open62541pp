@@ -41,7 +41,7 @@ TEST_CASE("Server") {
         std::this_thread::sleep_for(100ms);  // wait for thread to execute run method
 
         REQUIRE(server.isRunning());
-        REQUIRE_THROWS(server.run()); // already running
+        REQUIRE_THROWS(server.run());  // already running
         REQUIRE_NOTHROW(server.stop());
 
         t.join();  // wait until stopped
@@ -54,16 +54,23 @@ TEST_CASE("Server") {
         REQUIRE(uaStringToString(config->customHostname) == "customhost");
 
         server.setApplicationName("Test App");
-        REQUIRE(uaStringToString(config->applicationDescription.applicationName.text) == "Test App");
-        
+        REQUIRE(
+            uaStringToString(config->applicationDescription.applicationName.text) == "Test App"
+        );
+
         server.setApplicationUri("http://app.com");
-        REQUIRE(uaStringToString(config->applicationDescription.applicationUri) == "http://app.com");
+        REQUIRE(
+            uaStringToString(config->applicationDescription.applicationUri) == "http://app.com"
+        );
 
         server.setProductUri("http://product.com");
-        REQUIRE(uaStringToString(config->applicationDescription.productUri) == "http://product.com");
+        REQUIRE(
+            uaStringToString(config->applicationDescription.productUri) == "http://product.com"
+        );
     }
 
     SECTION("Get default nodes") {
+        // clang-format off
         REQUIRE(compareNodes(server.getRootNode().getNodeId(),           UA_NS0ID_ROOTFOLDER));
         REQUIRE(compareNodes(server.getObjectsNode().getNodeId(),        UA_NS0ID_OBJECTSFOLDER));
         REQUIRE(compareNodes(server.getTypesNode().getNodeId(),          UA_NS0ID_TYPESFOLDER));
@@ -72,6 +79,7 @@ TEST_CASE("Server") {
         REQUIRE(compareNodes(server.getVariableTypesNode().getNodeId(),  UA_NS0ID_VARIABLETYPESFOLDER));
         REQUIRE(compareNodes(server.getDataTypesNode().getNodeId(),      UA_NS0ID_DATATYPESFOLDER));
         REQUIRE(compareNodes(server.getReferenceTypesNode().getNodeId(), UA_NS0ID_REFERENCETYPESFOLDER));
+        // clang-format on
     }
 
     SECTION("Register namespace") {

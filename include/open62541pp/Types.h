@@ -7,6 +7,7 @@
 namespace opcua {
 
 enum class Type : uint16_t {
+    // clang-format off
     Boolean         = UA_TYPES_BOOLEAN,
     SByte           = UA_TYPES_SBYTE,
     Byte            = UA_TYPES_BYTE,
@@ -32,9 +33,11 @@ enum class Type : uint16_t {
     DataValue       = UA_TYPES_DATAVALUE,
     Variant         = UA_TYPES_VARIANT,
     DiagnosticInfo  = UA_TYPES_DIAGNOSTICINFO
+    // clang-format on
 };
 
 enum class NodeClass : uint16_t {
+    // clang-format off
     Unspecified   = UA_NODECLASS_UNSPECIFIED,
     Object        = UA_NODECLASS_OBJECT,
     Variable      = UA_NODECLASS_VARIABLE,
@@ -44,6 +47,7 @@ enum class NodeClass : uint16_t {
     ReferenceType = UA_NODECLASS_REFERENCETYPE,
     DataType      = UA_NODECLASS_DATATYPE,
     View          = UA_NODECLASS_VIEW,
+    // clang-format on
 };
 
 constexpr std::string_view getNodeClassName(NodeClass nodeClass) {
@@ -71,7 +75,7 @@ constexpr std::string_view getNodeClassName(NodeClass nodeClass) {
 
 /**
  * Reference types.
- * 
+ *
  * List in standard: https://reference.opcfoundation.org/v104/Core/ReferenceTypes/
  * Missing reference types in open62541?
  * - AliasFor
@@ -79,6 +83,7 @@ constexpr std::string_view getNodeClassName(NodeClass nodeClass) {
  * - HasWriterGroup
  */
 enum class ReferenceType : uint16_t {
+    // clang-format off
     References                          = UA_NS0ID_REFERENCES,
     NonHierarchicalReferences           = UA_NS0ID_NONHIERARCHICALREFERENCES,
     HierarchicalReferences              = UA_NS0ID_HIERARCHICALREFERENCES,
@@ -122,20 +127,27 @@ enum class ReferenceType : uint16_t {
     HasEffectEnable                     = UA_NS0ID_HASEFFECTENABLE,
     HasEffectSuppressed                 = UA_NS0ID_HASEFFECTSUPPRESSED,
     HasEffectUnsuppressed               = UA_NS0ID_HASEFFECTUNSUPPRESSED,
+    // clang-format on
 };
 
-// helper trait
 namespace detail {
-template <typename...> struct always_false : std::false_type {};
+
+template <typename...>
+struct always_false : std::false_type {};
+
 }  // namespace detail
 
-template <typename T> inline constexpr Type getType() {
-    static_assert(detail::always_false<T>::value,
-                  "Type mapping not possible (maybe not existing or not unique). \
-                   Please specify type manually.");
-    return {}; // TODO: Type::Undefined?
+template <typename T>
+inline constexpr Type getType() {
+    static_assert(
+        detail::always_false<T>::value,
+        "Type mapping not possible (maybe not existing or not unique). "
+        "Please specify type manually."
+    );
+    return {};  // TODO: Type::Undefined?
 }
 
+// clang-format off
 template <> inline constexpr Type getType<UA_Boolean>()         { return Type::Boolean; }
 template <> inline constexpr Type getType<UA_SByte>()           { return Type::SByte; }
 template <> inline constexpr Type getType<UA_Byte>()            { return Type::Byte; }
@@ -162,15 +174,17 @@ template <> inline constexpr Type getType<UA_DataValue>()       { return Type::D
 template <> inline constexpr Type getType<UA_Variant>()         { return Type::Variant; }
 template <> inline constexpr Type getType<UA_DiagnosticInfo>()  { return Type::DiagnosticInfo; }
 
-// Get UA_DataType by template argument
+// clang-format on
+
+/// Get UA_DataType by template argument.
 template <typename T>
 inline const UA_DataType* getUaDataType() {
-    return &UA_TYPES[static_cast<uint16_t>(getType<T>())]; // NOLINT
+    return &UA_TYPES[static_cast<uint16_t>(getType<T>())];  // NOLINT
 }
 
-// Get UA_DataType by Type enum
+/// Get UA_DataType by Type enum.
 inline const UA_DataType* getUaDataType(Type type) {
-    return &UA_TYPES[static_cast<uint16_t>(type)]; // NOLINT
+    return &UA_TYPES[static_cast<uint16_t>(type)];  // NOLINT
 }
 
-} // namespace opcua
+}  // namespace opcua
