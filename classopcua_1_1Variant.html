@@ -126,7 +126,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a6176f7740a2916e4e0c53e26223f6950"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a632b893a8aef075fcddb6facd0a902c9"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a632b893a8aef075fcddb6facd0a902c9"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html#a632b893a8aef075fcddb6facd0a902c9">readArray</a> () const</td></tr>
-<tr class="memdesc:a632b893a8aef075fcddb6facd0a902c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read array with given template type and return is as a std::vector- An exception is thrown if the variant is not an array or not of the given type.  <a href="classopcua_1_1Variant.html#a632b893a8aef075fcddb6facd0a902c9">More...</a><br /></td></tr>
+<tr class="memdesc:a632b893a8aef075fcddb6facd0a902c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read array with given template type and return it as a std::vector.  <a href="classopcua_1_1Variant.html#a632b893a8aef075fcddb6facd0a902c9">More...</a><br /></td></tr>
 <tr class="separator:a632b893a8aef075fcddb6facd0a902c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc1df45ce450810894e12e2c7ee4ac32"><td class="memTemplParams" colspan="2">template&lt;typename T , typename  = std::enable_if_t&lt;!std::is_convertible_v&lt;T*, TypeWrapperBase*&gt;&gt;&gt; </td></tr>
 <tr class="memitem:adc1df45ce450810894e12e2c7ee4ac32"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html#adc1df45ce450810894e12e2c7ee4ac32">setScalar</a> (T value)</td></tr>
@@ -261,7 +261,7 @@ template&lt;typename T &gt; </div>
 
 <p>Constructor for arrays. </p>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00023">23</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00025">25</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
 </div>
 </div>
@@ -291,11 +291,11 @@ template&lt;typename T &gt; </div>
 
 <p>Check if variant is a array. </p>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00030">30</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00036">36</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
-<p class="reference">References <a class="elRef" href="open62541/structUA__Variant.html#ad67091bb86efe71a8b798cbd5c4f61d1">UA_Variant::arrayLength</a>, <a class="elRef" href="open62541/structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">UA_Variant::data</a>, <a class="el" href="TypeWrapper_8h_source.html#l00063">opcua::TypeWrapper&lt; UA_Variant &gt;::data_</a>, and <a class="elRef" href="open62541/types_8h.html#a2cd952b4e4fae65bd5bbc1b90499ab5b">UA_EMPTY_ARRAY_SENTINEL</a>.</p>
+<p class="reference">References <a class="elRef" href="open62541/structUA__Variant.html#ad67091bb86efe71a8b798cbd5c4f61d1">UA_Variant::arrayLength</a>, <a class="elRef" href="open62541/structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">UA_Variant::data</a>, <a class="el" href="TypeWrapper_8h_source.html#l00078">opcua::TypeWrapper&lt; UA_Variant &gt;::data_</a>, and <a class="elRef" href="open62541/types_8h.html#a2cd952b4e4fae65bd5bbc1b90499ab5b">UA_EMPTY_ARRAY_SENTINEL</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Variant_8h_source.html#l00061">readArray()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Variant_8h_source.html#l00072">readArray()</a>.</p>
 
 </div>
 </div>
@@ -324,9 +324,9 @@ template&lt;typename T &gt; </div>
 
 <p>Check if variant is empty. </p>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00026">26</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00030">30</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
-<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00063">opcua::TypeWrapper&lt; UA_Variant &gt;::data_</a>.</p>
+<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00078">opcua::TypeWrapper&lt; UA_Variant &gt;::data_</a>.</p>
 
 </div>
 </div>
@@ -355,11 +355,11 @@ template&lt;typename T &gt; </div>
 
 <p>Check if variant is a scalar. </p>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00028">28</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00033">33</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
-<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00063">opcua::TypeWrapper&lt; UA_Variant &gt;::data_</a>.</p>
+<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00078">opcua::TypeWrapper&lt; UA_Variant &gt;::data_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Variant_8h_source.html#l00042">readScalar()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Variant_8h_source.html#l00052">readScalar()</a>.</p>
 
 </div>
 </div>
@@ -390,9 +390,9 @@ template&lt;typename T &gt; </div>
 
 <p>Check if variant type is equal to template type. </p>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00034">34</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00042">42</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
-<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00063">opcua::TypeWrapper&lt; UA_Variant &gt;::data_</a>, and <a class="elRef" href="open62541/structUA__Variant.html#ab246eb2c59043a7e5df0c75edd3f538f">UA_Variant::type</a>.</p>
+<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00078">opcua::TypeWrapper&lt; UA_Variant &gt;::data_</a>, and <a class="elRef" href="open62541/structUA__Variant.html#ab246eb2c59043a7e5df0c75edd3f538f">UA_Variant::type</a>.</p>
 
 </div>
 </div>
@@ -422,9 +422,9 @@ template&lt;typename T &gt; </div>
 
 <p>Check if variant type is equal to type argument (enum) </p>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00036">36</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00047">47</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
-<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00063">opcua::TypeWrapper&lt; UA_Variant &gt;::data_</a>, <a class="el" href="Types_8h_source.html#l00167">opcua::getUaDataType()</a>, and <a class="elRef" href="open62541/structUA__Variant.html#ab246eb2c59043a7e5df0c75edd3f538f">UA_Variant::type</a>.</p>
+<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00078">opcua::TypeWrapper&lt; UA_Variant &gt;::data_</a>, <a class="el" href="Types_8h_source.html#l00181">opcua::getUaDataType()</a>, and <a class="elRef" href="open62541/structUA__Variant.html#ab246eb2c59043a7e5df0c75edd3f538f">UA_Variant::type</a>.</p>
 
 </div>
 </div>
@@ -453,13 +453,14 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Read array with given template type and return is as a std::vector- An exception is thrown if the variant is not an array or not of the given type. </p>
+<p>Read array with given template type and return it as a std::vector. </p>
+<p>An exception is thrown if the variant is not an array or not of the given type. </p>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00061">61</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00072">72</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
-<p class="reference">References <a class="elRef" href="open62541/structUA__Variant.html#ad67091bb86efe71a8b798cbd5c4f61d1">UA_Variant::arrayLength</a>, <a class="elRef" href="open62541/structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">UA_Variant::data</a>, <a class="el" href="TypeWrapper_8h_source.html#l00063">opcua::TypeWrapper&lt; UA_Variant &gt;::data_</a>, and <a class="el" href="Variant_8h_source.html#l00030">isArray()</a>.</p>
+<p class="reference">References <a class="elRef" href="open62541/structUA__Variant.html#ad67091bb86efe71a8b798cbd5c4f61d1">UA_Variant::arrayLength</a>, <a class="elRef" href="open62541/structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">UA_Variant::data</a>, <a class="el" href="TypeWrapper_8h_source.html#l00078">opcua::TypeWrapper&lt; UA_Variant &gt;::data_</a>, and <a class="el" href="Variant_8h_source.html#l00036">isArray()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00091">opcua::Node::readArray()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00103">opcua::Node::readArray()</a>.</p>
 
 </div>
 </div>
@@ -491,11 +492,11 @@ template&lt;typename T &gt; </div>
 <p>Read scalar value with given template type. </p>
 <p>An exception is thrown if the variant is not a scalar or not of the given type. </p>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00042">42</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00052">52</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
-<p class="reference">References <a class="elRef" href="open62541/structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">UA_Variant::data</a>, <a class="el" href="TypeWrapper_8h_source.html#l00063">opcua::TypeWrapper&lt; UA_Variant &gt;::data_</a>, and <a class="el" href="Variant_8h_source.html#l00028">isScalar()</a>.</p>
+<p class="reference">References <a class="elRef" href="open62541/structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">UA_Variant::data</a>, <a class="el" href="TypeWrapper_8h_source.html#l00078">opcua::TypeWrapper&lt; UA_Variant &gt;::data_</a>, and <a class="el" href="Variant_8h_source.html#l00033">isScalar()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00084">opcua::Node::read()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00096">opcua::Node::read()</a>.</p>
 
 </div>
 </div>
@@ -526,7 +527,7 @@ template&lt;typename T &gt; </div>
 
 <p>Overload to read scalar values into wrapper objects. </p>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00053">53</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00064">64</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
 </div>
 </div>
@@ -558,9 +559,9 @@ template&lt;typename T &gt; </div>
 
 <p>Write array (std::vector) to variant. </p>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00096">96</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00105">105</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
-<p class="reference">References <a class="el" href="ErrorHandling_8h_source.html#l00038">opcua::checkStatusCodeException()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00055">opcua::TypeWrapper&lt; UA_Variant &gt;::clear()</a>, <a class="elRef" href="open62541/structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">UA_Variant::data</a>, <a class="el" href="TypeWrapper_8h_source.html#l00063">opcua::TypeWrapper&lt; UA_Variant &gt;::data_</a>, <a class="elRef" href="open62541/structUA__Variant.html#a09ff1e93e291d5b9db1ae5faa2c14780">UA_Variant::storageType</a>, <a class="elRef" href="open62541/types_8h.html#aa1478e00bedf1421f5f5462e8263c522a2b3eb8fafea49ba7e9b24ee4eaced395">UA_VARIANT_DATA</a>, and <a class="elRef" href="open62541/types_8h.html#aedcb0807aecd86b4aaed8bb993123b0f">UA_Variant_setArrayCopy()</a>.</p>
+<p class="reference">References <a class="el" href="ErrorHandling_8h_source.html#l00033">opcua::checkStatusCodeException()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00070">opcua::TypeWrapper&lt; UA_Variant &gt;::clear()</a>, <a class="elRef" href="open62541/structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">UA_Variant::data</a>, <a class="el" href="TypeWrapper_8h_source.html#l00078">opcua::TypeWrapper&lt; UA_Variant &gt;::data_</a>, <a class="elRef" href="open62541/structUA__Variant.html#a09ff1e93e291d5b9db1ae5faa2c14780">UA_Variant::storageType</a>, <a class="elRef" href="open62541/types_8h.html#aa1478e00bedf1421f5f5462e8263c522a2b3eb8fafea49ba7e9b24ee4eaced395">UA_VARIANT_DATA</a>, and <a class="elRef" href="open62541/types_8h.html#aedcb0807aecd86b4aaed8bb993123b0f">UA_Variant_setArrayCopy()</a>.</p>
 
 </div>
 </div>
@@ -593,9 +594,9 @@ template&lt;typename T &gt; </div>
 <p>Write array (std::vector) to variant by passing it's address to the variant (no copy). </p>
 <p>If the array values change, the variant values change as well. Take care of the vectors lifttime. If it gets deconstructed while the variant is still used, data get's corrupted. </p>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00110">110</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00119">119</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
-<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00055">opcua::TypeWrapper&lt; UA_Variant &gt;::clear()</a>, <a class="elRef" href="open62541/structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">UA_Variant::data</a>, <a class="el" href="TypeWrapper_8h_source.html#l00063">opcua::TypeWrapper&lt; UA_Variant &gt;::data_</a>, <a class="elRef" href="open62541/structUA__Variant.html#a09ff1e93e291d5b9db1ae5faa2c14780">UA_Variant::storageType</a>, <a class="elRef" href="open62541/types_8h.html#aa1478e00bedf1421f5f5462e8263c522ae8998cef426fb827da4c155c6791bc16">UA_VARIANT_DATA_NODELETE</a>, and <a class="elRef" href="open62541/types_8h.html#a6202f2a1788fd254f46832e62544fe54">UA_Variant_setArray()</a>.</p>
+<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00070">opcua::TypeWrapper&lt; UA_Variant &gt;::clear()</a>, <a class="elRef" href="open62541/structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">UA_Variant::data</a>, <a class="el" href="TypeWrapper_8h_source.html#l00078">opcua::TypeWrapper&lt; UA_Variant &gt;::data_</a>, <a class="elRef" href="open62541/structUA__Variant.html#a09ff1e93e291d5b9db1ae5faa2c14780">UA_Variant::storageType</a>, <a class="elRef" href="open62541/types_8h.html#aa1478e00bedf1421f5f5462e8263c522ae8998cef426fb827da4c155c6791bc16">UA_VARIANT_DATA_NODELETE</a>, and <a class="elRef" href="open62541/types_8h.html#a6202f2a1788fd254f46832e62544fe54">UA_Variant_setArray()</a>.</p>
 
 </div>
 </div>
@@ -627,9 +628,9 @@ template&lt;typename T , Type type&gt; </div>
 
 <p>Overload to write scalar values from wrapper objects to variant. </p>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00090">90</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00099">99</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
-<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00049">opcua::TypeWrapper&lt; T, type &gt;::handle()</a>.</p>
+<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00062">opcua::TypeWrapper&lt; T, type &gt;::handle()</a>.</p>
 
 </div>
 </div>
@@ -661,9 +662,9 @@ template&lt;typename T , typename  = std::enable_if_t&lt;!std::is_convertible_v&
 
 <p>Write scalar value to variant. </p>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00081">81</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00090">90</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
-<p class="reference">References <a class="el" href="ErrorHandling_8h_source.html#l00038">opcua::checkStatusCodeException()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00055">opcua::TypeWrapper&lt; UA_Variant &gt;::clear()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00063">opcua::TypeWrapper&lt; UA_Variant &gt;::data_</a>, <a class="elRef" href="open62541/structUA__Variant.html#a09ff1e93e291d5b9db1ae5faa2c14780">UA_Variant::storageType</a>, <a class="elRef" href="open62541/types_8h.html#aa1478e00bedf1421f5f5462e8263c522a2b3eb8fafea49ba7e9b24ee4eaced395">UA_VARIANT_DATA</a>, and <a class="elRef" href="open62541/types_8h.html#ab40084675fc8efaa4af30a5c6a1399e4">UA_Variant_setScalarCopy()</a>.</p>
+<p class="reference">References <a class="el" href="ErrorHandling_8h_source.html#l00033">opcua::checkStatusCodeException()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00070">opcua::TypeWrapper&lt; UA_Variant &gt;::clear()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00078">opcua::TypeWrapper&lt; UA_Variant &gt;::data_</a>, <a class="elRef" href="open62541/structUA__Variant.html#a09ff1e93e291d5b9db1ae5faa2c14780">UA_Variant::storageType</a>, <a class="elRef" href="open62541/types_8h.html#aa1478e00bedf1421f5f5462e8263c522a2b3eb8fafea49ba7e9b24ee4eaced395">UA_VARIANT_DATA</a>, and <a class="elRef" href="open62541/types_8h.html#ab40084675fc8efaa4af30a5c6a1399e4">UA_Variant_setScalarCopy()</a>.</p>
 
 </div>
 </div>
