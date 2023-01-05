@@ -33,6 +33,7 @@ public:
     /// Create server with custom port and a server certificate
     Server(uint16_t port, std::string_view certificate);
 
+    /// Set custom logger
     void setLogger(Logger logger);
 
     void setCustomHostname(std::string_view hostname);

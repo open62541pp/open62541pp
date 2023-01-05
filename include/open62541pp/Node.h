@@ -27,7 +27,11 @@ public:
     std::string getDescription();
     uint32_t    getWriteMask();
     // uint32_t    getUserWriteMask();
-    // Type getDataType();
+
+    /// Get data type of variable (type) node as NodeId
+    NodeId getDataType();
+    /// Get access level mask of variable node, e.g. ::UA_ACCESSLEVELMASK_READ | ::UA_ACCESSLEVELMASK_WRITE
+    uint8_t getAccessLevel();
 
     // writeBrowseName disabled for performance reasons:
     // https://github.com/open62541/open62541/issues/3545
@@ -36,7 +40,13 @@ public:
     void setDescription(std::string_view name, std::string_view locale = "en");
     void setWriteMask(uint32_t mask);
     // void setUserWriteMask(uint32_t mask);
-    // void setDataType(Type type);
+
+    /// Set data type of variable (type) node
+    void setDataType(Type type);
+    /// Set data type of variable (type) node by NodeId
+    void setDataType(const NodeId& typeId);
+    /// Set access level mask of variable node, e.g. ::UA_ACCESSLEVELMASK_READ | ::UA_ACCESSLEVELMASK_WRITE
+    void setAccessLevel(uint8_t mask);
 
     Node addFolder(const NodeId& id,       std::string_view browseName);
     Node addObject(const NodeId& id,       std::string_view browseName);

@@ -56,6 +56,20 @@ uint32_t Node::getWriteMask() {
     return writeMask;
 }
 
+NodeId Node::getDataType() {
+    NodeId nodeId(0, 0);
+    const auto status = UA_Server_readDataType(server_.handle(), *nodeId_.handle(), nodeId.handle());
+    checkStatusCodeException(status);
+    return nodeId;
+}
+
+uint8_t Node::getAccessLevel() {
+    uint8_t mask = 0;
+    const auto status = UA_Server_readAccessLevel(server_.handle(), *nodeId_.handle(), &mask);
+    checkStatusCodeException(status);
+    return mask;
+}
+
 // void Node::setBrowseName(std::string_view name) {
 //     const auto status = UA_Server_writeBrowseName(server_.handle(), *nodeId_.handle(),
 //         *QualifiedName(nodeId_.getNamespaceIndex(), name).handle());
@@ -79,11 +93,22 @@ void Node::setWriteMask(uint32_t mask) {
     checkStatusCodeException(status);
 }
 
-// void Node::setDataType(Type type) {
-//     const auto status = UA_Server_writeDataType(server_.handle(), *nodeId_.handle(),
-//         UA_TYPES[static_cast<uint16_t>(type)].typeId);
-//     checkStatusCodeException(status);
-// }
+void Node::setDataType(Type type) {
+    const auto status = UA_Server_writeDataType(server_.handle(), *nodeId_.handle(),
+        UA_TYPES[static_cast<uint16_t>(type)].typeId);
+    checkStatusCodeException(status);
+}
+
+void Node::setDataType(const NodeId& typeId) {
+    const auto status = UA_Server_writeDataType(server_.handle(), *nodeId_.handle(), *typeId.handle());
+    checkStatusCodeException(status);
+}
+
+void Node::setAccessLevel(uint8_t mask) {
+    const auto status = UA_Server_writeAccessLevel(server_.handle(), *nodeId_.handle(),
+        static_cast<UA_Byte>(mask));
+    checkStatusCodeException(status);
+}
 
 Node Node::addFolder(const NodeId& id, std::string_view browseName) {
     auto attr = UA_ObjectAttributes_default;
@@ -126,7 +151,7 @@ Node Node::addObject(const NodeId& id, std::string_view browseName) {
 Node Node::addVariable(const NodeId& id, std::string_view browseName, Type type) {
     auto attr        = UA_VariableAttributes_default;
     attr.dataType    = UA_TYPES[static_cast<uint16_t>(type)].typeId; // NOLINT
-    attr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
+    attr.accessLevel = UA_ACCESSLEVELMASK_READ;
 
     const auto ns     = id.handle()->namespaceIndex;
     const auto status = UA_Server_addVariableNode(

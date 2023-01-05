@@ -23,59 +23,55 @@ TEST_CASE("Node") {
         REQUIRE_THROWS(Node(server, NodeId("DoesNotExist")));
     }
 
-    SECTION("Get/set object attributes") {
-        auto obj  = server.getObjectsNode();
+    SECTION("Add/remove node") {
+        const NodeId nodeId{"testObj"};
 
-        // add node
-        NodeId testNodeId("attributesTest");
-        REQUIRE_NOTHROW(obj.addObject(testNodeId, "browseName"));
-        REQUIRE_NOTHROW(Node(server, testNodeId));
-        auto node = Node(server, testNodeId);
+        auto node = server.getObjectsNode().addObject(nodeId, "obj");
+        REQUIRE_NOTHROW(Node(server, nodeId));
+
+        node.remove();
+        REQUIRE_THROWS(Node(server, nodeId));
+    }
+
+    SECTION("Get/set node attributes") {
+        auto node = server.getObjectsNode().addVariable({"testAttributes"}, "testAttributes", Type::Boolean);
 
         // get default attributes
-        REQUIRE(node.getNodeClass()   == NodeClass::Object);
-        REQUIRE(node.getBrowseName()  == "browseName");
-        // REQUIRE(node.getDisplayName().empty());
+        REQUIRE(node.getNodeClass() == NodeClass::Variable);
+        REQUIRE(node.getBrowseName() == "testAttributes");
+        REQUIRE(node.getDisplayName() == "testAttributes");  // default -> browse name
         REQUIRE(node.getDescription().empty());
-        REQUIRE(node.getWriteMask()   == 0);
+        REQUIRE(node.getWriteMask() == 0);
+        REQUIRE(node.getDataType() == NodeId(1, 0)); // = boolean built-in type (https://reference.opcfoundation.org/v104/Core/docs/Part6/5.1.2/)
+        REQUIRE(node.getAccessLevel() == UA_ACCESSLEVELMASK_READ);
 
         // set new attributes
         // REQUIRE_NOTHROW(node.setBrowseName("newBrowseName"));
         REQUIRE_NOTHROW(node.setDisplayName("newDisplayName"));
         REQUIRE_NOTHROW(node.setDescription("newDescription"));
         REQUIRE_NOTHROW(node.setWriteMask(11));
+        REQUIRE_NOTHROW(node.setDataType(NodeId(2, 0)));
+        REQUIRE_NOTHROW(node.setAccessLevel(UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE));
 
         // get new attributes
         // REQUIRE(node.getBrowseName()  == "newBrowseName");
         REQUIRE(node.getDisplayName() == "newDisplayName");
         REQUIRE(node.getDescription() == "newDescription");
-        REQUIRE(node.getWriteMask()   == 11);
+        REQUIRE(node.getWriteMask() == 11);
+        REQUIRE(node.getDataType() == NodeId(2, 0));
+        REQUIRE(node.getAccessLevel() == (UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE));
     }
 
-    SECTION("Add/remove folder node") {
-        auto node = server.getRootNode().addFolder(NodeId("testFolder"), "testFolder");
+    SECTION("Add/remove node") {
+        auto node = server.getRootNode().addObject({"testObj"}, "testObj");
         
-        REQUIRE(node.getNodeClass()   == NodeClass::Object);
-        REQUIRE(node.getBrowseName()  == "testFolder");
-        // REQUIRE(node.getDisplayName() == "testFolder");
+        REQUIRE(node.getNodeClass() == NodeClass::Object);
+        REQUIRE(node.getBrowseName() == "testObj");
+        // REQUIRE(node.getDisplayName() == "testObj");
         REQUIRE_NOTHROW(node.remove());
     }
 
-    SECTION("Add/remove variable node") {
-        auto node = server.getRootNode().addVariable(
-            NodeId("testVariable"), "testVariable", Type::Float);
-
-        REQUIRE(node.getNodeClass()   == NodeClass::Variable);
-        REQUIRE(node.getBrowseName()  == "testVariable");
-        // REQUIRE(node.getDisplayName().empty());
-        REQUIRE_NOTHROW(node.remove());
-    }
-}
-
-TEST_CASE("VariableNode") {
-    Server server;
-
-    SECTION("Try read/write with node classes other than VariableNode") {
+    SECTION("Try read/write with node classes other than Variable") {
         REQUIRE_THROWS(server.getRootNode().read<int>());
         REQUIRE_THROWS(server.getRootNode().write<int>({}));
     }
