@@ -15,7 +15,7 @@ public:
         : std::runtime_error(getStatusMessage(statusCode)) {}
 
 private:
-    std::string getStatusMessage(UA_StatusCode statusCode) const {
+    static std::string getStatusMessage(UA_StatusCode statusCode) {
         static const std::string msg{"OPC UA error: "};
         return msg + UA_StatusCode_name(statusCode);
     }

@@ -1,3 +1,5 @@
+#include <utility>  // move
+
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_string.hpp>
 
@@ -31,11 +33,26 @@ TEST_CASE("TypeWrapper") {
         TypeWrapper<UA_String> wrapper1(UA_STRING_ALLOC("String1"));
         TypeWrapper<UA_String> wrapper2(UA_STRING_ALLOC("String2"));
 
-        TypeWrapper<UA_String> wrapperCopy(wrapper1);
-        REQUIRE_THAT(uaStringToString(*wrapperCopy.handle()), Equals("String1"));
+        TypeWrapper<UA_String> wrapperConstructor(wrapper1);
+        REQUIRE(wrapperConstructor.handle()->data != wrapper1.handle()->data);
+        REQUIRE_THAT(uaStringToString(*wrapperConstructor.handle()), Equals("String1"));
 
         TypeWrapper<UA_String> wrapperAssignmnet = wrapper2;
+        REQUIRE(wrapperAssignmnet.handle()->data != wrapper2.handle()->data);
         REQUIRE_THAT(uaStringToString(*wrapperAssignmnet.handle()), Equals("String2"));
+    }
+
+    SECTION("Move constructor / assignment") {
+        TypeWrapper<UA_String> wrapper1(UA_STRING_ALLOC("String1"));
+        TypeWrapper<UA_String> wrapper2(UA_STRING_ALLOC("String2"));
+
+        TypeWrapper<UA_String> wrapperConstructor(std::move(wrapper1));
+        // wrapper1 still points to same data, but doesn't own it anymore
+        REQUIRE(wrapperConstructor.handle()->data == wrapper1.handle()->data);
+
+        TypeWrapper<UA_String> wrapperAssignmnet = std::move(wrapper2);
+        // wrapper2 still points to same data, but doesn't own it anymore
+        REQUIRE(wrapperAssignmnet.handle()->data == wrapper2.handle()->data);
     }
 
     SECTION("Get type") {

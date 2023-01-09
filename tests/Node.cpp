@@ -11,12 +11,12 @@ TEST_CASE("Node") {
 
     SECTION("Constructor") {
         REQUIRE_NOTHROW(Node(server, NodeId(1, 0) /* boolean */));
-        REQUIRE_THROWS(Node(server, NodeId("DoesNotExist")));
+        REQUIRE_THROWS(Node(server, NodeId("DoesNotExist", 1)));
     }
 
     SECTION("Get/set node attributes") {
         auto node = server.getObjectsNode().addVariable(
-            {"testAttributes"}, "testAttributes", Type::Boolean
+            {"testAttributes", 1}, "testAttributes", Type::Boolean
         );
 
         // get default attributes
@@ -55,7 +55,7 @@ TEST_CASE("Node") {
 
     SECTION("Value rank and array dimension combinations") {
         auto node = server.getObjectsNode().addVariable(
-            {"testDimensions"}, "testDimensions", Type::Float
+            {"testDimensions", 1}, "testDimensions", Type::Float
         );
 
         SECTION("Unspecified dimension (ValueRank <= 0)") {
@@ -115,9 +115,7 @@ TEST_CASE("Node") {
     }
 
     SECTION("Read/write scalar") {
-        auto node = server.getRootNode().addVariable(
-            NodeId("testScalar"), "testScalar", Type::Float
-        );
+        auto node = server.getRootNode().addVariable({"testScalar", 1}, "testScalar", Type::Float);
 
         // Writes with wrong data type
         REQUIRE_THROWS(node.write<bool>({}));
@@ -130,7 +128,7 @@ TEST_CASE("Node") {
     }
 
     SECTION("Read/write array") {
-        auto node = server.getRootNode().addVariable(NodeId("testArray"), "testArray", Type::Float);
+        auto node = server.getRootNode().addVariable({"testArray", 1}, "testArray", Type::Float);
 
         // Writes with wrong data type
         REQUIRE_THROWS(node.writeArray<int>({}));
@@ -143,12 +141,12 @@ TEST_CASE("Node") {
     }
 
     SECTION("Remove node") {
-        const NodeId nodeId{"testObj"};
+        const NodeId id("testObj", 1);
 
-        auto node = server.getObjectsNode().addObject(nodeId, "obj");
-        REQUIRE_NOTHROW(Node(server, nodeId));
+        auto node = server.getObjectsNode().addObject(id, "obj");
+        REQUIRE_NOTHROW(Node(server, id));
 
         node.remove();
-        REQUIRE_THROWS(Node(server, nodeId));
+        REQUIRE_THROWS(Node(server, id));
     }
 }

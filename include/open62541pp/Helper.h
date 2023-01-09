@@ -17,11 +17,11 @@ inline UA_String allocUaString(std::string_view src) noexcept {
     s.length = src.size();
     s.data = nullptr;
 
-    if (src.size() > 0) {
-        s.data = (UA_Byte*)UA_malloc(s.length);
+    if (!src.empty()) {
+        s.data = (UA_Byte*)UA_malloc(s.length);  // NOLINT
         std::memcpy(s.data, src.data(), src.size());
     } else {
-        s.data = static_cast<UA_Byte*>(UA_EMPTY_ARRAY_SENTINEL);
+        s.data = static_cast<UA_Byte*>(UA_EMPTY_ARRAY_SENTINEL);  // NOLINT
     }
     return s;
 }
@@ -30,14 +30,14 @@ inline std::string uaStringToString(const UA_String& src) noexcept {
     if (src.data == nullptr) {
         return {};
     }
-    return std::string((char*)src.data, src.length);  // NOLINT
+    return {(char*)src.data, src.length};  // NOLINT
 }
 
 inline std::string_view uaStringToStringView(const UA_String& src) noexcept {
     if (src.data == nullptr) {
         return {};
     }
-    return std::string_view((char*)src.data, src.length);  // NOLINT
+    return {(char*)src.data, src.length};  // NOLINT
 }
 
 }  // namespace opcua

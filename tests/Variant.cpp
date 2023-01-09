@@ -123,7 +123,7 @@ TEST_CASE("Variant") {
         REQUIRE(var.readArray<float>() == value);
 
         std::vector<float> valueChanged({3, 4, 5});
-        value = valueChanged;
+        value.assign(valueChanged.begin(), valueChanged.end());
 
         REQUIRE(var.readArray<float>() == valueChanged);
     }

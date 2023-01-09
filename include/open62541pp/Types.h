@@ -145,14 +145,14 @@ enum class ReferenceType : uint16_t {
 namespace detail {
 
 template <typename...>
-struct always_false : std::false_type {};
+struct AlwaysFalse : std::false_type {};
 
 }  // namespace detail
 
 template <typename T>
 constexpr Type getType() {
     static_assert(
-        detail::always_false<T>::value,
+        detail::AlwaysFalse<T>::value,
         "Type mapping not possible (maybe not existing or not unique). "
         "Please specify type manually."
     );

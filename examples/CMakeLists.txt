@@ -12,5 +12,17 @@ foreach(source ${examples_sources})
             open62541pp::open62541pp
             open62541pp_project_options
     )
-    set_target_properties(${target_name} PROPERTIES OUTPUT_NAME ${name})
+    set_target_properties(
+        ${target_name}
+        PROPERTIES
+            OUTPUT_NAME ${name}
+    )
+    if(CMAKE_CXX_CLANG_TIDY)
+        set(checks "-bugprone-exception-escape")  # allow uncaught exceptions in main
+        set_target_properties(
+            ${target_name}
+            PROPERTIES
+                CXX_CLANG_TIDY "${CMAKE_CXX_CLANG_TIDY};-checks=${checks}"
+        )
+    endif()
 endforeach(source ${sandbox_sources})

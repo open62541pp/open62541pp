@@ -24,7 +24,10 @@ public:
     Connection() : server_(UA_Server_new()) {}
 
     ~Connection() {
-        stop();
+        // don't use stop method here because it might throw an exception
+        if (running_) {
+            UA_Server_run_shutdown(this->server_);
+        }
         UA_Server_delete(server_);
     }
 
@@ -44,34 +47,33 @@ public:
     }
 
     void run() {
-        if (running_.load()) {
+        if (running_) {
             throw Exception("OPC UA Server already running");
         }
 
         const auto status = UA_Server_run_startup(server_);
         checkStatusCodeException(status);
-
-        running_.store(true);
-        while (this->running_.load()) {
+        running_ = true;
+        while (running_) {
             // references:
             // https://open62541.org/doc/current/server.html#server-lifecycle
             // https://github.com/open62541/open62541/blob/master/examples/server_mainloop.c
-            const auto waitInterval = UA_Server_run_iterate(this->server_, true);
+            const auto waitInterval = UA_Server_run_iterate(server_, true);
             std::this_thread::sleep_for(std::chrono::milliseconds(waitInterval));
         }
     }
 
     void stop() {
-        if (!running_.load()) {
+        if (!running_) {
             return;
         }
 
-        running_.store(false);
         const auto status = UA_Server_run_shutdown(this->server_);
         checkStatusCodeException(status);
+        running_ = false;
     }
 
-    bool isRunning() const { return running_.load(); }
+    bool isRunning() const { return running_; }
 
     void setLogger(Logger logger) {
         logger_ = std::move(logger);
@@ -90,12 +92,15 @@ public:
         assert(instance->logger_ != nullptr);  // NOLINT
 
         // convert printf format + args to string_view
-        va_list tmp;
+        va_list tmp;  // NOLINT
         va_copy(tmp, args);  // NOLINT
-        const int bufferSize = std::vsnprintf(nullptr, 0, msg, tmp);  // NOLINT
+        const int charsToWrite = std::vsnprintf(nullptr, 0, msg, tmp);  // NOLINT
         va_end(tmp);  // NOLINT
-        std::vector<char> buffer(bufferSize + 1);
-        std::vsnprintf(buffer.data(), buffer.size(), msg, args);
+        std::vector<char> buffer(charsToWrite + 1);
+        const int charsWritten = std::vsnprintf(buffer.data(), buffer.size(), msg, args);
+        if (charsWritten < 0) {
+            return;
+        }
         const std::string_view sv(buffer.data(), buffer.size());
 
         instance->logger_(static_cast<LogLevel>(level), static_cast<LogCategory>(category), sv);
@@ -238,39 +243,39 @@ uint16_t Server::registerNamespace(std::string_view name) {
 }
 
 Node Server::getNode(const NodeId& id) {
-    return Node(*this, id);
+    return {*this, id};
 }
 
 Node Server::getRootNode() {
-    return Node(*this, UA_NS0ID_ROOTFOLDER);
+    return {*this, {UA_NS0ID_ROOTFOLDER, 0}};
 }
 
 Node Server::getObjectsNode() {
-    return Node(*this, UA_NS0ID_OBJECTSFOLDER);
+    return {*this, {UA_NS0ID_OBJECTSFOLDER, 0}};
 }
 
 Node Server::getTypesNode() {
-    return Node(*this, UA_NS0ID_TYPESFOLDER);
+    return {*this, {UA_NS0ID_TYPESFOLDER, 0}};
 }
 
 Node Server::getViewsNode() {
-    return Node(*this, UA_NS0ID_VIEWSFOLDER);
+    return {*this, {UA_NS0ID_VIEWSFOLDER, 0}};
 }
 
 Node Server::getObjectTypesNode() {
-    return Node(*this, UA_NS0ID_OBJECTTYPESFOLDER);
+    return {*this, {UA_NS0ID_OBJECTTYPESFOLDER, 0}};
 }
 
 Node Server::getVariableTypesNode() {
-    return Node(*this, UA_NS0ID_VARIABLETYPESFOLDER);
+    return {*this, {UA_NS0ID_VARIABLETYPESFOLDER, 0}};
 }
 
 Node Server::getDataTypesNode() {
-    return Node(*this, UA_NS0ID_DATATYPESFOLDER);
+    return {*this, {UA_NS0ID_DATATYPESFOLDER, 0}};
 }
 
 Node Server::getReferenceTypesNode() {
-    return Node(*this, UA_NS0ID_REFERENCETYPESFOLDER);
+    return {*this, {UA_NS0ID_REFERENCETYPESFOLDER, 0}};
 }
 
 UA_Server* Server::handle() {

@@ -29,7 +29,12 @@ target_link_libraries(
         open62541pp_project_options
 )
 target_include_directories(open62541pp_tests PRIVATE ../src)
-set_target_properties(open62541pp_tests PROPERTIES OUTPUT_NAME tests)
+set_target_properties(
+    open62541pp_tests
+    PROPERTIES
+        OUTPUT_NAME tests
+        CXX_CLANG_TIDY ""  # disable clang-tidy
+)
 
 # parse catch tests for ctest
 include(CTest)

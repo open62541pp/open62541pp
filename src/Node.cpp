@@ -144,7 +144,7 @@ void Node::setValueRank(ValueRank valueRank) {
     checkStatusCodeException(status);
 }
 
-void Node::setArrayDimensions(const std::vector<uint32_t>& dimensions) {  // NOLINT
+void Node::setArrayDimensions(const std::vector<uint32_t>& dimensions) {
     Variant variant;
     variant.setArray(dimensions);
     const auto status = UA_Server_writeArrayDimensions(
@@ -176,7 +176,7 @@ Node Node::addFolder(const NodeId& id, std::string_view browseName) {
         nullptr  // output new node id
     );
     checkStatusCodeException(status);
-    return Node(server_, id);
+    return {server_, id};
 }
 
 Node Node::addObject(const NodeId& id, std::string_view browseName) {
@@ -195,7 +195,7 @@ Node Node::addObject(const NodeId& id, std::string_view browseName) {
         nullptr  // output new node id
     );
     checkStatusCodeException(status);
-    return Node(server_, id);
+    return {server_, id};
 }
 
 Node Node::addVariable(const NodeId& id, std::string_view browseName, Type type) {
@@ -216,7 +216,7 @@ Node Node::addVariable(const NodeId& id, std::string_view browseName, Type type)
         nullptr  // output new node id
     );
     checkStatusCodeException(status);
-    return Node(server_, id);
+    return {server_, id};
 }
 
 Node Node::addProperty(const NodeId& id, std::string_view browseName, Type type) {
@@ -237,7 +237,7 @@ Node Node::addProperty(const NodeId& id, std::string_view browseName, Type type)
         nullptr  // output new node id
     );
     checkStatusCodeException(status);
-    return Node(server_, id);
+    return {server_, id};
 }
 
 Node Node::addObjectType(const NodeId& id, std::string_view browseName) {
@@ -255,7 +255,7 @@ Node Node::addObjectType(const NodeId& id, std::string_view browseName) {
         nullptr  // output new node id
     );
     checkStatusCodeException(status);
-    return Node(server_, id);
+    return {server_, id};
 }
 
 Node Node::addVariableType(const NodeId& id, std::string_view browseName, Type type) {
@@ -276,7 +276,7 @@ Node Node::addVariableType(const NodeId& id, std::string_view browseName, Type t
         nullptr  // output new node id
     );
     checkStatusCodeException(status);
-    return Node(server_, id);
+    return {server_, id};
 }
 
 void Node::remove() {

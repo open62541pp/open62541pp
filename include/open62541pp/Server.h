@@ -30,7 +30,7 @@ public:
     /// Create server with default config.
     Server();
     /// Create server with custom port.
-    Server(uint16_t port);
+    explicit Server(uint16_t port);
     /// Create server with custom port and a server certificate.
     Server(uint16_t port, std::string_view certificate);
 

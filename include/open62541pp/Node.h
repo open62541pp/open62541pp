@@ -109,10 +109,6 @@ public:
     void remove();
 
 protected:
-    Server server_;
-    NodeId nodeId_;
-    NodeClass nodeClass_;
-
     template <typename... Ts>
     constexpr bool isNodeClass(Ts&&... classes) {
         const auto isSame = [&](NodeClass c) { return nodeClass_ == c; };
@@ -132,6 +128,11 @@ protected:
 
     void writeVariantToServer(Variant& var);  // should be const Variant&
     void readVariantFromServer(Variant& var) noexcept;
+
+private:
+    Server server_;
+    NodeId nodeId_;
+    NodeClass nodeClass_;
 };
 
 }  // namespace opcua

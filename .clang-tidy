@@ -1,12 +1,13 @@
-Checks:
-    bugprone*, -bugprone-narrowing-conversions, -bugprone-exception-escape,
-    cppcoreguidelines*, -cppcoreguidelines-narrowing-conversions, -cppcoreguidelines-pro-type-vararg, -cppcoreguidelines-avoid-magic-numbers,
-    clang-analyzer*, -clang-analyzer-osx*
-    llvm*, -llvm-include-order, -llvm-namespace-comment,
-    misc*,
-    modernize*, -modernize-use-trailing-return-type, -modernize-use-nodiscard,
-    performance*,
-    readability*, -readability-braces-around-statements, -readability-magic-numbers, -readability-uppercase-literal-suffix
+Checks: |
+  bugprone*,
+  cert*,
+  cppcoreguidelines*, -cppcoreguidelines-avoid-magic-numbers,
+  clang-analyzer*, -clang-analyzer-osx*,
+  hicpp*,
+  misc*,
+  modernize*, -modernize-use-trailing-return-type, -modernize-use-nodiscard,
+  performance*,
+  readability*, -readability-identifier-length, -readability-magic-numbers,
 
 CheckOptions:
   - key: readability-identifier-naming.TypedefCase
@@ -28,4 +29,5 @@ CheckOptions:
   - key: readability-identifier-naming.GlobalConstantCase
     value: aNy_CasE
 
-WarningsAsErrors: '*'
+HeaderFilterRegex: "include/open62541pp"
+WarningsAsErrors: "*"

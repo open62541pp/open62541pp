@@ -4,7 +4,7 @@
 BasedOnStyle: LLVM
 
 AccessModifierOffset: -4
-AlignAfterOpenBracket: BlockIndent # version >= 14required
+AlignAfterOpenBracket: BlockIndent # version >= 14 required
 # AlignConsecutiveAssignments: true
 # AlignConsecutiveDeclarations: true
 AlignTrailingComments: false
@@ -25,14 +25,13 @@ SeparateDefinitionBlocks: Always # version >= 14 required
 SpacesBeforeTrailingComments: 2
 
 # Adjust penalties to prefer break after open bracket
-PenaltyBreakAssignment: 100             # default: ?
+PenaltyBreakAssignment: 100 # default: ?
 PenaltyBreakBeforeFirstCallParameter: 0 # default: 19
-PenaltyBreakComment: 300                # default: 300
-PenaltyBreakFirstLessLess: 120          # default: 120
-PenaltyBreakOpenParenthesis: 0          # default: 0
-PenaltyBreakString: 1000                # default: 1000
-PenaltyBreakTemplateDeclaration: 0      # default: ?
-PenaltyExcessCharacter: 1000000         # default: 1000000
-PenaltyIndentedWhitespace: 0            # default: 0
-PenaltyReturnTypeOnItsOwnLine: 200      # default: 60
-...
+PenaltyBreakComment: 300 # default: 300
+PenaltyBreakFirstLessLess: 120 # default: 120
+PenaltyBreakOpenParenthesis: 0 # default: 0
+PenaltyBreakString: 1000 # default: 1000
+PenaltyBreakTemplateDeclaration: 0 # default: ?
+PenaltyExcessCharacter: 1000000 # default: 1000000
+PenaltyIndentedWhitespace: 0 # default: 0
+PenaltyReturnTypeOnItsOwnLine: 200 # default: 60

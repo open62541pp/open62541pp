@@ -12,58 +12,52 @@ namespace opcua {
 
 class Variant : public TypeWrapper<UA_Variant> {
 public:
-    using BaseClass::BaseClass;  // inherit contructors
+    using BaseClass::BaseClass;  // inherit contructors  // NOLINT
 
     /// Constructor for scalars
     template <typename T>
-    Variant(const T& value) {
+    explicit Variant(const T& value) {
         setScalar<T>(value);
     }
 
     /// Constructor for arrays
     template <typename T>
-    Variant(const std::vector<T>& vector) {
+    explicit Variant(const std::vector<T>& vector) {
         setArray<T>(vector);
     }
 
     /// Check if variant is empty
-    bool isEmpty() const noexcept { return UA_Variant_isEmpty(&data_); }
+    bool isEmpty() const noexcept { return UA_Variant_isEmpty(handle()); }
 
     /// Check if variant is a scalar
-    bool isScalar() const noexcept { return UA_Variant_isScalar(&data_); }
+    bool isScalar() const noexcept { return UA_Variant_isScalar(handle()); }
 
     /// Check if variant is a array
     bool isArray() const noexcept {
-        return (data_.arrayLength > 0 && data_.data != UA_EMPTY_ARRAY_SENTINEL);
+        return (handle()->arrayLength > 0) &&
+               (handle()->data != UA_EMPTY_ARRAY_SENTINEL);  // NOLINT
     }
 
     /// Check if variant type is equal to template type
     template <typename T>
     bool isType() const noexcept {
-        return data_.type == getUaDataType<T>();
+        return handle()->type == getUaDataType<T>();
     }
 
     /// Check if variant type is equal to type argument (enum)
-    bool isType(Type type) const noexcept { return data_.type == getUaDataType(type); }
+    bool isType(Type type) const noexcept { return handle()->type == getUaDataType(type); }
 
     /// Read scalar value with given template type.
     /// An exception is thrown if the variant is not a scalar or not of the given type.
+    /// The template type can also be a wrapper type like opcua::String.
     template <typename T>
-    std::enable_if_t<!std::is_convertible_v<T*, TypeWrapperBase*>, T> readScalar() const {
-        if (!isScalar()) {
-            throw Exception("Variant is not a scalar");
+    T readScalar() const {
+        if constexpr (detail::IsTypeWrapper<T>::value) {
+            auto result = readScalarImpl<typename T::UaType>();
+            return T(result);
+        } else {
+            return readScalarImpl<T>();
         }
-        if (!isType<T>()) {
-            throw Exception("Variant does not contain a scalar of specified return type");
-        }
-        return *static_cast<T*>(data_.data);  // copy on purpose
-    }
-
-    /// Overload to read scalar values into wrapper objects.
-    template <typename T>
-    std::enable_if_t<std::is_convertible_v<T*, TypeWrapperBase*>, T> readScalar() const {
-        auto result = readScalar<typename T::UaType>();
-        return T(result);
     }
 
     /// Read array with given template type and return it as a std::vector.
@@ -81,32 +75,28 @@ public:
         // size_t arrayDimensionsSize;   /* The number of dimensions */
         // UA_UInt32 *arrayDimensions;   /* The length of each dimension */
 
-        auto dataPointer = static_cast<T*>(data_.data);
-        return std::vector<T>(dataPointer, dataPointer + data_.arrayLength);
+        auto* dataPointer = static_cast<T*>(handle()->data);
+        return std::vector<T>(dataPointer, dataPointer + handle()->arrayLength);  // NOLINT
     }
 
     /// Write scalar value to variant.
-    template <typename T, typename = std::enable_if_t<!std::is_convertible_v<T*, TypeWrapperBase*>>>
+    /// The template type can also be a wrapper type like opcua::String.
+    template <typename T>
     void setScalar(T value) {
-        clear();
-        const auto status = UA_Variant_setScalarCopy(&data_, &value, getUaDataType<T>());
-        checkStatusCodeException(status);
-        data_.storageType = UA_VARIANT_DATA;
-    }
-
-    /// Overload to write scalar values from wrapper objects to variant.
-    template <typename T, Type type>
-    void setScalar(const TypeWrapper<T, type>& value) {
-        setScalar<T>(*value.handle());
+        if constexpr (detail::IsTypeWrapper<T>::value) {
+            setScalarImpl<typename T::UaType>(*value.handle());
+        } else {
+            setScalarImpl<T>(value);
+        }
     }
 
     /// Write array (raw) to variant.
     template <typename T>
     void setArray(const T* array, size_t size) {
         clear();
-        const auto status = UA_Variant_setArrayCopy(&data_, array, size, getUaDataType<T>());
+        const auto status = UA_Variant_setArrayCopy(handle(), array, size, getUaDataType<T>());
         checkStatusCodeException(status);
-        data_.storageType = UA_VARIANT_DATA;
+        handle()->storageType = UA_VARIANT_DATA;
     }
 
     /// Write array (std::vector) to variant.
@@ -123,8 +113,28 @@ public:
     void setArrayNoCopy(std::vector<T>& array) noexcept {
         clear();
         // UA_Variant_setArray will borrow the vector data compared to UA_Variant_setArrayCopy
-        UA_Variant_setArray(&data_, array.data(), array.size(), getUaDataType<T>());
-        data_.storageType = UA_VARIANT_DATA_NODELETE;
+        UA_Variant_setArray(handle(), array.data(), array.size(), getUaDataType<T>());
+        handle()->storageType = UA_VARIANT_DATA_NODELETE;
+    }
+
+private:
+    template <typename T>
+    T readScalarImpl() const {
+        if (!isScalar()) {
+            throw Exception("Variant is not a scalar");
+        }
+        if (!isType<T>()) {
+            throw Exception("Variant does not contain a scalar of specified return type");
+        }
+        return *static_cast<T*>(handle()->data);  // copy on purpose
+    }
+
+    template <typename T>
+    void setScalarImpl(T value) {
+        clear();
+        const auto status = UA_Variant_setScalarCopy(handle(), &value, getUaDataType<T>());
+        checkStatusCodeException(status);
+        handle()->storageType = UA_VARIANT_DATA;
     }
 };
 
