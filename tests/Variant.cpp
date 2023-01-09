@@ -39,37 +39,6 @@ TEST_CASE("Variant") {
         }
     }
 
-    SECTION("Constructors for different types") {
-        {
-            bool value = true;
-            Variant var(value);
-            REQUIRE(var.isScalar());
-            REQUIRE(var.isType<bool>());
-            REQUIRE(var.readScalar<bool>() == value);
-        }
-        {
-            int value = 5;
-            Variant var(value);
-            REQUIRE(var.isScalar());
-            REQUIRE(var.isType<int>());
-            REQUIRE(var.readScalar<int>() == value);
-        }
-        {
-            double value = 11.11;
-            Variant var(value);
-            REQUIRE(var.isScalar());
-            REQUIRE(var.isType<double>());
-            REQUIRE(var.readScalar<double>() == value);
-        }
-        {
-            std::vector<float> value{1, 2, 3};
-            Variant var(value);
-            REQUIRE(var.isArray());
-            REQUIRE(var.isType<float>());
-            REQUIRE(var.readArray<float>() == value);
-        }
-    }
-
     SECTION("Write/read scalar") {
         Variant var;
         int32_t value = 5;

@@ -131,8 +131,8 @@ TEST_CASE("Node") {
         auto node = server.getRootNode().addVariable({"testArray", 1}, "testArray", Type::Float);
 
         // Writes with wrong data type
-        REQUIRE_THROWS(node.writeArray<int>({}));
-        REQUIRE_THROWS(node.writeArray<double>({}));
+        REQUIRE_THROWS(node.writeArray<std::vector<int>>({}));
+        REQUIRE_THROWS(node.writeArray<std::vector<double>>({}));
 
         // Writes with correct data type
         std::vector<float> value{11.11, 22.22, 33.33};

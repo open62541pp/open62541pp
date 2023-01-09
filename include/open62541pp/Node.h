@@ -80,19 +80,23 @@ public:
 
     template <typename Arg>  // perfect forwarding
     void write(Arg&& arg) {
-        Variant var(std::forward<Arg>(arg));
+        requireNodeClass(NodeClass::Variable);
+        Variant var;
+        var.setScalar(std::forward<Arg>(arg));
         writeVariantToServer(var);
     }
 
     template <typename Arg>  // perfect forwarding
     void writeArray(Arg&& arg) {
         requireNodeClass(NodeClass::Variable);
-        Variant var(std::forward<Arg>(arg));
+        Variant var;
+        var.setArray(std::forward<Arg>(arg));
         writeVariantToServer(var);
     }
 
     template <typename T>
     T read() {
+        requireNodeClass(NodeClass::Variable);
         Variant var;
         readVariantFromServer(var);
         return var.readScalar<T>();

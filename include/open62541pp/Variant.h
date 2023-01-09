@@ -12,19 +12,7 @@ namespace opcua {
 
 class Variant : public TypeWrapper<UA_Variant> {
 public:
-    using BaseClass::BaseClass;  // inherit contructors  // NOLINT
-
-    /// Constructor for scalars
-    template <typename T>
-    explicit Variant(const T& value) {
-        setScalar<T>(value);
-    }
-
-    /// Constructor for arrays
-    template <typename T>
-    explicit Variant(const std::vector<T>& vector) {
-        setArray<T>(vector);
-    }
+    using BaseClass::BaseClass;  // inherit contructors
 
     /// Check if variant is empty
     bool isEmpty() const noexcept { return UA_Variant_isEmpty(handle()); }
