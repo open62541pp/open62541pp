@@ -58,11 +58,6 @@ public:
         if (!isType<T>()) {
             throw Exception("Variant does not contain an array of specified return type");
         }
-
-        // TODO: check dimensions?
-        // size_t arrayDimensionsSize;   /* The number of dimensions */
-        // UA_UInt32 *arrayDimensions;   /* The length of each dimension */
-
         auto* dataPointer = static_cast<T*>(handle()->data);
         return std::vector<T>(dataPointer, dataPointer + handle()->arrayLength);  // NOLINT
     }

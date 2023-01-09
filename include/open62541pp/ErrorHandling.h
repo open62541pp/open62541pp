@@ -26,7 +26,7 @@ public:
     using std::runtime_error::runtime_error;  // inherit contructors
 };
 
-constexpr bool checkStatusCode(UA_StatusCode code) noexcept {
+inline constexpr bool checkStatusCode(UA_StatusCode code) noexcept {
     return code == UA_STATUSCODE_GOOD;
 }
 
