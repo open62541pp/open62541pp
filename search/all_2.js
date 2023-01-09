@@ -44,7 +44,7 @@ var searchData=
   ['alarmgroupmember_271',['AlarmGroupMember',['../namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba6e86c0c4714da329893d3882af602e31',1,'opcua']]],
   ['algorithm_272',['algorithm',['open62541/structUA__SignatureData.html#a00d0ae6d2e80527414d19834ec455edc',1,'UA_SignatureData::algorithm()'],['open62541/struct__OpcUa__SignatureData.html#a999b8ced5a03ef4c9e77a285c009cb84',1,'_OpcUa_SignatureData::Algorithm()']]],
   ['alias_273',['Alias',['open62541/struct__OpcUa__AttributeOperand.html#a6886c55ffeccbb41de4e69df77acf159',1,'_OpcUa_AttributeOperand::Alias()'],['open62541/structUA__AttributeOperand.html#a9ee4e21238b8bd4a1ac6d854c9029fc8',1,'UA_AttributeOperand::alias()']]],
-  ['allocuastring_274',['allocUaString',['../namespaceopcua.html#a2c9ce8f5ebcb92c87fe05405d1316c0b',1,'opcua::allocUaString(const std::string &amp;src) noexcept'],['../namespaceopcua.html#af43fe8086f676f6cf2f161bf638aabe8',1,'opcua::allocUaString(std::string_view src) noexcept']]],
+  ['allocuastring_274',['allocUaString',['../namespaceopcua_1_1detail.html#ab086ba6c1c55e2be3746f614066d754a',1,'opcua::detail::allocUaString(const std::string &amp;src)'],['../namespaceopcua_1_1detail.html#a161e9f5f92971da039857209d69cc103',1,'opcua::detail::allocUaString(std::string_view src)']]],
   ['allowaddnode_275',['allowAddNode',['open62541/structUA__AccessControl.html#aa15c555191d1a4143982a6291ebf3e89',1,'UA_AccessControl']]],
   ['allowaddreference_276',['allowAddReference',['open62541/structUA__AccessControl.html#a6f8bc16b2657ae4e697357bc6b567c53',1,'UA_AccessControl']]],
   ['allowbrowsenode_277',['allowBrowseNode',['open62541/structUA__AccessControl.html#a5ad48e792f8946acf223b2c46962b6b2',1,'UA_AccessControl']]],

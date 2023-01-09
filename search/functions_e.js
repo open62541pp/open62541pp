@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['uastringtostring_2744',['uaStringToString',['../namespaceopcua.html#aef0c841b561373b0f996440eb69c06f2',1,'opcua']]],
-  ['uastringtostringview_2745',['uaStringToStringView',['../namespaceopcua.html#a2143993185f55c1ebd71bef8af0feb34',1,'opcua']]]
+  ['write_2752',['write',['../classopcua_1_1Node.html#a729af7668ad251ac813ce54a7ca4635d',1,'opcua::Node']]],
+  ['writearray_2753',['writeArray',['../classopcua_1_1Node.html#ab78c2057b94e662e71750f63f80c606e',1,'opcua::Node']]],
+  ['writevarianttoserver_2754',['writeVariantToServer',['../classopcua_1_1Node.html#ab826da68b3953a8017ae4c9f57dcbfdf',1,'opcua::Node']]]
 ];

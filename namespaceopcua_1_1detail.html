@@ -90,6 +90,18 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a0341d74619a1f847bf0213d6bb4875df"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a0341d74619a1f847bf0213d6bb4875df">checkStatusCode</a> (<a class="elRef" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> code) noexcept</td></tr>
+<tr class="separator:a0341d74619a1f847bf0213d6bb4875df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac26224a3eb61403f507e69b78213cb77"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ac26224a3eb61403f507e69b78213cb77">checkStatusCodeException</a> (<a class="elRef" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> code)</td></tr>
+<tr class="separator:ac26224a3eb61403f507e69b78213cb77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab086ba6c1c55e2be3746f614066d754a"><td class="memItemLeft" align="right" valign="top"><a class="elRef" href="open62541/structUA__String.html">UA_String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ab086ba6c1c55e2be3746f614066d754a">allocUaString</a> (const std::string &amp;src)</td></tr>
+<tr class="separator:ab086ba6c1c55e2be3746f614066d754a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a161e9f5f92971da039857209d69cc103"><td class="memItemLeft" align="right" valign="top"><a class="elRef" href="open62541/structUA__String.html">UA_String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a161e9f5f92971da039857209d69cc103">allocUaString</a> (std::string_view src)</td></tr>
+<tr class="separator:a161e9f5f92971da039857209d69cc103"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf2513e895bc59a84f17a6a152f97cda"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#adf2513e895bc59a84f17a6a152f97cda">toStringView</a> (const <a class="elRef" href="open62541/structUA__String.html">UA_String</a> &amp;src)</td></tr>
+<tr class="separator:adf2513e895bc59a84f17a6a152f97cda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab875dad9e8b6ae20d73250943b6df298"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ab875dad9e8b6ae20d73250943b6df298">toString</a> (const <a class="elRef" href="open62541/structUA__String.html">UA_String</a> &amp;src)</td></tr>
+<tr class="separator:ab875dad9e8b6ae20d73250943b6df298"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad45795dab04da50d546fdfa8a87cc5c9"><td class="memTemplParams" colspan="2">template&lt;typename T , Type type&gt; </td></tr>
 <tr class="memitem:ad45795dab04da50d546fdfa8a87cc5c9"><td class="memTemplItemLeft" align="right" valign="top">std::true_type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ad45795dab04da50d546fdfa8a87cc5c9">isTypeWrapperImpl</a> (<a class="el" href="classopcua_1_1TypeWrapper.html">TypeWrapper</a>&lt; T, type &gt; *)</td></tr>
 <tr class="separator:ad45795dab04da50d546fdfa8a87cc5c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -116,6 +128,106 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="ab086ba6c1c55e2be3746f614066d754a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab086ba6c1c55e2be3746f614066d754a">&#9670;&nbsp;</a></span>allocUaString() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="open62541/structUA__String.html">UA_String</a> opcua::detail::allocUaString </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>src</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="TypeWrapper_8h_source.html#l00170">opcua::ByteString::ByteString()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00214">opcua::LocalizedText::LocalizedText()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00191">opcua::QualifiedName::QualifiedName()</a>, and <a class="el" href="TypeWrapper_8h_source.html#l00125">opcua::String::String()</a>.</p>
+
+</div>
+</div>
+<a id="a161e9f5f92971da039857209d69cc103"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a161e9f5f92971da039857209d69cc103">&#9670;&nbsp;</a></span>allocUaString() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="open62541/structUA__String.html">UA_String</a> opcua::detail::allocUaString </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>src</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0341d74619a1f847bf0213d6bb4875df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0341d74619a1f847bf0213d6bb4875df">&#9670;&nbsp;</a></span>checkStatusCode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool opcua::detail::checkStatusCode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ErrorHandling_8h_source.html#l00031">31</a> of file <a class="el" href="ErrorHandling_8h_source.html">ErrorHandling.h</a>.</p>
+
+<p class="reference">References <a class="elRef" href="open62541/statuscodes_8h.html#a3c68d30bc6f32228aa43be75fdc9d5aa">UA_STATUSCODE_GOOD</a>.</p>
+
+</div>
+</div>
+<a id="ac26224a3eb61403f507e69b78213cb77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac26224a3eb61403f507e69b78213cb77">&#9670;&nbsp;</a></span>checkStatusCodeException()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::detail::checkStatusCodeException </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ErrorHandling_8h_source.html#l00035">35</a> of file <a class="el" href="ErrorHandling_8h_source.html">ErrorHandling.h</a>.</p>
+
+<p class="reference">References <a class="elRef" href="open62541/statuscodes_8h.html#a3c68d30bc6f32228aa43be75fdc9d5aa">UA_STATUSCODE_GOOD</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="TypeWrapper_8h_source.html#l00084">opcua::TypeWrapper&lt; UA_LocalizedText &gt;::set()</a>, and <a class="el" href="Variant_8h_source.html#l00078">opcua::Variant::setArray()</a>.</p>
+
+</div>
+</div>
 <a id="a7f5928ebb3f1e8f9eecf59d26eb8310c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7f5928ebb3f1e8f9eecf59d26eb8310c">&#9670;&nbsp;</a></span>isTypeWrapperImpl() <span class="overload">[1/2]</span></h2>
 
@@ -151,6 +263,70 @@ template&lt;typename T , Type type&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab875dad9e8b6ae20d73250943b6df298"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab875dad9e8b6ae20d73250943b6df298">&#9670;&nbsp;</a></span>toString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string opcua::detail::toString </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="elRef" href="open62541/structUA__String.html">UA_String</a> &amp;&#160;</td>
+          <td class="paramname"><em>src</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Helper_8h_source.html#l00021">21</a> of file <a class="el" href="Helper_8h_source.html">Helper.h</a>.</p>
+
+<p class="reference">References <a class="el" href="Helper_8h_source.html#l00014">toStringView()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="TypeWrapper_8h_source.html#l00133">opcua::String::get()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00179">opcua::ByteString::get()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00222">opcua::LocalizedText::getLocale()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00202">opcua::QualifiedName::getName()</a>, and <a class="el" href="TypeWrapper_8h_source.html#l00218">opcua::LocalizedText::getText()</a>.</p>
+
+</div>
+</div>
+<a id="adf2513e895bc59a84f17a6a152f97cda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf2513e895bc59a84f17a6a152f97cda">&#9670;&nbsp;</a></span>toStringView()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string_view opcua::detail::toStringView </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="elRef" href="open62541/structUA__String.html">UA_String</a> &amp;&#160;</td>
+          <td class="paramname"><em>src</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Helper_8h_source.html#l00014">14</a> of file <a class="el" href="Helper_8h_source.html">Helper.h</a>.</p>
+
+<p class="reference">References <a class="elRef" href="open62541/structUA__String.html#a337ab69f4b7d9c5e6ab1f1cb18844d07">UA_String::data</a>, and <a class="elRef" href="open62541/structUA__String.html#ab73e448dea6fc379598652f5da447b47">UA_String::length</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="TypeWrapper_8h_source.html#l00224">opcua::LocalizedText::getLocaleView()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00204">opcua::QualifiedName::getNameView()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00220">opcua::LocalizedText::getTextView()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00135">opcua::String::getView()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00181">opcua::ByteString::getView()</a>, and <a class="el" href="Helper_8h_source.html#l00021">toString()</a>.</p>
 
 </div>
 </div>

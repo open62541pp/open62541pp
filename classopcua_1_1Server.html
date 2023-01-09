@@ -113,9 +113,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a51f8bc0f79b2e5cea8fc094c58a76a9c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a51f8bc0f79b2e5cea8fc094c58a76a9c">stop</a> ()</td></tr>
 <tr class="memdesc:a51f8bc0f79b2e5cea8fc094c58a76a9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop server.  <a href="classopcua_1_1Server.html#a51f8bc0f79b2e5cea8fc094c58a76a9c">More...</a><br /></td></tr>
 <tr class="separator:a51f8bc0f79b2e5cea8fc094c58a76a9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ccfbce01f0ea51a7b4fa631166521ca"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a7ccfbce01f0ea51a7b4fa631166521ca">isRunning</a> () const</td></tr>
-<tr class="memdesc:a7ccfbce01f0ea51a7b4fa631166521ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if server is running.  <a href="classopcua_1_1Server.html#a7ccfbce01f0ea51a7b4fa631166521ca">More...</a><br /></td></tr>
-<tr class="separator:a7ccfbce01f0ea51a7b4fa631166521ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae355af01f75adbe8197353e5f5d6afd6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#ae355af01f75adbe8197353e5f5d6afd6">isRunning</a> () const noexcept</td></tr>
+<tr class="memdesc:ae355af01f75adbe8197353e5f5d6afd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if server is running.  <a href="classopcua_1_1Server.html#ae355af01f75adbe8197353e5f5d6afd6">More...</a><br /></td></tr>
+<tr class="separator:ae355af01f75adbe8197353e5f5d6afd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7231db8ed95e021dd467e7f26ad2f308"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a7231db8ed95e021dd467e7f26ad2f308">registerNamespace</a> (std::string_view name)</td></tr>
 <tr class="memdesc:a7231db8ed95e021dd467e7f26ad2f308"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register namespace. The new namespace index will be returned.  <a href="classopcua_1_1Server.html#a7231db8ed95e021dd467e7f26ad2f308">More...</a><br /></td></tr>
 <tr class="separator:a7231db8ed95e021dd467e7f26ad2f308"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -139,14 +139,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aecb81f6a8200d889707eefb132abf3f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2962a325f7b4e7f423656631751e8f7f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a2962a325f7b4e7f423656631751e8f7f">removeNode</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id)</td></tr>
 <tr class="separator:a2962a325f7b4e7f423656631751e8f7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4954e4e6f8817dab1dbe3eb434844bf5"><td class="memItemLeft" align="right" valign="top"><a class="elRef" href="open62541/structUA__Server.html">UA_Server</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a4954e4e6f8817dab1dbe3eb434844bf5">handle</a> ()</td></tr>
-<tr class="separator:a4954e4e6f8817dab1dbe3eb434844bf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58aee3395a258640176341146ec1e6f6"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" href="open62541/structUA__Server.html">UA_Server</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a58aee3395a258640176341146ec1e6f6">handle</a> () const</td></tr>
-<tr class="separator:a58aee3395a258640176341146ec1e6f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f2ba20b0aa5f17655c927f0c67d3c3f"><td class="memItemLeft" align="right" valign="top"><a class="elRef" href="open62541/structUA__ServerConfig.html">UA_ServerConfig</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a1f2ba20b0aa5f17655c927f0c67d3c3f">getConfig</a> ()</td></tr>
-<tr class="separator:a1f2ba20b0aa5f17655c927f0c67d3c3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c580ac2ec235436da5716687960534d"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" href="open62541/structUA__ServerConfig.html">UA_ServerConfig</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a5c580ac2ec235436da5716687960534d">getConfig</a> () const</td></tr>
-<tr class="separator:a5c580ac2ec235436da5716687960534d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa838cb7997896f87d0611429246e2b28"><td class="memItemLeft" align="right" valign="top"><a class="elRef" href="open62541/structUA__Server.html">UA_Server</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#aa838cb7997896f87d0611429246e2b28">handle</a> () noexcept</td></tr>
+<tr class="separator:aa838cb7997896f87d0611429246e2b28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefc19d28714fbd67aec1aa1314d020f3"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" href="open62541/structUA__Server.html">UA_Server</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#aefc19d28714fbd67aec1aa1314d020f3">handle</a> () const noexcept</td></tr>
+<tr class="separator:aefc19d28714fbd67aec1aa1314d020f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f34fcfec6b9a45ff5ec19de2fa384ad"><td class="memItemLeft" align="right" valign="top"><a class="elRef" href="open62541/structUA__ServerConfig.html">UA_ServerConfig</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a3f34fcfec6b9a45ff5ec19de2fa384ad">getConfig</a> () noexcept</td></tr>
+<tr class="separator:a3f34fcfec6b9a45ff5ec19de2fa384ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78648b66eb0239a8f6dac5fd774905f5"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" href="open62541/structUA__ServerConfig.html">UA_ServerConfig</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a78648b66eb0239a8f6dac5fd774905f5">getConfig</a> () const noexcept</td></tr>
+<tr class="separator:a78648b66eb0239a8f6dac5fd774905f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
@@ -230,28 +230,14 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a1f2ba20b0aa5f17655c927f0c67d3c3f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f2ba20b0aa5f17655c927f0c67d3c3f">&#9670;&nbsp;</a></span>getConfig() <span class="overload">[1/2]</span></h2>
+<a id="a78648b66eb0239a8f6dac5fd774905f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78648b66eb0239a8f6dac5fd774905f5">&#9670;&nbsp;</a></span>getConfig() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="elRef" href="open62541/structUA__ServerConfig.html">UA_ServerConfig</a>* opcua::Server::getConfig </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a5c580ac2ec235436da5716687960534d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5c580ac2ec235436da5716687960534d">&#9670;&nbsp;</a></span>getConfig() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">const <a class="elRef" href="open62541/structUA__ServerConfig.html">UA_ServerConfig</a>* opcua::Server::getConfig </td>
@@ -260,6 +246,36 @@ Public Member Functions</h2></td></tr>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3f34fcfec6b9a45ff5ec19de2fa384ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f34fcfec6b9a45ff5ec19de2fa384ad">&#9670;&nbsp;</a></span>getConfig() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="open62541/structUA__ServerConfig.html">UA_ServerConfig</a>* opcua::Server::getConfig </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
@@ -418,28 +434,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a4954e4e6f8817dab1dbe3eb434844bf5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4954e4e6f8817dab1dbe3eb434844bf5">&#9670;&nbsp;</a></span>handle() <span class="overload">[1/2]</span></h2>
+<a id="aefc19d28714fbd67aec1aa1314d020f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefc19d28714fbd67aec1aa1314d020f3">&#9670;&nbsp;</a></span>handle() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="elRef" href="open62541/structUA__Server.html">UA_Server</a>* opcua::Server::handle </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a58aee3395a258640176341146ec1e6f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a58aee3395a258640176341146ec1e6f6">&#9670;&nbsp;</a></span>handle() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">const <a class="elRef" href="open62541/structUA__Server.html">UA_Server</a>* opcua::Server::handle </td>
@@ -448,15 +450,48 @@ Public Member Functions</h2></td></tr>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a7ccfbce01f0ea51a7b4fa631166521ca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7ccfbce01f0ea51a7b4fa631166521ca">&#9670;&nbsp;</a></span>isRunning()</h2>
+<a id="aa838cb7997896f87d0611429246e2b28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa838cb7997896f87d0611429246e2b28">&#9670;&nbsp;</a></span>handle() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" href="open62541/structUA__Server.html">UA_Server</a>* opcua::Server::handle </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae355af01f75adbe8197353e5f5d6afd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae355af01f75adbe8197353e5f5d6afd6">&#9670;&nbsp;</a></span>isRunning()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool opcua::Server::isRunning </td>
@@ -465,6 +500,11 @@ Public Member Functions</h2></td></tr>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Check if server is running. </p>

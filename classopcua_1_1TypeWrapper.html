@@ -115,12 +115,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8b7c31d13c5bb891c8488cd567b81d48"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1TypeWrapper.html">TypeWrapper</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a8b7c31d13c5bb891c8488cd567b81d48">operator=</a> (<a class="el" href="classopcua_1_1TypeWrapper.html">TypeWrapper</a> &amp;&amp;other) noexcept</td></tr>
 <tr class="memdesc:a8b7c31d13c5bb891c8488cd567b81d48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move assignment.  <a href="classopcua_1_1TypeWrapper.html#a8b7c31d13c5bb891c8488cd567b81d48">More...</a><br /></td></tr>
 <tr class="separator:a8b7c31d13c5bb891c8488cd567b81d48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56e22818d1809da11df65463bc8d999b"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a56e22818d1809da11df65463bc8d999b">handle</a> ()</td></tr>
-<tr class="memdesc:a56e22818d1809da11df65463bc8d999b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to wrapped UA data type.  <a href="classopcua_1_1TypeWrapper.html#a56e22818d1809da11df65463bc8d999b">More...</a><br /></td></tr>
-<tr class="separator:a56e22818d1809da11df65463bc8d999b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5f5d8b0cd3ce9f855f2fde8144756fe"><td class="memItemLeft" align="right" valign="top">const T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#aa5f5d8b0cd3ce9f855f2fde8144756fe">handle</a> () const</td></tr>
-<tr class="memdesc:aa5f5d8b0cd3ce9f855f2fde8144756fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return const pointer to wrapped UA data type.  <a href="classopcua_1_1TypeWrapper.html#aa5f5d8b0cd3ce9f855f2fde8144756fe">More...</a><br /></td></tr>
-<tr class="separator:aa5f5d8b0cd3ce9f855f2fde8144756fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d820669a24d9fcc3792819b7fe4c5a9"><td class="memItemLeft" align="right" valign="top">T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a5d820669a24d9fcc3792819b7fe4c5a9">handle</a> () noexcept</td></tr>
+<tr class="memdesc:a5d820669a24d9fcc3792819b7fe4c5a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return pointer to wrapped UA data type.  <a href="classopcua_1_1TypeWrapper.html#a5d820669a24d9fcc3792819b7fe4c5a9">More...</a><br /></td></tr>
+<tr class="separator:a5d820669a24d9fcc3792819b7fe4c5a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd62b164ba7f51bdb7b7517ecb982c75"><td class="memItemLeft" align="right" valign="top">const T *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#afd62b164ba7f51bdb7b7517ecb982c75">handle</a> () const noexcept</td></tr>
+<tr class="memdesc:afd62b164ba7f51bdb7b7517ecb982c75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return const pointer to wrapped UA data type.  <a href="classopcua_1_1TypeWrapper.html#afd62b164ba7f51bdb7b7517ecb982c75">More...</a><br /></td></tr>
+<tr class="separator:afd62b164ba7f51bdb7b7517ecb982c75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -470,41 +470,8 @@ template&lt;typename T , Type type = getType&lt;T&gt;()&gt; </div>
 
 </div>
 </div>
-<a id="a56e22818d1809da11df65463bc8d999b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a56e22818d1809da11df65463bc8d999b">&#9670;&nbsp;</a></span>handle() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , Type type = getType&lt;T&gt;()&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">T* <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, type &gt;::handle </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Return pointer to wrapped UA data type. </p>
-
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00070">70</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="NodeId_8h_source.html#l00041">opcua::NodeId::operator!=()</a>, <a class="el" href="NodeId_8h_source.html#l00045">opcua::NodeId::operator&lt;()</a>, <a class="el" href="NodeId_8h_source.html#l00037">opcua::NodeId::operator==()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00127">opcua::String::operator==()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00151">opcua::Guid::operator==()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00168">opcua::ByteString::operator==()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00189">opcua::QualifiedName::operator==()</a>, and <a class="el" href="NodeId_8h_source.html#l00049">opcua::NodeId::operator&gt;()</a>.</p>
-
-</div>
-</div>
-<a id="aa5f5d8b0cd3ce9f855f2fde8144756fe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa5f5d8b0cd3ce9f855f2fde8144756fe">&#9670;&nbsp;</a></span>handle() <span class="overload">[2/2]</span></h2>
+<a id="afd62b164ba7f51bdb7b7517ecb982c75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd62b164ba7f51bdb7b7517ecb982c75">&#9670;&nbsp;</a></span>handle() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -523,7 +490,7 @@ template&lt;typename T , Type type = getType&lt;T&gt;()&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -531,6 +498,39 @@ template&lt;typename T , Type type = getType&lt;T&gt;()&gt; </div>
 <p>Return const pointer to wrapped UA data type. </p>
 
 <p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00073">73</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+
+</div>
+</div>
+<a id="a5d820669a24d9fcc3792819b7fe4c5a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d820669a24d9fcc3792819b7fe4c5a9">&#9670;&nbsp;</a></span>handle() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , Type type = getType&lt;T&gt;()&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T* <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, type &gt;::handle </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return pointer to wrapped UA data type. </p>
+
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00070">70</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="TypeWrapper_8h_source.html#l00194">opcua::QualifiedName::operator==()</a>.</p>
 
 </div>
 </div>
