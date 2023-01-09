@@ -196,6 +196,8 @@ public:
     uint16_t getNamespaceIndex() const { return handle()->namespaceIndex; }
 
     std::string getName() const { return detail::toString(handle()->name); }
+
+    std::string_view getNameView() const { return detail::toStringView(handle()->name); }
 };
 
 /**
@@ -211,7 +213,11 @@ public:
 
     std::string getText() const { return detail::toString(handle()->text); }
 
+    std::string_view getTextView() const { return detail::toStringView(handle()->text); }
+
     std::string getLocale() const { return detail::toString(handle()->locale); }
+
+    std::string_view getLocaleView() const { return detail::toStringView(handle()->locale); }
 };
 
 }  // namespace opcua
