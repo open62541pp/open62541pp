@@ -1,10 +1,10 @@
 # Project related configuration options
-PROJECT_NAME           = ${PROJECT_NAME}
-PROJECT_NUMBER         = ${PROJECT_VERSION}
-PROJECT_BRIEF          = ${PROJECT_DESCRIPTION}
+PROJECT_NAME           = "${PROJECT_NAME}"
+PROJECT_NUMBER         = "${PROJECT_VERSION}"
+PROJECT_BRIEF          = "${PROJECT_DESCRIPTION}"
 PROJECT_LOGO           =
 
-OUTPUT_DIRECTORY       = ${DOXYGEN_OUTPUT_DIR}
+OUTPUT_DIRECTORY       = "${DOXYGEN_OUTPUT_DIR}"
 OUTPUT_LANGUAGE        = English
 JAVADOC_AUTOBRIEF      = YES
 AUTOLINK_SUPPORT       = YES
@@ -59,9 +59,9 @@ DOT_TRANSPARENT        = YES
 CALL_GRAPH             = NO
 CALLER_GRAPH           = NO
 CLASS_GRAPH            = YES
-COLLABORATION_GRAPH    = YES
+COLLABORATION_GRAPH    = NO
 DIRECTORY_GRAPH        = NO
 
 # External references
 # open62541 html documentation in "open62541" subdirectory
-TAGFILES               = ${doxygen_open62541_tagfile}=open62541
+TAGFILES               = "${doxygen_open62541_tagfile}=open62541"

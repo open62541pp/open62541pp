@@ -1,6 +1,6 @@
 # Project related configuration options
-PROJECT_NAME           = open62541
-PROJECT_NUMBER         = ${open62541_version}
+PROJECT_NAME           = "open62541"
+PROJECT_NUMBER         = "${open62541_version}"
 PROJECT_BRIEF          = "Open source implementation of OPC UA"
 PROJECT_LOGO           =
 
