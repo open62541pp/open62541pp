@@ -67,10 +67,10 @@ public:
     constexpr static const UA_DataType* getDataType() { return getUaDataType(type); }
 
     /// Return pointer to wrapped UA data type
-    T* handle() { return &data_; }
+    T* handle() noexcept { return &data_; }
 
     /// Return const pointer to wrapped UA data type
-    const T* handle() const { return &data_; };
+    const T* handle() const noexcept { return &data_; };
 
 protected:
     void init() noexcept { UA_init(&data_, getDataType()); }
@@ -124,9 +124,11 @@ public:
 
     explicit String(std::string_view str) : String(UA_String{detail::allocUaString(str)}) {}
 
-    bool operator==(const String& other) const { return UA_String_equal(handle(), other.handle()); }
+    bool operator==(const String& other) const noexcept {
+        return UA_String_equal(handle(), other.handle());
+    }
 
-    bool operator!=(const String& other) const { return !operator==(other); }
+    bool operator!=(const String& other) const noexcept { return !operator==(other); }
 
     std::string get() const { return detail::toString(*handle()); }
 
@@ -148,9 +150,11 @@ public:
               {data4[0], data4[1], data4[2], data4[3], data4[4], data4[5], data4[6], data4[7]},
           }) {}
 
-    bool operator==(const Guid& other) const { return UA_Guid_equal(handle(), other.handle()); }
+    bool operator==(const Guid& other) const noexcept {
+        return UA_Guid_equal(handle(), other.handle());
+    }
 
-    bool operator!=(const Guid& other) const { return !operator==(other); }
+    bool operator!=(const Guid& other) const noexcept { return !operator==(other); }
 };
 
 /**
@@ -166,11 +170,11 @@ public:
     explicit ByteString(std::string_view str)
         : ByteString(UA_ByteString{detail::allocUaString(str)}) {}
 
-    bool operator==(const ByteString& other) const {
+    bool operator==(const ByteString& other) const noexcept {
         return UA_ByteString_equal(handle(), other.handle());
     }
 
-    bool operator!=(const ByteString& other) const { return !operator==(other); }
+    bool operator!=(const ByteString& other) const noexcept { return !operator==(other); }
 
     std::string get() const { return detail::toString(*handle()); }
 
@@ -193,7 +197,7 @@ public:
 
     bool operator!=(const QualifiedName& other) const { return !operator==(other); }
 
-    uint16_t getNamespaceIndex() const { return handle()->namespaceIndex; }
+    uint16_t getNamespaceIndex() const noexcept { return handle()->namespaceIndex; }
 
     std::string getName() const { return detail::toString(handle()->name); }
 

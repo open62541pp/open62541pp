@@ -27,16 +27,16 @@ public:
     /// Create NodeId with ByteString identifier
     NodeId(const ByteString& identifier, UA_UInt16 namespaceIndex);
 
-    bool operator==(const NodeId& other) const;
-    bool operator!=(const NodeId& other) const;
-    bool operator<(const NodeId& other) const;
-    bool operator>(const NodeId& other) const;
+    bool operator==(const NodeId& other) const noexcept;
+    bool operator!=(const NodeId& other) const noexcept;
+    bool operator<(const NodeId& other) const noexcept;
+    bool operator>(const NodeId& other) const noexcept;
 
     UA_UInt32 hash() const;
 
-    UA_UInt16 getNamespaceIndex() const;
+    UA_UInt16 getNamespaceIndex() const noexcept;
 
-    UA_NodeIdType getIdentifierType() const;
+    UA_NodeIdType getIdentifierType() const noexcept;
 
     std::variant<UA_UInt32, String, Guid, ByteString> getIdentifier() const;
 };

@@ -73,7 +73,7 @@ public:
         running_ = false;
     }
 
-    bool isRunning() const { return running_; }
+    bool isRunning() const noexcept { return running_; }
 
     void setLogger(Logger logger) {
         logger_ = std::move(logger);
@@ -106,9 +106,9 @@ public:
         instance->logger_(static_cast<LogLevel>(level), static_cast<LogCategory>(category), sv);
     }
 
-    UA_ServerConfig* getConfig() { return UA_Server_getConfig(server_); }
+    UA_ServerConfig* getConfig() noexcept { return UA_Server_getConfig(server_); }
 
-    UA_Server* handle() { return server_; }
+    UA_Server* handle() noexcept { return server_; }
 
 private:
     UA_Server* server_;
@@ -234,7 +234,7 @@ void Server::stop() {
     connection_->stop();
 }
 
-bool Server::isRunning() const {
+bool Server::isRunning() const noexcept {
     return connection_->isRunning();
 }
 
@@ -278,19 +278,19 @@ Node Server::getReferenceTypesNode() {
     return {*this, {UA_NS0ID_REFERENCETYPESFOLDER, 0}};
 }
 
-UA_Server* Server::handle() {
+UA_Server* Server::handle() noexcept {
     return connection_->handle();
 }
 
-const UA_Server* Server::handle() const {
+const UA_Server* Server::handle() const noexcept {
     return connection_->handle();
 }
 
-UA_ServerConfig* Server::getConfig() {
+UA_ServerConfig* Server::getConfig() noexcept {
     return connection_->getConfig();
 }
 
-const UA_ServerConfig* Server::getConfig() const {
+const UA_ServerConfig* Server::getConfig() const noexcept {
     return connection_->getConfig();
 }
 

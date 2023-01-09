@@ -38,19 +38,19 @@ NodeId::NodeId(const ByteString& identifier, UA_UInt16 namespaceIndex)
     : NodeId(fromStringView(namespaceIndex, UA_NODEIDTYPE_BYTESTRING, identifier.getView())) {
 }
 
-bool NodeId::operator==(const NodeId& other) const {
+bool NodeId::operator==(const NodeId& other) const noexcept {
     return UA_NodeId_order(handle(), other.handle()) == UA_ORDER_EQ;
 }
 
-bool NodeId::operator!=(const NodeId& other) const {
+bool NodeId::operator!=(const NodeId& other) const noexcept {
     return UA_NodeId_order(handle(), other.handle()) != UA_ORDER_EQ;
 }
 
-bool NodeId::operator<(const NodeId& other) const {
+bool NodeId::operator<(const NodeId& other) const noexcept {
     return UA_NodeId_order(handle(), other.handle()) == UA_ORDER_LESS;
 }
 
-bool NodeId::operator>(const NodeId& other) const {
+bool NodeId::operator>(const NodeId& other) const noexcept {
     return UA_NodeId_order(handle(), other.handle()) == UA_ORDER_MORE;
 }
 
@@ -58,11 +58,11 @@ UA_UInt32 NodeId::hash() const {
     return UA_NodeId_hash(handle());
 }
 
-UA_UInt16 NodeId::getNamespaceIndex() const {
+UA_UInt16 NodeId::getNamespaceIndex() const noexcept {
     return handle()->namespaceIndex;
 }
 
-UA_NodeIdType NodeId::getIdentifierType() const {
+UA_NodeIdType NodeId::getIdentifierType() const noexcept {
     return handle()->identifierType;
 }
 

@@ -53,7 +53,7 @@ public:
     /// Stop server.
     void stop();
     /// Check if server is running.
-    bool isRunning() const;
+    bool isRunning() const noexcept;
 
     /// Register namespace. The new namespace index will be returned.
     uint16_t registerNamespace(std::string_view name);
@@ -70,11 +70,11 @@ public:
 
     void removeNode(const NodeId& id);
 
-    UA_Server* handle();
-    const UA_Server* handle() const;
+    UA_Server* handle() noexcept;
+    const UA_Server* handle() const noexcept;
 
-    UA_ServerConfig* getConfig();
-    const UA_ServerConfig* getConfig() const;
+    UA_ServerConfig* getConfig() noexcept;
+    const UA_ServerConfig* getConfig() const noexcept;
 
 private:
     class Connection;

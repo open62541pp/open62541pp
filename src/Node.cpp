@@ -31,7 +31,11 @@ Node::Node(const Server& server, const NodeId& id)  // NOLINT
     }
 }
 
-NodeClass Node::getNodeClass() {
+const NodeId& Node::getNodeId() const noexcept {
+    return nodeId_;
+}
+
+NodeClass Node::getNodeClass() const noexcept {
     return nodeClass_;
 }
 

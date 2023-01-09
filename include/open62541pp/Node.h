@@ -20,10 +20,10 @@ public:
     // getChildNodes?
 
     /// Get node id.
-    NodeId getNodeId() const { return nodeId_; }
+    const NodeId& getNodeId() const noexcept;
 
     /// Get node class.
-    NodeClass getNodeClass();
+    NodeClass getNodeClass() const noexcept;
 
     /// Get browse name.
     std::string getBrowseName();
