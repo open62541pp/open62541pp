@@ -28,9 +28,9 @@ public:
     /// Get browse name.
     std::string getBrowseName();
     /// Get localized display name.
-    std::string getDisplayName();
+    LocalizedText getDisplayName();
     /// Get localized description.
-    std::string getDescription();
+    LocalizedText getDescription();
     /// Get write mask, e.g. `::UA_WRITEMASK_ACCESSLEVEL | ::UA_WRITEMASK_DESCRIPTION`.
     uint32_t getWriteMask();
     // uint32_t getUserWriteMask();

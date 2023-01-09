@@ -48,22 +48,22 @@ std::string Node::getBrowseName() {
     return name.getName();
 }
 
-std::string Node::getDisplayName() {
+LocalizedText Node::getDisplayName() {
     LocalizedText text("");
     const auto status = UA_Server_readDisplayName(
         server_.handle(), *nodeId_.handle(), text.handle()
     );
     detail::checkStatusCodeException(status);
-    return text.getText();
+    return text;
 }
 
-std::string Node::getDescription() {
+LocalizedText Node::getDescription() {
     LocalizedText text("");
     const auto status = UA_Server_readDescription(
         server_.handle(), *nodeId_.handle(), text.handle()
     );
     detail::checkStatusCodeException(status);
-    return text.getText();
+    return text;
 }
 
 uint32_t Node::getWriteMask() {
