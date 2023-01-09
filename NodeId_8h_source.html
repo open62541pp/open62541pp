@@ -144,18 +144,19 @@ $(function() {
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keyword">static</span> <a class="codeRef" href="open62541/structUA__NodeId.html">UA_NodeId</a> fromStringView(</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <a class="codeRef" href="open62541/types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a> namespaceIndex, <a class="codeRef" href="open62541/types_8h.html#a026f31872abc03d18b81763d94f18904">UA_NodeIdType</a> identifierType, std::string_view identifier</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    ) {</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        assert(</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;            identifierType == UA_NODEIDTYPE_STRING || identifierType == UA_NODEIDTYPE_BYTESTRING</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        );  <span class="comment">// NOLINT</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <a class="codeRef" href="open62541/structUA__NodeId.html">UA_NodeId</a> result;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        result.<a class="codeRef" href="open62541/structUA__NodeId.html#ad9fec32e38f81fb6b22abdba1c047ce6">namespaceIndex</a> = namespaceIndex;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        result.<a class="codeRef" href="open62541/structUA__NodeId.html#a525dd4ac72bb569babda7aad2769f707">identifierType</a> = identifierType;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        result.<a class="codeRef" href="open62541/structUA__NodeId.html#aef237cab628d78e48e1592a105d99031">identifier</a>.<a class="codeRef" href="open62541/structUA__NodeId.html#ad8656745fcaf75f1482e2644a7ea0eb1">string</a> = <a class="code" href="namespaceopcua.html#a2c9ce8f5ebcb92c87fe05405d1316c0b">allocUaString</a>(identifier);  <span class="comment">// NOLINT</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keywordflow">return</span> result;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    }</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;};</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;}  <span class="comment">// namespace opcua</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="comment">// NOLINTNEXTLINE</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        assert(</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            identifierType == UA_NODEIDTYPE_STRING || identifierType == UA_NODEIDTYPE_BYTESTRING</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        );</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <a class="codeRef" href="open62541/structUA__NodeId.html">UA_NodeId</a> result;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        result.<a class="codeRef" href="open62541/structUA__NodeId.html#ad9fec32e38f81fb6b22abdba1c047ce6">namespaceIndex</a> = namespaceIndex;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        result.<a class="codeRef" href="open62541/structUA__NodeId.html#a525dd4ac72bb569babda7aad2769f707">identifierType</a> = identifierType;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        result.<a class="codeRef" href="open62541/structUA__NodeId.html#aef237cab628d78e48e1592a105d99031">identifier</a>.<a class="codeRef" href="open62541/structUA__NodeId.html#ad8656745fcaf75f1482e2644a7ea0eb1">string</a> = <a class="code" href="namespaceopcua.html#a2c9ce8f5ebcb92c87fe05405d1316c0b">allocUaString</a>(identifier);  <span class="comment">// NOLINT</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    }</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;};</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;}  <span class="comment">// namespace opcua</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="astructUA__NodeId_html_ad9fec32e38f81fb6b22abdba1c047ce6"><div class="ttname"><a href="open62541/structUA__NodeId.html#ad9fec32e38f81fb6b22abdba1c047ce6">UA_NodeId::namespaceIndex</a></div><div class="ttdeci">UA_UInt16 namespaceIndex</div></div>
 <div class="ttc" id="aclassopcua_1_1NodeId_html_a8d7a199d400a8e0f171aede73830a1fe"><div class="ttname"><a href="classopcua_1_1NodeId.html#a8d7a199d400a8e0f171aede73830a1fe">opcua::NodeId::operator!=</a></div><div class="ttdeci">bool operator!=(const NodeId &amp;other) const</div><div class="ttdef"><b>Definition:</b> <a href="NodeId_8h_source.html#l00041">NodeId.h:41</a></div></div>
