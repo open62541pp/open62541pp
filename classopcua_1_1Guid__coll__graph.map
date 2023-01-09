@@ -1,6 +1,4 @@
 <map id="opcua::Guid" name="opcua::Guid">
-<area shape="rect" id="node1" title="UA_Guid wrapper class." alt="" coords="128,185,227,212"/>
-<area shape="rect" id="node2" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="100,95,255,136"/>
-<area shape="rect" id="node3" href="$classopcua_1_1TypeWrapperBase.html" title=" " alt="" coords="5,5,192,32"/>
-<area shape="rect" id="node4" href="/home/runner/work/open62541pp/open62541pp/build/doxygen_open62541/open62541.tag$structUA__Guid.html" title=" " alt="" coords="217,5,295,32"/>
+<area shape="rect" id="node1" title="UA_Guid wrapper class." alt="" coords="33,95,132,121"/>
+<area shape="rect" id="node2" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,5,160,47"/>
 </map>

@@ -1,7 +1,4 @@
 <map id="opcua::QualifiedName" name="opcua::QualifiedName">
-<area shape="rect" id="node1" title="UA_QualifiedName wrapper class." alt="" coords="37,275,203,301"/>
-<area shape="rect" id="node2" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="33,184,207,225"/>
-<area shape="rect" id="node3" href="$classopcua_1_1TypeWrapperBase.html" title=" " alt="" coords="5,95,192,121"/>
-<area shape="rect" id="node4" href="/home/runner/work/open62541pp/open62541pp/build/doxygen_open62541/open62541.tag$structUA__QualifiedName.html" title=" " alt="" coords="217,95,362,121"/>
-<area shape="rect" id="node5" href="/home/runner/work/open62541pp/open62541pp/build/doxygen_open62541/open62541.tag$structUA__String.html" title=" " alt="" coords="246,5,333,32"/>
+<area shape="rect" id="node1" title="UA_QualifiedName wrapper class." alt="" coords="9,95,176,121"/>
+<area shape="rect" id="node2" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,5,180,47"/>
 </map>

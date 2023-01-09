@@ -71,7 +71,6 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classopcua_1_1Node-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">opcua::Node Class Reference</div>  </div>
@@ -79,12 +78,6 @@ $(function() {
 <div class="contents">
 
 <p><code>#include &lt;<a class="el" href="Node_8h_source.html">Node.h</a>&gt;</code></p>
-<div class="dynheader">
-Collaboration diagram for opcua::Node:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classopcua_1_1Node__coll__graph.svg" width="440" height="411"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -183,15 +176,6 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:ab826da68b3953a8017ae4c9f57dcbfdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9759c0ee8b8a828f84d8b4e27daee496"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a9759c0ee8b8a828f84d8b4e27daee496">readVariantFromServer</a> (<a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;var) noexcept</td></tr>
 <tr class="separator:a9759c0ee8b8a828f84d8b4e27daee496"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:af05bf4c141424309ed50795133227512"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Server.html">Server</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#af05bf4c141424309ed50795133227512">server_</a></td></tr>
-<tr class="separator:af05bf4c141424309ed50795133227512"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e03baf33f8153c69d7e4e1c0304a469"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1NodeId.html">NodeId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a2e03baf33f8153c69d7e4e1c0304a469">nodeId_</a></td></tr>
-<tr class="separator:a2e03baf33f8153c69d7e4e1c0304a469"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a43fed947943de0f8e12853b55d96dc5f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6d">NodeClass</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a43fed947943de0f8e12853b55d96dc5f">nodeClass_</a></td></tr>
-<tr class="separator:a43fed947943de0f8e12853b55d96dc5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
@@ -572,8 +556,6 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00023">23</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Node_8h_source.html#l00113">nodeId_</a>.</p>
-
 </div>
 </div>
 <a id="af83bd03e2a775e2d8f37de46134674f3"></a>
@@ -640,11 +622,9 @@ template&lt;typename... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00117">117</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00113">113</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Node_8h_source.html#l00114">nodeClass_</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00123">requireNodeClass()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00119">requireNodeClass()</a>.</p>
 
 </div>
 </div>
@@ -675,7 +655,7 @@ template&lt;typename T &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00095">95</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Variant_8h_source.html#l00052">opcua::Variant::readScalar()</a>, and <a class="el" href="classopcua_1_1Node.html#a9759c0ee8b8a828f84d8b4e27daee496">readVariantFromServer()</a>.</p>
+<p class="reference">References <a class="el" href="Variant_8h_source.html#l00054">opcua::Variant::readScalar()</a>, and <a class="el" href="classopcua_1_1Node.html#a9759c0ee8b8a828f84d8b4e27daee496">readVariantFromServer()</a>.</p>
 
 </div>
 </div>
@@ -706,7 +686,7 @@ template&lt;typename T &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00102">102</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Variant_8h_source.html#l00072">opcua::Variant::readArray()</a>, <a class="el" href="classopcua_1_1Node.html#a9759c0ee8b8a828f84d8b4e27daee496">readVariantFromServer()</a>, <a class="el" href="Node_8h_source.html#l00123">requireNodeClass()</a>, and <a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6da47c14840d8e15331fa420b9b2f757cd9">opcua::Variable</a>.</p>
+<p class="reference">References <a class="el" href="Variant_8h_source.html#l00066">opcua::Variant::readArray()</a>, <a class="el" href="classopcua_1_1Node.html#a9759c0ee8b8a828f84d8b4e27daee496">readVariantFromServer()</a>, <a class="el" href="Node_8h_source.html#l00119">requireNodeClass()</a>, and <a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6da47c14840d8e15331fa420b9b2f757cd9">opcua::Variable</a>.</p>
 
 </div>
 </div>
@@ -781,9 +761,9 @@ template&lt;typename... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00123">123</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00119">119</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Types_8h_source.html#l00053">opcua::getNodeClassName()</a>, <a class="el" href="Node_8h_source.html#l00117">isNodeClass()</a>, and <a class="el" href="Node_8h_source.html#l00114">nodeClass_</a>.</p>
+<p class="reference">References <a class="el" href="Types_8h_source.html#l00053">opcua::getNodeClassName()</a>, and <a class="el" href="Node_8h_source.html#l00113">isNodeClass()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00102">readArray()</a>, and <a class="el" href="Node_8h_source.html#l00088">writeArray()</a>.</p>
 
@@ -1031,7 +1011,7 @@ template&lt;typename Arg &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00088">88</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Node_8h_source.html#l00123">requireNodeClass()</a>, <a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6da47c14840d8e15331fa420b9b2f757cd9">opcua::Variable</a>, and <a class="el" href="classopcua_1_1Node.html#ab826da68b3953a8017ae4c9f57dcbfdf">writeVariantToServer()</a>.</p>
+<p class="reference">References <a class="el" href="Node_8h_source.html#l00119">requireNodeClass()</a>, <a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6da47c14840d8e15331fa420b9b2f757cd9">opcua::Variable</a>, and <a class="el" href="classopcua_1_1Node.html#ab826da68b3953a8017ae4c9f57dcbfdf">writeVariantToServer()</a>.</p>
 
 </div>
 </div>
@@ -1060,83 +1040,6 @@ template&lt;typename Arg &gt; </div>
 </div><div class="memdoc">
 
 <p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00082">write()</a>, and <a class="el" href="Node_8h_source.html#l00088">writeArray()</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="a43fed947943de0f8e12853b55d96dc5f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a43fed947943de0f8e12853b55d96dc5f">&#9670;&nbsp;</a></span>nodeClass_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6d">NodeClass</a> opcua::Node::nodeClass_</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00114">114</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00117">isNodeClass()</a>, and <a class="el" href="Node_8h_source.html#l00123">requireNodeClass()</a>.</p>
-
-</div>
-</div>
-<a id="a2e03baf33f8153c69d7e4e1c0304a469"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2e03baf33f8153c69d7e4e1c0304a469">&#9670;&nbsp;</a></span>nodeId_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1NodeId.html">NodeId</a> opcua::Node::nodeId_</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00113">113</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00023">getNodeId()</a>.</p>
-
-</div>
-</div>
-<a id="af05bf4c141424309ed50795133227512"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af05bf4c141424309ed50795133227512">&#9670;&nbsp;</a></span>server_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Server.html">Server</a> opcua::Node::server_</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00112">112</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>

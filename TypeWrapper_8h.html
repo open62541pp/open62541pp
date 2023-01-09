@@ -70,7 +70,9 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">TypeWrapper.h File Reference</div>  </div>
 </div><!--header-->
@@ -78,13 +80,14 @@ $(function() {
 <div class="textblock"><code>#include &lt;algorithm&gt;</code><br />
 <code>#include &lt;array&gt;</code><br />
 <code>#include &lt;type_traits&gt;</code><br />
+<code>#include &lt;utility&gt;</code><br />
 <code>#include &quot;<a class="el" href="ErrorHandling_8h_source.html">open62541pp/ErrorHandling.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Helper_8h_source.html">open62541pp/Helper.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Types_8h_source.html">open62541pp/Types.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for TypeWrapper.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="TypeWrapper_8h__incl.svg" width="915" height="306"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="TypeWrapper_8h__incl.svg" width="931" height="306"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -98,8 +101,6 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapperBase.html">opcua::TypeWrapperBase</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; T, type &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template base class to wrap UA_* type objects.  <a href="classopcua_1_1TypeWrapper.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -123,6 +124,22 @@ Classes</h2></td></tr>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespaceopcua"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html">opcua</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespaceopcua_1_1detail"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html">opcua::detail</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a6f6a9d9d89858dc4cd64637b4e252935"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a6f6a9d9d89858dc4cd64637b4e252935"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a6f6a9d9d89858dc4cd64637b4e252935">opcua::detail::IsTypeWrapper</a> = decltype(isTypeWrapperImpl(std::declval&lt; T * &gt;()))</td></tr>
+<tr class="separator:a6f6a9d9d89858dc4cd64637b4e252935"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ad45795dab04da50d546fdfa8a87cc5c9"><td class="memTemplParams" colspan="2">template&lt;typename T , Type type&gt; </td></tr>
+<tr class="memitem:ad45795dab04da50d546fdfa8a87cc5c9"><td class="memTemplItemLeft" align="right" valign="top">std::true_type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ad45795dab04da50d546fdfa8a87cc5c9">opcua::detail::isTypeWrapperImpl</a> (TypeWrapper&lt; T, type &gt; *)</td></tr>
+<tr class="separator:ad45795dab04da50d546fdfa8a87cc5c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f5928ebb3f1e8f9eecf59d26eb8310c"><td class="memItemLeft" align="right" valign="top">std::false_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a7f5928ebb3f1e8f9eecf59d26eb8310c">opcua::detail::isTypeWrapperImpl</a> (...)</td></tr>
+<tr class="separator:a7f5928ebb3f1e8f9eecf59d26eb8310c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

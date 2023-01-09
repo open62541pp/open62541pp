@@ -69,7 +69,9 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">opcua::detail Namespace Reference</div>  </div>
 </div><!--header-->
@@ -77,9 +79,81 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1always__false.html">always_false</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1AlwaysFalse.html">AlwaysFalse</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a6f6a9d9d89858dc4cd64637b4e252935"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a6f6a9d9d89858dc4cd64637b4e252935"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a6f6a9d9d89858dc4cd64637b4e252935">IsTypeWrapper</a> = decltype(<a class="el" href="namespaceopcua_1_1detail.html#ad45795dab04da50d546fdfa8a87cc5c9">isTypeWrapperImpl</a>(std::declval&lt; T * &gt;()))</td></tr>
+<tr class="separator:a6f6a9d9d89858dc4cd64637b4e252935"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ad45795dab04da50d546fdfa8a87cc5c9"><td class="memTemplParams" colspan="2">template&lt;typename T , Type type&gt; </td></tr>
+<tr class="memitem:ad45795dab04da50d546fdfa8a87cc5c9"><td class="memTemplItemLeft" align="right" valign="top">std::true_type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ad45795dab04da50d546fdfa8a87cc5c9">isTypeWrapperImpl</a> (<a class="el" href="classopcua_1_1TypeWrapper.html">TypeWrapper</a>&lt; T, type &gt; *)</td></tr>
+<tr class="separator:ad45795dab04da50d546fdfa8a87cc5c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f5928ebb3f1e8f9eecf59d26eb8310c"><td class="memItemLeft" align="right" valign="top">std::false_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a7f5928ebb3f1e8f9eecf59d26eb8310c">isTypeWrapperImpl</a> (...)</td></tr>
+<tr class="separator:a7f5928ebb3f1e8f9eecf59d26eb8310c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Typedef Documentation</h2>
+<a id="a6f6a9d9d89858dc4cd64637b4e252935"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f6a9d9d89858dc4cd64637b4e252935">&#9670;&nbsp;</a></span>IsTypeWrapper</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespaceopcua_1_1detail.html#a6f6a9d9d89858dc4cd64637b4e252935">opcua::detail::IsTypeWrapper</a> = typedef decltype(<a class="el" href="namespaceopcua_1_1detail.html#ad45795dab04da50d546fdfa8a87cc5c9">isTypeWrapperImpl</a>(std::declval&lt;T*&gt;()))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00112">112</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a7f5928ebb3f1e8f9eecf59d26eb8310c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f5928ebb3f1e8f9eecf59d26eb8310c">&#9670;&nbsp;</a></span>isTypeWrapperImpl() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::false_type opcua::detail::isTypeWrapperImpl </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad45795dab04da50d546fdfa8a87cc5c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad45795dab04da50d546fdfa8a87cc5c9">&#9670;&nbsp;</a></span>isTypeWrapperImpl() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , Type type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::true_type opcua::detail::isTypeWrapperImpl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1TypeWrapper.html">TypeWrapper</a>&lt; T, type &gt; *&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

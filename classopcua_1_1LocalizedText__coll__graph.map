@@ -1,7 +1,4 @@
 <map id="opcua::LocalizedText" name="opcua::LocalizedText">
-<area shape="rect" id="node1" title="UA_LocalizedText wrapper class." alt="" coords="77,289,235,316"/>
-<area shape="rect" id="node2" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="73,199,239,240"/>
-<area shape="rect" id="node3" href="$classopcua_1_1TypeWrapperBase.html" title=" " alt="" coords="5,109,192,136"/>
-<area shape="rect" id="node4" href="/home/runner/work/open62541pp/open62541pp/build/doxygen_open62541/open62541.tag$structUA__LocalizedText.html" title=" " alt="" coords="216,109,352,136"/>
-<area shape="rect" id="node5" href="/home/runner/work/open62541pp/open62541pp/build/doxygen_open62541/open62541.tag$structUA__String.html" title=" " alt="" coords="241,5,327,32"/>
+<area shape="rect" id="node1" title="UA_LocalizedText wrapper class." alt="" coords="10,95,167,121"/>
+<area shape="rect" id="node2" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,5,172,47"/>
 </map>

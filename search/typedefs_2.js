@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['uatype_3952',['UaType',['../classopcua_1_1TypeWrapper.html#a99a83d5abc498d6b7965c7b8f7b921cb',1,'opcua::TypeWrapper']]]
+  ['logger_3943',['Logger',['../namespaceopcua.html#addbefbd9d221be59908c6f60dc54238a',1,'opcua']]]
 ];
