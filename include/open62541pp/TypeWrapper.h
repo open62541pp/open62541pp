@@ -128,9 +128,9 @@ public:
 
     bool operator!=(const String& other) const { return !operator==(other); }
 
-    std::string get() const { return uaStringToString(*handle()); }
+    std::string get() const { return toString(*handle()); }
 
-    std::string_view getView() const { return uaStringToStringView(*handle()); }
+    std::string_view getView() const { return toStringView(*handle()); }
 };
 
 /**
@@ -171,9 +171,9 @@ public:
 
     bool operator!=(const ByteString& other) const { return !operator==(other); }
 
-    std::string get() const { return uaStringToString(*handle()); }
+    std::string get() const { return toString(*handle()); }
 
-    std::string_view getView() const { return uaStringToStringView(*handle()); }
+    std::string_view getView() const { return toStringView(*handle()); }
 };
 
 /**
@@ -194,7 +194,7 @@ public:
 
     uint16_t getNamespaceIndex() const { return handle()->namespaceIndex; }
 
-    std::string getName() const { return uaStringToString(handle()->name); }
+    std::string getName() const { return toString(handle()->name); }
 };
 
 /**
@@ -207,9 +207,9 @@ public:
     LocalizedText(std::string_view text, std::string_view locale = "")  // NOLINT
         : LocalizedText(UA_LocalizedText{allocUaString(locale), allocUaString(text)}) {}
 
-    std::string getText() const { return uaStringToString(handle()->text); }
+    std::string getText() const { return toString(handle()->text); }
 
-    std::string getLocale() const { return uaStringToString(handle()->locale); }
+    std::string getLocale() const { return toString(handle()->locale); }
 };
 
 }  // namespace opcua

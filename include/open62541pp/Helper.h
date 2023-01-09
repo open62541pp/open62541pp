@@ -8,11 +8,11 @@
 
 namespace opcua {
 
-inline UA_String allocUaString(const std::string& src) noexcept {
+inline UA_String allocUaString(const std::string& src) {
     return UA_String_fromChars(src.c_str());
 }
 
-inline UA_String allocUaString(std::string_view src) noexcept {
+inline UA_String allocUaString(std::string_view src) {
     UA_String s;
     s.length = src.size();
     s.data = nullptr;
@@ -26,18 +26,15 @@ inline UA_String allocUaString(std::string_view src) noexcept {
     return s;
 }
 
-inline std::string uaStringToString(const UA_String& src) noexcept {
+inline std::string_view toStringView(const UA_String& src) {
     if (src.data == nullptr) {
         return {};
     }
     return {(char*)src.data, src.length};  // NOLINT
 }
 
-inline std::string_view uaStringToStringView(const UA_String& src) noexcept {
-    if (src.data == nullptr) {
-        return {};
-    }
-    return {(char*)src.data, src.length};  // NOLINT
+inline std::string toString(const UA_String& src) {
+    return std::string(toStringView(src));
 }
 
 }  // namespace opcua

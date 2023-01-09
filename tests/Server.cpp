@@ -2,6 +2,7 @@
 #include <thread>
 
 #include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_string.hpp>
 
 #include "open62541pp/Helper.h"
 #include "open62541pp/Node.h"
@@ -10,6 +11,7 @@
 
 #include "open62541_impl.h"
 
+using namespace Catch::Matchers;
 using namespace std::chrono_literals;
 using namespace opcua;
 
@@ -51,21 +53,21 @@ TEST_CASE("Server") {
         auto* config = UA_Server_getConfig(server.handle());
 
         server.setCustomHostname("customhost");
-        REQUIRE(uaStringToString(config->customHostname) == "customhost");
+        REQUIRE_THAT(toString(config->customHostname), Equals("customhost"));
 
         server.setApplicationName("Test App");
-        REQUIRE(
-            uaStringToString(config->applicationDescription.applicationName.text) == "Test App"
+        REQUIRE_THAT(
+            toString(config->applicationDescription.applicationName.text), Equals("Test App")
         );
 
         server.setApplicationUri("http://app.com");
-        REQUIRE(
-            uaStringToString(config->applicationDescription.applicationUri) == "http://app.com"
+        REQUIRE_THAT(
+            toString(config->applicationDescription.applicationUri), Equals("http://app.com")
         );
 
         server.setProductUri("http://product.com");
-        REQUIRE(
-            uaStringToString(config->applicationDescription.productUri) == "http://product.com"
+        REQUIRE_THAT(
+            toString(config->applicationDescription.productUri), Equals("http://product.com")
         );
     }
 

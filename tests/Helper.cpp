@@ -8,17 +8,17 @@ using namespace opcua;
 
 TEST_CASE("String conversion UA_String -> string") {
     UA_String testString = UA_STRING_ALLOC("test123");
-    REQUIRE(uaStringToString(testString) == "test123");
+    REQUIRE(toString(testString) == "test123");
     UA_String_clear(&testString);
 
     SECTION("Null string") {
         UA_String nullString{};
-        REQUIRE(uaStringToString(nullString).empty());
+        REQUIRE(toString(nullString).empty());
     }
 
     SECTION("Empty string") {
         UA_String emptyString = UA_STRING_ALLOC("");
-        REQUIRE(uaStringToString(emptyString).empty());
+        REQUIRE(toString(emptyString).empty());
         UA_String_clear(&emptyString);
     }
 }
