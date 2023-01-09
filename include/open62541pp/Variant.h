@@ -78,7 +78,7 @@ public:
     void setArray(const T* array, size_t size) {
         clear();
         const auto status = UA_Variant_setArrayCopy(handle(), array, size, getUaDataType<T>());
-        checkStatusCodeException(status);
+        detail::checkStatusCodeException(status);
         handle()->storageType = UA_VARIANT_DATA;
     }
 
@@ -116,7 +116,7 @@ private:
     void setScalarImpl(T value) {
         clear();
         const auto status = UA_Variant_setScalarCopy(handle(), &value, getUaDataType<T>());
-        checkStatusCodeException(status);
+        detail::checkStatusCodeException(status);
         handle()->storageType = UA_VARIANT_DATA;
     }
 };

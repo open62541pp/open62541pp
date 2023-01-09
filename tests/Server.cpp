@@ -53,21 +53,24 @@ TEST_CASE("Server") {
         auto* config = UA_Server_getConfig(server.handle());
 
         server.setCustomHostname("customhost");
-        REQUIRE_THAT(toString(config->customHostname), Equals("customhost"));
+        REQUIRE_THAT(detail::toString(config->customHostname), Equals("customhost"));
 
         server.setApplicationName("Test App");
         REQUIRE_THAT(
-            toString(config->applicationDescription.applicationName.text), Equals("Test App")
+            detail::toString(config->applicationDescription.applicationName.text),
+            Equals("Test App")
         );
 
         server.setApplicationUri("http://app.com");
         REQUIRE_THAT(
-            toString(config->applicationDescription.applicationUri), Equals("http://app.com")
+            detail::toString(config->applicationDescription.applicationUri),
+            Equals("http://app.com")
         );
 
         server.setProductUri("http://product.com");
         REQUIRE_THAT(
-            toString(config->applicationDescription.productUri), Equals("http://product.com")
+            detail::toString(config->applicationDescription.productUri),
+            Equals("http://product.com")
         );
     }
 

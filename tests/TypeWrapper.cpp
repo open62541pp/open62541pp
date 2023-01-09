@@ -3,7 +3,7 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_string.hpp>
 
-#include "open62541pp/Helper.h"  // toString
+#include "open62541pp/Helper.h"  // detail::toString
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/Types.h"
 
@@ -35,11 +35,11 @@ TEST_CASE("TypeWrapper") {
 
         TypeWrapper<UA_String> wrapperConstructor(wrapper1);
         REQUIRE(wrapperConstructor.handle()->data != wrapper1.handle()->data);
-        REQUIRE_THAT(toString(*wrapperConstructor.handle()), Equals("String1"));
+        REQUIRE_THAT(detail::toString(*wrapperConstructor.handle()), Equals("String1"));
 
         TypeWrapper<UA_String> wrapperAssignmnet = wrapper2;
         REQUIRE(wrapperAssignmnet.handle()->data != wrapper2.handle()->data);
-        REQUIRE_THAT(toString(*wrapperAssignmnet.handle()), Equals("String2"));
+        REQUIRE_THAT(detail::toString(*wrapperAssignmnet.handle()), Equals("String2"));
     }
 
     SECTION("Move constructor / assignment") {

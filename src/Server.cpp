@@ -52,7 +52,7 @@ public:
         }
 
         const auto status = UA_Server_run_startup(server_);
-        checkStatusCodeException(status);
+        detail::checkStatusCodeException(status);
         running_ = true;
         while (running_) {
             // references:
@@ -69,7 +69,7 @@ public:
         }
 
         const auto status = UA_Server_run_shutdown(this->server_);
-        checkStatusCodeException(status);
+        detail::checkStatusCodeException(status);
         running_ = false;
     }
 
@@ -120,13 +120,13 @@ private:
 
 Server::Server() : connection_(std::make_shared<Connection>()) {
     const auto status = UA_ServerConfig_setDefault(getConfig());
-    checkStatusCodeException(status);
+    detail::checkStatusCodeException(status);
     connection_->applyDefaults();
 }
 
 Server::Server(uint16_t port) : connection_(std::make_shared<Connection>()) {
     const auto status = UA_ServerConfig_setMinimal(getConfig(), port, nullptr);
-    checkStatusCodeException(status);
+    detail::checkStatusCodeException(status);
     connection_->applyDefaults();
 }
 
@@ -135,7 +135,7 @@ Server::Server(uint16_t port, std::string_view certificate)
     const auto status = UA_ServerConfig_setMinimal(
         getConfig(), port, ByteString(certificate).handle()
     );
-    checkStatusCodeException(status);
+    detail::checkStatusCodeException(status);
     connection_->applyDefaults();
 }
 
@@ -163,7 +163,7 @@ static void copyApplicationDescriptionToEndpoints(UA_ServerConfig* config) {
 void Server::setCustomHostname(std::string_view hostname) {
     auto& ref = getConfig()->customHostname;
     UA_String_clear(&ref);
-    ref = allocUaString(hostname);
+    ref = detail::allocUaString(hostname);
 }
 
 void Server::setApplicationName(std::string_view name) {
@@ -176,14 +176,14 @@ void Server::setApplicationName(std::string_view name) {
 void Server::setApplicationUri(std::string_view uri) {
     auto& ref = getConfig()->applicationDescription.applicationUri;
     UA_String_clear(&ref);
-    ref = allocUaString(uri);
+    ref = detail::allocUaString(uri);
     copyApplicationDescriptionToEndpoints(getConfig());
 }
 
 void Server::setProductUri(std::string_view uri) {
     auto& ref = getConfig()->applicationDescription.productUri;
     UA_String_clear(&ref);
-    ref = allocUaString(uri);
+    ref = detail::allocUaString(uri);
     copyApplicationDescriptionToEndpoints(getConfig());
 }
 
@@ -192,8 +192,8 @@ void Server::setLogin(const std::vector<Login>& logins, bool allowAnonymous) {
     auto loginsUa = std::vector<UA_UsernamePasswordLogin>(number);
 
     for (size_t i = 0; i < number; ++i) {
-        loginsUa[i].username = allocUaString(logins[i].username);
-        loginsUa[i].password = allocUaString(logins[i].password);
+        loginsUa[i].username = detail::allocUaString(logins[i].username);
+        loginsUa[i].password = detail::allocUaString(logins[i].password);
     }
 
     auto* config = getConfig();
@@ -223,7 +223,7 @@ void Server::setLogin(const std::vector<Login>& logins, bool allowAnonymous) {
         UA_String_clear(&loginsUa[i].password);
     }
 
-    checkStatusCodeException(status);
+    detail::checkStatusCodeException(status);
 }
 
 void Server::run() {

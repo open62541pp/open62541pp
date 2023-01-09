@@ -14,7 +14,7 @@ static UA_NodeId fromStringView(
     UA_NodeId result;
     result.namespaceIndex = namespaceIndex;
     result.identifierType = identifierType;
-    result.identifier.string = allocUaString(identifier);  // NOLINT
+    result.identifier.string = detail::allocUaString(identifier);  // NOLINT
     return result;
 }
 

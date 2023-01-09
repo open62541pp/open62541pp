@@ -26,6 +26,8 @@ public:
     using std::runtime_error::runtime_error;  // inherit contructors
 };
 
+namespace detail {
+
 inline constexpr bool checkStatusCode(UA_StatusCode code) noexcept {
     return code == UA_STATUSCODE_GOOD;
 }
@@ -35,5 +37,7 @@ inline void checkStatusCodeException(UA_StatusCode code) {
         throw Exception(code);
     }
 }
+
+}  // namespace detail
 
 }  // namespace opcua

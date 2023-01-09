@@ -84,7 +84,7 @@ protected:
     void set(const T& data) {
         clear();
         auto status = UA_copy(&data, &data_, getDataType());  // deep copy of data
-        checkStatusCodeException(status);
+        detail::checkStatusCodeException(status);
         ownsData_ = true;
     }
 
@@ -122,15 +122,15 @@ class String : public TypeWrapper<UA_String> {
 public:
     using BaseClass::BaseClass;  // inherit contructors
 
-    explicit String(std::string_view str) : String(UA_String{allocUaString(str)}) {}
+    explicit String(std::string_view str) : String(UA_String{detail::allocUaString(str)}) {}
 
     bool operator==(const String& other) const { return UA_String_equal(handle(), other.handle()); }
 
     bool operator!=(const String& other) const { return !operator==(other); }
 
-    std::string get() const { return toString(*handle()); }
+    std::string get() const { return detail::toString(*handle()); }
 
-    std::string_view getView() const { return toStringView(*handle()); }
+    std::string_view getView() const { return detail::toStringView(*handle()); }
 };
 
 /**
@@ -163,7 +163,8 @@ class ByteString : public TypeWrapper<UA_ByteString, Type::ByteString> {
 public:
     using BaseClass::BaseClass;  // inherit contructors
 
-    explicit ByteString(std::string_view str) : ByteString(UA_ByteString{allocUaString(str)}) {}
+    explicit ByteString(std::string_view str)
+        : ByteString(UA_ByteString{detail::allocUaString(str)}) {}
 
     bool operator==(const ByteString& other) const {
         return UA_ByteString_equal(handle(), other.handle());
@@ -171,9 +172,9 @@ public:
 
     bool operator!=(const ByteString& other) const { return !operator==(other); }
 
-    std::string get() const { return toString(*handle()); }
+    std::string get() const { return detail::toString(*handle()); }
 
-    std::string_view getView() const { return toStringView(*handle()); }
+    std::string_view getView() const { return detail::toStringView(*handle()); }
 };
 
 /**
@@ -184,7 +185,7 @@ public:
     using BaseClass::BaseClass;  // inherit contructors
 
     QualifiedName(uint16_t namespaceIndex, std::string_view name)
-        : QualifiedName(UA_QualifiedName{namespaceIndex, allocUaString(name)}) {}
+        : QualifiedName(UA_QualifiedName{namespaceIndex, detail::allocUaString(name)}) {}
 
     bool operator==(const QualifiedName& other) const {
         return UA_QualifiedName_equal(handle(), other.handle());
@@ -194,7 +195,7 @@ public:
 
     uint16_t getNamespaceIndex() const { return handle()->namespaceIndex; }
 
-    std::string getName() const { return toString(handle()->name); }
+    std::string getName() const { return detail::toString(handle()->name); }
 };
 
 /**
@@ -205,11 +206,12 @@ public:
     using BaseClass::BaseClass;  // inherit contructors
 
     LocalizedText(std::string_view text, std::string_view locale = "")  // NOLINT
-        : LocalizedText(UA_LocalizedText{allocUaString(locale), allocUaString(text)}) {}
+        : LocalizedText(UA_LocalizedText{detail::allocUaString(locale), detail::allocUaString(text)}
+          ) {}
 
-    std::string getText() const { return toString(handle()->text); }
+    std::string getText() const { return detail::toString(handle()->text); }
 
-    std::string getLocale() const { return toString(handle()->locale); }
+    std::string getLocale() const { return detail::toString(handle()->locale); }
 };
 
 }  // namespace opcua

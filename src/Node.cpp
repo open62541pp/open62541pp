@@ -18,7 +18,7 @@ Node::Node(const Server& server, const NodeId& id)  // NOLINT
         const auto status = UA_Server_readNodeId(
             server_.handle(), *nodeId_.handle(), outputNode.handle()
         );
-        checkStatusCodeException(status);
+        detail::checkStatusCodeException(status);
     }
     // store node class
     {
@@ -26,7 +26,7 @@ Node::Node(const Server& server, const NodeId& id)  // NOLINT
         const auto status = UA_Server_readNodeClass(
             server_.handle(), *nodeId_.handle(), &nodeClass
         );
-        checkStatusCodeException(status);
+        detail::checkStatusCodeException(status);
         nodeClass_ = static_cast<NodeClass>(nodeClass);
     }
 }
@@ -40,7 +40,7 @@ std::string Node::getBrowseName() {
     const auto status = UA_Server_readBrowseName(
         server_.handle(), *nodeId_.handle(), name.handle()
     );
-    checkStatusCodeException(status);
+    detail::checkStatusCodeException(status);
     return name.getName();
 }
 
@@ -49,7 +49,7 @@ std::string Node::getDisplayName() {
     const auto status = UA_Server_readDisplayName(
         server_.handle(), *nodeId_.handle(), text.handle()
     );
-    checkStatusCodeException(status);
+    detail::checkStatusCodeException(status);
     return text.getText();
 }
 
@@ -58,14 +58,14 @@ std::string Node::getDescription() {
     const auto status = UA_Server_readDescription(
         server_.handle(), *nodeId_.handle(), text.handle()
     );
-    checkStatusCodeException(status);
+    detail::checkStatusCodeException(status);
     return text.getText();
 }
 
 uint32_t Node::getWriteMask() {
     uint32_t writeMask = 0;
     const auto status = UA_Server_readWriteMask(server_.handle(), *nodeId_.handle(), &writeMask);
-    checkStatusCodeException(status);
+    detail::checkStatusCodeException(status);
     return writeMask;
 }
 
@@ -74,14 +74,14 @@ NodeId Node::getDataType() {
     const auto status = UA_Server_readDataType(
         server_.handle(), *nodeId_.handle(), nodeId.handle()
     );
-    checkStatusCodeException(status);
+    detail::checkStatusCodeException(status);
     return nodeId;
 }
 
 ValueRank Node::getValueRank() {
     int32_t valueRank = 0;
     const auto status = UA_Server_readValueRank(server_.handle(), *nodeId_.handle(), &valueRank);
-    checkStatusCodeException(status);
+    detail::checkStatusCodeException(status);
     return static_cast<ValueRank>(valueRank);
 }
 
@@ -90,7 +90,7 @@ std::vector<uint32_t> Node::getArrayDimensions() {
     const auto status = UA_Server_readArrayDimensions(
         server_.handle(), *nodeId_.handle(), variant.handle()
     );
-    checkStatusCodeException(status);
+    detail::checkStatusCodeException(status);
     if (variant.isArray()) {
         return variant.readArray<uint32_t>();
     }
@@ -100,7 +100,7 @@ std::vector<uint32_t> Node::getArrayDimensions() {
 uint8_t Node::getAccessLevel() {
     uint8_t mask = 0;
     const auto status = UA_Server_readAccessLevel(server_.handle(), *nodeId_.handle(), &mask);
-    checkStatusCodeException(status);
+    detail::checkStatusCodeException(status);
     return mask;
 }
 
@@ -108,40 +108,40 @@ void Node::setDisplayName(std::string_view name, std::string_view locale) {
     const auto status = UA_Server_writeDisplayName(
         server_.handle(), *nodeId_.handle(), *LocalizedText(name, locale).handle()
     );
-    checkStatusCodeException(status);
+    detail::checkStatusCodeException(status);
 }
 
 void Node::setDescription(std::string_view name, std::string_view locale) {
     const auto status = UA_Server_writeDescription(
         server_.handle(), *nodeId_.handle(), *LocalizedText(name, locale).handle()
     );
-    checkStatusCodeException(status);
+    detail::checkStatusCodeException(status);
 }
 
 void Node::setWriteMask(uint32_t mask) {
     const auto status = UA_Server_writeWriteMask(server_.handle(), *nodeId_.handle(), mask);
-    checkStatusCodeException(status);
+    detail::checkStatusCodeException(status);
 }
 
 void Node::setDataType(Type type) {
     const auto status = UA_Server_writeDataType(
         server_.handle(), *nodeId_.handle(), getUaDataType(type)->typeId
     );
-    checkStatusCodeException(status);
+    detail::checkStatusCodeException(status);
 }
 
 void Node::setDataType(const NodeId& typeId) {
     const auto status = UA_Server_writeDataType(
         server_.handle(), *nodeId_.handle(), *typeId.handle()
     );
-    checkStatusCodeException(status);
+    detail::checkStatusCodeException(status);
 }
 
 void Node::setValueRank(ValueRank valueRank) {
     const auto status = UA_Server_writeValueRank(
         server_.handle(), *nodeId_.handle(), static_cast<int32_t>(valueRank)
     );
-    checkStatusCodeException(status);
+    detail::checkStatusCodeException(status);
 }
 
 void Node::setArrayDimensions(const std::vector<uint32_t>& dimensions) {
@@ -150,14 +150,14 @@ void Node::setArrayDimensions(const std::vector<uint32_t>& dimensions) {
     const auto status = UA_Server_writeArrayDimensions(
         server_.handle(), *nodeId_.handle(), *variant.handle()
     );
-    checkStatusCodeException(status);
+    detail::checkStatusCodeException(status);
 }
 
 void Node::setAccessLevel(uint8_t mask) {
     const auto status = UA_Server_writeAccessLevel(
         server_.handle(), *nodeId_.handle(), static_cast<UA_Byte>(mask)
     );
-    checkStatusCodeException(status);
+    detail::checkStatusCodeException(status);
 }
 
 Node Node::addFolder(const NodeId& id, std::string_view browseName) {
@@ -175,7 +175,7 @@ Node Node::addFolder(const NodeId& id, std::string_view browseName) {
         nullptr,  // node context
         nullptr  // output new node id
     );
-    checkStatusCodeException(status);
+    detail::checkStatusCodeException(status);
     return {server_, id};
 }
 
@@ -194,7 +194,7 @@ Node Node::addObject(const NodeId& id, std::string_view browseName) {
         nullptr,  // node context
         nullptr  // output new node id
     );
-    checkStatusCodeException(status);
+    detail::checkStatusCodeException(status);
     return {server_, id};
 }
 
@@ -215,7 +215,7 @@ Node Node::addVariable(const NodeId& id, std::string_view browseName, Type type)
         nullptr,  // node context
         nullptr  // output new node id
     );
-    checkStatusCodeException(status);
+    detail::checkStatusCodeException(status);
     return {server_, id};
 }
 
@@ -236,7 +236,7 @@ Node Node::addProperty(const NodeId& id, std::string_view browseName, Type type)
         nullptr,  // node context
         nullptr  // output new node id
     );
-    checkStatusCodeException(status);
+    detail::checkStatusCodeException(status);
     return {server_, id};
 }
 
@@ -254,7 +254,7 @@ Node Node::addObjectType(const NodeId& id, std::string_view browseName) {
         nullptr,  // node context
         nullptr  // output new node id
     );
-    checkStatusCodeException(status);
+    detail::checkStatusCodeException(status);
     return {server_, id};
 }
 
@@ -275,7 +275,7 @@ Node Node::addVariableType(const NodeId& id, std::string_view browseName, Type t
         nullptr,  // node context
         nullptr  // output new node id
     );
-    checkStatusCodeException(status);
+    detail::checkStatusCodeException(status);
     return {server_, id};
 }
 
@@ -285,12 +285,12 @@ void Node::remove() {
         *nodeId_.handle(),
         true  // remove all references
     );
-    checkStatusCodeException(status);
+    detail::checkStatusCodeException(status);
 }
 
 void Node::writeVariantToServer(Variant& var) {
     const auto status = UA_Server_writeValue(server_.handle(), *nodeId_.handle(), *var.handle());
-    checkStatusCodeException(status);
+    detail::checkStatusCodeException(status);
 }
 
 void Node::readVariantFromServer(Variant& var) noexcept {
