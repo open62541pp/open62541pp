@@ -25,6 +25,12 @@ struct Login {
     std::string password;
 };
 
+/**
+ * High-level server class.
+ *
+ * Exposes the most common functionality. Use the handle() and getConfig() method to get access
+ * to the underlying UA_Server and UA_ServerConfig instances and use the full power of open6254.
+ */
 class Server {
 public:
     /// Create server with default config.

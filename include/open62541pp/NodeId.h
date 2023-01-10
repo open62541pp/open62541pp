@@ -8,6 +8,9 @@
 
 namespace opcua {
 
+/**
+ * UA_NodeId wrapper class.
+ */
 class NodeId : public TypeWrapper<UA_NodeId> {
 public:
     using BaseClass::BaseClass;  // inherit contructors

@@ -12,6 +12,13 @@
 
 namespace opcua {
 
+/**
+ * High level node object, to access node attribute, browse and populate address space.
+ *
+ * Node objects are usefull as-is but they do not expose the entire OPC UA protocol.
+ * You can get access to the associated NodeId instance with the getNodeId() method and apply the
+ * native open62541 functions.
+ */
 class Node {
 public:
     Node(const Server& server, const NodeId& id);

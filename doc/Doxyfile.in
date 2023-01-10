@@ -20,6 +20,7 @@ GENERATE_TREEVIEW      = NO
 TREEVIEW_WIDTH         = 300
 SHOW_FILES             = YES
 SHOW_NAMESPACES        = YES
+SHOW_USED_FILES        = NO
 LAYOUT_FILE            = "${CMAKE_CURRENT_SOURCE_DIR}/DoxygenLayout.xml"
 QUIET                  = YES
 

@@ -10,6 +10,9 @@
 
 namespace opcua {
 
+/**
+ * UA_Variant wrapper class.
+ */
 class Variant : public TypeWrapper<UA_Variant> {
 public:
     using BaseClass::BaseClass;  // inherit contructors
