@@ -159,7 +159,7 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pub_types_classopcua_1_1TypeWrapper"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classopcua_1_1TypeWrapper')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_Variant &gt;</a></td></tr>
-<tr class="memitem:ab589d88dc65dc99a9f8fd3e54c3170f9 inherit pub_types_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#ab589d88dc65dc99a9f8fd3e54c3170f9">BaseClass</a> = <a class="el" href="classopcua_1_1TypeWrapper.html">TypeWrapper</a>&lt; <a class="elRef" href="open62541/structUA__Variant.html">UA_Variant</a>, <a class="el" href="classopcua_1_1TypeWrapper.html#ab04aff96ec6f671ab30c8edf29a7c1cd">getType</a>&lt; <a class="elRef" href="open62541/structUA__Variant.html">UA_Variant</a> &gt;() &gt;</td></tr>
+<tr class="memitem:ab589d88dc65dc99a9f8fd3e54c3170f9 inherit pub_types_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#ab589d88dc65dc99a9f8fd3e54c3170f9">BaseClass</a> = <a class="el" href="classopcua_1_1TypeWrapper.html">TypeWrapper</a>&lt; <a class="elRef" href="open62541/structUA__Variant.html">UA_Variant</a>, detail::getType&lt; <a class="elRef" href="open62541/structUA__Variant.html">UA_Variant</a> &gt;() &gt;</td></tr>
 <tr class="separator:ab589d88dc65dc99a9f8fd3e54c3170f9 inherit pub_types_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99a83d5abc498d6b7965c7b8f7b921cb inherit pub_types_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a99a83d5abc498d6b7965c7b8f7b921cb">UaType</a> = <a class="elRef" href="open62541/structUA__Variant.html">UA_Variant</a></td></tr>
 <tr class="separator:a99a83d5abc498d6b7965c7b8f7b921cb inherit pub_types_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -340,7 +340,7 @@ template&lt;typename T &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00036">36</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Types_8h_source.html#l00193">opcua::getUaDataType()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00070">opcua::TypeWrapper&lt; UA_Variant &gt;::handle()</a>, and <a class="elRef" href="open62541/structUA__Variant.html#ab246eb2c59043a7e5df0c75edd3f538f">UA_Variant::type</a>.</p>
+<p class="reference">References <a class="el" href="Types_8h_source.html#l00190">opcua::detail::getUaDataType()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00070">opcua::TypeWrapper&lt; UA_Variant &gt;::handle()</a>, and <a class="elRef" href="open62541/structUA__Variant.html#ab246eb2c59043a7e5df0c75edd3f538f">UA_Variant::type</a>.</p>
 
 </div>
 </div>
@@ -442,7 +442,7 @@ template&lt;typename T &gt; </div>
 
 <p>Write array (std::vector) to variant. </p>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00087">87</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00089">89</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
 <p class="reference">References <a class="el" href="Variant_8h_source.html#l00078">setArray()</a>.</p>
 
@@ -490,7 +490,7 @@ template&lt;typename T &gt; </div>
 
 <p class="reference">References <a class="el" href="ErrorHandling_8h_source.html#l00035">opcua::detail::checkStatusCodeException()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00078">opcua::TypeWrapper&lt; UA_Variant &gt;::clear()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00070">opcua::TypeWrapper&lt; UA_Variant &gt;::handle()</a>, <a class="elRef" href="open62541/structUA__Variant.html#a09ff1e93e291d5b9db1ae5faa2c14780">UA_Variant::storageType</a>, <a class="elRef" href="open62541/types_8h.html#aa1478e00bedf1421f5f5462e8263c522a2b3eb8fafea49ba7e9b24ee4eaced395">UA_VARIANT_DATA</a>, and <a class="elRef" href="open62541/types_8h.html#aedcb0807aecd86b4aaed8bb993123b0f">UA_Variant_setArrayCopy()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Variant_8h_source.html#l00087">setArray()</a>, and <a class="el" href="Node_8h_source.html#l00090">opcua::Node::writeArray()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Variant_8h_source.html#l00089">setArray()</a>, and <a class="el" href="Node_8h_source.html#l00090">opcua::Node::writeArray()</a>.</p>
 
 </div>
 </div>
@@ -523,7 +523,7 @@ template&lt;typename T &gt; </div>
 <p>Write array (std::vector) to variant by passing it's address to the variant (no copy). </p>
 <p>If the array values change, the variant values change as well. Take care of the vectors lifttime. If it gets deconstructed while the variant is still used, data get's corrupted. </p>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00096">96</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00098">98</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
 <p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00078">opcua::TypeWrapper&lt; UA_Variant &gt;::clear()</a>, <a class="elRef" href="open62541/structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">UA_Variant::data</a>, <a class="el" href="TypeWrapper_8h_source.html#l00070">opcua::TypeWrapper&lt; UA_Variant &gt;::handle()</a>, <a class="elRef" href="open62541/structUA__Variant.html#a09ff1e93e291d5b9db1ae5faa2c14780">UA_Variant::storageType</a>, <a class="elRef" href="open62541/types_8h.html#aa1478e00bedf1421f5f5462e8263c522ae8998cef426fb827da4c155c6791bc16">UA_VARIANT_DATA_NODELETE</a>, and <a class="elRef" href="open62541/types_8h.html#a6202f2a1788fd254f46832e62544fe54">UA_Variant_setArray()</a>.</p>
 
