@@ -1,6 +1,5 @@
 #pragma once
 
-#include <type_traits>
 #include <vector>
 
 #include "open62541pp/ErrorHandling.h"
@@ -10,6 +9,9 @@
 
 namespace opcua {
 
+// forward declarations
+class NodeId;
+
 /**
  * UA_Variant wrapper class.
  */
@@ -18,20 +20,11 @@ public:
     using BaseClass::BaseClass;  // inherit contructors
 
     /// Check if variant is empty
-    bool isEmpty() const noexcept {
-        return UA_Variant_isEmpty(handle());
-    }
-
+    bool isEmpty() const noexcept;
     /// Check if variant is a scalar
-    bool isScalar() const noexcept {
-        return UA_Variant_isScalar(handle());
-    }
-
+    bool isScalar() const noexcept;
     /// Check if variant is a array
-    bool isArray() const noexcept {
-        return (handle()->arrayLength > 0) &&
-               (handle()->data != UA_EMPTY_ARRAY_SENTINEL);  // NOLINT
-    }
+    bool isArray() const noexcept;
 
     /// Check if variant type is equal to template type
     template <typename T>
@@ -40,9 +33,9 @@ public:
     }
 
     /// Check if variant type is equal to type argument (enum)
-    bool isType(Type type) const noexcept {
-        return handle()->type == detail::getUaDataType(type);
-    }
+    bool isType(Type type) const noexcept;
+    /// Check if variant type is equal to data type node id
+    bool isType(const NodeId& id) const noexcept;
 
     /// Read scalar value with given template type.
     /// An exception is thrown if the variant is not a scalar or not of the given type.

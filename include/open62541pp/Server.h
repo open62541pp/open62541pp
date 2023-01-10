@@ -1,7 +1,6 @@
 #pragma once
 
-#include <atomic>
-#include <functional>
+#include <cstdint>
 #include <memory>
 #include <string>
 #include <string_view>

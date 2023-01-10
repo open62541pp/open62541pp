@@ -2,6 +2,7 @@
 
 #include <catch2/catch_test_macros.hpp>
 
+#include "open62541pp/NodeId.h"
 #include "open62541pp/Variant.h"
 
 using namespace opcua;
@@ -45,8 +46,9 @@ TEST_CASE("Variant") {
         var.setScalar(value);
 
         REQUIRE(var.isScalar());
-        REQUIRE(var.isType(Type::Int32));
         REQUIRE(var.isType<int32_t>());
+        REQUIRE(var.isType(Type::Int32));
+        REQUIRE(var.isType(NodeId{UA_NS0ID_INT32, 0}));
 
         REQUIRE_NOTHROW(var.readScalar<int32_t>());
         REQUIRE_THROWS(var.readArray<int32_t>());
@@ -74,8 +76,9 @@ TEST_CASE("Variant") {
         var.setArray(value);
 
         REQUIRE(var.isArray());
-        REQUIRE(var.isType(Type::Float));
         REQUIRE(var.isType<float>());
+        REQUIRE(var.isType(Type::Float));
+        REQUIRE(var.isType(NodeId{UA_NS0ID_FLOAT, 0}));
 
         REQUIRE_NOTHROW(var.readArray<float>());
         REQUIRE_THROWS(var.readArray<int32_t>());

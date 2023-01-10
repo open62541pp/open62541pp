@@ -1,12 +1,15 @@
 #pragma once
 
+#include <cstdint>
 #include <string>
 #include <string_view>
+#include <utility>  // forward
 #include <vector>
 
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/NodeId.h"
 #include "open62541pp/Server.h"
+#include "open62541pp/TypeWrapper.h"
 #include "open62541pp/Types.h"
 #include "open62541pp/Variant.h"
 
