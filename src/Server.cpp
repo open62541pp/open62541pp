@@ -21,7 +21,8 @@ namespace opcua {
 
 class Server::Connection {
 public:
-    Connection() : server_(UA_Server_new()) {}
+    Connection()
+        : server_(UA_Server_new()) {}
 
     ~Connection() {
         // don't use stop method here because it might throw an exception
@@ -73,7 +74,9 @@ public:
         running_ = false;
     }
 
-    bool isRunning() const noexcept { return running_; }
+    bool isRunning() const noexcept {
+        return running_;
+    }
 
     void setLogger(Logger logger) {
         logger_ = std::move(logger);
@@ -106,9 +109,13 @@ public:
         instance->logger_(static_cast<LogLevel>(level), static_cast<LogCategory>(category), sv);
     }
 
-    UA_ServerConfig* getConfig() noexcept { return UA_Server_getConfig(server_); }
+    UA_ServerConfig* getConfig() noexcept {
+        return UA_Server_getConfig(server_);
+    }
 
-    UA_Server* handle() noexcept { return server_; }
+    UA_Server* handle() noexcept {
+        return server_;
+    }
 
 private:
     UA_Server* server_;
@@ -118,13 +125,15 @@ private:
 
 /* ------------------------------------------- Server ------------------------------------------- */
 
-Server::Server() : connection_(std::make_shared<Connection>()) {
+Server::Server()
+    : connection_(std::make_shared<Connection>()) {
     const auto status = UA_ServerConfig_setDefault(getConfig());
     detail::checkStatusCodeException(status);
     connection_->applyDefaults();
 }
 
-Server::Server(uint16_t port) : connection_(std::make_shared<Connection>()) {
+Server::Server(uint16_t port)
+    : connection_(std::make_shared<Connection>()) {
     const auto status = UA_ServerConfig_setMinimal(getConfig(), port, nullptr);
     detail::checkStatusCodeException(status);
     connection_->applyDefaults();

@@ -22,18 +22,27 @@ public:
     using BaseClass = TypeWrapper<T, type>;
     using UaType = T;
 
-    TypeWrapper() { init(); }
+    TypeWrapper() {
+        init();
+    }
 
     /// Constructor with native UA_* type (deep copy)
-    explicit TypeWrapper(const T& data) { set(data); }
+    explicit TypeWrapper(const T& data) {
+        set(data);
+    }
 
     /// Constructor with native UA_* type (move rvalue)
-    explicit TypeWrapper(T&& data) noexcept : data_(data) {}
+    explicit TypeWrapper(T&& data) noexcept
+        : data_(data) {}
 
-    virtual ~TypeWrapper() { clear(); };
+    virtual ~TypeWrapper() {
+        clear();
+    };
 
     /// Copy constructor (deep copy)
-    TypeWrapper(const TypeWrapper& other) { set(other.data_); }
+    TypeWrapper(const TypeWrapper& other) {
+        set(other.data_);
+    }
 
     /// Move constructor
     TypeWrapper(TypeWrapper&& other) noexcept {
@@ -61,19 +70,29 @@ public:
     }
 
     /// Return type enum
-    constexpr static Type getType() { return type; }
+    constexpr static Type getType() {
+        return type;
+    }
 
     /// Return UA_DataType object
-    constexpr static const UA_DataType* getDataType() { return detail::getUaDataType(type); }
+    constexpr static const UA_DataType* getDataType() {
+        return detail::getUaDataType(type);
+    }
 
     /// Return pointer to wrapped UA data type
-    T* handle() noexcept { return &data_; }
+    T* handle() noexcept {
+        return &data_;
+    }
 
     /// Return const pointer to wrapped UA data type
-    const T* handle() const noexcept { return &data_; };
+    const T* handle() const noexcept {
+        return &data_;
+    };
 
 protected:
-    void init() noexcept { UA_init(&data_, getDataType()); }
+    void init() noexcept {
+        UA_init(&data_, getDataType());
+    }
 
     void clear() noexcept {
         if (ownsData_) {
@@ -122,17 +141,24 @@ class String : public TypeWrapper<UA_String> {
 public:
     using BaseClass::BaseClass;  // inherit contructors
 
-    explicit String(std::string_view str) : String(UA_String{detail::allocUaString(str)}) {}
+    explicit String(std::string_view str)
+        : String(UA_String{detail::allocUaString(str)}) {}
 
     bool operator==(const String& other) const noexcept {
         return UA_String_equal(handle(), other.handle());
     }
 
-    bool operator!=(const String& other) const noexcept { return !operator==(other); }
+    bool operator!=(const String& other) const noexcept {
+        return !operator==(other);
+    }
 
-    std::string get() const { return detail::toString(*handle()); }
+    std::string get() const {
+        return detail::toString(*handle());
+    }
 
-    std::string_view getView() const { return detail::toStringView(*handle()); }
+    std::string_view getView() const {
+        return detail::toStringView(*handle());
+    }
 };
 
 /**
@@ -154,7 +180,9 @@ public:
         return UA_Guid_equal(handle(), other.handle());
     }
 
-    bool operator!=(const Guid& other) const noexcept { return !operator==(other); }
+    bool operator!=(const Guid& other) const noexcept {
+        return !operator==(other);
+    }
 };
 
 /**
@@ -165,20 +193,34 @@ public:
  */
 class ByteString : public TypeWrapper<UA_ByteString, Type::ByteString> {
 public:
+    // NOLINTNEXTLINE, false positive?
     using BaseClass::BaseClass;  // inherit contructors
 
     explicit ByteString(std::string_view str)
         : ByteString(UA_ByteString{detail::allocUaString(str)}) {}
 
+    static ByteString fromBase64(std::string_view base64) {
+        ByteString result;
+        const auto status = UA_ByteString_fromBase64(result.handle(), String(base64).handle());
+        detail::checkStatusCodeException(status);
+        return result;
+    }
+
     bool operator==(const ByteString& other) const noexcept {
         return UA_ByteString_equal(handle(), other.handle());
     }
 
-    bool operator!=(const ByteString& other) const noexcept { return !operator==(other); }
+    bool operator!=(const ByteString& other) const noexcept {
+        return !operator==(other);
+    }
 
-    std::string get() const { return detail::toString(*handle()); }
+    std::string get() const {
+        return detail::toString(*handle());
+    }
 
-    std::string_view getView() const { return detail::toStringView(*handle()); }
+    std::string_view getView() const {
+        return detail::toStringView(*handle());
+    }
 };
 
 /**
@@ -196,13 +238,21 @@ public:
         return UA_QualifiedName_equal(handle(), other.handle());
     }
 
-    bool operator!=(const QualifiedName& other) const noexcept { return !operator==(other); }
+    bool operator!=(const QualifiedName& other) const noexcept {
+        return !operator==(other);
+    }
 
-    uint16_t getNamespaceIndex() const noexcept { return handle()->namespaceIndex; }
+    uint16_t getNamespaceIndex() const noexcept {
+        return handle()->namespaceIndex;
+    }
 
-    std::string getName() const { return detail::toString(handle()->name); }
+    std::string getName() const {
+        return detail::toString(handle()->name);
+    }
 
-    std::string_view getNameView() const { return detail::toStringView(handle()->name); }
+    std::string_view getNameView() const {
+        return detail::toStringView(handle()->name);
+    }
 };
 
 /**
@@ -222,15 +272,25 @@ public:
                UA_String_equal(&handle()->locale, &other.handle()->locale);
     }
 
-    bool operator!=(const LocalizedText& other) const noexcept { return !operator==(other); }
+    bool operator!=(const LocalizedText& other) const noexcept {
+        return !operator==(other);
+    }
 
-    std::string getText() const { return detail::toString(handle()->text); }
+    std::string getText() const {
+        return detail::toString(handle()->text);
+    }
 
-    std::string_view getTextView() const { return detail::toStringView(handle()->text); }
+    std::string_view getTextView() const {
+        return detail::toStringView(handle()->text);
+    }
 
-    std::string getLocale() const { return detail::toString(handle()->locale); }
+    std::string getLocale() const {
+        return detail::toString(handle()->locale);
+    }
 
-    std::string_view getLocaleView() const { return detail::toStringView(handle()->locale); }
+    std::string_view getLocaleView() const {
+        return detail::toStringView(handle()->locale);
+    }
 };
 
 }  // namespace opcua

@@ -19,24 +19,19 @@ static UA_NodeId fromStringView(
 }
 
 NodeId::NodeId(UA_UInt32 identifier, UA_UInt16 namespaceIndex)
-    : NodeId(UA_NODEID_NUMERIC(namespaceIndex, identifier)) {
-}
+    : NodeId(UA_NODEID_NUMERIC(namespaceIndex, identifier)) {}
 
 NodeId::NodeId(std::string_view identifier, UA_UInt16 namespaceIndex)
-    : NodeId(fromStringView(namespaceIndex, UA_NODEIDTYPE_STRING, identifier)) {
-}
+    : NodeId(fromStringView(namespaceIndex, UA_NODEIDTYPE_STRING, identifier)) {}
 
 NodeId::NodeId(const String& identifier, UA_UInt16 namespaceIndex)
-    : NodeId(identifier.getView(), namespaceIndex) {
-}
+    : NodeId(identifier.getView(), namespaceIndex) {}
 
 NodeId::NodeId(const Guid& identifier, UA_UInt16 namespaceIndex)
-    : NodeId(UA_NODEID_GUID(namespaceIndex, *identifier.handle())) {
-}
+    : NodeId(UA_NODEID_GUID(namespaceIndex, *identifier.handle())) {}
 
 NodeId::NodeId(const ByteString& identifier, UA_UInt16 namespaceIndex)
-    : NodeId(fromStringView(namespaceIndex, UA_NODEIDTYPE_BYTESTRING, identifier.getView())) {
-}
+    : NodeId(fromStringView(namespaceIndex, UA_NODEIDTYPE_BYTESTRING, identifier.getView())) {}
 
 bool NodeId::operator==(const NodeId& other) const noexcept {
     return UA_NodeId_order(handle(), other.handle()) == UA_ORDER_EQ;

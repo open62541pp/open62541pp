@@ -11,7 +11,8 @@
 namespace opcua {
 
 Node::Node(const Server& server, const NodeId& id)  // NOLINT
-    : server_(server), nodeId_(id) {
+    : server_(server),
+      nodeId_(id) {
     // check if node exists
     {
         NodeId outputNode(UA_NODEID_NULL);

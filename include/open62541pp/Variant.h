@@ -18,10 +18,14 @@ public:
     using BaseClass::BaseClass;  // inherit contructors
 
     /// Check if variant is empty
-    bool isEmpty() const noexcept { return UA_Variant_isEmpty(handle()); }
+    bool isEmpty() const noexcept {
+        return UA_Variant_isEmpty(handle());
+    }
 
     /// Check if variant is a scalar
-    bool isScalar() const noexcept { return UA_Variant_isScalar(handle()); }
+    bool isScalar() const noexcept {
+        return UA_Variant_isScalar(handle());
+    }
 
     /// Check if variant is a array
     bool isArray() const noexcept {
@@ -36,7 +40,9 @@ public:
     }
 
     /// Check if variant type is equal to type argument (enum)
-    bool isType(Type type) const noexcept { return handle()->type == detail::getUaDataType(type); }
+    bool isType(Type type) const noexcept {
+        return handle()->type == detail::getUaDataType(type);
+    }
 
     /// Read scalar value with given template type.
     /// An exception is thrown if the variant is not a scalar or not of the given type.
