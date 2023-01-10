@@ -24,6 +24,7 @@ var searchData=
   ['forcekeyreset_603',['forceKeyReset',['open62541/structUA__NetworkMessageSecurityHeader.html#ae52ff1af980e6ee014c9514ffac985e6',1,'UA_NetworkMessageSecurityHeader']]],
   ['found_604',['found',['open62541/structDecodeEntry.html#a5cb169e6394fa7aad2cb46a65d3fc691',1,'DecodeEntry']]],
   ['free_605',['free',['open62541/structUA__Connection.html#ad1d25b2a86d48cd59edc5676022a6c4b',1,'UA_Connection']]],
-  ['fromstate_606',['FromState',['../namespaceopcua.html#a807c61ccff66808c3559158c33d5463baf972837b8d16f8067de6b1566dbc6165',1,'opcua']]],
-  ['function_607',['function',['open62541/structDecodeEntry.html#a5092e33e01af6078684cdb638a1e5b7d',1,'DecodeEntry']]]
+  ['frombase64_606',['fromBase64',['../classopcua_1_1ByteString.html#a27397c6bd895237bcfb2a456315e0601',1,'opcua::ByteString']]],
+  ['fromstate_607',['FromState',['../namespaceopcua.html#a807c61ccff66808c3559158c33d5463baf972837b8d16f8067de6b1566dbc6165',1,'opcua']]],
+  ['function_608',['function',['open62541/structDecodeEntry.html#a5092e33e01af6078684cdb638a1e5b7d',1,'DecodeEntry']]]
 ];
