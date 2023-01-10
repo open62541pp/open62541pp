@@ -16,7 +16,7 @@ namespace opcua {
  *
  * The derived classes should implement specific constructors to convert from other data types.
  */
-template <typename T, Type type = getType<T>()>
+template <typename T, Type type = detail::getType<T>()>
 class TypeWrapper {
 public:
     using BaseClass = TypeWrapper<T, type>;
@@ -64,7 +64,7 @@ public:
     constexpr static Type getType() { return type; }
 
     /// Return UA_DataType object
-    constexpr static const UA_DataType* getDataType() { return getUaDataType(type); }
+    constexpr static const UA_DataType* getDataType() { return detail::getUaDataType(type); }
 
     /// Return pointer to wrapped UA data type
     T* handle() noexcept { return &data_; }

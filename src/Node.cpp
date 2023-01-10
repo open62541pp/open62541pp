@@ -129,7 +129,7 @@ void Node::setWriteMask(uint32_t mask) {
 
 void Node::setDataType(Type type) {
     const auto status = UA_Server_writeDataType(
-        server_.handle(), *nodeId_.handle(), getUaDataType(type)->typeId
+        server_.handle(), *nodeId_.handle(), detail::getUaDataType(type)->typeId
     );
     detail::checkStatusCodeException(status);
 }
@@ -204,7 +204,7 @@ Node Node::addObject(const NodeId& id, std::string_view browseName) {
 
 Node Node::addVariable(const NodeId& id, std::string_view browseName, Type type) {
     auto attr = UA_VariableAttributes_default;
-    attr.dataType = getUaDataType(type)->typeId;
+    attr.dataType = detail::getUaDataType(type)->typeId;
     attr.accessLevel = UA_ACCESSLEVELMASK_READ;
 
     const auto ns = id.handle()->namespaceIndex;
@@ -225,7 +225,7 @@ Node Node::addVariable(const NodeId& id, std::string_view browseName, Type type)
 
 Node Node::addProperty(const NodeId& id, std::string_view browseName, Type type) {
     auto attr = UA_VariableAttributes_default;
-    attr.dataType = getUaDataType(type)->typeId;
+    attr.dataType = detail::getUaDataType(type)->typeId;
     attr.accessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
 
     const auto ns = id.handle()->namespaceIndex;
@@ -264,7 +264,7 @@ Node Node::addObjectType(const NodeId& id, std::string_view browseName) {
 
 Node Node::addVariableType(const NodeId& id, std::string_view browseName, Type type) {
     auto attr = UA_VariableTypeAttributes_default;
-    attr.dataType = getUaDataType(type)->typeId;
+    attr.dataType = detail::getUaDataType(type)->typeId;
     attr.isAbstract = false;
 
     const auto ns = id.handle()->namespaceIndex;

@@ -29,11 +29,11 @@ public:
     /// Check if variant type is equal to template type
     template <typename T>
     bool isType() const noexcept {
-        return handle()->type == getUaDataType<T>();
+        return handle()->type == detail::getUaDataType<T>();
     }
 
     /// Check if variant type is equal to type argument (enum)
-    bool isType(Type type) const noexcept { return handle()->type == getUaDataType(type); }
+    bool isType(Type type) const noexcept { return handle()->type == detail::getUaDataType(type); }
 
     /// Read scalar value with given template type.
     /// An exception is thrown if the variant is not a scalar or not of the given type.
@@ -77,7 +77,9 @@ public:
     template <typename T>
     void setArray(const T* array, size_t size) {
         clear();
-        const auto status = UA_Variant_setArrayCopy(handle(), array, size, getUaDataType<T>());
+        const auto status = UA_Variant_setArrayCopy(
+            handle(), array, size, detail::getUaDataType<T>()
+        );
         detail::checkStatusCodeException(status);
         handle()->storageType = UA_VARIANT_DATA;
     }
@@ -96,7 +98,7 @@ public:
     void setArrayNoCopy(std::vector<T>& array) noexcept {
         clear();
         // UA_Variant_setArray will borrow the vector data compared to UA_Variant_setArrayCopy
-        UA_Variant_setArray(handle(), array.data(), array.size(), getUaDataType<T>());
+        UA_Variant_setArray(handle(), array.data(), array.size(), detail::getUaDataType<T>());
         handle()->storageType = UA_VARIANT_DATA_NODELETE;
     }
 
@@ -115,7 +117,7 @@ private:
     template <typename T>
     void setScalarImpl(T value) {
         clear();
-        const auto status = UA_Variant_setScalarCopy(handle(), &value, getUaDataType<T>());
+        const auto status = UA_Variant_setScalarCopy(handle(), &value, detail::getUaDataType<T>());
         detail::checkStatusCodeException(status);
         handle()->storageType = UA_VARIANT_DATA;
     }

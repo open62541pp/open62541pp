@@ -58,11 +58,11 @@ TEST_CASE("TypeWrapper") {
     SECTION("Get type") {
         TypeWrapper<float> wrapperFloat;
         REQUIRE(wrapperFloat.getType() == Type::Float);
-        REQUIRE(wrapperFloat.getDataType() == getUaDataType(Type::Float));
+        REQUIRE(wrapperFloat.getDataType() == detail::getUaDataType(Type::Float));
 
         TypeWrapper<UA_String> wrapperString;
         REQUIRE(wrapperString.getType() == Type::String);
-        REQUIRE(wrapperString.getDataType() == getUaDataType(Type::String));
+        REQUIRE(wrapperString.getDataType() == detail::getUaDataType(Type::String));
     }
 }
 
