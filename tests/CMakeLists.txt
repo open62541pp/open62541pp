@@ -18,6 +18,7 @@ add_executable(
     Node.cpp
     NodeId.cpp
     Server.cpp
+    Types.cpp
     TypeWrapper.cpp
     Variant.cpp
 )

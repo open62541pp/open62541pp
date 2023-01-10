@@ -191,6 +191,12 @@ inline const UA_DataType* getUaDataType(Type type) {
     return &UA_TYPES[static_cast<uint16_t>(type)];  // NOLINT
 }
 
+/// Get (custom) UA_DataType by UA_NodeId.
+/// Return nullptr if no matching data type was found.
+inline const UA_DataType* getUaDataType(const UA_NodeId* id) {
+    return UA_findDataType(id);
+}
+
 /// Get UA_DataType by template argument.
 template <typename T>
 inline const UA_DataType* getUaDataType() {
