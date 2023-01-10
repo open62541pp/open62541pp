@@ -97,13 +97,16 @@ else()
     message(STATUS "IPO not enabled")
 endif()
 
-# open62541pp library
-file(GLOB_RECURSE sources "src/*.cpp")
-add_library(open62541pp ${sources})  # static / shared depending on option BUILD_SHARED_LIBS
+# open62541pp library (static/shared depending on option BUILD_SHARED_LIBS)
+add_library(
+    open62541pp
+    src/Helper.cpp
+    src/Node.cpp
+    src/NodeId.cpp
+    src/Server.cpp
+)
 add_library(open62541pp::open62541pp ALIAS open62541pp)
-
 target_include_directories(open62541pp PUBLIC include)
-
 target_link_libraries(
     open62541pp
     PUBLIC
@@ -119,6 +122,28 @@ if(UAPP_BUILD_TESTS)
     message(STATUS "Unit tests enabled")
     enable_testing()
     add_subdirectory(tests)
+endif()
+
+# coverage report
+if(UAPP_BUILD_TESTS AND UAPP_ENABLE_COVERAGE)
+    find_program(GCOVR_EXE NAMES gcovr)
+    if(GCOVR_EXE)
+        set(gcovr_args "-f" "include/" "-f" "src/" "${CMAKE_BINARY_DIR}")
+        add_custom_target(
+            open62541pp_coverage_report
+            COMMAND ${GCOVR_EXE} ${gcovr_args}
+            COMMENT "Generate coverage report"
+            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        )
+        set(coverage_html_output_dir "${CMAKE_BINARY_DIR}/coverage_html")
+        make_directory(${coverage_html_output_dir})
+        add_custom_target(
+            open62541pp_coverage_report_html
+            COMMAND ${GCOVR_EXE} ${gcovr_args} "--html-details" "${coverage_html_output_dir}/index.html"
+            COMMENT "Generate HTML coverage report"
+            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        )
+    endif()
 endif()
 
 # examples
