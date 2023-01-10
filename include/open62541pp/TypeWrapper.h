@@ -186,16 +186,17 @@ public:
  */
 class QualifiedName : public TypeWrapper<UA_QualifiedName> {
 public:
+    // NOLINTNEXTLINE, false positive?
     using BaseClass::BaseClass;  // inherit contructors
 
     QualifiedName(uint16_t namespaceIndex, std::string_view name)
         : QualifiedName(UA_QualifiedName{namespaceIndex, detail::allocUaString(name)}) {}
 
-    bool operator==(const QualifiedName& other) const {
+    bool operator==(const QualifiedName& other) const noexcept {
         return UA_QualifiedName_equal(handle(), other.handle());
     }
 
-    bool operator!=(const QualifiedName& other) const { return !operator==(other); }
+    bool operator!=(const QualifiedName& other) const noexcept { return !operator==(other); }
 
     uint16_t getNamespaceIndex() const noexcept { return handle()->namespaceIndex; }
 
@@ -209,11 +210,19 @@ public:
  */
 class LocalizedText : public TypeWrapper<UA_LocalizedText> {
 public:
+    // NOLINTNEXTLINE, false positive?
     using BaseClass::BaseClass;  // inherit contructors
 
     LocalizedText(std::string_view text, std::string_view locale)
         : LocalizedText(UA_LocalizedText{detail::allocUaString(locale), detail::allocUaString(text)}
           ) {}
+
+    bool operator==(const LocalizedText& other) const noexcept {
+        return UA_String_equal(&handle()->text, &other.handle()->text) &&
+               UA_String_equal(&handle()->locale, &other.handle()->locale);
+    }
+
+    bool operator!=(const LocalizedText& other) const noexcept { return !operator==(other); }
 
     std::string getText() const { return detail::toString(handle()->text); }
 
