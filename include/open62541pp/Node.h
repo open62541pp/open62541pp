@@ -49,9 +49,9 @@ public:
     // void setBrowseName(std::string_view name);
 
     /// Set localized display name.
-    void setDisplayName(std::string_view name, std::string_view locale = "en");
+    void setDisplayName(std::string_view name, std::string_view locale);
     /// Set localized description.
-    void setDescription(std::string_view name, std::string_view locale = "en");
+    void setDescription(std::string_view name, std::string_view locale);
     /// Set write mask, e.g. `::UA_WRITEMASK_ACCESSLEVEL | ::UA_WRITEMASK_DESCRIPTION`.
     void setWriteMask(uint32_t mask);
     // void setUserWriteMask(uint32_t mask);

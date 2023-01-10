@@ -40,7 +40,7 @@ NodeClass Node::getNodeClass() const noexcept {
 }
 
 std::string Node::getBrowseName() {
-    QualifiedName name(0, "");
+    QualifiedName name;
     const auto status = UA_Server_readBrowseName(
         server_.handle(), *nodeId_.handle(), name.handle()
     );
@@ -49,7 +49,7 @@ std::string Node::getBrowseName() {
 }
 
 LocalizedText Node::getDisplayName() {
-    LocalizedText text("");
+    LocalizedText text;
     const auto status = UA_Server_readDisplayName(
         server_.handle(), *nodeId_.handle(), text.handle()
     );
@@ -58,7 +58,7 @@ LocalizedText Node::getDisplayName() {
 }
 
 LocalizedText Node::getDescription() {
-    LocalizedText text("");
+    LocalizedText text;
     const auto status = UA_Server_readDescription(
         server_.handle(), *nodeId_.handle(), text.handle()
     );

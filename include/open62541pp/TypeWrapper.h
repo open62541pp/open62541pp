@@ -211,7 +211,7 @@ class LocalizedText : public TypeWrapper<UA_LocalizedText> {
 public:
     using BaseClass::BaseClass;  // inherit contructors
 
-    LocalizedText(std::string_view text, std::string_view locale = "")  // NOLINT
+    LocalizedText(std::string_view text, std::string_view locale)
         : LocalizedText(UA_LocalizedText{detail::allocUaString(locale), detail::allocUaString(text)}
           ) {}
 
