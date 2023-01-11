@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['istypewrapper_3949',['IsTypeWrapper',['../namespaceopcua_1_1detail.html#a6f6a9d9d89858dc4cd64637b4e252935',1,'opcua::detail']]]
+  ['istypewrapper_3947',['IsTypeWrapper',['../namespaceopcua_1_1detail.html#a6f6a9d9d89858dc4cd64637b4e252935',1,'opcua::detail']]]
 ];
