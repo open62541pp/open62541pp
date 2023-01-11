@@ -17,7 +17,6 @@
 #include <open62541/server_config.h>
 #endif
 #include <open62541/server_config_default.h>
-#include <open62541/types.h>
 #include <open62541/types_generated_handling.h>
 
 #ifndef _MSC_VER

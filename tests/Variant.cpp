@@ -4,6 +4,7 @@
 
 #include "open62541pp/NodeId.h"
 #include "open62541pp/Variant.h"
+#include "open62541pp/open62541.h"
 
 using namespace opcua;
 
@@ -46,13 +47,15 @@ TEST_CASE("Variant") {
         var.setScalar(value);
 
         REQUIRE(var.isScalar());
-        REQUIRE(var.isType<int32_t>());
+        REQUIRE(var.isType(&UA_TYPES[UA_TYPES_INT32]));
         REQUIRE(var.isType(Type::Int32));
         REQUIRE(var.isType(NodeId{UA_NS0ID_INT32, 0}));
+        REQUIRE(var.isType<int32_t>());
 
         REQUIRE_NOTHROW(var.readScalar<int32_t>());
         REQUIRE_THROWS(var.readArray<int32_t>());
         REQUIRE_THROWS(var.readScalar<bool>());
+        REQUIRE_THROWS(var.readScalar<int16_t>(&UA_TYPES[UA_TYPES_INT32]));
 
         REQUIRE(var.readScalar<int32_t>() == value);
     }

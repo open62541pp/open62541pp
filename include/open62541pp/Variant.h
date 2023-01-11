@@ -26,16 +26,25 @@ public:
     /// Check if variant is a array
     bool isArray() const noexcept;
 
-    /// Check if variant type is equal to template type
-    template <typename T>
-    bool isType() const noexcept {
-        return handle()->type == detail::getUaDataType<T>();
-    }
-
-    /// Check if variant type is equal to type argument (enum)
+    /// Check if variant type is equal to data type
+    bool isType(const UA_DataType* type) const noexcept;
+    /// Check if variant type is equal to type enum
     bool isType(Type type) const noexcept;
     /// Check if variant type is equal to data type node id
     bool isType(const NodeId& id) const noexcept;
+
+    /// Check if variant type is equal to template type
+    template <typename T>
+    bool isType() const noexcept {
+        return isType(detail::getUaDataType<T>());
+    }
+
+    template <typename T>
+    T readScalar(const UA_DataType* type) const {
+        checkReadScalar(type);
+        checkMemSize<T>(type);
+        return *static_cast<T*>(handle()->data);  // copy on purpose
+    }
 
     /// Read scalar value with given template type.
     /// An exception is thrown if the variant is not a scalar or not of the given type.
@@ -54,14 +63,7 @@ public:
     /// An exception is thrown if the variant is not an array or not of the given type.
     template <typename T>
     std::vector<T> readArray() const {
-        if (!isArray()) {
-            throw Exception("Variant is not an array");
-        }
-        if (!isType<T>()) {
-            throw Exception("Variant does not contain an array of specified return type");
-        }
-        auto* dataPointer = static_cast<T*>(handle()->data);
-        return std::vector<T>(dataPointer, dataPointer + handle()->arrayLength);  // NOLINT
+        return readArrayImpl<T>();
     }
 
     /// Write scalar value to variant.
@@ -78,12 +80,7 @@ public:
     /// Write array (raw) to variant.
     template <typename T>
     void setArray(const T* array, size_t size) {
-        clear();
-        const auto status = UA_Variant_setArrayCopy(
-            handle(), array, size, detail::getUaDataType<T>()
-        );
-        detail::checkStatusCodeException(status);
-        handle()->storageType = UA_VARIANT_DATA;
+        setArrayCopyImpl(array, size, detail::getUaDataType<T>());
     }
 
     /// Write array (std::vector) to variant.
@@ -98,30 +95,45 @@ public:
     /// data get's corrupted.
     template <typename T>
     void setArrayNoCopy(std::vector<T>& array) noexcept {
-        clear();
-        // UA_Variant_setArray will borrow the vector data compared to UA_Variant_setArrayCopy
-        UA_Variant_setArray(handle(), array.data(), array.size(), detail::getUaDataType<T>());
-        handle()->storageType = UA_VARIANT_DATA_NODELETE;
+        setArrayImpl(array.data(), array.size(), detail::getUaDataType<T>());
     }
 
 private:
+    void checkReadScalar(const UA_DataType* type) const;
+    void checkReadArray(const UA_DataType* type) const;
+
+    template <typename T>
+    void checkMemSize(const UA_DataType* type) const {
+        if (sizeof(T) != type->memSize) {
+            throw Exception("Variant contains data of different memory size");
+        }
+    }
+
+    void setScalarImpl(void* value, const UA_DataType* type);
+    void setScalarCopyImpl(const void* value, const UA_DataType* type);
+    void setArrayImpl(void* array, size_t size, const UA_DataType* type);
+    void setArrayCopyImpl(const void* array, size_t size, const UA_DataType* type);
+
     template <typename T>
     T readScalarImpl() const {
-        if (!isScalar()) {
-            throw Exception("Variant is not a scalar");
-        }
-        if (!isType<T>()) {
-            throw Exception("Variant does not contain a scalar of specified return type");
-        }
-        return *static_cast<T*>(handle()->data);  // copy on purpose
+        const auto* type = detail::getUaDataType<T>();
+        checkReadScalar(type);
+        checkMemSize<T>(type);
+        return *static_cast<T*>(handle()->data);
+    }
+
+    template <typename T>
+    std::vector<T> readArrayImpl() const {
+        const auto* type = detail::getUaDataType<T>();
+        checkReadArray(type);
+        checkMemSize<T>(type);
+        auto* dataPointer = static_cast<T*>(handle()->data);
+        return std::vector<T>(dataPointer, dataPointer + handle()->arrayLength);  // NOLINT
     }
 
     template <typename T>
     void setScalarImpl(T value) {
-        clear();
-        const auto status = UA_Variant_setScalarCopy(handle(), &value, detail::getUaDataType<T>());
-        detail::checkStatusCodeException(status);
-        handle()->storageType = UA_VARIANT_DATA;
+        setScalarCopyImpl(&value, detail::getUaDataType<T>());
     }
 };
 
