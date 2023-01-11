@@ -178,8 +178,6 @@ public:
 
     explicit ByteString(std::string_view str);
 
-    static ByteString fromBase64(std::string_view base64);
-
     bool operator==(const ByteString& other) const noexcept;
     bool operator!=(const ByteString& other) const noexcept;
 

@@ -48,13 +48,6 @@ bool Guid::operator!=(const Guid& other) const noexcept {
 ByteString::ByteString(std::string_view str)
     : ByteString(UA_ByteString{detail::allocUaString(str)}) {}
 
-ByteString ByteString::fromBase64(std::string_view base64) {
-    ByteString result;
-    const auto status = UA_ByteString_fromBase64(result.handle(), String(base64).handle());
-    detail::checkStatusCodeException(status);
-    return result;
-}
-
 bool ByteString::operator==(const ByteString& other) const noexcept {
     return UA_ByteString_equal(handle(), other.handle());
 }
