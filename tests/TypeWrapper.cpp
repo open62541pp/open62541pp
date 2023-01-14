@@ -13,54 +13,54 @@ using namespace opcua;
 TEST_CASE("TypeWrapper") {
     SECTION("Constructor") {
         // Empty constructor
-        REQUIRE_NOTHROW(TypeWrapper<bool>());
+        REQUIRE_NOTHROW(TypeWrapper<bool, Type::Boolean>());
 
         // Constructor with wrapped type (lvalue)
         {
             bool value{true};
-            TypeWrapper<bool> wrapper(value);
+            TypeWrapper<bool, Type::Boolean> wrapper(value);
             REQUIRE(*wrapper.handle() == value);
         }
 
         // Constructor with wrapped type (rvalue)
         {
-            TypeWrapper<double> wrapper(11.11);
+            TypeWrapper<double, Type::Double> wrapper(11.11);
             REQUIRE(*wrapper.handle() == 11.11);
         }
     }
 
     SECTION("Copy constructor / assignment") {
-        TypeWrapper<UA_String> wrapper1(UA_STRING_ALLOC("String1"));
-        TypeWrapper<UA_String> wrapper2(UA_STRING_ALLOC("String2"));
+        TypeWrapper<UA_String, Type::String> wrapper1(UA_STRING_ALLOC("String1"));
+        TypeWrapper<UA_String, Type::String> wrapper2(UA_STRING_ALLOC("String2"));
 
-        TypeWrapper<UA_String> wrapperConstructor(wrapper1);
+        TypeWrapper<UA_String, Type::String> wrapperConstructor(wrapper1);
         REQUIRE(wrapperConstructor.handle()->data != wrapper1.handle()->data);
         REQUIRE_THAT(detail::toString(*wrapperConstructor.handle()), Equals("String1"));
 
-        TypeWrapper<UA_String> wrapperAssignmnet = wrapper2;
+        TypeWrapper<UA_String, Type::String> wrapperAssignmnet = wrapper2;
         REQUIRE(wrapperAssignmnet.handle()->data != wrapper2.handle()->data);
         REQUIRE_THAT(detail::toString(*wrapperAssignmnet.handle()), Equals("String2"));
     }
 
     SECTION("Move constructor / assignment") {
-        TypeWrapper<UA_String> wrapper1(UA_STRING_ALLOC("String1"));
-        TypeWrapper<UA_String> wrapper2(UA_STRING_ALLOC("String2"));
+        TypeWrapper<UA_String, Type::String> wrapper1(UA_STRING_ALLOC("String1"));
+        TypeWrapper<UA_String, Type::String> wrapper2(UA_STRING_ALLOC("String2"));
 
-        TypeWrapper<UA_String> wrapperConstructor(std::move(wrapper1));
+        TypeWrapper<UA_String, Type::String> wrapperConstructor(std::move(wrapper1));
         // wrapper1 still points to same data, but doesn't own it anymore
         REQUIRE(wrapperConstructor.handle()->data == wrapper1.handle()->data);
 
-        TypeWrapper<UA_String> wrapperAssignmnet = std::move(wrapper2);
+        TypeWrapper<UA_String, Type::String> wrapperAssignmnet = std::move(wrapper2);
         // wrapper2 still points to same data, but doesn't own it anymore
         REQUIRE(wrapperAssignmnet.handle()->data == wrapper2.handle()->data);
     }
 
     SECTION("Get type") {
-        TypeWrapper<float> wrapperFloat;
+        TypeWrapper<float, Type::Float> wrapperFloat;
         REQUIRE(wrapperFloat.getType() == Type::Float);
         REQUIRE(wrapperFloat.getDataType() == detail::getUaDataType(Type::Float));
 
-        TypeWrapper<UA_String> wrapperString;
+        TypeWrapper<UA_String, Type::String> wrapperString;
         REQUIRE(wrapperString.getType() == Type::String);
         REQUIRE(wrapperString.getDataType() == detail::getUaDataType(Type::String));
     }

@@ -25,7 +25,7 @@ enum class Type : uint16_t {
     ByteString      = UA_TYPES_BYTESTRING,
     XmlElement      = UA_TYPES_XMLELEMENT,
     NodeId          = UA_TYPES_NODEID,
-    ExpanededNodeId = UA_TYPES_EXPANDEDNODEID,
+    ExpandedNodeId  = UA_TYPES_EXPANDEDNODEID,
     StatusCode      = UA_TYPES_STATUSCODE,
     QualifiedName   = UA_TYPES_QUALIFIEDNAME,
     LocalizedText   = UA_TYPES_LOCALIZEDTEXT,
@@ -175,7 +175,7 @@ template <> constexpr Type getType<UA_Guid>()            { return Type::Guid; }
 // template <> constexpr Type getType<UA_ByteString>()      { return Type::ByteString; }
 // template <> constexpr Type getType<UA_XmlElement>()      { return Type::XmlElement; }
 template <> constexpr Type getType<UA_NodeId>()          { return Type::NodeId; }
-// template <> constexpr Type getType<UA_ExpanededNodeId>() { return Type::ExpanededNodeId; }
+// template <> constexpr Type getType<UA_ExpandedNodeId>() { return Type::ExpandedNodeId; }
 // template <> constexpr Type getType<UA_StatusCode>()      { return Type::StatusCode; }
 template <> constexpr Type getType<UA_QualifiedName>()   { return Type::QualifiedName; }
 template <> constexpr Type getType<UA_LocalizedText>()   { return Type::LocalizedText; }

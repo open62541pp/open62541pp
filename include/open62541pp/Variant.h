@@ -15,7 +15,7 @@ class NodeId;
 /**
  * UA_Variant wrapper class.
  */
-class Variant : public TypeWrapper<UA_Variant> {
+class Variant : public TypeWrapper<UA_Variant, Type::Variant> {
 public:
     using BaseClass::BaseClass;  // inherit contructors
 

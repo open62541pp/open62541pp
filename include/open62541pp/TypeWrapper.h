@@ -18,7 +18,7 @@ namespace opcua {
  *
  * The derived classes should implement specific constructors to convert from other data types.
  */
-template <typename T, Type type = detail::getType<T>()>
+template <typename T, Type type>
 class TypeWrapper {
 public:
     using BaseClass = TypeWrapper<T, type>;
@@ -139,7 +139,7 @@ using IsTypeWrapper = decltype(isTypeWrapperImpl(std::declval<T*>()));
 /**
  * UA_String wrapper class.
  */
-class String : public TypeWrapper<UA_String> {
+class String : public TypeWrapper<UA_String, Type::String> {
 public:
     using BaseClass::BaseClass;  // inherit contructors
 
@@ -155,7 +155,7 @@ public:
 /**
  * UA_Guid wrapper class.
  */
-class Guid : public TypeWrapper<UA_Guid> {
+class Guid : public TypeWrapper<UA_Guid, Type::Guid> {
 public:
     using BaseClass::BaseClass;  // inherit contructors
 
@@ -188,7 +188,7 @@ public:
 /**
  * UA_QualifiedName wrapper class.
  */
-class QualifiedName : public TypeWrapper<UA_QualifiedName> {
+class QualifiedName : public TypeWrapper<UA_QualifiedName, Type::QualifiedName> {
 public:
     // NOLINTNEXTLINE, false positive?
     using BaseClass::BaseClass;  // inherit contructors
@@ -206,7 +206,7 @@ public:
 /**
  * UA_LocalizedText wrapper class.
  */
-class LocalizedText : public TypeWrapper<UA_LocalizedText> {
+class LocalizedText : public TypeWrapper<UA_LocalizedText, Type::LocalizedText> {
 public:
     // NOLINTNEXTLINE, false positive?
     using BaseClass::BaseClass;  // inherit contructors

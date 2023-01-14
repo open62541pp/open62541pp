@@ -107,7 +107,7 @@ TEST_CASE("Variant") {
         Variant var;
 
         {
-            TypeWrapper<int> value(10);
+            TypeWrapper<int, Type::Int32> value(10);
             var.setScalar(value);
             REQUIRE(var.readScalar<int>() == 10);
         }
