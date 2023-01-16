@@ -100,7 +100,7 @@ T fromNative(void* value, Type type) {
 template <typename T, typename NativeType = typename TypeConverter<T>::NativeType>
 std::vector<T> fromNativeArray(NativeType* array, size_t size) {
     if constexpr (detail::isNativeType<T>() && std::is_fundamental_v<T>) {
-        return {array, array + size};  // NOLINT
+        return std::vector<T>(array, array + size);  // NOLINT
     } else {
         std::vector<T> result(size);
         for (size_t i = 0; i < size; ++i) {
