@@ -88,6 +88,7 @@ add_custom_command(
     DEPENDS
         Doxyfile.in
         DoxygenLayout.xml
+        ${PROJECT_SOURCE_DIR}/README.md
         open62541pp  # TODO: only header files?
     WORKING_DIRECTORY ${doxygen_output_dir}
 )

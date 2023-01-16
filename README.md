@@ -10,17 +10,17 @@
 
 open62541++ is a C++ wrapper built on top of the amazing [open62541](https://open62541.org) OPC UA (OPC Unified Architecture) library.
 
-It aims to:
+Features and goals:
 
-- safely wrap the open62541 `UA_*` types to prevent memory leaks
-- expose high-level and easy to use classes similar to the [python-opcua API](https://python-opcua.readthedocs.io):
+- High-level and easy to use classes similar to the [python-opcua API](https://python-opcua.readthedocs.io):
   - `opcua::Server`
-  - `opcua::Client` (TODO)
+  - `opcua::Client` *TODO*
   - `opcua::Node`
-- minimize code
-- reduce the hurdle to get started with OPC UA
-- use modern C++ (C++ 17) and best practices
-- native open62541 objects can be accessed using the `handle()` method of the wrapping classes to give you all the power of open62541 (the open62541++ API is quite limited at the moment)
+- Safe wrapper classes for open62541 `UA_*` types to prevent memory leaks
+- Native open62541 objects can be accessed using the `handle()` method of the wrapping classes
+- Extensible type conversion system to convert from arbitrary types to native `UA_*` types
+- Less hurdle to get started with OPC UA
+- Use modern C++ (C++ 17) and best practices
 
 ## Example
 
@@ -51,6 +51,52 @@ int main() {
 
     server.run();
 }
+```
+
+## Type conversion
+
+Type conversion from and to native `UA_*` types are handled by the `opcua::TypeConverter` struct.
+
+Compile-time checks are used where possible:
+
+```cpp
+opcua::Variant var;
+
+// will compile
+int number = 5;
+var.setScalar(number);
+var.setArrayCopy<double>({1.1, 2.2, 3.3});
+
+// won't compile, because the std::string can't be assigned without copy (conversion needed)
+std::string str{"test"};
+var.setScalar(str);
+
+// won't compile, because the type std::string is associated with more than one variant types:
+// - opcua::Type::String
+// - opcua::Type::ByteString
+// - opcua::Type::XmlElement
+var.setScalarCopy<std::string>("test");
+
+// finally compiles
+var.setScalarCopy<std::string, opcua::Type::String>("test");
+```
+
+You can add template specializations to add conversions for arbitrary types:
+
+```cpp
+namespace opcua {
+
+template <>
+struct TypeConverter<std::string> {
+    using ValueType = std::string;
+    using NativeType = UA_String;
+    using ValidTypes = TypeList<Type::String, Type::ByteString, Type::XmlElement>;
+
+    static void fromNative(const NativeType& src, ValueType& dst) { /* ... */ }
+    static void toNative(const ValueType& src, NativeType& dst) { /* ... */ }
+};
+
+}  // namespace opcua
 ```
 
 ## Build

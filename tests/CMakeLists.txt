@@ -18,7 +18,7 @@ add_executable(
     Node.cpp
     NodeId.cpp
     Server.cpp
-    Types.cpp
+    TypeConverter.cpp
     TypeWrapper.cpp
     Variant.cpp
 )

@@ -3,6 +3,7 @@
 #include <atomic>
 #include <cassert>
 #include <chrono>
+#include <cstdarg>  // va_list, va_copy
 #include <cstdio>
 #include <thread>
 #include <utility>  // move

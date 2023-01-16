@@ -7,6 +7,15 @@
 
 using namespace opcua;
 
+TEST_CASE("getUaDataType") {
+    const auto* expected = &UA_TYPES[UA_TYPES_BOOLEAN];
+
+    REQUIRE(detail::getUaDataType(Type::Boolean) == expected);
+
+    auto nodeId = UA_NODEID_NUMERIC(0, UA_NS0ID_BOOLEAN);
+    REQUIRE(detail::getUaDataType(&nodeId) == expected);
+}
+
 TEST_CASE("String conversion UA_String -> string") {
     UA_String testString = UA_STRING_ALLOC("test123");
     REQUIRE(detail::toString(testString) == "test123");

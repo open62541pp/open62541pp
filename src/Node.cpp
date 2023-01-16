@@ -1,6 +1,7 @@
 #include "open62541pp/Node.h"
 
 #include "open62541pp/ErrorHandling.h"
+#include "open62541pp/Helper.h"
 #include "open62541pp/TypeWrapper.h"
 
 #include "open62541_impl.h"
@@ -94,7 +95,7 @@ std::vector<uint32_t> Node::getArrayDimensions() {
     );
     detail::checkStatusCodeException(status);
     if (variant.isArray()) {
-        return variant.readArray<uint32_t>();
+        return variant.getArrayCopy<uint32_t>();
     }
     return {};
 }
@@ -148,7 +149,7 @@ void Node::setValueRank(ValueRank valueRank) {
 
 void Node::setArrayDimensions(const std::vector<uint32_t>& dimensions) {
     Variant variant;
-    variant.setArray(dimensions);
+    variant.setArrayCopy(dimensions);
     const auto status = UA_Server_writeArrayDimensions(
         server_.handle(), *nodeId_.handle(), *variant.handle()
     );

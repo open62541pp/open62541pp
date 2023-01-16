@@ -4,6 +4,7 @@
 #include <variant>
 
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/Types.h"
 #include "open62541pp/open62541.h"
 
 namespace opcua {

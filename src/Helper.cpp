@@ -6,6 +6,10 @@
 
 namespace opcua::detail {
 
+UA_String allocUaString(const char* src) {
+    return UA_String_fromChars(src);
+}
+
 UA_String allocUaString(const std::string& src) {
     return UA_String_fromChars(src.c_str());
 }

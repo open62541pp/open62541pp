@@ -1,3 +1,4 @@
+#include <array>
 #include <vector>
 
 #include <catch2/catch_test_macros.hpp>
@@ -11,10 +12,12 @@ using namespace opcua;
 TEST_CASE("Variant") {
     SECTION("Empty variant") {
         Variant varEmpty;
-
         REQUIRE(varEmpty.isEmpty());
         REQUIRE_FALSE(varEmpty.isScalar());
         REQUIRE_FALSE(varEmpty.isArray());
+        REQUIRE(varEmpty.getVariantType() == std::nullopt);
+        REQUIRE(varEmpty.getArrayLength() == 0);
+        REQUIRE(varEmpty.getArrayDimensions().empty());
 
         SECTION("Type checks") {
             REQUIRE_FALSE(varEmpty.isType(Type::Boolean));
@@ -27,21 +30,10 @@ TEST_CASE("Variant") {
             REQUIRE_FALSE(varEmpty.isType(Type::Float));
             REQUIRE_FALSE(varEmpty.isType(Type::Double));
             // ...
-
-            REQUIRE_FALSE(varEmpty.isType<bool>());
-            REQUIRE_FALSE(varEmpty.isType<int16_t>());
-            REQUIRE_FALSE(varEmpty.isType<uint16_t>());
-            REQUIRE_FALSE(varEmpty.isType<int32_t>());
-            REQUIRE_FALSE(varEmpty.isType<uint32_t>());
-            REQUIRE_FALSE(varEmpty.isType<int64_t>());
-            REQUIRE_FALSE(varEmpty.isType<uint64_t>());
-            REQUIRE_FALSE(varEmpty.isType<float>());
-            REQUIRE_FALSE(varEmpty.isType<double>());
-            // ...
         }
     }
 
-    SECTION("Write/read scalar") {
+    SECTION("Set/get scalar") {
         Variant var;
         int32_t value = 5;
         var.setScalar(value);
@@ -50,72 +42,120 @@ TEST_CASE("Variant") {
         REQUIRE(var.isType(&UA_TYPES[UA_TYPES_INT32]));
         REQUIRE(var.isType(Type::Int32));
         REQUIRE(var.isType(NodeId{UA_NS0ID_INT32, 0}));
-        REQUIRE(var.isType<int32_t>());
+        REQUIRE(var.getVariantType().value() == Type::Int32);
 
-        REQUIRE_NOTHROW(var.readScalar<int32_t>());
-        REQUIRE_THROWS(var.readArray<int32_t>());
-        REQUIRE_THROWS(var.readScalar<bool>());
-        REQUIRE_THROWS(var.readScalar<int16_t>(&UA_TYPES[UA_TYPES_INT32]));
-
-        REQUIRE(var.readScalar<int32_t>() == value);
+        REQUIRE_THROWS(var.getScalar<bool>());
+        REQUIRE_THROWS(var.getScalar<int16_t>());
+        REQUIRE_THROWS(var.getArrayCopy<int32_t>());
+        REQUIRE(var.getScalar<int32_t>() == value);
+        REQUIRE(var.getScalarCopy<int32_t>() == value);
     }
 
-    SECTION("Write/read mixed scalar types") {
+    SECTION("Set/get scalar reference") {
+        Variant var;
+        int value = 3;
+        var.setScalar(value);
+        int& ref = var.getScalar<int>();
+        REQUIRE(ref == value);
+        REQUIRE(&ref == &value);
+
+        value++;
+        REQUIRE(ref == value);
+        ref++;
+        REQUIRE(ref == value);
+    }
+
+    SECTION("Set/get mixed scalar types") {
         Variant var;
 
-        var.setScalar(static_cast<int>(11));
-        REQUIRE(var.readScalar<int>() == 11);
+        var.setScalarCopy(static_cast<int>(11));
+        REQUIRE(var.getScalar<int>() == 11);
+        REQUIRE(var.getScalarCopy<int>() == 11);
 
-        var.setScalar(static_cast<float>(11.11));
-        REQUIRE(var.readScalar<float>() == 11.11f);
+        var.setScalarCopy(static_cast<float>(11.11));
+        REQUIRE(var.getScalar<float>() == 11.11f);
+        REQUIRE(var.getScalarCopy<float>() == 11.11f);
 
-        var.setScalar(static_cast<short>(1));
-        REQUIRE(var.readScalar<short>() == 1);
+        var.setScalarCopy(static_cast<short>(1));
+        REQUIRE(var.getScalar<short>() == 1);
+        REQUIRE(var.getScalarCopy<short>() == 1);
     }
 
-    SECTION("Write/read array") {
-        Variant var;
-        std::vector<float> value{0, 1, 2, 3, 4, 5};
-        var.setArray(value);
-
-        REQUIRE(var.isArray());
-        REQUIRE(var.isType<float>());
-        REQUIRE(var.isType(Type::Float));
-        REQUIRE(var.isType(NodeId{UA_NS0ID_FLOAT, 0}));
-
-        REQUIRE_NOTHROW(var.readArray<float>());
-        REQUIRE_THROWS(var.readArray<int32_t>());
-        REQUIRE_THROWS(var.readArray<bool>());
-
-        REQUIRE(var.readArray<float>() == value);
-    }
-
-    SECTION("Write array no copy") {
-        Variant var;
-        std::vector<float> value{0, 1, 2};
-        var.setArrayNoCopy(value);
-
-        REQUIRE(var.readArray<float>() == value);
-
-        std::vector<float> valueChanged({3, 4, 5});
-        value.assign(valueChanged.begin(), valueChanged.end());
-
-        REQUIRE(var.readArray<float>() == valueChanged);
-    }
-
-    SECTION("Write/read wrapped types") {
+    SECTION("Set/get wrapped scalar types") {
         Variant var;
 
         {
             TypeWrapper<int, Type::Int32> value(10);
             var.setScalar(value);
-            REQUIRE(var.readScalar<int>() == 10);
+            REQUIRE(var.getScalar<int>() == 10);
+            REQUIRE(var.getScalarCopy<int>() == 10);
         }
 
         {
-            String value("Test");
+            LocalizedText value("text", "en-US");
             var.setScalar(value);
-            REQUIRE(var.readScalar<String>() == value);
+            REQUIRE(var.getScalarCopy<LocalizedText>() == value);
         }
+    }
+
+    SECTION("Set/get array") {
+        Variant var;
+        std::vector<float> value{0, 1, 2, 3, 4, 5};
+        var.setArrayCopy(value);
+
+        REQUIRE(var.isArray());
+        REQUIRE(var.isType(Type::Float));
+        REQUIRE(var.isType(NodeId{UA_NS0ID_FLOAT, 0}));
+        REQUIRE(var.getVariantType().value() == Type::Float);
+        REQUIRE(var.getArrayLength() == value.size());
+        REQUIRE(var.handle()->data != value.data());
+
+        REQUIRE_THROWS(var.getArrayCopy<int32_t>());
+        REQUIRE_THROWS(var.getArrayCopy<bool>());
+        REQUIRE(var.getArrayCopy<float>() == value);
+    }
+
+    SECTION("Set/get array reference") {
+        Variant var;
+        std::vector<float> value{0, 1, 2};
+        var.setArray(value);
+        REQUIRE(var.getArrayCopy<float>() == value);
+
+        std::vector<float> valueChanged({3, 4, 5});
+        value.assign(valueChanged.begin(), valueChanged.end());
+        REQUIRE(var.getArrayCopy<float>() == valueChanged);
+    }
+
+    SECTION("Set array of native strings") {
+        Variant var;
+        std::array array{
+            detail::allocUaString("item1"),
+            detail::allocUaString("item2"),
+            detail::allocUaString("item3"),
+        };
+
+        var.setArray<UA_String, Type::String>(array.data(), array.size());
+        REQUIRE(var.getArrayLength() == array.size());
+        REQUIRE(var.handle()->data == array.data());
+
+        UA_clear(&array[0], &UA_TYPES[UA_TYPES_STRING]);
+        UA_clear(&array[1], &UA_TYPES[UA_TYPES_STRING]);
+        UA_clear(&array[2], &UA_TYPES[UA_TYPES_STRING]);
+    }
+
+    SECTION("Set/get array of strings") {
+        Variant var;
+        std::vector<std::string> value{"a", "b", "c"};
+        var.setArrayCopy<std::string, Type::String>(value);
+
+        REQUIRE(var.isArray());
+        REQUIRE(var.isType(Type::String));
+        REQUIRE(var.isType(NodeId{UA_NS0ID_STRING, 0}));
+        REQUIRE(var.getVariantType().value() == Type::String);
+
+        REQUIRE_THROWS(var.getScalarCopy<std::string>());
+        REQUIRE_THROWS(var.getArrayCopy<int32_t>());
+        REQUIRE_THROWS(var.getArrayCopy<bool>());
+        REQUIRE(var.getArrayCopy<std::string>() == value);
     }
 }

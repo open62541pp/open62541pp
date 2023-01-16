@@ -8,6 +8,7 @@
 #include <utility>  // move
 
 #include "open62541pp/ErrorHandling.h"
+#include "open62541pp/Helper.h"
 #include "open62541pp/Types.h"
 #include "open62541pp/open62541.h"
 
@@ -72,12 +73,12 @@ public:
     }
 
     /// Return type enum
-    constexpr static Type getType() {
+    static constexpr Type getType() {
         return type;
     }
 
     /// Return UA_DataType object
-    constexpr static const UA_DataType* getDataType() {
+    static const UA_DataType* getDataType() {
         return detail::getUaDataType(type);
     }
 

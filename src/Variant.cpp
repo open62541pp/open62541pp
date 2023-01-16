@@ -21,36 +21,51 @@ bool Variant::isType(const UA_DataType* type) const noexcept {
 }
 
 bool Variant::isType(Type type) const noexcept {
-    return isType(detail::getUaDataType(type));
+    if (handle()->type == nullptr) {
+        return false;
+    }
+    return handle()->type->typeIndex == static_cast<uint16_t>(type);
 }
 
 bool Variant::isType(const NodeId& id) const noexcept {
     return isType(detail::getUaDataType(id.handle()));
 }
 
-void Variant::checkReadScalar(const UA_DataType* type) const {
-    if (!isScalar()) {
-        throw Exception("Variant is not a scalar");
+std::optional<Type> Variant::getVariantType() const noexcept {
+    if (handle()->type == nullptr) {
+        return {};
     }
-    if (!isType(type)) {
-        throw Exception("Variant does not contain a scalar of specified return type");
-    }
+    return static_cast<Type>(handle()->type->typeIndex);
 }
 
-void Variant::checkReadArray(const UA_DataType* type) const {
+size_t Variant::getArrayLength() const noexcept {
+    return isArray() ? handle()->arrayLength : 0;
+}
+
+std::vector<uint32_t> Variant::getArrayDimensions() const {
     if (!isArray()) {
-        throw Exception("Variant is not an array");
+        return {};
     }
-    if (!isType(type)) {
-        throw Exception("Variant does not contain an array of specified return type");
+    const auto* ptr = handle()->arrayDimensions;
+    return {ptr, ptr + handle()->arrayDimensionsSize};  // NOLINT
+}
+
+void Variant::checkIsScalar() const {
+    if (!isScalar()) {
+        throw BadVariantAccess("Variant is not a scalar");
     }
 }
 
-void Variant::setScalarImpl(void* value, const UA_DataType* type) {
+void Variant::checkIsArray() const {
+    if (!isArray()) {
+        throw BadVariantAccess("Variant is not an array");
+    }
+}
+
+void Variant::setScalarImpl(void* value, const UA_DataType* type, bool own) noexcept {
     clear();
-    // UA_Variant_setScalar will borrow data compared to UA_Variant_setScalarCopy
     UA_Variant_setScalar(handle(), value, type);
-    handle()->storageType = UA_VARIANT_DATA_NODELETE;
+    handle()->storageType = own ? UA_VARIANT_DATA : UA_VARIANT_DATA_NODELETE;
 }
 
 void Variant::setScalarCopyImpl(const void* value, const UA_DataType* type) {
@@ -60,11 +75,10 @@ void Variant::setScalarCopyImpl(const void* value, const UA_DataType* type) {
     handle()->storageType = UA_VARIANT_DATA;
 }
 
-void Variant::setArrayImpl(void* array, size_t size, const UA_DataType* type) {
+void Variant::setArrayImpl(void* array, size_t size, const UA_DataType* type, bool own) noexcept {
     clear();
-    // UA_Variant_setArray will borrow data compared to UA_Variant_setArrayCopy
     UA_Variant_setArray(handle(), array, size, type);
-    handle()->storageType = UA_VARIANT_DATA_NODELETE;
+    handle()->storageType = own ? UA_VARIANT_DATA : UA_VARIANT_DATA_NODELETE;
 }
 
 void Variant::setArrayCopyImpl(const void* array, size_t size, const UA_DataType* type) {

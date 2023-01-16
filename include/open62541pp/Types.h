@@ -1,10 +1,52 @@
 #pragma once
 
-#include <type_traits>
+#include <cstdint>
+#include <string_view>
+#include <tuple>
 
+#include "open62541pp/Traits.h"
 #include "open62541pp/open62541.h"
 
 namespace opcua {
+
+namespace detail {
+
+using NativeTypes = std::tuple<
+    UA_Boolean,
+    UA_SByte,
+    UA_Byte,
+    UA_Int16,
+    UA_UInt16,
+    UA_Int32,
+    UA_UInt32,
+    UA_Int64,
+    UA_UInt64,
+    UA_Float,
+    UA_Double,
+    UA_String,
+    UA_DateTime,
+    UA_Guid,
+    UA_ByteString,
+    UA_XmlElement,
+    UA_NodeId,
+    UA_ExpandedNodeId,
+    UA_StatusCode,
+    UA_QualifiedName,
+    UA_LocalizedText,
+    UA_ExtensionObject,
+    UA_DataValue,
+    UA_Variant,
+    UA_DiagnosticInfo>;
+
+template <typename T>
+constexpr bool isNativeType() {
+    return TupleHolds<NativeTypes, T>::value;
+}
+
+// template <size_t Index>
+// using NativeType = std::tuple_element<Index, NativeTypes>;
+
+}  // namespace detail
 
 enum class Type : uint16_t {
     // clang-format off
@@ -141,68 +183,5 @@ enum class ReferenceType : uint16_t {
     HasEffectUnsuppressed               = UA_NS0ID_HASEFFECTUNSUPPRESSED,
     // clang-format on
 };
-
-namespace detail {
-
-template <typename...>
-struct AlwaysFalse : std::false_type {};
-
-template <typename T>
-constexpr Type getType() {
-    static_assert(
-        detail::AlwaysFalse<T>::value,
-        "Type mapping not possible (maybe not existing or not unique). "
-        "Please specify type manually."
-    );
-    return {};  // TODO: Type::Undefined?
-}
-
-// clang-format off
-template <> constexpr Type getType<UA_Boolean>()         { return Type::Boolean; }
-template <> constexpr Type getType<UA_SByte>()           { return Type::SByte; }
-template <> constexpr Type getType<UA_Byte>()            { return Type::Byte; }
-template <> constexpr Type getType<UA_Int16>()           { return Type::Int16; }
-template <> constexpr Type getType<UA_UInt16>()          { return Type::UInt16; }
-template <> constexpr Type getType<UA_Int32>()           { return Type::Int32; }
-template <> constexpr Type getType<UA_UInt32>()          { return Type::UInt32; }
-template <> constexpr Type getType<UA_Int64>()           { return Type::Int64; }
-template <> constexpr Type getType<UA_UInt64>()          { return Type::UInt64; }
-template <> constexpr Type getType<UA_Float>()           { return Type::Float; }
-template <> constexpr Type getType<UA_Double>()          { return Type::Double; }
-template <> constexpr Type getType<UA_String>()          { return Type::String; }
-// template <> constexpr Type getType<UA_DateTime>()        { return Type::DateTime; }
-template <> constexpr Type getType<UA_Guid>()            { return Type::Guid; }
-// template <> constexpr Type getType<UA_ByteString>()      { return Type::ByteString; }
-// template <> constexpr Type getType<UA_XmlElement>()      { return Type::XmlElement; }
-template <> constexpr Type getType<UA_NodeId>()          { return Type::NodeId; }
-// template <> constexpr Type getType<UA_ExpandedNodeId>() { return Type::ExpandedNodeId; }
-// template <> constexpr Type getType<UA_StatusCode>()      { return Type::StatusCode; }
-template <> constexpr Type getType<UA_QualifiedName>()   { return Type::QualifiedName; }
-template <> constexpr Type getType<UA_LocalizedText>()   { return Type::LocalizedText; }
-template <> constexpr Type getType<UA_ExtensionObject>() { return Type::ExtensionObject; }
-template <> constexpr Type getType<UA_DataValue>()       { return Type::DataValue; }
-template <> constexpr Type getType<UA_Variant>()         { return Type::Variant; }
-template <> constexpr Type getType<UA_DiagnosticInfo>()  { return Type::DiagnosticInfo; }
-
-// clang-format on
-
-/// Get UA_DataType by Type enum.
-inline const UA_DataType* getUaDataType(Type type) {
-    return &UA_TYPES[static_cast<uint16_t>(type)];  // NOLINT
-}
-
-/// Get (custom) UA_DataType by UA_NodeId.
-/// Return nullptr if no matching data type was found.
-inline const UA_DataType* getUaDataType(const UA_NodeId* id) {
-    return UA_findDataType(id);
-}
-
-/// Get UA_DataType by template argument.
-template <typename T>
-inline const UA_DataType* getUaDataType() {
-    return getUaDataType(getType<T>());
-}
-
-}  // namespace detail
 
 }  // namespace opcua

@@ -92,7 +92,7 @@ public:
     void write(Arg&& arg) {
         requireNodeClass(NodeClass::Variable);
         Variant var;
-        var.setScalar(std::forward<Arg>(arg));
+        var.setScalarCopy(std::forward<Arg>(arg));
         writeVariantToServer(var);
     }
 
@@ -100,7 +100,7 @@ public:
     void writeArray(Arg&& arg) {
         requireNodeClass(NodeClass::Variable);
         Variant var;
-        var.setArray(std::forward<Arg>(arg));
+        var.setArrayCopy(std::forward<Arg>(arg));
         writeVariantToServer(var);
     }
 
@@ -109,7 +109,7 @@ public:
         requireNodeClass(NodeClass::Variable);
         Variant var;
         readVariantFromServer(var);
-        return var.readScalar<T>();
+        return var.getScalarCopy<T>();
     }
 
     template <typename T>
@@ -117,7 +117,7 @@ public:
         requireNodeClass(NodeClass::Variable);
         Variant var;
         readVariantFromServer(var);
-        return var.readArray<T>();
+        return var.getArrayCopy<T>();
     }
 
     void remove();
