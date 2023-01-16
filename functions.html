@@ -102,12 +102,25 @@ $(function() {
 <li>clear()
 : <a class="el" href="classopcua_1_1TypeWrapper.html#a66a1c9d61aebe7893d8a574598e76811">opcua::TypeWrapper&lt; T, type &gt;</a>
 </li>
+<li>contains()
+: <a class="el" href="structopcua_1_1TypeList.html#a44c81393cc7457bf69e7cda3b678218f">opcua::TypeList&lt; T &gt;</a>
+</li>
 </ul>
 
 
 <h3><a id="index_e"></a>- e -</h3><ul>
 <li>Exception()
 : <a class="el" href="classopcua_1_1Exception.html#ac87cbec4e68732dfabbafbc4245d9b15">opcua::Exception</a>
+</li>
+</ul>
+
+
+<h3><a id="index_f"></a>- f -</h3><ul>
+<li>fromNative()
+: <a class="el" href="structopcua_1_1detail_1_1TypeConverterNative.html#ad9882ad602face06aec6b6b6698e7430">opcua::detail::TypeConverterNative&lt; T, Types &gt;</a>
+, <a class="el" href="structopcua_1_1TypeConverter.html#a500a9ff63f07a43c196ed64b02169694">opcua::TypeConverter&lt; T, Enable &gt;</a>
+, <a class="el" href="structopcua_1_1TypeConverter_3_01std_1_1string_01_4.html#a26facf257e369e2856c92598528d9a40">opcua::TypeConverter&lt; std::string &gt;</a>
+, <a class="el" href="structopcua_1_1TypeConverter_3_01WrapperType_00_01std_1_1enable__if__t_3_01detail_1_1IsTypeWrappcc7e8e511c407d0e9e16d044c83436e7.html#af826a58802028dbabbcd60b6bafdad97">opcua::TypeConverter&lt; WrapperType, std::enable_if_t&lt; detail::IsTypeWrapper&lt; WrapperType &gt;::value &gt; &gt;</a>
 </li>
 </ul>
 
@@ -120,8 +133,18 @@ $(function() {
 <li>getAccessLevel()
 : <a class="el" href="classopcua_1_1Node.html#a2c61fd5aef70dfe248982d3a7ee54e29">opcua::Node</a>
 </li>
+<li>getArray()
+: <a class="el" href="classopcua_1_1Variant.html#a97420c5bb7175550da4dc5fda947035a">opcua::Variant</a>
+</li>
+<li>getArrayCopy()
+: <a class="el" href="classopcua_1_1Variant.html#a745da34378602215fd443e3b229d5c23">opcua::Variant</a>
+</li>
 <li>getArrayDimensions()
 : <a class="el" href="classopcua_1_1Node.html#a71f9fd2f16fe4793b6b56615e2bfd0a3">opcua::Node</a>
+, <a class="el" href="classopcua_1_1Variant.html#a27032e6b4c6ed92989432abc65810744">opcua::Variant</a>
+</li>
+<li>getArrayLength()
+: <a class="el" href="classopcua_1_1Variant.html#a54698bd6ada60d5f20556403f1e4d163">opcua::Variant</a>
 </li>
 <li>getBrowseName()
 : <a class="el" href="classopcua_1_1Node.html#a144cace8c9ad3d2fe4d57f2eef659e38">opcua::Node</a>
@@ -131,7 +154,7 @@ $(function() {
 </li>
 <li>getDataType()
 : <a class="el" href="classopcua_1_1Node.html#ad74c5052069cefa99ecd34a6c299cb58">opcua::Node</a>
-, <a class="el" href="classopcua_1_1TypeWrapper.html#abb384cf2a04e8ee62f41515e0e147b33">opcua::TypeWrapper&lt; T, type &gt;</a>
+, <a class="el" href="classopcua_1_1TypeWrapper.html#a8a47f12ca0ab0a3026b054c07a5b1d0e">opcua::TypeWrapper&lt; T, type &gt;</a>
 </li>
 <li>getDataTypesNode()
 : <a class="el" href="classopcua_1_1Server.html#ae7f742acb272be535a5f1370e4321904">opcua::Server</a>
@@ -185,6 +208,12 @@ $(function() {
 <li>getRootNode()
 : <a class="el" href="classopcua_1_1Server.html#a2d210513f74b7afc2e69d5c08726b8cd">opcua::Server</a>
 </li>
+<li>getScalar()
+: <a class="el" href="classopcua_1_1Variant.html#acbe30a5ffe8a675a7ba5162d4694fbb9">opcua::Variant</a>
+</li>
+<li>getScalarCopy()
+: <a class="el" href="classopcua_1_1Variant.html#a0f7d377bfecd10cc89fda41b3ad9d934">opcua::Variant</a>
+</li>
 <li>getText()
 : <a class="el" href="classopcua_1_1LocalizedText.html#ac1965da16a71b35e5b8ce4996c8e8db1">opcua::LocalizedText</a>
 </li>
@@ -192,7 +221,7 @@ $(function() {
 : <a class="el" href="classopcua_1_1LocalizedText.html#adf045011b1c3d4ffcf0cd52d063767fb">opcua::LocalizedText</a>
 </li>
 <li>getType()
-: <a class="el" href="classopcua_1_1TypeWrapper.html#ab04aff96ec6f671ab30c8edf29a7c1cd">opcua::TypeWrapper&lt; T, type &gt;</a>
+: <a class="el" href="classopcua_1_1TypeWrapper.html#a74bc41c0524f86ad72a637196861d1d9">opcua::TypeWrapper&lt; T, type &gt;</a>
 </li>
 <li>getTypesNode()
 : <a class="el" href="classopcua_1_1Server.html#a2a6f3df5e0d8c2f83b194153c156f84d">opcua::Server</a>
@@ -202,6 +231,9 @@ $(function() {
 </li>
 <li>getVariableTypesNode()
 : <a class="el" href="classopcua_1_1Server.html#afd60bdee28d6ddfcf6a2c367d92a77ec">opcua::Server</a>
+</li>
+<li>getVariantType()
+: <a class="el" href="classopcua_1_1Variant.html#aeb584a86991dc9b25ed22cd94ec06e58">opcua::Variant</a>
 </li>
 <li>getView()
 : <a class="el" href="classopcua_1_1ByteString.html#aaff44bcbad72bb244ccaebd71789d7a0">opcua::ByteString</a>
@@ -250,7 +282,7 @@ $(function() {
 : <a class="el" href="classopcua_1_1Variant.html#ae528dcb9d819364f9590c310dc8e8f2a">opcua::Variant</a>
 </li>
 <li>isType()
-: <a class="el" href="classopcua_1_1Variant.html#a7a68c9dad90735ea93c52494057b9f80">opcua::Variant</a>
+: <a class="el" href="classopcua_1_1Variant.html#a07ee9d4a0be5218428ceb42493398091">opcua::Variant</a>
 </li>
 </ul>
 
@@ -263,6 +295,15 @@ $(function() {
 
 
 <h3><a id="index_n"></a>- n -</h3><ul>
+<li>NativeConverter
+: <a class="el" href="structopcua_1_1TypeConverter_3_01WrapperType_00_01std_1_1enable__if__t_3_01detail_1_1IsTypeWrappcc7e8e511c407d0e9e16d044c83436e7.html#ad67aa0209cfe2efb3d83b145e13f5027">opcua::TypeConverter&lt; WrapperType, std::enable_if_t&lt; detail::IsTypeWrapper&lt; WrapperType &gt;::value &gt; &gt;</a>
+</li>
+<li>NativeType
+: <a class="el" href="structopcua_1_1detail_1_1TypeConverterNative.html#a40c6a47fe1d65bf7d8491411b1865a5a">opcua::detail::TypeConverterNative&lt; T, Types &gt;</a>
+, <a class="el" href="structopcua_1_1TypeConverter.html#aed78022eaa2d4d1d73ef24d6332869f8">opcua::TypeConverter&lt; T, Enable &gt;</a>
+, <a class="el" href="structopcua_1_1TypeConverter_3_01std_1_1string_01_4.html#a174c4e7a6eb1236f05b99381dad6a65b">opcua::TypeConverter&lt; std::string &gt;</a>
+, <a class="el" href="structopcua_1_1TypeConverter_3_01WrapperType_00_01std_1_1enable__if__t_3_01detail_1_1IsTypeWrappcc7e8e511c407d0e9e16d044c83436e7.html#a26e15f5c5f9d66a19ce4811cc8627cca">opcua::TypeConverter&lt; WrapperType, std::enable_if_t&lt; detail::IsTypeWrapper&lt; WrapperType &gt;::value &gt; &gt;</a>
+</li>
 <li>Node()
 : <a class="el" href="classopcua_1_1Node.html#a419b6b917de62aa5bfc13f076c53ef98">opcua::Node</a>
 </li>
@@ -321,10 +362,6 @@ $(function() {
 </li>
 <li>readArray()
 : <a class="el" href="classopcua_1_1Node.html#aa9a7d1e6b1fe819a9fef101d7aca201c">opcua::Node</a>
-, <a class="el" href="classopcua_1_1Variant.html#a632b893a8aef075fcddb6facd0a902c9">opcua::Variant</a>
-</li>
-<li>readScalar()
-: <a class="el" href="classopcua_1_1Variant.html#a747250037b3e1f92a0c439caf762a574">opcua::Variant</a>
 </li>
 <li>readVariantFromServer()
 : <a class="el" href="classopcua_1_1Node.html#a9759c0ee8b8a828f84d8b4e27daee496">opcua::Node</a>
@@ -364,13 +401,13 @@ $(function() {
 : <a class="el" href="classopcua_1_1Server.html#aa20fc13af8bce1152e682515d75afc3a">opcua::Server</a>
 </li>
 <li>setArray()
-: <a class="el" href="classopcua_1_1Variant.html#a234aa27bdbc07fc59340876ac81560ae">opcua::Variant</a>
+: <a class="el" href="classopcua_1_1Variant.html#a7d05beac903fac0b7391f5d0ef731515">opcua::Variant</a>
+</li>
+<li>setArrayCopy()
+: <a class="el" href="classopcua_1_1Variant.html#a5f71f0596ff5b378cddd04efbb23931d">opcua::Variant</a>
 </li>
 <li>setArrayDimensions()
 : <a class="el" href="classopcua_1_1Node.html#a590c001902af1491eb6f192a47adadc5">opcua::Node</a>
-</li>
-<li>setArrayNoCopy()
-: <a class="el" href="classopcua_1_1Variant.html#ab7f51fa954cf6c6b2e204a9a13adabe0">opcua::Variant</a>
 </li>
 <li>setCustomHostname()
 : <a class="el" href="classopcua_1_1Server.html#a50463492d9e0f1342b9a33b402931dc0">opcua::Server</a>
@@ -394,13 +431,19 @@ $(function() {
 : <a class="el" href="classopcua_1_1Server.html#a480065442a39d201936bbfb35d2530f1">opcua::Server</a>
 </li>
 <li>setScalar()
-: <a class="el" href="classopcua_1_1Variant.html#a7e29c5f9cdbcf04e1ad997eebf8f59e7">opcua::Variant</a>
+: <a class="el" href="classopcua_1_1Variant.html#afae3ba56203f2cbbd7a5ee7b4d7dcb5b">opcua::Variant</a>
+</li>
+<li>setScalarCopy()
+: <a class="el" href="classopcua_1_1Variant.html#a2e6c68f65d930dd8108dad49d842a624">opcua::Variant</a>
 </li>
 <li>setValueRank()
 : <a class="el" href="classopcua_1_1Node.html#a7447b73a7d9cd6944e97ab020a9f92a1">opcua::Node</a>
 </li>
 <li>setWriteMask()
 : <a class="el" href="classopcua_1_1Node.html#ac5749ccd6bc6342db7398e18b48dbfc8">opcua::Node</a>
+</li>
+<li>size()
+: <a class="el" href="structopcua_1_1TypeList.html#a236759ef82c78228f404b699803ad184">opcua::TypeList&lt; T &gt;</a>
 </li>
 <li>stop()
 : <a class="el" href="classopcua_1_1Server.html#a51f8bc0f79b2e5cea8fc094c58a76a9c">opcua::Server</a>
@@ -412,6 +455,18 @@ $(function() {
 
 
 <h3><a id="index_t"></a>- t -</h3><ul>
+<li>toArray()
+: <a class="el" href="structopcua_1_1TypeList.html#a11f4864a0da6414dc96df64e00e3809b">opcua::TypeList&lt; T &gt;</a>
+</li>
+<li>toNative()
+: <a class="el" href="structopcua_1_1detail_1_1TypeConverterNative.html#a8424f93e836397d483612cffc7288356">opcua::detail::TypeConverterNative&lt; T, Types &gt;</a>
+, <a class="el" href="structopcua_1_1TypeConverter.html#a3a75022757c6255b3e75a0ed76519edb">opcua::TypeConverter&lt; T, Enable &gt;</a>
+, <a class="el" href="structopcua_1_1TypeConverter_3_01std_1_1string_01_4.html#a5af7c0b12d138c08a596e2e52790e2f1">opcua::TypeConverter&lt; std::string &gt;</a>
+, <a class="el" href="structopcua_1_1TypeConverter_3_01WrapperType_00_01std_1_1enable__if__t_3_01detail_1_1IsTypeWrappcc7e8e511c407d0e9e16d044c83436e7.html#a4428b5befd9a6ead5c01f6f80694c03a">opcua::TypeConverter&lt; WrapperType, std::enable_if_t&lt; detail::IsTypeWrapper&lt; WrapperType &gt;::value &gt; &gt;</a>
+</li>
+<li>Types
+: <a class="el" href="structopcua_1_1TypeList.html#ac5f695d10565dd8b0b826d299809ff59">opcua::TypeList&lt; T &gt;</a>
+</li>
 <li>TypeWrapper()
 : <a class="el" href="classopcua_1_1TypeWrapper.html#a56255d1307d80db79ea9176769f25a61">opcua::TypeWrapper&lt; T, type &gt;</a>
 </li>
@@ -424,6 +479,22 @@ $(function() {
 </li>
 <li>username
 : <a class="el" href="structopcua_1_1Login.html#a92df088f423035168f7c4d6099bf9e04">opcua::Login</a>
+</li>
+</ul>
+
+
+<h3><a id="index_v"></a>- v -</h3><ul>
+<li>ValidTypes
+: <a class="el" href="structopcua_1_1detail_1_1TypeConverterNative.html#a5e530e4a82077a38f607c31708a1a051">opcua::detail::TypeConverterNative&lt; T, Types &gt;</a>
+, <a class="el" href="structopcua_1_1TypeConverter.html#ac091a5d0e15545862627fb2f7e896da4">opcua::TypeConverter&lt; T, Enable &gt;</a>
+, <a class="el" href="structopcua_1_1TypeConverter_3_01std_1_1string_01_4.html#ab722dfa1806ae15ef07aebe2d5c0ee95">opcua::TypeConverter&lt; std::string &gt;</a>
+, <a class="el" href="structopcua_1_1TypeConverter_3_01WrapperType_00_01std_1_1enable__if__t_3_01detail_1_1IsTypeWrappcc7e8e511c407d0e9e16d044c83436e7.html#a3bcf1451f0325129ccab2ef742e0402b">opcua::TypeConverter&lt; WrapperType, std::enable_if_t&lt; detail::IsTypeWrapper&lt; WrapperType &gt;::value &gt; &gt;</a>
+</li>
+<li>ValueType
+: <a class="el" href="structopcua_1_1detail_1_1TypeConverterNative.html#afe49139b1ae66563904fc4d2569058de">opcua::detail::TypeConverterNative&lt; T, Types &gt;</a>
+, <a class="el" href="structopcua_1_1TypeConverter.html#aa5f3e2e4b301798069e210b346f46f99">opcua::TypeConverter&lt; T, Enable &gt;</a>
+, <a class="el" href="structopcua_1_1TypeConverter_3_01std_1_1string_01_4.html#a46ec6dbf2d781a4c9ad6f23415c692d3">opcua::TypeConverter&lt; std::string &gt;</a>
+, <a class="el" href="structopcua_1_1TypeConverter_3_01WrapperType_00_01std_1_1enable__if__t_3_01detail_1_1IsTypeWrappcc7e8e511c407d0e9e16d044c83436e7.html#a79d406bd82855db1ac5224c0881cc96c">opcua::TypeConverter&lt; WrapperType, std::enable_if_t&lt; detail::IsTypeWrapper&lt; WrapperType &gt;::value &gt; &gt;</a>
 </li>
 </ul>
 

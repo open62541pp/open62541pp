@@ -69,42 +69,45 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Types.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;type_traits&gt;</code><br />
+<div class="textblock"><code>#include &lt;cstdint&gt;</code><br />
+<code>#include &lt;string_view&gt;</code><br />
+<code>#include &lt;tuple&gt;</code><br />
+<code>#include &quot;<a class="el" href="Traits_8h_source.html">open62541pp/Traits.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="open62541_8h_source.html">open62541pp/open62541.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Types.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="Types_8h__incl.svg" width="587" height="216"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="Types_8h__incl.svg" width="876" height="216"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="Types_8h__dep__incl.svg" width="718" height="483"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="Types_8h__dep__incl.svg" width="991" height="691"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div>
 <p><a href="Types_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1AlwaysFalse.html">opcua::detail::AlwaysFalse&lt;... &gt;</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespaceopcua"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html">opcua</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:namespaceopcua_1_1detail"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html">opcua::detail</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:ab3607bbea283b68a05eb277ff1dc0a6f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ab3607bbea283b68a05eb277ff1dc0a6f">opcua::detail::NativeTypes</a> = std::tuple&lt; <a class="elRef" href="open62541/types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>, <a class="elRef" href="open62541/types_8h.html#a4ba04733a2525e207fa5ea5337ad17f3">UA_SByte</a>, <a class="elRef" href="open62541/types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a>, <a class="elRef" href="open62541/types_8h.html#a2dfa954c25e6984956ab6fa8e8fd73db">UA_Int16</a>, <a class="elRef" href="open62541/types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a>, <a class="elRef" href="open62541/types_8h.html#a01ce3c3b2fb34ef81c97c313f516004e">UA_Int32</a>, <a class="elRef" href="open62541/types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>, <a class="elRef" href="open62541/types_8h.html#ae5c13df54009d7a3e374bfc594af8059">UA_Int64</a>, <a class="elRef" href="open62541/types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a>, <a class="elRef" href="open62541/types_8h.html#a899228311700e99d006f1ba5bcfcbd02">UA_Float</a>, <a class="elRef" href="open62541/types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a>, <a class="elRef" href="open62541/structUA__String.html">UA_String</a>, <a class="elRef" href="open62541/types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a>, <a class="elRef" href="open62541/structUA__Guid.html">UA_Guid</a>, <a class="elRef" href="open62541/types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a>, <a class="elRef" href="open62541/types_8h.html#a5f27ea2177086218de8bb542fc4476cc">UA_XmlElement</a>, <a class="elRef" href="open62541/structUA__NodeId.html">UA_NodeId</a>, <a class="elRef" href="open62541/structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a>, <a class="elRef" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>, <a class="elRef" href="open62541/structUA__QualifiedName.html">UA_QualifiedName</a>, <a class="elRef" href="open62541/structUA__LocalizedText.html">UA_LocalizedText</a>, <a class="elRef" href="open62541/structUA__ExtensionObject.html">UA_ExtensionObject</a>, <a class="elRef" href="open62541/structUA__DataValue.html">UA_DataValue</a>, <a class="elRef" href="open62541/structUA__Variant.html">UA_Variant</a>, <a class="elRef" href="open62541/structUA__DiagnosticInfo.html">UA_DiagnosticInfo</a> &gt;</td></tr>
+<tr class="separator:ab3607bbea283b68a05eb277ff1dc0a6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -130,7 +133,7 @@ Enumerations</h2></td></tr>
 <a class="el" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966a91f376fef4cd337471b267d0e39d51a9">opcua::Type::XmlElement</a> = UA_TYPES_XMLELEMENT, 
 <br />
 &#160;&#160;<a class="el" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966a4b5bd8a54893c87287a22228b5ef2bc8">opcua::Type::NodeId</a> = UA_TYPES_NODEID, 
-<a class="el" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966aeab6d2e56a3cbec68472f4ead232f77d">opcua::Type::ExpanededNodeId</a> = UA_TYPES_EXPANDEDNODEID, 
+<a class="el" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966a10dfa5f7ec4062dfb11461f88a30713d">opcua::Type::ExpandedNodeId</a> = UA_TYPES_EXPANDEDNODEID, 
 <a class="el" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966a72381d4605940627a6e846d5f3155c51">opcua::Type::StatusCode</a> = UA_TYPES_STATUSCODE, 
 <a class="el" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966ab4a75c1b2cfd3cb752898835cad346b0">opcua::Type::QualifiedName</a> = UA_TYPES_QUALIFIEDNAME, 
 <br />
@@ -231,81 +234,11 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a6228aef2d981a7d08177926555fd752f"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a6228aef2d981a7d08177926555fd752f"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a6228aef2d981a7d08177926555fd752f">opcua::detail::isNativeType</a> ()</td></tr>
+<tr class="separator:a6228aef2d981a7d08177926555fd752f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad182a23245c77059754cdcf093309a69"><td class="memItemLeft" align="right" valign="top">constexpr std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#ad182a23245c77059754cdcf093309a69">opcua::getNodeClassName</a> (NodeClass nodeClass)</td></tr>
 <tr class="separator:ad182a23245c77059754cdcf093309a69"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a649fe3e11fa2a8fd527bfa5edec0ff3b"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a649fe3e11fa2a8fd527bfa5edec0ff3b"><td class="memTemplItemLeft" align="right" valign="top">constexpr Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a649fe3e11fa2a8fd527bfa5edec0ff3b">opcua::detail::getType</a> ()</td></tr>
-<tr class="separator:a649fe3e11fa2a8fd527bfa5edec0ff3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a227154acc3c5442a9db3035d23da46a2"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
-<tr class="memitem:a227154acc3c5442a9db3035d23da46a2"><td class="memTemplItemLeft" align="right" valign="top">constexpr Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a227154acc3c5442a9db3035d23da46a2">opcua::detail::getType&lt; UA_Boolean &gt;</a> ()</td></tr>
-<tr class="separator:a227154acc3c5442a9db3035d23da46a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f7f475d80fac23beda442d06253bd82"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
-<tr class="memitem:a1f7f475d80fac23beda442d06253bd82"><td class="memTemplItemLeft" align="right" valign="top">constexpr Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a1f7f475d80fac23beda442d06253bd82">opcua::detail::getType&lt; UA_SByte &gt;</a> ()</td></tr>
-<tr class="separator:a1f7f475d80fac23beda442d06253bd82"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77aa096366c33def8e6a245ef0bca35a"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
-<tr class="memitem:a77aa096366c33def8e6a245ef0bca35a"><td class="memTemplItemLeft" align="right" valign="top">constexpr Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a77aa096366c33def8e6a245ef0bca35a">opcua::detail::getType&lt; UA_Byte &gt;</a> ()</td></tr>
-<tr class="separator:a77aa096366c33def8e6a245ef0bca35a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a640578c2c352e38891f79f0bb802eab2"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
-<tr class="memitem:a640578c2c352e38891f79f0bb802eab2"><td class="memTemplItemLeft" align="right" valign="top">constexpr Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a640578c2c352e38891f79f0bb802eab2">opcua::detail::getType&lt; UA_Int16 &gt;</a> ()</td></tr>
-<tr class="separator:a640578c2c352e38891f79f0bb802eab2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a03065e0c9c7b2a0086eefeb7d6ec581a"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
-<tr class="memitem:a03065e0c9c7b2a0086eefeb7d6ec581a"><td class="memTemplItemLeft" align="right" valign="top">constexpr Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a03065e0c9c7b2a0086eefeb7d6ec581a">opcua::detail::getType&lt; UA_UInt16 &gt;</a> ()</td></tr>
-<tr class="separator:a03065e0c9c7b2a0086eefeb7d6ec581a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4617ad2dd230a0b7ebc377bdfb6741c9"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
-<tr class="memitem:a4617ad2dd230a0b7ebc377bdfb6741c9"><td class="memTemplItemLeft" align="right" valign="top">constexpr Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a4617ad2dd230a0b7ebc377bdfb6741c9">opcua::detail::getType&lt; UA_Int32 &gt;</a> ()</td></tr>
-<tr class="separator:a4617ad2dd230a0b7ebc377bdfb6741c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8df3fe7199d2f1638b267716cc8e1b12"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
-<tr class="memitem:a8df3fe7199d2f1638b267716cc8e1b12"><td class="memTemplItemLeft" align="right" valign="top">constexpr Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a8df3fe7199d2f1638b267716cc8e1b12">opcua::detail::getType&lt; UA_UInt32 &gt;</a> ()</td></tr>
-<tr class="separator:a8df3fe7199d2f1638b267716cc8e1b12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf5d4a81f7b2e593e3570709c2f5dbb4"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
-<tr class="memitem:aaf5d4a81f7b2e593e3570709c2f5dbb4"><td class="memTemplItemLeft" align="right" valign="top">constexpr Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#aaf5d4a81f7b2e593e3570709c2f5dbb4">opcua::detail::getType&lt; UA_Int64 &gt;</a> ()</td></tr>
-<tr class="separator:aaf5d4a81f7b2e593e3570709c2f5dbb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c889aba897a5bd5dbf921c585e9b1a8"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
-<tr class="memitem:a2c889aba897a5bd5dbf921c585e9b1a8"><td class="memTemplItemLeft" align="right" valign="top">constexpr Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a2c889aba897a5bd5dbf921c585e9b1a8">opcua::detail::getType&lt; UA_UInt64 &gt;</a> ()</td></tr>
-<tr class="separator:a2c889aba897a5bd5dbf921c585e9b1a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e6a224c9cba0c2c0cb341db54fe701e"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
-<tr class="memitem:a7e6a224c9cba0c2c0cb341db54fe701e"><td class="memTemplItemLeft" align="right" valign="top">constexpr Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a7e6a224c9cba0c2c0cb341db54fe701e">opcua::detail::getType&lt; UA_Float &gt;</a> ()</td></tr>
-<tr class="separator:a7e6a224c9cba0c2c0cb341db54fe701e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acf471ef01a9b35b8bd28e3ae1143022d"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
-<tr class="memitem:acf471ef01a9b35b8bd28e3ae1143022d"><td class="memTemplItemLeft" align="right" valign="top">constexpr Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#acf471ef01a9b35b8bd28e3ae1143022d">opcua::detail::getType&lt; UA_Double &gt;</a> ()</td></tr>
-<tr class="separator:acf471ef01a9b35b8bd28e3ae1143022d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab139514d1fe5cd236d4a17e10ada0cf1"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
-<tr class="memitem:ab139514d1fe5cd236d4a17e10ada0cf1"><td class="memTemplItemLeft" align="right" valign="top">constexpr Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ab139514d1fe5cd236d4a17e10ada0cf1">opcua::detail::getType&lt; UA_String &gt;</a> ()</td></tr>
-<tr class="separator:ab139514d1fe5cd236d4a17e10ada0cf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a144ea9d9dde94afe0ac514918753bce1"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
-<tr class="memitem:a144ea9d9dde94afe0ac514918753bce1"><td class="memTemplItemLeft" align="right" valign="top">constexpr Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a144ea9d9dde94afe0ac514918753bce1">opcua::detail::getType&lt; UA_Guid &gt;</a> ()</td></tr>
-<tr class="separator:a144ea9d9dde94afe0ac514918753bce1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23d182ebefc096f09bef03464763a3a9"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
-<tr class="memitem:a23d182ebefc096f09bef03464763a3a9"><td class="memTemplItemLeft" align="right" valign="top">constexpr Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a23d182ebefc096f09bef03464763a3a9">opcua::detail::getType&lt; UA_NodeId &gt;</a> ()</td></tr>
-<tr class="separator:a23d182ebefc096f09bef03464763a3a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1d495af3f397b6e904ffc2e75acfc1c"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
-<tr class="memitem:ad1d495af3f397b6e904ffc2e75acfc1c"><td class="memTemplItemLeft" align="right" valign="top">constexpr Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ad1d495af3f397b6e904ffc2e75acfc1c">opcua::detail::getType&lt; UA_QualifiedName &gt;</a> ()</td></tr>
-<tr class="separator:ad1d495af3f397b6e904ffc2e75acfc1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a08fff11076984a1d89d0784d6458e896"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
-<tr class="memitem:a08fff11076984a1d89d0784d6458e896"><td class="memTemplItemLeft" align="right" valign="top">constexpr Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a08fff11076984a1d89d0784d6458e896">opcua::detail::getType&lt; UA_LocalizedText &gt;</a> ()</td></tr>
-<tr class="separator:a08fff11076984a1d89d0784d6458e896"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf4cccdcbe478b6f7756c296c6f0d77b"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
-<tr class="memitem:adf4cccdcbe478b6f7756c296c6f0d77b"><td class="memTemplItemLeft" align="right" valign="top">constexpr Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#adf4cccdcbe478b6f7756c296c6f0d77b">opcua::detail::getType&lt; UA_ExtensionObject &gt;</a> ()</td></tr>
-<tr class="separator:adf4cccdcbe478b6f7756c296c6f0d77b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaff1c24bc9eac3b4f0a244bc9b3ed899"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
-<tr class="memitem:aaff1c24bc9eac3b4f0a244bc9b3ed899"><td class="memTemplItemLeft" align="right" valign="top">constexpr Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#aaff1c24bc9eac3b4f0a244bc9b3ed899">opcua::detail::getType&lt; UA_DataValue &gt;</a> ()</td></tr>
-<tr class="separator:aaff1c24bc9eac3b4f0a244bc9b3ed899"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abfbadd8cf6d6d84d1725e4f4d973a375"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
-<tr class="memitem:abfbadd8cf6d6d84d1725e4f4d973a375"><td class="memTemplItemLeft" align="right" valign="top">constexpr Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#abfbadd8cf6d6d84d1725e4f4d973a375">opcua::detail::getType&lt; UA_Variant &gt;</a> ()</td></tr>
-<tr class="separator:abfbadd8cf6d6d84d1725e4f4d973a375"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1baad2f6fe2ec5791cee3b88c51d9df5"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
-<tr class="memitem:a1baad2f6fe2ec5791cee3b88c51d9df5"><td class="memTemplItemLeft" align="right" valign="top">constexpr Type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a1baad2f6fe2ec5791cee3b88c51d9df5">opcua::detail::getType&lt; UA_DiagnosticInfo &gt;</a> ()</td></tr>
-<tr class="separator:a1baad2f6fe2ec5791cee3b88c51d9df5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2588f9a54e910b2e74baf16157d83c5e"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a2588f9a54e910b2e74baf16157d83c5e">opcua::detail::getUaDataType</a> (Type type)</td></tr>
-<tr class="memdesc:a2588f9a54e910b2e74baf16157d83c5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get <a class="elRef" href="open62541/structUA__DataType.html">UA_DataType</a> by Type enum.  <a href="namespaceopcua_1_1detail.html#a2588f9a54e910b2e74baf16157d83c5e">More...</a><br /></td></tr>
-<tr class="separator:a2588f9a54e910b2e74baf16157d83c5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a172340c691e8dd72b05c0741de33e43a"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a172340c691e8dd72b05c0741de33e43a">opcua::detail::getUaDataType</a> (const <a class="elRef" href="open62541/structUA__NodeId.html">UA_NodeId</a> *id)</td></tr>
-<tr class="memdesc:a172340c691e8dd72b05c0741de33e43a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get (custom) <a class="elRef" href="open62541/structUA__DataType.html">UA_DataType</a> by <a class="elRef" href="open62541/structUA__NodeId.html">UA_NodeId</a>.  <a href="namespaceopcua_1_1detail.html#a172340c691e8dd72b05c0741de33e43a">More...</a><br /></td></tr>
-<tr class="separator:a172340c691e8dd72b05c0741de33e43a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8921f3892570f04846de85415ab1f88"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ad8921f3892570f04846de85415ab1f88"><td class="memTemplItemLeft" align="right" valign="top">const <a class="elRef" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ad8921f3892570f04846de85415ab1f88">opcua::detail::getUaDataType</a> ()</td></tr>
-<tr class="memdesc:ad8921f3892570f04846de85415ab1f88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get <a class="elRef" href="open62541/structUA__DataType.html">UA_DataType</a> by template argument.  <a href="namespaceopcua_1_1detail.html#ad8921f3892570f04846de85415ab1f88">More...</a><br /></td></tr>
-<tr class="separator:ad8921f3892570f04846de85415ab1f88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

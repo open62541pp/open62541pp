@@ -83,7 +83,7 @@ $(function() {
 <div class="dynheader">
 Inheritance diagram for opcua::Variant:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classopcua_1_1Variant__inherit__graph.svg" width="166" height="127"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classopcua_1_1Variant__inherit__graph.svg" width="166" height="142"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -96,7 +96,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ae528dcb9d819364f9590c310dc8e8f2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if variant is a scalar.  <a href="classopcua_1_1Variant.html#ae528dcb9d819364f9590c310dc8e8f2a">More...</a><br /></td></tr>
 <tr class="separator:ae528dcb9d819364f9590c310dc8e8f2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab2ef10e5ae385c175e646eedf347e209"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html#ab2ef10e5ae385c175e646eedf347e209">isArray</a> () const noexcept</td></tr>
-<tr class="memdesc:ab2ef10e5ae385c175e646eedf347e209"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if variant is a array.  <a href="classopcua_1_1Variant.html#ab2ef10e5ae385c175e646eedf347e209">More...</a><br /></td></tr>
+<tr class="memdesc:ab2ef10e5ae385c175e646eedf347e209"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if variant is an array.  <a href="classopcua_1_1Variant.html#ab2ef10e5ae385c175e646eedf347e209">More...</a><br /></td></tr>
 <tr class="separator:ab2ef10e5ae385c175e646eedf347e209"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a68c9dad90735ea93c52494057b9f80"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html#a7a68c9dad90735ea93c52494057b9f80">isType</a> (const <a class="elRef" href="open62541/structUA__DataType.html">UA_DataType</a> *type) const noexcept</td></tr>
 <tr class="memdesc:a7a68c9dad90735ea93c52494057b9f80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if variant type is equal to data type.  <a href="classopcua_1_1Variant.html#a7a68c9dad90735ea93c52494057b9f80">More...</a><br /></td></tr>
@@ -107,38 +107,59 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7e57dd7638607b1c207633fca2fb0f36"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html#a7e57dd7638607b1c207633fca2fb0f36">isType</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id) const noexcept</td></tr>
 <tr class="memdesc:a7e57dd7638607b1c207633fca2fb0f36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if variant type is equal to data type node id.  <a href="classopcua_1_1Variant.html#a7e57dd7638607b1c207633fca2fb0f36">More...</a><br /></td></tr>
 <tr class="separator:a7e57dd7638607b1c207633fca2fb0f36"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af0375c211d986bb9afc5bc43613616ca"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:af0375c211d986bb9afc5bc43613616ca"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html#af0375c211d986bb9afc5bc43613616ca">isType</a> () const noexcept</td></tr>
-<tr class="memdesc:af0375c211d986bb9afc5bc43613616ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if variant type is equal to template type.  <a href="classopcua_1_1Variant.html#af0375c211d986bb9afc5bc43613616ca">More...</a><br /></td></tr>
-<tr class="separator:af0375c211d986bb9afc5bc43613616ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a747250037b3e1f92a0c439caf762a574"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a747250037b3e1f92a0c439caf762a574"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html#a747250037b3e1f92a0c439caf762a574">readScalar</a> (const <a class="elRef" href="open62541/structUA__DataType.html">UA_DataType</a> *type) const</td></tr>
-<tr class="separator:a747250037b3e1f92a0c439caf762a574"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2893aa308674a9ed1d745bd08a9a5520"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a2893aa308674a9ed1d745bd08a9a5520"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html#a2893aa308674a9ed1d745bd08a9a5520">readScalar</a> () const</td></tr>
-<tr class="memdesc:a2893aa308674a9ed1d745bd08a9a5520"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read scalar value with given template type.  <a href="classopcua_1_1Variant.html#a2893aa308674a9ed1d745bd08a9a5520">More...</a><br /></td></tr>
-<tr class="separator:a2893aa308674a9ed1d745bd08a9a5520"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a632b893a8aef075fcddb6facd0a902c9"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a632b893a8aef075fcddb6facd0a902c9"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html#a632b893a8aef075fcddb6facd0a902c9">readArray</a> () const</td></tr>
-<tr class="memdesc:a632b893a8aef075fcddb6facd0a902c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read array with given template type and return it as a std::vector.  <a href="classopcua_1_1Variant.html#a632b893a8aef075fcddb6facd0a902c9">More...</a><br /></td></tr>
-<tr class="separator:a632b893a8aef075fcddb6facd0a902c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e29c5f9cdbcf04e1ad997eebf8f59e7"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a7e29c5f9cdbcf04e1ad997eebf8f59e7"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html#a7e29c5f9cdbcf04e1ad997eebf8f59e7">setScalar</a> (T value)</td></tr>
-<tr class="memdesc:a7e29c5f9cdbcf04e1ad997eebf8f59e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write scalar value to variant.  <a href="classopcua_1_1Variant.html#a7e29c5f9cdbcf04e1ad997eebf8f59e7">More...</a><br /></td></tr>
-<tr class="separator:a7e29c5f9cdbcf04e1ad997eebf8f59e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a234aa27bdbc07fc59340876ac81560ae"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a234aa27bdbc07fc59340876ac81560ae"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html#a234aa27bdbc07fc59340876ac81560ae">setArray</a> (const T *array, size_t size)</td></tr>
-<tr class="memdesc:a234aa27bdbc07fc59340876ac81560ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write array (raw) to variant.  <a href="classopcua_1_1Variant.html#a234aa27bdbc07fc59340876ac81560ae">More...</a><br /></td></tr>
-<tr class="separator:a234aa27bdbc07fc59340876ac81560ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a165aa1548a6d98f79f4a07484889ff6a"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a165aa1548a6d98f79f4a07484889ff6a"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html#a165aa1548a6d98f79f4a07484889ff6a">setArray</a> (const std::vector&lt; T &gt; &amp;array)</td></tr>
-<tr class="memdesc:a165aa1548a6d98f79f4a07484889ff6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write array (std::vector) to variant.  <a href="classopcua_1_1Variant.html#a165aa1548a6d98f79f4a07484889ff6a">More...</a><br /></td></tr>
-<tr class="separator:a165aa1548a6d98f79f4a07484889ff6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7f51fa954cf6c6b2e204a9a13adabe0"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ab7f51fa954cf6c6b2e204a9a13adabe0"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html#ab7f51fa954cf6c6b2e204a9a13adabe0">setArrayNoCopy</a> (std::vector&lt; T &gt; &amp;array) noexcept</td></tr>
-<tr class="memdesc:ab7f51fa954cf6c6b2e204a9a13adabe0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write array (std::vector) to variant by passing it's address to the variant (no copy).  <a href="classopcua_1_1Variant.html#ab7f51fa954cf6c6b2e204a9a13adabe0">More...</a><br /></td></tr>
-<tr class="separator:ab7f51fa954cf6c6b2e204a9a13adabe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classopcua_1_1TypeWrapper"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classopcua_1_1TypeWrapper')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_Variant &gt;</a></td></tr>
+<tr class="memitem:aeb584a86991dc9b25ed22cd94ec06e58"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="el" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966">Type</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html#aeb584a86991dc9b25ed22cd94ec06e58">getVariantType</a> () const noexcept</td></tr>
+<tr class="memdesc:aeb584a86991dc9b25ed22cd94ec06e58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get variant type.  <a href="classopcua_1_1Variant.html#aeb584a86991dc9b25ed22cd94ec06e58">More...</a><br /></td></tr>
+<tr class="separator:aeb584a86991dc9b25ed22cd94ec06e58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbe30a5ffe8a675a7ba5162d4694fbb9"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:acbe30a5ffe8a675a7ba5162d4694fbb9"><td class="memTemplItemLeft" align="right" valign="top">T &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html#acbe30a5ffe8a675a7ba5162d4694fbb9">getScalar</a> ()</td></tr>
+<tr class="memdesc:acbe30a5ffe8a675a7ba5162d4694fbb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get reference to scalar value with given template type.  <a href="classopcua_1_1Variant.html#acbe30a5ffe8a675a7ba5162d4694fbb9">More...</a><br /></td></tr>
+<tr class="separator:acbe30a5ffe8a675a7ba5162d4694fbb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f7d377bfecd10cc89fda41b3ad9d934"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a0f7d377bfecd10cc89fda41b3ad9d934"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html#a0f7d377bfecd10cc89fda41b3ad9d934">getScalarCopy</a> () const</td></tr>
+<tr class="memdesc:a0f7d377bfecd10cc89fda41b3ad9d934"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get copy of scalar value with given template type.  <a href="classopcua_1_1Variant.html#a0f7d377bfecd10cc89fda41b3ad9d934">More...</a><br /></td></tr>
+<tr class="separator:a0f7d377bfecd10cc89fda41b3ad9d934"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54698bd6ada60d5f20556403f1e4d163"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html#a54698bd6ada60d5f20556403f1e4d163">getArrayLength</a> () const noexcept</td></tr>
+<tr class="memdesc:a54698bd6ada60d5f20556403f1e4d163"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get array length or 0 if variant is not an array.  <a href="classopcua_1_1Variant.html#a54698bd6ada60d5f20556403f1e4d163">More...</a><br /></td></tr>
+<tr class="separator:a54698bd6ada60d5f20556403f1e4d163"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27032e6b4c6ed92989432abc65810744"><td class="memItemLeft" align="right" valign="top">std::vector&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html#a27032e6b4c6ed92989432abc65810744">getArrayDimensions</a> () const</td></tr>
+<tr class="memdesc:a27032e6b4c6ed92989432abc65810744"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get array dimensions.  <a href="classopcua_1_1Variant.html#a27032e6b4c6ed92989432abc65810744">More...</a><br /></td></tr>
+<tr class="separator:a27032e6b4c6ed92989432abc65810744"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97420c5bb7175550da4dc5fda947035a"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a97420c5bb7175550da4dc5fda947035a"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html#a97420c5bb7175550da4dc5fda947035a">getArray</a> ()</td></tr>
+<tr class="separator:a97420c5bb7175550da4dc5fda947035a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a745da34378602215fd443e3b229d5c23"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a745da34378602215fd443e3b229d5c23"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html#a745da34378602215fd443e3b229d5c23">getArrayCopy</a> () const</td></tr>
+<tr class="memdesc:a745da34378602215fd443e3b229d5c23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get copy of array with given template type and return it as a std::vector.  <a href="classopcua_1_1Variant.html#a745da34378602215fd443e3b229d5c23">More...</a><br /></td></tr>
+<tr class="separator:a745da34378602215fd443e3b229d5c23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afae3ba56203f2cbbd7a5ee7b4d7dcb5b"><td class="memTemplParams" colspan="2">template&lt;typename T , Type type = detail::guessType&lt;T&gt;()&gt; </td></tr>
+<tr class="memitem:afae3ba56203f2cbbd7a5ee7b4d7dcb5b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html#afae3ba56203f2cbbd7a5ee7b4d7dcb5b">setScalar</a> (T &amp;value) noexcept</td></tr>
+<tr class="memdesc:afae3ba56203f2cbbd7a5ee7b4d7dcb5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign scalar value to variant.  <a href="classopcua_1_1Variant.html#afae3ba56203f2cbbd7a5ee7b4d7dcb5b">More...</a><br /></td></tr>
+<tr class="separator:afae3ba56203f2cbbd7a5ee7b4d7dcb5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e6c68f65d930dd8108dad49d842a624"><td class="memTemplParams" colspan="2">template&lt;typename T , Type type = detail::guessType&lt;T&gt;()&gt; </td></tr>
+<tr class="memitem:a2e6c68f65d930dd8108dad49d842a624"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html#a2e6c68f65d930dd8108dad49d842a624">setScalarCopy</a> (const T &amp;value)</td></tr>
+<tr class="memdesc:a2e6c68f65d930dd8108dad49d842a624"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy scalar value to variant.  <a href="classopcua_1_1Variant.html#a2e6c68f65d930dd8108dad49d842a624">More...</a><br /></td></tr>
+<tr class="separator:a2e6c68f65d930dd8108dad49d842a624"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d05beac903fac0b7391f5d0ef731515"><td class="memTemplParams" colspan="2">template&lt;typename T , Type type = detail::guessType&lt;T&gt;()&gt; </td></tr>
+<tr class="memitem:a7d05beac903fac0b7391f5d0ef731515"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html#a7d05beac903fac0b7391f5d0ef731515">setArray</a> (T *array, size_t size) noexcept</td></tr>
+<tr class="memdesc:a7d05beac903fac0b7391f5d0ef731515"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign array (raw) to variant.  <a href="classopcua_1_1Variant.html#a7d05beac903fac0b7391f5d0ef731515">More...</a><br /></td></tr>
+<tr class="separator:a7d05beac903fac0b7391f5d0ef731515"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49272289967f696c5acd75a26e1ae58e"><td class="memTemplParams" colspan="2">template&lt;typename T , Type type = detail::guessType&lt;T&gt;()&gt; </td></tr>
+<tr class="memitem:a49272289967f696c5acd75a26e1ae58e"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html#a49272289967f696c5acd75a26e1ae58e">setArray</a> (std::vector&lt; T &gt; &amp;array) noexcept</td></tr>
+<tr class="memdesc:a49272289967f696c5acd75a26e1ae58e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign array (std::vector) to variant.  <a href="classopcua_1_1Variant.html#a49272289967f696c5acd75a26e1ae58e">More...</a><br /></td></tr>
+<tr class="separator:a49272289967f696c5acd75a26e1ae58e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f71f0596ff5b378cddd04efbb23931d"><td class="memTemplParams" colspan="2">template&lt;typename InputIt , Type type = detail::guessTypeFromIterator&lt;InputIt&gt;()&gt; </td></tr>
+<tr class="memitem:a5f71f0596ff5b378cddd04efbb23931d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html#a5f71f0596ff5b378cddd04efbb23931d">setArrayCopy</a> (InputIt first, InputIt last)</td></tr>
+<tr class="memdesc:a5f71f0596ff5b378cddd04efbb23931d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy range of elements as array to variant.  <a href="classopcua_1_1Variant.html#a5f71f0596ff5b378cddd04efbb23931d">More...</a><br /></td></tr>
+<tr class="separator:a5f71f0596ff5b378cddd04efbb23931d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5ba996867e11a5b743b549ef0592584"><td class="memTemplParams" colspan="2">template&lt;typename T , Type type = detail::guessType&lt;T&gt;()&gt; </td></tr>
+<tr class="memitem:ac5ba996867e11a5b743b549ef0592584"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html#ac5ba996867e11a5b743b549ef0592584">setArrayCopy</a> (const T *array, size_t size)</td></tr>
+<tr class="memdesc:ac5ba996867e11a5b743b549ef0592584"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy array (raw) to variant.  <a href="classopcua_1_1Variant.html#ac5ba996867e11a5b743b549ef0592584">More...</a><br /></td></tr>
+<tr class="separator:ac5ba996867e11a5b743b549ef0592584"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf87f645e3b481e7a33aba04774a3e2c"><td class="memTemplParams" colspan="2">template&lt;typename T , Type type = detail::guessType&lt;T&gt;()&gt; </td></tr>
+<tr class="memitem:aaf87f645e3b481e7a33aba04774a3e2c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html#aaf87f645e3b481e7a33aba04774a3e2c">setArrayCopy</a> (const std::vector&lt; T &gt; &amp;array)</td></tr>
+<tr class="memdesc:aaf87f645e3b481e7a33aba04774a3e2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy array (std::vector) to variant.  <a href="classopcua_1_1Variant.html#aaf87f645e3b481e7a33aba04774a3e2c">More...</a><br /></td></tr>
+<tr class="separator:aaf87f645e3b481e7a33aba04774a3e2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classopcua_1_1TypeWrapper"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classopcua_1_1TypeWrapper')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_Variant, Type::Variant &gt;</a></td></tr>
 <tr class="memitem:a56255d1307d80db79ea9176769f25a61 inherit pub_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a56255d1307d80db79ea9176769f25a61">TypeWrapper</a> ()</td></tr>
 <tr class="separator:a56255d1307d80db79ea9176769f25a61 inherit pub_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac60cc469e21eaa8ef7ff694023b83c52 inherit pub_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#ac60cc469e21eaa8ef7ff694023b83c52">TypeWrapper</a> (const <a class="elRef" href="open62541/structUA__Variant.html">UA_Variant</a> &amp;data)</td></tr>
@@ -170,19 +191,19 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pub_types_classopcua_1_1TypeWrapper"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classopcua_1_1TypeWrapper')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_Variant &gt;</a></td></tr>
-<tr class="memitem:ab589d88dc65dc99a9f8fd3e54c3170f9 inherit pub_types_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#ab589d88dc65dc99a9f8fd3e54c3170f9">BaseClass</a> = <a class="el" href="classopcua_1_1TypeWrapper.html">TypeWrapper</a>&lt; <a class="elRef" href="open62541/structUA__Variant.html">UA_Variant</a>, detail::getType&lt; <a class="elRef" href="open62541/structUA__Variant.html">UA_Variant</a> &gt;() &gt;</td></tr>
+<tr class="inherit_header pub_types_classopcua_1_1TypeWrapper"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classopcua_1_1TypeWrapper')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_Variant, Type::Variant &gt;</a></td></tr>
+<tr class="memitem:ab589d88dc65dc99a9f8fd3e54c3170f9 inherit pub_types_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#ab589d88dc65dc99a9f8fd3e54c3170f9">BaseClass</a> = <a class="el" href="classopcua_1_1TypeWrapper.html">TypeWrapper</a>&lt; <a class="elRef" href="open62541/structUA__Variant.html">UA_Variant</a>, type &gt;</td></tr>
 <tr class="separator:ab589d88dc65dc99a9f8fd3e54c3170f9 inherit pub_types_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99a83d5abc498d6b7965c7b8f7b921cb inherit pub_types_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a99a83d5abc498d6b7965c7b8f7b921cb">UaType</a> = <a class="elRef" href="open62541/structUA__Variant.html">UA_Variant</a></td></tr>
 <tr class="separator:a99a83d5abc498d6b7965c7b8f7b921cb inherit pub_types_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_static_methods_classopcua_1_1TypeWrapper"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_classopcua_1_1TypeWrapper')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_Variant &gt;</a></td></tr>
-<tr class="memitem:ab04aff96ec6f671ab30c8edf29a7c1cd inherit pub_static_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">constexpr static <a class="el" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966">Type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#ab04aff96ec6f671ab30c8edf29a7c1cd">getType</a> ()</td></tr>
-<tr class="memdesc:ab04aff96ec6f671ab30c8edf29a7c1cd inherit pub_static_methods_classopcua_1_1TypeWrapper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return type enum.  <a href="classopcua_1_1TypeWrapper.html#ab04aff96ec6f671ab30c8edf29a7c1cd">More...</a><br /></td></tr>
-<tr class="separator:ab04aff96ec6f671ab30c8edf29a7c1cd inherit pub_static_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb384cf2a04e8ee62f41515e0e147b33 inherit pub_static_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">constexpr static const <a class="elRef" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#abb384cf2a04e8ee62f41515e0e147b33">getDataType</a> ()</td></tr>
-<tr class="memdesc:abb384cf2a04e8ee62f41515e0e147b33 inherit pub_static_methods_classopcua_1_1TypeWrapper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return <a class="elRef" href="open62541/structUA__DataType.html">UA_DataType</a> object.  <a href="classopcua_1_1TypeWrapper.html#abb384cf2a04e8ee62f41515e0e147b33">More...</a><br /></td></tr>
-<tr class="separator:abb384cf2a04e8ee62f41515e0e147b33 inherit pub_static_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pro_methods_classopcua_1_1TypeWrapper"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classopcua_1_1TypeWrapper')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_Variant &gt;</a></td></tr>
+<tr class="inherit_header pub_static_methods_classopcua_1_1TypeWrapper"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_classopcua_1_1TypeWrapper')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_Variant, Type::Variant &gt;</a></td></tr>
+<tr class="memitem:a74bc41c0524f86ad72a637196861d1d9 inherit pub_static_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966">Type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a74bc41c0524f86ad72a637196861d1d9">getType</a> ()</td></tr>
+<tr class="memdesc:a74bc41c0524f86ad72a637196861d1d9 inherit pub_static_methods_classopcua_1_1TypeWrapper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return type enum.  <a href="classopcua_1_1TypeWrapper.html#a74bc41c0524f86ad72a637196861d1d9">More...</a><br /></td></tr>
+<tr class="separator:a74bc41c0524f86ad72a637196861d1d9 inherit pub_static_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a47f12ca0ab0a3026b054c07a5b1d0e inherit pub_static_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">static const <a class="elRef" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a8a47f12ca0ab0a3026b054c07a5b1d0e">getDataType</a> ()</td></tr>
+<tr class="memdesc:a8a47f12ca0ab0a3026b054c07a5b1d0e inherit pub_static_methods_classopcua_1_1TypeWrapper"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return <a class="elRef" href="open62541/structUA__DataType.html">UA_DataType</a> object.  <a href="classopcua_1_1TypeWrapper.html#a8a47f12ca0ab0a3026b054c07a5b1d0e">More...</a><br /></td></tr>
+<tr class="separator:a8a47f12ca0ab0a3026b054c07a5b1d0e inherit pub_static_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classopcua_1_1TypeWrapper"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classopcua_1_1TypeWrapper')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_Variant, Type::Variant &gt;</a></td></tr>
 <tr class="memitem:a3ca48cc0add2099230d87e4410f415f9 inherit pro_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a3ca48cc0add2099230d87e4410f415f9">init</a> () noexcept</td></tr>
 <tr class="separator:a3ca48cc0add2099230d87e4410f415f9 inherit pro_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a66a1c9d61aebe7893d8a574598e76811 inherit pro_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a66a1c9d61aebe7893d8a574598e76811">clear</a> () noexcept</td></tr>
@@ -195,8 +216,191 @@ Additional Inherited Members</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="elRef" href="open62541/structUA__Variant.html">UA_Variant</a> wrapper class. </p>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00018">18</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00024">24</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a97420c5bb7175550da4dc5fda947035a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97420c5bb7175550da4dc5fda947035a">&#9670;&nbsp;</a></span>getArray()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">T * opcua::Variant::getArray</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00136">136</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+
+<p class="reference">References <a class="elRef" href="open62541/structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">UA_Variant::data</a>, and <a class="el" href="TypeWrapper_8h_source.html#l00086">opcua::TypeWrapper&lt; UA_Variant, Type::Variant &gt;::handle()</a>.</p>
+
+</div>
+</div>
+<a id="a745da34378602215fd443e3b229d5c23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a745da34378602215fd443e3b229d5c23">&#9670;&nbsp;</a></span>getArrayCopy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; T &gt; opcua::Variant::getArrayCopy</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get copy of array with given template type and return it as a std::vector. </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadVariantAccess.html">BadVariantAccess</a></td><td>If the variant is not an array or not convertible to <code>T</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00147">147</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+
+<p class="reference">References <a class="el" href="classopcua_1_1Variant.html#aeb584a86991dc9b25ed22cd94ec06e58">getVariantType()</a>, and <a class="el" href="TypeWrapper_8h_source.html#l00086">opcua::TypeWrapper&lt; UA_Variant, Type::Variant &gt;::handle()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00116">opcua::Node::readArray()</a>.</p>
+
+</div>
+</div>
+<a id="a27032e6b4c6ed92989432abc65810744"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27032e6b4c6ed92989432abc65810744">&#9670;&nbsp;</a></span>getArrayDimensions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;uint32_t&gt; opcua::Variant::getArrayDimensions </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get array dimensions. </p>
+
+</div>
+</div>
+<a id="a54698bd6ada60d5f20556403f1e4d163"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54698bd6ada60d5f20556403f1e4d163">&#9670;&nbsp;</a></span>getArrayLength()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t opcua::Variant::getArrayLength </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get array length or 0 if variant is not an array. </p>
+
+</div>
+</div>
+<a id="acbe30a5ffe8a675a7ba5162d4694fbb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbe30a5ffe8a675a7ba5162d4694fbb9">&#9670;&nbsp;</a></span>getScalar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">T &amp; opcua::Variant::getScalar</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get reference to scalar value with given template type. </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadVariantAccess.html">BadVariantAccess</a></td><td>If the variant is not a scalar or not convertible to <code>T</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00118">118</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+
+<p class="reference">References <a class="elRef" href="open62541/structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">UA_Variant::data</a>, and <a class="el" href="TypeWrapper_8h_source.html#l00086">opcua::TypeWrapper&lt; UA_Variant, Type::Variant &gt;::handle()</a>.</p>
+
+</div>
+</div>
+<a id="a0f7d377bfecd10cc89fda41b3ad9d934"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f7d377bfecd10cc89fda41b3ad9d934">&#9670;&nbsp;</a></span>getScalarCopy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">T opcua::Variant::getScalarCopy</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get copy of scalar value with given template type. </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadVariantAccess.html">BadVariantAccess</a></td><td>If the variant is not a scalar or not convertible to <code>T</code>. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00129">129</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+
+<p class="reference">References <a class="el" href="classopcua_1_1Variant.html#aeb584a86991dc9b25ed22cd94ec06e58">getVariantType()</a>, and <a class="el" href="TypeWrapper_8h_source.html#l00086">opcua::TypeWrapper&lt; UA_Variant, Type::Variant &gt;::handle()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00108">opcua::Node::read()</a>.</p>
+
+</div>
+</div>
+<a id="aeb584a86991dc9b25ed22cd94ec06e58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb584a86991dc9b25ed22cd94ec06e58">&#9670;&nbsp;</a></span>getVariantType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::optional&lt;<a class="el" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966">Type</a>&gt; opcua::Variant::getVariantType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get variant type. </p>
+
+<p class="reference">Referenced by <a class="el" href="Variant_8h_source.html#l00147">getArrayCopy()</a>, and <a class="el" href="Variant_8h_source.html#l00129">getScalarCopy()</a>.</p>
+
+</div>
+</div>
 <a id="ab2ef10e5ae385c175e646eedf347e209"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab2ef10e5ae385c175e646eedf347e209">&#9670;&nbsp;</a></span>isArray()</h2>
 
@@ -220,7 +424,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Check if variant is a array. </p>
+<p>Check if variant is an array. </p>
 
 </div>
 </div>
@@ -278,39 +482,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="af0375c211d986bb9afc5bc43613616ca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af0375c211d986bb9afc5bc43613616ca">&#9670;&nbsp;</a></span>isType() <span class="overload">[1/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool opcua::Variant::isType </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Check if variant type is equal to template type. </p>
-
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00038">38</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
-
-</div>
-</div>
 <a id="a7e57dd7638607b1c207633fca2fb0f36"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e57dd7638607b1c207633fca2fb0f36">&#9670;&nbsp;</a></span>isType() <span class="overload">[2/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e57dd7638607b1c207633fca2fb0f36">&#9670;&nbsp;</a></span>isType() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -338,7 +511,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a7a68c9dad90735ea93c52494057b9f80"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7a68c9dad90735ea93c52494057b9f80">&#9670;&nbsp;</a></span>isType() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a68c9dad90735ea93c52494057b9f80">&#9670;&nbsp;</a></span>isType() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -366,7 +539,7 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <a id="a07ee9d4a0be5218428ceb42493398091"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a07ee9d4a0be5218428ceb42493398091">&#9670;&nbsp;</a></span>isType() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a07ee9d4a0be5218428ceb42493398091">&#9670;&nbsp;</a></span>isType() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -393,113 +566,13 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a632b893a8aef075fcddb6facd0a902c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a632b893a8aef075fcddb6facd0a902c9">&#9670;&nbsp;</a></span>readArray()</h2>
+<a id="a49272289967f696c5acd75a26e1ae58e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49272289967f696c5acd75a26e1ae58e">&#9670;&nbsp;</a></span>setArray() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt;T&gt; opcua::Variant::readArray </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Read array with given template type and return it as a std::vector. </p>
-<p>An exception is thrown if the variant is not an array or not of the given type. </p>
-
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00065">65</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00116">opcua::Node::readArray()</a>.</p>
-
-</div>
-</div>
-<a id="a2893aa308674a9ed1d745bd08a9a5520"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2893aa308674a9ed1d745bd08a9a5520">&#9670;&nbsp;</a></span>readScalar() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">T opcua::Variant::readScalar </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Read scalar value with given template type. </p>
-<p>An exception is thrown if the variant is not a scalar or not of the given type. The template type can also be a wrapper type like <a class="el" href="classopcua_1_1String.html" title="UA_String wrapper class.">opcua::String</a>. </p>
-
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00053">53</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
-
-</div>
-</div>
-<a id="a747250037b3e1f92a0c439caf762a574"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a747250037b3e1f92a0c439caf762a574">&#9670;&nbsp;</a></span>readScalar() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">T opcua::Variant::readScalar </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="elRef" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>type</em></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00043">43</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
-
-<p class="reference">References <a class="elRef" href="open62541/structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">UA_Variant::data</a>, and <a class="el" href="TypeWrapper_8h_source.html#l00085">opcua::TypeWrapper&lt; UA_Variant &gt;::handle()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00108">opcua::Node::read()</a>.</p>
-
-</div>
-</div>
-<a id="a165aa1548a6d98f79f4a07484889ff6a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a165aa1548a6d98f79f4a07484889ff6a">&#9670;&nbsp;</a></span>setArray() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T , Type type&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -507,33 +580,31 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="memname">void opcua::Variant::setArray </td>
           <td>(</td>
-          <td class="paramtype">const std::vector&lt; T &gt; &amp;&#160;</td>
+          <td class="paramtype">std::vector&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>array</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Write array (std::vector) to variant. </p>
+<p>Assign array (std::vector) to variant. </p>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00088">88</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
-
-<p class="reference">References <a class="el" href="Variant_8h_source.html#l00082">setArray()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00190">190</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
 </div>
 </div>
-<a id="a234aa27bdbc07fc59340876ac81560ae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a234aa27bdbc07fc59340876ac81560ae">&#9670;&nbsp;</a></span>setArray() <span class="overload">[2/2]</span></h2>
+<a id="a7d05beac903fac0b7391f5d0ef731515"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d05beac903fac0b7391f5d0ef731515">&#9670;&nbsp;</a></span>setArray() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T , Type type&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -541,7 +612,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="memname">void opcua::Variant::setArray </td>
           <td>(</td>
-          <td class="paramtype">const T *&#160;</td>
+          <td class="paramtype">T *&#160;</td>
           <td class="paramname"><em>array</em>, </td>
         </tr>
         <tr>
@@ -558,59 +629,124 @@ template&lt;typename T &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Write array (raw) to variant. </p>
+<p>Assign array (raw) to variant. </p>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00082">82</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00180">180</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Variant_8h_source.html#l00088">setArray()</a>, and <a class="el" href="Node_8h_source.html#l00100">opcua::Node::writeArray()</a>.</p>
+<p class="reference">References <a class="el" href="Helper_8h_source.html#l00013">opcua::detail::getUaDataType()</a>.</p>
 
 </div>
 </div>
-<a id="ab7f51fa954cf6c6b2e204a9a13adabe0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab7f51fa954cf6c6b2e204a9a13adabe0">&#9670;&nbsp;</a></span>setArrayNoCopy()</h2>
+<a id="aaf87f645e3b481e7a33aba04774a3e2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf87f645e3b481e7a33aba04774a3e2c">&#9670;&nbsp;</a></span>setArrayCopy() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
+template&lt;typename T , Type type&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::Variant::setArrayNoCopy </td>
+          <td class="memname">void opcua::Variant::setArrayCopy </td>
           <td>(</td>
-          <td class="paramtype">std::vector&lt; T &gt; &amp;&#160;</td>
+          <td class="paramtype">const std::vector&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>array</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>Write array (std::vector) to variant by passing it's address to the variant (no copy). </p>
-<p>If the array values change, the variant values change as well. Take care of the vectors lifttime. If it gets deconstructed while the variant is still used, data get's corrupted. </p>
+<p>Copy array (std::vector) to variant. </p>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00097">97</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00217">217</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
 </div>
 </div>
-<a id="a7e29c5f9cdbcf04e1ad997eebf8f59e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e29c5f9cdbcf04e1ad997eebf8f59e7">&#9670;&nbsp;</a></span>setScalar()</h2>
+<a id="ac5ba996867e11a5b743b549ef0592584"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5ba996867e11a5b743b549ef0592584">&#9670;&nbsp;</a></span>setArrayCopy() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename T , Type type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::Variant::setArrayCopy </td>
+          <td>(</td>
+          <td class="paramtype">const T *&#160;</td>
+          <td class="paramname"><em>array</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Copy array (raw) to variant. </p>
+
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00207">207</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+
+<p class="reference">References <a class="el" href="Helper_8h_source.html#l00013">opcua::detail::getUaDataType()</a>.</p>
+
+</div>
+</div>
+<a id="a5f71f0596ff5b378cddd04efbb23931d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f71f0596ff5b378cddd04efbb23931d">&#9670;&nbsp;</a></span>setArrayCopy() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename InputIt , Type type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::Variant::setArrayCopy </td>
+          <td>(</td>
+          <td class="paramtype">InputIt&#160;</td>
+          <td class="paramname"><em>first</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">InputIt&#160;</td>
+          <td class="paramname"><em>last</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Copy range of elements as array to variant. </p>
+
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00195">195</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+
+<p class="reference">References <a class="el" href="Helper_8h_source.html#l00013">opcua::detail::getUaDataType()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00100">opcua::Node::writeArray()</a>.</p>
+
+</div>
+</div>
+<a id="afae3ba56203f2cbbd7a5ee7b4d7dcb5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afae3ba56203f2cbbd7a5ee7b4d7dcb5b">&#9670;&nbsp;</a></span>setScalar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , Type type&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -618,22 +754,49 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="memname">void opcua::Variant::setScalar </td>
           <td>(</td>
-          <td class="paramtype">T&#160;</td>
+          <td class="paramtype">T &amp;&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Write scalar value to variant. </p>
-<p>The template type can also be a wrapper type like <a class="el" href="classopcua_1_1String.html" title="UA_String wrapper class.">opcua::String</a>. </p>
+<p>Assign scalar value to variant. </p>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00072">72</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00156">156</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+
+<p class="reference">References <a class="el" href="Helper_8h_source.html#l00013">opcua::detail::getUaDataType()</a>.</p>
+
+</div>
+</div>
+<a id="a2e6c68f65d930dd8108dad49d842a624"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e6c68f65d930dd8108dad49d842a624">&#9670;&nbsp;</a></span>setScalarCopy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , Type type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::Variant::setScalarCopy </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Copy scalar value to variant. </p>
+
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00170">170</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+
+<p class="reference">References <a class="el" href="Helper_8h_source.html#l00013">opcua::detail::getUaDataType()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00092">opcua::Node::write()</a>.</p>
 

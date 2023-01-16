@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['zip_5fentry_2755',['ZIP_ENTRY',['open62541/structRefEntry.html#af4cbc5615ad5d80202ddbca2f79c5cb6',1,'RefEntry::ZIP_ENTRY()'],['open62541/structUA__TimerEntry.html#a5ce76f05cdf1438e924101f30208e9d9',1,'UA_TimerEntry::ZIP_ENTRY(UA_TimerEntry) zipfields'],['open62541/structUA__TimerEntry.html#a02794de3fad8b213d157af182b85387a',1,'UA_TimerEntry::ZIP_ENTRY(UA_TimerEntry) idZipfields']]]
+  ['write_2848',['write',['../classopcua_1_1Node.html#a729af7668ad251ac813ce54a7ca4635d',1,'opcua::Node']]],
+  ['writearray_2849',['writeArray',['../classopcua_1_1Node.html#ab78c2057b94e662e71750f63f80c606e',1,'opcua::Node']]],
+  ['writevarianttoserver_2850',['writeVariantToServer',['../classopcua_1_1Node.html#ab826da68b3953a8017ae4c9f57dcbfdf',1,'opcua::Node']]]
 ];

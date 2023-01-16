@@ -21,8 +21,8 @@
 <g id="node2" class="node">
 <title>Node2</title>
 <g id="a_node2"><a xlink:title=" ">
-<polygon fill="none" stroke="#bfbfbf" points="16.5,-56.5 16.5,-75.5 120.5,-75.5 120.5,-56.5 16.5,-56.5"/>
-<text text-anchor="middle" x="68.5" y="-63.5" font-family="Helvetica,sans-Serif" font-size="10.00">std::runtime_error</text>
+<polygon fill="none" stroke="#bfbfbf" points="27,-56.5 27,-75.5 110,-75.5 110,-56.5 27,-56.5"/>
+<text text-anchor="middle" x="68.5" y="-63.5" font-family="Helvetica,sans-Serif" font-size="10.00">runtime_error</text>
 </a>
 </g>
 </g>

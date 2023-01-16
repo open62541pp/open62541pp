@@ -75,19 +75,21 @@ $(function() {
 <div class="title">Helper.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;string&gt;</code><br />
+<div class="textblock"><code>#include &lt;cstdint&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
 <code>#include &lt;string_view&gt;</code><br />
+<code>#include &quot;<a class="el" href="Types_8h_source.html">open62541pp/Types.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="open62541_8h_source.html">open62541pp/open62541.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Helper.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="Helper_8h__incl.svg" width="631" height="216"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="Helper_8h__incl.svg" width="876" height="291"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="Helper_8h__dep__incl.svg" width="268" height="171"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="Helper_8h__dep__incl.svg" width="798" height="587"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div>
@@ -102,13 +104,26 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:ad7881b9291259f504559a6d970bf5cd8"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ad7881b9291259f504559a6d970bf5cd8">opcua::detail::getUaDataType</a> (Type type) noexcept</td></tr>
+<tr class="memdesc:ad7881b9291259f504559a6d970bf5cd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get <a class="elRef" href="open62541/structUA__DataType.html">UA_DataType</a> by Type enum.  <a href="namespaceopcua_1_1detail.html#ad7881b9291259f504559a6d970bf5cd8">More...</a><br /></td></tr>
+<tr class="separator:ad7881b9291259f504559a6d970bf5cd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a126dfc428746878cf70d9137b3f6eede"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a126dfc428746878cf70d9137b3f6eede">opcua::detail::getUaDataType</a> (const <a class="elRef" href="open62541/structUA__NodeId.html">UA_NodeId</a> *id) noexcept</td></tr>
+<tr class="memdesc:a126dfc428746878cf70d9137b3f6eede"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get (custom) <a class="elRef" href="open62541/structUA__DataType.html">UA_DataType</a> by <a class="elRef" href="open62541/structUA__NodeId.html">UA_NodeId</a>.  <a href="namespaceopcua_1_1detail.html#a126dfc428746878cf70d9137b3f6eede">More...</a><br /></td></tr>
+<tr class="separator:a126dfc428746878cf70d9137b3f6eede"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a326f0e74460157371d1df10077703d94"><td class="memItemLeft" align="right" valign="top"><a class="elRef" href="open62541/structUA__String.html">UA_String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a326f0e74460157371d1df10077703d94">opcua::detail::allocUaString</a> (const char *src)</td></tr>
+<tr class="memdesc:a326f0e74460157371d1df10077703d94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate <a class="elRef" href="open62541/structUA__String.html">UA_String</a> from const char*.  <a href="namespaceopcua_1_1detail.html#a326f0e74460157371d1df10077703d94">More...</a><br /></td></tr>
+<tr class="separator:a326f0e74460157371d1df10077703d94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab086ba6c1c55e2be3746f614066d754a"><td class="memItemLeft" align="right" valign="top"><a class="elRef" href="open62541/structUA__String.html">UA_String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ab086ba6c1c55e2be3746f614066d754a">opcua::detail::allocUaString</a> (const std::string &amp;src)</td></tr>
+<tr class="memdesc:ab086ba6c1c55e2be3746f614066d754a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate <a class="elRef" href="open62541/structUA__String.html">UA_String</a> from std::string.  <a href="namespaceopcua_1_1detail.html#ab086ba6c1c55e2be3746f614066d754a">More...</a><br /></td></tr>
 <tr class="separator:ab086ba6c1c55e2be3746f614066d754a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a161e9f5f92971da039857209d69cc103"><td class="memItemLeft" align="right" valign="top"><a class="elRef" href="open62541/structUA__String.html">UA_String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a161e9f5f92971da039857209d69cc103">opcua::detail::allocUaString</a> (std::string_view src)</td></tr>
+<tr class="memdesc:a161e9f5f92971da039857209d69cc103"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate <a class="elRef" href="open62541/structUA__String.html">UA_String</a> from std::string_view.  <a href="namespaceopcua_1_1detail.html#a161e9f5f92971da039857209d69cc103">More...</a><br /></td></tr>
 <tr class="separator:a161e9f5f92971da039857209d69cc103"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf2513e895bc59a84f17a6a152f97cda"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#adf2513e895bc59a84f17a6a152f97cda">opcua::detail::toStringView</a> (const <a class="elRef" href="open62541/structUA__String.html">UA_String</a> &amp;src)</td></tr>
+<tr class="memdesc:adf2513e895bc59a84f17a6a152f97cda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert <a class="elRef" href="open62541/structUA__String.html">UA_String</a> to std::string_view.  <a href="namespaceopcua_1_1detail.html#adf2513e895bc59a84f17a6a152f97cda">More...</a><br /></td></tr>
 <tr class="separator:adf2513e895bc59a84f17a6a152f97cda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab875dad9e8b6ae20d73250943b6df298"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ab875dad9e8b6ae20d73250943b6df298">opcua::detail::toString</a> (const <a class="elRef" href="open62541/structUA__String.html">UA_String</a> &amp;src)</td></tr>
+<tr class="memdesc:ab875dad9e8b6ae20d73250943b6df298"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert <a class="elRef" href="open62541/structUA__String.html">UA_String</a> to std::string.  <a href="namespaceopcua_1_1detail.html#ab875dad9e8b6ae20d73250943b6df298">More...</a><br /></td></tr>
 <tr class="separator:ab875dad9e8b6ae20d73250943b6df298"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->

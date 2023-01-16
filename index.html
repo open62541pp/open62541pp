@@ -71,19 +71,19 @@ $(function() {
 <div class="textblock"><p><a href="https://github.com/open62541pp/open62541pp/blob/master/LICENSE"><object type="image/svg+xml" data="https://img.shields.io/badge/License-MPL%202.0-blue.svg" style="pointer-events: none;">License: MPL 2.0</object></a> <a href="https://github.com/open62541pp/open62541pp/actions/workflows/ci.yml"><object type="image/svg+xml" data="https://github.com/open62541pp/open62541pp/actions/workflows/ci.yml/badge.svg" style="pointer-events: none;">CI</object></a> <a href="https://github.com/open62541pp/open62541pp/actions/workflows/doc.yml"><object type="image/svg+xml" data="https://github.com/open62541pp/open62541pp/actions/workflows/doc.yml/badge.svg" style="pointer-events: none;">Documentation</object></a> <a href="https://github.com/open62541pp/open62541pp/actions/workflows/open62541-compatibility.yml"><object type="image/svg+xml" data="https://github.com/open62541pp/open62541pp/actions/workflows/open62541-compatibility.yml/badge.svg" style="pointer-events: none;">Compatibility</object></a> <a href="https://coveralls.io/github/open62541pp/open62541pp"><object type="image/svg+xml" data="https://coveralls.io/repos/github/open62541pp/open62541pp/badge.svg" style="pointer-events: none;">Coverage</object></a></p>
 <p><b><a href="https://open62541pp.github.io/open62541pp">Documentation</a> · <a href="https://github.com/open62541pp/open62541pp/tree/master/examples">Examples</a></b></p>
 <p>open62541++ is a C++ wrapper built on top of the amazing <a href="https://open62541.org">open62541</a> OPC UA (OPC Unified Architecture) library.</p>
-<p>It aims to:</p>
+<p>Features and goals:</p>
 <ul>
-<li>safely wrap the open62541 <code>UA_*</code> types to prevent memory leaks</li>
-<li>expose high-level and easy to use classes similar to the <a href="https://python-opcua.readthedocs.io">python-opcua API</a>:<ul>
+<li>High-level and easy to use classes similar to the <a href="https://python-opcua.readthedocs.io">python-opcua API</a>:<ul>
 <li><code><a class="el" href="classopcua_1_1Server.html" title="High-level server class.">opcua::Server</a></code></li>
-<li><code>opcua::Client</code> (TODO)</li>
+<li><code>opcua::Client</code> <em>TODO</em></li>
 <li><code><a class="el" href="classopcua_1_1Node.html" title="High level node object, to access node attribute, browse and populate address space.">opcua::Node</a></code></li>
 </ul>
 </li>
-<li>minimize code</li>
-<li>reduce the hurdle to get started with OPC UA</li>
-<li>use modern C++ (C++ 17) and best practices</li>
-<li>native open62541 objects can be accessed using the <code>handle()</code> method of the wrapping classes to give you all the power of open62541 (the open62541++ API is quite limited at the moment)</li>
+<li>Safe wrapper classes for open62541 <code>UA_*</code> types to prevent memory leaks</li>
+<li>Native open62541 objects can be accessed using the <code>handle()</code> method of the wrapping classes</li>
+<li>Extensible type conversion system to convert from arbitrary types to native <code>UA_*</code> types</li>
+<li>Less hurdle to get started with OPC UA</li>
+<li>Use modern C++ (C++ 17) and best practices</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Example</h1>
@@ -114,6 +114,43 @@ Example</h1>
 <div class="line">    server.<a class="code" href="classopcua_1_1Server.html#a7346a714c85e2d99fc8bc9fd1dd31d6d">run</a>();</div>
 <div class="line">}</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md2"></a>
+Type conversion</h1>
+<p>Type conversion from and to native <code>UA_*</code> types are handled by the <code><a class="el" href="structopcua_1_1TypeConverter.html">opcua::TypeConverter</a></code> struct.</p>
+<p>Compile-time checks are used where possible:</p>
+<div class="fragment"><div class="line"><a class="code" href="classopcua_1_1Variant.html">opcua::Variant</a> var;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// will compile</span></div>
+<div class="line"><span class="keywordtype">int</span> number = 5;</div>
+<div class="line">var.<a class="code" href="classopcua_1_1Variant.html#afae3ba56203f2cbbd7a5ee7b4d7dcb5b">setScalar</a>(number);</div>
+<div class="line">var.<a class="code" href="classopcua_1_1Variant.html#a5f71f0596ff5b378cddd04efbb23931d">setArrayCopy</a>&lt;<span class="keywordtype">double</span>&gt;({1.1, 2.2, 3.3});</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// won&#39;t compile, because the std::string can&#39;t be assigned without copy (conversion needed)</span></div>
+<div class="line">std::string str{<span class="stringliteral">&quot;test&quot;</span>};</div>
+<div class="line">var.<a class="code" href="classopcua_1_1Variant.html#afae3ba56203f2cbbd7a5ee7b4d7dcb5b">setScalar</a>(str);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// won&#39;t compile, because the type std::string is associated with more than one variant types:</span></div>
+<div class="line"><span class="comment">// - opcua::Type::String</span></div>
+<div class="line"><span class="comment">// - opcua::Type::ByteString</span></div>
+<div class="line"><span class="comment">// - opcua::Type::XmlElement</span></div>
+<div class="line">var.<a class="code" href="classopcua_1_1Variant.html#a2e6c68f65d930dd8108dad49d842a624">setScalarCopy</a>&lt;std::string&gt;(<span class="stringliteral">&quot;test&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// finally compiles</span></div>
+<div class="line">var.<a class="code" href="classopcua_1_1Variant.html#a2e6c68f65d930dd8108dad49d842a624">setScalarCopy</a>&lt;std::string, <a class="code" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966a27118326006d3829667a400ad23d5d98">opcua::Type::String</a>&gt;(<span class="stringliteral">&quot;test&quot;</span>);</div>
+</div><!-- fragment --><p>You can add template specializations to add conversions for arbitrary types:</p>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code" href="namespaceopcua.html">opcua</a> {</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;&gt;</div>
+<div class="line"><span class="keyword">struct </span>TypeConverter&lt;std::string&gt; {</div>
+<div class="line">    <span class="keyword">using</span> <a class="code" href="structopcua_1_1TypeConverter.html#aa5f3e2e4b301798069e210b346f46f99">ValueType</a> = std::string;</div>
+<div class="line">    <span class="keyword">using</span> <a class="code" href="structopcua_1_1TypeConverter.html#aed78022eaa2d4d1d73ef24d6332869f8">NativeType</a> = <a class="codeRef" href="open62541/structUA__String.html">UA_String</a>;</div>
+<div class="line">    <span class="keyword">using</span> <a class="code" href="structopcua_1_1TypeConverter.html#ac091a5d0e15545862627fb2f7e896da4">ValidTypes</a> = TypeList&lt;Type::String, Type::ByteString, Type::XmlElement&gt;;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="structopcua_1_1TypeConverter.html#a500a9ff63f07a43c196ed64b02169694">fromNative</a>(<span class="keyword">const</span> <a class="code" href="structopcua_1_1TypeConverter.html#aed78022eaa2d4d1d73ef24d6332869f8">NativeType</a>&amp; src, <a class="code" href="structopcua_1_1TypeConverter.html#aa5f3e2e4b301798069e210b346f46f99">ValueType</a>&amp; dst) { <span class="comment">/* ... */</span> }</div>
+<div class="line">    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code" href="structopcua_1_1TypeConverter.html#a3a75022757c6255b3e75a0ed76519edb">toNative</a>(<span class="keyword">const</span> <a class="code" href="structopcua_1_1TypeConverter.html#aa5f3e2e4b301798069e210b346f46f99">ValueType</a>&amp; src, <a class="code" href="structopcua_1_1TypeConverter.html#aed78022eaa2d4d1d73ef24d6332869f8">NativeType</a>&amp; dst) { <span class="comment">/* ... */</span> }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line">}  <span class="comment">// namespace opcua</span></div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md3"></a>
 Build</h1>
 <p>The library is built using <a href="https://cmake.org/runningcmake/">CMake</a>. You can add it to your project with as Git submodule (<code>git submodule add <a href="https://github.com/open62541pp/open62541pp.git">https://github.com/open62541pp/open62541pp.git</a></code>) and link it with CMake:</p>
 <div class="fragment"><div class="line">add_subdirectory(extern/open62541pp)  # the submodule directory</div>
@@ -129,7 +166,7 @@ Build</h1>
 <li><code>UAPP_ENABLE_COVERAGE</code>: Enable coverage analysis</li>
 <li><code>UAPP_ENABLE_SANITIZER_ADDRESS/LEAK/MEMORY/THREAD/UNDEFINED_BEHAVIOUR</code>: Enable sanitizers</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md3"></a>
+<h2><a class="anchor" id="autotoc_md4"></a>
 Dependencies</h2>
 <ul>
 <li><a href="https://github.com/open62541/open62541">open62541</a> as integrated submodule or external dependency</li>
@@ -137,14 +174,26 @@ Dependencies</h2>
 </ul>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
+<div class="ttc" id="anamespaceopcua_html_adc25953f10b26dc1213b1033d44f5966a27118326006d3829667a400ad23d5d98"><div class="ttname"><a href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966a27118326006d3829667a400ad23d5d98">opcua::Type::String</a></div><div class="ttdeci">@ String</div></div>
 <div class="ttc" id="aclassopcua_1_1Server_html_a7346a714c85e2d99fc8bc9fd1dd31d6d"><div class="ttname"><a href="classopcua_1_1Server.html#a7346a714c85e2d99fc8bc9fd1dd31d6d">opcua::Server::run</a></div><div class="ttdeci">void run()</div><div class="ttdoc">Run server. This method will block until Server::stop is called.</div></div>
+<div class="ttc" id="anamespaceopcua_html"><div class="ttname"><a href="namespaceopcua.html">opcua</a></div><div class="ttdef"><b>Definition:</b> <a href="ErrorHandling_8h_source.html#l00008">ErrorHandling.h:8</a></div></div>
+<div class="ttc" id="astructUA__String_html"><div class="ttname"><a href="open62541/structUA__String.html">UA_String</a></div></div>
 <div class="ttc" id="aopen62541pp_8h_html"><div class="ttname"><a href="open62541pp_8h.html">open62541pp.h</a></div></div>
+<div class="ttc" id="astructopcua_1_1TypeConverter_html_a500a9ff63f07a43c196ed64b02169694"><div class="ttname"><a href="structopcua_1_1TypeConverter.html#a500a9ff63f07a43c196ed64b02169694">opcua::TypeConverter::fromNative</a></div><div class="ttdeci">static void fromNative(const NativeType &amp;src, ValueType &amp;dst)</div></div>
+<div class="ttc" id="astructopcua_1_1TypeConverter_html_a3a75022757c6255b3e75a0ed76519edb"><div class="ttname"><a href="structopcua_1_1TypeConverter.html#a3a75022757c6255b3e75a0ed76519edb">opcua::TypeConverter::toNative</a></div><div class="ttdeci">static void toNative(const ValueType &amp;src, NativeType &amp;dst)</div></div>
 <div class="ttc" id="aclassopcua_1_1Server_html"><div class="ttname"><a href="classopcua_1_1Server.html">opcua::Server</a></div><div class="ttdoc">High-level server class.</div><div class="ttdef"><b>Definition:</b> <a href="Server_8h_source.html#l00033">Server.h:33</a></div></div>
-<div class="ttc" id="aclassopcua_1_1NodeId_html"><div class="ttname"><a href="classopcua_1_1NodeId.html">opcua::NodeId</a></div><div class="ttdoc">UA_NodeId wrapper class.</div><div class="ttdef"><b>Definition:</b> <a href="NodeId_8h_source.html#l00014">NodeId.h:14</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html"><div class="ttname"><a href="classopcua_1_1Variant.html">opcua::Variant</a></div><div class="ttdoc">UA_Variant wrapper class.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00024">Variant.h:24</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html_a5f71f0596ff5b378cddd04efbb23931d"><div class="ttname"><a href="classopcua_1_1Variant.html#a5f71f0596ff5b378cddd04efbb23931d">opcua::Variant::setArrayCopy</a></div><div class="ttdeci">void setArrayCopy(InputIt first, InputIt last)</div><div class="ttdoc">Copy range of elements as array to variant.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00195">Variant.h:195</a></div></div>
+<div class="ttc" id="astructopcua_1_1TypeConverter_html_aed78022eaa2d4d1d73ef24d6332869f8"><div class="ttname"><a href="structopcua_1_1TypeConverter.html#aed78022eaa2d4d1d73ef24d6332869f8">opcua::TypeConverter::NativeType</a></div><div class="ttdeci">std::nullptr_t NativeType</div><div class="ttdef"><b>Definition:</b> <a href="TypeConverter_8h_source.html#l00038">TypeConverter.h:38</a></div></div>
+<div class="ttc" id="aclassopcua_1_1NodeId_html"><div class="ttname"><a href="classopcua_1_1NodeId.html">opcua::NodeId</a></div><div class="ttdoc">UA_NodeId wrapper class.</div><div class="ttdef"><b>Definition:</b> <a href="NodeId_8h_source.html#l00015">NodeId.h:15</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Node_html_a436bc81b665c50e7a655ee38545fec58"><div class="ttname"><a href="classopcua_1_1Node.html#a436bc81b665c50e7a655ee38545fec58">opcua::Node::setDisplayName</a></div><div class="ttdeci">void setDisplayName(std::string_view name, std::string_view locale)</div><div class="ttdoc">Set localized display name.</div></div>
 <div class="ttc" id="aclassopcua_1_1Server_html_a9ffc192335325305fe4ab1b6924ebaf7"><div class="ttname"><a href="classopcua_1_1Server.html#a9ffc192335325305fe4ab1b6924ebaf7">opcua::Server::getObjectsNode</a></div><div class="ttdeci">Node getObjectsNode()</div></div>
 <div class="ttc" id="aclassopcua_1_1Node_html_aea34d8db292529557333db65e1bf2fc8"><div class="ttname"><a href="classopcua_1_1Node.html#aea34d8db292529557333db65e1bf2fc8">opcua::Node::addVariable</a></div><div class="ttdeci">Node addVariable(const NodeId &amp;id, std::string_view browseName, Type type)</div></div>
+<div class="ttc" id="astructopcua_1_1TypeConverter_html_ac091a5d0e15545862627fb2f7e896da4"><div class="ttname"><a href="structopcua_1_1TypeConverter.html#ac091a5d0e15545862627fb2f7e896da4">opcua::TypeConverter::ValidTypes</a></div><div class="ttdeci">TypeList&lt;&gt; ValidTypes</div><div class="ttdef"><b>Definition:</b> <a href="TypeConverter_8h_source.html#l00039">TypeConverter.h:39</a></div></div>
+<div class="ttc" id="astructopcua_1_1TypeConverter_html_aa5f3e2e4b301798069e210b346f46f99"><div class="ttname"><a href="structopcua_1_1TypeConverter.html#aa5f3e2e4b301798069e210b346f46f99">opcua::TypeConverter::ValueType</a></div><div class="ttdeci">T ValueType</div><div class="ttdef"><b>Definition:</b> <a href="TypeConverter_8h_source.html#l00037">TypeConverter.h:37</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html_afae3ba56203f2cbbd7a5ee7b4d7dcb5b"><div class="ttname"><a href="classopcua_1_1Variant.html#afae3ba56203f2cbbd7a5ee7b4d7dcb5b">opcua::Variant::setScalar</a></div><div class="ttdeci">void setScalar(T &amp;value) noexcept</div><div class="ttdoc">Assign scalar value to variant.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00156">Variant.h:156</a></div></div>
 <div class="ttc" id="anamespaceopcua_html_adc25953f10b26dc1213b1033d44f5966ac06129f6e6e15c09328365e553f1dc31"><div class="ttname"><a href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966ac06129f6e6e15c09328365e553f1dc31">opcua::Type::Int32</a></div><div class="ttdeci">@ Int32</div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html_a2e6c68f65d930dd8108dad49d842a624"><div class="ttname"><a href="classopcua_1_1Variant.html#a2e6c68f65d930dd8108dad49d842a624">opcua::Variant::setScalarCopy</a></div><div class="ttdeci">void setScalarCopy(const T &amp;value)</div><div class="ttdoc">Copy scalar value to variant.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00170">Variant.h:170</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

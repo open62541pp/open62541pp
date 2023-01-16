@@ -1,11 +1,12 @@
 <map id="/home/runner/work/open62541pp/open62541pp/include/open62541pp/open62541.h" name="/home/runner/work/open62541pp/open62541pp/include/open62541pp/open62541.h">
-<area shape="rect" id="node1" title=" " alt="" coords="376,5,634,61"/>
-<area shape="rect" id="node2" href="$ErrorHandling_8h.html" title=" " alt="" coords="236,109,494,165"/>
-<area shape="rect" id="node5" href="$TypeWrapper_8h.html" title=" " alt="" coords="134,213,391,269"/>
-<area shape="rect" id="node6" href="$NodeId_8h.html" title=" " alt="" coords="32,317,290,373"/>
-<area shape="rect" id="node7" href="$Variant_8h.html" title=" " alt="" coords="518,317,775,373"/>
-<area shape="rect" id="node8" href="$Helper_8h.html" title=" " alt="" coords="851,213,1108,269"/>
-<area shape="rect" id="node9" href="$Types_8h.html" title=" " alt="" coords="518,109,775,165"/>
-<area shape="rect" id="node3" href="$Node_8h.html" title=" " alt="" coords="357,421,618,477"/>
-<area shape="rect" id="node4" href="$open62541pp_8h.html" title=" " alt="" coords="359,525,616,581"/>
+<area shape="rect" id="node1" title=" " alt="" coords="426,5,683,61"/>
+<area shape="rect" id="node2" href="$ErrorHandling_8h.html" title=" " alt="" coords="426,213,683,269"/>
+<area shape="rect" id="node5" href="$TypeConverter_8h.html" title=" " alt="" coords="259,421,517,477"/>
+<area shape="rect" id="node6" href="$Variant_8h.html" title=" " alt="" coords="361,525,618,581"/>
+<area shape="rect" id="node7" href="$TypeWrapper_8h.html" title=" " alt="" coords="593,317,850,373"/>
+<area shape="rect" id="node8" href="$NodeId_8h.html" title=" " alt="" coords="963,421,1221,477"/>
+<area shape="rect" id="node9" href="$Helper_8h.html" title=" " alt="" coords="145,213,402,269"/>
+<area shape="rect" id="node10" href="$Types_8h.html" title=" " alt="" coords="759,109,1017,165"/>
+<area shape="rect" id="node3" href="$Node_8h.html" title=" " alt="" coords="525,629,787,685"/>
+<area shape="rect" id="node4" href="$open62541pp_8h.html" title=" " alt="" coords="443,733,701,789"/>
 </map>
