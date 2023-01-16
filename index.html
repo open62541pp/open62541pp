@@ -81,9 +81,12 @@ $(function() {
 </li>
 <li>Safe wrapper classes for open62541 <code>UA_*</code> types to prevent memory leaks</li>
 <li>Native open62541 objects can be accessed using the <code>handle()</code> method of the wrapping classes</li>
-<li>Extensible type conversion system to convert from arbitrary types to native <code>UA_*</code> types</li>
-<li>Less hurdle to get started with OPC UA</li>
+<li>Extensible type conversion system to convert arbitrary types to/from native <code>UA_*</code> types</li>
+<li>Cross-platform (tested on Windows, Linux and MacOS)</li>
+<li>Compatible with all stable open62541 versions (&gt; v1.0)</li>
+<li>Easy installation and integration with CMake</li>
 <li>Use modern C++ (C++ 17) and best practices</li>
+<li>Less hurdle to get started with OPC UA</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Example</h1>
@@ -150,9 +153,65 @@ Type conversion</h1>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line">}  <span class="comment">// namespace opcua</span></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md3"></a>
-Build</h1>
-<p>The library is built using <a href="https://cmake.org/runningcmake/">CMake</a>. You can add it to your project with as Git submodule (<code>git submodule add <a href="https://github.com/open62541pp/open62541pp.git">https://github.com/open62541pp/open62541pp.git</a></code>) and link it with CMake:</p>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md3"></a>
+Type map of built-in types</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Type Enum <code><a class="el" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966">opcua::Type</a></code> </th><th class="markdownTableHeadNone">Type </th><th class="markdownTableHeadNone">Typedef </th><th class="markdownTableHeadNone">Wrapper </th><th class="markdownTableHeadNone">Conversions  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Boolean </td><td class="markdownTableBodyNone"><code>UA_Boolean</code> </td><td class="markdownTableBodyNone"><code>bool</code> </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">SByte </td><td class="markdownTableBodyNone"><code>UA_SByte</code> </td><td class="markdownTableBodyNone"><code>int8_t</code> </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Byte </td><td class="markdownTableBodyNone"><code>UA_Byte</code> </td><td class="markdownTableBodyNone"><code>uint8_t</code> </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Int16 </td><td class="markdownTableBodyNone"><code>UA_Int16</code> </td><td class="markdownTableBodyNone"><code>int16_t</code> </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">UInt16 </td><td class="markdownTableBodyNone"><code>UA_UInt16</code> </td><td class="markdownTableBodyNone"><code>uint16_t</code> </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Int32 </td><td class="markdownTableBodyNone"><code>UA_Int32</code> </td><td class="markdownTableBodyNone"><code>int32_t</code> </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">UInt32 </td><td class="markdownTableBodyNone"><code>UA_UInt32</code> </td><td class="markdownTableBodyNone"><code>uint32_t</code> </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Int64 </td><td class="markdownTableBodyNone"><code>UA_Int64</code> </td><td class="markdownTableBodyNone"><code>int64_t</code> </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">UInt64 </td><td class="markdownTableBodyNone"><code>UA_UInt64</code> </td><td class="markdownTableBodyNone"><code>uint64_t</code> </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Float </td><td class="markdownTableBodyNone"><code>UA_Float</code> </td><td class="markdownTableBodyNone"><code>float</code> </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Double </td><td class="markdownTableBodyNone"><code>UA_Double</code> </td><td class="markdownTableBodyNone"><code>double</code> </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">String </td><td class="markdownTableBodyNone"><code><a class="elRef" href="open62541/structUA__String.html">UA_String</a></code> </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><code><a class="el" href="classopcua_1_1String.html" title="UA_String wrapper class.">opcua::String</a></code> </td><td class="markdownTableBodyNone"><code>std::string</code>  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">DateTime </td><td class="markdownTableBodyNone"><code>UA_DateTime</code> </td><td class="markdownTableBodyNone"><code>int64_t</code> </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Guid </td><td class="markdownTableBodyNone"><code><a class="elRef" href="open62541/structUA__Guid.html">UA_Guid</a></code> </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><code><a class="el" href="classopcua_1_1Guid.html" title="UA_Guid wrapper class.">opcua::Guid</a></code> </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">ByteString </td><td class="markdownTableBodyNone"><code>UA_ByteString</code> </td><td class="markdownTableBodyNone"><code><a class="elRef" href="open62541/structUA__String.html">UA_String</a></code> </td><td class="markdownTableBodyNone"><code><a class="el" href="classopcua_1_1ByteString.html" title="UA_ByteString wrapper class.">opcua::ByteString</a></code> </td><td class="markdownTableBodyNone"><code>std::string</code>  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">XmlElement </td><td class="markdownTableBodyNone"><code>UA_XmlElement</code> </td><td class="markdownTableBodyNone"><code><a class="elRef" href="open62541/structUA__String.html">UA_String</a></code> </td><td class="markdownTableBodyNone"><code>opcua::XmlElement</code> </td><td class="markdownTableBodyNone"><code>std::string</code>  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">NodeId </td><td class="markdownTableBodyNone"><code><a class="elRef" href="open62541/structUA__NodeId.html">UA_NodeId</a></code> </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><code><a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">opcua::NodeId</a></code> </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">ExpandedNodeId </td><td class="markdownTableBodyNone"><code><a class="elRef" href="open62541/structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a></code> </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><code>opcua::ExpandedNodeId</code> </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">StatusCode </td><td class="markdownTableBodyNone"><code>UA_StatusCode</code> </td><td class="markdownTableBodyNone"><code>uint32_t</code> </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">QualifiedName </td><td class="markdownTableBodyNone"><code><a class="elRef" href="open62541/structUA__QualifiedName.html">UA_QualifiedName</a></code> </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><code><a class="el" href="classopcua_1_1QualifiedName.html" title="UA_QualifiedName wrapper class.">opcua::QualifiedName</a></code> </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">LocalizedText </td><td class="markdownTableBodyNone"><code><a class="elRef" href="open62541/structUA__LocalizedText.html">UA_LocalizedText</a></code> </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><code><a class="el" href="classopcua_1_1LocalizedText.html" title="UA_LocalizedText wrapper class.">opcua::LocalizedText</a></code> </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">ExtensionObjectDataValue </td><td class="markdownTableBodyNone"><code><a class="elRef" href="open62541/structUA__ExtensionObject.html">UA_ExtensionObject</a></code> </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><code>opcua::ExtensionObjectDataValue</code> </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">DataValue </td><td class="markdownTableBodyNone"><code><a class="elRef" href="open62541/structUA__DataValue.html">UA_DataValue</a></code> </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><code>opcua::DataValue</code> </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Variant </td><td class="markdownTableBodyNone"><code><a class="elRef" href="open62541/structUA__Variant.html">UA_Variant</a></code> </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><code><a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">opcua::Variant</a></code> </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">DiagnosticInfo </td><td class="markdownTableBodyNone"><code><a class="elRef" href="open62541/structUA__DiagnosticInfo.html">UA_DiagnosticInfo</a></code> </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"><code>opcua::DiagnosticInfo</code> </td><td class="markdownTableBodyNone"></td></tr>
+</table>
+<h1><a class="anchor" id="autotoc_md4"></a>
+Install</h1>
+<p>The library can be installed using <a href="https://cmake.org/runningcmake/">CMake</a>. Add it to your project as a Git submodule (<code>git submodule add <a href="https://github.com/open62541pp/open62541pp.git">https://github.com/open62541pp/open62541pp.git</a></code>) and link it with CMake:</p>
 <div class="fragment"><div class="line">add_subdirectory(extern/open62541pp)  # the submodule directory</div>
 <div class="line">target_link_library(myexecutable PRIVATE open62541pp::open62541pp)</div>
 </div><!-- fragment --><p>Please check out the open62541 build options here: <a href="https://www.open62541.org/doc/1.3/building.html#build-options">https://www.open62541.org/doc/1.3/building.html#build-options</a></p>
@@ -166,7 +225,7 @@ Build</h1>
 <li><code>UAPP_ENABLE_COVERAGE</code>: Enable coverage analysis</li>
 <li><code>UAPP_ENABLE_SANITIZER_ADDRESS/LEAK/MEMORY/THREAD/UNDEFINED_BEHAVIOUR</code>: Enable sanitizers</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md4"></a>
+<h2><a class="anchor" id="autotoc_md5"></a>
 Dependencies</h2>
 <ul>
 <li><a href="https://github.com/open62541/open62541">open62541</a> as integrated submodule or external dependency</li>
@@ -183,7 +242,7 @@ Dependencies</h2>
 <div class="ttc" id="astructopcua_1_1TypeConverter_html_a3a75022757c6255b3e75a0ed76519edb"><div class="ttname"><a href="structopcua_1_1TypeConverter.html#a3a75022757c6255b3e75a0ed76519edb">opcua::TypeConverter::toNative</a></div><div class="ttdeci">static void toNative(const ValueType &amp;src, NativeType &amp;dst)</div></div>
 <div class="ttc" id="aclassopcua_1_1Server_html"><div class="ttname"><a href="classopcua_1_1Server.html">opcua::Server</a></div><div class="ttdoc">High-level server class.</div><div class="ttdef"><b>Definition:</b> <a href="Server_8h_source.html#l00033">Server.h:33</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Variant_html"><div class="ttname"><a href="classopcua_1_1Variant.html">opcua::Variant</a></div><div class="ttdoc">UA_Variant wrapper class.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00024">Variant.h:24</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Variant_html_a5f71f0596ff5b378cddd04efbb23931d"><div class="ttname"><a href="classopcua_1_1Variant.html#a5f71f0596ff5b378cddd04efbb23931d">opcua::Variant::setArrayCopy</a></div><div class="ttdeci">void setArrayCopy(InputIt first, InputIt last)</div><div class="ttdoc">Copy range of elements as array to variant.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00195">Variant.h:195</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html_a5f71f0596ff5b378cddd04efbb23931d"><div class="ttname"><a href="classopcua_1_1Variant.html#a5f71f0596ff5b378cddd04efbb23931d">opcua::Variant::setArrayCopy</a></div><div class="ttdeci">void setArrayCopy(InputIt first, InputIt last)</div><div class="ttdoc">Copy range of elements as array to variant.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00197">Variant.h:197</a></div></div>
 <div class="ttc" id="astructopcua_1_1TypeConverter_html_aed78022eaa2d4d1d73ef24d6332869f8"><div class="ttname"><a href="structopcua_1_1TypeConverter.html#aed78022eaa2d4d1d73ef24d6332869f8">opcua::TypeConverter::NativeType</a></div><div class="ttdeci">std::nullptr_t NativeType</div><div class="ttdef"><b>Definition:</b> <a href="TypeConverter_8h_source.html#l00038">TypeConverter.h:38</a></div></div>
 <div class="ttc" id="aclassopcua_1_1NodeId_html"><div class="ttname"><a href="classopcua_1_1NodeId.html">opcua::NodeId</a></div><div class="ttdoc">UA_NodeId wrapper class.</div><div class="ttdef"><b>Definition:</b> <a href="NodeId_8h_source.html#l00015">NodeId.h:15</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Node_html_a436bc81b665c50e7a655ee38545fec58"><div class="ttname"><a href="classopcua_1_1Node.html#a436bc81b665c50e7a655ee38545fec58">opcua::Node::setDisplayName</a></div><div class="ttdeci">void setDisplayName(std::string_view name, std::string_view locale)</div><div class="ttdoc">Set localized display name.</div></div>
@@ -191,9 +250,9 @@ Dependencies</h2>
 <div class="ttc" id="aclassopcua_1_1Node_html_aea34d8db292529557333db65e1bf2fc8"><div class="ttname"><a href="classopcua_1_1Node.html#aea34d8db292529557333db65e1bf2fc8">opcua::Node::addVariable</a></div><div class="ttdeci">Node addVariable(const NodeId &amp;id, std::string_view browseName, Type type)</div></div>
 <div class="ttc" id="astructopcua_1_1TypeConverter_html_ac091a5d0e15545862627fb2f7e896da4"><div class="ttname"><a href="structopcua_1_1TypeConverter.html#ac091a5d0e15545862627fb2f7e896da4">opcua::TypeConverter::ValidTypes</a></div><div class="ttdeci">TypeList&lt;&gt; ValidTypes</div><div class="ttdef"><b>Definition:</b> <a href="TypeConverter_8h_source.html#l00039">TypeConverter.h:39</a></div></div>
 <div class="ttc" id="astructopcua_1_1TypeConverter_html_aa5f3e2e4b301798069e210b346f46f99"><div class="ttname"><a href="structopcua_1_1TypeConverter.html#aa5f3e2e4b301798069e210b346f46f99">opcua::TypeConverter::ValueType</a></div><div class="ttdeci">T ValueType</div><div class="ttdef"><b>Definition:</b> <a href="TypeConverter_8h_source.html#l00037">TypeConverter.h:37</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Variant_html_afae3ba56203f2cbbd7a5ee7b4d7dcb5b"><div class="ttname"><a href="classopcua_1_1Variant.html#afae3ba56203f2cbbd7a5ee7b4d7dcb5b">opcua::Variant::setScalar</a></div><div class="ttdeci">void setScalar(T &amp;value) noexcept</div><div class="ttdoc">Assign scalar value to variant.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00156">Variant.h:156</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html_afae3ba56203f2cbbd7a5ee7b4d7dcb5b"><div class="ttname"><a href="classopcua_1_1Variant.html#afae3ba56203f2cbbd7a5ee7b4d7dcb5b">opcua::Variant::setScalar</a></div><div class="ttdeci">void setScalar(T &amp;value) noexcept</div><div class="ttdoc">Assign scalar value to variant.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00158">Variant.h:158</a></div></div>
 <div class="ttc" id="anamespaceopcua_html_adc25953f10b26dc1213b1033d44f5966ac06129f6e6e15c09328365e553f1dc31"><div class="ttname"><a href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966ac06129f6e6e15c09328365e553f1dc31">opcua::Type::Int32</a></div><div class="ttdeci">@ Int32</div></div>
-<div class="ttc" id="aclassopcua_1_1Variant_html_a2e6c68f65d930dd8108dad49d842a624"><div class="ttname"><a href="classopcua_1_1Variant.html#a2e6c68f65d930dd8108dad49d842a624">opcua::Variant::setScalarCopy</a></div><div class="ttdeci">void setScalarCopy(const T &amp;value)</div><div class="ttdoc">Copy scalar value to variant.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00170">Variant.h:170</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html_a2e6c68f65d930dd8108dad49d842a624"><div class="ttname"><a href="classopcua_1_1Variant.html#a2e6c68f65d930dd8108dad49d842a624">opcua::Variant::setScalarCopy</a></div><div class="ttdeci">void setScalarCopy(const T &amp;value)</div><div class="ttdoc">Copy scalar value to variant.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00172">Variant.h:172</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
