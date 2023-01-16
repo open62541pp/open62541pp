@@ -170,7 +170,7 @@ $(function() {
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;template &lt;typename T, typename NativeType = typename TypeConverter&lt;T&gt;::NativeType&gt;</div>
 <div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#a5b918ad5a2b192ffeeabb250101ef618">  101</a></span>&#160;std::vector&lt;T&gt; <a class="code" href="namespaceopcua_1_1detail.html#a5b918ad5a2b192ffeeabb250101ef618">fromNativeArray</a>(NativeType* array, <span class="keywordtype">size_t</span> size) {</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordflow">if</span> constexpr (detail::isNativeType&lt;T&gt;() &amp;&amp; std::is_fundamental_v&lt;T&gt;) {</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="keywordflow">return</span> {array, array + size};  <span class="comment">// NOLINT</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        <span class="keywordflow">return</span> std::vector&lt;T&gt;(array, array + size);  <span class="comment">// NOLINT</span></div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        std::vector&lt;T&gt; result(size);</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; size; ++i) {</div>
