@@ -18,9 +18,12 @@ Features and goals:
   - `opcua::Node`
 - Safe wrapper classes for open62541 `UA_*` types to prevent memory leaks
 - Native open62541 objects can be accessed using the `handle()` method of the wrapping classes
-- Extensible type conversion system to convert from arbitrary types to native `UA_*` types
-- Less hurdle to get started with OPC UA
+- Extensible type conversion system to convert arbitrary types to/from native `UA_*` types
+- Cross-platform (tested on Windows, Linux and MacOS)
+- Compatible with all stable open62541 versions (> v1.0)
+- Easy installation and integration with CMake
 - Use modern C++ (C++ 17) and best practices
+- Less hurdle to get started with OPC UA
 
 ## Example
 
@@ -99,9 +102,39 @@ struct TypeConverter<std::string> {
 }  // namespace opcua
 ```
 
-## Build
+### Type map of built-in types
 
-The library is built using [CMake](https://cmake.org/runningcmake/). You can add it to your project with as Git submodule (`git submodule add https://github.com/open62541pp/open62541pp.git`) and link it with CMake:
+| Type Enum `opcua::Type`  | Type                 | Typedef     | Wrapper                           | Conversions   |
+|--------------------------|----------------------|-------------|-----------------------------------|---------------|
+| Boolean                  | `UA_Boolean`         | `bool`      |                                   |               |
+| SByte                    | `UA_SByte`           | `int8_t`    |                                   |               |
+| Byte                     | `UA_Byte`            | `uint8_t`   |                                   |               |
+| Int16                    | `UA_Int16`           | `int16_t`   |                                   |               |
+| UInt16                   | `UA_UInt16`          | `uint16_t`  |                                   |               |
+| Int32                    | `UA_Int32`           | `int32_t`   |                                   |               |
+| UInt32                   | `UA_UInt32`          | `uint32_t`  |                                   |               |
+| Int64                    | `UA_Int64`           | `int64_t`   |                                   |               |
+| UInt64                   | `UA_UInt64`          | `uint64_t`  |                                   |               |
+| Float                    | `UA_Float`           | `float`     |                                   |               |
+| Double                   | `UA_Double`          | `double`    |                                   |               |
+| String                   | `UA_String`          |             | `opcua::String`                   | `std::string` |
+| DateTime                 | `UA_DateTime`        | `int64_t`   |                                   |               |
+| Guid                     | `UA_Guid`            |             | `opcua::Guid`                     |               |
+| ByteString               | `UA_ByteString`      | `UA_String` | `opcua::ByteString`               | `std::string` |
+| XmlElement               | `UA_XmlElement`      | `UA_String` | `opcua::XmlElement`               | `std::string` |
+| NodeId                   | `UA_NodeId`          |             | `opcua::NodeId`                   |               |
+| ExpandedNodeId           | `UA_ExpandedNodeId`  |             | `opcua::ExpandedNodeId`           |               |
+| StatusCode               | `UA_StatusCode`      | `uint32_t`  |                                   |               |
+| QualifiedName            | `UA_QualifiedName`   |             | `opcua::QualifiedName`            |               |
+| LocalizedText            | `UA_LocalizedText`   |             | `opcua::LocalizedText`            |               |
+| ExtensionObjectDataValue | `UA_ExtensionObject` |             | `opcua::ExtensionObjectDataValue` |               |
+| DataValue                | `UA_DataValue`       |             | `opcua::DataValue`                |               |
+| Variant                  | `UA_Variant`         |             | `opcua::Variant`                  |               |
+| DiagnosticInfo           | `UA_DiagnosticInfo`  |             | `opcua::DiagnosticInfo`           |               |
+
+## Install
+
+The library can be installed using [CMake](https://cmake.org/runningcmake/). Add it to your project as a Git submodule (`git submodule add https://github.com/open62541pp/open62541pp.git`) and link it with CMake:
 
 ```cmake
 add_subdirectory(extern/open62541pp)  # the submodule directory

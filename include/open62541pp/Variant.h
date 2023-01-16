@@ -43,7 +43,7 @@ public:
     std::optional<Type> getVariantType() const noexcept;
 
     /// Get reference to scalar value with given template type.
-    /// @exception BadVariantAccess If the variant is not a scalar or not convertible to `T`.
+    /// @exception BadVariantAccess If the variant is not a scalar or not of type `T`.
     template <typename T>
     T& getScalar();
 
@@ -58,6 +58,8 @@ public:
     /// Get array dimensions.
     std::vector<uint32_t> getArrayDimensions() const;
 
+    /// Get pointer to array with given template type.
+    /// @exception BadVariantAccess If the variant is not an array or not of type `T`.
     template <typename T>
     T* getArray();
 
