@@ -209,9 +209,9 @@ $(function() {
 <div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        <span class="stringliteral">&quot;Template type must be convertible to native type to assign scalar without copy&quot;</span></div>
 <div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    );</div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <span class="keywordflow">if</span> constexpr (<a class="code" href="namespaceopcua_1_1detail.html#a6f6a9d9d89858dc4cd64637b4e252935">detail::IsTypeWrapper&lt;T&gt;::value</a>) {</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        setScalarImpl(value.handle(), <a class="code" href="namespaceopcua_1_1detail.html#ad7881b9291259f504559a6d970bf5cd8">detail::getUaDataType</a>(type));</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        setScalarImpl(value.handle(), detail::getUaDataType&lt;type&gt;());</div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        setScalarImpl(&amp;value, <a class="code" href="namespaceopcua_1_1detail.html#ad7881b9291259f504559a6d970bf5cd8">detail::getUaDataType</a>(type));</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        setScalarImpl(&amp;value, detail::getUaDataType&lt;type&gt;());</div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    }</div>
 <div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;}</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
@@ -220,7 +220,7 @@ $(function() {
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    detail::assertTypeCombination&lt;T, type&gt;();</div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;    setScalarImpl(</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        detail::toNativeAlloc&lt;T, type&gt;(value),</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        <a class="code" href="namespaceopcua_1_1detail.html#ad7881b9291259f504559a6d970bf5cd8">detail::getUaDataType</a>(type),</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        detail::getUaDataType&lt;type&gt;(),</div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;        <span class="keyword">true</span>  <span class="comment">// move ownership</span></div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    );</div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;}</div>
@@ -232,7 +232,7 @@ $(function() {
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        detail::isNativeType&lt;T&gt;(),</div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        <span class="stringliteral">&quot;Template type must be a native type to assign array without copy&quot;</span></div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    );</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    setArrayImpl(array, size, <a class="code" href="namespaceopcua_1_1detail.html#ad7881b9291259f504559a6d970bf5cd8">detail::getUaDataType</a>(type));</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    setArrayImpl(array, size, detail::getUaDataType&lt;type&gt;());</div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;}</div>
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, Type type&gt;</div>
@@ -247,7 +247,7 @@ $(function() {
 <div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    setArrayImpl(</div>
 <div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;        detail::toNativeArrayAlloc&lt;InputIt, type&gt;(first, last),</div>
 <div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;        std::distance(first, last),</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        <a class="code" href="namespaceopcua_1_1detail.html#ad7881b9291259f504559a6d970bf5cd8">detail::getUaDataType</a>(type),</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;        detail::getUaDataType&lt;type&gt;(),</div>
 <div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        <span class="keyword">true</span>  <span class="comment">// move ownership</span></div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    );</div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;}</div>
@@ -256,7 +256,7 @@ $(function() {
 <div class="line"><a name="l00209"></a><span class="lineno"><a class="line" href="classopcua_1_1Variant.html#ac5ba996867e11a5b743b549ef0592584">  209</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classopcua_1_1Variant.html#a5f71f0596ff5b378cddd04efbb23931d">Variant::setArrayCopy</a>(<span class="keyword">const</span> T* array, <span class="keywordtype">size_t</span> size) {</div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    detail::assertTypeCombination&lt;T, type&gt;();</div>
 <div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    <span class="keywordflow">if</span> constexpr (detail::isNativeType&lt;T&gt;()) {</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        setArrayCopyImpl(array, size, <a class="code" href="namespaceopcua_1_1detail.html#ad7881b9291259f504559a6d970bf5cd8">detail::getUaDataType</a>(type));</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        setArrayCopyImpl(array, size, detail::getUaDataType&lt;type&gt;());</div>
 <div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        setArrayCopy&lt;const T*, type&gt;(array, array + size);</div>
 <div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    }</div>
@@ -283,7 +283,6 @@ $(function() {
 <div class="ttc" id="aTypeWrapper_8h_html"><div class="ttname"><a href="TypeWrapper_8h.html">TypeWrapper.h</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Variant_html_ab2ef10e5ae385c175e646eedf347e209"><div class="ttname"><a href="classopcua_1_1Variant.html#ab2ef10e5ae385c175e646eedf347e209">opcua::Variant::isArray</a></div><div class="ttdeci">bool isArray() const noexcept</div><div class="ttdoc">Check if variant is an array.</div></div>
 <div class="ttc" id="aclassopcua_1_1Variant_html_aeb584a86991dc9b25ed22cd94ec06e58"><div class="ttname"><a href="classopcua_1_1Variant.html#aeb584a86991dc9b25ed22cd94ec06e58">opcua::Variant::getVariantType</a></div><div class="ttdeci">std::optional&lt; Type &gt; getVariantType() const noexcept</div><div class="ttdoc">Get variant type.</div></div>
-<div class="ttc" id="anamespaceopcua_1_1detail_html_ad7881b9291259f504559a6d970bf5cd8"><div class="ttname"><a href="namespaceopcua_1_1detail.html#ad7881b9291259f504559a6d970bf5cd8">opcua::detail::getUaDataType</a></div><div class="ttdeci">const UA_DataType * getUaDataType(Type type) noexcept</div><div class="ttdoc">Get UA_DataType by Type enum.</div><div class="ttdef"><b>Definition:</b> <a href="Helper_8h_source.html#l00013">Helper.h:13</a></div></div>
 <div class="ttc" id="anamespaceopcua_html_adc25953f10b26dc1213b1033d44f5966a4b5bd8a54893c87287a22228b5ef2bc8"><div class="ttname"><a href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966a4b5bd8a54893c87287a22228b5ef2bc8">opcua::Type::NodeId</a></div><div class="ttdeci">@ NodeId</div></div>
 <div class="ttc" id="aclassopcua_1_1Variant_html"><div class="ttname"><a href="classopcua_1_1Variant.html">opcua::Variant</a></div><div class="ttdoc">UA_Variant wrapper class.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00024">Variant.h:24</a></div></div>
 <div class="ttc" id="aErrorHandling_8h_html"><div class="ttname"><a href="ErrorHandling_8h.html">ErrorHandling.h</a></div></div>

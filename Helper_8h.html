@@ -75,15 +75,15 @@ $(function() {
 <div class="title">Helper.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;cstdint&gt;</code><br />
-<code>#include &lt;string&gt;</code><br />
+<div class="textblock"><code>#include &lt;string&gt;</code><br />
 <code>#include &lt;string_view&gt;</code><br />
+<code>#include &lt;type_traits&gt;</code><br />
 <code>#include &quot;<a class="el" href="Types_8h_source.html">open62541pp/Types.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="open62541_8h_source.html">open62541pp/open62541.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Helper.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="Helper_8h__incl.svg" width="876" height="291"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="Helper_8h__incl.svg" width="923" height="291"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -104,9 +104,15 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:ae2d6c41ef470c7426c2acdc2e5f3dccf"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ae2d6c41ef470c7426c2acdc2e5f3dccf">opcua::detail::getTypeIndex</a> (Type type)</td></tr>
+<tr class="separator:ae2d6c41ef470c7426c2acdc2e5f3dccf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7881b9291259f504559a6d970bf5cd8"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ad7881b9291259f504559a6d970bf5cd8">opcua::detail::getUaDataType</a> (Type type) noexcept</td></tr>
 <tr class="memdesc:ad7881b9291259f504559a6d970bf5cd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get <a class="elRef" href="open62541/structUA__DataType.html">UA_DataType</a> by Type enum.  <a href="namespaceopcua_1_1detail.html#ad7881b9291259f504559a6d970bf5cd8">More...</a><br /></td></tr>
 <tr class="separator:ad7881b9291259f504559a6d970bf5cd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33b32b75f605cc7c3696360eb14f462c"><td class="memTemplParams" colspan="2">template&lt;Type type&gt; </td></tr>
+<tr class="memitem:a33b32b75f605cc7c3696360eb14f462c"><td class="memTemplItemLeft" align="right" valign="top">const <a class="elRef" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a33b32b75f605cc7c3696360eb14f462c">opcua::detail::getUaDataType</a> () noexcept</td></tr>
+<tr class="memdesc:a33b32b75f605cc7c3696360eb14f462c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get <a class="elRef" href="open62541/structUA__DataType.html">UA_DataType</a> by Type enum (template parameter).  <a href="namespaceopcua_1_1detail.html#a33b32b75f605cc7c3696360eb14f462c">More...</a><br /></td></tr>
+<tr class="separator:a33b32b75f605cc7c3696360eb14f462c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a126dfc428746878cf70d9137b3f6eede"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a126dfc428746878cf70d9137b3f6eede">opcua::detail::getUaDataType</a> (const <a class="elRef" href="open62541/structUA__NodeId.html">UA_NodeId</a> *id) noexcept</td></tr>
 <tr class="memdesc:a126dfc428746878cf70d9137b3f6eede"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get (custom) <a class="elRef" href="open62541/structUA__DataType.html">UA_DataType</a> by <a class="elRef" href="open62541/structUA__NodeId.html">UA_NodeId</a>.  <a href="namespaceopcua_1_1detail.html#a126dfc428746878cf70d9137b3f6eede">More...</a><br /></td></tr>
 <tr class="separator:a126dfc428746878cf70d9137b3f6eede"><td class="memSeparator" colspan="2">&#160;</td></tr>

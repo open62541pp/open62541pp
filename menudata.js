@@ -39,7 +39,13 @@ var menudata={children:[
 {text:"r",url:"namespacemembers.html#index_r"},
 {text:"t",url:"namespacemembers.html#index_t"},
 {text:"v",url:"namespacemembers.html#index_v"}]},
-{text:"Functions",url:"namespacemembers_func.html"},
+{text:"Functions",url:"namespacemembers_func.html",children:[
+{text:"a",url:"namespacemembers_func.html#index_a"},
+{text:"c",url:"namespacemembers_func.html#index_c"},
+{text:"f",url:"namespacemembers_func.html#index_f"},
+{text:"g",url:"namespacemembers_func.html#index_g"},
+{text:"i",url:"namespacemembers_func.html#index_i"},
+{text:"t",url:"namespacemembers_func.html#index_t"}]},
 {text:"Typedefs",url:"namespacemembers_type.html"},
 {text:"Enumerations",url:"namespacemembers_enum.html"}]}]},
 {text:"Class List",url:"annotated.html",children:[
