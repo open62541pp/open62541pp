@@ -37,13 +37,13 @@ inline const UA_DataType* getUaDataType(const UA_NodeId* id) noexcept {
 }
 
 /// Allocate UA_String from const char*
-UA_String allocUaString(const char* src);
+[[nodiscard]] UA_String allocUaString(const char* src);
 
 /// Allocate UA_String from std::string
-UA_String allocUaString(const std::string& src);
+[[nodiscard]] UA_String allocUaString(const std::string& src);
 
 /// Allocate UA_String from std::string_view
-UA_String allocUaString(std::string_view src);
+[[nodiscard]] UA_String allocUaString(std::string_view src);
 
 /// Convert UA_String to std::string_view
 inline std::string_view toStringView(const UA_String& src) {

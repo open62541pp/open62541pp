@@ -83,7 +83,7 @@ constexpr Type guessTypeFromIterator() {
 
 /// Convert and copy from native type.
 template <typename T, typename NativeType = typename TypeConverter<T>::NativeType>
-T fromNative(NativeType* value) {
+[[nodiscard]] T fromNative(NativeType* value) {
     T result{};
     TypeConverter<T>::fromNative(*value, result);
     return result;
@@ -92,14 +92,14 @@ T fromNative(NativeType* value) {
 /// Convert and copy from native type.
 /// @warning Type erased version, use with caution.
 template <typename T, typename NativeType = typename TypeConverter<T>::NativeType>
-T fromNative(void* value, Type type) {
+[[nodiscard]] T fromNative(void* value, Type type) {
     assert(isValidTypeCombination<T>(type));  // NOLINT
     return fromNative<T>(static_cast<NativeType*>(value));
 }
 
 /// Create and convert vector from native array.
 template <typename T, typename NativeType = typename TypeConverter<T>::NativeType>
-std::vector<T> fromNativeArray(NativeType* array, size_t size) {
+[[nodiscard]] std::vector<T> fromNativeArray(NativeType* array, size_t size) {
     if constexpr (isNativeType<T>() && std::is_fundamental_v<T>) {
         return std::vector<T>(array, array + size);  // NOLINT
     } else {
@@ -114,14 +114,14 @@ std::vector<T> fromNativeArray(NativeType* array, size_t size) {
 /// Create and convert vector from native array.
 /// @warning Type erased version, use with caution.
 template <typename T, typename NativeType = typename TypeConverter<T>::NativeType>
-std::vector<T> fromNativeArray(void* array, size_t size, Type type) {
+[[nodiscard]] std::vector<T> fromNativeArray(void* array, size_t size, Type type) {
     assert(isValidTypeCombination<T>(type));  // NOLINT
     return fromNativeArray<T>(static_cast<NativeType*>(array), size);
 }
 
 /// Allocate native type.
 template <typename TNative, Type type>
-TNative* allocNative() {
+[[nodiscard]] TNative* allocNative() {
     assertTypeCombination<TNative, type>();
     auto* result = static_cast<TNative*>(UA_new(getUaDataType<type>()));
     if (result == nullptr) {
@@ -132,7 +132,7 @@ TNative* allocNative() {
 
 /// Allocate and copy to native type.
 template <typename T, Type type>
-auto* toNativeAlloc(const T& value) {
+[[nodiscard]] auto* toNativeAlloc(const T& value) {
     assertTypeCombination<T, type>();
     using NativeType = typename TypeConverter<T>::NativeType;
     auto* result = allocNative<NativeType, type>();
@@ -142,7 +142,7 @@ auto* toNativeAlloc(const T& value) {
 
 /// Allocate native array
 template <typename TNative, Type type>
-auto* allocNativeArray(size_t size) {
+[[nodiscard]] auto* allocNativeArray(size_t size) {
     assertTypeCombination<TNative, type>();
     auto* result = static_cast<TNative*>(UA_Array_new(size, getUaDataType<type>()));
     if (result == nullptr) {
@@ -153,7 +153,7 @@ auto* allocNativeArray(size_t size) {
 
 /// Allocate and copy iterator range to native array.
 template <typename InputIt, Type type>
-auto* toNativeArrayAlloc(InputIt first, InputIt last) {
+[[nodiscard]] auto* toNativeArrayAlloc(InputIt first, InputIt last) {
     using ValueType = typename std::iterator_traits<InputIt>::value_type;
     using NativeType = typename TypeConverter<ValueType>::NativeType;
     assertTypeCombination<ValueType, type>();
@@ -167,7 +167,7 @@ auto* toNativeArrayAlloc(InputIt first, InputIt last) {
 
 /// Allocate and copy to native array.
 template <typename T, Type type>
-auto* toNativeArrayAlloc(const T* array, size_t size) {
+[[nodiscard]] auto* toNativeArrayAlloc(const T* array, size_t size) {
     return toNativeArrayAlloc<const T*, type>(array, array + size);  // NOLINT
 }
 
