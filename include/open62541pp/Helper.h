@@ -1,21 +1,33 @@
 #pragma once
 
-#include <cstdint>
 #include <string>
 #include <string_view>
+#include <type_traits>
 
 #include "open62541pp/Types.h"
 #include "open62541pp/open62541.h"
 
 namespace opcua::detail {
 
+constexpr auto getTypeIndex(Type type) {
+    return static_cast<std::underlying_type_t<Type>>(type);
+}
+
 /// Get UA_DataType by Type enum.
 inline const UA_DataType* getUaDataType(Type type) noexcept {
-    const auto typeIndex = static_cast<uint16_t>(type);
+    const auto typeIndex = getTypeIndex(type);
     if (typeIndex < UA_TYPES_COUNT) {
         return &UA_TYPES[typeIndex];  // NOLINT
     }
     return nullptr;
+}
+
+/// Get UA_DataType by Type enum (template parameter).
+template <Type type>
+inline const UA_DataType* getUaDataType() noexcept {
+    constexpr auto typeIndex = getTypeIndex(type);
+    static_assert(typeIndex < UA_TYPES_COUNT);
+    return &UA_TYPES[typeIndex];  // NOLINT
 }
 
 /// Get (custom) UA_DataType by UA_NodeId.

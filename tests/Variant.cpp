@@ -85,10 +85,10 @@ TEST_CASE("Variant") {
         Variant var;
 
         {
-            TypeWrapper<int, Type::Int32> value(10);
+            TypeWrapper<int32_t, Type::Int32> value(10);
             var.setScalar(value);
-            REQUIRE(var.getScalar<int>() == 10);
-            REQUIRE(var.getScalarCopy<int>() == 10);
+            REQUIRE(var.getScalar<int32_t>() == 10);
+            REQUIRE(var.getScalarCopy<int32_t>() == 10);
         }
 
         {

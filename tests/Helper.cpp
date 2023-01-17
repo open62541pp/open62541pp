@@ -11,6 +11,7 @@ TEST_CASE("getUaDataType") {
     const auto* expected = &UA_TYPES[UA_TYPES_BOOLEAN];
 
     REQUIRE(detail::getUaDataType(Type::Boolean) == expected);
+    REQUIRE(detail::getUaDataType<Type::Boolean>() == expected);
 
     auto nodeId = UA_NODEID_NUMERIC(0, UA_NS0ID_BOOLEAN);
     REQUIRE(detail::getUaDataType(&nodeId) == expected);

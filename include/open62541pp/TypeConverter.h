@@ -123,9 +123,7 @@ std::vector<T> fromNativeArray(void* array, size_t size, Type type) {
 template <typename TNative, Type type>
 TNative* allocNative() {
     assertTypeCombination<TNative, type>();
-    const auto* dataType = detail::getUaDataType(type);
-    assert(sizeof(TNative) == dataType->memSize);  // NOLINT
-    auto* result = static_cast<TNative*>(UA_new(dataType));
+    auto* result = static_cast<TNative*>(UA_new(getUaDataType<type>()));
     if (result == nullptr) {
         throw std::bad_alloc();
     }
@@ -146,9 +144,7 @@ auto* toNativeAlloc(const T& value) {
 template <typename TNative, Type type>
 auto* allocNativeArray(size_t size) {
     assertTypeCombination<TNative, type>();
-    const auto* dataType = detail::getUaDataType(type);
-    assert(sizeof(TNative) == dataType->memSize);  // NOLINT
-    auto* result = static_cast<TNative*>(UA_Array_new(size, dataType));
+    auto* result = static_cast<TNative*>(UA_Array_new(size, getUaDataType<type>()));
     if (result == nullptr) {
         throw std::bad_alloc();
     }
@@ -196,10 +192,10 @@ struct TypeConverterNative {
             // just take first type -> underlying memory layout of all types should be the same
             constexpr auto typeGuess = ValidTypes::toArray().at(0);
             // clear first
-            UA_clear(&dst, detail::getUaDataType(typeGuess));
+            UA_clear(&dst, getUaDataType<typeGuess>());
             // deep copy
-            const auto status = UA_copy(&src, &dst, detail::getUaDataType(typeGuess));
-            detail::checkStatusCodeException(status);
+            const auto status = UA_copy(&src, &dst, getUaDataType<typeGuess>());
+            checkStatusCodeException(status);
         }
     }
 
@@ -304,7 +300,7 @@ struct TypeConverter<std::string> {
     }
 
     static void toNative(const ValueType& src, NativeType& dst) {
-        UA_clear(&dst, detail::getUaDataType(Type::String));
+        UA_clear(&dst, detail::getUaDataType<Type::String>());
         dst = detail::allocUaString(src);
     }
 };

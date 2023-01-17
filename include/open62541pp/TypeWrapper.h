@@ -79,7 +79,7 @@ public:
 
     /// Return UA_DataType object
     static const UA_DataType* getDataType() {
-        return detail::getUaDataType(type);
+        return detail::getUaDataType<type>();
     }
 
     /// Return pointer to wrapped UA data type

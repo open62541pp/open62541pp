@@ -162,9 +162,9 @@ void Variant::setScalar(T& value) noexcept {
         "Template type must be convertible to native type to assign scalar without copy"
     );
     if constexpr (detail::IsTypeWrapper<T>::value) {
-        setScalarImpl(value.handle(), detail::getUaDataType(type));
+        setScalarImpl(value.handle(), detail::getUaDataType<type>());
     } else {
-        setScalarImpl(&value, detail::getUaDataType(type));
+        setScalarImpl(&value, detail::getUaDataType<type>());
     }
 }
 
@@ -173,7 +173,7 @@ void Variant::setScalarCopy(const T& value) {
     detail::assertTypeCombination<T, type>();
     setScalarImpl(
         detail::toNativeAlloc<T, type>(value),
-        detail::getUaDataType(type),
+        detail::getUaDataType<type>(),
         true  // move ownership
     );
 }
@@ -185,7 +185,7 @@ void Variant::setArray(T* array, size_t size) noexcept {
         detail::isNativeType<T>(),
         "Template type must be a native type to assign array without copy"
     );
-    setArrayImpl(array, size, detail::getUaDataType(type));
+    setArrayImpl(array, size, detail::getUaDataType<type>());
 }
 
 template <typename T, Type type>
@@ -200,7 +200,7 @@ void Variant::setArrayCopy(InputIt first, InputIt last) {
     setArrayImpl(
         detail::toNativeArrayAlloc<InputIt, type>(first, last),
         std::distance(first, last),
-        detail::getUaDataType(type),
+        detail::getUaDataType<type>(),
         true  // move ownership
     );
 }
@@ -209,7 +209,7 @@ template <typename T, Type type>
 void Variant::setArrayCopy(const T* array, size_t size) {
     detail::assertTypeCombination<T, type>();
     if constexpr (detail::isNativeType<T>()) {
-        setArrayCopyImpl(array, size, detail::getUaDataType(type));
+        setArrayCopyImpl(array, size, detail::getUaDataType<type>());
     } else {
         setArrayCopy<const T*, type>(array, array + size);
     }
