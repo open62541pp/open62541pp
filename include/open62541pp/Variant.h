@@ -157,6 +157,7 @@ std::vector<T> Variant::getArrayCopy() const {
 template <typename T, Type type>
 void Variant::setScalar(T& value) noexcept {
     detail::assertTypeCombination<T, type>();
+    static_assert(type != Type::Variant, "Variants cannot directly contain another variant");
     static_assert(
         detail::isNativeType<T>() || detail::IsTypeWrapper<T>::value,
         "Template type must be convertible to native type to assign scalar without copy"
@@ -170,6 +171,7 @@ void Variant::setScalar(T& value) noexcept {
 
 template <typename T, Type type>
 void Variant::setScalarCopy(const T& value) {
+    static_assert(type != Type::Variant, "Variants cannot directly contain another variant");
     detail::assertTypeCombination<T, type>();
     setScalarImpl(
         detail::toNativeAlloc<T, type>(value),
