@@ -84,3 +84,16 @@ TEST_CASE("NodeId") {
         }
     }
 }
+
+TEST_CASE("ExpandedNodeId") {
+    ExpandedNodeId idLocal({"local", 1}, {}, 0);
+    REQUIRE(idLocal.isLocal());
+
+    ExpandedNodeId idFull({"full", 1}, "namespace", 1);
+    REQUIRE(idFull.getNodeId() == NodeId{"full", 1});
+    REQUIRE(idFull.getNamespaceUri() == "namespace");
+    REQUIRE(idFull.getServerIndex() == 1);
+
+    REQUIRE(idLocal == idLocal);
+    REQUIRE(idLocal != idFull);
+}

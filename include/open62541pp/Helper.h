@@ -45,9 +45,14 @@ inline const UA_DataType* getUaDataType(const UA_NodeId* id) noexcept {
 /// Allocate UA_String from std::string_view
 [[nodiscard]] UA_String allocUaString(std::string_view src);
 
+/// Check if UA_String is empty
+constexpr bool isEmpty(const UA_String& value) {
+    return (value.data == nullptr) || (value.length == 0);
+}
+
 /// Convert UA_String to std::string_view
 inline std::string_view toStringView(const UA_String& src) {
-    if (src.data == nullptr || src.length == 0) {
+    if (isEmpty(src)) {
         return {};
     }
     return {(char*)src.data, src.length};  // NOLINT

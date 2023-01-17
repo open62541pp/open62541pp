@@ -45,4 +45,28 @@ public:
     std::variant<UA_UInt32, String, Guid, ByteString> getIdentifier() const;
 };
 
+/**
+ * UA_ExpandedNodeId wrapper class.
+ */
+class ExpandedNodeId : public TypeWrapper<UA_ExpandedNodeId, Type::ExpandedNodeId> {
+public:
+    using BaseClass::BaseClass;  // inherit contructors
+
+    ExpandedNodeId(const NodeId& id, std::string_view namespaceUri, uint32_t serverIndex);
+
+    bool operator==(const ExpandedNodeId& other) const noexcept;
+    bool operator!=(const ExpandedNodeId& other) const noexcept;
+    bool operator<(const ExpandedNodeId& other) const noexcept;
+    bool operator>(const ExpandedNodeId& other) const noexcept;
+
+    bool isLocal() const noexcept;
+
+    NodeId getNodeId() const noexcept;
+
+    std::string getNamespaceUri() const;
+    std::string_view getNamespaceUriView() const;
+
+    uint32_t getServerIndex() const noexcept;
+};
+
 }  // namespace opcua

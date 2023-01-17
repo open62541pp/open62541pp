@@ -2,6 +2,7 @@
 
 #include <cassert>
 
+#include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Helper.h"
 
 #include "open62541_impl.h"
@@ -76,6 +77,53 @@ std::variant<UA_UInt32, String, Guid, ByteString> NodeId::getIdentifier() const 
     default:
         return {};
     }
+}
+
+/* --------------------------------------- ExpandedNodeId --------------------------------------- */
+
+ExpandedNodeId::ExpandedNodeId(
+    const NodeId& id, std::string_view namespaceUri, uint32_t serverIndex
+) {
+    const auto status = UA_NodeId_copy(id.handle(), &handle()->nodeId);
+    detail::checkStatusCodeException(status);
+    handle()->namespaceUri = detail::allocUaString(namespaceUri);
+    handle()->serverIndex = serverIndex;
+}
+
+bool ExpandedNodeId::operator==(const ExpandedNodeId& other) const noexcept {
+    return UA_ExpandedNodeId_order(handle(), other.handle()) == UA_ORDER_EQ;
+}
+
+bool ExpandedNodeId::operator!=(const ExpandedNodeId& other) const noexcept {
+    return UA_ExpandedNodeId_order(handle(), other.handle()) != UA_ORDER_EQ;
+}
+
+bool ExpandedNodeId::operator<(const ExpandedNodeId& other) const noexcept {
+    return UA_ExpandedNodeId_order(handle(), other.handle()) == UA_ORDER_LESS;
+}
+
+bool ExpandedNodeId::operator>(const ExpandedNodeId& other) const noexcept {
+    return UA_ExpandedNodeId_order(handle(), other.handle()) == UA_ORDER_MORE;
+}
+
+bool ExpandedNodeId::isLocal() const noexcept {
+    return detail::isEmpty(handle()->namespaceUri) && handle()->serverIndex == 0;
+}
+
+NodeId ExpandedNodeId::getNodeId() const noexcept {
+    return NodeId(handle()->nodeId);
+}
+
+std::string ExpandedNodeId::getNamespaceUri() const {
+    return detail::toString(handle()->namespaceUri);
+}
+
+std::string_view ExpandedNodeId::getNamespaceUriView() const {
+    return detail::toStringView(handle()->namespaceUri);
+}
+
+uint32_t ExpandedNodeId::getServerIndex() const noexcept {
+    return handle()->serverIndex;
 }
 
 }  // namespace opcua
