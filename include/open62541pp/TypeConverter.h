@@ -57,9 +57,10 @@ constexpr bool isValidTypeCombination(Type type) {
 }
 
 template <typename T, Type type>
-static constexpr void assertTypeCombination() {
+constexpr void assertTypeCombination() {
     static_assert(
-        detail::isValidTypeCombination<T, type>(), "Invalid template type / type enum combination"
+        isValidTypeCombination<T, type>(),
+        "Invalid template type / type enum (opcua::Type) combination"
     );
 }
 
@@ -67,7 +68,7 @@ template <typename T>
 constexpr Type guessType() {
     static_assert(
         TypeConverter<T>::ValidTypes::size() == 1,
-        "Ambigious template type, please specify type enum manually"
+        "Ambiguous template type, please specify type enum (opcua::Type) manually"
     );
     return TypeConverter<T>::ValidTypes::toArray().at(0);
 }
@@ -92,14 +93,14 @@ T fromNative(NativeType* value) {
 /// @warning Type erased version, use with caution.
 template <typename T, typename NativeType = typename TypeConverter<T>::NativeType>
 T fromNative(void* value, Type type) {
-    assert(TypeConverter<T>::ValidTypes::contains(type));  // NOLINT
+    assert(isValidTypeCombination<T>(type));  // NOLINT
     return fromNative<T>(static_cast<NativeType*>(value));
 }
 
 /// Create and convert vector from native array.
 template <typename T, typename NativeType = typename TypeConverter<T>::NativeType>
 std::vector<T> fromNativeArray(NativeType* array, size_t size) {
-    if constexpr (detail::isNativeType<T>() && std::is_fundamental_v<T>) {
+    if constexpr (isNativeType<T>() && std::is_fundamental_v<T>) {
         return std::vector<T>(array, array + size);  // NOLINT
     } else {
         std::vector<T> result(size);
@@ -114,7 +115,7 @@ std::vector<T> fromNativeArray(NativeType* array, size_t size) {
 /// @warning Type erased version, use with caution.
 template <typename T, typename NativeType = typename TypeConverter<T>::NativeType>
 std::vector<T> fromNativeArray(void* array, size_t size, Type type) {
-    assert(TypeConverter<T>::ValidTypes::contains(type));  // NOLINT
+    assert(isValidTypeCombination<T>(type));  // NOLINT
     return fromNativeArray<T>(static_cast<NativeType*>(array), size);
 }
 
