@@ -1,5 +1,6 @@
 #include <utility>  // move
 
+#include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_string.hpp>
 
@@ -66,20 +67,28 @@ TEST_CASE("TypeWrapper") {
     }
 }
 
-TEST_CASE("String") {
-    String s("test");
-    REQUIRE(s.handle()->length == 4);
-    REQUIRE_THAT(s.get(), Equals("test"));
+TEMPLATE_TEST_CASE("StringLike", "", String, ByteString, XmlElement) {
+    SECTION("Construct with const char*") {
+        TestType wrapper("test");
+        REQUIRE(wrapper.handle()->length == 4);
+        REQUIRE_THAT(wrapper.get(), Equals("test"));
+        REQUIRE_THAT(std::string(wrapper.getView()), Equals("test"));
+    }
+
+    SECTION("Construct from non-null-terminated view") {
+        std::string str("test123");
+        std::string_view sv(str.c_str(), 4);
+        TestType wrapper(sv);
+        REQUIRE_THAT(wrapper.get(), Equals("test"));
+    }
+
+    SECTION("Equality") {
+        REQUIRE(TestType("test") == TestType("test"));
+        REQUIRE(TestType("test") != TestType());
+    }
 }
 
-TEST_CASE("String from non-null-terminated view") {
-    std::string str("test123");
-    std::string_view sv(str.c_str(), 4);
-    String s(sv);
-    REQUIRE_THAT(s.get(), Equals("test"));
-}
-
-TEST_CASE("Guid wrapper") {
+TEST_CASE("Guid") {
     UA_UInt32 data1{11};
     UA_UInt16 data2{22};
     UA_UInt16 data3{33};

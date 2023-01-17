@@ -64,6 +64,27 @@ std::string_view ByteString::getView() const {
     return detail::toStringView(*handle());
 }
 
+/* ----------------------------------------- XmlElement ----------------------------------------- */
+
+XmlElement::XmlElement(std::string_view str)
+    : XmlElement(UA_XmlElement{detail::allocUaString(str)}) {}
+
+bool XmlElement::operator==(const XmlElement& other) const noexcept {
+    return UA_String_equal(handle(), other.handle());
+}
+
+bool XmlElement::operator!=(const XmlElement& other) const noexcept {
+    return !operator==(other);
+}
+
+std::string XmlElement::get() const {
+    return detail::toString(*handle());
+}
+
+std::string_view XmlElement::getView() const {
+    return detail::toStringView(*handle());
+}
+
 /* ---------------------------------------- QualifiedName --------------------------------------- */
 
 QualifiedName::QualifiedName(uint16_t namespaceIndex, std::string_view name)

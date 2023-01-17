@@ -168,9 +168,6 @@ public:
 
 /**
  * UA_ByteString wrapper class.
- *
- * UA_ByteString is a typedef of UA_String. Therefore the type can not be deduced from UA_ByteString
- * itself. Second template argument (Type::ByteString) necessary to map to the right type.
  */
 class ByteString : public TypeWrapper<UA_ByteString, Type::ByteString> {
 public:
@@ -181,6 +178,23 @@ public:
 
     bool operator==(const ByteString& other) const noexcept;
     bool operator!=(const ByteString& other) const noexcept;
+
+    std::string get() const;
+    std::string_view getView() const;
+};
+
+/**
+ * UA_XmlElement wrapper class.
+ */
+class XmlElement : public TypeWrapper<UA_XmlElement, Type::XmlElement> {
+public:
+    // NOLINTNEXTLINE, false positive?
+    using BaseClass::BaseClass;  // inherit contructors
+
+    explicit XmlElement(std::string_view str);
+
+    bool operator==(const XmlElement& other) const noexcept;
+    bool operator!=(const XmlElement& other) const noexcept;
 
     std::string get() const;
     std::string_view getView() const;
