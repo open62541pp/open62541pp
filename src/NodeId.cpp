@@ -10,7 +10,7 @@
 namespace opcua {
 
 static UA_NodeId fromStringView(
-    UA_UInt16 namespaceIndex, UA_NodeIdType identifierType, std::string_view identifier
+    uint16_t namespaceIndex, UA_NodeIdType identifierType, std::string_view identifier
 ) {
     // NOLINTNEXTLINE
     assert(identifierType == UA_NODEIDTYPE_STRING || identifierType == UA_NODEIDTYPE_BYTESTRING);
@@ -21,19 +21,19 @@ static UA_NodeId fromStringView(
     return result;
 }
 
-NodeId::NodeId(UA_UInt32 identifier, UA_UInt16 namespaceIndex)
+NodeId::NodeId(uint32_t identifier, uint16_t namespaceIndex)
     : NodeId(UA_NODEID_NUMERIC(namespaceIndex, identifier)) {}
 
-NodeId::NodeId(std::string_view identifier, UA_UInt16 namespaceIndex)
+NodeId::NodeId(std::string_view identifier, uint16_t namespaceIndex)
     : NodeId(fromStringView(namespaceIndex, UA_NODEIDTYPE_STRING, identifier)) {}
 
-NodeId::NodeId(const String& identifier, UA_UInt16 namespaceIndex)
+NodeId::NodeId(const String& identifier, uint16_t namespaceIndex)
     : NodeId(identifier.getView(), namespaceIndex) {}
 
-NodeId::NodeId(const Guid& identifier, UA_UInt16 namespaceIndex)
+NodeId::NodeId(const Guid& identifier, uint16_t namespaceIndex)
     : NodeId(UA_NODEID_GUID(namespaceIndex, *identifier.handle())) {}
 
-NodeId::NodeId(const ByteString& identifier, UA_UInt16 namespaceIndex)
+NodeId::NodeId(const ByteString& identifier, uint16_t namespaceIndex)
     : NodeId(fromStringView(namespaceIndex, UA_NODEIDTYPE_BYTESTRING, identifier.getView())) {}
 
 bool NodeId::operator==(const NodeId& other) const noexcept {
@@ -52,19 +52,19 @@ bool NodeId::operator>(const NodeId& other) const noexcept {
     return UA_NodeId_order(handle(), other.handle()) == UA_ORDER_MORE;
 }
 
-UA_UInt32 NodeId::hash() const {
+uint32_t NodeId::hash() const {
     return UA_NodeId_hash(handle());
 }
 
-UA_UInt16 NodeId::getNamespaceIndex() const noexcept {
+uint16_t NodeId::getNamespaceIndex() const noexcept {
     return handle()->namespaceIndex;
 }
 
-UA_NodeIdType NodeId::getIdentifierType() const noexcept {
-    return handle()->identifierType;
+NodeIdType NodeId::getIdentifierType() const noexcept {
+    return static_cast<NodeIdType>(handle()->identifierType);
 }
 
-std::variant<UA_UInt32, String, Guid, ByteString> NodeId::getIdentifier() const {
+std::variant<uint32_t, String, Guid, ByteString> NodeId::getIdentifier() const {
     switch (handle()->identifierType) {
     case UA_NODEIDTYPE_NUMERIC:
         return handle()->identifier.numeric;  // NOLINT

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstdint>
+#include <string>
 #include <string_view>
 #include <variant>
 
@@ -9,6 +11,14 @@
 
 namespace opcua {
 
+/// Node id types.
+enum class NodeIdType : uint8_t {
+    Numeric = UA_NODEIDTYPE_NUMERIC,
+    String = UA_NODEIDTYPE_STRING,
+    Guid = UA_NODEIDTYPE_GUID,
+    ByteString = UA_NODEIDTYPE_BYTESTRING,
+};
+
 /**
  * UA_NodeId wrapper class.
  */
@@ -17,32 +27,56 @@ public:
     using BaseClass::BaseClass;  // inherit contructors
 
     /// Create NodeId with numeric identifier
-    NodeId(UA_UInt32 identifier, UA_UInt16 namespaceIndex);
+    NodeId(uint32_t identifier, uint16_t namespaceIndex);
 
     /// Create NodeId with String identifier from standard strings
-    NodeId(std::string_view identifier, UA_UInt16 namespaceIndex);
+    NodeId(std::string_view identifier, uint16_t namespaceIndex);
 
     /// Create NodeId with String identifier from String wrapper class
-    NodeId(const String& identifier, UA_UInt16 namespaceIndex);
+    NodeId(const String& identifier, uint16_t namespaceIndex);
 
     /// Create NodeId with Guid identifier
-    NodeId(const Guid& identifier, UA_UInt16 namespaceIndex);
+    NodeId(const Guid& identifier, uint16_t namespaceIndex);
 
     /// Create NodeId with ByteString identifier
-    NodeId(const ByteString& identifier, UA_UInt16 namespaceIndex);
+    NodeId(const ByteString& identifier, uint16_t namespaceIndex);
 
     bool operator==(const NodeId& other) const noexcept;
     bool operator!=(const NodeId& other) const noexcept;
     bool operator<(const NodeId& other) const noexcept;
     bool operator>(const NodeId& other) const noexcept;
 
-    UA_UInt32 hash() const;
+    uint32_t hash() const;
 
-    UA_UInt16 getNamespaceIndex() const noexcept;
+    uint16_t getNamespaceIndex() const noexcept;
 
-    UA_NodeIdType getIdentifierType() const noexcept;
+    NodeIdType getIdentifierType() const noexcept;
 
-    std::variant<UA_UInt32, String, Guid, ByteString> getIdentifier() const;
+    /// Get identifier variant
+    std::variant<uint32_t, String, Guid, ByteString> getIdentifier() const;
+
+    /// Get identifier by template type
+    template <typename T>
+    auto getIdentifierAs() const {
+        return std::get<T>(getIdentifier());
+    }
+
+    /// Get identifier by NodeIdType enum
+    template <NodeIdType E>
+    auto getIdentifierAs() const {
+        if constexpr (E == NodeIdType::Numeric) {
+            return getIdentifierAs<uint32_t>();
+        }
+        if constexpr (E == NodeIdType::String) {
+            return getIdentifierAs<String>();
+        }
+        if constexpr (E == NodeIdType::Guid) {
+            return getIdentifierAs<Guid>();
+        }
+        if constexpr (E == NodeIdType::ByteString) {
+            return getIdentifierAs<ByteString>();
+        }
+    }
 };
 
 /**

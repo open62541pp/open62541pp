@@ -5,82 +5,82 @@
 using namespace opcua;
 
 TEST_CASE("NodeId") {
-    NodeId nodeNumeric1(1, 0);
-    NodeId nodeNumeric2(1, 0);
-    NodeId nodeNumeric3(2, 0);
-    NodeId nodeNumeric4(2, 1);
-    NodeId nodeString1("a", 0);
-    NodeId nodeString2("a", 0);
-    NodeId nodeString3("b", 0);
-    NodeId nodeString4("b", 1);
+    NodeId idNumeric1(1, 0);
+    NodeId idNumeric2(1, 0);
+    NodeId idNumeric3(2, 0);
+    NodeId idNumeric4(2, 1);
+    NodeId idString1("a", 0);
+    NodeId idString2("a", 0);
+    NodeId idString3("b", 0);
+    NodeId idString4("b", 1);
 
     SECTION("Copy") {
-        REQUIRE(NodeId(nodeNumeric1) == nodeNumeric1);
+        REQUIRE(NodeId(idNumeric1) == idNumeric1);
     }
 
     SECTION("Assignment") {
         NodeId tmp(0, 0);
-        tmp = nodeNumeric1;
-        REQUIRE(tmp == nodeNumeric1);
+        tmp = idNumeric1;
+        REQUIRE(tmp == idNumeric1);
     }
 
     SECTION("Namespace index") {
-        REQUIRE(nodeNumeric1.getNamespaceIndex() == 0);
-        REQUIRE(nodeNumeric2.getNamespaceIndex() == 0);
-        REQUIRE(nodeNumeric3.getNamespaceIndex() == 0);
-        REQUIRE(nodeNumeric4.getNamespaceIndex() == 1);
-        REQUIRE(nodeString1.getNamespaceIndex() == 0);
-        REQUIRE(nodeString2.getNamespaceIndex() == 0);
-        REQUIRE(nodeString3.getNamespaceIndex() == 0);
-        REQUIRE(nodeString4.getNamespaceIndex() == 1);
+        REQUIRE(idNumeric1.getNamespaceIndex() == 0);
+        REQUIRE(idNumeric2.getNamespaceIndex() == 0);
+        REQUIRE(idNumeric3.getNamespaceIndex() == 0);
+        REQUIRE(idNumeric4.getNamespaceIndex() == 1);
+        REQUIRE(idString1.getNamespaceIndex() == 0);
+        REQUIRE(idString2.getNamespaceIndex() == 0);
+        REQUIRE(idString3.getNamespaceIndex() == 0);
+        REQUIRE(idString4.getNamespaceIndex() == 1);
     }
 
     SECTION("Comparison") {
-        REQUIRE(nodeNumeric1 == nodeNumeric2);
-        REQUIRE(nodeNumeric1 != nodeNumeric3);
-        REQUIRE(nodeNumeric3 != nodeNumeric4);
-        REQUIRE(nodeString1 != nodeNumeric1);
-        REQUIRE(nodeString1 == nodeString2);
-        REQUIRE(nodeString2 != nodeString3);
-        REQUIRE(nodeString3 != nodeString4);
+        REQUIRE(idNumeric1 == idNumeric2);
+        REQUIRE(idNumeric1 != idNumeric3);
+        REQUIRE(idNumeric3 != idNumeric4);
+        REQUIRE(idString1 != idNumeric1);
+        REQUIRE(idString1 == idString2);
+        REQUIRE(idString2 != idString3);
+        REQUIRE(idString3 != idString4);
     }
 
     SECTION("Hash") {
-        REQUIRE(nodeNumeric1.hash() == nodeNumeric2.hash());
-        REQUIRE(nodeNumeric1.hash() != nodeNumeric3.hash());
-        REQUIRE(nodeNumeric3.hash() != nodeNumeric4.hash());
-        REQUIRE(nodeString1.hash() != nodeNumeric1.hash());
-        REQUIRE(nodeString1.hash() == nodeString2.hash());
-        REQUIRE(nodeString2.hash() != nodeString3.hash());
-        REQUIRE(nodeString3.hash() != nodeString4.hash());
+        REQUIRE(idNumeric1.hash() == idNumeric2.hash());
+        REQUIRE(idNumeric1.hash() != idNumeric3.hash());
+        REQUIRE(idNumeric3.hash() != idNumeric4.hash());
+        REQUIRE(idString1.hash() != idNumeric1.hash());
+        REQUIRE(idString1.hash() == idString2.hash());
+        REQUIRE(idString2.hash() != idString3.hash());
+        REQUIRE(idString3.hash() != idString4.hash());
     }
 
-    SECTION("Get properties (getIdentifierType, getNamespaceInex, getIdentifier") {
+    SECTION("Get properties (getIdentifierType, getNamespaceIndex, getIdentifier") {
         {
             NodeId id(UA_NODEID_NUMERIC(1, 111));
-            REQUIRE(id.getIdentifierType() == UA_NODEIDTYPE_NUMERIC);
+            REQUIRE(id.getIdentifierType() == NodeIdType::Numeric);
             REQUIRE(id.getNamespaceIndex() == 1);
-            REQUIRE(std::get<0>(id.getIdentifier()) == 111);
+            REQUIRE(id.getIdentifierAs<NodeIdType::Numeric>() == 111);
         }
         {
             NodeId id(UA_NODEID_STRING_ALLOC(2, "Test123"));
-            REQUIRE(id.getIdentifierType() == UA_NODEIDTYPE_STRING);
+            REQUIRE(id.getIdentifierType() == NodeIdType::String);
             REQUIRE(id.getNamespaceIndex() == 2);
             REQUIRE(std::get<String>(id.getIdentifier()).get() == "Test123");
         }
         {
             Guid guid(11, 22, 33, {1, 2, 3, 4, 5, 6, 7, 8});
             NodeId id(guid, 3);
-            REQUIRE(id.getIdentifierType() == UA_NODEIDTYPE_GUID);
+            REQUIRE(id.getIdentifierType() == NodeIdType::Guid);
             REQUIRE(id.getNamespaceIndex() == 3);
-            REQUIRE(std::get<Guid>(id.getIdentifier()) == guid);
+            REQUIRE(id.getIdentifierAs<Guid>() == guid);
         }
         {
             ByteString byteString("Test456");
             NodeId id(byteString, 4);
-            REQUIRE(id.getIdentifierType() == UA_NODEIDTYPE_BYTESTRING);
+            REQUIRE(id.getIdentifierType() == NodeIdType::ByteString);
             REQUIRE(id.getNamespaceIndex() == 4);
-            REQUIRE(std::get<ByteString>(id.getIdentifier()) == byteString);
+            REQUIRE(id.getIdentifierAs<ByteString>() == byteString);
         }
     }
 }
