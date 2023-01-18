@@ -5,7 +5,7 @@
 #include <string>
 #include <string_view>
 #include <type_traits>
-#include <utility>  // move
+#include <utility>  // move, swap
 
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Helper.h"
@@ -49,8 +49,7 @@ public:
 
     /// Move constructor
     TypeWrapper(TypeWrapper&& other) noexcept {
-        set(std::move(other.data_));
-        other.ownsData_ = false;
+        swap(other);
     }
 
     /// Copy assignment (deep copy)
@@ -67,9 +66,15 @@ public:
         if (this == &other) {
             return *this;
         }
-        set(std::move(other.data_));
-        other.ownsData_ = false;
+        swap(other);
         return *this;
+    }
+
+    /// Swap wrapper objects
+    void swap(TypeWrapper& other) noexcept {
+        static_assert(std::is_swappable_v<UaType>);
+        std::swap(this->data_, other.data_);
+        std::swap(this->ownsData_, other.ownsData_);
     }
 
     /// Return type enum

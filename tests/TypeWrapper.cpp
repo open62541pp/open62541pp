@@ -31,39 +31,103 @@ TEST_CASE("TypeWrapper") {
     }
 
     SECTION("Copy constructor / assignment") {
-        TypeWrapper<UA_String, Type::String> wrapper1(UA_STRING_ALLOC("String1"));
-        TypeWrapper<UA_String, Type::String> wrapper2(UA_STRING_ALLOC("String2"));
+        TypeWrapper<UA_String, Type::String> wrapper(UA_STRING_ALLOC("test"));
+        TypeWrapper<UA_String, Type::String> wrapperConstructor(wrapper);
 
-        TypeWrapper<UA_String, Type::String> wrapperConstructor(wrapper1);
-        REQUIRE(wrapperConstructor.handle()->data != wrapper1.handle()->data);
-        REQUIRE_THAT(detail::toString(*wrapperConstructor.handle()), Equals("String1"));
-
-        TypeWrapper<UA_String, Type::String> wrapperAssignmnet = wrapper2;
-        REQUIRE(wrapperAssignmnet.handle()->data != wrapper2.handle()->data);
-        REQUIRE_THAT(detail::toString(*wrapperAssignmnet.handle()), Equals("String2"));
+        REQUIRE(wrapperConstructor.handle()->data != wrapper.handle()->data);
+        REQUIRE_THAT(detail::toString(*wrapperConstructor.handle()), Equals("test"));
     }
 
-    SECTION("Move constructor / assignment") {
-        TypeWrapper<UA_String, Type::String> wrapper1(UA_STRING_ALLOC("String1"));
-        TypeWrapper<UA_String, Type::String> wrapper2(UA_STRING_ALLOC("String2"));
+    SECTION("Copy assignment") {
+        TypeWrapper<UA_String, Type::String> wrapper(UA_STRING_ALLOC("test"));
+        TypeWrapper<UA_String, Type::String> wrapperAssignmnet = wrapper;
 
-        TypeWrapper<UA_String, Type::String> wrapperConstructor(std::move(wrapper1));
-        // wrapper1 still points to same data, but doesn't own it anymore
-        REQUIRE(wrapperConstructor.handle()->data == wrapper1.handle()->data);
+        REQUIRE(wrapperAssignmnet.handle()->data != wrapper.handle()->data);
+        REQUIRE_THAT(detail::toString(*wrapperAssignmnet.handle()), Equals("test"));
 
-        TypeWrapper<UA_String, Type::String> wrapperAssignmnet = std::move(wrapper2);
-        // wrapper2 still points to same data, but doesn't own it anymore
-        REQUIRE(wrapperAssignmnet.handle()->data == wrapper2.handle()->data);
+        // self assignment
+        REQUIRE_NOTHROW(wrapper = wrapper);
+    }
+
+    SECTION("Move constructor") {
+        TypeWrapper<UA_String, Type::String> wrapper(UA_STRING_ALLOC("test"));
+        TypeWrapper<UA_String, Type::String> wrapperConstructor(std::move(wrapper));
+
+        REQUIRE(wrapper.handle()->data == nullptr);
+        REQUIRE_THAT(detail::toString(*wrapperConstructor.handle()), Equals("test"));
+    }
+
+    SECTION("Move assignment") {
+        TypeWrapper<UA_String, Type::String> wrapper(UA_STRING_ALLOC("test"));
+        TypeWrapper<UA_String, Type::String> wrapperAssignmnet = std::move(wrapper);
+
+        REQUIRE(wrapper.handle()->data == nullptr);
+        REQUIRE_THAT(detail::toString(*wrapperAssignmnet.handle()), Equals("test"));
+
+        // self assignment
+        REQUIRE_NOTHROW(wrapper = std::move(wrapper));
+    }
+
+    SECTION("Swap") {
+        TypeWrapper<UA_String, Type::String> wrapper1(UA_STRING_ALLOC("test"));
+        TypeWrapper<UA_String, Type::String> wrapper2;
+
+        REQUIRE(wrapper1.handle()->data != nullptr);
+        REQUIRE(wrapper2.handle()->data == nullptr);
+        REQUIRE_THAT(detail::toString(*wrapper1.handle()), Equals("test"));
+
+        wrapper1.swap(wrapper2);
+        REQUIRE(wrapper1.handle()->data == nullptr);
+        REQUIRE(wrapper2.handle()->data != nullptr);
+        REQUIRE_THAT(detail::toString(*wrapper2.handle()), Equals("test"));
+    }
+}
+
+TEMPLATE_TEST_CASE_SIG(
+    "TypeWrapper instantiation",
+    "",
+    ((typename T, int typeIndex), T, typeIndex),
+    (UA_Boolean, UA_TYPES_BOOLEAN),
+    (UA_SByte, UA_TYPES_SBYTE),
+    (UA_Byte, UA_TYPES_BYTE),
+    (UA_Int16, UA_TYPES_INT16),
+    (UA_UInt16, UA_TYPES_UINT16),
+    (UA_Int32, UA_TYPES_INT32),
+    (UA_UInt32, UA_TYPES_UINT32),
+    (UA_Int64, UA_TYPES_INT64),
+    (UA_UInt64, UA_TYPES_UINT64),
+    (UA_Float, UA_TYPES_FLOAT),
+    (UA_Double, UA_TYPES_DOUBLE),
+    (UA_String, UA_TYPES_STRING),
+    (UA_DateTime, UA_TYPES_DATETIME),
+    (UA_Guid, UA_TYPES_GUID),
+    (UA_ByteString, UA_TYPES_BYTESTRING),
+    (UA_XmlElement, UA_TYPES_XMLELEMENT),
+    (UA_NodeId, UA_TYPES_NODEID),
+    (UA_ExpandedNodeId, UA_TYPES_EXPANDEDNODEID),
+    (UA_StatusCode, UA_TYPES_STATUSCODE),
+    (UA_QualifiedName, UA_TYPES_QUALIFIEDNAME),
+    (UA_LocalizedText, UA_TYPES_LOCALIZEDTEXT),
+    (UA_ExtensionObject, UA_TYPES_EXTENSIONOBJECT),
+    (UA_DataValue, UA_TYPES_DATAVALUE),
+    (UA_Variant, UA_TYPES_VARIANT),
+    (UA_DiagnosticInfo, UA_TYPES_DIAGNOSTICINFO)
+) {
+    constexpr auto type = static_cast<Type>(typeIndex);
+
+    SECTION("Swap") {
+        TypeWrapper<T, type> wrapper1;
+        TypeWrapper<T, type> wrapper2;
+
+        wrapper1.swap(wrapper2);
     }
 
     SECTION("Get type") {
-        TypeWrapper<float, Type::Float> wrapperFloat;
-        REQUIRE(wrapperFloat.getType() == Type::Float);
-        REQUIRE(wrapperFloat.getDataType() == detail::getUaDataType(Type::Float));
+        STATIC_REQUIRE(TypeWrapper<T, type>::getType() == type);
+    }
 
-        TypeWrapper<UA_String, Type::String> wrapperString;
-        REQUIRE(wrapperString.getType() == Type::String);
-        REQUIRE(wrapperString.getDataType() == detail::getUaDataType(Type::String));
+    SECTION("Get data type") {
+        REQUIRE(TypeWrapper<T, type>::getDataType() == &UA_TYPES[typeIndex]);
     }
 }
 
