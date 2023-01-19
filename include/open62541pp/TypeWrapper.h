@@ -1,6 +1,7 @@
 #pragma once
 
 #include <array>
+#include <chrono>
 #include <cstdint>
 #include <string>
 #include <string_view>
@@ -240,6 +241,67 @@ public:
     std::string_view getTextView() const;
     std::string getLocale() const;
     std::string_view getLocaleView() const;
+};
+
+/**
+ * UA_DateTime wrapper class.
+ *
+ * An instance in time. A DateTime value is encoded as a 64-bit signed integer which represents the
+ * number of 100 nanosecond intervals since January 1, 1601 (UTC).
+ *
+ * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/5.2.2.5
+ */
+class DateTime : public TypeWrapper<UA_DateTime, Type::DateTime> {
+public:
+    using DefaultClock = std::chrono::system_clock;
+    using UaDuration = std::chrono::duration<uint64_t, std::ratio<1, 10'000'000>>;
+
+    // NOLINTNEXTLINE, false positive?
+    using BaseClass::BaseClass;  // inherit contructors
+
+    template <typename Clock, typename Duration>
+    DateTime(std::chrono::time_point<Clock, Duration> timePoint)  // NOLINT, implicit wanted
+        : DateTime(fromTimePoint(timePoint)) {}
+
+    bool operator==(const DateTime& other) const noexcept;
+    bool operator!=(const DateTime& other) const noexcept;
+    bool operator<(const DateTime& other) const noexcept;
+    bool operator>(const DateTime& other) const noexcept;
+
+    /// Get current DateTime.
+    static DateTime now();
+
+    /// Get DateTime from std::chrono::time_point.
+    template <typename Clock, typename Duration>
+    static DateTime fromTimePoint(std::chrono::time_point<Clock, Duration> timePoint) {
+        static constexpr uint64_t dateTimeUnixEpoch = UA_DATETIME_UNIX_EPOCH;
+        const uint64_t sinceUnixEpoch =
+            std::chrono::duration_cast<UaDuration>(timePoint.time_since_epoch()).count();
+        return DateTime(dateTimeUnixEpoch + sinceUnixEpoch);
+    }
+
+    /// Get DateTime from Unix time.
+    static DateTime fromUnixTime(uint64_t unixTime);
+
+    /// Convert to std::chrono::time_point.
+    template <typename Clock = DefaultClock, typename Duration = UaDuration>
+    std::chrono::time_point<Clock, Duration> toTimePoint() const {
+        static constexpr std::chrono::time_point<Clock, Duration> unixEpoch{};
+        const auto dateTime = get();
+        if (dateTime < UA_DATETIME_UNIX_EPOCH) {
+            return unixEpoch;
+        }
+        return unixEpoch + UaDuration(dateTime - UA_DATETIME_UNIX_EPOCH);
+    }
+
+    /// Convert to Unix time.
+    uint64_t toUnixTime() const noexcept;
+
+    /// Convert to UA_DateTimeStruct.
+    UA_DateTimeStruct toStruct() const;
+
+    /// Get DateTime value as 100 nanosecond intervals since January 1, 1601 (UTC).
+    uint64_t get() const noexcept;
 };
 
 }  // namespace opcua

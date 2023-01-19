@@ -167,3 +167,44 @@ TEST_CASE("Guid") {
         REQUIRE(wrapper.handle()->data4[i] == data4[i]);  // NOLINT
     }
 }
+
+TEST_CASE("DateTime") {
+    SECTION("Empty") {
+        const DateTime dt;
+        REQUIRE(dt.get() == 0);
+        REQUIRE(*dt.handle() == 0);
+        // UA time starts before Unix time -> 0
+        REQUIRE(dt.toTimePoint() == std::chrono::system_clock::time_point{});
+        REQUIRE(dt.toUnixTime() == 0);
+
+        const auto dts = dt.toStruct();
+        REQUIRE(dts.nanoSec == 0);
+        REQUIRE(dts.microSec == 0);
+        REQUIRE(dts.milliSec == 0);
+        REQUIRE(dts.sec == 0);
+        REQUIRE(dts.min == 0);
+        REQUIRE(dts.hour == 0);
+        REQUIRE(dts.day == 1);
+        REQUIRE(dts.month == 1);
+        REQUIRE(dts.year == 1601);
+    }
+
+    SECTION("From std::chrono::time_point") {
+        using namespace std::chrono;
+
+        const auto now = system_clock::now();
+        const uint64_t secSinceEpoch = duration_cast<seconds>(now.time_since_epoch()).count();
+        const uint64_t nsecSinceEpoch = duration_cast<nanoseconds>(now.time_since_epoch()).count();
+
+        const DateTime dt(now);
+        REQUIRE(dt.get() == (nsecSinceEpoch / 100) + UA_DATETIME_UNIX_EPOCH);
+        REQUIRE(dt.toUnixTime() == secSinceEpoch);
+    }
+
+    SECTION("Comparison") {
+        const auto zero = DateTime(0);
+        const auto now = DateTime::now();
+        REQUIRE(zero != now);
+        REQUIRE(zero < now);
+    }
+}

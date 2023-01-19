@@ -1,5 +1,6 @@
 #pragma once
 
+#include <chrono>
 #include <iterator>  // distance
 #include <string>
 #include <type_traits>
@@ -302,6 +303,21 @@ struct TypeConverter<std::string> {
     static void toNative(const ValueType& src, NativeType& dst) {
         UA_clear(&dst, detail::getUaDataType<Type::String>());
         dst = detail::allocUaString(src);
+    }
+};
+
+template <typename Clock, typename Duration>
+struct TypeConverter<std::chrono::time_point<Clock, Duration>> {
+    using ValueType = std::chrono::time_point<Clock, Duration>;
+    using NativeType = UA_DateTime;
+    using ValidTypes = TypeList<Type::DateTime>;
+
+    static void fromNative(const NativeType& src, ValueType& dst) {
+        dst = DateTime(src).toTimePoint();
+    }
+
+    static void toNative(const ValueType& src, NativeType& dst) {
+        dst = DateTime::fromTimePoint(src).get();
     }
 };
 

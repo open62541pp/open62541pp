@@ -1,6 +1,5 @@
 #include <catch2/catch_template_test_macros.hpp>
 #include <catch2/catch_test_macros.hpp>
-#include <catch2/generators/catch_generators.hpp>
 
 #include "open62541pp/TypeConverter.h"
 
@@ -66,5 +65,23 @@ TEST_CASE("TypeConverter std::string") {
         REQUIRE(detail::toString(dst) == "Test123");
 
         UA_clear(&dst, &UA_TYPES[UA_TYPES_STRING]);
+    }
+}
+
+TEST_CASE("TypeConverter std::chrono::time_point") {
+    using TimePoint = std::chrono::time_point<std::chrono::system_clock>;
+    SECTION("fromNative") {
+        TimePoint src{};  // = Unix epoch
+        UA_DateTime dst{};
+
+        TypeConverter<TimePoint>::toNative(src, dst);
+        REQUIRE(dst == UA_DATETIME_UNIX_EPOCH);
+    }
+    SECTION("fromNative") {
+        UA_DateTime src = UA_DATETIME_UNIX_EPOCH;
+        TimePoint dst = std::chrono::system_clock::now();
+
+        TypeConverter<TimePoint>::fromNative(src, dst);
+        REQUIRE(dst.time_since_epoch().count() == 0);
     }
 }
