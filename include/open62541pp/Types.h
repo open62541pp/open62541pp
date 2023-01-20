@@ -9,45 +9,10 @@
 
 namespace opcua {
 
-namespace detail {
-
-using NativeTypes = std::tuple<
-    UA_Boolean,
-    UA_SByte,
-    UA_Byte,
-    UA_Int16,
-    UA_UInt16,
-    UA_Int32,
-    UA_UInt32,
-    UA_Int64,
-    UA_UInt64,
-    UA_Float,
-    UA_Double,
-    UA_String,
-    UA_DateTime,
-    UA_Guid,
-    UA_ByteString,
-    UA_XmlElement,
-    UA_NodeId,
-    UA_ExpandedNodeId,
-    UA_StatusCode,
-    UA_QualifiedName,
-    UA_LocalizedText,
-    UA_ExtensionObject,
-    UA_DataValue,
-    UA_Variant,
-    UA_DiagnosticInfo>;
-
-template <typename T>
-constexpr bool isNativeType() {
-    return TupleHolds<NativeTypes, T>::value;
-}
-
-// template <size_t Index>
-// using NativeType = std::tuple_element<Index, NativeTypes>;
-
-}  // namespace detail
-
+/**
+ * Built-in types.
+ * @see https://reference.opcfoundation.org/v104/Core/docs/Part6/5.1.2/
+ */
 enum class Type : uint16_t {
     // clang-format off
     Boolean         = UA_TYPES_BOOLEAN,
@@ -78,6 +43,10 @@ enum class Type : uint16_t {
     // clang-format on
 };
 
+/**
+ * Node classes.
+ * @see UA_NodeClass
+ */
 enum class NodeClass : uint16_t {
     // clang-format off
     Unspecified   = UA_NODECLASS_UNSPECIFIED,
@@ -92,6 +61,7 @@ enum class NodeClass : uint16_t {
     // clang-format on
 };
 
+/// Get name of node class.
 constexpr std::string_view getNodeClassName(NodeClass nodeClass) {
     switch (nodeClass) {
     case NodeClass::Object:
@@ -115,6 +85,9 @@ constexpr std::string_view getNodeClassName(NodeClass nodeClass) {
     }
 }
 
+/**
+ * Value rank.
+ */
 enum class ValueRank : int32_t {
     // clang-format off
     ScalarOrOneDimension = UA_VALUERANK_SCALAR_OR_ONE_DIMENSION,
@@ -183,5 +156,44 @@ enum class ReferenceType : uint16_t {
     HasEffectUnsuppressed               = UA_NS0ID_HASEFFECTUNSUPPRESSED,
     // clang-format on
 };
+
+namespace detail {
+
+using NativeTypes = std::tuple<
+    UA_Boolean,
+    UA_SByte,
+    UA_Byte,
+    UA_Int16,
+    UA_UInt16,
+    UA_Int32,
+    UA_UInt32,
+    UA_Int64,
+    UA_UInt64,
+    UA_Float,
+    UA_Double,
+    UA_String,
+    UA_DateTime,
+    UA_Guid,
+    UA_ByteString,
+    UA_XmlElement,
+    UA_NodeId,
+    UA_ExpandedNodeId,
+    UA_StatusCode,
+    UA_QualifiedName,
+    UA_LocalizedText,
+    UA_ExtensionObject,
+    UA_DataValue,
+    UA_Variant,
+    UA_DiagnosticInfo>;
+
+template <typename T>
+constexpr bool isNativeType() {
+    return TupleHolds<NativeTypes, T>::value;
+}
+
+// template <size_t Index>
+// using NativeType = std::tuple_element<Index, NativeTypes>;
+
+}  // namespace detail
 
 }  // namespace opcua
