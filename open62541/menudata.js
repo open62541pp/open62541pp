@@ -21,7 +21,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 for the JavaScript code in this file
 */
 var menudata={children:[
-{text:"Main Page",url:"index.html"},
+{text:"Overview",url:"index.html"},
 {text:"Data Structures",url:"annotated.html",children:[
 {text:"Data Structures",url:"annotated.html"},
 {text:"Data Structure Index",url:"classes.html"},
@@ -185,5 +185,6 @@ var menudata={children:[
 {text:"u",url:"globals_defs_u.html#index_u"},
 {text:"x",url:"globals_defs_x.html#index_x"},
 {text:"z",url:"globals_defs_z.html#index_z"}]}]}]},
-{text:" open62541++ API",url:"../index.html"},
-{text:" GitHub",url:"https://github.com/open62541/open62541"}]}
+{text:"Links",url:"usergroup0.html",children:[
+{text:"open62541++ API",url:"../index.html"},
+{text:"GitHub",url:"https://github.com/open62541/open62541"}]}]}

@@ -78,11 +78,13 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;array&gt;</code><br />
+<code>#include &lt;chrono&gt;</code><br />
 <code>#include &lt;cstdint&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
 <code>#include &lt;string_view&gt;</code><br />
 <code>#include &lt;type_traits&gt;</code><br />
 <code>#include &lt;utility&gt;</code><br />
+<code>#include &quot;<a class="el" href="Comparison_8h_source.html">open62541pp/Comparison.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="ErrorHandling_8h_source.html">open62541pp/ErrorHandling.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Helper_8h_source.html">open62541pp/Helper.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Types_8h_source.html">open62541pp/Types.h</a>&quot;</code><br />
@@ -90,7 +92,7 @@ $(function() {
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for TypeWrapper.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="TypeWrapper_8h__incl.svg" width="986" height="366"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="TypeWrapper_8h__incl.svg" width="1168" height="366"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -116,11 +118,17 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1ByteString.html">opcua::ByteString</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">UA_ByteString wrapper class.  <a href="classopcua_1_1ByteString.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1XmlElement.html">opcua::XmlElement</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">UA_XmlElement wrapper class.  <a href="classopcua_1_1XmlElement.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1QualifiedName.html">opcua::QualifiedName</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="elRef" href="open62541/structUA__QualifiedName.html">UA_QualifiedName</a> wrapper class.  <a href="classopcua_1_1QualifiedName.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1LocalizedText.html">opcua::LocalizedText</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="elRef" href="open62541/structUA__LocalizedText.html">UA_LocalizedText</a> wrapper class.  <a href="classopcua_1_1LocalizedText.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DateTime.html">opcua::DateTime</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">UA_DateTime wrapper class.  <a href="classopcua_1_1DateTime.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
@@ -143,6 +151,24 @@ Functions</h2></td></tr>
 <tr class="separator:ad45795dab04da50d546fdfa8a87cc5c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f5928ebb3f1e8f9eecf59d26eb8310c"><td class="memItemLeft" align="right" valign="top">std::false_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a7f5928ebb3f1e8f9eecf59d26eb8310c">opcua::detail::isTypeWrapperImpl</a> (...)</td></tr>
 <tr class="separator:a7f5928ebb3f1e8f9eecf59d26eb8310c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67163e9bbbe5e066a9a98dde618eadea"><td class="memTemplParams" colspan="2">template&lt;typename T , typename  = std::enable_if_t&lt;detail::IsTypeWrapper&lt;T&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:a67163e9bbbe5e066a9a98dde618eadea"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a67163e9bbbe5e066a9a98dde618eadea">opcua::operator==</a> (const T &amp;left, const T &amp;right) noexcept</td></tr>
+<tr class="separator:a67163e9bbbe5e066a9a98dde618eadea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ba8e61810b4a88feb4d9ece8bfcd49f"><td class="memTemplParams" colspan="2">template&lt;typename T , typename  = std::enable_if_t&lt;detail::IsTypeWrapper&lt;T&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:a5ba8e61810b4a88feb4d9ece8bfcd49f"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a5ba8e61810b4a88feb4d9ece8bfcd49f">opcua::operator!=</a> (const T &amp;left, const T &amp;right) noexcept</td></tr>
+<tr class="separator:a5ba8e61810b4a88feb4d9ece8bfcd49f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabfd3c3696eac182da36cbe71d9d264e"><td class="memTemplParams" colspan="2">template&lt;typename T , typename  = std::enable_if_t&lt;detail::IsTypeWrapper&lt;T&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:aabfd3c3696eac182da36cbe71d9d264e"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#aabfd3c3696eac182da36cbe71d9d264e">opcua::operator&lt;</a> (const T &amp;left, const T &amp;right) noexcept</td></tr>
+<tr class="separator:aabfd3c3696eac182da36cbe71d9d264e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42d57f71a3182547714b86aeb3aa5933"><td class="memTemplParams" colspan="2">template&lt;typename T , typename  = std::enable_if_t&lt;detail::IsTypeWrapper&lt;T&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:a42d57f71a3182547714b86aeb3aa5933"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a42d57f71a3182547714b86aeb3aa5933">opcua::operator&gt;</a> (const T &amp;left, const T &amp;right) noexcept</td></tr>
+<tr class="separator:a42d57f71a3182547714b86aeb3aa5933"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bc3d31d48d7a2a61a25fd3fb2dd6524"><td class="memTemplParams" colspan="2">template&lt;typename T , typename  = std::enable_if_t&lt;detail::IsTypeWrapper&lt;T&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:a8bc3d31d48d7a2a61a25fd3fb2dd6524"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a8bc3d31d48d7a2a61a25fd3fb2dd6524">opcua::operator&lt;=</a> (const T &amp;left, const T &amp;right) noexcept</td></tr>
+<tr class="separator:a8bc3d31d48d7a2a61a25fd3fb2dd6524"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa290ebedb98709f5db000ab65a49f926"><td class="memTemplParams" colspan="2">template&lt;typename T , typename  = std::enable_if_t&lt;detail::IsTypeWrapper&lt;T&gt;::value&gt;&gt; </td></tr>
+<tr class="memitem:aa290ebedb98709f5db000ab65a49f926"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#aa290ebedb98709f5db000ab65a49f926">opcua::operator&gt;=</a> (const T &amp;left, const T &amp;right) noexcept</td></tr>
+<tr class="separator:aa290ebedb98709f5db000ab65a49f926"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

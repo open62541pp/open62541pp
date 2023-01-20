@@ -1,12 +1,13 @@
 <map id="/home/runner/work/open62541pp/open62541pp/include/open62541pp/open62541.h" name="/home/runner/work/open62541pp/open62541pp/include/open62541pp/open62541.h">
-<area shape="rect" id="node1" title=" " alt="" coords="426,5,683,61"/>
-<area shape="rect" id="node2" href="$ErrorHandling_8h.html" title=" " alt="" coords="426,213,683,269"/>
-<area shape="rect" id="node5" href="$TypeConverter_8h.html" title=" " alt="" coords="259,421,517,477"/>
-<area shape="rect" id="node6" href="$Variant_8h.html" title=" " alt="" coords="361,525,618,581"/>
-<area shape="rect" id="node7" href="$TypeWrapper_8h.html" title=" " alt="" coords="593,317,850,373"/>
-<area shape="rect" id="node8" href="$NodeId_8h.html" title=" " alt="" coords="963,421,1221,477"/>
-<area shape="rect" id="node9" href="$Helper_8h.html" title=" " alt="" coords="145,213,402,269"/>
-<area shape="rect" id="node10" href="$Types_8h.html" title=" " alt="" coords="759,109,1017,165"/>
-<area shape="rect" id="node3" href="$Node_8h.html" title=" " alt="" coords="525,629,787,685"/>
-<area shape="rect" id="node4" href="$open62541pp_8h.html" title=" " alt="" coords="443,733,701,789"/>
+<area shape="rect" id="node1" title=" " alt="" coords="636,5,893,61"/>
+<area shape="rect" id="node2" href="$Comparison_8h.html" title=" " alt="" coords="5,213,263,269"/>
+<area shape="rect" id="node4" href="$TypeWrapper_8h.html" title=" " alt="" coords="440,317,697,373"/>
+<area shape="rect" id="node6" href="$NodeId_8h.html" title=" " alt="" coords="339,421,596,477"/>
+<area shape="rect" id="node7" href="$TypeConverter_8h.html" title=" " alt="" coords="1027,421,1284,477"/>
+<area shape="rect" id="node8" href="$Variant_8h.html" title=" " alt="" coords="976,525,1233,581"/>
+<area shape="rect" id="node9" href="$ErrorHandling_8h.html" title=" " alt="" coords="541,213,799,269"/>
+<area shape="rect" id="node10" href="$Helper_8h.html" title=" " alt="" coords="1077,213,1335,269"/>
+<area shape="rect" id="node11" href="$Types_8h.html" title=" " alt="" coords="745,109,1003,165"/>
+<area shape="rect" id="node3" href="$open62541pp_8h.html" title=" " alt="" coords="641,733,899,789"/>
+<area shape="rect" id="node5" href="$Node_8h.html" title=" " alt="" coords="639,629,901,685"/>
 </map>

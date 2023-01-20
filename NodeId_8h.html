@@ -70,12 +70,15 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle">
 <div class="title">NodeId.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;string_view&gt;</code><br />
+<div class="textblock"><code>#include &lt;cstdint&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
+<code>#include &lt;string_view&gt;</code><br />
 <code>#include &lt;variant&gt;</code><br />
 <code>#include &quot;<a class="el" href="TypeWrapper_8h_source.html">open62541pp/TypeWrapper.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Types_8h_source.html">open62541pp/Types.h</a>&quot;</code><br />
@@ -83,7 +86,7 @@ $(function() {
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for NodeId.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="NodeId_8h__incl.svg" width="1119" height="440"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="NodeId_8h__incl.svg" width="1372" height="440"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -100,11 +103,24 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1NodeId.html">opcua::NodeId</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="elRef" href="open62541/structUA__NodeId.html">UA_NodeId</a> wrapper class.  <a href="classopcua_1_1NodeId.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1ExpandedNodeId.html">opcua::ExpandedNodeId</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="elRef" href="open62541/structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> wrapper class.  <a href="classopcua_1_1ExpandedNodeId.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespaceopcua"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html">opcua</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a05d617e4c64656fa2ef6baf2af636f90"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a05d617e4c64656fa2ef6baf2af636f90">opcua::NodeIdType</a> : uint8_t { <a class="el" href="namespaceopcua.html#a05d617e4c64656fa2ef6baf2af636f90a87322391cc6e8948ce9fd5d6cb84fced">opcua::NodeIdType::Numeric</a> = UA_NODEIDTYPE_NUMERIC, 
+<a class="el" href="namespaceopcua.html#a05d617e4c64656fa2ef6baf2af636f90a27118326006d3829667a400ad23d5d98">opcua::NodeIdType::String</a> = UA_NODEIDTYPE_STRING, 
+<a class="el" href="namespaceopcua.html#a05d617e4c64656fa2ef6baf2af636f90ac195f641dd597766b98e4ffa9e2f0e75">opcua::NodeIdType::Guid</a> = UA_NODEIDTYPE_GUID, 
+<a class="el" href="namespaceopcua.html#a05d617e4c64656fa2ef6baf2af636f90a58efa9e8b8491c4a42cbf3bead1b06b6">opcua::NodeIdType::ByteString</a> = UA_NODEIDTYPE_BYTESTRING
+ }</td></tr>
+<tr class="memdesc:a05d617e4c64656fa2ef6baf2af636f90"><td class="mdescLeft">&#160;</td><td class="mdescRight">NodeId types.  <a href="namespaceopcua.html#a05d617e4c64656fa2ef6baf2af636f90">More...</a><br /></td></tr>
+<tr class="separator:a05d617e4c64656fa2ef6baf2af636f90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

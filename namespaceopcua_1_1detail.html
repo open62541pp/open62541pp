@@ -90,6 +90,9 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
+<tr class="memitem:aad1cfbe232418a890fa98c35c9508acb"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Ts&gt; </td></tr>
+<tr class="memitem:aad1cfbe232418a890fa98c35c9508acb"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#aad1cfbe232418a890fa98c35c9508acb">IsOneOf</a> = std::disjunction&lt; std::is_same&lt; T, Ts &gt;... &gt;</td></tr>
+<tr class="separator:aad1cfbe232418a890fa98c35c9508acb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3607bbea283b68a05eb277ff1dc0a6f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ab3607bbea283b68a05eb277ff1dc0a6f">NativeTypes</a> = std::tuple&lt; <a class="elRef" href="open62541/types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>, <a class="elRef" href="open62541/types_8h.html#a4ba04733a2525e207fa5ea5337ad17f3">UA_SByte</a>, <a class="elRef" href="open62541/types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a>, <a class="elRef" href="open62541/types_8h.html#a2dfa954c25e6984956ab6fa8e8fd73db">UA_Int16</a>, <a class="elRef" href="open62541/types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a>, <a class="elRef" href="open62541/types_8h.html#a01ce3c3b2fb34ef81c97c313f516004e">UA_Int32</a>, <a class="elRef" href="open62541/types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>, <a class="elRef" href="open62541/types_8h.html#ae5c13df54009d7a3e374bfc594af8059">UA_Int64</a>, <a class="elRef" href="open62541/types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a>, <a class="elRef" href="open62541/types_8h.html#a899228311700e99d006f1ba5bcfcbd02">UA_Float</a>, <a class="elRef" href="open62541/types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a>, <a class="elRef" href="open62541/structUA__String.html">UA_String</a>, <a class="elRef" href="open62541/types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a>, <a class="elRef" href="open62541/structUA__Guid.html">UA_Guid</a>, <a class="elRef" href="open62541/types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a>, <a class="elRef" href="open62541/types_8h.html#a5f27ea2177086218de8bb542fc4476cc">UA_XmlElement</a>, <a class="elRef" href="open62541/structUA__NodeId.html">UA_NodeId</a>, <a class="elRef" href="open62541/structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a>, <a class="elRef" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>, <a class="elRef" href="open62541/structUA__QualifiedName.html">UA_QualifiedName</a>, <a class="elRef" href="open62541/structUA__LocalizedText.html">UA_LocalizedText</a>, <a class="elRef" href="open62541/structUA__ExtensionObject.html">UA_ExtensionObject</a>, <a class="elRef" href="open62541/structUA__DataValue.html">UA_DataValue</a>, <a class="elRef" href="open62541/structUA__Variant.html">UA_Variant</a>, <a class="elRef" href="open62541/structUA__DiagnosticInfo.html">UA_DiagnosticInfo</a> &gt;</td></tr>
 <tr class="separator:ab3607bbea283b68a05eb277ff1dc0a6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f6a9d9d89858dc4cd64637b4e252935"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
@@ -123,6 +126,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a161e9f5f92971da039857209d69cc103"><td class="memItemLeft" align="right" valign="top"><a class="elRef" href="open62541/structUA__String.html">UA_String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a161e9f5f92971da039857209d69cc103">allocUaString</a> (std::string_view src)</td></tr>
 <tr class="memdesc:a161e9f5f92971da039857209d69cc103"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate <a class="elRef" href="open62541/structUA__String.html">UA_String</a> from std::string_view.  <a href="namespaceopcua_1_1detail.html#a161e9f5f92971da039857209d69cc103">More...</a><br /></td></tr>
 <tr class="separator:a161e9f5f92971da039857209d69cc103"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7bc12ad80fd3f05ffe2cf152c85409d"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ad7bc12ad80fd3f05ffe2cf152c85409d">isEmpty</a> (const <a class="elRef" href="open62541/structUA__String.html">UA_String</a> &amp;value)</td></tr>
+<tr class="memdesc:ad7bc12ad80fd3f05ffe2cf152c85409d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if <a class="elRef" href="open62541/structUA__String.html">UA_String</a> is empty.  <a href="namespaceopcua_1_1detail.html#ad7bc12ad80fd3f05ffe2cf152c85409d">More...</a><br /></td></tr>
+<tr class="separator:ad7bc12ad80fd3f05ffe2cf152c85409d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf2513e895bc59a84f17a6a152f97cda"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#adf2513e895bc59a84f17a6a152f97cda">toStringView</a> (const <a class="elRef" href="open62541/structUA__String.html">UA_String</a> &amp;src)</td></tr>
 <tr class="memdesc:adf2513e895bc59a84f17a6a152f97cda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert <a class="elRef" href="open62541/structUA__String.html">UA_String</a> to std::string_view.  <a href="namespaceopcua_1_1detail.html#adf2513e895bc59a84f17a6a152f97cda">More...</a><br /></td></tr>
 <tr class="separator:adf2513e895bc59a84f17a6a152f97cda"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -190,6 +196,24 @@ Functions</h2></td></tr>
 <tr class="separator:a7f5928ebb3f1e8f9eecf59d26eb8310c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
+<a id="aad1cfbe232418a890fa98c35c9508acb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad1cfbe232418a890fa98c35c9508acb">&#9670;&nbsp;</a></span>IsOneOf</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename... Ts&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespaceopcua_1_1detail.html#aad1cfbe232418a890fa98c35c9508acb">opcua::detail::IsOneOf</a> = typedef std::disjunction&lt;std::is_same&lt;T, Ts&gt;...&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Traits_8h_source.html#l00012">12</a> of file <a class="el" href="Traits_8h_source.html">Traits.h</a>.</p>
+
+</div>
+</div>
 <a id="a6f6a9d9d89858dc4cd64637b4e252935"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6f6a9d9d89858dc4cd64637b4e252935">&#9670;&nbsp;</a></span>IsTypeWrapper</h2>
 
@@ -204,7 +228,7 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00134">134</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00151">151</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -244,7 +268,7 @@ template&lt;typename TNative , Type type&gt; </div>
 
 <p>Allocate native type. </p>
 
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00124">124</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00125">125</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
 <p class="reference">References <a class="elRef" href="open62541/types_8h.html#af586a3b89f735da18f9e4ff57067d04a">UA_new()</a>.</p>
 
@@ -270,7 +294,7 @@ template&lt;typename TNative , Type type&gt; </div>
 
 <p>Allocate native array. </p>
 
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00145">145</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00146">146</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
 <p class="reference">References <a class="elRef" href="open62541/types_8h.html#af8c0f89bd7b5eed5c2cfe17b75665aba">UA_Array_new()</a>.</p>
 
@@ -294,7 +318,7 @@ template&lt;typename TNative , Type type&gt; </div>
 
 <p>Allocate <a class="elRef" href="open62541/structUA__String.html">UA_String</a> from const char*. </p>
 
-<p class="reference">Referenced by <a class="el" href="TypeConverter_8h_source.html#l00302">opcua::TypeConverter&lt; std::string &gt;::toNative()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="TypeConverter_8h_source.html#l00303">opcua::TypeConverter&lt; std::string &gt;::toNative()</a>.</p>
 
 </div>
 </div>
@@ -363,7 +387,7 @@ template&lt;typename T , Type type&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00060">60</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00061">61</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
 </div>
 </div>
@@ -425,7 +449,7 @@ template&lt;typename T , Type type&gt; </div>
 
 <p class="reference">References <a class="elRef" href="open62541/statuscodes_8h.html#a3c68d30bc6f32228aa43be75fdc9d5aa">UA_STATUSCODE_GOOD</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="TypeConverter_8h_source.html#l00188">opcua::detail::TypeConverterNative&lt; UA_String, Type::String, Type::ByteString, Type::XmlElement &gt;::fromNative()</a>, and <a class="el" href="TypeWrapper_8h_source.html#l00106">opcua::TypeWrapper&lt; UA_QualifiedName, Type::QualifiedName &gt;::set()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="TypeConverter_8h_source.html#l00189">opcua::detail::TypeConverterNative&lt; UA_String, Type::String, Type::ByteString, Type::XmlElement &gt;::fromNative()</a>, and <a class="el" href="TypeWrapper_8h_source.html#l00123">opcua::TypeWrapper&lt; UA_XmlElement, Type::XmlElement &gt;::set()</a>.</p>
 
 </div>
 </div>
@@ -449,7 +473,7 @@ template&lt;typename T , typename NativeType  = typename TypeConverter&lt;T&gt;:
 
 <p>Convert and copy from native type. </p>
 
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00086">86</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00087">87</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
 <p class="reference">References <a class="el" href="structopcua_1_1TypeConverter.html#a500a9ff63f07a43c196ed64b02169694">opcua::TypeConverter&lt; T, Enable &gt;::fromNative()</a>.</p>
 
@@ -486,7 +510,7 @@ template&lt;typename T , typename NativeType  = typename TypeConverter&lt;T&gt;:
 <p>Convert and copy from native type. </p>
 <dl class="section warning"><dt>Warning</dt><dd>Type erased version, use with caution. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00095">95</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00096">96</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
 </div>
 </div>
@@ -520,7 +544,7 @@ template&lt;typename T , typename NativeType  = typename TypeConverter&lt;T&gt;:
 
 <p>Create and convert vector from native array. </p>
 
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00102">102</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00103">103</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
 <p class="reference">References <a class="el" href="structopcua_1_1TypeConverter.html#a500a9ff63f07a43c196ed64b02169694">opcua::TypeConverter&lt; T, Enable &gt;::fromNative()</a>.</p>
 
@@ -563,7 +587,7 @@ template&lt;typename T , typename NativeType  = typename TypeConverter&lt;T&gt;:
 <p>Create and convert vector from native array. </p>
 <dl class="section warning"><dt>Warning</dt><dd>Type erased version, use with caution. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00117">117</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00118">118</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
 </div>
 </div>
@@ -720,9 +744,9 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00068">68</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00069">69</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
-<p class="reference">References <a class="el" href="TypeConverter_8h_source.html#l00028">opcua::TypeList&lt; T &gt;::toArray()</a>.</p>
+<p class="reference">References <a class="el" href="TypeConverter_8h_source.html#l00029">opcua::TypeList&lt; T &gt;::toArray()</a>.</p>
 
 </div>
 </div>
@@ -751,7 +775,41 @@ template&lt;typename It &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00077">77</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00078">78</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+
+</div>
+</div>
+<a id="ad7bc12ad80fd3f05ffe2cf152c85409d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7bc12ad80fd3f05ffe2cf152c85409d">&#9670;&nbsp;</a></span>isEmpty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool opcua::detail::isEmpty </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="elRef" href="open62541/structUA__String.html">UA_String</a> &amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if <a class="elRef" href="open62541/structUA__String.html">UA_String</a> is empty. </p>
+
+<p class="definition">Definition at line <a class="el" href="Helper_8h_source.html#l00049">49</a> of file <a class="el" href="Helper_8h_source.html">Helper.h</a>.</p>
+
+<p class="reference">References <a class="elRef" href="open62541/structUA__String.html#a337ab69f4b7d9c5e6ab1f1cb18844d07">UA_String::data</a>, and <a class="elRef" href="open62541/structUA__String.html#ab73e448dea6fc379598652f5da447b47">UA_String::length</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Helper_8h_source.html#l00054">toStringView()</a>.</p>
 
 </div>
 </div>
@@ -847,9 +905,9 @@ template&lt;typename T , Type type&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00050">50</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00051">51</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
-<p class="reference">References <a class="el" href="TypeConverter_8h_source.html#l00024">opcua::TypeList&lt; T &gt;::contains()</a>.</p>
+<p class="reference">References <a class="el" href="TypeConverter_8h_source.html#l00025">opcua::TypeList&lt; T &gt;::contains()</a>.</p>
 
 </div>
 </div>
@@ -879,9 +937,9 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00055">55</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00056">56</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
-<p class="reference">References <a class="el" href="TypeConverter_8h_source.html#l00024">opcua::TypeList&lt; T &gt;::contains()</a>.</p>
+<p class="reference">References <a class="el" href="TypeConverter_8h_source.html#l00025">opcua::TypeList&lt; T &gt;::contains()</a>.</p>
 
 </div>
 </div>
@@ -905,7 +963,7 @@ template&lt;typename T , Type type&gt; </div>
 
 <p>Allocate and copy to native type. </p>
 
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00135">135</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00136">136</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
 <p class="reference">References <a class="el" href="structopcua_1_1TypeConverter.html#a3a75022757c6255b3e75a0ed76519edb">opcua::TypeConverter&lt; T, Enable &gt;::toNative()</a>.</p>
 
@@ -941,7 +999,7 @@ template&lt;typename T , Type type&gt; </div>
 
 <p>Allocate and copy to native array. </p>
 
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00170">170</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00171">171</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
 </div>
 </div>
@@ -975,7 +1033,7 @@ template&lt;typename InputIt , Type type&gt; </div>
 
 <p>Allocate and copy iterator range to native array. </p>
 
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00156">156</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00157">157</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
 <p class="reference">References <a class="el" href="structopcua_1_1TypeConverter.html#a3a75022757c6255b3e75a0ed76519edb">opcua::TypeConverter&lt; T, Enable &gt;::toNative()</a>.</p>
 
@@ -1007,11 +1065,11 @@ template&lt;typename InputIt , Type type&gt; </div>
 
 <p>Convert <a class="elRef" href="open62541/structUA__String.html">UA_String</a> to std::string. </p>
 
-<p class="definition">Definition at line <a class="el" href="Helper_8h_source.html#l00057">57</a> of file <a class="el" href="Helper_8h_source.html">Helper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Helper_8h_source.html#l00062">62</a> of file <a class="el" href="Helper_8h_source.html">Helper.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Helper_8h_source.html#l00049">toStringView()</a>.</p>
+<p class="reference">References <a class="el" href="Helper_8h_source.html#l00054">toStringView()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="TypeConverter_8h_source.html#l00298">opcua::TypeConverter&lt; std::string &gt;::fromNative()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="TypeConverter_8h_source.html#l00299">opcua::TypeConverter&lt; std::string &gt;::fromNative()</a>.</p>
 
 </div>
 </div>
@@ -1041,11 +1099,11 @@ template&lt;typename InputIt , Type type&gt; </div>
 
 <p>Convert <a class="elRef" href="open62541/structUA__String.html">UA_String</a> to std::string_view. </p>
 
-<p class="definition">Definition at line <a class="el" href="Helper_8h_source.html#l00049">49</a> of file <a class="el" href="Helper_8h_source.html">Helper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Helper_8h_source.html#l00054">54</a> of file <a class="el" href="Helper_8h_source.html">Helper.h</a>.</p>
 
-<p class="reference">References <a class="elRef" href="open62541/structUA__String.html#a337ab69f4b7d9c5e6ab1f1cb18844d07">UA_String::data</a>, and <a class="elRef" href="open62541/structUA__String.html#ab73e448dea6fc379598652f5da447b47">UA_String::length</a>.</p>
+<p class="reference">References <a class="elRef" href="open62541/structUA__String.html#a337ab69f4b7d9c5e6ab1f1cb18844d07">UA_String::data</a>, <a class="el" href="Helper_8h_source.html#l00049">isEmpty()</a>, and <a class="elRef" href="open62541/structUA__String.html#ab73e448dea6fc379598652f5da447b47">UA_String::length</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Helper_8h_source.html#l00057">toString()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Helper_8h_source.html#l00062">toString()</a>.</p>
 
 </div>
 </div>

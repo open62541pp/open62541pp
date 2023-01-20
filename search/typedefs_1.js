@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['istypewrapper_4047',['IsTypeWrapper',['../namespaceopcua_1_1detail.html#a6f6a9d9d89858dc4cd64637b4e252935',1,'opcua::detail']]]
+  ['defaultclock_4096',['DefaultClock',['../classopcua_1_1DateTime.html#ae7375ebfe4e6809021b759bee9774329',1,'opcua::DateTime']]]
 ];

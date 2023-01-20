@@ -1,13 +1,5 @@
 var searchData=
 [
-  ['init_2789',['init',['../classopcua_1_1TypeWrapper.html#a3ca48cc0add2099230d87e4410f415f9',1,'opcua::TypeWrapper']]],
-  ['isarray_2790',['isArray',['../classopcua_1_1Variant.html#ab2ef10e5ae385c175e646eedf347e209',1,'opcua::Variant']]],
-  ['isempty_2791',['isEmpty',['../classopcua_1_1Variant.html#a9697a0c258f2c132b890eadcfa96bb72',1,'opcua::Variant']]],
-  ['isnativetype_2792',['isNativeType',['../namespaceopcua_1_1detail.html#a6228aef2d981a7d08177926555fd752f',1,'opcua::detail']]],
-  ['isnodeclass_2793',['isNodeClass',['../classopcua_1_1Node.html#ac022a78c7994bae38f995812e5730511',1,'opcua::Node']]],
-  ['isrunning_2794',['isRunning',['../classopcua_1_1Server.html#ae355af01f75adbe8197353e5f5d6afd6',1,'opcua::Server']]],
-  ['isscalar_2795',['isScalar',['../classopcua_1_1Variant.html#ae528dcb9d819364f9590c310dc8e8f2a',1,'opcua::Variant']]],
-  ['istype_2796',['isType',['../classopcua_1_1Variant.html#a7a68c9dad90735ea93c52494057b9f80',1,'opcua::Variant::isType(const UA_DataType *type) const noexcept'],['../classopcua_1_1Variant.html#a07ee9d4a0be5218428ceb42493398091',1,'opcua::Variant::isType(Type type) const noexcept'],['../classopcua_1_1Variant.html#a7e57dd7638607b1c207633fca2fb0f36',1,'opcua::Variant::isType(const NodeId &amp;id) const noexcept']]],
-  ['istypewrapperimpl_2797',['isTypeWrapperImpl',['../namespaceopcua_1_1detail.html#ad45795dab04da50d546fdfa8a87cc5c9',1,'opcua::detail::isTypeWrapperImpl(TypeWrapper&lt; T, type &gt; *)'],['../namespaceopcua_1_1detail.html#a7f5928ebb3f1e8f9eecf59d26eb8310c',1,'opcua::detail::isTypeWrapperImpl(...)']]],
-  ['isvalidtypecombination_2798',['isValidTypeCombination',['../namespaceopcua_1_1detail.html#af2e2edd55123c63b37b0cbb1c61a47bb',1,'opcua::detail::isValidTypeCombination()'],['../namespaceopcua_1_1detail.html#a7e6f257e72cc58fd807cefc0e3df76a9',1,'opcua::detail::isValidTypeCombination(Type type)']]]
+  ['handle_2827',['handle',['../classopcua_1_1Server.html#aa838cb7997896f87d0611429246e2b28',1,'opcua::Server::handle() noexcept'],['../classopcua_1_1Server.html#aefc19d28714fbd67aec1aa1314d020f3',1,'opcua::Server::handle() const noexcept'],['../classopcua_1_1TypeWrapper.html#a5d820669a24d9fcc3792819b7fe4c5a9',1,'opcua::TypeWrapper::handle() noexcept'],['../classopcua_1_1TypeWrapper.html#afd62b164ba7f51bdb7b7517ecb982c75',1,'opcua::TypeWrapper::handle() const noexcept']]],
+  ['hash_2828',['hash',['../classopcua_1_1NodeId.html#a1a1e23f88cf4af6597dd6c14d2d6cd30',1,'opcua::NodeId']]]
 ];

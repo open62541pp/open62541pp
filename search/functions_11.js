@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_7etypewrapper_2856',['~TypeWrapper',['../classopcua_1_1TypeWrapper.html#ac0cfd0f899e77a1f98a6e8c344f72425',1,'opcua::TypeWrapper']]]
+  ['xmlelement_2903',['XmlElement',['../classopcua_1_1XmlElement.html#ac70390b776e6aec8bca0819c696d2c93',1,'opcua::XmlElement']]]
 ];
