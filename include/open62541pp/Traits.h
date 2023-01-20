@@ -1,11 +1,15 @@
 #pragma once
 
 #include <tuple>
+#include <type_traits>
 
 namespace opcua::detail {
 
 template <typename...>
 struct AlwaysFalse : std::false_type {};
+
+template <typename T, typename... Ts>
+using IsOneOf = std::disjunction<std::is_same<T, Ts>...>;
 
 template <typename, typename>
 struct TupleHolds : std::false_type {};

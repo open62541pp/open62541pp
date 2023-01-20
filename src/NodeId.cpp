@@ -36,22 +36,6 @@ NodeId::NodeId(const Guid& identifier, uint16_t namespaceIndex)
 NodeId::NodeId(const ByteString& identifier, uint16_t namespaceIndex)
     : NodeId(fromStringView(namespaceIndex, UA_NODEIDTYPE_BYTESTRING, identifier.getView())) {}
 
-bool NodeId::operator==(const NodeId& other) const noexcept {
-    return UA_NodeId_order(handle(), other.handle()) == UA_ORDER_EQ;
-}
-
-bool NodeId::operator!=(const NodeId& other) const noexcept {
-    return UA_NodeId_order(handle(), other.handle()) != UA_ORDER_EQ;
-}
-
-bool NodeId::operator<(const NodeId& other) const noexcept {
-    return UA_NodeId_order(handle(), other.handle()) == UA_ORDER_LESS;
-}
-
-bool NodeId::operator>(const NodeId& other) const noexcept {
-    return UA_NodeId_order(handle(), other.handle()) == UA_ORDER_MORE;
-}
-
 uint32_t NodeId::hash() const {
     return UA_NodeId_hash(handle());
 }
@@ -88,22 +72,6 @@ ExpandedNodeId::ExpandedNodeId(
     detail::checkStatusCodeException(status);
     handle()->namespaceUri = detail::allocUaString(namespaceUri);
     handle()->serverIndex = serverIndex;
-}
-
-bool ExpandedNodeId::operator==(const ExpandedNodeId& other) const noexcept {
-    return UA_ExpandedNodeId_order(handle(), other.handle()) == UA_ORDER_EQ;
-}
-
-bool ExpandedNodeId::operator!=(const ExpandedNodeId& other) const noexcept {
-    return UA_ExpandedNodeId_order(handle(), other.handle()) != UA_ORDER_EQ;
-}
-
-bool ExpandedNodeId::operator<(const ExpandedNodeId& other) const noexcept {
-    return UA_ExpandedNodeId_order(handle(), other.handle()) == UA_ORDER_LESS;
-}
-
-bool ExpandedNodeId::operator>(const ExpandedNodeId& other) const noexcept {
-    return UA_ExpandedNodeId_order(handle(), other.handle()) == UA_ORDER_MORE;
 }
 
 bool ExpandedNodeId::isLocal() const noexcept {

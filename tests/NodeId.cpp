@@ -5,54 +5,46 @@
 using namespace opcua;
 
 TEST_CASE("NodeId") {
-    NodeId idNumeric1(1, 0);
-    NodeId idNumeric2(1, 0);
-    NodeId idNumeric3(2, 0);
-    NodeId idNumeric4(2, 1);
-    NodeId idString1("a", 0);
-    NodeId idString2("a", 0);
-    NodeId idString3("b", 0);
-    NodeId idString4("b", 1);
-
     SECTION("Copy") {
-        REQUIRE(NodeId(idNumeric1) == idNumeric1);
+        NodeId src(1, 0);
+        NodeId dst(src);
+        REQUIRE(dst == src);
     }
 
     SECTION("Assignment") {
-        NodeId tmp(0, 0);
-        tmp = idNumeric1;
-        REQUIRE(tmp == idNumeric1);
+        NodeId src(1, 0);
+        NodeId dst(2, 1);
+        dst = src;
+        REQUIRE(dst == src);
     }
 
     SECTION("Namespace index") {
-        REQUIRE(idNumeric1.getNamespaceIndex() == 0);
-        REQUIRE(idNumeric2.getNamespaceIndex() == 0);
-        REQUIRE(idNumeric3.getNamespaceIndex() == 0);
-        REQUIRE(idNumeric4.getNamespaceIndex() == 1);
-        REQUIRE(idString1.getNamespaceIndex() == 0);
-        REQUIRE(idString2.getNamespaceIndex() == 0);
-        REQUIRE(idString3.getNamespaceIndex() == 0);
-        REQUIRE(idString4.getNamespaceIndex() == 1);
+        REQUIRE(NodeId(1, 0).getNamespaceIndex() == 0);
+        REQUIRE(NodeId(1, 2).getNamespaceIndex() == 2);
     }
 
     SECTION("Comparison") {
-        REQUIRE(idNumeric1 == idNumeric2);
-        REQUIRE(idNumeric1 != idNumeric3);
-        REQUIRE(idNumeric3 != idNumeric4);
-        REQUIRE(idString1 != idNumeric1);
-        REQUIRE(idString1 == idString2);
-        REQUIRE(idString2 != idString3);
-        REQUIRE(idString3 != idString4);
+        REQUIRE(NodeId(1, 0) == NodeId(1, 0));
+        REQUIRE(NodeId(1, 0) <= NodeId(1, 0));
+        REQUIRE(NodeId(1, 0) >= NodeId(1, 0));
+        REQUIRE(NodeId(1, 0) != NodeId(2, 0));
+        REQUIRE(NodeId(1, 0) != NodeId(1, 1));
+        REQUIRE(NodeId("a", 0) == NodeId("a", 0));
+        REQUIRE(NodeId("a", 0) != NodeId("b", 0));
+        REQUIRE(NodeId("a", 0) != NodeId("a", 1));
+
+        // namespace index is compared before identifier
+        REQUIRE(NodeId(1, 0) < NodeId(0, 1));
+        REQUIRE(NodeId(1, 0) < NodeId(2, 0));
+
+        REQUIRE(NodeId("a", 1) < NodeId("b", 1));
+        REQUIRE(NodeId("b", 1) > NodeId("a", 1));
     }
 
     SECTION("Hash") {
-        REQUIRE(idNumeric1.hash() == idNumeric2.hash());
-        REQUIRE(idNumeric1.hash() != idNumeric3.hash());
-        REQUIRE(idNumeric3.hash() != idNumeric4.hash());
-        REQUIRE(idString1.hash() != idNumeric1.hash());
-        REQUIRE(idString1.hash() == idString2.hash());
-        REQUIRE(idString2.hash() != idString3.hash());
-        REQUIRE(idString3.hash() != idString4.hash());
+        REQUIRE(NodeId(1, 0).hash() == NodeId(1, 0).hash());
+        REQUIRE(NodeId(1, 0).hash() != NodeId(2, 0).hash());
+        REQUIRE(NodeId(1, 0).hash() != NodeId(1, 1).hash());
     }
 
     SECTION("Get properties (getIdentifierType, getNamespaceIndex, getIdentifier") {

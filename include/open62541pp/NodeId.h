@@ -41,11 +41,6 @@ public:
     /// Create NodeId with ByteString identifier
     NodeId(const ByteString& identifier, uint16_t namespaceIndex);
 
-    bool operator==(const NodeId& other) const noexcept;
-    bool operator!=(const NodeId& other) const noexcept;
-    bool operator<(const NodeId& other) const noexcept;
-    bool operator>(const NodeId& other) const noexcept;
-
     uint32_t hash() const;
 
     uint16_t getNamespaceIndex() const noexcept;
@@ -87,11 +82,6 @@ public:
     using BaseClass::BaseClass;  // inherit contructors
 
     ExpandedNodeId(const NodeId& id, std::string_view namespaceUri, uint32_t serverIndex);
-
-    bool operator==(const ExpandedNodeId& other) const noexcept;
-    bool operator!=(const ExpandedNodeId& other) const noexcept;
-    bool operator<(const ExpandedNodeId& other) const noexcept;
-    bool operator>(const ExpandedNodeId& other) const noexcept;
 
     bool isLocal() const noexcept;
 

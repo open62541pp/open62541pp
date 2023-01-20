@@ -8,6 +8,7 @@
 #include <type_traits>
 #include <utility>  // move, swap
 
+#include "open62541pp/Comparison.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Helper.h"
 #include "open62541pp/Types.h"
@@ -54,7 +55,7 @@ public:
     }
 
     /// Copy assignment (deep copy)
-    TypeWrapper& operator=(const TypeWrapper& other) {
+    TypeWrapper& operator=(const TypeWrapper& other) {  // NOLINT, false positive
         if (this == &other) {
             return *this;
         }
@@ -141,6 +142,40 @@ using IsTypeWrapper = decltype(isTypeWrapperImpl(std::declval<T*>()));
 
 }  // namespace detail
 
+/* ----------------------------------------- Comparison ----------------------------------------- */
+
+// generate from UA_* type comparison
+
+template <typename T, typename = std::enable_if_t<detail::IsTypeWrapper<T>::value>>
+inline bool operator==(const T& left, const T& right) noexcept {
+    return (*left.handle() == *right.handle());
+}
+
+template <typename T, typename = std::enable_if_t<detail::IsTypeWrapper<T>::value>>
+inline bool operator!=(const T& left, const T& right) noexcept {
+    return (*left.handle() != *right.handle());
+}
+
+template <typename T, typename = std::enable_if_t<detail::IsTypeWrapper<T>::value>>
+inline bool operator<(const T& left, const T& right) noexcept {
+    return (*left.handle() < *right.handle());
+}
+
+template <typename T, typename = std::enable_if_t<detail::IsTypeWrapper<T>::value>>
+inline bool operator>(const T& left, const T& right) noexcept {
+    return (*left.handle() > *right.handle());
+}
+
+template <typename T, typename = std::enable_if_t<detail::IsTypeWrapper<T>::value>>
+inline bool operator<=(const T& left, const T& right) noexcept {
+    return (*left.handle() <= *right.handle());
+}
+
+template <typename T, typename = std::enable_if_t<detail::IsTypeWrapper<T>::value>>
+inline bool operator>=(const T& left, const T& right) noexcept {
+    return (*left.handle() >= *right.handle());
+}
+
 /* ---------------------------------------------------------------------------------------------- */
 
 /**
@@ -151,9 +186,6 @@ public:
     using BaseClass::BaseClass;  // inherit contructors
 
     explicit String(std::string_view str);
-
-    bool operator==(const String& other) const noexcept;
-    bool operator!=(const String& other) const noexcept;
 
     std::string get() const;
     std::string_view getView() const;
@@ -167,9 +199,6 @@ public:
     using BaseClass::BaseClass;  // inherit contructors
 
     Guid(UA_UInt32 data1, UA_UInt16 data2, UA_UInt16 data3, std::array<UA_Byte, 8> data4);
-
-    bool operator==(const Guid& other) const noexcept;
-    bool operator!=(const Guid& other) const noexcept;
 };
 
 /**
@@ -181,9 +210,6 @@ public:
     using BaseClass::BaseClass;  // inherit contructors
 
     explicit ByteString(std::string_view str);
-
-    bool operator==(const ByteString& other) const noexcept;
-    bool operator!=(const ByteString& other) const noexcept;
 
     std::string get() const;
     std::string_view getView() const;
@@ -199,9 +225,6 @@ public:
 
     explicit XmlElement(std::string_view str);
 
-    bool operator==(const XmlElement& other) const noexcept;
-    bool operator!=(const XmlElement& other) const noexcept;
-
     std::string get() const;
     std::string_view getView() const;
 };
@@ -215,9 +238,6 @@ public:
     using BaseClass::BaseClass;  // inherit contructors
 
     QualifiedName(uint16_t namespaceIndex, std::string_view name);
-
-    bool operator==(const QualifiedName& other) const noexcept;
-    bool operator!=(const QualifiedName& other) const noexcept;
 
     uint16_t getNamespaceIndex() const noexcept;
     std::string getName() const;
@@ -233,9 +253,6 @@ public:
     using BaseClass::BaseClass;  // inherit contructors
 
     LocalizedText(std::string_view text, std::string_view locale);
-
-    bool operator==(const LocalizedText& other) const noexcept;
-    bool operator!=(const LocalizedText& other) const noexcept;
 
     std::string getText() const;
     std::string_view getTextView() const;
@@ -262,11 +279,6 @@ public:
     template <typename Clock, typename Duration>
     DateTime(std::chrono::time_point<Clock, Duration> timePoint)  // NOLINT, implicit wanted
         : DateTime(fromTimePoint(timePoint)) {}
-
-    bool operator==(const DateTime& other) const noexcept;
-    bool operator!=(const DateTime& other) const noexcept;
-    bool operator<(const DateTime& other) const noexcept;
-    bool operator>(const DateTime& other) const noexcept;
 
     /// Get current DateTime.
     static DateTime now();
