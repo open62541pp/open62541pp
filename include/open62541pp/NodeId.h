@@ -11,7 +11,10 @@
 
 namespace opcua {
 
-/// Node id types.
+/**
+ * NodeId types.
+ * @see UA_NodeIdType
+ */
 enum class NodeIdType : uint8_t {
     Numeric = UA_NODEIDTYPE_NUMERIC,
     String = UA_NODEIDTYPE_STRING,
@@ -21,6 +24,7 @@ enum class NodeIdType : uint8_t {
 
 /**
  * UA_NodeId wrapper class.
+ * @ingroup TypeWrapper
  */
 class NodeId : public TypeWrapper<UA_NodeId, Type::NodeId> {
 public:
@@ -76,6 +80,7 @@ public:
 
 /**
  * UA_ExpandedNodeId wrapper class.
+ * @ingroup TypeWrapper
  */
 class ExpandedNodeId : public TypeWrapper<UA_ExpandedNodeId, Type::ExpandedNodeId> {
 public:

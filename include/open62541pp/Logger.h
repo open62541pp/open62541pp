@@ -5,6 +5,10 @@
 
 namespace opcua {
 
+/**
+ * Log level.
+ * @see UA_LogLevel
+ */
 enum class LogLevel {
     Trace = 0,
     Debug,
@@ -14,6 +18,10 @@ enum class LogLevel {
     Fatal,
 };
 
+/**
+ * Log category.
+ * @see UA_LogCategory
+ */
 enum class LogCategory {
     Network = 0,
     SecureChannel,
@@ -24,10 +32,12 @@ enum class LogCategory {
     SecurityPolicy,
 };
 
+/// Log function signature.
 using Logger = std::function<void(LogLevel, LogCategory, std::string_view msg)>;
 
 /* -------------------------------------- Utility functions ------------------------------------- */
 
+/// Get name of log level.
 constexpr std::string_view getLogLevelName(LogLevel level) {
     switch (level) {
     case LogLevel::Trace:
@@ -47,6 +57,7 @@ constexpr std::string_view getLogLevelName(LogLevel level) {
     }
 }
 
+/// Get name of log category.
 constexpr std::string_view getLogCategoryName(LogCategory category) {
     switch (category) {
     case LogCategory::Network:

@@ -1,10 +1,11 @@
 <doxygenlayout version="1.0">
   <!-- Navigation index tabs for HTML output -->
   <navindex>
-    <tab type="mainpage" visible="yes" title=""/>
+    <tab type="mainpage" visible="yes" title="Overview"/>
 
-    <tab type="user" url="@ref opcua::Server" title="Server class"/>
-    <tab type="user" url="@ref opcua::Node" title="Node class"/>
+    <tab type="user" url="@ref opcua::Server" title="Server"/>
+    <tab type="user" url="@ref opcua::Node" title="Node"/>
+    <tab type="user" url="@ref TypeWrapper" title="Wrapper"/>
 
     <tab type="usergroup" title="API Reference">
       <!-- <tab type="pages" visible="yes" title="" intro=""/> -->
@@ -41,7 +42,9 @@
 
     <tab type="examples" visible="yes" title="" intro=""/>
 
-    <tab type="user" url="open62541/index.html" title="🔗 open62541 API"/>
-    <tab type="user" url="https://github.com/open62541pp/open62541pp" title="🔗 GitHub"/>
+    <tab type="usergroup" title="Links">
+      <tab type="user" url="open62541/index.html" title="open62541 API"/>
+      <tab type="user" url="https://github.com/open62541pp/open62541pp" title="GitHub"/>
+    </tab>
   </navindex>
 </doxygenlayout>

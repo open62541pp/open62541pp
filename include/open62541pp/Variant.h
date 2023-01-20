@@ -20,6 +20,7 @@ class NodeId;
 
 /**
  * UA_Variant wrapper class.
+ * @ingroup TypeWrapper
  */
 class Variant : public TypeWrapper<UA_Variant, Type::Variant> {
 public:

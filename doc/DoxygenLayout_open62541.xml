@@ -1,7 +1,7 @@
 <doxygenlayout version="1.0">
   <!-- Navigation index tabs for HTML output -->
   <navindex>
-    <tab type="mainpage" visible="yes" title=""/>
+    <tab type="mainpage" visible="yes" title="Overview"/>
 
     <tab type="pages" visible="yes" title="" intro=""/>
     <!-- <tab type="modules" visible="yes" title="" intro=""/> -->
@@ -34,7 +34,9 @@
       <tab type="globals" visible="yes" title="" intro=""/>
     </tab>
 
-    <tab type="user" url="../index.html" title="🔗 open62541++ API"/>
-    <tab type="user" url="https://github.com/open62541/open62541" title="🔗 GitHub"/>
+    <tab type="usergroup" title="Links">
+      <tab type="user" url="../index.html" title="open62541++ API"/>
+      <tab type="user" url="https://github.com/open62541/open62541" title="GitHub"/>
+    </tab>
   </navindex>
 </doxygenlayout>

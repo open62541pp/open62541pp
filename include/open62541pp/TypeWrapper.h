@@ -17,9 +17,19 @@
 namespace opcua {
 
 /**
+ * @defgroup TypeWrapper Wrapper classes of UA_* types
+ *
+ * Safe wrapper classes for heap-allocated open62541 `UA_*` types to prevent memory leaks.
+ * @n
+ * All wrapper classes inherit from opcua::TypeWrapper.
+ * Native open62541 objects can be accessed using the opcua::TypeWrapper::handle() method.
+ */
+
+/**
  * Template base class to wrap UA_* type objects.
  *
  * The derived classes should implement specific constructors to convert from other data types.
+ * @ingroup TypeWrapper
  */
 template <typename T, Type type>
 class TypeWrapper {
@@ -180,6 +190,7 @@ inline bool operator>=(const T& left, const T& right) noexcept {
 
 /**
  * UA_String wrapper class.
+ * @ingroup TypeWrapper
  */
 class String : public TypeWrapper<UA_String, Type::String> {
 public:
@@ -193,6 +204,7 @@ public:
 
 /**
  * UA_Guid wrapper class.
+ * @ingroup TypeWrapper
  */
 class Guid : public TypeWrapper<UA_Guid, Type::Guid> {
 public:
@@ -203,6 +215,7 @@ public:
 
 /**
  * UA_ByteString wrapper class.
+ * @ingroup TypeWrapper
  */
 class ByteString : public TypeWrapper<UA_ByteString, Type::ByteString> {
 public:
@@ -217,6 +230,7 @@ public:
 
 /**
  * UA_XmlElement wrapper class.
+ * @ingroup TypeWrapper
  */
 class XmlElement : public TypeWrapper<UA_XmlElement, Type::XmlElement> {
 public:
@@ -231,6 +245,7 @@ public:
 
 /**
  * UA_QualifiedName wrapper class.
+ * @ingroup TypeWrapper
  */
 class QualifiedName : public TypeWrapper<UA_QualifiedName, Type::QualifiedName> {
 public:
@@ -246,6 +261,7 @@ public:
 
 /**
  * UA_LocalizedText wrapper class.
+ * @ingroup TypeWrapper
  */
 class LocalizedText : public TypeWrapper<UA_LocalizedText, Type::LocalizedText> {
 public:
@@ -267,6 +283,7 @@ public:
  * number of 100 nanosecond intervals since January 1, 1601 (UTC).
  *
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/5.2.2.5
+ * @ingroup TypeWrapper
  */
 class DateTime : public TypeWrapper<UA_DateTime, Type::DateTime> {
 public:
