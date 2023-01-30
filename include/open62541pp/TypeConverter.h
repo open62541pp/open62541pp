@@ -196,7 +196,7 @@ struct TypeConverterNative {
             UA_clear(&dst, getUaDataType<typeGuess>());
             // deep copy
             const auto status = UA_copy(&src, &dst, getUaDataType<typeGuess>());
-            checkStatusCodeException(status);
+            throwOnBadStatus(status);
         }
     }
 

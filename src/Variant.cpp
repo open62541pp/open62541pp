@@ -71,7 +71,7 @@ void Variant::setScalarImpl(void* value, const UA_DataType* type, bool own) noex
 void Variant::setScalarCopyImpl(const void* value, const UA_DataType* type) {
     clear();
     const auto status = UA_Variant_setScalarCopy(handle(), value, type);
-    detail::checkStatusCodeException(status);
+    detail::throwOnBadStatus(status);
     handle()->storageType = UA_VARIANT_DATA;
 }
 
@@ -84,7 +84,7 @@ void Variant::setArrayImpl(void* array, size_t size, const UA_DataType* type, bo
 void Variant::setArrayCopyImpl(const void* array, size_t size, const UA_DataType* type) {
     clear();
     const auto status = UA_Variant_setArrayCopy(handle(), array, size, type);
-    detail::checkStatusCodeException(status);
+    detail::throwOnBadStatus(status);
     handle()->storageType = UA_VARIANT_DATA;
 }
 

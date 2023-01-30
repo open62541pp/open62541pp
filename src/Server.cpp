@@ -50,11 +50,11 @@ public:
 
     void run() {
         if (running_) {
-            throw Exception("OPC UA Server already running");
+            return;
         }
 
         const auto status = UA_Server_run_startup(server_);
-        detail::checkStatusCodeException(status);
+        detail::throwOnBadStatus(status);
         running_ = true;
         while (running_) {
             // references:
@@ -71,7 +71,7 @@ public:
         }
 
         const auto status = UA_Server_run_shutdown(this->server_);
-        detail::checkStatusCodeException(status);
+        detail::throwOnBadStatus(status);
         running_ = false;
     }
 
@@ -129,14 +129,14 @@ private:
 Server::Server()
     : connection_(std::make_shared<Connection>()) {
     const auto status = UA_ServerConfig_setDefault(getConfig());
-    detail::checkStatusCodeException(status);
+    detail::throwOnBadStatus(status);
     connection_->applyDefaults();
 }
 
 Server::Server(uint16_t port)
     : connection_(std::make_shared<Connection>()) {
     const auto status = UA_ServerConfig_setMinimal(getConfig(), port, nullptr);
-    detail::checkStatusCodeException(status);
+    detail::throwOnBadStatus(status);
     connection_->applyDefaults();
 }
 
@@ -145,7 +145,7 @@ Server::Server(uint16_t port, std::string_view certificate)
     const auto status = UA_ServerConfig_setMinimal(
         getConfig(), port, ByteString(certificate).handle()
     );
-    detail::checkStatusCodeException(status);
+    detail::throwOnBadStatus(status);
     connection_->applyDefaults();
 }
 
@@ -233,7 +233,7 @@ void Server::setLogin(const std::vector<Login>& logins, bool allowAnonymous) {
         UA_String_clear(&loginsUa[i].password);
     }
 
-    detail::checkStatusCodeException(status);
+    detail::throwOnBadStatus(status);
 }
 
 void Server::run() {

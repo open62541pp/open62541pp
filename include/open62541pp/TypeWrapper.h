@@ -123,7 +123,7 @@ protected:
     void set(const T& data) {
         clear();
         auto status = UA_copy(&data, &data_, getDataType());  // deep copy of data
-        detail::checkStatusCodeException(status);
+        detail::throwOnBadStatus(status);
         ownsData_ = true;
     }
 

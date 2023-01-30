@@ -43,7 +43,6 @@ TEST_CASE("Server") {
         std::this_thread::sleep_for(100ms);  // wait for thread to execute run method
 
         REQUIRE(server.isRunning());
-        REQUIRE_THROWS(server.run());  // already running
         REQUIRE_NOTHROW(server.stop());
 
         t.join();  // wait until stopped

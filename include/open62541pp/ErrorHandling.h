@@ -7,18 +7,21 @@
 
 namespace opcua {
 
-class Exception : public std::runtime_error {
+class BadStatus : public std::exception {
 public:
-    using std::runtime_error::runtime_error;  // inherit contructors
+    explicit BadStatus(UA_StatusCode code)
+        : code_(code) {}
 
-    explicit Exception(UA_StatusCode statusCode)
-        : std::runtime_error(getStatusMessage(statusCode)) {}
+    UA_StatusCode code() const noexcept {
+        return code_;
+    }
+
+    const char* what() const noexcept override {
+        return UA_StatusCode_name(code_);
+    }
 
 private:
-    static std::string getStatusMessage(UA_StatusCode statusCode) {
-        static const std::string msg{"OPC UA error: "};
-        return msg + UA_StatusCode_name(statusCode);
-    }
+    UA_StatusCode code_;
 };
 
 class InvalidNodeClass : public std::runtime_error {
@@ -33,13 +36,17 @@ public:
 
 namespace detail {
 
-inline constexpr bool checkStatusCode(UA_StatusCode code) noexcept {
+[[nodiscard]] inline constexpr bool isGoodStatus(UA_StatusCode code) noexcept {
     return code == UA_STATUSCODE_GOOD;
 }
 
-inline void checkStatusCodeException(UA_StatusCode code) {
-    if (code != UA_STATUSCODE_GOOD) {
-        throw Exception(code);
+[[nodiscard]] inline constexpr bool isBadStatus(UA_StatusCode code) noexcept {
+    return code != UA_STATUSCODE_GOOD;
+}
+
+inline void throwOnBadStatus(UA_StatusCode code) {
+    if (isBadStatus(code)) {
+        throw BadStatus(code);
     }
 }
 

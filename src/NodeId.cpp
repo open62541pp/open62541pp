@@ -69,7 +69,7 @@ ExpandedNodeId::ExpandedNodeId(
     const NodeId& id, std::string_view namespaceUri, uint32_t serverIndex
 ) {
     const auto status = UA_NodeId_copy(id.handle(), &handle()->nodeId);
-    detail::checkStatusCodeException(status);
+    detail::throwOnBadStatus(status);
     handle()->namespaceUri = detail::allocUaString(namespaceUri);
     handle()->serverIndex = serverIndex;
 }
