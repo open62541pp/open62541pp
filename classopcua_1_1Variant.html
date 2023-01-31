@@ -244,7 +244,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00139">139</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00155">155</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
 <p class="reference">References <a class="elRef" href="open62541/structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">UA_Variant::data</a>, and <a class="el" href="TypeWrapper_8h_source.html#l00103">opcua::TypeWrapper&lt; UA_Variant, Type::Variant &gt;::handle()</a>.</p>
 
@@ -272,11 +272,11 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00150">150</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00166">166</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
 <p class="reference">References <a class="el" href="classopcua_1_1Variant.html#aeb584a86991dc9b25ed22cd94ec06e58">getVariantType()</a>, and <a class="el" href="TypeWrapper_8h_source.html#l00103">opcua::TypeWrapper&lt; UA_Variant, Type::Variant &gt;::handle()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00116">opcua::Node::readArray()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00162">opcua::Node::readArray()</a>.</p>
 
 </div>
 </div>
@@ -348,7 +348,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00121">121</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00137">137</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
 <p class="reference">References <a class="elRef" href="open62541/structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">UA_Variant::data</a>, and <a class="el" href="TypeWrapper_8h_source.html#l00103">opcua::TypeWrapper&lt; UA_Variant, Type::Variant &gt;::handle()</a>.</p>
 
@@ -376,11 +376,11 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00132">132</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00148">148</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
 <p class="reference">References <a class="el" href="classopcua_1_1Variant.html#aeb584a86991dc9b25ed22cd94ec06e58">getVariantType()</a>, and <a class="el" href="TypeWrapper_8h_source.html#l00103">opcua::TypeWrapper&lt; UA_Variant, Type::Variant &gt;::handle()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00108">opcua::Node::read()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00155">opcua::Node::readScalar()</a>.</p>
 
 </div>
 </div>
@@ -409,7 +409,7 @@ template&lt;typename T &gt; </div>
 
 <p>Get variant type. </p>
 
-<p class="reference">Referenced by <a class="el" href="Variant_8h_source.html#l00150">getArrayCopy()</a>, and <a class="el" href="Variant_8h_source.html#l00132">getScalarCopy()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Variant_8h_source.html#l00166">getArrayCopy()</a>, and <a class="el" href="Variant_8h_source.html#l00148">getScalarCopy()</a>.</p>
 
 </div>
 </div>
@@ -606,7 +606,7 @@ template&lt;typename T , Type type&gt; </div>
 
 <p>Assign array (std::vector) to variant. </p>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00195">195</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00211">211</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
 </div>
 </div>
@@ -648,7 +648,9 @@ template&lt;typename T , Type type&gt; </div>
 
 <p>Assign array (raw) to variant. </p>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00185">185</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00201">201</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00180">opcua::Node::writeArray()</a>.</p>
 
 </div>
 </div>
@@ -672,7 +674,7 @@ template&lt;typename T , Type type&gt; </div>
 
 <p>Copy array (std::vector) to variant. </p>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00222">222</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00238">238</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
 </div>
 </div>
@@ -706,7 +708,7 @@ template&lt;typename T , Type type&gt; </div>
 
 <p>Copy array (raw) to variant. </p>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00212">212</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00228">228</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
 </div>
 </div>
@@ -740,9 +742,9 @@ template&lt;typename InputIt , Type type&gt; </div>
 
 <p>Copy range of elements as array to variant. </p>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00200">200</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00216">216</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00100">opcua::Node::writeArray()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00180">opcua::Node::writeArray()</a>.</p>
 
 </div>
 </div>
@@ -774,9 +776,11 @@ template&lt;typename T , Type type&gt; </div>
 
 <p>Assign scalar value to variant. </p>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00159">159</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00175">175</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
 <p class="reference">References <a class="el" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966a492f18b60811bf85ce118c0c6a1a5c4a">opcua::Variant</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00169">opcua::Node::writeScalar()</a>.</p>
 
 </div>
 </div>
@@ -800,11 +804,11 @@ template&lt;typename T , Type type&gt; </div>
 
 <p>Copy scalar value to variant. </p>
 
-<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00174">174</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00190">190</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
 
 <p class="reference">References <a class="el" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966a492f18b60811bf85ce118c0c6a1a5c4a">opcua::Variant</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00092">opcua::Node::write()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00169">opcua::Node::writeScalar()</a>.</p>
 
 </div>
 </div>

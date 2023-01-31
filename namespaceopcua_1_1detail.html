@@ -101,10 +101,12 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a0341d74619a1f847bf0213d6bb4875df"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a0341d74619a1f847bf0213d6bb4875df">checkStatusCode</a> (<a class="elRef" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> code) noexcept</td></tr>
-<tr class="separator:a0341d74619a1f847bf0213d6bb4875df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac26224a3eb61403f507e69b78213cb77"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ac26224a3eb61403f507e69b78213cb77">checkStatusCodeException</a> (<a class="elRef" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> code)</td></tr>
-<tr class="separator:ac26224a3eb61403f507e69b78213cb77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a165af762713831e9cd7e0304bdfea5f4"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a165af762713831e9cd7e0304bdfea5f4">isGoodStatus</a> (<a class="elRef" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> code) noexcept</td></tr>
+<tr class="separator:a165af762713831e9cd7e0304bdfea5f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ce9349b09a0d878daa78d25fe734806"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a6ce9349b09a0d878daa78d25fe734806">isBadStatus</a> (<a class="elRef" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> code) noexcept</td></tr>
+<tr class="separator:a6ce9349b09a0d878daa78d25fe734806"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a223a3f0d15d7e67ba6432496b2b327c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a223a3f0d15d7e67ba6432496b2b327c2">throwOnBadStatus</a> (<a class="elRef" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> code)</td></tr>
+<tr class="separator:a223a3f0d15d7e67ba6432496b2b327c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2d6c41ef470c7426c2acdc2e5f3dccf"><td class="memItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ae2d6c41ef470c7426c2acdc2e5f3dccf">getTypeIndex</a> (<a class="el" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966">Type</a> type)</td></tr>
 <tr class="separator:ae2d6c41ef470c7426c2acdc2e5f3dccf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7881b9291259f504559a6d970bf5cd8"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ad7881b9291259f504559a6d970bf5cd8">getUaDataType</a> (<a class="el" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966">Type</a> type) noexcept</td></tr>
@@ -194,6 +196,12 @@ Functions</h2></td></tr>
 <tr class="separator:ad45795dab04da50d546fdfa8a87cc5c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f5928ebb3f1e8f9eecf59d26eb8310c"><td class="memItemLeft" align="right" valign="top">std::false_type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a7f5928ebb3f1e8f9eecf59d26eb8310c">isTypeWrapperImpl</a> (...)</td></tr>
 <tr class="separator:a7f5928ebb3f1e8f9eecf59d26eb8310c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab34f110c7f3dacdf594f847d15763c8b"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ab34f110c7f3dacdf594f847d15763c8b"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ab34f110c7f3dacdf594f847d15763c8b">isAssignableToVariantScalar</a> ()</td></tr>
+<tr class="separator:ab34f110c7f3dacdf594f847d15763c8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa632bc62614ed8ceb544de6cc3fbd2e9"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:aa632bc62614ed8ceb544de6cc3fbd2e9"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#aa632bc62614ed8ceb544de6cc3fbd2e9">isAssignableToVariantArray</a> ()</td></tr>
+<tr class="separator:aa632bc62614ed8ceb544de6cc3fbd2e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="aad1cfbe232418a890fa98c35c9508acb"></a>
@@ -244,7 +252,7 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Types_8h_source.html#l00039">39</a> of file <a class="el" href="Types_8h_source.html">Types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Types_8h_source.html#l00187">187</a> of file <a class="el" href="Types_8h_source.html">Types.h</a>.</p>
 
 </div>
 </div>
@@ -388,68 +396,6 @@ template&lt;typename T , Type type&gt; </div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00061">61</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
-
-</div>
-</div>
-<a id="a0341d74619a1f847bf0213d6bb4875df"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0341d74619a1f847bf0213d6bb4875df">&#9670;&nbsp;</a></span>checkStatusCode()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr bool opcua::detail::checkStatusCode </td>
-          <td>(</td>
-          <td class="paramtype"><a class="elRef" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td>
-          <td class="paramname"><em>code</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="ErrorHandling_8h_source.html#l00036">36</a> of file <a class="el" href="ErrorHandling_8h_source.html">ErrorHandling.h</a>.</p>
-
-<p class="reference">References <a class="elRef" href="open62541/statuscodes_8h.html#a3c68d30bc6f32228aa43be75fdc9d5aa">UA_STATUSCODE_GOOD</a>.</p>
-
-</div>
-</div>
-<a id="ac26224a3eb61403f507e69b78213cb77"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac26224a3eb61403f507e69b78213cb77">&#9670;&nbsp;</a></span>checkStatusCodeException()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void opcua::detail::checkStatusCodeException </td>
-          <td>(</td>
-          <td class="paramtype"><a class="elRef" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td>
-          <td class="paramname"><em>code</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="ErrorHandling_8h_source.html#l00040">40</a> of file <a class="el" href="ErrorHandling_8h_source.html">ErrorHandling.h</a>.</p>
-
-<p class="reference">References <a class="elRef" href="open62541/statuscodes_8h.html#a3c68d30bc6f32228aa43be75fdc9d5aa">UA_STATUSCODE_GOOD</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="TypeConverter_8h_source.html#l00189">opcua::detail::TypeConverterNative&lt; UA_String, Type::String, Type::ByteString, Type::XmlElement &gt;::fromNative()</a>, and <a class="el" href="TypeWrapper_8h_source.html#l00123">opcua::TypeWrapper&lt; UA_XmlElement, Type::XmlElement &gt;::set()</a>.</p>
 
 </div>
 </div>
@@ -779,6 +725,96 @@ template&lt;typename It &gt; </div>
 
 </div>
 </div>
+<a id="aa632bc62614ed8ceb544de6cc3fbd2e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa632bc62614ed8ceb544de6cc3fbd2e9">&#9670;&nbsp;</a></span>isAssignableToVariantArray()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool opcua::detail::isAssignableToVariantArray </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00128">128</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+
+</div>
+</div>
+<a id="ab34f110c7f3dacdf594f847d15763c8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab34f110c7f3dacdf594f847d15763c8b">&#9670;&nbsp;</a></span>isAssignableToVariantScalar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool opcua::detail::isAssignableToVariantScalar </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Variant_8h_source.html#l00123">123</a> of file <a class="el" href="Variant_8h_source.html">Variant.h</a>.</p>
+
+</div>
+</div>
+<a id="a6ce9349b09a0d878daa78d25fe734806"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ce9349b09a0d878daa78d25fe734806">&#9670;&nbsp;</a></span>isBadStatus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool opcua::detail::isBadStatus </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ErrorHandling_8h_source.html#l00043">43</a> of file <a class="el" href="ErrorHandling_8h_source.html">ErrorHandling.h</a>.</p>
+
+<p class="reference">References <a class="elRef" href="open62541/statuscodes_8h.html#a3c68d30bc6f32228aa43be75fdc9d5aa">UA_STATUSCODE_GOOD</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="ErrorHandling_8h_source.html#l00047">throwOnBadStatus()</a>.</p>
+
+</div>
+</div>
 <a id="ad7bc12ad80fd3f05ffe2cf152c85409d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad7bc12ad80fd3f05ffe2cf152c85409d">&#9670;&nbsp;</a></span>isEmpty()</h2>
 
@@ -813,6 +849,36 @@ template&lt;typename It &gt; </div>
 
 </div>
 </div>
+<a id="a165af762713831e9cd7e0304bdfea5f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a165af762713831e9cd7e0304bdfea5f4">&#9670;&nbsp;</a></span>isGoodStatus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool opcua::detail::isGoodStatus </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ErrorHandling_8h_source.html#l00039">39</a> of file <a class="el" href="ErrorHandling_8h_source.html">ErrorHandling.h</a>.</p>
+
+<p class="reference">References <a class="elRef" href="open62541/statuscodes_8h.html#a3c68d30bc6f32228aa43be75fdc9d5aa">UA_STATUSCODE_GOOD</a>.</p>
+
+</div>
+</div>
 <a id="a6228aef2d981a7d08177926555fd752f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6228aef2d981a7d08177926555fd752f">&#9670;&nbsp;</a></span>isNativeType()</h2>
 
@@ -838,7 +904,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Types_8h_source.html#l00042">42</a> of file <a class="el" href="Types_8h_source.html">Types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Types_8h_source.html#l00190">190</a> of file <a class="el" href="Types_8h_source.html">Types.h</a>.</p>
 
 </div>
 </div>
@@ -940,6 +1006,38 @@ template&lt;typename T &gt; </div>
 <p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00056">56</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
 <p class="reference">References <a class="el" href="TypeConverter_8h_source.html#l00025">opcua::TypeList&lt; T &gt;::contains()</a>.</p>
+
+</div>
+</div>
+<a id="a223a3f0d15d7e67ba6432496b2b327c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a223a3f0d15d7e67ba6432496b2b327c2">&#9670;&nbsp;</a></span>throwOnBadStatus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::detail::throwOnBadStatus </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ErrorHandling_8h_source.html#l00047">47</a> of file <a class="el" href="ErrorHandling_8h_source.html">ErrorHandling.h</a>.</p>
+
+<p class="reference">References <a class="el" href="ErrorHandling_8h_source.html#l00043">isBadStatus()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="TypeConverter_8h_source.html#l00189">opcua::detail::TypeConverterNative&lt; UA_String, Type::String, Type::ByteString, Type::XmlElement &gt;::fromNative()</a>, and <a class="el" href="TypeWrapper_8h_source.html#l00123">opcua::TypeWrapper&lt; UA_XmlElement, Type::XmlElement &gt;::set()</a>.</p>
 
 </div>
 </div>

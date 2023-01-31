@@ -152,18 +152,36 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a4888c716c3ba25492de57d78bbb7f792"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a550584aabf588cd3b89f46bf1a9927db"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a550584aabf588cd3b89f46bf1a9927db">addVariableType</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::string_view browseName, <a class="el" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966">Type</a> type)</td></tr>
 <tr class="separator:a550584aabf588cd3b89f46bf1a9927db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a729af7668ad251ac813ce54a7ca4635d"><td class="memTemplParams" colspan="2">template&lt;typename Arg &gt; </td></tr>
-<tr class="memitem:a729af7668ad251ac813ce54a7ca4635d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a729af7668ad251ac813ce54a7ca4635d">write</a> (Arg &amp;&amp;arg)</td></tr>
-<tr class="separator:a729af7668ad251ac813ce54a7ca4635d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab78c2057b94e662e71750f63f80c606e"><td class="memTemplParams" colspan="2">template&lt;typename Arg &gt; </td></tr>
-<tr class="memitem:ab78c2057b94e662e71750f63f80c606e"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#ab78c2057b94e662e71750f63f80c606e">writeArray</a> (Arg &amp;&amp;arg)</td></tr>
-<tr class="separator:ab78c2057b94e662e71750f63f80c606e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adadba834635108fca14faeb3fcd74d89"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:adadba834635108fca14faeb3fcd74d89"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#adadba834635108fca14faeb3fcd74d89">read</a> ()</td></tr>
-<tr class="separator:adadba834635108fca14faeb3fcd74d89"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9a7d1e6b1fe819a9fef101d7aca201c"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:aa9a7d1e6b1fe819a9fef101d7aca201c"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#aa9a7d1e6b1fe819a9fef101d7aca201c">readArray</a> ()</td></tr>
-<tr class="separator:aa9a7d1e6b1fe819a9fef101d7aca201c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b858b5cf77426c18e2b9a394ff7d087"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a0b858b5cf77426c18e2b9a394ff7d087">readValue</a> (<a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;variant)</td></tr>
+<tr class="memdesc:a0b858b5cf77426c18e2b9a394ff7d087"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read value from variable node as <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> object.  <a href="classopcua_1_1Node.html#a0b858b5cf77426c18e2b9a394ff7d087">More...</a><br /></td></tr>
+<tr class="separator:a0b858b5cf77426c18e2b9a394ff7d087"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c28bf3c7d5a6b860a719f980802bf87"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a4c28bf3c7d5a6b860a719f980802bf87"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a4c28bf3c7d5a6b860a719f980802bf87">readScalar</a> ()</td></tr>
+<tr class="memdesc:a4c28bf3c7d5a6b860a719f980802bf87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read scalar from variable node.  <a href="classopcua_1_1Node.html#a4c28bf3c7d5a6b860a719f980802bf87">More...</a><br /></td></tr>
+<tr class="separator:a4c28bf3c7d5a6b860a719f980802bf87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a873853591e70a3c96e594698bb4a7f7a"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a873853591e70a3c96e594698bb4a7f7a"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a873853591e70a3c96e594698bb4a7f7a">readArray</a> ()</td></tr>
+<tr class="memdesc:a873853591e70a3c96e594698bb4a7f7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read array from variable node.  <a href="classopcua_1_1Node.html#a873853591e70a3c96e594698bb4a7f7a">More...</a><br /></td></tr>
+<tr class="separator:a873853591e70a3c96e594698bb4a7f7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acccd1d61744a271a22bffbc4e1df2f61"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#acccd1d61744a271a22bffbc4e1df2f61">writeValue</a> (const <a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;variant)</td></tr>
+<tr class="memdesc:acccd1d61744a271a22bffbc4e1df2f61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> to variable node.  <a href="classopcua_1_1Node.html#acccd1d61744a271a22bffbc4e1df2f61">More...</a><br /></td></tr>
+<tr class="separator:acccd1d61744a271a22bffbc4e1df2f61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c6d1ef783d3cf59bd003c36e69e7162"><td class="memTemplParams" colspan="2">template&lt;typename T , Type type = detail::guessType&lt;T&gt;()&gt; </td></tr>
+<tr class="memitem:a5c6d1ef783d3cf59bd003c36e69e7162"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a5c6d1ef783d3cf59bd003c36e69e7162">writeScalar</a> (const T &amp;value)</td></tr>
+<tr class="memdesc:a5c6d1ef783d3cf59bd003c36e69e7162"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write scalar to variable node.  <a href="classopcua_1_1Node.html#a5c6d1ef783d3cf59bd003c36e69e7162">More...</a><br /></td></tr>
+<tr class="separator:a5c6d1ef783d3cf59bd003c36e69e7162"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a163df53e7c39eaa4178d6f374735721e"><td class="memTemplParams" colspan="2">template&lt;typename T , Type type = detail::guessType&lt;T&gt;()&gt; </td></tr>
+<tr class="memitem:a163df53e7c39eaa4178d6f374735721e"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a163df53e7c39eaa4178d6f374735721e">writeArray</a> (const T *array, size_t size)</td></tr>
+<tr class="memdesc:a163df53e7c39eaa4178d6f374735721e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write array (raw) to variable node.  <a href="classopcua_1_1Node.html#a163df53e7c39eaa4178d6f374735721e">More...</a><br /></td></tr>
+<tr class="separator:a163df53e7c39eaa4178d6f374735721e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cec05dc658eb096d733d3e8f4a4b926"><td class="memTemplParams" colspan="2">template&lt;typename T , Type type = detail::guessType&lt;T&gt;()&gt; </td></tr>
+<tr class="memitem:a1cec05dc658eb096d733d3e8f4a4b926"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a1cec05dc658eb096d733d3e8f4a4b926">writeArray</a> (const std::vector&lt; T &gt; &amp;array)</td></tr>
+<tr class="memdesc:a1cec05dc658eb096d733d3e8f4a4b926"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write array (std::vector) to variable node.  <a href="classopcua_1_1Node.html#a1cec05dc658eb096d733d3e8f4a4b926">More...</a><br /></td></tr>
+<tr class="separator:a1cec05dc658eb096d733d3e8f4a4b926"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67a0fa913075fcedd69729145755f04b"><td class="memTemplParams" colspan="2">template&lt;typename InputIt , Type type = detail::guessTypeFromIterator&lt;InputIt&gt;()&gt; </td></tr>
+<tr class="memitem:a67a0fa913075fcedd69729145755f04b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a67a0fa913075fcedd69729145755f04b">writeArray</a> (InputIt first, InputIt last)</td></tr>
+<tr class="memdesc:a67a0fa913075fcedd69729145755f04b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write range of elements as array to variable node.  <a href="classopcua_1_1Node.html#a67a0fa913075fcedd69729145755f04b">More...</a><br /></td></tr>
+<tr class="separator:a67a0fa913075fcedd69729145755f04b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c4c9148c89ce8dd8d4ccf92708dd3d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a9c4c9148c89ce8dd8d4ccf92708dd3d1">remove</a> ()</td></tr>
 <tr class="separator:a9c4c9148c89ce8dd8d4ccf92708dd3d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -175,16 +193,12 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a75183b569bf8dcfdf2f32ec7531d2ead"><td class="memTemplParams" colspan="2">template&lt;typename... Ts&gt; </td></tr>
 <tr class="memitem:a75183b569bf8dcfdf2f32ec7531d2ead"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a75183b569bf8dcfdf2f32ec7531d2ead">requireNodeClass</a> (Ts &amp;&amp;... classes)</td></tr>
 <tr class="separator:a75183b569bf8dcfdf2f32ec7531d2ead"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab826da68b3953a8017ae4c9f57dcbfdf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#ab826da68b3953a8017ae4c9f57dcbfdf">writeVariantToServer</a> (<a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;var)</td></tr>
-<tr class="separator:ab826da68b3953a8017ae4c9f57dcbfdf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9759c0ee8b8a828f84d8b4e27daee496"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a9759c0ee8b8a828f84d8b4e27daee496">readVariantFromServer</a> (<a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;var) noexcept</td></tr>
-<tr class="separator:a9759c0ee8b8a828f84d8b4e27daee496"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>High-level node object, to access node attribute, browse and populate address space. </p>
 <p><a class="el" href="classopcua_1_1Node.html" title="High-level node object, to access node attribute, browse and populate address space.">Node</a> objects are usefull as-is but they do not expose the entire OPC UA protocol. You can get access to the associated <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> instance with the <a class="el" href="classopcua_1_1Node.html#a587319b569db88f3a33a422579662ed6" title="Get node id.">getNodeId()</a> method and apply the native open62541 functions. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00025">25</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00024">24</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a419b6b917de62aa5bfc13f076c53ef98"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a419b6b917de62aa5bfc13f076c53ef98">&#9670;&nbsp;</a></span>Node()</h2>
@@ -633,99 +647,75 @@ template&lt;typename... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00127">127</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00130">130</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00133">requireNodeClass()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00136">requireNodeClass()</a>.</p>
 
 </div>
 </div>
-<a id="adadba834635108fca14faeb3fcd74d89"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adadba834635108fca14faeb3fcd74d89">&#9670;&nbsp;</a></span>read()</h2>
+<a id="a873853591e70a3c96e594698bb4a7f7a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a873853591e70a3c96e594698bb4a7f7a">&#9670;&nbsp;</a></span>readArray()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">T opcua::Node::read </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td class="memname">std::vector&lt; T &gt; opcua::Node::readArray</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00108">108</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p>Read array from variable node. </p>
 
-<p class="reference">References <a class="el" href="Variant_8h_source.html#l00132">opcua::Variant::getScalarCopy()</a>, <a class="el" href="classopcua_1_1Node.html#a9759c0ee8b8a828f84d8b4e27daee496">readVariantFromServer()</a>, <a class="el" href="Node_8h_source.html#l00133">requireNodeClass()</a>, and <a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6da47c14840d8e15331fa420b9b2f757cd9">opcua::Variable</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00162">162</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+
+<p class="reference">References <a class="el" href="Variant_8h_source.html#l00166">opcua::Variant::getArrayCopy()</a>, and <a class="el" href="classopcua_1_1Node.html#a0b858b5cf77426c18e2b9a394ff7d087">readValue()</a>.</p>
 
 </div>
 </div>
-<a id="aa9a7d1e6b1fe819a9fef101d7aca201c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa9a7d1e6b1fe819a9fef101d7aca201c">&#9670;&nbsp;</a></span>readArray()</h2>
+<a id="a4c28bf3c7d5a6b860a719f980802bf87"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c28bf3c7d5a6b860a719f980802bf87">&#9670;&nbsp;</a></span>readScalar()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;T&gt; opcua::Node::readArray </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td class="memname">T opcua::Node::readScalar</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00116">116</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p>Read scalar from variable node. </p>
 
-<p class="reference">References <a class="el" href="Variant_8h_source.html#l00150">opcua::Variant::getArrayCopy()</a>, <a class="el" href="classopcua_1_1Node.html#a9759c0ee8b8a828f84d8b4e27daee496">readVariantFromServer()</a>, <a class="el" href="Node_8h_source.html#l00133">requireNodeClass()</a>, and <a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6da47c14840d8e15331fa420b9b2f757cd9">opcua::Variable</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00155">155</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+
+<p class="reference">References <a class="el" href="Variant_8h_source.html#l00148">opcua::Variant::getScalarCopy()</a>, and <a class="el" href="classopcua_1_1Node.html#a0b858b5cf77426c18e2b9a394ff7d087">readValue()</a>.</p>
 
 </div>
 </div>
-<a id="a9759c0ee8b8a828f84d8b4e27daee496"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9759c0ee8b8a828f84d8b4e27daee496">&#9670;&nbsp;</a></span>readVariantFromServer()</h2>
+<a id="a0b858b5cf77426c18e2b9a394ff7d087"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b858b5cf77426c18e2b9a394ff7d087">&#9670;&nbsp;</a></span>readValue()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::Node::readVariantFromServer </td>
+          <td class="memname">void opcua::Node::readValue </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;&#160;</td>
-          <td class="paramname"><em>var</em></td><td>)</td>
+          <td class="paramname"><em>variant</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00108">read()</a>, and <a class="el" href="Node_8h_source.html#l00116">readArray()</a>.</p>
+<p>Read value from variable node as <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> object. </p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00162">readArray()</a>, and <a class="el" href="Node_8h_source.html#l00155">readScalar()</a>.</p>
 
 </div>
 </div>
@@ -772,11 +762,9 @@ template&lt;typename... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00133">133</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00136">136</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Types_8h_source.html#l00095">opcua::getNodeClassName()</a>, and <a class="el" href="Node_8h_source.html#l00127">isNodeClass()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00108">read()</a>, <a class="el" href="Node_8h_source.html#l00116">readArray()</a>, <a class="el" href="Node_8h_source.html#l00092">write()</a>, and <a class="el" href="Node_8h_source.html#l00100">writeArray()</a>.</p>
+<p class="reference">References <a class="el" href="Types_8h_source.html#l00065">opcua::getNodeClassName()</a>, and <a class="el" href="Node_8h_source.html#l00130">isNodeClass()</a>.</p>
 
 </div>
 </div>
@@ -962,95 +950,147 @@ template&lt;typename... Ts&gt; </div>
 
 </div>
 </div>
-<a id="a729af7668ad251ac813ce54a7ca4635d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a729af7668ad251ac813ce54a7ca4635d">&#9670;&nbsp;</a></span>write()</h2>
+<a id="a1cec05dc658eb096d733d3e8f4a4b926"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cec05dc658eb096d733d3e8f4a4b926">&#9670;&nbsp;</a></span>writeArray() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Arg &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void opcua::Node::write </td>
-          <td>(</td>
-          <td class="paramtype">Arg &amp;&amp;&#160;</td>
-          <td class="paramname"><em>arg</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00092">92</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
-
-<p class="reference">References <a class="el" href="Node_8h_source.html#l00133">requireNodeClass()</a>, <a class="el" href="Variant_8h_source.html#l00174">opcua::Variant::setScalarCopy()</a>, <a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6da47c14840d8e15331fa420b9b2f757cd9">opcua::Variable</a>, and <a class="el" href="classopcua_1_1Node.html#ab826da68b3953a8017ae4c9f57dcbfdf">writeVariantToServer()</a>.</p>
-
-</div>
-</div>
-<a id="ab78c2057b94e662e71750f63f80c606e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab78c2057b94e662e71750f63f80c606e">&#9670;&nbsp;</a></span>writeArray()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename Arg &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
+template&lt;typename T , Type type&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">void opcua::Node::writeArray </td>
           <td>(</td>
-          <td class="paramtype">Arg &amp;&amp;&#160;</td>
-          <td class="paramname"><em>arg</em></td><td>)</td>
+          <td class="paramtype">const std::vector&lt; T &gt; &amp;&#160;</td>
+          <td class="paramname"><em>array</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00100">100</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p>Write array (std::vector) to variable node. </p>
 
-<p class="reference">References <a class="el" href="Node_8h_source.html#l00133">requireNodeClass()</a>, <a class="el" href="Variant_8h_source.html#l00200">opcua::Variant::setArrayCopy()</a>, <a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6da47c14840d8e15331fa420b9b2f757cd9">opcua::Variable</a>, and <a class="el" href="classopcua_1_1Node.html#ab826da68b3953a8017ae4c9f57dcbfdf">writeVariantToServer()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00191">191</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
-<a id="ab826da68b3953a8017ae4c9f57dcbfdf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab826da68b3953a8017ae4c9f57dcbfdf">&#9670;&nbsp;</a></span>writeVariantToServer()</h2>
+<a id="a163df53e7c39eaa4178d6f374735721e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a163df53e7c39eaa4178d6f374735721e">&#9670;&nbsp;</a></span>writeArray() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
+<div class="memtemplate">
+template&lt;typename T , Type type&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::Node::writeVariantToServer </td>
+          <td class="memname">void opcua::Node::writeArray </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;&#160;</td>
-          <td class="paramname"><em>var</em></td><td>)</td>
+          <td class="paramtype">const T *&#160;</td>
+          <td class="paramname"><em>array</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Write array (raw) to variable node. </p>
+
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00180">180</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+
+<p class="reference">References <a class="el" href="Variant_8h_source.html#l00201">opcua::Variant::setArray()</a>, <a class="el" href="Variant_8h_source.html#l00216">opcua::Variant::setArrayCopy()</a>, and <a class="el" href="classopcua_1_1Node.html#acccd1d61744a271a22bffbc4e1df2f61">writeValue()</a>.</p>
+
+</div>
+</div>
+<a id="a67a0fa913075fcedd69729145755f04b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67a0fa913075fcedd69729145755f04b">&#9670;&nbsp;</a></span>writeArray() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename InputIt , Type type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::Node::writeArray </td>
+          <td>(</td>
+          <td class="paramtype">InputIt&#160;</td>
+          <td class="paramname"><em>first</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">InputIt&#160;</td>
+          <td class="paramname"><em>last</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Write range of elements as array to variable node. </p>
+
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00196">196</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+
+<p class="reference">References <a class="el" href="Variant_8h_source.html#l00216">opcua::Variant::setArrayCopy()</a>, and <a class="el" href="classopcua_1_1Node.html#acccd1d61744a271a22bffbc4e1df2f61">writeValue()</a>.</p>
+
+</div>
+</div>
+<a id="a5c6d1ef783d3cf59bd003c36e69e7162"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c6d1ef783d3cf59bd003c36e69e7162">&#9670;&nbsp;</a></span>writeScalar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , Type type&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::Node::writeScalar </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00092">write()</a>, and <a class="el" href="Node_8h_source.html#l00100">writeArray()</a>.</p>
+<p>Write scalar to variable node. </p>
+
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00169">169</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+
+<p class="reference">References <a class="el" href="Variant_8h_source.html#l00175">opcua::Variant::setScalar()</a>, <a class="el" href="Variant_8h_source.html#l00190">opcua::Variant::setScalarCopy()</a>, and <a class="el" href="classopcua_1_1Node.html#acccd1d61744a271a22bffbc4e1df2f61">writeValue()</a>.</p>
+
+</div>
+</div>
+<a id="acccd1d61744a271a22bffbc4e1df2f61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acccd1d61744a271a22bffbc4e1df2f61">&#9670;&nbsp;</a></span>writeValue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::Node::writeValue </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;&#160;</td>
+          <td class="paramname"><em>variant</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Write <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> to variable node. </p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00180">writeArray()</a>, and <a class="el" href="Node_8h_source.html#l00169">writeScalar()</a>.</p>
 
 </div>
 </div>

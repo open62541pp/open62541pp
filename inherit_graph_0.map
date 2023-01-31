@@ -1,6 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" title=" " alt="" coords="5,56,116,83"/>
-<area shape="rect" id="node2" href="$classopcua_1_1BadVariantAccess.html" title=" " alt="" coords="164,5,349,32"/>
-<area shape="rect" id="node3" href="$classopcua_1_1Exception.html" title=" " alt="" coords="190,56,323,83"/>
-<area shape="rect" id="node4" href="$classopcua_1_1InvalidNodeClass.html" title=" " alt="" coords="165,107,348,133"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,5,92,32"/>
+<area shape="rect" id="node2" href="$classopcua_1_1BadStatus.html" title=" " alt="" coords="140,5,275,32"/>
 </map>

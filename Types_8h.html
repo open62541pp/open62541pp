@@ -145,6 +145,7 @@ Enumerations</h2></td></tr>
 &#160;&#160;<a class="el" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966a8cf91e40a55574aea32f6312f5f88b11">opcua::Type::DiagnosticInfo</a> = UA_TYPES_DIAGNOSTICINFO
 <br />
  }</td></tr>
+<tr class="memdesc:adc25953f10b26dc1213b1033d44f5966"><td class="mdescLeft">&#160;</td><td class="mdescRight">Built-in types.  <a href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966">More...</a><br /></td></tr>
 <tr class="separator:adc25953f10b26dc1213b1033d44f5966"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6dbdabe373cb5094cafbeede49c4df6d"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6d">opcua::NodeClass</a> : uint16_t { <br />
 &#160;&#160;<a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6da6fcdc090caeade09d0efd6253932b6f5">opcua::NodeClass::Unspecified</a> = UA_NODECLASS_UNSPECIFIED, 
@@ -160,6 +161,7 @@ Enumerations</h2></td></tr>
 &#160;&#160;<a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6da4351cfebe4b61d8aa5efa1d020710005">opcua::NodeClass::View</a> = UA_NODECLASS_VIEW
 <br />
  }</td></tr>
+<tr class="memdesc:a6dbdabe373cb5094cafbeede49c4df6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Node classes.  <a href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6d">More...</a><br /></td></tr>
 <tr class="separator:a6dbdabe373cb5094cafbeede49c4df6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41f8481e3c1494130327dca210329383"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383">opcua::ValueRank</a> : int32_t { <br />
 &#160;&#160;<a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383abc975004cfa0419c12cf23c09de61693">opcua::ValueRank::ScalarOrOneDimension</a> = UA_VALUERANK_SCALAR_OR_ONE_DIMENSION, 
@@ -172,6 +174,7 @@ Enumerations</h2></td></tr>
 <a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383a51a61e50c9f54972a59badc671694215">opcua::ValueRank::ThreeDimensions</a> = UA_VALUERANK_THREE_DIMENSIONS
 <br />
  }</td></tr>
+<tr class="memdesc:a41f8481e3c1494130327dca210329383"><td class="mdescLeft">&#160;</td><td class="mdescRight">Value rank.  <a href="namespaceopcua.html#a41f8481e3c1494130327dca210329383">More...</a><br /></td></tr>
 <tr class="separator:a41f8481e3c1494130327dca210329383"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a807c61ccff66808c3559158c33d5463b"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463b">opcua::ReferenceType</a> : uint16_t { <br />
 &#160;&#160;<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463bad95867deadfe690e40f42068d6b59df8">opcua::ReferenceType::References</a> = UA_NS0ID_REFERENCES, 
@@ -234,11 +237,12 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:ad182a23245c77059754cdcf093309a69"><td class="memItemLeft" align="right" valign="top">constexpr std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#ad182a23245c77059754cdcf093309a69">opcua::getNodeClassName</a> (NodeClass nodeClass)</td></tr>
+<tr class="memdesc:ad182a23245c77059754cdcf093309a69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get name of node class.  <a href="namespaceopcua.html#ad182a23245c77059754cdcf093309a69">More...</a><br /></td></tr>
+<tr class="separator:ad182a23245c77059754cdcf093309a69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6228aef2d981a7d08177926555fd752f"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a6228aef2d981a7d08177926555fd752f"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a6228aef2d981a7d08177926555fd752f">opcua::detail::isNativeType</a> ()</td></tr>
 <tr class="separator:a6228aef2d981a7d08177926555fd752f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad182a23245c77059754cdcf093309a69"><td class="memItemLeft" align="right" valign="top">constexpr std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#ad182a23245c77059754cdcf093309a69">opcua::getNodeClassName</a> (NodeClass nodeClass)</td></tr>
-<tr class="separator:ad182a23245c77059754cdcf093309a69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

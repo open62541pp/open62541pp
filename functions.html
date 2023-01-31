@@ -89,6 +89,9 @@ $(function() {
 
 
 <h3><a id="index_b"></a>- b -</h3><ul>
+<li>BadStatus()
+: <a class="el" href="classopcua_1_1BadStatus.html#a5a621aadcf026462f72ca35f385a17e8">opcua::BadStatus</a>
+</li>
 <li>BaseClass
 : <a class="el" href="classopcua_1_1TypeWrapper.html#ab589d88dc65dc99a9f8fd3e54c3170f9">opcua::TypeWrapper&lt; T, type &gt;</a>
 </li>
@@ -101,6 +104,9 @@ $(function() {
 <h3><a id="index_c"></a>- c -</h3><ul>
 <li>clear()
 : <a class="el" href="classopcua_1_1TypeWrapper.html#a66a1c9d61aebe7893d8a574598e76811">opcua::TypeWrapper&lt; T, type &gt;</a>
+</li>
+<li>code()
+: <a class="el" href="classopcua_1_1BadStatus.html#aa157f985a878295568af33aa718cf520">opcua::BadStatus</a>
 </li>
 <li>contains()
 : <a class="el" href="structopcua_1_1TypeList.html#a44c81393cc7457bf69e7cda3b678218f">opcua::TypeList&lt; T &gt;</a>
@@ -119,9 +125,6 @@ $(function() {
 
 
 <h3><a id="index_e"></a>- e -</h3><ul>
-<li>Exception()
-: <a class="el" href="classopcua_1_1Exception.html#ac87cbec4e68732dfabbafbc4245d9b15">opcua::Exception</a>
-</li>
 <li>ExpandedNodeId()
 : <a class="el" href="classopcua_1_1ExpandedNodeId.html#ae31ffcd5194d705aab1ed0a3417e16ea">opcua::ExpandedNodeId</a>
 </li>
@@ -137,7 +140,7 @@ $(function() {
 , <a class="el" href="structopcua_1_1TypeConverter_3_01WrapperType_00_01std_1_1enable__if__t_3_01detail_1_1IsTypeWrappcc7e8e511c407d0e9e16d044c83436e7.html#af826a58802028dbabbcd60b6bafdad97">opcua::TypeConverter&lt; WrapperType, std::enable_if_t&lt; detail::IsTypeWrapper&lt; WrapperType &gt;::value &gt; &gt;</a>
 </li>
 <li>fromTimePoint()
-: <a class="el" href="classopcua_1_1DateTime.html#a83dd8633f71eaa51ba3afb67fdd5be18">opcua::DateTime</a>
+: <a class="el" href="classopcua_1_1DateTime.html#a091d2cc80be986870f9703b1044c122c">opcua::DateTime</a>
 </li>
 <li>fromUnixTime()
 : <a class="el" href="classopcua_1_1DateTime.html#ac0dad2a365f529b7e14275a8af04e9fc">opcua::DateTime</a>
@@ -378,14 +381,14 @@ $(function() {
 
 
 <h3><a id="index_r"></a>- r -</h3><ul>
-<li>read()
-: <a class="el" href="classopcua_1_1Node.html#adadba834635108fca14faeb3fcd74d89">opcua::Node</a>
-</li>
 <li>readArray()
-: <a class="el" href="classopcua_1_1Node.html#aa9a7d1e6b1fe819a9fef101d7aca201c">opcua::Node</a>
+: <a class="el" href="classopcua_1_1Node.html#a873853591e70a3c96e594698bb4a7f7a">opcua::Node</a>
 </li>
-<li>readVariantFromServer()
-: <a class="el" href="classopcua_1_1Node.html#a9759c0ee8b8a828f84d8b4e27daee496">opcua::Node</a>
+<li>readScalar()
+: <a class="el" href="classopcua_1_1Node.html#a4c28bf3c7d5a6b860a719f980802bf87">opcua::Node</a>
+</li>
+<li>readValue()
+: <a class="el" href="classopcua_1_1Node.html#a0b858b5cf77426c18e2b9a394ff7d087">opcua::Node</a>
 </li>
 <li>registerNamespace()
 : <a class="el" href="classopcua_1_1Server.html#a7231db8ed95e021dd467e7f26ad2f308">opcua::Server</a>
@@ -493,7 +496,7 @@ $(function() {
 : <a class="el" href="classopcua_1_1DateTime.html#a1811e55104957d60b31663079821766b">opcua::DateTime</a>
 </li>
 <li>toTimePoint()
-: <a class="el" href="classopcua_1_1DateTime.html#ae8a63f0cc85467f0b9ce07786b3579b4">opcua::DateTime</a>
+: <a class="el" href="classopcua_1_1DateTime.html#adf4172f40087c213d7ab7932286387f4">opcua::DateTime</a>
 </li>
 <li>toUnixTime()
 : <a class="el" href="classopcua_1_1DateTime.html#adc353a4249491905d5a329765557a019">opcua::DateTime</a>
@@ -539,14 +542,17 @@ $(function() {
 
 
 <h3><a id="index_w"></a>- w -</h3><ul>
-<li>write()
-: <a class="el" href="classopcua_1_1Node.html#a729af7668ad251ac813ce54a7ca4635d">opcua::Node</a>
+<li>what()
+: <a class="el" href="classopcua_1_1BadStatus.html#a74b046a81a1f366bc9db8354d9d19c18">opcua::BadStatus</a>
 </li>
 <li>writeArray()
-: <a class="el" href="classopcua_1_1Node.html#ab78c2057b94e662e71750f63f80c606e">opcua::Node</a>
+: <a class="el" href="classopcua_1_1Node.html#a163df53e7c39eaa4178d6f374735721e">opcua::Node</a>
 </li>
-<li>writeVariantToServer()
-: <a class="el" href="classopcua_1_1Node.html#ab826da68b3953a8017ae4c9f57dcbfdf">opcua::Node</a>
+<li>writeScalar()
+: <a class="el" href="classopcua_1_1Node.html#a5c6d1ef783d3cf59bd003c36e69e7162">opcua::Node</a>
+</li>
+<li>writeValue()
+: <a class="el" href="classopcua_1_1Node.html#acccd1d61744a271a22bffbc4e1df2f61">opcua::Node</a>
 </li>
 </ul>
 

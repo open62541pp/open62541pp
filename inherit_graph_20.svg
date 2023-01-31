@@ -14,18 +14,18 @@
 <g id="a_node1"><a xlink:href="structopcua_1_1detail_1_1TypeConverterNative.html" target="_top" xlink:title=" ">
 <polygon fill="none" stroke="black" points="0,-0.5 0,-41.5 156,-41.5 156,-0.5 0,-0.5"/>
 <text text-anchor="start" x="8" y="-29.5" font-family="Helvetica,sans-Serif" font-size="10.00">opcua::detail::TypeConverter</text>
-<text text-anchor="start" x="8" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">Native&lt; UA_UInt32, Type</text>
-<text text-anchor="middle" x="78" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">::UInt32 &gt;</text>
+<text text-anchor="start" x="8" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">Native&lt; UA_UInt16, Type</text>
+<text text-anchor="middle" x="78" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">::UInt16 &gt;</text>
 </a>
 </g>
 </g>
 <!-- Node1 -->
 <g id="node2" class="node">
 <title>Node1</title>
-<g id="a_node2"><a xlink:href="structopcua_1_1TypeConverter_3_01UA__UInt32_01_4.html" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="structopcua_1_1TypeConverter_3_01UA__UInt16_01_4.html" target="_top" xlink:title=" ">
 <polygon fill="none" stroke="black" points="192,-6 192,-36 314,-36 314,-6 192,-6"/>
 <text text-anchor="start" x="200" y="-24" font-family="Helvetica,sans-Serif" font-size="10.00">opcua::TypeConverter</text>
-<text text-anchor="middle" x="253" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; UA_UInt32 &gt;</text>
+<text text-anchor="middle" x="253" y="-13" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; UA_UInt16 &gt;</text>
 </a>
 </g>
 </g>
