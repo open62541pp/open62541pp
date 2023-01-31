@@ -248,9 +248,9 @@ Node Node::addObjectType(const NodeId& id, std::string_view browseName) {
     const auto status = UA_Server_addObjectTypeNode(
         server_.handle(),  // server
         *id.handle(),  // new requested id
-        UA_NODEID_NUMERIC(0, UA_NS0ID_BASEOBJECTTYPE),  // parent id
-        UA_NODEID_NUMERIC(ns, UA_NS0ID_ORGANIZES),  // reference id
-        *QualifiedName(0, browseName).handle(),  // browse name
+        *nodeId_.handle(),  // parent id
+        UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES),  // reference id
+        *QualifiedName(ns, browseName).handle(),  // browse name
         attr,  // object attributes
         nullptr,  // node context
         nullptr  // output new node id
