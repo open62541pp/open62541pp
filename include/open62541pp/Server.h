@@ -61,7 +61,7 @@ public:
     bool isRunning() const noexcept;
 
     /// Register namespace. The new namespace index will be returned.
-    uint16_t registerNamespace(std::string_view name);
+    [[nodiscard]] uint16_t registerNamespace(std::string_view name);
 
     Node getNode(const NodeId& id);
     Node getRootNode();
