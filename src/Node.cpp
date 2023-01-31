@@ -279,6 +279,16 @@ Node Node::addVariableType(const NodeId& id, std::string_view browseName, Type t
     return {server_, id};
 }
 
+void Node::writeValue(const Variant& var) {
+    const auto status = UA_Server_writeValue(server_.handle(), *nodeId_.handle(), *var.handle());
+    detail::throwOnBadStatus(status);
+}
+
+void Node::readValue(Variant& var) {
+    const auto status = UA_Server_readValue(server_.handle(), *nodeId_.handle(), var.handle());
+    detail::throwOnBadStatus(status);
+}
+
 void Node::remove() {
     const auto status = UA_Server_deleteNode(
         server_.handle(),
@@ -286,15 +296,6 @@ void Node::remove() {
         true  // remove all references
     );
     detail::throwOnBadStatus(status);
-}
-
-void Node::writeVariantToServer(Variant& var) {
-    const auto status = UA_Server_writeValue(server_.handle(), *nodeId_.handle(), *var.handle());
-    detail::throwOnBadStatus(status);
-}
-
-void Node::readVariantFromServer(Variant& var) noexcept {
-    UA_Server_readValue(server_.handle(), *nodeId_.handle(), var.handle());
 }
 
 }  // namespace opcua

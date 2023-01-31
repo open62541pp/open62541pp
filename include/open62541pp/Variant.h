@@ -115,7 +115,23 @@ private:
     void setArrayCopyImpl(const void* array, size_t size, const UA_DataType* type);
 };
 
-/* ---------------------------------------------------------------------------------------------- */
+/* ------------------------------------------- Helper ------------------------------------------- */
+
+namespace detail {
+
+template <typename T>
+constexpr bool isAssignableToVariantScalar() {
+    return detail::isNativeType<T>() || detail::IsTypeWrapper<T>::value;
+}
+
+template <typename T>
+constexpr bool isAssignableToVariantArray() {
+    return detail::isNativeType<T>();
+}
+
+}  // namespace detail
+
+/* --------------------------------------- Implementation --------------------------------------- */
 
 template <typename T>
 T& Variant::getScalar() {
@@ -160,7 +176,7 @@ void Variant::setScalar(T& value) noexcept {
     detail::assertTypeCombination<T, type>();
     static_assert(type != Type::Variant, "Variants cannot directly contain another variant");
     static_assert(
-        detail::isNativeType<T>() || detail::IsTypeWrapper<T>::value,
+        detail::isAssignableToVariantScalar<T>(),
         "Template type must be convertible to native type to assign scalar without copy"
     );
     if constexpr (detail::IsTypeWrapper<T>::value) {
@@ -185,7 +201,7 @@ template <typename T, Type type>
 void Variant::setArray(T* array, size_t size) noexcept {
     detail::assertTypeCombination<T, type>();
     static_assert(
-        detail::isNativeType<T>(),
+        detail::isAssignableToVariantArray<T>(),
         "Template type must be a native type to assign array without copy"
     );
     setArrayImpl(array, size, detail::getUaDataType<type>());

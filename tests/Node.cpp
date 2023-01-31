@@ -114,34 +114,55 @@ TEST_CASE("Node") {
     }
 
     SECTION("Try read/write with node classes other than Variable") {
-        REQUIRE_THROWS(server.getRootNode().read<int>());
-        REQUIRE_THROWS(server.getRootNode().write<int>({}));
+        REQUIRE_THROWS(server.getRootNode().readScalar<int>());
+        REQUIRE_THROWS(server.getRootNode().writeScalar<int>({}));
     }
 
     SECTION("Read/write scalar") {
         auto node = server.getRootNode().addVariable({"testScalar", 1}, "testScalar", Type::Float);
 
         // Writes with wrong data type
-        REQUIRE_THROWS(node.write<bool>({}));
-        REQUIRE_THROWS(node.write<int>({}));
+        REQUIRE_THROWS(node.writeScalar<bool>({}));
+        REQUIRE_THROWS(node.writeScalar<int>({}));
 
         // Writes with correct data type
         float value = 11.11;
-        REQUIRE_NOTHROW(node.write(value));
-        REQUIRE(node.read<float>() == value);
+        REQUIRE_NOTHROW(node.writeScalar(value));
+        REQUIRE(node.readScalar<float>() == value);
+    }
+
+    SECTION("Read/write string") {
+        auto node = server.getRootNode().addVariable({"testString", 1}, "testString", Type::String);
+
+        String str("test");
+        REQUIRE_NOTHROW(node.writeScalar(str));
+        REQUIRE(node.readScalar<std::string>() == "test");
     }
 
     SECTION("Read/write array") {
-        auto node = server.getRootNode().addVariable({"testArray", 1}, "testArray", Type::Float);
+        auto node = server.getRootNode().addVariable({"testArray", 1}, "testArray", Type::Double);
 
         // Writes with wrong data type
-        REQUIRE_THROWS(node.writeArray<std::vector<int>>({}));
-        REQUIRE_THROWS(node.writeArray<std::vector<double>>({}));
+        REQUIRE_THROWS(node.writeArray<int>({}));
+        REQUIRE_THROWS(node.writeArray<float>({}));
 
         // Writes with correct data type
-        std::vector<float> value{11.11, 22.22, 33.33};
-        REQUIRE_NOTHROW(node.writeArray(value));
-        REQUIRE(node.readArray<float>() == value);
+        std::vector<double> array{11.11, 22.22, 33.33};
+
+        SECTION("Write as std::vector") {
+            REQUIRE_NOTHROW(node.writeArray(array));
+            REQUIRE(node.readArray<double>() == array);
+        }
+
+        SECTION("Write as raw array") {
+            REQUIRE_NOTHROW(node.writeArray(array.data(), array.size()));
+            REQUIRE(node.readArray<double>() == array);
+        }
+
+        SECTION("Write as iterator pair") {
+            REQUIRE_NOTHROW(node.writeArray(array.begin(), array.end()));
+            REQUIRE(node.readArray<double>() == array);
+        }
     }
 
     SECTION("Remove node") {

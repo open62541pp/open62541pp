@@ -3,7 +3,6 @@
 #include <cstdint>
 #include <string>
 #include <string_view>
-#include <utility>  // forward
 #include <vector>
 
 #include "open62541pp/ErrorHandling.h"
@@ -88,37 +87,41 @@ public:
     Node addObjectType(const NodeId& id, std::string_view browseName);
     Node addVariableType(const NodeId& id, std::string_view browseName, Type type);
 
-    template <typename Arg>  // perfect forwarding
-    void write(Arg&& arg) {
-        requireNodeClass(NodeClass::Variable);
-        Variant var;
-        var.setScalarCopy(std::forward<Arg>(arg));
-        writeVariantToServer(var);
-    }
+    // Read value from variable node as DataValue object.
+    // void readDataValue(DataValue& dataValue);
 
-    template <typename Arg>  // perfect forwarding
-    void writeArray(Arg&& arg) {
-        requireNodeClass(NodeClass::Variable);
-        Variant var;
-        var.setArrayCopy(std::forward<Arg>(arg));
-        writeVariantToServer(var);
-    }
+    /// Read value from variable node as Variant object.
+    void readValue(Variant& variant);
 
+    /// Read scalar from variable node.
     template <typename T>
-    T read() {
-        requireNodeClass(NodeClass::Variable);
-        Variant var;
-        readVariantFromServer(var);
-        return var.getScalarCopy<T>();
-    }
+    T readScalar();
 
+    /// Read array from variable node.
     template <typename T>
-    std::vector<T> readArray() {
-        requireNodeClass(NodeClass::Variable);
-        Variant var;
-        readVariantFromServer(var);
-        return var.getArrayCopy<T>();
-    }
+    std::vector<T> readArray();
+
+    // Write DataValue to variable node.
+    // void writeDataValue(const DataValue& variant);
+
+    /// Write Variant to variable node.
+    void writeValue(const Variant& variant);
+
+    /// Write scalar to variable node.
+    template <typename T, Type type = detail::guessType<T>()>
+    void writeScalar(const T& value);
+
+    /// Write array (raw) to variable node.
+    template <typename T, Type type = detail::guessType<T>()>
+    void writeArray(const T* array, size_t size);
+
+    /// Write array (std::vector) to variable node.
+    template <typename T, Type type = detail::guessType<T>()>
+    void writeArray(const std::vector<T>& array);
+
+    /// Write range of elements as array to variable node.
+    template <typename InputIt, Type type = detail::guessTypeFromIterator<InputIt>()>
+    void writeArray(InputIt first, InputIt last);
 
     void remove();
 
@@ -140,13 +143,60 @@ protected:
         }
     }
 
-    void writeVariantToServer(Variant& var);  // should be const Variant&
-    void readVariantFromServer(Variant& var) noexcept;
-
 private:
     Server server_;
     NodeId nodeId_;
     NodeClass nodeClass_;
 };
+
+/* ---------------------------------------------------------------------------------------------- */
+
+template <typename T>
+T Node::readScalar() {
+    Variant variant;
+    readValue(variant);
+    return variant.getScalarCopy<T>();
+}
+
+template <typename T>
+std::vector<T> Node::readArray() {
+    Variant variant;
+    readValue(variant);
+    return variant.getArrayCopy<T>();
+}
+
+template <typename T, Type type>
+void Node::writeScalar(const T& value) {
+    Variant variant;
+    if constexpr (detail::isAssignableToVariantScalar<T>()) {
+        variant.setScalar<T, type>(const_cast<T&>(value));  // NOLINT, variant isn't modified
+    } else {
+        variant.setScalarCopy<T, type>(value);
+    }
+    writeValue(variant);
+}
+
+template <typename T, Type type>
+void Node::writeArray(const T* array, size_t size) {
+    Variant variant;
+    if constexpr (detail::isAssignableToVariantArray<T>()) {
+        variant.setArray<T, type>(const_cast<T*>(array), size);  // NOLINT, variant isn't modified
+    } else {
+        variant.setArrayCopy<T, type>(array, size);
+    }
+    writeValue(variant);
+}
+
+template <typename T, Type type>
+void Node::writeArray(const std::vector<T>& array) {
+    writeArray<T, type>(array.data(), array.size());
+}
+
+template <typename InputIt, Type type>
+void Node::writeArray(InputIt first, InputIt last) {
+    Variant variant;
+    variant.setArrayCopy<InputIt, type>(first, last);
+    writeValue(variant);
+}
 
 }  // namespace opcua
