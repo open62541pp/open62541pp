@@ -75,14 +75,16 @@ TEST_CASE("Server") {
 
     SECTION("Get default nodes") {
         // clang-format off
-        REQUIRE(compareNodes(server.getRootNode().getNodeId(),           UA_NS0ID_ROOTFOLDER));
-        REQUIRE(compareNodes(server.getObjectsNode().getNodeId(),        UA_NS0ID_OBJECTSFOLDER));
-        REQUIRE(compareNodes(server.getTypesNode().getNodeId(),          UA_NS0ID_TYPESFOLDER));
-        REQUIRE(compareNodes(server.getViewsNode().getNodeId(),          UA_NS0ID_VIEWSFOLDER));
-        REQUIRE(compareNodes(server.getObjectTypesNode().getNodeId(),    UA_NS0ID_OBJECTTYPESFOLDER));
-        REQUIRE(compareNodes(server.getVariableTypesNode().getNodeId(),  UA_NS0ID_VARIABLETYPESFOLDER));
-        REQUIRE(compareNodes(server.getDataTypesNode().getNodeId(),      UA_NS0ID_DATATYPESFOLDER));
-        REQUIRE(compareNodes(server.getReferenceTypesNode().getNodeId(), UA_NS0ID_REFERENCETYPESFOLDER));
+        REQUIRE(compareNodes(server.getRootNode().getNodeId(),                 UA_NS0ID_ROOTFOLDER));
+        REQUIRE(compareNodes(server.getObjectsNode().getNodeId(),              UA_NS0ID_OBJECTSFOLDER));
+        REQUIRE(compareNodes(server.getTypesNode().getNodeId(),                UA_NS0ID_TYPESFOLDER));
+        REQUIRE(compareNodes(server.getViewsNode().getNodeId(),                UA_NS0ID_VIEWSFOLDER));
+        REQUIRE(compareNodes(server.getObjectTypesNode().getNodeId(),          UA_NS0ID_OBJECTTYPESFOLDER));
+        REQUIRE(compareNodes(server.getVariableTypesNode().getNodeId(),        UA_NS0ID_VARIABLETYPESFOLDER));
+        REQUIRE(compareNodes(server.getDataTypesNode().getNodeId(),            UA_NS0ID_DATATYPESFOLDER));
+        REQUIRE(compareNodes(server.getReferenceTypesNode().getNodeId(),       UA_NS0ID_REFERENCETYPESFOLDER));
+        REQUIRE(compareNodes(server.getBaseObjectTypeNode().getNodeId(),       UA_NS0ID_BASEOBJECTTYPE));
+        REQUIRE(compareNodes(server.getBaseDataVariableTypeNode().getNodeId(), UA_NS0ID_BASEDATAVARIABLETYPE));
         // clang-format on
     }
 

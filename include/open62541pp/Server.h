@@ -72,6 +72,8 @@ public:
     Node getVariableTypesNode();
     Node getDataTypesNode();
     Node getReferenceTypesNode();
+    Node getBaseObjectTypeNode();
+    Node getBaseDataVariableTypeNode();
 
     void removeNode(const NodeId& id);
 

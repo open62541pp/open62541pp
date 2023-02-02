@@ -288,6 +288,14 @@ Node Server::getReferenceTypesNode() {
     return {*this, {UA_NS0ID_REFERENCETYPESFOLDER, 0}};
 }
 
+Node Server::getBaseObjectTypeNode() {
+    return {*this, {UA_NS0ID_BASEOBJECTTYPE, 0}};
+}
+
+Node Server::getBaseDataVariableTypeNode() {
+    return {*this, {UA_NS0ID_BASEDATAVARIABLETYPE, 0}};
+}
+
 UA_Server* Server::handle() noexcept {
     return connection_->handle();
 }
