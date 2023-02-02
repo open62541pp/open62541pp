@@ -80,11 +80,33 @@ public:
     /// e.g. `::UA_ACCESSLEVELMASK_READ | ::UA_ACCESSLEVELMASK_WRITE`.
     void setAccessLevel(uint8_t mask);
 
+    /// Add child folder to node.
+    /// Reference type is `ReferenceType::HasComponent`.
+    /// Object type is `::UA_NS0ID_FOLDERTYPE`.
     Node addFolder(const NodeId& id, std::string_view browseName);
+
+    /// Add child object to node.
+    /// Reference type is `ReferenceType::HasComponent`.
+    /// Object type is `::UA_NS0ID_BASEOBJECTTYPE`.
     Node addObject(const NodeId& id, std::string_view browseName);
+
+    /// Add child variable to node.
+    /// Reference type is `ReferenceType::HasComponent`.
+    /// Object type is `::UA_NS0ID_BASEDATAVARIABLETYPE`.
     Node addVariable(const NodeId& id, std::string_view browseName, Type type);
+
+    /// Add child property to node.
+    /// Reference type is `ReferenceType::HasComponent`.
+    /// Object type is `::UA_NS0ID_PROPERTYTYPE`.
     Node addProperty(const NodeId& id, std::string_view browseName, Type type);
+
+    /// Add child object type to node.
+    /// Reference type is `ReferenceType::HasSubType`.
     Node addObjectType(const NodeId& id, std::string_view browseName);
+
+    /// Add child variable type to node.
+    /// Reference type is `ReferenceType::HasSubType`.
+    /// Type definition is `::UA_NS0ID_BASEDATAVARIABLETYPE`.
     Node addVariableType(const NodeId& id, std::string_view browseName, Type type);
 
     // Read value from variable node as DataValue object.

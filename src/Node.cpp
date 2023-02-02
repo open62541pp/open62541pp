@@ -171,7 +171,7 @@ Node Node::addFolder(const NodeId& id, std::string_view browseName) {
         server_.handle(),  // server
         *id.handle(),  // new requested id
         *nodeId_.handle(),  // parent id
-        UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES),  // reference id
+        UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),  // reference id
         *QualifiedName(ns, browseName).handle(),  // browse name
         UA_NODEID_NUMERIC(0, UA_NS0ID_FOLDERTYPE),  // type definition
         attr,  // object attributes
@@ -190,7 +190,7 @@ Node Node::addObject(const NodeId& id, std::string_view browseName) {
         server_.handle(),  // server
         *id.handle(),  // new requested id
         *nodeId_.handle(),  // parent id
-        UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES),  // reference id
+        UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),  // reference id
         *QualifiedName(ns, browseName).handle(),  // browse name
         UA_NODEID_NUMERIC(0, UA_NS0ID_BASEOBJECTTYPE),  // type definition
         attr,  // object attributes
@@ -210,7 +210,7 @@ Node Node::addVariable(const NodeId& id, std::string_view browseName, Type type)
         server_.handle(),  // server
         *id.handle(),  // new requested id
         *nodeId_.handle(),  // parent id
-        UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES),  // reference id
+        UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),  // reference id
         *QualifiedName(ns, browseName).handle(),  // browse name
         UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE),  // type definition
         attr,  // variable attributes
@@ -249,7 +249,7 @@ Node Node::addObjectType(const NodeId& id, std::string_view browseName) {
         server_.handle(),  // server
         *id.handle(),  // new requested id
         *nodeId_.handle(),  // parent id
-        UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES),  // reference id
+        UA_NODEID_NUMERIC(0, UA_NS0ID_HASSUBTYPE),  // reference id
         *QualifiedName(ns, browseName).handle(),  // browse name
         attr,  // object attributes
         nullptr,  // node context
@@ -268,7 +268,7 @@ Node Node::addVariableType(const NodeId& id, std::string_view browseName, Type t
         server_.handle(),  // server
         *id.handle(),  // new requested id
         *nodeId_.handle(),  // parent id
-        UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES),  // reference id
+        UA_NODEID_NUMERIC(0, UA_NS0ID_HASSUBTYPE),  // reference id
         *QualifiedName(ns, browseName).handle(),  // browse name
         UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE),  // type definition
         attr,  // variable attributes

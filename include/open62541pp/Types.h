@@ -123,7 +123,7 @@ enum class ReferenceType : uint16_t {
     HasTypeDefinition                   = UA_NS0ID_HASTYPEDEFINITION,
     GeneratesEvent                      = UA_NS0ID_GENERATESEVENT,
     Aggregates                          = UA_NS0ID_AGGREGATES,
-    HasSubtype                          = UA_NS0ID_HASSUBTYPE,
+    HasSubType                          = UA_NS0ID_HASSUBTYPE,
     HasProperty                         = UA_NS0ID_HASPROPERTY,
     HasComponent                        = UA_NS0ID_HASCOMPONENT,
     HasNotifier                         = UA_NS0ID_HASNOTIFIER,
