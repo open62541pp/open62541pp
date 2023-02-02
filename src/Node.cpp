@@ -163,7 +163,7 @@ void Node::setAccessLevel(uint8_t mask) {
     detail::throwOnBadStatus(status);
 }
 
-Node Node::addFolder(const NodeId& id, std::string_view browseName) {
+Node Node::addFolder(const NodeId& id, std::string_view browseName, ReferenceType referenceType) {
     auto attr = UA_ObjectAttributes_default;
 
     const auto ns = id.handle()->namespaceIndex;
@@ -171,7 +171,7 @@ Node Node::addFolder(const NodeId& id, std::string_view browseName) {
         server_.handle(),  // server
         *id.handle(),  // new requested id
         *nodeId_.handle(),  // parent id
-        UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),  // reference id
+        detail::getUaNodeId(referenceType),  // reference id
         *QualifiedName(ns, browseName).handle(),  // browse name
         UA_NODEID_NUMERIC(0, UA_NS0ID_FOLDERTYPE),  // type definition
         attr,  // object attributes
@@ -182,7 +182,12 @@ Node Node::addFolder(const NodeId& id, std::string_view browseName) {
     return {server_, id};
 }
 
-Node Node::addObject(const NodeId& id, std::string_view browseName) {
+Node Node::addObject(
+    const NodeId& id,
+    std::string_view browseName,
+    const NodeId& objectType,
+    ReferenceType referenceType
+) {
     auto attr = UA_ObjectAttributes_default;
 
     const auto ns = id.handle()->namespaceIndex;
@@ -190,9 +195,9 @@ Node Node::addObject(const NodeId& id, std::string_view browseName) {
         server_.handle(),  // server
         *id.handle(),  // new requested id
         *nodeId_.handle(),  // parent id
-        UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),  // reference id
+        detail::getUaNodeId(referenceType),  // reference id
         *QualifiedName(ns, browseName).handle(),  // browse name
-        UA_NODEID_NUMERIC(0, UA_NS0ID_BASEOBJECTTYPE),  // type definition
+        *objectType.handle(),  // type definition
         attr,  // object attributes
         nullptr,  // node context
         nullptr  // output new node id
@@ -201,7 +206,13 @@ Node Node::addObject(const NodeId& id, std::string_view browseName) {
     return {server_, id};
 }
 
-Node Node::addVariable(const NodeId& id, std::string_view browseName, Type type) {
+Node Node::addVariable(
+    const NodeId& id,
+    std::string_view browseName,
+    Type type,
+    const NodeId& variableType,
+    ReferenceType referenceType
+) {
     auto attr = UA_VariableAttributes_default;
     attr.dataType = detail::getUaDataType(type)->typeId;
 
@@ -210,9 +221,9 @@ Node Node::addVariable(const NodeId& id, std::string_view browseName, Type type)
         server_.handle(),  // server
         *id.handle(),  // new requested id
         *nodeId_.handle(),  // parent id
-        UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT),  // reference id
+        detail::getUaNodeId(referenceType),  // reference id
         *QualifiedName(ns, browseName).handle(),  // browse name
-        UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE),  // type definition
+        *variableType.handle(),  // type definition
         attr,  // variable attributes
         nullptr,  // node context
         nullptr  // output new node id
@@ -241,7 +252,9 @@ Node Node::addProperty(const NodeId& id, std::string_view browseName, Type type)
     return {server_, id};
 }
 
-Node Node::addObjectType(const NodeId& id, std::string_view browseName) {
+Node Node::addObjectType(
+    const NodeId& id, std::string_view browseName, ReferenceType referenceType
+) {
     auto attr = UA_ObjectTypeAttributes_default;
 
     const auto ns = id.handle()->namespaceIndex;
@@ -249,7 +262,7 @@ Node Node::addObjectType(const NodeId& id, std::string_view browseName) {
         server_.handle(),  // server
         *id.handle(),  // new requested id
         *nodeId_.handle(),  // parent id
-        UA_NODEID_NUMERIC(0, UA_NS0ID_HASSUBTYPE),  // reference id
+        detail::getUaNodeId(referenceType),  // reference id
         *QualifiedName(ns, browseName).handle(),  // browse name
         attr,  // object attributes
         nullptr,  // node context
@@ -259,7 +272,13 @@ Node Node::addObjectType(const NodeId& id, std::string_view browseName) {
     return {server_, id};
 }
 
-Node Node::addVariableType(const NodeId& id, std::string_view browseName, Type type) {
+Node Node::addVariableType(
+    const NodeId& id,
+    std::string_view browseName,
+    Type type,
+    const NodeId& variableType,
+    ReferenceType referenceType
+) {
     auto attr = UA_VariableTypeAttributes_default;
     attr.dataType = detail::getUaDataType(type)->typeId;
 
@@ -268,9 +287,9 @@ Node Node::addVariableType(const NodeId& id, std::string_view browseName, Type t
         server_.handle(),  // server
         *id.handle(),  // new requested id
         *nodeId_.handle(),  // parent id
-        UA_NODEID_NUMERIC(0, UA_NS0ID_HASSUBTYPE),  // reference id
+        detail::getUaNodeId(referenceType),  // reference id
         *QualifiedName(ns, browseName).handle(),  // browse name
-        UA_NODEID_NUMERIC(0, UA_NS0ID_BASEDATAVARIABLETYPE),  // type definition
+        *variableType.handle(),  // type definition
         attr,  // variable attributes
         nullptr,  // node context
         nullptr  // output new node id

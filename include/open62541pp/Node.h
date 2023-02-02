@@ -81,33 +81,47 @@ public:
     void setAccessLevel(uint8_t mask);
 
     /// Add child folder to node.
-    /// Reference type is `ReferenceType::HasComponent`.
-    /// Object type is `::UA_NS0ID_FOLDERTYPE`.
-    Node addFolder(const NodeId& id, std::string_view browseName);
+    Node addFolder(
+        const NodeId& id,
+        std::string_view browseName,
+        ReferenceType referenceType = ReferenceType::HasComponent
+    );
 
     /// Add child object to node.
-    /// Reference type is `ReferenceType::HasComponent`.
-    /// Object type is `::UA_NS0ID_BASEOBJECTTYPE`.
-    Node addObject(const NodeId& id, std::string_view browseName);
+    Node addObject(
+        const NodeId& id,
+        std::string_view browseName,
+        const NodeId& objectType = {UA_NS0ID_BASEOBJECTTYPE, 0},
+        ReferenceType referenceType = ReferenceType::HasComponent
+    );
 
     /// Add child variable to node.
-    /// Reference type is `ReferenceType::HasComponent`.
-    /// Object type is `::UA_NS0ID_BASEDATAVARIABLETYPE`.
-    Node addVariable(const NodeId& id, std::string_view browseName, Type type);
+    Node addVariable(
+        const NodeId& id,
+        std::string_view browseName,
+        Type type,
+        const NodeId& variableType = {UA_NS0ID_BASEDATAVARIABLETYPE, 0},
+        ReferenceType referenceType = ReferenceType::HasComponent
+    );
 
     /// Add child property to node.
-    /// Reference type is `ReferenceType::HasComponent`.
-    /// Object type is `::UA_NS0ID_PROPERTYTYPE`.
     Node addProperty(const NodeId& id, std::string_view browseName, Type type);
 
     /// Add child object type to node.
-    /// Reference type is `ReferenceType::HasSubType`.
-    Node addObjectType(const NodeId& id, std::string_view browseName);
+    Node addObjectType(
+        const NodeId& id,
+        std::string_view browseName,
+        ReferenceType referenceType = ReferenceType::HasSubType
+    );
 
     /// Add child variable type to node.
-    /// Reference type is `ReferenceType::HasSubType`.
-    /// Type definition is `::UA_NS0ID_BASEDATAVARIABLETYPE`.
-    Node addVariableType(const NodeId& id, std::string_view browseName, Type type);
+    Node addVariableType(
+        const NodeId& id,
+        std::string_view browseName,
+        Type type,
+        const NodeId& variableType = {UA_NS0ID_BASEDATAVARIABLETYPE, 0},
+        ReferenceType referenceType = ReferenceType::HasSubType
+    );
 
     // Read value from variable node as DataValue object.
     // void readDataValue(DataValue& dataValue);

@@ -36,6 +36,11 @@ inline const UA_DataType* getUaDataType(const UA_NodeId* id) noexcept {
     return UA_findDataType(id);
 }
 
+/// Get NodeId by ReferenceType.
+inline UA_NodeId getUaNodeId(ReferenceType type) noexcept {
+    return UA_NODEID_NUMERIC(0, static_cast<UA_Int32>(type));
+}
+
 /// Allocate UA_String from const char*
 [[nodiscard]] UA_String allocUaString(const char* src);
 
