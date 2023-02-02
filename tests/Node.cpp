@@ -15,9 +15,7 @@ TEST_CASE("Node") {
     }
 
     SECTION("Get/set node attributes") {
-        auto node = server.getObjectsNode().addVariable(
-            {"testAttributes", 1}, "testAttributes", Type::Boolean
-        );
+        auto node = server.getObjectsNode().addVariable({"testAttributes", 1}, "testAttributes");
 
         // get default attributes
         REQUIRE(node.getNodeClass() == NodeClass::Variable);
@@ -29,7 +27,7 @@ TEST_CASE("Node") {
         REQUIRE(node.getWriteMask() == 0);
         // built-in type boolean has NodeId(1, 0)
         // https://reference.opcfoundation.org/v104/Core/docs/Part6/5.1.2/
-        REQUIRE(node.getDataType() == NodeId(1, 0));
+        REQUIRE(node.getDataType() == NodeId(UA_NS0ID_BASEDATATYPE, 0));
         REQUIRE(node.getValueRank() == ValueRank::Any);
         REQUIRE(node.getArrayDimensions().empty());
         REQUIRE(node.getAccessLevel() == UA_ACCESSLEVELMASK_READ);
@@ -58,9 +56,7 @@ TEST_CASE("Node") {
     }
 
     SECTION("Value rank and array dimension combinations") {
-        auto node = server.getObjectsNode().addVariable(
-            {"testDimensions", 1}, "testDimensions", Type::Float
-        );
+        auto node = server.getObjectsNode().addVariable({"testDimensions", 1}, "testDimensions");
 
         SECTION("Unspecified dimension (ValueRank <= 0)") {
             auto valueRank = GENERATE(
@@ -119,7 +115,8 @@ TEST_CASE("Node") {
     }
 
     SECTION("Read/write scalar") {
-        auto node = server.getRootNode().addVariable({"testScalar", 1}, "testScalar", Type::Float);
+        auto node = server.getRootNode().addVariable({"testScalar", 1}, "testScalar");
+        node.setDataType(Type::Float);
 
         // Writes with wrong data type
         REQUIRE_THROWS(node.writeScalar<bool>({}));
@@ -132,7 +129,8 @@ TEST_CASE("Node") {
     }
 
     SECTION("Read/write string") {
-        auto node = server.getRootNode().addVariable({"testString", 1}, "testString", Type::String);
+        auto node = server.getRootNode().addVariable({"testString", 1}, "testString");
+        node.setDataType(Type::String);
 
         String str("test");
         REQUIRE_NOTHROW(node.writeScalar(str));
@@ -140,7 +138,8 @@ TEST_CASE("Node") {
     }
 
     SECTION("Read/write array") {
-        auto node = server.getRootNode().addVariable({"testArray", 1}, "testArray", Type::Double);
+        auto node = server.getRootNode().addVariable({"testArray", 1}, "testArray");
+        node.setDataType(Type::Double);
 
         // Writes with wrong data type
         REQUIRE_THROWS(node.writeArray<int>({}));

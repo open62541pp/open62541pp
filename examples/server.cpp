@@ -16,9 +16,10 @@ int main() {
 
     // add variable node
     auto parentNode = server.getObjectsNode();
-    auto myIntegerNode = parentNode.addVariable(myIntegerNodeId, myIntegerName, opcua::Type::Int32);
+    auto myIntegerNode = parentNode.addVariable(myIntegerNodeId, myIntegerName);
 
     // set node attributes
+    myIntegerNode.setDataType(opcua::Type::Int32);
     myIntegerNode.setDisplayName("the answer", "en-US");
     myIntegerNode.setDescription("the answer", "en-US");
 

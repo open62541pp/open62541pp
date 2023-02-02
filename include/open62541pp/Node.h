@@ -99,13 +99,12 @@ public:
     Node addVariable(
         const NodeId& id,
         std::string_view browseName,
-        Type type,
         const NodeId& variableType = {UA_NS0ID_BASEDATAVARIABLETYPE, 0},
         ReferenceType referenceType = ReferenceType::HasComponent
     );
 
     /// Add child property to node.
-    Node addProperty(const NodeId& id, std::string_view browseName, Type type);
+    Node addProperty(const NodeId& id, std::string_view browseName);
 
     /// Add child object type to node.
     Node addObjectType(
@@ -118,7 +117,6 @@ public:
     Node addVariableType(
         const NodeId& id,
         std::string_view browseName,
-        Type type,
         const NodeId& variableType = {UA_NS0ID_BASEDATAVARIABLETYPE, 0},
         ReferenceType referenceType = ReferenceType::HasSubType
     );
