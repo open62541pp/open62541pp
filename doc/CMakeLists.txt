@@ -70,7 +70,6 @@ add_custom_target(
 
 # -------------------------------------- Doxygen open62541++ ------------------------------------- #
 
-set(doxygen_input_dir  ${PROJECT_SOURCE_DIR}/include/open62541pp)
 set(doxygen_output_dir ${PROJECT_BINARY_DIR}/doxygen)
 set(doxygen_html_dir   ${PROJECT_BINARY_DIR}/doc_html)
 make_directory(${doxygen_output_dir})
