@@ -249,7 +249,7 @@ bool Server::isRunning() const noexcept {
 }
 
 uint16_t Server::registerNamespace(std::string_view name) {
-    return UA_Server_addNamespace(handle(), name.data());
+    return UA_Server_addNamespace(handle(), std::string(name).c_str());
 }
 
 Node Server::getNode(const NodeId& id) {
