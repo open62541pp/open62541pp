@@ -128,18 +128,25 @@ public:
     };
 
 protected:
+    inline static void checkMemSize() {
+        assert(sizeof(T) == getDataType()->memSize);  // NOLINT
+    }
+
     void init() noexcept {
+        checkMemSize();
         UA_init(&data_, getDataType());
     }
 
     void clear() noexcept {
         if (ownsData_) {
+            checkMemSize();
             UA_clear(&data_, getDataType());
         }
     }
 
     void set(const T& data) {
         clear();
+        checkMemSize();
         auto status = UA_copy(&data, &data_, getDataType());  // deep copy of data
         detail::throwOnBadStatus(status);
         ownsData_ = true;
