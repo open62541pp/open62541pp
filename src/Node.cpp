@@ -268,6 +268,17 @@ Node Node::addVariableType(
     return {server_, id};
 }
 
+void Node::addReference(const NodeId& target, ReferenceType referenceType, bool forward) {
+    const auto status = UA_Server_addReference(
+        server_.handle(),  // server
+        nodeId_,  // source id
+        detail::getUaNodeId(referenceType),  // reference id
+        ExpandedNodeId(target, {}, 0),  // target id
+        forward  // forward
+    );
+    detail::throwOnBadStatus(status);
+}
+
 void Node::writeValue(const Variant& var) {
     const auto status = UA_Server_writeValue(server_.handle(), nodeId_, var);
     detail::throwOnBadStatus(status);

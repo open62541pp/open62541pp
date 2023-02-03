@@ -123,6 +123,9 @@ public:
         ReferenceType referenceType = ReferenceType::HasSubType
     );
 
+    /// Add reference.
+    void addReference(const NodeId& target, ReferenceType referenceType, bool forward = true);
+
     // Read value from variable node as DataValue object.
     // void readDataValue(DataValue& dataValue);
 
