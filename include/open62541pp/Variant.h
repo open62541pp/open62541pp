@@ -24,7 +24,7 @@ class NodeId;
  */
 class Variant : public TypeWrapper<UA_Variant, UA_TYPES_VARIANT> {
 public:
-    using BaseClass::BaseClass;  // inherit contructors
+    using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
 
     /// Check if variant is empty
     bool isEmpty() const noexcept;

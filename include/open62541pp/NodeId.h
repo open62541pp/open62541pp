@@ -28,7 +28,7 @@ enum class NodeIdType : uint8_t {
  */
 class NodeId : public TypeWrapper<UA_NodeId, UA_TYPES_NODEID> {
 public:
-    using BaseClass::BaseClass;  // inherit contructors
+    using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
 
     /// Create NodeId with numeric identifier
     NodeId(uint32_t identifier, uint16_t namespaceIndex);
@@ -84,7 +84,7 @@ public:
  */
 class ExpandedNodeId : public TypeWrapper<UA_ExpandedNodeId, UA_TYPES_EXPANDEDNODEID> {
 public:
-    using BaseClass::BaseClass;  // inherit contructors
+    using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
 
     ExpandedNodeId(const NodeId& id, std::string_view namespaceUri, uint32_t serverIndex);
 

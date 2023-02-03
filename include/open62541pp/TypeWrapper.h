@@ -36,7 +36,7 @@ class TypeWrapper {
 public:
     static_assert(typeIndex < UA_TYPES_COUNT);
 
-    using BaseClass = TypeWrapper<T, typeIndex>;
+    using TypeWrapperBase = TypeWrapper<T, typeIndex>;
     using UaType = T;
 
     TypeWrapper() {
@@ -219,7 +219,7 @@ inline bool operator>=(const T& left, const T& right) noexcept {
  */
 class String : public TypeWrapper<UA_String, UA_TYPES_STRING> {
 public:
-    using BaseClass::BaseClass;  // inherit contructors
+    using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
 
     explicit String(std::string_view str);
 
@@ -233,7 +233,7 @@ public:
  */
 class Guid : public TypeWrapper<UA_Guid, UA_TYPES_GUID> {
 public:
-    using BaseClass::BaseClass;  // inherit contructors
+    using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
 
     Guid(UA_UInt32 data1, UA_UInt16 data2, UA_UInt16 data3, std::array<UA_Byte, 8> data4);
 };
@@ -245,7 +245,7 @@ public:
 class ByteString : public TypeWrapper<UA_ByteString, UA_TYPES_BYTESTRING> {
 public:
     // NOLINTNEXTLINE, false positive?
-    using BaseClass::BaseClass;  // inherit contructors
+    using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
 
     explicit ByteString(std::string_view str);
 
@@ -260,7 +260,7 @@ public:
 class XmlElement : public TypeWrapper<UA_XmlElement, UA_TYPES_XMLELEMENT> {
 public:
     // NOLINTNEXTLINE, false positive?
-    using BaseClass::BaseClass;  // inherit contructors
+    using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
 
     explicit XmlElement(std::string_view str);
 
@@ -275,7 +275,7 @@ public:
 class QualifiedName : public TypeWrapper<UA_QualifiedName, UA_TYPES_QUALIFIEDNAME> {
 public:
     // NOLINTNEXTLINE, false positive?
-    using BaseClass::BaseClass;  // inherit contructors
+    using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
 
     QualifiedName(uint16_t namespaceIndex, std::string_view name);
 
@@ -291,7 +291,7 @@ public:
 class LocalizedText : public TypeWrapper<UA_LocalizedText, UA_TYPES_LOCALIZEDTEXT> {
 public:
     // NOLINTNEXTLINE, false positive?
-    using BaseClass::BaseClass;  // inherit contructors
+    using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
 
     LocalizedText(std::string_view text, std::string_view locale);
 
@@ -316,7 +316,7 @@ public:
     using UaDuration = std::chrono::duration<uint64_t, std::ratio<1, 10'000'000>>;
 
     // NOLINTNEXTLINE, false positive?
-    using BaseClass::BaseClass;  // inherit contructors
+    using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
 
     template <typename Clock, typename Duration>
     DateTime(std::chrono::time_point<Clock, Duration> timePoint)  // NOLINT, implicit wanted
