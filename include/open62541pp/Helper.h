@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cassert>
 #include <string>
 #include <string_view>
 #include <type_traits>
@@ -9,36 +10,24 @@
 
 namespace opcua::detail {
 
-constexpr auto getTypeIndex(Type type) {
-    return static_cast<std::underlying_type_t<Type>>(type);
-}
-
-/// Get UA_DataType by type index.
-inline const UA_DataType* getUaDataType(uint16_t typeIndex) noexcept {
-    if (typeIndex < UA_TYPES_COUNT) {
-        return &UA_TYPES[typeIndex];  // NOLINT
-    }
-    return nullptr;
-}
-
-/// Get UA_DataType by Type enum.
-inline const UA_DataType* getUaDataType(Type type) noexcept {
-    const auto typeIndex = getTypeIndex(type);
-    return getUaDataType(typeIndex);
-}
-
-/// Get UA_DataType by type index (template parameter).
-template <uint16_t typeIndex>
+/// Get UA_DataType by type index or enum (template parameter).
+template <auto typeIndexOrEnum>
 inline const UA_DataType* getUaDataType() noexcept {
+    constexpr auto typeIndex = static_cast<uint16_t>(typeIndexOrEnum);
     static_assert(typeIndex < UA_TYPES_COUNT);
     return &UA_TYPES[typeIndex];  // NOLINT
 }
 
-/// Get UA_DataType by Type enum (template parameter).
-template <Type type>
-inline const UA_DataType* getUaDataType() noexcept {
-    constexpr auto typeIndex = getTypeIndex(type);
-    return getUaDataType<typeIndex>();
+/// Get UA_DataType by type index.
+inline const UA_DataType* getUaDataType(uint16_t typeIndex) noexcept {
+    assert(typeIndex < UA_TYPES_COUNT);  // NOLINT
+    return &UA_TYPES[typeIndex];  // NOLINT
+}
+
+/// Get UA_DataType by type enum.
+inline const UA_DataType* getUaDataType(Type type) noexcept {
+    const auto typeIndex = static_cast<uint16_t>(type);
+    return getUaDataType(typeIndex);
 }
 
 /// Get (custom) UA_DataType by UA_NodeId.
