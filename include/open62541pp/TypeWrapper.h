@@ -1,6 +1,7 @@
 #pragma once
 
 #include <array>
+#include <cassert>
 #include <chrono>
 #include <cstdint>
 #include <string>
