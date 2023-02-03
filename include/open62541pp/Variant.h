@@ -22,7 +22,7 @@ class NodeId;
  * UA_Variant wrapper class.
  * @ingroup TypeWrapper
  */
-class Variant : public TypeWrapper<UA_Variant, Type::Variant> {
+class Variant : public TypeWrapper<UA_Variant, UA_TYPES_VARIANT> {
 public:
     using BaseClass::BaseClass;  // inherit contructors
 

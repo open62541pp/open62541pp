@@ -26,7 +26,7 @@ enum class NodeIdType : uint8_t {
  * UA_NodeId wrapper class.
  * @ingroup TypeWrapper
  */
-class NodeId : public TypeWrapper<UA_NodeId, Type::NodeId> {
+class NodeId : public TypeWrapper<UA_NodeId, UA_TYPES_NODEID> {
 public:
     using BaseClass::BaseClass;  // inherit contructors
 
@@ -82,7 +82,7 @@ public:
  * UA_ExpandedNodeId wrapper class.
  * @ingroup TypeWrapper
  */
-class ExpandedNodeId : public TypeWrapper<UA_ExpandedNodeId, Type::ExpandedNodeId> {
+class ExpandedNodeId : public TypeWrapper<UA_ExpandedNodeId, UA_TYPES_EXPANDEDNODEID> {
 public:
     using BaseClass::BaseClass;  // inherit contructors
 

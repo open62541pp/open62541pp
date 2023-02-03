@@ -31,22 +31,24 @@ namespace opcua {
  * The derived classes should implement specific constructors to convert from other data types.
  * @ingroup TypeWrapper
  */
-template <typename T, Type type>
+template <typename T, uint16_t typeIndex>
 class TypeWrapper {
 public:
-    using BaseClass = TypeWrapper<T, type>;
+    static_assert(typeIndex < UA_TYPES_COUNT);
+
+    using BaseClass = TypeWrapper<T, typeIndex>;
     using UaType = T;
 
     TypeWrapper() {
         init();
     }
 
-    /// Constructor with native UA_* type (deep copy)
+    /// Constructor with native UA_* type (deep copy).
     explicit TypeWrapper(const T& data) {
         set(data);
     }
 
-    /// Constructor with native UA_* type (move rvalue)
+    /// Constructor with native UA_* type (move rvalue).
     explicit TypeWrapper(T&& data) noexcept
         : data_(data) {}
 
@@ -54,17 +56,17 @@ public:
         clear();
     };
 
-    /// Copy constructor (deep copy)
+    /// Copy constructor (deep copy).
     TypeWrapper(const TypeWrapper& other) {
         set(other.data_);
     }
 
-    /// Move constructor
+    /// Move constructor.
     TypeWrapper(TypeWrapper&& other) noexcept {
         swap(other);
     }
 
-    /// Copy assignment (deep copy)
+    /// Copy assignment (deep copy).
     TypeWrapper& operator=(const TypeWrapper& other) {  // NOLINT, false positive
         if (this == &other) {
             return *this;
@@ -73,7 +75,7 @@ public:
         return *this;
     }
 
-    /// Move assignment
+    /// Move assignment.
     TypeWrapper& operator=(TypeWrapper&& other) noexcept {
         if (this == &other) {
             return *this;
@@ -92,29 +94,35 @@ public:
         return data_;
     }
 
-    /// Swap wrapper objects
+    /// Swap wrapper objects.
     void swap(TypeWrapper& other) noexcept {
-        static_assert(std::is_swappable_v<UaType>);
+        static_assert(std::is_swappable_v<T>);
         std::swap(this->data_, other.data_);
         std::swap(this->ownsData_, other.ownsData_);
     }
 
-    /// Return type enum
+    /// Get type as type index.
+    static constexpr uint16_t getTypeIndex() {
+        return typeIndex;
+    }
+
+    /// Get type as Type enum (only for builtin types).
     static constexpr Type getType() {
-        return type;
+        static_assert(typeIndex < UA_BUILTIN_TYPES_COUNT, "Only possible for builtin types");
+        return static_cast<Type>(typeIndex);
     }
 
-    /// Return UA_DataType object
+    /// Get type as UA_DataType object.
     static const UA_DataType* getDataType() {
-        return detail::getUaDataType<type>();
+        return detail::getUaDataType<typeIndex>();
     }
 
-    /// Return pointer to wrapped UA data type
+    /// Return pointer to wrapped UA data type.
     T* handle() noexcept {
         return &data_;
     }
 
-    /// Return const pointer to wrapped UA data type
+    /// Return const pointer to wrapped UA data type.
     const T* handle() const noexcept {
         return &data_;
     };
@@ -153,8 +161,8 @@ private:
 namespace detail {
 
 // https://stackoverflow.com/a/51910887
-template <typename T, Type type>
-std::true_type isTypeWrapperImpl(TypeWrapper<T, type>*);
+template <typename T, uint16_t typeIndex>
+std::true_type isTypeWrapperImpl(TypeWrapper<T, typeIndex>*);
 std::false_type isTypeWrapperImpl(...);
 
 template <typename T>
@@ -202,7 +210,7 @@ inline bool operator>=(const T& left, const T& right) noexcept {
  * UA_String wrapper class.
  * @ingroup TypeWrapper
  */
-class String : public TypeWrapper<UA_String, Type::String> {
+class String : public TypeWrapper<UA_String, UA_TYPES_STRING> {
 public:
     using BaseClass::BaseClass;  // inherit contructors
 
@@ -216,7 +224,7 @@ public:
  * UA_Guid wrapper class.
  * @ingroup TypeWrapper
  */
-class Guid : public TypeWrapper<UA_Guid, Type::Guid> {
+class Guid : public TypeWrapper<UA_Guid, UA_TYPES_GUID> {
 public:
     using BaseClass::BaseClass;  // inherit contructors
 
@@ -227,7 +235,7 @@ public:
  * UA_ByteString wrapper class.
  * @ingroup TypeWrapper
  */
-class ByteString : public TypeWrapper<UA_ByteString, Type::ByteString> {
+class ByteString : public TypeWrapper<UA_ByteString, UA_TYPES_BYTESTRING> {
 public:
     // NOLINTNEXTLINE, false positive?
     using BaseClass::BaseClass;  // inherit contructors
@@ -242,7 +250,7 @@ public:
  * UA_XmlElement wrapper class.
  * @ingroup TypeWrapper
  */
-class XmlElement : public TypeWrapper<UA_XmlElement, Type::XmlElement> {
+class XmlElement : public TypeWrapper<UA_XmlElement, UA_TYPES_XMLELEMENT> {
 public:
     // NOLINTNEXTLINE, false positive?
     using BaseClass::BaseClass;  // inherit contructors
@@ -257,7 +265,7 @@ public:
  * UA_QualifiedName wrapper class.
  * @ingroup TypeWrapper
  */
-class QualifiedName : public TypeWrapper<UA_QualifiedName, Type::QualifiedName> {
+class QualifiedName : public TypeWrapper<UA_QualifiedName, UA_TYPES_QUALIFIEDNAME> {
 public:
     // NOLINTNEXTLINE, false positive?
     using BaseClass::BaseClass;  // inherit contructors
@@ -273,7 +281,7 @@ public:
  * UA_LocalizedText wrapper class.
  * @ingroup TypeWrapper
  */
-class LocalizedText : public TypeWrapper<UA_LocalizedText, Type::LocalizedText> {
+class LocalizedText : public TypeWrapper<UA_LocalizedText, UA_TYPES_LOCALIZEDTEXT> {
 public:
     // NOLINTNEXTLINE, false positive?
     using BaseClass::BaseClass;  // inherit contructors
@@ -295,7 +303,7 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/5.2.2.5
  * @ingroup TypeWrapper
  */
-class DateTime : public TypeWrapper<UA_DateTime, Type::DateTime> {
+class DateTime : public TypeWrapper<UA_DateTime, UA_TYPES_DATETIME> {
 public:
     using DefaultClock = std::chrono::system_clock;
     using UaDuration = std::chrono::duration<uint64_t, std::ratio<1, 10'000'000>>;

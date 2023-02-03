@@ -14,33 +14,33 @@ using namespace opcua;
 TEST_CASE("TypeWrapper") {
     SECTION("Constructor") {
         // Empty constructor
-        REQUIRE_NOTHROW(TypeWrapper<bool, Type::Boolean>());
+        REQUIRE_NOTHROW(TypeWrapper<UA_Boolean, UA_TYPES_BOOLEAN>());
 
         // Constructor with wrapped type (lvalue)
         {
-            bool value{true};
-            TypeWrapper<bool, Type::Boolean> wrapper(value);
+            UA_Boolean value{true};
+            TypeWrapper<UA_Boolean, UA_TYPES_BOOLEAN> wrapper(value);
             REQUIRE(*wrapper.handle() == value);
         }
 
         // Constructor with wrapped type (rvalue)
         {
-            TypeWrapper<double, Type::Double> wrapper(11.11);
+            TypeWrapper<UA_Double, UA_TYPES_DOUBLE> wrapper(11.11);
             REQUIRE(*wrapper.handle() == 11.11);
         }
     }
 
     SECTION("Copy constructor / assignment") {
-        TypeWrapper<UA_String, Type::String> wrapper(UA_STRING_ALLOC("test"));
-        TypeWrapper<UA_String, Type::String> wrapperConstructor(wrapper);
+        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper(UA_STRING_ALLOC("test"));
+        TypeWrapper<UA_String, UA_TYPES_STRING> wrapperConstructor(wrapper);
 
         REQUIRE(wrapperConstructor.handle()->data != wrapper.handle()->data);
         REQUIRE_THAT(detail::toString(*wrapperConstructor.handle()), Equals("test"));
     }
 
     SECTION("Copy assignment") {
-        TypeWrapper<UA_String, Type::String> wrapper(UA_STRING_ALLOC("test"));
-        TypeWrapper<UA_String, Type::String> wrapperAssignmnet = wrapper;
+        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper(UA_STRING_ALLOC("test"));
+        TypeWrapper<UA_String, UA_TYPES_STRING> wrapperAssignmnet = wrapper;
 
         REQUIRE(wrapperAssignmnet.handle()->data != wrapper.handle()->data);
         REQUIRE_THAT(detail::toString(*wrapperAssignmnet.handle()), Equals("test"));
@@ -50,16 +50,16 @@ TEST_CASE("TypeWrapper") {
     }
 
     SECTION("Move constructor") {
-        TypeWrapper<UA_String, Type::String> wrapper(UA_STRING_ALLOC("test"));
-        TypeWrapper<UA_String, Type::String> wrapperConstructor(std::move(wrapper));
+        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper(UA_STRING_ALLOC("test"));
+        TypeWrapper<UA_String, UA_TYPES_STRING> wrapperConstructor(std::move(wrapper));
 
         REQUIRE(wrapper.handle()->data == nullptr);
         REQUIRE_THAT(detail::toString(*wrapperConstructor.handle()), Equals("test"));
     }
 
     SECTION("Move assignment") {
-        TypeWrapper<UA_String, Type::String> wrapper(UA_STRING_ALLOC("test"));
-        TypeWrapper<UA_String, Type::String> wrapperAssignmnet = std::move(wrapper);
+        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper(UA_STRING_ALLOC("test"));
+        TypeWrapper<UA_String, UA_TYPES_STRING> wrapperAssignmnet = std::move(wrapper);
 
         REQUIRE(wrapper.handle()->data == nullptr);
         REQUIRE_THAT(detail::toString(*wrapperAssignmnet.handle()), Equals("test"));
@@ -69,8 +69,8 @@ TEST_CASE("TypeWrapper") {
     }
 
     SECTION("Swap") {
-        TypeWrapper<UA_String, Type::String> wrapper1(UA_STRING_ALLOC("test"));
-        TypeWrapper<UA_String, Type::String> wrapper2;
+        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper1(UA_STRING_ALLOC("test"));
+        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper2;
 
         REQUIRE(wrapper1.handle()->data != nullptr);
         REQUIRE(wrapper2.handle()->data == nullptr);
@@ -86,7 +86,7 @@ TEST_CASE("TypeWrapper") {
 TEMPLATE_TEST_CASE_SIG(
     "TypeWrapper instantiation",
     "",
-    ((typename T, int typeIndex), T, typeIndex),
+    ((typename T, uint16_t typeIndex), T, typeIndex),
     (UA_Boolean, UA_TYPES_BOOLEAN),
     (UA_SByte, UA_TYPES_SBYTE),
     (UA_Byte, UA_TYPES_BYTE),
@@ -113,21 +113,19 @@ TEMPLATE_TEST_CASE_SIG(
     (UA_Variant, UA_TYPES_VARIANT),
     (UA_DiagnosticInfo, UA_TYPES_DIAGNOSTICINFO)
 ) {
-    constexpr auto type = static_cast<Type>(typeIndex);
-
     SECTION("Swap") {
-        TypeWrapper<T, type> wrapper1;
-        TypeWrapper<T, type> wrapper2;
+        TypeWrapper<T, typeIndex> wrapper1;
+        TypeWrapper<T, typeIndex> wrapper2;
 
         wrapper1.swap(wrapper2);
     }
 
     SECTION("Get type") {
-        STATIC_REQUIRE(TypeWrapper<T, type>::getType() == type);
+        STATIC_REQUIRE(TypeWrapper<T, typeIndex>::getTypeIndex() == typeIndex);
     }
 
     SECTION("Get data type") {
-        REQUIRE(TypeWrapper<T, type>::getDataType() == &UA_TYPES[typeIndex]);
+        REQUIRE(TypeWrapper<T, typeIndex>::getDataType() == &UA_TYPES[typeIndex]);
     }
 }
 
