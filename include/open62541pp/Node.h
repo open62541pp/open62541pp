@@ -159,7 +159,7 @@ public:
     template <typename InputIt, Type type = detail::guessTypeFromIterator<InputIt>()>
     void writeArray(InputIt first, InputIt last);
 
-    void remove();
+    void remove(bool deleteReferences = true);
 
 protected:
     template <typename... Ts>

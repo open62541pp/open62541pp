@@ -82,6 +82,16 @@ public:
         return *this;
     }
 
+    /// Implicit conversion to wrapped UA data type.
+    operator T&() noexcept {  // NOLINT
+        return data_;
+    }
+
+    /// Implicit conversion to wrapped UA data type.
+    operator const T&() const noexcept {  // NOLINT
+        return data_;
+    }
+
     /// Swap wrapper objects
     void swap(TypeWrapper& other) noexcept {
         static_assert(std::is_swappable_v<UaType>);
