@@ -45,7 +45,7 @@ public:
 
     /// Constructor with native UA_* type (deep copy).
     explicit TypeWrapper(const T& data) {
-        set(data);
+        copy(data);
     }
 
     /// Constructor with native UA_* type (move rvalue).
@@ -58,7 +58,7 @@ public:
 
     /// Copy constructor (deep copy).
     TypeWrapper(const TypeWrapper& other) {
-        set(other.data_);
+        copy(other.data_);
     }
 
     /// Move constructor.
@@ -71,7 +71,7 @@ public:
         if (this == &other) {
             return *this;
         }
-        set(other.data_);
+        copy(other.data_);
         return *this;
     }
 
@@ -98,7 +98,6 @@ public:
     void swap(TypeWrapper& other) noexcept {
         static_assert(std::is_swappable_v<T>);
         std::swap(this->data_, other.data_);
-        std::swap(this->ownsData_, other.ownsData_);
     }
 
     /// Get type as type index.
@@ -138,29 +137,19 @@ protected:
     }
 
     void clear() noexcept {
-        if (ownsData_) {
-            checkMemSize();
-            UA_clear(&data_, getDataType());
-        }
+        checkMemSize();
+        UA_clear(&data_, getDataType());
     }
 
-    void set(const T& data) {
+    void copy(const T& data) {
         clear();
         checkMemSize();
         auto status = UA_copy(&data, &data_, getDataType());  // deep copy of data
         detail::throwOnBadStatus(status);
-        ownsData_ = true;
-    }
-
-    void set(T&& data) {
-        clear();
-        data_ = data;
-        ownsData_ = true;
     }
 
 private:
     T data_{};
-    bool ownsData_{true};
 };
 
 /* -------------------------------------------- Trait ------------------------------------------- */
