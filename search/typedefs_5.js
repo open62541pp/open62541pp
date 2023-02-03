@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['types_4115',['Types',['../structopcua_1_1TypeList.html#ac5f695d10565dd8b0b826d299809ff59',1,'opcua::TypeList']]]
+  ['uaduration_4165',['UaDuration',['../classopcua_1_1DateTime.html#abab6383f0b5eaff787f1d3a92be046c0',1,'opcua::DateTime']]],
+  ['uatype_4166',['UaType',['../classopcua_1_1TypeWrapper.html#a38af5e18f1d7e8d7f72eaf5dbf7dc60b',1,'opcua::TypeWrapper']]]
 ];

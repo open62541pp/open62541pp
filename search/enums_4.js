@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['valuerank_4126',['ValueRank',['../namespaceopcua.html#a41f8481e3c1494130327dca210329383',1,'opcua']]]
+  ['type_4176',['Type',['../namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966',1,'opcua']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['baseclass_4107',['BaseClass',['../classopcua_1_1TypeWrapper.html#ab589d88dc65dc99a9f8fd3e54c3170f9',1,'opcua::TypeWrapper']]]
+  ['defaultclock_4156',['DefaultClock',['../classopcua_1_1DateTime.html#ae7375ebfe4e6809021b759bee9774329',1,'opcua::DateTime']]]
 ];

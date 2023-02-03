@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['type_4125',['Type',['../namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966',1,'opcua']]]
+  ['referencetype_4175',['ReferenceType',['../namespaceopcua.html#a807c61ccff66808c3559158c33d5463b',1,'opcua']]]
 ];

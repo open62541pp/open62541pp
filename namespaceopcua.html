@@ -298,7 +298,7 @@ Enumerations</h2></td></tr>
 <a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba5e41840f4b2f20e0065ccce26ee9e91c">ReferenceType::GeneratesEvent</a> = UA_NS0ID_GENERATESEVENT, 
 <a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463bad5350d8759b1ec84607e47908809058e">ReferenceType::Aggregates</a> = UA_NS0ID_AGGREGATES, 
 <br />
-&#160;&#160;<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba79d00b2a3fd425da35a27ef5f903b18f">ReferenceType::HasSubtype</a> = UA_NS0ID_HASSUBTYPE, 
+&#160;&#160;<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba67fd3d4f6832b52a95d1938850461a3d">ReferenceType::HasSubType</a> = UA_NS0ID_HASSUBTYPE, 
 <a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba8b309f07b67be0b48023832ffd24f860">ReferenceType::HasProperty</a> = UA_NS0ID_HASPROPERTY, 
 <a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463baded9b3813b9f642b7166ee3000a3e14f">ReferenceType::HasComponent</a> = UA_NS0ID_HASCOMPONENT, 
 <a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba6889078bd2a83a7deb9b560de6cfb050">ReferenceType::HasNotifier</a> = UA_NS0ID_HASNOTIFIER, 
@@ -340,6 +340,17 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:a807c61ccff66808c3559158c33d5463b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference types.  <a href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463b">More...</a><br /></td></tr>
 <tr class="separator:a807c61ccff66808c3559158c33d5463b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad32e0c353b427fd8b7788a85a78335aa"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#ad32e0c353b427fd8b7788a85a78335aa">ModellingRule</a> : uint16_t { <br />
+&#160;&#160;<a class="el" href="namespaceopcua.html#ad32e0c353b427fd8b7788a85a78335aaae89ab59baea830bd940c300886c50efe">ModellingRule::Mandatory</a> = UA_NS0ID_MODELLINGRULE_MANDATORY, 
+<a class="el" href="namespaceopcua.html#ad32e0c353b427fd8b7788a85a78335aaaebb061953c0454b2c8ee7b0ac615ebcd">ModellingRule::Optional</a> = UA_NS0ID_MODELLINGRULE_MANDATORY, 
+<a class="el" href="namespaceopcua.html#ad32e0c353b427fd8b7788a85a78335aaa9ef8b4a7f1d9137746c489caa1697988">ModellingRule::ExposesItsArray</a> = UA_NS0ID_MODELLINGRULE_EXPOSESITSARRAY, 
+<a class="el" href="namespaceopcua.html#ad32e0c353b427fd8b7788a85a78335aaa313f1f57b51fabdcc7c19353f7630cb6">ModellingRule::OptionalPlaceholder</a> = UA_NS0ID_MODELLINGRULE_OPTIONALPLACEHOLDER, 
+<br />
+&#160;&#160;<a class="el" href="namespaceopcua.html#ad32e0c353b427fd8b7788a85a78335aaae3a415d0bb770f63839fdb6c92796725">ModellingRule::MandatoryPlaceholder</a> = UA_NS0ID_MODELLINGRULE_MANDATORYPLACEHOLDER
+<br />
+ }</td></tr>
+<tr class="memdesc:ad32e0c353b427fd8b7788a85a78335aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modelling rules.  <a href="namespaceopcua.html#ad32e0c353b427fd8b7788a85a78335aa">More...</a><br /></td></tr>
+<tr class="separator:ad32e0c353b427fd8b7788a85a78335aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -462,6 +473,40 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ad32e0c353b427fd8b7788a85a78335aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad32e0c353b427fd8b7788a85a78335aa">&#9670;&nbsp;</a></span>ModellingRule</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespaceopcua.html#ad32e0c353b427fd8b7788a85a78335aa">opcua::ModellingRule</a> : uint16_t</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Modelling rules. </p>
+<dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/v104/Core/docs/Part3/6.4.4/">https://reference.opcfoundation.org/v104/Core/docs/Part3/6.4.4/</a> </dd></dl>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ad32e0c353b427fd8b7788a85a78335aaae89ab59baea830bd940c300886c50efe"></a>Mandatory&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad32e0c353b427fd8b7788a85a78335aaaebb061953c0454b2c8ee7b0ac615ebcd"></a>Optional&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad32e0c353b427fd8b7788a85a78335aaa9ef8b4a7f1d9137746c489caa1697988"></a>ExposesItsArray&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad32e0c353b427fd8b7788a85a78335aaa313f1f57b51fabdcc7c19353f7630cb6"></a>OptionalPlaceholder&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad32e0c353b427fd8b7788a85a78335aaae3a415d0bb770f63839fdb6c92796725"></a>MandatoryPlaceholder&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="Types_8h_source.html#l00163">163</a> of file <a class="el" href="Types_8h_source.html">Types.h</a>.</p>
+
+</div>
+</div>
 <a id="a6dbdabe373cb5094cafbeede49c4df6d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6dbdabe373cb5094cafbeede49c4df6d">&#9670;&nbsp;</a></span>NodeClass</h2>
 
@@ -554,11 +599,12 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Reference types. </p>
-<p>List in standard: <a href="https://reference.opcfoundation.org/v104/Core/ReferenceTypes/">https://reference.opcfoundation.org/v104/Core/ReferenceTypes/</a> Missing reference types in open62541?</p><ul>
+<dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/v104/Core/ReferenceTypes/">https://reference.opcfoundation.org/v104/Core/ReferenceTypes/</a> Missing reference types in open62541?<ul>
 <li>AliasFor</li>
 <li>HasReaderGroup</li>
 <li>HasWriterGroup </li>
 </ul>
+</dd></dl>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a807c61ccff66808c3559158c33d5463bad95867deadfe690e40f42068d6b59df8"></a>References&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a807c61ccff66808c3559158c33d5463ba4fae204a369c3bdb12096d8a01b50a9f"></a>NonHierarchicalReferences&#160;</td><td class="fielddoc"></td></tr>
@@ -572,7 +618,7 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="a807c61ccff66808c3559158c33d5463ba3aa5cbdb62e3b8fec36e2505ce7394b2"></a>HasTypeDefinition&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a807c61ccff66808c3559158c33d5463ba5e41840f4b2f20e0065ccce26ee9e91c"></a>GeneratesEvent&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a807c61ccff66808c3559158c33d5463bad5350d8759b1ec84607e47908809058e"></a>Aggregates&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a807c61ccff66808c3559158c33d5463ba79d00b2a3fd425da35a27ef5f903b18f"></a>HasSubtype&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a807c61ccff66808c3559158c33d5463ba67fd3d4f6832b52a95d1938850461a3d"></a>HasSubType&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a807c61ccff66808c3559158c33d5463ba8b309f07b67be0b48023832ffd24f860"></a>HasProperty&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a807c61ccff66808c3559158c33d5463baded9b3813b9f642b7166ee3000a3e14f"></a>HasComponent&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a807c61ccff66808c3559158c33d5463ba6889078bd2a83a7deb9b560de6cfb050"></a>HasNotifier&#160;</td><td class="fielddoc"></td></tr>
@@ -605,7 +651,7 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="a807c61ccff66808c3559158c33d5463ba49813e4966306950e1f133245c4ad1c8"></a>HasEffectUnsuppressed&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="Types_8h_source.html#l00112">112</a> of file <a class="el" href="Types_8h_source.html">Types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Types_8h_source.html#l00111">111</a> of file <a class="el" href="Types_8h_source.html">Types.h</a>.</p>
 
 </div>
 </div>
@@ -793,7 +839,7 @@ Functions</h2></td></tr>
 
 <p class="reference">References <a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6daaa2aaa59ac1a7c24e5e86c068bda3d20">DataType</a>, <a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6da4c3880bb027f159e801041b1021e88e8">Method</a>, <a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6da497031794414a552435f90151ac3b54b">Object</a>, <a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6dab74c375731dc50c662d6ce08befe2db0">ObjectType</a>, <a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6daeabd2ac91ac41e38d4d61d77e3518160">ReferenceType</a>, <a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6da47c14840d8e15331fa420b9b2f757cd9">Variable</a>, <a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6da60e08a3601c0d6742aa798b4dc610670">VariableType</a>, and <a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6da4351cfebe4b61d8aa5efa1d020710005">View</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00136">opcua::Node::requireNodeClass()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00175">opcua::Node::requireNodeClass()</a>.</p>
 
 </div>
 </div>
@@ -833,7 +879,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;detail::IsTypeWrapper&l
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00165">165</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00179">179</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -873,7 +919,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;detail::IsTypeWrapper&l
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00170">170</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00184">184</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -913,7 +959,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;detail::IsTypeWrapper&l
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00180">180</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00194">194</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -953,7 +999,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;detail::IsTypeWrapper&l
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00160">160</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00174">174</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -993,7 +1039,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;detail::IsTypeWrapper&l
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00175">175</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00189">189</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -1033,7 +1079,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;detail::IsTypeWrapper&l
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00185">185</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00199">199</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
 </div>
 </div>

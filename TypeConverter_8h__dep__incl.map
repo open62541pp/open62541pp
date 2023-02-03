@@ -1,6 +1,9 @@
 <map id="/home/runner/work/open62541pp/open62541pp/include/open62541pp/TypeConverter.h" name="/home/runner/work/open62541pp/open62541pp/include/open62541pp/TypeConverter.h">
-<area shape="rect" id="node1" title=" " alt="" coords="37,5,295,61"/>
+<area shape="rect" id="node1" title=" " alt="" coords="88,5,345,61"/>
 <area shape="rect" id="node2" href="$open62541pp_8h.html" title=" " alt="" coords="5,317,263,373"/>
-<area shape="rect" id="node3" href="$Variant_8h.html" title=" " alt="" coords="121,109,379,165"/>
-<area shape="rect" id="node4" href="$Node_8h.html" title=" " alt="" coords="171,213,433,269"/>
+<area shape="rect" id="node3" href="$Variant_8h.html" title=" " alt="" coords="197,109,455,165"/>
+<area shape="rect" id="node4" href="$Node_8h.html" title=" " alt="" coords="222,213,483,269"/>
+<area shape="rect" id="node7" href="$Variant_8cpp.html" title=" " alt="" coords="507,221,745,262"/>
+<area shape="rect" id="node5" href="$Node_8cpp.html" title=" " alt="" coords="287,325,525,366"/>
+<area shape="rect" id="node6" href="$Server_8cpp.html" title=" " alt="" coords="549,325,786,366"/>
 </map>
