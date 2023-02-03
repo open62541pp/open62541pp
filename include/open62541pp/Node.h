@@ -79,6 +79,8 @@ public:
     /// Set access level mask of variable node,
     /// e.g. `::UA_ACCESSLEVELMASK_READ | ::UA_ACCESSLEVELMASK_WRITE`.
     void setAccessLevel(uint8_t mask);
+    /// Set modelling rule.
+    void setModellingRule(ModellingRule rule);
 
     /// Add child folder to node.
     Node addFolder(

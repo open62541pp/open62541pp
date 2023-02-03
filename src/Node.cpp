@@ -163,6 +163,17 @@ void Node::setAccessLevel(uint8_t mask) {
     detail::throwOnBadStatus(status);
 }
 
+void Node::setModellingRule(ModellingRule rule) {
+    const auto status = UA_Server_addReference(
+        server_.handle(),  // server
+        *nodeId_.handle(),  // source id
+        UA_NODEID_NUMERIC(0, UA_NS0ID_HASMODELLINGRULE),  // reference id
+        UA_EXPANDEDNODEID_NUMERIC(0, static_cast<UA_UInt32>(rule)),  // target id
+        true  // forward
+    );
+    detail::throwOnBadStatus(status);
+}
+
 Node Node::addFolder(const NodeId& id, std::string_view browseName, ReferenceType referenceType) {
     const auto status = UA_Server_addObjectNode(
         server_.handle(),  // server

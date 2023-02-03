@@ -102,8 +102,7 @@ enum class ValueRank : int32_t {
 
 /**
  * Reference types.
- *
- * List in standard: https://reference.opcfoundation.org/v104/Core/ReferenceTypes/
+ * @see https://reference.opcfoundation.org/v104/Core/ReferenceTypes/
  * Missing reference types in open62541?
  * - AliasFor
  * - HasReaderGroup
@@ -154,6 +153,20 @@ enum class ReferenceType : uint16_t {
     HasEffectEnable                     = UA_NS0ID_HASEFFECTENABLE,
     HasEffectSuppressed                 = UA_NS0ID_HASEFFECTSUPPRESSED,
     HasEffectUnsuppressed               = UA_NS0ID_HASEFFECTUNSUPPRESSED,
+    // clang-format on
+};
+
+/**
+ * Modelling rules.
+ * @see https://reference.opcfoundation.org/v104/Core/docs/Part3/6.4.4/
+ */
+enum class ModellingRule : uint16_t {
+    // clang-format off
+    Mandatory            = UA_NS0ID_MODELLINGRULE_MANDATORY,
+    Optional             = UA_NS0ID_MODELLINGRULE_MANDATORY,
+    ExposesItsArray      = UA_NS0ID_MODELLINGRULE_EXPOSESITSARRAY,
+    OptionalPlaceholder  = UA_NS0ID_MODELLINGRULE_OPTIONALPLACEHOLDER,
+    MandatoryPlaceholder = UA_NS0ID_MODELLINGRULE_MANDATORYPLACEHOLDER,
     // clang-format on
 };
 
