@@ -28,7 +28,7 @@ bool Variant::isType(Type type) const noexcept {
 }
 
 bool Variant::isType(const NodeId& id) const noexcept {
-    return isType(detail::getUaDataType(id.handle()));
+    return isType(detail::getUaDataType(id));
 }
 
 std::optional<Type> Variant::getVariantType() const noexcept {

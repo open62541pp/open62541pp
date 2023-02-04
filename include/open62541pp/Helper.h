@@ -32,8 +32,8 @@ inline const UA_DataType* getUaDataType(Type type) noexcept {
 
 /// Get (custom) UA_DataType by UA_NodeId.
 /// Return nullptr if no matching data type was found.
-inline const UA_DataType* getUaDataType(const UA_NodeId* id) noexcept {
-    return UA_findDataType(id);
+inline const UA_DataType* getUaDataType(const UA_NodeId& id) noexcept {
+    return UA_findDataType(&id);
 }
 
 /// Get NodeId by ReferenceType.

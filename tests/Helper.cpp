@@ -10,13 +10,13 @@ using namespace opcua;
 TEST_CASE("getUaDataType") {
     const auto* expected = &UA_TYPES[UA_TYPES_BOOLEAN];
 
-    REQUIRE(detail::getUaDataType(static_cast<uint16_t>(UA_TYPES_BOOLEAN)) == expected);
+    REQUIRE(detail::getUaDataType(UA_TYPES_BOOLEAN) == expected);
     REQUIRE(detail::getUaDataType(Type::Boolean) == expected);
     REQUIRE(detail::getUaDataType<UA_TYPES_BOOLEAN>() == expected);
     REQUIRE(detail::getUaDataType<Type::Boolean>() == expected);
 
     auto nodeId = UA_NODEID_NUMERIC(0, UA_NS0ID_BOOLEAN);
-    REQUIRE(detail::getUaDataType(&nodeId) == expected);
+    REQUIRE(detail::getUaDataType(nodeId) == expected);
 }
 
 TEST_CASE("String conversion UA_String -> string") {
