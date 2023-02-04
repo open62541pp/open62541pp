@@ -173,4 +173,9 @@ TEST_CASE("Node") {
         node.remove();
         REQUIRE_THROWS(Node(server, id));
     }
+
+    SECTION("Equality") {
+        REQUIRE(server.getRootNode() == server.getRootNode());
+        REQUIRE(server.getRootNode() != server.getObjectsNode());
+    }
 }

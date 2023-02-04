@@ -241,4 +241,9 @@ void Node::writeArray(InputIt first, InputIt last) {
     writeValue(variant);
 }
 
+/* ---------------------------------------------------------------------------------------------- */
+
+bool operator==(const Node& left, const Node& right) noexcept;
+bool operator!=(const Node& left, const Node& right) noexcept;
+
 }  // namespace opcua

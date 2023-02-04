@@ -302,4 +302,14 @@ void Node::remove(bool deleteReferences) {
     detail::throwOnBadStatus(status);
 }
 
+/* ---------------------------------------------------------------------------------------------- */
+
+bool operator==(const Node& left, const Node& right) noexcept {
+    return (left.getServer() == right.getServer()) && (left.getNodeId() == right.getNodeId());
+}
+
+bool operator!=(const Node& left, const Node& right) noexcept {
+    return !(left == right);
+}
+
 }  // namespace opcua
