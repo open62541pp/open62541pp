@@ -86,6 +86,12 @@ $(function() {
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a419b6b917de62aa5bfc13f076c53ef98"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a419b6b917de62aa5bfc13f076c53ef98">Node</a> (const <a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id)</td></tr>
 <tr class="separator:a419b6b917de62aa5bfc13f076c53ef98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a227e3862c99bdd880ffbfc29a1b9a5a1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Server.html">Server</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a227e3862c99bdd880ffbfc29a1b9a5a1">getServer</a> () noexcept</td></tr>
+<tr class="memdesc:a227e3862c99bdd880ffbfc29a1b9a5a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get server instance.  <a href="classopcua_1_1Node.html#a227e3862c99bdd880ffbfc29a1b9a5a1">More...</a><br /></td></tr>
+<tr class="separator:a227e3862c99bdd880ffbfc29a1b9a5a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebe8fe13822b4889ff46aa45d52fd25d"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classopcua_1_1Server.html">Server</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#aebe8fe13822b4889ff46aa45d52fd25d">getServer</a> () const noexcept</td></tr>
+<tr class="memdesc:aebe8fe13822b4889ff46aa45d52fd25d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get server instance.  <a href="classopcua_1_1Node.html#aebe8fe13822b4889ff46aa45d52fd25d">More...</a><br /></td></tr>
+<tr class="separator:aebe8fe13822b4889ff46aa45d52fd25d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2dc7e7224bac8145946330918a12fb8"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#af2dc7e7224bac8145946330918a12fb8">getNodeId</a> () const noexcept</td></tr>
 <tr class="memdesc:af2dc7e7224bac8145946330918a12fb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get node id.  <a href="classopcua_1_1Node.html#af2dc7e7224bac8145946330918a12fb8">More...</a><br /></td></tr>
 <tr class="separator:af2dc7e7224bac8145946330918a12fb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -164,6 +170,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae39d35a1197f2062b7fc15f8cc2d25cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#ae39d35a1197f2062b7fc15f8cc2d25cb">addReference</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;target, <a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463b">ReferenceType</a> referenceType, bool forward=true)</td></tr>
 <tr class="memdesc:ae39d35a1197f2062b7fc15f8cc2d25cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add reference.  <a href="classopcua_1_1Node.html#ae39d35a1197f2062b7fc15f8cc2d25cb">More...</a><br /></td></tr>
 <tr class="separator:ae39d35a1197f2062b7fc15f8cc2d25cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a273e296754e8981d8f6f9dde28c5236c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a273e296754e8981d8f6f9dde28c5236c">getChild</a> (const std::vector&lt; <a class="el" href="classopcua_1_1QualifiedName.html">QualifiedName</a> &gt; &amp;path)</td></tr>
+<tr class="memdesc:a273e296754e8981d8f6f9dde28c5236c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a child specified by its path from this node (only local nodes).  <a href="classopcua_1_1Node.html#a273e296754e8981d8f6f9dde28c5236c">More...</a><br /></td></tr>
+<tr class="separator:a273e296754e8981d8f6f9dde28c5236c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b858b5cf77426c18e2b9a394ff7d087"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a0b858b5cf77426c18e2b9a394ff7d087">readValue</a> (<a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;variant)</td></tr>
 <tr class="memdesc:a0b858b5cf77426c18e2b9a394ff7d087"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read value from variable node as <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> object.  <a href="classopcua_1_1Node.html#a0b858b5cf77426c18e2b9a394ff7d087">More...</a><br /></td></tr>
 <tr class="separator:a0b858b5cf77426c18e2b9a394ff7d087"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -240,7 +249,7 @@ Protected Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00011">11</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00121">opcua::TypeWrapper&lt; T, typeIndex &gt;::handle()</a>, <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>, <a class="elRef" href="open62541/types__generated_8h.html#adf98bb5a5ac8e50eece68338a046a904abef631a9e3bd8c4131488d08452f12dc">UA_NODECLASS_UNSPECIFIED</a>, and <a class="elRef" href="open62541/types_8h.html#a8549e8b2b906d336827cc1cd9ab05f68">UA_NODEID_NULL</a>.</p>
+<p class="reference">References <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00131">opcua::TypeWrapper&lt; T, typeIndex &gt;::handle()</a>, <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>, <a class="elRef" href="open62541/types__generated_8h.html#adf98bb5a5ac8e50eece68338a046a904abef631a9e3bd8c4131488d08452f12dc">UA_NODECLASS_UNSPECIFIED</a>, and <a class="elRef" href="open62541/types_8h.html#a8549e8b2b906d336827cc1cd9ab05f68">UA_NODEID_NULL</a>.</p>
 
 </div>
 </div>
@@ -279,7 +288,7 @@ Protected Member Functions</h2></td></tr>
 
 <p>Add child folder to node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00159">159</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00167">167</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="Helper_8h_source.html#l00040">opcua::detail::getUaNodeId()</a>, <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>, <a class="elRef" href="open62541/nodeids_8h.html#a5760f5c4f92932ad4a65937159b76542">UA_NS0ID_FOLDERTYPE</a>, and <a class="elRef" href="open62541/client__highlevel_8h.html#a3c9a16d586855f5d985396e7d83dfa44">UA_ObjectAttributes_default</a>.</p>
 
@@ -325,7 +334,7 @@ Protected Member Functions</h2></td></tr>
 
 <p>Add child object to node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00175">175</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00183">183</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="Helper_8h_source.html#l00040">opcua::detail::getUaNodeId()</a>, <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>, and <a class="elRef" href="open62541/client__highlevel_8h.html#a3c9a16d586855f5d985396e7d83dfa44">UA_ObjectAttributes_default</a>.</p>
 
@@ -365,7 +374,7 @@ Protected Member Functions</h2></td></tr>
 
 <p>Add child object type to node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00233">233</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00241">241</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="Helper_8h_source.html#l00040">opcua::detail::getUaNodeId()</a>, <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>, and <a class="elRef" href="open62541/client__highlevel_8h.html#a6f62e5d131451b7972573e696c54138c">UA_ObjectTypeAttributes_default</a>.</p>
 
@@ -399,7 +408,7 @@ Protected Member Functions</h2></td></tr>
 
 <p>Add child property to node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00217">217</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00225">225</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>, <a class="elRef" href="open62541/nodeids_8h.html#a2de2c6cf9a01198ca2ee7110cc1187e6">UA_NS0ID_HASPROPERTY</a>, <a class="elRef" href="open62541/nodeids_8h.html#ac071bd02012cc10b86e320623972e012">UA_NS0ID_PROPERTYTYPE</a>, and <a class="elRef" href="open62541/client__highlevel_8h.html#a9b1e9c8f3627dd5609b290803b3ea2d5">UA_VariableAttributes_default</a>.</p>
 
@@ -439,7 +448,7 @@ Protected Member Functions</h2></td></tr>
 
 <p>Add reference. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00271">271</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00279">279</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="Helper_8h_source.html#l00040">opcua::detail::getUaNodeId()</a>, <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>, and <a class="elRef" href="open62541/server_8h.html#ae3c683ec47055308bf805f4e6504cb16">UA_Server_addReference()</a>.</p>
 
@@ -485,7 +494,7 @@ Protected Member Functions</h2></td></tr>
 
 <p>Add child variable to node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00196">196</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00204">204</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="Helper_8h_source.html#l00040">opcua::detail::getUaNodeId()</a>, <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>, and <a class="elRef" href="open62541/client__highlevel_8h.html#a9b1e9c8f3627dd5609b290803b3ea2d5">UA_VariableAttributes_default</a>.</p>
 
@@ -531,7 +540,7 @@ Protected Member Functions</h2></td></tr>
 
 <p>Add child variable type to node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00250">250</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00258">258</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="Helper_8h_source.html#l00040">opcua::detail::getUaNodeId()</a>, <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>, and <a class="elRef" href="open62541/client__highlevel_8h.html#abb079d16b35f2efc6a09c22bb59e8736">UA_VariableTypeAttributes_default</a>.</p>
 
@@ -554,7 +563,7 @@ Protected Member Functions</h2></td></tr>
 
 <p>Get access level mask of variable node, e.g. <code><a class="elRef" href="open62541/common_8h.html#a40ea076d6ef4c0aaccdc0d14fb2573c4">UA_ACCESSLEVELMASK_READ</a></code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00089">89</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00097">97</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, and <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>.</p>
 
@@ -577,9 +586,9 @@ Protected Member Functions</h2></td></tr>
 
 <p>Get array dimensions of variable (type) node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00079">79</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00087">87</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="Variant_8h_source.html#l00166">opcua::Variant::getArrayCopy()</a>, <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00121">opcua::TypeWrapper&lt; T, typeIndex &gt;::handle()</a>, <a class="el" href="Variant_8cpp_source.html#l00015">opcua::Variant::isArray()</a>, and <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>.</p>
+<p class="reference">References <a class="el" href="Variant_8h_source.html#l00166">opcua::Variant::getArrayCopy()</a>, <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00131">opcua::TypeWrapper&lt; T, typeIndex &gt;::handle()</a>, <a class="el" href="Variant_8cpp_source.html#l00015">opcua::Variant::isArray()</a>, and <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>.</p>
 
 </div>
 </div>
@@ -600,9 +609,39 @@ Protected Member Functions</h2></td></tr>
 
 <p>Get browse name. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00037">37</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00045">45</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="TypeWrapper_8cpp_source.html#l00066">opcua::QualifiedName::getName()</a>, <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00121">opcua::TypeWrapper&lt; T, typeIndex &gt;::handle()</a>, and <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>.</p>
+<p class="reference">References <a class="el" href="TypeWrapper_8cpp_source.html#l00066">opcua::QualifiedName::getName()</a>, <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00131">opcua::TypeWrapper&lt; T, typeIndex &gt;::handle()</a>, and <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>.</p>
+
+</div>
+</div>
+<a id="a273e296754e8981d8f6f9dde28c5236c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a273e296754e8981d8f6f9dde28c5236c">&#9670;&nbsp;</a></span>getChild()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a> opcua::Node::getChild </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="classopcua_1_1QualifiedName.html">QualifiedName</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get a child specified by its path from this node (only local nodes). </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html">BadStatus</a></td><td>If path not found (BadNoMatch) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00290">290</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, <a class="elRef" href="open62541/structUA__BrowsePathResult.html#ae11348f3a72c574221ed01b339fbdbe7">UA_BrowsePathResult::statusCode</a>, <a class="elRef" href="open62541/structUA__BrowsePathTarget.html#a1d9d2bcfe3e4c2b57421fc793820c04c">UA_BrowsePathTarget::targetId</a>, <a class="elRef" href="open62541/structUA__BrowsePathResult.html#a95699c1b9bc5e731870d44be9a9897b7">UA_BrowsePathResult::targets</a>, <a class="elRef" href="open62541/structUA__BrowsePathResult.html#aaeddebfa348c60bb07102dd7655344e9">UA_BrowsePathResult::targetsSize</a>, <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>, <a class="elRef" href="open62541/server_8h.html#a635aa8c4249ac0fb66a968e7493843b4">UA_Server_browseSimplifiedBrowsePath()</a>, and <a class="elRef" href="open62541/statuscodes_8h.html#af4649a7ced9ad8f786a1b0765dc41852">UA_STATUSCODE_BADNOMATCH</a>.</p>
 
 </div>
 </div>
@@ -623,9 +662,9 @@ Protected Member Functions</h2></td></tr>
 
 <p>Get data type of variable (type) node as <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00065">65</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00073">73</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00121">opcua::TypeWrapper&lt; T, typeIndex &gt;::handle()</a>, and <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>.</p>
+<p class="reference">References <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00131">opcua::TypeWrapper&lt; T, typeIndex &gt;::handle()</a>, and <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>.</p>
 
 </div>
 </div>
@@ -646,9 +685,9 @@ Protected Member Functions</h2></td></tr>
 
 <p>Get localized description. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00051">51</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00059">59</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00121">opcua::TypeWrapper&lt; T, typeIndex &gt;::handle()</a>, and <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>.</p>
+<p class="reference">References <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00131">opcua::TypeWrapper&lt; T, typeIndex &gt;::handle()</a>, and <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>.</p>
 
 </div>
 </div>
@@ -669,9 +708,9 @@ Protected Member Functions</h2></td></tr>
 
 <p>Get localized display name. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00044">44</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00052">52</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00121">opcua::TypeWrapper&lt; T, typeIndex &gt;::handle()</a>, and <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>.</p>
+<p class="reference">References <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00131">opcua::TypeWrapper&lt; T, typeIndex &gt;::handle()</a>, and <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>.</p>
 
 </div>
 </div>
@@ -700,7 +739,7 @@ Protected Member Functions</h2></td></tr>
 
 <p>Get node class. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00033">33</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00041">41</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
 </div>
 </div>
@@ -729,6 +768,62 @@ Protected Member Functions</h2></td></tr>
 
 <p>Get node id. </p>
 
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00037">37</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aebe8fe13822b4889ff46aa45d52fd25d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebe8fe13822b4889ff46aa45d52fd25d">&#9670;&nbsp;</a></span>getServer() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classopcua_1_1Server.html">Server</a>&amp; opcua::Node::getServer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get server instance. </p>
+
+</div>
+</div>
+<a id="a227e3862c99bdd880ffbfc29a1b9a5a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a227e3862c99bdd880ffbfc29a1b9a5a1">&#9670;&nbsp;</a></span>getServer() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classopcua_1_1Server.html">Server</a> &amp; opcua::Node::getServer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get server instance. </p>
+
 <p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00029">29</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
 </div>
@@ -750,7 +845,7 @@ Protected Member Functions</h2></td></tr>
 
 <p>Get value rank of variable (type) node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00072">72</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00080">80</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, and <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>.</p>
 
@@ -773,7 +868,7 @@ Protected Member Functions</h2></td></tr>
 
 <p>Get write mask, e.g. <code><a class="elRef" href="open62541/common_8h.html#a1214f1819ce0305107b143ec936e32d4">UA_WRITEMASK_ACCESSLEVEL</a> | <a class="elRef" href="open62541/common_8h.html#a787ca45478013b2f4f928453429ba701">UA_WRITEMASK_DESCRIPTION</a></code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00058">58</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00066">66</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, and <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>.</p>
 
@@ -805,9 +900,9 @@ template&lt;typename... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00169">169</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00176">176</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00175">requireNodeClass()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00182">requireNodeClass()</a>.</p>
 
 </div>
 </div>
@@ -827,9 +922,9 @@ template&lt;typename T &gt; </div>
 
 <p>Read array from variable node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00201">201</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00208">208</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Variant_8h_source.html#l00166">opcua::Variant::getArrayCopy()</a>, and <a class="el" href="Node_8cpp_source.html#l00287">readValue()</a>.</p>
+<p class="reference">References <a class="el" href="Variant_8h_source.html#l00166">opcua::Variant::getArrayCopy()</a>, and <a class="el" href="Node_8cpp_source.html#l00314">readValue()</a>.</p>
 
 </div>
 </div>
@@ -849,9 +944,9 @@ template&lt;typename T &gt; </div>
 
 <p>Read scalar from variable node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00194">194</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00201">201</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Variant_8h_source.html#l00148">opcua::Variant::getScalarCopy()</a>, and <a class="el" href="Node_8cpp_source.html#l00287">readValue()</a>.</p>
+<p class="reference">References <a class="el" href="Variant_8h_source.html#l00148">opcua::Variant::getScalarCopy()</a>, and <a class="el" href="Node_8cpp_source.html#l00314">readValue()</a>.</p>
 
 </div>
 </div>
@@ -873,11 +968,11 @@ template&lt;typename T &gt; </div>
 
 <p>Read value from variable node as <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> object. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00287">287</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00314">314</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00121">opcua::TypeWrapper&lt; T, typeIndex &gt;::handle()</a>, and <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>.</p>
+<p class="reference">References <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00131">opcua::TypeWrapper&lt; T, typeIndex &gt;::handle()</a>, and <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00201">readArray()</a>, and <a class="el" href="Node_8h_source.html#l00194">readScalar()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00208">readArray()</a>, and <a class="el" href="Node_8h_source.html#l00201">readScalar()</a>.</p>
 
 </div>
 </div>
@@ -897,7 +992,7 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00292">292</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00319">319</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>, and <a class="elRef" href="open62541/server_8h.html#a2f52737db0f19ad3c90b1da571e794c6">UA_Server_deleteNode()</a>.</p>
 
@@ -929,9 +1024,9 @@ template&lt;typename... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00175">175</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00182">182</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Types_8h_source.html#l00065">opcua::getNodeClassName()</a>, and <a class="el" href="Node_8h_source.html#l00169">isNodeClass()</a>.</p>
+<p class="reference">References <a class="el" href="Types_8h_source.html#l00065">opcua::getNodeClassName()</a>, and <a class="el" href="Node_8h_source.html#l00176">isNodeClass()</a>.</p>
 
 </div>
 </div>
@@ -954,7 +1049,7 @@ template&lt;typename... Ts&gt; </div>
 <p>Set access level mask of variable node, e.g. </p>
 <p><code><a class="elRef" href="open62541/common_8h.html#a40ea076d6ef4c0aaccdc0d14fb2573c4">UA_ACCESSLEVELMASK_READ</a> | <a class="elRef" href="open62541/common_8h.html#a92380e13ac90946ba3d5a7e975dfc5d3">UA_ACCESSLEVELMASK_WRITE</a></code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00141">141</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00149">149</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, and <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>.</p>
 
@@ -979,7 +1074,7 @@ template&lt;typename... Ts&gt; </div>
 <p>Set array dimensions of variable (type) node. </p>
 <p>Should be unspecified if ValueRank is &lt;= 0 (<a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383aed36a1ef76a59ee3f15180e0441188ad">ValueRank::Any</a>, <a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383af60357a8d17e45793298323f1b372a74">ValueRank::Scalar</a>, <a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383abc975004cfa0419c12cf23c09de61693">ValueRank::ScalarOrOneDimension</a>, <a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383ab175b16c7f24cc7dff60de6707c4739f">ValueRank::OneOrMoreDimensions</a>). The dimension zero is a wildcard and the actual value may have any length in this dimension. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00134">134</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00142">142</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, <a class="el" href="Variant_8h_source.html#l00216">opcua::Variant::setArrayCopy()</a>, and <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>.</p>
 
@@ -1003,7 +1098,7 @@ template&lt;typename... Ts&gt; </div>
 
 <p>Set data type of variable (type) node by node id. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00122">122</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00130">130</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, and <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>.</p>
 
@@ -1027,7 +1122,7 @@ template&lt;typename... Ts&gt; </div>
 
 <p>Set data type of variable (type) node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00115">115</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00123">123</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="Helper_8h_source.html#l00015">opcua::detail::getUaDataType()</a>, <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>, and <a class="elRef" href="open62541/structUA__DataType.html#a600c88a57a9e371cfe1da19f273f441b">UA_DataType::typeId</a>.</p>
 
@@ -1061,7 +1156,7 @@ template&lt;typename... Ts&gt; </div>
 
 <p>Set localized description. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00103">103</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00111">111</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, and <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>.</p>
 
@@ -1095,7 +1190,7 @@ template&lt;typename... Ts&gt; </div>
 
 <p>Set localized display name. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00096">96</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00104">104</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, and <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>.</p>
 
@@ -1119,7 +1214,7 @@ template&lt;typename... Ts&gt; </div>
 
 <p>Set modelling rule. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00148">148</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00156">156</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>, <a class="elRef" href="open62541/nodeids_8h.html#ab0a02879855e311f7826595aec8ece8f">UA_NS0ID_HASMODELLINGRULE</a>, and <a class="elRef" href="open62541/server_8h.html#ae3c683ec47055308bf805f4e6504cb16">UA_Server_addReference()</a>.</p>
 
@@ -1143,7 +1238,7 @@ template&lt;typename... Ts&gt; </div>
 
 <p>Set value rank of variable (type) node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00127">127</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00135">135</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, and <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>.</p>
 
@@ -1167,7 +1262,7 @@ template&lt;typename... Ts&gt; </div>
 
 <p>Set write mask, e.g. <code><a class="elRef" href="open62541/common_8h.html#a1214f1819ce0305107b143ec936e32d4">UA_WRITEMASK_ACCESSLEVEL</a> | <a class="elRef" href="open62541/common_8h.html#a787ca45478013b2f4f928453429ba701">UA_WRITEMASK_DESCRIPTION</a></code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00110">110</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00118">118</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, and <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>.</p>
 
@@ -1193,7 +1288,7 @@ template&lt;typename T , Type type&gt; </div>
 
 <p>Write array (std::vector) to variable node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00230">230</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00237">237</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -1227,9 +1322,9 @@ template&lt;typename T , Type type&gt; </div>
 
 <p>Write array (raw) to variable node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00219">219</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00226">226</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Variant_8h_source.html#l00201">opcua::Variant::setArray()</a>, <a class="el" href="Variant_8h_source.html#l00216">opcua::Variant::setArrayCopy()</a>, and <a class="el" href="Node_8cpp_source.html#l00282">writeValue()</a>.</p>
+<p class="reference">References <a class="el" href="Variant_8h_source.html#l00201">opcua::Variant::setArray()</a>, <a class="el" href="Variant_8h_source.html#l00216">opcua::Variant::setArrayCopy()</a>, and <a class="el" href="Node_8cpp_source.html#l00309">writeValue()</a>.</p>
 
 </div>
 </div>
@@ -1263,9 +1358,9 @@ template&lt;typename InputIt , Type type&gt; </div>
 
 <p>Write range of elements as array to variable node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00235">235</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00242">242</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Variant_8h_source.html#l00216">opcua::Variant::setArrayCopy()</a>, and <a class="el" href="Node_8cpp_source.html#l00282">writeValue()</a>.</p>
+<p class="reference">References <a class="el" href="Variant_8h_source.html#l00216">opcua::Variant::setArrayCopy()</a>, and <a class="el" href="Node_8cpp_source.html#l00309">writeValue()</a>.</p>
 
 </div>
 </div>
@@ -1289,9 +1384,9 @@ template&lt;typename T , Type type&gt; </div>
 
 <p>Write scalar to variable node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00208">208</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00215">215</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Variant_8h_source.html#l00175">opcua::Variant::setScalar()</a>, <a class="el" href="Variant_8h_source.html#l00190">opcua::Variant::setScalarCopy()</a>, and <a class="el" href="Node_8cpp_source.html#l00282">writeValue()</a>.</p>
+<p class="reference">References <a class="el" href="Variant_8h_source.html#l00175">opcua::Variant::setScalar()</a>, <a class="el" href="Variant_8h_source.html#l00190">opcua::Variant::setScalarCopy()</a>, and <a class="el" href="Node_8cpp_source.html#l00309">writeValue()</a>.</p>
 
 </div>
 </div>
@@ -1313,11 +1408,11 @@ template&lt;typename T , Type type&gt; </div>
 
 <p>Write <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> to variable node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00282">282</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00309">309</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, and <a class="el" href="ErrorHandling_8h_source.html#l00047">opcua::detail::throwOnBadStatus()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00219">writeArray()</a>, and <a class="el" href="Node_8h_source.html#l00208">writeScalar()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00226">writeArray()</a>, and <a class="el" href="Node_8h_source.html#l00215">writeScalar()</a>.</p>
 
 </div>
 </div>

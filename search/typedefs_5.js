@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['uaduration_4165',['UaDuration',['../classopcua_1_1DateTime.html#abab6383f0b5eaff787f1d3a92be046c0',1,'opcua::DateTime']]],
-  ['uatype_4166',['UaType',['../classopcua_1_1TypeWrapper.html#a38af5e18f1d7e8d7f72eaf5dbf7dc60b',1,'opcua::TypeWrapper']]]
+  ['uaduration_4171',['UaDuration',['../classopcua_1_1DateTime.html#abab6383f0b5eaff787f1d3a92be046c0',1,'opcua::DateTime']]],
+  ['uatype_4172',['UaType',['../classopcua_1_1TypeWrapper.html#a38af5e18f1d7e8d7f72eaf5dbf7dc60b',1,'opcua::TypeWrapper']]]
 ];
