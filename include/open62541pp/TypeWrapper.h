@@ -85,17 +85,27 @@ public:
         return *this;
     }
 
-    /// Implicit conversion to wrapped UA data type.
+    /// Implicit conversion to wrapped object.
     operator T&() noexcept {  // NOLINT
         return data_;
     }
 
-    /// Implicit conversion to wrapped UA data type.
+    /// Implicit conversion to wrapped object.
     operator const T&() const noexcept {  // NOLINT
         return data_;
     }
 
-    /// Swap wrapper objects.
+    /// Member access to wrapped object.
+    T* operator->() noexcept {
+        return &data_;
+    }
+
+    /// Member access to wrapped object.
+    const T* operator->() const noexcept {
+        return &data_;
+    }
+
+    /// Swap wrapped objects.
     void swap(TypeWrapper& other) noexcept {
         static_assert(std::is_swappable_v<T>);
         std::swap(this->data_, other.data_);
@@ -117,12 +127,12 @@ public:
         return detail::getUaDataType<typeIndex>();
     }
 
-    /// Return pointer to wrapped UA data type.
+    /// Return pointer to wrapped object.
     T* handle() noexcept {
         return &data_;
     }
 
-    /// Return const pointer to wrapped UA data type.
+    /// Return const pointer to wrapped object.
     const T* handle() const noexcept {
         return &data_;
     };

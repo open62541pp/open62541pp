@@ -68,6 +68,23 @@ TEST_CASE("TypeWrapper") {
         REQUIRE_NOTHROW(wrapper = std::move(wrapper));
     }
 
+    SECTION("Implicit conversion") {
+        TypeWrapper<UA_Float, UA_TYPES_FLOAT> wrapper(11.11f);
+
+        float& value = wrapper;
+        REQUIRE(value == 11.11f);
+
+        const float& cvalue = wrapper;
+        REQUIRE(cvalue == 11.11f);
+    }
+
+    SECTION("Member access") {
+        TypeWrapper<UA_NodeId, UA_TYPES_NODEID> wrapper(UA_NODEID_NUMERIC(1, 1000));
+        REQUIRE(wrapper->namespaceIndex == 1);
+        REQUIRE(wrapper->identifierType == UA_NODEIDTYPE_NUMERIC);
+        REQUIRE(wrapper->identifier.numeric == 1000);
+    }
+
     SECTION("Swap") {
         TypeWrapper<UA_String, UA_TYPES_STRING> wrapper1(UA_STRING_ALLOC("test"));
         TypeWrapper<UA_String, UA_TYPES_STRING> wrapper2;
