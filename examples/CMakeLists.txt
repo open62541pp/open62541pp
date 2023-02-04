@@ -1,4 +1,7 @@
-set(examples_sources server.cpp)
+set(examples_sources
+    server.cpp
+    server_instantiation.cpp
+)
 
 foreach(source ${examples_sources})
     # extract filename
