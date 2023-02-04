@@ -25,8 +25,11 @@ class Node {
 public:
     Node(const Server& server, const NodeId& id);
 
-    // getParentNode?
-    // getChildNodes?
+    /// Get server instance.
+    Server& getServer() noexcept;
+
+    /// Get server instance.
+    const Server& getServer() const noexcept;
 
     /// Get node id.
     const NodeId& getNodeId() const noexcept;
