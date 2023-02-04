@@ -109,6 +109,15 @@ TEST_CASE("Node") {
         CHECK(server.getReferenceTypesNode().getNodeClass() == NodeClass::Object);
     }
 
+    SECTION("Get child") {
+        REQUIRE_THROWS(server.getRootNode().getChild({}));
+        REQUIRE_THROWS(server.getRootNode().getChild({{0, "Invalid"}}));
+        REQUIRE(
+            server.getRootNode().getChild({{0, "Types"}, {0, "ObjectTypes"}}) ==
+            server.getObjectTypesNode()
+        );
+    }
+
     SECTION("Try read/write with node classes other than Variable") {
         REQUIRE_THROWS(server.getRootNode().readScalar<int>());
         REQUIRE_THROWS(server.getRootNode().writeScalar<int>({}));

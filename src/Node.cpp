@@ -287,6 +287,25 @@ void Node::addReference(const NodeId& target, ReferenceType referenceType, bool 
     detail::throwOnBadStatus(status);
 }
 
+Node Node::getChild(const std::vector<QualifiedName>& path) {
+    const std::vector<UA_QualifiedName> pathNative(path.begin(), path.end());
+    const TypeWrapper<UA_BrowsePathResult, UA_TYPES_BROWSEPATHRESULT> result(
+        UA_Server_browseSimplifiedBrowsePath(
+            server_.handle(),
+            nodeId_,  // origin
+            pathNative.size(),  // browse path size
+            pathNative.data()  // browse path
+        )
+    );
+    detail::throwOnBadStatus(result->statusCode);
+    assert(result->targets != nullptr && result->targetsSize >= 1);  // NOLINT
+    const auto id = ExpandedNodeId(result->targets[0].targetId);  // NOLINT
+    if (!id.isLocal()) {
+        throw BadStatus(UA_STATUSCODE_BADNOMATCH);
+    }
+    return {server_, id.getNodeId()};
+}
+
 void Node::writeValue(const Variant& var) {
     const auto status = UA_Server_writeValue(server_.handle(), nodeId_, var);
     detail::throwOnBadStatus(status);

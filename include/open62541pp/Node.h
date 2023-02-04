@@ -129,6 +129,10 @@ public:
     /// Add reference.
     void addReference(const NodeId& target, ReferenceType referenceType, bool forward = true);
 
+    /// Get a child specified by its path from this node (only local nodes).
+    /// @exception BadStatus If path not found (BadNoMatch)
+    Node getChild(const std::vector<QualifiedName>& path);
+
     // Read value from variable node as DataValue object.
     // void readDataValue(DataValue& dataValue);
 
