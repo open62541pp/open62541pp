@@ -94,4 +94,9 @@ TEST_CASE("Server") {
         REQUIRE(server.registerNamespace("testnamespaceuri2") == 3);
         REQUIRE(server.registerNamespace("testnamespaceuri3") == 4);
     }
+
+    SECTION("Equality") {
+        REQUIRE(server == server);
+        REQUIRE(server != Server{});
+    }
 }

@@ -312,4 +312,14 @@ const UA_ServerConfig* Server::getConfig() const noexcept {
     return connection_->getConfig();
 }
 
+/* ---------------------------------------------------------------------------------------------- */
+
+bool operator==(const Server& left, const Server& right) noexcept {
+    return (left.handle() == right.handle());
+}
+
+bool operator!=(const Server& left, const Server& right) noexcept {
+    return !(left == right);
+}
+
 }  // namespace opcua
