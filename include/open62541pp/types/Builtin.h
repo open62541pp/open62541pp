@@ -83,6 +83,11 @@ public:
 
 /**
  * UA_LocalizedText wrapper class.
+ * The format of locale is `<language>[-<country/region>]`:
+ * - `<language>` is the two letter ISO 639 code for a language
+ * - `<country/region>` is the two letter ISO 3166 code for the country/region
+ * @see https://reference.opcfoundation.org/Core/Part3/v104/docs/8.5/
+ * @see https://reference.opcfoundation.org/Core/Part3/v104/docs/8.4/
  * @ingroup TypeWrapper
  */
 class LocalizedText : public TypeWrapper<UA_LocalizedText, UA_TYPES_LOCALIZEDTEXT> {
@@ -90,7 +95,7 @@ public:
     // NOLINTNEXTLINE, false positive?
     using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
 
-    LocalizedText(std::string_view text, std::string_view locale);
+    LocalizedText(std::string_view locale, std::string_view text, bool assertLocaleFormat = true);
 
     std::string getText() const;
     std::string_view getTextView() const;

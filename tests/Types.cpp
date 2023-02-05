@@ -263,7 +263,7 @@ TEST_CASE("Variant") {
         }
 
         {
-            LocalizedText value("text", "en-US");
+            LocalizedText value("en-US", "text");
             var.setScalar(value);
             REQUIRE(var.getScalarCopy<LocalizedText>() == value);
         }

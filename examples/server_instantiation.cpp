@@ -12,22 +12,22 @@ int main() {
      */
     auto nodeBaseObjectType = server.getBaseObjectTypeNode();
     auto nodeMamalType = nodeBaseObjectType.addObjectType({1, 10000}, "MamalType");
-    nodeMamalType.setDescription("A mamal", "en-US");
-    nodeMamalType.setDisplayName("MamalType", "en-US");
+    nodeMamalType.setDescription("en-US", "A mamal");
+    nodeMamalType.setDisplayName("en-US", "MamalType");
 
     auto nodeMamalTypeAge = nodeMamalType.addVariable({1, 10001}, "Age");
-    nodeMamalTypeAge.setDescription("This mamals age in months", "en-US");
-    nodeMamalTypeAge.setDisplayName("Age", "en-US");
+    nodeMamalTypeAge.setDescription("en-US", "This mamals age in months");
+    nodeMamalTypeAge.setDisplayName("en-US", "Age");
     nodeMamalTypeAge.setModellingRule(opcua::ModellingRule::Mandatory);  // create for new instance
     nodeMamalTypeAge.writeScalar<uint32_t>(0);  // default age
 
     auto nodeDogType = nodeMamalType.addObjectType({1, 10002}, "DogType");
-    nodeDogType.setDescription("A dog, subtype of mamal", "en-US");
-    nodeDogType.setDisplayName("DogType", "en-US");
+    nodeDogType.setDescription("en-US", "A dog, subtype of mamal");
+    nodeDogType.setDisplayName("en-US", "DogType");
 
     auto nodeDogTypeName = nodeDogType.addVariable({1, 10003}, "Name");
-    nodeDogTypeName.setDescription("This dogs name", "en-US");
-    nodeDogTypeName.setDisplayName("Name", "en-US");
+    nodeDogTypeName.setDescription("en-US", "This dogs name");
+    nodeDogTypeName.setDisplayName("en-US", "Name");
     nodeDogTypeName.setModellingRule(opcua::ModellingRule::Mandatory);  // create for new instance
     nodeDogTypeName.writeScalar(opcua::String("unnamed dog"));  // default name
 
@@ -39,8 +39,8 @@ int main() {
      */
     auto nodeObjects = server.getObjectsNode();
     auto nodeBello = nodeObjects.addObject({1, 20000}, "Bello", nodeDogType.getNodeId());
-    nodeBello.setDescription("A dog named Bello", "en-US");
-    nodeBello.setDisplayName("Bello", "en-US");
+    nodeBello.setDescription("en-US", "A dog named Bello");
+    nodeBello.setDisplayName("en-US", "Bello");
 
     // Set variables Age and Name
     nodeBello.getChild({{1, "Age"}}).writeScalar(3U);

@@ -31,8 +31,8 @@ TEST_CASE("Node") {
         REQUIRE(node.getAccessLevel() == UA_ACCESSLEVELMASK_READ);
 
         // set new attributes
-        REQUIRE_NOTHROW(node.setDisplayName("newDisplayName", "en"));
-        REQUIRE_NOTHROW(node.setDescription("newDescription", "de"));
+        REQUIRE_NOTHROW(node.setDisplayName("en-US", "newDisplayName"));
+        REQUIRE_NOTHROW(node.setDescription("de-DE", "newDescription"));
         REQUIRE_NOTHROW(node.setWriteMask(11));
         REQUIRE_NOTHROW(node.setDataType(NodeId(0, 2)));
         REQUIRE_NOTHROW(node.setValueRank(ValueRank::TwoDimensions));
@@ -41,9 +41,9 @@ TEST_CASE("Node") {
 
         // get new attributes
         REQUIRE(node.getDisplayName().getText() == "newDisplayName");
-        REQUIRE(node.getDisplayName().getLocale() == "en");
+        REQUIRE(node.getDisplayName().getLocale() == "en-US");
         REQUIRE(node.getDescription().getText() == "newDescription");
-        REQUIRE(node.getDescription().getLocale() == "de");
+        REQUIRE(node.getDescription().getLocale() == "de-DE");
         REQUIRE(node.getWriteMask() == 11);
         REQUIRE(node.getDataType() == NodeId(0, 2));
         REQUIRE(node.getValueRank() == ValueRank::TwoDimensions);

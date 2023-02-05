@@ -1,5 +1,7 @@
 #include "open62541pp/types/Builtin.h"
 
+#include <cassert>
+
 #include "open62541pp/Helper.h"
 
 namespace opcua {
@@ -72,8 +74,18 @@ std::string_view QualifiedName::getNameView() const {
 
 /* ---------------------------------------- LocalizedText --------------------------------------- */
 
-LocalizedText::LocalizedText(std::string_view text, std::string_view locale)
-    : LocalizedText(UA_LocalizedText{detail::allocUaString(locale), detail::allocUaString(text)}) {}
+LocalizedText::LocalizedText(
+    std::string_view locale, std::string_view text, bool assertLocaleFormat
+)
+    : LocalizedText(UA_LocalizedText{detail::allocUaString(locale), detail::allocUaString(text)}) {
+    if (assertLocaleFormat) {
+        // NOLINTNEXTLINE
+        assert(
+            (locale.size() == 2 || locale.size() == 5) &&
+            "locale must be of format <language>[-<country/region>]"
+        );
+    }
+}
 
 std::string LocalizedText::getText() const {
     return detail::toString(handle()->text);

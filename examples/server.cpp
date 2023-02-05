@@ -20,8 +20,8 @@ int main() {
 
     // set node attributes
     myIntegerNode.setDataType(opcua::Type::Int32);
-    myIntegerNode.setDisplayName("the answer", "en-US");
-    myIntegerNode.setDescription("the answer", "en-US");
+    myIntegerNode.setDisplayName("en-US", "the answer");
+    myIntegerNode.setDescription("en-US", "the answer");
 
     // write value
     myIntegerNode.writeScalar(42);
