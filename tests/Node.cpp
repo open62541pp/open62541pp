@@ -18,36 +18,36 @@ TEST_CASE("Node") {
         auto node = server.getObjectsNode().addVariable({1, "testAttributes"}, "testAttributes");
 
         // get default attributes
-        REQUIRE(node.getNodeClass() == NodeClass::Variable);
-        REQUIRE(node.getBrowseName() == "testAttributes");
-        REQUIRE(node.getDisplayName() == LocalizedText("", "testAttributes"));
-        REQUIRE(node.getDescription().getText().empty());
-        REQUIRE(node.getDescription().getLocale().empty());
-        REQUIRE(node.getWriteMask() == 0);
-        REQUIRE(node.getDataType() == NodeId(0, UA_NS0ID_BASEDATATYPE));
-        REQUIRE(node.getValueRank() == ValueRank::Any);
-        REQUIRE(node.getArrayDimensions().empty());
-        REQUIRE(node.getAccessLevel() == UA_ACCESSLEVELMASK_READ);
+        REQUIRE(node.readNodeClass() == NodeClass::Variable);
+        REQUIRE(node.readBrowseName() == "testAttributes");
+        REQUIRE(node.readDisplayName() == LocalizedText("", "testAttributes"));
+        REQUIRE(node.readDescription().getText().empty());
+        REQUIRE(node.readDescription().getLocale().empty());
+        REQUIRE(node.readWriteMask() == 0);
+        REQUIRE(node.readDataType() == NodeId(0, UA_NS0ID_BASEDATATYPE));
+        REQUIRE(node.readValueRank() == ValueRank::Any);
+        REQUIRE(node.readArrayDimensions().empty());
+        REQUIRE(node.readAccessLevel() == UA_ACCESSLEVELMASK_READ);
 
         // set new attributes
-        REQUIRE_NOTHROW(node.setDisplayName("en-US", "newDisplayName"));
-        REQUIRE_NOTHROW(node.setDescription("de-DE", "newDescription"));
-        REQUIRE_NOTHROW(node.setWriteMask(11));
-        REQUIRE_NOTHROW(node.setDataType(NodeId(0, 2)));
-        REQUIRE_NOTHROW(node.setValueRank(ValueRank::TwoDimensions));
-        REQUIRE_NOTHROW(node.setArrayDimensions({3, 2}));
-        REQUIRE_NOTHROW(node.setAccessLevel(UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE));
+        REQUIRE_NOTHROW(node.writeDisplayName("en-US", "newDisplayName"));
+        REQUIRE_NOTHROW(node.writeDescription("de-DE", "newDescription"));
+        REQUIRE_NOTHROW(node.writeWriteMask(11));
+        REQUIRE_NOTHROW(node.writeDataType(NodeId(0, 2)));
+        REQUIRE_NOTHROW(node.writeValueRank(ValueRank::TwoDimensions));
+        REQUIRE_NOTHROW(node.writeArrayDimensions({3, 2}));
+        REQUIRE_NOTHROW(node.writeAccessLevel(UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE));
 
         // get new attributes
-        REQUIRE(node.getDisplayName() == LocalizedText("en-US", "newDisplayName"));
-        REQUIRE(node.getDescription() == LocalizedText("de-DE", "newDescription"));
-        REQUIRE(node.getWriteMask() == 11);
-        REQUIRE(node.getDataType() == NodeId(0, 2));
-        REQUIRE(node.getValueRank() == ValueRank::TwoDimensions);
-        REQUIRE(node.getArrayDimensions().size() == 2);
-        REQUIRE(node.getArrayDimensions().at(0) == 3);
-        REQUIRE(node.getArrayDimensions().at(1) == 2);
-        REQUIRE(node.getAccessLevel() == (UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE));
+        REQUIRE(node.readDisplayName() == LocalizedText("en-US", "newDisplayName"));
+        REQUIRE(node.readDescription() == LocalizedText("de-DE", "newDescription"));
+        REQUIRE(node.readWriteMask() == 11);
+        REQUIRE(node.readDataType() == NodeId(0, 2));
+        REQUIRE(node.readValueRank() == ValueRank::TwoDimensions);
+        REQUIRE(node.readArrayDimensions().size() == 2);
+        REQUIRE(node.readArrayDimensions().at(0) == 3);
+        REQUIRE(node.readArrayDimensions().at(1) == 2);
+        REQUIRE(node.readAccessLevel() == (UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE));
     }
 
     SECTION("Value rank and array dimension combinations") {
@@ -61,47 +61,47 @@ TEST_CASE("Node") {
                 ValueRank::OneOrMoreDimensions
             );
             CAPTURE(valueRank);
-            node.setValueRank(valueRank);
-            CHECK_NOTHROW(node.setArrayDimensions({}));
-            CHECK_THROWS(node.setArrayDimensions({1}));
-            CHECK_THROWS(node.setArrayDimensions({1, 2}));
-            CHECK_THROWS(node.setArrayDimensions({1, 2, 3}));
+            node.writeValueRank(valueRank);
+            CHECK_NOTHROW(node.writeArrayDimensions({}));
+            CHECK_THROWS(node.writeArrayDimensions({1}));
+            CHECK_THROWS(node.writeArrayDimensions({1, 2}));
+            CHECK_THROWS(node.writeArrayDimensions({1, 2, 3}));
         }
 
         SECTION("OneDimension") {
-            node.setValueRank(ValueRank::OneDimension);
-            node.setArrayDimensions({1});
-            CHECK_THROWS(node.setArrayDimensions({}));
-            CHECK_THROWS(node.setArrayDimensions({1, 2}));
-            CHECK_THROWS(node.setArrayDimensions({1, 2, 3}));
+            node.writeValueRank(ValueRank::OneDimension);
+            node.writeArrayDimensions({1});
+            CHECK_THROWS(node.writeArrayDimensions({}));
+            CHECK_THROWS(node.writeArrayDimensions({1, 2}));
+            CHECK_THROWS(node.writeArrayDimensions({1, 2, 3}));
         }
 
         SECTION("TwoDimensions") {
-            node.setValueRank(ValueRank::TwoDimensions);
-            node.setArrayDimensions({1, 2});
-            CHECK_THROWS(node.setArrayDimensions({}));
-            CHECK_THROWS(node.setArrayDimensions({1}));
-            CHECK_THROWS(node.setArrayDimensions({1, 2, 3}));
+            node.writeValueRank(ValueRank::TwoDimensions);
+            node.writeArrayDimensions({1, 2});
+            CHECK_THROWS(node.writeArrayDimensions({}));
+            CHECK_THROWS(node.writeArrayDimensions({1}));
+            CHECK_THROWS(node.writeArrayDimensions({1, 2, 3}));
         }
 
         SECTION("ThreeDimensions") {
-            node.setValueRank(ValueRank::ThreeDimensions);
-            node.setArrayDimensions({1, 2, 3});
-            CHECK_THROWS(node.setArrayDimensions({}));
-            CHECK_THROWS(node.setArrayDimensions({1}));
-            CHECK_THROWS(node.setArrayDimensions({1, 2}));
+            node.writeValueRank(ValueRank::ThreeDimensions);
+            node.writeArrayDimensions({1, 2, 3});
+            CHECK_THROWS(node.writeArrayDimensions({}));
+            CHECK_THROWS(node.writeArrayDimensions({1}));
+            CHECK_THROWS(node.writeArrayDimensions({1, 2}));
         }
     }
 
     SECTION("Node class of default nodes") {
-        CHECK(server.getRootNode().getNodeClass() == NodeClass::Object);
-        CHECK(server.getObjectsNode().getNodeClass() == NodeClass::Object);
-        CHECK(server.getTypesNode().getNodeClass() == NodeClass::Object);
-        CHECK(server.getViewsNode().getNodeClass() == NodeClass::Object);
-        CHECK(server.getObjectTypesNode().getNodeClass() == NodeClass::Object);
-        CHECK(server.getVariableTypesNode().getNodeClass() == NodeClass::Object);
-        CHECK(server.getDataTypesNode().getNodeClass() == NodeClass::Object);
-        CHECK(server.getReferenceTypesNode().getNodeClass() == NodeClass::Object);
+        CHECK(server.getRootNode().readNodeClass() == NodeClass::Object);
+        CHECK(server.getObjectsNode().readNodeClass() == NodeClass::Object);
+        CHECK(server.getTypesNode().readNodeClass() == NodeClass::Object);
+        CHECK(server.getViewsNode().readNodeClass() == NodeClass::Object);
+        CHECK(server.getObjectTypesNode().readNodeClass() == NodeClass::Object);
+        CHECK(server.getVariableTypesNode().readNodeClass() == NodeClass::Object);
+        CHECK(server.getDataTypesNode().readNodeClass() == NodeClass::Object);
+        CHECK(server.getReferenceTypesNode().readNodeClass() == NodeClass::Object);
     }
 
     SECTION("Get child") {
@@ -143,7 +143,7 @@ TEST_CASE("Node") {
 
     SECTION("Read/write scalar") {
         auto node = server.getRootNode().addVariable({1, "testScalar"}, "testScalar");
-        node.setDataType(Type::Float);
+        node.writeDataType(Type::Float);
 
         // Writes with wrong data type
         REQUIRE_THROWS(node.writeScalar<bool>({}));
@@ -157,7 +157,7 @@ TEST_CASE("Node") {
 
     SECTION("Read/write string") {
         auto node = server.getRootNode().addVariable({1, "testString"}, "testString");
-        node.setDataType(Type::String);
+        node.writeDataType(Type::String);
 
         String str("test");
         REQUIRE_NOTHROW(node.writeScalar(str));
@@ -166,7 +166,7 @@ TEST_CASE("Node") {
 
     SECTION("Read/write array") {
         auto node = server.getRootNode().addVariable({1, "testArray"}, "testArray");
-        node.setDataType(Type::Double);
+        node.writeDataType(Type::Double);
 
         // Writes with wrong data type
         REQUIRE_THROWS(node.writeArray<int>({}));
@@ -197,7 +197,7 @@ TEST_CASE("Node") {
         auto node = server.getObjectsNode().addObject(id, "obj");
         REQUIRE_NOTHROW(Node(server, id));
 
-        node.remove();
+        node.deleteNode();
         REQUIRE_THROWS(Node(server, id));
     }
 
