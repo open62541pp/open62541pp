@@ -6,8 +6,8 @@
 
 #include "open62541pp/Helper.h"
 #include "open62541pp/Node.h"
-#include "open62541pp/NodeId.h"
 #include "open62541pp/Server.h"
+#include "open62541pp/types/NodeId.h"
 
 #include "open62541_impl.h"
 

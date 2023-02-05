@@ -11,7 +11,7 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Helper.h"
 #include "open62541pp/Node.h"
-#include "open62541pp/TypeWrapper.h"
+#include "open62541pp/types/Builtin.h"  // ByteString
 
 #include "open62541_impl.h"
 #include "version.h"

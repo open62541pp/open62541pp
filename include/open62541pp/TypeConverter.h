@@ -1,5 +1,6 @@
 #pragma once
 
+#include <array>
 #include <chrono>
 #include <iterator>  // distance
 #include <string>
@@ -11,6 +12,7 @@
 #include "open62541pp/Traits.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/open62541.h"
+#include "open62541pp/types/DateTime.h"
 
 namespace opcua {
 

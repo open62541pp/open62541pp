@@ -3,14 +3,17 @@
 #include <cstdint>
 #include <string>
 #include <string_view>
+#include <utility>  // forward
 #include <vector>
 
 #include "open62541pp/Common.h"
 #include "open62541pp/ErrorHandling.h"
-#include "open62541pp/NodeId.h"
 #include "open62541pp/Server.h"
+#include "open62541pp/TypeConverter.h"  // guessType
 #include "open62541pp/TypeWrapper.h"
-#include "open62541pp/Variant.h"
+#include "open62541pp/types/Builtin.h"
+#include "open62541pp/types/NodeId.h"
+#include "open62541pp/types/Variant.h"
 
 namespace opcua {
 

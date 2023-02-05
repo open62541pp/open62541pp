@@ -137,89 +137,11 @@ TEMPLATE_TEST_CASE_SIG(
         wrapper1.swap(wrapper2);
     }
 
-    SECTION("Get type") {
+    SECTION("Get type index") {
         STATIC_REQUIRE(TypeWrapper<T, typeIndex>::getTypeIndex() == typeIndex);
     }
 
     SECTION("Get data type") {
         REQUIRE(TypeWrapper<T, typeIndex>::getDataType() == &UA_TYPES[typeIndex]);
-    }
-}
-
-TEMPLATE_TEST_CASE("StringLike", "", String, ByteString, XmlElement) {
-    SECTION("Construct with const char*") {
-        TestType wrapper("test");
-        REQUIRE(wrapper.handle()->length == 4);
-        REQUIRE_THAT(wrapper.get(), Equals("test"));
-        REQUIRE_THAT(std::string(wrapper.getView()), Equals("test"));
-    }
-
-    SECTION("Construct from non-null-terminated view") {
-        std::string str("test123");
-        std::string_view sv(str.c_str(), 4);
-        TestType wrapper(sv);
-        REQUIRE_THAT(wrapper.get(), Equals("test"));
-    }
-
-    SECTION("Equality") {
-        REQUIRE(TestType("test") == TestType("test"));
-        REQUIRE(TestType("test") != TestType());
-    }
-}
-
-TEST_CASE("Guid") {
-    UA_UInt32 data1{11};
-    UA_UInt16 data2{22};
-    UA_UInt16 data3{33};
-    std::array<UA_Byte, 8> data4{1, 2, 3, 4, 5, 6, 7, 8};
-
-    Guid wrapper(data1, data2, data3, data4);
-
-    REQUIRE(wrapper.handle()->data1 == data1);
-    REQUIRE(wrapper.handle()->data2 == data2);
-    REQUIRE(wrapper.handle()->data3 == data3);
-    for (int i = 0; i < 8; ++i) {
-        REQUIRE(wrapper.handle()->data4[i] == data4[i]);  // NOLINT
-    }
-}
-
-TEST_CASE("DateTime") {
-    SECTION("Empty") {
-        const DateTime dt;
-        REQUIRE(dt.get() == 0);
-        REQUIRE(*dt.handle() == 0);
-        // UA time starts before Unix time -> 0
-        REQUIRE(dt.toTimePoint() == std::chrono::system_clock::time_point{});
-        REQUIRE(dt.toUnixTime() == 0);
-
-        const auto dts = dt.toStruct();
-        REQUIRE(dts.nanoSec == 0);
-        REQUIRE(dts.microSec == 0);
-        REQUIRE(dts.milliSec == 0);
-        REQUIRE(dts.sec == 0);
-        REQUIRE(dts.min == 0);
-        REQUIRE(dts.hour == 0);
-        REQUIRE(dts.day == 1);
-        REQUIRE(dts.month == 1);
-        REQUIRE(dts.year == 1601);
-    }
-
-    SECTION("From std::chrono::time_point") {
-        using namespace std::chrono;
-
-        const auto now = system_clock::now();
-        const uint64_t secSinceEpoch = duration_cast<seconds>(now.time_since_epoch()).count();
-        const uint64_t nsecSinceEpoch = duration_cast<nanoseconds>(now.time_since_epoch()).count();
-
-        const DateTime dt(now);
-        REQUIRE(dt.get() == (nsecSinceEpoch / 100) + UA_DATETIME_UNIX_EPOCH);
-        REQUIRE(dt.toUnixTime() == secSinceEpoch);
-    }
-
-    SECTION("Comparison") {
-        const auto zero = DateTime(0);
-        const auto now = DateTime::now();
-        REQUIRE(zero != now);
-        REQUIRE(zero < now);
     }
 }

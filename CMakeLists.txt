@@ -102,10 +102,11 @@ add_library(
     open62541pp
     src/Helper.cpp
     src/Node.cpp
-    src/NodeId.cpp
     src/Server.cpp
-    src/TypeWrapper.cpp
-    src/Variant.cpp
+    src/types/Builtin.cpp
+    src/types/DateTime.cpp
+    src/types/NodeId.cpp
+    src/types/Variant.cpp
 )
 add_library(open62541pp::open62541pp ALIAS open62541pp)
 target_include_directories(open62541pp PUBLIC include)

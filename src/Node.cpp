@@ -1,5 +1,7 @@
 #include "open62541pp/Node.h"
 
+#include <cassert>
+
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Helper.h"
 #include "open62541pp/TypeWrapper.h"
