@@ -3,9 +3,9 @@
 #include <cstdint>
 #include <optional>
 
-#include "open62541pp/Common.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/open62541.h"
+#include "open62541pp/types/DateTime.h"
 #include "open62541pp/types/Variant.h"
 
 namespace opcua {

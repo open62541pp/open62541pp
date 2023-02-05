@@ -3,11 +3,9 @@
 #include <cstdint>
 #include <string>
 #include <string_view>
-#include <utility>  // forward
 #include <vector>
 
 #include "open62541pp/Common.h"
-#include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeConverter.h"  // guessType
 #include "open62541pp/TypeWrapper.h"
@@ -86,7 +84,7 @@ public:
     Node getChild(const std::vector<QualifiedName>& path);
 
     /// Get node class.
-    NodeClass readNodeClass() const noexcept;
+    NodeClass readNodeClass();
 
     /// Get browse name.
     std::string readBrowseName();
@@ -182,28 +180,9 @@ public:
     /// Remove this node.
     void deleteNode(bool deleteReferences = true);
 
-protected:
-    template <typename... Ts>
-    constexpr bool isNodeClass(Ts&&... classes) {
-        const auto isSame = [&](NodeClass c) { return nodeClass_ == c; };
-        return (isSame(classes) || ...);
-    }
-
-    template <typename... Ts>
-    void requireNodeClass(Ts&&... classes) {
-        const bool isAnyOf = isNodeClass(std::forward<Ts>(classes)...);
-        if (!isAnyOf) {
-            const auto nodeClassName = getNodeClassName(nodeClass_);
-            throw InvalidNodeClass(
-                std::string("Operation not allowed for nodes of class ").append(nodeClassName)
-            );
-        }
-    }
-
 private:
     Server server_;
     NodeId nodeId_;
-    NodeClass nodeClass_;
 };
 
 /* ---------------------------------------------------------------------------------------------- */

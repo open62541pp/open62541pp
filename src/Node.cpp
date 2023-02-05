@@ -19,13 +19,6 @@ Node::Node(const Server& server, const NodeId& id)  // NOLINT
         const auto status = UA_Server_readNodeId(server_.handle(), nodeId_, outputNode.handle());
         detail::throwOnBadStatus(status);
     }
-    // store node class
-    {
-        UA_NodeClass nodeClass = UA_NODECLASS_UNSPECIFIED;
-        const auto status = UA_Server_readNodeClass(server_.handle(), nodeId_, &nodeClass);
-        detail::throwOnBadStatus(status);
-        nodeClass_ = static_cast<NodeClass>(nodeClass);
-    }
 }
 
 Server& Node::getServer() noexcept {
@@ -182,8 +175,11 @@ Node Node::getChild(const std::vector<QualifiedName>& path) {
     return {server_, id.getNodeId()};
 }
 
-NodeClass Node::readNodeClass() const noexcept {
-    return nodeClass_;
+NodeClass Node::readNodeClass() {
+    UA_NodeClass nodeClass = UA_NODECLASS_UNSPECIFIED;
+    const auto status = UA_Server_readNodeClass(server_.handle(), nodeId_, &nodeClass);
+    detail::throwOnBadStatus(status);
+    return static_cast<NodeClass>(nodeClass);
 }
 
 std::string Node::readBrowseName() {
