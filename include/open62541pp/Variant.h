@@ -6,11 +6,11 @@
 #include <optional>
 #include <vector>
 
+#include "open62541pp/Common.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Helper.h"
 #include "open62541pp/TypeConverter.h"
 #include "open62541pp/TypeWrapper.h"
-#include "open62541pp/Types.h"
 #include "open62541pp/open62541.h"
 
 namespace opcua {

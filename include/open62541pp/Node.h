@@ -5,11 +5,11 @@
 #include <string_view>
 #include <vector>
 
+#include "open62541pp/Common.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/NodeId.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeWrapper.h"
-#include "open62541pp/Types.h"
 #include "open62541pp/Variant.h"
 
 namespace opcua {

@@ -4,9 +4,9 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_string.hpp>
 
+#include "open62541pp/Common.h"
 #include "open62541pp/Helper.h"  // detail::toString
 #include "open62541pp/TypeWrapper.h"
-#include "open62541pp/Types.h"
 
 using namespace Catch::Matchers;
 using namespace opcua;
