@@ -12,6 +12,7 @@
 #include "open62541pp/TypeConverter.h"  // guessType
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/types/Builtin.h"
+#include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"
 
@@ -136,8 +137,8 @@ public:
     /// @exception BadStatus If path not found (BadNoMatch)
     Node getChild(const std::vector<QualifiedName>& path);
 
-    // Read value from variable node as DataValue object.
-    // void readDataValue(DataValue& dataValue);
+    /// Read value from variable node as DataValue object.
+    void readDataValue(DataValue& value);
 
     /// Read value from variable node as Variant object.
     void readValue(Variant& variant);
@@ -150,8 +151,8 @@ public:
     template <typename T>
     std::vector<T> readArray();
 
-    // Write DataValue to variable node.
-    // void writeDataValue(const DataValue& variant);
+    /// Write DataValue to variable node.
+    void writeDataValue(const DataValue& value);
 
     /// Write Variant to variable node.
     void writeValue(const Variant& variant);

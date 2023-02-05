@@ -308,9 +308,25 @@ Node Node::getChild(const std::vector<QualifiedName>& path) {
     return {server_, id.getNodeId()};
 }
 
+void Node::writeDataValue(const DataValue& value) {
+    const auto status = UA_Server_writeDataValue(server_.handle(), nodeId_, value);
+    detail::throwOnBadStatus(status);
+}
+
 void Node::writeValue(const Variant& var) {
     const auto status = UA_Server_writeValue(server_.handle(), nodeId_, var);
     detail::throwOnBadStatus(status);
+}
+
+void Node::readDataValue(DataValue& value) {
+    UA_ReadValueId rvi;
+    UA_ReadValueId_init(&rvi);
+    rvi.nodeId = *nodeId_.handle();
+    rvi.attributeId = UA_ATTRIBUTEID_VALUE;
+    value = DataValue(UA_Server_read(server_.handle(), &rvi, UA_TIMESTAMPSTORETURN_BOTH));
+    if (value->hasStatus) {
+        detail::throwOnBadStatus(value->status);
+    }
 }
 
 void Node::readValue(Variant& var) {

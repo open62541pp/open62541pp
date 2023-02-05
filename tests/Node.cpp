@@ -123,6 +123,29 @@ TEST_CASE("Node") {
         REQUIRE_THROWS(server.getRootNode().writeScalar<int>({}));
     }
 
+    SECTION("Read/write data value") {
+        auto node = server.getRootNode().addVariable({"testValue", 1}, "testValue");
+
+        Variant var;
+        var.setScalarCopy<int>(11);
+        DataValue valueWrite(var, {}, {DateTime::now()}, {}, 1, UA_STATUSCODE_GOOD);
+        node.writeDataValue(valueWrite);
+
+        DataValue valueRead;
+        node.readDataValue(valueRead);
+
+        CHECK(valueRead->hasValue);
+        CHECK(valueRead->hasServerTimestamp);
+        CHECK(valueRead->hasSourceTimestamp);
+        CHECK(valueRead->hasServerPicoseconds);
+        CHECK(valueRead->hasSourcePicoseconds);
+        CHECK_FALSE(valueRead->hasStatus);  // doesn't contain error code on success
+
+        CHECK(valueRead.getValue().value().getScalar<int>() == 11);
+        CHECK(valueRead->sourceTimestamp == valueWrite->sourceTimestamp);
+        CHECK(valueRead->sourcePicoseconds == valueWrite->sourcePicoseconds);
+    }
+
     SECTION("Read/write scalar") {
         auto node = server.getRootNode().addVariable({"testScalar", 1}, "testScalar");
         node.setDataType(Type::Float);
@@ -132,7 +155,7 @@ TEST_CASE("Node") {
         REQUIRE_THROWS(node.writeScalar<int>({}));
 
         // Writes with correct data type
-        float value = 11.11;
+        float value = 11.11f;
         REQUIRE_NOTHROW(node.writeScalar(value));
         REQUIRE(node.readScalar<float>() == value);
     }
