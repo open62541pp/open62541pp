@@ -101,7 +101,7 @@ template <typename T, typename NativeType = typename TypeConverter<T>::NativeTyp
 /// Create and convert vector from native array.
 template <typename T, typename NativeType = typename TypeConverter<T>::NativeType>
 [[nodiscard]] std::vector<T> fromNativeArray(NativeType* array, size_t size) {
-    if constexpr (isNativeType<T>() && std::is_fundamental_v<T>) {
+    if constexpr (isBuiltinType<T>() && std::is_fundamental_v<T>) {
         return std::vector<T>(array, array + size);  // NOLINT
     } else {
         std::vector<T> result(size);

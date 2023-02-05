@@ -172,7 +172,7 @@ enum class ModellingRule : uint16_t {
 
 namespace detail {
 
-using NativeTypes = std::tuple<
+using BuiltinTypes = std::tuple<
     UA_Boolean,
     UA_SByte,
     UA_Byte,
@@ -200,12 +200,12 @@ using NativeTypes = std::tuple<
     UA_DiagnosticInfo>;
 
 template <typename T>
-constexpr bool isNativeType() {
-    return TupleHolds<NativeTypes, T>::value;
+constexpr bool isBuiltinType() {
+    return TupleHolds<BuiltinTypes, T>::value;
 }
 
 // template <size_t Index>
-// using NativeType = std::tuple_element<Index, NativeTypes>;
+// using BuiltinType = std::tuple_element<Index, BuiltinTypes>;
 
 }  // namespace detail
 
