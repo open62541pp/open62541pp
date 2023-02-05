@@ -15,11 +15,6 @@ using namespace Catch::Matchers;
 using namespace std::chrono_literals;
 using namespace opcua;
 
-static bool compareNodes(NodeId id, uint16_t numericId) {
-    auto uaNode = UA_NODEID_NUMERIC(0, numericId);
-    return UA_NodeId_equal(id.handle(), &uaNode);
-}
-
 TEST_CASE("Server") {
     SECTION("Constructors") {
         SECTION("Default") {
@@ -75,16 +70,16 @@ TEST_CASE("Server") {
 
     SECTION("Get default nodes") {
         // clang-format off
-        REQUIRE(compareNodes(server.getRootNode().getNodeId(),                 UA_NS0ID_ROOTFOLDER));
-        REQUIRE(compareNodes(server.getObjectsNode().getNodeId(),              UA_NS0ID_OBJECTSFOLDER));
-        REQUIRE(compareNodes(server.getTypesNode().getNodeId(),                UA_NS0ID_TYPESFOLDER));
-        REQUIRE(compareNodes(server.getViewsNode().getNodeId(),                UA_NS0ID_VIEWSFOLDER));
-        REQUIRE(compareNodes(server.getObjectTypesNode().getNodeId(),          UA_NS0ID_OBJECTTYPESFOLDER));
-        REQUIRE(compareNodes(server.getVariableTypesNode().getNodeId(),        UA_NS0ID_VARIABLETYPESFOLDER));
-        REQUIRE(compareNodes(server.getDataTypesNode().getNodeId(),            UA_NS0ID_DATATYPESFOLDER));
-        REQUIRE(compareNodes(server.getReferenceTypesNode().getNodeId(),       UA_NS0ID_REFERENCETYPESFOLDER));
-        REQUIRE(compareNodes(server.getBaseObjectTypeNode().getNodeId(),       UA_NS0ID_BASEOBJECTTYPE));
-        REQUIRE(compareNodes(server.getBaseDataVariableTypeNode().getNodeId(), UA_NS0ID_BASEDATAVARIABLETYPE));
+        CHECK(server.getRootNode().getNodeId()                 == NodeId{0, UA_NS0ID_ROOTFOLDER});
+        CHECK(server.getObjectsNode().getNodeId()              == NodeId{0, UA_NS0ID_OBJECTSFOLDER});
+        CHECK(server.getTypesNode().getNodeId()                == NodeId{0, UA_NS0ID_TYPESFOLDER});
+        CHECK(server.getViewsNode().getNodeId()                == NodeId{0, UA_NS0ID_VIEWSFOLDER});
+        CHECK(server.getObjectTypesNode().getNodeId()          == NodeId{0, UA_NS0ID_OBJECTTYPESFOLDER});
+        CHECK(server.getVariableTypesNode().getNodeId()        == NodeId{0, UA_NS0ID_VARIABLETYPESFOLDER});
+        CHECK(server.getDataTypesNode().getNodeId()            == NodeId{0, UA_NS0ID_DATATYPESFOLDER});
+        CHECK(server.getReferenceTypesNode().getNodeId()       == NodeId{0, UA_NS0ID_REFERENCETYPESFOLDER});
+        CHECK(server.getBaseObjectTypeNode().getNodeId()       == NodeId{0, UA_NS0ID_BASEOBJECTTYPE});
+        CHECK(server.getBaseDataVariableTypeNode().getNodeId() == NodeId{0, UA_NS0ID_BASEDATAVARIABLETYPE});
         // clang-format on
     }
 

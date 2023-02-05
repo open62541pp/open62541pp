@@ -10,12 +10,12 @@ TEST_CASE("Node") {
     Server server;
 
     SECTION("Constructor") {
-        REQUIRE_NOTHROW(Node(server, NodeId(1, 0) /* boolean */));
-        REQUIRE_THROWS(Node(server, NodeId("DoesNotExist", 1)));
+        REQUIRE_NOTHROW(Node(server, NodeId(0, UA_NS0ID_BOOLEAN)));
+        REQUIRE_THROWS(Node(server, NodeId(0, "DoesNotExist")));
     }
 
     SECTION("Get/set node attributes") {
-        auto node = server.getObjectsNode().addVariable({"testAttributes", 1}, "testAttributes");
+        auto node = server.getObjectsNode().addVariable({1, "testAttributes"}, "testAttributes");
 
         // get default attributes
         REQUIRE(node.getNodeClass() == NodeClass::Variable);
@@ -25,9 +25,7 @@ TEST_CASE("Node") {
         REQUIRE(node.getDescription().getText().empty());
         REQUIRE(node.getDescription().getLocale().empty());
         REQUIRE(node.getWriteMask() == 0);
-        // built-in type boolean has NodeId(1, 0)
-        // https://reference.opcfoundation.org/v104/Core/docs/Part6/5.1.2/
-        REQUIRE(node.getDataType() == NodeId(UA_NS0ID_BASEDATATYPE, 0));
+        REQUIRE(node.getDataType() == NodeId(0, UA_NS0ID_BASEDATATYPE));
         REQUIRE(node.getValueRank() == ValueRank::Any);
         REQUIRE(node.getArrayDimensions().empty());
         REQUIRE(node.getAccessLevel() == UA_ACCESSLEVELMASK_READ);
@@ -36,7 +34,7 @@ TEST_CASE("Node") {
         REQUIRE_NOTHROW(node.setDisplayName("newDisplayName", "en"));
         REQUIRE_NOTHROW(node.setDescription("newDescription", "de"));
         REQUIRE_NOTHROW(node.setWriteMask(11));
-        REQUIRE_NOTHROW(node.setDataType(NodeId(2, 0)));
+        REQUIRE_NOTHROW(node.setDataType(NodeId(0, 2)));
         REQUIRE_NOTHROW(node.setValueRank(ValueRank::TwoDimensions));
         REQUIRE_NOTHROW(node.setArrayDimensions({3, 2}));
         REQUIRE_NOTHROW(node.setAccessLevel(UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE));
@@ -47,7 +45,7 @@ TEST_CASE("Node") {
         REQUIRE(node.getDescription().getText() == "newDescription");
         REQUIRE(node.getDescription().getLocale() == "de");
         REQUIRE(node.getWriteMask() == 11);
-        REQUIRE(node.getDataType() == NodeId(2, 0));
+        REQUIRE(node.getDataType() == NodeId(0, 2));
         REQUIRE(node.getValueRank() == ValueRank::TwoDimensions);
         REQUIRE(node.getArrayDimensions().size() == 2);
         REQUIRE(node.getArrayDimensions().at(0) == 3);
@@ -56,7 +54,7 @@ TEST_CASE("Node") {
     }
 
     SECTION("Value rank and array dimension combinations") {
-        auto node = server.getObjectsNode().addVariable({"testDimensions", 1}, "testDimensions");
+        auto node = server.getObjectsNode().addVariable({1, "testDimensions"}, "testDimensions");
 
         SECTION("Unspecified dimension (ValueRank <= 0)") {
             auto valueRank = GENERATE(
@@ -124,7 +122,7 @@ TEST_CASE("Node") {
     }
 
     SECTION("Read/write data value") {
-        auto node = server.getRootNode().addVariable({"testValue", 1}, "testValue");
+        auto node = server.getRootNode().addVariable({1, "testValue"}, "testValue");
 
         Variant var;
         var.setScalarCopy<int>(11);
@@ -147,7 +145,7 @@ TEST_CASE("Node") {
     }
 
     SECTION("Read/write scalar") {
-        auto node = server.getRootNode().addVariable({"testScalar", 1}, "testScalar");
+        auto node = server.getRootNode().addVariable({1, "testScalar"}, "testScalar");
         node.setDataType(Type::Float);
 
         // Writes with wrong data type
@@ -161,7 +159,7 @@ TEST_CASE("Node") {
     }
 
     SECTION("Read/write string") {
-        auto node = server.getRootNode().addVariable({"testString", 1}, "testString");
+        auto node = server.getRootNode().addVariable({1, "testString"}, "testString");
         node.setDataType(Type::String);
 
         String str("test");
@@ -170,7 +168,7 @@ TEST_CASE("Node") {
     }
 
     SECTION("Read/write array") {
-        auto node = server.getRootNode().addVariable({"testArray", 1}, "testArray");
+        auto node = server.getRootNode().addVariable({1, "testArray"}, "testArray");
         node.setDataType(Type::Double);
 
         // Writes with wrong data type
@@ -197,7 +195,7 @@ TEST_CASE("Node") {
     }
 
     SECTION("Remove node") {
-        const NodeId id("testObj", 1);
+        const NodeId id(1, "testObj");
 
         auto node = server.getObjectsNode().addObject(id, "obj");
         REQUIRE_NOTHROW(Node(server, id));

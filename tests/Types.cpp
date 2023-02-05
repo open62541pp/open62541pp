@@ -109,32 +109,32 @@ TEST_CASE("NodeId") {
     }
 
     SECTION("Namespace index") {
-        REQUIRE(NodeId(1, 0).getNamespaceIndex() == 0);
-        REQUIRE(NodeId(1, 2).getNamespaceIndex() == 2);
+        REQUIRE(NodeId(2, 1).getNamespaceIndex() == 2);
+        REQUIRE(NodeId(0, 1).getNamespaceIndex() == 0);
     }
 
     SECTION("Comparison") {
-        REQUIRE(NodeId(1, 0) == NodeId(1, 0));
-        REQUIRE(NodeId(1, 0) <= NodeId(1, 0));
-        REQUIRE(NodeId(1, 0) >= NodeId(1, 0));
-        REQUIRE(NodeId(1, 0) != NodeId(2, 0));
-        REQUIRE(NodeId(1, 0) != NodeId(1, 1));
-        REQUIRE(NodeId("a", 0) == NodeId("a", 0));
-        REQUIRE(NodeId("a", 0) != NodeId("b", 0));
-        REQUIRE(NodeId("a", 0) != NodeId("a", 1));
+        REQUIRE(NodeId(0, 1) == NodeId(0, 1));
+        REQUIRE(NodeId(0, 1) <= NodeId(0, 1));
+        REQUIRE(NodeId(0, 1) >= NodeId(0, 1));
+        REQUIRE(NodeId(0, 1) != NodeId(0, 2));
+        REQUIRE(NodeId(0, 1) != NodeId(1, 1));
+        REQUIRE(NodeId(0, "a") == NodeId(0, "a"));
+        REQUIRE(NodeId(0, "a") != NodeId(0, "b"));
+        REQUIRE(NodeId(0, "a") != NodeId(1, "a"));
 
         // namespace index is compared before identifier
-        REQUIRE(NodeId(1, 0) < NodeId(0, 1));
-        REQUIRE(NodeId(1, 0) < NodeId(2, 0));
+        REQUIRE(NodeId(0, 1) < NodeId(1, 0));
+        REQUIRE(NodeId(0, 1) < NodeId(0, 2));
 
-        REQUIRE(NodeId("a", 1) < NodeId("b", 1));
-        REQUIRE(NodeId("b", 1) > NodeId("a", 1));
+        REQUIRE(NodeId(1, "a") < NodeId(1, "b"));
+        REQUIRE(NodeId(1, "b") > NodeId(1, "a"));
     }
 
     SECTION("Hash") {
-        REQUIRE(NodeId(1, 0).hash() == NodeId(1, 0).hash());
-        REQUIRE(NodeId(1, 0).hash() != NodeId(2, 0).hash());
-        REQUIRE(NodeId(1, 0).hash() != NodeId(1, 1).hash());
+        REQUIRE(NodeId(0, 1).hash() == NodeId(0, 1).hash());
+        REQUIRE(NodeId(0, 1).hash() != NodeId(0, 2).hash());
+        REQUIRE(NodeId(0, 1).hash() != NodeId(1, 1).hash());
     }
 
     SECTION("Get properties (getIdentifierType, getNamespaceIndex, getIdentifier") {
@@ -152,14 +152,14 @@ TEST_CASE("NodeId") {
         }
         {
             Guid guid(11, 22, 33, {1, 2, 3, 4, 5, 6, 7, 8});
-            NodeId id(guid, 3);
+            NodeId id(3, guid);
             REQUIRE(id.getIdentifierType() == NodeIdType::Guid);
             REQUIRE(id.getNamespaceIndex() == 3);
             REQUIRE(id.getIdentifierAs<Guid>() == guid);
         }
         {
             ByteString byteString("Test456");
-            NodeId id(byteString, 4);
+            NodeId id(4, byteString);
             REQUIRE(id.getIdentifierType() == NodeIdType::ByteString);
             REQUIRE(id.getNamespaceIndex() == 4);
             REQUIRE(id.getIdentifierAs<ByteString>() == byteString);
@@ -168,11 +168,11 @@ TEST_CASE("NodeId") {
 }
 
 TEST_CASE("ExpandedNodeId") {
-    ExpandedNodeId idLocal({"local", 1}, {}, 0);
+    ExpandedNodeId idLocal({1, "local"}, {}, 0);
     REQUIRE(idLocal.isLocal());
 
-    ExpandedNodeId idFull({"full", 1}, "namespace", 1);
-    REQUIRE(idFull.getNodeId() == NodeId{"full", 1});
+    ExpandedNodeId idFull({1, "full"}, "namespace", 1);
+    REQUIRE(idFull.getNodeId() == NodeId{1, "full"});
     REQUIRE(idFull.getNamespaceUri() == "namespace");
     REQUIRE(idFull.getServerIndex() == 1);
 
@@ -212,7 +212,7 @@ TEST_CASE("Variant") {
         REQUIRE(var.isScalar());
         REQUIRE(var.isType(&UA_TYPES[UA_TYPES_INT32]));
         REQUIRE(var.isType(Type::Int32));
-        REQUIRE(var.isType(NodeId{UA_NS0ID_INT32, 0}));
+        REQUIRE(var.isType(NodeId{0, UA_NS0ID_INT32}));
         REQUIRE(var.getVariantType().value() == Type::Int32);
 
         REQUIRE_THROWS(var.getScalar<bool>());
@@ -276,7 +276,7 @@ TEST_CASE("Variant") {
 
         REQUIRE(var.isArray());
         REQUIRE(var.isType(Type::Float));
-        REQUIRE(var.isType(NodeId{UA_NS0ID_FLOAT, 0}));
+        REQUIRE(var.isType(NodeId{0, UA_NS0ID_FLOAT}));
         REQUIRE(var.getVariantType().value() == Type::Float);
         REQUIRE(var.getArrayLength() == value.size());
         REQUIRE(var.handle()->data != value.data());
@@ -321,7 +321,7 @@ TEST_CASE("Variant") {
 
         REQUIRE(var.isArray());
         REQUIRE(var.isType(Type::String));
-        REQUIRE(var.isType(NodeId{UA_NS0ID_STRING, 0}));
+        REQUIRE(var.isType(NodeId{0, UA_NS0ID_STRING}));
         REQUIRE(var.getVariantType().value() == Type::String);
 
         REQUIRE_THROWS(var.getScalarCopy<std::string>());

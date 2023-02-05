@@ -21,19 +21,19 @@ static UA_NodeId fromStringView(
     return result;
 }
 
-NodeId::NodeId(uint32_t identifier, uint16_t namespaceIndex)
+NodeId::NodeId(uint16_t namespaceIndex, uint32_t identifier)
     : NodeId(UA_NODEID_NUMERIC(namespaceIndex, identifier)) {}
 
-NodeId::NodeId(std::string_view identifier, uint16_t namespaceIndex)
+NodeId::NodeId(uint16_t namespaceIndex, std::string_view identifier)
     : NodeId(fromStringView(namespaceIndex, UA_NODEIDTYPE_STRING, identifier)) {}
 
-NodeId::NodeId(const String& identifier, uint16_t namespaceIndex)
-    : NodeId(identifier.getView(), namespaceIndex) {}
+NodeId::NodeId(uint16_t namespaceIndex, const String& identifier)
+    : NodeId(namespaceIndex, identifier.getView()) {}
 
-NodeId::NodeId(const Guid& identifier, uint16_t namespaceIndex)
+NodeId::NodeId(uint16_t namespaceIndex, const Guid& identifier)
     : NodeId(UA_NODEID_GUID(namespaceIndex, *identifier.handle())) {}
 
-NodeId::NodeId(const ByteString& identifier, uint16_t namespaceIndex)
+NodeId::NodeId(uint16_t namespaceIndex, const ByteString& identifier)
     : NodeId(fromStringView(namespaceIndex, UA_NODEIDTYPE_BYTESTRING, identifier.getView())) {}
 
 uint32_t NodeId::hash() const {

@@ -11,7 +11,7 @@ int main() {
                   << "[" << opcua::getLogCategoryName(category) << "] " << msg << std::endl;
     });
 
-    const opcua::NodeId myIntegerNodeId{"the.answer", 1};
+    const opcua::NodeId myIntegerNodeId{1, "the.answer"};
     const std::string myIntegerName{"the answer"};
 
     // add variable node

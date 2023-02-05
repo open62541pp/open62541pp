@@ -31,19 +31,19 @@ public:
     using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
 
     /// Create NodeId with numeric identifier
-    NodeId(uint32_t identifier, uint16_t namespaceIndex);
+    NodeId(uint16_t namespaceIndex, uint32_t identifier);
 
     /// Create NodeId with String identifier from standard strings
-    NodeId(std::string_view identifier, uint16_t namespaceIndex);
+    NodeId(uint16_t namespaceIndex, std::string_view identifier);
 
     /// Create NodeId with String identifier from String wrapper class
-    NodeId(const String& identifier, uint16_t namespaceIndex);
+    NodeId(uint16_t namespaceIndex, const String& identifier);
 
     /// Create NodeId with Guid identifier
-    NodeId(const Guid& identifier, uint16_t namespaceIndex);
+    NodeId(uint16_t namespaceIndex, const Guid& identifier);
 
     /// Create NodeId with ByteString identifier
-    NodeId(const ByteString& identifier, uint16_t namespaceIndex);
+    NodeId(uint16_t namespaceIndex, const ByteString& identifier);
 
     uint32_t hash() const;
 

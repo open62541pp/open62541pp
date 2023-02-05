@@ -257,43 +257,43 @@ Node Server::getNode(const NodeId& id) {
 }
 
 Node Server::getRootNode() {
-    return {*this, {UA_NS0ID_ROOTFOLDER, 0}};
+    return {*this, {0, UA_NS0ID_ROOTFOLDER}};
 }
 
 Node Server::getObjectsNode() {
-    return {*this, {UA_NS0ID_OBJECTSFOLDER, 0}};
+    return {*this, {0, UA_NS0ID_OBJECTSFOLDER}};
 }
 
 Node Server::getTypesNode() {
-    return {*this, {UA_NS0ID_TYPESFOLDER, 0}};
+    return {*this, {0, UA_NS0ID_TYPESFOLDER}};
 }
 
 Node Server::getViewsNode() {
-    return {*this, {UA_NS0ID_VIEWSFOLDER, 0}};
+    return {*this, {0, UA_NS0ID_VIEWSFOLDER}};
 }
 
 Node Server::getObjectTypesNode() {
-    return {*this, {UA_NS0ID_OBJECTTYPESFOLDER, 0}};
+    return {*this, {0, UA_NS0ID_OBJECTTYPESFOLDER}};
 }
 
 Node Server::getVariableTypesNode() {
-    return {*this, {UA_NS0ID_VARIABLETYPESFOLDER, 0}};
+    return {*this, {0, UA_NS0ID_VARIABLETYPESFOLDER}};
 }
 
 Node Server::getDataTypesNode() {
-    return {*this, {UA_NS0ID_DATATYPESFOLDER, 0}};
+    return {*this, {0, UA_NS0ID_DATATYPESFOLDER}};
 }
 
 Node Server::getReferenceTypesNode() {
-    return {*this, {UA_NS0ID_REFERENCETYPESFOLDER, 0}};
+    return {*this, {0, UA_NS0ID_REFERENCETYPESFOLDER}};
 }
 
 Node Server::getBaseObjectTypeNode() {
-    return {*this, {UA_NS0ID_BASEOBJECTTYPE, 0}};
+    return {*this, {0, UA_NS0ID_BASEOBJECTTYPE}};
 }
 
 Node Server::getBaseDataVariableTypeNode() {
-    return {*this, {UA_NS0ID_BASEDATAVARIABLETYPE, 0}};
+    return {*this, {0, UA_NS0ID_BASEDATAVARIABLETYPE}};
 }
 
 UA_Server* Server::handle() noexcept {

@@ -100,7 +100,7 @@ public:
     Node addObject(
         const NodeId& id,
         std::string_view browseName,
-        const NodeId& objectType = {UA_NS0ID_BASEOBJECTTYPE, 0},
+        const NodeId& objectType = {0, UA_NS0ID_BASEOBJECTTYPE},
         ReferenceType referenceType = ReferenceType::HasComponent
     );
 
@@ -108,7 +108,7 @@ public:
     Node addVariable(
         const NodeId& id,
         std::string_view browseName,
-        const NodeId& variableType = {UA_NS0ID_BASEDATAVARIABLETYPE, 0},
+        const NodeId& variableType = {0, UA_NS0ID_BASEDATAVARIABLETYPE},
         ReferenceType referenceType = ReferenceType::HasComponent
     );
 
@@ -126,7 +126,7 @@ public:
     Node addVariableType(
         const NodeId& id,
         std::string_view browseName,
-        const NodeId& variableType = {UA_NS0ID_BASEDATAVARIABLETYPE, 0},
+        const NodeId& variableType = {0, UA_NS0ID_BASEDATAVARIABLETYPE},
         ReferenceType referenceType = ReferenceType::HasSubType
     );
 
