@@ -20,8 +20,7 @@ TEST_CASE("Node") {
         // get default attributes
         REQUIRE(node.getNodeClass() == NodeClass::Variable);
         REQUIRE(node.getBrowseName() == "testAttributes");
-        REQUIRE(node.getDisplayName().getText() == "testAttributes");  // default -> browse name
-        REQUIRE(node.getDisplayName().getLocale() == "");
+        REQUIRE(node.getDisplayName() == LocalizedText("", "testAttributes"));
         REQUIRE(node.getDescription().getText().empty());
         REQUIRE(node.getDescription().getLocale().empty());
         REQUIRE(node.getWriteMask() == 0);
@@ -40,10 +39,8 @@ TEST_CASE("Node") {
         REQUIRE_NOTHROW(node.setAccessLevel(UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE));
 
         // get new attributes
-        REQUIRE(node.getDisplayName().getText() == "newDisplayName");
-        REQUIRE(node.getDisplayName().getLocale() == "en-US");
-        REQUIRE(node.getDescription().getText() == "newDescription");
-        REQUIRE(node.getDescription().getLocale() == "de-DE");
+        REQUIRE(node.getDisplayName() == LocalizedText("en-US", "newDisplayName"));
+        REQUIRE(node.getDescription() == LocalizedText("de-DE", "newDescription"));
         REQUIRE(node.getWriteMask() == 11);
         REQUIRE(node.getDataType() == NodeId(0, 2));
         REQUIRE(node.getValueRank() == ValueRank::TwoDimensions);

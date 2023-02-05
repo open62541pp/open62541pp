@@ -28,13 +28,13 @@ NodeId::NodeId(uint16_t namespaceIndex, std::string_view identifier)
     : NodeId(fromStringView(namespaceIndex, UA_NODEIDTYPE_STRING, identifier)) {}
 
 NodeId::NodeId(uint16_t namespaceIndex, const String& identifier)
-    : NodeId(namespaceIndex, identifier.getView()) {}
+    : NodeId(namespaceIndex, identifier.get()) {}
 
 NodeId::NodeId(uint16_t namespaceIndex, const Guid& identifier)
     : NodeId(UA_NODEID_GUID(namespaceIndex, *identifier.handle())) {}
 
 NodeId::NodeId(uint16_t namespaceIndex, const ByteString& identifier)
-    : NodeId(fromStringView(namespaceIndex, UA_NODEIDTYPE_BYTESTRING, identifier.getView())) {}
+    : NodeId(fromStringView(namespaceIndex, UA_NODEIDTYPE_BYTESTRING, identifier.get())) {}
 
 uint32_t NodeId::hash() const {
     return UA_NodeId_hash(handle());
@@ -82,11 +82,7 @@ NodeId ExpandedNodeId::getNodeId() const noexcept {
     return NodeId(handle()->nodeId);
 }
 
-std::string ExpandedNodeId::getNamespaceUri() const {
-    return detail::toString(handle()->namespaceUri);
-}
-
-std::string_view ExpandedNodeId::getNamespaceUriView() const {
+std::string_view ExpandedNodeId::getNamespaceUri() const {
     return detail::toStringView(handle()->namespaceUri);
 }
 

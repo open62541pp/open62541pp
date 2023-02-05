@@ -91,10 +91,7 @@ public:
     bool isLocal() const noexcept;
 
     NodeId getNodeId() const noexcept;
-
-    std::string getNamespaceUri() const;
-    std::string_view getNamespaceUriView() const;
-
+    std::string_view getNamespaceUri() const;
     uint32_t getServerIndex() const noexcept;
 };
 

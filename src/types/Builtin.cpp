@@ -11,11 +11,7 @@ namespace opcua {
 String::String(std::string_view str)
     : String(UA_String{detail::allocUaString(str)}) {}
 
-std::string String::get() const {
-    return detail::toString(*handle());
-}
-
-std::string_view String::getView() const {
+std::string_view String::get() const {
     return detail::toStringView(*handle());
 }
 
@@ -34,11 +30,7 @@ Guid::Guid(UA_UInt32 data1, UA_UInt16 data2, UA_UInt16 data3, std::array<UA_Byte
 ByteString::ByteString(std::string_view str)
     : ByteString(UA_ByteString{detail::allocUaString(str)}) {}
 
-std::string ByteString::get() const {
-    return detail::toString(*handle());
-}
-
-std::string_view ByteString::getView() const {
+std::string_view ByteString::get() const {
     return detail::toStringView(*handle());
 }
 
@@ -47,11 +39,7 @@ std::string_view ByteString::getView() const {
 XmlElement::XmlElement(std::string_view str)
     : XmlElement(UA_XmlElement{detail::allocUaString(str)}) {}
 
-std::string XmlElement::get() const {
-    return detail::toString(*handle());
-}
-
-std::string_view XmlElement::getView() const {
+std::string_view XmlElement::get() const {
     return detail::toStringView(*handle());
 }
 
@@ -64,11 +52,7 @@ uint16_t QualifiedName::getNamespaceIndex() const noexcept {
     return handle()->namespaceIndex;
 }
 
-std::string QualifiedName::getName() const {
-    return detail::toString(handle()->name);
-}
-
-std::string_view QualifiedName::getNameView() const {
+std::string_view QualifiedName::getName() const {
     return detail::toStringView(handle()->name);
 }
 
@@ -81,25 +65,17 @@ LocalizedText::LocalizedText(
     if (assertLocaleFormat) {
         // NOLINTNEXTLINE
         assert(
-            (locale.size() == 2 || locale.size() == 5) &&
+            (locale.empty() || locale.size() == 2 || locale.size() == 5) &&
             "locale must be of format <language>[-<country/region>]"
         );
     }
 }
 
-std::string LocalizedText::getText() const {
-    return detail::toString(handle()->text);
-}
-
-std::string_view LocalizedText::getTextView() const {
+std::string_view LocalizedText::getText() const {
     return detail::toStringView(handle()->text);
 }
 
-std::string LocalizedText::getLocale() const {
-    return detail::toString(handle()->locale);
-}
-
-std::string_view LocalizedText::getLocaleView() const {
+std::string_view LocalizedText::getLocale() const {
     return detail::toStringView(handle()->locale);
 }
 

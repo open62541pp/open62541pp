@@ -48,7 +48,7 @@ std::string Node::getBrowseName() {
     QualifiedName name;
     const auto status = UA_Server_readBrowseName(server_.handle(), nodeId_, name.handle());
     detail::throwOnBadStatus(status);
-    return name.getName();
+    return std::string{name.getName()};
 }
 
 LocalizedText Node::getDisplayName() {

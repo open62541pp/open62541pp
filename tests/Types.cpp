@@ -20,15 +20,14 @@ TEMPLATE_TEST_CASE("StringLike", "", String, ByteString, XmlElement) {
     SECTION("Construct with const char*") {
         TestType wrapper("test");
         REQUIRE(wrapper.handle()->length == 4);
-        REQUIRE_THAT(wrapper.get(), Equals("test"));
-        REQUIRE_THAT(std::string(wrapper.getView()), Equals("test"));
+        REQUIRE_THAT(std::string(wrapper.get()), Equals("test"));
     }
 
     SECTION("Construct from non-null-terminated view") {
         std::string str("test123");
         std::string_view sv(str.c_str(), 4);
         TestType wrapper(sv);
-        REQUIRE_THAT(wrapper.get(), Equals("test"));
+        REQUIRE_THAT(std::string(wrapper.get()), Equals("test"));
     }
 
     SECTION("Equality") {
@@ -148,7 +147,7 @@ TEST_CASE("NodeId") {
             NodeId id(UA_NODEID_STRING_ALLOC(2, "Test123"));
             REQUIRE(id.getIdentifierType() == NodeIdType::String);
             REQUIRE(id.getNamespaceIndex() == 2);
-            REQUIRE(std::get<String>(id.getIdentifier()).get() == "Test123");
+            REQUIRE(id.getIdentifierAs<String>() == String("Test123"));
         }
         {
             Guid guid(11, 22, 33, {1, 2, 3, 4, 5, 6, 7, 8});
@@ -170,10 +169,13 @@ TEST_CASE("NodeId") {
 TEST_CASE("ExpandedNodeId") {
     ExpandedNodeId idLocal({1, "local"}, {}, 0);
     REQUIRE(idLocal.isLocal());
+    REQUIRE(idLocal.getNodeId() == NodeId{1, "local"});
+    REQUIRE(idLocal.getNamespaceUri().empty());
+    REQUIRE(idLocal.getServerIndex() == 0);
 
     ExpandedNodeId idFull({1, "full"}, "namespace", 1);
     REQUIRE(idFull.getNodeId() == NodeId{1, "full"});
-    REQUIRE(idFull.getNamespaceUri() == "namespace");
+    REQUIRE(std::string(idFull.getNamespaceUri()) == "namespace");
     REQUIRE(idFull.getServerIndex() == 1);
 
     REQUIRE(idLocal == idLocal);

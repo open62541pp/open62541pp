@@ -20,8 +20,7 @@ public:
 
     explicit String(std::string_view str);
 
-    std::string get() const;
-    std::string_view getView() const;
+    std::string_view get() const;
 };
 
 /**
@@ -46,8 +45,7 @@ public:
 
     explicit ByteString(std::string_view str);
 
-    std::string get() const;
-    std::string_view getView() const;
+    std::string_view get() const;
 };
 
 /**
@@ -61,8 +59,7 @@ public:
 
     explicit XmlElement(std::string_view str);
 
-    std::string get() const;
-    std::string_view getView() const;
+    std::string_view get() const;
 };
 
 /**
@@ -77,8 +74,7 @@ public:
     QualifiedName(uint16_t namespaceIndex, std::string_view name);
 
     uint16_t getNamespaceIndex() const noexcept;
-    std::string getName() const;
-    std::string_view getNameView() const;
+    std::string_view getName() const;
 };
 
 /**
@@ -97,10 +93,8 @@ public:
 
     LocalizedText(std::string_view locale, std::string_view text, bool assertLocaleFormat = true);
 
-    std::string getText() const;
-    std::string_view getTextView() const;
-    std::string getLocale() const;
-    std::string_view getLocaleView() const;
+    std::string_view getText() const;
+    std::string_view getLocale() const;
 };
 
 }  // namespace opcua
