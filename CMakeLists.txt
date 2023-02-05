@@ -104,6 +104,7 @@ add_library(
     src/Node.cpp
     src/Server.cpp
     src/types/Builtin.cpp
+    src/types/DataValue.cpp
     src/types/DateTime.cpp
     src/types/NodeId.cpp
     src/types/Variant.cpp

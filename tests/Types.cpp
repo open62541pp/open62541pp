@@ -8,6 +8,7 @@
 #include "open62541pp/Common.h"
 #include "open62541pp/Helper.h"  // detail::toString
 #include "open62541pp/types/Builtin.h"
+#include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/DateTime.h"
 #include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"
@@ -327,5 +328,27 @@ TEST_CASE("Variant") {
         REQUIRE_THROWS(var.getArrayCopy<int32_t>());
         REQUIRE_THROWS(var.getArrayCopy<bool>());
         REQUIRE(var.getArrayCopy<std::string>() == value);
+    }
+}
+
+TEST_CASE("DataValue") {
+    SECTION("Empty") {
+        DataValue dv({}, {}, {}, {}, {}, {});
+        CHECK_FALSE(dv.getValue().has_value());
+        CHECK_FALSE(dv.getSourceTimestamp().has_value());
+        CHECK_FALSE(dv.getServerTimestamp().has_value());
+        CHECK_FALSE(dv.getSourcePicoseconds().has_value());
+        CHECK_FALSE(dv.getServerPicoseconds().has_value());
+        CHECK_FALSE(dv.getStatusCode().has_value());
+    }
+    SECTION("All specified") {
+        Variant var;
+        DataValue dv(var, DateTime{1}, DateTime{2}, 3, 4, 5);
+        CHECK(dv.getValue().has_value());
+        CHECK(dv.getSourceTimestamp().value() == DateTime{1});
+        CHECK(dv.getServerTimestamp().value() == DateTime{2});
+        CHECK(dv.getSourcePicoseconds().value() == 3);
+        CHECK(dv.getServerPicoseconds().value() == 4);
+        CHECK(dv.getStatusCode().value() == 5);
     }
 }
