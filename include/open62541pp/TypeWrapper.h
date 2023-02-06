@@ -72,12 +72,25 @@ public:
         return *this;
     }
 
+    /// Copy assignment with UA_* type (deep copy).
+    TypeWrapper& operator=(const T& other) {
+        copy(other);
+        return *this;
+    }
+
     /// Move assignment.
     TypeWrapper& operator=(TypeWrapper&& other) noexcept {
         if (this == &other) {
             return *this;
         }
         swap(other);
+        return *this;
+    }
+
+    /// Move assignment with UA_* type.
+    TypeWrapper& operator=(T&& other) noexcept {
+        clear();
+        data_ = other;
         return *this;
     }
 

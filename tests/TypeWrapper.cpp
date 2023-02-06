@@ -8,6 +8,8 @@
 #include "open62541pp/Helper.h"  // detail::toString
 #include "open62541pp/TypeWrapper.h"
 
+#include "open62541_impl.h"
+
 using namespace Catch::Matchers;
 using namespace opcua;
 
@@ -49,6 +51,14 @@ TEST_CASE("TypeWrapper") {
         REQUIRE_NOTHROW(wrapper = wrapper);
     }
 
+    SECTION("Copy assignment with native type") {
+        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper(UA_STRING_ALLOC("overwrite"));
+        UA_String str = UA_STRING_ALLOC("test");
+        wrapper = str;
+        REQUIRE_THAT(detail::toString(*wrapper.handle()), Equals("test"));
+        UA_String_clear(&str);
+    }
+
     SECTION("Move constructor") {
         TypeWrapper<UA_String, UA_TYPES_STRING> wrapper(UA_STRING_ALLOC("test"));
         TypeWrapper<UA_String, UA_TYPES_STRING> wrapperConstructor(std::move(wrapper));
@@ -66,6 +76,12 @@ TEST_CASE("TypeWrapper") {
 
         // self assignment
         REQUIRE_NOTHROW(wrapper = std::move(wrapper));
+    }
+
+    SECTION("Move assignment with native type") {
+        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper(UA_STRING_ALLOC("overwrite"));
+        wrapper = UA_STRING_ALLOC("test");
+        REQUIRE_THAT(detail::toString(*wrapper.handle()), Equals("test"));
     }
 
     SECTION("Implicit conversion") {
