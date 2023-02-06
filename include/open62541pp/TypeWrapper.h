@@ -36,9 +36,7 @@ public:
     using TypeWrapperBase = TypeWrapper<T, typeIndex>;
     using UaType = T;
 
-    TypeWrapper() {
-        init();
-    }
+    TypeWrapper() = default;
 
     /// Constructor with native UA_* type (deep copy).
     explicit TypeWrapper(const T& data) {
@@ -149,11 +147,6 @@ public:
 protected:
     inline static void checkMemSize() {
         assert(sizeof(T) == getDataType()->memSize);  // NOLINT
-    }
-
-    void init() noexcept {
-        checkMemSize();
-        UA_init(&data_, getDataType());
     }
 
     void clear() noexcept {
