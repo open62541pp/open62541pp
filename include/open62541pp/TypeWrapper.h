@@ -46,7 +46,7 @@ public:
     }
 
     /// Constructor with native UA_* type (move rvalue).
-    explicit TypeWrapper(T&& data) noexcept
+    constexpr explicit TypeWrapper(T&& data) noexcept
         : data_(data) {}
 
     virtual ~TypeWrapper() {
@@ -95,22 +95,22 @@ public:
     }
 
     /// Implicit conversion to wrapped object.
-    operator T&() noexcept {  // NOLINT
+    constexpr operator T&() noexcept {  // NOLINT
         return data_;
     }
 
     /// Implicit conversion to wrapped object.
-    operator const T&() const noexcept {  // NOLINT
+    constexpr operator const T&() const noexcept {  // NOLINT
         return data_;
     }
 
     /// Member access to wrapped object.
-    T* operator->() noexcept {
+    constexpr T* operator->() noexcept {
         return &data_;
     }
 
     /// Member access to wrapped object.
-    const T* operator->() const noexcept {
+    constexpr const T* operator->() const noexcept {
         return &data_;
     }
 
@@ -137,12 +137,12 @@ public:
     }
 
     /// Return pointer to wrapped object.
-    T* handle() noexcept {
+    constexpr T* handle() noexcept {
         return &data_;
     }
 
     /// Return const pointer to wrapped object.
-    const T* handle() const noexcept {
+    constexpr const T* handle() const noexcept {
         return &data_;
     };
 
