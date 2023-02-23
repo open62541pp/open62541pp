@@ -106,6 +106,8 @@ add_library(
     src/Server.cpp
     src/TypeWrapper.cpp
     src/Variant.cpp
+    src/Endpoint.cpp
+    src/Client.cpp
 )
 add_library(open62541pp::open62541pp ALIAS open62541pp)
 target_include_directories(open62541pp PUBLIC include)
