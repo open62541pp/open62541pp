@@ -39,7 +39,8 @@ enum class Type : uint16_t {
     ExtensionObject = UA_TYPES_EXTENSIONOBJECT,
     DataValue       = UA_TYPES_DATAVALUE,
     Variant         = UA_TYPES_VARIANT,
-    DiagnosticInfo  = UA_TYPES_DIAGNOSTICINFO
+    DiagnosticInfo  = UA_TYPES_DIAGNOSTICINFO,
+	ApplicationDescription = UA_TYPES_APPLICATIONDESCRIPTION
     // clang-format on
 };
 
@@ -197,7 +198,8 @@ using NativeTypes = std::tuple<
     UA_ExtensionObject,
     UA_DataValue,
     UA_Variant,
-    UA_DiagnosticInfo>;
+    UA_DiagnosticInfo,
+	UA_ApplicationDescription>;
 
 template <typename T>
 constexpr bool isNativeType() {
