@@ -7,35 +7,33 @@
 
 using namespace opcua;
 
+
 struct Client::PrivateData {
 	UA_Client* client{nullptr};
-	UA_EndpointDescription *descArray nullptr;
-	size_t descArraySize = 0;
 };
 
-
-Client::Client() : _d(new Client::PrivateData)
+Client::Client() : m_d(new Client::PrivateData)
 {
-	_d->client = UA_Client_new();
-	UA_ClientConfig_setDefault(UA_Client_getConfig(_d->client));
+	m_d->client = UA_Client_new();
+	UA_ClientConfig_setDefault(UA_Client_getConfig(m_d->client));
 }
 
 Client::~Client()
 {
-
-	UA_Client_delete(_d->client);
+	if (m_d->client)
+		UA_Clientm_delete(m_d->client);
 }
 
-std::vector<std::pair<std::string, std::string>> Client::findServers(std::string_view url)
+std::vector<std::pair<std::string, std::string>> Client::findServers(std::string_view url_)
 {
 	size_t nServers{0};
 	UA_ApplicationDescription *registeredServers = nullptr;
 
-	if(detail::isBadStatus(UA_Client_findServers(_d->client, url.data(), 0, nullptr, 0, nullptr,
+	if(detail::isBadStatus(UA_Client_findServers(m_d->client, url.data(), 0, nullptr, 0, nullptr,
 												 &nServers, &registeredServers)))
 	   return {};
 
-	vector<std::pair<std::string, std::string>> res(nServers);
+	std::vector<std::pair<std::string, std::string>> res;
 
 	for (size_t i=0; i< nServers; ++i)
 	{
@@ -44,19 +42,39 @@ std::vector<std::pair<std::string, std::string>> Client::findServers(std::string
 				detail::toString(registeredServers[i].applicationUri)});
 	}
 
-	UA_Array_delete(registeredServers, nServers, &UA_TYPES[UA_TYPES_APPLICATIONDESCRIPTION]);
+	UA_Arraym_delete(registeredServers, nServers, &UA_TYPES[UA_TYPES_APPLICATIONDESCRIPTION]);
+	return res;
 }
 
-Endpoints Client::getEndpoints(std::string_view url)
+std::vector<Endpoint> Client::getEndpoints(std::string_view url)
 {
-	detail::throwOnBadStatus(UA_Client_getEndpoints(_d->client, url, &descArraySize, &descArray));
+	UA_EndpointDescription *descArray = nullptr;
+	size_t descArraySize = 0;
 
-	Endpoints ret;
+	detail::throwOnBadStatus(UA_Client_getEndpoints(m_d->client, url.data(),
+													&descArraySize, &descArray));
+
+	std::vector<Endpoint> ret;
 
 	for (size_t i=0; i < descArraySize; ++i){
-		ret.emplace_back(Endpoint{descArray[i].endpointUrl.data, descArray[i].endpointUrl.length});
+		Endpoint point;
+		point.url = detail::toString(descArray[i].endpointUrl);
+		TypeConverter<ApplicationDescription>::fromNative(descArray[i].server, point.server);
+		point.serverCertificate = detail::toString(descArray[i].serverCertificate);
+
+		ret.emplace_back(std::move(point));
 	}
 
-	UA_Array_delete(descArray, descArraySize, &UA_TYPES[UA_TYPES_ENDPOINTDESCRIPTION]);
+	UA_Arraym_delete(descArray, descArraySize, &UA_TYPES[UA_TYPES_ENDPOINTDESCRIPTION]);
 	return ret;
+}
+
+void Client::connect(std::string_view url)
+{
+	detail::throwOnBadStatus(UA_Client_connectUsername(m_d->client, url));
+}
+
+void Client::connect(std::string_view url, std::string_view username, std::string_view password)
+{
+	detail::throwOnBadStatus(UA_Client_connectUsername(m_d->client, url, username, password));
 }
