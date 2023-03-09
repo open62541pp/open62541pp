@@ -36,7 +36,7 @@ public:
 
 class ClientNotConnected : public BadStatus {
 public:
-	ClientNotConnected (UA_StatusCode code) : BadStatus(code){}
+	explicit ClientNotConnected (UA_StatusCode code) : BadStatus(code){}
 };
 
 namespace detail {
