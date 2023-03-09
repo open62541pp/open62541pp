@@ -4,15 +4,18 @@
 
 #pragma once
 
-#include "Endpoint.h"
-#include "ErrorHandling.h"
+#include "open62541pp/Endpoint.h"
+#include "open62541pp/ErrorHandling.h"
+#include "open62541pp/Logger.h"
+#include "open62541pp/NodeId.h"
+#include "open62541pp/Variant.h"
+
+#include <open62541/client.h>
 
 #include <memory>
 #include <string_view>
 #include <string>
 #include <vector>
-
-#include "open62541pp/Logger.h"
 
 namespace opcua {
 
@@ -30,7 +33,7 @@ public:
 
     ~Client();
 
-	// delete unused constructors
+	// // delete unused constructors
 	Client(Client &other) = delete;
 	Client(Client const& other) = delete;
 	Client(Client &&other) = delete;
@@ -41,17 +44,16 @@ public:
 	   @return vector of pairs of servername and urls
 	   @warning throws opcua::BadStatus
 	*/
-    [[nodiscard]] std::vector<std::pair<std::string, std::string>>
-	findServers(std::string_view url);
+    [[nodiscard]] std::vector<std::pair<std::string, std::string>> findServers(std::string_view url);
 
-x	
+
 	/**
 	   @brief get a vector of endpoints
 	   @pparam[in] url of the server
 	   @return vector of Endpoints
 	   @warning throws opcua::BadStatus
 	*/
-    [[nodiscard]] std::vector<Endpoint> getEndpoints(std::string_view url);
+    [[nodiscard]] std::vector<opcua::Endpoint> getEndpoints(std::string_view url);
 
 	/**
 	   @brief Connect using a single url
@@ -69,7 +71,36 @@ x
 	 */
 	void connect(std::string_view url, std::string_view username, std::string_view password);
 
-	
+
+	/**
+	 * @brief Read Value Attribute from a node
+	 *
+	 * @param nodeId[in] id of the node
+	 * @return attribute value in a varian form
+	 */
+	Variant	 readValueAttribute(NodeId const& nodeId);
+
+	/**
+	 * @brief Write a value attribute to a node
+	 *
+	 * @param nodeId[in] id of the node
+	 * @param value[in] to be written
+	 */
+	void writeValueAttribute(NodeId const& nodeId, Variant const& value);
+
+	/**
+	 * @brief accessor to the internal UA_Client
+	 *
+	 * @return UA_Client*
+	 */
+	UA_Client* handle() noexcept;
+
+	/**
+	 * @brief const accessor to the internal UA_Client
+	 *
+	 * @return const UA_Client*
+	 */
+	const UA_Client* handle() const noexcept;
 
 private:
 	struct PrivateData;

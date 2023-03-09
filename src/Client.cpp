@@ -21,10 +21,10 @@ Client::Client() : m_d(new Client::PrivateData)
 Client::~Client()
 {
 	if (m_d->client)
-		UA_Clientm_delete(m_d->client);
+		UA_Client_delete(m_d->client);
 }
 
-std::vector<std::pair<std::string, std::string>> Client::findServers(std::string_view url_)
+std::vector<std::pair<std::string, std::string>> Client::findServers(std::string_view url)
 {
 	size_t nServers{0};
 	UA_ApplicationDescription *registeredServers = nullptr;
@@ -42,7 +42,7 @@ std::vector<std::pair<std::string, std::string>> Client::findServers(std::string
 				detail::toString(registeredServers[i].applicationUri)});
 	}
 
-	UA_Arraym_delete(registeredServers, nServers, &UA_TYPES[UA_TYPES_APPLICATIONDESCRIPTION]);
+	UA_Array_delete(registeredServers, nServers, &UA_TYPES[UA_TYPES_APPLICATIONDESCRIPTION]);
 	return res;
 }
 
@@ -65,16 +65,38 @@ std::vector<Endpoint> Client::getEndpoints(std::string_view url)
 		ret.emplace_back(std::move(point));
 	}
 
-	UA_Arraym_delete(descArray, descArraySize, &UA_TYPES[UA_TYPES_ENDPOINTDESCRIPTION]);
+	UA_Array_delete(descArray, descArraySize, &UA_TYPES[UA_TYPES_ENDPOINTDESCRIPTION]);
 	return ret;
 }
 
 void Client::connect(std::string_view url)
 {
-	detail::throwOnBadStatus(UA_Client_connectUsername(m_d->client, url));
+	detail::throwOnBadStatus(UA_Client_connect(m_d->client, url.data()));
 }
 
 void Client::connect(std::string_view url, std::string_view username, std::string_view password)
 {
-	detail::throwOnBadStatus(UA_Client_connectUsername(m_d->client, url, username, password));
+	detail::throwOnBadStatus(UA_Client_connectUsername(m_d->client, url.data(), username.data(), password.data()));
+}
+
+Variant	 Client::readValueAttribute(NodeId const& nodeId)
+{
+	(void)nodeId;
+	return {};
+}
+
+void Client::writeValueAttribute(NodeId const& nodeId, Variant const& value)
+{
+	(void)nodeId;
+	(void)value;
+}
+
+UA_Client* Client::handle() noexcept
+{
+	return m_d->client;
+}
+
+const UA_Client* Client::handle() const noexcept
+{
+	return m_d->client;
 }
