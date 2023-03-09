@@ -1,5 +1,7 @@
 #pragma once
 
+#include "open62541pp/TypeConverter.h"
+
 #include <string>
 #include <vector>
 
@@ -23,7 +25,6 @@ struct ApplicationDescription {
 	std::vector<std::string> discoveryUrls;
 };
 
-namespace detail {
 template <>
 struct TypeConverter<ApplicationDescription> {
     using ValueType = ApplicationDescription;
@@ -31,13 +32,16 @@ struct TypeConverter<ApplicationDescription> {
     using ValidTypes = TypeList<Type::String, Type::ByteString, Type::XmlElement>;
 
     static void fromNative(const NativeType& src, ValueType& dst) {
-        dst = detail::toString(src);
+		(void)src;
+		(void)dst;
+        // dst = detail::toString(src.);
     }
 
     static void toNative(const ValueType& src, NativeType& dst) {
-        UA_clear(&dst, detail::getUaDataType<Type::String>());
-        dst = detail::allocUaString(src);
+        // UA_clear(&dst, detail::getUaDataType<Type::String>());
+        // dst = detail::allocUaString(src);
+		(void)src;
+		(void)dst;
     }
 };
-}
 }
