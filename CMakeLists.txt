@@ -14,7 +14,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 # generate compile_commands.json
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON) 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # compiled binaries folders (same as open62541)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -108,6 +108,7 @@ add_library(
     src/Variant.cpp
     src/Endpoint.cpp
     src/Client.cpp
+    src/NodeClient.cpp
 )
 add_library(open62541pp::open62541pp ALIAS open62541pp)
 target_include_directories(open62541pp PUBLIC include)
