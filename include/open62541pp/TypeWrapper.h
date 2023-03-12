@@ -17,6 +17,8 @@
 
 namespace opcua {
 
+auto constexpr UA_BUILTIN_TYPES_COUNT  = 25U;
+
 /**
  * @defgroup TypeWrapper Wrapper classes of UA_* types
  *

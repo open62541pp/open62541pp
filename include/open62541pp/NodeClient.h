@@ -52,8 +52,10 @@ public:
     NodeId getDataType();
     /// Get value rank of variable (type) node.
     ValueRank getValueRank();
+    
     /// Get array dimensions of variable (type) node.
-    // std::vector<uint32_t> getArrayDimensions();
+    std::vector<uint32_t> getArrayDimensions();
+
     /// Get access level mask of variable node, e.g. `::UA_ACCESSLEVELMASK_READ`.
     uint8_t getAccessLevel();
 
@@ -65,16 +67,20 @@ public:
     void setDisplayName(std::string_view name, std::string_view locale);
     /// Set localized description.
     void setDescription(std::string_view name, std::string_view locale);
+
     /// Set write mask, e.g. `::UA_WRITEMASK_ACCESSLEVEL | ::UA_WRITEMASK_DESCRIPTION`.
     void setWriteMask(uint32_t mask);
     // void setUserWriteMask(uint32_t mask);
 
     /// Set data type of variable (type) node.
     void setDataType(Type type);
+
     /// Set data type of variable (type) node by node id.
     void setDataType(const NodeId& typeId);
+
     /// Set value rank of variable (type) node.
     void setValueRank(ValueRank valueRank);
+
     /// Set array dimensions of variable (type) node.
     /// Should be unspecified if ValueRank is <= 0 (ValueRank::Any, ValueRank::Scalar,
     /// ValueRank::ScalarOrOneDimension, ValueRank::OneOrMoreDimensions). The dimension zero is a

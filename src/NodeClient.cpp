@@ -86,15 +86,14 @@ ValueRank NodeClient::getValueRank() {
     return static_cast<ValueRank>(valueRank);
 }
 
-// std::vector<uint32_t> NodeClient::getArrayDimensions() {
-//     Variant variant;
-//     const auto status = UA_Client_readArrayDimensionsAttribute(client_->handle(), nodeId_, variant.handle());
-//     detail::throwOnBadStatus(status);
-//     if (variant.isArray()) {
-//         return variant.getArrayCopy<uint32_t>();
-//     }
-//     return {};
-// }
+std::vector<uint32_t> NodeClient::getArrayDimensions() {
+    size_t sz;
+    UA_UInt32* dims;
+    const auto status = UA_Client_readArrayDimensionsAttribute(client_->handle(), nodeId_, &sz, &dims);
+    detail::throwOnBadStatus(status);
+
+    return fromNativeArray<uint32_t>(dims, sz);;
+}
 
 uint8_t NodeClient::getAccessLevel() {
     uint8_t mask = 0;
