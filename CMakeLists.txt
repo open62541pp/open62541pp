@@ -82,7 +82,7 @@ endif()
 
 option(UAPP_INTERNAL_OPEN62541 "Use internal open62541 library" ON)
 if(UAPP_INTERNAL_OPEN62541)
-    set(OPEN62541_VERSION v1.2.6)  # set manually for CI
+    set(OPEN62541_VERSION v1.2.7)  # set manually for CI
     add_subdirectory(3rdparty/open62541)  # target open62541::open62541
 else()
     find_package(open62541 REQUIRED)

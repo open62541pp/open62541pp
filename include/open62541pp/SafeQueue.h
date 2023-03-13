@@ -38,6 +38,7 @@ public:
 
     void pop() {
         std::lock_guard lock(mutex);
+        T item;
         queue.pop(item);
     }
 };
