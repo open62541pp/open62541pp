@@ -159,7 +159,7 @@ T* Variant::getArray() {
     checkIsArray();
     checkReturnType<T>();
     assert(sizeof(T) == handle()->type->memSize);  // NOLINT
-    return *static_cast<T*>(handle()->data);
+    return static_cast<T*>(handle()->data);
 }
 
 template <typename T>

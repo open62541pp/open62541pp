@@ -4,6 +4,7 @@
 #include <iterator>  // distance
 #include <string>
 #include <type_traits>
+#include <vector>
 
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Helper.h"

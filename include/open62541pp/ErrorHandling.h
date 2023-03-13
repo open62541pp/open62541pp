@@ -34,6 +34,11 @@ public:
     using std::runtime_error::runtime_error;  // inherit contructors
 };
 
+class ClientNotConnected : public BadStatus {
+public:
+	explicit ClientNotConnected (UA_StatusCode code) : BadStatus(code){}
+};
+
 namespace detail {
 
 [[nodiscard]] inline constexpr bool isGoodStatus(UA_StatusCode code) noexcept {
@@ -44,10 +49,18 @@ namespace detail {
     return code != UA_STATUSCODE_GOOD;
 }
 
+[[nodiscard]] inline constexpr bool isServerNotConnected(UA_StatusCode code) noexcept {
+	return code != UA_STATUSCODE_BADSERVERNOTCONNECTED;
+}
+
 inline void throwOnBadStatus(UA_StatusCode code) {
     if (isBadStatus(code)) {
         throw BadStatus(code);
     }
+
+	if (isServerNotConnected(code)) {
+		throw ClientNotConnected(code);
+	}
 }
 
 }  // namespace detail

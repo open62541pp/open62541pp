@@ -3,3 +3,9 @@
 *.a
 .vscode/
 build*/
+.cache
+install/
+compile_commands.json
+.idea
+cmake-build-debug
+3rdparty

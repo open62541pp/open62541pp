@@ -21,6 +21,7 @@ add_executable(
     TypeConverter.cpp
     TypeWrapper.cpp
     Variant.cpp
+    Client.cpp
 )
 target_link_libraries(
     open62541pp_tests
