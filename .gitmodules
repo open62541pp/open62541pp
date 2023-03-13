@@ -1,6 +1,3 @@
-[submodule "3rdparty/open62541"]
-	path = 3rdparty/open62541
-	url = https://github.com/open62541/open62541.git
 [submodule "doc/doxygen-awesome-css"]
 	path = doc/doxygen-awesome-css
 	url = https://github.com/jothepro/doxygen-awesome-css.git
