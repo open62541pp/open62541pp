@@ -8,6 +8,7 @@
 #include "open62541pp/Variant.h"
 
 #include <cstdint>
+#include <future>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -146,13 +147,24 @@ public:
     /// Read value from variable node as Variant object.
     void readValue(Variant& variant);
 
+    /// Read value asynchronously from variable node as Variant array.
+    //std::future<Variant> readValueAsync();
+
     /// Read scalar from variable node.
     template <typename T>
     T readScalar();
 
+    /// Read scalar asynchronously from variable node.
+//    template<typename T>
+//    std::future<T> readScalarAsync();
+
     /// Read array from variable node.
     template <typename T>
     std::vector<T> readArray();
+
+    /// Read array asynchronously from variable node.
+//    template <typename T>
+//    std::future<std::vector<T>> readArrayAsync();
 
     // Write DataValue to variable node.
     // void writeDataValue(const DataValue& variant);

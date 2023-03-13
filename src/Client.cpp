@@ -100,3 +100,4 @@ const UA_Client* Client::handle() const noexcept
 {
 	return m_d->client;
 }
+

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "open62541pp/ApplicationDescription.h"
 #include "open62541pp/Comparison.h"
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
@@ -7,6 +8,7 @@
 #include "open62541pp/Logger.h"
 #include "open62541pp/Node.h"
 #include "open62541pp/NodeId.h"
+#include "open62541pp/SafeQueue.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/Traits.h"
 #include "open62541pp/TypeConverter.h"

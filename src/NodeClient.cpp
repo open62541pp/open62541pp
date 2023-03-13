@@ -321,6 +321,11 @@ void NodeClient::readValue(Variant& var) {
     detail::throwOnBadStatus(status);
 }
 
+//std::future<Variant> NodeClient::readValueAsync()
+//{
+//
+//}
+
 void NodeClient::remove(bool deleteReferences) {
     const auto status = UA_Client_deleteNode(client_->handle(), *nodeId_.handle(), deleteReferences);
     detail::throwOnBadStatus(status);
