@@ -50,7 +50,7 @@ namespace detail {
 }
 
 [[nodiscard]] inline constexpr bool isServerNotConnected(UA_StatusCode code) noexcept {
-	return code != UA_STATUSCODE_BADSERVERNOTCONNECTED;
+	return code == UA_STATUSCODE_BADSERVERNOTCONNECTED;
 }
 
 inline void throwOnBadStatus(UA_StatusCode code) {
