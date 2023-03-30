@@ -24,7 +24,7 @@ bool Variant::isType(Type type) const noexcept {
     if (handle()->type == nullptr) {
         return false;
     }
-    return handle()->type->typeIndex == static_cast<uint16_t>(type);
+    return handle()->type->typeKind == static_cast<uint16_t>(type);
 }
 
 bool Variant::isType(const NodeId& id) const noexcept {
@@ -35,7 +35,7 @@ std::optional<Type> Variant::getVariantType() const noexcept {
     if (handle()->type == nullptr) {
         return {};
     }
-    return static_cast<Type>(handle()->type->typeIndex);
+    return static_cast<Type>(handle()->type->typeKind);
 }
 
 size_t Variant::getArrayLength() const noexcept {
