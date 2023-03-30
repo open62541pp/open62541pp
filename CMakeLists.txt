@@ -100,6 +100,7 @@ endif()
 # open62541pp library (static/shared depending on option BUILD_SHARED_LIBS)
 add_library(
     open62541pp
+    src/DataValue.cpp
     src/Helper.cpp
     src/Node.cpp
     src/NodeId.cpp
