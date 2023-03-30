@@ -14,7 +14,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 # generate compile_commands.json
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON) 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # compiled binaries folders (same as open62541)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -82,7 +82,7 @@ endif()
 
 option(UAPP_INTERNAL_OPEN62541 "Use internal open62541 library" ON)
 if(UAPP_INTERNAL_OPEN62541)
-    set(OPEN62541_VERSION v1.2.6)  # set manually for CI
+    set(OPEN62541_VERSION v1.3.5)  # set manually for CI
     add_subdirectory(3rdparty/open62541)  # target open62541::open62541
 else()
     find_package(open62541 REQUIRED)
