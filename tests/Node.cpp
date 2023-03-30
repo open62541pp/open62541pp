@@ -144,6 +144,24 @@ TEST_CASE("Node") {
         String str("test");
         REQUIRE_NOTHROW(node.writeScalar(str));
         REQUIRE(node.readScalar<std::string>() == "test");
+
+        SECTION("Write with timestamp") {
+            String str1("test1");
+            auto ts = DateTime::now();
+            REQUIRE_NOTHROW(node.writeScalar(str1, ts));
+            auto dv = node.readDataValue();
+            REQUIRE(dv.getVariant().getScalarCopy<std::string>() == "test1");
+            REQUIRE(dv.getSourceTimeStamp() == ts);
+        }
+        SECTION("Write with timestamp and status code") {
+            String str2("test2");
+            auto ts = DateTime::now();
+            REQUIRE_NOTHROW(node.writeScalar(str2, ts, UA_STATUSCODE_BADINTERNALERROR));
+            auto dv = node.readDataValue();
+            REQUIRE(dv.getVariant().getScalarCopy<std::string>() == "test2");
+            REQUIRE(dv.getSourceTimeStamp() == ts);
+            REQUIRE(dv.getStatusCode() == UA_STATUSCODE_BADINTERNALERROR);
+        }
     }
 
     SECTION("Read/write array") {

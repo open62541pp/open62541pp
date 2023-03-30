@@ -316,6 +316,19 @@ void Node::readValue(Variant& var) {
     detail::throwOnBadStatus(status);
 }
 
+void Node::writeDataValue(const DataValue& var) {
+    const auto status = UA_Server_writeDataValue(server_.handle(), nodeId_, var);
+    detail::throwOnBadStatus(status);
+}
+
+DataValue Node::readDataValue() {
+    UA_ReadValueId rvi;
+    UA_ReadValueId_init(&rvi);
+    rvi.nodeId = nodeId_;
+    rvi.attributeId = UA_ATTRIBUTEID_VALUE;
+    return DataValue(UA_Server_read(server_.handle(), &rvi, UA_TIMESTAMPSTORETURN_BOTH));
+}
+
 void Node::remove(bool deleteReferences) {
     const auto status = UA_Server_deleteNode(server_.handle(), nodeId_, deleteReferences);
     detail::throwOnBadStatus(status);

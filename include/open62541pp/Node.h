@@ -5,6 +5,7 @@
 #include <string_view>
 #include <vector>
 
+#include "open62541pp/DataValue.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/NodeId.h"
 #include "open62541pp/Server.h"
@@ -139,6 +140,9 @@ public:
     /// Read value from variable node as Variant object.
     void readValue(Variant& variant);
 
+    /// Read value from variable node as DataValue object.
+    DataValue readDataValue();
+
     /// Read scalar from variable node.
     template <typename T>
     T readScalar();
@@ -148,7 +152,7 @@ public:
     std::vector<T> readArray();
 
     // Write DataValue to variable node.
-    // void writeDataValue(const DataValue& variant);
+    void writeDataValue(const DataValue& variant);
 
     /// Write Variant to variable node.
     void writeValue(const Variant& variant);
@@ -156,6 +160,14 @@ public:
     /// Write scalar to variable node.
     template <typename T, Type type = detail::guessType<T>()>
     void writeScalar(const T& value);
+
+    /// Write scalar with timestamp to variable node.
+    template <typename T, Type type = detail::guessType<T>()>
+    void writeScalar(const T& value, const DateTime& datetime);
+
+    /// Write scalar with timestamp and status code to variable node.
+    template <typename T, Type type = detail::guessType<T>()>
+    void writeScalar(const T& value, const DateTime& datetime, UA_StatusCode code);
 
     /// Write array (raw) to variable node.
     template <typename T, Type type = detail::guessType<T>()>
@@ -220,6 +232,35 @@ void Node::writeScalar(const T& value) {
         variant.setScalarCopy<T, type>(value);
     }
     writeValue(variant);
+}
+
+template <typename T, Type type>
+void Node::writeScalar(const T& value, const DateTime& datetime) {
+    Variant variant;
+    if constexpr (detail::isAssignableToVariantScalar<T>()) {
+        variant.setScalar<T, type>(const_cast<T&>(value));  // NOLINT, variant isn't modified
+    } else {
+        variant.setScalarCopy<T, type>(value);
+    }
+    DataValue datavalue;
+    datavalue.setVariant(variant);
+    datavalue.setSourceTimeStamp(datetime);
+    writeDataValue(datavalue);
+}
+
+template <typename T, Type type>
+void Node::writeScalar(const T& value, const DateTime& datetime, UA_StatusCode code) {
+    Variant variant;
+    if constexpr (detail::isAssignableToVariantScalar<T>()) {
+        variant.setScalar<T, type>(const_cast<T&>(value));  // NOLINT, variant isn't modified
+    } else {
+        variant.setScalarCopy<T, type>(value);
+    }
+    DataValue datavalue;
+    datavalue.setVariant(variant);
+    datavalue.setSourceTimeStamp(datetime);
+    datavalue.setStatusCode(code);
+    writeDataValue(datavalue);
 }
 
 template <typename T, Type type>
