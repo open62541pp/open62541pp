@@ -14,7 +14,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 # generate compile_commands.json
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON) 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # compiled binaries folders (same as open62541)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -100,6 +100,7 @@ endif()
 # open62541pp library (static/shared depending on option BUILD_SHARED_LIBS)
 add_library(
     open62541pp
+    src/ArrayTypeWrapper.cpp
     src/Helper.cpp
     src/Node.cpp
     src/NodeId.cpp

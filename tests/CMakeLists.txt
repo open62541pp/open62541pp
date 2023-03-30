@@ -14,6 +14,7 @@ endif()
 
 add_executable(
     open62541pp_tests
+    ArrayTypeWrapper.cpp
     Helper.cpp
     Node.cpp
     NodeId.cpp

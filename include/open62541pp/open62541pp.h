@@ -1,5 +1,6 @@
 #pragma once
 
+#include "open62541pp/ArrayTypeWrapper.h"
 #include "open62541pp/Comparison.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Helper.h"
