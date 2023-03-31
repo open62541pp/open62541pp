@@ -71,12 +71,6 @@ public:
     void connect(std::string_view url, std::string_view username, std::string_view password);
 
     /**
-     * @brief return if the client is connected
-     * @return connected
-     */
-    bool connected();
-
-    /**
      * @brief Read Value Attribute from a node
      *
      * @param nodeId[in] id of the node

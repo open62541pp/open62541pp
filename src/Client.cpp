@@ -36,7 +36,7 @@ std::vector<std::pair<std::string, std::string>> Client::findServers(std::string
     for (size_t i = 0; i < nServers; ++i) {
         res.emplace_back(std::pair<std::string, std::string>{
             detail::toString(registeredServers[i].applicationName.text),
-            detail::toString(registeredServers[i].applicationUri)});
+            detail::toString(registeredServers[i].productUri)});
     }
 
     UA_Array_delete(registeredServers, nServers, &UA_TYPES[UA_TYPES_APPLICATIONDESCRIPTION]);
@@ -92,15 +92,4 @@ UA_Client* Client::handle() noexcept {
 
 const UA_Client* Client::handle() const noexcept {
     return m_d->client;
-}
-
-bool Client::connected() {
-    UA_SecureChannelState* chanState = nullptr;
-    UA_SessionState* sessionState = nullptr;
-    UA_StatusCode* connectStatus = nullptr;
-
-    UA_Client_getState(m_d->client, chanState, sessionState, connectStatus);
-    detail::throwOnBadStatus(*connectStatus);
-
-    return *connectStatus == UA_SESSIONSTATE_ACTIVATED;
 }
