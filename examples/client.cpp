@@ -5,13 +5,13 @@
 int main() {
     opcua::Client client;
 
-	auto servers = client.findServers("opc.tcp://localhost:4840");
-	for (auto const& s: servers)
-		std::cout<< "Servers count "<< s.first << "   "  << s.second << "\n";
+    auto servers = client.findServers("opc.tcp://localhost:4840");
+    for (const auto& s : servers)
+        std::cout << "Servers count " << s.first << "   " << s.second << "\n";
 
-	auto endpoints = client.getEndpoints("opc.tcp://localhost:4840");
-	for (auto const& e: endpoints)
-		std::cout<< "Endpoints " << e.server.gatewayServerUri << "\n";
+    auto endpoints = client.getEndpoints("opc.tcp://localhost:4840");
+    for (const auto& e : endpoints)
+        std::cout << "Endpoints " << e.server.productUri << " | " << e.url << "\n";
 
     // server.setApplicationName("open62541pp server example");
     // server.setLogger([](auto level, auto category, auto msg) {
@@ -35,5 +35,5 @@ int main() {
     // myIntegerNode.writeScalar(42);
 
     // read value
-    // std::cout << "The answer is: " << myIntegerNode.readScalar<int>() << std::endl; // 
+    // std::cout << "The answer is: " << myIntegerNode.readScalar<int>() << std::endl; //
 }
