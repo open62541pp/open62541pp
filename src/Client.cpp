@@ -35,15 +35,10 @@ std::vector<std::pair<std::string, std::string>> Client::findServers(std::string
 
     std::vector<std::pair<std::string, std::string>> res;
 
-    if (nServers == 1)
+    for (size_t i = 0; i < nServers; ++i) {
         res.emplace_back(std::pair<std::string, std::string>{
-            detail::toString(registeredServers[0].applicationName.text), url});
-    else {
-        for (size_t i = 0; i < nServers; ++i) {
-            res.emplace_back(std::pair<std::string, std::string>{
-                detail::toString(registeredServers[i].applicationName.text),
-                detail::toString(registeredServers[i].applicationUri)});
-        }
+            detail::toString(registeredServers[i].applicationName.text),
+            detail::toString(*registeredServers[i].discoveryUrls)});
     }
 
     UA_Array_delete(registeredServers, nServers, &UA_TYPES[UA_TYPES_APPLICATIONDESCRIPTION]);
