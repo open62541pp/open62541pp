@@ -7,6 +7,8 @@
 
 using namespace opcua;
 
+// https://stackoverflow.com/questions/58316274/open62541-browsing-nodes-an-using-its-methods
+
 struct Client::PrivateData {
     UA_Client* client{nullptr};
 };
@@ -36,7 +38,7 @@ std::vector<std::pair<std::string, std::string>> Client::findServers(std::string
     for (size_t i = 0; i < nServers; ++i) {
         res.emplace_back(std::pair<std::string, std::string>{
             detail::toString(registeredServers[i].applicationName.text),
-            detail::toString(registeredServers[i].productUri)});
+            detail::toString(registeredServers[i].applicationUri)});
     }
 
     UA_Array_delete(registeredServers, nServers, &UA_TYPES[UA_TYPES_APPLICATIONDESCRIPTION]);
