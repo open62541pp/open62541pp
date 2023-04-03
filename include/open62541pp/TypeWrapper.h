@@ -25,7 +25,9 @@ namespace opcua {
 /**
  * Template base class to wrap UA_* type objects.
  *
+ * Zero cost abstraction to wrap the C API objects and delete them on destruction.
  * The derived classes should implement specific constructors to convert from other data types.
+ * @warning No virtual constructor defined, don't implement a destructor in the derived classes.
  * @ingroup TypeWrapper
  */
 template <typename T, uint16_t typeIndex>
@@ -38,16 +40,16 @@ public:
 
     TypeWrapper() = default;
 
-    /// Constructor with native UA_* type (deep copy).
+    /// Constructor with native object (deep copy).
     explicit TypeWrapper(const T& data) {
         copy(data);
     }
 
-    /// Constructor with native UA_* type (move rvalue).
+    /// Constructor with native object (move rvalue).
     constexpr explicit TypeWrapper(T&& data) noexcept
         : data_(data) {}
 
-    virtual ~TypeWrapper() {
+    ~TypeWrapper() {  // NOLINT
         clear();
     };
 
@@ -70,7 +72,7 @@ public:
         return *this;
     }
 
-    /// Copy assignment with UA_* type (deep copy).
+    /// Copy assignment with native object (deep copy).
     TypeWrapper& operator=(const T& other) {
         copy(other);
         return *this;
@@ -85,34 +87,34 @@ public:
         return *this;
     }
 
-    /// Move assignment with UA_* type.
+    /// Move assignment with native object.
     TypeWrapper& operator=(T&& other) noexcept {
         clear();
         data_ = other;
         return *this;
     }
 
-    /// Implicit conversion to wrapped object.
+    /// Implicit conversion to native object.
     constexpr operator T&() noexcept {  // NOLINT
         return data_;
     }
 
-    /// Implicit conversion to wrapped object.
+    /// Implicit conversion to native object.
     constexpr operator const T&() const noexcept {  // NOLINT
         return data_;
     }
 
-    /// Member access to wrapped object.
+    /// Member access to native object.
     constexpr T* operator->() noexcept {
         return &data_;
     }
 
-    /// Member access to wrapped object.
+    /// Member access to native object.
     constexpr const T* operator->() const noexcept {
         return &data_;
     }
 
-    /// Swap wrapped objects.
+    /// Swap objects.
     void swap(TypeWrapper& other) noexcept {
         static_assert(std::is_swappable_v<T>);
         std::swap(this->data_, other.data_);
@@ -134,12 +136,12 @@ public:
         return detail::getUaDataType<typeIndex>();
     }
 
-    /// Return pointer to wrapped object.
+    /// Return pointer to native object.
     constexpr T* handle() noexcept {
         return &data_;
     }
 
-    /// Return const pointer to wrapped object.
+    /// Return const pointer to native object.
     constexpr const T* handle() const noexcept {
         return &data_;
     };

@@ -14,25 +14,22 @@ using namespace Catch::Matchers;
 using namespace opcua;
 
 TEST_CASE("TypeWrapper") {
-    SECTION("Constructor") {
-        // Empty constructor
+    SECTION("Constructor empty") {
         REQUIRE_NOTHROW(TypeWrapper<UA_Boolean, UA_TYPES_BOOLEAN>());
-
-        // Constructor with wrapped type (lvalue)
-        {
-            UA_Boolean value{true};
-            TypeWrapper<UA_Boolean, UA_TYPES_BOOLEAN> wrapper(value);
-            REQUIRE(*wrapper.handle() == value);
-        }
-
-        // Constructor with wrapped type (rvalue)
-        {
-            TypeWrapper<UA_Double, UA_TYPES_DOUBLE> wrapper(11.11);
-            REQUIRE(*wrapper.handle() == 11.11);
-        }
     }
 
-    SECTION("Copy constructor / assignment") {
+    SECTION("Constructor with native type") {
+        UA_Boolean value{true};
+        TypeWrapper<UA_Boolean, UA_TYPES_BOOLEAN> wrapper(value);
+        REQUIRE(*wrapper.handle() == value);
+    }
+
+    SECTION("Constructor with wrapper type") {
+        TypeWrapper<UA_Double, UA_TYPES_DOUBLE> wrapper(11.11);
+        REQUIRE(*wrapper.handle() == 11.11);
+    }
+
+    SECTION("Copy constructor") {
         TypeWrapper<UA_String, UA_TYPES_STRING> wrapper(UA_STRING_ALLOC("test"));
         TypeWrapper<UA_String, UA_TYPES_STRING> wrapperConstructor(wrapper);
 
@@ -146,11 +143,8 @@ TEMPLATE_TEST_CASE_SIG(
     (UA_Variant, UA_TYPES_VARIANT),
     (UA_DiagnosticInfo, UA_TYPES_DIAGNOSTICINFO)
 ) {
-    SECTION("Swap") {
-        TypeWrapper<T, typeIndex> wrapper1;
-        TypeWrapper<T, typeIndex> wrapper2;
-
-        wrapper1.swap(wrapper2);
+    SECTION("Memory size") {
+        STATIC_REQUIRE(sizeof(TypeWrapper<T, typeIndex>) == sizeof(T));
     }
 
     SECTION("Get type index") {
