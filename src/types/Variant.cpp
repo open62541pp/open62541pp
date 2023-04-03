@@ -1,6 +1,6 @@
-#include "open62541pp/Variant.h"
+#include "open62541pp/types/Variant.h"
 
-#include "open62541pp/NodeId.h"
+#include "open62541pp/types/NodeId.h"
 
 namespace opcua {
 

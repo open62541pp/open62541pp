@@ -1,18 +1,14 @@
 #pragma once
 
-#include <array>
 #include <cassert>
-#include <chrono>
 #include <cstdint>
-#include <string>
-#include <string_view>
 #include <type_traits>
 #include <utility>  // move, swap
 
+#include "open62541pp/Common.h"
 #include "open62541pp/Comparison.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Helper.h"
-#include "open62541pp/Types.h"
 #include "open62541pp/open62541.h"
 
 namespace opcua {
@@ -29,7 +25,9 @@ namespace opcua {
 /**
  * Template base class to wrap UA_* type objects.
  *
+ * Zero cost abstraction to wrap the C API objects and delete them on destruction.
  * The derived classes should implement specific constructors to convert from other data types.
+ * @warning No virtual constructor defined, don't implement a destructor in the derived classes.
  * @ingroup TypeWrapper
  */
 template <typename T, uint16_t typeIndex>
@@ -40,20 +38,18 @@ public:
     using TypeWrapperBase = TypeWrapper<T, typeIndex>;
     using UaType = T;
 
-    TypeWrapper() {
-        init();
-    }
+    TypeWrapper() = default;
 
-    /// Constructor with native UA_* type (deep copy).
+    /// Constructor with native object (deep copy).
     explicit TypeWrapper(const T& data) {
         copy(data);
     }
 
-    /// Constructor with native UA_* type (move rvalue).
-    explicit TypeWrapper(T&& data) noexcept
+    /// Constructor with native object (move rvalue).
+    constexpr explicit TypeWrapper(T&& data) noexcept
         : data_(data) {}
 
-    virtual ~TypeWrapper() {
+    ~TypeWrapper() {  // NOLINT
         clear();
     };
 
@@ -76,6 +72,12 @@ public:
         return *this;
     }
 
+    /// Copy assignment with native object (deep copy).
+    TypeWrapper& operator=(const T& other) {
+        copy(other);
+        return *this;
+    }
+
     /// Move assignment.
     TypeWrapper& operator=(TypeWrapper&& other) noexcept {
         if (this == &other) {
@@ -85,27 +87,34 @@ public:
         return *this;
     }
 
-    /// Implicit conversion to wrapped object.
-    operator T&() noexcept {  // NOLINT
+    /// Move assignment with native object.
+    TypeWrapper& operator=(T&& other) noexcept {
+        clear();
+        data_ = other;
+        return *this;
+    }
+
+    /// Implicit conversion to native object.
+    constexpr operator T&() noexcept {  // NOLINT
         return data_;
     }
 
-    /// Implicit conversion to wrapped object.
-    operator const T&() const noexcept {  // NOLINT
+    /// Implicit conversion to native object.
+    constexpr operator const T&() const noexcept {  // NOLINT
         return data_;
     }
 
-    /// Member access to wrapped object.
-    T* operator->() noexcept {
+    /// Member access to native object.
+    constexpr T* operator->() noexcept {
         return &data_;
     }
 
-    /// Member access to wrapped object.
-    const T* operator->() const noexcept {
+    /// Member access to native object.
+    constexpr const T* operator->() const noexcept {
         return &data_;
     }
 
-    /// Swap wrapped objects.
+    /// Swap objects.
     void swap(TypeWrapper& other) noexcept {
         static_assert(std::is_swappable_v<T>);
         std::swap(this->data_, other.data_);
@@ -127,24 +136,19 @@ public:
         return detail::getUaDataType<typeIndex>();
     }
 
-    /// Return pointer to wrapped object.
-    T* handle() noexcept {
+    /// Return pointer to native object.
+    constexpr T* handle() noexcept {
         return &data_;
     }
 
-    /// Return const pointer to wrapped object.
-    const T* handle() const noexcept {
+    /// Return const pointer to native object.
+    constexpr const T* handle() const noexcept {
         return &data_;
     };
 
 protected:
     inline static void checkMemSize() {
         assert(sizeof(T) == getDataType()->memSize);  // NOLINT
-    }
-
-    void init() noexcept {
-        checkMemSize();
-        UA_init(&data_, getDataType());
     }
 
     void clear() noexcept {
@@ -209,159 +213,6 @@ inline bool operator<=(const T& left, const T& right) noexcept {
 template <typename T, typename = std::enable_if_t<detail::IsTypeWrapper<T>::value>>
 inline bool operator>=(const T& left, const T& right) noexcept {
     return (*left.handle() >= *right.handle());
-}
-
-/* ---------------------------------------------------------------------------------------------- */
-
-/**
- * UA_String wrapper class.
- * @ingroup TypeWrapper
- */
-class String : public TypeWrapper<UA_String, UA_TYPES_STRING> {
-public:
-    using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
-
-    explicit String(std::string_view str);
-
-    std::string get() const;
-    std::string_view getView() const;
-};
-
-/**
- * UA_Guid wrapper class.
- * @ingroup TypeWrapper
- */
-class Guid : public TypeWrapper<UA_Guid, UA_TYPES_GUID> {
-public:
-    using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
-
-    Guid(UA_UInt32 data1, UA_UInt16 data2, UA_UInt16 data3, std::array<UA_Byte, 8> data4);
-};
-
-/**
- * UA_ByteString wrapper class.
- * @ingroup TypeWrapper
- */
-class ByteString : public TypeWrapper<UA_ByteString, UA_TYPES_BYTESTRING> {
-public:
-    // NOLINTNEXTLINE, false positive?
-    using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
-
-    explicit ByteString(std::string_view str);
-
-    std::string get() const;
-    std::string_view getView() const;
-};
-
-/**
- * UA_XmlElement wrapper class.
- * @ingroup TypeWrapper
- */
-class XmlElement : public TypeWrapper<UA_XmlElement, UA_TYPES_XMLELEMENT> {
-public:
-    // NOLINTNEXTLINE, false positive?
-    using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
-
-    explicit XmlElement(std::string_view str);
-
-    std::string get() const;
-    std::string_view getView() const;
-};
-
-/**
- * UA_QualifiedName wrapper class.
- * @ingroup TypeWrapper
- */
-class QualifiedName : public TypeWrapper<UA_QualifiedName, UA_TYPES_QUALIFIEDNAME> {
-public:
-    // NOLINTNEXTLINE, false positive?
-    using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
-
-    QualifiedName(uint16_t namespaceIndex, std::string_view name);
-
-    uint16_t getNamespaceIndex() const noexcept;
-    std::string getName() const;
-    std::string_view getNameView() const;
-};
-
-/**
- * UA_LocalizedText wrapper class.
- * @ingroup TypeWrapper
- */
-class LocalizedText : public TypeWrapper<UA_LocalizedText, UA_TYPES_LOCALIZEDTEXT> {
-public:
-    // NOLINTNEXTLINE, false positive?
-    using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
-
-    LocalizedText(std::string_view text, std::string_view locale);
-
-    std::string getText() const;
-    std::string_view getTextView() const;
-    std::string getLocale() const;
-    std::string_view getLocaleView() const;
-};
-
-/**
- * UA_DateTime wrapper class.
- *
- * An instance in time. A DateTime value is encoded as a 64-bit signed integer which represents the
- * number of 100 nanosecond intervals since January 1, 1601 (UTC).
- *
- * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/5.2.2.5
- * @ingroup TypeWrapper
- */
-class DateTime : public TypeWrapper<UA_DateTime, UA_TYPES_DATETIME> {
-public:
-    using DefaultClock = std::chrono::system_clock;
-    using UaDuration = std::chrono::duration<uint64_t, std::ratio<1, 10'000'000>>;
-
-    // NOLINTNEXTLINE, false positive?
-    using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
-
-    template <typename Clock, typename Duration>
-    DateTime(std::chrono::time_point<Clock, Duration> timePoint)  // NOLINT, implicit wanted
-        : DateTime(fromTimePoint(timePoint)) {}
-
-    /// Get current DateTime.
-    static DateTime now();
-
-    /// Get DateTime from std::chrono::time_point.
-    template <typename Clock, typename Duration>
-    static DateTime fromTimePoint(std::chrono::time_point<Clock, Duration> timePoint);
-
-    /// Get DateTime from Unix time.
-    static DateTime fromUnixTime(uint64_t unixTime);
-
-    /// Convert to std::chrono::time_point.
-    template <typename Clock = DefaultClock, typename Duration = UaDuration>
-    std::chrono::time_point<Clock, Duration> toTimePoint() const;
-
-    /// Convert to Unix time.
-    uint64_t toUnixTime() const noexcept;
-
-    /// Convert to UA_DateTimeStruct.
-    UA_DateTimeStruct toStruct() const;
-
-    /// Get DateTime value as 100 nanosecond intervals since January 1, 1601 (UTC).
-    uint64_t get() const noexcept;
-};
-
-template <typename Clock, typename Duration>
-DateTime DateTime::fromTimePoint(std::chrono::time_point<Clock, Duration> timePoint) {
-    static constexpr uint64_t dateTimeUnixEpoch = UA_DATETIME_UNIX_EPOCH;
-    const uint64_t sinceUnixEpoch =
-        std::chrono::duration_cast<UaDuration>(timePoint.time_since_epoch()).count();
-    return DateTime(dateTimeUnixEpoch + sinceUnixEpoch);
-}
-
-template <typename Clock, typename Duration>
-std::chrono::time_point<Clock, Duration> DateTime::toTimePoint() const {
-    static constexpr std::chrono::time_point<Clock, Duration> unixEpoch{};
-    const auto dateTime = get();
-    if (dateTime < UA_DATETIME_UNIX_EPOCH) {
-        return unixEpoch;
-    }
-    return unixEpoch + UaDuration(dateTime - UA_DATETIME_UNIX_EPOCH);
 }
 
 }  // namespace opcua

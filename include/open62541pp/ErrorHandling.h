@@ -24,11 +24,6 @@ private:
     UA_StatusCode code_;
 };
 
-class InvalidNodeClass : public std::runtime_error {
-public:
-    using std::runtime_error::runtime_error;  // inherit contructors
-};
-
 class BadVariantAccess : public std::runtime_error {
 public:
     using std::runtime_error::runtime_error;  // inherit contructors

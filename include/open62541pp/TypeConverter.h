@@ -1,16 +1,18 @@
 #pragma once
 
+#include <array>
 #include <chrono>
 #include <iterator>  // distance
 #include <string>
 #include <type_traits>
 
+#include "open62541pp/Common.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Helper.h"
 #include "open62541pp/Traits.h"
 #include "open62541pp/TypeWrapper.h"
-#include "open62541pp/Types.h"
 #include "open62541pp/open62541.h"
+#include "open62541pp/types/DateTime.h"
 
 namespace opcua {
 
@@ -101,7 +103,7 @@ template <typename T, typename NativeType = typename TypeConverter<T>::NativeTyp
 /// Create and convert vector from native array.
 template <typename T, typename NativeType = typename TypeConverter<T>::NativeType>
 [[nodiscard]] std::vector<T> fromNativeArray(NativeType* array, size_t size) {
-    if constexpr (isNativeType<T>() && std::is_fundamental_v<T>) {
+    if constexpr (isBuiltinType<T>() && std::is_fundamental_v<T>) {
         return std::vector<T>(array, array + size);  // NOLINT
     } else {
         std::vector<T> result(size);
