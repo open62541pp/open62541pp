@@ -47,6 +47,7 @@ HTML_EXTRA_STYLESHEET  = "${CMAKE_CURRENT_SOURCE_DIR}/doxygen-awesome-css/doxyge
 HTML_DYNAMIC_MENUS     = YES
 HTML_DYNAMIC_SECTIONS  = NO
 HTML_OUTPUT            = "${doxygen_open62541_html_dir}"
+HTML_COLORSTYLE        = LIGHT
 
 # Dot diagrams
 HAVE_DOT               = NO
