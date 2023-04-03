@@ -86,13 +86,13 @@ $(function() {
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    std::optional&lt;uint16_t&gt; serverPicoseconds,</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    std::optional&lt;UA_StatusCode&gt; statusCode</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;)</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    : <a class="code" href="classopcua_1_1DataValue.html">DataValue</a>(<a class="codeRef" href="open62541/structUA__DataValue.html">UA_DataValue</a>{</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    : <a class="code" href="classopcua_1_1DataValue.html">DataValue</a>(<a class="codeRef" target="_blank" href="open62541/structUA__DataValue.html">UA_DataValue</a>{</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;          {},</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;          sourceTimestamp.value_or(<a class="code" href="classopcua_1_1DateTime.html">DateTime</a>{}),</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;          serverTimestamp.value_or(<a class="code" href="classopcua_1_1DateTime.html">DateTime</a>{}),</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;          sourcePicoseconds.value_or(uint16_t{}),</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;          serverPicoseconds.value_or(uint16_t{}),</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;          statusCode.value_or(<a class="codeRef" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>{}),</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;          statusCode.value_or(<a class="codeRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>{}),</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;          value.has_value(),</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;          sourceTimestamp.has_value(),</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;          serverTimestamp.has_value(),</div>
@@ -128,21 +128,21 @@ $(function() {
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
 <div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classopcua_1_1DataValue.html#a787d6d3882066fe3dc12532d3f7c36aa">   55</a></span>&#160;std::optional&lt;uint16_t&gt; <a class="code" href="classopcua_1_1DataValue.html#a787d6d3882066fe3dc12532d3f7c36aa">DataValue::getSourcePicoseconds</a>()<span class="keyword"> const </span>{</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805">handle</a>()-&gt;hasSourcePicoseconds) {</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805">handle</a>()-&gt;<a class="codeRef" href="open62541/structUA__DataValue.html#a878dae470cc6c4af7442b666144c598e">sourcePicoseconds</a>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805">handle</a>()-&gt;<a class="codeRef" target="_blank" href="open62541/structUA__DataValue.html#a878dae470cc6c4af7442b666144c598e">sourcePicoseconds</a>;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    }</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordflow">return</span> {};</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;}</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
 <div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="classopcua_1_1DataValue.html#a0968faaf6a632ef42ee9f20dd3f30bad">   62</a></span>&#160;std::optional&lt;uint16_t&gt; <a class="code" href="classopcua_1_1DataValue.html#a0968faaf6a632ef42ee9f20dd3f30bad">DataValue::getServerPicoseconds</a>()<span class="keyword"> const </span>{</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805">handle</a>()-&gt;hasSourcePicoseconds) {</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805">handle</a>()-&gt;<a class="codeRef" href="open62541/structUA__DataValue.html#a6012a45a2d1c61d611cd86556fdb97a3">serverPicoseconds</a>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805">handle</a>()-&gt;<a class="codeRef" target="_blank" href="open62541/structUA__DataValue.html#a6012a45a2d1c61d611cd86556fdb97a3">serverPicoseconds</a>;</div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    }</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordflow">return</span> {};</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;}</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
 <div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="classopcua_1_1DataValue.html#a8812b5a823539fbc7351257f99aa0ddc">   69</a></span>&#160;std::optional&lt;uint32_t&gt; <a class="code" href="classopcua_1_1DataValue.html#a8812b5a823539fbc7351257f99aa0ddc">DataValue::getStatusCode</a>()<span class="keyword"> const </span>{</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805">handle</a>()-&gt;hasStatus) {</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805">handle</a>()-&gt;<a class="codeRef" href="open62541/structUA__DataValue.html#a96804144fa60cfc250d5b0085148e588">status</a>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805">handle</a>()-&gt;<a class="codeRef" target="_blank" href="open62541/structUA__DataValue.html#a96804144fa60cfc250d5b0085148e588">status</a>;</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    }</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">return</span> {};</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}</div>

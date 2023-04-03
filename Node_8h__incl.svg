@@ -280,7 +280,7 @@
 <!-- Node11 -->
 <g id="node11" class="node">
 <title>Node11</title>
-<g id="a_node11"><a xlink:href="open62541/nodeids_8h.html.html" xlink:title=" ">
+<g id="a_node11"><a target="_blank" xlink:href="open62541/nodeids_8h.html.html" xlink:title=" ">
 <polygon fill="none" stroke="black" points="1388.48,-0.5 1388.48,-19.5 1509.48,-19.5 1509.48,-0.5 1388.48,-0.5"/>
 <text text-anchor="middle" x="1448.98" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">open62541/nodeids.h</text>
 </a>
@@ -295,7 +295,7 @@
 <!-- Node12 -->
 <g id="node12" class="node">
 <title>Node12</title>
-<g id="a_node12"><a xlink:href="open62541/types_8h.html.html" xlink:title=" ">
+<g id="a_node12"><a target="_blank" xlink:href="open62541/types_8h.html.html" xlink:title=" ">
 <polygon fill="none" stroke="black" points="1527.98,-0.5 1527.98,-19.5 1637.98,-19.5 1637.98,-0.5 1527.98,-0.5"/>
 <text text-anchor="middle" x="1582.98" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">open62541/types.h</text>
 </a>
@@ -310,7 +310,7 @@
 <!-- Node13 -->
 <g id="node13" class="node">
 <title>Node13</title>
-<g id="a_node13"><a xlink:href="open62541/types__generated_8h.html.html" xlink:title=" ">
+<g id="a_node13"><a target="_blank" xlink:href="open62541/types__generated_8h.html.html" xlink:title=" ">
 <polygon fill="none" stroke="black" points="1655.98,-0.5 1655.98,-19.5 1819.98,-19.5 1819.98,-0.5 1655.98,-0.5"/>
 <text text-anchor="middle" x="1737.98" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">open62541/types_generated.h</text>
 </a>

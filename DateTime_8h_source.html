@@ -107,14 +107,14 @@ $(function() {
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    uint64_t <a class="code" href="classopcua_1_1DateTime.html#adc353a4249491905d5a329765557a019">toUnixTime</a>() const noexcept;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="codeRef" href="open62541/structUA__DateTimeStruct.html">UA_DateTimeStruct</a> <a class="code" href="classopcua_1_1DateTime.html#a1811e55104957d60b31663079821766b">toStruct</a>() const;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="codeRef" target="_blank" href="open62541/structUA__DateTimeStruct.html">UA_DateTimeStruct</a> <a class="code" href="classopcua_1_1DateTime.html#a1811e55104957d60b31663079821766b">toStruct</a>() const;</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    uint64_t <a class="code" href="classopcua_1_1DateTime.html#a108f8b7f36195cb88367d13042492451">get</a>() const noexcept;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;};</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;template &lt;typename Clock, typename Duration&gt;</div>
 <div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="classopcua_1_1DateTime.html#a091d2cc80be986870f9703b1044c122c">   58</a></span>&#160;<a class="code" href="classopcua_1_1DateTime.html">DateTime</a> <a class="code" href="classopcua_1_1DateTime.html">DateTime</a>::<a class="code" href="classopcua_1_1DateTime.html#a091d2cc80be986870f9703b1044c122c">fromTimePoint</a>(std::chrono::time_point&lt;Clock, Duration&gt; timePoint) {</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">static</span> constexpr uint64_t dateTimeUnixEpoch = <a class="codeRef" href="open62541/types_8h.html#a489381cc84a7d552fc23c907c7c5c9cb">UA_DATETIME_UNIX_EPOCH</a>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">static</span> constexpr uint64_t dateTimeUnixEpoch = <a class="codeRef" target="_blank" href="open62541/types_8h.html#a489381cc84a7d552fc23c907c7c5c9cb">UA_DATETIME_UNIX_EPOCH</a>;</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">const</span> uint64_t sinceUnixEpoch =</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        std::chrono::duration_cast&lt;UaDuration&gt;(timePoint.time_since_epoch()).count();</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classopcua_1_1DateTime.html#aaed4988ef6c14a612aa17a5f6487c976">DateTime</a>(dateTimeUnixEpoch + sinceUnixEpoch);</div>
@@ -124,10 +124,10 @@ $(function() {
 <div class="line"><a name="l00066"></a><span class="lineno"><a class="line" href="classopcua_1_1DateTime.html#adf4172f40087c213d7ab7932286387f4">   66</a></span>&#160;std::chrono::time_point&lt;Clock, Duration&gt; <a class="code" href="classopcua_1_1DateTime.html#adf4172f40087c213d7ab7932286387f4">DateTime::toTimePoint</a>()<span class="keyword"> const </span>{</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">static</span> constexpr std::chrono::time_point&lt;Clock, Duration&gt; unixEpoch{};</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> dateTime = <a class="code" href="classopcua_1_1DateTime.html#a108f8b7f36195cb88367d13042492451">get</a>();</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">if</span> (dateTime &lt; <a class="codeRef" href="open62541/types_8h.html#a489381cc84a7d552fc23c907c7c5c9cb">UA_DATETIME_UNIX_EPOCH</a>) {</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">if</span> (dateTime &lt; <a class="codeRef" target="_blank" href="open62541/types_8h.html#a489381cc84a7d552fc23c907c7c5c9cb">UA_DATETIME_UNIX_EPOCH</a>) {</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keywordflow">return</span> unixEpoch;</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    }</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">return</span> unixEpoch + <a class="code" href="classopcua_1_1DateTime.html#abab6383f0b5eaff787f1d3a92be046c0">UaDuration</a>(dateTime - <a class="codeRef" href="open62541/types_8h.html#a489381cc84a7d552fc23c907c7c5c9cb">UA_DATETIME_UNIX_EPOCH</a>);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">return</span> unixEpoch + <a class="code" href="classopcua_1_1DateTime.html#abab6383f0b5eaff787f1d3a92be046c0">UaDuration</a>(dateTime - <a class="codeRef" target="_blank" href="open62541/types_8h.html#a489381cc84a7d552fc23c907c7c5c9cb">UA_DATETIME_UNIX_EPOCH</a>);</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}  <span class="comment">// namespace opcua</span></div>
