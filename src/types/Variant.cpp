@@ -1,5 +1,6 @@
 #include "open62541pp/types/Variant.h"
 
+#include "open62541pp/Helper.h"
 #include "open62541pp/types/NodeId.h"
 
 namespace opcua {
@@ -21,10 +22,7 @@ bool Variant::isType(const UA_DataType* type) const noexcept {
 }
 
 bool Variant::isType(Type type) const noexcept {
-    if (handle()->type == nullptr) {
-        return false;
-    }
-    return handle()->type->typeKind == static_cast<uint16_t>(type);
+    return handle()->type == detail::getUaDataType(type);
 }
 
 bool Variant::isType(const NodeId& id) const noexcept {
@@ -32,10 +30,15 @@ bool Variant::isType(const NodeId& id) const noexcept {
 }
 
 std::optional<Type> Variant::getVariantType() const noexcept {
-    if (handle()->type == nullptr) {
-        return {};
+    // UA_DataType typeIndex member was removed in open62541 v1.3
+    // https://github.com/open62541/open62541/pull/4477
+    // https://github.com/open62541/open62541/issues/4960
+    for (size_t typeIndex = 0; typeIndex < detail::builtinTypesCount; ++typeIndex) {
+        if (handle()->type == detail::getUaDataType(typeIndex)) {
+            return static_cast<Type>(typeIndex);
+        }
     }
-    return static_cast<Type>(handle()->type->typeKind);
+    return {};
 }
 
 size_t Variant::getArrayLength() const noexcept {

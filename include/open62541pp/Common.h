@@ -207,6 +207,8 @@ constexpr bool isBuiltinType() {
 // template <size_t Index>
 // using BuiltinType = std::tuple_element<Index, BuiltinTypes>;
 
+inline constexpr auto builtinTypesCount = std::tuple_size_v<BuiltinTypes>;
+
 }  // namespace detail
 
 }  // namespace opcua
