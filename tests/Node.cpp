@@ -4,6 +4,8 @@
 #include "open62541pp/Node.h"
 #include "open62541pp/Server.h"
 
+#include "version.h"
+
 using namespace opcua;
 
 TEST_CASE("Node") {
@@ -118,6 +120,7 @@ TEST_CASE("Node") {
         REQUIRE_THROWS(server.getRootNode().writeScalar<int>({}));
     }
 
+#if UAPP_OPEN62541_VER_GE(1, 1)
     SECTION("Read/write data value") {
         auto node = server.getRootNode().addVariable({1, "testValue"}, "testValue");
 
@@ -140,6 +143,7 @@ TEST_CASE("Node") {
         CHECK(valueRead->sourceTimestamp == valueWrite->sourceTimestamp);
         CHECK(valueRead->sourcePicoseconds == valueWrite->sourcePicoseconds);
     }
+#endif
 
     SECTION("Read/write scalar") {
         auto node = server.getRootNode().addVariable({1, "testScalar"}, "testScalar");

@@ -7,6 +7,7 @@
 #include "open62541pp/TypeWrapper.h"
 
 #include "open62541_impl.h"
+#include "version.h"
 
 namespace opcua {
 
@@ -321,8 +322,11 @@ void Node::writeModellingRule(ModellingRule rule) {
 }
 
 void Node::writeDataValue(const DataValue& value) {
+    // support for types with optional fields introduced in v1.1
+#if UAPP_OPEN62541_VER_GE(1, 1)
     const auto status = UA_Server_writeDataValue(server_.handle(), nodeId_, value);
     detail::throwOnBadStatus(status);
+#endif
 }
 
 void Node::writeValue(const Variant& var) {
