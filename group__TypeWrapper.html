@@ -72,20 +72,11 @@ $(function() {
 <div class="contents">
 
 <p>Safe wrapper classes for heap-allocated open62541 <code>UA_*</code> types to prevent memory leaks. <br  />
-All wrapper classes inherit from <a class="el" href="classopcua_1_1TypeWrapper.html" title="Template base class to wrap UA_* type objects.">opcua::TypeWrapper</a>. Native open62541 objects can be accessed using the <a class="el" href="classopcua_1_1TypeWrapper.html#afc8859c135eed99011101f8844c1bc26" title="Return pointer to wrapped object.">opcua::TypeWrapper::handle()</a> method.  
+All wrapper classes inherit from <a class="el" href="classopcua_1_1TypeWrapper.html" title="Template base class to wrap UA_* type objects.">opcua::TypeWrapper</a>. Native open62541 objects can be accessed using the <a class="el" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805" title="Return pointer to native object.">opcua::TypeWrapper::handle()</a> method.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1NodeId.html">opcua::NodeId</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="elRef" href="open62541/structUA__NodeId.html">UA_NodeId</a> wrapper class.  <a href="classopcua_1_1NodeId.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1ExpandedNodeId.html">opcua::ExpandedNodeId</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="elRef" href="open62541/structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> wrapper class.  <a href="classopcua_1_1ExpandedNodeId.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; T, typeIndex &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template base class to wrap UA_* type objects.  <a href="classopcua_1_1TypeWrapper.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1String.html">opcua::String</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="elRef" href="open62541/structUA__String.html">UA_String</a> wrapper class.  <a href="classopcua_1_1String.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -104,16 +95,28 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1LocalizedText.html">opcua::LocalizedText</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="elRef" href="open62541/structUA__LocalizedText.html">UA_LocalizedText</a> wrapper class.  <a href="classopcua_1_1LocalizedText.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataValue.html">opcua::DataValue</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="elRef" href="open62541/structUA__DataValue.html">UA_DataValue</a> wrapper class.  <a href="classopcua_1_1DataValue.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DateTime.html">opcua::DateTime</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">UA_DateTime wrapper class.  <a href="classopcua_1_1DateTime.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1NodeId.html">opcua::NodeId</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="elRef" href="open62541/structUA__NodeId.html">UA_NodeId</a> wrapper class.  <a href="classopcua_1_1NodeId.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1ExpandedNodeId.html">opcua::ExpandedNodeId</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="elRef" href="open62541/structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> wrapper class.  <a href="classopcua_1_1ExpandedNodeId.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html">opcua::Variant</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="elRef" href="open62541/structUA__Variant.html">UA_Variant</a> wrapper class.  <a href="classopcua_1_1Variant.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; T, typeIndex &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template base class to wrap UA_* type objects.  <a href="classopcua_1_1TypeWrapper.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Safe wrapper classes for heap-allocated open62541 <code>UA_*</code> types to prevent memory leaks. <br  />
-All wrapper classes inherit from <a class="el" href="classopcua_1_1TypeWrapper.html" title="Template base class to wrap UA_* type objects.">opcua::TypeWrapper</a>. Native open62541 objects can be accessed using the <a class="el" href="classopcua_1_1TypeWrapper.html#afc8859c135eed99011101f8844c1bc26" title="Return pointer to wrapped object.">opcua::TypeWrapper::handle()</a> method. </p>
+All wrapper classes inherit from <a class="el" href="classopcua_1_1TypeWrapper.html" title="Template base class to wrap UA_* type objects.">opcua::TypeWrapper</a>. Native open62541 objects can be accessed using the <a class="el" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805" title="Return pointer to native object.">opcua::TypeWrapper::handle()</a> method. </p>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

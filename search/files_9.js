@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['mdnsd_2eh_2718',['mdnsd.h',['open62541/mdnsd_8h.html.html',1,'']]],
-  ['mqtt_2eh_2719',['mqtt.h',['open62541/mqtt_8h.html.html',1,'']]],
-  ['mqtt_5fpal_2eh_2720',['mqtt_pal.h',['open62541/mqtt__pal_8h.html.html',1,'']]],
-  ['ms_5fstdint_2eh_2721',['ms_stdint.h',['open62541/mdnsd_2libmdnsd_2ms__stdint_8h.html.html',1,'(Global Namespace)'],['open62541/ms__stdint_8h.html.html',1,'(Global Namespace)']]]
+  ['libc_5ftime_2eh_2727',['libc_time.h',['open62541/libc__time_8h.html.html',1,'']]],
+  ['log_2eh_2728',['log.h',['open62541/log_8h.html.html',1,'']]],
+  ['log_5fstdout_2eh_2729',['log_stdout.h',['open62541/log__stdout_8h.html.html',1,'']]],
+  ['log_5fsyslog_2eh_2730',['log_syslog.h',['open62541/log__syslog_8h.html.html',1,'']]],
+  ['logger_2eh_2731',['Logger.h',['../Logger_8h.html',1,'']]]
 ];

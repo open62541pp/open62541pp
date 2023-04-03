@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['variant_2682',['Variant',['../classopcua_1_1Variant.html',1,'opcua']]]
+  ['xmlelement_2691',['XmlElement',['../classopcua_1_1XmlElement.html',1,'opcua']]]
 ];

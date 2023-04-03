@@ -89,6 +89,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1ByteString.html">ByteString</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">UA_ByteString wrapper class.  <a href="classopcua_1_1ByteString.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataValue.html">DataValue</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="elRef" href="open62541/structUA__DataValue.html">UA_DataValue</a> wrapper class.  <a href="classopcua_1_1DataValue.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DateTime.html">DateTime</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">UA_DateTime wrapper class.  <a href="classopcua_1_1DateTime.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -97,8 +100,6 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Guid.html">Guid</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="elRef" href="open62541/structUA__Guid.html">UA_Guid</a> wrapper class.  <a href="classopcua_1_1Guid.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1InvalidNodeClass.html">InvalidNodeClass</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="elRef" href="open62541/structUA__LocalizedText.html">UA_LocalizedText</a> wrapper class.  <a href="classopcua_1_1LocalizedText.html#details">More...</a><br /></td></tr>
@@ -185,38 +186,6 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a016225e750f216587c011ea43f212d8d"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a016225e750f216587c011ea43f212d8d">LogLevel</a> { <br />
-&#160;&#160;<a class="el" href="namespaceopcua.html#a016225e750f216587c011ea43f212d8dadd4ec0ac4e58f7c32a01244ae91150b1">LogLevel::Trace</a> = 0, 
-<a class="el" href="namespaceopcua.html#a016225e750f216587c011ea43f212d8daa603905470e2a5b8c13e96b579ef0dba">LogLevel::Debug</a>, 
-<a class="el" href="namespaceopcua.html#a016225e750f216587c011ea43f212d8da4059b0251f66a18cb56f544728796875">LogLevel::Info</a>, 
-<a class="el" href="namespaceopcua.html#a016225e750f216587c011ea43f212d8da0eaadb4fcb48a0a0ed7bc9868be9fbaa">LogLevel::Warning</a>, 
-<br />
-&#160;&#160;<a class="el" href="namespaceopcua.html#a016225e750f216587c011ea43f212d8da902b0d55fddef6f8d651fe1035b7d4bd">LogLevel::Error</a>, 
-<a class="el" href="namespaceopcua.html#a016225e750f216587c011ea43f212d8da882384ec38ce8d9582b57e70861730e4">LogLevel::Fatal</a>
-<br />
- }</td></tr>
-<tr class="memdesc:a016225e750f216587c011ea43f212d8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log level.  <a href="namespaceopcua.html#a016225e750f216587c011ea43f212d8d">More...</a><br /></td></tr>
-<tr class="separator:a016225e750f216587c011ea43f212d8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82c59334b1772f47ada395785f5bf70a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a82c59334b1772f47ada395785f5bf70a">LogCategory</a> { <br />
-&#160;&#160;<a class="el" href="namespaceopcua.html#a82c59334b1772f47ada395785f5bf70aaeec89088ee408b80387155272b113256">LogCategory::Network</a> = 0, 
-<a class="el" href="namespaceopcua.html#a82c59334b1772f47ada395785f5bf70aaf7160e501769c130b5226d4a6321e231">LogCategory::SecureChannel</a>, 
-<a class="el" href="namespaceopcua.html#a82c59334b1772f47ada395785f5bf70aa71c7ae294b7abd866b3fb295b3b9e4a4">LogCategory::Session</a>, 
-<a class="el" href="namespaceopcua.html#a82c59334b1772f47ada395785f5bf70aa9aa1b03934893d7134a660af4204f2a9">LogCategory::Server</a>, 
-<br />
-&#160;&#160;<a class="el" href="namespaceopcua.html#a82c59334b1772f47ada395785f5bf70aa577d7068826de925ea2aec01dbadf5e4">LogCategory::Client</a>, 
-<a class="el" href="namespaceopcua.html#a82c59334b1772f47ada395785f5bf70aa9257b89d51d597668172c34e1401971c">LogCategory::Userland</a>, 
-<a class="el" href="namespaceopcua.html#a82c59334b1772f47ada395785f5bf70aa72175821efef5c37a826c8833b2336e3">LogCategory::SecurityPolicy</a>
-<br />
- }</td></tr>
-<tr class="memdesc:a82c59334b1772f47ada395785f5bf70a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log category.  <a href="namespaceopcua.html#a82c59334b1772f47ada395785f5bf70a">More...</a><br /></td></tr>
-<tr class="separator:a82c59334b1772f47ada395785f5bf70a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05d617e4c64656fa2ef6baf2af636f90"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a05d617e4c64656fa2ef6baf2af636f90">NodeIdType</a> : uint8_t { <a class="el" href="namespaceopcua.html#a05d617e4c64656fa2ef6baf2af636f90a87322391cc6e8948ce9fd5d6cb84fced">NodeIdType::Numeric</a> = UA_NODEIDTYPE_NUMERIC, 
-<a class="el" href="namespaceopcua.html#a05d617e4c64656fa2ef6baf2af636f90a27118326006d3829667a400ad23d5d98">NodeIdType::String</a> = UA_NODEIDTYPE_STRING, 
-<a class="el" href="namespaceopcua.html#a05d617e4c64656fa2ef6baf2af636f90ac195f641dd597766b98e4ffa9e2f0e75">NodeIdType::Guid</a> = UA_NODEIDTYPE_GUID, 
-<a class="el" href="namespaceopcua.html#a05d617e4c64656fa2ef6baf2af636f90a58efa9e8b8491c4a42cbf3bead1b06b6">NodeIdType::ByteString</a> = UA_NODEIDTYPE_BYTESTRING
- }</td></tr>
-<tr class="memdesc:a05d617e4c64656fa2ef6baf2af636f90"><td class="mdescLeft">&#160;</td><td class="mdescRight">NodeId types.  <a href="namespaceopcua.html#a05d617e4c64656fa2ef6baf2af636f90">More...</a><br /></td></tr>
-<tr class="separator:a05d617e4c64656fa2ef6baf2af636f90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adc25953f10b26dc1213b1033d44f5966"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966">Type</a> : uint16_t { <br />
 &#160;&#160;<a class="el" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966a27226c864bac7454a8504f8edb15d95b">Type::Boolean</a> = UA_TYPES_BOOLEAN, 
 <a class="el" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966a7e76fb67fc7b4cb0004bc45f2bd92723">Type::SByte</a> = UA_TYPES_SBYTE, 
@@ -351,9 +320,44 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:ad32e0c353b427fd8b7788a85a78335aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modelling rules.  <a href="namespaceopcua.html#ad32e0c353b427fd8b7788a85a78335aa">More...</a><br /></td></tr>
 <tr class="separator:ad32e0c353b427fd8b7788a85a78335aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a016225e750f216587c011ea43f212d8d"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a016225e750f216587c011ea43f212d8d">LogLevel</a> { <br />
+&#160;&#160;<a class="el" href="namespaceopcua.html#a016225e750f216587c011ea43f212d8dadd4ec0ac4e58f7c32a01244ae91150b1">LogLevel::Trace</a> = 0, 
+<a class="el" href="namespaceopcua.html#a016225e750f216587c011ea43f212d8daa603905470e2a5b8c13e96b579ef0dba">LogLevel::Debug</a>, 
+<a class="el" href="namespaceopcua.html#a016225e750f216587c011ea43f212d8da4059b0251f66a18cb56f544728796875">LogLevel::Info</a>, 
+<a class="el" href="namespaceopcua.html#a016225e750f216587c011ea43f212d8da0eaadb4fcb48a0a0ed7bc9868be9fbaa">LogLevel::Warning</a>, 
+<br />
+&#160;&#160;<a class="el" href="namespaceopcua.html#a016225e750f216587c011ea43f212d8da902b0d55fddef6f8d651fe1035b7d4bd">LogLevel::Error</a>, 
+<a class="el" href="namespaceopcua.html#a016225e750f216587c011ea43f212d8da882384ec38ce8d9582b57e70861730e4">LogLevel::Fatal</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:a016225e750f216587c011ea43f212d8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log level.  <a href="namespaceopcua.html#a016225e750f216587c011ea43f212d8d">More...</a><br /></td></tr>
+<tr class="separator:a016225e750f216587c011ea43f212d8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82c59334b1772f47ada395785f5bf70a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a82c59334b1772f47ada395785f5bf70a">LogCategory</a> { <br />
+&#160;&#160;<a class="el" href="namespaceopcua.html#a82c59334b1772f47ada395785f5bf70aaeec89088ee408b80387155272b113256">LogCategory::Network</a> = 0, 
+<a class="el" href="namespaceopcua.html#a82c59334b1772f47ada395785f5bf70aaf7160e501769c130b5226d4a6321e231">LogCategory::SecureChannel</a>, 
+<a class="el" href="namespaceopcua.html#a82c59334b1772f47ada395785f5bf70aa71c7ae294b7abd866b3fb295b3b9e4a4">LogCategory::Session</a>, 
+<a class="el" href="namespaceopcua.html#a82c59334b1772f47ada395785f5bf70aa9aa1b03934893d7134a660af4204f2a9">LogCategory::Server</a>, 
+<br />
+&#160;&#160;<a class="el" href="namespaceopcua.html#a82c59334b1772f47ada395785f5bf70aa577d7068826de925ea2aec01dbadf5e4">LogCategory::Client</a>, 
+<a class="el" href="namespaceopcua.html#a82c59334b1772f47ada395785f5bf70aa9257b89d51d597668172c34e1401971c">LogCategory::Userland</a>, 
+<a class="el" href="namespaceopcua.html#a82c59334b1772f47ada395785f5bf70aa72175821efef5c37a826c8833b2336e3">LogCategory::SecurityPolicy</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:a82c59334b1772f47ada395785f5bf70a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log category.  <a href="namespaceopcua.html#a82c59334b1772f47ada395785f5bf70a">More...</a><br /></td></tr>
+<tr class="separator:a82c59334b1772f47ada395785f5bf70a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05d617e4c64656fa2ef6baf2af636f90"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a05d617e4c64656fa2ef6baf2af636f90">NodeIdType</a> : uint8_t { <a class="el" href="namespaceopcua.html#a05d617e4c64656fa2ef6baf2af636f90a87322391cc6e8948ce9fd5d6cb84fced">NodeIdType::Numeric</a> = UA_NODEIDTYPE_NUMERIC, 
+<a class="el" href="namespaceopcua.html#a05d617e4c64656fa2ef6baf2af636f90a27118326006d3829667a400ad23d5d98">NodeIdType::String</a> = UA_NODEIDTYPE_STRING, 
+<a class="el" href="namespaceopcua.html#a05d617e4c64656fa2ef6baf2af636f90ac195f641dd597766b98e4ffa9e2f0e75">NodeIdType::Guid</a> = UA_NODEIDTYPE_GUID, 
+<a class="el" href="namespaceopcua.html#a05d617e4c64656fa2ef6baf2af636f90a58efa9e8b8491c4a42cbf3bead1b06b6">NodeIdType::ByteString</a> = UA_NODEIDTYPE_BYTESTRING
+ }</td></tr>
+<tr class="memdesc:a05d617e4c64656fa2ef6baf2af636f90"><td class="mdescLeft">&#160;</td><td class="mdescRight">NodeId types.  <a href="namespaceopcua.html#a05d617e4c64656fa2ef6baf2af636f90">More...</a><br /></td></tr>
+<tr class="separator:a05d617e4c64656fa2ef6baf2af636f90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:ad182a23245c77059754cdcf093309a69"><td class="memItemLeft" align="right" valign="top">constexpr std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#ad182a23245c77059754cdcf093309a69">getNodeClassName</a> (<a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6d">NodeClass</a> nodeClass)</td></tr>
+<tr class="memdesc:ad182a23245c77059754cdcf093309a69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get name of node class.  <a href="namespaceopcua.html#ad182a23245c77059754cdcf093309a69">More...</a><br /></td></tr>
+<tr class="separator:ad182a23245c77059754cdcf093309a69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf326c66a6effffc34bb0df2aa64aa55"><td class="memItemLeft" align="right" valign="top">constexpr std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#aaf326c66a6effffc34bb0df2aa64aa55">getLogLevelName</a> (<a class="el" href="namespaceopcua.html#a016225e750f216587c011ea43f212d8d">LogLevel</a> level)</td></tr>
 <tr class="memdesc:aaf326c66a6effffc34bb0df2aa64aa55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get name of log level.  <a href="namespaceopcua.html#aaf326c66a6effffc34bb0df2aa64aa55">More...</a><br /></td></tr>
 <tr class="separator:aaf326c66a6effffc34bb0df2aa64aa55"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -368,9 +372,6 @@ Functions</h2></td></tr>
 <tr class="separator:a7702f8e40ac9da8201698e3e1ccad755"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2422738e8e762cb3841f0e129c2ec29c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a2422738e8e762cb3841f0e129c2ec29c">operator!=</a> (const <a class="el" href="classopcua_1_1Server.html">Server</a> &amp;left, const <a class="el" href="classopcua_1_1Server.html">Server</a> &amp;right) noexcept</td></tr>
 <tr class="separator:a2422738e8e762cb3841f0e129c2ec29c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad182a23245c77059754cdcf093309a69"><td class="memItemLeft" align="right" valign="top">constexpr std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#ad182a23245c77059754cdcf093309a69">getNodeClassName</a> (<a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6d">NodeClass</a> nodeClass)</td></tr>
-<tr class="memdesc:ad182a23245c77059754cdcf093309a69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get name of node class.  <a href="namespaceopcua.html#ad182a23245c77059754cdcf093309a69">More...</a><br /></td></tr>
-<tr class="separator:ad182a23245c77059754cdcf093309a69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a67163e9bbbe5e066a9a98dde618eadea"><td class="memTemplParams" colspan="2">template&lt;typename T , typename  = std::enable_if_t&lt;detail::IsTypeWrapper&lt;T&gt;::value&gt;&gt; </td></tr>
 <tr class="memitem:a67163e9bbbe5e066a9a98dde618eadea"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a67163e9bbbe5e066a9a98dde618eadea">operator==</a> (const T &amp;left, const T &amp;right) noexcept</td></tr>
 <tr class="separator:a67163e9bbbe5e066a9a98dde618eadea"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -511,7 +512,7 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="ad32e0c353b427fd8b7788a85a78335aaae3a415d0bb770f63839fdb6c92796725"></a>MandatoryPlaceholder&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="Types_8h_source.html#l00163">163</a> of file <a class="el" href="Types_8h_source.html">Types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Common_8h_source.html#l00163">163</a> of file <a class="el" href="Common_8h_source.html">Common.h</a>.</p>
 
 </div>
 </div>
@@ -549,7 +550,7 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="a6dbdabe373cb5094cafbeede49c4df6da4351cfebe4b61d8aa5efa1d020710005"></a>View&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="Types_8h_source.html#l00050">50</a> of file <a class="el" href="Types_8h_source.html">Types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Common_8h_source.html#l00050">50</a> of file <a class="el" href="Common_8h_source.html">Common.h</a>.</p>
 
 </div>
 </div>
@@ -659,7 +660,7 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="a807c61ccff66808c3559158c33d5463ba49813e4966306950e1f133245c4ad1c8"></a>HasEffectUnsuppressed&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="Types_8h_source.html#l00111">111</a> of file <a class="el" href="Types_8h_source.html">Types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Common_8h_source.html#l00111">111</a> of file <a class="el" href="Common_8h_source.html">Common.h</a>.</p>
 
 </div>
 </div>
@@ -713,7 +714,7 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="adc25953f10b26dc1213b1033d44f5966a8cf91e40a55574aea32f6312f5f88b11"></a>DiagnosticInfo&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="Types_8h_source.html#l00016">16</a> of file <a class="el" href="Types_8h_source.html">Types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Common_8h_source.html#l00016">16</a> of file <a class="el" href="Common_8h_source.html">Common.h</a>.</p>
 
 </div>
 </div>
@@ -748,7 +749,7 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="a41f8481e3c1494130327dca210329383a51a61e50c9f54972a59badc671694215"></a>ThreeDimensions&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="Types_8h_source.html#l00091">91</a> of file <a class="el" href="Types_8h_source.html">Types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Common_8h_source.html#l00091">91</a> of file <a class="el" href="Common_8h_source.html">Common.h</a>.</p>
 
 </div>
 </div>
@@ -843,11 +844,9 @@ Functions</h2></td></tr>
 
 <p>Get name of node class. </p>
 
-<p class="definition">Definition at line <a class="el" href="Types_8h_source.html#l00065">65</a> of file <a class="el" href="Types_8h_source.html">Types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Common_8h_source.html#l00065">65</a> of file <a class="el" href="Common_8h_source.html">Common.h</a>.</p>
 
 <p class="reference">References <a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6daaa2aaa59ac1a7c24e5e86c068bda3d20">DataType</a>, <a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6da4c3880bb027f159e801041b1021e88e8">Method</a>, <a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6da497031794414a552435f90151ac3b54b">Object</a>, <a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6dab74c375731dc50c662d6ce08befe2db0">ObjectType</a>, <a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6daeabd2ac91ac41e38d4d61d77e3518160">ReferenceType</a>, <a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6da47c14840d8e15331fa420b9b2f757cd9">Variable</a>, <a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6da60e08a3601c0d6742aa798b4dc610670">VariableType</a>, and <a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6da4351cfebe4b61d8aa5efa1d020710005">View</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00182">opcua::Node::requireNodeClass()</a>.</p>
 
 </div>
 </div>
@@ -885,7 +884,7 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00330">330</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00344">344</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
 </div>
 </div>
@@ -963,7 +962,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;detail::IsTypeWrapper&l
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00190">190</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00194">194</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -1003,7 +1002,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;detail::IsTypeWrapper&l
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00195">195</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00199">199</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -1043,7 +1042,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;detail::IsTypeWrapper&l
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00205">205</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00209">209</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -1081,7 +1080,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;detail::IsTypeWrapper&l
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00326">326</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00340">340</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
 </div>
 </div>
@@ -1159,7 +1158,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;detail::IsTypeWrapper&l
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00185">185</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00189">189</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -1199,7 +1198,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;detail::IsTypeWrapper&l
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00200">200</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00204">204</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -1239,7 +1238,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;detail::IsTypeWrapper&l
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00210">210</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00214">214</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
 </div>
 </div>

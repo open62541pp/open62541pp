@@ -77,29 +77,25 @@ $(function() {
 <div class="title">TypeWrapper.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;array&gt;</code><br />
-<code>#include &lt;cassert&gt;</code><br />
-<code>#include &lt;chrono&gt;</code><br />
+<div class="textblock"><code>#include &lt;cassert&gt;</code><br />
 <code>#include &lt;cstdint&gt;</code><br />
-<code>#include &lt;string&gt;</code><br />
-<code>#include &lt;string_view&gt;</code><br />
 <code>#include &lt;type_traits&gt;</code><br />
 <code>#include &lt;utility&gt;</code><br />
+<code>#include &quot;<a class="el" href="Common_8h_source.html">open62541pp/Common.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Comparison_8h_source.html">open62541pp/Comparison.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="ErrorHandling_8h_source.html">open62541pp/ErrorHandling.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Helper_8h_source.html">open62541pp/Helper.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="Types_8h_source.html">open62541pp/Types.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="open62541_8h_source.html">open62541pp/open62541.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for TypeWrapper.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="TypeWrapper_8h__incl.svg" width="1352" height="366"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="TypeWrapper_8h__incl.svg" width="1020" height="366"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="TypeWrapper_8h__dep__incl.svg" width="1427" height="483"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="TypeWrapper_8h__dep__incl.svg" width="1738" height="691"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div>
@@ -109,27 +105,6 @@ This graph shows which files directly or indirectly include this file:</div>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; T, typeIndex &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template base class to wrap UA_* type objects.  <a href="classopcua_1_1TypeWrapper.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1String.html">opcua::String</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="elRef" href="open62541/structUA__String.html">UA_String</a> wrapper class.  <a href="classopcua_1_1String.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Guid.html">opcua::Guid</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="elRef" href="open62541/structUA__Guid.html">UA_Guid</a> wrapper class.  <a href="classopcua_1_1Guid.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1ByteString.html">opcua::ByteString</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">UA_ByteString wrapper class.  <a href="classopcua_1_1ByteString.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1XmlElement.html">opcua::XmlElement</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">UA_XmlElement wrapper class.  <a href="classopcua_1_1XmlElement.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1QualifiedName.html">opcua::QualifiedName</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="elRef" href="open62541/structUA__QualifiedName.html">UA_QualifiedName</a> wrapper class.  <a href="classopcua_1_1QualifiedName.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1LocalizedText.html">opcua::LocalizedText</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="elRef" href="open62541/structUA__LocalizedText.html">UA_LocalizedText</a> wrapper class.  <a href="classopcua_1_1LocalizedText.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DateTime.html">opcua::DateTime</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">UA_DateTime wrapper class.  <a href="classopcua_1_1DateTime.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>

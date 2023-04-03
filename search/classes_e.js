@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['refentry_2384',['RefEntry',['open62541/structRefEntry.html',1,'']]],
-  ['reftree_2385',['RefTree',['open62541/structRefTree.html',1,'']]],
-  ['resource_2386',['resource',['open62541/structresource.html',1,'']]]
+  ['server_2394',['Server',['../classopcua_1_1Server.html',1,'opcua']]],
+  ['session_5flist_5fentry_2395',['session_list_entry',['open62541/structsession__list__entry.html',1,'']]],
+  ['string_2396',['String',['../classopcua_1_1String.html',1,'opcua']]]
 ];

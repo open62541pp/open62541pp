@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['qualifiedname_2382',['QualifiedName',['../classopcua_1_1QualifiedName.html',1,'opcua']]],
-  ['question_2383',['question',['open62541/structquestion.html',1,'']]]
+  ['refentry_2391',['RefEntry',['open62541/structRefEntry.html',1,'']]],
+  ['reftree_2392',['RefTree',['open62541/structRefTree.html',1,'']]],
+  ['resource_2393',['resource',['open62541/structresource.html',1,'']]]
 ];

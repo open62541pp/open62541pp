@@ -31,7 +31,10 @@ var searchData=
   ['builddate_349',['buildDate',['open62541/structUA__BuildInfo.html#a8e138d9912df2ef6bdc2b5fcd0350e74',1,'UA_BuildInfo::buildDate()'],['open62541/struct__OpcUa__BuildInfo.html#af54dc9b2e7c33ce62cc8966f620f2502',1,'_OpcUa_BuildInfo::BuildDate()']]],
   ['buildinfo_350',['buildInfo',['open62541/structUA__ServerConfig.html#a82f5b5aae08a9048c3151db5a40ecea9',1,'UA_ServerConfig::buildInfo()'],['open62541/structUA__ServerStatusDataType.html#ad4afb932c15ff97eef2a4a3ed8f4609d',1,'UA_ServerStatusDataType::buildInfo()'],['open62541/struct__OpcUa__ServerStatusDataType.html#a59e44abf3b43890544eedda01aac943e',1,'_OpcUa_ServerStatusDataType::BuildInfo()']]],
   ['buildnumber_351',['buildNumber',['open62541/structUA__BuildInfo.html#a0988e74957d82bce3e026eb6fc435739',1,'UA_BuildInfo::buildNumber()'],['open62541/struct__OpcUa__BuildInfo.html#a45fd1ecef4e44b49b0b64188f0c10386',1,'_OpcUa_BuildInfo::BuildNumber()']]],
-  ['byte_352',['Byte',['../namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966aa245c3230debe5c956484ecc6fa93877',1,'opcua']]],
-  ['bytes_353',['bytes',['open62541/structUA__Chunk.html#a856d33f45a9abde4d5f4eb945487a772',1,'UA_Chunk']]],
-  ['bytestring_354',['ByteString',['../classopcua_1_1ByteString.html',1,'opcua::ByteString'],['open62541/structUA__NodeId.html#aea4a6299c5ce6a23a8312af364f4b69b',1,'UA_NodeId::byteString()'],['../classopcua_1_1ByteString.html#a70f01be183a1da6ca80d4d6eddad65df',1,'opcua::ByteString::ByteString()'],['../namespaceopcua.html#a05d617e4c64656fa2ef6baf2af636f90a58efa9e8b8491c4a42cbf3bead1b06b6',1,'opcua::ByteString()'],['../namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966a58efa9e8b8491c4a42cbf3bead1b06b6',1,'opcua::ByteString()']]]
+  ['builtin_2ecpp_352',['Builtin.cpp',['../Builtin_8cpp.html',1,'']]],
+  ['builtin_2eh_353',['Builtin.h',['../Builtin_8h.html',1,'']]],
+  ['builtintypes_354',['BuiltinTypes',['../namespaceopcua_1_1detail.html#a69a2a1aee37ceeb30867baa933b8683e',1,'opcua::detail']]],
+  ['byte_355',['Byte',['../namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966aa245c3230debe5c956484ecc6fa93877',1,'opcua']]],
+  ['bytes_356',['bytes',['open62541/structUA__Chunk.html#a856d33f45a9abde4d5f4eb945487a772',1,'UA_Chunk']]],
+  ['bytestring_357',['ByteString',['../classopcua_1_1ByteString.html',1,'opcua::ByteString'],['open62541/structUA__NodeId.html#aea4a6299c5ce6a23a8312af364f4b69b',1,'UA_NodeId::byteString()'],['../classopcua_1_1ByteString.html#a70f01be183a1da6ca80d4d6eddad65df',1,'opcua::ByteString::ByteString()'],['../namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966a58efa9e8b8491c4a42cbf3bead1b06b6',1,'opcua::ByteString()'],['../namespaceopcua.html#a05d617e4c64656fa2ef6baf2af636f90a58efa9e8b8491c4a42cbf3bead1b06b6',1,'opcua::ByteString()']]]
 ];

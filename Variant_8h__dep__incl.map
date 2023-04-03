@@ -1,8 +1,10 @@
-<map id="/home/runner/work/open62541pp/open62541pp/include/open62541pp/Variant.h" name="/home/runner/work/open62541pp/open62541pp/include/open62541pp/Variant.h">
-<area shape="rect" id="node1" title=" " alt="" coords="251,5,508,61"/>
-<area shape="rect" id="node2" href="$Node_8h.html" title=" " alt="" coords="249,109,510,165"/>
-<area shape="rect" id="node3" href="$open62541pp_8h.html" title=" " alt="" coords="5,213,263,269"/>
-<area shape="rect" id="node6" href="$Variant_8cpp.html" title=" " alt="" coords="534,117,771,158"/>
-<area shape="rect" id="node4" href="$Node_8cpp.html" title=" " alt="" coords="287,221,525,262"/>
-<area shape="rect" id="node5" href="$Server_8cpp.html" title=" " alt="" coords="549,221,786,262"/>
+<map id="/home/runner/work/open62541pp/open62541pp/include/open62541pp/types/Variant.h" name="/home/runner/work/open62541pp/open62541pp/include/open62541pp/types/Variant.h">
+<area shape="rect" id="node1" title=" " alt="" coords="249,5,507,61"/>
+<area shape="rect" id="node2" href="$Node_8h.html" title=" " alt="" coords="249,213,510,269"/>
+<area shape="rect" id="node3" href="$open62541pp_8h.html" title=" " alt="" coords="5,317,263,373"/>
+<area shape="rect" id="node6" href="$DataValue_8h.html" title=" " alt="" coords="333,109,591,165"/>
+<area shape="rect" id="node8" href="$Variant_8cpp.html" title=" " alt="" coords="615,117,869,158"/>
+<area shape="rect" id="node4" href="$Node_8cpp.html" title=" " alt="" coords="287,325,525,366"/>
+<area shape="rect" id="node5" href="$Server_8cpp.html" title=" " alt="" coords="549,325,786,366"/>
+<area shape="rect" id="node7" href="$DataValue_8cpp.html" title=" " alt="" coords="534,221,809,262"/>
 </map>

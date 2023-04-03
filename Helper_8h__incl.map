@@ -1,15 +1,15 @@
 <map id="/home/runner/work/open62541pp/open62541pp/include/open62541pp/Helper.h" name="/home/runner/work/open62541pp/open62541pp/include/open62541pp/Helper.h">
-<area shape="rect" id="node1" title=" " alt="" coords="109,5,366,61"/>
+<area shape="rect" id="node1" title=" " alt="" coords="99,5,357,61"/>
 <area shape="rect" id="node2" title=" " alt="" coords="5,109,75,136"/>
-<area shape="rect" id="node3" title=" " alt="" coords="99,109,157,136"/>
-<area shape="rect" id="node4" title=" " alt="" coords="233,184,330,211"/>
-<area shape="rect" id="node5" title=" " alt="" coords="266,259,358,285"/>
-<area shape="rect" id="node6" href="$Types_8h.html" title=" " alt="" coords="376,109,539,136"/>
-<area shape="rect" id="node10" href="$open62541_8h.html" title=" " alt="" coords="682,184,881,211"/>
-<area shape="rect" id="node7" title=" " alt="" coords="355,184,421,211"/>
-<area shape="rect" id="node8" title=" " alt="" coords="499,259,554,285"/>
-<area shape="rect" id="node9" href="$Traits_8h.html" title=" " alt="" coords="446,184,607,211"/>
-<area shape="rect" id="node11" href="/home/runner/work/open62541pp/open62541pp/build/doxygen_open62541/open62541.tag$nodeids_8h.html.html" title=" " alt="" coords="822,259,983,285"/>
-<area shape="rect" id="node12" href="/home/runner/work/open62541pp/open62541pp/build/doxygen_open62541/open62541.tag$types_8h.html.html" title=" " alt="" coords="1008,259,1155,285"/>
-<area shape="rect" id="node13" href="/home/runner/work/open62541pp/open62541pp/build/doxygen_open62541/open62541.tag$types__generated_8h.html.html" title=" " alt="" coords="579,259,797,285"/>
+<area shape="rect" id="node3" title=" " alt="" coords="12,184,79,211"/>
+<area shape="rect" id="node4" title=" " alt="" coords="461,109,520,136"/>
+<area shape="rect" id="node5" title=" " alt="" coords="103,184,201,211"/>
+<area shape="rect" id="node6" href="$Common_8h.html" title=" " alt="" coords="201,109,386,136"/>
+<area shape="rect" id="node10" href="$open62541_8h.html" title=" " alt="" coords="461,184,659,211"/>
+<area shape="rect" id="node7" title=" " alt="" coords="327,259,382,285"/>
+<area shape="rect" id="node8" href="$Traits_8h.html" title=" " alt="" coords="225,184,386,211"/>
+<area shape="rect" id="node9" title=" " alt="" coords="211,259,303,285"/>
+<area shape="rect" id="node11" href="/home/runner/work/open62541pp/open62541pp/build/doxygen_open62541/open62541.tag$nodeids_8h.html.html" title=" " alt="" coords="406,259,567,285"/>
+<area shape="rect" id="node12" href="/home/runner/work/open62541pp/open62541pp/build/doxygen_open62541/open62541.tag$types_8h.html.html" title=" " alt="" coords="592,259,739,285"/>
+<area shape="rect" id="node13" href="/home/runner/work/open62541pp/open62541pp/build/doxygen_open62541/open62541.tag$types__generated_8h.html.html" title=" " alt="" coords="763,259,981,285"/>
 </map>

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['isoneof_4163',['IsOneOf',['../namespaceopcua_1_1detail.html#aad1cfbe232418a890fa98c35c9508acb',1,'opcua::detail']]],
-  ['istypewrapper_4164',['IsTypeWrapper',['../namespaceopcua_1_1detail.html#a6f6a9d9d89858dc4cd64637b4e252935',1,'opcua::detail']]]
+  ['defaultclock_4179',['DefaultClock',['../classopcua_1_1DateTime.html#ae7375ebfe4e6809021b759bee9774329',1,'opcua::DateTime']]]
 ];
