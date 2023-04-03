@@ -1,10 +1,8 @@
 #include "open62541pp/Endpoint.h"
 
-using namespace opcua;
+namespace opcua {
 
-Endpoint::Endpoint() {
-}
+Endpoint::Endpoint() {}
 
-Endpoint::~Endpoint()
-{
-}
+Endpoint::~Endpoint() {}
+} // namespace opcua
