@@ -73,9 +73,6 @@ find_package(Threads REQUIRED)
 
 # open62541
 # overwrite default open62541 options
-if(NOT UA_MULTITHREADING)
-    set(UA_MULTITHREADING 100 CACHE STRING "") # enable thread-safe API (100-199)
-endif()
 if(NOT UA_ENABLE_DEBUG_SANITIZER)
     set(UA_ENABLE_DEBUG_SANITIZER CACHE BOOL OFF)  # disable sanitizers in debug build
 endif()
