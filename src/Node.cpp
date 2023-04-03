@@ -7,6 +7,7 @@
 #include "open62541pp/TypeWrapper.h"
 
 #include "open62541_impl.h"
+#include "version.h"
 
 namespace opcua {
 
@@ -321,7 +322,17 @@ void Node::writeModellingRule(ModellingRule rule) {
 }
 
 void Node::writeDataValue(const DataValue& value) {
+#if UAPP_OPEN62541_VER_LE(1, 0)
+    const auto status = __UA_Server_write(
+        server_.handle(),
+        nodeId_.handle(),
+        UA_ATTRIBUTEID_VALUE,
+        &UA_TYPES[UA_TYPES_DATAVALUE],
+        value.handle()
+    );
+#else
     const auto status = UA_Server_writeDataValue(server_.handle(), nodeId_, value);
+#endif
     detail::throwOnBadStatus(status);
 }
 
