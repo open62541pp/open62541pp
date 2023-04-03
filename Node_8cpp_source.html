@@ -402,7 +402,7 @@ $(function() {
 <div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;        nodeId_.<a class="code" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805">handle</a>(),</div>
 <div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;        <a class="codeRef" target="_blank" href="open62541/common_8h.html#a4dc96c31672814d54f24409617bdbbe2a659151d5abe28a5c38051214698aac70">UA_ATTRIBUTEID_VALUE</a>,</div>
 <div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;        &amp;<a class="codeRef" target="_blank" href="open62541/types__generated_8h.html#aeb33a1ce9edba651f4aabdec2ed271ce">UA_TYPES</a>[<a class="codeRef" target="_blank" href="open62541/types__generated_8h.html#a91a02d711265a798d8c202042fa9f8aa">UA_TYPES_DATAVALUE</a>],</div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;        value</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;        value.<a class="code" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805">handle</a>()</div>
 <div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    );</div>
 <div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;<span class="preprocessor">#else</span></div>
 <div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    <span class="keyword">const</span> <span class="keyword">auto</span> <a class="codeRef" target="_blank" href="open62541/ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a> = UA_Server_writeDataValue(server_.<a class="code" href="classopcua_1_1Server.html#af530167c08d8da756193d4ed36a0934f">handle</a>(), nodeId_, value);</div>
