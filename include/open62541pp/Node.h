@@ -156,6 +156,7 @@ public:
     void writeModellingRule(ModellingRule rule);
 
     /// Write DataValue to variable node.
+    /// @info open62541 version >=1.1 required
     void writeDataValue(const DataValue& value);
 
     /// Write Variant to variable node.
