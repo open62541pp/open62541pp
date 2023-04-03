@@ -63,6 +63,29 @@ std::variant<uint32_t, String, Guid, ByteString> NodeId::getIdentifier() const {
     }
 }
 
+NodeId::NodeId (NodeId &other) noexcept : TypeWrapperBase(other){
+}
+
+NodeId::NodeId  (NodeId const& other) noexcept : TypeWrapperBase(other){}
+
+NodeId& NodeId::operator=(NodeId &other) noexcept
+{
+    TypeWrapperBase::operator=(other);
+    return *this;
+}
+NodeId& NodeId::operator=(NodeId const& other) noexcept
+{
+    TypeWrapperBase::operator=(other);
+    return *this;
+}
+
+NodeId::NodeId(NodeId &&other) noexcept : TypeWrapperBase(std::move(other)){}
+
+NodeId& NodeId::operator=(NodeId &&other) noexcept {
+    TypeWrapperBase::operator=(std::move(other));
+    return *this;
+}
+
 /* --------------------------------------- ExpandedNodeId --------------------------------------- */
 
 ExpandedNodeId::ExpandedNodeId(
@@ -93,5 +116,4 @@ std::string_view ExpandedNodeId::getNamespaceUriView() const {
 uint32_t ExpandedNodeId::getServerIndex() const noexcept {
     return handle()->serverIndex;
 }
-
 }  // namespace opcua

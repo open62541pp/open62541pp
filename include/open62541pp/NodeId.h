@@ -45,6 +45,15 @@ public:
     /// Create NodeId with ByteString identifier
     NodeId(const ByteString& identifier, uint16_t namespaceIndex);
 
+    NodeId (NodeId &other) noexcept;
+    NodeId (NodeId const& other) noexcept;
+    NodeId& operator=(NodeId &other) noexcept;
+    NodeId& operator=(NodeId const& other) noexcept;
+
+    NodeId(NodeId &&other) noexcept;
+    NodeId(NodeId const&& other) noexcept;
+    NodeId& operator=(NodeId &&other) noexcept;
+
     uint32_t hash() const;
 
     uint16_t getNamespaceIndex() const noexcept;
