@@ -17,13 +17,16 @@ NodeClient::NodeClient(std::shared_ptr<Client> client, const NodeId& id)  // NOL
     {
         NodeId outputNode(UA_NODEID_NULL);
         const auto status = UA_Client_readNodeIdAttribute(client_->handle(), nodeId_, outputNode.handle());
-        detail::throwOnBadStatus(status);
+        if (status!= UA_STATUSCODE_GOOD)
+            throw std::runtime_error("Failed to verify node existence");
     }
-    // store node class
+//    // store node class
     {
         UA_NodeClass nodeClass = UA_NODECLASS_UNSPECIFIED;
         const auto status = UA_Client_readNodeClassAttribute(client_->handle(), nodeId_, &nodeClass);
-        detail::throwOnBadStatus(status);
+        if (status!= UA_STATUSCODE_GOOD)
+            throw std::runtime_error("Failed to verify node existence");
+
         nodeClass_ = static_cast<NodeClass>(nodeClass);
     }
 }
