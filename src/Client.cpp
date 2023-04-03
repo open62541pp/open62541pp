@@ -5,7 +5,7 @@
 
 #include <open62541/client_config_default.h>
 
-using namespace opcua;
+namespace opcua {
 
 // https://stackoverflow.com/questions/58316274/open62541-browsing-nodes-an-using-its-methods
 
@@ -14,14 +14,14 @@ struct Client::PrivateData {
 };
 
 Client::Client()
-    : m_d(new Client::PrivateData) {
-    m_d->client = UA_Client_new();
-    UA_ClientConfig_setDefault(UA_Client_getConfig(m_d->client));
+    : d_(new Client::PrivateData) {
+    d_->client = UA_Client_new();
+    UA_ClientConfig_setDefault(UA_Client_getConfig(d_->client));
 }
 
 Client::~Client() {
-    if (m_d->client)
-        UA_Client_delete(m_d->client);
+    if (d_->client)
+        UA_Client_delete(d_->client);
 }
 
 std::vector<std::pair<std::string, std::string>> Client::findServers(std::string_view url) {
@@ -29,7 +29,7 @@ std::vector<std::pair<std::string, std::string>> Client::findServers(std::string
     UA_ApplicationDescription* registeredServers = nullptr;
 
     if (detail::isBadStatus(UA_Client_findServers(
-            m_d->client, url.data(), 0, nullptr, 0, nullptr, &nServers, &registeredServers
+            d_->client, url.data(), 0, nullptr, 0, nullptr, &nServers, &registeredServers
         )))
         return {};
 
@@ -50,7 +50,7 @@ std::vector<Endpoint> Client::getEndpoints(std::string_view url) {
     size_t descArraySize = 0;
 
     detail::throwOnBadStatus(
-        UA_Client_getEndpoints(m_d->client, url.data(), &descArraySize, &descArray)
+        UA_Client_getEndpoints(d_->client, url.data(), &descArraySize, &descArray)
     );
 
     std::vector<Endpoint> ret;
@@ -69,12 +69,12 @@ std::vector<Endpoint> Client::getEndpoints(std::string_view url) {
 }
 
 void Client::connect(std::string_view url) {
-    detail::throwOnBadStatus(UA_Client_connect(m_d->client, url.data()));
+    detail::throwOnBadStatus(UA_Client_connect(d_->client, url.data()));
 }
 
 void Client::connect(std::string_view url, std::string_view username, std::string_view password) {
     detail::throwOnBadStatus(
-        UA_Client_connectUsername(m_d->client, url.data(), username.data(), password.data())
+        UA_Client_connectUsername(d_->client, url.data(), username.data(), password.data())
     );
 }
 
@@ -89,9 +89,10 @@ void Client::writeValueAttribute(const NodeId& nodeId, const Variant& value) {
 }
 
 UA_Client* Client::handle() noexcept {
-    return m_d->client;
+    return d_->client;
 }
 
 const UA_Client* Client::handle() const noexcept {
-    return m_d->client;
+    return d_->client;
 }
+} // namespace opcua

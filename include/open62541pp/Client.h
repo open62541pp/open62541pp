@@ -102,6 +102,6 @@ public:
 
 private:
     struct PrivateData;
-    std::unique_ptr<PrivateData> m_d;
+    std::unique_ptr<PrivateData> d_;
 };
 }  // namespace opcua
