@@ -11,6 +11,6 @@ var searchData=
   ['tostringview_3032',['toStringView',['../namespaceopcua_1_1detail.html#adf2513e895bc59a84f17a6a152f97cda',1,'opcua::detail']]],
   ['tostruct_3033',['toStruct',['../classopcua_1_1DateTime.html#a1811e55104957d60b31663079821766b',1,'opcua::DateTime']]],
   ['totimepoint_3034',['toTimePoint',['../classopcua_1_1DateTime.html#adf4172f40087c213d7ab7932286387f4',1,'opcua::DateTime']]],
-  ['tounixtime_3035',['toUnixTime',['../classopcua_1_1DateTime.html#adc353a4249491905d5a329765557a019',1,'opcua::DateTime']]],
+  ['tounixtime_3035',['toUnixTime',['../classopcua_1_1DateTime.html#aa1f747a49123ebf605047921ef437757',1,'opcua::DateTime']]],
   ['typewrapper_3036',['TypeWrapper',['../classopcua_1_1TypeWrapper.html#a29f2b376d3d2bc2cdae828f1ef6c1b9d',1,'opcua::TypeWrapper::TypeWrapper()=default'],['../classopcua_1_1TypeWrapper.html#ae60dc95fc382392553c8dd057b71de8e',1,'opcua::TypeWrapper::TypeWrapper(const T &amp;data)'],['../classopcua_1_1TypeWrapper.html#a2982396da0cd78980698677819aac1ed',1,'opcua::TypeWrapper::TypeWrapper(T &amp;&amp;data) noexcept'],['../classopcua_1_1TypeWrapper.html#a559cdf64b172615bf989de482d41432c',1,'opcua::TypeWrapper::TypeWrapper(const TypeWrapper &amp;other)'],['../classopcua_1_1TypeWrapper.html#a8036ae3cc3ce2c4e135d58e4228a5e8d',1,'opcua::TypeWrapper::TypeWrapper(TypeWrapper &amp;&amp;other) noexcept']]]
 ];

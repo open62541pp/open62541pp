@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['get_2902',['get',['../classopcua_1_1String.html#a093f8efc09e138e3b510f26a044d2094',1,'opcua::String::get()'],['../classopcua_1_1ByteString.html#a00ef53bef35d529d62deac3a24ed0428',1,'opcua::ByteString::get()'],['../classopcua_1_1XmlElement.html#afebf10c5e1c8494299f07c07a468d4e9',1,'opcua::XmlElement::get()'],['../classopcua_1_1DateTime.html#a108f8b7f36195cb88367d13042492451',1,'opcua::DateTime::get()']]],
+  ['get_2902',['get',['../classopcua_1_1String.html#a093f8efc09e138e3b510f26a044d2094',1,'opcua::String::get()'],['../classopcua_1_1ByteString.html#a00ef53bef35d529d62deac3a24ed0428',1,'opcua::ByteString::get()'],['../classopcua_1_1XmlElement.html#afebf10c5e1c8494299f07c07a468d4e9',1,'opcua::XmlElement::get()'],['../classopcua_1_1DateTime.html#a20b227dfd968989c0b6d16d304215e38',1,'opcua::DateTime::get()']]],
   ['getarray_2903',['getArray',['../classopcua_1_1Variant.html#a97420c5bb7175550da4dc5fda947035a',1,'opcua::Variant']]],
   ['getarraycopy_2904',['getArrayCopy',['../classopcua_1_1Variant.html#a745da34378602215fd443e3b229d5c23',1,'opcua::Variant']]],
   ['getarraydimensions_2905',['getArrayDimensions',['../classopcua_1_1Variant.html#a9a5cfe5f2a1bd0571acd33e93b45054a',1,'opcua::Variant']]],

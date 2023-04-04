@@ -29,6 +29,6 @@ var searchData=
   ['fromnativearray_637',['fromNativeArray',['../namespaceopcua_1_1detail.html#a5b918ad5a2b192ffeeabb250101ef618',1,'opcua::detail::fromNativeArray(NativeType *array, size_t size)'],['../namespaceopcua_1_1detail.html#a68955baa1f8d1d8af74dc5ffac9f0903',1,'opcua::detail::fromNativeArray(void *array, size_t size, Type type)']]],
   ['fromstate_638',['FromState',['../namespaceopcua.html#a807c61ccff66808c3559158c33d5463baf972837b8d16f8067de6b1566dbc6165',1,'opcua']]],
   ['fromtimepoint_639',['fromTimePoint',['../classopcua_1_1DateTime.html#a091d2cc80be986870f9703b1044c122c',1,'opcua::DateTime']]],
-  ['fromunixtime_640',['fromUnixTime',['../classopcua_1_1DateTime.html#a25812e906b07b4b937decc808593d85c',1,'opcua::DateTime']]],
+  ['fromunixtime_640',['fromUnixTime',['../classopcua_1_1DateTime.html#aadf67126bd6f67fc4a484ac6b7d9df82',1,'opcua::DateTime']]],
   ['function_641',['function',['open62541/structDecodeEntry.html#a5092e33e01af6078684cdb638a1e5b7d',0,'DecodeEntry']]]
 ];

@@ -264,7 +264,7 @@ var searchData=
   ['ua_5fwritevalue_2064',['UA_WriteValue',['open62541/structUA__WriteValue.html',0,'']]],
   ['ua_5fx509identitytoken_2065',['UA_X509IdentityToken',['open62541/structUA__X509IdentityToken.html',0,'']]],
   ['ua_5fxvtype_2066',['UA_XVType',['open62541/structUA__XVType.html',0,'']]],
-  ['uaduration_2067',['UaDuration',['../classopcua_1_1DateTime.html#abab6383f0b5eaff787f1d3a92be046c0',1,'opcua::DateTime']]],
+  ['uaduration_2067',['UaDuration',['../classopcua_1_1DateTime.html#acb96457b8f19d74ccfaa720fdc7c9aa2',1,'opcua::DateTime']]],
   ['uapp_5fopen62541_5fver_5fge_2068',['UAPP_OPEN62541_VER_GE',['../version_8h.html#a32ee72445862a60fcaecdeb4534e079e',1,'version.h']]],
   ['uapp_5fopen62541_5fver_5fle_2069',['UAPP_OPEN62541_VER_LE',['../version_8h.html#ad95f0405b27091a8cdc11dd6ad86983b',1,'version.h']]],
   ['uatype_2070',['UaType',['../classopcua_1_1TypeWrapper.html#a38af5e18f1d7e8d7f72eaf5dbf7dc60b',1,'opcua::TypeWrapper']]],
