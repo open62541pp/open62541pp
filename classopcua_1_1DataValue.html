@@ -103,6 +103,18 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a0968faaf6a632ef42ee9f20dd3f30bad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8812b5a823539fbc7351257f99aa0ddc"><td class="memItemLeft" align="right" valign="top">std::optional&lt; <a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataValue.html#a8812b5a823539fbc7351257f99aa0ddc">getStatusCode</a> () const</td></tr>
 <tr class="separator:a8812b5a823539fbc7351257f99aa0ddc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeeb04edf684c2157076679ac5f2047b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataValue.html#aeeb04edf684c2157076679ac5f2047b8">setValue</a> (const <a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;value)</td></tr>
+<tr class="separator:aeeb04edf684c2157076679ac5f2047b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac16e00429df8b7fa7917acc1182166ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataValue.html#ac16e00429df8b7fa7917acc1182166ed">setSourceTimestamp</a> (<a class="el" href="classopcua_1_1DateTime.html">DateTime</a> sourceTimestamp)</td></tr>
+<tr class="separator:ac16e00429df8b7fa7917acc1182166ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46841f63156a83d17d7dad0a32c680fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataValue.html#a46841f63156a83d17d7dad0a32c680fb">setServerTimestamp</a> (<a class="el" href="classopcua_1_1DateTime.html">DateTime</a> serverTimestamp)</td></tr>
+<tr class="separator:a46841f63156a83d17d7dad0a32c680fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2705bc80a9710fc0d075da998a298f7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataValue.html#af2705bc80a9710fc0d075da998a298f7">setSourcePicoseconds</a> (uint16_t sourcePicoseconds)</td></tr>
+<tr class="separator:af2705bc80a9710fc0d075da998a298f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c70c48aa03c4169442407547c4a6ccf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataValue.html#a2c70c48aa03c4169442407547c4a6ccf">setServerPicoseconds</a> (uint16_t serverPicoseconds)</td></tr>
+<tr class="separator:a2c70c48aa03c4169442407547c4a6ccf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeaf91afea3e6e042ed4320e2e5b2a96e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataValue.html#aeaf91afea3e6e042ed4320e2e5b2a96e">setStatusCode</a> (<a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> statusCode)</td></tr>
+<tr class="separator:aeaf91afea3e6e042ed4320e2e5b2a96e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classopcua_1_1TypeWrapper"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classopcua_1_1TypeWrapper')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_DataValue, UA_TYPES_DATAVALUE &gt;</a></td></tr>
 <tr class="memitem:a29f2b376d3d2bc2cdae828f1ef6c1b9d inherit pub_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a29f2b376d3d2bc2cdae828f1ef6c1b9d">TypeWrapper</a> ()=default</td></tr>
 <tr class="separator:a29f2b376d3d2bc2cdae828f1ef6c1b9d inherit pub_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -364,6 +376,138 @@ Additional Inherited Members</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="DataValue_8cpp_source.html#l00034">34</a> of file <a class="el" href="DataValue_8cpp_source.html">DataValue.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00140">opcua::TypeWrapper&lt; UA_DataValue, UA_TYPES_DATAVALUE &gt;::handle()</a>.</p>
+
+</div>
+</div>
+<a id="a2c70c48aa03c4169442407547c4a6ccf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c70c48aa03c4169442407547c4a6ccf">&#9670;&nbsp;</a></span>setServerPicoseconds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::DataValue::setServerPicoseconds </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>serverPicoseconds</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DataValue_8cpp_source.html#l00096">96</a> of file <a class="el" href="DataValue_8cpp_source.html">DataValue.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00140">opcua::TypeWrapper&lt; UA_DataValue, UA_TYPES_DATAVALUE &gt;::handle()</a>, <a class="elRef" target="_blank" href="open62541/structUA__DataValue.html#ae05b644e0d350d7e38c8eb1583a68b55">UA_DataValue::hasServerPicoseconds</a>, and <a class="elRef" target="_blank" href="open62541/structUA__DataValue.html#a6012a45a2d1c61d611cd86556fdb97a3">UA_DataValue::serverPicoseconds</a>.</p>
+
+</div>
+</div>
+<a id="a46841f63156a83d17d7dad0a32c680fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46841f63156a83d17d7dad0a32c680fb">&#9670;&nbsp;</a></span>setServerTimestamp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::DataValue::setServerTimestamp </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1DateTime.html">DateTime</a>&#160;</td>
+          <td class="paramname"><em>serverTimestamp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DataValue_8cpp_source.html#l00086">86</a> of file <a class="el" href="DataValue_8cpp_source.html">DataValue.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00140">opcua::TypeWrapper&lt; UA_DataValue, UA_TYPES_DATAVALUE &gt;::handle()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00140">opcua::TypeWrapper&lt; T, typeIndex &gt;::handle()</a>, <a class="elRef" target="_blank" href="open62541/structUA__DataValue.html#a5e0ea1cf32c085085722370da0960970">UA_DataValue::hasServerTimestamp</a>, and <a class="elRef" target="_blank" href="open62541/structUA__DataValue.html#a72156c581820c38b5eaf22bf13000050">UA_DataValue::serverTimestamp</a>.</p>
+
+</div>
+</div>
+<a id="af2705bc80a9710fc0d075da998a298f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2705bc80a9710fc0d075da998a298f7">&#9670;&nbsp;</a></span>setSourcePicoseconds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::DataValue::setSourcePicoseconds </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>sourcePicoseconds</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DataValue_8cpp_source.html#l00091">91</a> of file <a class="el" href="DataValue_8cpp_source.html">DataValue.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00140">opcua::TypeWrapper&lt; UA_DataValue, UA_TYPES_DATAVALUE &gt;::handle()</a>, <a class="elRef" target="_blank" href="open62541/structUA__DataValue.html#a09a0c6d09e75f20fc02774751bbba988">UA_DataValue::hasSourcePicoseconds</a>, and <a class="elRef" target="_blank" href="open62541/structUA__DataValue.html#a878dae470cc6c4af7442b666144c598e">UA_DataValue::sourcePicoseconds</a>.</p>
+
+</div>
+</div>
+<a id="ac16e00429df8b7fa7917acc1182166ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac16e00429df8b7fa7917acc1182166ed">&#9670;&nbsp;</a></span>setSourceTimestamp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::DataValue::setSourceTimestamp </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1DateTime.html">DateTime</a>&#160;</td>
+          <td class="paramname"><em>sourceTimestamp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DataValue_8cpp_source.html#l00081">81</a> of file <a class="el" href="DataValue_8cpp_source.html">DataValue.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00140">opcua::TypeWrapper&lt; UA_DataValue, UA_TYPES_DATAVALUE &gt;::handle()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00140">opcua::TypeWrapper&lt; T, typeIndex &gt;::handle()</a>, <a class="elRef" target="_blank" href="open62541/structUA__DataValue.html#ac14d24ddfaff6540055bcab42a2c889d">UA_DataValue::hasSourceTimestamp</a>, and <a class="elRef" target="_blank" href="open62541/structUA__DataValue.html#ab7348f73003634fac46f91fb26935d54">UA_DataValue::sourceTimestamp</a>.</p>
+
+</div>
+</div>
+<a id="aeaf91afea3e6e042ed4320e2e5b2a96e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeaf91afea3e6e042ed4320e2e5b2a96e">&#9670;&nbsp;</a></span>setStatusCode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::DataValue::setStatusCode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td>
+          <td class="paramname"><em>statusCode</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DataValue_8cpp_source.html#l00101">101</a> of file <a class="el" href="DataValue_8cpp_source.html">DataValue.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00140">opcua::TypeWrapper&lt; UA_DataValue, UA_TYPES_DATAVALUE &gt;::handle()</a>, <a class="elRef" target="_blank" href="open62541/structUA__DataValue.html#ab9103bff620cafc90337c7d98b119b2e">UA_DataValue::hasStatus</a>, and <a class="elRef" target="_blank" href="open62541/structUA__DataValue.html#a96804144fa60cfc250d5b0085148e588">UA_DataValue::status</a>.</p>
+
+</div>
+</div>
+<a id="aeeb04edf684c2157076679ac5f2047b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeeb04edf684c2157076679ac5f2047b8">&#9670;&nbsp;</a></span>setValue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::DataValue::setValue </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DataValue_8cpp_source.html#l00076">76</a> of file <a class="el" href="DataValue_8cpp_source.html">DataValue.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00140">opcua::TypeWrapper&lt; T, typeIndex &gt;::handle()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00140">opcua::TypeWrapper&lt; UA_DataValue, UA_TYPES_DATAVALUE &gt;::handle()</a>, and <a class="elRef" target="_blank" href="open62541/structUA__DataValue.html#af7a6da643af31005029ad3759deae136">UA_DataValue::hasValue</a>.</p>
 
 </div>
 </div>

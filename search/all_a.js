@@ -23,7 +23,7 @@ var searchData=
   ['inputargumentdiagnosticinfossize_809',['inputArgumentDiagnosticInfosSize',['open62541/structUA__CallMethodResult.html#af0cd4051a5bc87052d3826e534db8cf2',0,'UA_CallMethodResult']]],
   ['inputargumentresults_810',['inputArgumentResults',['open62541/structUA__CallMethodResult.html#a324a69b50505072868ed24a385511f34',0,'UA_CallMethodResult::inputArgumentResults()'],['open62541/struct__OpcUa__CallMethodResult.html#a0dfe0f1f0e23a030d27f7289bfe83209',0,'_OpcUa_CallMethodResult::InputArgumentResults()']]],
   ['inputargumentresultssize_811',['inputArgumentResultsSize',['open62541/structUA__CallMethodResult.html#ad5684934355d94bca5776dbb143a3029',0,'UA_CallMethodResult']]],
-  ['inputarguments_812',['inputArguments',['open62541/structUA__CallMethodRequest.html#a54f4a541fcf08786f145f6d2ca2b0480',0,'UA_CallMethodRequest::inputArguments()'],['open62541/struct__OpcUa__CallMethodRequest.html#aa5c4bab41c4706cffbb100f151158a53',0,'_OpcUa_CallMethodRequest::InputArguments()']]],
+  ['inputarguments_812',['InputArguments',['open62541/struct__OpcUa__CallMethodRequest.html#aa5c4bab41c4706cffbb100f151158a53',0,'_OpcUa_CallMethodRequest::InputArguments()'],['open62541/structUA__CallMethodRequest.html#a54f4a541fcf08786f145f6d2ca2b0480',0,'UA_CallMethodRequest::inputArguments()']]],
   ['inputargumentssize_813',['inputArgumentsSize',['open62541/structUA__CallMethodRequest.html#aa9e93fb3321131258d8a06522a933963',0,'UA_CallMethodRequest']]],
   ['insertdatavalue_814',['insertDataValue',['open62541/structUA__HistoryDataBackend.html#ad1d4369db6d4ae038c985ee586ecfdfa',0,'UA_HistoryDataBackend']]],
   ['insertnode_815',['insertNode',['open62541/structUA__Nodestore.html#a82cd031007fc452d9884bc504d690e39',0,'UA_Nodestore']]],
