@@ -31,11 +31,46 @@ NodeClient::NodeClient(std::shared_ptr<Client> client, const NodeId& id)  // NOL
     }
 }
 
-std::shared_ptr<Client> NodeClient::getClient() noexcept {
+NodeClient::NodeClient(NodeClient const& other){
+    client_ = other.client_;
+    nodeId_ = other.nodeId_;
+    nodeClass_ = other.nodeClass_;
+}
+NodeClient::NodeClient(NodeClient& other){
+    client_ = other.client_;
+    nodeId_ = other.nodeId_;
+    nodeClass_ = other.nodeClass_;
+}
+NodeClient& NodeClient::operator=(NodeClient const& other){
+    client_ = other.client_;
+    nodeId_ = other.nodeId_;
+    nodeClass_ = other.nodeClass_;
+    return *this;
+}
+NodeClient& NodeClient::operator=(NodeClient& other){
+    client_ = other.client_;
+    nodeId_ = other.nodeId_;
+    nodeClass_ = other.nodeClass_;
+    return *this;
+}
+
+NodeClient::NodeClient(NodeClient&& other){
+    client_ = std::move(other.client_);
+    nodeId_ = std::move(other.nodeId_);
+    nodeClass_ = std::move(other.nodeClass_);
+}
+NodeClient& NodeClient::operator=(NodeClient&& other){
+    client_ = std::move(other.client_);
+    nodeId_ = std::move(other.nodeId_);
+    nodeClass_ = std::move(other.nodeClass_);
+    return *this;
+}
+
+std::weak_ptr<Client> NodeClient::getClient() noexcept {
     return client_;
 }
 
-std::shared_ptr<Client> NodeClient::getClient() const noexcept {
+std::weak_ptr<Client> NodeClient::getClient() const noexcept {
     return client_;
 }
 
@@ -49,6 +84,7 @@ NodeClass NodeClient::getNodeClass() const noexcept {
 
 std::string NodeClient::getBrowseName() {
     QualifiedName name;
+
     const auto status = UA_Client_readBrowseNameAttribute(client_->handle(), nodeId_, name.handle());
     detail::throwOnBadStatus(status);
     return name.getName();

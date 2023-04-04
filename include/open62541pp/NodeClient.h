@@ -25,13 +25,22 @@ namespace opcua {
  */
 class NodeClient {
 public:
-    NodeClient(std::shared_ptr<Client> client_, const NodeId& id_);
+    explicit NodeClient(std::shared_ptr<Client> client_, const NodeId& id_);
+
+    NodeClient(NodeClient const& other);
+    NodeClient(NodeClient& other);
+
+    NodeClient& operator=(NodeClient const& other);
+    NodeClient& operator=(NodeClient& other);
+
+    NodeClient(NodeClient&& other);
+    NodeClient& operator=(NodeClient&& other);
 
     /// Get server instance.
-    std::shared_ptr<Client> getClient() noexcept;
+    std::weak_ptr<Client> getClient() noexcept;
 
     /// Get server instance.
-    std::shared_ptr<Client> getClient() const noexcept;
+    std::weak_ptr<Client> getClient() const noexcept;
 
     /// Get node id.
     const NodeId& getNodeId() const noexcept;
