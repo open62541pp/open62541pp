@@ -14,7 +14,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 # generate compile_commands.json
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON) 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # compiled binaries folders (same as open62541)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -73,16 +73,13 @@ find_package(Threads REQUIRED)
 
 # open62541
 # overwrite default open62541 options
-if(NOT UA_MULTITHREADING)
-    set(UA_MULTITHREADING 100 CACHE STRING "") # enable thread-safe API (100-199)
-endif()
 if(NOT UA_ENABLE_DEBUG_SANITIZER)
     set(UA_ENABLE_DEBUG_SANITIZER CACHE BOOL OFF)  # disable sanitizers in debug build
 endif()
 
 option(UAPP_INTERNAL_OPEN62541 "Use internal open62541 library" ON)
 if(UAPP_INTERNAL_OPEN62541)
-    set(OPEN62541_VERSION v1.2.6)  # set manually for CI
+    set(OPEN62541_VERSION v1.3.5)  # set manually for CI
     add_subdirectory(3rdparty/open62541)  # target open62541::open62541
 else()
     find_package(open62541 REQUIRED)

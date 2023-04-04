@@ -127,7 +127,7 @@ public:
 
     /// Get type as Type enum (only for builtin types).
     static constexpr Type getType() {
-        static_assert(typeIndex < UA_BUILTIN_TYPES_COUNT, "Only possible for builtin types");
+        static_assert(typeIndex < UA_TYPES_COUNT, "Only possible for builtin types");
         return static_cast<Type>(typeIndex);
     }
 
