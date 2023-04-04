@@ -110,4 +110,5 @@ var menudata={children:[
 {text:"Macros",url:"globals_defs.html"}]}]}]},
 {text:"Links",url:"usergroup1.html",children:[
 {text:"open62541 API",url:"open62541/index.html"},
-{text:"GitHub",url:"https://github.com/open62541pp/open62541pp"}]}]}
+{text:"GitHub",url:"https://github.com/open62541pp/open62541pp"},
+{text:"Changelog",url:"https://github.com/open62541pp/open62541pp/blob/master/CHANGELOG.md"}]}]}
