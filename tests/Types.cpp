@@ -343,6 +343,7 @@ TEST_CASE("DataValue") {
         CHECK_FALSE(dv.getServerPicoseconds().has_value());
         CHECK_FALSE(dv.getStatusCode().has_value());
     }
+
     SECTION("All specified") {
         Variant var;
         DataValue dv(var, DateTime{1}, DateTime{2}, 3, 4, 5);
@@ -352,5 +353,41 @@ TEST_CASE("DataValue") {
         CHECK(dv.getSourcePicoseconds().value() == 3);
         CHECK(dv.getServerPicoseconds().value() == 4);
         CHECK(dv.getStatusCode().value() == 5);
+    }
+
+    SECTION("Setter methods") {
+        DataValue dv;
+        SECTION("Value") {
+            Variant var;
+            const float value = 11.11f;
+            var.setScalarCopy(value);
+            dv.setValue(var);
+            REQUIRE(dv.getValue().value().getScalar<float>() == value);
+        }
+        SECTION("Source timestamp") {
+            DateTime dt{123};
+            dv.setSourceTimestamp(dt);
+            REQUIRE(dv.getSourceTimestamp().value() == dt);
+        }
+        SECTION("Server timestamp") {
+            DateTime dt{456};
+            dv.setServerTimestamp(dt);
+            REQUIRE(dv.getServerTimestamp().value() == dt);
+        }
+        SECTION("Source picoseconds") {
+            const uint16_t ps = 123;
+            dv.setSourcePicoseconds(ps);
+            REQUIRE(dv.getSourcePicoseconds().value() == ps);
+        }
+        SECTION("Server picoseconds") {
+            const uint16_t ps = 456;
+            dv.setServerPicoseconds(ps);
+            REQUIRE(dv.getServerPicoseconds().value() == ps);
+        }
+        SECTION("Status code") {
+            const UA_StatusCode statusCode = UA_STATUSCODE_BADALREADYEXISTS;
+            dv.setStatusCode(statusCode);
+            REQUIRE(dv.getStatusCode().value() == statusCode);
+        }
     }
 }

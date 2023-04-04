@@ -35,6 +35,13 @@ public:
     std::optional<uint16_t> getSourcePicoseconds() const;
     std::optional<uint16_t> getServerPicoseconds() const;
     std::optional<UA_StatusCode> getStatusCode() const;
+
+    void setValue(const Variant& value);
+    void setSourceTimestamp(DateTime sourceTimestamp);
+    void setServerTimestamp(DateTime serverTimestamp);
+    void setSourcePicoseconds(uint16_t sourcePicoseconds);
+    void setServerPicoseconds(uint16_t serverPicoseconds);
+    void setStatusCode(UA_StatusCode statusCode);
 };
 
 }  // namespace opcua

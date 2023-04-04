@@ -27,7 +27,7 @@ DataValue::DataValue(
           statusCode.has_value(),
       }) {
     if (value.has_value()) {
-        UA_Variant_copy(value.value().handle(), &handle()->value);
+        setValue(value.value());
     }
 }
 
@@ -60,7 +60,7 @@ std::optional<uint16_t> DataValue::getSourcePicoseconds() const {
 }
 
 std::optional<uint16_t> DataValue::getServerPicoseconds() const {
-    if (handle()->hasSourcePicoseconds) {
+    if (handle()->hasServerPicoseconds) {
         return handle()->serverPicoseconds;
     }
     return {};
@@ -71,6 +71,36 @@ std::optional<uint32_t> DataValue::getStatusCode() const {
         return handle()->status;
     }
     return {};
+}
+
+void DataValue::setValue(const Variant& value) {
+    UA_Variant_copy(value.handle(), &handle()->value);
+    handle()->hasValue = true;
+}
+
+void DataValue::setSourceTimestamp(DateTime sourceTimestamp) {
+    handle()->sourceTimestamp = *sourceTimestamp.handle();
+    handle()->hasSourceTimestamp = true;
+}
+
+void DataValue::setServerTimestamp(DateTime serverTimestamp) {
+    handle()->serverTimestamp = *serverTimestamp.handle();
+    handle()->hasServerTimestamp = true;
+}
+
+void DataValue::setSourcePicoseconds(uint16_t sourcePicoseconds) {
+    handle()->sourcePicoseconds = sourcePicoseconds;
+    handle()->hasSourcePicoseconds = true;
+}
+
+void DataValue::setServerPicoseconds(uint16_t serverPicoseconds) {
+    handle()->serverPicoseconds = serverPicoseconds;
+    handle()->hasServerPicoseconds = true;
+}
+
+void DataValue::setStatusCode(UA_StatusCode statusCode) {
+    handle()->status = statusCode;
+    handle()->hasStatus = true;
 }
 
 }  // namespace opcua
