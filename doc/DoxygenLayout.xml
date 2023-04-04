@@ -45,6 +45,7 @@
     <tab type="usergroup" title="Links">
       <tab type="user" url="open62541/index.html" title="open62541 API"/>
       <tab type="user" url="https://github.com/open62541pp/open62541pp" title="GitHub"/>
+      <tab type="user" url="https://github.com/open62541pp/open62541pp/blob/master/CHANGELOG.md" title="Changelog"/>
     </tab>
   </navindex>
 </doxygenlayout>
