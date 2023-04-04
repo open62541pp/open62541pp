@@ -1,47 +1,40 @@
 #pragma once
 
 #include "open62541pp/TypeConverter.h"
+#include "open62541pp/TypeWrapper.h"
+#include "open62541pp/Types.h"
+#include "open62541pp/open62541.h"
 
 #include <string>
 #include <vector>
 
 namespace opcua {
 
-enum class ApplicationType {
-	SERVER,
-		CLIENT,
-		CLIENT_AND_SERVER,
-		DISCOVERY_SERVER,
-		FORCE_32BITS
+enum class ApplicationType { SERVER, CLIENT, CLIENT_AND_SERVER, DISCOVERY_SERVER, FORCE_32BITS };
+
+class ApplicationDescription
+    : TypeWrapper<UA_ApplicationDescription, UA_TYPES_APPLICATIONDESCRIPTION> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
+
+    explicit ApplicationDescription(
+        std::string uri,
+        std::string productUri,
+        std::string name,
+        ApplicationType type,
+        std::string gatewayServerUri,
+        std::string discoveryProfileUri,
+        std::vector<std::string> discoveryUrls
+    );
+
+private:
+    std::string uri_;
+    std::string productUri_;
+    std::string name_;
+    ApplicationType type_;
+    std::string gatewayServerUri_;
+    std::string discoveryProfileUri_;
+    std::vector<std::string> discoveryUrls_;
 };
 
-struct ApplicationDescription {
-	std::string uri;
-	std::string productUri;
-	std::string name;
-	ApplicationType type;
-	std::string gatewayServerUri;
-	std::string discoveryProfileUri;
-	std::vector<std::string> discoveryUrls;
-};
-
-template <>
-struct TypeConverter<ApplicationDescription> {
-    using ValueType = ApplicationDescription;
-    using NativeType = UA_ApplicationDescription;
-    using ValidTypes = TypeList<Type::String, Type::ByteString, Type::XmlElement>;
-
-    static void fromNative(const NativeType& src, ValueType& dst) {
-		(void)src;
-		(void)dst;
-        // dst = detail::toString(src.);
-    }
-
-    static void toNative(const ValueType& src, NativeType& dst) {
-        // UA_clear(&dst, detail::getUaDataType<Type::String>());
-        // dst = detail::allocUaString(src);
-		(void)src;
-		(void)dst;
-    }
-};
-}
+}  // namespace opcua
