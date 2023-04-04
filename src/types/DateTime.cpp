@@ -10,12 +10,12 @@ DateTime DateTime::now() {
 }
 
 /// Get DateTime from Unix time.
-DateTime DateTime::fromUnixTime(uint64_t unixTime) {
+DateTime DateTime::fromUnixTime(int64_t unixTime) {
     return DateTime(UA_DateTime_fromUnixTime(unixTime));
 }
 
 /// Convert to Unix time.
-uint64_t DateTime::toUnixTime() const noexcept {
+int64_t DateTime::toUnixTime() const noexcept {
     if (get() < UA_DATETIME_UNIX_EPOCH) {
         return 0;
     }
@@ -26,7 +26,7 @@ UA_DateTimeStruct DateTime::toStruct() const {
     return UA_DateTime_toStruct(get());
 }
 
-uint64_t DateTime::get() const noexcept {
+int64_t DateTime::get() const noexcept {
     return *handle();
 }
 

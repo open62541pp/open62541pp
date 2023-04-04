@@ -77,8 +77,8 @@ TEST_CASE("DateTime") {
         using namespace std::chrono;
 
         const auto now = system_clock::now();
-        const uint64_t secSinceEpoch = duration_cast<seconds>(now.time_since_epoch()).count();
-        const uint64_t nsecSinceEpoch = duration_cast<nanoseconds>(now.time_since_epoch()).count();
+        const int64_t secSinceEpoch = duration_cast<seconds>(now.time_since_epoch()).count();
+        const int64_t nsecSinceEpoch = duration_cast<nanoseconds>(now.time_since_epoch()).count();
 
         const DateTime dt(now);
         REQUIRE(dt.get() == (nsecSinceEpoch / 100) + UA_DATETIME_UNIX_EPOCH);

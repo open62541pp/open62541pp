@@ -21,7 +21,7 @@ namespace opcua {
 class DateTime : public TypeWrapper<UA_DateTime, UA_TYPES_DATETIME> {
 public:
     using DefaultClock = std::chrono::system_clock;
-    using UaDuration = std::chrono::duration<uint64_t, std::ratio<1, 10'000'000>>;
+    using UaDuration = std::chrono::duration<int64_t, std::ratio<1, 10'000'000>>;
 
     // NOLINTNEXTLINE, false positive?
     using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
@@ -38,26 +38,26 @@ public:
     static DateTime fromTimePoint(std::chrono::time_point<Clock, Duration> timePoint);
 
     /// Get DateTime from Unix time.
-    static DateTime fromUnixTime(uint64_t unixTime);
+    static DateTime fromUnixTime(int64_t unixTime);
 
     /// Convert to std::chrono::time_point.
     template <typename Clock = DefaultClock, typename Duration = UaDuration>
     std::chrono::time_point<Clock, Duration> toTimePoint() const;
 
     /// Convert to Unix time.
-    uint64_t toUnixTime() const noexcept;
+    int64_t toUnixTime() const noexcept;
 
     /// Convert to UA_DateTimeStruct.
     UA_DateTimeStruct toStruct() const;
 
     /// Get DateTime value as 100 nanosecond intervals since January 1, 1601 (UTC).
-    uint64_t get() const noexcept;
+    int64_t get() const noexcept;
 };
 
 template <typename Clock, typename Duration>
 DateTime DateTime::fromTimePoint(std::chrono::time_point<Clock, Duration> timePoint) {
-    static constexpr uint64_t dateTimeUnixEpoch = UA_DATETIME_UNIX_EPOCH;
-    const uint64_t sinceUnixEpoch =
+    static constexpr int64_t dateTimeUnixEpoch = UA_DATETIME_UNIX_EPOCH;
+    const int64_t sinceUnixEpoch =
         std::chrono::duration_cast<UaDuration>(timePoint.time_since_epoch()).count();
     return DateTime(dateTimeUnixEpoch + sinceUnixEpoch);
 }
