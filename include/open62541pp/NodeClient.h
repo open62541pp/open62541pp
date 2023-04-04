@@ -199,6 +199,11 @@ public:
 
     void remove(bool deleteReferences = true);
 
+    void setBrowseName(uint16_t namespaceIndex_, const std::string& browseName);
+    void setDisplayName1(const std::string& displayName);
+    bool isForwardReference() const;
+    void setIsForwardReference(bool isForwardReference);
+
 protected:
     template <typename... Ts>
     constexpr bool isNodeClass(Ts&&... classes) {
@@ -221,6 +226,10 @@ private:
     std::shared_ptr<Client> client_;
     NodeId nodeId_;
     NodeClass nodeClass_;
+    std::string browseName_;
+    uint16_t namespaceIndex_;
+    std::string displayName_;
+    bool isForwardReference_;
 };
 
 /* ---------------------------------------------------------------------------------------------- */
