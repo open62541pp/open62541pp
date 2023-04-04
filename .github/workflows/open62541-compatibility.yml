@@ -1,6 +1,6 @@
 name: Compatibility
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   external-open62541:
