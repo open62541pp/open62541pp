@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">open62541
-   &#160;<span id="projectnumber">1.2.6</span>
+   &#160;<span id="projectnumber">1.3.5</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -163,6 +163,12 @@ Macros</h2></td></tr>
 <tr class="separator:a7e0d70559ef67844f27400717af07784"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf3fdc660e462ab1ea3757aa45812e7e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_8h.html#acf3fdc660e462ab1ea3757aa45812e7e">UA_VALUERANK_THREE_DIMENSIONS</a>&#160;&#160;&#160;3</td></tr>
 <tr class="separator:acf3fdc660e462ab1ea3757aa45812e7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a680d461edabe297f79fee65d5595572b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_8h.html#a680d461edabe297f79fee65d5595572b">UA_EVENTNOTIFIER_SUBSCRIBE_TO_EVENT</a>&#160;&#160;&#160;(0x01u &lt;&lt; 0u)</td></tr>
+<tr class="separator:a680d461edabe297f79fee65d5595572b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40697aed48161949bb28840e9ecc1167"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_8h.html#a40697aed48161949bb28840e9ecc1167">UA_EVENTNOTIFIER_HISTORY_READ</a>&#160;&#160;&#160;(0x01u &lt;&lt; 2u)</td></tr>
+<tr class="separator:a40697aed48161949bb28840e9ecc1167"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab30611001d2f6f12efd81651f887dc53"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="common_8h.html#ab30611001d2f6f12efd81651f887dc53">UA_EVENTNOTIFIER_HISTORY_WRITE</a>&#160;&#160;&#160;(0x01u &lt;&lt; 3u)</td></tr>
+<tr class="separator:ab30611001d2f6f12efd81651f887dc53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -352,6 +358,54 @@ Enumerations</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00054">54</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+
+</div>
+</div>
+<a id="a40697aed48161949bb28840e9ecc1167"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40697aed48161949bb28840e9ecc1167">&#9670;&nbsp;</a></span>UA_EVENTNOTIFIER_HISTORY_READ</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_EVENTNOTIFIER_HISTORY_READ&#160;&#160;&#160;(0x01u &lt;&lt; 2u)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00099">99</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+
+</div>
+</div>
+<a id="ab30611001d2f6f12efd81651f887dc53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab30611001d2f6f12efd81651f887dc53">&#9670;&nbsp;</a></span>UA_EVENTNOTIFIER_HISTORY_WRITE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_EVENTNOTIFIER_HISTORY_WRITE&#160;&#160;&#160;(0x01u &lt;&lt; 3u)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00100">100</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+
+</div>
+</div>
+<a id="a680d461edabe297f79fee65d5595572b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a680d461edabe297f79fee65d5595572b">&#9670;&nbsp;</a></span>UA_EVENTNOTIFIER_SUBSCRIBE_TO_EVENT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_EVENTNOTIFIER_SUBSCRIBE_TO_EVENT&#160;&#160;&#160;(0x01u &lt;&lt; 0u)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00098">98</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -886,7 +940,7 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="adeb58a592483258f220c845c47622b15aa0655b2b07c598945ed82058ee6b1d0a"></a>UA_ORDER_MORE&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00106">106</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00112">112</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -908,7 +962,7 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="a6fda8bb9a494877d7c2f77fd4c4932f8aa3e7dff5f422064049b58fd2a64c814c"></a>UA_RULEHANDLING_ACCEPT&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00097">97</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00103">103</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -935,7 +989,7 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="a8c3787777dac67ecf48c13ad1ddb112ea1941b89608d0ce1d27063232802d726f"></a>UA_SECURECHANNELSTATE_CLOSED&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00114">114</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00120">120</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>
@@ -959,7 +1013,7 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="a66e73dba25a0a0771ed1a850291ca96fa70552776c3d3f4c4bcffe7dd17be17b5"></a>UA_SESSIONSTATE_CLOSING&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00126">126</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="common_8h_source.html#l00132">132</a> of file <a class="el" href="common_8h_source.html">common.h</a>.</p>
 
 </div>
 </div>

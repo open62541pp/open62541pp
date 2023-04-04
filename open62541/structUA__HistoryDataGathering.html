@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">open62541
-   &#160;<span id="projectnumber">1.2.6</span>
+   &#160;<span id="projectnumber">1.3.5</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -85,11 +85,11 @@ Data Fields</h2></td></tr>
 <tr class="separator:a9843ddec974377659bd840201ddb2b6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a47f8104629c905e9923fe79012a3c945"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__HistoryDataGathering.html#a47f8104629c905e9923fe79012a3c945">startPoll</a> )(<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdgContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId)</td></tr>
 <tr class="separator:a47f8104629c905e9923fe79012a3c945"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21dadea199835ef9b20b422e2fb88ecb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__HistoryDataGathering.html#a21dadea199835ef9b20b422e2fb88ecb">updateNodeIdSetting</a> )(<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdgContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, const <a class="el" href="structUA__HistorizingNodeIdSettings.html">UA_HistorizingNodeIdSettings</a> setting)</td></tr>
+<tr class="memitem:a21dadea199835ef9b20b422e2fb88ecb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__HistoryDataGathering.html#a21dadea199835ef9b20b422e2fb88ecb">updateNodeIdSetting</a> )(<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdgContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, const <a class="el" href="structUA__HistorizingNodeIdSettings.html">UA_HistorizingNodeIdSettings</a> setting)</td></tr>
 <tr class="separator:a21dadea199835ef9b20b422e2fb88ecb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff4e2b2480f0b3f0dfc1b1901100238e"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structUA__HistorizingNodeIdSettings.html">UA_HistorizingNodeIdSettings</a> *(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__HistoryDataGathering.html#aff4e2b2480f0b3f0dfc1b1901100238e">getHistorizingSetting</a> )(<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdgContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId)</td></tr>
 <tr class="separator:aff4e2b2480f0b3f0dfc1b1901100238e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a215b7e30c011ca62f8fe30c936691010"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__HistoryDataGathering.html#a215b7e30c011ca62f8fe30c936691010">setValue</a> )(<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdgContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, <a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> historizing, const <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *value)</td></tr>
+<tr class="memitem:a215b7e30c011ca62f8fe30c936691010"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__HistoryDataGathering.html#a215b7e30c011ca62f8fe30c936691010">setValue</a> )(<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdgContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> historizing, const <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *value)</td></tr>
 <tr class="separator:a215b7e30c011ca62f8fe30c936691010"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -167,7 +167,7 @@ Data Fields</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void(* UA_HistoryDataGathering::setValue) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdgContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, <a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> historizing, const <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *value)</td>
+          <td class="memname">void(* UA_HistoryDataGathering::setValue) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdgContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> historizing, const <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *value)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -215,7 +215,7 @@ Data Fields</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>(* UA_HistoryDataGathering::updateNodeIdSetting) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdgContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, const <a class="el" href="structUA__HistorizingNodeIdSettings.html">UA_HistorizingNodeIdSettings</a> setting)</td>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(* UA_HistoryDataGathering::updateNodeIdSetting) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdgContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, const <a class="el" href="structUA__HistorizingNodeIdSettings.html">UA_HistorizingNodeIdSettings</a> setting)</td>
         </tr>
       </table>
 </div><div class="memdoc">

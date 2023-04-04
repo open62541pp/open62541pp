@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>open62541: my_custom_socket_handle Struct Reference</title>
+<title>open62541: UA_KeyValuePair Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">open62541
-   &#160;<span id="projectnumber">1.2.6</span>
+   &#160;<span id="projectnumber">1.3.5</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -67,75 +67,57 @@ $(function() {
   <div class="summary">
 <a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle">
-<div class="title">my_custom_socket_handle Struct Reference</div>  </div>
+<div class="title">UA_KeyValuePair Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><code>#include &lt;<a class="el" href="mqtt__pal_8h_source.html">mqtt_pal.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="types__generated_8h_source.html">types_generated.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a3c43316de6b2d9a8ad29b9bc3b955704"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmy__custom__socket__handle.html#a3c43316de6b2d9a8ad29b9bc3b955704">client</a></td></tr>
-<tr class="separator:a3c43316de6b2d9a8ad29b9bc3b955704"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a92b71b68556913bb243edc86a19dc5bd"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmy__custom__socket__handle.html#a92b71b68556913bb243edc86a19dc5bd">connection</a></td></tr>
-<tr class="separator:a92b71b68556913bb243edc86a19dc5bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e3444289d42a673909b783d85529bfe"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmy__custom__socket__handle.html#a8e3444289d42a673909b783d85529bfe">timeout</a></td></tr>
-<tr class="separator:a8e3444289d42a673909b783d85529bfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1531eb0ff8a128a6623e2b5eb8f9ded8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__QualifiedName.html">UA_QualifiedName</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__KeyValuePair.html#a1531eb0ff8a128a6623e2b5eb8f9ded8">key</a></td></tr>
+<tr class="separator:a1531eb0ff8a128a6623e2b5eb8f9ded8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2087e6311621d54acf0db70cd4776650"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__Variant.html">UA_Variant</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__KeyValuePair.html#a2087e6311621d54acf0db70cd4776650">value</a></td></tr>
+<tr class="separator:a2087e6311621d54acf0db70cd4776650"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="mqtt__pal_8h_source.html#l00042">42</a> of file <a class="el" href="mqtt__pal_8h_source.html">mqtt_pal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types__generated_8h_source.html#l00098">98</a> of file <a class="el" href="types__generated_8h_source.html">types_generated.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
-<a id="a3c43316de6b2d9a8ad29b9bc3b955704"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3c43316de6b2d9a8ad29b9bc3b955704">&#9670;&nbsp;</a></span>client</h2>
+<a id="a1531eb0ff8a128a6623e2b5eb8f9ded8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1531eb0ff8a128a6623e2b5eb8f9ded8">&#9670;&nbsp;</a></span>key</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void* my_custom_socket_handle::client</td>
+          <td class="memname"><a class="el" href="structUA__QualifiedName.html">UA_QualifiedName</a> UA_KeyValuePair::key</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mqtt__pal_8h_source.html#l00043">43</a> of file <a class="el" href="mqtt__pal_8h_source.html">mqtt_pal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types__generated_8h_source.html#l00099">99</a> of file <a class="el" href="types__generated_8h_source.html">types_generated.h</a>.</p>
 
 </div>
 </div>
-<a id="a92b71b68556913bb243edc86a19dc5bd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a92b71b68556913bb243edc86a19dc5bd">&#9670;&nbsp;</a></span>connection</h2>
+<a id="a2087e6311621d54acf0db70cd4776650"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2087e6311621d54acf0db70cd4776650">&#9670;&nbsp;</a></span>value</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void* my_custom_socket_handle::connection</td>
+          <td class="memname"><a class="el" href="structUA__Variant.html">UA_Variant</a> UA_KeyValuePair::value</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mqtt__pal_8h_source.html#l00044">44</a> of file <a class="el" href="mqtt__pal_8h_source.html">mqtt_pal.h</a>.</p>
-
-</div>
-</div>
-<a id="a8e3444289d42a673909b783d85529bfe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e3444289d42a673909b783d85529bfe">&#9670;&nbsp;</a></span>timeout</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint16_t my_custom_socket_handle::timeout</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="mqtt__pal_8h_source.html#l00045">45</a> of file <a class="el" href="mqtt__pal_8h_source.html">mqtt_pal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types__generated_8h_source.html#l00100">100</a> of file <a class="el" href="types__generated_8h_source.html">types_generated.h</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>/home/runner/work/open62541pp/open62541pp/build/doc/open62541/deps/mqtt-c/<a class="el" href="mqtt__pal_8h_source.html">mqtt_pal.h</a></li>
+<li>/home/runner/work/open62541pp/open62541pp/build/doc/open62541/src_generated/open62541/<a class="el" href="types__generated_8h_source.html">types_generated.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

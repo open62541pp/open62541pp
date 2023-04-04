@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">open62541
-   &#160;<span id="projectnumber">1.2.6</span>
+   &#160;<span id="projectnumber">1.3.5</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -91,7 +91,7 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a0fd3dfee2e93e99b09030830a8c23dc4"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a0fd3dfee2e93e99b09030830a8c23dc4">UA_NodeIteratorCallback</a>) (<a class="el" href="structUA__NodeId.html">UA_NodeId</a> childId, <a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> isInverse, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> referenceTypeId, void *handle)</td></tr>
+<tr class="memitem:a0fd3dfee2e93e99b09030830a8c23dc4"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a0fd3dfee2e93e99b09030830a8c23dc4">UA_NodeIteratorCallback</a>) (<a class="el" href="structUA__NodeId.html">UA_NodeId</a> childId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> isInverse, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> referenceTypeId, void *handle)</td></tr>
 <tr class="memdesc:a0fd3dfee2e93e99b09030830a8c23dc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterate over all nodes referenced by parentNodeId by calling the callback function for each child node.  <a href="client__highlevel_8h.html#a0fd3dfee2e93e99b09030830a8c23dc4">More...</a><br /></td></tr>
 <tr class="separator:a0fd3dfee2e93e99b09030830a8c23dc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -107,11 +107,11 @@ Functions</h2></td></tr>
 <tr class="separator:a2db71d57441988b26a0a190c799b8ad9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3564c9fb4d7d3ba416991c8830e6e571"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a3564c9fb4d7d3ba416991c8830e6e571">UA_Client_writeArrayDimensionsAttribute</a> (<a class="el" href="structUA__Client.html">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> nodeId, size_t newArrayDimensionsSize, const <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *newArrayDimensions)</td></tr>
 <tr class="separator:a3564c9fb4d7d3ba416991c8830e6e571"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe39f6add753b9076b5aff9bf954edc6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#afe39f6add753b9076b5aff9bf954edc6">UA_Client_addReference</a> (<a class="el" href="structUA__Client.html">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> sourceNodeId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> referenceTypeId, <a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> isForward, const <a class="el" href="structUA__String.html">UA_String</a> targetServerUri, const <a class="el" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> targetNodeId, <a class="el" href="types__generated_8h.html#adf98bb5a5ac8e50eece68338a046a904">UA_NodeClass</a> targetNodeClass)</td></tr>
+<tr class="memitem:afe39f6add753b9076b5aff9bf954edc6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#afe39f6add753b9076b5aff9bf954edc6">UA_Client_addReference</a> (<a class="el" href="structUA__Client.html">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> sourceNodeId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> referenceTypeId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> isForward, const <a class="el" href="structUA__String.html">UA_String</a> targetServerUri, const <a class="el" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> targetNodeId, <a class="el" href="types__generated_8h.html#adf98bb5a5ac8e50eece68338a046a904">UA_NodeClass</a> targetNodeClass)</td></tr>
 <tr class="separator:afe39f6add753b9076b5aff9bf954edc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01bc72e700a1f57246a47c1355412985"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a01bc72e700a1f57246a47c1355412985">UA_Client_deleteReference</a> (<a class="el" href="structUA__Client.html">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> sourceNodeId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> referenceTypeId, <a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> isForward, const <a class="el" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> targetNodeId, <a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> deleteBidirectional)</td></tr>
+<tr class="memitem:a01bc72e700a1f57246a47c1355412985"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a01bc72e700a1f57246a47c1355412985">UA_Client_deleteReference</a> (<a class="el" href="structUA__Client.html">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> sourceNodeId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> referenceTypeId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> isForward, const <a class="el" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> targetNodeId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> deleteBidirectional)</td></tr>
 <tr class="separator:a01bc72e700a1f57246a47c1355412985"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86f95c99461f998f0c11a4b34a9b4d61"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a86f95c99461f998f0c11a4b34a9b4d61">UA_Client_deleteNode</a> (<a class="el" href="structUA__Client.html">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> nodeId, <a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> deleteTargetReferences)</td></tr>
+<tr class="memitem:a86f95c99461f998f0c11a4b34a9b4d61"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a86f95c99461f998f0c11a4b34a9b4d61">UA_Client_deleteNode</a> (<a class="el" href="structUA__Client.html">UA_Client</a> *client, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> nodeId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> deleteTargetReferences)</td></tr>
 <tr class="separator:a86f95c99461f998f0c11a4b34a9b4d61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e799660b0e2e087c14200f0197e2784"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client__highlevel_8h.html#a9e799660b0e2e087c14200f0197e2784">__UA_Client_addNode</a> (<a class="el" href="structUA__Client.html">UA_Client</a> *client, const <a class="el" href="types__generated_8h.html#adf98bb5a5ac8e50eece68338a046a904">UA_NodeClass</a> nodeClass, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> requestedNewNodeId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> parentNodeId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> referenceTypeId, const <a class="el" href="structUA__QualifiedName.html">UA_QualifiedName</a> browseName, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> typeDefinition, const <a class="el" href="structUA__NodeAttributes.html">UA_NodeAttributes</a> *attr, const <a class="el" href="structUA__DataType.html">UA_DataType</a> *attributeType, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *outNewNodeId)</td></tr>
 <tr class="memdesc:a9e799660b0e2e087c14200f0197e2784"><td class="mdescLeft">&#160;</td><td class="mdescRight">Don't call this function, use the typed versions.  <a href="client__highlevel_8h.html#a9e799660b0e2e087c14200f0197e2784">More...</a><br /></td></tr>
@@ -187,7 +187,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_NodeIteratorCallback) (<a class="el" href="structUA__NodeId.html">UA_NodeId</a> childId, <a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> isInverse, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> referenceTypeId, void *handle)</td>
+          <td class="memname">typedef <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_NodeIteratorCallback) (<a class="el" href="structUA__NodeId.html">UA_NodeId</a> childId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> isInverse, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> referenceTypeId, void *handle)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -402,7 +402,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td>
           <td class="paramname"><em>isForward</em>, </td>
         </tr>
         <tr>
@@ -454,7 +454,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td>
           <td class="paramname"><em>deleteTargetReferences</em>&#160;</td>
         </tr>
         <tr>
@@ -494,7 +494,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td>
           <td class="paramname"><em>isForward</em>, </td>
         </tr>
         <tr>
@@ -506,7 +506,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td>
           <td class="paramname"><em>deleteBidirectional</em>&#160;</td>
         </tr>
         <tr>

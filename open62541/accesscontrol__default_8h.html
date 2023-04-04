@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">open62541
-   &#160;<span id="projectnumber">1.2.6</span>
+   &#160;<span id="projectnumber">1.3.5</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -88,13 +88,13 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a3d48103e1e49963d380493596b1a35d6"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="accesscontrol__default_8h.html#a3d48103e1e49963d380493596b1a35d6">UA_AccessControl_default</a> (<a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> *config, <a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> allowAnonymous, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *userTokenPolicyUri, size_t usernamePasswordLoginSize, const <a class="el" href="structUA__UsernamePasswordLogin.html">UA_UsernamePasswordLogin</a> *usernamePasswordLogin)</td></tr>
-<tr class="memdesc:a3d48103e1e49963d380493596b1a35d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default access control.  <a href="accesscontrol__default_8h.html#a3d48103e1e49963d380493596b1a35d6">More...</a><br /></td></tr>
-<tr class="separator:a3d48103e1e49963d380493596b1a35d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23c7493b2c29d8e93de5d216377027bc"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="accesscontrol__default_8h.html#a23c7493b2c29d8e93de5d216377027bc">UA_AccessControl_default</a> (<a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> *config, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> allowAnonymous, <a class="el" href="structUA__CertificateVerification.html">UA_CertificateVerification</a> *verifyX509, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *userTokenPolicyUri, size_t usernamePasswordLoginSize, const <a class="el" href="structUA__UsernamePasswordLogin.html">UA_UsernamePasswordLogin</a> *usernamePasswordLogin)</td></tr>
+<tr class="memdesc:a23c7493b2c29d8e93de5d216377027bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default access control.  <a href="accesscontrol__default_8h.html#a23c7493b2c29d8e93de5d216377027bc">More...</a><br /></td></tr>
+<tr class="separator:a23c7493b2c29d8e93de5d216377027bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a3d48103e1e49963d380493596b1a35d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3d48103e1e49963d380493596b1a35d6">&#9670;&nbsp;</a></span>UA_AccessControl_default()</h2>
+<a id="a23c7493b2c29d8e93de5d216377027bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23c7493b2c29d8e93de5d216377027bc">&#9670;&nbsp;</a></span>UA_AccessControl_default()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -108,8 +108,14 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td>
           <td class="paramname"><em>allowAnonymous</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structUA__CertificateVerification.html">UA_CertificateVerification</a> *&#160;</td>
+          <td class="paramname"><em>verifyX509</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -138,7 +144,8 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Default access control. </p>
-<p>The log-in can be anonymous or username-password. A logged-in user has all access rights. </p>
+<p>The log-in can be anonymous or username-password. A logged-in user has all access rights.</p>
+<p>The certificate verification plugin lifecycle is moved to the access control system. So it is cleared up eventually together with the AccessControl. </p>
 
 </div>
 </div>

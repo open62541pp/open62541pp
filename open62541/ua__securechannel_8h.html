@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">open62541
-   &#160;<span id="projectnumber">1.2.6</span>
+   &#160;<span id="projectnumber">1.3.5</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -104,11 +104,22 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a27c15f978371980916c2510cf686fc47"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__securechannel_8h.html#a27c15f978371980916c2510cf686fc47">UA_SECURE_CONVERSATION_MESSAGE_HEADER_LENGTH</a>&#160;&#160;&#160;12</td></tr>
-<tr class="memdesc:a27c15f978371980916c2510cf686fc47"><td class="mdescLeft">&#160;</td><td class="mdescRight">This Source Code Form is subject to the terms of the Mozilla Public License, v.  <a href="ua__securechannel_8h.html#a27c15f978371980916c2510cf686fc47">More...</a><br /></td></tr>
-<tr class="separator:a27c15f978371980916c2510cf686fc47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7448773c0fe33c0863846b0a4e15415"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__securechannel_8h.html#ab7448773c0fe33c0863846b0a4e15415">UA_SECURE_MESSAGE_HEADER_LENGTH</a>&#160;&#160;&#160;24</td></tr>
-<tr class="separator:ab7448773c0fe33c0863846b0a4e15415"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a878880742264c3256a1a41670247f5eb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__securechannel_8h.html#a878880742264c3256a1a41670247f5eb">UA_SECURECHANNEL_MESSAGEHEADER_LENGTH</a>&#160;&#160;&#160;8</td></tr>
+<tr class="memdesc:a878880742264c3256a1a41670247f5eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">This Source Code Form is subject to the terms of the Mozilla Public License, v.  <a href="ua__securechannel_8h.html#a878880742264c3256a1a41670247f5eb">More...</a><br /></td></tr>
+<tr class="separator:a878880742264c3256a1a41670247f5eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a4e18605a121a2377b876edb853d5c0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__securechannel_8h.html#a7a4e18605a121a2377b876edb853d5c0">UA_SECURECHANNEL_CHANNELHEADER_LENGTH</a>&#160;&#160;&#160;12</td></tr>
+<tr class="separator:a7a4e18605a121a2377b876edb853d5c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae52c3f3af04001afc4f2b7ca58dceaa1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__securechannel_8h.html#ae52c3f3af04001afc4f2b7ca58dceaa1">UA_SECURECHANNEL_SYMMETRIC_SECURITYHEADER_LENGTH</a>&#160;&#160;&#160;4</td></tr>
+<tr class="separator:ae52c3f3af04001afc4f2b7ca58dceaa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1505f1b5a0eb8c0736e7487de39a36ce"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__securechannel_8h.html#a1505f1b5a0eb8c0736e7487de39a36ce">UA_SECURECHANNEL_SEQUENCEHEADER_LENGTH</a>&#160;&#160;&#160;8</td></tr>
+<tr class="separator:a1505f1b5a0eb8c0736e7487de39a36ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50c6ea0fef956b1176199da2f851edd8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__securechannel_8h.html#a50c6ea0fef956b1176199da2f851edd8">UA_SECURECHANNEL_SYMMETRIC_HEADER_UNENCRYPTEDLENGTH</a></td></tr>
+<tr class="separator:a50c6ea0fef956b1176199da2f851edd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15078d7e8c3783e981a271052875fc0d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__securechannel_8h.html#a15078d7e8c3783e981a271052875fc0d">UA_SECURECHANNEL_SYMMETRIC_HEADER_TOTALLENGTH</a></td></tr>
+<tr class="separator:a15078d7e8c3783e981a271052875fc0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62b2afcccb6608f7e46aed5b4712c205"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__securechannel_8h.html#a62b2afcccb6608f7e46aed5b4712c205">UA_SECURECHANNEL_MESSAGE_MIN_LENGTH</a>&#160;&#160;&#160;16</td></tr>
+<tr class="memdesc:a62b2afcccb6608f7e46aed5b4712c205"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimum length of a valid message (ERR message with an empty reason)  <a href="ua__securechannel_8h.html#a62b2afcccb6608f7e46aed5b4712c205">More...</a><br /></td></tr>
+<tr class="separator:a62b2afcccb6608f7e46aed5b4712c205"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9df312a3bbecdd03177e34da807b30f9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__securechannel_8h.html#a9df312a3bbecdd03177e34da807b30f9">UA_LOG_TRACE_CHANNEL_INTERNAL</a>(LOGGER,  CHANNEL,  MSG, ...)</td></tr>
 <tr class="separator:a9df312a3bbecdd03177e34da807b30f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d10b2162e9575953d2ad0489178b867"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__securechannel_8h.html#a7d10b2162e9575953d2ad0489178b867">UA_LOG_TRACE_CHANNEL</a>(LOGGER,  CHANNEL, ...)&#160;&#160;&#160;<a class="el" href="ua__util__internal_8h.html#a273fd37bc8fedce6d53e7d0bf2be78bb">UA_MACRO_EXPAND</a>(<a class="el" href="ua__securechannel_8h.html#a9df312a3bbecdd03177e34da807b30f9">UA_LOG_TRACE_CHANNEL_INTERNAL</a>(LOGGER, CHANNEL, __VA_ARGS__, &quot;&quot;))</td></tr>
@@ -211,22 +222,16 @@ Functions</h2></td></tr>
 <tr class="separator:a865391436b11e38fec7e53d8d114b548"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a751fcb2f1ee76bcf7ed75dd5e99f95"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__securechannel_8h.html#a8a751fcb2f1ee76bcf7ed75dd5e99f95">setBufPos</a> (<a class="el" href="structUA__MessageContext.html">UA_MessageContext</a> *mc)</td></tr>
 <tr class="separator:a8a751fcb2f1ee76bcf7ed75dd5e99f95"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3692469418c3b833d3fd873cf381519"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__securechannel_8h.html#ad3692469418c3b833d3fd873cf381519">checkSymHeader</a> (<a class="el" href="structUA__SecureChannel.html">UA_SecureChannel</a> *channel, const <a class="el" href="structUA__SymmetricAlgorithmSecurityHeader.html">UA_SymmetricAlgorithmSecurityHeader</a> *symHeader)</td></tr>
-<tr class="separator:ad3692469418c3b833d3fd873cf381519"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1363ac4843e3308790e56e81432c4da4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__securechannel_8h.html#a1363ac4843e3308790e56e81432c4da4">processSequenceNumberAsym</a> (<a class="el" href="structUA__SecureChannel.html">UA_SecureChannel</a> *channel, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> sequenceNumber)</td></tr>
-<tr class="separator:a1363ac4843e3308790e56e81432c4da4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a893484ae713377b6fedeff5b0ee13bc7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__securechannel_8h.html#a893484ae713377b6fedeff5b0ee13bc7">checkSymHeader</a> (<a class="el" href="structUA__SecureChannel.html">UA_SecureChannel</a> *channel, const <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> tokenId)</td></tr>
+<tr class="separator:a893484ae713377b6fedeff5b0ee13bc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae223a74760316bbe2a1670b8e2e14c00"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__securechannel_8h.html#ae223a74760316bbe2a1670b8e2e14c00">checkAsymHeader</a> (<a class="el" href="structUA__SecureChannel.html">UA_SecureChannel</a> *channel, const <a class="el" href="structUA__AsymmetricAlgorithmSecurityHeader.html">UA_AsymmetricAlgorithmSecurityHeader</a> *asymHeader)</td></tr>
 <tr class="separator:ae223a74760316bbe2a1670b8e2e14c00"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6556dc6859f448e88f87413af399cc37"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__securechannel_8h.html#a6556dc6859f448e88f87413af399cc37">padChunkAsym</a> (<a class="el" href="structUA__SecureChannel.html">UA_SecureChannel</a> *channel, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *buf, size_t securityHeaderLength, <a class="el" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a> **buf_pos)</td></tr>
-<tr class="separator:a6556dc6859f448e88f87413af399cc37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a408060337a23dde26ab60bc297a06370"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__securechannel_8h.html#a408060337a23dde26ab60bc297a06370">padChunk</a> (<a class="el" href="structUA__SecureChannel.html">UA_SecureChannel</a> *channel, const <a class="el" href="structUA__SecurityPolicyCryptoModule.html">UA_SecurityPolicyCryptoModule</a> *cm, const <a class="el" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a> *start, <a class="el" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a> **pos)</td></tr>
+<tr class="separator:a408060337a23dde26ab60bc297a06370"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e798c856ea3f05cf1d4c2a926ab3b39"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__securechannel_8h.html#a3e798c856ea3f05cf1d4c2a926ab3b39">signAndEncryptAsym</a> (<a class="el" href="structUA__SecureChannel.html">UA_SecureChannel</a> *channel, size_t preSignLength, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *buf, size_t securityHeaderLength, size_t totalLength)</td></tr>
 <tr class="separator:a3e798c856ea3f05cf1d4c2a926ab3b39"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c115d6728b922ac72684a0be86b5e8b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__securechannel_8h.html#a2c115d6728b922ac72684a0be86b5e8b">padChunkSym</a> (<a class="el" href="structUA__MessageContext.html">UA_MessageContext</a> *messageContext, size_t bodyLength)</td></tr>
-<tr class="separator:a2c115d6728b922ac72684a0be86b5e8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85c10142ba121d8b4ab3442ef0adfd8e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__securechannel_8h.html#a85c10142ba121d8b4ab3442ef0adfd8e">signChunkSym</a> (<a class="el" href="structUA__MessageContext.html">UA_MessageContext</a> *const messageContext, size_t preSigLength)</td></tr>
-<tr class="separator:a85c10142ba121d8b4ab3442ef0adfd8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c2aebe321d17fbecb607771ca8317af"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__securechannel_8h.html#a2c2aebe321d17fbecb607771ca8317af">encryptChunkSym</a> (<a class="el" href="structUA__MessageContext.html">UA_MessageContext</a> *const messageContext, size_t totalLength)</td></tr>
-<tr class="separator:a2c2aebe321d17fbecb607771ca8317af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9fe19bd90b7e481520fefcd333660f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__securechannel_8h.html#aa9fe19bd90b7e481520fefcd333660f4">signAndEncryptSym</a> (<a class="el" href="structUA__MessageContext.html">UA_MessageContext</a> *messageContext, size_t preSigLength, size_t totalLength)</td></tr>
+<tr class="separator:aa9fe19bd90b7e481520fefcd333660f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a6eea24563e144ba0329d8b70cec28c53"></a>
@@ -261,7 +266,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00327">327</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00346">346</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
 
 </div>
 </div>
@@ -307,7 +312,7 @@ Functions</h2></td></tr>
 <div class="line">                 ((CHANNEL)-&gt;connection ? (<span class="keywordtype">int</span>)((CHANNEL)-&gt;connection-&gt;sockfd) : 0), \</div>
 <div class="line">                 (CHANNEL)-&gt;securityToken.channelId, __VA_ARGS__)</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00321">321</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00340">340</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
 
 </div>
 </div>
@@ -343,7 +348,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00354">354</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00373">373</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
 
 </div>
 </div>
@@ -389,7 +394,7 @@ Functions</h2></td></tr>
 <div class="line">                 ((CHANNEL)-&gt;connection ? (<span class="keywordtype">int</span>)((CHANNEL)-&gt;connection-&gt;sockfd) : 0), \</div>
 <div class="line">                 (CHANNEL)-&gt;securityToken.channelId, __VA_ARGS__)</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00348">348</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00367">367</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
 
 </div>
 </div>
@@ -425,7 +430,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00363">363</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00382">382</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
 
 </div>
 </div>
@@ -471,7 +476,7 @@ Functions</h2></td></tr>
 <div class="line">                 ((CHANNEL)-&gt;connection ? (CHANNEL)-&gt;connection-&gt;sockfd : 0), \</div>
 <div class="line">                 (CHANNEL)-&gt;securityToken.channelId, __VA_ARGS__)</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00357">357</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00376">376</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
 
 </div>
 </div>
@@ -507,7 +512,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00336">336</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00355">355</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
 
 </div>
 </div>
@@ -553,7 +558,7 @@ Functions</h2></td></tr>
 <div class="line">                 ((CHANNEL)-&gt;connection ? (<span class="keywordtype">int</span>)((CHANNEL)-&gt;connection-&gt;sockfd) : 0), \</div>
 <div class="line">                 (CHANNEL)-&gt;securityToken.channelId, __VA_ARGS__)</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00330">330</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00349">349</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
 
 </div>
 </div>
@@ -589,7 +594,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00318">318</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00337">337</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
 
 </div>
 </div>
@@ -635,7 +640,7 @@ Functions</h2></td></tr>
 <div class="line">                 ((CHANNEL)-&gt;connection ? (<span class="keywordtype">int</span>)((CHANNEL)-&gt;connection-&gt;sockfd) : 0), \</div>
 <div class="line">                 (CHANNEL)-&gt;securityToken.channelId, __VA_ARGS__)</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00312">312</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00331">331</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
 
 </div>
 </div>
@@ -671,7 +676,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00345">345</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00364">364</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
 
 </div>
 </div>
@@ -717,43 +722,142 @@ Functions</h2></td></tr>
 <div class="line">                 ((CHANNEL)-&gt;connection ? (<span class="keywordtype">int</span>)((CHANNEL)-&gt;connection-&gt;sockfd) : 0), \</div>
 <div class="line">                 (CHANNEL)-&gt;securityToken.channelId, __VA_ARGS__)</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00339">339</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00358">358</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
 
 </div>
 </div>
-<a id="a27c15f978371980916c2510cf686fc47"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a27c15f978371980916c2510cf686fc47">&#9670;&nbsp;</a></span>UA_SECURE_CONVERSATION_MESSAGE_HEADER_LENGTH</h2>
+<a id="a7a4e18605a121a2377b876edb853d5c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a4e18605a121a2377b876edb853d5c0">&#9670;&nbsp;</a></span>UA_SECURECHANNEL_CHANNELHEADER_LENGTH</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define UA_SECURE_CONVERSATION_MESSAGE_HEADER_LENGTH&#160;&#160;&#160;12</td>
+          <td class="memname">#define UA_SECURECHANNEL_CHANNELHEADER_LENGTH&#160;&#160;&#160;12</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00040">40</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
+
+</div>
+</div>
+<a id="a62b2afcccb6608f7e46aed5b4712c205"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62b2afcccb6608f7e46aed5b4712c205">&#9670;&nbsp;</a></span>UA_SECURECHANNEL_MESSAGE_MIN_LENGTH</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_SECURECHANNEL_MESSAGE_MIN_LENGTH&#160;&#160;&#160;16</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Minimum length of a valid message (ERR message with an empty reason) </p>
+
+<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00052">52</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
+
+</div>
+</div>
+<a id="a878880742264c3256a1a41670247f5eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a878880742264c3256a1a41670247f5eb">&#9670;&nbsp;</a></span>UA_SECURECHANNEL_MESSAGEHEADER_LENGTH</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_SECURECHANNEL_MESSAGEHEADER_LENGTH&#160;&#160;&#160;8</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>This Source Code Form is subject to the terms of the Mozilla Public License, v. </p>
 <p>2.0. If a copy of the MPL was not distributed with this file, You can obtain one at <a href="http://mozilla.org/MPL/2.0/">http://mozilla.org/MPL/2.0/</a>.</p>
-<p>Copyright 2014-2020 (c) Fraunhofer IOSB (Author: Julius Pfrommer) Copyright 2017 (c) Florian Palm Copyright 2017 (c) Stefan Profanter, fortiss GmbH Copyright 2017 (c) Mark Giraud, Fraunhofer IOSB </p>
+<p>Copyright 2014-2020 (c) Fraunhofer IOSB (Author: Julius Pfrommer) Copyright 2017 (c) Florian Palm Copyright 2017 (c) Stefan Profanter, fortiss GmbH Copyright 2017 (c) Mark Giraud, Fraunhofer IOSB The message header of the OPC UA binary protocol is structured as follows:</p>
+<ul>
+<li>MessageType (3 Byte)</li>
+<li>IsFinal (1 Byte)</li>
+<li>MessageSize (4 Byte) *** UA_SECURECHANNEL_MESSAGEHEADER_LENGTH ***</li>
+<li>SecureChannelId (4 Byte) *** UA_SECURECHANNEL_CHANNELHEADER_LENGTH ***</li>
+<li>SecurityHeader (4 Byte TokenId for symmetric, otherwise dynamic length)</li>
+<li>SequenceHeader (8 Byte)<ul>
+<li>SequenceNumber</li>
+<li>RequestId </li>
+</ul>
+</li>
+</ul>
 
-<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00025">25</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00039">39</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
 
 </div>
 </div>
-<a id="ab7448773c0fe33c0863846b0a4e15415"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab7448773c0fe33c0863846b0a4e15415">&#9670;&nbsp;</a></span>UA_SECURE_MESSAGE_HEADER_LENGTH</h2>
+<a id="a1505f1b5a0eb8c0736e7487de39a36ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1505f1b5a0eb8c0736e7487de39a36ce">&#9670;&nbsp;</a></span>UA_SECURECHANNEL_SEQUENCEHEADER_LENGTH</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define UA_SECURE_MESSAGE_HEADER_LENGTH&#160;&#160;&#160;24</td>
+          <td class="memname">#define UA_SECURECHANNEL_SEQUENCEHEADER_LENGTH&#160;&#160;&#160;8</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00026">26</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00042">42</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
+
+</div>
+</div>
+<a id="a15078d7e8c3783e981a271052875fc0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15078d7e8c3783e981a271052875fc0d">&#9670;&nbsp;</a></span>UA_SECURECHANNEL_SYMMETRIC_HEADER_TOTALLENGTH</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_SECURECHANNEL_SYMMETRIC_HEADER_TOTALLENGTH</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    (<a class="code" href="ua__securechannel_8h.html#a7a4e18605a121a2377b876edb853d5c0">UA_SECURECHANNEL_CHANNELHEADER_LENGTH</a> +            \</div>
+<div class="line">    UA_SECURECHANNEL_SYMMETRIC_SECURITYHEADER_LENGTH +  \</div>
+<div class="line">     UA_SECURECHANNEL_SEQUENCEHEADER_LENGTH)</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00046">46</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
+
+</div>
+</div>
+<a id="a50c6ea0fef956b1176199da2f851edd8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50c6ea0fef956b1176199da2f851edd8">&#9670;&nbsp;</a></span>UA_SECURECHANNEL_SYMMETRIC_HEADER_UNENCRYPTEDLENGTH</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_SECURECHANNEL_SYMMETRIC_HEADER_UNENCRYPTEDLENGTH</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    (<a class="code" href="ua__securechannel_8h.html#a7a4e18605a121a2377b876edb853d5c0">UA_SECURECHANNEL_CHANNELHEADER_LENGTH</a> +                \</div>
+<div class="line">     UA_SECURECHANNEL_SYMMETRIC_SECURITYHEADER_LENGTH)</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00043">43</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
+
+</div>
+</div>
+<a id="ae52c3f3af04001afc4f2b7ca58dceaa1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae52c3f3af04001afc4f2b7ca58dceaa1">&#9670;&nbsp;</a></span>UA_SECURECHANNEL_SYMMETRIC_SECURITYHEADER_LENGTH</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_SECURECHANNEL_SYMMETRIC_SECURITYHEADER_LENGTH&#160;&#160;&#160;4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00041">41</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
 
 </div>
 </div>
@@ -786,7 +890,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00223">223</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00250">250</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
 
 </div>
 </div>
@@ -826,7 +930,7 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="aed5d83e0ffb542a7626d9858ccf3a4fdae403fdd20d7f221d270d7870c97eaf6b"></a>UA_SECURECHANNELRENEWSTATE_NEWTOKEN_CLIENT&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00059">59</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00086">86</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
 
 </div>
 </div>
@@ -877,8 +981,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ad3692469418c3b833d3fd873cf381519"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad3692469418c3b833d3fd873cf381519">&#9670;&nbsp;</a></span>checkSymHeader()</h2>
+<a id="a893484ae713377b6fedeff5b0ee13bc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a893484ae713377b6fedeff5b0ee13bc7">&#9670;&nbsp;</a></span>checkSymHeader()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -892,8 +996,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__SymmetricAlgorithmSecurityHeader.html">UA_SymmetricAlgorithmSecurityHeader</a> *&#160;</td>
-          <td class="paramname"><em>symHeader</em>&#160;</td>
+          <td class="paramtype">const <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td>
+          <td class="paramname"><em>tokenId</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -955,34 +1059,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a2c2aebe321d17fbecb607771ca8317af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2c2aebe321d17fbecb607771ca8317af">&#9670;&nbsp;</a></span>encryptChunkSym()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> encryptChunkSym </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__MessageContext.html">UA_MessageContext</a> *const&#160;</td>
-          <td class="paramname"><em>messageContext</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>totalLength</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="aa343bbfc03170edf95f2b54859fbf661"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa343bbfc03170edf95f2b54859fbf661">&#9670;&nbsp;</a></span>generateRemoteKeys()</h2>
 
@@ -1037,14 +1113,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a6556dc6859f448e88f87413af399cc37"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6556dc6859f448e88f87413af399cc37">&#9670;&nbsp;</a></span>padChunkAsym()</h2>
+<a id="a408060337a23dde26ab60bc297a06370"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a408060337a23dde26ab60bc297a06370">&#9670;&nbsp;</a></span>padChunk()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void padChunkAsym </td>
+          <td class="memname">void padChunk </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structUA__SecureChannel.html">UA_SecureChannel</a> *&#160;</td>
           <td class="paramname"><em>channel</em>, </td>
@@ -1052,48 +1128,20 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
-          <td class="paramname"><em>buf</em>, </td>
+          <td class="paramtype">const <a class="el" href="structUA__SecurityPolicyCryptoModule.html">UA_SecurityPolicyCryptoModule</a> *&#160;</td>
+          <td class="paramname"><em>cm</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>securityHeaderLength</em>, </td>
+          <td class="paramtype">const <a class="el" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a> *&#160;</td>
+          <td class="paramname"><em>start</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a> **&#160;</td>
-          <td class="paramname"><em>buf_pos</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a2c115d6728b922ac72684a0be86b5e8b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2c115d6728b922ac72684a0be86b5e8b">&#9670;&nbsp;</a></span>padChunkSym()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void padChunkSym </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__MessageContext.html">UA_MessageContext</a> *&#160;</td>
-          <td class="paramname"><em>messageContext</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>bodyLength</em>&#160;</td>
+          <td class="paramname"><em>pos</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1152,34 +1200,6 @@ Functions</h2></td></tr>
           <td></td>
           <td class="paramtype">size_t *const&#160;</td>
           <td class="paramname"><em>finalLength</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a1363ac4843e3308790e56e81432c4da4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1363ac4843e3308790e56e81432c4da4">&#9670;&nbsp;</a></span>processSequenceNumberAsym()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> processSequenceNumberAsym </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__SecureChannel.html">UA_SecureChannel</a> *&#160;</td>
-          <td class="paramname"><em>channel</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td>
-          <td class="paramname"><em>sequenceNumber</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1255,23 +1275,29 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a85c10142ba121d8b4ab3442ef0adfd8e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a85c10142ba121d8b4ab3442ef0adfd8e">&#9670;&nbsp;</a></span>signChunkSym()</h2>
+<a id="aa9fe19bd90b7e481520fefcd333660f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9fe19bd90b7e481520fefcd333660f4">&#9670;&nbsp;</a></span>signAndEncryptSym()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> signChunkSym </td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> signAndEncryptSym </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__MessageContext.html">UA_MessageContext</a> *const&#160;</td>
+          <td class="paramtype"><a class="el" href="structUA__MessageContext.html">UA_MessageContext</a> *&#160;</td>
           <td class="paramname"><em>messageContext</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>preSigLength</em>&#160;</td>
+          <td class="paramname"><em>preSigLength</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>totalLength</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1786,6 +1812,7 @@ Functions</h2></td></tr>
 </div>
 </div>
 </div><!-- contents -->
+<div class="ttc" id="aua__securechannel_8h_html_a7a4e18605a121a2377b876edb853d5c0"><div class="ttname"><a href="ua__securechannel_8h.html#a7a4e18605a121a2377b876edb853d5c0">UA_SECURECHANNEL_CHANNELHEADER_LENGTH</a></div><div class="ttdeci">#define UA_SECURECHANNEL_CHANNELHEADER_LENGTH</div><div class="ttdef"><b>Definition:</b> <a href="ua__securechannel_8h_source.html#l00040">ua_securechannel.h:40</a></div></div>
 <div class="ttc" id="alog_8h_html_ae3af3c02fdb05fd1bd53060113aac471adf08457db96e5160669e88c8deb1184d"><div class="ttname"><a href="log_8h.html#ae3af3c02fdb05fd1bd53060113aac471adf08457db96e5160669e88c8deb1184d">UA_LOGCATEGORY_SECURECHANNEL</a></div><div class="ttdeci">@ UA_LOGCATEGORY_SECURECHANNEL</div><div class="ttdef"><b>Definition:</b> <a href="log_8h_source.html#l00031">log.h:31</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">open62541
-   &#160;<span id="projectnumber">1.2.6</span>
+   &#160;<span id="projectnumber">1.3.5</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -166,7 +166,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00126">126</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00143">143</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
 
 </div>
 </div>
@@ -202,7 +202,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00147">147</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00164">164</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
 
 </div>
 </div>
@@ -238,7 +238,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00154">154</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00171">171</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
 
 </div>
 </div>
@@ -274,7 +274,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00133">133</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00150">150</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
 
 </div>
 </div>
@@ -322,20 +322,17 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> {                                                                \</div>
-<div class="line">        UA_String idString = <a class="code" href="types_8h.html#aeb8bfe8e68205bde46dca7e231d64ffa">UA_STRING_NULL</a>;                            \</div>
-<div class="line">        UA_UInt32 channelId = 0;                                        \</div>
-<div class="line">        if(SESSION) {                                                   \</div>
-<div class="line">            UA_NodeId_print(&amp;(SESSION)-&gt;sessionId, &amp;idString);          \</div>
-<div class="line">            channelId = (SESSION)-&gt;header.channel ?                     \</div>
-<div class="line">                (SESSION)-&gt;header.channel-&gt;securityToken.channelId : 0; \</div>
-<div class="line">        }                                                               \</div>
+<div class="line">        int nameLen = (SESSION) ? (<span class="keywordtype">int</span>)(SESSION)-&gt;sessionName.length : 0; \</div>
+<div class="line">        <span class="keyword">const</span> <span class="keywordtype">char</span> *nameStr = (SESSION) ?                               \</div>
+<div class="line">            (<span class="keyword">const</span> <span class="keywordtype">char</span>*)(SESSION)-&gt;sessionName.data : NULL;            \</div>
+<div class="line">        UA_UInt32 chanId = ((SESSION) &amp;&amp; (SESSION)-&gt;header.channel) ?   \</div>
+<div class="line">            (SESSION)-&gt;header.channel-&gt;securityToken.channelId : 0;     \</div>
 <div class="line">        UA_LOG_##LEVEL(LOGGER, <a class="code" href="log_8h.html#ae3af3c02fdb05fd1bd53060113aac471a56e3103283bca6c477febd153dc0bd3d">UA_LOGCATEGORY_SESSION</a>,                  \</div>
-<div class="line">                       <span class="stringliteral">&quot;SecureChannel %i | Session %.*s | &quot;</span> MSG <span class="stringliteral">&quot;%.0s&quot;</span>, \</div>
-<div class="line">                       channelId, (<span class="keywordtype">int</span>)idString.length, idString.data, __VA_ARGS__); \</div>
-<div class="line">        UA_String_clear(&amp;idString);                                     \</div>
+<div class="line">                       <span class="stringliteral">&quot;SecureChannel %&quot;</span> PRIu32 <span class="stringliteral">&quot; | Session \&quot;%.*s\&quot; | &quot;</span> MSG <span class="stringliteral">&quot;%.0s&quot;</span>, \</div>
+<div class="line">                       chanId, nameLen, nameStr, __VA_ARGS__);          \</div>
 <div class="line">    } <span class="keywordflow">while</span>(0)</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00103">103</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00123">123</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
 
 </div>
 </div>
@@ -371,7 +368,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00119">119</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00136">136</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
 
 </div>
 </div>
@@ -407,7 +404,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00140">140</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00157">157</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
 
 </div>
 </div>
@@ -616,7 +613,6 @@ Functions</h2></td></tr>
 </div>
 </div>
 </div><!-- contents -->
-<div class="ttc" id="atypes_8h_html_aeb8bfe8e68205bde46dca7e231d64ffa"><div class="ttname"><a href="types_8h.html#aeb8bfe8e68205bde46dca7e231d64ffa">UA_STRING_NULL</a></div><div class="ttdeci">const UA_EXPORT UA_String UA_STRING_NULL</div></div>
 <div class="ttc" id="alog_8h_html_ae3af3c02fdb05fd1bd53060113aac471a56e3103283bca6c477febd153dc0bd3d"><div class="ttname"><a href="log_8h.html#ae3af3c02fdb05fd1bd53060113aac471a56e3103283bca6c477febd153dc0bd3d">UA_LOGCATEGORY_SESSION</a></div><div class="ttdeci">@ UA_LOGCATEGORY_SESSION</div><div class="ttdef"><b>Definition:</b> <a href="log_8h_source.html#l00032">log.h:32</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

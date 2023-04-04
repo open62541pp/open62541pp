@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">open62541
-   &#160;<span id="projectnumber">1.2.6</span>
+   &#160;<span id="projectnumber">1.3.5</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -86,6 +86,7 @@ $(function() {
 <code>#include &quot;<a class="el" href="ua__server__async_8h_source.html">ua_server_async.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="ua__timer_8h_source.html">ua_timer.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="ziptree_8h_source.html">ziptree.h</a>&quot;</code><br />
 </div>
 <p><a href="ua__server__internal_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -167,12 +168,8 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ac962802700878dbae2580a7e8707fa6b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__ReferenceTarget.html">UA_ReferenceTarget</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#ac962802700878dbae2580a7e8707fa6b">UA_NodeReferenceKind_firstTarget</a> (const <a class="el" href="structUA__NodeReferenceKind.html">UA_NodeReferenceKind</a> *kind)</td></tr>
-<tr class="separator:ac962802700878dbae2580a7e8707fa6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a845d7b9320847d0e1d71037fe82a40d7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__ReferenceTarget.html">UA_ReferenceTarget</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a845d7b9320847d0e1d71037fe82a40d7">UA_NodeReferenceKind_nextTarget</a> (const <a class="el" href="structUA__NodeReferenceKind.html">UA_NodeReferenceKind</a> *kind, const <a class="el" href="structUA__ReferenceTarget.html">UA_ReferenceTarget</a> *current)</td></tr>
-<tr class="separator:a845d7b9320847d0e1d71037fe82a40d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d6e3892796ed16a41898b417e13def0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__ReferenceTarget.html">UA_ReferenceTarget</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a0d6e3892796ed16a41898b417e13def0">UA_NodeReferenceKind_findTarget</a> (const <a class="el" href="structUA__NodeReferenceKind.html">UA_NodeReferenceKind</a> *kind, const <a class="el" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> *targetId)</td></tr>
-<tr class="separator:a0d6e3892796ed16a41898b417e13def0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a2c11c602bded7f93ad30a55505233d"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structUA__ReferenceTarget.html">UA_ReferenceTarget</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a3a2c11c602bded7f93ad30a55505233d">UA_NodeReferenceKind_findTarget</a> (const <a class="el" href="structUA__NodeReferenceKind.html">UA_NodeReferenceKind</a> *rk, const <a class="el" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> *targetId)</td></tr>
+<tr class="separator:a3a2c11c602bded7f93ad30a55505233d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a109b0510a3b85d178c5c8cae165be4a9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a109b0510a3b85d178c5c8cae165be4a9">UA_Server_deleteSecureChannels</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server)</td></tr>
 <tr class="memdesc:a109b0510a3b85d178c5c8cae165be4a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">SecureChannel Handling.  <a href="ua__server__internal_8h.html#a109b0510a3b85d178c5c8cae165be4a9">More...</a><br /></td></tr>
 <tr class="separator:a109b0510a3b85d178c5c8cae165be4a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -183,13 +180,18 @@ Functions</h2></td></tr>
 <tr class="separator:a8a69cfd30819cac667d8833afb03a548"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28eace06e25695fd9bcaeed0edf06e91"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a28eace06e25695fd9bcaeed0edf06e91">UA_Server_configSecureChannel</a> (void *application, <a class="el" href="structUA__SecureChannel.html">UA_SecureChannel</a> *channel, const <a class="el" href="structUA__AsymmetricAlgorithmSecurityHeader.html">UA_AsymmetricAlgorithmSecurityHeader</a> *asymHeader)</td></tr>
 <tr class="separator:a28eace06e25695fd9bcaeed0edf06e91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaa94d0b7e1e23c3dea928b680040db7a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#aaa94d0b7e1e23c3dea928b680040db7a">sendServiceFault</a> (<a class="el" href="structUA__SecureChannel.html">UA_SecureChannel</a> *channel, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestHandle, const <a class="el" href="structUA__DataType.html">UA_DataType</a> *responseType, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> statusCode)</td></tr>
-<tr class="separator:aaa94d0b7e1e23c3dea928b680040db7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e177be27a5805ab73574d9e140c38db"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a9e177be27a5805ab73574d9e140c38db">sendServiceFault</a> (<a class="el" href="structUA__SecureChannel.html">UA_SecureChannel</a> *channel, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestHandle, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> statusCode)</td></tr>
+<tr class="separator:a9e177be27a5805ab73574d9e140c38db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40e910ff9955a066626edb62c89608c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a40e910ff9955a066626edb62c89608c9">UA_Server_closeSecureChannel</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__SecureChannel.html">UA_SecureChannel</a> *channel, <a class="el" href="ua__server__internal_8h.html#a73fc3452d6ddb8500490c76681ed0e15">UA_DiagnosticEvent</a> event)</td></tr>
 <tr class="separator:a40e910ff9955a066626edb62c89608c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85436ccd9c8888042b3c398efc5f8f71"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a85436ccd9c8888042b3c398efc5f8f71">getSecurityPolicyByUri</a> (const <a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *securityPolicyUri)</td></tr>
+<tr class="memdesc:a85436ccd9c8888042b3c398efc5f8f71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the a pointer to the context of a security policy supported by the server matched by the security policy uri.  <a href="ua__server__internal_8h.html#a85436ccd9c8888042b3c398efc5f8f71">More...</a><br /></td></tr>
+<tr class="separator:a85436ccd9c8888042b3c398efc5f8f71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acb8f56c43ea0acc7882221406e0a7e6f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#acb8f56c43ea0acc7882221406e0a7e6f">getNamespaceByName</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__String.html">UA_String</a> namespaceUri, size_t *foundIndex)</td></tr>
 <tr class="memdesc:acb8f56c43ea0acc7882221406e0a7e6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Session Handling.  <a href="ua__server__internal_8h.html#acb8f56c43ea0acc7882221406e0a7e6f">More...</a><br /></td></tr>
 <tr class="separator:acb8f56c43ea0acc7882221406e0a7e6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59bb1c8909e4de9bca97dfce9cdb9a58"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a59bb1c8909e4de9bca97dfce9cdb9a58">getNamespaceByIndex</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const size_t namespaceIndex, <a class="el" href="structUA__String.html">UA_String</a> *foundUri)</td></tr>
+<tr class="separator:a59bb1c8909e4de9bca97dfce9cdb9a58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad80de47992fe92bce8ae9697d207d45c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#ad80de47992fe92bce8ae9697d207d45c">getBoundSession</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__SecureChannel.html">UA_SecureChannel</a> *channel, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *token, <a class="el" href="structUA__Session.html">UA_Session</a> **session)</td></tr>
 <tr class="separator:ad80de47992fe92bce8ae9697d207d45c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34b8a46f24d3ab851d82107e1181ab62"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a34b8a46f24d3ab851d82107e1181ab62">UA_Server_createSession</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__SecureChannel.html">UA_SecureChannel</a> *channel, const <a class="el" href="structUA__CreateSessionRequest.html">UA_CreateSessionRequest</a> *request, <a class="el" href="structUA__Session.html">UA_Session</a> **session)</td></tr>
@@ -211,26 +213,26 @@ Functions</h2></td></tr>
 <tr class="separator:a8fc0d37a11d39dc3175b29c5ec622f54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1816470c83dc6297ba3f653b373b4146"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a1816470c83dc6297ba3f653b373b4146">addNamespace</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__String.html">UA_String</a> name)</td></tr>
 <tr class="separator:a1816470c83dc6297ba3f653b373b4146"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ee3516fdf90fed1d5ddcf5b31cfd2b7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a4ee3516fdf90fed1d5ddcf5b31cfd2b7">UA_Node_hasSubTypeOrInstances</a> (const <a class="el" href="structUA__NodeHead.html">UA_NodeHead</a> *head)</td></tr>
+<tr class="memitem:a4ee3516fdf90fed1d5ddcf5b31cfd2b7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a4ee3516fdf90fed1d5ddcf5b31cfd2b7">UA_Node_hasSubTypeOrInstances</a> (const <a class="el" href="structUA__NodeHead.html">UA_NodeHead</a> *head)</td></tr>
 <tr class="separator:a4ee3516fdf90fed1d5ddcf5b31cfd2b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a13b42b243c2fe8d75d3cd6e02e4dad45"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a13b42b243c2fe8d75d3cd6e02e4dad45">isNodeInTree</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *leafNode, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeToFind, const <a class="el" href="structUA__ReferenceTypeSet.html">UA_ReferenceTypeSet</a> *relevantRefs)</td></tr>
+<tr class="memitem:a13b42b243c2fe8d75d3cd6e02e4dad45"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a13b42b243c2fe8d75d3cd6e02e4dad45">isNodeInTree</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *leafNode, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeToFind, const <a class="el" href="structUA__ReferenceTypeSet.html">UA_ReferenceTypeSet</a> *relevantRefs)</td></tr>
 <tr class="memdesc:a13b42b243c2fe8d75d3cd6e02e4dad45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Recursively searches "upwards" in the tree following specific reference types.  <a href="ua__server__internal_8h.html#a13b42b243c2fe8d75d3cd6e02e4dad45">More...</a><br /></td></tr>
 <tr class="separator:a13b42b243c2fe8d75d3cd6e02e4dad45"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9539d7760b60ee4dba346a6b67b7f482"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a9539d7760b60ee4dba346a6b67b7f482">isNodeInTree_singleRef</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *leafNode, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeToFind, const <a class="el" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a> relevantRefTypeIndex)</td></tr>
+<tr class="memitem:a9539d7760b60ee4dba346a6b67b7f482"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a9539d7760b60ee4dba346a6b67b7f482">isNodeInTree_singleRef</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *leafNode, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeToFind, const <a class="el" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a> relevantRefTypeIndex)</td></tr>
 <tr class="memdesc:a9539d7760b60ee4dba346a6b67b7f482"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function with just a single ReferenceTypeIndex.  <a href="ua__server__internal_8h.html#a9539d7760b60ee4dba346a6b67b7f482">More...</a><br /></td></tr>
 <tr class="separator:a9539d7760b60ee4dba346a6b67b7f482"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70594b79b4747b6acebe031b60018573"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a70594b79b4747b6acebe031b60018573">browseRecursive</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, size_t startNodesSize, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *startNodes, <a class="el" href="types__generated_8h.html#a2e858f99c753ca75a81e40b49c3c035f">UA_BrowseDirection</a> browseDirection, const <a class="el" href="structUA__ReferenceTypeSet.html">UA_ReferenceTypeSet</a> *refTypes, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> nodeClassMask, <a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> includeStartNodes, size_t *resultsSize, <a class="el" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> **results)</td></tr>
+<tr class="memitem:a70594b79b4747b6acebe031b60018573"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a70594b79b4747b6acebe031b60018573">browseRecursive</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, size_t startNodesSize, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *startNodes, <a class="el" href="types__generated_8h.html#a2e858f99c753ca75a81e40b49c3c035f">UA_BrowseDirection</a> browseDirection, const <a class="el" href="structUA__ReferenceTypeSet.html">UA_ReferenceTypeSet</a> *refTypes, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> nodeClassMask, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> includeStartNodes, size_t *resultsSize, <a class="el" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> **results)</td></tr>
 <tr class="memdesc:a70594b79b4747b6acebe031b60018573"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an array with the hierarchy of nodes.  <a href="ua__server__internal_8h.html#a70594b79b4747b6acebe031b60018573">More...</a><br /></td></tr>
 <tr class="separator:a70594b79b4747b6acebe031b60018573"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a285e775f89fa65853e3b344ebe5c34ee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a285e775f89fa65853e3b344ebe5c34ee">referenceTypeIndices</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *refType, <a class="el" href="structUA__ReferenceTypeSet.html">UA_ReferenceTypeSet</a> *indices, <a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> includeSubtypes)</td></tr>
+<tr class="memitem:a285e775f89fa65853e3b344ebe5c34ee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a285e775f89fa65853e3b344ebe5c34ee">referenceTypeIndices</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *refType, <a class="el" href="structUA__ReferenceTypeSet.html">UA_ReferenceTypeSet</a> *indices, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> includeSubtypes)</td></tr>
 <tr class="memdesc:a285e775f89fa65853e3b344ebe5c34ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the bitfield indices of a ReferenceType and possibly its subtypes.  <a href="ua__server__internal_8h.html#a285e775f89fa65853e3b344ebe5c34ee">More...</a><br /></td></tr>
 <tr class="separator:a285e775f89fa65853e3b344ebe5c34ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf9a7d748920c049de8a1f4e7330e231"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#acf9a7d748920c049de8a1f4e7330e231">getParentTypeAndInterfaceHierarchy</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *typeNode, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> **typeHierarchy, size_t *typeHierarchySize)</td></tr>
 <tr class="memdesc:acf9a7d748920c049de8a1f4e7330e231"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the recursive type and interface hierarchy of the node.  <a href="ua__server__internal_8h.html#acf9a7d748920c049de8a1f4e7330e231">More...</a><br /></td></tr>
 <tr class="separator:acf9a7d748920c049de8a1f4e7330e231"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64cfb5ddd78a167508c6206daa7c3443"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a64cfb5ddd78a167508c6206daa7c3443">getInterfaceHierarchy</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *objectNode, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> **typeHierarchy, size_t *typeHierarchySize)</td></tr>
-<tr class="memdesc:a64cfb5ddd78a167508c6206daa7c3443"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the recursive interface hierarchy of the node.  <a href="ua__server__internal_8h.html#a64cfb5ddd78a167508c6206daa7c3443">More...</a><br /></td></tr>
-<tr class="separator:a64cfb5ddd78a167508c6206daa7c3443"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdf6978ee2f52533f0685ccc9aef783b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#acdf6978ee2f52533f0685ccc9aef783b">getAllInterfaceChildNodeIds</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *objectNode, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *objectTypeNode, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> **interfaceChildNodes, size_t *interfaceChildNodesSize)</td></tr>
+<tr class="memdesc:acdf6978ee2f52533f0685ccc9aef783b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the recursive interface hierarchy of the node.  <a href="ua__server__internal_8h.html#acdf6978ee2f52533f0685ccc9aef783b">More...</a><br /></td></tr>
+<tr class="separator:acdf6978ee2f52533f0685ccc9aef783b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a4d6b47be127c9569c01ca1a550dffe"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="unionUA__Node.html">UA_Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a6a4d6b47be127c9569c01ca1a550dffe">getNodeType</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeHead.html">UA_NodeHead</a> *nodeHead)</td></tr>
 <tr class="memdesc:a6a4d6b47be127c9569c01ca1a550dffe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the type node from the node on the stack top.  <a href="ua__server__internal_8h.html#a6a4d6b47be127c9569c01ca1a550dffe">More...</a><br /></td></tr>
 <tr class="separator:a6a4d6b47be127c9569c01ca1a550dffe"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -238,15 +240,15 @@ Functions</h2></td></tr>
 <tr class="separator:a28e3a23c173e6ff5742d30d5d63987fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae57bbf7eb6ca7a0a553673422119c89b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#ae57bbf7eb6ca7a0a553673422119c89b">UA_Server_processServiceOperations</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__Session.html">UA_Session</a> *session, <a class="el" href="ua__server__internal_8h.html#adab573da962fee8f85531c5ba9953023">UA_ServiceOperation</a> operationCallback, const void *context, const size_t *requestOperations, const <a class="el" href="structUA__DataType.html">UA_DataType</a> *requestOperationsType, size_t *responseOperations, const <a class="el" href="structUA__DataType.html">UA_DataType</a> *responseOperationsType)</td></tr>
 <tr class="separator:ae57bbf7eb6ca7a0a553673422119c89b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a32591a88591fbbec84c7c2e252f0a22f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a32591a88591fbbec84c7c2e252f0a22f">deleteNode</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> nodeId, <a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> deleteReferences)</td></tr>
+<tr class="memitem:a32591a88591fbbec84c7c2e252f0a22f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a32591a88591fbbec84c7c2e252f0a22f">deleteNode</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> nodeId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> deleteReferences)</td></tr>
 <tr class="memdesc:a32591a88591fbbec84c7c2e252f0a22f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal function calls, without locks.  <a href="ua__server__internal_8h.html#a32591a88591fbbec84c7c2e252f0a22f">More...</a><br /></td></tr>
 <tr class="separator:a32591a88591fbbec84c7c2e252f0a22f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0cbbe9e3b0ed20a44181e7577245937c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a0cbbe9e3b0ed20a44181e7577245937c">addNode</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="types__generated_8h.html#adf98bb5a5ac8e50eece68338a046a904">UA_NodeClass</a> nodeClass, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *requestedNewNodeId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *parentNodeId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *referenceTypeId, const <a class="el" href="structUA__QualifiedName.html">UA_QualifiedName</a> browseName, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *typeDefinition, const <a class="el" href="structUA__NodeAttributes.html">UA_NodeAttributes</a> *attr, const <a class="el" href="structUA__DataType.html">UA_DataType</a> *attributeType, void *nodeContext, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *outNewNodeId)</td></tr>
 <tr class="separator:a0cbbe9e3b0ed20a44181e7577245937c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44cc3c1e937cf9d78b10581761445030"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a44cc3c1e937cf9d78b10581761445030">addRef</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__Session.html">UA_Session</a> *session, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sourceId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *referenceTypeId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *targetId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> forward)</td></tr>
+<tr class="separator:a44cc3c1e937cf9d78b10581761445030"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f577b3f1a4e14c71afdc518e1ae230e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a5f577b3f1a4e14c71afdc518e1ae230e">setVariableNode_dataSource</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> nodeId, const <a class="el" href="structUA__DataSource.html">UA_DataSource</a> dataSource)</td></tr>
 <tr class="separator:a5f577b3f1a4e14c71afdc518e1ae230e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adea7071c5501ed94ec9e33442f1cae98"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#adea7071c5501ed94ec9e33442f1cae98">setMethodNode_callback</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> methodNodeId, <a class="el" href="nodestore_8h.html#a943f95365533842bb0938f2c6609a216">UA_MethodCallback</a> methodCallback)</td></tr>
-<tr class="separator:adea7071c5501ed94ec9e33442f1cae98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4ba419a6f4a19023344537a30ac9ab3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#ac4ba419a6f4a19023344537a30ac9ab3">writeAttribute</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__Session.html">UA_Session</a> *session, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, const <a class="el" href="common_8h.html#a4dc96c31672814d54f24409617bdbbe2">UA_AttributeId</a> attributeId, const void *attr, const <a class="el" href="structUA__DataType.html">UA_DataType</a> *attr_type)</td></tr>
 <tr class="separator:ac4ba419a6f4a19023344537a30ac9ab3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adea02c982c96a31c1a70bdd7d36c2c04"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__DataValue.html">UA_DataValue</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#adea02c982c96a31c1a70bdd7d36c2c04">readAttribute</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__ReadValueId.html">UA_ReadValueId</a> *item, <a class="el" href="types__generated_8h.html#ab298c4ff5eb700437114d0dc2db97ead">UA_TimestampsToReturn</a> timestamps)</td></tr>
@@ -263,11 +265,13 @@ Functions</h2></td></tr>
 <tr class="separator:a80f75e747d4643e8c1dfda4c6f881ad8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af08af968b9f53706cf456524f32ffa22"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#af08af968b9f53706cf456524f32ffa22">getNodeContext</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> nodeId, void **nodeContext)</td></tr>
 <tr class="separator:af08af968b9f53706cf456524f32ffa22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade6c18c651da6aefe87d87e29ec8458c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#ade6c18c651da6aefe87d87e29ec8458c">setNodeContext</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> nodeId, void *nodeContext)</td></tr>
+<tr class="separator:ade6c18c651da6aefe87d87e29ec8458c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7d2d762128db69a96d7b37b1c77e651"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#ad7d2d762128db69a96d7b37b1c77e651">removeCallback</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a> callbackId)</td></tr>
 <tr class="separator:ad7d2d762128db69a96d7b37b1c77e651"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f7baf9e2d906205b36b448e86a5b1b7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a3f7baf9e2d906205b36b448e86a5b1b7">changeRepeatedCallbackInterval</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a> callbackId, <a class="el" href="types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a> interval_ms)</td></tr>
 <tr class="separator:a3f7baf9e2d906205b36b448e86a5b1b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15efe5b2235395af803ac12f7fa98ca6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a15efe5b2235395af803ac12f7fa98ca6">addRepeatedCallback</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="server_8h.html#a68b1f0efce215c6832edde8745bb5215">UA_ServerCallback</a> callback, void *data, <a class="el" href="types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a> interval_ms, <a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a> *callbackId)</td></tr>
+<tr class="memitem:a15efe5b2235395af803ac12f7fa98ca6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a15efe5b2235395af803ac12f7fa98ca6">addRepeatedCallback</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="util_8h.html#a68b1f0efce215c6832edde8745bb5215">UA_ServerCallback</a> callback, void *data, <a class="el" href="types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a> interval_ms, <a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a> *callbackId)</td></tr>
 <tr class="separator:a15efe5b2235395af803ac12f7fa98ca6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a769bfb04d625c6add2b402bb4aa2be67"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a769bfb04d625c6add2b402bb4aa2be67">ZIP_HEAD</a> (<a class="el" href="ua__server__internal_8h.html#ab6e6698521097ee2255a9ba2411cdef9">RefHead</a>, <a class="el" href="structRefEntry.html">RefEntry</a>)</td></tr>
 <tr class="separator:a769bfb04d625c6add2b402bb4aa2be67"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -275,35 +279,36 @@ Functions</h2></td></tr>
 <tr class="separator:a0104553e5f8348e0acf5fd25b6e7c82b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adaca3859fc3d4e37d03f1bd361f4b0da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#adaca3859fc3d4e37d03f1bd361f4b0da">RefTree_clear</a> (<a class="el" href="structRefTree.html">RefTree</a> *rt)</td></tr>
 <tr class="separator:adaca3859fc3d4e37d03f1bd361f4b0da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a208b52ad58218bce4b35afab792a350e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a208b52ad58218bce4b35afab792a350e">RefTree_add</a> (<a class="el" href="structRefTree.html">RefTree</a> *rt, const <a class="el" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> *target, <a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> *duplicate)</td></tr>
-<tr class="separator:a208b52ad58218bce4b35afab792a350e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e542086cc63dd1d093e63a9a7387364"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a4e542086cc63dd1d093e63a9a7387364">RefTree_addNodeId</a> (<a class="el" href="structRefTree.html">RefTree</a> *rt, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *target, <a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> *duplicate)</td></tr>
+<tr class="memitem:a4e542086cc63dd1d093e63a9a7387364"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a4e542086cc63dd1d093e63a9a7387364">RefTree_addNodeId</a> (<a class="el" href="structRefTree.html">RefTree</a> *rt, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *target, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> *duplicate)</td></tr>
 <tr class="separator:a4e542086cc63dd1d093e63a9a7387364"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b9faa6cfbf04706e14e7dbacac52175"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a2b9faa6cfbf04706e14e7dbacac52175">RefTree_contains</a> (<a class="el" href="structRefTree.html">RefTree</a> *rt, const <a class="el" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> *target)</td></tr>
+<tr class="memitem:a2b9faa6cfbf04706e14e7dbacac52175"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a2b9faa6cfbf04706e14e7dbacac52175">RefTree_contains</a> (<a class="el" href="structRefTree.html">RefTree</a> *rt, const <a class="el" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> *target)</td></tr>
 <tr class="separator:a2b9faa6cfbf04706e14e7dbacac52175"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac74af95e036c45ae5e960e2deac92089"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#ac74af95e036c45ae5e960e2deac92089">RefTree_containsNodeId</a> (<a class="el" href="structRefTree.html">RefTree</a> *rt, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *target)</td></tr>
+<tr class="memitem:ac74af95e036c45ae5e960e2deac92089"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#ac74af95e036c45ae5e960e2deac92089">RefTree_containsNodeId</a> (<a class="el" href="structRefTree.html">RefTree</a> *rt, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *target)</td></tr>
 <tr class="separator:ac74af95e036c45ae5e960e2deac92089"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61250c94169c5485329c332b578eeddf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a61250c94169c5485329c332b578eeddf">ReadWithNode</a> (const <a class="el" href="unionUA__Node.html">UA_Node</a> *node, <a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__Session.html">UA_Session</a> *session, <a class="el" href="types__generated_8h.html#ab298c4ff5eb700437114d0dc2db97ead">UA_TimestampsToReturn</a> timestampsToReturn, const <a class="el" href="structUA__ReadValueId.html">UA_ReadValueId</a> *id, <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *v)</td></tr>
 <tr class="memdesc:a61250c94169c5485329c332b578eeddf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check Information Model Consistency.  <a href="ua__server__internal_8h.html#a61250c94169c5485329c332b578eeddf">More...</a><br /></td></tr>
 <tr class="separator:a61250c94169c5485329c332b578eeddf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d04cf5575d6b25375d7a8a3fbc4c43d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a3d04cf5575d6b25375d7a8a3fbc4c43d">readValueAttribute</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__Session.html">UA_Session</a> *session, const <a class="el" href="structUA__VariableNode.html">UA_VariableNode</a> *vn, <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *v)</td></tr>
 <tr class="separator:a3d04cf5575d6b25375d7a8a3fbc4c43d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae947844e33b82a7ad6f7033b258a4e39"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#ae947844e33b82a7ad6f7033b258a4e39">compatibleValue</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__Session.html">UA_Session</a> *session, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *targetDataTypeId, <a class="el" href="types_8h.html#a01ce3c3b2fb34ef81c97c313f516004e">UA_Int32</a> targetValueRank, size_t targetArrayDimensionsSize, const <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *targetArrayDimensions, const <a class="el" href="structUA__Variant.html">UA_Variant</a> *value, const <a class="el" href="structUA__NumericRange.html">UA_NumericRange</a> *range)</td></tr>
-<tr class="memdesc:ae947844e33b82a7ad6f7033b258a4e39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test whether the value matches a variable definition given by.  <a href="ua__server__internal_8h.html#ae947844e33b82a7ad6f7033b258a4e39">More...</a><br /></td></tr>
-<tr class="separator:ae947844e33b82a7ad6f7033b258a4e39"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ff7c4925304eddea65f1e42ac493c42"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a7ff7c4925304eddea65f1e42ac493c42">compatibleDataTypes</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *dataType, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *constraintDataType)</td></tr>
+<tr class="memitem:a071955bfb54d73b5e3ad8c03525c9810"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a071955bfb54d73b5e3ad8c03525c9810">compatibleValue</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__Session.html">UA_Session</a> *session, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *targetDataTypeId, <a class="el" href="types_8h.html#a01ce3c3b2fb34ef81c97c313f516004e">UA_Int32</a> targetValueRank, size_t targetArrayDimensionsSize, const <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *targetArrayDimensions, const <a class="el" href="structUA__Variant.html">UA_Variant</a> *value, const <a class="el" href="structUA__NumericRange.html">UA_NumericRange</a> *range, const char **reason)</td></tr>
+<tr class="memdesc:a071955bfb54d73b5e3ad8c03525c9810"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test whether the value matches a variable definition given by.  <a href="ua__server__internal_8h.html#a071955bfb54d73b5e3ad8c03525c9810">More...</a><br /></td></tr>
+<tr class="separator:a071955bfb54d73b5e3ad8c03525c9810"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ff7c4925304eddea65f1e42ac493c42"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a7ff7c4925304eddea65f1e42ac493c42">compatibleDataTypes</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *dataType, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *constraintDataType)</td></tr>
 <tr class="memdesc:a7ff7c4925304eddea65f1e42ac493c42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is the DataType compatible.  <a href="ua__server__internal_8h.html#a7ff7c4925304eddea65f1e42ac493c42">More...</a><br /></td></tr>
 <tr class="separator:a7ff7c4925304eddea65f1e42ac493c42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af6f9b7b88214cb8a6b4b6442c84ace9e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#af6f9b7b88214cb8a6b4b6442c84ace9e">compatibleValueDataType</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__DataType.html">UA_DataType</a> *dataType, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *constraintDataType)</td></tr>
+<tr class="memitem:acf89e3f898471fd73c3a261071c7e1a8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#acf89e3f898471fd73c3a261071c7e1a8">adjustValueType</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__Variant.html">UA_Variant</a> *value, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *targetDataTypeId)</td></tr>
+<tr class="memdesc:acf89e3f898471fd73c3a261071c7e1a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set to the target type if compatible.  <a href="ua__server__internal_8h.html#acf89e3f898471fd73c3a261071c7e1a8">More...</a><br /></td></tr>
+<tr class="separator:acf89e3f898471fd73c3a261071c7e1a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6f9b7b88214cb8a6b4b6442c84ace9e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#af6f9b7b88214cb8a6b4b6442c84ace9e">compatibleValueDataType</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__DataType.html">UA_DataType</a> *dataType, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *constraintDataType)</td></tr>
 <tr class="memdesc:af6f9b7b88214cb8a6b4b6442c84ace9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is the Value compatible with the DataType? Can perform additional checks compared to compatibleDataTypes.  <a href="ua__server__internal_8h.html#af6f9b7b88214cb8a6b4b6442c84ace9e">More...</a><br /></td></tr>
 <tr class="separator:af6f9b7b88214cb8a6b4b6442c84ace9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5492d3c39f3f85841bcdbbfbf89dba61"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a5492d3c39f3f85841bcdbbfbf89dba61">compatibleArrayDimensions</a> (size_t constraintArrayDimensionsSize, const <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *constraintArrayDimensions, size_t testArrayDimensionsSize, const <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *testArrayDimensions)</td></tr>
+<tr class="memitem:a5492d3c39f3f85841bcdbbfbf89dba61"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a5492d3c39f3f85841bcdbbfbf89dba61">compatibleArrayDimensions</a> (size_t constraintArrayDimensionsSize, const <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *constraintArrayDimensions, size_t testArrayDimensionsSize, const <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *testArrayDimensions)</td></tr>
 <tr class="separator:a5492d3c39f3f85841bcdbbfbf89dba61"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14bab653104b9483029d13bcfd05db08"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a14bab653104b9483029d13bcfd05db08">compatibleValueArrayDimensions</a> (const <a class="el" href="structUA__Variant.html">UA_Variant</a> *value, size_t targetArrayDimensionsSize, const <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *targetArrayDimensions)</td></tr>
+<tr class="memitem:a14bab653104b9483029d13bcfd05db08"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a14bab653104b9483029d13bcfd05db08">compatibleValueArrayDimensions</a> (const <a class="el" href="structUA__Variant.html">UA_Variant</a> *value, size_t targetArrayDimensionsSize, const <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *targetArrayDimensions)</td></tr>
 <tr class="separator:a14bab653104b9483029d13bcfd05db08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79d0e235d9edc9ea41f0996a7449de86"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a79d0e235d9edc9ea41f0996a7449de86">compatibleValueRankArrayDimensions</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__Session.html">UA_Session</a> *session, <a class="el" href="types_8h.html#a01ce3c3b2fb34ef81c97c313f516004e">UA_Int32</a> valueRank, size_t arrayDimensionsSize)</td></tr>
+<tr class="memitem:a79d0e235d9edc9ea41f0996a7449de86"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a79d0e235d9edc9ea41f0996a7449de86">compatibleValueRankArrayDimensions</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__Session.html">UA_Session</a> *session, <a class="el" href="types_8h.html#a01ce3c3b2fb34ef81c97c313f516004e">UA_Int32</a> valueRank, size_t arrayDimensionsSize)</td></tr>
 <tr class="separator:a79d0e235d9edc9ea41f0996a7449de86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade671e7f8781bb1502c4c0bf4a8dfd99"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#ade671e7f8781bb1502c4c0bf4a8dfd99">compatibleValueRanks</a> (<a class="el" href="types_8h.html#a01ce3c3b2fb34ef81c97c313f516004e">UA_Int32</a> valueRank, <a class="el" href="types_8h.html#a01ce3c3b2fb34ef81c97c313f516004e">UA_Int32</a> constraintValueRank)</td></tr>
+<tr class="memitem:ade671e7f8781bb1502c4c0bf4a8dfd99"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#ade671e7f8781bb1502c4c0bf4a8dfd99">compatibleValueRanks</a> (<a class="el" href="types_8h.html#a01ce3c3b2fb34ef81c97c313f516004e">UA_Int32</a> valueRank, <a class="el" href="types_8h.html#a01ce3c3b2fb34ef81c97c313f516004e">UA_Int32</a> constraintValueRank)</td></tr>
 <tr class="separator:ade671e7f8781bb1502c4c0bf4a8dfd99"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17c604e06102bb703be57919fdcb67c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a17c604e06102bb703be57919fdcb67c2">Operation_Browse</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="structUA__Session.html">UA_Session</a> *session, const <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *maxrefs, const <a class="el" href="structUA__BrowseDescription.html">UA_BrowseDescription</a> *descr, <a class="el" href="structUA__BrowseResult.html">UA_BrowseResult</a> *result)</td></tr>
 <tr class="separator:a17c604e06102bb703be57919fdcb67c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -323,9 +328,9 @@ Functions</h2></td></tr>
 <tr class="separator:a4219786b7315fe096708b005683f4dd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58cdb401603fd3a15da668bceda02822"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a58cdb401603fd3a15da668bceda02822">writeNs0VariableArray</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> id, void *v, size_t length, const <a class="el" href="structUA__DataType.html">UA_DataType</a> *type)</td></tr>
 <tr class="separator:a58cdb401603fd3a15da668bceda02822"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5827e6a82144a4e4d35fcfd038ef7f1f"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="unionUA__Node.html">UA_Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#a5827e6a82144a4e4d35fcfd038ef7f1f">UA_NODESTORE_GETFROMREF</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__ReferenceTarget.html">UA_ReferenceTarget</a> *target)</td></tr>
-<tr class="memdesc:a5827e6a82144a4e4d35fcfd038ef7f1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns NULL if the target is an external Reference (per the ExpandedNodeId)  <a href="ua__server__internal_8h.html#a5827e6a82144a4e4d35fcfd038ef7f1f">More...</a><br /></td></tr>
-<tr class="separator:a5827e6a82144a4e4d35fcfd038ef7f1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abab9fd5a2290a6ae8dc71dc07d94e348"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="unionUA__Node.html">UA_Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__server__internal_8h.html#abab9fd5a2290a6ae8dc71dc07d94e348">UA_NODESTORE_GETFROMREF</a> (<a class="el" href="structUA__Server.html">UA_Server</a> *server, <a class="el" href="unionUA__NodePointer.html">UA_NodePointer</a> target)</td></tr>
+<tr class="memdesc:abab9fd5a2290a6ae8dc71dc07d94e348"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns NULL if the target is an external Reference (per the ExpandedNodeId)  <a href="ua__server__internal_8h.html#abab9fd5a2290a6ae8dc71dc07d94e348">More...</a><br /></td></tr>
+<tr class="separator:abab9fd5a2290a6ae8dc71dc07d94e348"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -360,7 +365,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00585">585</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00647">647</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
@@ -390,7 +395,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00588">588</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00650">650</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
@@ -428,7 +433,7 @@ Variables</h2></td></tr>
 <b>Value:</b><div class="fragment"><div class="line">    server-&gt;config.nodestore.getNodeCopy(server-&gt;config.nodestore.context, \</div>
 <div class="line">                                         nodeid, outnode)</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00598">598</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00660">660</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
@@ -460,7 +465,7 @@ Variables</h2></td></tr>
 <b>Value:</b><div class="fragment"><div class="line">    server-&gt;config.nodestore.getReferenceTypeId(server-&gt;config.nodestore.context, \</div>
 <div class="line">                                                index)</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00612">612</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00674">674</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
@@ -498,7 +503,7 @@ Variables</h2></td></tr>
 <b>Value:</b><div class="fragment"><div class="line">    server-&gt;config.nodestore.insertNode(server-&gt;config.nodestore.context, \</div>
 <div class="line">                                        node, addedNodeId)</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00602">602</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00664">664</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
@@ -530,7 +535,7 @@ Variables</h2></td></tr>
 
 <p>Nodestore Access Macros. </p>
 
-<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00582">582</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00644">644</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
@@ -560,7 +565,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00595">595</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00657">657</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
@@ -590,7 +595,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00609">609</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00671">671</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
@@ -620,7 +625,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00606">606</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00668">668</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
@@ -642,7 +647,7 @@ Variables</h2></td></tr>
 <p>The layout of the targets array is as follows:</p>
 <p>| Targets [ExpandedNodeId, n times] | Tree [<a class="el" href="structRefEntry.html">RefEntry</a>, n times] | </p>
 
-<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00443">443</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00468">468</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
@@ -687,7 +692,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00452">452</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00477">477</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
@@ -720,7 +725,7 @@ Variables</h2></td></tr>
 <p>Node Handling. </p>
 <p>Calls the callback with the node retrieved from the nodestore on top of the stack. Either a copy or the original node for in-situ editing. Depends on multithreading and the nodestore. </p>
 
-<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00243">243</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00251">251</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
@@ -739,7 +744,7 @@ Variables</h2></td></tr>
 <p>Many services come as an array of operations. </p>
 <p>This function generalizes the processing of the operations. </p>
 
-<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00323">323</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00331">331</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
@@ -768,7 +773,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a73fc3452d6ddb8500490c76681ed0e15ac667b77fc6b4f78abda0900ec3489481"></a>UA_DIAGNOSTICEVENT_PURGE&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00058">58</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00059">59</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
@@ -788,7 +793,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a6c6363a48b2fb5162a6c21eee658bba1a81e79cd60efd6a6de4610a7889d7bf73"></a>UA_SERVERLIFECYLE_RUNNING&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00079">79</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00080">80</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
@@ -1042,6 +1047,58 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a44cc3c1e937cf9d78b10581761445030"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44cc3c1e937cf9d78b10581761445030">&#9670;&nbsp;</a></span>addRef()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> addRef </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structUA__Session.html">UA_Session</a> *&#160;</td>
+          <td class="paramname"><em>session</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
+          <td class="paramname"><em>sourceId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
+          <td class="paramname"><em>referenceTypeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
+          <td class="paramname"><em>targetId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td>
+          <td class="paramname"><em>forward</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a15efe5b2235395af803ac12f7fa98ca6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a15efe5b2235395af803ac12f7fa98ca6">&#9670;&nbsp;</a></span>addRepeatedCallback()</h2>
 
@@ -1057,7 +1114,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="server_8h.html#a68b1f0efce215c6832edde8745bb5215">UA_ServerCallback</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="util_8h.html#a68b1f0efce215c6832edde8745bb5215">UA_ServerCallback</a>&#160;</td>
           <td class="paramname"><em>callback</em>, </td>
         </tr>
         <tr>
@@ -1085,6 +1142,42 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="acf89e3f898471fd73c3a261071c7e1a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf89e3f898471fd73c3a261071c7e1a8">&#9670;&nbsp;</a></span>adjustValueType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void adjustValueType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structUA__Variant.html">UA_Variant</a> *&#160;</td>
+          <td class="paramname"><em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
+          <td class="paramname"><em>targetDataTypeId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set to the target type if compatible. </p>
 
 </div>
 </div>
@@ -1133,7 +1226,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td>
           <td class="paramname"><em>includeStartNodes</em>, </td>
         </tr>
         <tr>
@@ -1242,7 +1335,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> compatibleArrayDimensions </td>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> compatibleArrayDimensions </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>constraintArrayDimensionsSize</em>, </td>
@@ -1282,7 +1375,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> compatibleDataTypes </td>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> compatibleDataTypes </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
@@ -1311,14 +1404,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ae947844e33b82a7ad6f7033b258a4e39"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae947844e33b82a7ad6f7033b258a4e39">&#9670;&nbsp;</a></span>compatibleValue()</h2>
+<a id="a071955bfb54d73b5e3ad8c03525c9810"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a071955bfb54d73b5e3ad8c03525c9810">&#9670;&nbsp;</a></span>compatibleValue()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> compatibleValue </td>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> compatibleValue </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
@@ -1363,7 +1456,13 @@ Variables</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="structUA__NumericRange.html">UA_NumericRange</a> *&#160;</td>
-          <td class="paramname"><em>range</em>&#160;</td>
+          <td class="paramname"><em>range</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char **&#160;</td>
+          <td class="paramname"><em>reason</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1377,8 +1476,9 @@ Variables</h2></td></tr>
 <ul>
 <li>datatype</li>
 <li>valueranke</li>
-<li>array dimensions. Sometimes it can be necessary to transform the content of the value, e.g. byte array to bytestring or uint32 to some enum. If editableValue is non-NULL, we try to create a matching variant that points to the original data. </li>
+<li>array dimensions. Sometimes it can be necessary to transform the content of the value, e.g. byte array to bytestring or uint32 to some enum. If editableValue is non-NULL, we try to create a matching variant that points to the original data.</li>
 </ul>
+<p>The reason is set whenever the return value is false </p>
 
 </div>
 </div>
@@ -1389,7 +1489,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> compatibleValueArrayDimensions </td>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> compatibleValueArrayDimensions </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structUA__Variant.html">UA_Variant</a> *&#160;</td>
           <td class="paramname"><em>value</em>, </td>
@@ -1423,7 +1523,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> compatibleValueDataType </td>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> compatibleValueDataType </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
@@ -1459,7 +1559,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> compatibleValueRankArrayDimensions </td>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> compatibleValueRankArrayDimensions </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
@@ -1499,7 +1599,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> compatibleValueRanks </td>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> compatibleValueRanks </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="types_8h.html#a01ce3c3b2fb34ef81c97c313f516004e">UA_Int32</a>&#160;</td>
           <td class="paramname"><em>valueRank</em>, </td>
@@ -1541,7 +1641,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td>
           <td class="paramname"><em>deleteReferences</em>&#160;</td>
         </tr>
         <tr>
@@ -1553,6 +1653,54 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Internal function calls, without locks. </p>
+
+</div>
+</div>
+<a id="acdf6978ee2f52533f0685ccc9aef783b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdf6978ee2f52533f0685ccc9aef783b">&#9670;&nbsp;</a></span>getAllInterfaceChildNodeIds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> getAllInterfaceChildNodeIds </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
+          <td class="paramname"><em>objectNode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
+          <td class="paramname"><em>objectTypeNode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structUA__NodeId.html">UA_NodeId</a> **&#160;</td>
+          <td class="paramname"><em>interfaceChildNodes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t *&#160;</td>
+          <td class="paramname"><em>interfaceChildNodesSize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the recursive interface hierarchy of the node. </p>
 
 </div>
 </div>
@@ -1596,14 +1744,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a64cfb5ddd78a167508c6206daa7c3443"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a64cfb5ddd78a167508c6206daa7c3443">&#9670;&nbsp;</a></span>getInterfaceHierarchy()</h2>
+<a id="a59bb1c8909e4de9bca97dfce9cdb9a58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59bb1c8909e4de9bca97dfce9cdb9a58">&#9670;&nbsp;</a></span>getNamespaceByIndex()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> getInterfaceHierarchy </td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> getNamespaceByIndex </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
@@ -1611,20 +1759,14 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
-          <td class="paramname"><em>objectNode</em>, </td>
+          <td class="paramtype">const size_t&#160;</td>
+          <td class="paramname"><em>namespaceIndex</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structUA__NodeId.html">UA_NodeId</a> **&#160;</td>
-          <td class="paramname"><em>typeHierarchy</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t *&#160;</td>
-          <td class="paramname"><em>typeHierarchySize</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="structUA__String.html">UA_String</a> *&#160;</td>
+          <td class="paramname"><em>foundUri</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1633,8 +1775,6 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Returns the recursive interface hierarchy of the node. </p>
 
 </div>
 </div>
@@ -1781,6 +1921,36 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a85436ccd9c8888042b3c398efc5f8f71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85436ccd9c8888042b3c398efc5f8f71">&#9670;&nbsp;</a></span>getSecurityPolicyByUri()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a>* getSecurityPolicyByUri </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
+          <td class="paramname"><em>securityPolicyUri</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the a pointer to the context of a security policy supported by the server matched by the security policy uri. </p>
+
+</div>
+</div>
 <a id="aa6ec144c38e96e79c2d3026185c1b257"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa6ec144c38e96e79c2d3026185c1b257">&#9670;&nbsp;</a></span>getSessionByToken()</h2>
 
@@ -1816,7 +1986,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> isNodeInTree </td>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> isNodeInTree </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
@@ -1858,7 +2028,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> isNodeInTree_singleRef </td>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> isNodeInTree_singleRef </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
@@ -2175,7 +2345,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td>
           <td class="paramname"><em>includeSubtypes</em>&#160;</td>
         </tr>
         <tr>
@@ -2188,40 +2358,6 @@ Variables</h2></td></tr>
 
 <p>Get the bitfield indices of a ReferenceType and possibly its subtypes. </p>
 <p>refType must point to a ReferenceTypeNode. </p>
-
-</div>
-</div>
-<a id="a208b52ad58218bce4b35afab792a350e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a208b52ad58218bce4b35afab792a350e">&#9670;&nbsp;</a></span>RefTree_add()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> RefTree_add </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structRefTree.html">RefTree</a> *&#160;</td>
-          <td class="paramname"><em>rt</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> *&#160;</td>
-          <td class="paramname"><em>target</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> *&#160;</td>
-          <td class="paramname"><em>duplicate</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
 
 </div>
 </div>
@@ -2246,7 +2382,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> *&#160;</td>
           <td class="paramname"><em>duplicate</em>&#160;</td>
         </tr>
         <tr>
@@ -2284,7 +2420,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> RefTree_contains </td>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> RefTree_contains </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structRefTree.html">RefTree</a> *&#160;</td>
           <td class="paramname"><em>rt</em>, </td>
@@ -2312,7 +2448,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> RefTree_containsNodeId </td>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> RefTree_containsNodeId </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structRefTree.html">RefTree</a> *&#160;</td>
           <td class="paramname"><em>rt</em>, </td>
@@ -2431,8 +2567,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="aaa94d0b7e1e23c3dea928b680040db7a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa94d0b7e1e23c3dea928b680040db7a">&#9670;&nbsp;</a></span>sendServiceFault()</h2>
+<a id="a9e177be27a5805ab73574d9e140c38db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e177be27a5805ab73574d9e140c38db">&#9670;&nbsp;</a></span>sendServiceFault()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2458,12 +2594,6 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>responseType</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td>
           <td class="paramname"><em>statusCode</em>&#160;</td>
         </tr>
@@ -2477,14 +2607,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="adea7071c5501ed94ec9e33442f1cae98"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adea7071c5501ed94ec9e33442f1cae98">&#9670;&nbsp;</a></span>setMethodNode_callback()</h2>
+<a id="ade6c18c651da6aefe87d87e29ec8458c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade6c18c651da6aefe87d87e29ec8458c">&#9670;&nbsp;</a></span>setNodeContext()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> setMethodNode_callback </td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> setNodeContext </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td>
           <td class="paramname"><em>server</em>, </td>
@@ -2492,14 +2622,14 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>methodNodeId</em>, </td>
+          <td class="paramtype"><a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="nodestore_8h.html#a943f95365533842bb0938f2c6609a216">UA_MethodCallback</a>&#160;</td>
-          <td class="paramname"><em>methodCallback</em>&#160;</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>nodeContext</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -2600,7 +2730,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> UA_Node_hasSubTypeOrInstances </td>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> UA_Node_hasSubTypeOrInstances </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structUA__NodeHead.html">UA_NodeHead</a> *&#160;</td>
           <td class="paramname"><em>head</em></td><td>)</td>
@@ -2611,17 +2741,17 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a0d6e3892796ed16a41898b417e13def0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d6e3892796ed16a41898b417e13def0">&#9670;&nbsp;</a></span>UA_NodeReferenceKind_findTarget()</h2>
+<a id="a3a2c11c602bded7f93ad30a55505233d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a2c11c602bded7f93ad30a55505233d">&#9670;&nbsp;</a></span>UA_NodeReferenceKind_findTarget()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structUA__ReferenceTarget.html">UA_ReferenceTarget</a>* UA_NodeReferenceKind_findTarget </td>
+          <td class="memname">const <a class="el" href="structUA__ReferenceTarget.html">UA_ReferenceTarget</a>* UA_NodeReferenceKind_findTarget </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structUA__NodeReferenceKind.html">UA_NodeReferenceKind</a> *&#160;</td>
-          <td class="paramname"><em>kind</em>, </td>
+          <td class="paramname"><em>rk</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -2639,54 +2769,8 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ac962802700878dbae2580a7e8707fa6b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac962802700878dbae2580a7e8707fa6b">&#9670;&nbsp;</a></span>UA_NodeReferenceKind_firstTarget()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structUA__ReferenceTarget.html">UA_ReferenceTarget</a>* UA_NodeReferenceKind_firstTarget </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeReferenceKind.html">UA_NodeReferenceKind</a> *&#160;</td>
-          <td class="paramname"><em>kind</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a845d7b9320847d0e1d71037fe82a40d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a845d7b9320847d0e1d71037fe82a40d7">&#9670;&nbsp;</a></span>UA_NodeReferenceKind_nextTarget()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structUA__ReferenceTarget.html">UA_ReferenceTarget</a>* UA_NodeReferenceKind_nextTarget </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeReferenceKind.html">UA_NodeReferenceKind</a> *&#160;</td>
-          <td class="paramname"><em>kind</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__ReferenceTarget.html">UA_ReferenceTarget</a> *&#160;</td>
-          <td class="paramname"><em>current</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a5827e6a82144a4e4d35fcfd038ef7f1f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5827e6a82144a4e4d35fcfd038ef7f1f">&#9670;&nbsp;</a></span>UA_NODESTORE_GETFROMREF()</h2>
+<a id="abab9fd5a2290a6ae8dc71dc07d94e348"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abab9fd5a2290a6ae8dc71dc07d94e348">&#9670;&nbsp;</a></span>UA_NODESTORE_GETFROMREF()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2700,7 +2784,7 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__ReferenceTarget.html">UA_ReferenceTarget</a> *&#160;</td>
+          <td class="paramtype"><a class="el" href="unionUA__NodePointer.html">UA_NodePointer</a>&#160;</td>
           <td class="paramname"><em>target</em>&#160;</td>
         </tr>
         <tr>
@@ -2927,7 +3011,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>SecureChannel Handling. </p>
-<p>Remove a all securechannels </p>
+<p>Remove all securechannels </p>
 
 </div>
 </div>

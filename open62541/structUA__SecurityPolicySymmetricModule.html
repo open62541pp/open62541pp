@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">open62541
-   &#160;<span id="projectnumber">1.2.6</span>
+   &#160;<span id="projectnumber">1.3.5</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -75,10 +75,10 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a5fac04d880db66d61377850deb5dd120"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicySymmetricModule.html#a5fac04d880db66d61377850deb5dd120">generateKey</a> )(const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *secret, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *seed, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *out)</td></tr>
-<tr class="separator:a5fac04d880db66d61377850deb5dd120"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1509c18ec9e335b4555860fe9ec10f53"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicySymmetricModule.html#a1509c18ec9e335b4555860fe9ec10f53">generateNonce</a> )(const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *out)</td></tr>
-<tr class="separator:a1509c18ec9e335b4555860fe9ec10f53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcaceb4ea226d6521c8ae113c8099f11"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicySymmetricModule.html#abcaceb4ea226d6521c8ae113c8099f11">generateKey</a> )(void *policyContext, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *secret, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *seed, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *out)</td></tr>
+<tr class="separator:abcaceb4ea226d6521c8ae113c8099f11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b3cf8ec7f5f327114335952dcabff9e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicySymmetricModule.html#a3b3cf8ec7f5f327114335952dcabff9e">generateNonce</a> )(void *policyContext, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *out)</td></tr>
+<tr class="separator:a3b3cf8ec7f5f327114335952dcabff9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed4f6337bfeb9a5d5197a040b0039867"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicySymmetricModule.html#aed4f6337bfeb9a5d5197a040b0039867">secureChannelNonceLength</a></td></tr>
 <tr class="separator:aed4f6337bfeb9a5d5197a040b0039867"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acf4a732ba6633cf157a4bfe6322d9f85"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__SecurityPolicyCryptoModule.html">UA_SecurityPolicyCryptoModule</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicySymmetricModule.html#acf4a732ba6633cf157a4bfe6322d9f85">cryptoModule</a></td></tr>
@@ -86,7 +86,7 @@ Data Fields</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00210">210</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00174">174</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
 <a id="acf4a732ba6633cf157a4bfe6322d9f85"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acf4a732ba6633cf157a4bfe6322d9f85">&#9670;&nbsp;</a></span>cryptoModule</h2>
@@ -100,39 +100,39 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00243">243</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00203">203</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
 
 </div>
 </div>
-<a id="a5fac04d880db66d61377850deb5dd120"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5fac04d880db66d61377850deb5dd120">&#9670;&nbsp;</a></span>generateKey</h2>
+<a id="abcaceb4ea226d6521c8ae113c8099f11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abcaceb4ea226d6521c8ae113c8099f11">&#9670;&nbsp;</a></span>generateKey</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_SecurityPolicySymmetricModule::generateKey) (const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *secret, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *seed, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *out)</td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_SecurityPolicySymmetricModule::generateKey) (void *policyContext, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *secret, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *seed, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *out)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00221">221</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00185">185</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
 
 </div>
 </div>
-<a id="a1509c18ec9e335b4555860fe9ec10f53"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1509c18ec9e335b4555860fe9ec10f53">&#9670;&nbsp;</a></span>generateNonce</h2>
+<a id="a3b3cf8ec7f5f327114335952dcabff9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b3cf8ec7f5f327114335952dcabff9e">&#9670;&nbsp;</a></span>generateNonce</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_SecurityPolicySymmetricModule::generateNonce) (const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *out)</td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_SecurityPolicySymmetricModule::generateNonce) (void *policyContext, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *out)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00234">234</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00195">195</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
 
 </div>
 </div>
@@ -148,7 +148,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00241">241</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00201">201</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
 
 </div>
 </div>

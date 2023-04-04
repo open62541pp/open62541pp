@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">open62541
-   &#160;<span id="projectnumber">1.2.6</span>
+   &#160;<span id="projectnumber">1.3.5</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -113,16 +113,38 @@ $(function() {
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<a class="code" href="config_8h.html#ae2a857f3db1005cc1b5a41effd3adac6">_UA_END_DECLS</a></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#ifdef UA_ENABLE_PUBSUB_ENCRYPTION</span></div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* UA_SECURITYPOLICIES_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;UA_EXPORT <a class="code" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;UA_PubSubSecurityPolicy_Aes128Ctr(UA_PubSubSecurityPolicy *policy,</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                                  <span class="keyword">const</span> <a class="code" href="structUA__Logger.html">UA_Logger</a> *logger);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;UA_EXPORT <a class="code" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;UA_PubSubSecurityPolicy_Aes256Ctr(UA_PubSubSecurityPolicy *policy,</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                                  <span class="keyword">const</span> <a class="code" href="structUA__Logger.html">UA_Logger</a> *logger);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#ifdef UA_ENABLE_TPM2_SECURITY</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;UA_EXPORT <a class="code" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;UA_PubSubSecurityPolicy_Aes128CtrTPM(UA_PubSubSecurityPolicy *policy, <span class="keywordtype">char</span> *userpin, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> slotId,</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                                     <span class="keywordtype">char</span> *encryptionKeyLabel, <span class="keywordtype">char</span> *signingKeyLabel, <span class="keyword">const</span> <a class="code" href="structUA__Logger.html">UA_Logger</a> *logger);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;UA_EXPORT <a class="code" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;UA_PubSubSecurityPolicy_Aes256CtrTPM(UA_PubSubSecurityPolicy *policy, <span class="keywordtype">char</span> *userpin, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> slotId,</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                                     <span class="keywordtype">char</span> *encryptionKeyLabel, <span class="keywordtype">char</span> *signingKeyLabel, <span class="keyword">const</span> <a class="code" href="structUA__Logger.html">UA_Logger</a> *logger);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<a class="code" href="config_8h.html#ae2a857f3db1005cc1b5a41effd3adac6">_UA_END_DECLS</a></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* UA_SECURITYPOLICIES_H_ */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aconfig_8h_html_ae2a857f3db1005cc1b5a41effd3adac6"><div class="ttname"><a href="config_8h.html#ae2a857f3db1005cc1b5a41effd3adac6">_UA_END_DECLS</a></div><div class="ttdeci">#define _UA_END_DECLS</div><div class="ttdef"><b>Definition:</b> <a href="config_8h_source.html#l00088">config.h:88</a></div></div>
-<div class="ttc" id="astructUA__String_html"><div class="ttname"><a href="structUA__String.html">UA_String</a></div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00090">types.h:90</a></div></div>
-<div class="ttc" id="aconfig_8h_html_aa397bffde7d792f38dcbb8e329486f9c"><div class="ttname"><a href="config_8h.html#aa397bffde7d792f38dcbb8e329486f9c">_UA_BEGIN_DECLS</a></div><div class="ttdeci">#define _UA_BEGIN_DECLS</div><div class="ttdoc">#undef UA_DEBUG_DUMP_PKGS</div><div class="ttdef"><b>Definition:</b> <a href="config_8h_source.html#l00081">config.h:81</a></div></div>
-<div class="ttc" id="astructUA__SecurityPolicy_html"><div class="ttname"><a href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a></div><div class="ttdef"><b>Definition:</b> <a href="securitypolicy_8h_source.html#l00332">securitypolicy.h:332</a></div></div>
+<div class="ttc" id="aconfig_8h_html_ae2a857f3db1005cc1b5a41effd3adac6"><div class="ttname"><a href="config_8h.html#ae2a857f3db1005cc1b5a41effd3adac6">_UA_END_DECLS</a></div><div class="ttdeci">#define _UA_END_DECLS</div><div class="ttdef"><b>Definition:</b> <a href="config_8h_source.html#l00096">config.h:96</a></div></div>
+<div class="ttc" id="astructUA__String_html"><div class="ttname"><a href="structUA__String.html">UA_String</a></div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00114">types.h:114</a></div></div>
+<div class="ttc" id="aconfig_8h_html_aa397bffde7d792f38dcbb8e329486f9c"><div class="ttname"><a href="config_8h.html#aa397bffde7d792f38dcbb8e329486f9c">_UA_BEGIN_DECLS</a></div><div class="ttdeci">#define _UA_BEGIN_DECLS</div><div class="ttdoc">#undef UA_DEBUG_DUMP_PKGS</div><div class="ttdef"><b>Definition:</b> <a href="config_8h_source.html#l00089">config.h:89</a></div></div>
+<div class="ttc" id="astructUA__SecurityPolicy_html"><div class="ttname"><a href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a></div><div class="ttdef"><b>Definition:</b> <a href="securitypolicy_8h_source.html#l00292">securitypolicy.h:292</a></div></div>
 <div class="ttc" id="asecuritypolicy_8h_html"><div class="ttname"><a href="securitypolicy_8h.html">securitypolicy.h</a></div></div>
-<div class="ttc" id="atypes_8h_html_a8beaefc7873465d6baa54a21634b6ea7"><div class="ttname"><a href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div><div class="ttdeci">uint32_t UA_StatusCode</div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00079">types.h:79</a></div></div>
+<div class="ttc" id="atypes_8h_html_a8beaefc7873465d6baa54a21634b6ea7"><div class="ttname"><a href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div><div class="ttdeci">uint32_t UA_StatusCode</div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00077">types.h:77</a></div></div>
 <div class="ttc" id="astructUA__Logger_html"><div class="ttname"><a href="structUA__Logger.html">UA_Logger</a></div><div class="ttdef"><b>Definition:</b> <a href="log_8h_source.html#l00039">log.h:39</a></div></div>
 <div class="ttc" id="asecuritypolicy__default_8h_html_abd4bc4dd1213609d2e47ec921689914c"><div class="ttname"><a href="securitypolicy__default_8h.html#abd4bc4dd1213609d2e47ec921689914c">UA_SecurityPolicy_None</a></div><div class="ttdeci">_UA_BEGIN_DECLS UA_EXPORT UA_StatusCode UA_SecurityPolicy_None(UA_SecurityPolicy *policy, const UA_ByteString localCertificate, const UA_Logger *logger)</div><div class="ttdoc">This work is licensed under a Creative Commons CCZero 1.0 Universal License.</div></div>
 <!-- start footer part -->

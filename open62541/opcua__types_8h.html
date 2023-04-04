@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">open62541
-   &#160;<span id="projectnumber">1.2.6</span>
+   &#160;<span id="projectnumber">1.3.5</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -1227,7 +1227,8 @@ Enumerations</h2></td></tr>
 <br />
 &#160;&#160;<a class="el" href="opcua__types_8h.html#a0f245aefda7fc20deccad3a318817ef7a041d146be60a42c008e6cd78283208a3">OpcUa_AccessLevelExType_NonatomicRead</a> = 256, 
 <a class="el" href="opcua__types_8h.html#a0f245aefda7fc20deccad3a318817ef7a0bc2965c7e39bbf77776a3f1c6110208">OpcUa_AccessLevelExType_NonatomicWrite</a> = 512, 
-<a class="el" href="opcua__types_8h.html#a0f245aefda7fc20deccad3a318817ef7ac0c5e1dca44ee458f4095abd37be004a">OpcUa_AccessLevelExType_WriteFullArrayOnly</a> = 1024
+<a class="el" href="opcua__types_8h.html#a0f245aefda7fc20deccad3a318817ef7ac0c5e1dca44ee458f4095abd37be004a">OpcUa_AccessLevelExType_WriteFullArrayOnly</a> = 1024, 
+<a class="el" href="opcua__types_8h.html#a0f245aefda7fc20deccad3a318817ef7a189b2f3196282871dfeb4d41ad336814">OpcUa_AccessLevelExType_NoSubDataTypes</a> = 2048
 <br />
  }</td></tr>
 <tr class="separator:a0f245aefda7fc20deccad3a318817ef7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1237,15 +1238,24 @@ Enumerations</h2></td></tr>
 <a class="el" href="opcua__types_8h.html#a7b1e88e8bca6072324bb0e4bfd00b95cae2ddc1b46ff3b99bfc405ab30fe71846">OpcUa_EventNotifierType_HistoryWrite</a> = 8
  }</td></tr>
 <tr class="separator:a7b1e88e8bca6072324bb0e4bfd00b95c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5c122da087f2be9420434170a1d0b88"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="opcua__types_8h.html#ad5c122da087f2be9420434170a1d0b88">_OpcUa_AccessRestrictionType</a> { <a class="el" href="opcua__types_8h.html#ad5c122da087f2be9420434170a1d0b88a0c7c37aa7eb3ca9acfa00de4972899c6">OpcUa_AccessRestrictionType_None</a> = 0, 
+<tr class="memitem:ad5c122da087f2be9420434170a1d0b88"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="opcua__types_8h.html#ad5c122da087f2be9420434170a1d0b88">_OpcUa_AccessRestrictionType</a> { <br />
+&#160;&#160;<a class="el" href="opcua__types_8h.html#ad5c122da087f2be9420434170a1d0b88a0c7c37aa7eb3ca9acfa00de4972899c6">OpcUa_AccessRestrictionType_None</a> = 0, 
 <a class="el" href="opcua__types_8h.html#ad5c122da087f2be9420434170a1d0b88a64b69d0607e9d6070fe96d78a5d3f41e">OpcUa_AccessRestrictionType_SigningRequired</a> = 1, 
 <a class="el" href="opcua__types_8h.html#ad5c122da087f2be9420434170a1d0b88a3309f9ddaf6aacb6b81edbc136512708">OpcUa_AccessRestrictionType_EncryptionRequired</a> = 2, 
-<a class="el" href="opcua__types_8h.html#ad5c122da087f2be9420434170a1d0b88a807238a43eedafd589b2fdc4373c5f6c">OpcUa_AccessRestrictionType_SessionRequired</a> = 4
+<a class="el" href="opcua__types_8h.html#ad5c122da087f2be9420434170a1d0b88a807238a43eedafd589b2fdc4373c5f6c">OpcUa_AccessRestrictionType_SessionRequired</a> = 4, 
+<br />
+&#160;&#160;<a class="el" href="opcua__types_8h.html#ad5c122da087f2be9420434170a1d0b88adec3165138f64d889f678d1d8ee1a910">OpcUa_AccessRestrictionType_ApplyRestrictionsToBrowse</a> = 8
+<br />
  }</td></tr>
 <tr class="separator:ad5c122da087f2be9420434170a1d0b88"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17ee988a70e49e26504ee1186521c25b"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="opcua__types_8h.html#a17ee988a70e49e26504ee1186521c25b">_OpcUa_StructureType</a> { <a class="el" href="opcua__types_8h.html#a17ee988a70e49e26504ee1186521c25ba2a5fc06a9fbc775dc9aefc14c65fdc63">OpcUa_StructureType_Structure</a> = 0, 
+<tr class="memitem:a17ee988a70e49e26504ee1186521c25b"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="opcua__types_8h.html#a17ee988a70e49e26504ee1186521c25b">_OpcUa_StructureType</a> { <br />
+&#160;&#160;<a class="el" href="opcua__types_8h.html#a17ee988a70e49e26504ee1186521c25ba2a5fc06a9fbc775dc9aefc14c65fdc63">OpcUa_StructureType_Structure</a> = 0, 
 <a class="el" href="opcua__types_8h.html#a17ee988a70e49e26504ee1186521c25ba8de5ca4bb56876fb26a77f17575f888b">OpcUa_StructureType_StructureWithOptionalFields</a> = 1, 
-<a class="el" href="opcua__types_8h.html#a17ee988a70e49e26504ee1186521c25ba6bf158cb094657b5a093e2e12fb3d79b">OpcUa_StructureType_Union</a> = 2
+<a class="el" href="opcua__types_8h.html#a17ee988a70e49e26504ee1186521c25ba6bf158cb094657b5a093e2e12fb3d79b">OpcUa_StructureType_Union</a> = 2, 
+<a class="el" href="opcua__types_8h.html#a17ee988a70e49e26504ee1186521c25ba31ef120862b743b10bb46c4cfa839cbd">OpcUa_StructureType_StructureWithSubtypedValues</a> = 3, 
+<br />
+&#160;&#160;<a class="el" href="opcua__types_8h.html#a17ee988a70e49e26504ee1186521c25ba625983ba42f0de85c8e50fe4b385c2e4">OpcUa_StructureType_UnionWithSubtypedValues</a> = 4
+<br />
  }</td></tr>
 <tr class="separator:a17ee988a70e49e26504ee1186521c25b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34a7d78a309d6e23859b612a1b4ea3c6"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="opcua__types_8h.html#a34a7d78a309d6e23859b612a1b4ea3c6">_OpcUa_ApplicationType</a> { <a class="el" href="opcua__types_8h.html#a34a7d78a309d6e23859b612a1b4ea3c6a03712b2e3ebb62e7c09edc13c37ef10d">OpcUa_ApplicationType_Server</a> = 0, 
@@ -4246,7 +4256,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l00180">180</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l00181">181</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4266,7 +4276,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l00182">182</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l00183">183</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4326,7 +4336,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l00226">226</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l00228">228</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4346,7 +4356,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l00228">228</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l00230">230</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4366,7 +4376,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l00951">951</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l00955">955</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4386,7 +4396,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l00953">953</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l00957">957</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4406,7 +4416,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l02892">2892</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l02895">2895</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4426,7 +4436,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l02894">2894</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l02897">2897</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4446,7 +4456,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l06727">6727</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l06730">6730</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4466,7 +4476,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l06729">6729</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l06732">6732</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4486,7 +4496,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l02915">2915</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l02918">2918</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4506,7 +4516,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l02917">2917</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l02920">2920</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4526,7 +4536,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l02997">2997</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l03000">3000</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4546,7 +4556,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l02999">2999</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l03002">3002</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4566,7 +4576,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l05015">5015</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l05018">5018</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4586,7 +4596,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l05017">5017</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l05020">5020</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4606,7 +4616,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l05037">5037</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l05040">5040</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4626,7 +4636,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l05039">5039</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l05042">5042</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4646,7 +4656,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l00203">203</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l00204">204</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4666,7 +4676,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l00205">205</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l00206">206</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4686,7 +4696,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l06948">6948</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l06951">6951</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4706,7 +4716,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l06950">6950</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l06953">6953</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4726,7 +4736,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l03561">3561</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l03564">3564</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4746,7 +4756,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l03563">3563</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l03566">3566</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4766,7 +4776,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l04344">4344</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l04347">4347</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4786,7 +4796,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l04346">4346</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l04349">4349</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4846,7 +4856,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l01280">1280</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l01283">1283</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4866,7 +4876,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l01282">1282</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l01285">1285</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4886,7 +4896,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l06606">6606</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l06609">6609</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4906,7 +4916,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l06608">6608</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l06611">6611</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4926,7 +4936,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l04993">4993</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l04996">4996</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4946,7 +4956,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l04995">4995</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l04998">4998</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4966,7 +4976,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l02177">2177</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l02180">2180</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -4986,7 +4996,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l02179">2179</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l02182">2182</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -5046,7 +5056,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l04626">4626</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l04629">4629</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -5066,7 +5076,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l04628">4628</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l04631">4631</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -5126,7 +5136,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l06194">6194</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l06197">6197</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -5146,7 +5156,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l06196">6196</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l06199">6199</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -5166,7 +5176,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l01598">1598</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l01601">1601</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -5186,7 +5196,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l01600">1600</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l01603">1603</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -5206,7 +5216,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l06221">6221</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l06224">6224</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -5226,7 +5236,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l06223">6223</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l06226">6226</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -5246,7 +5256,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l00272">272</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l00276">276</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -5266,7 +5276,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l00274">274</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l00278">278</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -5286,7 +5296,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l03982">3982</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l03985">3985</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -5306,7 +5316,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l03984">3984</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l03987">3987</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -5326,7 +5336,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l01303">1303</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l01306">1306</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -5346,7 +5356,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l01305">1305</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l01308">1308</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -8889,6 +8899,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a0f245aefda7fc20deccad3a318817ef7a041d146be60a42c008e6cd78283208a3"></a>OpcUa_AccessLevelExType_NonatomicRead&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a0f245aefda7fc20deccad3a318817ef7a0bc2965c7e39bbf77776a3f1c6110208"></a>OpcUa_AccessLevelExType_NonatomicWrite&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a0f245aefda7fc20deccad3a318817ef7ac0c5e1dca44ee458f4095abd37be004a"></a>OpcUa_AccessLevelExType_WriteFullArrayOnly&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a0f245aefda7fc20deccad3a318817ef7a189b2f3196282871dfeb4d41ad336814"></a>OpcUa_AccessLevelExType_NoSubDataTypes&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 <p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l00161">161</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
@@ -8937,9 +8948,10 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="ad5c122da087f2be9420434170a1d0b88a64b69d0607e9d6070fe96d78a5d3f41e"></a>OpcUa_AccessRestrictionType_SigningRequired&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ad5c122da087f2be9420434170a1d0b88a3309f9ddaf6aacb6b81edbc136512708"></a>OpcUa_AccessRestrictionType_EncryptionRequired&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ad5c122da087f2be9420434170a1d0b88a807238a43eedafd589b2fdc4373c5f6c"></a>OpcUa_AccessRestrictionType_SessionRequired&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad5c122da087f2be9420434170a1d0b88adec3165138f64d889f678d1d8ee1a910"></a>OpcUa_AccessRestrictionType_ApplyRestrictionsToBrowse&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l00214">214</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l00215">215</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -8961,7 +8973,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a34a7d78a309d6e23859b612a1b4ea3c6a57ce7fbd0dbed876b1efb98151877ca4"></a>OpcUa_ApplicationType_DiscoveryServer&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l00939">939</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l00943">943</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -9006,7 +9018,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a5291bd479582a60d972169d619074286a350ebfc15caac0309e129a9d27c342f6"></a>OpcUa_AttributeWriteMask_AccessLevelEx&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l02857">2857</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l02860">2860</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -9027,7 +9039,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="ae967aaf22026cab95ee7c9f72536dfe5aa9ff628e4b5cfa50b452b9d9fb19a3f0"></a>OpcUa_AxisScaleEnumeration_Ln&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l06716">6716</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l06719">6719</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -9049,7 +9061,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a00cb360a35a4d0a9aa8be07acd26e54daed8aaf437057bdce8e0d041a2855d09a"></a>OpcUa_BrowseDirection_Invalid&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l02903">2903</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l02906">2906</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -9077,7 +9089,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="af69a19e9fd367c3701531d298235e5d3a9458a69d0d02c669532474865a0a6ab1"></a>OpcUa_BrowseResultMask_TargetInfo&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l02979">2979</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l02982">2982</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -9098,7 +9110,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a22b495193dfc3b2218a708c18c653aada332712866fc19266693702a5ea036b4e"></a>OpcUa_DataChangeTrigger_StatusValueTimestamp&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l05004">5004</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l05007">5007</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -9119,7 +9131,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a403d98d6da9ba96ab478cd67ac54c662a29fb4f2bcf4443ae055ee6b7d2eed085"></a>OpcUa_DeadbandType_Percent&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l05026">5026</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l05029">5029</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -9141,7 +9153,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a7b1e88e8bca6072324bb0e4bfd00b95cae2ddc1b46ff3b99bfc405ab30fe71846"></a>OpcUa_EventNotifierType_HistoryWrite&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l00191">191</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l00192">192</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -9164,7 +9176,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="aa095029ec6644458c67332eb89afaa61a1b0638524c83934ea6e5e9320d425c02"></a>OpcUa_ExceptionDeviationFormat_Unknown&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l06935">6935</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l06938">6938</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -9200,7 +9212,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="ada64711f72ae55de05140722aecacc07a1f498d7b33b01c212511ceee27bb4b71"></a>OpcUa_FilterOperator_BitwiseOr&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l03535">3535</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l03538">3538</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -9222,7 +9234,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="af2540ab905fd0e1b3d24ca2bc6df8d9baa5c5ea952101dc7c63de974d620bce3f"></a>OpcUa_HistoryUpdateType_Delete&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l04332">4332</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l04335">4335</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -9266,7 +9278,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="ae9437be2c74011a688eac523cdada99aaae45df2e1bd28c6dcc5360f7aac8ab10"></a>OpcUa_MessageSecurityMode_SignAndEncrypt&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l01268">1268</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l01271">1271</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -9289,7 +9301,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a1c78ab2490fd743017fc13ec37016e47a21cbffc6bf0c606b95ce8693367ceb69"></a>OpcUa_ModelChangeStructureVerbMask_DataTypeChanged&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l06593">6593</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l06596">6596</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -9310,7 +9322,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a0b94c6e24eecd4c2a5caf0a91637d182a4c1572847302c088aa8c64bd9923073f"></a>OpcUa_MonitoringMode_Reporting&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l04982">4982</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l04985">4985</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -9363,7 +9375,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="af439d75f84f48ce7b014a14f4455c23fa20703666e97c082c158b000db08ad0f7"></a>OpcUa_NodeAttributesMask_View&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l02134">2134</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l02137">2137</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -9412,7 +9424,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a7274c1ff4f272e2ec539588c4684f4a9a651310527143e6b5729ffead52f15504"></a>OpcUa_PerformUpdateType_Remove&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l04614">4614</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l04617">4617</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -9472,7 +9484,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a89a60879484d41b0b3f580fdbe233347a357389ddfeab32c16b6a91ca1d141cd1"></a>OpcUa_RedundancySupport_HotAndMirrored&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l06180">6180</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l06183">6183</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -9492,7 +9504,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="ab9527b87b84d0cc5fd058680006c50faacdcb561807921bd13ed2d3d9718c9d09"></a>OpcUa_SecurityTokenRequestType_Renew&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l01588">1588</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l01591">1591</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -9518,7 +9530,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a382691115c7dda7e977ce3fb9449db49a79f0cbcdfca41c06859042181d3605f9"></a>OpcUa_ServerState_Unknown&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l06205">6205</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l06208">6208</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -9537,9 +9549,11 @@ Variables</h2></td></tr>
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a17ee988a70e49e26504ee1186521c25ba2a5fc06a9fbc775dc9aefc14c65fdc63"></a>OpcUa_StructureType_Structure&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a17ee988a70e49e26504ee1186521c25ba8de5ca4bb56876fb26a77f17575f888b"></a>OpcUa_StructureType_StructureWithOptionalFields&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a17ee988a70e49e26504ee1186521c25ba6bf158cb094657b5a093e2e12fb3d79b"></a>OpcUa_StructureType_Union&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a17ee988a70e49e26504ee1186521c25ba31ef120862b743b10bb46c4cfa839cbd"></a>OpcUa_StructureType_StructureWithSubtypedValues&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a17ee988a70e49e26504ee1186521c25ba625983ba42f0de85c8e50fe4b385c2e4"></a>OpcUa_StructureType_UnionWithSubtypedValues&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l00261">261</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l00263">263</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -9562,7 +9576,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a5939f53044b66b44f93a8aa1f0905990a4cd913920fdff79440860e684e4f5afa"></a>OpcUa_TimestampsToReturn_Invalid&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l03969">3969</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l03972">3972</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>
@@ -9584,7 +9598,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="ae16044cebbd64011920ce89ff0221c0ca76e68861313d491795e232c07bc9923a"></a>OpcUa_UserTokenType_IssuedToken&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l01291">1291</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opcua__types_8h_source.html#l01294">1294</a> of file <a class="el" href="opcua__types_8h_source.html">opcua_types.h</a>.</p>
 
 </div>
 </div>

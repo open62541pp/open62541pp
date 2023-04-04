@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">open62541
-   &#160;<span id="projectnumber">1.2.6</span>
+   &#160;<span id="projectnumber">1.3.5</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -74,7 +74,13 @@ $(function() {
 : <a class="el" href="architecture__functions_8h.html#ab5e195aabe3a8c65df8aa88dd054203e">architecture_functions.h</a>
 </li>
 <li>UA_AccessControl_default()
-: <a class="el" href="accesscontrol__default_8h.html#a3d48103e1e49963d380493596b1a35d6">accesscontrol_default.h</a>
+: <a class="el" href="accesscontrol__default_8h.html#a23c7493b2c29d8e93de5d216377027bc">accesscontrol_default.h</a>
+</li>
+<li>UA_Array_append()
+: <a class="el" href="types_8h.html#ac342ed5f629d31e5079f4bf91953d139">types.h</a>
+</li>
+<li>UA_Array_appendCopy()
+: <a class="el" href="types_8h.html#a8f93398b32d6fc0845cd7d4c35030bc1">types.h</a>
 </li>
 <li>UA_Array_copy()
 : <a class="el" href="types_8h.html#af27a32f7f16ce2676dfadc56f15282a5">types.h</a>
@@ -84,6 +90,9 @@ $(function() {
 </li>
 <li>UA_Array_new()
 : <a class="el" href="types_8h.html#af8c0f89bd7b5eed5c2cfe17b75665aba">types.h</a>
+</li>
+<li>UA_Array_resize()
+: <a class="el" href="types_8h.html#a36d905479fc599f3ef5d0cf96d7bcb9e">types.h</a>
 </li>
 <li>UA_base64()
 : <a class="el" href="base64_8h.html#a3e42897783617022354000f822a67780">base64.h</a>
@@ -104,19 +113,13 @@ $(function() {
 : <a class="el" href="types_8h.html#a79a3f03f01edb1c980c022443761d98f">types.h</a>
 </li>
 <li>UA_calcSizeBinary()
-: <a class="el" href="ua__types__encoding__binary_8h.html#a6f0cd5535073f1e0e386f5edd50fd5a7">ua_types_encoding_binary.h</a>
+: <a class="el" href="types_8h.html#a01c682f8a091957ce7aaf517f87a2134">types.h</a>
 </li>
-<li>UA_calcSizeJson()
-: <a class="el" href="ua__types__encoding__json_8h.html#a870190c47ba8908341e9c3d79acd5ae7">ua_types_encoding_json.h</a>
-</li>
-<li>UA_calloc()
-: <a class="el" href="architecture__functions_8h.html#a968aca925c887a203335c60a9cf97068">architecture_functions.h</a>
+<li>UA_calcSizeJsonInternal()
+: <a class="el" href="ua__types__encoding__json_8h.html#a5c4cd290044765e654fb850bb5a963f9">ua_types_encoding_json.h</a>
 </li>
 <li>UA_CertificateVerification_AcceptAll()
 : <a class="el" href="pki__default_8h.html#ad0f7c5ae40a0fa3067d0ffaef1b3bf49">pki_default.h</a>
-</li>
-<li>UA_Cient_translateBrowsePathsToNodeIds_async()
-: <a class="el" href="client__highlevel__async_8h.html#a4c694662ce6c41db9108c738126ac844">client_highlevel_async.h</a>
 </li>
 <li>UA_clear()
 : <a class="el" href="types_8h.html#ab615e6928fa544fb7caf34c9e241fd4b">types.h</a>
@@ -187,6 +190,9 @@ $(function() {
 <li>UA_Client_getState()
 : <a class="el" href="client_8h.html#a120e79d9e8303ffceb73c67160575921">client.h</a>
 </li>
+<li>UA_Client_modifyAsyncCallback()
+: <a class="el" href="client_8h.html#a791c4ba6eeaf8928d8bca60a3fcaa99d">client.h</a>
+</li>
 <li>UA_Client_NamespaceGetIndex()
 : <a class="el" href="client__highlevel_8h.html#ae9d694d8be2f4395ff9292c45ac267bc">client_highlevel.h</a>
 </li>
@@ -196,8 +202,74 @@ $(function() {
 <li>UA_Client_newWithConfig()
 : <a class="el" href="client_8h.html#a801cdbd00f7417b8aa5468f740f8b196">client.h</a>
 </li>
+<li>UA_Client_readAccessLevelAttribute_async()
+: <a class="el" href="client__highlevel__async_8h.html#aa93430c8c0dbf2f832b57914d0d8e2de">client_highlevel_async.h</a>
+</li>
 <li>UA_Client_readArrayDimensionsAttribute()
 : <a class="el" href="client__highlevel_8h.html#a8db86fe454638cebfe8bbd9ee0ea214e">client_highlevel.h</a>
+</li>
+<li>UA_Client_readArrayDimensionsAttribute_async()
+: <a class="el" href="client__highlevel__async_8h.html#abb09d84aea58af7639246880c0bc1c85">client_highlevel_async.h</a>
+</li>
+<li>UA_Client_readAttribute_async()
+: <a class="el" href="client__highlevel__async_8h.html#a6f5fddd12663102c549970d0da0b490d">client_highlevel_async.h</a>
+</li>
+<li>UA_Client_readBrowseNameAttribute_async()
+: <a class="el" href="client__highlevel__async_8h.html#a86d4b1b723e8a27d47f273d459f2081b">client_highlevel_async.h</a>
+</li>
+<li>UA_Client_readContainsNoLoopsAttribute_async()
+: <a class="el" href="client__highlevel__async_8h.html#abee7954f3dda774a3ebf9bf6d6d1c0c2">client_highlevel_async.h</a>
+</li>
+<li>UA_Client_readDataTypeAttribute_async()
+: <a class="el" href="client__highlevel__async_8h.html#ade87fbdcf2637354810204f03a466829">client_highlevel_async.h</a>
+</li>
+<li>UA_Client_readDescriptionAttribute_async()
+: <a class="el" href="client__highlevel__async_8h.html#a767e9eaeef55a33658d260605687fff9">client_highlevel_async.h</a>
+</li>
+<li>UA_Client_readDisplayNameAttribute_async()
+: <a class="el" href="client__highlevel__async_8h.html#a5aa8081aa207a24415453d14e126ae1e">client_highlevel_async.h</a>
+</li>
+<li>UA_Client_readEventNotifierAttribute_async()
+: <a class="el" href="client__highlevel__async_8h.html#a7c1f838c7c828857d7d6d38eecbcca9b">client_highlevel_async.h</a>
+</li>
+<li>UA_Client_readExecutableAttribute_async()
+: <a class="el" href="client__highlevel__async_8h.html#aeb873fc4425ee4d6f33e12a9e8cf51ea">client_highlevel_async.h</a>
+</li>
+<li>UA_Client_readHistorizingAttribute_async()
+: <a class="el" href="client__highlevel__async_8h.html#af23059c478ddcff3184fa3a2ba3682a3">client_highlevel_async.h</a>
+</li>
+<li>UA_Client_readInverseNameAttribute_async()
+: <a class="el" href="client__highlevel__async_8h.html#a799d2d0a6b03fe5b9cb84e07a4a491be">client_highlevel_async.h</a>
+</li>
+<li>UA_Client_readIsAbstractAttribute_async()
+: <a class="el" href="client__highlevel__async_8h.html#a65fdbb8da814d4896a8cee431a89f3ee">client_highlevel_async.h</a>
+</li>
+<li>UA_Client_readMinimumSamplingIntervalAttribute_async()
+: <a class="el" href="client__highlevel__async_8h.html#ac99a1b05e3869dbbd5e001103a70e3e9">client_highlevel_async.h</a>
+</li>
+<li>UA_Client_readNodeClassAttribute_async()
+: <a class="el" href="client__highlevel__async_8h.html#a1d3846c28bdd65bfcb7758ce98d63e72">client_highlevel_async.h</a>
+</li>
+<li>UA_Client_readSymmetricAttribute_async()
+: <a class="el" href="client__highlevel__async_8h.html#a204f928d14228a19b1e3aa0fb81dd965">client_highlevel_async.h</a>
+</li>
+<li>UA_Client_readUserAccessLevelAttribute_async()
+: <a class="el" href="client__highlevel__async_8h.html#a5c87b707891489e4cc99a593e8f23d63">client_highlevel_async.h</a>
+</li>
+<li>UA_Client_readUserExecutableAttribute_async()
+: <a class="el" href="client__highlevel__async_8h.html#a192b7e33f271b965a778f975283fc446">client_highlevel_async.h</a>
+</li>
+<li>UA_Client_readUserWriteMaskAttribute_async()
+: <a class="el" href="client__highlevel__async_8h.html#aacb9e886dc91c978950520378e07b04a">client_highlevel_async.h</a>
+</li>
+<li>UA_Client_readValueAttribute_async()
+: <a class="el" href="client__highlevel__async_8h.html#a4e6362efaead322694d2e016f2f9d786">client_highlevel_async.h</a>
+</li>
+<li>UA_Client_readValueRankAttribute_async()
+: <a class="el" href="client__highlevel__async_8h.html#ab315b4afa875bb4ed69a256803cb3812">client_highlevel_async.h</a>
+</li>
+<li>UA_Client_readWriteMaskAttribute_async()
+: <a class="el" href="client__highlevel__async_8h.html#a1388cf683284766d6e7ba8427e62a3e9">client_highlevel_async.h</a>
 </li>
 <li>UA_Client_removeCallback()
 : <a class="el" href="client_8h.html#aa25686ca650da4eaf80808134d4e3152">client.h</a>
@@ -248,7 +320,7 @@ $(function() {
 : <a class="el" href="ua__pubsub__networkmessage_8h.html#a7a3104e9b35aaa0c7a2dd235c7279ab6">ua_pubsub_networkmessage.h</a>
 </li>
 <li>UA_DataSetMessage_decodeBinary()
-: <a class="el" href="ua__pubsub__networkmessage_8h.html#a5162ba25cc1cb2aa9309c624fca1fdb4">ua_pubsub_networkmessage.h</a>
+: <a class="el" href="ua__pubsub__networkmessage_8h.html#af7da1a9d03b003a3c3d4097d8d92d417">ua_pubsub_networkmessage.h</a>
 </li>
 <li>UA_DataSetMessage_encodeBinary()
 : <a class="el" href="ua__pubsub__networkmessage_8h.html#a18bbe6031f593542b804dee05d18a62e">ua_pubsub_networkmessage.h</a>
@@ -262,8 +334,14 @@ $(function() {
 <li>UA_DataSetMessageHeader_encodeBinary()
 : <a class="el" href="ua__pubsub__networkmessage_8h.html#a5644fed559ba9813fda8b6d5f14269a0">ua_pubsub_networkmessage.h</a>
 </li>
+<li>UA_DataType_getPrecedence()
+: <a class="el" href="types_8h.html#a5c121c383d0958129f7a765e85b16859">types.h</a>
+</li>
 <li>UA_DataType_isNumeric()
 : <a class="el" href="types_8h.html#ab9faa940eb88b05ab723fad65a1a49e4">types.h</a>
+</li>
+<li>UA_DataValue_copyVariantRange()
+: <a class="el" href="types_8h.html#abaff7ed599c86bb7891504e5d63df3d3">types.h</a>
 </li>
 <li>UA_DateTime_fromStruct()
 : <a class="el" href="types_8h.html#a42238d6ff579539e356922533266982a">types.h</a>
@@ -281,10 +359,10 @@ $(function() {
 : <a class="el" href="types_8h.html#a4d3d3375ba6c8deb2ba04449cfc6c61a">types.h</a>
 </li>
 <li>UA_decodeBinary()
-: <a class="el" href="ua__types__encoding__binary_8h.html#a4a145f36371c4f4663211a7e69639f03">ua_types_encoding_binary.h</a>
+: <a class="el" href="types_8h.html#ab8d429a855d956f989b57e5486cd8fc3">types.h</a>
 </li>
-<li>UA_decodeJson()
-: <a class="el" href="ua__types__encoding__json_8h.html#a900cddf79e4e7acc4c4c705d99cbdc2a">ua_types_encoding_json.h</a>
+<li>UA_decodeBinaryInternal()
+: <a class="el" href="ua__types__encoding__binary_8h.html#adf015ca938eab4b08b7133e17ae87ca4">ua_types_encoding_binary.h</a>
 </li>
 <li>UA_deinitialize_architecture_network()
 : <a class="el" href="architecture__functions_8h.html#aba26238708b214c2431638929501f6c3">architecture_functions.h</a>
@@ -293,10 +371,13 @@ $(function() {
 : <a class="el" href="types_8h.html#ac1fe49fb8120e59038e6f4d276ffa1ec">types.h</a>
 </li>
 <li>UA_encodeBinary()
-: <a class="el" href="ua__types__encoding__binary_8h.html#a4f76e917e4a300b857b5967ebe002a72">ua_types_encoding_binary.h</a>
+: <a class="el" href="types_8h.html#adaff9c45e3b54d87ece28f5e71086b7a">types.h</a>
 </li>
-<li>UA_encodeJson()
-: <a class="el" href="ua__types__encoding__json_8h.html#a6edbe6517f503aebde127e566d8410d3">ua_types_encoding_json.h</a>
+<li>UA_encodeBinaryInternal()
+: <a class="el" href="ua__types__encoding__binary_8h.html#a49c73b193f83c4e32af3214f8f0823f1">ua_types_encoding_binary.h</a>
+</li>
+<li>UA_encodeJsonInternal()
+: <a class="el" href="ua__types__encoding__json_8h.html#a2cd0d0399abba6748a61f09c5ae28da8">ua_types_encoding_json.h</a>
 </li>
 <li>UA_ExpandedNodeId_hash()
 : <a class="el" href="types_8h.html#a3b346c7682df0b269f3d7c5f5a115ca6">types.h</a>
@@ -333,9 +414,6 @@ $(function() {
 </li>
 <li>UA_findDataTypeWithCustom()
 : <a class="el" href="ua__util__internal_8h.html#a57a5b2fe872d7b2d15ea8263f6117302">ua_util_internal.h</a>
-</li>
-<li>UA_free()
-: <a class="el" href="architecture__functions_8h.html#aa447cfcd4ed49ae3c0a81058a8ce669a">architecture_functions.h</a>
 </li>
 <li>UA_freeaddrinfo()
 : <a class="el" href="architecture__functions_8h.html#ad9ccb3644cc2f216eae627843d3c7477">architecture_functions.h</a>
@@ -379,6 +457,33 @@ $(function() {
 <li>UA_initialize_architecture_network()
 : <a class="el" href="architecture__functions_8h.html#aa8da79aec5bde632d2b9ab9928b0215e">architecture_functions.h</a>
 </li>
+<li>UA_ioctl()
+: <a class="el" href="architecture__functions_8h.html#affc01d2de5e76afb8eea91d90eaf0f21">architecture_functions.h</a>
+</li>
+<li>UA_KeyValueMap_delete()
+: <a class="el" href="util_8h.html#af2325fe2c5a276441d645f110b13daf5">util.h</a>
+</li>
+<li>UA_KeyValueMap_deleteQualified()
+: <a class="el" href="util_8h.html#ab9a437e5a04733f74de83bfa4a2bbd13">util.h</a>
+</li>
+<li>UA_KeyValueMap_get()
+: <a class="el" href="util_8h.html#a2434c46877364780921553e0f4ab82b6">util.h</a>
+</li>
+<li>UA_KeyValueMap_getArray()
+: <a class="el" href="util_8h.html#ad70e6ccf8396d0ed9625df68b46ff5f2">util.h</a>
+</li>
+<li>UA_KeyValueMap_getQualified()
+: <a class="el" href="util_8h.html#aceeded5575edd87b47e6a9b84f852c8a">util.h</a>
+</li>
+<li>UA_KeyValueMap_getScalar()
+: <a class="el" href="util_8h.html#aa081f8d6b4a9d521e91569ab27f56ae3">util.h</a>
+</li>
+<li>UA_KeyValueMap_set()
+: <a class="el" href="util_8h.html#a3dbce9c4b1cbffd8ba5f44071eee8ed9">util.h</a>
+</li>
+<li>UA_KeyValueMap_setQualified()
+: <a class="el" href="util_8h.html#ad2b1090cb1d8383f7a596d838b8d1c74">util.h</a>
+</li>
 <li>UA_listen()
 : <a class="el" href="architecture__functions_8h.html#a559a47f10ed3568eaf25ac3ee33f932d">architecture_functions.h</a>
 </li>
@@ -390,9 +495,6 @@ $(function() {
 </li>
 <li>UA_Log_Stdout_withLevel()
 : <a class="el" href="log__stdout_8h.html#a7e994940912ea62b5897aafd9424a051">log_stdout.h</a>
-</li>
-<li>UA_malloc()
-: <a class="el" href="architecture__functions_8h.html#adac1de7c01df21a65a965db4891d01ad">architecture_functions.h</a>
 </li>
 <li>UA_MessageContext_abort()
 : <a class="el" href="ua__securechannel_8h.html#a17e2bdf1f7c8bff4f6b27380ffcc3400">ua_securechannel.h</a>
@@ -415,17 +517,38 @@ $(function() {
 <li>UA_NetworkMessage_decodeBinary()
 : <a class="el" href="ua__pubsub__networkmessage_8h.html#a0999a71242e04aeff067459b31049ac4">ua_pubsub_networkmessage.h</a>
 </li>
-<li>UA_NetworkMessage_delete()
-: <a class="el" href="ua__pubsub__networkmessage_8h.html#abb668b3ae2cc0261816ea3a4c09cc60f">ua_pubsub_networkmessage.h</a>
+<li>UA_NetworkMessage_decodeFooters()
+: <a class="el" href="ua__pubsub__networkmessage_8h.html#a4860e0b0f2e5ead1cc766c937c293fb6">ua_pubsub_networkmessage.h</a>
+</li>
+<li>UA_NetworkMessage_decodeHeaders()
+: <a class="el" href="ua__pubsub__networkmessage_8h.html#a7a832a6f3be640fe42153a2ca7c13347">ua_pubsub_networkmessage.h</a>
+</li>
+<li>UA_NetworkMessage_decodePayload()
+: <a class="el" href="ua__pubsub__networkmessage_8h.html#acb314fe4932c03d29ae376b8785cbde3">ua_pubsub_networkmessage.h</a>
 </li>
 <li>UA_NetworkMessage_encodeBinary()
-: <a class="el" href="ua__pubsub__networkmessage_8h.html#af3d33a949ed2f24153ef40bc6b91a27f">ua_pubsub_networkmessage.h</a>
+: <a class="el" href="ua__pubsub__networkmessage_8h.html#a68759ddffbf3a9ffc97d356034b0a5b0">ua_pubsub_networkmessage.h</a>
+</li>
+<li>UA_NetworkMessage_encodeFooters()
+: <a class="el" href="ua__pubsub__networkmessage_8h.html#af267ac8d6e6a2e2646179045893f84a7">ua_pubsub_networkmessage.h</a>
+</li>
+<li>UA_NetworkMessage_encodeHeaders()
+: <a class="el" href="ua__pubsub__networkmessage_8h.html#a559d3c5f8ca4b79165e062b2f0d4e554">ua_pubsub_networkmessage.h</a>
+</li>
+<li>UA_NetworkMessage_encodePayload()
+: <a class="el" href="ua__pubsub__networkmessage_8h.html#a82a31227f8d05c2bcd92e9b5af683c95">ua_pubsub_networkmessage.h</a>
 </li>
 <li>UA_NetworkMessage_updateBufferedMessage()
 : <a class="el" href="ua__pubsub__networkmessage_8h.html#a163d351d63694430fb593de6cae17038">ua_pubsub_networkmessage.h</a>
 </li>
 <li>UA_NetworkMessage_updateBufferedNwMessage()
 : <a class="el" href="ua__pubsub__networkmessage_8h.html#a0a30a1119711987eefef41f0b24fdeab">ua_pubsub_networkmessage.h</a>
+</li>
+<li>UA_NetworkMessageHeader_decodeBinary()
+: <a class="el" href="ua__pubsub__networkmessage_8h.html#ae0750124e8ec201fa26a1f0a6d33e655">ua_pubsub_networkmessage.h</a>
+</li>
+<li>UA_NetworkMessageOffsetBuffer_clear()
+: <a class="el" href="ua__pubsub__networkmessage_8h.html#a6eef404413b26690d49eef123a43d561">ua_pubsub_networkmessage.h</a>
 </li>
 <li>UA_new()
 : <a class="el" href="types_8h.html#af586a3b89f735da18f9e4ff57067d04a">types.h</a>
@@ -469,17 +592,41 @@ $(function() {
 <li>UA_NodeId_print()
 : <a class="el" href="types_8h.html#a5fa03347b6292541b4cc01ff3b0dc8df">types.h</a>
 </li>
+<li>UA_NodePointer_clear()
+: <a class="el" href="nodestore_8h.html#a92ab83b3815be5f770615ce210b5c778">nodestore.h</a>
+</li>
+<li>UA_NodePointer_copy()
+: <a class="el" href="nodestore_8h.html#a6178203646671a337e35c86ed69fb738">nodestore.h</a>
+</li>
+<li>UA_NodePointer_fromExpandedNodeId()
+: <a class="el" href="nodestore_8h.html#a46ffc2e6816f310aa42f135624813825">nodestore.h</a>
+</li>
+<li>UA_NodePointer_fromNodeId()
+: <a class="el" href="nodestore_8h.html#a171b3fc2bb32bff3f8ec328c8f3d22d0">nodestore.h</a>
+</li>
+<li>UA_NodePointer_isLocal()
+: <a class="el" href="nodestore_8h.html#ad653e04273f264bd20131e7e984d8d32">nodestore.h</a>
+</li>
+<li>UA_NodePointer_order()
+: <a class="el" href="nodestore_8h.html#a047b08667b596b359fe7781aee2a58d7">nodestore.h</a>
+</li>
+<li>UA_NodePointer_toExpandedNodeId()
+: <a class="el" href="nodestore_8h.html#abb97a4947e7bf1bd1e5e764c9d46831f">nodestore.h</a>
+</li>
+<li>UA_NodePointer_toNodeId()
+: <a class="el" href="nodestore_8h.html#a205e98507851ff4bfef0f3878de9cff1">nodestore.h</a>
+</li>
 <li>UA_NodeReferenceKind_findTarget()
-: <a class="el" href="ua__server__internal_8h.html#a0d6e3892796ed16a41898b417e13def0">ua_server_internal.h</a>
+: <a class="el" href="ua__server__internal_8h.html#a3a2c11c602bded7f93ad30a55505233d">ua_server_internal.h</a>
 </li>
-<li>UA_NodeReferenceKind_firstTarget()
-: <a class="el" href="ua__server__internal_8h.html#ac962802700878dbae2580a7e8707fa6b">ua_server_internal.h</a>
+<li>UA_NodeReferenceKind_iterate()
+: <a class="el" href="nodestore_8h.html#a5721c41e063644aa66bd1e1198744e69">nodestore.h</a>
 </li>
-<li>UA_NodeReferenceKind_nextTarget()
-: <a class="el" href="ua__server__internal_8h.html#a845d7b9320847d0e1d71037fe82a40d7">ua_server_internal.h</a>
+<li>UA_NodeReferenceKind_switch()
+: <a class="el" href="nodestore_8h.html#a38caf7dfbe51f78b32a1c98a55afb363">nodestore.h</a>
 </li>
 <li>UA_NODESTORE_GETFROMREF()
-: <a class="el" href="ua__server__internal_8h.html#a5827e6a82144a4e4d35fcfd038ef7f1f">ua_server_internal.h</a>
+: <a class="el" href="ua__server__internal_8h.html#abab9fd5a2290a6ae8dc71dc07d94e348">ua_server_internal.h</a>
 </li>
 <li>UA_Nodestore_HashMap()
 : <a class="el" href="nodestore__default_8h.html#a3dfa37a64e4aa2347c98b110482dee4f">nodestore_default.h</a>
@@ -493,6 +640,9 @@ $(function() {
 <li>UA_NumericRange_parse()
 : <a class="el" href="types_8h.html#aaf061bae4099cf865f1f470c21da794a">types.h</a>
 </li>
+<li>UA_order()
+: <a class="el" href="types_8h.html#a4e7a92f078dc587b4a364ed8cc6299c9">types.h</a>
+</li>
 <li>UA_parseEndpointUrl()
 : <a class="el" href="util_8h.html#aa17a316c0ae38fe3970b7ca9efe40eff">util.h</a>
 </li>
@@ -500,13 +650,10 @@ $(function() {
 : <a class="el" href="util_8h.html#a5c198621d30afabfc496a188a2125067">util.h</a>
 </li>
 <li>UA_PubSubTransportLayerEthernet()
-: <a class="el" href="pubsub__ethernet_8h.html#ab667ccb2ee85141222c14fcdedbcdda9">pubsub_ethernet.h</a>
+: <a class="el" href="pubsub__ethernet_8h.html#a484fbb0da42f2d97598f2a15a4299c15">pubsub_ethernet.h</a>
 </li>
-<li>UA_PubSubTransportLayerEthernetETF()
-: <a class="el" href="pubsub__ethernet__etf_8h.html#a8222b76e020efd1fb24f68dd27ce04c0">pubsub_ethernet_etf.h</a>
-</li>
-<li>UA_PubSubTransportLayerEthernetXDP()
-: <a class="el" href="pubsub__ethernet__xdp_8h.html#a6e296bd715b30bdf0f9282dce1886507">pubsub_ethernet_xdp.h</a>
+<li>UA_PubSubTransportLayerMQTT()
+: <a class="el" href="pubsub__mqtt_8h.html#a736e7160f72b3443be7114d4a8e662ab">pubsub_mqtt.h</a>
 </li>
 <li>UA_PubSubTransportLayerUDPMP()
 : <a class="el" href="pubsub__udp_8h.html#ae247bcb0bbb523bffeb4f4659d5664bf">pubsub_udp.h</a>
@@ -526,11 +673,14 @@ $(function() {
 <li>UA_readNumberWithBase()
 : <a class="el" href="util_8h.html#abd673b2c493dccd3ff2200f1b5a74a3e">util.h</a>
 </li>
-<li>UA_realloc()
-: <a class="el" href="architecture__functions_8h.html#a05efbaad6ce0a73ff0ae5b14d76febac">architecture_functions.h</a>
-</li>
 <li>UA_recv()
 : <a class="el" href="architecture__functions_8h.html#a6fc04a32ef007ec5099386337aad155f">architecture_functions.h</a>
+</li>
+<li>UA_recvfrom()
+: <a class="el" href="architecture__functions_8h.html#a8038b1e6e8b32856ad3a3d011cfc07c8">architecture_functions.h</a>
+</li>
+<li>UA_recvmsg()
+: <a class="el" href="architecture__functions_8h.html#a454b3b00cd8bd24dd682d94958045385">architecture_functions.h</a>
 </li>
 <li>UA_SecureChannel_close()
 : <a class="el" href="ua__securechannel_8h.html#adbdc1b876367c52e55a5dd5f0aae1f5d">ua_securechannel.h</a>
@@ -565,12 +715,6 @@ $(function() {
 <li>UA_SecureChannel_setSecurityPolicy()
 : <a class="el" href="ua__securechannel_8h.html#aecf1c94969f409833d96253a38d00656">ua_securechannel.h</a>
 </li>
-<li>UA_SecurityPolicy_getRemoteAsymEncryptionBufferLengthOverhead()
-: <a class="el" href="securitypolicy_8h.html#aa4ccf293009229f06d1e9e8ea2562512">securitypolicy.h</a>
-</li>
-<li>UA_SecurityPolicy_getSecurityPolicyByUri()
-: <a class="el" href="securitypolicy_8h.html#a7d3e78e9468898569fdad0abcb504554">securitypolicy.h</a>
-</li>
 <li>UA_SecurityPolicy_None()
 : <a class="el" href="securitypolicy__default_8h.html#abd4bc4dd1213609d2e47ec921689914c">securitypolicy_default.h</a>
 </li>
@@ -579,6 +723,9 @@ $(function() {
 </li>
 <li>UA_send()
 : <a class="el" href="architecture__functions_8h.html#a805379d7b703cde2edce2ad88d959f67">architecture_functions.h</a>
+</li>
+<li>UA_sendto()
+: <a class="el" href="architecture__functions_8h.html#a38f4ff5e1b0a73c22c222504c1bbc9b1">architecture_functions.h</a>
 </li>
 <li>UA_Server_addDataSourceVariableNode()
 : <a class="el" href="server_8h.html#a705cfeb7b66ffe5a02fd747b7231ee87">server.h</a>
@@ -625,6 +772,9 @@ $(function() {
 <li>UA_Server_closeSecureChannel()
 : <a class="el" href="ua__server__internal_8h.html#a40e910ff9955a066626edb62c89608c9">ua_server_internal.h</a>
 </li>
+<li>UA_Server_closeSession()
+: <a class="el" href="server_8h.html#ae2f4373d3051d9fafc45455f13274069">server.h</a>
+</li>
 <li>UA_Server_configSecureChannel()
 : <a class="el" href="ua__server__internal_8h.html#a28eace06e25695fd9bcaeed0edf06e91">ua_server_internal.h</a>
 </li>
@@ -646,6 +796,9 @@ $(function() {
 <li>UA_Server_deleteSecureChannels()
 : <a class="el" href="ua__server__internal_8h.html#a109b0510a3b85d178c5c8cae165be4a9">ua_server_internal.h</a>
 </li>
+<li>UA_Server_deleteSessionParameter()
+: <a class="el" href="server_8h.html#af44ff79b8d91c56bcf02abf8556e8241">server.h</a>
+</li>
 <li>UA_Server_editNode()
 : <a class="el" href="ua__server__internal_8h.html#a6917182f0c76e65635d342e05bcb7a25">ua_server_internal.h</a>
 </li>
@@ -658,14 +811,26 @@ $(function() {
 <li>UA_Server_getConfig()
 : <a class="el" href="server_8h.html#aa935baaf8a9bfbf918d8ddeb97c2efd6">server.h</a>
 </li>
+<li>UA_Server_getNamespaceByIndex()
+: <a class="el" href="server_8h.html#aa358d3727b4981f1ccbece9cc6981c85">server.h</a>
+</li>
 <li>UA_Server_getNamespaceByName()
 : <a class="el" href="server_8h.html#ae94b3e2c7a61e546d7953467b2dd56a8">server.h</a>
 </li>
 <li>UA_Server_getNodeContext()
 : <a class="el" href="server_8h.html#a16d51f58a6896c390c716989e2bf4abb">server.h</a>
 </li>
+<li>UA_Server_getSessionArrayParameter()
+: <a class="el" href="server_8h.html#a6ab4f473e178334c38b1cbff59335eac">server.h</a>
+</li>
 <li>UA_Server_getSessionById()
 : <a class="el" href="ua__server__internal_8h.html#a9d99a4ac7aeb7d4b13d74bc6711a804f">ua_server_internal.h</a>
+</li>
+<li>UA_Server_getSessionParameter()
+: <a class="el" href="server_8h.html#af8b9ae84ebd565280bfec6ee75f97799">server.h</a>
+</li>
+<li>UA_Server_getSessionScalarParameter()
+: <a class="el" href="server_8h.html#a4dd573b2293aa5764d3aeac54e33cb36">server.h</a>
 </li>
 <li>UA_Server_getStatistics()
 : <a class="el" href="server_8h.html#ad0cf4150cbf60e7b7d5c49bbb32436fa">server.h</a>
@@ -726,6 +891,9 @@ $(function() {
 </li>
 <li>UA_Server_setNodeTypeLifecycle()
 : <a class="el" href="server_8h.html#ab6cfde97a80d8a88b46c1866d27dea41">server.h</a>
+</li>
+<li>UA_Server_setSessionParameter()
+: <a class="el" href="server_8h.html#ada6648d0226a6ad96fc7a0d9cfadb299">server.h</a>
 </li>
 <li>UA_Server_setVariableNode_dataSource()
 : <a class="el" href="server_8h.html#ac447e96cd118c28cc28f2f45f799578b">server.h</a>
@@ -803,7 +971,7 @@ $(function() {
 : <a class="el" href="architecture__functions_8h.html#a6c300a9a83efdf0cd0145b6e8897df36">architecture_functions.h</a>
 </li>
 <li>UA_sleep_ms()
-: <a class="el" href="architecture__functions_8h.html#afe6951352bab458fbcc64cb766f6b47f">architecture_functions.h</a>
+: <a class="el" href="architecture__functions_8h.html#ab9cb9eec4e0303729f9bb8c8aff0f9e3">architecture_functions.h</a>
 </li>
 <li>UA_snprintf()
 : <a class="el" href="architecture__functions_8h.html#aca7473e58f1899dec9b92e211ae9046b">architecture_functions.h</a>
@@ -818,14 +986,11 @@ $(function() {
 : <a class="el" href="architecture__functions_8h.html#a424972e9fc86bdb03f1f231a1229f8cc">architecture_functions.h</a>
 </li>
 <li>UA_STATIC_ASSERT()
-: <a class="el" href="types__generated_8h.html#ab7c9eea20154ed43019c0c2dc40b8146">types_generated.h</a>
-, <a class="el" href="transport__generated_8h.html#a79c31f619e073d716a181defc120a038">transport_generated.h</a>
-, <a class="el" href="types__generated_8h.html#a46963273e5fea09379c758b5c219c5a8">types_generated.h</a>
+: <a class="el" href="types__generated_8h.html#a1a6cbabcaea8311f21d564eb40037b8b">types_generated.h</a>
 , <a class="el" href="transport__generated_8h.html#afb9295af3794a57302a37ec04092eabc">transport_generated.h</a>
-, <a class="el" href="types__generated_8h.html#a59bce5212bb0736d617a1723f5ee0e16">types_generated.h</a>
-</li>
-<li>UA_StatusCode_isBad()
-: <a class="el" href="types_8h.html#a08e356140f0f38d2c9822a8af9d1cd55">types.h</a>
+, <a class="el" href="types__generated_8h.html#aea778a599aec01276da6ae65ef726b62">types_generated.h</a>
+, <a class="el" href="transport__generated_8h.html#a79c31f619e073d716a181defc120a038">transport_generated.h</a>
+, <a class="el" href="types__generated_8h.html#a989bb9093d0aa56afd6fd4f58fd30641">types_generated.h</a>
 </li>
 <li>UA_StatusCode_name()
 : <a class="el" href="types_8h.html#a7ae7ef876a16570919d9318e6836b973">types.h</a>
@@ -843,7 +1008,7 @@ $(function() {
 : <a class="el" href="architecture__functions_8h.html#aaefe807046f4198e583dbc788748f4cb">architecture_functions.h</a>
 </li>
 <li>UA_Timer_addRepeatedCallback()
-: <a class="el" href="ua__timer_8h.html#a3610515f8b2fcfa1e42f3464883cdb2c">ua_timer.h</a>
+: <a class="el" href="ua__timer_8h.html#a7b9f525d272da6cefa016ea10f6d7e6d">ua_timer.h</a>
 </li>
 <li>UA_Timer_addTimedCallback()
 : <a class="el" href="ua__timer_8h.html#a37e97709d9f23b3ebfc349b2fe2830b8">ua_timer.h</a>
@@ -851,8 +1016,8 @@ $(function() {
 <li>UA_Timer_addTimerEntry()
 : <a class="el" href="ua__timer_8h.html#af8f0d18cef3e1c29dfc711dc6ff97d68">ua_timer.h</a>
 </li>
-<li>UA_Timer_changeRepeatedCallbackInterval()
-: <a class="el" href="ua__timer_8h.html#a1fc9da79f0c9454a6e562086d73dbcca">ua_timer.h</a>
+<li>UA_Timer_changeRepeatedCallback()
+: <a class="el" href="ua__timer_8h.html#aec80b9fcf0eb1493768ee20ca7a205a8">ua_timer.h</a>
 </li>
 <li>UA_Timer_clear()
 : <a class="el" href="ua__timer_8h.html#a8cc634afaf10ecf5fefed378db8ffe11">ua_timer.h</a>
@@ -892,6 +1057,12 @@ $(function() {
 </li>
 <li>UA_Variant_setScalarCopy()
 : <a class="el" href="types_8h.html#ab40084675fc8efaa4af30a5c6a1399e4">types.h</a>
+</li>
+<li>useMembufAlloc()
+: <a class="el" href="ua__pubsub__bufmalloc_8h.html#a53d6a5f7683d18b9a04433ab0c16fd81">ua_pubsub_bufmalloc.h</a>
+</li>
+<li>useNormalAlloc()
+: <a class="el" href="ua__pubsub__bufmalloc_8h.html#ab0c958e60e38ba501f2c565ae282ad19">ua_pubsub_bufmalloc.h</a>
 </li>
 <li>utf8_check_first()
 : <a class="el" href="string__escape_8h.html#a3c23bca01b899d819438d8d9880afb22">string_escape.h</a>

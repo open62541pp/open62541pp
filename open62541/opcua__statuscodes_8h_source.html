@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">open62541
-   &#160;<span id="projectnumber">1.2.6</span>
+   &#160;<span id="projectnumber">1.3.5</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -814,494 +814,564 @@ $(function() {
 <div class="line"><a name="l00768"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a49d7144ec27dac4f55bec5f9beb84f78">  768</a></span>&#160;<span class="preprocessor">#define OpcUa_BadSequenceNumberUnknown 0x807A0000</span></div>
 <div class="line"><a name="l00769"></a><span class="lineno">  769</span>&#160; </div>
 <div class="line"><a name="l00770"></a><span class="lineno">  770</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160;<span class="comment"> * The requested notification message is no longer available.</span></div>
+<div class="line"><a name="l00771"></a><span class="lineno">  771</span>&#160;<span class="comment"> * The Server does not support retransmission queue and acknowledgement of sequence numbers is not available.</span></div>
 <div class="line"><a name="l00772"></a><span class="lineno">  772</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00773"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ab86c196eeb372c40210c4bea68122b10">  773</a></span>&#160;<span class="preprocessor">#define OpcUa_BadMessageNotAvailable 0x807B0000</span></div>
+<div class="line"><a name="l00773"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ae82ac945fa4e581b0de42010b09c433d">  773</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodRetransmissionQueueNotSupported 0x00DF0000</span></div>
 <div class="line"><a name="l00774"></a><span class="lineno">  774</span>&#160; </div>
 <div class="line"><a name="l00775"></a><span class="lineno">  775</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160;<span class="comment"> * The client of the current session does not support one or more Profiles that are necessary for the subscription.</span></div>
+<div class="line"><a name="l00776"></a><span class="lineno">  776</span>&#160;<span class="comment"> * The requested notification message is no longer available.</span></div>
 <div class="line"><a name="l00777"></a><span class="lineno">  777</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00778"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#acd118e3ec0ae45cd5bf53980ac4d1756">  778</a></span>&#160;<span class="preprocessor">#define OpcUa_BadInsufficientClientProfile 0x807C0000</span></div>
+<div class="line"><a name="l00778"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ab86c196eeb372c40210c4bea68122b10">  778</a></span>&#160;<span class="preprocessor">#define OpcUa_BadMessageNotAvailable 0x807B0000</span></div>
 <div class="line"><a name="l00779"></a><span class="lineno">  779</span>&#160; </div>
 <div class="line"><a name="l00780"></a><span class="lineno">  780</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;<span class="comment"> * The sub-state machine is not currently active.</span></div>
+<div class="line"><a name="l00781"></a><span class="lineno">  781</span>&#160;<span class="comment"> * The client of the current session does not support one or more Profiles that are necessary for the subscription.</span></div>
 <div class="line"><a name="l00782"></a><span class="lineno">  782</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00783"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a865375d6e0ebf52ec34efe51a3bc2e78">  783</a></span>&#160;<span class="preprocessor">#define OpcUa_BadStateNotActive 0x80BF0000</span></div>
+<div class="line"><a name="l00783"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#acd118e3ec0ae45cd5bf53980ac4d1756">  783</a></span>&#160;<span class="preprocessor">#define OpcUa_BadInsufficientClientProfile 0x807C0000</span></div>
 <div class="line"><a name="l00784"></a><span class="lineno">  784</span>&#160; </div>
 <div class="line"><a name="l00785"></a><span class="lineno">  785</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00786"></a><span class="lineno">  786</span>&#160;<span class="comment"> * An equivalent rule already exists.</span></div>
+<div class="line"><a name="l00786"></a><span class="lineno">  786</span>&#160;<span class="comment"> * The sub-state machine is not currently active.</span></div>
 <div class="line"><a name="l00787"></a><span class="lineno">  787</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00788"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ab76ca0747c26ac23be96f9d65e78753d">  788</a></span>&#160;<span class="preprocessor">#define OpcUa_BadAlreadyExists 0x81150000</span></div>
+<div class="line"><a name="l00788"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a865375d6e0ebf52ec34efe51a3bc2e78">  788</a></span>&#160;<span class="preprocessor">#define OpcUa_BadStateNotActive 0x80BF0000</span></div>
 <div class="line"><a name="l00789"></a><span class="lineno">  789</span>&#160; </div>
 <div class="line"><a name="l00790"></a><span class="lineno">  790</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160;<span class="comment"> * The server cannot process the request because it is too busy.</span></div>
+<div class="line"><a name="l00791"></a><span class="lineno">  791</span>&#160;<span class="comment"> * An equivalent rule already exists.</span></div>
 <div class="line"><a name="l00792"></a><span class="lineno">  792</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00793"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#aeb81fd08f3dd76a5227ce84d09837a16">  793</a></span>&#160;<span class="preprocessor">#define OpcUa_BadTcpServerTooBusy 0x807D0000</span></div>
+<div class="line"><a name="l00793"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ab76ca0747c26ac23be96f9d65e78753d">  793</a></span>&#160;<span class="preprocessor">#define OpcUa_BadAlreadyExists 0x81150000</span></div>
 <div class="line"><a name="l00794"></a><span class="lineno">  794</span>&#160; </div>
 <div class="line"><a name="l00795"></a><span class="lineno">  795</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00796"></a><span class="lineno">  796</span>&#160;<span class="comment"> * The type of the message specified in the header invalid.</span></div>
+<div class="line"><a name="l00796"></a><span class="lineno">  796</span>&#160;<span class="comment"> * The server cannot process the request because it is too busy.</span></div>
 <div class="line"><a name="l00797"></a><span class="lineno">  797</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00798"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a257074bd034b592449ac8e2b50378005">  798</a></span>&#160;<span class="preprocessor">#define OpcUa_BadTcpMessageTypeInvalid 0x807E0000</span></div>
+<div class="line"><a name="l00798"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#aeb81fd08f3dd76a5227ce84d09837a16">  798</a></span>&#160;<span class="preprocessor">#define OpcUa_BadTcpServerTooBusy 0x807D0000</span></div>
 <div class="line"><a name="l00799"></a><span class="lineno">  799</span>&#160; </div>
 <div class="line"><a name="l00800"></a><span class="lineno">  800</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;<span class="comment"> * The SecureChannelId and/or TokenId are not currently in use.</span></div>
+<div class="line"><a name="l00801"></a><span class="lineno">  801</span>&#160;<span class="comment"> * The type of the message specified in the header invalid.</span></div>
 <div class="line"><a name="l00802"></a><span class="lineno">  802</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00803"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a48b2ec6bbe2d12fbe48c4dbccfad6712">  803</a></span>&#160;<span class="preprocessor">#define OpcUa_BadTcpSecureChannelUnknown 0x807F0000</span></div>
+<div class="line"><a name="l00803"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a257074bd034b592449ac8e2b50378005">  803</a></span>&#160;<span class="preprocessor">#define OpcUa_BadTcpMessageTypeInvalid 0x807E0000</span></div>
 <div class="line"><a name="l00804"></a><span class="lineno">  804</span>&#160; </div>
 <div class="line"><a name="l00805"></a><span class="lineno">  805</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160;<span class="comment"> * The size of the message chunk specified in the header is too large.</span></div>
+<div class="line"><a name="l00806"></a><span class="lineno">  806</span>&#160;<span class="comment"> * The SecureChannelId and/or TokenId are not currently in use.</span></div>
 <div class="line"><a name="l00807"></a><span class="lineno">  807</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00808"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a0ac3278540acaccfcb2b158fddbd2a9d">  808</a></span>&#160;<span class="preprocessor">#define OpcUa_BadTcpMessageTooLarge 0x80800000</span></div>
+<div class="line"><a name="l00808"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a48b2ec6bbe2d12fbe48c4dbccfad6712">  808</a></span>&#160;<span class="preprocessor">#define OpcUa_BadTcpSecureChannelUnknown 0x807F0000</span></div>
 <div class="line"><a name="l00809"></a><span class="lineno">  809</span>&#160; </div>
 <div class="line"><a name="l00810"></a><span class="lineno">  810</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00811"></a><span class="lineno">  811</span>&#160;<span class="comment"> * There are not enough resources to process the request.</span></div>
+<div class="line"><a name="l00811"></a><span class="lineno">  811</span>&#160;<span class="comment"> * The size of the message chunk specified in the header is too large.</span></div>
 <div class="line"><a name="l00812"></a><span class="lineno">  812</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00813"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a37c3154cf7b060a6131e9d65f9549d8b">  813</a></span>&#160;<span class="preprocessor">#define OpcUa_BadTcpNotEnoughResources 0x80810000</span></div>
+<div class="line"><a name="l00813"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a0ac3278540acaccfcb2b158fddbd2a9d">  813</a></span>&#160;<span class="preprocessor">#define OpcUa_BadTcpMessageTooLarge 0x80800000</span></div>
 <div class="line"><a name="l00814"></a><span class="lineno">  814</span>&#160; </div>
 <div class="line"><a name="l00815"></a><span class="lineno">  815</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00816"></a><span class="lineno">  816</span>&#160;<span class="comment"> * An internal error occurred.</span></div>
+<div class="line"><a name="l00816"></a><span class="lineno">  816</span>&#160;<span class="comment"> * There are not enough resources to process the request.</span></div>
 <div class="line"><a name="l00817"></a><span class="lineno">  817</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00818"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a7e4b5524ff2c2746f6bf39e1007b2e15">  818</a></span>&#160;<span class="preprocessor">#define OpcUa_BadTcpInternalError 0x80820000</span></div>
+<div class="line"><a name="l00818"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a37c3154cf7b060a6131e9d65f9549d8b">  818</a></span>&#160;<span class="preprocessor">#define OpcUa_BadTcpNotEnoughResources 0x80810000</span></div>
 <div class="line"><a name="l00819"></a><span class="lineno">  819</span>&#160; </div>
 <div class="line"><a name="l00820"></a><span class="lineno">  820</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00821"></a><span class="lineno">  821</span>&#160;<span class="comment"> * The server does not recognize the QueryString specified.</span></div>
+<div class="line"><a name="l00821"></a><span class="lineno">  821</span>&#160;<span class="comment"> * An internal error occurred.</span></div>
 <div class="line"><a name="l00822"></a><span class="lineno">  822</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00823"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ad4643bd52d31a72ef80dc945417e9d35">  823</a></span>&#160;<span class="preprocessor">#define OpcUa_BadTcpEndpointUrlInvalid 0x80830000</span></div>
+<div class="line"><a name="l00823"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a7e4b5524ff2c2746f6bf39e1007b2e15">  823</a></span>&#160;<span class="preprocessor">#define OpcUa_BadTcpInternalError 0x80820000</span></div>
 <div class="line"><a name="l00824"></a><span class="lineno">  824</span>&#160; </div>
 <div class="line"><a name="l00825"></a><span class="lineno">  825</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00826"></a><span class="lineno">  826</span>&#160;<span class="comment"> * The request could not be sent because of a network interruption.</span></div>
+<div class="line"><a name="l00826"></a><span class="lineno">  826</span>&#160;<span class="comment"> * The server does not recognize the QueryString specified.</span></div>
 <div class="line"><a name="l00827"></a><span class="lineno">  827</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00828"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ab789cf5797c0696519f1c41131d664b6">  828</a></span>&#160;<span class="preprocessor">#define OpcUa_BadRequestInterrupted 0x80840000</span></div>
+<div class="line"><a name="l00828"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ad4643bd52d31a72ef80dc945417e9d35">  828</a></span>&#160;<span class="preprocessor">#define OpcUa_BadTcpEndpointUrlInvalid 0x80830000</span></div>
 <div class="line"><a name="l00829"></a><span class="lineno">  829</span>&#160; </div>
 <div class="line"><a name="l00830"></a><span class="lineno">  830</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00831"></a><span class="lineno">  831</span>&#160;<span class="comment"> * Timeout occurred while processing the request.</span></div>
+<div class="line"><a name="l00831"></a><span class="lineno">  831</span>&#160;<span class="comment"> * The request could not be sent because of a network interruption.</span></div>
 <div class="line"><a name="l00832"></a><span class="lineno">  832</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00833"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ac3c2d4c9fe32c6e396b261a3c326b406">  833</a></span>&#160;<span class="preprocessor">#define OpcUa_BadRequestTimeout 0x80850000</span></div>
+<div class="line"><a name="l00833"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ab789cf5797c0696519f1c41131d664b6">  833</a></span>&#160;<span class="preprocessor">#define OpcUa_BadRequestInterrupted 0x80840000</span></div>
 <div class="line"><a name="l00834"></a><span class="lineno">  834</span>&#160; </div>
 <div class="line"><a name="l00835"></a><span class="lineno">  835</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00836"></a><span class="lineno">  836</span>&#160;<span class="comment"> * The secure channel has been closed.</span></div>
+<div class="line"><a name="l00836"></a><span class="lineno">  836</span>&#160;<span class="comment"> * Timeout occurred while processing the request.</span></div>
 <div class="line"><a name="l00837"></a><span class="lineno">  837</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00838"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#abed0a5398bac5fab501ac702b7ba2579">  838</a></span>&#160;<span class="preprocessor">#define OpcUa_BadSecureChannelClosed 0x80860000</span></div>
+<div class="line"><a name="l00838"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ac3c2d4c9fe32c6e396b261a3c326b406">  838</a></span>&#160;<span class="preprocessor">#define OpcUa_BadRequestTimeout 0x80850000</span></div>
 <div class="line"><a name="l00839"></a><span class="lineno">  839</span>&#160; </div>
 <div class="line"><a name="l00840"></a><span class="lineno">  840</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00841"></a><span class="lineno">  841</span>&#160;<span class="comment"> * The token has expired or is not recognized.</span></div>
+<div class="line"><a name="l00841"></a><span class="lineno">  841</span>&#160;<span class="comment"> * The secure channel has been closed.</span></div>
 <div class="line"><a name="l00842"></a><span class="lineno">  842</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00843"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a5d292b009907e943c803019c71f5276c">  843</a></span>&#160;<span class="preprocessor">#define OpcUa_BadSecureChannelTokenUnknown 0x80870000</span></div>
+<div class="line"><a name="l00843"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#abed0a5398bac5fab501ac702b7ba2579">  843</a></span>&#160;<span class="preprocessor">#define OpcUa_BadSecureChannelClosed 0x80860000</span></div>
 <div class="line"><a name="l00844"></a><span class="lineno">  844</span>&#160; </div>
 <div class="line"><a name="l00845"></a><span class="lineno">  845</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00846"></a><span class="lineno">  846</span>&#160;<span class="comment"> * The sequence number is not valid.</span></div>
+<div class="line"><a name="l00846"></a><span class="lineno">  846</span>&#160;<span class="comment"> * The token has expired or is not recognized.</span></div>
 <div class="line"><a name="l00847"></a><span class="lineno">  847</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00848"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a2f7ce2546fb078acf1a5c6d9dec65aa5">  848</a></span>&#160;<span class="preprocessor">#define OpcUa_BadSequenceNumberInvalid 0x80880000</span></div>
+<div class="line"><a name="l00848"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a5d292b009907e943c803019c71f5276c">  848</a></span>&#160;<span class="preprocessor">#define OpcUa_BadSecureChannelTokenUnknown 0x80870000</span></div>
 <div class="line"><a name="l00849"></a><span class="lineno">  849</span>&#160; </div>
 <div class="line"><a name="l00850"></a><span class="lineno">  850</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00851"></a><span class="lineno">  851</span>&#160;<span class="comment"> * The applications do not have compatible protocol versions.</span></div>
+<div class="line"><a name="l00851"></a><span class="lineno">  851</span>&#160;<span class="comment"> * The sequence number is not valid.</span></div>
 <div class="line"><a name="l00852"></a><span class="lineno">  852</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00853"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a98492bbf90ba7b05da30ee58fb123a13">  853</a></span>&#160;<span class="preprocessor">#define OpcUa_BadProtocolVersionUnsupported 0x80BE0000</span></div>
+<div class="line"><a name="l00853"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a2f7ce2546fb078acf1a5c6d9dec65aa5">  853</a></span>&#160;<span class="preprocessor">#define OpcUa_BadSequenceNumberInvalid 0x80880000</span></div>
 <div class="line"><a name="l00854"></a><span class="lineno">  854</span>&#160; </div>
 <div class="line"><a name="l00855"></a><span class="lineno">  855</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00856"></a><span class="lineno">  856</span>&#160;<span class="comment"> * There is a problem with the configuration that affects the usefulness of the value.</span></div>
+<div class="line"><a name="l00856"></a><span class="lineno">  856</span>&#160;<span class="comment"> * The applications do not have compatible protocol versions.</span></div>
 <div class="line"><a name="l00857"></a><span class="lineno">  857</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00858"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#afab471e4c614fd0846b9fc0b945c0460">  858</a></span>&#160;<span class="preprocessor">#define OpcUa_BadConfigurationError 0x80890000</span></div>
+<div class="line"><a name="l00858"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a98492bbf90ba7b05da30ee58fb123a13">  858</a></span>&#160;<span class="preprocessor">#define OpcUa_BadProtocolVersionUnsupported 0x80BE0000</span></div>
 <div class="line"><a name="l00859"></a><span class="lineno">  859</span>&#160; </div>
 <div class="line"><a name="l00860"></a><span class="lineno">  860</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00861"></a><span class="lineno">  861</span>&#160;<span class="comment"> * The variable should receive its value from another variable, but has never been configured to do so.</span></div>
+<div class="line"><a name="l00861"></a><span class="lineno">  861</span>&#160;<span class="comment"> * There is a problem with the configuration that affects the usefulness of the value.</span></div>
 <div class="line"><a name="l00862"></a><span class="lineno">  862</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00863"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ac01eb7ded61c78f8f9031dc7d40c5198">  863</a></span>&#160;<span class="preprocessor">#define OpcUa_BadNotConnected 0x808A0000</span></div>
+<div class="line"><a name="l00863"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#afab471e4c614fd0846b9fc0b945c0460">  863</a></span>&#160;<span class="preprocessor">#define OpcUa_BadConfigurationError 0x80890000</span></div>
 <div class="line"><a name="l00864"></a><span class="lineno">  864</span>&#160; </div>
 <div class="line"><a name="l00865"></a><span class="lineno">  865</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00866"></a><span class="lineno">  866</span>&#160;<span class="comment"> * There has been a failure in the device/data source that generates the value that has affected the value.</span></div>
+<div class="line"><a name="l00866"></a><span class="lineno">  866</span>&#160;<span class="comment"> * The variable should receive its value from another variable, but has never been configured to do so.</span></div>
 <div class="line"><a name="l00867"></a><span class="lineno">  867</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00868"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#af1470bf485bc2eb8f84c8fa67f887333">  868</a></span>&#160;<span class="preprocessor">#define OpcUa_BadDeviceFailure 0x808B0000</span></div>
+<div class="line"><a name="l00868"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ac01eb7ded61c78f8f9031dc7d40c5198">  868</a></span>&#160;<span class="preprocessor">#define OpcUa_BadNotConnected 0x808A0000</span></div>
 <div class="line"><a name="l00869"></a><span class="lineno">  869</span>&#160; </div>
 <div class="line"><a name="l00870"></a><span class="lineno">  870</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00871"></a><span class="lineno">  871</span>&#160;<span class="comment"> * There has been a failure in the sensor from which the value is derived by the device/data source.</span></div>
+<div class="line"><a name="l00871"></a><span class="lineno">  871</span>&#160;<span class="comment"> * There has been a failure in the device/data source that generates the value that has affected the value.</span></div>
 <div class="line"><a name="l00872"></a><span class="lineno">  872</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00873"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a0a9442ded2dcf15d74879ed4391640b8">  873</a></span>&#160;<span class="preprocessor">#define OpcUa_BadSensorFailure 0x808C0000</span></div>
+<div class="line"><a name="l00873"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#af1470bf485bc2eb8f84c8fa67f887333">  873</a></span>&#160;<span class="preprocessor">#define OpcUa_BadDeviceFailure 0x808B0000</span></div>
 <div class="line"><a name="l00874"></a><span class="lineno">  874</span>&#160; </div>
 <div class="line"><a name="l00875"></a><span class="lineno">  875</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00876"></a><span class="lineno">  876</span>&#160;<span class="comment"> * The source of the data is not operational.</span></div>
+<div class="line"><a name="l00876"></a><span class="lineno">  876</span>&#160;<span class="comment"> * There has been a failure in the sensor from which the value is derived by the device/data source.</span></div>
 <div class="line"><a name="l00877"></a><span class="lineno">  877</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00878"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a840231ee26af49aed9fb154f57e13c6f">  878</a></span>&#160;<span class="preprocessor">#define OpcUa_BadOutOfService 0x808D0000</span></div>
+<div class="line"><a name="l00878"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a0a9442ded2dcf15d74879ed4391640b8">  878</a></span>&#160;<span class="preprocessor">#define OpcUa_BadSensorFailure 0x808C0000</span></div>
 <div class="line"><a name="l00879"></a><span class="lineno">  879</span>&#160; </div>
 <div class="line"><a name="l00880"></a><span class="lineno">  880</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00881"></a><span class="lineno">  881</span>&#160;<span class="comment"> * The deadband filter is not valid.</span></div>
+<div class="line"><a name="l00881"></a><span class="lineno">  881</span>&#160;<span class="comment"> * The source of the data is not operational.</span></div>
 <div class="line"><a name="l00882"></a><span class="lineno">  882</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00883"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a0f14ba8fedb0078bdc377d79a2d356d8">  883</a></span>&#160;<span class="preprocessor">#define OpcUa_BadDeadbandFilterInvalid 0x808E0000</span></div>
+<div class="line"><a name="l00883"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a840231ee26af49aed9fb154f57e13c6f">  883</a></span>&#160;<span class="preprocessor">#define OpcUa_BadOutOfService 0x808D0000</span></div>
 <div class="line"><a name="l00884"></a><span class="lineno">  884</span>&#160; </div>
 <div class="line"><a name="l00885"></a><span class="lineno">  885</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00886"></a><span class="lineno">  886</span>&#160;<span class="comment"> * Communication to the data source has failed. The variable value is the last value that had a good quality.</span></div>
+<div class="line"><a name="l00886"></a><span class="lineno">  886</span>&#160;<span class="comment"> * The deadband filter is not valid.</span></div>
 <div class="line"><a name="l00887"></a><span class="lineno">  887</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00888"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#abc100aceec4272ab20f38500028572b8">  888</a></span>&#160;<span class="preprocessor">#define OpcUa_UncertainNoCommunicationLastUsableValue 0x408F0000</span></div>
+<div class="line"><a name="l00888"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a0f14ba8fedb0078bdc377d79a2d356d8">  888</a></span>&#160;<span class="preprocessor">#define OpcUa_BadDeadbandFilterInvalid 0x808E0000</span></div>
 <div class="line"><a name="l00889"></a><span class="lineno">  889</span>&#160; </div>
 <div class="line"><a name="l00890"></a><span class="lineno">  890</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00891"></a><span class="lineno">  891</span>&#160;<span class="comment"> * Whatever was updating this value has stopped doing so.</span></div>
+<div class="line"><a name="l00891"></a><span class="lineno">  891</span>&#160;<span class="comment"> * Communication to the data source has failed. The variable value is the last value that had a good quality.</span></div>
 <div class="line"><a name="l00892"></a><span class="lineno">  892</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00893"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a737d638329db31aeb3a8dc2b7e700181">  893</a></span>&#160;<span class="preprocessor">#define OpcUa_UncertainLastUsableValue 0x40900000</span></div>
+<div class="line"><a name="l00893"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#abc100aceec4272ab20f38500028572b8">  893</a></span>&#160;<span class="preprocessor">#define OpcUa_UncertainNoCommunicationLastUsableValue 0x408F0000</span></div>
 <div class="line"><a name="l00894"></a><span class="lineno">  894</span>&#160; </div>
 <div class="line"><a name="l00895"></a><span class="lineno">  895</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00896"></a><span class="lineno">  896</span>&#160;<span class="comment"> * The value is an operational value that was manually overwritten.</span></div>
+<div class="line"><a name="l00896"></a><span class="lineno">  896</span>&#160;<span class="comment"> * Whatever was updating this value has stopped doing so.</span></div>
 <div class="line"><a name="l00897"></a><span class="lineno">  897</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00898"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#abf6b5ff80e855d98e9a2628210f3dd56">  898</a></span>&#160;<span class="preprocessor">#define OpcUa_UncertainSubstituteValue 0x40910000</span></div>
+<div class="line"><a name="l00898"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a737d638329db31aeb3a8dc2b7e700181">  898</a></span>&#160;<span class="preprocessor">#define OpcUa_UncertainLastUsableValue 0x40900000</span></div>
 <div class="line"><a name="l00899"></a><span class="lineno">  899</span>&#160; </div>
 <div class="line"><a name="l00900"></a><span class="lineno">  900</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00901"></a><span class="lineno">  901</span>&#160;<span class="comment"> * The value is an initial value for a variable that normally receives its value from another variable.</span></div>
+<div class="line"><a name="l00901"></a><span class="lineno">  901</span>&#160;<span class="comment"> * The value is an operational value that was manually overwritten.</span></div>
 <div class="line"><a name="l00902"></a><span class="lineno">  902</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00903"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a4c834c31b0050e60d7766ca3dd6301c8">  903</a></span>&#160;<span class="preprocessor">#define OpcUa_UncertainInitialValue 0x40920000</span></div>
+<div class="line"><a name="l00903"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#abf6b5ff80e855d98e9a2628210f3dd56">  903</a></span>&#160;<span class="preprocessor">#define OpcUa_UncertainSubstituteValue 0x40910000</span></div>
 <div class="line"><a name="l00904"></a><span class="lineno">  904</span>&#160; </div>
 <div class="line"><a name="l00905"></a><span class="lineno">  905</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00906"></a><span class="lineno">  906</span>&#160;<span class="comment"> * The value is at one of the sensor limits.</span></div>
+<div class="line"><a name="l00906"></a><span class="lineno">  906</span>&#160;<span class="comment"> * The value is an initial value for a variable that normally receives its value from another variable.</span></div>
 <div class="line"><a name="l00907"></a><span class="lineno">  907</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00908"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a675ab9a14e4e06aa74bf4348c97b1f47">  908</a></span>&#160;<span class="preprocessor">#define OpcUa_UncertainSensorNotAccurate 0x40930000</span></div>
+<div class="line"><a name="l00908"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a4c834c31b0050e60d7766ca3dd6301c8">  908</a></span>&#160;<span class="preprocessor">#define OpcUa_UncertainInitialValue 0x40920000</span></div>
 <div class="line"><a name="l00909"></a><span class="lineno">  909</span>&#160; </div>
 <div class="line"><a name="l00910"></a><span class="lineno">  910</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00911"></a><span class="lineno">  911</span>&#160;<span class="comment"> * The value is outside of the range of values defined for this parameter.</span></div>
+<div class="line"><a name="l00911"></a><span class="lineno">  911</span>&#160;<span class="comment"> * The value is at one of the sensor limits.</span></div>
 <div class="line"><a name="l00912"></a><span class="lineno">  912</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00913"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a8dcbc22c33c1eddcfc710e81182a895b">  913</a></span>&#160;<span class="preprocessor">#define OpcUa_UncertainEngineeringUnitsExceeded 0x40940000</span></div>
+<div class="line"><a name="l00913"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a675ab9a14e4e06aa74bf4348c97b1f47">  913</a></span>&#160;<span class="preprocessor">#define OpcUa_UncertainSensorNotAccurate 0x40930000</span></div>
 <div class="line"><a name="l00914"></a><span class="lineno">  914</span>&#160; </div>
 <div class="line"><a name="l00915"></a><span class="lineno">  915</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00916"></a><span class="lineno">  916</span>&#160;<span class="comment"> * The value is derived from multiple sources and has less than the required number of Good sources.</span></div>
+<div class="line"><a name="l00916"></a><span class="lineno">  916</span>&#160;<span class="comment"> * The value is outside of the range of values defined for this parameter.</span></div>
 <div class="line"><a name="l00917"></a><span class="lineno">  917</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00918"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#af3cf613fffc2962d0dd43bc9af89ad43">  918</a></span>&#160;<span class="preprocessor">#define OpcUa_UncertainSubNormal 0x40950000</span></div>
+<div class="line"><a name="l00918"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a8dcbc22c33c1eddcfc710e81182a895b">  918</a></span>&#160;<span class="preprocessor">#define OpcUa_UncertainEngineeringUnitsExceeded 0x40940000</span></div>
 <div class="line"><a name="l00919"></a><span class="lineno">  919</span>&#160; </div>
 <div class="line"><a name="l00920"></a><span class="lineno">  920</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00921"></a><span class="lineno">  921</span>&#160;<span class="comment"> * The value has been overridden.</span></div>
+<div class="line"><a name="l00921"></a><span class="lineno">  921</span>&#160;<span class="comment"> * The value is derived from multiple sources and has less than the required number of Good sources.</span></div>
 <div class="line"><a name="l00922"></a><span class="lineno">  922</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00923"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a8ab9ecbd8ad11e0d8b47e229a1e22430">  923</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodLocalOverride 0x00960000</span></div>
+<div class="line"><a name="l00923"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#af3cf613fffc2962d0dd43bc9af89ad43">  923</a></span>&#160;<span class="preprocessor">#define OpcUa_UncertainSubNormal 0x40950000</span></div>
 <div class="line"><a name="l00924"></a><span class="lineno">  924</span>&#160; </div>
 <div class="line"><a name="l00925"></a><span class="lineno">  925</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00926"></a><span class="lineno">  926</span>&#160;<span class="comment"> * This Condition refresh failed, a Condition refresh operation is already in progress.</span></div>
+<div class="line"><a name="l00926"></a><span class="lineno">  926</span>&#160;<span class="comment"> * The value has been overridden.</span></div>
 <div class="line"><a name="l00927"></a><span class="lineno">  927</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00928"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ad11422ec4fd574e5a7eb4bf98ac04fc4">  928</a></span>&#160;<span class="preprocessor">#define OpcUa_BadRefreshInProgress 0x80970000</span></div>
+<div class="line"><a name="l00928"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a8ab9ecbd8ad11e0d8b47e229a1e22430">  928</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodLocalOverride 0x00960000</span></div>
 <div class="line"><a name="l00929"></a><span class="lineno">  929</span>&#160; </div>
 <div class="line"><a name="l00930"></a><span class="lineno">  930</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00931"></a><span class="lineno">  931</span>&#160;<span class="comment"> * This condition has already been disabled.</span></div>
+<div class="line"><a name="l00931"></a><span class="lineno">  931</span>&#160;<span class="comment"> * This Condition refresh failed, a Condition refresh operation is already in progress.</span></div>
 <div class="line"><a name="l00932"></a><span class="lineno">  932</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00933"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a5906f11b6b279536caf66c53a9eae6ef">  933</a></span>&#160;<span class="preprocessor">#define OpcUa_BadConditionAlreadyDisabled 0x80980000</span></div>
+<div class="line"><a name="l00933"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ad11422ec4fd574e5a7eb4bf98ac04fc4">  933</a></span>&#160;<span class="preprocessor">#define OpcUa_BadRefreshInProgress 0x80970000</span></div>
 <div class="line"><a name="l00934"></a><span class="lineno">  934</span>&#160; </div>
 <div class="line"><a name="l00935"></a><span class="lineno">  935</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00936"></a><span class="lineno">  936</span>&#160;<span class="comment"> * This condition has already been enabled.</span></div>
+<div class="line"><a name="l00936"></a><span class="lineno">  936</span>&#160;<span class="comment"> * This condition has already been disabled.</span></div>
 <div class="line"><a name="l00937"></a><span class="lineno">  937</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00938"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a2721947f3428c6d6b4c545bda4f68052">  938</a></span>&#160;<span class="preprocessor">#define OpcUa_BadConditionAlreadyEnabled 0x80CC0000</span></div>
+<div class="line"><a name="l00938"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a5906f11b6b279536caf66c53a9eae6ef">  938</a></span>&#160;<span class="preprocessor">#define OpcUa_BadConditionAlreadyDisabled 0x80980000</span></div>
 <div class="line"><a name="l00939"></a><span class="lineno">  939</span>&#160; </div>
 <div class="line"><a name="l00940"></a><span class="lineno">  940</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00941"></a><span class="lineno">  941</span>&#160;<span class="comment"> * Property not available, this condition is disabled.</span></div>
+<div class="line"><a name="l00941"></a><span class="lineno">  941</span>&#160;<span class="comment"> * This condition has already been enabled.</span></div>
 <div class="line"><a name="l00942"></a><span class="lineno">  942</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00943"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a140805711b8d903ac844efe95939b50f">  943</a></span>&#160;<span class="preprocessor">#define OpcUa_BadConditionDisabled 0x80990000</span></div>
+<div class="line"><a name="l00943"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a2721947f3428c6d6b4c545bda4f68052">  943</a></span>&#160;<span class="preprocessor">#define OpcUa_BadConditionAlreadyEnabled 0x80CC0000</span></div>
 <div class="line"><a name="l00944"></a><span class="lineno">  944</span>&#160; </div>
 <div class="line"><a name="l00945"></a><span class="lineno">  945</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00946"></a><span class="lineno">  946</span>&#160;<span class="comment"> * The specified event id is not recognized.</span></div>
+<div class="line"><a name="l00946"></a><span class="lineno">  946</span>&#160;<span class="comment"> * Property not available, this condition is disabled.</span></div>
 <div class="line"><a name="l00947"></a><span class="lineno">  947</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00948"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a9fd37d471fd047ef666cfadb2985bf53">  948</a></span>&#160;<span class="preprocessor">#define OpcUa_BadEventIdUnknown 0x809A0000</span></div>
+<div class="line"><a name="l00948"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a140805711b8d903ac844efe95939b50f">  948</a></span>&#160;<span class="preprocessor">#define OpcUa_BadConditionDisabled 0x80990000</span></div>
 <div class="line"><a name="l00949"></a><span class="lineno">  949</span>&#160; </div>
 <div class="line"><a name="l00950"></a><span class="lineno">  950</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00951"></a><span class="lineno">  951</span>&#160;<span class="comment"> * The event cannot be acknowledged.</span></div>
+<div class="line"><a name="l00951"></a><span class="lineno">  951</span>&#160;<span class="comment"> * The specified event id is not recognized.</span></div>
 <div class="line"><a name="l00952"></a><span class="lineno">  952</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00953"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a90bba2ec44bf9915146fba9324beb283">  953</a></span>&#160;<span class="preprocessor">#define OpcUa_BadEventNotAcknowledgeable 0x80BB0000</span></div>
+<div class="line"><a name="l00953"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a9fd37d471fd047ef666cfadb2985bf53">  953</a></span>&#160;<span class="preprocessor">#define OpcUa_BadEventIdUnknown 0x809A0000</span></div>
 <div class="line"><a name="l00954"></a><span class="lineno">  954</span>&#160; </div>
 <div class="line"><a name="l00955"></a><span class="lineno">  955</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00956"></a><span class="lineno">  956</span>&#160;<span class="comment"> * The dialog condition is not active.</span></div>
+<div class="line"><a name="l00956"></a><span class="lineno">  956</span>&#160;<span class="comment"> * The event cannot be acknowledged.</span></div>
 <div class="line"><a name="l00957"></a><span class="lineno">  957</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00958"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#aa7cacc23db6529cdabf51f178ee0826b">  958</a></span>&#160;<span class="preprocessor">#define OpcUa_BadDialogNotActive 0x80CD0000</span></div>
+<div class="line"><a name="l00958"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a90bba2ec44bf9915146fba9324beb283">  958</a></span>&#160;<span class="preprocessor">#define OpcUa_BadEventNotAcknowledgeable 0x80BB0000</span></div>
 <div class="line"><a name="l00959"></a><span class="lineno">  959</span>&#160; </div>
 <div class="line"><a name="l00960"></a><span class="lineno">  960</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00961"></a><span class="lineno">  961</span>&#160;<span class="comment"> * The response is not valid for the dialog.</span></div>
+<div class="line"><a name="l00961"></a><span class="lineno">  961</span>&#160;<span class="comment"> * The dialog condition is not active.</span></div>
 <div class="line"><a name="l00962"></a><span class="lineno">  962</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00963"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a06d0dd3ea331a0a6bbbbdc7d89011633">  963</a></span>&#160;<span class="preprocessor">#define OpcUa_BadDialogResponseInvalid 0x80CE0000</span></div>
+<div class="line"><a name="l00963"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#aa7cacc23db6529cdabf51f178ee0826b">  963</a></span>&#160;<span class="preprocessor">#define OpcUa_BadDialogNotActive 0x80CD0000</span></div>
 <div class="line"><a name="l00964"></a><span class="lineno">  964</span>&#160; </div>
 <div class="line"><a name="l00965"></a><span class="lineno">  965</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00966"></a><span class="lineno">  966</span>&#160;<span class="comment"> * The condition branch has already been acknowledged.</span></div>
+<div class="line"><a name="l00966"></a><span class="lineno">  966</span>&#160;<span class="comment"> * The response is not valid for the dialog.</span></div>
 <div class="line"><a name="l00967"></a><span class="lineno">  967</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00968"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a209f7131015dbb53dc81243ae33e04bc">  968</a></span>&#160;<span class="preprocessor">#define OpcUa_BadConditionBranchAlreadyAcked 0x80CF0000</span></div>
+<div class="line"><a name="l00968"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a06d0dd3ea331a0a6bbbbdc7d89011633">  968</a></span>&#160;<span class="preprocessor">#define OpcUa_BadDialogResponseInvalid 0x80CE0000</span></div>
 <div class="line"><a name="l00969"></a><span class="lineno">  969</span>&#160; </div>
 <div class="line"><a name="l00970"></a><span class="lineno">  970</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00971"></a><span class="lineno">  971</span>&#160;<span class="comment"> * The condition branch has already been confirmed.</span></div>
+<div class="line"><a name="l00971"></a><span class="lineno">  971</span>&#160;<span class="comment"> * The condition branch has already been acknowledged.</span></div>
 <div class="line"><a name="l00972"></a><span class="lineno">  972</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00973"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a9bab525dbf9ad6fea11e26be241803aa">  973</a></span>&#160;<span class="preprocessor">#define OpcUa_BadConditionBranchAlreadyConfirmed 0x80D00000</span></div>
+<div class="line"><a name="l00973"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a209f7131015dbb53dc81243ae33e04bc">  973</a></span>&#160;<span class="preprocessor">#define OpcUa_BadConditionBranchAlreadyAcked 0x80CF0000</span></div>
 <div class="line"><a name="l00974"></a><span class="lineno">  974</span>&#160; </div>
 <div class="line"><a name="l00975"></a><span class="lineno">  975</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00976"></a><span class="lineno">  976</span>&#160;<span class="comment"> * The condition has already been shelved.</span></div>
+<div class="line"><a name="l00976"></a><span class="lineno">  976</span>&#160;<span class="comment"> * The condition branch has already been confirmed.</span></div>
 <div class="line"><a name="l00977"></a><span class="lineno">  977</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00978"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a9d3ee8e2ee514834057b536336a64359">  978</a></span>&#160;<span class="preprocessor">#define OpcUa_BadConditionAlreadyShelved 0x80D10000</span></div>
+<div class="line"><a name="l00978"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a9bab525dbf9ad6fea11e26be241803aa">  978</a></span>&#160;<span class="preprocessor">#define OpcUa_BadConditionBranchAlreadyConfirmed 0x80D00000</span></div>
 <div class="line"><a name="l00979"></a><span class="lineno">  979</span>&#160; </div>
 <div class="line"><a name="l00980"></a><span class="lineno">  980</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00981"></a><span class="lineno">  981</span>&#160;<span class="comment"> * The condition is not currently shelved.</span></div>
+<div class="line"><a name="l00981"></a><span class="lineno">  981</span>&#160;<span class="comment"> * The condition has already been shelved.</span></div>
 <div class="line"><a name="l00982"></a><span class="lineno">  982</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00983"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a713b4067a5fb1d90b55d28ad9bb3c0e1">  983</a></span>&#160;<span class="preprocessor">#define OpcUa_BadConditionNotShelved 0x80D20000</span></div>
+<div class="line"><a name="l00983"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a9d3ee8e2ee514834057b536336a64359">  983</a></span>&#160;<span class="preprocessor">#define OpcUa_BadConditionAlreadyShelved 0x80D10000</span></div>
 <div class="line"><a name="l00984"></a><span class="lineno">  984</span>&#160; </div>
 <div class="line"><a name="l00985"></a><span class="lineno">  985</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00986"></a><span class="lineno">  986</span>&#160;<span class="comment"> * The shelving time not within an acceptable range.</span></div>
+<div class="line"><a name="l00986"></a><span class="lineno">  986</span>&#160;<span class="comment"> * The condition is not currently shelved.</span></div>
 <div class="line"><a name="l00987"></a><span class="lineno">  987</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00988"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a6a713879f0bfeb7a5a6e680e68d9cb8b">  988</a></span>&#160;<span class="preprocessor">#define OpcUa_BadShelvingTimeOutOfRange 0x80D30000</span></div>
+<div class="line"><a name="l00988"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a713b4067a5fb1d90b55d28ad9bb3c0e1">  988</a></span>&#160;<span class="preprocessor">#define OpcUa_BadConditionNotShelved 0x80D20000</span></div>
 <div class="line"><a name="l00989"></a><span class="lineno">  989</span>&#160; </div>
 <div class="line"><a name="l00990"></a><span class="lineno">  990</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00991"></a><span class="lineno">  991</span>&#160;<span class="comment"> * No data exists for the requested time range or event filter.</span></div>
+<div class="line"><a name="l00991"></a><span class="lineno">  991</span>&#160;<span class="comment"> * The shelving time not within an acceptable range.</span></div>
 <div class="line"><a name="l00992"></a><span class="lineno">  992</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00993"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#acf9ef0604c6f7853f3a0442d7b649928">  993</a></span>&#160;<span class="preprocessor">#define OpcUa_BadNoData 0x809B0000</span></div>
+<div class="line"><a name="l00993"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a6a713879f0bfeb7a5a6e680e68d9cb8b">  993</a></span>&#160;<span class="preprocessor">#define OpcUa_BadShelvingTimeOutOfRange 0x80D30000</span></div>
 <div class="line"><a name="l00994"></a><span class="lineno">  994</span>&#160; </div>
 <div class="line"><a name="l00995"></a><span class="lineno">  995</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l00996"></a><span class="lineno">  996</span>&#160;<span class="comment"> * No data found to provide upper or lower bound value.</span></div>
+<div class="line"><a name="l00996"></a><span class="lineno">  996</span>&#160;<span class="comment"> * No data exists for the requested time range or event filter.</span></div>
 <div class="line"><a name="l00997"></a><span class="lineno">  997</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l00998"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ab96b0dfc0d5ef2dd107d9cab486ba947">  998</a></span>&#160;<span class="preprocessor">#define OpcUa_BadBoundNotFound 0x80D70000</span></div>
+<div class="line"><a name="l00998"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#acf9ef0604c6f7853f3a0442d7b649928">  998</a></span>&#160;<span class="preprocessor">#define OpcUa_BadNoData 0x809B0000</span></div>
 <div class="line"><a name="l00999"></a><span class="lineno">  999</span>&#160; </div>
 <div class="line"><a name="l01000"></a><span class="lineno"> 1000</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01001"></a><span class="lineno"> 1001</span>&#160;<span class="comment"> * The server cannot retrieve a bound for the variable.</span></div>
+<div class="line"><a name="l01001"></a><span class="lineno"> 1001</span>&#160;<span class="comment"> * No data found to provide upper or lower bound value.</span></div>
 <div class="line"><a name="l01002"></a><span class="lineno"> 1002</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01003"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ab10dbf17ea4b0b1e2da94b58ce5b6ae2"> 1003</a></span>&#160;<span class="preprocessor">#define OpcUa_BadBoundNotSupported 0x80D80000</span></div>
+<div class="line"><a name="l01003"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ab96b0dfc0d5ef2dd107d9cab486ba947"> 1003</a></span>&#160;<span class="preprocessor">#define OpcUa_BadBoundNotFound 0x80D70000</span></div>
 <div class="line"><a name="l01004"></a><span class="lineno"> 1004</span>&#160; </div>
 <div class="line"><a name="l01005"></a><span class="lineno"> 1005</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01006"></a><span class="lineno"> 1006</span>&#160;<span class="comment"> * Data is missing due to collection started/stopped/lost.</span></div>
+<div class="line"><a name="l01006"></a><span class="lineno"> 1006</span>&#160;<span class="comment"> * The server cannot retrieve a bound for the variable.</span></div>
 <div class="line"><a name="l01007"></a><span class="lineno"> 1007</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01008"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#acf7f38c055a1ccddb14940b76a30b31e"> 1008</a></span>&#160;<span class="preprocessor">#define OpcUa_BadDataLost 0x809D0000</span></div>
+<div class="line"><a name="l01008"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ab10dbf17ea4b0b1e2da94b58ce5b6ae2"> 1008</a></span>&#160;<span class="preprocessor">#define OpcUa_BadBoundNotSupported 0x80D80000</span></div>
 <div class="line"><a name="l01009"></a><span class="lineno"> 1009</span>&#160; </div>
 <div class="line"><a name="l01010"></a><span class="lineno"> 1010</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01011"></a><span class="lineno"> 1011</span>&#160;<span class="comment"> * Expected data is unavailable for the requested time range due to an un-mounted volume, an off-line archive or tape, or similar reason for temporary unavailability.</span></div>
+<div class="line"><a name="l01011"></a><span class="lineno"> 1011</span>&#160;<span class="comment"> * Data is missing due to collection started/stopped/lost.</span></div>
 <div class="line"><a name="l01012"></a><span class="lineno"> 1012</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01013"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a1226ac269cf24b3ba6b84c05dda08fa5"> 1013</a></span>&#160;<span class="preprocessor">#define OpcUa_BadDataUnavailable 0x809E0000</span></div>
+<div class="line"><a name="l01013"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#acf7f38c055a1ccddb14940b76a30b31e"> 1013</a></span>&#160;<span class="preprocessor">#define OpcUa_BadDataLost 0x809D0000</span></div>
 <div class="line"><a name="l01014"></a><span class="lineno"> 1014</span>&#160; </div>
 <div class="line"><a name="l01015"></a><span class="lineno"> 1015</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01016"></a><span class="lineno"> 1016</span>&#160;<span class="comment"> * The data or event was not successfully inserted because a matching entry exists.</span></div>
+<div class="line"><a name="l01016"></a><span class="lineno"> 1016</span>&#160;<span class="comment"> * Expected data is unavailable for the requested time range due to an un-mounted volume, an off-line archive or tape, or similar reason for temporary unavailability.</span></div>
 <div class="line"><a name="l01017"></a><span class="lineno"> 1017</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01018"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#adfeef9c67ebf2a7bd1a4d86523f1aa34"> 1018</a></span>&#160;<span class="preprocessor">#define OpcUa_BadEntryExists 0x809F0000</span></div>
+<div class="line"><a name="l01018"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a1226ac269cf24b3ba6b84c05dda08fa5"> 1018</a></span>&#160;<span class="preprocessor">#define OpcUa_BadDataUnavailable 0x809E0000</span></div>
 <div class="line"><a name="l01019"></a><span class="lineno"> 1019</span>&#160; </div>
 <div class="line"><a name="l01020"></a><span class="lineno"> 1020</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01021"></a><span class="lineno"> 1021</span>&#160;<span class="comment"> * The data or event was not successfully updated because no matching entry exists.</span></div>
+<div class="line"><a name="l01021"></a><span class="lineno"> 1021</span>&#160;<span class="comment"> * The data or event was not successfully inserted because a matching entry exists.</span></div>
 <div class="line"><a name="l01022"></a><span class="lineno"> 1022</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01023"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a90d71be6d25212720b9d6f38fbcfeda2"> 1023</a></span>&#160;<span class="preprocessor">#define OpcUa_BadNoEntryExists 0x80A00000</span></div>
+<div class="line"><a name="l01023"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#adfeef9c67ebf2a7bd1a4d86523f1aa34"> 1023</a></span>&#160;<span class="preprocessor">#define OpcUa_BadEntryExists 0x809F0000</span></div>
 <div class="line"><a name="l01024"></a><span class="lineno"> 1024</span>&#160; </div>
 <div class="line"><a name="l01025"></a><span class="lineno"> 1025</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01026"></a><span class="lineno"> 1026</span>&#160;<span class="comment"> * The client requested history using a timestamp format the server does not support (i.e requested ServerTimestamp when server only supports SourceTimestamp).</span></div>
+<div class="line"><a name="l01026"></a><span class="lineno"> 1026</span>&#160;<span class="comment"> * The data or event was not successfully updated because no matching entry exists.</span></div>
 <div class="line"><a name="l01027"></a><span class="lineno"> 1027</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01028"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#aff1db3741ab673c52b2e0a31884f3270"> 1028</a></span>&#160;<span class="preprocessor">#define OpcUa_BadTimestampNotSupported 0x80A10000</span></div>
+<div class="line"><a name="l01028"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a90d71be6d25212720b9d6f38fbcfeda2"> 1028</a></span>&#160;<span class="preprocessor">#define OpcUa_BadNoEntryExists 0x80A00000</span></div>
 <div class="line"><a name="l01029"></a><span class="lineno"> 1029</span>&#160; </div>
 <div class="line"><a name="l01030"></a><span class="lineno"> 1030</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01031"></a><span class="lineno"> 1031</span>&#160;<span class="comment"> * The data or event was successfully inserted into the historical database.</span></div>
+<div class="line"><a name="l01031"></a><span class="lineno"> 1031</span>&#160;<span class="comment"> * The client requested history using a timestamp format the server does not support (i.e requested ServerTimestamp when server only supports SourceTimestamp).</span></div>
 <div class="line"><a name="l01032"></a><span class="lineno"> 1032</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01033"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a59495d68632534f740e8db3f9485f57d"> 1033</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodEntryInserted 0x00A20000</span></div>
+<div class="line"><a name="l01033"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#aff1db3741ab673c52b2e0a31884f3270"> 1033</a></span>&#160;<span class="preprocessor">#define OpcUa_BadTimestampNotSupported 0x80A10000</span></div>
 <div class="line"><a name="l01034"></a><span class="lineno"> 1034</span>&#160; </div>
 <div class="line"><a name="l01035"></a><span class="lineno"> 1035</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01036"></a><span class="lineno"> 1036</span>&#160;<span class="comment"> * The data or event field was successfully replaced in the historical database.</span></div>
+<div class="line"><a name="l01036"></a><span class="lineno"> 1036</span>&#160;<span class="comment"> * The data or event was successfully inserted into the historical database.</span></div>
 <div class="line"><a name="l01037"></a><span class="lineno"> 1037</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01038"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a44e8bada8d08caf6cea1849d7ef9efa1"> 1038</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodEntryReplaced 0x00A30000</span></div>
+<div class="line"><a name="l01038"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a59495d68632534f740e8db3f9485f57d"> 1038</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodEntryInserted 0x00A20000</span></div>
 <div class="line"><a name="l01039"></a><span class="lineno"> 1039</span>&#160; </div>
 <div class="line"><a name="l01040"></a><span class="lineno"> 1040</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01041"></a><span class="lineno"> 1041</span>&#160;<span class="comment"> * The value is derived from multiple values and has less than the required number of Good values.</span></div>
+<div class="line"><a name="l01041"></a><span class="lineno"> 1041</span>&#160;<span class="comment"> * The data or event field was successfully replaced in the historical database.</span></div>
 <div class="line"><a name="l01042"></a><span class="lineno"> 1042</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01043"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ac5977431b2f1548aa7623a76ee802348"> 1043</a></span>&#160;<span class="preprocessor">#define OpcUa_UncertainDataSubNormal 0x40A40000</span></div>
+<div class="line"><a name="l01043"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a44e8bada8d08caf6cea1849d7ef9efa1"> 1043</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodEntryReplaced 0x00A30000</span></div>
 <div class="line"><a name="l01044"></a><span class="lineno"> 1044</span>&#160; </div>
 <div class="line"><a name="l01045"></a><span class="lineno"> 1045</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01046"></a><span class="lineno"> 1046</span>&#160;<span class="comment"> * No data exists for the requested time range or event filter.</span></div>
+<div class="line"><a name="l01046"></a><span class="lineno"> 1046</span>&#160;<span class="comment"> * The value is derived from multiple values and has less than the required number of Good values.</span></div>
 <div class="line"><a name="l01047"></a><span class="lineno"> 1047</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01048"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ab7ecb679f20a575e2a112c7759d08c2b"> 1048</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodNoData 0x00A50000</span></div>
+<div class="line"><a name="l01048"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ac5977431b2f1548aa7623a76ee802348"> 1048</a></span>&#160;<span class="preprocessor">#define OpcUa_UncertainDataSubNormal 0x40A40000</span></div>
 <div class="line"><a name="l01049"></a><span class="lineno"> 1049</span>&#160; </div>
 <div class="line"><a name="l01050"></a><span class="lineno"> 1050</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01051"></a><span class="lineno"> 1051</span>&#160;<span class="comment"> * The data or event field was successfully replaced in the historical database.</span></div>
+<div class="line"><a name="l01051"></a><span class="lineno"> 1051</span>&#160;<span class="comment"> * No data exists for the requested time range or event filter.</span></div>
 <div class="line"><a name="l01052"></a><span class="lineno"> 1052</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01053"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a23e2f7367c6e1b761bb87aaee7fae205"> 1053</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodMoreData 0x00A60000</span></div>
+<div class="line"><a name="l01053"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ab7ecb679f20a575e2a112c7759d08c2b"> 1053</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodNoData 0x00A50000</span></div>
 <div class="line"><a name="l01054"></a><span class="lineno"> 1054</span>&#160; </div>
 <div class="line"><a name="l01055"></a><span class="lineno"> 1055</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01056"></a><span class="lineno"> 1056</span>&#160;<span class="comment"> * The requested number of Aggregates does not match the requested number of NodeIds.</span></div>
+<div class="line"><a name="l01056"></a><span class="lineno"> 1056</span>&#160;<span class="comment"> * The data or event field was successfully replaced in the historical database.</span></div>
 <div class="line"><a name="l01057"></a><span class="lineno"> 1057</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01058"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#acbc860a43d6bb12da6e32ad84015b85f"> 1058</a></span>&#160;<span class="preprocessor">#define OpcUa_BadAggregateListMismatch 0x80D40000</span></div>
+<div class="line"><a name="l01058"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a23e2f7367c6e1b761bb87aaee7fae205"> 1058</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodMoreData 0x00A60000</span></div>
 <div class="line"><a name="l01059"></a><span class="lineno"> 1059</span>&#160; </div>
 <div class="line"><a name="l01060"></a><span class="lineno"> 1060</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01061"></a><span class="lineno"> 1061</span>&#160;<span class="comment"> * The requested Aggregate is not support by the server.</span></div>
+<div class="line"><a name="l01061"></a><span class="lineno"> 1061</span>&#160;<span class="comment"> * The requested number of Aggregates does not match the requested number of NodeIds.</span></div>
 <div class="line"><a name="l01062"></a><span class="lineno"> 1062</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01063"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a413584153de852ea82df9e51b433596e"> 1063</a></span>&#160;<span class="preprocessor">#define OpcUa_BadAggregateNotSupported 0x80D50000</span></div>
+<div class="line"><a name="l01063"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#acbc860a43d6bb12da6e32ad84015b85f"> 1063</a></span>&#160;<span class="preprocessor">#define OpcUa_BadAggregateListMismatch 0x80D40000</span></div>
 <div class="line"><a name="l01064"></a><span class="lineno"> 1064</span>&#160; </div>
 <div class="line"><a name="l01065"></a><span class="lineno"> 1065</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01066"></a><span class="lineno"> 1066</span>&#160;<span class="comment"> * The aggregate value could not be derived due to invalid data inputs.</span></div>
+<div class="line"><a name="l01066"></a><span class="lineno"> 1066</span>&#160;<span class="comment"> * The requested Aggregate is not support by the server.</span></div>
 <div class="line"><a name="l01067"></a><span class="lineno"> 1067</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01068"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ae0d3b820d29751cc532abe10e862f764"> 1068</a></span>&#160;<span class="preprocessor">#define OpcUa_BadAggregateInvalidInputs 0x80D60000</span></div>
+<div class="line"><a name="l01068"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a413584153de852ea82df9e51b433596e"> 1068</a></span>&#160;<span class="preprocessor">#define OpcUa_BadAggregateNotSupported 0x80D50000</span></div>
 <div class="line"><a name="l01069"></a><span class="lineno"> 1069</span>&#160; </div>
 <div class="line"><a name="l01070"></a><span class="lineno"> 1070</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01071"></a><span class="lineno"> 1071</span>&#160;<span class="comment"> * The aggregate configuration is not valid for specified node.</span></div>
+<div class="line"><a name="l01071"></a><span class="lineno"> 1071</span>&#160;<span class="comment"> * The aggregate value could not be derived due to invalid data inputs.</span></div>
 <div class="line"><a name="l01072"></a><span class="lineno"> 1072</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01073"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a1b7dc02c8e09847ccd95a90992625c3a"> 1073</a></span>&#160;<span class="preprocessor">#define OpcUa_BadAggregateConfigurationRejected 0x80DA0000</span></div>
+<div class="line"><a name="l01073"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ae0d3b820d29751cc532abe10e862f764"> 1073</a></span>&#160;<span class="preprocessor">#define OpcUa_BadAggregateInvalidInputs 0x80D60000</span></div>
 <div class="line"><a name="l01074"></a><span class="lineno"> 1074</span>&#160; </div>
 <div class="line"><a name="l01075"></a><span class="lineno"> 1075</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01076"></a><span class="lineno"> 1076</span>&#160;<span class="comment"> * The request specifies fields which are not valid for the EventType or cannot be saved by the historian.</span></div>
+<div class="line"><a name="l01076"></a><span class="lineno"> 1076</span>&#160;<span class="comment"> * The aggregate configuration is not valid for specified node.</span></div>
 <div class="line"><a name="l01077"></a><span class="lineno"> 1077</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01078"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a2aa679911fff77fda43ab50695ab1d0c"> 1078</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodDataIgnored 0x00D90000</span></div>
+<div class="line"><a name="l01078"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a1b7dc02c8e09847ccd95a90992625c3a"> 1078</a></span>&#160;<span class="preprocessor">#define OpcUa_BadAggregateConfigurationRejected 0x80DA0000</span></div>
 <div class="line"><a name="l01079"></a><span class="lineno"> 1079</span>&#160; </div>
 <div class="line"><a name="l01080"></a><span class="lineno"> 1080</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01081"></a><span class="lineno"> 1081</span>&#160;<span class="comment"> * The request was rejected by the server because it did not meet the criteria set by the server.</span></div>
+<div class="line"><a name="l01081"></a><span class="lineno"> 1081</span>&#160;<span class="comment"> * The request specifies fields which are not valid for the EventType or cannot be saved by the historian.</span></div>
 <div class="line"><a name="l01082"></a><span class="lineno"> 1082</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01083"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a0b293cbffbf9802364700c9ccf3d348a"> 1083</a></span>&#160;<span class="preprocessor">#define OpcUa_BadRequestNotAllowed 0x80E40000</span></div>
+<div class="line"><a name="l01083"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a2aa679911fff77fda43ab50695ab1d0c"> 1083</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodDataIgnored 0x00D90000</span></div>
 <div class="line"><a name="l01084"></a><span class="lineno"> 1084</span>&#160; </div>
 <div class="line"><a name="l01085"></a><span class="lineno"> 1085</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01086"></a><span class="lineno"> 1086</span>&#160;<span class="comment"> * The request has not been processed by the server yet.</span></div>
+<div class="line"><a name="l01086"></a><span class="lineno"> 1086</span>&#160;<span class="comment"> * The request was rejected by the server because it did not meet the criteria set by the server.</span></div>
 <div class="line"><a name="l01087"></a><span class="lineno"> 1087</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01088"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#abb4d74a1443912588e9ef57e044b8bc7"> 1088</a></span>&#160;<span class="preprocessor">#define OpcUa_BadRequestNotComplete 0x81130000</span></div>
+<div class="line"><a name="l01088"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a0b293cbffbf9802364700c9ccf3d348a"> 1088</a></span>&#160;<span class="preprocessor">#define OpcUa_BadRequestNotAllowed 0x80E40000</span></div>
 <div class="line"><a name="l01089"></a><span class="lineno"> 1089</span>&#160; </div>
 <div class="line"><a name="l01090"></a><span class="lineno"> 1090</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01091"></a><span class="lineno"> 1091</span>&#160;<span class="comment"> * The value does not come from the real source and has been edited by the server.</span></div>
+<div class="line"><a name="l01091"></a><span class="lineno"> 1091</span>&#160;<span class="comment"> * The request has not been processed by the server yet.</span></div>
 <div class="line"><a name="l01092"></a><span class="lineno"> 1092</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01093"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a52ecd39e76e87d94ace94a78e9ebe0f9"> 1093</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodEdited 0x00DC0000</span></div>
+<div class="line"><a name="l01093"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#abb4d74a1443912588e9ef57e044b8bc7"> 1093</a></span>&#160;<span class="preprocessor">#define OpcUa_BadRequestNotComplete 0x81130000</span></div>
 <div class="line"><a name="l01094"></a><span class="lineno"> 1094</span>&#160; </div>
 <div class="line"><a name="l01095"></a><span class="lineno"> 1095</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01096"></a><span class="lineno"> 1096</span>&#160;<span class="comment"> * There was an error in execution of these post-actions.</span></div>
+<div class="line"><a name="l01096"></a><span class="lineno"> 1096</span>&#160;<span class="comment"> * The device identity needs a ticket before it can be accepted.</span></div>
 <div class="line"><a name="l01097"></a><span class="lineno"> 1097</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01098"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a3d125c3b056665c567f917588fc701a8"> 1098</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodPostActionFailed 0x00DD0000</span></div>
+<div class="line"><a name="l01098"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a813c2fd9e46f8e3fa4f9a059e7038394"> 1098</a></span>&#160;<span class="preprocessor">#define OpcUa_BadTicketRequired 0x811F0000</span></div>
 <div class="line"><a name="l01099"></a><span class="lineno"> 1099</span>&#160; </div>
 <div class="line"><a name="l01100"></a><span class="lineno"> 1100</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01101"></a><span class="lineno"> 1101</span>&#160;<span class="comment"> * The related EngineeringUnit has been changed but the Variable Value is still provided based on the previous unit.</span></div>
+<div class="line"><a name="l01101"></a><span class="lineno"> 1101</span>&#160;<span class="comment"> * The device identity needs a ticket before it can be accepted.</span></div>
 <div class="line"><a name="l01102"></a><span class="lineno"> 1102</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01103"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a24c36a0e6e4ad6e031a1641fcc22adda"> 1103</a></span>&#160;<span class="preprocessor">#define OpcUa_UncertainDominantValueChanged 0x40DE0000</span></div>
+<div class="line"><a name="l01103"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ac6350f84cb4e5561e1cd177b14f2d5a6"> 1103</a></span>&#160;<span class="preprocessor">#define OpcUa_BadTicketInvalid 0x81200000</span></div>
 <div class="line"><a name="l01104"></a><span class="lineno"> 1104</span>&#160; </div>
 <div class="line"><a name="l01105"></a><span class="lineno"> 1105</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01106"></a><span class="lineno"> 1106</span>&#160;<span class="comment"> * A dependent value has been changed but the change has not been applied to the device.</span></div>
+<div class="line"><a name="l01106"></a><span class="lineno"> 1106</span>&#160;<span class="comment"> * The value does not come from the real source and has been edited by the server.</span></div>
 <div class="line"><a name="l01107"></a><span class="lineno"> 1107</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01108"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#aa809ded5be505e2610f5b611e04913c2"> 1108</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodDependentValueChanged 0x00E00000</span></div>
+<div class="line"><a name="l01108"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a52ecd39e76e87d94ace94a78e9ebe0f9"> 1108</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodEdited 0x00DC0000</span></div>
 <div class="line"><a name="l01109"></a><span class="lineno"> 1109</span>&#160; </div>
 <div class="line"><a name="l01110"></a><span class="lineno"> 1110</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01111"></a><span class="lineno"> 1111</span>&#160;<span class="comment"> * The related EngineeringUnit has been changed but this change has not been applied to the device. The Variable Value is still dependent on the previous unit but its status is currently Bad.</span></div>
+<div class="line"><a name="l01111"></a><span class="lineno"> 1111</span>&#160;<span class="comment"> * There was an error in execution of these post-actions.</span></div>
 <div class="line"><a name="l01112"></a><span class="lineno"> 1112</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01113"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#accd63ca1b186e3288c7520ec60c5004e"> 1113</a></span>&#160;<span class="preprocessor">#define OpcUa_BadDominantValueChanged 0x80E10000</span></div>
+<div class="line"><a name="l01113"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a3d125c3b056665c567f917588fc701a8"> 1113</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodPostActionFailed 0x00DD0000</span></div>
 <div class="line"><a name="l01114"></a><span class="lineno"> 1114</span>&#160; </div>
 <div class="line"><a name="l01115"></a><span class="lineno"> 1115</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01116"></a><span class="lineno"> 1116</span>&#160;<span class="comment"> * A dependent value has been changed but the change has not been applied to the device. The quality of the dominant variable is uncertain.</span></div>
+<div class="line"><a name="l01116"></a><span class="lineno"> 1116</span>&#160;<span class="comment"> * The related EngineeringUnit has been changed but the Variable Value is still provided based on the previous unit.</span></div>
 <div class="line"><a name="l01117"></a><span class="lineno"> 1117</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01118"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#aea3c8fdadaa5cb868fffb888534ccb47"> 1118</a></span>&#160;<span class="preprocessor">#define OpcUa_UncertainDependentValueChanged 0x40E20000</span></div>
+<div class="line"><a name="l01118"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a24c36a0e6e4ad6e031a1641fcc22adda"> 1118</a></span>&#160;<span class="preprocessor">#define OpcUa_UncertainDominantValueChanged 0x40DE0000</span></div>
 <div class="line"><a name="l01119"></a><span class="lineno"> 1119</span>&#160; </div>
 <div class="line"><a name="l01120"></a><span class="lineno"> 1120</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01121"></a><span class="lineno"> 1121</span>&#160;<span class="comment"> * A dependent value has been changed but the change has not been applied to the device. The quality of the dominant variable is Bad.</span></div>
+<div class="line"><a name="l01121"></a><span class="lineno"> 1121</span>&#160;<span class="comment"> * A dependent value has been changed but the change has not been applied to the device.</span></div>
 <div class="line"><a name="l01122"></a><span class="lineno"> 1122</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01123"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ad1bb286fb71ccb6e68a955160debbc0c"> 1123</a></span>&#160;<span class="preprocessor">#define OpcUa_BadDependentValueChanged 0x80E30000</span></div>
+<div class="line"><a name="l01123"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#aa809ded5be505e2610f5b611e04913c2"> 1123</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodDependentValueChanged 0x00E00000</span></div>
 <div class="line"><a name="l01124"></a><span class="lineno"> 1124</span>&#160; </div>
 <div class="line"><a name="l01125"></a><span class="lineno"> 1125</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01126"></a><span class="lineno"> 1126</span>&#160;<span class="comment"> * It is delivered with a dominant Variable value when a dependent Variable has changed but the change has not been applied.</span></div>
+<div class="line"><a name="l01126"></a><span class="lineno"> 1126</span>&#160;<span class="comment"> * The related EngineeringUnit has been changed but this change has not been applied to the device. The Variable Value is still dependent on the previous unit but its status is currently Bad.</span></div>
 <div class="line"><a name="l01127"></a><span class="lineno"> 1127</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01128"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#af35a79840f0739457697a2806c7e7873"> 1128</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodEdited_DependentValueChanged 0x01160000</span></div>
+<div class="line"><a name="l01128"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#accd63ca1b186e3288c7520ec60c5004e"> 1128</a></span>&#160;<span class="preprocessor">#define OpcUa_BadDominantValueChanged 0x80E10000</span></div>
 <div class="line"><a name="l01129"></a><span class="lineno"> 1129</span>&#160; </div>
 <div class="line"><a name="l01130"></a><span class="lineno"> 1130</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01131"></a><span class="lineno"> 1131</span>&#160;<span class="comment"> * It is delivered with a dependent Variable value when a dominant Variable has changed but the change has not been applied.</span></div>
+<div class="line"><a name="l01131"></a><span class="lineno"> 1131</span>&#160;<span class="comment"> * A dependent value has been changed but the change has not been applied to the device. The quality of the dominant variable is uncertain.</span></div>
 <div class="line"><a name="l01132"></a><span class="lineno"> 1132</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01133"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ad2707c857f9d1587a364ece1d6b28dab"> 1133</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodEdited_DominantValueChanged 0x01170000</span></div>
+<div class="line"><a name="l01133"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#aea3c8fdadaa5cb868fffb888534ccb47"> 1133</a></span>&#160;<span class="preprocessor">#define OpcUa_UncertainDependentValueChanged 0x40E20000</span></div>
 <div class="line"><a name="l01134"></a><span class="lineno"> 1134</span>&#160; </div>
 <div class="line"><a name="l01135"></a><span class="lineno"> 1135</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01136"></a><span class="lineno"> 1136</span>&#160;<span class="comment"> * It is delivered with a dependent Variable value when a dominant or dependent Variable has changed but change has not been applied.</span></div>
+<div class="line"><a name="l01136"></a><span class="lineno"> 1136</span>&#160;<span class="comment"> * A dependent value has been changed but the change has not been applied to the device. The quality of the dominant variable is Bad.</span></div>
 <div class="line"><a name="l01137"></a><span class="lineno"> 1137</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01138"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a79876c3445cc5674bcca91d52456da3c"> 1138</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodEdited_DominantValueChanged_DependentValueChanged 0x01180000</span></div>
+<div class="line"><a name="l01138"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ad1bb286fb71ccb6e68a955160debbc0c"> 1138</a></span>&#160;<span class="preprocessor">#define OpcUa_BadDependentValueChanged 0x80E30000</span></div>
 <div class="line"><a name="l01139"></a><span class="lineno"> 1139</span>&#160; </div>
 <div class="line"><a name="l01140"></a><span class="lineno"> 1140</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01141"></a><span class="lineno"> 1141</span>&#160;<span class="comment"> * It is delivered with a Variable value when Variable has changed but the value is not legal.</span></div>
+<div class="line"><a name="l01141"></a><span class="lineno"> 1141</span>&#160;<span class="comment"> * It is delivered with a dominant Variable value when a dependent Variable has changed but the change has not been applied.</span></div>
 <div class="line"><a name="l01142"></a><span class="lineno"> 1142</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01143"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a254b783a0e4546f61915bdb3d1bac198"> 1143</a></span>&#160;<span class="preprocessor">#define OpcUa_BadEdited_OutOfRange 0x81190000</span></div>
+<div class="line"><a name="l01143"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#af35a79840f0739457697a2806c7e7873"> 1143</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodEdited_DependentValueChanged 0x01160000</span></div>
 <div class="line"><a name="l01144"></a><span class="lineno"> 1144</span>&#160; </div>
 <div class="line"><a name="l01145"></a><span class="lineno"> 1145</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01146"></a><span class="lineno"> 1146</span>&#160;<span class="comment"> * It is delivered with a Variable value when a source Variable has changed but the value is not legal.</span></div>
+<div class="line"><a name="l01146"></a><span class="lineno"> 1146</span>&#160;<span class="comment"> * It is delivered with a dependent Variable value when a dominant Variable has changed but the change has not been applied.</span></div>
 <div class="line"><a name="l01147"></a><span class="lineno"> 1147</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01148"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a6cacf93d769bb3403d8fd5057b562c2b"> 1148</a></span>&#160;<span class="preprocessor">#define OpcUa_BadInitialValue_OutOfRange 0x811A0000</span></div>
+<div class="line"><a name="l01148"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ad2707c857f9d1587a364ece1d6b28dab"> 1148</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodEdited_DominantValueChanged 0x01170000</span></div>
 <div class="line"><a name="l01149"></a><span class="lineno"> 1149</span>&#160; </div>
 <div class="line"><a name="l01150"></a><span class="lineno"> 1150</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01151"></a><span class="lineno"> 1151</span>&#160;<span class="comment"> * It is delivered with a dependent Variable value when a dominant Variable has changed and the value is not legal.</span></div>
+<div class="line"><a name="l01151"></a><span class="lineno"> 1151</span>&#160;<span class="comment"> * It is delivered with a dependent Variable value when a dominant or dependent Variable has changed but change has not been applied.</span></div>
 <div class="line"><a name="l01152"></a><span class="lineno"> 1152</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01153"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a96e1afd526d05b29f4ad50ac3365afc5"> 1153</a></span>&#160;<span class="preprocessor">#define OpcUa_BadOutOfRange_DominantValueChanged 0x811B0000</span></div>
+<div class="line"><a name="l01153"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a79876c3445cc5674bcca91d52456da3c"> 1153</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodEdited_DominantValueChanged_DependentValueChanged 0x01180000</span></div>
 <div class="line"><a name="l01154"></a><span class="lineno"> 1154</span>&#160; </div>
 <div class="line"><a name="l01155"></a><span class="lineno"> 1155</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01156"></a><span class="lineno"> 1156</span>&#160;<span class="comment"> * It is delivered with a dependent Variable value when a dominant Variable has changed, the value is not legal and the change has not been applied.</span></div>
+<div class="line"><a name="l01156"></a><span class="lineno"> 1156</span>&#160;<span class="comment"> * It is delivered with a Variable value when Variable has changed but the value is not legal.</span></div>
 <div class="line"><a name="l01157"></a><span class="lineno"> 1157</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01158"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a9f0ae669939f4e72fb37de19dcf98eaf"> 1158</a></span>&#160;<span class="preprocessor">#define OpcUa_BadEdited_OutOfRange_DominantValueChanged 0x811C0000</span></div>
+<div class="line"><a name="l01158"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a254b783a0e4546f61915bdb3d1bac198"> 1158</a></span>&#160;<span class="preprocessor">#define OpcUa_BadEdited_OutOfRange 0x81190000</span></div>
 <div class="line"><a name="l01159"></a><span class="lineno"> 1159</span>&#160; </div>
 <div class="line"><a name="l01160"></a><span class="lineno"> 1160</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01161"></a><span class="lineno"> 1161</span>&#160;<span class="comment"> * It is delivered with a dependent Variable value when a dominant or dependent Variable has changed and the value is not legal.</span></div>
+<div class="line"><a name="l01161"></a><span class="lineno"> 1161</span>&#160;<span class="comment"> * It is delivered with a Variable value when a source Variable has changed but the value is not legal.</span></div>
 <div class="line"><a name="l01162"></a><span class="lineno"> 1162</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01163"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#af6f7e7ffd8b25219860ad27571b77679"> 1163</a></span>&#160;<span class="preprocessor">#define OpcUa_BadOutOfRange_DominantValueChanged_DependentValueChanged 0x811D0000</span></div>
+<div class="line"><a name="l01163"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a6cacf93d769bb3403d8fd5057b562c2b"> 1163</a></span>&#160;<span class="preprocessor">#define OpcUa_BadInitialValue_OutOfRange 0x811A0000</span></div>
 <div class="line"><a name="l01164"></a><span class="lineno"> 1164</span>&#160; </div>
 <div class="line"><a name="l01165"></a><span class="lineno"> 1165</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01166"></a><span class="lineno"> 1166</span>&#160;<span class="comment"> * It is delivered with a dependent Variable value when a dominant or dependent Variable has changed, the value is not legal and the change has not been applied.</span></div>
+<div class="line"><a name="l01166"></a><span class="lineno"> 1166</span>&#160;<span class="comment"> * It is delivered with a dependent Variable value when a dominant Variable has changed and the value is not legal.</span></div>
 <div class="line"><a name="l01167"></a><span class="lineno"> 1167</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01168"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ad3681cdbea83cfc6aa78e02a2586f77a"> 1168</a></span>&#160;<span class="preprocessor">#define OpcUa_BadEdited_OutOfRange_DominantValueChanged_DependentValueChanged 0x811E0000</span></div>
+<div class="line"><a name="l01168"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a96e1afd526d05b29f4ad50ac3365afc5"> 1168</a></span>&#160;<span class="preprocessor">#define OpcUa_BadOutOfRange_DominantValueChanged 0x811B0000</span></div>
 <div class="line"><a name="l01169"></a><span class="lineno"> 1169</span>&#160; </div>
 <div class="line"><a name="l01170"></a><span class="lineno"> 1170</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01171"></a><span class="lineno"> 1171</span>&#160;<span class="comment"> * The communication layer has raised an event.</span></div>
+<div class="line"><a name="l01171"></a><span class="lineno"> 1171</span>&#160;<span class="comment"> * It is delivered with a dependent Variable value when a dominant Variable has changed, the value is not legal and the change has not been applied.</span></div>
 <div class="line"><a name="l01172"></a><span class="lineno"> 1172</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01173"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a4b4735edd543608ef907fbeeae57024f"> 1173</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodCommunicationEvent 0x00A70000</span></div>
+<div class="line"><a name="l01173"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a9f0ae669939f4e72fb37de19dcf98eaf"> 1173</a></span>&#160;<span class="preprocessor">#define OpcUa_BadEdited_OutOfRange_DominantValueChanged 0x811C0000</span></div>
 <div class="line"><a name="l01174"></a><span class="lineno"> 1174</span>&#160; </div>
 <div class="line"><a name="l01175"></a><span class="lineno"> 1175</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01176"></a><span class="lineno"> 1176</span>&#160;<span class="comment"> * The system is shutting down.</span></div>
+<div class="line"><a name="l01176"></a><span class="lineno"> 1176</span>&#160;<span class="comment"> * It is delivered with a dependent Variable value when a dominant or dependent Variable has changed and the value is not legal.</span></div>
 <div class="line"><a name="l01177"></a><span class="lineno"> 1177</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01178"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a9ce5ee6afdce5cd97b359f5f2db4de2c"> 1178</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodShutdownEvent 0x00A80000</span></div>
+<div class="line"><a name="l01178"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#af6f7e7ffd8b25219860ad27571b77679"> 1178</a></span>&#160;<span class="preprocessor">#define OpcUa_BadOutOfRange_DominantValueChanged_DependentValueChanged 0x811D0000</span></div>
 <div class="line"><a name="l01179"></a><span class="lineno"> 1179</span>&#160; </div>
 <div class="line"><a name="l01180"></a><span class="lineno"> 1180</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01181"></a><span class="lineno"> 1181</span>&#160;<span class="comment"> * The operation is not finished and needs to be called again.</span></div>
+<div class="line"><a name="l01181"></a><span class="lineno"> 1181</span>&#160;<span class="comment"> * It is delivered with a dependent Variable value when a dominant or dependent Variable has changed, the value is not legal and the change has not been applied.</span></div>
 <div class="line"><a name="l01182"></a><span class="lineno"> 1182</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01183"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a4ca11300c811f2ebd81b3349cd407500"> 1183</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodCallAgain 0x00A90000</span></div>
+<div class="line"><a name="l01183"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ad3681cdbea83cfc6aa78e02a2586f77a"> 1183</a></span>&#160;<span class="preprocessor">#define OpcUa_BadEdited_OutOfRange_DominantValueChanged_DependentValueChanged 0x811E0000</span></div>
 <div class="line"><a name="l01184"></a><span class="lineno"> 1184</span>&#160; </div>
 <div class="line"><a name="l01185"></a><span class="lineno"> 1185</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01186"></a><span class="lineno"> 1186</span>&#160;<span class="comment"> * A non-critical timeout occurred.</span></div>
+<div class="line"><a name="l01186"></a><span class="lineno"> 1186</span>&#160;<span class="comment"> * The communication layer has raised an event.</span></div>
 <div class="line"><a name="l01187"></a><span class="lineno"> 1187</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01188"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#afbabf00a2aad375ae2366f88390e9b87"> 1188</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodNonCriticalTimeout 0x00AA0000</span></div>
+<div class="line"><a name="l01188"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a4b4735edd543608ef907fbeeae57024f"> 1188</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodCommunicationEvent 0x00A70000</span></div>
 <div class="line"><a name="l01189"></a><span class="lineno"> 1189</span>&#160; </div>
 <div class="line"><a name="l01190"></a><span class="lineno"> 1190</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01191"></a><span class="lineno"> 1191</span>&#160;<span class="comment"> * One or more arguments are invalid.</span></div>
+<div class="line"><a name="l01191"></a><span class="lineno"> 1191</span>&#160;<span class="comment"> * The system is shutting down.</span></div>
 <div class="line"><a name="l01192"></a><span class="lineno"> 1192</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01193"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ac7160e50a0c09ed98c7fa1c4aef3fd99"> 1193</a></span>&#160;<span class="preprocessor">#define OpcUa_BadInvalidArgument 0x80AB0000</span></div>
+<div class="line"><a name="l01193"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a9ce5ee6afdce5cd97b359f5f2db4de2c"> 1193</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodShutdownEvent 0x00A80000</span></div>
 <div class="line"><a name="l01194"></a><span class="lineno"> 1194</span>&#160; </div>
 <div class="line"><a name="l01195"></a><span class="lineno"> 1195</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01196"></a><span class="lineno"> 1196</span>&#160;<span class="comment"> * Could not establish a network connection to remote server.</span></div>
+<div class="line"><a name="l01196"></a><span class="lineno"> 1196</span>&#160;<span class="comment"> * The operation is not finished and needs to be called again.</span></div>
 <div class="line"><a name="l01197"></a><span class="lineno"> 1197</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01198"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ad95546c2919fde4481a5affd8f0bfa4e"> 1198</a></span>&#160;<span class="preprocessor">#define OpcUa_BadConnectionRejected 0x80AC0000</span></div>
+<div class="line"><a name="l01198"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a4ca11300c811f2ebd81b3349cd407500"> 1198</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodCallAgain 0x00A90000</span></div>
 <div class="line"><a name="l01199"></a><span class="lineno"> 1199</span>&#160; </div>
 <div class="line"><a name="l01200"></a><span class="lineno"> 1200</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01201"></a><span class="lineno"> 1201</span>&#160;<span class="comment"> * The server has disconnected from the client.</span></div>
+<div class="line"><a name="l01201"></a><span class="lineno"> 1201</span>&#160;<span class="comment"> * A non-critical timeout occurred.</span></div>
 <div class="line"><a name="l01202"></a><span class="lineno"> 1202</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01203"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ab81924623b1ffc14d62ce8814d10249e"> 1203</a></span>&#160;<span class="preprocessor">#define OpcUa_BadDisconnect 0x80AD0000</span></div>
+<div class="line"><a name="l01203"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#afbabf00a2aad375ae2366f88390e9b87"> 1203</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodNonCriticalTimeout 0x00AA0000</span></div>
 <div class="line"><a name="l01204"></a><span class="lineno"> 1204</span>&#160; </div>
 <div class="line"><a name="l01205"></a><span class="lineno"> 1205</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01206"></a><span class="lineno"> 1206</span>&#160;<span class="comment"> * The network connection has been closed.</span></div>
+<div class="line"><a name="l01206"></a><span class="lineno"> 1206</span>&#160;<span class="comment"> * One or more arguments are invalid.</span></div>
 <div class="line"><a name="l01207"></a><span class="lineno"> 1207</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01208"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a2818fcdd3b482007415cffcea952f35b"> 1208</a></span>&#160;<span class="preprocessor">#define OpcUa_BadConnectionClosed 0x80AE0000</span></div>
+<div class="line"><a name="l01208"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ac7160e50a0c09ed98c7fa1c4aef3fd99"> 1208</a></span>&#160;<span class="preprocessor">#define OpcUa_BadInvalidArgument 0x80AB0000</span></div>
 <div class="line"><a name="l01209"></a><span class="lineno"> 1209</span>&#160; </div>
 <div class="line"><a name="l01210"></a><span class="lineno"> 1210</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01211"></a><span class="lineno"> 1211</span>&#160;<span class="comment"> * The operation cannot be completed because the object is closed, uninitialized or in some other invalid state.</span></div>
+<div class="line"><a name="l01211"></a><span class="lineno"> 1211</span>&#160;<span class="comment"> * Could not establish a network connection to remote server.</span></div>
 <div class="line"><a name="l01212"></a><span class="lineno"> 1212</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01213"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#aef6954936000e0c408e940da4a84958c"> 1213</a></span>&#160;<span class="preprocessor">#define OpcUa_BadInvalidState 0x80AF0000</span></div>
+<div class="line"><a name="l01213"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ad95546c2919fde4481a5affd8f0bfa4e"> 1213</a></span>&#160;<span class="preprocessor">#define OpcUa_BadConnectionRejected 0x80AC0000</span></div>
 <div class="line"><a name="l01214"></a><span class="lineno"> 1214</span>&#160; </div>
 <div class="line"><a name="l01215"></a><span class="lineno"> 1215</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01216"></a><span class="lineno"> 1216</span>&#160;<span class="comment"> * Cannot move beyond end of the stream.</span></div>
+<div class="line"><a name="l01216"></a><span class="lineno"> 1216</span>&#160;<span class="comment"> * The server has disconnected from the client.</span></div>
 <div class="line"><a name="l01217"></a><span class="lineno"> 1217</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01218"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a32563c7dd421f4e77f61829f8a9f1ccd"> 1218</a></span>&#160;<span class="preprocessor">#define OpcUa_BadEndOfStream 0x80B00000</span></div>
+<div class="line"><a name="l01218"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ab81924623b1ffc14d62ce8814d10249e"> 1218</a></span>&#160;<span class="preprocessor">#define OpcUa_BadDisconnect 0x80AD0000</span></div>
 <div class="line"><a name="l01219"></a><span class="lineno"> 1219</span>&#160; </div>
 <div class="line"><a name="l01220"></a><span class="lineno"> 1220</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01221"></a><span class="lineno"> 1221</span>&#160;<span class="comment"> * No data is currently available for reading from a non-blocking stream.</span></div>
+<div class="line"><a name="l01221"></a><span class="lineno"> 1221</span>&#160;<span class="comment"> * The network connection has been closed.</span></div>
 <div class="line"><a name="l01222"></a><span class="lineno"> 1222</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01223"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a48f7855e100719a19b2cfa630ce0fc65"> 1223</a></span>&#160;<span class="preprocessor">#define OpcUa_BadNoDataAvailable 0x80B10000</span></div>
+<div class="line"><a name="l01223"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a2818fcdd3b482007415cffcea952f35b"> 1223</a></span>&#160;<span class="preprocessor">#define OpcUa_BadConnectionClosed 0x80AE0000</span></div>
 <div class="line"><a name="l01224"></a><span class="lineno"> 1224</span>&#160; </div>
 <div class="line"><a name="l01225"></a><span class="lineno"> 1225</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01226"></a><span class="lineno"> 1226</span>&#160;<span class="comment"> * The asynchronous operation is waiting for a response.</span></div>
+<div class="line"><a name="l01226"></a><span class="lineno"> 1226</span>&#160;<span class="comment"> * The operation cannot be completed because the object is closed, uninitialized or in some other invalid state.</span></div>
 <div class="line"><a name="l01227"></a><span class="lineno"> 1227</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01228"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a04f4b7bdb995096be98e1ebbb90a5366"> 1228</a></span>&#160;<span class="preprocessor">#define OpcUa_BadWaitingForResponse 0x80B20000</span></div>
+<div class="line"><a name="l01228"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#aef6954936000e0c408e940da4a84958c"> 1228</a></span>&#160;<span class="preprocessor">#define OpcUa_BadInvalidState 0x80AF0000</span></div>
 <div class="line"><a name="l01229"></a><span class="lineno"> 1229</span>&#160; </div>
 <div class="line"><a name="l01230"></a><span class="lineno"> 1230</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01231"></a><span class="lineno"> 1231</span>&#160;<span class="comment"> * The asynchronous operation was abandoned by the caller.</span></div>
+<div class="line"><a name="l01231"></a><span class="lineno"> 1231</span>&#160;<span class="comment"> * Cannot move beyond end of the stream.</span></div>
 <div class="line"><a name="l01232"></a><span class="lineno"> 1232</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01233"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a084cff8d5c7831c3d57889262ea55f06"> 1233</a></span>&#160;<span class="preprocessor">#define OpcUa_BadOperationAbandoned 0x80B30000</span></div>
+<div class="line"><a name="l01233"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a32563c7dd421f4e77f61829f8a9f1ccd"> 1233</a></span>&#160;<span class="preprocessor">#define OpcUa_BadEndOfStream 0x80B00000</span></div>
 <div class="line"><a name="l01234"></a><span class="lineno"> 1234</span>&#160; </div>
 <div class="line"><a name="l01235"></a><span class="lineno"> 1235</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01236"></a><span class="lineno"> 1236</span>&#160;<span class="comment"> * The stream did not return all data requested (possibly because it is a non-blocking stream).</span></div>
+<div class="line"><a name="l01236"></a><span class="lineno"> 1236</span>&#160;<span class="comment"> * No data is currently available for reading from a non-blocking stream.</span></div>
 <div class="line"><a name="l01237"></a><span class="lineno"> 1237</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01238"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a238ac9145c944c4798855759aa612a85"> 1238</a></span>&#160;<span class="preprocessor">#define OpcUa_BadExpectedStreamToBlock 0x80B40000</span></div>
+<div class="line"><a name="l01238"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a48f7855e100719a19b2cfa630ce0fc65"> 1238</a></span>&#160;<span class="preprocessor">#define OpcUa_BadNoDataAvailable 0x80B10000</span></div>
 <div class="line"><a name="l01239"></a><span class="lineno"> 1239</span>&#160; </div>
 <div class="line"><a name="l01240"></a><span class="lineno"> 1240</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01241"></a><span class="lineno"> 1241</span>&#160;<span class="comment"> * Non blocking behaviour is required and the operation would block.</span></div>
+<div class="line"><a name="l01241"></a><span class="lineno"> 1241</span>&#160;<span class="comment"> * The asynchronous operation is waiting for a response.</span></div>
 <div class="line"><a name="l01242"></a><span class="lineno"> 1242</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01243"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a519650d11d4a57b8cf4cc69b1c567702"> 1243</a></span>&#160;<span class="preprocessor">#define OpcUa_BadWouldBlock 0x80B50000</span></div>
+<div class="line"><a name="l01243"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a04f4b7bdb995096be98e1ebbb90a5366"> 1243</a></span>&#160;<span class="preprocessor">#define OpcUa_BadWaitingForResponse 0x80B20000</span></div>
 <div class="line"><a name="l01244"></a><span class="lineno"> 1244</span>&#160; </div>
 <div class="line"><a name="l01245"></a><span class="lineno"> 1245</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01246"></a><span class="lineno"> 1246</span>&#160;<span class="comment"> * A value had an invalid syntax.</span></div>
+<div class="line"><a name="l01246"></a><span class="lineno"> 1246</span>&#160;<span class="comment"> * The asynchronous operation was abandoned by the caller.</span></div>
 <div class="line"><a name="l01247"></a><span class="lineno"> 1247</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01248"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#aa6e1ffb9cf2309ee0df95cc73492c78d"> 1248</a></span>&#160;<span class="preprocessor">#define OpcUa_BadSyntaxError 0x80B60000</span></div>
+<div class="line"><a name="l01248"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a084cff8d5c7831c3d57889262ea55f06"> 1248</a></span>&#160;<span class="preprocessor">#define OpcUa_BadOperationAbandoned 0x80B30000</span></div>
 <div class="line"><a name="l01249"></a><span class="lineno"> 1249</span>&#160; </div>
 <div class="line"><a name="l01250"></a><span class="lineno"> 1250</span>&#160;<span class="comment">/*============================================================================</span></div>
-<div class="line"><a name="l01251"></a><span class="lineno"> 1251</span>&#160;<span class="comment"> * The operation could not be finished because all available connections are in use.</span></div>
+<div class="line"><a name="l01251"></a><span class="lineno"> 1251</span>&#160;<span class="comment"> * The stream did not return all data requested (possibly because it is a non-blocking stream).</span></div>
 <div class="line"><a name="l01252"></a><span class="lineno"> 1252</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
-<div class="line"><a name="l01253"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a9f89cdf7041f8632d3dd5f59cd55323a"> 1253</a></span>&#160;<span class="preprocessor">#define OpcUa_BadMaxConnectionsReached 0x80B70000</span></div>
+<div class="line"><a name="l01253"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a238ac9145c944c4798855759aa612a85"> 1253</a></span>&#160;<span class="preprocessor">#define OpcUa_BadExpectedStreamToBlock 0x80B40000</span></div>
 <div class="line"><a name="l01254"></a><span class="lineno"> 1254</span>&#160; </div>
-<div class="line"><a name="l01255"></a><span class="lineno"> 1255</span>&#160;OPCUA_END_EXTERN_C</div>
-<div class="line"><a name="l01256"></a><span class="lineno"> 1256</span>&#160; </div>
-<div class="line"><a name="l01257"></a><span class="lineno"> 1257</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* _OpcUa_StatusCodes_H_ */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l01258"></a><span class="lineno"> 1258</span>&#160; </div>
+<div class="line"><a name="l01255"></a><span class="lineno"> 1255</span>&#160;<span class="comment">/*============================================================================</span></div>
+<div class="line"><a name="l01256"></a><span class="lineno"> 1256</span>&#160;<span class="comment"> * Non blocking behaviour is required and the operation would block.</span></div>
+<div class="line"><a name="l01257"></a><span class="lineno"> 1257</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
+<div class="line"><a name="l01258"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a519650d11d4a57b8cf4cc69b1c567702"> 1258</a></span>&#160;<span class="preprocessor">#define OpcUa_BadWouldBlock 0x80B50000</span></div>
+<div class="line"><a name="l01259"></a><span class="lineno"> 1259</span>&#160; </div>
+<div class="line"><a name="l01260"></a><span class="lineno"> 1260</span>&#160;<span class="comment">/*============================================================================</span></div>
+<div class="line"><a name="l01261"></a><span class="lineno"> 1261</span>&#160;<span class="comment"> * A value had an invalid syntax.</span></div>
+<div class="line"><a name="l01262"></a><span class="lineno"> 1262</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
+<div class="line"><a name="l01263"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#aa6e1ffb9cf2309ee0df95cc73492c78d"> 1263</a></span>&#160;<span class="preprocessor">#define OpcUa_BadSyntaxError 0x80B60000</span></div>
+<div class="line"><a name="l01264"></a><span class="lineno"> 1264</span>&#160; </div>
+<div class="line"><a name="l01265"></a><span class="lineno"> 1265</span>&#160;<span class="comment">/*============================================================================</span></div>
+<div class="line"><a name="l01266"></a><span class="lineno"> 1266</span>&#160;<span class="comment"> * The operation could not be finished because all available connections are in use.</span></div>
+<div class="line"><a name="l01267"></a><span class="lineno"> 1267</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
+<div class="line"><a name="l01268"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a9f89cdf7041f8632d3dd5f59cd55323a"> 1268</a></span>&#160;<span class="preprocessor">#define OpcUa_BadMaxConnectionsReached 0x80B70000</span></div>
+<div class="line"><a name="l01269"></a><span class="lineno"> 1269</span>&#160; </div>
+<div class="line"><a name="l01270"></a><span class="lineno"> 1270</span>&#160;<span class="comment">/*============================================================================</span></div>
+<div class="line"><a name="l01271"></a><span class="lineno"> 1271</span>&#160;<span class="comment"> * The value may not be accurate because the transducer is in manual mode.</span></div>
+<div class="line"><a name="l01272"></a><span class="lineno"> 1272</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
+<div class="line"><a name="l01273"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a94484fe58ad2eb01937c7db72de5893a"> 1273</a></span>&#160;<span class="preprocessor">#define OpcUa_UncertainTransducerInManual 0x42080000</span></div>
+<div class="line"><a name="l01274"></a><span class="lineno"> 1274</span>&#160; </div>
+<div class="line"><a name="l01275"></a><span class="lineno"> 1275</span>&#160;<span class="comment">/*============================================================================</span></div>
+<div class="line"><a name="l01276"></a><span class="lineno"> 1276</span>&#160;<span class="comment"> * The value is simulated.</span></div>
+<div class="line"><a name="l01277"></a><span class="lineno"> 1277</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
+<div class="line"><a name="l01278"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a3554da9c915ed9d4ac6ead886adeff5a"> 1278</a></span>&#160;<span class="preprocessor">#define OpcUa_UncertainSimulatedValue 0x42090000</span></div>
+<div class="line"><a name="l01279"></a><span class="lineno"> 1279</span>&#160; </div>
+<div class="line"><a name="l01280"></a><span class="lineno"> 1280</span>&#160;<span class="comment">/*============================================================================</span></div>
+<div class="line"><a name="l01281"></a><span class="lineno"> 1281</span>&#160;<span class="comment"> * The value may not be accurate due to a sensor calibration fault.</span></div>
+<div class="line"><a name="l01282"></a><span class="lineno"> 1282</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
+<div class="line"><a name="l01283"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a6c5c332f1cad061a413294c58272c2e5"> 1283</a></span>&#160;<span class="preprocessor">#define OpcUa_UncertainSensorCalibration 0x420A0000</span></div>
+<div class="line"><a name="l01284"></a><span class="lineno"> 1284</span>&#160; </div>
+<div class="line"><a name="l01285"></a><span class="lineno"> 1285</span>&#160;<span class="comment">/*============================================================================</span></div>
+<div class="line"><a name="l01286"></a><span class="lineno"> 1286</span>&#160;<span class="comment"> * The value may not be accurate due to a configuration issue.</span></div>
+<div class="line"><a name="l01287"></a><span class="lineno"> 1287</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
+<div class="line"><a name="l01288"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a304fe58419aff3bbd34165b44442d76e"> 1288</a></span>&#160;<span class="preprocessor">#define OpcUa_UncertainConfigurationError 0x420F0000</span></div>
+<div class="line"><a name="l01289"></a><span class="lineno"> 1289</span>&#160; </div>
+<div class="line"><a name="l01290"></a><span class="lineno"> 1290</span>&#160;<span class="comment">/*============================================================================</span></div>
+<div class="line"><a name="l01291"></a><span class="lineno"> 1291</span>&#160;<span class="comment"> * The value source supports cascade handshaking and the value has been Initialized based on an initialization request from a cascade secondary.</span></div>
+<div class="line"><a name="l01292"></a><span class="lineno"> 1292</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
+<div class="line"><a name="l01293"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a7823cef072a8591fb21095181b029dcb"> 1293</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodCascadeInitializationAcknowledged 0x04010000</span></div>
+<div class="line"><a name="l01294"></a><span class="lineno"> 1294</span>&#160; </div>
+<div class="line"><a name="l01295"></a><span class="lineno"> 1295</span>&#160;<span class="comment">/*============================================================================</span></div>
+<div class="line"><a name="l01296"></a><span class="lineno"> 1296</span>&#160;<span class="comment"> * The value source supports cascade handshaking and is requesting initialization of a cascade primary.</span></div>
+<div class="line"><a name="l01297"></a><span class="lineno"> 1297</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
+<div class="line"><a name="l01298"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ad599f8a4e1e6727d8695abcb7b34bc57"> 1298</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodCascadeInitializationRequest 0x04020000</span></div>
+<div class="line"><a name="l01299"></a><span class="lineno"> 1299</span>&#160; </div>
+<div class="line"><a name="l01300"></a><span class="lineno"> 1300</span>&#160;<span class="comment">/*============================================================================</span></div>
+<div class="line"><a name="l01301"></a><span class="lineno"> 1301</span>&#160;<span class="comment"> * The value source supports cascade handshaking, however, the source’s current state does not allow for cascade.</span></div>
+<div class="line"><a name="l01302"></a><span class="lineno"> 1302</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
+<div class="line"><a name="l01303"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a8cdad876fa0a55c39e3a6d10278b03d8"> 1303</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodCascadeNotInvited 0x04030000</span></div>
+<div class="line"><a name="l01304"></a><span class="lineno"> 1304</span>&#160; </div>
+<div class="line"><a name="l01305"></a><span class="lineno"> 1305</span>&#160;<span class="comment">/*============================================================================</span></div>
+<div class="line"><a name="l01306"></a><span class="lineno"> 1306</span>&#160;<span class="comment"> * The value source supports cascade handshaking, however, the source has not selected the corresponding cascade primary for use.</span></div>
+<div class="line"><a name="l01307"></a><span class="lineno"> 1307</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
+<div class="line"><a name="l01308"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#af7b402e7ce830436e33ffc58adb27693"> 1308</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodCascadeNotSelected 0x04040000</span></div>
+<div class="line"><a name="l01309"></a><span class="lineno"> 1309</span>&#160; </div>
+<div class="line"><a name="l01310"></a><span class="lineno"> 1310</span>&#160;<span class="comment">/*============================================================================</span></div>
+<div class="line"><a name="l01311"></a><span class="lineno"> 1311</span>&#160;<span class="comment"> * There is a fault state condition active in the value source.</span></div>
+<div class="line"><a name="l01312"></a><span class="lineno"> 1312</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
+<div class="line"><a name="l01313"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#a3010f2d800813e1923ac7e7166924e91"> 1313</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodFaultStateActive 0x04070000</span></div>
+<div class="line"><a name="l01314"></a><span class="lineno"> 1314</span>&#160; </div>
+<div class="line"><a name="l01315"></a><span class="lineno"> 1315</span>&#160;<span class="comment">/*============================================================================</span></div>
+<div class="line"><a name="l01316"></a><span class="lineno"> 1316</span>&#160;<span class="comment"> * A fault state condition is being requested of the destination.</span></div>
+<div class="line"><a name="l01317"></a><span class="lineno"> 1317</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
+<div class="line"><a name="l01318"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#ad3a26700f423521a27d097541b3cafd0"> 1318</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodInitiateFaultState 0x04080000</span></div>
+<div class="line"><a name="l01319"></a><span class="lineno"> 1319</span>&#160; </div>
+<div class="line"><a name="l01320"></a><span class="lineno"> 1320</span>&#160;<span class="comment">/*============================================================================</span></div>
+<div class="line"><a name="l01321"></a><span class="lineno"> 1321</span>&#160;<span class="comment"> * The value is accurate, and the signal source supports cascade handshaking.</span></div>
+<div class="line"><a name="l01322"></a><span class="lineno"> 1322</span>&#160;<span class="comment"> *===========================================================================*/</span></div>
+<div class="line"><a name="l01323"></a><span class="lineno"><a class="line" href="opcua__statuscodes_8h.html#af50d3c7e1e166af3a64747c7f2afb33c"> 1323</a></span>&#160;<span class="preprocessor">#define OpcUa_GoodCascade 0x04090000</span></div>
+<div class="line"><a name="l01324"></a><span class="lineno"> 1324</span>&#160; </div>
+<div class="line"><a name="l01325"></a><span class="lineno"> 1325</span>&#160;OPCUA_END_EXTERN_C</div>
+<div class="line"><a name="l01326"></a><span class="lineno"> 1326</span>&#160; </div>
+<div class="line"><a name="l01327"></a><span class="lineno"> 1327</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* _OpcUa_StatusCodes_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l01328"></a><span class="lineno"> 1328</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

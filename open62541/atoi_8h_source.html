@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">open62541
-   &#160;<span id="projectnumber">1.2.6</span>
+   &#160;<span id="projectnumber">1.3.5</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -81,8 +81,8 @@ $(function() {
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="types_8h.html">open62541/types.h</a>&gt;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<a class="code" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="code" href="atoi_8h.html#a7e07d146dbf715fb5a16e86ad501dadd">atoiUnsigned</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *s, <span class="keywordtype">size_t</span> size, <a class="code" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a> *result);</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<a class="code" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="code" href="atoi_8h.html#a04ea7668bec192ad4d0262f6769922bc">atoiSigned</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *s, <span class="keywordtype">size_t</span> size, <a class="code" href="types_8h.html#ae5c13df54009d7a3e374bfc594af8059">UA_Int64</a> *result);</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="atoi_8h.html#a47d566f65b46a131b20e0c1600a9cbbd">atoiUnsigned</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *pos, <span class="keywordtype">size_t</span> size, <a class="code" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a> *result);</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="atoi_8h.html#a2d6115e97cb6d71274a1138f724bc7ae">atoiSigned</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *pos, <span class="keywordtype">size_t</span> size, <a class="code" href="types_8h.html#ae5c13df54009d7a3e374bfc594af8059">UA_Int64</a> *result);</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    </div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#ifdef __cplusplus</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;}</div>
@@ -92,11 +92,10 @@ $(function() {
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="atypes_8h_html"><div class="ttname"><a href="types_8h.html">types.h</a></div></div>
-<div class="ttc" id="atypes_8h_html_ae5c13df54009d7a3e374bfc594af8059"><div class="ttname"><a href="types_8h.html#ae5c13df54009d7a3e374bfc594af8059">UA_Int64</a></div><div class="ttdeci">int64_t UA_Int64</div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00063">types.h:63</a></div></div>
-<div class="ttc" id="aatoi_8h_html_a7e07d146dbf715fb5a16e86ad501dadd"><div class="ttname"><a href="atoi_8h.html#a7e07d146dbf715fb5a16e86ad501dadd">atoiUnsigned</a></div><div class="ttdeci">UA_StatusCode atoiUnsigned(const char *s, size_t size, UA_UInt64 *result)</div></div>
-<div class="ttc" id="atypes_8h_html_ad0d8e52a357b7fbe50a0b93a2b688b51"><div class="ttname"><a href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a></div><div class="ttdeci">uint64_t UA_UInt64</div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00068">types.h:68</a></div></div>
-<div class="ttc" id="aatoi_8h_html_a04ea7668bec192ad4d0262f6769922bc"><div class="ttname"><a href="atoi_8h.html#a04ea7668bec192ad4d0262f6769922bc">atoiSigned</a></div><div class="ttdeci">UA_StatusCode atoiSigned(const char *s, size_t size, UA_Int64 *result)</div></div>
-<div class="ttc" id="atypes_8h_html_a8beaefc7873465d6baa54a21634b6ea7"><div class="ttname"><a href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div><div class="ttdeci">uint32_t UA_StatusCode</div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00079">types.h:79</a></div></div>
+<div class="ttc" id="aatoi_8h_html_a47d566f65b46a131b20e0c1600a9cbbd"><div class="ttname"><a href="atoi_8h.html#a47d566f65b46a131b20e0c1600a9cbbd">atoiUnsigned</a></div><div class="ttdeci">size_t atoiUnsigned(const char *pos, size_t size, UA_UInt64 *result)</div></div>
+<div class="ttc" id="aatoi_8h_html_a2d6115e97cb6d71274a1138f724bc7ae"><div class="ttname"><a href="atoi_8h.html#a2d6115e97cb6d71274a1138f724bc7ae">atoiSigned</a></div><div class="ttdeci">size_t atoiSigned(const char *pos, size_t size, UA_Int64 *result)</div></div>
+<div class="ttc" id="atypes_8h_html_ae5c13df54009d7a3e374bfc594af8059"><div class="ttname"><a href="types_8h.html#ae5c13df54009d7a3e374bfc594af8059">UA_Int64</a></div><div class="ttdeci">int64_t UA_Int64</div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00061">types.h:61</a></div></div>
+<div class="ttc" id="atypes_8h_html_ad0d8e52a357b7fbe50a0b93a2b688b51"><div class="ttname"><a href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a></div><div class="ttdeci">uint64_t UA_UInt64</div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00066">types.h:66</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

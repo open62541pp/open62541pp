@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">open62541
-   &#160;<span id="projectnumber">1.2.6</span>
+   &#160;<span id="projectnumber">1.3.5</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -72,7 +72,8 @@ $(function() {
 <a href="#nested-classes">Data Structures</a> &#124;
 <a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">ua_types_encoding_json.h File Reference</div>  </div>
 </div><!--header-->
@@ -97,7 +98,7 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a6a89bba44ffe9069e0fb4b2f0caf8210"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__types__encoding__json_8h.html#a6a89bba44ffe9069e0fb4b2f0caf8210">UA_JSON_MAXTOKENCOUNT</a>&#160;&#160;&#160;1000</td></tr>
+<tr class="memitem:a6a89bba44ffe9069e0fb4b2f0caf8210"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__types__encoding__json_8h.html#a6a89bba44ffe9069e0fb4b2f0caf8210">UA_JSON_MAXTOKENCOUNT</a>&#160;&#160;&#160;2048</td></tr>
 <tr class="memdesc:a6a89bba44ffe9069e0fb4b2f0caf8210"><td class="mdescLeft">&#160;</td><td class="mdescRight">This Source Code Form is subject to the terms of the Mozilla Public License, v.  <a href="ua__types__encoding__json_8h.html#a6a89bba44ffe9069e0fb4b2f0caf8210">More...</a><br /></td></tr>
 <tr class="separator:a6a89bba44ffe9069e0fb4b2f0caf8210"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a19d18a4ce4ec31461795214f75edc1ee"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__types__encoding__json_8h.html#a19d18a4ce4ec31461795214f75edc1ee">UA_JSON_ENCODING_MAX_RECURSION</a>&#160;&#160;&#160;100</td></tr>
@@ -108,17 +109,17 @@ Macros</h2></td></tr>
 Typedefs</h2></td></tr>
 <tr class="memitem:a4925586299d56808579b9a643c683154"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__types__encoding__json_8h.html#a4925586299d56808579b9a643c683154">encodeJsonSignature</a>) (const void *src, const <a class="el" href="structUA__DataType.html">UA_DataType</a> *type, <a class="el" href="structCtxJson.html">CtxJson</a> *ctx)</td></tr>
 <tr class="separator:a4925586299d56808579b9a643c683154"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26511909ebc16d29efccc561371b5e6d"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__types__encoding__json_8h.html#a26511909ebc16d29efccc561371b5e6d">decodeJsonSignature</a>) (void *dst, const <a class="el" href="structUA__DataType.html">UA_DataType</a> *type, <a class="el" href="structCtxJson.html">CtxJson</a> *ctx, <a class="el" href="structParseCtx.html">ParseCtx</a> *parseCtx, <a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> moveToken)</td></tr>
-<tr class="separator:a26511909ebc16d29efccc561371b5e6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec806a7f706e089220742e8d4e09d138"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__types__encoding__json_8h.html#aec806a7f706e089220742e8d4e09d138">decodeJsonSignature</a>) (void *dst, const <a class="el" href="structUA__DataType.html">UA_DataType</a> *type, <a class="el" href="structCtxJson.html">CtxJson</a> *ctx, <a class="el" href="structParseCtx.html">ParseCtx</a> *parseCtx)</td></tr>
+<tr class="separator:aec806a7f706e089220742e8d4e09d138"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a870190c47ba8908341e9c3d79acd5ae7"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__types__encoding__json_8h.html#a870190c47ba8908341e9c3d79acd5ae7">UA_calcSizeJson</a> (const void *src, const <a class="el" href="structUA__DataType.html">UA_DataType</a> *type, <a class="el" href="structUA__String.html">UA_String</a> *namespaces, size_t namespaceSize, <a class="el" href="structUA__String.html">UA_String</a> *serverUris, size_t serverUriSize, <a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> useReversible)</td></tr>
-<tr class="separator:a870190c47ba8908341e9c3d79acd5ae7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6edbe6517f503aebde127e566d8410d3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__types__encoding__json_8h.html#a6edbe6517f503aebde127e566d8410d3">UA_encodeJson</a> (const void *src, const <a class="el" href="structUA__DataType.html">UA_DataType</a> *type, uint8_t **bufPos, const uint8_t **bufEnd, <a class="el" href="structUA__String.html">UA_String</a> *namespaces, size_t namespaceSize, <a class="el" href="structUA__String.html">UA_String</a> *serverUris, size_t serverUriSize, <a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> useReversible)</td></tr>
-<tr class="separator:a6edbe6517f503aebde127e566d8410d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a900cddf79e4e7acc4c4c705d99cbdc2a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__types__encoding__json_8h.html#a900cddf79e4e7acc4c4c705d99cbdc2a">UA_decodeJson</a> (const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *src, void *dst, const <a class="el" href="structUA__DataType.html">UA_DataType</a> *type)</td></tr>
-<tr class="separator:a900cddf79e4e7acc4c4c705d99cbdc2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c4cd290044765e654fb850bb5a963f9"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__types__encoding__json_8h.html#a5c4cd290044765e654fb850bb5a963f9">UA_calcSizeJsonInternal</a> (const void *src, const <a class="el" href="structUA__DataType.html">UA_DataType</a> *type, const <a class="el" href="structUA__String.html">UA_String</a> *namespaces, size_t namespaceSize, const <a class="el" href="structUA__String.html">UA_String</a> *serverUris, size_t serverUriSize, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> useReversible)</td></tr>
+<tr class="memdesc:a5c4cd290044765e654fb850bb5a963f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of bytes the value src takes in json encoding.  <a href="ua__types__encoding__json_8h.html#a5c4cd290044765e654fb850bb5a963f9">More...</a><br /></td></tr>
+<tr class="separator:a5c4cd290044765e654fb850bb5a963f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2cd0d0399abba6748a61f09c5ae28da8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__types__encoding__json_8h.html#a2cd0d0399abba6748a61f09c5ae28da8">UA_encodeJsonInternal</a> (const void *src, const <a class="el" href="structUA__DataType.html">UA_DataType</a> *type, uint8_t **bufPos, const uint8_t **bufEnd, const <a class="el" href="structUA__String.html">UA_String</a> *namespaces, size_t namespaceSize, const <a class="el" href="structUA__String.html">UA_String</a> *serverUris, size_t serverUriSize, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> useReversible)</td></tr>
+<tr class="memdesc:a2cd0d0399abba6748a61f09c5ae28da8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encodes the scalar value described by type to json encoding.  <a href="ua__types__encoding__json_8h.html#a2cd0d0399abba6748a61f09c5ae28da8">More...</a><br /></td></tr>
+<tr class="separator:a2cd0d0399abba6748a61f09c5ae28da8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8078054883c89b727ab59857024a0c53"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__types__encoding__json_8h.html#a8078054883c89b727ab59857024a0c53">writeJsonObjStart</a> (<a class="el" href="structCtxJson.html">CtxJson</a> *ctx)</td></tr>
 <tr class="separator:a8078054883c89b727ab59857024a0c53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29cf44d2e3d40d2e27416214597e84a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__types__encoding__json_8h.html#a29cf44d2e3d40d2e27416214597e84a3">writeJsonObjElm</a> (<a class="el" href="structCtxJson.html">CtxJson</a> *ctx, const char *key, const void *value, const <a class="el" href="structUA__DataType.html">UA_DataType</a> *type)</td></tr>
@@ -139,21 +140,22 @@ Functions</h2></td></tr>
 <tr class="separator:a3eebb6cd1e547fc13cd078214c81e245"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01aa0454a9458dc93e43395a6b759d3e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__types__encoding__json_8h.html#a01aa0454a9458dc93e43395a6b759d3e">encodeJsonInternal</a> (const void *src, const <a class="el" href="structUA__DataType.html">UA_DataType</a> *type, <a class="el" href="structCtxJson.html">CtxJson</a> *ctx)</td></tr>
 <tr class="separator:a01aa0454a9458dc93e43395a6b759d3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad650f707ecfcd355f968a4cdaf163d27"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__types__encoding__json_8h.html#ad650f707ecfcd355f968a4cdaf163d27">decodeFields</a> (<a class="el" href="structCtxJson.html">CtxJson</a> *ctx, <a class="el" href="structParseCtx.html">ParseCtx</a> *parseCtx, <a class="el" href="structDecodeEntry.html">DecodeEntry</a> *entries, size_t entryCount, const <a class="el" href="structUA__DataType.html">UA_DataType</a> *type)</td></tr>
-<tr class="separator:ad650f707ecfcd355f968a4cdaf163d27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac18b6988122e9303c79bc84b6ecb8e6f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__types__encoding__json_8h.html#ac18b6988122e9303c79bc84b6ecb8e6f">decodeJsonInternal</a> (void *dst, const <a class="el" href="structUA__DataType.html">UA_DataType</a> *type, <a class="el" href="structCtxJson.html">CtxJson</a> *ctx, <a class="el" href="structParseCtx.html">ParseCtx</a> *parseCtx, <a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> moveToken)</td></tr>
-<tr class="separator:ac18b6988122e9303c79bc84b6ecb8e6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab89f7422439b00610788e963f402cda5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ua__types__encoding__json_8h.html#a26511909ebc16d29efccc561371b5e6d">decodeJsonSignature</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__types__encoding__json_8h.html#ab89f7422439b00610788e963f402cda5">getDecodeSignature</a> (<a class="el" href="ua__util__internal_8h.html#a4815c48446777685ba3c51cfec5e2cfc">u8</a> index)</td></tr>
-<tr class="memdesc:ab89f7422439b00610788e963f402cda5"><td class="mdescLeft">&#160;</td><td class="mdescRight">workaround: TODO generate functions for UA_xxx_decodeJson  <a href="ua__types__encoding__json_8h.html#ab89f7422439b00610788e963f402cda5">More...</a><br /></td></tr>
-<tr class="separator:ab89f7422439b00610788e963f402cda5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4432a71916dc6cfabb8478754c34349"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__types__encoding__json_8h.html#af4432a71916dc6cfabb8478754c34349">decodeFields</a> (<a class="el" href="structCtxJson.html">CtxJson</a> *ctx, <a class="el" href="structParseCtx.html">ParseCtx</a> *parseCtx, <a class="el" href="structDecodeEntry.html">DecodeEntry</a> *entries, size_t entryCount)</td></tr>
+<tr class="separator:af4432a71916dc6cfabb8478754c34349"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad57b4a01b820889ec336bd3a95633eb9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__types__encoding__json_8h.html#ad57b4a01b820889ec336bd3a95633eb9">lookAheadForKey</a> (const char *search, <a class="el" href="structCtxJson.html">CtxJson</a> *ctx, <a class="el" href="structParseCtx.html">ParseCtx</a> *parseCtx, size_t *resultIndex)</td></tr>
 <tr class="separator:ad57b4a01b820889ec336bd3a95633eb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af099a8bc4b768eae8df4746cb306137a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="jsmn_8h.html#a065320719769f9dc1fbe30094e52802f">jsmntype_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__types__encoding__json_8h.html#af099a8bc4b768eae8df4746cb306137a">getJsmnType</a> (const <a class="el" href="structParseCtx.html">ParseCtx</a> *parseCtx)</td></tr>
-<tr class="separator:af099a8bc4b768eae8df4746cb306137a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a76773c019d2a95b7fc4f74ce001b1e12"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__types__encoding__json_8h.html#a76773c019d2a95b7fc4f74ce001b1e12">tokenize</a> (<a class="el" href="structParseCtx.html">ParseCtx</a> *parseCtx, <a class="el" href="structCtxJson.html">CtxJson</a> *ctx, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *src)</td></tr>
-<tr class="separator:a76773c019d2a95b7fc4f74ce001b1e12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a564b737ca8de88223afa5536530f0a51"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__types__encoding__json_8h.html#a564b737ca8de88223afa5536530f0a51">isJsonNull</a> (const <a class="el" href="structCtxJson.html">CtxJson</a> *ctx, const <a class="el" href="structParseCtx.html">ParseCtx</a> *parseCtx)</td></tr>
+<tr class="memitem:a8f1ecc6d12506a716d776ca0bb416c6b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__types__encoding__json_8h.html#a8f1ecc6d12506a716d776ca0bb416c6b">tokenize</a> (<a class="el" href="structParseCtx.html">ParseCtx</a> *parseCtx, <a class="el" href="structCtxJson.html">CtxJson</a> *ctx, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *src, size_t tokensSize)</td></tr>
+<tr class="separator:a8f1ecc6d12506a716d776ca0bb416c6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a564b737ca8de88223afa5536530f0a51"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__types__encoding__json_8h.html#a564b737ca8de88223afa5536530f0a51">isJsonNull</a> (const <a class="el" href="structCtxJson.html">CtxJson</a> *ctx, const <a class="el" href="structParseCtx.html">ParseCtx</a> *parseCtx)</td></tr>
 <tr class="separator:a564b737ca8de88223afa5536530f0a51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a1c55c6abdba4aff1a453dca5f7a57a10"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="ua__types__encoding__json_8h.html#a4925586299d56808579b9a643c683154">encodeJsonSignature</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__types__encoding__json_8h.html#a1c55c6abdba4aff1a453dca5f7a57a10">encodeJsonJumpTable</a> [<a class="el" href="types_8h.html#a2ce8ca747ea530a1f413d9cfd14eb2c6">UA_DATATYPEKINDS</a>]</td></tr>
+<tr class="memdesc:a1c55c6abdba4aff1a453dca5f7a57a10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Expose the jump tables and some methods for PubSub JSON decoding.  <a href="ua__types__encoding__json_8h.html#a1c55c6abdba4aff1a453dca5f7a57a10">More...</a><br /></td></tr>
+<tr class="separator:a1c55c6abdba4aff1a453dca5f7a57a10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a105e012903d8dc70704b81ee34f2d9b3"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="ua__types__encoding__json_8h.html#aec806a7f706e089220742e8d4e09d138">decodeJsonSignature</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ua__types__encoding__json_8h.html#a105e012903d8dc70704b81ee34f2d9b3">decodeJsonJumpTable</a> [<a class="el" href="types_8h.html#a2ce8ca747ea530a1f413d9cfd14eb2c6">UA_DATATYPEKINDS</a>]</td></tr>
+<tr class="separator:a105e012903d8dc70704b81ee34f2d9b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a19d18a4ce4ec31461795214f75edc1ee"></a>
@@ -171,7 +173,7 @@ Functions</h2></td></tr>
 <p>Interal Definitions. </p>
 <p>For future by the PubSub encoding </p>
 
-<p class="definition">Definition at line <a class="el" href="ua__types__encoding__json_8h_source.html#l00045">45</a> of file <a class="el" href="ua__types__encoding__json_8h_source.html">ua_types_encoding_json.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__types__encoding__json_8h_source.html#l00057">57</a> of file <a class="el" href="ua__types__encoding__json_8h_source.html">ua_types_encoding_json.h</a>.</p>
 
 </div>
 </div>
@@ -182,7 +184,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define UA_JSON_MAXTOKENCOUNT&#160;&#160;&#160;1000</td>
+          <td class="memname">#define UA_JSON_MAXTOKENCOUNT&#160;&#160;&#160;2048</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -196,19 +198,19 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Typedef Documentation</h2>
-<a id="a26511909ebc16d29efccc561371b5e6d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a26511909ebc16d29efccc561371b5e6d">&#9670;&nbsp;</a></span>decodeJsonSignature</h2>
+<a id="aec806a7f706e089220742e8d4e09d138"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec806a7f706e089220742e8d4e09d138">&#9670;&nbsp;</a></span>decodeJsonSignature</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* decodeJsonSignature) (void *dst, const <a class="el" href="structUA__DataType.html">UA_DataType</a> *type, <a class="el" href="structCtxJson.html">CtxJson</a> *ctx, <a class="el" href="structParseCtx.html">ParseCtx</a> *parseCtx, <a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> moveToken)</td>
+          <td class="memname">typedef <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* decodeJsonSignature) (void *dst, const <a class="el" href="structUA__DataType.html">UA_DataType</a> *type, <a class="el" href="structCtxJson.html">CtxJson</a> *ctx, <a class="el" href="structParseCtx.html">ParseCtx</a> *parseCtx)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__types__encoding__json_8h_source.html#l00134">134</a> of file <a class="el" href="ua__types__encoding__json_8h_source.html">ua_types_encoding_json.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__types__encoding__json_8h_source.html#l00148">148</a> of file <a class="el" href="ua__types__encoding__json_8h_source.html">ua_types_encoding_json.h</a>.</p>
 
 </div>
 </div>
@@ -224,13 +226,13 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__types__encoding__json_8h_source.html#l00131">131</a> of file <a class="el" href="ua__types__encoding__json_8h_source.html">ua_types_encoding_json.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__types__encoding__json_8h_source.html#l00145">145</a> of file <a class="el" href="ua__types__encoding__json_8h_source.html">ua_types_encoding_json.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ad650f707ecfcd355f968a4cdaf163d27"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad650f707ecfcd355f968a4cdaf163d27">&#9670;&nbsp;</a></span>decodeFields()</h2>
+<a id="af4432a71916dc6cfabb8478754c34349"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4432a71916dc6cfabb8478754c34349">&#9670;&nbsp;</a></span>decodeFields()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -257,59 +259,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>entryCount</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>type</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ac18b6988122e9303c79bc84b6ecb8e6f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac18b6988122e9303c79bc84b6ecb8e6f">&#9670;&nbsp;</a></span>decodeJsonInternal()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> decodeJsonInternal </td>
-          <td>(</td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>dst</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structCtxJson.html">CtxJson</a> *&#160;</td>
-          <td class="paramname"><em>ctx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structParseCtx.html">ParseCtx</a> *&#160;</td>
-          <td class="paramname"><em>parseCtx</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>&#160;</td>
-          <td class="paramname"><em>moveToken</em>&#160;</td>
+          <td class="paramname"><em>entryCount</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -355,44 +305,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ab89f7422439b00610788e963f402cda5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab89f7422439b00610788e963f402cda5">&#9670;&nbsp;</a></span>getDecodeSignature()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="ua__types__encoding__json_8h.html#a26511909ebc16d29efccc561371b5e6d">decodeJsonSignature</a> getDecodeSignature </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="ua__util__internal_8h.html#a4815c48446777685ba3c51cfec5e2cfc">u8</a>&#160;</td>
-          <td class="paramname"><em>index</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>workaround: TODO generate functions for UA_xxx_decodeJson </p>
-
-</div>
-</div>
-<a id="af099a8bc4b768eae8df4746cb306137a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af099a8bc4b768eae8df4746cb306137a">&#9670;&nbsp;</a></span>getJsmnType()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="jsmn_8h.html#a065320719769f9dc1fbe30094e52802f">jsmntype_t</a> getJsmnType </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structParseCtx.html">ParseCtx</a> *&#160;</td>
-          <td class="paramname"><em>parseCtx</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a564b737ca8de88223afa5536530f0a51"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a564b737ca8de88223afa5536530f0a51">&#9670;&nbsp;</a></span>isJsonNull()</h2>
 
@@ -400,7 +312,7 @@ Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> isJsonNull </td>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> isJsonNull </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structCtxJson.html">CtxJson</a> *&#160;</td>
           <td class="paramname"><em>ctx</em>, </td>
@@ -461,8 +373,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a76773c019d2a95b7fc4f74ce001b1e12"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76773c019d2a95b7fc4f74ce001b1e12">&#9670;&nbsp;</a></span>tokenize()</h2>
+<a id="a8f1ecc6d12506a716d776ca0bb416c6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f1ecc6d12506a716d776ca0bb416c6b">&#9670;&nbsp;</a></span>tokenize()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -483,7 +395,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
-          <td class="paramname"><em>src</em>&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>tokensSize</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -495,14 +413,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a870190c47ba8908341e9c3d79acd5ae7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a870190c47ba8908341e9c3d79acd5ae7">&#9670;&nbsp;</a></span>UA_calcSizeJson()</h2>
+<a id="a5c4cd290044765e654fb850bb5a963f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c4cd290044765e654fb850bb5a963f9">&#9670;&nbsp;</a></span>UA_calcSizeJsonInternal()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t UA_calcSizeJson </td>
+          <td class="memname">size_t UA_calcSizeJsonInternal </td>
           <td>(</td>
           <td class="paramtype">const void *&#160;</td>
           <td class="paramname"><em>src</em>, </td>
@@ -516,7 +434,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structUA__String.html">UA_String</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structUA__String.html">UA_String</a> *&#160;</td>
           <td class="paramname"><em>namespaces</em>, </td>
         </tr>
         <tr>
@@ -528,7 +446,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structUA__String.html">UA_String</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structUA__String.html">UA_String</a> *&#160;</td>
           <td class="paramname"><em>serverUris</em>, </td>
         </tr>
         <tr>
@@ -540,7 +458,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td>
           <td class="paramname"><em>useReversible</em>&#160;</td>
         </tr>
         <tr>
@@ -551,50 +469,19 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Returns the number of bytes the value src takes in json encoding. </p>
+<p>Returns zero if an error occurs. </p>
+
 </div>
 </div>
-<a id="a900cddf79e4e7acc4c4c705d99cbdc2a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a900cddf79e4e7acc4c4c705d99cbdc2a">&#9670;&nbsp;</a></span>UA_decodeJson()</h2>
+<a id="a2cd0d0399abba6748a61f09c5ae28da8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2cd0d0399abba6748a61f09c5ae28da8">&#9670;&nbsp;</a></span>UA_encodeJsonInternal()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_decodeJson </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
-          <td class="paramname"><em>src</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>dst</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>type</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a6edbe6517f503aebde127e566d8410d3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6edbe6517f503aebde127e566d8410d3">&#9670;&nbsp;</a></span>UA_encodeJson()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_encodeJson </td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_encodeJsonInternal </td>
           <td>(</td>
           <td class="paramtype">const void *&#160;</td>
           <td class="paramname"><em>src</em>, </td>
@@ -620,7 +507,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structUA__String.html">UA_String</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structUA__String.html">UA_String</a> *&#160;</td>
           <td class="paramname"><em>namespaces</em>, </td>
         </tr>
         <tr>
@@ -632,7 +519,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structUA__String.html">UA_String</a> *&#160;</td>
+          <td class="paramtype">const <a class="el" href="structUA__String.html">UA_String</a> *&#160;</td>
           <td class="paramname"><em>serverUris</em>, </td>
         </tr>
         <tr>
@@ -644,7 +531,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td>
           <td class="paramname"><em>useReversible</em>&#160;</td>
         </tr>
         <tr>
@@ -654,6 +541,23 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Encodes the scalar value described by type to json encoding. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">src</td><td>The value. Must not be NULL. </td></tr>
+    <tr><td class="paramname">type</td><td>The value type. Must not be NULL. </td></tr>
+    <tr><td class="paramname">bufPos</td><td>Points to a pointer to the current position in the encoding buffer. Must not be NULL. </td></tr>
+    <tr><td class="paramname">bufEnd</td><td>Points to a pointer to the end of the encoding buffer (encoding always stops before *buf_end). Must not be NULL. </td></tr>
+    <tr><td class="paramname">namespaces</td><td>An array of namespaces </td></tr>
+    <tr><td class="paramname">namespaceSize</td><td>The size of the namespaces array </td></tr>
+    <tr><td class="paramname">serverUris</td><td>An array of serverUris </td></tr>
+    <tr><td class="paramname">serverUriSize</td><td>The size of the serverUris array </td></tr>
+    <tr><td class="paramname">useReversible</td><td>preserve datatypes in json encoding </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns a statuscode whether encoding succeeded. </dd></dl>
 
 </div>
 </div>
@@ -864,6 +768,37 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a105e012903d8dc70704b81ee34f2d9b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a105e012903d8dc70704b81ee34f2d9b3">&#9670;&nbsp;</a></span>decodeJsonJumpTable</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="ua__types__encoding__json_8h.html#aec806a7f706e089220742e8d4e09d138">decodeJsonSignature</a> decodeJsonJumpTable[<a class="el" href="types_8h.html#a2ce8ca747ea530a1f413d9cfd14eb2c6">UA_DATATYPEKINDS</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1c55c6abdba4aff1a453dca5f7a57a10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c55c6abdba4aff1a453dca5f7a57a10">&#9670;&nbsp;</a></span>encodeJsonJumpTable</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="ua__types__encoding__json_8h.html#a4925586299d56808579b9a643c683154">encodeJsonSignature</a> encodeJsonJumpTable[<a class="el" href="types_8h.html#a2ce8ca747ea530a1f413d9cfd14eb2c6">UA_DATATYPEKINDS</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Expose the jump tables and some methods for PubSub JSON decoding. </p>
 
 </div>
 </div>

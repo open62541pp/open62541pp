@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">open62541
-   &#160;<span id="projectnumber">1.2.6</span>
+   &#160;<span id="projectnumber">1.3.5</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -106,67 +106,71 @@ $(function() {
 <div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#aad7d59495166e84f660afb14f6112844">   37</a></span>&#160;<span class="preprocessor">#define UA_WOULDBLOCK EWOULDBLOCK</span></div>
 <div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#ab65a7ee210e2c2edfd57dd08d2358188">   38</a></span>&#160;<span class="preprocessor">#define UA_ERR_CONNECTION_PROGRESS EINPROGRESS</span></div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a2f86e35b5431b66270f5c245c5e9a403">   40</a></span>&#160;<span class="preprocessor">#define UA_send lwip_send</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#ae6ae4cb3b88f06ffadf55c9aacfa4af4">   41</a></span>&#160;<span class="preprocessor">#define UA_recv lwip_recv</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a0b5288b34c53cc5ec7ffac93edfc08d8">   42</a></span>&#160;<span class="preprocessor">#define UA_sendto lwip_sendto</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a529b4aacb719779e251c04380d60e9c8">   43</a></span>&#160;<span class="preprocessor">#define UA_recvfrom lwip_recvfrom</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#aefe846e8bf268537ee5867be88aeea3a">   44</a></span>&#160;<span class="preprocessor">#define UA_htonl lwip_htonl</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a188ff805eaae4ff52e3e2f7f8abc1dda">   45</a></span>&#160;<span class="preprocessor">#define UA_ntohl lwip_ntohl</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a91ec1fc5e82b5738bd75fa9a677ad057">   46</a></span>&#160;<span class="preprocessor">#define UA_close lwip_close</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a2aa3a3368b60e306b9436f1bf46e6890">   47</a></span>&#160;<span class="preprocessor">#define UA_select lwip_select</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#aed0f86f32c691c00502ce3479b0c8b63">   48</a></span>&#160;<span class="preprocessor">#define UA_shutdown lwip_shutdown</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a0feedf59c1aed7a495b070781e2d68d0">   49</a></span>&#160;<span class="preprocessor">#define UA_socket lwip_socket</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a63a2de759ae897495c29a12847ff27f9">   50</a></span>&#160;<span class="preprocessor">#define UA_bind lwip_bind</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#aaef1ec25e9e00456d3e6b26ca5645363">   51</a></span>&#160;<span class="preprocessor">#define UA_listen lwip_listen</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#ab3c5de29859d6d596dce0a6272da7bf6">   52</a></span>&#160;<span class="preprocessor">#define UA_accept lwip_accept</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#af3227d440097041881475f0d28f3b247">   53</a></span>&#160;<span class="preprocessor">#define UA_connect lwip_connect</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a70f97d4f443258d5a3f9459809f4dcfc">   54</a></span>&#160;<span class="preprocessor">#define UA_getsockopt lwip_getsockopt</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a049597dd49ec9594e2202b38f9ea8a96">   55</a></span>&#160;<span class="preprocessor">#define UA_setsockopt lwip_setsockopt</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#aae2956a3c7c5a31a195122911258a80f">   56</a></span>&#160;<span class="preprocessor">#define UA_freeaddrinfo lwip_freeaddrinfo</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#ifndef UA_gethostname</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a075236828379124cd8b288b5788b9f07">   58</a></span>&#160;<span class="preprocessor">#define UA_gethostname gethostname_lwip</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="ua__lwip_8h.html#a075236828379124cd8b288b5788b9f07">UA_gethostname</a>(<span class="keywordtype">char</span>* name, <span class="keywordtype">size_t</span> len);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#ifndef UA_getsockname</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a25b3aa59821ea1b39b5073c598cd15d2">   63</a></span>&#160;<span class="preprocessor">#define UA_getsockname lwip_getsockname</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="ua__lwip_8h.html#a25b3aa59821ea1b39b5073c598cd15d2">UA_getsockname</a>((<span class="keywordtype">int</span> s, <span class="keyword">struct</span> sockaddr *name, socklen_t *namelen);</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">#ifndef UA_getaddrinfo</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a37c2481d71d052e5d685a13b16b58d92">   68</a></span>&#160;<span class="preprocessor">#define UA_getaddrinfo lwip_getaddrinfo</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="ua__lwip_8h.html#a37c2481d71d052e5d685a13b16b58d92">UA_getaddrinfo</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *nodename, <span class="keyword">const</span> <span class="keywordtype">char</span> *servname,</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                 <span class="keyword">const</span> <span class="keyword">struct</span> addrinfo *hints, <span class="keyword">struct</span> addrinfo **res);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#if UA_IPV6</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor"># define UA_inet_pton(af, src, dst) \</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">    (((af) == AF_INET6) ? ip6addr_aton((src),(ip6_addr_t*)(dst)) \</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">     : (((af) == AF_INET) ? ip4addr_aton((src),(ip4_addr_t*)(dst)) : 0))</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#ad895227d560ff4b61b089081b93d34f0">   79</a></span>&#160;<span class="preprocessor"># define UA_inet_pton(af, src, dst) \</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">     (((af) == AF_INET) ? ip4addr_aton((src),(ip4_addr_t*)(dst)) : 0)</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#if UA_IPV6</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor"># define UA_if_nametoindex lwip_if_nametoindex</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor"># if LWIP_VERSION_IS_RELEASE //lwip_if_nametoindex is not yet released</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> lwip_if_nametoindex(<span class="keyword">const</span> <span class="keywordtype">char</span> *ifname);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor"># endif</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keywordtype">int</span> <a class="code" href="ua__lwip_8h.html#ab8dba2f1e3b38c2dd638e8611178230b">gethostname_lwip</a>(<span class="keywordtype">char</span>* name, <span class="keywordtype">size_t</span> len); <span class="comment">//gethostname is not present in LwIP. We implement here a dummy. See ../freertosLWIP/ua_architecture_functions.c</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a8438c75f3d41e4845f379c9053f996b9">   93</a></span>&#160;<span class="preprocessor">#define UA_LOG_SOCKET_ERRNO_GAI_WRAP UA_LOG_SOCKET_ERRNO_WRAP</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a629bdb80b3db9f8613921bbf5cc58843">   40</a></span>&#160;<span class="preprocessor">#define UA_POLLIN POLLIN</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a82360b1d0d1565325eeed9f15acaf145">   41</a></span>&#160;<span class="preprocessor">#define UA_POLLOUT POLLOUT</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a7b2d28aedc000fa8bfc08056af766641">   43</a></span>&#160;<span class="preprocessor">#define UA_poll lwip_poll</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a2f86e35b5431b66270f5c245c5e9a403">   44</a></span>&#160;<span class="preprocessor">#define UA_send lwip_send</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#ae6ae4cb3b88f06ffadf55c9aacfa4af4">   45</a></span>&#160;<span class="preprocessor">#define UA_recv lwip_recv</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a0b5288b34c53cc5ec7ffac93edfc08d8">   46</a></span>&#160;<span class="preprocessor">#define UA_sendto lwip_sendto</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a529b4aacb719779e251c04380d60e9c8">   47</a></span>&#160;<span class="preprocessor">#define UA_recvfrom lwip_recvfrom</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#aefe846e8bf268537ee5867be88aeea3a">   48</a></span>&#160;<span class="preprocessor">#define UA_htonl lwip_htonl</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a188ff805eaae4ff52e3e2f7f8abc1dda">   49</a></span>&#160;<span class="preprocessor">#define UA_ntohl lwip_ntohl</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a91ec1fc5e82b5738bd75fa9a677ad057">   50</a></span>&#160;<span class="preprocessor">#define UA_close lwip_close</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a2aa3a3368b60e306b9436f1bf46e6890">   51</a></span>&#160;<span class="preprocessor">#define UA_select lwip_select</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#aed0f86f32c691c00502ce3479b0c8b63">   52</a></span>&#160;<span class="preprocessor">#define UA_shutdown lwip_shutdown</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a0feedf59c1aed7a495b070781e2d68d0">   53</a></span>&#160;<span class="preprocessor">#define UA_socket lwip_socket</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a63a2de759ae897495c29a12847ff27f9">   54</a></span>&#160;<span class="preprocessor">#define UA_bind lwip_bind</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#aaef1ec25e9e00456d3e6b26ca5645363">   55</a></span>&#160;<span class="preprocessor">#define UA_listen lwip_listen</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#ab3c5de29859d6d596dce0a6272da7bf6">   56</a></span>&#160;<span class="preprocessor">#define UA_accept lwip_accept</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#af3227d440097041881475f0d28f3b247">   57</a></span>&#160;<span class="preprocessor">#define UA_connect lwip_connect</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a70f97d4f443258d5a3f9459809f4dcfc">   58</a></span>&#160;<span class="preprocessor">#define UA_getsockopt lwip_getsockopt</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a049597dd49ec9594e2202b38f9ea8a96">   59</a></span>&#160;<span class="preprocessor">#define UA_setsockopt lwip_setsockopt</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#aae2956a3c7c5a31a195122911258a80f">   60</a></span>&#160;<span class="preprocessor">#define UA_freeaddrinfo lwip_freeaddrinfo</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#ifndef UA_gethostname</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a075236828379124cd8b288b5788b9f07">   62</a></span>&#160;<span class="preprocessor">#define UA_gethostname gethostname_lwip</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="ua__lwip_8h.html#a075236828379124cd8b288b5788b9f07">UA_gethostname</a>(<span class="keywordtype">char</span>* name, <span class="keywordtype">size_t</span> len);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#ifndef UA_getsockname</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a25b3aa59821ea1b39b5073c598cd15d2">   67</a></span>&#160;<span class="preprocessor">#define UA_getsockname lwip_getsockname</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="ua__lwip_8h.html#a25b3aa59821ea1b39b5073c598cd15d2">UA_getsockname</a>((<span class="keywordtype">int</span> s, <span class="keyword">struct</span> sockaddr *name, socklen_t *namelen);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">#ifndef UA_getaddrinfo</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a37c2481d71d052e5d685a13b16b58d92">   72</a></span>&#160;<span class="preprocessor">#define UA_getaddrinfo lwip_getaddrinfo</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">int</span> <a class="code" href="ua__lwip_8h.html#a37c2481d71d052e5d685a13b16b58d92">UA_getaddrinfo</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *nodename, <span class="keyword">const</span> <span class="keywordtype">char</span> *servname,</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                 <span class="keyword">const</span> <span class="keyword">struct</span> addrinfo *hints, <span class="keyword">struct</span> addrinfo **res);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">#if UA_IPV6</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor"># define UA_inet_pton(af, src, dst) \</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">    (((af) == AF_INET6) ? ip6addr_aton((src),(ip6_addr_t*)(dst)) \</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">     : (((af) == AF_INET) ? ip4addr_aton((src),(ip4_addr_t*)(dst)) : 0))</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#ad895227d560ff4b61b089081b93d34f0">   83</a></span>&#160;<span class="preprocessor"># define UA_inet_pton(af, src, dst) \</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">     (((af) == AF_INET) ? ip4addr_aton((src),(ip4_addr_t*)(dst)) : 0)</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">#if UA_IPV6</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor"># define UA_if_nametoindex lwip_if_nametoindex</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor"># if LWIP_VERSION_IS_RELEASE //lwip_if_nametoindex is not yet released</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> lwip_if_nametoindex(<span class="keyword">const</span> <span class="keywordtype">char</span> *ifname);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor"># endif</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* ARCH_COMMON_LWIP62541_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="keywordtype">int</span> <a class="code" href="ua__lwip_8h.html#ab8dba2f1e3b38c2dd638e8611178230b">gethostname_lwip</a>(<span class="keywordtype">char</span>* name, <span class="keywordtype">size_t</span> len);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno"><a class="line" href="ua__lwip_8h.html#a8438c75f3d41e4845f379c9053f996b9">   97</a></span>&#160;<span class="preprocessor">#define UA_LOG_SOCKET_ERRNO_GAI_WRAP UA_LOG_SOCKET_ERRNO_WRAP</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* ARCH_COMMON_LWIP62541_H_ */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aua__lwip_8h_html_a075236828379124cd8b288b5788b9f07"><div class="ttname"><a href="ua__lwip_8h.html#a075236828379124cd8b288b5788b9f07">UA_gethostname</a></div><div class="ttdeci">#define UA_gethostname</div><div class="ttdef"><b>Definition:</b> <a href="ua__lwip_8h_source.html#l00058">ua_lwip.h:58</a></div></div>
+<div class="ttc" id="aua__lwip_8h_html_a075236828379124cd8b288b5788b9f07"><div class="ttname"><a href="ua__lwip_8h.html#a075236828379124cd8b288b5788b9f07">UA_gethostname</a></div><div class="ttdeci">#define UA_gethostname</div><div class="ttdef"><b>Definition:</b> <a href="ua__lwip_8h_source.html#l00062">ua_lwip.h:62</a></div></div>
 <div class="ttc" id="aua__lwip_8h_html_ab8dba2f1e3b38c2dd638e8611178230b"><div class="ttname"><a href="ua__lwip_8h.html#ab8dba2f1e3b38c2dd638e8611178230b">gethostname_lwip</a></div><div class="ttdeci">int gethostname_lwip(char *name, size_t len)</div></div>
-<div class="ttc" id="aua__lwip_8h_html_a37c2481d71d052e5d685a13b16b58d92"><div class="ttname"><a href="ua__lwip_8h.html#a37c2481d71d052e5d685a13b16b58d92">UA_getaddrinfo</a></div><div class="ttdeci">#define UA_getaddrinfo</div><div class="ttdef"><b>Definition:</b> <a href="ua__lwip_8h_source.html#l00068">ua_lwip.h:68</a></div></div>
-<div class="ttc" id="aua__lwip_8h_html_a25b3aa59821ea1b39b5073c598cd15d2"><div class="ttname"><a href="ua__lwip_8h.html#a25b3aa59821ea1b39b5073c598cd15d2">UA_getsockname</a></div><div class="ttdeci">#define UA_getsockname</div><div class="ttdef"><b>Definition:</b> <a href="ua__lwip_8h_source.html#l00063">ua_lwip.h:63</a></div></div>
+<div class="ttc" id="aua__lwip_8h_html_a37c2481d71d052e5d685a13b16b58d92"><div class="ttname"><a href="ua__lwip_8h.html#a37c2481d71d052e5d685a13b16b58d92">UA_getaddrinfo</a></div><div class="ttdeci">#define UA_getaddrinfo</div><div class="ttdef"><b>Definition:</b> <a href="ua__lwip_8h_source.html#l00072">ua_lwip.h:72</a></div></div>
+<div class="ttc" id="aua__lwip_8h_html_a25b3aa59821ea1b39b5073c598cd15d2"><div class="ttname"><a href="ua__lwip_8h.html#a25b3aa59821ea1b39b5073c598cd15d2">UA_getsockname</a></div><div class="ttdeci">#define UA_getsockname</div><div class="ttdef"><b>Definition:</b> <a href="ua__lwip_8h_source.html#l00067">ua_lwip.h:67</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

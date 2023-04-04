@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">open62541
-   &#160;<span id="projectnumber">1.2.6</span>
+   &#160;<span id="projectnumber">1.3.5</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -82,7 +82,7 @@ Data Fields</h2></td></tr>
 <tr class="separator:a76edbcc58e73d7c5aa718c19bace9737"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3fcb6546626ac8af9e001bcad2ef7af"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__GlobalNodeLifecycle.html#ad3fcb6546626ac8af9e001bcad2ef7af">destructor</a> )(<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, void *nodeContext)</td></tr>
 <tr class="separator:ad3fcb6546626ac8af9e001bcad2ef7af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a775c12a0c15f099174dcce4ee114bceb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__GlobalNodeLifecycle.html#a775c12a0c15f099174dcce4ee114bceb">createOptionalChild</a> )(<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sourceNodeId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *targetParentNodeId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *referenceTypeId)</td></tr>
+<tr class="memitem:a775c12a0c15f099174dcce4ee114bceb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__GlobalNodeLifecycle.html#a775c12a0c15f099174dcce4ee114bceb">createOptionalChild</a> )(<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sourceNodeId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *targetParentNodeId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *referenceTypeId)</td></tr>
 <tr class="separator:a775c12a0c15f099174dcce4ee114bceb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26391b7989881b79a7fbaeb474096645"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__GlobalNodeLifecycle.html#a26391b7989881b79a7fbaeb474096645">generateChildNodeId</a> )(<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sourceNodeId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *targetParentNodeId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *referenceTypeId, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *targetNodeId)</td></tr>
 <tr class="separator:a26391b7989881b79a7fbaeb474096645"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -90,10 +90,10 @@ Data Fields</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This Source Code Form is subject to the terms of the Mozilla Public License, v. </p>
 <p>2.0. If a copy of the MPL was not distributed with this file, You can obtain one at <a href="http://mozilla.org/MPL/2.0/">http://mozilla.org/MPL/2.0/</a>.</p>
-<p>Copyright 2017 (c) Fraunhofer IOSB (Author: Julius Pfrommer) Copyright 2017 (c) Julian Grothoff Copyright 2017 (c) Stefan Profanter, fortiss GmbH !!! Warning !!!</p>
+<p>Copyright 2017, 2021 (c) Fraunhofer IOSB (Author: Julius Pfrommer) Copyright 2017 (c) Julian Grothoff Copyright 2017 (c) Stefan Profanter, fortiss GmbH !!! Warning !!!</p>
 <p>If you are not developing a nodestore plugin, then you should not work with the definitions from this file directly. The underlying node structures are not meant to be used directly by end users. Please use the public server API / OPC UA services to interact with the information model. Forward declaration </p>
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00032">32</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00033">33</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
 <a id="a76edbcc58e73d7c5aa718c19bace9737"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a76edbcc58e73d7c5aa718c19bace9737">&#9670;&nbsp;</a></span>constructor</h2>
@@ -107,7 +107,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00034">34</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00035">35</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
@@ -118,12 +118,12 @@ Data Fields</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>(* UA_GlobalNodeLifecycle::createOptionalChild) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sourceNodeId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *targetParentNodeId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *referenceTypeId)</td>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(* UA_GlobalNodeLifecycle::createOptionalChild) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sourceNodeId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *targetParentNodeId, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *referenceTypeId)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00060">60</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00061">61</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
@@ -139,7 +139,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00040">40</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00041">41</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
@@ -155,7 +155,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00081">81</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00082">82</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>

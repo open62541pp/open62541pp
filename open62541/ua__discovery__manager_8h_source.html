@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">open62541
-   &#160;<span id="projectnumber">1.2.6</span>
+   &#160;<span id="projectnumber">1.3.5</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -94,7 +94,7 @@ $(function() {
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a> id;</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a> this_interval;</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a> default_interval;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> registered;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> registered;</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">struct </span><a class="code" href="structUA__Client.html">UA_Client</a>* client;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">char</span>* discovery_server_url;</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;};</div>
@@ -115,8 +115,8 @@ $(function() {
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    UA_ServerOnNetwork serverOnNetwork;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> created;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <a class="code" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> lastSeen;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> txtSet;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <a class="code" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> srvSet;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <a class="code" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> txtSet;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <a class="code" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> srvSet;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">char</span>* pathTmp;</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;} serverOnNetwork_list_entry;</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
@@ -138,7 +138,7 @@ $(function() {
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor"># ifdef UA_ENABLE_DISCOVERY_MULTICAST</span></div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <a class="code" href="mdnsd_8h.html#a8734d308c61c7a8458e0aa9f5e3d2577">mdns_daemon_t</a> *mdnsDaemon;</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <a class="code" href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a> mdnsSocket;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <a class="code" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> mdnsMainSrvAdded;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <a class="code" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> mdnsMainSrvAdded;</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="comment">/* Full Domain Name of server itself. Used to detect if received mDNS message was from itself */</span></div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <a class="code" href="structUA__String.html">UA_String</a> selfFqdnMdnsRecord;</div>
@@ -154,9 +154,9 @@ $(function() {
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    UA_Server_serverOnNetworkCallback serverOnNetworkCallback;</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordtype">void</span>* serverOnNetworkCallbackData;</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">#if UA_MULTITHREADING &gt;= 200</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">#if UA_MULTITHREADING &gt;= 100</span></div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    pthread_t mdnsThread;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <a class="code" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> mdnsRunning;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <a class="code" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> mdnsRunning;</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor">#  endif</span></div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="preprocessor"># endif </span><span class="comment">/* UA_ENABLE_DISCOVERY_MULTICAST */</span><span class="preprocessor"></span></div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;} UA_DiscoveryManager;</div>
@@ -173,7 +173,7 @@ $(function() {
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;UA_Server_updateMdnsForDiscoveryUrl(<a class="code" href="structUA__Server.html">UA_Server</a> *server, <span class="keyword">const</span> <a class="code" href="structUA__String.html">UA_String</a> *serverName,</div>
 <div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                                    <span class="keyword">const</span> UA_MdnsDiscoveryConfiguration *mdnsConfig,</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                                    <span class="keyword">const</span> <a class="code" href="structUA__String.html">UA_String</a> *discoveryUrl,</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                                    <a class="code" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> isOnline, <a class="code" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> updateTxt);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                                    <a class="code" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> isOnline, <a class="code" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> updateTxt);</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
 <div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="keywordtype">void</span> mdns_record_received(<span class="keyword">const</span> <span class="keyword">struct</span> <a class="code" href="structresource.html">resource</a> *r, <span class="keywordtype">void</span> *data);</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
@@ -190,77 +190,80 @@ $(function() {
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;mdns_find_record(<a class="code" href="mdnsd_8h.html#a8734d308c61c7a8458e0aa9f5e3d2577">mdns_daemon_t</a> *mdnsDaemon, <span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> type,</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                 <span class="keyword">const</span> <span class="keywordtype">char</span> *host, <span class="keyword">const</span> <span class="keywordtype">char</span> *rdname);</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="keywordtype">void</span> startMulticastDiscoveryServer(<a class="code" href="structUA__Server.html">UA_Server</a> *server);</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="keywordtype">void</span> stopMulticastDiscoveryServer(<a class="code" href="structUA__Server.html">UA_Server</a> *server);</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<a class="code" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;iterateMulticastDiscoveryServer(<a class="code" href="structUA__Server.html">UA_Server</a>* server, <a class="code" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> *nextRepeat,</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;                                <a class="code" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> processIn);</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    UA_DISCOVERY_TCP,     <span class="comment">/* OPC UA TCP mapping */</span></div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    UA_DISCOVERY_TLS     <span class="comment">/* OPC UA HTTPS mapping */</span></div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;} UA_DiscoveryProtocol;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<a class="code" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;UA_Discovery_multicastQuery(<a class="code" href="structUA__Server.html">UA_Server</a>* server);</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<a class="code" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;UA_Discovery_addRecord(<a class="code" href="structUA__Server.html">UA_Server</a> *server, <span class="keyword">const</span> <a class="code" href="structUA__String.html">UA_String</a> *servername,</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;                       <span class="keyword">const</span> <a class="code" href="structUA__String.html">UA_String</a> *hostname, <a class="code" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a> port,</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                       <span class="keyword">const</span> <a class="code" href="structUA__String.html">UA_String</a> *path, <span class="keyword">const</span> UA_DiscoveryProtocol protocol,</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                       <a class="code" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> createTxt, <span class="keyword">const</span> <a class="code" href="structUA__String.html">UA_String</a>* capabilites,</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                       <span class="keyword">const</span> <span class="keywordtype">size_t</span> capabilitiesSize,</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                       <a class="code" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> isSelf);</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<a class="code" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;UA_DiscoveryManager_addEntryToServersOnNetwork(<a class="code" href="structUA__Server.html">UA_Server</a> *server, <span class="keyword">const</span> <span class="keywordtype">char</span> *fqdnMdnsRecord, <span class="keyword">const</span> <span class="keywordtype">char</span> *serverName,</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                                               <span class="keywordtype">size_t</span> serverNameLen, <span class="keyword">struct</span> serverOnNetwork_list_entry **addedEntry);</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<a class="code" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;UA_Discovery_removeRecord(<a class="code" href="structUA__Server.html">UA_Server</a> *server, <span class="keyword">const</span> <a class="code" href="structUA__String.html">UA_String</a> *servername,</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                          <span class="keyword">const</span> <a class="code" href="structUA__String.html">UA_String</a> *hostname, <a class="code" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a> port,</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                          <a class="code" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> removeTxt);</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<a class="code" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;UA_DiscoveryManager_removeEntryFromServersOnNetwork(<a class="code" href="structUA__Server.html">UA_Server</a> *server, <span class="keyword">const</span> <span class="keywordtype">char</span> *fqdnMdnsRecord, <span class="keyword">const</span> <span class="keywordtype">char</span> *serverName,</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                                                    <span class="keywordtype">size_t</span> serverNameLen);</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* UA_ENABLE_DISCOVERY_MULTICAST */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<a class="code" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;initMulticastDiscoveryServer(UA_DiscoveryManager *dm, <a class="code" href="structUA__Server.html">UA_Server</a>* server);</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="keywordtype">void</span> startMulticastDiscoveryServer(<a class="code" href="structUA__Server.html">UA_Server</a> *server);</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160; </div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="keywordtype">void</span> stopMulticastDiscoveryServer(<a class="code" href="structUA__Server.html">UA_Server</a> *server);</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<a class="code" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;iterateMulticastDiscoveryServer(<a class="code" href="structUA__Server.html">UA_Server</a>* server, <a class="code" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> *nextRepeat,</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                                <a class="code" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> processIn);</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    UA_DISCOVERY_TCP,     <span class="comment">/* OPC UA TCP mapping */</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    UA_DISCOVERY_TLS     <span class="comment">/* OPC UA HTTPS mapping */</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;} UA_DiscoveryProtocol;</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<a class="code" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;UA_Discovery_multicastQuery(<a class="code" href="structUA__Server.html">UA_Server</a>* server);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<a class="code" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;UA_Discovery_addRecord(<a class="code" href="structUA__Server.html">UA_Server</a> *server, <span class="keyword">const</span> <a class="code" href="structUA__String.html">UA_String</a> *servername,</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                       <span class="keyword">const</span> <a class="code" href="structUA__String.html">UA_String</a> *hostname, <a class="code" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a> port,</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                       <span class="keyword">const</span> <a class="code" href="structUA__String.html">UA_String</a> *path, <span class="keyword">const</span> UA_DiscoveryProtocol protocol,</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                       <a class="code" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> createTxt, <span class="keyword">const</span> <a class="code" href="structUA__String.html">UA_String</a>* capabilites,</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                       <span class="keyword">const</span> <span class="keywordtype">size_t</span> capabilitiesSize,</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                       <a class="code" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> isSelf);</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<a class="code" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;UA_DiscoveryManager_addEntryToServersOnNetwork(<a class="code" href="structUA__Server.html">UA_Server</a> *server, <span class="keyword">const</span> <span class="keywordtype">char</span> *fqdnMdnsRecord, <span class="keyword">const</span> <span class="keywordtype">char</span> *serverName,</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                                               <span class="keywordtype">size_t</span> serverNameLen, <span class="keyword">struct</span> serverOnNetwork_list_entry **addedEntry);</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160; </div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; </div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<a class="code" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;UA_Discovery_removeRecord(<a class="code" href="structUA__Server.html">UA_Server</a> *server, <span class="keyword">const</span> <a class="code" href="structUA__String.html">UA_String</a> *servername,</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                          <span class="keyword">const</span> <a class="code" href="structUA__String.html">UA_String</a> *hostname, <a class="code" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a> port,</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                          <a class="code" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> removeTxt);</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<a class="code" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;UA_DiscoveryManager_removeEntryFromServersOnNetwork(<a class="code" href="structUA__Server.html">UA_Server</a> *server, <span class="keyword">const</span> <span class="keywordtype">char</span> *fqdnMdnsRecord, <span class="keyword">const</span> <span class="keywordtype">char</span> *serverName,</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                                                    <span class="keywordtype">size_t</span> serverNameLen);</div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160; </div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* UA_ENABLE_DISCOVERY */</span><span class="preprocessor"></span></div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<a class="code" href="config_8h.html#ae2a857f3db1005cc1b5a41effd3adac6">_UA_END_DECLS</a></div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* UA_DISCOVERY_MANAGER_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* UA_ENABLE_DISCOVERY_MULTICAST */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* UA_ENABLE_DISCOVERY */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<a class="code" href="config_8h.html#ae2a857f3db1005cc1b5a41effd3adac6">_UA_END_DECLS</a></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* UA_DISCOVERY_MANAGER_H_ */</span><span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="astructUA__Server_html"><div class="ttname"><a href="structUA__Server.html">UA_Server</a></div><div class="ttdef"><b>Definition:</b> <a href="ua__server__internal_8h_source.html#l00084">ua_server_internal.h:84</a></div></div>
+<div class="ttc" id="astructUA__Server_html"><div class="ttname"><a href="structUA__Server.html">UA_Server</a></div><div class="ttdef"><b>Definition:</b> <a href="ua__server__internal_8h_source.html#l00085">ua_server_internal.h:85</a></div></div>
 <div class="ttc" id="amdnsd_8h_html_a80124818b7c2bf9d45e43e081ad7f2de"><div class="ttname"><a href="mdnsd_8h.html#a80124818b7c2bf9d45e43e081ad7f2de">mdns_record_t</a></div><div class="ttdeci">struct mdns_record mdns_record_t</div><div class="ttdoc">Record entry.</div><div class="ttdef"><b>Definition:</b> <a href="mdnsd_8h_source.html#l00068">mdnsd.h:68</a></div></div>
-<div class="ttc" id="aconfig_8h_html_ae2a857f3db1005cc1b5a41effd3adac6"><div class="ttname"><a href="config_8h.html#ae2a857f3db1005cc1b5a41effd3adac6">_UA_END_DECLS</a></div><div class="ttdeci">#define _UA_END_DECLS</div><div class="ttdef"><b>Definition:</b> <a href="config_8h_source.html#l00088">config.h:88</a></div></div>
+<div class="ttc" id="atypes_8h_html_a0a44d61c7e7e9107300c8e477c54bd47"><div class="ttname"><a href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a></div><div class="ttdeci">_UA_BEGIN_DECLS typedef bool UA_Boolean</div><div class="ttdoc">This Source Code Form is subject to the terms of the Mozilla Public License, v.</div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00026">types.h:26</a></div></div>
+<div class="ttc" id="aconfig_8h_html_ae2a857f3db1005cc1b5a41effd3adac6"><div class="ttname"><a href="config_8h.html#ae2a857f3db1005cc1b5a41effd3adac6">_UA_END_DECLS</a></div><div class="ttdeci">#define _UA_END_DECLS</div><div class="ttdef"><b>Definition:</b> <a href="config_8h_source.html#l00096">config.h:96</a></div></div>
 <div class="ttc" id="aopen62541__queue_8h_html_ae72219f63b2fe9bce774a64e11404179"><div class="ttname"><a href="open62541__queue_8h.html#ae72219f63b2fe9bce774a64e11404179">LIST_HEAD</a></div><div class="ttdeci">#define LIST_HEAD(name, type)</div><div class="ttdef"><b>Definition:</b> <a href="open62541__queue_8h_source.html#l00167">open62541_queue.h:167</a></div></div>
-<div class="ttc" id="atypes_8h_html_a6cfbce46cf586a305e4c9b9455c37eea"><div class="ttname"><a href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a></div><div class="ttdeci">int64_t UA_DateTime</div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00120">types.h:120</a></div></div>
+<div class="ttc" id="atypes_8h_html_a6cfbce46cf586a305e4c9b9455c37eea"><div class="ttname"><a href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a></div><div class="ttdeci">int64_t UA_DateTime</div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00144">types.h:144</a></div></div>
 <div class="ttc" id="amdnsd_8h_html_a8734d308c61c7a8458e0aa9f5e3d2577"><div class="ttname"><a href="mdnsd_8h.html#a8734d308c61c7a8458e0aa9f5e3d2577">mdns_daemon_t</a></div><div class="ttdeci">struct mdns_daemon mdns_daemon_t</div><div class="ttdoc">Main daemon data.</div><div class="ttdef"><b>Definition:</b> <a href="mdnsd_8h_source.html#l00066">mdnsd.h:66</a></div></div>
 <div class="ttc" id="astructresource_html"><div class="ttname"><a href="structresource.html">resource</a></div><div class="ttdef"><b>Definition:</b> <a href="1035_8h_source.html#l00077">1035.h:77</a></div></div>
-<div class="ttc" id="astructUA__Client_html"><div class="ttname"><a href="structUA__Client.html">UA_Client</a></div><div class="ttdef"><b>Definition:</b> <a href="ua__client__internal_8h_source.html#l00112">ua_client_internal.h:112</a></div></div>
-<div class="ttc" id="astructUA__String_html"><div class="ttname"><a href="structUA__String.html">UA_String</a></div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00090">types.h:90</a></div></div>
-<div class="ttc" id="atypes_8h_html_a0a5ff540581b2a3ca4757de792c68f05"><div class="ttname"><a href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a></div><div class="ttdeci">uint16_t UA_UInt16</div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00048">types.h:48</a></div></div>
-<div class="ttc" id="aconfig_8h_html_aa397bffde7d792f38dcbb8e329486f9c"><div class="ttname"><a href="config_8h.html#aa397bffde7d792f38dcbb8e329486f9c">_UA_BEGIN_DECLS</a></div><div class="ttdeci">#define _UA_BEGIN_DECLS</div><div class="ttdoc">#undef UA_DEBUG_DUMP_PKGS</div><div class="ttdef"><b>Definition:</b> <a href="config_8h_source.html#l00081">config.h:81</a></div></div>
+<div class="ttc" id="astructUA__Client_html"><div class="ttname"><a href="structUA__Client.html">UA_Client</a></div><div class="ttdef"><b>Definition:</b> <a href="ua__client__internal_8h_source.html#l00110">ua_client_internal.h:110</a></div></div>
+<div class="ttc" id="astructUA__String_html"><div class="ttname"><a href="structUA__String.html">UA_String</a></div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00114">types.h:114</a></div></div>
+<div class="ttc" id="atypes_8h_html_a0a5ff540581b2a3ca4757de792c68f05"><div class="ttname"><a href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a></div><div class="ttdeci">uint16_t UA_UInt16</div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00046">types.h:46</a></div></div>
+<div class="ttc" id="aconfig_8h_html_aa397bffde7d792f38dcbb8e329486f9c"><div class="ttname"><a href="config_8h.html#aa397bffde7d792f38dcbb8e329486f9c">_UA_BEGIN_DECLS</a></div><div class="ttdeci">#define _UA_BEGIN_DECLS</div><div class="ttdoc">#undef UA_DEBUG_DUMP_PKGS</div><div class="ttdef"><b>Definition:</b> <a href="config_8h_source.html#l00089">config.h:89</a></div></div>
 <div class="ttc" id="aopen62541__queue_8h_html_aec2ccd0e8c215504508af23f04480be6"><div class="ttname"><a href="open62541__queue_8h.html#aec2ccd0e8c215504508af23f04480be6">LIST_ENTRY</a></div><div class="ttdeci">#define LIST_ENTRY(type)</div><div class="ttdef"><b>Definition:</b> <a href="open62541__queue_8h_source.html#l00175">open62541_queue.h:175</a></div></div>
-<div class="ttc" id="atypes_8h_html_ad0d8e52a357b7fbe50a0b93a2b688b51"><div class="ttname"><a href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a></div><div class="ttdeci">uint64_t UA_UInt64</div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00068">types.h:68</a></div></div>
+<div class="ttc" id="atypes_8h_html_ad0d8e52a357b7fbe50a0b93a2b688b51"><div class="ttname"><a href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a></div><div class="ttdeci">uint64_t UA_UInt64</div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00066">types.h:66</a></div></div>
 <div class="ttc" id="aopen62541__queue_8h_html"><div class="ttname"><a href="open62541__queue_8h.html">open62541_queue.h</a></div></div>
 <div class="ttc" id="aua__lwip_8h_html_ae7ee2eeb127467f5dc6860091e9500a8"><div class="ttname"><a href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a></div><div class="ttdeci">#define UA_SOCKET</div><div class="ttdef"><b>Definition:</b> <a href="ua__lwip_8h_source.html#l00031">ua_lwip.h:31</a></div></div>
 <div class="ttc" id="aserver_8h_html"><div class="ttname"><a href="server_8h.html">server.h</a></div></div>
-<div class="ttc" id="atypes_8h_html_a8beaefc7873465d6baa54a21634b6ea7"><div class="ttname"><a href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div><div class="ttdeci">uint32_t UA_StatusCode</div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00079">types.h:79</a></div></div>
-<div class="ttc" id="atypes_8h_html_a5f0721b034e4c44a7f81589b15ba1baf"><div class="ttname"><a href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a></div><div class="ttdeci">uint32_t UA_UInt32</div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00058">types.h:58</a></div></div>
+<div class="ttc" id="atypes_8h_html_a8beaefc7873465d6baa54a21634b6ea7"><div class="ttname"><a href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div><div class="ttdeci">uint32_t UA_StatusCode</div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00077">types.h:77</a></div></div>
+<div class="ttc" id="atypes_8h_html_a5f0721b034e4c44a7f81589b15ba1baf"><div class="ttname"><a href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a></div><div class="ttdeci">uint32_t UA_UInt32</div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00056">types.h:56</a></div></div>
 <div class="ttc" id="amdnsd_8h_html"><div class="ttname"><a href="mdnsd_8h.html">mdnsd.h</a></div></div>
-<div class="ttc" id="atypes_8h_html_a9a1800cf448ad57727ab920aa254a1a4"><div class="ttname"><a href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a></div><div class="ttdeci">bool UA_Boolean</div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00028">types.h:28</a></div></div>
-<div class="ttc" id="atypes_8h_html_aac69e6c4659bdcafdb30498200a0ab07"><div class="ttname"><a href="types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a></div><div class="ttdeci">double UA_Double</div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00076">types.h:76</a></div></div>
+<div class="ttc" id="atypes_8h_html_aac69e6c4659bdcafdb30498200a0ab07"><div class="ttname"><a href="types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a></div><div class="ttdeci">double UA_Double</div><div class="ttdef"><b>Definition:</b> <a href="types_8h_source.html#l00074">types.h:74</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

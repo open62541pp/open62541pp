@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">open62541
-   &#160;<span id="projectnumber">1.2.6</span>
+   &#160;<span id="projectnumber">1.3.5</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -86,6 +86,8 @@ Public Member Functions</h2></td></tr>
 Data Fields</h2></td></tr>
 <tr class="memitem:aaff8870f1ebf592a35b76ab09c64a8d2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SessionHeader.html#aaff8870f1ebf592a35b76ab09c64a8d2">authenticationToken</a></td></tr>
 <tr class="separator:aaff8870f1ebf592a35b76ab09c64a8d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a662fd0ba8c73d7a04238f45062f4a2d9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SessionHeader.html#a662fd0ba8c73d7a04238f45062f4a2d9">serverSession</a></td></tr>
+<tr class="separator:a662fd0ba8c73d7a04238f45062f4a2d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c832ba1c69a3c69dbbf7b2061180604"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__SecureChannel.html">UA_SecureChannel</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SessionHeader.html#a1c832ba1c69a3c69dbbf7b2061180604">channel</a></td></tr>
 <tr class="separator:a1c832ba1c69a3c69dbbf7b2061180604"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -93,7 +95,7 @@ Data Fields</h2></td></tr>
 <div class="textblock"><p>Thread-local variables to force failure modes during testing. </p>
 <p>The Session implementation differs between client and server. Still, it is expected that the Session structure begins with the SessionHeader. This is the interface that will be used by the SecureChannel. The lifecycle of Sessions is independent of the underlying SecureChannel. But every Session can be attached to only one SecureChannel. </p>
 
-<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00040">40</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00066">66</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="afdeeb3e94857d5ae45d44a730ceb45f0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afdeeb3e94857d5ae45d44a730ceb45f0">&#9670;&nbsp;</a></span>SLIST_ENTRY()</h2>
@@ -126,7 +128,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00042">42</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00068">68</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
 
 </div>
 </div>
@@ -142,7 +144,23 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00043">43</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00070">70</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
+
+</div>
+</div>
+<a id="a662fd0ba8c73d7a04238f45062f4a2d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a662fd0ba8c73d7a04238f45062f4a2d9">&#9670;&nbsp;</a></span>serverSession</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> UA_SessionHeader::serverSession</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__securechannel_8h_source.html#l00069">69</a> of file <a class="el" href="ua__securechannel_8h_source.html">ua_securechannel.h</a>.</p>
 
 </div>
 </div>

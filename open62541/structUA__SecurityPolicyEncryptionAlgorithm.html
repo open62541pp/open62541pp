@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">open62541
-   &#160;<span id="projectnumber">1.2.6</span>
+   &#160;<span id="projectnumber">1.3.5</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -77,152 +77,116 @@ $(function() {
 Data Fields</h2></td></tr>
 <tr class="memitem:af177a50298eb453ae5694093179f71b8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__String.html">UA_String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicyEncryptionAlgorithm.html#af177a50298eb453ae5694093179f71b8">uri</a></td></tr>
 <tr class="separator:af177a50298eb453ae5694093179f71b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39d7b14ae56cad307a5c0d9edcd92b20"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicyEncryptionAlgorithm.html#a39d7b14ae56cad307a5c0d9edcd92b20">encrypt</a> )(const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, void *channelContext, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *data)</td></tr>
-<tr class="separator:a39d7b14ae56cad307a5c0d9edcd92b20"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4ef2e47e63811af22b639ad6cfd4c27"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicyEncryptionAlgorithm.html#ae4ef2e47e63811af22b639ad6cfd4c27">decrypt</a> )(const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, void *channelContext, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *data)</td></tr>
-<tr class="separator:ae4ef2e47e63811af22b639ad6cfd4c27"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a71f7cb7a4919c339784301759fad3149"><td class="memItemLeft" align="right" valign="top">size_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicyEncryptionAlgorithm.html#a71f7cb7a4919c339784301759fad3149">getLocalKeyLength</a> )(const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, const void *channelContext)</td></tr>
-<tr class="separator:a71f7cb7a4919c339784301759fad3149"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:addf35853cd5f30e625c1e630fc9b6503"><td class="memItemLeft" align="right" valign="top">size_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicyEncryptionAlgorithm.html#addf35853cd5f30e625c1e630fc9b6503">getRemoteKeyLength</a> )(const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, const void *channelContext)</td></tr>
-<tr class="separator:addf35853cd5f30e625c1e630fc9b6503"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a300d63a1410b42d0dc699b7060f35cea"><td class="memItemLeft" align="right" valign="top">size_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicyEncryptionAlgorithm.html#a300d63a1410b42d0dc699b7060f35cea">getLocalBlockSize</a> )(const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, const void *channelContext)</td></tr>
-<tr class="separator:a300d63a1410b42d0dc699b7060f35cea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a302d0d8d5cfed226a2ea10e53a6b3577"><td class="memItemLeft" align="right" valign="top">size_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicyEncryptionAlgorithm.html#a302d0d8d5cfed226a2ea10e53a6b3577">getRemoteBlockSize</a> )(const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, const void *channelContext)</td></tr>
-<tr class="separator:a302d0d8d5cfed226a2ea10e53a6b3577"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae09b2e963020da1624529a3c13cf92c2"><td class="memItemLeft" align="right" valign="top">size_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicyEncryptionAlgorithm.html#ae09b2e963020da1624529a3c13cf92c2">getLocalPlainTextBlockSize</a> )(const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, const void *channelContext)</td></tr>
-<tr class="separator:ae09b2e963020da1624529a3c13cf92c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef0def79e4e9c68c23647daf2a8a745d"><td class="memItemLeft" align="right" valign="top">size_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicyEncryptionAlgorithm.html#aef0def79e4e9c68c23647daf2a8a745d">getRemotePlainTextBlockSize</a> )(const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, const void *channelContext)</td></tr>
-<tr class="separator:aef0def79e4e9c68c23647daf2a8a745d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3174a4b697787f726d3652f1a3e63c32"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicyEncryptionAlgorithm.html#a3174a4b697787f726d3652f1a3e63c32">encrypt</a> )(void *channelContext, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *data)</td></tr>
+<tr class="separator:a3174a4b697787f726d3652f1a3e63c32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2afc629bd955263432d396e92d969c69"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicyEncryptionAlgorithm.html#a2afc629bd955263432d396e92d969c69">decrypt</a> )(void *channelContext, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *data)</td></tr>
+<tr class="separator:a2afc629bd955263432d396e92d969c69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a551bd45bf53c4f6c61895c4e75289f5f"><td class="memItemLeft" align="right" valign="top">size_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicyEncryptionAlgorithm.html#a551bd45bf53c4f6c61895c4e75289f5f">getLocalKeyLength</a> )(const void *channelContext)</td></tr>
+<tr class="separator:a551bd45bf53c4f6c61895c4e75289f5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f28c6d9b1ab215f98edbc0fd76a6ba1"><td class="memItemLeft" align="right" valign="top">size_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicyEncryptionAlgorithm.html#a6f28c6d9b1ab215f98edbc0fd76a6ba1">getRemoteKeyLength</a> )(const void *channelContext)</td></tr>
+<tr class="separator:a6f28c6d9b1ab215f98edbc0fd76a6ba1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a514db2eeedde5073a06ee36c97e87e5f"><td class="memItemLeft" align="right" valign="top">size_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicyEncryptionAlgorithm.html#a514db2eeedde5073a06ee36c97e87e5f">getRemoteBlockSize</a> )(const void *channelContext)</td></tr>
+<tr class="separator:a514db2eeedde5073a06ee36c97e87e5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9a479fc9e773574b96c9c4203a20d01"><td class="memItemLeft" align="right" valign="top">size_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicyEncryptionAlgorithm.html#ad9a479fc9e773574b96c9c4203a20d01">getRemotePlainTextBlockSize</a> )(const void *channelContext)</td></tr>
+<tr class="separator:ad9a479fc9e773574b96c9c4203a20d01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00093">93</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00081">81</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
-<a id="ae4ef2e47e63811af22b639ad6cfd4c27"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4ef2e47e63811af22b639ad6cfd4c27">&#9670;&nbsp;</a></span>decrypt</h2>
+<a id="a2afc629bd955263432d396e92d969c69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2afc629bd955263432d396e92d969c69">&#9670;&nbsp;</a></span>decrypt</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_SecurityPolicyEncryptionAlgorithm::decrypt) (const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, void *channelContext, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *data)</td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_SecurityPolicyEncryptionAlgorithm::decrypt) (void *channelContext, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *data)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00114">114</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00100">100</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
 
 </div>
 </div>
-<a id="a39d7b14ae56cad307a5c0d9edcd92b20"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a39d7b14ae56cad307a5c0d9edcd92b20">&#9670;&nbsp;</a></span>encrypt</h2>
+<a id="a3174a4b697787f726d3652f1a3e63c32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3174a4b697787f726d3652f1a3e63c32">&#9670;&nbsp;</a></span>encrypt</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_SecurityPolicyEncryptionAlgorithm::encrypt) (const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, void *channelContext, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *data)</td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_SecurityPolicyEncryptionAlgorithm::encrypt) (void *channelContext, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *data)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00103">103</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00091">91</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
 
 </div>
 </div>
-<a id="a300d63a1410b42d0dc699b7060f35cea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a300d63a1410b42d0dc699b7060f35cea">&#9670;&nbsp;</a></span>getLocalBlockSize</h2>
+<a id="a551bd45bf53c4f6c61895c4e75289f5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a551bd45bf53c4f6c61895c4e75289f5f">&#9670;&nbsp;</a></span>getLocalKeyLength</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t(* UA_SecurityPolicyEncryptionAlgorithm::getLocalBlockSize) (const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, const void *channelContext)</td>
+          <td class="memname">size_t(* UA_SecurityPolicyEncryptionAlgorithm::getLocalKeyLength) (const void *channelContext)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00142">142</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00109">109</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
 
 </div>
 </div>
-<a id="a71f7cb7a4919c339784301759fad3149"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a71f7cb7a4919c339784301759fad3149">&#9670;&nbsp;</a></span>getLocalKeyLength</h2>
+<a id="a514db2eeedde5073a06ee36c97e87e5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a514db2eeedde5073a06ee36c97e87e5f">&#9670;&nbsp;</a></span>getRemoteBlockSize</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t(* UA_SecurityPolicyEncryptionAlgorithm::getLocalKeyLength) (const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, const void *channelContext)</td>
+          <td class="memname">size_t(* UA_SecurityPolicyEncryptionAlgorithm::getRemoteBlockSize) (const void *channelContext)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00124">124</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00126">126</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
 
 </div>
 </div>
-<a id="ae09b2e963020da1624529a3c13cf92c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae09b2e963020da1624529a3c13cf92c2">&#9670;&nbsp;</a></span>getLocalPlainTextBlockSize</h2>
+<a id="a6f28c6d9b1ab215f98edbc0fd76a6ba1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f28c6d9b1ab215f98edbc0fd76a6ba1">&#9670;&nbsp;</a></span>getRemoteKeyLength</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t(* UA_SecurityPolicyEncryptionAlgorithm::getLocalPlainTextBlockSize) (const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, const void *channelContext)</td>
+          <td class="memname">size_t(* UA_SecurityPolicyEncryptionAlgorithm::getRemoteKeyLength) (const void *channelContext)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00160">160</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00117">117</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
 
 </div>
 </div>
-<a id="a302d0d8d5cfed226a2ea10e53a6b3577"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a302d0d8d5cfed226a2ea10e53a6b3577">&#9670;&nbsp;</a></span>getRemoteBlockSize</h2>
+<a id="ad9a479fc9e773574b96c9c4203a20d01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9a479fc9e773574b96c9c4203a20d01">&#9670;&nbsp;</a></span>getRemotePlainTextBlockSize</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t(* UA_SecurityPolicyEncryptionAlgorithm::getRemoteBlockSize) (const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, const void *channelContext)</td>
+          <td class="memname">size_t(* UA_SecurityPolicyEncryptionAlgorithm::getRemotePlainTextBlockSize) (const void *channelContext)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00151">151</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
-
-</div>
-</div>
-<a id="addf35853cd5f30e625c1e630fc9b6503"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#addf35853cd5f30e625c1e630fc9b6503">&#9670;&nbsp;</a></span>getRemoteKeyLength</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">size_t(* UA_SecurityPolicyEncryptionAlgorithm::getRemoteKeyLength) (const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, const void *channelContext)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00133">133</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
-
-</div>
-</div>
-<a id="aef0def79e4e9c68c23647daf2a8a745d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aef0def79e4e9c68c23647daf2a8a745d">&#9670;&nbsp;</a></span>getRemotePlainTextBlockSize</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">size_t(* UA_SecurityPolicyEncryptionAlgorithm::getRemotePlainTextBlockSize) (const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, const void *channelContext)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00169">169</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00135">135</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
 
 </div>
 </div>
@@ -238,7 +202,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00094">94</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00082">82</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
 
 </div>
 </div>

@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">open62541
-   &#160;<span id="projectnumber">1.2.6</span>
+   &#160;<span id="projectnumber">1.3.5</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -77,79 +77,31 @@ $(function() {
 Data Fields</h2></td></tr>
 <tr class="memitem:a0c864ad092edb7c217f94911d40fbd3c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__String.html">UA_String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicySignatureAlgorithm.html#a0c864ad092edb7c217f94911d40fbd3c">uri</a></td></tr>
 <tr class="separator:a0c864ad092edb7c217f94911d40fbd3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7dbb5c4717693a05a909d2f334c88c45"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicySignatureAlgorithm.html#a7dbb5c4717693a05a909d2f334c88c45">verify</a> )(const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, void *channelContext, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *<a class="el" href="structmessage.html">message</a>, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *signature)</td></tr>
-<tr class="separator:a7dbb5c4717693a05a909d2f334c88c45"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8efa7ecf5e879e2b6d72044f177f505a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicySignatureAlgorithm.html#a8efa7ecf5e879e2b6d72044f177f505a">sign</a> )(const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, void *channelContext, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *<a class="el" href="structmessage.html">message</a>, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *signature)</td></tr>
-<tr class="separator:a8efa7ecf5e879e2b6d72044f177f505a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad068c681cd69cbea9571cb1156c8d947"><td class="memItemLeft" align="right" valign="top">size_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicySignatureAlgorithm.html#ad068c681cd69cbea9571cb1156c8d947">getLocalSignatureSize</a> )(const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, const void *channelContext)</td></tr>
-<tr class="separator:ad068c681cd69cbea9571cb1156c8d947"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3e84030f0254f2cb26ea539eb684ab36"><td class="memItemLeft" align="right" valign="top">size_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicySignatureAlgorithm.html#a3e84030f0254f2cb26ea539eb684ab36">getRemoteSignatureSize</a> )(const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, const void *channelContext)</td></tr>
-<tr class="separator:a3e84030f0254f2cb26ea539eb684ab36"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56f54891fd3013371d26c2ca94baa3b0"><td class="memItemLeft" align="right" valign="top">size_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicySignatureAlgorithm.html#a56f54891fd3013371d26c2ca94baa3b0">getLocalKeyLength</a> )(const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, const void *channelContext)</td></tr>
-<tr class="separator:a56f54891fd3013371d26c2ca94baa3b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85362b29f4425549dae02dc31284167f"><td class="memItemLeft" align="right" valign="top">size_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicySignatureAlgorithm.html#a85362b29f4425549dae02dc31284167f">getRemoteKeyLength</a> )(const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, const void *channelContext)</td></tr>
-<tr class="separator:a85362b29f4425549dae02dc31284167f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a512e1313b92cc1bec524f46e29e549ba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicySignatureAlgorithm.html#a512e1313b92cc1bec524f46e29e549ba">verify</a> )(void *channelContext, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *<a class="el" href="structmessage.html">message</a>, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *signature)</td></tr>
+<tr class="separator:a512e1313b92cc1bec524f46e29e549ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab90d56fa15108cedff88003f5b15f680"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicySignatureAlgorithm.html#ab90d56fa15108cedff88003f5b15f680">sign</a> )(void *channelContext, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *<a class="el" href="structmessage.html">message</a>, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *signature)</td></tr>
+<tr class="separator:ab90d56fa15108cedff88003f5b15f680"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4920da7d26105f10ae0fa126d496515"><td class="memItemLeft" align="right" valign="top">size_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicySignatureAlgorithm.html#ac4920da7d26105f10ae0fa126d496515">getLocalSignatureSize</a> )(const void *channelContext)</td></tr>
+<tr class="separator:ac4920da7d26105f10ae0fa126d496515"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3bcac351e5cab227fe592d3d9ecbad0"><td class="memItemLeft" align="right" valign="top">size_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicySignatureAlgorithm.html#af3bcac351e5cab227fe592d3d9ecbad0">getRemoteSignatureSize</a> )(const void *channelContext)</td></tr>
+<tr class="separator:af3bcac351e5cab227fe592d3d9ecbad0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5006d0b63033bb11ce7f42ce88b897bf"><td class="memItemLeft" align="right" valign="top">size_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicySignatureAlgorithm.html#a5006d0b63033bb11ce7f42ce88b897bf">getLocalKeyLength</a> )(const void *channelContext)</td></tr>
+<tr class="separator:a5006d0b63033bb11ce7f42ce88b897bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5f6e5bcd173700e36008616cf0dab42"><td class="memItemLeft" align="right" valign="top">size_t(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__SecurityPolicySignatureAlgorithm.html#ae5f6e5bcd173700e36008616cf0dab42">getRemoteKeyLength</a> )(const void *channelContext)</td></tr>
+<tr class="separator:ae5f6e5bcd173700e36008616cf0dab42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00026">26</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
-<a id="a56f54891fd3013371d26c2ca94baa3b0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a56f54891fd3013371d26c2ca94baa3b0">&#9670;&nbsp;</a></span>getLocalKeyLength</h2>
+<a id="a5006d0b63033bb11ce7f42ce88b897bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5006d0b63033bb11ce7f42ce88b897bf">&#9670;&nbsp;</a></span>getLocalKeyLength</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t(* UA_SecurityPolicySignatureAlgorithm::getLocalKeyLength) (const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, const void *channelContext)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00080">80</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
-
-</div>
-</div>
-<a id="ad068c681cd69cbea9571cb1156c8d947"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad068c681cd69cbea9571cb1156c8d947">&#9670;&nbsp;</a></span>getLocalSignatureSize</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">size_t(* UA_SecurityPolicySignatureAlgorithm::getLocalSignatureSize) (const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, const void *channelContext)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00062">62</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
-
-</div>
-</div>
-<a id="a85362b29f4425549dae02dc31284167f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a85362b29f4425549dae02dc31284167f">&#9670;&nbsp;</a></span>getRemoteKeyLength</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">size_t(* UA_SecurityPolicySignatureAlgorithm::getRemoteKeyLength) (const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, const void *channelContext)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00089">89</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
-
-</div>
-</div>
-<a id="a3e84030f0254f2cb26ea539eb684ab36"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3e84030f0254f2cb26ea539eb684ab36">&#9670;&nbsp;</a></span>getRemoteSignatureSize</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">size_t(* UA_SecurityPolicySignatureAlgorithm::getRemoteSignatureSize) (const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, const void *channelContext)</td>
+          <td class="memname">size_t(* UA_SecurityPolicySignatureAlgorithm::getLocalKeyLength) (const void *channelContext)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -158,19 +110,67 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="a8efa7ecf5e879e2b6d72044f177f505a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8efa7ecf5e879e2b6d72044f177f505a">&#9670;&nbsp;</a></span>sign</h2>
+<a id="ac4920da7d26105f10ae0fa126d496515"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4920da7d26105f10ae0fa126d496515">&#9670;&nbsp;</a></span>getLocalSignatureSize</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_SecurityPolicySignatureAlgorithm::sign) (const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, void *channelContext, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *<a class="el" href="structmessage.html">message</a>, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *signature)</td>
+          <td class="memname">size_t(* UA_SecurityPolicySignatureAlgorithm::getLocalSignatureSize) (const void *channelContext)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00051">51</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00057">57</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
+
+</div>
+</div>
+<a id="ae5f6e5bcd173700e36008616cf0dab42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5f6e5bcd173700e36008616cf0dab42">&#9670;&nbsp;</a></span>getRemoteKeyLength</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t(* UA_SecurityPolicySignatureAlgorithm::getRemoteKeyLength) (const void *channelContext)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00078">78</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
+
+</div>
+</div>
+<a id="af3bcac351e5cab227fe592d3d9ecbad0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3bcac351e5cab227fe592d3d9ecbad0">&#9670;&nbsp;</a></span>getRemoteSignatureSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t(* UA_SecurityPolicySignatureAlgorithm::getRemoteSignatureSize) (const void *channelContext)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00064">64</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
+
+</div>
+</div>
+<a id="ab90d56fa15108cedff88003f5b15f680"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab90d56fa15108cedff88003f5b15f680">&#9670;&nbsp;</a></span>sign</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_SecurityPolicySignatureAlgorithm::sign) (void *channelContext, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *<a class="el" href="structmessage.html">message</a>, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *signature)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00048">48</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
 
 </div>
 </div>
@@ -190,19 +190,19 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="a7dbb5c4717693a05a909d2f334c88c45"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7dbb5c4717693a05a909d2f334c88c45">&#9670;&nbsp;</a></span>verify</h2>
+<a id="a512e1313b92cc1bec524f46e29e549ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a512e1313b92cc1bec524f46e29e549ba">&#9670;&nbsp;</a></span>verify</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_SecurityPolicySignatureAlgorithm::verify) (const <a class="el" href="structUA__SecurityPolicy.html">UA_SecurityPolicy</a> *securityPolicy, void *channelContext, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *<a class="el" href="structmessage.html">message</a>, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *signature)</td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_SecurityPolicySignatureAlgorithm::verify) (void *channelContext, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *<a class="el" href="structmessage.html">message</a>, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *signature)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00036">36</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="securitypolicy_8h_source.html#l00035">35</a> of file <a class="el" href="securitypolicy_8h_source.html">securitypolicy.h</a>.</p>
 
 </div>
 </div>

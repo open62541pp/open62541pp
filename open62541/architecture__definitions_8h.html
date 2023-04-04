@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">open62541
-   &#160;<span id="projectnumber">1.2.6</span>
+   &#160;<span id="projectnumber">1.3.5</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -86,10 +86,13 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:a9cb286f1301989fbc9b1574c809bdd4a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="architecture__definitions_8h.html#a9cb286f1301989fbc9b1574c809bdd4a">UA_THREAD_LOCAL</a></td></tr>
+<tr class="memdesc:a9cb286f1301989fbc9b1574c809bdd4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This Source Code Form is subject to the terms of the Mozilla Public License, v.  <a href="architecture__definitions_8h.html#a9cb286f1301989fbc9b1574c809bdd4a">More...</a><br /></td></tr>
+<tr class="separator:a9cb286f1301989fbc9b1574c809bdd4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad1a962c9914954e5236f9d01084e28bc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="architecture__definitions_8h.html#ad1a962c9914954e5236f9d01084e28bc">UA_alloca</a>(SIZE)&#160;&#160;&#160;alloca(SIZE)</td></tr>
-<tr class="memdesc:ad1a962c9914954e5236f9d01084e28bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">This Source Code Form is subject to the terms of the Mozilla Public License, v.  <a href="architecture__definitions_8h.html#ad1a962c9914954e5236f9d01084e28bc">More...</a><br /></td></tr>
+<tr class="memdesc:ad1a962c9914954e5236f9d01084e28bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stack-allocation of memory.  <a href="architecture__definitions_8h.html#ad1a962c9914954e5236f9d01084e28bc">More...</a><br /></td></tr>
 <tr class="separator:ad1a962c9914954e5236f9d01084e28bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93b9becf9efdfa782a0ecdb2439dcb94"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="architecture__definitions_8h.html#a93b9becf9efdfa782a0ecdb2439dcb94">UA_STACKARRAY</a>(TYPE,  NAME,  SIZE)&#160;&#160;&#160;TYPE *(NAME) = (TYPE*)<a class="el" href="architecture__definitions_8h.html#ad1a962c9914954e5236f9d01084e28bc">UA_alloca</a>(sizeof(TYPE) * (SIZE))</td></tr>
+<tr class="memitem:a93b9becf9efdfa782a0ecdb2439dcb94"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="architecture__definitions_8h.html#a93b9becf9efdfa782a0ecdb2439dcb94">UA_STACKARRAY</a>(TYPE,  NAME,  SIZE)</td></tr>
 <tr class="separator:a93b9becf9efdfa782a0ecdb2439dcb94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a134e6f8e1aa5c8625e22719513e10f1a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="architecture__definitions_8h.html#a134e6f8e1aa5c8625e22719513e10f1a">UA_assert</a>(ignore)&#160;&#160;&#160;do {} while(0)</td></tr>
 <tr class="separator:a134e6f8e1aa5c8625e22719513e10f1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -102,6 +105,10 @@ Macros</h2></td></tr>
 <tr class="separator:ad28b66f0104aa585c1ab043ddb465f29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a00d24c7231be28dbaf71f5408f30e44c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="architecture__definitions_8h.html#a00d24c7231be28dbaf71f5408f30e44c">inline</a></td></tr>
 <tr class="separator:a00d24c7231be28dbaf71f5408f30e44c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af72698149b30e53f0923f67eaa230b56"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="architecture__definitions_8h.html#af72698149b30e53f0923f67eaa230b56">UA_LIKELY</a>(x)&#160;&#160;&#160;x</td></tr>
+<tr class="separator:af72698149b30e53f0923f67eaa230b56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a503bd3d9b0a1fcfb470d6d20614c0ef8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="architecture__definitions_8h.html#a503bd3d9b0a1fcfb470d6d20614c0ef8">UA_UNLIKELY</a>(x)&#160;&#160;&#160;x</td></tr>
+<tr class="separator:a503bd3d9b0a1fcfb470d6d20614c0ef8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a278f8dcda2c68184a89b95f7a78cfe69"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="architecture__definitions_8h.html#a278f8dcda2c68184a89b95f7a78cfe69">UA_FUNC_ATTR_PURE</a></td></tr>
 <tr class="separator:a278f8dcda2c68184a89b95f7a78cfe69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7890392ad248807eef17406deff97408"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="architecture__definitions_8h.html#a7890392ad248807eef17406deff97408">UA_FUNC_ATTR_CONST</a></td></tr>
@@ -157,7 +164,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00164">164</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00179">179</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
 
 </div>
 </div>
@@ -177,11 +184,10 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This Source Code Form is subject to the terms of the Mozilla Public License, v. </p>
-<p>2.0. If a copy of the MPL was not distributed with this file, You can obtain one at <a href="http://mozilla.org/MPL/2.0/">http://mozilla.org/MPL/2.0/</a>.</p>
-<p>Copyright 2017 (c) Fraunhofer IOSB (Author: Julius Pfrommer) Copyright 2017 (c) Stefan Profanter, fortiss GmbH Copyright 2018 (c) Jose Cabral, fortiss GmbH Include stdint.h and stdbool.h or workaround for older Visual Studios Include inttypes.h or workaround for older Visual Studios Stack-allocation of memory. Use C99 variable-length arrays if possible. Otherwise revert to alloca. Note that alloca is not supported on some plattforms. </p>
+<p>Stack-allocation of memory. </p>
+<p>Use C99 variable-length arrays if possible. Otherwise revert to alloca. Note that alloca is not supported on some plattforms. </p>
 
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00098">98</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00110">110</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
 
 </div>
 </div>
@@ -201,7 +207,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00110">110</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00123">123</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
 
 </div>
 </div>
@@ -223,7 +229,7 @@ Macros</h2></td></tr>
 Atomic Operations</h2>
 <p>Atomic operations that synchronize across processor cores (for multithreading). Only the inline-functions defined next are used. Replace with architecture-specific operations if necessary. </p>
 
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00321">321</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00354">354</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
 
 </div>
 </div>
@@ -241,7 +247,7 @@ Atomic Operations</h2>
 
 <p>Only if the floating points are litle-endian <b>and</b> in IEEE 754 format can we memcpy directly onto the network buffer. </p>
 
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00306">306</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00339">339</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
 
 </div>
 </div>
@@ -260,7 +266,7 @@ Atomic Operations</h2>
 <p>Can the integers be memcpy'd onto the network buffer? Add additional checks here. </p>
 <p>Some platforms (e.g. QNX) have sizeof(bool) &gt; 1. Manually disable overlayed integer encoding if that is the case. </p>
 
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00264">264</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00297">297</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
 
 </div>
 </div>
@@ -276,7 +282,7 @@ Atomic Operations</h2>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00198">198</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00229">229</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
 
 </div>
 </div>
@@ -292,7 +298,7 @@ Atomic Operations</h2>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00278">278</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00311">311</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
 
 </div>
 </div>
@@ -310,7 +316,7 @@ Atomic Operations</h2>
 
 <p>Wikipedia says (<a href="https://en.wikipedia.org/wiki/Endianness">https://en.wikipedia.org/wiki/Endianness</a>): Although the ubiquitous x86 processors of today use little-endian storage for all types of data (integer, floating point, BCD), there are a number of hardware architectures where floating-point numbers are represented in big-endian form while integers are represented in little-endian form. </p>
 
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00298">298</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00331">331</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
 
 </div>
 </div>
@@ -340,7 +346,7 @@ Atomic Operations</h2>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00190">190</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00221">221</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
 
 </div>
 </div>
@@ -356,7 +362,7 @@ Atomic Operations</h2>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00188">188</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00219">219</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
 
 </div>
 </div>
@@ -372,7 +378,7 @@ Atomic Operations</h2>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00187">187</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00218">218</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
 
 </div>
 </div>
@@ -388,7 +394,7 @@ Atomic Operations</h2>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00206">206</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00238">238</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
 
 </div>
 </div>
@@ -404,7 +410,27 @@ Atomic Operations</h2>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00212">212</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00245">245</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+
+</div>
+</div>
+<a id="af72698149b30e53f0923f67eaa230b56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af72698149b30e53f0923f67eaa230b56">&#9670;&nbsp;</a></span>UA_LIKELY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_LIKELY</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x</td><td>)</td>
+          <td>&#160;&#160;&#160;x</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00198">198</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
 
 </div>
 </div>
@@ -420,7 +446,7 @@ Atomic Operations</h2>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00254">254</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00287">287</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
 
 </div>
 </div>
@@ -451,12 +477,14 @@ Atomic Operations</h2>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;TYPE *(NAME) = (TYPE*)<a class="el" href="architecture__definitions_8h.html#ad1a962c9914954e5236f9d01084e28bc">UA_alloca</a>(sizeof(TYPE) * (SIZE))</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00100">100</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+<b>Value:</b><div class="fragment"><div class="line">    <span class="comment">/* cppcheck-suppress allocaCalled */</span>  \</div>
+<div class="line">    TYPE *(NAME) = (TYPE*)<a class="code" href="architecture__definitions_8h.html#ad1a962c9914954e5236f9d01084e28bc">UA_alloca</a>(<span class="keyword">sizeof</span>(TYPE) * (SIZE))</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00112">112</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
 
 </div>
 </div>
@@ -489,7 +517,27 @@ Atomic Operations</h2>
 <p>Outputs an error message at compile time if the assert fails. </p>
 <p>Example usage: UA_STATIC_ASSERT(sizeof(long)==7, use_another_compiler_luke) See: <a href="https://stackoverflow.com/a/4815532/869402">https://stackoverflow.com/a/4815532/869402</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00132">132</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00145">145</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+
+</div>
+</div>
+<a id="a9cb286f1301989fbc9b1574c809bdd4a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cb286f1301989fbc9b1574c809bdd4a">&#9670;&nbsp;</a></span>UA_THREAD_LOCAL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_THREAD_LOCAL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This Source Code Form is subject to the terms of the Mozilla Public License, v. </p>
+<p>2.0. If a copy of the MPL was not distributed with this file, You can obtain one at <a href="http://mozilla.org/MPL/2.0/">http://mozilla.org/MPL/2.0/</a>.</p>
+<p>Copyright 2017 (c) Fraunhofer IOSB (Author: Julius Pfrommer) Copyright 2017 (c) Stefan Profanter, fortiss GmbH Copyright 2018 (c) Jose Cabral, fortiss GmbH Include stdint.h and stdbool.h or workaround for older Visual Studios Include inttypes.h or workaround for older Visual Studios </p>
+
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00081">81</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
 
 </div>
 </div>
@@ -505,11 +553,32 @@ Atomic Operations</h2>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00158">158</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00173">173</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
+
+</div>
+</div>
+<a id="a503bd3d9b0a1fcfb470d6d20614c0ef8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a503bd3d9b0a1fcfb470d6d20614c0ef8">&#9670;&nbsp;</a></span>UA_UNLIKELY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_UNLIKELY</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x</td><td>)</td>
+          <td>&#160;&#160;&#160;x</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="architecture__definitions_8h_source.html#l00199">199</a> of file <a class="el" href="architecture__definitions_8h_source.html">architecture_definitions.h</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
+<div class="ttc" id="aarchitecture__definitions_8h_html_ad1a962c9914954e5236f9d01084e28bc"><div class="ttname"><a href="architecture__definitions_8h.html#ad1a962c9914954e5236f9d01084e28bc">UA_alloca</a></div><div class="ttdeci">#define UA_alloca(SIZE)</div><div class="ttdoc">Stack-allocation of memory.</div><div class="ttdef"><b>Definition:</b> <a href="architecture__definitions_8h_source.html#l00110">architecture_definitions.h:110</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

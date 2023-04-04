@@ -23,7 +23,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">open62541
-   &#160;<span id="projectnumber">1.2.6</span>
+   &#160;<span id="projectnumber">1.3.5</span>
    </div>
    <div id="projectbrief">Open source implementation of OPC UA</div>
   </td>
@@ -97,6 +97,8 @@ Data Fields</h2></td></tr>
 <tr class="separator:a5eff97eaec190fd76db3672c3ec46ca2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d79e78fe230d76241017d9bc02ce450"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Server.html#a7d79e78fe230d76241017d9bc02ce450">sessionCount</a></td></tr>
 <tr class="separator:a7d79e78fe230d76241017d9bc02ce450"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06f2592d9bace23a9849027c79fff9df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Server.html#a06f2592d9bace23a9849027c79fff9df">activeSessionCount</a></td></tr>
+<tr class="separator:a06f2592d9bace23a9849027c79fff9df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e196ff35df470b3a3619600f707d0a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__Session.html">UA_Session</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Server.html#a2e196ff35df470b3a3619600f707d0a6">adminSession</a></td></tr>
 <tr class="separator:a2e196ff35df470b3a3619600f707d0a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f1beeb821608a0680ec2a087d1d3027"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Server.html#a2f1beeb821608a0680ec2a087d1d3027">namespacesSize</a></td></tr>
@@ -105,14 +107,18 @@ Data Fields</h2></td></tr>
 <tr class="separator:a0c5afbd1a160c26cc162a41c2ea26c50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f6d6c654442fd2161cb712edd3040e5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__Timer.html">UA_Timer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Server.html#a9f6d6c654442fd2161cb712edd3040e5">timer</a></td></tr>
 <tr class="separator:a9f6d6c654442fd2161cb712edd3040e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeec88e0a089ef49d0e05155d65cc76d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Server.html#aeec88e0a089ef49d0e05155d65cc76d0">bootstrapNS0</a></td></tr>
+<tr class="memitem:aeec88e0a089ef49d0e05155d65cc76d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Server.html#aeec88e0a089ef49d0e05155d65cc76d0">bootstrapNS0</a></td></tr>
 <tr class="separator:aeec88e0a089ef49d0e05155d65cc76d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a340fbd01a00d9f62b9ac55a281247374"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__ServerStatistics.html">UA_ServerStatistics</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Server.html#a340fbd01a00d9f62b9ac55a281247374">serverStats</a></td></tr>
-<tr class="separator:a340fbd01a00d9f62b9ac55a281247374"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae91dcf73aa27d9de44f034e1275792ac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__NetworkStatistics.html">UA_NetworkStatistics</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Server.html#ae91dcf73aa27d9de44f034e1275792ac">networkStatistics</a></td></tr>
+<tr class="separator:ae91dcf73aa27d9de44f034e1275792ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bc84c99e0b4194f67880db6b7d30106"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__SecureChannelStatistics.html">UA_SecureChannelStatistics</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Server.html#a5bc84c99e0b4194f67880db6b7d30106">secureChannelStatistics</a></td></tr>
+<tr class="separator:a5bc84c99e0b4194f67880db6b7d30106"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa177669fafa8e20a13c97259e04bea86"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__ServerDiagnosticsSummaryDataType.html">UA_ServerDiagnosticsSummaryDataType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Server.html#aa177669fafa8e20a13c97259e04bea86">serverDiagnosticsSummary</a></td></tr>
+<tr class="separator:aa177669fafa8e20a13c97259e04bea86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00084">84</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00085">85</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="abce5bdf34c7baee7f77d491d8538da5a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abce5bdf34c7baee7f77d491d8538da5a">&#9670;&nbsp;</a></span>LIST_HEAD()</h2>
@@ -161,6 +167,22 @@ Data Fields</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Field Documentation</h2>
+<a id="a06f2592d9bace23a9849027c79fff9df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06f2592d9bace23a9849027c79fff9df">&#9670;&nbsp;</a></span>activeSessionCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> UA_Server::activeSessionCount</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00106">106</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+
+</div>
+</div>
 <a id="a2e196ff35df470b3a3619600f707d0a6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2e196ff35df470b3a3619600f707d0a6">&#9670;&nbsp;</a></span>adminSession</h2>
 
@@ -173,7 +195,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00105">105</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00107">107</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
@@ -184,12 +206,12 @@ Data Fields</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a9a1800cf448ad57727ab920aa254a1a4">UA_Boolean</a> UA_Server::bootstrapNS0</td>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> UA_Server::bootstrapNS0</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00118">118</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00120">120</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
@@ -205,7 +227,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00086">86</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00087">87</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
@@ -221,7 +243,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00088">88</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00089">89</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
@@ -237,7 +259,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00095">95</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00096">96</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
@@ -253,7 +275,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00096">96</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00097">97</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
@@ -269,7 +291,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00111">111</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00113">113</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
@@ -285,23 +307,55 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00110">110</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00112">112</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
-<a id="a340fbd01a00d9f62b9ac55a281247374"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a340fbd01a00d9f62b9ac55a281247374">&#9670;&nbsp;</a></span>serverStats</h2>
+<a id="ae91dcf73aa27d9de44f034e1275792ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae91dcf73aa27d9de44f034e1275792ac">&#9670;&nbsp;</a></span>networkStatistics</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structUA__ServerStatistics.html">UA_ServerStatistics</a> UA_Server::serverStats</td>
+          <td class="memname"><a class="el" href="structUA__NetworkStatistics.html">UA_NetworkStatistics</a> UA_Server::networkStatistics</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00155">155</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00157">157</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+
+</div>
+</div>
+<a id="a5bc84c99e0b4194f67880db6b7d30106"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bc84c99e0b4194f67880db6b7d30106">&#9670;&nbsp;</a></span>secureChannelStatistics</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUA__SecureChannelStatistics.html">UA_SecureChannelStatistics</a> UA_Server::secureChannelStatistics</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00158">158</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+
+</div>
+</div>
+<a id="aa177669fafa8e20a13c97259e04bea86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa177669fafa8e20a13c97259e04bea86">&#9670;&nbsp;</a></span>serverDiagnosticsSummary</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUA__ServerDiagnosticsSummaryDataType.html">UA_ServerDiagnosticsSummaryDataType</a> UA_Server::serverDiagnosticsSummary</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00159">159</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
@@ -317,7 +371,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00104">104</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00105">105</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
@@ -333,7 +387,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00087">87</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00088">88</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
@@ -349,7 +403,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00091">91</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00092">92</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
@@ -365,7 +419,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00114">114</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00116">116</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
