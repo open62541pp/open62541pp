@@ -79,7 +79,7 @@ bool ExpandedNodeId::isLocal() const noexcept {
 }
 
 NodeId ExpandedNodeId::getNodeId() const noexcept {
-    return NodeId(handle()->nodeId);
+    return NodeId(handle()->nodeId);  // NOLINT
 }
 
 std::string_view ExpandedNodeId::getNamespaceUri() const {

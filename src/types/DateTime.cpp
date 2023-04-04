@@ -6,12 +6,12 @@ namespace opcua {
 
 /// Get current DateTime.
 DateTime DateTime::now() {
-    return DateTime(UA_DateTime_now());
+    return DateTime(UA_DateTime_now());  // NOLINT
 }
 
 /// Get DateTime from Unix time.
 DateTime DateTime::fromUnixTime(int64_t unixTime) {
-    return DateTime(UA_DateTime_fromUnixTime(unixTime));
+    return DateTime(UA_DateTime_fromUnixTime(unixTime));  // NOLINT
 }
 
 /// Convert to Unix time.

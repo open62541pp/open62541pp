@@ -3,6 +3,7 @@ Checks: |
   cert*,
   cppcoreguidelines*, -cppcoreguidelines-avoid-magic-numbers,
   clang-analyzer*, -clang-analyzer-osx*,
+  -clang-diagnostic-ignored-optimization-argument,
   hicpp*,
   misc*,
   modernize*, -modernize-use-trailing-return-type, -modernize-use-nodiscard,
