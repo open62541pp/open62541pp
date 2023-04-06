@@ -6,8 +6,8 @@ namespace opcua {
 
 DataValue::DataValue(
     const std::optional<Variant>& value,
-    const std::optional<DateTime>& sourceTimestamp,
-    const std::optional<DateTime>& serverTimestamp,
+    std::optional<DateTime> sourceTimestamp,  // NOLINT
+    std::optional<DateTime> serverTimestamp,  // NOLINT
     std::optional<uint16_t> sourcePicoseconds,
     std::optional<uint16_t> serverPicoseconds,
     std::optional<UA_StatusCode> statusCode
