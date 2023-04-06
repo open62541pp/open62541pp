@@ -204,23 +204,15 @@ std::vector<T> Node::readArray() {
 
 template <typename T, Type type>
 void Node::writeScalar(const T& value) {
-    Variant variant;
-    if constexpr (detail::isAssignableToVariantScalar<T>()) {
-        variant.setScalar<T, type>(const_cast<T&>(value));  // NOLINT, variant isn't modified
-    } else {
-        variant.setScalarCopy<T, type>(value);
-    }
+    // NOLINTNEXTLINE, variant isn't modified, try to avoid copy
+    const auto variant = Variant::fromScalar<T, type>(const_cast<T&>(value));
     writeValue(variant);
 }
 
 template <typename T, Type type>
 void Node::writeArray(const T* array, size_t size) {
-    Variant variant;
-    if constexpr (detail::isAssignableToVariantArray<T>()) {
-        variant.setArray<T, type>(const_cast<T*>(array), size);  // NOLINT, variant isn't modified
-    } else {
-        variant.setArrayCopy<T, type>(array, size);
-    }
+    // NOLINTNEXTLINE, variant isn't modified, try to avoid copy
+    const auto variant = Variant::fromArray<T, type>(const_cast<T*>(array), size);
     writeValue(variant);
 }
 
@@ -231,8 +223,7 @@ void Node::writeArray(const std::vector<T>& array) {
 
 template <typename InputIt, Type type>
 void Node::writeArray(InputIt first, InputIt last) {
-    Variant variant;
-    variant.setArrayCopy<InputIt, type>(first, last);
+    const auto variant = Variant::fromArray<InputIt, type>(first, last);
     writeValue(variant);
 }
 
