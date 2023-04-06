@@ -334,9 +334,9 @@ TEST_CASE("Variant") {
 }
 
 TEST_CASE("DataValue") {
-    SECTION("Empty") {
+    SECTION("Empty variant") {
         DataValue dv({}, {}, {}, {}, {}, {});
-        CHECK_FALSE(dv.getValue().has_value());
+        CHECK(dv.getValue().has_value());
         CHECK_FALSE(dv.getSourceTimestamp().has_value());
         CHECK_FALSE(dv.getServerTimestamp().has_value());
         CHECK_FALSE(dv.getSourcePicoseconds().has_value());

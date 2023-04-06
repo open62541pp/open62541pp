@@ -22,7 +22,7 @@ public:
     using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
 
     DataValue(
-        const std::optional<Variant>& value,
+        const Variant& value,
         std::optional<DateTime> sourceTimestamp,  // NOLINT
         std::optional<DateTime> serverTimestamp,  // NOLINT
         std::optional<uint16_t> sourcePicoseconds,
