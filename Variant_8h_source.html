@@ -96,205 +96,280 @@ $(function() {
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keyword">using</span> <a class="code" href="classopcua_1_1TypeWrapper.html#a7f24ba2bf6517bed143c1eb789fff19a">TypeWrapperBase::TypeWrapperBase</a>;  <span class="comment">// inherit contructors</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classopcua_1_1Variant.html#a9697a0c258f2c132b890eadcfa96bb72">isEmpty</a>() <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classopcua_1_1Variant.html#ae528dcb9d819364f9590c310dc8e8f2a">isScalar</a>() <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classopcua_1_1Variant.html#ab2ef10e5ae385c175e646eedf347e209">isArray</a>() <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classopcua_1_1Variant.html#a7a68c9dad90735ea93c52494057b9f80">isType</a>(<span class="keyword">const</span> <a class="codeRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>* type) <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classopcua_1_1Variant.html#a7a68c9dad90735ea93c52494057b9f80">isType</a>(<a class="code" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966">Type</a> type) <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classopcua_1_1Variant.html#a7a68c9dad90735ea93c52494057b9f80">isType</a>(<span class="keyword">const</span> <a class="code" href="classopcua_1_1NodeId.html">NodeId</a>&amp; <span class="keywordtype">id</span>) <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    std::optional&lt;Type&gt; <a class="code" href="classopcua_1_1Variant.html#a14ff8ca3cd37ce0640c8bde40bf9fb32">getVariantType</a>() <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    T&amp; <a class="code" href="classopcua_1_1Variant.html#acbe30a5ffe8a675a7ba5162d4694fbb9">getScalar</a>();</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    T <a class="code" href="classopcua_1_1Variant.html#a0f7d377bfecd10cc89fda41b3ad9d934">getScalarCopy</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="classopcua_1_1Variant.html#a54698bd6ada60d5f20556403f1e4d163">getArrayLength</a>() <span class="keyword">const</span> noexcept;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    std::vector&lt;uint32_t&gt; <a class="code" href="classopcua_1_1Variant.html#a9a5cfe5f2a1bd0571acd33e93b45054a">getArrayDimensions</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    T* <a class="code" href="classopcua_1_1Variant.html#a97420c5bb7175550da4dc5fda947035a">getArray</a>();</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    std::vector&lt;T&gt; <a class="code" href="classopcua_1_1Variant.html#a745da34378602215fd443e3b229d5c23">getArrayCopy</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    template &lt;typename T, Type type = detail::guessType&lt;T&gt;()&gt;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classopcua_1_1Variant.html#afae3ba56203f2cbbd7a5ee7b4d7dcb5b">setScalar</a>(T&amp; value) noexcept;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    template &lt;typename T, Type type = detail::guessType&lt;T&gt;()&gt;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classopcua_1_1Variant.html#a2e6c68f65d930dd8108dad49d842a624">setScalarCopy</a>(<span class="keyword">const</span> T&amp; value);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    template &lt;typename T, Type type = detail::guessType&lt;T&gt;()&gt;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classopcua_1_1Variant.html#a7d05beac903fac0b7391f5d0ef731515">setArray</a>(T* array, <span class="keywordtype">size_t</span> size) noexcept;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    template &lt;typename T, Type type = detail::guessType&lt;T&gt;()&gt;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    [[nodiscard]] <span class="keyword">static</span> <a class="code" href="classopcua_1_1Variant.html">Variant</a> <a class="code" href="classopcua_1_1Variant.html#a6eee92f79f6910b7652bcc2719345339">fromScalar</a>(T&amp; value);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    template &lt;typename T, Type type = detail::guessType&lt;T&gt;()&gt;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    [[nodiscard]] <span class="keyword">static</span> <a class="code" href="classopcua_1_1Variant.html">Variant</a> <a class="code" href="classopcua_1_1Variant.html#a6eee92f79f6910b7652bcc2719345339">fromScalar</a>(<span class="keyword">const</span> T&amp; value);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    template &lt;typename T, Type type = detail::guessType&lt;T&gt;()&gt;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    [[nodiscard]] <span class="keyword">static</span> <a class="code" href="classopcua_1_1Variant.html">Variant</a> <a class="code" href="classopcua_1_1Variant.html#ac99619ea9e1b6f0774abf36c5c97a934">fromArray</a>(T* array, <span class="keywordtype">size_t</span> size);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    template &lt;typename T, Type type = detail::guessType&lt;T&gt;()&gt;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    [[nodiscard]] <span class="keyword">static</span> <a class="code" href="classopcua_1_1Variant.html">Variant</a> <a class="code" href="classopcua_1_1Variant.html#ac99619ea9e1b6f0774abf36c5c97a934">fromArray</a>(<span class="keyword">const</span> T* array, <span class="keywordtype">size_t</span> size);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    template &lt;typename T, Type type = detail::guessType&lt;T&gt;()&gt;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    [[nodiscard]] <span class="keyword">static</span> <a class="code" href="classopcua_1_1Variant.html">Variant</a> <a class="code" href="classopcua_1_1Variant.html#ac99619ea9e1b6f0774abf36c5c97a934">fromArray</a>(std::vector&lt;T&gt;&amp; array);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    template &lt;typename T, Type type = detail::guessType&lt;T&gt;()&gt;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    [[nodiscard]] <span class="keyword">static</span> <a class="code" href="classopcua_1_1Variant.html">Variant</a> <a class="code" href="classopcua_1_1Variant.html#ac99619ea9e1b6f0774abf36c5c97a934">fromArray</a>(<span class="keyword">const</span> std::vector&lt;T&gt;&amp; array);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    template &lt;typename InputIt, Type type = detail::guessTypeFromIterator&lt;InputIt&gt;()&gt;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    [[nodiscard]] <span class="keyword">static</span> <a class="code" href="classopcua_1_1Variant.html">Variant</a> <a class="code" href="classopcua_1_1Variant.html#ac99619ea9e1b6f0774abf36c5c97a934">fromArray</a>(InputIt first, InputIt last);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classopcua_1_1Variant.html#a9697a0c258f2c132b890eadcfa96bb72">isEmpty</a>() <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classopcua_1_1Variant.html#ae528dcb9d819364f9590c310dc8e8f2a">isScalar</a>() <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classopcua_1_1Variant.html#ab2ef10e5ae385c175e646eedf347e209">isArray</a>() <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classopcua_1_1Variant.html#a7a68c9dad90735ea93c52494057b9f80">isType</a>(<span class="keyword">const</span> <a class="codeRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>* type) <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classopcua_1_1Variant.html#a7a68c9dad90735ea93c52494057b9f80">isType</a>(<a class="code" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966">Type</a> type) <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classopcua_1_1Variant.html#a7a68c9dad90735ea93c52494057b9f80">isType</a>(<span class="keyword">const</span> <a class="code" href="classopcua_1_1NodeId.html">NodeId</a>&amp; <span class="keywordtype">id</span>) <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    std::optional&lt;Type&gt; <a class="code" href="classopcua_1_1Variant.html#a14ff8ca3cd37ce0640c8bde40bf9fb32">getVariantType</a>() <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    T&amp; <a class="code" href="classopcua_1_1Variant.html#acbe30a5ffe8a675a7ba5162d4694fbb9">getScalar</a>();</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    T <a class="code" href="classopcua_1_1Variant.html#a0f7d377bfecd10cc89fda41b3ad9d934">getScalarCopy</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    template &lt;typename T, Type type = detail::guessType&lt;T&gt;()&gt;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classopcua_1_1Variant.html#a7d05beac903fac0b7391f5d0ef731515">setArray</a>(std::vector&lt;T&gt;&amp; array) noexcept;</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    template &lt;typename InputIt, Type type = detail::guessTypeFromIterator&lt;InputIt&gt;()&gt;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classopcua_1_1Variant.html#a5f71f0596ff5b378cddd04efbb23931d">setArrayCopy</a>(InputIt first, InputIt last);</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    template &lt;typename T, Type type = detail::guessType&lt;T&gt;()&gt;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classopcua_1_1Variant.html#a5f71f0596ff5b378cddd04efbb23931d">setArrayCopy</a>(<span class="keyword">const</span> T* array, <span class="keywordtype">size_t</span> size);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    template &lt;typename T, Type type = detail::guessType&lt;T&gt;()&gt;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classopcua_1_1Variant.html#a5f71f0596ff5b378cddd04efbb23931d">setArrayCopy</a>(<span class="keyword">const</span> std::vector&lt;T&gt;&amp; array);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">size_t</span> <a class="code" href="classopcua_1_1Variant.html#a54698bd6ada60d5f20556403f1e4d163">getArrayLength</a>() <span class="keyword">const</span> noexcept;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    std::vector&lt;uint32_t&gt; <a class="code" href="classopcua_1_1Variant.html#a9a5cfe5f2a1bd0571acd33e93b45054a">getArrayDimensions</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    T* <a class="code" href="classopcua_1_1Variant.html#a97420c5bb7175550da4dc5fda947035a">getArray</a>();</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    std::vector&lt;T&gt; <a class="code" href="classopcua_1_1Variant.html#a745da34378602215fd443e3b229d5c23">getArrayCopy</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordtype">void</span> checkIsScalar() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordtype">void</span> checkIsArray() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    template &lt;typename T, Type type = detail::guessType&lt;T&gt;()&gt;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classopcua_1_1Variant.html#afae3ba56203f2cbbd7a5ee7b4d7dcb5b">setScalar</a>(T&amp; value) noexcept;</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordtype">void</span> checkReturnType()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> optType = <a class="code" href="classopcua_1_1Variant.html#a14ff8ca3cd37ce0640c8bde40bf9fb32">getVariantType</a>();</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="keywordflow">if</span> (!optType || !detail::isValidTypeCombination&lt;T&gt;(*optType)) {</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            <span class="keywordflow">throw</span> <a class="code" href="classopcua_1_1BadVariantAccess.html">BadVariantAccess</a>(<span class="stringliteral">&quot;Variant does not contain a value convertible to template type&quot;</span>);</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        }</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    }</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    template &lt;typename T, Type type = detail::guessType&lt;T&gt;()&gt;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classopcua_1_1Variant.html#a2e6c68f65d930dd8108dad49d842a624">setScalarCopy</a>(<span class="keyword">const</span> T&amp; value);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    template &lt;typename T, Type type = detail::guessType&lt;T&gt;()&gt;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classopcua_1_1Variant.html#a7d05beac903fac0b7391f5d0ef731515">setArray</a>(T* array, <span class="keywordtype">size_t</span> size) noexcept;</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordtype">void</span> setScalarImpl(<span class="keywordtype">void</span>* value, <span class="keyword">const</span> <a class="codeRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>* type, <span class="keywordtype">bool</span> own = <span class="keyword">false</span>) noexcept;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordtype">void</span> setScalarCopyImpl(<span class="keyword">const</span> <span class="keywordtype">void</span>* value, <span class="keyword">const</span> <a class="codeRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>* type);</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordtype">void</span> setArrayImpl(<span class="keywordtype">void</span>* array, <span class="keywordtype">size_t</span> size, <span class="keyword">const</span> <a class="codeRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>* type, <span class="keywordtype">bool</span> own = <span class="keyword">false</span>) noexcept;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="keywordtype">void</span> setArrayCopyImpl(<span class="keyword">const</span> <span class="keywordtype">void</span>* array, <span class="keywordtype">size_t</span> size, <span class="keyword">const</span> <a class="codeRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>* type);</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;};</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">/* ------------------------------------------- Helper ------------------------------------------- */</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    template &lt;typename T, Type type = detail::guessType&lt;T&gt;()&gt;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classopcua_1_1Variant.html#a7d05beac903fac0b7391f5d0ef731515">setArray</a>(std::vector&lt;T&gt;&amp; array) noexcept;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    template &lt;typename InputIt, Type type = detail::guessTypeFromIterator&lt;InputIt&gt;()&gt;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classopcua_1_1Variant.html#a5f71f0596ff5b378cddd04efbb23931d">setArrayCopy</a>(InputIt first, InputIt last);</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keyword">namespace </span>detail {</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160; </div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00123"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#ab34f110c7f3dacdf594f847d15763c8b">  123</a></span>&#160;constexpr <span class="keywordtype">bool</span> <a class="code" href="namespaceopcua_1_1detail.html#ab34f110c7f3dacdf594f847d15763c8b">isAssignableToVariantScalar</a>() {</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keywordflow">return</span> detail::isBuiltinType&lt;T&gt;() || <a class="code" href="namespaceopcua_1_1detail.html#a6f6a9d9d89858dc4cd64637b4e252935">detail::IsTypeWrapper&lt;T&gt;::value</a>;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;}</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160; </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#aa632bc62614ed8ceb544de6cc3fbd2e9">  128</a></span>&#160;constexpr <span class="keywordtype">bool</span> <a class="code" href="namespaceopcua_1_1detail.html#aa632bc62614ed8ceb544de6cc3fbd2e9">isAssignableToVariantArray</a>() {</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordflow">return</span> detail::isBuiltinType&lt;T&gt;();</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;}</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    template &lt;typename T, Type type = detail::guessType&lt;T&gt;()&gt;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classopcua_1_1Variant.html#a5f71f0596ff5b378cddd04efbb23931d">setArrayCopy</a>(<span class="keyword">const</span> T* array, <span class="keywordtype">size_t</span> size);</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    template &lt;typename T, Type type = detail::guessType&lt;T&gt;()&gt;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classopcua_1_1Variant.html#a5f71f0596ff5b378cddd04efbb23931d">setArrayCopy</a>(<span class="keyword">const</span> std::vector&lt;T&gt;&amp; array);</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordtype">void</span> checkIsScalar() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <span class="keywordtype">void</span> checkIsArray() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;}  <span class="comment">// namespace detail</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="comment">/* --------------------------------------- Implementation --------------------------------------- */</span></div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00137"></a><span class="lineno"><a class="line" href="classopcua_1_1Variant.html#acbe30a5ffe8a675a7ba5162d4694fbb9">  137</a></span>&#160;T&amp; <a class="code" href="classopcua_1_1Variant.html#acbe30a5ffe8a675a7ba5162d4694fbb9">Variant::getScalar</a>() {</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    static_assert(</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        detail::isBuiltinType&lt;T&gt;(), <span class="stringliteral">&quot;Template type must be a native type to get scalar without copy&quot;</span></div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    );</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    checkIsScalar();</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    checkReturnType&lt;T&gt;();</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    assert(<span class="keyword">sizeof</span>(T) == <a class="code" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805">handle</a>()-&gt;type-&gt;memSize);  <span class="comment">// NOLINT</span></div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(<a class="code" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805">handle</a>()-&gt;<a class="codeRef" target="_blank" href="open62541/structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">data</a>);</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;}</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00148"></a><span class="lineno"><a class="line" href="classopcua_1_1Variant.html#a0f7d377bfecd10cc89fda41b3ad9d934">  148</a></span>&#160;T <a class="code" href="classopcua_1_1Variant.html#a0f7d377bfecd10cc89fda41b3ad9d934">Variant::getScalarCopy</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    checkIsScalar();</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    checkReturnType&lt;T&gt;();</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keywordflow">return</span> detail::fromNative&lt;T&gt;(<a class="code" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805">handle</a>()-&gt;data, <a class="code" href="classopcua_1_1Variant.html#a14ff8ca3cd37ce0640c8bde40bf9fb32">getVariantType</a>().value());</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;}</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00155"></a><span class="lineno"><a class="line" href="classopcua_1_1Variant.html#a97420c5bb7175550da4dc5fda947035a">  155</a></span>&#160;T* <a class="code" href="classopcua_1_1Variant.html#a97420c5bb7175550da4dc5fda947035a">Variant::getArray</a>() {</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    static_assert(</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;        detail::isBuiltinType&lt;T&gt;(), <span class="stringliteral">&quot;Template type must be a native type to get array without copy&quot;</span></div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    );</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    checkIsArray();</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;    checkReturnType&lt;T&gt;();</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    assert(<span class="keyword">sizeof</span>(T) == <a class="code" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805">handle</a>()-&gt;type-&gt;memSize);  <span class="comment">// NOLINT</span></div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(<a class="code" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805">handle</a>()-&gt;<a class="codeRef" target="_blank" href="open62541/structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">data</a>);</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;}</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a name="l00166"></a><span class="lineno"><a class="line" href="classopcua_1_1Variant.html#a745da34378602215fd443e3b229d5c23">  166</a></span>&#160;std::vector&lt;T&gt; <a class="code" href="classopcua_1_1Variant.html#a745da34378602215fd443e3b229d5c23">Variant::getArrayCopy</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    checkIsArray();</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    checkReturnType&lt;T&gt;();</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <span class="keywordflow">return</span> detail::fromNativeArray&lt;T&gt;(</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        <a class="code" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805">handle</a>()-&gt;data, <a class="code" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805">handle</a>()-&gt;arrayLength, <a class="code" href="classopcua_1_1Variant.html#a14ff8ca3cd37ce0640c8bde40bf9fb32">getVariantType</a>().value()</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    );</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;}</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, Type type&gt;</div>
-<div class="line"><a name="l00175"></a><span class="lineno"><a class="line" href="classopcua_1_1Variant.html#afae3ba56203f2cbbd7a5ee7b4d7dcb5b">  175</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classopcua_1_1Variant.html#afae3ba56203f2cbbd7a5ee7b4d7dcb5b">Variant::setScalar</a>(T&amp; value) noexcept {</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    detail::assertTypeCombination&lt;T, type&gt;();</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    static_assert(type != <a class="code" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966a492f18b60811bf85ce118c0c6a1a5c4a">Type::Variant</a>, <span class="stringliteral">&quot;Variants cannot directly contain another variant&quot;</span>);</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    static_assert(</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;        detail::isAssignableToVariantScalar&lt;T&gt;(),</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;        <span class="stringliteral">&quot;Template type must be convertible to native type to assign scalar without copy&quot;</span></div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    );</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    <span class="keywordflow">if</span> constexpr (<a class="code" href="namespaceopcua_1_1detail.html#a6f6a9d9d89858dc4cd64637b4e252935">detail::IsTypeWrapper&lt;T&gt;::value</a>) {</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        setScalarImpl(value.handle(), detail::getUaDataType&lt;type&gt;());</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        setScalarImpl(&amp;value, detail::getUaDataType&lt;type&gt;());</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    }</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;}</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, Type type&gt;</div>
-<div class="line"><a name="l00190"></a><span class="lineno"><a class="line" href="classopcua_1_1Variant.html#a2e6c68f65d930dd8108dad49d842a624">  190</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classopcua_1_1Variant.html#a2e6c68f65d930dd8108dad49d842a624">Variant::setScalarCopy</a>(<span class="keyword">const</span> T&amp; value) {</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    static_assert(type != <a class="code" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966a492f18b60811bf85ce118c0c6a1a5c4a">Type::Variant</a>, <span class="stringliteral">&quot;Variants cannot directly contain another variant&quot;</span>);</div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    detail::assertTypeCombination&lt;T, type&gt;();</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    setScalarImpl(</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        detail::toNativeAlloc&lt;T, type&gt;(value),</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        detail::getUaDataType&lt;type&gt;(),</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        <span class="keyword">true</span>  <span class="comment">// move ownership</span></div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    );</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <span class="keywordtype">void</span> checkReturnType()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        <span class="keyword">const</span> <span class="keyword">auto</span> optType = <a class="code" href="classopcua_1_1Variant.html#a14ff8ca3cd37ce0640c8bde40bf9fb32">getVariantType</a>();</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        <span class="keywordflow">if</span> (!optType || !detail::isValidTypeCombination&lt;T&gt;(*optType)) {</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            <span class="keywordflow">throw</span> <a class="code" href="classopcua_1_1BadVariantAccess.html">BadVariantAccess</a>(<span class="stringliteral">&quot;Variant does not contain a value convertible to template type&quot;</span>);</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        }</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    }</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    <span class="keywordtype">void</span> setScalarImpl(<span class="keywordtype">void</span>* value, <span class="keyword">const</span> <a class="codeRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>* type, <span class="keywordtype">bool</span> own = <span class="keyword">false</span>) noexcept;</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <span class="keywordtype">void</span> setScalarCopyImpl(<span class="keyword">const</span> <span class="keywordtype">void</span>* value, <span class="keyword">const</span> <a class="codeRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>* type);</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    <span class="keywordtype">void</span> setArrayImpl(<span class="keywordtype">void</span>* array, <span class="keywordtype">size_t</span> size, <span class="keyword">const</span> <a class="codeRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>* type, <span class="keywordtype">bool</span> own = <span class="keyword">false</span>) noexcept;</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    <span class="keywordtype">void</span> setArrayCopyImpl(<span class="keyword">const</span> <span class="keywordtype">void</span>* array, <span class="keywordtype">size_t</span> size, <span class="keyword">const</span> <a class="codeRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>* type);</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;};</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="comment">/* ------------------------------------------- Helper ------------------------------------------- */</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="keyword">namespace </span>detail {</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00151"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#ab34f110c7f3dacdf594f847d15763c8b">  151</a></span>&#160;constexpr <span class="keywordtype">bool</span> <a class="code" href="namespaceopcua_1_1detail.html#ab34f110c7f3dacdf594f847d15763c8b">isAssignableToVariantScalar</a>() {</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keywordflow">return</span> detail::isBuiltinType&lt;T&gt;() || <a class="code" href="namespaceopcua_1_1detail.html#a6f6a9d9d89858dc4cd64637b4e252935">detail::IsTypeWrapper&lt;T&gt;::value</a>;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;}</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00156"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#aa632bc62614ed8ceb544de6cc3fbd2e9">  156</a></span>&#160;constexpr <span class="keywordtype">bool</span> <a class="code" href="namespaceopcua_1_1detail.html#aa632bc62614ed8ceb544de6cc3fbd2e9">isAssignableToVariantArray</a>() {</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <span class="keywordflow">return</span> detail::isBuiltinType&lt;T&gt;();</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;}</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;}  <span class="comment">// namespace detail</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="comment">/* --------------------------------------- Implementation --------------------------------------- */</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, Type type&gt;</div>
+<div class="line"><a name="l00165"></a><span class="lineno"><a class="line" href="classopcua_1_1Variant.html#a6eee92f79f6910b7652bcc2719345339">  165</a></span>&#160;<a class="code" href="classopcua_1_1Variant.html">Variant</a> <a class="code" href="classopcua_1_1Variant.html#a6eee92f79f6910b7652bcc2719345339">Variant::fromScalar</a>(T&amp; value) {</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <a class="code" href="classopcua_1_1Variant.html">Variant</a> variant;</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <span class="keywordflow">if</span> constexpr (detail::isAssignableToVariantScalar&lt;T&gt;()) {</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        variant.<a class="code" href="classopcua_1_1Variant.html#afae3ba56203f2cbbd7a5ee7b4d7dcb5b">setScalar</a>&lt;T, type&gt;(value);</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        variant.<a class="code" href="classopcua_1_1Variant.html#a2e6c68f65d930dd8108dad49d842a624">setScalarCopy</a>&lt;T, type&gt;(value);</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    }</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="keywordflow">return</span> variant;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;}</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, Type type&gt;</div>
+<div class="line"><a name="l00176"></a><span class="lineno"><a class="line" href="classopcua_1_1Variant.html#afdd1b253ef8c1b255f05041264c80ad1">  176</a></span>&#160;<a class="code" href="classopcua_1_1Variant.html">Variant</a> <a class="code" href="classopcua_1_1Variant.html#a6eee92f79f6910b7652bcc2719345339">Variant::fromScalar</a>(<span class="keyword">const</span> T&amp; value) {</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    <a class="code" href="classopcua_1_1Variant.html">Variant</a> variant;</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    variant.<a class="code" href="classopcua_1_1Variant.html#a2e6c68f65d930dd8108dad49d842a624">setScalarCopy</a>&lt;T, type&gt;(value);</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    <span class="keywordflow">return</span> variant;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;}</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, Type type&gt;</div>
+<div class="line"><a name="l00183"></a><span class="lineno"><a class="line" href="classopcua_1_1Variant.html#ac99619ea9e1b6f0774abf36c5c97a934">  183</a></span>&#160;<a class="code" href="classopcua_1_1Variant.html">Variant</a> <a class="code" href="classopcua_1_1Variant.html#ac99619ea9e1b6f0774abf36c5c97a934">Variant::fromArray</a>(T* array, <span class="keywordtype">size_t</span> size) {</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <a class="code" href="classopcua_1_1Variant.html">Variant</a> variant;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    <span class="keywordflow">if</span> constexpr (detail::isAssignableToVariantArray&lt;T&gt;()) {</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;        variant.<a class="code" href="classopcua_1_1Variant.html#a7d05beac903fac0b7391f5d0ef731515">setArray</a>&lt;T, type&gt;(array, size);  <span class="comment">// NOLINT, variant isn&#39;t modified</span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        variant.<a class="code" href="classopcua_1_1Variant.html#a5f71f0596ff5b378cddd04efbb23931d">setArrayCopy</a>&lt;T, type&gt;(array, size);</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    }</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    <span class="keywordflow">return</span> variant;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;}</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160; </div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, Type type&gt;</div>
+<div class="line"><a name="l00194"></a><span class="lineno"><a class="line" href="classopcua_1_1Variant.html#a5b61c5cac894019b5f3ec18ddcbbb1d0">  194</a></span>&#160;<a class="code" href="classopcua_1_1Variant.html">Variant</a> <a class="code" href="classopcua_1_1Variant.html#ac99619ea9e1b6f0774abf36c5c97a934">Variant::fromArray</a>(<span class="keyword">const</span> T* array, <span class="keywordtype">size_t</span> size) {</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <a class="code" href="classopcua_1_1Variant.html">Variant</a> variant;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    variant.<a class="code" href="classopcua_1_1Variant.html#a5f71f0596ff5b378cddd04efbb23931d">setArrayCopy</a>&lt;T, type&gt;(array, size);</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <span class="keywordflow">return</span> variant;</div>
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;}</div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
 <div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, Type type&gt;</div>
-<div class="line"><a name="l00201"></a><span class="lineno"><a class="line" href="classopcua_1_1Variant.html#a7d05beac903fac0b7391f5d0ef731515">  201</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classopcua_1_1Variant.html#a7d05beac903fac0b7391f5d0ef731515">Variant::setArray</a>(T* array, <span class="keywordtype">size_t</span> size) noexcept {</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    detail::assertTypeCombination&lt;T, type&gt;();</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    static_assert(</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        detail::isAssignableToVariantArray&lt;T&gt;(),</div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;        <span class="stringliteral">&quot;Template type must be a native type to assign array without copy&quot;</span></div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    );</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    setArrayImpl(array, size, detail::getUaDataType&lt;type&gt;());</div>
+<div class="line"><a name="l00201"></a><span class="lineno"><a class="line" href="classopcua_1_1Variant.html#aa6fe213a945cb96c2bcef0fc09e478ff">  201</a></span>&#160;<a class="code" href="classopcua_1_1Variant.html">Variant</a> <a class="code" href="classopcua_1_1Variant.html#ac99619ea9e1b6f0774abf36c5c97a934">Variant::fromArray</a>(std::vector&lt;T&gt;&amp; array) {</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <span class="keywordflow">return</span> fromArray&lt;T, type&gt;(array.data(), array.size());</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;}</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160; </div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, Type type&gt;</div>
+<div class="line"><a name="l00206"></a><span class="lineno"><a class="line" href="classopcua_1_1Variant.html#a13b739254de32ec6037fe2444f08eaef">  206</a></span>&#160;<a class="code" href="classopcua_1_1Variant.html">Variant</a> <a class="code" href="classopcua_1_1Variant.html#ac99619ea9e1b6f0774abf36c5c97a934">Variant::fromArray</a>(<span class="keyword">const</span> std::vector&lt;T&gt;&amp; array) {</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    <span class="keywordflow">return</span> fromArray&lt;T, type&gt;(array.data(), array.size());</div>
 <div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;}</div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160; </div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, Type type&gt;</div>
-<div class="line"><a name="l00211"></a><span class="lineno"><a class="line" href="classopcua_1_1Variant.html#a49272289967f696c5acd75a26e1ae58e">  211</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classopcua_1_1Variant.html#a7d05beac903fac0b7391f5d0ef731515">Variant::setArray</a>(std::vector&lt;T&gt;&amp; array) noexcept {</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    setArray&lt;T, type&gt;(array.data(), array.size());</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;}</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; </div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> InputIt, Type type&gt;</div>
-<div class="line"><a name="l00216"></a><span class="lineno"><a class="line" href="classopcua_1_1Variant.html#a5f71f0596ff5b378cddd04efbb23931d">  216</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classopcua_1_1Variant.html#a5f71f0596ff5b378cddd04efbb23931d">Variant::setArrayCopy</a>(InputIt first, InputIt last) {</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <span class="keyword">using</span> ValueType = <span class="keyword">typename</span> std::iterator_traits&lt;InputIt&gt;::value_type;</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    detail::assertTypeCombination&lt;ValueType, type&gt;();</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    setArrayImpl(</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        detail::toNativeArrayAlloc&lt;InputIt, type&gt;(first, last),</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;        std::distance(first, last),</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;        detail::getUaDataType&lt;type&gt;(),</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        <span class="keyword">true</span>  <span class="comment">// move ownership</span></div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    );</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;}</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; </div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, Type type&gt;</div>
-<div class="line"><a name="l00228"></a><span class="lineno"><a class="line" href="classopcua_1_1Variant.html#ac5ba996867e11a5b743b549ef0592584">  228</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classopcua_1_1Variant.html#a5f71f0596ff5b378cddd04efbb23931d">Variant::setArrayCopy</a>(<span class="keyword">const</span> T* array, <span class="keywordtype">size_t</span> size) {</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    detail::assertTypeCombination&lt;T, type&gt;();</div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    <span class="keywordflow">if</span> constexpr (detail::isBuiltinType&lt;T&gt;()) {</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        setArrayCopyImpl(array, size, detail::getUaDataType&lt;type&gt;());</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;        setArrayCopy&lt;const T*, type&gt;(array, array + size);</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    }</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;}</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160; </div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, Type type&gt;</div>
-<div class="line"><a name="l00238"></a><span class="lineno"><a class="line" href="classopcua_1_1Variant.html#aaf87f645e3b481e7a33aba04774a3e2c">  238</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classopcua_1_1Variant.html#a5f71f0596ff5b378cddd04efbb23931d">Variant::setArrayCopy</a>(<span class="keyword">const</span> std::vector&lt;T&gt;&amp; array) {</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    setArrayCopy&lt;T, type&gt;(array.data(), array.size());</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;}</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160; </div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;}  <span class="comment">// namespace opcua</span></div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> InputIt, Type type&gt;</div>
+<div class="line"><a name="l00211"></a><span class="lineno"><a class="line" href="classopcua_1_1Variant.html#a995cad4a7a40655faa50e870f3d5d2f9">  211</a></span>&#160;<a class="code" href="classopcua_1_1Variant.html">Variant</a> <a class="code" href="classopcua_1_1Variant.html#ac99619ea9e1b6f0774abf36c5c97a934">Variant::fromArray</a>(InputIt first, InputIt last) {</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    <a class="code" href="classopcua_1_1Variant.html">Variant</a> variant;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    variant.<a class="code" href="classopcua_1_1Variant.html#a5f71f0596ff5b378cddd04efbb23931d">setArrayCopy</a>&lt;InputIt, type&gt;(first, last);</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    <span class="keywordflow">return</span> variant;</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;}</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160; </div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00218"></a><span class="lineno"><a class="line" href="classopcua_1_1Variant.html#acbe30a5ffe8a675a7ba5162d4694fbb9">  218</a></span>&#160;T&amp; <a class="code" href="classopcua_1_1Variant.html#acbe30a5ffe8a675a7ba5162d4694fbb9">Variant::getScalar</a>() {</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    static_assert(</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        detail::isBuiltinType&lt;T&gt;(), <span class="stringliteral">&quot;Template type must be a native type to get scalar without copy&quot;</span></div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    );</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    checkIsScalar();</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    checkReturnType&lt;T&gt;();</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    assert(<span class="keyword">sizeof</span>(T) == <a class="code" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805">handle</a>()-&gt;type-&gt;memSize);  <span class="comment">// NOLINT</span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(<a class="code" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805">handle</a>()-&gt;<a class="codeRef" target="_blank" href="open62541/structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">data</a>);</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;}</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160; </div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00229"></a><span class="lineno"><a class="line" href="classopcua_1_1Variant.html#a0f7d377bfecd10cc89fda41b3ad9d934">  229</a></span>&#160;T <a class="code" href="classopcua_1_1Variant.html#a0f7d377bfecd10cc89fda41b3ad9d934">Variant::getScalarCopy</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    checkIsScalar();</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    checkReturnType&lt;T&gt;();</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    <span class="keywordflow">return</span> detail::fromNative&lt;T&gt;(<a class="code" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805">handle</a>()-&gt;data, <a class="code" href="classopcua_1_1Variant.html#a14ff8ca3cd37ce0640c8bde40bf9fb32">getVariantType</a>().value());</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;}</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160; </div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00236"></a><span class="lineno"><a class="line" href="classopcua_1_1Variant.html#a97420c5bb7175550da4dc5fda947035a">  236</a></span>&#160;T* <a class="code" href="classopcua_1_1Variant.html#a97420c5bb7175550da4dc5fda947035a">Variant::getArray</a>() {</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    static_assert(</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        detail::isBuiltinType&lt;T&gt;(), <span class="stringliteral">&quot;Template type must be a native type to get array without copy&quot;</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    );</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    checkIsArray();</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    checkReturnType&lt;T&gt;();</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    assert(<span class="keyword">sizeof</span>(T) == <a class="code" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805">handle</a>()-&gt;type-&gt;memSize);  <span class="comment">// NOLINT</span></div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(<a class="code" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805">handle</a>()-&gt;<a class="codeRef" target="_blank" href="open62541/structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">data</a>);</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;}</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a name="l00247"></a><span class="lineno"><a class="line" href="classopcua_1_1Variant.html#a745da34378602215fd443e3b229d5c23">  247</a></span>&#160;std::vector&lt;T&gt; <a class="code" href="classopcua_1_1Variant.html#a745da34378602215fd443e3b229d5c23">Variant::getArrayCopy</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    checkIsArray();</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    checkReturnType&lt;T&gt;();</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    <span class="keywordflow">return</span> detail::fromNativeArray&lt;T&gt;(</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        <a class="code" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805">handle</a>()-&gt;data, <a class="code" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805">handle</a>()-&gt;arrayLength, <a class="code" href="classopcua_1_1Variant.html#a14ff8ca3cd37ce0640c8bde40bf9fb32">getVariantType</a>().value()</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    );</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;}</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160; </div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, Type type&gt;</div>
+<div class="line"><a name="l00256"></a><span class="lineno"><a class="line" href="classopcua_1_1Variant.html#afae3ba56203f2cbbd7a5ee7b4d7dcb5b">  256</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classopcua_1_1Variant.html#afae3ba56203f2cbbd7a5ee7b4d7dcb5b">Variant::setScalar</a>(T&amp; value) noexcept {</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    detail::assertTypeCombination&lt;T, type&gt;();</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    static_assert(type != <a class="code" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966a492f18b60811bf85ce118c0c6a1a5c4a">Type::Variant</a>, <span class="stringliteral">&quot;Variants cannot directly contain another variant&quot;</span>);</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    static_assert(</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        detail::isAssignableToVariantScalar&lt;T&gt;(),</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        <span class="stringliteral">&quot;Template type must be convertible to native type to assign scalar without copy&quot;</span></div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    );</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    <span class="keywordflow">if</span> constexpr (<a class="code" href="namespaceopcua_1_1detail.html#a6f6a9d9d89858dc4cd64637b4e252935">detail::IsTypeWrapper&lt;T&gt;::value</a>) {</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        setScalarImpl(value.handle(), detail::getUaDataType&lt;type&gt;());</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        setScalarImpl(&amp;value, detail::getUaDataType&lt;type&gt;());</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    }</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;}</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, Type type&gt;</div>
+<div class="line"><a name="l00271"></a><span class="lineno"><a class="line" href="classopcua_1_1Variant.html#a2e6c68f65d930dd8108dad49d842a624">  271</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classopcua_1_1Variant.html#a2e6c68f65d930dd8108dad49d842a624">Variant::setScalarCopy</a>(<span class="keyword">const</span> T&amp; value) {</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    static_assert(type != <a class="code" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966a492f18b60811bf85ce118c0c6a1a5c4a">Type::Variant</a>, <span class="stringliteral">&quot;Variants cannot directly contain another variant&quot;</span>);</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    detail::assertTypeCombination&lt;T, type&gt;();</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    setScalarImpl(</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        detail::toNativeAlloc&lt;T, type&gt;(value),</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;        detail::getUaDataType&lt;type&gt;(),</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        <span class="keyword">true</span>  <span class="comment">// move ownership</span></div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;    );</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;}</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160; </div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, Type type&gt;</div>
+<div class="line"><a name="l00282"></a><span class="lineno"><a class="line" href="classopcua_1_1Variant.html#a7d05beac903fac0b7391f5d0ef731515">  282</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classopcua_1_1Variant.html#a7d05beac903fac0b7391f5d0ef731515">Variant::setArray</a>(T* array, <span class="keywordtype">size_t</span> size) noexcept {</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    detail::assertTypeCombination&lt;T, type&gt;();</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    static_assert(</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;        detail::isAssignableToVariantArray&lt;T&gt;(),</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;        <span class="stringliteral">&quot;Template type must be a native type to assign array without copy&quot;</span></div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    );</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    setArrayImpl(array, size, detail::getUaDataType&lt;type&gt;());</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;}</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, Type type&gt;</div>
+<div class="line"><a name="l00292"></a><span class="lineno"><a class="line" href="classopcua_1_1Variant.html#a49272289967f696c5acd75a26e1ae58e">  292</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classopcua_1_1Variant.html#a7d05beac903fac0b7391f5d0ef731515">Variant::setArray</a>(std::vector&lt;T&gt;&amp; array) noexcept {</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    setArray&lt;T, type&gt;(array.data(), array.size());</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;}</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160; </div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> InputIt, Type type&gt;</div>
+<div class="line"><a name="l00297"></a><span class="lineno"><a class="line" href="classopcua_1_1Variant.html#a5f71f0596ff5b378cddd04efbb23931d">  297</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classopcua_1_1Variant.html#a5f71f0596ff5b378cddd04efbb23931d">Variant::setArrayCopy</a>(InputIt first, InputIt last) {</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    <span class="keyword">using</span> ValueType = <span class="keyword">typename</span> std::iterator_traits&lt;InputIt&gt;::value_type;</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;    detail::assertTypeCombination&lt;ValueType, type&gt;();</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    setArrayImpl(</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;        detail::toNativeArrayAlloc&lt;InputIt, type&gt;(first, last),</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        std::distance(first, last),</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        detail::getUaDataType&lt;type&gt;(),</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;        <span class="keyword">true</span>  <span class="comment">// move ownership</span></div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    );</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;}</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160; </div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, Type type&gt;</div>
+<div class="line"><a name="l00309"></a><span class="lineno"><a class="line" href="classopcua_1_1Variant.html#ac5ba996867e11a5b743b549ef0592584">  309</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classopcua_1_1Variant.html#a5f71f0596ff5b378cddd04efbb23931d">Variant::setArrayCopy</a>(<span class="keyword">const</span> T* array, <span class="keywordtype">size_t</span> size) {</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    detail::assertTypeCombination&lt;T, type&gt;();</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;    <span class="keywordflow">if</span> constexpr (detail::isBuiltinType&lt;T&gt;()) {</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        setArrayCopyImpl(array, size, detail::getUaDataType&lt;type&gt;());</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;        setArrayCopy&lt;const T*, type&gt;(array, array + size);</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    }</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;}</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160; </div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, Type type&gt;</div>
+<div class="line"><a name="l00319"></a><span class="lineno"><a class="line" href="classopcua_1_1Variant.html#aaf87f645e3b481e7a33aba04774a3e2c">  319</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classopcua_1_1Variant.html#a5f71f0596ff5b378cddd04efbb23931d">Variant::setArrayCopy</a>(<span class="keyword">const</span> std::vector&lt;T&gt;&amp; array) {</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;    setArrayCopy&lt;T, type&gt;(array.data(), array.size());</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;}</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160; </div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;}  <span class="comment">// namespace opcua</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="anamespaceopcua_1_1detail_html_ab34f110c7f3dacdf594f847d15763c8b"><div class="ttname"><a href="namespaceopcua_1_1detail.html#ab34f110c7f3dacdf594f847d15763c8b">opcua::detail::isAssignableToVariantScalar</a></div><div class="ttdeci">constexpr bool isAssignableToVariantScalar()</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00123">Variant.h:123</a></div></div>
+<div class="ttc" id="anamespaceopcua_1_1detail_html_ab34f110c7f3dacdf594f847d15763c8b"><div class="ttname"><a href="namespaceopcua_1_1detail.html#ab34f110c7f3dacdf594f847d15763c8b">opcua::detail::isAssignableToVariantScalar</a></div><div class="ttdeci">constexpr bool isAssignableToVariantScalar()</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00151">Variant.h:151</a></div></div>
 <div class="ttc" id="aclassopcua_1_1TypeWrapper_html_a7f24ba2bf6517bed143c1eb789fff19a"><div class="ttname"><a href="classopcua_1_1TypeWrapper.html#a7f24ba2bf6517bed143c1eb789fff19a">opcua::TypeWrapper::TypeWrapperBase</a></div><div class="ttdeci">TypeWrapper&lt; T, typeIndex &gt; TypeWrapperBase</div><div class="ttdef"><b>Definition:</b> <a href="TypeWrapper_8h_source.html#l00038">TypeWrapper.h:38</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Variant_html_ae528dcb9d819364f9590c310dc8e8f2a"><div class="ttname"><a href="classopcua_1_1Variant.html#ae528dcb9d819364f9590c310dc8e8f2a">opcua::Variant::isScalar</a></div><div class="ttdeci">bool isScalar() const noexcept</div><div class="ttdoc">Check if variant is a scalar.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8cpp_source.html#l00012">Variant.cpp:12</a></div></div>
 <div class="ttc" id="aopen62541_8h_html"><div class="ttname"><a href="open62541_8h.html">open62541.h</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Variant_html_acbe30a5ffe8a675a7ba5162d4694fbb9"><div class="ttname"><a href="classopcua_1_1Variant.html#acbe30a5ffe8a675a7ba5162d4694fbb9">opcua::Variant::getScalar</a></div><div class="ttdeci">T &amp; getScalar()</div><div class="ttdoc">Get reference to scalar value with given template type.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00137">Variant.h:137</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Variant_html_a7d05beac903fac0b7391f5d0ef731515"><div class="ttname"><a href="classopcua_1_1Variant.html#a7d05beac903fac0b7391f5d0ef731515">opcua::Variant::setArray</a></div><div class="ttdeci">void setArray(T *array, size_t size) noexcept</div><div class="ttdoc">Assign array (raw) to variant.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00201">Variant.h:201</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html_acbe30a5ffe8a675a7ba5162d4694fbb9"><div class="ttname"><a href="classopcua_1_1Variant.html#acbe30a5ffe8a675a7ba5162d4694fbb9">opcua::Variant::getScalar</a></div><div class="ttdeci">T &amp; getScalar()</div><div class="ttdoc">Get reference to scalar value with given template type.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00218">Variant.h:218</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html_a7d05beac903fac0b7391f5d0ef731515"><div class="ttname"><a href="classopcua_1_1Variant.html#a7d05beac903fac0b7391f5d0ef731515">opcua::Variant::setArray</a></div><div class="ttdeci">void setArray(T *array, size_t size) noexcept</div><div class="ttdoc">Assign array (raw) to variant.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00282">Variant.h:282</a></div></div>
 <div class="ttc" id="aTypeConverter_8h_html"><div class="ttname"><a href="TypeConverter_8h.html">TypeConverter.h</a></div></div>
-<div class="ttc" id="anamespaceopcua_1_1detail_html_aa632bc62614ed8ceb544de6cc3fbd2e9"><div class="ttname"><a href="namespaceopcua_1_1detail.html#aa632bc62614ed8ceb544de6cc3fbd2e9">opcua::detail::isAssignableToVariantArray</a></div><div class="ttdeci">constexpr bool isAssignableToVariantArray()</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00128">Variant.h:128</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html_a6eee92f79f6910b7652bcc2719345339"><div class="ttname"><a href="classopcua_1_1Variant.html#a6eee92f79f6910b7652bcc2719345339">opcua::Variant::fromScalar</a></div><div class="ttdeci">static Variant fromScalar(T &amp;value)</div><div class="ttdoc">Create Variant from scalar value (no copy if assignable without conversion)</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00165">Variant.h:165</a></div></div>
+<div class="ttc" id="anamespaceopcua_1_1detail_html_aa632bc62614ed8ceb544de6cc3fbd2e9"><div class="ttname"><a href="namespaceopcua_1_1detail.html#aa632bc62614ed8ceb544de6cc3fbd2e9">opcua::detail::isAssignableToVariantArray</a></div><div class="ttdeci">constexpr bool isAssignableToVariantArray()</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00156">Variant.h:156</a></div></div>
 <div class="ttc" id="anamespaceopcua_html"><div class="ttname"><a href="namespaceopcua.html">opcua</a></div><div class="ttdef"><b>Definition:</b> <a href="Common_8h_source.html#l00010">Common.h:10</a></div></div>
 <div class="ttc" id="aclassopcua_1_1TypeWrapper_html_af6c6b5bb6ee6bb9a4aa95f6aabb20805"><div class="ttname"><a href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805">opcua::TypeWrapper&lt; UA_Variant, UA_TYPES_VARIANT &gt;::handle</a></div><div class="ttdeci">constexpr UA_Variant * handle() noexcept</div><div class="ttdoc">Return pointer to native object.</div><div class="ttdef"><b>Definition:</b> <a href="TypeWrapper_8h_source.html#l00146">TypeWrapper.h:146</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Variant_html_a9a5cfe5f2a1bd0571acd33e93b45054a"><div class="ttname"><a href="classopcua_1_1Variant.html#a9a5cfe5f2a1bd0571acd33e93b45054a">opcua::Variant::getArrayDimensions</a></div><div class="ttdeci">std::vector&lt; uint32_t &gt; getArrayDimensions() const</div><div class="ttdoc">Get array dimensions.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8cpp_source.html#l00048">Variant.cpp:48</a></div></div>
@@ -305,14 +380,14 @@ $(function() {
 <div class="ttc" id="anamespaceopcua_html_adc25953f10b26dc1213b1033d44f5966a4b5bd8a54893c87287a22228b5ef2bc8"><div class="ttname"><a href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966a4b5bd8a54893c87287a22228b5ef2bc8">opcua::Type::NodeId</a></div><div class="ttdeci">@ NodeId</div></div>
 <div class="ttc" id="aclassopcua_1_1Variant_html"><div class="ttname"><a href="classopcua_1_1Variant.html">opcua::Variant</a></div><div class="ttdoc">UA_Variant wrapper class.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00025">Variant.h:25</a></div></div>
 <div class="ttc" id="aErrorHandling_8h_html"><div class="ttname"><a href="ErrorHandling_8h.html">ErrorHandling.h</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Variant_html_a5f71f0596ff5b378cddd04efbb23931d"><div class="ttname"><a href="classopcua_1_1Variant.html#a5f71f0596ff5b378cddd04efbb23931d">opcua::Variant::setArrayCopy</a></div><div class="ttdeci">void setArrayCopy(InputIt first, InputIt last)</div><div class="ttdoc">Copy range of elements as array to variant.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00216">Variant.h:216</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html_a5f71f0596ff5b378cddd04efbb23931d"><div class="ttname"><a href="classopcua_1_1Variant.html#a5f71f0596ff5b378cddd04efbb23931d">opcua::Variant::setArrayCopy</a></div><div class="ttdeci">void setArrayCopy(InputIt first, InputIt last)</div><div class="ttdoc">Copy range of elements as array to variant.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00297">Variant.h:297</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Variant_html_a9697a0c258f2c132b890eadcfa96bb72"><div class="ttname"><a href="classopcua_1_1Variant.html#a9697a0c258f2c132b890eadcfa96bb72">opcua::Variant::isEmpty</a></div><div class="ttdeci">bool isEmpty() const noexcept</div><div class="ttdoc">Check if variant is empty.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8cpp_source.html#l00008">Variant.cpp:8</a></div></div>
 <div class="ttc" id="aCommon_8h_html"><div class="ttname"><a href="Common_8h.html">Common.h</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Variant_html_a14ff8ca3cd37ce0640c8bde40bf9fb32"><div class="ttname"><a href="classopcua_1_1Variant.html#a14ff8ca3cd37ce0640c8bde40bf9fb32">opcua::Variant::getVariantType</a></div><div class="ttdeci">std::optional&lt; Type &gt; getVariantType() const noexcept</div><div class="ttdoc">Get variant type.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8cpp_source.html#l00032">Variant.cpp:32</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Variant_html_a97420c5bb7175550da4dc5fda947035a"><div class="ttname"><a href="classopcua_1_1Variant.html#a97420c5bb7175550da4dc5fda947035a">opcua::Variant::getArray</a></div><div class="ttdeci">T * getArray()</div><div class="ttdoc">Get pointer to array with given template type.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00155">Variant.h:155</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html_a97420c5bb7175550da4dc5fda947035a"><div class="ttname"><a href="classopcua_1_1Variant.html#a97420c5bb7175550da4dc5fda947035a">opcua::Variant::getArray</a></div><div class="ttdeci">T * getArray()</div><div class="ttdoc">Get pointer to array with given template type.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00236">Variant.h:236</a></div></div>
 <div class="ttc" id="aclassopcua_1_1NodeId_html"><div class="ttname"><a href="classopcua_1_1NodeId.html">opcua::NodeId</a></div><div class="ttdoc">UA_NodeId wrapper class.</div><div class="ttdef"><b>Definition:</b> <a href="NodeId_8h_source.html#l00029">NodeId.h:29</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Variant_html_a0f7d377bfecd10cc89fda41b3ad9d934"><div class="ttname"><a href="classopcua_1_1Variant.html#a0f7d377bfecd10cc89fda41b3ad9d934">opcua::Variant::getScalarCopy</a></div><div class="ttdeci">T getScalarCopy() const</div><div class="ttdoc">Get copy of scalar value with given template type.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00148">Variant.h:148</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Variant_html_a745da34378602215fd443e3b229d5c23"><div class="ttname"><a href="classopcua_1_1Variant.html#a745da34378602215fd443e3b229d5c23">opcua::Variant::getArrayCopy</a></div><div class="ttdeci">std::vector&lt; T &gt; getArrayCopy() const</div><div class="ttdoc">Get copy of array with given template type and return it as a std::vector.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00166">Variant.h:166</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html_a0f7d377bfecd10cc89fda41b3ad9d934"><div class="ttname"><a href="classopcua_1_1Variant.html#a0f7d377bfecd10cc89fda41b3ad9d934">opcua::Variant::getScalarCopy</a></div><div class="ttdeci">T getScalarCopy() const</div><div class="ttdoc">Get copy of scalar value with given template type.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00229">Variant.h:229</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html_a745da34378602215fd443e3b229d5c23"><div class="ttname"><a href="classopcua_1_1Variant.html#a745da34378602215fd443e3b229d5c23">opcua::Variant::getArrayCopy</a></div><div class="ttdeci">std::vector&lt; T &gt; getArrayCopy() const</div><div class="ttdoc">Get copy of array with given template type and return it as a std::vector.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00247">Variant.h:247</a></div></div>
 <div class="ttc" id="aclassopcua_1_1BadVariantAccess_html"><div class="ttname"><a href="classopcua_1_1BadVariantAccess.html">opcua::BadVariantAccess</a></div><div class="ttdef"><b>Definition:</b> <a href="ErrorHandling_8h_source.html#l00027">ErrorHandling.h:27</a></div></div>
 <div class="ttc" id="anamespaceopcua_html_adc25953f10b26dc1213b1033d44f5966a492f18b60811bf85ce118c0c6a1a5c4a"><div class="ttname"><a href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966a492f18b60811bf85ce118c0c6a1a5c4a">opcua::Type::Variant</a></div><div class="ttdeci">@ Variant</div></div>
 <div class="ttc" id="aHelper_8h_html"><div class="ttname"><a href="Helper_8h.html">Helper.h</a></div></div>
@@ -320,9 +395,10 @@ $(function() {
 <div class="ttc" id="anamespaceopcua_1_1detail_html_a6f6a9d9d89858dc4cd64637b4e252935"><div class="ttname"><a href="namespaceopcua_1_1detail.html#a6f6a9d9d89858dc4cd64637b4e252935">opcua::detail::IsTypeWrapper</a></div><div class="ttdeci">decltype(isTypeWrapperImpl(std::declval&lt; T * &gt;())) IsTypeWrapper</div><div class="ttdef"><b>Definition:</b> <a href="TypeWrapper_8h_source.html#l00186">TypeWrapper.h:186</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Variant_html_a54698bd6ada60d5f20556403f1e4d163"><div class="ttname"><a href="classopcua_1_1Variant.html#a54698bd6ada60d5f20556403f1e4d163">opcua::Variant::getArrayLength</a></div><div class="ttdeci">size_t getArrayLength() const noexcept</div><div class="ttdoc">Get array length or 0 if variant is not an array.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8cpp_source.html#l00044">Variant.cpp:44</a></div></div>
 <div class="ttc" id="astructUA__DataType_html"><div class="ttname"><a href="open62541/structUA__DataType.html">UA_DataType</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Variant_html_afae3ba56203f2cbbd7a5ee7b4d7dcb5b"><div class="ttname"><a href="classopcua_1_1Variant.html#afae3ba56203f2cbbd7a5ee7b4d7dcb5b">opcua::Variant::setScalar</a></div><div class="ttdeci">void setScalar(T &amp;value) noexcept</div><div class="ttdoc">Assign scalar value to variant.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00175">Variant.h:175</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html_afae3ba56203f2cbbd7a5ee7b4d7dcb5b"><div class="ttname"><a href="classopcua_1_1Variant.html#afae3ba56203f2cbbd7a5ee7b4d7dcb5b">opcua::Variant::setScalar</a></div><div class="ttdeci">void setScalar(T &amp;value) noexcept</div><div class="ttdoc">Assign scalar value to variant.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00256">Variant.h:256</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html_ac99619ea9e1b6f0774abf36c5c97a934"><div class="ttname"><a href="classopcua_1_1Variant.html#ac99619ea9e1b6f0774abf36c5c97a934">opcua::Variant::fromArray</a></div><div class="ttdeci">static Variant fromArray(T *array, size_t size)</div><div class="ttdoc">Create Variant from array (no copy if assignable without conversion)</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00183">Variant.h:183</a></div></div>
 <div class="ttc" id="astructUA__Variant_html_ada37e83e1c07bafef77b7132403e1456"><div class="ttname"><a href="open62541/structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">UA_Variant::data</a></div><div class="ttdeci">void * data</div></div>
-<div class="ttc" id="aclassopcua_1_1Variant_html_a2e6c68f65d930dd8108dad49d842a624"><div class="ttname"><a href="classopcua_1_1Variant.html#a2e6c68f65d930dd8108dad49d842a624">opcua::Variant::setScalarCopy</a></div><div class="ttdeci">void setScalarCopy(const T &amp;value)</div><div class="ttdoc">Copy scalar value to variant.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00190">Variant.h:190</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html_a2e6c68f65d930dd8108dad49d842a624"><div class="ttname"><a href="classopcua_1_1Variant.html#a2e6c68f65d930dd8108dad49d842a624">opcua::Variant::setScalarCopy</a></div><div class="ttdeci">void setScalarCopy(const T &amp;value)</div><div class="ttdoc">Copy scalar value to variant.</div><div class="ttdef"><b>Definition:</b> <a href="Variant_8h_source.html#l00271">Variant.h:271</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
