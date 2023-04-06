@@ -1,4 +1,5 @@
 #include <array>
+#include <utility>  // move
 #include <vector>
 
 #include <catch2/catch_template_test_macros.hpp>
@@ -334,7 +335,7 @@ TEST_CASE("Variant") {
 }
 
 TEST_CASE("DataValue") {
-    SECTION("Empty variant") {
+    SECTION("Constructor with all optional parameter empty") {
         DataValue dv({}, {}, {}, {}, {}, {});
         CHECK(dv.getValue().has_value());
         CHECK_FALSE(dv.getSourceTimestamp().has_value());
@@ -344,7 +345,7 @@ TEST_CASE("DataValue") {
         CHECK_FALSE(dv.getStatusCode().has_value());
     }
 
-    SECTION("All specified") {
+    SECTION("Constructor with all optional parameter specified") {
         Variant var;
         DataValue dv(var, DateTime{1}, DateTime{2}, 3, 4, 5);
         CHECK(dv.getValue().has_value());
@@ -357,10 +358,19 @@ TEST_CASE("DataValue") {
 
     SECTION("Setter methods") {
         DataValue dv;
-        SECTION("Value") {
+        SECTION("Value (move)") {
+            float value = 11.11f;
             Variant var;
-            const float value = 11.11f;
-            var.setScalarCopy(value);
+            var.setScalar(value);
+            REQUIRE(var->data == &value);
+            dv.setValue(std::move(var));
+            REQUIRE(dv.getValue().value().getScalar<float>() == value);
+            REQUIRE(dv->value.data == &value);
+        }
+        SECTION("Value (copy)") {
+            float value = 11.11f;
+            Variant var;
+            var.setScalar(value);
             dv.setValue(var);
             REQUIRE(dv.getValue().value().getScalar<float>() == value);
         }

@@ -45,6 +45,8 @@ public:
 
     /// Set value (copy).
     void setValue(const Variant& value);
+    /// Set value (move).
+    void setValue(Variant&& value);
     /// Set source timestamp for the value.
     void setSourceTimestamp(DateTime sourceTimestamp);
     /// Set server timestamp for the value.

@@ -88,6 +88,11 @@ void DataValue::setValue(const Variant& value) {
     handle()->hasValue = true;
 }
 
+void DataValue::setValue(Variant&& value) {
+    value.swap(handle()->value);
+    handle()->hasValue = true;
+}
+
 void DataValue::setSourceTimestamp(DateTime sourceTimestamp) {
     handle()->sourceTimestamp = *sourceTimestamp.handle();
     handle()->hasSourceTimestamp = true;
