@@ -16,12 +16,12 @@ var searchData=
   ['setsourcepicoseconds_3013',['setSourcePicoseconds',['../classopcua_1_1DataValue.html#af2705bc80a9710fc0d075da998a298f7',1,'opcua::DataValue']]],
   ['setsourcetimestamp_3014',['setSourceTimestamp',['../classopcua_1_1DataValue.html#ac16e00429df8b7fa7917acc1182166ed',1,'opcua::DataValue']]],
   ['setstatuscode_3015',['setStatusCode',['../classopcua_1_1DataValue.html#aeaf91afea3e6e042ed4320e2e5b2a96e',1,'opcua::DataValue']]],
-  ['setvalue_3016',['setValue',['../classopcua_1_1DataValue.html#aeeb04edf684c2157076679ac5f2047b8',1,'opcua::DataValue']]],
+  ['setvalue_3016',['setValue',['../classopcua_1_1DataValue.html#aeeb04edf684c2157076679ac5f2047b8',1,'opcua::DataValue::setValue(const Variant &amp;value)'],['../classopcua_1_1DataValue.html#aaa22ac2b62ed1da7507b15a3286cfe58',1,'opcua::DataValue::setValue(Variant &amp;&amp;value)']]],
   ['simpleq_5fentry_3017',['SIMPLEQ_ENTRY',['open62541/structUA__Chunk.html#aa2596c67f92f4ea19dbff4d62e5faf32',0,'UA_Chunk']]],
   ['size_3018',['size',['../structopcua_1_1TypeList.html#a236759ef82c78228f404b699803ad184',1,'opcua::TypeList']]],
   ['slist_5fentry_3019',['SLIST_ENTRY',['open62541/structUA__SessionHeader.html#afdeeb3e94857d5ae45d44a730ceb45f0',0,'UA_SessionHeader']]],
   ['slist_5fhead_3020',['SLIST_HEAD',['open62541/structUA__SecureChannel.html#aa561716b8323852d9809c156ca68384e',0,'UA_SecureChannel']]],
   ['stop_3021',['stop',['../classopcua_1_1Server.html#a51f8bc0f79b2e5cea8fc094c58a76a9c',1,'opcua::Server::stop()'],['../classopcua_1_1Server_1_1Connection.html#ac9f453a6745476bd5500205eaaad9729',1,'opcua::Server::Connection::stop()']]],
   ['string_3022',['String',['../classopcua_1_1String.html#ac58c1e3f65de50a5edad1f734d73aef4',1,'opcua::String']]],
-  ['swap_3023',['swap',['../classopcua_1_1TypeWrapper.html#a94a8f29763ebca5b66a0b7fb2fc9bdf0',1,'opcua::TypeWrapper']]]
+  ['swap_3023',['swap',['../classopcua_1_1TypeWrapper.html#a94a8f29763ebca5b66a0b7fb2fc9bdf0',1,'opcua::TypeWrapper::swap(TypeWrapper &amp;other) noexcept'],['../classopcua_1_1TypeWrapper.html#ae5799ed8e4e7a2c7ce6c3b40dc47eee3',1,'opcua::TypeWrapper::swap(T &amp;other) noexcept']]]
 ];
