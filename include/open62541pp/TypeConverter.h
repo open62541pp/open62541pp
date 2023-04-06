@@ -69,11 +69,12 @@ constexpr void assertTypeCombination() {
 
 template <typename T>
 constexpr Type guessType() {
+    using ValueType = typename std::remove_cv_t<std::remove_reference_t<T>>;
     static_assert(
-        TypeConverter<T>::ValidTypes::size() == 1,
+        TypeConverter<ValueType>::ValidTypes::size() == 1,
         "Ambiguous template type, please specify type enum (opcua::Type) manually"
     );
-    return TypeConverter<T>::ValidTypes::toArray().at(0);
+    return TypeConverter<ValueType>::ValidTypes::toArray().at(0);
 }
 
 template <typename It>

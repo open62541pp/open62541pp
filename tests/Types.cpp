@@ -207,6 +207,53 @@ TEST_CASE("Variant") {
         }
     }
 
+    SECTION("Create from scalar") {
+        SECTION("Assign if possible") {
+            double value = 11.11;
+            const auto var = Variant::fromScalar(value);
+            REQUIRE(var.isScalar());
+            REQUIRE(var->data == &value);
+        }
+        SECTION("Copy if const") {
+            const double value = 11.11;
+            const auto var = Variant::fromScalar(value);
+            REQUIRE(var.isScalar());
+            REQUIRE(var->data != &value);
+        }
+        SECTION("Copy rvalue") {
+            auto var = Variant::fromScalar(11.11);
+            REQUIRE(var.isScalar());
+            REQUIRE(var.getScalar<double>() == 11.11);
+        }
+        SECTION("Copy if not assignable (const or conversion required)") {
+            std::string value{"test"};
+            const auto var = Variant::fromScalar<std::string, Type::String>(value);
+            REQUIRE(var.isScalar());
+            REQUIRE(var->data != &value);
+        }
+    }
+
+    SECTION("Create from array") {
+        SECTION("Assign if possible") {
+            std::vector<double> vec{1.1, 2.2, 3.3};
+            const auto var = Variant::fromArray(vec.data(), vec.size());
+            REQUIRE(var.isArray());
+            REQUIRE(var->data == vec.data());
+        }
+        SECTION("Copy if const") {
+            const std::vector<double> vec{1.1, 2.2, 3.3};
+            const auto var = Variant::fromArray(vec);
+            REQUIRE(var.isArray());
+            REQUIRE(var->data != vec.data());
+        }
+        SECTION("Copy from iterator") {
+            const std::vector<double> vec{1.1, 2.2, 3.3};
+            const auto var = Variant::fromArray(vec.begin(), vec.end());
+            REQUIRE(var.isArray());
+            REQUIRE(var->data != vec.data());
+        }
+    }
+
     SECTION("Set/get scalar") {
         Variant var;
         int32_t value = 5;
