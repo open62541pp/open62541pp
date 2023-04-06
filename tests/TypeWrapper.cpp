@@ -111,6 +111,20 @@ TEST_CASE("TypeWrapper") {
         REQUIRE(wrapper2.handle()->data != nullptr);
         REQUIRE_THAT(detail::toString(*wrapper2.handle()), Equals("test"));
     }
+
+    SECTION("Swap with native object") {
+        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper;
+        UA_String str = UA_STRING_ALLOC("test");
+
+        REQUIRE(wrapper.handle()->data == nullptr);
+        REQUIRE(str.data != nullptr);
+
+        wrapper.swap(str);
+        REQUIRE(wrapper.handle()->data != nullptr);
+        REQUIRE(str.data == nullptr);
+
+        // UA_String_clear not necessary, because data is now owned by wrapper
+    }
 }
 
 TEMPLATE_TEST_CASE_SIG(

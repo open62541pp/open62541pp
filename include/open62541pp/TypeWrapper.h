@@ -114,10 +114,16 @@ public:
         return &data_;
     }
 
-    /// Swap objects.
+    /// Swap with wrapper object.
     void swap(TypeWrapper& other) noexcept {
         static_assert(std::is_swappable_v<T>);
-        std::swap(this->data_, other.data_);
+        std::swap(data_, other.data_);
+    }
+
+    /// Swap with native object.
+    void swap(T& other) noexcept {
+        static_assert(std::is_swappable_v<T>);
+        std::swap(data_, other);
     }
 
     /// Get type as type index.
