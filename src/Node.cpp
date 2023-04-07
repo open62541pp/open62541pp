@@ -5,6 +5,7 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Helper.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/services/NodeManagement.h"
 
 #include "open62541_impl.h"
 #include "version.h"
@@ -35,18 +36,7 @@ const NodeId& Node::getNodeId() const noexcept {
 }
 
 Node Node::addFolder(const NodeId& id, std::string_view browseName, ReferenceType referenceType) {
-    const auto status = UA_Server_addObjectNode(
-        server_.handle(),  // server
-        id,  // new requested id
-        nodeId_,  // parent id
-        detail::getUaNodeId(referenceType),  // reference id
-        QualifiedName(id.getNamespaceIndex(), browseName),  // browse name
-        UA_NODEID_NUMERIC(0, UA_NS0ID_FOLDERTYPE),  // type definition
-        UA_ObjectAttributes_default,  // object attributes
-        nullptr,  // node context
-        nullptr  // output new node id
-    );
-    detail::throwOnBadStatus(status);
+    services::addFolder(server_, nodeId_, id, browseName, referenceType);
     return {server_, id};
 }
 
@@ -56,18 +46,7 @@ Node Node::addObject(
     const NodeId& objectType,
     ReferenceType referenceType
 ) {
-    const auto status = UA_Server_addObjectNode(
-        server_.handle(),  // server
-        id,  // new requested id
-        nodeId_,  // parent id
-        detail::getUaNodeId(referenceType),  // reference id
-        QualifiedName(id.getNamespaceIndex(), browseName),  // browse name
-        objectType,  // type definition
-        UA_ObjectAttributes_default,  // object attributes
-        nullptr,  // node context
-        nullptr  // output new node id
-    );
-    detail::throwOnBadStatus(status);
+    services::addObject(server_, nodeId_, id, browseName, objectType, referenceType);
     return {server_, id};
 }
 
@@ -77,51 +56,19 @@ Node Node::addVariable(
     const NodeId& variableType,
     ReferenceType referenceType
 ) {
-    const auto status = UA_Server_addVariableNode(
-        server_.handle(),  // server
-        id,  // new requested id
-        nodeId_,  // parent id
-        detail::getUaNodeId(referenceType),  // reference id
-        QualifiedName(id.getNamespaceIndex(), browseName),  // browse name
-        variableType,  // type definition
-        UA_VariableAttributes_default,  // variable attributes
-        nullptr,  // node context
-        nullptr  // output new node id
-    );
-    detail::throwOnBadStatus(status);
+    services::addVariable(server_, nodeId_, id, browseName, variableType, referenceType);
     return {server_, id};
 }
 
 Node Node::addProperty(const NodeId& id, std::string_view browseName) {
-    const auto status = UA_Server_addVariableNode(
-        server_.handle(),  // server
-        id,  // new requested id
-        nodeId_,  // parent id
-        UA_NODEID_NUMERIC(0, UA_NS0ID_HASPROPERTY),  // reference id
-        QualifiedName(id.getNamespaceIndex(), browseName),  // browse name
-        UA_NODEID_NUMERIC(0, UA_NS0ID_PROPERTYTYPE),  // type definition
-        UA_VariableAttributes_default,  // variable attributes
-        nullptr,  // node context
-        nullptr  // output new node id
-    );
-    detail::throwOnBadStatus(status);
+    services::addProperty(server_, nodeId_, id, browseName);
     return {server_, id};
 }
 
 Node Node::addObjectType(
     const NodeId& id, std::string_view browseName, ReferenceType referenceType
 ) {
-    const auto status = UA_Server_addObjectTypeNode(
-        server_.handle(),  // server
-        id,  // new requested id
-        nodeId_,  // parent id
-        detail::getUaNodeId(referenceType),  // reference id
-        QualifiedName(id.getNamespaceIndex(), browseName),  // browse name
-        UA_ObjectTypeAttributes_default,  // object attributes
-        nullptr,  // node context
-        nullptr  // output new node id
-    );
-    detail::throwOnBadStatus(status);
+    services::addObjectType(server_, nodeId_, id, browseName, referenceType);
     return {server_, id};
 }
 
@@ -131,30 +78,16 @@ Node Node::addVariableType(
     const NodeId& variableType,
     ReferenceType referenceType
 ) {
-    const auto status = UA_Server_addVariableTypeNode(
-        server_.handle(),  // server
-        id,  // new requested id
-        nodeId_,  // parent id
-        detail::getUaNodeId(referenceType),  // reference id
-        QualifiedName(id.getNamespaceIndex(), browseName),  // browse name
-        variableType,  // type definition
-        UA_VariableTypeAttributes_default,  // variable attributes
-        nullptr,  // node context
-        nullptr  // output new node id
-    );
-    detail::throwOnBadStatus(status);
+    services::addVariableType(server_, nodeId_, id, browseName, variableType, referenceType);
     return {server_, id};
 }
 
-void Node::addReference(const NodeId& target, ReferenceType referenceType, bool forward) {
-    const auto status = UA_Server_addReference(
-        server_.handle(),  // server
-        nodeId_,  // source id
-        detail::getUaNodeId(referenceType),  // reference id
-        ExpandedNodeId(target, {}, 0),  // target id
-        forward  // forward
-    );
-    detail::throwOnBadStatus(status);
+void Node::addReference(const NodeId& targetId, ReferenceType referenceType, bool forward) {
+    services::addReference(server_, nodeId_, targetId, referenceType, forward);
+}
+
+void Node::deleteNode(bool deleteReferences) {
+    services::deleteNode(server_, nodeId_, deleteReferences);
 }
 
 Node Node::getChild(const std::vector<QualifiedName>& path) {
@@ -331,11 +264,6 @@ void Node::writeDataValue(const DataValue& value) {
 
 void Node::writeValue(const Variant& var) {
     const auto status = UA_Server_writeValue(server_.handle(), nodeId_, var);
-    detail::throwOnBadStatus(status);
-}
-
-void Node::deleteNode(bool deleteReferences) {
-    const auto status = UA_Server_deleteNode(server_.handle(), nodeId_, deleteReferences);
     detail::throwOnBadStatus(status);
 }
 

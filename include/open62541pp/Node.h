@@ -35,14 +35,14 @@ public:
     /// Get node id.
     const NodeId& getNodeId() const noexcept;
 
-    /// Add child folder to node.
+    /// @copydoc services::addFolder
     Node addFolder(
         const NodeId& id,
         std::string_view browseName,
         ReferenceType referenceType = ReferenceType::HasComponent
     );
 
-    /// Add child object to node.
+    /// @copydoc services::addObject
     Node addObject(
         const NodeId& id,
         std::string_view browseName,
@@ -50,7 +50,7 @@ public:
         ReferenceType referenceType = ReferenceType::HasComponent
     );
 
-    /// Add child variable to node.
+    /// @copydoc services::addVariable
     Node addVariable(
         const NodeId& id,
         std::string_view browseName,
@@ -58,17 +58,17 @@ public:
         ReferenceType referenceType = ReferenceType::HasComponent
     );
 
-    /// Add child property to node.
+    /// @copydoc services::addProperty
     Node addProperty(const NodeId& id, std::string_view browseName);
 
-    /// Add child object type to node.
+    /// @copydoc services::addObjectType
     Node addObjectType(
         const NodeId& id,
         std::string_view browseName,
         ReferenceType referenceType = ReferenceType::HasSubType
     );
 
-    /// Add child variable type to node.
+    /// @copydoc services::addVariableType
     Node addVariableType(
         const NodeId& id,
         std::string_view browseName,
@@ -76,8 +76,11 @@ public:
         ReferenceType referenceType = ReferenceType::HasSubType
     );
 
-    /// Add reference.
-    void addReference(const NodeId& target, ReferenceType referenceType, bool forward = true);
+    /// @copydoc services::addReference
+    void addReference(const NodeId& targetId, ReferenceType referenceType, bool forward = true);
+
+    /// @copydoc services::deleteNode
+    void deleteNode(bool deleteReferences = true);
 
     /// Get a child specified by its path from this node (only local nodes).
     /// @exception BadStatus If path not found (BadNoMatch)
@@ -177,9 +180,6 @@ public:
     /// Write range of elements as array to variable node.
     template <typename InputIt, Type type = detail::guessTypeFromIterator<InputIt>()>
     void writeArray(InputIt first, InputIt last);
-
-    /// Remove this node.
-    void deleteNode(bool deleteReferences = true);
 
 private:
     Server server_;

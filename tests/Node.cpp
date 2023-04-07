@@ -195,16 +195,6 @@ TEST_CASE("Node") {
         }
     }
 
-    SECTION("Remove node") {
-        const NodeId id(1, "testObj");
-
-        auto node = server.getObjectsNode().addObject(id, "obj");
-        REQUIRE_NOTHROW(Node(server, id));
-
-        node.deleteNode();
-        REQUIRE_THROWS(Node(server, id));
-    }
-
     SECTION("Equality") {
         REQUIRE(server.getRootNode() == server.getRootNode());
         REQUIRE(server.getRootNode() != server.getObjectsNode());

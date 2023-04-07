@@ -17,6 +17,7 @@ add_executable(
     Helper.cpp
     Node.cpp
     Server.cpp
+    Services.cpp
     TypeConverter.cpp
     Types.cpp
     TypeWrapper.cpp
