@@ -8,16 +8,6 @@
 
 namespace opcua::services {
 
-void addFolder(
-    Server& server,
-    const NodeId& parentId,
-    const NodeId& id,
-    std::string_view browseName,
-    ReferenceType referenceType
-) {
-    addObject(server, parentId, id, browseName, {0, UA_NS0ID_FOLDERTYPE}, referenceType);
-}
-
 void addObject(
     Server& server,
     const NodeId& parentId,
@@ -60,14 +50,6 @@ void addVariable(
         nullptr  // output new node id
     );
     detail::throwOnBadStatus(status);
-}
-
-void addProperty(
-    Server& server, const NodeId& parentId, const NodeId& id, std::string_view browseName
-) {
-    addVariable(
-        server, parentId, id, browseName, {0, UA_NS0ID_PROPERTYTYPE}, ReferenceType::HasProperty
-    );
 }
 
 void addObjectType(

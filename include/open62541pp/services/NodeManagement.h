@@ -19,19 +19,6 @@ namespace opcua::services {
  */
 
 /**
- * Add child folder to node.
- * @exception BadStatus
- * @ingroup NodeManagement
- */
-void addFolder(
-    Server& server,
-    const NodeId& parentId,
-    const NodeId& id,
-    std::string_view browseName,
-    ReferenceType referenceType = ReferenceType::HasComponent
-);
-
-/**
  * Add child object to node.
  * @exception BadStatus
  * @ingroup NodeManagement
@@ -44,6 +31,21 @@ void addObject(
     const NodeId& objectType = {0, UA_NS0ID_BASEOBJECTTYPE},
     ReferenceType referenceType = ReferenceType::HasComponent
 );
+
+/**
+ * Add child folder to node.
+ * @exception BadStatus
+ * @ingroup NodeManagement
+ */
+inline void addFolder(
+    Server& server,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    ReferenceType referenceType = ReferenceType::HasComponent
+) {
+    addObject(server, parentId, id, browseName, {0, UA_NS0ID_FOLDERTYPE}, referenceType);
+}
 
 /**
  * Add child variable to node.
@@ -64,9 +66,13 @@ void addVariable(
  * @exception BadStatus
  * @ingroup NodeManagement
  */
-void addProperty(
+inline void addProperty(
     Server& server, const NodeId& parentId, const NodeId& id, std::string_view browseName
-);
+) {
+    addVariable(
+        server, parentId, id, browseName, {0, UA_NS0ID_PROPERTYTYPE}, ReferenceType::HasProperty
+    );
+}
 
 /**
  * Add child object type to node.

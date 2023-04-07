@@ -8,7 +8,8 @@
 #include "open62541pp/Common.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeConverter.h"  // guessType
-#include "open62541pp/TypeWrapper.h"
+#include "open62541pp/services/Attribute.h"
+#include "open62541pp/services/NodeManagement.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/NodeId.h"
@@ -28,19 +29,29 @@ public:
     Node(const Server& server, const NodeId& id);
 
     /// Get server instance.
-    Server& getServer() noexcept;
+    Server& getServer() noexcept {
+        return server_;
+    }
+
     /// Get server instance.
-    const Server& getServer() const noexcept;
+    const Server& getServer() const noexcept {
+        return server_;
+    }
 
     /// Get node id.
-    const NodeId& getNodeId() const noexcept;
+    const NodeId& getNodeId() const noexcept {
+        return nodeId_;
+    }
 
     /// @copydoc services::addFolder
     Node addFolder(
         const NodeId& id,
         std::string_view browseName,
         ReferenceType referenceType = ReferenceType::HasComponent
-    );
+    ) {
+        services::addFolder(server_, nodeId_, id, browseName, referenceType);
+        return {server_, id};
+    }
 
     /// @copydoc services::addObject
     Node addObject(
@@ -48,7 +59,10 @@ public:
         std::string_view browseName,
         const NodeId& objectType = {0, UA_NS0ID_BASEOBJECTTYPE},
         ReferenceType referenceType = ReferenceType::HasComponent
-    );
+    ) {
+        services::addObject(server_, nodeId_, id, browseName, objectType, referenceType);
+        return {server_, id};
+    }
 
     /// @copydoc services::addVariable
     Node addVariable(
@@ -56,17 +70,26 @@ public:
         std::string_view browseName,
         const NodeId& variableType = {0, UA_NS0ID_BASEDATAVARIABLETYPE},
         ReferenceType referenceType = ReferenceType::HasComponent
-    );
+    ) {
+        services::addVariable(server_, nodeId_, id, browseName, variableType, referenceType);
+        return {server_, id};
+    }
 
     /// @copydoc services::addProperty
-    Node addProperty(const NodeId& id, std::string_view browseName);
+    Node addProperty(const NodeId& id, std::string_view browseName) {
+        services::addProperty(server_, nodeId_, id, browseName);
+        return {server_, id};
+    }
 
     /// @copydoc services::addObjectType
     Node addObjectType(
         const NodeId& id,
         std::string_view browseName,
         ReferenceType referenceType = ReferenceType::HasSubType
-    );
+    ) {
+        services::addObjectType(server_, nodeId_, id, browseName, referenceType);
+        return {server_, id};
+    }
 
     /// @copydoc services::addVariableType
     Node addVariableType(
@@ -74,50 +97,79 @@ public:
         std::string_view browseName,
         const NodeId& variableType = {0, UA_NS0ID_BASEDATAVARIABLETYPE},
         ReferenceType referenceType = ReferenceType::HasSubType
-    );
+    ) {
+        services::addVariableType(server_, nodeId_, id, browseName, variableType, referenceType);
+        return {server_, id};
+    }
 
     /// @copydoc services::addReference
-    void addReference(const NodeId& targetId, ReferenceType referenceType, bool forward = true);
+    void addReference(const NodeId& targetId, ReferenceType referenceType, bool forward = true) {
+        services::addReference(server_, nodeId_, targetId, referenceType, forward);
+    }
 
     /// @copydoc services::deleteNode
-    void deleteNode(bool deleteReferences = true);
+    void deleteNode(bool deleteReferences = true) {
+        services::deleteNode(server_, nodeId_, deleteReferences);
+    }
 
     /// Get a child specified by its path from this node (only local nodes).
     /// @exception BadStatus If path not found (BadNoMatch)
     Node getChild(const std::vector<QualifiedName>& path);
 
     /// @copydoc services::readNodeClass
-    NodeClass readNodeClass();
+    NodeClass readNodeClass() {
+        return services::readNodeClass(server_, nodeId_);
+    }
 
     /// @copydoc services::readBrowseName
-    std::string readBrowseName();
+    std::string readBrowseName() {
+        return services::readBrowseName(server_, nodeId_);
+    }
 
     /// @copydoc services::readDisplayName
-    LocalizedText readDisplayName();
+    LocalizedText readDisplayName() {
+        return services::readDisplayName(server_, nodeId_);
+    }
 
     /// @copydoc services::readDescription
-    LocalizedText readDescription();
+    LocalizedText readDescription() {
+        return services::readDescription(server_, nodeId_);
+    }
 
     /// @copydoc services::readWriteMask
-    uint32_t readWriteMask();
+    uint32_t readWriteMask() {
+        return services::readWriteMask(server_, nodeId_);
+    }
 
     /// @copydoc services::readDataType
-    NodeId readDataType();
+    NodeId readDataType() {
+        return services::readDataType(server_, nodeId_);
+    }
 
     /// @copydoc services::readValueRank
-    ValueRank readValueRank();
+    ValueRank readValueRank() {
+        return services::readValueRank(server_, nodeId_);
+    }
 
     /// @copydoc services::readArrayDimensions
-    std::vector<uint32_t> readArrayDimensions();
+    std::vector<uint32_t> readArrayDimensions() {
+        return services::readArrayDimensions(server_, nodeId_);
+    }
 
     /// @copydoc services::readAccessLevel
-    uint8_t readAccessLevel();
+    uint8_t readAccessLevel() {
+        return services::readAccessLevel(server_, nodeId_);
+    }
 
     /// @copydoc services::readDataValue
-    void readDataValue(DataValue& value);
+    void readDataValue(DataValue& value) {
+        services::readDataValue(server_, nodeId_, value);
+    }
 
     /// @copydoc services::readValue
-    void readValue(Variant& value);
+    void readValue(Variant& value) {
+        services::readValue(server_, nodeId_, value);
+    }
 
     /// Read scalar from variable node.
     template <typename T>
@@ -128,37 +180,59 @@ public:
     std::vector<T> readArray();
 
     /// @copydoc services::writeDisplayName
-    void writeDisplayName(std::string_view name, std::string_view locale);
+    void writeDisplayName(std::string_view name, std::string_view locale) {
+        services::writeDisplayName(server_, nodeId_, name, locale);
+    }
 
     /// @copydoc services::writeDescription
-    void writeDescription(std::string_view name, std::string_view locale);
+    void writeDescription(std::string_view name, std::string_view locale) {
+        services::writeDescription(server_, nodeId_, name, locale);
+    }
 
     /// @copydoc services::writeWriteMask
-    void writeWriteMask(uint32_t mask);
+    void writeWriteMask(uint32_t mask) {
+        services::writeWriteMask(server_, nodeId_, mask);
+    }
 
     /// @copydoc services::writeDataType(Server&, const NodeId&, Type)
-    void writeDataType(Type type);
+    void writeDataType(Type type) {
+        services::writeDataType(server_, nodeId_, type);
+    }
 
     /// @copydoc services::writeDataType(Server&, const NodeId&, const NodeId&)
-    void writeDataType(const NodeId& typeId);
+    void writeDataType(const NodeId& typeId) {
+        services::writeDataType(server_, nodeId_, typeId);
+    }
 
     /// @copydoc services::writeValueRank
-    void writeValueRank(ValueRank valueRank);
+    void writeValueRank(ValueRank valueRank) {
+        services::writeValueRank(server_, nodeId_, valueRank);
+    }
 
     /// @copydoc services::writeArrayDimensions
-    void writeArrayDimensions(const std::vector<uint32_t>& dimensions);
+    void writeArrayDimensions(const std::vector<uint32_t>& dimensions) {
+        services::writeArrayDimensions(server_, nodeId_, dimensions);
+    }
 
     /// @copydoc services::writeAccessLevel
-    void writeAccessLevel(uint8_t mask);
+    void writeAccessLevel(uint8_t mask) {
+        services::writeAccessLevel(server_, nodeId_, mask);
+    }
 
     /// @copydoc services::writeModellingRule
-    void writeModellingRule(ModellingRule rule);
+    void writeModellingRule(ModellingRule rule) {
+        services::writeModellingRule(server_, nodeId_, rule);
+    }
 
     /// @copydoc services::writeDataValue
-    void writeDataValue(const DataValue& value);
+    void writeDataValue(const DataValue& value) {
+        services::writeDataValue(server_, nodeId_, value);
+    }
 
     /// @copydoc services::writeValue
-    void writeValue(const Variant& value);
+    void writeValue(const Variant& value) {
+        services::writeValue(server_, nodeId_, value);
+    }
 
     /// Write scalar to variable node.
     template <typename T, Type type = detail::guessType<T>()>
