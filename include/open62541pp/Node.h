@@ -86,38 +86,38 @@ public:
     /// @exception BadStatus If path not found (BadNoMatch)
     Node getChild(const std::vector<QualifiedName>& path);
 
-    /// Get node class.
+    /// @copydoc services::readNodeClass
     NodeClass readNodeClass();
 
-    /// Get browse name.
+    /// @copydoc services::readBrowseName
     std::string readBrowseName();
 
-    /// Get localized display name.
+    /// @copydoc services::readDisplayName
     LocalizedText readDisplayName();
 
-    /// Get localized description.
+    /// @copydoc services::readDescription
     LocalizedText readDescription();
 
-    /// Get write mask, e.g. `::UA_WRITEMASK_ACCESSLEVEL | ::UA_WRITEMASK_DESCRIPTION`.
+    /// @copydoc services::readWriteMask
     uint32_t readWriteMask();
 
-    /// Get data type of variable (type) node as NodeId.
+    /// @copydoc services::readDataType
     NodeId readDataType();
 
-    /// Get value rank of variable (type) node.
+    /// @copydoc services::readValueRank
     ValueRank readValueRank();
 
-    /// Get array dimensions of variable (type) node.
+    /// @copydoc services::readArrayDimensions
     std::vector<uint32_t> readArrayDimensions();
 
-    /// Get access level mask of variable node, e.g. `::UA_ACCESSLEVELMASK_READ`.
+    /// @copydoc services::readAccessLevel
     uint8_t readAccessLevel();
 
-    /// Read value from variable node as DataValue object.
+    /// @copydoc services::readDataValue
     void readDataValue(DataValue& value);
 
-    /// Read value from variable node as Variant object.
-    void readValue(Variant& variant);
+    /// @copydoc services::readValue
+    void readValue(Variant& value);
 
     /// Read scalar from variable node.
     template <typename T>
@@ -127,43 +127,38 @@ public:
     template <typename T>
     std::vector<T> readArray();
 
-    /// Set localized display name.
+    /// @copydoc services::writeDisplayName
     void writeDisplayName(std::string_view name, std::string_view locale);
 
-    /// Set localized description.
+    /// @copydoc services::writeDescription
     void writeDescription(std::string_view name, std::string_view locale);
 
-    /// Set write mask, e.g. `::UA_WRITEMASK_ACCESSLEVEL | ::UA_WRITEMASK_DESCRIPTION`.
+    /// @copydoc services::writeWriteMask
     void writeWriteMask(uint32_t mask);
 
-    /// Set data type of variable (type) node.
+    /// @copydoc services::writeDataType(Server&, const NodeId&, Type)
     void writeDataType(Type type);
 
-    /// Set data type of variable (type) node by node id.
+    /// @copydoc services::writeDataType(Server&, const NodeId&, const NodeId&)
     void writeDataType(const NodeId& typeId);
 
-    /// Set value rank of variable (type) node.
+    /// @copydoc services::writeValueRank
     void writeValueRank(ValueRank valueRank);
 
-    /// Set array dimensions of variable (type) node.
-    /// Should be unspecified if ValueRank is <= 0 (ValueRank::Any, ValueRank::Scalar,
-    /// ValueRank::ScalarOrOneDimension, ValueRank::OneOrMoreDimensions). The dimension zero is a
-    /// wildcard and the actual value may have any length in this dimension.
+    /// @copydoc services::writeArrayDimensions
     void writeArrayDimensions(const std::vector<uint32_t>& dimensions);
 
-    /// Set access level mask of variable node,
-    /// e.g. `::UA_ACCESSLEVELMASK_READ | ::UA_ACCESSLEVELMASK_WRITE`.
+    /// @copydoc services::writeAccessLevel
     void writeAccessLevel(uint8_t mask);
 
-    /// Set modelling rule.
+    /// @copydoc services::writeModellingRule
     void writeModellingRule(ModellingRule rule);
 
-    /// Write DataValue to variable node.
-    /// @note open62541 version >=1.1 required
+    /// @copydoc services::writeDataValue
     void writeDataValue(const DataValue& value);
 
-    /// Write Variant to variable node.
-    void writeValue(const Variant& variant);
+    /// @copydoc services::writeValue
+    void writeValue(const Variant& value);
 
     /// Write scalar to variable node.
     template <typename T, Type type = detail::guessType<T>()>

@@ -7,4 +7,5 @@
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/
  */
 
+#include "open62541pp/services/Attribute.h"
 #include "open62541pp/services/NodeManagement.h"

@@ -100,6 +100,7 @@ add_library(
     src/Helper.cpp
     src/Node.cpp
     src/Server.cpp
+    src/services/Attribute.cpp
     src/services/NodeManagement.cpp
     src/types/Builtin.cpp
     src/types/DataValue.cpp
