@@ -35,7 +35,7 @@ Features and goals:
 int main() {
     opcua::Server server;
 
-    const opcua::NodeId myIntegerNodeId{"the.answer", 1};
+    const opcua::NodeId myIntegerNodeId{1, "the.answer"};
     const std::string   myIntegerName{"the answer"};
 
     // add variable node
@@ -43,9 +43,9 @@ int main() {
     auto myIntegerNode = parentNode.addVariable(myIntegerNodeId, myIntegerName);
 
     // set node attributes
-    myIntegerNode.setDataType(opcua::Type::Int32);
-    myIntegerNode.setDisplayName("the answer", "en-US");
-    myIntegerNode.setDescription("the answer", "en-US");
+    myIntegerNode.writeDataType(opcua::Type::Int32);
+    myIntegerNode.writeDisplayName("en-US", "the answer");
+    myIntegerNode.writeDescription("en-US", "the answer");
 
     // write value
     myIntegerNode.writeScalar(42);
