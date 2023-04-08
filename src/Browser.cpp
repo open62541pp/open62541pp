@@ -38,19 +38,26 @@ std::vector<NodeClient> Browser::browse() {
     for(size_t i = 0; i < bResp.resultsSize; ++i) {
         for (size_t j = 0; j < bResp.results[i].referencesSize; ++j) {
             UA_ReferenceDescription* ref = &(bResp.results[i].references[j]);
+
+            NodeClient *node;
+
             if (ref->nodeId.nodeId.identifierType == UA_NODEIDTYPE_NUMERIC) {
-                NodeClient node(
+                node = new NodeClient(
                     d_->client, {ref->nodeId.nodeId.identifier.numeric, ref->nodeId.nodeId.namespaceIndex});
-                resp.emplace_back(std::move(node));
             } else if (ref->nodeId.nodeId.identifierType == UA_NODEIDTYPE_STRING) {
                 std::string strRef = detail::toString(ref->nodeId.nodeId.identifier.string);
-                NodeClient node(d_->client, {strRef, ref->nodeId.nodeId.namespaceIndex});
-                resp.emplace_back(std::move(node));
-            }
+                node = new NodeClient(d_->client, {strRef, ref->nodeId.nodeId.namespaceIndex});
+            } else
+                throw std::runtime_error("unknown node type");
+
+            node->setBrowseName(ref->browseName.namespaceIndex, detail::toString(ref->browseName.name));
+            node->setDisplayName1(detail::toString(ref->displayName.text));
+            resp.emplace_back(std::move(*node));
+
+            delete node;
+            node = nullptr;
         }
     }
     return resp;
 }
-
-
 } // namespace opcua

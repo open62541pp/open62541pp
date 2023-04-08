@@ -35,22 +35,39 @@ NodeClient::NodeClient(NodeClient const& other){
     client_ = other.client_;
     nodeId_ = other.nodeId_;
     nodeClass_ = other.nodeClass_;
+    browseName_ = other.browseName_;
+    displayName_ = other.displayName_;
+    isForwardReference_ = other.isForwardReference_;
+    namespaceIndex_ = other.namespaceIndex_;
 }
+
 NodeClient::NodeClient(NodeClient& other){
     client_ = other.client_;
     nodeId_ = other.nodeId_;
     nodeClass_ = other.nodeClass_;
+    browseName_ = other.browseName_;
+    displayName_ = other.displayName_;
+    isForwardReference_ = other.isForwardReference_;
+    namespaceIndex_ = other.namespaceIndex_;
 }
 NodeClient& NodeClient::operator=(NodeClient const& other){
     client_ = other.client_;
     nodeId_ = other.nodeId_;
     nodeClass_ = other.nodeClass_;
+    browseName_ = other.browseName_;
+    displayName_ = other.displayName_;
+    isForwardReference_ = other.isForwardReference_;
+    namespaceIndex_ = other.namespaceIndex_;
     return *this;
 }
 NodeClient& NodeClient::operator=(NodeClient& other){
     client_ = other.client_;
     nodeId_ = other.nodeId_;
     nodeClass_ = other.nodeClass_;
+    browseName_ = other.browseName_;
+    displayName_ = other.displayName_;
+    isForwardReference_ = other.isForwardReference_;
+    namespaceIndex_ = other.namespaceIndex_;
     return *this;
 }
 
@@ -58,11 +75,19 @@ NodeClient::NodeClient(NodeClient&& other){
     client_ = std::move(other.client_);
     nodeId_ = std::move(other.nodeId_);
     nodeClass_ = std::move(other.nodeClass_);
+    browseName_ = std::move(other.browseName_);
+    displayName_ = std::move(other.displayName_);
+    isForwardReference_ = other.isForwardReference_;
+    namespaceIndex_ = other.namespaceIndex_;
 }
 NodeClient& NodeClient::operator=(NodeClient&& other){
     client_ = std::move(other.client_);
     nodeId_ = std::move(other.nodeId_);
     nodeClass_ = std::move(other.nodeClass_);
+    browseName_ = std::move(other.browseName_);
+    displayName_ = std::move(other.displayName_);
+    isForwardReference_ = other.isForwardReference_;
+    namespaceIndex_ = other.namespaceIndex_;
     return *this;
 }
 
@@ -370,14 +395,27 @@ void NodeClient::remove(bool deleteReferences) {
     detail::throwOnBadStatus(status);
 }
 
+void NodeClient::setBrowseName(uint16_t namespaceIndex, const std::string& browseName) {
+    browseName_ = browseName;
+    namespaceIndex_ = namespaceIndex;
+}
+
+void NodeClient::setDisplayName1(const std::string& displayName) {
+    displayName_ = displayName;
+}
+
+bool NodeClient::isForwardReference() const {
+    return isForwardReference_;
+}
+
+void NodeClient::setIsForwardReference(bool isForwardReference) {
+    isForwardReference_ = isForwardReference;
+}
+
 /* ---------------------------------------------------------------------------------------------- */
 
 bool operator==(const NodeClient& left, const NodeClient& right) noexcept {
-    auto const l = left.getClient().get();
-    auto const r = right.getClient().get();
-
-    return (l == r) &&
-    (left.getNodeId() == right.getNodeId());
+    return left.getNodeId() == right.getNodeId();
 }
 
 bool operator!=(const NodeClient& left, const NodeClient& right) noexcept {

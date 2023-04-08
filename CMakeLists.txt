@@ -67,6 +67,7 @@ add_library(
         src/Client.cpp
         src/NodeClient.cpp
         src/Browser.cpp
+        src/ReferenceDescription.cpp
 )
 #add_library(open62541pp::open62541pp ALIAS open62541pp)
 target_include_directories(open62541pp
@@ -113,15 +114,15 @@ else ()
         endif ()
     endif ()
 
-    target_compile_options(
-            open62541pp_project_options
-            INTERFACE
-            -Wall
-            -Wextra
-            -Wshadow
-            -Wnon-virtual-dtor
-            -Wpedantic
-    )
+#    target_compile_options(
+#            open62541pp_project_options
+#            INTERFACE
+#            -Wall
+#            -Wextra
+#            -Wshadow
+#            -Wnon-virtual-dtor
+#            -Wpedantic
+#    )
 endif ()
 
 # tests
