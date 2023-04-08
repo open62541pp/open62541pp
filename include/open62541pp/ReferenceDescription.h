@@ -5,7 +5,7 @@
 #pragma once
 
 #include "open62541pp/NodeId.h"
-#include "open62541pp/types.h"
+#include "open62541pp/Types.h"
 
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/Types.h"
@@ -18,23 +18,21 @@ class ReferenceDescription
 public:
     using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
 
-    explicit ReferenceDescription(
-        NodeId referenceTypeId,
-        bool isForward,
-        ExpandedNodeId nodeId,
-        QualifiedName browseName,
-        LocalizedText displayName,
-        NodeClass nodeClass,
-        ExpandedNodeId typeDefinition);
-
-private:
-    NodeId referenceTypeId_;
-    bool isForward_;
-    ExpandedNodeId nodeId_;
-    QualifiedName browseName_;
-    LocalizedText displayName_;
-    NodeClass nodeClass_;
-    ExpandedNodeId typeDefinition_;
+public:
+    NodeId getReferenceTypeId() const;
+    void setReferenceTypeId(const NodeId& referenceTypeId);
+    bool isForward() const;
+    void setIsForward(bool isForward);
+    ExpandedNodeId getNodeId() const;
+    void setNodeId(const ExpandedNodeId& nodeId);
+    QualifiedName getBrowseName() const;
+    void setBrowseName(const QualifiedName& browseName);
+    LocalizedText getDisplayName() const;
+    void setDisplayName(const LocalizedText& displayName);
+    NodeClass getNodeClass() const;
+    void setNodeClass(NodeClass nodeClass);
+    ExpandedNodeId getTypeDefinition() const;
+    void setTypeDefinition(const ExpandedNodeId& typeDefinition);
 };
 
 }  // namespace opcua
