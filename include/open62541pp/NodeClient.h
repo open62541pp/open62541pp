@@ -1,11 +1,11 @@
 #pragma once
 
 #include "open62541pp/ErrorHandling.h"
-#include "open62541pp/NodeId.h"
+#include "open62541pp/types/NodeId.h"
 #include "open62541pp/Client.h"
 #include "open62541pp/TypeWrapper.h"
-#include "open62541pp/Types.h"
-#include "open62541pp/Variant.h"
+#include "open62541pp/Common.h"
+#include "open62541pp/types/Variant.h"
 
 #include <cstdint>
 #include <future>
@@ -49,7 +49,7 @@ public:
     NodeClass getNodeClass() const noexcept;
 
     /// Get browse name.
-    std::string getBrowseName();
+    std::string_view getBrowseName();
     /// Get localized display name.
     LocalizedText getDisplayName();
     /// Get localized description.
@@ -211,16 +211,16 @@ protected:
         return (isSame(classes) || ...);
     }
 
-    template <typename... Ts>
-    void requireNodeClass(Ts&&... classes) {
-        const bool isAnyOf = isNodeClass(std::forward<Ts>(classes)...);
-        if (!isAnyOf) {
-            const auto nodeClassName = getNodeClassName(nodeClass_);
-            throw InvalidNodeClass(
-                std::string("Operation not allowed for nodes of class ").append(nodeClassName)
-            );
-        }
-    }
+//    template <typename... Ts>
+//    void requireNodeClass(Ts&&... classes) {
+//        const bool isAnyOf = isNodeClass(std::forward<Ts>(classes)...);
+//        if (!isAnyOf) {
+//            const auto nodeClassName = getNodeClassName(nodeClass_);
+//            throw InvalidNodeClass(
+//                std::string("Operation not allowed for nodes of class ").append(nodeClassName)
+//            );
+//        }
+//    }
 
 private:
     std::shared_ptr<Client> client_;

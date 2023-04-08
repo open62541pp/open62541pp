@@ -7,8 +7,8 @@
 #include "open62541pp/Endpoint.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Logger.h"
-#include "open62541pp/NodeId.h"
-#include "open62541pp/Variant.h"
+#include "open62541pp/types/NodeId.h"
+#include "open62541pp/types/Variant.h"
 
 #include <open62541/client.h>
 

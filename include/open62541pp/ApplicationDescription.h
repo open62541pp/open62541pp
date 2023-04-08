@@ -1,9 +1,10 @@
 #pragma once
 
+#include "open62541pp/Common.h"
 #include "open62541pp/TypeConverter.h"
 #include "open62541pp/TypeWrapper.h"
-#include "open62541pp/Types.h"
 #include "open62541pp/open62541.h"
+#include "open62541pp/types/Builtin.h"
 
 #include <string>
 #include <vector>
@@ -121,8 +122,8 @@ struct TypeConverter<ApplicationDescription> {
     static void toNative(const ValueType& src, NativeType& dst) {
         dst.applicationUri = detail::allocUaString(src.getUri());
         dst.productUri = detail::allocUaString(src.getProductUri());
-        TypeConverter<std::string>::toNative(src.getName().getText(), dst.applicationName.text);
-        TypeConverter<std::string>::toNative(src.getName().getLocale(), dst.applicationName.locale);
+        TypeConverter<std::string>::toNative(std::string(src.getName().getText()), dst.applicationName.text);
+        TypeConverter<std::string>::toNative(std::string(src.getName().getLocale()), dst.applicationName.locale);
         dst.applicationType = static_cast<UA_ApplicationType>(src.getType());
         dst.gatewayServerUri = detail::allocUaString(src.getGatewayServerUri());
         dst.discoveryProfileUri = detail::allocUaString(src.getDiscoveryProfileUri());
