@@ -1,8 +1,8 @@
 #include <cstring>
 
 #include <catch2/catch_test_macros.hpp>
-#include <open62541/types_generated_handling.h>  // UA_String_clear
 
+#include "open62541_impl.h"  // UA_String_clear
 #include "open62541pp/Helper.h"
 
 using namespace opcua;

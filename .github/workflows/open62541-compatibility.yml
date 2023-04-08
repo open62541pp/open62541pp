@@ -1,6 +1,6 @@
 name: Compatibility
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   external-open62541:
@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        version: [v1.0, v1.1, v1.2]
+        version: [v1.0, v1.1, v1.2, v1.3]
         build: ["static", "shared"]
     steps:
       - uses: actions/checkout@v3

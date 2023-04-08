@@ -1,17 +1,19 @@
 #pragma once
 
+#include <array>
 #include <chrono>
 #include <iterator>  // distance
 #include <string>
 #include <type_traits>
 #include <vector>
 
+#include "open62541pp/Common.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Helper.h"
 #include "open62541pp/Traits.h"
 #include "open62541pp/TypeWrapper.h"
-#include "open62541pp/Types.h"
 #include "open62541pp/open62541.h"
+#include "open62541pp/types/DateTime.h"
 
 namespace opcua {
 
@@ -68,11 +70,12 @@ constexpr void assertTypeCombination() {
 
 template <typename T>
 constexpr Type guessType() {
+    using ValueType = typename std::remove_cv_t<std::remove_reference_t<T>>;
     static_assert(
-        TypeConverter<T>::ValidTypes::size() == 1,
+        TypeConverter<ValueType>::ValidTypes::size() == 1,
         "Ambiguous template type, please specify type enum (opcua::Type) manually"
     );
-    return TypeConverter<T>::ValidTypes::toArray().at(0);
+    return TypeConverter<ValueType>::ValidTypes::toArray().at(0);
 }
 
 template <typename It>
@@ -102,7 +105,7 @@ template <typename T, typename NativeType = typename TypeConverter<T>::NativeTyp
 /// Create and convert vector from native array.
 template <typename T, typename NativeType = typename TypeConverter<T>::NativeType>
 [[nodiscard]] std::vector<T> fromNativeArray(NativeType* array, size_t size) {
-    if constexpr (isNativeType<T>() && std::is_fundamental_v<T>) {
+    if constexpr (isBuiltinType<T>() && std::is_fundamental_v<T>) {
         return std::vector<T>(array, array + size);  // NOLINT
     } else {
         std::vector<T> result(size);

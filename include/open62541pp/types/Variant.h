@@ -6,11 +6,11 @@
 #include <optional>
 #include <vector>
 
+#include "open62541pp/Common.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Helper.h"
 #include "open62541pp/TypeConverter.h"
 #include "open62541pp/TypeWrapper.h"
-#include "open62541pp/Types.h"
 #include "open62541pp/open62541.h"
 
 namespace opcua {
@@ -25,6 +25,34 @@ class NodeId;
 class Variant : public TypeWrapper<UA_Variant, UA_TYPES_VARIANT> {
 public:
     using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
+
+    /// Create Variant from scalar value (no copy if assignable without conversion)
+    template <typename T, Type type = detail::guessType<T>()>
+    [[nodiscard]] static Variant fromScalar(T& value);
+
+    /// Create Variant from scalar value (copy)
+    template <typename T, Type type = detail::guessType<T>()>
+    [[nodiscard]] static Variant fromScalar(const T& value);
+
+    /// Create Variant from array (no copy if assignable without conversion)
+    template <typename T, Type type = detail::guessType<T>()>
+    [[nodiscard]] static Variant fromArray(T* array, size_t size);
+
+    /// Create Variant from array (copy)
+    template <typename T, Type type = detail::guessType<T>()>
+    [[nodiscard]] static Variant fromArray(const T* array, size_t size);
+
+    /// Create Variant from std::vector (no copy if assignable without conversion)
+    template <typename T, Type type = detail::guessType<T>()>
+    [[nodiscard]] static Variant fromArray(std::vector<T>& array);
+
+    /// Create Variant from std::vector (copy)
+    template <typename T, Type type = detail::guessType<T>()>
+    [[nodiscard]] static Variant fromArray(const std::vector<T>& array);
+
+    /// Create Variant from range of elements (copy)
+    template <typename InputIt, Type type = detail::guessTypeFromIterator<InputIt>()>
+    [[nodiscard]] static Variant fromArray(InputIt first, InputIt last);
 
     /// Check if variant is empty
     bool isEmpty() const noexcept;
@@ -121,22 +149,75 @@ namespace detail {
 
 template <typename T>
 constexpr bool isAssignableToVariantScalar() {
-    return detail::isNativeType<T>() || detail::IsTypeWrapper<T>::value;
+    return detail::isBuiltinType<T>() || detail::IsTypeWrapper<T>::value;
 }
 
 template <typename T>
 constexpr bool isAssignableToVariantArray() {
-    return detail::isNativeType<T>();
+    return detail::isBuiltinType<T>();
 }
 
 }  // namespace detail
 
 /* --------------------------------------- Implementation --------------------------------------- */
 
+template <typename T, Type type>
+Variant Variant::fromScalar(T& value) {
+    Variant variant;
+    if constexpr (detail::isAssignableToVariantScalar<T>()) {
+        variant.setScalar<T, type>(value);
+    } else {
+        variant.setScalarCopy<T, type>(value);
+    }
+    return variant;
+}
+
+template <typename T, Type type>
+Variant Variant::fromScalar(const T& value) {
+    Variant variant;
+    variant.setScalarCopy<T, type>(value);
+    return variant;
+}
+
+template <typename T, Type type>
+Variant Variant::fromArray(T* array, size_t size) {
+    Variant variant;
+    if constexpr (detail::isAssignableToVariantArray<T>()) {
+        variant.setArray<T, type>(array, size);  // NOLINT, variant isn't modified
+    } else {
+        variant.setArrayCopy<T, type>(array, size);
+    }
+    return variant;
+}
+
+template <typename T, Type type>
+Variant Variant::fromArray(const T* array, size_t size) {
+    Variant variant;
+    variant.setArrayCopy<T, type>(array, size);
+    return variant;
+}
+
+template <typename T, Type type>
+Variant Variant::fromArray(std::vector<T>& array) {
+    return fromArray<T, type>(array.data(), array.size());
+}
+
+template <typename T, Type type>
+Variant Variant::fromArray(const std::vector<T>& array) {
+    return fromArray<T, type>(array.data(), array.size());
+}
+
+template <typename InputIt, Type type>
+Variant Variant::fromArray(InputIt first, InputIt last) {
+    Variant variant;
+    variant.setArrayCopy<InputIt, type>(first, last);
+    return variant;
+}
+
 template <typename T>
 T& Variant::getScalar() {
     static_assert(
-        detail::isNativeType<T>(), "Template type must be a native type to get scalar without copy"
+        detail::isBuiltinType<T>(), "Template type must be a native type to get scalar without copy"
     );
     checkIsScalar();
     checkReturnType<T>();
@@ -154,7 +235,7 @@ T Variant::getScalarCopy() const {
 template <typename T>
 T* Variant::getArray() {
     static_assert(
-        detail::isNativeType<T>(), "Template type must be a native type to get array without copy"
+        detail::isBuiltinType<T>(), "Template type must be a native type to get array without copy"
     );
     checkIsArray();
     checkReturnType<T>();
@@ -227,7 +308,7 @@ void Variant::setArrayCopy(InputIt first, InputIt last) {
 template <typename T, Type type>
 void Variant::setArrayCopy(const T* array, size_t size) {
     detail::assertTypeCombination<T, type>();
-    if constexpr (detail::isNativeType<T>()) {
+    if constexpr (detail::isBuiltinType<T>()) {
         setArrayCopyImpl(array, size, detail::getUaDataType<type>());
     } else {
         setArrayCopy<const T*, type>(array, array + size);

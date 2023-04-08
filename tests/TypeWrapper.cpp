@@ -4,33 +4,32 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_string.hpp>
 
+#include "open62541pp/Common.h"
 #include "open62541pp/Helper.h"  // detail::toString
 #include "open62541pp/TypeWrapper.h"
-#include "open62541pp/Types.h"
+
+#include "open62541_impl.h"
 
 using namespace Catch::Matchers;
 using namespace opcua;
 
 TEST_CASE("TypeWrapper") {
-    SECTION("Constructor") {
-        // Empty constructor
+    SECTION("Constructor empty") {
         REQUIRE_NOTHROW(TypeWrapper<UA_Boolean, UA_TYPES_BOOLEAN>());
-
-        // Constructor with wrapped type (lvalue)
-        {
-            UA_Boolean value{true};
-            TypeWrapper<UA_Boolean, UA_TYPES_BOOLEAN> wrapper(value);
-            REQUIRE(*wrapper.handle() == value);
-        }
-
-        // Constructor with wrapped type (rvalue)
-        {
-            TypeWrapper<UA_Double, UA_TYPES_DOUBLE> wrapper(11.11);
-            REQUIRE(*wrapper.handle() == 11.11);
-        }
     }
 
-    SECTION("Copy constructor / assignment") {
+    SECTION("Constructor with native type") {
+        UA_Boolean value{true};
+        TypeWrapper<UA_Boolean, UA_TYPES_BOOLEAN> wrapper(value);
+        REQUIRE(*wrapper.handle() == value);
+    }
+
+    SECTION("Constructor with wrapper type") {
+        TypeWrapper<UA_Double, UA_TYPES_DOUBLE> wrapper(11.11);
+        REQUIRE(*wrapper.handle() == 11.11);
+    }
+
+    SECTION("Copy constructor") {
         TypeWrapper<UA_String, UA_TYPES_STRING> wrapper(UA_STRING_ALLOC("test"));
         TypeWrapper<UA_String, UA_TYPES_STRING> wrapperConstructor(wrapper);
 
@@ -47,6 +46,14 @@ TEST_CASE("TypeWrapper") {
 
         // self assignment
         REQUIRE_NOTHROW(wrapper = wrapper);
+    }
+
+    SECTION("Copy assignment with native type") {
+        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper(UA_STRING_ALLOC("overwrite"));
+        UA_String str = UA_STRING_ALLOC("test");
+        wrapper = str;
+        REQUIRE_THAT(detail::toString(*wrapper.handle()), Equals("test"));
+        UA_String_clear(&str);
     }
 
     SECTION("Move constructor") {
@@ -66,6 +73,12 @@ TEST_CASE("TypeWrapper") {
 
         // self assignment
         REQUIRE_NOTHROW(wrapper = std::move(wrapper));
+    }
+
+    SECTION("Move assignment with native type") {
+        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper(UA_STRING_ALLOC("overwrite"));
+        wrapper = UA_STRING_ALLOC("test");
+        REQUIRE_THAT(detail::toString(*wrapper.handle()), Equals("test"));
     }
 
     SECTION("Implicit conversion") {
@@ -97,6 +110,20 @@ TEST_CASE("TypeWrapper") {
         REQUIRE(wrapper1.handle()->data == nullptr);
         REQUIRE(wrapper2.handle()->data != nullptr);
         REQUIRE_THAT(detail::toString(*wrapper2.handle()), Equals("test"));
+    }
+
+    SECTION("Swap with native object") {
+        TypeWrapper<UA_String, UA_TYPES_STRING> wrapper;
+        UA_String str = UA_STRING_ALLOC("test");
+
+        REQUIRE(wrapper.handle()->data == nullptr);
+        REQUIRE(str.data != nullptr);
+
+        wrapper.swap(str);
+        REQUIRE(wrapper.handle()->data != nullptr);
+        REQUIRE(str.data == nullptr);
+
+        // UA_String_clear not necessary, because data is now owned by wrapper
     }
 }
 
@@ -130,96 +157,15 @@ TEMPLATE_TEST_CASE_SIG(
     (UA_Variant, UA_TYPES_VARIANT),
     (UA_DiagnosticInfo, UA_TYPES_DIAGNOSTICINFO)
 ) {
-    SECTION("Swap") {
-        TypeWrapper<T, typeIndex> wrapper1;
-        TypeWrapper<T, typeIndex> wrapper2;
-
-        wrapper1.swap(wrapper2);
+    SECTION("Memory size") {
+        STATIC_REQUIRE(sizeof(TypeWrapper<T, typeIndex>) == sizeof(T));
     }
 
-    SECTION("Get type") {
+    SECTION("Get type index") {
         STATIC_REQUIRE(TypeWrapper<T, typeIndex>::getTypeIndex() == typeIndex);
     }
 
     SECTION("Get data type") {
         REQUIRE(TypeWrapper<T, typeIndex>::getDataType() == &UA_TYPES[typeIndex]);
-    }
-}
-
-TEMPLATE_TEST_CASE("StringLike", "", String, ByteString, XmlElement) {
-    SECTION("Construct with const char*") {
-        TestType wrapper("test");
-        REQUIRE(wrapper.handle()->length == 4);
-        REQUIRE_THAT(wrapper.get(), Equals("test"));
-        REQUIRE_THAT(std::string(wrapper.getView()), Equals("test"));
-    }
-
-    SECTION("Construct from non-null-terminated view") {
-        std::string str("test123");
-        std::string_view sv(str.c_str(), 4);
-        TestType wrapper(sv);
-        REQUIRE_THAT(wrapper.get(), Equals("test"));
-    }
-
-    SECTION("Equality") {
-        REQUIRE(TestType("test") == TestType("test"));
-        REQUIRE(TestType("test") != TestType());
-    }
-}
-
-TEST_CASE("Guid") {
-    UA_UInt32 data1{11};
-    UA_UInt16 data2{22};
-    UA_UInt16 data3{33};
-    std::array<UA_Byte, 8> data4{1, 2, 3, 4, 5, 6, 7, 8};
-
-    Guid wrapper(data1, data2, data3, data4);
-
-    REQUIRE(wrapper.handle()->data1 == data1);
-    REQUIRE(wrapper.handle()->data2 == data2);
-    REQUIRE(wrapper.handle()->data3 == data3);
-    for (int i = 0; i < 8; ++i) {
-        REQUIRE(wrapper.handle()->data4[i] == data4[i]);  // NOLINT
-    }
-}
-
-TEST_CASE("DateTime") {
-    SECTION("Empty") {
-        const DateTime dt;
-        REQUIRE(dt.get() == 0);
-        REQUIRE(*dt.handle() == 0);
-        // UA time starts before Unix time -> 0
-        REQUIRE(dt.toTimePoint() == std::chrono::system_clock::time_point{});
-        REQUIRE(dt.toUnixTime() == 0);
-
-        const auto dts = dt.toStruct();
-        REQUIRE(dts.nanoSec == 0);
-        REQUIRE(dts.microSec == 0);
-        REQUIRE(dts.milliSec == 0);
-        REQUIRE(dts.sec == 0);
-        REQUIRE(dts.min == 0);
-        REQUIRE(dts.hour == 0);
-        REQUIRE(dts.day == 1);
-        REQUIRE(dts.month == 1);
-        REQUIRE(dts.year == 1601);
-    }
-
-    SECTION("From std::chrono::time_point") {
-        using namespace std::chrono;
-
-        const auto now = system_clock::now();
-        const uint64_t secSinceEpoch = duration_cast<seconds>(now.time_since_epoch()).count();
-        const uint64_t nsecSinceEpoch = duration_cast<nanoseconds>(now.time_since_epoch()).count();
-
-        const DateTime dt(now);
-        REQUIRE(dt.get() == (nsecSinceEpoch / 100) + UA_DATETIME_UNIX_EPOCH);
-        REQUIRE(dt.toUnixTime() == secSinceEpoch);
-    }
-
-    SECTION("Comparison") {
-        const auto zero = DateTime(0);
-        const auto now = DateTime::now();
-        REQUIRE(zero != now);
-        REQUIRE(zero < now);
     }
 }

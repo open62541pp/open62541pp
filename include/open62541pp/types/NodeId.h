@@ -6,8 +6,8 @@
 #include <variant>
 
 #include "open62541pp/TypeWrapper.h"
-#include "open62541pp/Types.h"
 #include "open62541pp/open62541.h"
+#include "open62541pp/types/Builtin.h"
 
 namespace opcua {
 
@@ -31,19 +31,19 @@ public:
     using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
 
     /// Create NodeId with numeric identifier
-    NodeId(uint32_t identifier, uint16_t namespaceIndex);
+    NodeId(uint16_t namespaceIndex, uint32_t identifier);
 
     /// Create NodeId with String identifier from standard strings
-    NodeId(std::string_view identifier, uint16_t namespaceIndex);
+    NodeId(uint16_t namespaceIndex, std::string_view identifier);
 
     /// Create NodeId with String identifier from String wrapper class
-    NodeId(const String& identifier, uint16_t namespaceIndex);
+    NodeId(uint16_t namespaceIndex, const String& identifier);
 
     /// Create NodeId with Guid identifier
-    NodeId(const Guid& identifier, uint16_t namespaceIndex);
+    NodeId(uint16_t namespaceIndex, const Guid& identifier);
 
     /// Create NodeId with ByteString identifier
-    NodeId(const ByteString& identifier, uint16_t namespaceIndex);
+    NodeId(uint16_t namespaceIndex, const ByteString& identifier);
 
     NodeId (NodeId &other) noexcept;
     NodeId (NodeId const& other) noexcept;
@@ -100,10 +100,7 @@ public:
     bool isLocal() const noexcept;
 
     NodeId getNodeId() const noexcept;
-
-    std::string getNamespaceUri() const;
-    std::string_view getNamespaceUriView() const;
-
+    std::string_view getNamespaceUri() const;
     uint32_t getServerIndex() const noexcept;
 };
 
