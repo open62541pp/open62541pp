@@ -1,8 +1,8 @@
 #pragma once
 
+#include "open62541pp/Common.h"
 #include "open62541pp/ApplicationDescription.h"
 #include "open62541pp/Browser.h"
-#include "open62541pp/Common.h"
 #include "open62541pp/Comparison.h"
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"

@@ -126,7 +126,7 @@ target_link_libraries(
         open62541::open62541
     PRIVATE
         Threads::Threads
-        open62541pp_project_options
+        $<BUILD_INTERFACE:open62541pp_project_options>
 )
 
 # tests

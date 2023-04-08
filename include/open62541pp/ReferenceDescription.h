@@ -4,11 +4,11 @@
 
 #pragma once
 
-#include "open62541pp/NodeId.h"
-#include "open62541pp/Types.h"
+#include "open62541pp/types/NodeId.h"
+#include "open62541pp/Common.h"
 
 #include "open62541pp/TypeWrapper.h"
-#include "open62541pp/Types.h"
+#include "open62541pp/Common.h"
 #include "open62541pp/open62541.h"
 
 namespace opcua {

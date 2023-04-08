@@ -16,6 +16,7 @@ add_executable(
     open62541pp_tests
     Helper.cpp
     Node.cpp
+    NodeId.cpp
     Server.cpp
     TypeConverter.cpp
     Types.cpp

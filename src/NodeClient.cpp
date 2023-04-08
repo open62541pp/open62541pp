@@ -107,7 +107,7 @@ NodeClass NodeClient::getNodeClass() const noexcept {
     return nodeClass_;
 }
 
-std::string NodeClient::getBrowseName() {
+std::string_view NodeClient::getBrowseName() {
     QualifiedName name;
 
     const auto status = UA_Client_readBrowseNameAttribute(client_->handle(), nodeId_, name.handle());
