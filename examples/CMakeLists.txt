@@ -15,9 +15,7 @@ foreach(source ${examples_sources})
         PRIVATE
             open62541pp::open62541pp
             open62541pp_project_options
-
     )
-
     set_target_properties(
         ${target_name}
         PROPERTIES
