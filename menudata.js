@@ -25,6 +25,7 @@ var menudata={children:[
 {text:"Server",url:"classopcua_1_1Server.html"},
 {text:"Node",url:"classopcua_1_1Node.html"},
 {text:"Wrapper",url:"group__TypeWrapper.html"},
+{text:"Services",url:"group__Services.html"},
 {text:"API Reference",url:"usergroup0.html",children:[
 {text:"Namespace List",url:"namespaces.html",children:[
 {text:"Namespace List",url:"namespaces.html"},
@@ -32,6 +33,7 @@ var menudata={children:[
 {text:"All",url:"namespacemembers.html",children:[
 {text:"a",url:"namespacemembers.html#index_a"},
 {text:"b",url:"namespacemembers.html#index_b"},
+{text:"d",url:"namespacemembers.html#index_d"},
 {text:"f",url:"namespacemembers.html#index_f"},
 {text:"g",url:"namespacemembers.html#index_g"},
 {text:"i",url:"namespacemembers.html#index_i"},
@@ -41,14 +43,18 @@ var menudata={children:[
 {text:"o",url:"namespacemembers.html#index_o"},
 {text:"r",url:"namespacemembers.html#index_r"},
 {text:"t",url:"namespacemembers.html#index_t"},
-{text:"v",url:"namespacemembers.html#index_v"}]},
+{text:"v",url:"namespacemembers.html#index_v"},
+{text:"w",url:"namespacemembers.html#index_w"}]},
 {text:"Functions",url:"namespacemembers_func.html",children:[
 {text:"a",url:"namespacemembers_func.html#index_a"},
+{text:"d",url:"namespacemembers_func.html#index_d"},
 {text:"f",url:"namespacemembers_func.html#index_f"},
 {text:"g",url:"namespacemembers_func.html#index_g"},
 {text:"i",url:"namespacemembers_func.html#index_i"},
 {text:"o",url:"namespacemembers_func.html#index_o"},
-{text:"t",url:"namespacemembers_func.html#index_t"}]},
+{text:"r",url:"namespacemembers_func.html#index_r"},
+{text:"t",url:"namespacemembers_func.html#index_t"},
+{text:"w",url:"namespacemembers_func.html#index_w"}]},
 {text:"Variables",url:"namespacemembers_vars.html"},
 {text:"Typedefs",url:"namespacemembers_type.html"},
 {text:"Enumerations",url:"namespacemembers_enum.html"}]}]},

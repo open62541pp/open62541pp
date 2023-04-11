@@ -1,8 +1,10 @@
 <map id="/home/runner/work/open62541pp/open62541pp/include/open62541pp/Logger.h" name="/home/runner/work/open62541pp/open62541pp/include/open62541pp/Logger.h">
-<area shape="rect" id="node1" title=" " alt="" coords="115,5,372,61"/>
+<area shape="rect" id="node1" title=" " alt="" coords="141,5,399,61"/>
 <area shape="rect" id="node2" href="$open62541pp_8h.html" title=" " alt="" coords="5,317,263,373"/>
-<area shape="rect" id="node3" href="$Server_8h.html" title=" " alt="" coords="224,109,481,165"/>
+<area shape="rect" id="node3" href="$Server_8h.html" title=" " alt="" coords="355,109,612,165"/>
 <area shape="rect" id="node4" href="$Node_8h.html" title=" " alt="" coords="269,213,530,269"/>
 <area shape="rect" id="node6" href="$Server_8cpp.html" title=" " alt="" coords="549,325,786,366"/>
+<area shape="rect" id="node7" href="$Attribute_8cpp.html" title=" " alt="" coords="605,213,842,269"/>
+<area shape="rect" id="node8" href="$NodeManagement_8cpp.html" title=" " alt="" coords="866,213,1103,269"/>
 <area shape="rect" id="node5" href="$Node_8cpp.html" title=" " alt="" coords="287,325,525,366"/>
 </map>
