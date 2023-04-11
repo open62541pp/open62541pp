@@ -8,7 +8,8 @@
 #include "open62541pp/Common.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeConverter.h"  // guessType
-#include "open62541pp/TypeWrapper.h"
+#include "open62541pp/services/Attribute.h"
+#include "open62541pp/services/NodeManagement.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/NodeId.h"
@@ -28,93 +29,147 @@ public:
     Node(const Server& server, const NodeId& id);
 
     /// Get server instance.
-    Server& getServer() noexcept;
+    Server& getServer() noexcept {
+        return server_;
+    }
+
     /// Get server instance.
-    const Server& getServer() const noexcept;
+    const Server& getServer() const noexcept {
+        return server_;
+    }
 
     /// Get node id.
-    const NodeId& getNodeId() const noexcept;
+    const NodeId& getNodeId() const noexcept {
+        return nodeId_;
+    }
 
-    /// Add child folder to node.
+    /// @copydoc services::addFolder
     Node addFolder(
         const NodeId& id,
         std::string_view browseName,
         ReferenceType referenceType = ReferenceType::HasComponent
-    );
+    ) {
+        services::addFolder(server_, nodeId_, id, browseName, referenceType);
+        return {server_, id};
+    }
 
-    /// Add child object to node.
+    /// @copydoc services::addObject
     Node addObject(
         const NodeId& id,
         std::string_view browseName,
         const NodeId& objectType = {0, UA_NS0ID_BASEOBJECTTYPE},
         ReferenceType referenceType = ReferenceType::HasComponent
-    );
+    ) {
+        services::addObject(server_, nodeId_, id, browseName, objectType, referenceType);
+        return {server_, id};
+    }
 
-    /// Add child variable to node.
+    /// @copydoc services::addVariable
     Node addVariable(
         const NodeId& id,
         std::string_view browseName,
         const NodeId& variableType = {0, UA_NS0ID_BASEDATAVARIABLETYPE},
         ReferenceType referenceType = ReferenceType::HasComponent
-    );
+    ) {
+        services::addVariable(server_, nodeId_, id, browseName, variableType, referenceType);
+        return {server_, id};
+    }
 
-    /// Add child property to node.
-    Node addProperty(const NodeId& id, std::string_view browseName);
+    /// @copydoc services::addProperty
+    Node addProperty(const NodeId& id, std::string_view browseName) {
+        services::addProperty(server_, nodeId_, id, browseName);
+        return {server_, id};
+    }
 
-    /// Add child object type to node.
+    /// @copydoc services::addObjectType
     Node addObjectType(
         const NodeId& id,
         std::string_view browseName,
         ReferenceType referenceType = ReferenceType::HasSubType
-    );
+    ) {
+        services::addObjectType(server_, nodeId_, id, browseName, referenceType);
+        return {server_, id};
+    }
 
-    /// Add child variable type to node.
+    /// @copydoc services::addVariableType
     Node addVariableType(
         const NodeId& id,
         std::string_view browseName,
         const NodeId& variableType = {0, UA_NS0ID_BASEDATAVARIABLETYPE},
         ReferenceType referenceType = ReferenceType::HasSubType
-    );
+    ) {
+        services::addVariableType(server_, nodeId_, id, browseName, variableType, referenceType);
+        return {server_, id};
+    }
 
-    /// Add reference.
-    void addReference(const NodeId& target, ReferenceType referenceType, bool forward = true);
+    /// @copydoc services::addReference
+    void addReference(const NodeId& targetId, ReferenceType referenceType, bool forward = true) {
+        services::addReference(server_, nodeId_, targetId, referenceType, forward);
+    }
+
+    /// @copydoc services::deleteNode
+    void deleteNode(bool deleteReferences = true) {
+        services::deleteNode(server_, nodeId_, deleteReferences);
+    }
 
     /// Get a child specified by its path from this node (only local nodes).
     /// @exception BadStatus If path not found (BadNoMatch)
     Node getChild(const std::vector<QualifiedName>& path);
 
-    /// Get node class.
-    NodeClass readNodeClass();
+    /// @copydoc services::readNodeClass
+    NodeClass readNodeClass() {
+        return services::readNodeClass(server_, nodeId_);
+    }
 
-    /// Get browse name.
-    std::string readBrowseName();
+    /// @copydoc services::readBrowseName
+    std::string readBrowseName() {
+        return services::readBrowseName(server_, nodeId_);
+    }
 
-    /// Get localized display name.
-    LocalizedText readDisplayName();
+    /// @copydoc services::readDisplayName
+    LocalizedText readDisplayName() {
+        return services::readDisplayName(server_, nodeId_);
+    }
 
-    /// Get localized description.
-    LocalizedText readDescription();
+    /// @copydoc services::readDescription
+    LocalizedText readDescription() {
+        return services::readDescription(server_, nodeId_);
+    }
 
-    /// Get write mask, e.g. `::UA_WRITEMASK_ACCESSLEVEL | ::UA_WRITEMASK_DESCRIPTION`.
-    uint32_t readWriteMask();
+    /// @copydoc services::readWriteMask
+    uint32_t readWriteMask() {
+        return services::readWriteMask(server_, nodeId_);
+    }
 
-    /// Get data type of variable (type) node as NodeId.
-    NodeId readDataType();
+    /// @copydoc services::readDataType
+    NodeId readDataType() {
+        return services::readDataType(server_, nodeId_);
+    }
 
-    /// Get value rank of variable (type) node.
-    ValueRank readValueRank();
+    /// @copydoc services::readValueRank
+    ValueRank readValueRank() {
+        return services::readValueRank(server_, nodeId_);
+    }
 
-    /// Get array dimensions of variable (type) node.
-    std::vector<uint32_t> readArrayDimensions();
+    /// @copydoc services::readArrayDimensions
+    std::vector<uint32_t> readArrayDimensions() {
+        return services::readArrayDimensions(server_, nodeId_);
+    }
 
-    /// Get access level mask of variable node, e.g. `::UA_ACCESSLEVELMASK_READ`.
-    uint8_t readAccessLevel();
+    /// @copydoc services::readAccessLevel
+    uint8_t readAccessLevel() {
+        return services::readAccessLevel(server_, nodeId_);
+    }
 
-    /// Read value from variable node as DataValue object.
-    void readDataValue(DataValue& value);
+    /// @copydoc services::readDataValue
+    void readDataValue(DataValue& value) {
+        services::readDataValue(server_, nodeId_, value);
+    }
 
-    /// Read value from variable node as Variant object.
-    void readValue(Variant& variant);
+    /// @copydoc services::readValue
+    void readValue(Variant& value) {
+        services::readValue(server_, nodeId_, value);
+    }
 
     /// Read scalar from variable node.
     template <typename T>
@@ -124,43 +179,60 @@ public:
     template <typename T>
     std::vector<T> readArray();
 
-    /// Set localized display name.
-    void writeDisplayName(std::string_view name, std::string_view locale);
+    /// @copydoc services::writeDisplayName
+    void writeDisplayName(std::string_view name, std::string_view locale) {
+        services::writeDisplayName(server_, nodeId_, name, locale);
+    }
 
-    /// Set localized description.
-    void writeDescription(std::string_view name, std::string_view locale);
+    /// @copydoc services::writeDescription
+    void writeDescription(std::string_view name, std::string_view locale) {
+        services::writeDescription(server_, nodeId_, name, locale);
+    }
 
-    /// Set write mask, e.g. `::UA_WRITEMASK_ACCESSLEVEL | ::UA_WRITEMASK_DESCRIPTION`.
-    void writeWriteMask(uint32_t mask);
+    /// @copydoc services::writeWriteMask
+    void writeWriteMask(uint32_t mask) {
+        services::writeWriteMask(server_, nodeId_, mask);
+    }
 
-    /// Set data type of variable (type) node.
-    void writeDataType(Type type);
+    /// @copydoc services::writeDataType(Server&, const NodeId&, Type)
+    void writeDataType(Type type) {
+        services::writeDataType(server_, nodeId_, type);
+    }
 
-    /// Set data type of variable (type) node by node id.
-    void writeDataType(const NodeId& typeId);
+    /// @copydoc services::writeDataType(Server&, const NodeId&, const NodeId&)
+    void writeDataType(const NodeId& typeId) {
+        services::writeDataType(server_, nodeId_, typeId);
+    }
 
-    /// Set value rank of variable (type) node.
-    void writeValueRank(ValueRank valueRank);
+    /// @copydoc services::writeValueRank
+    void writeValueRank(ValueRank valueRank) {
+        services::writeValueRank(server_, nodeId_, valueRank);
+    }
 
-    /// Set array dimensions of variable (type) node.
-    /// Should be unspecified if ValueRank is <= 0 (ValueRank::Any, ValueRank::Scalar,
-    /// ValueRank::ScalarOrOneDimension, ValueRank::OneOrMoreDimensions). The dimension zero is a
-    /// wildcard and the actual value may have any length in this dimension.
-    void writeArrayDimensions(const std::vector<uint32_t>& dimensions);
+    /// @copydoc services::writeArrayDimensions
+    void writeArrayDimensions(const std::vector<uint32_t>& dimensions) {
+        services::writeArrayDimensions(server_, nodeId_, dimensions);
+    }
 
-    /// Set access level mask of variable node,
-    /// e.g. `::UA_ACCESSLEVELMASK_READ | ::UA_ACCESSLEVELMASK_WRITE`.
-    void writeAccessLevel(uint8_t mask);
+    /// @copydoc services::writeAccessLevel
+    void writeAccessLevel(uint8_t mask) {
+        services::writeAccessLevel(server_, nodeId_, mask);
+    }
 
-    /// Set modelling rule.
-    void writeModellingRule(ModellingRule rule);
+    /// @copydoc services::writeModellingRule
+    void writeModellingRule(ModellingRule rule) {
+        services::writeModellingRule(server_, nodeId_, rule);
+    }
 
-    /// Write DataValue to variable node.
-    /// @note open62541 version >=1.1 required
-    void writeDataValue(const DataValue& value);
+    /// @copydoc services::writeDataValue
+    void writeDataValue(const DataValue& value) {
+        services::writeDataValue(server_, nodeId_, value);
+    }
 
-    /// Write Variant to variable node.
-    void writeValue(const Variant& variant);
+    /// @copydoc services::writeValue
+    void writeValue(const Variant& value) {
+        services::writeValue(server_, nodeId_, value);
+    }
 
     /// Write scalar to variable node.
     template <typename T, Type type = detail::guessType<T>()>
@@ -177,9 +249,6 @@ public:
     /// Write range of elements as array to variable node.
     template <typename InputIt, Type type = detail::guessTypeFromIterator<InputIt>()>
     void writeArray(InputIt first, InputIt last);
-
-    /// Remove this node.
-    void deleteNode(bool deleteReferences = true);
 
 private:
     Server server_;
