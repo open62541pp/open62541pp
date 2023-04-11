@@ -2,8 +2,8 @@
 
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Helper.h"
-#include "open62541pp/TypeWrapper.h"
 #include "open62541pp/TypeConverter.h"
+#include "open62541pp/TypeWrapper.h"
 using namespace opcua::detail;
 
 #include "open62541/client_highlevel.h"
@@ -16,86 +16,69 @@ NodeClient::NodeClient(std::shared_ptr<Client> client, const NodeId& id)  // NOL
     // check if node exists
     {
         NodeId outputNode(UA_NODEID_NULL);
-        const auto status = UA_Client_readNodeIdAttribute(client_->handle(), nodeId_, outputNode.handle());
-        if (status!= UA_STATUSCODE_GOOD)
+        const auto status = UA_Client_readNodeIdAttribute(
+            client_->handle(), nodeId_, outputNode.handle()
+        );
+        if (status != UA_STATUSCODE_GOOD)
             throw std::runtime_error("Failed to verify node existence");
     }
-//    // store node class
+    //    // store node class
     {
         UA_NodeClass nodeClass = UA_NODECLASS_UNSPECIFIED;
-        const auto status = UA_Client_readNodeClassAttribute(client_->handle(), nodeId_, &nodeClass);
-        if (status!= UA_STATUSCODE_GOOD)
+        const auto status = UA_Client_readNodeClassAttribute(
+            client_->handle(), nodeId_, &nodeClass
+        );
+        if (status != UA_STATUSCODE_GOOD)
             throw std::runtime_error("Failed to verify node existence");
 
-        nodeClass_ = static_cast<NodeClass>(nodeClass);
+        refDesc_.handle()->nodeClass = nodeClass;
     }
 }
 
-NodeClient::NodeClient(NodeClient const& other){
+NodeClient::NodeClient(std::shared_ptr<Client> client, opcua::ReferenceDescription& refDesc)
+    : client_(client),
+      refDesc_(refDesc) {}
+
+NodeClient::NodeClient(const NodeClient& other) {
     client_ = other.client_;
     nodeId_ = other.nodeId_;
-    nodeClass_ = other.nodeClass_;
-    browseName_ = other.browseName_;
-    displayName_ = other.displayName_;
-    isForwardReference_ = other.isForwardReference_;
-    namespaceIndex_ = other.namespaceIndex_;
+    refDesc_ = other.refDesc_;
 }
 
-NodeClient::NodeClient(NodeClient& other){
+NodeClient::NodeClient(NodeClient& other) {
     client_ = other.client_;
     nodeId_ = other.nodeId_;
-    nodeClass_ = other.nodeClass_;
-    browseName_ = other.browseName_;
-    displayName_ = other.displayName_;
-    isForwardReference_ = other.isForwardReference_;
-    namespaceIndex_ = other.namespaceIndex_;
+    refDesc_ = other.refDesc_;
 }
-NodeClient& NodeClient::operator=(NodeClient const& other){
+
+NodeClient& NodeClient::operator=(const NodeClient& other) {
     client_ = other.client_;
     nodeId_ = other.nodeId_;
-    nodeClass_ = other.nodeClass_;
-    browseName_ = other.browseName_;
-    displayName_ = other.displayName_;
-    isForwardReference_ = other.isForwardReference_;
-    namespaceIndex_ = other.namespaceIndex_;
-    return *this;
-}
-NodeClient& NodeClient::operator=(NodeClient& other){
-    client_ = other.client_;
-    nodeId_ = other.nodeId_;
-    nodeClass_ = other.nodeClass_;
-    browseName_ = other.browseName_;
-    displayName_ = other.displayName_;
-    isForwardReference_ = other.isForwardReference_;
-    namespaceIndex_ = other.namespaceIndex_;
+    refDesc_ = other.refDesc_;
     return *this;
 }
 
-NodeClient::NodeClient(NodeClient&& other){
-    client_ = std::move(other.client_);
-    nodeId_ = std::move(other.nodeId_);
-    nodeClass_ = std::move(other.nodeClass_);
-    browseName_ = std::move(other.browseName_);
-    displayName_ = std::move(other.displayName_);
-    isForwardReference_ = other.isForwardReference_;
-    namespaceIndex_ = other.namespaceIndex_;
+NodeClient& NodeClient::operator=(NodeClient& other) {
+    client_ = other.client_;
+    nodeId_ = other.nodeId_;
+    refDesc_ = other.refDesc_;
+    return *this;
 }
-NodeClient& NodeClient::operator=(NodeClient&& other){
+
+NodeClient::NodeClient(NodeClient&& other) {
     client_ = std::move(other.client_);
     nodeId_ = std::move(other.nodeId_);
-    nodeClass_ = std::move(other.nodeClass_);
-    browseName_ = std::move(other.browseName_);
-    displayName_ = std::move(other.displayName_);
-    isForwardReference_ = other.isForwardReference_;
-    namespaceIndex_ = other.namespaceIndex_;
+    refDesc_ = std::move(other.refDesc_);
+}
+
+NodeClient& NodeClient::operator=(NodeClient&& other) {
+    client_ = std::move(other.client_);
+    nodeId_ = std::move(other.nodeId_);
+    refDesc_ = std::move(other.refDesc_);
     return *this;
 }
 
 std::weak_ptr<Client> NodeClient::getClient() noexcept {
-    return client_;
-}
-
-std::weak_ptr<Client> NodeClient::getClient() const noexcept {
     return client_;
 }
 
@@ -104,27 +87,33 @@ const NodeId& NodeClient::getNodeId() const noexcept {
 }
 
 NodeClass NodeClient::getNodeClass() const noexcept {
-    return nodeClass_;
+    return refDesc_.getNodeClass();
 }
 
 std::string_view NodeClient::getBrowseName() {
     QualifiedName name;
 
-    const auto status = UA_Client_readBrowseNameAttribute(client_->handle(), nodeId_, name.handle());
+    const auto status = UA_Client_readBrowseNameAttribute(
+        client_->handle(), nodeId_, name.handle()
+    );
     detail::throwOnBadStatus(status);
     return name.getName();
 }
 
 LocalizedText NodeClient::getDisplayName() {
     LocalizedText text;
-    const auto status = UA_Client_readDisplayNameAttribute(client_->handle(), nodeId_, text.handle());
+    const auto status = UA_Client_readDisplayNameAttribute(
+        client_->handle(), nodeId_, text.handle()
+    );
     detail::throwOnBadStatus(status);
     return text;
 }
 
 LocalizedText NodeClient::getDescription() {
     LocalizedText text;
-    const auto status = UA_Client_readDescriptionAttribute(client_->handle(), nodeId_, text.handle());
+    const auto status = UA_Client_readDescriptionAttribute(
+        client_->handle(), nodeId_, text.handle()
+    );
     detail::throwOnBadStatus(status);
     return text;
 }
@@ -138,7 +127,9 @@ uint32_t NodeClient::getWriteMask() {
 
 NodeId NodeClient::getDataType() {
     NodeId nodeId(0, 0);
-    const auto status = UA_Client_readDataTypeAttribute(client_->handle(), nodeId_, nodeId.handle());
+    const auto status = UA_Client_readDataTypeAttribute(
+        client_->handle(), nodeId_, nodeId.handle()
+    );
     detail::throwOnBadStatus(status);
     return nodeId;
 }
@@ -153,10 +144,13 @@ ValueRank NodeClient::getValueRank() {
 std::vector<uint32_t> NodeClient::getArrayDimensions() {
     size_t sz;
     UA_UInt32* dims;
-    const auto status = UA_Client_readArrayDimensionsAttribute(client_->handle(), nodeId_, &sz, &dims);
+    const auto status = UA_Client_readArrayDimensionsAttribute(
+        client_->handle(), nodeId_, &sz, &dims
+    );
     detail::throwOnBadStatus(status);
 
-    return fromNativeArray<uint32_t>(dims, sz);;
+    return fromNativeArray<uint32_t>(dims, sz);
+    ;
 }
 
 uint8_t NodeClient::getAccessLevel() {
@@ -193,31 +187,31 @@ void NodeClient::setDataType(Type type) {
 }
 
 void NodeClient::setDataType(const NodeId& typeId) {
-    const auto status = UA_Client_writeDataTypeAttribute(client_->handle(), *nodeId_.handle(), typeId.handle());
+    const auto status = UA_Client_writeDataTypeAttribute(
+        client_->handle(), *nodeId_.handle(), typeId.handle()
+    );
     detail::throwOnBadStatus(status);
 }
 
 void NodeClient::setValueRank(ValueRank valueRank) {
     int rank = static_cast<int32_t>(valueRank);
-    const auto status = UA_Client_writeValueRankAttribute(
-        client_->handle(), nodeId_, &rank
-    );
+    const auto status = UA_Client_writeValueRankAttribute(client_->handle(), nodeId_, &rank);
     detail::throwOnBadStatus(status);
 }
 
 void NodeClient::setArrayDimensions(const std::vector<uint32_t>& dimensions) {
     Variant variant;
     variant.setArrayCopy(dimensions);
-    auto const arr = variant.getArray<UA_UInt32>();
-    const auto status = UA_Client_writeArrayDimensionsAttribute(client_->handle(), nodeId_, variant.getArrayLength(), arr);
+    const auto arr = variant.getArray<UA_UInt32>();
+    const auto status = UA_Client_writeArrayDimensionsAttribute(
+        client_->handle(), nodeId_, variant.getArrayLength(), arr
+    );
     detail::throwOnBadStatus(status);
 }
 
 void NodeClient::setAccessLevel(uint8_t mask) {
     UA_Byte m = static_cast<UA_Byte>(mask);
-    const auto status = UA_Client_writeAccessLevelAttribute(
-        client_->handle(), nodeId_, &m
-    );
+    const auto status = UA_Client_writeAccessLevelAttribute(client_->handle(), nodeId_, &m);
     detail::throwOnBadStatus(status);
 }
 
@@ -233,7 +227,8 @@ void NodeClient::setAccessLevel(uint8_t mask) {
 //     detail::throwOnBadStatus(status);
 // }
 
-// NodeClient NodeClient::addFolder(const NodeId& id, std::string_view browseName, ReferenceType referenceType) {
+// NodeClient NodeClient::addFolder(const NodeId& id, std::string_view browseName, ReferenceType
+// referenceType) {
 //     const auto status = UA_Client_addObjectNode(
 //         client_->handle(),  // client
 //         id,  // new requested id
@@ -385,31 +380,33 @@ void NodeClient::readValue(Variant& var) {
     detail::throwOnBadStatus(status);
 }
 
-//std::future<Variant> NodeClient::readValueAsync()
+// std::future<Variant> NodeClient::readValueAsync()
 //{
 //
-//}
+// }
 
 void NodeClient::remove(bool deleteReferences) {
-    const auto status = UA_Client_deleteNode(client_->handle(), *nodeId_.handle(), deleteReferences);
+    const auto status = UA_Client_deleteNode(
+        client_->handle(), *nodeId_.handle(), deleteReferences
+    );
     detail::throwOnBadStatus(status);
 }
 
 void NodeClient::setBrowseName(uint16_t namespaceIndex, const std::string& browseName) {
-    browseName_ = browseName;
-    namespaceIndex_ = namespaceIndex;
+    QualifiedName name(namespaceIndex, browseName);
+    refDesc_.setBrowseName(name);
 }
 
-void NodeClient::setDisplayName1(const std::string& displayName) {
-    displayName_ = displayName;
+void NodeClient::setDisplayName(const LocalizedText& displayName) {
+    refDesc_.setDisplayName(displayName);
 }
 
 bool NodeClient::isForwardReference() const {
-    return isForwardReference_;
+    return refDesc_.isForward();
 }
 
 void NodeClient::setIsForwardReference(bool isForwardReference) {
-    isForwardReference_ = isForwardReference;
+    refDesc_.setIsForward(isForwardReference);
 }
 
 /* ---------------------------------------------------------------------------------------------- */

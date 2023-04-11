@@ -5,6 +5,7 @@
 #include "open62541pp/Client.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/Common.h"
+#include "open62541pp/types/ReferenceDescription.h"
 #include "open62541pp/types/Variant.h"
 
 #include <cstdint>
@@ -27,6 +28,8 @@ class NodeClient {
 public:
     explicit NodeClient(std::shared_ptr<Client> client_, const NodeId& id_);
 
+    explicit NodeClient(std::shared_ptr<Client> client_, ReferenceDescription &refDesc);
+
     NodeClient(NodeClient const& other);
     NodeClient(NodeClient& other);
 
@@ -36,17 +39,15 @@ public:
     NodeClient(NodeClient&& other);
     NodeClient& operator=(NodeClient&& other);
 
-    /// Get server instance.
     std::weak_ptr<Client> getClient() noexcept;
-
-    /// Get server instance.
-    std::weak_ptr<Client> getClient() const noexcept;
 
     /// Get node id.
     const NodeId& getNodeId() const noexcept;
 
     /// Get node class.
     NodeClass getNodeClass() const noexcept;
+
+    const ReferenceDescription& getReferenceDescription() const noexcept;
 
     /// Get browse name.
     std::string_view getBrowseName();
@@ -143,15 +144,17 @@ public:
     //     ReferenceType referenceType = ReferenceType::HasSubType
     // );
 
-    /// Add reference.
-    void addReference(const NodeId& target, ReferenceType referenceType, bool forward = true);
-
     /// Get a child specified by its path from this node (only local nodes).
     /// @exception BadStatus If path not found (BadNoMatch)
     // NodeClient getChild(const std::vector<QualifiedName>& path);
 
     // Read value from variable node as DataValue object.
     // void readDataValue(DataValue& dataValue);
+
+    /// Add reference.
+    void addReference(const NodeId& target, ReferenceType referenceType, bool forward = true);
+
+
 
     /// Read value from variable node as Variant object.
     void readValue(Variant& variant);
@@ -200,14 +203,14 @@ public:
     void remove(bool deleteReferences = true);
 
     void setBrowseName(uint16_t namespaceIndex_, const std::string& browseName);
-    void setDisplayName1(const std::string& displayName);
+    void setDisplayName(const LocalizedText& displayName);
     bool isForwardReference() const;
     void setIsForwardReference(bool isForwardReference);
 
 protected:
     template <typename... Ts>
     constexpr bool isNodeClass(Ts&&... classes) {
-        const auto isSame = [&](NodeClass c) { return nodeClass_ == c; };
+        const auto isSame = [&](NodeClass c) { return refDesc_.getNodeClass() == c; };
         return (isSame(classes) || ...);
     }
 
@@ -225,11 +228,7 @@ protected:
 private:
     std::shared_ptr<Client> client_;
     NodeId nodeId_;
-    NodeClass nodeClass_;
-    std::string browseName_;
-    uint16_t namespaceIndex_;
-    std::string displayName_;
-    bool isForwardReference_;
+    ReferenceDescription refDesc_;
 };
 
 /* ---------------------------------------------------------------------------------------------- */

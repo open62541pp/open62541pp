@@ -15,7 +15,7 @@ int main() {
 
     auto endpoints = client->getEndpoints("opc.tcp://localhost:4840");
     for (const auto& e : endpoints)
-        std::cout << "Endpoints " << e.server.productUri << " | " << e.url << "\n";
+        std::cout << "Endpoints " << e.url << " | " << e.url << "\n";
 
     client->connect("opc.tcp://localhost:4840");
     opcua::Browser browser(client);

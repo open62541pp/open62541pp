@@ -1,7 +1,3 @@
-//
-// Created by ELopes1 on 4/4/2023.
-//
-
 #pragma once
 
 #include "open62541pp/types/NodeId.h"

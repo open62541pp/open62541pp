@@ -3,10 +3,13 @@
 // file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 #include "open62541pp/Browser.h"
+#include "open62541pp/Client.h"
+#include "open62541pp/types/ReferenceDescription.h"
 
 #include "open62541/types.h"
 #include "open62541/types_generated.h"
 #include "open62541/nodeids.h"
+
 
 namespace opcua {
 
@@ -37,25 +40,10 @@ std::vector<NodeClient> Browser::browse() {
     UA_BrowseResponse bResp = UA_Client_Service_browse(d_->client->handle(), d_->browseRequest);
     for(size_t i = 0; i < bResp.resultsSize; ++i) {
         for (size_t j = 0; j < bResp.results[i].referencesSize; ++j) {
-            UA_ReferenceDescription* ref = &(bResp.results[i].references[j]);
+            ReferenceDescription refDesc((bResp.results[i].references[j]));
 
-            NodeClient *node;
-
-            if (ref->nodeId.nodeId.identifierType == UA_NODEIDTYPE_NUMERIC) {
-                node = new NodeClient(
-                    d_->client, {ref->nodeId.nodeId.identifier.numeric, ref->nodeId.nodeId.namespaceIndex});
-            } else if (ref->nodeId.nodeId.identifierType == UA_NODEIDTYPE_STRING) {
-                std::string strRef = detail::toString(ref->nodeId.nodeId.identifier.string);
-                node = new NodeClient(d_->client, {strRef, ref->nodeId.nodeId.namespaceIndex});
-            } else
-                throw std::runtime_error("unknown node type");
-
-            node->setBrowseName(ref->browseName.namespaceIndex, detail::toString(ref->browseName.name));
-            node->setDisplayName1(detail::toString(ref->displayName.text));
-            resp.emplace_back(std::move(*node));
-
-            delete node;
-            node = nullptr;
+            NodeClient node(d_->client, refDesc);
+            resp.emplace_back(std::move(node));
         }
     }
     return resp;

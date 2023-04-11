@@ -1,4 +1,4 @@
-#include "open62541pp/ReferenceDescription.h"
+#include "open62541pp/types/ReferenceDescription.h"
 #include "open62541pp/TypeConverter.h"
 
 namespace opcua {
