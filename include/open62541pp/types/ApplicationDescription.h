@@ -28,7 +28,7 @@ public:
      * @brief Get the application URI
      * @return uri
      */
-    const std::string& getUri() const;
+    std::string getUri() const;
 
     /**
      * @brief set the application URI
@@ -40,7 +40,7 @@ public:
      * @brief Get the product URI
      * @return product URI
      */
-    const std::string& getProductUri() const;
+    std::string getProductUri() const;
 
     /**
      * @brief set the product URI
@@ -52,7 +52,7 @@ public:
      * @brief Get the application name
      * @return name
      */
-    const LocalizedText& getName() const;
+    LocalizedText getName() const;
 
     /**
      * @brief set the application name
@@ -76,7 +76,7 @@ public:
      * @brief Get the gateway server URI
      * @return gateway server URI
      */
-    const std::string& getGatewayServerUri() const;
+    std::string getGatewayServerUri() const;
 
     /**
      * @brief set the gateway server URI
@@ -88,7 +88,7 @@ public:
      * @brief Get the discovery profile URI
      * @return discovery profile URI
      */
-    const std::string& getDiscoveryProfileUri() const;
+    std::string getDiscoveryProfileUri() const;
 
     /**
      * @brief set the discovery profile URI
@@ -100,7 +100,7 @@ public:
      * @brief Get the discovery Urls
      * @return discovery Urls
      */
-    const std::vector<std::string>& getDiscoveryUrls() const;
+    std::vector<std::string> getDiscoveryUrls() const;
 
     /**
      * @brief set the discovery Urls
