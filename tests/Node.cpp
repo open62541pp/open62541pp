@@ -9,8 +9,10 @@ TEST_CASE("Node") {
     Server server;
 
     SECTION("Constructor") {
-        REQUIRE_NOTHROW(Node(server, NodeId(0, UA_NS0ID_BOOLEAN)));
-        REQUIRE_THROWS(Node(server, NodeId(0, "DoesNotExist")));
+        REQUIRE_NOTHROW(Node(server, NodeId(0, UA_NS0ID_BOOLEAN), false));
+        REQUIRE_NOTHROW(Node(server, NodeId(0, UA_NS0ID_BOOLEAN), true));
+        REQUIRE_NOTHROW(Node(server, NodeId(0, "DoesNotExist"), false));
+        REQUIRE_THROWS(Node(server, NodeId(0, "DoesNotExist"), true));
     }
 
     SECTION("Node class of default nodes") {

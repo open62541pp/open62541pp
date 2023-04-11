@@ -26,7 +26,7 @@ namespace opcua {
  */
 class Node {
 public:
-    Node(const Server& server, const NodeId& id);
+    Node(const Server& server, const NodeId& id, bool checkExists = true);
 
     /// Get server instance.
     Server& getServer() noexcept {
@@ -50,7 +50,7 @@ public:
         ReferenceType referenceType = ReferenceType::HasComponent
     ) {
         services::addFolder(server_, nodeId_, id, browseName, referenceType);
-        return {server_, id};
+        return {server_, id, false};
     }
 
     /// @copydoc services::addObject
@@ -61,7 +61,7 @@ public:
         ReferenceType referenceType = ReferenceType::HasComponent
     ) {
         services::addObject(server_, nodeId_, id, browseName, objectType, referenceType);
-        return {server_, id};
+        return {server_, id, false};
     }
 
     /// @copydoc services::addVariable
@@ -72,13 +72,13 @@ public:
         ReferenceType referenceType = ReferenceType::HasComponent
     ) {
         services::addVariable(server_, nodeId_, id, browseName, variableType, referenceType);
-        return {server_, id};
+        return {server_, id, false};
     }
 
     /// @copydoc services::addProperty
     Node addProperty(const NodeId& id, std::string_view browseName) {
         services::addProperty(server_, nodeId_, id, browseName);
-        return {server_, id};
+        return {server_, id, false};
     }
 
     /// @copydoc services::addObjectType
@@ -88,7 +88,7 @@ public:
         ReferenceType referenceType = ReferenceType::HasSubType
     ) {
         services::addObjectType(server_, nodeId_, id, browseName, referenceType);
-        return {server_, id};
+        return {server_, id, false};
     }
 
     /// @copydoc services::addVariableType
@@ -99,7 +99,7 @@ public:
         ReferenceType referenceType = ReferenceType::HasSubType
     ) {
         services::addVariableType(server_, nodeId_, id, browseName, variableType, referenceType);
-        return {server_, id};
+        return {server_, id, false};
     }
 
     /// @copydoc services::addReference
