@@ -16,12 +16,10 @@ add_executable(
     open62541pp_tests
     Helper.cpp
     Node.cpp
-    NodeId.cpp
     Server.cpp
     TypeConverter.cpp
     Types.cpp
     TypeWrapper.cpp
-    Variant.cpp
     Client.cpp
 )
 target_link_libraries(

@@ -1,12 +1,12 @@
 ﻿---
-#Documentation : https:  // clang.llvm.org/docs/ClangFormatStyleOptions.html
-#LLVM defaults : https:  // github.com/llvm/llvm-project/blob/main/clang/lib/Format/Format.cpp#L1248
+# Documentation: https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+# LLVM defaults: https://github.com/llvm/llvm-project/blob/main/clang/lib/Format/Format.cpp#L1248
 BasedOnStyle: LLVM
 
 AccessModifierOffset: -4
 AlignAfterOpenBracket: BlockIndent # version >= 14 required
-#AlignConsecutiveAssignments : true
-#AlignConsecutiveDeclarations : true
+# AlignConsecutiveAssignments: true
+# AlignConsecutiveDeclarations: true
 AlignTrailingComments: false
 AllowShortFunctionsOnASingleLine: Empty
 AlwaysBreakTemplateDeclarations: Yes
@@ -15,7 +15,7 @@ BinPackParameters: false
 ColumnLimit: 100
 FixNamespaceComments: true
 IndentWidth: 4
-#InsertBraces : true
+InsertBraces: true
 InsertTrailingCommas: Wrapped # currently only available for JavaScript
 Language: Cpp
 PackConstructorInitializers: Never
@@ -25,7 +25,7 @@ ReferenceAlignment: Left
 SeparateDefinitionBlocks: Always # version >= 14 required
 SpacesBeforeTrailingComments: 2
 
-#Adjust penalties to prefer break after open bracket
+# Adjust penalties to prefer break after open bracket
 PenaltyBreakAssignment: 100 # default: ?
 PenaltyBreakBeforeFirstCallParameter: 0 # default: 19
 PenaltyBreakComment: 300 # default: 300

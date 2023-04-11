@@ -13,7 +13,8 @@ foreach(source ${examples_sources})
     target_link_libraries(
         ${target_name}
         PRIVATE
-            open62541pp
+            open62541pp::open62541pp
+            open62541pp_project_options
 
     )
 
