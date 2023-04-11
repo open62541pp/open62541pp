@@ -1,6 +1,6 @@
 #pragma once
 
-#include "open62541pp/ApplicationDescription.h"
+#include "open62541pp/types/ApplicationDescription.h"
 
 #include <string>
 
