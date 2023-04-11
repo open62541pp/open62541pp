@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.12)
 
 project(
-    open62541++
-    VERSION 0.1.0
-    DESCRIPTION "C++ wrapper for open62541"
-    HOMEPAGE_URL "https://github.com/open62541pp/open62541pp"
-    LANGUAGES CXX
+        open62541++
+        VERSION 0.1.0
+        DESCRIPTION "C++ wrapper for open62541"
+        HOMEPAGE_URL "https://github.com/open62541pp/open62541pp"
+        LANGUAGES CXX
 )
 
 # set c++ standard explicitly, compile feature "cxx_std_17" does not set -std=c++17 compile flag
@@ -14,7 +14,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 # generate compile_commands.json
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON) 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # compiled binaries folders (same as open62541)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -29,8 +29,8 @@ target_compile_features(open62541pp_project_options INTERFACE cxx_std_17)
 
 if(MSVC)
     target_compile_options(
-        open62541pp_project_options
-        INTERFACE
+            open62541pp_project_options
+            INTERFACE
             /permissive-
             /W4
             /w14640
@@ -56,8 +56,8 @@ else()
     endif()
 
     target_compile_options(
-        open62541pp_project_options
-        INTERFACE
+            open62541pp_project_options
+            INTERFACE
             -Wall
             -Wextra
             -Wshadow
@@ -96,35 +96,34 @@ endif()
 
 # open62541pp library (static/shared depending on option BUILD_SHARED_LIBS)
 add_library(
-    open62541pp
-    src/Helper.cpp
-    src/Node.cpp
-    src/Server.cpp
-    src/types/Builtin.cpp
-    src/types/DataValue.cpp
-    src/types/DateTime.cpp
-    src/types/NodeId.cpp
-    src/types/Variant.cpp
+        open62541pp
+        src/Helper.cpp
+        src/Node.cpp
+        src/Server.cpp
+        src/types/ApplicationDescription.cpp
+        src/types/Builtin.cpp
+        src/types/DataValue.cpp
+        src/types/DateTime.cpp
+        src/types/NodeId.cpp
+        src/types/Variant.cpp
         src/Endpoint.cpp
         src/Client.cpp
         src/NodeClient.cpp
         src/Browser.cpp
         src/ReferenceDescription.cpp
 )
-#add_library(open62541pp::open62541pp ALIAS open62541pp)
-target_include_directories(open62541pp
-        INTERFACE
+add_library(open62541pp::open62541pp ALIAS open62541pp)
+target_include_directories(open62541pp INTERFACE
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
         PUBLIC
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
         )
-
 target_link_libraries(
-    open62541pp
-    PUBLIC
+        open62541pp
+        PUBLIC
         open62541::open62541
-    PRIVATE
+        PRIVATE
         Threads::Threads
         $<BUILD_INTERFACE:open62541pp_project_options>
 )
@@ -143,18 +142,18 @@ if(UAPP_BUILD_TESTS AND UAPP_ENABLE_COVERAGE)
     if(GCOVR_EXE)
         set(gcovr_args "-f" "include/" "-f" "src/" "${CMAKE_BINARY_DIR}")
         add_custom_target(
-            open62541pp_coverage_report
-            COMMAND ${GCOVR_EXE} ${gcovr_args}
-            COMMENT "Generate coverage report"
-            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+                open62541pp_coverage_report
+                COMMAND ${GCOVR_EXE} ${gcovr_args}
+                COMMENT "Generate coverage report"
+                WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         )
         set(coverage_html_output_dir "${CMAKE_BINARY_DIR}/coverage_html")
         make_directory(${coverage_html_output_dir})
         add_custom_target(
-            open62541pp_coverage_report_html
-            COMMAND ${GCOVR_EXE} ${gcovr_args} "--html-details" "${coverage_html_output_dir}/index.html"
-            COMMENT "Generate HTML coverage report"
-            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+                open62541pp_coverage_report_html
+                COMMAND ${GCOVR_EXE} ${gcovr_args} "--html-details" "${coverage_html_output_dir}/index.html"
+                COMMENT "Generate HTML coverage report"
+                WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         )
     endif()
 endif()
