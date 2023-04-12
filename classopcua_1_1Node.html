@@ -162,12 +162,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a873853591e70a3c96e594698bb4a7f7a"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a873853591e70a3c96e594698bb4a7f7a">readArray</a> ()</td></tr>
 <tr class="memdesc:a873853591e70a3c96e594698bb4a7f7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read array from variable node.  <a href="classopcua_1_1Node.html#a873853591e70a3c96e594698bb4a7f7a">More...</a><br /></td></tr>
 <tr class="separator:a873853591e70a3c96e594698bb4a7f7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a346aa2b32e8eb6ed0f831a822b6fd064"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a346aa2b32e8eb6ed0f831a822b6fd064">writeDisplayName</a> (std::string_view name, std::string_view locale)</td></tr>
-<tr class="memdesc:a346aa2b32e8eb6ed0f831a822b6fd064"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set localized display name.  <a href="classopcua_1_1Node.html#a346aa2b32e8eb6ed0f831a822b6fd064">More...</a><br /></td></tr>
-<tr class="separator:a346aa2b32e8eb6ed0f831a822b6fd064"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0d96f34ef78e1389095fdbf8b04c1e33"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a0d96f34ef78e1389095fdbf8b04c1e33">writeDescription</a> (std::string_view name, std::string_view locale)</td></tr>
-<tr class="memdesc:a0d96f34ef78e1389095fdbf8b04c1e33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set localized description.  <a href="classopcua_1_1Node.html#a0d96f34ef78e1389095fdbf8b04c1e33">More...</a><br /></td></tr>
-<tr class="separator:a0d96f34ef78e1389095fdbf8b04c1e33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1583117e2aab7dc084e73195cf4541c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#aa1583117e2aab7dc084e73195cf4541c">writeDisplayName</a> (std::string_view locale, std::string_view name)</td></tr>
+<tr class="memdesc:aa1583117e2aab7dc084e73195cf4541c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set localized display name.  <a href="classopcua_1_1Node.html#aa1583117e2aab7dc084e73195cf4541c">More...</a><br /></td></tr>
+<tr class="separator:aa1583117e2aab7dc084e73195cf4541c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a167f6884db7180a6542fdd99f213f245"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a167f6884db7180a6542fdd99f213f245">writeDescription</a> (std::string_view locale, std::string_view name)</td></tr>
+<tr class="memdesc:a167f6884db7180a6542fdd99f213f245"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set localized description.  <a href="classopcua_1_1Node.html#a167f6884db7180a6542fdd99f213f245">More...</a><br /></td></tr>
+<tr class="separator:a167f6884db7180a6542fdd99f213f245"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05044c366407b350be4b6cac5289cbff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a05044c366407b350be4b6cac5289cbff">writeWriteMask</a> (uint32_t mask)</td></tr>
 <tr class="memdesc:a05044c366407b350be4b6cac5289cbff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set write mask, for example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a1214f1819ce0305107b143ec936e32d4">UA_WRITEMASK_ACCESSLEVEL</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a787ca45478013b2f4f928453429ba701">UA_WRITEMASK_DESCRIPTION</a></code>.  <a href="classopcua_1_1Node.html#a05044c366407b350be4b6cac5289cbff">More...</a><br /></td></tr>
 <tr class="separator:a05044c366407b350be4b6cac5289cbff"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1449,8 +1449,8 @@ template&lt;typename InputIt , Type type&gt; </div>
 
 </div>
 </div>
-<a id="a0d96f34ef78e1389095fdbf8b04c1e33"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d96f34ef78e1389095fdbf8b04c1e33">&#9670;&nbsp;</a></span>writeDescription()</h2>
+<a id="a167f6884db7180a6542fdd99f213f245"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a167f6884db7180a6542fdd99f213f245">&#9670;&nbsp;</a></span>writeDescription()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1462,13 +1462,13 @@ template&lt;typename InputIt , Type type&gt; </div>
           <td class="memname">void opcua::Node::writeDescription </td>
           <td>(</td>
           <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
+          <td class="paramname"><em>locale</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>locale</em>&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1491,8 +1491,8 @@ template&lt;typename InputIt , Type type&gt; </div>
 
 </div>
 </div>
-<a id="a346aa2b32e8eb6ed0f831a822b6fd064"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a346aa2b32e8eb6ed0f831a822b6fd064">&#9670;&nbsp;</a></span>writeDisplayName()</h2>
+<a id="aa1583117e2aab7dc084e73195cf4541c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1583117e2aab7dc084e73195cf4541c">&#9670;&nbsp;</a></span>writeDisplayName()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1504,13 +1504,13 @@ template&lt;typename InputIt , Type type&gt; </div>
           <td class="memname">void opcua::Node::writeDisplayName </td>
           <td>(</td>
           <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
+          <td class="paramname"><em>locale</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>locale</em>&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
