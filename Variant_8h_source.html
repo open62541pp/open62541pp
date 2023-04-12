@@ -279,7 +279,7 @@ $(function() {
 <div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    checkIsArray();</div>
 <div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    checkReturnType&lt;T&gt;();</div>
 <div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    assert(<span class="keyword">sizeof</span>(T) == <a class="code" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805">handle</a>()-&gt;type-&gt;memSize);  <span class="comment">// NOLINT</span></div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(<a class="code" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805">handle</a>()-&gt;<a class="codeRef" target="_blank" href="open62541/structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">data</a>);</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(<a class="code" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805">handle</a>()-&gt;<a class="codeRef" target="_blank" href="open62541/structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">data</a>);</div>
 <div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;}</div>
 <div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160; </div>
 <div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
