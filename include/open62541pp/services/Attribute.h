@@ -94,7 +94,7 @@ void readValue(Server& server, const NodeId& id, Variant& value);
  * @ingroup Attribute
  */
 void writeDisplayName(
-    Server& server, const NodeId& id, std::string_view name, std::string_view locale
+    Server& server, const NodeId& id, std::string_view locale, std::string_view name
 );
 
 /**
@@ -102,7 +102,7 @@ void writeDisplayName(
  * @ingroup Attribute
  */
 void writeDescription(
-    Server& server, const NodeId& id, std::string_view name, std::string_view locale
+    Server& server, const NodeId& id, std::string_view locale, std::string_view name
 );
 
 /**

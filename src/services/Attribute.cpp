@@ -92,19 +92,19 @@ void readValue(Server& server, const NodeId& id, Variant& value) {
 }
 
 void writeDisplayName(
-    Server& server, const NodeId& id, std::string_view name, std::string_view locale
+    Server& server, const NodeId& id, std::string_view locale, std::string_view name
 ) {
     const auto status = UA_Server_writeDisplayName(
-        server.handle(), id, LocalizedText(name, locale)
+        server.handle(), id, LocalizedText(locale, name)
     );
     detail::throwOnBadStatus(status);
 }
 
 void writeDescription(
-    Server& server, const NodeId& id, std::string_view name, std::string_view locale
+    Server& server, const NodeId& id, std::string_view locale, std::string_view name
 ) {
     const auto status = UA_Server_writeDescription(
-        server.handle(), id, LocalizedText(name, locale)
+        server.handle(), id, LocalizedText(locale, name)
     );
     detail::throwOnBadStatus(status);
 }

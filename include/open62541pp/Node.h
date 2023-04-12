@@ -180,13 +180,13 @@ public:
     std::vector<T> readArray();
 
     /// @copydoc services::writeDisplayName
-    void writeDisplayName(std::string_view name, std::string_view locale) {
-        services::writeDisplayName(server_, nodeId_, name, locale);
+    void writeDisplayName(std::string_view locale, std::string_view name) {
+        services::writeDisplayName(server_, nodeId_, locale, name);
     }
 
     /// @copydoc services::writeDescription
-    void writeDescription(std::string_view name, std::string_view locale) {
-        services::writeDescription(server_, nodeId_, name, locale);
+    void writeDescription(std::string_view locale, std::string_view name) {
+        services::writeDescription(server_, nodeId_, locale, name);
     }
 
     /// @copydoc services::writeWriteMask
