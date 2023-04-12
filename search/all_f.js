@@ -33,7 +33,7 @@ var searchData=
   ['nextsequencenumber_1064',['NextSequenceNumber',['open62541/struct__OpcUa__SubscriptionDiagnosticsDataType.html#af8438314d7aba0bc5eeaffb0c5094fb2',0,'_OpcUa_SubscriptionDiagnosticsDataType']]],
   ['nexttime_1065',['nextTime',['open62541/structUA__TimerEntry.html#ac7871bf7dcca5c30ff9a7d857618cefc',0,'UA_TimerEntry']]],
   ['nm_1066',['nm',['open62541/structUA__NetworkMessageOffsetBuffer.html#a470d1bbb9bc546e90b73ad56fa22d1f4',0,'UA_NetworkMessageOffsetBuffer']]],
-  ['node_1067',['Node',['../classopcua_1_1Node.html',1,'opcua::Node'],['../classopcua_1_1Node.html#a419b6b917de62aa5bfc13f076c53ef98',1,'opcua::Node::Node()'],['open62541/unionUA__NodePointer.html#ad42423747f4204a3b349decae34de5f4',0,'UA_NodePointer::node()']]],
+  ['node_1067',['Node',['../classopcua_1_1Node.html',1,'opcua::Node'],['../classopcua_1_1Node.html#a39226707854784d4883a590dc8dad27e',1,'opcua::Node::Node()'],['open62541/unionUA__NodePointer.html#ad42423747f4204a3b349decae34de5f4',0,'UA_NodePointer::node()']]],
   ['node_2ecpp_1068',['Node.cpp',['../Node_8cpp.html',1,'']]],
   ['node_2eh_1069',['Node.h',['../Node_8h.html',1,'']]],
   ['nodeattributes_1070',['nodeAttributes',['open62541/structUA__AddNodesItem.html#ac968de7300cd071fb16a295b25b4e9ac',0,'UA_AddNodesItem::nodeAttributes()'],['open62541/struct__OpcUa__AddNodesItem.html#a68253c09ff26c0d7c0fc990b07f83d80',0,'_OpcUa_AddNodesItem::NodeAttributes()']]],

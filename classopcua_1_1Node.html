@@ -83,8 +83,8 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a419b6b917de62aa5bfc13f076c53ef98"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a419b6b917de62aa5bfc13f076c53ef98">Node</a> (const <a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id)</td></tr>
-<tr class="separator:a419b6b917de62aa5bfc13f076c53ef98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39226707854784d4883a590dc8dad27e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a39226707854784d4883a590dc8dad27e">Node</a> (const <a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, bool checkExists=true)</td></tr>
+<tr class="separator:a39226707854784d4883a590dc8dad27e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a700db6ef5e78f37c15789a7250bd593d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Server.html">Server</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a700db6ef5e78f37c15789a7250bd593d">getServer</a> () noexcept</td></tr>
 <tr class="memdesc:a700db6ef5e78f37c15789a7250bd593d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get server instance.  <a href="classopcua_1_1Node.html#a700db6ef5e78f37c15789a7250bd593d">More...</a><br /></td></tr>
 <tr class="separator:a700db6ef5e78f37c15789a7250bd593d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -218,8 +218,8 @@ Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00027">27</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a419b6b917de62aa5bfc13f076c53ef98"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a419b6b917de62aa5bfc13f076c53ef98">&#9670;&nbsp;</a></span>Node()</h2>
+<a id="a39226707854784d4883a590dc8dad27e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39226707854784d4883a590dc8dad27e">&#9670;&nbsp;</a></span>Node()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -234,7 +234,13 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>checkExists</em> = <code>true</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -703,7 +709,7 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00023">23</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00022">22</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, <a class="elRef" target="_blank" href="open62541/structUA__BrowsePathResult.html#ae11348f3a72c574221ed01b339fbdbe7">UA_BrowsePathResult::statusCode</a>, <a class="elRef" target="_blank" href="open62541/structUA__BrowsePathTarget.html#a1d9d2bcfe3e4c2b57421fc793820c04c">UA_BrowsePathTarget::targetId</a>, <a class="elRef" target="_blank" href="open62541/structUA__BrowsePathResult.html#a95699c1b9bc5e731870d44be9a9897b7">UA_BrowsePathResult::targets</a>, <a class="elRef" target="_blank" href="open62541/structUA__BrowsePathResult.html#aaeddebfa348c60bb07102dd7655344e9">UA_BrowsePathResult::targetsSize</a>, <a class="el" href="ErrorHandling_8h_source.html#l00042">opcua::detail::throwOnBadStatus()</a>, <a class="elRef" target="_blank" href="open62541/server_8h.html#a635aa8c4249ac0fb66a968e7493843b4">UA_Server_browseSimplifiedBrowsePath()</a>, and <a class="elRef" target="_blank" href="open62541/statuscodes_8h.html#af4649a7ced9ad8f786a1b0765dc41852">UA_STATUSCODE_BADNOMATCH</a>.</p>
 
