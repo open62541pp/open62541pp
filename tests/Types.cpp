@@ -259,11 +259,11 @@ TEST_CASE("Variant") {
         int32_t value = 5;
         var.setScalar(value);
 
-        REQUIRE(var.isScalar());
-        REQUIRE(var.isType(&UA_TYPES[UA_TYPES_INT32]));
-        REQUIRE(var.isType(Type::Int32));
-        REQUIRE(var.isType(NodeId{0, UA_NS0ID_INT32}));
-        REQUIRE(var.getVariantType().value() == Type::Int32);
+        CHECK(var.isScalar());
+        CHECK(var.isType(&UA_TYPES[UA_TYPES_INT32]));
+        CHECK(var.isType(Type::Int32));
+        CHECK(var.isType(NodeId{0, UA_NS0ID_INT32}));
+        CHECK(var.getVariantType().value() == Type::Int32);
 
         REQUIRE_THROWS(var.getScalar<bool>());
         REQUIRE_THROWS(var.getScalar<int16_t>());
@@ -319,17 +319,17 @@ TEST_CASE("Variant") {
         }
     }
 
-    SECTION("Set/get array") {
+    SECTION("Set/get array (copy)") {
         Variant var;
         std::vector<float> value{0, 1, 2, 3, 4, 5};
         var.setArrayCopy(value);
 
-        REQUIRE(var.isArray());
-        REQUIRE(var.isType(Type::Float));
-        REQUIRE(var.isType(NodeId{0, UA_NS0ID_FLOAT}));
-        REQUIRE(var.getVariantType().value() == Type::Float);
-        REQUIRE(var.getArrayLength() == value.size());
-        REQUIRE(var.handle()->data != value.data());
+        CHECK(var.isArray());
+        CHECK(var.isType(Type::Float));
+        CHECK(var.isType(NodeId{0, UA_NS0ID_FLOAT}));
+        CHECK(var.getVariantType().value() == Type::Float);
+        CHECK(var.getArrayLength() == value.size());
+        CHECK(var.handle()->data != value.data());
 
         REQUIRE_THROWS(var.getArrayCopy<int32_t>());
         REQUIRE_THROWS(var.getArrayCopy<bool>());
@@ -340,6 +340,7 @@ TEST_CASE("Variant") {
         Variant var;
         std::vector<float> value{0, 1, 2};
         var.setArray(value);
+        REQUIRE(var.getArray<float>() == value.data());
         REQUIRE(var.getArrayCopy<float>() == value);
 
         std::vector<float> valueChanged({3, 4, 5});
@@ -369,10 +370,10 @@ TEST_CASE("Variant") {
         std::vector<std::string> value{"a", "b", "c"};
         var.setArrayCopy<std::string, Type::String>(value);
 
-        REQUIRE(var.isArray());
-        REQUIRE(var.isType(Type::String));
-        REQUIRE(var.isType(NodeId{0, UA_NS0ID_STRING}));
-        REQUIRE(var.getVariantType().value() == Type::String);
+        CHECK(var.isArray());
+        CHECK(var.isType(Type::String));
+        CHECK(var.isType(NodeId{0, UA_NS0ID_STRING}));
+        CHECK(var.getVariantType().value() == Type::String);
 
         REQUIRE_THROWS(var.getScalarCopy<std::string>());
         REQUIRE_THROWS(var.getArrayCopy<int32_t>());
