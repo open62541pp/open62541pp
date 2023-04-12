@@ -72,8 +72,8 @@ TEST_CASE("Attribute") {
         REQUIRE(services::readAccessLevel(server, id) == UA_ACCESSLEVELMASK_READ);
 
         // write new attributes
-        REQUIRE_NOTHROW(services::writeDisplayName(server, id, "en-US", "newDisplayName"));
-        REQUIRE_NOTHROW(services::writeDescription(server, id, "de-DE", "newDescription"));
+        REQUIRE_NOTHROW(services::writeDisplayName(server, id, {"en-US", "newDisplayName"}));
+        REQUIRE_NOTHROW(services::writeDescription(server, id, {"de-DE", "newDescription"}));
         REQUIRE_NOTHROW(services::writeWriteMask(server, id, 11));
         REQUIRE_NOTHROW(services::writeDataType(server, id, NodeId{0, 2}));
         REQUIRE_NOTHROW(services::writeValueRank(server, id, ValueRank::TwoDimensions));

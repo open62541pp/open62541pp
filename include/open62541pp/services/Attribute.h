@@ -93,17 +93,13 @@ void readValue(Server& server, const NodeId& id, Variant& value);
  * Set localized display name.
  * @ingroup Attribute
  */
-void writeDisplayName(
-    Server& server, const NodeId& id, std::string_view locale, std::string_view name
-);
+void writeDisplayName(Server& server, const NodeId& id, const LocalizedText& name);
 
 /**
  * Set localized description.
  * @ingroup Attribute
  */
-void writeDescription(
-    Server& server, const NodeId& id, std::string_view locale, std::string_view name
-);
+void writeDescription(Server& server, const NodeId& id, const LocalizedText& name);
 
 /**
  * Set write mask, for example `::UA_WRITEMASK_ACCESSLEVEL | ::UA_WRITEMASK_DESCRIPTION`.
