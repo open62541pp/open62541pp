@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Generic type conversions with `TypeConverter` struct specializations
+- Free functions in services namespace as alternative to `Node` interface (#22)
 - `Server` constructors with custom port and certificate
 - Custom logger with `Server::setLogger`
 - Example `server_instantiation`
@@ -27,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `ExpandedNodeId`
   - `DateTime`
   - `DataValue`
+- Static methods `Variant::from*` for create variants from scalars and arrays (#21)
 
 ### Changed
 
@@ -46,10 +48,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rename `Exception` -> `BadStatus`
 - Use default open62541 attributes for `Node::add*`
 - Use `ReferenceType::HasComponent` as default reference for child variable and object nodes
+- Optional check if `Node` exists in constructor (#24)
 
 ### Removed
 
 - `Variant` constructors to set scalars and arrays directly
+
+### Fixed
+
+- Dereference in `Variant::getArray` (#25)
 
 ## [0.1.0] - 2022-04-24
 
