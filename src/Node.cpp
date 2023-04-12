@@ -9,11 +9,10 @@
 
 namespace opcua {
 
-Node::Node(const Server& server, const NodeId& id)  // NOLINT
+Node::Node(const Server& server, const NodeId& id, bool checkExists)  // NOLINT
     : server_(server),
       nodeId_(id) {
-    // check if node exists
-    {
+    if (checkExists) {
         NodeId outputNode(UA_NODEID_NULL);
         const auto status = UA_Server_readNodeId(server_.handle(), nodeId_, outputNode.handle());
         detail::throwOnBadStatus(status);
@@ -36,7 +35,7 @@ Node Node::getChild(const std::vector<QualifiedName>& path) {
     if (!id.isLocal()) {
         throw BadStatus(UA_STATUSCODE_BADNOMATCH);
     }
-    return {server_, id.getNodeId()};
+    return {server_, id.getNodeId(), false};
 }
 
 /* ---------------------------------------------------------------------------------------------- */

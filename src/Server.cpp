@@ -253,47 +253,47 @@ uint16_t Server::registerNamespace(std::string_view name) {
 }
 
 Node Server::getNode(const NodeId& id) {
-    return {*this, id};
+    return {*this, id, true};
 }
 
 Node Server::getRootNode() {
-    return {*this, {0, UA_NS0ID_ROOTFOLDER}};
+    return {*this, {0, UA_NS0ID_ROOTFOLDER}, false};
 }
 
 Node Server::getObjectsNode() {
-    return {*this, {0, UA_NS0ID_OBJECTSFOLDER}};
+    return {*this, {0, UA_NS0ID_OBJECTSFOLDER}, false};
 }
 
 Node Server::getTypesNode() {
-    return {*this, {0, UA_NS0ID_TYPESFOLDER}};
+    return {*this, {0, UA_NS0ID_TYPESFOLDER}, false};
 }
 
 Node Server::getViewsNode() {
-    return {*this, {0, UA_NS0ID_VIEWSFOLDER}};
+    return {*this, {0, UA_NS0ID_VIEWSFOLDER}, false};
 }
 
 Node Server::getObjectTypesNode() {
-    return {*this, {0, UA_NS0ID_OBJECTTYPESFOLDER}};
+    return {*this, {0, UA_NS0ID_OBJECTTYPESFOLDER}, false};
 }
 
 Node Server::getVariableTypesNode() {
-    return {*this, {0, UA_NS0ID_VARIABLETYPESFOLDER}};
+    return {*this, {0, UA_NS0ID_VARIABLETYPESFOLDER}, false};
 }
 
 Node Server::getDataTypesNode() {
-    return {*this, {0, UA_NS0ID_DATATYPESFOLDER}};
+    return {*this, {0, UA_NS0ID_DATATYPESFOLDER}, false};
 }
 
 Node Server::getReferenceTypesNode() {
-    return {*this, {0, UA_NS0ID_REFERENCETYPESFOLDER}};
+    return {*this, {0, UA_NS0ID_REFERENCETYPESFOLDER}, false};
 }
 
 Node Server::getBaseObjectTypeNode() {
-    return {*this, {0, UA_NS0ID_BASEOBJECTTYPE}};
+    return {*this, {0, UA_NS0ID_BASEOBJECTTYPE}, false};
 }
 
 Node Server::getBaseDataVariableTypeNode() {
-    return {*this, {0, UA_NS0ID_BASEDATAVARIABLETYPE}};
+    return {*this, {0, UA_NS0ID_BASEDATAVARIABLETYPE}, false};
 }
 
 UA_Server* Server::handle() noexcept {
