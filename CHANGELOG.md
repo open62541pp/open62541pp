@@ -7,9 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `asWrapper` function to cast native refs to wrapper refs (#30, #31)
+- `DataValue::getValuePtr` method
+
 ### Changed
 
-- Pass `LocalizedText` instead of members (`locale`, `text`) to `Node::writeDisplayName`, `Node::writeDescription`, `services::writeDisplayName`, services::writeDescription` (#29)
+- Templated `Node` class (`Node<Server>`, `Node<Client>`) as preparation for client implementation (#32)
+- Return reference from `ExpandedNodeId::getNodeId`
+- Pass `LocalizedText` instead of members (`locale`, `text`) to `Node::writeDisplayName`, `Node::writeDescription`, `services::writeDisplayName`, `services::writeDescription` (#29)
+
+### Fixed
+
+- `TypeConverter::toNative` specialization for wrapper types
 
 ## [0.2.0] - 2023-04-12
 
