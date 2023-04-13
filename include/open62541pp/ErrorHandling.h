@@ -7,6 +7,10 @@
 
 namespace opcua {
 
+/**
+ * Exception for bad status codes from open62541 `UA_STATUSCODE_*`.
+ * @see statuscodes.h
+ */
 class BadStatus : public std::exception {
 public:
     explicit BadStatus(UA_StatusCode code)

@@ -55,6 +55,11 @@ TEST_CASE("Attribute") {
     Server server;
     const NodeId objectsId{0, UA_NS0ID_OBJECTSFOLDER};
 
+    SECTION("Check if node id exists") {
+        CHECK(services::checkNodeIdExists(server, {0, UA_NS0ID_OBJECTSFOLDER}));
+        CHECK_FALSE(services::checkNodeIdExists(server, {0, "Invalid"}));
+    }
+
     SECTION("Read/write node attributes") {
         const NodeId id{1, "testAttributes"};
         services::addVariable(server, objectsId, id, "testAttributes");
@@ -179,4 +184,19 @@ TEST_CASE("Attribute") {
         CHECK(valueRead->sourcePicoseconds == valueWrite->sourcePicoseconds);
     }
 #endif
+}
+
+TEST_CASE("Browse") {
+    Server server;
+
+    SECTION("Browse child") {
+        const NodeId rootId{0, UA_NS0ID_ROOTFOLDER};
+
+        REQUIRE_THROWS(services::browseChild(server, rootId, {}));
+        REQUIRE_THROWS(services::browseChild(server, rootId, {{0, "Invalid"}}));
+        REQUIRE(
+            services::browseChild(server, rootId, {{0, "Types"}, {0, "ObjectTypes"}}) ==
+            NodeId{0, UA_NS0ID_OBJECTTYPESFOLDER}
+        );
+    }
 }

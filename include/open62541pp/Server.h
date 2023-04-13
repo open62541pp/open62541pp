@@ -16,6 +16,8 @@ namespace opcua {
 
 // forward declaration
 class NodeId;
+
+template <typename ServerOrClient>
 class Node;
 
 /// Login credentials.
@@ -63,19 +65,17 @@ public:
     /// Register namespace. The new namespace index will be returned.
     [[nodiscard]] uint16_t registerNamespace(std::string_view name);
 
-    Node getNode(const NodeId& id);
-    Node getRootNode();
-    Node getObjectsNode();
-    Node getTypesNode();
-    Node getViewsNode();
-    Node getObjectTypesNode();
-    Node getVariableTypesNode();
-    Node getDataTypesNode();
-    Node getReferenceTypesNode();
-    Node getBaseObjectTypeNode();
-    Node getBaseDataVariableTypeNode();
-
-    void removeNode(const NodeId& id);
+    Node<Server> getNode(const NodeId& id);
+    Node<Server> getRootNode();
+    Node<Server> getObjectsNode();
+    Node<Server> getTypesNode();
+    Node<Server> getViewsNode();
+    Node<Server> getObjectTypesNode();
+    Node<Server> getVariableTypesNode();
+    Node<Server> getDataTypesNode();
+    Node<Server> getReferenceTypesNode();
+    Node<Server> getBaseObjectTypeNode();
+    Node<Server> getBaseDataVariableTypeNode();
 
     UA_Server* handle() noexcept;
     const UA_Server* handle() const noexcept;
