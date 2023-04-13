@@ -171,6 +171,7 @@ TEST_CASE("ExpandedNodeId") {
     ExpandedNodeId idLocal({1, "local"}, {}, 0);
     REQUIRE(idLocal.isLocal());
     REQUIRE(idLocal.getNodeId() == NodeId{1, "local"});
+    REQUIRE(idLocal.getNodeId().handle() == &idLocal.handle()->nodeId);  // return ref
     REQUIRE(idLocal.getNamespaceUri().empty());
     REQUIRE(idLocal.getServerIndex() == 0);
 
