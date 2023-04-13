@@ -384,8 +384,21 @@ TEST_CASE("Variant") {
 }
 
 TEST_CASE("DataValue") {
+    SECTION("Empty") {
+        DataValue dv{};
+        CHECK(dv.getValuePtr() == nullptr);
+        CHECK_FALSE(dv.getValue().has_value());
+        CHECK_FALSE(dv.getSourceTimestamp().has_value());
+        CHECK_FALSE(dv.getServerTimestamp().has_value());
+        CHECK_FALSE(dv.getSourcePicoseconds().has_value());
+        CHECK_FALSE(dv.getServerPicoseconds().has_value());
+        CHECK_FALSE(dv.getStatusCode().has_value());
+    }
+
     SECTION("Constructor with all optional parameter empty") {
         DataValue dv({}, {}, {}, {}, {}, {});
+        CHECK(dv.getValuePtr() != nullptr);
+        CHECK(dv.getValuePtr()->handle() == &dv.handle()->value);
         CHECK(dv.getValue().has_value());
         CHECK_FALSE(dv.getSourceTimestamp().has_value());
         CHECK_FALSE(dv.getServerTimestamp().has_value());
@@ -397,6 +410,8 @@ TEST_CASE("DataValue") {
     SECTION("Constructor with all optional parameter specified") {
         Variant var;
         DataValue dv(var, DateTime{1}, DateTime{2}, 3, 4, 5);
+        CHECK(dv.getValuePtr() != nullptr);
+        CHECK(dv.getValuePtr()->handle() == &dv.handle()->value);
         CHECK(dv.getValue().has_value());
         CHECK(dv.getSourceTimestamp().value() == DateTime{1});
         CHECK(dv.getServerTimestamp().value() == DateTime{2});

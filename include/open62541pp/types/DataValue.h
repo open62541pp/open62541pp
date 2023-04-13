@@ -13,7 +13,6 @@ namespace opcua {
 /**
  * UA_DataValue wrapper class.
  * @see https://reference.opcfoundation.org/v104/Core/docs/Part4/7.7
- * @todo Prevent unnecessary copies, maybe just use a struct with wrapped types?
  * @ingroup TypeWrapper
  */
 class DataValue : public TypeWrapper<UA_DataValue, UA_TYPES_DATAVALUE> {
@@ -29,6 +28,11 @@ public:
         std::optional<uint16_t> serverPicoseconds,
         std::optional<UA_StatusCode> statusCode
     );
+
+    /// Get value as pointer (might be `nullptr` if not set).
+    Variant* getValuePtr() noexcept;
+    /// Get value as pointer (might be `nullptr` if not set).
+    const Variant* getValuePtr() const noexcept;
 
     /// Get value.
     std::optional<Variant> getValue() const;
