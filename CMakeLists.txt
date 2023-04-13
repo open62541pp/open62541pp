@@ -98,9 +98,9 @@ endif()
 add_library(
     open62541pp
     src/Helper.cpp
-    src/Node.cpp
     src/Server.cpp
     src/services/Attribute.cpp
+    src/services/Browse.cpp
     src/services/NodeManagement.cpp
     src/types/Builtin.cpp
     src/types/DataValue.cpp

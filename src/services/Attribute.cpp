@@ -9,6 +9,12 @@
 
 namespace opcua::services {
 
+bool checkNodeIdExists(Server& server, const NodeId& id) {
+    NodeId result(UA_NODEID_NULL);
+    const auto status = UA_Server_readNodeId(server.handle(), id, result.handle());
+    return detail::isGoodStatus(status);
+}
+
 NodeClass readNodeClass(Server& server, const NodeId& id) {
     UA_NodeClass nodeClass = UA_NODECLASS_UNSPECIFIED;
     const auto status = UA_Server_readNodeClass(server.handle(), id, &nodeClass);

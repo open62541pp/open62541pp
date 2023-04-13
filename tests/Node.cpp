@@ -5,14 +5,14 @@
 
 using namespace opcua;
 
-TEST_CASE("Node") {
+TEST_CASE("Node<Server>") {
     Server server;
 
     SECTION("Constructor") {
-        REQUIRE_NOTHROW(Node(server, NodeId(0, UA_NS0ID_BOOLEAN), false));
-        REQUIRE_NOTHROW(Node(server, NodeId(0, UA_NS0ID_BOOLEAN), true));
-        REQUIRE_NOTHROW(Node(server, NodeId(0, "DoesNotExist"), false));
-        REQUIRE_THROWS(Node(server, NodeId(0, "DoesNotExist"), true));
+        REQUIRE_NOTHROW(Node<Server>(server, NodeId(0, UA_NS0ID_BOOLEAN), false));
+        REQUIRE_NOTHROW(Node<Server>(server, NodeId(0, UA_NS0ID_BOOLEAN), true));
+        REQUIRE_NOTHROW(Node<Server>(server, NodeId(0, "DoesNotExist"), false));
+        REQUIRE_THROWS(Node<Server>(server, NodeId(0, "DoesNotExist"), true));
     }
 
     SECTION("Node class of default nodes") {
@@ -24,15 +24,6 @@ TEST_CASE("Node") {
         CHECK(server.getVariableTypesNode().readNodeClass() == NodeClass::Object);
         CHECK(server.getDataTypesNode().readNodeClass() == NodeClass::Object);
         CHECK(server.getReferenceTypesNode().readNodeClass() == NodeClass::Object);
-    }
-
-    SECTION("Get child") {
-        REQUIRE_THROWS(server.getRootNode().getChild({}));
-        REQUIRE_THROWS(server.getRootNode().getChild({{0, "Invalid"}}));
-        REQUIRE(
-            server.getRootNode().getChild({{0, "Types"}, {0, "ObjectTypes"}}) ==
-            server.getObjectTypesNode()
-        );
     }
 
     SECTION("Try read/write with node classes other than Variable") {

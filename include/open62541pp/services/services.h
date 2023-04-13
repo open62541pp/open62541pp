@@ -8,4 +8,5 @@
  */
 
 #include "open62541pp/services/Attribute.h"
+#include "open62541pp/services/Browse.h"
 #include "open62541pp/services/NodeManagement.h"
