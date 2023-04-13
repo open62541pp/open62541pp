@@ -171,7 +171,7 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1TypeList.html">TypeList</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html">TypeWrapper</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template base class to wrap UA_* type objects.  <a href="classopcua_1_1TypeWrapper.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template base class to wrap <code>UA_*</code> type objects.  <a href="classopcua_1_1TypeWrapper.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Variant.html">Variant</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="elRef" target="_blank" href="open62541/structUA__Variant.html">UA_Variant</a> wrapper class.  <a href="classopcua_1_1Variant.html#details">More...</a><br /></td></tr>
@@ -374,6 +374,14 @@ Functions</h2></td></tr>
 <tr class="separator:a7702f8e40ac9da8201698e3e1ccad755"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2422738e8e762cb3841f0e129c2ec29c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a2422738e8e762cb3841f0e129c2ec29c">operator!=</a> (const <a class="el" href="classopcua_1_1Server.html">Server</a> &amp;left, const <a class="el" href="classopcua_1_1Server.html">Server</a> &amp;right) noexcept</td></tr>
 <tr class="separator:a2422738e8e762cb3841f0e129c2ec29c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa4275beab6de0c1db2d1a738e86e40ab"><td class="memTemplParams" colspan="2">template&lt;typename WrapperType , typename NativeType  = typename WrapperType::Native&gt; </td></tr>
+<tr class="memitem:gaa4275beab6de0c1db2d1a738e86e40ab"><td class="memTemplItemLeft" align="right" valign="top">constexpr WrapperType &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__TypeWrapper.html#gaa4275beab6de0c1db2d1a738e86e40ab">asWrapper</a> (NativeType &amp;native) noexcept</td></tr>
+<tr class="memdesc:gaa4275beab6de0c1db2d1a738e86e40ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast native <code>UA_*</code> type object references to <a class="el" href="classopcua_1_1TypeWrapper.html" title="Template base class to wrap UA_* type objects.">TypeWrapper</a> object references.  <a href="group__TypeWrapper.html#gaa4275beab6de0c1db2d1a738e86e40ab">More...</a><br /></td></tr>
+<tr class="separator:gaa4275beab6de0c1db2d1a738e86e40ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1db4a7e984865f4ec43f7eb9dfa2b690"><td class="memTemplParams" colspan="2">template&lt;typename WrapperType , typename NativeType  = typename WrapperType::Native&gt; </td></tr>
+<tr class="memitem:ga1db4a7e984865f4ec43f7eb9dfa2b690"><td class="memTemplItemLeft" align="right" valign="top">constexpr const WrapperType &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__TypeWrapper.html#ga1db4a7e984865f4ec43f7eb9dfa2b690">asWrapper</a> (const NativeType &amp;native) noexcept</td></tr>
+<tr class="memdesc:ga1db4a7e984865f4ec43f7eb9dfa2b690"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast native <code>UA_*</code> type object references to <a class="el" href="classopcua_1_1TypeWrapper.html" title="Template base class to wrap UA_* type objects.">TypeWrapper</a> object references.  <a href="group__TypeWrapper.html#ga1db4a7e984865f4ec43f7eb9dfa2b690">More...</a><br /></td></tr>
+<tr class="separator:ga1db4a7e984865f4ec43f7eb9dfa2b690"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a67163e9bbbe5e066a9a98dde618eadea"><td class="memTemplParams" colspan="2">template&lt;typename T , typename  = std::enable_if_t&lt;detail::IsTypeWrapper&lt;T&gt;::value&gt;&gt; </td></tr>
 <tr class="memitem:a67163e9bbbe5e066a9a98dde618eadea"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a67163e9bbbe5e066a9a98dde618eadea">operator==</a> (const T &amp;left, const T &amp;right) noexcept</td></tr>
 <tr class="separator:a67163e9bbbe5e066a9a98dde618eadea"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -964,7 +972,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;detail::IsTypeWrapper&l
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00200">200</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00239">239</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -1004,7 +1012,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;detail::IsTypeWrapper&l
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00205">205</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00244">244</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -1044,7 +1052,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;detail::IsTypeWrapper&l
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00215">215</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00254">254</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -1160,7 +1168,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;detail::IsTypeWrapper&l
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00195">195</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00234">234</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -1200,7 +1208,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;detail::IsTypeWrapper&l
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00210">210</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00249">249</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -1240,7 +1248,7 @@ template&lt;typename T , typename  = std::enable_if_t&lt;detail::IsTypeWrapper&l
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00220">220</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00259">259</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
 </div>
 </div>

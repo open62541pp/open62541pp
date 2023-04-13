@@ -65,7 +65,8 @@ $(function() {
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Wrapper classes of UA_* types</div>  </div>
 </div><!--header-->
@@ -111,12 +112,90 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="elRef" target="_blank" href="open62541/structUA__Variant.html">UA_Variant</a> wrapper class.  <a href="classopcua_1_1Variant.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; T, typeIndex &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template base class to wrap UA_* type objects.  <a href="classopcua_1_1TypeWrapper.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template base class to wrap <code>UA_*</code> type objects.  <a href="classopcua_1_1TypeWrapper.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:gaa4275beab6de0c1db2d1a738e86e40ab"><td class="memTemplParams" colspan="2">template&lt;typename WrapperType , typename NativeType  = typename WrapperType::Native&gt; </td></tr>
+<tr class="memitem:gaa4275beab6de0c1db2d1a738e86e40ab"><td class="memTemplItemLeft" align="right" valign="top">constexpr WrapperType &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__TypeWrapper.html#gaa4275beab6de0c1db2d1a738e86e40ab">opcua::asWrapper</a> (NativeType &amp;native) noexcept</td></tr>
+<tr class="memdesc:gaa4275beab6de0c1db2d1a738e86e40ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast native <code>UA_*</code> type object references to <a class="el" href="classopcua_1_1TypeWrapper.html" title="Template base class to wrap UA_* type objects.">TypeWrapper</a> object references.  <a href="group__TypeWrapper.html#gaa4275beab6de0c1db2d1a738e86e40ab">More...</a><br /></td></tr>
+<tr class="separator:gaa4275beab6de0c1db2d1a738e86e40ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1db4a7e984865f4ec43f7eb9dfa2b690"><td class="memTemplParams" colspan="2">template&lt;typename WrapperType , typename NativeType  = typename WrapperType::Native&gt; </td></tr>
+<tr class="memitem:ga1db4a7e984865f4ec43f7eb9dfa2b690"><td class="memTemplItemLeft" align="right" valign="top">constexpr const WrapperType &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__TypeWrapper.html#ga1db4a7e984865f4ec43f7eb9dfa2b690">opcua::asWrapper</a> (const NativeType &amp;native) noexcept</td></tr>
+<tr class="memdesc:ga1db4a7e984865f4ec43f7eb9dfa2b690"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast native <code>UA_*</code> type object references to <a class="el" href="classopcua_1_1TypeWrapper.html" title="Template base class to wrap UA_* type objects.">TypeWrapper</a> object references.  <a href="group__TypeWrapper.html#ga1db4a7e984865f4ec43f7eb9dfa2b690">More...</a><br /></td></tr>
+<tr class="separator:ga1db4a7e984865f4ec43f7eb9dfa2b690"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Safe wrapper classes for heap-allocated open62541 <code>UA_*</code> types to prevent memory leaks. <br  />
 All wrapper classes inherit from <a class="el" href="classopcua_1_1TypeWrapper.html" title="Template base class to wrap UA_* type objects.">opcua::TypeWrapper</a>. Native open62541 objects can be accessed using the <a class="el" href="classopcua_1_1TypeWrapper.html#af6c6b5bb6ee6bb9a4aa95f6aabb20805" title="Return pointer to native object.">opcua::TypeWrapper::handle()</a> method. </p>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ga1db4a7e984865f4ec43f7eb9dfa2b690"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1db4a7e984865f4ec43f7eb9dfa2b690">&#9670;&nbsp;</a></span>asWrapper() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename WrapperType , typename NativeType  = typename WrapperType::Native&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr const WrapperType&amp; opcua::asWrapper </td>
+          <td>(</td>
+          <td class="paramtype">const NativeType &amp;&#160;</td>
+          <td class="paramname"><em>native</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Cast native <code>UA_*</code> type object references to <a class="el" href="classopcua_1_1TypeWrapper.html" title="Template base class to wrap UA_* type objects.">TypeWrapper</a> object references. </p>
+<p>This is especially helpful to avoid copies in getter methods of composed types. A reference to a native type object be casted to a reference to a wrapper object. </p><dl class="section see"><dt>See also</dt><dd><a href="https://en.cppreference.com/w/cpp/language/static_cast#pointer-interconvertible">https://en.cppreference.com/w/cpp/language/static_cast#pointer-interconvertible</a> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00224">224</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+
+</div>
+</div>
+<a id="gaa4275beab6de0c1db2d1a738e86e40ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa4275beab6de0c1db2d1a738e86e40ab">&#9670;&nbsp;</a></span>asWrapper() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename WrapperType , typename NativeType  = typename WrapperType::Native&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr WrapperType&amp; opcua::asWrapper </td>
+          <td>(</td>
+          <td class="paramtype">NativeType &amp;&#160;</td>
+          <td class="paramname"><em>native</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Cast native <code>UA_*</code> type object references to <a class="el" href="classopcua_1_1TypeWrapper.html" title="Template base class to wrap UA_* type objects.">TypeWrapper</a> object references. </p>
+<p>This is especially helpful to avoid copies in getter methods of composed types. A reference to a native type object be casted to a reference to a wrapper object. </p><dl class="section see"><dt>See also</dt><dd><a href="https://en.cppreference.com/w/cpp/language/static_cast#pointer-interconvertible">https://en.cppreference.com/w/cpp/language/static_cast#pointer-interconvertible</a> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00216">216</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
