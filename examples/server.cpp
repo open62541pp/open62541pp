@@ -11,12 +11,9 @@ int main() {
                   << "[" << opcua::getLogCategoryName(category) << "] " << msg << std::endl;
     });
 
-    const opcua::NodeId myIntegerNodeId{1, "the.answer"};
-    const std::string myIntegerName{"the answer"};
-
     // add variable node
     auto parentNode = server.getObjectsNode();
-    auto myIntegerNode = parentNode.addVariable(myIntegerNodeId, myIntegerName);
+    auto myIntegerNode = parentNode.addVariable({1, "the.answer"}, "the answer");
 
     // set node attributes
     myIntegerNode.writeDataType(opcua::Type::Int32);

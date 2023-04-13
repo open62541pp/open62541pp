@@ -14,7 +14,7 @@ Features and goals:
 
 - High-level and easy to use classes similar to the [python-opcua API](https://python-opcua.readthedocs.io):
   - `opcua::Server`
-  - `opcua::Client` *TODO*
+  - `opcua::Client` (ToDo)
   - `opcua::Node`
 - Safe wrapper classes for open62541 `UA_*` types to prevent memory leaks
 - Native open62541 objects can be accessed using the `handle()` method of the wrapping classes
@@ -35,17 +35,14 @@ Features and goals:
 int main() {
     opcua::Server server;
 
-    const opcua::NodeId myIntegerNodeId{1, "the.answer"};
-    const std::string   myIntegerName{"the answer"};
-
     // add variable node
-    auto parentNode    = server.getObjectsNode();
-    auto myIntegerNode = parentNode.addVariable(myIntegerNodeId, myIntegerName);
+    auto parentNode = server.getObjectsNode();
+    auto myIntegerNode = parentNode.addVariable({1, "the.answer"}, "the answer");
 
     // set node attributes
     myIntegerNode.writeDataType(opcua::Type::Int32);
-    myIntegerNode.writeDisplayName("en-US", "the answer");
-    myIntegerNode.writeDescription("en-US", "the answer");
+    myIntegerNode.writeDisplayName({"en-US", "the answer"});
+    myIntegerNode.writeDescription({"en-US", "the answer"});
 
     // write value
     myIntegerNode.writeScalar(42);
@@ -106,7 +103,7 @@ struct TypeConverter<std::string> {
 ### Type map of built-in types
 
 | Type Enum `opcua::Type`  | Type                 | Typedef     | Wrapper                           | Conversions               |
-|--------------------------|----------------------|-------------|-----------------------------------|---------------------------|
+| ------------------------ | -------------------- | ----------- | --------------------------------- | ------------------------- |
 | Boolean                  | `UA_Boolean`         | `bool`      |                                   |                           |
 | SByte                    | `UA_SByte`           | `int8_t`    |                                   |                           |
 | Byte                     | `UA_Byte`            | `uint8_t`   |                                   |                           |
