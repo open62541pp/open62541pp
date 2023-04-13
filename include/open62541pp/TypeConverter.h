@@ -276,10 +276,10 @@ struct TypeConverter<UA_ExtensionObject>
 
 template <typename WrapperType>
 struct TypeConverter<WrapperType, std::enable_if_t<detail::IsTypeWrapper<WrapperType>::value>> {
-    using NativeConverter = TypeConverter<typename WrapperType::UaType>;
+    using NativeConverter = TypeConverter<typename WrapperType::NativeType>;
 
     using ValueType = WrapperType;
-    using NativeType = typename WrapperType::UaType;
+    using NativeType = typename WrapperType::NativeType;
     using ValidTypes = TypeList<WrapperType::getType()>;
 
     static void fromNative(const NativeType& src, ValueType& dst) {
