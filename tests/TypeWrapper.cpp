@@ -169,3 +169,31 @@ TEMPLATE_TEST_CASE_SIG(
         REQUIRE(TypeWrapper<T, typeIndex>::getDataType() == &UA_TYPES[typeIndex]);
     }
 }
+
+TEST_CASE("asWrapper") {
+    class Int32Wrapper : public TypeWrapper<int32_t, UA_TYPES_INT32> {
+    public:
+        void increment() {
+            auto& ref = *handle();
+            ++ref;
+        }
+
+        int32_t get() const {
+            return *handle();
+        }
+    };
+
+    SECTION("non-const") {
+        int32_t value = 1;
+        Int32Wrapper& wrapper = asWrapper<Int32Wrapper>(value);
+        wrapper.increment();
+        REQUIRE(value == 2);
+        REQUIRE(wrapper.get() == 2);
+    }
+
+    SECTION("const") {
+        const int32_t value = 1;
+        const Int32Wrapper& wrapper = asWrapper<Int32Wrapper>(value);
+        REQUIRE(wrapper.get() == 1);
+    }
+}
