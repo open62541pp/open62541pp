@@ -36,7 +36,7 @@ public:
     static_assert(typeIndex < UA_TYPES_COUNT);
 
     using TypeWrapperBase = TypeWrapper<T, typeIndex>;
-    using UaType = T;
+    using NativeType = T;
 
     TypeWrapper() = default;
 
