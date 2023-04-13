@@ -34,6 +34,24 @@ TEMPLATE_TEST_CASE(
     }
 }
 
+TEST_CASE("TypeConverter wrapper types") {
+    using FloatWrapper = TypeWrapper<float, UA_TYPES_FLOAT>;
+
+    SECTION("fromNative") {
+        float native = 11.11f;
+        FloatWrapper wrapper;
+        TypeConverter<FloatWrapper>::fromNative(native, wrapper);
+        REQUIRE(*wrapper.handle() == 11.11f);
+    }
+
+    SECTION("toNative") {
+        FloatWrapper wrapper(11.11f);
+        float native{};
+        TypeConverter<FloatWrapper>::toNative(wrapper, native);
+        REQUIRE(native == 11.11f);
+    }
+}
+
 TEMPLATE_TEST_CASE("TypeConverter native strings", "", UA_String, UA_ByteString, UA_XmlElement) {
     TestType src = detail::allocUaString("Test123");
     TestType dst = detail::allocUaString("Overwrite me");

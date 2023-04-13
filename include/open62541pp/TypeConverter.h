@@ -287,7 +287,7 @@ struct TypeConverter<WrapperType, std::enable_if_t<detail::IsTypeWrapper<Wrapper
     }
 
     static void toNative(const ValueType& src, NativeType& dst) {
-        NativeConverter::toNative(dst, src.handle());
+        NativeConverter::toNative(*src.handle(), dst);
     }
 };
 
