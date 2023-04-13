@@ -20,7 +20,7 @@
 <!-- Node0 -->
 <g id="node2" class="node">
 <title>Node0</title>
-<g id="a_node2"><a xlink:href="classopcua_1_1BadStatus.html" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="classopcua_1_1BadStatus.html" target="_top" xlink:title="Exception for bad status codes from open62541 UA_STATUSCODE_*.">
 <polygon fill="none" stroke="black" points="101,-0.5 101,-19.5 202,-19.5 202,-0.5 101,-0.5"/>
 <text text-anchor="middle" x="151.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">opcua::BadStatus</text>
 </a>

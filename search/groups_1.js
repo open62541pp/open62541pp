@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['node_20management_4430',['Node management',['../group__NodeManagement.html',1,'']]]
+  ['browse_4436',['Browse',['../group__Browse.html',1,'']]]
 ];

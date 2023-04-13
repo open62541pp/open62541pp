@@ -1,5 +1,6 @@
 <map id="Services" name="Services">
 <area shape="rect" id="node1" href="$group__Attribute.html" title="Read and write node attributes." alt="" coords="165,5,243,31"/>
-<area shape="rect" id="node2" title="OPC UA services as free functions. Functions are overloaded for both Server and Client (TODO)." alt="" coords="5,31,83,56"/>
-<area shape="rect" id="node3" href="$group__NodeManagement.html" title="Add/delete nodes and references." alt="" coords="131,55,277,80"/>
+<area shape="rect" id="node2" title="OPC UA services as free functions. Functions are overloaded for both Server and Client (TODO)." alt="" coords="5,55,83,80"/>
+<area shape="rect" id="node3" href="$group__Browse.html" title="Browse the address space / view created by a server." alt="" coords="169,55,239,80"/>
+<area shape="rect" id="node4" href="$group__NodeManagement.html" title="Add/delete nodes and references." alt="" coords="131,104,277,129"/>
 </map>

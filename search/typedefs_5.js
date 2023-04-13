@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['types_4310',['Types',['../structopcua_1_1TypeList.html#ac5f695d10565dd8b0b826d299809ff59',1,'opcua::TypeList']]],
-  ['typewrapperbase_4311',['TypeWrapperBase',['../classopcua_1_1TypeWrapper.html#a7f24ba2bf6517bed143c1eb789fff19a',1,'opcua::TypeWrapper']]]
+  ['types_4316',['Types',['../structopcua_1_1TypeList.html#ac5f695d10565dd8b0b826d299809ff59',1,'opcua::TypeList']]],
+  ['typewrapperbase_4317',['TypeWrapperBase',['../classopcua_1_1TypeWrapper.html#a7f24ba2bf6517bed143c1eb789fff19a',1,'opcua::TypeWrapper']]]
 ];

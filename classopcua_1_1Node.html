@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>open62541++: opcua::Node Class Reference</title>
+<title>open62541++: opcua::Node&lt; ServerOrClient &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -72,168 +72,179 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classopcua_1_1Node-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">opcua::Node Class Reference</div>  </div>
+<div class="title">opcua::Node&lt; ServerOrClient &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>High-level node object, to access node attribute, browse and populate address space.  
+<p>High-level node object to access node attribute, browse and populate address space.  
  <a href="classopcua_1_1Node.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="Node_8h_source.html">Node.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a39226707854784d4883a590dc8dad27e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a39226707854784d4883a590dc8dad27e">Node</a> (const <a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, bool checkExists=true)</td></tr>
-<tr class="separator:a39226707854784d4883a590dc8dad27e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a700db6ef5e78f37c15789a7250bd593d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Server.html">Server</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a700db6ef5e78f37c15789a7250bd593d">getServer</a> () noexcept</td></tr>
-<tr class="memdesc:a700db6ef5e78f37c15789a7250bd593d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get server instance.  <a href="classopcua_1_1Node.html#a700db6ef5e78f37c15789a7250bd593d">More...</a><br /></td></tr>
-<tr class="separator:a700db6ef5e78f37c15789a7250bd593d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aebe8fe13822b4889ff46aa45d52fd25d"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classopcua_1_1Server.html">Server</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#aebe8fe13822b4889ff46aa45d52fd25d">getServer</a> () const noexcept</td></tr>
-<tr class="memdesc:aebe8fe13822b4889ff46aa45d52fd25d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get server instance.  <a href="classopcua_1_1Node.html#aebe8fe13822b4889ff46aa45d52fd25d">More...</a><br /></td></tr>
-<tr class="separator:aebe8fe13822b4889ff46aa45d52fd25d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a587319b569db88f3a33a422579662ed6"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a587319b569db88f3a33a422579662ed6">getNodeId</a> () const noexcept</td></tr>
-<tr class="memdesc:a587319b569db88f3a33a422579662ed6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get node id.  <a href="classopcua_1_1Node.html#a587319b569db88f3a33a422579662ed6">More...</a><br /></td></tr>
-<tr class="separator:a587319b569db88f3a33a422579662ed6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afdd136d1198586624fef0e7d374095d6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#afdd136d1198586624fef0e7d374095d6">addFolder</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::string_view browseName, <a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463b">ReferenceType</a> referenceType=<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463baded9b3813b9f642b7166ee3000a3e14f">ReferenceType::HasComponent</a>)</td></tr>
-<tr class="memdesc:afdd136d1198586624fef0e7d374095d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add child folder to node.  <a href="classopcua_1_1Node.html#afdd136d1198586624fef0e7d374095d6">More...</a><br /></td></tr>
-<tr class="separator:afdd136d1198586624fef0e7d374095d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4e522b91588f7c6bd7e512d06564591"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#ae4e522b91588f7c6bd7e512d06564591">addObject</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::string_view browseName, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;objectType={0, <a class="elRef" target="_blank" href="open62541/nodeids_8h.html#ae9c277a866772a21fcff5dea71af45ce">UA_NS0ID_BASEOBJECTTYPE</a>}, <a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463b">ReferenceType</a> referenceType=<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463baded9b3813b9f642b7166ee3000a3e14f">ReferenceType::HasComponent</a>)</td></tr>
-<tr class="memdesc:ae4e522b91588f7c6bd7e512d06564591"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add child object to node.  <a href="classopcua_1_1Node.html#ae4e522b91588f7c6bd7e512d06564591">More...</a><br /></td></tr>
-<tr class="separator:ae4e522b91588f7c6bd7e512d06564591"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb0f1a0ba30f664794e84eff2b80168b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#abb0f1a0ba30f664794e84eff2b80168b">addVariable</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::string_view browseName, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;variableType={0, <a class="elRef" target="_blank" href="open62541/nodeids_8h.html#a820a6680f8fe35af74f6f44c8df63606">UA_NS0ID_BASEDATAVARIABLETYPE</a>}, <a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463b">ReferenceType</a> referenceType=<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463baded9b3813b9f642b7166ee3000a3e14f">ReferenceType::HasComponent</a>)</td></tr>
-<tr class="memdesc:abb0f1a0ba30f664794e84eff2b80168b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add child variable to node.  <a href="classopcua_1_1Node.html#abb0f1a0ba30f664794e84eff2b80168b">More...</a><br /></td></tr>
-<tr class="separator:abb0f1a0ba30f664794e84eff2b80168b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a302d860e6845d5cfc5c33339e8526e4f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a302d860e6845d5cfc5c33339e8526e4f">addProperty</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::string_view browseName)</td></tr>
-<tr class="memdesc:a302d860e6845d5cfc5c33339e8526e4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add child property to node.  <a href="classopcua_1_1Node.html#a302d860e6845d5cfc5c33339e8526e4f">More...</a><br /></td></tr>
-<tr class="separator:a302d860e6845d5cfc5c33339e8526e4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad08c7666af2a0bb91533d6d2530bc38c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#ad08c7666af2a0bb91533d6d2530bc38c">addObjectType</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::string_view browseName, <a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463b">ReferenceType</a> referenceType=<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba67fd3d4f6832b52a95d1938850461a3d">ReferenceType::HasSubType</a>)</td></tr>
-<tr class="memdesc:ad08c7666af2a0bb91533d6d2530bc38c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add child object type to node.  <a href="classopcua_1_1Node.html#ad08c7666af2a0bb91533d6d2530bc38c">More...</a><br /></td></tr>
-<tr class="separator:ad08c7666af2a0bb91533d6d2530bc38c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5659fb8b696d56b9199f83e1931e597"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#ac5659fb8b696d56b9199f83e1931e597">addVariableType</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::string_view browseName, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;variableType={0, <a class="elRef" target="_blank" href="open62541/nodeids_8h.html#a820a6680f8fe35af74f6f44c8df63606">UA_NS0ID_BASEDATAVARIABLETYPE</a>}, <a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463b">ReferenceType</a> referenceType=<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba67fd3d4f6832b52a95d1938850461a3d">ReferenceType::HasSubType</a>)</td></tr>
-<tr class="memdesc:ac5659fb8b696d56b9199f83e1931e597"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add child variable type to node.  <a href="classopcua_1_1Node.html#ac5659fb8b696d56b9199f83e1931e597">More...</a><br /></td></tr>
-<tr class="separator:ac5659fb8b696d56b9199f83e1931e597"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a585f0aaeaea26b6fc04369be0d08a1b2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a585f0aaeaea26b6fc04369be0d08a1b2">addReference</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;targetId, <a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463b">ReferenceType</a> referenceType, bool forward=true)</td></tr>
-<tr class="memdesc:a585f0aaeaea26b6fc04369be0d08a1b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add reference to node.  <a href="classopcua_1_1Node.html#a585f0aaeaea26b6fc04369be0d08a1b2">More...</a><br /></td></tr>
-<tr class="separator:a585f0aaeaea26b6fc04369be0d08a1b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f7acd6470f6507a98f0b70899755f50"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a0f7acd6470f6507a98f0b70899755f50">deleteNode</a> (bool deleteReferences=true)</td></tr>
-<tr class="memdesc:a0f7acd6470f6507a98f0b70899755f50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete node.  <a href="classopcua_1_1Node.html#a0f7acd6470f6507a98f0b70899755f50">More...</a><br /></td></tr>
-<tr class="separator:a0f7acd6470f6507a98f0b70899755f50"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a273e296754e8981d8f6f9dde28c5236c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a273e296754e8981d8f6f9dde28c5236c">getChild</a> (const std::vector&lt; <a class="el" href="classopcua_1_1QualifiedName.html">QualifiedName</a> &gt; &amp;path)</td></tr>
-<tr class="memdesc:a273e296754e8981d8f6f9dde28c5236c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a child specified by its path from this node (only local nodes).  <a href="classopcua_1_1Node.html#a273e296754e8981d8f6f9dde28c5236c">More...</a><br /></td></tr>
-<tr class="separator:a273e296754e8981d8f6f9dde28c5236c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abfa8de771a7d557829adfc3f88bbe71c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6d">NodeClass</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#abfa8de771a7d557829adfc3f88bbe71c">readNodeClass</a> ()</td></tr>
-<tr class="memdesc:abfa8de771a7d557829adfc3f88bbe71c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get node class.  <a href="classopcua_1_1Node.html#abfa8de771a7d557829adfc3f88bbe71c">More...</a><br /></td></tr>
-<tr class="separator:abfa8de771a7d557829adfc3f88bbe71c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa8f78c064c541b4f0bb8ff4afce5123c"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#aa8f78c064c541b4f0bb8ff4afce5123c">readBrowseName</a> ()</td></tr>
-<tr class="memdesc:aa8f78c064c541b4f0bb8ff4afce5123c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get browse name.  <a href="classopcua_1_1Node.html#aa8f78c064c541b4f0bb8ff4afce5123c">More...</a><br /></td></tr>
-<tr class="separator:aa8f78c064c541b4f0bb8ff4afce5123c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9c6b24266da950881482d6f75dd058d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#ae9c6b24266da950881482d6f75dd058d">readDisplayName</a> ()</td></tr>
-<tr class="memdesc:ae9c6b24266da950881482d6f75dd058d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get localized display name.  <a href="classopcua_1_1Node.html#ae9c6b24266da950881482d6f75dd058d">More...</a><br /></td></tr>
-<tr class="separator:ae9c6b24266da950881482d6f75dd058d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52029d430ca9806def83bdb7d4ed6f57"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a52029d430ca9806def83bdb7d4ed6f57">readDescription</a> ()</td></tr>
-<tr class="memdesc:a52029d430ca9806def83bdb7d4ed6f57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get localized description.  <a href="classopcua_1_1Node.html#a52029d430ca9806def83bdb7d4ed6f57">More...</a><br /></td></tr>
-<tr class="separator:a52029d430ca9806def83bdb7d4ed6f57"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3238798a42e65f2ce93c1f881975bc0c"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a3238798a42e65f2ce93c1f881975bc0c">readWriteMask</a> ()</td></tr>
-<tr class="memdesc:a3238798a42e65f2ce93c1f881975bc0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get write mask, for example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a1214f1819ce0305107b143ec936e32d4">UA_WRITEMASK_ACCESSLEVEL</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a787ca45478013b2f4f928453429ba701">UA_WRITEMASK_DESCRIPTION</a></code>.  <a href="classopcua_1_1Node.html#a3238798a42e65f2ce93c1f881975bc0c">More...</a><br /></td></tr>
-<tr class="separator:a3238798a42e65f2ce93c1f881975bc0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e5cdf0be2434d36d00a5831da2a0cc4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1NodeId.html">NodeId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a8e5cdf0be2434d36d00a5831da2a0cc4">readDataType</a> ()</td></tr>
-<tr class="memdesc:a8e5cdf0be2434d36d00a5831da2a0cc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get data type of variable (type) node as <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a>.  <a href="classopcua_1_1Node.html#a8e5cdf0be2434d36d00a5831da2a0cc4">More...</a><br /></td></tr>
-<tr class="separator:a8e5cdf0be2434d36d00a5831da2a0cc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1780740ed1607ac94a2ef23e0fd6caaa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383">ValueRank</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a1780740ed1607ac94a2ef23e0fd6caaa">readValueRank</a> ()</td></tr>
-<tr class="memdesc:a1780740ed1607ac94a2ef23e0fd6caaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get value rank of variable (type) node.  <a href="classopcua_1_1Node.html#a1780740ed1607ac94a2ef23e0fd6caaa">More...</a><br /></td></tr>
-<tr class="separator:a1780740ed1607ac94a2ef23e0fd6caaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a961d458bee69a6a15dfc4c59bc9a3bec"><td class="memItemLeft" align="right" valign="top">std::vector&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a961d458bee69a6a15dfc4c59bc9a3bec">readArrayDimensions</a> ()</td></tr>
-<tr class="memdesc:a961d458bee69a6a15dfc4c59bc9a3bec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get array dimensions of variable (type) node.  <a href="classopcua_1_1Node.html#a961d458bee69a6a15dfc4c59bc9a3bec">More...</a><br /></td></tr>
-<tr class="separator:a961d458bee69a6a15dfc4c59bc9a3bec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8336a2ee08493511cef12081925870b5"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a8336a2ee08493511cef12081925870b5">readAccessLevel</a> ()</td></tr>
-<tr class="memdesc:a8336a2ee08493511cef12081925870b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get access level mask of variable node, for example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a40ea076d6ef4c0aaccdc0d14fb2573c4">UA_ACCESSLEVELMASK_READ</a></code>.  <a href="classopcua_1_1Node.html#a8336a2ee08493511cef12081925870b5">More...</a><br /></td></tr>
-<tr class="separator:a8336a2ee08493511cef12081925870b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2dd53c43761219d360bf44bb39b8140"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#af2dd53c43761219d360bf44bb39b8140">readDataValue</a> (<a class="el" href="classopcua_1_1DataValue.html">DataValue</a> &amp;value)</td></tr>
-<tr class="memdesc:af2dd53c43761219d360bf44bb39b8140"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read value from variable node as <a class="el" href="classopcua_1_1DataValue.html" title="UA_DataValue wrapper class.">DataValue</a> object.  <a href="classopcua_1_1Node.html#af2dd53c43761219d360bf44bb39b8140">More...</a><br /></td></tr>
-<tr class="separator:af2dd53c43761219d360bf44bb39b8140"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa31ccb4dee9db5d427cf9f3957fdae0d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#aa31ccb4dee9db5d427cf9f3957fdae0d">readValue</a> (<a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;value)</td></tr>
-<tr class="memdesc:aa31ccb4dee9db5d427cf9f3957fdae0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read value from variable node as <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> object.  <a href="classopcua_1_1Node.html#aa31ccb4dee9db5d427cf9f3957fdae0d">More...</a><br /></td></tr>
-<tr class="separator:aa31ccb4dee9db5d427cf9f3957fdae0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c28bf3c7d5a6b860a719f980802bf87"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a4c28bf3c7d5a6b860a719f980802bf87"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a4c28bf3c7d5a6b860a719f980802bf87">readScalar</a> ()</td></tr>
-<tr class="memdesc:a4c28bf3c7d5a6b860a719f980802bf87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read scalar from variable node.  <a href="classopcua_1_1Node.html#a4c28bf3c7d5a6b860a719f980802bf87">More...</a><br /></td></tr>
-<tr class="separator:a4c28bf3c7d5a6b860a719f980802bf87"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a873853591e70a3c96e594698bb4a7f7a"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a873853591e70a3c96e594698bb4a7f7a"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a873853591e70a3c96e594698bb4a7f7a">readArray</a> ()</td></tr>
-<tr class="memdesc:a873853591e70a3c96e594698bb4a7f7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read array from variable node.  <a href="classopcua_1_1Node.html#a873853591e70a3c96e594698bb4a7f7a">More...</a><br /></td></tr>
-<tr class="separator:a873853591e70a3c96e594698bb4a7f7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c115ec085449b0b966c0bd6798d154f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a3c115ec085449b0b966c0bd6798d154f">writeDisplayName</a> (const <a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a> &amp;name)</td></tr>
-<tr class="memdesc:a3c115ec085449b0b966c0bd6798d154f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set localized display name.  <a href="classopcua_1_1Node.html#a3c115ec085449b0b966c0bd6798d154f">More...</a><br /></td></tr>
-<tr class="separator:a3c115ec085449b0b966c0bd6798d154f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1e67ee177deb05ba8c136df1bb92225"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#aa1e67ee177deb05ba8c136df1bb92225">writeDescription</a> (const <a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a> &amp;name)</td></tr>
-<tr class="memdesc:aa1e67ee177deb05ba8c136df1bb92225"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set localized description.  <a href="classopcua_1_1Node.html#aa1e67ee177deb05ba8c136df1bb92225">More...</a><br /></td></tr>
-<tr class="separator:aa1e67ee177deb05ba8c136df1bb92225"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05044c366407b350be4b6cac5289cbff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a05044c366407b350be4b6cac5289cbff">writeWriteMask</a> (uint32_t mask)</td></tr>
-<tr class="memdesc:a05044c366407b350be4b6cac5289cbff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set write mask, for example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a1214f1819ce0305107b143ec936e32d4">UA_WRITEMASK_ACCESSLEVEL</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a787ca45478013b2f4f928453429ba701">UA_WRITEMASK_DESCRIPTION</a></code>.  <a href="classopcua_1_1Node.html#a05044c366407b350be4b6cac5289cbff">More...</a><br /></td></tr>
-<tr class="separator:a05044c366407b350be4b6cac5289cbff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba0649af43bde989f77767b17334e273"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#aba0649af43bde989f77767b17334e273">writeDataType</a> (<a class="el" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966">Type</a> type)</td></tr>
-<tr class="memdesc:aba0649af43bde989f77767b17334e273"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set data type of variable (type) node.  <a href="classopcua_1_1Node.html#aba0649af43bde989f77767b17334e273">More...</a><br /></td></tr>
-<tr class="separator:aba0649af43bde989f77767b17334e273"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac6ce46424b6a9f047bb08a208a734110"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#ac6ce46424b6a9f047bb08a208a734110">writeDataType</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;typeId)</td></tr>
-<tr class="memdesc:ac6ce46424b6a9f047bb08a208a734110"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set data type of variable (type) node by node id.  <a href="classopcua_1_1Node.html#ac6ce46424b6a9f047bb08a208a734110">More...</a><br /></td></tr>
-<tr class="separator:ac6ce46424b6a9f047bb08a208a734110"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f82bb0ef39dcae99d1facd228f69bfb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a8f82bb0ef39dcae99d1facd228f69bfb">writeValueRank</a> (<a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383">ValueRank</a> valueRank)</td></tr>
-<tr class="memdesc:a8f82bb0ef39dcae99d1facd228f69bfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set value rank of variable (type) node.  <a href="classopcua_1_1Node.html#a8f82bb0ef39dcae99d1facd228f69bfb">More...</a><br /></td></tr>
-<tr class="separator:a8f82bb0ef39dcae99d1facd228f69bfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa40f6e854d09c1f5153544803b75f746"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#aa40f6e854d09c1f5153544803b75f746">writeArrayDimensions</a> (const std::vector&lt; uint32_t &gt; &amp;dimensions)</td></tr>
-<tr class="memdesc:aa40f6e854d09c1f5153544803b75f746"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set array dimensions of variable (type) node.  <a href="classopcua_1_1Node.html#aa40f6e854d09c1f5153544803b75f746">More...</a><br /></td></tr>
-<tr class="separator:aa40f6e854d09c1f5153544803b75f746"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0fd71d4eb9d8838ee0929ccf584b454"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#ac0fd71d4eb9d8838ee0929ccf584b454">writeAccessLevel</a> (uint8_t mask)</td></tr>
-<tr class="memdesc:ac0fd71d4eb9d8838ee0929ccf584b454"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set access level mask of variable node, for example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a40ea076d6ef4c0aaccdc0d14fb2573c4">UA_ACCESSLEVELMASK_READ</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a92380e13ac90946ba3d5a7e975dfc5d3">UA_ACCESSLEVELMASK_WRITE</a></code>.  <a href="classopcua_1_1Node.html#ac0fd71d4eb9d8838ee0929ccf584b454">More...</a><br /></td></tr>
-<tr class="separator:ac0fd71d4eb9d8838ee0929ccf584b454"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8825024471ef83f379f5d11e33031151"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a8825024471ef83f379f5d11e33031151">writeModellingRule</a> (<a class="el" href="namespaceopcua.html#ad32e0c353b427fd8b7788a85a78335aa">ModellingRule</a> rule)</td></tr>
-<tr class="memdesc:a8825024471ef83f379f5d11e33031151"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set modelling rule.  <a href="classopcua_1_1Node.html#a8825024471ef83f379f5d11e33031151">More...</a><br /></td></tr>
-<tr class="separator:a8825024471ef83f379f5d11e33031151"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4a85908c30e6620c4423fbdde20a8b36"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a4a85908c30e6620c4423fbdde20a8b36">writeDataValue</a> (const <a class="el" href="classopcua_1_1DataValue.html">DataValue</a> &amp;value)</td></tr>
-<tr class="memdesc:a4a85908c30e6620c4423fbdde20a8b36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write <a class="el" href="classopcua_1_1DataValue.html" title="UA_DataValue wrapper class.">DataValue</a> to variable node.  <a href="classopcua_1_1Node.html#a4a85908c30e6620c4423fbdde20a8b36">More...</a><br /></td></tr>
-<tr class="separator:a4a85908c30e6620c4423fbdde20a8b36"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46d6d97cf5f4217854203b3e0ccf9920"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a46d6d97cf5f4217854203b3e0ccf9920">writeValue</a> (const <a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;value)</td></tr>
-<tr class="memdesc:a46d6d97cf5f4217854203b3e0ccf9920"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> to variable node.  <a href="classopcua_1_1Node.html#a46d6d97cf5f4217854203b3e0ccf9920">More...</a><br /></td></tr>
-<tr class="separator:a46d6d97cf5f4217854203b3e0ccf9920"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c6d1ef783d3cf59bd003c36e69e7162"><td class="memTemplParams" colspan="2">template&lt;typename T , Type type = detail::guessType&lt;T&gt;()&gt; </td></tr>
-<tr class="memitem:a5c6d1ef783d3cf59bd003c36e69e7162"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a5c6d1ef783d3cf59bd003c36e69e7162">writeScalar</a> (const T &amp;value)</td></tr>
-<tr class="memdesc:a5c6d1ef783d3cf59bd003c36e69e7162"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write scalar to variable node.  <a href="classopcua_1_1Node.html#a5c6d1ef783d3cf59bd003c36e69e7162">More...</a><br /></td></tr>
-<tr class="separator:a5c6d1ef783d3cf59bd003c36e69e7162"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a163df53e7c39eaa4178d6f374735721e"><td class="memTemplParams" colspan="2">template&lt;typename T , Type type = detail::guessType&lt;T&gt;()&gt; </td></tr>
-<tr class="memitem:a163df53e7c39eaa4178d6f374735721e"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a163df53e7c39eaa4178d6f374735721e">writeArray</a> (const T *array, size_t size)</td></tr>
-<tr class="memdesc:a163df53e7c39eaa4178d6f374735721e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write array (raw) to variable node.  <a href="classopcua_1_1Node.html#a163df53e7c39eaa4178d6f374735721e">More...</a><br /></td></tr>
-<tr class="separator:a163df53e7c39eaa4178d6f374735721e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1cec05dc658eb096d733d3e8f4a4b926"><td class="memTemplParams" colspan="2">template&lt;typename T , Type type = detail::guessType&lt;T&gt;()&gt; </td></tr>
-<tr class="memitem:a1cec05dc658eb096d733d3e8f4a4b926"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a1cec05dc658eb096d733d3e8f4a4b926">writeArray</a> (const std::vector&lt; T &gt; &amp;array)</td></tr>
-<tr class="memdesc:a1cec05dc658eb096d733d3e8f4a4b926"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write array (std::vector) to variable node.  <a href="classopcua_1_1Node.html#a1cec05dc658eb096d733d3e8f4a4b926">More...</a><br /></td></tr>
-<tr class="separator:a1cec05dc658eb096d733d3e8f4a4b926"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67a0fa913075fcedd69729145755f04b"><td class="memTemplParams" colspan="2">template&lt;typename InputIt , Type type = detail::guessTypeFromIterator&lt;InputIt&gt;()&gt; </td></tr>
-<tr class="memitem:a67a0fa913075fcedd69729145755f04b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a67a0fa913075fcedd69729145755f04b">writeArray</a> (InputIt first, InputIt last)</td></tr>
-<tr class="memdesc:a67a0fa913075fcedd69729145755f04b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write range of elements as array to variable node.  <a href="classopcua_1_1Node.html#a67a0fa913075fcedd69729145755f04b">More...</a><br /></td></tr>
-<tr class="separator:a67a0fa913075fcedd69729145755f04b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4eb8de5f5f135d6268711036883ce2a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#aa4eb8de5f5f135d6268711036883ce2a">Node</a> (ServerOrClient connection, <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> id, bool checkExists=true)</td></tr>
+<tr class="memdesc:aa4eb8de5f5f135d6268711036883ce2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create <a class="el" href="classopcua_1_1Node.html" title="High-level node object to access node attribute, browse and populate address space.">Node</a> object.  <a href="classopcua_1_1Node.html#aa4eb8de5f5f135d6268711036883ce2a">More...</a><br /></td></tr>
+<tr class="separator:aa4eb8de5f5f135d6268711036883ce2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5786eff044bcab506b113c8b00b328a7"><td class="memItemLeft" align="right" valign="top">ServerOrClient &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a5786eff044bcab506b113c8b00b328a7">getConnection</a> () noexcept</td></tr>
+<tr class="memdesc:a5786eff044bcab506b113c8b00b328a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get server/client instance.  <a href="classopcua_1_1Node.html#a5786eff044bcab506b113c8b00b328a7">More...</a><br /></td></tr>
+<tr class="separator:a5786eff044bcab506b113c8b00b328a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab13bb8bff4617586d53246d999212361"><td class="memItemLeft" align="right" valign="top">const ServerOrClient &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#ab13bb8bff4617586d53246d999212361">getConnection</a> () const noexcept</td></tr>
+<tr class="memdesc:ab13bb8bff4617586d53246d999212361"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get server/client instance.  <a href="classopcua_1_1Node.html#ab13bb8bff4617586d53246d999212361">More...</a><br /></td></tr>
+<tr class="separator:ab13bb8bff4617586d53246d999212361"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5661efce6aa153692733c00314f31278"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a5661efce6aa153692733c00314f31278">getNodeId</a> () const noexcept</td></tr>
+<tr class="memdesc:a5661efce6aa153692733c00314f31278"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get node id.  <a href="classopcua_1_1Node.html#a5661efce6aa153692733c00314f31278">More...</a><br /></td></tr>
+<tr class="separator:a5661efce6aa153692733c00314f31278"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84e1d6a9b503fae659598db95ae23d8e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a84e1d6a9b503fae659598db95ae23d8e">addFolder</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::string_view browseName, <a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463b">ReferenceType</a> referenceType=<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463baded9b3813b9f642b7166ee3000a3e14f">ReferenceType::HasComponent</a>)</td></tr>
+<tr class="memdesc:a84e1d6a9b503fae659598db95ae23d8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add child folder to node.  <a href="classopcua_1_1Node.html#a84e1d6a9b503fae659598db95ae23d8e">More...</a><br /></td></tr>
+<tr class="separator:a84e1d6a9b503fae659598db95ae23d8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3017efba8007b47cea18cefc5bb16049"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a3017efba8007b47cea18cefc5bb16049">addObject</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::string_view browseName, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;objectType={0, <a class="elRef" target="_blank" href="open62541/nodeids_8h.html#ae9c277a866772a21fcff5dea71af45ce">UA_NS0ID_BASEOBJECTTYPE</a>}, <a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463b">ReferenceType</a> referenceType=<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463baded9b3813b9f642b7166ee3000a3e14f">ReferenceType::HasComponent</a>)</td></tr>
+<tr class="memdesc:a3017efba8007b47cea18cefc5bb16049"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add child object to node.  <a href="classopcua_1_1Node.html#a3017efba8007b47cea18cefc5bb16049">More...</a><br /></td></tr>
+<tr class="separator:a3017efba8007b47cea18cefc5bb16049"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab67d2636f46582253f3b76793d290d1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#aab67d2636f46582253f3b76793d290d1">addVariable</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::string_view browseName, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;variableType={0, <a class="elRef" target="_blank" href="open62541/nodeids_8h.html#a820a6680f8fe35af74f6f44c8df63606">UA_NS0ID_BASEDATAVARIABLETYPE</a>}, <a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463b">ReferenceType</a> referenceType=<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463baded9b3813b9f642b7166ee3000a3e14f">ReferenceType::HasComponent</a>)</td></tr>
+<tr class="memdesc:aab67d2636f46582253f3b76793d290d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add child variable to node.  <a href="classopcua_1_1Node.html#aab67d2636f46582253f3b76793d290d1">More...</a><br /></td></tr>
+<tr class="separator:aab67d2636f46582253f3b76793d290d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8ce1dd1f5e57f8c7138e54d3e119181"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#aa8ce1dd1f5e57f8c7138e54d3e119181">addProperty</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::string_view browseName)</td></tr>
+<tr class="memdesc:aa8ce1dd1f5e57f8c7138e54d3e119181"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add child property to node.  <a href="classopcua_1_1Node.html#aa8ce1dd1f5e57f8c7138e54d3e119181">More...</a><br /></td></tr>
+<tr class="separator:aa8ce1dd1f5e57f8c7138e54d3e119181"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad90a3e05591ce987d7ed99e6f9335fbf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#ad90a3e05591ce987d7ed99e6f9335fbf">addObjectType</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::string_view browseName, <a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463b">ReferenceType</a> referenceType=<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba67fd3d4f6832b52a95d1938850461a3d">ReferenceType::HasSubType</a>)</td></tr>
+<tr class="memdesc:ad90a3e05591ce987d7ed99e6f9335fbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add child object type to node.  <a href="classopcua_1_1Node.html#ad90a3e05591ce987d7ed99e6f9335fbf">More...</a><br /></td></tr>
+<tr class="separator:ad90a3e05591ce987d7ed99e6f9335fbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b283940a0225634acc95ac82f5034cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a5b283940a0225634acc95ac82f5034cf">addVariableType</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::string_view browseName, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;variableType={0, <a class="elRef" target="_blank" href="open62541/nodeids_8h.html#a820a6680f8fe35af74f6f44c8df63606">UA_NS0ID_BASEDATAVARIABLETYPE</a>}, <a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463b">ReferenceType</a> referenceType=<a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba67fd3d4f6832b52a95d1938850461a3d">ReferenceType::HasSubType</a>)</td></tr>
+<tr class="memdesc:a5b283940a0225634acc95ac82f5034cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add child variable type to node.  <a href="classopcua_1_1Node.html#a5b283940a0225634acc95ac82f5034cf">More...</a><br /></td></tr>
+<tr class="separator:a5b283940a0225634acc95ac82f5034cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59d04f638b504c7f0c9f35f6632ed236"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a59d04f638b504c7f0c9f35f6632ed236">addReference</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;targetId, <a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463b">ReferenceType</a> referenceType, bool forward=true)</td></tr>
+<tr class="memdesc:a59d04f638b504c7f0c9f35f6632ed236"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add reference to node.  <a href="classopcua_1_1Node.html#a59d04f638b504c7f0c9f35f6632ed236">More...</a><br /></td></tr>
+<tr class="separator:a59d04f638b504c7f0c9f35f6632ed236"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f3f59979c66c52e54b26bd2af34a92c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a4f3f59979c66c52e54b26bd2af34a92c">deleteNode</a> (bool deleteReferences=true)</td></tr>
+<tr class="memdesc:a4f3f59979c66c52e54b26bd2af34a92c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete node.  <a href="classopcua_1_1Node.html#a4f3f59979c66c52e54b26bd2af34a92c">More...</a><br /></td></tr>
+<tr class="separator:a4f3f59979c66c52e54b26bd2af34a92c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16c649c49023f5d6d0198b32eb16508d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a16c649c49023f5d6d0198b32eb16508d">getChild</a> (const std::vector&lt; <a class="el" href="classopcua_1_1QualifiedName.html">QualifiedName</a> &gt; &amp;path)</td></tr>
+<tr class="memdesc:a16c649c49023f5d6d0198b32eb16508d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a child specified by its path from this node (only local nodes).  <a href="classopcua_1_1Node.html#a16c649c49023f5d6d0198b32eb16508d">More...</a><br /></td></tr>
+<tr class="separator:a16c649c49023f5d6d0198b32eb16508d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a039408f8771a06d3e49ea0a0af072749"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6d">NodeClass</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a039408f8771a06d3e49ea0a0af072749">readNodeClass</a> ()</td></tr>
+<tr class="memdesc:a039408f8771a06d3e49ea0a0af072749"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read node class.  <a href="classopcua_1_1Node.html#a039408f8771a06d3e49ea0a0af072749">More...</a><br /></td></tr>
+<tr class="separator:a039408f8771a06d3e49ea0a0af072749"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15c9e18786cb88b1e7d14ebbcfa7d305"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a15c9e18786cb88b1e7d14ebbcfa7d305">readBrowseName</a> ()</td></tr>
+<tr class="memdesc:a15c9e18786cb88b1e7d14ebbcfa7d305"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read browse name.  <a href="classopcua_1_1Node.html#a15c9e18786cb88b1e7d14ebbcfa7d305">More...</a><br /></td></tr>
+<tr class="separator:a15c9e18786cb88b1e7d14ebbcfa7d305"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b98218b589c81cf1f2bf1598869a19d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a9b98218b589c81cf1f2bf1598869a19d">readDisplayName</a> ()</td></tr>
+<tr class="memdesc:a9b98218b589c81cf1f2bf1598869a19d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read localized display name.  <a href="classopcua_1_1Node.html#a9b98218b589c81cf1f2bf1598869a19d">More...</a><br /></td></tr>
+<tr class="separator:a9b98218b589c81cf1f2bf1598869a19d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fe2832b12339e130e708372c71f06d1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a1fe2832b12339e130e708372c71f06d1">readDescription</a> ()</td></tr>
+<tr class="memdesc:a1fe2832b12339e130e708372c71f06d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read localized description.  <a href="classopcua_1_1Node.html#a1fe2832b12339e130e708372c71f06d1">More...</a><br /></td></tr>
+<tr class="separator:a1fe2832b12339e130e708372c71f06d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad864be99c49900638cc4de9046a2b5cf"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#ad864be99c49900638cc4de9046a2b5cf">readWriteMask</a> ()</td></tr>
+<tr class="memdesc:ad864be99c49900638cc4de9046a2b5cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read write mask, for example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a1214f1819ce0305107b143ec936e32d4">UA_WRITEMASK_ACCESSLEVEL</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a787ca45478013b2f4f928453429ba701">UA_WRITEMASK_DESCRIPTION</a></code>.  <a href="classopcua_1_1Node.html#ad864be99c49900638cc4de9046a2b5cf">More...</a><br /></td></tr>
+<tr class="separator:ad864be99c49900638cc4de9046a2b5cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a9566341f13f8e3521919b2ca48b517"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1NodeId.html">NodeId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a9a9566341f13f8e3521919b2ca48b517">readDataType</a> ()</td></tr>
+<tr class="memdesc:a9a9566341f13f8e3521919b2ca48b517"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read data type of variable (type) node as <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a>.  <a href="classopcua_1_1Node.html#a9a9566341f13f8e3521919b2ca48b517">More...</a><br /></td></tr>
+<tr class="separator:a9a9566341f13f8e3521919b2ca48b517"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a523e23702ceceea6c426fe6aff73ea65"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383">ValueRank</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a523e23702ceceea6c426fe6aff73ea65">readValueRank</a> ()</td></tr>
+<tr class="memdesc:a523e23702ceceea6c426fe6aff73ea65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read value rank of variable (type) node.  <a href="classopcua_1_1Node.html#a523e23702ceceea6c426fe6aff73ea65">More...</a><br /></td></tr>
+<tr class="separator:a523e23702ceceea6c426fe6aff73ea65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0934d6b24ee2c215b08e178d8b3d19d1"><td class="memItemLeft" align="right" valign="top">std::vector&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a0934d6b24ee2c215b08e178d8b3d19d1">readArrayDimensions</a> ()</td></tr>
+<tr class="memdesc:a0934d6b24ee2c215b08e178d8b3d19d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read array dimensions of variable (type) node.  <a href="classopcua_1_1Node.html#a0934d6b24ee2c215b08e178d8b3d19d1">More...</a><br /></td></tr>
+<tr class="separator:a0934d6b24ee2c215b08e178d8b3d19d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4eae60cd621fc01e494f5c2d93061f3"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#ab4eae60cd621fc01e494f5c2d93061f3">readAccessLevel</a> ()</td></tr>
+<tr class="memdesc:ab4eae60cd621fc01e494f5c2d93061f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read access level mask of variable node, for example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a40ea076d6ef4c0aaccdc0d14fb2573c4">UA_ACCESSLEVELMASK_READ</a></code>.  <a href="classopcua_1_1Node.html#ab4eae60cd621fc01e494f5c2d93061f3">More...</a><br /></td></tr>
+<tr class="separator:ab4eae60cd621fc01e494f5c2d93061f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5225a58418d8d36d97beab31811487b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#ae5225a58418d8d36d97beab31811487b">readDataValue</a> (<a class="el" href="classopcua_1_1DataValue.html">DataValue</a> &amp;value)</td></tr>
+<tr class="memdesc:ae5225a58418d8d36d97beab31811487b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read value from variable node as <a class="el" href="classopcua_1_1DataValue.html" title="UA_DataValue wrapper class.">DataValue</a> object.  <a href="classopcua_1_1Node.html#ae5225a58418d8d36d97beab31811487b">More...</a><br /></td></tr>
+<tr class="separator:ae5225a58418d8d36d97beab31811487b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52e334e9ad22f6d8c605cf7748b2f96f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a52e334e9ad22f6d8c605cf7748b2f96f">readValue</a> (<a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;value)</td></tr>
+<tr class="memdesc:a52e334e9ad22f6d8c605cf7748b2f96f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read value from variable node as <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> object.  <a href="classopcua_1_1Node.html#a52e334e9ad22f6d8c605cf7748b2f96f">More...</a><br /></td></tr>
+<tr class="separator:a52e334e9ad22f6d8c605cf7748b2f96f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3a500a359bd17292d093ab6b2090822"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ac3a500a359bd17292d093ab6b2090822"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#ac3a500a359bd17292d093ab6b2090822">readScalar</a> ()</td></tr>
+<tr class="memdesc:ac3a500a359bd17292d093ab6b2090822"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read scalar from variable node.  <a href="classopcua_1_1Node.html#ac3a500a359bd17292d093ab6b2090822">More...</a><br /></td></tr>
+<tr class="separator:ac3a500a359bd17292d093ab6b2090822"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adddb5f48e988ff5a74653504941adaec"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:adddb5f48e988ff5a74653504941adaec"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#adddb5f48e988ff5a74653504941adaec">readArray</a> ()</td></tr>
+<tr class="memdesc:adddb5f48e988ff5a74653504941adaec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read array from variable node.  <a href="classopcua_1_1Node.html#adddb5f48e988ff5a74653504941adaec">More...</a><br /></td></tr>
+<tr class="separator:adddb5f48e988ff5a74653504941adaec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dc5961d42509d0b40ef3c483848de50"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a4dc5961d42509d0b40ef3c483848de50">writeDisplayName</a> (const <a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a> &amp;name)</td></tr>
+<tr class="memdesc:a4dc5961d42509d0b40ef3c483848de50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write localized display name.  <a href="classopcua_1_1Node.html#a4dc5961d42509d0b40ef3c483848de50">More...</a><br /></td></tr>
+<tr class="separator:a4dc5961d42509d0b40ef3c483848de50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affbe13040e5a5d021528711718d0a61a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#affbe13040e5a5d021528711718d0a61a">writeDescription</a> (const <a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a> &amp;name)</td></tr>
+<tr class="memdesc:affbe13040e5a5d021528711718d0a61a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write localized description.  <a href="classopcua_1_1Node.html#affbe13040e5a5d021528711718d0a61a">More...</a><br /></td></tr>
+<tr class="separator:affbe13040e5a5d021528711718d0a61a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5201494ee40a30f7e1e88039d197bbc9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a5201494ee40a30f7e1e88039d197bbc9">writeWriteMask</a> (uint32_t mask)</td></tr>
+<tr class="memdesc:a5201494ee40a30f7e1e88039d197bbc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write write mask, for example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a1214f1819ce0305107b143ec936e32d4">UA_WRITEMASK_ACCESSLEVEL</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a787ca45478013b2f4f928453429ba701">UA_WRITEMASK_DESCRIPTION</a></code>.  <a href="classopcua_1_1Node.html#a5201494ee40a30f7e1e88039d197bbc9">More...</a><br /></td></tr>
+<tr class="separator:a5201494ee40a30f7e1e88039d197bbc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09728b3d14e473101aaa17b84f94ba27"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a09728b3d14e473101aaa17b84f94ba27">writeDataType</a> (<a class="el" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966">Type</a> type)</td></tr>
+<tr class="memdesc:a09728b3d14e473101aaa17b84f94ba27"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write data type of variable (type) node.  <a href="classopcua_1_1Node.html#a09728b3d14e473101aaa17b84f94ba27">More...</a><br /></td></tr>
+<tr class="separator:a09728b3d14e473101aaa17b84f94ba27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cc10aaba2f685709d59b48455c284dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a4cc10aaba2f685709d59b48455c284dd">writeDataType</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;typeId)</td></tr>
+<tr class="memdesc:a4cc10aaba2f685709d59b48455c284dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write data type of variable (type) node by node id.  <a href="classopcua_1_1Node.html#a4cc10aaba2f685709d59b48455c284dd">More...</a><br /></td></tr>
+<tr class="separator:a4cc10aaba2f685709d59b48455c284dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af85666e06a2e4c86bea44f21f40434b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#af85666e06a2e4c86bea44f21f40434b8">writeValueRank</a> (<a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383">ValueRank</a> valueRank)</td></tr>
+<tr class="memdesc:af85666e06a2e4c86bea44f21f40434b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write value rank of variable (type) node.  <a href="classopcua_1_1Node.html#af85666e06a2e4c86bea44f21f40434b8">More...</a><br /></td></tr>
+<tr class="separator:af85666e06a2e4c86bea44f21f40434b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec69495656d907270da9ddbc17b22164"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#aec69495656d907270da9ddbc17b22164">writeArrayDimensions</a> (const std::vector&lt; uint32_t &gt; &amp;dimensions)</td></tr>
+<tr class="memdesc:aec69495656d907270da9ddbc17b22164"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write array dimensions of variable (type) node.  <a href="classopcua_1_1Node.html#aec69495656d907270da9ddbc17b22164">More...</a><br /></td></tr>
+<tr class="separator:aec69495656d907270da9ddbc17b22164"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2146dd0d8169927995411e75ad2032f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a2146dd0d8169927995411e75ad2032f4">writeAccessLevel</a> (uint8_t mask)</td></tr>
+<tr class="memdesc:a2146dd0d8169927995411e75ad2032f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write access level mask of variable node, for example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a40ea076d6ef4c0aaccdc0d14fb2573c4">UA_ACCESSLEVELMASK_READ</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a92380e13ac90946ba3d5a7e975dfc5d3">UA_ACCESSLEVELMASK_WRITE</a></code>.  <a href="classopcua_1_1Node.html#a2146dd0d8169927995411e75ad2032f4">More...</a><br /></td></tr>
+<tr class="separator:a2146dd0d8169927995411e75ad2032f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3f987211e3f9997e4434a0f3125436b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#ab3f987211e3f9997e4434a0f3125436b">writeModellingRule</a> (<a class="el" href="namespaceopcua.html#ad32e0c353b427fd8b7788a85a78335aa">ModellingRule</a> rule)</td></tr>
+<tr class="memdesc:ab3f987211e3f9997e4434a0f3125436b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write modelling rule.  <a href="classopcua_1_1Node.html#ab3f987211e3f9997e4434a0f3125436b">More...</a><br /></td></tr>
+<tr class="separator:ab3f987211e3f9997e4434a0f3125436b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac34229e13e76c394bf28b935e23e4bc5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#ac34229e13e76c394bf28b935e23e4bc5">writeDataValue</a> (const <a class="el" href="classopcua_1_1DataValue.html">DataValue</a> &amp;value)</td></tr>
+<tr class="memdesc:ac34229e13e76c394bf28b935e23e4bc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write <a class="el" href="classopcua_1_1DataValue.html" title="UA_DataValue wrapper class.">DataValue</a> to variable node.  <a href="classopcua_1_1Node.html#ac34229e13e76c394bf28b935e23e4bc5">More...</a><br /></td></tr>
+<tr class="separator:ac34229e13e76c394bf28b935e23e4bc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68028d622f8be50e6771a32a4a886d0b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a68028d622f8be50e6771a32a4a886d0b">writeValue</a> (const <a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;value)</td></tr>
+<tr class="memdesc:a68028d622f8be50e6771a32a4a886d0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> to variable node.  <a href="classopcua_1_1Node.html#a68028d622f8be50e6771a32a4a886d0b">More...</a><br /></td></tr>
+<tr class="separator:a68028d622f8be50e6771a32a4a886d0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d61c4b2a6a616d696f1e06d2e0e16c7"><td class="memTemplParams" colspan="2">template&lt;typename T , Type type = detail::guessType&lt;T&gt;()&gt; </td></tr>
+<tr class="memitem:a8d61c4b2a6a616d696f1e06d2e0e16c7"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a8d61c4b2a6a616d696f1e06d2e0e16c7">writeScalar</a> (const T &amp;value)</td></tr>
+<tr class="memdesc:a8d61c4b2a6a616d696f1e06d2e0e16c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write scalar to variable node.  <a href="classopcua_1_1Node.html#a8d61c4b2a6a616d696f1e06d2e0e16c7">More...</a><br /></td></tr>
+<tr class="separator:a8d61c4b2a6a616d696f1e06d2e0e16c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73315e65ca9b81e86fa4e73e9489dcc2"><td class="memTemplParams" colspan="2">template&lt;typename T , Type type = detail::guessType&lt;T&gt;()&gt; </td></tr>
+<tr class="memitem:a73315e65ca9b81e86fa4e73e9489dcc2"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a73315e65ca9b81e86fa4e73e9489dcc2">writeArray</a> (const T *array, size_t size)</td></tr>
+<tr class="memdesc:a73315e65ca9b81e86fa4e73e9489dcc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write array (raw) to variable node.  <a href="classopcua_1_1Node.html#a73315e65ca9b81e86fa4e73e9489dcc2">More...</a><br /></td></tr>
+<tr class="separator:a73315e65ca9b81e86fa4e73e9489dcc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba1f44b97ac7812a47108e8120f4977e"><td class="memTemplParams" colspan="2">template&lt;typename T , Type type = detail::guessType&lt;T&gt;()&gt; </td></tr>
+<tr class="memitem:aba1f44b97ac7812a47108e8120f4977e"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#aba1f44b97ac7812a47108e8120f4977e">writeArray</a> (const std::vector&lt; T &gt; &amp;array)</td></tr>
+<tr class="memdesc:aba1f44b97ac7812a47108e8120f4977e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write array (std::vector) to variable node.  <a href="classopcua_1_1Node.html#aba1f44b97ac7812a47108e8120f4977e">More...</a><br /></td></tr>
+<tr class="separator:aba1f44b97ac7812a47108e8120f4977e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a306de3320aa58ec6ae92bc500e02ca6b"><td class="memTemplParams" colspan="2">template&lt;typename InputIt , Type type = detail::guessTypeFromIterator&lt;InputIt&gt;()&gt; </td></tr>
+<tr class="memitem:a306de3320aa58ec6ae92bc500e02ca6b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a306de3320aa58ec6ae92bc500e02ca6b">writeArray</a> (InputIt first, InputIt last)</td></tr>
+<tr class="memdesc:a306de3320aa58ec6ae92bc500e02ca6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write range of elements as array to variable node.  <a href="classopcua_1_1Node.html#a306de3320aa58ec6ae92bc500e02ca6b">More...</a><br /></td></tr>
+<tr class="separator:a306de3320aa58ec6ae92bc500e02ca6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>High-level node object, to access node attribute, browse and populate address space. </p>
-<p><a class="el" href="classopcua_1_1Node.html" title="High-level node object, to access node attribute, browse and populate address space.">Node</a> objects are usefull as-is but they do not expose the entire OPC UA protocol. You can get access to the associated <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> instance with the <a class="el" href="classopcua_1_1Node.html#a587319b569db88f3a33a422579662ed6" title="Get node id.">getNodeId()</a> method and apply the native open62541 functions. </p>
+<div class="textblock"><h3>template&lt;typename ServerOrClient&gt;<br />
+class opcua::Node&lt; ServerOrClient &gt;</h3>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00027">27</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p>High-level node object to access node attribute, browse and populate address space. </p>
+<p>The <a class="el" href="classopcua_1_1Node.html" title="High-level node object to access node attribute, browse and populate address space.">Node</a> API is just a more convenient way of using the free functions in the <code>services</code> namespace.</p>
+<p><a class="el" href="classopcua_1_1Node.html" title="High-level node object to access node attribute, browse and populate address space.">Node</a> objects are usefull as-is but they do not expose the entire OPC UA protocol. You can get access to the associated <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> instance with the <a class="el" href="classopcua_1_1Node.html#a5661efce6aa153692733c00314f31278" title="Get node id.">getNodeId()</a> method and apply the native open62541 functions or the free functions in the <code>services</code> namespace.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__Services.html" title="OPC UA services as free functions. Functions are overloaded for both Server and Client (TODO).">Services</a> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00033">33</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a39226707854784d4883a590dc8dad27e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a39226707854784d4883a590dc8dad27e">&#9670;&nbsp;</a></span>Node()</h2>
+<a id="aa4eb8de5f5f135d6268711036883ce2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4eb8de5f5f135d6268711036883ce2a">&#9670;&nbsp;</a></span>Node()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">opcua::Node::Node </td>
+          <td class="memname"><a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::<a class="el" href="classopcua_1_1Node.html">Node</a> </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1Server.html">Server</a> &amp;&#160;</td>
-          <td class="paramname"><em>server</em>, </td>
+          <td class="paramtype">ServerOrClient&#160;</td>
+          <td class="paramname"><em>connection</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1NodeId.html">NodeId</a>&#160;</td>
           <td class="paramname"><em>id</em>, </td>
         </tr>
         <tr>
@@ -248,26 +259,41 @@ Public Member Functions</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00012">12</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p>Create <a class="el" href="classopcua_1_1Node.html" title="High-level node object to access node attribute, browse and populate address space.">Node</a> object. </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html" title="Exception for bad status codes from open62541 UA_STATUSCODE_*.">BadStatus</a></td><td>(BadNodeIdUnknown) if <code>checkExists</code> enabled and <code>id</code> not found </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="reference">References <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00150">opcua::TypeWrapper&lt; T, typeIndex &gt;::handle()</a>, <a class="el" href="ErrorHandling_8h_source.html#l00042">opcua::detail::throwOnBadStatus()</a>, and <a class="elRef" target="_blank" href="open62541/types_8h.html#a8549e8b2b906d336827cc1cd9ab05f68">UA_NODEID_NULL</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00037">37</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00012">opcua::services::checkNodeIdExists()</a>, and <a class="elRef" target="_blank" href="open62541/statuscodes_8h.html#aa2b8b5a557077c6d3b21c4b3f4450641">UA_STATUSCODE_BADNODEIDUNKNOWN</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="afdd136d1198586624fef0e7d374095d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afdd136d1198586624fef0e7d374095d6">&#9670;&nbsp;</a></span>addFolder()</h2>
+<a id="a84e1d6a9b503fae659598db95ae23d8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84e1d6a9b503fae659598db95ae23d8e">&#9670;&nbsp;</a></span>addFolder()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a> opcua::Node::addFolder </td>
+          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a> <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::addFolder </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
           <td class="paramname"><em>id</em>, </td>
@@ -300,28 +326,30 @@ Public Member Functions</h2></td></tr>
 <p>Add child folder to node. </p>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html">BadStatus</a></td><td></td></tr>
+    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html" title="Exception for bad status codes from open62541 UA_STATUSCODE_*.">BadStatus</a></td><td></td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00047">47</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00061">61</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 <p class="reference">References <a class="el" href="NodeManagement_8h_source.html#l00040">opcua::services::addFolder()</a>.</p>
 
 </div>
 </div>
-<a id="ae4e522b91588f7c6bd7e512d06564591"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4e522b91588f7c6bd7e512d06564591">&#9670;&nbsp;</a></span>addObject()</h2>
+<a id="a3017efba8007b47cea18cefc5bb16049"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3017efba8007b47cea18cefc5bb16049">&#9670;&nbsp;</a></span>addObject()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a> opcua::Node::addObject </td>
+          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a> <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::addObject </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
           <td class="paramname"><em>id</em>, </td>
@@ -360,28 +388,30 @@ Public Member Functions</h2></td></tr>
 <p>Add child object to node. </p>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html">BadStatus</a></td><td></td></tr>
+    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html" title="Exception for bad status codes from open62541 UA_STATUSCODE_*.">BadStatus</a></td><td></td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00057">57</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00071">71</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 <p class="reference">References <a class="elRef" target="_blank" href="open62541/nodeids_8h.html#ae9c277a866772a21fcff5dea71af45ce">UA_NS0ID_BASEOBJECTTYPE</a>.</p>
 
 </div>
 </div>
-<a id="ad08c7666af2a0bb91533d6d2530bc38c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad08c7666af2a0bb91533d6d2530bc38c">&#9670;&nbsp;</a></span>addObjectType()</h2>
+<a id="ad90a3e05591ce987d7ed99e6f9335fbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad90a3e05591ce987d7ed99e6f9335fbf">&#9670;&nbsp;</a></span>addObjectType()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a> opcua::Node::addObjectType </td>
+          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a> <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::addObjectType </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
           <td class="paramname"><em>id</em>, </td>
@@ -414,28 +444,30 @@ Public Member Functions</h2></td></tr>
 <p>Add child object type to node. </p>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html">BadStatus</a></td><td></td></tr>
+    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html" title="Exception for bad status codes from open62541 UA_STATUSCODE_*.">BadStatus</a></td><td></td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00085">85</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00099">99</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 <p class="reference">References <a class="el" href="NodeManagement_8cpp_source.html#l00055">opcua::services::addObjectType()</a>.</p>
 
 </div>
 </div>
-<a id="a302d860e6845d5cfc5c33339e8526e4f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a302d860e6845d5cfc5c33339e8526e4f">&#9670;&nbsp;</a></span>addProperty()</h2>
+<a id="aa8ce1dd1f5e57f8c7138e54d3e119181"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8ce1dd1f5e57f8c7138e54d3e119181">&#9670;&nbsp;</a></span>addProperty()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a> opcua::Node::addProperty </td>
+          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a> <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::addProperty </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
           <td class="paramname"><em>id</em>, </td>
@@ -462,28 +494,30 @@ Public Member Functions</h2></td></tr>
 <p>Add child property to node. </p>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html">BadStatus</a></td><td></td></tr>
+    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html" title="Exception for bad status codes from open62541 UA_STATUSCODE_*.">BadStatus</a></td><td></td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00079">79</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00093">93</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 <p class="reference">References <a class="el" href="NodeManagement_8h_source.html#l00069">opcua::services::addProperty()</a>.</p>
 
 </div>
 </div>
-<a id="a585f0aaeaea26b6fc04369be0d08a1b2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a585f0aaeaea26b6fc04369be0d08a1b2">&#9670;&nbsp;</a></span>addReference()</h2>
+<a id="a59d04f638b504c7f0c9f35f6632ed236"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59d04f638b504c7f0c9f35f6632ed236">&#9670;&nbsp;</a></span>addReference()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::Node::addReference </td>
+          <td class="memname">void <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::addReference </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
           <td class="paramname"><em>targetId</em>, </td>
@@ -516,28 +550,30 @@ Public Member Functions</h2></td></tr>
 <p>Add reference to node. </p>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html">BadStatus</a></td><td></td></tr>
+    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html" title="Exception for bad status codes from open62541 UA_STATUSCODE_*.">BadStatus</a></td><td></td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00106">106</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00122">122</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 <p class="reference">References <a class="el" href="NodeManagement_8cpp_source.html#l00097">opcua::services::addReference()</a>.</p>
 
 </div>
 </div>
-<a id="abb0f1a0ba30f664794e84eff2b80168b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abb0f1a0ba30f664794e84eff2b80168b">&#9670;&nbsp;</a></span>addVariable()</h2>
+<a id="aab67d2636f46582253f3b76793d290d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab67d2636f46582253f3b76793d290d1">&#9670;&nbsp;</a></span>addVariable()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a> opcua::Node::addVariable </td>
+          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a> <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::addVariable </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
           <td class="paramname"><em>id</em>, </td>
@@ -576,28 +612,30 @@ Public Member Functions</h2></td></tr>
 <p>Add child variable to node. </p>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html">BadStatus</a></td><td></td></tr>
+    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html" title="Exception for bad status codes from open62541 UA_STATUSCODE_*.">BadStatus</a></td><td></td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00068">68</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00082">82</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 <p class="reference">References <a class="elRef" target="_blank" href="open62541/nodeids_8h.html#a820a6680f8fe35af74f6f44c8df63606">UA_NS0ID_BASEDATAVARIABLETYPE</a>.</p>
 
 </div>
 </div>
-<a id="ac5659fb8b696d56b9199f83e1931e597"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac5659fb8b696d56b9199f83e1931e597">&#9670;&nbsp;</a></span>addVariableType()</h2>
+<a id="a5b283940a0225634acc95ac82f5034cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b283940a0225634acc95ac82f5034cf">&#9670;&nbsp;</a></span>addVariableType()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a> opcua::Node::addVariableType </td>
+          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a> <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::addVariableType </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
           <td class="paramname"><em>id</em>, </td>
@@ -636,28 +674,30 @@ Public Member Functions</h2></td></tr>
 <p>Add child variable type to node. </p>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html">BadStatus</a></td><td></td></tr>
+    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html" title="Exception for bad status codes from open62541 UA_STATUSCODE_*.">BadStatus</a></td><td></td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00095">95</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00109">109</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 <p class="reference">References <a class="elRef" target="_blank" href="open62541/nodeids_8h.html#a820a6680f8fe35af74f6f44c8df63606">UA_NS0ID_BASEDATAVARIABLETYPE</a>.</p>
 
 </div>
 </div>
-<a id="a0f7acd6470f6507a98f0b70899755f50"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0f7acd6470f6507a98f0b70899755f50">&#9670;&nbsp;</a></span>deleteNode()</h2>
+<a id="a4f3f59979c66c52e54b26bd2af34a92c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f3f59979c66c52e54b26bd2af34a92c">&#9670;&nbsp;</a></span>deleteNode()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::Node::deleteNode </td>
+          <td class="memname">void <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::deleteNode </td>
           <td>(</td>
           <td class="paramtype">bool&#160;</td>
           <td class="paramname"><em>deleteReferences</em> = <code>true</code></td><td>)</td>
@@ -674,58 +714,132 @@ Public Member Functions</h2></td></tr>
 <p>Delete node. </p>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html">BadStatus</a></td><td></td></tr>
+    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html" title="Exception for bad status codes from open62541 UA_STATUSCODE_*.">BadStatus</a></td><td></td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00111">111</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00127">127</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 <p class="reference">References <a class="el" href="NodeManagement_8cpp_source.html#l00114">opcua::services::deleteNode()</a>.</p>
 
 </div>
 </div>
-<a id="a273e296754e8981d8f6f9dde28c5236c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a273e296754e8981d8f6f9dde28c5236c">&#9670;&nbsp;</a></span>getChild()</h2>
+<a id="a16c649c49023f5d6d0198b32eb16508d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16c649c49023f5d6d0198b32eb16508d">&#9670;&nbsp;</a></span>getChild()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a> opcua::Node::getChild </td>
+          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a> <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::getChild </td>
           <td>(</td>
           <td class="paramtype">const std::vector&lt; <a class="el" href="classopcua_1_1QualifiedName.html">QualifiedName</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>path</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Get a child specified by its path from this node (only local nodes). </p>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html">BadStatus</a></td><td>If path not found (BadNoMatch) </td></tr>
+    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html" title="Exception for bad status codes from open62541 UA_STATUSCODE_*.">BadStatus</a></td><td>If path not found (BadNoMatch) </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8cpp_source.html#l00022">22</a> of file <a class="el" href="Node_8cpp_source.html">Node.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00132">132</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Server_8cpp_source.html#l00299">opcua::Server::handle()</a>, <a class="elRef" target="_blank" href="open62541/structUA__BrowsePathResult.html#ae11348f3a72c574221ed01b339fbdbe7">UA_BrowsePathResult::statusCode</a>, <a class="elRef" target="_blank" href="open62541/structUA__BrowsePathTarget.html#a1d9d2bcfe3e4c2b57421fc793820c04c">UA_BrowsePathTarget::targetId</a>, <a class="elRef" target="_blank" href="open62541/structUA__BrowsePathResult.html#a95699c1b9bc5e731870d44be9a9897b7">UA_BrowsePathResult::targets</a>, <a class="elRef" target="_blank" href="open62541/structUA__BrowsePathResult.html#aaeddebfa348c60bb07102dd7655344e9">UA_BrowsePathResult::targetsSize</a>, <a class="el" href="ErrorHandling_8h_source.html#l00042">opcua::detail::throwOnBadStatus()</a>, <a class="elRef" target="_blank" href="open62541/server_8h.html#a635aa8c4249ac0fb66a968e7493843b4">UA_Server_browseSimplifiedBrowsePath()</a>, and <a class="elRef" target="_blank" href="open62541/statuscodes_8h.html#af4649a7ced9ad8f786a1b0765dc41852">UA_STATUSCODE_BADNOMATCH</a>.</p>
+<p class="reference">References <a class="el" href="Browse_8cpp_source.html#l00010">opcua::services::browseChild()</a>.</p>
 
 </div>
 </div>
-<a id="a587319b569db88f3a33a422579662ed6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a587319b569db88f3a33a422579662ed6">&#9670;&nbsp;</a></span>getNodeId()</h2>
+<a id="ab13bb8bff4617586d53246d999212361"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab13bb8bff4617586d53246d999212361">&#9670;&nbsp;</a></span>getConnection() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a>&amp; opcua::Node::getNodeId </td>
+          <td class="memname">const ServerOrClient&amp; <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::getConnection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get server/client instance. </p>
+
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00051">51</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+
+</div>
+</div>
+<a id="a5786eff044bcab506b113c8b00b328a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5786eff044bcab506b113c8b00b328a7">&#9670;&nbsp;</a></span>getConnection() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ServerOrClient&amp; <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::getConnection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get server/client instance. </p>
+
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00046">46</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+
+</div>
+</div>
+<a id="a5661efce6aa153692733c00314f31278"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5661efce6aa153692733c00314f31278">&#9670;&nbsp;</a></span>getNodeId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a>&amp; <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::getNodeId </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -740,132 +854,91 @@ Public Member Functions</h2></td></tr>
 
 <p>Get node id. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00042">42</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00056">56</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
-<a id="aebe8fe13822b4889ff46aa45d52fd25d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aebe8fe13822b4889ff46aa45d52fd25d">&#9670;&nbsp;</a></span>getServer() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="classopcua_1_1Server.html">Server</a>&amp; opcua::Node::getServer </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get server instance. </p>
-
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00037">37</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
-
-</div>
-</div>
-<a id="a700db6ef5e78f37c15789a7250bd593d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a700db6ef5e78f37c15789a7250bd593d">&#9670;&nbsp;</a></span>getServer() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Server.html">Server</a>&amp; opcua::Node::getServer </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get server instance. </p>
-
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00032">32</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
-
-</div>
-</div>
-<a id="a8336a2ee08493511cef12081925870b5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8336a2ee08493511cef12081925870b5">&#9670;&nbsp;</a></span>readAccessLevel()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint8_t opcua::Node::readAccessLevel </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get access level mask of variable node, for example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a40ea076d6ef4c0aaccdc0d14fb2573c4">UA_ACCESSLEVELMASK_READ</a></code>. </p>
-
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00160">160</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
-
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00071">opcua::services::readAccessLevel()</a>.</p>
-
-</div>
-</div>
-<a id="a873853591e70a3c96e594698bb4a7f7a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a873853591e70a3c96e594698bb4a7f7a">&#9670;&nbsp;</a></span>readArray()</h2>
+<a id="ab4eae60cd621fc01e494f5c2d93061f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4eae60cd621fc01e494f5c2d93061f3">&#9670;&nbsp;</a></span>readAccessLevel()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;typename ServerOrClient &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; T &gt; opcua::Node::readArray</td>
+          <td class="memname">uint8_t <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::readAccessLevel </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read access level mask of variable node, for example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a40ea076d6ef4c0aaccdc0d14fb2573c4">UA_ACCESSLEVELMASK_READ</a></code>. </p>
+
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00178">178</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00077">opcua::services::readAccessLevel()</a>.</p>
+
+</div>
+</div>
+<a id="adddb5f48e988ff5a74653504941adaec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adddb5f48e988ff5a74653504941adaec">&#9670;&nbsp;</a></span>readArray()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;T&gt; <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::readArray </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Read array from variable node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00268">268</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00202">202</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Variant_8h_source.html#l00247">opcua::Variant::getArrayCopy()</a>, and <a class="el" href="Node_8h_source.html#l00170">readValue()</a>.</p>
+<p class="reference">References <a class="el" href="Variant_8h_source.html#l00247">opcua::Variant::getArrayCopy()</a>, and <a class="el" href="Node_8h_source.html#l00188">opcua::Node&lt; ServerOrClient &gt;::readValue()</a>.</p>
 
 </div>
 </div>
-<a id="a961d458bee69a6a15dfc4c59bc9a3bec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a961d458bee69a6a15dfc4c59bc9a3bec">&#9670;&nbsp;</a></span>readArrayDimensions()</h2>
+<a id="a0934d6b24ee2c215b08e178d8b3d19d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0934d6b24ee2c215b08e178d8b3d19d1">&#9670;&nbsp;</a></span>readArrayDimensions()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;uint32_t&gt; opcua::Node::readArrayDimensions </td>
+          <td class="memname">std::vector&lt;uint32_t&gt; <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::readArrayDimensions </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -878,25 +951,27 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Get array dimensions of variable (type) node. </p>
+<p>Read array dimensions of variable (type) node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00155">155</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00173">173</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00061">opcua::services::readArrayDimensions()</a>.</p>
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00067">opcua::services::readArrayDimensions()</a>.</p>
 
 </div>
 </div>
-<a id="aa8f78c064c541b4f0bb8ff4afce5123c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa8f78c064c541b4f0bb8ff4afce5123c">&#9670;&nbsp;</a></span>readBrowseName()</h2>
+<a id="a15c9e18786cb88b1e7d14ebbcfa7d305"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15c9e18786cb88b1e7d14ebbcfa7d305">&#9670;&nbsp;</a></span>readBrowseName()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string opcua::Node::readBrowseName </td>
+          <td class="memname">std::string <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::readBrowseName </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -909,25 +984,27 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Get browse name. </p>
+<p>Read browse name. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00125">125</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00143">143</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00019">opcua::services::readBrowseName()</a>.</p>
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00025">opcua::services::readBrowseName()</a>.</p>
 
 </div>
 </div>
-<a id="a8e5cdf0be2434d36d00a5831da2a0cc4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e5cdf0be2434d36d00a5831da2a0cc4">&#9670;&nbsp;</a></span>readDataType()</h2>
+<a id="a9a9566341f13f8e3521919b2ca48b517"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a9566341f13f8e3521919b2ca48b517">&#9670;&nbsp;</a></span>readDataType()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1NodeId.html">NodeId</a> opcua::Node::readDataType </td>
+          <td class="memname"><a class="el" href="classopcua_1_1NodeId.html">NodeId</a> <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::readDataType </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -940,25 +1017,27 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Get data type of variable (type) node as <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a>. </p>
+<p>Read data type of variable (type) node as <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00145">145</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00163">163</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00047">opcua::services::readDataType()</a>.</p>
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00053">opcua::services::readDataType()</a>.</p>
 
 </div>
 </div>
-<a id="af2dd53c43761219d360bf44bb39b8140"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af2dd53c43761219d360bf44bb39b8140">&#9670;&nbsp;</a></span>readDataValue()</h2>
+<a id="ae5225a58418d8d36d97beab31811487b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5225a58418d8d36d97beab31811487b">&#9670;&nbsp;</a></span>readDataValue()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::Node::readDataValue </td>
+          <td class="memname">void <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::readDataValue </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classopcua_1_1DataValue.html">DataValue</a> &amp;&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
@@ -974,138 +1053,159 @@ template&lt;typename T &gt; </div>
 
 <p>Read value from variable node as <a class="el" href="classopcua_1_1DataValue.html" title="UA_DataValue wrapper class.">DataValue</a> object. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00165">165</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00183">183</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00078">opcua::services::readDataValue()</a>.</p>
-
-</div>
-</div>
-<a id="a52029d430ca9806def83bdb7d4ed6f57"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52029d430ca9806def83bdb7d4ed6f57">&#9670;&nbsp;</a></span>readDescription()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a> opcua::Node::readDescription </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get localized description. </p>
-
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00135">135</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
-
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00033">opcua::services::readDescription()</a>.</p>
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00084">opcua::services::readDataValue()</a>.</p>
 
 </div>
 </div>
-<a id="ae9c6b24266da950881482d6f75dd058d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae9c6b24266da950881482d6f75dd058d">&#9670;&nbsp;</a></span>readDisplayName()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a> opcua::Node::readDisplayName </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get localized display name. </p>
-
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00130">130</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
-
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00026">opcua::services::readDisplayName()</a>.</p>
-
-</div>
-</div>
-<a id="abfa8de771a7d557829adfc3f88bbe71c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abfa8de771a7d557829adfc3f88bbe71c">&#9670;&nbsp;</a></span>readNodeClass()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6d">NodeClass</a> opcua::Node::readNodeClass </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get node class. </p>
-
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00120">120</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
-
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00012">opcua::services::readNodeClass()</a>.</p>
-
-</div>
-</div>
-<a id="a4c28bf3c7d5a6b860a719f980802bf87"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4c28bf3c7d5a6b860a719f980802bf87">&#9670;&nbsp;</a></span>readScalar()</h2>
+<a id="a1fe2832b12339e130e708372c71f06d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fe2832b12339e130e708372c71f06d1">&#9670;&nbsp;</a></span>readDescription()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">T opcua::Node::readScalar</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Read scalar from variable node. </p>
-
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00261">261</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
-
-<p class="reference">References <a class="el" href="Variant_8h_source.html#l00229">opcua::Variant::getScalarCopy()</a>, and <a class="el" href="Node_8h_source.html#l00170">readValue()</a>.</p>
-
-</div>
-</div>
-<a id="aa31ccb4dee9db5d427cf9f3957fdae0d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa31ccb4dee9db5d427cf9f3957fdae0d">&#9670;&nbsp;</a></span>readValue()</h2>
-
-<div class="memitem">
-<div class="memproto">
+template&lt;typename ServerOrClient &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::Node::readValue </td>
+          <td class="memname"><a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a> <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::readDescription </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read localized description. </p>
+
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00153">153</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00039">opcua::services::readDescription()</a>.</p>
+
+</div>
+</div>
+<a id="a9b98218b589c81cf1f2bf1598869a19d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b98218b589c81cf1f2bf1598869a19d">&#9670;&nbsp;</a></span>readDisplayName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a> <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::readDisplayName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read localized display name. </p>
+
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00148">148</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00032">opcua::services::readDisplayName()</a>.</p>
+
+</div>
+</div>
+<a id="a039408f8771a06d3e49ea0a0af072749"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a039408f8771a06d3e49ea0a0af072749">&#9670;&nbsp;</a></span>readNodeClass()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6d">NodeClass</a> <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::readNodeClass </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read node class. </p>
+
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00138">138</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00018">opcua::services::readNodeClass()</a>.</p>
+
+</div>
+</div>
+<a id="ac3a500a359bd17292d093ab6b2090822"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3a500a359bd17292d093ab6b2090822">&#9670;&nbsp;</a></span>readScalar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::readScalar </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read scalar from variable node. </p>
+
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00194">194</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+
+<p class="reference">References <a class="el" href="Variant_8h_source.html#l00229">opcua::Variant::getScalarCopy()</a>, and <a class="el" href="Node_8h_source.html#l00188">opcua::Node&lt; ServerOrClient &gt;::readValue()</a>.</p>
+
+</div>
+</div>
+<a id="a52e334e9ad22f6d8c605cf7748b2f96f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52e334e9ad22f6d8c605cf7748b2f96f">&#9670;&nbsp;</a></span>readValue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::readValue </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
@@ -1121,25 +1221,27 @@ template&lt;typename T &gt; </div>
 
 <p>Read value from variable node as <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> object. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00170">170</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00188">188</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00089">opcua::services::readValue()</a>.</p>
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00095">opcua::services::readValue()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00268">readArray()</a>, and <a class="el" href="Node_8h_source.html#l00261">readScalar()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00202">opcua::Node&lt; ServerOrClient &gt;::readArray()</a>, and <a class="el" href="Node_8h_source.html#l00194">opcua::Node&lt; ServerOrClient &gt;::readScalar()</a>.</p>
 
 </div>
 </div>
-<a id="a1780740ed1607ac94a2ef23e0fd6caaa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1780740ed1607ac94a2ef23e0fd6caaa">&#9670;&nbsp;</a></span>readValueRank()</h2>
+<a id="a523e23702ceceea6c426fe6aff73ea65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a523e23702ceceea6c426fe6aff73ea65">&#9670;&nbsp;</a></span>readValueRank()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383">ValueRank</a> opcua::Node::readValueRank </td>
+          <td class="memname"><a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383">ValueRank</a> <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::readValueRank </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1152,25 +1254,27 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Get value rank of variable (type) node. </p>
+<p>Read value rank of variable (type) node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00150">150</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00168">168</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00054">opcua::services::readValueRank()</a>.</p>
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00060">opcua::services::readValueRank()</a>.</p>
 
 </div>
 </div>
-<a id="a3238798a42e65f2ce93c1f881975bc0c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3238798a42e65f2ce93c1f881975bc0c">&#9670;&nbsp;</a></span>readWriteMask()</h2>
+<a id="ad864be99c49900638cc4de9046a2b5cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad864be99c49900638cc4de9046a2b5cf">&#9670;&nbsp;</a></span>readWriteMask()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t opcua::Node::readWriteMask </td>
+          <td class="memname">uint32_t <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::readWriteMask </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1183,25 +1287,27 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Get write mask, for example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a1214f1819ce0305107b143ec936e32d4">UA_WRITEMASK_ACCESSLEVEL</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a787ca45478013b2f4f928453429ba701">UA_WRITEMASK_DESCRIPTION</a></code>. </p>
+<p>Read write mask, for example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a1214f1819ce0305107b143ec936e32d4">UA_WRITEMASK_ACCESSLEVEL</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a787ca45478013b2f4f928453429ba701">UA_WRITEMASK_DESCRIPTION</a></code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00140">140</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00158">158</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00040">opcua::services::readWriteMask()</a>.</p>
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00046">opcua::services::readWriteMask()</a>.</p>
 
 </div>
 </div>
-<a id="ac0fd71d4eb9d8838ee0929ccf584b454"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac0fd71d4eb9d8838ee0929ccf584b454">&#9670;&nbsp;</a></span>writeAccessLevel()</h2>
+<a id="a2146dd0d8169927995411e75ad2032f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2146dd0d8169927995411e75ad2032f4">&#9670;&nbsp;</a></span>writeAccessLevel()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::Node::writeAccessLevel </td>
+          <td class="memname">void <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::writeAccessLevel </td>
           <td>(</td>
           <td class="paramtype">uint8_t&#160;</td>
           <td class="paramname"><em>mask</em></td><td>)</td>
@@ -1215,48 +1321,63 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Set access level mask of variable node, for example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a40ea076d6ef4c0aaccdc0d14fb2573c4">UA_ACCESSLEVELMASK_READ</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a92380e13ac90946ba3d5a7e975dfc5d3">UA_ACCESSLEVELMASK_WRITE</a></code>. </p>
+<p>Write access level mask of variable node, for example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a40ea076d6ef4c0aaccdc0d14fb2573c4">UA_ACCESSLEVELMASK_READ</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a92380e13ac90946ba3d5a7e975dfc5d3">UA_ACCESSLEVELMASK_WRITE</a></code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00218">218</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00244">244</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00137">opcua::services::writeAccessLevel()</a>.</p>
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00143">opcua::services::writeAccessLevel()</a>.</p>
 
 </div>
 </div>
-<a id="a1cec05dc658eb096d733d3e8f4a4b926"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1cec05dc658eb096d733d3e8f4a4b926">&#9670;&nbsp;</a></span>writeArray() <span class="overload">[1/3]</span></h2>
+<a id="aba1f44b97ac7812a47108e8120f4977e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba1f44b97ac7812a47108e8120f4977e">&#9670;&nbsp;</a></span>writeArray() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , Type type&gt; </div>
+template&lt;typename ServerOrClient &gt; </div>
+<div class="memtemplate">
+template&lt;typename T , Type type = detail::guessType&lt;T&gt;()&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::Node::writeArray </td>
+          <td class="memname">void <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::writeArray </td>
           <td>(</td>
           <td class="paramtype">const std::vector&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>array</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Write array (std::vector) to variable node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00289">289</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00281">281</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
-<a id="a163df53e7c39eaa4178d6f374735721e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a163df53e7c39eaa4178d6f374735721e">&#9670;&nbsp;</a></span>writeArray() <span class="overload">[2/3]</span></h2>
+<a id="a73315e65ca9b81e86fa4e73e9489dcc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73315e65ca9b81e86fa4e73e9489dcc2">&#9670;&nbsp;</a></span>writeArray() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , Type type&gt; </div>
+template&lt;typename ServerOrClient &gt; </div>
+<div class="memtemplate">
+template&lt;typename T , Type type = detail::guessType&lt;T&gt;()&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::Node::writeArray </td>
+          <td class="memname">void <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::writeArray </td>
           <td>(</td>
           <td class="paramtype">const T *&#160;</td>
           <td class="paramname"><em>array</em>, </td>
@@ -1273,26 +1394,36 @@ template&lt;typename T , Type type&gt; </div>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Write array (raw) to variable node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00282">282</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00273">273</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Node_8h_source.html#l00233">writeValue()</a>.</p>
+<p class="reference">References <a class="el" href="Node_8h_source.html#l00259">opcua::Node&lt; ServerOrClient &gt;::writeValue()</a>.</p>
 
 </div>
 </div>
-<a id="a67a0fa913075fcedd69729145755f04b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a67a0fa913075fcedd69729145755f04b">&#9670;&nbsp;</a></span>writeArray() <span class="overload">[3/3]</span></h2>
+<a id="a306de3320aa58ec6ae92bc500e02ca6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a306de3320aa58ec6ae92bc500e02ca6b">&#9670;&nbsp;</a></span>writeArray() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename InputIt , Type type&gt; </div>
+template&lt;typename ServerOrClient &gt; </div>
+<div class="memtemplate">
+template&lt;typename InputIt , Type type = detail::guessTypeFromIterator&lt;InputIt&gt;()&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::Node::writeArray </td>
+          <td class="memname">void <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::writeArray </td>
           <td>(</td>
           <td class="paramtype">InputIt&#160;</td>
           <td class="paramname"><em>first</em>, </td>
@@ -1309,27 +1440,34 @@ template&lt;typename InputIt , Type type&gt; </div>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Write range of elements as array to variable node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00294">294</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00287">287</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Node_8h_source.html#l00233">writeValue()</a>.</p>
+<p class="reference">References <a class="el" href="Node_8h_source.html#l00259">opcua::Node&lt; ServerOrClient &gt;::writeValue()</a>.</p>
 
 </div>
 </div>
-<a id="aa40f6e854d09c1f5153544803b75f746"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa40f6e854d09c1f5153544803b75f746">&#9670;&nbsp;</a></span>writeArrayDimensions()</h2>
+<a id="aec69495656d907270da9ddbc17b22164"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec69495656d907270da9ddbc17b22164">&#9670;&nbsp;</a></span>writeArrayDimensions()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::Node::writeArrayDimensions </td>
+          <td class="memname">void <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::writeArrayDimensions </td>
           <td>(</td>
           <td class="paramtype">const std::vector&lt; uint32_t &gt; &amp;&#160;</td>
           <td class="paramname"><em>dimensions</em></td><td>)</td>
@@ -1343,26 +1481,28 @@ template&lt;typename InputIt , Type type&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Set array dimensions of variable (type) node. </p>
+<p>Write array dimensions of variable (type) node. </p>
 <p>Should be unspecified if ValueRank is &lt;= 0 (<a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383aed36a1ef76a59ee3f15180e0441188ad">ValueRank::Any</a>, <a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383af60357a8d17e45793298323f1b372a74">ValueRank::Scalar</a>, <a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383abc975004cfa0419c12cf23c09de61693">ValueRank::ScalarOrOneDimension</a>, <a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383ab175b16c7f24cc7dff60de6707c4739f">ValueRank::OneOrMoreDimensions</a>). The dimension zero is a wildcard and the actual value may have any length in this dimension. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00213">213</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00239">239</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00128">opcua::services::writeArrayDimensions()</a>.</p>
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00134">opcua::services::writeArrayDimensions()</a>.</p>
 
 </div>
 </div>
-<a id="ac6ce46424b6a9f047bb08a208a734110"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac6ce46424b6a9f047bb08a208a734110">&#9670;&nbsp;</a></span>writeDataType() <span class="overload">[1/2]</span></h2>
+<a id="a4cc10aaba2f685709d59b48455c284dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cc10aaba2f685709d59b48455c284dd">&#9670;&nbsp;</a></span>writeDataType() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::Node::writeDataType </td>
+          <td class="memname">void <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::writeDataType </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
           <td class="paramname"><em>typeId</em></td><td>)</td>
@@ -1376,25 +1516,27 @@ template&lt;typename InputIt , Type type&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Set data type of variable (type) node by node id. </p>
+<p>Write data type of variable (type) node by node id. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00203">203</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00229">229</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00109">opcua::services::writeDataType()</a>.</p>
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00115">opcua::services::writeDataType()</a>.</p>
 
 </div>
 </div>
-<a id="aba0649af43bde989f77767b17334e273"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aba0649af43bde989f77767b17334e273">&#9670;&nbsp;</a></span>writeDataType() <span class="overload">[2/2]</span></h2>
+<a id="a09728b3d14e473101aaa17b84f94ba27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09728b3d14e473101aaa17b84f94ba27">&#9670;&nbsp;</a></span>writeDataType() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::Node::writeDataType </td>
+          <td class="memname">void <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::writeDataType </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceopcua.html#adc25953f10b26dc1213b1033d44f5966">Type</a>&#160;</td>
           <td class="paramname"><em>type</em></td><td>)</td>
@@ -1408,25 +1550,27 @@ template&lt;typename InputIt , Type type&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Set data type of variable (type) node. </p>
+<p>Write data type of variable (type) node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00198">198</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00224">224</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00109">opcua::services::writeDataType()</a>.</p>
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00115">opcua::services::writeDataType()</a>.</p>
 
 </div>
 </div>
-<a id="a4a85908c30e6620c4423fbdde20a8b36"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4a85908c30e6620c4423fbdde20a8b36">&#9670;&nbsp;</a></span>writeDataValue()</h2>
+<a id="ac34229e13e76c394bf28b935e23e4bc5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac34229e13e76c394bf28b935e23e4bc5">&#9670;&nbsp;</a></span>writeDataValue()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::Node::writeDataValue </td>
+          <td class="memname">void <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::writeDataValue </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classopcua_1_1DataValue.html">DataValue</a> &amp;&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
@@ -1443,23 +1587,25 @@ template&lt;typename InputIt , Type type&gt; </div>
 <p>Write <a class="el" href="classopcua_1_1DataValue.html" title="UA_DataValue wrapper class.">DataValue</a> to variable node. </p>
 <dl class="section note"><dt>Note</dt><dd>open62541 version &gt;=1.1 required </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00228">228</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00254">254</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00153">opcua::services::writeDataValue()</a>.</p>
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00159">opcua::services::writeDataValue()</a>.</p>
 
 </div>
 </div>
-<a id="aa1e67ee177deb05ba8c136df1bb92225"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa1e67ee177deb05ba8c136df1bb92225">&#9670;&nbsp;</a></span>writeDescription()</h2>
+<a id="affbe13040e5a5d021528711718d0a61a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affbe13040e5a5d021528711718d0a61a">&#9670;&nbsp;</a></span>writeDescription()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::Node::writeDescription </td>
+          <td class="memname">void <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::writeDescription </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a> &amp;&#160;</td>
           <td class="paramname"><em>name</em></td><td>)</td>
@@ -1473,25 +1619,27 @@ template&lt;typename InputIt , Type type&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Set localized description. </p>
+<p>Write localized description. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00188">188</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00214">214</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00099">opcua::services::writeDescription()</a>.</p>
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00105">opcua::services::writeDescription()</a>.</p>
 
 </div>
 </div>
-<a id="a3c115ec085449b0b966c0bd6798d154f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3c115ec085449b0b966c0bd6798d154f">&#9670;&nbsp;</a></span>writeDisplayName()</h2>
+<a id="a4dc5961d42509d0b40ef3c483848de50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4dc5961d42509d0b40ef3c483848de50">&#9670;&nbsp;</a></span>writeDisplayName()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::Node::writeDisplayName </td>
+          <td class="memname">void <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::writeDisplayName </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a> &amp;&#160;</td>
           <td class="paramname"><em>name</em></td><td>)</td>
@@ -1505,25 +1653,27 @@ template&lt;typename InputIt , Type type&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Set localized display name. </p>
+<p>Write localized display name. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00183">183</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00209">209</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00094">opcua::services::writeDisplayName()</a>.</p>
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00100">opcua::services::writeDisplayName()</a>.</p>
 
 </div>
 </div>
-<a id="a8825024471ef83f379f5d11e33031151"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8825024471ef83f379f5d11e33031151">&#9670;&nbsp;</a></span>writeModellingRule()</h2>
+<a id="ab3f987211e3f9997e4434a0f3125436b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3f987211e3f9997e4434a0f3125436b">&#9670;&nbsp;</a></span>writeModellingRule()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::Node::writeModellingRule </td>
+          <td class="memname">void <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::writeModellingRule </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceopcua.html#ad32e0c353b427fd8b7788a85a78335aa">ModellingRule</a>&#160;</td>
           <td class="paramname"><em>rule</em></td><td>)</td>
@@ -1537,51 +1687,63 @@ template&lt;typename InputIt , Type type&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Set modelling rule. </p>
+<p>Write modelling rule. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00223">223</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00249">249</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00142">opcua::services::writeModellingRule()</a>.</p>
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00148">opcua::services::writeModellingRule()</a>.</p>
 
 </div>
 </div>
-<a id="a5c6d1ef783d3cf59bd003c36e69e7162"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5c6d1ef783d3cf59bd003c36e69e7162">&#9670;&nbsp;</a></span>writeScalar()</h2>
+<a id="a8d61c4b2a6a616d696f1e06d2e0e16c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d61c4b2a6a616d696f1e06d2e0e16c7">&#9670;&nbsp;</a></span>writeScalar()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , Type type&gt; </div>
+template&lt;typename ServerOrClient &gt; </div>
+<div class="memtemplate">
+template&lt;typename T , Type type = detail::guessType&lt;T&gt;()&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::Node::writeScalar </td>
+          <td class="memname">void <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::writeScalar </td>
           <td>(</td>
           <td class="paramtype">const T &amp;&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Write scalar to variable node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00275">275</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00265">265</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Node_8h_source.html#l00233">writeValue()</a>.</p>
+<p class="reference">References <a class="el" href="Node_8h_source.html#l00259">opcua::Node&lt; ServerOrClient &gt;::writeValue()</a>.</p>
 
 </div>
 </div>
-<a id="a46d6d97cf5f4217854203b3e0ccf9920"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a46d6d97cf5f4217854203b3e0ccf9920">&#9670;&nbsp;</a></span>writeValue()</h2>
+<a id="a68028d622f8be50e6771a32a4a886d0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68028d622f8be50e6771a32a4a886d0b">&#9670;&nbsp;</a></span>writeValue()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::Node::writeValue </td>
+          <td class="memname">void <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::writeValue </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;&#160;</td>
           <td class="paramname"><em>value</em></td><td>)</td>
@@ -1597,25 +1759,27 @@ template&lt;typename T , Type type&gt; </div>
 
 <p>Write <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> to variable node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00233">233</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00259">259</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00161">opcua::services::writeValue()</a>.</p>
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00167">opcua::services::writeValue()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00282">writeArray()</a>, and <a class="el" href="Node_8h_source.html#l00275">writeScalar()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00273">opcua::Node&lt; ServerOrClient &gt;::writeArray()</a>, and <a class="el" href="Node_8h_source.html#l00265">opcua::Node&lt; ServerOrClient &gt;::writeScalar()</a>.</p>
 
 </div>
 </div>
-<a id="a8f82bb0ef39dcae99d1facd228f69bfb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f82bb0ef39dcae99d1facd228f69bfb">&#9670;&nbsp;</a></span>writeValueRank()</h2>
+<a id="af85666e06a2e4c86bea44f21f40434b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af85666e06a2e4c86bea44f21f40434b8">&#9670;&nbsp;</a></span>writeValueRank()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::Node::writeValueRank </td>
+          <td class="memname">void <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::writeValueRank </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383">ValueRank</a>&#160;</td>
           <td class="paramname"><em>valueRank</em></td><td>)</td>
@@ -1629,25 +1793,27 @@ template&lt;typename T , Type type&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Set value rank of variable (type) node. </p>
+<p>Write value rank of variable (type) node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00208">208</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00234">234</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00121">opcua::services::writeValueRank()</a>.</p>
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00127">opcua::services::writeValueRank()</a>.</p>
 
 </div>
 </div>
-<a id="a05044c366407b350be4b6cac5289cbff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05044c366407b350be4b6cac5289cbff">&#9670;&nbsp;</a></span>writeWriteMask()</h2>
+<a id="a5201494ee40a30f7e1e88039d197bbc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5201494ee40a30f7e1e88039d197bbc9">&#9670;&nbsp;</a></span>writeWriteMask()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::Node::writeWriteMask </td>
+          <td class="memname">void <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::writeWriteMask </td>
           <td>(</td>
           <td class="paramtype">uint32_t&#160;</td>
           <td class="paramname"><em>mask</em></td><td>)</td>
@@ -1661,11 +1827,11 @@ template&lt;typename T , Type type&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Set write mask, for example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a1214f1819ce0305107b143ec936e32d4">UA_WRITEMASK_ACCESSLEVEL</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a787ca45478013b2f4f928453429ba701">UA_WRITEMASK_DESCRIPTION</a></code>. </p>
+<p>Write write mask, for example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a1214f1819ce0305107b143ec936e32d4">UA_WRITEMASK_ACCESSLEVEL</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a787ca45478013b2f4f928453429ba701">UA_WRITEMASK_DESCRIPTION</a></code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00193">193</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00219">219</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00104">opcua::services::writeWriteMask()</a>.</p>
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00110">opcua::services::writeWriteMask()</a>.</p>
 
 </div>
 </div>

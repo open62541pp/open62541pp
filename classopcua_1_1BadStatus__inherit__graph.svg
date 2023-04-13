@@ -11,7 +11,7 @@
 <!-- Node1 -->
 <g id="node1" class="node">
 <title>Node1</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_node1"><a xlink:title="Exception for bad status codes from open62541 UA_STATUSCODE_*.">
 <polygon fill="#bfbfbf" stroke="black" points="0,-0.5 0,-19.5 101,-19.5 101,-0.5 0,-0.5"/>
 <text text-anchor="middle" x="50.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">opcua::BadStatus</text>
 </a>
