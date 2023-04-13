@@ -41,6 +41,14 @@ DataValue::DataValue(
     setValue(value);
 }
 
+Variant* DataValue::getValuePtr() noexcept {
+    return handle()->hasValue ? &asWrapper<Variant>(handle()->value) : nullptr;
+}
+
+const Variant* DataValue::getValuePtr() const noexcept {
+    return handle()->hasValue ? &asWrapper<Variant>(handle()->value) : nullptr;
+}
+
 std::optional<Variant> DataValue::getValue() const {
     if (handle()->hasValue) {
         return Variant(handle()->value);
