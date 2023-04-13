@@ -162,12 +162,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a873853591e70a3c96e594698bb4a7f7a"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a873853591e70a3c96e594698bb4a7f7a">readArray</a> ()</td></tr>
 <tr class="memdesc:a873853591e70a3c96e594698bb4a7f7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read array from variable node.  <a href="classopcua_1_1Node.html#a873853591e70a3c96e594698bb4a7f7a">More...</a><br /></td></tr>
 <tr class="separator:a873853591e70a3c96e594698bb4a7f7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa1583117e2aab7dc084e73195cf4541c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#aa1583117e2aab7dc084e73195cf4541c">writeDisplayName</a> (std::string_view locale, std::string_view name)</td></tr>
-<tr class="memdesc:aa1583117e2aab7dc084e73195cf4541c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set localized display name.  <a href="classopcua_1_1Node.html#aa1583117e2aab7dc084e73195cf4541c">More...</a><br /></td></tr>
-<tr class="separator:aa1583117e2aab7dc084e73195cf4541c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a167f6884db7180a6542fdd99f213f245"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a167f6884db7180a6542fdd99f213f245">writeDescription</a> (std::string_view locale, std::string_view name)</td></tr>
-<tr class="memdesc:a167f6884db7180a6542fdd99f213f245"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set localized description.  <a href="classopcua_1_1Node.html#a167f6884db7180a6542fdd99f213f245">More...</a><br /></td></tr>
-<tr class="separator:a167f6884db7180a6542fdd99f213f245"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c115ec085449b0b966c0bd6798d154f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a3c115ec085449b0b966c0bd6798d154f">writeDisplayName</a> (const <a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a> &amp;name)</td></tr>
+<tr class="memdesc:a3c115ec085449b0b966c0bd6798d154f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set localized display name.  <a href="classopcua_1_1Node.html#a3c115ec085449b0b966c0bd6798d154f">More...</a><br /></td></tr>
+<tr class="separator:a3c115ec085449b0b966c0bd6798d154f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1e67ee177deb05ba8c136df1bb92225"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#aa1e67ee177deb05ba8c136df1bb92225">writeDescription</a> (const <a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a> &amp;name)</td></tr>
+<tr class="memdesc:aa1e67ee177deb05ba8c136df1bb92225"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set localized description.  <a href="classopcua_1_1Node.html#aa1e67ee177deb05ba8c136df1bb92225">More...</a><br /></td></tr>
+<tr class="separator:aa1e67ee177deb05ba8c136df1bb92225"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05044c366407b350be4b6cac5289cbff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a05044c366407b350be4b6cac5289cbff">writeWriteMask</a> (uint32_t mask)</td></tr>
 <tr class="memdesc:a05044c366407b350be4b6cac5289cbff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set write mask, for example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a1214f1819ce0305107b143ec936e32d4">UA_WRITEMASK_ACCESSLEVEL</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a787ca45478013b2f4f928453429ba701">UA_WRITEMASK_DESCRIPTION</a></code>.  <a href="classopcua_1_1Node.html#a05044c366407b350be4b6cac5289cbff">More...</a><br /></td></tr>
 <tr class="separator:a05044c366407b350be4b6cac5289cbff"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -1219,7 +1219,7 @@ template&lt;typename T &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00218">218</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00145">opcua::services::writeAccessLevel()</a>.</p>
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00137">opcua::services::writeAccessLevel()</a>.</p>
 
 </div>
 </div>
@@ -1348,7 +1348,7 @@ template&lt;typename InputIt , Type type&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00213">213</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00136">opcua::services::writeArrayDimensions()</a>.</p>
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00128">opcua::services::writeArrayDimensions()</a>.</p>
 
 </div>
 </div>
@@ -1380,7 +1380,7 @@ template&lt;typename InputIt , Type type&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00203">203</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00117">opcua::services::writeDataType()</a>.</p>
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00109">opcua::services::writeDataType()</a>.</p>
 
 </div>
 </div>
@@ -1412,7 +1412,7 @@ template&lt;typename InputIt , Type type&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00198">198</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00117">opcua::services::writeDataType()</a>.</p>
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00109">opcua::services::writeDataType()</a>.</p>
 
 </div>
 </div>
@@ -1445,12 +1445,12 @@ template&lt;typename InputIt , Type type&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00228">228</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00161">opcua::services::writeDataValue()</a>.</p>
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00153">opcua::services::writeDataValue()</a>.</p>
 
 </div>
 </div>
-<a id="a167f6884db7180a6542fdd99f213f245"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a167f6884db7180a6542fdd99f213f245">&#9670;&nbsp;</a></span>writeDescription()</h2>
+<a id="aa1e67ee177deb05ba8c136df1bb92225"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1e67ee177deb05ba8c136df1bb92225">&#9670;&nbsp;</a></span>writeDescription()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1461,19 +1461,9 @@ template&lt;typename InputIt , Type type&gt; </div>
         <tr>
           <td class="memname">void opcua::Node::writeDescription </td>
           <td>(</td>
-          <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>locale</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a> &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>name</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -1487,12 +1477,12 @@ template&lt;typename InputIt , Type type&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00188">188</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00103">opcua::services::writeDescription()</a>.</p>
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00099">opcua::services::writeDescription()</a>.</p>
 
 </div>
 </div>
-<a id="aa1583117e2aab7dc084e73195cf4541c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa1583117e2aab7dc084e73195cf4541c">&#9670;&nbsp;</a></span>writeDisplayName()</h2>
+<a id="a3c115ec085449b0b966c0bd6798d154f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c115ec085449b0b966c0bd6798d154f">&#9670;&nbsp;</a></span>writeDisplayName()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1503,19 +1493,9 @@ template&lt;typename InputIt , Type type&gt; </div>
         <tr>
           <td class="memname">void opcua::Node::writeDisplayName </td>
           <td>(</td>
-          <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>locale</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a> &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>name</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -1561,7 +1541,7 @@ template&lt;typename InputIt , Type type&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00223">223</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00150">opcua::services::writeModellingRule()</a>.</p>
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00142">opcua::services::writeModellingRule()</a>.</p>
 
 </div>
 </div>
@@ -1619,7 +1599,7 @@ template&lt;typename T , Type type&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00233">233</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00169">opcua::services::writeValue()</a>.</p>
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00161">opcua::services::writeValue()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00282">writeArray()</a>, and <a class="el" href="Node_8h_source.html#l00275">writeScalar()</a>.</p>
 
@@ -1653,7 +1633,7 @@ template&lt;typename T , Type type&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00208">208</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00129">opcua::services::writeValueRank()</a>.</p>
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00121">opcua::services::writeValueRank()</a>.</p>
 
 </div>
 </div>
@@ -1685,7 +1665,7 @@ template&lt;typename T , Type type&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00193">193</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00112">opcua::services::writeWriteMask()</a>.</p>
+<p class="reference">References <a class="el" href="Attribute_8cpp_source.html#l00104">opcua::services::writeWriteMask()</a>.</p>
 
 </div>
 </div>
