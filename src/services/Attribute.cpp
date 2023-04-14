@@ -1,5 +1,6 @@
 #include "open62541pp/services/Attribute.h"
 
+#include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Helper.h"
 #include "open62541pp/Server.h"
@@ -12,6 +13,12 @@ namespace opcua::services {
 bool checkNodeIdExists(Server& server, const NodeId& id) {
     NodeId result(UA_NODEID_NULL);
     const auto status = UA_Server_readNodeId(server.handle(), id, result.handle());
+    return detail::isGoodStatus(status);
+}
+
+bool checkNodeIdExists(Client& client, const NodeId& id) {
+    NodeId result(UA_NODEID_NULL);
+    const auto status = UA_Client_readNodeIdAttribute(client.handle(), id, result.handle());
     return detail::isGoodStatus(status);
 }
 

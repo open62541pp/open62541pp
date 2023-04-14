@@ -12,6 +12,7 @@
 
 // forward declarations
 namespace opcua {
+class Client;
 class Server;
 }  // namespace opcua
 
@@ -28,6 +29,9 @@ namespace opcua::services {
  * @ingroup Attribute
  */
 bool checkNodeIdExists(Server& server, const NodeId& id);
+
+/// @copydoc checkNodeIdExists(Server&, const NodeId&)
+bool checkNodeIdExists(Client& client, const NodeId& id);
 
 /**
  * Read node class.

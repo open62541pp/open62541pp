@@ -12,6 +12,7 @@
 #include "open62541pp/Helper.h"
 #include "open62541pp/Node.h"
 #include "open62541pp/types/Builtin.h"  // ByteString
+#include "open62541pp/types/NodeId.h"
 
 #include "open62541_impl.h"
 #include "version.h"

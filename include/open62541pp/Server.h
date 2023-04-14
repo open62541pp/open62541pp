@@ -6,6 +6,7 @@
 #include <string_view>
 #include <vector>
 
+#include "open62541pp/Auth.h"
 #include "open62541pp/Logger.h"
 
 // forward declaration open62541
@@ -19,12 +20,6 @@ class NodeId;
 
 template <typename ServerOrClient>
 class Node;
-
-/// Login credentials.
-struct Login {
-    std::string username;
-    std::string password;
-};
 
 /**
  * High-level server class.
