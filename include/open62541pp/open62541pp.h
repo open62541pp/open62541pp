@@ -12,5 +12,8 @@
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/services/services.h"
 #include "open62541pp/types/Builtin.h"
+#include "open62541pp/types/Composed.h"
+#include "open62541pp/types/DataValue.h"
+#include "open62541pp/types/DateTime.h"
 #include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"
