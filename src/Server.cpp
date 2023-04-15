@@ -18,6 +18,16 @@
 
 namespace opcua {
 
+/* ------------------------------------------- Helper ------------------------------------------- */
+
+inline static UA_ServerConfig* getConfig(UA_Server* server) noexcept {
+    return UA_Server_getConfig(server);
+}
+
+inline static UA_ServerConfig* getConfig(Server* server) noexcept {
+    return UA_Server_getConfig(server->handle());
+}
+
 /* ----------------------------------------- Connection ----------------------------------------- */
 
 class Server::Connection {
@@ -28,7 +38,7 @@ public:
     ~Connection() {
         // don't use stop method here because it might throw an exception
         if (running_) {
-            UA_Server_run_shutdown(this->server_);
+            UA_Server_run_shutdown(server_);
         }
         UA_Server_delete(server_);
     }
@@ -40,7 +50,7 @@ public:
     Connection& operator=(Connection&&) noexcept = delete;
 
     void applyDefaults() {
-        auto* config = getConfig();
+        auto* config = getConfig(server_);
         config->publishingIntervalLimits.min = 10;  // ms
         config->samplingIntervalLimits.min = 10;  // ms
 #if UAPP_OPEN62541_VER_GE(1, 2)
@@ -70,7 +80,7 @@ public:
             return;
         }
 
-        const auto status = UA_Server_run_shutdown(this->server_);
+        const auto status = UA_Server_run_shutdown(server_);
         detail::throwOnBadStatus(status);
         running_ = false;
     }
@@ -81,7 +91,7 @@ public:
 
     void setLogger(Logger logger) {
         logger_ = std::move(logger);
-        auto* config = getConfig();
+        auto* config = getConfig(server_);
         config->logger.log = log;
         config->logger.context = this;
         config->logger.clear = nullptr;
@@ -110,10 +120,6 @@ public:
         instance->logger_(static_cast<LogLevel>(level), static_cast<LogCategory>(category), sv);
     }
 
-    UA_ServerConfig* getConfig() noexcept {
-        return UA_Server_getConfig(server_);
-    }
-
     UA_Server* handle() noexcept {
         return server_;
     }
@@ -128,14 +134,14 @@ private:
 
 Server::Server()
     : connection_(std::make_shared<Connection>()) {
-    const auto status = UA_ServerConfig_setDefault(getConfig());
+    const auto status = UA_ServerConfig_setDefault(getConfig(this));
     detail::throwOnBadStatus(status);
     connection_->applyDefaults();
 }
 
 Server::Server(uint16_t port)
     : connection_(std::make_shared<Connection>()) {
-    const auto status = UA_ServerConfig_setMinimal(getConfig(), port, nullptr);
+    const auto status = UA_ServerConfig_setMinimal(getConfig(this), port, nullptr);
     detail::throwOnBadStatus(status);
     connection_->applyDefaults();
 }
@@ -143,7 +149,7 @@ Server::Server(uint16_t port)
 Server::Server(uint16_t port, std::string_view certificate)
     : connection_(std::make_shared<Connection>()) {
     const auto status = UA_ServerConfig_setMinimal(
-        getConfig(), port, ByteString(certificate).handle()
+        getConfig(this), port, ByteString(certificate).handle()
     );
     detail::throwOnBadStatus(status);
     connection_->applyDefaults();
@@ -171,30 +177,30 @@ static void copyApplicationDescriptionToEndpoints(UA_ServerConfig* config) {
 }
 
 void Server::setCustomHostname(std::string_view hostname) {
-    auto& ref = getConfig()->customHostname;
+    auto& ref = getConfig(this)->customHostname;
     UA_String_clear(&ref);
     ref = detail::allocUaString(hostname);
 }
 
 void Server::setApplicationName(std::string_view name) {
-    auto& ref = getConfig()->applicationDescription.applicationName;
+    auto& ref = getConfig(this)->applicationDescription.applicationName;
     UA_LocalizedText_clear(&ref);
     ref = UA_LOCALIZEDTEXT_ALLOC("", name.data());
-    copyApplicationDescriptionToEndpoints(getConfig());
+    copyApplicationDescriptionToEndpoints(getConfig(this));
 }
 
 void Server::setApplicationUri(std::string_view uri) {
-    auto& ref = getConfig()->applicationDescription.applicationUri;
+    auto& ref = getConfig(this)->applicationDescription.applicationUri;
     UA_String_clear(&ref);
     ref = detail::allocUaString(uri);
-    copyApplicationDescriptionToEndpoints(getConfig());
+    copyApplicationDescriptionToEndpoints(getConfig(this));
 }
 
 void Server::setProductUri(std::string_view uri) {
-    auto& ref = getConfig()->applicationDescription.productUri;
+    auto& ref = getConfig(this)->applicationDescription.productUri;
     UA_String_clear(&ref);
     ref = detail::allocUaString(uri);
-    copyApplicationDescriptionToEndpoints(getConfig());
+    copyApplicationDescriptionToEndpoints(getConfig(this));
 }
 
 void Server::setLogin(const std::vector<Login>& logins, bool allowAnonymous) {
@@ -206,7 +212,7 @@ void Server::setLogin(const std::vector<Login>& logins, bool allowAnonymous) {
         loginsUa[i].password = detail::allocUaString(logins[i].password);
     }
 
-    auto* config = getConfig();
+    auto* config = getConfig(this);
 #if UAPP_OPEN62541_VER_GE(1, 1)
     if (config->accessControl.clear != nullptr) {
         config->accessControl.clear(&config->accessControl);
@@ -302,14 +308,6 @@ UA_Server* Server::handle() noexcept {
 
 const UA_Server* Server::handle() const noexcept {
     return connection_->handle();
-}
-
-UA_ServerConfig* Server::getConfig() noexcept {
-    return connection_->getConfig();
-}
-
-const UA_ServerConfig* Server::getConfig() const noexcept {
-    return connection_->getConfig();
 }
 
 /* ---------------------------------------------------------------------------------------------- */
