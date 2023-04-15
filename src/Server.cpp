@@ -11,7 +11,9 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Helper.h"
 #include "open62541pp/Node.h"
-#include "open62541pp/types/Builtin.h"  // ByteString
+#include "open62541pp/services/Attribute.h"
+#include "open62541pp/types/Builtin.h"
+#include "open62541pp/types/Variant.h"
 
 #include "open62541_impl.h"
 #include "version.h"
@@ -242,6 +244,16 @@ void Server::setLogin(const std::vector<Login>& logins, bool allowAnonymous) {
     detail::throwOnBadStatus(status);
 }
 
+std::vector<std::string> Server::getNamespaceArray() {
+    Variant variant;
+    services::readValue(*this, {0, UA_NS0ID_SERVER_NAMESPACEARRAY}, variant);
+    return variant.getArrayCopy<std::string>();
+}
+
+uint16_t Server::registerNamespace(std::string_view uri) {
+    return UA_Server_addNamespace(handle(), std::string(uri).c_str());
+}
+
 void Server::run() {
     connection_->run();
 }
@@ -252,10 +264,6 @@ void Server::stop() {
 
 bool Server::isRunning() const noexcept {
     return connection_->isRunning();
-}
-
-uint16_t Server::registerNamespace(std::string_view name) {
-    return UA_Server_addNamespace(handle(), std::string(name).c_str());
 }
 
 Node<Server> Server::getNode(const NodeId& id) {

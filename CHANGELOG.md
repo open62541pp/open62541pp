@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `asWrapper` function to cast native refs to wrapper refs (#30, #31)
 - `DataValue::getValuePtr` method
+- `Server::getNamespaceArray` method
 
 ### Changed
 

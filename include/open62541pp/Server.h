@@ -53,15 +53,17 @@ public:
     /// Set login credentials (username/password) and anonymous login.
     void setLogin(const std::vector<Login>& logins, bool allowAnonymous = true);
 
+    /// Get all defined namespaces.
+    std::vector<std::string> getNamespaceArray();
+    /// Register namespace. The new namespace index will be returned.
+    [[nodiscard]] uint16_t registerNamespace(std::string_view uri);
+
     /// Run server. This method will block until Server::stop is called.
     void run();
     /// Stop server.
     void stop();
     /// Check if server is running.
     bool isRunning() const noexcept;
-
-    /// Register namespace. The new namespace index will be returned.
-    [[nodiscard]] uint16_t registerNamespace(std::string_view name);
 
     Node<Server> getNode(const NodeId& id);
     Node<Server> getRootNode();
