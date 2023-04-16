@@ -68,6 +68,21 @@ TEST_CASE("Server") {
         );
     }
 
+    SECTION("Namespace array") {
+        const auto namespaces = server.getNamespaceArray();
+        CHECK(namespaces.size() == 2);
+        CHECK_THAT(namespaces.at(0), Equals("http://opcfoundation.org/UA/"));
+        CHECK_THAT(namespaces.at(1), Equals("urn:open62541.server.application"));
+    }
+
+    SECTION("Register namespace") {
+        CHECK(server.registerNamespace("test1") == 2);
+        CHECK_THAT(server.getNamespaceArray().at(2), Equals("test1"));
+
+        CHECK(server.registerNamespace("test2") == 3);
+        CHECK_THAT(server.getNamespaceArray().at(3), Equals("test2"));
+    }
+
     SECTION("Get default nodes") {
         // clang-format off
         CHECK(server.getRootNode().getNodeId()                 == NodeId{0, UA_NS0ID_ROOTFOLDER});
@@ -81,13 +96,6 @@ TEST_CASE("Server") {
         CHECK(server.getBaseObjectTypeNode().getNodeId()       == NodeId{0, UA_NS0ID_BASEOBJECTTYPE});
         CHECK(server.getBaseDataVariableTypeNode().getNodeId() == NodeId{0, UA_NS0ID_BASEDATAVARIABLETYPE});
         // clang-format on
-    }
-
-    SECTION("Register namespace") {
-        // namespace 0 reserved, but why starting at 2?
-        REQUIRE(server.registerNamespace("testnamespaceuri1") == 2);
-        REQUIRE(server.registerNamespace("testnamespaceuri2") == 3);
-        REQUIRE(server.registerNamespace("testnamespaceuri3") == 4);
     }
 
     SECTION("Equality") {

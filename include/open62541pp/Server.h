@@ -8,24 +8,22 @@
 
 #include "open62541pp/Auth.h"
 #include "open62541pp/Logger.h"
+#include "open62541pp/types/NodeId.h"
 
 // forward declaration open62541
 struct UA_Server;
-struct UA_ServerConfig;
 
 namespace opcua {
 
 // forward declaration
-class NodeId;
-
 template <typename ServerOrClient>
 class Node;
 
 /**
  * High-level server class.
  *
- * Exposes the most common functionality. Use the handle() and getConfig() method to get access
- * to the underlying UA_Server and UA_ServerConfig instances and use the full power of open6254.
+ * Exposes the most common functionality. Use the handle() method to get access the underlying
+ * UA_Server instance and use the full power of open6254.
  */
 class Server {
 public:
@@ -50,15 +48,17 @@ public:
     /// Set login credentials (username/password) and anonymous login.
     void setLogin(const std::vector<Login>& logins, bool allowAnonymous = true);
 
+    /// Get all defined namespaces.
+    std::vector<std::string> getNamespaceArray();
+    /// Register namespace. The new namespace index will be returned.
+    [[nodiscard]] uint16_t registerNamespace(std::string_view uri);
+
     /// Run server. This method will block until Server::stop is called.
     void run();
     /// Stop server.
     void stop();
     /// Check if server is running.
     bool isRunning() const noexcept;
-
-    /// Register namespace. The new namespace index will be returned.
-    [[nodiscard]] uint16_t registerNamespace(std::string_view name);
 
     Node<Server> getNode(const NodeId& id);
     Node<Server> getRootNode();
@@ -74,9 +74,6 @@ public:
 
     UA_Server* handle() noexcept;
     const UA_Server* handle() const noexcept;
-
-    UA_ServerConfig* getConfig() noexcept;
-    const UA_ServerConfig* getConfig() const noexcept;
 
 private:
     class Connection;
