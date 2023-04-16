@@ -1,4 +1,4 @@
-#include <chrono>
+#include <atomic>
 #include <string_view>
 #include <thread>
 
@@ -12,22 +12,24 @@ using namespace opcua;
 /// Helper class to run server in background thread.
 class ServerRunner {
 public:
-    ServerRunner(Server& server)
-        : server_(server),
-          thread_([&] { server_.run(); }) {
-        // wait for thread to execute run method
-        while (!server_.isRunning()) {
-            std::this_thread::sleep_for(std::chrono::milliseconds(10));
-        }
+    ServerRunner(Server& server) {
+        server.setLogger({});  // disable logging to prevent data races
+        server.runIterate();  // make sure server is running within constructor
+        thread_ = std::thread([&] {
+            while (!stopFlag_) {
+                server.runIterate();
+                // no sleep here, process server events as fast a possible
+            };
+        });
     }
 
     ~ServerRunner() {
-        server_.stop();
+        stopFlag_ = true;
         thread_.join();
     }
 
 private:
-    Server& server_;
+    std::atomic<bool> stopFlag_{false};
     std::thread thread_;
 };
 
