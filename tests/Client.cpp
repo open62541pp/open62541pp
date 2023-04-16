@@ -31,15 +31,16 @@ private:
     std::thread thread_;
 };
 
-TEST_CASE("Client") {
+constexpr std::string_view localServerUrl{"opc.tcp://localhost:4840"};
+
+TEST_CASE("Client discovery") {
     Server server;
     ServerRunner serverRunner(server);
-    std::string_view serverUrl{"opc.tcp://localhost:4840"};
 
     Client client;
 
     SECTION("Find servers") {
-        const auto results = client.findServers(serverUrl);
+        const auto results = client.findServers(localServerUrl);
         REQUIRE(results.size() == 1);
 
         const auto& result = results[0];
@@ -49,17 +50,12 @@ TEST_CASE("Client") {
         CHECK(result.getDiscoveryUrls().size() == 1);
     }
 
-    SECTION("Find servers should fail if connected") {
-        client.connect(serverUrl);
-        REQUIRE_THROWS(client.findServers(serverUrl));
-    }
-
     SECTION("Get endpoints") {
-        const auto endpoints = client.getEndpoints(serverUrl);
+        const auto endpoints = client.getEndpoints(localServerUrl);
         REQUIRE(endpoints.size() == 1);
 
         const auto& endpoint = endpoints[0];
-        CHECK(endpoint.getEndpointUrl() == String(serverUrl));
+        CHECK(endpoint.getEndpointUrl() == String(localServerUrl));
         CHECK(endpoint.getServerCertificate() == ByteString());
         CHECK(endpoint.getSecurityMode() == UA_MESSAGESECURITYMODE_NONE);
         CHECK(
@@ -71,29 +67,37 @@ TEST_CASE("Client") {
             String("http://opcfoundation.org/UA-Profile/Transport/uatcp-uasc-uabinary")
         );
     }
+}
 
-    SECTION("Get endpoints should fail if connected") {
-        client.connect(serverUrl);
-        REQUIRE_THROWS(client.getEndpoints(serverUrl));
-    }
+TEST_CASE("Client anonymous login") {
+    Server server;
+    ServerRunner serverRunner(server);
+
+    Client client;
 
     SECTION("Connect/disconnect") {
-        client.connect(serverUrl);
+        client.connect(localServerUrl);
         client.disconnect();
     }
 
     SECTION("Connect with username/password should fail") {
-        REQUIRE_THROWS(client.connect(serverUrl, {"username", "password"}));
+        REQUIRE_THROWS(client.connect(localServerUrl, {"username", "password"}));
     }
 }
 
-TEST_CASE("Client username/password") {
+TEST_CASE("Client username/password login") {
     Server server;
     server.setLogin({{"username", "password"}}, false);
     ServerRunner serverRunner(server);
-    std::string_view serverUrl{"opc.tcp://localhost:4840"};
 
     Client client;
-    client.connect(serverUrl, {"username", "password"});
-    client.disconnect();
+
+    SECTION("Connect with anonymous should fail") {
+        REQUIRE_THROWS(client.connect(localServerUrl));
+    }
+
+    SECTION("Connect with username/password should succeed") {
+        client.connect(localServerUrl, {"username", "password"});
+        client.disconnect();
+    }
 }
