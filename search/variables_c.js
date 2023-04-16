@@ -1,7 +1,7 @@
 var searchData=
 [
   ['makecertificatethumbprint_3576',['makeCertificateThumbprint',['open62541/structUA__SecurityPolicyAsymmetricModule.html#a21a92932413de6470b03ccec64511cb1',0,'UA_SecurityPolicyAsymmetricModule']]],
-  ['manufacturername_3577',['ManufacturerName',['open62541/struct__OpcUa__BuildInfo.html#aefe9793989d6da318c3c3038b42ee9dd',0,'_OpcUa_BuildInfo::ManufacturerName()'],['open62541/structUA__BuildInfo.html#af76c60d0732b4d69bd2cccc1014ae2ac',0,'UA_BuildInfo::manufacturerName()']]],
+  ['manufacturername_3577',['manufacturerName',['open62541/structUA__BuildInfo.html#af76c60d0732b4d69bd2cccc1014ae2ac',0,'UA_BuildInfo::manufacturerName()'],['open62541/struct__OpcUa__BuildInfo.html#aefe9793989d6da318c3c3038b42ee9dd',0,'_OpcUa_BuildInfo::ManufacturerName()']]],
   ['max_3578',['max',['open62541/structUA__DurationRange.html#a920a68c35bc45ba205b0e1ee8d84df85',0,'UA_DurationRange::max()'],['open62541/structUA__NumericRangeDimension.html#ae154ceece5417f1e2678a2abbb6fe91d',0,'UA_NumericRangeDimension::max()'],['open62541/structUA__UInt32Range.html#a3150885d3ee87ab2b37d6b9878d87339',0,'UA_UInt32Range::max()']]],
   ['maxage_3579',['maxAge',['open62541/structUA__ReadRequest.html#a9526a6c1b108a7d64e75b9cbe5b67d00',0,'UA_ReadRequest::maxAge()'],['open62541/struct__OpcUa__ReadRequest.html#a6932f98fbc364c2ab79a0760a620baee',0,'_OpcUa_ReadRequest::MaxAge()']]],
   ['maxarraylength_3580',['MaxArrayLength',['open62541/struct__OpcUa__EndpointConfiguration.html#a84c5676b20342d8b4820b964e08128a9',0,'_OpcUa_EndpointConfiguration']]],
