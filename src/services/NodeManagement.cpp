@@ -111,16 +111,6 @@ void addReference(
     detail::throwOnBadStatus(status);
 }
 
-void addModellingRule(Server& server, const NodeId& id, ModellingRule rule) {
-    addReference(
-        server,
-        id,
-        {0, static_cast<uint32_t>(rule)},  // target
-        ReferenceType::HasModellingRule,
-        true
-    );
-}
-
 void deleteNode(Server& server, const NodeId& id, bool deleteReferences) {
     const auto status = UA_Server_deleteNode(server.handle(), id, deleteReferences);
     detail::throwOnBadStatus(status);
