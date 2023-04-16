@@ -151,12 +151,6 @@ void writeArrayDimensions(
 void writeAccessLevel(Server& server, const NodeId& id, uint8_t mask);
 
 /**
- * Write modelling rule.
- * @ingroup Attribute
- */
-void writeModellingRule(Server& server, const NodeId& id, ModellingRule rule);
-
-/**
  * Write DataValue to variable node.
  * @note open62541 version >=1.1 required
  * @ingroup Attribute

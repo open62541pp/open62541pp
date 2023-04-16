@@ -115,6 +115,13 @@ void addReference(
 );
 
 /**
+ * Add modelling rule.
+ * @exception BadStatus
+ * @ingroup NodeManagement
+ */
+void addModellingRule(Server& server, const NodeId& id, ModellingRule rule);
+
+/**
  * Delete node.
  * @exception BadStatus
  * @ingroup NodeManagement

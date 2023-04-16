@@ -145,17 +145,6 @@ void writeAccessLevel(Server& server, const NodeId& id, uint8_t mask) {
     detail::throwOnBadStatus(status);
 }
 
-void writeModellingRule(Server& server, const NodeId& id, ModellingRule rule) {
-    const auto status = UA_Server_addReference(
-        server.handle(),  // server
-        id,  // source id
-        UA_NODEID_NUMERIC(0, UA_NS0ID_HASMODELLINGRULE),  // reference id
-        UA_EXPANDEDNODEID_NUMERIC(0, static_cast<UA_UInt32>(rule)),  // target id
-        true  // forward
-    );
-    detail::throwOnBadStatus(status);
-}
-
 void writeDataValue(Server& server, const NodeId& id, const DataValue& value) {
     // support for types with optional fields introduced in v1.1
 #if UAPP_OPEN62541_VER_GE(1, 1)
