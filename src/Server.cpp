@@ -2,10 +2,8 @@
 
 #include <atomic>
 #include <cassert>
-#include <chrono>
 #include <cstdarg>  // va_list, va_copy
 #include <cstdio>
-#include <thread>
 #include <utility>  // move
 
 #include "open62541pp/ErrorHandling.h"
@@ -60,20 +58,27 @@ public:
 #endif
     }
 
+    void runStartup() {
+        const auto status = UA_Server_run_startup(server_);
+        detail::throwOnBadStatus(status);
+        running_ = true;
+    }
+
+    uint16_t runIterate() {
+        if (!running_) {
+            runStartup();
+        }
+        return UA_Server_run_iterate(server_, false /* don't wait */);
+    }
+
     void run() {
         if (running_) {
             return;
         }
-
-        const auto status = UA_Server_run_startup(server_);
-        detail::throwOnBadStatus(status);
-        running_ = true;
+        runStartup();
         while (running_) {
-            // references:
-            // https://open62541.org/doc/current/server.html#server-lifecycle
             // https://github.com/open62541/open62541/blob/master/examples/server_mainloop.c
-            const auto waitInterval = UA_Server_run_iterate(server_, true);
-            std::this_thread::sleep_for(std::chrono::milliseconds(waitInterval));
+            UA_Server_run_iterate(server_, true /* wait for messages in the networklayer */);
         }
     }
 
@@ -81,7 +86,6 @@ public:
         if (!running_) {
             return;
         }
-
         const auto status = UA_Server_run_shutdown(server_);
         detail::throwOnBadStatus(status);
         running_ = false;
@@ -252,6 +256,10 @@ std::vector<std::string> Server::getNamespaceArray() {
 
 uint16_t Server::registerNamespace(std::string_view uri) {
     return UA_Server_addNamespace(handle(), std::string(uri).c_str());
+}
+
+uint16_t Server::runIterate() {
+    return connection_->runIterate();
 }
 
 void Server::run() {
