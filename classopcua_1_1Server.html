@@ -122,14 +122,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aebbf0356e35f42af50930448fe2245a4"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#aebbf0356e35f42af50930448fe2245a4">registerNamespace</a> (std::string_view uri)</td></tr>
 <tr class="memdesc:aebbf0356e35f42af50930448fe2245a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register namespace. The new namespace index will be returned.  <a href="classopcua_1_1Server.html#aebbf0356e35f42af50930448fe2245a4">More...</a><br /></td></tr>
 <tr class="separator:aebbf0356e35f42af50930448fe2245a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74af3b7dbfa031a19230a45dcf3f3a31"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a74af3b7dbfa031a19230a45dcf3f3a31">runIterate</a> ()</td></tr>
+<tr class="memdesc:a74af3b7dbfa031a19230a45dcf3f3a31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run single iteration of the server's main loop.  <a href="classopcua_1_1Server.html#a74af3b7dbfa031a19230a45dcf3f3a31">More...</a><br /></td></tr>
+<tr class="separator:a74af3b7dbfa031a19230a45dcf3f3a31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7346a714c85e2d99fc8bc9fd1dd31d6d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a7346a714c85e2d99fc8bc9fd1dd31d6d">run</a> ()</td></tr>
-<tr class="memdesc:a7346a714c85e2d99fc8bc9fd1dd31d6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run server. This method will block until <a class="el" href="classopcua_1_1Server.html#a51f8bc0f79b2e5cea8fc094c58a76a9c" title="Stop server.">Server::stop</a> is called.  <a href="classopcua_1_1Server.html#a7346a714c85e2d99fc8bc9fd1dd31d6d">More...</a><br /></td></tr>
+<tr class="memdesc:a7346a714c85e2d99fc8bc9fd1dd31d6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run the server's main loop. This method will block until <a class="el" href="classopcua_1_1Server.html#a51f8bc0f79b2e5cea8fc094c58a76a9c" title="Stop the server&#39;s main loop.">Server::stop</a> is called.  <a href="classopcua_1_1Server.html#a7346a714c85e2d99fc8bc9fd1dd31d6d">More...</a><br /></td></tr>
 <tr class="separator:a7346a714c85e2d99fc8bc9fd1dd31d6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51f8bc0f79b2e5cea8fc094c58a76a9c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a51f8bc0f79b2e5cea8fc094c58a76a9c">stop</a> ()</td></tr>
-<tr class="memdesc:a51f8bc0f79b2e5cea8fc094c58a76a9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop server.  <a href="classopcua_1_1Server.html#a51f8bc0f79b2e5cea8fc094c58a76a9c">More...</a><br /></td></tr>
+<tr class="memdesc:a51f8bc0f79b2e5cea8fc094c58a76a9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop the server's main loop.  <a href="classopcua_1_1Server.html#a51f8bc0f79b2e5cea8fc094c58a76a9c">More...</a><br /></td></tr>
 <tr class="separator:a51f8bc0f79b2e5cea8fc094c58a76a9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae355af01f75adbe8197353e5f5d6afd6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#ae355af01f75adbe8197353e5f5d6afd6">isRunning</a> () const noexcept</td></tr>
-<tr class="memdesc:ae355af01f75adbe8197353e5f5d6afd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if server is running.  <a href="classopcua_1_1Server.html#ae355af01f75adbe8197353e5f5d6afd6">More...</a><br /></td></tr>
+<tr class="memdesc:ae355af01f75adbe8197353e5f5d6afd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the server is running.  <a href="classopcua_1_1Server.html#ae355af01f75adbe8197353e5f5d6afd6">More...</a><br /></td></tr>
 <tr class="separator:ae355af01f75adbe8197353e5f5d6afd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8163eca1c3e5e6ec20d6de12199e260"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a>&lt; <a class="el" href="classopcua_1_1Server.html">Server</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#af8163eca1c3e5e6ec20d6de12199e260">getNode</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id)</td></tr>
 <tr class="separator:af8163eca1c3e5e6ec20d6de12199e260"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -181,7 +184,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Create server with default config. </p>
 
-<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00137">137</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00141">141</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="ErrorHandling_8h_source.html#l00046">opcua::detail::throwOnBadStatus()</a>.</p>
 
@@ -213,7 +216,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Create server with custom port. </p>
 
-<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00144">144</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00148">148</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="ErrorHandling_8h_source.html#l00046">opcua::detail::throwOnBadStatus()</a>.</p>
 
@@ -247,9 +250,9 @@ Public Member Functions</h2></td></tr>
 
 <p>Create server with custom port and a server certificate. </p>
 
-<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00151">151</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00155">155</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="Server_8cpp_source.html#l00313">handle()</a>, and <a class="el" href="ErrorHandling_8h_source.html#l00046">opcua::detail::throwOnBadStatus()</a>.</p>
+<p class="reference">References <a class="el" href="Server_8cpp_source.html#l00321">handle()</a>, and <a class="el" href="ErrorHandling_8h_source.html#l00046">opcua::detail::throwOnBadStatus()</a>.</p>
 
 </div>
 </div>
@@ -269,7 +272,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00309">309</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00317">317</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
 
 <p class="reference">References <a class="elRef" target="_blank" href="open62541/nodeids_8h.html#a820a6680f8fe35af74f6f44c8df63606">UA_NS0ID_BASEDATAVARIABLETYPE</a>.</p>
 
@@ -290,7 +293,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00305">305</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00313">313</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
 
 <p class="reference">References <a class="elRef" target="_blank" href="open62541/nodeids_8h.html#ae9c277a866772a21fcff5dea71af45ce">UA_NS0ID_BASEOBJECTTYPE</a>.</p>
 
@@ -311,7 +314,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00297">297</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00305">305</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
 
 <p class="reference">References <a class="elRef" target="_blank" href="open62541/nodeids_8h.html#aa32c5a4da40638ccf88c7da0124c3f9c">UA_NS0ID_DATATYPESFOLDER</a>.</p>
 
@@ -334,7 +337,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Get all defined namespaces. </p>
 
-<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00247">247</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00251">251</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="Variant_8h_source.html#l00247">opcua::Variant::getArrayCopy()</a>, <a class="el" href="Attribute_8cpp_source.html#l00095">opcua::services::readValue()</a>, and <a class="elRef" target="_blank" href="open62541/nodeids_8h.html#a7faac5e4a8f52506d0fa2ed8377b35b6">UA_NS0ID_SERVER_NAMESPACEARRAY</a>.</p>
 
@@ -356,7 +359,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00269">269</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00277">277</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
 
 </div>
 </div>
@@ -375,7 +378,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00277">277</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00285">285</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
 
 <p class="reference">References <a class="elRef" target="_blank" href="open62541/nodeids_8h.html#aace8d1ffd797f96700703cfc930d2013">UA_NS0ID_OBJECTSFOLDER</a>.</p>
 
@@ -396,7 +399,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00289">289</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00297">297</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
 
 <p class="reference">References <a class="elRef" target="_blank" href="open62541/nodeids_8h.html#a53b1bf3f0dcb1bfe09e070cf69ff0a3c">UA_NS0ID_OBJECTTYPESFOLDER</a>.</p>
 
@@ -417,7 +420,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00301">301</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00309">309</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
 
 <p class="reference">References <a class="elRef" target="_blank" href="open62541/nodeids_8h.html#a433795dc1ea5a86a272f215ae381b160">UA_NS0ID_REFERENCETYPESFOLDER</a>.</p>
 
@@ -438,7 +441,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00273">273</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00281">281</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
 
 <p class="reference">References <a class="elRef" target="_blank" href="open62541/nodeids_8h.html#a0fb700fde5f540522dad8a5cbfcb15fc">UA_NS0ID_ROOTFOLDER</a>.</p>
 
@@ -459,7 +462,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00281">281</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00289">289</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
 
 <p class="reference">References <a class="elRef" target="_blank" href="open62541/nodeids_8h.html#ae12ec36e8f40c809badba74ba862fe39">UA_NS0ID_TYPESFOLDER</a>.</p>
 
@@ -480,7 +483,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00293">293</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00301">301</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
 
 <p class="reference">References <a class="elRef" target="_blank" href="open62541/nodeids_8h.html#aaef1b9426134e9fc402cac3b4969e84c">UA_NS0ID_VARIABLETYPESFOLDER</a>.</p>
 
@@ -501,7 +504,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00285">285</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00293">293</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
 
 <p class="reference">References <a class="elRef" target="_blank" href="open62541/nodeids_8h.html#af77cd3c94ccaaef317496dc8057c032a">UA_NS0ID_VIEWSFOLDER</a>.</p>
 
@@ -555,9 +558,9 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00313">313</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00321">321</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="NodeManagement_8cpp_source.html#l00011">opcua::services::addObject()</a>, <a class="el" href="NodeManagement_8cpp_source.html#l00055">opcua::services::addObjectType()</a>, <a class="el" href="NodeManagement_8cpp_source.html#l00097">opcua::services::addReference()</a>, <a class="el" href="NodeManagement_8cpp_source.html#l00033">opcua::services::addVariable()</a>, <a class="el" href="NodeManagement_8cpp_source.html#l00075">opcua::services::addVariableType()</a>, <a class="el" href="Browse_8cpp_source.html#l00010">opcua::services::browseChild()</a>, <a class="el" href="Attribute_8cpp_source.html#l00012">opcua::services::checkNodeIdExists()</a>, <a class="el" href="NodeManagement_8cpp_source.html#l00114">opcua::services::deleteNode()</a>, <a class="el" href="Attribute_8cpp_source.html#l00077">opcua::services::readAccessLevel()</a>, <a class="el" href="Attribute_8cpp_source.html#l00067">opcua::services::readArrayDimensions()</a>, <a class="el" href="Attribute_8cpp_source.html#l00025">opcua::services::readBrowseName()</a>, <a class="el" href="Attribute_8cpp_source.html#l00053">opcua::services::readDataType()</a>, <a class="el" href="Attribute_8cpp_source.html#l00084">opcua::services::readDataValue()</a>, <a class="el" href="Attribute_8cpp_source.html#l00039">opcua::services::readDescription()</a>, <a class="el" href="Attribute_8cpp_source.html#l00032">opcua::services::readDisplayName()</a>, <a class="el" href="Attribute_8cpp_source.html#l00018">opcua::services::readNodeClass()</a>, <a class="el" href="Attribute_8cpp_source.html#l00095">opcua::services::readValue()</a>, <a class="el" href="Attribute_8cpp_source.html#l00060">opcua::services::readValueRank()</a>, <a class="el" href="Attribute_8cpp_source.html#l00046">opcua::services::readWriteMask()</a>, <a class="el" href="Server_8cpp_source.html#l00253">registerNamespace()</a>, <a class="el" href="Server_8cpp_source.html#l00151">Server()</a>, <a class="el" href="Attribute_8cpp_source.html#l00143">opcua::services::writeAccessLevel()</a>, <a class="el" href="Attribute_8cpp_source.html#l00134">opcua::services::writeArrayDimensions()</a>, <a class="el" href="Attribute_8cpp_source.html#l00115">opcua::services::writeDataType()</a>, <a class="el" href="Attribute_8cpp_source.html#l00159">opcua::services::writeDataValue()</a>, <a class="el" href="Attribute_8cpp_source.html#l00105">opcua::services::writeDescription()</a>, <a class="el" href="Attribute_8cpp_source.html#l00100">opcua::services::writeDisplayName()</a>, <a class="el" href="Attribute_8cpp_source.html#l00148">opcua::services::writeModellingRule()</a>, <a class="el" href="Attribute_8cpp_source.html#l00167">opcua::services::writeValue()</a>, <a class="el" href="Attribute_8cpp_source.html#l00127">opcua::services::writeValueRank()</a>, and <a class="el" href="Attribute_8cpp_source.html#l00110">opcua::services::writeWriteMask()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="NodeManagement_8cpp_source.html#l00011">opcua::services::addObject()</a>, <a class="el" href="NodeManagement_8cpp_source.html#l00055">opcua::services::addObjectType()</a>, <a class="el" href="NodeManagement_8cpp_source.html#l00097">opcua::services::addReference()</a>, <a class="el" href="NodeManagement_8cpp_source.html#l00033">opcua::services::addVariable()</a>, <a class="el" href="NodeManagement_8cpp_source.html#l00075">opcua::services::addVariableType()</a>, <a class="el" href="Browse_8cpp_source.html#l00010">opcua::services::browseChild()</a>, <a class="el" href="Attribute_8cpp_source.html#l00012">opcua::services::checkNodeIdExists()</a>, <a class="el" href="NodeManagement_8cpp_source.html#l00114">opcua::services::deleteNode()</a>, <a class="el" href="Attribute_8cpp_source.html#l00077">opcua::services::readAccessLevel()</a>, <a class="el" href="Attribute_8cpp_source.html#l00067">opcua::services::readArrayDimensions()</a>, <a class="el" href="Attribute_8cpp_source.html#l00025">opcua::services::readBrowseName()</a>, <a class="el" href="Attribute_8cpp_source.html#l00053">opcua::services::readDataType()</a>, <a class="el" href="Attribute_8cpp_source.html#l00084">opcua::services::readDataValue()</a>, <a class="el" href="Attribute_8cpp_source.html#l00039">opcua::services::readDescription()</a>, <a class="el" href="Attribute_8cpp_source.html#l00032">opcua::services::readDisplayName()</a>, <a class="el" href="Attribute_8cpp_source.html#l00018">opcua::services::readNodeClass()</a>, <a class="el" href="Attribute_8cpp_source.html#l00095">opcua::services::readValue()</a>, <a class="el" href="Attribute_8cpp_source.html#l00060">opcua::services::readValueRank()</a>, <a class="el" href="Attribute_8cpp_source.html#l00046">opcua::services::readWriteMask()</a>, <a class="el" href="Server_8cpp_source.html#l00257">registerNamespace()</a>, <a class="el" href="Server_8cpp_source.html#l00155">Server()</a>, <a class="el" href="Attribute_8cpp_source.html#l00143">opcua::services::writeAccessLevel()</a>, <a class="el" href="Attribute_8cpp_source.html#l00134">opcua::services::writeArrayDimensions()</a>, <a class="el" href="Attribute_8cpp_source.html#l00115">opcua::services::writeDataType()</a>, <a class="el" href="Attribute_8cpp_source.html#l00159">opcua::services::writeDataValue()</a>, <a class="el" href="Attribute_8cpp_source.html#l00105">opcua::services::writeDescription()</a>, <a class="el" href="Attribute_8cpp_source.html#l00100">opcua::services::writeDisplayName()</a>, <a class="el" href="Attribute_8cpp_source.html#l00148">opcua::services::writeModellingRule()</a>, <a class="el" href="Attribute_8cpp_source.html#l00167">opcua::services::writeValue()</a>, <a class="el" href="Attribute_8cpp_source.html#l00127">opcua::services::writeValueRank()</a>, and <a class="el" href="Attribute_8cpp_source.html#l00110">opcua::services::writeWriteMask()</a>.</p>
 
 </div>
 </div>
@@ -584,9 +587,9 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Check if server is running. </p>
+<p>Check if the server is running. </p>
 
-<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00265">265</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00273">273</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
 
 </div>
 </div>
@@ -608,9 +611,9 @@ Public Member Functions</h2></td></tr>
 
 <p>Register namespace. The new namespace index will be returned. </p>
 
-<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00253">253</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00257">257</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="Server_8cpp_source.html#l00313">handle()</a>, and <a class="elRef" target="_blank" href="open62541/server_8h.html#abfe6669d1ebaa10ec43c43af817cdd14">UA_Server_addNamespace()</a>.</p>
+<p class="reference">References <a class="el" href="Server_8cpp_source.html#l00321">handle()</a>, and <a class="elRef" target="_blank" href="open62541/server_8h.html#abfe6669d1ebaa10ec43c43af817cdd14">UA_Server_addNamespace()</a>.</p>
 
 </div>
 </div>
@@ -629,9 +632,31 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Run server. This method will block until <a class="el" href="classopcua_1_1Server.html#a51f8bc0f79b2e5cea8fc094c58a76a9c" title="Stop server.">Server::stop</a> is called. </p>
+<p>Run the server's main loop. This method will block until <a class="el" href="classopcua_1_1Server.html#a51f8bc0f79b2e5cea8fc094c58a76a9c" title="Stop the server&#39;s main loop.">Server::stop</a> is called. </p>
 
-<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00257">257</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00265">265</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a74af3b7dbfa031a19230a45dcf3f3a31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74af3b7dbfa031a19230a45dcf3f3a31">&#9670;&nbsp;</a></span>runIterate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t opcua::Server::runIterate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Run single iteration of the server's main loop. </p>
+<dl class="section return"><dt>Returns</dt><dd>Maximum wait period until next <a class="el" href="classopcua_1_1Server.html#a74af3b7dbfa031a19230a45dcf3f3a31" title="Run single iteration of the server&#39;s main loop.">Server::runIterate</a> call (in ms) </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00261">261</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
 
 </div>
 </div>
@@ -653,7 +678,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Set application name, default: <code>open62541-based OPC UA Application</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00187">187</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00191">191</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
 
 <p class="reference">References <a class="elRef" target="_blank" href="open62541/structUA__ServerConfig.html#af85c94c5c5818ad60665ea74cef337e9">UA_ServerConfig::applicationDescription</a>, and <a class="elRef" target="_blank" href="open62541/structUA__ApplicationDescription.html#a3293da75ac498ae2ac9193a74d58a8a4">UA_ApplicationDescription::applicationName</a>.</p>
 
@@ -677,7 +702,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Set application URI, default: <code>urn:open62541.server.application</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00194">194</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00198">198</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="Helper_8cpp_source.html#l00009">opcua::detail::allocUaString()</a>, <a class="elRef" target="_blank" href="open62541/structUA__ServerConfig.html#af85c94c5c5818ad60665ea74cef337e9">UA_ServerConfig::applicationDescription</a>, and <a class="elRef" target="_blank" href="open62541/structUA__ApplicationDescription.html#a6dc1d2dac981f0e98ff710fa872af536">UA_ApplicationDescription::applicationUri</a>.</p>
 
@@ -701,7 +726,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Set custom hostname, default: system's host name. </p>
 
-<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00181">181</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00185">185</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="Helper_8cpp_source.html#l00009">opcua::detail::allocUaString()</a>, and <a class="elRef" target="_blank" href="open62541/structUA__ServerConfig.html#ae77bf1bfeadd923a474f4c5d1445c5a2">UA_ServerConfig::customHostname</a>.</p>
 
@@ -725,7 +750,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Set custom logging function. </p>
 
-<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00160">160</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00164">164</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
 
 </div>
 </div>
@@ -757,7 +782,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Set login credentials (username/password) and anonymous login. </p>
 
-<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00208">208</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00212">212</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
 
 <p class="reference">References <a class="elRef" target="_blank" href="open62541/structUA__ServerConfig.html#a4e05ef99a4839b8265ca72a68f845d1d">UA_ServerConfig::accessControl</a>, <a class="el" href="Helper_8cpp_source.html#l00009">opcua::detail::allocUaString()</a>, <a class="elRef" target="_blank" href="open62541/structUA__AccessControl.html#a150a90e41f509ef3f0c731f69a074c58">UA_AccessControl::clear</a>, <a class="elRef" target="_blank" href="open62541/structUA__String.html#a337ab69f4b7d9c5e6ab1f1cb18844d07">UA_String::data</a>, <a class="elRef" target="_blank" href="open62541/architecture__definitions_8h.html#aa0c1167bb311135eecf24a0e7c885b7f">endif</a>, <a class="elRef" target="_blank" href="open62541/structUA__SecurityPolicy.html#ae037899e9d19889a174bdda33e2e1572">UA_SecurityPolicy::policyUri</a>, <a class="elRef" target="_blank" href="open62541/structUA__ServerConfig.html#a2844855e4b6bb54599560095e8216be1">UA_ServerConfig::securityPolicies</a>, <a class="elRef" target="_blank" href="open62541/structUA__ServerConfig.html#a08d2e348ff6b4a43d5a0f252ccb8b4ea">UA_ServerConfig::securityPoliciesSize</a>, <a class="el" href="ErrorHandling_8h_source.html#l00046">opcua::detail::throwOnBadStatus()</a>, <a class="elRef" target="_blank" href="open62541/accesscontrol__default_8h.html#a23c7493b2c29d8e93de5d216377027bc">UA_AccessControl_default()</a>, and <a class="el" href="version_8h_source.html#l00005">UAPP_OPEN62541_VER_GE</a>.</p>
 
@@ -781,7 +806,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Set product URI, default: <code><a href="http://open62541.org">http://open62541.org</a></code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00201">201</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00205">205</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="Helper_8cpp_source.html#l00009">opcua::detail::allocUaString()</a>, <a class="elRef" target="_blank" href="open62541/structUA__ServerConfig.html#af85c94c5c5818ad60665ea74cef337e9">UA_ServerConfig::applicationDescription</a>, and <a class="elRef" target="_blank" href="open62541/structUA__ApplicationDescription.html#a03aae332aa9caab8a0f94c934e7cfe1d">UA_ApplicationDescription::productUri</a>.</p>
 
@@ -802,9 +827,9 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Stop server. </p>
+<p>Stop the server's main loop. </p>
 
-<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00261">261</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Server_8cpp_source.html#l00269">269</a> of file <a class="el" href="Server_8cpp_source.html">Server.cpp</a>.</p>
 
 </div>
 </div>
