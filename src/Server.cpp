@@ -4,6 +4,7 @@
 #include <cassert>
 #include <cstdarg>  // va_list, va_copy
 #include <cstdio>
+#include <mutex>
 #include <utility>  // move
 
 #include "open62541pp/ErrorHandling.h"
@@ -76,6 +77,7 @@ public:
             return;
         }
         runStartup();
+        std::lock_guard<std::mutex> lock(mutex_);
         while (running_) {
             // https://github.com/open62541/open62541/blob/master/examples/server_mainloop.c
             UA_Server_run_iterate(server_, true /* wait for messages in the networklayer */);
@@ -83,12 +85,11 @@ public:
     }
 
     void stop() {
-        if (!running_) {
-            return;
-        }
+        running_ = false;
+        // wait for run loop to complete
+        std::lock_guard<std::mutex> lock(mutex_);
         const auto status = UA_Server_run_shutdown(server_);
         detail::throwOnBadStatus(status);
-        running_ = false;
     }
 
     bool isRunning() const noexcept {
@@ -133,6 +134,7 @@ public:
 private:
     UA_Server* server_;
     std::atomic<bool> running_{false};
+    std::mutex mutex_;
     Logger logger_{nullptr};
 };
 
