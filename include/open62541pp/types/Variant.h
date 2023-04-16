@@ -24,6 +24,7 @@ class NodeId;
  */
 class Variant : public TypeWrapper<UA_Variant, UA_TYPES_VARIANT> {
 public:
+    // NOLINTNEXTLINE, false positive?
     using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
 
     /// Create Variant from scalar value (no copy if assignable without conversion)

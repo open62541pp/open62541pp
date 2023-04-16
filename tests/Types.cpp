@@ -384,6 +384,15 @@ TEST_CASE("Variant") {
 }
 
 TEST_CASE("DataValue") {
+    SECTION("Create from scalar") {
+        REQUIRE(DataValue::fromScalar(5).getValue().value().getScalar<int>() == 5);
+    }
+
+    SECTION("Create from aray") {
+        std::vector<int> vec{1, 2, 3};
+        REQUIRE(DataValue::fromArray(vec).getValue().value().getArrayCopy<int>() == vec);
+    }
+
     SECTION("Empty") {
         DataValue dv{};
         CHECK(dv.getValuePtr() == nullptr);
