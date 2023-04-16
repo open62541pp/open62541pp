@@ -37,8 +37,8 @@ public:
     Node(ServerOrClient connection, NodeId id, bool checkExists = true)
         : connection_(std::move(connection)),
           nodeId_(std::move(id)) {
-        if (checkExists && !services::checkNodeIdExists(connection_, nodeId_)) {
-            throw BadStatus(UA_STATUSCODE_BADNODEIDUNKNOWN);
+        if (checkExists) {
+            services::readNodeId(connection_, nodeId_);
         }
     }
 
@@ -121,6 +121,11 @@ public:
     /// @copydoc services::addReference
     void addReference(const NodeId& targetId, ReferenceType referenceType, bool forward = true) {
         services::addReference(connection_, nodeId_, targetId, referenceType, forward);
+    }
+
+    /// @copydoc services::addModellingRule
+    void addModellingRule(ModellingRule rule) {
+        services::addModellingRule(connection_, nodeId_, rule);
     }
 
     /// @copydoc services::deleteNode
@@ -243,11 +248,6 @@ public:
     /// @copydoc services::writeAccessLevel
     void writeAccessLevel(uint8_t mask) {
         services::writeAccessLevel(connection_, nodeId_, mask);
-    }
-
-    /// @copydoc services::writeModellingRule
-    void writeModellingRule(ModellingRule rule) {
-        services::writeModellingRule(connection_, nodeId_, rule);
     }
 
     /// @copydoc services::writeDataValue

@@ -5,8 +5,6 @@
 #include "open62541pp/Server.h"
 #include "open62541pp/services/services.h"
 
-#include "version.h"
-
 using namespace opcua;
 
 TEST_CASE("NodeManagement") {
@@ -54,11 +52,6 @@ TEST_CASE("NodeManagement") {
 TEST_CASE("Attribute") {
     Server server;
     const NodeId objectsId{0, UA_NS0ID_OBJECTSFOLDER};
-
-    SECTION("Check if node id exists") {
-        CHECK(services::checkNodeIdExists(server, {0, UA_NS0ID_OBJECTSFOLDER}));
-        CHECK_FALSE(services::checkNodeIdExists(server, {0, "Invalid"}));
-    }
 
     SECTION("Read/write node attributes") {
         const NodeId id{1, "testAttributes"};
@@ -159,7 +152,6 @@ TEST_CASE("Attribute") {
         CHECK(variantRead.getScalar<double>() == 11.11);
     }
 
-#if UAPP_OPEN62541_VER_GE(1, 1)
     SECTION("Read/write data value") {
         const NodeId id{1, "testDataValue"};
         services::addVariable(server, objectsId, id, "testDataValue");
@@ -183,7 +175,6 @@ TEST_CASE("Attribute") {
         CHECK(valueRead->sourceTimestamp == valueWrite->sourceTimestamp);
         CHECK(valueRead->sourcePicoseconds == valueWrite->sourcePicoseconds);
     }
-#endif
 }
 
 TEST_CASE("Browse") {

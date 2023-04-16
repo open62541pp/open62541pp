@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Static methods `DataValue::fromScalar` and `DataValue::fromArray`
 - `Server::getNamespaceArray` method
 - `Server::runIterate` method, e.g. to run server in existing event loop
+- Generic `services::readAttribute` and `services::writeAttribute` functions
 
 ### Changed
 
