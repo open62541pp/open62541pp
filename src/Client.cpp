@@ -5,9 +5,6 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Node.h"
 #include "open62541pp/TypeConverter.h"
-#include "open62541pp/types/Builtin.h"
-#include "open62541pp/types/Composed.h"
-#include "open62541pp/types/NodeId.h"
 
 #include "open62541_impl.h"
 
@@ -79,6 +76,22 @@ std::vector<EndpointDescription> Client::getEndpoints(std::string_view serverUrl
     UA_Array_delete(array, arraySize, &UA_TYPES[UA_TYPES_ENDPOINTDESCRIPTION]);
     detail::throwOnBadStatus(status);
     return result;
+}
+
+void Client::connect(std::string_view endpointUrl) {
+    const auto status = UA_Client_connect(handle(), std::string(endpointUrl).c_str());
+    detail::throwOnBadStatus(status);
+}
+
+void Client::connect(std::string_view endpointUrl, const Login& login) {
+    const auto status = UA_Client_connectUsername(
+        handle(), std::string(endpointUrl).c_str(), login.username.c_str(), login.password.c_str()
+    );
+    detail::throwOnBadStatus(status);
+}
+
+void Client::disconnect() noexcept {
+    UA_Client_disconnect(handle());
 }
 
 Node<Client> Client::getNode(const NodeId& id) {

@@ -5,6 +5,9 @@
 #include <vector>
 
 #include "open62541pp/Auth.h"
+#include "open62541pp/types/Builtin.h"
+#include "open62541pp/types/Composed.h"
+#include "open62541pp/types/NodeId.h"
 
 // forward declaration open62541
 struct UA_Client;
@@ -12,18 +15,14 @@ struct UA_Client;
 namespace opcua {
 
 // forward declaration
-class NodeId;
-class ApplicationDescription;
-class EndpointDescription;
-
 template <typename ServerOrClient>
 class Node;
 
 /**
  * High-level client class.
  *
- * Exposes the most common functionality. Use the handle() and getConfig() method to get access
- * to the underlying UA_Client and UA_ClientConfig instances and use the full power of open6254.
+ * Exposes the most common functionality. Use the handle() method to get access the underlying
+ * UA_Client instance and use the full power of open6254.
  */
 class Client {
 public:
@@ -34,13 +33,15 @@ public:
 
     /**
      * Gets a list of all registered servers at the given server.
+     * @note Client must be disconnected.
      * @param serverUrl url to connect (for example `opc.tcp://localhost:4840`)
      */
     std::vector<ApplicationDescription> findServers(std::string_view serverUrl);
 
     /**
      * Gets a list of endpoints of a server.
-     * @param serverUrl url to connect (for example `opc.tcp://localhost:4840`)
+     * @note Client must be disconnected.
+     * @param serverUrl to connect (for example `opc.tcp://localhost:4840`)
      */
     std::vector<EndpointDescription> getEndpoints(std::string_view serverUrl);
 
@@ -56,6 +57,12 @@ public:
      * @param login credentials with username and password
      */
     void connect(std::string_view endpointUrl, const Login& login);
+
+    /**
+     * Disconnect and close a connection to the server.
+     * Disconnection is always performed async (without blocking).
+     */
+    void disconnect() noexcept;
 
     Node<Client> getNode(const NodeId& id);
     Node<Client> getRootNode();
