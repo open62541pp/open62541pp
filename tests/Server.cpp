@@ -30,17 +30,32 @@ TEST_CASE("Server") {
 
     Server server;
 
-    SECTION("Start / stop server") {
+    SECTION("Run/stop") {
         REQUIRE_FALSE(server.isRunning());
 
         auto t = std::thread([&] { server.run(); });
-
         std::this_thread::sleep_for(100ms);  // wait for thread to execute run method
 
         REQUIRE(server.isRunning());
-        REQUIRE_NOTHROW(server.stop());
 
+        server.stop();
         t.join();  // wait until stopped
+
+        REQUIRE_FALSE(server.isRunning());
+    }
+
+    SECTION("Run iterate") {
+        REQUIRE_FALSE(server.isRunning());
+
+        for (size_t i = 0; i < 10; ++i) {
+            const auto waitInterval = server.runIterate();
+            CHECK(waitInterval > 0);
+            CHECK(waitInterval <= 50);
+            CHECK(server.isRunning());
+        }
+
+        server.stop();
+        REQUIRE_FALSE(server.isRunning());
     }
 
     SECTION("Set hostname / application name / uris") {

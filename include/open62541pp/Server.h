@@ -53,11 +53,14 @@ public:
     /// Register namespace. The new namespace index will be returned.
     [[nodiscard]] uint16_t registerNamespace(std::string_view uri);
 
-    /// Run server. This method will block until Server::stop is called.
+    /// Run single iteration of the server's main loop.
+    /// @returns Maximum wait period until next Server::runIterate call (in ms)
+    uint16_t runIterate();
+    /// Run the server's main loop. This method will block until Server::stop is called.
     void run();
-    /// Stop server.
+    /// Stop the server's main loop.
     void stop();
-    /// Check if server is running.
+    /// Check if the server is running.
     bool isRunning() const noexcept;
 
     Node<Server> getNode(const NodeId& id);
