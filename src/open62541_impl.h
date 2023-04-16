@@ -13,6 +13,7 @@
 // common
 #include <open62541/config.h>
 #include <open62541/plugin/accesscontrol_default.h>
+#include <open62541/plugin/log.h>
 #include <open62541/types_generated_handling.h>
 
 // client

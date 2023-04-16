@@ -1,22 +1,35 @@
 #include "open62541pp/Client.h"
 
 #include <string>
+#include <utility>  // move
 
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Node.h"
 #include "open62541pp/TypeConverter.h"
 
+#include "CustomLogger.h"
 #include "open62541_impl.h"
 #include "version.h"
 
 namespace opcua {
+
+/* ------------------------------------------- Helper ------------------------------------------- */
+
+inline static UA_ClientConfig* getConfig(UA_Client* client) noexcept {
+    return UA_Client_getConfig(client);
+}
+
+inline static UA_ClientConfig* getConfig(Client* client) noexcept {
+    return UA_Client_getConfig(client->handle());
+}
 
 /* ----------------------------------------- Connection ----------------------------------------- */
 
 class Client::Connection {
 public:
     Connection()
-        : client_(UA_Client_new()) {}
+        : client_(UA_Client_new()),
+          logger_(getConfig(client_)->logger) {}
 
     ~Connection() {
         UA_Client_disconnect(client_);
@@ -29,20 +42,29 @@ public:
     Connection& operator=(const Connection&) = delete;
     Connection& operator=(Connection&&) noexcept = delete;
 
+    void setLogger(Logger logger) {
+        logger_.setLogger(std::move(logger));
+    }
+
     UA_Client* handle() noexcept {
         return client_;
     }
 
 private:
     UA_Client* client_;
+    CustomLogger logger_;
 };
 
 /* ------------------------------------------- Client ------------------------------------------- */
 
 Client::Client()
     : connection_(std::make_shared<Connection>()) {
-    const auto status = UA_ClientConfig_setDefault(UA_Client_getConfig(handle()));
+    const auto status = UA_ClientConfig_setDefault(getConfig(this));
     detail::throwOnBadStatus(status);
+}
+
+void Client::setLogger(Logger logger) {
+    connection_->setLogger(std::move(logger));
 }
 
 std::vector<ApplicationDescription> Client::findServers(std::string_view serverUrl) {

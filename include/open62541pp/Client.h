@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "open62541pp/Auth.h"
+#include "open62541pp/Logger.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/NodeId.h"
@@ -26,10 +27,11 @@ class Node;
  */
 class Client {
 public:
-    /**
-     * Create client with default configuration.
-     */
+    /// Create client with default configuration.
     Client();
+
+    /// Set custom logging function.
+    void setLogger(Logger logger);
 
     /**
      * Gets a list of all registered servers at the given server.
@@ -58,10 +60,7 @@ public:
      */
     void connect(std::string_view endpointUrl, const Login& login);
 
-    /**
-     * Disconnect and close a connection to the server.
-     * Disconnection is always performed async (without blocking).
-     */
+    /// Disconnect and close a connection to the server (async, without blocking).
     void disconnect() noexcept;
 
     Node<Client> getNode(const NodeId& id);

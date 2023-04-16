@@ -98,6 +98,7 @@ endif()
 add_library(
     open62541pp
     src/Client.cpp
+    src/CustomLogger.cpp
     src/Helper.cpp
     src/Server.cpp
     src/services/Attribute.cpp
