@@ -103,6 +103,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga38adf1c443c744b69caa043a41461abe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__NodeManagement.html#ga38adf1c443c744b69caa043a41461abe">opcua::services::addReference</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;sourceId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;targetId, <a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463b">ReferenceType</a> referenceType, bool forward=true)</td></tr>
 <tr class="memdesc:ga38adf1c443c744b69caa043a41461abe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add reference to node.  <a href="group__NodeManagement.html#ga38adf1c443c744b69caa043a41461abe">More...</a><br /></td></tr>
 <tr class="separator:ga38adf1c443c744b69caa043a41461abe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac605cab16b579893dafd661f66e08acc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__NodeManagement.html#gac605cab16b579893dafd661f66e08acc">opcua::services::addModellingRule</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="namespaceopcua.html#ad32e0c353b427fd8b7788a85a78335aa">ModellingRule</a> rule)</td></tr>
+<tr class="memdesc:gac605cab16b579893dafd661f66e08acc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add modelling rule.  <a href="group__NodeManagement.html#gac605cab16b579893dafd661f66e08acc">More...</a><br /></td></tr>
+<tr class="separator:gac605cab16b579893dafd661f66e08acc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga08b77894d5e17d2df69afa16c344ff76"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__NodeManagement.html#ga08b77894d5e17d2df69afa16c344ff76">opcua::services::deleteNode</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, bool deleteReferences=true)</td></tr>
 <tr class="memdesc:ga08b77894d5e17d2df69afa16c344ff76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete node.  <a href="group__NodeManagement.html#ga08b77894d5e17d2df69afa16c344ff76">More...</a><br /></td></tr>
 <tr class="separator:ga08b77894d5e17d2df69afa16c344ff76"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,6 +178,54 @@ Functions</h2></td></tr>
 <p class="reference">References <a class="el" href="NodeManagement_8cpp_source.html#l00011">opcua::services::addObject()</a>, and <a class="elRef" target="_blank" href="open62541/nodeids_8h.html#a5760f5c4f92932ad4a65937159b76542">UA_NS0ID_FOLDERTYPE</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00061">opcua::Node&lt; ServerOrClient &gt;::addFolder()</a>.</p>
+
+</div>
+</div>
+<a id="gac605cab16b579893dafd661f66e08acc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac605cab16b579893dafd661f66e08acc">&#9670;&nbsp;</a></span>addModellingRule()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::services::addModellingRule </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Server.html">Server</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#ad32e0c353b427fd8b7788a85a78335aa">ModellingRule</a>&#160;</td>
+          <td class="paramname"><em>rule</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add modelling rule. </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html" title="Exception for bad status codes from open62541 UA_STATUSCODE_*.">BadStatus</a></td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="NodeManagement_8cpp_source.html#l00114">114</a> of file <a class="el" href="NodeManagement_8cpp_source.html">NodeManagement.cpp</a>.</p>
+
+<p class="reference">References <a class="el" href="NodeManagement_8cpp_source.html#l00097">opcua::services::addReference()</a>, and <a class="el" href="namespaceopcua.html#a807c61ccff66808c3559158c33d5463ba6af8b39ae758e192e6d87241277db2e3">opcua::HasModellingRule</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00127">opcua::Node&lt; ServerOrClient &gt;::addModellingRule()</a>.</p>
 
 </div>
 </div>
@@ -422,7 +473,7 @@ Functions</h2></td></tr>
 
 <p class="reference">References <a class="el" href="Helper_8h_source.html#l00040">opcua::detail::getUaNodeId()</a>, <a class="el" href="Server_8cpp_source.html#l00323">opcua::Server::handle()</a>, <a class="el" href="ErrorHandling_8h_source.html#l00046">opcua::detail::throwOnBadStatus()</a>, and <a class="elRef" target="_blank" href="open62541/server_8h.html#ae3c683ec47055308bf805f4e6504cb16">UA_Server_addReference()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00122">opcua::Node&lt; ServerOrClient &gt;::addReference()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="NodeManagement_8cpp_source.html#l00114">opcua::services::addModellingRule()</a>, and <a class="el" href="Node_8h_source.html#l00122">opcua::Node&lt; ServerOrClient &gt;::addReference()</a>.</p>
 
 </div>
 </div>
@@ -596,11 +647,11 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="NodeManagement_8cpp_source.html#l00114">114</a> of file <a class="el" href="NodeManagement_8cpp_source.html">NodeManagement.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="NodeManagement_8cpp_source.html#l00124">124</a> of file <a class="el" href="NodeManagement_8cpp_source.html">NodeManagement.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="Server_8cpp_source.html#l00323">opcua::Server::handle()</a>, <a class="el" href="ErrorHandling_8h_source.html#l00046">opcua::detail::throwOnBadStatus()</a>, and <a class="elRef" target="_blank" href="open62541/server_8h.html#a2f52737db0f19ad3c90b1da571e794c6">UA_Server_deleteNode()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00127">opcua::Node&lt; ServerOrClient &gt;::deleteNode()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00132">opcua::Node&lt; ServerOrClient &gt;::deleteNode()</a>.</p>
 
 </div>
 </div>

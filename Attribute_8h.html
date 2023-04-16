@@ -79,6 +79,7 @@ $(function() {
 <code>#include &lt;string_view&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 <code>#include &quot;<a class="el" href="Common_8h_source.html">open62541pp/Common.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Helper_8h_source.html">open62541pp/Helper.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Builtin_8h_source.html">open62541pp/types/Builtin.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="DataValue_8h_source.html">open62541pp/types/DataValue.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="NodeId_8h_source.html">open62541pp/types/NodeId.h</a>&quot;</code><br />
@@ -86,7 +87,7 @@ $(function() {
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Attribute.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="Attribute_8h__incl.svg" width="2214" height="739"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="Attribute_8h__incl.svg" width="2263" height="739"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -107,9 +108,15 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga06750371571fc2488ebec0b0995d2448"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Attribute.html#ga06750371571fc2488ebec0b0995d2448">opcua::services::checkNodeIdExists</a> (Server &amp;server, const NodeId &amp;id)</td></tr>
-<tr class="memdesc:ga06750371571fc2488ebec0b0995d2448"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if node id exists.  <a href="group__Attribute.html#ga06750371571fc2488ebec0b0995d2448">More...</a><br /></td></tr>
-<tr class="separator:ga06750371571fc2488ebec0b0995d2448"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2b3eca6d3aebb3a26f71371583dbe8c5"><td class="memItemLeft" align="right" valign="top">DataValue&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Attribute.html#ga2b3eca6d3aebb3a26f71371583dbe8c5">opcua::services::readAttribute</a> (Server &amp;server, const NodeId &amp;id, <a class="elRef" target="_blank" href="open62541/common_8h.html#a4dc96c31672814d54f24409617bdbbe2">UA_AttributeId</a> attributeId, <a class="elRef" target="_blank" href="open62541/types__generated_8h.html#ab298c4ff5eb700437114d0dc2db97ead">UA_TimestampsToReturn</a> timestamps=<a class="elRef" target="_blank" href="open62541/types__generated_8h.html#ab298c4ff5eb700437114d0dc2db97eadaa3e0c1e560bb4de5933dd347f2609cda">UA_TIMESTAMPSTORETURN_NEITHER</a>)</td></tr>
+<tr class="memdesc:ga2b3eca6d3aebb3a26f71371583dbe8c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic server function to read node attributes.  <a href="group__Attribute.html#ga2b3eca6d3aebb3a26f71371583dbe8c5">More...</a><br /></td></tr>
+<tr class="separator:ga2b3eca6d3aebb3a26f71371583dbe8c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf6339a0016eed2824c09e76a3f59368b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Attribute.html#gaf6339a0016eed2824c09e76a3f59368b">opcua::services::writeAttribute</a> (Server &amp;server, const NodeId &amp;id, <a class="elRef" target="_blank" href="open62541/common_8h.html#a4dc96c31672814d54f24409617bdbbe2">UA_AttributeId</a> attributeId, const DataValue &amp;value)</td></tr>
+<tr class="memdesc:gaf6339a0016eed2824c09e76a3f59368b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic server function to write node attributes.  <a href="group__Attribute.html#gaf6339a0016eed2824c09e76a3f59368b">More...</a><br /></td></tr>
+<tr class="separator:gaf6339a0016eed2824c09e76a3f59368b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0cbf116d828be0550a5d0033c90f6de1"><td class="memItemLeft" align="right" valign="top">NodeId&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Attribute.html#ga0cbf116d828be0550a5d0033c90f6de1">opcua::services::readNodeId</a> (Server &amp;server, const NodeId &amp;id)</td></tr>
+<tr class="memdesc:ga0cbf116d828be0550a5d0033c90f6de1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read node id.  <a href="group__Attribute.html#ga0cbf116d828be0550a5d0033c90f6de1">More...</a><br /></td></tr>
+<tr class="separator:ga0cbf116d828be0550a5d0033c90f6de1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaa509eb67d812a2fa86a81edafc942995"><td class="memItemLeft" align="right" valign="top">NodeClass&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Attribute.html#gaa509eb67d812a2fa86a81edafc942995">opcua::services::readNodeClass</a> (Server &amp;server, const NodeId &amp;id)</td></tr>
 <tr class="memdesc:gaa509eb67d812a2fa86a81edafc942995"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read node class.  <a href="group__Attribute.html#gaa509eb67d812a2fa86a81edafc942995">More...</a><br /></td></tr>
 <tr class="separator:gaa509eb67d812a2fa86a81edafc942995"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -131,9 +138,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga0fcf598f46a9c563de4196a11966973e"><td class="memItemLeft" align="right" valign="top">ValueRank&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Attribute.html#ga0fcf598f46a9c563de4196a11966973e">opcua::services::readValueRank</a> (Server &amp;server, const NodeId &amp;id)</td></tr>
 <tr class="memdesc:ga0fcf598f46a9c563de4196a11966973e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read value rank of variable (type) node.  <a href="group__Attribute.html#ga0fcf598f46a9c563de4196a11966973e">More...</a><br /></td></tr>
 <tr class="separator:ga0fcf598f46a9c563de4196a11966973e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac5ca589d72e70185dfe429a1b853e6f4"><td class="memItemLeft" align="right" valign="top">std::vector&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Attribute.html#gac5ca589d72e70185dfe429a1b853e6f4">opcua::services::readArrayDimensions</a> (Server &amp;server, const NodeId &amp;id)</td></tr>
-<tr class="memdesc:gac5ca589d72e70185dfe429a1b853e6f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read array dimensions of variable (type) node.  <a href="group__Attribute.html#gac5ca589d72e70185dfe429a1b853e6f4">More...</a><br /></td></tr>
-<tr class="separator:gac5ca589d72e70185dfe429a1b853e6f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0258c52a5dc6b8c46f03d686bbc90284"><td class="memItemLeft" align="right" valign="top">std::vector&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Attribute.html#ga0258c52a5dc6b8c46f03d686bbc90284">opcua::services::readArrayDimensions</a> (Server &amp;server, const NodeId &amp;id)</td></tr>
+<tr class="memdesc:ga0258c52a5dc6b8c46f03d686bbc90284"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read array dimensions of variable (type) node.  <a href="group__Attribute.html#ga0258c52a5dc6b8c46f03d686bbc90284">More...</a><br /></td></tr>
+<tr class="separator:ga0258c52a5dc6b8c46f03d686bbc90284"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad53ea47a352af16a7522f009c8dd0bbd"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Attribute.html#gad53ea47a352af16a7522f009c8dd0bbd">opcua::services::readAccessLevel</a> (Server &amp;server, const NodeId &amp;id)</td></tr>
 <tr class="memdesc:gad53ea47a352af16a7522f009c8dd0bbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read access level mask of variable node, for example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a40ea076d6ef4c0aaccdc0d14fb2573c4">UA_ACCESSLEVELMASK_READ</a></code>.  <a href="group__Attribute.html#gad53ea47a352af16a7522f009c8dd0bbd">More...</a><br /></td></tr>
 <tr class="separator:gad53ea47a352af16a7522f009c8dd0bbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -167,9 +174,6 @@ Functions</h2></td></tr>
 <tr class="memitem:gacb491de2ea35bebac37d44c2f74e9fc2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Attribute.html#gacb491de2ea35bebac37d44c2f74e9fc2">opcua::services::writeAccessLevel</a> (Server &amp;server, const NodeId &amp;id, uint8_t mask)</td></tr>
 <tr class="memdesc:gacb491de2ea35bebac37d44c2f74e9fc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write access level mask of variable node, for example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a40ea076d6ef4c0aaccdc0d14fb2573c4">UA_ACCESSLEVELMASK_READ</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a92380e13ac90946ba3d5a7e975dfc5d3">UA_ACCESSLEVELMASK_WRITE</a></code>.  <a href="group__Attribute.html#gacb491de2ea35bebac37d44c2f74e9fc2">More...</a><br /></td></tr>
 <tr class="separator:gacb491de2ea35bebac37d44c2f74e9fc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0c4815595b011f139e68d5c6c90103cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Attribute.html#ga0c4815595b011f139e68d5c6c90103cd">opcua::services::writeModellingRule</a> (Server &amp;server, const NodeId &amp;id, ModellingRule rule)</td></tr>
-<tr class="memdesc:ga0c4815595b011f139e68d5c6c90103cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write modelling rule.  <a href="group__Attribute.html#ga0c4815595b011f139e68d5c6c90103cd">More...</a><br /></td></tr>
-<tr class="separator:ga0c4815595b011f139e68d5c6c90103cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga61fb7892cc99910e12ffc49f20fe9754"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Attribute.html#ga61fb7892cc99910e12ffc49f20fe9754">opcua::services::writeDataValue</a> (Server &amp;server, const NodeId &amp;id, const DataValue &amp;value)</td></tr>
 <tr class="memdesc:ga61fb7892cc99910e12ffc49f20fe9754"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write <a class="el" href="classopcua_1_1DataValue.html" title="UA_DataValue wrapper class.">DataValue</a> to variable node.  <a href="group__Attribute.html#ga61fb7892cc99910e12ffc49f20fe9754">More...</a><br /></td></tr>
 <tr class="separator:ga61fb7892cc99910e12ffc49f20fe9754"><td class="memSeparator" colspan="2">&#160;</td></tr>
