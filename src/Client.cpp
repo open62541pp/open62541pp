@@ -7,6 +7,7 @@
 #include "open62541pp/TypeConverter.h"
 
 #include "open62541_impl.h"
+#include "version.h"
 
 namespace opcua {
 
@@ -84,7 +85,12 @@ void Client::connect(std::string_view endpointUrl) {
 }
 
 void Client::connect(std::string_view endpointUrl, const Login& login) {
-    const auto status = UA_Client_connectUsername(
+#if UAPP_OPEN62541_VER_LE(1, 0)
+    const auto func = UA_Client_connect_username;
+#else
+    const auto func = UA_Client_connectUsername;
+#endif
+    const auto status = func(
         handle(), std::string(endpointUrl).c_str(), login.username.c_str(), login.password.c_str()
     );
     detail::throwOnBadStatus(status);
