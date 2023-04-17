@@ -50,7 +50,7 @@ public:
     }
 
     /// Constructor with native object (move rvalue).
-    constexpr explicit TypeWrapper(T&& data) noexcept
+    constexpr TypeWrapper(T&& data) noexcept  // NOLINT, implicit wanted
         : data_(data) {}
 
     ~TypeWrapper() {  // NOLINT

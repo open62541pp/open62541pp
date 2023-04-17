@@ -21,7 +21,12 @@ TEST_CASE("TypeWrapper") {
     SECTION("Constructor with native type") {
         UA_Boolean value{true};
         TypeWrapper<UA_Boolean, UA_TYPES_BOOLEAN> wrapper(value);
-        REQUIRE(*wrapper.handle() == value);
+        REQUIRE(*wrapper.handle() == true);
+    }
+
+    SECTION("Constructor with native type (implicit)") {
+        TypeWrapper<UA_Int32, UA_TYPES_INT32> wrapper = UA_Int32{123};
+        REQUIRE(*wrapper.handle() == 123);
     }
 
     SECTION("Constructor with wrapper type") {
