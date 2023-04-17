@@ -164,24 +164,24 @@ public:
         return services::readWriteMask(connection_, nodeId_);
     }
 
-    /// @copydoc services::readDataType
-    NodeId readDataType() {
-        return services::readDataType(connection_, nodeId_);
+    /// @copydoc services::readUserWriteMask
+    uint32_t readUserWriteMask() {
+        return services::readUserWriteMask(connection_, nodeId_);
     }
 
-    /// @copydoc services::readValueRank
-    ValueRank readValueRank() {
-        return services::readValueRank(connection_, nodeId_);
+    /// @copydoc services::readIsAbstract
+    bool readIsAbstract() {
+        return services::readIsAbstract(connection_, nodeId_);
     }
 
-    /// @copydoc services::readArrayDimensions
-    std::vector<uint32_t> readArrayDimensions() {
-        return services::readArrayDimensions(connection_, nodeId_);
+    /// @copydoc services::readSymmetric
+    bool readSymmetric() {
+        return services::readSymmetric(connection_, nodeId_);
     }
 
-    /// @copydoc services::readAccessLevel
-    uint8_t readAccessLevel() {
-        return services::readAccessLevel(connection_, nodeId_);
+    /// @copydoc services::readInverseName
+    LocalizedText readInverseName() {
+        return services::readInverseName(connection_, nodeId_);
     }
 
     /// @copydoc services::readDataValue
@@ -210,14 +210,44 @@ public:
         return variant.getArrayCopy<T>();
     }
 
+    /// @copydoc services::readDataType
+    NodeId readDataType() {
+        return services::readDataType(connection_, nodeId_);
+    }
+
+    /// @copydoc services::readValueRank
+    ValueRank readValueRank() {
+        return services::readValueRank(connection_, nodeId_);
+    }
+
+    /// @copydoc services::readArrayDimensions
+    std::vector<uint32_t> readArrayDimensions() {
+        return services::readArrayDimensions(connection_, nodeId_);
+    }
+
+    /// @copydoc services::readAccessLevel
+    uint8_t readAccessLevel() {
+        return services::readAccessLevel(connection_, nodeId_);
+    }
+
+    /// @copydoc services::readUserAccessLevel
+    uint8_t readUserAccessLevel() {
+        return services::readUserAccessLevel(connection_, nodeId_);
+    }
+
+    /// @copydoc services::readMinimumSamplingInterval
+    double readMinimumSamplingInterval() {
+        return services::readMinimumSamplingInterval(connection_, nodeId_);
+    }
+
     /// @copydoc services::writeDisplayName
     void writeDisplayName(const LocalizedText& name) {
         services::writeDisplayName(connection_, nodeId_, name);
     }
 
     /// @copydoc services::writeDescription
-    void writeDescription(const LocalizedText& name) {
-        services::writeDescription(connection_, nodeId_, name);
+    void writeDescription(const LocalizedText& desc) {
+        services::writeDescription(connection_, nodeId_, desc);
     }
 
     /// @copydoc services::writeWriteMask
@@ -225,29 +255,24 @@ public:
         services::writeWriteMask(connection_, nodeId_, mask);
     }
 
-    /// @copydoc services::writeDataType(T&, const NodeId&, Type)
-    void writeDataType(Type type) {
-        services::writeDataType(connection_, nodeId_, type);
+    /// @copydoc services::writeWriteMask
+    void writeUserWriteMask(uint32_t mask) {
+        services::writeUserWriteMask(connection_, nodeId_, mask);
     }
 
-    /// @copydoc services::writeDataType(T&, const NodeId&, const NodeId&)
-    void writeDataType(const NodeId& typeId) {
-        services::writeDataType(connection_, nodeId_, typeId);
+    /// @copydoc services::writeIsAbstract
+    void writeIsAbstract(bool isAbstract) {
+        services::writeIsAbstract(connection_, nodeId_, isAbstract);
     }
 
-    /// @copydoc services::writeValueRank
-    void writeValueRank(ValueRank valueRank) {
-        services::writeValueRank(connection_, nodeId_, valueRank);
+    /// @copydoc services::writeSymmetric
+    void writeSymmetric(bool symmetric) {
+        services::writeSymmetric(connection_, nodeId_, symmetric);
     }
 
-    /// @copydoc services::writeArrayDimensions
-    void writeArrayDimensions(const std::vector<uint32_t>& dimensions) {
-        services::writeArrayDimensions(connection_, nodeId_, dimensions);
-    }
-
-    /// @copydoc services::writeAccessLevel
-    void writeAccessLevel(uint8_t mask) {
-        services::writeAccessLevel(connection_, nodeId_, mask);
+    /// @copydoc services::writeInverseName
+    void writeInverseName(const LocalizedText& name) {
+        services::writeInverseName(connection_, nodeId_, name);
     }
 
     /// @copydoc services::writeDataValue
@@ -287,6 +312,41 @@ public:
     void writeArray(InputIt first, InputIt last) {
         const auto variant = Variant::fromArray<InputIt, type>(first, last);
         writeValue(variant);
+    }
+
+    /// @copydoc services::writeDataType(T&, const NodeId&, Type)
+    void writeDataType(Type type) {
+        services::writeDataType(connection_, nodeId_, type);
+    }
+
+    /// @copydoc services::writeDataType(T&, const NodeId&, const NodeId&)
+    void writeDataType(const NodeId& typeId) {
+        services::writeDataType(connection_, nodeId_, typeId);
+    }
+
+    /// @copydoc services::writeValueRank
+    void writeValueRank(ValueRank valueRank) {
+        services::writeValueRank(connection_, nodeId_, valueRank);
+    }
+
+    /// @copydoc services::writeArrayDimensions
+    void writeArrayDimensions(const std::vector<uint32_t>& dimensions) {
+        services::writeArrayDimensions(connection_, nodeId_, dimensions);
+    }
+
+    /// @copydoc services::writeAccessLevel
+    void writeAccessLevel(uint8_t mask) {
+        services::writeAccessLevel(connection_, nodeId_, mask);
+    }
+
+    /// @copydoc services::writeUserAccessLevel
+    void writeUserAccessLevel(uint8_t mask) {
+        services::writeUserAccessLevel(connection_, nodeId_, mask);
+    }
+
+    /// @copydoc services::writeMinimumSamplingInterval
+    void writeMinimumSamplingInterval(double milliseconds) {
+        services::writeMinimumSamplingInterval(connection_, nodeId_, milliseconds);
     }
 
 private:

@@ -20,7 +20,7 @@ namespace opcua::services {
  */
 
 /**
- * Add child object to node.
+ * Add child object.
  * @exception BadStatus
  * @ingroup NodeManagement
  */
@@ -35,7 +35,7 @@ void addObject(
 );
 
 /**
- * Add child folder to node.
+ * Add child folder.
  * @exception BadStatus
  * @ingroup NodeManagement
  */
@@ -51,7 +51,7 @@ inline void addFolder(
 }
 
 /**
- * Add child variable to node.
+ * Add child variable.
  * @exception BadStatus
  * @ingroup NodeManagement
  */
@@ -66,7 +66,7 @@ void addVariable(
 );
 
 /**
- * Add child property to node.
+ * Add child property.
  * @exception BadStatus
  * @ingroup NodeManagement
  */
@@ -85,7 +85,7 @@ inline void addProperty(
 }
 
 /**
- * Add child object type to node.
+ * Add child object type.
  * @exception BadStatus
  * @ingroup NodeManagement
  */
@@ -99,7 +99,7 @@ void addObjectType(
 );
 
 /**
- * Add child variable type to node.
+ * Add child variable type.
  * @exception BadStatus
  * @ingroup NodeManagement
  */
@@ -114,7 +114,7 @@ void addVariableType(
 );
 
 /**
- * Add reference to node.
+ * Add reference.
  * @exception BadStatus
  * @ingroup NodeManagement
  */

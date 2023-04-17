@@ -119,16 +119,22 @@ TEST_CASE("Attribute (server)") {
         services::addVariable(server, objectsId, id, "testAttributes");
 
         // read default attributes
+        REQUIRE(services::readNodeId(server, id) == id);
         REQUIRE(services::readNodeClass(server, id) == NodeClass::Variable);
         REQUIRE(services::readBrowseName(server, id) == "testAttributes");
         // REQUIRE(services::readDisplayName(server, id) == LocalizedText("", "testAttributes"));
         REQUIRE(services::readDescription(server, id).getText().empty());
         REQUIRE(services::readDescription(server, id).getLocale().empty());
         REQUIRE(services::readWriteMask(server, id) == 0);
+        const uint32_t adminUserWriteMask = ~0;  // all bits set
+        REQUIRE(services::readUserWriteMask(server, id) == adminUserWriteMask);
         REQUIRE(services::readDataType(server, id) == NodeId(0, UA_NS0ID_BASEDATATYPE));
         REQUIRE(services::readValueRank(server, id) == ValueRank::Any);
         REQUIRE(services::readArrayDimensions(server, id).empty());
         REQUIRE(services::readAccessLevel(server, id) == UA_ACCESSLEVELMASK_READ);
+        const uint8_t adminUserAccessLevel = ~0;  // all bits set
+        REQUIRE(services::readUserAccessLevel(server, id) == adminUserAccessLevel);
+        REQUIRE(services::readMinimumSamplingInterval(server, id) == 0.0);
 
         // write new attributes
         REQUIRE_NOTHROW(services::writeDisplayName(server, id, {"en-US", "newDisplayName"}));
@@ -137,9 +143,9 @@ TEST_CASE("Attribute (server)") {
         REQUIRE_NOTHROW(services::writeDataType(server, id, NodeId{0, 2}));
         REQUIRE_NOTHROW(services::writeValueRank(server, id, ValueRank::TwoDimensions));
         REQUIRE_NOTHROW(services::writeArrayDimensions(server, id, {3, 2}));
-        REQUIRE_NOTHROW(services::writeAccessLevel(
-            server, id, UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE
-        ));
+        const uint8_t newAccessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
+        REQUIRE_NOTHROW(services::writeAccessLevel(server, id, newAccessLevel));
+        REQUIRE_NOTHROW(services::writeMinimumSamplingInterval(server, id, 10.0));
 
         // read new attributes
         REQUIRE(services::readDisplayName(server, id) == LocalizedText("en-US", "newDisplayName"));
@@ -150,10 +156,27 @@ TEST_CASE("Attribute (server)") {
         REQUIRE(services::readArrayDimensions(server, id).size() == 2);
         REQUIRE(services::readArrayDimensions(server, id).at(0) == 3);
         REQUIRE(services::readArrayDimensions(server, id).at(1) == 2);
-        REQUIRE(
-            services::readAccessLevel(server, id) ==
-            (UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE)
-        );
+        REQUIRE(services::readAccessLevel(server, id) == newAccessLevel);
+        REQUIRE(services::readMinimumSamplingInterval(server, id) == 10.0);
+    }
+
+    SECTION("Read/write reference node attributes") {
+        const NodeId id{0, UA_NS0ID_REFERENCES};
+
+        // read default attributes
+        REQUIRE(services::readIsAbstract(server, id) == true);
+        REQUIRE(services::readSymmetric(server, id) == true);
+        REQUIRE(services::readInverseName(server, id) == LocalizedText("", "References"));
+
+        // write new attributes
+        REQUIRE_NOTHROW(services::writeIsAbstract(server, id, false));
+        REQUIRE_NOTHROW(services::writeSymmetric(server, id, false));
+        REQUIRE_NOTHROW(services::writeInverseName(server, id, LocalizedText("", "New")));
+
+        // read new attributes
+        REQUIRE(services::readIsAbstract(server, id) == false);
+        REQUIRE(services::readSymmetric(server, id) == false);
+        REQUIRE(services::readInverseName(server, id) == LocalizedText("", "New"));
     }
 
     SECTION("Value rank and array dimension combinations") {
