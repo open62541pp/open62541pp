@@ -1,4 +1,5 @@
 set(examples_sources
+    client_connect.cpp
     client_find_servers.cpp
     server.cpp
     server_instantiation.cpp
