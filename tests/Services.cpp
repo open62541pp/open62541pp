@@ -16,7 +16,7 @@
 using namespace Catch::Matchers;
 using namespace opcua;
 
-TEST_CASE("NodeManagement") {
+TEST_CASE("NodeManagement (server)") {
     Server server;
     const NodeId objectsId{0, UA_NS0ID_OBJECTSFOLDER};
 
@@ -55,6 +55,58 @@ TEST_CASE("NodeManagement") {
         services::addObject(server, objectsId, {1, 1000}, "object");
         services::deleteNode(server, {1, 1000});
         REQUIRE_THROWS_WITH(services::deleteNode(server, {1, 1000}), "BadNodeIdUnknown");
+    }
+}
+
+TEST_CASE("NodeManagement (client)") {
+    Server server;
+    ServerRunner serverRunner(server);
+
+    Client client;
+    client.connect("opc.tcp://localhost:4840");
+
+    const NodeId objectsId{0, UA_NS0ID_OBJECTSFOLDER};
+
+    SECTION("Non-type nodes") {
+        REQUIRE_NOTHROW(services::addObject(client, objectsId, {1, 1000}, "object"));
+        REQUIRE(services::readNodeClass(server, {1, 1000}) == NodeClass::Object);
+
+        REQUIRE_NOTHROW(services::addFolder(client, objectsId, {1, 1001}, "folder"));
+        REQUIRE(services::readNodeClass(server, {1, 1001}) == NodeClass::Object);
+
+        REQUIRE_NOTHROW(services::addVariable(client, objectsId, {1, 1002}, "variable"));
+        REQUIRE(services::readNodeClass(server, {1, 1002}) == NodeClass::Variable);
+
+        REQUIRE_NOTHROW(services::addProperty(client, objectsId, {1, 1003}, "property"));
+        REQUIRE(services::readNodeClass(server, {1, 1003}) == NodeClass::Variable);
+    }
+
+    SECTION("Type nodes") {
+        REQUIRE_NOTHROW(
+            services::addObjectType(client, {0, UA_NS0ID_BASEOBJECTTYPE}, {1, 1000}, "objecttype")
+        );
+        REQUIRE(services::readNodeClass(server, {1, 1000}) == NodeClass::ObjectType);
+
+        REQUIRE_NOTHROW(services::addVariableType(
+            client, {0, UA_NS0ID_BASEVARIABLETYPE}, {1, 1001}, "variabletype"
+        ));
+        REQUIRE(services::readNodeClass(server, {1, 1001}) == NodeClass::VariableType);
+    }
+
+    SECTION("Add reference") {
+        services::addFolder(client, objectsId, {1, 1000}, "folder");
+        services::addObject(client, objectsId, {1, 1001}, "object");
+        services::addReference(client, {1, 1000}, {1, 1001}, ReferenceType::Organizes);
+        REQUIRE_THROWS_WITH(
+            services::addReference(client, {1, 1000}, {1, 1001}, ReferenceType::Organizes),
+            "BadDuplicateReferenceNotAllowed"
+        );
+    }
+
+    SECTION("Delete node") {
+        services::addObject(client, objectsId, {1, 1000}, "object");
+        services::deleteNode(client, {1, 1000});
+        REQUIRE_THROWS_WITH(services::deleteNode(client, {1, 1000}), "BadNodeIdUnknown");
     }
 }
 

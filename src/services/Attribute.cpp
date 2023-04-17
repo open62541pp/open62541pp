@@ -8,7 +8,8 @@
 
 namespace opcua::services {
 
-DataValue readAttribute(
+template <>
+DataValue readAttribute<Server>(
     Server& server, const NodeId& id, UA_AttributeId attributeId, UA_TimestampsToReturn timestamps
 ) {
     UA_ReadValueId item{};
@@ -22,7 +23,8 @@ DataValue readAttribute(
     return result;
 }
 
-DataValue readAttribute(
+template <>
+DataValue readAttribute<Client>(
     Client& client, const NodeId& id, UA_AttributeId attributeId, UA_TimestampsToReturn timestamps
 ) {
     // https://github.com/open62541/open62541/blob/v1.3.5/src/client/ua_client_highlevel.c#L357
@@ -54,7 +56,8 @@ DataValue readAttribute(
     return result;
 }
 
-void writeAttribute(
+template <>
+void writeAttribute<Server>(
     Server& server, const NodeId& id, UA_AttributeId attributeId, const DataValue& value
 ) {
     UA_WriteValue item{};
@@ -67,7 +70,8 @@ void writeAttribute(
     detail::throwOnBadStatus(status);
 }
 
-void writeAttribute(
+template <>
+void writeAttribute<Client>(
     Client& client, const NodeId& id, UA_AttributeId attributeId, const DataValue& value
 ) {
     // https://github.com/open62541/open62541/blob/v1.3.5/src/client/ua_client_highlevel.c#L285

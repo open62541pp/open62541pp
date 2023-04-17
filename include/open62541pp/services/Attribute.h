@@ -28,22 +28,12 @@ namespace opcua::services {
  */
 
 /**
- * Generic server function to read node attributes.
+ * Generic function to read node attributes.
  * @ingroup Attribute
  */
+template <typename T>
 DataValue readAttribute(
-    Server& server,
-    const NodeId& id,
-    UA_AttributeId attributeId,
-    UA_TimestampsToReturn timestamps = UA_TIMESTAMPSTORETURN_NEITHER
-);
-
-/**
- * Generic client function to read node attributes.
- * @ingroup Attribute
- */
-DataValue readAttribute(
-    Client& client,
+    T& serverOrClient,
     const NodeId& id,
     UA_AttributeId attributeId,
     UA_TimestampsToReturn timestamps = UA_TIMESTAMPSTORETURN_NEITHER
@@ -57,19 +47,12 @@ inline auto readAttributeScalar(T& serverOrClient, const NodeId& id, UA_Attribut
 }
 
 /**
- * Generic server function to write node attributes.
+ * Generic function to write node attributes.
  * @ingroup Attribute
  */
+template <typename T>
 void writeAttribute(
-    Server& server, const NodeId& id, UA_AttributeId attributeId, const DataValue& value
-);
-
-/**
- * Generic server function to write client attributes.
- * @ingroup Attribute
- */
-void writeAttribute(
-    Client& client, const NodeId& id, UA_AttributeId attributeId, const DataValue& value
+    T& serverOrClient, const NodeId& id, UA_AttributeId attributeId, const DataValue& value
 );
 
 /* -------------------------------- Specialized inline functions -------------------------------- */
