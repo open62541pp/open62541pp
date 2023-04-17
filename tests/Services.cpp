@@ -1,10 +1,19 @@
+#include <functional>  // reference_wrapper
+#include <variant>
+#include <vector>
+
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/generators/catch_generators.hpp>
 #include <catch2/matchers/catch_matchers.hpp>
+#include <catch2/matchers/catch_matchers_vector.hpp>
 
+#include "open62541pp/Client.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/services/services.h"
 
+#include "helper/Runner.h"
+
+using namespace Catch::Matchers;
 using namespace opcua;
 
 TEST_CASE("NodeManagement") {
@@ -49,7 +58,7 @@ TEST_CASE("NodeManagement") {
     }
 }
 
-TEST_CASE("Attribute") {
+TEST_CASE("Attribute (server)") {
     Server server;
     const NodeId objectsId{0, UA_NS0ID_OBJECTSFOLDER};
 
@@ -175,6 +184,87 @@ TEST_CASE("Attribute") {
         CHECK(valueRead->sourceTimestamp == valueWrite->sourceTimestamp);
         CHECK(valueRead->sourcePicoseconds == valueWrite->sourcePicoseconds);
     }
+}
+
+TEST_CASE("Attribute (server & client)") {
+    Server server;
+    ServerRunner serverRunner(server);
+
+    Client client;
+    client.connect("opc.tcp://localhost:4840");
+
+    // create variable node
+    const NodeId id{1, 1000};
+    services::addVariable(server, {0, UA_NS0ID_OBJECTSFOLDER}, id, "variable");
+    services::writeAccessLevel(server, id, UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE);
+    services::writeWriteMask(server, id, ~0U);  // set all bits to 1 -> allow all
+
+    // check read-only attributes
+    CHECK(services::readNodeId(server, id) == services::readNodeId(client, id));
+    CHECK(services::readNodeClass(server, id) == services::readNodeClass(client, id));
+    CHECK(services::readBrowseName(server, id) == services::readBrowseName(client, id));
+
+    // generate test matrix of possible reader/writer combinations
+    // 1. writer: server, reader: server
+    // 2. writer: server, reader: client
+    // 3. writer: client, reader: server
+    // 4. writer: client, reader: client
+    using ServerRef = std::reference_wrapper<Server>;
+    using ClientRef = std::reference_wrapper<Client>;
+    using ServerOrClientRef = std::variant<ServerRef, ClientRef>;
+
+    auto writerVar = GENERATE_REF(as<ServerOrClientRef>{}, std::ref(server), std::ref(client));
+    auto readerVar = GENERATE_REF(as<ServerOrClientRef>{}, std::ref(server), std::ref(client));
+
+    CAPTURE(std::holds_alternative<ServerRef>(writerVar));
+    CAPTURE(std::holds_alternative<ClientRef>(writerVar));
+    CAPTURE(std::holds_alternative<ServerRef>(readerVar));
+    CAPTURE(std::holds_alternative<ClientRef>(readerVar));
+
+    std::visit(
+        [&](auto writerRef, auto readerRef) {
+            auto& writer = writerRef.get();
+            auto& reader = readerRef.get();
+
+            const LocalizedText displayName("", "display name");
+            CHECK_NOTHROW(services::writeDisplayName(writer, id, displayName));
+            CHECK(services::readDisplayName(reader, id) == displayName);
+
+            const LocalizedText description("en-US", "description...");
+            CHECK_NOTHROW(services::writeDescription(writer, id, description));
+            CHECK(services::readDescription(reader, id) == description);
+
+            const NodeId dataType(0, UA_NS0ID_DOUBLE);
+            CHECK_NOTHROW(services::writeDataType(writer, id, dataType));
+            CHECK(services::readDataType(reader, id) == dataType);
+
+            const ValueRank valueRank = ValueRank::OneDimension;
+            CHECK_NOTHROW(services::writeValueRank(writer, id, valueRank));
+            CHECK(services::readValueRank(reader, id) == valueRank);
+
+            std::vector<uint32_t> arrayDimensions{3};
+            CHECK_NOTHROW(services::writeArrayDimensions(writer, id, arrayDimensions));
+            CHECK(services::readArrayDimensions(reader, id) == arrayDimensions);
+
+            const std::vector<double> array{1, 2, 3};
+            const auto variant = Variant::fromArray(array);
+            CHECK_NOTHROW(services::writeValue(writer, id, variant));
+            Variant variantRead;
+            CHECK_NOTHROW(services::readValue(reader, id, variantRead));
+            CHECK_THAT(variantRead.getArrayCopy<double>(), Equals(array));
+
+            const auto dataValue = DataValue::fromArray(array);
+            CHECK_NOTHROW(services::writeDataValue(writer, id, dataValue));
+            DataValue dataValueRead;
+            CHECK_NOTHROW(services::readDataValue(reader, id, dataValueRead));
+            CHECK(dataValueRead->hasValue);
+            CHECK(dataValueRead->hasSourceTimestamp);
+            CHECK(dataValueRead->hasServerTimestamp);
+            CHECK_THAT(dataValueRead.getValuePtr()->getArrayCopy<double>(), Equals(array));
+        },
+        writerVar,
+        readerVar
+    );
 }
 
 TEST_CASE("Browse") {

@@ -225,12 +225,12 @@ public:
         services::writeWriteMask(connection_, nodeId_, mask);
     }
 
-    /// @copydoc services::writeDataType(Server&, const NodeId&, Type)
+    /// @copydoc services::writeDataType(T&, const NodeId&, Type)
     void writeDataType(Type type) {
         services::writeDataType(connection_, nodeId_, type);
     }
 
-    /// @copydoc services::writeDataType(Server&, const NodeId&, const NodeId&)
+    /// @copydoc services::writeDataType(T&, const NodeId&, const NodeId&)
     void writeDataType(const NodeId& typeId) {
         services::writeDataType(connection_, nodeId_, typeId);
     }

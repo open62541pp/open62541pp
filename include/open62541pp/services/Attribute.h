@@ -19,6 +19,8 @@ class Server;
 
 namespace opcua::services {
 
+/* -------------------------------------- Generic functions ------------------------------------- */
+
 /**
  * @defgroup Attribute Attribute
  * Read and write node attributes.
@@ -37,6 +39,24 @@ DataValue readAttribute(
 );
 
 /**
+ * Generic client function to read node attributes.
+ * @ingroup Attribute
+ */
+DataValue readAttribute(
+    Client& client,
+    const NodeId& id,
+    UA_AttributeId attributeId,
+    UA_TimestampsToReturn timestamps = UA_TIMESTAMPSTORETURN_NEITHER
+);
+
+/// Helper function to read scalar node attributes.
+template <typename AttributeType, typename T>
+inline auto readAttributeScalar(T& serverOrClient, const NodeId& id, UA_AttributeId attributeId) {
+    const auto dv = readAttribute(serverOrClient, id, attributeId);
+    return dv.getValuePtr()->template getScalarCopy<AttributeType>();
+}
+
+/**
  * Generic server function to write node attributes.
  * @ingroup Attribute
  */
@@ -45,87 +65,102 @@ void writeAttribute(
 );
 
 /**
+ * Generic server function to write client attributes.
+ * @ingroup Attribute
+ */
+void writeAttribute(
+    Client& client, const NodeId& id, UA_AttributeId attributeId, const DataValue& value
+);
+
+/* -------------------------------- Specialized inline functions -------------------------------- */
+
+/**
  * Read node id.
  * @ingroup Attribute
  */
-inline NodeId readNodeId(Server& server, const NodeId& id) {
-    const auto dv = readAttribute(server, id, UA_ATTRIBUTEID_NODEID);
-    return dv.getValuePtr()->getScalarCopy<NodeId>();
+template <typename T>
+inline NodeId readNodeId(T& serverOrClient, const NodeId& id) {
+    return readAttributeScalar<NodeId>(serverOrClient, id, UA_ATTRIBUTEID_NODEID);
 }
 
 /**
  * Read node class.
  * @ingroup Attribute
  */
-inline NodeClass readNodeClass(Server& server, const NodeId& id) {
-    auto dv = readAttribute(server, id, UA_ATTRIBUTEID_NODECLASS);
+template <typename T>
+inline NodeClass readNodeClass(T& serverOrClient, const NodeId& id) {
+    auto dv = readAttribute(serverOrClient, id, UA_ATTRIBUTEID_NODECLASS);
     // workaround to read enum from variant...
-    auto* nodeClass = static_cast<NodeClass*>(dv.getValuePtr()->handle()->data);
-    return static_cast<NodeClass>(*nodeClass);
+    return *static_cast<NodeClass*>(dv.getValuePtr()->handle()->data);
 }
 
 /**
  * Read browse name.
  * @ingroup Attribute
  */
-inline std::string readBrowseName(Server& server, const NodeId& id) {
-    const auto dv = readAttribute(server, id, UA_ATTRIBUTEID_BROWSENAME);
-    return std::string(dv.getValuePtr()->getScalarCopy<QualifiedName>().getName());
+template <typename T>
+inline std::string readBrowseName(T& serverOrClient, const NodeId& id) {
+    const auto name = readAttributeScalar<QualifiedName>(
+        serverOrClient, id, UA_ATTRIBUTEID_BROWSENAME
+    );
+    return std::string(name.getName());
 }
 
 /**
  * Read localized display name.
  * @ingroup Attribute
  */
-inline LocalizedText readDisplayName(Server& server, const NodeId& id) {
-    const auto dv = readAttribute(server, id, UA_ATTRIBUTEID_DISPLAYNAME);
-    return dv.getValuePtr()->getScalarCopy<LocalizedText>();
+template <typename T>
+inline LocalizedText readDisplayName(T& serverOrClient, const NodeId& id) {
+    return readAttributeScalar<LocalizedText>(serverOrClient, id, UA_ATTRIBUTEID_DISPLAYNAME);
 }
 
 /**
  * Read localized description.
  * @ingroup Attribute
  */
-inline LocalizedText readDescription(Server& server, const NodeId& id) {
-    const auto dv = readAttribute(server, id, UA_ATTRIBUTEID_DESCRIPTION);
-    return dv.getValuePtr()->getScalarCopy<LocalizedText>();
+template <typename T>
+inline LocalizedText readDescription(T& serverOrClient, const NodeId& id) {
+    return readAttributeScalar<LocalizedText>(serverOrClient, id, UA_ATTRIBUTEID_DESCRIPTION);
 }
 
 /**
  * Read write mask, for example `::UA_WRITEMASK_ACCESSLEVEL | ::UA_WRITEMASK_DESCRIPTION`.
  * @ingroup Attribute
  */
-inline uint32_t readWriteMask(Server& server, const NodeId& id) {
-    const auto dv = readAttribute(server, id, UA_ATTRIBUTEID_WRITEMASK);
-    return dv.getValuePtr()->getScalarCopy<uint32_t>();
+template <typename T>
+inline uint32_t readWriteMask(T& serverOrClient, const NodeId& id) {
+    return readAttributeScalar<uint32_t>(serverOrClient, id, UA_ATTRIBUTEID_WRITEMASK);
 }
 
 /**
  * Read data type of variable (type) node as NodeId.
  * @ingroup Attribute
  */
-inline NodeId readDataType(Server& server, const NodeId& id) {
-    const auto dv = readAttribute(server, id, UA_ATTRIBUTEID_DATATYPE);
-    return dv.getValuePtr()->getScalarCopy<NodeId>();
+template <typename T>
+inline NodeId readDataType(T& serverOrClient, const NodeId& id) {
+    return readAttributeScalar<NodeId>(serverOrClient, id, UA_ATTRIBUTEID_DATATYPE);
 }
 
 /**
  * Read value rank of variable (type) node.
  * @ingroup Attribute
  */
-inline ValueRank readValueRank(Server& server, const NodeId& id) {
-    const auto dv = readAttribute(server, id, UA_ATTRIBUTEID_VALUERANK);
-    return static_cast<ValueRank>(dv.getValuePtr()->getScalarCopy<int32_t>());
+template <typename T>
+inline ValueRank readValueRank(T& serverOrClient, const NodeId& id) {
+    const auto index = readAttributeScalar<int32_t>(serverOrClient, id, UA_ATTRIBUTEID_VALUERANK);
+    return static_cast<ValueRank>(index);
 }
 
 /**
  * Read array dimensions of variable (type) node.
  * @ingroup Attribute
  */
-inline std::vector<uint32_t> readArrayDimensions(Server& server, const NodeId& id) {
-    const auto dv = readAttribute(server, id, UA_ATTRIBUTEID_ARRAYDIMENSIONS);
+template <typename T>
+inline std::vector<uint32_t> readArrayDimensions(T& serverOrClient, const NodeId& id) {
+    const auto dv = readAttribute(serverOrClient, id, UA_ATTRIBUTEID_ARRAYDIMENSIONS);
     if (dv.getValuePtr()->isArray()) {
-        return dv.getValuePtr()->getArrayCopy<uint32_t>();
+        return dv.getValuePtr()->template getArrayCopy<uint32_t>();
     }
     return {};
 }
@@ -134,75 +169,84 @@ inline std::vector<uint32_t> readArrayDimensions(Server& server, const NodeId& i
  * Read access level mask of variable node, for example `::UA_ACCESSLEVELMASK_READ`.
  * @ingroup Attribute
  */
-inline uint8_t readAccessLevel(Server& server, const NodeId& id) {
-    const auto dv = readAttribute(server, id, UA_ATTRIBUTEID_ACCESSLEVEL);
-    return dv.getValuePtr()->getScalarCopy<uint8_t>();
+template <typename T>
+inline uint8_t readAccessLevel(T& serverOrClient, const NodeId& id) {
+    return readAttributeScalar<uint8_t>(serverOrClient, id, UA_ATTRIBUTEID_ACCESSLEVEL);
 }
 
 /**
  * Read value from variable node as DataValue object.
  * @ingroup Attribute
  */
-inline void readDataValue(Server& server, const NodeId& id, DataValue& value) {
-    value = readAttribute(server, id, UA_ATTRIBUTEID_VALUE, UA_TIMESTAMPSTORETURN_BOTH);
+template <typename T>
+inline void readDataValue(T& serverOrClient, const NodeId& id, DataValue& value) {
+    value = readAttribute(serverOrClient, id, UA_ATTRIBUTEID_VALUE, UA_TIMESTAMPSTORETURN_BOTH);
 }
 
 /**
  * Read value from variable node as Variant object.
  * @ingroup Attribute
  */
-inline void readValue(Server& server, const NodeId& id, Variant& value) {
-    value = readAttribute(server, id, UA_ATTRIBUTEID_VALUE).getValue().value();
+template <typename T>
+inline void readValue(T& serverOrClient, const NodeId& id, Variant& value) {
+    DataValue dv = readAttribute(serverOrClient, id, UA_ATTRIBUTEID_VALUE);
+    value.swap(dv->value);
 }
 
 /**
  * Write localized display name.
  * @ingroup Attribute
  */
-inline void writeDisplayName(Server& server, const NodeId& id, const LocalizedText& name) {
-    writeAttribute(server, id, UA_ATTRIBUTEID_DISPLAYNAME, DataValue::fromScalar(name));
+template <typename T>
+inline void writeDisplayName(T& serverOrClient, const NodeId& id, const LocalizedText& name) {
+    writeAttribute(serverOrClient, id, UA_ATTRIBUTEID_DISPLAYNAME, DataValue::fromScalar(name));
 }
 
 /**
  * Write localized description.
  * @ingroup Attribute
  */
-inline void writeDescription(Server& server, const NodeId& id, const LocalizedText& name) {
-    writeAttribute(server, id, UA_ATTRIBUTEID_DESCRIPTION, DataValue::fromScalar(name));
+template <typename T>
+inline void writeDescription(T& serverOrClient, const NodeId& id, const LocalizedText& name) {
+    writeAttribute(serverOrClient, id, UA_ATTRIBUTEID_DESCRIPTION, DataValue::fromScalar(name));
 }
 
 /**
  * Write write mask, for example `::UA_WRITEMASK_ACCESSLEVEL | ::UA_WRITEMASK_DESCRIPTION`.
  * @ingroup Attribute
  */
-inline void writeWriteMask(Server& server, const NodeId& id, uint32_t mask) {
-    writeAttribute(server, id, UA_ATTRIBUTEID_WRITEMASK, DataValue::fromScalar(mask));
+template <typename T>
+inline void writeWriteMask(T& serverOrClient, const NodeId& id, uint32_t mask) {
+    writeAttribute(serverOrClient, id, UA_ATTRIBUTEID_WRITEMASK, DataValue::fromScalar(mask));
 }
 
 /**
  * Write data type of variable (type) node.
  * @ingroup Attribute
  */
-inline void writeDataType(Server& server, const NodeId& id, Type type) {
-    const auto typeId = detail::getUaDataType(type)->typeId;
-    writeAttribute(server, id, UA_ATTRIBUTEID_DATATYPE, DataValue::fromScalar(typeId));
+template <typename T>
+inline void writeDataType(T& serverOrClient, const NodeId& id, Type type) {
+    const auto typeId = ::opcua::detail::getUaDataType(type)->typeId;
+    writeAttribute(serverOrClient, id, UA_ATTRIBUTEID_DATATYPE, DataValue::fromScalar(typeId));
 }
 
 /**
  * Write data type of variable (type) node by node id.
  * @ingroup Attribute
  */
-inline void writeDataType(Server& server, const NodeId& id, const NodeId& typeId) {
-    writeAttribute(server, id, UA_ATTRIBUTEID_DATATYPE, DataValue::fromScalar(typeId));
+template <typename T>
+inline void writeDataType(T& serverOrClient, const NodeId& id, const NodeId& typeId) {
+    writeAttribute(serverOrClient, id, UA_ATTRIBUTEID_DATATYPE, DataValue::fromScalar(typeId));
 }
 
 /**
  * Write value rank of variable (type) node.
  * @ingroup Attribute
  */
-inline void writeValueRank(Server& server, const NodeId& id, ValueRank valueRank) {
+template <typename T>
+inline void writeValueRank(T& serverOrClient, const NodeId& id, ValueRank valueRank) {
     const auto native = static_cast<int32_t>(valueRank);
-    writeAttribute(server, id, UA_ATTRIBUTEID_VALUERANK, DataValue::fromScalar(native));
+    writeAttribute(serverOrClient, id, UA_ATTRIBUTEID_VALUERANK, DataValue::fromScalar(native));
 }
 
 /**
@@ -213,10 +257,13 @@ inline void writeValueRank(Server& server, const NodeId& id, ValueRank valueRank
  * wildcard and the actual value may have any length in this dimension.
  * @ingroup Attribute
  */
+template <typename T>
 inline void writeArrayDimensions(
-    Server& server, const NodeId& id, const std::vector<uint32_t>& dimensions
+    T& serverOrClient, const NodeId& id, const std::vector<uint32_t>& dimensions
 ) {
-    writeAttribute(server, id, UA_ATTRIBUTEID_ARRAYDIMENSIONS, DataValue::fromArray(dimensions));
+    writeAttribute(
+        serverOrClient, id, UA_ATTRIBUTEID_ARRAYDIMENSIONS, DataValue::fromArray(dimensions)
+    );
 }
 
 /**
@@ -224,28 +271,31 @@ inline void writeArrayDimensions(
  * for example `::UA_ACCESSLEVELMASK_READ | ::UA_ACCESSLEVELMASK_WRITE`.
  * @ingroup Attribute
  */
-inline void writeAccessLevel(Server& server, const NodeId& id, uint8_t mask) {
+template <typename T>
+inline void writeAccessLevel(T& serverOrClient, const NodeId& id, uint8_t mask) {
     const auto native = static_cast<UA_Byte>(mask);
-    writeAttribute(server, id, UA_ATTRIBUTEID_ACCESSLEVEL, DataValue::fromScalar(native));
+    writeAttribute(serverOrClient, id, UA_ATTRIBUTEID_ACCESSLEVEL, DataValue::fromScalar(native));
 }
 
 /**
  * Write DataValue to variable node.
  * @ingroup Attribute
  */
-inline void writeDataValue(Server& server, const NodeId& id, const DataValue& value) {
-    writeAttribute(server, id, UA_ATTRIBUTEID_VALUE, value);
+template <typename T>
+inline void writeDataValue(T& serverOrClient, const NodeId& id, const DataValue& value) {
+    writeAttribute(serverOrClient, id, UA_ATTRIBUTEID_VALUE, value);
 }
 
 /**
  * Write Variant to variable node.
  * @ingroup Attribute
  */
-inline void writeValue(Server& server, const NodeId& id, const Variant& value) {
+template <typename T>
+inline void writeValue(T& serverOrClient, const NodeId& id, const Variant& value) {
     UA_DataValue dv{};
     dv.value = *value.handle();  // shallow copy
     dv.hasValue = true;
-    writeAttribute(server, id, UA_ATTRIBUTEID_VALUE, asWrapper<DataValue>(dv));
+    writeAttribute(serverOrClient, id, UA_ATTRIBUTEID_VALUE, asWrapper<DataValue>(dv));
 }
 
 }  // namespace opcua::services
