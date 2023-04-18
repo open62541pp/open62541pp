@@ -2,6 +2,7 @@
 
 #include <array>
 #include <cstdint>
+#include <string>
 #include <string_view>
 
 #include "open62541pp/TypeWrapper.h"
@@ -32,7 +33,9 @@ public:
     // NOLINTNEXTLINE, false positive?
     using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
 
-    Guid(UA_UInt32 data1, UA_UInt16 data2, UA_UInt16 data3, std::array<UA_Byte, 8> data4);
+    Guid(uint32_t data1, uint16_t data2, uint16_t data3, std::array<uint8_t, 8> data4);
+
+    std::string toString() const;
 };
 
 /**

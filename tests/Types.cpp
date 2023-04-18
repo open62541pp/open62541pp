@@ -38,18 +38,31 @@ TEMPLATE_TEST_CASE("StringLike", "", String, ByteString, XmlElement) {
 }
 
 TEST_CASE("Guid") {
-    UA_UInt32 data1{11};
-    UA_UInt16 data2{22};
-    UA_UInt16 data3{33};
-    std::array<UA_Byte, 8> data4{1, 2, 3, 4, 5, 6, 7, 8};
+    SECTION("Construct") {
+        UA_UInt32 data1{11};
+        UA_UInt16 data2{22};
+        UA_UInt16 data3{33};
+        std::array<UA_Byte, 8> data4{1, 2, 3, 4, 5, 6, 7, 8};
 
-    Guid wrapper(data1, data2, data3, data4);
+        const Guid wrapper(data1, data2, data3, data4);
 
-    REQUIRE(wrapper.handle()->data1 == data1);
-    REQUIRE(wrapper.handle()->data2 == data2);
-    REQUIRE(wrapper.handle()->data3 == data3);
-    for (int i = 0; i < 8; ++i) {
-        REQUIRE(wrapper.handle()->data4[i] == data4[i]);  // NOLINT
+        REQUIRE(wrapper.handle()->data1 == data1);
+        REQUIRE(wrapper.handle()->data2 == data2);
+        REQUIRE(wrapper.handle()->data3 == data3);
+        for (int i = 0; i < 8; ++i) {
+            REQUIRE(wrapper.handle()->data4[i] == data4[i]);  // NOLINT
+        }
+    }
+
+    SECTION("toString") {
+        {
+            const Guid guid{};
+            REQUIRE_THAT(guid.toString(), Equals("00000000-0000-0000-0000-000000000000"));
+        }
+        {
+            const Guid guid{3298187146, 3582, 19343, {135, 10, 116, 82, 56, 198, 174, 174}};
+            REQUIRE_THAT(guid.toString(), Equals("C496578A-0DFE-4B8F-870A-745238C6AEAE"));
+        }
     }
 }
 
