@@ -74,6 +74,10 @@ TEST_CASE("DateTime") {
         REQUIRE(dts.year == 1601);
     }
 
+    SECTION("Static methods") {
+        REQUIRE_NOTHROW(DateTime::localTimeUtcOffset());
+    }
+
     SECTION("From std::chrono::time_point") {
         using namespace std::chrono;
 

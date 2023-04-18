@@ -40,6 +40,9 @@ public:
     /// Get DateTime from Unix time.
     static DateTime fromUnixTime(int64_t unixTime);
 
+    /// Offset of local time to UTC.
+    static int64_t localTimeUtcOffset();
+
     /// Convert to std::chrono::time_point.
     template <typename Clock = DefaultClock, typename Duration = UaDuration>
     std::chrono::time_point<Clock, Duration> toTimePoint() const;
