@@ -98,6 +98,7 @@ endif()
 add_library(
     open62541pp
     src/Helper.cpp
+    src/ostream.cpp
     src/Server.cpp
     src/services/Attribute.cpp
     src/services/Browse.cpp
