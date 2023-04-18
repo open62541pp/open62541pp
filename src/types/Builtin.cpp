@@ -53,6 +53,10 @@ std::string Guid::toString() const {
 ByteString::ByteString(std::string_view str)
     : ByteString(UA_ByteString{detail::allocUaString(str)}) {}
 
+Guid Guid::random() {
+    return Guid(UA_Guid_random());  // NOLINT
+}
+
 std::string_view ByteString::get() const {
     return detail::toStringView(*handle());
 }

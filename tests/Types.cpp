@@ -54,6 +54,11 @@ TEST_CASE("Guid") {
         }
     }
 
+    SECTION("Random") {
+        REQUIRE(Guid::random() != Guid());
+        REQUIRE(Guid::random() != Guid::random());
+    }
+
     SECTION("toString") {
         {
             const Guid guid{};

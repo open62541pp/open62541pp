@@ -35,6 +35,8 @@ public:
 
     Guid(uint32_t data1, uint16_t data2, uint16_t data3, std::array<uint8_t, 8> data4);
 
+    static Guid random();
+
     std::string toString() const;
 };
 
