@@ -72,7 +72,8 @@ std::chrono::time_point<Clock, Duration> DateTime::toTimePoint() const {
     if (dateTime < UA_DATETIME_UNIX_EPOCH) {
         return unixEpoch;
     }
-    return unixEpoch + UaDuration(dateTime - UA_DATETIME_UNIX_EPOCH);
+    const auto sinceEpoch = UaDuration(dateTime - UA_DATETIME_UNIX_EPOCH);
+    return unixEpoch + std::chrono::duration_cast<Duration>(sinceEpoch);
 }
 
 }  // namespace opcua

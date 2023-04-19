@@ -19,8 +19,8 @@ jobs:
           - { name: Clang 12,   CC: clang-12, CXX: clang++-12, flags: "" }
           - { name: Clang-Tidy, CC: clang-12, CXX: clang++-12, flags: "-DUAPP_ENABLE_CLANG_TIDY=ON" }
           - { name: ASan,       CC: clang-12, CXX: clang++-12, flags: "-DUAPP_ENABLE_SANITIZER_ADDRESS=ON" }
-          - { name: TSan,       CC: clang-12, CXX: clang++-12, flags: "-DUAPP_ENABLE_SANITIZER_THREAD=ON" }
           - { name: LSan,       CC: clang-12, CXX: clang++-12, flags: "-DUAPP_ENABLE_SANITIZER_LEAK=ON" }
+          - { name: TSan,       CC: clang-12, CXX: clang++-12, flags: "-DUAPP_ENABLE_SANITIZER_THREAD=ON" }
           - { name: UBSan,      CC: clang-12, CXX: clang++-12, flags: "-DUAPP_ENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON" }
           - { name: Coverage,   CC: gcc,      CXX: g++,        flags: "-DUAPP_ENABLE_COVERAGE=ON" }
     steps:
