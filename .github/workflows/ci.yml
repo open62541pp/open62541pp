@@ -24,7 +24,6 @@ jobs:
           - { name: LSan,       CC: clang-14, CXX: clang++-14, flags: "-DUAPP_ENABLE_SANITIZER_LEAK=ON" }
           - { name: TSan,       CC: clang-14, CXX: clang++-14, flags: "-DUAPP_ENABLE_SANITIZER_THREAD=ON" }
           - { name: UBSan,      CC: clang-14, CXX: clang++-14, flags: "-DUAPP_ENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON" }
-          - { name: Coverage,   CC: gcc,      CXX: g++,        flags: "-DUAPP_ENABLE_COVERAGE=ON" }
     steps:
       - uses: actions/checkout@v3
         with:
@@ -38,19 +37,31 @@ jobs:
           cd build
           cmake -DUAPP_BUILD_TESTS=ON -DUAPP_BUILD_EXAMPLES=ON ${{ matrix.config.flags }} ..
           cmake --build .
-      - name: Upload coverage results to coveralls.io
-        if: ${{ github.ref == 'refs/heads/master' && matrix.config.name == 'Coverage' }}
-        env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+
+  linux-coverage:
+    name: Linux Coverage
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - name: Install requirements
+        run: pip install gcovr~=6.0
+      - name: Compile and run tests
         run: |
-          pip install cpp-coveralls
-          coveralls \
-            -E '.*/3rdparty/.*' \
-            -E '.*/build/.*' \
-            -E '.*/doc/.*' \
-            -E '.*/examples/.*' \
-            -E '.*/tests/.*' \
-            --gcov-options '\-lp';
+          mkdir build
+          cd build
+          cmake -DUAPP_BUILD_TESTS=ON -DUAPP_ENABLE_COVERAGE=ON ..
+          cmake --build .
+      - name: Coverage report (text)
+        run: cmake --build build --target open62541pp_coverage_report
+      - name: Coverage report (xml)
+        run: cmake --build build --target open62541pp_coverage_report_xml
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: build/coverage.xml
 
   windows:
     # https://github.com/actions/runner-images/blob/main/images/win/Windows2019-Readme.md
