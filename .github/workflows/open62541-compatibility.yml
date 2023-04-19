@@ -1,9 +1,16 @@
 name: Compatibility
 
-on: [push, pull_request]
+# run after CI workflow
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
+    branches: ["**"]
 
 jobs:
   external-open62541:
+    # only run if CI workflow succeeded
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: open62541 ${{ matrix.version }} (${{ matrix.build }})
     runs-on: ubuntu-20.04
     strategy:
