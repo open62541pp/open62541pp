@@ -108,6 +108,10 @@ TEST_CASE("DateTime") {
         REQUIRE(dt.toUnixTime() == secSinceEpoch);
     }
 
+    SECTION("Format") {
+        REQUIRE_THAT(DateTime().format("%Y-%m-%d %H:%M:%S"), Equals("1970-01-01 00:00:00"));
+    }
+
     SECTION("Comparison") {
         const auto zero = DateTime(0);
         const auto now = DateTime::now();

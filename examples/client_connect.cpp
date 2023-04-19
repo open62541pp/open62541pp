@@ -32,10 +32,7 @@ int main(int argc, char* argv[]) {
 
     auto node = client.getNode({0, UA_NS0ID_SERVER_SERVERSTATUS_CURRENTTIME});
     const auto dt = node.readScalar<opcua::DateTime>();
-
     client.disconnect();
 
-    const auto dts = dt.toStruct();
-    std::cout << "Server date (UTC): " << dts.year << "-" << dts.month << "-" << dts.day << " "
-              << dts.hour << ":" << dts.min << ":" << dts.sec << "." << dts.milliSec << std::endl;
+    std::cout << "Server date (UTC): " << dt.format("%Y-%m-%d %H:%M:%S") << std::endl;
 }

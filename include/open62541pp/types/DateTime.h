@@ -47,7 +47,7 @@ public:
     template <typename Clock = DefaultClock, typename Duration = UaDuration>
     std::chrono::time_point<Clock, Duration> toTimePoint() const;
 
-    /// Convert to Unix time.
+    /// Convert to Unix time (number of seconds since January 1, 1970 UTC).
     int64_t toUnixTime() const noexcept;
 
     /// Convert to UA_DateTimeStruct.
@@ -55,6 +55,10 @@ public:
 
     /// Get DateTime value as 100 nanosecond intervals since January 1, 1601 (UTC).
     int64_t get() const noexcept;
+
+    /// Convert to string with given format (same format codes as strftime).
+    /// @see https://en.cppreference.com/w/cpp/chrono/c/strftime
+    std::string format(std::string_view format, bool localtime = false) const;
 };
 
 template <typename Clock, typename Duration>
