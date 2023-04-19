@@ -3,6 +3,8 @@
   <navindex>
     <tab type="mainpage" visible="yes" title="Overview"/>
 
+    <tab type="examples" visible="yes" title="" intro=""/>
+
     <tab type="user" url="@ref opcua::Server" title="Server"/>
     <tab type="user" url="@ref opcua::Client" title="Client"/>
     <tab type="user" url="@ref opcua::Node" title="Node"/>
@@ -41,8 +43,6 @@
         <tab type="globals" visible="yes" title="" intro=""/>
       </tab>
     </tab>
-
-    <tab type="examples" visible="yes" title="" intro=""/>
 
     <tab type="usergroup" title="Links">
       <tab type="user" url="open62541/index.html" title="open62541 API"/>

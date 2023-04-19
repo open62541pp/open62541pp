@@ -90,6 +90,7 @@ add_custom_command(
     DEPENDS
         Doxyfile.in
         DoxygenLayout.xml
+        example.dox
         ${PROJECT_SOURCE_DIR}/README.md
         ${open62541pp_sources}
         ${open62541pp_headers}
