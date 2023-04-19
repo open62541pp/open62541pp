@@ -9,12 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Basic `Client` implementation (#33)
 - `asWrapper` function to cast native refs to wrapper refs (#30, #31)
 - `DataValue::getValuePtr` method
 - Static methods `DataValue::fromScalar` and `DataValue::fromArray`
+- `DateTime::format` method
 - `Server::getNamespaceArray` method
 - `Server::runIterate` method, e.g. to run server in existing event loop
 - Generic `services::readAttribute` and `services::writeAttribute` functions
+- Missing functions to read/write attributes `UserWriteMask`, `IsAbstract`, `Symmetric`, `InverseName`, `UserAccessLevel` and `MinimumSamplingInterval`
+- Examples:
+  - `client_connect`
+  - `client_find_servers`
 
 ### Changed
 
