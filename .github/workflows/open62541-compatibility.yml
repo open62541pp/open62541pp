@@ -1,16 +1,9 @@
 name: Compatibility
 
-# run after CI workflow
-on:
-  workflow_run:
-    workflows: ["CI"]
-    types: [completed]
-    branches: ["**"]
+on: [push, pull_request]
 
 jobs:
   external-open62541:
-    # only run if CI workflow succeeded
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: open62541 ${{ matrix.version }} (${{ matrix.build }})
     runs-on: ubuntu-22.04
     strategy:
