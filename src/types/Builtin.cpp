@@ -4,7 +4,7 @@
 #include <iomanip>
 #include <sstream>
 
-#include "open62541pp/Helper.h"
+#include "open62541pp/detail/helper.h"
 
 namespace opcua {
 

@@ -4,7 +4,7 @@
 #include <string_view>
 #include <tuple>
 
-#include "open62541pp/Traits.h"
+#include "open62541pp/detail/traits.h"
 #include "open62541pp/open62541.h"
 
 namespace opcua {

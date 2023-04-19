@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "open62541pp/Common.h"
-#include "open62541pp/Helper.h"
+#include "open62541pp/detail/helper.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/NodeId.h"

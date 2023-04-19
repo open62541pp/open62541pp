@@ -5,8 +5,8 @@
 #include <catch2/matchers/catch_matchers_string.hpp>
 
 #include "open62541pp/Common.h"
-#include "open62541pp/Helper.h"  // detail::toString
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/detail/helper.h"  // detail::toString
 
 #include "open62541_impl.h"
 

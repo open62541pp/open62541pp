@@ -3,7 +3,7 @@
 #include <cassert>
 
 #include "open62541pp/ErrorHandling.h"
-#include "open62541pp/Helper.h"
+#include "open62541pp/detail/helper.h"
 
 #include "../open62541_impl.h"
 

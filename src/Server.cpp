@@ -5,8 +5,8 @@
 #include <utility>  // move
 
 #include "open62541pp/ErrorHandling.h"
-#include "open62541pp/Helper.h"
 #include "open62541pp/Node.h"
+#include "open62541pp/detail/helper.h"
 #include "open62541pp/services/Attribute.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Variant.h"

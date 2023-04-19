@@ -8,7 +8,7 @@
 #include "open62541pp/Common.h"
 #include "open62541pp/Comparison.h"
 #include "open62541pp/ErrorHandling.h"
-#include "open62541pp/Helper.h"
+#include "open62541pp/detail/helper.h"
 #include "open62541pp/open62541.h"
 
 namespace opcua {
