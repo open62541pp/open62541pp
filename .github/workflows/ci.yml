@@ -4,9 +4,9 @@ on: [push, pull_request]
 
 jobs:
   linux:
-    # https://github.com/actions/runner-images/blob/main/images/linux/Ubuntu2004-Readme.md
+    # https://github.com/actions/runner-images/blob/main/images/linux/Ubuntu2204-Readme.md
     name: Linux ${{ matrix.config.name }}
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
@@ -14,14 +14,16 @@ jobs:
           # prettier-ignore
           - { name: GCC 9,      CC: gcc-9,    CXX: g++-9,      flags: ""}
           - { name: GCC 10,     CC: gcc-10,   CXX: g++-10,     flags: ""}
-          - { name: Clang 10,   CC: clang-10, CXX: clang++-10, flags: "" }
-          - { name: Clang 11,   CC: clang-11, CXX: clang++-11, flags: "" }
+          - { name: GCC 11,     CC: gcc-11,   CXX: g++-11,     flags: ""}
+          - { name: GCC 12,     CC: gcc-12,   CXX: g++-12,     flags: ""}
           - { name: Clang 12,   CC: clang-12, CXX: clang++-12, flags: "" }
-          - { name: Clang-Tidy, CC: clang-12, CXX: clang++-12, flags: "-DUAPP_ENABLE_CLANG_TIDY=ON" }
-          - { name: ASan,       CC: clang-12, CXX: clang++-12, flags: "-DUAPP_ENABLE_SANITIZER_ADDRESS=ON" }
-          - { name: LSan,       CC: clang-12, CXX: clang++-12, flags: "-DUAPP_ENABLE_SANITIZER_LEAK=ON" }
-          - { name: TSan,       CC: clang-12, CXX: clang++-12, flags: "-DUAPP_ENABLE_SANITIZER_THREAD=ON" }
-          - { name: UBSan,      CC: clang-12, CXX: clang++-12, flags: "-DUAPP_ENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON" }
+          - { name: Clang 13,   CC: clang-13, CXX: clang++-13, flags: "" }
+          - { name: Clang 14,   CC: clang-14, CXX: clang++-14, flags: "" }
+          - { name: Clang-Tidy, CC: clang-14, CXX: clang++-14, flags: "-DUAPP_ENABLE_CLANG_TIDY=ON" }
+          - { name: ASan,       CC: clang-14, CXX: clang++-14, flags: "-DUAPP_ENABLE_SANITIZER_ADDRESS=ON" }
+          - { name: LSan,       CC: clang-14, CXX: clang++-14, flags: "-DUAPP_ENABLE_SANITIZER_LEAK=ON" }
+          - { name: TSan,       CC: clang-14, CXX: clang++-14, flags: "-DUAPP_ENABLE_SANITIZER_THREAD=ON" }
+          - { name: UBSan,      CC: clang-14, CXX: clang++-14, flags: "-DUAPP_ENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON" }
           - { name: Coverage,   CC: gcc,      CXX: g++,        flags: "-DUAPP_ENABLE_COVERAGE=ON" }
     steps:
       - uses: actions/checkout@v3
