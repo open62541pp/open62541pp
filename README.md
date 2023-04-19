@@ -183,4 +183,4 @@ open62541++ provides additional build options:
 ### Dependencies
 
 - [open62541](https://github.com/open62541/open62541) as integrated submodule or external dependency
-- [catch2](https://github.com/catchorg/Catch2) for tests
+- [doctest](https://github.com/doctest/doctest) for tests as integrated submodule
