@@ -1,13 +1,12 @@
-#include <catch2/catch_template_test_macros.hpp>
-#include <catch2/catch_test_macros.hpp>
+#include <doctest/doctest.h>
 
 #include "open62541pp/TypeConverter.h"
 
 using namespace opcua;
 
-TEMPLATE_TEST_CASE(
+TEST_CASE_TEMPLATE(
     "TypeConverter native scalars",
-    "",
+    T,
     UA_SByte,
     UA_Byte,
     UA_Int16,
@@ -19,68 +18,68 @@ TEMPLATE_TEST_CASE(
     UA_Float,
     UA_Double
 ) {
-    const TestType src{11};
+    const T src{11};
 
-    SECTION("fromNative") {
-        TestType dst{};
-        TypeConverter<TestType>::fromNative(src, dst);
-        REQUIRE(dst == src);
+    SUBCASE("fromNative") {
+        T dst{};
+        TypeConverter<T>::fromNative(src, dst);
+        CHECK(dst == src);
     }
 
-    SECTION("toNative") {
-        TestType dst{};
-        TypeConverter<TestType>::toNative(src, dst);
-        REQUIRE(dst == src);
+    SUBCASE("toNative") {
+        T dst{};
+        TypeConverter<T>::toNative(src, dst);
+        CHECK(dst == src);
     }
 }
 
 TEST_CASE("TypeConverter wrapper types") {
     using FloatWrapper = TypeWrapper<float, UA_TYPES_FLOAT>;
 
-    SECTION("fromNative") {
+    SUBCASE("fromNative") {
         float native = 11.11f;
         FloatWrapper wrapper;
         TypeConverter<FloatWrapper>::fromNative(native, wrapper);
-        REQUIRE(*wrapper.handle() == 11.11f);
+        CHECK(*wrapper.handle() == 11.11f);
     }
 
-    SECTION("toNative") {
+    SUBCASE("toNative") {
         FloatWrapper wrapper(11.11f);
         float native{};
         TypeConverter<FloatWrapper>::toNative(wrapper, native);
-        REQUIRE(native == 11.11f);
+        CHECK(native == 11.11f);
     }
 }
 
-TEMPLATE_TEST_CASE("TypeConverter native strings", "", UA_String, UA_ByteString, UA_XmlElement) {
-    TestType src = detail::allocUaString("Test123");
-    TestType dst = detail::allocUaString("Overwrite me");
+TEST_CASE_TEMPLATE("TypeConverter native strings", T, UA_String, UA_ByteString, UA_XmlElement) {
+    T src = detail::allocUaString("Test123");
+    T dst = detail::allocUaString("Overwrite me");
 
-    TypeConverter<TestType>::fromNative(src, dst);
-    REQUIRE(UA_String_equal(&src, &dst));
-    REQUIRE(src.data != dst.data);
+    TypeConverter<T>::fromNative(src, dst);
+    CHECK(UA_String_equal(&src, &dst));
+    CHECK(src.data != dst.data);
 
     UA_clear(&src, &UA_TYPES[UA_TYPES_STRING]);
     UA_clear(&dst, &UA_TYPES[UA_TYPES_STRING]);
 }
 
 TEST_CASE("TypeConverter std::string") {
-    SECTION("fromNative") {
+    SUBCASE("fromNative") {
         UA_String src = detail::allocUaString("Test123");
         std::string dst;
 
         TypeConverter<std::string>::fromNative(src, dst);
-        REQUIRE(dst == "Test123");
+        CHECK(dst == "Test123");
 
         UA_clear(&src, &UA_TYPES[UA_TYPES_STRING]);
     }
 
-    SECTION("toNative") {
+    SUBCASE("toNative") {
         std::string src{"Test123"};
         UA_String dst{};
 
         TypeConverter<std::string>::toNative(src, dst);
-        REQUIRE(detail::toString(dst) == "Test123");
+        CHECK(detail::toString(dst) == "Test123");
 
         UA_clear(&dst, &UA_TYPES[UA_TYPES_STRING]);
     }
@@ -88,18 +87,20 @@ TEST_CASE("TypeConverter std::string") {
 
 TEST_CASE("TypeConverter std::chrono::time_point") {
     using TimePoint = std::chrono::time_point<std::chrono::system_clock>;
-    SECTION("fromNative") {
+
+    SUBCASE("fromNative") {
         TimePoint src{};  // = Unix epoch
         UA_DateTime dst{};
 
         TypeConverter<TimePoint>::toNative(src, dst);
-        REQUIRE(dst == UA_DATETIME_UNIX_EPOCH);
+        CHECK(dst == UA_DATETIME_UNIX_EPOCH);
     }
-    SECTION("fromNative") {
+
+    SUBCASE("fromNative") {
         UA_DateTime src = UA_DATETIME_UNIX_EPOCH;
         TimePoint dst = std::chrono::system_clock::now();
 
         TypeConverter<TimePoint>::fromNative(src, dst);
-        REQUIRE(dst.time_since_epoch().count() == 0);
+        CHECK(dst.time_since_epoch().count() == 0);
     }
 }
