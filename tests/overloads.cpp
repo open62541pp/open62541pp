@@ -3,7 +3,7 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_string.hpp>
 
-#include "open62541pp/ostream.h"
+#include "open62541pp/overloads/ostream.h"
 
 using namespace Catch::Matchers;
 using namespace opcua;

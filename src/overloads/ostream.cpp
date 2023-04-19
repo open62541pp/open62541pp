@@ -1,4 +1,4 @@
-#include "open62541pp/ostream.h"
+#include "open62541pp/overloads/ostream.h"
 
 namespace opcua {
 

@@ -99,9 +99,9 @@ add_library(
     open62541pp
     src/Client.cpp
     src/CustomLogger.cpp
-    src/ostream.cpp
     src/Server.cpp
     src/detail/helper.cpp
+    src/overloads/ostream.cpp
     src/services/Attribute.cpp
     src/services/Browse.cpp
     src/services/NodeManagement.cpp
