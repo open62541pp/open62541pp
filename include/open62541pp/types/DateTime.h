@@ -40,6 +40,9 @@ public:
     /// Get DateTime from Unix time.
     static DateTime fromUnixTime(int64_t unixTime);
 
+    /// Offset of local time to UTC.
+    static int64_t localTimeUtcOffset();
+
     /// Convert to std::chrono::time_point.
     template <typename Clock = DefaultClock, typename Duration = UaDuration>
     std::chrono::time_point<Clock, Duration> toTimePoint() const;
@@ -69,7 +72,8 @@ std::chrono::time_point<Clock, Duration> DateTime::toTimePoint() const {
     if (dateTime < UA_DATETIME_UNIX_EPOCH) {
         return unixEpoch;
     }
-    return unixEpoch + UaDuration(dateTime - UA_DATETIME_UNIX_EPOCH);
+    const auto sinceEpoch = UaDuration(dateTime - UA_DATETIME_UNIX_EPOCH);
+    return unixEpoch + std::chrono::duration_cast<Duration>(sinceEpoch);
 }
 
 }  // namespace opcua

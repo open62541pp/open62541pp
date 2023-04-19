@@ -100,6 +100,7 @@ add_library(
     src/Client.cpp
     src/CustomLogger.cpp
     src/Helper.cpp
+    src/ostream.cpp
     src/Server.cpp
     src/services/Attribute.cpp
     src/services/Browse.cpp

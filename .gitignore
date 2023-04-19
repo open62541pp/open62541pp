@@ -1,5 +1,4 @@
-*.o
-*.so
-*.a
-.vscode/
-build*/
+/.idea/
+/.vscode/
+/build*/
+/cmake-build*/

@@ -4,17 +4,18 @@
 
 namespace opcua {
 
-/// Get current DateTime.
 DateTime DateTime::now() {
     return DateTime(UA_DateTime_now());  // NOLINT
 }
 
-/// Get DateTime from Unix time.
 DateTime DateTime::fromUnixTime(int64_t unixTime) {
     return DateTime(UA_DateTime_fromUnixTime(unixTime));  // NOLINT
 }
 
-/// Convert to Unix time.
+int64_t DateTime::localTimeUtcOffset() {
+    return UA_DateTime_localTimeUtcOffset();
+}
+
 int64_t DateTime::toUnixTime() const noexcept {
     if (get() < UA_DATETIME_UNIX_EPOCH) {
         return 0;

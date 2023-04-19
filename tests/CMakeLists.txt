@@ -17,6 +17,7 @@ add_executable(
     Client.cpp
     Helper.cpp
     Node.cpp
+    ostream.cpp
     Server.cpp
     Services.cpp
     TypeConverter.cpp
