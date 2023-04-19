@@ -13,6 +13,8 @@ jobs:
         build: ["static", "shared"]
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: recursive
       - name: Checkout open62541 version ${{ matrix.version }}
         uses: actions/checkout@v3
         with:

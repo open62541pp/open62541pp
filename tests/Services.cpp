@@ -1,11 +1,9 @@
 #include <functional>  // reference_wrapper
+#include <utility>  // pair
 #include <variant>
 #include <vector>
 
-#include <catch2/catch_test_macros.hpp>
-#include <catch2/generators/catch_generators.hpp>
-#include <catch2/matchers/catch_matchers.hpp>
-#include <catch2/matchers/catch_matchers_vector.hpp>
+#include <doctest/doctest.h>
 
 #include "open62541pp/Client.h"
 #include "open62541pp/Server.h"
@@ -13,48 +11,47 @@
 
 #include "helper/Runner.h"
 
-using namespace Catch::Matchers;
 using namespace opcua;
 
 TEST_CASE("NodeManagement (server)") {
     Server server;
     const NodeId objectsId{0, UA_NS0ID_OBJECTSFOLDER};
 
-    SECTION("Non-type nodes") {
+    SUBCASE("Non-type nodes") {
         services::addFolder(server, objectsId, {1, 1000}, "folder");
         services::addObject(server, objectsId, {1, 1001}, "object");
         services::addVariable(server, objectsId, {1, 1002}, "variable");
         services::addProperty(server, objectsId, {1, 1003}, "property");
     }
 
-    SECTION("Type nodes") {
+    SUBCASE("Type nodes") {
         services::addObjectType(server, {0, UA_NS0ID_BASEOBJECTTYPE}, {1, 1000}, "objecttype");
         services::addVariableType(
             server, {0, UA_NS0ID_BASEVARIABLETYPE}, {1, 1001}, "variabletype"
         );
     }
 
-    SECTION("Add existing node id") {
+    SUBCASE("Add existing node id") {
         services::addObject(server, objectsId, {1, 1000}, "object1");
-        REQUIRE_THROWS_WITH(
+        CHECK_THROWS_WITH(
             services::addObject(server, objectsId, {1, 1000}, "object2"), "BadNodeIdExists"
         );
     }
 
-    SECTION("Add reference") {
+    SUBCASE("Add reference") {
         services::addFolder(server, objectsId, {1, 1000}, "folder");
         services::addObject(server, objectsId, {1, 1001}, "object");
         services::addReference(server, {1, 1000}, {1, 1001}, ReferenceType::Organizes);
-        REQUIRE_THROWS_WITH(
+        CHECK_THROWS_WITH(
             services::addReference(server, {1, 1000}, {1, 1001}, ReferenceType::Organizes),
             "BadDuplicateReferenceNotAllowed"
         );
     }
 
-    SECTION("Delete node") {
+    SUBCASE("Delete node") {
         services::addObject(server, objectsId, {1, 1000}, "object");
         services::deleteNode(server, {1, 1000});
-        REQUIRE_THROWS_WITH(services::deleteNode(server, {1, 1000}), "BadNodeIdUnknown");
+        CHECK_THROWS_WITH(services::deleteNode(server, {1, 1000}), "BadNodeIdUnknown");
     }
 }
 
@@ -67,46 +64,46 @@ TEST_CASE("NodeManagement (client)") {
 
     const NodeId objectsId{0, UA_NS0ID_OBJECTSFOLDER};
 
-    SECTION("Non-type nodes") {
-        REQUIRE_NOTHROW(services::addObject(client, objectsId, {1, 1000}, "object"));
-        REQUIRE(services::readNodeClass(server, {1, 1000}) == NodeClass::Object);
+    SUBCASE("Non-type nodes") {
+        CHECK_NOTHROW(services::addObject(client, objectsId, {1, 1000}, "object"));
+        CHECK(services::readNodeClass(server, {1, 1000}) == NodeClass::Object);
 
-        REQUIRE_NOTHROW(services::addFolder(client, objectsId, {1, 1001}, "folder"));
-        REQUIRE(services::readNodeClass(server, {1, 1001}) == NodeClass::Object);
+        CHECK_NOTHROW(services::addFolder(client, objectsId, {1, 1001}, "folder"));
+        CHECK(services::readNodeClass(server, {1, 1001}) == NodeClass::Object);
 
-        REQUIRE_NOTHROW(services::addVariable(client, objectsId, {1, 1002}, "variable"));
-        REQUIRE(services::readNodeClass(server, {1, 1002}) == NodeClass::Variable);
+        CHECK_NOTHROW(services::addVariable(client, objectsId, {1, 1002}, "variable"));
+        CHECK(services::readNodeClass(server, {1, 1002}) == NodeClass::Variable);
 
-        REQUIRE_NOTHROW(services::addProperty(client, objectsId, {1, 1003}, "property"));
-        REQUIRE(services::readNodeClass(server, {1, 1003}) == NodeClass::Variable);
+        CHECK_NOTHROW(services::addProperty(client, objectsId, {1, 1003}, "property"));
+        CHECK(services::readNodeClass(server, {1, 1003}) == NodeClass::Variable);
     }
 
-    SECTION("Type nodes") {
-        REQUIRE_NOTHROW(
+    SUBCASE("Type nodes") {
+        CHECK_NOTHROW(
             services::addObjectType(client, {0, UA_NS0ID_BASEOBJECTTYPE}, {1, 1000}, "objecttype")
         );
-        REQUIRE(services::readNodeClass(server, {1, 1000}) == NodeClass::ObjectType);
+        CHECK(services::readNodeClass(server, {1, 1000}) == NodeClass::ObjectType);
 
-        REQUIRE_NOTHROW(services::addVariableType(
+        CHECK_NOTHROW(services::addVariableType(
             client, {0, UA_NS0ID_BASEVARIABLETYPE}, {1, 1001}, "variabletype"
         ));
-        REQUIRE(services::readNodeClass(server, {1, 1001}) == NodeClass::VariableType);
+        CHECK(services::readNodeClass(server, {1, 1001}) == NodeClass::VariableType);
     }
 
-    SECTION("Add reference") {
+    SUBCASE("Add reference") {
         services::addFolder(client, objectsId, {1, 1000}, "folder");
         services::addObject(client, objectsId, {1, 1001}, "object");
         services::addReference(client, {1, 1000}, {1, 1001}, ReferenceType::Organizes);
-        REQUIRE_THROWS_WITH(
+        CHECK_THROWS_WITH(
             services::addReference(client, {1, 1000}, {1, 1001}, ReferenceType::Organizes),
             "BadDuplicateReferenceNotAllowed"
         );
     }
 
-    SECTION("Delete node") {
+    SUBCASE("Delete node") {
         services::addObject(client, objectsId, {1, 1000}, "object");
         services::deleteNode(client, {1, 1000});
-        REQUIRE_THROWS_WITH(services::deleteNode(client, {1, 1000}), "BadNodeIdUnknown");
+        CHECK_THROWS_WITH(services::deleteNode(client, {1, 1000}), "BadNodeIdUnknown");
     }
 }
 
@@ -114,91 +111,93 @@ TEST_CASE("Attribute (server)") {
     Server server;
     const NodeId objectsId{0, UA_NS0ID_OBJECTSFOLDER};
 
-    SECTION("Read/write node attributes") {
+    SUBCASE("Read/write node attributes") {
         const NodeId id{1, "testAttributes"};
         services::addVariable(server, objectsId, id, "testAttributes");
 
         // read default attributes
-        REQUIRE(services::readNodeId(server, id) == id);
-        REQUIRE(services::readNodeClass(server, id) == NodeClass::Variable);
-        REQUIRE(services::readBrowseName(server, id) == "testAttributes");
-        // REQUIRE(services::readDisplayName(server, id) == LocalizedText("", "testAttributes"));
-        REQUIRE(services::readDescription(server, id).getText().empty());
-        REQUIRE(services::readDescription(server, id).getLocale().empty());
-        REQUIRE(services::readWriteMask(server, id) == 0);
+        CHECK(services::readNodeId(server, id) == id);
+        CHECK(services::readNodeClass(server, id) == NodeClass::Variable);
+        CHECK(services::readBrowseName(server, id) == "testAttributes");
+        //_EQ CHECK(services::readDisplayName(server, id), LocalizedText("", "testAttributes"));
+        CHECK(services::readDescription(server, id).getText().empty());
+        CHECK(services::readDescription(server, id).getLocale().empty());
+        CHECK(services::readWriteMask(server, id) == 0);
         const uint32_t adminUserWriteMask = ~0;  // all bits set
-        REQUIRE(services::readUserWriteMask(server, id) == adminUserWriteMask);
-        REQUIRE(services::readDataType(server, id) == NodeId(0, UA_NS0ID_BASEDATATYPE));
-        REQUIRE(services::readValueRank(server, id) == ValueRank::Any);
-        REQUIRE(services::readArrayDimensions(server, id).empty());
-        REQUIRE(services::readAccessLevel(server, id) == UA_ACCESSLEVELMASK_READ);
+        CHECK(services::readUserWriteMask(server, id) == adminUserWriteMask);
+        CHECK(services::readDataType(server, id) == NodeId(0, UA_NS0ID_BASEDATATYPE));
+        CHECK(services::readValueRank(server, id) == ValueRank::Any);
+        CHECK(services::readArrayDimensions(server, id).empty());
+        CHECK(services::readAccessLevel(server, id) == UA_ACCESSLEVELMASK_READ);
         const uint8_t adminUserAccessLevel = ~0;  // all bits set
-        REQUIRE(services::readUserAccessLevel(server, id) == adminUserAccessLevel);
-        REQUIRE(services::readMinimumSamplingInterval(server, id) == 0.0);
+        CHECK(services::readUserAccessLevel(server, id) == adminUserAccessLevel);
+        CHECK(services::readMinimumSamplingInterval(server, id) == 0.0);
 
         // write new attributes
-        REQUIRE_NOTHROW(services::writeDisplayName(server, id, {"en-US", "newDisplayName"}));
-        REQUIRE_NOTHROW(services::writeDescription(server, id, {"de-DE", "newDescription"}));
-        REQUIRE_NOTHROW(services::writeWriteMask(server, id, 11));
-        REQUIRE_NOTHROW(services::writeDataType(server, id, NodeId{0, 2}));
-        REQUIRE_NOTHROW(services::writeValueRank(server, id, ValueRank::TwoDimensions));
-        REQUIRE_NOTHROW(services::writeArrayDimensions(server, id, {3, 2}));
+        CHECK_NOTHROW(services::writeDisplayName(server, id, {"en-US", "newDisplayName"}));
+        CHECK_NOTHROW(services::writeDescription(server, id, {"de-DE", "newDescription"}));
+        CHECK_NOTHROW(services::writeWriteMask(server, id, 11));
+        CHECK_NOTHROW(services::writeDataType(server, id, NodeId{0, 2}));
+        CHECK_NOTHROW(services::writeValueRank(server, id, ValueRank::TwoDimensions));
+        CHECK_NOTHROW(services::writeArrayDimensions(server, id, {3, 2}));
         const uint8_t newAccessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
-        REQUIRE_NOTHROW(services::writeAccessLevel(server, id, newAccessLevel));
-        REQUIRE_NOTHROW(services::writeMinimumSamplingInterval(server, id, 10.0));
+        CHECK_NOTHROW(services::writeAccessLevel(server, id, newAccessLevel));
+        CHECK_NOTHROW(services::writeMinimumSamplingInterval(server, id, 10.0));
 
         // read new attributes
-        REQUIRE(services::readDisplayName(server, id) == LocalizedText("en-US", "newDisplayName"));
-        REQUIRE(services::readDescription(server, id) == LocalizedText("de-DE", "newDescription"));
-        REQUIRE(services::readWriteMask(server, id) == 11);
-        REQUIRE(services::readDataType(server, id) == NodeId(0, 2));
-        REQUIRE(services::readValueRank(server, id) == ValueRank::TwoDimensions);
-        REQUIRE(services::readArrayDimensions(server, id).size() == 2);
-        REQUIRE(services::readArrayDimensions(server, id).at(0) == 3);
-        REQUIRE(services::readArrayDimensions(server, id).at(1) == 2);
-        REQUIRE(services::readAccessLevel(server, id) == newAccessLevel);
-        REQUIRE(services::readMinimumSamplingInterval(server, id) == 10.0);
+        CHECK(services::readDisplayName(server, id) == LocalizedText("en-US", "newDisplayName"));
+        CHECK(services::readDescription(server, id) == LocalizedText("de-DE", "newDescription"));
+        CHECK(services::readWriteMask(server, id) == 11);
+        CHECK(services::readDataType(server, id) == NodeId(0, 2));
+        CHECK(services::readValueRank(server, id) == ValueRank::TwoDimensions);
+        CHECK(services::readArrayDimensions(server, id).size() == 2);
+        CHECK(services::readArrayDimensions(server, id).at(0) == 3);
+        CHECK(services::readArrayDimensions(server, id).at(1) == 2);
+        CHECK(services::readAccessLevel(server, id) == newAccessLevel);
+        CHECK(services::readMinimumSamplingInterval(server, id) == 10.0);
     }
 
-    SECTION("Read/write reference node attributes") {
+    SUBCASE("Read/write reference node attributes") {
         const NodeId id{0, UA_NS0ID_REFERENCES};
 
         // read default attributes
-        REQUIRE(services::readIsAbstract(server, id) == true);
-        REQUIRE(services::readSymmetric(server, id) == true);
-        REQUIRE(services::readInverseName(server, id) == LocalizedText("", "References"));
+        CHECK(services::readIsAbstract(server, id) == true);
+        CHECK(services::readSymmetric(server, id) == true);
+        CHECK(services::readInverseName(server, id) == LocalizedText("", "References"));
 
         // write new attributes
-        REQUIRE_NOTHROW(services::writeIsAbstract(server, id, false));
-        REQUIRE_NOTHROW(services::writeSymmetric(server, id, false));
-        REQUIRE_NOTHROW(services::writeInverseName(server, id, LocalizedText("", "New")));
+        CHECK_NOTHROW(services::writeIsAbstract(server, id, false));
+        CHECK_NOTHROW(services::writeSymmetric(server, id, false));
+        CHECK_NOTHROW(services::writeInverseName(server, id, LocalizedText("", "New")));
 
         // read new attributes
-        REQUIRE(services::readIsAbstract(server, id) == false);
-        REQUIRE(services::readSymmetric(server, id) == false);
-        REQUIRE(services::readInverseName(server, id) == LocalizedText("", "New"));
+        CHECK(services::readIsAbstract(server, id) == false);
+        CHECK(services::readSymmetric(server, id) == false);
+        CHECK(services::readInverseName(server, id) == LocalizedText("", "New"));
     }
 
-    SECTION("Value rank and array dimension combinations") {
+    SUBCASE("Value rank and array dimension combinations") {
         const NodeId id{1, "testDimensions"};
         services::addVariable(server, objectsId, id, "testDimensions");
 
-        SECTION("Unspecified dimension (ValueRank <= 0)") {
-            auto valueRank = GENERATE(
+        SUBCASE("Unspecified dimension (ValueRank <= 0)") {
+            const std::vector<ValueRank> valueRanks = {
                 ValueRank::Any,
                 ValueRank::Scalar,
                 ValueRank::ScalarOrOneDimension,
-                ValueRank::OneOrMoreDimensions
-            );
-            CAPTURE(valueRank);
-            services::writeValueRank(server, id, valueRank);
-            CHECK_NOTHROW(services::writeArrayDimensions(server, id, {}));
-            CHECK_THROWS(services::writeArrayDimensions(server, id, {1}));
-            CHECK_THROWS(services::writeArrayDimensions(server, id, {1, 2}));
-            CHECK_THROWS(services::writeArrayDimensions(server, id, {1, 2, 3}));
+                ValueRank::OneOrMoreDimensions,
+            };
+            for (auto valueRank : valueRanks) {
+                CAPTURE(valueRank);
+                services::writeValueRank(server, id, valueRank);
+                CHECK_NOTHROW(services::writeArrayDimensions(server, id, {}));
+                CHECK_THROWS(services::writeArrayDimensions(server, id, {1}));
+                CHECK_THROWS(services::writeArrayDimensions(server, id, {1, 2}));
+                CHECK_THROWS(services::writeArrayDimensions(server, id, {1, 2, 3}));
+            }
         }
 
-        SECTION("OneDimension") {
+        SUBCASE("OneDimension") {
             services::writeValueRank(server, id, ValueRank::OneDimension);
             services::writeArrayDimensions(server, id, {1});
             CHECK_THROWS(services::writeArrayDimensions(server, id, {}));
@@ -206,7 +205,7 @@ TEST_CASE("Attribute (server)") {
             CHECK_THROWS(services::writeArrayDimensions(server, id, {1, 2, 3}));
         }
 
-        SECTION("TwoDimensions") {
+        SUBCASE("TwoDimensions") {
             services::writeValueRank(server, id, ValueRank::TwoDimensions);
             services::writeArrayDimensions(server, id, {1, 2});
             CHECK_THROWS(services::writeArrayDimensions(server, id, {}));
@@ -214,7 +213,7 @@ TEST_CASE("Attribute (server)") {
             CHECK_THROWS(services::writeArrayDimensions(server, id, {1, 2, 3}));
         }
 
-        SECTION("ThreeDimensions") {
+        SUBCASE("ThreeDimensions") {
             services::writeValueRank(server, id, ValueRank::ThreeDimensions);
             services::writeArrayDimensions(server, id, {1, 2, 3});
             CHECK_THROWS(services::writeArrayDimensions(server, id, {}));
@@ -223,7 +222,7 @@ TEST_CASE("Attribute (server)") {
         }
     }
 
-    SECTION("Read/write value") {
+    SUBCASE("Read/write value") {
         const NodeId id{1, "testValue"};
         services::addVariable(server, objectsId, id, "testValue");
 
@@ -236,7 +235,7 @@ TEST_CASE("Attribute (server)") {
         CHECK(variantRead.getScalar<double>() == 11.11);
     }
 
-    SECTION("Read/write data value") {
+    SUBCASE("Read/write data value") {
         const NodeId id{1, "testDataValue"};
         services::addVariable(server, objectsId, id, "testDataValue");
 
@@ -248,12 +247,12 @@ TEST_CASE("Attribute (server)") {
         DataValue valueRead;
         services::readDataValue(server, id, valueRead);
 
-        CHECK(valueRead->hasValue);
-        CHECK(valueRead->hasServerTimestamp);
-        CHECK(valueRead->hasSourceTimestamp);
-        CHECK(valueRead->hasServerPicoseconds);
-        CHECK(valueRead->hasSourcePicoseconds);
-        CHECK_FALSE(valueRead->hasStatus);  // doesn't contain error code on success
+        CHECK_EQ(valueRead->hasValue, true);
+        CHECK_EQ(valueRead->hasServerTimestamp, true);
+        CHECK_EQ(valueRead->hasSourceTimestamp, true);
+        CHECK_EQ(valueRead->hasServerPicoseconds, true);
+        CHECK_EQ(valueRead->hasSourcePicoseconds, true);
+        CHECK_EQ(valueRead->hasStatus, false);  // doesn't contain error code on success
 
         CHECK(valueRead.getValue().value().getScalar<int>() == 11);
         CHECK(valueRead->sourceTimestamp == valueWrite->sourceTimestamp);
@@ -280,16 +279,19 @@ TEST_CASE("Attribute (server & client)") {
     CHECK(services::readBrowseName(server, id) == services::readBrowseName(client, id));
 
     // generate test matrix of possible reader/writer combinations
-    // 1. writer: server, reader: server
-    // 2. writer: server, reader: client
-    // 3. writer: client, reader: server
-    // 4. writer: client, reader: client
+    // https://github.com/doctest/doctest/blob/v2.4.11/doc/markdown/parameterized-tests.md
     using ServerRef = std::reference_wrapper<Server>;
     using ClientRef = std::reference_wrapper<Client>;
     using ServerOrClientRef = std::variant<ServerRef, ClientRef>;
 
-    auto writerVar = GENERATE_REF(as<ServerOrClientRef>{}, std::ref(server), std::ref(client));
-    auto readerVar = GENERATE_REF(as<ServerOrClientRef>{}, std::ref(server), std::ref(client));
+    ServerOrClientRef writerVar{server};
+    ServerOrClientRef readerVar{server};
+    // clang-format off
+    SUBCASE("server/server") { writerVar = server; readerVar = server; }
+    SUBCASE("server/client") { writerVar = server; readerVar = client; }
+    SUBCASE("client/server") { writerVar = client; readerVar = server; }
+    SUBCASE("client/client") { writerVar = client; readerVar = client; }
+    // clang-format on
 
     CAPTURE(std::holds_alternative<ServerRef>(writerVar));
     CAPTURE(std::holds_alternative<ClientRef>(writerVar));
@@ -326,16 +328,16 @@ TEST_CASE("Attribute (server & client)") {
             CHECK_NOTHROW(services::writeValue(writer, id, variant));
             Variant variantRead;
             CHECK_NOTHROW(services::readValue(reader, id, variantRead));
-            CHECK_THAT(variantRead.getArrayCopy<double>(), Equals(array));
+            CHECK(variantRead.getArrayCopy<double>() == array);
 
             const auto dataValue = DataValue::fromArray(array);
             CHECK_NOTHROW(services::writeDataValue(writer, id, dataValue));
             DataValue dataValueRead;
             CHECK_NOTHROW(services::readDataValue(reader, id, dataValueRead));
-            CHECK(dataValueRead->hasValue);
-            CHECK(dataValueRead->hasSourceTimestamp);
-            CHECK(dataValueRead->hasServerTimestamp);
-            CHECK_THAT(dataValueRead.getValuePtr()->getArrayCopy<double>(), Equals(array));
+            CHECK_EQ(dataValueRead->hasValue, true);
+            CHECK_EQ(dataValueRead->hasSourceTimestamp, true);
+            CHECK_EQ(dataValueRead->hasServerTimestamp, true);
+            CHECK(dataValueRead.getValuePtr()->getArrayCopy<double>() == array);
         },
         writerVar,
         readerVar
@@ -345,12 +347,12 @@ TEST_CASE("Attribute (server & client)") {
 TEST_CASE("Browse") {
     Server server;
 
-    SECTION("Browse child") {
+    SUBCASE("Browse child") {
         const NodeId rootId{0, UA_NS0ID_ROOTFOLDER};
 
-        REQUIRE_THROWS(services::browseChild(server, rootId, {}));
-        REQUIRE_THROWS(services::browseChild(server, rootId, {{0, "Invalid"}}));
-        REQUIRE(
+        CHECK_THROWS(services::browseChild(server, rootId, {}));
+        CHECK_THROWS(services::browseChild(server, rootId, {{0, "Invalid"}}));
+        CHECK(
             services::browseChild(server, rootId, {{0, "Types"}, {0, "ObjectTypes"}}) ==
             NodeId{0, UA_NS0ID_OBJECTTYPESFOLDER}
         );

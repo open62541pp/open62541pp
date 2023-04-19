@@ -1,6 +1,6 @@
 #include <string_view>
 
-#include <catch2/catch_test_macros.hpp>
+#include <doctest/doctest.h>
 
 #include "open62541pp/Client.h"
 #include "open62541pp/Server.h"
@@ -17,9 +17,9 @@ TEST_CASE("Client discovery") {
 
     Client client;
 
-    SECTION("Find servers") {
+    SUBCASE("Find servers") {
         const auto results = client.findServers(localServerUrl);
-        REQUIRE(results.size() == 1);
+        CHECK(results.size() == 1);
 
         const auto& result = results[0];
         CHECK(result.getApplicationUri() == String("urn:open62541.server.application"));
@@ -28,9 +28,9 @@ TEST_CASE("Client discovery") {
         CHECK(result.getDiscoveryUrls().size() == 1);
     }
 
-    SECTION("Get endpoints") {
+    SUBCASE("Get endpoints") {
         const auto endpoints = client.getEndpoints(localServerUrl);
-        REQUIRE(endpoints.size() == 1);
+        CHECK(endpoints.size() == 1);
 
         const auto& endpoint = endpoints[0];
         CHECK(endpoint.getEndpointUrl() == String(localServerUrl));
@@ -53,13 +53,13 @@ TEST_CASE("Client anonymous login") {
 
     Client client;
 
-    SECTION("Connect/disconnect") {
-        client.connect(localServerUrl);
-        client.disconnect();
+    SUBCASE("Connect/disconnect") {
+        CHECK_NOTHROW(client.connect(localServerUrl));
+        CHECK_NOTHROW(client.disconnect());
     }
 
-    SECTION("Connect with username/password should fail") {
-        REQUIRE_THROWS(client.connect(localServerUrl, {"username", "password"}));
+    SUBCASE("Connect with username/password should fail") {
+        CHECK_THROWS(client.connect(localServerUrl, {"username", "password"}));
     }
 }
 
@@ -70,12 +70,12 @@ TEST_CASE("Client username/password login") {
 
     Client client;
 
-    SECTION("Connect with anonymous should fail") {
-        REQUIRE_THROWS(client.connect(localServerUrl));
+    SUBCASE("Connect with anonymous should fail") {
+        CHECK_THROWS(client.connect(localServerUrl));
     }
 
-    SECTION("Connect with username/password should succeed") {
-        client.connect(localServerUrl, {"username", "password"});
-        client.disconnect();
+    SUBCASE("Connect with username/password should succeed") {
+        CHECK_NOTHROW(client.connect(localServerUrl, {"username", "password"}));
+        CHECK_NOTHROW(client.disconnect());
     }
 }
