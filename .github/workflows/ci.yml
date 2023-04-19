@@ -60,8 +60,8 @@ jobs:
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         with:
+          token: ${{ secrets.CODECOV_TOKEN }}
           files: build/coverage.xml
-          fail_ci_if_error: true
 
   windows:
     # https://github.com/actions/runner-images/blob/main/images/win/Windows2019-Readme.md
