@@ -141,12 +141,18 @@ if(UAPP_BUILD_TESTS AND UAPP_ENABLE_COVERAGE)
             COMMENT "Generate coverage report"
             WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         )
+        add_custom_target(
+            open62541pp_coverage_report_xml
+            COMMAND ${GCOVR_EXE} ${gcovr_args} "--xml" "${CMAKE_BINARY_DIR}/coverage.xml"
+            COMMENT "Generate coverage report (xml/cobertura)"
+            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        )
         set(coverage_html_output_dir "${CMAKE_BINARY_DIR}/coverage_html")
         make_directory(${coverage_html_output_dir})
         add_custom_target(
             open62541pp_coverage_report_html
             COMMAND ${GCOVR_EXE} ${gcovr_args} "--html-details" "${coverage_html_output_dir}/index.html"
-            COMMENT "Generate HTML coverage report"
+            COMMENT "Generate coverage report (html)"
             WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         )
     endif()
