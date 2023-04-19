@@ -14,6 +14,7 @@ endif()
 
 add_executable(
     open62541pp_tests
+    Client.cpp
     Helper.cpp
     Node.cpp
     ostream.cpp

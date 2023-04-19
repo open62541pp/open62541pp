@@ -4,6 +4,7 @@
     <tab type="mainpage" visible="yes" title="Overview"/>
 
     <tab type="user" url="@ref opcua::Server" title="Server"/>
+    <tab type="user" url="@ref opcua::Client" title="Client"/>
     <tab type="user" url="@ref opcua::Node" title="Node"/>
     <tab type="user" url="@ref TypeWrapper" title="Wrapper"/>
     <tab type="user" url="@ref Services" title="Services"/>

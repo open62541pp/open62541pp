@@ -6,6 +6,7 @@
 #include <string_view>
 #include <vector>
 
+#include "open62541pp/Auth.h"
 #include "open62541pp/Logger.h"
 #include "open62541pp/types/NodeId.h"
 
@@ -17,12 +18,6 @@ namespace opcua {
 // forward declaration
 template <typename ServerOrClient>
 class Node;
-
-/// Login credentials.
-struct Login {
-    std::string username;
-    std::string password;
-};
 
 /**
  * High-level server class.

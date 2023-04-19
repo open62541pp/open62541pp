@@ -1,5 +1,7 @@
 #pragma once
 
+#include "open62541pp/Auth.h"
+#include "open62541pp/Client.h"
 #include "open62541pp/Common.h"
 #include "open62541pp/Comparison.h"
 #include "open62541pp/ErrorHandling.h"
@@ -13,5 +15,8 @@
 #include "open62541pp/ostream.h"
 #include "open62541pp/services/services.h"
 #include "open62541pp/types/Builtin.h"
+#include "open62541pp/types/Composed.h"
+#include "open62541pp/types/DataValue.h"
+#include "open62541pp/types/DateTime.h"
 #include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"

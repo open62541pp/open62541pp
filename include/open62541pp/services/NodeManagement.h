@@ -7,6 +7,7 @@
 
 // forward declarations
 namespace opcua {
+class Client;
 class Server;
 }  // namespace opcua
 
@@ -19,12 +20,13 @@ namespace opcua::services {
  */
 
 /**
- * Add child object to node.
+ * Add child object.
  * @exception BadStatus
  * @ingroup NodeManagement
  */
+template <typename T>
 void addObject(
-    Server& server,
+    T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -33,27 +35,29 @@ void addObject(
 );
 
 /**
- * Add child folder to node.
+ * Add child folder.
  * @exception BadStatus
  * @ingroup NodeManagement
  */
+template <typename T>
 inline void addFolder(
-    Server& server,
+    T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
     ReferenceType referenceType = ReferenceType::HasComponent
 ) {
-    addObject(server, parentId, id, browseName, {0, UA_NS0ID_FOLDERTYPE}, referenceType);
+    addObject(serverOrClient, parentId, id, browseName, {0, UA_NS0ID_FOLDERTYPE}, referenceType);
 }
 
 /**
- * Add child variable to node.
+ * Add child variable.
  * @exception BadStatus
  * @ingroup NodeManagement
  */
+template <typename T>
 void addVariable(
-    Server& server,
+    T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -62,25 +66,32 @@ void addVariable(
 );
 
 /**
- * Add child property to node.
+ * Add child property.
  * @exception BadStatus
  * @ingroup NodeManagement
  */
+template <typename T>
 inline void addProperty(
-    Server& server, const NodeId& parentId, const NodeId& id, std::string_view browseName
+    T& serverOrClient, const NodeId& parentId, const NodeId& id, std::string_view browseName
 ) {
     addVariable(
-        server, parentId, id, browseName, {0, UA_NS0ID_PROPERTYTYPE}, ReferenceType::HasProperty
+        serverOrClient,
+        parentId,
+        id,
+        browseName,
+        {0, UA_NS0ID_PROPERTYTYPE},
+        ReferenceType::HasProperty
     );
 }
 
 /**
- * Add child object type to node.
+ * Add child object type.
  * @exception BadStatus
  * @ingroup NodeManagement
  */
+template <typename T>
 void addObjectType(
-    Server& server,
+    T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -88,12 +99,13 @@ void addObjectType(
 );
 
 /**
- * Add child variable type to node.
+ * Add child variable type.
  * @exception BadStatus
  * @ingroup NodeManagement
  */
+template <typename T>
 void addVariableType(
-    Server& server,
+    T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -102,12 +114,13 @@ void addVariableType(
 );
 
 /**
- * Add reference to node.
+ * Add reference.
  * @exception BadStatus
  * @ingroup NodeManagement
  */
+template <typename T>
 void addReference(
-    Server& server,
+    T& serverOrClient,
     const NodeId& sourceId,
     const NodeId& targetId,
     ReferenceType referenceType,
@@ -119,9 +132,10 @@ void addReference(
  * @exception BadStatus
  * @ingroup NodeManagement
  */
-inline void addModellingRule(Server& server, const NodeId& id, ModellingRule rule) {
+template <typename T>
+inline void addModellingRule(T& serverOrClient, const NodeId& id, ModellingRule rule) {
     addReference(
-        server, id, {0, static_cast<uint32_t>(rule)}, ReferenceType::HasModellingRule, true
+        serverOrClient, id, {0, static_cast<uint32_t>(rule)}, ReferenceType::HasModellingRule, true
     );
 }
 
@@ -130,7 +144,8 @@ inline void addModellingRule(Server& server, const NodeId& id, ModellingRule rul
  * @exception BadStatus
  * @ingroup NodeManagement
  */
-void deleteNode(Server& server, const NodeId& id, bool deleteReferences = true);
+template <typename T>
+void deleteNode(T& serverOrClient, const NodeId& id, bool deleteReferences = true);
 
 // TODO: deleteReferences
 

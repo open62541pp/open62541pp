@@ -1,9 +1,6 @@
 #include "open62541pp/Server.h"
 
 #include <atomic>
-#include <cassert>
-#include <cstdarg>  // va_list, va_copy
-#include <cstdio>
 #include <mutex>
 #include <utility>  // move
 
@@ -14,6 +11,7 @@
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Variant.h"
 
+#include "CustomLogger.h"
 #include "open62541_impl.h"
 #include "version.h"
 
@@ -34,7 +32,8 @@ inline static UA_ServerConfig* getConfig(Server* server) noexcept {
 class Server::Connection {
 public:
     Connection()
-        : server_(UA_Server_new()) {}
+        : server_(UA_Server_new()),
+          logger_(getConfig(server_)->logger) {}
 
     ~Connection() {
         // don't use stop method here because it might throw an exception
@@ -97,34 +96,7 @@ public:
     }
 
     void setLogger(Logger logger) {
-        logger_ = std::move(logger);
-        auto* config = getConfig(server_);
-        config->logger.log = log;
-        config->logger.context = this;
-        config->logger.clear = nullptr;
-    }
-
-    static void log(
-        void* context, UA_LogLevel level, UA_LogCategory category, const char* msg, va_list args
-    ) {
-        assert(context != nullptr);  // NOLINT
-
-        const auto* instance = static_cast<Connection*>(context);
-        assert(instance->logger_ != nullptr);  // NOLINT
-
-        // convert printf format + args to string_view
-        va_list tmp;  // NOLINT
-        va_copy(tmp, args);  // NOLINT
-        const int charsToWrite = std::vsnprintf(nullptr, 0, msg, tmp);  // NOLINT
-        va_end(tmp);  // NOLINT
-        std::vector<char> buffer(charsToWrite + 1);
-        const int charsWritten = std::vsnprintf(buffer.data(), buffer.size(), msg, args);
-        if (charsWritten < 0) {
-            return;
-        }
-        const std::string_view sv(buffer.data(), buffer.size());
-
-        instance->logger_(static_cast<LogLevel>(level), static_cast<LogCategory>(category), sv);
+        logger_.setLogger(std::move(logger));
     }
 
     UA_Server* handle() noexcept {
@@ -135,7 +107,7 @@ private:
     UA_Server* server_;
     std::atomic<bool> running_{false};
     std::mutex mutex_;
-    Logger logger_{nullptr};
+    CustomLogger logger_;
 };
 
 /* ------------------------------------------- Server ------------------------------------------- */
