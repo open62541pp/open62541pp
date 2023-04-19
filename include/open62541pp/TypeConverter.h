@@ -316,7 +316,7 @@ struct TypeConverter<std::chrono::time_point<Clock, Duration>> {
     using ValidTypes = TypeList<Type::DateTime>;
 
     static void fromNative(const NativeType& src, ValueType& dst) {
-        dst = DateTime(src).toTimePoint();
+        dst = DateTime(src).toTimePoint<Clock, Duration>();
     }
 
     static void toNative(const ValueType& src, NativeType& dst) {

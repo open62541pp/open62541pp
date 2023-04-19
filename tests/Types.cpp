@@ -77,7 +77,7 @@ TEST_CASE("DateTime") {
         REQUIRE(dt.get() == 0);
         REQUIRE(*dt.handle() == 0);
         // UA time starts before Unix time -> 0
-        REQUIRE(dt.toTimePoint() == std::chrono::system_clock::time_point{});
+        REQUIRE(dt.toTimePoint().time_since_epoch().count() == 0);
         REQUIRE(dt.toUnixTime() == 0);
 
         const auto dts = dt.toStruct();
