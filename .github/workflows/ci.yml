@@ -57,11 +57,11 @@ jobs:
         run: cmake --build build --target open62541pp_coverage_report
       - name: Coverage report (xml)
         run: cmake --build build --target open62541pp_coverage_report_xml
-      - name: Coveralls
-        uses: coverallsapp/github-action@v2
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
         with:
-          file: build/coverage.xml
-          format: cobertura
+          files: build/coverage.xml
+          fail_ci_if_error: true
 
   windows:
     # https://github.com/actions/runner-images/blob/main/images/win/Windows2019-Readme.md
