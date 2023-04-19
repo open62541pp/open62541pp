@@ -4,6 +4,7 @@
 #include <cstdarg>  // va_list, va_copy
 #include <cstdio>
 #include <utility>  // move
+#include <vector>
 
 namespace opcua {
 
