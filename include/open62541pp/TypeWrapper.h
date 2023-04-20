@@ -130,15 +130,9 @@ public:
         std::swap(data_, other);
     }
 
-    /// Get type as type index.
+    /// Get type as type index of the ::UA_TYPES array.
     static constexpr uint16_t getTypeIndex() {
         return typeIndex;
-    }
-
-    /// Get type as Type enum (only for builtin types).
-    static constexpr Type getType() {
-        static_assert(typeIndex < UA_TYPES_COUNT, "Only possible for builtin types");
-        return static_cast<Type>(typeIndex);
     }
 
     /// Get type as UA_DataType object.

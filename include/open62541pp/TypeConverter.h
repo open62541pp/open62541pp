@@ -279,9 +279,11 @@ template <typename WrapperType>
 struct TypeConverter<WrapperType, std::enable_if_t<detail::IsTypeWrapper<WrapperType>::value>> {
     using NativeConverter = TypeConverter<typename WrapperType::NativeType>;
 
+    // static_assert(WrapperType::getTypeIndex() < detail::builtinTypesCount);
+
     using ValueType = WrapperType;
     using NativeType = typename WrapperType::NativeType;
-    using ValidTypes = TypeList<WrapperType::getType()>;
+    using ValidTypes = TypeList<static_cast<Type>(WrapperType::getTypeIndex())>;  // dangerous!
 
     static void fromNative(const NativeType& src, ValueType& dst) {
         dst = WrapperType(src);
