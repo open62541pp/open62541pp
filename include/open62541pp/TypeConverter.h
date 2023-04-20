@@ -211,67 +211,31 @@ struct TypeConverterNative {
 
 }  // namespace detail
 
-template <>
-struct TypeConverter<UA_Boolean> : detail::TypeConverterNative<UA_Boolean, Type::Boolean> {};
+// NOLINTNEXTLINE
+#define UAPP_TYPECONVERTER_NATIVE(NativeType, ...)                                                 \
+    template <>                                                                                    \
+    struct TypeConverter<NativeType> : detail::TypeConverterNative<NativeType, __VA_ARGS__> {};
 
-template <>
-struct TypeConverter<UA_SByte> : detail::TypeConverterNative<UA_SByte, Type::SByte> {};
-
-template <>
-struct TypeConverter<UA_Byte> : detail::TypeConverterNative<UA_Byte, Type::Byte> {};
-
-template <>
-struct TypeConverter<UA_Int16> : detail::TypeConverterNative<UA_Int16, Type::Int16> {};
-
-template <>
-struct TypeConverter<UA_UInt16> : detail::TypeConverterNative<UA_UInt16, Type::UInt16> {};
-
-template <>
-struct TypeConverter<UA_Int32> : detail::TypeConverterNative<UA_Int32, Type::Int32> {};
-
-template <>
-struct TypeConverter<UA_UInt32> : detail::TypeConverterNative<UA_UInt32, Type::UInt32> {};
-
-template <>
-struct TypeConverter<UA_Int64> : detail::TypeConverterNative<UA_Int64, Type::Int64> {};
-
-template <>
-struct TypeConverter<UA_UInt64> : detail::TypeConverterNative<UA_UInt64, Type::UInt64> {};
-
-template <>
-struct TypeConverter<UA_Float> : detail::TypeConverterNative<UA_Float, Type::Float> {};
-
-template <>
-struct TypeConverter<UA_Double> : detail::TypeConverterNative<UA_Double, Type::Double> {};
-
+UAPP_TYPECONVERTER_NATIVE(UA_Boolean, Type::Boolean)
+UAPP_TYPECONVERTER_NATIVE(UA_SByte, Type::SByte)
+UAPP_TYPECONVERTER_NATIVE(UA_Byte, Type::Byte)
+UAPP_TYPECONVERTER_NATIVE(UA_Int16, Type::Int16)
+UAPP_TYPECONVERTER_NATIVE(UA_UInt16, Type::UInt16)
+UAPP_TYPECONVERTER_NATIVE(UA_Int32, Type::Int32)
+UAPP_TYPECONVERTER_NATIVE(UA_UInt32, Type::UInt32)
+UAPP_TYPECONVERTER_NATIVE(UA_Int64, Type::Int64)
+UAPP_TYPECONVERTER_NATIVE(UA_UInt64, Type::UInt64)
+UAPP_TYPECONVERTER_NATIVE(UA_Float, Type::Float)
+UAPP_TYPECONVERTER_NATIVE(UA_Double, Type::Double)
 static_assert(std::is_same_v<UA_String, UA_ByteString>);
 static_assert(std::is_same_v<UA_String, UA_XmlElement>);
-
-template <>
-struct TypeConverter<UA_String>
-    : detail::TypeConverterNative<UA_String, Type::String, Type::ByteString, Type::XmlElement> {};
-
-template <>
-struct TypeConverter<UA_Guid> : detail::TypeConverterNative<UA_Guid, Type::Guid> {};
-
-template <>
-struct TypeConverter<UA_NodeId> : detail::TypeConverterNative<UA_NodeId, Type::NodeId> {};
-
-template <>
-struct TypeConverter<UA_ExpandedNodeId>
-    : detail::TypeConverterNative<UA_ExpandedNodeId, Type::ExpandedNodeId> {};
-
-template <>
-struct TypeConverter<UA_QualifiedName>
-    : detail::TypeConverterNative<UA_QualifiedName, Type::QualifiedName> {};
-
-template <>
-struct TypeConverter<UA_LocalizedText>
-    : detail::TypeConverterNative<UA_LocalizedText, Type::LocalizedText> {};
-
-template <>
-struct TypeConverter<UA_ExtensionObject>
-    : detail::TypeConverterNative<UA_ExtensionObject, Type::ExtensionObject> {};
+UAPP_TYPECONVERTER_NATIVE(UA_String, Type::String, Type::ByteString, Type::XmlElement)
+UAPP_TYPECONVERTER_NATIVE(UA_Guid, Type::Guid)
+UAPP_TYPECONVERTER_NATIVE(UA_NodeId, Type::NodeId)
+UAPP_TYPECONVERTER_NATIVE(UA_ExpandedNodeId, Type::ExpandedNodeId)
+UAPP_TYPECONVERTER_NATIVE(UA_QualifiedName, Type::QualifiedName)
+UAPP_TYPECONVERTER_NATIVE(UA_LocalizedText, Type::LocalizedText)
+UAPP_TYPECONVERTER_NATIVE(UA_ExtensionObject, Type::ExtensionObject)
 
 /* ------------------------------- Implementation for TypeWrapper ------------------------------- */
 
