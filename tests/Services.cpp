@@ -278,70 +278,51 @@ TEST_CASE("Attribute (server & client)") {
     CHECK(services::readNodeClass(server, id) == services::readNodeClass(client, id));
     CHECK(services::readBrowseName(server, id) == services::readBrowseName(client, id));
 
-    // generate test matrix of possible reader/writer combinations
-    // https://github.com/doctest/doctest/blob/v2.4.11/doc/markdown/parameterized-tests.md
-    using ServerRef = std::reference_wrapper<Server>;
-    using ClientRef = std::reference_wrapper<Client>;
-    using ServerOrClientRef = std::variant<ServerRef, ClientRef>;
+    // check remaining attributes with possible writer/reader combinations
+    const auto testWriteReadAttribute = [&](auto& writer, auto& reader) {
+        const LocalizedText displayName("", "display name");
+        CHECK_NOTHROW(services::writeDisplayName(writer, id, displayName));
+        CHECK(services::readDisplayName(reader, id) == displayName);
 
-    ServerOrClientRef writerVar{server};
-    ServerOrClientRef readerVar{server};
+        const LocalizedText description("en-US", "description...");
+        CHECK_NOTHROW(services::writeDescription(writer, id, description));
+        CHECK(services::readDescription(reader, id) == description);
+
+        const NodeId dataType(0, UA_NS0ID_DOUBLE);
+        CHECK_NOTHROW(services::writeDataType(writer, id, dataType));
+        CHECK(services::readDataType(reader, id) == dataType);
+
+        const ValueRank valueRank = ValueRank::OneDimension;
+        CHECK_NOTHROW(services::writeValueRank(writer, id, valueRank));
+        CHECK(services::readValueRank(reader, id) == valueRank);
+
+        std::vector<uint32_t> arrayDimensions{3};
+        CHECK_NOTHROW(services::writeArrayDimensions(writer, id, arrayDimensions));
+        CHECK(services::readArrayDimensions(reader, id) == arrayDimensions);
+
+        const std::vector<double> array{1, 2, 3};
+        const auto variant = Variant::fromArray(array);
+        CHECK_NOTHROW(services::writeValue(writer, id, variant));
+        Variant variantRead;
+        CHECK_NOTHROW(services::readValue(reader, id, variantRead));
+        CHECK(variantRead.getArrayCopy<double>() == array);
+
+        const auto dataValue = DataValue::fromArray(array);
+        CHECK_NOTHROW(services::writeDataValue(writer, id, dataValue));
+        DataValue dataValueRead;
+        CHECK_NOTHROW(services::readDataValue(reader, id, dataValueRead));
+        CHECK_EQ(dataValueRead->hasValue, true);
+        CHECK_EQ(dataValueRead->hasSourceTimestamp, true);
+        CHECK_EQ(dataValueRead->hasServerTimestamp, true);
+        CHECK(dataValueRead.getValuePtr()->getArrayCopy<double>() == array);
+    };
+
     // clang-format off
-    SUBCASE("server/server") { writerVar = server; readerVar = server; }
-    SUBCASE("server/client") { writerVar = server; readerVar = client; }
-    SUBCASE("client/server") { writerVar = client; readerVar = server; }
-    SUBCASE("client/client") { writerVar = client; readerVar = client; }
+    SUBCASE("server/server") { testWriteReadAttribute(server, server); }
+    SUBCASE("server/client") { testWriteReadAttribute(server, client); }
+    SUBCASE("client/server") { testWriteReadAttribute(client, server); }
+    SUBCASE("client/client") { testWriteReadAttribute(client, client); }
     // clang-format on
-
-    CAPTURE(std::holds_alternative<ServerRef>(writerVar));
-    CAPTURE(std::holds_alternative<ClientRef>(writerVar));
-    CAPTURE(std::holds_alternative<ServerRef>(readerVar));
-    CAPTURE(std::holds_alternative<ClientRef>(readerVar));
-
-    std::visit(
-        [&](auto writerRef, auto readerRef) {
-            auto& writer = writerRef.get();
-            auto& reader = readerRef.get();
-
-            const LocalizedText displayName("", "display name");
-            CHECK_NOTHROW(services::writeDisplayName(writer, id, displayName));
-            CHECK(services::readDisplayName(reader, id) == displayName);
-
-            const LocalizedText description("en-US", "description...");
-            CHECK_NOTHROW(services::writeDescription(writer, id, description));
-            CHECK(services::readDescription(reader, id) == description);
-
-            const NodeId dataType(0, UA_NS0ID_DOUBLE);
-            CHECK_NOTHROW(services::writeDataType(writer, id, dataType));
-            CHECK(services::readDataType(reader, id) == dataType);
-
-            const ValueRank valueRank = ValueRank::OneDimension;
-            CHECK_NOTHROW(services::writeValueRank(writer, id, valueRank));
-            CHECK(services::readValueRank(reader, id) == valueRank);
-
-            std::vector<uint32_t> arrayDimensions{3};
-            CHECK_NOTHROW(services::writeArrayDimensions(writer, id, arrayDimensions));
-            CHECK(services::readArrayDimensions(reader, id) == arrayDimensions);
-
-            const std::vector<double> array{1, 2, 3};
-            const auto variant = Variant::fromArray(array);
-            CHECK_NOTHROW(services::writeValue(writer, id, variant));
-            Variant variantRead;
-            CHECK_NOTHROW(services::readValue(reader, id, variantRead));
-            CHECK(variantRead.getArrayCopy<double>() == array);
-
-            const auto dataValue = DataValue::fromArray(array);
-            CHECK_NOTHROW(services::writeDataValue(writer, id, dataValue));
-            DataValue dataValueRead;
-            CHECK_NOTHROW(services::readDataValue(reader, id, dataValueRead));
-            CHECK_EQ(dataValueRead->hasValue, true);
-            CHECK_EQ(dataValueRead->hasSourceTimestamp, true);
-            CHECK_EQ(dataValueRead->hasServerTimestamp, true);
-            CHECK(dataValueRead.getValuePtr()->getArrayCopy<double>() == array);
-        },
-        writerVar,
-        readerVar
-    );
 }
 
 TEST_CASE("Browse") {
