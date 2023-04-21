@@ -18,9 +18,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Server::runIterate` method, e.g. to run server in existing event loop
 - Generic `services::readAttribute` and `services::writeAttribute` functions
 - Missing functions to read/write attributes `UserWriteMask`, `IsAbstract`, `Symmetric`, `InverseName`, `UserAccessLevel` and `MinimumSamplingInterval`
+- `Guid::toString` and `Guid::random` method
+- `DateTime::localTimeUtcOffset` and `DateTime::format` method
+- `ostream` overloads for `String`, `Guid`, `XmlElement`
 - Examples:
+  - `client_minimal`
   - `client_connect`
   - `client_find_servers`
+  - `server_minimal`
 
 ### Changed
 
@@ -29,6 +34,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Pass `LocalizedText` instead of members (`locale`, `text`) to `Node::writeDisplayName`, `Node::writeDescription`, `services::writeDisplayName`, `services::writeDescription` (#29)
 - Remove `Server::getConfig` method
 - Rename `Node::writeModellingRule` -> `Node::addModellingRule`
+- Remove `TypeWrapper::getType` method
+- Use `TypeIndex` instead of `Type` enum for `TypeConverter` to allow conversions of non-builtin types
 
 ### Fixed
 
