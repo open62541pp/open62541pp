@@ -7,6 +7,7 @@
 #include "open62541pp/Common.h"
 #include "open62541pp/detail/helper.h"  // detail::toString
 #include "open62541pp/types/Builtin.h"
+#include "open62541pp/types/Composed.h"
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/DateTime.h"
 #include "open62541pp/types/NodeId.h"
@@ -495,4 +496,14 @@ TEST_CASE("DataValue") {
             CHECK(dv.getStatusCode().value() == statusCode);
         }
     }
+}
+
+TEST_CASE("BrowseDescription") {
+    BrowseDescription bd(NodeId(1, 1000), BrowseDirection::Forward);
+    CHECK(bd.getNodeId() == NodeId(1, 1000));
+    CHECK(bd.getBrowseDirection() == BrowseDirection::Forward);
+    CHECK(bd.getReferenceTypeId() == NodeId(0, UA_NS0ID_REFERENCES));
+    CHECK(bd.getIncludeSubtypes() == true);
+    CHECK(bd.getNodeClassMask() == UA_NODECLASS_UNSPECIFIED);
+    CHECK(bd.getResultMask() == UA_BROWSERESULTMASK_ALL);
 }
