@@ -68,8 +68,7 @@ std::variant<uint32_t, String, Guid, ByteString> NodeId::getIdentifier() const {
 ExpandedNodeId::ExpandedNodeId(
     const NodeId& id, std::string_view namespaceUri, uint32_t serverIndex
 ) {
-    const auto status = UA_NodeId_copy(id.handle(), &handle()->nodeId);
-    detail::throwOnBadStatus(status);
+    getNodeId() = id;
     handle()->namespaceUri = detail::allocUaString(namespaceUri);
     handle()->serverIndex = serverIndex;
 }

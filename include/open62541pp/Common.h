@@ -173,6 +173,18 @@ enum class ModellingRule : uint16_t {
     // clang-format on
 };
 
+/**
+ * Browse direction.
+ * An enumeration that specifies the direction of references to follow.
+ * @see https://reference.opcfoundation.org/Core/Part4/v104/docs/5.8.2
+ */
+enum class BrowseDirection : uint32_t {
+    Forward = UA_BROWSEDIRECTION_FORWARD,
+    Inverse = UA_BROWSEDIRECTION_INVERSE,
+    Both = UA_BROWSEDIRECTION_BOTH,
+    Invalid = UA_BROWSEDIRECTION_INVALID,
+};
+
 namespace detail {
 
 using BuiltinTypes = std::tuple<

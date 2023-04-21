@@ -116,6 +116,7 @@ add_library(
     src/services/Browse.cpp
     src/services/NodeManagement.cpp
     src/types/Builtin.cpp
+    src/types/Composed.cpp
     src/types/DataValue.cpp
     src/types/DateTime.cpp
     src/types/NodeId.cpp

@@ -3,17 +3,36 @@
 #include "open62541pp/TypeConverter.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/types/Builtin.h"
+#include "open62541pp/types/NodeId.h"
 
 #include <string>
 #include <vector>
 
 // NOLINTNEXTLINE
-#define UAPP_COMPOSED_WRAPPER_GETTER(WrapperType, member, getterName)                              \
+#define UAPP_COMPOSED_GETTER(Type, getterName, member)                                             \
+    Type getterName() const noexcept {                                                             \
+        return handle()->member;                                                                   \
+    }
+
+// NOLINTNEXTLINE
+#define UAPP_COMPOSED_GETTER_CAST(Type, getterName, member)                                        \
+    Type getterName() const noexcept {                                                             \
+        return static_cast<Type>(handle()->member);                                                \
+    }
+
+// NOLINTNEXTLINE
+#define UAPP_COMPOSED_GETTER_WRAPPER(WrapperType, getterName, member)                              \
     WrapperType& getterName() noexcept {                                                           \
         return asWrapper<WrapperType>(handle()->member);                                           \
     }                                                                                              \
     const WrapperType& getterName() const noexcept {                                               \
         return asWrapper<WrapperType>(handle()->member);                                           \
+    }
+
+// NOLINTNEXTLINE
+#define UAPP_COMPOSED_GETTER_ARRAY(Type, getterName, array, size)                                  \
+    std::vector<Type> getterName() const {                                                         \
+        return detail::fromNativeArray<Type>(handle()->array, handle()->size);                     \
     }
 
 namespace opcua {
@@ -27,22 +46,13 @@ class ApplicationDescription
 public:
     using TypeWrapperBase::TypeWrapperBase;
 
-    UAPP_COMPOSED_WRAPPER_GETTER(String, applicationUri, getApplicationUri)
-    UAPP_COMPOSED_WRAPPER_GETTER(String, productUri, getProductUri)
-    UAPP_COMPOSED_WRAPPER_GETTER(LocalizedText, applicationName, getApplicationName)
-
-    UA_ApplicationType getApplicationType() const noexcept {
-        return handle()->applicationType;
-    }
-
-    UAPP_COMPOSED_WRAPPER_GETTER(String, gatewayServerUri, getGatewayServerUri)
-    UAPP_COMPOSED_WRAPPER_GETTER(String, discoveryProfileUri, getDiscoveryProfileUri)
-
-    std::vector<std::string> getDiscoveryUrls() const {
-        return detail::fromNativeArray<std::string>(
-            handle()->discoveryUrls, handle()->discoveryUrlsSize
-        );
-    }
+    UAPP_COMPOSED_GETTER_WRAPPER(String, getApplicationUri, applicationUri)
+    UAPP_COMPOSED_GETTER_WRAPPER(String, getProductUri, productUri)
+    UAPP_COMPOSED_GETTER_WRAPPER(LocalizedText, getApplicationName, applicationName)
+    UAPP_COMPOSED_GETTER(UA_ApplicationType, getApplicationType, applicationType)
+    UAPP_COMPOSED_GETTER_WRAPPER(String, getGatewayServerUri, gatewayServerUri)
+    UAPP_COMPOSED_GETTER_WRAPPER(String, getDiscoveryProfileUri, discoveryProfileUri)
+    UAPP_COMPOSED_GETTER_ARRAY(std::string, getDiscoveryUrls, discoveryUrls, discoveryUrlsSize)
 };
 
 /**
@@ -53,15 +63,11 @@ class UserTokenPolicy : public TypeWrapper<UA_UserTokenPolicy, UA_TYPES_USERTOKE
 public:
     using TypeWrapperBase::TypeWrapperBase;
 
-    UAPP_COMPOSED_WRAPPER_GETTER(String, policyId, getPolicyId)
-
-    UA_UserTokenType getTokenType() const noexcept {
-        return handle()->tokenType;
-    }
-
-    UAPP_COMPOSED_WRAPPER_GETTER(String, issuedTokenType, getIssuedTokenType)
-    UAPP_COMPOSED_WRAPPER_GETTER(String, issuerEndpointUrl, getIssuerEndpointUrl)
-    UAPP_COMPOSED_WRAPPER_GETTER(String, securityPolicyUri, getSecurityPolicyUri)
+    UAPP_COMPOSED_GETTER_WRAPPER(String, getPolicyId, policyId)
+    UAPP_COMPOSED_GETTER(UA_UserTokenType, getTokenType, tokenType)
+    UAPP_COMPOSED_GETTER_WRAPPER(String, getIssuedTokenType, issuedTokenType)
+    UAPP_COMPOSED_GETTER_WRAPPER(String, getIssuerEndpointUrl, issuerEndpointUrl)
+    UAPP_COMPOSED_GETTER_WRAPPER(String, getSecurityPolicyUri, securityPolicyUri)
 };
 
 /**
@@ -73,27 +79,72 @@ class EndpointDescription
 public:
     using TypeWrapperBase::TypeWrapperBase;
 
-    UAPP_COMPOSED_WRAPPER_GETTER(String, endpointUrl, getEndpointUrl)
-    UAPP_COMPOSED_WRAPPER_GETTER(ApplicationDescription, server, getServer)
-    UAPP_COMPOSED_WRAPPER_GETTER(ByteString, serverCertificate, getServerCertificate)
+    UAPP_COMPOSED_GETTER_WRAPPER(String, getEndpointUrl, endpointUrl)
+    UAPP_COMPOSED_GETTER_WRAPPER(ApplicationDescription, getServer, server)
+    UAPP_COMPOSED_GETTER_WRAPPER(ByteString, getServerCertificate, serverCertificate)
+    UAPP_COMPOSED_GETTER(UA_MessageSecurityMode, getSecurityMode, securityMode)
+    UAPP_COMPOSED_GETTER_WRAPPER(String, getSecurityPolicyUri, securityPolicyUri)
+    UAPP_COMPOSED_GETTER_ARRAY(
+        UserTokenPolicy, getUserIdentityTokens, userIdentityTokens, userIdentityTokensSize
+    )
+    UAPP_COMPOSED_GETTER_WRAPPER(String, getTransportProfileUri, transportProfileUri)
+    UAPP_COMPOSED_GETTER_WRAPPER(UA_Byte, getSecurityLevel, securityLevel)
+};
 
-    UA_MessageSecurityMode getSecurityMode() const noexcept {
-        return handle()->securityMode;
-    }
+/**
+ * UA_BrowseDescription wrapper class.
+ * @ingroup TypeWrapper
+ */
+class BrowseDescription : public TypeWrapper<UA_BrowseDescription, UA_TYPES_BROWSEDESCRIPTION> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
 
-    UAPP_COMPOSED_WRAPPER_GETTER(String, securityPolicyUri, getSecurityPolicyUri)
+    BrowseDescription(
+        const NodeId& nodeId,
+        BrowseDirection browseDirection,
+        ReferenceType referenceType = ReferenceType::References,
+        bool includeSubtypes = true,
+        uint32_t nodeClassMask = UA_NODECLASS_UNSPECIFIED,
+        uint32_t resultMask = UA_BROWSERESULTMASK_ALL
+    );
 
-    std::vector<UserTokenPolicy> getUserIdentityTokens() const {
-        return detail::fromNativeArray<UserTokenPolicy>(
-            handle()->userIdentityTokens, handle()->userIdentityTokensSize
-        );
-    }
+    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getNodeId, nodeId)
+    UAPP_COMPOSED_GETTER_CAST(BrowseDirection, getBrowseDirection, browseDirection)
+    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getReferenceTypeId, referenceTypeId)
+    UAPP_COMPOSED_GETTER(bool, getIncludeSubtypes, includeSubtypes)
+    UAPP_COMPOSED_GETTER(uint32_t, getNodeClassMask, nodeClassMask)
+    UAPP_COMPOSED_GETTER(uint32_t, getResultMask, resultMask)
+};
 
-    UAPP_COMPOSED_WRAPPER_GETTER(String, transportProfileUri, getTransportProfileUri)
+/**
+ * UA_ReferenceDescription wrapper class.
+ * @ingroup TypeWrapper
+ */
+class ReferenceDescription
+    : public TypeWrapper<UA_ReferenceDescription, UA_TYPES_REFERENCEDESCRIPTION> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
 
-    UA_Byte getSecurityLevel() const noexcept {
-        return handle()->securityLevel;
-    }
+    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getReferenceTypeId, referenceTypeId)
+    UAPP_COMPOSED_GETTER(bool, getIsForward, isForward)
+    UAPP_COMPOSED_GETTER_WRAPPER(ExpandedNodeId, getNodeId, nodeId)
+    UAPP_COMPOSED_GETTER_WRAPPER(QualifiedName, getBrowseName, browseName)
+    UAPP_COMPOSED_GETTER_WRAPPER(LocalizedText, getDisplayName, displayName)
+    UAPP_COMPOSED_GETTER_CAST(NodeClass, getNodeClass, nodeClass)
+    UAPP_COMPOSED_GETTER_WRAPPER(ExpandedNodeId, getTypeDefinition, typeDefinition)
+};
+
+/**
+ * UA_BrowseResult wrapper class.
+ * @ingroup TypeWrapper
+ */
+class BrowseResult : public TypeWrapper<UA_BrowseResult, UA_TYPES_BROWSERESULT> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    UAPP_COMPOSED_GETTER(UA_StatusCode, getStatusCode, statusCode)
+    UAPP_COMPOSED_GETTER_WRAPPER(ByteString, getContinuationPoint, continuationPoint)
+    UAPP_COMPOSED_GETTER_ARRAY(ReferenceDescription, getReferences, references, referencesSize)
 };
 
 }  // namespace opcua
