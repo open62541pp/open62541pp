@@ -17,20 +17,24 @@
 
 namespace opcua {
 
-template <Type... T>
-struct TypeList {
-    using Types = std::integer_sequence<Type, T...>;
+template <TypeIndex... typeIndexes>
+struct TypeIndexList {
+    using TypeIndexes = std::integer_sequence<TypeIndex, typeIndexes...>;
 
     static constexpr size_t size() {
-        return sizeof...(T);
+        return sizeof...(typeIndexes);
+    }
+
+    static constexpr bool contains(TypeIndex typeIndex) {
+        return ((typeIndex == typeIndexes) || ...);
     }
 
     static constexpr bool contains(Type type) {
-        return ((type == T) || ...);
+        return contains(static_cast<TypeIndex>(type));
     }
 
     static constexpr auto toArray() {
-        return std::array<Type, sizeof...(T)>{T...};
+        return std::array<TypeIndex, sizeof...(typeIndexes)>{typeIndexes...};
     }
 };
 
@@ -40,7 +44,7 @@ struct TypeConverter {
 
     using ValueType = T;
     using NativeType = std::nullptr_t;
-    using ValidTypes = TypeList<>;
+    using ValidTypes = TypeIndexList<>;
 
     static void fromNative(const NativeType& src, ValueType& dst);
     static void toNative(const ValueType& src, NativeType& dst);
@@ -75,7 +79,9 @@ constexpr Type guessType() {
         TypeConverter<ValueType>::ValidTypes::size() == 1,
         "Ambiguous template type, please specify type enum (opcua::Type) manually"
     );
-    return TypeConverter<ValueType>::ValidTypes::toArray().at(0);
+    constexpr auto typeIndexGuess = TypeConverter<ValueType>::ValidTypes::toArray().at(0);
+    static_assert(typeIndexGuess < builtinTypesCount, "T doesn't seem to be a builtin type");
+    return static_cast<Type>(typeIndexGuess);
 }
 
 template <typename It>
@@ -182,11 +188,11 @@ template <typename T, Type type>
 
 namespace detail {
 
-template <typename T, Type... Types>
+template <typename T, TypeIndex... typeIndexes>
 struct TypeConverterNative {
     using ValueType = T;
     using NativeType = T;
-    using ValidTypes = TypeList<Types...>;
+    using ValidTypes = TypeIndexList<typeIndexes...>;
 
     static_assert(ValidTypes::size() >= 1);
 
@@ -195,11 +201,11 @@ struct TypeConverterNative {
             dst = src;  // shallow copy
         } else {
             // just take first type -> underlying memory layout of all types should be the same
-            constexpr auto typeGuess = ValidTypes::toArray().at(0);
+            constexpr auto typeIndexGuess = ValidTypes::toArray().at(0);
             // clear first
-            UA_clear(&dst, getUaDataType<typeGuess>());
+            UA_clear(&dst, getUaDataType<typeIndexGuess>());
             // deep copy
-            const auto status = UA_copy(&src, &dst, getUaDataType<typeGuess>());
+            const auto status = UA_copy(&src, &dst, getUaDataType<typeIndexGuess>());
             throwOnBadStatus(status);
         }
     }
@@ -216,26 +222,26 @@ struct TypeConverterNative {
     template <>                                                                                    \
     struct TypeConverter<NativeType> : detail::TypeConverterNative<NativeType, __VA_ARGS__> {};
 
-UAPP_TYPECONVERTER_NATIVE(UA_Boolean, Type::Boolean)
-UAPP_TYPECONVERTER_NATIVE(UA_SByte, Type::SByte)
-UAPP_TYPECONVERTER_NATIVE(UA_Byte, Type::Byte)
-UAPP_TYPECONVERTER_NATIVE(UA_Int16, Type::Int16)
-UAPP_TYPECONVERTER_NATIVE(UA_UInt16, Type::UInt16)
-UAPP_TYPECONVERTER_NATIVE(UA_Int32, Type::Int32)
-UAPP_TYPECONVERTER_NATIVE(UA_UInt32, Type::UInt32)
-UAPP_TYPECONVERTER_NATIVE(UA_Int64, Type::Int64)
-UAPP_TYPECONVERTER_NATIVE(UA_UInt64, Type::UInt64)
-UAPP_TYPECONVERTER_NATIVE(UA_Float, Type::Float)
-UAPP_TYPECONVERTER_NATIVE(UA_Double, Type::Double)
+UAPP_TYPECONVERTER_NATIVE(UA_Boolean, UA_TYPES_BOOLEAN)
+UAPP_TYPECONVERTER_NATIVE(UA_SByte, UA_TYPES_SBYTE)
+UAPP_TYPECONVERTER_NATIVE(UA_Byte, UA_TYPES_BYTE)
+UAPP_TYPECONVERTER_NATIVE(UA_Int16, UA_TYPES_INT16)
+UAPP_TYPECONVERTER_NATIVE(UA_UInt16, UA_TYPES_UINT16)
+UAPP_TYPECONVERTER_NATIVE(UA_Int32, UA_TYPES_INT32)
+UAPP_TYPECONVERTER_NATIVE(UA_UInt32, UA_TYPES_UINT32)
+UAPP_TYPECONVERTER_NATIVE(UA_Int64, UA_TYPES_INT64)
+UAPP_TYPECONVERTER_NATIVE(UA_UInt64, UA_TYPES_UINT64)
+UAPP_TYPECONVERTER_NATIVE(UA_Float, UA_TYPES_FLOAT)
+UAPP_TYPECONVERTER_NATIVE(UA_Double, UA_TYPES_DOUBLE)
 static_assert(std::is_same_v<UA_String, UA_ByteString>);
 static_assert(std::is_same_v<UA_String, UA_XmlElement>);
-UAPP_TYPECONVERTER_NATIVE(UA_String, Type::String, Type::ByteString, Type::XmlElement)
-UAPP_TYPECONVERTER_NATIVE(UA_Guid, Type::Guid)
-UAPP_TYPECONVERTER_NATIVE(UA_NodeId, Type::NodeId)
-UAPP_TYPECONVERTER_NATIVE(UA_ExpandedNodeId, Type::ExpandedNodeId)
-UAPP_TYPECONVERTER_NATIVE(UA_QualifiedName, Type::QualifiedName)
-UAPP_TYPECONVERTER_NATIVE(UA_LocalizedText, Type::LocalizedText)
-UAPP_TYPECONVERTER_NATIVE(UA_ExtensionObject, Type::ExtensionObject)
+UAPP_TYPECONVERTER_NATIVE(UA_String, UA_TYPES_STRING, UA_TYPES_BYTESTRING, UA_TYPES_XMLELEMENT)
+UAPP_TYPECONVERTER_NATIVE(UA_Guid, UA_TYPES_GUID)
+UAPP_TYPECONVERTER_NATIVE(UA_NodeId, UA_TYPES_NODEID)
+UAPP_TYPECONVERTER_NATIVE(UA_ExpandedNodeId, UA_TYPES_EXPANDEDNODEID)
+UAPP_TYPECONVERTER_NATIVE(UA_QualifiedName, UA_TYPES_QUALIFIEDNAME)
+UAPP_TYPECONVERTER_NATIVE(UA_LocalizedText, UA_TYPES_LOCALIZEDTEXT)
+UAPP_TYPECONVERTER_NATIVE(UA_ExtensionObject, UA_TYPES_EXTENSIONOBJECT)
 
 /* ------------------------------- Implementation for TypeWrapper ------------------------------- */
 
@@ -243,11 +249,9 @@ template <typename WrapperType>
 struct TypeConverter<WrapperType, std::enable_if_t<detail::IsTypeWrapper<WrapperType>::value>> {
     using NativeConverter = TypeConverter<typename WrapperType::NativeType>;
 
-    // static_assert(WrapperType::getTypeIndex() < detail::builtinTypesCount);
-
     using ValueType = WrapperType;
     using NativeType = typename WrapperType::NativeType;
-    using ValidTypes = TypeList<static_cast<Type>(WrapperType::getTypeIndex())>;  // dangerous!
+    using ValidTypes = TypeIndexList<WrapperType::getTypeIndex()>;
 
     static void fromNative(const NativeType& src, ValueType& dst) {
         dst = WrapperType(src);
@@ -264,14 +268,14 @@ template <>
 struct TypeConverter<std::string> {
     using ValueType = std::string;
     using NativeType = UA_String;
-    using ValidTypes = TypeList<Type::String, Type::ByteString, Type::XmlElement>;
+    using ValidTypes = TypeIndexList<UA_TYPES_STRING, UA_TYPES_BYTESTRING, UA_TYPES_XMLELEMENT>;
 
     static void fromNative(const NativeType& src, ValueType& dst) {
         dst = detail::toString(src);
     }
 
     static void toNative(const ValueType& src, NativeType& dst) {
-        UA_clear(&dst, detail::getUaDataType<Type::String>());
+        UA_clear(&dst, detail::getUaDataType<UA_TYPES_STRING>());
         dst = detail::allocUaString(src);
     }
 };
@@ -280,7 +284,7 @@ template <typename Clock, typename Duration>
 struct TypeConverter<std::chrono::time_point<Clock, Duration>> {
     using ValueType = std::chrono::time_point<Clock, Duration>;
     using NativeType = UA_DateTime;
-    using ValidTypes = TypeList<Type::DateTime>;
+    using ValidTypes = TypeIndexList<UA_TYPES_DATETIME>;
 
     static void fromNative(const NativeType& src, ValueType& dst) {
         dst = DateTime(src).toTimePoint<Clock, Duration>();

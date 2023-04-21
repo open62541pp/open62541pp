@@ -119,7 +119,7 @@ template <>
 struct TypeConverter<std::string> {
     using ValueType = std::string;
     using NativeType = UA_String;
-    using ValidTypes = TypeList<Type::String, Type::ByteString, Type::XmlElement>;
+    using ValidTypes = TypeIndexList<UA_TYPES_STRING, UA_TYPES_BYTESTRING, UA_TYPES_XMLELEMENT>;
 
     static void fromNative(const NativeType& src, ValueType& dst) { /* ... */ }
     static void toNative(const ValueType& src, NativeType& dst) { /* ... */ }

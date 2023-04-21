@@ -34,7 +34,7 @@ namespace opcua {
  * @warning No virtual constructor defined, don't implement a destructor in the derived classes.
  * @ingroup TypeWrapper
  */
-template <typename T, uint16_t typeIndex>
+template <typename T, TypeIndex typeIndex>
 class TypeWrapper {
 public:
     static_assert(typeIndex < UA_TYPES_COUNT);
@@ -131,7 +131,7 @@ public:
     }
 
     /// Get type as type index of the ::UA_TYPES array.
-    static constexpr uint16_t getTypeIndex() {
+    static constexpr TypeIndex getTypeIndex() {
         return typeIndex;
     }
 
@@ -176,7 +176,7 @@ private:
 namespace detail {
 
 // https://stackoverflow.com/a/51910887
-template <typename T, uint16_t typeIndex>
+template <typename T, TypeIndex typeIndex>
 std::true_type isTypeWrapperImpl(TypeWrapper<T, typeIndex>*);
 std::false_type isTypeWrapperImpl(...);
 
