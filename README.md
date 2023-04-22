@@ -161,12 +161,6 @@ struct TypeConverter<std::string> {
 ## Install
 
 The library can be installed using [CMake](https://cmake.org/runningcmake/).
-Add it to your project as a Git submodule (`git submodule add https://github.com/open62541pp/open62541pp.git`) and link it with CMake:
-
-```cmake
-add_subdirectory(extern/open62541pp)  # the submodule directory
-target_link_library(myexecutable PRIVATE open62541pp::open62541pp)
-```
 
 Please check out the open62541 build options here: https://www.open62541.org/doc/1.3/building.html#build-options
 
@@ -179,6 +173,21 @@ open62541++ provides additional build options:
 - `UAPP_ENABLE_CLANG_TIDY`: Enable static code analysis with Clang-Tidy
 - `UAPP_ENABLE_COVERAGE`: Enable coverage analysis
 - `UAPP_ENABLE_SANITIZER_ADDRESS/LEAK/MEMORY/THREAD/UNDEFINED_BEHAVIOUR`: Enable sanitizers
+
+### Using as an embedded (in-source) dependency
+Add it to your project as a Git submodule (`git submodule add https://github.com/open62541pp/open62541pp.git`) and link it with CMake:
+
+```cmake
+add_subdirectory(extern/open62541pp)  # the submodule directory
+target_link_library(myexecutable PRIVATE open62541pp::open62541pp)
+```
+
+### Using as a pre-compiled library
+
+After installing the library, add the complete path to the `lib/open62541pp/cmake` directory to your `CMAKE_MODULE_PATH` list and then:
+```cmake 
+find_package(open62541pp::open62541pp 0.2.0 CONFIG REQUIRED)
+```
 
 ### Dependencies
 
