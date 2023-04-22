@@ -9,6 +9,7 @@
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeConverter.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/types/ApplicationDescription.h"
 #include "open62541pp/detail/helper.h"
 #include "open62541pp/detail/traits.h"
 #include "open62541pp/overloads/comparison.h"
@@ -19,4 +20,5 @@
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/DateTime.h"
 #include "open62541pp/types/NodeId.h"
+#include "open62541pp/types/ReferenceDescription.h"
 #include "open62541pp/types/Variant.h"

@@ -42,7 +42,8 @@ enum class Type : TypeIndex {
     ExtensionObject = UA_TYPES_EXTENSIONOBJECT,
     DataValue       = UA_TYPES_DATAVALUE,
     Variant         = UA_TYPES_VARIANT,
-    DiagnosticInfo  = UA_TYPES_DIAGNOSTICINFO
+    DiagnosticInfo  = UA_TYPES_DIAGNOSTICINFO,
+	ApplicationDescription = UA_TYPES_APPLICATIONDESCRIPTION
     // clang-format on
 };
 
@@ -50,7 +51,7 @@ enum class Type : TypeIndex {
  * Node classes.
  * @see UA_NodeClass
  */
-enum class NodeClass : uint16_t {
+enum class NodeClass : uint32_t {
     // clang-format off
     Unspecified   = UA_NODECLASS_UNSPECIFIED,
     Object        = UA_NODECLASS_OBJECT,
@@ -200,7 +201,8 @@ using BuiltinTypes = std::tuple<
     UA_ExtensionObject,
     UA_DataValue,
     UA_Variant,
-    UA_DiagnosticInfo>;
+    UA_DiagnosticInfo,
+	UA_ApplicationDescription>;
 
 template <typename T>
 constexpr bool isBuiltinType() {
