@@ -327,31 +327,39 @@ TEST_CASE("Attribute (server & client)") {
 
 TEST_CASE("View") {
     Server server;
+    ServerRunner serverRunner(server);
+
+    Client client;
+    client.connect("opc.tcp://localhost:4840");
 
     // add node to query references
     const NodeId id{1, 1000};
     services::addVariable(server, {0, UA_NS0ID_OBJECTSFOLDER}, id, "variable");
 
-    SUBCASE("Browse") {
-        const BrowseDescription bd(id, BrowseDirection::Both);
-        const auto result = services::browse(server, bd);
+    const auto testBrowse = [&](auto& reader) {
+        SUBCASE("Browse") {
+            const BrowseDescription bd(id, BrowseDirection::Both);
+            const auto result = services::browse(reader, bd);
 
-        CHECK(result.getStatusCode() == UA_STATUSCODE_GOOD);
-        CHECK(result.getContinuationPoint() == ByteString());  // empty
+            CHECK(result.getStatusCode() == UA_STATUSCODE_GOOD);
+            CHECK(result.getContinuationPoint() == ByteString());  // empty
 
-        const auto refs = result.getReferences();
-        CHECK(refs.size() == 2);
-        // 1. ComponentOf Objects
-        CHECK(refs.at(0).getReferenceTypeId() == NodeId(0, UA_NS0ID_HASCOMPONENT));
-        CHECK(refs.at(0).getIsForward() == false);
-        CHECK(refs.at(0).getNodeId() == ExpandedNodeId({0, UA_NS0ID_OBJECTSFOLDER}));
-        CHECK(refs.at(0).getBrowseName() == QualifiedName(0, "Objects"));
-        // 2. HasTypeDefinition BaseDataVariableType
-        CHECK(refs.at(1).getReferenceTypeId() == NodeId(0, UA_NS0ID_HASTYPEDEFINITION));
-        CHECK(refs.at(1).getIsForward() == true);
-        CHECK(refs.at(1).getNodeId() == ExpandedNodeId({0, UA_NS0ID_BASEDATAVARIABLETYPE}));
-        CHECK(refs.at(1).getBrowseName() == QualifiedName(0, "BaseDataVariableType"));
-    }
+            const auto refs = result.getReferences();
+            CHECK(refs.size() == 2);
+            // 1. ComponentOf Objects
+            CHECK(refs.at(0).getReferenceTypeId() == NodeId(0, UA_NS0ID_HASCOMPONENT));
+            CHECK(refs.at(0).getIsForward() == false);
+            CHECK(refs.at(0).getNodeId() == ExpandedNodeId({0, UA_NS0ID_OBJECTSFOLDER}));
+            CHECK(refs.at(0).getBrowseName() == QualifiedName(0, "Objects"));
+            // 2. HasTypeDefinition BaseDataVariableType
+            CHECK(refs.at(1).getReferenceTypeId() == NodeId(0, UA_NS0ID_HASTYPEDEFINITION));
+            CHECK(refs.at(1).getIsForward() == true);
+            CHECK(refs.at(1).getNodeId() == ExpandedNodeId({0, UA_NS0ID_BASEDATAVARIABLETYPE}));
+            CHECK(refs.at(1).getBrowseName() == QualifiedName(0, "BaseDataVariableType"));
+        }
+    };
+    testBrowse(server);
+    testBrowse(client);
 
     SUBCASE("Browse next") {
         CHECK_THROWS_WITH(services::browseNext(server, {}), "BadContinuationPointInvalid");
