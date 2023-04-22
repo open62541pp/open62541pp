@@ -112,14 +112,19 @@ add_library(
     src/types/Variant.cpp
 )
 add_library(open62541pp::open62541pp ALIAS open62541pp)
-target_include_directories(open62541pp PUBLIC include)
+target_include_directories(open62541pp INTERFACE
+        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+        PUBLIC
+        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+        )
 target_link_libraries(
-    open62541pp
-    PUBLIC
+        open62541pp
+        PUBLIC
         open62541::open62541
-    PRIVATE
+        PRIVATE
         Threads::Threads
-        open62541pp_project_options
+        $<BUILD_INTERFACE:open62541pp_project_options>
 )
 
 # tests
@@ -171,3 +176,40 @@ if(UAPP_BUILD_DOCUMENTATION)
     message(STATUS "Documentation enabled")
     add_subdirectory(doc)
 endif()
+
+include(CMakePackageConfigHelpers)
+configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake/open62541ppConfig.cmake.in"
+        "${CMAKE_CURRENT_BINARY_DIR}/open62541ppConfig.cmake"
+        INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/open62541pp
+        )
+
+write_basic_package_version_file("${CMAKE_CURRENT_BINARY_DIR}/open62541ConfigVersion.cmake"
+        VERSION ${CMAKE_PROJECT_VERSION}
+        COMPATIBILITY AnyNewerVersion)
+
+message("${CMAKE_CURRENT_SOURCE_DIR} - ${CMAKE_INSTALL_INCLUDEDIR} ${CMAKE_INSTALL_INCLUDEDIR}")
+
+install(TARGETS open62541pp
+        EXPORT open62541ppTargets
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+        INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        )
+
+install(EXPORT open62541ppTargets
+        NAMESPACE open62541pp::
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/open62541pp
+        )
+
+install(FILES
+        "${CMAKE_CURRENT_BINARY_DIR}/open62541ConfigVersion.cmake"
+        "${CMAKE_CURRENT_BINARY_DIR}/open62541ppConfig.cmake"
+        "${CMAKE_SOURCE_DIR}/cmake/Findopen62541.cmake"
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/open62541pp
+        )
+
+install(DIRECTORY
+        "${PROJECT_SOURCE_DIR}/include/open62541pp"
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        )
