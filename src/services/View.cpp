@@ -1,4 +1,4 @@
-#include "open62541pp/services/Browse.h"
+#include "open62541pp/services/View.h"
 
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"

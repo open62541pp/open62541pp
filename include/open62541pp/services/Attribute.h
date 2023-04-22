@@ -22,7 +22,7 @@ namespace opcua::services {
 /* -------------------------------------- Generic functions ------------------------------------- */
 
 /**
- * @defgroup Attribute Attribute
+ * @defgroup Attribute Attribute service set
  * Read and write node attributes.
  *
  * The following node attributes cannot be changed once a node has been created:

@@ -103,8 +103,8 @@ add_library(
     src/detail/helper.cpp
     src/overloads/ostream.cpp
     src/services/Attribute.cpp
-    src/services/Browse.cpp
     src/services/NodeManagement.cpp
+    src/services/View.cpp
     src/types/Builtin.cpp
     src/types/Composed.cpp
     src/types/DataValue.cpp
