@@ -328,30 +328,29 @@ TEST_CASE("Attribute (server & client)") {
 TEST_CASE("View") {
     Server server;
 
+    // add node to query references
+    const NodeId id{1, 1000};
+    services::addVariable(server, {0, UA_NS0ID_OBJECTSFOLDER}, id, "variable");
+
     SUBCASE("Browse") {
-        const BrowseDescription bd({0, UA_NS0ID_OBJECTSFOLDER}, BrowseDirection::Both);
+        const BrowseDescription bd(id, BrowseDirection::Both);
         const auto result = services::browse(server, bd);
 
         CHECK(result.getStatusCode() == UA_STATUSCODE_GOOD);
         CHECK(result.getContinuationPoint() == ByteString());  // empty
 
-        const auto references = result.getReferences();
-        CHECK(references.size() == 3);
-        // 1. Organized by Root
-        CHECK(references.at(0).getReferenceTypeId() == NodeId(0, UA_NS0ID_ORGANIZES));
-        CHECK(references.at(0).getIsForward() == false);
-        CHECK(references.at(0).getNodeId().getNodeId() == NodeId(0, UA_NS0ID_ROOTFOLDER));
-        CHECK(references.at(0).getBrowseName() == QualifiedName(0, "Root"));
-        // 2. HasTypeDefinition FolderType
-        CHECK(references.at(1).getReferenceTypeId() == NodeId(0, UA_NS0ID_HASTYPEDEFINITION));
-        CHECK(references.at(1).getIsForward() == true);
-        CHECK(references.at(1).getNodeId().getNodeId() == NodeId(0, UA_NS0ID_FOLDERTYPE));
-        CHECK(references.at(1).getBrowseName() == QualifiedName(0, "FolderType"));
-        // 3. Organizes Server
-        CHECK(references.at(2).getReferenceTypeId() == NodeId(0, UA_NS0ID_ORGANIZES));
-        CHECK(references.at(2).getIsForward() == true);
-        CHECK(references.at(2).getNodeId().getNodeId() == NodeId(0, UA_NS0ID_SERVER));
-        CHECK(references.at(2).getBrowseName() == QualifiedName(0, "Server"));
+        const auto refs = result.getReferences();
+        CHECK(refs.size() == 2);
+        // 1. ComponentOf Objects
+        CHECK(refs.at(0).getReferenceTypeId() == NodeId(0, UA_NS0ID_HASCOMPONENT));
+        CHECK(refs.at(0).getIsForward() == false);
+        CHECK(refs.at(0).getNodeId() == ExpandedNodeId({0, UA_NS0ID_OBJECTSFOLDER}));
+        CHECK(refs.at(0).getBrowseName() == QualifiedName(0, "Objects"));
+        // 2. HasTypeDefinition BaseDataVariableType
+        CHECK(refs.at(1).getReferenceTypeId() == NodeId(0, UA_NS0ID_HASTYPEDEFINITION));
+        CHECK(refs.at(1).getIsForward() == true);
+        CHECK(refs.at(1).getNodeId() == ExpandedNodeId({0, UA_NS0ID_BASEDATAVARIABLETYPE}));
+        CHECK(refs.at(1).getBrowseName() == QualifiedName(0, "BaseDataVariableType"));
     }
 
     SUBCASE("Browse next") {
