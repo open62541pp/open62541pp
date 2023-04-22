@@ -1,5 +1,6 @@
 #include "open62541pp/services/View.h"
 
+#include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
 
@@ -15,9 +16,50 @@ BrowseResult browse<Server>(Server& server, const BrowseDescription& bd, uint32_
 }
 
 template <>
+BrowseResult browse<Client>(Client& client, const BrowseDescription& bd, uint32_t maxReferences) {
+    UA_BrowseRequest request{};
+    request.requestedMaxReferencesPerNode = maxReferences;
+    request.nodesToBrowseSize = 1;
+    // NOLINTNEXTLINE, won't be modified
+    request.nodesToBrowse = const_cast<UA_BrowseDescription*>(bd.handle());
+
+    using BrowseResponse = TypeWrapper<UA_BrowseResponse, UA_TYPES_BROWSERESPONSE>;
+    BrowseResponse response = UA_Client_Service_browse(client.handle(), request);
+    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+
+    if (response->resultsSize != 1) {
+        throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
+    }
+
+    BrowseResult result;
+    result.swap(*response->results);
+    return result;
+}
+
+template <>
 BrowseResult browseNext<Server>(Server& server, const ByteString& continuationPoint) {
     BrowseResult result = UA_Server_browseNext(server.handle(), false, continuationPoint.handle());
     detail::throwOnBadStatus(result->statusCode);
+    return result;
+}
+
+template <>
+BrowseResult browseNext<Client>(Client& client, const ByteString& continuationPoint) {
+    UA_BrowseNextRequest request{};
+    request.continuationPointsSize = 1;
+    // NOLINTNEXTLINE, won't be modified
+    request.continuationPoints = const_cast<UA_ByteString*>(continuationPoint.handle());
+
+    using BrowseNextResponse = TypeWrapper<UA_BrowseNextResponse, UA_TYPES_BROWSENEXTRESPONSE>;
+    BrowseNextResponse response = UA_Client_Service_browseNext(client.handle(), request);
+    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+
+    if (response->resultsSize != 1) {
+        throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
+    }
+
+    BrowseResult result;
+    result.swap(*response->results);
     return result;
 }
 
