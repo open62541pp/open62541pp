@@ -1,7 +1,10 @@
 set(examples_sources
+    client_connect.cpp
+    client_find_servers.cpp
+    client_minimal.cpp
     server.cpp
     server_instantiation.cpp
-    client.cpp
+    server_minimal.cpp
 )
 
 foreach(source ${examples_sources})
@@ -20,7 +23,9 @@ foreach(source ${examples_sources})
         ${target_name}
         PROPERTIES
             OUTPUT_NAME ${name}
+            RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/examples"
     )
+    # disable clang-tidy check to avoid try/except blocks in examples
     if(CMAKE_CXX_CLANG_TIDY)
         set(checks "-bugprone-exception-escape")  # allow uncaught exceptions in main
         set_target_properties(

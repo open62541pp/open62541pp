@@ -2,6 +2,7 @@
 
 #include <array>
 #include <cstdint>
+#include <string>
 #include <string_view>
 
 #include "open62541pp/TypeWrapper.h"
@@ -15,6 +16,7 @@ namespace opcua {
  */
 class String : public TypeWrapper<UA_String, UA_TYPES_STRING> {
 public:
+    // NOLINTNEXTLINE, false positive?
     using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
 
     explicit String(std::string_view str);
@@ -28,9 +30,14 @@ public:
  */
 class Guid : public TypeWrapper<UA_Guid, UA_TYPES_GUID> {
 public:
+    // NOLINTNEXTLINE, false positive?
     using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
 
-    Guid(UA_UInt32 data1, UA_UInt16 data2, UA_UInt16 data3, std::array<UA_Byte, 8> data4);
+    Guid(uint32_t data1, uint16_t data2, uint16_t data3, std::array<uint8_t, 8> data4);
+
+    static Guid random();
+
+    std::string toString() const;
 };
 
 /**

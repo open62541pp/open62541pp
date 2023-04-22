@@ -1,107 +1,86 @@
-// This Source Code Form is subject to the terms of the Mozilla Public
-// License, v. 2.0. If a copy of the MPL was not distributed with this
-// file, You can obtain one at http://mozilla.org/MPL/2.0/.
-
 #pragma once
 
-#include "open62541pp/Endpoint.h"
-#include "open62541pp/ErrorHandling.h"
-#include "open62541pp/Logger.h"
-#include "open62541pp/types/NodeId.h"
-#include "open62541pp/types/Variant.h"
-
-#include <open62541/client.h>
-
 #include <memory>
-#include <string>
 #include <string_view>
 #include <vector>
+
+#include "open62541pp/Auth.h"
+#include "open62541pp/Logger.h"
+#include "open62541pp/types/Builtin.h"
+#include "open62541pp/types/Composed.h"
+#include "open62541pp/types/NodeId.h"
+
+// forward declaration open62541
+struct UA_Client;
 
 namespace opcua {
 
 // forward declaration
-class NodeId;
+template <typename ServerOrClient>
 class Node;
 
-/// Login credentials.
-
+/**
+ * High-level client class.
+ *
+ * Exposes the most common functionality. Use the handle() method to get access the underlying
+ * UA_Client instance and use the full power of open6254.
+ */
 class Client {
-
 public:
+    /// Create client with default configuration.
     Client();
 
-    ~Client();
-
-    // // delete unused constructors
-    Client(Client& other) = delete;
-    Client(const Client& other) = delete;
-    Client(Client&& other) = delete;
+    /// Set custom logging function.
+    void setLogger(Logger logger);
 
     /**
-       @brief find servers and return a vector of server names and their urls
-       @param[in] uri of network to search for servers
-       @return vector of pairs of servername and urls
-       @warning throws opcua::BadStatus
-    */
-    [[nodiscard]] std::vector<std::pair<std::string, std::string>> findServers(std::string_view url
-    );
-
-    /**
-       @brief get a vector of endpoints
-       @pparam[in] url of the server
-       @return vector of Endpoints
-       @warning throws opcua::BadStatus
-    */
-    [[nodiscard]] std::vector<opcua::Endpoint> getEndpoints(std::string_view url);
-
-    /**
-       @brief Connect using a single url
-       @param[in] url of the server
-       @warning Throws opcua::BadStatus
+     * Gets a list of all registered servers at the given server.
+     * @note Client must be disconnected.
+     * @param serverUrl url to connect (for example `opc.tcp://localhost:4840`)
      */
-    void connect(std::string_view url);
+    std::vector<ApplicationDescription> findServers(std::string_view serverUrl);
 
     /**
-       @brief Connect using username and a password
-       @param[in] url of the server
-       @param[in] username name of the user
-       @param[in] user password
-       @warning Throws opcua::BadStatus
+     * Gets a list of endpoints of a server.
+     * @note Client must be disconnected.
+     * @param serverUrl to connect (for example `opc.tcp://localhost:4840`)
      */
-    void connect(std::string_view url, std::string_view username, std::string_view password);
+    std::vector<EndpointDescription> getEndpoints(std::string_view serverUrl);
 
     /**
-     * @brief Read Value Attribute from a node
-     *
-     * @param nodeId[in] id of the node
-     * @return attribute value in a varian form
+     * Connect to the selected server.
+     * @param endpointUrl to connect (for example `opc.tcp://localhost:4840/open62541/server/`)
      */
-    Variant readValueAttribute(const NodeId& nodeId);
+    void connect(std::string_view endpointUrl);
 
     /**
-     * @brief Write a value attribute to a node
-     *
-     * @param nodeId[in] id of the node
-     * @param value[in] to be written
+     * Connect to the selected server with the given username and password.
+     * @param endpointUrl to connect (for example `opc.tcp://localhost:4840/open62541/server/`)
+     * @param login credentials with username and password
      */
-    void writeValueAttribute(const NodeId& nodeId, const Variant& value);
+    void connect(std::string_view endpointUrl, const Login& login);
 
-    /**
-     * @brief accessor to the internal UA_Client
-     *
-     * @return UA_Client*
-     */
+    /// Disconnect and close a connection to the server (async, without blocking).
+    void disconnect() noexcept;
+
+    Node<Client> getNode(const NodeId& id);
+    Node<Client> getRootNode();
+    Node<Client> getObjectsNode();
+    Node<Client> getTypesNode();
+    Node<Client> getViewsNode();
+    Node<Client> getObjectTypesNode();
+    Node<Client> getVariableTypesNode();
+    Node<Client> getDataTypesNode();
+    Node<Client> getReferenceTypesNode();
+    Node<Client> getBaseObjectTypeNode();
+    Node<Client> getBaseDataVariableTypeNode();
+
     UA_Client* handle() noexcept;
-
-    /**
-     * @brief const accessor to the internal UA_Client
-     *
-     * @return const UA_Client*
-     */
     const UA_Client* handle() const noexcept;
 
 private:
-    struct PrivateData;
-    std::unique_ptr<PrivateData> d_;
+    class Connection;
+    std::shared_ptr<Connection> connection_;
 };
+
 }  // namespace opcua

@@ -80,6 +80,9 @@ configure_file(
     ${doxygen_output_dir}/Doxyfile
 )
 
+file(GLOB_RECURSE open62541pp_sources "${PROJECT_SOURCE_DIR}/src/*.cpp")
+file(GLOB_RECURSE open62541pp_headers "${PROJECT_SOURCE_DIR}/include/*.h")
+
 add_custom_command(
     OUTPUT ${doxygen_html_dir}/index.html  # as dummy dependency for target
     COMMAND Doxygen::doxygen
@@ -87,8 +90,10 @@ add_custom_command(
     DEPENDS
         Doxyfile.in
         DoxygenLayout.xml
+        example.dox
         ${PROJECT_SOURCE_DIR}/README.md
-        open62541pp  # TODO: only header files?
+        ${open62541pp_sources}
+        ${open62541pp_headers}
     WORKING_DIRECTORY ${doxygen_output_dir}
 )
 add_custom_target(

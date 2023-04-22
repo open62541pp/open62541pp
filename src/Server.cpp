@@ -1,34 +1,44 @@
 #include "open62541pp/Server.h"
 
 #include <atomic>
-#include <cassert>
-#include <chrono>
-#include <cstdarg>  // va_list, va_copy
-#include <cstdio>
-#include <thread>
+#include <mutex>
 #include <utility>  // move
 
 #include "open62541pp/ErrorHandling.h"
-#include "open62541pp/Helper.h"
 #include "open62541pp/Node.h"
-#include "open62541pp/types/Builtin.h"  // ByteString
+#include "open62541pp/detail/helper.h"
+#include "open62541pp/services/Attribute.h"
+#include "open62541pp/types/Builtin.h"
+#include "open62541pp/types/Variant.h"
 
+#include "CustomLogger.h"
 #include "open62541_impl.h"
 #include "version.h"
 
 namespace opcua {
+
+/* ------------------------------------------- Helper ------------------------------------------- */
+
+inline static UA_ServerConfig* getConfig(UA_Server* server) noexcept {
+    return UA_Server_getConfig(server);
+}
+
+inline static UA_ServerConfig* getConfig(Server* server) noexcept {
+    return UA_Server_getConfig(server->handle());
+}
 
 /* ----------------------------------------- Connection ----------------------------------------- */
 
 class Server::Connection {
 public:
     Connection()
-        : server_(UA_Server_new()) {}
+        : server_(UA_Server_new()),
+          logger_(getConfig(server_)->logger) {}
 
     ~Connection() {
         // don't use stop method here because it might throw an exception
         if (running_) {
-            UA_Server_run_shutdown(this->server_);
+            UA_Server_run_shutdown(server_);
         }
         UA_Server_delete(server_);
     }
@@ -40,7 +50,7 @@ public:
     Connection& operator=(Connection&&) noexcept = delete;
 
     void applyDefaults() {
-        auto* config = getConfig();
+        auto* config = getConfig(server_);
         config->publishingIntervalLimits.min = 10;  // ms
         config->samplingIntervalLimits.min = 10;  // ms
 #if UAPP_OPEN62541_VER_GE(1, 2)
@@ -48,31 +58,37 @@ public:
 #endif
     }
 
+    void runStartup() {
+        const auto status = UA_Server_run_startup(server_);
+        detail::throwOnBadStatus(status);
+        running_ = true;
+    }
+
+    uint16_t runIterate() {
+        if (!running_) {
+            runStartup();
+        }
+        return UA_Server_run_iterate(server_, false /* don't wait */);
+    }
+
     void run() {
         if (running_) {
             return;
         }
-
-        const auto status = UA_Server_run_startup(server_);
-        detail::throwOnBadStatus(status);
-        running_ = true;
+        runStartup();
+        std::lock_guard<std::mutex> lock(mutex_);
         while (running_) {
-            // references:
-            // https://open62541.org/doc/current/server.html#server-lifecycle
             // https://github.com/open62541/open62541/blob/master/examples/server_mainloop.c
-            const auto waitInterval = UA_Server_run_iterate(server_, true);
-            std::this_thread::sleep_for(std::chrono::milliseconds(waitInterval));
+            UA_Server_run_iterate(server_, true /* wait for messages in the networklayer */);
         }
     }
 
     void stop() {
-        if (!running_) {
-            return;
-        }
-
-        const auto status = UA_Server_run_shutdown(this->server_);
-        detail::throwOnBadStatus(status);
         running_ = false;
+        // wait for run loop to complete
+        std::lock_guard<std::mutex> lock(mutex_);
+        const auto status = UA_Server_run_shutdown(server_);
+        detail::throwOnBadStatus(status);
     }
 
     bool isRunning() const noexcept {
@@ -80,38 +96,7 @@ public:
     }
 
     void setLogger(Logger logger) {
-        logger_ = std::move(logger);
-        auto* config = getConfig();
-        config->logger.log = log;
-        config->logger.context = this;
-        config->logger.clear = nullptr;
-    }
-
-    static void log(
-        void* context, UA_LogLevel level, UA_LogCategory category, const char* msg, va_list args
-    ) {
-        assert(context != nullptr);  // NOLINT
-
-        const auto* instance = static_cast<Connection*>(context);
-        assert(instance->logger_ != nullptr);  // NOLINT
-
-        // convert printf format + args to string_view
-        va_list tmp;  // NOLINT
-        va_copy(tmp, args);  // NOLINT
-        const int charsToWrite = std::vsnprintf(nullptr, 0, msg, tmp);  // NOLINT
-        va_end(tmp);  // NOLINT
-        std::vector<char> buffer(charsToWrite + 1);
-        const int charsWritten = std::vsnprintf(buffer.data(), buffer.size(), msg, args);
-        if (charsWritten < 0) {
-            return;
-        }
-        const std::string_view sv(buffer.data(), buffer.size());
-
-        instance->logger_(static_cast<LogLevel>(level), static_cast<LogCategory>(category), sv);
-    }
-
-    UA_ServerConfig* getConfig() noexcept {
-        return UA_Server_getConfig(server_);
+        logger_.setLogger(std::move(logger));
     }
 
     UA_Server* handle() noexcept {
@@ -121,21 +106,22 @@ public:
 private:
     UA_Server* server_;
     std::atomic<bool> running_{false};
-    Logger logger_{nullptr};
+    std::mutex mutex_;
+    CustomLogger logger_;
 };
 
 /* ------------------------------------------- Server ------------------------------------------- */
 
 Server::Server()
     : connection_(std::make_shared<Connection>()) {
-    const auto status = UA_ServerConfig_setDefault(getConfig());
+    const auto status = UA_ServerConfig_setDefault(getConfig(this));
     detail::throwOnBadStatus(status);
     connection_->applyDefaults();
 }
 
 Server::Server(uint16_t port)
     : connection_(std::make_shared<Connection>()) {
-    const auto status = UA_ServerConfig_setMinimal(getConfig(), port, nullptr);
+    const auto status = UA_ServerConfig_setMinimal(getConfig(this), port, nullptr);
     detail::throwOnBadStatus(status);
     connection_->applyDefaults();
 }
@@ -143,7 +129,7 @@ Server::Server(uint16_t port)
 Server::Server(uint16_t port, std::string_view certificate)
     : connection_(std::make_shared<Connection>()) {
     const auto status = UA_ServerConfig_setMinimal(
-        getConfig(), port, ByteString(certificate).handle()
+        getConfig(this), port, ByteString(certificate).handle()
     );
     detail::throwOnBadStatus(status);
     connection_->applyDefaults();
@@ -171,30 +157,30 @@ static void copyApplicationDescriptionToEndpoints(UA_ServerConfig* config) {
 }
 
 void Server::setCustomHostname(std::string_view hostname) {
-    auto& ref = getConfig()->customHostname;
+    auto& ref = getConfig(this)->customHostname;
     UA_String_clear(&ref);
     ref = detail::allocUaString(hostname);
 }
 
 void Server::setApplicationName(std::string_view name) {
-    auto& ref = getConfig()->applicationDescription.applicationName;
+    auto& ref = getConfig(this)->applicationDescription.applicationName;
     UA_LocalizedText_clear(&ref);
     ref = UA_LOCALIZEDTEXT_ALLOC("", name.data());
-    copyApplicationDescriptionToEndpoints(getConfig());
+    copyApplicationDescriptionToEndpoints(getConfig(this));
 }
 
 void Server::setApplicationUri(std::string_view uri) {
-    auto& ref = getConfig()->applicationDescription.applicationUri;
+    auto& ref = getConfig(this)->applicationDescription.applicationUri;
     UA_String_clear(&ref);
     ref = detail::allocUaString(uri);
-    copyApplicationDescriptionToEndpoints(getConfig());
+    copyApplicationDescriptionToEndpoints(getConfig(this));
 }
 
 void Server::setProductUri(std::string_view uri) {
-    auto& ref = getConfig()->applicationDescription.productUri;
+    auto& ref = getConfig(this)->applicationDescription.productUri;
     UA_String_clear(&ref);
     ref = detail::allocUaString(uri);
-    copyApplicationDescriptionToEndpoints(getConfig());
+    copyApplicationDescriptionToEndpoints(getConfig(this));
 }
 
 void Server::setLogin(const std::vector<Login>& logins, bool allowAnonymous) {
@@ -206,7 +192,7 @@ void Server::setLogin(const std::vector<Login>& logins, bool allowAnonymous) {
         loginsUa[i].password = detail::allocUaString(logins[i].password);
     }
 
-    auto* config = getConfig();
+    auto* config = getConfig(this);
 #if UAPP_OPEN62541_VER_GE(1, 1)
     if (config->accessControl.clear != nullptr) {
         config->accessControl.clear(&config->accessControl);
@@ -236,6 +222,20 @@ void Server::setLogin(const std::vector<Login>& logins, bool allowAnonymous) {
     detail::throwOnBadStatus(status);
 }
 
+std::vector<std::string> Server::getNamespaceArray() {
+    Variant variant;
+    services::readValue(*this, {0, UA_NS0ID_SERVER_NAMESPACEARRAY}, variant);
+    return variant.getArrayCopy<std::string>();
+}
+
+uint16_t Server::registerNamespace(std::string_view uri) {
+    return UA_Server_addNamespace(handle(), std::string(uri).c_str());
+}
+
+uint16_t Server::runIterate() {
+    return connection_->runIterate();
+}
+
 void Server::run() {
     connection_->run();
 }
@@ -248,52 +248,48 @@ bool Server::isRunning() const noexcept {
     return connection_->isRunning();
 }
 
-uint16_t Server::registerNamespace(std::string_view name) {
-    return UA_Server_addNamespace(handle(), std::string(name).c_str());
+Node<Server> Server::getNode(const NodeId& id) {
+    return {*this, id, true};
 }
 
-Node Server::getNode(const NodeId& id) {
-    return {*this, id};
+Node<Server> Server::getRootNode() {
+    return {*this, {0, UA_NS0ID_ROOTFOLDER}, false};
 }
 
-Node Server::getRootNode() {
-    return {*this, {0, UA_NS0ID_ROOTFOLDER}};
+Node<Server> Server::getObjectsNode() {
+    return {*this, {0, UA_NS0ID_OBJECTSFOLDER}, false};
 }
 
-Node Server::getObjectsNode() {
-    return {*this, {0, UA_NS0ID_OBJECTSFOLDER}};
+Node<Server> Server::getTypesNode() {
+    return {*this, {0, UA_NS0ID_TYPESFOLDER}, false};
 }
 
-Node Server::getTypesNode() {
-    return {*this, {0, UA_NS0ID_TYPESFOLDER}};
+Node<Server> Server::getViewsNode() {
+    return {*this, {0, UA_NS0ID_VIEWSFOLDER}, false};
 }
 
-Node Server::getViewsNode() {
-    return {*this, {0, UA_NS0ID_VIEWSFOLDER}};
+Node<Server> Server::getObjectTypesNode() {
+    return {*this, {0, UA_NS0ID_OBJECTTYPESFOLDER}, false};
 }
 
-Node Server::getObjectTypesNode() {
-    return {*this, {0, UA_NS0ID_OBJECTTYPESFOLDER}};
+Node<Server> Server::getVariableTypesNode() {
+    return {*this, {0, UA_NS0ID_VARIABLETYPESFOLDER}, false};
 }
 
-Node Server::getVariableTypesNode() {
-    return {*this, {0, UA_NS0ID_VARIABLETYPESFOLDER}};
+Node<Server> Server::getDataTypesNode() {
+    return {*this, {0, UA_NS0ID_DATATYPESFOLDER}, false};
 }
 
-Node Server::getDataTypesNode() {
-    return {*this, {0, UA_NS0ID_DATATYPESFOLDER}};
+Node<Server> Server::getReferenceTypesNode() {
+    return {*this, {0, UA_NS0ID_REFERENCETYPESFOLDER}, false};
 }
 
-Node Server::getReferenceTypesNode() {
-    return {*this, {0, UA_NS0ID_REFERENCETYPESFOLDER}};
+Node<Server> Server::getBaseObjectTypeNode() {
+    return {*this, {0, UA_NS0ID_BASEOBJECTTYPE}, false};
 }
 
-Node Server::getBaseObjectTypeNode() {
-    return {*this, {0, UA_NS0ID_BASEOBJECTTYPE}};
-}
-
-Node Server::getBaseDataVariableTypeNode() {
-    return {*this, {0, UA_NS0ID_BASEDATAVARIABLETYPE}};
+Node<Server> Server::getBaseDataVariableTypeNode() {
+    return {*this, {0, UA_NS0ID_BASEDATAVARIABLETYPE}, false};
 }
 
 UA_Server* Server::handle() noexcept {
@@ -302,14 +298,6 @@ UA_Server* Server::handle() noexcept {
 
 const UA_Server* Server::handle() const noexcept {
     return connection_->handle();
-}
-
-UA_ServerConfig* Server::getConfig() noexcept {
-    return connection_->getConfig();
-}
-
-const UA_ServerConfig* Server::getConfig() const noexcept {
-    return connection_->getConfig();
 }
 
 /* ---------------------------------------------------------------------------------------------- */

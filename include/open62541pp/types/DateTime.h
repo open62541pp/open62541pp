@@ -40,11 +40,14 @@ public:
     /// Get DateTime from Unix time.
     static DateTime fromUnixTime(int64_t unixTime);
 
+    /// Offset of local time to UTC.
+    static int64_t localTimeUtcOffset();
+
     /// Convert to std::chrono::time_point.
     template <typename Clock = DefaultClock, typename Duration = UaDuration>
     std::chrono::time_point<Clock, Duration> toTimePoint() const;
 
-    /// Convert to Unix time.
+    /// Convert to Unix time (number of seconds since January 1, 1970 UTC).
     int64_t toUnixTime() const noexcept;
 
     /// Convert to UA_DateTimeStruct.
@@ -52,6 +55,10 @@ public:
 
     /// Get DateTime value as 100 nanosecond intervals since January 1, 1601 (UTC).
     int64_t get() const noexcept;
+
+    /// Convert to string with given format (same format codes as strftime).
+    /// @see https://en.cppreference.com/w/cpp/chrono/c/strftime
+    std::string format(std::string_view format, bool localtime = false) const;
 };
 
 template <typename Clock, typename Duration>
@@ -69,7 +76,8 @@ std::chrono::time_point<Clock, Duration> DateTime::toTimePoint() const {
     if (dateTime < UA_DATETIME_UNIX_EPOCH) {
         return unixEpoch;
     }
-    return unixEpoch + UaDuration(dateTime - UA_DATETIME_UNIX_EPOCH);
+    const auto sinceEpoch = UaDuration(dateTime - UA_DATETIME_UNIX_EPOCH);
+    return unixEpoch + std::chrono::duration_cast<Duration>(sinceEpoch);
 }
 
 }  // namespace opcua

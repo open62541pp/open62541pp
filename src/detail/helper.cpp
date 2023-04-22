@@ -1,8 +1,8 @@
-#include "open62541pp/Helper.h"
+#include "open62541pp/detail/helper.h"
 
 #include <cstring>
 
-#include "open62541_impl.h"
+#include "../open62541_impl.h"
 
 namespace opcua::detail {
 

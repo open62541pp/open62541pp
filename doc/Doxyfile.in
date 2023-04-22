@@ -25,7 +25,8 @@ QUIET                  = YES
 # Input files
 INPUT                  = "${PROJECT_SOURCE_DIR}/include/" \
                          "${PROJECT_SOURCE_DIR}/src/" \
-                         "${PROJECT_SOURCE_DIR}/README.md"
+                         "${PROJECT_SOURCE_DIR}/README.md" \
+                         "${CMAKE_CURRENT_SOURCE_DIR}/example.dox"
 FILE_PATTERNS          = *.h *.hpp *.cpp
 RECURSIVE              = YES
 EXAMPLE_PATH           = "${PROJECT_SOURCE_DIR}/examples"
@@ -51,6 +52,9 @@ HTML_DYNAMIC_SECTIONS  = NO
 HTML_OUTPUT            = "${doxygen_html_dir}"
 HTML_COLORSTYLE        = LIGHT
 EXT_LINKS_IN_WINDOW    = YES
+
+# Preprocessor
+MACRO_EXPANSION        = YES
 
 # Dot diagrams
 HAVE_DOT               = YES

@@ -9,7 +9,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Basic `Client` implementation (#33)
+- `asWrapper` function to cast native refs to wrapper refs (#30, #31)
+- `DataValue::getValuePtr` method
+- Static methods `DataValue::fromScalar` and `DataValue::fromArray`
+- `DateTime::format` method
+- `Server::getNamespaceArray` method
+- `Server::runIterate` method, e.g. to run server in existing event loop
+- Generic `services::readAttribute` and `services::writeAttribute` functions
+- Missing functions to read/write attributes `UserWriteMask`, `IsAbstract`, `Symmetric`, `InverseName`, `UserAccessLevel` and `MinimumSamplingInterval`
+- `Guid::toString` and `Guid::random` method
+- `DateTime::localTimeUtcOffset` and `DateTime::format` method
+- `ostream` overloads for `String`, `Guid`, `XmlElement`
+- Examples:
+  - `client_minimal`
+  - `client_connect`
+  - `client_find_servers`
+  - `server_minimal`
+
+### Changed
+
+- Templated `Node` class (`Node<Server>`, `Node<Client>`) as preparation for client implementation (#32)
+- Return reference from `ExpandedNodeId::getNodeId`
+- Pass `LocalizedText` instead of members (`locale`, `text`) to `Node::writeDisplayName`, `Node::writeDescription`, `services::writeDisplayName`, `services::writeDescription` (#29)
+- Remove `Server::getConfig` method
+- Rename `Node::writeModellingRule` -> `Node::addModellingRule`
+- Remove `TypeWrapper::getType` method
+- Use `TypeIndex` instead of `Type` enum for `TypeConverter` to allow conversions of non-builtin types
+
+### Fixed
+
+- `TypeConverter::toNative` specialization for wrapper types
+
+## [0.2.0] - 2023-04-12
+
+### Added
+
 - Generic type conversions with `TypeConverter` struct specializations
+- Free functions in services namespace as alternative to `Node` interface (#22)
 - `Server` constructors with custom port and certificate
 - Custom logger with `Server::setLogger`
 - Example `server_instantiation`
@@ -27,6 +64,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `ExpandedNodeId`
   - `DateTime`
   - `DataValue`
+- Static methods `Variant::from*` for create variants from scalars and arrays (#21)
 
 ### Changed
 
@@ -46,14 +84,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rename `Exception` -> `BadStatus`
 - Use default open62541 attributes for `Node::add*`
 - Use `ReferenceType::HasComponent` as default reference for child variable and object nodes
+- Optional check if `Node` exists in constructor (#24)
 
 ### Removed
 
 - `Variant` constructors to set scalars and arrays directly
 
+### Fixed
+
+- Dereference in `Variant::getArray` (#25)
+
 ## [0.1.0] - 2022-04-24
 
 Initial public release
 
-[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.1.0...HEAD
+[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.2.0
 [0.1.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.1.0

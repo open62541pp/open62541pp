@@ -1,80 +1,81 @@
-#include <chrono>
-#include <thread>
+#include <string_view>
 
-#include <catch2/catch_test_macros.hpp>
-#include <catch2/matchers/catch_matchers_string.hpp>
+#include <doctest/doctest.h>
 
-#include "open62541pp/Helper.h"
-#include "open62541pp/Node.h"
-#include "open62541pp/types/NodeId.h"
-#include "open62541pp/Server.h"
 #include "open62541pp/Client.h"
+#include "open62541pp/Server.h"
 
-#include "open62541_impl.h"
+#include "helper/Runner.h"
 
-using namespace Catch::Matchers;
-using namespace std::chrono_literals;
 using namespace opcua;
 
-static bool compareNodes(NodeId id, uint16_t numericId) {
-	auto uaNode = UA_NODEID_NUMERIC(0, numericId);
-	return UA_NodeId_equal(id.handle(), &uaNode);
+constexpr std::string_view localServerUrl{"opc.tcp://localhost:4840"};
+
+TEST_CASE("Client discovery") {
+    Server server;
+    ServerRunner serverRunner(server);
+
+    Client client;
+
+    SUBCASE("Find servers") {
+        const auto results = client.findServers(localServerUrl);
+        CHECK(results.size() == 1);
+
+        const auto& result = results[0];
+        CHECK(result.getApplicationUri() == String("urn:open62541.server.application"));
+        CHECK(result.getProductUri() == String("http://open62541.org"));
+        CHECK(result.getApplicationType() == UA_APPLICATIONTYPE_SERVER);
+        CHECK(result.getDiscoveryUrls().size() == 1);
+    }
+
+    SUBCASE("Get endpoints") {
+        const auto endpoints = client.getEndpoints(localServerUrl);
+        CHECK(endpoints.size() == 1);
+
+        const auto& endpoint = endpoints[0];
+        CHECK(endpoint.getEndpointUrl() == String(localServerUrl));
+        CHECK(endpoint.getServerCertificate() == ByteString());
+        CHECK(endpoint.getSecurityMode() == UA_MESSAGESECURITYMODE_NONE);
+        CHECK(
+            endpoint.getSecurityPolicyUri() ==
+            String("http://opcfoundation.org/UA/SecurityPolicy#None")
+        );
+        CHECK(
+            endpoint.getTransportProfileUri() ==
+            String("http://opcfoundation.org/UA-Profile/Transport/uatcp-uasc-uabinary")
+        );
+    }
 }
 
-TEST_CASE("Client") {
-	Server server;
+TEST_CASE("Client anonymous login") {
+    Server server;
+    ServerRunner serverRunner(server);
 
-	REQUIRE_FALSE(server.isRunning());
+    Client client;
 
-	auto t = std::thread([&] { server.run(); });
+    SUBCASE("Connect/disconnect") {
+        CHECK_NOTHROW(client.connect(localServerUrl));
+        CHECK_NOTHROW(client.disconnect());
+    }
 
-	std::this_thread::sleep_for(100ms);  // wait for thread to execute run method
-	
-	REQUIRE(server.isRunning());
-	REQUIRE_NOTHROW(server.stop());
+    SUBCASE("Connect with username/password should fail") {
+        CHECK_THROWS(client.connect(localServerUrl, {"username", "password"}));
+    }
+}
 
-	server.setCustomHostname("customhost");
+TEST_CASE("Client username/password login") {
+    Server server;
+    server.setLogin({{"username", "password"}}, false);
+    ServerRunner serverRunner(server);
 
-	server.setApplicationName("Test App");
+    Client client;
 
-	server.setApplicationUri("http://app.com");
+    SUBCASE("Connect with anonymous should fail") {
+        CHECK_THROWS(client.connect(localServerUrl));
+    }
 
-	server.setProductUri("http://product.com");
-
-	SECTION("List Endpoints")
-	{
-		Client client;
-		auto servers = client.findServers("opc.tcp://localhost:4840");		
-		REQUIRE(servers.size() >= 1);
-	}
-        SECTION("Get Endpoints")
-        {
-                Client client;
-                auto endpoints = client.getEndpoints("opc.tcp://localhost:4840");
-                REQUIRE(endpoints.size() >= 1);
-        }
-
-        SECTION("Client::connect")
-        {
-                Client client;
-                REQUIRE_NOTHROW(client.connect("opc.tcp://localhost:4840"));
-        }
-
-        SECTION("Client::readValueAttributes")
-        {
-                Client client;
-                REQUIRE_NOTHROW(client.connect("opc.tcp://localhost:4840"));
-                    // clang-format off
-        auto rootFolder = client.readValueAttribute(NodeId{0, UA_NS0ID_ROOTFOLDER});
-        auto objFolder = client.readValueAttribute(NodeId{0, UA_NS0ID_OBJECTSFOLDER});
-        auto typesFolder = client.readValueAttribute(NodeId{0, UA_NS0ID_TYPESFOLDER});
-        auto viewsFolder = client.readValueAttribute(NodeId{0, UA_NS0ID_VIEWSFOLDER});
-        auto objTypesFolder = client.readValueAttribute(NodeId{0, UA_NS0ID_OBJECTTYPESFOLDER});
-        auto varTypesFolder = client.readValueAttribute(NodeId{0, UA_NS0ID_VARIABLETYPESFOLDER});
-        auto dataTypesFolder = client.readValueAttribute(NodeId{0, UA_NS0ID_DATATYPESFOLDER});
-        auto refTypesFolder = client.readValueAttribute(NodeId{0, UA_NS0ID_REFERENCETYPESFOLDER});
-        auto baseObjType = client.readValueAttribute(NodeId{0, UA_NS0ID_BASEOBJECTTYPE});
-        auto baseDataVariableType = client.readValueAttribute(NodeId{0, UA_NS0ID_BASEDATAVARIABLETYPE});
-        }
-
+    SUBCASE("Connect with username/password should succeed") {
+        CHECK_NOTHROW(client.connect(localServerUrl, {"username", "password"}));
+        CHECK_NOTHROW(client.disconnect());
+    }
 }

@@ -2,12 +2,13 @@ name: Doc
 
 on:
   push:
-    branches:
-      - master
+    branches: [master]
+  release:
+    types: [published]
 
 jobs:
   doc:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Install requirements
         run: |
@@ -23,6 +24,7 @@ jobs:
           cmake -DUAPP_BUILD_DOCUMENTATION=ON ..
           cmake --build . --target open62541pp_doc
       - name: Deploy
+        if: ${{ github.event_name == 'release' }}
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

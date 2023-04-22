@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.12)
 
 project(
-        open62541++
-        VERSION 0.1.0
-        DESCRIPTION "C++ wrapper for open62541"
-        HOMEPAGE_URL "https://github.com/open62541pp/open62541pp"
-        LANGUAGES CXX
+    open62541++
+    VERSION 0.2.0
+    DESCRIPTION "C++ wrapper for open62541"
+    HOMEPAGE_URL "https://github.com/open62541pp/open62541pp"
+    LANGUAGES CXX
 )
 
 # set c++ standard explicitly, compile feature "cxx_std_17" does not set -std=c++17 compile flag
@@ -29,8 +29,8 @@ target_compile_features(open62541pp_project_options INTERFACE cxx_std_17)
 
 if(MSVC)
     target_compile_options(
-            open62541pp_project_options
-            INTERFACE
+        open62541pp_project_options
+        INTERFACE
             /permissive-
             /W4
             /w14640
@@ -56,8 +56,8 @@ else()
     endif()
 
     target_compile_options(
-            open62541pp_project_options
-            INTERFACE
+        open62541pp_project_options
+        INTERFACE
             -Wall
             -Wextra
             -Wshadow
@@ -96,21 +96,20 @@ endif()
 
 # open62541pp library (static/shared depending on option BUILD_SHARED_LIBS)
 add_library(
-        open62541pp
-        src/Helper.cpp
-        src/Node.cpp
-        src/Server.cpp
-        src/types/ApplicationDescription.cpp
-        src/types/Builtin.cpp
-        src/types/DataValue.cpp
-        src/types/DateTime.cpp
-        src/types/NodeId.cpp
-        src/types/Variant.cpp
-        src/Endpoint.cpp
-        src/Client.cpp
-        src/NodeClient.cpp
-        src/Browser.cpp
-        src/ReferenceDescription.cpp
+    open62541pp
+    src/Client.cpp
+    src/CustomLogger.cpp
+    src/Server.cpp
+    src/detail/helper.cpp
+    src/overloads/ostream.cpp
+    src/services/Attribute.cpp
+    src/services/Browse.cpp
+    src/services/NodeManagement.cpp
+    src/types/Builtin.cpp
+    src/types/DataValue.cpp
+    src/types/DateTime.cpp
+    src/types/NodeId.cpp
+    src/types/Variant.cpp
 )
 add_library(open62541pp::open62541pp ALIAS open62541pp)
 target_include_directories(open62541pp INTERFACE
@@ -142,18 +141,24 @@ if(UAPP_BUILD_TESTS AND UAPP_ENABLE_COVERAGE)
     if(GCOVR_EXE)
         set(gcovr_args "-f" "include/" "-f" "src/" "${CMAKE_BINARY_DIR}")
         add_custom_target(
-                open62541pp_coverage_report
-                COMMAND ${GCOVR_EXE} ${gcovr_args}
-                COMMENT "Generate coverage report"
-                WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+            open62541pp_coverage_report
+            COMMAND ${GCOVR_EXE} ${gcovr_args}
+            COMMENT "Generate coverage report"
+            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        )
+        add_custom_target(
+            open62541pp_coverage_report_xml
+            COMMAND ${GCOVR_EXE} ${gcovr_args} "--xml" "${CMAKE_BINARY_DIR}/coverage.xml"
+            COMMENT "Generate coverage report (xml/cobertura)"
+            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         )
         set(coverage_html_output_dir "${CMAKE_BINARY_DIR}/coverage_html")
         make_directory(${coverage_html_output_dir})
         add_custom_target(
-                open62541pp_coverage_report_html
-                COMMAND ${GCOVR_EXE} ${gcovr_args} "--html-details" "${coverage_html_output_dir}/index.html"
-                COMMENT "Generate HTML coverage report"
-                WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+            open62541pp_coverage_report_html
+            COMMAND ${GCOVR_EXE} ${gcovr_args} "--html-details" "${coverage_html_output_dir}/index.html"
+            COMMENT "Generate coverage report (html)"
+            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         )
     endif()
 endif()

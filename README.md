@@ -2,9 +2,9 @@
 
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-blue.svg)](https://github.com/open62541pp/open62541pp/blob/master/LICENSE)
 [![CI](https://github.com/open62541pp/open62541pp/actions/workflows/ci.yml/badge.svg)](https://github.com/open62541pp/open62541pp/actions/workflows/ci.yml)
-[![Documentation](https://github.com/open62541pp/open62541pp/actions/workflows/doc.yml/badge.svg)](https://github.com/open62541pp/open62541pp/actions/workflows/doc.yml)
 [![Compatibility](https://github.com/open62541pp/open62541pp/actions/workflows/open62541-compatibility.yml/badge.svg)](https://github.com/open62541pp/open62541pp/actions/workflows/open62541-compatibility.yml)
-[![Coverage](https://coveralls.io/repos/github/open62541pp/open62541pp/badge.svg)](https://coveralls.io/github/open62541pp/open62541pp)
+[![Coverage](https://codecov.io/github/open62541pp/open62541pp/branch/master/graph/badge.svg?token=P87N1WRXC4)](https://codecov.io/github/open62541pp/open62541pp)
+[![Documentation](https://github.com/open62541pp/open62541pp/actions/workflows/doc.yml/badge.svg)](https://github.com/open62541pp/open62541pp/actions/workflows/doc.yml)
 
 **[Documentation](https://open62541pp.github.io/open62541pp) · [Examples](https://github.com/open62541pp/open62541pp/tree/master/examples)**
 
@@ -14,7 +14,7 @@ Features and goals:
 
 - High-level and easy to use classes similar to the [python-opcua API](https://python-opcua.readthedocs.io):
   - `opcua::Server`
-  - `opcua::Client` *TODO*
+  - `opcua::Client`
   - `opcua::Node`
 - Safe wrapper classes for open62541 `UA_*` types to prevent memory leaks
 - Native open62541 objects can be accessed using the `handle()` method of the wrapping classes
@@ -25,37 +25,62 @@ Features and goals:
 - Use modern C++ (C++ 17) and best practices
 - Less hurdle to get started with OPC UA
 
-## Example
+## Examples
 
+### Server
+
+<!-- [[[cog
+from pathlib import Path
+import cog
+cog.outl("```cpp")
+cog.out(Path("examples/server_minimal.cpp").read_text())
+cog.outl("```")
+]]] -->
+```cpp
+#include "open62541pp/open62541pp.h"
+
+int main() {
+    opcua::Server server;
+
+    // add variable node
+    auto parentNode = server.getObjectsNode();
+    auto myIntegerNode = parentNode.addVariable({1, "the.answer"}, "the answer");
+    // set node attributes
+    myIntegerNode.writeDataType(opcua::Type::Int32);
+    myIntegerNode.writeDisplayName({"en-US", "the answer"});
+    myIntegerNode.writeDescription({"en-US", "the answer"});
+    myIntegerNode.writeScalar(42);
+
+    server.run();
+}
+```
+<!-- [[[end]]] -->
+
+### Client
+
+<!-- [[[cog
+from pathlib import Path
+import cog
+cog.outl("```cpp")
+cog.out(Path("examples/client_minimal.cpp").read_text())
+cog.outl("```")
+]]] -->
 ```cpp
 #include <iostream>
 
 #include "open62541pp/open62541pp.h"
 
 int main() {
-    opcua::Server server;
+    opcua::Client client;
+    client.connect("opc.tcp://localhost:4840");
 
-    const opcua::NodeId myIntegerNodeId{1, "the.answer"};
-    const std::string   myIntegerName{"the answer"};
+    auto node = client.getNode({0, UA_NS0ID_SERVER_SERVERSTATUS_CURRENTTIME});
+    const auto dt = node.readScalar<opcua::DateTime>();
 
-    // add variable node
-    auto parentNode    = server.getObjectsNode();
-    auto myIntegerNode = parentNode.addVariable(myIntegerNodeId, myIntegerName);
-
-    // set node attributes
-    myIntegerNode.writeDataType(opcua::Type::Int32);
-    myIntegerNode.writeDisplayName("en-US", "the answer");
-    myIntegerNode.writeDescription("en-US", "the answer");
-
-    // write value
-    myIntegerNode.writeScalar(42);
-
-    // read value
-    std::cout << "The answer is: " << myIntegerNode.readScalar<int>() << std::endl;
-
-    server.run();
+    std::cout << "Server date (UTC): " << dt.format("%Y-%m-%d %H:%M:%S") << std::endl;
 }
 ```
+<!-- [[[end]]] -->
 
 ## Type conversion
 
@@ -94,7 +119,7 @@ template <>
 struct TypeConverter<std::string> {
     using ValueType = std::string;
     using NativeType = UA_String;
-    using ValidTypes = TypeList<Type::String, Type::ByteString, Type::XmlElement>;
+    using ValidTypes = TypeIndexList<UA_TYPES_STRING, UA_TYPES_BYTESTRING, UA_TYPES_XMLELEMENT>;
 
     static void fromNative(const NativeType& src, ValueType& dst) { /* ... */ }
     static void toNative(const ValueType& src, NativeType& dst) { /* ... */ }
@@ -106,7 +131,7 @@ struct TypeConverter<std::string> {
 ### Type map of built-in types
 
 | Type Enum `opcua::Type`  | Type                 | Typedef     | Wrapper                           | Conversions               |
-|--------------------------|----------------------|-------------|-----------------------------------|---------------------------|
+| ------------------------ | -------------------- | ----------- | --------------------------------- | ------------------------- |
 | Boolean                  | `UA_Boolean`         | `bool`      |                                   |                           |
 | SByte                    | `UA_SByte`           | `int8_t`    |                                   |                           |
 | Byte                     | `UA_Byte`            | `uint8_t`   |                                   |                           |
@@ -158,4 +183,4 @@ open62541++ provides additional build options:
 ### Dependencies
 
 - [open62541](https://github.com/open62541/open62541) as integrated submodule or external dependency
-- [catch2](https://github.com/catchorg/Catch2) for tests
+- [doctest](https://github.com/doctest/doctest) for tests as integrated submodule

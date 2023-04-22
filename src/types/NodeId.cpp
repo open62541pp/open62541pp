@@ -3,7 +3,7 @@
 #include <cassert>
 
 #include "open62541pp/ErrorHandling.h"
-#include "open62541pp/Helper.h"
+#include "open62541pp/detail/helper.h"
 
 #include "../open62541_impl.h"
 
@@ -101,8 +101,12 @@ bool ExpandedNodeId::isLocal() const noexcept {
     return detail::isEmpty(handle()->namespaceUri) && handle()->serverIndex == 0;
 }
 
-NodeId ExpandedNodeId::getNodeId() const noexcept {
-    return NodeId(handle()->nodeId);  // NOLINT
+NodeId& ExpandedNodeId::getNodeId() noexcept {
+    return asWrapper<NodeId>(handle()->nodeId);
+}
+
+const NodeId& ExpandedNodeId::getNodeId() const noexcept {
+    return asWrapper<NodeId>(handle()->nodeId);
 }
 
 std::string_view ExpandedNodeId::getNamespaceUri() const {

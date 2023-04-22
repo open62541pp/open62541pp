@@ -1,98 +1,177 @@
 #include "open62541pp/Client.h"
-#include "open62541pp/Helper.h"
 
-#include "open62541pp/Logger.h"
+#include <string>
+#include <utility>  // move
 
-#include <open62541/client_config_default.h>
+#include "open62541pp/ErrorHandling.h"
+#include "open62541pp/Node.h"
+#include "open62541pp/TypeConverter.h"
+
+#include "CustomLogger.h"
+#include "open62541_impl.h"
+#include "version.h"
 
 namespace opcua {
 
-// https://stackoverflow.com/questions/58316274/open62541-browsing-nodes-an-using-its-methods
+/* ------------------------------------------- Helper ------------------------------------------- */
 
-struct Client::PrivateData {
-    UA_Client* client{nullptr};
+inline static UA_ClientConfig* getConfig(UA_Client* client) noexcept {
+    return UA_Client_getConfig(client);
+}
+
+inline static UA_ClientConfig* getConfig(Client* client) noexcept {
+    return UA_Client_getConfig(client->handle());
+}
+
+/* ----------------------------------------- Connection ----------------------------------------- */
+
+class Client::Connection {
+public:
+    Connection()
+        : client_(UA_Client_new()),
+          logger_(getConfig(client_)->logger) {}
+
+    ~Connection() {
+        UA_Client_disconnect(client_);
+        UA_Client_delete(client_);
+    }
+
+    // prevent copy & move
+    Connection(const Connection&) = delete;
+    Connection(Connection&&) noexcept = delete;
+    Connection& operator=(const Connection&) = delete;
+    Connection& operator=(Connection&&) noexcept = delete;
+
+    void setLogger(Logger logger) {
+        logger_.setLogger(std::move(logger));
+    }
+
+    UA_Client* handle() noexcept {
+        return client_;
+    }
+
+private:
+    UA_Client* client_;
+    CustomLogger logger_;
 };
 
+/* ------------------------------------------- Client ------------------------------------------- */
+
 Client::Client()
-    : d_(new Client::PrivateData) {
-    d_->client = UA_Client_new();
-    UA_ClientConfig_setDefault(UA_Client_getConfig(d_->client));
+    : connection_(std::make_shared<Connection>()) {
+    const auto status = UA_ClientConfig_setDefault(getConfig(this));
+    detail::throwOnBadStatus(status);
 }
 
-Client::~Client() {
-    if (d_->client)
-        UA_Client_delete(d_->client);
+void Client::setLogger(Logger logger) {
+    connection_->setLogger(std::move(logger));
 }
 
-std::vector<std::pair<std::string, std::string>> Client::findServers(std::string_view url) {
-    size_t nServers{0};
-    UA_ApplicationDescription* registeredServers = nullptr;
-
-    if (detail::isBadStatus(UA_Client_findServers(
-            d_->client, url.data(), 0, nullptr, 0, nullptr, &nServers, &registeredServers
-        )))
-        return {};
-
-    std::vector<std::pair<std::string, std::string>> res;
-
-    for (size_t i = 0; i < nServers; ++i) {
-        res.emplace_back(std::pair<std::string, std::string>{
-            detail::toString(registeredServers[i].applicationName.text),
-            detail::toString(*registeredServers[i].discoveryUrls)});
-    }
-
-    UA_Array_delete(registeredServers, nServers, &UA_TYPES[UA_TYPES_APPLICATIONDESCRIPTION]);
-    return res;
-}
-
-std::vector<Endpoint> Client::getEndpoints(std::string_view url) {
-    UA_EndpointDescription* descArray = nullptr;
-    size_t descArraySize = 0;
-
-    detail::throwOnBadStatus(
-        UA_Client_getEndpoints(d_->client, url.data(), &descArraySize, &descArray)
+std::vector<ApplicationDescription> Client::findServers(std::string_view serverUrl) {
+    UA_ApplicationDescription* array = nullptr;
+    size_t arraySize = 0;
+    const auto status = UA_Client_findServers(
+        handle(),
+        std::string(serverUrl).c_str(),  // serverUrl
+        0,  // serverUrisSize
+        nullptr,  // serverUris
+        0,  // localeIdsSize
+        nullptr,  // localeIds
+        &arraySize,  // registeredServersSize
+        &array  // registeredServers
     );
-
-    std::vector<Endpoint> ret;
-
-    for (size_t i = 0; i < descArraySize; ++i) {
-        Endpoint point;
-        point.url = detail::toString(descArray[i].endpointUrl);
-        TypeConverter<ApplicationDescription>::fromNative(descArray[i].server, point.server);
-        point.serverCertificate = detail::toString(descArray[i].serverCertificate);
-
-        ret.emplace_back(std::move(point));
-    }
-
-    UA_Array_delete(descArray, descArraySize, &UA_TYPES[UA_TYPES_ENDPOINTDESCRIPTION]);
-    return ret;
+    auto result = detail::fromNativeArray<ApplicationDescription>(array, arraySize);
+    UA_Array_delete(array, arraySize, &UA_TYPES[UA_TYPES_APPLICATIONDESCRIPTION]);
+    detail::throwOnBadStatus(status);
+    return result;
 }
 
-void Client::connect(std::string_view url) {
-    detail::throwOnBadStatus(UA_Client_connect(d_->client, url.data()));
-}
-
-void Client::connect(std::string_view url, std::string_view username, std::string_view password) {
-    detail::throwOnBadStatus(
-        UA_Client_connectUsername(d_->client, url.data(), username.data(), password.data())
+std::vector<EndpointDescription> Client::getEndpoints(std::string_view serverUrl) {
+    UA_EndpointDescription* array = nullptr;
+    size_t arraySize = 0;
+    const auto status = UA_Client_getEndpoints(
+        handle(),
+        std::string(serverUrl).c_str(),  // serverUrl
+        &arraySize,  // endpointDescriptionsSize,
+        &array  // endpointDescriptions
     );
+    auto result = detail::fromNativeArray<EndpointDescription>(array, arraySize);
+    UA_Array_delete(array, arraySize, &UA_TYPES[UA_TYPES_ENDPOINTDESCRIPTION]);
+    detail::throwOnBadStatus(status);
+    return result;
 }
 
-Variant Client::readValueAttribute(const NodeId& nodeId) {
-    (void)nodeId;
-    return {};
+void Client::connect(std::string_view endpointUrl) {
+    const auto status = UA_Client_connect(handle(), std::string(endpointUrl).c_str());
+    detail::throwOnBadStatus(status);
 }
 
-void Client::writeValueAttribute(const NodeId& nodeId, const Variant& value) {
-    (void)nodeId;
-    (void)value;
+void Client::connect(std::string_view endpointUrl, const Login& login) {
+#if UAPP_OPEN62541_VER_LE(1, 0)
+    const auto func = UA_Client_connect_username;
+#else
+    const auto func = UA_Client_connectUsername;
+#endif
+    const auto status = func(
+        handle(), std::string(endpointUrl).c_str(), login.username.c_str(), login.password.c_str()
+    );
+    detail::throwOnBadStatus(status);
+}
+
+void Client::disconnect() noexcept {
+    UA_Client_disconnect(handle());
+}
+
+Node<Client> Client::getNode(const NodeId& id) {
+    return {*this, id, true};
+}
+
+Node<Client> Client::getRootNode() {
+    return {*this, {0, UA_NS0ID_ROOTFOLDER}, false};
+}
+
+Node<Client> Client::getObjectsNode() {
+    return {*this, {0, UA_NS0ID_OBJECTSFOLDER}, false};
+}
+
+Node<Client> Client::getTypesNode() {
+    return {*this, {0, UA_NS0ID_TYPESFOLDER}, false};
+}
+
+Node<Client> Client::getViewsNode() {
+    return {*this, {0, UA_NS0ID_VIEWSFOLDER}, false};
+}
+
+Node<Client> Client::getObjectTypesNode() {
+    return {*this, {0, UA_NS0ID_OBJECTTYPESFOLDER}, false};
+}
+
+Node<Client> Client::getVariableTypesNode() {
+    return {*this, {0, UA_NS0ID_VARIABLETYPESFOLDER}, false};
+}
+
+Node<Client> Client::getDataTypesNode() {
+    return {*this, {0, UA_NS0ID_DATATYPESFOLDER}, false};
+}
+
+Node<Client> Client::getReferenceTypesNode() {
+    return {*this, {0, UA_NS0ID_REFERENCETYPESFOLDER}, false};
+}
+
+Node<Client> Client::getBaseObjectTypeNode() {
+    return {*this, {0, UA_NS0ID_BASEOBJECTTYPE}, false};
+}
+
+Node<Client> Client::getBaseDataVariableTypeNode() {
+    return {*this, {0, UA_NS0ID_BASEDATAVARIABLETYPE}, false};
 }
 
 UA_Client* Client::handle() noexcept {
-    return d_->client;
+    return connection_->handle();
 }
 
 const UA_Client* Client::handle() const noexcept {
-    return d_->client;
+    return connection_->handle();
 }
-} // namespace opcua
+
+}  // namespace opcua

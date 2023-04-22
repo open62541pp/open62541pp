@@ -4,16 +4,19 @@
 #include <string_view>
 #include <tuple>
 
-#include "open62541pp/Traits.h"
+#include "open62541pp/detail/traits.h"
 #include "open62541pp/open62541.h"
 
 namespace opcua {
+
+/// Type index of the ::UA_TYPES array.
+using TypeIndex = uint16_t;
 
 /**
  * Built-in types.
  * @see https://reference.opcfoundation.org/v104/Core/docs/Part6/5.1.2/
  */
-enum class Type : uint16_t {
+enum class Type : TypeIndex {
     // clang-format off
     Boolean         = UA_TYPES_BOOLEAN,
     SByte           = UA_TYPES_SBYTE,
