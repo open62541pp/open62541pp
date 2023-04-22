@@ -65,6 +65,10 @@ std::variant<uint32_t, String, Guid, ByteString> NodeId::getIdentifier() const {
 
 /* --------------------------------------- ExpandedNodeId --------------------------------------- */
 
+ExpandedNodeId::ExpandedNodeId(const NodeId& id) {
+    getNodeId() = id;
+}
+
 ExpandedNodeId::ExpandedNodeId(
     const NodeId& id, std::string_view namespaceUri, uint32_t serverIndex
 ) {
