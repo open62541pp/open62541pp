@@ -325,7 +325,7 @@ TEST_CASE("Attribute (server & client)") {
     // clang-format on
 }
 
-TEST_CASE("Browse") {
+TEST_CASE("View") {
     Server server;
 
     SUBCASE("Browse child") {

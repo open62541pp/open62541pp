@@ -14,7 +14,7 @@ class Server;
 namespace opcua::services {
 
 /**
- * @defgroup Browse Browse
+ * @defgroup View View service set
  * Browse the address space / view created by a server.
  * @ingroup Services
  */
@@ -22,7 +22,7 @@ namespace opcua::services {
 /**
  * Get a child specified by its path from this node (only local nodes).
  * @exception BadStatus If path not found (BadNoMatch)
- * @ingroup Browse
+ * @ingroup View
  */
 NodeId browseChild(Server& server, const NodeId& origin, const std::vector<QualifiedName>& path);
 
