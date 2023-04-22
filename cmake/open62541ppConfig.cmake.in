@@ -2,16 +2,13 @@
 
 include("${CMAKE_CURRENT_LIST_DIR}/open62541ppTargets.cmake")
 
-set (open62541pp_TOOLS_DIR @PACKAGE_open62541pp_install_tools_dir@ CACHE PATH "Path to the directory that contains the tooling of the stack")
-set (open62541pp_NODESET_DIR @PACKAGE_open62541pp_install_nodeset_dir@ CACHE PATH "Path to the directory that contains the OPC UA schema repository")
-
-include(CMakeFindDependencyMacro)
+# include(CMakeFindDependencyMacro)
 
 set(open62541pp_COMPONENTS_ALL @open62541pp_enabled_components@)
 
 # find_dependency has no option to provide hints for modules, so temporary add the path to CMAKE_MODULE_PATH
-#list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR})
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR})
 
-#find_package(open62541 REQUIRED)
+find_package(open62541 REQUIRED)
 
 list(REMOVE_AT CMAKE_MODULE_PATH -1)
