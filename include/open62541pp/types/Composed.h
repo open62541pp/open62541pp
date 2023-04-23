@@ -5,6 +5,7 @@
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/NodeId.h"
 
+#include <initializer_list>
 #include <string>
 #include <vector>
 
@@ -145,6 +146,80 @@ public:
     UAPP_COMPOSED_GETTER(UA_StatusCode, getStatusCode, statusCode)
     UAPP_COMPOSED_GETTER_WRAPPER(ByteString, getContinuationPoint, continuationPoint)
     UAPP_COMPOSED_GETTER_ARRAY(ReferenceDescription, getReferences, references, referencesSize)
+};
+
+/**
+ * UA_RelativePathElement wrapper class.
+ * @ingroup TypeWrapper
+ */
+class RelativePathElement
+    : public TypeWrapper<UA_RelativePathElement, UA_TYPES_RELATIVEPATHELEMENT> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    RelativePathElement(
+        ReferenceType referenceType,
+        bool isInverse,
+        bool includeSubtypes,
+        const QualifiedName& targetName
+    );
+
+    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getReferenceTypeId, referenceTypeId)
+    UAPP_COMPOSED_GETTER(bool, getIsInverse, isInverse)
+    UAPP_COMPOSED_GETTER(bool, getIncludeSubtypes, includeSubtypes)
+    UAPP_COMPOSED_GETTER_WRAPPER(QualifiedName, getTargetName, targetName)
+};
+
+/**
+ * UA_RelativePath wrapper class.
+ * @ingroup TypeWrapper
+ */
+class RelativePath : public TypeWrapper<UA_RelativePath, UA_TYPES_RELATIVEPATH> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    RelativePath(std::initializer_list<RelativePathElement> elements);
+    explicit RelativePath(const std::vector<RelativePathElement>& elements);
+
+    UAPP_COMPOSED_GETTER_ARRAY(RelativePathElement, getElements, elements, elementsSize)
+};
+
+/**
+ * UA_BrowsePath wrapper class.
+ * @ingroup TypeWrapper
+ */
+class BrowsePath : public TypeWrapper<UA_BrowsePath, UA_TYPES_BROWSEPATH> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    BrowsePath(const NodeId& startingNode, const RelativePath& relativePath);
+
+    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getStartingNode, startingNode)
+    UAPP_COMPOSED_GETTER_WRAPPER(RelativePath, getRelativePath, relativePath)
+};
+
+/**
+ * UA_BrowsePathTarget wrapper class.
+ * @ingroup TypeWrapper
+ */
+class BrowsePathTarget : public TypeWrapper<UA_BrowsePathTarget, UA_TYPES_BROWSEPATHTARGET> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    UAPP_COMPOSED_GETTER_WRAPPER(ExpandedNodeId, getTargetId, targetId)
+    UAPP_COMPOSED_GETTER(uint32_t, getRemainingPathIndex, remainingPathIndex)
+};
+
+/**
+ * UA_BrowsePathResult wrapper class.
+ * @ingroup TypeWrapper
+ */
+class BrowsePathResult : public TypeWrapper<UA_BrowsePathResult, UA_TYPES_BROWSEPATHRESULT> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    UAPP_COMPOSED_GETTER(UA_StatusCode, getStatusCode, statusCode)
+    UAPP_COMPOSED_GETTER_ARRAY(BrowsePathTarget, getTargets, targets, targetsSize)
 };
 
 }  // namespace opcua

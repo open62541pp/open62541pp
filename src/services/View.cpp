@@ -1,5 +1,7 @@
 #include "open62541pp/services/View.h"
 
+#include <algorithm>  // transform
+
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
@@ -23,10 +25,9 @@ BrowseResult browse<Client>(Client& client, const BrowseDescription& bd, uint32_
     // NOLINTNEXTLINE, won't be modified
     request.nodesToBrowse = const_cast<UA_BrowseDescription*>(bd.handle());
 
-    using BrowseResponse = TypeWrapper<UA_BrowseResponse, UA_TYPES_BROWSERESPONSE>;
-    BrowseResponse response = UA_Client_Service_browse(client.handle(), request);
+    using Response = TypeWrapper<UA_BrowseResponse, UA_TYPES_BROWSERESPONSE>;
+    Response response = UA_Client_Service_browse(client.handle(), request);
     detail::throwOnBadStatus(response->responseHeader.serviceResult);
-
     if (response->resultsSize != 1) {
         throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
     }
@@ -57,10 +58,9 @@ BrowseResult browseNext<Client>(
     // NOLINTNEXTLINE, won't be modified
     request.continuationPoints = const_cast<UA_ByteString*>(continuationPoint.handle());
 
-    using BrowseNextResponse = TypeWrapper<UA_BrowseNextResponse, UA_TYPES_BROWSENEXTRESPONSE>;
-    BrowseNextResponse response = UA_Client_Service_browseNext(client.handle(), request);
+    using Response = TypeWrapper<UA_BrowseNextResponse, UA_TYPES_BROWSENEXTRESPONSE>;
+    Response response = UA_Client_Service_browseNext(client.handle(), request);
     detail::throwOnBadStatus(response->responseHeader.serviceResult);
-
     if (response->resultsSize != 1) {
         throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
     }
@@ -70,18 +70,69 @@ BrowseResult browseNext<Client>(
     return result;
 }
 
-NodeId browseChild(Server& server, const NodeId& origin, const std::vector<QualifiedName>& path) {
-    const std::vector<UA_QualifiedName> pathNative(path.begin(), path.end());
-    const TypeWrapper<UA_BrowsePathResult, UA_TYPES_BROWSEPATHRESULT> result(
-        UA_Server_browseSimplifiedBrowsePath(
-            server.handle(),
-            origin,  // origin
-            pathNative.size(),  // browse path size
-            pathNative.data()  // browse path
-        )
+template <>
+BrowsePathResult translateBrowsePathToNodeIds<Server>(
+    Server& server, const BrowsePath& browsePath
+) {
+    BrowsePathResult result = UA_Server_translateBrowsePathToNodeIds(
+        server.handle(), browsePath.handle()
     );
     detail::throwOnBadStatus(result->statusCode);
-    assert(result->targets != nullptr && result->targetsSize >= 1);  // NOLINT
+    return result;
+}
+
+template <>
+BrowsePathResult translateBrowsePathToNodeIds<Client>(
+    Client& client, const BrowsePath& browsePath
+) {
+    UA_TranslateBrowsePathsToNodeIdsRequest request{};
+    request.browsePathsSize = 1;
+    // NOLINTNEXTLINE, won't be modified
+    request.browsePaths = const_cast<UA_BrowsePath*>(browsePath.handle());
+
+    using Response = TypeWrapper<
+        UA_TranslateBrowsePathsToNodeIdsResponse,
+        UA_TYPES_TRANSLATEBROWSEPATHSTONODEIDSRESPONSE>;
+    Response response = UA_Client_Service_translateBrowsePathsToNodeIds(client.handle(), request);
+    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    if (response->resultsSize != 1) {
+        throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
+    }
+
+    BrowsePathResult result;
+    result.swap(*response->results);
+    return result;
+}
+
+template <typename T>
+BrowsePathResult browseSimplifiedBrowsePath(
+    T& serverOrClient, const NodeId& origin, const std::vector<QualifiedName>& browsePath
+) {
+    std::vector<RelativePathElement> relativePathElements(browsePath.size());
+    std::transform(
+        browsePath.begin(),
+        browsePath.end(),
+        relativePathElements.begin(),
+        [](const auto& qn) {
+            return RelativePathElement(ReferenceType::HierarchicalReferences, false, true, qn);
+        }
+    );
+    const BrowsePath bp(origin, RelativePath(relativePathElements));
+    return translateBrowsePathToNodeIds(serverOrClient, bp);
+}
+
+// explicit template instantiation
+// clang-format off
+template BrowsePathResult browseSimplifiedBrowsePath<Server>(Server&, const NodeId&, const std::vector<QualifiedName>&);
+template BrowsePathResult browseSimplifiedBrowsePath<Client>(Client&, const NodeId&, const std::vector<QualifiedName>&);
+
+// clang-format on
+
+NodeId browseChild(Server& server, const NodeId& origin, const std::vector<QualifiedName>& path) {
+    const auto result = browseSimplifiedBrowsePath(server, origin, path);
+    if (result->targetsSize < 1) {
+        throw BadStatus(UA_STATUSCODE_BADNOMATCH);
+    }
     const auto id = ExpandedNodeId(result->targets[0].targetId);  // NOLINT
     if (!id.isLocal()) {
         throw BadStatus(UA_STATUSCODE_BADNOMATCH);

@@ -1,5 +1,7 @@
 #include "open62541pp/types/Composed.h"
 
+#include "open62541pp/detail/helper.h"
+
 namespace opcua {
 
 BrowseDescription::BrowseDescription(
@@ -16,6 +18,33 @@ BrowseDescription::BrowseDescription(
     handle()->includeSubtypes = includeSubtypes;
     handle()->nodeClassMask = nodeClassMask;
     handle()->resultMask = resultMask;
+}
+
+RelativePathElement::RelativePathElement(
+    ReferenceType referenceType,
+    bool isInverse,
+    bool includeSubtypes,
+    const QualifiedName& targetName
+) {
+    handle()->referenceTypeId = detail::getUaNodeId(referenceType);
+    handle()->isInverse = isInverse;
+    handle()->includeSubtypes = includeSubtypes;
+    asWrapper<QualifiedName>(handle()->targetName) = targetName;
+}
+
+RelativePath::RelativePath(std::initializer_list<RelativePathElement> elements) {
+    handle()->elementsSize = elements.size();
+    handle()->elements = detail::toNativeArrayAlloc(elements.begin(), elements.end());
+}
+
+RelativePath::RelativePath(const std::vector<RelativePathElement>& elements) {
+    handle()->elementsSize = elements.size();
+    handle()->elements = detail::toNativeArrayAlloc(elements.begin(), elements.end());
+}
+
+BrowsePath::BrowsePath(const NodeId& startingNode, const RelativePath& relativePath) {
+    asWrapper<NodeId>(handle()->startingNode) = startingNode;
+    asWrapper<RelativePath>(handle()->relativePath) = relativePath;
 }
 
 }  // namespace opcua

@@ -507,3 +507,30 @@ TEST_CASE("BrowseDescription") {
     CHECK(bd.getNodeClassMask() == UA_NODECLASS_UNSPECIFIED);
     CHECK(bd.getResultMask() == UA_BROWSERESULTMASK_ALL);
 }
+
+TEST_CASE("RelativePathElement") {
+    const RelativePathElement rpe(ReferenceType::HasComponent, false, false, {0, "test"});
+    CHECK(rpe.getReferenceTypeId() == NodeId{0, UA_NS0ID_HASCOMPONENT});
+    CHECK(rpe.getIsInverse() == false);
+    CHECK(rpe.getIncludeSubtypes() == false);
+    CHECK(rpe.getTargetName() == QualifiedName(0, "test"));
+}
+
+TEST_CASE("RelativePath") {
+    const RelativePath rp{
+        {ReferenceType::HasComponent, false, false, {0, "child1"}},
+        {ReferenceType::HasComponent, false, false, {0, "child2"}},
+    };
+    const auto elements = rp.getElements();
+    CHECK(elements.size() == 2);
+    CHECK(elements.at(0).getTargetName() == QualifiedName(0, "child1"));
+    CHECK(elements.at(1).getTargetName() == QualifiedName(0, "child2"));
+}
+
+TEST_CASE("BrowsePath") {
+    const BrowsePath bp(
+        {0, UA_NS0ID_OBJECTSFOLDER}, {{ReferenceType::HasComponent, false, false, {0, "child"}}}
+    );
+    CHECK(bp.getStartingNode() == NodeId(0, UA_NS0ID_OBJECTSFOLDER));
+    CHECK(bp.getRelativePath().getElements().size() == 1);
+}
