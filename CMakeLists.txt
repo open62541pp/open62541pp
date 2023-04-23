@@ -179,6 +179,23 @@ if(UAPP_BUILD_DOCUMENTATION)
 endif()
 
 # install targets
+install(
+    TARGETS open62541pp
+    EXPORT open62541ppTargets
+)
+
+install(
+    DIRECTORY "${PROJECT_SOURCE_DIR}/include/"
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
+
+# install cmake config files
+install(
+    EXPORT open62541ppTargets
+    NAMESPACE open62541pp::
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/open62541pp
+)
+
 include(CMakePackageConfigHelpers)
 configure_package_config_file(
     "${PROJECT_SOURCE_DIR}/cmake/open62541ppConfig.cmake.in"
@@ -193,25 +210,9 @@ write_basic_package_version_file(
 )
 
 install(
-    TARGETS open62541pp
-    EXPORT open62541ppTargets
-)
-
-install(
-    EXPORT open62541ppTargets
-    NAMESPACE open62541pp::
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/open62541pp
-)
-
-install(
     FILES
         "${CMAKE_BINARY_DIR}/open62541ppConfigVersion.cmake"
         "${CMAKE_BINARY_DIR}/open62541ppConfig.cmake"
         "${PROJECT_SOURCE_DIR}/cmake/Findopen62541.cmake"
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/open62541pp
-)
-
-install(
-    DIRECTORY "${PROJECT_SOURCE_DIR}/include/open62541pp"
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
