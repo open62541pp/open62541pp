@@ -4,6 +4,17 @@
 
 using namespace opcua;
 
+TEST_CASE("TypeConverter checks") {
+    SUBCASE("isValidTypeCombination") {
+        CHECK(detail::isValidTypeCombination<bool>(Type::Boolean));
+        CHECK_FALSE(detail::isValidTypeCombination<bool>(Type::Float));
+
+        using ReadRequest = TypeWrapper<UA_ReadRequest, UA_TYPES_READREQUEST>;
+        CHECK(detail::isValidTypeCombination<ReadRequest>(UA_TYPES_READREQUEST));
+        CHECK_FALSE(detail::isValidTypeCombination<ReadRequest>(UA_TYPES_WRITEREQUEST));
+    }
+}
+
 TEST_CASE_TEMPLATE(
     "TypeConverter native scalars",
     T,

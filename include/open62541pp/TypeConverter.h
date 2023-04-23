@@ -54,22 +54,26 @@ struct TypeConverter {
 
 namespace detail {
 
-template <typename T, Type type>
-constexpr bool isValidTypeCombination() {
-    return TypeConverter<T>::ValidTypes::contains(type);
+template <typename T, typename TypeIndexOrType>
+constexpr bool isValidTypeCombination(TypeIndexOrType typeOrTypeIndex) {
+    return TypeConverter<T>::ValidTypes::contains(typeOrTypeIndex);
+}
+
+template <typename T, auto typeOrTypeIndex>
+constexpr void assertTypeCombination() {
+    static_assert(
+        isValidTypeCombination<T>(typeOrTypeIndex), "Invalid template type / type index combination"
+    );
 }
 
 template <typename T>
-constexpr bool isValidTypeCombination(Type type) {
-    return TypeConverter<T>::ValidTypes::contains(type);
-}
-
-template <typename T, Type type>
-constexpr void assertTypeCombination() {
+constexpr TypeIndex guessTypeIndex() {
+    using ValueType = typename std::remove_cv_t<std::remove_reference_t<T>>;
     static_assert(
-        isValidTypeCombination<T, type>(),
-        "Invalid template type / type enum (opcua::Type) combination"
+        TypeConverter<ValueType>::ValidTypes::size() == 1,
+        "Ambiguous template type, please specify type index (UA_TYPES_*) manually"
     );
+    return TypeConverter<ValueType>::ValidTypes::toArray().at(0);
 }
 
 template <typename T>
@@ -82,6 +86,12 @@ constexpr Type guessType() {
     constexpr auto typeIndexGuess = TypeConverter<ValueType>::ValidTypes::toArray().at(0);
     static_assert(typeIndexGuess < builtinTypesCount, "T doesn't seem to be a builtin type");
     return static_cast<Type>(typeIndexGuess);
+}
+
+template <typename It>
+constexpr TypeIndex guessTypeIndexFromIterator() {
+    using ValueType = typename std::iterator_traits<It>::value_type;
+    return guessTypeIndex<ValueType>();
 }
 
 template <typename It>
@@ -131,10 +141,10 @@ template <typename T, typename NativeType = typename TypeConverter<T>::NativeTyp
 }
 
 /// Allocate native type.
-template <typename TNative, Type type>
+template <typename TNative, TypeIndex typeIndex = guessTypeIndex<TNative>()>
 [[nodiscard]] TNative* allocNative() {
-    assertTypeCombination<TNative, type>();
-    auto* result = static_cast<TNative*>(UA_new(getUaDataType<type>()));
+    assertTypeCombination<TNative, typeIndex>();
+    auto* result = static_cast<TNative*>(UA_new(getUaDataType<typeIndex>()));
     if (result == nullptr) {
         throw std::bad_alloc();
     }
@@ -142,20 +152,20 @@ template <typename TNative, Type type>
 }
 
 /// Allocate and copy to native type.
-template <typename T, Type type>
+template <typename T, TypeIndex typeIndex = guessTypeIndex<T>()>
 [[nodiscard]] auto* toNativeAlloc(const T& value) {
-    assertTypeCombination<T, type>();
+    assertTypeCombination<T, typeIndex>();
     using NativeType = typename TypeConverter<T>::NativeType;
-    auto* result = allocNative<NativeType, type>();
+    auto* result = allocNative<NativeType, typeIndex>();
     TypeConverter<T>::toNative(value, *result);
     return result;
 }
 
 /// Allocate native array
-template <typename TNative, Type type>
+template <typename TNative, TypeIndex typeIndex = guessTypeIndex<TNative>()>
 [[nodiscard]] auto* allocNativeArray(size_t size) {
-    assertTypeCombination<TNative, type>();
-    auto* result = static_cast<TNative*>(UA_Array_new(size, getUaDataType<type>()));
+    assertTypeCombination<TNative, typeIndex>();
+    auto* result = static_cast<TNative*>(UA_Array_new(size, getUaDataType<typeIndex>()));
     if (result == nullptr) {
         throw std::bad_alloc();
     }
@@ -163,13 +173,13 @@ template <typename TNative, Type type>
 }
 
 /// Allocate and copy iterator range to native array.
-template <typename InputIt, Type type>
+template <typename InputIt, TypeIndex typeIndex = guessTypeIndexFromIterator<InputIt>()>
 [[nodiscard]] auto* toNativeArrayAlloc(InputIt first, InputIt last) {
     using ValueType = typename std::iterator_traits<InputIt>::value_type;
     using NativeType = typename TypeConverter<ValueType>::NativeType;
-    assertTypeCombination<ValueType, type>();
+    assertTypeCombination<ValueType, typeIndex>();
     const size_t size = std::distance(first, last);
-    auto* result = allocNativeArray<NativeType, type>(size);
+    auto* result = allocNativeArray<NativeType, typeIndex>(size);
     for (size_t i = 0; i < size; ++i) {
         TypeConverter<ValueType>::toNative(*first++, result[i]);  // NOLINT
     }
@@ -177,9 +187,9 @@ template <typename InputIt, Type type>
 }
 
 /// Allocate and copy to native array.
-template <typename T, Type type>
+template <typename T, TypeIndex typeIndex = guessTypeIndex<T>()>
 [[nodiscard]] auto* toNativeArrayAlloc(const T* array, size_t size) {
-    return toNativeArrayAlloc<const T*, type>(array, array + size);  // NOLINT
+    return toNativeArrayAlloc<const T*, typeIndex>(array, array + size);  // NOLINT
 }
 
 }  // namespace detail
@@ -198,7 +208,7 @@ struct TypeConverterNative {
 
     static void fromNative(const T& src, T& dst) {
         if constexpr (std::is_fundamental_v<T>) {
-            dst = src;  // shallow copy
+            dst = src;
         } else {
             // just take first type -> underlying memory layout of all types should be the same
             constexpr auto typeIndexGuess = ValidTypes::toArray().at(0);

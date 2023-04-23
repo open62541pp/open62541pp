@@ -273,7 +273,7 @@ void Variant::setScalarCopy(const T& value) {
     static_assert(type != Type::Variant, "Variants cannot directly contain another variant");
     detail::assertTypeCombination<T, type>();
     setScalarImpl(
-        detail::toNativeAlloc<T, type>(value),
+        detail::toNativeAlloc<T, static_cast<TypeIndex>(type)>(value),
         detail::getUaDataType<type>(),
         true  // move ownership
     );
@@ -299,7 +299,7 @@ void Variant::setArrayCopy(InputIt first, InputIt last) {
     using ValueType = typename std::iterator_traits<InputIt>::value_type;
     detail::assertTypeCombination<ValueType, type>();
     setArrayImpl(
-        detail::toNativeArrayAlloc<InputIt, type>(first, last),
+        detail::toNativeArrayAlloc<InputIt, static_cast<TypeIndex>(type)>(first, last),
         std::distance(first, last),
         detail::getUaDataType<type>(),
         true  // move ownership
