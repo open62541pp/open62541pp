@@ -1,4 +1,4 @@
-add_subdirectory(${PROJECT_SOURCE_DIR}/3rdparty/doctest doctest)
+add_subdirectory(${PROJECT_SOURCE_DIR}/3rdparty/doctest doctest EXCLUDE_FROM_ALL)  # don't install
 
 add_executable(
     open62541pp_tests
