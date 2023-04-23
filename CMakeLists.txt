@@ -182,13 +182,13 @@ endif()
 # install targets
 include(CMakePackageConfigHelpers)
 configure_package_config_file(
-    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/open62541ppConfig.cmake.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/open62541ppConfig.cmake"
+    "${PROJECT_SOURCE_DIR}/cmake/open62541ppConfig.cmake.in"
+    "${CMAKE_BINARY_DIR}/open62541ppConfig.cmake"
     INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/open62541pp
 )
 
 write_basic_package_version_file(
-    "${CMAKE_CURRENT_BINARY_DIR}/open62541ppConfigVersion.cmake"
+    "${CMAKE_BINARY_DIR}/open62541ppConfigVersion.cmake"
     VERSION ${CMAKE_PROJECT_VERSION}
     COMPATIBILITY AnyNewerVersion
 )
@@ -210,9 +210,9 @@ install(
 
 install(
     FILES
-        "${CMAKE_CURRENT_BINARY_DIR}/open62541ppConfigVersion.cmake"
-        "${CMAKE_CURRENT_BINARY_DIR}/open62541ppConfig.cmake"
-        "${CMAKE_SOURCE_DIR}/cmake/Findopen62541.cmake"
+        "${CMAKE_BINARY_DIR}/open62541ppConfigVersion.cmake"
+        "${CMAKE_BINARY_DIR}/open62541ppConfig.cmake"
+        "${PROJECT_SOURCE_DIR}/cmake/Findopen62541.cmake"
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/open62541pp
 )
 
