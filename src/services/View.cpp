@@ -37,15 +37,22 @@ BrowseResult browse<Client>(Client& client, const BrowseDescription& bd, uint32_
 }
 
 template <>
-BrowseResult browseNext<Server>(Server& server, const ByteString& continuationPoint) {
-    BrowseResult result = UA_Server_browseNext(server.handle(), false, continuationPoint.handle());
+BrowseResult browseNext<Server>(
+    Server& server, bool releaseContinuationPoint, const ByteString& continuationPoint
+) {
+    BrowseResult result = UA_Server_browseNext(
+        server.handle(), releaseContinuationPoint, continuationPoint.handle()
+    );
     detail::throwOnBadStatus(result->statusCode);
     return result;
 }
 
 template <>
-BrowseResult browseNext<Client>(Client& client, const ByteString& continuationPoint) {
+BrowseResult browseNext<Client>(
+    Client& client, bool releaseContinuationPoint, const ByteString& continuationPoint
+) {
     UA_BrowseNextRequest request{};
+    request.releaseContinuationPoints = releaseContinuationPoint;
     request.continuationPointsSize = 1;
     // NOLINTNEXTLINE, won't be modified
     request.continuationPoints = const_cast<UA_ByteString*>(continuationPoint.handle());

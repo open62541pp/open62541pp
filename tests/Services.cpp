@@ -318,10 +318,10 @@ TEST_CASE("Attribute (server & client)") {
     };
 
     // clang-format off
-    SUBCASE("server/server") { testWriteReadAttribute(server, server); }
-    SUBCASE("server/client") { testWriteReadAttribute(server, client); }
-    SUBCASE("client/server") { testWriteReadAttribute(client, server); }
-    SUBCASE("client/client") { testWriteReadAttribute(client, client); }
+    SUBCASE("Server/Server") { testWriteReadAttribute(server, server); }
+    SUBCASE("Server/Client") { testWriteReadAttribute(server, client); }
+    SUBCASE("Client/Server") { testWriteReadAttribute(client, server); }
+    SUBCASE("Client/Client") { testWriteReadAttribute(client, client); }
     // clang-format on
 }
 
@@ -336,10 +336,10 @@ TEST_CASE("View") {
     const NodeId id{1, 1000};
     services::addVariable(server, {0, UA_NS0ID_OBJECTSFOLDER}, id, "variable");
 
-    const auto testBrowse = [&](auto& reader) {
+    const auto testBrowse = [&](auto& serverOrClient) {
         SUBCASE("Browse") {
             const BrowseDescription bd(id, BrowseDirection::Both);
-            const auto result = services::browse(reader, bd);
+            const auto result = services::browse(serverOrClient, bd);
 
             CHECK(result.getStatusCode() == UA_STATUSCODE_GOOD);
             CHECK(result.getContinuationPoint() == ByteString());  // empty
@@ -357,13 +357,38 @@ TEST_CASE("View") {
             CHECK(refs.at(1).getNodeId() == ExpandedNodeId({0, UA_NS0ID_BASEDATAVARIABLETYPE}));
             CHECK(refs.at(1).getBrowseName() == QualifiedName(0, "BaseDataVariableType"));
         }
-    };
-    testBrowse(server);
-    testBrowse(client);
 
-    SUBCASE("Browse next") {
-        CHECK_THROWS_WITH(services::browseNext(server, {}), "BadContinuationPointInvalid");
-    }
+        SUBCASE("Browse next") {
+            // https://github.com/open62541/open62541/blob/v1.3.5/tests/client/check_client_highlevel.c#L252-L318
+            const BrowseDescription bd({0, UA_NS0ID_SERVER}, BrowseDirection::Both);
+            // restrict browse result to max 1 reference, more with browseNext
+            auto resultBrowse = services::browse(serverOrClient, bd, 1);
+
+            CHECK(resultBrowse.getStatusCode() == UA_STATUSCODE_GOOD);
+            CHECK(resultBrowse.getContinuationPoint() != ByteString());  // not empty
+            CHECK(resultBrowse.getReferences().size() == 1);
+
+            // get next result
+            resultBrowse = services::browseNext(
+                serverOrClient, false, resultBrowse.getContinuationPoint()
+            );
+            CHECK(resultBrowse.getStatusCode() == UA_STATUSCODE_GOOD);
+            CHECK(resultBrowse.getContinuationPoint() != ByteString());  // not empty
+            CHECK(resultBrowse.getReferences().size() == 1);
+
+            // release continuation point, result should be empty
+            resultBrowse = services::browseNext(
+                serverOrClient, true, resultBrowse.getContinuationPoint()
+            );
+            CHECK(resultBrowse.getStatusCode() == UA_STATUSCODE_GOOD);
+            CHECK(resultBrowse.getContinuationPoint() == ByteString());  // empty
+            CHECK(resultBrowse.getReferences().size() == 0);
+        }
+    };
+    // clang-format off
+    SUBCASE("Server") { testBrowse(server); };
+    SUBCASE("Client") { testBrowse(client); };
+    // clang-format on
 
     SUBCASE("Browse child") {
         const NodeId rootId{0, UA_NS0ID_ROOTFOLDER};
