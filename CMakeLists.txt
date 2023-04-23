@@ -95,6 +95,7 @@ else()
 endif()
 
 # open62541pp library (static/shared depending on option BUILD_SHARED_LIBS)
+include(GNUInstallDirs)
 add_library(
     open62541pp
     src/Client.cpp
