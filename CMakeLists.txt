@@ -206,7 +206,7 @@ configure_package_config_file(
 write_basic_package_version_file(
     "${CMAKE_BINARY_DIR}/open62541ppConfigVersion.cmake"
     VERSION ${CMAKE_PROJECT_VERSION}
-    COMPATIBILITY AnyNewerVersion
+    COMPATIBILITY SameMinorVersion
 )
 
 install(
