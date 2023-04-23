@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.12)
+
+project(test_package)
+
+set(CMAKE_CXX_STANDARD 20)
+list(APPEND CMAKE_PREFIX_PATH @CMAKE_INSTALL_PREFIX@/lib/cmake/open62541pp)
+
+find_package(open62541pp CONFIG REQUIRED)
+
+
+add_executable(test_open62541pp main.cpp)
+target_link_libraries(test_open62541pp PRIVATE open62541pp::open62541pp)
+
+install(
+    TARGETS test_open62541pp
+    DESTINATION .
+)

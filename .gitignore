@@ -1,5 +1,6 @@
 /.idea/
 /.vscode/
-/build*/
-/cmake-build*/
-/install
+**/build*/
+**/cmake-build*/
+**/install
+/tests/test_package/CMakeLists.txt
