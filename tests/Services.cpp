@@ -334,10 +334,10 @@ TEST_CASE("View") {
 
     // add node to query references
     const NodeId id{1, 1000};
-    services::addVariable(server, {0, UA_NS0ID_OBJECTSFOLDER}, id, "variable");
+    services::addVariable(server, {0, UA_NS0ID_OBJECTSFOLDER}, id, "Variable");
 
     const auto testBrowse = [&](auto& serverOrClient) {
-        SUBCASE("Browse") {
+        SUBCASE("browse") {
             const BrowseDescription bd(id, BrowseDirection::Both);
             const auto result = services::browse(serverOrClient, bd);
 
@@ -358,7 +358,7 @@ TEST_CASE("View") {
             CHECK(refs.at(1).getBrowseName() == QualifiedName(0, "BaseDataVariableType"));
         }
 
-        SUBCASE("Browse next") {
+        SUBCASE("browseNext") {
             // https://github.com/open62541/open62541/blob/v1.3.5/tests/client/check_client_highlevel.c#L252-L318
             const BrowseDescription bd({0, UA_NS0ID_SERVER}, BrowseDirection::Both);
             // restrict browse result to max 1 reference, more with browseNext
@@ -383,6 +383,19 @@ TEST_CASE("View") {
             CHECK(resultBrowse.getStatusCode() == UA_STATUSCODE_GOOD);
             CHECK(resultBrowse.getContinuationPoint() == ByteString());  // empty
             CHECK(resultBrowse.getReferences().size() == 0);
+        }
+
+        SUBCASE("browseSimplifiedBrowsePath") {
+            const auto result = services::browseSimplifiedBrowsePath(
+                serverOrClient, {0, UA_NS0ID_ROOTFOLDER}, {{0, "Objects"}, {1, "Variable"}}
+            );
+            CHECK(result.getStatusCode() == UA_STATUSCODE_GOOD);
+            const auto targets = result.getTargets();
+            CHECK(targets.size() == 1);
+            // https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8
+            // value shall be equal to the maximum value of uint32 if all elements processed
+            CHECK(targets.at(0).getRemainingPathIndex() == 0xffffffff);
+            CHECK(targets.at(0).getTargetId().getNodeId() == id);
         }
     };
     // clang-format off
