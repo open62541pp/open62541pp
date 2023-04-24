@@ -3,8 +3,9 @@
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-blue.svg)](https://github.com/open62541pp/open62541pp/blob/master/LICENSE)
 [![CI](https://github.com/open62541pp/open62541pp/actions/workflows/ci.yml/badge.svg)](https://github.com/open62541pp/open62541pp/actions/workflows/ci.yml)
 [![Compatibility](https://github.com/open62541pp/open62541pp/actions/workflows/open62541-compatibility.yml/badge.svg)](https://github.com/open62541pp/open62541pp/actions/workflows/open62541-compatibility.yml)
-[![Coverage](https://codecov.io/github/open62541pp/open62541pp/branch/master/graph/badge.svg?token=P87N1WRXC4)](https://codecov.io/github/open62541pp/open62541pp)
+[![Package](https://github.com/open62541pp/open62541pp/actions/workflows/package.yml/badge.svg)](https://github.com/open62541pp/open62541pp/actions/workflows/package.yml)
 [![Documentation](https://github.com/open62541pp/open62541pp/actions/workflows/doc.yml/badge.svg)](https://github.com/open62541pp/open62541pp/actions/workflows/doc.yml)
+[![Coverage](https://codecov.io/github/open62541pp/open62541pp/branch/master/graph/badge.svg?token=P87N1WRXC4)](https://codecov.io/github/open62541pp/open62541pp)
 
 **[Documentation](https://open62541pp.github.io/open62541pp) · [Examples](https://github.com/open62541pp/open62541pp/tree/master/examples)**
 
@@ -158,9 +159,9 @@ struct TypeConverter<std::string> {
 | Variant                  | `UA_Variant`         |             | `opcua::Variant`                  |                           |
 | DiagnosticInfo           | `UA_DiagnosticInfo`  |             | `opcua::DiagnosticInfo`           |                           |
 
-## Install
+## Getting started
 
-The library can be installed using [CMake](https://cmake.org/runningcmake/).
+The library can be built, integrated and installed using [CMake](https://cmake.org/runningcmake/).
 
 Please check out the open62541 build options here: https://www.open62541.org/doc/1.3/building.html#build-options
 
@@ -174,7 +175,30 @@ open62541++ provides additional build options:
 - `UAPP_ENABLE_COVERAGE`: Enable coverage analysis
 - `UAPP_ENABLE_SANITIZER_ADDRESS/LEAK/MEMORY/THREAD/UNDEFINED_BEHAVIOUR`: Enable sanitizers
 
-### Using as an embedded (in-source) dependency
+### Build and install
+
+```cmake
+# clone repository
+git clone --recursive https://github.com/open62541pp/open62541pp.git
+cd open62541pp
+# build and run tests
+mkdir build
+cd build
+cmake -DCMAKE_BUILD_TYPE=Debug -DUAPP_BUILD_EXAMPLES=ON -DUAPP_BUILD_TESTS=ON ..
+cmake --build .
+# run tests again (tests run automatically after build step)
+ctest --output-on-failure
+# coverage report (text or html)
+cmake --build . --target open62541pp_coverage_report
+cmake --build . --target open62541pp_coverage_report_html
+# build documentation
+cmake --build . --target open62541pp_doc
+# install to system
+cmake --install .
+```
+
+### Integrate as an embedded (in-source) dependency
+
 Add it to your project as a Git submodule (`git submodule add https://github.com/open62541pp/open62541pp.git`) and link it with CMake:
 
 ```cmake
@@ -182,11 +206,14 @@ add_subdirectory(extern/open62541pp)  # the submodule directory
 target_link_library(myexecutable PRIVATE open62541pp::open62541pp)
 ```
 
-### Using as a pre-compiled library
+### Integrate as a pre-compiled library
 
-After installing the library, add the complete path to the `lib/open62541pp/cmake` directory to your `CMAKE_MODULE_PATH` list and then:
+If you build and install this package to your system, a `open62541ppConfig.cmake` file will be generated and installed to your system.
+The installed library can be found and linked within CMake:
+
 ```cmake 
-find_package(open62541pp::open62541pp 0.2.0 CONFIG REQUIRED)
+find_package(open62541pp::open62541pp CONFIG REQUIRED)
+target_link_library(myexecutable PRIVATE open62541pp::open62541pp)
 ```
 
 ### Dependencies
