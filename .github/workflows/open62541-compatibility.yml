@@ -30,7 +30,6 @@ jobs:
           cmake \
             -DBUILD_SHARED_LIBS=${{ matrix.library_type == 'shared' }} \
             -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-            -DUA_NAMESPACE_ZERO=FULL \
             ..
           cmake --build .
           sudo cmake --install .
