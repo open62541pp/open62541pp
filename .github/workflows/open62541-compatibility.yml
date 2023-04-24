@@ -4,12 +4,13 @@ on: [push, pull_request]
 
 jobs:
   external-open62541:
-    name: open62541 ${{ matrix.version }} (${{ matrix.library_type }})
+    name: open62541 ${{ matrix.version }} (${{ matrix.build_type }}, ${{ matrix.library_type }})
     runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
         version: [v1.0, v1.1, v1.2, v1.3]
+        build_type: ["Debug", "Release"]
         library_type: ["static", "shared"]
     steps:
       - uses: actions/checkout@v3
@@ -28,8 +29,8 @@ jobs:
           mkdir build
           cd build
           cmake \
+            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
             -DBUILD_SHARED_LIBS=${{ matrix.library_type == 'shared' }} \
-            -DCMAKE_BUILD_TYPE=RelWithDebInfo \
             ..
           cmake --build .
           sudo cmake --install .
@@ -37,5 +38,10 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake -DUAPP_BUILD_TESTS=ON -DUAPP_BUILD_EXAMPLES=ON -DUAPP_INTERNAL_OPEN62541=OFF ..
+          cmake \
+            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+            -DUAPP_BUILD_TESTS=ON \
+            -DUAPP_BUILD_EXAMPLES=ON \
+            -DUAPP_INTERNAL_OPEN62541=OFF \
+            ..
           cmake --build .

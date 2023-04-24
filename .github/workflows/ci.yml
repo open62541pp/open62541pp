@@ -5,11 +5,12 @@ on: [push, pull_request]
 jobs:
   linux:
     # https://github.com/actions/runner-images/blob/main/images/linux/Ubuntu2204-Readme.md
-    name: Linux ${{ matrix.config.name }}
+    name: Linux ${{ matrix.config.name }} (${{ matrix.build_type }})
     runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
+        build_type: ["Debug", "Release"]
         config:
           # prettier-ignore
           - { name: GCC 9,      CC: gcc-9,    CXX: g++-9,      flags: ""}
@@ -35,7 +36,12 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake -DUAPP_BUILD_TESTS=ON -DUAPP_BUILD_EXAMPLES=ON ${{ matrix.config.flags }} ..
+          cmake \
+            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+            -DUAPP_BUILD_TESTS=ON \
+            -DUAPP_BUILD_EXAMPLES=ON \
+            ${{ matrix.config.flags }} \
+            ..
           cmake --build .
 
   linux-coverage:
@@ -66,11 +72,12 @@ jobs:
   windows:
     # https://github.com/actions/runner-images/blob/main/images/win/Windows2019-Readme.md
     # https://github.com/actions/runner-images/blob/main/images/win/Windows2022-Readme.md
-    name: Windows ${{ matrix.config.name }}
+    name: Windows ${{ matrix.config.name }} (${{ matrix.build_type }})
     runs-on: ${{ matrix.config.os }}
     strategy:
       fail-fast: false
       matrix:
+        build_type: ["Debug", "Release"]
         config:
           - { name: Visual Studio 16 2019, os: windows-2019 }
           - { name: Visual Studio 17 2022, os: windows-2022 }
@@ -82,16 +89,20 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake -DUAPP_BUILD_TESTS=ON -DUAPP_BUILD_EXAMPLES=ON ..
-          cmake --build . --config RelWithDebInfo
+          cmake \
+            -DUAPP_BUILD_TESTS=ON \
+            -DUAPP_BUILD_EXAMPLES=ON \
+            ..
+          cmake --build . --config ${{ matrix.build_type }}
 
   macos:
     # https://github.com/actions/runner-images/blob/main/images/macos/macos-12-Readme.md
-    name: macOS ${{ matrix.config.name }}
+    name: macOS ${{ matrix.config.name }} (${{ matrix.build_type }})
     runs-on: macos-12
     strategy:
       fail-fast: false
       matrix:
+        build_type: ["Debug", "Release"]
         config:
           - { name: AppleClang 14, CC: clang, CXX: clang++ }
     steps:
@@ -105,5 +116,9 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake -DUAPP_BUILD_TESTS=ON -DUAPP_BUILD_EXAMPLES=ON ${{ matrix.config.flags }} ..
+          cmake \
+            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+            -DUAPP_BUILD_TESTS=ON \
+            -DUAPP_BUILD_EXAMPLES=ON \
+            ..
           cmake --build .
