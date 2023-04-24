@@ -7,6 +7,8 @@ if(NOT TARGET open62541pp)
     find_package(open62541pp REQUIRED)
 endif()
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/examples)
+
 set(examples_sources
     client_connect.cpp
     client_find_servers.cpp
@@ -32,7 +34,6 @@ foreach(source ${examples_sources})
         ${target_name}
         PROPERTIES
             OUTPUT_NAME ${name}
-            RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/examples"
     )
     # disable clang-tidy check to avoid try/except blocks in examples
     if(CMAKE_CXX_CLANG_TIDY)
