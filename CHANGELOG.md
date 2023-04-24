@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Guid::toString` and `Guid::random` method
 - `DateTime::localTimeUtcOffset` and `DateTime::format` method
 - `ostream` overloads for `String`, `Guid`, `XmlElement`
+- CMake install target and config files (#38)
 - Examples:
   - `client_minimal`
   - `client_connect`
