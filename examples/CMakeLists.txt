@@ -1,3 +1,12 @@
+cmake_minimum_required(VERSION 3.12)
+
+project(open62541pp_examples)
+
+if(NOT TARGET open62541pp)
+    # stand-alone build
+    find_package(open62541pp REQUIRED)
+endif()
+
 set(examples_sources
     client_connect.cpp
     client_find_servers.cpp
@@ -17,7 +26,7 @@ foreach(source ${examples_sources})
         ${target_name}
         PRIVATE
             open62541pp::open62541pp
-            open62541pp_project_options
+            $<TARGET_NAME_IF_EXISTS:open62541pp_project_options>  # not available in stand-alone
     )
     set_target_properties(
         ${target_name}
