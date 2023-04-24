@@ -134,11 +134,6 @@ if(UAPP_BUILD_TESTS)
     message(STATUS "Unit tests enabled")
     enable_testing()
     add_subdirectory(tests)
-
-    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/tests/test_package/CMakeLists.txt.in
-            ${CMAKE_CURRENT_SOURCE_DIR}/tests/test_package/CMakeLists.txt
-            USE_SOURCE_PERMISSIONS)
-
 endif()
 
 # coverage report
