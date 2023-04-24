@@ -82,6 +82,7 @@ if(UAPP_INTERNAL_OPEN62541)
     set(OPEN62541_VERSION v1.3.5)  # set manually for CI
     add_subdirectory(3rdparty/open62541)  # target open62541::open62541
 else()
+    set(CMAKE_FIND_PACKAGE_PREFER_CONFIG ON)  # prefer open62541's own config file
     find_package(open62541 REQUIRED)
 endif()
 
