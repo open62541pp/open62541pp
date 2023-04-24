@@ -5,7 +5,7 @@
 [![Compatibility](https://github.com/open62541pp/open62541pp/actions/workflows/open62541-compatibility.yml/badge.svg)](https://github.com/open62541pp/open62541pp/actions/workflows/open62541-compatibility.yml)
 [![Package](https://github.com/open62541pp/open62541pp/actions/workflows/package.yml/badge.svg)](https://github.com/open62541pp/open62541pp/actions/workflows/package.yml)
 [![Documentation](https://github.com/open62541pp/open62541pp/actions/workflows/doc.yml/badge.svg)](https://github.com/open62541pp/open62541pp/actions/workflows/doc.yml)
-[![Coverage](https://codecov.io/github/open62541pp/open62541pp/branch/master/graph/badge.svg?token=P87N1WRXC4)](https://codecov.io/github/open62541pp/open62541pp)
+[![Coverage](https://codecov.io/gh/open62541pp/open62541pp/branch/master/graph/badge.svg?token=P87N1WRXC4)](https://codecov.io/gh/open62541pp/open62541pp)
 
 **[Documentation](https://open62541pp.github.io/open62541pp) · [Examples](https://github.com/open62541pp/open62541pp/tree/master/examples)**
 
