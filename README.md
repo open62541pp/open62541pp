@@ -177,7 +177,7 @@ open62541++ provides additional build options:
 
 ### Build and install
 
-```cmake
+```shell
 # clone repository
 git clone --recursive https://github.com/open62541pp/open62541pp.git
 cd open62541pp
