@@ -1,0 +1,25 @@
+name: Package
+
+on: [push, pull_request]
+
+jobs:
+  cmake:
+    name: CMake package
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - name: Compile and install open62541/open62541pp
+        run: |
+          mkdir build
+          cd build
+          cmake ..
+          cmake --build .
+          sudo cmake --install .
+      - name: Compile examples (stand-alone)
+        run: |
+          mkdir build_examples
+          cd build_examples
+          cmake ../examples
+          cmake --build .
