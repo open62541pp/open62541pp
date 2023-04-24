@@ -95,6 +95,7 @@ else()
 endif()
 
 # open62541pp library (static/shared depending on option BUILD_SHARED_LIBS)
+include(GNUInstallDirs)
 add_library(
     open62541pp
     src/Client.cpp
@@ -112,14 +113,19 @@ add_library(
     src/types/Variant.cpp
 )
 add_library(open62541pp::open62541pp ALIAS open62541pp)
-target_include_directories(open62541pp PUBLIC include)
+target_include_directories(
+    open62541pp
+    PUBLIC
+        $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+)
 target_link_libraries(
     open62541pp
     PUBLIC
         open62541::open62541
     PRIVATE
         Threads::Threads
-        open62541pp_project_options
+        $<BUILD_INTERFACE:open62541pp_project_options>
 )
 
 # tests
@@ -171,3 +177,42 @@ if(UAPP_BUILD_DOCUMENTATION)
     message(STATUS "Documentation enabled")
     add_subdirectory(doc)
 endif()
+
+# install targets
+install(
+    TARGETS open62541pp
+    EXPORT open62541ppTargets
+)
+
+install(
+    DIRECTORY "${PROJECT_SOURCE_DIR}/include/"
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
+
+# install cmake config files
+install(
+    EXPORT open62541ppTargets
+    NAMESPACE open62541pp::
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/open62541pp
+)
+
+include(CMakePackageConfigHelpers)
+configure_package_config_file(
+    "${PROJECT_SOURCE_DIR}/cmake/open62541ppConfig.cmake.in"
+    "${CMAKE_BINARY_DIR}/open62541ppConfig.cmake"
+    INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/open62541pp
+)
+
+write_basic_package_version_file(
+    "${CMAKE_BINARY_DIR}/open62541ppConfigVersion.cmake"
+    VERSION ${CMAKE_PROJECT_VERSION}
+    COMPATIBILITY SameMinorVersion
+)
+
+install(
+    FILES
+        "${CMAKE_BINARY_DIR}/open62541ppConfigVersion.cmake"
+        "${CMAKE_BINARY_DIR}/open62541ppConfig.cmake"
+        "${PROJECT_SOURCE_DIR}/cmake/Findopen62541.cmake"
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/open62541pp
+)
