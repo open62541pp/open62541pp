@@ -73,8 +73,9 @@ find_package(Threads REQUIRED)
 
 # open62541
 # overwrite default open62541 options
+# disable sanitizers in debug build (> v1.3)
 if(NOT UA_ENABLE_DEBUG_SANITIZER)
-    set(UA_ENABLE_DEBUG_SANITIZER CACHE BOOL OFF)  # disable sanitizers in debug build
+    set(UA_ENABLE_DEBUG_SANITIZER CACHE BOOL OFF)
 endif()
 
 option(UAPP_INTERNAL_OPEN62541 "Use internal open62541 library" ON)
