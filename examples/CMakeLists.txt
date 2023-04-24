@@ -1,3 +1,14 @@
+cmake_minimum_required(VERSION 3.12)
+
+project(open62541pp_examples)
+
+if(NOT TARGET open62541pp)
+    # stand-alone build
+    find_package(open62541pp REQUIRED)
+endif()
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/examples)
+
 set(examples_sources
     client_connect.cpp
     client_find_servers.cpp
@@ -17,13 +28,12 @@ foreach(source ${examples_sources})
         ${target_name}
         PRIVATE
             open62541pp::open62541pp
-            open62541pp_project_options
+            $<TARGET_NAME_IF_EXISTS:open62541pp_project_options>  # not available in stand-alone
     )
     set_target_properties(
         ${target_name}
         PROPERTIES
             OUTPUT_NAME ${name}
-            RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/examples"
     )
     # disable clang-tidy check to avoid try/except blocks in examples
     if(CMAKE_CXX_CLANG_TIDY)
