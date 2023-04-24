@@ -4,8 +4,13 @@ on: [push, pull_request]
 
 jobs:
   cmake:
-    name: CMake package
+    name: CMake package (${{ matrix.build_type }}, ${{ matrix.library_type }})
     runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type: ["Debug", "Release"]
+        library_type: ["static", "shared"]
     steps:
       - uses: actions/checkout@v3
         with:
@@ -14,7 +19,10 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake ..
+          cmake \
+            -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}} \
+            -DBUILD_SHARED_LIBS=${{ matrix.library_type == 'shared' }} \
+            ..
           cmake --build .
           sudo cmake --install .
       - name: Compile examples (stand-alone)

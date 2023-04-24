@@ -4,13 +4,13 @@ on: [push, pull_request]
 
 jobs:
   external-open62541:
-    name: open62541 ${{ matrix.version }} (${{ matrix.build }})
+    name: open62541 ${{ matrix.version }} (${{ matrix.library_type }})
     runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
         version: [v1.0, v1.1, v1.2, v1.3]
-        build: ["static", "shared"]
+        library_type: ["static", "shared"]
     steps:
       - uses: actions/checkout@v3
         with:
@@ -28,7 +28,7 @@ jobs:
           mkdir build
           cd build
           cmake \
-            -DBUILD_SHARED_LIBS=${{ matrix.build == 'shared' }} \
+            -DBUILD_SHARED_LIBS=${{ matrix.library_type == 'shared' }} \
             -DCMAKE_BUILD_TYPE=RelWithDebInfo \
             -DUA_NAMESPACE_ZERO=FULL \
             ..
