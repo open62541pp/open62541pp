@@ -28,6 +28,8 @@ jobs:
           path: open62541
           submodules: recursive
       - name: Install open62541
+        env:
+          CFLAGS: "-Wstrict-overflow=0" # disable strict-overflow error in v1.1
         run: |
           cd open62541
           mkdir build
@@ -36,7 +38,7 @@ jobs:
             -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
             -DBUILD_SHARED_LIBS=${{ matrix.library_type == 'shared' }} \
             ..
-          cmake --build . -- -Wno-error
+          cmake --build .
           sudo cmake --install .
       - name: Compile and run tests
         run: |
