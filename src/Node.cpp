@@ -10,44 +10,73 @@
 
 namespace opcua {
 
-inline static void removeNonLocal(std::vector<ReferenceDescription>& refs) {
-    refs.erase(
-        std::remove_if(
-            refs.begin(), refs.end(), [](const auto& ref) { return !ref.getNodeId().isLocal(); }
-        ),
-        refs.end()
+template <typename T>
+std::vector<ReferenceDescription> Node<T>::getReferences(
+    BrowseDirection browseDirection,
+    ReferenceType referenceType,
+    bool includeSubtypes,
+    uint32_t nodeClassMask
+) {
+    const BrowseDescription bd(
+        nodeId_,
+        browseDirection,
+        referenceType,
+        includeSubtypes,
+        nodeClassMask,
+        UA_BROWSERESULTMASK_ALL
     );
+    return services::browseAll(connection_, bd);
+}
+
+template <typename T>
+std::vector<Node<T>> Node<T>::getReferencedNodes(
+    BrowseDirection browseDirection,
+    ReferenceType referenceType,
+    bool includeSubtypes,
+    uint32_t nodeClassMask
+) {
+    const BrowseDescription bd(
+        nodeId_,
+        browseDirection,
+        referenceType,
+        includeSubtypes,
+        nodeClassMask,
+        UA_BROWSERESULTMASK_TARGETINFO  // only node id required here
+    );
+    const auto refs = services::browseAll(connection_, bd);
+    std::vector<Node<T>> nodes;
+    nodes.reserve(refs.size());
+    for (const auto& ref : refs) {
+        if (ref.getNodeId().isLocal()) {
+            nodes.emplace_back(connection_, ref.getNodeId().getNodeId(), false);
+        }
+    }
+    return nodes;
 }
 
 template <typename T>
 Node<T> Node<T>::getChild(const std::vector<QualifiedName>& path) {
     const auto result = services::browseSimplifiedBrowsePath(connection_, nodeId_, path);
-    if (result->targetsSize < 1) {
-        throw BadStatus(UA_STATUSCODE_BADNOMATCH);
+    for (auto&& target : result.getTargets()) {
+        if (target.getTargetId().isLocal()) {
+            return {connection_, target.getTargetId().getNodeId(), false};
+        }
     }
-    const auto id = ExpandedNodeId(result->targets[0].targetId);  // NOLINT
-    if (!id.isLocal()) {
-        throw BadStatus(UA_STATUSCODE_BADNOMATCH);
-    }
-    return {connection_, id.getNodeId(), false};
+    throw BadStatus(UA_STATUSCODE_BADNOMATCH);
 }
 
 template <typename T>
 Node<T> Node<T>::getParent() {
-    const BrowseDescription bd(
-        nodeId_,
+    const auto nodes = getReferencedNodes(
         BrowseDirection::Inverse,
         ReferenceType::HierarchicalReferences,
-        true,  // include subtypes
-        UA_NODECLASS_UNSPECIFIED,
-        UA_BROWSERESULTMASK_ALL
+        true,
+        UA_NODECLASS_UNSPECIFIED
     );
-    auto refs = services::browseAll(connection_, bd);
-    removeNonLocal(refs);
-    if (refs.empty()) {
+    if (nodes.empty()) {
         throw BadStatus(UA_STATUSCODE_BADNOTFOUND);
     }
-    return {connection_, refs[0].getNodeId().getNodeId(), false};
+    return nodes[0];
 }
 
 /* ---------------------------------------------------------------------------------------------- */
