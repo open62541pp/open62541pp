@@ -385,6 +385,12 @@ TEST_CASE("View") {
             CHECK(resultBrowse.getReferences().size() == 0);
         }
 
+        SUBCASE("browseAll") {
+            const BrowseDescription bd(id, BrowseDirection::Both);
+            CHECK(services::browseAll(serverOrClient, bd, 0).size() == 2);
+            CHECK(services::browseAll(serverOrClient, bd, 1).size() == 1);
+        }
+
         SUBCASE("browseSimplifiedBrowsePath") {
             const auto result = services::browseSimplifiedBrowsePath(
                 serverOrClient, {0, UA_NS0ID_ROOTFOLDER}, {{0, "Objects"}, {1, "Variable"}}
