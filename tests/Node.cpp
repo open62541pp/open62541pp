@@ -21,6 +21,10 @@ TEST_CASE("Node") {
     services::writeWriteMask(server, varId, ~0U);  // set all bits to 1 -> allow all
 
     const auto testNode = [&](auto& serverOrClient) {
+        auto rootNode = serverOrClient.getRootNode();
+        auto objNode = serverOrClient.getObjectsNode();
+        auto varNode = serverOrClient.getNode(varId);
+
         SUBCASE("Constructor") {
             CHECK_NOTHROW(Node(serverOrClient, NodeId(0, UA_NS0ID_BOOLEAN), false));
             CHECK_NOTHROW(Node(serverOrClient, NodeId(0, UA_NS0ID_BOOLEAN), true));
@@ -40,76 +44,76 @@ TEST_CASE("Node") {
         }
 
         SUBCASE("Get child") {
-            auto root = serverOrClient.getRootNode();
-            CHECK_THROWS_WITH(root.getChild({{0, "Invalid"}}), "BadNoMatch");
+            CHECK_THROWS_WITH(rootNode.getChild({{0, "Invalid"}}), "BadNoMatch");
             CHECK_EQ(
-                root.getChild({{0, "Objects"}}).getNodeId(), NodeId(0, UA_NS0ID_OBJECTSFOLDER)
+                rootNode.getChild({{0, "Objects"}}).getNodeId(), NodeId(0, UA_NS0ID_OBJECTSFOLDER)
             );
             CHECK_EQ(
-                root.getChild({{0, "Objects"}, {0, "Server"}}).getNodeId(),
+                rootNode.getChild({{0, "Objects"}, {0, "Server"}}).getNodeId(),
                 NodeId(0, UA_NS0ID_SERVER)
             );
         }
 
+        SUBCASE("Get parent") {
+            CHECK_THROWS_WITH(rootNode.getParent(), "BadNotFound");
+            CHECK_EQ(objNode.getParent(), rootNode);
+        }
+
         SUBCASE("Try read/write with node classes other than Variable") {
-            auto root = serverOrClient.getRootNode();
-            CHECK_THROWS(root.template readScalar<int>());
-            CHECK_THROWS(root.template writeScalar<int>({}));
+            CHECK_THROWS(rootNode.template readScalar<int>());
+            CHECK_THROWS(rootNode.template writeScalar<int>({}));
         }
 
         SUBCASE("Read/write scalar") {
-            auto node = Node(serverOrClient, varId);
-            CHECK_NOTHROW(node.writeDataType(Type::Float));
+            CHECK_NOTHROW(varNode.writeDataType(Type::Float));
 
             // write with wrong data type
-            CHECK_THROWS(node.template writeScalar<bool>({}));
-            CHECK_THROWS(node.template writeScalar<int>({}));
+            CHECK_THROWS(varNode.template writeScalar<bool>({}));
+            CHECK_THROWS(varNode.template writeScalar<int>({}));
 
             // write with correct data type
             float value = 11.11f;
-            CHECK_NOTHROW(node.writeScalar(value));
-            CHECK(node.template readScalar<float>() == value);
+            CHECK_NOTHROW(varNode.writeScalar(value));
+            CHECK(varNode.template readScalar<float>() == value);
         }
 
         SUBCASE("Read/write string") {
-            auto node = Node(serverOrClient, varId);
-            CHECK_NOTHROW(node.writeDataType(Type::String));
+            CHECK_NOTHROW(varNode.writeDataType(Type::String));
 
             String str("test");
-            CHECK_NOTHROW(node.writeScalar(str));
-            CHECK(node.template readScalar<std::string>() == "test");
+            CHECK_NOTHROW(varNode.writeScalar(str));
+            CHECK(varNode.template readScalar<std::string>() == "test");
         }
 
         SUBCASE("Read/write array") {
-            auto node = Node(serverOrClient, varId);
-            CHECK_NOTHROW(node.writeDataType(Type::Double));
+            CHECK_NOTHROW(varNode.writeDataType(Type::Double));
 
             // write with wrong data type
-            CHECK_THROWS(node.template writeArray<int>({}));
-            CHECK_THROWS(node.template writeArray<float>({}));
+            CHECK_THROWS(varNode.template writeArray<int>({}));
+            CHECK_THROWS(varNode.template writeArray<float>({}));
 
             // write with correct data type
             std::vector<double> array{11.11, 22.22, 33.33};
 
             SUBCASE("Write as std::vector") {
-                CHECK_NOTHROW(node.writeArray(array));
-                CHECK(node.template readArray<double>() == array);
+                CHECK_NOTHROW(varNode.writeArray(array));
+                CHECK(varNode.template readArray<double>() == array);
             }
 
             SUBCASE("Write as raw array") {
-                CHECK_NOTHROW(node.writeArray(array.data(), array.size()));
-                CHECK(node.template readArray<double>() == array);
+                CHECK_NOTHROW(varNode.writeArray(array.data(), array.size()));
+                CHECK(varNode.template readArray<double>() == array);
             }
 
             SUBCASE("Write as iterator pair") {
-                CHECK_NOTHROW(node.writeArray(array.begin(), array.end()));
-                CHECK(node.template readArray<double>() == array);
+                CHECK_NOTHROW(varNode.writeArray(array.begin(), array.end()));
+                CHECK(varNode.template readArray<double>() == array);
             }
         }
 
         SUBCASE("Equality") {
-            CHECK(serverOrClient.getRootNode() == serverOrClient.getRootNode());
-            CHECK(serverOrClient.getRootNode() != serverOrClient.getObjectsNode());
+            CHECK(rootNode == rootNode);
+            CHECK(rootNode != objNode);
         }
     };
 

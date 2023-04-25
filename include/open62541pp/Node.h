@@ -33,7 +33,7 @@ template <typename ServerOrClient>
 class Node {
 public:
     /// Create Node object.
-    /// @exception BadStatus (BadNodeIdUnknown) if `checkExists` enabled and `id` not found
+    /// @exception BadStatus (BadNodeIdUnknown) If `checkExists` enabled and `id` not found
     Node(ServerOrClient connection, NodeId id, bool checkExists = true)
         : connection_(std::move(connection)),
           nodeId_(std::move(id)) {
@@ -137,6 +137,11 @@ public:
     /// The relative path is specified using browse names.
     /// @exception BadStatus If path not found (BadNoMatch)
     Node getChild(const std::vector<QualifiedName>& path);
+
+    /// Get parent node.
+    /// A Node may have several parents, the first found is returned.
+    /// @exception BadStatus If no parent node found (BadNotFound)
+    Node getParent();
 
     /// @copydoc services::readNodeClass
     NodeClass readNodeClass() {
