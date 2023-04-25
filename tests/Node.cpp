@@ -1,5 +1,7 @@
 #include <doctest/doctest.h>
 
+#include <algorithm>  // any_of
+
 #include "open62541pp/Client.h"
 #include "open62541pp/Node.h"
 #include "open62541pp/Server.h"
@@ -41,6 +43,32 @@ TEST_CASE("Node") {
             CHECK(serverOrClient.getVariableTypesNode().readNodeClass() == NodeClass::Object);
             CHECK(serverOrClient.getDataTypesNode().readNodeClass() == NodeClass::Object);
             CHECK(serverOrClient.getReferenceTypesNode().readNodeClass() == NodeClass::Object);
+        }
+
+        SUBCASE("Get references") {
+            const auto refs = rootNode.getReferences();
+            CHECK(refs.size() > 0);
+            CHECK(std::any_of(refs.begin(), refs.end(), [&](auto& ref) {
+                return ref.getBrowseName() == QualifiedName(0, "Objects");
+            }));
+        }
+
+        SUBCASE("Get referenced nodes") {
+            const auto nodes = objNode.getReferencedNodes();
+            CHECK(nodes.size() > 0);
+            CHECK(std::any_of(nodes.begin(), nodes.end(), [&](auto& node) {
+                return node == rootNode;
+            }));
+        }
+
+        SUBCASE("Get children") {
+            CHECK(rootNode.getChildren(ReferenceType::HasChild).empty());
+
+            const auto nodes = rootNode.getChildren(ReferenceType::HierarchicalReferences);
+            CHECK(nodes.size() > 0);
+            CHECK(std::any_of(nodes.begin(), nodes.end(), [&](auto& node) {
+                return node == objNode;
+            }));
         }
 
         SUBCASE("Get child") {
