@@ -10,6 +10,7 @@ endif()
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/examples)
 
 set(examples_sources
+    client_browse.cpp
     client_connect.cpp
     client_find_servers.cpp
     client_minimal.cpp
