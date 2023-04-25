@@ -83,11 +83,4 @@ BrowsePathResult browseSimplifiedBrowsePath(
     T& serverOrClient, const NodeId& origin, const std::vector<QualifiedName>& browsePath
 );
 
-/**
- * Get a child specified by its path from this node (only local nodes).
- * @exception BadStatus If path not found (BadNoMatch)
- * @ingroup View
- */
-NodeId browseChild(Server& server, const NodeId& origin, const std::vector<QualifiedName>& path);
-
 }  // namespace opcua::services
