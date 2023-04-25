@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <string>
 #include <string_view>
 #include <vector>
 
@@ -62,6 +63,9 @@ public:
 
     /// Disconnect and close a connection to the server (async, without blocking).
     void disconnect() noexcept;
+
+    /// Get all defined namespaces.
+    std::vector<std::string> getNamespaceArray();
 
     Node<Client> getNode(const NodeId& id);
     Node<Client> getRootNode();

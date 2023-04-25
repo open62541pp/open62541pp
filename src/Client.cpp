@@ -122,6 +122,12 @@ void Client::disconnect() noexcept {
     UA_Client_disconnect(handle());
 }
 
+std::vector<std::string> Client::getNamespaceArray() {
+    Variant variant;
+    services::readValue(*this, {0, UA_NS0ID_SERVER_NAMESPACEARRAY}, variant);
+    return variant.getArrayCopy<std::string>();
+}
+
 Node<Client> Client::getNode(const NodeId& id) {
     return {*this, id, true};
 }

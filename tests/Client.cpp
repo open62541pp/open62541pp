@@ -14,7 +14,6 @@ constexpr std::string_view localServerUrl{"opc.tcp://localhost:4840"};
 TEST_CASE("Client discovery") {
     Server server;
     ServerRunner serverRunner(server);
-
     Client client;
 
     SUBCASE("Find servers") {
@@ -50,7 +49,6 @@ TEST_CASE("Client discovery") {
 TEST_CASE("Client anonymous login") {
     Server server;
     ServerRunner serverRunner(server);
-
     Client client;
 
     SUBCASE("Connect/disconnect") {
@@ -67,7 +65,6 @@ TEST_CASE("Client username/password login") {
     Server server;
     server.setLogin({{"username", "password"}}, false);
     ServerRunner serverRunner(server);
-
     Client client;
 
     SUBCASE("Connect with anonymous should fail") {
@@ -77,5 +74,19 @@ TEST_CASE("Client username/password login") {
     SUBCASE("Connect with username/password should succeed") {
         CHECK_NOTHROW(client.connect(localServerUrl, {"username", "password"}));
         CHECK_NOTHROW(client.disconnect());
+    }
+}
+
+TEST_CASE("Client methods") {
+    Server server;
+    ServerRunner serverRunner(server);
+    Client client;
+    client.connect(localServerUrl);
+
+    SUBCASE("Namespace array") {
+        const auto namespaces = client.getNamespaceArray();
+        CHECK(namespaces.size() == 2);
+        CHECK(namespaces.at(0) == "http://opcfoundation.org/UA/");
+        CHECK(namespaces.at(1) == "urn:open62541.server.application");
     }
 }
