@@ -45,46 +45,47 @@ TEST_CASE("Node") {
             CHECK(serverOrClient.getReferenceTypesNode().readNodeClass() == NodeClass::Object);
         }
 
-        SUBCASE("Get references") {
-            const auto refs = rootNode.getReferences();
+        SUBCASE("Browse references") {
+            const auto refs = rootNode.browseReferences();
             CHECK(refs.size() > 0);
             CHECK(std::any_of(refs.begin(), refs.end(), [&](auto& ref) {
                 return ref.getBrowseName() == QualifiedName(0, "Objects");
             }));
         }
 
-        SUBCASE("Get referenced nodes") {
-            const auto nodes = objNode.getReferencedNodes();
+        SUBCASE("Browse referenced nodes") {
+            const auto nodes = objNode.browseReferencedNodes();
             CHECK(nodes.size() > 0);
             CHECK(std::any_of(nodes.begin(), nodes.end(), [&](auto& node) {
                 return node == rootNode;
             }));
         }
 
-        SUBCASE("Get children") {
-            CHECK(rootNode.getChildren(ReferenceType::HasChild).empty());
+        SUBCASE("Browse children") {
+            CHECK(rootNode.browseChildren(ReferenceType::HasChild).empty());
 
-            const auto nodes = rootNode.getChildren(ReferenceType::HierarchicalReferences);
+            const auto nodes = rootNode.browseChildren(ReferenceType::HierarchicalReferences);
             CHECK(nodes.size() > 0);
             CHECK(std::any_of(nodes.begin(), nodes.end(), [&](auto& node) {
                 return node == objNode;
             }));
         }
 
-        SUBCASE("Get child") {
-            CHECK_THROWS_WITH(rootNode.getChild({{0, "Invalid"}}), "BadNoMatch");
+        SUBCASE("Browse child") {
+            CHECK_THROWS_WITH(rootNode.browseChild({{0, "Invalid"}}), "BadNoMatch");
             CHECK_EQ(
-                rootNode.getChild({{0, "Objects"}}).getNodeId(), NodeId(0, UA_NS0ID_OBJECTSFOLDER)
+                rootNode.browseChild({{0, "Objects"}}).getNodeId(),
+                NodeId(0, UA_NS0ID_OBJECTSFOLDER)
             );
             CHECK_EQ(
-                rootNode.getChild({{0, "Objects"}, {0, "Server"}}).getNodeId(),
+                rootNode.browseChild({{0, "Objects"}, {0, "Server"}}).getNodeId(),
                 NodeId(0, UA_NS0ID_SERVER)
             );
         }
 
-        SUBCASE("Get parent") {
-            CHECK_THROWS_WITH(rootNode.getParent(), "BadNotFound");
-            CHECK_EQ(objNode.getParent(), rootNode);
+        SUBCASE("Browse parent") {
+            CHECK_THROWS_WITH(rootNode.browseParent(), "BadNotFound");
+            CHECK_EQ(objNode.browseParent(), rootNode);
         }
 
         SUBCASE("Try read/write with node classes other than Variable") {

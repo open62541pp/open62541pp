@@ -11,7 +11,7 @@
 namespace opcua {
 
 template <typename T>
-std::vector<ReferenceDescription> Node<T>::getReferences(
+std::vector<ReferenceDescription> Node<T>::browseReferences(
     BrowseDirection browseDirection,
     ReferenceType referenceType,
     bool includeSubtypes,
@@ -29,7 +29,7 @@ std::vector<ReferenceDescription> Node<T>::getReferences(
 }
 
 template <typename T>
-std::vector<Node<T>> Node<T>::getReferencedNodes(
+std::vector<Node<T>> Node<T>::browseReferencedNodes(
     BrowseDirection browseDirection,
     ReferenceType referenceType,
     bool includeSubtypes,
@@ -55,7 +55,7 @@ std::vector<Node<T>> Node<T>::getReferencedNodes(
 }
 
 template <typename T>
-Node<T> Node<T>::getChild(const std::vector<QualifiedName>& path) {
+Node<T> Node<T>::browseChild(const std::vector<QualifiedName>& path) {
     const auto result = services::browseSimplifiedBrowsePath(connection_, nodeId_, path);
     for (auto&& target : result.getTargets()) {
         if (target.getTargetId().isLocal()) {
@@ -66,8 +66,8 @@ Node<T> Node<T>::getChild(const std::vector<QualifiedName>& path) {
 }
 
 template <typename T>
-Node<T> Node<T>::getParent() {
-    const auto nodes = getReferencedNodes(
+Node<T> Node<T>::browseParent() {
+    const auto nodes = browseReferencedNodes(
         BrowseDirection::Inverse,
         ReferenceType::HierarchicalReferences,
         true,

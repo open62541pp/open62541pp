@@ -43,8 +43,8 @@ int main() {
     nodeBello.writeDescription({"en-US", "A dog named Bello"});
 
     // Set variables Age and Name
-    nodeBello.getChild({{1, "Age"}}).writeScalar(3U);
-    nodeBello.getChild({{1, "Name"}}).writeScalar(opcua::String("Bello"));
+    nodeBello.browseChild({{1, "Age"}}).writeScalar(3U);
+    nodeBello.browseChild({{1, "Name"}}).writeScalar(opcua::String("Bello"));
 
     server.run();
 }

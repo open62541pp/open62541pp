@@ -134,7 +134,7 @@ public:
     }
 
     /// Browse references.
-    std::vector<ReferenceDescription> getReferences(
+    std::vector<ReferenceDescription> browseReferences(
         BrowseDirection browseDirection = BrowseDirection::Both,
         ReferenceType referenceType = ReferenceType::References,
         bool includeSubtypes = true,
@@ -142,7 +142,7 @@ public:
     );
 
     /// Browse referenced nodes (only local nodes).
-    std::vector<Node> getReferencedNodes(
+    std::vector<Node> browseReferencedNodes(
         BrowseDirection browseDirection = BrowseDirection::Both,
         ReferenceType referenceType = ReferenceType::References,
         bool includeSubtypes = true,
@@ -150,22 +150,22 @@ public:
     );
 
     /// Browse child nodes (only local nodes).
-    std::vector<Node> getChildren(
+    std::vector<Node> browseChildren(
         ReferenceType referenceType = ReferenceType::HierarchicalReferences,
         uint32_t nodeClassMask = UA_NODECLASS_UNSPECIFIED
     ) {
-        return getReferencedNodes(BrowseDirection::Forward, referenceType, true, nodeClassMask);
+        return browseReferencedNodes(BrowseDirection::Forward, referenceType, true, nodeClassMask);
     }
 
-    /// Get a child specified by its relative path from this node (only local nodes).
+    /// Browse child node specified by its relative path from this node (only local nodes).
     /// The relative path is specified using browse names.
     /// @exception BadStatus (BadNoMatch) If path not found
-    Node getChild(const std::vector<QualifiedName>& path);
+    Node browseChild(const std::vector<QualifiedName>& path);
 
-    /// Get parent node.
+    /// Browse parent node.
     /// A Node may have several parents, the first found is returned.
     /// @exception BadStatus (BadNotFound) If no parent node found
-    Node getParent();
+    Node browseParent();
 
     /// @copydoc services::readNodeClass
     NodeClass readNodeClass() {
