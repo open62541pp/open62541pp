@@ -83,4 +83,9 @@ private:
     std::shared_ptr<Connection> connection_;
 };
 
+/* ---------------------------------------------------------------------------------------------- */
+
+bool operator==(const Client& left, const Client& right) noexcept;
+bool operator!=(const Client& left, const Client& right) noexcept;
+
 }  // namespace opcua

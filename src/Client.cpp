@@ -174,4 +174,14 @@ const UA_Client* Client::handle() const noexcept {
     return connection_->handle();
 }
 
+/* ---------------------------------------------------------------------------------------------- */
+
+bool operator==(const Client& left, const Client& right) noexcept {
+    return (left.handle() == right.handle());
+}
+
+bool operator!=(const Client& left, const Client& right) noexcept {
+    return !(left == right);
+}
+
 }  // namespace opcua
