@@ -10,14 +10,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Basic `Client` implementation (#33)
+- Attribute service set with generic read/write functions:
+  - `services::readAttribute`
+  - `services::writeAttribute`
+- View/browse service set:
+  - `services::browse`
+  - `services::browseNext`
+  - `services::browseAll`
+  - `services::translateBrowsePathToNodeIds`
+  - `services::browseSimplifiedBrowsePath`
+- `Node` methods for browsing:
+  - `browseReferences`
+  - `browseReferencedNodes`
+  - `browseChildren`
+  - `browseChild`
+  - `browseParent`
+- Missing functions to read/write attributes `UserWriteMask`, `IsAbstract`, `Symmetric`, `InverseName`, `UserAccessLevel` and `MinimumSamplingInterval`
 - `asWrapper` function to cast native refs to wrapper refs (#30, #31)
 - `DataValue::getValuePtr` method
 - Static methods `DataValue::fromScalar` and `DataValue::fromArray`
 - `DateTime::format` method
 - `Server::getNamespaceArray` method
 - `Server::runIterate` method, e.g. to run server in existing event loop
-- Generic `services::readAttribute` and `services::writeAttribute` functions
-- Missing functions to read/write attributes `UserWriteMask`, `IsAbstract`, `Symmetric`, `InverseName`, `UserAccessLevel` and `MinimumSamplingInterval`
 - `Guid::toString` and `Guid::random` method
 - `DateTime::localTimeUtcOffset` and `DateTime::format` method
 - `ostream` overloads for `String`, `Guid`, `XmlElement`
@@ -25,6 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `client_minimal`
   - `client_connect`
   - `client_find_servers`
+  - `client_browse`
   - `server_minimal`
 
 ### Changed
@@ -34,6 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Pass `LocalizedText` instead of members (`locale`, `text`) to `Node::writeDisplayName`, `Node::writeDescription`, `services::writeDisplayName`, `services::writeDescription` (#29)
 - Remove `Server::getConfig` method
 - Rename `Node::writeModellingRule` -> `Node::addModellingRule`
+- Rename `Node::getChild` -> `Node::browseChild`
 - Remove `TypeWrapper::getType` method
 - Use `TypeIndex` instead of `Type` enum for `TypeConverter` to allow conversions of non-builtin types
 
