@@ -10,8 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # disable debug builds (with clang) until UA_ENABLE_DEBUG_SANITIZER available in open62541
-        build_type: ["RelWithDebInfo"]
+        build_type: ["Debug", "Release"]
         config:
           # prettier-ignore
           - { name: GCC 9,      CC: gcc-9,    CXX: g++-9,      flags: ""}

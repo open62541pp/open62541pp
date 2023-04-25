@@ -72,14 +72,21 @@ include(cmake/Sanitizers.cmake)
 find_package(Threads REQUIRED)
 
 # open62541
-# overwrite default open62541 options
-# disable sanitizers in debug build (> v1.3)
-if(NOT UA_ENABLE_DEBUG_SANITIZER)
-    set(UA_ENABLE_DEBUG_SANITIZER CACHE BOOL OFF)
-endif()
-
 option(UAPP_INTERNAL_OPEN62541 "Use internal open62541 library" ON)
 if(UAPP_INTERNAL_OPEN62541)
+    # overwrite default open62541 options
+    # disable sanitizers in debug build (> v1.3)
+    if (NOT UA_ENABLE_DEBUG_SANITIZER)
+        set(UA_ENABLE_DEBUG_SANITIZER OFF CACHE BOOL "")
+        mark_as_advanced(UA_ENABLE_DEBUG_SANITIZER)
+    endif()
+    # disable sanitizers in debug build (<= v1.3) WORKAROUND
+    # https://github.com/open62541/open62541/blob/v1.3.5/CMakeLists.txt#L753-L764
+    if (NOT UA_ENABLE_UNIT_TESTS_MEMCHECK)
+        set(UA_ENABLE_UNIT_TESTS_MEMCHECK ON CACHE BOOL "")
+        mark_as_advanced(UA_ENABLE_UNIT_TESTS_MEMCHECK)
+    endif()
+
     set(OPEN62541_VERSION v1.3.5)  # set manually for CI
     add_subdirectory(3rdparty/open62541)  # target open62541::open62541
 else()
