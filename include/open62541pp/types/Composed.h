@@ -32,6 +32,9 @@
 
 // NOLINTNEXTLINE
 #define UAPP_COMPOSED_GETTER_ARRAY(Type, getterName, array, size)                                  \
+    size_t getterName##Size() const noexcept {                                                     \
+        return handle()->size;                                                                     \
+    }                                                                                              \
     std::vector<Type> getterName() const {                                                         \
         return detail::fromNativeArray<Type>(handle()->array, handle()->size);                     \
     }
