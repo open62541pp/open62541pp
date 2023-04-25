@@ -1,6 +1,7 @@
 #include "open62541pp/services/View.h"
 
 #include <algorithm>  // transform
+#include <iterator>  // make_move_iterator
 
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
@@ -70,6 +71,28 @@ BrowseResult browseNext<Client>(
     return result;
 }
 
+template <typename T>
+std::vector<ReferenceDescription> browseAll(
+    T& serverOrClient, const BrowseDescription& bd, uint32_t maxReferences
+) {
+    auto response = browse(serverOrClient, bd, maxReferences);
+    std::vector<ReferenceDescription> refs = response.getReferences();
+    while (response.getContinuationPoint() != ByteString()) {
+        const bool release = (refs.size() >= maxReferences);
+        response = browseNext(serverOrClient, release, response.getContinuationPoint());
+        auto refsNext = response.getReferences();
+        refs.insert(
+            refs.end(),
+            std::make_move_iterator(refsNext.begin()),
+            std::make_move_iterator(refsNext.end())
+        );
+    }
+    if ((maxReferences > 0) && (refs.size() > maxReferences)) {
+        refs.resize(maxReferences);
+    }
+    return refs;
+}
+
 template <>
 BrowsePathResult translateBrowsePathToNodeIds<Server>(
     Server& server, const BrowsePath& browsePath
@@ -121,13 +144,6 @@ BrowsePathResult browseSimplifiedBrowsePath(
     return translateBrowsePathToNodeIds(serverOrClient, bp);
 }
 
-// explicit template instantiation
-// clang-format off
-template BrowsePathResult browseSimplifiedBrowsePath<Server>(Server&, const NodeId&, const std::vector<QualifiedName>&);
-template BrowsePathResult browseSimplifiedBrowsePath<Client>(Client&, const NodeId&, const std::vector<QualifiedName>&);
-
-// clang-format on
-
 NodeId browseChild(Server& server, const NodeId& origin, const std::vector<QualifiedName>& path) {
     const auto result = browseSimplifiedBrowsePath(server, origin, path);
     if (result->targetsSize < 1) {
@@ -139,5 +155,16 @@ NodeId browseChild(Server& server, const NodeId& origin, const std::vector<Quali
     }
     return id.getNodeId();
 }
+
+// explicit template instantiations
+// clang-format off
+
+template std::vector<ReferenceDescription> browseAll<Server>(Server&, const BrowseDescription&, uint32_t);
+template std::vector<ReferenceDescription> browseAll<Client>(Client&, const BrowseDescription&, uint32_t);
+
+template BrowsePathResult browseSimplifiedBrowsePath<Server>(Server&, const NodeId&, const std::vector<QualifiedName>&);
+template BrowsePathResult browseSimplifiedBrowsePath<Client>(Client&, const NodeId&, const std::vector<QualifiedName>&);
+
+// clang-format on
 
 }  // namespace opcua::services

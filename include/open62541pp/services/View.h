@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iterator>
 #include <vector>
 
 #include "open62541pp/Common.h"
@@ -43,6 +44,16 @@ BrowseResult browse(T& serverOrClient, const BrowseDescription& bd, uint32_t max
 template <typename T>
 BrowseResult browseNext(
     T& serverOrClient, bool releaseContinuationPoint, const ByteString& continuationPoint
+);
+
+/**
+ * Discover all the references of a specified node (without calling @ref browseNext).
+ * @copydetails browse
+ * @ingroup View
+ */
+template <typename T>
+std::vector<ReferenceDescription> browseAll(
+    T& serverOrClient, const BrowseDescription& bd, uint32_t maxReferences = 0
 );
 
 /**
