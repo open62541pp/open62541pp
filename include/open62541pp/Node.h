@@ -133,11 +133,10 @@ public:
         services::deleteNode(connection_, nodeId_, deleteReferences);
     }
 
-    /// @copydoc services::browseChild
-    Node getChild(const std::vector<QualifiedName>& path) {
-        const auto id = services::browseChild(connection_, nodeId_, path);
-        return {connection_, id, false};
-    }
+    /// Get a child specified by its relative path from this node (only local nodes).
+    /// The relative path is specified using browse names.
+    /// @exception BadStatus If path not found (BadNoMatch)
+    Node getChild(const std::vector<QualifiedName>& path);
 
     /// @copydoc services::readNodeClass
     NodeClass readNodeClass() {

@@ -58,7 +58,6 @@ TEST_CASE("NodeManagement (server)") {
 TEST_CASE("NodeManagement (client)") {
     Server server;
     ServerRunner serverRunner(server);
-
     Client client;
     client.connect("opc.tcp://localhost:4840");
 
@@ -263,7 +262,6 @@ TEST_CASE("Attribute (server)") {
 TEST_CASE("Attribute (server & client)") {
     Server server;
     ServerRunner serverRunner(server);
-
     Client client;
     client.connect("opc.tcp://localhost:4840");
 
@@ -404,19 +402,9 @@ TEST_CASE("View") {
             CHECK(targets.at(0).getTargetId().getNodeId() == id);
         }
     };
+
     // clang-format off
     SUBCASE("Server") { testBrowse(server); };
     SUBCASE("Client") { testBrowse(client); };
     // clang-format on
-
-    SUBCASE("Browse child") {
-        const NodeId rootId{0, UA_NS0ID_ROOTFOLDER};
-
-        CHECK_THROWS(services::browseChild(server, rootId, {}));
-        CHECK_THROWS(services::browseChild(server, rootId, {{0, "Invalid"}}));
-        CHECK(
-            services::browseChild(server, rootId, {{0, "Types"}, {0, "ObjectTypes"}}) ==
-            NodeId{0, UA_NS0ID_OBJECTTYPESFOLDER}
-        );
-    }
 }

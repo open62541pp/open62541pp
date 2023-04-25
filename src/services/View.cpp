@@ -144,18 +144,6 @@ BrowsePathResult browseSimplifiedBrowsePath(
     return translateBrowsePathToNodeIds(serverOrClient, bp);
 }
 
-NodeId browseChild(Server& server, const NodeId& origin, const std::vector<QualifiedName>& path) {
-    const auto result = browseSimplifiedBrowsePath(server, origin, path);
-    if (result->targetsSize < 1) {
-        throw BadStatus(UA_STATUSCODE_BADNOMATCH);
-    }
-    const auto id = ExpandedNodeId(result->targets[0].targetId);  // NOLINT
-    if (!id.isLocal()) {
-        throw BadStatus(UA_STATUSCODE_BADNOMATCH);
-    }
-    return id.getNodeId();
-}
-
 // explicit template instantiations
 // clang-format off
 
