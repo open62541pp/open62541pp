@@ -188,11 +188,9 @@ cmake -DCMAKE_BUILD_TYPE=Debug -DUAPP_BUILD_EXAMPLES=ON -DUAPP_BUILD_TESTS=ON ..
 cmake --build .
 # run tests again (tests run automatically after build step)
 ctest --output-on-failure
-# coverage report (text or html)
+# coverage report (text or html) with UAPP_ENABLE_COVERAGE option enabled
 cmake --build . --target open62541pp_coverage_report
 cmake --build . --target open62541pp_coverage_report_html
-# build documentation
-cmake --build . --target open62541pp_doc
 # install to system
 cmake --install .
 ```
