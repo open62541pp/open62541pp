@@ -29,6 +29,11 @@ TEST_CASE_TEMPLATE("StringLike", T, String, ByteString, XmlElement) {
         CHECK(std::string(wrapper.get()) == "test");
     }
 
+    SUBCASE("Empty") {
+        CHECK(T().empty());
+        CHECK_FALSE(T("test").empty());
+    }
+
     SUBCASE("Equality") {
         CHECK(T("test") == T("test"));
         CHECK(T("test") != T());

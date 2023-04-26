@@ -77,7 +77,7 @@ std::vector<ReferenceDescription> browseAll(
 ) {
     auto response = browse(serverOrClient, bd, maxReferences);
     std::vector<ReferenceDescription> refs = response.getReferences();
-    while (response.getContinuationPoint() != ByteString()) {
+    while (!response.getContinuationPoint().empty()) {
         const bool release = (refs.size() >= maxReferences);
         response = browseNext(serverOrClient, release, response.getContinuationPoint());
         auto refsNext = response.getReferences();

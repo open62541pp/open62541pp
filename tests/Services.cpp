@@ -340,7 +340,7 @@ TEST_CASE("View") {
             const auto result = services::browse(serverOrClient, bd);
 
             CHECK(result.getStatusCode() == UA_STATUSCODE_GOOD);
-            CHECK(result.getContinuationPoint() == ByteString());  // empty
+            CHECK(result.getContinuationPoint().empty());
 
             const auto refs = result.getReferences();
             CHECK(refs.size() == 2);
@@ -363,7 +363,7 @@ TEST_CASE("View") {
             auto resultBrowse = services::browse(serverOrClient, bd, 1);
 
             CHECK(resultBrowse.getStatusCode() == UA_STATUSCODE_GOOD);
-            CHECK(resultBrowse.getContinuationPoint() != ByteString());  // not empty
+            CHECK(resultBrowse.getContinuationPoint().empty() == false);
             CHECK(resultBrowse.getReferences().size() == 1);
 
             // get next result
@@ -371,7 +371,7 @@ TEST_CASE("View") {
                 serverOrClient, false, resultBrowse.getContinuationPoint()
             );
             CHECK(resultBrowse.getStatusCode() == UA_STATUSCODE_GOOD);
-            CHECK(resultBrowse.getContinuationPoint() != ByteString());  // not empty
+            CHECK(resultBrowse.getContinuationPoint().empty() == false);
             CHECK(resultBrowse.getReferences().size() == 1);
 
             // release continuation point, result should be empty
@@ -379,7 +379,7 @@ TEST_CASE("View") {
                 serverOrClient, true, resultBrowse.getContinuationPoint()
             );
             CHECK(resultBrowse.getStatusCode() == UA_STATUSCODE_GOOD);
-            CHECK(resultBrowse.getContinuationPoint() == ByteString());  // empty
+            CHECK(resultBrowse.getContinuationPoint().empty());
             CHECK(resultBrowse.getReferences().size() == 0);
         }
 

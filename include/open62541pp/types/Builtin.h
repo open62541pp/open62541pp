@@ -21,6 +21,8 @@ public:
 
     explicit String(std::string_view str);
 
+    bool empty() const noexcept;
+
     std::string_view get() const;
 };
 
@@ -51,6 +53,8 @@ public:
 
     explicit ByteString(std::string_view str);
 
+    bool empty() const noexcept;
+
     std::string_view get() const;
 };
 
@@ -64,6 +68,8 @@ public:
     using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
 
     explicit XmlElement(std::string_view str);
+
+    bool empty() const noexcept;
 
     std::string_view get() const;
 };
