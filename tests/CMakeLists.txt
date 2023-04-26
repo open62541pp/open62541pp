@@ -5,6 +5,7 @@ add_executable(
     main.cpp
     Client.cpp
     helper.cpp
+    Mask.cpp
     Node.cpp
     overloads.cpp
     Server.cpp
