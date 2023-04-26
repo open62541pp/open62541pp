@@ -117,7 +117,7 @@ TEST_CASE("Attribute (server)") {
         // read default attributes
         CHECK(services::readNodeId(server, id) == id);
         CHECK(services::readNodeClass(server, id) == NodeClass::Variable);
-        CHECK(services::readBrowseName(server, id) == "testAttributes");
+        CHECK(services::readBrowseName(server, id) == QualifiedName(1, "testAttributes"));
         //_EQ CHECK(services::readDisplayName(server, id), LocalizedText("", "testAttributes"));
         CHECK(services::readDescription(server, id).getText().empty());
         CHECK(services::readDescription(server, id).getLocale().empty());

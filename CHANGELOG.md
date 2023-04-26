@@ -45,7 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Templated `Node` class (`Node<Server>`, `Node<Client>`) as preparation for client implementation (#32)
+- Templated `Node` class (`Node<Server>`, `Node<Client>`) for client implementation (#32)
 - Return reference from `ExpandedNodeId::getNodeId`
 - Pass `LocalizedText` instead of members (`locale`, `text`) to `Node::writeDisplayName`, `Node::writeDescription`, `services::writeDisplayName`, `services::writeDescription` (#29)
 - Remove `Server::getConfig` method
@@ -53,6 +53,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rename `Node::getChild` -> `Node::browseChild`
 - Remove `TypeWrapper::getType` method
 - Use `TypeIndex` instead of `Type` enum for `TypeConverter` to allow conversions of non-builtin types
+- Return `Qualified` name from `readBrowseName` instead of `std::string`
 
 ### Fixed
 

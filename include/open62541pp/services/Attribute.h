@@ -102,11 +102,8 @@ inline NodeClass readNodeClass(T& serverOrClient, const NodeId& id) {
  * @ingroup Attribute
  */
 template <typename T>
-inline std::string readBrowseName(T& serverOrClient, const NodeId& id) {
-    const auto name = readAttributeScalar<QualifiedName>(
-        serverOrClient, id, UA_ATTRIBUTEID_BROWSENAME
-    );
-    return std::string(name.getName());
+inline QualifiedName readBrowseName(T& serverOrClient, const NodeId& id) {
+    return readAttributeScalar<QualifiedName>(serverOrClient, id, UA_ATTRIBUTEID_BROWSENAME);
 }
 
 /**

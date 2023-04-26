@@ -173,7 +173,7 @@ public:
     }
 
     /// @copydoc services::readBrowseName
-    std::string readBrowseName() {
+    QualifiedName readBrowseName() {
         return services::readBrowseName(connection_, nodeId_);
     }
 
