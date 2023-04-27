@@ -38,7 +38,7 @@ namespace opcua::services {
  * - UserExecutable
  *
  * @see https://www.open62541.org/doc/1.3/server.html
- * @see https://reference.opcfoundation.org/Core/Part3/v105/docs
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.10
  * @ingroup Services
  */
 

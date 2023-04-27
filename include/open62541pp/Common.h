@@ -14,7 +14,7 @@ using TypeIndex = uint16_t;
 
 /**
  * Built-in types.
- * @see https://reference.opcfoundation.org/v104/Core/docs/Part6/5.1.2/
+ * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/5.1.2
  */
 enum class Type : TypeIndex {
     // clang-format off
@@ -105,7 +105,7 @@ enum class ValueRank : int32_t {
 
 /**
  * Reference types.
- * @see https://reference.opcfoundation.org/v104/Core/ReferenceTypes/
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/7
  * Missing reference types in open62541?
  * - AliasFor
  * - HasReaderGroup
@@ -161,7 +161,7 @@ enum class ReferenceType : uint16_t {
 
 /**
  * Modelling rules.
- * @see https://reference.opcfoundation.org/v104/Core/docs/Part3/6.4.4/
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/6.4.4
  */
 enum class ModellingRule : uint16_t {
     // clang-format off
@@ -176,13 +176,15 @@ enum class ModellingRule : uint16_t {
 /**
  * Browse direction.
  * An enumeration that specifies the direction of references to follow.
- * @see https://reference.opcfoundation.org/Core/Part4/v104/docs/5.8.2
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.2
  */
 enum class BrowseDirection : uint32_t {
+    // clang-format off
     Forward = UA_BROWSEDIRECTION_FORWARD,
     Inverse = UA_BROWSEDIRECTION_INVERSE,
-    Both = UA_BROWSEDIRECTION_BOTH,
+    Both    = UA_BROWSEDIRECTION_BOTH,
     Invalid = UA_BROWSEDIRECTION_INVALID,
+    // clang-format on
 };
 
 namespace detail {
