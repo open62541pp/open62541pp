@@ -7,7 +7,15 @@ namespace opcua {
 
 /**
  * Bit mask using (scoped) enums as flags.
- * This class allows scoped enums to be used interchangeable with the native `UA_*` enums.
+ *
+ * This class allows scoped enums to be used interchangeable with the native `UA_*` enums:
+ * @code{.cpp}
+ * // construct with scoped enums
+ * Mask<NodeClass> mask = NodeClass::Object;
+ * Mask<NodeClass> mask{NodeClass::Object, NodeClass::Variable};  // OR combination
+ * // construct with unscoped (native) enums
+ * Mask<NodeClass> mask = UA_NODECLASS_VARIABLE | UA_NODECLASS_OBJECT;
+ * @endcode
  * Additional methods to test/set/reset/flip bits similar to `std::bitset`.
  */
 template <typename T>
