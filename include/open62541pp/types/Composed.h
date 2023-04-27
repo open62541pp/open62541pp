@@ -1,5 +1,6 @@
 #pragma once
 
+#include "open62541pp/Mask.h"
 #include "open62541pp/TypeConverter.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/types/Builtin.h"
@@ -105,7 +106,7 @@ public:
         BrowseDirection browseDirection,
         ReferenceType referenceType = ReferenceType::References,
         bool includeSubtypes = true,
-        uint32_t nodeClassMask = UA_NODECLASS_UNSPECIFIED,
+        Mask<NodeClass> nodeClassMask = NodeClass::Unspecified,
         uint32_t resultMask = UA_BROWSERESULTMASK_ALL
     );
 
@@ -113,7 +114,7 @@ public:
     UAPP_COMPOSED_GETTER_CAST(BrowseDirection, getBrowseDirection, browseDirection)
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getReferenceTypeId, referenceTypeId)
     UAPP_COMPOSED_GETTER(bool, getIncludeSubtypes, includeSubtypes)
-    UAPP_COMPOSED_GETTER(uint32_t, getNodeClassMask, nodeClassMask)
+    UAPP_COMPOSED_GETTER(Mask<NodeClass>, getNodeClassMask, nodeClassMask)
     UAPP_COMPOSED_GETTER(uint32_t, getResultMask, resultMask)
 };
 

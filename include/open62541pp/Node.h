@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "open62541pp/Common.h"
+#include "open62541pp/Mask.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeConverter.h"  // guessType
 #include "open62541pp/services/services.h"
@@ -138,7 +139,7 @@ public:
         BrowseDirection browseDirection = BrowseDirection::Both,
         ReferenceType referenceType = ReferenceType::References,
         bool includeSubtypes = true,
-        uint32_t nodeClassMask = UA_NODECLASS_UNSPECIFIED
+        Mask<NodeClass> nodeClassMask = NodeClass::Unspecified
     );
 
     /// Browse referenced nodes (only local nodes).
@@ -146,13 +147,13 @@ public:
         BrowseDirection browseDirection = BrowseDirection::Both,
         ReferenceType referenceType = ReferenceType::References,
         bool includeSubtypes = true,
-        uint32_t nodeClassMask = UA_NODECLASS_UNSPECIFIED
+        Mask<NodeClass> nodeClassMask = NodeClass::Unspecified
     );
 
     /// Browse child nodes (only local nodes).
     std::vector<Node> browseChildren(
         ReferenceType referenceType = ReferenceType::HierarchicalReferences,
-        uint32_t nodeClassMask = UA_NODECLASS_UNSPECIFIED
+        Mask<NodeClass> nodeClassMask = NodeClass::Unspecified
     ) {
         return browseReferencedNodes(BrowseDirection::Forward, referenceType, true, nodeClassMask);
     }
@@ -188,12 +189,12 @@ public:
     }
 
     /// @copydoc services::readWriteMask
-    uint32_t readWriteMask() {
+    Mask<WriteMask> readWriteMask() {
         return services::readWriteMask(connection_, nodeId_);
     }
 
     /// @copydoc services::readUserWriteMask
-    uint32_t readUserWriteMask() {
+    Mask<WriteMask> readUserWriteMask() {
         return services::readUserWriteMask(connection_, nodeId_);
     }
 
@@ -254,12 +255,12 @@ public:
     }
 
     /// @copydoc services::readAccessLevel
-    uint8_t readAccessLevel() {
+    Mask<AccessLevel> readAccessLevel() {
         return services::readAccessLevel(connection_, nodeId_);
     }
 
     /// @copydoc services::readUserAccessLevel
-    uint8_t readUserAccessLevel() {
+    Mask<AccessLevel> readUserAccessLevel() {
         return services::readUserAccessLevel(connection_, nodeId_);
     }
 
@@ -279,12 +280,12 @@ public:
     }
 
     /// @copydoc services::writeWriteMask
-    void writeWriteMask(uint32_t mask) {
+    void writeWriteMask(Mask<WriteMask> mask) {
         services::writeWriteMask(connection_, nodeId_, mask);
     }
 
     /// @copydoc services::writeWriteMask
-    void writeUserWriteMask(uint32_t mask) {
+    void writeUserWriteMask(Mask<WriteMask> mask) {
         services::writeUserWriteMask(connection_, nodeId_, mask);
     }
 
@@ -363,12 +364,12 @@ public:
     }
 
     /// @copydoc services::writeAccessLevel
-    void writeAccessLevel(uint8_t mask) {
+    void writeAccessLevel(Mask<AccessLevel> mask) {
         services::writeAccessLevel(connection_, nodeId_, mask);
     }
 
     /// @copydoc services::writeUserAccessLevel
-    void writeUserAccessLevel(uint8_t mask) {
+    void writeUserAccessLevel(Mask<AccessLevel> mask) {
         services::writeUserAccessLevel(connection_, nodeId_, mask);
     }
 

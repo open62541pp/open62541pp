@@ -14,7 +14,7 @@ using TypeIndex = uint16_t;
 
 /**
  * Built-in types.
- * @see https://reference.opcfoundation.org/v104/Core/docs/Part6/5.1.2/
+ * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/5.1.2
  */
 enum class Type : TypeIndex {
     // clang-format off
@@ -89,23 +89,8 @@ constexpr std::string_view getNodeClassName(NodeClass nodeClass) {
 }
 
 /**
- * Value rank.
- */
-enum class ValueRank : int32_t {
-    // clang-format off
-    ScalarOrOneDimension = UA_VALUERANK_SCALAR_OR_ONE_DIMENSION,
-    Any                  = UA_VALUERANK_ANY,
-    Scalar               = UA_VALUERANK_SCALAR,
-    OneOrMoreDimensions  = UA_VALUERANK_ONE_OR_MORE_DIMENSIONS,
-    OneDimension         = UA_VALUERANK_ONE_DIMENSION,
-    TwoDimensions        = UA_VALUERANK_TWO_DIMENSIONS,
-    ThreeDimensions      = UA_VALUERANK_THREE_DIMENSIONS,
-    // clang-format on
-};
-
-/**
  * Reference types.
- * @see https://reference.opcfoundation.org/v104/Core/ReferenceTypes/
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/7
  * Missing reference types in open62541?
  * - AliasFor
  * - HasReaderGroup
@@ -160,8 +145,71 @@ enum class ReferenceType : uint16_t {
 };
 
 /**
+ * Write mask.
+ * Exposes the possibilities of a client to write the Attributes of the Node.
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/5.2.7
+ */
+enum class WriteMask : uint32_t {
+    // clang-format off
+    AccessLevel             = UA_WRITEMASK_ACCESSLEVEL,
+    ArrrayDimensions        = UA_WRITEMASK_ARRRAYDIMENSIONS,
+    BrowseName              = UA_WRITEMASK_BROWSENAME,
+    ContainsNoLoops         = UA_WRITEMASK_CONTAINSNOLOOPS,
+    DataType                = UA_WRITEMASK_DATATYPE,
+    Description             = UA_WRITEMASK_DESCRIPTION,
+    DisplayName             = UA_WRITEMASK_DISPLAYNAME,
+    EventNotifier           = UA_WRITEMASK_EVENTNOTIFIER,
+    Executable              = UA_WRITEMASK_EXECUTABLE,
+    Historizing             = UA_WRITEMASK_HISTORIZING,
+    InverseName             = UA_WRITEMASK_INVERSENAME,
+    IsAbstract              = UA_WRITEMASK_ISABSTRACT,
+    MinimumSamplingInterval = UA_WRITEMASK_MINIMUMSAMPLINGINTERVAL,
+    NodeClass               = UA_WRITEMASK_NODECLASS,
+    NodeId                  = UA_WRITEMASK_NODEID,
+    Symmetric               = UA_WRITEMASK_SYMMETRIC,
+    UserAccesslevel         = UA_WRITEMASK_USERACCESSLEVEL,
+    UserExecutable          = UA_WRITEMASK_USEREXECUTABLE,
+    UserWritemask           = UA_WRITEMASK_USERWRITEMASK,
+    ValueRank               = UA_WRITEMASK_VALUERANK,
+    WriteMask               = UA_WRITEMASK_WRITEMASK,
+    ValueForVariableType    = UA_WRITEMASK_VALUEFORVARIABLETYPE,
+    // clang-format on
+};
+
+/**
+ * Access level.
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.57
+ */
+enum class AccessLevel : uint8_t {
+    // clang-format off
+    Read           = UA_ACCESSLEVELMASK_READ,
+    Write          = UA_ACCESSLEVELMASK_WRITE,
+    HistoryRead    = UA_ACCESSLEVELMASK_HISTORYREAD,
+    HistoryWrite   = UA_ACCESSLEVELMASK_HISTORYWRITE,
+    SemanticChange = UA_ACCESSLEVELMASK_SEMANTICCHANGE,
+    StatusWrite    = UA_ACCESSLEVELMASK_STATUSWRITE,
+    TimestampwWite = UA_ACCESSLEVELMASK_TIMESTAMPWRITE,
+    // clang-format on
+};
+
+/**
+ * Value rank.
+ */
+enum class ValueRank : int32_t {
+    // clang-format off
+    ScalarOrOneDimension = UA_VALUERANK_SCALAR_OR_ONE_DIMENSION,
+    Any                  = UA_VALUERANK_ANY,
+    Scalar               = UA_VALUERANK_SCALAR,
+    OneOrMoreDimensions  = UA_VALUERANK_ONE_OR_MORE_DIMENSIONS,
+    OneDimension         = UA_VALUERANK_ONE_DIMENSION,
+    TwoDimensions        = UA_VALUERANK_TWO_DIMENSIONS,
+    ThreeDimensions      = UA_VALUERANK_THREE_DIMENSIONS,
+    // clang-format on
+};
+
+/**
  * Modelling rules.
- * @see https://reference.opcfoundation.org/v104/Core/docs/Part3/6.4.4/
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/6.4.4
  */
 enum class ModellingRule : uint16_t {
     // clang-format off
@@ -176,13 +224,15 @@ enum class ModellingRule : uint16_t {
 /**
  * Browse direction.
  * An enumeration that specifies the direction of references to follow.
- * @see https://reference.opcfoundation.org/Core/Part4/v104/docs/5.8.2
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.2
  */
 enum class BrowseDirection : uint32_t {
+    // clang-format off
     Forward = UA_BROWSEDIRECTION_FORWARD,
     Inverse = UA_BROWSEDIRECTION_INVERSE,
-    Both = UA_BROWSEDIRECTION_BOTH,
+    Both    = UA_BROWSEDIRECTION_BOTH,
     Invalid = UA_BROWSEDIRECTION_INVALID,
+    // clang-format on
 };
 
 namespace detail {

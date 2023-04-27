@@ -122,14 +122,12 @@ TEST_CASE("Attribute (server)") {
         CHECK(services::readDescription(server, id).getText().empty());
         CHECK(services::readDescription(server, id).getLocale().empty());
         CHECK(services::readWriteMask(server, id) == 0);
-        const uint32_t adminUserWriteMask = ~0;  // all bits set
-        CHECK(services::readUserWriteMask(server, id) == adminUserWriteMask);
+        CHECK(services::readUserWriteMask(server, id).all());  // -> admin rights
         CHECK(services::readDataType(server, id) == NodeId(0, UA_NS0ID_BASEDATATYPE));
         CHECK(services::readValueRank(server, id) == ValueRank::Any);
         CHECK(services::readArrayDimensions(server, id).empty());
         CHECK(services::readAccessLevel(server, id) == UA_ACCESSLEVELMASK_READ);
-        const uint8_t adminUserAccessLevel = ~0;  // all bits set
-        CHECK(services::readUserAccessLevel(server, id) == adminUserAccessLevel);
+        CHECK(services::readUserAccessLevel(server, id).all());  // -> admin rights
         CHECK(services::readMinimumSamplingInterval(server, id) == 0.0);
 
         // write new attributes

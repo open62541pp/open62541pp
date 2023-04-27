@@ -15,14 +15,14 @@ std::vector<ReferenceDescription> Node<T>::browseReferences(
     BrowseDirection browseDirection,
     ReferenceType referenceType,
     bool includeSubtypes,
-    uint32_t nodeClassMask
+    Mask<NodeClass> nodeClassMask
 ) {
     const BrowseDescription bd(
         nodeId_,
         browseDirection,
         referenceType,
         includeSubtypes,
-        nodeClassMask,
+        nodeClassMask.get(),
         UA_BROWSERESULTMASK_ALL
     );
     return services::browseAll(connection_, bd);
@@ -33,14 +33,14 @@ std::vector<Node<T>> Node<T>::browseReferencedNodes(
     BrowseDirection browseDirection,
     ReferenceType referenceType,
     bool includeSubtypes,
-    uint32_t nodeClassMask
+    Mask<NodeClass> nodeClassMask
 ) {
     const BrowseDescription bd(
         nodeId_,
         browseDirection,
         referenceType,
         includeSubtypes,
-        nodeClassMask,
+        nodeClassMask.get(),
         UA_BROWSERESULTMASK_TARGETINFO  // only node id required here
     );
     const auto refs = services::browseAll(connection_, bd);

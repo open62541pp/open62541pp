@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "open62541pp/Common.h"
+#include "open62541pp/Mask.h"
 #include "open62541pp/detail/helper.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/DataValue.h"
@@ -38,7 +39,7 @@ namespace opcua::services {
  * - UserExecutable
  *
  * @see https://www.open62541.org/doc/1.3/server.html
- * @see https://reference.opcfoundation.org/Core/Part3/v105/docs
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.10
  * @ingroup Services
  */
 
@@ -138,7 +139,7 @@ inline LocalizedText readDescription(T& serverOrClient, const NodeId& id) {
  * @ingroup Attribute
  */
 template <typename T>
-inline uint32_t readWriteMask(T& serverOrClient, const NodeId& id) {
+inline Mask<WriteMask> readWriteMask(T& serverOrClient, const NodeId& id) {
     return readAttributeScalar<uint32_t>(serverOrClient, id, UA_ATTRIBUTEID_WRITEMASK);
 }
 
@@ -150,7 +151,7 @@ inline uint32_t readWriteMask(T& serverOrClient, const NodeId& id) {
  * @ingroup Attribute
  */
 template <typename T>
-inline uint32_t readUserWriteMask(T& serverOrClient, const NodeId& id) {
+inline Mask<WriteMask> readUserWriteMask(T& serverOrClient, const NodeId& id) {
     return readAttributeScalar<uint32_t>(serverOrClient, id, UA_ATTRIBUTEID_USERWRITEMASK);
 }
 
@@ -253,7 +254,7 @@ inline std::vector<uint32_t> readArrayDimensions(T& serverOrClient, const NodeId
  * @ingroup Attribute
  */
 template <typename T>
-inline uint8_t readAccessLevel(T& serverOrClient, const NodeId& id) {
+inline Mask<AccessLevel> readAccessLevel(T& serverOrClient, const NodeId& id) {
     return readAttributeScalar<uint8_t>(serverOrClient, id, UA_ATTRIBUTEID_ACCESSLEVEL);
 }
 
@@ -265,7 +266,7 @@ inline uint8_t readAccessLevel(T& serverOrClient, const NodeId& id) {
  * @ingroup Attribute
  */
 template <typename T>
-inline uint8_t readUserAccessLevel(T& serverOrClient, const NodeId& id) {
+inline Mask<AccessLevel> readUserAccessLevel(T& serverOrClient, const NodeId& id) {
     return readAttributeScalar<uint8_t>(serverOrClient, id, UA_ATTRIBUTEID_USERACCESSLEVEL);
 }
 
@@ -310,8 +311,8 @@ inline void writeDescription(T& serverOrClient, const NodeId& id, const Localize
  * @ingroup Attribute
  */
 template <typename T>
-inline void writeWriteMask(T& serverOrClient, const NodeId& id, uint32_t mask) {
-    writeAttribute(serverOrClient, id, UA_ATTRIBUTEID_WRITEMASK, DataValue::fromScalar(mask));
+inline void writeWriteMask(T& serverOrClient, const NodeId& id, Mask<WriteMask> mask) {
+    writeAttribute(serverOrClient, id, UA_ATTRIBUTEID_WRITEMASK, DataValue::fromScalar(mask.get()));
 }
 
 /**
@@ -321,8 +322,10 @@ inline void writeWriteMask(T& serverOrClient, const NodeId& id, uint32_t mask) {
  * @ingroup Attribute
  */
 template <typename T>
-inline void writeUserWriteMask(T& serverOrClient, const NodeId& id, uint32_t mask) {
-    writeAttribute(serverOrClient, id, UA_ATTRIBUTEID_USERWRITEMASK, DataValue::fromScalar(mask));
+inline void writeUserWriteMask(T& serverOrClient, const NodeId& id, Mask<WriteMask> mask) {
+    writeAttribute(
+        serverOrClient, id, UA_ATTRIBUTEID_USERWRITEMASK, DataValue::fromScalar(mask.get())
+    );
 }
 
 /**
@@ -436,8 +439,8 @@ inline void writeArrayDimensions(
  * @ingroup Attribute
  */
 template <typename T>
-inline void writeAccessLevel(T& serverOrClient, const NodeId& id, uint8_t mask) {
-    const auto native = static_cast<UA_Byte>(mask);
+inline void writeAccessLevel(T& serverOrClient, const NodeId& id, Mask<AccessLevel> mask) {
+    const auto native = static_cast<UA_Byte>(mask.get());
     writeAttribute(serverOrClient, id, UA_ATTRIBUTEID_ACCESSLEVEL, DataValue::fromScalar(native));
 }
 
@@ -448,8 +451,8 @@ inline void writeAccessLevel(T& serverOrClient, const NodeId& id, uint8_t mask) 
  * @ingroup Attribute
  */
 template <typename T>
-inline void writeUserAccessLevel(T& serverOrClient, const NodeId& id, uint8_t mask) {
-    const auto native = static_cast<UA_Byte>(mask);
+inline void writeUserAccessLevel(T& serverOrClient, const NodeId& id, Mask<AccessLevel> mask) {
+    const auto native = static_cast<UA_Byte>(mask.get());
     writeAttribute(
         serverOrClient, id, UA_ATTRIBUTEID_USERACCESSLEVEL, DataValue::fromScalar(native)
     );

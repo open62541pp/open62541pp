@@ -88,8 +88,8 @@ public:
  * The format of locale is `<language>[-<country/region>]`:
  * - `<language>` is the two letter ISO 639 code for a language
  * - `<country/region>` is the two letter ISO 3166 code for the country/region
- * @see https://reference.opcfoundation.org/Core/Part3/v104/docs/8.5/
- * @see https://reference.opcfoundation.org/Core/Part3/v104/docs/8.4/
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.5/
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.4/
  * @ingroup TypeWrapper
  */
 class LocalizedText : public TypeWrapper<UA_LocalizedText, UA_TYPES_LOCALIZEDTEXT> {

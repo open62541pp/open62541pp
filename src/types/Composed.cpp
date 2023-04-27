@@ -9,14 +9,14 @@ BrowseDescription::BrowseDescription(
     BrowseDirection browseDirection,
     ReferenceType referenceType,
     bool includeSubtypes,
-    uint32_t nodeClassMask,  // NOLINT
+    Mask<NodeClass> nodeClassMask,  // NOLINT
     uint32_t resultMask  // NOLINT
 ) {
     asWrapper<NodeId>(handle()->nodeId) = nodeId;
     handle()->browseDirection = static_cast<UA_BrowseDirection>(browseDirection);
     handle()->referenceTypeId = detail::getUaNodeId(referenceType);
     handle()->includeSubtypes = includeSubtypes;
-    handle()->nodeClassMask = nodeClassMask;
+    handle()->nodeClassMask = nodeClassMask.get();
     handle()->resultMask = resultMask;
 }
 

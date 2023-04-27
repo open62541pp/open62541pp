@@ -504,7 +504,7 @@ TEST_CASE("BrowseDescription") {
     CHECK(bd.getBrowseDirection() == BrowseDirection::Forward);
     CHECK(bd.getReferenceTypeId() == NodeId(0, UA_NS0ID_REFERENCES));
     CHECK(bd.getIncludeSubtypes() == true);
-    CHECK(bd.getNodeClassMask() == UA_NODECLASS_UNSPECIFIED);
+    CHECK(bd.getNodeClassMask().get() == UA_NODECLASS_UNSPECIFIED);
     CHECK(bd.getResultMask() == UA_BROWSERESULTMASK_ALL);
 }
 
