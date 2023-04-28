@@ -110,7 +110,7 @@ enum class ValueRank : int32_t {
 enum class ModellingRule : uint16_t {
     // clang-format off
     Mandatory            = UA_NS0ID_MODELLINGRULE_MANDATORY,
-    Optional             = UA_NS0ID_MODELLINGRULE_MANDATORY,
+    Optional             = UA_NS0ID_MODELLINGRULE_OPTIONAL,
     ExposesItsArray      = UA_NS0ID_MODELLINGRULE_EXPOSESITSARRAY,
     OptionalPlaceholder  = UA_NS0ID_MODELLINGRULE_OPTIONALPLACEHOLDER,
     MandatoryPlaceholder = UA_NS0ID_MODELLINGRULE_MANDATORYPLACEHOLDER,
