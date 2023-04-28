@@ -72,12 +72,6 @@ public:
     Node<Client> getObjectsNode();
     Node<Client> getTypesNode();
     Node<Client> getViewsNode();
-    Node<Client> getObjectTypesNode();
-    Node<Client> getVariableTypesNode();
-    Node<Client> getDataTypesNode();
-    Node<Client> getReferenceTypesNode();
-    Node<Client> getBaseObjectTypeNode();
-    Node<Client> getBaseDataVariableTypeNode();
 
     UA_Client* handle() noexcept;
     const UA_Client* handle() const noexcept;

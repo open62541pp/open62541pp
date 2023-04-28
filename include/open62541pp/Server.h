@@ -68,12 +68,6 @@ public:
     Node<Server> getObjectsNode();
     Node<Server> getTypesNode();
     Node<Server> getViewsNode();
-    Node<Server> getObjectTypesNode();
-    Node<Server> getVariableTypesNode();
-    Node<Server> getDataTypesNode();
-    Node<Server> getReferenceTypesNode();
-    Node<Server> getBaseObjectTypeNode();
-    Node<Server> getBaseDataVariableTypeNode();
 
     UA_Server* handle() noexcept;
     const UA_Server* handle() const noexcept;

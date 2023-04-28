@@ -39,10 +39,6 @@ TEST_CASE("Node") {
             CHECK(serverOrClient.getObjectsNode().readNodeClass() == NodeClass::Object);
             CHECK(serverOrClient.getTypesNode().readNodeClass() == NodeClass::Object);
             CHECK(serverOrClient.getViewsNode().readNodeClass() == NodeClass::Object);
-            CHECK(serverOrClient.getObjectTypesNode().readNodeClass() == NodeClass::Object);
-            CHECK(serverOrClient.getVariableTypesNode().readNodeClass() == NodeClass::Object);
-            CHECK(serverOrClient.getDataTypesNode().readNodeClass() == NodeClass::Object);
-            CHECK(serverOrClient.getReferenceTypesNode().readNodeClass() == NodeClass::Object);
         }
 
         SUBCASE("Browse references") {
