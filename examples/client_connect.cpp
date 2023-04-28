@@ -30,7 +30,7 @@ int main(int argc, char* argv[]) {
         client.connect(serverUrl);
     }
 
-    auto node = client.getNode({0, UA_NS0ID_SERVER_SERVERSTATUS_CURRENTTIME});
+    auto node = client.getNode(opcua::VariableId::Server_ServerStatus_CurrentTime);
     const auto dt = node.readScalar<opcua::DateTime>();
     client.disconnect();
 

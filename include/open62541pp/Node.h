@@ -71,7 +71,7 @@ public:
     Node addObject(
         const NodeId& id,
         std::string_view browseName,
-        const NodeId& objectType = {0, UA_NS0ID_BASEOBJECTTYPE},
+        const NodeId& objectType = ObjectTypeId::BaseObjectType,
         ReferenceType referenceType = ReferenceType::HasComponent
     ) {
         services::addObject(connection_, nodeId_, id, browseName, objectType, referenceType);
@@ -82,7 +82,7 @@ public:
     Node addVariable(
         const NodeId& id,
         std::string_view browseName,
-        const NodeId& variableType = {0, UA_NS0ID_BASEDATAVARIABLETYPE},
+        const NodeId& variableType = VariableTypeId::BaseDataVariableType,
         ReferenceType referenceType = ReferenceType::HasComponent
     ) {
         services::addVariable(connection_, nodeId_, id, browseName, variableType, referenceType);
@@ -109,7 +109,7 @@ public:
     Node addVariableType(
         const NodeId& id,
         std::string_view browseName,
-        const NodeId& variableType = {0, UA_NS0ID_BASEDATAVARIABLETYPE},
+        const NodeId& variableType = VariableTypeId::BaseDataVariableType,
         ReferenceType referenceType = ReferenceType::HasSubType
     ) {
         services::addVariableType(

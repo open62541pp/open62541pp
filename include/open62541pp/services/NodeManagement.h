@@ -30,7 +30,7 @@ void addObject(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    const NodeId& objectType = {0, UA_NS0ID_BASEOBJECTTYPE},
+    const NodeId& objectType = ObjectTypeId::BaseObjectType,
     ReferenceType referenceType = ReferenceType::HasComponent
 );
 
@@ -47,7 +47,7 @@ inline void addFolder(
     std::string_view browseName,
     ReferenceType referenceType = ReferenceType::HasComponent
 ) {
-    addObject(serverOrClient, parentId, id, browseName, {0, UA_NS0ID_FOLDERTYPE}, referenceType);
+    addObject(serverOrClient, parentId, id, browseName, ObjectTypeId::FolderType, referenceType);
 }
 
 /**
@@ -61,7 +61,7 @@ void addVariable(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    const NodeId& variableType = {0, UA_NS0ID_BASEDATAVARIABLETYPE},
+    const NodeId& variableType = VariableTypeId::BaseDataVariableType,
     ReferenceType referenceType = ReferenceType::HasComponent
 );
 
@@ -79,7 +79,7 @@ inline void addProperty(
         parentId,
         id,
         browseName,
-        {0, UA_NS0ID_PROPERTYTYPE},
+        VariableTypeId::PropertyType,
         ReferenceType::HasProperty
     );
 }
@@ -109,7 +109,7 @@ void addVariableType(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    const NodeId& variableType = {0, UA_NS0ID_BASEDATAVARIABLETYPE},
+    const NodeId& variableType = VariableTypeId::BaseDataVariableType,
     ReferenceType referenceType = ReferenceType::HasSubType
 );
 
