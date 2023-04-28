@@ -524,7 +524,7 @@ TEST_CASE("BrowseDescription") {
 }
 
 TEST_CASE("RelativePathElement") {
-    const RelativePathElement rpe(ReferenceType::HasComponent, false, false, {0, "test"});
+    const RelativePathElement rpe(ReferenceTypeId::HasComponent, false, false, {0, "test"});
     CHECK(rpe.getReferenceTypeId() == NodeId{0, UA_NS0ID_HASCOMPONENT});
     CHECK(rpe.getIsInverse() == false);
     CHECK(rpe.getIncludeSubtypes() == false);
@@ -533,8 +533,8 @@ TEST_CASE("RelativePathElement") {
 
 TEST_CASE("RelativePath") {
     const RelativePath rp{
-        {ReferenceType::HasComponent, false, false, {0, "child1"}},
-        {ReferenceType::HasComponent, false, false, {0, "child2"}},
+        {ReferenceTypeId::HasComponent, false, false, {0, "child1"}},
+        {ReferenceTypeId::HasComponent, false, false, {0, "child2"}},
     };
     const auto elements = rp.getElements();
     CHECK(elements.size() == 2);
@@ -544,7 +544,7 @@ TEST_CASE("RelativePath") {
 
 TEST_CASE("BrowsePath") {
     const BrowsePath bp(
-        {0, UA_NS0ID_OBJECTSFOLDER}, {{ReferenceType::HasComponent, false, false, {0, "child"}}}
+        {0, UA_NS0ID_OBJECTSFOLDER}, {{ReferenceTypeId::HasComponent, false, false, {0, "child"}}}
     );
     CHECK(bp.getStartingNode() == NodeId(0, UA_NS0ID_OBJECTSFOLDER));
     CHECK(bp.getRelativePath().getElements().size() == 1);

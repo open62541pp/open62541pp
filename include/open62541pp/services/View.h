@@ -71,7 +71,7 @@ BrowsePathResult translateBrowsePathToNodeIds(T& serverOrClient, const BrowsePat
  *
  * The relative path is specified using browse names instead of the RelativePath structure.
  * The list of browse names is equivalent to a RelativePath that specifies forward references which
- * are subtypes of the HierarchicalReferences ReferenceType.
+ * are subtypes of the HierarchicalReferences ReferenceTypeId.
  *
  * @param serverOrClient Instance of type Server or Client
  * @param origin Starting node of the browse path
