@@ -106,7 +106,7 @@ public:
     BrowseDescription(
         const NodeId& nodeId,
         BrowseDirection browseDirection,
-        ReferenceTypeId referenceType = ReferenceTypeId::References,
+        const NodeId& referenceType = ReferenceTypeId::References,
         bool includeSubtypes = true,
         uint32_t nodeClassMask = UA_NODECLASS_UNSPECIFIED,
         uint32_t resultMask = UA_BROWSERESULTMASK_ALL
@@ -161,7 +161,7 @@ public:
     using TypeWrapperBase::TypeWrapperBase;
 
     RelativePathElement(
-        ReferenceTypeId referenceType,
+        const NodeId& referenceType,
         bool isInverse,
         bool includeSubtypes,
         const QualifiedName& targetName

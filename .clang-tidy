@@ -1,5 +1,5 @@
 Checks: |
-  bugprone*,
+  bugprone*, -bugprone-easily-swappable-parameters,
   cert*,
   cppcoreguidelines*, -cppcoreguidelines-avoid-magic-numbers,
   clang-analyzer*, -clang-analyzer-osx*,

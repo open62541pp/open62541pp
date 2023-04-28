@@ -16,13 +16,13 @@ void addObject<Server>(
     const NodeId& id,
     std::string_view browseName,
     const NodeId& objectType,
-    ReferenceTypeId referenceType
+    const NodeId& referenceType
 ) {
     const auto status = UA_Server_addObjectNode(
         server.handle(),
         id,
         parentId,
-        detail::getUaNodeId(referenceType),
+        referenceType,
         QualifiedName(id.getNamespaceIndex(), browseName),
         objectType,
         UA_ObjectAttributes_default,
@@ -39,13 +39,13 @@ void addObject<Client>(
     const NodeId& id,
     std::string_view browseName,
     const NodeId& objectType,
-    ReferenceTypeId referenceType
+    const NodeId& referenceType
 ) {
     const auto status = UA_Client_addObjectNode(
         client.handle(),
         id,
         parentId,
-        detail::getUaNodeId(referenceType),
+        referenceType,
         QualifiedName(id.getNamespaceIndex(), browseName),
         objectType,
         UA_ObjectAttributes_default,
@@ -61,13 +61,13 @@ void addVariable<Server>(
     const NodeId& id,
     std::string_view browseName,
     const NodeId& variableType,
-    ReferenceTypeId referenceType
+    const NodeId& referenceType
 ) {
     const auto status = UA_Server_addVariableNode(
         server.handle(),
         id,
         parentId,
-        detail::getUaNodeId(referenceType),
+        referenceType,
         QualifiedName(id.getNamespaceIndex(), browseName),
         variableType,
         UA_VariableAttributes_default,
@@ -84,13 +84,13 @@ void addVariable<Client>(
     const NodeId& id,
     std::string_view browseName,
     const NodeId& variableType,
-    ReferenceTypeId referenceType
+    const NodeId& referenceType
 ) {
     const auto status = UA_Client_addVariableNode(
         client.handle(),
         id,
         parentId,
-        detail::getUaNodeId(referenceType),
+        referenceType,
         QualifiedName(id.getNamespaceIndex(), browseName),
         variableType,
         UA_VariableAttributes_default,
@@ -105,13 +105,13 @@ void addObjectType<Server>(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    ReferenceTypeId referenceType
+    const NodeId& referenceType
 ) {
     const auto status = UA_Server_addObjectTypeNode(
         server.handle(),
         id,
         parentId,
-        detail::getUaNodeId(referenceType),
+        referenceType,
         QualifiedName(id.getNamespaceIndex(), browseName),
         UA_ObjectTypeAttributes_default,
         nullptr,  // node context
@@ -126,13 +126,13 @@ void addObjectType<Client>(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    ReferenceTypeId referenceType
+    const NodeId& referenceType
 ) {
     const auto status = UA_Client_addObjectTypeNode(
         client.handle(),
         id,
         parentId,
-        detail::getUaNodeId(referenceType),
+        referenceType,
         QualifiedName(id.getNamespaceIndex(), browseName),
         UA_ObjectTypeAttributes_default,
         nullptr  // output new node id
@@ -147,13 +147,13 @@ void addVariableType<Server>(
     const NodeId& id,
     std::string_view browseName,
     const NodeId& variableType,
-    ReferenceTypeId referenceType
+    const NodeId& referenceType
 ) {
     const auto status = UA_Server_addVariableTypeNode(
         server.handle(),
         id,
         parentId,
-        detail::getUaNodeId(referenceType),
+        referenceType,
         QualifiedName(id.getNamespaceIndex(), browseName),
         variableType,
         UA_VariableTypeAttributes_default,
@@ -170,14 +170,14 @@ void addVariableType<Client>(
     const NodeId& id,
     std::string_view browseName,
     const NodeId& variableType,
-    ReferenceTypeId referenceType
+    const NodeId& referenceType
 ) {
     (void)variableType;  // TODO: variableType is currently unused
     const auto status = UA_Client_addVariableTypeNode(
         client.handle(),
         id,
         parentId,
-        detail::getUaNodeId(referenceType),
+        referenceType,
         QualifiedName(id.getNamespaceIndex(), browseName),
         UA_VariableTypeAttributes_default,
         nullptr  // output new node id
@@ -190,13 +190,13 @@ void addReference<Server>(
     Server& server,
     const NodeId& sourceId,
     const NodeId& targetId,
-    ReferenceTypeId referenceType,
+    const NodeId& referenceType,
     bool forward
 ) {
     const auto status = UA_Server_addReference(
         server.handle(),
         sourceId,
-        detail::getUaNodeId(referenceType),
+        referenceType,
         ExpandedNodeId(targetId, {}, 0),
         forward  // isForward
     );
@@ -208,13 +208,13 @@ void addReference<Client>(
     Client& client,
     const NodeId& sourceId,
     const NodeId& targetId,
-    ReferenceTypeId referenceType,
+    const NodeId& referenceType,
     bool forward
 ) {
     const auto status = UA_Client_addReference(
         client.handle(),
         sourceId,
-        detail::getUaNodeId(referenceType),
+        referenceType,
         forward,  // isForward
         UA_STRING_NULL,  // targetServerUri
         ExpandedNodeId(targetId, {}, 0),

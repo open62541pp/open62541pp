@@ -61,7 +61,7 @@ public:
     Node addFolder(
         const NodeId& id,
         std::string_view browseName,
-        ReferenceTypeId referenceType = ReferenceTypeId::HasComponent
+        const NodeId& referenceType = ReferenceTypeId::HasComponent
     ) {
         services::addFolder(connection_, nodeId_, id, browseName, referenceType);
         return {connection_, id, false};
@@ -72,7 +72,7 @@ public:
         const NodeId& id,
         std::string_view browseName,
         const NodeId& objectType = ObjectTypeId::BaseObjectType,
-        ReferenceTypeId referenceType = ReferenceTypeId::HasComponent
+        const NodeId& referenceType = ReferenceTypeId::HasComponent
     ) {
         services::addObject(connection_, nodeId_, id, browseName, objectType, referenceType);
         return {connection_, id, false};
@@ -83,7 +83,7 @@ public:
         const NodeId& id,
         std::string_view browseName,
         const NodeId& variableType = VariableTypeId::BaseDataVariableType,
-        ReferenceTypeId referenceType = ReferenceTypeId::HasComponent
+        const NodeId& referenceType = ReferenceTypeId::HasComponent
     ) {
         services::addVariable(connection_, nodeId_, id, browseName, variableType, referenceType);
         return {connection_, id, false};
@@ -99,7 +99,7 @@ public:
     Node addObjectType(
         const NodeId& id,
         std::string_view browseName,
-        ReferenceTypeId referenceType = ReferenceTypeId::HasSubtype
+        const NodeId& referenceType = ReferenceTypeId::HasSubtype
     ) {
         services::addObjectType(connection_, nodeId_, id, browseName, referenceType);
         return {connection_, id, false};
@@ -110,7 +110,7 @@ public:
         const NodeId& id,
         std::string_view browseName,
         const NodeId& variableType = VariableTypeId::BaseDataVariableType,
-        ReferenceTypeId referenceType = ReferenceTypeId::HasSubtype
+        const NodeId& referenceType = ReferenceTypeId::HasSubtype
     ) {
         services::addVariableType(
             connection_, nodeId_, id, browseName, variableType, referenceType
@@ -119,7 +119,7 @@ public:
     }
 
     /// @copydoc services::addReference
-    void addReference(const NodeId& targetId, ReferenceTypeId referenceType, bool forward = true) {
+    void addReference(const NodeId& targetId, const NodeId& referenceType, bool forward = true) {
         services::addReference(connection_, nodeId_, targetId, referenceType, forward);
     }
 
@@ -136,7 +136,7 @@ public:
     /// Browse references.
     std::vector<ReferenceDescription> browseReferences(
         BrowseDirection browseDirection = BrowseDirection::Both,
-        ReferenceTypeId referenceType = ReferenceTypeId::References,
+        const NodeId& referenceType = ReferenceTypeId::References,
         bool includeSubtypes = true,
         uint32_t nodeClassMask = UA_NODECLASS_UNSPECIFIED
     );
@@ -144,14 +144,14 @@ public:
     /// Browse referenced nodes (only local nodes).
     std::vector<Node> browseReferencedNodes(
         BrowseDirection browseDirection = BrowseDirection::Both,
-        ReferenceTypeId referenceType = ReferenceTypeId::References,
+        const NodeId& referenceType = ReferenceTypeId::References,
         bool includeSubtypes = true,
         uint32_t nodeClassMask = UA_NODECLASS_UNSPECIFIED
     );
 
     /// Browse child nodes (only local nodes).
     std::vector<Node> browseChildren(
-        ReferenceTypeId referenceType = ReferenceTypeId::HierarchicalReferences,
+        const NodeId& referenceType = ReferenceTypeId::HierarchicalReferences,
         uint32_t nodeClassMask = UA_NODECLASS_UNSPECIFIED
     ) {
         return browseReferencedNodes(BrowseDirection::Forward, referenceType, true, nodeClassMask);
