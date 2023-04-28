@@ -6,6 +6,7 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Logger.h"
 #include "open62541pp/Node.h"
+#include "open62541pp/NodeIds.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeConverter.h"
 #include "open62541pp/TypeWrapper.h"

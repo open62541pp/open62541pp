@@ -21,7 +21,7 @@ static UA_NodeId fromStringView(
     return result;
 }
 
-NodeId::NodeId(uint16_t namespaceIndex, uint32_t identifier)
+NodeId::NodeId(uint16_t namespaceIndex, uint32_t identifier) noexcept
     : NodeId(UA_NODEID_NUMERIC(namespaceIndex, identifier)) {}
 
 NodeId::NodeId(uint16_t namespaceIndex, std::string_view identifier)

@@ -5,6 +5,7 @@
 #include <string_view>
 #include <variant>
 
+#include "open62541pp/NodeIds.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/open62541.h"
 #include "open62541pp/types/Builtin.h"
@@ -31,20 +32,48 @@ public:
     // NOLINTNEXTLINE, false positive?
     using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
 
-    /// Create NodeId with numeric identifier
-    NodeId(uint16_t namespaceIndex, uint32_t identifier);
+    /// Create NodeId with numeric identifier.
+    NodeId(uint16_t namespaceIndex, uint32_t identifier) noexcept;
 
-    /// Create NodeId with String identifier from standard strings
+    /// Create NodeId with String identifier from standard strings.
     NodeId(uint16_t namespaceIndex, std::string_view identifier);
 
-    /// Create NodeId with String identifier from String wrapper class
+    /// Create NodeId with String identifier from String wrapper class.
     NodeId(uint16_t namespaceIndex, const String& identifier);
 
-    /// Create NodeId with Guid identifier
+    /// Create NodeId with Guid identifier.
     NodeId(uint16_t namespaceIndex, const Guid& identifier);
 
-    /// Create NodeId with ByteString identifier
+    /// Create NodeId with ByteString identifier.
     NodeId(uint16_t namespaceIndex, const ByteString& identifier);
+
+    /// Create NodeId from DataTypeId.
+    NodeId(DataTypeId id) noexcept  // NOLINT, implicit wanted
+        : NodeId(0, static_cast<uint32_t>(id)) {}
+
+    /// Create NodeId from ReferenceTypeId.
+    NodeId(ReferenceTypeId id) noexcept  // NOLINT, implicit wanted
+        : NodeId(0, static_cast<uint32_t>(id)) {}
+
+    /// Create NodeId from ObjectTypeId.
+    NodeId(ObjectTypeId id) noexcept  // NOLINT, implicit wanted
+        : NodeId(0, static_cast<uint32_t>(id)) {}
+
+    /// Create NodeId from VariableTypeId.
+    NodeId(VariableTypeId id) noexcept  // NOLINT, implicit wanted
+        : NodeId(0, static_cast<uint32_t>(id)) {}
+
+    /// Create NodeId from ObjectId.
+    NodeId(ObjectId id) noexcept  // NOLINT, implicit wanted
+        : NodeId(0, static_cast<uint32_t>(id)) {}
+
+    /// Create NodeId from VariableId.
+    NodeId(VariableId id) noexcept  // NOLINT, implicit wanted
+        : NodeId(0, static_cast<uint32_t>(id)) {}
+
+    /// Create NodeId from MethodId.
+    NodeId(MethodId id) noexcept  // NOLINT, implicit wanted
+        : NodeId(0, static_cast<uint32_t>(id)) {}
 
     uint32_t hash() const;
 
@@ -52,16 +81,16 @@ public:
 
     NodeIdType getIdentifierType() const noexcept;
 
-    /// Get identifier variant
+    /// Get identifier variant.
     std::variant<uint32_t, String, Guid, ByteString> getIdentifier() const;
 
-    /// Get identifier by template type
+    /// Get identifier by template type.
     template <typename T>
     auto getIdentifierAs() const {
         return std::get<T>(getIdentifier());
     }
 
-    /// Get identifier by NodeIdType enum
+    /// Get identifier by NodeIdType enum.
     template <NodeIdType E>
     auto getIdentifierAs() const {
         if constexpr (E == NodeIdType::Numeric) {
