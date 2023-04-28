@@ -89,16 +89,10 @@ TEST_CASE("Server") {
 
     SUBCASE("Get default nodes") {
         // clang-format off
-        CHECK_EQ(server.getRootNode().getNodeId(),                 NodeId{0, UA_NS0ID_ROOTFOLDER});
-        CHECK_EQ(server.getObjectsNode().getNodeId(),              NodeId{0, UA_NS0ID_OBJECTSFOLDER});
-        CHECK_EQ(server.getTypesNode().getNodeId(),                NodeId{0, UA_NS0ID_TYPESFOLDER});
-        CHECK_EQ(server.getViewsNode().getNodeId(),                NodeId{0, UA_NS0ID_VIEWSFOLDER});
-        CHECK_EQ(server.getObjectTypesNode().getNodeId(),          NodeId{0, UA_NS0ID_OBJECTTYPESFOLDER});
-        CHECK_EQ(server.getVariableTypesNode().getNodeId(),        NodeId{0, UA_NS0ID_VARIABLETYPESFOLDER});
-        CHECK_EQ(server.getDataTypesNode().getNodeId(),            NodeId{0, UA_NS0ID_DATATYPESFOLDER});
-        CHECK_EQ(server.getReferenceTypesNode().getNodeId(),       NodeId{0, UA_NS0ID_REFERENCETYPESFOLDER});
-        CHECK_EQ(server.getBaseObjectTypeNode().getNodeId(),       NodeId{0, UA_NS0ID_BASEOBJECTTYPE});
-        CHECK_EQ(server.getBaseDataVariableTypeNode().getNodeId(), NodeId{0, UA_NS0ID_BASEDATAVARIABLETYPE});
+        CHECK_EQ(server.getRootNode().getNodeId(),    NodeId{0, UA_NS0ID_ROOTFOLDER});
+        CHECK_EQ(server.getObjectsNode().getNodeId(), NodeId{0, UA_NS0ID_OBJECTSFOLDER});
+        CHECK_EQ(server.getTypesNode().getNodeId(),   NodeId{0, UA_NS0ID_TYPESFOLDER});
+        CHECK_EQ(server.getViewsNode().getNodeId(),   NodeId{0, UA_NS0ID_VIEWSFOLDER});
         // clang-format on
     }
 

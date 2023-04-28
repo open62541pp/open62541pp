@@ -10,7 +10,7 @@ int main() {
      *   + (OT) DogType
      *     + (V) Name
      */
-    auto nodeBaseObjectType = server.getBaseObjectTypeNode();
+    auto nodeBaseObjectType = server.getNode(opcua::ObjectTypeId::BaseObjectType);
     auto nodeMamalType = nodeBaseObjectType.addObjectType({1, 10000}, "MamalType");
     nodeMamalType.writeDisplayName({"en-US", "MamalType"});
     nodeMamalType.writeDescription({"en-US", "A mamal"});

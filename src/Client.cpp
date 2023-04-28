@@ -148,30 +148,6 @@ Node<Client> Client::getViewsNode() {
     return {*this, {0, UA_NS0ID_VIEWSFOLDER}, false};
 }
 
-Node<Client> Client::getObjectTypesNode() {
-    return {*this, {0, UA_NS0ID_OBJECTTYPESFOLDER}, false};
-}
-
-Node<Client> Client::getVariableTypesNode() {
-    return {*this, {0, UA_NS0ID_VARIABLETYPESFOLDER}, false};
-}
-
-Node<Client> Client::getDataTypesNode() {
-    return {*this, {0, UA_NS0ID_DATATYPESFOLDER}, false};
-}
-
-Node<Client> Client::getReferenceTypesNode() {
-    return {*this, {0, UA_NS0ID_REFERENCETYPESFOLDER}, false};
-}
-
-Node<Client> Client::getBaseObjectTypeNode() {
-    return {*this, {0, UA_NS0ID_BASEOBJECTTYPE}, false};
-}
-
-Node<Client> Client::getBaseDataVariableTypeNode() {
-    return {*this, {0, UA_NS0ID_BASEDATAVARIABLETYPE}, false};
-}
-
 UA_Client* Client::handle() noexcept {
     return connection_->handle();
 }

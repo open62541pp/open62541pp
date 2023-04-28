@@ -268,30 +268,6 @@ Node<Server> Server::getViewsNode() {
     return {*this, {0, UA_NS0ID_VIEWSFOLDER}, false};
 }
 
-Node<Server> Server::getObjectTypesNode() {
-    return {*this, {0, UA_NS0ID_OBJECTTYPESFOLDER}, false};
-}
-
-Node<Server> Server::getVariableTypesNode() {
-    return {*this, {0, UA_NS0ID_VARIABLETYPESFOLDER}, false};
-}
-
-Node<Server> Server::getDataTypesNode() {
-    return {*this, {0, UA_NS0ID_DATATYPESFOLDER}, false};
-}
-
-Node<Server> Server::getReferenceTypesNode() {
-    return {*this, {0, UA_NS0ID_REFERENCETYPESFOLDER}, false};
-}
-
-Node<Server> Server::getBaseObjectTypeNode() {
-    return {*this, {0, UA_NS0ID_BASEOBJECTTYPE}, false};
-}
-
-Node<Server> Server::getBaseDataVariableTypeNode() {
-    return {*this, {0, UA_NS0ID_BASEDATAVARIABLETYPE}, false};
-}
-
 UA_Server* Server::handle() noexcept {
     return connection_->handle();
 }
