@@ -41,9 +41,9 @@ TEST_CASE("NodeManagement (server)") {
     SUBCASE("Add reference") {
         services::addFolder(server, objectsId, {1, 1000}, "folder");
         services::addObject(server, objectsId, {1, 1001}, "object");
-        services::addReference(server, {1, 1000}, {1, 1001}, ReferenceType::Organizes);
+        services::addReference(server, {1, 1000}, {1, 1001}, ReferenceTypeId::Organizes);
         CHECK_THROWS_WITH(
-            services::addReference(server, {1, 1000}, {1, 1001}, ReferenceType::Organizes),
+            services::addReference(server, {1, 1000}, {1, 1001}, ReferenceTypeId::Organizes),
             "BadDuplicateReferenceNotAllowed"
         );
     }
@@ -92,9 +92,9 @@ TEST_CASE("NodeManagement (client)") {
     SUBCASE("Add reference") {
         services::addFolder(client, objectsId, {1, 1000}, "folder");
         services::addObject(client, objectsId, {1, 1001}, "object");
-        services::addReference(client, {1, 1000}, {1, 1001}, ReferenceType::Organizes);
+        services::addReference(client, {1, 1000}, {1, 1001}, ReferenceTypeId::Organizes);
         CHECK_THROWS_WITH(
-            services::addReference(client, {1, 1000}, {1, 1001}, ReferenceType::Organizes),
+            services::addReference(client, {1, 1000}, {1, 1001}, ReferenceTypeId::Organizes),
             "BadDuplicateReferenceNotAllowed"
         );
     }

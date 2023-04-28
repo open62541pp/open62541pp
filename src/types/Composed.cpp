@@ -7,7 +7,7 @@ namespace opcua {
 BrowseDescription::BrowseDescription(
     const NodeId& nodeId,
     BrowseDirection browseDirection,
-    ReferenceType referenceType,
+    ReferenceTypeId referenceType,
     bool includeSubtypes,
     uint32_t nodeClassMask,  // NOLINT
     uint32_t resultMask  // NOLINT
@@ -21,7 +21,7 @@ BrowseDescription::BrowseDescription(
 }
 
 RelativePathElement::RelativePathElement(
-    ReferenceType referenceType,
+    ReferenceTypeId referenceType,
     bool isInverse,
     bool includeSubtypes,
     const QualifiedName& targetName

@@ -16,7 +16,7 @@ void addObject<Server>(
     const NodeId& id,
     std::string_view browseName,
     const NodeId& objectType,
-    ReferenceType referenceType
+    ReferenceTypeId referenceType
 ) {
     const auto status = UA_Server_addObjectNode(
         server.handle(),
@@ -39,7 +39,7 @@ void addObject<Client>(
     const NodeId& id,
     std::string_view browseName,
     const NodeId& objectType,
-    ReferenceType referenceType
+    ReferenceTypeId referenceType
 ) {
     const auto status = UA_Client_addObjectNode(
         client.handle(),
@@ -61,7 +61,7 @@ void addVariable<Server>(
     const NodeId& id,
     std::string_view browseName,
     const NodeId& variableType,
-    ReferenceType referenceType
+    ReferenceTypeId referenceType
 ) {
     const auto status = UA_Server_addVariableNode(
         server.handle(),
@@ -84,7 +84,7 @@ void addVariable<Client>(
     const NodeId& id,
     std::string_view browseName,
     const NodeId& variableType,
-    ReferenceType referenceType
+    ReferenceTypeId referenceType
 ) {
     const auto status = UA_Client_addVariableNode(
         client.handle(),
@@ -105,7 +105,7 @@ void addObjectType<Server>(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    ReferenceType referenceType
+    ReferenceTypeId referenceType
 ) {
     const auto status = UA_Server_addObjectTypeNode(
         server.handle(),
@@ -126,7 +126,7 @@ void addObjectType<Client>(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    ReferenceType referenceType
+    ReferenceTypeId referenceType
 ) {
     const auto status = UA_Client_addObjectTypeNode(
         client.handle(),
@@ -147,7 +147,7 @@ void addVariableType<Server>(
     const NodeId& id,
     std::string_view browseName,
     const NodeId& variableType,
-    ReferenceType referenceType
+    ReferenceTypeId referenceType
 ) {
     const auto status = UA_Server_addVariableTypeNode(
         server.handle(),
@@ -170,7 +170,7 @@ void addVariableType<Client>(
     const NodeId& id,
     std::string_view browseName,
     const NodeId& variableType,
-    ReferenceType referenceType
+    ReferenceTypeId referenceType
 ) {
     (void)variableType;  // TODO: variableType is currently unused
     const auto status = UA_Client_addVariableTypeNode(
@@ -190,7 +190,7 @@ void addReference<Server>(
     Server& server,
     const NodeId& sourceId,
     const NodeId& targetId,
-    ReferenceType referenceType,
+    ReferenceTypeId referenceType,
     bool forward
 ) {
     const auto status = UA_Server_addReference(
@@ -208,7 +208,7 @@ void addReference<Client>(
     Client& client,
     const NodeId& sourceId,
     const NodeId& targetId,
-    ReferenceType referenceType,
+    ReferenceTypeId referenceType,
     bool forward
 ) {
     const auto status = UA_Client_addReference(

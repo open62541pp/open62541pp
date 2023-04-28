@@ -62,9 +62,9 @@ TEST_CASE("Node") {
         }
 
         SUBCASE("Browse children") {
-            CHECK(rootNode.browseChildren(ReferenceType::HasChild).empty());
+            CHECK(rootNode.browseChildren(ReferenceTypeId::HasChild).empty());
 
-            const auto nodes = rootNode.browseChildren(ReferenceType::HierarchicalReferences);
+            const auto nodes = rootNode.browseChildren(ReferenceTypeId::HierarchicalReferences);
             CHECK(nodes.size() > 0);
             CHECK(std::any_of(nodes.begin(), nodes.end(), [&](auto& node) {
                 return node == objNode;

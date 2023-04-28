@@ -137,7 +137,7 @@ BrowsePathResult browseSimplifiedBrowsePath(
         browsePath.end(),
         relativePathElements.begin(),
         [](const auto& qn) {
-            return RelativePathElement(ReferenceType::HierarchicalReferences, false, true, qn);
+            return RelativePathElement(ReferenceTypeId::HierarchicalReferences, false, true, qn);
         }
     );
     const BrowsePath bp(origin, RelativePath(relativePathElements));

@@ -6,6 +6,7 @@
 #include <string_view>
 
 #include "open62541pp/Common.h"
+#include "open62541pp/NodeIds.h"
 #include "open62541pp/open62541.h"
 
 namespace opcua::detail {
@@ -35,8 +36,8 @@ inline const UA_DataType* getUaDataType(const UA_NodeId& id) noexcept {
     return UA_findDataType(&id);
 }
 
-/// Get NodeId by ReferenceType.
-inline UA_NodeId getUaNodeId(ReferenceType type) noexcept {
+/// Get NodeId by ReferenceTypeId.
+inline UA_NodeId getUaNodeId(ReferenceTypeId type) noexcept {
     return UA_NODEID_NUMERIC(0, static_cast<UA_Int32>(type));
 }
 

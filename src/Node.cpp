@@ -13,7 +13,7 @@ namespace opcua {
 template <typename T>
 std::vector<ReferenceDescription> Node<T>::browseReferences(
     BrowseDirection browseDirection,
-    ReferenceType referenceType,
+    ReferenceTypeId referenceType,
     bool includeSubtypes,
     uint32_t nodeClassMask
 ) {
@@ -31,7 +31,7 @@ std::vector<ReferenceDescription> Node<T>::browseReferences(
 template <typename T>
 std::vector<Node<T>> Node<T>::browseReferencedNodes(
     BrowseDirection browseDirection,
-    ReferenceType referenceType,
+    ReferenceTypeId referenceType,
     bool includeSubtypes,
     uint32_t nodeClassMask
 ) {
@@ -69,7 +69,7 @@ template <typename T>
 Node<T> Node<T>::browseParent() {
     const auto nodes = browseReferencedNodes(
         BrowseDirection::Inverse,
-        ReferenceType::HierarchicalReferences,
+        ReferenceTypeId::HierarchicalReferences,
         true,
         UA_NODECLASS_UNSPECIFIED
     );

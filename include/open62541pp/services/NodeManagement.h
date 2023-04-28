@@ -31,7 +31,7 @@ void addObject(
     const NodeId& id,
     std::string_view browseName,
     const NodeId& objectType = ObjectTypeId::BaseObjectType,
-    ReferenceType referenceType = ReferenceType::HasComponent
+    ReferenceTypeId referenceType = ReferenceTypeId::HasComponent
 );
 
 /**
@@ -45,7 +45,7 @@ inline void addFolder(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    ReferenceType referenceType = ReferenceType::HasComponent
+    ReferenceTypeId referenceType = ReferenceTypeId::HasComponent
 ) {
     addObject(serverOrClient, parentId, id, browseName, ObjectTypeId::FolderType, referenceType);
 }
@@ -62,7 +62,7 @@ void addVariable(
     const NodeId& id,
     std::string_view browseName,
     const NodeId& variableType = VariableTypeId::BaseDataVariableType,
-    ReferenceType referenceType = ReferenceType::HasComponent
+    ReferenceTypeId referenceType = ReferenceTypeId::HasComponent
 );
 
 /**
@@ -80,7 +80,7 @@ inline void addProperty(
         id,
         browseName,
         VariableTypeId::PropertyType,
-        ReferenceType::HasProperty
+        ReferenceTypeId::HasProperty
     );
 }
 
@@ -95,7 +95,7 @@ void addObjectType(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    ReferenceType referenceType = ReferenceType::HasSubType
+    ReferenceTypeId referenceType = ReferenceTypeId::HasSubtype
 );
 
 /**
@@ -110,7 +110,7 @@ void addVariableType(
     const NodeId& id,
     std::string_view browseName,
     const NodeId& variableType = VariableTypeId::BaseDataVariableType,
-    ReferenceType referenceType = ReferenceType::HasSubType
+    ReferenceTypeId referenceType = ReferenceTypeId::HasSubtype
 );
 
 /**
@@ -123,7 +123,7 @@ void addReference(
     T& serverOrClient,
     const NodeId& sourceId,
     const NodeId& targetId,
-    ReferenceType referenceType,
+    ReferenceTypeId referenceType,
     bool forward = true
 );
 
@@ -135,7 +135,11 @@ void addReference(
 template <typename T>
 inline void addModellingRule(T& serverOrClient, const NodeId& id, ModellingRule rule) {
     addReference(
-        serverOrClient, id, {0, static_cast<uint32_t>(rule)}, ReferenceType::HasModellingRule, true
+        serverOrClient,
+        id,
+        {0, static_cast<uint32_t>(rule)},
+        ReferenceTypeId::HasModellingRule,
+        true
     );
 }
 
