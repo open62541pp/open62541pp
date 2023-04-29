@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['valuerank_4339',['ValueRank',['../namespaceopcua.html#a41f8481e3c1494130327dca210329383',1,'opcua']]]
+  ['objectid_20138',['ObjectId',['../namespaceopcua.html#ad6d1c9a92cf8a3d1113d816ef3d11e35',1,'opcua']]],
+  ['objecttypeid_20139',['ObjectTypeId',['../namespaceopcua.html#a49cc032e039ddce709db015c0f36547f',1,'opcua']]]
 ];

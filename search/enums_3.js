@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['referencetype_4337',['ReferenceType',['../namespaceopcua.html#a807c61ccff66808c3559158c33d5463b',1,'opcua']]]
+  ['methodid_20134',['MethodId',['../namespaceopcua.html#af8383578280a388f73f5df15fc63a998',1,'opcua']]],
+  ['modellingrule_20135',['ModellingRule',['../namespaceopcua.html#ad32e0c353b427fd8b7788a85a78335aa',1,'opcua']]]
 ];
