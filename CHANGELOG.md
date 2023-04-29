@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2023-04-29
+
 ### Added
 
 - Basic `Client` implementation (#33)
@@ -54,10 +56,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove `TypeWrapper::getType` method
 - Use `TypeIndex` instead of `Type` enum for `TypeConverter` to allow conversions of non-builtin types
 - Return `Qualified` name from `readBrowseName` instead of `std::string`
+- Rename `ReferenceType` enum -> `ReferenceTypeId` (#44)
+- Use `NodeId` for `referenceType` function parameters (instead of enum to allow arbitrary references) (#44)
+- Remove get methods of nested nodes from `Client`/`Server` class, use `getNode` instead (#44)
+  - `Server::getObjectTypesNode()` -> `Server::getNode(ObjectId::ObjectTypesFolder)`
+  - `Server::getVariableTypesNode()` -> `Server::getNode(ObjectId::VariableTypesFolder)`
+  - `Server::getDataTypesNode()` -> `Server::getNode(ObjectId::DataTypesFolder)`
+  - `Server::getReferenceTypesNode()` -> `Server::getNode(ObjectId::ReferenceTypesFolder)`
+  - `Server::getBaseObjectTypeNode()` -> `Server::getNode(ObjectTypeId::BaseObjectType)`
+  - `Server::getBaseDataVariableTypeNode()` -> `Server::getNode(VariableTypeId::BaseDataVariableType)`
 
 ### Fixed
 
 - `TypeConverter::toNative` specialization for wrapper types
+- `ModellingRule::Optional` enum value (#44)
 
 ## [0.2.0] - 2023-04-12
 
@@ -116,6 +128,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial public release
 
-[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.2.0...HEAD
+[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.3.0
 [0.2.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.2.0
 [0.1.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.1.0
