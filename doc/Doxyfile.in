@@ -51,6 +51,8 @@ HTML_DYNAMIC_MENUS     = YES
 HTML_DYNAMIC_SECTIONS  = NO
 HTML_OUTPUT            = "${doxygen_html_dir}"
 HTML_COLORSTYLE        = LIGHT
+
+ENUM_VALUES_PER_LINE   = 0
 EXT_LINKS_IN_WINDOW    = YES
 
 # Preprocessor
