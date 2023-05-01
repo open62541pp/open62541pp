@@ -51,7 +51,7 @@ DataValue readAttribute(
     T& serverOrClient,
     const NodeId& id,
     AttributeId attributeId,
-    UA_TimestampsToReturn timestamps = UA_TIMESTAMPSTORETURN_NEITHER
+    TimestampsToReturn timestamps = TimestampsToReturn::Neighter
 );
 
 /// Helper function to read scalar node attributes.
@@ -191,7 +191,7 @@ inline LocalizedText readInverseName(T& serverOrClient, const NodeId& id) {
  */
 template <typename T>
 inline void readDataValue(T& serverOrClient, const NodeId& id, DataValue& value) {
-    value = readAttribute(serverOrClient, id, AttributeId::Value, UA_TIMESTAMPSTORETURN_BOTH);
+    value = readAttribute(serverOrClient, id, AttributeId::Value, TimestampsToReturn::Both);
 }
 
 /**

@@ -167,6 +167,20 @@ enum class BrowseDirection : uint32_t {
     // clang-format on
 };
 
+/**
+ * Timestamps to return.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.40
+ */
+enum class TimestampsToReturn : uint32_t {
+    // clang-format off
+    Source   = UA_TIMESTAMPSTORETURN_SOURCE,
+    Server   = UA_TIMESTAMPSTORETURN_SERVER,
+    Both     = UA_TIMESTAMPSTORETURN_BOTH,
+    Neighter = UA_TIMESTAMPSTORETURN_NEITHER,
+    Invalid  = UA_TIMESTAMPSTORETURN_INVALID,
+    // clang-format on
+};
+
 namespace detail {
 
 using BuiltinTypes = std::tuple<

@@ -10,13 +10,15 @@ namespace opcua::services {
 
 template <>
 DataValue readAttribute<Server>(
-    Server& server, const NodeId& id, AttributeId attributeId, UA_TimestampsToReturn timestamps
+    Server& server, const NodeId& id, AttributeId attributeId, TimestampsToReturn timestamps
 ) {
     UA_ReadValueId item{};
     item.nodeId = *id.handle();
     item.attributeId = static_cast<uint32_t>(attributeId);
 
-    DataValue result = UA_Server_read(server.handle(), &item, timestamps);
+    DataValue result = UA_Server_read(
+        server.handle(), &item, static_cast<UA_TimestampsToReturn>(timestamps)
+    );
     if (result->hasStatus) {
         detail::throwOnBadStatus(result->status);
     }
@@ -25,7 +27,7 @@ DataValue readAttribute<Server>(
 
 template <>
 DataValue readAttribute<Client>(
-    Client& client, const NodeId& id, AttributeId attributeId, UA_TimestampsToReturn timestamps
+    Client& client, const NodeId& id, AttributeId attributeId, TimestampsToReturn timestamps
 ) {
     // https://github.com/open62541/open62541/blob/v1.3.5/src/client/ua_client_highlevel.c#L357
     UA_ReadValueId item{};
@@ -33,7 +35,7 @@ DataValue readAttribute<Client>(
     item.attributeId = static_cast<uint32_t>(attributeId);
 
     UA_ReadRequest request{};
-    request.timestampsToReturn = timestamps;
+    request.timestampsToReturn = static_cast<UA_TimestampsToReturn>(timestamps);
     request.nodesToReadSize = 1;
     request.nodesToRead = &item;
 
