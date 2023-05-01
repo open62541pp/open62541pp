@@ -7,6 +7,7 @@
 #include "open62541pp/Node.h"
 #include "open62541pp/TypeConverter.h"
 
+#include "ClientContext.h"
 #include "CustomLogger.h"
 #include "open62541_impl.h"
 #include "version.h"
@@ -50,8 +51,13 @@ public:
         return client_;
     }
 
+    ClientContext& getContext() noexcept {
+        return context_;
+    }
+
 private:
     UA_Client* client_;
+    ClientContext context_;
     CustomLogger logger_;
 };
 
@@ -154,6 +160,10 @@ UA_Client* Client::handle() noexcept {
 
 const UA_Client* Client::handle() const noexcept {
     return connection_->handle();
+}
+
+ClientContext& Client::getContext() noexcept {
+    return connection_->getContext();
 }
 
 /* ---------------------------------------------------------------------------------------------- */

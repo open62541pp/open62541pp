@@ -17,6 +17,7 @@ struct UA_Client;
 namespace opcua {
 
 // forward declaration
+struct ClientContext;
 template <typename ServerOrClient>
 class Node;
 
@@ -75,6 +76,10 @@ public:
 
     UA_Client* handle() noexcept;
     const UA_Client* handle() const noexcept;
+
+    /// Get client context (for internal use only).
+    /// @private
+    ClientContext& getContext() noexcept;
 
 private:
     class Connection;

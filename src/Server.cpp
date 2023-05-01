@@ -12,6 +12,7 @@
 #include "open62541pp/types/Variant.h"
 
 #include "CustomLogger.h"
+#include "ServerContext.h"
 #include "open62541_impl.h"
 #include "version.h"
 
@@ -103,10 +104,15 @@ public:
         return server_;
     }
 
+    ServerContext& getContext() noexcept {
+        return context_;
+    }
+
 private:
     UA_Server* server_;
     std::atomic<bool> running_{false};
     std::mutex mutex_;
+    ServerContext context_;
     CustomLogger logger_;
 };
 
@@ -274,6 +280,10 @@ UA_Server* Server::handle() noexcept {
 
 const UA_Server* Server::handle() const noexcept {
     return connection_->handle();
+}
+
+ServerContext& Server::getContext() noexcept {
+    return connection_->getContext();
 }
 
 /* ---------------------------------------------------------------------------------------------- */

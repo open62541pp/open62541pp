@@ -115,6 +115,7 @@ add_library(
     src/overloads/ostream.cpp
     src/services/Attribute.cpp
     src/services/NodeManagement.cpp
+    src/services/Subscription.cpp
     src/services/View.cpp
     src/types/Builtin.cpp
     src/types/Composed.cpp
