@@ -15,6 +15,12 @@ TEMPLATE_HEADER = """
 
 namespace opcua {{
 
+/**
+ * @defgroup NodeIds Generated NodeIds
+ * Numeric NodeIds defined by the OPC UA specification.
+ * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/A.3
+ */
+
 // clang-format off
 
 {body}
@@ -28,6 +34,7 @@ TEMPLATE_ENUM = """
 /**
  * {nodeclass} node ids defined by the OPC UA specification (generated).
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/A.3
+ * @ingroup NodeIds
  */
 enum class {enum_name} : uint32_t {{
 {body}

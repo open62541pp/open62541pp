@@ -6,11 +6,18 @@
 
 namespace opcua {
 
+/**
+ * @defgroup NodeIds Generated NodeIds
+ * Numeric NodeIds defined by the OPC UA specification.
+ * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/A.3
+ */
+
 // clang-format off
 
 /**
  * DataType node ids defined by the OPC UA specification (generated).
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/A.3
+ * @ingroup NodeIds
  */
 enum class DataTypeId : uint32_t {
     Boolean = 1,
@@ -425,6 +432,7 @@ enum class DataTypeId : uint32_t {
 /**
  * ReferenceType node ids defined by the OPC UA specification (generated).
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/A.3
+ * @ingroup NodeIds
  */
 enum class ReferenceTypeId : uint32_t {
     References = 31,
@@ -478,6 +486,7 @@ enum class ReferenceTypeId : uint32_t {
 /**
  * ObjectType node ids defined by the OPC UA specification (generated).
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/A.3
+ * @ingroup NodeIds
  */
 enum class ObjectTypeId : uint32_t {
     BaseObjectType = 58,
@@ -718,6 +727,7 @@ enum class ObjectTypeId : uint32_t {
 /**
  * VariableType node ids defined by the OPC UA specification (generated).
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/A.3
+ * @ingroup NodeIds
  */
 enum class VariableTypeId : uint32_t {
     BaseVariableType = 62,
@@ -784,6 +794,7 @@ enum class VariableTypeId : uint32_t {
 /**
  * Object node ids defined by the OPC UA specification (generated).
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/A.3
+ * @ingroup NodeIds
  */
 enum class ObjectId : uint32_t {
     ModellingRule_Mandatory = 78,
@@ -2160,6 +2171,7 @@ enum class ObjectId : uint32_t {
 /**
  * Variable node ids defined by the OPC UA specification (generated).
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/A.3
+ * @ingroup NodeIds
  */
 enum class VariableId : uint32_t {
     DataTypeDescriptionType_DataTypeVersion = 104,
@@ -13385,6 +13397,7 @@ enum class VariableId : uint32_t {
 /**
  * Method node ids defined by the OPC UA specification (generated).
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/A.3
+ * @ingroup NodeIds
  */
 enum class MethodId : uint32_t {
     ProgramStateMachineType_Start = 2426,
