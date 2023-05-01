@@ -47,4 +47,9 @@ BrowsePath::BrowsePath(const NodeId& startingNode, const RelativePath& relativeP
     asWrapper<RelativePath>(handle()->relativePath) = relativePath;
 }
 
+ReadValueId::ReadValueId(const NodeId& id, AttributeId attributeId) {
+    asWrapper<NodeId>(handle()->nodeId) = id;
+    handle()->attributeId = static_cast<uint32_t>(attributeId);
+}
+
 }  // namespace opcua
