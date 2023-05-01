@@ -48,55 +48,57 @@ enum class Type : TypeIndex {
 
 /**
  * Attribute identifiers.
+ * @see UA_AttributeId
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/A.1/
  */
 enum class AttributeId : uint32_t {
     // clang-format off
-    NodeId                  = UA_ATTRIBUTEID_NODEID,
-    NodeClass               = UA_ATTRIBUTEID_NODECLASS,
-    BrowseName              = UA_ATTRIBUTEID_BROWSENAME,
-    DisplayName             = UA_ATTRIBUTEID_DISPLAYNAME,
-    Description             = UA_ATTRIBUTEID_DESCRIPTION,
-    WriteMask               = UA_ATTRIBUTEID_WRITEMASK,
-    UserWriteMask           = UA_ATTRIBUTEID_USERWRITEMASK,
-    IsAbstract              = UA_ATTRIBUTEID_ISABSTRACT,
-    Symmetric               = UA_ATTRIBUTEID_SYMMETRIC,
-    InverseName             = UA_ATTRIBUTEID_INVERSENAME,
-    ContainsNoLoops         = UA_ATTRIBUTEID_CONTAINSNOLOOPS,
-    EventNotifier           = UA_ATTRIBUTEID_EVENTNOTIFIER,
-    Value                   = UA_ATTRIBUTEID_VALUE,
-    DataType                = UA_ATTRIBUTEID_DATATYPE,
-    ValueRank               = UA_ATTRIBUTEID_VALUERANK,
-    ArrayDimensions         = UA_ATTRIBUTEID_ARRAYDIMENSIONS,
-    AccessLevel             = UA_ATTRIBUTEID_ACCESSLEVEL,
-    UserAccessLevel         = UA_ATTRIBUTEID_USERACCESSLEVEL,
-    MinimumSamplingInterval = UA_ATTRIBUTEID_MINIMUMSAMPLINGINTERVAL,
-    Historizing             = UA_ATTRIBUTEID_HISTORIZING,
-    Executable              = UA_ATTRIBUTEID_EXECUTABLE,
-    UserExecutable          = UA_ATTRIBUTEID_USEREXECUTABLE,
-    DataTypeDefinition      = UA_ATTRIBUTEID_DATATYPEDEFINITION,
-    RolePermissions         = UA_ATTRIBUTEID_ROLEPERMISSIONS,
-    UserRolePermissions     = UA_ATTRIBUTEID_USERROLEPERMISSIONS,
-    AccessRestrictions      = UA_ATTRIBUTEID_ACCESSRESTRICTIONS,
-    AccessLevelEx           = UA_ATTRIBUTEID_ACCESSLEVELEX,
+    NodeId                  = 1,
+    NodeClass               = 2,
+    BrowseName              = 3,
+    DisplayName             = 4,
+    Description             = 5,
+    WriteMask               = 6,
+    UserWriteMask           = 7,
+    IsAbstract              = 8,
+    Symmetric               = 9,
+    InverseName             = 10,
+    ContainsNoLoops         = 11,
+    EventNotifier           = 12,
+    Value                   = 13,
+    DataType                = 14,
+    ValueRank               = 15,
+    ArrayDimensions         = 16,
+    AccessLevel             = 17,
+    UserAccessLevel         = 18,
+    MinimumSamplingInterval = 19,
+    Historizing             = 20,
+    Executable              = 21,
+    UserExecutable          = 22,
+    DataTypeDefinition      = 23,
+    RolePermissions         = 24,
+    UserRolePermissions     = 25,
+    AccessRestrictions      = 26,
+    AccessLevelEx           = 27,
     // clang-format on
 };
 
 /**
  * Node classes.
  * @see UA_NodeClass
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.29
  */
-enum class NodeClass : uint16_t {
+enum class NodeClass : uint32_t {
     // clang-format off
-    Unspecified   = UA_NODECLASS_UNSPECIFIED,
-    Object        = UA_NODECLASS_OBJECT,
-    Variable      = UA_NODECLASS_VARIABLE,
-    Method        = UA_NODECLASS_METHOD,
-    ObjectType    = UA_NODECLASS_OBJECTTYPE,
-    VariableType  = UA_NODECLASS_VARIABLETYPE,
-    ReferenceType = UA_NODECLASS_REFERENCETYPE,
-    DataType      = UA_NODECLASS_DATATYPE,
-    View          = UA_NODECLASS_VIEW,
+    Unspecified   = 0,
+    Object        = 1,
+    Variable      = 2,
+    Method        = 4,
+    ObjectType    = 8,
+    VariableType  = 16,
+    ReferenceType = 32,
+    DataType      = 64,
+    View          = 128,
     // clang-format on
 };
 
@@ -156,28 +158,30 @@ enum class ModellingRule : uint16_t {
 /**
  * Browse direction.
  * An enumeration that specifies the direction of references to follow.
- * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.2
+ * @see UA_BrowseDirection
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.5
  */
 enum class BrowseDirection : uint32_t {
     // clang-format off
-    Forward = UA_BROWSEDIRECTION_FORWARD,
-    Inverse = UA_BROWSEDIRECTION_INVERSE,
-    Both    = UA_BROWSEDIRECTION_BOTH,
-    Invalid = UA_BROWSEDIRECTION_INVALID,
+    Forward = 0,
+    Inverse = 1,
+    Both    = 2,
+    Invalid = 3,
     // clang-format on
 };
 
 /**
  * Timestamps to return.
+ * @see UA_TimestampsToReturn
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.40
  */
 enum class TimestampsToReturn : uint32_t {
     // clang-format off
-    Source   = UA_TIMESTAMPSTORETURN_SOURCE,
-    Server   = UA_TIMESTAMPSTORETURN_SERVER,
-    Both     = UA_TIMESTAMPSTORETURN_BOTH,
-    Neighter = UA_TIMESTAMPSTORETURN_NEITHER,
-    Invalid  = UA_TIMESTAMPSTORETURN_INVALID,
+    Source   = 0,
+    Server   = 1,
+    Both     = 2,
+    Neighter = 3,
+    Invalid  = 4,
     // clang-format on
 };
 
