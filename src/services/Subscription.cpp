@@ -13,7 +13,9 @@
 
 namespace opcua::services {
 
-static void deleteSubscriptionCallback(UA_Client*, uint32_t subId, void* subContext) {
+static void deleteSubscriptionCallback(
+    [[maybe_unused]] UA_Client* client, uint32_t subId, void* subContext
+) {
     if (subContext == nullptr) {
         return;
     }
