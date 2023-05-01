@@ -47,6 +47,42 @@ enum class Type : TypeIndex {
 };
 
 /**
+ * Attribute identifiers.
+ * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/A.1/
+ */
+enum class AttributeId : uint32_t {
+    // clang-format off
+    NodeId                  = UA_ATTRIBUTEID_NODEID,
+    NodeClass               = UA_ATTRIBUTEID_NODECLASS,
+    BrowseName              = UA_ATTRIBUTEID_BROWSENAME,
+    DisplayName             = UA_ATTRIBUTEID_DISPLAYNAME,
+    Description             = UA_ATTRIBUTEID_DESCRIPTION,
+    WriteMask               = UA_ATTRIBUTEID_WRITEMASK,
+    UserWriteMask           = UA_ATTRIBUTEID_USERWRITEMASK,
+    IsAbstract              = UA_ATTRIBUTEID_ISABSTRACT,
+    Symmetric               = UA_ATTRIBUTEID_SYMMETRIC,
+    InverseName             = UA_ATTRIBUTEID_INVERSENAME,
+    ContainsNoLoops         = UA_ATTRIBUTEID_CONTAINSNOLOOPS,
+    EventNotifier           = UA_ATTRIBUTEID_EVENTNOTIFIER,
+    Value                   = UA_ATTRIBUTEID_VALUE,
+    DataType                = UA_ATTRIBUTEID_DATATYPE,
+    ValueRank               = UA_ATTRIBUTEID_VALUERANK,
+    ArrayDimensions         = UA_ATTRIBUTEID_ARRAYDIMENSIONS,
+    AccessLevel             = UA_ATTRIBUTEID_ACCESSLEVEL,
+    UserAccessLevel         = UA_ATTRIBUTEID_USERACCESSLEVEL,
+    MinimumSamplingInterval = UA_ATTRIBUTEID_MINIMUMSAMPLINGINTERVAL,
+    Historizing             = UA_ATTRIBUTEID_HISTORIZING,
+    Executable              = UA_ATTRIBUTEID_EXECUTABLE,
+    UserExecutable          = UA_ATTRIBUTEID_USEREXECUTABLE,
+    DataTypeDefinition      = UA_ATTRIBUTEID_DATATYPEDEFINITION,
+    RolePermissions         = UA_ATTRIBUTEID_ROLEPERMISSIONS,
+    UserRolePermissions     = UA_ATTRIBUTEID_USERROLEPERMISSIONS,
+    AccessRestrictions      = UA_ATTRIBUTEID_ACCESSRESTRICTIONS,
+    AccessLevelEx           = UA_ATTRIBUTEID_ACCESSLEVELEX,
+    // clang-format on
+};
+
+/**
  * Node classes.
  * @see UA_NodeClass
  */

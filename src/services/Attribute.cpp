@@ -10,11 +10,11 @@ namespace opcua::services {
 
 template <>
 DataValue readAttribute<Server>(
-    Server& server, const NodeId& id, UA_AttributeId attributeId, UA_TimestampsToReturn timestamps
+    Server& server, const NodeId& id, AttributeId attributeId, UA_TimestampsToReturn timestamps
 ) {
     UA_ReadValueId item{};
     item.nodeId = *id.handle();
-    item.attributeId = attributeId;
+    item.attributeId = static_cast<uint32_t>(attributeId);
 
     DataValue result = UA_Server_read(server.handle(), &item, timestamps);
     if (result->hasStatus) {
@@ -25,12 +25,12 @@ DataValue readAttribute<Server>(
 
 template <>
 DataValue readAttribute<Client>(
-    Client& client, const NodeId& id, UA_AttributeId attributeId, UA_TimestampsToReturn timestamps
+    Client& client, const NodeId& id, AttributeId attributeId, UA_TimestampsToReturn timestamps
 ) {
     // https://github.com/open62541/open62541/blob/v1.3.5/src/client/ua_client_highlevel.c#L357
     UA_ReadValueId item{};
     item.nodeId = *id.handle();
-    item.attributeId = attributeId;
+    item.attributeId = static_cast<uint32_t>(attributeId);
 
     UA_ReadRequest request{};
     request.timestampsToReturn = timestamps;
@@ -58,11 +58,11 @@ DataValue readAttribute<Client>(
 
 template <>
 void writeAttribute<Server>(
-    Server& server, const NodeId& id, UA_AttributeId attributeId, const DataValue& value
+    Server& server, const NodeId& id, AttributeId attributeId, const DataValue& value
 ) {
     UA_WriteValue item{};
     item.nodeId = *id.handle();
-    item.attributeId = attributeId;
+    item.attributeId = static_cast<uint32_t>(attributeId);
     item.value = *value.handle();  // shallow copy
     item.value.hasValue = true;
 
@@ -72,12 +72,12 @@ void writeAttribute<Server>(
 
 template <>
 void writeAttribute<Client>(
-    Client& client, const NodeId& id, UA_AttributeId attributeId, const DataValue& value
+    Client& client, const NodeId& id, AttributeId attributeId, const DataValue& value
 ) {
     // https://github.com/open62541/open62541/blob/v1.3.5/src/client/ua_client_highlevel.c#L285
     UA_WriteValue item{};
     item.nodeId = *id.handle();
-    item.attributeId = attributeId;
+    item.attributeId = static_cast<uint32_t>(attributeId);
     item.value = *value.handle();  // shallow copy
     item.value.hasValue = true;
 

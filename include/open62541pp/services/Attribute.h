@@ -50,13 +50,13 @@ template <typename T>
 DataValue readAttribute(
     T& serverOrClient,
     const NodeId& id,
-    UA_AttributeId attributeId,
+    AttributeId attributeId,
     UA_TimestampsToReturn timestamps = UA_TIMESTAMPSTORETURN_NEITHER
 );
 
 /// Helper function to read scalar node attributes.
 template <typename AttributeType, typename T>
-inline auto readAttributeScalar(T& serverOrClient, const NodeId& id, UA_AttributeId attributeId) {
+inline auto readAttributeScalar(T& serverOrClient, const NodeId& id, AttributeId attributeId) {
     const auto dv = readAttribute(serverOrClient, id, attributeId);
     return dv.getValuePtr()->template getScalarCopy<AttributeType>();
 }
@@ -67,7 +67,7 @@ inline auto readAttributeScalar(T& serverOrClient, const NodeId& id, UA_Attribut
  */
 template <typename T>
 void writeAttribute(
-    T& serverOrClient, const NodeId& id, UA_AttributeId attributeId, const DataValue& value
+    T& serverOrClient, const NodeId& id, AttributeId attributeId, const DataValue& value
 );
 
 /* -------------------------------- Specialized inline functions -------------------------------- */
@@ -80,7 +80,7 @@ void writeAttribute(
  */
 template <typename T>
 inline NodeId readNodeId(T& serverOrClient, const NodeId& id) {
-    return readAttributeScalar<NodeId>(serverOrClient, id, UA_ATTRIBUTEID_NODEID);
+    return readAttributeScalar<NodeId>(serverOrClient, id, AttributeId::NodeId);
 }
 
 /**
@@ -89,7 +89,7 @@ inline NodeId readNodeId(T& serverOrClient, const NodeId& id) {
  */
 template <typename T>
 inline NodeClass readNodeClass(T& serverOrClient, const NodeId& id) {
-    auto dv = readAttribute(serverOrClient, id, UA_ATTRIBUTEID_NODECLASS);
+    auto dv = readAttribute(serverOrClient, id, AttributeId::NodeClass);
     // workaround to read enum from variant...
     return *static_cast<NodeClass*>(dv.getValuePtr()->handle()->data);
 }
@@ -103,7 +103,7 @@ inline NodeClass readNodeClass(T& serverOrClient, const NodeId& id) {
  */
 template <typename T>
 inline QualifiedName readBrowseName(T& serverOrClient, const NodeId& id) {
-    return readAttributeScalar<QualifiedName>(serverOrClient, id, UA_ATTRIBUTEID_BROWSENAME);
+    return readAttributeScalar<QualifiedName>(serverOrClient, id, AttributeId::BrowseName);
 }
 
 /**
@@ -114,7 +114,7 @@ inline QualifiedName readBrowseName(T& serverOrClient, const NodeId& id) {
  */
 template <typename T>
 inline LocalizedText readDisplayName(T& serverOrClient, const NodeId& id) {
-    return readAttributeScalar<LocalizedText>(serverOrClient, id, UA_ATTRIBUTEID_DISPLAYNAME);
+    return readAttributeScalar<LocalizedText>(serverOrClient, id, AttributeId::DisplayName);
 }
 
 /**
@@ -125,7 +125,7 @@ inline LocalizedText readDisplayName(T& serverOrClient, const NodeId& id) {
  */
 template <typename T>
 inline LocalizedText readDescription(T& serverOrClient, const NodeId& id) {
-    return readAttributeScalar<LocalizedText>(serverOrClient, id, UA_ATTRIBUTEID_DESCRIPTION);
+    return readAttributeScalar<LocalizedText>(serverOrClient, id, AttributeId::Description);
 }
 
 /**
@@ -136,7 +136,7 @@ inline LocalizedText readDescription(T& serverOrClient, const NodeId& id) {
  */
 template <typename T>
 inline uint32_t readWriteMask(T& serverOrClient, const NodeId& id) {
-    return readAttributeScalar<uint32_t>(serverOrClient, id, UA_ATTRIBUTEID_WRITEMASK);
+    return readAttributeScalar<uint32_t>(serverOrClient, id, AttributeId::WriteMask);
 }
 
 /**
@@ -148,7 +148,7 @@ inline uint32_t readWriteMask(T& serverOrClient, const NodeId& id) {
  */
 template <typename T>
 inline uint32_t readUserWriteMask(T& serverOrClient, const NodeId& id) {
-    return readAttributeScalar<uint32_t>(serverOrClient, id, UA_ATTRIBUTEID_USERWRITEMASK);
+    return readAttributeScalar<uint32_t>(serverOrClient, id, AttributeId::UserWriteMask);
 }
 
 /**
@@ -159,7 +159,7 @@ inline uint32_t readUserWriteMask(T& serverOrClient, const NodeId& id) {
  */
 template <typename T>
 inline bool readIsAbstract(T& serverOrClient, const NodeId& id) {
-    return readAttributeScalar<bool>(serverOrClient, id, UA_ATTRIBUTEID_ISABSTRACT);
+    return readAttributeScalar<bool>(serverOrClient, id, AttributeId::IsAbstract);
 }
 
 /**
@@ -170,7 +170,7 @@ inline bool readIsAbstract(T& serverOrClient, const NodeId& id) {
  */
 template <typename T>
 inline bool readSymmetric(T& serverOrClient, const NodeId& id) {
-    return readAttributeScalar<bool>(serverOrClient, id, UA_ATTRIBUTEID_SYMMETRIC);
+    return readAttributeScalar<bool>(serverOrClient, id, AttributeId::Symmetric);
 }
 
 /**
@@ -182,7 +182,7 @@ inline bool readSymmetric(T& serverOrClient, const NodeId& id) {
  */
 template <typename T>
 inline LocalizedText readInverseName(T& serverOrClient, const NodeId& id) {
-    return readAttributeScalar<LocalizedText>(serverOrClient, id, UA_ATTRIBUTEID_INVERSENAME);
+    return readAttributeScalar<LocalizedText>(serverOrClient, id, AttributeId::InverseName);
 }
 
 /**
@@ -191,7 +191,7 @@ inline LocalizedText readInverseName(T& serverOrClient, const NodeId& id) {
  */
 template <typename T>
 inline void readDataValue(T& serverOrClient, const NodeId& id, DataValue& value) {
-    value = readAttribute(serverOrClient, id, UA_ATTRIBUTEID_VALUE, UA_TIMESTAMPSTORETURN_BOTH);
+    value = readAttribute(serverOrClient, id, AttributeId::Value, UA_TIMESTAMPSTORETURN_BOTH);
 }
 
 /**
@@ -200,7 +200,7 @@ inline void readDataValue(T& serverOrClient, const NodeId& id, DataValue& value)
  */
 template <typename T>
 inline void readValue(T& serverOrClient, const NodeId& id, Variant& value) {
-    DataValue dv = readAttribute(serverOrClient, id, UA_ATTRIBUTEID_VALUE);
+    DataValue dv = readAttribute(serverOrClient, id, AttributeId::Value);
     value.swap(dv->value);
 }
 
@@ -210,7 +210,7 @@ inline void readValue(T& serverOrClient, const NodeId& id, Variant& value) {
  */
 template <typename T>
 inline NodeId readDataType(T& serverOrClient, const NodeId& id) {
-    return readAttributeScalar<NodeId>(serverOrClient, id, UA_ATTRIBUTEID_DATATYPE);
+    return readAttributeScalar<NodeId>(serverOrClient, id, AttributeId::DataType);
 }
 
 /**
@@ -222,7 +222,7 @@ inline NodeId readDataType(T& serverOrClient, const NodeId& id) {
  */
 template <typename T>
 inline ValueRank readValueRank(T& serverOrClient, const NodeId& id) {
-    const auto index = readAttributeScalar<int32_t>(serverOrClient, id, UA_ATTRIBUTEID_VALUERANK);
+    const auto index = readAttributeScalar<int32_t>(serverOrClient, id, AttributeId::ValueRank);
     return static_cast<ValueRank>(index);
 }
 
@@ -234,7 +234,7 @@ inline ValueRank readValueRank(T& serverOrClient, const NodeId& id) {
  */
 template <typename T>
 inline std::vector<uint32_t> readArrayDimensions(T& serverOrClient, const NodeId& id) {
-    const auto dv = readAttribute(serverOrClient, id, UA_ATTRIBUTEID_ARRAYDIMENSIONS);
+    const auto dv = readAttribute(serverOrClient, id, AttributeId::ArrayDimensions);
     if (dv.getValuePtr()->isArray()) {
         return dv.getValuePtr()->template getArrayCopy<uint32_t>();
     }
@@ -251,7 +251,7 @@ inline std::vector<uint32_t> readArrayDimensions(T& serverOrClient, const NodeId
  */
 template <typename T>
 inline uint8_t readAccessLevel(T& serverOrClient, const NodeId& id) {
-    return readAttributeScalar<uint8_t>(serverOrClient, id, UA_ATTRIBUTEID_ACCESSLEVEL);
+    return readAttributeScalar<uint8_t>(serverOrClient, id, AttributeId::AccessLevel);
 }
 
 /**
@@ -263,7 +263,7 @@ inline uint8_t readAccessLevel(T& serverOrClient, const NodeId& id) {
  */
 template <typename T>
 inline uint8_t readUserAccessLevel(T& serverOrClient, const NodeId& id) {
-    return readAttributeScalar<uint8_t>(serverOrClient, id, UA_ATTRIBUTEID_USERACCESSLEVEL);
+    return readAttributeScalar<uint8_t>(serverOrClient, id, AttributeId::UserAccessLevel);
 }
 
 /**
@@ -276,7 +276,7 @@ inline uint8_t readUserAccessLevel(T& serverOrClient, const NodeId& id) {
  */
 template <typename T>
 inline double readMinimumSamplingInterval(T& serverOrClient, const NodeId& id) {
-    return readAttributeScalar<double>(serverOrClient, id, UA_ATTRIBUTEID_MINIMUMSAMPLINGINTERVAL);
+    return readAttributeScalar<double>(serverOrClient, id, AttributeId::MinimumSamplingInterval);
 }
 
 /* ---------------------------------------------------------------------------------------------- */
@@ -288,7 +288,7 @@ inline double readMinimumSamplingInterval(T& serverOrClient, const NodeId& id) {
  */
 template <typename T>
 inline void writeDisplayName(T& serverOrClient, const NodeId& id, const LocalizedText& name) {
-    writeAttribute(serverOrClient, id, UA_ATTRIBUTEID_DISPLAYNAME, DataValue::fromScalar(name));
+    writeAttribute(serverOrClient, id, AttributeId::DisplayName, DataValue::fromScalar(name));
 }
 
 /**
@@ -298,7 +298,7 @@ inline void writeDisplayName(T& serverOrClient, const NodeId& id, const Localize
  */
 template <typename T>
 inline void writeDescription(T& serverOrClient, const NodeId& id, const LocalizedText& desc) {
-    writeAttribute(serverOrClient, id, UA_ATTRIBUTEID_DESCRIPTION, DataValue::fromScalar(desc));
+    writeAttribute(serverOrClient, id, AttributeId::Description, DataValue::fromScalar(desc));
 }
 
 /**
@@ -308,7 +308,7 @@ inline void writeDescription(T& serverOrClient, const NodeId& id, const Localize
  */
 template <typename T>
 inline void writeWriteMask(T& serverOrClient, const NodeId& id, uint32_t mask) {
-    writeAttribute(serverOrClient, id, UA_ATTRIBUTEID_WRITEMASK, DataValue::fromScalar(mask));
+    writeAttribute(serverOrClient, id, AttributeId::WriteMask, DataValue::fromScalar(mask));
 }
 
 /**
@@ -319,7 +319,7 @@ inline void writeWriteMask(T& serverOrClient, const NodeId& id, uint32_t mask) {
  */
 template <typename T>
 inline void writeUserWriteMask(T& serverOrClient, const NodeId& id, uint32_t mask) {
-    writeAttribute(serverOrClient, id, UA_ATTRIBUTEID_USERWRITEMASK, DataValue::fromScalar(mask));
+    writeAttribute(serverOrClient, id, AttributeId::UserWriteMask, DataValue::fromScalar(mask));
 }
 
 /**
@@ -329,9 +329,7 @@ inline void writeUserWriteMask(T& serverOrClient, const NodeId& id, uint32_t mas
  */
 template <typename T>
 inline void writeIsAbstract(T& serverOrClient, const NodeId& id, bool isAbstract) {
-    writeAttribute(
-        serverOrClient, id, UA_ATTRIBUTEID_ISABSTRACT, DataValue::fromScalar(isAbstract)
-    );
+    writeAttribute(serverOrClient, id, AttributeId::IsAbstract, DataValue::fromScalar(isAbstract));
 }
 
 /**
@@ -341,7 +339,7 @@ inline void writeIsAbstract(T& serverOrClient, const NodeId& id, bool isAbstract
  */
 template <typename T>
 inline void writeSymmetric(T& serverOrClient, const NodeId& id, bool symmetric) {
-    writeAttribute(serverOrClient, id, UA_ATTRIBUTEID_SYMMETRIC, DataValue::fromScalar(symmetric));
+    writeAttribute(serverOrClient, id, AttributeId::Symmetric, DataValue::fromScalar(symmetric));
 }
 
 /**
@@ -351,7 +349,7 @@ inline void writeSymmetric(T& serverOrClient, const NodeId& id, bool symmetric) 
  */
 template <typename T>
 inline void writeInverseName(T& serverOrClient, const NodeId& id, const LocalizedText& name) {
-    writeAttribute(serverOrClient, id, UA_ATTRIBUTEID_INVERSENAME, DataValue::fromScalar(name));
+    writeAttribute(serverOrClient, id, AttributeId::InverseName, DataValue::fromScalar(name));
 }
 
 /**
@@ -361,7 +359,7 @@ inline void writeInverseName(T& serverOrClient, const NodeId& id, const Localize
  */
 template <typename T>
 inline void writeDataValue(T& serverOrClient, const NodeId& id, const DataValue& value) {
-    writeAttribute(serverOrClient, id, UA_ATTRIBUTEID_VALUE, value);
+    writeAttribute(serverOrClient, id, AttributeId::Value, value);
 }
 
 /**
@@ -374,7 +372,7 @@ inline void writeValue(T& serverOrClient, const NodeId& id, const Variant& value
     UA_DataValue dv{};
     dv.value = *value.handle();  // shallow copy
     dv.hasValue = true;
-    writeAttribute(serverOrClient, id, UA_ATTRIBUTEID_VALUE, asWrapper<DataValue>(dv));
+    writeAttribute(serverOrClient, id, AttributeId::Value, asWrapper<DataValue>(dv));
 }
 
 /**
@@ -385,7 +383,7 @@ inline void writeValue(T& serverOrClient, const NodeId& id, const Variant& value
 template <typename T>
 inline void writeDataType(T& serverOrClient, const NodeId& id, Type type) {
     const auto typeId = ::opcua::detail::getUaDataType(type)->typeId;
-    writeAttribute(serverOrClient, id, UA_ATTRIBUTEID_DATATYPE, DataValue::fromScalar(typeId));
+    writeAttribute(serverOrClient, id, AttributeId::DataType, DataValue::fromScalar(typeId));
 }
 
 /**
@@ -395,7 +393,7 @@ inline void writeDataType(T& serverOrClient, const NodeId& id, Type type) {
  */
 template <typename T>
 inline void writeDataType(T& serverOrClient, const NodeId& id, const NodeId& typeId) {
-    writeAttribute(serverOrClient, id, UA_ATTRIBUTEID_DATATYPE, DataValue::fromScalar(typeId));
+    writeAttribute(serverOrClient, id, AttributeId::DataType, DataValue::fromScalar(typeId));
 }
 
 /**
@@ -406,7 +404,7 @@ inline void writeDataType(T& serverOrClient, const NodeId& id, const NodeId& typ
 template <typename T>
 inline void writeValueRank(T& serverOrClient, const NodeId& id, ValueRank valueRank) {
     const auto native = static_cast<int32_t>(valueRank);
-    writeAttribute(serverOrClient, id, UA_ATTRIBUTEID_VALUERANK, DataValue::fromScalar(native));
+    writeAttribute(serverOrClient, id, AttributeId::ValueRank, DataValue::fromScalar(native));
 }
 
 /**
@@ -423,7 +421,7 @@ inline void writeArrayDimensions(
     T& serverOrClient, const NodeId& id, const std::vector<uint32_t>& dimensions
 ) {
     writeAttribute(
-        serverOrClient, id, UA_ATTRIBUTEID_ARRAYDIMENSIONS, DataValue::fromArray(dimensions)
+        serverOrClient, id, AttributeId::ArrayDimensions, DataValue::fromArray(dimensions)
     );
 }
 
@@ -435,7 +433,7 @@ inline void writeArrayDimensions(
 template <typename T>
 inline void writeAccessLevel(T& serverOrClient, const NodeId& id, uint8_t mask) {
     const auto native = static_cast<UA_Byte>(mask);
-    writeAttribute(serverOrClient, id, UA_ATTRIBUTEID_ACCESSLEVEL, DataValue::fromScalar(native));
+    writeAttribute(serverOrClient, id, AttributeId::AccessLevel, DataValue::fromScalar(native));
 }
 
 /**
@@ -447,9 +445,7 @@ inline void writeAccessLevel(T& serverOrClient, const NodeId& id, uint8_t mask) 
 template <typename T>
 inline void writeUserAccessLevel(T& serverOrClient, const NodeId& id, uint8_t mask) {
     const auto native = static_cast<UA_Byte>(mask);
-    writeAttribute(
-        serverOrClient, id, UA_ATTRIBUTEID_USERACCESSLEVEL, DataValue::fromScalar(native)
-    );
+    writeAttribute(serverOrClient, id, AttributeId::UserAccessLevel, DataValue::fromScalar(native));
 }
 
 /**
@@ -462,7 +458,7 @@ inline void writeMinimumSamplingInterval(T& serverOrClient, const NodeId& id, do
     writeAttribute(
         serverOrClient,
         id,
-        UA_ATTRIBUTEID_MINIMUMSAMPLINGINTERVAL,
+        AttributeId::MinimumSamplingInterval,
         DataValue::fromScalar(milliseconds)
     );
 }
