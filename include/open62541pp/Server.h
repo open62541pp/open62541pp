@@ -16,7 +16,7 @@ struct UA_Server;
 namespace opcua {
 
 // forward declaration
-struct ServerContext;
+class ServerContext;
 template <typename ServerOrClient>
 class Node;
 

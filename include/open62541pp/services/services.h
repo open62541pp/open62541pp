@@ -8,6 +8,7 @@
  */
 
 #include "open62541pp/services/Attribute.h"
+#include "open62541pp/services/MonitoredItem.h"
 #include "open62541pp/services/NodeManagement.h"
 #include "open62541pp/services/Subscription.h"
 #include "open62541pp/services/View.h"

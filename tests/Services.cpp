@@ -1,8 +1,11 @@
+#include <chrono>
 #include <functional>  // reference_wrapper
+#include <thread>
 #include <utility>  // pair
 #include <variant>
 #include <vector>
 
+#include "open62541/client.h"
 #include <doctest/doctest.h>
 
 #include "open62541pp/Client.h"
@@ -12,6 +15,7 @@
 #include "helper/Runner.h"
 
 using namespace opcua;
+using namespace std::literals::chrono_literals;
 
 TEST_CASE("NodeManagement (server)") {
     Server server;
@@ -463,4 +467,196 @@ TEST_CASE("Subscription") {
     SUBCASE("Server") { testSubscription(server); };
     SUBCASE("Client") { testSubscription(client); };
     // clang-format on
+}
+
+TEST_CASE("MonitoredItem (client)") {
+    Server server;
+    ServerRunner serverRunner(server);
+    Client client;
+    client.connect("opc.tcp://localhost:4840");
+
+    // add variable node to test data change notifications
+    const NodeId id{1, 1000};
+    services::addVariable(server, {0, UA_NS0ID_OBJECTSFOLDER}, id, "Variable");
+
+    services::SubscriptionParameters subscriptionParameters{};
+    services::MonitoringParameters monitoringParameters{};
+
+    SUBCASE("createMonitoredItemDataChange without subscription") {
+        CHECK_THROWS(
+            services::createMonitoredItemDataChange(
+                client,
+                11U,  // random subId
+                {id, AttributeId::Value},
+                MonitoringMode::Reporting,
+                monitoringParameters,
+                {}
+            ) == 1
+        );
+    }
+
+    const auto subId = services::createSubscription(client, subscriptionParameters);
+    CAPTURE(subId);
+
+    SUBCASE("createMonitoredItemDataChange") {
+        size_t notificationCount = 0;
+        DataValue changedValue;
+        const auto monId = services::createMonitoredItemDataChange(
+            client,
+            subId,
+            {id, AttributeId::Value},
+            MonitoringMode::Reporting,
+            monitoringParameters,
+            [&](uint32_t, uint32_t, const DataValue& value) {
+                notificationCount++;
+                changedValue = value;
+            }
+        );
+        CAPTURE(monId);
+
+        services::writeValue(server, id, Variant::fromScalar(11.11));
+        UA_Client_run_iterate(client.handle(), 1000);
+        CHECK(notificationCount > 0);  // 1 for client, 2 for server - why?
+        CHECK(changedValue.getValue().value().getScalar<double>() == 11.11);
+    }
+
+    SUBCASE("createMonitoredItemEvent (client only)") {
+        const auto monId = services::createMonitoredItemEvent(
+            client,
+            subId,
+            {ObjectId::Server, AttributeId::EventNotifier},
+            MonitoringMode::Reporting,
+            monitoringParameters,
+            [&](uint32_t, uint32_t, const std::vector<Variant>&) {}
+        );
+        CAPTURE(monId);
+
+        // TODO: trigger event and check if callback was called
+    }
+
+    SUBCASE("modifyMonitoredItem") {
+        const auto monId = services::createMonitoredItemDataChange(
+            client,
+            subId,
+            {id, AttributeId::Value},
+            MonitoringMode::Reporting,
+            monitoringParameters,
+            {}
+        );
+        CAPTURE(monId);
+
+        services::MonitoringParameters modifiedParameters{};
+        modifiedParameters.samplingInterval = 1000.0;
+        CHECK_NOTHROW(services::modifyMonitoredItem(client, subId, monId, modifiedParameters));
+        CHECK(modifiedParameters.samplingInterval == 1000.0);  // should not be revised
+    }
+
+    SUBCASE("setMonitoringMode") {
+        const auto monId = services::createMonitoredItemDataChange(
+            client,
+            subId,
+            {id, AttributeId::Value},
+            MonitoringMode::Reporting,
+            monitoringParameters,
+            {}
+        );
+        CAPTURE(monId);
+        CHECK_NOTHROW(services::setMonitoringMode(client, subId, monId, MonitoringMode::Disabled));
+    }
+
+    SUBCASE("setTriggering") {
+        // use current server time as triggering item and let it trigger the variable node
+        size_t notificationCountTriggering = 0;
+        size_t notificationCount = 0;
+        const auto monIdTriggering = services::createMonitoredItemDataChange(
+            client,
+            subId,
+            {VariableId::Server_ServerStatus_CurrentTime, AttributeId::Value},
+            MonitoringMode::Reporting,
+            monitoringParameters,
+            [&](uint32_t, uint32_t, const DataValue&) { notificationCountTriggering++; }
+        );
+        // set triggered item's monitoring mode to sampling
+        // -> will only report if triggered by triggering item
+        // https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.1.6
+        const auto monId = services::createMonitoredItemDataChange(
+            client,
+            subId,
+            {id, AttributeId::Value},
+            MonitoringMode::Sampling,
+            monitoringParameters,
+            [&](uint32_t, uint32_t, const DataValue&) { notificationCount++; }
+        );
+
+        UA_Client_run_iterate(client.handle(), 1000);
+        CHECK(notificationCountTriggering > 0);
+        CHECK(notificationCount == 0);  // no triggering links yet
+
+        services::setTriggering(
+            client,
+            subId,
+            monIdTriggering,
+            {monId},  // links to add
+            {}  // links to remove
+        );
+
+        UA_Client_run_iterate(client.handle(), 1000);
+        CHECK(notificationCount > 0);
+    }
+
+    SUBCASE("deleteMonitoredItem") {
+        CHECK_THROWS_WITH(
+            services::deleteMonitoredItem(client, subId, 11U), "BadMonitoredItemIdInvalid"
+        );
+
+        bool deleted = false;
+        const auto monId = services::createMonitoredItemDataChange(
+            client,
+            subId,
+            {id, AttributeId::Value},
+            MonitoringMode::Reporting,
+            monitoringParameters,
+            {},
+            [&](uint32_t, uint32_t) { deleted = true; }
+        );
+
+        CHECK_NOTHROW(services::deleteMonitoredItem(client, subId, monId));
+        UA_Client_run_iterate(client.handle(), 1000);
+        CHECK(deleted == true);
+    }
+}
+
+TEST_CASE("MonitoredItem (server)") {
+    Server server;
+    ServerRunner serverRunner(server);
+
+    services::MonitoringParameters monitoringParameters{};
+
+    SUBCASE("createMonitoredItemDataChange") {
+        size_t notificationCount = 0;
+        const auto monId = services::createMonitoredItemDataChange(
+            server,
+            {VariableId::Server_ServerStatus_CurrentTime, AttributeId::Value},
+            MonitoringMode::Reporting,
+            monitoringParameters,
+            [&](uint32_t, uint32_t, const DataValue&) { notificationCount++; }
+        );
+        CAPTURE(monId);
+        std::this_thread::sleep_for(100ms);
+        CHECK(notificationCount > 0);
+    }
+
+    SUBCASE("deleteMonitoredItem") {
+        CHECK_THROWS_WITH(services::deleteMonitoredItem(server, 11U), "BadMonitoredItemIdInvalid");
+
+        const auto monId = services::createMonitoredItemDataChange(
+            server,
+            {VariableId::Server_ServerStatus_CurrentTime, AttributeId::Value},
+            MonitoringMode::Reporting,
+            monitoringParameters,
+            {}
+        );
+
+        CHECK_NOTHROW(services::deleteMonitoredItem(server, monId));
+    }
 }

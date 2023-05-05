@@ -19,15 +19,11 @@ static void deleteSubscriptionCallback(
     if (subContext == nullptr) {
         return;
     }
-    auto* clientContext = static_cast<ClientContext*>(subContext);
-    auto it = clientContext->subscriptions.find(subId);
-    if (it == clientContext->subscriptions.end()) {
-        return;
+    auto* subscription = static_cast<ClientContext::Subscription*>(subContext);
+    if (subscription->deleteCallback) {
+        subscription->deleteCallback(subId);
     }
-    if (it->second.deleteSubscriptionCallback) {
-        it->second.deleteSubscriptionCallback(subId);
-    }
-    clientContext->subscriptions.erase(it);
+    subscription->deleted = true;
 }
 
 template <>
@@ -37,7 +33,7 @@ uint32_t createSubscription<Server>(
     [[maybe_unused]] bool publishingEnabled,
     DeleteSubscriptionCallback deleteCallback
 ) {
-    server.getContext().deleteSubscriptionCallback = std::move(deleteCallback);
+    server.getContext().addSubscription(std::move(deleteCallback));
     return 0U;
 }
 
@@ -56,34 +52,28 @@ uint32_t createSubscription<Client>(
     request.publishingEnabled = publishingEnabled;
     request.priority = parameters.priority;
 
-    auto& clientContext = client.getContext();
+    auto subscriptionContext = std::make_unique<ClientContext::Subscription>();
+    subscriptionContext->deleteCallback = std::move(deleteCallback);
 
     using Response =
         TypeWrapper<UA_CreateSubscriptionResponse, UA_TYPES_CREATESUBSCRIPTIONRESPONSE>;
     const Response response = UA_Client_Subscriptions_create(
         client.handle(),
         request,
-        &clientContext,  // subscriptionContext
+        subscriptionContext.get(),
         nullptr,  // statusChangeCallback
-        deleteCallback ? deleteSubscriptionCallback : nullptr  // deleteCallback
+        deleteSubscriptionCallback
     );
     detail::throwOnBadStatus(response->responseHeader.serviceResult);
+
+    client.getContext().addSubscription(std::move(subscriptionContext));
 
     // update revised parameters
     parameters.publishingInterval = response->revisedPublishingInterval;
     parameters.lifetimeCount = response->revisedLifetimeCount;
     parameters.maxKeepAliveCount = response->revisedMaxKeepAliveCount;
 
-    const auto subId = response->subscriptionId;
-
-    // create subscription context to dispatch callback
-    if (deleteCallback) {
-        ClientContext::SubscriptionContext subscriptionContext{};
-        subscriptionContext.deleteSubscriptionCallback = std::move(deleteCallback);
-        clientContext.subscriptions.insert_or_assign(subId, std::move(subscriptionContext));
-    }
-
-    return subId;
+    return response->subscriptionId;
 }
 
 template <>
@@ -151,11 +141,7 @@ void deleteSubscription<Server>([[maybe_unused]] Server& server, uint32_t subscr
     if (subscriptionId != 0U) {
         throw BadStatus(UA_STATUSCODE_BADSUBSCRIPTIONIDINVALID);
     }
-    // TODO: delete all monitored items
-    auto& serverContext = server.getContext();
-    if (serverContext.deleteSubscriptionCallback) {
-        serverContext.deleteSubscriptionCallback(subscriptionId);
-    }
+    server.getContext().deleteSubscription();
 }
 
 template <>
