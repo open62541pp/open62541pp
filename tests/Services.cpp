@@ -412,6 +412,7 @@ TEST_CASE("View") {
     // clang-format on
 }
 
+#ifdef UA_ENABLE_SUBSCRIPTIONS
 TEST_CASE("Subscription (client)") {
     Server server;
     ServerRunner serverRunner(server);
@@ -512,7 +513,8 @@ TEST_CASE("MonitoredItem (client)") {
         CHECK(changedValue.getValue().value().getScalar<double>() == 11.11);
     }
 
-    SUBCASE("createMonitoredItemEvent (client only)") {
+#ifdef UA_ENABLE_SUBSCRIPTIONS_EVENTS
+    SUBCASE("createMonitoredItemEvent") {
         const auto monId = services::createMonitoredItemEvent(
             client,
             subId,
@@ -525,6 +527,7 @@ TEST_CASE("MonitoredItem (client)") {
 
         // TODO: trigger event and check if callback was called
     }
+#endif
 
     SUBCASE("modifyMonitoredItem") {
         const auto monId = services::createMonitoredItemDataChange(
@@ -652,3 +655,4 @@ TEST_CASE("MonitoredItem (server)") {
         CHECK_NOTHROW(services::deleteMonitoredItem(server, monId));
     }
 }
+#endif
