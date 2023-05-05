@@ -412,61 +412,53 @@ TEST_CASE("View") {
     // clang-format on
 }
 
-TEST_CASE("Subscription") {
+TEST_CASE("Subscription (client)") {
     Server server;
     ServerRunner serverRunner(server);
     Client client;
     client.connect("opc.tcp://localhost:4840");
 
-    const auto testSubscription = [](auto& serverOrClient) {
-        services::SubscriptionParameters parameters{};
+    services::SubscriptionParameters parameters{};
 
-        SUBCASE("createSubscription") {
-            const auto subId = services::createSubscription(serverOrClient, parameters);
-            CAPTURE(subId);
-        }
+    SUBCASE("createSubscription") {
+        const auto subId = services::createSubscription(client, parameters);
+        CAPTURE(subId);
+    }
 
-        SUBCASE("modifySubscription") {
-            const auto subId = services::createSubscription(serverOrClient, parameters);
+    SUBCASE("modifySubscription") {
+        const auto subId = services::createSubscription(client, parameters);
 
-            parameters.priority = 1;
-            CHECK_NOTHROW(services::modifySubscription(serverOrClient, subId, parameters));
-            CHECK_THROWS_WITH(
-                services::modifySubscription(serverOrClient, subId + 1, parameters),
-                "BadSubscriptionIdInvalid"
-            );
-        }
+        parameters.priority = 1;
+        CHECK_NOTHROW(services::modifySubscription(client, subId, parameters));
+        CHECK_THROWS_WITH(
+            services::modifySubscription(client, subId + 1, parameters), "BadSubscriptionIdInvalid"
+        );
+    }
 
-        SUBCASE("setPublishingMode") {
-            const auto subId = services::createSubscription(serverOrClient, parameters);
+    SUBCASE("setPublishingMode") {
+        const auto subId = services::createSubscription(client, parameters);
 
-            CHECK_NOTHROW(services::setPublishingMode(serverOrClient, subId, false));
-        }
+        CHECK_NOTHROW(services::setPublishingMode(client, subId, false));
+    }
 
-        SUBCASE("deleteSubscription") {
-            const auto subId = services::createSubscription(serverOrClient, parameters);
+    SUBCASE("deleteSubscription") {
+        const auto subId = services::createSubscription(client, parameters);
 
-            CHECK_NOTHROW(services::deleteSubscription(serverOrClient, subId));
-            CHECK_THROWS_WITH(
-                services::deleteSubscription(serverOrClient, subId + 1), "BadSubscriptionIdInvalid"
-            );
-        }
+        CHECK_NOTHROW(services::deleteSubscription(client, subId));
+        CHECK_THROWS_WITH(
+            services::deleteSubscription(client, subId + 1), "BadSubscriptionIdInvalid"
+        );
+    }
 
-        SUBCASE("deleteSubscription with callback") {
-            bool deleted = false;
-            const auto subId = services::createSubscription(
-                serverOrClient, parameters, true, [&](uint32_t) { deleted = true; }
-            );
+    SUBCASE("deleteSubscription with callback") {
+        bool deleted = false;
+        const auto subId = services::createSubscription(client, parameters, true, [&](uint32_t) {
+            deleted = true;
+        });
 
-            CHECK_NOTHROW(services::deleteSubscription(serverOrClient, subId));
-            CHECK(deleted == true);
-        }
-    };
-
-    // clang-format off
-    SUBCASE("Server") { testSubscription(server); };
-    SUBCASE("Client") { testSubscription(client); };
-    // clang-format on
+        CHECK_NOTHROW(services::deleteSubscription(client, subId));
+        CHECK(deleted == true);
+    }
 }
 
 TEST_CASE("MonitoredItem (client)") {

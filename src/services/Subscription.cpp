@@ -26,19 +26,7 @@ static void deleteSubscriptionCallback(
     subscription->deleted = true;
 }
 
-template <>
-uint32_t createSubscription<Server>(
-    [[maybe_unused]] Server& server,
-    [[maybe_unused]] SubscriptionParameters& parameters,
-    [[maybe_unused]] bool publishingEnabled,
-    DeleteSubscriptionCallback deleteCallback
-) {
-    server.getContext().addSubscription(std::move(deleteCallback));
-    return 0U;
-}
-
-template <>
-uint32_t createSubscription<Client>(
+uint32_t createSubscription(
     Client& client,
     SubscriptionParameters& parameters,
     bool publishingEnabled,
@@ -76,19 +64,7 @@ uint32_t createSubscription<Client>(
     return response->subscriptionId;
 }
 
-template <>
-void modifySubscription<Server>(
-    [[maybe_unused]] Server& server,
-    uint32_t subscriptionId,
-    [[maybe_unused]] SubscriptionParameters& parameters
-) {
-    if (subscriptionId != 0U) {
-        throw BadStatus(UA_STATUSCODE_BADSUBSCRIPTIONIDINVALID);
-    }
-}
-
-template <>
-void modifySubscription<Client>(
+void modifySubscription(
     Client& client, uint32_t subscriptionId, SubscriptionParameters& parameters
 ) {
     UA_ModifySubscriptionRequest request{};
@@ -110,17 +86,7 @@ void modifySubscription<Client>(
     parameters.maxKeepAliveCount = response->revisedMaxKeepAliveCount;
 }
 
-template <>
-void setPublishingMode<Server>(
-    [[maybe_unused]] Server& server, uint32_t subscriptionId, [[maybe_unused]] bool publishing
-) {
-    if (subscriptionId != 0U) {
-        throw BadStatus(UA_STATUSCODE_BADSUBSCRIPTIONIDINVALID);
-    }
-}
-
-template <>
-void setPublishingMode<Client>(Client& client, uint32_t subscriptionId, bool publishing) {
+void setPublishingMode(Client& client, uint32_t subscriptionId, bool publishing) {
     UA_SetPublishingModeRequest request{};
     request.publishingEnabled = publishing;
     request.subscriptionIdsSize = 1;
@@ -136,16 +102,7 @@ void setPublishingMode<Client>(Client& client, uint32_t subscriptionId, bool pub
     detail::throwOnBadStatus(*response->results);
 }
 
-template <>
-void deleteSubscription<Server>([[maybe_unused]] Server& server, uint32_t subscriptionId) {
-    if (subscriptionId != 0U) {
-        throw BadStatus(UA_STATUSCODE_BADSUBSCRIPTIONIDINVALID);
-    }
-    server.getContext().deleteSubscription();
-}
-
-template <>
-void deleteSubscription<Client>(Client& client, uint32_t subscriptionId) {
+void deleteSubscription(Client& client, uint32_t subscriptionId) {
     const auto status = UA_Client_Subscriptions_deleteSingle(client.handle(), subscriptionId);
     detail::throwOnBadStatus(status);
 }

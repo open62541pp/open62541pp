@@ -19,18 +19,6 @@ public:
         bool deleted = false;
     };
 
-    void addSubscription(services::DeleteSubscriptionCallback deleteCallback) {
-        deleteSubscriptionCallback_ = std::move(deleteCallback);
-    }
-
-    void deleteSubscription() {
-        // TODO: delete all monitored items -> call delete callback and remove from container
-        if (deleteSubscriptionCallback_) {
-            deleteSubscriptionCallback_(0U);
-            deleteSubscriptionCallback_ = nullptr;
-        }
-    }
-
     void addMonitoredItem(std::unique_ptr<MonitoredItem>&& monitoredItem) {
         cleanDeleted();
         monitoredItems_.push_back(std::move(monitoredItem));
@@ -45,7 +33,6 @@ private:
         removeIf(monitoredItems_, hasDeletedFlag);
     }
 
-    services::DeleteSubscriptionCallback deleteSubscriptionCallback_;
     std::vector<std::unique_ptr<MonitoredItem>> monitoredItems_;
 };
 

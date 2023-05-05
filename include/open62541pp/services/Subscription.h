@@ -5,6 +5,11 @@
 
 #include "open62541pp/Common.h"
 
+// forward declarations
+namespace opcua {
+class Client;
+}  // namespace opcua
+
 namespace opcua::services {
 
 /**
@@ -15,16 +20,6 @@ namespace opcua::services {
  * back notifications. MonitoredItems are used to generate notifications. Every MonitoredItem is
  * attached to exactly one Subscription. And a Subscription can contain many MonitoredItems.
  *
- * @note
- * The subscription mechanism does not exist within a server. Instead, MonitoredItems can be
- * registered locally. Because the API is symmetric for both clients and servers, the subscription
- * mechanism for servers is simulated. Please refer to the function documentation for details:
- * - @ref createSubscription
- * - @ref modifySubscription
- * - @ref setPublishingMode
- * - @ref deleteSubscription
- *
- * @see https://github.com/open62541/open62541/blob/v1.3.5/include/open62541/server.h#L1049-L1100
  * @see MonitoredItem
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13
  * @ingroup Services
@@ -59,20 +54,17 @@ using DeleteSubscriptionCallback = std::function<void(uint32_t subId)>;
 
 /**
  * Create a subscription.
- *
- * @note Simulated subscription mechanism with Server: Always returns `0`.
- *
  * @copydetails SubscriptionParameters
- * @param serverOrClient Instance of type Server or Client
+ *
+ * @param client Instance of type Client
  * @param parameters Subscription parameters, may be revised by server
  * @param publishingEnabled Enable/disable publishing for the subscription
  * @param deleteCallback Invoked when the subscription is deleted
  * @returns Server-assigned identifier for the subscription
  * @ingroup Subscription
  */
-template <typename T>
 [[nodiscard]] uint32_t createSubscription(
-    T& serverOrClient,
+    Client& client,
     SubscriptionParameters& parameters,
     bool publishingEnabled = true,
     DeleteSubscriptionCallback deleteCallback = {}
@@ -80,45 +72,36 @@ template <typename T>
 
 /**
  * Modify a subscription.
- *
- * @note Simulated subscription mechanism with Server: Does nothing.
- *
  * @copydetails SubscriptionParameters
- * @param serverOrClient Instance of type Server or Client
+ *
+ * @param client Instance of type Client
  * @param subscriptionId Identifier for the subscription returned by @ref createSubscription
  * @param parameters Subscription parameters, may be revised by server
  * @ingroup Subscription
  */
-template <typename T>
 void modifySubscription(
-    T& serverOrClient, uint32_t subscriptionId, SubscriptionParameters& parameters
+    Client& client, uint32_t subscriptionId, SubscriptionParameters& parameters
 );
 
 /**
  * Enable/disable publishing of NotificationMessages for the subscription.
- *
- * @note Simulated subscription mechanism with Server: Does nothing.
- *
  * Disable publishing of NotificationMessages for the subscription doesn't discontinue the sending
  * of keep-alive messages, nor change the monitoring mode.
- * @param serverOrClient Instance of type Server or Client
+ *
+ * @param client Instance of type Client
  * @param subscriptionId Identifier for the subscription returned by @ref createSubscription
  * @param publishing Enable/disable publishing
  * @ingroup Subscription
  */
-template <typename T>
-void setPublishingMode(T& serverOrClient, uint32_t subscriptionId, bool publishing);
+void setPublishingMode(Client& client, uint32_t subscriptionId, bool publishing);
 
 /**
  * Delete a subscription.
  *
- * @note Simulated subscription mechanism with Server: Delete all local monitored items.
- *
- * @param serverOrClient Instance of type Server or Client
+ * @param client Instance of type Client
  * @param subscriptionId Identifier for the subscription returned by @ref createSubscription
  * @ingroup Subscription
  */
-template <typename T>
-void deleteSubscription(T& serverOrClient, uint32_t subscriptionId);
+void deleteSubscription(Client& client, uint32_t subscriptionId);
 
 }  // namespace opcua::services
