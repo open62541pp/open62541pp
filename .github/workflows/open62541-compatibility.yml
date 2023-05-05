@@ -37,6 +37,8 @@ jobs:
           cmake \
             -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
             -DBUILD_SHARED_LIBS=${{ matrix.library_type == 'shared' }} \
+            -DUA_ENABLE_SUBSCRIPTIONS=ON \
+            -DUA_ENABLE_SUBSCRIPTIONS_EVENTS=ON \
             ..
           cmake --build .
           sudo cmake --install .
