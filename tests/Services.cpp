@@ -5,14 +5,15 @@
 #include <variant>
 #include <vector>
 
-#include "open62541/client.h"
 #include <doctest/doctest.h>
+#include <open62541/client.h>
 
 #include "open62541pp/Client.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/services/services.h"
 
 #include "helper/Runner.h"
+#include "version.h"
 
 using namespace opcua;
 using namespace std::literals::chrono_literals;
@@ -559,6 +560,7 @@ TEST_CASE("MonitoredItem (client)") {
         CHECK_NOTHROW(services::setMonitoringMode(client, subId, monId, MonitoringMode::Disabled));
     }
 
+#if UAPP_OPEN62541_VER_GE(1, 2)
     SUBCASE("setTriggering") {
         // use current server time as triggering item and let it trigger the variable node
         size_t notificationCountTriggering = 0;
@@ -598,6 +600,7 @@ TEST_CASE("MonitoredItem (client)") {
         UA_Client_run_iterate(client.handle(), 1000);
         CHECK(notificationCount > 0);
     }
+#endif
 
     SUBCASE("deleteMonitoredItem") {
         CHECK_THROWS_WITH(

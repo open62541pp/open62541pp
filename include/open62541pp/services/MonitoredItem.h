@@ -190,6 +190,7 @@ void setMonitoringMode(
  * Add and delete triggering links for a monitored item.
  * The triggering item and the items to report shall belong to the same subscription.
  *
+ * @note Supported since open62541 v1.2
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.1.6
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.5
  *
