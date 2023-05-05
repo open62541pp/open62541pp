@@ -6,13 +6,13 @@
 #include <vector>
 
 #include <doctest/doctest.h>
-#include <open62541/client.h>
 
 #include "open62541pp/Client.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/services/services.h"
 
 #include "helper/Runner.h"
+#include "open62541_impl.h"
 #include "version.h"
 
 using namespace opcua;
@@ -626,7 +626,6 @@ TEST_CASE("MonitoredItem (client)") {
 
 TEST_CASE("MonitoredItem (server)") {
     Server server;
-    ServerRunner serverRunner(server);
 
     services::MonitoringParameters monitoringParameters{};
 
@@ -641,6 +640,7 @@ TEST_CASE("MonitoredItem (server)") {
         );
         CAPTURE(monId);
         std::this_thread::sleep_for(100ms);
+        server.runIterate();
         CHECK(notificationCount > 0);
     }
 
