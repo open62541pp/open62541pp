@@ -13,17 +13,15 @@
 
 namespace opcua::services {
 
-static void deleteSubscriptionCallback(
-    [[maybe_unused]] UA_Client* client, uint32_t subId, void* subContext
-) {
-    if (subContext == nullptr) {
-        return;
+static void deleteSubscriptionCallback(UA_Client* client, uint32_t subId, void* subContext) {
+    if (subContext != nullptr) {
+        auto* subscription = static_cast<ClientContext::Subscription*>(subContext);
+        if (subscription->deleteCallback) {
+            subscription->deleteCallback(subId);
+        }
     }
-    auto* subscription = static_cast<ClientContext::Subscription*>(subContext);
-    if (subscription->deleteCallback) {
-        subscription->deleteCallback(subId);
-    }
-    subscription->deleted = true;
+    ClientContext& clientContext = getContext(client);
+    clientContext.subscriptions.erase(subId);
 }
 
 uint32_t createSubscription(
@@ -54,14 +52,17 @@ uint32_t createSubscription(
     );
     detail::throwOnBadStatus(response->responseHeader.serviceResult);
 
-    client.getContext().addSubscription(std::move(subscriptionContext));
-
     // update revised parameters
     parameters.publishingInterval = response->revisedPublishingInterval;
     parameters.lifetimeCount = response->revisedLifetimeCount;
     parameters.maxKeepAliveCount = response->revisedMaxKeepAliveCount;
 
-    return response->subscriptionId;
+    const auto subscriptionId = response->subscriptionId;
+    client.getContext().subscriptions.insert_or_assign(
+        subscriptionId, std::move(subscriptionContext)
+    );
+
+    return subscriptionId;
 }
 
 void modifySubscription(

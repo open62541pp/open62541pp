@@ -30,11 +30,13 @@ class Client::Connection {
 public:
     Connection()
         : client_(UA_Client_new()),
-          logger_(getConfig(client_)->logger) {}
+          logger_(getConfig(client_)->logger) {
+        setContext(client_, context_);
+    }
 
     ~Connection() {
-        UA_Client_disconnect(client_);
-        UA_Client_delete(client_);
+        UA_Client_disconnect(handle());
+        UA_Client_delete(handle());
     }
 
     // prevent copy & move
@@ -67,6 +69,7 @@ Client::Client()
     : connection_(std::make_shared<Connection>()) {
     const auto status = UA_ClientConfig_setDefault(getConfig(this));
     detail::throwOnBadStatus(status);
+    setContext(handle(), getContext());  // overwritten by UA_ClientConfig_setDefault
 }
 
 void Client::setLogger(Logger logger) {

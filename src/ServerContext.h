@@ -1,10 +1,12 @@
 #pragma once
 
+#include <cassert>
+#include <map>
 #include <memory>
-#include <utility>  // move
-#include <vector>
 
 #include "open62541pp/services/Subscription.h"
+
+#include "open62541_impl.h"
 
 namespace opcua {
 
@@ -16,24 +18,23 @@ class ServerContext {
 public:
     struct MonitoredItem {
         services::DataChangeNotificationCallback dataChangeCallback;
-        bool deleted = false;
     };
 
-    void addMonitoredItem(std::unique_ptr<MonitoredItem>&& monitoredItem) {
-        cleanDeleted();
-        monitoredItems_.push_back(std::move(monitoredItem));
-    }
-
-private:
-    void cleanDeleted() {
-        const auto hasDeletedFlag = [](auto&& e) { return e->deleted; };
-        const auto removeIf = [](auto& c, auto pred) {
-            c.erase(std::remove_if(c.begin(), c.end(), pred), c.end());
-        };
-        removeIf(monitoredItems_, hasDeletedFlag);
-    }
-
-    std::vector<std::unique_ptr<MonitoredItem>> monitoredItems_;
+    std::map<uint32_t, std::unique_ptr<MonitoredItem>> monitoredItems;
 };
+
+/* ---------------------------------------------------------------------------------------------- */
+
+inline void setContext(UA_Server* server, ServerContext& context) {
+    assert(server != nullptr);  // NOLINT
+    UA_Server_getConfig(server)->context = &context;
+}
+
+inline ServerContext& getContext(UA_Server* server) {
+    assert(server != nullptr);  // NOLINT
+    void* context = UA_Server_getConfig(server)->context;
+    assert(context != nullptr);  // NOLINT
+    return *static_cast<ServerContext*>(context);
+}
 
 }  // namespace opcua

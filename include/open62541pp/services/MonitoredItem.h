@@ -25,6 +25,9 @@ namespace opcua::services {
  * back notifications. MonitoredItems are used to generate notifications. Every MonitoredItem is
  * attached to exactly one Subscription. And a Subscription can contain many MonitoredItems.
  *
+ * MonitoredItems can also be registered locally (server-side). Notifications are then forwarded
+ * to a user-defined callback instead of a remote client.
+ *
  * @see Subscription
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12
  * @ingroup Services
@@ -41,7 +44,9 @@ struct MonitoringParameters {
     /// Timestamps to be transmitted. Won't be revised by the server.
     TimestampsToReturn timestamps = TimestampsToReturn::Both;
     /// Interval in milliseconds that defines the fastest rate at which the MonitoredItem should be
-    /// accessed and evaluated.
+    /// accessed and evaluated. The following values have special meaning:
+    /// - `0.0` to use the fastest practical rate
+    /// - `-1.0` to use the default sampling interval (publishing interval of the subscription)
     double samplingInterval = 250.0;
     /// Size of the MonitoringItem queue.
     /// The following values have special meaning:
@@ -66,7 +71,7 @@ using DeleteMonitoredItemCallback = std::function<void(uint32_t subId, uint32_t 
 
 /**
  * Data change notification callback.
- * @param subId Subscription identifier
+ * @param subId Subscription identifier (`0U` for local (server-side) monitored item)
  * @param monId MonitoredItem identifier
  * @param value Changed value
  * @ingroup MonitoredItem
@@ -76,10 +81,10 @@ using DataChangeNotificationCallback =
 
 /**
  * Event notification callback.
- * @param subId Subscription identifier
+ * @param subId Subscription identifier (`0U` for local (server-side) monitored item)
  * @param monId MonitoredItem identifier
  * @param value Changed value
- * @ingroup MonitoredItem
+ * @ingroup MonitoredIte
  */
 using EventNotificationCallback =
     std::function<void(uint32_t subId, uint32_t monId, const std::vector<Variant>& eventFields)>;

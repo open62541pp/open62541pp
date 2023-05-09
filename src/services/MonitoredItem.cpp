@@ -75,14 +75,14 @@ static void deleteMonitoredItemCallback(
     uint32_t monId,
     void* monContext
 ) {
-    if (monContext == nullptr) {
-        return;
+    if (monContext != nullptr) {
+        auto* monitoredItem = static_cast<ClientContext::MonitoredItem*>(monContext);
+        if (monitoredItem->deleteCallback) {
+            monitoredItem->deleteCallback(subId, monId);
+        }
     }
-    auto* monitoredItem = static_cast<ClientContext::MonitoredItem*>(monContext);
-    if (monitoredItem->deleteCallback) {
-        monitoredItem->deleteCallback(subId, monId);
-    }
-    monitoredItem->deleted = true;
+    ClientContext& clientContext = getContext(client);
+    clientContext.monitoredItems.erase({subId, monId});
 }
 
 uint32_t createMonitoredItemDataChange(
@@ -117,13 +117,16 @@ uint32_t createMonitoredItemDataChange(
     );
     detail::throwOnBadStatus(result->statusCode);
 
-    client.getContext().addMonitoredItem(std::move(monitoredItemContext));
-
     // update revised parameters
     parameters.samplingInterval = result->revisedSamplingInterval;
     parameters.queueSize = result->revisedQueueSize;
 
-    return result->monitoredItemId;
+    const auto monitoredItemId = result->monitoredItemId;
+    client.getContext().monitoredItems.insert_or_assign(
+        {subscriptionId, monitoredItemId}, std::move(monitoredItemContext)
+    );
+
+    return monitoredItemId;
 }
 
 uint32_t createMonitoredItemDataChange(
@@ -153,13 +156,16 @@ uint32_t createMonitoredItemDataChange(
     );
     detail::throwOnBadStatus(result->statusCode);
 
-    server.getContext().addMonitoredItem(std::move(monitoredItemContext));
-
     // update revised parameters
     parameters.samplingInterval = result->revisedSamplingInterval;
     parameters.queueSize = result->revisedQueueSize;
 
-    return result->monitoredItemId;
+    const auto monitoredItemId = result->monitoredItemId;
+    server.getContext().monitoredItems.insert_or_assign(
+        monitoredItemId, std::move(monitoredItemContext)
+    );
+
+    return monitoredItemId;
 }
 
 uint32_t createMonitoredItemEvent(
@@ -201,13 +207,16 @@ uint32_t createMonitoredItemEvent(
     );
     detail::throwOnBadStatus(result->statusCode);
 
-    client.getContext().addMonitoredItem(std::move(monitoredItemContext));
-
     // update revised parameters
     parameters.samplingInterval = result->revisedSamplingInterval;
     parameters.queueSize = result->revisedQueueSize;
 
-    return result->monitoredItemId;
+    const auto monitoredItemId = result->monitoredItemId;
+    client.getContext().monitoredItems.insert_or_assign(
+        {subscriptionId, monitoredItemId}, std::move(monitoredItemContext)
+    );
+
+    return monitoredItemId;
 }
 
 void modifyMonitoredItem(
@@ -297,6 +306,7 @@ void deleteMonitoredItem(Client& client, uint32_t subscriptionId, uint32_t monit
 void deleteMonitoredItem(Server& server, uint32_t monitoredItemId) {
     const auto status = UA_Server_deleteMonitoredItem(server.handle(), monitoredItemId);
     detail::throwOnBadStatus(status);
+    server.getContext().monitoredItems.erase(monitoredItemId);
 }
 
 }  // namespace opcua::services

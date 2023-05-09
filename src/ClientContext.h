@@ -1,11 +1,14 @@
 #pragma once
 
-#include <algorithm>  // remove_if
+#include <cassert>
+#include <map>
 #include <memory>
-#include <vector>
+#include <utility>  // pair
 
 #include "open62541pp/services/MonitoredItem.h"
 #include "open62541pp/services/Subscription.h"
+
+#include "open62541_impl.h"
 
 namespace opcua {
 
@@ -17,38 +20,34 @@ class ClientContext {
 public:
     struct Subscription {
         services::DeleteSubscriptionCallback deleteCallback;
-        bool deleted = false;
     };
 
     struct MonitoredItem {
         services::DataChangeNotificationCallback dataChangeCallback;
         services::EventNotificationCallback eventCallback;
         services::DeleteMonitoredItemCallback deleteCallback;
-        bool deleted = false;
     };
 
-    void addSubscription(std::unique_ptr<Subscription>&& subscription) {
-        cleanDeleted();
-        subscriptions_.push_back(std::move(subscription));
-    }
+    using SubId = uint32_t;
+    using MonId = uint32_t;
+    using SubMonId = std::pair<uint32_t, uint32_t>;
 
-    void addMonitoredItem(std::unique_ptr<MonitoredItem>&& monitoredItem) {
-        cleanDeleted();
-        monitoredItems_.push_back(std::move(monitoredItem));
-    }
-
-private:
-    void cleanDeleted() {
-        const auto hasDeletedFlag = [](auto&& e) { return e->deleted; };
-        const auto removeIf = [](auto& c, auto pred) {
-            c.erase(std::remove_if(c.begin(), c.end(), pred), c.end());
-        };
-        removeIf(subscriptions_, hasDeletedFlag);
-        removeIf(monitoredItems_, hasDeletedFlag);
-    }
-
-    std::vector<std::unique_ptr<Subscription>> subscriptions_;
-    std::vector<std::unique_ptr<MonitoredItem>> monitoredItems_;
+    std::map<SubId, std::unique_ptr<Subscription>> subscriptions;
+    std::map<SubMonId, std::unique_ptr<MonitoredItem>> monitoredItems;
 };
+
+/* ---------------------------------------------------------------------------------------------- */
+
+inline void setContext(UA_Client* client, ClientContext& context) {
+    assert(client != nullptr);  // NOLINT
+    UA_Client_getConfig(client)->clientContext = &context;
+}
+
+inline ClientContext& getContext(UA_Client* client) {
+    assert(client != nullptr);  // NOLINT
+    void* context = UA_Client_getConfig(client)->clientContext;
+    assert(context != nullptr);  // NOLINT
+    return *static_cast<ClientContext*>(context);
+}
 
 }  // namespace opcua
