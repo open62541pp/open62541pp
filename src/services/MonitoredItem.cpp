@@ -102,6 +102,7 @@ uint32_t createMonitoredItemDataChange(
     request.requestedParameters.discardOldest = parameters.discardOldest;
 
     auto monitoredItemContext = std::make_unique<ClientContext::MonitoredItem>();
+    monitoredItemContext->itemToMonitor = itemToMonitor;
     monitoredItemContext->dataChangeCallback = std::move(dataChangeCallback);
     monitoredItemContext->deleteCallback = std::move(deleteCallback);
 
@@ -144,6 +145,7 @@ uint32_t createMonitoredItemDataChange(
     request.requestedParameters.discardOldest = parameters.discardOldest;
 
     auto monitoredItemContext = std::make_unique<ServerContext::MonitoredItem>();
+    monitoredItemContext->itemToMonitor = itemToMonitor;
     monitoredItemContext->dataChangeCallback = std::move(dataChangeCallback);
 
     using Result = TypeWrapper<UA_MonitoredItemCreateResult, UA_TYPES_MONITOREDITEMCREATERESULT>;
@@ -192,6 +194,7 @@ uint32_t createMonitoredItemEvent(
     request.requestedParameters.filter.content.decoded.type = &UA_TYPES[UA_TYPES_EVENTFILTER];
 
     auto monitoredItemContext = std::make_unique<ClientContext::MonitoredItem>();
+    monitoredItemContext->itemToMonitor = itemToMonitor;
     monitoredItemContext->eventCallback = std::move(eventCallback);
     monitoredItemContext->deleteCallback = std::move(deleteCallback);
 

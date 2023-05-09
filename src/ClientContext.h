@@ -7,6 +7,7 @@
 
 #include "open62541pp/services/MonitoredItem.h"
 #include "open62541pp/services/Subscription.h"
+#include "open62541pp/types/Composed.h"
 
 #include "open62541_impl.h"
 
@@ -23,6 +24,7 @@ public:
     };
 
     struct MonitoredItem {
+        ReadValueId itemToMonitor;
         services::DataChangeNotificationCallback dataChangeCallback;
         services::EventNotificationCallback eventCallback;
         services::DeleteMonitoredItemCallback deleteCallback;

@@ -5,8 +5,7 @@
 #include <memory>
 
 #include "open62541pp/services/Subscription.h"
-
-#include "open62541_impl.h"
+#include "open62541pp/types/Composed.h"
 
 namespace opcua {
 
@@ -17,6 +16,7 @@ namespace opcua {
 class ServerContext {
 public:
     struct MonitoredItem {
+        ReadValueId itemToMonitor;
         services::DataChangeNotificationCallback dataChangeCallback;
     };
 
