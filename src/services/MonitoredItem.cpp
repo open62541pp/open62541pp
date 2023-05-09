@@ -26,7 +26,7 @@ static void dataChangeNotificationCallback(
     if (monitoredItemContext == nullptr) {
         return;
     }
-    auto* monitoredItem = static_cast<ClientContext::MonitoredItem*>(monitoredItemContext);
+    auto* monitoredItem = static_cast<ServerContext::MonitoredItem*>(monitoredItemContext);
     if (monitoredItem->dataChangeCallback) {
         monitoredItem->dataChangeCallback(0U, monitoredItemId, asWrapper<DataValue>(*value));
     }
