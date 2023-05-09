@@ -23,18 +23,4 @@ public:
     std::map<uint32_t, std::unique_ptr<MonitoredItem>> monitoredItems;
 };
 
-/* ---------------------------------------------------------------------------------------------- */
-
-inline void setContext(UA_Server* server, ServerContext& context) {
-    assert(server != nullptr);  // NOLINT
-    UA_Server_getConfig(server)->context = &context;
-}
-
-inline ServerContext& getContext(UA_Server* server) {
-    assert(server != nullptr);  // NOLINT
-    void* context = UA_Server_getConfig(server)->context;
-    assert(context != nullptr);  // NOLINT
-    return *static_cast<ServerContext*>(context);
-}
-
 }  // namespace opcua

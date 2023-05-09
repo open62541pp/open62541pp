@@ -34,9 +34,7 @@ class Server::Connection {
 public:
     Connection()
         : server_(UA_Server_new()),
-          logger_(getConfig(server_)->logger) {
-        setContext(server_, context_);
-    }
+          logger_(getConfig(server_)->logger) {}
 
     ~Connection() {
         // don't use stop method here because it might throw an exception
