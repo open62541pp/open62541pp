@@ -10,6 +10,12 @@
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 #endif
 
+#if __has_include(<open62541.h>)
+// UA_ENABLE_AMALGAMATION=ON
+#include <open62541.h>
+#else
+
+// UA_ENABLE_AMALGAMATION=OFF
 // common
 #include <open62541/config.h>
 #include <open62541/plugin/accesscontrol_default.h>
@@ -30,6 +36,8 @@
 #include <open62541/server_config.h>
 #endif
 #include <open62541/server_config_default.h>
+
+#endif
 
 #ifndef _MSC_VER
 #pragma GCC diagnostic pop
