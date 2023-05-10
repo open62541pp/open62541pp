@@ -58,9 +58,9 @@ using DeleteSubscriptionCallback = std::function<void(uint32_t subId)>;
  *
  * @param client Instance of type Client
  * @param parameters Subscription parameters, may be revised by server
- * @param publishingEnabled Enable/disable publishing for the subscription
+ * @param publishingEnabled Enable/disable publishing of the subscription
  * @param deleteCallback Invoked when the subscription is deleted
- * @returns Server-assigned identifier for the subscription
+ * @returns Server-assigned identifier of the subscription
  * @ingroup Subscription
  */
 [[nodiscard]] uint32_t createSubscription(
@@ -75,7 +75,7 @@ using DeleteSubscriptionCallback = std::function<void(uint32_t subId)>;
  * @copydetails SubscriptionParameters
  *
  * @param client Instance of type Client
- * @param subscriptionId Identifier for the subscription returned by @ref createSubscription
+ * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @param parameters Subscription parameters, may be revised by server
  * @ingroup Subscription
  */
@@ -84,12 +84,12 @@ void modifySubscription(
 );
 
 /**
- * Enable/disable publishing of NotificationMessages for the subscription.
- * Disable publishing of NotificationMessages for the subscription doesn't discontinue the sending
+ * Enable/disable publishing of notification messages.
+ * Disable publishing of NotificationMessages of the subscription doesn't discontinue the sending
  * of keep-alive messages, nor change the monitoring mode.
  *
  * @param client Instance of type Client
- * @param subscriptionId Identifier for the subscription returned by @ref createSubscription
+ * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @param publishing Enable/disable publishing
  * @ingroup Subscription
  */
@@ -99,7 +99,7 @@ void setPublishingMode(Client& client, uint32_t subscriptionId, bool publishing)
  * Delete a subscription.
  *
  * @param client Instance of type Client
- * @param subscriptionId Identifier for the subscription returned by @ref createSubscription
+ * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @ingroup Subscription
  */
 void deleteSubscription(Client& client, uint32_t subscriptionId);
