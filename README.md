@@ -35,7 +35,7 @@
 - Native open62541 objects can be accessed using the `handle()` method of the wrapping classes
 - [Extensible type conversion system](#-type-conversion) to convert arbitrary types to/from native `UA_*` types
 - Cross-platform (tested on Windows, Linux and MacOS)
-- Compatible with all stable open62541 versions (> v1.0)
+- Compatible with all stable open62541 versions ≥ v1.0
 - [Easy installation and integration with CMake](#-getting-started)
 - Use modern C++ (C++ 17) and best practices
 - Less hurdle to get started with OPC UA
