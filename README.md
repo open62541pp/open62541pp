@@ -1,32 +1,46 @@
-# open62541++
+<!-- links to documentation -->
+[doc-server]: https://open62541pp.github.io/open62541pp/classopcua_1_1Server.html
+[doc-client]: https://open62541pp.github.io/open62541pp/classopcua_1_1Client.html
+[doc-node]: https://open62541pp.github.io/open62541pp/classopcua_1_1Node.html
+[doc-typewrapper]: https://open62541pp.github.io/open62541pp/group__TypeWrapper.html
 
-[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-blue.svg)](https://github.com/open62541pp/open62541pp/blob/master/LICENSE)
-[![CI](https://github.com/open62541pp/open62541pp/actions/workflows/ci.yml/badge.svg)](https://github.com/open62541pp/open62541pp/actions/workflows/ci.yml)
-[![Compatibility](https://github.com/open62541pp/open62541pp/actions/workflows/open62541-compatibility.yml/badge.svg)](https://github.com/open62541pp/open62541pp/actions/workflows/open62541-compatibility.yml)
-[![Package](https://github.com/open62541pp/open62541pp/actions/workflows/package.yml/badge.svg)](https://github.com/open62541pp/open62541pp/actions/workflows/package.yml)
-[![Documentation](https://github.com/open62541pp/open62541pp/actions/workflows/doc.yml/badge.svg)](https://github.com/open62541pp/open62541pp/actions/workflows/doc.yml)
-[![Coverage](https://codecov.io/gh/open62541pp/open62541pp/branch/master/graph/badge.svg?token=P87N1WRXC4)](https://codecov.io/gh/open62541pp/open62541pp)
+<div align="center">
+  <h1>open62541++</h1>
 
-**[Documentation](https://open62541pp.github.io/open62541pp) · [Examples](https://github.com/open62541pp/open62541pp/tree/master/examples)**
+  [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-blue.svg)](https://github.com/open62541pp/open62541pp/blob/master/LICENSE)
+  [![CI](https://github.com/open62541pp/open62541pp/actions/workflows/ci.yml/badge.svg)](https://github.com/open62541pp/open62541pp/actions/workflows/ci.yml)
+  [![Compatibility](https://github.com/open62541pp/open62541pp/actions/workflows/open62541-compatibility.yml/badge.svg)](https://github.com/open62541pp/open62541pp/actions/workflows/open62541-compatibility.yml)
+  [![Package](https://github.com/open62541pp/open62541pp/actions/workflows/package.yml/badge.svg)](https://github.com/open62541pp/open62541pp/actions/workflows/package.yml)
+  [![Documentation](https://github.com/open62541pp/open62541pp/actions/workflows/doc.yml/badge.svg)](https://github.com/open62541pp/open62541pp/actions/workflows/doc.yml)
+  [![Coverage](https://codecov.io/gh/open62541pp/open62541pp/branch/master/graph/badge.svg?token=P87N1WRXC4)](https://codecov.io/gh/open62541pp/open62541pp)
 
-open62541++ is a C++ wrapper built on top of the amazing [open62541](https://open62541.org) OPC UA (OPC Unified Architecture) library.
+  <h3>C++ wrapper of the amazing <a href="https://open62541.org">open62541</a> OPC UA library.</h3>
 
-Features and goals:
+  <p>
+    <b>
+      <a href="https://open62541pp.github.io/open62541pp">Documentation</a>
+      •
+      <a href="https://github.com/open62541pp/open62541pp/tree/master/examples">Examples</a>
+    </b>
+  </p>
+</div>
 
-- High-level and easy to use classes similar to the [python-opcua API](https://python-opcua.readthedocs.io):
-  - `opcua::Server`
-  - `opcua::Client`
-  - `opcua::Node`
-- Safe wrapper classes for open62541 `UA_*` types to prevent memory leaks
+## 🎯 Features and goals
+
+- High-level and easy to use classes similar to the [Python opcua/asyncua API](https://python-opcua.readthedocs.io):
+  - [`opcua::Server`][doc-server]
+  - [`opcua::Client`][doc-client]
+  - [`opcua::Node`][doc-node]
+- [Safe wrapper classes][doc-typewrapper] for open62541 `UA_*` types to prevent memory leaks
 - Native open62541 objects can be accessed using the `handle()` method of the wrapping classes
-- Extensible type conversion system to convert arbitrary types to/from native `UA_*` types
+- [Extensible type conversion system](#-type-conversion) to convert arbitrary types to/from native `UA_*` types
 - Cross-platform (tested on Windows, Linux and MacOS)
 - Compatible with all stable open62541 versions (> v1.0)
-- Easy installation and integration with CMake
+- [Easy installation and integration with CMake](#-getting-started)
 - Use modern C++ (C++ 17) and best practices
 - Less hurdle to get started with OPC UA
 
-## Examples
+## ✍ Examples
 
 ### Server
 
@@ -83,7 +97,7 @@ int main() {
 ```
 <!-- [[[end]]] -->
 
-## Type conversion
+## ⇆ Type conversion
 
 Type conversion from and to native `UA_*` types are handled by the `opcua::TypeConverter` struct.
 
@@ -159,7 +173,7 @@ struct TypeConverter<std::string> {
 | Variant                  | `UA_Variant`         |             | `opcua::Variant`                  |                           |
 | DiagnosticInfo           | `UA_DiagnosticInfo`  |             | `opcua::DiagnosticInfo`           |                           |
 
-## Getting started
+## 🚀 Getting started
 
 The library can be built, integrated and installed using [CMake](https://cmake.org/runningcmake/).
 
