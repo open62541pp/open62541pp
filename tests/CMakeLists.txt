@@ -9,6 +9,7 @@ add_executable(
     overloads.cpp
     Server.cpp
     Services.cpp
+    Subscription_MonitoredItem.cpp
     TypeConverter.cpp
     Types.cpp
     TypeWrapper.cpp

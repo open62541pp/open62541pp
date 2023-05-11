@@ -32,7 +32,7 @@ namespace opcua {
 template <typename ServerOrClient>
 class Node {
 public:
-    /// Create Node object.
+    /// Create a Node object.
     /// @exception BadStatus (BadNodeIdUnknown) If `checkExists` enabled and `id` not found
     Node(ServerOrClient connection, NodeId id, bool checkExists = true)
         : connection_(std::move(connection)),
@@ -42,17 +42,17 @@ public:
         }
     }
 
-    /// Get server/client instance.
+    /// Get the server/client instance.
     ServerOrClient& getConnection() noexcept {
         return connection_;
     }
 
-    /// Get server/client instance.
+    /// Get the server/client instance.
     const ServerOrClient& getConnection() const noexcept {
         return connection_;
     }
 
-    /// Get node id.
+    /// Get the node id.
     const NodeId& getNodeId() const noexcept {
         return nodeId_;
     }

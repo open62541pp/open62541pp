@@ -238,6 +238,14 @@ uint16_t Server::registerNamespace(std::string_view uri) {
     return UA_Server_addNamespace(handle(), std::string(uri).c_str());
 }
 
+Subscription<Server> Server::createSubscription() noexcept {
+    return Subscription<Server>(*this);
+}
+
+Subscription<Server> Server::getSubscription() noexcept {
+    return Subscription<Server>(*this);
+}
+
 uint16_t Server::runIterate() {
     return connection_->runIterate();
 }

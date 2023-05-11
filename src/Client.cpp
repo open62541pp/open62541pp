@@ -6,6 +6,7 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Node.h"
 #include "open62541pp/TypeConverter.h"
+#include "open62541pp/services/Subscription.h"
 
 #include "ClientContext.h"
 #include "CustomLogger.h"
@@ -135,6 +136,26 @@ std::vector<std::string> Client::getNamespaceArray() {
     Variant variant;
     services::readValue(*this, {0, UA_NS0ID_SERVER_NAMESPACEARRAY}, variant);
     return variant.getArrayCopy<std::string>();
+}
+
+Subscription<Client> Client::createSubscription() {
+    SubscriptionParameters parameters{};
+    return createSubscription(parameters);
+}
+
+Subscription<Client> Client::createSubscription(SubscriptionParameters& parameters) {
+    const uint32_t subscriptionId = services::createSubscription(*this, parameters, true);
+    return {*this, subscriptionId};
+}
+
+std::vector<Subscription<Client>> Client::getSubscriptions() {
+    const auto& subscriptions = getContext().subscriptions;
+    std::vector<Subscription<Client>> result;
+    result.reserve(subscriptions.size());
+    for (const auto& [subId, _] : subscriptions) {
+        result.emplace_back(*this, subId);
+    }
+    return result;
 }
 
 Node<Client> Client::getNode(const NodeId& id) {

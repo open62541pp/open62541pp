@@ -7,6 +7,7 @@
 
 #include "open62541pp/Auth.h"
 #include "open62541pp/Logger.h"
+#include "open62541pp/Subscription.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/NodeId.h"
@@ -67,6 +68,13 @@ public:
 
     /// Get all defined namespaces.
     std::vector<std::string> getNamespaceArray();
+
+    /// Create a subscription to monitor data changes and events (default subscription parameters).
+    Subscription<Client> createSubscription();
+    /// Create a subscription to monitor data changes and events.
+    Subscription<Client> createSubscription(SubscriptionParameters& parameters);
+    /// Get all active subscriptions
+    std::vector<Subscription<Client>> getSubscriptions();
 
     Node<Client> getNode(const NodeId& id);
     Node<Client> getRootNode();
