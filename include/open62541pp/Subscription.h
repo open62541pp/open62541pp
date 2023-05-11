@@ -50,6 +50,8 @@ using EventCallback =
 template <typename ServerOrClient>
 class Subscription {
 public:
+    /// Wrap an existing subscription.
+    /// The `subscriptionId` is ignored and set to `0U` for servers.
     Subscription(ServerOrClient& connection, uint32_t subscriptionId) noexcept;
 
     /// Get the server/client instance.

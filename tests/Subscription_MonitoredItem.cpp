@@ -20,7 +20,6 @@ TEST_CASE("Subscription & MonitoredItem (server)") {
     Server server;
 
     auto sub = server.createSubscription();
-    CHECK(sub == server.getSubscription());
 
     CHECK(sub.getConnection() == server);
     CHECK(sub.getMonitoredItems().empty());

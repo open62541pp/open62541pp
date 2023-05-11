@@ -242,10 +242,6 @@ Subscription<Server> Server::createSubscription() noexcept {
     return {*this, 0U};
 }
 
-Subscription<Server> Server::getSubscription() noexcept {
-    return {*this, 0U};
-}
-
 uint16_t Server::runIterate() {
     return connection_->runIterate();
 }

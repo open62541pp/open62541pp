@@ -57,8 +57,6 @@ public:
 
     /// Create a (pseudo) subscription to monitor local data changes and events.
     Subscription<Server> createSubscription() noexcept;
-    /// Get subscription object to monitor local data changes and events.
-    Subscription<Server> getSubscription() noexcept;
 
     /// Run single iteration of the server's main loop.
     /// @returns Maximum wait period until next Server::runIterate call (in ms)

@@ -53,7 +53,7 @@ std::vector<MonitoredItem<Server>> Subscription<Server>::getMonitoredItems() {
     std::vector<MonitoredItem<Server>> result;
     result.reserve(monitoredItems.size());
     for (const auto& [monId, _] : monitoredItems) {
-        result.emplace_back(connection_, monId);
+        result.emplace_back(connection_, 0U, monId);
     }
     return result;
 }
@@ -85,11 +85,11 @@ MonitoredItem<Server> Subscription<Server>::subscribeDataChange(
                 initialized = true;
             }
 
-            static const MonitoredItem<Server> monitoredItem(connection_, monId);
+            static const MonitoredItem<Server> monitoredItem(connection_, 0U, monId);
             callback(monitoredItem, value);
         }
     );
-    return {connection_, monitoredItemId};
+    return {connection_, 0U, monitoredItemId};
 }
 
 /* ----------------------------------- Client specializations ----------------------------------- */
