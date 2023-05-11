@@ -18,7 +18,7 @@
 using namespace opcua;
 using namespace std::literals::chrono_literals;
 
-TEST_CASE("NodeManagement (server)") {
+TEST_CASE("NodeManagement service set (server)") {
     Server server;
     const NodeId objectsId{0, UA_NS0ID_OBJECTSFOLDER};
 
@@ -60,7 +60,7 @@ TEST_CASE("NodeManagement (server)") {
     }
 }
 
-TEST_CASE("NodeManagement (client)") {
+TEST_CASE("NodeManagement service set (client)") {
     Server server;
     ServerRunner serverRunner(server);
     Client client;
@@ -111,7 +111,7 @@ TEST_CASE("NodeManagement (client)") {
     }
 }
 
-TEST_CASE("Attribute (server)") {
+TEST_CASE("Attribute service set (server)") {
     Server server;
     const NodeId objectsId{0, UA_NS0ID_OBJECTSFOLDER};
 
@@ -264,7 +264,7 @@ TEST_CASE("Attribute (server)") {
     }
 }
 
-TEST_CASE("Attribute (server & client)") {
+TEST_CASE("Attribute service set (server & client)") {
     Server server;
     ServerRunner serverRunner(server);
     Client client;
@@ -328,7 +328,7 @@ TEST_CASE("Attribute (server & client)") {
     // clang-format on
 }
 
-TEST_CASE("View") {
+TEST_CASE("View service set (server & client)") {
     Server server;
     ServerRunner serverRunner(server);
     Client client;
@@ -414,7 +414,7 @@ TEST_CASE("View") {
 }
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
-TEST_CASE("Subscription (client)") {
+TEST_CASE("Subscription service set (client)") {
     Server server;
     ServerRunner serverRunner(server);
     Client client;
@@ -463,7 +463,7 @@ TEST_CASE("Subscription (client)") {
     }
 }
 
-TEST_CASE("MonitoredItem (client)") {
+TEST_CASE("MonitoredItem service set (client)") {
     Server server;
     ServerRunner serverRunner(server);
     Client client;
@@ -624,7 +624,7 @@ TEST_CASE("MonitoredItem (client)") {
     }
 }
 
-TEST_CASE("MonitoredItem (server)") {
+TEST_CASE("MonitoredItem service set (server)") {
     Server server;
 
     services::MonitoringParameters monitoringParameters{};

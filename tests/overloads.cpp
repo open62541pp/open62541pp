@@ -6,7 +6,7 @@
 
 using namespace opcua;
 
-TEST_CASE("ostream") {
+TEST_CASE("ostream overloads") {
     std::stringstream ss;
 
     SUBCASE("String") {
