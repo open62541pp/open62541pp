@@ -13,29 +13,52 @@
 
 namespace opcua {
 
-/* ------------------------------------------- Server ------------------------------------------- */
-
-Subscription<Server>::Subscription(Server& server) noexcept
-    : server_(server) {}
-
-Server& Subscription<Server>::getConnection() noexcept {
-    return server_;
+template <typename T>
+T& Subscription<T>::getConnection() noexcept {
+    return connection_;
 }
 
-const Server& Subscription<Server>::getConnection() const noexcept {
-    return server_;
+template <typename T>
+const T& Subscription<T>::getConnection() const noexcept {
+    return connection_;
 }
 
+template <typename T>
+uint32_t Subscription<T>::getSubscriptionId() const noexcept {
+    return subscriptionId_;
+}
+
+template <typename T>
+MonitoredItem<T> Subscription<T>::subscribeDataChange(
+    const NodeId& id, AttributeId attribute, DataChangeCallback<T> onDataChange
+) {
+    MonitoringParameters parameters;
+    return subscribeDataChange(
+        id, attribute, MonitoringMode::Reporting, parameters, std::move(onDataChange)
+    );
+}
+
+/* ----------------------------------- Server specializations ----------------------------------- */
+
+template <>
+Subscription<Server>::Subscription(
+    Server& connection,
+    [[maybe_unused]] uint32_t subscriptionId  // ignore specified id and use default 0U
+) noexcept
+    : connection_(connection) {}
+
+template <>
 std::vector<MonitoredItem<Server>> Subscription<Server>::getMonitoredItems() {
-    const auto& monitoredItems = server_.getContext().monitoredItems;
+    const auto& monitoredItems = connection_.getContext().monitoredItems;
     std::vector<MonitoredItem<Server>> result;
     result.reserve(monitoredItems.size());
     for (const auto& [monId, _] : monitoredItems) {
-        result.emplace_back(server_, monId);
+        result.emplace_back(connection_, monId);
     }
     return result;
 }
 
+template <>
 MonitoredItem<Server> Subscription<Server>::subscribeDataChange(
     const NodeId& id,
     AttributeId attribute,
@@ -44,7 +67,7 @@ MonitoredItem<Server> Subscription<Server>::subscribeDataChange(
     DataChangeCallback<Server> onDataChange
 ) {
     const uint32_t monitoredItemId = services::createMonitoredItemDataChange(
-        server_,
+        connection_,
         {id, attribute},
         monitoringMode,
         parameters,
@@ -56,65 +79,50 @@ MonitoredItem<Server> Subscription<Server>::subscribeDataChange(
             // -> wait until monitoredItemContext is inserted in ServerContext::monitoredItems
             static std::atomic<bool> initialized = false;
             if (!initialized) {
-                if (server_.getContext().monitoredItems.count(monId) == 0) {
+                if (connection_.getContext().monitoredItems.count(monId) == 0) {
                     return;  // not initialized yet, skip
                 }
                 initialized = true;
             }
 
-            static const MonitoredItem<Server> monitoredItem(server_, monId);
+            static const MonitoredItem<Server> monitoredItem(connection_, monId);
             callback(monitoredItem, value);
         }
     );
-    return {server_, monitoredItemId};
+    return {connection_, monitoredItemId};
 }
 
-bool operator==(const Subscription<Server>& left, const Subscription<Server>& right) noexcept {
-    return (left.getConnection() == right.getConnection());
-}
+/* ----------------------------------- Client specializations ----------------------------------- */
 
-bool operator!=(const Subscription<Server>& left, const Subscription<Server>& right) noexcept {
-    return !(left == right);
-}
-
-/* ------------------------------------------- Client ------------------------------------------- */
-
-Subscription<Client>::Subscription(Client& client, uint32_t subscriptionId) noexcept
-    : client_(client),
+template <>
+Subscription<Client>::Subscription(Client& connection, uint32_t subscriptionId) noexcept
+    : connection_(connection),
       subscriptionId_(subscriptionId) {}
 
-Client& Subscription<Client>::getConnection() noexcept {
-    return client_;
-}
-
-const Client& Subscription<Client>::getConnection() const noexcept {
-    return client_;
-}
-
-uint32_t Subscription<Client>::getSubscriptionId() const noexcept {
-    return subscriptionId_;
-}
-
+template <>
 std::vector<MonitoredItem<Client>> Subscription<Client>::getMonitoredItems() {
-    const auto& monitoredItems = client_.getContext().monitoredItems;
+    const auto& monitoredItems = connection_.getContext().monitoredItems;
     std::vector<MonitoredItem<Client>> result;
     for (const auto& [subMonId, _] : monitoredItems) {
         const auto [subId, monId] = subMonId;
         if (subId == subscriptionId_) {
-            result.emplace_back(client_, subId, monId);
+            result.emplace_back(connection_, subId, monId);
         }
     }
     return result;
 }
 
+template <>
 void Subscription<Client>::setSubscriptionParameters(SubscriptionParameters& parameters) {
-    services::modifySubscription(client_, subscriptionId_, parameters);
+    services::modifySubscription(connection_, subscriptionId_, parameters);
 }
 
+template <>
 void Subscription<Client>::setPublishingMode(bool publishing) {
-    services::setPublishingMode(client_, subscriptionId_, publishing);
+    services::setPublishingMode(connection_, subscriptionId_, publishing);
 }
 
+template <>
 MonitoredItem<Client> Subscription<Client>::subscribeDataChange(
     const NodeId& id,
     AttributeId attribute,
@@ -123,7 +131,7 @@ MonitoredItem<Client> Subscription<Client>::subscribeDataChange(
     DataChangeCallback<Client> onDataChange
 ) {
     const uint32_t monitoredItemId = services::createMonitoredItemDataChange(
-        client_,
+        connection_,
         subscriptionId_,
         {id, attribute},
         monitoringMode,
@@ -131,13 +139,14 @@ MonitoredItem<Client> Subscription<Client>::subscribeDataChange(
         [&, callback = std::move(onDataChange)](
             uint32_t subId, uint32_t monId, const DataValue& value
         ) {
-            static const MonitoredItem<Client> monitoredItem(client_, subId, monId);
+            static const MonitoredItem<Client> monitoredItem(connection_, subId, monId);
             callback(monitoredItem, value);
         }
     );
-    return {client_, subscriptionId_, monitoredItemId};
+    return {connection_, subscriptionId_, monitoredItemId};
 }
 
+template <>
 MonitoredItem<Client> Subscription<Client>::subscribeEvent(
     const NodeId& id,
     MonitoringMode monitoringMode,
@@ -145,7 +154,7 @@ MonitoredItem<Client> Subscription<Client>::subscribeEvent(
     EventCallback<Client> onEvent
 ) {
     const uint32_t monitoredItemId = services::createMonitoredItemEvent(
-        client_,
+        connection_,
         subscriptionId_,
         {id, AttributeId::EventNotifier},
         monitoringMode,
@@ -153,24 +162,22 @@ MonitoredItem<Client> Subscription<Client>::subscribeEvent(
         [&, callback = std::move(onEvent)](
             uint32_t subId, uint32_t monId, const std::vector<Variant>& eventFields
         ) {
-            static const MonitoredItem<Client> monitoredItem(client_, subId, monId);
+            static const MonitoredItem<Client> monitoredItem(connection_, subId, monId);
             callback(monitoredItem, eventFields);
         }
     );
-    return {client_, subscriptionId_, monitoredItemId};
+    return {connection_, subscriptionId_, monitoredItemId};
 }
 
+template <>
 void Subscription<Client>::deleteSubscription() {
-    services::deleteSubscription(client_, subscriptionId_);
+    services::deleteSubscription(connection_, subscriptionId_);
 }
 
-bool operator==(Subscription<Client>& left, Subscription<Client>& right) noexcept {
-    return (left.getConnection() == right.getConnection()) &&
-           (left.getSubscriptionId() == right.getSubscriptionId());
-}
+/* ---------------------------------------------------------------------------------------------- */
 
-bool operator!=(Subscription<Client>& left, Subscription<Client>& right) noexcept {
-    return !(left == right);
-}
+// explicit template instantiation
+template class Subscription<Server>;
+template class Subscription<Client>;
 
 }  // namespace opcua

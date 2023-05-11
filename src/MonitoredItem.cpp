@@ -39,7 +39,7 @@ uint32_t MonitoredItem<Server>::getMonitoredItemId() const noexcept {
 }
 
 Subscription<Server> MonitoredItem<Server>::getSubscription() const {
-    return Subscription<Server>(server_);
+    return {server_, 0U};
 }
 
 const NodeId& MonitoredItem<Server>::getNodeId() const {

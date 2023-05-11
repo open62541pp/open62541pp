@@ -59,7 +59,8 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
     SUBCASE("Create & delete subscription") {
         CHECK(client.getSubscriptions().empty());
 
-        auto sub = client.createSubscription();
+        SubscriptionParameters parameters{};
+        auto sub = client.createSubscription(parameters);
         CAPTURE(sub.getSubscriptionId());
 
         CHECK(client.getSubscriptions().size() == 1);
@@ -71,6 +72,17 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
         sub.deleteSubscription();
         CHECK(client.getSubscriptions().empty());
         CHECK_THROWS_WITH(sub.deleteSubscription(), "BadSubscriptionIdInvalid");
+    }
+
+    SUBCASE("Modify subscription") {
+        auto sub = client.createSubscription();
+        sub.setPublishingMode(false);
+
+        SubscriptionParameters parameters{};
+        parameters.priority = 10;
+        sub.setSubscriptionParameters(parameters);
+
+        CHECK(parameters.priority == 10);  // not revised by server
     }
 
     SUBCASE("Monitor data change") {
@@ -109,6 +121,20 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
 
         mon.deleteMonitoredItem();
         CHECK_THROWS_WITH(mon.deleteMonitoredItem(), "BadMonitoredItemIdInvalid");
+    }
+
+    SUBCASE("Modify monitored item") {
+        auto sub = client.createSubscription();
+        auto mon = sub.subscribeDataChange(
+            VariableId::Server_ServerStatus_CurrentTime, AttributeId::Value, {}
+        );
+
+        mon.setMonitoringMode(MonitoringMode::Disabled);
+
+        MonitoringParameters monitoringParameters{};
+        monitoringParameters.samplingInterval = 0.0;  // = fastest practical rate
+        mon.setMonitoringParameters(monitoringParameters);
+        CHECK(monitoringParameters.samplingInterval > 0.0);
     }
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS_EVENTS

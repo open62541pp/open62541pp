@@ -239,11 +239,11 @@ uint16_t Server::registerNamespace(std::string_view uri) {
 }
 
 Subscription<Server> Server::createSubscription() noexcept {
-    return Subscription<Server>(*this);
+    return {*this, 0U};
 }
 
 Subscription<Server> Server::getSubscription() noexcept {
-    return Subscription<Server>(*this);
+    return {*this, 0U};
 }
 
 uint16_t Server::runIterate() {

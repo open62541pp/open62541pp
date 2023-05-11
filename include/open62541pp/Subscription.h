@@ -22,124 +22,106 @@ using SubscriptionParameters = services::SubscriptionParameters;
 using MonitoringParameters = services::MonitoringParameters;
 
 /// Data change notification callback.
+/// @tparam T Server or Client
 template <typename T>
 using DataChangeCallback =
     std::function<void(const MonitoredItem<T>& item, const DataValue& value)>;
 
 /// Event notification callback.
+/// @tparam T Server or Client
 template <typename T>
 using EventCallback =
     std::function<void(const MonitoredItem<T>& item, const std::vector<Variant>& eventFields)>;
 
 /**
- * High-level subscription class with template specializations for Server and Client.
+ * High-level subscription class.
  *
- * @see Subscription<Server>
- * @see Subscription<Client>
+ * The API is symmetric for both Server and Client, although servers don't use the subscription
+ * mechanism of OPC UA to transport notifications of data changes and events. Instead MonitoredItems
+ * are registered locally. Notifications are then forwarded to user-defined callbacks instead of a
+ * remote client. The `subscriptionId` for servers is always `0U`.
+ *
+ * @note Not all methods are available and implemented for servers.
  *
  * Use the free functions in the `services` namespace for more advanced usage:
  * - @ref Subscription
+ * - @ref MonitoredItem
  */
 template <typename ServerOrClient>
-class Subscription;
-
-/* ------------------------------------------- Server ------------------------------------------- */
-
-/**
- * High-level subscription class for servers.
- *
- * Servers don't use the subscription mechanism of OPC UA to transport notifications of data changes
- * and events. Instead MonitoredItems are registered locally. Notifications are then forwarded to
- * user-defined callbacks instead of a remote client.
- */
-template <>
-class Subscription<Server> {
+class Subscription {
 public:
-    explicit Subscription(Server& server) noexcept;
+    Subscription(ServerOrClient& connection, uint32_t subscriptionId) noexcept;
 
-    /// Get the server instance.
-    Server& getConnection() noexcept;
-    /// Get the server instance.
-    const Server& getConnection() const noexcept;
-
-    /// Get all local monitored items.
-    std::vector<MonitoredItem<Server>> getMonitoredItems();
-
-    /// Create a local monitored item for data change notifications.
-    /// @copydetails services::MonitoringParameters
-    MonitoredItem<Server> subscribeDataChange(
-        const NodeId& id,
-        AttributeId attribute,
-        MonitoringMode monitoringMode,
-        MonitoringParameters& parameters,
-        DataChangeCallback<Server> onDataChange
-    );
-
-private:
-    Server& server_;
-};
-
-bool operator==(const Subscription<Server>& left, const Subscription<Server>& right) noexcept;
-bool operator!=(const Subscription<Server>& left, const Subscription<Server>& right) noexcept;
-
-/* ------------------------------------------- Client ------------------------------------------- */
-
-/**
- * High-level subscription class for clients.
- */
-template <>
-class Subscription<Client> {
-public:
-    Subscription(Client& client, uint32_t subscriptionId) noexcept;
-
-    /// Get the client instance.
-    Client& getConnection() noexcept;
-    /// Get the client instance.
-    const Client& getConnection() const noexcept;
+    /// Get the server/client instance.
+    ServerOrClient& getConnection() noexcept;
+    /// Get the server/client instance.
+    const ServerOrClient& getConnection() const noexcept;
 
     /// Get the server-assigned identifier of this subscription.
     uint32_t getSubscriptionId() const noexcept;
 
-    /// Get all monitored items of this subscription.
-    std::vector<MonitoredItem<Client>> getMonitoredItems();
+    /// Get all local monitored items.
+    std::vector<MonitoredItem<ServerOrClient>> getMonitoredItems();
 
     /// Modify this subscription.
+    /// @note Not implemented for Server.
     /// @see services::modifySubscription
     void setSubscriptionParameters(SubscriptionParameters& parameters);
 
     /// Enable/disable publishing of notification messages.
+    /// @note Not implemented for Server.
     /// @see services::setPublishingMode
     void setPublishingMode(bool publishing);
 
+    /// Create a monitored item for data change notifications (default settings).
+    /// The monitoring mode is set to MonitoringMode::Reporting and the default open62541
+    /// MonitoringParameters are used.
+    /// @see services::MonitoringParameters
+    MonitoredItem<ServerOrClient> subscribeDataChange(
+        const NodeId& id, AttributeId attribute, DataChangeCallback<ServerOrClient> onDataChange
+    );
+
     /// Create a monitored item for data change notifications.
     /// @copydetails services::MonitoringParameters
-    MonitoredItem<Client> subscribeDataChange(
+    MonitoredItem<ServerOrClient> subscribeDataChange(
         const NodeId& id,
         AttributeId attribute,
         MonitoringMode monitoringMode,
         MonitoringParameters& parameters,
-        DataChangeCallback<Client> onDataChange
+        DataChangeCallback<ServerOrClient> onDataChange
     );
 
-    /// Create a monitored item for data change notifications.
+    /// Create a monitored item for event notifications.
     /// @copydetails services::MonitoringParameters
-    MonitoredItem<Client> subscribeEvent(
+    /// @note Not implemented for Server.
+    MonitoredItem<ServerOrClient> subscribeEvent(
         const NodeId& id,
         MonitoringMode monitoringMode,
         MonitoringParameters& parameters,
-        EventCallback<Client> onEvent
+        EventCallback<ServerOrClient> onEvent
     );
 
     /// Delete this subscription.
+    /// @note Not implemented for Server.
     /// @see services::deleteSubscription
     void deleteSubscription();
 
 private:
-    Client& client_;
-    uint32_t subscriptionId_;
+    ServerOrClient& connection_;
+    uint32_t subscriptionId_{0U};
 };
 
-bool operator==(Subscription<Client>& left, Subscription<Client>& right) noexcept;
-bool operator!=(Subscription<Client>& left, Subscription<Client>& right) noexcept;
+/* ---------------------------------------------------------------------------------------------- */
+
+template <typename T>
+inline bool operator==(const Subscription<T>& left, const Subscription<T>& right) noexcept {
+    return (left.getConnection() == right.getConnection()) &&
+           (left.getSubscriptionId() == right.getSubscriptionId());
+}
+
+template <typename T>
+inline bool operator!=(const Subscription<T>& left, const Subscription<T>& right) noexcept {
+    return !(left == right);
+}
 
 }  // namespace opcua
