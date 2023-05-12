@@ -213,6 +213,16 @@ TEST_CASE("NodeId") {
             CHECK(id.getIdentifierAs<ByteString>() == byteString);
         }
     }
+
+    SUBCASE("toString") {
+        CHECK(NodeId(0, 13).toString() == "i=13");
+        CHECK(NodeId(10, 1).toString() == "ns=10;i=1");
+        CHECK(NodeId(10, "Hello:World").toString() == "ns=10;s=Hello:World");
+        CHECK(NodeId(0, Guid()).toString() == "g=00000000-0000-0000-0000-000000000000");
+#if UAPP_OPEN62541_VER_GE(1, 1)
+        CHECK(NodeId(1, ByteString("test123")).toString() == "ns=1;b=dGVzdDEyMw==");
+#endif
+    }
 }
 
 TEST_CASE("ExpandedNodeId") {

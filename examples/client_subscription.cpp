@@ -24,7 +24,9 @@ int main() {
         [](const auto& item, const opcua::DataValue& value) {
             std::cout << "Data change notification:\n"
                       << "- subscription id:   " << item.getSubscriptionId() << "\n"
-                      << "- monitored item id: " << item.getMonitoredItemId() << "\n";
+                      << "- monitored item id: " << item.getMonitoredItemId() << "\n"
+                      << "- node id:           " << item.getNodeId().toString() << "\n"
+                      << "- attribute id:      " << static_cast<int>(item.getAttributeId()) << "\n";
 
             const auto dt = value.getValue().value().getScalarCopy<opcua::DateTime>();
             std::cout << "Current server time (UTC): " << dt.format("%H:%M:%S") << std::endl;

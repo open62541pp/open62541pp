@@ -106,6 +106,10 @@ public:
             return getIdentifierAs<ByteString>();
         }
     }
+
+    /// Encode NodeId as a string like `ns=1;s=SomeNode`.
+    /// @see https://reference.opcfoundation.org/Core/Part6/v105/docs/5.3.1.10
+    std::string toString() const;
 };
 
 /**
