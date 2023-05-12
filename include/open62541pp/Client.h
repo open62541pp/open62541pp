@@ -76,6 +76,13 @@ public:
     /// Get all active subscriptions
     std::vector<Subscription<Client>> getSubscriptions();
 
+    /**
+     * Listen on the network and process arriving asynchronous responses in the background.
+     * Internal housekeeping, renewal of SecureChannels and subscription management is done as well.
+     * @param timeoutMilliseconds Timeout in milliseconds
+     */
+    void runIterate(uint16_t timeoutMilliseconds = 1000);
+
     Node<Client> getNode(const NodeId& id);
     Node<Client> getRootNode();
     Node<Client> getObjectsNode();

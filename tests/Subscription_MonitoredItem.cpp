@@ -8,8 +8,6 @@
 #include "open62541pp/Server.h"
 #include "open62541pp/Subscription.h"
 
-#include "open62541_impl.h"
-
 #include "helper/Runner.h"
 
 using namespace opcua;
@@ -107,15 +105,15 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
         CHECK(sub.getMonitoredItems().size() == 1);
         CHECK(sub.getMonitoredItems().at(0) == mon);
 
-        UA_Client_run_iterate(client.handle(), 1000);
+        client.runIterate();
         CHECK(notificationCount == 0);
 
         sub.setPublishingMode(true);  // monitoring mode is still sampling -> no notifications
-        UA_Client_run_iterate(client.handle(), 1000);
+        client.runIterate();
         CHECK(notificationCount == 0);
 
         mon.setMonitoringMode(MonitoringMode::Reporting);  // now we should get a notification
-        UA_Client_run_iterate(client.handle(), 1000);
+        client.runIterate();
         CHECK(notificationCount > 0);
 
         mon.deleteMonitoredItem();

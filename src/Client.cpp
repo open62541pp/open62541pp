@@ -158,6 +158,11 @@ std::vector<Subscription<Client>> Client::getSubscriptions() {
     return result;
 }
 
+void Client::runIterate(uint16_t timeoutMilliseconds) {
+    const auto status = UA_Client_run_iterate(handle(), timeoutMilliseconds);
+    detail::throwOnBadStatus(status);
+}
+
 Node<Client> Client::getNode(const NodeId& id) {
     return {*this, id, true};
 }

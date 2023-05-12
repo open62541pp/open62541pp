@@ -12,7 +12,6 @@
 #include "open62541pp/services/services.h"
 
 #include "helper/Runner.h"
-#include "open62541_impl.h"
 #include "version.h"
 
 using namespace opcua;
@@ -509,8 +508,8 @@ TEST_CASE("MonitoredItem service set (client)") {
         CAPTURE(monId);
 
         services::writeValue(server, id, Variant::fromScalar(11.11));
-        UA_Client_run_iterate(client.handle(), 1000);
-        CHECK(notificationCount > 0);  // 1 for client, 2 for server - why?
+        client.runIterate();
+        CHECK(notificationCount > 0);
         CHECK(changedValue.getValue().value().getScalar<double>() == 11.11);
     }
 
@@ -585,7 +584,7 @@ TEST_CASE("MonitoredItem service set (client)") {
             [&](uint32_t, uint32_t, const DataValue&) { notificationCount++; }
         );
 
-        UA_Client_run_iterate(client.handle(), 1000);
+        client.runIterate();
         CHECK(notificationCountTriggering > 0);
         CHECK(notificationCount == 0);  // no triggering links yet
 
@@ -597,7 +596,7 @@ TEST_CASE("MonitoredItem service set (client)") {
             {}  // links to remove
         );
 
-        UA_Client_run_iterate(client.handle(), 1000);
+        client.runIterate();
         CHECK(notificationCount > 0);
     }
 #endif
@@ -619,7 +618,7 @@ TEST_CASE("MonitoredItem service set (client)") {
         );
 
         CHECK_NOTHROW(services::deleteMonitoredItem(client, subId, monId));
-        UA_Client_run_iterate(client.handle(), 1000);
+        client.runIterate();
         CHECK(deleted == true);
     }
 }
