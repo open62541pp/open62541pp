@@ -8,14 +8,19 @@ int main() {
     opcua::Client client;
     client.connect("opc.tcp://localhost:4840");
 
+    auto sub = client.createSubscription();
+
+    // modify and delete the subscription via the returend Subscription<T> object
     opcua::SubscriptionParameters subscriptionParameters{};
     subscriptionParameters.publishingInterval = 1000.0;
+    sub.setSubscriptionParameters(subscriptionParameters);
+    sub.setPublishingMode(true);
+    // sub.deleteSubscription();
 
-    auto sub = client.createSubscription(subscriptionParameters);
-
-    sub.subscribeDataChange(
-        opcua::VariableId::Server_ServerStatus_CurrentTime,
-        opcua::AttributeId::Value,
+    // create a monitored item within the subscription for data change notifications
+    auto mon = sub.subscribeDataChange(
+        opcua::VariableId::Server_ServerStatus_CurrentTime,  // monitored node id
+        opcua::AttributeId::Value,  // monitored attribute
         [](const auto& item, const opcua::DataValue& value) {
             std::cout << "Data change notification:\n"
                       << "- subscription id:   " << item.getSubscriptionId() << "\n"
@@ -25,6 +30,13 @@ int main() {
             std::cout << "Current server time (UTC): " << dt.format("%H:%M:%S") << std::endl;
         }
     );
+
+    // modify and delete the monitored item via the returned MonitoredItem<T> object
+    opcua::MonitoringParameters monitoringParameters{};
+    monitoringParameters.samplingInterval = 100.0;
+    mon.setMonitoringParameters(monitoringParameters);
+    mon.setMonitoringMode(opcua::MonitoringMode::Reporting);
+    // mon.deleteMonitoredItem();
 
     while (true) {
         client.runIterate();
