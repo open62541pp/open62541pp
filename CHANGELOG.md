@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use scoped enum `AttributeId` instead of `UA_AttributeId`
 - Don't return std::optional from `DataValue` getters
 - Add `DataValue::has*` methods
+- Remove `DataValue::getValuePtr` method
 
 ### Fixed
 

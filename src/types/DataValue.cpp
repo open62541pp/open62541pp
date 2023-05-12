@@ -41,14 +41,6 @@ DataValue::DataValue(
     setValue(value);
 }
 
-Variant* DataValue::getValuePtr() noexcept {
-    return handle()->hasValue ? &asWrapper<Variant>(handle()->value) : nullptr;
-}
-
-const Variant* DataValue::getValuePtr() const noexcept {
-    return handle()->hasValue ? &asWrapper<Variant>(handle()->value) : nullptr;
-}
-
 bool DataValue::hasValue() const noexcept {
     return handle()->hasValue;
 }
