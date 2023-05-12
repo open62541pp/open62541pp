@@ -13,6 +13,8 @@
 #include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"
 
+#include "version.h"
+
 using namespace opcua;
 
 TEST_CASE_TEMPLATE("StringLike", T, String, ByteString, XmlElement) {
@@ -38,6 +40,13 @@ TEST_CASE_TEMPLATE("StringLike", T, String, ByteString, XmlElement) {
         CHECK(T("test") == T("test"));
         CHECK(T("test") != T());
     }
+}
+
+TEST_CASE("ByteString") {
+#if UAPP_OPEN62541_VER_GE(1, 1)
+    CHECK(ByteString::fromBase64("dGVzdDEyMw==") == ByteString("test123"));
+    CHECK(ByteString("test123").toBase64() == "dGVzdDEyMw==");
+#endif
 }
 
 TEST_CASE("Guid") {

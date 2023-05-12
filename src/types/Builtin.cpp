@@ -6,6 +6,8 @@
 
 #include "open62541pp/detail/helper.h"
 
+#include "../version.h"
+
 namespace opcua {
 
 /* ------------------------------------------- String ------------------------------------------- */
@@ -68,6 +70,20 @@ bool ByteString::empty() const noexcept {
 std::string_view ByteString::get() const {
     return detail::toStringView(*handle());
 }
+
+#if UAPP_OPEN62541_VER_GE(1, 1)
+ByteString ByteString::fromBase64(std::string_view encoded) {
+    ByteString output;
+    UA_ByteString_fromBase64(output.handle(), String(encoded).handle());
+    return output;
+}
+
+std::string ByteString::toBase64() const {
+    String output;
+    UA_ByteString_toBase64(handle(), output.handle());
+    return std::string(output.get());
+}
+#endif
 
 /* ----------------------------------------- XmlElement ----------------------------------------- */
 

@@ -53,9 +53,17 @@ public:
 
     explicit ByteString(std::string_view str);
 
+    /// Parse ByteString from Base64 encoded string.
+    /// @note Only supported since open62541 v1.1
+    static ByteString fromBase64(std::string_view encoded);
+
     bool empty() const noexcept;
 
     std::string_view get() const;
+
+    /// Convert to Base64 encoded string.
+    /// @note Only supported since open62541 v1.1
+    std::string toBase64() const;
 };
 
 /**
@@ -86,6 +94,7 @@ public:
     QualifiedName(uint16_t namespaceIndex, std::string_view name);
 
     uint16_t getNamespaceIndex() const noexcept;
+
     std::string_view getName() const;
 };
 
@@ -106,6 +115,7 @@ public:
     LocalizedText(std::string_view locale, std::string_view text, bool assertLocaleFormat = true);
 
     std::string_view getText() const;
+
     std::string_view getLocale() const;
 };
 
