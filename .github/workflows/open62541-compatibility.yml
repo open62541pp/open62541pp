@@ -4,7 +4,11 @@ on: [push, pull_request]
 
 jobs:
   external-open62541:
-    name: open62541 ${{ matrix.version }} (${{ matrix.build_type }}, ${{ matrix.library_type }})
+    name: >-
+      ${{ matrix.version }}
+      (${{ matrix.build_type }},
+      ${{ matrix.library_type }},
+      ${{ matrix.amalgamation && 'amalgamated' || 'default' }})
     runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
@@ -16,6 +20,7 @@ jobs:
           - v1.3.5
         build_type: ["Debug", "Release"]
         library_type: ["static", "shared"]
+        amalgamation: [false, true]
     steps:
       - uses: actions/checkout@v3
         with:
@@ -37,6 +42,7 @@ jobs:
           cmake \
             -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
             -DBUILD_SHARED_LIBS=${{ matrix.library_type == 'shared' }} \
+            -DUA_ENABLE_AMALGAMATION=${{ matrix.amalgamation }} \
             -DUA_ENABLE_SUBSCRIPTIONS=ON \
             -DUA_ENABLE_SUBSCRIPTIONS_EVENTS=ON \
             ..
