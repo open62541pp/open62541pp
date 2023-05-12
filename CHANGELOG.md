@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Subscription and MonitoredItem service set as free functions in namespace services (#45)
+- High-level `Subscription<T>` and `MonitoredItem<T>` classes (#45)
+- `Server`/`Client` methods to create and list subscriptions (#45):
+  - `Server::createSubscription`
+  - `Client::createSubscription`
+  - `Client::getSubscriptions`
+- `Client::runIterate` method (#45)
+- `ReadValueId` wrapper class (#45)
+- Example `client_subscription.cpp` (#45)
+
+### Changed
+
+- Use scoped enum `TimestampsToReturn` instead of `UA_TimestampsToReturn`
+- Use scoped enum `AttributeId` instead of `UA_AttributeId`
+
+### Fixed
+
+- Amalgamation support (#47)
+
 ## [0.3.0] - 2023-04-29
 
 ### Added
