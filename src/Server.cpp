@@ -12,6 +12,7 @@
 #include "open62541pp/types/Variant.h"
 
 #include "CustomLogger.h"
+#include "ServerContext.h"
 #include "open62541_impl.h"
 #include "version.h"
 
@@ -38,9 +39,9 @@ public:
     ~Connection() {
         // don't use stop method here because it might throw an exception
         if (running_) {
-            UA_Server_run_shutdown(server_);
+            UA_Server_run_shutdown(handle());
         }
-        UA_Server_delete(server_);
+        UA_Server_delete(handle());
     }
 
     // prevent copy & move
@@ -50,7 +51,7 @@ public:
     Connection& operator=(Connection&&) noexcept = delete;
 
     void applyDefaults() {
-        auto* config = getConfig(server_);
+        auto* config = getConfig(handle());
         config->publishingIntervalLimits.min = 10;  // ms
         config->samplingIntervalLimits.min = 10;  // ms
 #if UAPP_OPEN62541_VER_GE(1, 2)
@@ -59,7 +60,7 @@ public:
     }
 
     void runStartup() {
-        const auto status = UA_Server_run_startup(server_);
+        const auto status = UA_Server_run_startup(handle());
         detail::throwOnBadStatus(status);
         running_ = true;
     }
@@ -68,7 +69,7 @@ public:
         if (!running_) {
             runStartup();
         }
-        return UA_Server_run_iterate(server_, false /* don't wait */);
+        return UA_Server_run_iterate(handle(), false /* don't wait */);
     }
 
     void run() {
@@ -79,7 +80,7 @@ public:
         std::lock_guard<std::mutex> lock(mutex_);
         while (running_) {
             // https://github.com/open62541/open62541/blob/master/examples/server_mainloop.c
-            UA_Server_run_iterate(server_, true /* wait for messages in the networklayer */);
+            UA_Server_run_iterate(handle(), true /* wait for messages in the networklayer */);
         }
     }
 
@@ -87,7 +88,7 @@ public:
         running_ = false;
         // wait for run loop to complete
         std::lock_guard<std::mutex> lock(mutex_);
-        const auto status = UA_Server_run_shutdown(server_);
+        const auto status = UA_Server_run_shutdown(handle());
         detail::throwOnBadStatus(status);
     }
 
@@ -103,10 +104,15 @@ public:
         return server_;
     }
 
+    ServerContext& getContext() noexcept {
+        return context_;
+    }
+
 private:
     UA_Server* server_;
     std::atomic<bool> running_{false};
     std::mutex mutex_;
+    ServerContext context_;
     CustomLogger logger_;
 };
 
@@ -232,6 +238,10 @@ uint16_t Server::registerNamespace(std::string_view uri) {
     return UA_Server_addNamespace(handle(), std::string(uri).c_str());
 }
 
+Subscription<Server> Server::createSubscription() noexcept {
+    return {*this, 0U};
+}
+
 uint16_t Server::runIterate() {
     return connection_->runIterate();
 }
@@ -274,6 +284,10 @@ UA_Server* Server::handle() noexcept {
 
 const UA_Server* Server::handle() const noexcept {
     return connection_->handle();
+}
+
+ServerContext& Server::getContext() noexcept {
+    return connection_->getContext();
 }
 
 /* ---------------------------------------------------------------------------------------------- */

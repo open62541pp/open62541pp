@@ -549,3 +549,11 @@ TEST_CASE("BrowsePath") {
     CHECK(bp.getStartingNode() == NodeId(0, UA_NS0ID_OBJECTSFOLDER));
     CHECK(bp.getRelativePath().getElements().size() == 1);
 }
+
+TEST_CASE("ReadValueId") {
+    const ReadValueId rvid(NodeId(1, 1000), AttributeId::Value);
+    CHECK(rvid.getNodeId() == NodeId(1, 1000));
+    CHECK(rvid.getAttributeId() == AttributeId::Value);
+    CHECK(rvid.getIndexRange().empty());
+    CHECK(rvid.getDataEncoding() == QualifiedName());
+}

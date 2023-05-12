@@ -7,6 +7,7 @@
 
 #include "open62541pp/Auth.h"
 #include "open62541pp/Logger.h"
+#include "open62541pp/Subscription.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/NodeId.h"
@@ -17,6 +18,7 @@ struct UA_Client;
 namespace opcua {
 
 // forward declaration
+class ClientContext;
 template <typename ServerOrClient>
 class Node;
 
@@ -67,6 +69,20 @@ public:
     /// Get all defined namespaces.
     std::vector<std::string> getNamespaceArray();
 
+    /// Create a subscription to monitor data changes and events (default subscription parameters).
+    Subscription<Client> createSubscription();
+    /// Create a subscription to monitor data changes and events.
+    Subscription<Client> createSubscription(SubscriptionParameters& parameters);
+    /// Get all active subscriptions
+    std::vector<Subscription<Client>> getSubscriptions();
+
+    /**
+     * Listen on the network and process arriving asynchronous responses in the background.
+     * Internal housekeeping, renewal of SecureChannels and subscription management is done as well.
+     * @param timeoutMilliseconds Timeout in milliseconds
+     */
+    void runIterate(uint16_t timeoutMilliseconds = 1000);
+
     Node<Client> getNode(const NodeId& id);
     Node<Client> getRootNode();
     Node<Client> getObjectsNode();
@@ -75,6 +91,10 @@ public:
 
     UA_Client* handle() noexcept;
     const UA_Client* handle() const noexcept;
+
+    /// Get client context (for internal use only).
+    /// @private
+    ClientContext& getContext() noexcept;
 
 private:
     class Connection;

@@ -185,6 +185,19 @@ enum class TimestampsToReturn : uint32_t {
     // clang-format on
 };
 
+/**
+ * Monitoring mode.
+ * @see UA_MonitoringMode
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.23
+ */
+enum class MonitoringMode : uint32_t {
+    // clang-format off
+    Disabled  = 0,
+    Sampling  = 1,
+    Reporting = 2,
+    // clang-format on
+};
+
 namespace detail {
 
 using BuiltinTypes = std::tuple<

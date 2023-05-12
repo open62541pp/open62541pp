@@ -14,8 +14,8 @@ class Server;
 namespace opcua::services {
 
 /**
- * @defgroup NodeManagement Node management service set
- * Add/delete nodes and references
+ * @defgroup NodeManagement NodeManagement service set
+ * Add/delete nodes and references.
  * @ingroup Services
  */
 

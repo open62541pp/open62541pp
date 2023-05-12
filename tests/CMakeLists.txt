@@ -9,6 +9,7 @@ add_executable(
     overloads.cpp
     Server.cpp
     Services.cpp
+    Subscription_MonitoredItem.cpp
     TypeConverter.cpp
     Types.cpp
     TypeWrapper.cpp
@@ -36,5 +37,6 @@ doctest_discover_tests(open62541pp_tests)
 add_custom_command(
     TARGET open62541pp_tests POST_BUILD
     COMMAND ${CMAKE_CTEST_COMMAND} "--output-on-failure"
+    COMMENT "Run ctest"
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 )

@@ -8,6 +8,7 @@
 
 #include "open62541pp/Auth.h"
 #include "open62541pp/Logger.h"
+#include "open62541pp/Subscription.h"
 #include "open62541pp/types/NodeId.h"
 
 // forward declaration open62541
@@ -16,6 +17,7 @@ struct UA_Server;
 namespace opcua {
 
 // forward declaration
+class ServerContext;
 template <typename ServerOrClient>
 class Node;
 
@@ -53,6 +55,9 @@ public:
     /// Register namespace. The new namespace index will be returned.
     [[nodiscard]] uint16_t registerNamespace(std::string_view uri);
 
+    /// Create a (pseudo) subscription to monitor local data changes and events.
+    Subscription<Server> createSubscription() noexcept;
+
     /// Run single iteration of the server's main loop.
     /// @returns Maximum wait period until next Server::runIterate call (in ms)
     uint16_t runIterate();
@@ -71,6 +76,10 @@ public:
 
     UA_Server* handle() noexcept;
     const UA_Server* handle() const noexcept;
+
+    /// Get client context (for internal use only).
+    /// @private
+    ServerContext& getContext() noexcept;
 
 private:
     class Connection;

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "open62541pp/Common.h"
 #include "open62541pp/TypeConverter.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/types/Builtin.h"
@@ -223,6 +224,23 @@ public:
 
     UAPP_COMPOSED_GETTER(UA_StatusCode, getStatusCode, statusCode)
     UAPP_COMPOSED_GETTER_ARRAY(BrowsePathTarget, getTargets, targets, targetsSize)
+};
+
+/**
+ * UA_ReadValueId wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.29
+ * @ingroup TypeWrapper
+ */
+class ReadValueId : public TypeWrapper<UA_ReadValueId, UA_TYPES_READVALUEID> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    ReadValueId(const NodeId& id, AttributeId attributeId);
+
+    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getNodeId, nodeId)
+    UAPP_COMPOSED_GETTER_CAST(AttributeId, getAttributeId, attributeId)
+    UAPP_COMPOSED_GETTER_WRAPPER(String, getIndexRange, indexRange)
+    UAPP_COMPOSED_GETTER_WRAPPER(QualifiedName, getDataEncoding, dataEncoding)
 };
 
 }  // namespace opcua

@@ -6,4 +6,5 @@
 @example client_connect.cpp
 @example client_find_servers.cpp
 @example client_browse.cpp
+@example client_subscription.cpp
 */

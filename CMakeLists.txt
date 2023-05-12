@@ -109,12 +109,16 @@ add_library(
     open62541pp
     src/Client.cpp
     src/CustomLogger.cpp
+    src/MonitoredItem.cpp
     src/Node.cpp
     src/Server.cpp
+    src/Subscription.cpp
     src/detail/helper.cpp
     src/overloads/ostream.cpp
     src/services/Attribute.cpp
+    src/services/MonitoredItem.cpp
     src/services/NodeManagement.cpp
+    src/services/Subscription.cpp
     src/services/View.cpp
     src/types/Builtin.cpp
     src/types/Composed.cpp

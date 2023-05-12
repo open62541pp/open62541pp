@@ -6,7 +6,9 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Node.h"
 #include "open62541pp/TypeConverter.h"
+#include "open62541pp/services/Subscription.h"
 
+#include "ClientContext.h"
 #include "CustomLogger.h"
 #include "open62541_impl.h"
 #include "version.h"
@@ -29,11 +31,13 @@ class Client::Connection {
 public:
     Connection()
         : client_(UA_Client_new()),
-          logger_(getConfig(client_)->logger) {}
+          logger_(getConfig(client_)->logger) {
+        setContext(client_, context_);
+    }
 
     ~Connection() {
-        UA_Client_disconnect(client_);
-        UA_Client_delete(client_);
+        UA_Client_disconnect(handle());
+        UA_Client_delete(handle());
     }
 
     // prevent copy & move
@@ -50,8 +54,13 @@ public:
         return client_;
     }
 
+    ClientContext& getContext() noexcept {
+        return context_;
+    }
+
 private:
     UA_Client* client_;
+    ClientContext context_;
     CustomLogger logger_;
 };
 
@@ -61,6 +70,7 @@ Client::Client()
     : connection_(std::make_shared<Connection>()) {
     const auto status = UA_ClientConfig_setDefault(getConfig(this));
     detail::throwOnBadStatus(status);
+    setContext(handle(), getContext());  // overwritten by UA_ClientConfig_setDefault
 }
 
 void Client::setLogger(Logger logger) {
@@ -128,6 +138,31 @@ std::vector<std::string> Client::getNamespaceArray() {
     return variant.getArrayCopy<std::string>();
 }
 
+Subscription<Client> Client::createSubscription() {
+    SubscriptionParameters parameters{};
+    return createSubscription(parameters);
+}
+
+Subscription<Client> Client::createSubscription(SubscriptionParameters& parameters) {
+    const uint32_t subscriptionId = services::createSubscription(*this, parameters, true);
+    return {*this, subscriptionId};
+}
+
+std::vector<Subscription<Client>> Client::getSubscriptions() {
+    const auto& subscriptions = getContext().subscriptions;
+    std::vector<Subscription<Client>> result;
+    result.reserve(subscriptions.size());
+    for (const auto& [subId, _] : subscriptions) {
+        result.emplace_back(*this, subId);
+    }
+    return result;
+}
+
+void Client::runIterate(uint16_t timeoutMilliseconds) {
+    const auto status = UA_Client_run_iterate(handle(), timeoutMilliseconds);
+    detail::throwOnBadStatus(status);
+}
+
 Node<Client> Client::getNode(const NodeId& id) {
     return {*this, id, true};
 }
@@ -154,6 +189,10 @@ UA_Client* Client::handle() noexcept {
 
 const UA_Client* Client::handle() const noexcept {
     return connection_->handle();
+}
+
+ClientContext& Client::getContext() noexcept {
+    return connection_->getContext();
 }
 
 /* ---------------------------------------------------------------------------------------------- */
