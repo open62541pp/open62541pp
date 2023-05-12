@@ -454,48 +454,42 @@ TEST_CASE("Variant") {
 
 TEST_CASE("DataValue") {
     SUBCASE("Create from scalar") {
-        CHECK(DataValue::fromScalar(5).getValue().value().getScalar<int>() == 5);
+        CHECK(DataValue::fromScalar(5).getValue().getScalar<int>() == 5);
     }
 
     SUBCASE("Create from aray") {
         std::vector<int> vec{1, 2, 3};
-        CHECK(DataValue::fromArray(vec).getValue().value().getArrayCopy<int>() == vec);
+        CHECK(DataValue::fromArray(vec).getValue().getArrayCopy<int>() == vec);
     }
 
     SUBCASE("Empty") {
         DataValue dv{};
-        CHECK(dv.getValuePtr() == nullptr);
-        CHECK_FALSE(dv.getValue().has_value());
-        CHECK_FALSE(dv.getSourceTimestamp().has_value());
-        CHECK_FALSE(dv.getServerTimestamp().has_value());
-        CHECK_FALSE(dv.getSourcePicoseconds().has_value());
-        CHECK_FALSE(dv.getServerPicoseconds().has_value());
-        CHECK_FALSE(dv.getStatusCode().has_value());
+        CHECK_FALSE(dv.hasValue());
+        CHECK_FALSE(dv.hasSourceTimestamp());
+        CHECK_FALSE(dv.hasServerTimestamp());
+        CHECK_FALSE(dv.hasSourcePicoseconds());
+        CHECK_FALSE(dv.hasServerPicoseconds());
+        CHECK_FALSE(dv.hasStatusCode());
     }
 
     SUBCASE("Constructor with all optional parameter empty") {
         DataValue dv({}, {}, {}, {}, {}, {});
-        CHECK(dv.getValuePtr() != nullptr);
-        CHECK(dv.getValuePtr()->handle() == &dv.handle()->value);
-        CHECK(dv.getValue().has_value());
-        CHECK_FALSE(dv.getSourceTimestamp().has_value());
-        CHECK_FALSE(dv.getServerTimestamp().has_value());
-        CHECK_FALSE(dv.getSourcePicoseconds().has_value());
-        CHECK_FALSE(dv.getServerPicoseconds().has_value());
-        CHECK_FALSE(dv.getStatusCode().has_value());
+        CHECK(dv.hasValue());
+        CHECK_FALSE(dv.hasSourceTimestamp());
+        CHECK_FALSE(dv.hasServerTimestamp());
+        CHECK_FALSE(dv.hasSourcePicoseconds());
+        CHECK_FALSE(dv.hasServerPicoseconds());
+        CHECK_FALSE(dv.hasStatusCode());
     }
 
     SUBCASE("Constructor with all optional parameter specified") {
-        Variant var;
-        DataValue dv(var, DateTime{1}, DateTime{2}, 3, 4, 5);
-        CHECK(dv.getValuePtr() != nullptr);
-        CHECK(dv.getValuePtr()->handle() == &dv.handle()->value);
-        CHECK(dv.getValue().has_value());
-        CHECK(dv.getSourceTimestamp().value() == DateTime{1});
-        CHECK(dv.getServerTimestamp().value() == DateTime{2});
-        CHECK(dv.getSourcePicoseconds().value() == 3);
-        CHECK(dv.getServerPicoseconds().value() == 4);
-        CHECK(dv.getStatusCode().value() == 5);
+        DataValue dv(Variant::fromScalar(5), DateTime{1}, DateTime{2}, 3, 4, 5);
+        CHECK(dv.getValue().isScalar());
+        CHECK(dv.getSourceTimestamp() == DateTime{1});
+        CHECK(dv.getServerTimestamp() == DateTime{2});
+        CHECK(dv.getSourcePicoseconds() == 3);
+        CHECK(dv.getServerPicoseconds() == 4);
+        CHECK(dv.getStatusCode() == 5);
     }
 
     SUBCASE("Setter methods") {
@@ -506,7 +500,7 @@ TEST_CASE("DataValue") {
             var.setScalar(value);
             CHECK(var->data == &value);
             dv.setValue(std::move(var));
-            CHECK(dv.getValue().value().getScalar<float>() == value);
+            CHECK(dv.getValue().getScalar<float>() == value);
             CHECK(dv->value.data == &value);
         }
         SUBCASE("Value (copy)") {
@@ -514,32 +508,32 @@ TEST_CASE("DataValue") {
             Variant var;
             var.setScalar(value);
             dv.setValue(var);
-            CHECK(dv.getValue().value().getScalar<float>() == value);
+            CHECK(dv.getValue().getScalar<float>() == value);
         }
         SUBCASE("Source timestamp") {
             DateTime dt{123};
             dv.setSourceTimestamp(dt);
-            CHECK(dv.getSourceTimestamp().value() == dt);
+            CHECK(dv.getSourceTimestamp() == dt);
         }
         SUBCASE("Server timestamp") {
             DateTime dt{456};
             dv.setServerTimestamp(dt);
-            CHECK(dv.getServerTimestamp().value() == dt);
+            CHECK(dv.getServerTimestamp() == dt);
         }
         SUBCASE("Source picoseconds") {
             const uint16_t ps = 123;
             dv.setSourcePicoseconds(ps);
-            CHECK(dv.getSourcePicoseconds().value() == ps);
+            CHECK(dv.getSourcePicoseconds() == ps);
         }
         SUBCASE("Server picoseconds") {
             const uint16_t ps = 456;
             dv.setServerPicoseconds(ps);
-            CHECK(dv.getServerPicoseconds().value() == ps);
+            CHECK(dv.getServerPicoseconds() == ps);
         }
         SUBCASE("Status code") {
             const UA_StatusCode statusCode = UA_STATUSCODE_BADALREADYEXISTS;
             dv.setStatusCode(statusCode);
-            CHECK(dv.getStatusCode().value() == statusCode);
+            CHECK(dv.getStatusCode() == statusCode);
         }
     }
 }

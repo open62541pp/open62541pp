@@ -257,7 +257,7 @@ TEST_CASE("Attribute service set (server)") {
         CHECK_EQ(valueRead->hasSourcePicoseconds, true);
         CHECK_EQ(valueRead->hasStatus, false);  // doesn't contain error code on success
 
-        CHECK(valueRead.getValue().value().getScalar<int>() == 11);
+        CHECK(valueRead.getValue().getScalar<int>() == 11);
         CHECK(valueRead->sourceTimestamp == valueWrite->sourceTimestamp);
         CHECK(valueRead->sourcePicoseconds == valueWrite->sourcePicoseconds);
     }
@@ -316,7 +316,7 @@ TEST_CASE("Attribute service set (server & client)") {
         CHECK_EQ(dataValueRead->hasValue, true);
         CHECK_EQ(dataValueRead->hasSourceTimestamp, true);
         CHECK_EQ(dataValueRead->hasServerTimestamp, true);
-        CHECK(dataValueRead.getValuePtr()->getArrayCopy<double>() == array);
+        CHECK(dataValueRead.getValue().getArrayCopy<double>() == array);
     };
 
     // clang-format off
@@ -510,7 +510,7 @@ TEST_CASE("MonitoredItem service set (client)") {
         services::writeValue(server, id, Variant::fromScalar(11.11));
         client.runIterate();
         CHECK(notificationCount > 0);
-        CHECK(changedValue.getValue().value().getScalar<double>() == 11.11);
+        CHECK(changedValue.getValue().getScalar<double>() == 11.11);
     }
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS_EVENTS

@@ -58,7 +58,7 @@ DataValue readAttribute(
 template <typename AttributeType, typename T>
 inline auto readAttributeScalar(T& serverOrClient, const NodeId& id, AttributeId attributeId) {
     const auto dv = readAttribute(serverOrClient, id, attributeId);
-    return dv.getValuePtr()->template getScalarCopy<AttributeType>();
+    return dv.getValue().template getScalarCopy<AttributeType>();
 }
 
 /**
@@ -91,7 +91,7 @@ template <typename T>
 inline NodeClass readNodeClass(T& serverOrClient, const NodeId& id) {
     auto dv = readAttribute(serverOrClient, id, AttributeId::NodeClass);
     // workaround to read enum from variant...
-    return *static_cast<NodeClass*>(dv.getValuePtr()->handle()->data);
+    return *static_cast<NodeClass*>(dv.getValue().handle()->data);
 }
 
 /**
@@ -235,8 +235,8 @@ inline ValueRank readValueRank(T& serverOrClient, const NodeId& id) {
 template <typename T>
 inline std::vector<uint32_t> readArrayDimensions(T& serverOrClient, const NodeId& id) {
     const auto dv = readAttribute(serverOrClient, id, AttributeId::ArrayDimensions);
-    if (dv.getValuePtr()->isArray()) {
-        return dv.getValuePtr()->template getArrayCopy<uint32_t>();
+    if (dv.getValue().isArray()) {
+        return dv.getValue().template getArrayCopy<uint32_t>();
     }
     return {};
 }

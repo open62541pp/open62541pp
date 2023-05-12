@@ -49,46 +49,56 @@ const Variant* DataValue::getValuePtr() const noexcept {
     return handle()->hasValue ? &asWrapper<Variant>(handle()->value) : nullptr;
 }
 
-std::optional<Variant> DataValue::getValue() const {
-    if (handle()->hasValue) {
-        return Variant(handle()->value);
-    }
-    return {};
+bool DataValue::hasValue() const noexcept {
+    return handle()->hasValue;
 }
 
-std::optional<DateTime> DataValue::getSourceTimestamp() const {
-    if (handle()->hasSourceTimestamp) {
-        return DateTime(handle()->sourceTimestamp);
-    }
-    return {};
+bool DataValue::hasSourceTimestamp() const noexcept {
+    return handle()->hasSourceTimestamp;
 }
 
-std::optional<DateTime> DataValue::getServerTimestamp() const {
-    if (handle()->hasServerTimestamp) {
-        return DateTime(handle()->serverTimestamp);
-    }
-    return {};
+bool DataValue::hasServerTimestamp() const noexcept {
+    return handle()->hasServerTimestamp;
 }
 
-std::optional<uint16_t> DataValue::getSourcePicoseconds() const {
-    if (handle()->hasSourcePicoseconds) {
-        return handle()->sourcePicoseconds;
-    }
-    return {};
+bool DataValue::hasSourcePicoseconds() const noexcept {
+    return handle()->hasSourcePicoseconds;
 }
 
-std::optional<uint16_t> DataValue::getServerPicoseconds() const {
-    if (handle()->hasServerPicoseconds) {
-        return handle()->serverPicoseconds;
-    }
-    return {};
+bool DataValue::hasServerPicoseconds() const noexcept {
+    return handle()->hasServerPicoseconds;
 }
 
-std::optional<uint32_t> DataValue::getStatusCode() const {
-    if (handle()->hasStatus) {
-        return handle()->status;
-    }
-    return {};
+bool DataValue::hasStatusCode() const noexcept {
+    return handle()->hasStatus;
+}
+
+Variant& DataValue::getValue() noexcept {
+    return asWrapper<Variant>(handle()->value);
+}
+
+const Variant& DataValue::getValue() const noexcept {
+    return asWrapper<Variant>(handle()->value);
+}
+
+DateTime DataValue::getSourceTimestamp() const noexcept {
+    return DateTime(handle()->sourceTimestamp);  // NOLINT
+}
+
+DateTime DataValue::getServerTimestamp() const noexcept {
+    return DateTime(handle()->serverTimestamp);  // NOLINT
+}
+
+uint16_t DataValue::getSourcePicoseconds() const noexcept {
+    return handle()->sourcePicoseconds;
+}
+
+uint16_t DataValue::getServerPicoseconds() const noexcept {
+    return handle()->serverPicoseconds;
+}
+
+uint32_t DataValue::getStatusCode() const noexcept {
+    return handle()->status;
 }
 
 void DataValue::setValue(const Variant& value) {

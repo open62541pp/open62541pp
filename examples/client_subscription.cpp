@@ -28,7 +28,7 @@ int main() {
                       << "- node id:           " << item.getNodeId().toString() << "\n"
                       << "- attribute id:      " << static_cast<int>(item.getAttributeId()) << "\n";
 
-            const auto dt = value.getValue().value().getScalarCopy<opcua::DateTime>();
+            const auto dt = value.getValue().getScalarCopy<opcua::DateTime>();
             std::cout << "Current server time (UTC): " << dt.format("%H:%M:%S") << std::endl;
         }
     );

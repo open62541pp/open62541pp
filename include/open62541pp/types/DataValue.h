@@ -45,18 +45,27 @@ public:
     /// Get value as pointer (might be `nullptr` if not set).
     const Variant* getValuePtr() const noexcept;
 
+    bool hasValue() const noexcept;
+    bool hasSourceTimestamp() const noexcept;
+    bool hasServerTimestamp() const noexcept;
+    bool hasSourcePicoseconds() const noexcept;
+    bool hasServerPicoseconds() const noexcept;
+    bool hasStatusCode() const noexcept;
+
     /// Get value.
-    std::optional<Variant> getValue() const;
+    Variant& getValue() noexcept;
+    /// Get value.
+    const Variant& getValue() const noexcept;
     /// Get source timestamp for the value.
-    std::optional<DateTime> getSourceTimestamp() const;
+    DateTime getSourceTimestamp() const noexcept;
     /// Get server timestamp for the value.
-    std::optional<DateTime> getServerTimestamp() const;
+    DateTime getServerTimestamp() const noexcept;
     /// Get picoseconds interval added to the source timestamp.
-    std::optional<uint16_t> getSourcePicoseconds() const;
+    uint16_t getSourcePicoseconds() const noexcept;
     /// Get picoseconds interval added to the server timestamp.
-    std::optional<uint16_t> getServerPicoseconds() const;
+    uint16_t getServerPicoseconds() const noexcept;
     /// Get status code.
-    std::optional<UA_StatusCode> getStatusCode() const;
+    UA_StatusCode getStatusCode() const noexcept;
 
     /// Set value (copy).
     void setValue(const Variant& value);
