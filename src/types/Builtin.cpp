@@ -71,19 +71,25 @@ std::string_view ByteString::get() const {
     return detail::toStringView(*handle());
 }
 
-#if UAPP_OPEN62541_VER_GE(1, 1)
 ByteString ByteString::fromBase64(std::string_view encoded) {
+#if UAPP_OPEN62541_VER_GE(1, 1)
     ByteString output;
     UA_ByteString_fromBase64(output.handle(), String(encoded).handle());
     return output;
+#else
+    return {};
+#endif
 }
 
 std::string ByteString::toBase64() const {
+#if UAPP_OPEN62541_VER_GE(1, 1)
     String output;
     UA_ByteString_toBase64(handle(), output.handle());
     return std::string(output.get());
-}
+#else
+    return {};
 #endif
+}
 
 /* ----------------------------------------- XmlElement ----------------------------------------- */
 
