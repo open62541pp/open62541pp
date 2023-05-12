@@ -69,7 +69,6 @@ std::string NodeId::toString() const {
     if (ns > 0) {
         result.append("ns=").append(std::to_string(ns)).append(";");
     }
-
     switch (getIdentifierType()) {
     case NodeIdType::Numeric:
         result.append("i=").append(std::to_string(getIdentifierAs<uint32_t>()));
@@ -119,6 +118,20 @@ std::string_view ExpandedNodeId::getNamespaceUri() const {
 
 uint32_t ExpandedNodeId::getServerIndex() const noexcept {
     return handle()->serverIndex;
+}
+
+std::string ExpandedNodeId::toString() const {
+    std::string result;
+    const auto svr = getServerIndex();
+    if (svr > 0) {
+        result.append("svr=").append(std::to_string(svr)).append(";");
+    }
+    const auto nsu = getNamespaceUri();
+    if (!nsu.empty()) {
+        result.append("nsu=").append(nsu).append(";");
+    }
+    result.append(getNodeId().toString());
+    return result;
 }
 
 }  // namespace opcua

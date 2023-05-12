@@ -240,6 +240,18 @@ TEST_CASE("ExpandedNodeId") {
 
     CHECK(idLocal == idLocal);
     CHECK(idLocal != idFull);
+
+    SUBCASE("toString") {
+        CHECK_EQ(ExpandedNodeId({2, 10157}).toString(), "ns=2;i=10157");
+        CHECK_EQ(
+            ExpandedNodeId({2, 10157}, "http://test.org/UA/Data/", 0).toString(),
+            "nsu=http://test.org/UA/Data/;ns=2;i=10157"
+        );
+        CHECK_EQ(
+            ExpandedNodeId({2, 10157}, "http://test.org/UA/Data/", 1).toString(),
+            "svr=1;nsu=http://test.org/UA/Data/;ns=2;i=10157"
+        );
+    }
 }
 
 TEST_CASE("Variant") {

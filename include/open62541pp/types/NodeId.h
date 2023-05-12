@@ -132,6 +132,10 @@ public:
     std::string_view getNamespaceUri() const;
 
     uint32_t getServerIndex() const noexcept;
+
+    /// Encode ExpandedNodeId as a string like `svr=1;nsu=http://test.org/UA/Data/;ns=2;i=10157`.
+    /// @see https://reference.opcfoundation.org/Core/Part6/v105/docs/5.3.1.11
+    std::string toString() const;
 };
 
 }  // namespace opcua
