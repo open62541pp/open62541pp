@@ -1,5 +1,6 @@
 #include "open62541pp/Client.h"
 
+#include <atomic>
 #include <string>
 #include <utility>  // move
 
@@ -50,6 +51,29 @@ public:
         logger_.setLogger(std::move(logger));
     }
 
+    void runIterate(uint16_t timeoutMilliseconds) {
+        const auto status = UA_Client_run_iterate(handle(), timeoutMilliseconds);
+        detail::throwOnBadStatus(status);
+    }
+
+    void run() {
+        if (running_) {
+            return;
+        }
+        running_ = true;
+        while (running_) {
+            runIterate(1000);
+        }
+    }
+
+    void stop() {
+        running_ = false;
+    }
+
+    bool isRunning() const noexcept {
+        return running_;
+    }
+
     UA_Client* handle() noexcept {
         return client_;
     }
@@ -62,6 +86,7 @@ private:
     UA_Client* client_;
     ClientContext context_;
     CustomLogger logger_;
+    std::atomic<bool> running_{false};
 };
 
 /* ------------------------------------------- Client ------------------------------------------- */
@@ -71,10 +96,6 @@ Client::Client()
     const auto status = UA_ClientConfig_setDefault(getConfig(this));
     detail::throwOnBadStatus(status);
     setContext(handle(), getContext());  // overwritten by UA_ClientConfig_setDefault
-}
-
-void Client::setLogger(Logger logger) {
-    connection_->setLogger(std::move(logger));
 }
 
 std::vector<ApplicationDescription> Client::findServers(std::string_view serverUrl) {
@@ -109,6 +130,10 @@ std::vector<EndpointDescription> Client::getEndpoints(std::string_view serverUrl
     UA_Array_delete(array, arraySize, &UA_TYPES[UA_TYPES_ENDPOINTDESCRIPTION]);
     detail::throwOnBadStatus(status);
     return result;
+}
+
+void Client::setLogger(Logger logger) {
+    connection_->setLogger(std::move(logger));
 }
 
 void Client::connect(std::string_view endpointUrl) {
@@ -169,8 +194,19 @@ std::vector<Subscription<Client>> Client::getSubscriptions() {
 }
 
 void Client::runIterate(uint16_t timeoutMilliseconds) {
-    const auto status = UA_Client_run_iterate(handle(), timeoutMilliseconds);
-    detail::throwOnBadStatus(status);
+    connection_->runIterate(timeoutMilliseconds);
+}
+
+void Client::run() {
+    connection_->run();
+}
+
+void Client::stop() {
+    connection_->stop();
+}
+
+bool Client::isRunning() const noexcept {
+    return connection_->isRunning();
 }
 
 Node<Client> Client::getNode(const NodeId& id) {

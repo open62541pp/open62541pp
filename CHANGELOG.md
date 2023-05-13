@@ -15,8 +15,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `Server::createSubscription`
   - `Client::createSubscription`
   - `Client::getSubscriptions`
-- `Client::runIterate` method (#45)
-- `Client::isConnected` method
+- Client methods:
+  - `Client::isConnected`
+  - `Client::runIterate` (#45)
+  - `Client::run`
+  - `Client::stop`
+  - `Client::isRunning`
 - `ReadValueId` wrapper class (#45)
 - Example `client_subscription.cpp` (#45)
 - `ByteString::fromBase64` and `ByteString::toBase64` methods

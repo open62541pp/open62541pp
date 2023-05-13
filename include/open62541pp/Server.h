@@ -58,7 +58,7 @@ public:
     /// Create a (pseudo) subscription to monitor local data changes and events.
     Subscription<Server> createSubscription() noexcept;
 
-    /// Run single iteration of the server's main loop.
+    /// Run a single iteration of the server's main loop.
     /// @returns Maximum wait period until next Server::runIterate call (in ms)
     uint16_t runIterate();
     /// Run the server's main loop. This method will block until Server::stop is called.

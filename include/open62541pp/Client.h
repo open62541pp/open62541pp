@@ -33,33 +33,32 @@ public:
     /// Create client with default configuration.
     Client();
 
-    /// Set custom logging function.
-    void setLogger(Logger logger);
-
     /**
      * Gets a list of all registered servers at the given server.
+     * @param serverUrl Server URL (for example `opc.tcp://localhost:4840`)
      * @note Client must be disconnected.
-     * @param serverUrl url to connect (for example `opc.tcp://localhost:4840`)
      */
     std::vector<ApplicationDescription> findServers(std::string_view serverUrl);
 
     /**
      * Gets a list of endpoints of a server.
-     * @note Client must be disconnected.
-     * @param serverUrl to connect (for example `opc.tcp://localhost:4840`)
+     * @copydetails findServers
      */
     std::vector<EndpointDescription> getEndpoints(std::string_view serverUrl);
 
+    /// Set custom logging function.
+    void setLogger(Logger logger);
+
     /**
      * Connect to the selected server.
-     * @param endpointUrl to connect (for example `opc.tcp://localhost:4840/open62541/server/`)
+     * @param endpointUrl Endpoint URL (for example `opc.tcp://localhost:4840/open62541/server/`)
      */
     void connect(std::string_view endpointUrl);
 
     /**
      * Connect to the selected server with the given username and password.
-     * @param endpointUrl to connect (for example `opc.tcp://localhost:4840/open62541/server/`)
-     * @param login credentials with username and password
+     * @param endpointUrl Endpoint URL (for example `opc.tcp://localhost:4840/open62541/server/`)
+     * @param login       Login credentials with username and password
      */
     void connect(std::string_view endpointUrl, const Login& login);
 
@@ -80,11 +79,18 @@ public:
     std::vector<Subscription<Client>> getSubscriptions();
 
     /**
+     * Run a single iteration of the client's main loop.
      * Listen on the network and process arriving asynchronous responses in the background.
      * Internal housekeeping, renewal of SecureChannels and subscription management is done as well.
      * @param timeoutMilliseconds Timeout in milliseconds
      */
     void runIterate(uint16_t timeoutMilliseconds = 1000);
+    /// Run the client's main loop by. This method will block until Client::stop is called.
+    void run();
+    /// Stop the client's main loop.
+    void stop();
+    /// Check if the client's main loop is running.
+    bool isRunning() const noexcept;
 
     Node<Client> getNode(const NodeId& id);
     Node<Client> getRootNode();

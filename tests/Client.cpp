@@ -1,4 +1,6 @@
+#include <chrono>
 #include <string_view>
+#include <thread>
 
 #include <doctest/doctest.h>
 
@@ -7,6 +9,7 @@
 
 #include "helper/Runner.h"
 
+using namespace std::chrono_literals;
 using namespace opcua;
 
 constexpr std::string_view localServerUrl{"opc.tcp://localhost:4840"};
@@ -78,6 +81,25 @@ TEST_CASE("Client username/password login") {
         CHECK(client.isConnected());
         CHECK_NOTHROW(client.disconnect());
     }
+}
+
+TEST_CASE("Client run/stop") {
+    Server server;
+    ServerRunner serverRunner(server);
+    Client client;
+    client.connect(localServerUrl);
+
+    CHECK_FALSE(client.isRunning());
+
+    auto t = std::thread([&] { client.run(); });
+    std::this_thread::sleep_for(100ms);  // wait for thread to execute run method
+
+    CHECK(client.isRunning());
+
+    client.stop();
+    t.join();  // wait until stopped
+
+    CHECK_FALSE(client.isRunning());
 }
 
 TEST_CASE("Client methods") {

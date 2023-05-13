@@ -40,7 +40,7 @@ int main() {
     mon.setMonitoringMode(opcua::MonitoringMode::Reporting);
     // mon.deleteMonitoredItem();
 
-    while (true) {
-        client.runIterate();
-    }
+    // Run the client's main loop to process callbacks and events.
+    // This will block until client.stop() is called or an exception is thrown.
+    client.run();
 }

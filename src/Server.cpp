@@ -110,10 +110,10 @@ public:
 
 private:
     UA_Server* server_;
-    std::atomic<bool> running_{false};
-    std::mutex mutex_;
     ServerContext context_;
     CustomLogger logger_;
+    std::atomic<bool> running_{false};
+    std::mutex mutex_;
 };
 
 /* ------------------------------------------- Server ------------------------------------------- */
