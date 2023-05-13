@@ -3,23 +3,20 @@
 
 #include "open62541pp/open62541pp.h"
 
-// separate definition for recursion
+// Separate definition for recursion
 void printNodeTree(opcua::Node<opcua::Client>& node, int indent);
 
-/**
- * Browse and print the server's node tree recursively.
- *
- * - Objects (Object)
- *   - Server (Object)
- *     - Auditing (Variable)
- *     - ServiceLevel (Variable)
- *     - NamespaceArray (Variable)
- *     - ServerArray (Variable)
- *     - ServerRedundancy (Object)
- *       - RedundancySupport (Variable)
- *     - VendorServerInfo (Object)
- * ...
- */
+// Browse and print the server's node tree recursively:
+// - Objects (Object)
+//   - Server (Object)
+//     - Auditing (Variable)
+//     - ServiceLevel (Variable)
+//     - NamespaceArray (Variable)
+//     - ServerArray (Variable)
+//     - ServerRedundancy (Object)
+//       - RedundancySupport (Variable)
+//     - VendorServerInfo (Object)
+// ...
 void printNodeTree(opcua::Node<opcua::Client>& node, int indent) {  // NOLINT
     for (auto&& child : node.browseChildren()) {
         std::cout << std::setw(indent) << "- " << child.readBrowseName().getName() << " ("
@@ -34,12 +31,12 @@ int main() {
 
     auto nodeRoot = client.getRootNode();
 
-    // browse all nodes recursively and print node tree to console
+    // Browse all nodes recursively and print node tree to console
     printNodeTree(nodeRoot, 0);
 
-    // get child node by relative path using browse names
+    // Browse a child node by its relative path using browse names
     auto nodeServer = nodeRoot.browseChild({{0, "Objects"}, {0, "Server"}});
-    // get parent
+    // Browse the parent node
     auto nodeServerParent = nodeServer.browseParent();
 
     std::cout << nodeServer.readDisplayName().getText() << "'s parent node is "

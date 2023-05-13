@@ -3,13 +3,12 @@
 int main() {
     opcua::Server server;
 
-    /* Create object types `MamalType` and `DogType`:
-     * (OT) BaseObjectType
-     * + (OT) MamalType
-     *   + (V) Age
-     *   + (OT) DogType
-     *     + (V) Name
-     */
+    // Create object types `MamalType` and `DogType`:
+    // (OT) BaseObjectType
+    // + (OT) MamalType
+    //   + (V) Age
+    //   + (OT) DogType
+    //      + (V) Name
     auto nodeBaseObjectType = server.getNode(opcua::ObjectTypeId::BaseObjectType);
     auto nodeMamalType = nodeBaseObjectType.addObjectType({1, 10000}, "MamalType");
     nodeMamalType.writeDisplayName({"en-US", "MamalType"});
@@ -31,12 +30,11 @@ int main() {
     nodeDogTypeName.writeDescription({"en-US", "This dogs name"});
     nodeDogTypeName.writeScalar(opcua::String("unnamed dog"));  // default name
 
-    /* Instatiate a dog named Bello:
-     * (O) Objects
-     *   + (O) Bello <DogType>
-     *     + (V) Age
-     *     + (V) Name
-     */
+    // Instatiate a dog named Bello:
+    // (O) Objects
+    //   + (O) Bello <DogType>
+    //     + (V) Age
+    //     + (V) Name
     auto nodeObjects = server.getObjectsNode();
     auto nodeBello = nodeObjects.addObject({1, 20000}, "Bello", nodeDogType.getNodeId());
     nodeBello.writeDisplayName({"en-US", "Bello"});

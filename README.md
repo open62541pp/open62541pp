@@ -57,10 +57,10 @@ cog.outl("```")
 int main() {
     opcua::Server server;
 
-    // add variable node
+    // Add a variable node to the Objects node
     auto parentNode = server.getObjectsNode();
     auto myIntegerNode = parentNode.addVariable({1, "the.answer"}, "the answer");
-    // set node attributes
+    // Write some node attributes
     myIntegerNode.writeDataType(opcua::Type::Int32);
     myIntegerNode.writeDisplayName({"en-US", "the answer"});
     myIntegerNode.writeDescription({"en-US", "the answer"});

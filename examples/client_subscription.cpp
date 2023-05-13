@@ -10,14 +10,14 @@ int main() {
 
     auto sub = client.createSubscription();
 
-    // modify and delete the subscription via the returend Subscription<T> object
+    // Modify and delete the subscription via the returend Subscription<T> object
     opcua::SubscriptionParameters subscriptionParameters{};
     subscriptionParameters.publishingInterval = 1000.0;
     sub.setSubscriptionParameters(subscriptionParameters);
     sub.setPublishingMode(true);
     // sub.deleteSubscription();
 
-    // create a monitored item within the subscription for data change notifications
+    // Create a monitored item within the subscription for data change notifications
     auto mon = sub.subscribeDataChange(
         opcua::VariableId::Server_ServerStatus_CurrentTime,  // monitored node id
         opcua::AttributeId::Value,  // monitored attribute
@@ -33,7 +33,7 @@ int main() {
         }
     );
 
-    // modify and delete the monitored item via the returned MonitoredItem<T> object
+    // Modify and delete the monitored item via the returned MonitoredItem<T> object
     opcua::MonitoringParameters monitoringParameters{};
     monitoringParameters.samplingInterval = 100.0;
     mon.setMonitoringParameters(monitoringParameters);
