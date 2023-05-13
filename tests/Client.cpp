@@ -52,7 +52,9 @@ TEST_CASE("Client anonymous login") {
     Client client;
 
     SUBCASE("Connect/disconnect") {
+        CHECK_FALSE(client.isConnected());
         CHECK_NOTHROW(client.connect(localServerUrl));
+        CHECK(client.isConnected());
         CHECK_NOTHROW(client.disconnect());
     }
 
@@ -73,6 +75,7 @@ TEST_CASE("Client username/password login") {
 
     SUBCASE("Connect with username/password should succeed") {
         CHECK_NOTHROW(client.connect(localServerUrl, {"username", "password"}));
+        CHECK(client.isConnected());
         CHECK_NOTHROW(client.disconnect());
     }
 }

@@ -66,6 +66,9 @@ public:
     /// Disconnect and close a connection to the server (async, without blocking).
     void disconnect() noexcept;
 
+    /// Check if client is connected (secure channel open).
+    bool isConnected() noexcept;
+
     /// Get all defined namespaces.
     std::vector<std::string> getNamespaceArray();
 

@@ -132,6 +132,16 @@ void Client::disconnect() noexcept {
     UA_Client_disconnect(handle());
 }
 
+bool Client::isConnected() noexcept {
+#if UAPP_OPEN62541_VER_LE(1, 0)
+    return (UA_Client_getState(handle()) >= UA_CLIENTSTATE_CONNECTED);
+#else
+    UA_SecureChannelState channelState{};
+    UA_Client_getState(handle(), &channelState, nullptr, nullptr);
+    return (channelState == UA_SECURECHANNELSTATE_OPEN);
+#endif
+}
+
 std::vector<std::string> Client::getNamespaceArray() {
     Variant variant;
     services::readValue(*this, {0, UA_NS0ID_SERVER_NAMESPACEARRAY}, variant);
