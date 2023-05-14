@@ -85,6 +85,23 @@ static void deleteMonitoredItemCallback(
     clientContext.monitoredItems.erase({subId, monId});
 }
 
+static void copyMonitoringParametersToNative(
+    const MonitoringParameters& parameters, UA_MonitoringParameters& native
+) {
+    native.samplingInterval = parameters.samplingInterval;
+    native.filter = parameters.filter;
+    native.queueSize = parameters.queueSize;
+    native.discardOldest = parameters.discardOldest;
+}
+
+template <typename T>
+static void reviseMonitoringParameters(MonitoringParameters& parameters, const T& result) {
+    // response type may be UA_MonitoredItemCreateResult or UA_MonitoredItemModifyResult
+    parameters.samplingInterval = result->revisedSamplingInterval;
+    parameters.queueSize = result->revisedQueueSize;
+    parameters.filter = asWrapper<ExtensionObject>(result->filterResult);
+}
+
 uint32_t createMonitoredItemDataChange(
     Client& client,
     uint32_t subscriptionId,
@@ -97,9 +114,7 @@ uint32_t createMonitoredItemDataChange(
     UA_MonitoredItemCreateRequest request{};
     request.itemToMonitor = *itemToMonitor.handle();
     request.monitoringMode = static_cast<UA_MonitoringMode>(monitoringMode);
-    request.requestedParameters.samplingInterval = parameters.samplingInterval;
-    request.requestedParameters.queueSize = parameters.queueSize;
-    request.requestedParameters.discardOldest = parameters.discardOldest;
+    copyMonitoringParametersToNative(parameters, request.requestedParameters);
 
     auto monitoredItemContext = std::make_unique<ClientContext::MonitoredItem>();
     monitoredItemContext->itemToMonitor = itemToMonitor;
@@ -117,16 +132,12 @@ uint32_t createMonitoredItemDataChange(
         deleteMonitoredItemCallback
     );
     detail::throwOnBadStatus(result->statusCode);
-
-    // update revised parameters
-    parameters.samplingInterval = result->revisedSamplingInterval;
-    parameters.queueSize = result->revisedQueueSize;
+    reviseMonitoringParameters(parameters, result);
 
     const auto monitoredItemId = result->monitoredItemId;
     client.getContext().monitoredItems.insert_or_assign(
         {subscriptionId, monitoredItemId}, std::move(monitoredItemContext)
     );
-
     return monitoredItemId;
 }
 
@@ -140,9 +151,7 @@ uint32_t createMonitoredItemDataChange(
     UA_MonitoredItemCreateRequest request{};
     request.itemToMonitor = *itemToMonitor.handle();
     request.monitoringMode = static_cast<UA_MonitoringMode>(monitoringMode);
-    request.requestedParameters.samplingInterval = parameters.samplingInterval;
-    request.requestedParameters.queueSize = parameters.queueSize;
-    request.requestedParameters.discardOldest = parameters.discardOldest;
+    copyMonitoringParametersToNative(parameters, request.requestedParameters);
 
     auto monitoredItemContext = std::make_unique<ServerContext::MonitoredItem>();
     monitoredItemContext->itemToMonitor = itemToMonitor;
@@ -157,16 +166,12 @@ uint32_t createMonitoredItemDataChange(
         dataChangeNotificationCallback
     );
     detail::throwOnBadStatus(result->statusCode);
-
-    // update revised parameters
-    parameters.samplingInterval = result->revisedSamplingInterval;
-    parameters.queueSize = result->revisedQueueSize;
+    reviseMonitoringParameters(parameters, result);
 
     const auto monitoredItemId = result->monitoredItemId;
     server.getContext().monitoredItems.insert_or_assign(
         monitoredItemId, std::move(monitoredItemContext)
     );
-
     return monitoredItemId;
 }
 
@@ -179,19 +184,18 @@ uint32_t createMonitoredItemEvent(
     EventNotificationCallback eventCallback,
     DeleteMonitoredItemCallback deleteCallback
 ) {
+    // TODO: add EventFilter wrapper class
+    using EventFilter = TypeWrapper<UA_EventFilter, UA_TYPES_EVENTFILTER>;
+
     UA_MonitoredItemCreateRequest request{};
     request.itemToMonitor = *itemToMonitor.handle();
     request.monitoringMode = static_cast<UA_MonitoringMode>(monitoringMode);
-    request.requestedParameters.samplingInterval = parameters.samplingInterval;
-    request.requestedParameters.queueSize = parameters.queueSize;
-    request.requestedParameters.discardOldest = parameters.discardOldest;
-    // TODO: add filter to MonitoringParameters
-    UA_EventFilter eventFilter{};
-    request.requestedParameters.filter.encoding = UA_EXTENSIONOBJECT_DECODED;
-    // NOLINTNEXTLINE
-    request.requestedParameters.filter.content.decoded.data = &eventFilter;
-    // NOLINTNEXTLINE
-    request.requestedParameters.filter.content.decoded.type = &UA_TYPES[UA_TYPES_EVENTFILTER];
+    if (parameters.filter.isEmpty()) {
+        // empty filter object will throw BadEventFilterInvalid
+        // use an empty EventFilter instead
+        parameters.filter = ExtensionObject::fromDecodedCopy(EventFilter{});
+    }
+    copyMonitoringParametersToNative(parameters, request.requestedParameters);
 
     auto monitoredItemContext = std::make_unique<ClientContext::MonitoredItem>();
     monitoredItemContext->itemToMonitor = itemToMonitor;
@@ -209,16 +213,12 @@ uint32_t createMonitoredItemEvent(
         deleteMonitoredItemCallback
     );
     detail::throwOnBadStatus(result->statusCode);
-
-    // update revised parameters
-    parameters.samplingInterval = result->revisedSamplingInterval;
-    parameters.queueSize = result->revisedQueueSize;
+    reviseMonitoringParameters(parameters, result);
 
     const auto monitoredItemId = result->monitoredItemId;
     client.getContext().monitoredItems.insert_or_assign(
         {subscriptionId, monitoredItemId}, std::move(monitoredItemContext)
     );
-
     return monitoredItemId;
 }
 
@@ -230,9 +230,7 @@ void modifyMonitoredItem(
 ) {
     UA_MonitoredItemModifyRequest itemToModify{};
     itemToModify.monitoredItemId = monitoredItemId;
-    itemToModify.requestedParameters.samplingInterval = parameters.samplingInterval;
-    itemToModify.requestedParameters.queueSize = parameters.queueSize;
-    itemToModify.requestedParameters.discardOldest = parameters.discardOldest;
+    copyMonitoringParametersToNative(parameters, itemToModify.requestedParameters);
 
     UA_ModifyMonitoredItemsRequest request{};
     request.subscriptionId = subscriptionId;
@@ -249,10 +247,7 @@ void modifyMonitoredItem(
     }
     auto* result = response->results;
     detail::throwOnBadStatus(result->statusCode);
-
-    // update revised parameters
-    parameters.samplingInterval = result->revisedSamplingInterval;
-    parameters.queueSize = result->revisedQueueSize;
+    reviseMonitoringParameters(parameters, result);
 }
 
 void setMonitoringMode(

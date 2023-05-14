@@ -7,6 +7,7 @@
 #include "open62541pp/Common.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/DataValue.h"
+#include "open62541pp/types/ExtensionObject.h"
 #include "open62541pp/types/Variant.h"
 
 // forward declarations
@@ -48,6 +49,11 @@ struct MonitoringParameters {
     /// - `0.0` to use the fastest practical rate
     /// - `-1.0` to use the default sampling interval (publishing interval of the subscription)
     double samplingInterval = 250.0;
+    /// Filter used by the Server to determine if the MonitoredItem should generate a Notification.
+    /// The MonitoringFilter parameter type is an extensible parameter type and can be, for example,
+    /// of type `UA_DataChangeFilter`, `UA_EventFilter` or `UA_AggregateFilter`.
+    /// @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.22
+    ExtensionObject filter;
     /// Size of the MonitoringItem queue.
     /// The following values have special meaning:
     /// - `0` to retrieve the server's default queue size
