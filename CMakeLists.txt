@@ -23,9 +23,17 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)  # for find_package
 
+if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.16.0")
+    option(UAPP_ENABLE_PCH "Use precompiled headers to speed up compilation" OFF)
+endif()
+option(UAPP_ENABLE_COVERAGE "Enable coverage reporting for gcc/clang" OFF)
+
 # interface "library" to set the c++ standard / compile-time options requested
 add_library(open62541pp_project_options INTERFACE)
 target_compile_features(open62541pp_project_options INTERFACE cxx_std_17)
+
+include(cmake/Sanitizers.cmake)
+include(cmake/StaticAnalyzers.cmake)
 
 if(MSVC)
     target_compile_options(
@@ -36,13 +44,6 @@ if(MSVC)
             /w14640
     )
 else()
-    option(UAPP_ENABLE_COVERAGE "Enable coverage reporting for gcc/clang" OFF)
-    if(UAPP_ENABLE_COVERAGE)
-        message(STATUS "Coverage enabled")
-        target_compile_options(open62541pp_project_options INTERFACE --coverage -O0 -g)
-        target_link_libraries(open62541pp_project_options INTERFACE --coverage)
-    endif()
-
     target_compile_options(
         open62541pp_project_options
         INTERFACE
@@ -52,13 +53,12 @@ else()
             -Wnon-virtual-dtor
             -Wpedantic
     )
-endif()
 
-if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.16.0")
-    option(UAPP_ENABLE_PCH "Use precompiled headers to speed up compilation" OFF)
+    if(UAPP_ENABLE_COVERAGE)
+        target_compile_options(open62541pp_project_options INTERFACE --coverage -O0 -g)
+        target_link_libraries(open62541pp_project_options INTERFACE --coverage)
+    endif()
 endif()
-include(cmake/Sanitizers.cmake)
-include(cmake/StaticAnalyzers.cmake)
 
 # threads
 find_package(Threads REQUIRED)
