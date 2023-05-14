@@ -46,4 +46,11 @@ foreach(source ${examples_sources})
                 CXX_CLANG_TIDY "${CMAKE_CXX_CLANG_TIDY};-checks=${checks}"
         )
     endif()
+    if(UAPP_ENABLE_PCH)
+        target_precompile_headers(
+            ${target_name}
+            REUSE_FROM
+                open62541pp::open62541pp
+        )
+    endif()
 endforeach(source ${sandbox_sources})

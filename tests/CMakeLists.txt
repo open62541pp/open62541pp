@@ -28,6 +28,13 @@ set_target_properties(
         OUTPUT_NAME tests
         CXX_CLANG_TIDY ""  # disable clang-tidy
 )
+if(UAPP_ENABLE_PCH)
+    target_precompile_headers(
+        open62541pp_tests
+        REUSE_FROM
+            open62541pp
+    )
+endif()
 
 # discover tests for ctest
 include(${PROJECT_SOURCE_DIR}/3rdparty/doctest/scripts/cmake/doctest.cmake)

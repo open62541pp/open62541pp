@@ -43,18 +43,6 @@ else()
         target_link_libraries(open62541pp_project_options INTERFACE --coverage)
     endif()
 
-    option(UAPP_ENABLE_CLANG_TIDY "Enable testing with clang-tidy" OFF)
-    if(UAPP_ENABLE_CLANG_TIDY)
-        message(STATUS "Static code analysis with clang-tidy enabled")
-        find_program(CLANG_TIDY_EXE NAMES clang-tidy)
-        if(CLANG_TIDY_EXE)
-            message(STATUS "Found clang-tidy: ${CLANG_TIDY_EXE}")
-            set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_EXE}")
-        else()
-            message(SEND_ERROR "clang-tidy requested but executable not found")
-        endif()
-    endif()
-
     target_compile_options(
         open62541pp_project_options
         INTERFACE
@@ -66,7 +54,11 @@ else()
     )
 endif()
 
+if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.16.0")
+    option(UAPP_ENABLE_PCH "Use precompiled headers to speed up compilation" OFF)
+endif()
 include(cmake/Sanitizers.cmake)
+include(cmake/StaticAnalyzers.cmake)
 
 # threads
 find_package(Threads REQUIRED)
@@ -143,6 +135,24 @@ target_link_libraries(
         Threads::Threads
         $<BUILD_INTERFACE:open62541pp_project_options>
 )
+
+if(UAPP_ENABLE_PCH)
+    message(STATUS "PCH enabled")
+    target_precompile_headers(
+        open62541pp
+        PUBLIC
+            <chrono>
+            <functional>
+            <iterator>
+            <memory>
+            <string>
+            <string_view>
+            <vector>
+            ${PROJECT_SOURCE_DIR}/include/open62541pp/open62541.h
+        PRIVATE
+            ${PROJECT_SOURCE_DIR}/src/open62541_impl.h
+    )
+endif()
 
 # tests
 option(UAPP_BUILD_TESTS "Build unit tests" OFF)
