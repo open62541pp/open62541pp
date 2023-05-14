@@ -124,6 +124,7 @@ add_library(
     src/types/Composed.cpp
     src/types/DataValue.cpp
     src/types/DateTime.cpp
+    src/types/ExtensionObject.cpp
     src/types/NodeId.cpp
     src/types/Variant.cpp
 )

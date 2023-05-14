@@ -10,6 +10,7 @@
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/DateTime.h"
+#include "open62541pp/types/ExtensionObject.h"
 #include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"
 
@@ -535,6 +536,63 @@ TEST_CASE("DataValue") {
             dv.setStatusCode(statusCode);
             CHECK(dv.getStatusCode() == statusCode);
         }
+    }
+}
+
+TEST_CASE("ExtensionObject") {
+    SUBCASE("Empty") {
+        ExtensionObject obj;
+        CHECK(obj.getEncoding() == ExtensionObjectEncoding::EncodedNoBody);
+        CHECK(obj.isEncoded());
+        CHECK(obj.getEncodedTypeId().value() == NodeId(0, 0));  // UA_NODEID_NULL
+        CHECK(obj.getEncodedBody().value().empty());
+        CHECK(obj.getDecodedDataType() == nullptr);
+        CHECK(obj.getDecodedData() == nullptr);
+    }
+
+    SUBCASE("setValue (type erased variant)") {
+        ExtensionObject obj;
+        int32_t value = 11;
+        obj.setValue(&value, &UA_TYPES[UA_TYPES_INT32]);
+        CHECK(obj.getEncoding() == ExtensionObjectEncoding::DecodedNoDelete);
+        CHECK(obj.isDecoded());
+        CHECK(obj.getDecodedDataType() == &UA_TYPES[UA_TYPES_INT32]);
+        CHECK(obj.getDecodedData() == &value);
+    }
+
+    SUBCASE("setValue") {
+        ExtensionObject obj;
+        String value("test123");
+        obj.setValue(value);
+        CHECK(obj.getEncoding() == ExtensionObjectEncoding::DecodedNoDelete);
+        CHECK(obj.isDecoded());
+        CHECK(obj.getDecodedDataType() == &UA_TYPES[UA_TYPES_STRING]);
+        CHECK(obj.getDecodedData() == value.handle());
+    }
+
+    SUBCASE("setValueCopy") {
+        ExtensionObject obj;
+        auto variant = Variant::fromScalar(11.11);
+        obj.setValueCopy(variant);
+        CHECK(obj.getEncoding() == ExtensionObjectEncoding::Decoded);
+        CHECK(obj.isDecoded());
+        CHECK(obj.getDecodedDataType() == &UA_TYPES[UA_TYPES_VARIANT]);
+        auto* varPtr = static_cast<Variant*>(obj.getDecodedData());
+        CHECK(varPtr != nullptr);
+        CHECK(varPtr->getScalar<double>() == 11.11);
+    }
+
+    SUBCASE("getDecodedData") {
+        ExtensionObject obj;
+        double value = 11.11;
+        CHECK(obj.getDecodedData() == nullptr);
+        CHECK(obj.getDecodedData<int>() == nullptr);
+        CHECK(obj.getDecodedData<double>() == nullptr);
+
+        obj.setValue(value);
+        CHECK(obj.getDecodedData() == &value);
+        CHECK(obj.getDecodedData<int>() == nullptr);
+        CHECK(obj.getDecodedData<double>() == &value);
     }
 }
 
