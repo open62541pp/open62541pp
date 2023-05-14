@@ -8,15 +8,15 @@
 #include "open62541pp/MonitoredItem.h"
 #include "open62541pp/services/MonitoredItem.h"
 #include "open62541pp/services/Subscription.h"
-#include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/NodeId.h"
-#include "open62541pp/types/Variant.h"
 
 namespace opcua {
 
 // forward declarations
 class Client;
 class Server;
+class DataValue;
+class Variant;
 
 using SubscriptionParameters = services::SubscriptionParameters;
 using MonitoringParameters = services::MonitoringParameters;

@@ -5,10 +5,12 @@
 #include "open62541pp/TypeConverter.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/open62541.h"
-#include "open62541pp/types/Builtin.h"
-#include "open62541pp/types/NodeId.h"
 
 namespace opcua {
+
+// forward declarations
+class ByteString;
+class NodeId;
 
 /**
  * Extension object encoding.

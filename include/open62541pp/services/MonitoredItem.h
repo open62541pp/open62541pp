@@ -5,15 +5,15 @@
 #include <vector>
 
 #include "open62541pp/Common.h"
-#include "open62541pp/types/Composed.h"
-#include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/ExtensionObject.h"
-#include "open62541pp/types/Variant.h"
 
 // forward declarations
 namespace opcua {
 class Client;
 class Server;
+class DataValue;
+class ReadValueId;
+class Variant;
 }  // namespace opcua
 
 namespace opcua::services {

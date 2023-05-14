@@ -1,7 +1,5 @@
 #include "open62541pp/types/Composed.h"
 
-#include "open62541pp/detail/helper.h"
-
 namespace opcua {
 
 BrowseDescription::BrowseDescription(

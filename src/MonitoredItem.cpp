@@ -3,6 +3,7 @@
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
+#include "open62541pp/types/NodeId.h"
 
 #include "ClientContext.h"
 #include "ServerContext.h"

@@ -1,16 +1,15 @@
 #pragma once
 
-#include <iterator>
+#include <cstdint>
 #include <vector>
 
-#include "open62541pp/Common.h"
-#include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/NodeId.h"
 
 // forward declarations
 namespace opcua {
-class Server;
+class ByteString;
+class QualifiedName;
 }  // namespace opcua
 
 namespace opcua::services {

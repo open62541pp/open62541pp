@@ -4,13 +4,13 @@
 
 #include "open62541pp/Common.h"
 #include "open62541pp/services/MonitoredItem.h"
-#include "open62541pp/types/NodeId.h"
 
 namespace opcua {
 
 // forward declarations
 class Client;
 class Server;
+class NodeId;
 template <typename ServerOrClient>
 class Subscription;
 

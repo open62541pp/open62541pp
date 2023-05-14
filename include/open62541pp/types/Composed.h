@@ -1,6 +1,9 @@
 #pragma once
 
+#include <cstdint>
+
 #include "open62541pp/Common.h"
+#include "open62541pp/NodeIds.h"  // ReferenceTypeId
 #include "open62541pp/TypeConverter.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/types/Builtin.h"

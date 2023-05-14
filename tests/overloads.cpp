@@ -3,6 +3,7 @@
 #include <doctest/doctest.h>
 
 #include "open62541pp/overloads/ostream.h"
+#include "open62541pp/types/Builtin.h"
 
 using namespace opcua;
 

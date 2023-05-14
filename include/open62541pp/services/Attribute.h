@@ -1,21 +1,15 @@
 #pragma once
 
-#include <string>
-#include <string_view>
+#include <cstdint>
 #include <vector>
 
 #include "open62541pp/Common.h"
+#include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/helper.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"
-
-// forward declarations
-namespace opcua {
-class Client;
-class Server;
-}  // namespace opcua
 
 namespace opcua::services {
 

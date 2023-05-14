@@ -1,16 +1,16 @@
 #pragma once
 
 #include <cstdint>
-#include <string>
 #include <string_view>
 #include <utility>  // move
 #include <vector>
 
 #include "open62541pp/Common.h"
-#include "open62541pp/Server.h"
 #include "open62541pp/TypeConverter.h"  // guessType
-#include "open62541pp/services/services.h"
+#include "open62541pp/services/Attribute.h"
+#include "open62541pp/services/NodeManagement.h"
 #include "open62541pp/types/Builtin.h"
+#include "open62541pp/types/Composed.h"
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"

@@ -1,15 +1,11 @@
 #pragma once
 
+#include <cstdint>
 #include <string_view>
 
-#include "open62541pp/Common.h"
+#include "open62541pp/Common.h"  // ModellingRule
+#include "open62541pp/NodeIds.h"  // ReferenceTypeId
 #include "open62541pp/types/NodeId.h"
-
-// forward declarations
-namespace opcua {
-class Client;
-class Server;
-}  // namespace opcua
 
 namespace opcua::services {
 

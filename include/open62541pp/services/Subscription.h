@@ -3,8 +3,6 @@
 #include <cstdint>
 #include <functional>
 
-#include "open62541pp/Common.h"
-
 // forward declarations
 namespace opcua {
 class Client;

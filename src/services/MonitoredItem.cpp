@@ -1,5 +1,6 @@
 #include "open62541pp/services/MonitoredItem.h"
 
+#include <memory>
 #include <type_traits>  // is_same_v
 #include <utility>  // move
 
@@ -7,6 +8,9 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/types/Composed.h"
+#include "open62541pp/types/DataValue.h"
+#include "open62541pp/types/Variant.h"
 
 #include "../ClientContext.h"
 #include "../ServerContext.h"

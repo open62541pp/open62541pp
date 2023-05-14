@@ -7,6 +7,7 @@
 #include "open62541pp/MonitoredItem.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/Subscription.h"
+#include "open62541pp/types/Variant.h"
 
 #include "helper/Runner.h"
 

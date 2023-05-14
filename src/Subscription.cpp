@@ -1,7 +1,6 @@
 #include "open62541pp/Subscription.h"
 
 #include <atomic>
-#include <tuple>  // ignore
 #include <utility>  // move
 
 #include "open62541pp/Client.h"

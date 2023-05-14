@@ -4,6 +4,13 @@
 
 #pragma once
 
+// ignore (false-positive?) warning of GCC:
+// declaration of ‘MonitoringParameters’ shadows a global declaration
+#ifndef _MSC_VER
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wshadow"
+#endif
+
 namespace opcua {
 
 /**
@@ -14575,3 +14582,7 @@ enum class MethodId : uint32_t {
 // clang-format on
 
 }  // namespace opcua
+
+#ifndef _MSC_VER
+#pragma GCC diagnostic pop
+#endif

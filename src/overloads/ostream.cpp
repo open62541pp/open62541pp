@@ -1,5 +1,7 @@
 #include "open62541pp/overloads/ostream.h"
 
+#include "open62541pp/types/Builtin.h"
+
 namespace opcua {
 
 std::ostream& operator<<(std::ostream& os, const String& string) {

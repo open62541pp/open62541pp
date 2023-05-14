@@ -3,6 +3,7 @@
 #include <cassert>
 #include <cstdarg>  // va_list, va_copy
 #include <cstdio>
+#include <string_view>
 #include <utility>  // move
 #include <vector>
 

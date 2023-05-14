@@ -1,14 +1,13 @@
 #include "open62541pp/services/Subscription.h"
 
+#include <memory>
 #include <utility>  // move
 
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
-#include "open62541pp/Server.h"
 #include "open62541pp/TypeWrapper.h"
 
 #include "../ClientContext.h"
-#include "../ServerContext.h"
 #include "../open62541_impl.h"
 
 namespace opcua::services {

@@ -1,7 +1,5 @@
 #include "open62541pp/Node.h"
 
-#include <algorithm>  // remove_if
-
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
