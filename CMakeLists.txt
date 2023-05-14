@@ -66,6 +66,12 @@ find_package(Threads REQUIRED)
 # open62541
 option(UAPP_INTERNAL_OPEN62541 "Use internal open62541 library" ON)
 if(UAPP_INTERNAL_OPEN62541)
+    # disable IPO if not defined, otherwise open62541 will enable it
+    # IPO increases link times, especially with sanitizers enabled
+    if(NOT DEFINED CMAKE_INTERPROCEDURAL_OPTIMIZATION)
+        set(CMAKE_INTERPROCEDURAL_OPTIMIZATION OFF)
+    endif()
+
     # overwrite default open62541 options
     # disable sanitizers in debug build (> v1.3)
     if (NOT UA_ENABLE_DEBUG_SANITIZER)
