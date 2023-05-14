@@ -542,38 +542,34 @@ TEST_CASE("DataValue") {
 TEST_CASE("ExtensionObject") {
     SUBCASE("Empty") {
         ExtensionObject obj;
+        CHECK(obj.isEmpty());
         CHECK(obj.getEncoding() == ExtensionObjectEncoding::EncodedNoBody);
-        CHECK(obj.isEncoded());
         CHECK(obj.getEncodedTypeId().value() == NodeId(0, 0));  // UA_NODEID_NULL
         CHECK(obj.getEncodedBody().value().empty());
         CHECK(obj.getDecodedDataType() == nullptr);
         CHECK(obj.getDecodedData() == nullptr);
     }
 
-    SUBCASE("setValue (type erased variant)") {
-        ExtensionObject obj;
+    SUBCASE("fromDecoded (type erased variant)") {
         int32_t value = 11;
-        obj.setValue(&value, &UA_TYPES[UA_TYPES_INT32]);
+        const auto obj = ExtensionObject::fromDecoded(&value, &UA_TYPES[UA_TYPES_INT32]);
         CHECK(obj.getEncoding() == ExtensionObjectEncoding::DecodedNoDelete);
         CHECK(obj.isDecoded());
         CHECK(obj.getDecodedDataType() == &UA_TYPES[UA_TYPES_INT32]);
         CHECK(obj.getDecodedData() == &value);
     }
 
-    SUBCASE("setValue") {
-        ExtensionObject obj;
+    SUBCASE("fromDecoded") {
         String value("test123");
-        obj.setValue(value);
+        const auto obj = ExtensionObject::fromDecoded(value);
         CHECK(obj.getEncoding() == ExtensionObjectEncoding::DecodedNoDelete);
         CHECK(obj.isDecoded());
         CHECK(obj.getDecodedDataType() == &UA_TYPES[UA_TYPES_STRING]);
         CHECK(obj.getDecodedData() == value.handle());
     }
 
-    SUBCASE("setValueCopy") {
-        ExtensionObject obj;
-        auto variant = Variant::fromScalar(11.11);
-        obj.setValueCopy(variant);
+    SUBCASE("fromDecodedCopy") {
+        auto obj = ExtensionObject::fromDecodedCopy(Variant::fromScalar(11.11));
         CHECK(obj.getEncoding() == ExtensionObjectEncoding::Decoded);
         CHECK(obj.isDecoded());
         CHECK(obj.getDecodedDataType() == &UA_TYPES[UA_TYPES_VARIANT]);
@@ -583,13 +579,8 @@ TEST_CASE("ExtensionObject") {
     }
 
     SUBCASE("getDecodedData") {
-        ExtensionObject obj;
         double value = 11.11;
-        CHECK(obj.getDecodedData() == nullptr);
-        CHECK(obj.getDecodedData<int>() == nullptr);
-        CHECK(obj.getDecodedData<double>() == nullptr);
-
-        obj.setValue(value);
+        auto obj = ExtensionObject::fromDecoded(value);
         CHECK(obj.getDecodedData() == &value);
         CHECK(obj.getDecodedData<int>() == nullptr);
         CHECK(obj.getDecodedData<double>() == &value);

@@ -40,6 +40,32 @@ public:
     // NOLINTNEXTLINE, false positive?
     using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
 
+    /// Create an ExtensionObject from a decoded object (assign).
+    /// The data will *not* be deleted when the ExtensionObject is destructed.
+    /// @param data Decoded data
+    template <typename T, TypeIndex typeIndex = detail::guessTypeIndex<T>()>
+    static ExtensionObject fromDecoded(T& data) noexcept;
+
+    /// Create an ExtensionObject from a decoded object (assign).
+    /// The data will *not* be deleted when the ExtensionObject is destructed.
+    /// @param data Decoded data
+    /// @param type Data type of the decoded data
+    /// @warning Type erased version, use with caution.
+    static ExtensionObject fromDecoded(void* data, const UA_DataType* type) noexcept;
+
+    /// Create an ExtensionObject from a decoded object (copy).
+    /// Set the "decoded" data to a copy of the given object.
+    /// @param data Decoded data
+    template <typename T, TypeIndex typeIndex = detail::guessTypeIndex<T>()>
+    static ExtensionObject fromDecodedCopy(const T& data);
+
+    /// Create an ExtensionObject from a decoded object (copy).
+    /// @param data Decoded data
+    /// @param type Data type of the decoded data
+    /// @warning Type erased version, use with caution.
+    static ExtensionObject fromDecodedCopy(const void* data, const UA_DataType* type);
+
+    bool isEmpty() const noexcept;
     /// Check if the ExtensionObject is encoded (usually if the data type is unknown).
     bool isEncoded() const noexcept;
     /// Check if the ExtensionObject is decoded.
@@ -62,34 +88,16 @@ public:
     template <typename T, TypeIndex typeIndex = detail::guessTypeIndex<T>()>
     T* getDecodedData() noexcept;
 
+    /// @copydoc getDecodedData
+    template <typename T, TypeIndex typeIndex = detail::guessTypeIndex<T>()>
+    const T* getDecodedData() const noexcept;
+
     /// Get pointer to the encoded data. Returns `nullptr` if the ExtensionObject is encoded.
     /// @warning Type erased version, use with caution.
     void* getDecodedData() noexcept;
 
-    /// Assign an object to the ExtensionObject (decoded data).
-    /// The data will *not* be deleted when the ExtensionObject is destructed.
-    /// @param data Decoded data
-    template <typename T, TypeIndex typeIndex = detail::guessTypeIndex<T>()>
-    void setValue(T& data) noexcept;
-
-    /// Assign an object to the ExtensionObject (decoded data).
-    /// The data will *not* be deleted when the ExtensionObject is destructed.
-    /// @param data Decoded data
-    /// @param type Data type of the decoded data
-    /// @warning Type erased version, use with caution.
-    void setValue(void* data, const UA_DataType* type) noexcept;
-
-    /// Copy an object to the ExtensionObject (decoded data).
-    /// Set the "decoded" data to a copy of the given object.
-    /// @param data Decoded data
-    template <typename T, TypeIndex typeIndex = detail::guessTypeIndex<T>()>
-    void setValueCopy(const T& data);
-
-    /// Copy an object to the ExtensionObject (decoded data).
-    /// @param data Decoded data
-    /// @param type Data type of the decoded data
-    /// @warning Type erased version, use with caution.
-    void setValueCopy(const void* data, const UA_DataType* type);
+    /// @copydoc getDecodedData
+    const void* getDecodedData() const noexcept;
 };
 
 /* ------------------------------------------- Helper ------------------------------------------- */
@@ -115,26 +123,26 @@ T* ExtensionObject::getDecodedData() noexcept {
 }
 
 template <typename T, TypeIndex typeIndex>
-void ExtensionObject::setValue(T& data) noexcept {
+ExtensionObject ExtensionObject::fromDecoded(T& data) noexcept {
     detail::assertTypeCombination<T, typeIndex>();
     static_assert(
         detail::isAssignableToExtensionObject<T>(),
         "Template type must be convertible to native type to assign data without copy"
     );
     if constexpr (detail::IsTypeWrapper<T>::value) {
-        setValue(data.handle(), detail::getUaDataType<typeIndex>());
+        return fromDecoded(data.handle(), detail::getUaDataType<typeIndex>());
     } else {
-        setValue(&data, detail::getUaDataType<typeIndex>());
+        return fromDecoded(&data, detail::getUaDataType<typeIndex>());
     }
 }
 
 template <typename T, TypeIndex typeIndex>
-void ExtensionObject::setValueCopy(const T& data) {
+ExtensionObject ExtensionObject::fromDecodedCopy(const T& data) {
     detail::assertTypeCombination<T, typeIndex>();
     if constexpr (detail::IsTypeWrapper<T>::value) {
-        setValueCopy(data.handle(), detail::getUaDataType<typeIndex>());
+        return fromDecodedCopy(data.handle(), detail::getUaDataType<typeIndex>());
     } else {
-        setValueCopy(&data, detail::getUaDataType<typeIndex>());
+        return fromDecodedCopy(&data, detail::getUaDataType<typeIndex>());
     }
 }
 
