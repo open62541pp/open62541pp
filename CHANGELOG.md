@@ -22,9 +22,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `Client::stop`
   - `Client::isRunning`
 - `ReadValueId` wrapper class (#45)
-- Example `client_subscription.cpp` (#45)
+- `ExtensionObject` wrapper class (#48)
 - `ByteString::fromBase64` and `ByteString::toBase64` methods
 - `NodeId::toString`/`ExpandedNodeId::toString` method to encode NodeIds as strings, e.g. `ns=1;s=SomeNode`
+- Examples:
+  - `client_subscription` (#45)
 
 ### Changed
 
