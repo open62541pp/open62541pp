@@ -25,14 +25,15 @@ jobs:
           - { name: LSan,       CC: clang-14, CXX: clang++-14, flags: "-DUAPP_ENABLE_SANITIZER_LEAK=ON" }
           - { name: TSan,       CC: clang-14, CXX: clang++-14, flags: "-DUAPP_ENABLE_SANITIZER_THREAD=ON" }
           - { name: UBSan,      CC: clang-14, CXX: clang++-14, flags: "-DUAPP_ENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON" }
+    env:
+      CMAKE_GENERATOR: Ninja
+      CC: ${{ matrix.config.CC }}
+      CXX: ${{ matrix.config.CXX }}
     steps:
       - uses: actions/checkout@v3
         with:
           submodules: recursive
-      - name: Compile and run tests
-        env:
-          CC: ${{ matrix.config.CC }}
-          CXX: ${{ matrix.config.CXX }}
+      - name: Build
         run: |
           mkdir build
           cd build
@@ -43,24 +44,28 @@ jobs:
             ${{ matrix.config.flags }} \
             ..
           cmake --build .
-          ctest --output-on-failure
+      - name: Run tests
+        run: ctest --output-on-failure
 
   linux-coverage:
     name: Linux Coverage
     runs-on: ubuntu-22.04
+    env:
+      CMAKE_GENERATOR: Ninja
     steps:
       - uses: actions/checkout@v3
         with:
           submodules: recursive
       - name: Install requirements
         run: pip install gcovr~=6.0
-      - name: Compile and run tests
+      - name: Build
         run: |
           mkdir build
           cd build
           cmake -DUAPP_BUILD_TESTS=ON -DUAPP_ENABLE_COVERAGE=ON ..
           cmake --build .
-          ctest --output-on-failure
+      - name: Run tests
+        run: ctest --output-on-failure
       - name: Coverage report (text)
         run: cmake --build build --target open62541pp_coverage_report
       - name: Coverage report (xml)
@@ -87,13 +92,14 @@ jobs:
       - uses: actions/checkout@v3
         with:
           submodules: recursive
-      - name: Compile and run tests
+      - name: Build
         run: |
           mkdir build
           cd build
           cmake -DUAPP_BUILD_TESTS=ON -DUAPP_BUILD_EXAMPLES=ON ..
           cmake --build . --config ${{ matrix.build_type }}
-          ctest --output-on-failure
+      - name: Run tests
+        run: ctest --output-on-failure
 
   macos:
     # https://github.com/actions/runner-images/blob/main/images/macos/macos-12-Readme.md
@@ -109,7 +115,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           submodules: recursive
-      - name: Compile and run tests
+      - name: Build
         env:
           CC: ${{ matrix.config.CC }}
           CXX: ${{ matrix.config.CXX }}
@@ -122,4 +128,5 @@ jobs:
             -DUAPP_BUILD_EXAMPLES=ON \
             ..
           cmake --build .
-          ctest --output-on-failure
+      - name: Run tests
+        run: ctest --output-on-failure

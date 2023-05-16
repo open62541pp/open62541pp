@@ -11,11 +11,13 @@ jobs:
       matrix:
         build_type: ["Debug", "Release"]
         library_type: ["static", "shared"]
+    env:
+      CMAKE_GENERATOR: Ninja
     steps:
       - uses: actions/checkout@v3
         with:
           submodules: recursive
-      - name: Compile and install open62541/open62541pp
+      - name: Build and install open62541 & open62541pp
         run: |
           mkdir build
           cd build
@@ -25,7 +27,7 @@ jobs:
             ..
           cmake --build .
           sudo cmake --install .
-      - name: Compile examples (stand-alone)
+      - name: Build examples (stand-alone)
         run: |
           mkdir build_examples
           cd build_examples

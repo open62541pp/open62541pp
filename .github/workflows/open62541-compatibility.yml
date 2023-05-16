@@ -21,6 +21,9 @@ jobs:
         build_type: ["Debug", "Release"]
         library_type: ["static", "shared"]
         amalgamation: [false, true]
+    env:
+      CMAKE_GENERATOR: Ninja
+      CFLAGS: "-Wstrict-overflow=0" # disable strict-overflow error in v1.1
     steps:
       - uses: actions/checkout@v3
         with:
@@ -32,9 +35,7 @@ jobs:
           ref: ${{ matrix.version }}
           path: open62541
           submodules: recursive
-      - name: Install open62541
-        env:
-          CFLAGS: "-Wstrict-overflow=0" # disable strict-overflow error in v1.1
+      - name: Build & install open62541
         run: |
           cd open62541
           mkdir build
@@ -48,7 +49,7 @@ jobs:
             ..
           cmake --build .
           sudo cmake --install .
-      - name: Compile and run tests
+      - name: Build
         run: |
           mkdir build
           cd build
@@ -59,3 +60,5 @@ jobs:
             -DUAPP_INTERNAL_OPEN62541=OFF \
             ..
           cmake --build .
+      - name: Run tests
+        run: ctest --output-on-failure

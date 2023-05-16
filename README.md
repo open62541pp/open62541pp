@@ -216,16 +216,20 @@ target_link_library(myexecutable PRIVATE open62541pp::open62541pp)
 # clone repository
 git clone --recursive https://github.com/open62541pp/open62541pp.git
 cd open62541pp
+
 # build and run tests
 mkdir build
 cd build
 cmake -DCMAKE_BUILD_TYPE=Debug -DUAPP_BUILD_EXAMPLES=ON -DUAPP_BUILD_TESTS=ON ..
 cmake --build .
-# run tests again (tests run automatically after build step)
+
+# run tests
 ctest --output-on-failure
-# coverage report (text or html) with UAPP_ENABLE_COVERAGE option enabled
+
+# generate coverage reports (text or html) with UAPP_ENABLE_COVERAGE option enabled
 cmake --build . --target open62541pp_coverage_report
 cmake --build . --target open62541pp_coverage_report_html
+
 # install to system
 cmake --install .
 ```
