@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Update open62541 to v1.3.6 (#49)
 - Use scoped enum `TimestampsToReturn` instead of `UA_TimestampsToReturn`
 - Use scoped enum `AttributeId` instead of `UA_AttributeId`
 - Don't return std::optional from `DataValue` getters
