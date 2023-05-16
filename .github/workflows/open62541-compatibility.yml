@@ -21,9 +21,6 @@ jobs:
         build_type: ["Debug", "Release"]
         library_type: ["static", "shared"]
         amalgamation: [false, true]
-    env:
-      CMAKE_GENERATOR: Ninja
-      CFLAGS: "-Wstrict-overflow=0" # disable strict-overflow error in v1.1
     steps:
       - uses: actions/checkout@v3
         with:
@@ -35,7 +32,14 @@ jobs:
           ref: ${{ matrix.version }}
           path: open62541
           submodules: recursive
+      - uses: aminya/setup-cpp@v1
+        with:
+          compiler: ${{ matrix.compiler }}
+          cmake: true
+          ninja: true
       - name: Build & install open62541
+        env:
+          CFLAGS: "-Wstrict-overflow=0" # disable strict-overflow error in v1.1
         run: |
           cd open62541
           mkdir build

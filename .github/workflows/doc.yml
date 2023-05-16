@@ -10,13 +10,15 @@ jobs:
   doc:
     runs-on: ubuntu-22.04
     steps:
-      - name: Install requirements
-        run: |
-          sudo apt update
-          sudo apt install -y doxygen graphviz
       - uses: actions/checkout@v3
         with:
           submodules: recursive
+      - uses: aminya/setup-cpp@v1
+        with:
+          compiler: ${{ matrix.compiler }}
+          cmake: true
+          doxygen: true
+          graphviz: true
       - name: Build documentation
         run: |
           mkdir build
