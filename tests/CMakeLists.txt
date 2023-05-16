@@ -40,10 +40,11 @@ endif()
 include(${PROJECT_SOURCE_DIR}/3rdparty/doctest/scripts/cmake/doctest.cmake)
 doctest_discover_tests(open62541pp_tests)
 
-# run tests after build
-add_custom_command(
-    TARGET open62541pp_tests POST_BUILD
-    COMMAND ${CMAKE_CTEST_COMMAND} "--output-on-failure"
-    COMMENT "Run ctest"
-    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-)
+if(UAPP_BUILD_TESTS_AUTORUN)
+    add_custom_command(
+        TARGET open62541pp_tests POST_BUILD
+        COMMAND ${CMAKE_CTEST_COMMAND} "--output-on-failure"
+        COMMENT "Run ctest"
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+    )
+endif()

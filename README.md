@@ -184,10 +184,31 @@ open62541++ provides additional build options:
 - `UAPP_INTERNAL_OPEN62541`: Use internal open62541 library if `ON` or search for installed open62541 library if `OFF`
 - `UAPP_BUILD_DOCUMENTATION`: Build documentation
 - `UAPP_BUILD_EXAMPLES`: Build examples for `examples` directory
-- `UAPP_BUILD_TESTS`: Build an run tests
+- `UAPP_BUILD_TESTS`: Build unit tests
+- `UAPP_BUILD_TESTS_AUTORUN`: Run unit tests after build
 - `UAPP_ENABLE_CLANG_TIDY`: Enable static code analysis with Clang-Tidy
 - `UAPP_ENABLE_COVERAGE`: Enable coverage analysis
+- `UAPP_ENABLE_PCH`: Use precompiled headers to speed up compilation
 - `UAPP_ENABLE_SANITIZER_ADDRESS/LEAK/MEMORY/THREAD/UNDEFINED_BEHAVIOUR`: Enable sanitizers
+
+### Integrate as an embedded (in-source) dependency
+
+Add it to your project as a Git submodule (`git submodule add https://github.com/open62541pp/open62541pp.git`) and link it with CMake:
+
+```cmake
+add_subdirectory(extern/open62541pp)  # the submodule directory
+target_link_library(myexecutable PRIVATE open62541pp::open62541pp)
+```
+
+### Integrate as a pre-compiled library
+
+If you build and install this package to your system, a `open62541ppConfig.cmake` file will be generated and installed to your system.
+The installed library can be found and linked within CMake:
+
+```cmake 
+find_package(open62541pp::open62541pp CONFIG REQUIRED)
+target_link_library(myexecutable PRIVATE open62541pp::open62541pp)
+```
 
 ### Build and install
 
@@ -207,25 +228,6 @@ cmake --build . --target open62541pp_coverage_report
 cmake --build . --target open62541pp_coverage_report_html
 # install to system
 cmake --install .
-```
-
-### Integrate as an embedded (in-source) dependency
-
-Add it to your project as a Git submodule (`git submodule add https://github.com/open62541pp/open62541pp.git`) and link it with CMake:
-
-```cmake
-add_subdirectory(extern/open62541pp)  # the submodule directory
-target_link_library(myexecutable PRIVATE open62541pp::open62541pp)
-```
-
-### Integrate as a pre-compiled library
-
-If you build and install this package to your system, a `open62541ppConfig.cmake` file will be generated and installed to your system.
-The installed library can be found and linked within CMake:
-
-```cmake 
-find_package(open62541pp::open62541pp CONFIG REQUIRED)
-target_link_library(myexecutable PRIVATE open62541pp::open62541pp)
 ```
 
 ### Dependencies

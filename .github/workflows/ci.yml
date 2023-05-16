@@ -43,6 +43,7 @@ jobs:
             ${{ matrix.config.flags }} \
             ..
           cmake --build .
+          ctest --output-on-failure
 
   linux-coverage:
     name: Linux Coverage
@@ -59,6 +60,7 @@ jobs:
           cd build
           cmake -DUAPP_BUILD_TESTS=ON -DUAPP_ENABLE_COVERAGE=ON ..
           cmake --build .
+          ctest --output-on-failure
       - name: Coverage report (text)
         run: cmake --build build --target open62541pp_coverage_report
       - name: Coverage report (xml)
@@ -91,6 +93,7 @@ jobs:
           cd build
           cmake -DUAPP_BUILD_TESTS=ON -DUAPP_BUILD_EXAMPLES=ON ..
           cmake --build . --config ${{ matrix.build_type }}
+          ctest --output-on-failure
 
   macos:
     # https://github.com/actions/runner-images/blob/main/images/macos/macos-12-Readme.md
@@ -119,3 +122,4 @@ jobs:
             -DUAPP_BUILD_EXAMPLES=ON \
             ..
           cmake --build .
+          ctest --output-on-failure
