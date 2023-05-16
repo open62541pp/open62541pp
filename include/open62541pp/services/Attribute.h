@@ -402,7 +402,7 @@ inline void writeValueRank(T& serverOrClient, const NodeId& id, ValueRank valueR
 }
 
 /**
- * Write the `ArrayDimensions` attribute of variable (type) node.
+ * Write the `ArrayDimensions` attribute of a variable (type) node.
  *
  * Should be unspecified if ValueRank is <= 0 (ValueRank::Any, ValueRank::Scalar,
  * ValueRank::ScalarOrOneDimension, ValueRank::OneOrMoreDimensions). The dimension zero is a
@@ -420,7 +420,7 @@ inline void writeArrayDimensions(
 }
 
 /**
- * Write the `AccessLevel` attribute of variable node.
+ * Write the `AccessLevel` attribute of a variable node.
  * @copydetails readAccessLevel
  * @ingroup Attribute
  */
@@ -431,7 +431,7 @@ inline void writeAccessLevel(T& serverOrClient, const NodeId& id, uint8_t mask) 
 }
 
 /**
- * Write the `UserAccessLevel` attribute of variable node.
+ * Write the `UserAccessLevel` attribute of a variable node.
  * @copydetails readUserAccessLevel
  * @note Cannot be written from the server.
  * @ingroup Attribute

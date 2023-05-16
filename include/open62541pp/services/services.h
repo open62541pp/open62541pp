@@ -12,3 +12,8 @@
 #include "open62541pp/services/NodeManagement.h"
 #include "open62541pp/services/Subscription.h"
 #include "open62541pp/services/View.h"
+
+/**
+ * OPC UA services as free functions.
+ */
+namespace opcua::services {}
