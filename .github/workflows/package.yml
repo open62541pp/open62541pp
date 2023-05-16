@@ -19,14 +19,12 @@ jobs:
           submodules: recursive
       - uses: aminya/setup-cpp@v1
         with:
-          compiler: ${{ matrix.compiler }}
-          cmake: true
           ninja: true
       - name: Build and install open62541 & open62541pp
         run: |
           mkdir build
           cd build
-          cmake \
+          cmake -G Ninja \
             -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}} \
             -DBUILD_SHARED_LIBS=${{ matrix.library_type == 'shared' }} \
             ..
@@ -36,5 +34,5 @@ jobs:
         run: |
           mkdir build_examples
           cd build_examples
-          cmake --debug-find ../examples
+          cmake -G Ninja --debug-find ../examples
           cmake --build .

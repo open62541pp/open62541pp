@@ -31,14 +31,12 @@ jobs:
           submodules: recursive
       - uses: aminya/setup-cpp@v1
         with:
-          compiler: ${{ matrix.compiler }}
-          cmake: true
           ninja: true
       - name: Build
         run: |
           mkdir build
           cd build
-          cmake \
+          cmake -G Ninja \
             -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
             -DUAPP_BUILD_TESTS=ON \
             -DUAPP_BUILD_EXAMPLES=ON \
@@ -46,7 +44,7 @@ jobs:
             ..
           cmake --build .
       - name: Run tests
-        run: ctest --output-on-failure
+        run: ctest --test-dir build --output-on-failure
 
   linux-coverage:
     name: Linux Coverage
@@ -57,18 +55,16 @@ jobs:
           submodules: recursive
       - uses: aminya/setup-cpp@v1
         with:
-          compiler: ${{ matrix.compiler }}
-          cmake: true
           ninja: true
           gcovr: "6.0"
       - name: Build
         run: |
           mkdir build
           cd build
-          cmake -DUAPP_BUILD_TESTS=ON -DUAPP_ENABLE_COVERAGE=ON ..
+          cmake -G Ninja -DUAPP_BUILD_TESTS=ON -DUAPP_ENABLE_COVERAGE=ON ..
           cmake --build .
       - name: Run tests
-        run: ctest --output-on-failure
+        run: ctest --test-dir build --output-on-failure
       - name: Coverage report (text)
         run: cmake --build build --target open62541pp_coverage_report
       - name: Coverage report (xml)
@@ -102,7 +98,7 @@ jobs:
           cmake -DUAPP_BUILD_TESTS=ON -DUAPP_BUILD_EXAMPLES=ON ..
           cmake --build . --config ${{ matrix.build_type }}
       - name: Run tests
-        run: ctest --output-on-failure
+        run: ctest --test-dir build --output-on-failure
 
   macos:
     # https://github.com/actions/runner-images/blob/main/images/macos/macos-12-Readme.md
@@ -132,4 +128,4 @@ jobs:
             ..
           cmake --build .
       - name: Run tests
-        run: ctest --output-on-failure
+        run: ctest --test-dir build --output-on-failure
