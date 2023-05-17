@@ -21,12 +21,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `Client::run`
   - `Client::stop`
   - `Client::isRunning`
+- Client state callbacks: `Client::onConnected`, `Client::onDisconnected`, `Client::onSessionActivated`, `Client::onSessionClosed` (#50)
 - `ReadValueId` wrapper class (#45)
 - `ExtensionObject` wrapper class (#48)
 - `ByteString::fromBase64` and `ByteString::toBase64` methods
 - `NodeId::toString`/`ExpandedNodeId::toString` method to encode NodeIds as strings, e.g. `ns=1;s=SomeNode`
+- `BadDisconnect` exception for simpler handling of disconnects (#50)
 - Examples:
-  - `client_subscription` (#45)
+  - `client_subscription` (#45, #50)
 
 ### Changed
 
