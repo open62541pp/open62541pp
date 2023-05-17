@@ -172,8 +172,13 @@ public:
             return;
         }
         running_ = true;
-        while (running_) {
-            runIterate(1000);
+        try {
+            while (running_) {
+                runIterate(1000);
+            }
+        } catch (...) {
+            running_ = false;
+            throw;
         }
     }
 
