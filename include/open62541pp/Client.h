@@ -52,9 +52,13 @@ public:
     /// Set custom logging function.
     void setLogger(Logger logger);
 
+    /// Set a state callback that will be called after the client is connected.
     void onConnected(StateCallback callback);
+    /// Set a state callback that will be called after the client is disconnected.
     void onDisconnected(StateCallback callback);
+    /// Set a state callback that will be called after the session is activated.
     void onSessionActivated(StateCallback callback);
+    /// Set a state callback that will be called after the session is closed.
     void onSessionClosed(StateCallback callback);
 
     /**
