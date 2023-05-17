@@ -1,5 +1,7 @@
 #include "open62541pp/MonitoredItem.h"
 
+#include <cassert>
+
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
@@ -51,6 +53,7 @@ inline static ServerContext::MonitoredItem& getMonitoredItemContext(
     if (it == monitoredItems.end()) {
         throw BadStatus(UA_STATUSCODE_BADMONITOREDITEMIDINVALID);
     }
+    assert(it->second != nullptr);  // NOLINT
     return *(it->second);
 }
 
@@ -62,6 +65,7 @@ inline static ClientContext::MonitoredItem& getMonitoredItemContext(
     if (it == monitoredItems.end()) {
         throw BadStatus(UA_STATUSCODE_BADMONITOREDITEMIDINVALID);
     }
+    assert(it->second != nullptr);  // NOLINT
     return *(it->second);
 }
 
