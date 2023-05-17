@@ -135,10 +135,10 @@ MonitoredItem<Client> Subscription<Client>::subscribeDataChange(
         {id, attribute},
         monitoringMode,
         parameters,
-        [&, callback = std::move(onDataChange)](
+        [connectionPtr = &connection_, callback = std::move(onDataChange)](
             uint32_t subId, uint32_t monId, const DataValue& value
         ) {
-            static const MonitoredItem<Client> monitoredItem(connection_, subId, monId);
+            static const MonitoredItem<Client> monitoredItem(*connectionPtr, subId, monId);
             callback(monitoredItem, value);
         }
     );
@@ -158,10 +158,10 @@ MonitoredItem<Client> Subscription<Client>::subscribeEvent(
         {id, AttributeId::EventNotifier},
         monitoringMode,
         parameters,
-        [&, callback = std::move(onEvent)](
+        [connectionPtr = &connection_, callback = std::move(onEvent)](
             uint32_t subId, uint32_t monId, const std::vector<Variant>& eventFields
         ) {
-            static const MonitoredItem<Client> monitoredItem(connection_, subId, monId);
+            static const MonitoredItem<Client> monitoredItem(*connectionPtr, subId, monId);
             callback(monitoredItem, eventFields);
         }
     );
