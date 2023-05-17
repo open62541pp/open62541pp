@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2023-05-17
+
 ### Added
 
 - Subscription and MonitoredItem service set as free functions in namespace services (#45)
@@ -164,7 +166,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial public release
 
-[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.3.0...HEAD
+[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.4.0
 [0.3.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.3.0
 [0.2.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.2.0
 [0.1.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.1.0
