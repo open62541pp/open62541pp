@@ -28,6 +28,16 @@ private:
     UA_StatusCode code_;
 };
 
+/**
+ * Specific exception for open62541 status code `UA_STATUSCODE_BADDISCONNECT`.
+ * Useful to catch Client disconnects.
+ */
+class BadDisconnect : public BadStatus {
+public:
+    BadDisconnect()
+        : BadStatus(UA_STATUSCODE_BADDISCONNECT) {}
+};
+
 class BadVariantAccess : public std::runtime_error {
 public:
     using std::runtime_error::runtime_error;  // inherit contructors
@@ -45,7 +55,13 @@ namespace detail {
 
 inline void throwOnBadStatus(UA_StatusCode code) {
     if (isBadStatus(code)) {
-        throw BadStatus(code);
+        // NOLINTNEXTLINE
+        switch (code) {
+        case UA_STATUSCODE_BADDISCONNECT:
+            throw BadDisconnect();
+        default:
+            throw BadStatus(code);
+        }
     }
 }
 
