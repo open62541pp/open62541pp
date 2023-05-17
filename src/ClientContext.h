@@ -1,17 +1,28 @@
 #pragma once
 
+#include <array>
 #include <cassert>
 #include <map>
 #include <memory>
 #include <utility>  // pair
 
+#include "open62541pp/Client.h"
 #include "open62541pp/services/MonitoredItem.h"
 #include "open62541pp/services/Subscription.h"
 #include "open62541pp/types/Composed.h"
 
 #include "open62541_impl.h"
+#include "version.h"
 
 namespace opcua {
+
+enum class ClientState {
+    Disconnected,
+    Connected,
+    SessionActicated,
+    SessionClosed,
+};
+inline constexpr size_t clientStateCount = 4;
 
 /**
  * Internal storage for Client class.
@@ -36,14 +47,17 @@ public:
 
     std::map<SubId, std::unique_ptr<Subscription>> subscriptions;
     std::map<SubMonId, std::unique_ptr<MonitoredItem>> monitoredItems;
+
+#if UAPP_OPEN62541_VER_LE(1, 0)
+    UA_ClientState lastClientState{};
+#else
+    UA_SecureChannelState lastChannelState{};
+    UA_SessionState lastSessionState{};
+#endif
+    std::array<StateCallback, clientStateCount> stateCallbacks;
 };
 
 /* ---------------------------------------------------------------------------------------------- */
-
-inline void setContext(UA_Client* client, ClientContext& context) {
-    assert(client != nullptr);  // NOLINT
-    UA_Client_getConfig(client)->clientContext = &context;
-}
 
 inline ClientContext& getContext(UA_Client* client) {
     assert(client != nullptr);  // NOLINT

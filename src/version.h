@@ -1,3 +1,5 @@
+#pragma once
+
 #include <tuple>
 
 #include "open62541_impl.h"

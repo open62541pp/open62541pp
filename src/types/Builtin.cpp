@@ -71,7 +71,7 @@ std::string_view ByteString::get() const {
     return detail::toStringView(*handle());
 }
 
-ByteString ByteString::fromBase64(std::string_view encoded) {
+ByteString ByteString::fromBase64([[maybe_unused]] std::string_view encoded) {
 #if UAPP_OPEN62541_VER_GE(1, 1)
     ByteString output;
     UA_ByteString_fromBase64(output.handle(), String(encoded).handle());
