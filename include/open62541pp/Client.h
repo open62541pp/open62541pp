@@ -1,5 +1,6 @@
 #pragma once
 
+#include <functional>
 #include <memory>
 #include <string>
 #include <string_view>
@@ -21,6 +22,8 @@ namespace opcua {
 class ClientContext;
 template <typename ServerOrClient>
 class Node;
+
+using StateCallback = std::function<void()>;
 
 /**
  * High-level client class.
@@ -48,6 +51,11 @@ public:
 
     /// Set custom logging function.
     void setLogger(Logger logger);
+
+    void onConnected(StateCallback callback);
+    void onDisconnected(StateCallback callback);
+    void onSessionActivated(StateCallback callback);
+    void onSessionClosed(StateCallback callback);
 
     /**
      * Connect to the selected server.

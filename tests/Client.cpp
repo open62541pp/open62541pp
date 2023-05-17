@@ -102,6 +102,43 @@ TEST_CASE("Client run/stop") {
     CHECK_FALSE(client.isRunning());
 }
 
+TEST_CASE("Client state callbacks") {
+    Server server;
+    ServerRunner serverRunner(server);
+    Client client;
+
+    enum class States {
+        Connected,
+        Disconnected,
+        SessionActicated,
+        SessionClosed,
+    };
+
+    std::vector<States> states;
+    client.onConnected([&] { states.push_back(States::Connected); });
+    client.onDisconnected([&] { states.push_back(States::Disconnected); });
+    client.onSessionActivated([&] { states.push_back(States::SessionActicated); });
+    client.onSessionClosed([&] { states.push_back(States::SessionClosed); });
+
+    client.connect(localServerUrl);
+    std::this_thread::sleep_for(100ms);
+
+    // Endpoints can be discovered with FindServers (without session) before connection.
+    // This will trigger the connect/disconnect before the actual connection happens.
+    // -> Look at the last two states:
+    CHECK(states.size() >= 2);
+    CHECK(states.at(states.size() - 2) == States::Connected);
+    CHECK(states.at(states.size() - 1) == States::SessionActicated);
+
+    states.clear();
+    client.disconnect();
+    std::this_thread::sleep_for(100ms);
+
+    // v1.0 will not trigger session closed
+    CHECK(states.size() >= 1);
+    CHECK(states.at(states.size() - 1) == States::Disconnected);
+}
+
 TEST_CASE("Client methods") {
     Server server;
     ServerRunner serverRunner(server);

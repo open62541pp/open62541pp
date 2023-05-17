@@ -26,6 +26,111 @@ inline static UA_ClientConfig* getConfig(Client* client) noexcept {
     return UA_Client_getConfig(client->handle());
 }
 
+/* --------------------------------------- State callbacks -------------------------------------- */
+
+// State changes in open62541.
+// The initial UA_ClientState from v1.0 was replace by two separate states:
+// - UA_SecureChannelState
+// - UA_SessionState
+//
+// | v1.0        | ClientState                  |
+// |-------------|------------------------------|
+// | Connect     | UA_CLIENTSTATE_CONNECTED     |
+// |             | UA_CLIENTSTATE_SECURECHANNEL |
+// |             | UA_CLIENTSTATE_SESSION       |
+// | Disconnect  | UA_CLIENTSTATE_DISCONNECTED  |
+// | Kill server | UA_CLIENTSTATE_DISCONNECTED  |
+//
+// clang-format off
+// | ≥ v1.1      | ChannelState                       | SessionState                       | ConnectStatus |
+// |-------------|------------------------------------|------------------------------------|---------------|
+// | Connect     | UA_SECURECHANNELSTATE_HEL_SENT     | UA_SESSIONSTATE_CLOSED             | 0             |
+// |             | UA_SECURECHANNELSTATE_ACK_RECEIVED | UA_SESSIONSTATE_CLOSED             | 0             |
+// |             | UA_SECURECHANNELSTATE_OPN_SENT     | UA_SESSIONSTATE_CLOSED             | 0             |
+// |             | UA_SECURECHANNELSTATE_OPEN         | UA_SESSIONSTATE_CLOSED             | 0             |
+// |             | UA_SECURECHANNELSTATE_CLOSED       | UA_SESSIONSTATE_CLOSED             | 0             |
+// |             | UA_SECURECHANNELSTATE_OPEN         | UA_SESSIONSTATE_CREATE_REQUESTED   | 0             |
+// |             | UA_SECURECHANNELSTATE_OPEN         | UA_SESSIONSTATE_CREATED            | 0             |
+// |             | UA_SECURECHANNELSTATE_OPEN         | UA_SESSIONSTATE_ACTIVATE_REQUESTED | 0             |
+// |             | UA_SECURECHANNELSTATE_OPEN         | UA_SESSIONSTATE_ACTIVATED          | 0             |
+// | Disconnect  | UA_SECURECHANNELSTATE_OPEN         | UA_SESSIONSTATE_CLOSING            | 0             |
+// |             | UA_SECURECHANNELSTATE_CLOSED       | UA_SESSIONSTATE_CLOSED             | 0             |
+// | Kill server | UA_SECURECHANNELSTATE_CLOSED       | UA_SESSIONSTATE_CREATED            | 0             |
+// |             | UA_SECURECHANNELSTATE_FRESH        | UA_SESSIONSTATE_CREATED            | 0             |
+// |             | UA_SECURECHANNELSTATE_FRESH        | UA_SESSIONSTATE_CREATED            | 2158821376    |
+// clang-format on
+
+inline static void execStateCallback(ClientContext& context, ClientState state) {
+    const auto& callbackArray = context.stateCallbacks;
+    const auto& callback = callbackArray.at(static_cast<size_t>(state));
+    if (callback) {
+        callback();
+    }
+}
+
+#if UAPP_OPEN62541_VER_LE(1, 0)
+// state callback for v1.0
+static void stateCallback(UA_Client* client, UA_ClientState clientState) {
+    auto& context = getContext(client);
+    if (clientState != context.lastClientState) {
+        switch (clientState) {
+        case UA_CLIENTSTATE_DISCONNECTED:
+            execStateCallback(context, ClientState::Disconnected);
+            break;
+        case UA_CLIENTSTATE_CONNECTED:
+            execStateCallback(context, ClientState::Connected);
+            break;
+        case UA_CLIENTSTATE_SESSION:
+            execStateCallback(context, ClientState::SessionActicated);
+            break;
+        case UA_CLIENTSTATE_SESSION_DISCONNECTED:
+            execStateCallback(context, ClientState::SessionClosed);
+            break;
+        default:
+            break;
+        };
+    }
+    context.lastClientState = clientState;
+}
+#else
+// state callback for >= v1.1
+static void stateCallback(
+    UA_Client* client,
+    UA_SecureChannelState channelState,
+    UA_SessionState sessionState,
+    [[maybe_unused]] UA_StatusCode connectStatus
+) {
+    auto& context = getContext(client);
+    // handle session state first, mainly to to handle SessionClosed bevor Disconnected
+    if (sessionState != context.lastSessionState) {
+        switch (sessionState) {
+        case UA_SESSIONSTATE_ACTIVATED:
+            execStateCallback(context, ClientState::SessionActicated);
+            break;
+        case UA_SESSIONSTATE_CLOSED:
+            execStateCallback(context, ClientState::SessionClosed);
+            break;
+        default:
+            break;
+        }
+    }
+    if (channelState != context.lastChannelState) {
+        switch (channelState) {
+        case UA_SECURECHANNELSTATE_OPEN:
+            execStateCallback(context, ClientState::Connected);
+            break;
+        case UA_SECURECHANNELSTATE_CLOSED:
+            execStateCallback(context, ClientState::Disconnected);
+            break;
+        default:
+            break;
+        }
+    }
+    context.lastChannelState = channelState;
+    context.lastSessionState = sessionState;
+}
+#endif
+
 /* ----------------------------------------- Connection ----------------------------------------- */
 
 class Client::Connection {
@@ -33,7 +138,7 @@ public:
     Connection()
         : client_(UA_Client_new()),
           logger_(getConfig(client_)->logger) {
-        setContext(client_, context_);
+        applyDefaults();
     }
 
     ~Connection() {
@@ -46,6 +151,12 @@ public:
     Connection(Connection&&) noexcept = delete;
     Connection& operator=(const Connection&) = delete;
     Connection& operator=(Connection&&) noexcept = delete;
+
+    void applyDefaults() {
+        auto* config = getConfig(handle());
+        config->clientContext = &context_;
+        config->stateCallback = stateCallback;
+    }
 
     void setLogger(Logger logger) {
         logger_.setLogger(std::move(logger));
@@ -95,7 +206,7 @@ Client::Client()
     : connection_(std::make_shared<Connection>()) {
     const auto status = UA_ClientConfig_setDefault(getConfig(this));
     detail::throwOnBadStatus(status);
-    setContext(handle(), getContext());  // overwritten by UA_ClientConfig_setDefault
+    connection_->applyDefaults();
 }
 
 std::vector<ApplicationDescription> Client::findServers(std::string_view serverUrl) {
@@ -134,6 +245,26 @@ std::vector<EndpointDescription> Client::getEndpoints(std::string_view serverUrl
 
 void Client::setLogger(Logger logger) {
     connection_->setLogger(std::move(logger));
+}
+
+static void setStateCallback(ClientContext& context, ClientState state, StateCallback&& callback) {
+    context.stateCallbacks.at(static_cast<size_t>(state)) = callback;
+}
+
+void Client::onConnected(StateCallback callback) {
+    setStateCallback(getContext(), ClientState::Connected, std::move(callback));
+}
+
+void Client::onDisconnected(StateCallback callback) {
+    setStateCallback(getContext(), ClientState::Disconnected, std::move(callback));
+}
+
+void Client::onSessionActivated(StateCallback callback) {
+    setStateCallback(getContext(), ClientState::SessionActicated, std::move(callback));
+}
+
+void Client::onSessionClosed(StateCallback callback) {
+    setStateCallback(getContext(), ClientState::SessionClosed, std::move(callback));
 }
 
 void Client::connect(std::string_view endpointUrl) {

@@ -4,10 +4,16 @@
 
 int main() {
     opcua::Client client;
+    client.onConnected([] { std::cout << "Connected\n"; });
+    client.onDisconnected([] { std::cout << "Disconnected\n"; });
+    client.onSessionActivated([] { std::cout << "Session activated\n"; });
+    client.onSessionClosed([] { std::cout << "Session closed\n"; });
+
     client.connect("opc.tcp://localhost:4840");
 
     auto node = client.getNode(opcua::VariableId::Server_ServerStatus_CurrentTime);
     const auto dt = node.readScalar<opcua::DateTime>();
 
     std::cout << "Server date (UTC): " << dt.format("%Y-%m-%d %H:%M:%S") << std::endl;
+    client.disconnect();
 }
