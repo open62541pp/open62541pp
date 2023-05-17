@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['browseopts_26501',['BrowseOpts',['../structBrowseOpts.html',1,'']]]
+  ['browseopts_0',['BrowseOpts',['../structBrowseOpts.html',1,'']]]
 ];

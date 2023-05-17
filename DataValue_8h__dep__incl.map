@@ -1,12 +1,7 @@
 <map id="/home/runner/work/open62541pp/open62541pp/include/open62541pp/types/DataValue.h" name="/home/runner/work/open62541pp/open62541pp/include/open62541pp/types/DataValue.h">
-<area shape="rect" id="node1" title=" " alt="" coords="193,5,451,61"/>
-<area shape="rect" id="node2" href="$Node_8h.html" title=" " alt="" coords="275,317,537,373"/>
-<area shape="rect" id="node3" href="$open62541pp_8h.html" title=" " alt="" coords="5,421,263,477"/>
-<area shape="rect" id="node7" href="$Attribute_8h.html" title=" " alt="" coords="277,109,535,165"/>
-<area shape="rect" id="node10" href="$DataValue_8cpp.html" title=" " alt="" coords="559,117,834,158"/>
-<area shape="rect" id="node4" href="$Client_8cpp.html" title=" " alt="" coords="287,429,525,470"/>
-<area shape="rect" id="node5" href="$Node_8cpp.html" title=" " alt="" coords="549,429,786,470"/>
-<area shape="rect" id="node6" href="$Server_8cpp.html" title=" " alt="" coords="810,429,1047,470"/>
-<area shape="rect" id="node8" href="$services_8h.html" title=" " alt="" coords="277,213,535,269"/>
-<area shape="rect" id="node9" href="$Attribute_8cpp.html" title=" " alt="" coords="611,213,849,269"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,5,263,60"/>
+<area shape="rect" id="node2" href="$Node_8h.html" title=" " alt="" coords="62,211,323,265"/>
+<area shape="rect" id="node3" href="$open62541pp_8h.html" title=" " alt="" coords="64,313,321,368"/>
+<area shape="rect" id="node4" href="$Attribute_8h.html" title=" " alt="" coords="172,108,429,163"/>
+<area shape="rect" id="node5" href="$services_8h.html" title=" " alt="" coords="348,211,605,265"/>
 </map>

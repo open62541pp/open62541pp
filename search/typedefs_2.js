@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['isoneof_20118',['IsOneOf',['../namespaceopcua_1_1detail.html#aad1cfbe232418a890fa98c35c9508acb',1,'opcua::detail']]],
-  ['istypewrapper_20119',['IsTypeWrapper',['../namespaceopcua_1_1detail.html#a6f6a9d9d89858dc4cd64637b4e252935',1,'opcua::detail']]]
+  ['eventcallback_0',['EventCallback',['../namespaceopcua.html#a1d215badd4c6239f6cd158beeeece034',1,'opcua']]],
+  ['eventnotificationcallback_1',['EventNotificationCallback',['../namespaceopcua_1_1services.html#a4158005ab020167a1c458f7ac94eea2b',1,'opcua::services']]]
 ];

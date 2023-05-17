@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['browsedirection_20130',['BrowseDirection',['../namespaceopcua.html#a2d01a00b56739c335fc3c57deb05c02c',1,'opcua']]]
+  ['attributeid_0',['AttributeId',['../namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61',1,'opcua']]]
 ];

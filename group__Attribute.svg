@@ -12,7 +12,7 @@
 <g id="node1" class="node">
 <title>Node1</title>
 <g id="a_node1"><a xlink:title="Read and write node attributes.">
-<polygon fill="#bfbfbf" stroke="black" points="210,-19 94,-19 94,0 210,0 210,-19"/>
+<polygon fill="#999999" stroke="#666666" points="210,-19 94,-19 94,0 210,0 210,-19"/>
 <text text-anchor="middle" x="152" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">Attribute service set</text>
 </a>
 </g>
@@ -21,7 +21,7 @@
 <g id="node2" class="node">
 <title>Node2</title>
 <g id="a_node2"><a xlink:href="group__Services.html" target="_top" xlink:title="OPC UA services as free functions.">
-<polygon fill="none" stroke="black" points="58,-19 0,-19 0,0 58,0 58,-19"/>
+<polygon fill="white" stroke="#666666" points="58,-19 0,-19 0,0 58,0 58,-19"/>
 <text text-anchor="middle" x="29" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">Services</text>
 </a>
 </g>

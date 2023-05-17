@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['datatypeid_20131',['DataTypeId',['../namespaceopcua.html#adfeffe1a4352e8d89c5167a8c09d1692',1,'opcua']]]
+  ['browsedirection_0',['BrowseDirection',['../namespaceopcua.html#a2d01a00b56739c335fc3c57deb05c02c',1,'opcua']]]
 ];

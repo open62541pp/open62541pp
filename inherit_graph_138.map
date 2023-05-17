@@ -1,4 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,5,276,61"/>
-<area shape="rect" id="node2" href="$classopcua_1_1EndpointDescription.html" title="UA_EndpointDescription wrapper class." alt="" coords="324,20,524,47"/>
+<area shape="rect" id="node1" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,5,172,60"/>
+<area shape="rect" id="node2" href="$classopcua_1_1Guid.html" title="UA_Guid wrapper class." alt="" coords="220,20,319,45"/>
 </map>

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['nodeclass_20136',['NodeClass',['../namespaceopcua.html#a6dbdabe373cb5094cafbeede49c4df6d',1,'opcua']]],
-  ['nodeidtype_20137',['NodeIdType',['../namespaceopcua.html#a05d617e4c64656fa2ef6baf2af636f90',1,'opcua']]]
+  ['logcategory_0',['LogCategory',['../namespaceopcua.html#a82c59334b1772f47ada395785f5bf70a',1,'opcua']]],
+  ['loglevel_1',['LogLevel',['../namespaceopcua.html#a016225e750f216587c011ea43f212d8d',1,'opcua']]]
 ];

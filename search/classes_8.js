@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['localizedtext_17564',['LocalizedText',['../classopcua_1_1LocalizedText.html',1,'opcua']]],
-  ['login_17565',['Login',['../structopcua_1_1Login.html',1,'opcua']]]
+  ['localizedtext_0',['LocalizedText',['../classopcua_1_1LocalizedText.html',1,'opcua']]],
+  ['login_1',['Login',['../structopcua_1_1Login.html',1,'opcua']]]
 ];

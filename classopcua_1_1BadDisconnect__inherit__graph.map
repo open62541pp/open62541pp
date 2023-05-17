@@ -1,0 +1,5 @@
+<map id="opcua::BadDisconnect" name="opcua::BadDisconnect">
+<area shape="rect" id="node1" title="Specific exception for open62541 status code UA_STATUSCODE_BADDISCONNECT." alt="" coords="5,152,172,177"/>
+<area shape="rect" id="node2" href="$classopcua_1_1BadStatus.html" title="Exception for bad status codes from open62541 UA_STATUSCODE_*." alt="" coords="21,79,156,104"/>
+<area shape="rect" id="node3" title=" " alt="" coords="31,5,146,31"/>
+</map>

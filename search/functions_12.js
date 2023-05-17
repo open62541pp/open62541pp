@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['zip_5fentry_18531',['ZIP_ENTRY',['open62541/structRefEntry.html#af4cbc5615ad5d80202ddbca2f79c5cb6',0,'RefEntry']]]
+  ['xmlelement_0',['XmlElement',['../classopcua_1_1XmlElement.html#ac70390b776e6aec8bca0819c696d2c93',1,'opcua::XmlElement']]]
 ];
