@@ -121,6 +121,46 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
         CHECK_THROWS_WITH(mon.deleteMonitoredItem(), "BadMonitoredItemIdInvalid");
     }
 
+    SUBCASE("Monitor data change multiple Monitored Items") {
+        SubscriptionParameters subscriptionParameters{};
+        MonitoringParameters monitoringParameters{};
+
+        auto sub = client.createSubscription(subscriptionParameters);
+        sub.setPublishingMode(false);  // enable later
+
+        int32_t notificationId1 = 0;
+        sub.subscribeDataChange(
+            VariableId::Server_ServerStatus_CurrentTime,
+            AttributeId::Value,
+            MonitoringMode::Reporting,  // will trigger notifications
+            monitoringParameters,
+            [&](const auto& item, const DataValue&) {
+                CHECK(item.getNodeId() == NodeId(VariableId::Server_ServerStatus_CurrentTime));
+                CHECK(item.getAttributeId() == AttributeId::Value);
+                notificationId1 = item.getMonitoredItemId();
+            }
+        );
+
+        int32_t notificationId2 = 0;
+        sub.subscribeDataChange(
+            VariableId::Server_ServerStatus_CurrentTime,
+            AttributeId::Value,
+            MonitoringMode::Reporting,  // will trigger notifications
+            monitoringParameters,
+            [&](const auto& item, const DataValue&) {
+                CHECK(item.getNodeId() == NodeId(VariableId::Server_ServerStatus_CurrentTime));
+                CHECK(item.getAttributeId() == AttributeId::Value);
+                notificationId2 = item.getMonitoredItemId();
+            }
+        );
+
+        sub.setPublishingMode(true);
+        client.runIterate();
+        CHECK(notificationId1 != 0);
+        CHECK(notificationId2 != 0);
+        CHECK(notificationId2 != notificationId1);
+    }
+
     SUBCASE("Modify monitored item") {
         auto sub = client.createSubscription();
         auto mon = sub.subscribeDataChange(
