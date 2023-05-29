@@ -129,7 +129,7 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
         sub.setPublishingMode(false);  // enable later
 
         int32_t notificationId1 = 0;
-        sub.subscribeDataChange(
+        auto monId1 = sub.subscribeDataChange(
             VariableId::Server_ServerStatus_CurrentTime,
             AttributeId::Value,
             MonitoringMode::Reporting,  // will trigger notifications
@@ -142,7 +142,7 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
         );
 
         int32_t notificationId2 = 0;
-        sub.subscribeDataChange(
+        auto monId2 = sub.subscribeDataChange(
             VariableId::Server_ServerStatus_CurrentTime,
             AttributeId::Value,
             MonitoringMode::Reporting,  // will trigger notifications
@@ -159,6 +159,8 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
         CHECK(notificationId1 != 0);
         CHECK(notificationId2 != 0);
         CHECK(notificationId2 != notificationId1);
+        CHECK(monId1.getMonitoredItemId() == notificationId1);
+        CHECK(monId2.getMonitoredItemId() == notificationId2);
     }
 
     SUBCASE("Modify monitored item") {
