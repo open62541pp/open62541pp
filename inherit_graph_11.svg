@@ -9,9 +9,9 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 45)">
 <title>Graphical Class Hierarchy</title>
 <!-- Node0 -->
-<g id="node1" class="node">
+<g id="Node000000" class="node">
 <title>Node0</title>
-<g id="a_node1"><a xlink:href="structopcua_1_1detail_1_1TypeConverterNative.html" target="_top" xlink:title=" ">
+<g id="a_Node000000"><a xlink:href="structopcua_1_1detail_1_1TypeConverterNative.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="#666666" points="230,-41 0,-41 0,0 230,0 230,-41"/>
 <text text-anchor="start" x="8" y="-29" font-family="Helvetica,sans-Serif" font-size="10.00">opcua::detail::TypeConverter</text>
 <text text-anchor="start" x="8" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">Native&lt; UA_AnonymousIdentityToken,</text>
@@ -20,9 +20,9 @@
 </g>
 </g>
 <!-- Node1 -->
-<g id="node2" class="node">
+<g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_node2"><a xlink:href="structopcua_1_1TypeConverter_3_01UA__AnonymousIdentityToken_01_4.html" target="_top" xlink:title=" ">
+<g id="a_Node000001"><a xlink:href="structopcua_1_1TypeConverter_3_01UA__AnonymousIdentityToken_01_4.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="#666666" points="448,-35.5 266,-35.5 266,-5.5 448,-5.5 448,-35.5"/>
 <text text-anchor="start" x="274" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">opcua::TypeConverter</text>
 <text text-anchor="middle" x="357" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; UA_AnonymousIdentityToken &gt;</text>
@@ -30,10 +30,13 @@
 </g>
 </g>
 <!-- Node0&#45;&gt;Node1 -->
-<g id="edge1" class="edge">
+<g id="edge10_Node000000_Node000001" class="edge">
 <title>Node0&#45;&gt;Node1</title>
+<g id="a_edge10_Node000000_Node000001"><a xlink:title=" ">
 <path fill="none" stroke="#63b8ff" d="M240.14,-20.5C248.75,-20.5 257.33,-20.5 265.71,-20.5"/>
 <polygon fill="#63b8ff" stroke="#63b8ff" points="240.03,-17 230.03,-20.5 240.03,-24 240.03,-17"/>
+</a>
+</g>
 </g>
 </g>
 </svg>

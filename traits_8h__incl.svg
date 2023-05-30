@@ -9,9 +9,9 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 100)">
 <title>/home/runner/work/open62541pp/open62541pp/include/open62541pp/detail/traits.h</title>
 <!-- Node1 -->
-<g id="node1" class="node">
+<g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_Node000001"><a xlink:title=" ">
 <polygon fill="#999999" stroke="#666666" points="193,-96 0,-96 0,-55 193,-55 193,-96"/>
 <text text-anchor="start" x="8" y="-84" font-family="Helvetica,sans-Serif" font-size="10.00">/home/runner/work/open62541pp</text>
 <text text-anchor="start" x="8" y="-73" font-family="Helvetica,sans-Serif" font-size="10.00">/open62541pp/include/open62541pp</text>
@@ -20,34 +20,40 @@
 </g>
 </g>
 <!-- Node2 -->
-<g id="node2" class="node">
+<g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:title=" ">
+<g id="a_Node000002"><a xlink:title=" ">
 <polygon fill="#e0e0e0" stroke="#999999" points="81,-19 40,-19 40,0 81,0 81,-19"/>
 <text text-anchor="middle" x="60.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">tuple</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node2 -->
-<g id="edge1" class="edge">
+<g id="edge1_Node000001_Node000002" class="edge">
 <title>Node1&#45;&gt;Node2</title>
+<g id="a_edge1_Node000001_Node000002"><a xlink:title=" ">
 <path fill="none" stroke="#63b8ff" d="M85.5,-54.95C80.69,-46.39 75.08,-36.42 70.4,-28.1"/>
 <polygon fill="#63b8ff" stroke="#63b8ff" points="73.38,-26.26 65.43,-19.26 67.28,-29.69 73.38,-26.26"/>
+</a>
+</g>
 </g>
 <!-- Node3 -->
-<g id="node3" class="node">
+<g id="Node000003" class="node">
 <title>Node3</title>
-<g id="a_node3"><a xlink:title=" ">
+<g id="a_Node000003"><a xlink:title=" ">
 <polygon fill="#e0e0e0" stroke="#999999" points="168,-19 99,-19 99,0 168,0 168,-19"/>
 <text text-anchor="middle" x="133.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">type_traits</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node3 -->
-<g id="edge2" class="edge">
+<g id="edge2_Node000001_Node000003" class="edge">
 <title>Node1&#45;&gt;Node3</title>
+<g id="a_edge2_Node000001_Node000003"><a xlink:title=" ">
 <path fill="none" stroke="#63b8ff" d="M107.8,-54.95C112.75,-46.39 118.51,-36.42 123.33,-28.1"/>
 <polygon fill="#63b8ff" stroke="#63b8ff" points="126.46,-29.67 128.44,-19.26 120.4,-26.17 126.46,-29.67"/>
+</a>
+</g>
 </g>
 </g>
 </svg>

@@ -1,4 +1,5 @@
 <map id="opcua::TypeConverter&lt; UA_AnonymousIdentityToken &gt;" name="opcua::TypeConverter&lt; UA_AnonymousIdentityToken &gt;">
-<area shape="rect" id="node1" title=" " alt="" coords="360,13,603,53"/>
-<area shape="rect" id="node2" href="$structopcua_1_1detail_1_1TypeConverterNative.html" title=" " alt="" coords="5,5,312,60"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="360,13,603,53"/>
+<area shape="rect" id="Node000002" href="$structopcua_1_1detail_1_1TypeConverterNative.html" title=" " alt="" coords="5,5,312,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="326,30,360,30,360,35,326,35"/>
 </map>

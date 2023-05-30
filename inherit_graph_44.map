@@ -1,4 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$structopcua_1_1detail_1_1TypeConverterNative.html" title=" " alt="" coords="5,5,232,60"/>
-<area shape="rect" id="node2" href="$structopcua_1_1TypeConverter_3_01UA__Double_01_4.html" title=" " alt="" coords="280,13,443,53"/>
+<area shape="rect" id="Node000000" href="$structopcua_1_1detail_1_1TypeConverterNative.html" title=" " alt="" coords="5,5,232,60"/>
+<area shape="rect" id="Node000001" href="$structopcua_1_1TypeConverter_3_01UA__Double_01_4.html" title=" " alt="" coords="280,13,443,53"/>
+<area shape="poly" id="edge43_Node000000_Node000001" title=" " alt="" coords="246,30,280,30,280,35,246,35"/>
 </map>

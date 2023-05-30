@@ -9,43 +9,49 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 23)">
 <title>Graphical Class Hierarchy</title>
 <!-- Node0 -->
-<g id="node1" class="node">
+<g id="Node000000" class="node">
 <title>Node0</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_Node000000"><a xlink:title=" ">
 <polygon fill="#e0e0e0" stroke="#999999" points="86,-19 0,-19 0,0 86,0 86,-19"/>
 <text text-anchor="middle" x="43" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">std::exception</text>
 </a>
 </g>
 </g>
 <!-- Node1 -->
-<g id="node2" class="node">
+<g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_node2"><a xlink:href="classopcua_1_1BadStatus.html" target="_top" xlink:title="Exception for bad status codes from open62541 UA_STATUSCODE_*.">
+<g id="a_Node000001"><a xlink:href="classopcua_1_1BadStatus.html" target="_top" xlink:title="Exception for bad status codes from open62541 UA_STATUSCODE_*.">
 <polygon fill="white" stroke="#666666" points="223,-19 122,-19 122,0 223,0 223,-19"/>
 <text text-anchor="middle" x="172.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">opcua::BadStatus</text>
 </a>
 </g>
 </g>
 <!-- Node0&#45;&gt;Node1 -->
-<g id="edge1" class="edge">
+<g id="edge137_Node000000_Node000001" class="edge">
 <title>Node0&#45;&gt;Node1</title>
+<g id="a_edge137_Node000000_Node000001"><a xlink:title=" ">
 <path fill="none" stroke="#63b8ff" d="M96.26,-9.5C104.74,-9.5 113.5,-9.5 121.92,-9.5"/>
 <polygon fill="#63b8ff" stroke="#63b8ff" points="96.1,-6 86.1,-9.5 96.1,-13 96.1,-6"/>
+</a>
+</g>
 </g>
 <!-- Node2 -->
-<g id="node3" class="node">
+<g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_node3"><a xlink:href="classopcua_1_1BadDisconnect.html" target="_top" xlink:title="Specific exception for open62541 status code UA_STATUSCODE_BADDISCONNECT.">
+<g id="a_Node000002"><a xlink:href="classopcua_1_1BadDisconnect.html" target="_top" xlink:title="Specific exception for open62541 status code UA_STATUSCODE_BADDISCONNECT.">
 <polygon fill="white" stroke="#666666" points="384,-19 259,-19 259,0 384,0 384,-19"/>
 <text text-anchor="middle" x="321.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">opcua::BadDisconnect</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node2 -->
-<g id="edge2" class="edge">
+<g id="edge138_Node000001_Node000002" class="edge">
 <title>Node1&#45;&gt;Node2</title>
+<g id="a_edge138_Node000001_Node000002"><a xlink:title=" ">
 <path fill="none" stroke="#63b8ff" d="M233.35,-9.5C241.73,-9.5 250.37,-9.5 258.79,-9.5"/>
 <polygon fill="#63b8ff" stroke="#63b8ff" points="233.27,-6 223.27,-9.5 233.27,-13 233.27,-6"/>
+</a>
+</g>
 </g>
 </g>
 </svg>

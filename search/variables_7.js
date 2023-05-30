@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['gatewayserveruri_0',['GatewayServerUri',['open62541/struct__OpcUa__RegisteredServer.html#a2516ea4a2a7fa2456e12c9c1a741e86d',0,'_OpcUa_RegisteredServer::GatewayServerUri()'],['open62541/struct__OpcUa__ApplicationDescription.html#a5f969bf513fe8e3e5cf8b917447e2485',0,'_OpcUa_ApplicationDescription::GatewayServerUri()']]],
+  ['gatewayserveruri_0',['GatewayServerUri',['open62541/struct__OpcUa__RegisteredServer.html#a2516ea4a2a7fa2456e12c9c1a741e86d',0,'_OpcUa_RegisteredServer::GatewayServerUri'],['open62541/struct__OpcUa__ApplicationDescription.html#a5f969bf513fe8e3e5cf8b917447e2485',0,'_OpcUa_ApplicationDescription::GatewayServerUri']]],
   ['gatewayserveruri_1',['gatewayServerUri',['open62541/structUA__ApplicationDescription.html#abfe87af61cffc29acc02250bc5dd8a9f',0,'UA_ApplicationDescription']]],
   ['generatechildnodeid_2',['generateChildNodeId',['open62541/structUA__GlobalNodeLifecycle.html#a26391b7989881b79a7fbaeb474096645',0,'UA_GlobalNodeLifecycle']]],
   ['generatekey_3',['generateKey',['open62541/structUA__SecurityPolicySymmetricModule.html#abcaceb4ea226d6521c8ae113c8099f11',0,'UA_SecurityPolicySymmetricModule']]],
@@ -12,13 +12,13 @@ var searchData=
   ['getendpointsresponse_9',['getEndpointsResponse',['open62541/unionUA__Response.html#a2824f52d179da6d29c1cbc1827a5ef0b',0,'UA_Response']]],
   ['gethistorizingsetting_10',['getHistorizingSetting',['open62541/structUA__HistoryDataGathering.html#a1c356d2dd57d6dc82d86c14057fa5dbc',0,'UA_HistoryDataGathering']]],
   ['gethistorydata_11',['getHistoryData',['open62541/structUA__HistoryDataBackend.html#a8ad8ad2587038992dd83c81b4fa4ec39',0,'UA_HistoryDataBackend']]],
-  ['getlocalkeylength_12',['getLocalKeyLength',['open62541/structUA__SecurityPolicyEncryptionAlgorithm.html#a551bd45bf53c4f6c61895c4e75289f5f',0,'UA_SecurityPolicyEncryptionAlgorithm::getLocalKeyLength()'],['open62541/structUA__SecurityPolicySignatureAlgorithm.html#a5006d0b63033bb11ce7f42ce88b897bf',0,'UA_SecurityPolicySignatureAlgorithm::getLocalKeyLength()']]],
+  ['getlocalkeylength_12',['getLocalKeyLength',['open62541/structUA__SecurityPolicyEncryptionAlgorithm.html#a551bd45bf53c4f6c61895c4e75289f5f',0,'UA_SecurityPolicyEncryptionAlgorithm::getLocalKeyLength'],['open62541/structUA__SecurityPolicySignatureAlgorithm.html#a5006d0b63033bb11ce7f42ce88b897bf',0,'UA_SecurityPolicySignatureAlgorithm::getLocalKeyLength']]],
   ['getlocalsignaturesize_13',['getLocalSignatureSize',['open62541/structUA__SecurityPolicySignatureAlgorithm.html#ac4920da7d26105f10ae0fa126d496515',0,'UA_SecurityPolicySignatureAlgorithm']]],
   ['getnode_14',['getNode',['open62541/structUA__Nodestore.html#a205348e7e8a269e9c336eac7d8a0313a',0,'UA_Nodestore']]],
   ['getnodecopy_15',['getNodeCopy',['open62541/structUA__Nodestore.html#ad442f3f022ae67f592a227cc118f363c',0,'UA_Nodestore']]],
   ['getreferencetypeid_16',['getReferenceTypeId',['open62541/structUA__Nodestore.html#a59d49446609bcf74c5b5ba0ca6a61c5d',0,'UA_Nodestore']]],
   ['getremoteblocksize_17',['getRemoteBlockSize',['open62541/structUA__SecurityPolicyEncryptionAlgorithm.html#a514db2eeedde5073a06ee36c97e87e5f',0,'UA_SecurityPolicyEncryptionAlgorithm']]],
-  ['getremotekeylength_18',['getRemoteKeyLength',['open62541/structUA__SecurityPolicyEncryptionAlgorithm.html#a6f28c6d9b1ab215f98edbc0fd76a6ba1',0,'UA_SecurityPolicyEncryptionAlgorithm::getRemoteKeyLength()'],['open62541/structUA__SecurityPolicySignatureAlgorithm.html#ae5f6e5bcd173700e36008616cf0dab42',0,'UA_SecurityPolicySignatureAlgorithm::getRemoteKeyLength()']]],
+  ['getremotekeylength_18',['getRemoteKeyLength',['open62541/structUA__SecurityPolicyEncryptionAlgorithm.html#a6f28c6d9b1ab215f98edbc0fd76a6ba1',0,'UA_SecurityPolicyEncryptionAlgorithm::getRemoteKeyLength'],['open62541/structUA__SecurityPolicySignatureAlgorithm.html#ae5f6e5bcd173700e36008616cf0dab42',0,'UA_SecurityPolicySignatureAlgorithm::getRemoteKeyLength']]],
   ['getremoteplaintextblocksize_19',['getRemotePlainTextBlockSize',['open62541/structUA__SecurityPolicyEncryptionAlgorithm.html#ad9a479fc9e773574b96c9c4203a20d01',0,'UA_SecurityPolicyEncryptionAlgorithm']]],
   ['getremotesignaturesize_20',['getRemoteSignatureSize',['open62541/structUA__SecurityPolicySignatureAlgorithm.html#af3bcac351e5cab227fe592d3d9ecbad0',0,'UA_SecurityPolicySignatureAlgorithm']]],
   ['getsendbuffer_21',['getSendBuffer',['open62541/structUA__Connection.html#ab74d0b1bca3410bab2b53bf053c67134',0,'UA_Connection']]],

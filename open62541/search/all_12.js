@@ -11,7 +11,7 @@ var searchData=
   ['qtype_5fptr_8',['QTYPE_PTR',['../1035_8h.html#a32a04223e6d00b7e93f5842402b7aafd',1,'1035.h']]],
   ['qtype_5fsrv_9',['QTYPE_SRV',['../1035_8h.html#a8eafe7f5bb91c03cdb93c3120f594600',1,'1035.h']]],
   ['qtype_5ftxt_10',['QTYPE_TXT',['../1035_8h.html#a6d3461ceb72695d7f41123f66c99968c',1,'1035.h']]],
-  ['querydatasets_11',['QueryDataSets',['../struct__OpcUa__QueryNextResponse.html#ae454ae52732b0f29f7d6969a9833bf09',1,'_OpcUa_QueryNextResponse::QueryDataSets()'],['../struct__OpcUa__QueryFirstResponse.html#ac7dfad13687bfe690358677d85713935',1,'_OpcUa_QueryFirstResponse::QueryDataSets()']]],
+  ['querydatasets_11',['QueryDataSets',['../struct__OpcUa__QueryNextResponse.html#ae454ae52732b0f29f7d6969a9833bf09',1,'_OpcUa_QueryNextResponse::QueryDataSets'],['../struct__OpcUa__QueryFirstResponse.html#ac7dfad13687bfe690358677d85713935',1,'_OpcUa_QueryFirstResponse::QueryDataSets']]],
   ['queryfirstcount_12',['QueryFirstCount',['../struct__OpcUa__SessionDiagnosticsDataType.html#a1ae6f993480ac7fd96a0d1d8c6c4b6ab',1,'_OpcUa_SessionDiagnosticsDataType']]],
   ['querynextcount_13',['QueryNextCount',['../struct__OpcUa__SessionDiagnosticsDataType.html#a4eb7a8411f6b19206b2ddf2026e5ce5f',1,'_OpcUa_SessionDiagnosticsDataType']]],
   ['question_14',['question',['../structquestion.html',1,'']]],

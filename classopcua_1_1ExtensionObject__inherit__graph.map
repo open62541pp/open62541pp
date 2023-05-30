@@ -1,4 +1,5 @@
 <map id="opcua::ExtensionObject" name="opcua::ExtensionObject">
-<area shape="rect" id="node1" title="UA_ExtensionObject wrapper class." alt="" coords="37,108,211,133"/>
-<area shape="rect" id="node2" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,5,243,60"/>
+<area shape="rect" id="Node000001" title="UA_ExtensionObject wrapper class." alt="" coords="37,108,211,133"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,5,243,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,74,127,108,121,108,121,74"/>
 </map>

@@ -1,5 +1,7 @@
 <map id="/home/runner/work/open62541pp/open62541pp/include/open62541pp/services/Subscription.h" name="/home/runner/work/open62541pp/open62541pp/include/open62541pp/services/Subscription.h">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,263,60"/>
-<area shape="rect" id="node2" title=" " alt="" coords="50,108,117,133"/>
-<area shape="rect" id="node3" title=" " alt="" coords="141,108,228,133"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,263,60"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="50,108,117,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="121,61,100,97,95,95,116,59"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="141,108,228,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="152,59,173,95,168,97,147,61"/>
 </map>

@@ -1,4 +1,5 @@
 <map id="opcua::TypeConverter&lt; UA_SignedSoftwareCertificate &gt;" name="opcua::TypeConverter&lt; UA_SignedSoftwareCertificate &gt;">
-<area shape="rect" id="node1" title=" " alt="" coords="371,13,617,53"/>
-<area shape="rect" id="node2" href="$structopcua_1_1detail_1_1TypeConverterNative.html" title=" " alt="" coords="5,5,323,60"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="371,13,617,53"/>
+<area shape="rect" id="Node000002" href="$structopcua_1_1detail_1_1TypeConverterNative.html" title=" " alt="" coords="5,5,323,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="336,30,371,30,371,35,336,35"/>
 </map>

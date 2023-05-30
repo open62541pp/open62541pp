@@ -9,18 +9,18 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 82)">
 <title>Graphical Class Hierarchy</title>
 <!-- Node0 -->
-<g id="node1" class="node">
+<g id="Node000000" class="node">
 <title>Node0</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_Node000000"><a xlink:title=" ">
 <polygon fill="#e0e0e0" stroke="#999999" points="89,-48.5 0,-48.5 0,-29.5 89,-29.5 89,-48.5"/>
 <text text-anchor="middle" x="44.5" y="-36.5" font-family="Helvetica,sans-Serif" font-size="10.00">std::false_type</text>
 </a>
 </g>
 </g>
 <!-- Node1 -->
-<g id="node2" class="node">
+<g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_node2"><a xlink:href="structopcua_1_1detail_1_1AlwaysFalse.html" target="_top" xlink:title=" ">
+<g id="a_Node000001"><a xlink:href="structopcua_1_1detail_1_1AlwaysFalse.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="#666666" points="271,-78 125,-78 125,-48 271,-48 271,-78"/>
 <text text-anchor="start" x="133" y="-66" font-family="Helvetica,sans-Serif" font-size="10.00">opcua::detail::AlwaysFalse</text>
 <text text-anchor="middle" x="198" y="-55" font-family="Helvetica,sans-Serif" font-size="10.00">&lt;... &gt;</text>
@@ -28,15 +28,18 @@
 </g>
 </g>
 <!-- Node0&#45;&gt;Node1 -->
-<g id="edge1" class="edge">
+<g id="edge139_Node000000_Node000001" class="edge">
 <title>Node0&#45;&gt;Node1</title>
+<g id="a_edge139_Node000000_Node000001"><a xlink:title=" ">
 <path fill="none" stroke="#63b8ff" d="M99.47,-47.55C107.66,-48.85 116.23,-50.2 124.74,-51.55"/>
 <polygon fill="#63b8ff" stroke="#63b8ff" points="99.74,-44.05 89.32,-45.94 98.65,-50.96 99.74,-44.05"/>
+</a>
+</g>
 </g>
 <!-- Node2 -->
-<g id="node3" class="node">
+<g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_node3"><a xlink:href="structopcua_1_1detail_1_1TupleHolds.html" target="_top" xlink:title=" ">
+<g id="a_Node000002"><a xlink:href="structopcua_1_1detail_1_1TupleHolds.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="#666666" points="270,-30 126,-30 126,0 270,0 270,-30"/>
 <text text-anchor="start" x="134" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">opcua::detail::TupleHolds</text>
 <text text-anchor="middle" x="198" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; typename, typename &gt;</text>
@@ -44,10 +47,13 @@
 </g>
 </g>
 <!-- Node0&#45;&gt;Node2 -->
-<g id="edge2" class="edge">
+<g id="edge140_Node000000_Node000002" class="edge">
 <title>Node0&#45;&gt;Node2</title>
+<g id="a_edge140_Node000000_Node000002"><a xlink:title=" ">
 <path fill="none" stroke="#63b8ff" d="M99.23,-30.49C107.86,-29.12 116.91,-27.69 125.88,-26.27"/>
 <polygon fill="#63b8ff" stroke="#63b8ff" points="98.65,-27.04 89.32,-32.06 99.74,-33.95 98.65,-27.04"/>
+</a>
+</g>
 </g>
 </g>
 </svg>

@@ -1,4 +1,4 @@
 <map id="MonitoredItem service set" name="MonitoredItem service set">
-<area shape="rect" id="node1" title="Subscribe to data and events." alt="" coords="131,5,324,31"/>
-<area shape="rect" id="node2" href="$group__Services.html" title="OPC UA services as free functions." alt="" coords="5,5,83,31"/>
+<area shape="rect" id="Node000001" title="Subscribe to data and events." alt="" coords="131,5,324,31"/>
+<area shape="rect" id="Node000002" href="$group__Services.html" title="OPC UA services as free functions." alt="" coords="5,5,83,31"/>
 </map>

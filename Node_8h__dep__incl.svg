@@ -9,9 +9,9 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 122)">
 <title>/home/runner/work/open62541pp/open62541pp/include/open62541pp/Node.h</title>
 <!-- Node1 -->
-<g id="node1" class="node">
+<g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_Node000001"><a xlink:title=" ">
 <polygon fill="#999999" stroke="#666666" points="196,-118 0,-118 0,-77 196,-77 196,-118"/>
 <text text-anchor="start" x="8" y="-106" font-family="Helvetica,sans-Serif" font-size="10.00">/home/runner/work/open62541pp</text>
 <text text-anchor="start" x="8" y="-95" font-family="Helvetica,sans-Serif" font-size="10.00">/open62541pp/include/open62541pp/</text>
@@ -20,9 +20,9 @@
 </g>
 </g>
 <!-- Node2 -->
-<g id="node2" class="node">
+<g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:href="open62541pp_8h.html" target="_top" xlink:title=" ">
+<g id="a_Node000002"><a xlink:href="open62541pp_8h.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="#666666" points="194.5,-41 1.5,-41 1.5,0 194.5,0 194.5,-41"/>
 <text text-anchor="start" x="9.5" y="-29" font-family="Helvetica,sans-Serif" font-size="10.00">/home/runner/work/open62541pp</text>
 <text text-anchor="start" x="9.5" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">/open62541pp/include/open62541pp</text>
@@ -31,10 +31,13 @@
 </g>
 </g>
 <!-- Node1&#45;&gt;Node2 -->
-<g id="edge1" class="edge">
+<g id="edge1_Node000001_Node000002" class="edge">
 <title>Node1&#45;&gt;Node2</title>
+<g id="a_edge1_Node000001_Node000002"><a xlink:title=" ">
 <path fill="none" stroke="#63b8ff" d="M98,-66.69C98,-58.08 98,-48.9 98,-41.07"/>
 <polygon fill="#63b8ff" stroke="#63b8ff" points="94.5,-66.79 98,-76.79 101.5,-66.79 94.5,-66.79"/>
+</a>
+</g>
 </g>
 </g>
 </svg>

@@ -9,9 +9,9 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 111)">
 <title>opcua::detail::TupleHolds&lt; std::tuple&lt; Ts... &gt;, T &gt;</title>
 <!-- Node1 -->
-<g id="node1" class="node">
+<g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_Node000001"><a xlink:title=" ">
 <polygon fill="#999999" stroke="#666666" points="139,-30 0,-30 0,0 139,0 139,-30"/>
 <text text-anchor="start" x="8" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">opcua::detail::TupleHolds</text>
 <text text-anchor="middle" x="69.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; std::tuple&lt; Ts... &gt;, T &gt;</text>
@@ -19,9 +19,9 @@
 </g>
 </g>
 <!-- Node2 -->
-<g id="node2" class="node">
+<g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:title=" ">
+<g id="a_Node000002"><a xlink:title=" ">
 <polygon fill="white" stroke="#666666" points="132,-107 7,-107 7,-66 132,-66 132,-107"/>
 <text text-anchor="start" x="15" y="-95" font-family="Helvetica,sans-Serif" font-size="10.00">std::bool_constant</text>
 <text text-anchor="start" x="15" y="-84" font-family="Helvetica,sans-Serif" font-size="10.00">&lt;(std::is_same_v&lt; Ts,</text>
@@ -30,10 +30,13 @@
 </g>
 </g>
 <!-- Node2&#45;&gt;Node1 -->
-<g id="edge1" class="edge">
+<g id="edge1_Node000001_Node000002" class="edge">
 <title>Node2&#45;&gt;Node1</title>
+<g id="a_edge1_Node000001_Node000002"><a xlink:title=" ">
 <path fill="none" stroke="#63b8ff" d="M69.5,-55.66C69.5,-46.76 69.5,-37.42 69.5,-30.04"/>
 <polygon fill="#63b8ff" stroke="#63b8ff" points="66,-55.77 69.5,-65.77 73,-55.77 66,-55.77"/>
+</a>
+</g>
 </g>
 </g>
 </svg>

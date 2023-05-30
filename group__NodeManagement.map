@@ -1,4 +1,4 @@
 <map id="NodeManagement service set" name="NodeManagement service set">
-<area shape="rect" id="node1" title="Add/delete nodes and references." alt="" coords="131,5,348,31"/>
-<area shape="rect" id="node2" href="$group__Services.html" title="OPC UA services as free functions." alt="" coords="5,5,83,31"/>
+<area shape="rect" id="Node000001" title="Add/delete nodes and references." alt="" coords="131,5,348,31"/>
+<area shape="rect" id="Node000002" href="$group__Services.html" title="OPC UA services as free functions." alt="" coords="5,5,83,31"/>
 </map>

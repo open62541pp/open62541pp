@@ -1,4 +1,5 @@
 <map id="opcua::TypeConverter&lt; UA_CreateSessionResponse &gt;" name="opcua::TypeConverter&lt; UA_CreateSessionResponse &gt;">
-<area shape="rect" id="node1" title=" " alt="" coords="343,13,577,53"/>
-<area shape="rect" id="node2" href="$structopcua_1_1detail_1_1TypeConverterNative.html" title=" " alt="" coords="5,5,295,60"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="343,13,577,53"/>
+<area shape="rect" id="Node000002" href="$structopcua_1_1detail_1_1TypeConverterNative.html" title=" " alt="" coords="5,5,295,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="309,30,343,30,343,35,309,35"/>
 </map>

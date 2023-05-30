@@ -1,4 +1,5 @@
 <map id="opcua::QualifiedName" name="opcua::QualifiedName">
-<area shape="rect" id="node1" title="UA_QualifiedName wrapper class." alt="" coords="33,108,200,133"/>
-<area shape="rect" id="node2" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,5,228,60"/>
+<area shape="rect" id="Node000001" title="UA_QualifiedName wrapper class." alt="" coords="33,108,200,133"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,5,228,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="119,74,119,108,114,108,114,74"/>
 </map>

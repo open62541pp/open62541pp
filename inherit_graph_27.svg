@@ -9,9 +9,9 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 34)">
 <title>Graphical Class Hierarchy</title>
 <!-- Node0 -->
-<g id="node1" class="node">
+<g id="Node000000" class="node">
 <title>Node0</title>
-<g id="a_node1"><a xlink:href="structopcua_1_1detail_1_1TypeConverterNative.html" target="_top" xlink:title=" ">
+<g id="a_Node000000"><a xlink:href="structopcua_1_1detail_1_1TypeConverterNative.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="#666666" points="198,-30 0,-30 0,0 198,0 198,-30"/>
 <text text-anchor="start" x="8" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">opcua::detail::TypeConverter</text>
 <text text-anchor="middle" x="99" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">Native&lt; UA_Byte, UA_TYPES_BYTE &gt;</text>
@@ -19,9 +19,9 @@
 </g>
 </g>
 <!-- Node1 -->
-<g id="node2" class="node">
+<g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_node2"><a xlink:href="structopcua_1_1TypeConverter_3_01UA__Byte_01_4.html" target="_top" xlink:title=" ">
+<g id="a_Node000001"><a xlink:href="structopcua_1_1TypeConverter_3_01UA__Byte_01_4.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="#666666" points="356,-30 234,-30 234,0 356,0 356,-30"/>
 <text text-anchor="start" x="242" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">opcua::TypeConverter</text>
 <text text-anchor="middle" x="295" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; UA_Byte &gt;</text>
@@ -29,10 +29,13 @@
 </g>
 </g>
 <!-- Node0&#45;&gt;Node1 -->
-<g id="edge1" class="edge">
+<g id="edge26_Node000000_Node000001" class="edge">
 <title>Node0&#45;&gt;Node1</title>
+<g id="a_edge26_Node000000_Node000001"><a xlink:title=" ">
 <path fill="none" stroke="#63b8ff" d="M208.14,-15C216.96,-15 225.66,-15 233.94,-15"/>
 <polygon fill="#63b8ff" stroke="#63b8ff" points="208.14,-11.5 198.14,-15 208.14,-18.5 208.14,-11.5"/>
+</a>
+</g>
 </g>
 </g>
 </svg>

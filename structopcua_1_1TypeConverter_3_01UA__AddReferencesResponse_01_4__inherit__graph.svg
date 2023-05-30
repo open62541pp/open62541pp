@@ -9,9 +9,9 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 45)">
 <title>opcua::TypeConverter&lt; UA_AddReferencesResponse &gt;</title>
 <!-- Node1 -->
-<g id="node1" class="node">
+<g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_Node000001"><a xlink:title=" ">
 <polygon fill="#999999" stroke="#666666" points="438,-35.5 259,-35.5 259,-5.5 438,-5.5 438,-35.5"/>
 <text text-anchor="start" x="267" y="-23.5" font-family="Helvetica,sans-Serif" font-size="10.00">opcua::TypeConverter</text>
 <text text-anchor="middle" x="348.5" y="-12.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; UA_AddReferencesResponse &gt;</text>
@@ -19,9 +19,9 @@
 </g>
 </g>
 <!-- Node2 -->
-<g id="node2" class="node">
+<g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:href="structopcua_1_1detail_1_1TypeConverterNative.html" target="_top" xlink:title=" ">
+<g id="a_Node000002"><a xlink:href="structopcua_1_1detail_1_1TypeConverterNative.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="#666666" points="223,-41 0,-41 0,0 223,0 223,-41"/>
 <text text-anchor="start" x="8" y="-29" font-family="Helvetica,sans-Serif" font-size="10.00">opcua::detail::TypeConverter</text>
 <text text-anchor="start" x="8" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">Native&lt; UA_AddReferencesResponse,</text>
@@ -30,10 +30,13 @@
 </g>
 </g>
 <!-- Node2&#45;&gt;Node1 -->
-<g id="edge1" class="edge">
+<g id="edge1_Node000001_Node000002" class="edge">
 <title>Node2&#45;&gt;Node1</title>
+<g id="a_edge1_Node000001_Node000002"><a xlink:title=" ">
 <path fill="none" stroke="#63b8ff" d="M233.28,-20.5C241.93,-20.5 250.56,-20.5 258.97,-20.5"/>
 <polygon fill="#63b8ff" stroke="#63b8ff" points="233.12,-17 223.12,-20.5 233.12,-24 233.12,-17"/>
+</a>
+</g>
 </g>
 </g>
 </svg>

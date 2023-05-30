@@ -4,7 +4,7 @@ var searchData=
   ['objectid_1',['objectId',['../structUA__CallMethodRequest.html#a26a99bb993de37299df444585caab4f5',1,'UA_CallMethodRequest']]],
   ['objectnode_2',['objectNode',['../unionUA__Node.html#a399a7a9c1d2c7c6a5b9e64244fc8c2fc',1,'UA_Node']]],
   ['objecttypenode_3',['objectTypeNode',['../unionUA__Node.html#ab43457d3e5209ac9814b4cf5f775dc94',1,'UA_Node']]],
-  ['offset_4',['offset',['../structUA__NetworkMessageOffset.html#a7b6fade5b14e433ca749bcc96e5795df',1,'UA_NetworkMessageOffset::offset()'],['../structUA__TimeZoneDataType.html#af2335ac398e34df77427a439ca0b6de8',1,'UA_TimeZoneDataType::offset()']]],
+  ['offset_4',['offset',['../structUA__NetworkMessageOffset.html#a7b6fade5b14e433ca749bcc96e5795df',1,'UA_NetworkMessageOffset::offset'],['../structUA__TimeZoneDataType.html#af2335ac398e34df77427a439ca0b6de8',1,'UA_TimeZoneDataType::offset']]],
   ['offset_5',['Offset',['../struct__OpcUa__TimeZoneDataType.html#aee015b4de40dd83049b11affdcbb4a47',1,'_OpcUa_TimeZoneDataType']]],
   ['offsetdata_6',['offsetData',['../structUA__NetworkMessageOffset.html#a8b5cc10e007d76258d86ef66733a7f37',1,'UA_NetworkMessageOffset']]],
   ['offsets_7',['offsets',['../structUA__NetworkMessageOffsetBuffer.html#a2481b24020f3c04f888ce5817696e484',1,'UA_NetworkMessageOffsetBuffer']]],

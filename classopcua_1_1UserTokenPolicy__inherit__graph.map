@@ -1,4 +1,5 @@
 <map id="opcua::UserTokenPolicy" name="opcua::UserTokenPolicy">
-<area shape="rect" id="node1" title="UA_UserTokenPolicy wrapper class." alt="" coords="37,108,212,133"/>
-<area shape="rect" id="node2" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,5,244,60"/>
+<area shape="rect" id="Node000001" title="UA_UserTokenPolicy wrapper class." alt="" coords="37,108,212,133"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,5,244,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,74,127,108,122,108,122,74"/>
 </map>

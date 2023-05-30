@@ -1,4 +1,5 @@
 <map id="opcua::TypeConverter&lt; UA_CloseSecureChannelResponse &gt;" name="opcua::TypeConverter&lt; UA_CloseSecureChannelResponse &gt;">
-<area shape="rect" id="node1" title=" " alt="" coords="393,13,668,53"/>
-<area shape="rect" id="node2" href="$structopcua_1_1detail_1_1TypeConverterNative.html" title=" " alt="" coords="5,5,345,60"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="393,13,668,53"/>
+<area shape="rect" id="Node000002" href="$structopcua_1_1detail_1_1TypeConverterNative.html" title=" " alt="" coords="5,5,345,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="359,30,393,30,393,35,359,35"/>
 </map>

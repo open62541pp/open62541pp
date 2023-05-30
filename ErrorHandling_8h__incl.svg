@@ -9,9 +9,9 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 155)">
 <title>/home/runner/work/open62541pp/open62541pp/include/open62541pp/ErrorHandling.h</title>
 <!-- Node1 -->
-<g id="node1" class="node">
+<g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_Node000001"><a xlink:title=" ">
 <polygon fill="#999999" stroke="#666666" points="202,-151 9,-151 9,-110 202,-110 202,-151"/>
 <text text-anchor="start" x="17" y="-139" font-family="Helvetica,sans-Serif" font-size="10.00">/home/runner/work/open62541pp</text>
 <text text-anchor="start" x="17" y="-128" font-family="Helvetica,sans-Serif" font-size="10.00">/open62541pp/include/open62541pp</text>
@@ -20,94 +20,112 @@
 </g>
 </g>
 <!-- Node2 -->
-<g id="node2" class="node">
+<g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_node2"><a xlink:title=" ">
+<g id="a_Node000002"><a xlink:title=" ">
 <polygon fill="#e0e0e0" stroke="#999999" points="65,-74 0,-74 0,-55 65,-55 65,-74"/>
 <text text-anchor="middle" x="32.5" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">stdexcept</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node2 -->
-<g id="edge1" class="edge">
+<g id="edge1_Node000001_Node000002" class="edge">
 <title>Node1&#45;&gt;Node2</title>
+<g id="a_edge1_Node000001_Node000002"><a xlink:title=" ">
 <path fill="none" stroke="#63b8ff" d="M83.2,-109.95C72.59,-100.65 60.08,-89.68 50.14,-80.96"/>
 <polygon fill="#63b8ff" stroke="#63b8ff" points="52.32,-78.22 42.49,-74.26 47.7,-83.48 52.32,-78.22"/>
+</a>
+</g>
 </g>
 <!-- Node3 -->
-<g id="node3" class="node">
+<g id="Node000003" class="node">
 <title>Node3</title>
-<g id="a_node3"><a xlink:title=" ">
+<g id="a_Node000003"><a xlink:title=" ">
 <polygon fill="#e0e0e0" stroke="#999999" points="127.5,-74 83.5,-74 83.5,-55 127.5,-55 127.5,-74"/>
 <text text-anchor="middle" x="105.5" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">string</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node3 -->
-<g id="edge2" class="edge">
+<g id="edge2_Node000001_Node000003" class="edge">
 <title>Node1&#45;&gt;Node3</title>
+<g id="a_edge2_Node000001_Node000003"><a xlink:title=" ">
 <path fill="none" stroke="#63b8ff" d="M105.5,-109.95C105.5,-101.85 105.5,-92.5 105.5,-84.47"/>
 <polygon fill="#63b8ff" stroke="#63b8ff" points="109,-84.26 105.5,-74.26 102,-84.26 109,-84.26"/>
+</a>
+</g>
 </g>
 <!-- Node4 -->
-<g id="node4" class="node">
+<g id="Node000004" class="node">
 <title>Node4</title>
-<g id="a_node4"><a xlink:href="open62541_8h.html" target="_top" xlink:title=" ">
+<g id="a_Node000004"><a xlink:href="open62541_8h.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="#666666" points="294,-74 145,-74 145,-55 294,-55 294,-74"/>
 <text text-anchor="middle" x="219.5" y="-62" font-family="Helvetica,sans-Serif" font-size="10.00">open62541pp/open62541.h</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node4 -->
-<g id="edge3" class="edge">
+<g id="edge3_Node000001_Node000004" class="edge">
 <title>Node1&#45;&gt;Node4</title>
+<g id="a_edge3_Node000001_Node000004"><a xlink:title=" ">
 <path fill="none" stroke="#63b8ff" d="M140.32,-109.95C158.17,-99.93 179.45,-87.99 195.45,-79"/>
 <polygon fill="#63b8ff" stroke="#63b8ff" points="197.19,-82.04 204.2,-74.09 193.76,-75.94 197.19,-82.04"/>
+</a>
+</g>
 </g>
 <!-- Node5 -->
-<g id="node5" class="node">
+<g id="Node000005" class="node">
 <title>Node5</title>
-<g id="a_node5"><a target="_blank" xlink:href="open62541/nodeids_8h.html" xlink:title=" ">
+<g id="a_Node000005"><a target="_blank" xlink:href="open62541/nodeids_8h.html" xlink:title=" ">
 <polygon fill="white" stroke="#666666" points="146,-19 25,-19 25,0 146,0 146,-19"/>
 <text text-anchor="middle" x="85.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">open62541/nodeids.h</text>
 </a>
 </g>
 </g>
 <!-- Node4&#45;&gt;Node5 -->
-<g id="edge4" class="edge">
+<g id="edge4_Node000004_Node000005" class="edge">
 <title>Node4&#45;&gt;Node5</title>
+<g id="a_edge4_Node000004_Node000005"><a xlink:title=" ">
 <path fill="none" stroke="#63b8ff" d="M197.97,-54.98C176.03,-46.3 141.76,-32.75 116.81,-22.88"/>
 <polygon fill="#63b8ff" stroke="#63b8ff" points="118.01,-19.59 107.42,-19.17 115.43,-26.1 118.01,-19.59"/>
+</a>
+</g>
 </g>
 <!-- Node6 -->
-<g id="node6" class="node">
+<g id="Node000006" class="node">
 <title>Node6</title>
-<g id="a_node6"><a target="_blank" xlink:href="open62541/types_8h.html" xlink:title=" ">
+<g id="a_Node000006"><a target="_blank" xlink:href="open62541/types_8h.html" xlink:title=" ">
 <polygon fill="white" stroke="#666666" points="274.5,-19 164.5,-19 164.5,0 274.5,0 274.5,-19"/>
 <text text-anchor="middle" x="219.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">open62541/types.h</text>
 </a>
 </g>
 </g>
 <!-- Node4&#45;&gt;Node6 -->
-<g id="edge5" class="edge">
+<g id="edge5_Node000004_Node000006" class="edge">
 <title>Node4&#45;&gt;Node6</title>
+<g id="a_edge5_Node000004_Node000006"><a xlink:title=" ">
 <path fill="none" stroke="#63b8ff" d="M219.5,-54.75C219.5,-47.8 219.5,-37.85 219.5,-29.13"/>
 <polygon fill="#63b8ff" stroke="#63b8ff" points="223,-29.09 219.5,-19.09 216,-29.09 223,-29.09"/>
+</a>
+</g>
 </g>
 <!-- Node7 -->
-<g id="node7" class="node">
+<g id="Node000007" class="node">
 <title>Node7</title>
-<g id="a_node7"><a target="_blank" xlink:href="open62541/types__generated_8h.html" xlink:title=" ">
+<g id="a_Node000007"><a target="_blank" xlink:href="open62541/types__generated_8h.html" xlink:title=" ">
 <polygon fill="white" stroke="#666666" points="456.5,-19 292.5,-19 292.5,0 456.5,0 456.5,-19"/>
 <text text-anchor="middle" x="374.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">open62541/types_generated.h</text>
 </a>
 </g>
 </g>
 <!-- Node4&#45;&gt;Node7 -->
-<g id="edge6" class="edge">
+<g id="edge6_Node000004_Node000007" class="edge">
 <title>Node4&#45;&gt;Node7</title>
+<g id="a_edge6_Node000004_Node000007"><a xlink:title=" ">
 <path fill="none" stroke="#63b8ff" d="M244.4,-54.98C270.2,-46.16 310.72,-32.31 339.68,-22.41"/>
 <polygon fill="#63b8ff" stroke="#63b8ff" points="341.07,-25.63 349.4,-19.08 338.81,-19.01 341.07,-25.63"/>
+</a>
+</g>
 </g>
 </g>
 </svg>

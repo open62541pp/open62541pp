@@ -9,18 +9,18 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 23)">
 <title>View service set</title>
 <!-- Node2 -->
-<g id="node1" class="node">
+<g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_node1"><a xlink:href="group__Services.html" target="_top" xlink:title="OPC UA services as free functions.">
+<g id="a_Node000002"><a xlink:href="group__Services.html" target="_top" xlink:title="OPC UA services as free functions.">
 <polygon fill="white" stroke="#666666" points="58,-19 0,-19 0,0 58,0 58,-19"/>
 <text text-anchor="middle" x="29" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">Services</text>
 </a>
 </g>
 </g>
 <!-- Node1 -->
-<g id="node2" class="node">
+<g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_node2"><a xlink:title="Browse the address space / view created by a server.">
+<g id="a_Node000001"><a xlink:title="Browse the address space / view created by a server.">
 <polygon fill="#999999" stroke="#666666" points="191,-19 94,-19 94,0 191,0 191,-19"/>
 <text text-anchor="middle" x="142.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">View service set</text>
 </a>

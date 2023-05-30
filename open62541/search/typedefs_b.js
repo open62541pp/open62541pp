@@ -59,7 +59,7 @@ var searchData=
   ['ua_5flocaleid_56',['UA_LocaleId',['../types__generated_8h.html#a344d38983239815b0ca14ec1d72afe92',1,'types_generated.h']]],
   ['ua_5fmethodcallback_57',['UA_MethodCallback',['../nodestore_8h.html#a943f95365533842bb0938f2c6609a216',1,'nodestore.h']]],
   ['ua_5fnodehead_58',['UA_NodeHead',['../nodestore_8h.html#aa1d4134b378a3b3dc61b14cc2bcbd595',1,'nodestore.h']]],
-  ['ua_5fnodeiteratorcallback_59',['UA_NodeIteratorCallback',['../client__highlevel_8h.html#a0fd3dfee2e93e99b09030830a8c23dc4',1,'UA_NodeIteratorCallback():&#160;client_highlevel.h'],['../server_8h.html#a0fd3dfee2e93e99b09030830a8c23dc4',1,'UA_NodeIteratorCallback():&#160;server.h']]],
+  ['ua_5fnodeiteratorcallback_59',['UA_NodeIteratorCallback',['../client__highlevel_8h.html#a0fd3dfee2e93e99b09030830a8c23dc4',1,'UA_NodeIteratorCallback:&#160;client_highlevel.h'],['../server_8h.html#a0fd3dfee2e93e99b09030830a8c23dc4',1,'UA_NodeIteratorCallback:&#160;server.h']]],
   ['ua_5fnodestorevisitor_60',['UA_NodestoreVisitor',['../nodestore_8h.html#a182a5a3bdc9323eae2cf82fb92d1a967',1,'nodestore.h']]],
   ['ua_5fprocessmessagecallback_61',['UA_ProcessMessageCallback',['../ua__securechannel_8h.html#a16618c042bffe038faec76ff8bcbb5a8',1,'ua_securechannel.h']]],
   ['ua_5fpubsubconfiguration_62',['UA_PubSubConfiguration',['../server_8h.html#ae2ed50a9331a27c13b38b9c86ad938f8',1,'server.h']]],
