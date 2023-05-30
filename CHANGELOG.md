@@ -7,9 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.1] - 2023-05-30
+
 ### Fixed
 
 - Enforce new session in `client_subscription` example (#51)
+- Incorrect `MonitoredItem` passed to data change and event callback (#53)
 
 ## [0.4.0] - 2023-05-17
 
@@ -170,7 +173,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial public release
 
-[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.4.0...HEAD
+[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.4.1...HEAD
+[0.4.1]: https://github.com/open62541pp/open62541pp/releases/tag/v0.4.1
 [0.4.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.4.0
 [0.3.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.3.0
 [0.2.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.2.0
