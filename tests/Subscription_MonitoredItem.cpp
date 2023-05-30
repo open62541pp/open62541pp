@@ -121,6 +121,39 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
         CHECK_THROWS_WITH(mon.deleteMonitoredItem(), "BadMonitoredItemIdInvalid");
     }
 
+    SUBCASE("Monitor data change with multiple monitored items") {
+        auto sub = client.createSubscription();
+
+        uint32_t monId1 = 0;
+        auto monItem1 = sub.subscribeDataChange(
+            VariableId::Server_ServerStatus_CurrentTime,
+            AttributeId::Value,
+            [&](const auto& item, const DataValue&) {
+                CHECK(item.getNodeId() == NodeId(VariableId::Server_ServerStatus_CurrentTime));
+                CHECK(item.getAttributeId() == AttributeId::Value);
+                monId1 = item.getMonitoredItemId();
+            }
+        );
+
+        uint32_t monId2 = 0;
+        auto monItem2 = sub.subscribeDataChange(
+            VariableId::Server_ServerStatus_CurrentTime,
+            AttributeId::Value,
+            [&](const auto& item, const DataValue&) {
+                CHECK(item.getNodeId() == NodeId(VariableId::Server_ServerStatus_CurrentTime));
+                CHECK(item.getAttributeId() == AttributeId::Value);
+                monId2 = item.getMonitoredItemId();
+            }
+        );
+
+        client.runIterate();
+        CHECK(monId1 != 0);
+        CHECK(monId2 != 0);
+        CHECK(monId2 != monId1);
+        CHECK(monItem1.getMonitoredItemId() == monId1);
+        CHECK(monItem2.getMonitoredItemId() == monId2);
+    }
+
     SUBCASE("Modify monitored item") {
         auto sub = client.createSubscription();
         auto mon = sub.subscribeDataChange(
