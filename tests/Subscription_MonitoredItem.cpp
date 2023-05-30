@@ -124,34 +124,34 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
     SUBCASE("Monitor data change with multiple monitored items") {
         auto sub = client.createSubscription();
 
-        int32_t notificationId1 = 0;
-        auto monId1 = sub.subscribeDataChange(
+        uint32_t monId1 = 0;
+        auto monItem1 = sub.subscribeDataChange(
             VariableId::Server_ServerStatus_CurrentTime,
             AttributeId::Value,
             [&](const auto& item, const DataValue&) {
                 CHECK(item.getNodeId() == NodeId(VariableId::Server_ServerStatus_CurrentTime));
                 CHECK(item.getAttributeId() == AttributeId::Value);
-                notificationId1 = item.getMonitoredItemId();
+                monId1 = item.getMonitoredItemId();
             }
         );
 
-        int32_t notificationId2 = 0;
-        auto monId2 = sub.subscribeDataChange(
+        uint32_t monId2 = 0;
+        auto monItem2 = sub.subscribeDataChange(
             VariableId::Server_ServerStatus_CurrentTime,
             AttributeId::Value,
             [&](const auto& item, const DataValue&) {
                 CHECK(item.getNodeId() == NodeId(VariableId::Server_ServerStatus_CurrentTime));
                 CHECK(item.getAttributeId() == AttributeId::Value);
-                notificationId2 = item.getMonitoredItemId();
+                monId2 = item.getMonitoredItemId();
             }
         );
 
         client.runIterate();
-        CHECK(notificationId1 != 0);
-        CHECK(notificationId2 != 0);
-        CHECK(notificationId2 != notificationId1);
-        CHECK(monId1.getMonitoredItemId() == notificationId1);
-        CHECK(monId2.getMonitoredItemId() == notificationId2);
+        CHECK(monId1 != 0);
+        CHECK(monId2 != 0);
+        CHECK(monId2 != monId1);
+        CHECK(monItem1.getMonitoredItemId() == monId1);
+        CHECK(monItem2.getMonitoredItemId() == monId2);
     }
 
     SUBCASE("Modify monitored item") {
