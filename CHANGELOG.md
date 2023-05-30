@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Enforce new session in `client_subscription` example (#51)
+
 ## [0.4.0] - 2023-05-17
 
 ### Added

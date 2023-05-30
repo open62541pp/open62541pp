@@ -54,6 +54,9 @@ int main() {
             // This will block until client.stop() is called or an exception is thrown.
             client.run();
         } catch (const opcua::BadDisconnect&) {
+            // Workaround to enforce a new session
+            // https://github.com/open62541pp/open62541pp/issues/51
+            client.disconnect();
             std::cout << "Disconnected. Retry to connect in 3 seconds\n";
             std::this_thread::sleep_for(std::chrono::seconds(3));
         }
