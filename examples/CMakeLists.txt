@@ -17,6 +17,7 @@ set(examples_sources
     client_subscription.cpp
     server.cpp
     server_instantiation.cpp
+    server_method.cpp
     server_minimal.cpp
 )
 
