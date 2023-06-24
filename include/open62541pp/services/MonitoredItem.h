@@ -223,7 +223,7 @@ void setTriggering(
 /**
  * Delete a monitored item from a subscription.
  *
- * @param client Instance of type Server or Client
+ * @param client Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @param monitoredItemId Identifier of the monitored item
  * @ingroup MonitoredItem

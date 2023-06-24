@@ -1,5 +1,8 @@
 #include "open62541pp/types/Composed.h"
 
+#include "open62541pp/ErrorHandling.h"
+#include "open62541pp/detail/helper.h"
+
 namespace opcua {
 
 BrowseDescription::BrowseDescription(
@@ -48,6 +51,27 @@ BrowsePath::BrowsePath(const NodeId& startingNode, const RelativePath& relativeP
 ReadValueId::ReadValueId(const NodeId& id, AttributeId attributeId) {
     asWrapper<NodeId>(handle()->nodeId) = id;
     handle()->attributeId = static_cast<uint32_t>(attributeId);
+}
+
+Argument::Argument(
+    std::string_view name,
+    const LocalizedText& description,
+    const NodeId& dataType,
+    ValueRank valueRank,
+    const std::vector<uint32_t>& arrayDimensions
+) {
+    asWrapper<String>(handle()->name) = String(name);
+    asWrapper<LocalizedText>(handle()->description) = description;
+    asWrapper<NodeId>(handle()->dataType) = dataType;
+    handle()->valueRank = static_cast<UA_Int32>(valueRank);
+    handle()->arrayDimensionsSize = arrayDimensions.size();
+    const auto status = UA_Array_copy(
+        arrayDimensions.data(),
+        arrayDimensions.size(),
+        (void**)&handle()->arrayDimensions,  // NOLINT
+        detail::getUaDataType(UA_TYPES_UINT32)
+    );
+    detail::throwOnBadStatus(status);
 }
 
 }  // namespace opcua

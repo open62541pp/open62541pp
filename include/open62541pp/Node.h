@@ -118,6 +118,30 @@ public:
         return {connection_, id, false};
     }
 
+#ifdef UA_ENABLE_METHODCALLS
+    /// @copydoc services::addMethod
+    Node addMethod(
+        const NodeId& id,
+        std::string_view browseName,
+        services::MethodCallback callback,
+        const std::vector<Argument>& inputArguments,
+        const std::vector<Argument>& outputArguments,
+        const NodeId& referenceType = ReferenceTypeId::HasComponent
+    ) {
+        services::addMethod(
+            connection_,
+            nodeId_,
+            id,
+            browseName,
+            std::move(callback),
+            inputArguments,
+            outputArguments,
+            referenceType
+        );
+        return {connection_, id, false};
+    }
+#endif
+
     /// @copydoc services::addReference
     void addReference(const NodeId& targetId, const NodeId& referenceType, bool forward = true) {
         services::addReference(connection_, nodeId_, targetId, referenceType, forward);
