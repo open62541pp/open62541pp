@@ -96,7 +96,7 @@ public:
         UserTokenPolicy, getUserIdentityTokens, userIdentityTokens, userIdentityTokensSize
     )
     UAPP_COMPOSED_GETTER_WRAPPER(String, getTransportProfileUri, transportProfileUri)
-    UAPP_COMPOSED_GETTER_WRAPPER(UA_Byte, getSecurityLevel, securityLevel)
+    UAPP_COMPOSED_GETTER(UA_Byte, getSecurityLevel, securityLevel)
 };
 
 /**
@@ -244,6 +244,30 @@ public:
     UAPP_COMPOSED_GETTER_CAST(AttributeId, getAttributeId, attributeId)
     UAPP_COMPOSED_GETTER_WRAPPER(String, getIndexRange, indexRange)
     UAPP_COMPOSED_GETTER_WRAPPER(QualifiedName, getDataEncoding, dataEncoding)
+};
+
+/**
+ * UA_Argument wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.6
+ * @ingroup TypeWrapper
+ */
+class Argument : public TypeWrapper<UA_Argument, UA_TYPES_ARGUMENT> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    Argument(
+        std::string_view name,
+        const LocalizedText& description,
+        const NodeId& dataType,
+        ValueRank valueRank = {},
+        const std::vector<uint32_t>& arrayDimensions = {}
+    );
+
+    UAPP_COMPOSED_GETTER_WRAPPER(String, getName, name)
+    UAPP_COMPOSED_GETTER_WRAPPER(LocalizedText, getDescription, description)
+    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getDataType, dataType)
+    UAPP_COMPOSED_GETTER_CAST(ValueRank, getValueRank, valueRank)
+    UAPP_COMPOSED_GETTER_ARRAY(uint32_t, getArrayDimensions, arrayDimensions, arrayDimensionsSize)
 };
 
 }  // namespace opcua

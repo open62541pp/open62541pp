@@ -129,9 +129,11 @@ TEST_CASE("TypeWrapper") {
     }
 }
 
-TEST_CASE("asWrapper") {
+TEST_CASE("asWrapper / asNative") {
     class Int32Wrapper : public TypeWrapper<int32_t, UA_TYPES_INT32> {
     public:
+        using TypeWrapperBase::TypeWrapperBase;
+
         void increment() {
             auto& ref = *handle();
             ++ref;
@@ -142,17 +144,35 @@ TEST_CASE("asWrapper") {
         }
     };
 
-    SUBCASE("non-const") {
-        int32_t value = 1;
-        Int32Wrapper& wrapper = asWrapper<Int32Wrapper>(value);
-        wrapper.increment();
-        CHECK(value == 2);
-        CHECK(wrapper.get() == 2);
+    SUBCASE("asWrapper") {
+        SUBCASE("non-const") {
+            int32_t value = 1;
+            Int32Wrapper& wrapper = asWrapper<Int32Wrapper>(value);
+            wrapper.increment();
+            CHECK(value == 2);
+            CHECK(wrapper.get() == 2);
+        }
+
+        SUBCASE("const") {
+            const int32_t value = 1;
+            const Int32Wrapper& wrapper = asWrapper<Int32Wrapper>(value);
+            CHECK(wrapper.get() == 1);
+        }
     }
 
-    SUBCASE("const") {
-        const int32_t value = 1;
-        const Int32Wrapper& wrapper = asWrapper<Int32Wrapper>(value);
-        CHECK(wrapper.get() == 1);
+    SUBCASE("asNative") {
+        SUBCASE("non-const") {
+            Int32Wrapper wrapper(1);
+            int32_t& native = asNative(wrapper);
+            native++;
+            CHECK(native == 2);
+            CHECK(wrapper.get() == 2);
+        }
+
+        SUBCASE("non-const") {
+            const Int32Wrapper wrapper(1);
+            const int32_t& native = asNative(wrapper);
+            CHECK(native == 1);
+        }
     }
 }
