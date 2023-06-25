@@ -221,7 +221,8 @@ static UA_StatusCode methodCallback(
     } catch (const BadStatus& e) {
         return e.code();
     } catch (const std::exception&) {
-        return UA_STATUSCODE_BAD;
+        // TODO: log exception what()
+        return 0x80000000;  // UA_STATUSCODE_BAD
     }
     return UA_STATUSCODE_GOOD;
 }
