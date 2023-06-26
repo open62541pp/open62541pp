@@ -13,6 +13,7 @@ set(examples_sources
     client_browse.cpp
     client_connect.cpp
     client_find_servers.cpp
+    client_method.cpp
     client_minimal.cpp
     client_subscription.cpp
     server.cpp

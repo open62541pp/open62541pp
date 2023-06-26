@@ -32,6 +32,9 @@ namespace opcua::services {
  * @param methodId NodeId of the method to invoke
  * @param inputArguments Input argumet values
  * @exception BadStatus
+ * @exception BadStatus (BadInvalidArgument) If input arguments don't match expected variant types
+ * @exception BadStatus (BadArgumentsMissing) If input arguments are missing
+ * @exception BadStatus (BadTooManyArguments) If too many input arguments provided
  * @ingroup Method
  */
 template <typename T>
