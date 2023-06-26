@@ -9,7 +9,9 @@
 
 #include "open62541pp/Client.h"
 #include "open62541pp/Server.h"
+#include "open62541pp/open62541.h"  // UA_ENABLE_METHODCALLS
 #include "open62541pp/services/services.h"
+#include "open62541pp/types/Composed.h"
 
 #include "helper/Runner.h"
 #include "version.h"
@@ -17,97 +19,70 @@
 using namespace opcua;
 using namespace std::literals::chrono_literals;
 
-TEST_CASE("NodeManagement service set (server)") {
-    Server server;
-    const NodeId objectsId{0, UA_NS0ID_OBJECTSFOLDER};
-
-    SUBCASE("Non-type nodes") {
-        services::addFolder(server, objectsId, {1, 1000}, "folder");
-        services::addObject(server, objectsId, {1, 1001}, "object");
-        services::addVariable(server, objectsId, {1, 1002}, "variable");
-        services::addProperty(server, objectsId, {1, 1003}, "property");
-    }
-
-    SUBCASE("Type nodes") {
-        services::addObjectType(server, {0, UA_NS0ID_BASEOBJECTTYPE}, {1, 1000}, "objecttype");
-        services::addVariableType(
-            server, {0, UA_NS0ID_BASEVARIABLETYPE}, {1, 1001}, "variabletype"
-        );
-    }
-
-    SUBCASE("Add existing node id") {
-        services::addObject(server, objectsId, {1, 1000}, "object1");
-        CHECK_THROWS_WITH(
-            services::addObject(server, objectsId, {1, 1000}, "object2"), "BadNodeIdExists"
-        );
-    }
-
-    SUBCASE("Add reference") {
-        services::addFolder(server, objectsId, {1, 1000}, "folder");
-        services::addObject(server, objectsId, {1, 1001}, "object");
-        services::addReference(server, {1, 1000}, {1, 1001}, ReferenceTypeId::Organizes);
-        CHECK_THROWS_WITH(
-            services::addReference(server, {1, 1000}, {1, 1001}, ReferenceTypeId::Organizes),
-            "BadDuplicateReferenceNotAllowed"
-        );
-    }
-
-    SUBCASE("Delete node") {
-        services::addObject(server, objectsId, {1, 1000}, "object");
-        services::deleteNode(server, {1, 1000});
-        CHECK_THROWS_WITH(services::deleteNode(server, {1, 1000}), "BadNodeIdUnknown");
-    }
-}
-
-TEST_CASE("NodeManagement service set (client)") {
+TEST_CASE("NodeManagement service set (server & client)") {
     Server server;
     ServerRunner serverRunner(server);
     Client client;
     client.connect("opc.tcp://localhost:4840");
-
     const NodeId objectsId{0, UA_NS0ID_OBJECTSFOLDER};
 
-    SUBCASE("Non-type nodes") {
-        CHECK_NOTHROW(services::addObject(client, objectsId, {1, 1000}, "object"));
-        CHECK(services::readNodeClass(server, {1, 1000}) == NodeClass::Object);
+    const auto testNodeManagement = [&](auto& serverOrClient) {
+        SUBCASE("Non-type nodes") {
+            services::addObject(serverOrClient, objectsId, {1, 1000}, "object");
+            CHECK(services::readNodeClass(server, {1, 1000}) == NodeClass::Object);
 
-        CHECK_NOTHROW(services::addFolder(client, objectsId, {1, 1001}, "folder"));
-        CHECK(services::readNodeClass(server, {1, 1001}) == NodeClass::Object);
+            services::addFolder(serverOrClient, objectsId, {1, 1001}, "folder");
+            CHECK(services::readNodeClass(server, {1, 1001}) == NodeClass::Object);
 
-        CHECK_NOTHROW(services::addVariable(client, objectsId, {1, 1002}, "variable"));
-        CHECK(services::readNodeClass(server, {1, 1002}) == NodeClass::Variable);
+            services::addVariable(serverOrClient, objectsId, {1, 1002}, "variable");
+            CHECK(services::readNodeClass(server, {1, 1002}) == NodeClass::Variable);
 
-        CHECK_NOTHROW(services::addProperty(client, objectsId, {1, 1003}, "property"));
-        CHECK(services::readNodeClass(server, {1, 1003}) == NodeClass::Variable);
-    }
+            services::addProperty(serverOrClient, objectsId, {1, 1003}, "property");
+            CHECK(services::readNodeClass(server, {1, 1003}) == NodeClass::Variable);
 
-    SUBCASE("Type nodes") {
-        CHECK_NOTHROW(
-            services::addObjectType(client, {0, UA_NS0ID_BASEOBJECTTYPE}, {1, 1000}, "objecttype")
-        );
-        CHECK(services::readNodeClass(server, {1, 1000}) == NodeClass::ObjectType);
+#ifdef UA_ENABLE_METHODCALLS
+            services::addMethod(serverOrClient, objectsId, {1, 1004}, "method", {}, {}, {});
+            CHECK(services::readNodeClass(server, {1, 1004}) == NodeClass::Method);
+#endif
+        }
 
-        CHECK_NOTHROW(services::addVariableType(
-            client, {0, UA_NS0ID_BASEVARIABLETYPE}, {1, 1001}, "variabletype"
-        ));
-        CHECK(services::readNodeClass(server, {1, 1001}) == NodeClass::VariableType);
-    }
+        SUBCASE("Type nodes") {
+            services::addObjectType(
+                serverOrClient, {0, UA_NS0ID_BASEOBJECTTYPE}, {1, 1000}, "objecttype"
+            );
+            CHECK(services::readNodeClass(server, {1, 1000}) == NodeClass::ObjectType);
 
-    SUBCASE("Add reference") {
-        services::addFolder(client, objectsId, {1, 1000}, "folder");
-        services::addObject(client, objectsId, {1, 1001}, "object");
-        services::addReference(client, {1, 1000}, {1, 1001}, ReferenceTypeId::Organizes);
-        CHECK_THROWS_WITH(
-            services::addReference(client, {1, 1000}, {1, 1001}, ReferenceTypeId::Organizes),
-            "BadDuplicateReferenceNotAllowed"
-        );
-    }
+            services::addVariableType(
+                serverOrClient, {0, UA_NS0ID_BASEVARIABLETYPE}, {1, 1001}, "variabletype"
+            );
+            CHECK(services::readNodeClass(server, {1, 1001}) == NodeClass::VariableType);
+        }
 
-    SUBCASE("Delete node") {
-        services::addObject(client, objectsId, {1, 1000}, "object");
-        services::deleteNode(client, {1, 1000});
-        CHECK_THROWS_WITH(services::deleteNode(client, {1, 1000}), "BadNodeIdUnknown");
-    }
+        SUBCASE("Add reference") {
+            services::addFolder(serverOrClient, objectsId, {1, 1000}, "folder");
+            services::addObject(serverOrClient, objectsId, {1, 1001}, "object");
+            services::addReference(
+                serverOrClient, {1, 1000}, {1, 1001}, ReferenceTypeId::Organizes
+            );
+            CHECK_THROWS_WITH(
+                services::addReference(
+                    serverOrClient, {1, 1000}, {1, 1001}, ReferenceTypeId::Organizes
+                ),
+                "BadDuplicateReferenceNotAllowed"
+            );
+        }
+
+        SUBCASE("Delete node") {
+            services::addObject(serverOrClient, objectsId, {1, 1000}, "object");
+            services::deleteNode(serverOrClient, {1, 1000});
+            CHECK_THROWS_WITH(services::deleteNode(serverOrClient, {1, 1000}), "BadNodeIdUnknown");
+        }
+    };
+
+    // clang-format off
+    SUBCASE("Server") { testNodeManagement(server); };
+    SUBCASE("Client") { testNodeManagement(client); };
+    // clang-format on
 }
 
 TEST_CASE("Attribute service set (server)") {
@@ -411,6 +386,87 @@ TEST_CASE("View service set (server & client)") {
     SUBCASE("Client") { testBrowse(client); };
     // clang-format on
 }
+
+#ifdef UA_ENABLE_METHODCALLS
+TEST_CASE("Method service set (server & client)") {
+    Server server;
+    ServerRunner serverRunner(server);
+    Client client;
+    client.connect("opc.tcp://localhost:4840");
+
+    const NodeId objectsId{ObjectId::ObjectsFolder};
+    const NodeId methodId{1, 1000};
+
+    services::addMethod(
+        server,
+        objectsId,
+        methodId,
+        "add",
+        [](const std::vector<Variant>& inputs, std::vector<Variant>& outputs) {
+            const auto a = inputs.at(0).getScalarCopy<int32_t>();
+            const auto b = inputs.at(1).getScalarCopy<int32_t>();
+            outputs.at(0).setScalarCopy(a + b);
+        },
+        {
+            Argument("a", {"en-US", "first number"}, DataTypeId::Int32, ValueRank::Scalar),
+            Argument("b", {"en-US", "second number"}, DataTypeId::Int32, ValueRank::Scalar),
+        },
+        {
+            Argument("sum", {"en-US", "sum of both numbers"}, DataTypeId::Int32, ValueRank::Scalar),
+        }
+    );
+
+    const auto testCall = [&](auto& serverOrClient) {
+        const std::vector<Variant> outputs = services::call(
+            serverOrClient,
+            objectsId,
+            methodId,
+            {
+                Variant::fromScalar<int32_t>(1),
+                Variant::fromScalar<int32_t>(2),
+            }
+        );
+        CHECK(outputs.size() == 1);
+        CHECK(outputs.at(0).getScalarCopy<int32_t>() == 3);
+
+        SUBCASE("Invalid input arguments") {
+            CHECK_THROWS_WITH(
+                services::call(
+                    serverOrClient,
+                    objectsId,
+                    methodId,
+                    {
+                        Variant::fromScalar<bool>(true),
+                        Variant::fromScalar<float>(11.11f),
+                    }
+                ),
+                "BadInvalidArgument"
+            );
+            CHECK_THROWS_WITH(
+                services::call(serverOrClient, objectsId, methodId, {}), "BadArgumentsMissing"
+            );
+            CHECK_THROWS_WITH(
+                services::call(
+                    serverOrClient,
+                    objectsId,
+                    methodId,
+                    {
+                        Variant::fromScalar<int32_t>(1),
+                        Variant::fromScalar<int32_t>(2),
+                        Variant::fromScalar<int32_t>(3),
+                    }
+                ),
+                "BadTooManyArguments"
+            );
+        }
+    };
+
+    // clang-format off
+    SUBCASE("Server") { testCall(server); };
+    SUBCASE("Client") { testCall(client); };
+    // clang-format on
+}
+#endif
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 TEST_CASE("Subscription service set (client)") {
