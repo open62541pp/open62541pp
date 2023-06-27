@@ -17,7 +17,7 @@ TEST_CASE("Node") {
     client.connect("opc.tcp://localhost:4840");
 
     // create variable node
-    const NodeId varId{1, 1000};
+    const NodeId varId{1, 1};
     services::addVariable(server, {0, UA_NS0ID_OBJECTSFOLDER}, varId, "variable");
     services::writeAccessLevel(server, varId, UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE);
     services::writeWriteMask(server, varId, ~0U);  // set all bits to 1 -> allow all
@@ -39,6 +39,41 @@ TEST_CASE("Node") {
             CHECK(serverOrClient.getObjectsNode().readNodeClass() == NodeClass::Object);
             CHECK(serverOrClient.getTypesNode().readNodeClass() == NodeClass::Object);
             CHECK(serverOrClient.getViewsNode().readNodeClass() == NodeClass::Object);
+        }
+
+        SUBCASE("Add non-type nodes") {
+            CHECK(objNode.addObject({1, 1000}, "object").readNodeClass() == NodeClass::Object);
+            CHECK(objNode.addFolder({1, 1001}, "folder").readNodeClass() == NodeClass::Object);
+            CHECK(
+                objNode.addVariable({1, 1002}, "variable").readNodeClass() == NodeClass::Variable
+            );
+            CHECK(
+                objNode.addProperty({1, 1003}, "property").readNodeClass() == NodeClass::Variable
+            );
+#ifdef UA_ENABLE_METHODCALLS
+            CHECK(
+                objNode.addMethod({1, 1004}, "method", {}, {}, {}).readNodeClass() ==
+                NodeClass::Method
+            );
+#endif
+        }
+
+        SUBCASE("Add type nodes") {
+            CHECK(
+                serverOrClient.getNode(ObjectTypeId::BaseObjectType)
+                    .addObjectType({1, 1000}, "objecttype")
+                    .readNodeClass() == NodeClass::ObjectType
+            );
+            CHECK(
+                serverOrClient.getNode(VariableTypeId::BaseVariableType)
+                    .addVariableType({1, 1001}, "variabletype")
+                    .readNodeClass() == NodeClass::VariableType
+            );
+        }
+
+        SUBCASE("Delete node") {
+            auto node = objNode.addObject({1, 1000}, "object");
+            CHECK_NOTHROW(node.deleteNode());
         }
 
         SUBCASE("Browse references") {
