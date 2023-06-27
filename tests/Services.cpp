@@ -397,12 +397,16 @@ TEST_CASE("Method service set (server & client)") {
     const NodeId objectsId{ObjectId::ObjectsFolder};
     const NodeId methodId{1, 1000};
 
+    bool throwException = false;
     services::addMethod(
         server,
         objectsId,
         methodId,
         "add",
-        [](const std::vector<Variant>& inputs, std::vector<Variant>& outputs) {
+        [&](const std::vector<Variant>& inputs, std::vector<Variant>& outputs) {
+            if (throwException) {
+                throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
+            }
             const auto a = inputs.at(0).getScalarCopy<int32_t>();
             const auto b = inputs.at(1).getScalarCopy<int32_t>();
             outputs.at(0).setScalarCopy(a + b);
@@ -417,17 +421,35 @@ TEST_CASE("Method service set (server & client)") {
     );
 
     const auto testCall = [&](auto& serverOrClient) {
-        const std::vector<Variant> outputs = services::call(
-            serverOrClient,
-            objectsId,
-            methodId,
-            {
-                Variant::fromScalar<int32_t>(1),
-                Variant::fromScalar<int32_t>(2),
-            }
-        );
-        CHECK(outputs.size() == 1);
-        CHECK(outputs.at(0).getScalarCopy<int32_t>() == 3);
+        SUBCASE("Check result") {
+            const std::vector<Variant> outputs = services::call(
+                serverOrClient,
+                objectsId,
+                methodId,
+                {
+                    Variant::fromScalar<int32_t>(1),
+                    Variant::fromScalar<int32_t>(2),
+                }
+            );
+            CHECK(outputs.size() == 1);
+            CHECK(outputs.at(0).getScalarCopy<int32_t>() == 3);
+        }
+
+        SUBCASE("Propagate exception") {
+            throwException = true;
+            CHECK_THROWS_WITH(
+                services::call(
+                    serverOrClient,
+                    objectsId,
+                    methodId,
+                    {
+                        Variant::fromScalar<int32_t>(1),
+                        Variant::fromScalar<int32_t>(2),
+                    }
+                ),
+                "BadUnexpectedError"
+            );
+        }
 
         SUBCASE("Invalid input arguments") {
             CHECK_THROWS_WITH(
