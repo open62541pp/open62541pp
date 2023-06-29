@@ -52,6 +52,9 @@ public:
     /// Set custom logging function.
     void setLogger(Logger logger);
 
+    /// Set response timeout in milliseconds.
+    void setTimeout(uint32_t milliseconds);
+
     /// Set a state callback that will be called after the client is connected.
     void onConnected(StateCallback callback);
     /// Set a state callback that will be called after the client is disconnected.

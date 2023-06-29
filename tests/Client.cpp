@@ -7,6 +7,8 @@
 #include "open62541pp/Client.h"
 #include "open62541pp/Server.h"
 
+#include "open62541_impl.h"
+
 #include "helper/Runner.h"
 
 using namespace std::chrono_literals;
@@ -137,6 +139,17 @@ TEST_CASE("Client state callbacks") {
     // v1.0 will not trigger session closed
     CHECK(states.size() >= 1);
     CHECK(states.at(states.size() - 1) == States::Disconnected);
+}
+
+TEST_CASE("Client configuration") {
+    Client client;
+    UA_ClientConfig* config = UA_Client_getConfig(client.handle());
+    CHECK(config != nullptr);
+
+    SUBCASE("Set timeout") {
+        client.setTimeout(333);
+        CHECK(config->timeout == 333);
+    }
 }
 
 TEST_CASE("Client methods") {
