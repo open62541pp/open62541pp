@@ -252,6 +252,10 @@ void Client::setLogger(Logger logger) {
     connection_->setLogger(std::move(logger));
 }
 
+void Client::setTimeout(uint32_t milliseconds) {
+    getConfig(this)->timeout = milliseconds;
+}
+
 static void setStateCallback(ClientContext& context, ClientState state, StateCallback&& callback) {
     context.stateCallbacks.at(static_cast<size_t>(state)) = callback;
 }
