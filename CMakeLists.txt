@@ -114,6 +114,7 @@ add_library(
     src/detail/helper.cpp
     src/overloads/ostream.cpp
     src/services/Attribute.cpp
+    src/services/Method.cpp
     src/services/MonitoredItem.cpp
     src/services/NodeManagement.cpp
     src/services/Subscription.cpp

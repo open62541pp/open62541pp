@@ -8,6 +8,7 @@
 #include "open62541pp/Common.h"
 #include "open62541pp/TypeConverter.h"  // guessType
 #include "open62541pp/services/Attribute.h"
+#include "open62541pp/services/Method.h"
 #include "open62541pp/services/NodeManagement.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
@@ -118,6 +119,30 @@ public:
         return {connection_, id, false};
     }
 
+#ifdef UA_ENABLE_METHODCALLS
+    /// @copydoc services::addMethod
+    Node addMethod(
+        const NodeId& id,
+        std::string_view browseName,
+        services::MethodCallback callback,
+        const std::vector<Argument>& inputArguments,
+        const std::vector<Argument>& outputArguments,
+        const NodeId& referenceType = ReferenceTypeId::HasComponent
+    ) {
+        services::addMethod(
+            connection_,
+            nodeId_,
+            id,
+            browseName,
+            std::move(callback),
+            inputArguments,
+            outputArguments,
+            referenceType
+        );
+        return {connection_, id, false};
+    }
+#endif
+
     /// @copydoc services::addReference
     void addReference(const NodeId& targetId, const NodeId& referenceType, bool forward = true) {
         services::addReference(connection_, nodeId_, targetId, referenceType, forward);
@@ -166,6 +191,17 @@ public:
     /// A Node may have several parents, the first found is returned.
     /// @exception BadStatus (BadNotFound) If no parent node found
     Node browseParent();
+
+#ifdef UA_ENABLE_METHODCALLS
+    /// Call a server method and return results.
+    /// @param methodId NodeId of the method (`HasComponent` reference to current node required)
+    /// @param inputArguments Input argument values
+    std::vector<Variant> callMethod(
+        const NodeId& methodId, const std::vector<Variant>& inputArguments
+    ) {
+        return services::call(connection_, nodeId_, methodId, inputArguments);
+    }
+#endif
 
     /// @copydoc services::readNodeClass
     NodeClass readNodeClass() {

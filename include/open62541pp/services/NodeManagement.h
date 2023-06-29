@@ -1,11 +1,19 @@
 #pragma once
 
 #include <cstdint>
+#include <functional>
 #include <string_view>
+#include <vector>
 
 #include "open62541pp/Common.h"  // ModellingRule
 #include "open62541pp/NodeIds.h"  // ReferenceTypeId
 #include "open62541pp/types/NodeId.h"
+
+// forward declarations
+namespace opcua {
+class Argument;
+class Variant;
+}  // namespace opcua
 
 namespace opcua::services {
 
@@ -108,6 +116,32 @@ void addVariableType(
     const NodeId& variableType = VariableTypeId::BaseDataVariableType,
     const NodeId& referenceType = ReferenceTypeId::HasSubtype
 );
+
+#ifdef UA_ENABLE_METHODCALLS
+/**
+ * Method callback.
+ * @ingroup NodeManagement
+ */
+using MethodCallback = std::function<void(const std::vector<Variant>&, std::vector<Variant>&)>;
+
+/**
+ * Add child method.
+ * Callbacks can not be set by clients. Servers can assign callbacks to method nodes afterwards.
+ * @exception BadStatus
+ * @ingroup NodeManagement
+ */
+template <typename T>
+void addMethod(
+    T& serverOrClient,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    MethodCallback callback,
+    const std::vector<Argument>& inputArguments,
+    const std::vector<Argument>& outputArguments,
+    const NodeId& referenceType = ReferenceTypeId::HasComponent
+);
+#endif
 
 /**
  * Add reference.

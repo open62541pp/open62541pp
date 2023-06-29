@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `asNative` function to cast wrapper to native objects
+- Add method nodes (#55)
+  - `services::addMethod`
+  - `Node::addMethod`
+- Call method (#55)
+  - `services::call`
+  - `Node::callMethod`
+- Examples
+  - `server_method` (#55)
+  - `client_method` (#55)
+
 ## [0.4.1] - 2023-05-30
 
 ### Fixed
