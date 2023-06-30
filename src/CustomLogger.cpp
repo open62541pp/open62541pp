@@ -22,18 +22,21 @@ static void log(
     }
 
     // convert printf format + args to string_view
-    va_list tmp;  // NOLINT
+    va_list tmp{};  // NOLINT
     va_copy(tmp, args);  // NOLINT
     const int charsToWrite = std::vsnprintf(nullptr, 0, msg, tmp);  // NOLINT
     va_end(tmp);  // NOLINT
-    std::vector<char> buffer(charsToWrite + 1);
+    std::vector<char> buffer(charsToWrite + 1);  // additional terminating null character
     const int charsWritten = std::vsnprintf(buffer.data(), buffer.size(), msg, args);
     if (charsWritten < 0) {
         return;
     }
-    const std::string_view sv(buffer.data(), buffer.size());
 
-    logger(static_cast<LogLevel>(level), static_cast<LogCategory>(category), sv);
+    logger(
+        static_cast<LogLevel>(level),
+        static_cast<LogCategory>(category),
+        {buffer.data(), buffer.size() - 1}
+    );
 }
 
 CustomLogger::CustomLogger(UA_Logger& logger)

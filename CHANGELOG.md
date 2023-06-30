@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Variant`:
   - Get/set wrapper types without copy (`Variant::getScalar`, `Variant::getArray`, `Variant::setScalar`, `Variant::setArray`)
   - `const` version of `Variant::getScalar`, `Variant::getArray`
+- `log` function to generate log message with server's or client's logger
 - Examples
   - `server_method` (#55)
   - `client_method` (#55)

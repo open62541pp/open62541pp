@@ -107,6 +107,7 @@ add_library(
     open62541pp
     src/Client.cpp
     src/CustomLogger.cpp
+    src/Logger.cpp
     src/MonitoredItem.cpp
     src/Node.cpp
     src/Server.cpp

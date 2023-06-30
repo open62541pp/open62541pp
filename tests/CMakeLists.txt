@@ -5,6 +5,7 @@ add_executable(
     main.cpp
     Client.cpp
     helper.cpp
+    Logger.cpp
     Node.cpp
     overloads.cpp
     Server.cpp
