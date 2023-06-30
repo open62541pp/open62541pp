@@ -127,6 +127,32 @@ public:
     void setArrayCopy(const std::vector<T>& array);
 
 private:
+    template <typename T>
+    static constexpr bool isConvertibleToNative() {
+        return detail::isBuiltinType<T>() || detail::IsTypeWrapper<T>::value;
+    }
+
+    template <typename T>
+    static constexpr void assertGetNoCopy() {
+        static_assert(
+            isConvertibleToNative<T>(),
+            "Template type must be a native or wrapper type to get scalar/array without copy"
+        );
+    }
+
+    template <typename T>
+    static constexpr void assertSetNoCopy() {
+        static_assert(
+            isConvertibleToNative<T>(),
+            "Template type must be a native or wrapper type to assign scalar/array without copy"
+        );
+    }
+
+    template <Type type>
+    static constexpr void assertNoVariant() {
+        static_assert(type != Type::Variant, "Variants cannot directly contain another variant");
+    }
+
     void checkIsScalar() const;
     void checkIsArray() const;
 
@@ -144,28 +170,12 @@ private:
     void setArrayCopyImpl(const void* array, size_t size, const UA_DataType* type);
 };
 
-/* ------------------------------------------- Helper ------------------------------------------- */
-
-namespace detail {
-
-template <typename T>
-constexpr bool isAssignableToVariantScalar() {
-    return detail::isBuiltinType<T>() || detail::IsTypeWrapper<T>::value;
-}
-
-template <typename T>
-constexpr bool isAssignableToVariantArray() {
-    return detail::isBuiltinType<T>();
-}
-
-}  // namespace detail
-
 /* --------------------------------------- Implementation --------------------------------------- */
 
 template <typename T, Type type>
 Variant Variant::fromScalar(T& value) {
     Variant variant;
-    if constexpr (detail::isAssignableToVariantScalar<T>()) {
+    if constexpr (isConvertibleToNative<T>()) {
         variant.setScalar<T, type>(value);
     } else {
         variant.setScalarCopy<T, type>(value);
@@ -183,7 +193,7 @@ Variant Variant::fromScalar(const T& value) {
 template <typename T, Type type>
 Variant Variant::fromArray(T* array, size_t size) {
     Variant variant;
-    if constexpr (detail::isAssignableToVariantArray<T>()) {
+    if constexpr (isConvertibleToNative<T>()) {
         variant.setArray<T, type>(array, size);  // NOLINT, variant isn't modified
     } else {
         variant.setArrayCopy<T, type>(array, size);
@@ -217,9 +227,7 @@ Variant Variant::fromArray(InputIt first, InputIt last) {
 
 template <typename T>
 T& Variant::getScalar() {
-    static_assert(
-        detail::isBuiltinType<T>(), "Template type must be a native type to get scalar without copy"
-    );
+    assertGetNoCopy<T>();
     checkIsScalar();
     checkReturnType<T>();
     assert(sizeof(T) == handle()->type->memSize);  // NOLINT
@@ -235,9 +243,7 @@ T Variant::getScalarCopy() const {
 
 template <typename T>
 T* Variant::getArray() {
-    static_assert(
-        detail::isBuiltinType<T>(), "Template type must be a native type to get array without copy"
-    );
+    assertGetNoCopy<T>();
     checkIsArray();
     checkReturnType<T>();
     assert(sizeof(T) == handle()->type->memSize);  // NOLINT
@@ -255,12 +261,9 @@ std::vector<T> Variant::getArrayCopy() const {
 
 template <typename T, Type type>
 void Variant::setScalar(T& value) noexcept {
+    assertSetNoCopy<T>();
+    assertNoVariant<type>();
     detail::assertTypeCombination<T, type>();
-    static_assert(type != Type::Variant, "Variants cannot directly contain another variant");
-    static_assert(
-        detail::isAssignableToVariantScalar<T>(),
-        "Template type must be convertible to native type to assign scalar without copy"
-    );
     if constexpr (detail::IsTypeWrapper<T>::value) {
         setScalarImpl(value.handle(), detail::getUaDataType<type>());
     } else {
@@ -270,7 +273,7 @@ void Variant::setScalar(T& value) noexcept {
 
 template <typename T, Type type>
 void Variant::setScalarCopy(const T& value) {
-    static_assert(type != Type::Variant, "Variants cannot directly contain another variant");
+    assertNoVariant<type>();
     detail::assertTypeCombination<T, type>();
     setScalarImpl(
         detail::toNativeAlloc<T, static_cast<TypeIndex>(type)>(value),
@@ -281,11 +284,8 @@ void Variant::setScalarCopy(const T& value) {
 
 template <typename T, Type type>
 void Variant::setArray(T* array, size_t size) noexcept {
+    assertSetNoCopy<T>();
     detail::assertTypeCombination<T, type>();
-    static_assert(
-        detail::isAssignableToVariantArray<T>(),
-        "Template type must be a native type to assign array without copy"
-    );
     setArrayImpl(array, size, detail::getUaDataType<type>());
 }
 

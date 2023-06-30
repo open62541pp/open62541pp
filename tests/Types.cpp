@@ -387,37 +387,38 @@ TEST_CASE("Variant") {
         {
             LocalizedText value("en-US", "text");
             var.setScalar(value);
+            CHECK(var.getScalar<LocalizedText>() == value);
             CHECK(var.getScalarCopy<LocalizedText>() == value);
         }
     }
 
     SUBCASE("Set/get array (copy)") {
         Variant var;
-        std::vector<float> value{0, 1, 2, 3, 4, 5};
-        var.setArrayCopy(value);
+        std::vector<float> array{0, 1, 2, 3, 4, 5};
+        var.setArrayCopy(array);
 
         CHECK(var.isArray());
         CHECK(var.isType(Type::Float));
         CHECK(var.isType(NodeId{0, UA_NS0ID_FLOAT}));
         CHECK(var.getVariantType().value() == Type::Float);
-        CHECK(var.getArrayLength() == value.size());
-        CHECK(var.handle()->data != value.data());
+        CHECK(var.getArrayLength() == array.size());
+        CHECK(var.handle()->data != array.data());
 
         CHECK_THROWS(var.getArrayCopy<int32_t>());
         CHECK_THROWS(var.getArrayCopy<bool>());
-        CHECK(var.getArrayCopy<float>() == value);
+        CHECK(var.getArrayCopy<float>() == array);
     }
 
     SUBCASE("Set/get array reference") {
         Variant var;
-        std::vector<float> value{0, 1, 2};
-        var.setArray(value);
-        CHECK(var.getArray<float>() == value.data());
-        CHECK(var.getArrayCopy<float>() == value);
+        std::vector<float> array{0, 1, 2};
+        var.setArray(array);
+        CHECK(var.getArray<float>() == array.data());
+        CHECK(var.getArrayCopy<float>() == array);
 
-        std::vector<float> valueChanged({3, 4, 5});
-        value.assign(valueChanged.begin(), valueChanged.end());
-        CHECK(var.getArrayCopy<float>() == valueChanged);
+        std::vector<float> arrayChanged({3, 4, 5});
+        array.assign(arrayChanged.begin(), arrayChanged.end());
+        CHECK(var.getArrayCopy<float>() == arrayChanged);
     }
 
     SUBCASE("Set array of native strings") {
@@ -435,6 +436,16 @@ TEST_CASE("Variant") {
         UA_clear(&array[0], &UA_TYPES[UA_TYPES_STRING]);
         UA_clear(&array[1], &UA_TYPES[UA_TYPES_STRING]);
         UA_clear(&array[2], &UA_TYPES[UA_TYPES_STRING]);
+    }
+
+    SUBCASE("Set array of wrapper strings") {
+        Variant var;
+        std::vector<String> array{String{"item1"}, String{"item2"}, String{"item3"}};
+
+        var.setArray(array);
+        CHECK(var.getArrayLength() == array.size());
+        CHECK(var.handle()->data == array.data());
+        CHECK(var.getArray<String>() == array.data());
     }
 
     SUBCASE("Set/get array of strings") {
