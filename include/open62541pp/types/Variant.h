@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <iterator>  // distance
 #include <optional>
+#include <utility>  // as_const
 #include <vector>
 
 #include "open62541pp/Common.h"
@@ -72,10 +73,15 @@ public:
     /// Get variant type
     std::optional<Type> getVariantType() const noexcept;
 
-    /// Get reference to scalar value with given template type.
+    /// Get reference to scalar value with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not a scalar or not of type `T`.
     template <typename T>
     T& getScalar();
+
+    /// Get const reference to scalar value with given template type (only native or wrapper types).
+    /// @exception BadVariantAccess If the variant is not a scalar or not of type `T`.
+    template <typename T>
+    const T& getScalar() const;
 
     /// Get copy of scalar value with given template type.
     /// @exception BadVariantAccess If the variant is not a scalar or not convertible to `T`.
@@ -88,10 +94,15 @@ public:
     /// Get array dimensions.
     std::vector<uint32_t> getArrayDimensions() const;
 
-    /// Get pointer to array with given template type.
+    /// Get pointer to array with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not an array or not of type `T`.
     template <typename T>
     T* getArray();
+
+    /// Get const pointer to array with given template type (only native or wrapper types).
+    /// @exception BadVariantAccess If the variant is not an array or not of type `T`.
+    template <typename T>
+    const T* getArray() const;
 
     /// Get copy of array with given template type and return it as a std::vector.
     /// @exception BadVariantAccess If the variant is not an array or not convertible to `T`.
@@ -227,11 +238,16 @@ Variant Variant::fromArray(InputIt first, InputIt last) {
 
 template <typename T>
 T& Variant::getScalar() {
+    return const_cast<T&>(std::as_const(*this).getScalar<T>());  // NOLINT, avoid code duplication
+}
+
+template <typename T>
+const T& Variant::getScalar() const {
     assertGetNoCopy<T>();
     checkIsScalar();
     checkReturnType<T>();
     assert(sizeof(T) == handle()->type->memSize);  // NOLINT
-    return *static_cast<T*>(handle()->data);
+    return *static_cast<const T*>(handle()->data);
 }
 
 template <typename T>
@@ -243,11 +259,16 @@ T Variant::getScalarCopy() const {
 
 template <typename T>
 T* Variant::getArray() {
+    return const_cast<T*>(std::as_const(*this).getArray<T>());  // NOLINT, avoid code duplication
+}
+
+template <typename T>
+const T* Variant::getArray() const {
     assertGetNoCopy<T>();
     checkIsArray();
     checkReturnType<T>();
     assert(sizeof(T) == handle()->type->memSize);  // NOLINT
-    return static_cast<T*>(handle()->data);
+    return static_cast<const T*>(handle()->data);
 }
 
 template <typename T>

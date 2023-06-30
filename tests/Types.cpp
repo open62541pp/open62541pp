@@ -349,14 +349,8 @@ TEST_CASE("Variant") {
         Variant var;
         int value = 3;
         var.setScalar(value);
-        int& ref = var.getScalar<int>();
-        CHECK(ref == value);
-        CHECK(&ref == &value);
-
-        value++;
-        CHECK(ref == value);
-        ref++;
-        CHECK(ref == value);
+        CHECK(&var.getScalar<int>() == &value);
+        CHECK(&std::as_const(var).getScalar<int>() == &value);
     }
 
     SUBCASE("Set/get mixed scalar types") {
@@ -414,6 +408,7 @@ TEST_CASE("Variant") {
         std::vector<float> array{0, 1, 2};
         var.setArray(array);
         CHECK(var.getArray<float>() == array.data());
+        CHECK(std::as_const(var).getArray<float>() == array.data());
         CHECK(var.getArrayCopy<float>() == array);
 
         std::vector<float> arrayChanged({3, 4, 5});
