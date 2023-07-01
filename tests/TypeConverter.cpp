@@ -44,6 +44,11 @@ TEST_CASE_TEMPLATE(
     }
 }
 
+TEST_CASE("TypeConverter native types (generated)") {
+    CHECK(TypeConverter<UA_NodeClass>::ValidTypes::size() == 1);
+    CHECK(TypeConverter<UA_NodeClass>::ValidTypes::contains(UA_TYPES_NODECLASS));
+}
+
 TEST_CASE("TypeConverter wrapper types") {
     using FloatWrapper = TypeWrapper<float, UA_TYPES_FLOAT>;
 

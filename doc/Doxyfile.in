@@ -57,8 +57,7 @@ EXT_LINKS_IN_WINDOW    = YES
 
 # Preprocessor
 MACRO_EXPANSION        = YES
-PREDEFINED             = DOXYGEN \
-                         UA_ENABLE_DA \
+PREDEFINED             = UA_ENABLE_DA \
                          UA_ENABLE_DISCOVERY \
                          UA_ENABLE_ENCRYPTION \
                          UA_ENABLE_HISTORIZING \

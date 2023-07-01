@@ -11,6 +11,7 @@
 #include "open62541pp/Server.h"
 #include "open62541pp/Subscription.h"
 #include "open62541pp/TypeConverter.h"
+#include "open62541pp/TypeConverterNative.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/helper.h"
 #include "open62541pp/detail/traits.h"
