@@ -4,6 +4,7 @@
 #include <doctest/doctest.h>
 
 #include "open62541pp/Client.h"
+#include "open62541pp/Config.h"
 #include "open62541pp/MonitoredItem.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/Subscription.h"

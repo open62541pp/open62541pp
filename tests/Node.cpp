@@ -3,6 +3,7 @@
 #include <algorithm>  // any_of
 
 #include "open62541pp/Client.h"
+#include "open62541pp/Config.h"
 #include "open62541pp/Node.h"
 #include "open62541pp/Server.h"
 

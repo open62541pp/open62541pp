@@ -3,6 +3,7 @@
 #include <map>
 #include <memory>
 
+#include "open62541pp/Config.h"
 #include "open62541pp/services/NodeManagement.h"
 #include "open62541pp/services/Subscription.h"
 #include "open62541pp/types/Composed.h"

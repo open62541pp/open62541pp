@@ -3,6 +3,7 @@
 #include <cstdint>
 
 #include "open62541pp/Common.h"
+#include "open62541pp/Config.h"
 #include "open62541pp/NodeIds.h"  // ReferenceTypeId
 #include "open62541pp/TypeConverter.h"
 #include "open62541pp/TypeWrapper.h"
@@ -246,7 +247,7 @@ public:
     UAPP_COMPOSED_GETTER_WRAPPER(QualifiedName, getDataEncoding, dataEncoding)
 };
 
-#ifdef UA_ENABLE_METHODCALLS
+#ifdef UA_TYPES_ARGUMENT
 /**
  * UA_Argument wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.6

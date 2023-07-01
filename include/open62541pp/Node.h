@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "open62541pp/Common.h"
+#include "open62541pp/Config.h"
 #include "open62541pp/TypeConverter.h"  // guessType
 #include "open62541pp/services/Attribute.h"
 #include "open62541pp/services/Method.h"

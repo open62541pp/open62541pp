@@ -8,8 +8,8 @@
 #include <doctest/doctest.h>
 
 #include "open62541pp/Client.h"
+#include "open62541pp/Config.h"
 #include "open62541pp/Server.h"
-#include "open62541pp/open62541.h"  // UA_ENABLE_METHODCALLS
 #include "open62541pp/services/services.h"
 #include "open62541pp/types/Composed.h"
 

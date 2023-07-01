@@ -6,11 +6,15 @@
 #include <vector>
 
 #include "open62541pp/Common.h"  // ModellingRule
+#include "open62541pp/Config.h"
 #include "open62541pp/NodeIds.h"  // ReferenceTypeId
 #include "open62541pp/types/NodeId.h"
 
-// forward declaration
+// forward declarations
 namespace opcua {
+#ifdef UA_ENABLE_METHODCALLS
+class Argument;
+#endif
 class Variant;
 }  // namespace opcua
 
@@ -122,9 +126,6 @@ void addVariableType(
  * @ingroup NodeManagement
  */
 using MethodCallback = std::function<void(const std::vector<Variant>&, std::vector<Variant>&)>;
-
-// forward declaration
-class Argument;
 
 /**
  * Add child method.

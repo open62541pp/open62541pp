@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include "open62541pp/open62541.h"  // UA_ENABLE_METHODCALLS
+#include "open62541pp/Config.h"
 
 #ifdef UA_ENABLE_METHODCALLS
 

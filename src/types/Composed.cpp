@@ -53,7 +53,7 @@ ReadValueId::ReadValueId(const NodeId& id, AttributeId attributeId) {
     handle()->attributeId = static_cast<uint32_t>(attributeId);
 }
 
-#ifdef UA_ENABLE_METHODCALLS
+#ifdef UA_TYPES_ARGUMENT
 Argument::Argument(
     std::string_view name,
     const LocalizedText& description,

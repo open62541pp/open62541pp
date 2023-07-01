@@ -86,8 +86,8 @@ if(UAPP_INTERNAL_OPEN62541)
     endif()
 
     # disable warnings as errors for open62541
-    if(NOT DEFINED UA_FORCE_WERROR)
-        set(UA_FORCE_WERROR OFF)
+    if(NOT UA_FORCE_WERROR)
+        set(UA_FORCE_WERROR OFF OFF CACHE BOOL "")
     endif()
 
     set(OPEN62541_VERSION v1.3.6)  # set manually for CI
