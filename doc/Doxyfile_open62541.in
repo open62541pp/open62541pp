@@ -52,6 +52,19 @@ HTML_COLORSTYLE        = LIGHT
 ENUM_VALUES_PER_LINE   = 0
 EXT_LINKS_IN_WINDOW    = YES
 
+# Preprocessor
+MACRO_EXPANSION        = YES
+PREDEFINED             = UA_ENABLE_DA \
+                         UA_ENABLE_DISCOVERY \
+                         UA_ENABLE_ENCRYPTION \
+                         UA_ENABLE_HISTORIZING \
+                         UA_ENABLE_METHODCALLS \
+                         UA_ENABLE_NODEMANAGEMENT \
+                         UA_ENABLE_PUBSUB \
+                         UA_ENABLE_QUERY \
+                         UA_ENABLE_SUBSCRIPTIONS \
+                         UA_ENABLE_SUBSCRIPTIONS_EVENTS
+
 # Dot diagrams
 HAVE_DOT               = NO
 
