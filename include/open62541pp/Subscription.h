@@ -5,10 +5,13 @@
 #include <vector>
 
 #include "open62541pp/Common.h"
+#include "open62541pp/Config.h"
 #include "open62541pp/MonitoredItem.h"
 #include "open62541pp/services/MonitoredItem.h"
 #include "open62541pp/services/Subscription.h"
 #include "open62541pp/types/NodeId.h"
+
+#ifdef UA_ENABLE_SUBSCRIPTIONS
 
 namespace opcua {
 
@@ -127,3 +130,5 @@ inline bool operator!=(const Subscription<T>& left, const Subscription<T>& right
 }
 
 }  // namespace opcua
+
+#endif

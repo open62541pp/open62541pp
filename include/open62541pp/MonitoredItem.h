@@ -3,7 +3,10 @@
 #include <cstdint>
 
 #include "open62541pp/Common.h"
+#include "open62541pp/Config.h"
 #include "open62541pp/services/MonitoredItem.h"
+
+#ifdef UA_ENABLE_SUBSCRIPTIONS
 
 namespace opcua {
 
@@ -87,3 +90,5 @@ inline bool operator!=(const MonitoredItem<T>& left, const MonitoredItem<T>& rig
 }
 
 }  // namespace opcua
+
+#endif

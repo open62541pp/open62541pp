@@ -17,19 +17,22 @@ namespace opcua {
  */
 class ServerContext {
 public:
+#ifdef UA_ENABLE_SUBSCRIPTIONS
     struct MonitoredItem {
         ReadValueId itemToMonitor;
         services::DataChangeNotificationCallback dataChangeCallback;
     };
 
-    struct NodeContext {
-#ifdef UA_ENABLE_METHODCALLS
-        services::MethodCallback methodCallback;
+    std::map<uint32_t, std::unique_ptr<MonitoredItem>> monitoredItems;
 #endif
+
+#ifdef UA_ENABLE_METHODCALLS
+    struct NodeContext {
+        services::MethodCallback methodCallback;
     };
 
-    std::map<uint32_t, std::unique_ptr<MonitoredItem>> monitoredItems;
     std::map<NodeId, std::unique_ptr<NodeContext>> nodeContexts;
+#endif
 };
 
 }  // namespace opcua

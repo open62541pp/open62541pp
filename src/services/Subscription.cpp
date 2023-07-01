@@ -1,5 +1,7 @@
 #include "open62541pp/services/Subscription.h"
 
+#ifdef UA_ENABLE_SUBSCRIPTIONS
+
 #include <memory>
 #include <utility>  // move
 
@@ -108,3 +110,5 @@ void deleteSubscription(Client& client, uint32_t subscriptionId) {
 }
 
 }  // namespace opcua::services
+
+#endif

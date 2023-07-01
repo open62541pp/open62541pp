@@ -1,5 +1,7 @@
 #include "open62541pp/Subscription.h"
 
+#ifdef UA_ENABLE_SUBSCRIPTIONS
+
 #include <atomic>
 #include <utility>  // move
 
@@ -180,3 +182,5 @@ template class Subscription<Server>;
 template class Subscription<Client>;
 
 }  // namespace opcua
+
+#endif

@@ -4,6 +4,7 @@
 #include <mutex>
 #include <utility>  // move
 
+#include "open62541pp/Config.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Node.h"
 #include "open62541pp/detail/helper.h"
@@ -52,8 +53,10 @@ public:
 
     void applyDefaults() {
         auto* config = getConfig(handle());
+#ifdef UA_ENABLE_SUBSCRIPTIONS
         config->publishingIntervalLimits.min = 10;  // ms
         config->samplingIntervalLimits.min = 10;  // ms
+#endif
 #if UAPP_OPEN62541_VER_GE(1, 2)
         config->allowEmptyVariables = UA_RULEHANDLING_ACCEPT;  // allow empty variables
 #endif
@@ -238,9 +241,11 @@ uint16_t Server::registerNamespace(std::string_view uri) {
     return UA_Server_addNamespace(handle(), std::string(uri).c_str());
 }
 
+#ifdef UA_ENABLE_SUBSCRIPTIONS
 Subscription<Server> Server::createSubscription() noexcept {
     return {*this, 0U};
 }
+#endif
 
 uint16_t Server::runIterate() {
     return connection_->runIterate();

@@ -1,5 +1,7 @@
 #include "open62541pp/MonitoredItem.h"
 
+#ifdef UA_ENABLE_SUBSCRIPTIONS
+
 #include <cassert>
 
 #include "open62541pp/Client.h"
@@ -119,3 +121,5 @@ template class MonitoredItem<Server>;
 template class MonitoredItem<Client>;
 
 }  // namespace opcua
+
+#endif

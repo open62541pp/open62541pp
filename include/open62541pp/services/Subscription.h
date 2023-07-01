@@ -3,6 +3,10 @@
 #include <cstdint>
 #include <functional>
 
+#include "open62541pp/Config.h"
+
+#ifdef UA_ENABLE_SUBSCRIPTIONS
+
 // forward declarations
 namespace opcua {
 class Client;
@@ -103,3 +107,5 @@ void setPublishingMode(Client& client, uint32_t subscriptionId, bool publishing)
 void deleteSubscription(Client& client, uint32_t subscriptionId);
 
 }  // namespace opcua::services
+
+#endif

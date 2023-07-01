@@ -313,6 +313,7 @@ std::vector<std::string> Client::getNamespaceArray() {
     return variant.getArrayCopy<std::string>();
 }
 
+#ifdef UA_ENABLE_SUBSCRIPTIONS
 Subscription<Client> Client::createSubscription() {
     SubscriptionParameters parameters{};
     return createSubscription(parameters);
@@ -332,6 +333,7 @@ std::vector<Subscription<Client>> Client::getSubscriptions() {
     }
     return result;
 }
+#endif
 
 void Client::runIterate(uint16_t timeoutMilliseconds) {
     connection_->runIterate(timeoutMilliseconds);

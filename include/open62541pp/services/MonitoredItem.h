@@ -5,7 +5,10 @@
 #include <vector>
 
 #include "open62541pp/Common.h"
+#include "open62541pp/Config.h"
 #include "open62541pp/types/ExtensionObject.h"
+
+#ifdef UA_ENABLE_SUBSCRIPTIONS
 
 // forward declarations
 namespace opcua {
@@ -240,3 +243,5 @@ void deleteMonitoredItem(Client& client, uint32_t subscriptionId, uint32_t monit
 void deleteMonitoredItem(Server& server, uint32_t monitoredItemId);
 
 }  // namespace opcua::services
+
+#endif

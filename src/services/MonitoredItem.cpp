@@ -1,5 +1,7 @@
 #include "open62541pp/services/MonitoredItem.h"
 
+#ifdef UA_ENABLE_SUBSCRIPTIONS
+
 #include <memory>
 #include <type_traits>  // is_same_v
 #include <utility>  // move
@@ -312,3 +314,5 @@ void deleteMonitoredItem(Server& server, uint32_t monitoredItemId) {
 }
 
 }  // namespace opcua::services
+
+#endif

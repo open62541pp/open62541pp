@@ -7,6 +7,7 @@
 #include <utility>  // pair
 
 #include "open62541pp/Client.h"
+#include "open62541pp/Config.h"
 #include "open62541pp/services/MonitoredItem.h"
 #include "open62541pp/services/Subscription.h"
 #include "open62541pp/types/Composed.h"
@@ -30,6 +31,7 @@ inline constexpr size_t clientStateCount = 4;
  */
 class ClientContext {
 public:
+#ifdef UA_ENABLE_SUBSCRIPTIONS
     struct Subscription {
         services::DeleteSubscriptionCallback deleteCallback;
     };
@@ -47,6 +49,7 @@ public:
 
     std::map<SubId, std::unique_ptr<Subscription>> subscriptions;
     std::map<SubMonId, std::unique_ptr<MonitoredItem>> monitoredItems;
+#endif
 
 #if UAPP_OPEN62541_VER_LE(1, 0)
     UA_ClientState lastClientState{};

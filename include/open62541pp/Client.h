@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "open62541pp/Auth.h"
+#include "open62541pp/Config.h"
 #include "open62541pp/Logger.h"
 #include "open62541pp/Subscription.h"
 #include "open62541pp/types/Builtin.h"
@@ -86,12 +87,14 @@ public:
     /// Get all defined namespaces.
     std::vector<std::string> getNamespaceArray();
 
+#ifdef UA_ENABLE_SUBSCRIPTIONS
     /// Create a subscription to monitor data changes and events (default subscription parameters).
     Subscription<Client> createSubscription();
     /// Create a subscription to monitor data changes and events.
     Subscription<Client> createSubscription(SubscriptionParameters& parameters);
     /// Get all active subscriptions
     std::vector<Subscription<Client>> getSubscriptions();
+#endif
 
     /**
      * Run a single iteration of the client's main loop.

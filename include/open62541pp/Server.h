@@ -55,8 +55,10 @@ public:
     /// Register namespace. The new namespace index will be returned.
     [[nodiscard]] uint16_t registerNamespace(std::string_view uri);
 
+#ifdef UA_ENABLE_SUBSCRIPTIONS
     /// Create a (pseudo) subscription to monitor local data changes and events.
     Subscription<Server> createSubscription() noexcept;
+#endif
 
     /// Run a single iteration of the server's main loop.
     /// @returns Maximum wait period until next Server::runIterate call (in ms)
