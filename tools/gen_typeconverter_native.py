@@ -1,21 +1,20 @@
 from pathlib import Path
-from typing import Optional
 
 HERE = Path(__file__).parent
 SCHEMA_DIR = HERE.parent / "3rdparty" / "open62541" / "tools" / "schema"
 HEADER_FILE = HERE.parent / "include" / "open62541pp" / "TypeConverterNative.h"
 
-FILENAMES_AND_GUARDS = {
-    "datatypes_minimal.txt": None,
-    "datatypes_method.txt": "UA_ENABLE_METHODCALLS",
-    "datatypes_subscriptions.txt": "UA_ENABLE_SUBSCRIPTIONS",
-    "datatypes_events.txt": "UA_ENABLE_SUBSCRIPTIONS_EVENTS",
-    "datatypes_historizing.txt": "UA_ENABLE_HISTORIZING",
-    "datatypes_discovery.txt": "UA_ENABLE_DISCOVERY",
-    "datatypes_query.txt": "UA_ENABLE_QUERY",
-    "datatypes_pubsub.txt": "UA_ENABLE_PUBSUB",
-    "datatypes_dataaccess.txt": "UA_ENABLE_DA",
-}
+FILES_DATATYPES = [
+    SCHEMA_DIR / "datatypes_minimal.txt",
+    SCHEMA_DIR / "datatypes_method.txt",
+    SCHEMA_DIR / "datatypes_subscriptions.txt",
+    SCHEMA_DIR / "datatypes_events.txt",
+    SCHEMA_DIR / "datatypes_historizing.txt",
+    SCHEMA_DIR / "datatypes_discovery.txt",
+    SCHEMA_DIR / "datatypes_query.txt",
+    SCHEMA_DIR / "datatypes_pubsub.txt",
+    SCHEMA_DIR / "datatypes_dataaccess.txt",
+]
 
 TEMPLATE_HEADER = """
 /* ---------------------------------------------------------------------------------------------- */
@@ -38,11 +37,11 @@ namespace opcua {{
 }}  // namespace opcua
 """.lstrip()
 
-TEMPLATE_MACRO = (
-    "#ifdef {typeindex_define}\n"
-    "UAPP_TYPECONVERTER_NATIVE({type}, {typeindex_define})\n"
-    "#endif"
-)
+TEMPLATE_MACRO = """
+#ifdef {typeindex_define}
+UAPP_TYPECONVERTER_NATIVE({type}, {typeindex_define})
+#endif
+""".strip()
 
 EXCLUDE_TYPES = [
     # builtin types
@@ -75,32 +74,32 @@ EXCLUDE_TYPES = [
     "Duration",  # Double
     "UtcTime",  # Int64
     "LocaleId",  # String
+    "DiscoveryConfiguration",  # void*
+    "FilterOperand",  # void*
+    "DataSetFieldContentMask",  # UInt32
+    "DataSetFieldFlags",  # UInt16
+    "JsonDataSetMessageContentMask",  # UInt32
+    "JsonNetworkMessageContentMask",  # UInt32
+    "UadpDataSetMessageContentMask",  # UInt32
+    "UadpNetworkMessageContentMask",  # UInt32
+    "PermissionType",  # UInt32
 ]
 
 
-def gen_by_file(filename: str, guard: Optional[str]):
-    typenames = (SCHEMA_DIR / filename).read_text().strip().splitlines()
-    typenames = list(dict.fromkeys(typenames))  # remove duplicates, keep order
-    if guard:
-        yield f"#ifdef {guard}"
-    for typename in typenames:
-        if typename in EXCLUDE_TYPES:
-            continue
-        type = f"UA_{typename}"
-        typeindex_define = f"UA_TYPES_{typename.upper()}"
-        yield TEMPLATE_MACRO.format(type=type, typeindex_define=typeindex_define)
-    if guard:
-        yield f"#endif  // {guard}"
-
-
-def gen_body():
-    for filename, guard in FILENAMES_AND_GUARDS.items():
-        yield from gen_by_file(filename, guard)
-        yield ""
-
-
 def main():
-    body = "\n".join(gen_body()).strip()
+    # remove duplicates to prevent redefinitions
+    typenames = set.union(*(
+        set(f.read_text().strip().splitlines())
+        for f in FILES_DATATYPES
+    ))
+    typenames -= set(EXCLUDE_TYPES)
+    body = "\n".join(
+        TEMPLATE_MACRO.format(
+            type=f"UA_{typename}",
+            typeindex_define = f"UA_TYPES_{typename.upper()}"
+        )
+        for typename in sorted(typenames)
+    )
     header = TEMPLATE_HEADER.format(body=body)
     HEADER_FILE.write_text(header)
 
