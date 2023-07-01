@@ -12,11 +12,9 @@ int main() {
     auto objNode = client.getObjectsNode();
     auto greetMethodNode = objNode.browseChild({{1, "Greet"}});
 
-#ifdef UA_ENABLE_METHODCALLS
     // Call method from parent node (Objects)
     const auto outputs = objNode.callMethod(
         greetMethodNode.getNodeId(), {opcua::Variant::fromScalar(opcua::String("World"))}
     );
     std::cout << outputs.at(0).getScalarCopy<opcua::String>().get() << std::endl;
-#endif
 }

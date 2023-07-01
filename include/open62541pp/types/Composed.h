@@ -246,6 +246,7 @@ public:
     UAPP_COMPOSED_GETTER_WRAPPER(QualifiedName, getDataEncoding, dataEncoding)
 };
 
+#ifdef UA_ENABLE_METHODCALLS
 /**
  * UA_Argument wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.6
@@ -269,5 +270,6 @@ public:
     UAPP_COMPOSED_GETTER_CAST(ValueRank, getValueRank, valueRank)
     UAPP_COMPOSED_GETTER_ARRAY(uint32_t, getArrayDimensions, arrayDimensions, arrayDimensionsSize)
 };
+#endif
 
 }  // namespace opcua

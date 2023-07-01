@@ -9,20 +9,7 @@ endif()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/examples)
 
-set(examples_sources
-    client_browse.cpp
-    client_connect.cpp
-    client_find_servers.cpp
-    client_method.cpp
-    client_minimal.cpp
-    client_subscription.cpp
-    server.cpp
-    server_instantiation.cpp
-    server_method.cpp
-    server_minimal.cpp
-)
-
-foreach(source ${examples_sources})
+function(add_example source)
     # extract filename
     get_filename_component(name ${source} NAME_WE)
     # use open62541pp_example_ prefix for target to prevent naming collisions
@@ -55,4 +42,21 @@ foreach(source ${examples_sources})
                 open62541pp::open62541pp
         )
     endif()
-endforeach(source ${sandbox_sources})
+endfunction()
+
+add_example(client_browse.cpp)
+add_example(client_connect.cpp)
+add_example(client_find_servers.cpp)
+add_example(client_minimal.cpp)
+add_example(server.cpp)
+add_example(server_instantiation.cpp)
+add_example(server_minimal.cpp)
+
+if(UA_ENABLE_METHODCALLS)
+    add_example(client_method.cpp)
+    add_example(server_method.cpp)
+endif()
+
+if(UA_ENABLE_SUBSCRIPTIONS)
+    add_example(client_subscription.cpp)
+endif()

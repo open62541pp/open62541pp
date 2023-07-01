@@ -22,7 +22,9 @@ public:
     };
 
     struct NodeContext {
+#ifdef UA_ENABLE_METHODCALLS
         services::MethodCallback methodCallback;
+#endif
     };
 
     std::map<uint32_t, std::unique_ptr<MonitoredItem>> monitoredItems;

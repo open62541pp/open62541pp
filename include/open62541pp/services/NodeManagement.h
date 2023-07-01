@@ -9,9 +9,8 @@
 #include "open62541pp/NodeIds.h"  // ReferenceTypeId
 #include "open62541pp/types/NodeId.h"
 
-// forward declarations
+// forward declaration
 namespace opcua {
-class Argument;
 class Variant;
 }  // namespace opcua
 
@@ -123,6 +122,9 @@ void addVariableType(
  * @ingroup NodeManagement
  */
 using MethodCallback = std::function<void(const std::vector<Variant>&, std::vector<Variant>&)>;
+
+// forward declaration
+class Argument;
 
 /**
  * Add child method.
