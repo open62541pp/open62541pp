@@ -84,6 +84,43 @@ void addVariable<Server>(
     detail::throwOnBadStatus(status);
 }
 
+template<>
+void addVariable<Server>(
+    Server &server,
+    const NodeId &parentId,
+    const NodeId &id,
+    std::string_view browseName,
+    const Variant& value,
+    const uint8_t accessLevel,
+    const uint32_t writeMask,
+    const NodeId &variableType,
+    const NodeId &referenceType
+) {
+    auto vAttr = UA_VariableAttributes_default;
+    vAttr.value = value;
+    const auto varType = value.getVariantType();
+    if(!varType)
+    {
+        detail::throwOnBadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
+        return;
+    }
+    vAttr.dataType = ::opcua::detail::getUaDataType(*varType)->typeId;
+    vAttr.accessLevel = accessLevel;
+    vAttr.writeMask = writeMask;
+    const auto status = UA_Server_addVariableNode(
+            server.handle(),
+            id,
+            parentId,
+            referenceType,
+            QualifiedName(id.getNamespaceIndex(), browseName),
+            variableType,
+            vAttr,
+            nullptr,  // node context
+            nullptr  // output new node id
+    );
+    detail::throwOnBadStatus(status);
+}
+
 template <>
 void addVariable<Client>(
     Client& client,
@@ -102,6 +139,42 @@ void addVariable<Client>(
         variableType,
         UA_VariableAttributes_default,
         nullptr  // output new node id
+    );
+    detail::throwOnBadStatus(status);
+}
+
+template<>
+void addVariable<Client>(
+    Client &client,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    const Variant& value,
+    const uint8_t accessLevel,
+    const uint32_t writeMask,
+    const NodeId& variableType,
+    const NodeId& referenceType
+) {
+    auto vAttr = UA_VariableAttributes_default;
+    vAttr.value = value;
+    const auto varType = value.getVariantType();
+    if(!varType)
+    {
+        detail::throwOnBadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
+        return;
+    }
+    vAttr.dataType = ::opcua::detail::getUaDataType(*varType)->typeId;
+    vAttr.accessLevel = accessLevel;
+    vAttr.writeMask = writeMask;
+    const auto status = UA_Client_addVariableNode(
+            client.handle(),
+            id,
+            parentId,
+            referenceType,
+            QualifiedName(id.getNamespaceIndex(), browseName),
+            variableType,
+            vAttr,
+            nullptr  // output new node id
     );
     detail::throwOnBadStatus(status);
 }

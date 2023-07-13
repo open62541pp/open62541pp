@@ -91,6 +91,22 @@ public:
         return {connection_, id, false};
     }
 
+    /// @copydoc services::addVariable
+    template<typename T, Type type = detail::guessType<T>()>
+    Node addVariable(
+            const NodeId& id,
+            std::string_view browseName,
+            const T& value,
+            const uint8_t accessLevel = UA_ACCESSLEVELMASK_READ,
+            const uint32_t writeMask = 0x0,
+            const NodeId& variableType = VariableTypeId::BaseDataVariableType,
+            const NodeId& referenceType = ReferenceTypeId::HasComponent
+    ) {
+        const auto variant = Variant::fromScalar<T, type>(const_cast<T&>(value));
+        services::addVariable(connection_, nodeId_, id, browseName, variant, accessLevel, writeMask, variableType, referenceType);
+        return {connection_, id, false};
+    }
+
     /// @copydoc services::addProperty
     Node addProperty(const NodeId& id, std::string_view browseName) {
         services::addProperty(connection_, nodeId_, id, browseName);

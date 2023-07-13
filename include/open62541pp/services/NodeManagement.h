@@ -73,6 +73,24 @@ void addVariable(
 );
 
 /**
+ * Add child variable with value.
+ * @exception BadStatus
+ * @ingroup NodeManagement
+ */
+template <typename T>
+void addVariable(
+        T& serverOrClient,
+        const NodeId& parentId,
+        const NodeId& id,
+        std::string_view browseName,
+        const Variant& value,
+        const uint8_t accessLevel = UA_ACCESSLEVELMASK_READ,
+        const uint32_t writeMask = 0x0,
+        const NodeId& variableType = VariableTypeId::BaseDataVariableType,
+        const NodeId& referenceType = ReferenceTypeId::HasComponent
+);
+
+/**
  * Add child property.
  * @exception BadStatus
  * @ingroup NodeManagement
