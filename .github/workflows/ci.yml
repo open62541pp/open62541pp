@@ -84,6 +84,7 @@ jobs:
       fail-fast: false
       matrix:
         build_type: ["Debug", "Release"]
+        library_type: ["static", "shared"]
         config:
           - { name: Visual Studio 16 2019, os: windows-2019 }
           - { name: Visual Studio 17 2022, os: windows-2022 }
@@ -95,7 +96,11 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake -DUAPP_BUILD_TESTS=ON -DUAPP_BUILD_EXAMPLES=ON ..
+          cmake `
+            -DBUILD_SHARED_LIBS=${{ matrix.library_type == 'shared' }} `
+            -DUAPP_BUILD_TESTS=ON `
+            -DUAPP_BUILD_EXAMPLES=ON `
+            ..
           cmake --build . --config ${{ matrix.build_type }}
       - name: Run tests
         run: ctest --test-dir build --output-on-failure
