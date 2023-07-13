@@ -78,7 +78,7 @@ jobs:
   windows:
     # https://github.com/actions/runner-images/blob/main/images/win/Windows2019-Readme.md
     # https://github.com/actions/runner-images/blob/main/images/win/Windows2022-Readme.md
-    name: Windows ${{ matrix.config.name }} (${{ matrix.build_type }})
+    name: Windows ${{ matrix.config.name }} (${{ matrix.build_type }}, ${{ matrix.library_type }})
     runs-on: ${{ matrix.config.os }}
     strategy:
       fail-fast: false
