@@ -77,9 +77,6 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>This Source Code Form is subject to the terms of the Mozilla Public License, v.  
- <a href="structUA__ClientConfig.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="client_8h_source.html">client.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -128,6 +125,10 @@ Data Fields</h2></td></tr>
 <tr class="separator:a5f1757343d1e92272edf7c46394233dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab01d4a0cc47c422c788adbb0d98ab689"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ClientConfig.html#ab01d4a0cc47c422c788adbb0d98ab689">inactivityCallback</a> )(<a class="el" href="structUA__Client.html">UA_Client</a> *client)</td></tr>
 <tr class="separator:ab01d4a0cc47c422c788adbb0d98ab689"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a315ec738bdc118fe0fd2601b83c459"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ClientConfig.html#a2a315ec738bdc118fe0fd2601b83c459">outStandingPublishRequests</a></td></tr>
+<tr class="separator:a2a315ec738bdc118fe0fd2601b83c459"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada9431671ef6659424f466b22737cbbf"><td class="memItemLeft" align="right" valign="top">void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ClientConfig.html#ada9431671ef6659424f466b22737cbbf">subscriptionInactivityCallback</a> )(<a class="el" href="structUA__Client.html">UA_Client</a> *client, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> subscriptionId, void *subContext)</td></tr>
+<tr class="separator:ada9431671ef6659424f466b22737cbbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee76aa40567509e4bcd42dab52f7fd6d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types__generated_8h.html#a344d38983239815b0ca14ec1d72afe92">UA_LocaleId</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ClientConfig.html#aee76aa40567509e4bcd42dab52f7fd6d">sessionLocaleIds</a></td></tr>
 <tr class="separator:aee76aa40567509e4bcd42dab52f7fd6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3bce8db1aed3a3699631bb975b5bcbc5"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__ClientConfig.html#a3bce8db1aed3a3699631bb975b5bcbc5">sessionLocaleIdsSize</a></td></tr>
@@ -316,6 +317,22 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
+<a id="a2a315ec738bdc118fe0fd2601b83c459" name="a2a315ec738bdc118fe0fd2601b83c459"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a315ec738bdc118fe0fd2601b83c459">&#9670;&#160;</a></span>outStandingPublishRequests</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a> UA_ClientConfig::outStandingPublishRequests</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="client_8h_source.html#l00105">105</a> of file <a class="el" href="client_8h_source.html">client.h</a>.</p>
+
+</div>
+</div>
 <a id="ab83bb93794f2467c3fed00cff162e2f7" name="ab83bb93794f2467c3fed00cff162e2f7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab83bb93794f2467c3fed00cff162e2f7">&#9670;&#160;</a></span>pollConnectionFunc</h2>
 
@@ -473,6 +490,22 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="client_8h_source.html#l00091">91</a> of file <a class="el" href="client_8h_source.html">client.h</a>.</p>
+
+</div>
+</div>
+<a id="ada9431671ef6659424f466b22737cbbf" name="ada9431671ef6659424f466b22737cbbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada9431671ef6659424f466b22737cbbf">&#9670;&#160;</a></span>subscriptionInactivityCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* UA_ClientConfig::subscriptionInactivityCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> subscriptionId, void *subContext)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="client_8h_source.html#l00111">111</a> of file <a class="el" href="client_8h_source.html">client.h</a>.</p>
 
 </div>
 </div>

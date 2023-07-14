@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.4.1</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.5.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -76,9 +76,6 @@ $(function() {
   <div class="headertitle"><div class="title">View service set<div class="ingroups"><a class="el" href="group__Services.html">Services</a></div></div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>Browse the address space / view created by a server.  
-<a href="#details">More...</a></p>
 <div class="dynheader">
 Collaboration diagram for View service set:</div>
 <div class="dyncontent">
@@ -89,23 +86,18 @@ Collaboration diagram for View service set:</div>
 Functions</h2></td></tr>
 <tr class="memitem:ga8f135af148293ce3c8d900c3ec75ad05"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ga8f135af148293ce3c8d900c3ec75ad05"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1BrowseResult.html">BrowseResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__View.html#ga8f135af148293ce3c8d900c3ec75ad05">opcua::services::browse</a> (T &amp;serverOrClient, const <a class="el" href="classopcua_1_1BrowseDescription.html">BrowseDescription</a> &amp;bd, uint32_t maxReferences=0)</td></tr>
-<tr class="memdesc:ga8f135af148293ce3c8d900c3ec75ad05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Discover the references of a specified node.  <br /></td></tr>
 <tr class="separator:ga8f135af148293ce3c8d900c3ec75ad05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaab0c3d3008133ccbde6f9c973e0dc29a"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:gaab0c3d3008133ccbde6f9c973e0dc29a"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1BrowseResult.html">BrowseResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__View.html#gaab0c3d3008133ccbde6f9c973e0dc29a">opcua::services::browseNext</a> (T &amp;serverOrClient, bool releaseContinuationPoint, const <a class="el" href="classopcua_1_1ByteString.html">ByteString</a> &amp;continuationPoint)</td></tr>
-<tr class="memdesc:gaab0c3d3008133ccbde6f9c973e0dc29a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Request the next set of a <a class="el" href="group__View.html#ga8f135af148293ce3c8d900c3ec75ad05">browse</a> or <a class="el" href="group__View.html#gaab0c3d3008133ccbde6f9c973e0dc29a">browseNext</a> response.  <br /></td></tr>
 <tr class="separator:gaab0c3d3008133ccbde6f9c973e0dc29a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga6d317eefc3363365241f630bc076c325"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ga6d317eefc3363365241f630bc076c325"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classopcua_1_1ReferenceDescription.html">ReferenceDescription</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__View.html#ga6d317eefc3363365241f630bc076c325">opcua::services::browseAll</a> (T &amp;serverOrClient, const <a class="el" href="classopcua_1_1BrowseDescription.html">BrowseDescription</a> &amp;bd, uint32_t maxReferences=0)</td></tr>
-<tr class="memdesc:ga6d317eefc3363365241f630bc076c325"><td class="mdescLeft">&#160;</td><td class="mdescRight">Discover all the references of a specified node (without calling <a class="el" href="group__View.html#gaab0c3d3008133ccbde6f9c973e0dc29a">browseNext</a>).  <br /></td></tr>
 <tr class="separator:ga6d317eefc3363365241f630bc076c325"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga4362595d4b93ece9f5471164e2abc4dd"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ga4362595d4b93ece9f5471164e2abc4dd"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1BrowsePathResult.html">BrowsePathResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__View.html#ga4362595d4b93ece9f5471164e2abc4dd">opcua::services::translateBrowsePathToNodeIds</a> (T &amp;serverOrClient, const <a class="el" href="classopcua_1_1BrowsePath.html">BrowsePath</a> &amp;browsePath)</td></tr>
-<tr class="memdesc:ga4362595d4b93ece9f5471164e2abc4dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Translate a browse path to NodeIds.  <br /></td></tr>
 <tr class="separator:ga4362595d4b93ece9f5471164e2abc4dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga881816279700702618773d9cb2568f2e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ga881816279700702618773d9cb2568f2e"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1BrowsePathResult.html">BrowsePathResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__View.html#ga881816279700702618773d9cb2568f2e">opcua::services::browseSimplifiedBrowsePath</a> (T &amp;serverOrClient, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;origin, const std::vector&lt; <a class="el" href="classopcua_1_1QualifiedName.html">QualifiedName</a> &gt; &amp;browsePath)</td></tr>
-<tr class="memdesc:ga881816279700702618773d9cb2568f2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">A simplified version of <a class="el" href="group__View.html#ga4362595d4b93ece9f5471164e2abc4dd">translateBrowsePathToNodeIds</a>.  <br /></td></tr>
 <tr class="separator:ga881816279700702618773d9cb2568f2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>

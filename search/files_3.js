@@ -10,6 +10,7 @@ var searchData=
   ['common_2eh_7',['common.h',['open62541/common_8h.html',0,'']]],
   ['comparison_2eh_8',['comparison.h',['../comparison_8h.html',1,'']]],
   ['composed_2eh_9',['Composed.h',['../Composed_8h.html',1,'']]],
-  ['config_2eh_10',['config.h',['open62541/config_8h.html',0,'']]],
-  ['create_5fcertificate_2eh_11',['create_certificate.h',['open62541/create__certificate_8h.html',0,'']]]
+  ['config_2eh_10',['Config.h',['../Config_8h.html',1,'']]],
+  ['config_2eh_11',['config.h',['open62541/config_8h.html',0,'']]],
+  ['create_5fcertificate_2eh_12',['create_certificate.h',['open62541/create__certificate_8h.html',0,'']]]
 ];

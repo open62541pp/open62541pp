@@ -72,6 +72,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle"><div class="title">UA_Session Struct Reference</div></div>
 </div><!--header-->
@@ -79,6 +80,13 @@ $(function() {
 
 <p><code>#include &lt;<a class="el" href="ua__session_8h_source.html">ua_session.h</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ab9fe437a81d78caeee84f1f90cbc9ed6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Session.html#ab9fe437a81d78caeee84f1f90cbc9ed6">TAILQ_HEAD</a> (, <a class="el" href="ua__session_8h.html#ad9b3548352238a852344fe8ee4e684a9">UA_Subscription</a>) subscriptions</td></tr>
+<tr class="separator:ab9fe437a81d78caeee84f1f90cbc9ed6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65f18978c95dcd0122ddfb8c07372da0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Session.html#a65f18978c95dcd0122ddfb8c07372da0">SIMPLEQ_HEAD</a> (, <a class="el" href="structUA__PublishResponseEntry.html">UA_PublishResponseEntry</a>) responseQueue</td></tr>
+<tr class="separator:a65f18978c95dcd0122ddfb8c07372da0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Data Fields</h2></td></tr>
 <tr class="memitem:a6702280f3e56ac834391635735dbc974"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__SessionHeader.html">UA_SessionHeader</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Session.html#a6702280f3e56ac834391635735dbc974">header</a></td></tr>
@@ -115,11 +123,54 @@ Data Fields</h2></td></tr>
 <tr class="separator:aedf0781784229ab1b595e30b25abc726"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98226543ac824d25fca8b8821619d875"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__String.html">UA_String</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Session.html#a98226543ac824d25fca8b8821619d875">localeIds</a></td></tr>
 <tr class="separator:a98226543ac824d25fca8b8821619d875"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca1408403e2aca0ed1720eb692bbe9b1"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Session.html#aca1408403e2aca0ed1720eb692bbe9b1">subscriptionsSize</a></td></tr>
+<tr class="separator:aca1408403e2aca0ed1720eb692bbe9b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a544e18315b042d9acfbbdc83935e0089"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Session.html#a544e18315b042d9acfbbdc83935e0089">responseQueueSize</a></td></tr>
+<tr class="separator:a544e18315b042d9acfbbdc83935e0089"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d0f93641def5871d239bca5a3c17260"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Session.html#a6d0f93641def5871d239bca5a3c17260">totalRetransmissionQueueSize</a></td></tr>
+<tr class="separator:a6d0f93641def5871d239bca5a3c17260"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00038">38</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
-</div><h2 class="groupheader">Field Documentation</h2>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a65f18978c95dcd0122ddfb8c07372da0" name="a65f18978c95dcd0122ddfb8c07372da0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65f18978c95dcd0122ddfb8c07372da0">&#9670;&#160;</a></span>SIMPLEQ_HEAD()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_Session::SIMPLEQ_HEAD </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__PublishResponseEntry.html">UA_PublishResponseEntry</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab9fe437a81d78caeee84f1f90cbc9ed6" name="ab9fe437a81d78caeee84f1f90cbc9ed6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9fe437a81d78caeee84f1f90cbc9ed6">&#9670;&#160;</a></span>TAILQ_HEAD()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_Session::TAILQ_HEAD </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="ua__session_8h.html#ad9b3548352238a852344fe8ee4e684a9">UA_Subscription</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Field Documentation</h2>
 <a id="aec80693033a2eb0bfba005ba2f063e0a" name="aec80693033a2eb0bfba005ba2f063e0a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aec80693033a2eb0bfba005ba2f063e0a">&#9670;&#160;</a></span>activated</h2>
 
@@ -296,6 +347,22 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
+<a id="a544e18315b042d9acfbbdc83935e0089" name="a544e18315b042d9acfbbdc83935e0089"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a544e18315b042d9acfbbdc83935e0089">&#9670;&#160;</a></span>responseQueueSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t UA_Session::responseQueueSize</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00069">69</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
+
+</div>
+</div>
 <a id="a71c39780dee9020134b1bdae8d3fc491" name="a71c39780dee9020134b1bdae8d3fc491"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a71c39780dee9020134b1bdae8d3fc491">&#9670;&#160;</a></span>serverNonce</h2>
 
@@ -360,6 +427,22 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
+<a id="aca1408403e2aca0ed1720eb692bbe9b1" name="aca1408403e2aca0ed1720eb692bbe9b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca1408403e2aca0ed1720eb692bbe9b1">&#9670;&#160;</a></span>subscriptionsSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t UA_Session::subscriptionsSize</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00066">66</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
+
+</div>
+</div>
 <a id="a3802af52d7eeb6635cbe2f3641d8426a" name="a3802af52d7eeb6635cbe2f3641d8426a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3802af52d7eeb6635cbe2f3641d8426a">&#9670;&#160;</a></span>timeout</h2>
 
@@ -373,6 +456,22 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00047">47</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
+
+</div>
+</div>
+<a id="a6d0f93641def5871d239bca5a3c17260" name="a6d0f93641def5871d239bca5a3c17260"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d0f93641def5871d239bca5a3c17260">&#9670;&#160;</a></span>totalRetransmissionQueueSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t UA_Session::totalRetransmissionQueueSize</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__session_8h_source.html#l00072">72</a> of file <a class="el" href="ua__session_8h_source.html">ua_session.h</a>.</p>
 
 </div>
 </div>

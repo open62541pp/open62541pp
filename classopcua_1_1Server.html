@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.4.1</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.5.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -82,60 +82,41 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>High-level server class.  
- <a href="classopcua_1_1Server.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="Server_8h_source.html">Server.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:adf0fca729e9e75dabd9e673a7eb7514c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#adf0fca729e9e75dabd9e673a7eb7514c">Server</a> ()</td></tr>
-<tr class="memdesc:adf0fca729e9e75dabd9e673a7eb7514c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create server with default config.  <br /></td></tr>
 <tr class="separator:adf0fca729e9e75dabd9e673a7eb7514c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af15226e234a7215c4c79b1ee54126121"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#af15226e234a7215c4c79b1ee54126121">Server</a> (uint16_t port)</td></tr>
-<tr class="memdesc:af15226e234a7215c4c79b1ee54126121"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create server with custom port.  <br /></td></tr>
 <tr class="separator:af15226e234a7215c4c79b1ee54126121"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf4f826095437abc0b3e20b8366cd8c1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#aaf4f826095437abc0b3e20b8366cd8c1">Server</a> (uint16_t port, std::string_view certificate)</td></tr>
-<tr class="memdesc:aaf4f826095437abc0b3e20b8366cd8c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create server with custom port and a server certificate.  <br /></td></tr>
 <tr class="separator:aaf4f826095437abc0b3e20b8366cd8c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af917ca8ebe2f20dc0c262fed82464a7f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#af917ca8ebe2f20dc0c262fed82464a7f">setLogger</a> (<a class="el" href="namespaceopcua.html#addbefbd9d221be59908c6f60dc54238a">Logger</a> logger)</td></tr>
-<tr class="memdesc:af917ca8ebe2f20dc0c262fed82464a7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set custom logging function.  <br /></td></tr>
 <tr class="separator:af917ca8ebe2f20dc0c262fed82464a7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50463492d9e0f1342b9a33b402931dc0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a50463492d9e0f1342b9a33b402931dc0">setCustomHostname</a> (std::string_view hostname)</td></tr>
-<tr class="memdesc:a50463492d9e0f1342b9a33b402931dc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set custom hostname, default: system's host name.  <br /></td></tr>
 <tr class="separator:a50463492d9e0f1342b9a33b402931dc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3096faf64ed93d3f2602a2371e55b644"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a3096faf64ed93d3f2602a2371e55b644">setApplicationName</a> (std::string_view name)</td></tr>
-<tr class="memdesc:a3096faf64ed93d3f2602a2371e55b644"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set application name, default: <code>open62541-based OPC UA Application</code>.  <br /></td></tr>
 <tr class="separator:a3096faf64ed93d3f2602a2371e55b644"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa20fc13af8bce1152e682515d75afc3a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#aa20fc13af8bce1152e682515d75afc3a">setApplicationUri</a> (std::string_view uri)</td></tr>
-<tr class="memdesc:aa20fc13af8bce1152e682515d75afc3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set application URI, default: <code>urn:open62541.server.application</code>.  <br /></td></tr>
 <tr class="separator:aa20fc13af8bce1152e682515d75afc3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a480065442a39d201936bbfb35d2530f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a480065442a39d201936bbfb35d2530f1">setProductUri</a> (std::string_view uri)</td></tr>
-<tr class="memdesc:a480065442a39d201936bbfb35d2530f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set product URI, default: <code><a href="http://open62541.org">http://open62541.org</a></code>.  <br /></td></tr>
 <tr class="separator:a480065442a39d201936bbfb35d2530f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b3b0886683dbcddd95709407ecda3e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a1b3b0886683dbcddd95709407ecda3e2">setLogin</a> (const std::vector&lt; <a class="el" href="structopcua_1_1Login.html">Login</a> &gt; &amp;logins, bool allowAnonymous=true)</td></tr>
-<tr class="memdesc:a1b3b0886683dbcddd95709407ecda3e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set login credentials (username/password) and anonymous login.  <br /></td></tr>
 <tr class="separator:a1b3b0886683dbcddd95709407ecda3e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae841b3cea5eff765a6ce5c0692b45724"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#ae841b3cea5eff765a6ce5c0692b45724">getNamespaceArray</a> ()</td></tr>
-<tr class="memdesc:ae841b3cea5eff765a6ce5c0692b45724"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all defined namespaces.  <br /></td></tr>
 <tr class="separator:ae841b3cea5eff765a6ce5c0692b45724"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebbf0356e35f42af50930448fe2245a4"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#aebbf0356e35f42af50930448fe2245a4">registerNamespace</a> (std::string_view uri)</td></tr>
-<tr class="memdesc:aebbf0356e35f42af50930448fe2245a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Register namespace. The new namespace index will be returned.  <br /></td></tr>
 <tr class="separator:aebbf0356e35f42af50930448fe2245a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a80242dd95c529b6e7b68c8d60da91a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Subscription.html">Subscription</a>&lt; <a class="el" href="classopcua_1_1Server.html">Server</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a7a80242dd95c529b6e7b68c8d60da91a">createSubscription</a> () noexcept</td></tr>
-<tr class="memdesc:a7a80242dd95c529b6e7b68c8d60da91a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a (pseudo) subscription to monitor local data changes and events.  <br /></td></tr>
 <tr class="separator:a7a80242dd95c529b6e7b68c8d60da91a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74af3b7dbfa031a19230a45dcf3f3a31"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a74af3b7dbfa031a19230a45dcf3f3a31">runIterate</a> ()</td></tr>
-<tr class="memdesc:a74af3b7dbfa031a19230a45dcf3f3a31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run a single iteration of the server's main loop.  <br /></td></tr>
 <tr class="separator:a74af3b7dbfa031a19230a45dcf3f3a31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7346a714c85e2d99fc8bc9fd1dd31d6d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a7346a714c85e2d99fc8bc9fd1dd31d6d">run</a> ()</td></tr>
-<tr class="memdesc:a7346a714c85e2d99fc8bc9fd1dd31d6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run the server's main loop. This method will block until <a class="el" href="classopcua_1_1Server.html#a51f8bc0f79b2e5cea8fc094c58a76a9c" title="Stop the server&#39;s main loop.">Server::stop</a> is called.  <br /></td></tr>
 <tr class="separator:a7346a714c85e2d99fc8bc9fd1dd31d6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51f8bc0f79b2e5cea8fc094c58a76a9c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a51f8bc0f79b2e5cea8fc094c58a76a9c">stop</a> ()</td></tr>
-<tr class="memdesc:a51f8bc0f79b2e5cea8fc094c58a76a9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop the server's main loop.  <br /></td></tr>
 <tr class="separator:a51f8bc0f79b2e5cea8fc094c58a76a9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae355af01f75adbe8197353e5f5d6afd6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#ae355af01f75adbe8197353e5f5d6afd6">isRunning</a> () const noexcept</td></tr>
-<tr class="memdesc:ae355af01f75adbe8197353e5f5d6afd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the server is running.  <br /></td></tr>
 <tr class="separator:ae355af01f75adbe8197353e5f5d6afd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8163eca1c3e5e6ec20d6de12199e260"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a>&lt; <a class="el" href="classopcua_1_1Server.html">Server</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#af8163eca1c3e5e6ec20d6de12199e260">getNode</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id)</td></tr>
 <tr class="separator:af8163eca1c3e5e6ec20d6de12199e260"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -155,7 +136,7 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>High-level server class. </p>
 <p>Exposes the most common functionality. Use the <a class="el" href="classopcua_1_1Server.html#af78448a2823bfe2e6ba8badb987a8bc8">handle()</a> method to get access the underlying <a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> instance and use the full power of open6254. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_8cpp-example.html#_a0">server.cpp</a>, <a class="el" href="server_instantiation_8cpp-example.html#_a0">server_instantiation.cpp</a>, and <a class="el" href="server_minimal_8cpp-example.html#_a0">server_minimal.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_8cpp-example.html#_a0">server.cpp</a>, <a class="el" href="server_instantiation_8cpp-example.html#_a0">server_instantiation.cpp</a>, <a class="el" href="server_method_8cpp-example.html#_a0">server_method.cpp</a>, and <a class="el" href="server_minimal_8cpp-example.html#_a0">server_minimal.cpp</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="Server_8h_source.html#l00030">30</a> of file <a class="el" href="Server_8h_source.html">Server.h</a>.</p>
@@ -318,7 +299,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_8cpp-example.html#a7">server.cpp</a>, <a class="el" href="server_instantiation_8cpp-example.html#a5">server_instantiation.cpp</a>, and <a class="el" href="server_minimal_8cpp-example.html#a1">server_minimal.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_8cpp-example.html#a7">server.cpp</a>, <a class="el" href="server_instantiation_8cpp-example.html#a5">server_instantiation.cpp</a>, <a class="el" href="server_method_8cpp-example.html#a1">server_method.cpp</a>, and <a class="el" href="server_minimal_8cpp-example.html#a1">server_minimal.cpp</a>.</dd>
 </dl>
 
 </div>
@@ -487,7 +468,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Run the server's main loop. This method will block until <a class="el" href="classopcua_1_1Server.html#a51f8bc0f79b2e5cea8fc094c58a76a9c" title="Stop the server&#39;s main loop.">Server::stop</a> is called. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_8cpp-example.html#a9">server.cpp</a>, <a class="el" href="server_instantiation_8cpp-example.html#a6">server_instantiation.cpp</a>, and <a class="el" href="server_minimal_8cpp-example.html#a3">server_minimal.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_8cpp-example.html#a9">server.cpp</a>, <a class="el" href="server_instantiation_8cpp-example.html#a6">server_instantiation.cpp</a>, <a class="el" href="server_method_8cpp-example.html#a8">server_method.cpp</a>, and <a class="el" href="server_minimal_8cpp-example.html#a3">server_minimal.cpp</a>.</dd>
 </dl>
 
 </div>

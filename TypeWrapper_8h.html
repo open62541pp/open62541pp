@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.4.1</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.5.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -95,12 +95,12 @@ $(function() {
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for TypeWrapper.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="TypeWrapper_8h__incl.svg" width="1020" height="388"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="TypeWrapper_8h__incl.svg" width="1130" height="388"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="TypeWrapper_8h__dep__incl.svg" width="2104" height="887"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="TypeWrapper_8h__dep__incl.svg" width="2287" height="887"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="TypeWrapper_8h_source.html">Go to the source code of this file.</a></p>
@@ -108,7 +108,6 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; T, typeIndex &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Template base class to wrap <code>UA_*</code> type objects.  <a href="classopcua_1_1TypeWrapper.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -134,14 +133,33 @@ Functions</h2></td></tr>
 <tr class="memitem:aa61a881a92088fa01e02db076d405706"><td class="memTemplParams" colspan="2">template&lt;typename T1 , typename T2 &gt; </td></tr>
 <tr class="memitem:aa61a881a92088fa01e02db076d405706"><td class="memTemplItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#aa61a881a92088fa01e02db076d405706">opcua::detail::assertIsPointerInterconvertible</a> () noexcept</td></tr>
 <tr class="separator:aa61a881a92088fa01e02db076d405706"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga34a35bfc71197dca7dded281c0d4e46b"><td class="memTemplParams" colspan="2">template&lt;typename WrapperType , typename NativeType  = typename WrapperType::Native&gt; </td></tr>
+<tr class="memitem:a27e45c1fc19db57f057fe185c817b01c"><td class="memTemplParams" colspan="2">template&lt;typename WrapperType , typename NativeType &gt; </td></tr>
+<tr class="memitem:a27e45c1fc19db57f057fe185c817b01c"><td class="memTemplItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a27e45c1fc19db57f057fe185c817b01c">opcua::detail::assertIsWrappedType</a> () noexcept</td></tr>
+<tr class="separator:a27e45c1fc19db57f057fe185c817b01c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga2b5d8235ded2014effc2629670250b91"><td class="memTemplParams" colspan="2">template&lt;typename WrapperType , typename NativeType  = typename WrapperType::NativeType&gt; </td></tr>
+<tr class="memitem:ga2b5d8235ded2014effc2629670250b91"><td class="memTemplItemLeft" align="right" valign="top">constexpr WrapperType *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__TypeWrapper.html#ga2b5d8235ded2014effc2629670250b91">opcua::asWrapper</a> (NativeType *native) noexcept</td></tr>
+<tr class="separator:ga2b5d8235ded2014effc2629670250b91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga23d32d5904a42339779536303ede8709"><td class="memTemplParams" colspan="2">template&lt;typename WrapperType , typename NativeType  = typename WrapperType::NativeType&gt; </td></tr>
+<tr class="memitem:ga23d32d5904a42339779536303ede8709"><td class="memTemplItemLeft" align="right" valign="top">constexpr const WrapperType *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__TypeWrapper.html#ga23d32d5904a42339779536303ede8709">opcua::asWrapper</a> (const NativeType *native) noexcept</td></tr>
+<tr class="separator:ga23d32d5904a42339779536303ede8709"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga34a35bfc71197dca7dded281c0d4e46b"><td class="memTemplParams" colspan="2">template&lt;typename WrapperType , typename NativeType  = typename WrapperType::NativeType&gt; </td></tr>
 <tr class="memitem:ga34a35bfc71197dca7dded281c0d4e46b"><td class="memTemplItemLeft" align="right" valign="top">constexpr WrapperType &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__TypeWrapper.html#ga34a35bfc71197dca7dded281c0d4e46b">opcua::asWrapper</a> (NativeType &amp;native) noexcept</td></tr>
-<tr class="memdesc:ga34a35bfc71197dca7dded281c0d4e46b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast native <code>UA_*</code> type object references to <a class="el" href="classopcua_1_1TypeWrapper.html" title="Template base class to wrap UA_* type objects.">TypeWrapper</a> object references.  <br /></td></tr>
 <tr class="separator:ga34a35bfc71197dca7dded281c0d4e46b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gafba1bb0a4666ef8308f308953e90c0ee"><td class="memTemplParams" colspan="2">template&lt;typename WrapperType , typename NativeType  = typename WrapperType::Native&gt; </td></tr>
+<tr class="memitem:gafba1bb0a4666ef8308f308953e90c0ee"><td class="memTemplParams" colspan="2">template&lt;typename WrapperType , typename NativeType  = typename WrapperType::NativeType&gt; </td></tr>
 <tr class="memitem:gafba1bb0a4666ef8308f308953e90c0ee"><td class="memTemplItemLeft" align="right" valign="top">constexpr const WrapperType &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__TypeWrapper.html#gafba1bb0a4666ef8308f308953e90c0ee">opcua::asWrapper</a> (const NativeType &amp;native) noexcept</td></tr>
-<tr class="memdesc:gafba1bb0a4666ef8308f308953e90c0ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cast native <code>UA_*</code> type object references to <a class="el" href="classopcua_1_1TypeWrapper.html" title="Template base class to wrap UA_* type objects.">TypeWrapper</a> object references.    <br /></td></tr>
 <tr class="separator:gafba1bb0a4666ef8308f308953e90c0ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga820fdc2f355b734fd07dd71b518d0367"><td class="memTemplParams" colspan="2">template&lt;typename WrapperType , typename NativeType  = typename WrapperType::NativeType&gt; </td></tr>
+<tr class="memitem:ga820fdc2f355b734fd07dd71b518d0367"><td class="memTemplItemLeft" align="right" valign="top">constexpr NativeType *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__TypeWrapper.html#ga820fdc2f355b734fd07dd71b518d0367">opcua::asNative</a> (WrapperType *wrapper) noexcept</td></tr>
+<tr class="separator:ga820fdc2f355b734fd07dd71b518d0367"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabd3456604e4cb5a7902de2f78a389057"><td class="memTemplParams" colspan="2">template&lt;typename WrapperType , typename NativeType  = typename WrapperType::NativeType&gt; </td></tr>
+<tr class="memitem:gabd3456604e4cb5a7902de2f78a389057"><td class="memTemplItemLeft" align="right" valign="top">constexpr const NativeType *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__TypeWrapper.html#gabd3456604e4cb5a7902de2f78a389057">opcua::asNative</a> (const WrapperType *wrapper) noexcept</td></tr>
+<tr class="separator:gabd3456604e4cb5a7902de2f78a389057"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1455a9427b97e09d3ccbc254d42ae0bd"><td class="memTemplParams" colspan="2">template&lt;typename WrapperType , typename NativeType  = typename WrapperType::NativeType&gt; </td></tr>
+<tr class="memitem:ga1455a9427b97e09d3ccbc254d42ae0bd"><td class="memTemplItemLeft" align="right" valign="top">constexpr NativeType &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__TypeWrapper.html#ga1455a9427b97e09d3ccbc254d42ae0bd">opcua::asNative</a> (WrapperType &amp;wrapper) noexcept</td></tr>
+<tr class="separator:ga1455a9427b97e09d3ccbc254d42ae0bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad01c8185106d874d951555dee7726e3c"><td class="memTemplParams" colspan="2">template&lt;typename WrapperType , typename NativeType  = typename WrapperType::NativeType&gt; </td></tr>
+<tr class="memitem:gad01c8185106d874d951555dee7726e3c"><td class="memTemplItemLeft" align="right" valign="top">constexpr const NativeType &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__TypeWrapper.html#gad01c8185106d874d951555dee7726e3c">opcua::asNative</a> (const WrapperType &amp;wrapper) noexcept</td></tr>
+<tr class="separator:gad01c8185106d874d951555dee7726e3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a67163e9bbbe5e066a9a98dde618eadea"><td class="memTemplParams" colspan="2">template&lt;typename T , typename  = std::enable_if_t&lt;detail::IsTypeWrapper&lt;T&gt;::value&gt;&gt; </td></tr>
 <tr class="memitem:a67163e9bbbe5e066a9a98dde618eadea"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a67163e9bbbe5e066a9a98dde618eadea">opcua::operator==</a> (const T &amp;left, const T &amp;right) noexcept</td></tr>
 <tr class="separator:a67163e9bbbe5e066a9a98dde618eadea"><td class="memSeparator" colspan="2">&#160;</td></tr>

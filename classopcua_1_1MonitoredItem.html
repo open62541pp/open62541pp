@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.4.1</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.5.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -82,45 +82,31 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>High-level monitored item class.  
- <a href="classopcua_1_1MonitoredItem.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="MonitoredItem_8h_source.html">MonitoredItem.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a91d2110032d6873cb37a2c4dd11863fc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1MonitoredItem.html#a91d2110032d6873cb37a2c4dd11863fc">MonitoredItem</a> (ServerOrClient &amp;connection, uint32_t subscriptionId, uint32_t monitoredItemId) noexcept</td></tr>
-<tr class="memdesc:a91d2110032d6873cb37a2c4dd11863fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrap an existing monitored item.  <br /></td></tr>
 <tr class="separator:a91d2110032d6873cb37a2c4dd11863fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16596e0a764506ac4336d9dcab65c10e"><td class="memItemLeft" align="right" valign="top">ServerOrClient &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1MonitoredItem.html#a16596e0a764506ac4336d9dcab65c10e">getConnection</a> () noexcept</td></tr>
-<tr class="memdesc:a16596e0a764506ac4336d9dcab65c10e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the server/client instance.  <br /></td></tr>
 <tr class="separator:a16596e0a764506ac4336d9dcab65c10e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac636bc74ca612740213d688329ea2ab2"><td class="memItemLeft" align="right" valign="top">const ServerOrClient &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1MonitoredItem.html#ac636bc74ca612740213d688329ea2ab2">getConnection</a> () const noexcept</td></tr>
-<tr class="memdesc:ac636bc74ca612740213d688329ea2ab2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the server/client instance.  <br /></td></tr>
 <tr class="separator:ac636bc74ca612740213d688329ea2ab2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b0287e55dc789138f53d3c428372b88"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1MonitoredItem.html#a5b0287e55dc789138f53d3c428372b88">getSubscriptionId</a> () const noexcept</td></tr>
-<tr class="memdesc:a5b0287e55dc789138f53d3c428372b88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the server-assigned identifier of the underlying subscription.  <br /></td></tr>
 <tr class="separator:a5b0287e55dc789138f53d3c428372b88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9b480044d5a816cdbad82e83c54ff11"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1MonitoredItem.html#ab9b480044d5a816cdbad82e83c54ff11">getMonitoredItemId</a> () const noexcept</td></tr>
-<tr class="memdesc:ab9b480044d5a816cdbad82e83c54ff11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the server-assigned identifier of this monitored item.  <br /></td></tr>
 <tr class="separator:ab9b480044d5a816cdbad82e83c54ff11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1eee85b46c300fe018fdabb673a60bbf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Subscription.html">Subscription</a>&lt; ServerOrClient &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1MonitoredItem.html#a1eee85b46c300fe018fdabb673a60bbf">getSubscription</a> () const</td></tr>
-<tr class="memdesc:a1eee85b46c300fe018fdabb673a60bbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the underlying subscription.  <br /></td></tr>
 <tr class="separator:a1eee85b46c300fe018fdabb673a60bbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f0266437836c187667f59d31422a590"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1MonitoredItem.html#a1f0266437836c187667f59d31422a590">getNodeId</a> () const</td></tr>
-<tr class="memdesc:a1f0266437836c187667f59d31422a590"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the monitored <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a>.  <br /></td></tr>
 <tr class="separator:a1f0266437836c187667f59d31422a590"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7bbb17916d38c4458378cace0b7d9d2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61">AttributeId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1MonitoredItem.html#ad7bbb17916d38c4458378cace0b7d9d2">getAttributeId</a> () const</td></tr>
-<tr class="memdesc:ad7bbb17916d38c4458378cace0b7d9d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the monitored AttributeId.  <br /></td></tr>
 <tr class="separator:ad7bbb17916d38c4458378cace0b7d9d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44564dd620cc5d948aef6977f988b483"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1MonitoredItem.html#a44564dd620cc5d948aef6977f988b483">setMonitoringParameters</a> (<a class="el" href="namespaceopcua.html#a735c9cf90bca3e9ce3f281f9417509b3">MonitoringParameters</a> &amp;parameters)</td></tr>
-<tr class="memdesc:a44564dd620cc5d948aef6977f988b483"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modify this monitored item.  <br /></td></tr>
 <tr class="separator:a44564dd620cc5d948aef6977f988b483"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0cd3a9d797f82d428500370e10140d8e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1MonitoredItem.html#a0cd3a9d797f82d428500370e10140d8e">setMonitoringMode</a> (<a class="el" href="namespaceopcua.html#ac7b72cb1f86ea818f1386642867ff381">MonitoringMode</a> monitoringMode)</td></tr>
-<tr class="memdesc:a0cd3a9d797f82d428500370e10140d8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the monitoring mode of this monitored item.  <br /></td></tr>
 <tr class="separator:a0cd3a9d797f82d428500370e10140d8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a03adb09887485e58b59534b8b40bad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1MonitoredItem.html#a2a03adb09887485e58b59534b8b40bad">deleteMonitoredItem</a> ()</td></tr>
-<tr class="memdesc:a2a03adb09887485e58b59534b8b40bad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete this monitored item.  <br /></td></tr>
 <tr class="separator:a2a03adb09887485e58b59534b8b40bad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -131,7 +117,7 @@ class opcua::MonitoredItem&lt; ServerOrClient &gt;</div><p>High-level monitored 
 <li><a class="el" href="group__MonitoredItem.html">MonitoredItem service set</a> </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="MonitoredItem_8h_source.html#l00028">28</a> of file <a class="el" href="MonitoredItem_8h_source.html">MonitoredItem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="MonitoredItem_8h_source.html#l00031">31</a> of file <a class="el" href="MonitoredItem_8h_source.html">MonitoredItem.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a91d2110032d6873cb37a2c4dd11863fc" name="a91d2110032d6873cb37a2c4dd11863fc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a91d2110032d6873cb37a2c4dd11863fc">&#9670;&#160;</a></span>MonitoredItem()</h2>

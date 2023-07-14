@@ -88,31 +88,35 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a5406fde7353bf9e3a0f60cbbf0cdb36d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="config_8h.html#aa397bffde7d792f38dcbb8e329486f9c">_UA_BEGIN_DECLS</a> <a class="el" href="structUA__Server.html">UA_Server</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__config__default_8h.html#a5406fde7353bf9e3a0f60cbbf0cdb36d">UA_Server_new</a> (void)</td></tr>
-<tr class="memdesc:a5406fde7353bf9e3a0f60cbbf0cdb36d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This work is licensed under a Creative Commons CCZero 1.0 Universal License.  <br /></td></tr>
 <tr class="separator:a5406fde7353bf9e3a0f60cbbf0cdb36d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac5a9b7c0c0c1b9a2b5644df3422706c2"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__config__default_8h.html#ac5a9b7c0c0c1b9a2b5644df3422706c2">UA_ServerConfig_setMinimalCustomBuffer</a> (<a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> *config, <a class="el" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a> portNumber, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *certificate, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> sendBufferSize, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> recvBufferSize)</td></tr>
-<tr class="memdesc:ac5a9b7c0c0c1b9a2b5644df3422706c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Server Config.  <br /></td></tr>
 <tr class="separator:ac5a9b7c0c0c1b9a2b5644df3422706c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bbc6fd0418849740ba97856f6804386"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__config__default_8h.html#a5bbc6fd0418849740ba97856f6804386">UA_ServerConfig_setDefaultWithSecurityPolicies</a> (<a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> *conf, <a class="el" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a> portNumber, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *certificate, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *privateKey, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *trustList, size_t trustListSize, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *issuerList, size_t issuerListSize, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *revocationList, size_t revocationListSize)</td></tr>
+<tr class="separator:a5bbc6fd0418849740ba97856f6804386"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa18446cc47c61331b5775518f3a7f9a0"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__config__default_8h.html#aa18446cc47c61331b5775518f3a7f9a0">UA_ServerConfig_setBasics</a> (<a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> *conf)</td></tr>
-<tr class="memdesc:aa18446cc47c61331b5775518f3a7f9a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new server config with no network layer and no endpoints.  <br /></td></tr>
 <tr class="separator:aa18446cc47c61331b5775518f3a7f9a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f93adb54e6782769cbdadf39dba5ced"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__config__default_8h.html#a4f93adb54e6782769cbdadf39dba5ced">UA_ServerConfig_addNetworkLayerTCP</a> (<a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> *conf, <a class="el" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a> portNumber, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> sendBufferSize, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> recvBufferSize)</td></tr>
-<tr class="memdesc:a4f93adb54e6782769cbdadf39dba5ced"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a TCP network layer with custom buffer sizes.  <br /></td></tr>
 <tr class="separator:a4f93adb54e6782769cbdadf39dba5ced"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85e3756317030827c424d7db784b5aa9"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__config__default_8h.html#a85e3756317030827c424d7db784b5aa9">UA_ServerConfig_addSecurityPolicyNone</a> (<a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> *config, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *certificate)</td></tr>
-<tr class="memdesc:a85e3756317030827c424d7db784b5aa9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the security policy <code>SecurityPolicy#None</code> to the server.  <br /></td></tr>
 <tr class="separator:a85e3756317030827c424d7db784b5aa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad77828f158c28396415fd7ff2268ad68"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__config__default_8h.html#ad77828f158c28396415fd7ff2268ad68">UA_ServerConfig_addSecurityPolicyBasic128Rsa15</a> (<a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> *config, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *certificate, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *privateKey)</td></tr>
+<tr class="separator:ad77828f158c28396415fd7ff2268ad68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad42ba7db07c67ec76bfe3e06b49f9668"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__config__default_8h.html#ad42ba7db07c67ec76bfe3e06b49f9668">UA_ServerConfig_addSecurityPolicyBasic256</a> (<a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> *config, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *certificate, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *privateKey)</td></tr>
+<tr class="separator:ad42ba7db07c67ec76bfe3e06b49f9668"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79ab0f62c034aa2b8b6dcd31986f53c7"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__config__default_8h.html#a79ab0f62c034aa2b8b6dcd31986f53c7">UA_ServerConfig_addSecurityPolicyBasic256Sha256</a> (<a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> *config, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *certificate, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *privateKey)</td></tr>
+<tr class="separator:a79ab0f62c034aa2b8b6dcd31986f53c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf71499858b06a65221bdd59f68959ad"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__config__default_8h.html#aaf71499858b06a65221bdd59f68959ad">UA_ServerConfig_addSecurityPolicyAes128Sha256RsaOaep</a> (<a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> *config, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *certificate, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *privateKey)</td></tr>
+<tr class="separator:aaf71499858b06a65221bdd59f68959ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef2882c00bce0a74ad4fa285fb51625e"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__config__default_8h.html#aef2882c00bce0a74ad4fa285fb51625e">UA_ServerConfig_addAllSecurityPolicies</a> (<a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> *config, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *certificate, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *privateKey)</td></tr>
+<tr class="separator:aef2882c00bce0a74ad4fa285fb51625e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4b7855cfa98bf35a229af5f0839ed1e6"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__config__default_8h.html#a4b7855cfa98bf35a229af5f0839ed1e6">UA_ServerConfig_addEndpoint</a> (<a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> *config, const <a class="el" href="structUA__String.html">UA_String</a> securityPolicyUri, <a class="el" href="types__generated_8h.html#a2d23d500f1b2c02f196a8d35902b4f46">UA_MessageSecurityMode</a> securityMode)</td></tr>
-<tr class="memdesc:a4b7855cfa98bf35a229af5f0839ed1e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an endpoint for the given security policy and mode.  <br /></td></tr>
 <tr class="separator:a4b7855cfa98bf35a229af5f0839ed1e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a925276ca5c34d8f0670e5e01114b6203"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__config__default_8h.html#a925276ca5c34d8f0670e5e01114b6203">UA_ServerConfig_addAllEndpoints</a> (<a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> *config)</td></tr>
-<tr class="memdesc:a925276ca5c34d8f0670e5e01114b6203"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds endpoints for all configured security policies in each mode.  <br /></td></tr>
 <tr class="separator:a925276ca5c34d8f0670e5e01114b6203"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a711c53c2304f6b9604766301c4f47b7c"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structUA__ConnectionConfig.html">UA_ConnectionConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server__config__default_8h.html#a711c53c2304f6b9604766301c4f47b7c">UA_ConnectionConfig_default</a></td></tr>
-<tr class="memdesc:a711c53c2304f6b9604766301c4f47b7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default Connection.  <br /></td></tr>
 <tr class="separator:a711c53c2304f6b9604766301c4f47b7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
@@ -158,6 +162,55 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">config</td><td>The configuration to manipulate </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aef2882c00bce0a74ad4fa285fb51625e" name="aef2882c00bce0a74ad4fa285fb51625e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef2882c00bce0a74ad4fa285fb51625e">&#9670;&#160;</a></span>UA_ServerConfig_addAllSecurityPolicies()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_ServerConfig_addAllSecurityPolicies </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> *&#160;</td>
+          <td class="paramname"><em>config</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
+          <td class="paramname"><em>certificate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
+          <td class="paramname"><em>privateKey</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adds all supported security policies and sets up certificate validation procedures. </p>
+<p>Certificate verification should be configured before calling this function. See PKI plugin.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">config</td><td>The configuration to manipulate </td></tr>
+    <tr><td class="paramname">certificate</td><td>The server certificate. </td></tr>
+    <tr><td class="paramname">privateKey</td><td>The private key that corresponds to the certificate. </td></tr>
+    <tr><td class="paramname">trustList</td><td>The trustList for client certificate validation. </td></tr>
+    <tr><td class="paramname">trustListSize</td><td>The trustList size. </td></tr>
+    <tr><td class="paramname">revocationList</td><td>The revocationList for client certificate validation. </td></tr>
+    <tr><td class="paramname">revocationListSize</td><td>The revocationList size. </td></tr>
   </table>
   </dd>
 </dl>
@@ -260,6 +313,190 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="aaf71499858b06a65221bdd59f68959ad" name="aaf71499858b06a65221bdd59f68959ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf71499858b06a65221bdd59f68959ad">&#9670;&#160;</a></span>UA_ServerConfig_addSecurityPolicyAes128Sha256RsaOaep()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_ServerConfig_addSecurityPolicyAes128Sha256RsaOaep </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> *&#160;</td>
+          <td class="paramname"><em>config</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
+          <td class="paramname"><em>certificate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
+          <td class="paramname"><em>privateKey</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adds the security policy <code>SecurityPolicy#Aes128Sha256RsaOaep</code> to the server. </p>
+<p>A server certificate may be supplied but is optional.</p>
+<p>Certificate verification should be configured before calling this function. See PKI plugin.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">config</td><td>The configuration to manipulate </td></tr>
+    <tr><td class="paramname">certificate</td><td>The server certificate. </td></tr>
+    <tr><td class="paramname">privateKey</td><td>The private key that corresponds to the certificate. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad77828f158c28396415fd7ff2268ad68" name="ad77828f158c28396415fd7ff2268ad68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad77828f158c28396415fd7ff2268ad68">&#9670;&#160;</a></span>UA_ServerConfig_addSecurityPolicyBasic128Rsa15()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_ServerConfig_addSecurityPolicyBasic128Rsa15 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> *&#160;</td>
+          <td class="paramname"><em>config</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
+          <td class="paramname"><em>certificate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
+          <td class="paramname"><em>privateKey</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adds the security policy <code>SecurityPolicy#Basic128Rsa15</code> to the server. </p>
+<p>A server certificate may be supplied but is optional.</p>
+<p>Certificate verification should be configured before calling this function. See PKI plugin.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">config</td><td>The configuration to manipulate </td></tr>
+    <tr><td class="paramname">certificate</td><td>The server certificate. </td></tr>
+    <tr><td class="paramname">privateKey</td><td>The private key that corresponds to the certificate. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad42ba7db07c67ec76bfe3e06b49f9668" name="ad42ba7db07c67ec76bfe3e06b49f9668"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad42ba7db07c67ec76bfe3e06b49f9668">&#9670;&#160;</a></span>UA_ServerConfig_addSecurityPolicyBasic256()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_ServerConfig_addSecurityPolicyBasic256 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> *&#160;</td>
+          <td class="paramname"><em>config</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
+          <td class="paramname"><em>certificate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
+          <td class="paramname"><em>privateKey</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adds the security policy <code>SecurityPolicy#Basic256</code> to the server. </p>
+<p>A server certificate may be supplied but is optional.</p>
+<p>Certificate verification should be configured before calling this function. See PKI plugin.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">config</td><td>The configuration to manipulate </td></tr>
+    <tr><td class="paramname">certificate</td><td>The server certificate. </td></tr>
+    <tr><td class="paramname">privateKey</td><td>The private key that corresponds to the certificate. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a79ab0f62c034aa2b8b6dcd31986f53c7" name="a79ab0f62c034aa2b8b6dcd31986f53c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79ab0f62c034aa2b8b6dcd31986f53c7">&#9670;&#160;</a></span>UA_ServerConfig_addSecurityPolicyBasic256Sha256()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_ServerConfig_addSecurityPolicyBasic256Sha256 </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> *&#160;</td>
+          <td class="paramname"><em>config</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
+          <td class="paramname"><em>certificate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
+          <td class="paramname"><em>privateKey</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adds the security policy <code>SecurityPolicy#Basic256Sha256</code> to the server. </p>
+<p>A server certificate may be supplied but is optional.</p>
+<p>Certificate verification should be configured before calling this function. See PKI plugin.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">config</td><td>The configuration to manipulate </td></tr>
+    <tr><td class="paramname">certificate</td><td>The server certificate. </td></tr>
+    <tr><td class="paramname">privateKey</td><td>The private key that corresponds to the certificate. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a85e3756317030827c424d7db784b5aa9" name="a85e3756317030827c424d7db784b5aa9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a85e3756317030827c424d7db784b5aa9">&#9670;&#160;</a></span>UA_ServerConfig_addSecurityPolicyNone()</h2>
 
@@ -322,6 +559,82 @@ Variables</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a5bbc6fd0418849740ba97856f6804386" name="a5bbc6fd0418849740ba97856f6804386"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bbc6fd0418849740ba97856f6804386">&#9670;&#160;</a></span>UA_ServerConfig_setDefaultWithSecurityPolicies()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_ServerConfig_setDefaultWithSecurityPolicies </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__ServerConfig.html">UA_ServerConfig</a> *&#160;</td>
+          <td class="paramname"><em>conf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a>&#160;</td>
+          <td class="paramname"><em>portNumber</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
+          <td class="paramname"><em>certificate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
+          <td class="paramname"><em>privateKey</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
+          <td class="paramname"><em>trustList</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>trustListSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
+          <td class="paramname"><em>issuerList</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>issuerListSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
+          <td class="paramname"><em>revocationList</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>revocationListSize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

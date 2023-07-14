@@ -9,5 +9,6 @@ var searchData=
   ['yarrayitemtype_5ftitle_6',['YArrayItemType_Title',['../group__NodeIds.html#gga0d0700fca6d7287fc710bdb115beab85a89ab8dd20032deb11acc52628f8206b9',1,'opcua']]],
   ['yarrayitemtype_5fvalueprecision_7',['YArrayItemType_ValuePrecision',['../group__NodeIds.html#gga0d0700fca6d7287fc710bdb115beab85a77ced2c633b9acfce19b7af2235711ef',1,'opcua']]],
   ['yarrayitemtype_5fxaxisdefinition_8',['YArrayItemType_XAxisDefinition',['../group__NodeIds.html#gga0d0700fca6d7287fc710bdb115beab85aefbdf526066c7aed16c24d4f69326a10',1,'opcua']]],
-  ['year_9',['year',['open62541/structUA__DateTimeStruct.html#a770b483a1e65dfb8c4992e1a79dc35ee',0,'UA_DateTimeStruct']]]
+  ['year_9',['year',['open62541/structUA__DateTimeStruct.html#a770b483a1e65dfb8c4992e1a79dc35ee',0,'UA_DateTimeStruct']]],
+  ['yield_10',['yield',['open62541/structUA__PubSubChannel.html#aa11aa8fa0db9f1a43a4b1353b67489b4',0,'UA_PubSubChannel']]]
 ];

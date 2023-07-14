@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.4.1</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.5.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -82,45 +82,31 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>High-level subscription class.  
- <a href="classopcua_1_1Subscription.html#details">More...</a></p>
-
 <p><code>#include &lt;<a class="el" href="Subscription_8h_source.html">Subscription.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aa269931bc6742c8384d9cc49867273c2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Subscription.html#aa269931bc6742c8384d9cc49867273c2">Subscription</a> (ServerOrClient &amp;connection, uint32_t subscriptionId) noexcept</td></tr>
-<tr class="memdesc:aa269931bc6742c8384d9cc49867273c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrap an existing subscription.  <br /></td></tr>
 <tr class="separator:aa269931bc6742c8384d9cc49867273c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29299d3e032cba1478c57b656576960c"><td class="memItemLeft" align="right" valign="top">ServerOrClient &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Subscription.html#a29299d3e032cba1478c57b656576960c">getConnection</a> () noexcept</td></tr>
-<tr class="memdesc:a29299d3e032cba1478c57b656576960c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the server/client instance.  <br /></td></tr>
 <tr class="separator:a29299d3e032cba1478c57b656576960c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a5500ecf7bea6a2e6f2da52e7f009f1"><td class="memItemLeft" align="right" valign="top">const ServerOrClient &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Subscription.html#a6a5500ecf7bea6a2e6f2da52e7f009f1">getConnection</a> () const noexcept</td></tr>
-<tr class="memdesc:a6a5500ecf7bea6a2e6f2da52e7f009f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the server/client instance.  <br /></td></tr>
 <tr class="separator:a6a5500ecf7bea6a2e6f2da52e7f009f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a476a433e5fc17675a8b4c10c16e23b96"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Subscription.html#a476a433e5fc17675a8b4c10c16e23b96">getSubscriptionId</a> () const noexcept</td></tr>
-<tr class="memdesc:a476a433e5fc17675a8b4c10c16e23b96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the server-assigned identifier of this subscription.  <br /></td></tr>
 <tr class="separator:a476a433e5fc17675a8b4c10c16e23b96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a414d28b4e6bde2ffdaa1c72ac6df6903"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; ServerOrClient &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Subscription.html#a414d28b4e6bde2ffdaa1c72ac6df6903">getMonitoredItems</a> ()</td></tr>
-<tr class="memdesc:a414d28b4e6bde2ffdaa1c72ac6df6903"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all local monitored items.  <br /></td></tr>
 <tr class="separator:a414d28b4e6bde2ffdaa1c72ac6df6903"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2be955f3eb26c7dcc9dd61979b5d3d7b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Subscription.html#a2be955f3eb26c7dcc9dd61979b5d3d7b">setSubscriptionParameters</a> (<a class="el" href="namespaceopcua.html#a26c94e4458518c4f9f72e77e2446f6db">SubscriptionParameters</a> &amp;parameters)</td></tr>
-<tr class="memdesc:a2be955f3eb26c7dcc9dd61979b5d3d7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modify this subscription.  <br /></td></tr>
 <tr class="separator:a2be955f3eb26c7dcc9dd61979b5d3d7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9bd5cff80431adb322fce04f4e1e39d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Subscription.html#a9bd5cff80431adb322fce04f4e1e39d9">setPublishingMode</a> (bool publishing)</td></tr>
-<tr class="memdesc:a9bd5cff80431adb322fce04f4e1e39d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable/disable publishing of notification messages.  <br /></td></tr>
 <tr class="separator:a9bd5cff80431adb322fce04f4e1e39d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45de2bdbb14e9bdd505d4cc5d3d689ae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; ServerOrClient &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Subscription.html#a45de2bdbb14e9bdd505d4cc5d3d689ae">subscribeDataChange</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61">AttributeId</a> attribute, <a class="el" href="namespaceopcua.html#a23647db4c1e20e3f56c8baac3556f705">DataChangeCallback</a>&lt; ServerOrClient &gt; onDataChange)</td></tr>
-<tr class="memdesc:a45de2bdbb14e9bdd505d4cc5d3d689ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a monitored item for data change notifications (default settings).  <br /></td></tr>
 <tr class="separator:a45de2bdbb14e9bdd505d4cc5d3d689ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a213cd3d862d3a7fc97c55633d1520ddc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; ServerOrClient &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Subscription.html#a213cd3d862d3a7fc97c55633d1520ddc">subscribeDataChange</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61">AttributeId</a> attribute, <a class="el" href="namespaceopcua.html#ac7b72cb1f86ea818f1386642867ff381">MonitoringMode</a> monitoringMode, <a class="el" href="namespaceopcua.html#a735c9cf90bca3e9ce3f281f9417509b3">MonitoringParameters</a> &amp;parameters, <a class="el" href="namespaceopcua.html#a23647db4c1e20e3f56c8baac3556f705">DataChangeCallback</a>&lt; ServerOrClient &gt; onDataChange)</td></tr>
-<tr class="memdesc:a213cd3d862d3a7fc97c55633d1520ddc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a monitored item for data change notifications.  <br /></td></tr>
 <tr class="separator:a213cd3d862d3a7fc97c55633d1520ddc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a889d7a71f80323ec01977a5f280de821"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; ServerOrClient &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Subscription.html#a889d7a71f80323ec01977a5f280de821">subscribeEvent</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="namespaceopcua.html#ac7b72cb1f86ea818f1386642867ff381">MonitoringMode</a> monitoringMode, <a class="el" href="namespaceopcua.html#a735c9cf90bca3e9ce3f281f9417509b3">MonitoringParameters</a> &amp;parameters, <a class="el" href="namespaceopcua.html#a1d215badd4c6239f6cd158beeeece034">EventCallback</a>&lt; ServerOrClient &gt; onEvent)</td></tr>
-<tr class="memdesc:a889d7a71f80323ec01977a5f280de821"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a monitored item for event notifications.  <br /></td></tr>
 <tr class="separator:a889d7a71f80323ec01977a5f280de821"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4a2f23ecdf60d1d4756d26426870880"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Subscription.html#ae4a2f23ecdf60d1d4756d26426870880">deleteSubscription</a> ()</td></tr>
-<tr class="memdesc:ae4a2f23ecdf60d1d4756d26426870880"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete this subscription.  <br /></td></tr>
 <tr class="separator:ae4a2f23ecdf60d1d4756d26426870880"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -133,7 +119,7 @@ class opcua::Subscription&lt; ServerOrClient &gt;</div><p>High-level subscriptio
 <li><a class="el" href="group__MonitoredItem.html">MonitoredItem service set</a> </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="Subscription_8h_source.html#l00051">51</a> of file <a class="el" href="Subscription_8h_source.html">Subscription.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Subscription_8h_source.html#l00054">54</a> of file <a class="el" href="Subscription_8h_source.html">Subscription.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa269931bc6742c8384d9cc49867273c2" name="aa269931bc6742c8384d9cc49867273c2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa269931bc6742c8384d9cc49867273c2">&#9670;&#160;</a></span>Subscription()</h2>

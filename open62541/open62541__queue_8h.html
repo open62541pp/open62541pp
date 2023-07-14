@@ -214,7 +214,6 @@ Macros</h2></td></tr>
 <tr class="memitem:af71bfd90dc9d00fb03545fe66c67d673"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="open62541__queue_8h.html#af71bfd90dc9d00fb03545fe66c67d673">TAILQ_ENTRY</a>(type)</td></tr>
 <tr class="separator:af71bfd90dc9d00fb03545fe66c67d673"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d6894360bd1c41e0e6f6d84998c1362"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="open62541__queue_8h.html#a7d6894360bd1c41e0e6f6d84998c1362">TAILQ_FIRST</a>(head)&#160;&#160;&#160;((head)-&gt;tqh_first)</td></tr>
-<tr class="memdesc:a7d6894360bd1c41e0e6f6d84998c1362"><td class="mdescLeft">&#160;</td><td class="mdescRight">tail queue access methods  <br /></td></tr>
 <tr class="separator:a7d6894360bd1c41e0e6f6d84998c1362"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4322b8461a6ab7632435ff4f57bb3a2e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="open62541__queue_8h.html#a4322b8461a6ab7632435ff4f57bb3a2e">TAILQ_END</a>(head)&#160;&#160;&#160;NULL</td></tr>
 <tr class="separator:a4322b8461a6ab7632435ff4f57bb3a2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -223,7 +222,6 @@ Macros</h2></td></tr>
 <tr class="memitem:ac9154a9aebb3c15a3f2356349a1cc14f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="open62541__queue_8h.html#ac9154a9aebb3c15a3f2356349a1cc14f">TAILQ_LAST</a>(head,  headname)&#160;&#160;&#160;    (*(((struct headname *)((head)-&gt;tqh_last))-&gt;tqh_last))</td></tr>
 <tr class="separator:ac9154a9aebb3c15a3f2356349a1cc14f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a524f93a0c21c390683fab4c27e840a10"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="open62541__queue_8h.html#a524f93a0c21c390683fab4c27e840a10">TAILQ_PREV</a>(elm,  headname,  field)&#160;&#160;&#160;    (*(((struct headname *)((elm)-&gt;field.tqe_prev))-&gt;tqh_last))</td></tr>
-<tr class="memdesc:a524f93a0c21c390683fab4c27e840a10"><td class="mdescLeft">&#160;</td><td class="mdescRight">XXX.  <br /></td></tr>
 <tr class="separator:a524f93a0c21c390683fab4c27e840a10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3c9da7ac712eacbbad5cc54d7a3477e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="open62541__queue_8h.html#ac3c9da7ac712eacbbad5cc54d7a3477e">TAILQ_EMPTY</a>(head)&#160;&#160;&#160;    (<a class="el" href="open62541__queue_8h.html#a7d6894360bd1c41e0e6f6d84998c1362">TAILQ_FIRST</a>(head) == <a class="el" href="open62541__queue_8h.html#a4322b8461a6ab7632435ff4f57bb3a2e">TAILQ_END</a>(head))</td></tr>
 <tr class="separator:ac3c9da7ac712eacbbad5cc54d7a3477e"><td class="memSeparator" colspan="2">&#160;</td></tr>

@@ -87,8 +87,9 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ad0f7c5ae40a0fa3067d0ffaef1b3bf49"><td class="memItemLeft" align="right" valign="top"><a class="el" href="config_8h.html#aa397bffde7d792f38dcbb8e329486f9c">_UA_BEGIN_DECLS</a> UA_EXPORT void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pki__default_8h.html#ad0f7c5ae40a0fa3067d0ffaef1b3bf49">UA_CertificateVerification_AcceptAll</a> (<a class="el" href="structUA__CertificateVerification.html">UA_CertificateVerification</a> *cv)</td></tr>
-<tr class="memdesc:ad0f7c5ae40a0fa3067d0ffaef1b3bf49"><td class="mdescLeft">&#160;</td><td class="mdescRight">This work is licensed under a Creative Commons CCZero 1.0 Universal License.  <br /></td></tr>
 <tr class="separator:ad0f7c5ae40a0fa3067d0ffaef1b3bf49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a278a1f5809da17bfb28166d5f5231b5a"><td class="memItemLeft" align="right" valign="top">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="pki__default_8h.html#a278a1f5809da17bfb28166d5f5231b5a">UA_CertificateVerification_Trustlist</a> (<a class="el" href="structUA__CertificateVerification.html">UA_CertificateVerification</a> *cv, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *certificateTrustList, size_t certificateTrustListSize, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *certificateIssuerList, size_t certificateIssuerListSize, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *certificateRevocationList, size_t certificateRevocationListSize)</td></tr>
+<tr class="separator:a278a1f5809da17bfb28166d5f5231b5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="ad0f7c5ae40a0fa3067d0ffaef1b3bf49" name="ad0f7c5ae40a0fa3067d0ffaef1b3bf49"></a>
@@ -110,6 +111,67 @@ Functions</h2></td></tr>
 <p>This work is licensed under a Creative Commons CCZero 1.0 Universal License. </p>
 <p>See <a href="http://creativecommons.org/publicdomain/zero/1.0/">http://creativecommons.org/publicdomain/zero/1.0/</a> for more information.</p>
 <p>Copyright 2018 (c) Mark Giraud, Fraunhofer IOSB Copyright 2019 (c) Kalycito Infotech Private Limited Default implementation that accepts all certificates </p>
+
+</div>
+</div>
+<a id="a278a1f5809da17bfb28166d5f5231b5a" name="a278a1f5809da17bfb28166d5f5231b5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a278a1f5809da17bfb28166d5f5231b5a">&#9670;&#160;</a></span>UA_CertificateVerification_Trustlist()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_CertificateVerification_Trustlist </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__CertificateVerification.html">UA_CertificateVerification</a> *&#160;</td>
+          <td class="paramname"><em>cv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
+          <td class="paramname"><em>certificateTrustList</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>certificateTrustListSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
+          <td class="paramname"><em>certificateIssuerList</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>certificateIssuerListSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
+          <td class="paramname"><em>certificateRevocationList</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>certificateRevocationListSize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Accept certificates based on a trust-list and a revocation-list. </p>
+<p>Based on mbedTLS. </p>
 
 </div>
 </div>

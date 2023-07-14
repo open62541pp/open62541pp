@@ -1,8 +1,9 @@
 <map id="Services" name="Services">
 <area shape="rect" id="Node000002" href="$group__Attribute.html" title="Read and write node attributes." alt="" coords="162,5,317,31"/>
-<area shape="rect" id="Node000003" href="$group__MonitoredItem.html" title="Subscribe to data and events." alt="" coords="143,55,336,80"/>
-<area shape="rect" id="Node000004" href="$group__NodeManagement.html" title="Add/delete nodes and references." alt="" coords="131,104,348,129"/>
-<area shape="rect" id="Node000001" title="OPC UA services as free functions." alt="" coords="5,104,83,129"/>
-<area shape="rect" id="Node000005" href="$group__Subscription.html" title="Report notifications to the client." alt="" coords="151,153,328,179"/>
-<area shape="rect" id="Node000006" href="$group__View.html" title="Browse the address space / view created by a server." alt="" coords="175,203,304,228"/>
+<area shape="rect" id="Node000003" href="$group__Method.html" title="Call (invoke) methods." alt="" coords="166,55,313,80"/>
+<area shape="rect" id="Node000004" href="$group__MonitoredItem.html" title="Subscribe to data and events." alt="" coords="143,104,336,129"/>
+<area shape="rect" id="Node000005" href="$group__NodeManagement.html" title="Add/delete nodes and references." alt="" coords="131,153,348,179"/>
+<area shape="rect" id="Node000001" title="OPC UA services as free functions." alt="" coords="5,129,83,155"/>
+<area shape="rect" id="Node000006" href="$group__Subscription.html" title="Report notifications to the client." alt="" coords="151,203,328,228"/>
+<area shape="rect" id="Node000007" href="$group__View.html" title="Browse the address space / view created by a server." alt="" coords="175,252,304,277"/>
 </map>

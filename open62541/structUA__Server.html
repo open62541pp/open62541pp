@@ -86,6 +86,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a30525fc0415c544489856533a7611da1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abce5bdf34c7baee7f77d491d8538da5a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Server.html#abce5bdf34c7baee7f77d491d8538da5a">LIST_HEAD</a> (session_list, <a class="el" href="structsession__list__entry.html">session_list_entry</a>) sessions</td></tr>
 <tr class="separator:abce5bdf34c7baee7f77d491d8538da5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcc875966c331b879b276de180aa6c1f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Server.html#afcc875966c331b879b276de180aa6c1f">LIST_HEAD</a> (, <a class="el" href="structUA__Subscription.html">UA_Subscription</a>) subscriptions</td></tr>
+<tr class="separator:afcc875966c331b879b276de180aa6c1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a772dd349eaeef1a8289488056edb888c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Server.html#a772dd349eaeef1a8289488056edb888c">LIST_HEAD</a> (, <a class="el" href="structUA__MonitoredItem.html">UA_MonitoredItem</a>) localMonitoredItems</td></tr>
+<tr class="separator:a772dd349eaeef1a8289488056edb888c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Data Fields</h2></td></tr>
@@ -115,6 +119,18 @@ Data Fields</h2></td></tr>
 <tr class="separator:a9f6d6c654442fd2161cb712edd3040e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeec88e0a089ef49d0e05155d65cc76d0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Server.html#aeec88e0a089ef49d0e05155d65cc76d0">bootstrapNS0</a></td></tr>
 <tr class="separator:aeec88e0a089ef49d0e05155d65cc76d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a471ea4a1e3c40a59b6d8c4a85b440a74"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__DiscoveryManager.html">UA_DiscoveryManager</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Server.html#a471ea4a1e3c40a59b6d8c4a85b440a74">discoveryManager</a></td></tr>
+<tr class="separator:a471ea4a1e3c40a59b6d8c4a85b440a74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f8b3edcc7d73bd07ebb8c23ca0a04a5"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Server.html#a9f8b3edcc7d73bd07ebb8c23ca0a04a5">subscriptionsSize</a></td></tr>
+<tr class="separator:a9f8b3edcc7d73bd07ebb8c23ca0a04a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab58e47db3cf4691584ab8c0b02669329"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Server.html#ab58e47db3cf4691584ab8c0b02669329">monitoredItemsSize</a></td></tr>
+<tr class="separator:ab58e47db3cf4691584ab8c0b02669329"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3321b79f73c482d34cff240705ffbd7c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Server.html#a3321b79f73c482d34cff240705ffbd7c">lastSubscriptionId</a></td></tr>
+<tr class="separator:a3321b79f73c482d34cff240705ffbd7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8dc0b8d25f402ae96f90a46be4655207"><td class="memItemLeft" align="right" valign="top"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Server.html#a8dc0b8d25f402ae96f90a46be4655207">lastLocalMonitoredItemId</a></td></tr>
+<tr class="separator:a8dc0b8d25f402ae96f90a46be4655207"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75c3e54835302ed626283ea12c3bba53"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__PubSubManager.html">UA_PubSubManager</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Server.html#a75c3e54835302ed626283ea12c3bba53">pubSubManager</a></td></tr>
+<tr class="separator:a75c3e54835302ed626283ea12c3bba53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae91dcf73aa27d9de44f034e1275792ac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__NetworkStatistics.html">UA_NetworkStatistics</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Server.html#ae91dcf73aa27d9de44f034e1275792ac">networkStatistics</a></td></tr>
 <tr class="separator:ae91dcf73aa27d9de44f034e1275792ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5bc84c99e0b4194f67880db6b7d30106"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUA__SecureChannelStatistics.html">UA_SecureChannelStatistics</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUA__Server.html#a5bc84c99e0b4194f67880db6b7d30106">secureChannelStatistics</a></td></tr>
@@ -126,8 +142,44 @@ Data Fields</h2></td></tr>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00085">85</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a772dd349eaeef1a8289488056edb888c" name="a772dd349eaeef1a8289488056edb888c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a772dd349eaeef1a8289488056edb888c">&#9670;&#160;</a></span>LIST_HEAD() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_Server::LIST_HEAD </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__MonitoredItem.html">UA_MonitoredItem</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afcc875966c331b879b276de180aa6c1f" name="afcc875966c331b879b276de180aa6c1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcc875966c331b879b276de180aa6c1f">&#9670;&#160;</a></span>LIST_HEAD() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_Server::LIST_HEAD </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Subscription.html">UA_Subscription</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="abce5bdf34c7baee7f77d491d8538da5a" name="abce5bdf34c7baee7f77d491d8538da5a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abce5bdf34c7baee7f77d491d8538da5a">&#9670;&#160;</a></span>LIST_HEAD()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abce5bdf34c7baee7f77d491d8538da5a">&#9670;&#160;</a></span>LIST_HEAD() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -237,6 +289,22 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
+<a id="a471ea4a1e3c40a59b6d8c4a85b440a74" name="a471ea4a1e3c40a59b6d8c4a85b440a74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a471ea4a1e3c40a59b6d8c4a85b440a74">&#9670;&#160;</a></span>discoveryManager</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUA__DiscoveryManager.html">UA_DiscoveryManager</a> UA_Server::discoveryManager</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00124">124</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+
+</div>
+</div>
 <a id="a6f29078d43e755476d40ebabb489368b" name="a6f29078d43e755476d40ebabb489368b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6f29078d43e755476d40ebabb489368b">&#9670;&#160;</a></span>endTime</h2>
 
@@ -269,6 +337,38 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
+<a id="a8dc0b8d25f402ae96f90a46be4655207" name="a8dc0b8d25f402ae96f90a46be4655207"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8dc0b8d25f402ae96f90a46be4655207">&#9670;&#160;</a></span>lastLocalMonitoredItemId</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> UA_Server::lastLocalMonitoredItemId</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00138">138</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+
+</div>
+</div>
+<a id="a3321b79f73c482d34cff240705ffbd7c" name="a3321b79f73c482d34cff240705ffbd7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3321b79f73c482d34cff240705ffbd7c">&#9670;&#160;</a></span>lastSubscriptionId</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> UA_Server::lastSubscriptionId</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00134">134</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+
+</div>
+</div>
 <a id="a5eff97eaec190fd76db3672c3ec46ca2" name="a5eff97eaec190fd76db3672c3ec46ca2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5eff97eaec190fd76db3672c3ec46ca2">&#9670;&#160;</a></span>lastTokenId</h2>
 
@@ -282,6 +382,22 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00097">97</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+
+</div>
+</div>
+<a id="ab58e47db3cf4691584ab8c0b02669329" name="ab58e47db3cf4691584ab8c0b02669329"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab58e47db3cf4691584ab8c0b02669329">&#9670;&#160;</a></span>monitoredItemsSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t UA_Server::monitoredItemsSize</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00130">130</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
@@ -330,6 +446,22 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00157">157</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+
+</div>
+</div>
+<a id="a75c3e54835302ed626283ea12c3bba53" name="a75c3e54835302ed626283ea12c3bba53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75c3e54835302ed626283ea12c3bba53">&#9670;&#160;</a></span>pubSubManager</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structUA__PubSubManager.html">UA_PubSubManager</a> UA_Server::pubSubManager</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00148">148</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
@@ -410,6 +542,22 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00092">92</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
+
+</div>
+</div>
+<a id="a9f8b3edcc7d73bd07ebb8c23ca0a04a5" name="a9f8b3edcc7d73bd07ebb8c23ca0a04a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f8b3edcc7d73bd07ebb8c23ca0a04a5">&#9670;&#160;</a></span>subscriptionsSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t UA_Server::subscriptionsSize</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__server__internal_8h_source.html#l00129">129</a> of file <a class="el" href="ua__server__internal_8h_source.html">ua_server_internal.h</a>.</p>
 
 </div>
 </div>
