@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Call method (#55)
   - `services::call`
   - `Node::callMethod`
+- Set client timeout with `Client::setTimeout` (#56)
 - `Variant`:
   - Get/set wrapper types without copy (`Variant::getScalar`, `Variant::getArray`, `Variant::setScalar`, `Variant::setArray`)
   - `const` version of `Variant::getScalar`, `Variant::getArray`
@@ -23,6 +24,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Examples
   - `server_method` (#55)
   - `client_method` (#55)
+
+### Fixed
+
+- Build with `UA_ENABLE_SUBSCRIPTIONS` or `UA_ENABLE_METHODCALLS` disabled
+- Export symbols of shared library on windows (#58)
 
 ## [0.4.1] - 2023-05-30
 
