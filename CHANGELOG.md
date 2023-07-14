@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0] - 2023-07-14
+
 ### Added
 
 - `asNative` function to cast wrapper to native objects
@@ -196,7 +198,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial public release
 
-[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.4.1...HEAD
+[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.5.0
 [0.4.1]: https://github.com/open62541pp/open62541pp/releases/tag/v0.4.1
 [0.4.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.4.0
 [0.3.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.3.0
