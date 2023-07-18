@@ -63,9 +63,10 @@ public:
     Node addFolder(
         const NodeId& id,
         std::string_view browseName,
-        const NodeId& referenceType = ReferenceTypeId::HasComponent
+        const NodeId& referenceType = ReferenceTypeId::HasComponent,
+        const ObjectAttributes& attributes = {}
     ) {
-        services::addFolder(connection_, nodeId_, id, browseName, referenceType);
+        services::addFolder(connection_, nodeId_, id, browseName, referenceType, attributes);
         return {connection_, id, false};
     }
 
@@ -74,9 +75,12 @@ public:
         const NodeId& id,
         std::string_view browseName,
         const NodeId& objectType = ObjectTypeId::BaseObjectType,
-        const NodeId& referenceType = ReferenceTypeId::HasComponent
+        const NodeId& referenceType = ReferenceTypeId::HasComponent,
+        const ObjectAttributes& attributes = {}
     ) {
-        services::addObject(connection_, nodeId_, id, browseName, objectType, referenceType);
+        services::addObject(
+            connection_, nodeId_, id, browseName, objectType, referenceType, attributes
+        );
         return {connection_, id, false};
     }
 
@@ -85,15 +89,20 @@ public:
         const NodeId& id,
         std::string_view browseName,
         const NodeId& variableType = VariableTypeId::BaseDataVariableType,
-        const NodeId& referenceType = ReferenceTypeId::HasComponent
+        const NodeId& referenceType = ReferenceTypeId::HasComponent,
+        const VariableAttributes& attributes = {}
     ) {
-        services::addVariable(connection_, nodeId_, id, browseName, variableType, referenceType);
+        services::addVariable(
+            connection_, nodeId_, id, browseName, variableType, referenceType, attributes
+        );
         return {connection_, id, false};
     }
 
     /// @copydoc services::addProperty
-    Node addProperty(const NodeId& id, std::string_view browseName) {
-        services::addProperty(connection_, nodeId_, id, browseName);
+    Node addProperty(
+        const NodeId& id, std::string_view browseName, const VariableAttributes& attributes = {}
+    ) {
+        services::addProperty(connection_, nodeId_, id, browseName, attributes);
         return {connection_, id, false};
     }
 
@@ -101,9 +110,10 @@ public:
     Node addObjectType(
         const NodeId& id,
         std::string_view browseName,
-        const NodeId& referenceType = ReferenceTypeId::HasSubtype
+        const NodeId& referenceType = ReferenceTypeId::HasSubtype,
+        const ObjectTypeAttributes& attributes = {}
     ) {
-        services::addObjectType(connection_, nodeId_, id, browseName, referenceType);
+        services::addObjectType(connection_, nodeId_, id, browseName, referenceType, attributes);
         return {connection_, id, false};
     }
 
@@ -112,10 +122,11 @@ public:
         const NodeId& id,
         std::string_view browseName,
         const NodeId& variableType = VariableTypeId::BaseDataVariableType,
-        const NodeId& referenceType = ReferenceTypeId::HasSubtype
+        const NodeId& referenceType = ReferenceTypeId::HasSubtype,
+        const VariableTypeAttributes& attributes = {}
     ) {
         services::addVariableType(
-            connection_, nodeId_, id, browseName, variableType, referenceType
+            connection_, nodeId_, id, browseName, variableType, referenceType, attributes
         );
         return {connection_, id, false};
     }
@@ -128,7 +139,8 @@ public:
         services::MethodCallback callback,
         const std::vector<Argument>& inputArguments,
         const std::vector<Argument>& outputArguments,
-        const NodeId& referenceType = ReferenceTypeId::HasComponent
+        const NodeId& referenceType = ReferenceTypeId::HasComponent,
+        const MethodAttributes& attributes = {}
     ) {
         services::addMethod(
             connection_,
@@ -138,7 +150,8 @@ public:
             std::move(callback),
             inputArguments,
             outputArguments,
-            referenceType
+            referenceType,
+            attributes
         );
         return {connection_, id, false};
     }

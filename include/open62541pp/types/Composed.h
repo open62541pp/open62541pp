@@ -183,6 +183,9 @@ class ObjectAttributes : public TypeWrapper<UA_ObjectAttributes, UA_TYPES_OBJECT
 public:
     using TypeWrapperBase::TypeWrapperBase;
 
+    /// Construct with default attribute definitions.
+    ObjectAttributes();
+
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR(uint8_t, EventNotifier, eventNotifier, UA_NODEATTRIBUTESMASK_EVENTNOTIFIER)
 };
@@ -194,6 +197,9 @@ public:
 class VariableAttributes : public TypeWrapper<UA_VariableAttributes, UA_TYPES_VARIABLEATTRIBUTES> {
 public:
     using TypeWrapperBase::TypeWrapperBase;
+
+    /// Construct with default attribute definitions.
+    VariableAttributes();
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR_WRAPPER(Variant, Value, value, UA_NODEATTRIBUTESMASK_VALUE)
@@ -225,6 +231,9 @@ class MethodAttributes : public TypeWrapper<UA_MethodAttributes, UA_TYPES_METHOD
 public:
     using TypeWrapperBase::TypeWrapperBase;
 
+    /// Construct with default attribute definitions.
+    MethodAttributes();
+
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR(bool, Executable, executable, UA_NODEATTRIBUTESMASK_EXECUTABLE)
     UAPP_NODEATTR(bool, UserExecutable, userExecutable, UA_NODEATTRIBUTESMASK_USEREXECUTABLE)
@@ -239,6 +248,9 @@ class ObjectTypeAttributes
 public:
     using TypeWrapperBase::TypeWrapperBase;
 
+    /// Construct with default attribute definitions.
+    ObjectTypeAttributes();
+
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR(bool, IsAbstract, isAbstract, UA_NODEATTRIBUTESMASK_ISABSTRACT)
 };
@@ -251,6 +263,9 @@ class VariableTypeAttributes
     : public TypeWrapper<UA_VariableTypeAttributes, UA_TYPES_VARIABLETYPEATTRIBUTES> {
 public:
     using TypeWrapperBase::TypeWrapperBase;
+
+    /// Construct with default attribute definitions.
+    VariableTypeAttributes();
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR_WRAPPER(Variant, Value, value, UA_NODEATTRIBUTESMASK_VALUE)

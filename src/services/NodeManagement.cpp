@@ -22,7 +22,8 @@ void addObject<Server>(
     const NodeId& id,
     std::string_view browseName,
     const NodeId& objectType,
-    const NodeId& referenceType
+    const NodeId& referenceType,
+    const ObjectAttributes& attributes
 ) {
     const auto status = UA_Server_addObjectNode(
         server.handle(),
@@ -31,7 +32,7 @@ void addObject<Server>(
         referenceType,
         QualifiedName(id.getNamespaceIndex(), browseName),
         objectType,
-        UA_ObjectAttributes_default,
+        attributes,
         nullptr,  // node context
         nullptr  // output new node id
     );
@@ -45,7 +46,8 @@ void addObject<Client>(
     const NodeId& id,
     std::string_view browseName,
     const NodeId& objectType,
-    const NodeId& referenceType
+    const NodeId& referenceType,
+    const ObjectAttributes& attributes
 ) {
     const auto status = UA_Client_addObjectNode(
         client.handle(),
@@ -54,7 +56,7 @@ void addObject<Client>(
         referenceType,
         QualifiedName(id.getNamespaceIndex(), browseName),
         objectType,
-        UA_ObjectAttributes_default,
+        attributes,
         nullptr  // output new node id
     );
     detail::throwOnBadStatus(status);
@@ -67,7 +69,8 @@ void addVariable<Server>(
     const NodeId& id,
     std::string_view browseName,
     const NodeId& variableType,
-    const NodeId& referenceType
+    const NodeId& referenceType,
+    const VariableAttributes& attributes
 ) {
     const auto status = UA_Server_addVariableNode(
         server.handle(),
@@ -76,7 +79,7 @@ void addVariable<Server>(
         referenceType,
         QualifiedName(id.getNamespaceIndex(), browseName),
         variableType,
-        UA_VariableAttributes_default,
+        attributes,
         nullptr,  // node context
         nullptr  // output new node id
     );
@@ -90,7 +93,8 @@ void addVariable<Client>(
     const NodeId& id,
     std::string_view browseName,
     const NodeId& variableType,
-    const NodeId& referenceType
+    const NodeId& referenceType,
+    const VariableAttributes& attributes
 ) {
     const auto status = UA_Client_addVariableNode(
         client.handle(),
@@ -99,7 +103,7 @@ void addVariable<Client>(
         referenceType,
         QualifiedName(id.getNamespaceIndex(), browseName),
         variableType,
-        UA_VariableAttributes_default,
+        attributes,
         nullptr  // output new node id
     );
     detail::throwOnBadStatus(status);
@@ -111,7 +115,8 @@ void addObjectType<Server>(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    const NodeId& referenceType
+    const NodeId& referenceType,
+    const ObjectTypeAttributes& attributes
 ) {
     const auto status = UA_Server_addObjectTypeNode(
         server.handle(),
@@ -119,7 +124,7 @@ void addObjectType<Server>(
         parentId,
         referenceType,
         QualifiedName(id.getNamespaceIndex(), browseName),
-        UA_ObjectTypeAttributes_default,
+        attributes,
         nullptr,  // node context
         nullptr  // output new node id
     );
@@ -132,7 +137,8 @@ void addObjectType<Client>(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    const NodeId& referenceType
+    const NodeId& referenceType,
+    const ObjectTypeAttributes& attributes
 ) {
     const auto status = UA_Client_addObjectTypeNode(
         client.handle(),
@@ -140,7 +146,7 @@ void addObjectType<Client>(
         parentId,
         referenceType,
         QualifiedName(id.getNamespaceIndex(), browseName),
-        UA_ObjectTypeAttributes_default,
+        attributes,
         nullptr  // output new node id
     );
     detail::throwOnBadStatus(status);
@@ -153,7 +159,8 @@ void addVariableType<Server>(
     const NodeId& id,
     std::string_view browseName,
     const NodeId& variableType,
-    const NodeId& referenceType
+    const NodeId& referenceType,
+    const VariableTypeAttributes& attributes
 ) {
     const auto status = UA_Server_addVariableTypeNode(
         server.handle(),
@@ -162,7 +169,7 @@ void addVariableType<Server>(
         referenceType,
         QualifiedName(id.getNamespaceIndex(), browseName),
         variableType,
-        UA_VariableTypeAttributes_default,
+        attributes,
         nullptr,  // node context
         nullptr  // output new node id
     );
@@ -176,7 +183,8 @@ void addVariableType<Client>(
     const NodeId& id,
     std::string_view browseName,
     const NodeId& variableType,
-    const NodeId& referenceType
+    const NodeId& referenceType,
+    const VariableTypeAttributes& attributes
 ) {
     (void)variableType;  // TODO: variableType is currently unused
     const auto status = UA_Client_addVariableTypeNode(
@@ -185,7 +193,7 @@ void addVariableType<Client>(
         parentId,
         referenceType,
         QualifiedName(id.getNamespaceIndex(), browseName),
-        UA_VariableTypeAttributes_default,
+        attributes,
         nullptr  // output new node id
     );
     detail::throwOnBadStatus(status);
@@ -236,7 +244,8 @@ void addMethod(
     MethodCallback callback,
     const std::vector<Argument>& inputArguments,
     const std::vector<Argument>& outputArguments,
-    const NodeId& referenceType
+    const NodeId& referenceType,
+    const MethodAttributes& attributes
 ) {
     auto nodeContext = std::make_unique<ServerContext::NodeContext>();
     nodeContext->methodCallback = std::move(callback);
@@ -246,7 +255,7 @@ void addMethod(
         parentId,
         referenceType,
         QualifiedName(id.getNamespaceIndex(), browseName),
-        UA_MethodAttributes_default,
+        attributes,
         methodCallback,
         inputArguments.size(),
         inputArguments.data()->handle(),
@@ -268,7 +277,8 @@ void addMethod(
     MethodCallback callback,  // NOLINT
     const std::vector<Argument>& inputArguments,
     const std::vector<Argument>& outputArguments,
-    const NodeId& referenceType
+    const NodeId& referenceType,
+    const MethodAttributes& attributes
 ) {
     // callback can be added later by server with UA_Server_setMethodNodeCallback
     (void)callback;
@@ -281,7 +291,7 @@ void addMethod(
         parentId,
         referenceType,
         QualifiedName(id.getNamespaceIndex(), browseName),
-        UA_MethodAttributes_default,
+        attributes,
         nullptr  // outNewNodeId
     );
     detail::throwOnBadStatus(status);
