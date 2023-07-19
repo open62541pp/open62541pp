@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "open62541pp/Auth.h"
+#include "open62541pp/Common.h"
 #include "open62541pp/Config.h"
 #include "open62541pp/Logger.h"
 #include "open62541pp/Subscription.h"
@@ -34,8 +35,38 @@ using StateCallback = std::function<void()>;
  */
 class Client {
 public:
-    /// Create client with default configuration.
+    /**
+     * Create client with default configuration (no encryption).
+     * Security policies:
+     * - [None](http://opcfoundation.org/UA/SecurityPolicy#None)
+     */
     Client();
+
+#ifdef UA_ENABLE_ENCRYPTION
+    /**
+     * Create client with encryption enabled (PKI).
+     * Security policies:
+     * - [None](http://opcfoundation.org/UA/SecurityPolicy#None)
+     * - [Basic128Rsa15](http://opcfoundation.org/UA/SecurityPolicy#Basic128Rsa15)
+     * - [Basic256](http://opcfoundation.org/UA/SecurityPolicy#Basic256)
+     * - [Basic256Sha256](http://opcfoundation.org/UA/SecurityPolicy#Basic256Sha256)
+     * - [Aes128_Sha256_RsaOaep](http://opcfoundation.org/UA/SecurityPolicy#Aes128_Sha256_RsaOaep)
+     *
+     * @param certificate X.509 v3 certificate in `DER` encoded format
+     * @param privateKey Private key in `PEM` encoded format
+     * @param trustLists Certificate trust lists (CTL) in `DER` encoded format
+     * @param revocationLists Certificate revocation lists (CRL) in `DER` encoded format
+     *
+     * @see https://reference.opcfoundation.org/Core/Part2/v105/docs/8
+     * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/6.2
+     */
+    Client(
+        const ByteString& certificate,
+        const ByteString& privateKey,
+        const std::vector<ByteString>& trustLists,
+        const std::vector<ByteString>& revocationLists = {}
+    );
+#endif
 
     /**
      * Gets a list of all registered servers at the given server.
@@ -55,6 +86,9 @@ public:
 
     /// Set response timeout in milliseconds.
     void setTimeout(uint32_t milliseconds);
+
+    /// Set message security mode.
+    void setSecurityMode(MessageSecurityMode mode);
 
     /// Set a state callback that will be called after the client is connected.
     void onConnected(StateCallback callback);

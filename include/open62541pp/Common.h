@@ -198,6 +198,20 @@ enum class MonitoringMode : uint32_t {
     // clang-format on
 };
 
+/**
+ * Message security mode.
+ * @see UA_MessageSecurityMode
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.20
+ */
+enum class MessageSecurityMode : uint32_t {
+    // clang-format off
+    Invalid        = 0,  ///< Will always be rejected
+    None           = 1,  ///< No security applied
+    Sign           = 2,  ///< All messages are signed but not encrypted
+    SignAndEncrypt = 3,  ///< All messages are signed and encrypted
+    // clang-format on
+};
+
 namespace detail {
 
 using BuiltinTypes = std::tuple<

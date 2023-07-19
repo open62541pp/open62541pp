@@ -7,6 +7,7 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Node.h"
 #include "open62541pp/TypeConverter.h"
+#include "open62541pp/TypeWrapper.h"
 #include "open62541pp/services/Subscription.h"
 
 #include "ClientContext.h"
@@ -211,8 +212,32 @@ Client::Client()
     : connection_(std::make_shared<Connection>()) {
     const auto status = UA_ClientConfig_setDefault(getConfig(this));
     detail::throwOnBadStatus(status);
+    getConfig(this)->securityMode = UA_MESSAGESECURITYMODE_NONE;
     connection_->applyDefaults();
 }
+
+#ifdef UA_ENABLE_ENCRYPTION
+Client::Client(
+    const ByteString& certificate,
+    const ByteString& privateKey,
+    const std::vector<ByteString>& trustLists,
+    const std::vector<ByteString>& revocationLists
+)
+    : connection_(std::make_shared<Connection>()) {
+    const auto status = UA_ClientConfig_setDefaultEncryption(
+        getConfig(this),
+        certificate,
+        privateKey,
+        asNative(trustLists.data()),
+        trustLists.size(),
+        asNative(revocationLists.data()),
+        revocationLists.size()
+    );
+    detail::throwOnBadStatus(status);
+    getConfig(this)->securityMode = UA_MESSAGESECURITYMODE_SIGNANDENCRYPT;
+    connection_->applyDefaults();
+}
+#endif
 
 std::vector<ApplicationDescription> Client::findServers(std::string_view serverUrl) {
     UA_ApplicationDescription* array = nullptr;
@@ -254,6 +279,10 @@ void Client::setLogger(Logger logger) {
 
 void Client::setTimeout(uint32_t milliseconds) {
     getConfig(this)->timeout = milliseconds;
+}
+
+void Client::setSecurityMode(MessageSecurityMode mode) {
+    getConfig(this)->securityMode = static_cast<UA_MessageSecurityMode>(mode);
 }
 
 static void setStateCallback(ClientContext& context, ClientState state, StateCallback&& callback) {
