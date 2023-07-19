@@ -7,9 +7,11 @@
 #include "open62541pp/Config.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Node.h"
+#include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/helper.h"
 #include "open62541pp/services/Attribute.h"
 #include "open62541pp/types/Builtin.h"
+#include "open62541pp/types/Composed.h"
 #include "open62541pp/types/Variant.h"
 
 #include "CustomLogger.h"
@@ -50,17 +52,6 @@ public:
     Connection(Connection&&) noexcept = delete;
     Connection& operator=(const Connection&) = delete;
     Connection& operator=(Connection&&) noexcept = delete;
-
-    void applyDefaults() {
-        auto* config = getConfig(handle());
-#ifdef UA_ENABLE_SUBSCRIPTIONS
-        config->publishingIntervalLimits.min = 10;  // ms
-        config->samplingIntervalLimits.min = 10;  // ms
-#endif
-#if UAPP_OPEN62541_VER_GE(1, 2)
-        config->allowEmptyVariables = UA_RULEHANDLING_ACCEPT;  // allow empty variables
-#endif
-    }
 
     void runStartup() {
         const auto status = UA_Server_run_startup(handle());
@@ -121,18 +112,28 @@ private:
 
 /* ------------------------------------------- Server ------------------------------------------- */
 
+static void applyDefaults(UA_ServerConfig* config) {
+#ifdef UA_ENABLE_SUBSCRIPTIONS
+    config->publishingIntervalLimits.min = 10;  // ms
+    config->samplingIntervalLimits.min = 10;  // ms
+#endif
+#if UAPP_OPEN62541_VER_GE(1, 2)
+    config->allowEmptyVariables = UA_RULEHANDLING_ACCEPT;  // allow empty variables
+#endif
+}
+
 Server::Server()
     : connection_(std::make_shared<Connection>()) {
     const auto status = UA_ServerConfig_setDefault(getConfig(this));
     detail::throwOnBadStatus(status);
-    connection_->applyDefaults();
+    applyDefaults(getConfig(this));
 }
 
 Server::Server(uint16_t port)
     : connection_(std::make_shared<Connection>()) {
     const auto status = UA_ServerConfig_setMinimal(getConfig(this), port, nullptr);
     detail::throwOnBadStatus(status);
-    connection_->applyDefaults();
+    applyDefaults(getConfig(this));
 }
 
 Server::Server(uint16_t port, std::string_view certificate)
@@ -141,7 +142,7 @@ Server::Server(uint16_t port, std::string_view certificate)
         getConfig(this), port, ByteString(certificate).handle()
     );
     detail::throwOnBadStatus(status);
-    connection_->applyDefaults();
+    applyDefaults(getConfig(this));
 }
 
 void Server::setLogger(Logger logger) {
@@ -151,44 +152,31 @@ void Server::setLogger(Logger logger) {
 // copy to endpoints needed, see: https://github.com/open62541/open62541/issues/1175
 static void copyApplicationDescriptionToEndpoints(UA_ServerConfig* config) {
     for (size_t i = 0; i < config->endpointsSize; ++i) {
-        auto& refApplicationName = config->endpoints[i].server.applicationName;  // NOLINT
-        auto& refApplicationUri = config->endpoints[i].server.applicationUri;  // NOLINT
-        auto& refProductUri = config->endpoints[i].server.productUri;  // NOLINT
-
-        UA_LocalizedText_clear(&refApplicationName);
-        UA_String_clear(&refApplicationUri);
-        UA_String_clear(&refProductUri);
-
-        UA_LocalizedText_copy(&config->applicationDescription.applicationName, &refApplicationName);
-        UA_String_copy(&config->applicationDescription.applicationUri, &refApplicationUri);
-        UA_String_copy(&config->applicationDescription.productUri, &refProductUri);
+        auto& ref = asWrapper<ApplicationDescription>(config->endpoints[i].server);  // NOLINT
+        ref = ApplicationDescription(config->applicationDescription);
     }
 }
 
 void Server::setCustomHostname(std::string_view hostname) {
-    auto& ref = getConfig(this)->customHostname;
-    UA_String_clear(&ref);
-    ref = detail::allocUaString(hostname);
+    auto& ref = asWrapper<String>(getConfig(this)->customHostname);
+    ref = String(hostname);
 }
 
 void Server::setApplicationName(std::string_view name) {
-    auto& ref = getConfig(this)->applicationDescription.applicationName;
-    UA_LocalizedText_clear(&ref);
-    ref = UA_LOCALIZEDTEXT_ALLOC("", name.data());
+    auto& ref = asWrapper<LocalizedText>(getConfig(this)->applicationDescription.applicationName);
+    ref = LocalizedText("", name);
     copyApplicationDescriptionToEndpoints(getConfig(this));
 }
 
 void Server::setApplicationUri(std::string_view uri) {
-    auto& ref = getConfig(this)->applicationDescription.applicationUri;
-    UA_String_clear(&ref);
-    ref = detail::allocUaString(uri);
+    auto& ref = asWrapper<String>(getConfig(this)->applicationDescription.applicationUri);
+    ref = String(uri);
     copyApplicationDescriptionToEndpoints(getConfig(this));
 }
 
 void Server::setProductUri(std::string_view uri) {
-    auto& ref = getConfig(this)->applicationDescription.productUri;
-    UA_String_clear(&ref);
-    ref = detail::allocUaString(uri);
+    auto& ref = asWrapper<String>(getConfig(this)->applicationDescription.productUri);
+    ref = String(uri);
     copyApplicationDescriptionToEndpoints(getConfig(this));
 }
 
