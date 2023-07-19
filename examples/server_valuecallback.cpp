@@ -22,8 +22,6 @@ int main() {
         server.getNode(id).writeScalar(timeNow);
     };
     server.setVariableNodeValueCallback(currentTimeId, valueCallback);
-    server.setVariableNodeValueCallback(currentTimeId, valueCallback);
-    server.setVariableNodeValueCallback(currentTimeId, valueCallback);
 
     server.run();
 }
