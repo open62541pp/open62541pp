@@ -1,6 +1,7 @@
 #include "open62541pp/Server.h"
 
 #include <atomic>
+#include <cassert>
 #include <mutex>
 #include <utility>  // move
 
@@ -12,6 +13,7 @@
 #include "open62541pp/services/Attribute.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
+#include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/Variant.h"
 
 #include "CustomLogger.h"
@@ -227,6 +229,49 @@ std::vector<std::string> Server::getNamespaceArray() {
 
 uint16_t Server::registerNamespace(std::string_view uri) {
     return UA_Server_addNamespace(handle(), std::string(uri).c_str());
+}
+
+static void valueCallbackOnRead(
+    [[maybe_unused]] UA_Server* server,
+    [[maybe_unused]] const UA_NodeId* sessionId,
+    [[maybe_unused]] void* sessionContext,
+    const UA_NodeId* nodeId,
+    void* nodeContext,
+    [[maybe_unused]] const UA_NumericRange* range,
+    const UA_DataValue* value
+) {
+    assert(nodeContext != nullptr && nodeId != nullptr && value != nullptr);  // NOLINT
+    auto& cb = static_cast<ServerContext::NodeContext*>(nodeContext)->valueCallback.onBeforeRead;
+    if (cb) {
+        cb(asWrapper<NodeId>(*nodeId), asWrapper<DataValue>(*value));
+    }
+}
+
+static void valueCallbackOnWrite(
+    [[maybe_unused]] UA_Server* server,
+    [[maybe_unused]] const UA_NodeId* sessionId,
+    [[maybe_unused]] void* sessionContext,
+    const UA_NodeId* nodeId,
+    void* nodeContext,
+    [[maybe_unused]] const UA_NumericRange* range,
+    const UA_DataValue* value
+) {
+    assert(nodeContext != nullptr && nodeId != nullptr && value != nullptr);  // NOLINT
+    auto& cb = static_cast<ServerContext::NodeContext*>(nodeContext)->valueCallback.onAfterWrite;
+    if (cb) {
+        cb(asWrapper<NodeId>(*nodeId), asWrapper<DataValue>(*value));
+    }
+}
+
+void Server::setVariableNodeValueCallback(const NodeId& id, ValueCallback callback) {
+    auto* nodeContext = getContext().getOrCreateNodeContext(id);
+    nodeContext->valueCallback = std::move(callback);
+    detail::throwOnBadStatus(UA_Server_setNodeContext(handle(), id, nodeContext));
+
+    UA_ValueCallback callbackNative;
+    callbackNative.onRead = valueCallbackOnRead;
+    callbackNative.onWrite = valueCallbackOnWrite;
+    detail::throwOnBadStatus(UA_Server_setVariableNode_valueCallback(handle(), id, callbackNative));
 }
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
