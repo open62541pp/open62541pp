@@ -14,12 +14,12 @@ int main() {
 
     // set variable value callback to write current time before every read operation
     opcua::ValueCallback valueCallback;
-    valueCallback.onBeforeRead = [&](const opcua::NodeId& id, const opcua::DataValue& value) {
+    valueCallback.onBeforeRead = [&](const opcua::DataValue& value) {
         const auto timeOld = value.getValue().getScalar<opcua::DateTime>();
         const auto timeNow = opcua::DateTime::now();
         std::cout << "Time before read: " << timeOld.format("%Y-%m-%d %H:%M:%S") << std::endl;
         std::cout << "Set current time: " << timeNow.format("%Y-%m-%d %H:%M:%S") << std::endl;
-        server.getNode(id).writeScalar(timeNow);
+        currentTimeNode.writeScalar(timeNow);
     };
     server.setVariableNodeValueCallback(currentTimeId, valueCallback);
 

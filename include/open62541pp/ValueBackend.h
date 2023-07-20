@@ -19,13 +19,13 @@ struct ValueCallback {
      * during onBeforeRead (using e.g. services::writeValue or Node::writeValue). The node is
      * re-opened afterwards so that changes are considered in the following read operation.
      */
-    std::function<void(const NodeId&, const DataValue&)> onBeforeRead;
+    std::function<void(const DataValue& value)> onBeforeRead;
 
     /**
      * Called after writing the value attribute. The node is re-opened after
      * writing so that the new value is visible in the callback.
      */
-    std::function<void(const NodeId&, const DataValue&)> onAfterWrite;
+    std::function<void(const DataValue& value)> onAfterWrite;
 };
 
 }  // namespace opcua

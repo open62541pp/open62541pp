@@ -94,20 +94,16 @@ TEST_CASE("Server") {
 
         bool onBeforeReadCalled = false;
         bool onAfterWriteCalled = false;
-        NodeId idRead;
-        NodeId idWrite;
         int valueBeforeRead = 0;
         int valueAfterWrite = 0;
 
         ValueCallback valueCallback;
-        valueCallback.onBeforeRead = [&](const NodeId& nodeId, const DataValue& value) {
+        valueCallback.onBeforeRead = [&](const DataValue& value) {
             onBeforeReadCalled = true;
-            idRead = nodeId;
             valueBeforeRead = value.getValue().getScalar<int>();
         };
-        valueCallback.onAfterWrite = [&](const NodeId& nodeId, const DataValue& value) {
+        valueCallback.onAfterWrite = [&](const DataValue& value) {
             onAfterWriteCalled = true;
-            idWrite = nodeId;
             valueAfterWrite = value.getValue().getScalar<int>();
         };
         server.setVariableNodeValueCallback(id, valueCallback);
@@ -116,7 +112,6 @@ TEST_CASE("Server") {
         const auto valueRead = node.readScalar<int>();
         CHECK(onBeforeReadCalled == true);
         CHECK(onAfterWriteCalled == false);
-        CHECK(idRead == id);
         CHECK(valueBeforeRead == 1);
         CHECK(valueRead == 1);
 
@@ -124,7 +119,6 @@ TEST_CASE("Server") {
         node.writeScalar<int>(2);
         CHECK(onBeforeReadCalled == true);
         CHECK(onAfterWriteCalled == true);
-        CHECK(idWrite == id);
         CHECK(valueAfterWrite == 2);
     }
 

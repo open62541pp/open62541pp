@@ -235,15 +235,15 @@ static void valueCallbackOnRead(
     [[maybe_unused]] UA_Server* server,
     [[maybe_unused]] const UA_NodeId* sessionId,
     [[maybe_unused]] void* sessionContext,
-    const UA_NodeId* nodeId,
+    [[maybe_unused]] const UA_NodeId* nodeId,
     void* nodeContext,
     [[maybe_unused]] const UA_NumericRange* range,
     const UA_DataValue* value
 ) {
-    assert(nodeContext != nullptr && nodeId != nullptr && value != nullptr);  // NOLINT
+    assert(nodeContext != nullptr && value != nullptr);  // NOLINT
     auto& cb = static_cast<ServerContext::NodeContext*>(nodeContext)->valueCallback.onBeforeRead;
     if (cb) {
-        cb(asWrapper<NodeId>(*nodeId), asWrapper<DataValue>(*value));
+        cb(asWrapper<DataValue>(*value));
     }
 }
 
@@ -251,15 +251,15 @@ static void valueCallbackOnWrite(
     [[maybe_unused]] UA_Server* server,
     [[maybe_unused]] const UA_NodeId* sessionId,
     [[maybe_unused]] void* sessionContext,
-    const UA_NodeId* nodeId,
+    [[maybe_unused]] const UA_NodeId* nodeId,
     void* nodeContext,
     [[maybe_unused]] const UA_NumericRange* range,
     const UA_DataValue* value
 ) {
-    assert(nodeContext != nullptr && nodeId != nullptr && value != nullptr);  // NOLINT
+    assert(nodeContext != nullptr && value != nullptr);  // NOLINT
     auto& cb = static_cast<ServerContext::NodeContext*>(nodeContext)->valueCallback.onAfterWrite;
     if (cb) {
-        cb(asWrapper<NodeId>(*nodeId), asWrapper<DataValue>(*value));
+        cb(asWrapper<DataValue>(*value));
     }
 }
 
