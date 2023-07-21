@@ -22,7 +22,19 @@ TEST_CASE("Server") {
             Server server(4850);
         }
         SUBCASE("Custom port and certificate") {
-            Server server(4850, "certificate...");
+            Server server(4850, ByteString("certificate"));
+        }
+        SUBCASE("With encryption (invalid)") {
+            Server server(
+                4850,
+                ByteString("certificate"),  // invalid
+                ByteString("privateKey"),  // invalid
+                {},
+                {},
+                {}
+            );
+            // no encrypting security policies enabled due to invalid certificate and key
+            CHECK(UA_Server_getConfig(server.handle())->securityPoliciesSize == 1);
         }
     }
 
