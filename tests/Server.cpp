@@ -24,6 +24,7 @@ TEST_CASE("Server") {
         SUBCASE("Custom port and certificate") {
             Server server(4850, ByteString("certificate"));
         }
+#ifdef UA_ENABLE_ENCRYPTION
         SUBCASE("With encryption (invalid)") {
             Server server(
                 4850,
@@ -36,6 +37,7 @@ TEST_CASE("Server") {
             // no encrypting security policies enabled due to invalid certificate and key
             CHECK(UA_Server_getConfig(server.handle())->securityPoliciesSize == 1);
         }
+#endif
     }
 
     Server server;
