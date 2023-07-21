@@ -220,18 +220,18 @@ Client::Client()
 Client::Client(
     const ByteString& certificate,
     const ByteString& privateKey,
-    const std::vector<ByteString>& trustLists,
-    const std::vector<ByteString>& revocationLists
+    const std::vector<ByteString>& trustList,
+    const std::vector<ByteString>& revocationList
 )
     : connection_(std::make_shared<Connection>()) {
     const auto status = UA_ClientConfig_setDefaultEncryption(
         getConfig(this),
         certificate,
         privateKey,
-        asNative(trustLists.data()),
-        trustLists.size(),
-        asNative(revocationLists.data()),
-        revocationLists.size()
+        asNative(trustList.data()),
+        trustList.size(),
+        asNative(revocationList.data()),
+        revocationList.size()
     );
     detail::throwOnBadStatus(status);
     getConfig(this)->securityMode = UA_MESSAGESECURITYMODE_SIGNANDENCRYPT;

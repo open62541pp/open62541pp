@@ -54,8 +54,8 @@ public:
      *
      * @param certificate X.509 v3 certificate in `DER` encoded format
      * @param privateKey Private key in `PEM` encoded format
-     * @param trustLists Certificate trust lists (CTL) in `DER` encoded format
-     * @param revocationLists Certificate revocation lists (CRL) in `DER` encoded format
+     * @param trustList List of trusted certificates in `DER` encoded format
+     * @param revocationList Certificate revocation lists (CRL) in `DER` encoded format
      *
      * @see https://reference.opcfoundation.org/Core/Part2/v105/docs/8
      * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/6.2
@@ -63,8 +63,8 @@ public:
     Client(
         const ByteString& certificate,
         const ByteString& privateKey,
-        const std::vector<ByteString>& trustLists,
-        const std::vector<ByteString>& revocationLists = {}
+        const std::vector<ByteString>& trustList,
+        const std::vector<ByteString>& revocationList = {}
     );
 #endif
 
