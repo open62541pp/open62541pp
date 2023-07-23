@@ -1,3 +1,5 @@
+#ifdef UA_ENABLE_ENCRYPTION
+
 #include <string>
 #include <vector>
 
@@ -104,4 +106,6 @@ TEST_CASE("Encrypted connection server/client") {
     }
 }
 
-#endif
+#endif  // ifdef UAPP_CREATE_CERTIFICATE
+
+#endif  // ifdef UA_ENABLE_ENCRYPTION
