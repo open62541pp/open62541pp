@@ -41,10 +41,10 @@ TEST_CASE("TypeWrapper") {
 
     SUBCASE("Copy assignment") {
         TypeWrapper<UA_String, UA_TYPES_STRING> wrapper(UA_STRING_ALLOC("test"));
-        TypeWrapper<UA_String, UA_TYPES_STRING> wrapperAssignmnet = wrapper;
+        TypeWrapper<UA_String, UA_TYPES_STRING> wrapperAssignment = wrapper;
 
-        CHECK(wrapperAssignmnet.handle()->data != wrapper.handle()->data);
-        CHECK(detail::toString(*wrapperAssignmnet.handle()) == "test");
+        CHECK(wrapperAssignment.handle()->data != wrapper.handle()->data);
+        CHECK(detail::toString(*wrapperAssignment.handle()) == "test");
 
         // self assignment
         CHECK_NOTHROW(wrapper = wrapper);
@@ -68,10 +68,10 @@ TEST_CASE("TypeWrapper") {
 
     SUBCASE("Move assignment") {
         TypeWrapper<UA_String, UA_TYPES_STRING> wrapper(UA_STRING_ALLOC("test"));
-        TypeWrapper<UA_String, UA_TYPES_STRING> wrapperAssignmnet = std::move(wrapper);
+        TypeWrapper<UA_String, UA_TYPES_STRING> wrapperAssignment = std::move(wrapper);
 
         CHECK(wrapper.handle()->data == nullptr);
-        CHECK(detail::toString(*wrapperAssignmnet.handle()) == "test");
+        CHECK(detail::toString(*wrapperAssignment.handle()) == "test");
 
         // self assignment
         CHECK_NOTHROW(wrapper = std::move(wrapper));

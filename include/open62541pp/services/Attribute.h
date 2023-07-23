@@ -45,7 +45,7 @@ DataValue readAttribute(
     T& serverOrClient,
     const NodeId& id,
     AttributeId attributeId,
-    TimestampsToReturn timestamps = TimestampsToReturn::Neighter
+    TimestampsToReturn timestamps = TimestampsToReturn::Neither
 );
 
 /// Helper function to read scalar node attributes.
@@ -69,7 +69,7 @@ void writeAttribute(
 /**
  * Read the `NodeId` attribute of a node.
  *
- * This function is mainly used to check the existance of a node.
+ * This function is mainly used to check the existence of a node.
  * @ingroup Attribute
  */
 template <typename T>

@@ -81,7 +81,7 @@ static void stateCallback(UA_Client* client, UA_ClientState clientState) {
             execStateCallback(context, ClientState::Connected);
             break;
         case UA_CLIENTSTATE_SESSION:
-            execStateCallback(context, ClientState::SessionActicated);
+            execStateCallback(context, ClientState::SessionActivated);
             break;
         case UA_CLIENTSTATE_SESSION_DISCONNECTED:
             execStateCallback(context, ClientState::SessionClosed);
@@ -101,11 +101,11 @@ static void stateCallback(
     [[maybe_unused]] UA_StatusCode connectStatus
 ) {
     auto& context = getContext(client);
-    // handle session state first, mainly to to handle SessionClosed bevor Disconnected
+    // handle session state first, mainly to handle SessionClosed before Disconnected
     if (sessionState != context.lastSessionState) {
         switch (sessionState) {
         case UA_SESSIONSTATE_ACTIVATED:
-            execStateCallback(context, ClientState::SessionActicated);
+            execStateCallback(context, ClientState::SessionActivated);
             break;
         case UA_SESSIONSTATE_CLOSED:
             execStateCallback(context, ClientState::SessionClosed);
@@ -269,7 +269,7 @@ void Client::onDisconnected(StateCallback callback) {
 }
 
 void Client::onSessionActivated(StateCallback callback) {
-    setStateCallback(getContext(), ClientState::SessionActicated, std::move(callback));
+    setStateCallback(getContext(), ClientState::SessionActivated, std::move(callback));
 }
 
 void Client::onSessionClosed(StateCallback callback) {
