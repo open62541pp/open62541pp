@@ -180,7 +180,7 @@ enum class TimestampsToReturn : uint32_t {
     Source   = 0,
     Server   = 1,
     Both     = 2,
-    Neighter = 3,
+    Neither = 3,
     Invalid  = 4,
     // clang-format on
 };
