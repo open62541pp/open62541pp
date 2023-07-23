@@ -4,6 +4,7 @@ add_executable(
     open62541pp_tests
     main.cpp
     Client.cpp
+    Crypto.cpp
     helper.cpp
     Logger.cpp
     Node.cpp

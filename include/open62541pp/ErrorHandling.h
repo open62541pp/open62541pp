@@ -40,7 +40,12 @@ public:
 
 class BadVariantAccess : public std::runtime_error {
 public:
-    using std::runtime_error::runtime_error;  // inherit contructors
+    using runtime_error::runtime_error;  // inherit contructors
+};
+
+class CreateCertificateError : public std::runtime_error {
+public:
+    using runtime_error::runtime_error;  // inherit contructors
 };
 
 namespace detail {
