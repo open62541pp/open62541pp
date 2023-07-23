@@ -24,6 +24,10 @@ CreateCertificateResult createCertificate(
     size_t keySizeBits,
     CertificateFormat certificateFormat
 ) {
+    if (subject.empty() || subjectAltName.empty()) {
+        throw CreateCertificateError("Argument subject or subjectAltName is empty");
+    }
+
     // OpenSSL errors will generate a generic UA_STATUSCODE_BADINTERNALERROR status code
     // detailled errors are reported through error log messages -> capture log messages
     UA_Logger logger{};

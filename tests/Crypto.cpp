@@ -19,7 +19,7 @@ using namespace opcua;
 
 TEST_CASE("Create certificate") {
     SUBCASE("Empty subject / subjectAltName") {
-        CHECK_THROWS_WITH(crypto::createCertificate({}, {}), "BadInvalidArgument");
+        CHECK_THROWS_AS(crypto::createCertificate({}, {}), CreateCertificateError);
     }
 
     SUBCASE("Invalid subject / subjectAltName") {
@@ -28,8 +28,7 @@ TEST_CASE("Create certificate") {
             CreateCertificateError
         );
         CHECK_THROWS_AS(
-            crypto::createCertificate({String{"C=DE"}}, {String{"X:Y"}}),
-            CreateCertificateError
+            crypto::createCertificate({String{"C=DE"}}, {String{"X:Y"}}), CreateCertificateError
         );
     }
 

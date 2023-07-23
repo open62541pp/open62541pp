@@ -35,9 +35,8 @@ struct CreateCertificateResult {
  *        Possible values are: 0, 1024 (deprecated), 2048, 4096
  * @param certificateFormat Certificate format, either DER or PEM
  *
- * @exception BadStatus(BadInvalidArgument)
- * @exception BadStatus(BadOutOfMemory)
- * @exception CreateCertificateError 
+ * @exception BadStatus (BadOutOfMemory)
+ * @exception CreateCertificateError
  *
  * @see UA_CreateCertificate
  */
