@@ -85,6 +85,30 @@ TEST_CASE("Guid") {
     }
 }
 
+TEST_CASE("NumericRange") {
+    SUBCASE("Empty") {
+        const NumericRange nr;
+        CHECK(nr.empty());
+        CHECK(nr.get().size() == 0);
+    }
+
+    SUBCASE("Parse") {
+        CHECK_THROWS(NumericRange("abc"));
+
+        const NumericRange nr("1:2,0:3,5");
+        CHECK(nr.get().size() == 3);
+        CHECK(nr.get().at(0) == NumericRangeDimension{1, 2});
+        CHECK(nr.get().at(1) == NumericRangeDimension{0, 3});
+        CHECK(nr.get().at(2) == NumericRangeDimension{5, 5});
+    }
+
+    SUBCASE("toString") {
+        CHECK(NumericRange({{1, 1}}).toString() == "1");
+        CHECK(NumericRange({{1, 2}}).toString() == "1:2");
+        CHECK(NumericRange({{1, 2}, {0, 3}, {5, 5}}).toString() == "1:2,0:3,5");
+    }
+}
+
 TEST_CASE("DateTime") {
     SUBCASE("Empty") {
         const DateTime dt;
