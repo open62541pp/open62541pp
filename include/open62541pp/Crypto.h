@@ -23,7 +23,7 @@ struct CreateCertificateResult {
  * Create a self-signed X.509 v3 certificate.
  *
  * It is recommended to store the generated certificate on disk for reuse, so the application can be
- * recognized across several executions.
+ * recognized across several executions, e.g. with ByteString::toFile, ByteString::fromFile.
  * 
  * @note Only available with open62541 >= v1.3 and OpenSSL/LibreSSL
  *

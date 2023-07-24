@@ -2,6 +2,7 @@
 
 #include <array>
 #include <cstdint>
+#include <filesystem>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -55,17 +56,23 @@ public:
     explicit ByteString(std::string_view str);
     explicit ByteString(const std::vector<uint8_t>& bytes);
 
+    /// Read ByteString from binary file.
+    static ByteString fromFile(const std::filesystem::path& filepath);
+
     /// Parse ByteString from Base64 encoded string.
     /// @note Only supported since open62541 v1.1
     static ByteString fromBase64(std::string_view encoded);
 
-    bool empty() const noexcept;
-
-    std::string_view get() const;
+    /// Write ByteString to binary file.
+    void toFile(const std::filesystem::path& filepath) const;
 
     /// Convert to Base64 encoded string.
     /// @note Only supported since open62541 v1.1
     std::string toBase64() const;
+
+    bool empty() const noexcept;
+
+    std::string_view get() const;
 };
 
 /**

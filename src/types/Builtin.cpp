@@ -1,9 +1,12 @@
 #include "open62541pp/types/Builtin.h"
 
 #include <cassert>
+#include <fstream>
 #include <iomanip>
+#include <iterator>  // istreambuf_iterator
 #include <sstream>
 
+#include "open62541pp/ErrorHandling.h"
 #include "open62541pp/detail/helper.h"
 
 #include "../version.h"
@@ -87,6 +90,14 @@ ByteString ByteString::fromBase64([[maybe_unused]] std::string_view encoded) {
 #endif
 }
 
+ByteString ByteString::fromFile(const std::filesystem::path& filepath) {
+    std::ifstream fp(filepath, std::ios::binary);
+    const std::vector<uint8_t> bytes(
+        (std::istreambuf_iterator<char>(fp)), (std::istreambuf_iterator<char>())
+    );
+    return ByteString(bytes);
+}
+
 std::string ByteString::toBase64() const {
 #if UAPP_OPEN62541_VER_GE(1, 1)
     String output;
@@ -95,6 +106,11 @@ std::string ByteString::toBase64() const {
 #else
     return {};
 #endif
+}
+
+void ByteString::toFile(const std::filesystem::path& filepath) const {
+    std::ofstream fp(filepath, std::ios::binary);
+    fp.write(reinterpret_cast<char*>(handle()->data), handle()->length);  // NOLINT
 }
 
 /* ----------------------------------------- XmlElement ----------------------------------------- */

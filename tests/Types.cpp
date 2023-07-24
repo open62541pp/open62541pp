@@ -45,12 +45,27 @@ TEST_CASE_TEMPLATE("StringLike", T, String, ByteString, XmlElement) {
 }
 
 TEST_CASE("ByteString") {
-    SUBCASE("Construct from vector") {
-        const ByteString bs({0, 1, 2});
+    SUBCASE("Construct from string") {
+        const ByteString bs("XYZ");
         CHECK(bs->length == 3);
-        CHECK(bs->data[0] == 0);
-        CHECK(bs->data[1] == 1);
-        CHECK(bs->data[2] == 2);
+        CHECK(bs->data[0] == 88);
+        CHECK(bs->data[1] == 89);
+        CHECK(bs->data[2] == 90);
+    }
+
+    SUBCASE("Construct from vector") {
+        const ByteString bs({88, 89, 90});
+        CHECK(bs->length == 3);
+        CHECK(bs->data[0] == 88);
+        CHECK(bs->data[1] == 89);
+        CHECK(bs->data[2] == 90);
+        CHECK(std::string(bs.get()) == "XYZ");
+    }
+
+    SUBCASE("toFile / fromFile") {
+        const ByteString bs({88, 89, 90});
+        CHECK_NOTHROW(bs.toFile("bytestring.bin"));
+        CHECK(ByteString::fromFile("bytestring.bin") == bs);
     }
 
 #if UAPP_OPEN62541_VER_GE(1, 1)
