@@ -85,6 +85,12 @@ TEST_CASE("Guid") {
     }
 }
 
+TEST_CASE("NumericRangeDimension") {
+    CHECK(NumericRangeDimension{} == NumericRangeDimension{});
+    CHECK(NumericRangeDimension{1, 2} == NumericRangeDimension{1, 2});
+    CHECK(NumericRangeDimension{1, 2} != NumericRangeDimension{1, 3});
+}
+
 TEST_CASE("NumericRange") {
     SUBCASE("Empty") {
         const NumericRange nr;
