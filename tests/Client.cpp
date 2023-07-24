@@ -85,6 +85,24 @@ TEST_CASE("Client username/password login") {
     }
 }
 
+#ifdef UA_ENABLE_ENCRYPTION
+TEST_CASE("Client encryption") {
+    SUBCASE("Connect to unencrypted server") {
+        Server server;
+        ServerRunner serverRunner(server);
+        Client client(ByteString{}, ByteString{}, {}, {});
+
+        client.setSecurityMode(MessageSecurityMode::SignAndEncrypt);
+        CHECK_THROWS(client.connect(localServerUrl));
+
+        client.setSecurityMode(MessageSecurityMode::None);
+        CHECK_NOTHROW(client.connect(localServerUrl));
+    }
+
+    // TODO...
+}
+#endif
+
 TEST_CASE("Client run/stop") {
     Server server;
     ServerRunner serverRunner(server);

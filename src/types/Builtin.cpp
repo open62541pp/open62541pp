@@ -1,13 +1,15 @@
 #include "open62541pp/types/Builtin.h"
 
 #include <cassert>
+#include <fstream>
 #include <iomanip>
+#include <iterator>  // istreambuf_iterator
 #include <sstream>
 #include <utility>  // move
 
+#include "open62541pp/Config.h"
+#include "open62541pp/ErrorHandling.h"
 #include "open62541pp/detail/helper.h"
-
-#include "../version.h"
 
 namespace opcua {
 
@@ -64,6 +66,12 @@ std::string Guid::toString() const {
 ByteString::ByteString(std::string_view str)
     : ByteString(UA_ByteString{detail::allocUaString(str)}) {}
 
+ByteString::ByteString(const std::vector<uint8_t>& bytes) {
+    const auto status = UA_ByteString_allocBuffer(handle(), bytes.size());
+    detail::throwOnBadStatus(status);
+    std::copy(bytes.begin(), bytes.end(), handle()->data);
+}
+
 bool ByteString::empty() const noexcept {
     return handle()->length == 0U;
 }
@@ -82,6 +90,14 @@ ByteString ByteString::fromBase64([[maybe_unused]] std::string_view encoded) {
 #endif
 }
 
+ByteString ByteString::fromFile(const std::filesystem::path& filepath) {
+    std::ifstream fp(filepath, std::ios::binary);
+    const std::vector<uint8_t> bytes(
+        (std::istreambuf_iterator<char>(fp)), (std::istreambuf_iterator<char>())
+    );
+    return ByteString(bytes);
+}
+
 std::string ByteString::toBase64() const {
 #if UAPP_OPEN62541_VER_GE(1, 1)
     String output;
@@ -90,6 +106,11 @@ std::string ByteString::toBase64() const {
 #else
     return {};
 #endif
+}
+
+void ByteString::toFile(const std::filesystem::path& filepath) const {
+    std::ofstream fp(filepath, std::ios::binary);
+    fp.write(reinterpret_cast<char*>(handle()->data), handle()->length);  // NOLINT
 }
 
 /* ----------------------------------------- XmlElement ----------------------------------------- */

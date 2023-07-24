@@ -20,6 +20,9 @@
 #include <open62541/config.h>
 #include <open62541/plugin/accesscontrol_default.h>
 #include <open62541/plugin/log.h>
+#if __has_include(<open62541/plugin/create_certificate.h>)  // since v1.3
+#include <open62541/plugin/create_certificate.h>
+#endif
 #include <open62541/types_generated_handling.h>
 
 // client

@@ -19,7 +19,6 @@
 #include "CustomLogger.h"
 #include "ServerContext.h"
 #include "open62541_impl.h"
-#include "version.h"
 
 namespace opcua {
 
@@ -124,28 +123,41 @@ static void applyDefaults(UA_ServerConfig* config) {
 #endif
 }
 
-Server::Server()
-    : connection_(std::make_shared<Connection>()) {
-    const auto status = UA_ServerConfig_setDefault(getConfig(this));
-    detail::throwOnBadStatus(status);
-    applyDefaults(getConfig(this));
-}
-
-Server::Server(uint16_t port)
-    : connection_(std::make_shared<Connection>()) {
-    const auto status = UA_ServerConfig_setMinimal(getConfig(this), port, nullptr);
-    detail::throwOnBadStatus(status);
-    applyDefaults(getConfig(this));
-}
-
-Server::Server(uint16_t port, std::string_view certificate)
+Server::Server(uint16_t port, ByteString certificate)
     : connection_(std::make_shared<Connection>()) {
     const auto status = UA_ServerConfig_setMinimal(
-        getConfig(this), port, ByteString(certificate).handle()
+        getConfig(this), port, certificate.empty() ? nullptr : certificate.handle()
     );
     detail::throwOnBadStatus(status);
     applyDefaults(getConfig(this));
 }
+
+#ifdef UA_ENABLE_ENCRYPTION
+Server::Server(
+    uint16_t port,
+    const ByteString& certificate,
+    const ByteString& privateKey,
+    const std::vector<ByteString>& trustList,
+    const std::vector<ByteString>& issuerList,
+    const std::vector<ByteString>& revocationList
+)
+    : connection_(std::make_shared<Connection>()) {
+    const auto status = UA_ServerConfig_setDefaultWithSecurityPolicies(
+        getConfig(this),
+        port,
+        certificate.handle(),
+        privateKey.handle(),
+        asNative(trustList.data()),
+        trustList.size(),
+        asNative(issuerList.data()),
+        issuerList.size(),
+        asNative(revocationList.data()),
+        revocationList.size()
+    );
+    detail::throwOnBadStatus(status);
+    applyDefaults(getConfig(this));
+}
+#endif
 
 void Server::setLogger(Logger logger) {
     connection_->setLogger(std::move(logger));
