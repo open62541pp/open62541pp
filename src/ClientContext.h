@@ -20,7 +20,7 @@ namespace opcua {
 enum class ClientState {
     Disconnected,
     Connected,
-    SessionActicated,
+    SessionActivated,
     SessionClosed,
 };
 inline constexpr size_t clientStateCount = 4;

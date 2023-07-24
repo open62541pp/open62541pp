@@ -101,6 +101,41 @@ TEST_CASE("Server") {
         CHECK(server.getNamespaceArray().at(3) == "test2");
     }
 
+    SUBCASE("Variable node value callback") {
+        NodeId id{1, 1000};
+        auto node = server.getObjectsNode().addVariable(id, "testVariable");
+        node.writeScalar<int>(1);
+
+        bool onBeforeReadCalled = false;
+        bool onAfterWriteCalled = false;
+        int valueBeforeRead = 0;
+        int valueAfterWrite = 0;
+
+        ValueCallback valueCallback;
+        valueCallback.onBeforeRead = [&](const DataValue& value) {
+            onBeforeReadCalled = true;
+            valueBeforeRead = value.getValue().getScalar<int>();
+        };
+        valueCallback.onAfterWrite = [&](const DataValue& value) {
+            onAfterWriteCalled = true;
+            valueAfterWrite = value.getValue().getScalar<int>();
+        };
+        server.setVariableNodeValueCallback(id, valueCallback);
+
+        // trigger onBeforeRead callback with read operation
+        const auto valueRead = node.readScalar<int>();
+        CHECK(onBeforeReadCalled == true);
+        CHECK(onAfterWriteCalled == false);
+        CHECK(valueBeforeRead == 1);
+        CHECK(valueRead == 1);
+
+        // trigger onAfterWrite callback with write operation
+        node.writeScalar<int>(2);
+        CHECK(onBeforeReadCalled == true);
+        CHECK(onAfterWriteCalled == true);
+        CHECK(valueAfterWrite == 2);
+    }
+
     SUBCASE("Get default nodes") {
         // clang-format off
         CHECK_EQ(server.getRootNode().getNodeId(),    NodeId{0, UA_NS0ID_ROOTFOLDER});

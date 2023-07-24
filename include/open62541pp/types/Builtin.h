@@ -128,4 +128,32 @@ public:
     std::string_view getLocale() const;
 };
 
+using NumericRangeDimension = UA_NumericRangeDimension;
+
+bool operator==(const NumericRangeDimension& left, const NumericRangeDimension& right) noexcept;
+bool operator!=(const NumericRangeDimension& left, const NumericRangeDimension& right) noexcept;
+
+/**
+ * Numeric range to indicate subsets of (multidimensional) arrays.
+ * They are no official data type in the OPC UA standard and are transmitted only with a string
+ * encoding, such as "1:2,0:3,5". The colon separates min/max index and the comma separates
+ * dimensions. A single value indicates a range with a single element (min==max).
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.27
+ */
+class NumericRange {
+public:
+    NumericRange();
+    explicit NumericRange(std::string_view encodedRange);
+    explicit NumericRange(std::vector<NumericRangeDimension> dimensions);
+
+    bool empty() const noexcept;
+
+    const std::vector<NumericRangeDimension>& get() const noexcept;
+
+    std::string toString() const;
+
+private:
+    std::vector<NumericRangeDimension> dimensions_;
+};
+
 }  // namespace opcua

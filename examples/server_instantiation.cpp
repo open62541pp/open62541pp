@@ -3,26 +3,26 @@
 int main() {
     opcua::Server server;
 
-    // Create object types `MamalType` and `DogType`:
+    // Create object types `MammalType` and `DogType`:
     // (OT) BaseObjectType
-    // + (OT) MamalType
+    // + (OT) MammalType
     //   + (V) Age
     //   + (OT) DogType
     //      + (V) Name
     auto nodeBaseObjectType = server.getNode(opcua::ObjectTypeId::BaseObjectType);
-    auto nodeMamalType = nodeBaseObjectType.addObjectType({1, 10000}, "MamalType");
-    nodeMamalType.writeDisplayName({"en-US", "MamalType"});
-    nodeMamalType.writeDescription({"en-US", "A mamal"});
+    auto nodeMammalType = nodeBaseObjectType.addObjectType({1, 10000}, "MammalType");
+    nodeMammalType.writeDisplayName({"en-US", "MammalType"});
+    nodeMammalType.writeDescription({"en-US", "A mammal"});
 
-    auto nodeMamalTypeAge = nodeMamalType.addVariable({1, 10001}, "Age");
-    nodeMamalTypeAge.addModellingRule(opcua::ModellingRule::Mandatory);  // create on new instance
-    nodeMamalTypeAge.writeDisplayName({"en-US", "Age"});
-    nodeMamalTypeAge.writeDescription({"en-US", "This mamals age in months"});
-    nodeMamalTypeAge.writeScalar<uint32_t>(0);  // default age
+    auto nodeMammalTypeAge = nodeMammalType.addVariable({1, 10001}, "Age");
+    nodeMammalTypeAge.addModellingRule(opcua::ModellingRule::Mandatory);  // create on new instance
+    nodeMammalTypeAge.writeDisplayName({"en-US", "Age"});
+    nodeMammalTypeAge.writeDescription({"en-US", "This mammals age in months"});
+    nodeMammalTypeAge.writeScalar<uint32_t>(0);  // default age
 
-    auto nodeDogType = nodeMamalType.addObjectType({1, 10002}, "DogType");
+    auto nodeDogType = nodeMammalType.addObjectType({1, 10002}, "DogType");
     nodeDogType.writeDisplayName({"en-US", "DogType"});
-    nodeDogType.writeDescription({"en-US", "A dog, subtype of mamal"});
+    nodeDogType.writeDescription({"en-US", "A dog, subtype of mammal"});
 
     auto nodeDogTypeName = nodeDogType.addVariable({1, 10003}, "Name");
     nodeDogTypeName.addModellingRule(opcua::ModellingRule::Mandatory);  // create on new instance

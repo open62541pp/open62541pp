@@ -51,6 +51,7 @@ add_example(client_minimal.cpp)
 add_example(server.cpp)
 add_example(server_instantiation.cpp)
 add_example(server_minimal.cpp)
+add_example(server_valuecallback.cpp)
 
 if(UA_ENABLE_METHODCALLS)
     add_example(client_method.cpp)

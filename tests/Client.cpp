@@ -130,14 +130,14 @@ TEST_CASE("Client state callbacks") {
     enum class States {
         Connected,
         Disconnected,
-        SessionActicated,
+        SessionActivated,
         SessionClosed,
     };
 
     std::vector<States> states;
     client.onConnected([&] { states.push_back(States::Connected); });
     client.onDisconnected([&] { states.push_back(States::Disconnected); });
-    client.onSessionActivated([&] { states.push_back(States::SessionActicated); });
+    client.onSessionActivated([&] { states.push_back(States::SessionActivated); });
     client.onSessionClosed([&] { states.push_back(States::SessionClosed); });
 
     client.connect(localServerUrl);
@@ -148,7 +148,7 @@ TEST_CASE("Client state callbacks") {
     // -> Look at the last two states:
     CHECK(states.size() >= 2);
     CHECK(states.at(states.size() - 2) == States::Connected);
-    CHECK(states.at(states.size() - 1) == States::SessionActicated);
+    CHECK(states.at(states.size() - 1) == States::SessionActivated);
 
     states.clear();
     client.disconnect();

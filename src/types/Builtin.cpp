@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <iterator>  // istreambuf_iterator
 #include <sstream>
+#include <utility>  // move
 
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/detail/helper.h"
@@ -43,7 +44,7 @@ Guid Guid::random() {
 std::string Guid::toString() const {
     // <Data1>-<Data2>-<Data3>-<Data4[0:1]>-<Data4[2:7]>
     // each value is formatted as a hexadecimal number with padded zeros
-    std::stringstream ss;
+    std::ostringstream ss;
     ss << std::hex << std::uppercase << std::setfill('0');
 
     ss << std::setw(8) << handle()->data1 << "-";
@@ -160,6 +161,57 @@ std::string_view LocalizedText::getText() const {
 
 std::string_view LocalizedText::getLocale() const {
     return detail::toStringView(handle()->locale);
+}
+
+bool operator==(const NumericRangeDimension& left, const NumericRangeDimension& right) noexcept {
+    return (left.min == right.min) && (left.max == right.max);
+}
+
+bool operator!=(const NumericRangeDimension& left, const NumericRangeDimension& right) noexcept {
+    return !(left == right);
+}
+
+NumericRange::NumericRange() = default;
+
+NumericRange::NumericRange(std::string_view encodedRange) {
+    UA_NumericRange native{};
+#if UAPP_OPEN62541_VER_GE(1, 1)
+    const auto status = UA_NumericRange_parse(&native, String(encodedRange));
+#else
+    const auto status = UA_NumericRange_parseFromString(&native, String(encodedRange).handle());
+#endif
+    dimensions_ = std::vector<NumericRangeDimension>(
+        native.dimensions,
+        native.dimensions + native.dimensionsSize  // NOLINT
+    );
+    UA_free(native.dimensions);  // NOLINT
+    detail::throwOnBadStatus(status);
+}
+
+NumericRange::NumericRange(std::vector<NumericRangeDimension> dimensions)
+    : dimensions_(std::move(dimensions)) {}
+
+bool NumericRange::empty() const noexcept {
+    return dimensions_.empty();
+}
+
+const std::vector<NumericRangeDimension>& NumericRange::get() const noexcept {
+    return dimensions_;
+}
+
+std::string NumericRange::toString() const {
+    std::ostringstream ss;
+    for (size_t i = 0; i < dimensions_.size(); ++i) {
+        const auto& dimension = dimensions_.at(i);
+        ss << dimension.min;
+        if (dimension.min != dimension.max) {
+            ss << ":" << dimension.max;
+        }
+        if (i < dimensions_.size() - 1) {
+            ss << ",";
+        }
+    }
+    return ss.str();
 }
 
 }  // namespace opcua

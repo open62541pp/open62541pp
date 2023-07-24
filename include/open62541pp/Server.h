@@ -9,6 +9,7 @@
 #include "open62541pp/Auth.h"
 #include "open62541pp/Logger.h"
 #include "open62541pp/Subscription.h"
+#include "open62541pp/ValueBackend.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/NodeId.h"
 
@@ -89,6 +90,9 @@ public:
     std::vector<std::string> getNamespaceArray();
     /// Register namespace. The new namespace index will be returned.
     [[nodiscard]] uint16_t registerNamespace(std::string_view uri);
+
+    /// Set value callbacks to execute before every read and after every write operation.
+    void setVariableNodeValueCallback(const NodeId& id, ValueCallback callback);
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
     /// Create a (pseudo) subscription to monitor local data changes and events.

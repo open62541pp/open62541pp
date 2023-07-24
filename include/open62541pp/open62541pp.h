@@ -15,6 +15,7 @@
 #include "open62541pp/TypeConverter.h"
 #include "open62541pp/TypeConverterNative.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/ValueBackend.h"
 #include "open62541pp/detail/helper.h"
 #include "open62541pp/detail/traits.h"
 #include "open62541pp/overloads/comparison.h"
