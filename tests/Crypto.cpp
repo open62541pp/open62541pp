@@ -1,5 +1,3 @@
-#ifdef UA_ENABLE_ENCRYPTION
-
 #include <string>
 #include <vector>
 
@@ -15,6 +13,8 @@
 #include "helper/Runner.h"
 
 using namespace opcua;
+
+#ifdef UA_ENABLE_ENCRYPTION
 
 #ifdef UAPP_CREATE_CERTIFICATE
 
