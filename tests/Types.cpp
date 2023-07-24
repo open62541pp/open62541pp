@@ -45,9 +45,19 @@ TEST_CASE_TEMPLATE("StringLike", T, String, ByteString, XmlElement) {
 }
 
 TEST_CASE("ByteString") {
+    SUBCASE("Construct from vector") {
+        const ByteString bs({0, 1, 2});
+        CHECK(bs->length == 3);
+        CHECK(bs->data[0] == 0);
+        CHECK(bs->data[1] == 1);
+        CHECK(bs->data[2] == 2);
+    }
+
 #if UAPP_OPEN62541_VER_GE(1, 1)
-    CHECK(ByteString::fromBase64("dGVzdDEyMw==") == ByteString("test123"));
-    CHECK(ByteString("test123").toBase64() == "dGVzdDEyMw==");
+    SUBCASE("fromBase64 / to Base64") {
+        CHECK(ByteString::fromBase64("dGVzdDEyMw==") == ByteString("test123"));
+        CHECK(ByteString("test123").toBase64() == "dGVzdDEyMw==");
+    }
 #endif
 }
 

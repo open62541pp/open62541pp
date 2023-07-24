@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <string>
 #include <string_view>
+#include <vector>
 
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/open62541.h"
@@ -52,6 +53,7 @@ public:
     using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
 
     explicit ByteString(std::string_view str);
+    explicit ByteString(const std::vector<uint8_t>& bytes);
 
     /// Parse ByteString from Base64 encoded string.
     /// @note Only supported since open62541 v1.1

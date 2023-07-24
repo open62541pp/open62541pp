@@ -63,6 +63,12 @@ std::string Guid::toString() const {
 ByteString::ByteString(std::string_view str)
     : ByteString(UA_ByteString{detail::allocUaString(str)}) {}
 
+ByteString::ByteString(const std::vector<uint8_t>& bytes) {
+    const auto status = UA_ByteString_allocBuffer(handle(), bytes.size());
+    detail::throwOnBadStatus(status);
+    std::copy(bytes.begin(), bytes.end(), handle()->data);
+}
+
 bool ByteString::empty() const noexcept {
     return handle()->length == 0U;
 }
