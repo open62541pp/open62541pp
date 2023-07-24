@@ -5,6 +5,7 @@
 #include <doctest/doctest.h>
 
 #include "open62541pp/Common.h"
+#include "open62541pp/Config.h"
 #include "open62541pp/NodeIds.h"
 #include "open62541pp/detail/helper.h"  // detail::toString
 #include "open62541pp/types/Builtin.h"
@@ -14,8 +15,6 @@
 #include "open62541pp/types/ExtensionObject.h"
 #include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"
-
-#include "version.h"
 
 using namespace opcua;
 

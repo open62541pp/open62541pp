@@ -13,7 +13,6 @@
 #include "open62541pp/types/Composed.h"
 
 #include "open62541_impl.h"
-#include "version.h"
 
 namespace opcua {
 

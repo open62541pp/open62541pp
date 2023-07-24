@@ -4,6 +4,7 @@
 #include <string>
 #include <utility>  // move
 
+#include "open62541pp/Config.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Node.h"
 #include "open62541pp/TypeConverter.h"
@@ -13,7 +14,6 @@
 #include "ClientContext.h"
 #include "CustomLogger.h"
 #include "open62541_impl.h"
-#include "version.h"
 
 namespace opcua {
 

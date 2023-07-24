@@ -7,10 +7,9 @@
 #include <sstream>
 #include <utility>  // move
 
+#include "open62541pp/Config.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/detail/helper.h"
-
-#include "../version.h"
 
 namespace opcua {
 

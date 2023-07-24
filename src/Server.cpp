@@ -19,7 +19,6 @@
 #include "CustomLogger.h"
 #include "ServerContext.h"
 #include "open62541_impl.h"
-#include "version.h"
 
 namespace opcua {
 
