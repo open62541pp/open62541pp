@@ -153,7 +153,11 @@ NumericRange::NumericRange() = default;
 
 NumericRange::NumericRange(std::string_view encodedRange) {
     UA_NumericRange native{};
+#if UAPP_OPEN62541_VER_GE(1, 1)
     const auto status = UA_NumericRange_parse(&native, String(encodedRange));
+#else
+    const auto status = UA_NumericRange_parseFromString(&native, String(encodedRange).handle());
+#endif
     dimensions_ = std::vector<NumericRangeDimension>(
         native.dimensions,
         native.dimensions + native.dimensionsSize  // NOLINT
