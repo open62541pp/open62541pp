@@ -10,42 +10,20 @@
 
 namespace opcua {
 
-AccessControlBase::AccessControlBase(Server& server)
-    : server_(server) {}
-
-AccessControlBase::~AccessControlBase() = default;
-
-Server& AccessControlBase::getServer() noexcept {
-    return server_;
-}
-
-const Server& AccessControlBase::getServer() const noexcept {
-    return server_;
-}
-
 /* ----------------------------------- Default access control ----------------------------------- */
 
 constexpr std::string_view policyIdAnonymous = "open62541-anonymous-policy";
 constexpr std::string_view policyIdUsername = "open62541-username-policy";
 
-AccessControlDefault::AccessControlDefault(
-    Server& server, bool allowAnonymous, std::vector<Login> logins
-)
-    : AccessControlBase(server),
-      allowAnonymous_(allowAnonymous),
+AccessControlDefault::AccessControlDefault(bool allowAnonymous, std::vector<Login> logins)
+    : allowAnonymous_(allowAnonymous),
       logins_(std::move(logins)) {}
 
 std::vector<UserTokenPolicy> AccessControlDefault::getUserTokenPolicies() noexcept {
-    // retrieve security policy from server instance
-    auto* config = UA_Server_getConfig(getServer().handle());
-    assert(config->securityPoliciesSize >= 1);  // NOLINT
-    auto securityPolicyUri = detail::toStringView(
-        config->securityPolicies[config->securityPoliciesSize - 1].policyUri  // NOLINT
-    );
-
     std::vector<UserTokenPolicy> result;
     std::string_view issuedTokenType{};
     std::string_view issuerEndpointUrl{};
+    std::string_view securityPolicyUri{};
     if (allowAnonymous_) {
         result.emplace_back(
             policyIdAnonymous,
@@ -68,6 +46,7 @@ std::vector<UserTokenPolicy> AccessControlDefault::getUserTokenPolicies() noexce
 }
 
 UA_StatusCode AccessControlDefault::activateSession(
+    [[maybe_unused]] Server& server,
     [[maybe_unused]] const EndpointDescription& endpointDescription,
     [[maybe_unused]] const ByteString& secureChannelRemoteCertificate,
     [[maybe_unused]] const NodeId& sessionId,
@@ -125,10 +104,13 @@ UA_StatusCode AccessControlDefault::activateSession(
 }
 
 void AccessControlDefault::closeSesion(
-    [[maybe_unused]] const NodeId& sessionId, [[maybe_unused]] SessionContext& sessionContext
+    [[maybe_unused]] Server& server,
+    [[maybe_unused]] const NodeId& sessionId,
+    [[maybe_unused]] SessionContext& sessionContext
 ) noexcept {}
 
 uint32_t AccessControlDefault::getUserRightsMask(
+    [[maybe_unused]] Server& server,
     [[maybe_unused]] const NodeId& sessionId,
     [[maybe_unused]] SessionContext& sessionContext,
     [[maybe_unused]] const NodeId& nodeId,
@@ -138,6 +120,7 @@ uint32_t AccessControlDefault::getUserRightsMask(
 }
 
 uint8_t AccessControlDefault::getUserAccessLevel(
+    [[maybe_unused]] Server& server,
     [[maybe_unused]] const NodeId& sessionId,
     [[maybe_unused]] SessionContext& sessionContext,
     [[maybe_unused]] const NodeId& nodeId,
@@ -147,6 +130,7 @@ uint8_t AccessControlDefault::getUserAccessLevel(
 }
 
 bool AccessControlDefault::getUserExecutable(
+    [[maybe_unused]] Server& server,
     [[maybe_unused]] const NodeId& sessionId,
     [[maybe_unused]] SessionContext& sessionContext,
     [[maybe_unused]] const NodeId& methodId,
@@ -156,6 +140,7 @@ bool AccessControlDefault::getUserExecutable(
 }
 
 bool AccessControlDefault::getUserExecutableOnObject(
+    [[maybe_unused]] Server& server,
     [[maybe_unused]] const NodeId& sessionId,
     [[maybe_unused]] SessionContext& sessionContext,
     [[maybe_unused]] const NodeId& methodId,
@@ -167,6 +152,7 @@ bool AccessControlDefault::getUserExecutableOnObject(
 }
 
 bool AccessControlDefault::allowAddNode(
+    [[maybe_unused]] Server& server,
     [[maybe_unused]] const NodeId& sessionId,
     [[maybe_unused]] SessionContext& sessionContext,
     [[maybe_unused]] const AddNodesItem& item
@@ -175,6 +161,7 @@ bool AccessControlDefault::allowAddNode(
 }
 
 bool AccessControlDefault::allowAddReference(
+    [[maybe_unused]] Server& server,
     [[maybe_unused]] const NodeId& sessionId,
     [[maybe_unused]] SessionContext& sessionContext,
     [[maybe_unused]] const AddReferencesItem& item
@@ -183,6 +170,7 @@ bool AccessControlDefault::allowAddReference(
 }
 
 bool AccessControlDefault::allowDeleteNode(
+    [[maybe_unused]] Server& server,
     [[maybe_unused]] const NodeId& sessionId,
     [[maybe_unused]] SessionContext& sessionContext,
     [[maybe_unused]] const DeleteNodesItem& item
@@ -191,6 +179,7 @@ bool AccessControlDefault::allowDeleteNode(
 }
 
 bool AccessControlDefault::allowDeleteReference(
+    [[maybe_unused]] Server& server,
     [[maybe_unused]] const NodeId& sessionId,
     [[maybe_unused]] SessionContext& sessionContext,
     [[maybe_unused]] const DeleteReferencesItem& item
@@ -199,6 +188,7 @@ bool AccessControlDefault::allowDeleteReference(
 }
 
 bool AccessControlDefault::allowBrowseNode(
+    [[maybe_unused]] Server& server,
     [[maybe_unused]] const NodeId& sessionId,
     [[maybe_unused]] SessionContext& sessionContext,
     [[maybe_unused]] const NodeId& nodeId,
@@ -209,6 +199,7 @@ bool AccessControlDefault::allowBrowseNode(
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 bool AccessControlDefault::allowTransferSubscription(
+    [[maybe_unused]] Server& server,
     [[maybe_unused]] const NodeId& oldSessionId,
     [[maybe_unused]] SessionContext& oldSessionContext,
     [[maybe_unused]] const NodeId& newSessionId,
@@ -220,6 +211,7 @@ bool AccessControlDefault::allowTransferSubscription(
 
 #ifdef UA_ENABLE_HISTORIZING
 bool AccessControlDefault::allowHistoryUpdate(
+    [[maybe_unused]] Server& server,
     [[maybe_unused]] const NodeId& sessionId,
     [[maybe_unused]] SessionContext& sessionContext,
     [[maybe_unused]] const NodeId& nodeId,
@@ -230,6 +222,7 @@ bool AccessControlDefault::allowHistoryUpdate(
 }
 
 bool AccessControlDefault::allowHistoryDelete(
+    [[maybe_unused]] Server& server,
     [[maybe_unused]] const NodeId& sessionId,
     [[maybe_unused]] SessionContext& sessionContext,
     [[maybe_unused]] const NodeId& nodeId,

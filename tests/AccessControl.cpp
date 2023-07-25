@@ -9,25 +9,22 @@ TEST_CASE("AccessControlDefault") {
     Server server;
 
     SUBCASE("getUserTokenPolicies") {
-        AccessControlDefault ac(server, true, {{"username", "password"}});
-        std::string_view securityPolicyUriNone = "http://opcfoundation.org/UA/SecurityPolicy#None";
+        AccessControlDefault ac(true, {{"username", "password"}});
 
         const auto userTokenPolicies = ac.getUserTokenPolicies();
         CHECK(userTokenPolicies.size() == 2);
         CHECK(userTokenPolicies.at(0).getPolicyId() == "open62541-anonymous-policy");
         CHECK(userTokenPolicies.at(0).getTokenType() == UserTokenType::Anonymous);
-        CHECK(userTokenPolicies.at(0).getSecurityPolicyUri() == securityPolicyUriNone);
 
         CHECK(userTokenPolicies.at(1).getPolicyId() == "open62541-username-policy");
         CHECK(userTokenPolicies.at(1).getTokenType() == UserTokenType::Username);
-        CHECK(userTokenPolicies.at(1).getSecurityPolicyUri() == securityPolicyUriNone);
     }
 
     SUBCASE("activateSession") {
         for (bool allowAnonymous : {false, true}) {
             CAPTURE(allowAnonymous);
 
-            AccessControlDefault ac(server, allowAnonymous, {{"username", "password"}});
+            AccessControlDefault ac(allowAnonymous, {{"username", "password"}});
             const EndpointDescription endpointDescription{};
             const ByteString secureChannelRemoteCertificate{};
             const NodeId sessionId{};
@@ -35,6 +32,7 @@ TEST_CASE("AccessControlDefault") {
 
             const auto activateSessionWithToken = [&](const ExtensionObject& userIdentityToken) {
                 return ac.activateSession(
+                    server,
                     endpointDescription,
                     secureChannelRemoteCertificate,
                     sessionId,
@@ -98,25 +96,27 @@ TEST_CASE("AccessControlDefault") {
     }
 
     SUBCASE("Access control callbacks (all permissive)") {
-        AccessControlDefault ac(server);
+        AccessControlDefault ac;
         const NodeId sessionId{};
         AccessControlBase::SessionContext sessionContext{};
 
-        CHECK(ac.getUserRightsMask(sessionId, sessionContext, {}, {}) == 0xFFFFFFFF);
-        CHECK(ac.getUserAccessLevel(sessionId, sessionContext, {}, {}) == 0xFF);
-        CHECK(ac.getUserExecutable(sessionId, sessionContext, {}, {}));
-        CHECK(ac.getUserExecutableOnObject(sessionId, sessionContext, {}, {}, {}, {}));
-        CHECK(ac.allowAddNode(sessionId, sessionContext, {}));
-        CHECK(ac.allowAddReference(sessionId, sessionContext, {}));
-        CHECK(ac.allowDeleteNode(sessionId, sessionContext, {}));
-        CHECK(ac.allowDeleteReference(sessionId, sessionContext, {}));
-        CHECK(ac.allowBrowseNode(sessionId, sessionContext, {}, {}));
+        CHECK(ac.getUserRightsMask(server, sessionId, sessionContext, {}, {}) == 0xFFFFFFFF);
+        CHECK(ac.getUserAccessLevel(server, sessionId, sessionContext, {}, {}) == 0xFF);
+        CHECK(ac.getUserExecutable(server, sessionId, sessionContext, {}, {}));
+        CHECK(ac.getUserExecutableOnObject(server, sessionId, sessionContext, {}, {}, {}, {}));
+        CHECK(ac.allowAddNode(server, sessionId, sessionContext, {}));
+        CHECK(ac.allowAddReference(server, sessionId, sessionContext, {}));
+        CHECK(ac.allowDeleteNode(server, sessionId, sessionContext, {}));
+        CHECK(ac.allowDeleteReference(server, sessionId, sessionContext, {}));
+        CHECK(ac.allowBrowseNode(server, sessionId, sessionContext, {}, {}));
 #ifdef UA_ENABLE_SUBSCRIPTIONS
-        CHECK(ac.allowTransferSubscription(sessionId, sessionContext, sessionId, sessionContext));
+        CHECK(ac.allowTransferSubscription(
+            server, sessionId, sessionContext, sessionId, sessionContext
+        ));
 #endif
 #ifdef UA_ENABLE_HISTORIZING
-        CHECK(ac.allowHistoryUpdate(sessionId, sessionContext, {}, {}, {}));
-        CHECK(ac.allowHistoryDelete(sessionId, sessionContext, {}, {}, {}, {}));
+        CHECK(ac.allowHistoryUpdate(server, sessionId, sessionContext, {}, {}, {}));
+        CHECK(ac.allowHistoryDelete(server, sessionId, sessionContext, {}, {}, {}, {}));
 #endif
     }
 }

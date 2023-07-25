@@ -80,6 +80,7 @@ enum class UserTokenType : uint32_t {
 
 /**
  * UA_UserTokenPolicy wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.42
  * @ingroup TypeWrapper
  */
 class UserTokenPolicy : public TypeWrapper<UA_UserTokenPolicy, UA_TYPES_USERTOKENPOLICY> {

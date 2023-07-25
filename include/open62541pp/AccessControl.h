@@ -38,15 +38,15 @@ public:
     /// Arbitrary data attached to a session.
     using SessionContext = std::any;
 
-    explicit AccessControlBase(Server& server);
+    AccessControlBase() = default;
 
-    virtual ~AccessControlBase();
+    virtual ~AccessControlBase() = default;
 
-    AccessControlBase(const AccessControlBase& other) = delete;
-    AccessControlBase(AccessControlBase&& other) noexcept = delete;
+    AccessControlBase(const AccessControlBase& other) = default;
+    AccessControlBase(AccessControlBase&& other) noexcept = default;
 
-    AccessControlBase& operator=(const AccessControlBase& other) = delete;
-    AccessControlBase& operator=(AccessControlBase&& other) noexcept = delete;
+    AccessControlBase& operator=(const AccessControlBase& other) = default;
+    AccessControlBase& operator=(AccessControlBase&& other) noexcept = default;
 
     /// Get available user token policies.
     virtual std::vector<UserTokenPolicy> getUserTokenPolicies() noexcept = 0;
@@ -59,6 +59,7 @@ public:
      * The new session is rejected if a status code other than UA_STATUSCODE_GOOD is returned.
      */
     virtual UA_StatusCode activateSession(
+        Server& server,
         const EndpointDescription& endpointDescription,
         const ByteString& secureChannelRemoteCertificate,
         const NodeId& sessionId,
@@ -67,10 +68,13 @@ public:
     ) noexcept = 0;
 
     /// Deauthenticate a session and cleanup session context.
-    virtual void closeSesion(const NodeId& sessionId, SessionContext& sessionContext) noexcept = 0;
+    virtual void closeSesion(
+        Server& server, const NodeId& sessionId, SessionContext& sessionContext
+    ) noexcept = 0;
 
     /// Access control for all nodes.
     virtual uint32_t getUserRightsMask(
+        Server& server,
         const NodeId& sessionId,
         SessionContext& sessionContext,
         const NodeId& nodeId,
@@ -79,6 +83,7 @@ public:
 
     /// Additional access control for variable nodes.
     virtual uint8_t getUserAccessLevel(
+        Server& server,
         const NodeId& sessionId,
         SessionContext& sessionContext,
         const NodeId& nodeId,
@@ -87,6 +92,7 @@ public:
 
     /// Additional access control for method nodes.
     virtual bool getUserExecutable(
+        Server& server,
         const NodeId& sessionId,
         SessionContext& sessionContext,
         const NodeId& methodId,
@@ -95,6 +101,7 @@ public:
 
     /// Additional access control for calling a method node in the context of a specific object.
     virtual bool getUserExecutableOnObject(
+        Server& server,
         const NodeId& sessionId,
         SessionContext& sessionContext,
         const NodeId& methodId,
@@ -105,26 +112,39 @@ public:
 
     /// Allow adding a node.
     virtual bool allowAddNode(
-        const NodeId& sessionId, SessionContext& sessionContext, const AddNodesItem& item
+        Server& server,
+        const NodeId& sessionId,
+        SessionContext& sessionContext,
+        const AddNodesItem& item
     ) noexcept = 0;
 
     /// Allow adding a reference.
     virtual bool allowAddReference(
-        const NodeId& sessionId, SessionContext& sessionContext, const AddReferencesItem& item
+        Server& server,
+        const NodeId& sessionId,
+        SessionContext& sessionContext,
+        const AddReferencesItem& item
     ) noexcept = 0;
 
     /// Allow deleting a node.
     virtual bool allowDeleteNode(
-        const NodeId& sessionId, SessionContext& sessionContext, const DeleteNodesItem& item
+        Server& server,
+        const NodeId& sessionId,
+        SessionContext& sessionContext,
+        const DeleteNodesItem& item
     ) noexcept = 0;
 
     /// Allow deleting a reference.
     virtual bool allowDeleteReference(
-        const NodeId& sessionId, SessionContext& sessionContext, const DeleteReferencesItem& item
+        Server& server,
+        const NodeId& sessionId,
+        SessionContext& sessionContext,
+        const DeleteReferencesItem& item
     ) noexcept = 0;
 
     /// Allow browsing a node.
     virtual bool allowBrowseNode(
+        Server& server,
         const NodeId& sessionId,
         SessionContext& sessionContext,
         const NodeId& nodeId,
@@ -134,6 +154,7 @@ public:
 #ifdef UA_ENABLE_SUBSCRIPTIONS
     /// Allow transfer of a subscription to another session.
     virtual bool allowTransferSubscription(
+        Server& server,
         const NodeId& oldSessionId,
         SessionContext& oldSessionContext,
         const NodeId& newSessionId,
@@ -144,6 +165,7 @@ public:
 #ifdef UA_ENABLE_HISTORIZING
     /// Allow insert, replace, update of historical data.
     virtual bool allowHistoryUpdate(
+        Server& server,
         const NodeId& sessionId,
         SessionContext& sessionContext,
         const NodeId& nodeId,
@@ -153,6 +175,7 @@ public:
 
     /// Allow delete of historical data.
     virtual bool allowHistoryDelete(
+        Server& server,
         const NodeId& sessionId,
         SessionContext& sessionContext,
         const NodeId& nodeId,
@@ -161,13 +184,6 @@ public:
         bool isDeleteModified
     ) noexcept = 0;
 #endif
-
-protected:
-    Server& getServer() noexcept;
-    const Server& getServer() const noexcept;
-
-private:
-    Server& server_;
 };
 
 /* ----------------------------------- Default access control ----------------------------------- */
@@ -182,13 +198,12 @@ private:
  */
 class AccessControlDefault : public AccessControlBase {
 public:
-    explicit AccessControlDefault(
-        Server& server, bool allowAnonymous = true, std::vector<Login> logins = {}
-    );
+    explicit AccessControlDefault(bool allowAnonymous = true, std::vector<Login> logins = {});
 
     std::vector<UserTokenPolicy> getUserTokenPolicies() noexcept override;
 
     UA_StatusCode activateSession(
+        Server& server,
         const EndpointDescription& endpointDescription,
         const ByteString& secureChannelRemoteCertificate,
         const NodeId& sessionId,
@@ -196,9 +211,12 @@ public:
         SessionContext& sessionContext
     ) noexcept override;
 
-    void closeSesion(const NodeId& sessionId, SessionContext& sessionContext) noexcept override;
+    void closeSesion(
+        Server& server, const NodeId& sessionId, SessionContext& sessionContext
+    ) noexcept override;
 
     uint32_t getUserRightsMask(
+        Server& server,
         const NodeId& sessionId,
         SessionContext& sessionContext,
         const NodeId& nodeId,
@@ -206,6 +224,7 @@ public:
     ) noexcept override;
 
     uint8_t getUserAccessLevel(
+        Server& server,
         const NodeId& sessionId,
         SessionContext& sessionContext,
         const NodeId& nodeId,
@@ -213,6 +232,7 @@ public:
     ) noexcept override;
 
     bool getUserExecutable(
+        Server& server,
         const NodeId& sessionId,
         SessionContext& sessionContext,
         const NodeId& methodId,
@@ -220,6 +240,7 @@ public:
     ) noexcept override;
 
     bool getUserExecutableOnObject(
+        Server& server,
         const NodeId& sessionId,
         SessionContext& sessionContext,
         const NodeId& methodId,
@@ -229,22 +250,35 @@ public:
     ) noexcept override;
 
     bool allowAddNode(
-        const NodeId& sessionId, SessionContext& sessionContext, const AddNodesItem& item
+        Server& server,
+        const NodeId& sessionId,
+        SessionContext& sessionContext,
+        const AddNodesItem& item
     ) noexcept override;
 
     bool allowAddReference(
-        const NodeId& sessionId, SessionContext& sessionContext, const AddReferencesItem& item
+        Server& server,
+        const NodeId& sessionId,
+        SessionContext& sessionContext,
+        const AddReferencesItem& item
     ) noexcept override;
 
     bool allowDeleteNode(
-        const NodeId& sessionId, SessionContext& sessionContext, const DeleteNodesItem& item
+        Server& server,
+        const NodeId& sessionId,
+        SessionContext& sessionContext,
+        const DeleteNodesItem& item
     ) noexcept override;
 
     bool allowDeleteReference(
-        const NodeId& sessionId, SessionContext& sessionContext, const DeleteReferencesItem& item
+        Server& server,
+        const NodeId& sessionId,
+        SessionContext& sessionContext,
+        const DeleteReferencesItem& item
     ) noexcept override;
 
     bool allowBrowseNode(
+        Server& server,
         const NodeId& sessionId,
         SessionContext& sessionContext,
         const NodeId& nodeId,
@@ -253,6 +287,7 @@ public:
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
     bool allowTransferSubscription(
+        Server& server,
         const NodeId& oldSessionId,
         SessionContext& oldSessionContext,
         const NodeId& newSessionId,
@@ -262,6 +297,7 @@ public:
 
 #ifdef UA_ENABLE_HISTORIZING
     bool allowHistoryUpdate(
+        Server& server,
         const NodeId& sessionId,
         SessionContext& sessionContext,
         const NodeId& nodeId,
@@ -270,6 +306,7 @@ public:
     ) noexcept override;
 
     bool allowHistoryDelete(
+        Server& server,
         const NodeId& sessionId,
         SessionContext& sessionContext,
         const NodeId& nodeId,
