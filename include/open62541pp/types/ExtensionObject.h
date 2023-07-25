@@ -125,6 +125,15 @@ T* ExtensionObject::getDecodedData() noexcept {
 }
 
 template <typename T, TypeIndex typeIndex>
+const T* ExtensionObject::getDecodedData() const noexcept {
+    detail::assertTypeCombination<T, typeIndex>();
+    if (getDecodedDataType() == detail::getUaDataType(typeIndex)) {
+        return static_cast<const T*>(getDecodedData());
+    }
+    return nullptr;
+}
+
+template <typename T, TypeIndex typeIndex>
 ExtensionObject ExtensionObject::fromDecoded(T& data) noexcept {
     detail::assertTypeCombination<T, typeIndex>();
     static_assert(
