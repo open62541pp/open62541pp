@@ -110,6 +110,7 @@ endif()
 include(GNUInstallDirs)
 add_library(
     open62541pp
+    src/AccessControl.cpp
     src/Client.cpp
     src/Crypto.cpp
     src/CustomLogger.cpp

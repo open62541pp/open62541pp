@@ -3,6 +3,7 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/3rdparty/doctest doctest EXCLUDE_FROM_ALL
 add_executable(
     open62541pp_tests
     main.cpp
+    AccessControl.cpp
     Client.cpp
     Crypto.cpp
     helper.cpp

@@ -18,6 +18,7 @@
 // UA_ENABLE_AMALGAMATION=OFF
 // common
 #include <open62541/config.h>
+#include <open62541/plugin/accesscontrol.h>
 #include <open62541/plugin/accesscontrol_default.h>
 #include <open62541/plugin/log.h>
 #if __has_include(<open62541/plugin/create_certificate.h>)  // since v1.3

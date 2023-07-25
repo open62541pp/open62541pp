@@ -1,5 +1,6 @@
 #pragma once
 
+#include "open62541pp/AccessControl.h"
 #include "open62541pp/Auth.h"
 #include "open62541pp/Client.h"
 #include "open62541pp/Common.h"
