@@ -342,12 +342,12 @@ ServerContext& Server::getContext() noexcept {
 
 /* ---------------------------------------------------------------------------------------------- */
 
-bool operator==(const Server& left, const Server& right) noexcept {
-    return (left.handle() == right.handle());
+bool operator==(const Server& lhs, const Server& rhs) noexcept {
+    return (lhs.handle() == rhs.handle());
 }
 
-bool operator!=(const Server& left, const Server& right) noexcept {
-    return !(left == right);
+bool operator!=(const Server& lhs, const Server& rhs) noexcept {
+    return !(lhs == rhs);
 }
 
 }  // namespace opcua

@@ -422,14 +422,13 @@ private:
 /* ---------------------------------------------------------------------------------------------- */
 
 template <typename ServerOrClient>
-bool operator==(const Node<ServerOrClient>& left, const Node<ServerOrClient>& right) noexcept {
-    return (left.getConnection() == right.getConnection()) &&
-           (left.getNodeId() == right.getNodeId());
+bool operator==(const Node<ServerOrClient>& lhs, const Node<ServerOrClient>& rhs) noexcept {
+    return (lhs.getConnection() == rhs.getConnection()) && (lhs.getNodeId() == rhs.getNodeId());
 }
 
 template <typename ServerOrClient>
-bool operator!=(const Node<ServerOrClient>& left, const Node<ServerOrClient>& right) noexcept {
-    return !(left == right);
+bool operator!=(const Node<ServerOrClient>& lhs, const Node<ServerOrClient>& rhs) noexcept {
+    return !(lhs == rhs);
 }
 
 }  // namespace opcua

@@ -286,33 +286,33 @@ constexpr const NativeType& asNative(const WrapperType& wrapper) noexcept {
 // generate from UA_* type comparison
 
 template <typename T, typename = std::enable_if_t<detail::IsTypeWrapper<T>::value>>
-inline bool operator==(const T& left, const T& right) noexcept {
-    return (*left.handle() == *right.handle());
+inline bool operator==(const T& lhs, const T& rhs) noexcept {
+    return (*lhs.handle() == *rhs.handle());
 }
 
 template <typename T, typename = std::enable_if_t<detail::IsTypeWrapper<T>::value>>
-inline bool operator!=(const T& left, const T& right) noexcept {
-    return (*left.handle() != *right.handle());
+inline bool operator!=(const T& lhs, const T& rhs) noexcept {
+    return (*lhs.handle() != *rhs.handle());
 }
 
 template <typename T, typename = std::enable_if_t<detail::IsTypeWrapper<T>::value>>
-inline bool operator<(const T& left, const T& right) noexcept {
-    return (*left.handle() < *right.handle());
+inline bool operator<(const T& lhs, const T& rhs) noexcept {
+    return (*lhs.handle() < *rhs.handle());
 }
 
 template <typename T, typename = std::enable_if_t<detail::IsTypeWrapper<T>::value>>
-inline bool operator>(const T& left, const T& right) noexcept {
-    return (*left.handle() > *right.handle());
+inline bool operator>(const T& lhs, const T& rhs) noexcept {
+    return (*lhs.handle() > *rhs.handle());
 }
 
 template <typename T, typename = std::enable_if_t<detail::IsTypeWrapper<T>::value>>
-inline bool operator<=(const T& left, const T& right) noexcept {
-    return (*left.handle() <= *right.handle());
+inline bool operator<=(const T& lhs, const T& rhs) noexcept {
+    return (*lhs.handle() <= *rhs.handle());
 }
 
 template <typename T, typename = std::enable_if_t<detail::IsTypeWrapper<T>::value>>
-inline bool operator>=(const T& left, const T& right) noexcept {
-    return (*left.handle() >= *right.handle());
+inline bool operator>=(const T& lhs, const T& rhs) noexcept {
+    return (*lhs.handle() >= *rhs.handle());
 }
 
 }  // namespace opcua

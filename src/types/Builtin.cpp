@@ -194,12 +194,12 @@ std::string_view LocalizedText::getLocale() const {
     return detail::toStringView(handle()->locale);
 }
 
-bool operator==(const NumericRangeDimension& left, const NumericRangeDimension& right) noexcept {
-    return (left.min == right.min) && (left.max == right.max);
+bool operator==(const NumericRangeDimension& lhs, const NumericRangeDimension& rhs) noexcept {
+    return (lhs.min == rhs.min) && (lhs.max == rhs.max);
 }
 
-bool operator!=(const NumericRangeDimension& left, const NumericRangeDimension& right) noexcept {
-    return !(left == right);
+bool operator!=(const NumericRangeDimension& lhs, const NumericRangeDimension& rhs) noexcept {
+    return !(lhs == rhs);
 }
 
 NumericRange::NumericRange() = default;

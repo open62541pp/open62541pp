@@ -78,15 +78,15 @@ private:
 /* ---------------------------------------------------------------------------------------------- */
 
 template <typename T>
-inline bool operator==(const MonitoredItem<T>& left, const MonitoredItem<T>& right) noexcept {
-    return (left.getConnection() == right.getConnection()) &&
-           (left.getSubscriptionId() == right.getSubscriptionId()) &&
-           (left.getMonitoredItemId() == right.getMonitoredItemId());
+inline bool operator==(const MonitoredItem<T>& lhs, const MonitoredItem<T>& rhs) noexcept {
+    return (lhs.getConnection() == rhs.getConnection()) &&
+           (lhs.getSubscriptionId() == rhs.getSubscriptionId()) &&
+           (lhs.getMonitoredItemId() == rhs.getMonitoredItemId());
 }
 
 template <typename T>
-inline bool operator!=(const MonitoredItem<T>& left, const MonitoredItem<T>& right) noexcept {
-    return !(left == right);
+inline bool operator!=(const MonitoredItem<T>& lhs, const MonitoredItem<T>& rhs) noexcept {
+    return !(lhs == rhs);
 }
 
 }  // namespace opcua

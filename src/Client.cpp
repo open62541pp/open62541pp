@@ -414,12 +414,12 @@ ClientContext& Client::getContext() noexcept {
 
 /* ---------------------------------------------------------------------------------------------- */
 
-bool operator==(const Client& left, const Client& right) noexcept {
-    return (left.handle() == right.handle());
+bool operator==(const Client& lhs, const Client& rhs) noexcept {
+    return (lhs.handle() == rhs.handle());
 }
 
-bool operator!=(const Client& left, const Client& right) noexcept {
-    return !(left == right);
+bool operator!=(const Client& lhs, const Client& rhs) noexcept {
+    return !(lhs == rhs);
 }
 
 }  // namespace opcua

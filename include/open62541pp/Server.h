@@ -129,7 +129,7 @@ private:
 
 /* ---------------------------------------------------------------------------------------------- */
 
-bool operator==(const Server& left, const Server& right) noexcept;
-bool operator!=(const Server& left, const Server& right) noexcept;
+bool operator==(const Server& lhs, const Server& rhs) noexcept;
+bool operator!=(const Server& lhs, const Server& rhs) noexcept;
 
 }  // namespace opcua

@@ -119,14 +119,14 @@ private:
 /* ---------------------------------------------------------------------------------------------- */
 
 template <typename T>
-inline bool operator==(const Subscription<T>& left, const Subscription<T>& right) noexcept {
-    return (left.getConnection() == right.getConnection()) &&
-           (left.getSubscriptionId() == right.getSubscriptionId());
+inline bool operator==(const Subscription<T>& lhs, const Subscription<T>& rhs) noexcept {
+    return (lhs.getConnection() == rhs.getConnection()) &&
+           (lhs.getSubscriptionId() == rhs.getSubscriptionId());
 }
 
 template <typename T>
-inline bool operator!=(const Subscription<T>& left, const Subscription<T>& right) noexcept {
-    return !(left == right);
+inline bool operator!=(const Subscription<T>& lhs, const Subscription<T>& rhs) noexcept {
+    return !(lhs == rhs);
 }
 
 }  // namespace opcua

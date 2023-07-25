@@ -140,8 +140,8 @@ public:
 
 using NumericRangeDimension = UA_NumericRangeDimension;
 
-bool operator==(const NumericRangeDimension& left, const NumericRangeDimension& right) noexcept;
-bool operator!=(const NumericRangeDimension& left, const NumericRangeDimension& right) noexcept;
+bool operator==(const NumericRangeDimension& lhs, const NumericRangeDimension& rhs) noexcept;
+bool operator!=(const NumericRangeDimension& lhs, const NumericRangeDimension& rhs) noexcept;
 
 /**
  * Numeric range to indicate subsets of (multidimensional) arrays.
