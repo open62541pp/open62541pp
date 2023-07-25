@@ -656,6 +656,21 @@ TEST_CASE("ExtensionObject") {
     }
 }
 
+TEST_CASE("UserTokenPolicy") {
+    UserTokenPolicy userTokenPolicy(
+        "policyId",
+        UserTokenType::Username,
+        "issuedTokenType",
+        "issuerEndpointUrl",
+        "securityPolicyUri"
+    );
+    CHECK(userTokenPolicy.getPolicyId() == String("policyId"));
+    CHECK(userTokenPolicy.getTokenType() == UserTokenType::Username);
+    CHECK(userTokenPolicy.getIssuedTokenType() == String("issuedTokenType"));
+    CHECK(userTokenPolicy.getIssuerEndpointUrl() == String("issuerEndpointUrl"));
+    CHECK(userTokenPolicy.getSecurityPolicyUri() == String("securityPolicyUri"));
+}
+
 TEST_CASE("BrowseDescription") {
     BrowseDescription bd(NodeId(1, 1000), BrowseDirection::Forward);
     CHECK(bd.getNodeId() == NodeId(1, 1000));
