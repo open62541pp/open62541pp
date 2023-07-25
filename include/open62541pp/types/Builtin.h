@@ -28,6 +28,11 @@ public:
     std::string_view get() const;
 };
 
+bool operator==(const String& lhs, std::string_view rhs) noexcept;
+bool operator!=(const String& lhs, std::string_view rhs) noexcept;
+bool operator==(std::string_view lhs, const String& rhs) noexcept;
+bool operator!=(std::string_view lhs, const String& rhs) noexcept;
+
 /**
  * UA_Guid wrapper class.
  * @ingroup TypeWrapper
@@ -74,6 +79,11 @@ public:
 
     std::string_view get() const;
 };
+
+bool operator==(const ByteString& lhs, std::string_view rhs) noexcept;
+bool operator!=(const ByteString& lhs, std::string_view rhs) noexcept;
+bool operator==(std::string_view lhs, const ByteString& rhs) noexcept;
+bool operator!=(std::string_view lhs, const ByteString& rhs) noexcept;
 
 /**
  * UA_XmlElement wrapper class.

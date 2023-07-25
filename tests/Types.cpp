@@ -1,4 +1,5 @@
 #include <array>
+#include <string>
 #include <utility>  // move
 #include <vector>
 
@@ -41,6 +42,13 @@ TEST_CASE_TEMPLATE("StringLike", T, String, ByteString, XmlElement) {
         CHECK(T("test") == T("test"));
         CHECK(T("test") != T());
     }
+}
+
+TEST_CASE_TEMPLATE("StringLike equality overloads", T, String, ByteString) {
+    CHECK(T("test") == std::string("test"));
+    CHECK(T("test") != std::string("abc"));
+    CHECK(std::string("test") == T("test"));
+    CHECK(std::string("test") != T("abc"));
 }
 
 TEST_CASE("ByteString") {
