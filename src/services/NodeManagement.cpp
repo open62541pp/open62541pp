@@ -21,9 +21,9 @@ void addObject<Server>(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
+    const ObjectAttributes& attributes,
     const NodeId& objectType,
-    const NodeId& referenceType,
-    const ObjectAttributes& attributes
+    const NodeId& referenceType
 ) {
     const auto status = UA_Server_addObjectNode(
         server.handle(),
@@ -45,9 +45,9 @@ void addObject<Client>(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
+    const ObjectAttributes& attributes,
     const NodeId& objectType,
-    const NodeId& referenceType,
-    const ObjectAttributes& attributes
+    const NodeId& referenceType
 ) {
     const auto status = UA_Client_addObjectNode(
         client.handle(),
@@ -68,9 +68,9 @@ void addVariable<Server>(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
+    const VariableAttributes& attributes,
     const NodeId& variableType,
-    const NodeId& referenceType,
-    const VariableAttributes& attributes
+    const NodeId& referenceType
 ) {
     const auto status = UA_Server_addVariableNode(
         server.handle(),
@@ -92,9 +92,9 @@ void addVariable<Client>(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
+    const VariableAttributes& attributes,
     const NodeId& variableType,
-    const NodeId& referenceType,
-    const VariableAttributes& attributes
+    const NodeId& referenceType
 ) {
     const auto status = UA_Client_addVariableNode(
         client.handle(),
@@ -115,8 +115,8 @@ void addObjectType<Server>(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    const NodeId& referenceType,
-    const ObjectTypeAttributes& attributes
+    const ObjectTypeAttributes& attributes,
+    const NodeId& referenceType
 ) {
     const auto status = UA_Server_addObjectTypeNode(
         server.handle(),
@@ -137,8 +137,8 @@ void addObjectType<Client>(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    const NodeId& referenceType,
-    const ObjectTypeAttributes& attributes
+    const ObjectTypeAttributes& attributes,
+    const NodeId& referenceType
 ) {
     const auto status = UA_Client_addObjectTypeNode(
         client.handle(),
@@ -158,9 +158,9 @@ void addVariableType<Server>(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
+    const VariableTypeAttributes& attributes,
     const NodeId& variableType,
-    const NodeId& referenceType,
-    const VariableTypeAttributes& attributes
+    const NodeId& referenceType
 ) {
     const auto status = UA_Server_addVariableTypeNode(
         server.handle(),
@@ -182,9 +182,9 @@ void addVariableType<Client>(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
+    const VariableTypeAttributes& attributes,
     const NodeId& variableType,
-    const NodeId& referenceType,
-    const VariableTypeAttributes& attributes
+    const NodeId& referenceType
 ) {
     (void)variableType;  // TODO: variableType is currently unused
     const auto status = UA_Client_addVariableTypeNode(
@@ -244,8 +244,8 @@ void addMethod(
     MethodCallback callback,
     const std::vector<Argument>& inputArguments,
     const std::vector<Argument>& outputArguments,
-    const NodeId& referenceType,
-    const MethodAttributes& attributes
+    const MethodAttributes& attributes,
+    const NodeId& referenceType
 ) {
     auto nodeContext = std::make_unique<ServerContext::NodeContext>();
     nodeContext->methodCallback = std::move(callback);
@@ -277,8 +277,8 @@ void addMethod(
     MethodCallback callback,  // NOLINT
     const std::vector<Argument>& inputArguments,
     const std::vector<Argument>& outputArguments,
-    const NodeId& referenceType,
-    const MethodAttributes& attributes
+    const MethodAttributes& attributes,
+    const NodeId& referenceType
 ) {
     // callback can be added later by server with UA_Server_setMethodNodeCallback
     (void)callback;

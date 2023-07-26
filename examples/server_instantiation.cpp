@@ -36,7 +36,7 @@ int main() {
     //     + (V) Age
     //     + (V) Name
     auto nodeObjects = server.getObjectsNode();
-    auto nodeBello = nodeObjects.addObject({1, 20000}, "Bello", nodeDogType.getNodeId());
+    auto nodeBello = nodeObjects.addObject({1, 20000}, "Bello", {}, nodeDogType.getNodeId());
     nodeBello.writeDisplayName({"en-US", "Bello"});
     nodeBello.writeDescription({"en-US", "A dog named Bello"});
 

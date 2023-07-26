@@ -128,9 +128,9 @@ TEST_CASE("Attribute service set (server)") {
             objectsId,
             id,
             "testAttributes",
+            attr,
             VariableTypeId::BaseDataVariableType,
-            ReferenceTypeId::HasComponent,
-            attr
+            ReferenceTypeId::HasComponent
         );
 
         CHECK(services::readDisplayName(server, id) == attr.getDisplayName());
