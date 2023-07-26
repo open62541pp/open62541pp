@@ -111,35 +111,39 @@ public:
 
 // Specifialized macros to generate getters/setters for `UA_*Attribute` classes.
 // The `specifiedAttributes` mask is automatically updated in the setter methods.
+// A fluent interface is used for the setter methods.
 
 // NOLINTNEXTLINE
 #define UAPP_NODEATTR(Type, suffix, member, flag)                                                  \
     UAPP_COMPOSED_GETTER(Type, get##suffix, member)                                                \
-    void set##suffix(Type member) noexcept {                                                       \
+    auto& set##suffix(Type member) noexcept {                                                      \
         handle()->specifiedAttributes |= flag;                                                     \
         handle()->member = member;                                                                 \
+        return *this;                                                                              \
     }
 
 // NOLINTNEXTLINE
 #define UAPP_NODEATTR_CAST(Type, suffix, member, flag)                                             \
     UAPP_COMPOSED_GETTER_CAST(Type, get##suffix, member)                                           \
-    void set##suffix(Type member) noexcept {                                                       \
+    auto& set##suffix(Type member) noexcept {                                                      \
         handle()->specifiedAttributes |= flag;                                                     \
         handle()->member = static_cast<decltype(handle()->member)>(member);                        \
+        return *this;                                                                              \
     }
 
 // NOLINTNEXTLINE
 #define UAPP_NODEATTR_WRAPPER(WrapperType, suffix, member, flag)                                   \
     UAPP_COMPOSED_GETTER_WRAPPER_CONST(WrapperType, get##suffix, member)                           \
-    void set##suffix(const WrapperType& member) {                                                  \
+    auto& set##suffix(const WrapperType& member) {                                                 \
         handle()->specifiedAttributes |= flag;                                                     \
         asWrapper<WrapperType>(handle()->member) = member;                                         \
+        return *this;                                                                              \
     }
 
 // NOLINTNEXTLINE
 #define UAPP_NODEATTR_ARRAY(Type, suffix, memberArray, memberSize, flag)                           \
     UAPP_COMPOSED_GETTER_ARRAY(Type, get##suffix, memberArray, memberSize)                         \
-    void set##suffix(const std::vector<Type>& memberArray) {                                       \
+    auto& set##suffix(const std::vector<Type>& memberArray) {                                      \
         handle()->specifiedAttributes |= flag;                                                     \
         UA_Array_delete(                                                                           \
             handle()->memberArray,                                                                 \
@@ -150,6 +154,7 @@ public:
             memberArray.begin(), memberArray.end()                                                 \
         );                                                                                         \
         handle()->memberSize = memberArray.size();                                                 \
+        return *this;                                                                              \
     }
 
 // NOLINTNEXTLINT

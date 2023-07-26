@@ -628,6 +628,12 @@ TEST_CASE("NodeAttributes") {
     }
 }
 
+TEST_CASE("NodeAttributes fluent interface") {
+    const auto attr = NodeAttributes{}.setDisplayName({"", "displayName"}).setWriteMask(0xFFFFFFFF);
+    CHECK(attr.getDisplayName() == LocalizedText("", "displayName"));
+    CHECK(attr.getWriteMask() == 0xFFFFFFFF);
+}
+
 TEST_CASE("BrowseDescription") {
     BrowseDescription bd(NodeId(1, 1000), BrowseDirection::Forward);
     CHECK(bd.getNodeId() == NodeId(1, 1000));
