@@ -135,11 +135,6 @@ public:
         return typeIndex;
     }
 
-    /// Get type as UA_DataType object.
-    static const UA_DataType* getDataType() {
-        return detail::getUaDataType<typeIndex>();
-    }
-
     /// Return pointer to native object.
     constexpr T* handle() noexcept {
         return &data_;
@@ -151,6 +146,10 @@ public:
     };
 
 protected:
+    inline static const UA_DataType* getDataType() {
+        return detail::getUaDataType<typeIndex>();
+    }
+
     inline static void checkMemSize() {
         assert(sizeof(T) == getDataType()->memSize);  // NOLINT
     }
