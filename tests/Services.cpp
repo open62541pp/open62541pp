@@ -14,7 +14,6 @@
 #include "open62541pp/types/Composed.h"
 
 #include "helper/Runner.h"
-#include "version.h"
 
 using namespace opcua;
 using namespace std::literals::chrono_literals;

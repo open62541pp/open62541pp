@@ -16,9 +16,9 @@ int main() {
     auto myIntegerNode = parentNode.addVariable({1, "the.answer"}, "the answer");
 
     // Write some node attributes
-    myIntegerNode.writeDataType(opcua::Type::Int32);
-    myIntegerNode.writeDisplayName({"en-US", "the answer"});
-    myIntegerNode.writeDescription({"en-US", "the answer"});
+    myIntegerNode.writeDataType(opcua::Type::Int32)
+        .writeDisplayName({"en-US", "the answer"})
+        .writeDescription({"en-US", "the answer"});
 
     // Write a value (attribute) to the node
     myIntegerNode.writeScalar(42);

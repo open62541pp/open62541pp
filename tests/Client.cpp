@@ -85,6 +85,24 @@ TEST_CASE("Client username/password login") {
     }
 }
 
+#ifdef UA_ENABLE_ENCRYPTION
+TEST_CASE("Client encryption") {
+    SUBCASE("Connect to unencrypted server") {
+        Server server;
+        ServerRunner serverRunner(server);
+        Client client(ByteString{}, ByteString{}, {}, {});
+
+        client.setSecurityMode(MessageSecurityMode::SignAndEncrypt);
+        CHECK_THROWS(client.connect(localServerUrl));
+
+        client.setSecurityMode(MessageSecurityMode::None);
+        CHECK_NOTHROW(client.connect(localServerUrl));
+    }
+
+    // TODO...
+}
+#endif
+
 TEST_CASE("Client run/stop") {
     Server server;
     ServerRunner serverRunner(server);
@@ -112,14 +130,14 @@ TEST_CASE("Client state callbacks") {
     enum class States {
         Connected,
         Disconnected,
-        SessionActicated,
+        SessionActivated,
         SessionClosed,
     };
 
     std::vector<States> states;
     client.onConnected([&] { states.push_back(States::Connected); });
     client.onDisconnected([&] { states.push_back(States::Disconnected); });
-    client.onSessionActivated([&] { states.push_back(States::SessionActicated); });
+    client.onSessionActivated([&] { states.push_back(States::SessionActivated); });
     client.onSessionClosed([&] { states.push_back(States::SessionClosed); });
 
     client.connect(localServerUrl);
@@ -130,7 +148,7 @@ TEST_CASE("Client state callbacks") {
     // -> Look at the last two states:
     CHECK(states.size() >= 2);
     CHECK(states.at(states.size() - 2) == States::Connected);
-    CHECK(states.at(states.size() - 1) == States::SessionActicated);
+    CHECK(states.at(states.size() - 1) == States::SessionActivated);
 
     states.clear();
     client.disconnect();

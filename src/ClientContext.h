@@ -13,14 +13,13 @@
 #include "open62541pp/types/Composed.h"
 
 #include "open62541_impl.h"
-#include "version.h"
 
 namespace opcua {
 
 enum class ClientState {
     Disconnected,
     Connected,
-    SessionActicated,
+    SessionActivated,
     SessionClosed,
 };
 inline constexpr size_t clientStateCount = 4;

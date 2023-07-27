@@ -1,10 +1,12 @@
 #include <array>
+#include <string>
 #include <utility>  // move
 #include <vector>
 
 #include <doctest/doctest.h>
 
 #include "open62541pp/Common.h"
+#include "open62541pp/Config.h"
 #include "open62541pp/NodeIds.h"
 #include "open62541pp/detail/helper.h"  // detail::toString
 #include "open62541pp/types/Builtin.h"
@@ -14,8 +16,6 @@
 #include "open62541pp/types/ExtensionObject.h"
 #include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"
-
-#include "version.h"
 
 using namespace opcua;
 
@@ -44,10 +44,42 @@ TEST_CASE_TEMPLATE("StringLike", T, String, ByteString, XmlElement) {
     }
 }
 
+TEST_CASE_TEMPLATE("StringLike equality overloads", T, String, ByteString) {
+    CHECK(T("test") == std::string("test"));
+    CHECK(T("test") != std::string("abc"));
+    CHECK(std::string("test") == T("test"));
+    CHECK(std::string("test") != T("abc"));
+}
+
 TEST_CASE("ByteString") {
+    SUBCASE("Construct from string") {
+        const ByteString bs("XYZ");
+        CHECK(bs->length == 3);
+        CHECK(bs->data[0] == 88);
+        CHECK(bs->data[1] == 89);
+        CHECK(bs->data[2] == 90);
+    }
+
+    SUBCASE("Construct from vector") {
+        const ByteString bs({88, 89, 90});
+        CHECK(bs->length == 3);
+        CHECK(bs->data[0] == 88);
+        CHECK(bs->data[1] == 89);
+        CHECK(bs->data[2] == 90);
+        CHECK(std::string(bs.get()) == "XYZ");
+    }
+
+    SUBCASE("toFile / fromFile") {
+        const ByteString bs({88, 89, 90});
+        CHECK_NOTHROW(bs.toFile("bytestring.bin"));
+        CHECK(ByteString::fromFile("bytestring.bin") == bs);
+    }
+
 #if UAPP_OPEN62541_VER_GE(1, 1)
-    CHECK(ByteString::fromBase64("dGVzdDEyMw==") == ByteString("test123"));
-    CHECK(ByteString("test123").toBase64() == "dGVzdDEyMw==");
+    SUBCASE("fromBase64 / to Base64") {
+        CHECK(ByteString::fromBase64("dGVzdDEyMw==") == ByteString("test123"));
+        CHECK(ByteString("test123").toBase64() == "dGVzdDEyMw==");
+    }
 #endif
 }
 
@@ -82,6 +114,36 @@ TEST_CASE("Guid") {
             const Guid guid{3298187146, 3582, 19343, {135, 10, 116, 82, 56, 198, 174, 174}};
             CHECK(guid.toString() == "C496578A-0DFE-4B8F-870A-745238C6AEAE");
         }
+    }
+}
+
+TEST_CASE("NumericRangeDimension") {
+    CHECK(NumericRangeDimension{} == NumericRangeDimension{});
+    CHECK(NumericRangeDimension{1, 2} == NumericRangeDimension{1, 2});
+    CHECK(NumericRangeDimension{1, 2} != NumericRangeDimension{1, 3});
+}
+
+TEST_CASE("NumericRange") {
+    SUBCASE("Empty") {
+        const NumericRange nr;
+        CHECK(nr.empty());
+        CHECK(nr.get().size() == 0);
+    }
+
+    SUBCASE("Parse") {
+        CHECK_THROWS(NumericRange("abc"));
+
+        const NumericRange nr("1:2,0:3,5");
+        CHECK(nr.get().size() == 3);
+        CHECK(nr.get().at(0) == NumericRangeDimension{1, 2});
+        CHECK(nr.get().at(1) == NumericRangeDimension{0, 3});
+        CHECK(nr.get().at(2) == NumericRangeDimension{5, 5});
+    }
+
+    SUBCASE("toString") {
+        CHECK(NumericRange({{1, 1}}).toString() == "1");
+        CHECK(NumericRange({{1, 2}}).toString() == "1:2");
+        CHECK(NumericRange({{1, 2}, {0, 3}, {5, 5}}).toString() == "1:2,0:3,5");
     }
 }
 

@@ -9,6 +9,8 @@
 #include "open62541pp/Auth.h"
 #include "open62541pp/Logger.h"
 #include "open62541pp/Subscription.h"
+#include "open62541pp/ValueBackend.h"
+#include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/NodeId.h"
 
 // forward declaration open62541
@@ -29,12 +31,46 @@ class Node;
  */
 class Server {
 public:
-    /// Create server with default config.
-    Server();
-    /// Create server with custom port.
-    explicit Server(uint16_t port);
-    /// Create server with custom port and a server certificate.
-    Server(uint16_t port, std::string_view certificate);
+    /**
+     * Create server with default configuration (no encryption).
+     * Security policies:
+     * - [None](http://opcfoundation.org/UA/SecurityPolicy#None)
+     *
+     * @param port Port number
+     * @param certificate Optional X.509 v3 certificate in `DER` encoded format
+     */
+    explicit Server(uint16_t port = 4840, ByteString certificate = {});
+
+#ifdef UA_ENABLE_ENCRYPTION
+    /**
+     * Create server with encryption enabled (PKI).
+     * Security policies:
+     * - [None](http://opcfoundation.org/UA/SecurityPolicy#None)
+     * - [Basic128Rsa15](http://opcfoundation.org/UA/SecurityPolicy#Basic128Rsa15)
+     * - [Basic256](http://opcfoundation.org/UA/SecurityPolicy#Basic256)
+     * - [Basic256Sha256](http://opcfoundation.org/UA/SecurityPolicy#Basic256Sha256)
+     * - [Aes128_Sha256_RsaOaep](http://opcfoundation.org/UA/SecurityPolicy#Aes128_Sha256_RsaOaep)
+     *
+     * @param port Port number
+     * @param certificate X.509 v3 certificate in `DER` encoded format
+     * @param privateKey Private key in `PEM` encoded format
+     * @param trustList List of trusted certificates in `DER` encoded format
+     * @param issuerList List of issuer certificates (i.e. CAs) in `DER` encoded format
+     * @param revocationList Certificate revocation lists (CRL) in `DER` encoded format
+     *
+     * @see https://reference.opcfoundation.org/Core/Part2/v105/docs/8
+     * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/6.1
+     * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/6.2
+     */
+    Server(
+        uint16_t port,
+        const ByteString& certificate,
+        const ByteString& privateKey,
+        const std::vector<ByteString>& trustList,
+        const std::vector<ByteString>& issuerList,
+        const std::vector<ByteString>& revocationList = {}
+    );
+#endif
 
     /// Set custom logging function.
     void setLogger(Logger logger);
@@ -54,6 +90,9 @@ public:
     std::vector<std::string> getNamespaceArray();
     /// Register namespace. The new namespace index will be returned.
     [[nodiscard]] uint16_t registerNamespace(std::string_view uri);
+
+    /// Set value callbacks to execute before every read and after every write operation.
+    void setVariableNodeValueCallback(const NodeId& id, ValueCallback callback);
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
     /// Create a (pseudo) subscription to monitor local data changes and events.
@@ -90,7 +129,7 @@ private:
 
 /* ---------------------------------------------------------------------------------------------- */
 
-bool operator==(const Server& left, const Server& right) noexcept;
-bool operator!=(const Server& left, const Server& right) noexcept;
+bool operator==(const Server& lhs, const Server& rhs) noexcept;
+bool operator!=(const Server& lhs, const Server& rhs) noexcept;
 
 }  // namespace opcua

@@ -38,6 +38,7 @@ jobs:
           cd build
           cmake -G Ninja \
             -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+            -DUA_ENABLE_ENCRYPTION=OPENSSL \
             -DUAPP_BUILD_TESTS=ON \
             -DUAPP_BUILD_EXAMPLES=ON \
             ${{ matrix.config.flags }} \
@@ -61,7 +62,11 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake -G Ninja -DUAPP_BUILD_TESTS=ON -DUAPP_ENABLE_COVERAGE=ON ..
+          cmake -G Ninja \
+            -DUAPP_BUILD_TESTS=ON \
+            -DUA_ENABLE_ENCRYPTION=OPENSSL \
+            -DUAPP_ENABLE_COVERAGE=ON \
+            ..
           cmake --build .
       - name: Run tests
         run: ctest --test-dir build --output-on-failure

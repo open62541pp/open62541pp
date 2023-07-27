@@ -4,15 +4,16 @@
 #include <string>
 #include <utility>  // move
 
+#include "open62541pp/Config.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Node.h"
 #include "open62541pp/TypeConverter.h"
+#include "open62541pp/TypeWrapper.h"
 #include "open62541pp/services/Subscription.h"
 
 #include "ClientContext.h"
 #include "CustomLogger.h"
 #include "open62541_impl.h"
-#include "version.h"
 
 namespace opcua {
 
@@ -81,7 +82,7 @@ static void stateCallback(UA_Client* client, UA_ClientState clientState) {
             execStateCallback(context, ClientState::Connected);
             break;
         case UA_CLIENTSTATE_SESSION:
-            execStateCallback(context, ClientState::SessionActicated);
+            execStateCallback(context, ClientState::SessionActivated);
             break;
         case UA_CLIENTSTATE_SESSION_DISCONNECTED:
             execStateCallback(context, ClientState::SessionClosed);
@@ -101,11 +102,11 @@ static void stateCallback(
     [[maybe_unused]] UA_StatusCode connectStatus
 ) {
     auto& context = getContext(client);
-    // handle session state first, mainly to to handle SessionClosed bevor Disconnected
+    // handle session state first, mainly to handle SessionClosed before Disconnected
     if (sessionState != context.lastSessionState) {
         switch (sessionState) {
         case UA_SESSIONSTATE_ACTIVATED:
-            execStateCallback(context, ClientState::SessionActicated);
+            execStateCallback(context, ClientState::SessionActivated);
             break;
         case UA_SESSIONSTATE_CLOSED:
             execStateCallback(context, ClientState::SessionClosed);
@@ -211,8 +212,32 @@ Client::Client()
     : connection_(std::make_shared<Connection>()) {
     const auto status = UA_ClientConfig_setDefault(getConfig(this));
     detail::throwOnBadStatus(status);
+    getConfig(this)->securityMode = UA_MESSAGESECURITYMODE_NONE;
     connection_->applyDefaults();
 }
+
+#ifdef UA_ENABLE_ENCRYPTION
+Client::Client(
+    const ByteString& certificate,
+    const ByteString& privateKey,
+    const std::vector<ByteString>& trustList,
+    const std::vector<ByteString>& revocationList
+)
+    : connection_(std::make_shared<Connection>()) {
+    const auto status = UA_ClientConfig_setDefaultEncryption(
+        getConfig(this),
+        certificate,
+        privateKey,
+        asNative(trustList.data()),
+        trustList.size(),
+        asNative(revocationList.data()),
+        revocationList.size()
+    );
+    detail::throwOnBadStatus(status);
+    getConfig(this)->securityMode = UA_MESSAGESECURITYMODE_SIGNANDENCRYPT;
+    connection_->applyDefaults();
+}
+#endif
 
 std::vector<ApplicationDescription> Client::findServers(std::string_view serverUrl) {
     UA_ApplicationDescription* array = nullptr;
@@ -256,6 +281,10 @@ void Client::setTimeout(uint32_t milliseconds) {
     getConfig(this)->timeout = milliseconds;
 }
 
+void Client::setSecurityMode(MessageSecurityMode mode) {
+    getConfig(this)->securityMode = static_cast<UA_MessageSecurityMode>(mode);
+}
+
 static void setStateCallback(ClientContext& context, ClientState state, StateCallback&& callback) {
     context.stateCallbacks.at(static_cast<size_t>(state)) = callback;
 }
@@ -269,7 +298,7 @@ void Client::onDisconnected(StateCallback callback) {
 }
 
 void Client::onSessionActivated(StateCallback callback) {
-    setStateCallback(getContext(), ClientState::SessionActicated, std::move(callback));
+    setStateCallback(getContext(), ClientState::SessionActivated, std::move(callback));
 }
 
 void Client::onSessionClosed(StateCallback callback) {
@@ -385,12 +414,12 @@ ClientContext& Client::getContext() noexcept {
 
 /* ---------------------------------------------------------------------------------------------- */
 
-bool operator==(const Client& left, const Client& right) noexcept {
-    return (left.handle() == right.handle());
+bool operator==(const Client& lhs, const Client& rhs) noexcept {
+    return (lhs.handle() == rhs.handle());
 }
 
-bool operator!=(const Client& left, const Client& right) noexcept {
-    return !(left == right);
+bool operator!=(const Client& lhs, const Client& rhs) noexcept {
+    return !(lhs == rhs);
 }
 
 }  // namespace opcua

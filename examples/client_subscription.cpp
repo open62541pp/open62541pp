@@ -14,7 +14,7 @@ int main() {
     client.onSessionActivated([&] {
         auto sub = client.createSubscription();
 
-        // Modify and delete the subscription via the returend Subscription<T> object
+        // Modify and delete the subscription via the returned Subscription<T> object
         opcua::SubscriptionParameters subscriptionParameters{};
         subscriptionParameters.publishingInterval = 1000.0;
         sub.setSubscriptionParameters(subscriptionParameters);

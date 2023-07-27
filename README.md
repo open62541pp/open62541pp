@@ -61,10 +61,10 @@ int main() {
     auto parentNode = server.getObjectsNode();
     auto myIntegerNode = parentNode.addVariable({1, "the.answer"}, "the answer");
     // Write some node attributes
-    myIntegerNode.writeDataType(opcua::Type::Int32);
-    myIntegerNode.writeDisplayName({"en-US", "the answer"});
-    myIntegerNode.writeDescription({"en-US", "the answer"});
-    myIntegerNode.writeScalar(42);
+    myIntegerNode.writeDataType(opcua::Type::Int32)
+        .writeDisplayName({"en-US", "the answer"})
+        .writeDescription({"en-US", "the answer"})
+        .writeScalar(42);
 
     server.run();
 }
@@ -197,7 +197,7 @@ Add it to your project as a Git submodule (`git submodule add https://github.com
 
 ```cmake
 add_subdirectory(extern/open62541pp)  # the submodule directory
-target_link_library(myexecutable PRIVATE open62541pp::open62541pp)
+target_link_libraries(myexecutable PRIVATE open62541pp::open62541pp)
 ```
 
 ### Integrate as a pre-compiled library
@@ -207,7 +207,7 @@ The installed library can be found and linked within CMake:
 
 ```cmake 
 find_package(open62541pp::open62541pp CONFIG REQUIRED)
-target_link_library(myexecutable PRIVATE open62541pp::open62541pp)
+target_link_libraries(myexecutable PRIVATE open62541pp::open62541pp)
 ```
 
 ### Build and install

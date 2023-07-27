@@ -1,21 +1,24 @@
 #include "open62541pp/Server.h"
 
 #include <atomic>
+#include <cassert>
 #include <mutex>
 #include <utility>  // move
 
 #include "open62541pp/Config.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Node.h"
+#include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/helper.h"
 #include "open62541pp/services/Attribute.h"
 #include "open62541pp/types/Builtin.h"
+#include "open62541pp/types/Composed.h"
+#include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/Variant.h"
 
 #include "CustomLogger.h"
 #include "ServerContext.h"
 #include "open62541_impl.h"
-#include "version.h"
 
 namespace opcua {
 
@@ -50,17 +53,6 @@ public:
     Connection(Connection&&) noexcept = delete;
     Connection& operator=(const Connection&) = delete;
     Connection& operator=(Connection&&) noexcept = delete;
-
-    void applyDefaults() {
-        auto* config = getConfig(handle());
-#ifdef UA_ENABLE_SUBSCRIPTIONS
-        config->publishingIntervalLimits.min = 10;  // ms
-        config->samplingIntervalLimits.min = 10;  // ms
-#endif
-#if UAPP_OPEN62541_VER_GE(1, 2)
-        config->allowEmptyVariables = UA_RULEHANDLING_ACCEPT;  // allow empty variables
-#endif
-    }
 
     void runStartup() {
         const auto status = UA_Server_run_startup(handle());
@@ -121,28 +113,51 @@ private:
 
 /* ------------------------------------------- Server ------------------------------------------- */
 
-Server::Server()
-    : connection_(std::make_shared<Connection>()) {
-    const auto status = UA_ServerConfig_setDefault(getConfig(this));
-    detail::throwOnBadStatus(status);
-    connection_->applyDefaults();
+static void applyDefaults(UA_ServerConfig* config) {
+#ifdef UA_ENABLE_SUBSCRIPTIONS
+    config->publishingIntervalLimits.min = 10;  // ms
+    config->samplingIntervalLimits.min = 10;  // ms
+#endif
+#if UAPP_OPEN62541_VER_GE(1, 2)
+    config->allowEmptyVariables = UA_RULEHANDLING_ACCEPT;  // allow empty variables
+#endif
 }
 
-Server::Server(uint16_t port)
-    : connection_(std::make_shared<Connection>()) {
-    const auto status = UA_ServerConfig_setMinimal(getConfig(this), port, nullptr);
-    detail::throwOnBadStatus(status);
-    connection_->applyDefaults();
-}
-
-Server::Server(uint16_t port, std::string_view certificate)
+Server::Server(uint16_t port, ByteString certificate)
     : connection_(std::make_shared<Connection>()) {
     const auto status = UA_ServerConfig_setMinimal(
-        getConfig(this), port, ByteString(certificate).handle()
+        getConfig(this), port, certificate.empty() ? nullptr : certificate.handle()
     );
     detail::throwOnBadStatus(status);
-    connection_->applyDefaults();
+    applyDefaults(getConfig(this));
 }
+
+#ifdef UA_ENABLE_ENCRYPTION
+Server::Server(
+    uint16_t port,
+    const ByteString& certificate,
+    const ByteString& privateKey,
+    const std::vector<ByteString>& trustList,
+    const std::vector<ByteString>& issuerList,
+    const std::vector<ByteString>& revocationList
+)
+    : connection_(std::make_shared<Connection>()) {
+    const auto status = UA_ServerConfig_setDefaultWithSecurityPolicies(
+        getConfig(this),
+        port,
+        certificate.handle(),
+        privateKey.handle(),
+        asNative(trustList.data()),
+        trustList.size(),
+        asNative(issuerList.data()),
+        issuerList.size(),
+        asNative(revocationList.data()),
+        revocationList.size()
+    );
+    detail::throwOnBadStatus(status);
+    applyDefaults(getConfig(this));
+}
+#endif
 
 void Server::setLogger(Logger logger) {
     connection_->setLogger(std::move(logger));
@@ -151,44 +166,31 @@ void Server::setLogger(Logger logger) {
 // copy to endpoints needed, see: https://github.com/open62541/open62541/issues/1175
 static void copyApplicationDescriptionToEndpoints(UA_ServerConfig* config) {
     for (size_t i = 0; i < config->endpointsSize; ++i) {
-        auto& refApplicationName = config->endpoints[i].server.applicationName;  // NOLINT
-        auto& refApplicationUri = config->endpoints[i].server.applicationUri;  // NOLINT
-        auto& refProductUri = config->endpoints[i].server.productUri;  // NOLINT
-
-        UA_LocalizedText_clear(&refApplicationName);
-        UA_String_clear(&refApplicationUri);
-        UA_String_clear(&refProductUri);
-
-        UA_LocalizedText_copy(&config->applicationDescription.applicationName, &refApplicationName);
-        UA_String_copy(&config->applicationDescription.applicationUri, &refApplicationUri);
-        UA_String_copy(&config->applicationDescription.productUri, &refProductUri);
+        auto& ref = asWrapper<ApplicationDescription>(config->endpoints[i].server);  // NOLINT
+        ref = ApplicationDescription(config->applicationDescription);
     }
 }
 
 void Server::setCustomHostname(std::string_view hostname) {
-    auto& ref = getConfig(this)->customHostname;
-    UA_String_clear(&ref);
-    ref = detail::allocUaString(hostname);
+    auto& ref = asWrapper<String>(getConfig(this)->customHostname);
+    ref = String(hostname);
 }
 
 void Server::setApplicationName(std::string_view name) {
-    auto& ref = getConfig(this)->applicationDescription.applicationName;
-    UA_LocalizedText_clear(&ref);
-    ref = UA_LOCALIZEDTEXT_ALLOC("", name.data());
+    auto& ref = asWrapper<LocalizedText>(getConfig(this)->applicationDescription.applicationName);
+    ref = LocalizedText("", name);
     copyApplicationDescriptionToEndpoints(getConfig(this));
 }
 
 void Server::setApplicationUri(std::string_view uri) {
-    auto& ref = getConfig(this)->applicationDescription.applicationUri;
-    UA_String_clear(&ref);
-    ref = detail::allocUaString(uri);
+    auto& ref = asWrapper<String>(getConfig(this)->applicationDescription.applicationUri);
+    ref = String(uri);
     copyApplicationDescriptionToEndpoints(getConfig(this));
 }
 
 void Server::setProductUri(std::string_view uri) {
-    auto& ref = getConfig(this)->applicationDescription.productUri;
-    UA_String_clear(&ref);
-    ref = detail::allocUaString(uri);
+    auto& ref = asWrapper<String>(getConfig(this)->applicationDescription.productUri);
+    ref = String(uri);
     copyApplicationDescriptionToEndpoints(getConfig(this));
 }
 
@@ -239,6 +241,49 @@ std::vector<std::string> Server::getNamespaceArray() {
 
 uint16_t Server::registerNamespace(std::string_view uri) {
     return UA_Server_addNamespace(handle(), std::string(uri).c_str());
+}
+
+static void valueCallbackOnRead(
+    [[maybe_unused]] UA_Server* server,
+    [[maybe_unused]] const UA_NodeId* sessionId,
+    [[maybe_unused]] void* sessionContext,
+    [[maybe_unused]] const UA_NodeId* nodeId,
+    void* nodeContext,
+    [[maybe_unused]] const UA_NumericRange* range,
+    const UA_DataValue* value
+) {
+    assert(nodeContext != nullptr && value != nullptr);  // NOLINT
+    auto& cb = static_cast<ServerContext::NodeContext*>(nodeContext)->valueCallback.onBeforeRead;
+    if (cb) {
+        cb(asWrapper<DataValue>(*value));
+    }
+}
+
+static void valueCallbackOnWrite(
+    [[maybe_unused]] UA_Server* server,
+    [[maybe_unused]] const UA_NodeId* sessionId,
+    [[maybe_unused]] void* sessionContext,
+    [[maybe_unused]] const UA_NodeId* nodeId,
+    void* nodeContext,
+    [[maybe_unused]] const UA_NumericRange* range,
+    const UA_DataValue* value
+) {
+    assert(nodeContext != nullptr && value != nullptr);  // NOLINT
+    auto& cb = static_cast<ServerContext::NodeContext*>(nodeContext)->valueCallback.onAfterWrite;
+    if (cb) {
+        cb(asWrapper<DataValue>(*value));
+    }
+}
+
+void Server::setVariableNodeValueCallback(const NodeId& id, ValueCallback callback) {
+    auto* nodeContext = getContext().getOrCreateNodeContext(id);
+    nodeContext->valueCallback = std::move(callback);
+    detail::throwOnBadStatus(UA_Server_setNodeContext(handle(), id, nodeContext));
+
+    UA_ValueCallback callbackNative;
+    callbackNative.onRead = valueCallbackOnRead;
+    callbackNative.onWrite = valueCallbackOnWrite;
+    detail::throwOnBadStatus(UA_Server_setVariableNode_valueCallback(handle(), id, callbackNative));
 }
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
@@ -297,12 +342,12 @@ ServerContext& Server::getContext() noexcept {
 
 /* ---------------------------------------------------------------------------------------------- */
 
-bool operator==(const Server& left, const Server& right) noexcept {
-    return (left.handle() == right.handle());
+bool operator==(const Server& lhs, const Server& rhs) noexcept {
+    return (lhs.handle() == rhs.handle());
 }
 
-bool operator!=(const Server& left, const Server& right) noexcept {
-    return !(left == right);
+bool operator!=(const Server& lhs, const Server& rhs) noexcept {
+    return !(lhs == rhs);
 }
 
 }  // namespace opcua

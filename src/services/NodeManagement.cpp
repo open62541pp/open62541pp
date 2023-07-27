@@ -1,5 +1,6 @@
 #include "open62541pp/services/NodeManagement.h"
 
+#include <cassert>
 #include <memory>
 #include <stdexcept>
 #include <utility>  // move
@@ -213,9 +214,7 @@ static UA_StatusCode methodCallback(
     size_t outputSize,
     UA_Variant* output
 ) {
-    if (methodContext == nullptr) {
-        return UA_STATUSCODE_BADUNEXPECTEDERROR;
-    }
+    assert(methodContext != nullptr);  // NOLINT
     const auto* nodeContext = static_cast<ServerContext::NodeContext*>(methodContext);
     const std::vector<Variant> inputVector(input, input + inputSize);  // NOLINT
     std::vector<Variant> outputVector(outputSize);
@@ -247,7 +246,7 @@ void addMethod(
     const MethodAttributes& attributes,
     const NodeId& referenceType
 ) {
-    auto nodeContext = std::make_unique<ServerContext::NodeContext>();
+    auto* nodeContext = server.getContext().getOrCreateNodeContext(id);
     nodeContext->methodCallback = std::move(callback);
     const auto status = UA_Server_addMethodNode(
         server.handle(),
@@ -261,11 +260,10 @@ void addMethod(
         inputArguments.data()->handle(),
         outputArguments.size(),
         outputArguments.data()->handle(),
-        nodeContext.get(),
+        nodeContext,
         nullptr  // outNewNodeId
     );
     detail::throwOnBadStatus(status);
-    server.getContext().nodeContexts.insert_or_assign(id, std::move(nodeContext));
 }
 
 template <>
