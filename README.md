@@ -115,14 +115,8 @@ var.setArrayCopy<double>({1.1, 2.2, 3.3});
 std::string str{"test"};
 var.setScalar(str);
 
-// won't compile, because the type std::string is associated with more than one variant types:
-// - opcua::Type::String
-// - opcua::Type::ByteString
-// - opcua::Type::XmlElement
-var.setScalarCopy<std::string>("test");
-
-// finally compiles
-var.setScalarCopy<std::string, opcua::Type::String>("test");
+// will compile
+var.setScalarCopy(str);
 ```
 
 You can add template specializations to add conversions for arbitrary types:
@@ -161,8 +155,8 @@ struct TypeConverter<std::string> {
 | String                   | `UA_String`          |             | `opcua::String`                   | `std::string`             |
 | DateTime                 | `UA_DateTime`        | `int64_t`   | `opcua::DateTime`                 | `std::chrono::time_point` |
 | Guid                     | `UA_Guid`            |             | `opcua::Guid`                     |                           |
-| ByteString               | `UA_ByteString`      | `UA_String` | `opcua::ByteString`               | `std::string`             |
-| XmlElement               | `UA_XmlElement`      | `UA_String` | `opcua::XmlElement`               | `std::string`             |
+| ByteString               | `UA_ByteString`      | `UA_String` | `opcua::ByteString`               |                           |
+| XmlElement               | `UA_XmlElement`      | `UA_String` | `opcua::XmlElement`               |                           |
 | NodeId                   | `UA_NodeId`          |             | `opcua::NodeId`                   |                           |
 | ExpandedNodeId           | `UA_ExpandedNodeId`  |             | `opcua::ExpandedNodeId`           |                           |
 | StatusCode               | `UA_StatusCode`      | `uint32_t`  |                                   |                           |

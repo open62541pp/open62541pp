@@ -4,6 +4,7 @@
 #include <chrono>
 #include <iterator>  // distance
 #include <string>
+#include <string_view>
 #include <type_traits>
 #include <vector>
 
@@ -291,7 +292,7 @@ template <>
 struct TypeConverter<std::string> {
     using ValueType = std::string;
     using NativeType = UA_String;
-    using ValidTypes = TypeIndexList<UA_TYPES_STRING, UA_TYPES_BYTESTRING, UA_TYPES_XMLELEMENT>;
+    using ValidTypes = TypeIndexList<UA_TYPES_STRING>;
 
     static void fromNative(const NativeType& src, ValueType& dst) {
         dst = detail::toString(src);
