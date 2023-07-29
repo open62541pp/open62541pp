@@ -34,11 +34,13 @@ const UA_DataType* Variant::getDataType() const noexcept {
 }
 
 std::optional<Type> Variant::getVariantType() const noexcept {
-    // UA_DataType typeIndex member was removed in open62541 v1.3
-    // https://github.com/open62541/open62541/pull/4477
-    // https://github.com/open62541/open62541/issues/4960
-    for (size_t typeIndex = 0; typeIndex < detail::builtinTypesCount; ++typeIndex) {
-        if (handle()->type == detail::getUaDataType(typeIndex)) {
+    // UA_DataType::typeIndex member was removed in open62541 v1.3
+    // use typeKind instead: https://github.com/open62541/open62541/issues/4960
+    static_assert(UA_TYPES_BOOLEAN == UA_DATATYPEKIND_BOOLEAN);
+    static_assert(UA_TYPES_VARIANT == UA_DATATYPEKIND_VARIANT);
+    if (getDataType() != nullptr) {
+        const auto typeIndex = getDataType()->typeKind;
+        if (typeIndex <= UA_DATATYPEKIND_DIAGNOSTICINFO) {
             return static_cast<Type>(typeIndex);
         }
     }
