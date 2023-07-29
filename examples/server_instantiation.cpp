@@ -18,15 +18,16 @@ int main() {
             .setDescription({"en-US", "A mammal"})
     );
 
-    nodeMammalType.addVariable(
-        {1, 10001},
-        "Age",
-        opcua::VariableAttributes{}
-            .setDisplayName({"en-US", "Age"})
-            .setDescription({"en-US", "This mammals age in months"})
-            .setValue(opcua::Variant::fromScalar(0U))  // default age
-    );
-    nodeMammalType.addModellingRule(opcua::ModellingRule::Mandatory);  // create on new instance
+    nodeMammalType
+        .addVariable(
+            {1, 10001},
+            "Age",
+            opcua::VariableAttributes{}
+                .setDisplayName({"en-US", "Age"})
+                .setDescription({"en-US", "This mammals age in months"})
+                .setValueScalar(0U)  // default age
+        )
+        .addModellingRule(opcua::ModellingRule::Mandatory);  // create on new instance
 
     auto nodeDogType = nodeMammalType.addObjectType(
         {1, 10002},
@@ -36,15 +37,16 @@ int main() {
             .setDescription({"en-US", "A dog, subtype of mammal"})
     );
 
-    nodeDogType.addVariable(
-        {1, 10003},
-        "Name",
-        opcua::VariableAttributes{}
-            .setDisplayName({"en-US", "Name"})
-            .setDescription({"en-US", "This dogs name"})
-            .setValue(opcua::Variant::fromScalar(opcua::String("unnamed dog")))  // default name
-    );
-    nodeDogType.addModellingRule(opcua::ModellingRule::Mandatory);  // create on new instance
+    nodeDogType
+        .addVariable(
+            {1, 10003},
+            "Name",
+            opcua::VariableAttributes{}
+                .setDisplayName({"en-US", "Name"})
+                .setDescription({"en-US", "This dogs name"})
+                .setValueScalar(opcua::String("unnamed dog"))  // default name
+        )
+        .addModellingRule(opcua::ModellingRule::Mandatory);  // create on new instance
 
     // Instatiate a dog named Bello:
     // (O) Objects

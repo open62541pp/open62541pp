@@ -208,6 +208,17 @@ public:
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR_WRAPPER(Variant, Value, value, UA_NODEATTRIBUTESMASK_VALUE)
+
+    template <typename T, Type type = detail::guessType<T>()>
+    auto& setValueScalar(const T& value) {
+        return setValue(Variant::fromScalar<T, type>(value));
+    }
+
+    template <typename T, Type type = detail::guessType<T>()>
+    auto& setValueArray(const std::vector<T>& array) {
+        return setValue(Variant::fromArray<T, type>(array));
+    }
+
     UAPP_NODEATTR_WRAPPER(NodeId, DataType, dataType, UA_NODEATTRIBUTESMASK_DATATYPE)
     UAPP_NODEATTR_CAST(ValueRank, ValueRank, valueRank, UA_NODEATTRIBUTESMASK_VALUERANK)
     UAPP_NODEATTR_ARRAY(
