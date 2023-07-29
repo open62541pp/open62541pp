@@ -5,6 +5,7 @@
 #include "open62541pp/Common.h"
 #include "open62541pp/Config.h"
 #include "open62541pp/Crypto.h"
+#include "open62541pp/DataType.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Logger.h"
 #include "open62541pp/MonitoredItem.h"

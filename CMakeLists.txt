@@ -113,6 +113,7 @@ add_library(
     src/Client.cpp
     src/Crypto.cpp
     src/CustomLogger.cpp
+    src/DataType.cpp
     src/Logger.cpp
     src/MonitoredItem.cpp
     src/Node.cpp
