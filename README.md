@@ -58,8 +58,8 @@ int main() {
     opcua::Server server;
 
     // Add a variable node to the Objects node
-    auto parentNode = server.getObjectsNode();
-    auto myIntegerNode = parentNode.addVariable({1, "the.answer"}, "the answer");
+    opcua::Node parentNode = server.getObjectsNode();
+    opcua::Node myIntegerNode = parentNode.addVariable({1, "the.answer"}, "the answer");
     // Write some node attributes
     myIntegerNode.writeDataType(opcua::Type::Int32)
         .writeDisplayName({"en-US", "the answer"})
@@ -89,7 +89,7 @@ int main() {
     opcua::Client client;
     client.connect("opc.tcp://localhost:4840");
 
-    auto node = client.getNode(opcua::VariableId::Server_ServerStatus_CurrentTime);
+    opcua::Node node = client.getNode(opcua::VariableId::Server_ServerStatus_CurrentTime);
     const auto dt = node.readScalar<opcua::DateTime>();
 
     std::cout << "Server date (UTC): " << dt.format("%Y-%m-%d %H:%M:%S") << std::endl;
