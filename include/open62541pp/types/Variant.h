@@ -28,49 +28,52 @@ public:
     // NOLINTNEXTLINE, false positive?
     using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
 
-    /// Create Variant from scalar value (no copy if assignable without conversion)
+    /// Create Variant from scalar value (no copy if assignable without conversion).
     template <typename T, Type type = detail::guessType<T>()>
     [[nodiscard]] static Variant fromScalar(T& value);
 
-    /// Create Variant from scalar value (copy)
+    /// Create Variant from scalar value (copy).
     template <typename T, Type type = detail::guessType<T>()>
     [[nodiscard]] static Variant fromScalar(const T& value);
 
-    /// Create Variant from array (no copy if assignable without conversion)
+    /// Create Variant from array (no copy if assignable without conversion).
     template <typename T, Type type = detail::guessType<T>()>
     [[nodiscard]] static Variant fromArray(T* array, size_t size);
 
-    /// Create Variant from array (copy)
+    /// Create Variant from array (copy).
     template <typename T, Type type = detail::guessType<T>()>
     [[nodiscard]] static Variant fromArray(const T* array, size_t size);
 
-    /// Create Variant from std::vector (no copy if assignable without conversion)
+    /// Create Variant from std::vector (no copy if assignable without conversion).
     template <typename T, Type type = detail::guessType<T>()>
     [[nodiscard]] static Variant fromArray(std::vector<T>& array);
 
-    /// Create Variant from std::vector (copy)
+    /// Create Variant from std::vector (copy).
     template <typename T, Type type = detail::guessType<T>()>
     [[nodiscard]] static Variant fromArray(const std::vector<T>& array);
 
-    /// Create Variant from range of elements (copy)
+    /// Create Variant from range of elements (copy).
     template <typename InputIt, Type type = detail::guessTypeFromIterator<InputIt>()>
     [[nodiscard]] static Variant fromArray(InputIt first, InputIt last);
 
-    /// Check if variant is empty
+    /// Check if variant is empty.
     bool isEmpty() const noexcept;
-    /// Check if variant is a scalar
+    /// Check if variant is a scalar.
     bool isScalar() const noexcept;
-    /// Check if variant is an array
+    /// Check if variant is an array.
     bool isArray() const noexcept;
 
-    /// Check if variant type is equal to data type
+    /// Check if variant type is equal to data type.
     bool isType(const UA_DataType* type) const noexcept;
-    /// Check if variant type is equal to type enum
+    /// Check if variant type is equal to type enum.
     bool isType(Type type) const noexcept;
-    /// Check if variant type is equal to data type node id
+    /// Check if variant type is equal to data type node id.
     bool isType(const NodeId& id) const noexcept;
 
-    /// Get variant type
+    /// Get data type.
+    const UA_DataType* getDataType() const noexcept;
+
+    /// Get variant type.
     std::optional<Type> getVariantType() const noexcept;
 
     /// Get reference to scalar value with given template type (only native or wrapper types).
@@ -246,7 +249,7 @@ const T& Variant::getScalar() const {
     assertGetNoCopy<T>();
     checkIsScalar();
     checkReturnType<T>();
-    assert(sizeof(T) == handle()->type->memSize);  // NOLINT
+    assert(sizeof(T) == getDataType()->memSize);  // NOLINT
     return *static_cast<const T*>(handle()->data);
 }
 
@@ -267,7 +270,7 @@ const T* Variant::getArray() const {
     assertGetNoCopy<T>();
     checkIsArray();
     checkReturnType<T>();
-    assert(sizeof(T) == handle()->type->memSize);  // NOLINT
+    assert(sizeof(T) == getDataType()->memSize);  // NOLINT
     return static_cast<const T*>(handle()->data);
 }
 

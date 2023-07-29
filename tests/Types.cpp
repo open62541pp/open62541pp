@@ -324,6 +324,7 @@ TEST_CASE("Variant") {
         CHECK(varEmpty.isEmpty());
         CHECK(!varEmpty.isScalar());
         CHECK(!varEmpty.isArray());
+        CHECK(varEmpty.getDataType() == nullptr);
         CHECK(varEmpty.getVariantType() == std::nullopt);
         CHECK(varEmpty.getArrayLength() == 0);
         CHECK(varEmpty.getArrayDimensions().empty());
@@ -398,6 +399,7 @@ TEST_CASE("Variant") {
         CHECK(var.isType(&UA_TYPES[UA_TYPES_INT32]));
         CHECK(var.isType(Type::Int32));
         CHECK(var.isType(NodeId{0, UA_NS0ID_INT32}));
+        CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_INT32]);
         CHECK(var.getVariantType().value() == Type::Int32);
 
         CHECK_THROWS(var.getScalar<bool>());
@@ -456,6 +458,7 @@ TEST_CASE("Variant") {
         CHECK(var.isArray());
         CHECK(var.isType(Type::Float));
         CHECK(var.isType(NodeId{0, UA_NS0ID_FLOAT}));
+        CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_FLOAT]);
         CHECK(var.getVariantType().value() == Type::Float);
         CHECK(var.getArrayLength() == array.size());
         CHECK(var.handle()->data != array.data());
@@ -513,6 +516,7 @@ TEST_CASE("Variant") {
         CHECK(var.isArray());
         CHECK(var.isType(Type::String));
         CHECK(var.isType(NodeId{0, UA_NS0ID_STRING}));
+        CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_STRING]);
         CHECK(var.getVariantType().value() == Type::String);
 
         CHECK_THROWS(var.getScalarCopy<std::string>());

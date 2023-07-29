@@ -18,15 +18,19 @@ bool Variant::isArray() const noexcept {
 }
 
 bool Variant::isType(const UA_DataType* type) const noexcept {
-    return handle()->type == type;
+    return getDataType() == type;
 }
 
 bool Variant::isType(Type type) const noexcept {
-    return handle()->type == detail::getUaDataType(type);
+    return getDataType() == detail::getUaDataType(type);
 }
 
 bool Variant::isType(const NodeId& id) const noexcept {
     return isType(detail::getUaDataType(id));
+}
+
+const UA_DataType* Variant::getDataType() const noexcept {
+    return handle()->type;
 }
 
 std::optional<Type> Variant::getVariantType() const noexcept {
