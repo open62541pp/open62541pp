@@ -26,4 +26,16 @@ struct Unqualified {
 template <typename T>
 using UnqualifiedT = typename Unqualified<T>::type;
 
+/// Derive member type from member pointer
+template <typename T>
+struct MemberType;
+
+template <typename C, typename T>
+struct MemberType<T C::*> {
+    using type = T;
+};
+
+template <typename T>
+using MemberTypeT = typename MemberType<T>::type;
+
 }  // namespace opcua::detail
