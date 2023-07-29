@@ -81,43 +81,43 @@ public:
     static auto createUnion(const char* typeName, NodeId typeId, NodeId binaryEncodingId);
 
     /**
-     * Add a structure member.
-     * @tparam member Member pointer, e.g. `&S::value`
-     * @param memberName Human-readable member name
-     * @param memberType Member data type
+     * Add a structure field.
+     * @tparam field Member pointer, e.g. `&S::value`
+     * @param fieldName Human-readable field name
+     * @param fieldType Member data type
      */
-    template <auto T::*member>
-    DataTypeBuilder<T, Tag>& addMember(const char* memberName, const UA_DataType& memberType);
+    template <auto T::*field>
+    DataTypeBuilder<T, Tag>& addField(const char* fieldName, const UA_DataType& fieldType);
 
     /**
-     * Add a structure member (derive DataType from `member`).
+     * Add a structure field (derive DataType from `field`).
      * @overload
      */
-    template <auto T::*member>
-    DataTypeBuilder<T, Tag>& addMember(const char* memberName) {
-        return addMember<member>(memberName, detail::guessMemberDataType<member>());
+    template <auto T::*field>
+    DataTypeBuilder<T, Tag>& addField(const char* fieldName) {
+        return addField<field>(fieldName, detail::guessMemberDataType<field>());
     }
 
     /**
-     * Add a structure array member.
+     * Add a structure array field.
      * Arrays must consists of two fields: its size (of type `size_t`) and the pointer to the data.
      * No padding allowed between the size field and the array field.
-     * @tparam memberSize Member pointer to the size field, e.g. `&S::lenth`
-     * @tparam memberArray Member pointer to the array field, e.g. `&S::data`
-     * @param memberName Human-readable member name
-     * @param memberType Member data type
+     * @tparam fieldSize Member pointer to the size field, e.g. `&S::lenth`
+     * @tparam fieldArray Member pointer to the array field, e.g. `&S::data`
+     * @param fieldName Human-readable field name
+     * @param fieldType Member data type
      */
-    template <auto T::*memberSize, auto T::*memberArray>
-    DataTypeBuilder<T, Tag>& addMember(const char* memberName, const UA_DataType& memberType);
+    template <auto T::*fieldSize, auto T::*fieldArray>
+    DataTypeBuilder<T, Tag>& addField(const char* fieldName, const UA_DataType& fieldType);
 
     /**
-     * Add a structure array member (derive DataType from `memberArray`).
+     * Add a structure array field (derive DataType from `fieldArray`).
      * @overload
      */
-    template <auto T::*memberSize, auto T::*memberArray>
-    DataTypeBuilder<T, Tag>& addMember(const char* memberName) {
-        return addMember<memberSize, memberArray>(
-            memberName, detail::guessMemberDataType<memberArray>()
+    template <auto T::*fieldSize, auto T::*fieldArray>
+    DataTypeBuilder<T, Tag>& addField(const char* fieldName) {
+        return addField<fieldSize, fieldArray>(
+            fieldName, detail::guessMemberDataType<fieldArray>()
         );
     }
 
@@ -125,19 +125,19 @@ public:
      * Add a union field.
      * @tparam memberUnion Member pointer to the union, e.g. `&S::Uni`
      * @tparam TField Type of the union field
-     * @param memberName Human-readable member name
-     * @param memberType Data type of the union field
+     * @param fieldName Human-readable field name
+     * @param fieldType Data type of the union field
      */
     template <auto T::*memberUnion, typename TField>
-    DataTypeBuilder<T, Tag>& addUnionField(const char* memberName, const UA_DataType& memberType);
+    DataTypeBuilder<T, Tag>& addUnionField(const char* fieldName, const UA_DataType& fieldType);
 
     /**
      * Add a union field (derive DataType from `TField`).
      * @overload
      */
     template <auto T::*memberUnion, typename TField>
-    DataTypeBuilder<T, Tag>& addUnionField(const char* memberName) {
-        return addUnionField<memberUnion, TField>(memberName, detail::guessDataType<TField>());
+    DataTypeBuilder<T, Tag>& addUnionField(const char* fieldName) {
+        return addUnionField<memberUnion, TField>(fieldName, detail::guessDataType<TField>());
     }
 
     /**
@@ -152,14 +152,14 @@ private:
     explicit DataTypeBuilder(DataType dataType)
         : dataType_(std::move(dataType)) {}
 
-    struct Member {
+    struct Field {
         size_t memSize;
         size_t offset;
-        DataTypeMember member;
+        DataTypeMember dataTypeMember;
     };
 
     DataType dataType_;
-    std::vector<Member> members_;
+    std::vector<Field> fields_;
 };
 
 /* --------------------------------------- Implementation --------------------------------------- */
@@ -213,28 +213,28 @@ auto DataTypeBuilder<T, Tag>::createUnion(
 }
 
 template <typename T, typename Tag>
-template <auto T::*member>
-DataTypeBuilder<T, Tag>& DataTypeBuilder<T, Tag>::addMember(
-    const char* memberName, const UA_DataType& memberType
+template <auto T::*field>
+DataTypeBuilder<T, Tag>& DataTypeBuilder<T, Tag>::addField(
+    const char* fieldName, const UA_DataType& fieldType
 ) {
-    using TMember = detail::MemberTypeT<decltype(member)>;
+    using TMember = detail::MemberTypeT<decltype(field)>;
     static_assert(
         std::is_same_v<Tag, detail::TagDataTypeStruct>,
         "Built type must be a struct or class to add members"
     );
-    assert(sizeof(detail::UnqualifiedT<TMember>) == memberType.memSize);  // NOLINT
+    assert(sizeof(detail::UnqualifiedT<TMember>) == fieldType.memSize);  // NOLINT
     if (std::is_pointer_v<TMember>) {
         dataType_.setTypeKind(UA_DATATYPEKIND_OPTSTRUCT);
     }
-    if (std::is_pointer_v<TMember> || !memberType.pointerFree) {
+    if (std::is_pointer_v<TMember> || !fieldType.pointerFree) {
         dataType_.setPointerFree(false);
     }
-    members_.push_back({
+    fields_.push_back({
         sizeof(TMember),
-        detail::offsetOfMember(member),
+        detail::offsetOfMember(field),
         detail::createDataTypeMember(
-            memberName,
-            memberType,
+            fieldName,
+            fieldType,
             {},  // calculate padding between members later
             false,
             std::is_pointer_v<TMember>
@@ -244,12 +244,12 @@ DataTypeBuilder<T, Tag>& DataTypeBuilder<T, Tag>::addMember(
 }
 
 template <typename T, typename Tag>
-template <auto T::*memberSize, auto T::*memberArray>
-DataTypeBuilder<T, Tag>& DataTypeBuilder<T, Tag>::addMember(
-    const char* memberName, const UA_DataType& memberType
+template <auto T::*fieldSize, auto T::*fieldArray>
+DataTypeBuilder<T, Tag>& DataTypeBuilder<T, Tag>::addField(
+    const char* fieldName, const UA_DataType& fieldType
 ) {
-    using TSize = detail::MemberTypeT<decltype(memberSize)>;
-    using TArray = detail::MemberTypeT<decltype(memberArray)>;
+    using TSize = detail::MemberTypeT<decltype(fieldSize)>;
+    using TArray = detail::MemberTypeT<decltype(fieldArray)>;
     static_assert(
         std::is_same_v<Tag, detail::TagDataTypeStruct>,
         "Built type must be a struct or class to add members"
@@ -258,17 +258,17 @@ DataTypeBuilder<T, Tag>& DataTypeBuilder<T, Tag>::addMember(
     static_assert(std::is_pointer_v<TArray>, "TArray must be a pointer");
     // NOLINTNEXTLINE
     assert(
-        detail::offsetOfMember(memberArray) == detail::offsetOfMember(memberSize) + sizeof(TSize) &&
+        detail::offsetOfMember(fieldArray) == detail::offsetOfMember(fieldSize) + sizeof(TSize) &&
         "No padding between members size and array allowed"
     );
-    assert(sizeof(detail::UnqualifiedT<TArray>) == memberType.memSize);  // NOLINT
+    assert(sizeof(detail::UnqualifiedT<TArray>) == fieldType.memSize);  // NOLINT
     dataType_.setPointerFree(false);
-    members_.push_back({
+    fields_.push_back({
         sizeof(TSize) + sizeof(TArray),
-        detail::offsetOfMember(memberSize),  // offset/padding related to size member
+        detail::offsetOfMember(fieldSize),  // offset/padding related to size field
         detail::createDataTypeMember(
-            memberName,
-            memberType,
+            fieldName,
+            fieldType,
             {},  // calculate padding between members later
             true,
             false
@@ -280,7 +280,7 @@ DataTypeBuilder<T, Tag>& DataTypeBuilder<T, Tag>::addMember(
 template <typename T, typename Tag>
 template <auto T::*memberUnion, typename TField>
 DataTypeBuilder<T, Tag>& DataTypeBuilder<T, Tag>::addUnionField(
-    const char* memberName, const UA_DataType& memberType
+    const char* fieldName, const UA_DataType& fieldType
 ) {
     using TUnion = detail::MemberTypeT<decltype(memberUnion)>;
     static_assert(
@@ -291,16 +291,16 @@ DataTypeBuilder<T, Tag>& DataTypeBuilder<T, Tag>::addUnionField(
     static_assert(sizeof(TField) <= sizeof(TUnion), "TField exceeds size of union");
     const auto offset = detail::offsetOfMember(memberUnion);
     assert(offset > 0 && "A union type must consist of a switch field and a union");  // NOLINT
-    assert(sizeof(detail::UnqualifiedT<TField>) == memberType.memSize);  // NOLINT
-    if (std::is_pointer_v<TField> || !memberType.pointerFree) {
+    assert(sizeof(detail::UnqualifiedT<TField>) == fieldType.memSize);  // NOLINT
+    if (std::is_pointer_v<TField> || !fieldType.pointerFree) {
         dataType_.setPointerFree(false);
     }
-    members_.push_back({
+    fields_.push_back({
         sizeof(TField),
         offset,
         detail::createDataTypeMember(
-            memberName,
-            memberType,
+            fieldName,
+            fieldType,
             offset,  // padding = offset of each field
             false,
             std::is_pointer_v<TField>
@@ -313,25 +313,25 @@ template <typename T, typename Tag>
 [[nodiscard]] DataType DataTypeBuilder<T, Tag>::build() {
     static_assert(!std::is_same_v<Tag, detail::TagDataTypeAny>);
     // sort members by offset
-    std::sort(members_.begin(), members_.end(), [](const auto& lhs, const auto& rhs) {
+    std::sort(fields_.begin(), fields_.end(), [](const auto& lhs, const auto& rhs) {
         return lhs.offset < rhs.offset;
     });
     // calculate padding of struct members
     if constexpr (std::is_same_v<Tag, detail::TagDataTypeStruct>) {
-        for (auto it = members_.begin(); it < members_.end(); ++it) {
-            if (it == members_.begin()) {
-                it->member.padding = static_cast<uint8_t>(it->offset);
+        for (auto it = fields_.begin(); it < fields_.end(); ++it) {
+            if (it == fields_.begin()) {
+                it->dataTypeMember.padding = static_cast<uint8_t>(it->offset);
             } else {
-                it->member.padding = static_cast<uint8_t>(
+                it->dataTypeMember.padding = static_cast<uint8_t>(
                     it->offset - (std::prev(it)->offset + std::prev(it)->memSize)
                 );
             }
         }
     }
     // generate and set members array
-    std::vector<DataTypeMember> dataTypeMembers(members_.size());
-    std::transform(members_.cbegin(), members_.cend(), dataTypeMembers.begin(), [](auto&& m) {
-        return m.member;
+    std::vector<DataTypeMember> dataTypeMembers(fields_.size());
+    std::transform(fields_.cbegin(), fields_.cend(), dataTypeMembers.begin(), [](auto&& m) {
+        return m.dataTypeMember;
     });
     dataType_.setMembers(dataTypeMembers);
     return dataType_;

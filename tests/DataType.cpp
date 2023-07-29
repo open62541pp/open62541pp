@@ -155,9 +155,9 @@ static void checkDataTypeEqual(const DataType& dt, const UA_DataType& expected) 
 TEST_CASE("DataTypeBuilder") {
     SUBCASE("Struct") {
         auto dt = DataTypeBuilder<Point>::createStructure("Point", {1, 1001}, {1, 1})
-                      .addMember<&Point::x>("x")
-                      .addMember<&Point::y>("y")
-                      .addMember<&Point::z>("z")
+                      .addField<&Point::x>("x")
+                      .addField<&Point::y>("y")
+                      .addField<&Point::z>("z")
                       .build();
 
         checkDataTypeEqual(dt, pointType);
@@ -188,10 +188,10 @@ TEST_CASE("DataTypeBuilder") {
         );
 
         auto dt = DataTypeBuilder<Measurements>::createStructure("Measurements", {1, 1002}, {1, 2})
-                      .addMember<&Measurements::description>(
+                      .addField<&Measurements::description>(
                           "description", UA_TYPES[UA_TYPES_STRING]
                       )
-                      .addMember<&Measurements::measurementsSize, &Measurements::measurements>(
+                      .addField<&Measurements::measurementsSize, &Measurements::measurements>(
                           "measurements"
                       )
                       .build();
@@ -243,9 +243,9 @@ TEST_CASE("DataTypeBuilder") {
         );
 
         auto dt = DataTypeBuilder<Opt>::createStructure("Opt", {1, 1003}, {1, 3})
-                      .addMember<&Opt::a>("a")
-                      .addMember<&Opt::b>("b")
-                      .addMember<&Opt::c>("c")
+                      .addField<&Opt::a>("a")
+                      .addField<&Opt::b>("b")
+                      .addField<&Opt::c>("c")
                       .build();
 
         checkDataTypeEqual(dt, optType);
@@ -308,13 +308,13 @@ TEST_CASE("DataTypeBuilder") {
         };
 
         auto dtNative = DataTypeBuilder<SNative>::createStructure("S", {1, 1005}, {1, 5})
-                            .addMember<&SNative::guid>("guid")
-                            .addMember<&SNative::value>("value")
+                            .addField<&SNative::guid>("guid")
+                            .addField<&SNative::value>("value")
                             .build();
 
         auto dtWrapper = DataTypeBuilder<SWrapper>::createStructure("S", {1, 1005}, {1, 5})
-                             .addMember<&SWrapper::guid>("guid")
-                             .addMember<&SWrapper::value>("value")
+                             .addField<&SWrapper::guid>("guid")
+                             .addField<&SWrapper::value>("value")
                              .build();
 
         CHECK(dtNative == dtWrapper);
