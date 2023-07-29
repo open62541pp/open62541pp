@@ -72,7 +72,7 @@ constexpr void assertTypeCombination() {
 
 template <typename T>
 constexpr TypeIndex guessTypeIndex() {
-    using ValueType = typename std::remove_cv_t<std::remove_reference_t<T>>;
+    using ValueType = typename detail::UnqualifiedT<T>;
     static_assert(
         TypeConverter<ValueType>::ValidTypes::size() == 1,
         "Ambiguous template type, please specify type index (UA_TYPES_*) manually"
@@ -82,7 +82,7 @@ constexpr TypeIndex guessTypeIndex() {
 
 template <typename T>
 constexpr Type guessType() {
-    using ValueType = typename std::remove_cv_t<std::remove_reference_t<T>>;
+    using ValueType = typename detail::UnqualifiedT<T>;
     static_assert(
         TypeConverter<ValueType>::ValidTypes::size() == 1,
         "Ambiguous template type, please specify type enum (opcua::Type) manually"
