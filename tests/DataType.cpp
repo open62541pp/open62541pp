@@ -3,6 +3,7 @@
 
 #include <doctest/doctest.h>
 
+#include "open62541pp/Config.h"
 #include "open62541pp/DataType.h"
 #include "open62541pp/DataTypeBuilder.h"
 #include "open62541pp/types/Builtin.h"
@@ -42,19 +43,17 @@ static UA_DataTypeMember pointMembers[3] = {
     ),
 };
 
-static const UA_DataType pointType = {
-#ifdef UA_ENABLE_TYPEDESCRIPTION
+static const UA_DataType pointType = detail::createDataType(
     "Point",
-#endif
-    {1, UA_NODEIDTYPE_NUMERIC, {1001}},
-    {1, UA_NODEIDTYPE_NUMERIC, {1}},
+    UA_NODEID_NUMERIC(1, 1001),
+    UA_NODEID_NUMERIC(1, 1),
     sizeof(Point),
     UA_DATATYPEKIND_STRUCTURE,
     true,
     false,
     3,
-    pointMembers,
-};
+    pointMembers
+);
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -62,9 +61,7 @@ TEST_CASE("DataType") {
     SUBCASE("Construct from native") {
         DataType dt(pointType);
         CHECK(dt.handle() != &pointType);
-#ifdef UA_ENABLE_TYPEDESCRIPTION
         CHECK(dt.getTypeName() == pointType.typeName);
-#endif
         CHECK(dt.getTypeId() == NodeId(1, 1001));
         CHECK(dt.getBinaryEncodingId() == NodeId(1, 1));
         CHECK(dt.getMemSize() == sizeof(Point));
@@ -123,28 +120,39 @@ TEST_CASE("DataType") {
     }
 }
 
-TEST_CASE("DataTypeBuilder") {
-    auto checkDataTypeEqual = [](const DataType& dt, const UA_DataType& expected) {
+static void checkDataTypeEqual(const DataType& dt, const UA_DataType& expected) {
 #ifdef UA_ENABLE_TYPEDESCRIPTION
-        CHECK(std::string_view(dt.getTypeName()) == std::string_view(expected.typeName));
+    CHECK(std::string_view(dt.getTypeName()) == std::string_view(expected.typeName));
 #endif
-        CHECK(dt.getTypeId() == expected.typeId);
-        CHECK(dt.getBinaryEncodingId() == expected.binaryEncodingId);
-        CHECK(dt.getMemSize() == expected.memSize);
-        CHECK(dt.getTypeKind() == expected.typeKind);
-        CHECK(dt.getPointerFree() == expected.pointerFree);
-        CHECK(dt.getOverlayable() == expected.overlayable);
-        CHECK(dt.getMembersSize() == expected.membersSize);
-        for (uint8_t i = 0; i < dt.getMembersSize(); ++i) {
-            CAPTURE(i);
-            auto m = dt.getMembers().at(i);
-            CHECK(m.memberType == expected.members[i].memberType);
-            CHECK((uint8_t)m.padding == (uint8_t)expected.members[i].padding);  // NOLINT
-            CHECK((bool)m.isArray == (bool)expected.members[i].isArray);  // NOLINT
-            CHECK((bool)m.isOptional == (bool)expected.members[i].isOptional);  // NOLINT
-        }
-    };
+    CHECK(dt.getTypeId() == expected.typeId);
+#if UAPP_OPEN62541_VER_GE(1, 2)
+    CHECK(dt.getBinaryEncodingId() == expected.binaryEncodingId);
+#else
+    CHECK(dt.getBinaryEncodingId().getIdentifierAs<uint32_t>() == expected.binaryEncodingId);
+#endif
+    CHECK(dt.getMemSize() == expected.memSize);
+    CHECK(dt.getTypeKind() == expected.typeKind);
+    CHECK(dt.getPointerFree() == expected.pointerFree);
+    CHECK(dt.getOverlayable() == expected.overlayable);
+    CHECK(dt.getMembersSize() == expected.membersSize);
+    for (uint8_t i = 0; i < dt.getMembersSize(); ++i) {
+        CAPTURE(i);
+        auto m = dt.getMembers().at(i);
+#if UAPP_OPEN62541_VER_GE(1, 3)
+        CHECK(m.memberType == expected.members[i].memberType);
+#else
+        CHECK(m.memberTypeIndex == expected.members[i].memberTypeIndex);
+        CHECK((bool)m.namespaceZero == (bool)expected.members[i].namespaceZero);  // NOLINT
+#endif
+        CHECK((uint8_t)m.padding == (uint8_t)expected.members[i].padding);  // NOLINT
+        CHECK((bool)m.isArray == (bool)expected.members[i].isArray);  // NOLINT
+#if UAPP_OPEN62541_VER_GE(1, 1)
+        CHECK((bool)m.isOptional == (bool)expected.members[i].isOptional);  // NOLINT
+#endif
+    }
+};
 
+TEST_CASE("DataTypeBuilder") {
     SUBCASE("Struct") {
         auto dt = DataTypeBuilder<Point>::createStructure("Point", {1, 1001}, {1, 1})
                       .addMember<&Point::x>("x")
@@ -158,19 +166,17 @@ TEST_CASE("DataTypeBuilder") {
     SUBCASE("Struct with array") {
         struct Measurements {
             UA_String description;
-            size_t measurementSize;
-            float* measurement;
+            size_t measurementsSize;
+            float* measurements;
         };
 
         UA_DataTypeMember measurementsMembers[2] = {
-            detail::createDataTypeMember("Description", UA_TYPES[UA_TYPES_STRING], 0, false, false),
-            detail::createDataTypeMember("Measurements", UA_TYPES[UA_TYPES_FLOAT], 0, true, false),
+            detail::createDataTypeMember("description", UA_TYPES[UA_TYPES_STRING], 0, false, false),
+            detail::createDataTypeMember("measurements", UA_TYPES[UA_TYPES_FLOAT], 0, true, false),
         };
 
-        const UA_DataType measurementsType = {
-#ifdef UA_ENABLE_TYPEDESCRIPTION
-            "Measurement",
-#endif
+        const UA_DataType measurementsType = detail::createDataType(
+            "Measurements",
             UA_NODEID_NUMERIC(1, 1002),
             UA_NODEID_NUMERIC(1, 2),
             sizeof(Measurements),
@@ -178,15 +184,15 @@ TEST_CASE("DataTypeBuilder") {
             false,
             false,
             2,
-            measurementsMembers,
-        };
+            measurementsMembers
+        );
 
-        auto dt = DataTypeBuilder<Measurements>::createStructure("Measurement", {1, 1002}, {1, 2})
+        auto dt = DataTypeBuilder<Measurements>::createStructure("Measurements", {1, 1002}, {1, 2})
                       .addMember<&Measurements::description>(
-                          "Description", UA_TYPES[UA_TYPES_STRING]
+                          "description", UA_TYPES[UA_TYPES_STRING]
                       )
-                      .addMember<&Measurements::measurementSize, &Measurements::measurement>(
-                          "Measurements"
+                      .addMember<&Measurements::measurementsSize, &Measurements::measurements>(
+                          "measurements"
                       )
                       .build();
 
@@ -224,10 +230,8 @@ TEST_CASE("DataTypeBuilder") {
             ),
         };
 
-        const UA_DataType optType = {
-#ifdef UA_ENABLE_TYPEDESCRIPTION
+        const UA_DataType optType = detail::createDataType(
             "Opt",
-#endif
             UA_NODEID_NUMERIC(1, 1003),
             UA_NODEID_NUMERIC(1, 3),
             sizeof(Opt),
@@ -235,8 +239,8 @@ TEST_CASE("DataTypeBuilder") {
             false,
             false,
             3,
-            optMembers,
-        };
+            optMembers
+        );
 
         auto dt = DataTypeBuilder<Opt>::createStructure("Opt", {1, 1003}, {1, 3})
                       .addMember<&Opt::a>("a")
@@ -272,10 +276,8 @@ TEST_CASE("DataTypeBuilder") {
             ),
         };
 
-        static const UA_DataType uniType = {
-#ifdef UA_ENABLE_TYPEDESCRIPTION
+        const UA_DataType uniType = detail::createDataType(
             "Uni",
-#endif
             UA_NODEID_NUMERIC(1, 1004),
             UA_NODEID_NUMERIC(1, 4),
             sizeof(Uni),
@@ -283,8 +285,8 @@ TEST_CASE("DataTypeBuilder") {
             false,
             false,
             2,
-            uniMembers,
-        };
+            uniMembers
+        );
 
         auto dt = DataTypeBuilder<Uni>::createUnion("Uni", {1, 1004}, {1, 4})
                       .addUnionField<&Uni::fields, double>("optionA")

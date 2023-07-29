@@ -114,6 +114,7 @@ ByteString ByteString::fromFile(const std::filesystem::path& filepath) {
     return ByteString(bytes);
 }
 
+// NOLINTNEXTLINE
 std::string ByteString::toBase64() const {
 #if UAPP_OPEN62541_VER_GE(1, 1)
     String output;

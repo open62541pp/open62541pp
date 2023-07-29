@@ -5,10 +5,15 @@
 #include <cstring>
 #include <utility>  // move, swap
 
+#include "open62541pp/Config.h"
 #include "open62541pp/overloads/comparison.h"
 #include "open62541pp/types/NodeId.h"
 
 namespace opcua {
+
+[[maybe_unused]] inline static const char* emptyIfNullptr(const char* name) {
+    return name == nullptr ? "" : name;
+};
 
 static void clearMembers(UA_DataType* native) {
     if (native != nullptr) {
@@ -77,6 +82,7 @@ DataType& DataType::operator=(DataType&& other) noexcept {
     return *this;
 }
 
+// NOLINTNEXTLINE
 const char* DataType::getTypeName() const noexcept {
 #ifdef UA_ENABLE_TYPEDESCRIPTION
     return handle()->typeName;
@@ -90,8 +96,8 @@ void DataType::setTypeName([[maybe_unused]] const char* typeName) noexcept {
 #endif
 }
 
-const NodeId& DataType::getTypeId() const noexcept {
-    return asWrapper<NodeId>(handle()->typeId);
+NodeId DataType::getTypeId() const noexcept {
+    return NodeId(handle()->typeId);  // NOLINT
 }
 
 void DataType::setTypeId(const NodeId& typeId) {
@@ -102,16 +108,28 @@ void DataType::setTypeId(NodeId&& typeId) noexcept {
     asWrapper<NodeId>(handle()->typeId) = std::move(typeId);
 }
 
-const NodeId& DataType::getBinaryEncodingId() const noexcept {
-    return asWrapper<NodeId>(handle()->binaryEncodingId);
+NodeId DataType::getBinaryEncodingId() const noexcept {
+#if UAPP_OPEN62541_VER_GE(1, 2)
+    return NodeId(handle()->binaryEncodingId);  // NOLINT
+#else
+    return NodeId(handle()->typeId.namespaceIndex, handle()->binaryEncodingId);  // NOLINT
+#endif
 }
 
 void DataType::setBinaryEncodingId(const NodeId& binaryEncodingId) {
+#if UAPP_OPEN62541_VER_GE(1, 2)
     asWrapper<NodeId>(handle()->binaryEncodingId) = binaryEncodingId;
+#else
+    handle()->binaryEncodingId = binaryEncodingId.getIdentifierAs<uint32_t>();
+#endif
 }
 
-void DataType::setBinaryEncodingId(NodeId&& binaryEncodingId) noexcept {
+void DataType::setBinaryEncodingId(NodeId&& binaryEncodingId) {
+#if UAPP_OPEN62541_VER_GE(1, 2)
     asWrapper<NodeId>(handle()->binaryEncodingId) = std::move(binaryEncodingId);
+#else
+    handle()->binaryEncodingId = binaryEncodingId.getIdentifierAs<uint32_t>();
+#endif
 }
 
 uint16_t DataType::getMemSize() const noexcept {
@@ -168,15 +186,31 @@ void DataType::setMembers(const std::vector<DataTypeMember>& members) {
 }
 
 bool operator==(const UA_DataTypeMember& lhs, const UA_DataTypeMember& rhs) noexcept {
+#ifdef UA_ENABLE_TYPEDESCRIPTION
+    if (std::strcmp(emptyIfNullptr(lhs.memberName), emptyIfNullptr(rhs.memberName)) != 0) {
+        return false;
+    }
+#endif
+#if UAPP_OPEN62541_VER_GE(1, 3)
+    if (lhs.memberType != rhs.memberType) {
+        return false;
+    }
+#else
+    if ((lhs.memberTypeIndex != rhs.memberTypeIndex) && (lhs.namespaceZero != rhs.namespaceZero)) {
+        return false;
+    }
+#endif
     if (lhs.padding != rhs.padding) {
         return false;
     }
     if (lhs.isArray != rhs.isArray) {
         return false;
     }
+#if UAPP_OPEN62541_VER_GE(1, 1)
     if (lhs.isOptional != rhs.isOptional) {
         return false;
     }
+#endif
     return true;
 }
 
@@ -186,7 +220,6 @@ bool operator!=(const UA_DataTypeMember& lhs, const UA_DataTypeMember& rhs) noex
 
 bool operator==(const UA_DataType& lhs, const UA_DataType& rhs) noexcept {
 #ifdef UA_ENABLE_TYPEDESCRIPTION
-    auto emptyIfNullptr = [](const char* name) { return name == nullptr ? "" : name; };
     if (std::strcmp(emptyIfNullptr(lhs.typeName), emptyIfNullptr(rhs.typeName)) != 0) {
         return false;
     }
@@ -231,5 +264,65 @@ bool operator==(const DataType& lhs, const DataType& rhs) noexcept {
 bool operator!=(const DataType& lhs, const DataType& rhs) noexcept {
     return !(lhs == rhs);
 }
+
+namespace detail {
+
+DataTypeMember createDataTypeMember(
+    [[maybe_unused]] const char* memberName,
+    const UA_DataType& memberType,
+    uint8_t padding,
+    bool isArray,
+    [[maybe_unused]] bool isOptional
+) noexcept {
+    DataTypeMember result{};
+#ifdef UA_ENABLE_TYPEDESCRIPTION
+    result.memberName = memberName;
+#endif
+#if UAPP_OPEN62541_VER_GE(1, 3)
+    result.memberType = &memberType;
+#else
+    result.memberTypeIndex = memberType.typeIndex;
+    result.namespaceZero = memberType.typeId.namespaceIndex == 0;
+#endif
+    result.padding = padding;
+    result.isArray = isArray;  // NOLINT
+#if UAPP_OPEN62541_VER_GE(1, 1)
+    result.isOptional = isOptional;  // NOLINT
+#endif
+    return result;
+}
+
+UA_DataType createDataType(
+    [[maybe_unused]] const char* typeName,
+    UA_NodeId typeId,
+    UA_NodeId binaryEncodingId,
+    uint16_t memSize,
+    uint8_t typeKind,
+    bool pointerFree,
+    bool overlayable,
+    uint32_t membersSize,
+    DataTypeMember* members
+) noexcept {
+    UA_DataType result{};
+#ifdef UA_ENABLE_TYPEDESCRIPTION
+    result.typeName = typeName;
+#endif
+    result.typeId = typeId;
+#if UAPP_OPEN62541_VER_GE(1, 2)
+    result.binaryEncodingId = binaryEncodingId;
+#else
+    assert(binaryEncodingId.identifierType == UA_NODEIDTYPE_NUMERIC);  // NOLINT
+    result.binaryEncodingId = binaryEncodingId.identifier.numeric;  // NOLINT
+#endif
+    result.memSize = memSize;
+    result.typeKind = typeKind;
+    result.pointerFree = pointerFree;
+    result.overlayable = overlayable;
+    result.membersSize = membersSize;
+    result.members = members;
+    return result;
+}
+
+}  // namespace detail
 
 }  // namespace opcua

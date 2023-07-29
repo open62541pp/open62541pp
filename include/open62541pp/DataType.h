@@ -4,7 +4,6 @@
 #include <vector>
 
 #include "open62541pp/Common.h"
-#include "open62541pp/Config.h"
 #include "open62541pp/open62541.h"
 
 namespace opcua {
@@ -46,13 +45,13 @@ public:
     const char* getTypeName() const noexcept;
     void setTypeName(const char* typeName) noexcept;
 
-    const NodeId& getTypeId() const noexcept;
+    NodeId getTypeId() const noexcept;
     void setTypeId(const NodeId& typeId);
     void setTypeId(NodeId&& typeId) noexcept;
 
-    const NodeId& getBinaryEncodingId() const noexcept;
+    NodeId getBinaryEncodingId() const noexcept;
     void setBinaryEncodingId(const NodeId& binaryEncodingId);
-    void setBinaryEncodingId(NodeId&& binaryEncodingId) noexcept;
+    void setBinaryEncodingId(NodeId&& binaryEncodingId);
 
     uint16_t getMemSize() const noexcept;
     void setMemSize(uint16_t memSize) noexcept;
@@ -93,23 +92,25 @@ bool operator!=(const DataType& lhs, const DataType& rhs) noexcept;
 
 namespace detail {
 
-[[nodiscard]] constexpr DataTypeMember createDataTypeMember(
-    [[maybe_unused]] const char* memberName,
+[[nodiscard]] DataTypeMember createDataTypeMember(
+    const char* memberName,
     const UA_DataType& memberType,
     uint8_t padding,
     bool isArray,
     bool isOptional
-) {
-    return {
-#ifdef UA_ENABLE_TYPEDESCRIPTION
-        memberName,
-#endif
-        &memberType,
-        padding,
-        static_cast<uint8_t>(isArray),
-        static_cast<uint8_t>(isOptional),
-    };
-}
+) noexcept;
+
+[[nodiscard]] UA_DataType createDataType(
+    const char* typeName,
+    UA_NodeId typeId,
+    UA_NodeId binaryEncodingId,
+    uint16_t memSize,
+    uint8_t typeKind,
+    bool pointerFree,
+    bool overlayable,
+    uint32_t membersSize,
+    DataTypeMember* members
+) noexcept;
 
 }  // namespace detail
 
