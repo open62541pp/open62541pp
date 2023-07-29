@@ -524,6 +524,19 @@ TEST_CASE("Variant") {
         CHECK_THROWS(var.getArrayCopy<bool>());
         CHECK(var.getArrayCopy<std::string>() == value);
     }
+
+    SUBCASE("Set/get custom data types") {
+        using CustomType = UA_ApplicationDescription;
+        const auto& dt = UA_TYPES[UA_TYPES_APPLICATIONDESCRIPTION];
+
+        Variant var;
+        CustomType value{};
+        value.applicationType = UA_APPLICATIONTYPE_CLIENT;
+        var.setScalar(value, dt);
+        CHECK(var.isScalar());
+        CHECK(var.getDataType() == &dt);
+        CHECK(var.getVariantType() == std::nullopt);
+    }
 }
 
 TEST_CASE("DataValue") {

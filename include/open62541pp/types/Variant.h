@@ -116,6 +116,10 @@ public:
     template <typename T, Type type = detail::guessType<T>()>
     void setScalar(T& value) noexcept;
 
+    /// Assign scalar value to variant with custom data type.
+    template <typename T>
+    void setScalar(T& value, const UA_DataType& dataType) noexcept;
+
     /// Copy scalar value to variant.
     template <typename T, Type type = detail::guessType<T>()>
     void setScalarCopy(const T& value);
@@ -169,6 +173,11 @@ private:
 
     void checkIsScalar() const;
     void checkIsArray() const;
+
+    template <typename T>
+    inline static void checkDataType([[maybe_unused]] const UA_DataType& dataType) {
+        assert(sizeof(T) == dataType.memSize);
+    }
 
     template <typename T>
     void checkReturnType() const {
@@ -249,7 +258,7 @@ const T& Variant::getScalar() const {
     assertGetNoCopy<T>();
     checkIsScalar();
     checkReturnType<T>();
-    assert(sizeof(T) == getDataType()->memSize);  // NOLINT
+    checkDataType<T>(*getDataType());
     return *static_cast<const T*>(handle()->data);
 }
 
@@ -270,7 +279,7 @@ const T* Variant::getArray() const {
     assertGetNoCopy<T>();
     checkIsArray();
     checkReturnType<T>();
-    assert(sizeof(T) == getDataType()->memSize);  // NOLINT
+    checkDataType<T>(*getDataType());
     return static_cast<const T*>(handle()->data);
 }
 
@@ -293,6 +302,12 @@ void Variant::setScalar(T& value) noexcept {
     } else {
         setScalarImpl(&value, detail::getUaDataType<type>());
     }
+}
+
+template <typename T>
+void Variant::setScalar(T& value, const UA_DataType& dataType) noexcept {
+    checkDataType<T>(dataType);
+    setScalarImpl(&value, &dataType);
 }
 
 template <typename T, Type type>
