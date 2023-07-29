@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.5.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.6.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -87,6 +87,21 @@ $(function() {
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#ifndef UA_ENABLE_NODEMANAGEMENT</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#warning &quot;open62541 should be compiled with UA_ENABLE_NODEMANAGEMENT&quot;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment">// open62541pp specific macros/defines</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// NOLINTNEXTLINE</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="Config_8h.html#a32ee72445862a60fcaecdeb4534e079e">   14</a></span><span class="preprocessor">#define UAPP_OPEN62541_VER_GE(MAJOR, MINOR)                                                        \</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">    (UA_OPEN62541_VER_MAJOR &gt;= (MAJOR)) &amp;&amp; (UA_OPEN62541_VER_MINOR &gt;= (MINOR))</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">// NOLINTNEXTLINE</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="Config_8h.html#ad95f0405b27091a8cdc11dd6ad86983b">   18</a></span><span class="preprocessor">#define UAPP_OPEN62541_VER_LE(MAJOR, MINOR)                                                        \</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">    (UA_OPEN62541_VER_MAJOR &lt;= (MAJOR)) &amp;&amp; (UA_OPEN62541_VER_MINOR &lt;= (MINOR))</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#if UAPP_OPEN62541_VER_GE(1, 3) &amp;&amp;                                                                 \</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">    (defined(UA_ENABLE_ENCRYPTION_OPENSSL) || defined(UA_ENABLE_ENCRYPTION_LIBRESSL))</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#define UAPP_CREATE_CERTIFICATE</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aopen62541_8h_html"><div class="ttname"><a href="open62541_8h.html">open62541.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

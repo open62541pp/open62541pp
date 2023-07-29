@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.5.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.6.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -84,9 +84,9 @@ Collaboration diagram for Attribute service set:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga26d51c7adf5f6397d545d5a1b7aece7c"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ga26d51c7adf5f6397d545d5a1b7aece7c"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1DataValue.html">DataValue</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Attribute.html#ga26d51c7adf5f6397d545d5a1b7aece7c">opcua::services::readAttribute</a> (T &amp;serverOrClient, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61">AttributeId</a> attributeId, <a class="el" href="namespaceopcua.html#a5fe27bb15f3e5712b9f2dbe2b090b304">TimestampsToReturn</a> timestamps=<a class="el" href="namespaceopcua.html#a5fe27bb15f3e5712b9f2dbe2b090b304ab400894b1c0bf114007d431aaa541943">TimestampsToReturn::Neighter</a>)</td></tr>
-<tr class="separator:ga26d51c7adf5f6397d545d5a1b7aece7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga464b08b87240eb7a96a50239f03501e5"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ga464b08b87240eb7a96a50239f03501e5"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1DataValue.html">DataValue</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Attribute.html#ga464b08b87240eb7a96a50239f03501e5">opcua::services::readAttribute</a> (T &amp;serverOrClient, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61">AttributeId</a> attributeId, <a class="el" href="namespaceopcua.html#a5fe27bb15f3e5712b9f2dbe2b090b304">TimestampsToReturn</a> timestamps=<a class="el" href="namespaceopcua.html#a5fe27bb15f3e5712b9f2dbe2b090b304a72e608760a087621cc6f67517b2de8eb">TimestampsToReturn::Neither</a>)</td></tr>
+<tr class="separator:ga464b08b87240eb7a96a50239f03501e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac0294d3ff3d0ea43cedfb59c36e0c52b"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:gac0294d3ff3d0ea43cedfb59c36e0c52b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute</a> (T &amp;serverOrClient, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61">AttributeId</a> attributeId, const <a class="el" href="classopcua_1_1DataValue.html">DataValue</a> &amp;value)</td></tr>
 <tr class="separator:gac0294d3ff3d0ea43cedfb59c36e0c52b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -210,102 +210,8 @@ Functions</h2></td></tr>
 <dd>
 <a href="https://reference.opcfoundation.org/Core/Part4/v105/docs/5.10">https://reference.opcfoundation.org/Core/Part4/v105/docs/5.10</a> </dd></dl>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ga1115b2d3e059569c28155138c16fc268" name="ga1115b2d3e059569c28155138c16fc268"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga1115b2d3e059569c28155138c16fc268">&#9670;&#160;</a></span>readAccessLevel()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint8_t opcua::services::readAccessLevel </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>serverOrClient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Read the <code>AccessLevel</code> attribute of a variable node. </p>
-<p>For example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a40ea076d6ef4c0aaccdc0d14fb2573c4">UA_ACCESSLEVELMASK_READ</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a92380e13ac90946ba3d5a7e975dfc5d3">UA_ACCESSLEVELMASK_WRITE</a></code>. The access level attribute is used to indicate how the value of a variable can be accessed (read/write) and if it contains current and/or historic data. </p>
-
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00247">247</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
-
-<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a12e36cfaa1ac01c4d45312adf07d261c">opcua::AccessLevel</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00294">opcua::Node&lt; ServerOrClient &gt;::readAccessLevel()</a>.</p>
-
-</div>
-</div>
-<a id="ga3a26f8740ad10dd03480143fc0baef76" name="ga3a26f8740ad10dd03480143fc0baef76"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga3a26f8740ad10dd03480143fc0baef76">&#9670;&#160;</a></span>readArrayDimensions()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt; uint32_t &gt; opcua::services::readArrayDimensions </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>serverOrClient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Read the <code>ArrayDimensions</code> attribute of a variable (type) node. </p>
-<p>Specifies the maximum supported length of each dimension (0 if unknown). </p>
-
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00230">230</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
-
-<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61ac10f1bf793030437aa5372e25ed1aa0d">opcua::ArrayDimensions</a>, and <a class="el" href="group__Attribute.html#ga26d51c7adf5f6397d545d5a1b7aece7c">opcua::services::readAttribute()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00289">opcua::Node&lt; ServerOrClient &gt;::readArrayDimensions()</a>.</p>
-
-</div>
-</div>
-<a id="ga26d51c7adf5f6397d545d5a1b7aece7c" name="ga26d51c7adf5f6397d545d5a1b7aece7c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga26d51c7adf5f6397d545d5a1b7aece7c">&#9670;&#160;</a></span>readAttribute()</h2>
+<a id="ga464b08b87240eb7a96a50239f03501e5" name="ga464b08b87240eb7a96a50239f03501e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga464b08b87240eb7a96a50239f03501e5">&#9670;&#160;</a></span>readAttribute()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -334,7 +240,7 @@ template&lt;typename T &gt; </div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="namespaceopcua.html#a5fe27bb15f3e5712b9f2dbe2b090b304">TimestampsToReturn</a>&#160;</td>
-          <td class="paramname"><em>timestamps</em> = <code><a class="el" href="namespaceopcua.html#a5fe27bb15f3e5712b9f2dbe2b090b304ab400894b1c0bf114007d431aaa541943">TimestampsToReturn::Neighter</a></code>&#160;</td>
+          <td class="paramname"><em>timestamps</em> = <code><a class="el" href="namespaceopcua.html#a5fe27bb15f3e5712b9f2dbe2b090b304a72e608760a087621cc6f67517b2de8eb">TimestampsToReturn::Neither</a></code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -347,6 +253,145 @@ template&lt;typename T &gt; </div>
 <p>Generic function to read node attributes. </p>
 
 <p class="reference">Referenced by <a class="el" href="Attribute_8h_source.html#l00230">opcua::services::readArrayDimensions()</a>, <a class="el" href="Attribute_8h_source.html#l00053">opcua::services::readAttributeScalar()</a>, <a class="el" href="Attribute_8h_source.html#l00187">opcua::services::readDataValue()</a>, <a class="el" href="Attribute_8h_source.html#l00085">opcua::services::readNodeClass()</a>, and <a class="el" href="Attribute_8h_source.html#l00196">opcua::services::readValue()</a>.</p>
+
+</div>
+</div>
+<a id="gac0294d3ff3d0ea43cedfb59c36e0c52b" name="gac0294d3ff3d0ea43cedfb59c36e0c52b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac0294d3ff3d0ea43cedfb59c36e0c52b">&#9670;&#160;</a></span>writeAttribute()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::services::writeAttribute </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>serverOrClient</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61">AttributeId</a>&#160;</td>
+          <td class="paramname"><em>attributeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1DataValue.html">DataValue</a> &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generic function to write node attributes. </p>
+
+<p class="reference">Referenced by <a class="el" href="Attribute_8h_source.html#l00428">opcua::services::writeAccessLevel()</a>, <a class="el" href="Attribute_8h_source.html#l00414">opcua::services::writeArrayDimensions()</a>, <a class="el" href="Attribute_8h_source.html#l00389">opcua::services::writeDataType()</a>, <a class="el" href="Attribute_8h_source.html#l00378">opcua::services::writeDataType()</a>, <a class="el" href="Attribute_8h_source.html#l00355">opcua::services::writeDataValue()</a>, <a class="el" href="Attribute_8h_source.html#l00294">opcua::services::writeDescription()</a>, <a class="el" href="Attribute_8h_source.html#l00284">opcua::services::writeDisplayName()</a>, <a class="el" href="Attribute_8h_source.html#l00345">opcua::services::writeInverseName()</a>, <a class="el" href="Attribute_8h_source.html#l00325">opcua::services::writeIsAbstract()</a>, <a class="el" href="Attribute_8h_source.html#l00451">opcua::services::writeMinimumSamplingInterval()</a>, <a class="el" href="Attribute_8h_source.html#l00335">opcua::services::writeSymmetric()</a>, <a class="el" href="Attribute_8h_source.html#l00440">opcua::services::writeUserAccessLevel()</a>, <a class="el" href="Attribute_8h_source.html#l00315">opcua::services::writeUserWriteMask()</a>, <a class="el" href="Attribute_8h_source.html#l00365">opcua::services::writeValue()</a>, <a class="el" href="Attribute_8h_source.html#l00399">opcua::services::writeValueRank()</a>, and <a class="el" href="Attribute_8h_source.html#l00304">opcua::services::writeWriteMask()</a>.</p>
+
+</div>
+</div>
+<a id="gabbc650dc1c8d7fe4ef9b6e21bdf98739" name="gabbc650dc1c8d7fe4ef9b6e21bdf98739"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabbc650dc1c8d7fe4ef9b6e21bdf98739">&#9670;&#160;</a></span>readNodeId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1NodeId.html">NodeId</a> opcua::services::readNodeId </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>serverOrClient</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read the <code><a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a></code> attribute of a node. </p>
+<p>This function is mainly used to check the existence of a node. </p>
+
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00076">76</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+
+<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a4b5bd8a54893c87287a22228b5ef2bc8">opcua::NodeId</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00039">opcua::Node&lt; ServerOrClient &gt;::Node()</a>.</p>
+
+</div>
+</div>
+<a id="gafb9fb4937f179afe7082a7f8ad2f62d7" name="gafb9fb4937f179afe7082a7f8ad2f62d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafb9fb4937f179afe7082a7f8ad2f62d7">&#9670;&#160;</a></span>readNodeClass()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceopcua.html#a73517e637628b7e96a5dfa0e2e84e64a">NodeClass</a> opcua::services::readNodeClass </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>serverOrClient</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read the <code>NodeClass</code> attribute of a node. </p>
+
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00085">85</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+
+<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a3fc17dcf2e79aea9c120e49ab80ff8a2">opcua::NodeClass</a>, and <a class="el" href="group__Attribute.html#ga464b08b87240eb7a96a50239f03501e5">opcua::services::readAttribute()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00225">opcua::Node&lt; ServerOrClient &gt;::readNodeClass()</a>.</p>
 
 </div>
 </div>
@@ -393,12 +438,12 @@ template&lt;typename T &gt; </div>
 
 <p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a50eebb9e969077ded08eed61ad9a5f0a">opcua::BrowseName</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00213">opcua::Node&lt; ServerOrClient &gt;::readBrowseName()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00230">opcua::Node&lt; ServerOrClient &gt;::readBrowseName()</a>.</p>
 
 </div>
 </div>
-<a id="ga846aa743b2fd92a9136918d1c682b507" name="ga846aa743b2fd92a9136918d1c682b507"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga846aa743b2fd92a9136918d1c682b507">&#9670;&#160;</a></span>readDataType()</h2>
+<a id="ga9bf1d25d8e453aaccbc8bf21b57b446b" name="ga9bf1d25d8e453aaccbc8bf21b57b446b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9bf1d25d8e453aaccbc8bf21b57b446b">&#9670;&#160;</a></span>readDisplayName()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -409,7 +454,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1NodeId.html">NodeId</a> opcua::services::readDataType </td>
+          <td class="memname"><a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a> opcua::services::readDisplayName </td>
           <td>(</td>
           <td class="paramtype">T &amp;&#160;</td>
           <td class="paramname"><em>serverOrClient</em>, </td>
@@ -433,13 +478,296 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Read the <code>DataType</code> attribute of a variable (type) node as <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a>. </p>
+<p>Read the <code>DisplayName</code> attribute of a node. </p>
+<p>Used to display the node to the user. </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00206">206</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00110">110</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61aaa2aaa59ac1a7c24e5e86c068bda3d20">opcua::DataType</a>.</p>
+<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a3b868ced6f60acf5ee565ac021d42941">opcua::DisplayName</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00279">opcua::Node&lt; ServerOrClient &gt;::readDataType()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00235">opcua::Node&lt; ServerOrClient &gt;::readDisplayName()</a>.</p>
+
+</div>
+</div>
+<a id="ga6941bb916a68c0f7e5d9746563dd3533" name="ga6941bb916a68c0f7e5d9746563dd3533"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6941bb916a68c0f7e5d9746563dd3533">&#9670;&#160;</a></span>readDescription()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a> opcua::services::readDescription </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>serverOrClient</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read the <code>Description</code> attribute of a node. </p>
+<p>The description shall explain the meaning of the node. </p>
+
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00121">121</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+
+<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61ab5a7adde1af5c87d7fd797b6245c2a39">opcua::Description</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00240">opcua::Node&lt; ServerOrClient &gt;::readDescription()</a>.</p>
+
+</div>
+</div>
+<a id="ga15f5640adc36edd2103c6dc557718e19" name="ga15f5640adc36edd2103c6dc557718e19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga15f5640adc36edd2103c6dc557718e19">&#9670;&#160;</a></span>readWriteMask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t opcua::services::readWriteMask </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>serverOrClient</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read the <code>WriteMask</code> attribute of a node. </p>
+<p>For example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#ada81db626738ee2eada8215ea9c5ca6f">UA_WRITEMASK_VALUEFORVARIABLETYPE</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a35003ddcccde5610e1c95ec92305398d">UA_WRITEMASK_VALUERANK</a></code>. </p>
+
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00132">132</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+
+<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a348b4177da9c7679f6aaeb691d81b245">opcua::WriteMask</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00245">opcua::Node&lt; ServerOrClient &gt;::readWriteMask()</a>.</p>
+
+</div>
+</div>
+<a id="ga74eb2eae1b870b8b1f894c48f028dea7" name="ga74eb2eae1b870b8b1f894c48f028dea7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga74eb2eae1b870b8b1f894c48f028dea7">&#9670;&#160;</a></span>readUserWriteMask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t opcua::services::readUserWriteMask </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>serverOrClient</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read the <code>UserWriteMask</code> attribute of a node. </p>
+<p>For example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#ada81db626738ee2eada8215ea9c5ca6f">UA_WRITEMASK_VALUEFORVARIABLETYPE</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a35003ddcccde5610e1c95ec92305398d">UA_WRITEMASK_VALUERANK</a></code>.   In constrast to the write mask, the user write mask is taking access rights into account. </p>
+
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00144">144</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+
+<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61ab9dcbac825fcc04d987748560bf1c87d">opcua::UserWriteMask</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00250">opcua::Node&lt; ServerOrClient &gt;::readUserWriteMask()</a>.</p>
+
+</div>
+</div>
+<a id="ga25c86a04729ba5ed3cab251c25a9f8e2" name="ga25c86a04729ba5ed3cab251c25a9f8e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga25c86a04729ba5ed3cab251c25a9f8e2">&#9670;&#160;</a></span>readIsAbstract()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool opcua::services::readIsAbstract </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>serverOrClient</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read the <code>IsAbtract</code> attribute of a reference type node. </p>
+<p>If a reference is abstract, no reference of this type shall exist, only of its subtypes. </p>
+
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00155">155</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+
+<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a833b3ec00a198b60d574fe7246137741">opcua::IsAbstract</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00255">opcua::Node&lt; ServerOrClient &gt;::readIsAbstract()</a>.</p>
+
+</div>
+</div>
+<a id="ga2ebbfb739203cfce49c4f9f023e17b01" name="ga2ebbfb739203cfce49c4f9f023e17b01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2ebbfb739203cfce49c4f9f023e17b01">&#9670;&#160;</a></span>readSymmetric()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool opcua::services::readSymmetric </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>serverOrClient</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read the <code>Symmetric</code> attribute of a reference type node. </p>
+<p>If a reference is symmetric it can seen from both the source and target node. </p>
+
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00166">166</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+
+<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61af334649ef5e5d0ffe200751d07012626">opcua::Symmetric</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00260">opcua::Node&lt; ServerOrClient &gt;::readSymmetric()</a>.</p>
+
+</div>
+</div>
+<a id="ga2c4d0ec7979b8552c5603bd13fbcaa6a" name="ga2c4d0ec7979b8552c5603bd13fbcaa6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga2c4d0ec7979b8552c5603bd13fbcaa6a">&#9670;&#160;</a></span>readInverseName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a> opcua::services::readInverseName </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>serverOrClient</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read the <code>InverseName</code> attribute of a reference type node. </p>
+<p>The inverse name describes the reference type as seen from the target node. For example, the reference type <code>HasSubtype</code> has the inverse name <code>HasSupertype</code>. </p>
+
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00178">178</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+
+<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a930804b1a5b9b120b1e6b94cf7367a5b">opcua::InverseName</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00265">opcua::Node&lt; ServerOrClient &gt;::readInverseName()</a>.</p>
 
 </div>
 </div>
@@ -489,478 +817,9 @@ template&lt;typename T &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00187">187</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">References <a class="el" href="namespaceopcua.html#a5fe27bb15f3e5712b9f2dbe2b090b304a130c5b3473c57faa76e2a1c54e26f88e">opcua::Both</a>, <a class="el" href="group__Attribute.html#ga26d51c7adf5f6397d545d5a1b7aece7c">opcua::services::readAttribute()</a>, and <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a689202409e48743b914713f96d93947c">opcua::Value</a>.</p>
+<p class="reference">References <a class="el" href="namespaceopcua.html#a5fe27bb15f3e5712b9f2dbe2b090b304a130c5b3473c57faa76e2a1c54e26f88e">opcua::Both</a>, <a class="el" href="group__Attribute.html#ga464b08b87240eb7a96a50239f03501e5">opcua::services::readAttribute()</a>, and <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a689202409e48743b914713f96d93947c">opcua::Value</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00253">opcua::Node&lt; ServerOrClient &gt;::readDataValue()</a>.</p>
-
-</div>
-</div>
-<a id="ga6941bb916a68c0f7e5d9746563dd3533" name="ga6941bb916a68c0f7e5d9746563dd3533"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga6941bb916a68c0f7e5d9746563dd3533">&#9670;&#160;</a></span>readDescription()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a> opcua::services::readDescription </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>serverOrClient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Read the <code>Description</code> attribute of a node. </p>
-<p>The description shall explain the meaning of the node. </p>
-
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00121">121</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
-
-<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61ab5a7adde1af5c87d7fd797b6245c2a39">opcua::Description</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00223">opcua::Node&lt; ServerOrClient &gt;::readDescription()</a>.</p>
-
-</div>
-</div>
-<a id="ga9bf1d25d8e453aaccbc8bf21b57b446b" name="ga9bf1d25d8e453aaccbc8bf21b57b446b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga9bf1d25d8e453aaccbc8bf21b57b446b">&#9670;&#160;</a></span>readDisplayName()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a> opcua::services::readDisplayName </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>serverOrClient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Read the <code>DisplayName</code> attribute of a node. </p>
-<p>Used to display the node to the user. </p>
-
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00110">110</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
-
-<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a3b868ced6f60acf5ee565ac021d42941">opcua::DisplayName</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00218">opcua::Node&lt; ServerOrClient &gt;::readDisplayName()</a>.</p>
-
-</div>
-</div>
-<a id="ga2c4d0ec7979b8552c5603bd13fbcaa6a" name="ga2c4d0ec7979b8552c5603bd13fbcaa6a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga2c4d0ec7979b8552c5603bd13fbcaa6a">&#9670;&#160;</a></span>readInverseName()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a> opcua::services::readInverseName </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>serverOrClient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Read the <code>InverseName</code> attribute of a reference type node. </p>
-<p>The inverse name describes the reference type as seen from the target node. For example, the reference type <code>HasSubtype</code> has the inverse name <code>HasSupertype</code>. </p>
-
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00178">178</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
-
-<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a930804b1a5b9b120b1e6b94cf7367a5b">opcua::InverseName</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00248">opcua::Node&lt; ServerOrClient &gt;::readInverseName()</a>.</p>
-
-</div>
-</div>
-<a id="ga25c86a04729ba5ed3cab251c25a9f8e2" name="ga25c86a04729ba5ed3cab251c25a9f8e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga25c86a04729ba5ed3cab251c25a9f8e2">&#9670;&#160;</a></span>readIsAbstract()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool opcua::services::readIsAbstract </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>serverOrClient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Read the <code>IsAbtract</code> attribute of a reference type node. </p>
-<p>If a reference is abstract, no reference of this type shall exist, only of its subtypes. </p>
-
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00155">155</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
-
-<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a833b3ec00a198b60d574fe7246137741">opcua::IsAbstract</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00238">opcua::Node&lt; ServerOrClient &gt;::readIsAbstract()</a>.</p>
-
-</div>
-</div>
-<a id="gab4a968460e6818dc636bccf216ee1d93" name="gab4a968460e6818dc636bccf216ee1d93"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab4a968460e6818dc636bccf216ee1d93">&#9670;&#160;</a></span>readMinimumSamplingInterval()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">double opcua::services::readMinimumSamplingInterval </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>serverOrClient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Read the <code>MinimumSamplingInterval</code> attribute of a variable node. </p>
-<p>Specifies (in milliseconds) how fast the server can reasonably sample the value for changes. A minimum sampling interval of 0 indicates that the server is to monitor the item continuously. A minimum sampling interval of -1 means indeterminate. </p>
-
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00272">272</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
-
-<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a7aaf3829928c26d13a9d1a5fd3755c2f">opcua::MinimumSamplingInterval</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00304">opcua::Node&lt; ServerOrClient &gt;::readMinimumSamplingInterval()</a>.</p>
-
-</div>
-</div>
-<a id="gafb9fb4937f179afe7082a7f8ad2f62d7" name="gafb9fb4937f179afe7082a7f8ad2f62d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gafb9fb4937f179afe7082a7f8ad2f62d7">&#9670;&#160;</a></span>readNodeClass()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespaceopcua.html#a73517e637628b7e96a5dfa0e2e84e64a">NodeClass</a> opcua::services::readNodeClass </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>serverOrClient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Read the <code>NodeClass</code> attribute of a node. </p>
-
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00085">85</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
-
-<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a3fc17dcf2e79aea9c120e49ab80ff8a2">opcua::NodeClass</a>, and <a class="el" href="group__Attribute.html#ga26d51c7adf5f6397d545d5a1b7aece7c">opcua::services::readAttribute()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00208">opcua::Node&lt; ServerOrClient &gt;::readNodeClass()</a>.</p>
-
-</div>
-</div>
-<a id="gabbc650dc1c8d7fe4ef9b6e21bdf98739" name="gabbc650dc1c8d7fe4ef9b6e21bdf98739"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gabbc650dc1c8d7fe4ef9b6e21bdf98739">&#9670;&#160;</a></span>readNodeId()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1NodeId.html">NodeId</a> opcua::services::readNodeId </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>serverOrClient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Read the <code><a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a></code> attribute of a node. </p>
-<p>This function is mainly used to check the existance of a node. </p>
-
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00076">76</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
-
-<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a4b5bd8a54893c87287a22228b5ef2bc8">opcua::NodeId</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00039">opcua::Node&lt; ServerOrClient &gt;::Node()</a>.</p>
-
-</div>
-</div>
-<a id="ga2ebbfb739203cfce49c4f9f023e17b01" name="ga2ebbfb739203cfce49c4f9f023e17b01"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga2ebbfb739203cfce49c4f9f023e17b01">&#9670;&#160;</a></span>readSymmetric()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool opcua::services::readSymmetric </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>serverOrClient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Read the <code>Symmetric</code> attribute of a reference type node. </p>
-<p>If a reference is symmetric it can seen from both the source and target node. </p>
-
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00166">166</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
-
-<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61af334649ef5e5d0ffe200751d07012626">opcua::Symmetric</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00243">opcua::Node&lt; ServerOrClient &gt;::readSymmetric()</a>.</p>
-
-</div>
-</div>
-<a id="gae7f2ba2d476377a7e9e0eca3ac5b5fae" name="gae7f2ba2d476377a7e9e0eca3ac5b5fae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gae7f2ba2d476377a7e9e0eca3ac5b5fae">&#9670;&#160;</a></span>readUserAccessLevel()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint8_t opcua::services::readUserAccessLevel </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>serverOrClient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Read the <code>UserAccessLevel</code> attribute a variable node. </p>
-<p>For example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a40ea076d6ef4c0aaccdc0d14fb2573c4">UA_ACCESSLEVELMASK_READ</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a92380e13ac90946ba3d5a7e975dfc5d3">UA_ACCESSLEVELMASK_WRITE</a></code>. The access level attribute is used to indicate how the value of a variable can be accessed (read/write) and if it contains current and/or historic data.   In constrast to the access level, the user acceess level is taking access rights into account. </p>
-
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00259">259</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
-
-<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61adaf479084152b5fa98cda5560c0125fb">opcua::UserAccessLevel</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00299">opcua::Node&lt; ServerOrClient &gt;::readUserAccessLevel()</a>.</p>
-
-</div>
-</div>
-<a id="ga74eb2eae1b870b8b1f894c48f028dea7" name="ga74eb2eae1b870b8b1f894c48f028dea7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga74eb2eae1b870b8b1f894c48f028dea7">&#9670;&#160;</a></span>readUserWriteMask()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t opcua::services::readUserWriteMask </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>serverOrClient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Read the <code>UserWriteMask</code> attribute of a node. </p>
-<p>For example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#ada81db626738ee2eada8215ea9c5ca6f">UA_WRITEMASK_VALUEFORVARIABLETYPE</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a35003ddcccde5610e1c95ec92305398d">UA_WRITEMASK_VALUERANK</a></code>.   In constrast to the write mask, the user write mask is taking access rights into account. </p>
-
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00144">144</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
-
-<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61ab9dcbac825fcc04d987748560bf1c87d">opcua::UserWriteMask</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00233">opcua::Node&lt; ServerOrClient &gt;::readUserWriteMask()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00270">opcua::Node&lt; ServerOrClient &gt;::readDataValue()</a>.</p>
 
 </div>
 </div>
@@ -1010,9 +869,55 @@ template&lt;typename T &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00196">196</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">References <a class="el" href="group__Attribute.html#ga26d51c7adf5f6397d545d5a1b7aece7c">opcua::services::readAttribute()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00122">opcua::TypeWrapper&lt; T, typeIndex &gt;::swap()</a>, and <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a689202409e48743b914713f96d93947c">opcua::Value</a>.</p>
+<p class="reference">References <a class="el" href="group__Attribute.html#ga464b08b87240eb7a96a50239f03501e5">opcua::services::readAttribute()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00122">opcua::TypeWrapper&lt; T, typeIndex &gt;::swap()</a>, and <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a689202409e48743b914713f96d93947c">opcua::Value</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00258">opcua::Node&lt; ServerOrClient &gt;::readValue()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00275">opcua::Node&lt; ServerOrClient &gt;::readValue()</a>.</p>
+
+</div>
+</div>
+<a id="ga846aa743b2fd92a9136918d1c682b507" name="ga846aa743b2fd92a9136918d1c682b507"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga846aa743b2fd92a9136918d1c682b507">&#9670;&#160;</a></span>readDataType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1NodeId.html">NodeId</a> opcua::services::readDataType </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>serverOrClient</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read the <code>DataType</code> attribute of a variable (type) node as <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00206">206</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+
+<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61aaa2aaa59ac1a7c24e5e86c068bda3d20">opcua::DataType</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00296">opcua::Node&lt; ServerOrClient &gt;::readDataType()</a>.</p>
 
 </div>
 </div>
@@ -1059,12 +964,12 @@ template&lt;typename T &gt; </div>
 
 <p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a984b29a2ca83266dd2898a0a548b2c9f">opcua::ValueRank</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00284">opcua::Node&lt; ServerOrClient &gt;::readValueRank()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00301">opcua::Node&lt; ServerOrClient &gt;::readValueRank()</a>.</p>
 
 </div>
 </div>
-<a id="ga15f5640adc36edd2103c6dc557718e19" name="ga15f5640adc36edd2103c6dc557718e19"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga15f5640adc36edd2103c6dc557718e19">&#9670;&#160;</a></span>readWriteMask()</h2>
+<a id="ga3a26f8740ad10dd03480143fc0baef76" name="ga3a26f8740ad10dd03480143fc0baef76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3a26f8740ad10dd03480143fc0baef76">&#9670;&#160;</a></span>readArrayDimensions()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1075,7 +980,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t opcua::services::readWriteMask </td>
+          <td class="memname">std::vector&lt; uint32_t &gt; opcua::services::readArrayDimensions </td>
           <td>(</td>
           <td class="paramtype">T &amp;&#160;</td>
           <td class="paramname"><em>serverOrClient</em>, </td>
@@ -1099,19 +1004,19 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Read the <code>WriteMask</code> attribute of a node. </p>
-<p>For example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#ada81db626738ee2eada8215ea9c5ca6f">UA_WRITEMASK_VALUEFORVARIABLETYPE</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a35003ddcccde5610e1c95ec92305398d">UA_WRITEMASK_VALUERANK</a></code>. </p>
+<p>Read the <code>ArrayDimensions</code> attribute of a variable (type) node. </p>
+<p>Specifies the maximum supported length of each dimension (0 if unknown). </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00132">132</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00230">230</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a348b4177da9c7679f6aaeb691d81b245">opcua::WriteMask</a>.</p>
+<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61ac10f1bf793030437aa5372e25ed1aa0d">opcua::ArrayDimensions</a>, and <a class="el" href="group__Attribute.html#ga464b08b87240eb7a96a50239f03501e5">opcua::services::readAttribute()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00228">opcua::Node&lt; ServerOrClient &gt;::readWriteMask()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00306">opcua::Node&lt; ServerOrClient &gt;::readArrayDimensions()</a>.</p>
 
 </div>
 </div>
-<a id="ga0c1440e93b0f5a54b57d57cb45f2069b" name="ga0c1440e93b0f5a54b57d57cb45f2069b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga0c1440e93b0f5a54b57d57cb45f2069b">&#9670;&#160;</a></span>writeAccessLevel()</h2>
+<a id="ga1115b2d3e059569c28155138c16fc268" name="ga1115b2d3e059569c28155138c16fc268"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1115b2d3e059569c28155138c16fc268">&#9670;&#160;</a></span>readAccessLevel()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1122,7 +1027,148 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::services::writeAccessLevel </td>
+          <td class="memname">uint8_t opcua::services::readAccessLevel </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>serverOrClient</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read the <code>AccessLevel</code> attribute of a variable node. </p>
+<p>For example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a40ea076d6ef4c0aaccdc0d14fb2573c4">UA_ACCESSLEVELMASK_READ</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a92380e13ac90946ba3d5a7e975dfc5d3">UA_ACCESSLEVELMASK_WRITE</a></code>. The access level attribute is used to indicate how the value of a variable can be accessed (read/write) and if it contains current and/or historic data. </p>
+
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00247">247</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+
+<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a12e36cfaa1ac01c4d45312adf07d261c">opcua::AccessLevel</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00311">opcua::Node&lt; ServerOrClient &gt;::readAccessLevel()</a>.</p>
+
+</div>
+</div>
+<a id="gae7f2ba2d476377a7e9e0eca3ac5b5fae" name="gae7f2ba2d476377a7e9e0eca3ac5b5fae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae7f2ba2d476377a7e9e0eca3ac5b5fae">&#9670;&#160;</a></span>readUserAccessLevel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t opcua::services::readUserAccessLevel </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>serverOrClient</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read the <code>UserAccessLevel</code> attribute a variable node. </p>
+<p>For example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a40ea076d6ef4c0aaccdc0d14fb2573c4">UA_ACCESSLEVELMASK_READ</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a92380e13ac90946ba3d5a7e975dfc5d3">UA_ACCESSLEVELMASK_WRITE</a></code>. The access level attribute is used to indicate how the value of a variable can be accessed (read/write) and if it contains current and/or historic data.   In constrast to the access level, the user acceess level is taking access rights into account. </p>
+
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00259">259</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+
+<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61adaf479084152b5fa98cda5560c0125fb">opcua::UserAccessLevel</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00316">opcua::Node&lt; ServerOrClient &gt;::readUserAccessLevel()</a>.</p>
+
+</div>
+</div>
+<a id="gab4a968460e6818dc636bccf216ee1d93" name="gab4a968460e6818dc636bccf216ee1d93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab4a968460e6818dc636bccf216ee1d93">&#9670;&#160;</a></span>readMinimumSamplingInterval()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double opcua::services::readMinimumSamplingInterval </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>serverOrClient</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read the <code>MinimumSamplingInterval</code> attribute of a variable node. </p>
+<p>Specifies (in milliseconds) how fast the server can reasonably sample the value for changes. A minimum sampling interval of 0 indicates that the server is to monitor the item continuously. A minimum sampling interval of -1 means indeterminate. </p>
+
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00272">272</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+
+<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a7aaf3829928c26d13a9d1a5fd3755c2f">opcua::MinimumSamplingInterval</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00321">opcua::Node&lt; ServerOrClient &gt;::readMinimumSamplingInterval()</a>.</p>
+
+</div>
+</div>
+<a id="gae5e6754b385b9f9964a53462f85b52b4" name="gae5e6754b385b9f9964a53462f85b52b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae5e6754b385b9f9964a53462f85b52b4">&#9670;&#160;</a></span>writeDisplayName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::services::writeDisplayName </td>
           <td>(</td>
           <td class="paramtype">T &amp;&#160;</td>
           <td class="paramname"><em>serverOrClient</em>, </td>
@@ -1136,7 +1182,113 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a> &amp;&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write the <code>DisplayName</code> attribute of a node. </p>
+<p>Used to display the node to the user.   </p>
+
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00284">284</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+
+<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a3b868ced6f60acf5ee565ac021d42941">opcua::DisplayName</a>, <a class="el" href="DataValue_8h_source.html#l00089">opcua::DataValue::fromScalar()</a>, and <a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00327">opcua::Node&lt; ServerOrClient &gt;::writeDisplayName()</a>.</p>
+
+</div>
+</div>
+<a id="ga9ff994fe94c8666118a416a8e43ba114" name="ga9ff994fe94c8666118a416a8e43ba114"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9ff994fe94c8666118a416a8e43ba114">&#9670;&#160;</a></span>writeDescription()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::services::writeDescription </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>serverOrClient</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a> &amp;&#160;</td>
+          <td class="paramname"><em>desc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write the <code>Description</code> attribute of a node. </p>
+<p>The description shall explain the meaning of the node.   </p>
+
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00294">294</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+
+<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61ab5a7adde1af5c87d7fd797b6245c2a39">opcua::Description</a>, <a class="el" href="DataValue_8h_source.html#l00089">opcua::DataValue::fromScalar()</a>, and <a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00334">opcua::Node&lt; ServerOrClient &gt;::writeDescription()</a>.</p>
+
+</div>
+</div>
+<a id="ga8acd0110ca8f67498612c35126743886" name="ga8acd0110ca8f67498612c35126743886"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8acd0110ca8f67498612c35126743886">&#9670;&#160;</a></span>writeWriteMask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::services::writeWriteMask </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>serverOrClient</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
           <td class="paramname"><em>mask</em>&#160;</td>
         </tr>
         <tr>
@@ -1152,14 +1304,485 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Write the <code>AccessLevel</code> attribute of a variable node. </p>
-<p>For example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a40ea076d6ef4c0aaccdc0d14fb2573c4">UA_ACCESSLEVELMASK_READ</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a92380e13ac90946ba3d5a7e975dfc5d3">UA_ACCESSLEVELMASK_WRITE</a></code>. The access level attribute is used to indicate how the value of a variable can be accessed (read/write) and if it contains current and/or historic data.   </p>
+<p>Write the <code>WriteMask</code> attribute of a node. </p>
+<p>For example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#ada81db626738ee2eada8215ea9c5ca6f">UA_WRITEMASK_VALUEFORVARIABLETYPE</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a35003ddcccde5610e1c95ec92305398d">UA_WRITEMASK_VALUERANK</a></code>.   </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00428">428</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00304">304</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a12e36cfaa1ac01c4d45312adf07d261c">opcua::AccessLevel</a>, <a class="el" href="DataValue_8h_source.html#l00089">opcua::DataValue::fromScalar()</a>, and <a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute()</a>.</p>
+<p class="reference">References <a class="el" href="DataValue_8h_source.html#l00089">opcua::DataValue::fromScalar()</a>, <a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute()</a>, and <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a348b4177da9c7679f6aaeb691d81b245">opcua::WriteMask</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00403">opcua::Node&lt; ServerOrClient &gt;::writeAccessLevel()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00341">opcua::Node&lt; ServerOrClient &gt;::writeWriteMask()</a>.</p>
+
+</div>
+</div>
+<a id="gaf3d30a340cda39f9f71fe1e7ea54fc1a" name="gaf3d30a340cda39f9f71fe1e7ea54fc1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf3d30a340cda39f9f71fe1e7ea54fc1a">&#9670;&#160;</a></span>writeUserWriteMask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::services::writeUserWriteMask </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>serverOrClient</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>mask</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write the <code>UserWriteMask</code> attribute of a node. </p>
+<p>For example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#ada81db626738ee2eada8215ea9c5ca6f">UA_WRITEMASK_VALUEFORVARIABLETYPE</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a35003ddcccde5610e1c95ec92305398d">UA_WRITEMASK_VALUERANK</a></code>.   In constrast to the write mask, the user write mask is taking access rights into account.   </p><dl class="section note"><dt>Note</dt><dd>Cannot be written from the server. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00315">315</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+
+<p class="reference">References <a class="el" href="DataValue_8h_source.html#l00089">opcua::DataValue::fromScalar()</a>, <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61ab9dcbac825fcc04d987748560bf1c87d">opcua::UserWriteMask</a>, and <a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00348">opcua::Node&lt; ServerOrClient &gt;::writeUserWriteMask()</a>.</p>
+
+</div>
+</div>
+<a id="ga9e68c38ef69f653a20dd7b7be1a14d17" name="ga9e68c38ef69f653a20dd7b7be1a14d17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9e68c38ef69f653a20dd7b7be1a14d17">&#9670;&#160;</a></span>writeIsAbstract()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::services::writeIsAbstract </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>serverOrClient</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isAbstract</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write the <code>IsAbstract</code> attribute of a reference type node. </p>
+<p>If a reference is abstract, no reference of this type shall exist, only of its subtypes.   </p>
+
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00325">325</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+
+<p class="reference">References <a class="el" href="DataValue_8h_source.html#l00089">opcua::DataValue::fromScalar()</a>, <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a833b3ec00a198b60d574fe7246137741">opcua::IsAbstract</a>, and <a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00355">opcua::Node&lt; ServerOrClient &gt;::writeIsAbstract()</a>.</p>
+
+</div>
+</div>
+<a id="ga61fc44b804fb4d3e4df978792b59e155" name="ga61fc44b804fb4d3e4df978792b59e155"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga61fc44b804fb4d3e4df978792b59e155">&#9670;&#160;</a></span>writeSymmetric()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::services::writeSymmetric </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>serverOrClient</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>symmetric</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write the <code>Symmetric</code> attribute of a reference type node. </p>
+<p>If a reference is symmetric it can seen from both the source and target node.   </p>
+
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00335">335</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+
+<p class="reference">References <a class="el" href="DataValue_8h_source.html#l00089">opcua::DataValue::fromScalar()</a>, <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61af334649ef5e5d0ffe200751d07012626">opcua::Symmetric</a>, and <a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00362">opcua::Node&lt; ServerOrClient &gt;::writeSymmetric()</a>.</p>
+
+</div>
+</div>
+<a id="ga8503a2debb855028d1a4efe285543f59" name="ga8503a2debb855028d1a4efe285543f59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8503a2debb855028d1a4efe285543f59">&#9670;&#160;</a></span>writeInverseName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::services::writeInverseName </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>serverOrClient</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a> &amp;&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write the <code>InverseName</code> of a reference type node. </p>
+<p>The inverse name describes the reference type as seen from the target node. For example, the reference type <code>HasSubtype</code> has the inverse name <code>HasSupertype</code>.   </p>
+
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00345">345</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+
+<p class="reference">References <a class="el" href="DataValue_8h_source.html#l00089">opcua::DataValue::fromScalar()</a>, <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a930804b1a5b9b120b1e6b94cf7367a5b">opcua::InverseName</a>, and <a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00369">opcua::Node&lt; ServerOrClient &gt;::writeInverseName()</a>.</p>
+
+</div>
+</div>
+<a id="gab988ff9fda28967b0b1b29661eec211a" name="gab988ff9fda28967b0b1b29661eec211a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab988ff9fda28967b0b1b29661eec211a">&#9670;&#160;</a></span>writeDataValue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::services::writeDataValue </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>serverOrClient</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1DataValue.html">DataValue</a> &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write the <code>Value</code> attribute of a variable node as a <a class="el" href="classopcua_1_1DataValue.html" title="UA_DataValue wrapper class.">DataValue</a> object. </p>
+
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00355">355</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+
+<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a689202409e48743b914713f96d93947c">opcua::Value</a>, and <a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00376">opcua::Node&lt; ServerOrClient &gt;::writeDataValue()</a>.</p>
+
+</div>
+</div>
+<a id="gad12365fe20edc5077ba7e3aebd9eac68" name="gad12365fe20edc5077ba7e3aebd9eac68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad12365fe20edc5077ba7e3aebd9eac68">&#9670;&#160;</a></span>writeValue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::services::writeValue </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>serverOrClient</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write the <code>Value</code> attribute of a variable node as a <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> object. </p>
+
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00365">365</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+
+<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00139">opcua::TypeWrapper&lt; T, typeIndex &gt;::handle()</a>, <a class="elRef" target="_blank" href="open62541/structUA__DataValue.html#ab18e898e2ee5478aa0cd295f3357841b">UA_DataValue::value</a>, <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a689202409e48743b914713f96d93947c">opcua::Value</a>, and <a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00383">opcua::Node&lt; ServerOrClient &gt;::writeValue()</a>.</p>
+
+</div>
+</div>
+<a id="ga163a5a8e814dea27ea253f97993a3ae9" name="ga163a5a8e814dea27ea253f97993a3ae9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga163a5a8e814dea27ea253f97993a3ae9">&#9670;&#160;</a></span>writeDataType() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::services::writeDataType </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>serverOrClient</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#a83669427d4f4639c57ec0b499c5fdc10">Type</a>&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write the <code>DataType</code> attribute of a variable (type) node. </p>
+
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00378">378</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+
+<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61aaa2aaa59ac1a7c24e5e86c068bda3d20">opcua::DataType</a>, <a class="el" href="DataValue_8h_source.html#l00089">opcua::DataValue::fromScalar()</a>, <a class="el" href="helper_8h_source.html#l00014">opcua::detail::getUaDataType()</a>, <a class="elRef" target="_blank" href="open62541/structUA__DataType.html#a600c88a57a9e371cfe1da19f273f441b">UA_DataType::typeId</a>, and <a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00434">opcua::Node&lt; ServerOrClient &gt;::writeDataType()</a>, and <a class="el" href="Node_8h_source.html#l00427">opcua::Node&lt; ServerOrClient &gt;::writeDataType()</a>.</p>
+
+</div>
+</div>
+<a id="gad8524562cd27c1e0e393e566ce84aa02" name="gad8524562cd27c1e0e393e566ce84aa02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad8524562cd27c1e0e393e566ce84aa02">&#9670;&#160;</a></span>writeDataType() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::services::writeDataType </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>serverOrClient</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>typeId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write the <code>DataType</code> attribute of a variable (type) node by node id. </p>
+
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00389">389</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+
+<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61aaa2aaa59ac1a7c24e5e86c068bda3d20">opcua::DataType</a>, <a class="el" href="DataValue_8h_source.html#l00089">opcua::DataValue::fromScalar()</a>, and <a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute()</a>.</p>
+
+</div>
+</div>
+<a id="ga89d92760c369fe3557cb5e5329ad9832" name="ga89d92760c369fe3557cb5e5329ad9832"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga89d92760c369fe3557cb5e5329ad9832">&#9670;&#160;</a></span>writeValueRank()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::services::writeValueRank </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>serverOrClient</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383">ValueRank</a>&#160;</td>
+          <td class="paramname"><em>valueRank</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write the <code>ValueRank</code> attribute of a variable (type) node. </p>
+<p>Indicates whether the value attribute of the variable node is an array and how many dimensions the array has.   </p>
+
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00399">399</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+
+<p class="reference">References <a class="el" href="DataValue_8h_source.html#l00089">opcua::DataValue::fromScalar()</a>, <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a984b29a2ca83266dd2898a0a548b2c9f">opcua::ValueRank</a>, and <a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00441">opcua::Node&lt; ServerOrClient &gt;::writeValueRank()</a>.</p>
 
 </div>
 </div>
@@ -1213,58 +1836,12 @@ template&lt;typename T &gt; </div>
 
 <p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61ac10f1bf793030437aa5372e25ed1aa0d">opcua::ArrayDimensions</a>, <a class="el" href="DataValue_8h_source.html#l00097">opcua::DataValue::fromArray()</a>, and <a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00398">opcua::Node&lt; ServerOrClient &gt;::writeArrayDimensions()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00448">opcua::Node&lt; ServerOrClient &gt;::writeArrayDimensions()</a>.</p>
 
 </div>
 </div>
-<a id="gac0294d3ff3d0ea43cedfb59c36e0c52b" name="gac0294d3ff3d0ea43cedfb59c36e0c52b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gac0294d3ff3d0ea43cedfb59c36e0c52b">&#9670;&#160;</a></span>writeAttribute()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void opcua::services::writeAttribute </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>serverOrClient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61">AttributeId</a>&#160;</td>
-          <td class="paramname"><em>attributeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1DataValue.html">DataValue</a> &amp;&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Generic function to write node attributes. </p>
-
-<p class="reference">Referenced by <a class="el" href="Attribute_8h_source.html#l00428">opcua::services::writeAccessLevel()</a>, <a class="el" href="Attribute_8h_source.html#l00414">opcua::services::writeArrayDimensions()</a>, <a class="el" href="Attribute_8h_source.html#l00389">opcua::services::writeDataType()</a>, <a class="el" href="Attribute_8h_source.html#l00378">opcua::services::writeDataType()</a>, <a class="el" href="Attribute_8h_source.html#l00355">opcua::services::writeDataValue()</a>, <a class="el" href="Attribute_8h_source.html#l00294">opcua::services::writeDescription()</a>, <a class="el" href="Attribute_8h_source.html#l00284">opcua::services::writeDisplayName()</a>, <a class="el" href="Attribute_8h_source.html#l00345">opcua::services::writeInverseName()</a>, <a class="el" href="Attribute_8h_source.html#l00325">opcua::services::writeIsAbstract()</a>, <a class="el" href="Attribute_8h_source.html#l00451">opcua::services::writeMinimumSamplingInterval()</a>, <a class="el" href="Attribute_8h_source.html#l00335">opcua::services::writeSymmetric()</a>, <a class="el" href="Attribute_8h_source.html#l00440">opcua::services::writeUserAccessLevel()</a>, <a class="el" href="Attribute_8h_source.html#l00315">opcua::services::writeUserWriteMask()</a>, <a class="el" href="Attribute_8h_source.html#l00365">opcua::services::writeValue()</a>, <a class="el" href="Attribute_8h_source.html#l00399">opcua::services::writeValueRank()</a>, and <a class="el" href="Attribute_8h_source.html#l00304">opcua::services::writeWriteMask()</a>.</p>
-
-</div>
-</div>
-<a id="gad8524562cd27c1e0e393e566ce84aa02" name="gad8524562cd27c1e0e393e566ce84aa02"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gad8524562cd27c1e0e393e566ce84aa02">&#9670;&#160;</a></span>writeDataType() <span class="overload">[1/2]</span></h2>
+<a id="ga0c1440e93b0f5a54b57d57cb45f2069b" name="ga0c1440e93b0f5a54b57d57cb45f2069b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0c1440e93b0f5a54b57d57cb45f2069b">&#9670;&#160;</a></span>writeAccessLevel()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1275,7 +1852,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::services::writeDataType </td>
+          <td class="memname">void opcua::services::writeAccessLevel </td>
           <td>(</td>
           <td class="paramtype">T &amp;&#160;</td>
           <td class="paramname"><em>serverOrClient</em>, </td>
@@ -1289,8 +1866,8 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>typeId</em>&#160;</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>mask</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1305,433 +1882,14 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Write the <code>DataType</code> attribute of a variable (type) node by node id. </p>
+<p>Write the <code>AccessLevel</code> attribute of a variable node. </p>
+<p>For example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a40ea076d6ef4c0aaccdc0d14fb2573c4">UA_ACCESSLEVELMASK_READ</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a92380e13ac90946ba3d5a7e975dfc5d3">UA_ACCESSLEVELMASK_WRITE</a></code>. The access level attribute is used to indicate how the value of a variable can be accessed (read/write) and if it contains current and/or historic data.   </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00389">389</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00428">428</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61aaa2aaa59ac1a7c24e5e86c068bda3d20">opcua::DataType</a>, <a class="el" href="DataValue_8h_source.html#l00089">opcua::DataValue::fromScalar()</a>, and <a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute()</a>.</p>
+<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a12e36cfaa1ac01c4d45312adf07d261c">opcua::AccessLevel</a>, <a class="el" href="DataValue_8h_source.html#l00089">opcua::DataValue::fromScalar()</a>, and <a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute()</a>.</p>
 
-</div>
-</div>
-<a id="ga163a5a8e814dea27ea253f97993a3ae9" name="ga163a5a8e814dea27ea253f97993a3ae9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga163a5a8e814dea27ea253f97993a3ae9">&#9670;&#160;</a></span>writeDataType() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void opcua::services::writeDataType </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>serverOrClient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespaceopcua.html#a83669427d4f4639c57ec0b499c5fdc10">Type</a>&#160;</td>
-          <td class="paramname"><em>type</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Write the <code>DataType</code> attribute of a variable (type) node. </p>
-
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00378">378</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
-
-<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61aaa2aaa59ac1a7c24e5e86c068bda3d20">opcua::DataType</a>, <a class="el" href="DataValue_8h_source.html#l00089">opcua::DataValue::fromScalar()</a>, <a class="el" href="helper_8h_source.html#l00014">opcua::detail::getUaDataType()</a>, <a class="elRef" target="_blank" href="open62541/structUA__DataType.html#a600c88a57a9e371cfe1da19f273f441b">UA_DataType::typeId</a>, and <a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00388">opcua::Node&lt; ServerOrClient &gt;::writeDataType()</a>, and <a class="el" href="Node_8h_source.html#l00383">opcua::Node&lt; ServerOrClient &gt;::writeDataType()</a>.</p>
-
-</div>
-</div>
-<a id="gab988ff9fda28967b0b1b29661eec211a" name="gab988ff9fda28967b0b1b29661eec211a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab988ff9fda28967b0b1b29661eec211a">&#9670;&#160;</a></span>writeDataValue()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void opcua::services::writeDataValue </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>serverOrClient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1DataValue.html">DataValue</a> &amp;&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Write the <code>Value</code> attribute of a variable node as a <a class="el" href="classopcua_1_1DataValue.html" title="UA_DataValue wrapper class.">DataValue</a> object. </p>
-
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00355">355</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
-
-<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a689202409e48743b914713f96d93947c">opcua::Value</a>, and <a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00344">opcua::Node&lt; ServerOrClient &gt;::writeDataValue()</a>.</p>
-
-</div>
-</div>
-<a id="ga9ff994fe94c8666118a416a8e43ba114" name="ga9ff994fe94c8666118a416a8e43ba114"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga9ff994fe94c8666118a416a8e43ba114">&#9670;&#160;</a></span>writeDescription()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void opcua::services::writeDescription </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>serverOrClient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a> &amp;&#160;</td>
-          <td class="paramname"><em>desc</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Write the <code>Description</code> attribute of a node. </p>
-<p>The description shall explain the meaning of the node.   </p>
-
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00294">294</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
-
-<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61ab5a7adde1af5c87d7fd797b6245c2a39">opcua::Description</a>, <a class="el" href="DataValue_8h_source.html#l00089">opcua::DataValue::fromScalar()</a>, and <a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00314">opcua::Node&lt; ServerOrClient &gt;::writeDescription()</a>.</p>
-
-</div>
-</div>
-<a id="gae5e6754b385b9f9964a53462f85b52b4" name="gae5e6754b385b9f9964a53462f85b52b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gae5e6754b385b9f9964a53462f85b52b4">&#9670;&#160;</a></span>writeDisplayName()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void opcua::services::writeDisplayName </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>serverOrClient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a> &amp;&#160;</td>
-          <td class="paramname"><em>name</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Write the <code>DisplayName</code> attribute of a node. </p>
-<p>Used to display the node to the user.   </p>
-
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00284">284</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
-
-<p class="reference">References <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a3b868ced6f60acf5ee565ac021d42941">opcua::DisplayName</a>, <a class="el" href="DataValue_8h_source.html#l00089">opcua::DataValue::fromScalar()</a>, and <a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00309">opcua::Node&lt; ServerOrClient &gt;::writeDisplayName()</a>.</p>
-
-</div>
-</div>
-<a id="ga8503a2debb855028d1a4efe285543f59" name="ga8503a2debb855028d1a4efe285543f59"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga8503a2debb855028d1a4efe285543f59">&#9670;&#160;</a></span>writeInverseName()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void opcua::services::writeInverseName </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>serverOrClient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a> &amp;&#160;</td>
-          <td class="paramname"><em>name</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Write the <code>InverseName</code> of a reference type node. </p>
-<p>The inverse name describes the reference type as seen from the target node. For example, the reference type <code>HasSubtype</code> has the inverse name <code>HasSupertype</code>.   </p>
-
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00345">345</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
-
-<p class="reference">References <a class="el" href="DataValue_8h_source.html#l00089">opcua::DataValue::fromScalar()</a>, <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a930804b1a5b9b120b1e6b94cf7367a5b">opcua::InverseName</a>, and <a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00339">opcua::Node&lt; ServerOrClient &gt;::writeInverseName()</a>.</p>
-
-</div>
-</div>
-<a id="ga9e68c38ef69f653a20dd7b7be1a14d17" name="ga9e68c38ef69f653a20dd7b7be1a14d17"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga9e68c38ef69f653a20dd7b7be1a14d17">&#9670;&#160;</a></span>writeIsAbstract()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void opcua::services::writeIsAbstract </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>serverOrClient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>isAbstract</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Write the <code>IsAbstract</code> attribute of a reference type node. </p>
-<p>If a reference is abstract, no reference of this type shall exist, only of its subtypes.   </p>
-
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00325">325</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
-
-<p class="reference">References <a class="el" href="DataValue_8h_source.html#l00089">opcua::DataValue::fromScalar()</a>, <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a833b3ec00a198b60d574fe7246137741">opcua::IsAbstract</a>, and <a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00329">opcua::Node&lt; ServerOrClient &gt;::writeIsAbstract()</a>.</p>
-
-</div>
-</div>
-<a id="ga0f06b6000d0fe434a920500d9a82ef5a" name="ga0f06b6000d0fe434a920500d9a82ef5a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga0f06b6000d0fe434a920500d9a82ef5a">&#9670;&#160;</a></span>writeMinimumSamplingInterval()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void opcua::services::writeMinimumSamplingInterval </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>serverOrClient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>milliseconds</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Write the <code>MinimumSamplingInterval</code> attribute of a variable node. </p>
-<p>Specifies (in milliseconds) how fast the server can reasonably sample the value for changes. A minimum sampling interval of 0 indicates that the server is to monitor the item continuously. A minimum sampling interval of -1 means indeterminate.   </p>
-
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00451">451</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
-
-<p class="reference">References <a class="el" href="DataValue_8h_source.html#l00089">opcua::DataValue::fromScalar()</a>, <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a7aaf3829928c26d13a9d1a5fd3755c2f">opcua::MinimumSamplingInterval</a>, and <a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00413">opcua::Node&lt; ServerOrClient &gt;::writeMinimumSamplingInterval()</a>.</p>
-
-</div>
-</div>
-<a id="ga61fc44b804fb4d3e4df978792b59e155" name="ga61fc44b804fb4d3e4df978792b59e155"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga61fc44b804fb4d3e4df978792b59e155">&#9670;&#160;</a></span>writeSymmetric()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void opcua::services::writeSymmetric </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>serverOrClient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>symmetric</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Write the <code>Symmetric</code> attribute of a reference type node. </p>
-<p>If a reference is symmetric it can seen from both the source and target node.   </p>
-
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00335">335</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
-
-<p class="reference">References <a class="el" href="DataValue_8h_source.html#l00089">opcua::DataValue::fromScalar()</a>, <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61af334649ef5e5d0ffe200751d07012626">opcua::Symmetric</a>, and <a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00334">opcua::Node&lt; ServerOrClient &gt;::writeSymmetric()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00455">opcua::Node&lt; ServerOrClient &gt;::writeAccessLevel()</a>.</p>
 
 </div>
 </div>
@@ -1784,12 +1942,12 @@ template&lt;typename T &gt; </div>
 
 <p class="reference">References <a class="el" href="DataValue_8h_source.html#l00089">opcua::DataValue::fromScalar()</a>, <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61adaf479084152b5fa98cda5560c0125fb">opcua::UserAccessLevel</a>, and <a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00408">opcua::Node&lt; ServerOrClient &gt;::writeUserAccessLevel()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00462">opcua::Node&lt; ServerOrClient &gt;::writeUserAccessLevel()</a>.</p>
 
 </div>
 </div>
-<a id="gaf3d30a340cda39f9f71fe1e7ea54fc1a" name="gaf3d30a340cda39f9f71fe1e7ea54fc1a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaf3d30a340cda39f9f71fe1e7ea54fc1a">&#9670;&#160;</a></span>writeUserWriteMask()</h2>
+<a id="ga0f06b6000d0fe434a920500d9a82ef5a" name="ga0f06b6000d0fe434a920500d9a82ef5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0f06b6000d0fe434a920500d9a82ef5a">&#9670;&#160;</a></span>writeMinimumSamplingInterval()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1800,7 +1958,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::services::writeUserWriteMask </td>
+          <td class="memname">void opcua::services::writeMinimumSamplingInterval </td>
           <td>(</td>
           <td class="paramtype">T &amp;&#160;</td>
           <td class="paramname"><em>serverOrClient</em>, </td>
@@ -1814,8 +1972,8 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>mask</em>&#160;</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>milliseconds</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1830,172 +1988,14 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Write the <code>UserWriteMask</code> attribute of a node. </p>
-<p>For example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#ada81db626738ee2eada8215ea9c5ca6f">UA_WRITEMASK_VALUEFORVARIABLETYPE</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a35003ddcccde5610e1c95ec92305398d">UA_WRITEMASK_VALUERANK</a></code>.   In constrast to the write mask, the user write mask is taking access rights into account.   </p><dl class="section note"><dt>Note</dt><dd>Cannot be written from the server. </dd></dl>
+<p>Write the <code>MinimumSamplingInterval</code> attribute of a variable node. </p>
+<p>Specifies (in milliseconds) how fast the server can reasonably sample the value for changes. A minimum sampling interval of 0 indicates that the server is to monitor the item continuously. A minimum sampling interval of -1 means indeterminate.   </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00315">315</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00451">451</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">References <a class="el" href="DataValue_8h_source.html#l00089">opcua::DataValue::fromScalar()</a>, <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61ab9dcbac825fcc04d987748560bf1c87d">opcua::UserWriteMask</a>, and <a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute()</a>.</p>
+<p class="reference">References <a class="el" href="DataValue_8h_source.html#l00089">opcua::DataValue::fromScalar()</a>, <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a7aaf3829928c26d13a9d1a5fd3755c2f">opcua::MinimumSamplingInterval</a>, and <a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00324">opcua::Node&lt; ServerOrClient &gt;::writeUserWriteMask()</a>.</p>
-
-</div>
-</div>
-<a id="gad12365fe20edc5077ba7e3aebd9eac68" name="gad12365fe20edc5077ba7e3aebd9eac68"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gad12365fe20edc5077ba7e3aebd9eac68">&#9670;&#160;</a></span>writeValue()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void opcua::services::writeValue </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>serverOrClient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Write the <code>Value</code> attribute of a variable node as a <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> object. </p>
-
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00365">365</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
-
-<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00144">opcua::TypeWrapper&lt; T, typeIndex &gt;::handle()</a>, <a class="elRef" target="_blank" href="open62541/structUA__DataValue.html#ab18e898e2ee5478aa0cd295f3357841b">UA_DataValue::value</a>, <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a689202409e48743b914713f96d93947c">opcua::Value</a>, and <a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00349">opcua::Node&lt; ServerOrClient &gt;::writeValue()</a>.</p>
-
-</div>
-</div>
-<a id="ga89d92760c369fe3557cb5e5329ad9832" name="ga89d92760c369fe3557cb5e5329ad9832"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga89d92760c369fe3557cb5e5329ad9832">&#9670;&#160;</a></span>writeValueRank()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void opcua::services::writeValueRank </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>serverOrClient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383">ValueRank</a>&#160;</td>
-          <td class="paramname"><em>valueRank</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Write the <code>ValueRank</code> attribute of a variable (type) node. </p>
-<p>Indicates whether the value attribute of the variable node is an array and how many dimensions the array has.   </p>
-
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00399">399</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
-
-<p class="reference">References <a class="el" href="DataValue_8h_source.html#l00089">opcua::DataValue::fromScalar()</a>, <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a984b29a2ca83266dd2898a0a548b2c9f">opcua::ValueRank</a>, and <a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00393">opcua::Node&lt; ServerOrClient &gt;::writeValueRank()</a>.</p>
-
-</div>
-</div>
-<a id="ga8acd0110ca8f67498612c35126743886" name="ga8acd0110ca8f67498612c35126743886"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga8acd0110ca8f67498612c35126743886">&#9670;&#160;</a></span>writeWriteMask()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void opcua::services::writeWriteMask </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&#160;</td>
-          <td class="paramname"><em>serverOrClient</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>mask</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Write the <code>WriteMask</code> attribute of a node. </p>
-<p>For example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#ada81db626738ee2eada8215ea9c5ca6f">UA_WRITEMASK_VALUEFORVARIABLETYPE</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a35003ddcccde5610e1c95ec92305398d">UA_WRITEMASK_VALUERANK</a></code>.   </p>
-
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00304">304</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
-
-<p class="reference">References <a class="el" href="DataValue_8h_source.html#l00089">opcua::DataValue::fromScalar()</a>, <a class="el" href="group__Attribute.html#gac0294d3ff3d0ea43cedfb59c36e0c52b">opcua::services::writeAttribute()</a>, and <a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61a348b4177da9c7679f6aaeb691d81b245">opcua::WriteMask</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00319">opcua::Node&lt; ServerOrClient &gt;::writeWriteMask()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00469">opcua::Node&lt; ServerOrClient &gt;::writeMinimumSamplingInterval()</a>.</p>
 
 </div>
 </div>

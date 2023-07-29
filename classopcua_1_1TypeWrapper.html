@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.5.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.6.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -138,8 +138,6 @@ Public Member Functions</h2></td></tr>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a5e05524b2745c94d9b43037f8fd938de"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a5e05524b2745c94d9b43037f8fd938de">getTypeIndex</a> ()</td></tr>
 <tr class="separator:a5e05524b2745c94d9b43037f8fd938de"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a570e5661b87bdc4abc4fa96fca9dd493"><td class="memItemLeft" align="right" valign="top">static const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a570e5661b87bdc4abc4fa96fca9dd493">getDataType</a> ()</td></tr>
-<tr class="separator:a570e5661b87bdc4abc4fa96fca9dd493"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -150,6 +148,8 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:a570e5661b87bdc4abc4fa96fca9dd493"><td class="memItemLeft" align="right" valign="top">static const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a570e5661b87bdc4abc4fa96fca9dd493">getDataType</a> ()</td></tr>
+<tr class="separator:a570e5661b87bdc4abc4fa96fca9dd493"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7794f5381651258794f075fdaf7bbcff"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a7794f5381651258794f075fdaf7bbcff">checkMemSize</a> ()</td></tr>
 <tr class="separator:a7794f5381651258794f075fdaf7bbcff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -162,24 +162,6 @@ class opcua::TypeWrapper&lt; T, typeIndex &gt;</div><p>Template base class to wr
 
 <p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00038">38</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="ab8741f2c3cd49fc00e8697197775ea05" name="ab8741f2c3cd49fc00e8697197775ea05"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8741f2c3cd49fc00e8697197775ea05">&#9670;&#160;</a></span>NativeType</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, typeIndex &gt;::NativeType =  T</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00043">43</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
-
-</div>
-</div>
 <a id="a7f24ba2bf6517bed143c1eb789fff19a" name="a7f24ba2bf6517bed143c1eb789fff19a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7f24ba2bf6517bed143c1eb789fff19a">&#9670;&#160;</a></span>TypeWrapperBase</h2>
 
@@ -195,6 +177,24 @@ template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebea
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00042">42</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+
+</div>
+</div>
+<a id="ab8741f2c3cd49fc00e8697197775ea05" name="ab8741f2c3cd49fc00e8697197775ea05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8741f2c3cd49fc00e8697197775ea05">&#9670;&#160;</a></span>NativeType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, typeIndex &gt;::NativeType =  T</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00043">43</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -256,7 +256,7 @@ template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebea
 
 <p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00048">48</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
-<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00163">opcua::TypeWrapper&lt; T, typeIndex &gt;::copy()</a>.</p>
+<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00162">opcua::TypeWrapper&lt; T, typeIndex &gt;::copy()</a>.</p>
 
 </div>
 </div>
@@ -319,7 +319,7 @@ template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebea
 
 <p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00056">56</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
-<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00158">opcua::TypeWrapper&lt; T, typeIndex &gt;::clear()</a>.</p>
+<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00157">opcua::TypeWrapper&lt; T, typeIndex &gt;::clear()</a>.</p>
 
 </div>
 </div>
@@ -353,7 +353,7 @@ template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebea
 
 <p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00061">61</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
-<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00163">opcua::TypeWrapper&lt; T, typeIndex &gt;::copy()</a>.</p>
+<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00162">opcua::TypeWrapper&lt; T, typeIndex &gt;::copy()</a>.</p>
 
 </div>
 </div>
@@ -392,8 +392,8 @@ template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebea
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a7794f5381651258794f075fdaf7bbcff" name="a7794f5381651258794f075fdaf7bbcff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7794f5381651258794f075fdaf7bbcff">&#9670;&#160;</a></span>checkMemSize()</h2>
+<a id="a86611a03dd65dc9b494c62125e6aa4af" name="a86611a03dd65dc9b494c62125e6aa4af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86611a03dd65dc9b494c62125e6aa4af">&#9670;&#160;</a></span>operator=() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -404,29 +404,30 @@ template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebea
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static void <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, typeIndex &gt;::checkMemSize </td>
+          <td class="memname"><a class="el" href="classopcua_1_1TypeWrapper.html">TypeWrapper</a> &amp; <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, typeIndex &gt;::operator= </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1TypeWrapper.html">TypeWrapper</a>&lt; T, typeIndex &gt; &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00154">154</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p>Copy assignment (deep copy). </p>
 
-<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00139">opcua::TypeWrapper&lt; T, typeIndex &gt;::getDataType()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00071">71</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="TypeWrapper_8h_source.html#l00158">opcua::TypeWrapper&lt; T, typeIndex &gt;::clear()</a>, and <a class="el" href="TypeWrapper_8h_source.html#l00163">opcua::TypeWrapper&lt; T, typeIndex &gt;::copy()</a>.</p>
+<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00162">opcua::TypeWrapper&lt; T, typeIndex &gt;::copy()</a>.</p>
 
 </div>
 </div>
-<a id="acf3c23c43e0751d83f78772457935f81" name="acf3c23c43e0751d83f78772457935f81"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acf3c23c43e0751d83f78772457935f81">&#9670;&#160;</a></span>clear()</h2>
+<a id="ae5973467e6123af523b27755d2a758a0" name="ae5973467e6123af523b27755d2a758a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5973467e6123af523b27755d2a758a0">&#9670;&#160;</a></span>operator=() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -437,63 +438,30 @@ template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebea
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, typeIndex &gt;::clear </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00158">158</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
-
-<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00154">opcua::TypeWrapper&lt; T, typeIndex &gt;::checkMemSize()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00139">opcua::TypeWrapper&lt; T, typeIndex &gt;::getDataType()</a>, and <a class="elRef" target="_blank" href="open62541/types_8h.html#ab615e6928fa544fb7caf34c9e241fd4b">UA_clear()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="TypeWrapper_8h_source.html#l00163">opcua::TypeWrapper&lt; T, typeIndex &gt;::copy()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00095">opcua::TypeWrapper&lt; T, typeIndex &gt;::operator=()</a>, and <a class="el" href="TypeWrapper_8h_source.html#l00056">opcua::TypeWrapper&lt; T, typeIndex &gt;::~TypeWrapper()</a>.</p>
-
-</div>
-</div>
-<a id="ac183e283c4619b5e6e84d80706034224" name="ac183e283c4619b5e6e84d80706034224"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac183e283c4619b5e6e84d80706034224">&#9670;&#160;</a></span>copy()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, typeIndex &gt;::copy </td>
+          <td class="memname"><a class="el" href="classopcua_1_1TypeWrapper.html">TypeWrapper</a> &amp; <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, typeIndex &gt;::operator= </td>
           <td>(</td>
           <td class="paramtype">const T &amp;&#160;</td>
-          <td class="paramname"><em>data</em></td><td>)</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00163">163</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p>Copy assignment with native object (deep copy). </p>
 
-<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00154">opcua::TypeWrapper&lt; T, typeIndex &gt;::checkMemSize()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00158">opcua::TypeWrapper&lt; T, typeIndex &gt;::clear()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00139">opcua::TypeWrapper&lt; T, typeIndex &gt;::getDataType()</a>, <a class="el" href="ErrorHandling_8h_source.html#l00056">opcua::detail::throwOnBadStatus()</a>, and <a class="elRef" target="_blank" href="open62541/types_8h.html#a06dc3ec388f93ee9aab177e3b50ca7e4">UA_copy()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00080">80</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="TypeWrapper_8h_source.html#l00080">opcua::TypeWrapper&lt; T, typeIndex &gt;::operator=()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00071">opcua::TypeWrapper&lt; T, typeIndex &gt;::operator=()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00048">opcua::TypeWrapper&lt; T, typeIndex &gt;::TypeWrapper()</a>, and <a class="el" href="TypeWrapper_8h_source.html#l00061">opcua::TypeWrapper&lt; T, typeIndex &gt;::TypeWrapper()</a>.</p>
+<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00162">opcua::TypeWrapper&lt; T, typeIndex &gt;::copy()</a>.</p>
 
 </div>
 </div>
-<a id="a570e5661b87bdc4abc4fa96fca9dd493" name="a570e5661b87bdc4abc4fa96fca9dd493"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a570e5661b87bdc4abc4fa96fca9dd493">&#9670;&#160;</a></span>getDataType()</h2>
+<a id="a7ebd2f672857cddc9813e28ff533552c" name="a7ebd2f672857cddc9813e28ff533552c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ebd2f672857cddc9813e28ff533552c">&#9670;&#160;</a></span>operator=() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -504,29 +472,30 @@ template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebea
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> * <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, typeIndex &gt;::getDataType </td>
+          <td class="memname"><a class="el" href="classopcua_1_1TypeWrapper.html">TypeWrapper</a> &amp; <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, typeIndex &gt;::operator= </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1TypeWrapper.html">TypeWrapper</a>&lt; T, typeIndex &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get type as <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> object. </p>
+<p>Move assignment. </p>
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00139">139</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00086">86</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="TypeWrapper_8h_source.html#l00154">opcua::TypeWrapper&lt; T, typeIndex &gt;::checkMemSize()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00158">opcua::TypeWrapper&lt; T, typeIndex &gt;::clear()</a>, and <a class="el" href="TypeWrapper_8h_source.html#l00163">opcua::TypeWrapper&lt; T, typeIndex &gt;::copy()</a>.</p>
+<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00122">opcua::TypeWrapper&lt; T, typeIndex &gt;::swap()</a>.</p>
 
 </div>
 </div>
-<a id="a5e05524b2745c94d9b43037f8fd938de" name="a5e05524b2745c94d9b43037f8fd938de"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e05524b2745c94d9b43037f8fd938de">&#9670;&#160;</a></span>getTypeIndex()</h2>
+<a id="a1ce47bb0fb7deddd858c6e923be11c9c" name="a1ce47bb0fb7deddd858c6e923be11c9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ce47bb0fb7deddd858c6e923be11c9c">&#9670;&#160;</a></span>operator=() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -537,117 +506,25 @@ template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebea
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static constexpr <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, typeIndex &gt;::getTypeIndex </td>
+          <td class="memname"><a class="el" href="classopcua_1_1TypeWrapper.html">TypeWrapper</a> &amp; <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, typeIndex &gt;::operator= </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get type as type index of the <a class="elRef" target="_blank" href="open62541/types__generated_8h.html#aba037b86f18a7b7bceef5c098910c2c7">UA_TYPES</a> array. </p>
+<p>Move assignment with native object. </p>
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00134">134</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00095">95</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
-</div>
-</div>
-<a id="a8a3532a725c365cd7a19eff52401a100" name="a8a3532a725c365cd7a19eff52401a100"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8a3532a725c365cd7a19eff52401a100">&#9670;&#160;</a></span>handle() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const T * <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, typeIndex &gt;::handle </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Return const pointer to native object. </p>
-
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00149">149</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
-
-</div>
-</div>
-<a id="a94db6081488119e4222037f286b52aad" name="a94db6081488119e4222037f286b52aad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a94db6081488119e4222037f286b52aad">&#9670;&#160;</a></span>handle() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr T * <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, typeIndex &gt;::handle </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Return pointer to native object. </p>
-
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00144">144</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Attribute_8h_source.html#l00365">opcua::services::writeValue()</a>.</p>
-
-</div>
-</div>
-<a id="a806199321722ed028ba4ff64c0661685" name="a806199321722ed028ba4ff64c0661685"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a806199321722ed028ba4ff64c0661685">&#9670;&#160;</a></span>operator const T &amp;()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, typeIndex &gt;::operator const T &amp; </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Implicit conversion to native object. </p>
-
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00107">107</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00157">opcua::TypeWrapper&lt; T, typeIndex &gt;::clear()</a>.</p>
 
 </div>
 </div>
@@ -682,8 +559,8 @@ template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebea
 
 </div>
 </div>
-<a id="a702f21b231fe0210b3bc573d974d8280" name="a702f21b231fe0210b3bc573d974d8280"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a702f21b231fe0210b3bc573d974d8280">&#9670;&#160;</a></span>operator-&gt;() <span class="overload">[1/2]</span></h2>
+<a id="a806199321722ed028ba4ff64c0661685" name="a806199321722ed028ba4ff64c0661685"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a806199321722ed028ba4ff64c0661685">&#9670;&#160;</a></span>operator const T &amp;()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -694,7 +571,7 @@ template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebea
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr const T * <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, typeIndex &gt;::operator-&gt; </td>
+          <td class="memname">constexpr <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, typeIndex &gt;::operator const T &amp; </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -707,14 +584,14 @@ template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebea
 </table>
 </div><div class="memdoc">
 
-<p>Member access to native object. </p>
+<p>Implicit conversion to native object. </p>
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00117">117</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00107">107</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
 </div>
 </div>
 <a id="a8f53420d2161e34501b88ee8e5427535" name="a8f53420d2161e34501b88ee8e5427535"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f53420d2161e34501b88ee8e5427535">&#9670;&#160;</a></span>operator-&gt;() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f53420d2161e34501b88ee8e5427535">&#9670;&#160;</a></span>operator-&gt;() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -744,8 +621,8 @@ template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebea
 
 </div>
 </div>
-<a id="ae5973467e6123af523b27755d2a758a0" name="ae5973467e6123af523b27755d2a758a0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae5973467e6123af523b27755d2a758a0">&#9670;&#160;</a></span>operator=() <span class="overload">[1/4]</span></h2>
+<a id="a702f21b231fe0210b3bc573d974d8280" name="a702f21b231fe0210b3bc573d974d8280"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a702f21b231fe0210b3bc573d974d8280">&#9670;&#160;</a></span>operator-&gt;() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -756,30 +633,27 @@ template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebea
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1TypeWrapper.html">TypeWrapper</a> &amp; <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, typeIndex &gt;::operator= </td>
+          <td class="memname">constexpr const T * <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, typeIndex &gt;::operator-&gt; </td>
           <td>(</td>
-          <td class="paramtype">const T &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td></td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Copy assignment with native object (deep copy). </p>
+<p>Member access to native object. </p>
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00080">80</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
-
-<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00163">opcua::TypeWrapper&lt; T, typeIndex &gt;::copy()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00117">117</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
 </div>
 </div>
-<a id="a86611a03dd65dc9b494c62125e6aa4af" name="a86611a03dd65dc9b494c62125e6aa4af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a86611a03dd65dc9b494c62125e6aa4af">&#9670;&#160;</a></span>operator=() <span class="overload">[2/4]</span></h2>
+<a id="a94a8f29763ebca5b66a0b7fb2fc9bdf0" name="a94a8f29763ebca5b66a0b7fb2fc9bdf0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94a8f29763ebca5b66a0b7fb2fc9bdf0">&#9670;&#160;</a></span>swap() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -790,43 +664,9 @@ template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebea
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1TypeWrapper.html">TypeWrapper</a> &amp; <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, typeIndex &gt;::operator= </td>
+          <td class="memname">void <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, typeIndex &gt;::swap </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1TypeWrapper.html">TypeWrapper</a>&lt; T, typeIndex &gt; &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Copy assignment (deep copy). </p>
-
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00071">71</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
-
-<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00163">opcua::TypeWrapper&lt; T, typeIndex &gt;::copy()</a>.</p>
-
-</div>
-</div>
-<a id="a1ce47bb0fb7deddd858c6e923be11c9c" name="a1ce47bb0fb7deddd858c6e923be11c9c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1ce47bb0fb7deddd858c6e923be11c9c">&#9670;&#160;</a></span>operator=() <span class="overload">[3/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1TypeWrapper.html">TypeWrapper</a> &amp; <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, typeIndex &gt;::operator= </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1TypeWrapper.html">TypeWrapper</a>&lt; T, typeIndex &gt; &amp;&#160;</td>
           <td class="paramname"><em>other</em></td><td>)</td>
           <td></td>
         </tr>
@@ -838,50 +678,16 @@ template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebea
 </table>
 </div><div class="memdoc">
 
-<p>Move assignment with native object. </p>
+<p>Swap with wrapper object. </p>
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00095">95</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00122">122</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
-<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00158">opcua::TypeWrapper&lt; T, typeIndex &gt;::clear()</a>.</p>
-
-</div>
-</div>
-<a id="a7ebd2f672857cddc9813e28ff533552c" name="a7ebd2f672857cddc9813e28ff533552c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7ebd2f672857cddc9813e28ff533552c">&#9670;&#160;</a></span>operator=() <span class="overload">[4/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1TypeWrapper.html">TypeWrapper</a> &amp; <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, typeIndex &gt;::operator= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1TypeWrapper.html">TypeWrapper</a>&lt; T, typeIndex &gt; &amp;&amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Move assignment. </p>
-
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00086">86</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
-
-<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00122">opcua::TypeWrapper&lt; T, typeIndex &gt;::swap()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="TypeWrapper_8h_source.html#l00086">opcua::TypeWrapper&lt; T, typeIndex &gt;::operator=()</a>, <a class="el" href="Attribute_8h_source.html#l00196">opcua::services::readValue()</a>, and <a class="el" href="TypeWrapper_8h_source.html#l00066">opcua::TypeWrapper&lt; T, typeIndex &gt;::TypeWrapper()</a>.</p>
 
 </div>
 </div>
 <a id="ae5799ed8e4e7a2c7ce6c3b40dc47eee3" name="ae5799ed8e4e7a2c7ce6c3b40dc47eee3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae5799ed8e4e7a2c7ce6c3b40dc47eee3">&#9670;&#160;</a></span>swap() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5799ed8e4e7a2c7ce6c3b40dc47eee3">&#9670;&#160;</a></span>swap() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -912,8 +718,8 @@ template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebea
 
 </div>
 </div>
-<a id="a94a8f29763ebca5b66a0b7fb2fc9bdf0" name="a94a8f29763ebca5b66a0b7fb2fc9bdf0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a94a8f29763ebca5b66a0b7fb2fc9bdf0">&#9670;&#160;</a></span>swap() <span class="overload">[2/2]</span></h2>
+<a id="a5e05524b2745c94d9b43037f8fd938de" name="a5e05524b2745c94d9b43037f8fd938de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e05524b2745c94d9b43037f8fd938de">&#9670;&#160;</a></span>getTypeIndex()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -924,25 +730,217 @@ template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebea
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, typeIndex &gt;::swap </td>
+          <td class="memname">static constexpr <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, typeIndex &gt;::getTypeIndex </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1TypeWrapper.html">TypeWrapper</a>&lt; T, typeIndex &gt; &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Swap with wrapper object. </p>
+<p>Get type as type index of the <a class="elRef" target="_blank" href="open62541/types__generated_8h.html#aba037b86f18a7b7bceef5c098910c2c7">UA_TYPES</a> array. </p>
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00122">122</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00134">134</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="TypeWrapper_8h_source.html#l00086">opcua::TypeWrapper&lt; T, typeIndex &gt;::operator=()</a>, <a class="el" href="Attribute_8h_source.html#l00196">opcua::services::readValue()</a>, and <a class="el" href="TypeWrapper_8h_source.html#l00066">opcua::TypeWrapper&lt; T, typeIndex &gt;::TypeWrapper()</a>.</p>
+</div>
+</div>
+<a id="a94db6081488119e4222037f286b52aad" name="a94db6081488119e4222037f286b52aad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94db6081488119e4222037f286b52aad">&#9670;&#160;</a></span>handle() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr T * <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, typeIndex &gt;::handle </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return pointer to native object. </p>
+
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00139">139</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Attribute_8h_source.html#l00365">opcua::services::writeValue()</a>.</p>
+
+</div>
+</div>
+<a id="a8a3532a725c365cd7a19eff52401a100" name="a8a3532a725c365cd7a19eff52401a100"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a3532a725c365cd7a19eff52401a100">&#9670;&#160;</a></span>handle() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr const T * <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, typeIndex &gt;::handle </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return const pointer to native object. </p>
+
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00144">144</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+
+</div>
+</div>
+<a id="a570e5661b87bdc4abc4fa96fca9dd493" name="a570e5661b87bdc4abc4fa96fca9dd493"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a570e5661b87bdc4abc4fa96fca9dd493">&#9670;&#160;</a></span>getDataType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> * <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, typeIndex &gt;::getDataType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00149">149</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="TypeWrapper_8h_source.html#l00153">opcua::TypeWrapper&lt; T, typeIndex &gt;::checkMemSize()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00157">opcua::TypeWrapper&lt; T, typeIndex &gt;::clear()</a>, and <a class="el" href="TypeWrapper_8h_source.html#l00162">opcua::TypeWrapper&lt; T, typeIndex &gt;::copy()</a>.</p>
+
+</div>
+</div>
+<a id="a7794f5381651258794f075fdaf7bbcff" name="a7794f5381651258794f075fdaf7bbcff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7794f5381651258794f075fdaf7bbcff">&#9670;&#160;</a></span>checkMemSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, typeIndex &gt;::checkMemSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00153">153</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+
+<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00149">opcua::TypeWrapper&lt; T, typeIndex &gt;::getDataType()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="TypeWrapper_8h_source.html#l00157">opcua::TypeWrapper&lt; T, typeIndex &gt;::clear()</a>, and <a class="el" href="TypeWrapper_8h_source.html#l00162">opcua::TypeWrapper&lt; T, typeIndex &gt;::copy()</a>.</p>
+
+</div>
+</div>
+<a id="acf3c23c43e0751d83f78772457935f81" name="acf3c23c43e0751d83f78772457935f81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf3c23c43e0751d83f78772457935f81">&#9670;&#160;</a></span>clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, typeIndex &gt;::clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00157">157</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+
+<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00153">opcua::TypeWrapper&lt; T, typeIndex &gt;::checkMemSize()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00149">opcua::TypeWrapper&lt; T, typeIndex &gt;::getDataType()</a>, and <a class="elRef" target="_blank" href="open62541/types_8h.html#ab615e6928fa544fb7caf34c9e241fd4b">UA_clear()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="TypeWrapper_8h_source.html#l00162">opcua::TypeWrapper&lt; T, typeIndex &gt;::copy()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00095">opcua::TypeWrapper&lt; T, typeIndex &gt;::operator=()</a>, and <a class="el" href="TypeWrapper_8h_source.html#l00056">opcua::TypeWrapper&lt; T, typeIndex &gt;::~TypeWrapper()</a>.</p>
+
+</div>
+</div>
+<a id="ac183e283c4619b5e6e84d80706034224" name="ac183e283c4619b5e6e84d80706034224"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac183e283c4619b5e6e84d80706034224">&#9670;&#160;</a></span>copy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper</a>&lt; T, typeIndex &gt;::copy </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00162">162</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+
+<p class="reference">References <a class="el" href="TypeWrapper_8h_source.html#l00153">opcua::TypeWrapper&lt; T, typeIndex &gt;::checkMemSize()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00157">opcua::TypeWrapper&lt; T, typeIndex &gt;::clear()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00149">opcua::TypeWrapper&lt; T, typeIndex &gt;::getDataType()</a>, <a class="el" href="ErrorHandling_8h_source.html#l00061">opcua::detail::throwOnBadStatus()</a>, and <a class="elRef" target="_blank" href="open62541/types_8h.html#a06dc3ec388f93ee9aab177e3b50ca7e4">UA_copy()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="TypeWrapper_8h_source.html#l00080">opcua::TypeWrapper&lt; T, typeIndex &gt;::operator=()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00071">opcua::TypeWrapper&lt; T, typeIndex &gt;::operator=()</a>, <a class="el" href="TypeWrapper_8h_source.html#l00048">opcua::TypeWrapper&lt; T, typeIndex &gt;::TypeWrapper()</a>, and <a class="el" href="TypeWrapper_8h_source.html#l00061">opcua::TypeWrapper&lt; T, typeIndex &gt;::TypeWrapper()</a>.</p>
 
 </div>
 </div>

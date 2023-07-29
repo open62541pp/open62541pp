@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.5.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.6.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -90,18 +90,19 @@ $(function() {
 <code>#include &quot;<a class="el" href="TypeWrapper_8h_source.html">open62541pp/TypeWrapper.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Builtin_8h_source.html">open62541pp/types/Builtin.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="NodeId_8h_source.html">open62541pp/types/NodeId.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Variant_8h_source.html">open62541pp/types/Variant.h</a>&quot;</code><br />
 <code>#include &lt;initializer_list&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Composed.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="Composed_8h__incl.svg" width="2555" height="623"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="Composed_8h__incl.svg" width="2863" height="696"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="Composed_8h__dep__incl.svg" width="887" height="374"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="Composed_8h__dep__incl.svg" width="934" height="374"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="Composed_8h_source.html">Go to the source code of this file.</a></p>
@@ -113,6 +114,18 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1UserTokenPolicy.html">opcua::UserTokenPolicy</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1EndpointDescription.html">opcua::EndpointDescription</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1NodeAttributes.html">opcua::NodeAttributes</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1ObjectAttributes.html">opcua::ObjectAttributes</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1VariableAttributes.html">opcua::VariableAttributes</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1MethodAttributes.html">opcua::MethodAttributes</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1ObjectTypeAttributes.html">opcua::ObjectTypeAttributes</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1VariableTypeAttributes.html">opcua::VariableTypeAttributes</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1BrowseDescription.html">opcua::BrowseDescription</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -144,10 +157,24 @@ Macros</h2></td></tr>
 <tr class="separator:a9187278ea2c4ce87ef169bf71946d456"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8f74777e46ff46aee07245a7c065748"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Composed_8h.html#ab8f74777e46ff46aee07245a7c065748">UAPP_COMPOSED_GETTER_CAST</a>(Type,  getterName,  member)</td></tr>
 <tr class="separator:ab8f74777e46ff46aee07245a7c065748"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a865ac95936aefce51803586472d04a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Composed_8h.html#a8a865ac95936aefce51803586472d04a">UAPP_COMPOSED_GETTER_WRAPPER_CONST</a>(WrapperType,  getterName,  member)</td></tr>
+<tr class="separator:a8a865ac95936aefce51803586472d04a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae813c8ad96a7c4f79cf8d689e26a1cbd"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Composed_8h.html#ae813c8ad96a7c4f79cf8d689e26a1cbd">UAPP_COMPOSED_GETTER_WRAPPER_NONCONST</a>(WrapperType,  getterName,  member)</td></tr>
+<tr class="separator:ae813c8ad96a7c4f79cf8d689e26a1cbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa5539d131a000ed48eb8f3967c7d0bc"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Composed_8h.html#afa5539d131a000ed48eb8f3967c7d0bc">UAPP_COMPOSED_GETTER_WRAPPER</a>(WrapperType,  getterName,  member)</td></tr>
 <tr class="separator:afa5539d131a000ed48eb8f3967c7d0bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af251c6b3cfc77e24ccde042598f27b66"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Composed_8h.html#af251c6b3cfc77e24ccde042598f27b66">UAPP_COMPOSED_GETTER_ARRAY</a>(Type,  getterName,  array,  size)</td></tr>
-<tr class="separator:af251c6b3cfc77e24ccde042598f27b66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bdb8e3d0bca2e1b1a7429b1379b24b0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Composed_8h.html#a5bdb8e3d0bca2e1b1a7429b1379b24b0">UAPP_COMPOSED_GETTER_ARRAY</a>(Type,  getterName,  memberArray,  memberSize)</td></tr>
+<tr class="separator:a5bdb8e3d0bca2e1b1a7429b1379b24b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb335a3027b1c038557c57b11dbc7335"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Composed_8h.html#adb335a3027b1c038557c57b11dbc7335">UAPP_NODEATTR</a>(Type,  suffix,  member,  flag)</td></tr>
+<tr class="separator:adb335a3027b1c038557c57b11dbc7335"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5b9ce4868d585199a9341222bc6b165"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Composed_8h.html#ad5b9ce4868d585199a9341222bc6b165">UAPP_NODEATTR_CAST</a>(Type,  suffix,  member,  flag)</td></tr>
+<tr class="separator:ad5b9ce4868d585199a9341222bc6b165"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa429b39dbf51dab6dd5bccd820f62ff2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Composed_8h.html#aa429b39dbf51dab6dd5bccd820f62ff2">UAPP_NODEATTR_WRAPPER</a>(WrapperType,  suffix,  member,  flag)</td></tr>
+<tr class="separator:aa429b39dbf51dab6dd5bccd820f62ff2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9515ebeb0c270eef703f31a57b8d175"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Composed_8h.html#ab9515ebeb0c270eef703f31a57b8d175">UAPP_NODEATTR_ARRAY</a>(Type,  suffix,  memberArray,  memberSize,  flag)</td></tr>
+<tr class="separator:ab9515ebeb0c270eef703f31a57b8d175"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeddb1e62140de62a9b15e9a9aeed1613"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Composed_8h.html#aeddb1e62140de62a9b15e9a9aeed1613">UAPP_NODEATTR_COMMON</a></td></tr>
+<tr class="separator:aeddb1e62140de62a9b15e9a9aeed1613"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a9187278ea2c4ce87ef169bf71946d456" name="a9187278ea2c4ce87ef169bf71946d456"></a>
@@ -185,55 +212,7 @@ Macros</h2></td></tr>
 <div class="line">        <span class="keywordflow">return</span> handle()-&gt;member;                                                                   \</div>
 <div class="line">    }</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00018">18</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
-
-</div>
-</div>
-<a id="af251c6b3cfc77e24ccde042598f27b66" name="af251c6b3cfc77e24ccde042598f27b66"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af251c6b3cfc77e24ccde042598f27b66">&#9670;&#160;</a></span>UAPP_COMPOSED_GETTER_ARRAY</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UAPP_COMPOSED_GETTER_ARRAY</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">Type, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">getterName, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">array, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">size&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordtype">size_t</span> getterName##Size() const noexcept {                                                     \</div>
-<div class="line">        <span class="keywordflow">return</span> handle()-&gt;size;                                                                     \</div>
-<div class="line">    }                                                                                              \</div>
-<div class="line">    std::vector&lt;Type&gt; getterName()<span class="keyword"> const </span>{                                                         \</div>
-<div class="line">        <span class="keywordflow">return</span> detail::fromNativeArray&lt;Type&gt;(handle()-&gt;array, handle()-&gt;size);                     \</div>
-<div class="line">    }</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00039">39</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00019">19</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -272,7 +251,85 @@ Macros</h2></td></tr>
 <div class="line">        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>Type<span class="keyword">&gt;</span>(handle()-&gt;member);                                                \</div>
 <div class="line">    }</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00024">24</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00025">25</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+
+</div>
+</div>
+<a id="a8a865ac95936aefce51803586472d04a" name="a8a865ac95936aefce51803586472d04a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a865ac95936aefce51803586472d04a">&#9670;&#160;</a></span>UAPP_COMPOSED_GETTER_WRAPPER_CONST</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UAPP_COMPOSED_GETTER_WRAPPER_CONST</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">WrapperType, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">getterName, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">member&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keyword">const</span> WrapperType&amp; getterName() const noexcept {                                               \</div>
+<div class="line">        <span class="keywordflow">return</span> asWrapper&lt;WrapperType&gt;(handle()-&gt;member);                                           \</div>
+<div class="line">    }</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00031">31</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+
+</div>
+</div>
+<a id="ae813c8ad96a7c4f79cf8d689e26a1cbd" name="ae813c8ad96a7c4f79cf8d689e26a1cbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae813c8ad96a7c4f79cf8d689e26a1cbd">&#9670;&#160;</a></span>UAPP_COMPOSED_GETTER_WRAPPER_NONCONST</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UAPP_COMPOSED_GETTER_WRAPPER_NONCONST</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">WrapperType, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">getterName, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">member&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    WrapperType&amp; getterName() noexcept {                                                           \</div>
+<div class="line">        <span class="keywordflow">return</span> asWrapper&lt;WrapperType&gt;(handle()-&gt;member);                                           \</div>
+<div class="line">    }</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00036">36</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -307,14 +364,293 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    WrapperType&amp; getterName() noexcept {                                                           \</div>
-<div class="line">        <span class="keywordflow">return</span> asWrapper&lt;WrapperType&gt;(handle()-&gt;member);                                           \</div>
+<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="Composed_8h.html#a8a865ac95936aefce51803586472d04a">UAPP_COMPOSED_GETTER_WRAPPER_CONST</a>(WrapperType, getterName, member)                            \</div>
+<div class="line">    UAPP_COMPOSED_GETTER_WRAPPER_NONCONST(WrapperType, getterName, member)</div>
+<div class="ttc" id="aComposed_8h_html_a8a865ac95936aefce51803586472d04a"><div class="ttname"><a href="Composed_8h.html#a8a865ac95936aefce51803586472d04a">UAPP_COMPOSED_GETTER_WRAPPER_CONST</a></div><div class="ttdeci">#define UAPP_COMPOSED_GETTER_WRAPPER_CONST(WrapperType, getterName, member)</div><div class="ttdef"><b>Definition</b> <a href="Composed_8h_source.html#l00031">Composed.h:31</a></div></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00041">41</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+
+</div>
+</div>
+<a id="a5bdb8e3d0bca2e1b1a7429b1379b24b0" name="a5bdb8e3d0bca2e1b1a7429b1379b24b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bdb8e3d0bca2e1b1a7429b1379b24b0">&#9670;&#160;</a></span>UAPP_COMPOSED_GETTER_ARRAY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UAPP_COMPOSED_GETTER_ARRAY</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Type, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">getterName, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">memberArray, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">memberSize&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordtype">size_t</span> getterName##Size() const noexcept {                                                     \</div>
+<div class="line">        <span class="keywordflow">return</span> handle()-&gt;memberSize;                                                               \</div>
 <div class="line">    }                                                                                              \</div>
-<div class="line">    <span class="keyword">const</span> WrapperType&amp; getterName() const noexcept {                                               \</div>
-<div class="line">        <span class="keywordflow">return</span> asWrapper&lt;WrapperType&gt;(handle()-&gt;member);                                           \</div>
+<div class="line">    std::vector&lt;Type&gt; getterName()<span class="keyword"> const </span>{                                                         \</div>
+<div class="line">        <span class="keywordflow">return</span> detail::fromNativeArray&lt;Type&gt;(handle()-&gt;memberArray, handle()-&gt;memberSize);         \</div>
 <div class="line">    }</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00030">30</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00046">46</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+
+</div>
+</div>
+<a id="adb335a3027b1c038557c57b11dbc7335" name="adb335a3027b1c038557c57b11dbc7335"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb335a3027b1c038557c57b11dbc7335">&#9670;&#160;</a></span>UAPP_NODEATTR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UAPP_NODEATTR</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Type, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">suffix, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">member, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">flag&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="Composed_8h.html#a9187278ea2c4ce87ef169bf71946d456">UAPP_COMPOSED_GETTER</a>(Type, get##suffix, member)                                                \</div>
+<div class="line">    <span class="keyword">auto</span>&amp; set##suffix(Type member) <span class="keyword">noexcept</span> {                                                      \</div>
+<div class="line">        handle()-&gt;specifiedAttributes |= flag;                                                     \</div>
+<div class="line">        handle()-&gt;member = member;                                                                 \</div>
+<div class="line">        <span class="keywordflow">return</span> *<span class="keyword">this</span>;                                                                              \</div>
+<div class="line">    }</div>
+<div class="ttc" id="aComposed_8h_html_a9187278ea2c4ce87ef169bf71946d456"><div class="ttname"><a href="Composed_8h.html#a9187278ea2c4ce87ef169bf71946d456">UAPP_COMPOSED_GETTER</a></div><div class="ttdeci">#define UAPP_COMPOSED_GETTER(Type, getterName, member)</div><div class="ttdef"><b>Definition</b> <a href="Composed_8h_source.html#l00019">Composed.h:19</a></div></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00117">117</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+
+</div>
+</div>
+<a id="ad5b9ce4868d585199a9341222bc6b165" name="ad5b9ce4868d585199a9341222bc6b165"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5b9ce4868d585199a9341222bc6b165">&#9670;&#160;</a></span>UAPP_NODEATTR_CAST</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UAPP_NODEATTR_CAST</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Type, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">suffix, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">member, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">flag&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="Composed_8h.html#ab8f74777e46ff46aee07245a7c065748">UAPP_COMPOSED_GETTER_CAST</a>(Type, get##suffix, member)                                           \</div>
+<div class="line">    <span class="keyword">auto</span>&amp; set##suffix(Type member) <span class="keyword">noexcept</span> {                                                      \</div>
+<div class="line">        handle()-&gt;specifiedAttributes |= flag;                                                     \</div>
+<div class="line">        handle()-&gt;member = <span class="keyword">static_cast&lt;</span>decltype(handle()-<span class="keyword">&gt;</span>member)&gt;(member);                        \</div>
+<div class="line">        <span class="keywordflow">return</span> *<span class="keyword">this</span>;                                                                              \</div>
+<div class="line">    }</div>
+<div class="ttc" id="aComposed_8h_html_ab8f74777e46ff46aee07245a7c065748"><div class="ttname"><a href="Composed_8h.html#ab8f74777e46ff46aee07245a7c065748">UAPP_COMPOSED_GETTER_CAST</a></div><div class="ttdeci">#define UAPP_COMPOSED_GETTER_CAST(Type, getterName, member)</div><div class="ttdef"><b>Definition</b> <a href="Composed_8h_source.html#l00025">Composed.h:25</a></div></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00126">126</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+
+</div>
+</div>
+<a id="aa429b39dbf51dab6dd5bccd820f62ff2" name="aa429b39dbf51dab6dd5bccd820f62ff2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa429b39dbf51dab6dd5bccd820f62ff2">&#9670;&#160;</a></span>UAPP_NODEATTR_WRAPPER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UAPP_NODEATTR_WRAPPER</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">WrapperType, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">suffix, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">member, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">flag&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="Composed_8h.html#a8a865ac95936aefce51803586472d04a">UAPP_COMPOSED_GETTER_WRAPPER_CONST</a>(WrapperType, get##suffix, member)                           \</div>
+<div class="line">    <span class="keyword">auto</span>&amp; set##suffix(<span class="keyword">const</span> WrapperType&amp; member) {                                                 \</div>
+<div class="line">        handle()-&gt;specifiedAttributes |= flag;                                                     \</div>
+<div class="line">        asWrapper&lt;WrapperType&gt;(handle()-&gt;member) = member;                                         \</div>
+<div class="line">        <span class="keywordflow">return</span> *<span class="keyword">this</span>;                                                                              \</div>
+<div class="line">    }</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00135">135</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+
+</div>
+</div>
+<a id="ab9515ebeb0c270eef703f31a57b8d175" name="ab9515ebeb0c270eef703f31a57b8d175"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9515ebeb0c270eef703f31a57b8d175">&#9670;&#160;</a></span>UAPP_NODEATTR_ARRAY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UAPP_NODEATTR_ARRAY</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">Type, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">suffix, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">memberArray, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">memberSize, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">flag&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="Composed_8h.html#a5bdb8e3d0bca2e1b1a7429b1379b24b0">UAPP_COMPOSED_GETTER_ARRAY</a>(Type, get##suffix, memberArray, memberSize)                         \</div>
+<div class="line">    <span class="keyword">auto</span>&amp; set##suffix(<span class="keyword">const</span> std::vector&lt;Type&gt;&amp; memberArray) {                                      \</div>
+<div class="line">        handle()-&gt;specifiedAttributes |= flag;                                                     \</div>
+<div class="line">        UA_Array_delete(                                                                           \</div>
+<div class="line">            handle()-&gt;memberArray,                                                                 \</div>
+<div class="line">            handle()-&gt;memberSize,                                                                  \</div>
+<div class="line">            detail::getUaDataType(detail::guessTypeIndex&lt;Type&gt;())                                  \</div>
+<div class="line">        );                                                                                         \</div>
+<div class="line">        handle()-&gt;memberArray = detail::toNativeArrayAlloc(                                        \</div>
+<div class="line">            memberArray.begin(), memberArray.end()                                                 \</div>
+<div class="line">        );                                                                                         \</div>
+<div class="line">        handle()-&gt;memberSize = memberArray.size();                                                 \</div>
+<div class="line">        <span class="keywordflow">return</span> *<span class="keyword">this</span>;                                                                              \</div>
+<div class="line">    }</div>
+<div class="ttc" id="aComposed_8h_html_a5bdb8e3d0bca2e1b1a7429b1379b24b0"><div class="ttname"><a href="Composed_8h.html#a5bdb8e3d0bca2e1b1a7429b1379b24b0">UAPP_COMPOSED_GETTER_ARRAY</a></div><div class="ttdeci">#define UAPP_COMPOSED_GETTER_ARRAY(Type, getterName, memberArray, memberSize)</div><div class="ttdef"><b>Definition</b> <a href="Composed_8h_source.html#l00046">Composed.h:46</a></div></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00144">144</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+
+</div>
+</div>
+<a id="aeddb1e62140de62a9b15e9a9aeed1613" name="aeddb1e62140de62a9b15e9a9aeed1613"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeddb1e62140de62a9b15e9a9aeed1613">&#9670;&#160;</a></span>UAPP_NODEATTR_COMMON</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UAPP_NODEATTR_COMMON</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="Composed_8h.html#a9187278ea2c4ce87ef169bf71946d456">UAPP_COMPOSED_GETTER</a>(uint32_t, getSpecifiedAttributes, specifiedAttributes)                    \</div>
+<div class="line">    UAPP_NODEATTR_WRAPPER(                                                                         \</div>
+<div class="line">        LocalizedText, DisplayName, displayName, UA_NODEATTRIBUTESMASK_DISPLAYNAME                 \</div>
+<div class="line">    )                                                                                              \</div>
+<div class="line">    UAPP_NODEATTR_WRAPPER(                                                                         \</div>
+<div class="line">        LocalizedText, Description, description, UA_NODEATTRIBUTESMASK_DESCRIPTION                 \</div>
+<div class="line">    )                                                                                              \</div>
+<div class="line">    UAPP_NODEATTR(uint32_t, WriteMask, writeMask, UA_NODEATTRIBUTESMASK_WRITEMASK)                 \</div>
+<div class="line">    UAPP_NODEATTR(uint32_t, UserWriteMask, userWriteMask, UA_NODEATTRIBUTESMASK_USERWRITEMASK)</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00161">161</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>

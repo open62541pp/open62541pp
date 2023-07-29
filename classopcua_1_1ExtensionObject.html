@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.5.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.6.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -169,8 +169,6 @@ Static Public Member Functions</h2></td></tr>
 <tr class="inherit_header pub_static_methods_classopcua_1_1TypeWrapper"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_classopcua_1_1TypeWrapper')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_ExtensionObject, UA_TYPES_EXTENSIONOBJECT &gt;</a></td></tr>
 <tr class="memitem:a5e05524b2745c94d9b43037f8fd938de inherit pub_static_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a5e05524b2745c94d9b43037f8fd938de">getTypeIndex</a> ()</td></tr>
 <tr class="separator:a5e05524b2745c94d9b43037f8fd938de inherit pub_static_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a570e5661b87bdc4abc4fa96fca9dd493 inherit pub_static_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">static const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a570e5661b87bdc4abc4fa96fca9dd493">getDataType</a> ()</td></tr>
-<tr class="separator:a570e5661b87bdc4abc4fa96fca9dd493 inherit pub_static_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -185,6 +183,8 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:ac183e283c4619b5e6e84d80706034224 inherit pro_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#ac183e283c4619b5e6e84d80706034224">copy</a> (const <a class="elRef" target="_blank" href="open62541/structUA__ExtensionObject.html">UA_ExtensionObject</a> &amp;data)</td></tr>
 <tr class="separator:ac183e283c4619b5e6e84d80706034224 inherit pro_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_static_methods_classopcua_1_1TypeWrapper"><td colspan="2" onclick="javascript:toggleInherit('pro_static_methods_classopcua_1_1TypeWrapper')"><img src="closed.png" alt="-"/>&#160;Static Protected Member Functions inherited from <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_ExtensionObject, UA_TYPES_EXTENSIONOBJECT &gt;</a></td></tr>
+<tr class="memitem:a570e5661b87bdc4abc4fa96fca9dd493 inherit pro_static_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">static const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a570e5661b87bdc4abc4fa96fca9dd493">getDataType</a> ()</td></tr>
+<tr class="separator:a570e5661b87bdc4abc4fa96fca9dd493 inherit pro_static_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7794f5381651258794f075fdaf7bbcff inherit pro_static_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a7794f5381651258794f075fdaf7bbcff">checkMemSize</a> ()</td></tr>
 <tr class="separator:a7794f5381651258794f075fdaf7bbcff inherit pro_static_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -373,262 +373,6 @@ template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebea
 
 </div>
 </div>
-<a id="a99e7667f7784b80fb19ef95d78438e4e" name="a99e7667f7784b80fb19ef95d78438e4e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99e7667f7784b80fb19ef95d78438e4e">&#9670;&#160;</a></span>getDecodedData() <span class="overload">[1/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex = detail::guessTypeIndex&lt;T&gt;()&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const T * opcua::ExtensionObject::getDecodedData </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get pointer to the encoded data with given template type.   </p>
-<p>Returns <code>nullptr</code> if the <a class="el" href="classopcua_1_1ExtensionObject.html" title="UA_ExtensionObject wrapper class.">ExtensionObject</a> is either encoded or the decoded data not of type <code>T</code>.   </p>
-
-</div>
-</div>
-<a id="aed223938f25bf00742089b8d511e3d14" name="aed223938f25bf00742089b8d511e3d14"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed223938f25bf00742089b8d511e3d14">&#9670;&#160;</a></span>getDecodedData() <span class="overload">[2/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const void * opcua::ExtensionObject::getDecodedData </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get pointer to the encoded data with given template type.   </p>
-<p>Returns <code>nullptr</code> if the <a class="el" href="classopcua_1_1ExtensionObject.html" title="UA_ExtensionObject wrapper class.">ExtensionObject</a> is either encoded or the decoded data not of type <code>T</code>.   </p>
-
-</div>
-</div>
-<a id="af14fe4f1276ccba6fbaeab4f62b7f56a" name="af14fe4f1276ccba6fbaeab4f62b7f56a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af14fe4f1276ccba6fbaeab4f62b7f56a">&#9670;&#160;</a></span>getDecodedData() <span class="overload">[3/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">T * opcua::ExtensionObject::getDecodedData</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get pointer to the encoded data with given template type. </p>
-<p>Returns <code>nullptr</code> if the <a class="el" href="classopcua_1_1ExtensionObject.html" title="UA_ExtensionObject wrapper class.">ExtensionObject</a> is either encoded or the decoded data not of type <code>T</code>. </p>
-
-<p class="definition">Definition at line <a class="el" href="ExtensionObject_8h_source.html#l00119">119</a> of file <a class="el" href="ExtensionObject_8h_source.html">ExtensionObject.h</a>.</p>
-
-<p class="reference">References <a class="el" href="ExtensionObject_8h_source.html#l00119">getDecodedData()</a>, <a class="el" href="classopcua_1_1ExtensionObject.html#a31792a009849fbaa33750d17209fac0a">getDecodedDataType()</a>, and <a class="el" href="helper_8h_source.html#l00014">opcua::detail::getUaDataType()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="ExtensionObject_8h_source.html#l00119">getDecodedData()</a>.</p>
-
-</div>
-</div>
-<a id="ac3c9e7b1597a0f9df5dec105a977932d" name="ac3c9e7b1597a0f9df5dec105a977932d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac3c9e7b1597a0f9df5dec105a977932d">&#9670;&#160;</a></span>getDecodedData() <span class="overload">[4/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void * opcua::ExtensionObject::getDecodedData </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get pointer to the encoded data. </p>
-<p>Returns <code>nullptr</code> if the <a class="el" href="classopcua_1_1ExtensionObject.html" title="UA_ExtensionObject wrapper class.">ExtensionObject</a> is encoded. </p><dl class="section warning"><dt>Warning</dt><dd>Type erased version, use with caution. </dd></dl>
-
-</div>
-</div>
-<a id="a31792a009849fbaa33750d17209fac0a" name="a31792a009849fbaa33750d17209fac0a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a31792a009849fbaa33750d17209fac0a">&#9670;&#160;</a></span>getDecodedDataType()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> * opcua::ExtensionObject::getDecodedDataType </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the decoded data type. Returns <code>nullptr</code> if <a class="el" href="classopcua_1_1ExtensionObject.html" title="UA_ExtensionObject wrapper class.">ExtensionObject</a> is encoded. </p>
-
-<p class="reference">Referenced by <a class="el" href="ExtensionObject_8h_source.html#l00119">getDecodedData()</a>.</p>
-
-</div>
-</div>
-<a id="a832145c0a196a9511668101589adfca2" name="a832145c0a196a9511668101589adfca2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a832145c0a196a9511668101589adfca2">&#9670;&#160;</a></span>getEncodedBody()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::optional&lt; <a class="el" href="classopcua_1_1ByteString.html">ByteString</a> &gt; opcua::ExtensionObject::getEncodedBody </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the encoded body. Returns <code>std::nullopt</code> if <a class="el" href="classopcua_1_1ExtensionObject.html" title="UA_ExtensionObject wrapper class.">ExtensionObject</a> is decoded. </p>
-
-</div>
-</div>
-<a id="a9f7bff4f85295955ab99641612e11f0b" name="a9f7bff4f85295955ab99641612e11f0b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f7bff4f85295955ab99641612e11f0b">&#9670;&#160;</a></span>getEncodedTypeId()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::optional&lt; <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &gt; opcua::ExtensionObject::getEncodedTypeId </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the encoded type id. Returns <code>std::nullopt</code> if <a class="el" href="classopcua_1_1ExtensionObject.html" title="UA_ExtensionObject wrapper class.">ExtensionObject</a> is decoded. </p>
-
-</div>
-</div>
-<a id="ab0f48fbf68a669af0b8063ee219d64e2" name="ab0f48fbf68a669af0b8063ee219d64e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab0f48fbf68a669af0b8063ee219d64e2">&#9670;&#160;</a></span>getEncoding()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespaceopcua.html#a12f473c742c5dee093677093bd19ab12">ExtensionObjectEncoding</a> opcua::ExtensionObject::getEncoding </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the encoding. </p>
-
-</div>
-</div>
-<a id="a095e78d33f1aeebcd9269f4269484ffc" name="a095e78d33f1aeebcd9269f4269484ffc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a095e78d33f1aeebcd9269f4269484ffc">&#9670;&#160;</a></span>isDecoded()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool opcua::ExtensionObject::isDecoded </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Check if the <a class="el" href="classopcua_1_1ExtensionObject.html" title="UA_ExtensionObject wrapper class.">ExtensionObject</a> is decoded. </p>
-
-</div>
-</div>
 <a id="a313aa146a841532c592026d3f3c18112" name="a313aa146a841532c592026d3f3c18112"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a313aa146a841532c592026d3f3c18112">&#9670;&#160;</a></span>isEmpty()</h2>
 
@@ -678,6 +422,262 @@ template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebea
 </div><div class="memdoc">
 
 <p>Check if the <a class="el" href="classopcua_1_1ExtensionObject.html" title="UA_ExtensionObject wrapper class.">ExtensionObject</a> is encoded (usually if the data type is unknown). </p>
+
+</div>
+</div>
+<a id="a095e78d33f1aeebcd9269f4269484ffc" name="a095e78d33f1aeebcd9269f4269484ffc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a095e78d33f1aeebcd9269f4269484ffc">&#9670;&#160;</a></span>isDecoded()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool opcua::ExtensionObject::isDecoded </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if the <a class="el" href="classopcua_1_1ExtensionObject.html" title="UA_ExtensionObject wrapper class.">ExtensionObject</a> is decoded. </p>
+
+</div>
+</div>
+<a id="ab0f48fbf68a669af0b8063ee219d64e2" name="ab0f48fbf68a669af0b8063ee219d64e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0f48fbf68a669af0b8063ee219d64e2">&#9670;&#160;</a></span>getEncoding()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceopcua.html#a12f473c742c5dee093677093bd19ab12">ExtensionObjectEncoding</a> opcua::ExtensionObject::getEncoding </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the encoding. </p>
+
+</div>
+</div>
+<a id="a9f7bff4f85295955ab99641612e11f0b" name="a9f7bff4f85295955ab99641612e11f0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f7bff4f85295955ab99641612e11f0b">&#9670;&#160;</a></span>getEncodedTypeId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::optional&lt; <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &gt; opcua::ExtensionObject::getEncodedTypeId </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the encoded type id. Returns <code>std::nullopt</code> if <a class="el" href="classopcua_1_1ExtensionObject.html" title="UA_ExtensionObject wrapper class.">ExtensionObject</a> is decoded. </p>
+
+</div>
+</div>
+<a id="a832145c0a196a9511668101589adfca2" name="a832145c0a196a9511668101589adfca2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a832145c0a196a9511668101589adfca2">&#9670;&#160;</a></span>getEncodedBody()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::optional&lt; <a class="el" href="classopcua_1_1ByteString.html">ByteString</a> &gt; opcua::ExtensionObject::getEncodedBody </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the encoded body. Returns <code>std::nullopt</code> if <a class="el" href="classopcua_1_1ExtensionObject.html" title="UA_ExtensionObject wrapper class.">ExtensionObject</a> is decoded. </p>
+
+</div>
+</div>
+<a id="a31792a009849fbaa33750d17209fac0a" name="a31792a009849fbaa33750d17209fac0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31792a009849fbaa33750d17209fac0a">&#9670;&#160;</a></span>getDecodedDataType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> * opcua::ExtensionObject::getDecodedDataType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the decoded data type. Returns <code>nullptr</code> if <a class="el" href="classopcua_1_1ExtensionObject.html" title="UA_ExtensionObject wrapper class.">ExtensionObject</a> is encoded. </p>
+
+<p class="reference">Referenced by <a class="el" href="ExtensionObject_8h_source.html#l00119">getDecodedData()</a>.</p>
+
+</div>
+</div>
+<a id="af14fe4f1276ccba6fbaeab4f62b7f56a" name="af14fe4f1276ccba6fbaeab4f62b7f56a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af14fe4f1276ccba6fbaeab4f62b7f56a">&#9670;&#160;</a></span>getDecodedData() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T * opcua::ExtensionObject::getDecodedData</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get pointer to the encoded data with given template type. </p>
+<p>Returns <code>nullptr</code> if the <a class="el" href="classopcua_1_1ExtensionObject.html" title="UA_ExtensionObject wrapper class.">ExtensionObject</a> is either encoded or the decoded data not of type <code>T</code>. </p>
+
+<p class="definition">Definition at line <a class="el" href="ExtensionObject_8h_source.html#l00119">119</a> of file <a class="el" href="ExtensionObject_8h_source.html">ExtensionObject.h</a>.</p>
+
+<p class="reference">References <a class="el" href="ExtensionObject_8h_source.html#l00119">getDecodedData()</a>, <a class="el" href="classopcua_1_1ExtensionObject.html#a31792a009849fbaa33750d17209fac0a">getDecodedDataType()</a>, and <a class="el" href="helper_8h_source.html#l00014">opcua::detail::getUaDataType()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="ExtensionObject_8h_source.html#l00119">getDecodedData()</a>.</p>
+
+</div>
+</div>
+<a id="a99e7667f7784b80fb19ef95d78438e4e" name="a99e7667f7784b80fb19ef95d78438e4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99e7667f7784b80fb19ef95d78438e4e">&#9670;&#160;</a></span>getDecodedData() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex = detail::guessTypeIndex&lt;T&gt;()&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const T * opcua::ExtensionObject::getDecodedData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get pointer to the encoded data with given template type.   </p>
+<p>Returns <code>nullptr</code> if the <a class="el" href="classopcua_1_1ExtensionObject.html" title="UA_ExtensionObject wrapper class.">ExtensionObject</a> is either encoded or the decoded data not of type <code>T</code>.   </p>
+
+</div>
+</div>
+<a id="ac3c9e7b1597a0f9df5dec105a977932d" name="ac3c9e7b1597a0f9df5dec105a977932d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3c9e7b1597a0f9df5dec105a977932d">&#9670;&#160;</a></span>getDecodedData() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * opcua::ExtensionObject::getDecodedData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get pointer to the encoded data. </p>
+<p>Returns <code>nullptr</code> if the <a class="el" href="classopcua_1_1ExtensionObject.html" title="UA_ExtensionObject wrapper class.">ExtensionObject</a> is encoded. </p><dl class="section warning"><dt>Warning</dt><dd>Type erased version, use with caution. </dd></dl>
+
+</div>
+</div>
+<a id="aed223938f25bf00742089b8d511e3d14" name="aed223938f25bf00742089b8d511e3d14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed223938f25bf00742089b8d511e3d14">&#9670;&#160;</a></span>getDecodedData() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const void * opcua::ExtensionObject::getDecodedData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get pointer to the encoded data with given template type.   </p>
+<p>Returns <code>nullptr</code> if the <a class="el" href="classopcua_1_1ExtensionObject.html" title="UA_ExtensionObject wrapper class.">ExtensionObject</a> is either encoded or the decoded data not of type <code>T</code>.   </p>
 
 </div>
 </div>

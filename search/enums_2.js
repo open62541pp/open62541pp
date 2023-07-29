@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['datatypeid_0',['DataTypeId',['../group__NodeIds.html#gadfeffe1a4352e8d89c5167a8c09d1692',1,'opcua']]]
+  ['certificateformat_0',['CertificateFormat',['../namespaceopcua_1_1crypto.html#a15882ccfa0ebebfd7ac52fb1a3840094',1,'opcua::crypto']]]
 ];

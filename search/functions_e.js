@@ -4,7 +4,7 @@ var searchData=
   ['readaccesslevel_1',['readAccessLevel',['../classopcua_1_1Node.html#ab4eae60cd621fc01e494f5c2d93061f3',1,'opcua::Node::readAccessLevel()'],['../group__Attribute.html#ga1115b2d3e059569c28155138c16fc268',1,'opcua::services::readAccessLevel()']]],
   ['readarray_2',['readArray',['../classopcua_1_1Node.html#aace7116c9f0f5832c02d3b9b79e9d847',1,'opcua::Node']]],
   ['readarraydimensions_3',['readArrayDimensions',['../group__Attribute.html#ga3a26f8740ad10dd03480143fc0baef76',1,'opcua::services::readArrayDimensions()'],['../classopcua_1_1Node.html#ab78e64929abdce498280d871d3423959',1,'opcua::Node::readArrayDimensions()']]],
-  ['readattribute_4',['readAttribute',['../group__Attribute.html#ga26d51c7adf5f6397d545d5a1b7aece7c',1,'opcua::services']]],
+  ['readattribute_4',['readAttribute',['../group__Attribute.html#ga464b08b87240eb7a96a50239f03501e5',1,'opcua::services']]],
   ['readattributescalar_5',['readAttributeScalar',['../namespaceopcua_1_1services.html#a15dca5739c1c2ad779e38c6c621948ee',1,'opcua::services']]],
   ['readbrowsename_6',['readBrowseName',['../classopcua_1_1Node.html#a00935eeecf278c7663d3be771fd31854',1,'opcua::Node::readBrowseName()'],['../group__Attribute.html#ga65def8326ed0fd3300eaedfc56e1daef',1,'opcua::services::readBrowseName(T &amp;serverOrClient, const NodeId &amp;id)']]],
   ['readdatatype_7',['readDataType',['../group__Attribute.html#ga846aa743b2fd92a9136918d1c682b507',1,'opcua::services::readDataType()'],['../classopcua_1_1Node.html#a9a9566341f13f8e3521919b2ca48b517',1,'opcua::Node::readDataType()']]],

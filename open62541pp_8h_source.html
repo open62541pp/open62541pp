@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.5.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.6.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -84,34 +84,37 @@ $(function() {
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="Client_8h.html">open62541pp/Client.h</a>&quot;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="Common_8h.html">open62541pp/Common.h</a>&quot;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="Config_8h.html">open62541pp/Config.h</a>&quot;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="ErrorHandling_8h.html">open62541pp/ErrorHandling.h</a>&quot;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="Logger_8h.html">open62541pp/Logger.h</a>&quot;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="MonitoredItem_8h.html">open62541pp/MonitoredItem.h</a>&quot;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="Node_8h.html">open62541pp/Node.h</a>&quot;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="NodeIds_8h.html">open62541pp/NodeIds.h</a>&quot;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="Server_8h.html">open62541pp/Server.h</a>&quot;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="Subscription_8h.html">open62541pp/Subscription.h</a>&quot;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="TypeConverter_8h.html">open62541pp/TypeConverter.h</a>&quot;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="TypeConverterNative_8h.html">open62541pp/TypeConverterNative.h</a>&quot;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="TypeWrapper_8h.html">open62541pp/TypeWrapper.h</a>&quot;</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="helper_8h.html">open62541pp/detail/helper.h</a>&quot;</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;<a class="code" href="traits_8h.html">open62541pp/detail/traits.h</a>&quot;</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;<a class="code" href="comparison_8h.html">open62541pp/overloads/comparison.h</a>&quot;</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &quot;<a class="code" href="ostream_8h.html">open62541pp/overloads/ostream.h</a>&quot;</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &quot;<a class="code" href="services_8h.html">open62541pp/services/services.h</a>&quot;</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &quot;<a class="code" href="Builtin_8h.html">open62541pp/types/Builtin.h</a>&quot;</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#include &quot;<a class="code" href="Composed_8h.html">open62541pp/types/Composed.h</a>&quot;</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#include &quot;<a class="code" href="DataValue_8h.html">open62541pp/types/DataValue.h</a>&quot;</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &quot;<a class="code" href="DateTime_8h.html">open62541pp/types/DateTime.h</a>&quot;</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;<a class="code" href="ExtensionObject_8h.html">open62541pp/types/ExtensionObject.h</a>&quot;</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &quot;<a class="code" href="NodeId_8h.html">open62541pp/types/NodeId.h</a>&quot;</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &quot;<a class="code" href="Variant_8h.html">open62541pp/types/Variant.h</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="Crypto_8h.html">open62541pp/Crypto.h</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="ErrorHandling_8h.html">open62541pp/ErrorHandling.h</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="Logger_8h.html">open62541pp/Logger.h</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="MonitoredItem_8h.html">open62541pp/MonitoredItem.h</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="Node_8h.html">open62541pp/Node.h</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="NodeIds_8h.html">open62541pp/NodeIds.h</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="Server_8h.html">open62541pp/Server.h</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="Subscription_8h.html">open62541pp/Subscription.h</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="TypeConverter_8h.html">open62541pp/TypeConverter.h</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="TypeConverterNative_8h.html">open62541pp/TypeConverterNative.h</a>&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="TypeWrapper_8h.html">open62541pp/TypeWrapper.h</a>&quot;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;<a class="code" href="ValueBackend_8h.html">open62541pp/ValueBackend.h</a>&quot;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;<a class="code" href="helper_8h.html">open62541pp/detail/helper.h</a>&quot;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &quot;<a class="code" href="traits_8h.html">open62541pp/detail/traits.h</a>&quot;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &quot;<a class="code" href="comparison_8h.html">open62541pp/overloads/comparison.h</a>&quot;</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &quot;<a class="code" href="ostream_8h.html">open62541pp/overloads/ostream.h</a>&quot;</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#include &quot;<a class="code" href="services_8h.html">open62541pp/services/services.h</a>&quot;</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#include &quot;<a class="code" href="Builtin_8h.html">open62541pp/types/Builtin.h</a>&quot;</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &quot;<a class="code" href="Composed_8h.html">open62541pp/types/Composed.h</a>&quot;</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;<a class="code" href="DataValue_8h.html">open62541pp/types/DataValue.h</a>&quot;</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &quot;<a class="code" href="DateTime_8h.html">open62541pp/types/DateTime.h</a>&quot;</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &quot;<a class="code" href="ExtensionObject_8h.html">open62541pp/types/ExtensionObject.h</a>&quot;</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &quot;<a class="code" href="NodeId_8h.html">open62541pp/types/NodeId.h</a>&quot;</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &quot;<a class="code" href="Variant_8h.html">open62541pp/types/Variant.h</a>&quot;</span></div>
 <div class="ttc" id="aAuth_8h_html"><div class="ttname"><a href="Auth_8h.html">Auth.h</a></div></div>
 <div class="ttc" id="aBuiltin_8h_html"><div class="ttname"><a href="Builtin_8h.html">Builtin.h</a></div></div>
 <div class="ttc" id="aClient_8h_html"><div class="ttname"><a href="Client_8h.html">Client.h</a></div></div>
 <div class="ttc" id="aCommon_8h_html"><div class="ttname"><a href="Common_8h.html">Common.h</a></div></div>
 <div class="ttc" id="aComposed_8h_html"><div class="ttname"><a href="Composed_8h.html">Composed.h</a></div></div>
 <div class="ttc" id="aConfig_8h_html"><div class="ttname"><a href="Config_8h.html">Config.h</a></div></div>
+<div class="ttc" id="aCrypto_8h_html"><div class="ttname"><a href="Crypto_8h.html">Crypto.h</a></div></div>
 <div class="ttc" id="aDataValue_8h_html"><div class="ttname"><a href="DataValue_8h.html">DataValue.h</a></div></div>
 <div class="ttc" id="aDateTime_8h_html"><div class="ttname"><a href="DateTime_8h.html">DateTime.h</a></div></div>
 <div class="ttc" id="aErrorHandling_8h_html"><div class="ttname"><a href="ErrorHandling_8h.html">ErrorHandling.h</a></div></div>
@@ -126,6 +129,7 @@ $(function() {
 <div class="ttc" id="aTypeConverterNative_8h_html"><div class="ttname"><a href="TypeConverterNative_8h.html">TypeConverterNative.h</a></div></div>
 <div class="ttc" id="aTypeConverter_8h_html"><div class="ttname"><a href="TypeConverter_8h.html">TypeConverter.h</a></div></div>
 <div class="ttc" id="aTypeWrapper_8h_html"><div class="ttname"><a href="TypeWrapper_8h.html">TypeWrapper.h</a></div></div>
+<div class="ttc" id="aValueBackend_8h_html"><div class="ttname"><a href="ValueBackend_8h.html">ValueBackend.h</a></div></div>
 <div class="ttc" id="aVariant_8h_html"><div class="ttname"><a href="Variant_8h.html">Variant.h</a></div></div>
 <div class="ttc" id="acomparison_8h_html"><div class="ttname"><a href="comparison_8h.html">comparison.h</a></div></div>
 <div class="ttc" id="ahelper_8h_html"><div class="ttname"><a href="helper_8h.html">helper.h</a></div></div>

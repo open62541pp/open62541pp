@@ -171,6 +171,44 @@ Functions</h2></td></tr>
 <tr class="separator:a01c8488c42c2323b11bf15866d037040"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="abed8448821b2cf18800c02ae8b83d355" name="abed8448821b2cf18800c02ae8b83d355"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abed8448821b2cf18800c02ae8b83d355">&#9670;&#160;</a></span>QCLASS_IN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define QCLASS_IN&#160;&#160;&#160;(1)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="mdnsd_8h_source.html#l00020">20</a> of file <a class="el" href="mdnsd_8h_source.html">mdnsd.h</a>.</p>
+
+</div>
+</div>
+<a id="a7f2d20682eb028db60166bb95aeed619" name="a7f2d20682eb028db60166bb95aeed619"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f2d20682eb028db60166bb95aeed619">&#9670;&#160;</a></span>MDNSD_LOG_TRACE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MDNSD_LOG_TRACE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">        <span class="keywordflow">do</span> { \</div>
+<div class="line">        printf(<span class="stringliteral">&quot;mdnsd: TRACE - &quot;</span>); printf(__VA_ARGS__); printf(<span class="stringliteral">&quot;\n&quot;</span>); } <span class="keywordflow">while</span>(0)</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="mdnsd_8h_source.html#l00023">23</a> of file <a class="el" href="mdnsd_8h_source.html">mdnsd.h</a>.</p>
+
+</div>
+</div>
 <a id="a1af26f98052d553b1b0eae9d8d5d4631" name="a1af26f98052d553b1b0eae9d8d5d4631"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1af26f98052d553b1b0eae9d8d5d4631">&#9670;&#160;</a></span>MDNSD_LOG_DEBUG</h2>
 
@@ -190,6 +228,50 @@ Functions</h2></td></tr>
 <div class="line">        printf(<span class="stringliteral">&quot;mdnsd: DEBUG - &quot;</span>); printf(__VA_ARGS__); printf(<span class="stringliteral">&quot;\n&quot;</span>); } <span class="keywordflow">while</span>(0)</div>
 </div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="mdnsd_8h_source.html#l00030">30</a> of file <a class="el" href="mdnsd_8h_source.html">mdnsd.h</a>.</p>
+
+</div>
+</div>
+<a id="aa6a88d0811ab994b6f4ae1a2d537b059" name="aa6a88d0811ab994b6f4ae1a2d537b059"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6a88d0811ab994b6f4ae1a2d537b059">&#9670;&#160;</a></span>MDNSD_LOG_INFO</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MDNSD_LOG_INFO</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">        <span class="keywordflow">do</span> { \</div>
+<div class="line">        printf(<span class="stringliteral">&quot;mdnsd: INFO  - &quot;</span>); printf(__VA_ARGS__); printf(<span class="stringliteral">&quot;\n&quot;</span>); } <span class="keywordflow">while</span>(0)</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="mdnsd_8h_source.html#l00037">37</a> of file <a class="el" href="mdnsd_8h_source.html">mdnsd.h</a>.</p>
+
+</div>
+</div>
+<a id="a7bf38565d69d980f876ae2c6066214e4" name="a7bf38565d69d980f876ae2c6066214e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bf38565d69d980f876ae2c6066214e4">&#9670;&#160;</a></span>MDNSD_LOG_WARNING</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MDNSD_LOG_WARNING</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">        <span class="keywordflow">do</span> { \</div>
+<div class="line">        printf(<span class="stringliteral">&quot;mdnsd: WARN  - &quot;</span>); printf(__VA_ARGS__); printf(<span class="stringliteral">&quot;\n&quot;</span>); } <span class="keywordflow">while</span>(0)</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="mdnsd_8h_source.html#l00044">44</a> of file <a class="el" href="mdnsd_8h_source.html">mdnsd.h</a>.</p>
 
 </div>
 </div>
@@ -237,105 +319,7 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa6a88d0811ab994b6f4ae1a2d537b059" name="aa6a88d0811ab994b6f4ae1a2d537b059"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa6a88d0811ab994b6f4ae1a2d537b059">&#9670;&#160;</a></span>MDNSD_LOG_INFO</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define MDNSD_LOG_INFO</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>...</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">        <span class="keywordflow">do</span> { \</div>
-<div class="line">        printf(<span class="stringliteral">&quot;mdnsd: INFO  - &quot;</span>); printf(__VA_ARGS__); printf(<span class="stringliteral">&quot;\n&quot;</span>); } <span class="keywordflow">while</span>(0)</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="mdnsd_8h_source.html#l00037">37</a> of file <a class="el" href="mdnsd_8h_source.html">mdnsd.h</a>.</p>
-
-</div>
-</div>
-<a id="a7f2d20682eb028db60166bb95aeed619" name="a7f2d20682eb028db60166bb95aeed619"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f2d20682eb028db60166bb95aeed619">&#9670;&#160;</a></span>MDNSD_LOG_TRACE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define MDNSD_LOG_TRACE</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>...</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">        <span class="keywordflow">do</span> { \</div>
-<div class="line">        printf(<span class="stringliteral">&quot;mdnsd: TRACE - &quot;</span>); printf(__VA_ARGS__); printf(<span class="stringliteral">&quot;\n&quot;</span>); } <span class="keywordflow">while</span>(0)</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="mdnsd_8h_source.html#l00023">23</a> of file <a class="el" href="mdnsd_8h_source.html">mdnsd.h</a>.</p>
-
-</div>
-</div>
-<a id="a7bf38565d69d980f876ae2c6066214e4" name="a7bf38565d69d980f876ae2c6066214e4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7bf38565d69d980f876ae2c6066214e4">&#9670;&#160;</a></span>MDNSD_LOG_WARNING</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define MDNSD_LOG_WARNING</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>...</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">        <span class="keywordflow">do</span> { \</div>
-<div class="line">        printf(<span class="stringliteral">&quot;mdnsd: WARN  - &quot;</span>); printf(__VA_ARGS__); printf(<span class="stringliteral">&quot;\n&quot;</span>); } <span class="keywordflow">while</span>(0)</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="mdnsd_8h_source.html#l00044">44</a> of file <a class="el" href="mdnsd_8h_source.html">mdnsd.h</a>.</p>
-
-</div>
-</div>
-<a id="abed8448821b2cf18800c02ae8b83d355" name="abed8448821b2cf18800c02ae8b83d355"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abed8448821b2cf18800c02ae8b83d355">&#9670;&#160;</a></span>QCLASS_IN</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define QCLASS_IN&#160;&#160;&#160;(1)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="mdnsd_8h_source.html#l00020">20</a> of file <a class="el" href="mdnsd_8h_source.html">mdnsd.h</a>.</p>
-
-</div>
-</div>
 <h2 class="groupheader">Typedef Documentation</h2>
-<a id="af414c04b0262459c330ac69f405b2012" name="af414c04b0262459c330ac69f405b2012"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af414c04b0262459c330ac69f405b2012">&#9670;&#160;</a></span>mdns_answer_t</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef struct <a class="el" href="structmdns__answer.html">mdns_answer</a> <a class="el" href="mdnsd_8h.html#af414c04b0262459c330ac69f405b2012">mdns_answer_t</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Answer data. </p>
-
-</div>
-</div>
 <a id="a8734d308c61c7a8458e0aa9f5e3d2577" name="a8734d308c61c7a8458e0aa9f5e3d2577"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8734d308c61c7a8458e0aa9f5e3d2577">&#9670;&#160;</a></span>mdns_daemon_t</h2>
 
@@ -391,29 +375,63 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a7df050af1ec0e39ecfe6200cc7696d18" name="a7df050af1ec0e39ecfe6200cc7696d18"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7df050af1ec0e39ecfe6200cc7696d18">&#9670;&#160;</a></span>mdnsd_done()</h2>
+<a id="af414c04b0262459c330ac69f405b2012" name="af414c04b0262459c330ac69f405b2012"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af414c04b0262459c330ac69f405b2012">&#9670;&#160;</a></span>mdns_answer_t</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void MDNSD_EXPORT mdnsd_done </td>
+          <td class="memname">typedef struct <a class="el" href="structmdns__answer.html">mdns_answer</a> <a class="el" href="mdnsd_8h.html#af414c04b0262459c330ac69f405b2012">mdns_answer_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Answer data. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="af44600a772215944ba804147034f68e9" name="af44600a772215944ba804147034f68e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af44600a772215944ba804147034f68e9">&#9670;&#160;</a></span>mdnsd_new()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="mdnsd_8h.html#a8734d308c61c7a8458e0aa9f5e3d2577">mdns_daemon_t</a> MDNSD_EXPORT * mdnsd_new </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="mdnsd_8h.html#a8734d308c61c7a8458e0aa9f5e3d2577">mdns_daemon_t</a> *&#160;</td>
-          <td class="paramname"><em>d</em>, </td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>clazz</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="mdnsd_8h.html#a80124818b7c2bf9d45e43e081ad7f2de">mdns_record_t</a> *&#160;</td>
-          <td class="paramname"><em>r</em>&#160;</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>frame</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
           <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab9464b9d1b49833e8053aed3283a1a6a" name="ab9464b9d1b49833e8053aed3283a1a6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9464b9d1b49833e8053aed3283a1a6a">&#9670;&#160;</a></span>mdnsd_shutdown()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MDNSD_EXPORT mdnsd_shutdown </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="mdnsd_8h.html#a8734d308c61c7a8458e0aa9f5e3d2577">mdns_daemon_t</a> *&#160;</td>
+          <td class="paramname"><em>d</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -450,6 +468,352 @@ Functions</h2></td></tr>
           <td class="paramtype"><a class="el" href="mdnsd_8h.html#a8734d308c61c7a8458e0aa9f5e3d2577">mdns_daemon_t</a> *&#160;</td>
           <td class="paramname"><em>d</em></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a544c6751b8940e0b0d3b4060f2b2a994" name="a544c6751b8940e0b0d3b4060f2b2a994"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a544c6751b8940e0b0d3b4060f2b2a994">&#9670;&#160;</a></span>mdnsd_register_receive_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MDNSD_EXPORT mdnsd_register_receive_callback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="mdnsd_8h.html#a8734d308c61c7a8458e0aa9f5e3d2577">mdns_daemon_t</a> *&#160;</td>
+          <td class="paramname"><em>d</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="mdnsd_8h.html#ae2343dafc2f1db9cec33f2f3f4931021">mdnsd_record_received_callback</a>&#160;</td>
+          <td class="paramname"><em>cb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab87deb677abe4e9af6d7af9323ee9dbd" name="ab87deb677abe4e9af6d7af9323ee9dbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab87deb677abe4e9af6d7af9323ee9dbd">&#9670;&#160;</a></span>mdnsd_in()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int MDNSD_EXPORT mdnsd_in </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="mdnsd_8h.html#a8734d308c61c7a8458e0aa9f5e3d2577">mdns_daemon_t</a> *&#160;</td>
+          <td class="paramname"><em>d</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="structmessage.html">message</a> *&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">in_addr_t&#160;</td>
+          <td class="paramname"><em>ip</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned short int&#160;</td>
+          <td class="paramname"><em>port</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af3fe26e3c5d06073f383b492028410e1" name="af3fe26e3c5d06073f383b492028410e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3fe26e3c5d06073f383b492028410e1">&#9670;&#160;</a></span>mdnsd_out()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int MDNSD_EXPORT mdnsd_out </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="mdnsd_8h.html#a8734d308c61c7a8458e0aa9f5e3d2577">mdns_daemon_t</a> *&#160;</td>
+          <td class="paramname"><em>d</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="structmessage.html">message</a> *&#160;</td>
+          <td class="paramname"><em>m</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct in_addr *&#160;</td>
+          <td class="paramname"><em>ip</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned short int *&#160;</td>
+          <td class="paramname"><em>port</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5f80e1d18d942fd676b4a23391f39cfe" name="a5f80e1d18d942fd676b4a23391f39cfe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f80e1d18d942fd676b4a23391f39cfe">&#9670;&#160;</a></span>mdnsd_sleep()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct timeval MDNSD_EXPORT * mdnsd_sleep </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="mdnsd_8h.html#a8734d308c61c7a8458e0aa9f5e3d2577">mdns_daemon_t</a> *&#160;</td>
+          <td class="paramname"><em>d</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8674c2d4b7aad54dc70d53a0e0a7e5d0" name="a8674c2d4b7aad54dc70d53a0e0a7e5d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8674c2d4b7aad54dc70d53a0e0a7e5d0">&#9670;&#160;</a></span>mdnsd_query()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MDNSD_EXPORT mdnsd_query </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="mdnsd_8h.html#a8734d308c61c7a8458e0aa9f5e3d2577">mdns_daemon_t</a> *&#160;</td>
+          <td class="paramname"><em>d</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>host</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int(*)(<a class="el" href="mdnsd_8h.html#af414c04b0262459c330ac69f405b2012">mdns_answer_t</a> *a, void *arg)&#160;</td>
+          <td class="paramname"><em>answer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>arg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afec0718b6844abc912e257a8c6b1f9b6" name="afec0718b6844abc912e257a8c6b1f9b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afec0718b6844abc912e257a8c6b1f9b6">&#9670;&#160;</a></span>mdnsd_list()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="mdnsd_8h.html#af414c04b0262459c330ac69f405b2012">mdns_answer_t</a> MDNSD_EXPORT * mdnsd_list </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="mdnsd_8h.html#a8734d308c61c7a8458e0aa9f5e3d2577">mdns_daemon_t</a> *&#160;</td>
+          <td class="paramname"><em>d</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>host</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="mdnsd_8h.html#af414c04b0262459c330ac69f405b2012">mdns_answer_t</a> *&#160;</td>
+          <td class="paramname"><em>last</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aadd4f59c450bb0074a7a6a54671cf1a1" name="aadd4f59c450bb0074a7a6a54671cf1a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadd4f59c450bb0074a7a6a54671cf1a1">&#9670;&#160;</a></span>mdnsd_record_next()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="mdnsd_8h.html#a80124818b7c2bf9d45e43e081ad7f2de">mdns_record_t</a> MDNSD_EXPORT * mdnsd_record_next </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="mdnsd_8h.html#a80124818b7c2bf9d45e43e081ad7f2de">mdns_record_t</a> *&#160;</td>
+          <td class="paramname"><em>r</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a996e694475d7619261db9c5091cb5b02" name="a996e694475d7619261db9c5091cb5b02"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a996e694475d7619261db9c5091cb5b02">&#9670;&#160;</a></span>mdnsd_record_data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="mdnsd_8h.html#af414c04b0262459c330ac69f405b2012">mdns_answer_t</a> MDNSD_EXPORT * mdnsd_record_data </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="mdnsd_8h.html#a80124818b7c2bf9d45e43e081ad7f2de">mdns_record_t</a> *&#160;</td>
+          <td class="paramname"><em>r</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a72107503fae909b176c060387ccd6ca3" name="a72107503fae909b176c060387ccd6ca3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72107503fae909b176c060387ccd6ca3">&#9670;&#160;</a></span>mdnsd_unique()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="mdnsd_8h.html#a80124818b7c2bf9d45e43e081ad7f2de">mdns_record_t</a> MDNSD_EXPORT * mdnsd_unique </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="mdnsd_8h.html#a8734d308c61c7a8458e0aa9f5e3d2577">mdns_daemon_t</a> *&#160;</td>
+          <td class="paramname"><em>d</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>host</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned short int&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long int&#160;</td>
+          <td class="paramname"><em>ttl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)(char *host, int type, void *arg)&#160;</td>
+          <td class="paramname"><em>conflict</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>arg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa9eb9b276d385aed99517cbcd0b3e15a" name="aa9eb9b276d385aed99517cbcd0b3e15a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9eb9b276d385aed99517cbcd0b3e15a">&#9670;&#160;</a></span>mdnsd_shared()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="mdnsd_8h.html#a80124818b7c2bf9d45e43e081ad7f2de">mdns_record_t</a> MDNSD_EXPORT * mdnsd_shared </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="mdnsd_8h.html#a8734d308c61c7a8458e0aa9f5e3d2577">mdns_daemon_t</a> *&#160;</td>
+          <td class="paramname"><em>d</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>host</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned short int&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned long int&#160;</td>
+          <td class="paramname"><em>ttl</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -512,14 +876,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ab87deb677abe4e9af6d7af9323ee9dbd" name="ab87deb677abe4e9af6d7af9323ee9dbd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab87deb677abe4e9af6d7af9323ee9dbd">&#9670;&#160;</a></span>mdnsd_in()</h2>
+<a id="a7df050af1ec0e39ecfe6200cc7696d18" name="a7df050af1ec0e39ecfe6200cc7696d18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7df050af1ec0e39ecfe6200cc7696d18">&#9670;&#160;</a></span>mdnsd_done()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int MDNSD_EXPORT mdnsd_in </td>
+          <td class="memname">void MDNSD_EXPORT mdnsd_done </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="mdnsd_8h.html#a8734d308c61c7a8458e0aa9f5e3d2577">mdns_daemon_t</a> *&#160;</td>
           <td class="paramname"><em>d</em>, </td>
@@ -527,244 +891,48 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">struct <a class="el" href="structmessage.html">message</a> *&#160;</td>
-          <td class="paramname"><em>m</em>, </td>
+          <td class="paramtype"><a class="el" href="mdnsd_8h.html#a80124818b7c2bf9d45e43e081ad7f2de">mdns_record_t</a> *&#160;</td>
+          <td class="paramname"><em>r</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad03be7319c19ce5a20d29483d1cd2bf0" name="ad03be7319c19ce5a20d29483d1cd2bf0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad03be7319c19ce5a20d29483d1cd2bf0">&#9670;&#160;</a></span>mdnsd_set_raw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MDNSD_EXPORT mdnsd_set_raw </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="mdnsd_8h.html#a8734d308c61c7a8458e0aa9f5e3d2577">mdns_daemon_t</a> *&#160;</td>
+          <td class="paramname"><em>d</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">in_addr_t&#160;</td>
-          <td class="paramname"><em>ip</em>, </td>
+          <td class="paramtype"><a class="el" href="mdnsd_8h.html#a80124818b7c2bf9d45e43e081ad7f2de">mdns_record_t</a> *&#160;</td>
+          <td class="paramname"><em>r</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">unsigned short int&#160;</td>
-          <td class="paramname"><em>port</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="afec0718b6844abc912e257a8c6b1f9b6" name="afec0718b6844abc912e257a8c6b1f9b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afec0718b6844abc912e257a8c6b1f9b6">&#9670;&#160;</a></span>mdnsd_list()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="mdnsd_8h.html#af414c04b0262459c330ac69f405b2012">mdns_answer_t</a> MDNSD_EXPORT * mdnsd_list </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="mdnsd_8h.html#a8734d308c61c7a8458e0aa9f5e3d2577">mdns_daemon_t</a> *&#160;</td>
-          <td class="paramname"><em>d</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>host</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="mdnsd_8h.html#af414c04b0262459c330ac69f405b2012">mdns_answer_t</a> *&#160;</td>
-          <td class="paramname"><em>last</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="af44600a772215944ba804147034f68e9" name="af44600a772215944ba804147034f68e9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af44600a772215944ba804147034f68e9">&#9670;&#160;</a></span>mdnsd_new()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="mdnsd_8h.html#a8734d308c61c7a8458e0aa9f5e3d2577">mdns_daemon_t</a> MDNSD_EXPORT * mdnsd_new </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>clazz</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>frame</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="af3fe26e3c5d06073f383b492028410e1" name="af3fe26e3c5d06073f383b492028410e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af3fe26e3c5d06073f383b492028410e1">&#9670;&#160;</a></span>mdnsd_out()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int MDNSD_EXPORT mdnsd_out </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="mdnsd_8h.html#a8734d308c61c7a8458e0aa9f5e3d2577">mdns_daemon_t</a> *&#160;</td>
-          <td class="paramname"><em>d</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">struct <a class="el" href="structmessage.html">message</a> *&#160;</td>
-          <td class="paramname"><em>m</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">struct in_addr *&#160;</td>
-          <td class="paramname"><em>ip</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned short int *&#160;</td>
-          <td class="paramname"><em>port</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a8674c2d4b7aad54dc70d53a0e0a7e5d0" name="a8674c2d4b7aad54dc70d53a0e0a7e5d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8674c2d4b7aad54dc70d53a0e0a7e5d0">&#9670;&#160;</a></span>mdnsd_query()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void MDNSD_EXPORT mdnsd_query </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="mdnsd_8h.html#a8734d308c61c7a8458e0aa9f5e3d2577">mdns_daemon_t</a> *&#160;</td>
-          <td class="paramname"><em>d</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>host</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int(*)(<a class="el" href="mdnsd_8h.html#af414c04b0262459c330ac69f405b2012">mdns_answer_t</a> *a, void *arg)&#160;</td>
-          <td class="paramname"><em>answer</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>arg</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a996e694475d7619261db9c5091cb5b02" name="a996e694475d7619261db9c5091cb5b02"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a996e694475d7619261db9c5091cb5b02">&#9670;&#160;</a></span>mdnsd_record_data()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="mdnsd_8h.html#af414c04b0262459c330ac69f405b2012">mdns_answer_t</a> MDNSD_EXPORT * mdnsd_record_data </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="mdnsd_8h.html#a80124818b7c2bf9d45e43e081ad7f2de">mdns_record_t</a> *&#160;</td>
-          <td class="paramname"><em>r</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aadd4f59c450bb0074a7a6a54671cf1a1" name="aadd4f59c450bb0074a7a6a54671cf1a1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aadd4f59c450bb0074a7a6a54671cf1a1">&#9670;&#160;</a></span>mdnsd_record_next()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="mdnsd_8h.html#a80124818b7c2bf9d45e43e081ad7f2de">mdns_record_t</a> MDNSD_EXPORT * mdnsd_record_next </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="mdnsd_8h.html#a80124818b7c2bf9d45e43e081ad7f2de">mdns_record_t</a> *&#160;</td>
-          <td class="paramname"><em>r</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a544c6751b8940e0b0d3b4060f2b2a994" name="a544c6751b8940e0b0d3b4060f2b2a994"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a544c6751b8940e0b0d3b4060f2b2a994">&#9670;&#160;</a></span>mdnsd_register_receive_callback()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void MDNSD_EXPORT mdnsd_register_receive_callback </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="mdnsd_8h.html#a8734d308c61c7a8458e0aa9f5e3d2577">mdns_daemon_t</a> *&#160;</td>
-          <td class="paramname"><em>d</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="mdnsd_8h.html#ae2343dafc2f1db9cec33f2f3f4931021">mdnsd_record_received_callback</a>&#160;</td>
-          <td class="paramname"><em>cb</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>data</em>&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -844,46 +1012,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ad03be7319c19ce5a20d29483d1cd2bf0" name="ad03be7319c19ce5a20d29483d1cd2bf0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad03be7319c19ce5a20d29483d1cd2bf0">&#9670;&#160;</a></span>mdnsd_set_raw()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void MDNSD_EXPORT mdnsd_set_raw </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="mdnsd_8h.html#a8734d308c61c7a8458e0aa9f5e3d2577">mdns_daemon_t</a> *&#160;</td>
-          <td class="paramname"><em>d</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="mdnsd_8h.html#a80124818b7c2bf9d45e43e081ad7f2de">mdns_record_t</a> *&#160;</td>
-          <td class="paramname"><em>r</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>data</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned short int&#160;</td>
-          <td class="paramname"><em>len</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="afe8513f50f1c11bc6e3e0bdfcec055e6" name="afe8513f50f1c11bc6e3e0bdfcec055e6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afe8513f50f1c11bc6e3e0bdfcec055e6">&#9670;&#160;</a></span>mdnsd_set_srv()</h2>
 
@@ -936,82 +1064,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa9eb9b276d385aed99517cbcd0b3e15a" name="aa9eb9b276d385aed99517cbcd0b3e15a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa9eb9b276d385aed99517cbcd0b3e15a">&#9670;&#160;</a></span>mdnsd_shared()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="mdnsd_8h.html#a80124818b7c2bf9d45e43e081ad7f2de">mdns_record_t</a> MDNSD_EXPORT * mdnsd_shared </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="mdnsd_8h.html#a8734d308c61c7a8458e0aa9f5e3d2577">mdns_daemon_t</a> *&#160;</td>
-          <td class="paramname"><em>d</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>host</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned short int&#160;</td>
-          <td class="paramname"><em>type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned long int&#160;</td>
-          <td class="paramname"><em>ttl</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ab9464b9d1b49833e8053aed3283a1a6a" name="ab9464b9d1b49833e8053aed3283a1a6a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab9464b9d1b49833e8053aed3283a1a6a">&#9670;&#160;</a></span>mdnsd_shutdown()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void MDNSD_EXPORT mdnsd_shutdown </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="mdnsd_8h.html#a8734d308c61c7a8458e0aa9f5e3d2577">mdns_daemon_t</a> *&#160;</td>
-          <td class="paramname"><em>d</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a5f80e1d18d942fd676b4a23391f39cfe" name="a5f80e1d18d942fd676b4a23391f39cfe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5f80e1d18d942fd676b4a23391f39cfe">&#9670;&#160;</a></span>mdnsd_sleep()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">struct timeval MDNSD_EXPORT * mdnsd_sleep </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="mdnsd_8h.html#a8734d308c61c7a8458e0aa9f5e3d2577">mdns_daemon_t</a> *&#160;</td>
-          <td class="paramname"><em>d</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a01c8488c42c2323b11bf15866d037040" name="a01c8488c42c2323b11bf15866d037040"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a01c8488c42c2323b11bf15866d037040">&#9670;&#160;</a></span>mdnsd_step()</h2>
 
@@ -1047,58 +1099,6 @@ Functions</h2></td></tr>
           <td></td>
           <td class="paramtype">struct timeval *&#160;</td>
           <td class="paramname"><em>nextSleep</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a72107503fae909b176c060387ccd6ca3" name="a72107503fae909b176c060387ccd6ca3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a72107503fae909b176c060387ccd6ca3">&#9670;&#160;</a></span>mdnsd_unique()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="mdnsd_8h.html#a80124818b7c2bf9d45e43e081ad7f2de">mdns_record_t</a> MDNSD_EXPORT * mdnsd_unique </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="mdnsd_8h.html#a8734d308c61c7a8458e0aa9f5e3d2577">mdns_daemon_t</a> *&#160;</td>
-          <td class="paramname"><em>d</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>host</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned short int&#160;</td>
-          <td class="paramname"><em>type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned long int&#160;</td>
-          <td class="paramname"><em>ttl</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void(*)(char *host, int type, void *arg)&#160;</td>
-          <td class="paramname"><em>conflict</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>arg</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

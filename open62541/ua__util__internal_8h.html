@@ -189,6 +189,268 @@ Functions</h2></td></tr>
 <tr class="separator:a6b6e802e9aebe630a40a650904aff8ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="aa3dce341fe6a38c92ec98243e40ae820" name="aa3dce341fe6a38c92ec98243e40ae820"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3dce341fe6a38c92ec98243e40ae820">&#9670;&#160;</a></span>UA_INTERNAL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_INTERNAL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This Source Code Form is subject to the terms of the Mozilla Public License, v. </p>
+<p>2.0. If a copy of the MPL was not distributed with this file, You can obtain one at <a href="http://mozilla.org/MPL/2.0/">http://mozilla.org/MPL/2.0/</a>.</p>
+<p>Copyright 2014-2017 (c) Fraunhofer IOSB (Author: Julius Pfrommer) Copyright 2014, 2017 (c) Florian Palm Copyright 2015 (c) LEvertz Copyright 2015-2016 (c) Sten Grüner Copyright 2015 (c) Chris Iatrou Copyright 2015-2016 (c) Oleksiy Vasylyev Copyright 2017 (c) Stefan Profanter, fortiss GmbH Copyright 2021 (c) Fraunhofer IOSB (Author: Jan Hermes) </p>
+
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00018">18</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
+
+</div>
+</div>
+<a id="a273fd37bc8fedce6d53e7d0bf2be78bb" name="a273fd37bc8fedce6d53e7d0bf2be78bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a273fd37bc8fedce6d53e7d0bf2be78bb">&#9670;&#160;</a></span>UA_MACRO_EXPAND</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_MACRO_EXPAND</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">x</td><td>)</td>
+          <td>&#160;&#160;&#160;x</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Macro-Expand for MSVC workarounds. </p>
+
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00028">28</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
+
+</div>
+</div>
+<a id="a1f34e0cd8cfcdc24c0868b4c8e8449d6" name="a1f34e0cd8cfcdc24c0868b4c8e8449d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f34e0cd8cfcdc24c0868b4c8e8449d6">&#9670;&#160;</a></span>UA_LOG_NODEID_INTERNAL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_LOG_NODEID_INTERNAL</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">NODEID, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">LOG&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> {                                             \</div>
+<div class="line">    <a class="code hl_struct" href="structUA__String.html">UA_String</a> nodeIdStr = <a class="code hl_variable" href="types_8h.html#add6877cdf12368c808b31e46e2c01df7">UA_STRING_NULL</a>;            \</div>
+<div class="line">    UA_NodeId_print(NODEID, &amp;nodeIdStr);             \</div>
+<div class="line">    LOG;                                             \</div>
+<div class="line">    UA_String_clear(&amp;nodeIdStr);                     \</div>
+<div class="line">    } <span class="keywordflow">while</span>(0)</div>
+<div class="ttc" id="astructUA__String_html"><div class="ttname"><a href="structUA__String.html">UA_String</a></div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00114">types.h:114</a></div></div>
+<div class="ttc" id="atypes_8h_html_add6877cdf12368c808b31e46e2c01df7"><div class="ttname"><a href="types_8h.html#add6877cdf12368c808b31e46e2c01df7">UA_STRING_NULL</a></div><div class="ttdeci">UA_EXPORT const UA_String UA_STRING_NULL</div></div>
+</div><!-- fragment -->
+<p>Print a NodeId in logs. </p>
+
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00031">31</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
+
+</div>
+</div>
+<a id="a17e5c8fc9d31a5b419c20c6249466226" name="a17e5c8fc9d31a5b419c20c6249466226"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17e5c8fc9d31a5b419c20c6249466226">&#9670;&#160;</a></span>UA_LOG_NODEID_TRACE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_LOG_NODEID_TRACE</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">NODEID, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">LOG&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;    <a class="el" href="ua__util__internal_8h.html#a1f34e0cd8cfcdc24c0868b4c8e8449d6">UA_LOG_NODEID_INTERNAL</a>(NODEID, LOG)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00040">40</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
+
+</div>
+</div>
+<a id="ae02e1eb78c13032a0f3ac1a6b7fe2729" name="ae02e1eb78c13032a0f3ac1a6b7fe2729"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae02e1eb78c13032a0f3ac1a6b7fe2729">&#9670;&#160;</a></span>UA_LOG_NODEID_DEBUG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_LOG_NODEID_DEBUG</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">NODEID, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">LOG&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;    <a class="el" href="ua__util__internal_8h.html#a1f34e0cd8cfcdc24c0868b4c8e8449d6">UA_LOG_NODEID_INTERNAL</a>(NODEID, LOG)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00047">47</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
+
+</div>
+</div>
+<a id="a634e6e345c005895a6d60793c22e49d9" name="a634e6e345c005895a6d60793c22e49d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a634e6e345c005895a6d60793c22e49d9">&#9670;&#160;</a></span>UA_LOG_NODEID_INFO</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_LOG_NODEID_INFO</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">NODEID, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">LOG&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;    <a class="el" href="ua__util__internal_8h.html#a1f34e0cd8cfcdc24c0868b4c8e8449d6">UA_LOG_NODEID_INTERNAL</a>(NODEID, LOG)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00054">54</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
+
+</div>
+</div>
+<a id="a01ff9eeb19108b88de90fcfa83b713fa" name="a01ff9eeb19108b88de90fcfa83b713fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01ff9eeb19108b88de90fcfa83b713fa">&#9670;&#160;</a></span>UA_LOG_NODEID_WARNING</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_LOG_NODEID_WARNING</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">NODEID, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">LOG&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;    <a class="el" href="ua__util__internal_8h.html#a1f34e0cd8cfcdc24c0868b4c8e8449d6">UA_LOG_NODEID_INTERNAL</a>(NODEID, LOG)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00061">61</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
+
+</div>
+</div>
+<a id="a6b742378e94a51314e19dbe33a15a094" name="a6b742378e94a51314e19dbe33a15a094"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b742378e94a51314e19dbe33a15a094">&#9670;&#160;</a></span>UA_LOG_NODEID_ERROR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_LOG_NODEID_ERROR</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">NODEID, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">LOG&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;    <a class="el" href="ua__util__internal_8h.html#a1f34e0cd8cfcdc24c0868b4c8e8449d6">UA_LOG_NODEID_INTERNAL</a>(NODEID, LOG)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00068">68</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
+
+</div>
+</div>
+<a id="a76dd866cd4170f4c21ed90cf3555bd41" name="a76dd866cd4170f4c21ed90cf3555bd41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76dd866cd4170f4c21ed90cf3555bd41">&#9670;&#160;</a></span>UA_LOG_NODEID_FATAL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_LOG_NODEID_FATAL</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">NODEID, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">LOG&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;    <a class="el" href="ua__util__internal_8h.html#a1f34e0cd8cfcdc24c0868b4c8e8449d6">UA_LOG_NODEID_INTERNAL</a>(NODEID, LOG)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00075">75</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
+
+</div>
+</div>
 <a id="a5d01b16c55a86289dd9072b1cf2c075d" name="a5d01b16c55a86289dd9072b1cf2c075d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5d01b16c55a86289dd9072b1cf2c075d">&#9670;&#160;</a></span>UA_CHECK</h2>
 
@@ -225,206 +487,63 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a4f466d0e74b727de6b33933a1a879c17" name="a4f466d0e74b727de6b33933a1a879c17"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4f466d0e74b727de6b33933a1a879c17">&#9670;&#160;</a></span>UA_CHECK_ERROR</h2>
+<a id="adbc23bcd2bde97e0bc33176567bde6a6" name="adbc23bcd2bde97e0bc33176567bde6a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbc23bcd2bde97e0bc33176567bde6a6">&#9670;&#160;</a></span>UA_CHECK_STATUS</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define UA_CHECK_ERROR</td>
+          <td class="memname">#define UA_CHECK_STATUS</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">A, </td>
+          <td class="paramname">STATUSCODE, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">EVAL, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">LOGGER, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">CAT, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>...</em>&#160;</td>
+          <td class="paramname">EVAL_ON_ERROR&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;    <a class="el" href="ua__util__internal_8h.html#a273fd37bc8fedce6d53e7d0bf2be78bb">UA_MACRO_EXPAND</a>(<a class="el" href="ua__util__internal_8h.html#a27b0945aa9d61fa2e9f5b80101c0c6ec">UA_CHECK_LOG</a>(A, EVAL, ERROR, LOGGER, CAT, __VA_ARGS__))</td>
+          <td></td><td>&#160;&#160;&#160;    <a class="el" href="ua__util__internal_8h.html#a5d01b16c55a86289dd9072b1cf2c075d">UA_CHECK</a>(isGood(STATUSCODE), EVAL_ON_ERROR)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00154">154</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00117">117</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
 
 </div>
 </div>
-<a id="a7046caa627fe40624bd33b07d52fd8fe" name="a7046caa627fe40624bd33b07d52fd8fe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7046caa627fe40624bd33b07d52fd8fe">&#9670;&#160;</a></span>UA_CHECK_FATAL</h2>
+<a id="a88efd3921b0f65b2ad215415cd2a99c0" name="a88efd3921b0f65b2ad215415cd2a99c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88efd3921b0f65b2ad215415cd2a99c0">&#9670;&#160;</a></span>UA_CHECK_MEM</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define UA_CHECK_FATAL</td>
+          <td class="memname">#define UA_CHECK_MEM</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">A, </td>
+          <td class="paramname">STATUSCODE, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">EVAL, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">LOGGER, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">CAT, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>...</em>&#160;</td>
+          <td class="paramname">EVAL_ON_ERROR&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;    <a class="el" href="ua__util__internal_8h.html#a273fd37bc8fedce6d53e7d0bf2be78bb">UA_MACRO_EXPAND</a>(<a class="el" href="ua__util__internal_8h.html#a27b0945aa9d61fa2e9f5b80101c0c6ec">UA_CHECK_LOG</a>(A, EVAL, FATAL, LOGGER, CAT, __VA_ARGS__))</td>
+          <td></td><td>&#160;&#160;&#160;    <a class="el" href="ua__util__internal_8h.html#a5d01b16c55a86289dd9072b1cf2c075d">UA_CHECK</a>(isNonNull(STATUSCODE), EVAL_ON_ERROR)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00152">152</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
-
-</div>
-</div>
-<a id="a31c1db3973bf6f4b0d498922b68e38d3" name="a31c1db3973bf6f4b0d498922b68e38d3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a31c1db3973bf6f4b0d498922b68e38d3">&#9670;&#160;</a></span>UA_CHECK_INFO</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_CHECK_INFO</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">A, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">EVAL, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">LOGGER, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">CAT, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>...</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;    <a class="el" href="ua__util__internal_8h.html#a273fd37bc8fedce6d53e7d0bf2be78bb">UA_MACRO_EXPAND</a>(<a class="el" href="ua__util__internal_8h.html#a27b0945aa9d61fa2e9f5b80101c0c6ec">UA_CHECK_LOG</a>(A, EVAL, INFO, LOGGER, CAT, __VA_ARGS__))</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00158">158</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
-
-</div>
-</div>
-<a id="a27b0945aa9d61fa2e9f5b80101c0c6ec" name="a27b0945aa9d61fa2e9f5b80101c0c6ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a27b0945aa9d61fa2e9f5b80101c0c6ec">&#9670;&#160;</a></span>UA_CHECK_LOG</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_CHECK_LOG</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">A, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">EVAL, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">LEVEL, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">LOGGER, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">CAT, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>...</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="ua__util__internal_8h.html#a273fd37bc8fedce6d53e7d0bf2be78bb">UA_MACRO_EXPAND</a>(<a class="code hl_define" href="ua__util__internal_8h.html#a52b92e52febee804bc40c7a0a63a983b">UA_CHECK_LOG_INTERNAL</a>(A, <a class="code hl_define" href="statuscodes_8h.html#afb415b7ec65a92a87eb61e43b790b308">UA_STATUSCODE_BAD</a>, EVAL, UA_LOG_##LEVEL,    \</div>
-<div class="line">                                          LOGGER, CAT, __VA_ARGS__, <span class="stringliteral">&quot;&quot;</span>))</div>
-<div class="ttc" id="astatuscodes_8h_html_afb415b7ec65a92a87eb61e43b790b308"><div class="ttname"><a href="statuscodes_8h.html#afb415b7ec65a92a87eb61e43b790b308">UA_STATUSCODE_BAD</a></div><div class="ttdeci">#define UA_STATUSCODE_BAD</div><div class="ttdoc">&quot;The operation failed.&quot;</div><div class="ttdef"><b>Definition</b> <a href="statuscodes_8h_source.html#l00016">statuscodes.h:16</a></div></div>
-<div class="ttc" id="aua__util__internal_8h_html_a273fd37bc8fedce6d53e7d0bf2be78bb"><div class="ttname"><a href="ua__util__internal_8h.html#a273fd37bc8fedce6d53e7d0bf2be78bb">UA_MACRO_EXPAND</a></div><div class="ttdeci">#define UA_MACRO_EXPAND(x)</div><div class="ttdoc">Macro-Expand for MSVC workarounds.</div><div class="ttdef"><b>Definition</b> <a href="ua__util__internal_8h_source.html#l00028">ua_util_internal.h:28</a></div></div>
-<div class="ttc" id="aua__util__internal_8h_html_a52b92e52febee804bc40c7a0a63a983b"><div class="ttname"><a href="ua__util__internal_8h.html#a52b92e52febee804bc40c7a0a63a983b">UA_CHECK_LOG_INTERNAL</a></div><div class="ttdeci">#define UA_CHECK_LOG_INTERNAL(A, STATUSCODE, EVAL, LOG, LOGGER, CAT, MSG,...)</div><div class="ttdef"><b>Definition</b> <a href="ua__util__internal_8h_source.html#l00130">ua_util_internal.h:130</a></div></div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00137">137</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00120">120</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
 
 </div>
 </div>
@@ -494,20 +613,79 @@ Functions</h2></td></tr>
 <div class="line">                        <a class="code hl_function" href="types_8h.html#a6f4095449612683166455cb8ef8d2399">UA_StatusCode_name</a>(STATUSCODE));             \</div>
 <div class="line">                 EVAL))</div>
 <div class="ttc" id="atypes_8h_html_a6f4095449612683166455cb8ef8d2399"><div class="ttname"><a href="types_8h.html#a6f4095449612683166455cb8ef8d2399">UA_StatusCode_name</a></div><div class="ttdeci">UA_EXPORT const char * UA_StatusCode_name(UA_StatusCode code)</div><div class="ttdoc">Returns the human-readable name of the StatusCode.</div></div>
+<div class="ttc" id="aua__util__internal_8h_html_a273fd37bc8fedce6d53e7d0bf2be78bb"><div class="ttname"><a href="ua__util__internal_8h.html#a273fd37bc8fedce6d53e7d0bf2be78bb">UA_MACRO_EXPAND</a></div><div class="ttdeci">#define UA_MACRO_EXPAND(x)</div><div class="ttdoc">Macro-Expand for MSVC workarounds.</div><div class="ttdef"><b>Definition</b> <a href="ua__util__internal_8h_source.html#l00028">ua_util_internal.h:28</a></div></div>
 <div class="ttc" id="aua__util__internal_8h_html_a5d01b16c55a86289dd9072b1cf2c075d"><div class="ttname"><a href="ua__util__internal_8h.html#a5d01b16c55a86289dd9072b1cf2c075d">UA_CHECK</a></div><div class="ttdeci">#define UA_CHECK(A, EVAL_ON_ERROR)</div><div class="ttdef"><b>Definition</b> <a href="ua__util__internal_8h_source.html#l00110">ua_util_internal.h:110</a></div></div>
 </div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00130">130</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
 
 </div>
 </div>
-<a id="a88efd3921b0f65b2ad215415cd2a99c0" name="a88efd3921b0f65b2ad215415cd2a99c0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a88efd3921b0f65b2ad215415cd2a99c0">&#9670;&#160;</a></span>UA_CHECK_MEM</h2>
+<a id="a27b0945aa9d61fa2e9f5b80101c0c6ec" name="a27b0945aa9d61fa2e9f5b80101c0c6ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27b0945aa9d61fa2e9f5b80101c0c6ec">&#9670;&#160;</a></span>UA_CHECK_LOG</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define UA_CHECK_MEM</td>
+          <td class="memname">#define UA_CHECK_LOG</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">A, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">EVAL, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">LEVEL, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">LOGGER, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">CAT, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="ua__util__internal_8h.html#a273fd37bc8fedce6d53e7d0bf2be78bb">UA_MACRO_EXPAND</a>(<a class="code hl_define" href="ua__util__internal_8h.html#a52b92e52febee804bc40c7a0a63a983b">UA_CHECK_LOG_INTERNAL</a>(A, <a class="code hl_define" href="statuscodes_8h.html#afb415b7ec65a92a87eb61e43b790b308">UA_STATUSCODE_BAD</a>, EVAL, UA_LOG_##LEVEL,    \</div>
+<div class="line">                                          LOGGER, CAT, __VA_ARGS__, <span class="stringliteral">&quot;&quot;</span>))</div>
+<div class="ttc" id="astatuscodes_8h_html_afb415b7ec65a92a87eb61e43b790b308"><div class="ttname"><a href="statuscodes_8h.html#afb415b7ec65a92a87eb61e43b790b308">UA_STATUSCODE_BAD</a></div><div class="ttdeci">#define UA_STATUSCODE_BAD</div><div class="ttdoc">&quot;The operation failed.&quot;</div><div class="ttdef"><b>Definition</b> <a href="statuscodes_8h_source.html#l00016">statuscodes.h:16</a></div></div>
+<div class="ttc" id="aua__util__internal_8h_html_a52b92e52febee804bc40c7a0a63a983b"><div class="ttname"><a href="ua__util__internal_8h.html#a52b92e52febee804bc40c7a0a63a983b">UA_CHECK_LOG_INTERNAL</a></div><div class="ttdeci">#define UA_CHECK_LOG_INTERNAL(A, STATUSCODE, EVAL, LOG, LOGGER, CAT, MSG,...)</div><div class="ttdef"><b>Definition</b> <a href="ua__util__internal_8h_source.html#l00130">ua_util_internal.h:130</a></div></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00137">137</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
+
+</div>
+</div>
+<a id="a1e5c6ddb1755de939858aeb61ba3b7f7" name="a1e5c6ddb1755de939858aeb61ba3b7f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e5c6ddb1755de939858aeb61ba3b7f7">&#9670;&#160;</a></span>UA_CHECK_STATUS_LOG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_CHECK_STATUS_LOG</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">STATUSCODE, </td>
@@ -516,37 +694,13 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">EVAL_ON_ERROR&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;    <a class="el" href="ua__util__internal_8h.html#a5d01b16c55a86289dd9072b1cf2c075d">UA_CHECK</a>(isNonNull(STATUSCODE), EVAL_ON_ERROR)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00120">120</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
-
-</div>
-</div>
-<a id="ac667900e5ce79bcbb7d9423d9650f617" name="ac667900e5ce79bcbb7d9423d9650f617"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac667900e5ce79bcbb7d9423d9650f617">&#9670;&#160;</a></span>UA_CHECK_MEM_ERROR</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_CHECK_MEM_ERROR</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">PTR, </td>
+          <td class="paramname">EVAL, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">EVAL, </td>
+          <td class="paramname">LEVEL, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -573,111 +727,11 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="ua__util__internal_8h.html#a273fd37bc8fedce6d53e7d0bf2be78bb">UA_MACRO_EXPAND</a>(                                                                     \</div>
-<div class="line">        <a class="code hl_define" href="ua__util__internal_8h.html#a519932d114c1e608f7832242f75626af">UA_CHECK_MEM_LOG</a>(PTR, EVAL, ERROR, LOGGER, CAT, __VA_ARGS__))</div>
-<div class="ttc" id="aua__util__internal_8h_html_a519932d114c1e608f7832242f75626af"><div class="ttname"><a href="ua__util__internal_8h.html#a519932d114c1e608f7832242f75626af">UA_CHECK_MEM_LOG</a></div><div class="ttdeci">#define UA_CHECK_MEM_LOG(PTR, EVAL, LEVEL, LOGGER, CAT,...)</div><div class="ttdef"><b>Definition</b> <a href="ua__util__internal_8h_source.html#l00146">ua_util_internal.h:146</a></div></div>
+<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="ua__util__internal_8h.html#a273fd37bc8fedce6d53e7d0bf2be78bb">UA_MACRO_EXPAND</a>(<a class="code hl_define" href="ua__util__internal_8h.html#a52b92e52febee804bc40c7a0a63a983b">UA_CHECK_LOG_INTERNAL</a>(isGood(STATUSCODE), STATUSCODE,  \</div>
+<div class="line">                                          EVAL, UA_LOG_##LEVEL, LOGGER, CAT,             \</div>
+<div class="line">                                          __VA_ARGS__, <span class="stringliteral">&quot;&quot;</span>))</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00177">177</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
-
-</div>
-</div>
-<a id="a1dc8cbf2dcb0ee429ee3a5b472733dcb" name="a1dc8cbf2dcb0ee429ee3a5b472733dcb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1dc8cbf2dcb0ee429ee3a5b472733dcb">&#9670;&#160;</a></span>UA_CHECK_MEM_FATAL</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_CHECK_MEM_FATAL</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">PTR, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">EVAL, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">LOGGER, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">CAT, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>...</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="ua__util__internal_8h.html#a273fd37bc8fedce6d53e7d0bf2be78bb">UA_MACRO_EXPAND</a>(                                                                     \</div>
-<div class="line">        <a class="code hl_define" href="ua__util__internal_8h.html#a519932d114c1e608f7832242f75626af">UA_CHECK_MEM_LOG</a>(PTR, EVAL, FATAL, LOGGER, CAT, __VA_ARGS__))</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00174">174</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
-
-</div>
-</div>
-<a id="ad5ae6d9d23a134069d5d591836cd2332" name="ad5ae6d9d23a134069d5d591836cd2332"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad5ae6d9d23a134069d5d591836cd2332">&#9670;&#160;</a></span>UA_CHECK_MEM_INFO</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_CHECK_MEM_INFO</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">PTR, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">EVAL, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">LOGGER, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">CAT, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>...</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="ua__util__internal_8h.html#a273fd37bc8fedce6d53e7d0bf2be78bb">UA_MACRO_EXPAND</a>(                                                                     \</div>
-<div class="line">        <a class="code hl_define" href="ua__util__internal_8h.html#a519932d114c1e608f7832242f75626af">UA_CHECK_MEM_LOG</a>(PTR, EVAL, INFO, LOGGER, CAT, __VA_ARGS__))</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00183">183</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00141">141</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
 
 </div>
 </div>
@@ -739,17 +793,17 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aacf3a6512d0eec426687581647eb34ca" name="aacf3a6512d0eec426687581647eb34ca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aacf3a6512d0eec426687581647eb34ca">&#9670;&#160;</a></span>UA_CHECK_MEM_WARN</h2>
+<a id="a7046caa627fe40624bd33b07d52fd8fe" name="a7046caa627fe40624bd33b07d52fd8fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7046caa627fe40624bd33b07d52fd8fe">&#9670;&#160;</a></span>UA_CHECK_FATAL</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define UA_CHECK_MEM_WARN</td>
+          <td class="memname">#define UA_CHECK_FATAL</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">PTR, </td>
+          <td class="paramname">A, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -778,58 +832,26 @@ Functions</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td>&#160;&#160;&#160;    <a class="el" href="ua__util__internal_8h.html#a273fd37bc8fedce6d53e7d0bf2be78bb">UA_MACRO_EXPAND</a>(<a class="el" href="ua__util__internal_8h.html#a27b0945aa9d61fa2e9f5b80101c0c6ec">UA_CHECK_LOG</a>(A, EVAL, FATAL, LOGGER, CAT, __VA_ARGS__))</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="ua__util__internal_8h.html#a273fd37bc8fedce6d53e7d0bf2be78bb">UA_MACRO_EXPAND</a>(                                                                     \</div>
-<div class="line">        <a class="code hl_define" href="ua__util__internal_8h.html#a519932d114c1e608f7832242f75626af">UA_CHECK_MEM_LOG</a>(PTR, EVAL, WARNING, LOGGER, CAT, __VA_ARGS__))</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00180">180</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00152">152</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
 
 </div>
 </div>
-<a id="adbc23bcd2bde97e0bc33176567bde6a6" name="adbc23bcd2bde97e0bc33176567bde6a6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adbc23bcd2bde97e0bc33176567bde6a6">&#9670;&#160;</a></span>UA_CHECK_STATUS</h2>
+<a id="a4f466d0e74b727de6b33933a1a879c17" name="a4f466d0e74b727de6b33933a1a879c17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f466d0e74b727de6b33933a1a879c17">&#9670;&#160;</a></span>UA_CHECK_ERROR</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define UA_CHECK_STATUS</td>
+          <td class="memname">#define UA_CHECK_ERROR</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">STATUSCODE, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">EVAL_ON_ERROR&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;    <a class="el" href="ua__util__internal_8h.html#a5d01b16c55a86289dd9072b1cf2c075d">UA_CHECK</a>(isGood(STATUSCODE), EVAL_ON_ERROR)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00117">117</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
-
-</div>
-</div>
-<a id="abfcb6ef8fa29356d2c2dd1681c75d5c5" name="abfcb6ef8fa29356d2c2dd1681c75d5c5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abfcb6ef8fa29356d2c2dd1681c75d5c5">&#9670;&#160;</a></span>UA_CHECK_STATUS_ERROR</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_CHECK_STATUS_ERROR</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">STATUSCODE, </td>
+          <td class="paramname">A, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -858,15 +880,108 @@ Functions</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td>&#160;&#160;&#160;    <a class="el" href="ua__util__internal_8h.html#a273fd37bc8fedce6d53e7d0bf2be78bb">UA_MACRO_EXPAND</a>(<a class="el" href="ua__util__internal_8h.html#a27b0945aa9d61fa2e9f5b80101c0c6ec">UA_CHECK_LOG</a>(A, EVAL, ERROR, LOGGER, CAT, __VA_ARGS__))</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="ua__util__internal_8h.html#a273fd37bc8fedce6d53e7d0bf2be78bb">UA_MACRO_EXPAND</a>(                                                                     \</div>
-<div class="line">        <a class="code hl_define" href="ua__util__internal_8h.html#a1e5c6ddb1755de939858aeb61ba3b7f7">UA_CHECK_STATUS_LOG</a>(STATUSCODE, EVAL, ERROR, LOGGER, CAT, __VA_ARGS__))</div>
-<div class="ttc" id="aua__util__internal_8h_html_a1e5c6ddb1755de939858aeb61ba3b7f7"><div class="ttname"><a href="ua__util__internal_8h.html#a1e5c6ddb1755de939858aeb61ba3b7f7">UA_CHECK_STATUS_LOG</a></div><div class="ttdeci">#define UA_CHECK_STATUS_LOG(STATUSCODE, EVAL, LEVEL, LOGGER, CAT,...)</div><div class="ttdef"><b>Definition</b> <a href="ua__util__internal_8h_source.html#l00141">ua_util_internal.h:141</a></div></div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00164">164</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00154">154</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
+
+</div>
+</div>
+<a id="a2611c7847c4be8483381502f7a758816" name="a2611c7847c4be8483381502f7a758816"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2611c7847c4be8483381502f7a758816">&#9670;&#160;</a></span>UA_CHECK_WARN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_CHECK_WARN</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">A, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">EVAL, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">LOGGER, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">CAT, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;    <a class="el" href="ua__util__internal_8h.html#a273fd37bc8fedce6d53e7d0bf2be78bb">UA_MACRO_EXPAND</a>(<a class="el" href="ua__util__internal_8h.html#a27b0945aa9d61fa2e9f5b80101c0c6ec">UA_CHECK_LOG</a>(A, EVAL, WARNING, LOGGER, CAT, __VA_ARGS__))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00156">156</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
+
+</div>
+</div>
+<a id="a31c1db3973bf6f4b0d498922b68e38d3" name="a31c1db3973bf6f4b0d498922b68e38d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a31c1db3973bf6f4b0d498922b68e38d3">&#9670;&#160;</a></span>UA_CHECK_INFO</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_CHECK_INFO</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">A, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">EVAL, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">LOGGER, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">CAT, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;    <a class="el" href="ua__util__internal_8h.html#a273fd37bc8fedce6d53e7d0bf2be78bb">UA_MACRO_EXPAND</a>(<a class="el" href="ua__util__internal_8h.html#a27b0945aa9d61fa2e9f5b80101c0c6ec">UA_CHECK_LOG</a>(A, EVAL, INFO, LOGGER, CAT, __VA_ARGS__))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00158">158</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
 
 </div>
 </div>
@@ -915,19 +1030,20 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="ua__util__internal_8h.html#a273fd37bc8fedce6d53e7d0bf2be78bb">UA_MACRO_EXPAND</a>(                                                                     \</div>
 <div class="line">        <a class="code hl_define" href="ua__util__internal_8h.html#a1e5c6ddb1755de939858aeb61ba3b7f7">UA_CHECK_STATUS_LOG</a>(STATUSCODE, EVAL, FATAL, LOGGER, CAT, __VA_ARGS__))</div>
+<div class="ttc" id="aua__util__internal_8h_html_a1e5c6ddb1755de939858aeb61ba3b7f7"><div class="ttname"><a href="ua__util__internal_8h.html#a1e5c6ddb1755de939858aeb61ba3b7f7">UA_CHECK_STATUS_LOG</a></div><div class="ttdeci">#define UA_CHECK_STATUS_LOG(STATUSCODE, EVAL, LEVEL, LOGGER, CAT,...)</div><div class="ttdef"><b>Definition</b> <a href="ua__util__internal_8h_source.html#l00141">ua_util_internal.h:141</a></div></div>
 </div><!-- fragment -->
 <p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00161">161</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
 
 </div>
 </div>
-<a id="ae6dab5ec2f8ef6cbd8d7f6da0af44ea3" name="ae6dab5ec2f8ef6cbd8d7f6da0af44ea3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae6dab5ec2f8ef6cbd8d7f6da0af44ea3">&#9670;&#160;</a></span>UA_CHECK_STATUS_INFO</h2>
+<a id="abfcb6ef8fa29356d2c2dd1681c75d5c5" name="abfcb6ef8fa29356d2c2dd1681c75d5c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abfcb6ef8fa29356d2c2dd1681c75d5c5">&#9670;&#160;</a></span>UA_CHECK_STATUS_ERROR</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define UA_CHECK_STATUS_INFO</td>
+          <td class="memname">#define UA_CHECK_STATUS_ERROR</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
           <td class="paramname">STATUSCODE, </td>
@@ -964,66 +1080,9 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="ua__util__internal_8h.html#a273fd37bc8fedce6d53e7d0bf2be78bb">UA_MACRO_EXPAND</a>(                                                                     \</div>
-<div class="line">        <a class="code hl_define" href="ua__util__internal_8h.html#a1e5c6ddb1755de939858aeb61ba3b7f7">UA_CHECK_STATUS_LOG</a>(STATUSCODE, EVAL, INFO, LOGGER, CAT, __VA_ARGS__))</div>
+<div class="line">        <a class="code hl_define" href="ua__util__internal_8h.html#a1e5c6ddb1755de939858aeb61ba3b7f7">UA_CHECK_STATUS_LOG</a>(STATUSCODE, EVAL, ERROR, LOGGER, CAT, __VA_ARGS__))</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00170">170</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
-
-</div>
-</div>
-<a id="a1e5c6ddb1755de939858aeb61ba3b7f7" name="a1e5c6ddb1755de939858aeb61ba3b7f7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e5c6ddb1755de939858aeb61ba3b7f7">&#9670;&#160;</a></span>UA_CHECK_STATUS_LOG</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_CHECK_STATUS_LOG</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">STATUSCODE, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">EVAL, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">LEVEL, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">LOGGER, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">CAT, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>...</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="ua__util__internal_8h.html#a273fd37bc8fedce6d53e7d0bf2be78bb">UA_MACRO_EXPAND</a>(<a class="code hl_define" href="ua__util__internal_8h.html#a52b92e52febee804bc40c7a0a63a983b">UA_CHECK_LOG_INTERNAL</a>(isGood(STATUSCODE), STATUSCODE,  \</div>
-<div class="line">                                          EVAL, UA_LOG_##LEVEL, LOGGER, CAT,             \</div>
-<div class="line">                                          __VA_ARGS__, <span class="stringliteral">&quot;&quot;</span>))</div>
-</div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00141">141</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00164">164</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
 
 </div>
 </div>
@@ -1077,17 +1136,17 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a2611c7847c4be8483381502f7a758816" name="a2611c7847c4be8483381502f7a758816"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2611c7847c4be8483381502f7a758816">&#9670;&#160;</a></span>UA_CHECK_WARN</h2>
+<a id="ae6dab5ec2f8ef6cbd8d7f6da0af44ea3" name="ae6dab5ec2f8ef6cbd8d7f6da0af44ea3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6dab5ec2f8ef6cbd8d7f6da0af44ea3">&#9670;&#160;</a></span>UA_CHECK_STATUS_INFO</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define UA_CHECK_WARN</td>
+          <td class="memname">#define UA_CHECK_STATUS_INFO</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">A, </td>
+          <td class="paramname">STATUSCODE, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -1116,12 +1175,215 @@ Functions</h2></td></tr>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td>&#160;&#160;&#160;    <a class="el" href="ua__util__internal_8h.html#a273fd37bc8fedce6d53e7d0bf2be78bb">UA_MACRO_EXPAND</a>(<a class="el" href="ua__util__internal_8h.html#a27b0945aa9d61fa2e9f5b80101c0c6ec">UA_CHECK_LOG</a>(A, EVAL, WARNING, LOGGER, CAT, __VA_ARGS__))</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="ua__util__internal_8h.html#a273fd37bc8fedce6d53e7d0bf2be78bb">UA_MACRO_EXPAND</a>(                                                                     \</div>
+<div class="line">        <a class="code hl_define" href="ua__util__internal_8h.html#a1e5c6ddb1755de939858aeb61ba3b7f7">UA_CHECK_STATUS_LOG</a>(STATUSCODE, EVAL, INFO, LOGGER, CAT, __VA_ARGS__))</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00170">170</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00156">156</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
+</div>
+</div>
+<a id="a1dc8cbf2dcb0ee429ee3a5b472733dcb" name="a1dc8cbf2dcb0ee429ee3a5b472733dcb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1dc8cbf2dcb0ee429ee3a5b472733dcb">&#9670;&#160;</a></span>UA_CHECK_MEM_FATAL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_CHECK_MEM_FATAL</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">PTR, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">EVAL, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">LOGGER, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">CAT, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="ua__util__internal_8h.html#a273fd37bc8fedce6d53e7d0bf2be78bb">UA_MACRO_EXPAND</a>(                                                                     \</div>
+<div class="line">        <a class="code hl_define" href="ua__util__internal_8h.html#a519932d114c1e608f7832242f75626af">UA_CHECK_MEM_LOG</a>(PTR, EVAL, FATAL, LOGGER, CAT, __VA_ARGS__))</div>
+<div class="ttc" id="aua__util__internal_8h_html_a519932d114c1e608f7832242f75626af"><div class="ttname"><a href="ua__util__internal_8h.html#a519932d114c1e608f7832242f75626af">UA_CHECK_MEM_LOG</a></div><div class="ttdeci">#define UA_CHECK_MEM_LOG(PTR, EVAL, LEVEL, LOGGER, CAT,...)</div><div class="ttdef"><b>Definition</b> <a href="ua__util__internal_8h_source.html#l00146">ua_util_internal.h:146</a></div></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00174">174</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
+
+</div>
+</div>
+<a id="ac667900e5ce79bcbb7d9423d9650f617" name="ac667900e5ce79bcbb7d9423d9650f617"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac667900e5ce79bcbb7d9423d9650f617">&#9670;&#160;</a></span>UA_CHECK_MEM_ERROR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_CHECK_MEM_ERROR</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">PTR, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">EVAL, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">LOGGER, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">CAT, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="ua__util__internal_8h.html#a273fd37bc8fedce6d53e7d0bf2be78bb">UA_MACRO_EXPAND</a>(                                                                     \</div>
+<div class="line">        <a class="code hl_define" href="ua__util__internal_8h.html#a519932d114c1e608f7832242f75626af">UA_CHECK_MEM_LOG</a>(PTR, EVAL, ERROR, LOGGER, CAT, __VA_ARGS__))</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00177">177</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
+
+</div>
+</div>
+<a id="aacf3a6512d0eec426687581647eb34ca" name="aacf3a6512d0eec426687581647eb34ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacf3a6512d0eec426687581647eb34ca">&#9670;&#160;</a></span>UA_CHECK_MEM_WARN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_CHECK_MEM_WARN</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">PTR, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">EVAL, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">LOGGER, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">CAT, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="ua__util__internal_8h.html#a273fd37bc8fedce6d53e7d0bf2be78bb">UA_MACRO_EXPAND</a>(                                                                     \</div>
+<div class="line">        <a class="code hl_define" href="ua__util__internal_8h.html#a519932d114c1e608f7832242f75626af">UA_CHECK_MEM_LOG</a>(PTR, EVAL, WARNING, LOGGER, CAT, __VA_ARGS__))</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00180">180</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
+
+</div>
+</div>
+<a id="ad5ae6d9d23a134069d5d591836cd2332" name="ad5ae6d9d23a134069d5d591836cd2332"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5ae6d9d23a134069d5d591836cd2332">&#9670;&#160;</a></span>UA_CHECK_MEM_INFO</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UA_CHECK_MEM_INFO</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">PTR, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">EVAL, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">LOGGER, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">CAT, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="ua__util__internal_8h.html#a273fd37bc8fedce6d53e7d0bf2be78bb">UA_MACRO_EXPAND</a>(                                                                     \</div>
+<div class="line">        <a class="code hl_define" href="ua__util__internal_8h.html#a519932d114c1e608f7832242f75626af">UA_CHECK_MEM_LOG</a>(PTR, EVAL, INFO, LOGGER, CAT, __VA_ARGS__))</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00183">183</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
 
 </div>
 </div>
@@ -1164,7 +1426,6 @@ Functions</h2></td></tr>
 <div class="line">    <span class="keywordflow">return</span> <a class="code hl_function" href="ua__types__encoding__binary_8h.html#adf015ca938eab4b08b7133e17ae87ca4">UA_decodeBinaryInternal</a>(src, offset, dst, \</div>
 <div class="line">                                   &amp;<a class="code hl_variable" href="types__generated_8h.html#aba037b86f18a7b7bceef5c098910c2c7">UA_TYPES</a>[UA_TYPES_##UPCASE_TYPE], NULL); \</div>
 <div class="line">    }</div>
-<div class="ttc" id="astructUA__String_html"><div class="ttname"><a href="structUA__String.html">UA_String</a></div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00114">types.h:114</a></div></div>
 <div class="ttc" id="atypes_8h_html_a01c682f8a091957ce7aaf517f87a2134"><div class="ttname"><a href="types_8h.html#a01c682f8a091957ce7aaf517f87a2134">UA_calcSizeBinary</a></div><div class="ttdeci">UA_EXPORT size_t UA_calcSizeBinary(const void *p, const UA_DataType *type)</div><div class="ttdoc">Returns the number of bytes the value p takes in binary encoding.</div></div>
 <div class="ttc" id="atypes_8h_html_ac31865e6fcb9a042b5eaf5a5bd4ed30d"><div class="ttname"><a href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a></div><div class="ttdeci">uint8_t UA_Byte</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00036">types.h:36</a></div></div>
 <div class="ttc" id="atypes__generated_8h_html_aba037b86f18a7b7bceef5c098910c2c7"><div class="ttname"><a href="types__generated_8h.html#aba037b86f18a7b7bceef5c098910c2c7">UA_TYPES</a></div><div class="ttdeci">const UA_DataType UA_TYPES[191]</div></div>
@@ -1177,396 +1438,7 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa3dce341fe6a38c92ec98243e40ae820" name="aa3dce341fe6a38c92ec98243e40ae820"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa3dce341fe6a38c92ec98243e40ae820">&#9670;&#160;</a></span>UA_INTERNAL</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_INTERNAL</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>This Source Code Form is subject to the terms of the Mozilla Public License, v. </p>
-<p>2.0. If a copy of the MPL was not distributed with this file, You can obtain one at <a href="http://mozilla.org/MPL/2.0/">http://mozilla.org/MPL/2.0/</a>.</p>
-<p>Copyright 2014-2017 (c) Fraunhofer IOSB (Author: Julius Pfrommer) Copyright 2014, 2017 (c) Florian Palm Copyright 2015 (c) LEvertz Copyright 2015-2016 (c) Sten Grüner Copyright 2015 (c) Chris Iatrou Copyright 2015-2016 (c) Oleksiy Vasylyev Copyright 2017 (c) Stefan Profanter, fortiss GmbH Copyright 2021 (c) Fraunhofer IOSB (Author: Jan Hermes) </p>
-
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00018">18</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
-
-</div>
-</div>
-<a id="ae02e1eb78c13032a0f3ac1a6b7fe2729" name="ae02e1eb78c13032a0f3ac1a6b7fe2729"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae02e1eb78c13032a0f3ac1a6b7fe2729">&#9670;&#160;</a></span>UA_LOG_NODEID_DEBUG</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_LOG_NODEID_DEBUG</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">NODEID, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">LOG&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;    <a class="el" href="ua__util__internal_8h.html#a1f34e0cd8cfcdc24c0868b4c8e8449d6">UA_LOG_NODEID_INTERNAL</a>(NODEID, LOG)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00047">47</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
-
-</div>
-</div>
-<a id="a6b742378e94a51314e19dbe33a15a094" name="a6b742378e94a51314e19dbe33a15a094"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b742378e94a51314e19dbe33a15a094">&#9670;&#160;</a></span>UA_LOG_NODEID_ERROR</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_LOG_NODEID_ERROR</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">NODEID, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">LOG&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;    <a class="el" href="ua__util__internal_8h.html#a1f34e0cd8cfcdc24c0868b4c8e8449d6">UA_LOG_NODEID_INTERNAL</a>(NODEID, LOG)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00068">68</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
-
-</div>
-</div>
-<a id="a76dd866cd4170f4c21ed90cf3555bd41" name="a76dd866cd4170f4c21ed90cf3555bd41"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76dd866cd4170f4c21ed90cf3555bd41">&#9670;&#160;</a></span>UA_LOG_NODEID_FATAL</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_LOG_NODEID_FATAL</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">NODEID, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">LOG&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;    <a class="el" href="ua__util__internal_8h.html#a1f34e0cd8cfcdc24c0868b4c8e8449d6">UA_LOG_NODEID_INTERNAL</a>(NODEID, LOG)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00075">75</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
-
-</div>
-</div>
-<a id="a634e6e345c005895a6d60793c22e49d9" name="a634e6e345c005895a6d60793c22e49d9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a634e6e345c005895a6d60793c22e49d9">&#9670;&#160;</a></span>UA_LOG_NODEID_INFO</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_LOG_NODEID_INFO</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">NODEID, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">LOG&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;    <a class="el" href="ua__util__internal_8h.html#a1f34e0cd8cfcdc24c0868b4c8e8449d6">UA_LOG_NODEID_INTERNAL</a>(NODEID, LOG)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00054">54</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
-
-</div>
-</div>
-<a id="a1f34e0cd8cfcdc24c0868b4c8e8449d6" name="a1f34e0cd8cfcdc24c0868b4c8e8449d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f34e0cd8cfcdc24c0868b4c8e8449d6">&#9670;&#160;</a></span>UA_LOG_NODEID_INTERNAL</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_LOG_NODEID_INTERNAL</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">NODEID, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">LOG&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">    <span class="keywordflow">do</span> {                                             \</div>
-<div class="line">    <a class="code hl_struct" href="structUA__String.html">UA_String</a> nodeIdStr = <a class="code hl_variable" href="types_8h.html#add6877cdf12368c808b31e46e2c01df7">UA_STRING_NULL</a>;            \</div>
-<div class="line">    UA_NodeId_print(NODEID, &amp;nodeIdStr);             \</div>
-<div class="line">    LOG;                                             \</div>
-<div class="line">    UA_String_clear(&amp;nodeIdStr);                     \</div>
-<div class="line">    } <span class="keywordflow">while</span>(0)</div>
-<div class="ttc" id="atypes_8h_html_add6877cdf12368c808b31e46e2c01df7"><div class="ttname"><a href="types_8h.html#add6877cdf12368c808b31e46e2c01df7">UA_STRING_NULL</a></div><div class="ttdeci">UA_EXPORT const UA_String UA_STRING_NULL</div></div>
-</div><!-- fragment -->
-<p>Print a NodeId in logs. </p>
-
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00031">31</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
-
-</div>
-</div>
-<a id="a17e5c8fc9d31a5b419c20c6249466226" name="a17e5c8fc9d31a5b419c20c6249466226"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a17e5c8fc9d31a5b419c20c6249466226">&#9670;&#160;</a></span>UA_LOG_NODEID_TRACE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_LOG_NODEID_TRACE</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">NODEID, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">LOG&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;    <a class="el" href="ua__util__internal_8h.html#a1f34e0cd8cfcdc24c0868b4c8e8449d6">UA_LOG_NODEID_INTERNAL</a>(NODEID, LOG)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00040">40</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
-
-</div>
-</div>
-<a id="a01ff9eeb19108b88de90fcfa83b713fa" name="a01ff9eeb19108b88de90fcfa83b713fa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a01ff9eeb19108b88de90fcfa83b713fa">&#9670;&#160;</a></span>UA_LOG_NODEID_WARNING</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_LOG_NODEID_WARNING</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">NODEID, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">LOG&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td>&#160;&#160;&#160;    <a class="el" href="ua__util__internal_8h.html#a1f34e0cd8cfcdc24c0868b4c8e8449d6">UA_LOG_NODEID_INTERNAL</a>(NODEID, LOG)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00061">61</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
-
-</div>
-</div>
-<a id="a273fd37bc8fedce6d53e7d0bf2be78bb" name="a273fd37bc8fedce6d53e7d0bf2be78bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a273fd37bc8fedce6d53e7d0bf2be78bb">&#9670;&#160;</a></span>UA_MACRO_EXPAND</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define UA_MACRO_EXPAND</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">x</td><td>)</td>
-          <td>&#160;&#160;&#160;x</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Macro-Expand for MSVC workarounds. </p>
-
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00028">28</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
-
-</div>
-</div>
 <h2 class="groupheader">Typedef Documentation</h2>
-<a id="aebef1ee89a24da974f65db31c31fcc8a" name="aebef1ee89a24da974f65db31c31fcc8a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aebef1ee89a24da974f65db31c31fcc8a">&#9670;&#160;</a></span>i16</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="types_8h.html#a2dfa954c25e6984956ab6fa8e8fd73db">UA_Int16</a> <a class="el" href="ua__util__internal_8h.html#aebef1ee89a24da974f65db31c31fcc8a">i16</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00086">86</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
-
-</div>
-</div>
-<a id="a3d1fa3e377f5089c20c06ec27d71f11c" name="a3d1fa3e377f5089c20c06ec27d71f11c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3d1fa3e377f5089c20c06ec27d71f11c">&#9670;&#160;</a></span>i32</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="types_8h.html#a01ce3c3b2fb34ef81c97c313f516004e">UA_Int32</a> <a class="el" href="ua__util__internal_8h.html#a3d1fa3e377f5089c20c06ec27d71f11c">i32</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00088">88</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
-
-</div>
-</div>
-<a id="a96f0549d97c2de62503ab404c55fe974" name="a96f0549d97c2de62503ab404c55fe974"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a96f0549d97c2de62503ab404c55fe974">&#9670;&#160;</a></span>i64</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="types_8h.html#ae5c13df54009d7a3e374bfc594af8059">UA_Int64</a> <a class="el" href="ua__util__internal_8h.html#a96f0549d97c2de62503ab404c55fe974">i64</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00090">90</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
-
-</div>
-</div>
-<a id="a438c7fe1be183dd409864e35be77ee3a" name="a438c7fe1be183dd409864e35be77ee3a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a438c7fe1be183dd409864e35be77ee3a">&#9670;&#160;</a></span>i8</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="types_8h.html#a4ba04733a2525e207fa5ea5337ad17f3">UA_SByte</a> <a class="el" href="ua__util__internal_8h.html#a438c7fe1be183dd409864e35be77ee3a">i8</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00084">84</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
-
-</div>
-</div>
-<a id="ad560a5dcac947428b046c21c5ff5f97b" name="ad560a5dcac947428b046c21c5ff5f97b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad560a5dcac947428b046c21c5ff5f97b">&#9670;&#160;</a></span>status</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00091">91</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
-
-</div>
-</div>
-<a id="a87e798d80f950196077a616b6793c07d" name="a87e798d80f950196077a616b6793c07d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a87e798d80f950196077a616b6793c07d">&#9670;&#160;</a></span>u16</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a> <a class="el" href="ua__util__internal_8h.html#a87e798d80f950196077a616b6793c07d">u16</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00085">85</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
-
-</div>
-</div>
-<a id="af5c0afad7fc290a3048610a6f675b0e6" name="af5c0afad7fc290a3048610a6f675b0e6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af5c0afad7fc290a3048610a6f675b0e6">&#9670;&#160;</a></span>u32</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> <a class="el" href="ua__util__internal_8h.html#af5c0afad7fc290a3048610a6f675b0e6">u32</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00087">87</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
-
-</div>
-</div>
-<a id="a76295917e21176b955a65e57f1e2d3e1" name="a76295917e21176b955a65e57f1e2d3e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a76295917e21176b955a65e57f1e2d3e1">&#9670;&#160;</a></span>u64</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef <a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a> <a class="el" href="ua__util__internal_8h.html#a76295917e21176b955a65e57f1e2d3e1">u64</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00089">89</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
-
-</div>
-</div>
 <a id="a4815c48446777685ba3c51cfec5e2cfc" name="a4815c48446777685ba3c51cfec5e2cfc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4815c48446777685ba3c51cfec5e2cfc">&#9670;&#160;</a></span>u8</h2>
 
@@ -1586,27 +1458,135 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="afe517b7bcaceb4d38374da48ad616409" name="afe517b7bcaceb4d38374da48ad616409"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe517b7bcaceb4d38374da48ad616409">&#9670;&#160;</a></span>getCountOfOptionalFields()</h2>
+<a id="a438c7fe1be183dd409864e35be77ee3a" name="a438c7fe1be183dd409864e35be77ee3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a438c7fe1be183dd409864e35be77ee3a">&#9670;&#160;</a></span>i8</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t getCountOfOptionalFields </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>type</em></td><td>)</td>
-          <td></td>
+          <td class="memname">typedef <a class="el" href="types_8h.html#a4ba04733a2525e207fa5ea5337ad17f3">UA_SByte</a> <a class="el" href="ua__util__internal_8h.html#a438c7fe1be183dd409864e35be77ee3a">i8</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get the number of optional fields contained in an structure type. </p>
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00084">84</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
 
 </div>
 </div>
+<a id="a87e798d80f950196077a616b6793c07d" name="a87e798d80f950196077a616b6793c07d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87e798d80f950196077a616b6793c07d">&#9670;&#160;</a></span>u16</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a> <a class="el" href="ua__util__internal_8h.html#a87e798d80f950196077a616b6793c07d">u16</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00085">85</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
+
+</div>
+</div>
+<a id="aebef1ee89a24da974f65db31c31fcc8a" name="aebef1ee89a24da974f65db31c31fcc8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebef1ee89a24da974f65db31c31fcc8a">&#9670;&#160;</a></span>i16</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="types_8h.html#a2dfa954c25e6984956ab6fa8e8fd73db">UA_Int16</a> <a class="el" href="ua__util__internal_8h.html#aebef1ee89a24da974f65db31c31fcc8a">i16</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00086">86</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
+
+</div>
+</div>
+<a id="af5c0afad7fc290a3048610a6f675b0e6" name="af5c0afad7fc290a3048610a6f675b0e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5c0afad7fc290a3048610a6f675b0e6">&#9670;&#160;</a></span>u32</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> <a class="el" href="ua__util__internal_8h.html#af5c0afad7fc290a3048610a6f675b0e6">u32</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00087">87</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
+
+</div>
+</div>
+<a id="a3d1fa3e377f5089c20c06ec27d71f11c" name="a3d1fa3e377f5089c20c06ec27d71f11c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d1fa3e377f5089c20c06ec27d71f11c">&#9670;&#160;</a></span>i32</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="types_8h.html#a01ce3c3b2fb34ef81c97c313f516004e">UA_Int32</a> <a class="el" href="ua__util__internal_8h.html#a3d1fa3e377f5089c20c06ec27d71f11c">i32</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00088">88</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
+
+</div>
+</div>
+<a id="a76295917e21176b955a65e57f1e2d3e1" name="a76295917e21176b955a65e57f1e2d3e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76295917e21176b955a65e57f1e2d3e1">&#9670;&#160;</a></span>u64</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a> <a class="el" href="ua__util__internal_8h.html#a76295917e21176b955a65e57f1e2d3e1">u64</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00089">89</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
+
+</div>
+</div>
+<a id="a96f0549d97c2de62503ab404c55fe974" name="a96f0549d97c2de62503ab404c55fe974"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96f0549d97c2de62503ab404c55fe974">&#9670;&#160;</a></span>i64</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="types_8h.html#ae5c13df54009d7a3e374bfc594af8059">UA_Int64</a> <a class="el" href="ua__util__internal_8h.html#a96f0549d97c2de62503ab404c55fe974">i64</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00090">90</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
+
+</div>
+</div>
+<a id="ad560a5dcac947428b046c21c5ff5f97b" name="ad560a5dcac947428b046c21c5ff5f97b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad560a5dcac947428b046c21c5ff5f97b">&#9670;&#160;</a></span>status</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ua__util__internal_8h_source.html#l00091">91</a> of file <a class="el" href="ua__util__internal_8h_source.html">ua_util_internal.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
 <a id="a7a5947b0c847ffc83ccef7b7eb8383a4" name="a7a5947b0c847ffc83ccef7b7eb8383a4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7a5947b0c847ffc83ccef7b7eb8383a4">&#9670;&#160;</a></span>UA_findDataTypeWithCustom()</h2>
 
@@ -1632,6 +1612,26 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="afe517b7bcaceb4d38374da48ad616409" name="afe517b7bcaceb4d38374da48ad616409"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe517b7bcaceb4d38374da48ad616409">&#9670;&#160;</a></span>getCountOfOptionalFields()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t getCountOfOptionalFields </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the number of optional fields contained in an structure type. </p>
 
 </div>
 </div>

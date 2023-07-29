@@ -244,6 +244,22 @@ Functions</h2></td></tr>
 <tr class="separator:a325eeac7ab4873de8850f4e6af4dce01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a50781ed232e8fd19a071d07566579974" name="a50781ed232e8fd19a071d07566579974"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50781ed232e8fd19a071d07566579974">&#9670;&#160;</a></span>MQTT_PROTOCOL_LEVEL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MQTT_PROTOCOL_LEVEL&#160;&#160;&#160;0x04</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="mqtt_8h_source.html#l00080">80</a> of file <a class="el" href="mqtt_8h_source.html">mqtt.h</a>.</p>
+
+</div>
+</div>
 <a id="a86c09e2666bd14722fa165ed904f78cb" name="a86c09e2666bd14722fa165ed904f78cb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a86c09e2666bd14722fa165ed904f78cb">&#9670;&#160;</a></span>__ALL_MQTT_ERRORS</h2>
 
@@ -320,26 +336,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a9f3be391755b744ee33832caf82b9749" name="a9f3be391755b744ee33832caf82b9749"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9f3be391755b744ee33832caf82b9749">&#9670;&#160;</a></span>__mqtt_packed_cstrlen</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define __mqtt_packed_cstrlen</td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname">x</td><td>)</td>
-          <td>&#160;&#160;&#160;(2 + (unsigned int)strlen(x))</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="mqtt_8h_source.html#l00142">142</a> of file <a class="el" href="mqtt_8h_source.html">mqtt.h</a>.</p>
-
-</div>
-</div>
 <a id="aed8760364c7992625d06c93d12b2496d" name="aed8760364c7992625d06c93d12b2496d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aed8760364c7992625d06c93d12b2496d">&#9670;&#160;</a></span>GENERATE_ENUM</h2>
 
@@ -382,23 +378,55 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a8cd873da2116975ce39b313f93068d83" name="a8cd873da2116975ce39b313f93068d83"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8cd873da2116975ce39b313f93068d83">&#9670;&#160;</a></span>mqtt_mq_currsz</h2>
+<a id="a9f3be391755b744ee33832caf82b9749" name="a9f3be391755b744ee33832caf82b9749"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f3be391755b744ee33832caf82b9749">&#9670;&#160;</a></span>__mqtt_packed_cstrlen</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define mqtt_mq_currsz</td>
+          <td class="memname">#define __mqtt_packed_cstrlen</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">mq_ptr</td><td>)</td>
-          <td>&#160;&#160;&#160;(mq_ptr-&gt;curr &gt;= (uint8_t*) ((mq_ptr)-&gt;queue_tail - 1)) ? 0 : ((uint8_t*) ((mq_ptr)-&gt;queue_tail - 1)) - (mq_ptr)-&gt;curr</td>
+          <td class="paramname">x</td><td>)</td>
+          <td>&#160;&#160;&#160;(2 + (unsigned int)strlen(x))</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mqtt_8h_source.html#l00425">425</a> of file <a class="el" href="mqtt_8h_source.html">mqtt.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mqtt_8h_source.html#l00142">142</a> of file <a class="el" href="mqtt_8h_source.html">mqtt.h</a>.</p>
+
+</div>
+</div>
+<a id="a6501874871fce6b65d972430afa64fb8" name="a6501874871fce6b65d972430afa64fb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6501874871fce6b65d972430afa64fb8">&#9670;&#160;</a></span>MQTT_SUBSCRIBE_REQUEST_MAX_NUM_TOPICS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MQTT_SUBSCRIBE_REQUEST_MAX_NUM_TOPICS&#160;&#160;&#160;8</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="mqtt_8h_source.html#l00337">337</a> of file <a class="el" href="mqtt_8h_source.html">mqtt.h</a>.</p>
+
+</div>
+</div>
+<a id="aff4017b7a1668b6ad6e0d006d0fdf10e" name="aff4017b7a1668b6ad6e0d006d0fdf10e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff4017b7a1668b6ad6e0d006d0fdf10e">&#9670;&#160;</a></span>MQTT_UNSUBSCRIBE_REQUEST_MAX_NUM_TOPICS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MQTT_UNSUBSCRIBE_REQUEST_MAX_NUM_TOPICS&#160;&#160;&#160;8</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="mqtt_8h_source.html#l00345">345</a> of file <a class="el" href="mqtt_8h_source.html">mqtt.h</a>.</p>
 
 </div>
 </div>
@@ -452,108 +480,27 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a50781ed232e8fd19a071d07566579974" name="a50781ed232e8fd19a071d07566579974"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a50781ed232e8fd19a071d07566579974">&#9670;&#160;</a></span>MQTT_PROTOCOL_LEVEL</h2>
+<a id="a8cd873da2116975ce39b313f93068d83" name="a8cd873da2116975ce39b313f93068d83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cd873da2116975ce39b313f93068d83">&#9670;&#160;</a></span>mqtt_mq_currsz</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define MQTT_PROTOCOL_LEVEL&#160;&#160;&#160;0x04</td>
+          <td class="memname">#define mqtt_mq_currsz</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">mq_ptr</td><td>)</td>
+          <td>&#160;&#160;&#160;(mq_ptr-&gt;curr &gt;= (uint8_t*) ((mq_ptr)-&gt;queue_tail - 1)) ? 0 : ((uint8_t*) ((mq_ptr)-&gt;queue_tail - 1)) - (mq_ptr)-&gt;curr</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mqtt_8h_source.html#l00080">80</a> of file <a class="el" href="mqtt_8h_source.html">mqtt.h</a>.</p>
-
-</div>
-</div>
-<a id="a6501874871fce6b65d972430afa64fb8" name="a6501874871fce6b65d972430afa64fb8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6501874871fce6b65d972430afa64fb8">&#9670;&#160;</a></span>MQTT_SUBSCRIBE_REQUEST_MAX_NUM_TOPICS</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define MQTT_SUBSCRIBE_REQUEST_MAX_NUM_TOPICS&#160;&#160;&#160;8</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="mqtt_8h_source.html#l00337">337</a> of file <a class="el" href="mqtt_8h_source.html">mqtt.h</a>.</p>
-
-</div>
-</div>
-<a id="aff4017b7a1668b6ad6e0d006d0fdf10e" name="aff4017b7a1668b6ad6e0d006d0fdf10e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aff4017b7a1668b6ad6e0d006d0fdf10e">&#9670;&#160;</a></span>MQTT_UNSUBSCRIBE_REQUEST_MAX_NUM_TOPICS</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define MQTT_UNSUBSCRIBE_REQUEST_MAX_NUM_TOPICS&#160;&#160;&#160;8</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="mqtt_8h_source.html#l00345">345</a> of file <a class="el" href="mqtt_8h_source.html">mqtt.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mqtt_8h_source.html#l00425">425</a> of file <a class="el" href="mqtt_8h_source.html">mqtt.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="a07e480dfa5738e60c54ad0447ddb1a25" name="a07e480dfa5738e60c54ad0447ddb1a25"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a07e480dfa5738e60c54ad0447ddb1a25">&#9670;&#160;</a></span>MQTTConnackReturnCode</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="mqtt_8h.html#a07e480dfa5738e60c54ad0447ddb1a25">MQTTConnackReturnCode</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>RESPONSES. </p>
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a07e480dfa5738e60c54ad0447ddb1a25a8ed62964c597ddea739324ac904e423a" name="a07e480dfa5738e60c54ad0447ddb1a25a8ed62964c597ddea739324ac904e423a"></a>MQTT_CONNACK_ACCEPTED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a07e480dfa5738e60c54ad0447ddb1a25a6630a3751629a3bffa7c4d10255942cc" name="a07e480dfa5738e60c54ad0447ddb1a25a6630a3751629a3bffa7c4d10255942cc"></a>MQTT_CONNACK_REFUSED_PROTOCOL_VERSION&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a07e480dfa5738e60c54ad0447ddb1a25a008fd8f71e743057757dcb06ddbfdaef" name="a07e480dfa5738e60c54ad0447ddb1a25a008fd8f71e743057757dcb06ddbfdaef"></a>MQTT_CONNACK_REFUSED_IDENTIFIER_REJECTED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a07e480dfa5738e60c54ad0447ddb1a25ab8f59dfc09af88dd3099932b25123e61" name="a07e480dfa5738e60c54ad0447ddb1a25ab8f59dfc09af88dd3099932b25123e61"></a>MQTT_CONNACK_REFUSED_SERVER_UNAVAILABLE&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a07e480dfa5738e60c54ad0447ddb1a25aa4ff9b812e7b4ba789bc55ee5e6da622" name="a07e480dfa5738e60c54ad0447ddb1a25aa4ff9b812e7b4ba789bc55ee5e6da622"></a>MQTT_CONNACK_REFUSED_BAD_USER_NAME_OR_PASSWORD&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a07e480dfa5738e60c54ad0447ddb1a25a4a231c1d42dfd20e926b3f5deafc04bf" name="a07e480dfa5738e60c54ad0447ddb1a25a4a231c1d42dfd20e926b3f5deafc04bf"></a>MQTT_CONNACK_REFUSED_NOT_AUTHORIZED&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-<p class="definition">Definition at line <a class="el" href="mqtt_8h_source.html#l00147">147</a> of file <a class="el" href="mqtt_8h_source.html">mqtt.h</a>.</p>
-
-</div>
-</div>
-<a id="ad6fa84a96a940fe4eae6ffca1a6d945f" name="ad6fa84a96a940fe4eae6ffca1a6d945f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad6fa84a96a940fe4eae6ffca1a6d945f">&#9670;&#160;</a></span>MQTTConnectFlags</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="mqtt_8h.html#ad6fa84a96a940fe4eae6ffca1a6d945f">MQTTConnectFlags</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ad6fa84a96a940fe4eae6ffca1a6d945fabdfc545bcb1ec20ed77cbb817fad6c0f" name="ad6fa84a96a940fe4eae6ffca1a6d945fabdfc545bcb1ec20ed77cbb817fad6c0f"></a>MQTT_CONNECT_RESERVED&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ad6fa84a96a940fe4eae6ffca1a6d945fa7b8e672215d48bd2b5895f816dc656f0" name="ad6fa84a96a940fe4eae6ffca1a6d945fa7b8e672215d48bd2b5895f816dc656f0"></a>MQTT_CONNECT_CLEAN_SESSION&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ad6fa84a96a940fe4eae6ffca1a6d945faee6c4a1be1fa545ecff8654f34241574" name="ad6fa84a96a940fe4eae6ffca1a6d945faee6c4a1be1fa545ecff8654f34241574"></a>MQTT_CONNECT_WILL_FLAG&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ad6fa84a96a940fe4eae6ffca1a6d945fa59ea6cf8b44ba699439cca9d2510bcf5" name="ad6fa84a96a940fe4eae6ffca1a6d945fa59ea6cf8b44ba699439cca9d2510bcf5"></a>MQTT_CONNECT_WILL_QOS_0&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ad6fa84a96a940fe4eae6ffca1a6d945fae686c05071db5ba9662e83b8aea0a562" name="ad6fa84a96a940fe4eae6ffca1a6d945fae686c05071db5ba9662e83b8aea0a562"></a>MQTT_CONNECT_WILL_QOS_1&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ad6fa84a96a940fe4eae6ffca1a6d945fac08adc0bc69a367162b6109952a632c6" name="ad6fa84a96a940fe4eae6ffca1a6d945fac08adc0bc69a367162b6109952a632c6"></a>MQTT_CONNECT_WILL_QOS_2&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ad6fa84a96a940fe4eae6ffca1a6d945fa0059d93efdf00ab05fde33f85cb80921" name="ad6fa84a96a940fe4eae6ffca1a6d945fa0059d93efdf00ab05fde33f85cb80921"></a>MQTT_CONNECT_WILL_RETAIN&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ad6fa84a96a940fe4eae6ffca1a6d945fa0e87378997e56c672e9b4087b0b59842" name="ad6fa84a96a940fe4eae6ffca1a6d945fa0e87378997e56c672e9b4087b0b59842"></a>MQTT_CONNECT_PASSWORD&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="ad6fa84a96a940fe4eae6ffca1a6d945fab9935021bbd3ed4b33e78f103c21660d" name="ad6fa84a96a940fe4eae6ffca1a6d945fab9935021bbd3ed4b33e78f103c21660d"></a>MQTT_CONNECT_USER_NAME&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-<p class="definition">Definition at line <a class="el" href="mqtt_8h_source.html#l00290">290</a> of file <a class="el" href="mqtt_8h_source.html">mqtt.h</a>.</p>
-
-</div>
-</div>
 <a id="acbd36b88ec7f62bc161b07e1a0aed679" name="acbd36b88ec7f62bc161b07e1a0aed679"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acbd36b88ec7f62bc161b07e1a0aed679">&#9670;&#160;</a></span>MQTTControlPacketType</h2>
 
@@ -634,6 +581,81 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a07e480dfa5738e60c54ad0447ddb1a25" name="a07e480dfa5738e60c54ad0447ddb1a25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07e480dfa5738e60c54ad0447ddb1a25">&#9670;&#160;</a></span>MQTTConnackReturnCode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="mqtt_8h.html#a07e480dfa5738e60c54ad0447ddb1a25">MQTTConnackReturnCode</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>RESPONSES. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a07e480dfa5738e60c54ad0447ddb1a25a8ed62964c597ddea739324ac904e423a" name="a07e480dfa5738e60c54ad0447ddb1a25a8ed62964c597ddea739324ac904e423a"></a>MQTT_CONNACK_ACCEPTED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a07e480dfa5738e60c54ad0447ddb1a25a6630a3751629a3bffa7c4d10255942cc" name="a07e480dfa5738e60c54ad0447ddb1a25a6630a3751629a3bffa7c4d10255942cc"></a>MQTT_CONNACK_REFUSED_PROTOCOL_VERSION&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a07e480dfa5738e60c54ad0447ddb1a25a008fd8f71e743057757dcb06ddbfdaef" name="a07e480dfa5738e60c54ad0447ddb1a25a008fd8f71e743057757dcb06ddbfdaef"></a>MQTT_CONNACK_REFUSED_IDENTIFIER_REJECTED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a07e480dfa5738e60c54ad0447ddb1a25ab8f59dfc09af88dd3099932b25123e61" name="a07e480dfa5738e60c54ad0447ddb1a25ab8f59dfc09af88dd3099932b25123e61"></a>MQTT_CONNACK_REFUSED_SERVER_UNAVAILABLE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a07e480dfa5738e60c54ad0447ddb1a25aa4ff9b812e7b4ba789bc55ee5e6da622" name="a07e480dfa5738e60c54ad0447ddb1a25aa4ff9b812e7b4ba789bc55ee5e6da622"></a>MQTT_CONNACK_REFUSED_BAD_USER_NAME_OR_PASSWORD&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a07e480dfa5738e60c54ad0447ddb1a25a4a231c1d42dfd20e926b3f5deafc04bf" name="a07e480dfa5738e60c54ad0447ddb1a25a4a231c1d42dfd20e926b3f5deafc04bf"></a>MQTT_CONNACK_REFUSED_NOT_AUTHORIZED&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="mqtt_8h_source.html#l00147">147</a> of file <a class="el" href="mqtt_8h_source.html">mqtt.h</a>.</p>
+
+</div>
+</div>
+<a id="a2d626b05e589a148ce2e9e97f41302ae" name="a2d626b05e589a148ce2e9e97f41302ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d626b05e589a148ce2e9e97f41302ae">&#9670;&#160;</a></span>MQTTSubackReturnCodes</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="mqtt_8h.html#a2d626b05e589a148ce2e9e97f41302ae">MQTTSubackReturnCodes</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a2d626b05e589a148ce2e9e97f41302aea1bbe099b18a7f0ed878ebb0a60e1210a" name="a2d626b05e589a148ce2e9e97f41302aea1bbe099b18a7f0ed878ebb0a60e1210a"></a>MQTT_SUBACK_SUCCESS_MAX_QOS_0&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2d626b05e589a148ce2e9e97f41302aeadf939e22b959e88c15e3c6bab55967d8" name="a2d626b05e589a148ce2e9e97f41302aeadf939e22b959e88c15e3c6bab55967d8"></a>MQTT_SUBACK_SUCCESS_MAX_QOS_1&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2d626b05e589a148ce2e9e97f41302aea1c6c926f38967dfe73d4ecfbeb495288" name="a2d626b05e589a148ce2e9e97f41302aea1c6c926f38967dfe73d4ecfbeb495288"></a>MQTT_SUBACK_SUCCESS_MAX_QOS_2&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a2d626b05e589a148ce2e9e97f41302aea08b9651ef43ea219f29125fcb43952f7" name="a2d626b05e589a148ce2e9e97f41302aea08b9651ef43ea219f29125fcb43952f7"></a>MQTT_SUBACK_FAILURE&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="mqtt_8h_source.html#l00217">217</a> of file <a class="el" href="mqtt_8h_source.html">mqtt.h</a>.</p>
+
+</div>
+</div>
+<a id="ad6fa84a96a940fe4eae6ffca1a6d945f" name="ad6fa84a96a940fe4eae6ffca1a6d945f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6fa84a96a940fe4eae6ffca1a6d945f">&#9670;&#160;</a></span>MQTTConnectFlags</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="mqtt_8h.html#ad6fa84a96a940fe4eae6ffca1a6d945f">MQTTConnectFlags</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ad6fa84a96a940fe4eae6ffca1a6d945fabdfc545bcb1ec20ed77cbb817fad6c0f" name="ad6fa84a96a940fe4eae6ffca1a6d945fabdfc545bcb1ec20ed77cbb817fad6c0f"></a>MQTT_CONNECT_RESERVED&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad6fa84a96a940fe4eae6ffca1a6d945fa7b8e672215d48bd2b5895f816dc656f0" name="ad6fa84a96a940fe4eae6ffca1a6d945fa7b8e672215d48bd2b5895f816dc656f0"></a>MQTT_CONNECT_CLEAN_SESSION&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad6fa84a96a940fe4eae6ffca1a6d945faee6c4a1be1fa545ecff8654f34241574" name="ad6fa84a96a940fe4eae6ffca1a6d945faee6c4a1be1fa545ecff8654f34241574"></a>MQTT_CONNECT_WILL_FLAG&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad6fa84a96a940fe4eae6ffca1a6d945fa59ea6cf8b44ba699439cca9d2510bcf5" name="ad6fa84a96a940fe4eae6ffca1a6d945fa59ea6cf8b44ba699439cca9d2510bcf5"></a>MQTT_CONNECT_WILL_QOS_0&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad6fa84a96a940fe4eae6ffca1a6d945fae686c05071db5ba9662e83b8aea0a562" name="ad6fa84a96a940fe4eae6ffca1a6d945fae686c05071db5ba9662e83b8aea0a562"></a>MQTT_CONNECT_WILL_QOS_1&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad6fa84a96a940fe4eae6ffca1a6d945fac08adc0bc69a367162b6109952a632c6" name="ad6fa84a96a940fe4eae6ffca1a6d945fac08adc0bc69a367162b6109952a632c6"></a>MQTT_CONNECT_WILL_QOS_2&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad6fa84a96a940fe4eae6ffca1a6d945fa0059d93efdf00ab05fde33f85cb80921" name="ad6fa84a96a940fe4eae6ffca1a6d945fa0059d93efdf00ab05fde33f85cb80921"></a>MQTT_CONNECT_WILL_RETAIN&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad6fa84a96a940fe4eae6ffca1a6d945fa0e87378997e56c672e9b4087b0b59842" name="ad6fa84a96a940fe4eae6ffca1a6d945fa0e87378997e56c672e9b4087b0b59842"></a>MQTT_CONNECT_PASSWORD&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad6fa84a96a940fe4eae6ffca1a6d945fab9935021bbd3ed4b33e78f103c21660d" name="ad6fa84a96a940fe4eae6ffca1a6d945fab9935021bbd3ed4b33e78f103c21660d"></a>MQTT_CONNECT_USER_NAME&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="mqtt_8h_source.html#l00290">290</a> of file <a class="el" href="mqtt_8h_source.html">mqtt.h</a>.</p>
+
+</div>
+</div>
 <a id="ad38a41e1c497f9bcd2477c005f280b23" name="ad38a41e1c497f9bcd2477c005f280b23"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad38a41e1c497f9bcd2477c005f280b23">&#9670;&#160;</a></span>MQTTPublishFlags</h2>
 
@@ -679,40 +701,64 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a2d626b05e589a148ce2e9e97f41302ae" name="a2d626b05e589a148ce2e9e97f41302ae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2d626b05e589a148ce2e9e97f41302ae">&#9670;&#160;</a></span>MQTTSubackReturnCodes</h2>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="ad2450e11094eba170a7fee52e2ad8a03" name="ad2450e11094eba170a7fee52e2ad8a03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2450e11094eba170a7fee52e2ad8a03">&#9670;&#160;</a></span>mqtt_error_str()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="mqtt_8h.html#a2d626b05e589a148ce2e9e97f41302ae">MQTTSubackReturnCodes</a></td>
+          <td class="memname">const char * mqtt_error_str </td>
+          <td>(</td>
+          <td class="paramtype">enum <a class="el" href="mqtt_8h.html#ad0c901a8d30691ed0ca17915b691b7e7">MQTTErrors</a>&#160;</td>
+          <td class="paramname"><em>error</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a2d626b05e589a148ce2e9e97f41302aea1bbe099b18a7f0ed878ebb0a60e1210a" name="a2d626b05e589a148ce2e9e97f41302aea1bbe099b18a7f0ed878ebb0a60e1210a"></a>MQTT_SUBACK_SUCCESS_MAX_QOS_0&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a2d626b05e589a148ce2e9e97f41302aeadf939e22b959e88c15e3c6bab55967d8" name="a2d626b05e589a148ce2e9e97f41302aeadf939e22b959e88c15e3c6bab55967d8"></a>MQTT_SUBACK_SUCCESS_MAX_QOS_1&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a2d626b05e589a148ce2e9e97f41302aea1c6c926f38967dfe73d4ecfbeb495288" name="a2d626b05e589a148ce2e9e97f41302aea1c6c926f38967dfe73d4ecfbeb495288"></a>MQTT_SUBACK_SUCCESS_MAX_QOS_2&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a2d626b05e589a148ce2e9e97f41302aea08b9651ef43ea219f29125fcb43952f7" name="a2d626b05e589a148ce2e9e97f41302aea08b9651ef43ea219f29125fcb43952f7"></a>MQTT_SUBACK_FAILURE&#160;</td><td class="fielddoc"></td></tr>
-</table>
-
-<p class="definition">Definition at line <a class="el" href="mqtt_8h_source.html#l00217">217</a> of file <a class="el" href="mqtt_8h_source.html">mqtt.h</a>.</p>
 
 </div>
 </div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a7ca75c661980d4af50493f59a386f378" name="a7ca75c661980d4af50493f59a386f378"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7ca75c661980d4af50493f59a386f378">&#9670;&#160;</a></span>__mqtt_next_pid()</h2>
+<a id="a3968f3df67a7ded8f3e21faad10139c9" name="a3968f3df67a7ded8f3e21faad10139c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3968f3df67a7ded8f3e21faad10139c9">&#9670;&#160;</a></span>__mqtt_pack_uint16()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint16_t __mqtt_next_pid </td>
+          <td class="memname">ssize_t __mqtt_pack_uint16 </td>
           <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
-          <td class="paramname"><em>client</em></td><td>)</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>buf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>integer</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a053442c47812d3a3ef1b9525a2520c78" name="a053442c47812d3a3ef1b9525a2520c78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a053442c47812d3a3ef1b9525a2520c78">&#9670;&#160;</a></span>__mqtt_unpack_uint16()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t __mqtt_unpack_uint16 </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>buf</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -748,490 +794,22 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a3968f3df67a7ded8f3e21faad10139c9" name="a3968f3df67a7ded8f3e21faad10139c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3968f3df67a7ded8f3e21faad10139c9">&#9670;&#160;</a></span>__mqtt_pack_uint16()</h2>
+<a id="ad596aa5faf7f79e05fb15da33321db10" name="ad596aa5faf7f79e05fb15da33321db10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad596aa5faf7f79e05fb15da33321db10">&#9670;&#160;</a></span>mqtt_unpack_fixed_header()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">ssize_t __mqtt_pack_uint16 </td>
+          <td class="memname">ssize_t mqtt_unpack_fixed_header </td>
           <td>(</td>
-          <td class="paramtype">uint8_t *&#160;</td>
-          <td class="paramname"><em>buf</em>, </td>
+          <td class="paramtype">struct <a class="el" href="structmqtt__response.html">mqtt_response</a> *&#160;</td>
+          <td class="paramname"><em>response</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint16_t&#160;</td>
-          <td class="paramname"><em>integer</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a444875d32fd56990f7c5a8251159d6bf" name="a444875d32fd56990f7c5a8251159d6bf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a444875d32fd56990f7c5a8251159d6bf">&#9670;&#160;</a></span>__mqtt_ping()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="mqtt_8h.html#ad0c901a8d30691ed0ca17915b691b7e7">MQTTErrors</a> __mqtt_ping </td>
-          <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
-          <td class="paramname"><em>client</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ae09d4412a871ecec31377db55cc54228" name="ae09d4412a871ecec31377db55cc54228"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae09d4412a871ecec31377db55cc54228">&#9670;&#160;</a></span>__mqtt_puback()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ssize_t __mqtt_puback </td>
-          <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint16_t&#160;</td>
-          <td class="paramname"><em>packet_id</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a86ddd2a08fbe4bd351dfd161db93303d" name="a86ddd2a08fbe4bd351dfd161db93303d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a86ddd2a08fbe4bd351dfd161db93303d">&#9670;&#160;</a></span>__mqtt_pubcomp()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ssize_t __mqtt_pubcomp </td>
-          <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint16_t&#160;</td>
-          <td class="paramname"><em>packet_id</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a874c62f7a20b6adf13dbed2b4e2dd985" name="a874c62f7a20b6adf13dbed2b4e2dd985"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a874c62f7a20b6adf13dbed2b4e2dd985">&#9670;&#160;</a></span>__mqtt_pubrec()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ssize_t __mqtt_pubrec </td>
-          <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint16_t&#160;</td>
-          <td class="paramname"><em>packet_id</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a427f9191ab9967b75e0a7a2f7fa0dca0" name="a427f9191ab9967b75e0a7a2f7fa0dca0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a427f9191ab9967b75e0a7a2f7fa0dca0">&#9670;&#160;</a></span>__mqtt_pubrel()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ssize_t __mqtt_pubrel </td>
-          <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint16_t&#160;</td>
-          <td class="paramname"><em>packet_id</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a4d50a465c684a5ecd1c000f811fa601e" name="a4d50a465c684a5ecd1c000f811fa601e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4d50a465c684a5ecd1c000f811fa601e">&#9670;&#160;</a></span>__mqtt_recv()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ssize_t __mqtt_recv </td>
-          <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
-          <td class="paramname"><em>client</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="acf553ca88f48350dbde0dc3b96e550f7" name="acf553ca88f48350dbde0dc3b96e550f7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acf553ca88f48350dbde0dc3b96e550f7">&#9670;&#160;</a></span>__mqtt_send()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ssize_t __mqtt_send </td>
-          <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
-          <td class="paramname"><em>client</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a053442c47812d3a3ef1b9525a2520c78" name="a053442c47812d3a3ef1b9525a2520c78"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a053442c47812d3a3ef1b9525a2520c78">&#9670;&#160;</a></span>__mqtt_unpack_uint16()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint16_t __mqtt_unpack_uint16 </td>
-          <td>(</td>
           <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>buf</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="adbe914e5a9d4f93314c4e7637cb4f7b3" name="adbe914e5a9d4f93314c4e7637cb4f7b3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adbe914e5a9d4f93314c4e7637cb4f7b3">&#9670;&#160;</a></span>mqtt_connect()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="mqtt_8h.html#ad0c901a8d30691ed0ca17915b691b7e7">MQTTErrors</a> mqtt_connect </td>
-          <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>client_id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>will_topic</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>will_message</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>will_message_size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>user_name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>password</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>connect_flags</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint16_t&#160;</td>
-          <td class="paramname"><em>keep_alive</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a95d9981735ab4495d3d65e8056611126" name="a95d9981735ab4495d3d65e8056611126"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a95d9981735ab4495d3d65e8056611126">&#9670;&#160;</a></span>mqtt_disconnect()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="mqtt_8h.html#ad0c901a8d30691ed0ca17915b691b7e7">MQTTErrors</a> mqtt_disconnect </td>
-          <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
-          <td class="paramname"><em>client</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ad2450e11094eba170a7fee52e2ad8a03" name="ad2450e11094eba170a7fee52e2ad8a03"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad2450e11094eba170a7fee52e2ad8a03">&#9670;&#160;</a></span>mqtt_error_str()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const char * mqtt_error_str </td>
-          <td>(</td>
-          <td class="paramtype">enum <a class="el" href="mqtt_8h.html#ad0c901a8d30691ed0ca17915b691b7e7">MQTTErrors</a>&#160;</td>
-          <td class="paramname"><em>error</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aa5dab8a06f016b09c7a5259274b3b3ce" name="aa5dab8a06f016b09c7a5259274b3b3ce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa5dab8a06f016b09c7a5259274b3b3ce">&#9670;&#160;</a></span>mqtt_init()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="mqtt_8h.html#ad0c901a8d30691ed0ca17915b691b7e7">MQTTErrors</a> mqtt_init </td>
-          <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">mqtt_pal_socket_handle&#160;</td>
-          <td class="paramname"><em>sockfd</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t *&#160;</td>
-          <td class="paramname"><em>sendbuf</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>sendbufsz</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t *&#160;</td>
-          <td class="paramname"><em>recvbuf</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>recvbufsz</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void(*)(void **state, struct <a class="el" href="structmqtt__response__publish.html">mqtt_response_publish</a> *publish)&#160;</td>
-          <td class="paramname"><em>publish_response_callback</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a4becaa66425469cf462b531aa7eb1ac9" name="a4becaa66425469cf462b531aa7eb1ac9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4becaa66425469cf462b531aa7eb1ac9">&#9670;&#160;</a></span>mqtt_init_reconnect()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void mqtt_init_reconnect </td>
-          <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void(*)(struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *client, void **state)&#160;</td>
-          <td class="paramname"><em>reconnect_callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>reconnect_state</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void(*)(void **state, struct <a class="el" href="structmqtt__response__publish.html">mqtt_response_publish</a> *publish)&#160;</td>
-          <td class="paramname"><em>publish_response_callback</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="adb54c413b4d884619c50cc20ee6eb084" name="adb54c413b4d884619c50cc20ee6eb084"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adb54c413b4d884619c50cc20ee6eb084">&#9670;&#160;</a></span>mqtt_mq_clean()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void mqtt_mq_clean </td>
-          <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structmqtt__message__queue.html">mqtt_message_queue</a> *&#160;</td>
-          <td class="paramname"><em>mq</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a1ffcd45af057865a0d85b4e9e24789a2" name="a1ffcd45af057865a0d85b4e9e24789a2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1ffcd45af057865a0d85b4e9e24789a2">&#9670;&#160;</a></span>mqtt_mq_find()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">struct <a class="el" href="structmqtt__queued__message.html">mqtt_queued_message</a> * mqtt_mq_find </td>
-          <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structmqtt__message__queue.html">mqtt_message_queue</a> *&#160;</td>
-          <td class="paramname"><em>mq</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">enum <a class="el" href="mqtt_8h.html#acbd36b88ec7f62bc161b07e1a0aed679">MQTTControlPacketType</a>&#160;</td>
-          <td class="paramname"><em>control_type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint16_t *&#160;</td>
-          <td class="paramname"><em>packet_id</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a0da861c969387bf8d0229924543d9bb7" name="a0da861c969387bf8d0229924543d9bb7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0da861c969387bf8d0229924543d9bb7">&#9670;&#160;</a></span>mqtt_mq_init()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void mqtt_mq_init </td>
-          <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structmqtt__message__queue.html">mqtt_message_queue</a> *&#160;</td>
-          <td class="paramname"><em>mq</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
           <td class="paramname"><em>buf</em>, </td>
         </tr>
         <tr>
@@ -1250,23 +828,23 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa34e6af3ab1af60ebf8fe7b86be868fc" name="aa34e6af3ab1af60ebf8fe7b86be868fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa34e6af3ab1af60ebf8fe7b86be868fc">&#9670;&#160;</a></span>mqtt_mq_register()</h2>
+<a id="aa174fec8a214d65ee887b5b6c9b79d78" name="aa174fec8a214d65ee887b5b6c9b79d78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa174fec8a214d65ee887b5b6c9b79d78">&#9670;&#160;</a></span>mqtt_unpack_connack_response()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">struct <a class="el" href="structmqtt__queued__message.html">mqtt_queued_message</a> * mqtt_mq_register </td>
+          <td class="memname">ssize_t mqtt_unpack_connack_response </td>
           <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structmqtt__message__queue.html">mqtt_message_queue</a> *&#160;</td>
-          <td class="paramname"><em>mq</em>, </td>
+          <td class="paramtype">struct <a class="el" href="structmqtt__response.html">mqtt_response</a> *&#160;</td>
+          <td class="paramname"><em>mqtt_response</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>nbytes</em>&#160;</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>buf</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1275,6 +853,160 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae8ee6c1da210c4782f4f9939fe6ec828" name="ae8ee6c1da210c4782f4f9939fe6ec828"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8ee6c1da210c4782f4f9939fe6ec828">&#9670;&#160;</a></span>mqtt_unpack_publish_response()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ssize_t mqtt_unpack_publish_response </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structmqtt__response.html">mqtt_response</a> *&#160;</td>
+          <td class="paramname"><em>mqtt_response</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>buf</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8c9b9bb3aab29bfca1408b9e5c5d4a01" name="a8c9b9bb3aab29bfca1408b9e5c5d4a01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c9b9bb3aab29bfca1408b9e5c5d4a01">&#9670;&#160;</a></span>mqtt_unpack_pubxxx_response()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ssize_t mqtt_unpack_pubxxx_response </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structmqtt__response.html">mqtt_response</a> *&#160;</td>
+          <td class="paramname"><em>mqtt_response</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>buf</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a52a9d997a2d4dbe6fd2abc6d458df908" name="a52a9d997a2d4dbe6fd2abc6d458df908"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52a9d997a2d4dbe6fd2abc6d458df908">&#9670;&#160;</a></span>mqtt_unpack_suback_response()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ssize_t mqtt_unpack_suback_response </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structmqtt__response.html">mqtt_response</a> *&#160;</td>
+          <td class="paramname"><em>mqtt_response</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>buf</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aae124a93579dcd31e6f52411f4582fbd" name="aae124a93579dcd31e6f52411f4582fbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae124a93579dcd31e6f52411f4582fbd">&#9670;&#160;</a></span>mqtt_unpack_response()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ssize_t mqtt_unpack_response </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structmqtt__response.html">mqtt_response</a> *&#160;</td>
+          <td class="paramname"><em>response</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>buf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>bufsz</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a52d369e6e7d44539aab6732375288623" name="a52d369e6e7d44539aab6732375288623"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52d369e6e7d44539aab6732375288623">&#9670;&#160;</a></span>mqtt_pack_fixed_header()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ssize_t mqtt_pack_fixed_header </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>buf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>bufsz</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const struct <a class="el" href="structmqtt__fixed__header.html">mqtt_fixed_header</a> *&#160;</td>
+          <td class="paramname"><em>fixed_header</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>REQUESTS. </p>
 
 </div>
 </div>
@@ -1343,98 +1075,6 @@ Functions</h2></td></tr>
           <td></td>
           <td class="paramtype">uint16_t&#160;</td>
           <td class="paramname"><em>keep_alive</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a7842c85a0711df31f2e9ce31a9253999" name="a7842c85a0711df31f2e9ce31a9253999"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7842c85a0711df31f2e9ce31a9253999">&#9670;&#160;</a></span>mqtt_pack_disconnect()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ssize_t mqtt_pack_disconnect </td>
-          <td>(</td>
-          <td class="paramtype">uint8_t *&#160;</td>
-          <td class="paramname"><em>buf</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>bufsz</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a52d369e6e7d44539aab6732375288623" name="a52d369e6e7d44539aab6732375288623"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52d369e6e7d44539aab6732375288623">&#9670;&#160;</a></span>mqtt_pack_fixed_header()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ssize_t mqtt_pack_fixed_header </td>
-          <td>(</td>
-          <td class="paramtype">uint8_t *&#160;</td>
-          <td class="paramname"><em>buf</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>bufsz</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const struct <a class="el" href="structmqtt__fixed__header.html">mqtt_fixed_header</a> *&#160;</td>
-          <td class="paramname"><em>fixed_header</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>REQUESTS. </p>
-
-</div>
-</div>
-<a id="ac11b5cc5c6bbbf386c2515c823965a82" name="ac11b5cc5c6bbbf386c2515c823965a82"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac11b5cc5c6bbbf386c2515c823965a82">&#9670;&#160;</a></span>mqtt_pack_ping_request()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ssize_t mqtt_pack_ping_request </td>
-          <td>(</td>
-          <td class="paramtype">uint8_t *&#160;</td>
-          <td class="paramname"><em>buf</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>bufsz</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1624,59 +1264,23 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ae472795684a1d973bfb89d075d17a29e" name="ae472795684a1d973bfb89d075d17a29e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae472795684a1d973bfb89d075d17a29e">&#9670;&#160;</a></span>mqtt_ping()</h2>
+<a id="ac11b5cc5c6bbbf386c2515c823965a82" name="ac11b5cc5c6bbbf386c2515c823965a82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac11b5cc5c6bbbf386c2515c823965a82">&#9670;&#160;</a></span>mqtt_pack_ping_request()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="mqtt_8h.html#ad0c901a8d30691ed0ca17915b691b7e7">MQTTErrors</a> mqtt_ping </td>
+          <td class="memname">ssize_t mqtt_pack_ping_request </td>
           <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
-          <td class="paramname"><em>client</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="af97b13371c254248416dcaf5890cec49" name="af97b13371c254248416dcaf5890cec49"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af97b13371c254248416dcaf5890cec49">&#9670;&#160;</a></span>mqtt_publish()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="mqtt_8h.html#ad0c901a8d30691ed0ca17915b691b7e7">MQTTErrors</a> mqtt_publish </td>
-          <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>topic_name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>application_message</em>, </td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>buf</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>application_message_size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>publish_flags</em>&#160;</td>
+          <td class="paramname"><em>bufsz</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1686,22 +1290,314 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>todo: will_message should be a void* </p>
-
 </div>
 </div>
-<a id="a325eeac7ab4873de8850f4e6af4dce01" name="a325eeac7ab4873de8850f4e6af4dce01"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a325eeac7ab4873de8850f4e6af4dce01">&#9670;&#160;</a></span>mqtt_reconnect()</h2>
+<a id="a7842c85a0711df31f2e9ce31a9253999" name="a7842c85a0711df31f2e9ce31a9253999"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7842c85a0711df31f2e9ce31a9253999">&#9670;&#160;</a></span>mqtt_pack_disconnect()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="mqtt_8h.html#ad0c901a8d30691ed0ca17915b691b7e7">MQTTErrors</a> mqtt_reconnect </td>
+          <td class="memname">ssize_t mqtt_pack_disconnect </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>buf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>bufsz</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0da861c969387bf8d0229924543d9bb7" name="a0da861c969387bf8d0229924543d9bb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0da861c969387bf8d0229924543d9bb7">&#9670;&#160;</a></span>mqtt_mq_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mqtt_mq_init </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structmqtt__message__queue.html">mqtt_message_queue</a> *&#160;</td>
+          <td class="paramname"><em>mq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>buf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>bufsz</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adb54c413b4d884619c50cc20ee6eb084" name="adb54c413b4d884619c50cc20ee6eb084"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb54c413b4d884619c50cc20ee6eb084">&#9670;&#160;</a></span>mqtt_mq_clean()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mqtt_mq_clean </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structmqtt__message__queue.html">mqtt_message_queue</a> *&#160;</td>
+          <td class="paramname"><em>mq</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa34e6af3ab1af60ebf8fe7b86be868fc" name="aa34e6af3ab1af60ebf8fe7b86be868fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa34e6af3ab1af60ebf8fe7b86be868fc">&#9670;&#160;</a></span>mqtt_mq_register()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structmqtt__queued__message.html">mqtt_queued_message</a> * mqtt_mq_register </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structmqtt__message__queue.html">mqtt_message_queue</a> *&#160;</td>
+          <td class="paramname"><em>mq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>nbytes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1ffcd45af057865a0d85b4e9e24789a2" name="a1ffcd45af057865a0d85b4e9e24789a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ffcd45af057865a0d85b4e9e24789a2">&#9670;&#160;</a></span>mqtt_mq_find()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structmqtt__queued__message.html">mqtt_queued_message</a> * mqtt_mq_find </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structmqtt__message__queue.html">mqtt_message_queue</a> *&#160;</td>
+          <td class="paramname"><em>mq</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">enum <a class="el" href="mqtt_8h.html#acbd36b88ec7f62bc161b07e1a0aed679">MQTTControlPacketType</a>&#160;</td>
+          <td class="paramname"><em>control_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t *&#160;</td>
+          <td class="paramname"><em>packet_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7ca75c661980d4af50493f59a386f378" name="a7ca75c661980d4af50493f59a386f378"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ca75c661980d4af50493f59a386f378">&#9670;&#160;</a></span>__mqtt_next_pid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t __mqtt_next_pid </td>
           <td>(</td>
           <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
           <td class="paramname"><em>client</em></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acf553ca88f48350dbde0dc3b96e550f7" name="acf553ca88f48350dbde0dc3b96e550f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf553ca88f48350dbde0dc3b96e550f7">&#9670;&#160;</a></span>__mqtt_send()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ssize_t __mqtt_send </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
+          <td class="paramname"><em>client</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4d50a465c684a5ecd1c000f811fa601e" name="a4d50a465c684a5ecd1c000f811fa601e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d50a465c684a5ecd1c000f811fa601e">&#9670;&#160;</a></span>__mqtt_recv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ssize_t __mqtt_recv </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
+          <td class="paramname"><em>client</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae3d3aafc7588ed53a90c9f66fc620a6e" name="ae3d3aafc7588ed53a90c9f66fc620a6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3d3aafc7588ed53a90c9f66fc620a6e">&#9670;&#160;</a></span>mqtt_sync()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="mqtt_8h.html#ad0c901a8d30691ed0ca17915b691b7e7">MQTTErrors</a> mqtt_sync </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
+          <td class="paramname"><em>client</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa5dab8a06f016b09c7a5259274b3b3ce" name="aa5dab8a06f016b09c7a5259274b3b3ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5dab8a06f016b09c7a5259274b3b3ce">&#9670;&#160;</a></span>mqtt_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="mqtt_8h.html#ad0c901a8d30691ed0ca17915b691b7e7">MQTTErrors</a> mqtt_init </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">mqtt_pal_socket_handle&#160;</td>
+          <td class="paramname"><em>sockfd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>sendbuf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>sendbufsz</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t *&#160;</td>
+          <td class="paramname"><em>recvbuf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>recvbufsz</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)(void **state, struct <a class="el" href="structmqtt__response__publish.html">mqtt_response_publish</a> *publish)&#160;</td>
+          <td class="paramname"><em>publish_response_callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4becaa66425469cf462b531aa7eb1ac9" name="a4becaa66425469cf462b531aa7eb1ac9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4becaa66425469cf462b531aa7eb1ac9">&#9670;&#160;</a></span>mqtt_init_reconnect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mqtt_init_reconnect </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)(struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *client, void **state)&#160;</td>
+          <td class="paramname"><em>reconnect_callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>reconnect_state</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void(*)(void **state, struct <a class="el" href="structmqtt__response__publish.html">mqtt_response_publish</a> *publish)&#160;</td>
+          <td class="paramname"><em>publish_response_callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -1760,6 +1656,236 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="adbe914e5a9d4f93314c4e7637cb4f7b3" name="adbe914e5a9d4f93314c4e7637cb4f7b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbe914e5a9d4f93314c4e7637cb4f7b3">&#9670;&#160;</a></span>mqtt_connect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="mqtt_8h.html#ad0c901a8d30691ed0ca17915b691b7e7">MQTTErrors</a> mqtt_connect </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>client_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>will_topic</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>will_message</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>will_message_size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>user_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>password</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>connect_flags</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>keep_alive</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af97b13371c254248416dcaf5890cec49" name="af97b13371c254248416dcaf5890cec49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af97b13371c254248416dcaf5890cec49">&#9670;&#160;</a></span>mqtt_publish()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="mqtt_8h.html#ad0c901a8d30691ed0ca17915b691b7e7">MQTTErrors</a> mqtt_publish </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>topic_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>application_message</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>application_message_size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>publish_flags</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>todo: will_message should be a void* </p>
+
+</div>
+</div>
+<a id="ae09d4412a871ecec31377db55cc54228" name="ae09d4412a871ecec31377db55cc54228"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae09d4412a871ecec31377db55cc54228">&#9670;&#160;</a></span>__mqtt_puback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ssize_t __mqtt_puback </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>packet_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a874c62f7a20b6adf13dbed2b4e2dd985" name="a874c62f7a20b6adf13dbed2b4e2dd985"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a874c62f7a20b6adf13dbed2b4e2dd985">&#9670;&#160;</a></span>__mqtt_pubrec()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ssize_t __mqtt_pubrec </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>packet_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a427f9191ab9967b75e0a7a2f7fa0dca0" name="a427f9191ab9967b75e0a7a2f7fa0dca0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a427f9191ab9967b75e0a7a2f7fa0dca0">&#9670;&#160;</a></span>__mqtt_pubrel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ssize_t __mqtt_pubrel </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>packet_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a86ddd2a08fbe4bd351dfd161db93303d" name="a86ddd2a08fbe4bd351dfd161db93303d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86ddd2a08fbe4bd351dfd161db93303d">&#9670;&#160;</a></span>__mqtt_pubcomp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ssize_t __mqtt_pubcomp </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>packet_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aea5da9b546f6e91eb77c9eff9c478de5" name="aea5da9b546f6e91eb77c9eff9c478de5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aea5da9b546f6e91eb77c9eff9c478de5">&#9670;&#160;</a></span>mqtt_subscribe()</h2>
 
@@ -1794,204 +1920,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ae3d3aafc7588ed53a90c9f66fc620a6e" name="ae3d3aafc7588ed53a90c9f66fc620a6e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae3d3aafc7588ed53a90c9f66fc620a6e">&#9670;&#160;</a></span>mqtt_sync()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="mqtt_8h.html#ad0c901a8d30691ed0ca17915b691b7e7">MQTTErrors</a> mqtt_sync </td>
-          <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
-          <td class="paramname"><em>client</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aa174fec8a214d65ee887b5b6c9b79d78" name="aa174fec8a214d65ee887b5b6c9b79d78"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa174fec8a214d65ee887b5b6c9b79d78">&#9670;&#160;</a></span>mqtt_unpack_connack_response()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ssize_t mqtt_unpack_connack_response </td>
-          <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structmqtt__response.html">mqtt_response</a> *&#160;</td>
-          <td class="paramname"><em>mqtt_response</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>buf</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ad596aa5faf7f79e05fb15da33321db10" name="ad596aa5faf7f79e05fb15da33321db10"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad596aa5faf7f79e05fb15da33321db10">&#9670;&#160;</a></span>mqtt_unpack_fixed_header()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ssize_t mqtt_unpack_fixed_header </td>
-          <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structmqtt__response.html">mqtt_response</a> *&#160;</td>
-          <td class="paramname"><em>response</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>buf</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>bufsz</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ae8ee6c1da210c4782f4f9939fe6ec828" name="ae8ee6c1da210c4782f4f9939fe6ec828"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae8ee6c1da210c4782f4f9939fe6ec828">&#9670;&#160;</a></span>mqtt_unpack_publish_response()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ssize_t mqtt_unpack_publish_response </td>
-          <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structmqtt__response.html">mqtt_response</a> *&#160;</td>
-          <td class="paramname"><em>mqtt_response</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>buf</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a8c9b9bb3aab29bfca1408b9e5c5d4a01" name="a8c9b9bb3aab29bfca1408b9e5c5d4a01"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8c9b9bb3aab29bfca1408b9e5c5d4a01">&#9670;&#160;</a></span>mqtt_unpack_pubxxx_response()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ssize_t mqtt_unpack_pubxxx_response </td>
-          <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structmqtt__response.html">mqtt_response</a> *&#160;</td>
-          <td class="paramname"><em>mqtt_response</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>buf</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aae124a93579dcd31e6f52411f4582fbd" name="aae124a93579dcd31e6f52411f4582fbd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aae124a93579dcd31e6f52411f4582fbd">&#9670;&#160;</a></span>mqtt_unpack_response()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ssize_t mqtt_unpack_response </td>
-          <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structmqtt__response.html">mqtt_response</a> *&#160;</td>
-          <td class="paramname"><em>response</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>buf</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>bufsz</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a52a9d997a2d4dbe6fd2abc6d458df908" name="a52a9d997a2d4dbe6fd2abc6d458df908"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52a9d997a2d4dbe6fd2abc6d458df908">&#9670;&#160;</a></span>mqtt_unpack_suback_response()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">ssize_t mqtt_unpack_suback_response </td>
-          <td>(</td>
-          <td class="paramtype">struct <a class="el" href="structmqtt__response.html">mqtt_response</a> *&#160;</td>
-          <td class="paramname"><em>mqtt_response</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const uint8_t *&#160;</td>
-          <td class="paramname"><em>buf</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a08d16571dfefa690698c0cca5cca7a1d" name="a08d16571dfefa690698c0cca5cca7a1d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a08d16571dfefa690698c0cca5cca7a1d">&#9670;&#160;</a></span>mqtt_unsubscribe()</h2>
 
@@ -2014,6 +1942,78 @@ Functions</h2></td></tr>
           <td></td>
           <td>)</td>
           <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae472795684a1d973bfb89d075d17a29e" name="ae472795684a1d973bfb89d075d17a29e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae472795684a1d973bfb89d075d17a29e">&#9670;&#160;</a></span>mqtt_ping()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="mqtt_8h.html#ad0c901a8d30691ed0ca17915b691b7e7">MQTTErrors</a> mqtt_ping </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
+          <td class="paramname"><em>client</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a444875d32fd56990f7c5a8251159d6bf" name="a444875d32fd56990f7c5a8251159d6bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a444875d32fd56990f7c5a8251159d6bf">&#9670;&#160;</a></span>__mqtt_ping()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="mqtt_8h.html#ad0c901a8d30691ed0ca17915b691b7e7">MQTTErrors</a> __mqtt_ping </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
+          <td class="paramname"><em>client</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a95d9981735ab4495d3d65e8056611126" name="a95d9981735ab4495d3d65e8056611126"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95d9981735ab4495d3d65e8056611126">&#9670;&#160;</a></span>mqtt_disconnect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="mqtt_8h.html#ad0c901a8d30691ed0ca17915b691b7e7">MQTTErrors</a> mqtt_disconnect </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
+          <td class="paramname"><em>client</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a325eeac7ab4873de8850f4e6af4dce01" name="a325eeac7ab4873de8850f4e6af4dce01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a325eeac7ab4873de8850f4e6af4dce01">&#9670;&#160;</a></span>mqtt_reconnect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="mqtt_8h.html#ad0c901a8d30691ed0ca17915b691b7e7">MQTTErrors</a> mqtt_reconnect </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structmqtt__client.html">mqtt_client</a> *&#160;</td>
+          <td class="paramname"><em>client</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">

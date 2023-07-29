@@ -110,6 +110,22 @@ Data Fields</h2></td></tr>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00048">48</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
+<a id="a6979a4bc89f65e887c19d3ebbda19061" name="a6979a4bc89f65e887c19d3ebbda19061"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6979a4bc89f65e887c19d3ebbda19061">&#9670;&#160;</a></span>state</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="network_8h.html#a581d16bf4bb2cef817c374c81680fc8d">UA_ConnectionState</a> UA_Connection::state</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00049">49</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
 <a id="a1eab2eaf337b158af98d8ef6a9fd38cd" name="a1eab2eaf337b158af98d8ef6a9fd38cd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1eab2eaf337b158af98d8ef6a9fd38cd">&#9670;&#160;</a></span>channel</h2>
 
@@ -126,67 +142,19 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="a8a0f13c01ac18801add388cdb3fd5da8" name="a8a0f13c01ac18801add388cdb3fd5da8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8a0f13c01ac18801add388cdb3fd5da8">&#9670;&#160;</a></span>close</h2>
+<a id="a5dd9ac2eeadb8a60a8d2eefaacb08f2b" name="a5dd9ac2eeadb8a60a8d2eefaacb08f2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5dd9ac2eeadb8a60a8d2eefaacb08f2b">&#9670;&#160;</a></span>sockfd</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void(* UA_Connection::close) (<a class="el" href="structUA__Connection.html">UA_Connection</a> *connection)</td>
+          <td class="memname"><a class="el" href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a> UA_Connection::sockfd</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00097">97</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
-
-</div>
-</div>
-<a id="ad1d25b2a86d48cd59edc5676022a6c4b" name="ad1d25b2a86d48cd59edc5676022a6c4b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1d25b2a86d48cd59edc5676022a6c4b">&#9670;&#160;</a></span>free</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void(* UA_Connection::free) (<a class="el" href="structUA__Connection.html">UA_Connection</a> *connection)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00101">101</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
-
-</div>
-</div>
-<a id="ab74d0b1bca3410bab2b53bf053c67134" name="ab74d0b1bca3410bab2b53bf053c67134"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab74d0b1bca3410bab2b53bf053c67134">&#9670;&#160;</a></span>getSendBuffer</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_Connection::getSendBuffer) (<a class="el" href="structUA__Connection.html">UA_Connection</a> *connection, size_t length, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *buf)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00059">59</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
-
-</div>
-</div>
-<a id="acc52d6b6984f09739dea63b7a479134a" name="acc52d6b6984f09739dea63b7a479134a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acc52d6b6984f09739dea63b7a479134a">&#9670;&#160;</a></span>handle</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void* UA_Connection::handle</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00056">56</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00052">52</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
@@ -206,35 +174,35 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="ae1225186f25783865549311d44538f7f" name="ae1225186f25783865549311d44538f7f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae1225186f25783865549311d44538f7f">&#9670;&#160;</a></span>recv</h2>
+<a id="acc52d6b6984f09739dea63b7a479134a" name="acc52d6b6984f09739dea63b7a479134a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc52d6b6984f09739dea63b7a479134a">&#9670;&#160;</a></span>handle</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_Connection::recv) (<a class="el" href="structUA__Connection.html">UA_Connection</a> *connection, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *response, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> timeout)</td>
+          <td class="memname">void* UA_Connection::handle</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00088">88</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00056">56</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
-<a id="ab4e002afc2dc2dbd5f17ff1a31b40ce8" name="ab4e002afc2dc2dbd5f17ff1a31b40ce8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab4e002afc2dc2dbd5f17ff1a31b40ce8">&#9670;&#160;</a></span>releaseRecvBuffer</h2>
+<a id="ab74d0b1bca3410bab2b53bf053c67134" name="ab74d0b1bca3410bab2b53bf053c67134"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab74d0b1bca3410bab2b53bf053c67134">&#9670;&#160;</a></span>getSendBuffer</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void(* UA_Connection::releaseRecvBuffer) (<a class="el" href="structUA__Connection.html">UA_Connection</a> *connection, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *buf)</td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_Connection::getSendBuffer) (<a class="el" href="structUA__Connection.html">UA_Connection</a> *connection, size_t length, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *buf)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00092">92</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00059">59</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
@@ -270,35 +238,67 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="a5dd9ac2eeadb8a60a8d2eefaacb08f2b" name="a5dd9ac2eeadb8a60a8d2eefaacb08f2b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5dd9ac2eeadb8a60a8d2eefaacb08f2b">&#9670;&#160;</a></span>sockfd</h2>
+<a id="ae1225186f25783865549311d44538f7f" name="ae1225186f25783865549311d44538f7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1225186f25783865549311d44538f7f">&#9670;&#160;</a></span>recv</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a> UA_Connection::sockfd</td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_Connection::recv) (<a class="el" href="structUA__Connection.html">UA_Connection</a> *connection, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *response, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> timeout)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00052">52</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00088">88</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>
-<a id="a6979a4bc89f65e887c19d3ebbda19061" name="a6979a4bc89f65e887c19d3ebbda19061"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6979a4bc89f65e887c19d3ebbda19061">&#9670;&#160;</a></span>state</h2>
+<a id="ab4e002afc2dc2dbd5f17ff1a31b40ce8" name="ab4e002afc2dc2dbd5f17ff1a31b40ce8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4e002afc2dc2dbd5f17ff1a31b40ce8">&#9670;&#160;</a></span>releaseRecvBuffer</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="network_8h.html#a581d16bf4bb2cef817c374c81680fc8d">UA_ConnectionState</a> UA_Connection::state</td>
+          <td class="memname">void(* UA_Connection::releaseRecvBuffer) (<a class="el" href="structUA__Connection.html">UA_Connection</a> *connection, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *buf)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00049">49</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00092">92</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="a8a0f13c01ac18801add388cdb3fd5da8" name="a8a0f13c01ac18801add388cdb3fd5da8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a0f13c01ac18801add388cdb3fd5da8">&#9670;&#160;</a></span>close</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* UA_Connection::close) (<a class="el" href="structUA__Connection.html">UA_Connection</a> *connection)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00097">97</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
+
+</div>
+</div>
+<a id="ad1d25b2a86d48cd59edc5676022a6c4b" name="ad1d25b2a86d48cd59edc5676022a6c4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1d25b2a86d48cd59edc5676022a6c4b">&#9670;&#160;</a></span>free</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* UA_Connection::free) (<a class="el" href="structUA__Connection.html">UA_Connection</a> *connection)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="network_8h_source.html#l00101">101</a> of file <a class="el" href="network_8h_source.html">network.h</a>.</p>
 
 </div>
 </div>

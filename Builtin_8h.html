@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.5.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.6.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -77,25 +77,29 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">Builtin.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;array&gt;</code><br />
 <code>#include &lt;cstdint&gt;</code><br />
+<code>#include &lt;filesystem&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
 <code>#include &lt;string_view&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
 <code>#include &quot;<a class="el" href="TypeWrapper_8h_source.html">open62541pp/TypeWrapper.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="open62541_8h_source.html">open62541pp/open62541.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Builtin.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="Builtin_8h__incl.svg" width="1123" height="462"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="Builtin_8h__incl.svg" width="1428" height="462"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="Builtin_8h__dep__incl.svg" width="1516" height="579"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="Builtin_8h__dep__incl.svg" width="1762" height="579"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="Builtin_8h_source.html">Go to the source code of this file.</a></p>
@@ -114,11 +118,41 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1LocalizedText.html">opcua::LocalizedText</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1NumericRange.html">opcua::NumericRange</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespaceopcua"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html">opcua</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a8482df382d1d7a2fe9d7c1d1e79a5bfa"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a8482df382d1d7a2fe9d7c1d1e79a5bfa">opcua::NumericRangeDimension</a> = <a class="elRef" target="_blank" href="open62541/structUA__NumericRangeDimension.html">UA_NumericRangeDimension</a></td></tr>
+<tr class="separator:a8482df382d1d7a2fe9d7c1d1e79a5bfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a501efc5fe9ff53b075377a4a22b2374a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a501efc5fe9ff53b075377a4a22b2374a">opcua::operator==</a> (const <a class="el" href="classopcua_1_1String.html">String</a> &amp;lhs, std::string_view rhs) noexcept</td></tr>
+<tr class="separator:a501efc5fe9ff53b075377a4a22b2374a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99cb537af8ec0fc4be7cd25fd84a43cd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a99cb537af8ec0fc4be7cd25fd84a43cd">opcua::operator!=</a> (const <a class="el" href="classopcua_1_1String.html">String</a> &amp;lhs, std::string_view rhs) noexcept</td></tr>
+<tr class="separator:a99cb537af8ec0fc4be7cd25fd84a43cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af561b8b0e8ef0572966541cc73028299"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#af561b8b0e8ef0572966541cc73028299">opcua::operator==</a> (std::string_view lhs, const <a class="el" href="classopcua_1_1String.html">String</a> &amp;rhs) noexcept</td></tr>
+<tr class="separator:af561b8b0e8ef0572966541cc73028299"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae83c66eded4b5a5356c8ba2dadb715e0"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#ae83c66eded4b5a5356c8ba2dadb715e0">opcua::operator!=</a> (std::string_view lhs, const <a class="el" href="classopcua_1_1String.html">String</a> &amp;rhs) noexcept</td></tr>
+<tr class="separator:ae83c66eded4b5a5356c8ba2dadb715e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2d26048ded8794f52da64993dbfe455"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#ab2d26048ded8794f52da64993dbfe455">opcua::operator==</a> (const <a class="el" href="classopcua_1_1ByteString.html">ByteString</a> &amp;lhs, std::string_view rhs) noexcept</td></tr>
+<tr class="separator:ab2d26048ded8794f52da64993dbfe455"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a548515ed8c6a155a90aba29c1f3a292d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a548515ed8c6a155a90aba29c1f3a292d">opcua::operator!=</a> (const <a class="el" href="classopcua_1_1ByteString.html">ByteString</a> &amp;lhs, std::string_view rhs) noexcept</td></tr>
+<tr class="separator:a548515ed8c6a155a90aba29c1f3a292d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a100910c97b3ddbaf89cd9424977db0f4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a100910c97b3ddbaf89cd9424977db0f4">opcua::operator==</a> (std::string_view lhs, const <a class="el" href="classopcua_1_1ByteString.html">ByteString</a> &amp;rhs) noexcept</td></tr>
+<tr class="separator:a100910c97b3ddbaf89cd9424977db0f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acedbac00721eede9c71442cf265e8f92"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#acedbac00721eede9c71442cf265e8f92">opcua::operator!=</a> (std::string_view lhs, const <a class="el" href="classopcua_1_1ByteString.html">ByteString</a> &amp;rhs) noexcept</td></tr>
+<tr class="separator:acedbac00721eede9c71442cf265e8f92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa419f6cdcc526dc7fb8e26317cdfecd5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#aa419f6cdcc526dc7fb8e26317cdfecd5">opcua::operator==</a> (const <a class="el" href="namespaceopcua.html#a8482df382d1d7a2fe9d7c1d1e79a5bfa">NumericRangeDimension</a> &amp;lhs, const <a class="el" href="namespaceopcua.html#a8482df382d1d7a2fe9d7c1d1e79a5bfa">NumericRangeDimension</a> &amp;rhs) noexcept</td></tr>
+<tr class="separator:aa419f6cdcc526dc7fb8e26317cdfecd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e62b35721dc63bcac3e87aa6e8e5277"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a3e62b35721dc63bcac3e87aa6e8e5277">opcua::operator!=</a> (const <a class="el" href="namespaceopcua.html#a8482df382d1d7a2fe9d7c1d1e79a5bfa">NumericRangeDimension</a> &amp;lhs, const <a class="el" href="namespaceopcua.html#a8482df382d1d7a2fe9d7c1d1e79a5bfa">NumericRangeDimension</a> &amp;rhs) noexcept</td></tr>
+<tr class="separator:a3e62b35721dc63bcac3e87aa6e8e5277"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.5.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.6.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -171,8 +171,6 @@ Static Public Member Functions</h2></td></tr>
 <tr class="inherit_header pub_static_methods_classopcua_1_1TypeWrapper"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_classopcua_1_1TypeWrapper')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_DateTime, UA_TYPES_DATETIME &gt;</a></td></tr>
 <tr class="memitem:a5e05524b2745c94d9b43037f8fd938de inherit pub_static_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a5e05524b2745c94d9b43037f8fd938de">getTypeIndex</a> ()</td></tr>
 <tr class="separator:a5e05524b2745c94d9b43037f8fd938de inherit pub_static_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a570e5661b87bdc4abc4fa96fca9dd493 inherit pub_static_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">static const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a570e5661b87bdc4abc4fa96fca9dd493">getDataType</a> ()</td></tr>
-<tr class="separator:a570e5661b87bdc4abc4fa96fca9dd493 inherit pub_static_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -182,6 +180,8 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:ac183e283c4619b5e6e84d80706034224 inherit pro_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#ac183e283c4619b5e6e84d80706034224">copy</a> (const <a class="elRef" target="_blank" href="open62541/types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> &amp;data)</td></tr>
 <tr class="separator:ac183e283c4619b5e6e84d80706034224 inherit pro_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_static_methods_classopcua_1_1TypeWrapper"><td colspan="2" onclick="javascript:toggleInherit('pro_static_methods_classopcua_1_1TypeWrapper')"><img src="closed.png" alt="-"/>&#160;Static Protected Member Functions inherited from <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_DateTime, UA_TYPES_DATETIME &gt;</a></td></tr>
+<tr class="memitem:a570e5661b87bdc4abc4fa96fca9dd493 inherit pro_static_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">static const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a570e5661b87bdc4abc4fa96fca9dd493">getDataType</a> ()</td></tr>
+<tr class="separator:a570e5661b87bdc4abc4fa96fca9dd493 inherit pro_static_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7794f5381651258794f075fdaf7bbcff inherit pro_static_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a7794f5381651258794f075fdaf7bbcff">checkMemSize</a> ()</td></tr>
 <tr class="separator:a7794f5381651258794f075fdaf7bbcff inherit pro_static_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -189,7 +189,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><p>UA_DateTime wrapper class. </p>
 <p>An instance in time. A <a class="el" href="classopcua_1_1DateTime.html" title="UA_DateTime wrapper class.">DateTime</a> value is encoded as a 64-bit signed integer which represents the number of 100 nanosecond intervals since January 1, 1601 (UTC).</p>
 <dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/Core/Part6/v105/docs/5.2.2.5">https://reference.opcfoundation.org/Core/Part6/v105/docs/5.2.2.5</a> </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_connect_8cpp-example.html#_a7">client_connect.cpp</a>, <a class="el" href="client_minimal_8cpp-example.html#_a4">client_minimal.cpp</a>, and <a class="el" href="client_subscription_8cpp-example.html#_a10">client_subscription.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_connect_8cpp-example.html#_a7">client_connect.cpp</a>, <a class="el" href="client_minimal_8cpp-example.html#_a6">client_minimal.cpp</a>, <a class="el" href="client_subscription_8cpp-example.html#_a10">client_subscription.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#_a8">server_valuecallback.cpp</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="DateTime_8h_source.html#l00023">23</a> of file <a class="el" href="DateTime_8h_source.html">DateTime.h</a>.</p>
@@ -258,35 +258,31 @@ template&lt;typename Clock , typename <a class="el" href="group__NodeIds.html#gg
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="adc058b53ee4123c5ea3be4bba633cb2a" name="adc058b53ee4123c5ea3be4bba633cb2a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adc058b53ee4123c5ea3be4bba633cb2a">&#9670;&#160;</a></span>format()</h2>
+<a id="a18b5241e57fe24c2ac88661fed11ba8b" name="a18b5241e57fe24c2ac88661fed11ba8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18b5241e57fe24c2ac88661fed11ba8b">&#9670;&#160;</a></span>now()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string opcua::DateTime::format </td>
+          <td class="memname">static <a class="el" href="classopcua_1_1DateTime.html">DateTime</a> opcua::DateTime::now </td>
           <td>(</td>
-          <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>format</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>localtime</em> = <code>false</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Convert to string with given format (same format codes as strftime). </p>
-<dl class="section see"><dt>See also</dt><dd><a href="https://en.cppreference.com/w/cpp/chrono/c/strftime">https://en.cppreference.com/w/cpp/chrono/c/strftime</a> </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_minimal_8cpp-example.html#a5">client_minimal.cpp</a>, and <a class="el" href="client_subscription_8cpp-example.html#a11">client_subscription.cpp</a>.</dd>
+<p>Get current <a class="el" href="classopcua_1_1DateTime.html" title="UA_DateTime wrapper class.">DateTime</a>. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_valuecallback_8cpp-example.html#a4">server_valuecallback.cpp</a>.</dd>
 </dl>
 
 </div>
@@ -323,7 +319,7 @@ template&lt;typename Clock , typename <a class="el" href="group__NodeIds.html#gg
 
 <p class="reference">References <a class="elRef" target="_blank" href="open62541/types_8h.html#a489381cc84a7d552fc23c907c7c5c9cb">UA_DATETIME_UNIX_EPOCH</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="TypeConverter_8h_source.html#l00316">opcua::TypeConverter&lt; std::chrono::time_point&lt; Clock, Duration &gt; &gt;::toNative()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="TypeConverter_8h_source.html#l00317">opcua::TypeConverter&lt; std::chrono::time_point&lt; Clock, Duration &gt; &gt;::toNative()</a>.</p>
 
 </div>
 </div>
@@ -355,35 +351,6 @@ template&lt;typename Clock , typename <a class="el" href="group__NodeIds.html#gg
 
 </div>
 </div>
-<a id="a20b227dfd968989c0b6d16d304215e38" name="a20b227dfd968989c0b6d16d304215e38"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a20b227dfd968989c0b6d16d304215e38">&#9670;&#160;</a></span>get()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int64_t opcua::DateTime::get </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get <a class="el" href="classopcua_1_1DateTime.html" title="UA_DateTime wrapper class.">DateTime</a> value as 100 nanosecond intervals since January 1, 1601 (UTC). </p>
-
-<p class="reference">Referenced by <a class="el" href="TypeConverter_8h_source.html#l00316">opcua::TypeConverter&lt; std::chrono::time_point&lt; Clock, Duration &gt; &gt;::toNative()</a>, and <a class="el" href="DateTime_8h_source.html#l00075">toTimePoint()</a>.</p>
-
-</div>
-</div>
 <a id="a2a0436d9513051adb71c4f01d4f8e807" name="a2a0436d9513051adb71c4f01d4f8e807"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2a0436d9513051adb71c4f01d4f8e807">&#9670;&#160;</a></span>localTimeUtcOffset()</h2>
 
@@ -411,52 +378,6 @@ template&lt;typename Clock , typename <a class="el" href="group__NodeIds.html#gg
 
 </div>
 </div>
-<a id="a18b5241e57fe24c2ac88661fed11ba8b" name="a18b5241e57fe24c2ac88661fed11ba8b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a18b5241e57fe24c2ac88661fed11ba8b">&#9670;&#160;</a></span>now()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="classopcua_1_1DateTime.html">DateTime</a> opcua::DateTime::now </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get current <a class="el" href="classopcua_1_1DateTime.html" title="UA_DateTime wrapper class.">DateTime</a>. </p>
-
-</div>
-</div>
-<a id="a1811e55104957d60b31663079821766b" name="a1811e55104957d60b31663079821766b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1811e55104957d60b31663079821766b">&#9670;&#160;</a></span>toStruct()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__DateTimeStruct.html">UA_DateTimeStruct</a> opcua::DateTime::toStruct </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Convert to <a class="elRef" target="_blank" href="open62541/structUA__DateTimeStruct.html">UA_DateTimeStruct</a>. </p>
-
-</div>
-</div>
 <a id="adf4172f40087c213d7ab7932286387f4" name="adf4172f40087c213d7ab7932286387f4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adf4172f40087c213d7ab7932286387f4">&#9670;&#160;</a></span>toTimePoint()</h2>
 
@@ -477,7 +398,7 @@ template&lt;typename Clock , typename <a class="el" href="group__NodeIds.html#gg
 
 <p class="reference">References <a class="el" href="classopcua_1_1DateTime.html#a20b227dfd968989c0b6d16d304215e38">get()</a>, and <a class="elRef" target="_blank" href="open62541/types_8h.html#a489381cc84a7d552fc23c907c7c5c9cb">UA_DATETIME_UNIX_EPOCH</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="TypeConverter_8h_source.html#l00312">opcua::TypeConverter&lt; std::chrono::time_point&lt; Clock, Duration &gt; &gt;::fromNative()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="TypeConverter_8h_source.html#l00313">opcua::TypeConverter&lt; std::chrono::time_point&lt; Clock, Duration &gt; &gt;::fromNative()</a>.</p>
 
 </div>
 </div>
@@ -505,6 +426,87 @@ template&lt;typename Clock , typename <a class="el" href="group__NodeIds.html#gg
 </div><div class="memdoc">
 
 <p>Convert to Unix time (number of seconds since January 1, 1970 UTC). </p>
+
+</div>
+</div>
+<a id="a1811e55104957d60b31663079821766b" name="a1811e55104957d60b31663079821766b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1811e55104957d60b31663079821766b">&#9670;&#160;</a></span>toStruct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__DateTimeStruct.html">UA_DateTimeStruct</a> opcua::DateTime::toStruct </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convert to <a class="elRef" target="_blank" href="open62541/structUA__DateTimeStruct.html">UA_DateTimeStruct</a>. </p>
+
+</div>
+</div>
+<a id="a20b227dfd968989c0b6d16d304215e38" name="a20b227dfd968989c0b6d16d304215e38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20b227dfd968989c0b6d16d304215e38">&#9670;&#160;</a></span>get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int64_t opcua::DateTime::get </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get <a class="el" href="classopcua_1_1DateTime.html" title="UA_DateTime wrapper class.">DateTime</a> value as 100 nanosecond intervals since January 1, 1601 (UTC). </p>
+
+<p class="reference">Referenced by <a class="el" href="TypeConverter_8h_source.html#l00317">opcua::TypeConverter&lt; std::chrono::time_point&lt; Clock, Duration &gt; &gt;::toNative()</a>, and <a class="el" href="DateTime_8h_source.html#l00075">toTimePoint()</a>.</p>
+
+</div>
+</div>
+<a id="adc058b53ee4123c5ea3be4bba633cb2a" name="adc058b53ee4123c5ea3be4bba633cb2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc058b53ee4123c5ea3be4bba633cb2a">&#9670;&#160;</a></span>format()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string opcua::DateTime::format </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>format</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>localtime</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convert to string with given format (same format codes as strftime). </p>
+<dl class="section see"><dt>See also</dt><dd><a href="https://en.cppreference.com/w/cpp/chrono/c/strftime">https://en.cppreference.com/w/cpp/chrono/c/strftime</a> </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_minimal_8cpp-example.html#a7">client_minimal.cpp</a>, <a class="el" href="client_subscription_8cpp-example.html#a11">client_subscription.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#a9">server_valuecallback.cpp</a>.</dd>
+</dl>
 
 </div>
 </div>

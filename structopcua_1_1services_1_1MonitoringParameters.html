@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.5.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.6.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -105,25 +105,45 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="services_2MonitoredItem_8h_source.html#l00047">47</a> of file <a class="el" href="services_2MonitoredItem_8h_source.html">MonitoredItem.h</a>.</p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
-<a id="a6658f38cb9a74d39418b4e719ffeda01" name="a6658f38cb9a74d39418b4e719ffeda01"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6658f38cb9a74d39418b4e719ffeda01">&#9670;&#160;</a></span>discardOldest</h2>
+<a id="af190773a57ecf87dedd27ae0f6161087" name="af190773a57ecf87dedd27ae0f6161087"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af190773a57ecf87dedd27ae0f6161087">&#9670;&#160;</a></span>timestamps</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool opcua::services::MonitoringParameters::discardOldest = true</td>
+          <td class="memname"><a class="el" href="namespaceopcua.html#a5fe27bb15f3e5712b9f2dbe2b090b304">TimestampsToReturn</a> opcua::services::MonitoringParameters::timestamps = <a class="el" href="namespaceopcua.html#a5fe27bb15f3e5712b9f2dbe2b090b304a130c5b3473c57faa76e2a1c54e26f88e">TimestampsToReturn::Both</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Discard policy when the queue is full. </p>
-<ul>
-<li><code>true</code>: the oldest (first) notification in the queue is discarded</li>
-<li><code>false</code>: the last notification added to the queue gets replaced with the new notification </li>
-</ul>
+<p>Timestamps to be transmitted. Won't be revised by the server. </p>
 
-<p class="definition">Definition at line <a class="el" href="services_2MonitoredItem_8h_source.html#l00070">70</a> of file <a class="el" href="services_2MonitoredItem_8h_source.html">MonitoredItem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="services_2MonitoredItem_8h_source.html#l00049">49</a> of file <a class="el" href="services_2MonitoredItem_8h_source.html">MonitoredItem.h</a>.</p>
+
+</div>
+</div>
+<a id="aac8b360b3bdc6dd65c19a7bc3ed28e7e" name="aac8b360b3bdc6dd65c19a7bc3ed28e7e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac8b360b3bdc6dd65c19a7bc3ed28e7e">&#9670;&#160;</a></span>samplingInterval</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double opcua::services::MonitoringParameters::samplingInterval = 250.0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Interval in milliseconds that defines the fastest rate at which the <a class="el" href="classopcua_1_1MonitoredItem.html" title="High-level monitored item class.">MonitoredItem</a> should be accessed and evaluated. </p>
+<p>The following values have special meaning:</p><ul>
+<li><code>0.0</code> to use the fastest practical rate</li>
+<li><code>-1.0</code> to use the default sampling interval (publishing interval of the subscription) </li>
+</ul>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_subscription_8cpp-example.html#a13">client_subscription.cpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="services_2MonitoredItem_8h_source.html#l00054">54</a> of file <a class="el" href="services_2MonitoredItem_8h_source.html">MonitoredItem.h</a>.</p>
 
 </div>
 </div>
@@ -168,45 +188,25 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aac8b360b3bdc6dd65c19a7bc3ed28e7e" name="aac8b360b3bdc6dd65c19a7bc3ed28e7e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aac8b360b3bdc6dd65c19a7bc3ed28e7e">&#9670;&#160;</a></span>samplingInterval</h2>
+<a id="a6658f38cb9a74d39418b4e719ffeda01" name="a6658f38cb9a74d39418b4e719ffeda01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6658f38cb9a74d39418b4e719ffeda01">&#9670;&#160;</a></span>discardOldest</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double opcua::services::MonitoringParameters::samplingInterval = 250.0</td>
+          <td class="memname">bool opcua::services::MonitoringParameters::discardOldest = true</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Interval in milliseconds that defines the fastest rate at which the <a class="el" href="classopcua_1_1MonitoredItem.html" title="High-level monitored item class.">MonitoredItem</a> should be accessed and evaluated. </p>
-<p>The following values have special meaning:</p><ul>
-<li><code>0.0</code> to use the fastest practical rate</li>
-<li><code>-1.0</code> to use the default sampling interval (publishing interval of the subscription) </li>
+<p>Discard policy when the queue is full. </p>
+<ul>
+<li><code>true</code>: the oldest (first) notification in the queue is discarded</li>
+<li><code>false</code>: the last notification added to the queue gets replaced with the new notification </li>
 </ul>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_subscription_8cpp-example.html#a13">client_subscription.cpp</a>.</dd>
-</dl>
 
-<p class="definition">Definition at line <a class="el" href="services_2MonitoredItem_8h_source.html#l00054">54</a> of file <a class="el" href="services_2MonitoredItem_8h_source.html">MonitoredItem.h</a>.</p>
-
-</div>
-</div>
-<a id="af190773a57ecf87dedd27ae0f6161087" name="af190773a57ecf87dedd27ae0f6161087"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af190773a57ecf87dedd27ae0f6161087">&#9670;&#160;</a></span>timestamps</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespaceopcua.html#a5fe27bb15f3e5712b9f2dbe2b090b304">TimestampsToReturn</a> opcua::services::MonitoringParameters::timestamps = <a class="el" href="namespaceopcua.html#a5fe27bb15f3e5712b9f2dbe2b090b304a130c5b3473c57faa76e2a1c54e26f88e">TimestampsToReturn::Both</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Timestamps to be transmitted. Won't be revised by the server. </p>
-
-<p class="definition">Definition at line <a class="el" href="services_2MonitoredItem_8h_source.html#l00049">49</a> of file <a class="el" href="services_2MonitoredItem_8h_source.html">MonitoredItem.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="services_2MonitoredItem_8h_source.html#l00070">70</a> of file <a class="el" href="services_2MonitoredItem_8h_source.html">MonitoredItem.h</a>.</p>
 
 </div>
 </div>

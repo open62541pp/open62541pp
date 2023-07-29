@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.5.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.6.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -167,80 +167,8 @@ template&lt;typename ServerOrClient &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a2a03adb09887485e58b59534b8b40bad" name="a2a03adb09887485e58b59534b8b40bad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2a03adb09887485e58b59534b8b40bad">&#9670;&#160;</a></span>deleteMonitoredItem()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename ServerOrClient &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classopcua_1_1MonitoredItem.html">opcua::MonitoredItem</a>&lt; ServerOrClient &gt;::deleteMonitoredItem </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Delete this monitored item. </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__MonitoredItem.html#ga8c2014ad46076f30dd32cda553d97db7" title="Delete a monitored item from a subscription.">services::deleteMonitoredItem</a> </dd></dl>
-
-</div>
-</div>
-<a id="ad7bbb17916d38c4458378cace0b7d9d2" name="ad7bbb17916d38c4458378cace0b7d9d2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad7bbb17916d38c4458378cace0b7d9d2">&#9670;&#160;</a></span>getAttributeId()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename ServerOrClient &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61">AttributeId</a> <a class="el" href="classopcua_1_1MonitoredItem.html">opcua::MonitoredItem</a>&lt; ServerOrClient &gt;::getAttributeId </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get the monitored AttributeId. </p>
-
-</div>
-</div>
-<a id="ac636bc74ca612740213d688329ea2ab2" name="ac636bc74ca612740213d688329ea2ab2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac636bc74ca612740213d688329ea2ab2">&#9670;&#160;</a></span>getConnection() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename ServerOrClient &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const ServerOrClient &amp; <a class="el" href="classopcua_1_1MonitoredItem.html">opcua::MonitoredItem</a>&lt; ServerOrClient &gt;::getConnection </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the server/client instance. </p>
-
-</div>
-</div>
 <a id="a16596e0a764506ac4336d9dcab65c10e" name="a16596e0a764506ac4336d9dcab65c10e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a16596e0a764506ac4336d9dcab65c10e">&#9670;&#160;</a></span>getConnection() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a16596e0a764506ac4336d9dcab65c10e">&#9670;&#160;</a></span>getConnection() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -268,8 +196,8 @@ template&lt;typename ServerOrClient &gt; </div>
 
 </div>
 </div>
-<a id="ab9b480044d5a816cdbad82e83c54ff11" name="ab9b480044d5a816cdbad82e83c54ff11"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab9b480044d5a816cdbad82e83c54ff11">&#9670;&#160;</a></span>getMonitoredItemId()</h2>
+<a id="ac636bc74ca612740213d688329ea2ab2" name="ac636bc74ca612740213d688329ea2ab2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac636bc74ca612740213d688329ea2ab2">&#9670;&#160;</a></span>getConnection() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -280,7 +208,7 @@ template&lt;typename ServerOrClient &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t <a class="el" href="classopcua_1_1MonitoredItem.html">opcua::MonitoredItem</a>&lt; ServerOrClient &gt;::getMonitoredItemId </td>
+          <td class="memname">const ServerOrClient &amp; <a class="el" href="classopcua_1_1MonitoredItem.html">opcua::MonitoredItem</a>&lt; ServerOrClient &gt;::getConnection </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -293,49 +221,7 @@ template&lt;typename ServerOrClient &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Get the server-assigned identifier of this monitored item. </p>
-
-</div>
-</div>
-<a id="a1f0266437836c187667f59d31422a590" name="a1f0266437836c187667f59d31422a590"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f0266437836c187667f59d31422a590">&#9670;&#160;</a></span>getNodeId()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename ServerOrClient &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp; <a class="el" href="classopcua_1_1MonitoredItem.html">opcua::MonitoredItem</a>&lt; ServerOrClient &gt;::getNodeId </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get the monitored <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a>. </p>
-
-</div>
-</div>
-<a id="a1eee85b46c300fe018fdabb673a60bbf" name="a1eee85b46c300fe018fdabb673a60bbf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1eee85b46c300fe018fdabb673a60bbf">&#9670;&#160;</a></span>getSubscription()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename ServerOrClient &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Subscription.html">Subscription</a>&lt; ServerOrClient &gt; <a class="el" href="classopcua_1_1MonitoredItem.html">opcua::MonitoredItem</a>&lt; ServerOrClient &gt;::getSubscription </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get the underlying subscription. </p>
+<p>Get the server/client instance. </p>
 
 </div>
 </div>
@@ -368,8 +254,37 @@ template&lt;typename ServerOrClient &gt; </div>
 
 </div>
 </div>
-<a id="a0cd3a9d797f82d428500370e10140d8e" name="a0cd3a9d797f82d428500370e10140d8e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0cd3a9d797f82d428500370e10140d8e">&#9670;&#160;</a></span>setMonitoringMode()</h2>
+<a id="ab9b480044d5a816cdbad82e83c54ff11" name="ab9b480044d5a816cdbad82e83c54ff11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9b480044d5a816cdbad82e83c54ff11">&#9670;&#160;</a></span>getMonitoredItemId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t <a class="el" href="classopcua_1_1MonitoredItem.html">opcua::MonitoredItem</a>&lt; ServerOrClient &gt;::getMonitoredItemId </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the server-assigned identifier of this monitored item. </p>
+
+</div>
+</div>
+<a id="a1eee85b46c300fe018fdabb673a60bbf" name="a1eee85b46c300fe018fdabb673a60bbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1eee85b46c300fe018fdabb673a60bbf">&#9670;&#160;</a></span>getSubscription()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -377,18 +292,57 @@ template&lt;typename ServerOrClient &gt; </div>
 template&lt;typename ServerOrClient &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classopcua_1_1MonitoredItem.html">opcua::MonitoredItem</a>&lt; ServerOrClient &gt;::setMonitoringMode </td>
+          <td class="memname"><a class="el" href="classopcua_1_1Subscription.html">Subscription</a>&lt; ServerOrClient &gt; <a class="el" href="classopcua_1_1MonitoredItem.html">opcua::MonitoredItem</a>&lt; ServerOrClient &gt;::getSubscription </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceopcua.html#ac7b72cb1f86ea818f1386642867ff381">MonitoringMode</a>&#160;</td>
-          <td class="paramname"><em>monitoringMode</em></td><td>)</td>
-          <td></td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Set the monitoring mode of this monitored item. </p>
-<dl class="section note"><dt>Note</dt><dd>Not implemented for <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>. </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__MonitoredItem.html#ga27e41a99a1fb597dc1364f4da42d5954" title="Set the monitoring mode of a monitored item.">services::setMonitoringMode</a> </dd></dl>
+<p>Get the underlying subscription. </p>
+
+</div>
+</div>
+<a id="a1f0266437836c187667f59d31422a590" name="a1f0266437836c187667f59d31422a590"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f0266437836c187667f59d31422a590">&#9670;&#160;</a></span>getNodeId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp; <a class="el" href="classopcua_1_1MonitoredItem.html">opcua::MonitoredItem</a>&lt; ServerOrClient &gt;::getNodeId </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the monitored <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a>. </p>
+
+</div>
+</div>
+<a id="ad7bbb17916d38c4458378cace0b7d9d2" name="ad7bbb17916d38c4458378cace0b7d9d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7bbb17916d38c4458378cace0b7d9d2">&#9670;&#160;</a></span>getAttributeId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceopcua.html#a01ebacac6968a88933b658290a7a1b61">AttributeId</a> <a class="el" href="classopcua_1_1MonitoredItem.html">opcua::MonitoredItem</a>&lt; ServerOrClient &gt;::getAttributeId </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the monitored AttributeId. </p>
 
 </div>
 </div>
@@ -413,6 +367,52 @@ template&lt;typename ServerOrClient &gt; </div>
 <p>Modify this monitored item. </p>
 <dl class="section note"><dt>Note</dt><dd>Not implemented for <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="group__MonitoredItem.html#gaf94de46df704cffd3b421206613f6e74" title="Modify a monitored item of a subscription.">services::modifyMonitoredItem</a> </dd></dl>
+
+</div>
+</div>
+<a id="a0cd3a9d797f82d428500370e10140d8e" name="a0cd3a9d797f82d428500370e10140d8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0cd3a9d797f82d428500370e10140d8e">&#9670;&#160;</a></span>setMonitoringMode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classopcua_1_1MonitoredItem.html">opcua::MonitoredItem</a>&lt; ServerOrClient &gt;::setMonitoringMode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#ac7b72cb1f86ea818f1386642867ff381">MonitoringMode</a>&#160;</td>
+          <td class="paramname"><em>monitoringMode</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the monitoring mode of this monitored item. </p>
+<dl class="section note"><dt>Note</dt><dd>Not implemented for <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>. </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__MonitoredItem.html#ga27e41a99a1fb597dc1364f4da42d5954" title="Set the monitoring mode of a monitored item.">services::setMonitoringMode</a> </dd></dl>
+
+</div>
+</div>
+<a id="a2a03adb09887485e58b59534b8b40bad" name="a2a03adb09887485e58b59534b8b40bad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a03adb09887485e58b59534b8b40bad">&#9670;&#160;</a></span>deleteMonitoredItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classopcua_1_1MonitoredItem.html">opcua::MonitoredItem</a>&lt; ServerOrClient &gt;::deleteMonitoredItem </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Delete this monitored item. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__MonitoredItem.html#ga8c2014ad46076f30dd32cda553d97db7" title="Delete a monitored item from a subscription.">services::deleteMonitoredItem</a> </dd></dl>
 
 </div>
 </div>

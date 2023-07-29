@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.5.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.6.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -163,60 +163,8 @@ template&lt;typename ServerOrClient &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ae4a2f23ecdf60d1d4756d26426870880" name="ae4a2f23ecdf60d1d4756d26426870880"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4a2f23ecdf60d1d4756d26426870880">&#9670;&#160;</a></span>deleteSubscription()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename ServerOrClient &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; ServerOrClient &gt;::deleteSubscription </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Delete this subscription. </p>
-<dl class="section note"><dt>Note</dt><dd>Not implemented for <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>. </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__Subscription.html#gafa3988fe5d0c5ce694d0ff506a4b4edd" title="Delete a subscription.">services::deleteSubscription</a> </dd></dl>
-
-</div>
-</div>
-<a id="a6a5500ecf7bea6a2e6f2da52e7f009f1" name="a6a5500ecf7bea6a2e6f2da52e7f009f1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a5500ecf7bea6a2e6f2da52e7f009f1">&#9670;&#160;</a></span>getConnection() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename ServerOrClient &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const ServerOrClient &amp; <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; ServerOrClient &gt;::getConnection </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get the server/client instance. </p>
-
-</div>
-</div>
 <a id="a29299d3e032cba1478c57b656576960c" name="a29299d3e032cba1478c57b656576960c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a29299d3e032cba1478c57b656576960c">&#9670;&#160;</a></span>getConnection() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a29299d3e032cba1478c57b656576960c">&#9670;&#160;</a></span>getConnection() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -244,24 +192,32 @@ template&lt;typename ServerOrClient &gt; </div>
 
 </div>
 </div>
-<a id="a414d28b4e6bde2ffdaa1c72ac6df6903" name="a414d28b4e6bde2ffdaa1c72ac6df6903"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a414d28b4e6bde2ffdaa1c72ac6df6903">&#9670;&#160;</a></span>getMonitoredItems()</h2>
+<a id="a6a5500ecf7bea6a2e6f2da52e7f009f1" name="a6a5500ecf7bea6a2e6f2da52e7f009f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a5500ecf7bea6a2e6f2da52e7f009f1">&#9670;&#160;</a></span>getConnection() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename ServerOrClient &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; <a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; ServerOrClient &gt; &gt; <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; ServerOrClient &gt;::getMonitoredItems </td>
+          <td class="memname">const ServerOrClient &amp; <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; ServerOrClient &gt;::getConnection </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Get all local monitored items. </p>
+<p>Get the server/client instance. </p>
 
 </div>
 </div>
@@ -294,8 +250,8 @@ template&lt;typename ServerOrClient &gt; </div>
 
 </div>
 </div>
-<a id="a9bd5cff80431adb322fce04f4e1e39d9" name="a9bd5cff80431adb322fce04f4e1e39d9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9bd5cff80431adb322fce04f4e1e39d9">&#9670;&#160;</a></span>setPublishingMode()</h2>
+<a id="a414d28b4e6bde2ffdaa1c72ac6df6903" name="a414d28b4e6bde2ffdaa1c72ac6df6903"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a414d28b4e6bde2ffdaa1c72ac6df6903">&#9670;&#160;</a></span>getMonitoredItems()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -303,18 +259,15 @@ template&lt;typename ServerOrClient &gt; </div>
 template&lt;typename ServerOrClient &gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; ServerOrClient &gt;::setPublishingMode </td>
+          <td class="memname">std::vector&lt; <a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; ServerOrClient &gt; &gt; <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; ServerOrClient &gt;::getMonitoredItems </td>
           <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>publishing</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Enable/disable publishing of notification messages. </p>
-<dl class="section note"><dt>Note</dt><dd>Not implemented for <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>. </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__Subscription.html#ga80719d2520f347ac1db551ec37c2513c" title="Enable/disable publishing of notification messages.">services::setPublishingMode</a> </dd></dl>
+<p>Get all local monitored items. </p>
 
 </div>
 </div>
@@ -339,6 +292,30 @@ template&lt;typename ServerOrClient &gt; </div>
 <p>Modify this subscription. </p>
 <dl class="section note"><dt>Note</dt><dd>Not implemented for <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="group__Subscription.html#gaaf599cc8de212e459f6dae28463af7e4" title="Modify a subscription.">services::modifySubscription</a> </dd></dl>
+
+</div>
+</div>
+<a id="a9bd5cff80431adb322fce04f4e1e39d9" name="a9bd5cff80431adb322fce04f4e1e39d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9bd5cff80431adb322fce04f4e1e39d9">&#9670;&#160;</a></span>setPublishingMode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; ServerOrClient &gt;::setPublishingMode </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>publishing</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enable/disable publishing of notification messages. </p>
+<dl class="section note"><dt>Note</dt><dd>Not implemented for <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>. </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__Subscription.html#ga80719d2520f347ac1db551ec37c2513c" title="Enable/disable publishing of notification messages.">services::setPublishingMode</a> </dd></dl>
 
 </div>
 </div>
@@ -475,6 +452,29 @@ template&lt;typename ServerOrClient &gt; </div>
 <p>Create a monitored item for event notifications. </p>
 <p>Parameters are passed by reference because illegal parameters can be revised by the server. The updated parameters reflect the actual values that the server will use. </p><dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/Core/Part4/v105/docs/7.21">https://reference.opcfoundation.org/Core/Part4/v105/docs/7.21</a>   </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Not implemented for <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>. </dd></dl>
+
+</div>
+</div>
+<a id="ae4a2f23ecdf60d1d4756d26426870880" name="ae4a2f23ecdf60d1d4756d26426870880"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4a2f23ecdf60d1d4756d26426870880">&#9670;&#160;</a></span>deleteSubscription()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; ServerOrClient &gt;::deleteSubscription </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Delete this subscription. </p>
+<dl class="section note"><dt>Note</dt><dd>Not implemented for <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>. </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__Subscription.html#gafa3988fe5d0c5ce694d0ff506a4b4edd" title="Delete a subscription.">services::deleteSubscription</a> </dd></dl>
 
 </div>
 </div>

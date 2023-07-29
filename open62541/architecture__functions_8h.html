@@ -182,14 +182,36 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a35843fc6daa0bbf5ee67a6ca7cdebfdb" name="a35843fc6daa0bbf5ee67a6ca7cdebfdb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a35843fc6daa0bbf5ee67a6ca7cdebfdb">&#9670;&#160;</a></span>UA_accept()</h2>
+<a id="ab9cb9eec4e0303729f9bb8c8aff0f9e3" name="ab9cb9eec4e0303729f9bb8c8aff0f9e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9cb9eec4e0303729f9bb8c8aff0f9e3">&#9670;&#160;</a></span>UA_sleep_ms()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int UA_accept </td>
+          <td class="memname"><a class="el" href="config_8h.html#aa397bffde7d792f38dcbb8e329486f9c">_UA_BEGIN_DECLS</a> int UA_sleep_ms </td>
+          <td>(</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>miliSeconds</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This work is licensed under a Creative Commons CCZero 1.0 Universal License. </p>
+<p>See <a href="http://creativecommons.org/publicdomain/zero/1.0/">http://creativecommons.org/publicdomain/zero/1.0/</a> for more information.</p>
+<p>Copyright 2018 (c) Jose Cabral, fortiss GmbH Sleep function </p>
+
+</div>
+</div>
+<a id="a805379d7b703cde2edce2ad88d959f67" name="a805379d7b703cde2edce2ad88d959f67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a805379d7b703cde2edce2ad88d959f67">&#9670;&#160;</a></span>UA_send()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ssize_t UA_send </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a>&#160;</td>
           <td class="paramname"><em>sockfd</em>, </td>
@@ -197,290 +219,20 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">struct sockaddr *&#160;</td>
-          <td class="paramname"><em>addr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">socklen_t *&#160;</td>
-          <td class="paramname"><em>addrlen</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ab5e195aabe3a8c65df8aa88dd054203e" name="ab5e195aabe3a8c65df8aa88dd054203e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab5e195aabe3a8c65df8aa88dd054203e">&#9670;&#160;</a></span>UA_access()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int UA_access </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>pathname</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>mode</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Access to file function. </p>
-
-</div>
-</div>
-<a id="ac620636693e5f5265997d37d848f6adb" name="ac620636693e5f5265997d37d848f6adb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac620636693e5f5265997d37d848f6adb">&#9670;&#160;</a></span>UA_bind()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int UA_bind </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a>&#160;</td>
-          <td class="paramname"><em>sockfd</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const struct sockaddr *&#160;</td>
-          <td class="paramname"><em>addr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">socklen_t&#160;</td>
-          <td class="paramname"><em>addrlen</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="adc8cc3706a74f2dab5caca77274ebbc2" name="adc8cc3706a74f2dab5caca77274ebbc2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adc8cc3706a74f2dab5caca77274ebbc2">&#9670;&#160;</a></span>UA_close()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int UA_close </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a>&#160;</td>
-          <td class="paramname"><em>sockfd</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a011256f50205cd472ce14da93c9aa3b9" name="a011256f50205cd472ce14da93c9aa3b9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a011256f50205cd472ce14da93c9aa3b9">&#9670;&#160;</a></span>UA_connect()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int UA_connect </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a>&#160;</td>
-          <td class="paramname"><em>sockfd</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const struct sockaddr *&#160;</td>
-          <td class="paramname"><em>addr</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">socklen_t&#160;</td>
-          <td class="paramname"><em>addrlen</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aba26238708b214c2431638929501f6c3" name="aba26238708b214c2431638929501f6c3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aba26238708b214c2431638929501f6c3">&#9670;&#160;</a></span>UA_deinitialize_architecture_network()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void UA_deinitialize_architecture_network </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a7f00f47290257c1b1176a2c3fa1b664b" name="a7f00f47290257c1b1176a2c3fa1b664b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f00f47290257c1b1176a2c3fa1b664b">&#9670;&#160;</a></span>UA_fd_isset()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int UA_fd_isset </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a>&#160;</td>
-          <td class="paramname"><em>fd</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">fd_set *&#160;</td>
-          <td class="paramname"><em>set</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a69fd3a0298ec06c78ad6b349be56bdbc" name="a69fd3a0298ec06c78ad6b349be56bdbc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a69fd3a0298ec06c78ad6b349be56bdbc">&#9670;&#160;</a></span>UA_fd_set()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void UA_fd_set </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a>&#160;</td>
-          <td class="paramname"><em>fd</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">fd_set *&#160;</td>
-          <td class="paramname"><em>set</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ad9ccb3644cc2f216eae627843d3c7477" name="ad9ccb3644cc2f216eae627843d3c7477"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad9ccb3644cc2f216eae627843d3c7477">&#9670;&#160;</a></span>UA_freeaddrinfo()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void UA_freeaddrinfo </td>
-          <td>(</td>
-          <td class="paramtype">struct addrinfo *&#160;</td>
-          <td class="paramname"><em>res</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="af154ee06dd72a455bcab1903e14b33a3" name="af154ee06dd72a455bcab1903e14b33a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af154ee06dd72a455bcab1903e14b33a3">&#9670;&#160;</a></span>UA_getaddrinfo()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int UA_getaddrinfo </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>node</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>service</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const struct addrinfo *&#160;</td>
-          <td class="paramname"><em>hints</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">struct addrinfo **&#160;</td>
-          <td class="paramname"><em>res</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="af41d4fc0bb000f51b414b483f915807a" name="af41d4fc0bb000f51b414b483f915807a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af41d4fc0bb000f51b414b483f915807a">&#9670;&#160;</a></span>UA_gethostname()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int UA_gethostname </td>
-          <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>buf</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>len</em>&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>flags</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -490,30 +242,50 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Socket functions. </p>
+
 </div>
 </div>
-<a id="a487fa411578bcc245ef2434b443ea419" name="a487fa411578bcc245ef2434b443ea419"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a487fa411578bcc245ef2434b443ea419">&#9670;&#160;</a></span>UA_getsockname()</h2>
+<a id="a38f4ff5e1b0a73c22c222504c1bbc9b1" name="a38f4ff5e1b0a73c22c222504c1bbc9b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38f4ff5e1b0a73c22c222504c1bbc9b1">&#9670;&#160;</a></span>UA_sendto()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int UA_getsockname </td>
+          <td class="memname">ssize_t UA_sendto </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype"><a class="el" href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a>&#160;</td>
           <td class="paramname"><em>sockfd</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">struct sockaddr *&#160;</td>
-          <td class="paramname"><em>addr</em>, </td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>buf</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">socklen_t *&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>flags</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const struct sockaddr *&#160;</td>
+          <td class="paramname"><em>dest_addr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">socklen_t&#160;</td>
           <td class="paramname"><em>addrlen</em>&#160;</td>
         </tr>
         <tr>
@@ -526,196 +298,46 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a5d6a1e3d43182b99d245c982a1b651af" name="a5d6a1e3d43182b99d245c982a1b651af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d6a1e3d43182b99d245c982a1b651af">&#9670;&#160;</a></span>UA_getsockopt()</h2>
+<a id="aef746b31f30d1f2f0e1d5c88bc15be29" name="aef746b31f30d1f2f0e1d5c88bc15be29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef746b31f30d1f2f0e1d5c88bc15be29">&#9670;&#160;</a></span>UA_select()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int UA_getsockopt </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>sockfd</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>level</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>optname</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>optval</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">socklen_t *&#160;</td>
-          <td class="paramname"><em>optlen</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a3873739027cacfea7a99fa8b20cf8297" name="a3873739027cacfea7a99fa8b20cf8297"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3873739027cacfea7a99fa8b20cf8297">&#9670;&#160;</a></span>UA_htonl()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t UA_htonl </td>
-          <td>(</td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>hostlong</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a096c59944d7ddd89664dbf0f6df31954" name="a096c59944d7ddd89664dbf0f6df31954"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a096c59944d7ddd89664dbf0f6df31954">&#9670;&#160;</a></span>UA_inet_pton()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int UA_inet_pton </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>af</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>src</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>dst</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aa8da79aec5bde632d2b9ab9928b0215e" name="aa8da79aec5bde632d2b9ab9928b0215e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa8da79aec5bde632d2b9ab9928b0215e">&#9670;&#160;</a></span>UA_initialize_architecture_network()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void UA_initialize_architecture_network </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="affc01d2de5e76afb8eea91d90eaf0f21" name="affc01d2de5e76afb8eea91d90eaf0f21"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#affc01d2de5e76afb8eea91d90eaf0f21">&#9670;&#160;</a></span>UA_ioctl()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int UA_ioctl </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>fildes</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>request</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>...</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a559a47f10ed3568eaf25ac3ee33f932d" name="a559a47f10ed3568eaf25ac3ee33f932d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a559a47f10ed3568eaf25ac3ee33f932d">&#9670;&#160;</a></span>UA_listen()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int UA_listen </td>
+          <td class="memname">int UA_select </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a>&#160;</td>
-          <td class="paramname"><em>sockfd</em>, </td>
+          <td class="paramname"><em>nfds</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>backlog</em>&#160;</td>
+          <td class="paramtype">fd_set *&#160;</td>
+          <td class="paramname"><em>readfds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">fd_set *&#160;</td>
+          <td class="paramname"><em>writefds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">fd_set *&#160;</td>
+          <td class="paramname"><em>exceptfds</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct timeval *&#160;</td>
+          <td class="paramname"><em>timeout</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
           <td>)</td>
           <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a9edecddfdc2652f282bbd169b4e06dfb" name="a9edecddfdc2652f282bbd169b4e06dfb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9edecddfdc2652f282bbd169b4e06dfb">&#9670;&#160;</a></span>UA_ntohl()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t UA_ntohl </td>
-          <td>(</td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>netlong</em></td><td>)</td>
-          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -848,41 +470,23 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aef746b31f30d1f2f0e1d5c88bc15be29" name="aef746b31f30d1f2f0e1d5c88bc15be29"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aef746b31f30d1f2f0e1d5c88bc15be29">&#9670;&#160;</a></span>UA_select()</h2>
+<a id="a6c300a9a83efdf0cd0145b6e8897df36" name="a6c300a9a83efdf0cd0145b6e8897df36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c300a9a83efdf0cd0145b6e8897df36">&#9670;&#160;</a></span>UA_shutdown()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int UA_select </td>
+          <td class="memname">int UA_shutdown </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a>&#160;</td>
-          <td class="paramname"><em>nfds</em>, </td>
+          <td class="paramname"><em>sockfd</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">fd_set *&#160;</td>
-          <td class="paramname"><em>readfds</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">fd_set *&#160;</td>
-          <td class="paramname"><em>writefds</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">fd_set *&#160;</td>
-          <td class="paramname"><em>exceptfds</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">struct timeval *&#160;</td>
-          <td class="paramname"><em>timeout</em>&#160;</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>how</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -894,35 +498,29 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a805379d7b703cde2edce2ad88d959f67" name="a805379d7b703cde2edce2ad88d959f67"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a805379d7b703cde2edce2ad88d959f67">&#9670;&#160;</a></span>UA_send()</h2>
+<a id="a6316cc6958d206c666420c0b2fe4797e" name="a6316cc6958d206c666420c0b2fe4797e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6316cc6958d206c666420c0b2fe4797e">&#9670;&#160;</a></span>UA_socket()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">ssize_t UA_send </td>
+          <td class="memname"><a class="el" href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a> UA_socket </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a>&#160;</td>
-          <td class="paramname"><em>sockfd</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>buf</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>len</em>, </td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>domain</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>flags</em>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>protocol</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -932,51 +530,427 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Socket functions. </p>
-
 </div>
 </div>
-<a id="a38f4ff5e1b0a73c22c222504c1bbc9b1" name="a38f4ff5e1b0a73c22c222504c1bbc9b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a38f4ff5e1b0a73c22c222504c1bbc9b1">&#9670;&#160;</a></span>UA_sendto()</h2>
+<a id="ac620636693e5f5265997d37d848f6adb" name="ac620636693e5f5265997d37d848f6adb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac620636693e5f5265997d37d848f6adb">&#9670;&#160;</a></span>UA_bind()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">ssize_t UA_sendto </td>
+          <td class="memname">int UA_bind </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a>&#160;</td>
           <td class="paramname"><em>sockfd</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>buf</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>len</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>flags</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const struct sockaddr *&#160;</td>
-          <td class="paramname"><em>dest_addr</em>, </td>
+          <td class="paramname"><em>addr</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">socklen_t&#160;</td>
           <td class="paramname"><em>addrlen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a559a47f10ed3568eaf25ac3ee33f932d" name="a559a47f10ed3568eaf25ac3ee33f932d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a559a47f10ed3568eaf25ac3ee33f932d">&#9670;&#160;</a></span>UA_listen()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int UA_listen </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a>&#160;</td>
+          <td class="paramname"><em>sockfd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>backlog</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a35843fc6daa0bbf5ee67a6ca7cdebfdb" name="a35843fc6daa0bbf5ee67a6ca7cdebfdb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35843fc6daa0bbf5ee67a6ca7cdebfdb">&#9670;&#160;</a></span>UA_accept()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int UA_accept </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a>&#160;</td>
+          <td class="paramname"><em>sockfd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct sockaddr *&#160;</td>
+          <td class="paramname"><em>addr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">socklen_t *&#160;</td>
+          <td class="paramname"><em>addrlen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adc8cc3706a74f2dab5caca77274ebbc2" name="adc8cc3706a74f2dab5caca77274ebbc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc8cc3706a74f2dab5caca77274ebbc2">&#9670;&#160;</a></span>UA_close()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int UA_close </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a>&#160;</td>
+          <td class="paramname"><em>sockfd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a011256f50205cd472ce14da93c9aa3b9" name="a011256f50205cd472ce14da93c9aa3b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a011256f50205cd472ce14da93c9aa3b9">&#9670;&#160;</a></span>UA_connect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int UA_connect </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a>&#160;</td>
+          <td class="paramname"><em>sockfd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const struct sockaddr *&#160;</td>
+          <td class="paramname"><em>addr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">socklen_t&#160;</td>
+          <td class="paramname"><em>addrlen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a69fd3a0298ec06c78ad6b349be56bdbc" name="a69fd3a0298ec06c78ad6b349be56bdbc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69fd3a0298ec06c78ad6b349be56bdbc">&#9670;&#160;</a></span>UA_fd_set()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UA_fd_set </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a>&#160;</td>
+          <td class="paramname"><em>fd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">fd_set *&#160;</td>
+          <td class="paramname"><em>set</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7f00f47290257c1b1176a2c3fa1b664b" name="a7f00f47290257c1b1176a2c3fa1b664b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f00f47290257c1b1176a2c3fa1b664b">&#9670;&#160;</a></span>UA_fd_isset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int UA_fd_isset </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a>&#160;</td>
+          <td class="paramname"><em>fd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">fd_set *&#160;</td>
+          <td class="paramname"><em>set</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af154ee06dd72a455bcab1903e14b33a3" name="af154ee06dd72a455bcab1903e14b33a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af154ee06dd72a455bcab1903e14b33a3">&#9670;&#160;</a></span>UA_getaddrinfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int UA_getaddrinfo </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>service</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const struct addrinfo *&#160;</td>
+          <td class="paramname"><em>hints</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct addrinfo **&#160;</td>
+          <td class="paramname"><em>res</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3873739027cacfea7a99fa8b20cf8297" name="a3873739027cacfea7a99fa8b20cf8297"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3873739027cacfea7a99fa8b20cf8297">&#9670;&#160;</a></span>UA_htonl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t UA_htonl </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>hostlong</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9edecddfdc2652f282bbd169b4e06dfb" name="a9edecddfdc2652f282bbd169b4e06dfb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9edecddfdc2652f282bbd169b4e06dfb">&#9670;&#160;</a></span>UA_ntohl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t UA_ntohl </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>netlong</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a096c59944d7ddd89664dbf0f6df31954" name="a096c59944d7ddd89664dbf0f6df31954"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a096c59944d7ddd89664dbf0f6df31954">&#9670;&#160;</a></span>UA_inet_pton()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int UA_inet_pton </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>af</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>dst</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a53cd1fda00600fbd81d943b2774637d3" name="a53cd1fda00600fbd81d943b2774637d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53cd1fda00600fbd81d943b2774637d3">&#9670;&#160;</a></span>UA_socket_set_blocking()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int UA_socket_set_blocking </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a>&#160;</td>
+          <td class="paramname"><em>sockfd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a424972e9fc86bdb03f1f231a1229f8cc" name="a424972e9fc86bdb03f1f231a1229f8cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a424972e9fc86bdb03f1f231a1229f8cc">&#9670;&#160;</a></span>UA_socket_set_nonblocking()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int UA_socket_set_nonblocking </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a>&#160;</td>
+          <td class="paramname"><em>sockfd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="affc01d2de5e76afb8eea91d90eaf0f21" name="affc01d2de5e76afb8eea91d90eaf0f21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affc01d2de5e76afb8eea91d90eaf0f21">&#9670;&#160;</a></span>UA_ioctl()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int UA_ioctl </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>fildes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>request</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>...</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5d6a1e3d43182b99d245c982a1b651af" name="a5d6a1e3d43182b99d245c982a1b651af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d6a1e3d43182b99d245c982a1b651af">&#9670;&#160;</a></span>UA_getsockopt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int UA_getsockopt </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sockfd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>optname</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>optval</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">socklen_t *&#160;</td>
+          <td class="paramname"><em>optlen</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1034,23 +1008,41 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a6c300a9a83efdf0cd0145b6e8897df36" name="a6c300a9a83efdf0cd0145b6e8897df36"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6c300a9a83efdf0cd0145b6e8897df36">&#9670;&#160;</a></span>UA_shutdown()</h2>
+<a id="ad9ccb3644cc2f216eae627843d3c7477" name="ad9ccb3644cc2f216eae627843d3c7477"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9ccb3644cc2f216eae627843d3c7477">&#9670;&#160;</a></span>UA_freeaddrinfo()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int UA_shutdown </td>
+          <td class="memname">void UA_freeaddrinfo </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a>&#160;</td>
-          <td class="paramname"><em>sockfd</em>, </td>
+          <td class="paramtype">struct addrinfo *&#160;</td>
+          <td class="paramname"><em>res</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af41d4fc0bb000f51b414b483f915807a" name="af41d4fc0bb000f51b414b483f915807a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af41d4fc0bb000f51b414b483f915807a">&#9670;&#160;</a></span>UA_gethostname()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int UA_gethostname </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>how</em>&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1062,25 +1054,73 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ab9cb9eec4e0303729f9bb8c8aff0f9e3" name="ab9cb9eec4e0303729f9bb8c8aff0f9e3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab9cb9eec4e0303729f9bb8c8aff0f9e3">&#9670;&#160;</a></span>UA_sleep_ms()</h2>
+<a id="a487fa411578bcc245ef2434b443ea419" name="a487fa411578bcc245ef2434b443ea419"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a487fa411578bcc245ef2434b443ea419">&#9670;&#160;</a></span>UA_getsockname()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="config_8h.html#aa397bffde7d792f38dcbb8e329486f9c">_UA_BEGIN_DECLS</a> int UA_sleep_ms </td>
+          <td class="memname">int UA_getsockname </td>
           <td>(</td>
-          <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>miliSeconds</em></td><td>)</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sockfd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct sockaddr *&#160;</td>
+          <td class="paramname"><em>addr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">socklen_t *&#160;</td>
+          <td class="paramname"><em>addrlen</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa8da79aec5bde632d2b9ab9928b0215e" name="aa8da79aec5bde632d2b9ab9928b0215e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8da79aec5bde632d2b9ab9928b0215e">&#9670;&#160;</a></span>UA_initialize_architecture_network()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UA_initialize_architecture_network </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>This work is licensed under a Creative Commons CCZero 1.0 Universal License. </p>
-<p>See <a href="http://creativecommons.org/publicdomain/zero/1.0/">http://creativecommons.org/publicdomain/zero/1.0/</a> for more information.</p>
-<p>Copyright 2018 (c) Jose Cabral, fortiss GmbH Sleep function </p>
+</div>
+</div>
+<a id="aba26238708b214c2431638929501f6c3" name="aba26238708b214c2431638929501f6c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba26238708b214c2431638929501f6c3">&#9670;&#160;</a></span>UA_deinitialize_architecture_network()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UA_deinitialize_architecture_network </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -1126,76 +1166,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a6316cc6958d206c666420c0b2fe4797e" name="a6316cc6958d206c666420c0b2fe4797e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6316cc6958d206c666420c0b2fe4797e">&#9670;&#160;</a></span>UA_socket()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a> UA_socket </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>domain</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>protocol</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a53cd1fda00600fbd81d943b2774637d3" name="a53cd1fda00600fbd81d943b2774637d3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a53cd1fda00600fbd81d943b2774637d3">&#9670;&#160;</a></span>UA_socket_set_blocking()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned int UA_socket_set_blocking </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a>&#160;</td>
-          <td class="paramname"><em>sockfd</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a424972e9fc86bdb03f1f231a1229f8cc" name="a424972e9fc86bdb03f1f231a1229f8cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a424972e9fc86bdb03f1f231a1229f8cc">&#9670;&#160;</a></span>UA_socket_set_nonblocking()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned int UA_socket_set_nonblocking </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a>&#160;</td>
-          <td class="paramname"><em>sockfd</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="aaefe807046f4198e583dbc788748f4cb" name="aaefe807046f4198e583dbc788748f4cb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaefe807046f4198e583dbc788748f4cb">&#9670;&#160;</a></span>UA_strncasecmp()</h2>
 
@@ -1227,6 +1197,36 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab5e195aabe3a8c65df8aa88dd054203e" name="ab5e195aabe3a8c65df8aa88dd054203e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5e195aabe3a8c65df8aa88dd054203e">&#9670;&#160;</a></span>UA_access()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int UA_access </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>pathname</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>mode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Access to file function. </p>
 
 </div>
 </div>

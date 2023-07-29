@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.5.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.6.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -106,7 +106,7 @@ Static Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename WrapperType&gt;<br />
 struct opcua::TypeConverter&lt; WrapperType, std::enable_if_t&lt; detail::IsTypeWrapper&lt; WrapperType &gt;::value &gt; &gt;</div>
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00272">272</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00273">273</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a3cef7f476ee481d3b0c21fceae41f851" name="a3cef7f476ee481d3b0c21fceae41f851"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3cef7f476ee481d3b0c21fceae41f851">&#9670;&#160;</a></span>NativeConverter</h2>
@@ -122,43 +122,7 @@ template&lt;typename WrapperType &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00273">273</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
-
-</div>
-</div>
-<a id="a95c6c87bd944c12970d82a743f3a3997" name="a95c6c87bd944c12970d82a743f3a3997"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a95c6c87bd944c12970d82a743f3a3997">&#9670;&#160;</a></span>NativeType</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename WrapperType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="structopcua_1_1TypeConverter.html">opcua::TypeConverter</a>&lt; WrapperType, std::enable_if_t&lt; <a class="el" href="namespaceopcua_1_1detail.html#a6f6a9d9d89858dc4cd64637b4e252935">detail::IsTypeWrapper</a>&lt; WrapperType &gt;::value &gt; &gt;::NativeType =  typename WrapperType::NativeType</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00276">276</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
-
-</div>
-</div>
-<a id="ab3931edc2a8452cf0ec304c1557997fd" name="ab3931edc2a8452cf0ec304c1557997fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab3931edc2a8452cf0ec304c1557997fd">&#9670;&#160;</a></span>ValidTypes</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename WrapperType &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="structopcua_1_1TypeConverter.html">opcua::TypeConverter</a>&lt; WrapperType, std::enable_if_t&lt; <a class="el" href="namespaceopcua_1_1detail.html#a6f6a9d9d89858dc4cd64637b4e252935">detail::IsTypeWrapper</a>&lt; WrapperType &gt;::value &gt; &gt;::ValidTypes =  <a class="el" href="structopcua_1_1TypeIndexList.html">TypeIndexList</a>&lt;WrapperType::getTypeIndex()&gt;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00277">277</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00274">274</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
 </div>
 </div>
@@ -176,7 +140,43 @@ template&lt;typename WrapperType &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00275">275</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00276">276</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+
+</div>
+</div>
+<a id="a95c6c87bd944c12970d82a743f3a3997" name="a95c6c87bd944c12970d82a743f3a3997"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95c6c87bd944c12970d82a743f3a3997">&#9670;&#160;</a></span>NativeType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename WrapperType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structopcua_1_1TypeConverter.html">opcua::TypeConverter</a>&lt; WrapperType, std::enable_if_t&lt; <a class="el" href="namespaceopcua_1_1detail.html#a6f6a9d9d89858dc4cd64637b4e252935">detail::IsTypeWrapper</a>&lt; WrapperType &gt;::value &gt; &gt;::NativeType =  typename WrapperType::NativeType</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00277">277</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+
+</div>
+</div>
+<a id="ab3931edc2a8452cf0ec304c1557997fd" name="ab3931edc2a8452cf0ec304c1557997fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3931edc2a8452cf0ec304c1557997fd">&#9670;&#160;</a></span>ValidTypes</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename WrapperType &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="structopcua_1_1TypeConverter.html">opcua::TypeConverter</a>&lt; WrapperType, std::enable_if_t&lt; <a class="el" href="namespaceopcua_1_1detail.html#a6f6a9d9d89858dc4cd64637b4e252935">detail::IsTypeWrapper</a>&lt; WrapperType &gt;::value &gt; &gt;::ValidTypes =  <a class="el" href="structopcua_1_1TypeIndexList.html">TypeIndexList</a>&lt;WrapperType::getTypeIndex()&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00278">278</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
 </div>
 </div>
@@ -217,7 +217,7 @@ template&lt;typename WrapperType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00279">279</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00280">280</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
 </div>
 </div>
@@ -257,7 +257,7 @@ template&lt;typename WrapperType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00283">283</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00284">284</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
 </div>
 </div>

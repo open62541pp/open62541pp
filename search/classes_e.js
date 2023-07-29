@@ -1,8 +1,11 @@
 var searchData=
 [
-  ['server_0',['Server',['../classopcua_1_1Server.html',1,'opcua']]],
-  ['session_5flist_5fentry_1',['session_list_entry',['open62541/structsession__list__entry.html',0,'']]],
-  ['string_2',['String',['../classopcua_1_1String.html',1,'opcua']]],
-  ['subscription_3',['Subscription',['../classopcua_1_1Subscription.html',1,'opcua']]],
-  ['subscriptionparameters_4',['SubscriptionParameters',['../structopcua_1_1services_1_1SubscriptionParameters.html',1,'opcua::services']]]
+  ['readvalueid_0',['ReadValueId',['../classopcua_1_1ReadValueId.html',1,'opcua']]],
+  ['refentry_1',['RefEntry',['open62541/structRefEntry.html',0,'']]],
+  ['referencedescription_2',['ReferenceDescription',['../classopcua_1_1ReferenceDescription.html',1,'opcua']]],
+  ['reftree_3',['RefTree',['open62541/structRefTree.html',0,'']]],
+  ['registeredserver_5flist_5fentry_4',['registeredServer_list_entry',['open62541/structregisteredServer__list__entry.html',0,'']]],
+  ['relativepath_5',['RelativePath',['../classopcua_1_1RelativePath.html',1,'opcua']]],
+  ['relativepathelement_6',['RelativePathElement',['../classopcua_1_1RelativePathElement.html',1,'opcua']]],
+  ['resource_7',['resource',['open62541/structresource.html',0,'']]]
 ];

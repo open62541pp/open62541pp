@@ -120,22 +120,6 @@ Data Fields</h2></td></tr>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="history__data__backend_8h_source.html#l00029">29</a> of file <a class="el" href="history__data__backend_8h_source.html">history_data_backend.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
-<a id="a2c7701cac4b3890aaa15c94631e24f75" name="a2c7701cac4b3890aaa15c94631e24f75"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2c7701cac4b3890aaa15c94631e24f75">&#9670;&#160;</a></span>boundSupported</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(* UA_HistoryDataBackend::boundSupported) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdbContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="history__data__backend_8h_source.html#l00235">235</a> of file <a class="el" href="history__data__backend_8h_source.html">history_data_backend.h</a>.</p>
-
-</div>
-</div>
 <a id="a8d258afd105190d7af0308ea0890f88c" name="a8d258afd105190d7af0308ea0890f88c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8d258afd105190d7af0308ea0890f88c">&#9670;&#160;</a></span>context</h2>
 
@@ -149,22 +133,6 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="history__data__backend_8h_source.html#l00030">30</a> of file <a class="el" href="history__data__backend_8h_source.html">history_data_backend.h</a>.</p>
-
-</div>
-</div>
-<a id="a5e587fef5ccde65dc89a5b7a1e0f53ed" name="a5e587fef5ccde65dc89a5b7a1e0f53ed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e587fef5ccde65dc89a5b7a1e0f53ed">&#9670;&#160;</a></span>copyDataValues</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_HistoryDataBackend::copyDataValues) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdbContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, size_t startIndex, size_t endIndex, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> reverse, size_t valueSize, <a class="el" href="structUA__NumericRange.html">UA_NumericRange</a> range, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> releaseContinuationPoints, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *continuationPoint, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *outContinuationPoint, size_t *providedValues, <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *values)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="history__data__backend_8h_source.html#l00193">193</a> of file <a class="el" href="history__data__backend_8h_source.html">history_data_backend.h</a>.</p>
 
 </div>
 </div>
@@ -184,35 +152,35 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="ab5ff4fb782e66854613b5f8b694aee73" name="ab5ff4fb782e66854613b5f8b694aee73"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab5ff4fb782e66854613b5f8b694aee73">&#9670;&#160;</a></span>firstIndex</h2>
+<a id="ad19c31d0a9728e2058314476dbe8f4d4" name="ad19c31d0a9728e2058314476dbe8f4d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad19c31d0a9728e2058314476dbe8f4d4">&#9670;&#160;</a></span>serverSetHistoryData</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t(* UA_HistoryDataBackend::firstIndex) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdbContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId)</td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_HistoryDataBackend::serverSetHistoryData) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdbContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> historizing, const <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *value)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="history__data__backend_8h_source.html#l00151">151</a> of file <a class="el" href="history__data__backend_8h_source.html">history_data_backend.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="history__data__backend_8h_source.html#l00044">44</a> of file <a class="el" href="history__data__backend_8h_source.html">history_data_backend.h</a>.</p>
 
 </div>
 </div>
-<a id="abe7c4a344bc905bad4080f22ccd11792" name="abe7c4a344bc905bad4080f22ccd11792"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abe7c4a344bc905bad4080f22ccd11792">&#9670;&#160;</a></span>getDataValue</h2>
+<a id="a8ad8ad2587038992dd83c81b4fa4ec39" name="a8ad8ad2587038992dd83c81b4fa4ec39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ad8ad2587038992dd83c81b4fa4ec39">&#9670;&#160;</a></span>getHistoryData</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *(* UA_HistoryDataBackend::getDataValue) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdbContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, size_t index)</td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_HistoryDataBackend::getHistoryData) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__HistoryDataBackend.html">UA_HistoryDataBackend</a> *backend, const <a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> start, const <a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> end, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, size_t maxSizePerResponse, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> numValuesPerNode, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> returnBounds, <a class="el" href="types__generated_8h.html#ab298c4ff5eb700437114d0dc2db97ead">UA_TimestampsToReturn</a> timestampsToReturn, <a class="el" href="structUA__NumericRange.html">UA_NumericRange</a> range, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> releaseContinuationPoints, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *continuationPoint, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *outContinuationPoint, UA_HistoryData *result)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="history__data__backend_8h_source.html#l00218">218</a> of file <a class="el" href="history__data__backend_8h_source.html">history_data_backend.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="history__data__backend_8h_source.html#l00077">77</a> of file <a class="el" href="history__data__backend_8h_source.html">history_data_backend.h</a>.</p>
 
 </div>
 </div>
@@ -248,38 +216,6 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="a8ad8ad2587038992dd83c81b4fa4ec39" name="a8ad8ad2587038992dd83c81b4fa4ec39"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8ad8ad2587038992dd83c81b4fa4ec39">&#9670;&#160;</a></span>getHistoryData</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_HistoryDataBackend::getHistoryData) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__HistoryDataBackend.html">UA_HistoryDataBackend</a> *backend, const <a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> start, const <a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> end, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, size_t maxSizePerResponse, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> numValuesPerNode, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> returnBounds, <a class="el" href="types__generated_8h.html#ab298c4ff5eb700437114d0dc2db97ead">UA_TimestampsToReturn</a> timestampsToReturn, <a class="el" href="structUA__NumericRange.html">UA_NumericRange</a> range, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> releaseContinuationPoints, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *continuationPoint, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *outContinuationPoint, UA_HistoryData *result)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="history__data__backend_8h_source.html#l00077">77</a> of file <a class="el" href="history__data__backend_8h_source.html">history_data_backend.h</a>.</p>
-
-</div>
-</div>
-<a id="ad1d4369db6d4ae038c985ee586ecfdfa" name="ad1d4369db6d4ae038c985ee586ecfdfa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1d4369db6d4ae038c985ee586ecfdfa">&#9670;&#160;</a></span>insertDataValue</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_HistoryDataBackend::insertDataValue) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdbContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, const <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *value)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="history__data__backend_8h_source.html#l00258">258</a> of file <a class="el" href="history__data__backend_8h_source.html">history_data_backend.h</a>.</p>
-
-</div>
-</div>
 <a id="a6598a0572da4c51912077c3e52bebca1" name="a6598a0572da4c51912077c3e52bebca1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6598a0572da4c51912077c3e52bebca1">&#9670;&#160;</a></span>lastIndex</h2>
 
@@ -296,35 +232,19 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="a33246c89017406dd8956e3953be4aecb" name="a33246c89017406dd8956e3953be4aecb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a33246c89017406dd8956e3953be4aecb">&#9670;&#160;</a></span>removeDataValue</h2>
+<a id="ab5ff4fb782e66854613b5f8b694aee73" name="ab5ff4fb782e66854613b5f8b694aee73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5ff4fb782e66854613b5f8b694aee73">&#9670;&#160;</a></span>firstIndex</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_HistoryDataBackend::removeDataValue) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdbContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, <a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> startTimestamp, <a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> endTimestamp)</td>
+          <td class="memname">size_t(* UA_HistoryDataBackend::firstIndex) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdbContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="history__data__backend_8h_source.html#l00279">279</a> of file <a class="el" href="history__data__backend_8h_source.html">history_data_backend.h</a>.</p>
-
-</div>
-</div>
-<a id="adf3d3d446dc7a3d92f44d9b46fc97674" name="adf3d3d446dc7a3d92f44d9b46fc97674"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf3d3d446dc7a3d92f44d9b46fc97674">&#9670;&#160;</a></span>replaceDataValue</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_HistoryDataBackend::replaceDataValue) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdbContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, const <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *value)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="history__data__backend_8h_source.html#l00265">265</a> of file <a class="el" href="history__data__backend_8h_source.html">history_data_backend.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="history__data__backend_8h_source.html#l00151">151</a> of file <a class="el" href="history__data__backend_8h_source.html">history_data_backend.h</a>.</p>
 
 </div>
 </div>
@@ -344,19 +264,51 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="ad19c31d0a9728e2058314476dbe8f4d4" name="ad19c31d0a9728e2058314476dbe8f4d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad19c31d0a9728e2058314476dbe8f4d4">&#9670;&#160;</a></span>serverSetHistoryData</h2>
+<a id="a5e587fef5ccde65dc89a5b7a1e0f53ed" name="a5e587fef5ccde65dc89a5b7a1e0f53ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e587fef5ccde65dc89a5b7a1e0f53ed">&#9670;&#160;</a></span>copyDataValues</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_HistoryDataBackend::serverSetHistoryData) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdbContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> historizing, const <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *value)</td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_HistoryDataBackend::copyDataValues) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdbContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, size_t startIndex, size_t endIndex, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> reverse, size_t valueSize, <a class="el" href="structUA__NumericRange.html">UA_NumericRange</a> range, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> releaseContinuationPoints, const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *continuationPoint, <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *outContinuationPoint, size_t *providedValues, <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *values)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="history__data__backend_8h_source.html#l00044">44</a> of file <a class="el" href="history__data__backend_8h_source.html">history_data_backend.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="history__data__backend_8h_source.html#l00193">193</a> of file <a class="el" href="history__data__backend_8h_source.html">history_data_backend.h</a>.</p>
+
+</div>
+</div>
+<a id="abe7c4a344bc905bad4080f22ccd11792" name="abe7c4a344bc905bad4080f22ccd11792"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe7c4a344bc905bad4080f22ccd11792">&#9670;&#160;</a></span>getDataValue</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *(* UA_HistoryDataBackend::getDataValue) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdbContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, size_t index)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="history__data__backend_8h_source.html#l00218">218</a> of file <a class="el" href="history__data__backend_8h_source.html">history_data_backend.h</a>.</p>
+
+</div>
+</div>
+<a id="a2c7701cac4b3890aaa15c94631e24f75" name="a2c7701cac4b3890aaa15c94631e24f75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c7701cac4b3890aaa15c94631e24f75">&#9670;&#160;</a></span>boundSupported</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>(* UA_HistoryDataBackend::boundSupported) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdbContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="history__data__backend_8h_source.html#l00235">235</a> of file <a class="el" href="history__data__backend_8h_source.html">history_data_backend.h</a>.</p>
 
 </div>
 </div>
@@ -376,6 +328,38 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
+<a id="ad1d4369db6d4ae038c985ee586ecfdfa" name="ad1d4369db6d4ae038c985ee586ecfdfa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1d4369db6d4ae038c985ee586ecfdfa">&#9670;&#160;</a></span>insertDataValue</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_HistoryDataBackend::insertDataValue) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdbContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, const <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *value)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="history__data__backend_8h_source.html#l00258">258</a> of file <a class="el" href="history__data__backend_8h_source.html">history_data_backend.h</a>.</p>
+
+</div>
+</div>
+<a id="adf3d3d446dc7a3d92f44d9b46fc97674" name="adf3d3d446dc7a3d92f44d9b46fc97674"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf3d3d446dc7a3d92f44d9b46fc97674">&#9670;&#160;</a></span>replaceDataValue</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_HistoryDataBackend::replaceDataValue) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdbContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, const <a class="el" href="structUA__DataValue.html">UA_DataValue</a> *value)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="history__data__backend_8h_source.html#l00265">265</a> of file <a class="el" href="history__data__backend_8h_source.html">history_data_backend.h</a>.</p>
+
+</div>
+</div>
 <a id="a140b227f675630771cbf5c2ce91bfc10" name="a140b227f675630771cbf5c2ce91bfc10"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a140b227f675630771cbf5c2ce91bfc10">&#9670;&#160;</a></span>updateDataValue</h2>
 
@@ -389,6 +373,22 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="history__data__backend_8h_source.html#l00272">272</a> of file <a class="el" href="history__data__backend_8h_source.html">history_data_backend.h</a>.</p>
+
+</div>
+</div>
+<a id="a33246c89017406dd8956e3953be4aecb" name="a33246c89017406dd8956e3953be4aecb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33246c89017406dd8956e3953be4aecb">&#9670;&#160;</a></span>removeDataValue</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_HistoryDataBackend::removeDataValue) (<a class="el" href="structUA__Server.html">UA_Server</a> *server, void *hdbContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *sessionId, void *sessionContext, const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *nodeId, <a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> startTimestamp, <a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> endTimestamp)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="history__data__backend_8h_source.html#l00279">279</a> of file <a class="el" href="history__data__backend_8h_source.html">history_data_backend.h</a>.</p>
 
 </div>
 </div>

@@ -161,64 +161,18 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a7b9f525d272da6cefa016ea10f6d7e6d" name="a7b9f525d272da6cefa016ea10f6d7e6d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7b9f525d272da6cefa016ea10f6d7e6d">&#9670;&#160;</a></span>UA_Timer_addRepeatedCallback()</h2>
+<a id="ab64841b00c7965278877217ed278d6a6" name="ab64841b00c7965278877217ed278d6a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab64841b00c7965278877217ed278d6a6">&#9670;&#160;</a></span>UA_Timer_init()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Timer_addRepeatedCallback </td>
+          <td class="memname">void UA_Timer_init </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structUA__Timer.html">UA_Timer</a> *&#160;</td>
-          <td class="paramname"><em>t</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>t</em></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="ua__timer_8h.html#a13808ef6ce16119f0f1be001ee23ecac">UA_ApplicationCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>application</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>data</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a>&#160;</td>
-          <td class="paramname"><em>interval_ms</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> *&#160;</td>
-          <td class="paramname"><em>baseTime</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="util_8h.html#ac9706771f3c17b602bbdb3ac6efc952b">UA_TimerPolicy</a>&#160;</td>
-          <td class="paramname"><em>timerPolicy</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a> *&#160;</td>
-          <td class="paramname"><em>callbackId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -314,6 +268,70 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a7b9f525d272da6cefa016ea10f6d7e6d" name="a7b9f525d272da6cefa016ea10f6d7e6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b9f525d272da6cefa016ea10f6d7e6d">&#9670;&#160;</a></span>UA_Timer_addRepeatedCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Timer_addRepeatedCallback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Timer.html">UA_Timer</a> *&#160;</td>
+          <td class="paramname"><em>t</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="ua__timer_8h.html#a13808ef6ce16119f0f1be001ee23ecac">UA_ApplicationCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>application</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a>&#160;</td>
+          <td class="paramname"><em>interval_ms</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> *&#160;</td>
+          <td class="paramname"><em>baseTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="util_8h.html#ac9706771f3c17b602bbdb3ac6efc952b">UA_TimerPolicy</a>&#160;</td>
+          <td class="paramname"><em>timerPolicy</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a> *&#160;</td>
+          <td class="paramname"><em>callbackId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aec80b9fcf0eb1493768ee20ca7a205a8" name="aec80b9fcf0eb1493768ee20ca7a205a8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aec80b9fcf0eb1493768ee20ca7a205a8">&#9670;&#160;</a></span>UA_Timer_changeRepeatedCallback()</h2>
 
@@ -360,36 +378,28 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a8cc634afaf10ecf5fefed378db8ffe11" name="a8cc634afaf10ecf5fefed378db8ffe11"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8cc634afaf10ecf5fefed378db8ffe11">&#9670;&#160;</a></span>UA_Timer_clear()</h2>
+<a id="ae504cae780f667d314c5ab3fc70adc06" name="ae504cae780f667d314c5ab3fc70adc06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae504cae780f667d314c5ab3fc70adc06">&#9670;&#160;</a></span>UA_Timer_removeCallback()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void UA_Timer_clear </td>
+          <td class="memname">void UA_Timer_removeCallback </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structUA__Timer.html">UA_Timer</a> *&#160;</td>
-          <td class="paramname"><em>t</em></td><td>)</td>
-          <td></td>
+          <td class="paramname"><em>t</em>, </td>
         </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ab64841b00c7965278877217ed278d6a6" name="ab64841b00c7965278877217ed278d6a6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab64841b00c7965278877217ed278d6a6">&#9670;&#160;</a></span>UA_Timer_init()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
         <tr>
-          <td class="memname">void UA_Timer_init </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Timer.html">UA_Timer</a> *&#160;</td>
-          <td class="paramname"><em>t</em></td><td>)</td>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a>&#160;</td>
+          <td class="paramname"><em>callbackId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -436,28 +446,18 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="ae504cae780f667d314c5ab3fc70adc06" name="ae504cae780f667d314c5ab3fc70adc06"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae504cae780f667d314c5ab3fc70adc06">&#9670;&#160;</a></span>UA_Timer_removeCallback()</h2>
+<a id="a8cc634afaf10ecf5fefed378db8ffe11" name="a8cc634afaf10ecf5fefed378db8ffe11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cc634afaf10ecf5fefed378db8ffe11">&#9670;&#160;</a></span>UA_Timer_clear()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void UA_Timer_removeCallback </td>
+          <td class="memname">void UA_Timer_clear </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structUA__Timer.html">UA_Timer</a> *&#160;</td>
-          <td class="paramname"><em>t</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>t</em></td><td>)</td>
           <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a>&#160;</td>
-          <td class="paramname"><em>callbackId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">

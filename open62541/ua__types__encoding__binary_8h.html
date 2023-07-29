@@ -100,67 +100,6 @@ Variables</h2></td></tr>
 <tr class="separator:a885650a00ec32115094c53f2d45dfaee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="adf015ca938eab4b08b7133e17ae87ca4" name="adf015ca938eab4b08b7133e17ae87ca4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf015ca938eab4b08b7133e17ae87ca4">&#9670;&#160;</a></span>UA_decodeBinaryInternal()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_decodeBinaryInternal </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
-          <td class="paramname"><em>src</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t *&#160;</td>
-          <td class="paramname"><em>offset</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>dst</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataTypeArray.html">UA_DataTypeArray</a> *&#160;</td>
-          <td class="paramname"><em>customTypes</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Decodes a scalar value described by type from binary encoding. </p>
-<p>Decoding is thread-safe if thread-local variables are enabled. Decoding is also reentrant and can be safely called from signal handlers or interrupts.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">src</td><td>The buffer with the binary encoded value. Must not be NULL. </td></tr>
-    <tr><td class="paramname">offset</td><td>The current position in the buffer. Must not be NULL. The value is advanced as decoding progresses. </td></tr>
-    <tr><td class="paramname">dst</td><td>The target value. Must not be NULL. The target is assumed to have size type-&gt;memSize. The value is reset to zero before decoding. If decoding fails, members are deleted and the value is reset (zeroed) again. </td></tr>
-    <tr><td class="paramname">type</td><td>The value type. Must not be NULL. </td></tr>
-    <tr><td class="paramname">customTypesSize</td><td>The number of non-standard datatypes contained in the customTypes array. </td></tr>
-    <tr><td class="paramname">customTypes</td><td>An array of non-standard datatypes (not included in UA_TYPES). Can be NULL if customTypesSize is zero. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns a statuscode whether decoding succeeded. </dd></dl>
-
-</div>
-</div>
 <a id="a49c73b193f83c4e32af3214f8f0823f1" name="a49c73b193f83c4e32af3214f8f0823f1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a49c73b193f83c4e32af3214f8f0823f1">&#9670;&#160;</a></span>UA_encodeBinaryInternal()</h2>
 
@@ -225,6 +164,67 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Returns a statuscode whether encoding succeeded. </dd></dl>
+
+</div>
+</div>
+<a id="adf015ca938eab4b08b7133e17ae87ca4" name="adf015ca938eab4b08b7133e17ae87ca4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf015ca938eab4b08b7133e17ae87ca4">&#9670;&#160;</a></span>UA_decodeBinaryInternal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_decodeBinaryInternal </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a> *&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t *&#160;</td>
+          <td class="paramname"><em>offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>dst</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__DataTypeArray.html">UA_DataTypeArray</a> *&#160;</td>
+          <td class="paramname"><em>customTypes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Decodes a scalar value described by type from binary encoding. </p>
+<p>Decoding is thread-safe if thread-local variables are enabled. Decoding is also reentrant and can be safely called from signal handlers or interrupts.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">src</td><td>The buffer with the binary encoded value. Must not be NULL. </td></tr>
+    <tr><td class="paramname">offset</td><td>The current position in the buffer. Must not be NULL. The value is advanced as decoding progresses. </td></tr>
+    <tr><td class="paramname">dst</td><td>The target value. Must not be NULL. The target is assumed to have size type-&gt;memSize. The value is reset to zero before decoding. If decoding fails, members are deleted and the value is reset (zeroed) again. </td></tr>
+    <tr><td class="paramname">type</td><td>The value type. Must not be NULL. </td></tr>
+    <tr><td class="paramname">customTypesSize</td><td>The number of non-standard datatypes contained in the customTypes array. </td></tr>
+    <tr><td class="paramname">customTypes</td><td>An array of non-standard datatypes (not included in UA_TYPES). Can be NULL if customTypesSize is zero. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns a statuscode whether decoding succeeded. </dd></dl>
 
 </div>
 </div>

@@ -110,6 +110,22 @@ Data Fields</h2></td></tr>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00587">587</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
+<a id="aadce5d2fa153d9be60ba6b3cb85d5112" name="aadce5d2fa153d9be60ba6b3cb85d5112"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadce5d2fa153d9be60ba6b3cb85d5112">&#9670;&#160;</a></span>context</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* UA_Nodestore::context</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00589">589</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+
+</div>
+</div>
 <a id="aeb7f19aad180aaa96243f504483e3fb9" name="aeb7f19aad180aaa96243f504483e3fb9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aeb7f19aad180aaa96243f504483e3fb9">&#9670;&#160;</a></span>clear</h2>
 
@@ -126,19 +142,19 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="aadce5d2fa153d9be60ba6b3cb85d5112" name="aadce5d2fa153d9be60ba6b3cb85d5112"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aadce5d2fa153d9be60ba6b3cb85d5112">&#9670;&#160;</a></span>context</h2>
+<a id="af3c0b07853d6743dec4746ea64241bcd" name="af3c0b07853d6743dec4746ea64241bcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3c0b07853d6743dec4746ea64241bcd">&#9670;&#160;</a></span>newNode</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void* UA_Nodestore::context</td>
+          <td class="memname"><a class="el" href="unionUA__Node.html">UA_Node</a> *(* UA_Nodestore::newNode) (void *nsCtx, <a class="el" href="types__generated_8h.html#adf98bb5a5ac8e50eece68338a046a904">UA_NodeClass</a> nodeClass)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00589">589</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00596">596</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
@@ -174,6 +190,22 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
+<a id="a7f0da8de7d89e094725b8dd1bdbfc8a4" name="a7f0da8de7d89e094725b8dd1bdbfc8a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f0da8de7d89e094725b8dd1bdbfc8a4">&#9670;&#160;</a></span>releaseNode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* UA_Nodestore::releaseNode) (void *nsCtx, const <a class="el" href="unionUA__Node.html">UA_Node</a> *node)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00604">604</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+
+</div>
+</div>
 <a id="ad442f3f022ae67f592a227cc118f363c" name="ad442f3f022ae67f592a227cc118f363c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad442f3f022ae67f592a227cc118f363c">&#9670;&#160;</a></span>getNodeCopy</h2>
 
@@ -187,22 +219,6 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00608">608</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
-
-</div>
-</div>
-<a id="a59d49446609bcf74c5b5ba0ca6a61c5d" name="a59d49446609bcf74c5b5ba0ca6a61c5d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a59d49446609bcf74c5b5ba0ca6a61c5d">&#9670;&#160;</a></span>getReferenceTypeId</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *(* UA_Nodestore::getReferenceTypeId) (void *nsCtx, <a class="el" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a> refTypeIndex)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00630">630</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
@@ -222,51 +238,19 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="a5361dd3910e4c91904d10edc326f843b" name="a5361dd3910e4c91904d10edc326f843b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5361dd3910e4c91904d10edc326f843b">&#9670;&#160;</a></span>iterate</h2>
+<a id="aec745eced0acf74662402675f3b44f9f" name="aec745eced0acf74662402675f3b44f9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec745eced0acf74662402675f3b44f9f">&#9670;&#160;</a></span>replaceNode</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void(* UA_Nodestore::iterate) (void *nsCtx, <a class="el" href="nodestore_8h.html#a182a5a3bdc9323eae2cf82fb92d1a967">UA_NodestoreVisitor</a> visitor, void *visitorCtx)</td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_Nodestore::replaceNode) (void *nsCtx, <a class="el" href="unionUA__Node.html">UA_Node</a> *node)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00633">633</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
-
-</div>
-</div>
-<a id="af3c0b07853d6743dec4746ea64241bcd" name="af3c0b07853d6743dec4746ea64241bcd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af3c0b07853d6743dec4746ea64241bcd">&#9670;&#160;</a></span>newNode</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="unionUA__Node.html">UA_Node</a> *(* UA_Nodestore::newNode) (void *nsCtx, <a class="el" href="types__generated_8h.html#adf98bb5a5ac8e50eece68338a046a904">UA_NodeClass</a> nodeClass)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00596">596</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
-
-</div>
-</div>
-<a id="a7f0da8de7d89e094725b8dd1bdbfc8a4" name="a7f0da8de7d89e094725b8dd1bdbfc8a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7f0da8de7d89e094725b8dd1bdbfc8a4">&#9670;&#160;</a></span>releaseNode</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void(* UA_Nodestore::releaseNode) (void *nsCtx, const <a class="el" href="unionUA__Node.html">UA_Node</a> *node)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00604">604</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00622">622</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>
@@ -286,19 +270,35 @@ Data Fields</h2></td></tr>
 
 </div>
 </div>
-<a id="aec745eced0acf74662402675f3b44f9f" name="aec745eced0acf74662402675f3b44f9f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aec745eced0acf74662402675f3b44f9f">&#9670;&#160;</a></span>replaceNode</h2>
+<a id="a59d49446609bcf74c5b5ba0ca6a61c5d" name="a59d49446609bcf74c5b5ba0ca6a61c5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59d49446609bcf74c5b5ba0ca6a61c5d">&#9670;&#160;</a></span>getReferenceTypeId</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>(* UA_Nodestore::replaceNode) (void *nsCtx, <a class="el" href="unionUA__Node.html">UA_Node</a> *node)</td>
+          <td class="memname">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *(* UA_Nodestore::getReferenceTypeId) (void *nsCtx, <a class="el" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a> refTypeIndex)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00622">622</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00630">630</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
+
+</div>
+</div>
+<a id="a5361dd3910e4c91904d10edc326f843b" name="a5361dd3910e4c91904d10edc326f843b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5361dd3910e4c91904d10edc326f843b">&#9670;&#160;</a></span>iterate</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* UA_Nodestore::iterate) (void *nsCtx, <a class="el" href="nodestore_8h.html#a182a5a3bdc9323eae2cf82fb92d1a967">UA_NodestoreVisitor</a> visitor, void *visitorCtx)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="nodestore_8h_source.html#l00633">633</a> of file <a class="el" href="nodestore_8h_source.html">nodestore.h</a>.</p>
 
 </div>
 </div>

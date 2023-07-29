@@ -202,14 +202,36 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ad78231c45e627fe56021d7b36470818c" name="ad78231c45e627fe56021d7b36470818c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad78231c45e627fe56021d7b36470818c">&#9670;&#160;</a></span>__UA_Client_AsyncService()</h2>
+<a id="a8ed965dd8b7c837b9e5c5889952c38b4" name="a8ed965dd8b7c837b9e5c5889952c38b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ed965dd8b7c837b9e5c5889952c38b4">&#9670;&#160;</a></span>UA_Client_newWithConfig()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> __UA_Client_AsyncService </td>
+          <td class="memname"><a class="el" href="structUA__Client.html">UA_Client</a> * UA_Client_newWithConfig </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structUA__ClientConfig.html">UA_ClientConfig</a> *&#160;</td>
+          <td class="paramname"><em>config</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The method UA_Client_new is defined in <a class="el" href="client__config__default_8h.html">client_config_default.h</a>. </p>
+<p>So default plugins outside of the core library (for logging, etc) are already available during the initialization.</p>
+<p><a class="el" href="structUA__Client.html">UA_Client</a> * <a class="el" href="client__config__default_8h.html#a07b6bcbeb77d916afb3d4fff330b7ae6" title="This work is licensed under a Creative Commons CCZero 1.0 Universal License.">UA_Client_new(void)</a>; Creates a new client. Moves the config into the client with a shallow copy. The config content is cleared together with the client. </p>
+
+</div>
+</div>
+<a id="a120e79d9e8303ffceb73c67160575921" name="a120e79d9e8303ffceb73c67160575921"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a120e79d9e8303ffceb73c67160575921">&#9670;&#160;</a></span>UA_Client_getState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UA_Client_getState </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
           <td class="paramname"><em>client</em>, </td>
@@ -217,38 +239,20 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>request</em>, </td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a8c3787777dac67ecf48c13ad1ddb112e">UA_SecureChannelState</a> *&#160;</td>
+          <td class="paramname"><em>channelState</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>requestType</em>, </td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a66e73dba25a0a0771ed1a850291ca96f">UA_SessionState</a> *&#160;</td>
+          <td class="paramname"><em>sessionState</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="client_8h.html#a0798176d568f4a010e2b76430a81529f">UA_ClientAsyncServiceCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>responseType</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>userdata</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
-          <td class="paramname"><em>requestId</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> *&#160;</td>
+          <td class="paramname"><em>connectStatus</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -258,279 +262,48 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Returns the current state. </p>
+<p>All arguments except <code>client</code> can be NULL. </p>
+
 </div>
 </div>
-<a id="afe89ec5227d18cb15649a04437ed57d3" name="afe89ec5227d18cb15649a04437ed57d3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe89ec5227d18cb15649a04437ed57d3">&#9670;&#160;</a></span>__UA_Client_AsyncServiceEx()</h2>
+<a id="a24b90187586fcdc30222c49c11bafb14" name="a24b90187586fcdc30222c49c11bafb14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24b90187586fcdc30222c49c11bafb14">&#9670;&#160;</a></span>UA_Client_getConfig()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> __UA_Client_AsyncServiceEx </td>
+          <td class="memname">UA_EXPORT <a class="el" href="structUA__ClientConfig.html">UA_ClientConfig</a> * UA_Client_getConfig </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>client</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>request</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>requestType</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client_8h.html#a0798176d568f4a010e2b76430a81529f">UA_ClientAsyncServiceCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>responseType</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>userdata</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
-          <td class="paramname"><em>requestId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td>
-          <td class="paramname"><em>timeout</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Use the type versions of this method. </p>
-<p>See below. However, the general mechanism of async service calls is explained here.</p>
-<p>We say that an async service call has been dispatched once this method returns UA_STATUSCODE_GOOD. If there is an error after an async service has been dispatched, the callback is called with an "empty" response where the statusCode has been set accordingly. This is also done if the client is shutting down and the list of dispatched async services is emptied.</p>
-<p>The statusCode received when the client is shutting down is UA_STATUSCODE_BADSHUTDOWN.</p>
-<p>The statusCode received when the client don't receive response after specified timeout (in ms) is UA_STATUSCODE_BADTIMEOUT.</p>
-<p>The timeout can be disabled by setting timeout to 0</p>
-<p>The userdata and requestId arguments can be NULL. </p>
+<p>Get the client configuration. </p>
 
 </div>
 </div>
-<a id="a1a58c84867e27341d94347c978f243bc" name="a1a58c84867e27341d94347c978f243bc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1a58c84867e27341d94347c978f243bc">&#9670;&#160;</a></span>__UA_Client_Service()</h2>
+<a id="aa65c6c338211a5b463309288fd1a3552" name="aa65c6c338211a5b463309288fd1a3552"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa65c6c338211a5b463309288fd1a3552">&#9670;&#160;</a></span>UA_Client_delete()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void __UA_Client_Service </td>
+          <td class="memname">void UA_Client_delete </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>client</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>request</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>requestType</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>response</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>responseType</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Don't use this function. </p>
-<p>Use the type versions below instead. </p>
-
-</div>
-</div>
-<a id="a90f1188423b27f2d491b7c1ad5d49221" name="a90f1188423b27f2d491b7c1ad5d49221"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a90f1188423b27f2d491b7c1ad5d49221">&#9670;&#160;</a></span>UA_Client_addRepeatedCallback()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_addRepeatedCallback </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client_8h.html#a663612286763fbbef85dc6a6ec280b7e">UA_ClientCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>data</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a>&#160;</td>
-          <td class="paramname"><em>interval_ms</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a> *&#160;</td>
-          <td class="paramname"><em>callbackId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Add a callback for cyclic repetition to the client. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">client</td><td>The client object. </td></tr>
-    <tr><td class="paramname">callback</td><td>The callback that shall be added. </td></tr>
-    <tr><td class="paramname">data</td><td>Data that is forwarded to the callback. </td></tr>
-    <tr><td class="paramname">interval_ms</td><td>The callback shall be repeatedly executed with the given interval (in ms). The interval must be positive. The first execution occurs at now() + interval at the latest. </td></tr>
-    <tr><td class="paramname">callbackId</td><td>Set to the identifier of the repeated callback . This can be used to cancel the callback later on. If the pointer is null, the identifier is not set. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Upon success, UA_STATUSCODE_GOOD is returned. An error code otherwise. </dd></dl>
-
-</div>
-</div>
-<a id="a0db486fc6880598596d5669cada81617" name="a0db486fc6880598596d5669cada81617"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0db486fc6880598596d5669cada81617">&#9670;&#160;</a></span>UA_Client_addTimedCallback()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_addTimedCallback </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client_8h.html#a663612286763fbbef85dc6a6ec280b7e">UA_ClientCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>data</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a>&#160;</td>
-          <td class="paramname"><em>date</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a> *&#160;</td>
-          <td class="paramname"><em>callbackId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Add a callback for execution at a specified time. </p>
-<p>If the indicated time lies in the past, then the callback is executed at the next iteration of the server's main loop.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">client</td><td>The client object. </td></tr>
-    <tr><td class="paramname">callback</td><td>The callback that shall be added. </td></tr>
-    <tr><td class="paramname">data</td><td>Data that is forwarded to the callback. </td></tr>
-    <tr><td class="paramname">date</td><td>The timestamp for the execution time. </td></tr>
-    <tr><td class="paramname">callbackId</td><td>Set to the identifier of the repeated callback . This can be used to cancel the callback later on. If the pointer is null, the identifier is not set. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Upon success, UA_STATUSCODE_GOOD is returned. An error code otherwise. </dd></dl>
-
-</div>
-</div>
-<a id="abbdf0c21a09fbe7edab325d2ac1e54d2" name="abbdf0c21a09fbe7edab325d2ac1e54d2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abbdf0c21a09fbe7edab325d2ac1e54d2">&#9670;&#160;</a></span>UA_Client_changeRepeatedCallbackInterval()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_changeRepeatedCallbackInterval </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a>&#160;</td>
-          <td class="paramname"><em>callbackId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a>&#160;</td>
-          <td class="paramname"><em>interval_ms</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>(Disconnect and) delete the client </p>
 
 </div>
 </div>
@@ -672,26 +445,6 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa65c6c338211a5b463309288fd1a3552" name="aa65c6c338211a5b463309288fd1a3552"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa65c6c338211a5b463309288fd1a3552">&#9670;&#160;</a></span>UA_Client_delete()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void UA_Client_delete </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>(Disconnect and) delete the client </p>
-
-</div>
-</div>
 <a id="a77caa64f5788ccd88a3760461fcafe43" name="a77caa64f5788ccd88a3760461fcafe43"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a77caa64f5788ccd88a3760461fcafe43">&#9670;&#160;</a></span>UA_Client_disconnect()</h2>
 
@@ -755,14 +508,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a844a7b3135dd1659105e62049c828037" name="a844a7b3135dd1659105e62049c828037"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a844a7b3135dd1659105e62049c828037">&#9670;&#160;</a></span>UA_Client_findDataType()</h2>
+<a id="aaf3bd81def2e0df473df3b4ddff76f23" name="aaf3bd81def2e0df473df3b4ddff76f23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf3bd81def2e0df473df3b4ddff76f23">&#9670;&#160;</a></span>UA_Client_getEndpoints()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">UA_EXPORT const <a class="el" href="structUA__DataType.html">UA_DataType</a> * UA_Client_findDataType </td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_getEndpoints </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
           <td class="paramname"><em>client</em>, </td>
@@ -770,8 +523,20 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
-          <td class="paramname"><em>typeId</em>&#160;</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>serverUrl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t *&#160;</td>
+          <td class="paramname"><em>endpointDescriptionsSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structUA__EndpointDescription.html">UA_EndpointDescription</a> **&#160;</td>
+          <td class="paramname"><em>endpointDescriptions</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -781,8 +546,17 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Lookup a datatype by its NodeId. </p>
-<p>Takes the custom types in the client configuration into account. Return NULL if none found. </p>
+<p>Gets a list of endpoints of a server. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">client</td><td>to use. Must be connected to the same endpoint given in serverUrl or otherwise in disconnected state. </td></tr>
+    <tr><td class="paramname">serverUrl</td><td>url to connect (for example "opc.tcp://localhost:4840") </td></tr>
+    <tr><td class="paramname">endpointDescriptionsSize</td><td>size of the array of endpoint descriptions </td></tr>
+    <tr><td class="paramname">endpointDescriptions</td><td>array of endpoint descriptions that is allocated by the function (you need to free manually) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Indicates whether the operation succeeded or returns an error code </dd></dl>
 
 </div>
 </div>
@@ -949,34 +723,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a24b90187586fcdc30222c49c11bafb14" name="a24b90187586fcdc30222c49c11bafb14"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a24b90187586fcdc30222c49c11bafb14">&#9670;&#160;</a></span>UA_Client_getConfig()</h2>
+<a id="a1a58c84867e27341d94347c978f243bc" name="a1a58c84867e27341d94347c978f243bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a58c84867e27341d94347c978f243bc">&#9670;&#160;</a></span>__UA_Client_Service()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">UA_EXPORT <a class="el" href="structUA__ClientConfig.html">UA_ClientConfig</a> * UA_Client_getConfig </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get the client configuration. </p>
-
-</div>
-</div>
-<a id="aaf3bd81def2e0df473df3b4ddff76f23" name="aaf3bd81def2e0df473df3b4ddff76f23"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaf3bd81def2e0df473df3b4ddff76f23">&#9670;&#160;</a></span>UA_Client_getEndpoints()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_getEndpoints </td>
+          <td class="memname">void __UA_Client_Service </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
           <td class="paramname"><em>client</em>, </td>
@@ -984,20 +738,26 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>serverUrl</em>, </td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>request</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t *&#160;</td>
-          <td class="paramname"><em>endpointDescriptionsSize</em>, </td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>requestType</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structUA__EndpointDescription.html">UA_EndpointDescription</a> **&#160;</td>
-          <td class="paramname"><em>endpointDescriptions</em>&#160;</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>response</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>responseType</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1007,28 +767,19 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Gets a list of endpoints of a server. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">client</td><td>to use. Must be connected to the same endpoint given in serverUrl or otherwise in disconnected state. </td></tr>
-    <tr><td class="paramname">serverUrl</td><td>url to connect (for example "opc.tcp://localhost:4840") </td></tr>
-    <tr><td class="paramname">endpointDescriptionsSize</td><td>size of the array of endpoint descriptions </td></tr>
-    <tr><td class="paramname">endpointDescriptions</td><td>array of endpoint descriptions that is allocated by the function (you need to free manually) </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Indicates whether the operation succeeded or returns an error code </dd></dl>
+<p>Don't use this function. </p>
+<p>Use the type versions below instead. </p>
 
 </div>
 </div>
-<a id="a120e79d9e8303ffceb73c67160575921" name="a120e79d9e8303ffceb73c67160575921"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a120e79d9e8303ffceb73c67160575921">&#9670;&#160;</a></span>UA_Client_getState()</h2>
+<a id="ad78231c45e627fe56021d7b36470818c" name="ad78231c45e627fe56021d7b36470818c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad78231c45e627fe56021d7b36470818c">&#9670;&#160;</a></span>__UA_Client_AsyncService()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void UA_Client_getState </td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> __UA_Client_AsyncService </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
           <td class="paramname"><em>client</em>, </td>
@@ -1036,51 +787,26 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="common_8h.html#a8c3787777dac67ecf48c13ad1ddb112e">UA_SecureChannelState</a> *&#160;</td>
-          <td class="paramname"><em>channelState</em>, </td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>request</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="common_8h.html#a66e73dba25a0a0771ed1a850291ca96f">UA_SessionState</a> *&#160;</td>
-          <td class="paramname"><em>sessionState</em>, </td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>requestType</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> *&#160;</td>
-          <td class="paramname"><em>connectStatus</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Returns the current state. </p>
-<p>All arguments except <code>client</code> can be NULL. </p>
-
-</div>
-</div>
-<a id="a791c4ba6eeaf8928d8bca60a3fcaa99d" name="a791c4ba6eeaf8928d8bca60a3fcaa99d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a791c4ba6eeaf8928d8bca60a3fcaa99d">&#9670;&#160;</a></span>UA_Client_modifyAsyncCallback()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_modifyAsyncCallback </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
+          <td class="paramtype"><a class="el" href="client_8h.html#a0798176d568f4a010e2b76430a81529f">UA_ClientAsyncServiceCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td>
-          <td class="paramname"><em>requestId</em>, </td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>responseType</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -1091,8 +817,8 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="client_8h.html#a0798176d568f4a010e2b76430a81529f">UA_ClientAsyncServiceCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
+          <td class="paramname"><em>requestId</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1101,121 +827,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Set new userdata and callback for an existing request. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">client</td><td>Pointer to the <a class="el" href="structUA__Client.html">UA_Client</a> </td></tr>
-    <tr><td class="paramname">requestId</td><td>RequestId of the request, which was returned by UA_Client_sendAsyncRequest before </td></tr>
-    <tr><td class="paramname">userdata</td><td>The new userdata. </td></tr>
-    <tr><td class="paramname">callback</td><td>The new callback </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>UA_StatusCode UA_STATUSCODE_GOOD on success UA_STATUSCODE_BADNOTFOUND when no request with requestId is found. </dd></dl>
-
-</div>
-</div>
-<a id="a8ed965dd8b7c837b9e5c5889952c38b4" name="a8ed965dd8b7c837b9e5c5889952c38b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8ed965dd8b7c837b9e5c5889952c38b4">&#9670;&#160;</a></span>UA_Client_newWithConfig()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structUA__Client.html">UA_Client</a> * UA_Client_newWithConfig </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structUA__ClientConfig.html">UA_ClientConfig</a> *&#160;</td>
-          <td class="paramname"><em>config</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The method UA_Client_new is defined in <a class="el" href="client__config__default_8h.html">client_config_default.h</a>. </p>
-<p>So default plugins outside of the core library (for logging, etc) are already available during the initialization.</p>
-<p><a class="el" href="structUA__Client.html">UA_Client</a> * <a class="el" href="client__config__default_8h.html#a07b6bcbeb77d916afb3d4fff330b7ae6" title="This work is licensed under a Creative Commons CCZero 1.0 Universal License.">UA_Client_new(void)</a>; Creates a new client. Moves the config into the client with a shallow copy. The config content is cleared together with the client. </p>
-
-</div>
-</div>
-<a id="aa25686ca650da4eaf80808134d4e3152" name="aa25686ca650da4eaf80808134d4e3152"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa25686ca650da4eaf80808134d4e3152">&#9670;&#160;</a></span>UA_Client_removeCallback()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void UA_Client_removeCallback </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a>&#160;</td>
-          <td class="paramname"><em>callbackId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a40b434d3ddcfe696d9dd106c3d0e8b9d" name="a40b434d3ddcfe696d9dd106c3d0e8b9d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a40b434d3ddcfe696d9dd106c3d0e8b9d">&#9670;&#160;</a></span>UA_Client_renewSecureChannel()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_renewSecureChannel </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Force the manual renewal of the SecureChannel. </p>
-<p>This is useful to renew the SecureChannel during a downtime when no time-critical operations are performed. This method is asynchronous. The renewal is triggered (the OPN message is sent) but not completed. The OPN response is handled with <code>UA_Client_run_iterate</code> or a synchronous servica-call operation.</p>
-<dl class="section return"><dt>Returns</dt><dd>The return value is UA_STATUSCODE_GOODCALLAGAIN if the SecureChannel has not elapsed at least 75% of its lifetime. Otherwise the <code>connectStatus</code> is returned. </dd></dl>
-
-</div>
-</div>
-<a id="abaea97e133c59908235ff2452e80a59c" name="abaea97e133c59908235ff2452e80a59c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abaea97e133c59908235ff2452e80a59c">&#9670;&#160;</a></span>UA_Client_run_iterate()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_run_iterate </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td>
-          <td class="paramname"><em>timeout</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Listen on the network and process arriving asynchronous responses in the background. </p>
-<p>Internal housekeeping, renewal of SecureChannels and subscription management is done as well. </p>
 
 </div>
 </div>
@@ -1274,6 +885,395 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+</div>
+</div>
+<a id="a791c4ba6eeaf8928d8bca60a3fcaa99d" name="a791c4ba6eeaf8928d8bca60a3fcaa99d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a791c4ba6eeaf8928d8bca60a3fcaa99d">&#9670;&#160;</a></span>UA_Client_modifyAsyncCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_modifyAsyncCallback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td>
+          <td class="paramname"><em>requestId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client_8h.html#a0798176d568f4a010e2b76430a81529f">UA_ClientAsyncServiceCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set new userdata and callback for an existing request. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">client</td><td>Pointer to the <a class="el" href="structUA__Client.html">UA_Client</a> </td></tr>
+    <tr><td class="paramname">requestId</td><td>RequestId of the request, which was returned by UA_Client_sendAsyncRequest before </td></tr>
+    <tr><td class="paramname">userdata</td><td>The new userdata. </td></tr>
+    <tr><td class="paramname">callback</td><td>The new callback </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>UA_StatusCode UA_STATUSCODE_GOOD on success UA_STATUSCODE_BADNOTFOUND when no request with requestId is found. </dd></dl>
+
+</div>
+</div>
+<a id="abaea97e133c59908235ff2452e80a59c" name="abaea97e133c59908235ff2452e80a59c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abaea97e133c59908235ff2452e80a59c">&#9670;&#160;</a></span>UA_Client_run_iterate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_run_iterate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td>
+          <td class="paramname"><em>timeout</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Listen on the network and process arriving asynchronous responses in the background. </p>
+<p>Internal housekeeping, renewal of SecureChannels and subscription management is done as well. </p>
+
+</div>
+</div>
+<a id="a40b434d3ddcfe696d9dd106c3d0e8b9d" name="a40b434d3ddcfe696d9dd106c3d0e8b9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40b434d3ddcfe696d9dd106c3d0e8b9d">&#9670;&#160;</a></span>UA_Client_renewSecureChannel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_renewSecureChannel </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Force the manual renewal of the SecureChannel. </p>
+<p>This is useful to renew the SecureChannel during a downtime when no time-critical operations are performed. This method is asynchronous. The renewal is triggered (the OPN message is sent) but not completed. The OPN response is handled with <code>UA_Client_run_iterate</code> or a synchronous servica-call operation.</p>
+<dl class="section return"><dt>Returns</dt><dd>The return value is UA_STATUSCODE_GOODCALLAGAIN if the SecureChannel has not elapsed at least 75% of its lifetime. Otherwise the <code>connectStatus</code> is returned. </dd></dl>
+
+</div>
+</div>
+<a id="afe89ec5227d18cb15649a04437ed57d3" name="afe89ec5227d18cb15649a04437ed57d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe89ec5227d18cb15649a04437ed57d3">&#9670;&#160;</a></span>__UA_Client_AsyncServiceEx()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> __UA_Client_AsyncServiceEx </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>request</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>requestType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client_8h.html#a0798176d568f4a010e2b76430a81529f">UA_ClientAsyncServiceCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>responseType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
+          <td class="paramname"><em>requestId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a>&#160;</td>
+          <td class="paramname"><em>timeout</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Use the type versions of this method. </p>
+<p>See below. However, the general mechanism of async service calls is explained here.</p>
+<p>We say that an async service call has been dispatched once this method returns UA_STATUSCODE_GOOD. If there is an error after an async service has been dispatched, the callback is called with an "empty" response where the statusCode has been set accordingly. This is also done if the client is shutting down and the list of dispatched async services is emptied.</p>
+<p>The statusCode received when the client is shutting down is UA_STATUSCODE_BADSHUTDOWN.</p>
+<p>The statusCode received when the client don't receive response after specified timeout (in ms) is UA_STATUSCODE_BADTIMEOUT.</p>
+<p>The timeout can be disabled by setting timeout to 0</p>
+<p>The userdata and requestId arguments can be NULL. </p>
+
+</div>
+</div>
+<a id="a0db486fc6880598596d5669cada81617" name="a0db486fc6880598596d5669cada81617"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0db486fc6880598596d5669cada81617">&#9670;&#160;</a></span>UA_Client_addTimedCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_addTimedCallback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client_8h.html#a663612286763fbbef85dc6a6ec280b7e">UA_ClientCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a>&#160;</td>
+          <td class="paramname"><em>date</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a> *&#160;</td>
+          <td class="paramname"><em>callbackId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add a callback for execution at a specified time. </p>
+<p>If the indicated time lies in the past, then the callback is executed at the next iteration of the server's main loop.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">client</td><td>The client object. </td></tr>
+    <tr><td class="paramname">callback</td><td>The callback that shall be added. </td></tr>
+    <tr><td class="paramname">data</td><td>Data that is forwarded to the callback. </td></tr>
+    <tr><td class="paramname">date</td><td>The timestamp for the execution time. </td></tr>
+    <tr><td class="paramname">callbackId</td><td>Set to the identifier of the repeated callback . This can be used to cancel the callback later on. If the pointer is null, the identifier is not set. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Upon success, UA_STATUSCODE_GOOD is returned. An error code otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a90f1188423b27f2d491b7c1ad5d49221" name="a90f1188423b27f2d491b7c1ad5d49221"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90f1188423b27f2d491b7c1ad5d49221">&#9670;&#160;</a></span>UA_Client_addRepeatedCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_addRepeatedCallback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client_8h.html#a663612286763fbbef85dc6a6ec280b7e">UA_ClientCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a>&#160;</td>
+          <td class="paramname"><em>interval_ms</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a> *&#160;</td>
+          <td class="paramname"><em>callbackId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add a callback for cyclic repetition to the client. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">client</td><td>The client object. </td></tr>
+    <tr><td class="paramname">callback</td><td>The callback that shall be added. </td></tr>
+    <tr><td class="paramname">data</td><td>Data that is forwarded to the callback. </td></tr>
+    <tr><td class="paramname">interval_ms</td><td>The callback shall be repeatedly executed with the given interval (in ms). The interval must be positive. The first execution occurs at now() + interval at the latest. </td></tr>
+    <tr><td class="paramname">callbackId</td><td>Set to the identifier of the repeated callback . This can be used to cancel the callback later on. If the pointer is null, the identifier is not set. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Upon success, UA_STATUSCODE_GOOD is returned. An error code otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="abbdf0c21a09fbe7edab325d2ac1e54d2" name="abbdf0c21a09fbe7edab325d2ac1e54d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbdf0c21a09fbe7edab325d2ac1e54d2">&#9670;&#160;</a></span>UA_Client_changeRepeatedCallbackInterval()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_changeRepeatedCallbackInterval </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a>&#160;</td>
+          <td class="paramname"><em>callbackId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a>&#160;</td>
+          <td class="paramname"><em>interval_ms</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa25686ca650da4eaf80808134d4e3152" name="aa25686ca650da4eaf80808134d4e3152"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa25686ca650da4eaf80808134d4e3152">&#9670;&#160;</a></span>UA_Client_removeCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UA_Client_removeCallback </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a>&#160;</td>
+          <td class="paramname"><em>callbackId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a844a7b3135dd1659105e62049c828037" name="a844a7b3135dd1659105e62049c828037"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a844a7b3135dd1659105e62049c828037">&#9670;&#160;</a></span>UA_Client_findDataType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UA_EXPORT const <a class="el" href="structUA__DataType.html">UA_DataType</a> * UA_Client_findDataType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
+          <td class="paramname"><em>typeId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Lookup a datatype by its NodeId. </p>
+<p>Takes the custom types in the client configuration into account. Return NULL if none found. </p>
 
 </div>
 </div>

@@ -202,19 +202,19 @@ Variables</h2></td></tr>
 <tr class="separator:a6fd81065b4b205e07058b3e92454fc91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
-<a id="af86f5fb4dcbe0e310c7ef8088a158d9c" name="af86f5fb4dcbe0e310c7ef8088a158d9c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af86f5fb4dcbe0e310c7ef8088a158d9c">&#9670;&#160;</a></span>UA_ClientAsyncAddNodesCallback</h2>
+<a id="ae8ab823c7efec3fc9b6776e4f60a29e5" name="ae8ab823c7efec3fc9b6776e4f60a29e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8ab823c7efec3fc9b6776e4f60a29e5">&#9670;&#160;</a></span>UA_ClientAsyncWriteCallback</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef void(* UA_ClientAsyncAddNodesCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="structUA__AddNodesResponse.html">UA_AddNodesResponse</a> *ar)</td>
+          <td class="memname">typedef void(* UA_ClientAsyncWriteCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="structUA__WriteResponse.html">UA_WriteResponse</a> *wr)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00507">507</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00029">29</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
 
 </div>
 </div>
@@ -234,22 +234,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="afb35aec63c04a7f79aabace6536eacf3" name="afb35aec63c04a7f79aabace6536eacf3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afb35aec63c04a7f79aabace6536eacf3">&#9670;&#160;</a></span>UA_ClientAsyncCallCallback</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* UA_ClientAsyncCallCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="structUA__CallResponse.html">UA_CallResponse</a> *cr)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00492">492</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
-
-</div>
-</div>
 <a id="a2bcd65abebcbf3683093c3607a5c2a3a" name="a2bcd65abebcbf3683093c3607a5c2a3a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2bcd65abebcbf3683093c3607a5c2a3a">&#9670;&#160;</a></span>UA_ClientAsyncOperationCallback</h2>
 
@@ -263,24 +247,6 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00053">53</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
-
-</div>
-</div>
-<a id="a9969a927b0d7a987d761704d02e8ba52" name="a9969a927b0d7a987d761704d02e8ba52"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9969a927b0d7a987d761704d02e8ba52">&#9670;&#160;</a></span>UA_ClientAsyncReadAccessLevelAttributeCallback</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* UA_ClientAsyncReadAccessLevelAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a> *accessLevel)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Read a single AccessLevel attribute. </p>
-
-<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00223">223</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
 
 </div>
 </div>
@@ -302,294 +268,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a2a329a41268bbd8caf7295c3fde03829" name="a2a329a41268bbd8caf7295c3fde03829"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2a329a41268bbd8caf7295c3fde03829">&#9670;&#160;</a></span>UA_ClientAsyncReadBrowseNameAttributeCallback</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* UA_ClientAsyncReadBrowseNameAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="structUA__QualifiedName.html">UA_QualifiedName</a> *browseName)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Read a single BrowseName attribute. </p>
-
-<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00113">113</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
-
-</div>
-</div>
-<a id="abf015e895c532d26b0e74cc451f3889a" name="abf015e895c532d26b0e74cc451f3889a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abf015e895c532d26b0e74cc451f3889a">&#9670;&#160;</a></span>UA_ClientAsyncReadContainsNoLoopsAttributeCallback</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* UA_ClientAsyncReadContainsNoLoopsAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> *containsNoLoops)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Read a single ContainsNoLoops attribute. </p>
-
-<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00193">193</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
-
-</div>
-</div>
-<a id="a4f25ddb4d18ed970cc9f859d94f47e7b" name="a4f25ddb4d18ed970cc9f859d94f47e7b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4f25ddb4d18ed970cc9f859d94f47e7b">&#9670;&#160;</a></span>UA_ClientAsyncReadDataTypeAttributeCallback</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* UA_ClientAsyncReadDataTypeAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *dataType)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Read a single DataType attribute. </p>
-
-<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00082">82</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
-
-</div>
-</div>
-<a id="ae81062183abe12d0e371ae641f9dda78" name="ae81062183abe12d0e371ae641f9dda78"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae81062183abe12d0e371ae641f9dda78">&#9670;&#160;</a></span>UA_ClientAsyncReadDescriptionAttributeCallback</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* UA_ClientAsyncReadDescriptionAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="structUA__LocalizedText.html">UA_LocalizedText</a> *description)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Read a single Description attribute. </p>
-
-<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00133">133</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
-
-</div>
-</div>
-<a id="a77cf2418aa027884153088afb2307989" name="a77cf2418aa027884153088afb2307989"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a77cf2418aa027884153088afb2307989">&#9670;&#160;</a></span>UA_ClientAsyncReadDisplayNameAttributeCallback</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* UA_ClientAsyncReadDisplayNameAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="structUA__LocalizedText.html">UA_LocalizedText</a> *displayName)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Read a single DisplayName attribute. </p>
-
-<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00123">123</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
-
-</div>
-</div>
-<a id="a67885d8e3df9db37abb4511d5cee972b" name="a67885d8e3df9db37abb4511d5cee972b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a67885d8e3df9db37abb4511d5cee972b">&#9670;&#160;</a></span>UA_ClientAsyncReadEventNotifierAttributeCallback</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* UA_ClientAsyncReadEventNotifierAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a> *eventNotifier)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Read a single EventNotifier attribute. </p>
-
-<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00203">203</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
-
-</div>
-</div>
-<a id="ac67ccc454e952ac7b8834d6cb21f0630" name="ac67ccc454e952ac7b8834d6cb21f0630"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac67ccc454e952ac7b8834d6cb21f0630">&#9670;&#160;</a></span>UA_ClientAsyncReadExecutableAttributeCallback</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* UA_ClientAsyncReadExecutableAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> *executable)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Read a single Executable attribute. </p>
-
-<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00263">263</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
-
-</div>
-</div>
-<a id="abec2bbddeeead2881913483d2cf6f385" name="abec2bbddeeead2881913483d2cf6f385"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abec2bbddeeead2881913483d2cf6f385">&#9670;&#160;</a></span>UA_ClientAsyncReadHistorizingAttributeCallback</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* UA_ClientAsyncReadHistorizingAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> *historizing)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Read a single Historizing attribute. </p>
-
-<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00253">253</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
-
-</div>
-</div>
-<a id="a2926f6284a3bc5e53ecacfd60c852d08" name="a2926f6284a3bc5e53ecacfd60c852d08"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2926f6284a3bc5e53ecacfd60c852d08">&#9670;&#160;</a></span>UA_ClientAsyncReadInverseNameAttributeCallback</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* UA_ClientAsyncReadInverseNameAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="structUA__LocalizedText.html">UA_LocalizedText</a> *inverseName)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Read a single InverseName attribute. </p>
-
-<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00183">183</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
-
-</div>
-</div>
-<a id="ab534a34f8597a6090e2ced945dd8216a" name="ab534a34f8597a6090e2ced945dd8216a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab534a34f8597a6090e2ced945dd8216a">&#9670;&#160;</a></span>UA_ClientAsyncReadIsAbstractAttributeCallback</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* UA_ClientAsyncReadIsAbstractAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> *isAbstract)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Read a single IsAbstract attribute. </p>
-
-<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00163">163</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
-
-</div>
-</div>
-<a id="a781e94da0bae3127eb6f9b232a16299a" name="a781e94da0bae3127eb6f9b232a16299a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a781e94da0bae3127eb6f9b232a16299a">&#9670;&#160;</a></span>UA_ClientAsyncReadMinimumSamplingIntervalAttributeCallback</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* UA_ClientAsyncReadMinimumSamplingIntervalAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a> *minimumSamplingInterval)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Read a single MinimumSamplingInterval attribute. </p>
-
-<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00243">243</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
-
-</div>
-</div>
-<a id="a06a28b3157f9636cc68cac26ad46cf78" name="a06a28b3157f9636cc68cac26ad46cf78"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a06a28b3157f9636cc68cac26ad46cf78">&#9670;&#160;</a></span>UA_ClientAsyncReadNodeClassAttributeCallback</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* UA_ClientAsyncReadNodeClassAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="types__generated_8h.html#adf98bb5a5ac8e50eece68338a046a904">UA_NodeClass</a> *nodeClass)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Read a single NodeClass attribute. </p>
-
-<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00103">103</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
-
-</div>
-</div>
-<a id="ab77334671c967c24b3e6b60cab3143cc" name="ab77334671c967c24b3e6b60cab3143cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab77334671c967c24b3e6b60cab3143cc">&#9670;&#160;</a></span>UA_ClientAsyncReadSymmetricAttributeCallback</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* UA_ClientAsyncReadSymmetricAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> *symmetric)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Read a single Symmetric attribute. </p>
-
-<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00173">173</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
-
-</div>
-</div>
-<a id="ac69052c8a804498f6cfe9782970233a2" name="ac69052c8a804498f6cfe9782970233a2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac69052c8a804498f6cfe9782970233a2">&#9670;&#160;</a></span>UA_ClientAsyncReadUserAccessLevelAttributeCallback</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* UA_ClientAsyncReadUserAccessLevelAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a> *userAccessLevel)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Read a single UserAccessLevel attribute. </p>
-
-<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00233">233</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
-
-</div>
-</div>
-<a id="a1d889b360c1e00d67482d788fa727e28" name="a1d889b360c1e00d67482d788fa727e28"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1d889b360c1e00d67482d788fa727e28">&#9670;&#160;</a></span>UA_ClientAsyncReadUserExecutableAttributeCallback</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* UA_ClientAsyncReadUserExecutableAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> *userExecutable)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Read a single UserExecutable attribute. </p>
-
-<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00273">273</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
-
-</div>
-</div>
-<a id="adadf06a8931d63074a52301cac0cd434" name="adadf06a8931d63074a52301cac0cd434"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adadf06a8931d63074a52301cac0cd434">&#9670;&#160;</a></span>UA_ClientAsyncReadUserWriteMaskAttributeCallback</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* UA_ClientAsyncReadUserWriteMaskAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *writeMask)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Read a single UserWriteMask attribute. </p>
-
-<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00153">153</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
-
-</div>
-</div>
 <a id="a5e5c23a7d93ea035e25f2c89ca9423b9" name="a5e5c23a7d93ea035e25f2c89ca9423b9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5e5c23a7d93ea035e25f2c89ca9423b9">&#9670;&#160;</a></span>UA_ClientAsyncReadValueAttributeCallback</h2>
 
@@ -608,55 +286,21 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a3b93f37098685b06fdfdc05e83450208" name="a3b93f37098685b06fdfdc05e83450208"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3b93f37098685b06fdfdc05e83450208">&#9670;&#160;</a></span>UA_ClientAsyncReadValueRankAttributeCallback</h2>
+<a id="a4f25ddb4d18ed970cc9f859d94f47e7b" name="a4f25ddb4d18ed970cc9f859d94f47e7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f25ddb4d18ed970cc9f859d94f47e7b">&#9670;&#160;</a></span>UA_ClientAsyncReadDataTypeAttributeCallback</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef void(* UA_ClientAsyncReadValueRankAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="types_8h.html#a01ce3c3b2fb34ef81c97c313f516004e">UA_Int32</a> *valueRank)</td>
+          <td class="memname">typedef void(* UA_ClientAsyncReadDataTypeAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *dataType)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Read a single ValueRank attribute. </p>
+<p>Read a single DataType attribute. </p>
 
-<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00213">213</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
-
-</div>
-</div>
-<a id="ab577fbebf2e1539d5a0052fd2f401d33" name="ab577fbebf2e1539d5a0052fd2f401d33"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab577fbebf2e1539d5a0052fd2f401d33">&#9670;&#160;</a></span>UA_ClientAsyncReadWriteMaskAttributeCallback</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* UA_ClientAsyncReadWriteMaskAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *writeMask)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Read a single WriteMask attribute. </p>
-
-<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00143">143</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
-
-</div>
-</div>
-<a id="ae8ab823c7efec3fc9b6776e4f60a29e5" name="ae8ab823c7efec3fc9b6776e4f60a29e5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae8ab823c7efec3fc9b6776e4f60a29e5">&#9670;&#160;</a></span>UA_ClientAsyncWriteCallback</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* UA_ClientAsyncWriteCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="structUA__WriteResponse.html">UA_WriteResponse</a> *wr)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00029">29</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00082">82</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
 
 </div>
 </div>
@@ -679,15 +323,371 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a9af5a42545ee89e601623846099a0d46" name="a9af5a42545ee89e601623846099a0d46"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9af5a42545ee89e601623846099a0d46">&#9670;&#160;</a></span>__UA_Client_addNode_async()</h2>
+<a id="a06a28b3157f9636cc68cac26ad46cf78" name="a06a28b3157f9636cc68cac26ad46cf78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06a28b3157f9636cc68cac26ad46cf78">&#9670;&#160;</a></span>UA_ClientAsyncReadNodeClassAttributeCallback</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> __UA_Client_addNode_async </td>
+          <td class="memname">typedef void(* UA_ClientAsyncReadNodeClassAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="types__generated_8h.html#adf98bb5a5ac8e50eece68338a046a904">UA_NodeClass</a> *nodeClass)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read a single NodeClass attribute. </p>
+
+<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00103">103</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
+
+</div>
+</div>
+<a id="a2a329a41268bbd8caf7295c3fde03829" name="a2a329a41268bbd8caf7295c3fde03829"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a329a41268bbd8caf7295c3fde03829">&#9670;&#160;</a></span>UA_ClientAsyncReadBrowseNameAttributeCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* UA_ClientAsyncReadBrowseNameAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="structUA__QualifiedName.html">UA_QualifiedName</a> *browseName)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read a single BrowseName attribute. </p>
+
+<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00113">113</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
+
+</div>
+</div>
+<a id="a77cf2418aa027884153088afb2307989" name="a77cf2418aa027884153088afb2307989"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a77cf2418aa027884153088afb2307989">&#9670;&#160;</a></span>UA_ClientAsyncReadDisplayNameAttributeCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* UA_ClientAsyncReadDisplayNameAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="structUA__LocalizedText.html">UA_LocalizedText</a> *displayName)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read a single DisplayName attribute. </p>
+
+<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00123">123</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
+
+</div>
+</div>
+<a id="ae81062183abe12d0e371ae641f9dda78" name="ae81062183abe12d0e371ae641f9dda78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae81062183abe12d0e371ae641f9dda78">&#9670;&#160;</a></span>UA_ClientAsyncReadDescriptionAttributeCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* UA_ClientAsyncReadDescriptionAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="structUA__LocalizedText.html">UA_LocalizedText</a> *description)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read a single Description attribute. </p>
+
+<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00133">133</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
+
+</div>
+</div>
+<a id="ab577fbebf2e1539d5a0052fd2f401d33" name="ab577fbebf2e1539d5a0052fd2f401d33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab577fbebf2e1539d5a0052fd2f401d33">&#9670;&#160;</a></span>UA_ClientAsyncReadWriteMaskAttributeCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* UA_ClientAsyncReadWriteMaskAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *writeMask)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read a single WriteMask attribute. </p>
+
+<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00143">143</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
+
+</div>
+</div>
+<a id="adadf06a8931d63074a52301cac0cd434" name="adadf06a8931d63074a52301cac0cd434"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adadf06a8931d63074a52301cac0cd434">&#9670;&#160;</a></span>UA_ClientAsyncReadUserWriteMaskAttributeCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* UA_ClientAsyncReadUserWriteMaskAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *writeMask)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read a single UserWriteMask attribute. </p>
+
+<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00153">153</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
+
+</div>
+</div>
+<a id="ab534a34f8597a6090e2ced945dd8216a" name="ab534a34f8597a6090e2ced945dd8216a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab534a34f8597a6090e2ced945dd8216a">&#9670;&#160;</a></span>UA_ClientAsyncReadIsAbstractAttributeCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* UA_ClientAsyncReadIsAbstractAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> *isAbstract)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read a single IsAbstract attribute. </p>
+
+<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00163">163</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
+
+</div>
+</div>
+<a id="ab77334671c967c24b3e6b60cab3143cc" name="ab77334671c967c24b3e6b60cab3143cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab77334671c967c24b3e6b60cab3143cc">&#9670;&#160;</a></span>UA_ClientAsyncReadSymmetricAttributeCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* UA_ClientAsyncReadSymmetricAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> *symmetric)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read a single Symmetric attribute. </p>
+
+<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00173">173</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
+
+</div>
+</div>
+<a id="a2926f6284a3bc5e53ecacfd60c852d08" name="a2926f6284a3bc5e53ecacfd60c852d08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2926f6284a3bc5e53ecacfd60c852d08">&#9670;&#160;</a></span>UA_ClientAsyncReadInverseNameAttributeCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* UA_ClientAsyncReadInverseNameAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="structUA__LocalizedText.html">UA_LocalizedText</a> *inverseName)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read a single InverseName attribute. </p>
+
+<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00183">183</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
+
+</div>
+</div>
+<a id="abf015e895c532d26b0e74cc451f3889a" name="abf015e895c532d26b0e74cc451f3889a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf015e895c532d26b0e74cc451f3889a">&#9670;&#160;</a></span>UA_ClientAsyncReadContainsNoLoopsAttributeCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* UA_ClientAsyncReadContainsNoLoopsAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> *containsNoLoops)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read a single ContainsNoLoops attribute. </p>
+
+<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00193">193</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
+
+</div>
+</div>
+<a id="a67885d8e3df9db37abb4511d5cee972b" name="a67885d8e3df9db37abb4511d5cee972b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67885d8e3df9db37abb4511d5cee972b">&#9670;&#160;</a></span>UA_ClientAsyncReadEventNotifierAttributeCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* UA_ClientAsyncReadEventNotifierAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a> *eventNotifier)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read a single EventNotifier attribute. </p>
+
+<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00203">203</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
+
+</div>
+</div>
+<a id="a3b93f37098685b06fdfdc05e83450208" name="a3b93f37098685b06fdfdc05e83450208"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b93f37098685b06fdfdc05e83450208">&#9670;&#160;</a></span>UA_ClientAsyncReadValueRankAttributeCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* UA_ClientAsyncReadValueRankAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="types_8h.html#a01ce3c3b2fb34ef81c97c313f516004e">UA_Int32</a> *valueRank)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read a single ValueRank attribute. </p>
+
+<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00213">213</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
+
+</div>
+</div>
+<a id="a9969a927b0d7a987d761704d02e8ba52" name="a9969a927b0d7a987d761704d02e8ba52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9969a927b0d7a987d761704d02e8ba52">&#9670;&#160;</a></span>UA_ClientAsyncReadAccessLevelAttributeCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* UA_ClientAsyncReadAccessLevelAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a> *accessLevel)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read a single AccessLevel attribute. </p>
+
+<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00223">223</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
+
+</div>
+</div>
+<a id="ac69052c8a804498f6cfe9782970233a2" name="ac69052c8a804498f6cfe9782970233a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac69052c8a804498f6cfe9782970233a2">&#9670;&#160;</a></span>UA_ClientAsyncReadUserAccessLevelAttributeCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* UA_ClientAsyncReadUserAccessLevelAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a> *userAccessLevel)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read a single UserAccessLevel attribute. </p>
+
+<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00233">233</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
+
+</div>
+</div>
+<a id="a781e94da0bae3127eb6f9b232a16299a" name="a781e94da0bae3127eb6f9b232a16299a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a781e94da0bae3127eb6f9b232a16299a">&#9670;&#160;</a></span>UA_ClientAsyncReadMinimumSamplingIntervalAttributeCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* UA_ClientAsyncReadMinimumSamplingIntervalAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a> *minimumSamplingInterval)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read a single MinimumSamplingInterval attribute. </p>
+
+<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00243">243</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
+
+</div>
+</div>
+<a id="abec2bbddeeead2881913483d2cf6f385" name="abec2bbddeeead2881913483d2cf6f385"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abec2bbddeeead2881913483d2cf6f385">&#9670;&#160;</a></span>UA_ClientAsyncReadHistorizingAttributeCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* UA_ClientAsyncReadHistorizingAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> *historizing)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read a single Historizing attribute. </p>
+
+<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00253">253</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
+
+</div>
+</div>
+<a id="ac67ccc454e952ac7b8834d6cb21f0630" name="ac67ccc454e952ac7b8834d6cb21f0630"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac67ccc454e952ac7b8834d6cb21f0630">&#9670;&#160;</a></span>UA_ClientAsyncReadExecutableAttributeCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* UA_ClientAsyncReadExecutableAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> *executable)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read a single Executable attribute. </p>
+
+<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00263">263</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
+
+</div>
+</div>
+<a id="a1d889b360c1e00d67482d788fa727e28" name="a1d889b360c1e00d67482d788fa727e28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d889b360c1e00d67482d788fa727e28">&#9670;&#160;</a></span>UA_ClientAsyncReadUserExecutableAttributeCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* UA_ClientAsyncReadUserExecutableAttributeCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="el" href="ua__util__internal_8h.html#ad560a5dcac947428b046c21c5ff5f97b">status</a>, <a class="el" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> *userExecutable)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read a single UserExecutable attribute. </p>
+
+<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00273">273</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
+
+</div>
+</div>
+<a id="afb35aec63c04a7f79aabace6536eacf3" name="afb35aec63c04a7f79aabace6536eacf3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb35aec63c04a7f79aabace6536eacf3">&#9670;&#160;</a></span>UA_ClientAsyncCallCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* UA_ClientAsyncCallCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="structUA__CallResponse.html">UA_CallResponse</a> *cr)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00492">492</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
+
+</div>
+</div>
+<a id="af86f5fb4dcbe0e310c7ef8088a158d9c" name="af86f5fb4dcbe0e310c7ef8088a158d9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af86f5fb4dcbe0e310c7ef8088a158d9c">&#9670;&#160;</a></span>UA_ClientAsyncAddNodesCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* UA_ClientAsyncAddNodesCallback) (<a class="el" href="structUA__Client.html">UA_Client</a> *client, void *userdata, <a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> requestId, <a class="el" href="structUA__AddNodesResponse.html">UA_AddNodesResponse</a> *ar)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="client__highlevel__async_8h_source.html#l00507">507</a> of file <a class="el" href="client__highlevel__async_8h_source.html">client_highlevel_async.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a6f5fddd12663102c549970d0da0b490d" name="a6f5fddd12663102c549970d0da0b490d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f5fddd12663102c549970d0da0b490d">&#9670;&#160;</a></span>UA_Client_readAttribute_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readAttribute_async </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
           <td class="paramname"><em>client</em>, </td>
@@ -695,56 +695,1044 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="types__generated_8h.html#adf98bb5a5ac8e50eece68338a046a904">UA_NodeClass</a>&#160;</td>
-          <td class="paramname"><em>nodeClass</em>, </td>
+          <td class="paramtype">const <a class="el" href="structUA__ReadValueId.html">UA_ReadValueId</a> *&#160;</td>
+          <td class="paramname"><em>rvi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types__generated_8h.html#ab298c4ff5eb700437114d0dc2db97ead">UA_TimestampsToReturn</a>&#160;</td>
+          <td class="paramname"><em>timestampsToReturn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#afb3d07f1d8887ed20f211f007fccbcc3">UA_ClientAsyncReadAttributeCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
+          <td class="paramname"><em>requestId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4e6362efaead322694d2e016f2f9d786" name="a4e6362efaead322694d2e016f2f9d786"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e6362efaead322694d2e016f2f9d786">&#9670;&#160;</a></span>UA_Client_readValueAttribute_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readValueAttribute_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>requestedNewNodeId</em>, </td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#a5e5c23a7d93ea035e25f2c89ca9423b9">UA_ClientAsyncReadValueAttributeCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
+          <td class="paramname"><em>requestId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ade87fbdcf2637354810204f03a466829" name="ade87fbdcf2637354810204f03a466829"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade87fbdcf2637354810204f03a466829">&#9670;&#160;</a></span>UA_Client_readDataTypeAttribute_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readDataTypeAttribute_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>parentNodeId</em>, </td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#a4f25ddb4d18ed970cc9f859d94f47e7b">UA_ClientAsyncReadDataTypeAttributeCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
+          <td class="paramname"><em>requestId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abb09d84aea58af7639246880c0bc1c85" name="abb09d84aea58af7639246880c0bc1c85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb09d84aea58af7639246880c0bc1c85">&#9670;&#160;</a></span>UA_Client_readArrayDimensionsAttribute_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readArrayDimensionsAttribute_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>referenceTypeId</em>, </td>
+          <td class="paramname"><em>nodeId</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__QualifiedName.html">UA_QualifiedName</a>&#160;</td>
-          <td class="paramname"><em>browseName</em>, </td>
+          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#a375e2de5da57d05dae7273c7ba33c26a">UA_ClientReadArrayDimensionsAttributeCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
+          <td class="paramname"><em>requestId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1d3846c28bdd65bfcb7758ce98d63e72" name="a1d3846c28bdd65bfcb7758ce98d63e72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d3846c28bdd65bfcb7758ce98d63e72">&#9670;&#160;</a></span>UA_Client_readNodeClassAttribute_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readNodeClassAttribute_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>typeDefinition</em>, </td>
+          <td class="paramname"><em>nodeId</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeAttributes.html">UA_NodeAttributes</a> *&#160;</td>
-          <td class="paramname"><em>attr</em>, </td>
+          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#a06a28b3157f9636cc68cac26ad46cf78">UA_ClientAsyncReadNodeClassAttributeCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
+          <td class="paramname"><em>requestId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a86d4b1b723e8a27d47f273d459f2081b" name="a86d4b1b723e8a27d47f273d459f2081b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86d4b1b723e8a27d47f273d459f2081b">&#9670;&#160;</a></span>UA_Client_readBrowseNameAttribute_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readBrowseNameAttribute_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#a2a329a41268bbd8caf7295c3fde03829">UA_ClientAsyncReadBrowseNameAttributeCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
+          <td class="paramname"><em>requestId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5aa8081aa207a24415453d14e126ae1e" name="a5aa8081aa207a24415453d14e126ae1e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5aa8081aa207a24415453d14e126ae1e">&#9670;&#160;</a></span>UA_Client_readDisplayNameAttribute_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readDisplayNameAttribute_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#a77cf2418aa027884153088afb2307989">UA_ClientAsyncReadDisplayNameAttributeCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
+          <td class="paramname"><em>requestId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a767e9eaeef55a33658d260605687fff9" name="a767e9eaeef55a33658d260605687fff9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a767e9eaeef55a33658d260605687fff9">&#9670;&#160;</a></span>UA_Client_readDescriptionAttribute_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readDescriptionAttribute_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#ae81062183abe12d0e371ae641f9dda78">UA_ClientAsyncReadDescriptionAttributeCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
+          <td class="paramname"><em>requestId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1388cf683284766d6e7ba8427e62a3e9" name="a1388cf683284766d6e7ba8427e62a3e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1388cf683284766d6e7ba8427e62a3e9">&#9670;&#160;</a></span>UA_Client_readWriteMaskAttribute_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readWriteMaskAttribute_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#ab577fbebf2e1539d5a0052fd2f401d33">UA_ClientAsyncReadWriteMaskAttributeCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
+          <td class="paramname"><em>requestId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aacb9e886dc91c978950520378e07b04a" name="aacb9e886dc91c978950520378e07b04a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacb9e886dc91c978950520378e07b04a">&#9670;&#160;</a></span>UA_Client_readUserWriteMaskAttribute_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readUserWriteMaskAttribute_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#adadf06a8931d63074a52301cac0cd434">UA_ClientAsyncReadUserWriteMaskAttributeCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
+          <td class="paramname"><em>requestId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a65fdbb8da814d4896a8cee431a89f3ee" name="a65fdbb8da814d4896a8cee431a89f3ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65fdbb8da814d4896a8cee431a89f3ee">&#9670;&#160;</a></span>UA_Client_readIsAbstractAttribute_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readIsAbstractAttribute_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#ab534a34f8597a6090e2ced945dd8216a">UA_ClientAsyncReadIsAbstractAttributeCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
+          <td class="paramname"><em>requestId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a204f928d14228a19b1e3aa0fb81dd965" name="a204f928d14228a19b1e3aa0fb81dd965"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a204f928d14228a19b1e3aa0fb81dd965">&#9670;&#160;</a></span>UA_Client_readSymmetricAttribute_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readSymmetricAttribute_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#ab77334671c967c24b3e6b60cab3143cc">UA_ClientAsyncReadSymmetricAttributeCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
+          <td class="paramname"><em>requestId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a799d2d0a6b03fe5b9cb84e07a4a491be" name="a799d2d0a6b03fe5b9cb84e07a4a491be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a799d2d0a6b03fe5b9cb84e07a4a491be">&#9670;&#160;</a></span>UA_Client_readInverseNameAttribute_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readInverseNameAttribute_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#a2926f6284a3bc5e53ecacfd60c852d08">UA_ClientAsyncReadInverseNameAttributeCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
+          <td class="paramname"><em>requestId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abee7954f3dda774a3ebf9bf6d6d1c0c2" name="abee7954f3dda774a3ebf9bf6d6d1c0c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abee7954f3dda774a3ebf9bf6d6d1c0c2">&#9670;&#160;</a></span>UA_Client_readContainsNoLoopsAttribute_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readContainsNoLoopsAttribute_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#abf015e895c532d26b0e74cc451f3889a">UA_ClientAsyncReadContainsNoLoopsAttributeCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
+          <td class="paramname"><em>requestId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7c1f838c7c828857d7d6d38eecbcca9b" name="a7c1f838c7c828857d7d6d38eecbcca9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c1f838c7c828857d7d6d38eecbcca9b">&#9670;&#160;</a></span>UA_Client_readEventNotifierAttribute_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readEventNotifierAttribute_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#a67885d8e3df9db37abb4511d5cee972b">UA_ClientAsyncReadEventNotifierAttributeCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
+          <td class="paramname"><em>requestId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab315b4afa875bb4ed69a256803cb3812" name="ab315b4afa875bb4ed69a256803cb3812"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab315b4afa875bb4ed69a256803cb3812">&#9670;&#160;</a></span>UA_Client_readValueRankAttribute_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readValueRankAttribute_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#a3b93f37098685b06fdfdc05e83450208">UA_ClientAsyncReadValueRankAttributeCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
+          <td class="paramname"><em>requestId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa93430c8c0dbf2f832b57914d0d8e2de" name="aa93430c8c0dbf2f832b57914d0d8e2de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa93430c8c0dbf2f832b57914d0d8e2de">&#9670;&#160;</a></span>UA_Client_readAccessLevelAttribute_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readAccessLevelAttribute_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#a9969a927b0d7a987d761704d02e8ba52">UA_ClientAsyncReadAccessLevelAttributeCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
+          <td class="paramname"><em>requestId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5c87b707891489e4cc99a593e8f23d63" name="a5c87b707891489e4cc99a593e8f23d63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c87b707891489e4cc99a593e8f23d63">&#9670;&#160;</a></span>UA_Client_readUserAccessLevelAttribute_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readUserAccessLevelAttribute_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#ac69052c8a804498f6cfe9782970233a2">UA_ClientAsyncReadUserAccessLevelAttributeCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
+          <td class="paramname"><em>requestId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac99a1b05e3869dbbd5e001103a70e3e9" name="ac99a1b05e3869dbbd5e001103a70e3e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac99a1b05e3869dbbd5e001103a70e3e9">&#9670;&#160;</a></span>UA_Client_readMinimumSamplingIntervalAttribute_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readMinimumSamplingIntervalAttribute_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#a781e94da0bae3127eb6f9b232a16299a">UA_ClientAsyncReadMinimumSamplingIntervalAttributeCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
+          <td class="paramname"><em>requestId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af23059c478ddcff3184fa3a2ba3682a3" name="af23059c478ddcff3184fa3a2ba3682a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af23059c478ddcff3184fa3a2ba3682a3">&#9670;&#160;</a></span>UA_Client_readHistorizingAttribute_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readHistorizingAttribute_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#abec2bbddeeead2881913483d2cf6f385">UA_ClientAsyncReadHistorizingAttributeCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
+          <td class="paramname"><em>requestId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aeb873fc4425ee4d6f33e12a9e8cf51ea" name="aeb873fc4425ee4d6f33e12a9e8cf51ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb873fc4425ee4d6f33e12a9e8cf51ea">&#9670;&#160;</a></span>UA_Client_readExecutableAttribute_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readExecutableAttribute_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#ac67ccc454e952ac7b8834d6cb21f0630">UA_ClientAsyncReadExecutableAttributeCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
+          <td class="paramname"><em>requestId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a192b7e33f271b965a778f975283fc446" name="a192b7e33f271b965a778f975283fc446"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a192b7e33f271b965a778f975283fc446">&#9670;&#160;</a></span>UA_Client_readUserExecutableAttribute_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readUserExecutableAttribute_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#a1d889b360c1e00d67482d788fa727e28">UA_ClientAsyncReadUserExecutableAttributeCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>userdata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
+          <td class="paramname"><em>requestId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="acc5266ba837371a9532acb45675d36cf" name="acc5266ba837371a9532acb45675d36cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc5266ba837371a9532acb45675d36cf">&#9670;&#160;</a></span>__UA_Client_writeAttribute_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> __UA_Client_writeAttribute_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
+          <td class="paramname"><em>client</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
+          <td class="paramname"><em>nodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="common_8h.html#a4dc96c31672814d54f24409617bdbbe2">UA_AttributeId</a>&#160;</td>
+          <td class="paramname"><em>attributeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>in</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>attributeType</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
-          <td class="paramname"><em>outNewNodeId</em>, </td>
+          <td class="paramname"><em>inDataType</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -838,14 +1826,14 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="acc5266ba837371a9532acb45675d36cf" name="acc5266ba837371a9532acb45675d36cf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acc5266ba837371a9532acb45675d36cf">&#9670;&#160;</a></span>__UA_Client_writeAttribute_async()</h2>
+<a id="a9af5a42545ee89e601623846099a0d46" name="a9af5a42545ee89e601623846099a0d46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9af5a42545ee89e601623846099a0d46">&#9670;&#160;</a></span>__UA_Client_addNode_async()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> __UA_Client_writeAttribute_async </td>
+          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> __UA_Client_addNode_async </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
           <td class="paramname"><em>client</em>, </td>
@@ -853,26 +1841,56 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
+          <td class="paramtype">const <a class="el" href="types__generated_8h.html#adf98bb5a5ac8e50eece68338a046a904">UA_NodeClass</a>&#160;</td>
+          <td class="paramname"><em>nodeClass</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="common_8h.html#a4dc96c31672814d54f24409617bdbbe2">UA_AttributeId</a>&#160;</td>
-          <td class="paramname"><em>attributeId</em>, </td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>requestedNewNodeId</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>in</em>, </td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>parentNodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>referenceTypeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__QualifiedName.html">UA_QualifiedName</a>&#160;</td>
+          <td class="paramname"><em>browseName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>typeDefinition</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="structUA__NodeAttributes.html">UA_NodeAttributes</a> *&#160;</td>
+          <td class="paramname"><em>attr</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const <a class="el" href="structUA__DataType.html">UA_DataType</a> *&#160;</td>
-          <td class="paramname"><em>inDataType</em>, </td>
+          <td class="paramname"><em>attributeType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structUA__NodeId.html">UA_NodeId</a> *&#160;</td>
+          <td class="paramname"><em>outNewNodeId</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -891,1024 +1909,6 @@ Variables</h2></td></tr>
           <td></td>
           <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
           <td class="paramname"><em>reqId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aa93430c8c0dbf2f832b57914d0d8e2de" name="aa93430c8c0dbf2f832b57914d0d8e2de"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa93430c8c0dbf2f832b57914d0d8e2de">&#9670;&#160;</a></span>UA_Client_readAccessLevelAttribute_async()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readAccessLevelAttribute_async </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#a9969a927b0d7a987d761704d02e8ba52">UA_ClientAsyncReadAccessLevelAttributeCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>userdata</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
-          <td class="paramname"><em>requestId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="abb09d84aea58af7639246880c0bc1c85" name="abb09d84aea58af7639246880c0bc1c85"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abb09d84aea58af7639246880c0bc1c85">&#9670;&#160;</a></span>UA_Client_readArrayDimensionsAttribute_async()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readArrayDimensionsAttribute_async </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#a375e2de5da57d05dae7273c7ba33c26a">UA_ClientReadArrayDimensionsAttributeCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>userdata</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
-          <td class="paramname"><em>requestId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a6f5fddd12663102c549970d0da0b490d" name="a6f5fddd12663102c549970d0da0b490d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f5fddd12663102c549970d0da0b490d">&#9670;&#160;</a></span>UA_Client_readAttribute_async()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readAttribute_async </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__ReadValueId.html">UA_ReadValueId</a> *&#160;</td>
-          <td class="paramname"><em>rvi</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types__generated_8h.html#ab298c4ff5eb700437114d0dc2db97ead">UA_TimestampsToReturn</a>&#160;</td>
-          <td class="paramname"><em>timestampsToReturn</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#afb3d07f1d8887ed20f211f007fccbcc3">UA_ClientAsyncReadAttributeCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>userdata</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
-          <td class="paramname"><em>requestId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a86d4b1b723e8a27d47f273d459f2081b" name="a86d4b1b723e8a27d47f273d459f2081b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a86d4b1b723e8a27d47f273d459f2081b">&#9670;&#160;</a></span>UA_Client_readBrowseNameAttribute_async()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readBrowseNameAttribute_async </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#a2a329a41268bbd8caf7295c3fde03829">UA_ClientAsyncReadBrowseNameAttributeCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>userdata</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
-          <td class="paramname"><em>requestId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="abee7954f3dda774a3ebf9bf6d6d1c0c2" name="abee7954f3dda774a3ebf9bf6d6d1c0c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abee7954f3dda774a3ebf9bf6d6d1c0c2">&#9670;&#160;</a></span>UA_Client_readContainsNoLoopsAttribute_async()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readContainsNoLoopsAttribute_async </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#abf015e895c532d26b0e74cc451f3889a">UA_ClientAsyncReadContainsNoLoopsAttributeCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>userdata</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
-          <td class="paramname"><em>requestId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ade87fbdcf2637354810204f03a466829" name="ade87fbdcf2637354810204f03a466829"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade87fbdcf2637354810204f03a466829">&#9670;&#160;</a></span>UA_Client_readDataTypeAttribute_async()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readDataTypeAttribute_async </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#a4f25ddb4d18ed970cc9f859d94f47e7b">UA_ClientAsyncReadDataTypeAttributeCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>userdata</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
-          <td class="paramname"><em>requestId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a767e9eaeef55a33658d260605687fff9" name="a767e9eaeef55a33658d260605687fff9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a767e9eaeef55a33658d260605687fff9">&#9670;&#160;</a></span>UA_Client_readDescriptionAttribute_async()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readDescriptionAttribute_async </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#ae81062183abe12d0e371ae641f9dda78">UA_ClientAsyncReadDescriptionAttributeCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>userdata</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
-          <td class="paramname"><em>requestId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a5aa8081aa207a24415453d14e126ae1e" name="a5aa8081aa207a24415453d14e126ae1e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5aa8081aa207a24415453d14e126ae1e">&#9670;&#160;</a></span>UA_Client_readDisplayNameAttribute_async()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readDisplayNameAttribute_async </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#a77cf2418aa027884153088afb2307989">UA_ClientAsyncReadDisplayNameAttributeCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>userdata</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
-          <td class="paramname"><em>requestId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a7c1f838c7c828857d7d6d38eecbcca9b" name="a7c1f838c7c828857d7d6d38eecbcca9b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7c1f838c7c828857d7d6d38eecbcca9b">&#9670;&#160;</a></span>UA_Client_readEventNotifierAttribute_async()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readEventNotifierAttribute_async </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#a67885d8e3df9db37abb4511d5cee972b">UA_ClientAsyncReadEventNotifierAttributeCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>userdata</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
-          <td class="paramname"><em>requestId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aeb873fc4425ee4d6f33e12a9e8cf51ea" name="aeb873fc4425ee4d6f33e12a9e8cf51ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeb873fc4425ee4d6f33e12a9e8cf51ea">&#9670;&#160;</a></span>UA_Client_readExecutableAttribute_async()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readExecutableAttribute_async </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#ac67ccc454e952ac7b8834d6cb21f0630">UA_ClientAsyncReadExecutableAttributeCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>userdata</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
-          <td class="paramname"><em>requestId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="af23059c478ddcff3184fa3a2ba3682a3" name="af23059c478ddcff3184fa3a2ba3682a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af23059c478ddcff3184fa3a2ba3682a3">&#9670;&#160;</a></span>UA_Client_readHistorizingAttribute_async()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readHistorizingAttribute_async </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#abec2bbddeeead2881913483d2cf6f385">UA_ClientAsyncReadHistorizingAttributeCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>userdata</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
-          <td class="paramname"><em>requestId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a799d2d0a6b03fe5b9cb84e07a4a491be" name="a799d2d0a6b03fe5b9cb84e07a4a491be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a799d2d0a6b03fe5b9cb84e07a4a491be">&#9670;&#160;</a></span>UA_Client_readInverseNameAttribute_async()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readInverseNameAttribute_async </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#a2926f6284a3bc5e53ecacfd60c852d08">UA_ClientAsyncReadInverseNameAttributeCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>userdata</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
-          <td class="paramname"><em>requestId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a65fdbb8da814d4896a8cee431a89f3ee" name="a65fdbb8da814d4896a8cee431a89f3ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65fdbb8da814d4896a8cee431a89f3ee">&#9670;&#160;</a></span>UA_Client_readIsAbstractAttribute_async()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readIsAbstractAttribute_async </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#ab534a34f8597a6090e2ced945dd8216a">UA_ClientAsyncReadIsAbstractAttributeCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>userdata</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
-          <td class="paramname"><em>requestId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ac99a1b05e3869dbbd5e001103a70e3e9" name="ac99a1b05e3869dbbd5e001103a70e3e9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac99a1b05e3869dbbd5e001103a70e3e9">&#9670;&#160;</a></span>UA_Client_readMinimumSamplingIntervalAttribute_async()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readMinimumSamplingIntervalAttribute_async </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#a781e94da0bae3127eb6f9b232a16299a">UA_ClientAsyncReadMinimumSamplingIntervalAttributeCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>userdata</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
-          <td class="paramname"><em>requestId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a1d3846c28bdd65bfcb7758ce98d63e72" name="a1d3846c28bdd65bfcb7758ce98d63e72"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1d3846c28bdd65bfcb7758ce98d63e72">&#9670;&#160;</a></span>UA_Client_readNodeClassAttribute_async()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readNodeClassAttribute_async </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#a06a28b3157f9636cc68cac26ad46cf78">UA_ClientAsyncReadNodeClassAttributeCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>userdata</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
-          <td class="paramname"><em>requestId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a204f928d14228a19b1e3aa0fb81dd965" name="a204f928d14228a19b1e3aa0fb81dd965"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a204f928d14228a19b1e3aa0fb81dd965">&#9670;&#160;</a></span>UA_Client_readSymmetricAttribute_async()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readSymmetricAttribute_async </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#ab77334671c967c24b3e6b60cab3143cc">UA_ClientAsyncReadSymmetricAttributeCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>userdata</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
-          <td class="paramname"><em>requestId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a5c87b707891489e4cc99a593e8f23d63" name="a5c87b707891489e4cc99a593e8f23d63"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5c87b707891489e4cc99a593e8f23d63">&#9670;&#160;</a></span>UA_Client_readUserAccessLevelAttribute_async()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readUserAccessLevelAttribute_async </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#ac69052c8a804498f6cfe9782970233a2">UA_ClientAsyncReadUserAccessLevelAttributeCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>userdata</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
-          <td class="paramname"><em>requestId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a192b7e33f271b965a778f975283fc446" name="a192b7e33f271b965a778f975283fc446"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a192b7e33f271b965a778f975283fc446">&#9670;&#160;</a></span>UA_Client_readUserExecutableAttribute_async()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readUserExecutableAttribute_async </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#a1d889b360c1e00d67482d788fa727e28">UA_ClientAsyncReadUserExecutableAttributeCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>userdata</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
-          <td class="paramname"><em>requestId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aacb9e886dc91c978950520378e07b04a" name="aacb9e886dc91c978950520378e07b04a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aacb9e886dc91c978950520378e07b04a">&#9670;&#160;</a></span>UA_Client_readUserWriteMaskAttribute_async()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readUserWriteMaskAttribute_async </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#adadf06a8931d63074a52301cac0cd434">UA_ClientAsyncReadUserWriteMaskAttributeCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>userdata</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
-          <td class="paramname"><em>requestId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a4e6362efaead322694d2e016f2f9d786" name="a4e6362efaead322694d2e016f2f9d786"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4e6362efaead322694d2e016f2f9d786">&#9670;&#160;</a></span>UA_Client_readValueAttribute_async()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readValueAttribute_async </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#a5e5c23a7d93ea035e25f2c89ca9423b9">UA_ClientAsyncReadValueAttributeCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>userdata</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
-          <td class="paramname"><em>requestId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ab315b4afa875bb4ed69a256803cb3812" name="ab315b4afa875bb4ed69a256803cb3812"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab315b4afa875bb4ed69a256803cb3812">&#9670;&#160;</a></span>UA_Client_readValueRankAttribute_async()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readValueRankAttribute_async </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#a3b93f37098685b06fdfdc05e83450208">UA_ClientAsyncReadValueRankAttributeCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>userdata</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
-          <td class="paramname"><em>requestId</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a1388cf683284766d6e7ba8427e62a3e9" name="a1388cf683284766d6e7ba8427e62a3e9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1388cf683284766d6e7ba8427e62a3e9">&#9670;&#160;</a></span>UA_Client_readWriteMaskAttribute_async()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> UA_Client_readWriteMaskAttribute_async </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structUA__Client.html">UA_Client</a> *&#160;</td>
-          <td class="paramname"><em>client</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const <a class="el" href="structUA__NodeId.html">UA_NodeId</a>&#160;</td>
-          <td class="paramname"><em>nodeId</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="client__highlevel__async_8h.html#ab577fbebf2e1539d5a0052fd2f401d33">UA_ClientAsyncReadWriteMaskAttributeCallback</a>&#160;</td>
-          <td class="paramname"><em>callback</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>userdata</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *&#160;</td>
-          <td class="paramname"><em>requestId</em>&#160;</td>
         </tr>
         <tr>
           <td></td>

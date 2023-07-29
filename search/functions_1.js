@@ -13,5 +13,5 @@ var searchData=
   ['browsereferencednodes_10',['browseReferencedNodes',['../classopcua_1_1Node.html#ac92e7b010286789156bb91fe628735e7',1,'opcua::Node']]],
   ['browsereferences_11',['browseReferences',['../classopcua_1_1Node.html#ac77a95e7e2480495b3d825edad61c125',1,'opcua::Node']]],
   ['browsesimplifiedbrowsepath_12',['browseSimplifiedBrowsePath',['../group__View.html#ga881816279700702618773d9cb2568f2e',1,'opcua::services']]],
-  ['bytestring_13',['ByteString',['../classopcua_1_1ByteString.html#a70f01be183a1da6ca80d4d6eddad65df',1,'opcua::ByteString']]]
+  ['bytestring_13',['ByteString',['../classopcua_1_1ByteString.html#a70f01be183a1da6ca80d4d6eddad65df',1,'opcua::ByteString::ByteString(std::string_view str)'],['../classopcua_1_1ByteString.html#a6ff43a288b6dc2c4896cbbdd0eca9d6b',1,'opcua::ByteString::ByteString(const std::vector&lt; uint8_t &gt; &amp;bytes)']]]
 ];

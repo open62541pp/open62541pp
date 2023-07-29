@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['objectid_0',['ObjectId',['../group__NodeIds.html#gad6d1c9a92cf8a3d1113d816ef3d11e35',1,'opcua']]],
-  ['objecttypeid_1',['ObjectTypeId',['../group__NodeIds.html#ga49cc032e039ddce709db015c0f36547f',1,'opcua']]]
+  ['nodeclass_0',['NodeClass',['../namespaceopcua.html#a73517e637628b7e96a5dfa0e2e84e64a',1,'opcua']]],
+  ['nodeidtype_1',['NodeIdType',['../namespaceopcua.html#a05d617e4c64656fa2ef6baf2af636f90',1,'opcua']]]
 ];

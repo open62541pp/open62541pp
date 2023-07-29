@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.5.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.6.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -86,12 +86,10 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:adf0fca729e9e75dabd9e673a7eb7514c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#adf0fca729e9e75dabd9e673a7eb7514c">Server</a> ()</td></tr>
-<tr class="separator:adf0fca729e9e75dabd9e673a7eb7514c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af15226e234a7215c4c79b1ee54126121"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#af15226e234a7215c4c79b1ee54126121">Server</a> (uint16_t port)</td></tr>
-<tr class="separator:af15226e234a7215c4c79b1ee54126121"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf4f826095437abc0b3e20b8366cd8c1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#aaf4f826095437abc0b3e20b8366cd8c1">Server</a> (uint16_t port, std::string_view certificate)</td></tr>
-<tr class="separator:aaf4f826095437abc0b3e20b8366cd8c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadaece83cb335b692e84baf0c538e492"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#aadaece83cb335b692e84baf0c538e492">Server</a> (uint16_t port=4840, <a class="el" href="classopcua_1_1ByteString.html">ByteString</a> certificate={})</td></tr>
+<tr class="separator:aadaece83cb335b692e84baf0c538e492"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe11cf9e2c5636db6cef861a102a62a7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#afe11cf9e2c5636db6cef861a102a62a7">Server</a> (uint16_t port, const <a class="el" href="classopcua_1_1ByteString.html">ByteString</a> &amp;certificate, const <a class="el" href="classopcua_1_1ByteString.html">ByteString</a> &amp;privateKey, const std::vector&lt; <a class="el" href="classopcua_1_1ByteString.html">ByteString</a> &gt; &amp;trustList, const std::vector&lt; <a class="el" href="classopcua_1_1ByteString.html">ByteString</a> &gt; &amp;issuerList, const std::vector&lt; <a class="el" href="classopcua_1_1ByteString.html">ByteString</a> &gt; &amp;revocationList={})</td></tr>
+<tr class="separator:afe11cf9e2c5636db6cef861a102a62a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af917ca8ebe2f20dc0c262fed82464a7f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#af917ca8ebe2f20dc0c262fed82464a7f">setLogger</a> (<a class="el" href="namespaceopcua.html#addbefbd9d221be59908c6f60dc54238a">Logger</a> logger)</td></tr>
 <tr class="separator:af917ca8ebe2f20dc0c262fed82464a7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50463492d9e0f1342b9a33b402931dc0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a50463492d9e0f1342b9a33b402931dc0">setCustomHostname</a> (std::string_view hostname)</td></tr>
@@ -108,6 +106,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae841b3cea5eff765a6ce5c0692b45724"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebbf0356e35f42af50930448fe2245a4"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#aebbf0356e35f42af50930448fe2245a4">registerNamespace</a> (std::string_view uri)</td></tr>
 <tr class="separator:aebbf0356e35f42af50930448fe2245a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4f006cd9e70844e32b40251ce596cea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#aa4f006cd9e70844e32b40251ce596cea">setVariableNodeValueCallback</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="structopcua_1_1ValueCallback.html">ValueCallback</a> callback)</td></tr>
+<tr class="separator:aa4f006cd9e70844e32b40251ce596cea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a80242dd95c529b6e7b68c8d60da91a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Subscription.html">Subscription</a>&lt; <a class="el" href="classopcua_1_1Server.html">Server</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a7a80242dd95c529b6e7b68c8d60da91a">createSubscription</a> () noexcept</td></tr>
 <tr class="separator:a7a80242dd95c529b6e7b68c8d60da91a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74af3b7dbfa031a19230a45dcf3f3a31"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a74af3b7dbfa031a19230a45dcf3f3a31">runIterate</a> ()</td></tr>
@@ -136,32 +136,13 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>High-level server class. </p>
 <p>Exposes the most common functionality. Use the <a class="el" href="classopcua_1_1Server.html#af78448a2823bfe2e6ba8badb987a8bc8">handle()</a> method to get access the underlying <a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> instance and use the full power of open6254. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_8cpp-example.html#_a0">server.cpp</a>, <a class="el" href="server_instantiation_8cpp-example.html#_a0">server_instantiation.cpp</a>, <a class="el" href="server_method_8cpp-example.html#_a0">server_method.cpp</a>, and <a class="el" href="server_minimal_8cpp-example.html#_a0">server_minimal.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_8cpp-example.html#_a0">server.cpp</a>, <a class="el" href="server_instantiation_8cpp-example.html#_a0">server_instantiation.cpp</a>, <a class="el" href="server_method_8cpp-example.html#_a0">server_method.cpp</a>, <a class="el" href="server_minimal_8cpp-example.html#_a0">server_minimal.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#_a0">server_valuecallback.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Server_8h_source.html#l00030">30</a> of file <a class="el" href="Server_8h_source.html">Server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Server_8h_source.html#l00032">32</a> of file <a class="el" href="Server_8h_source.html">Server.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="adf0fca729e9e75dabd9e673a7eb7514c" name="adf0fca729e9e75dabd9e673a7eb7514c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf0fca729e9e75dabd9e673a7eb7514c">&#9670;&#160;</a></span>Server() <span class="overload">[1/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">opcua::Server::Server </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Create server with default config. </p>
-
-</div>
-</div>
-<a id="af15226e234a7215c4c79b1ee54126121" name="af15226e234a7215c4c79b1ee54126121"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af15226e234a7215c4c79b1ee54126121">&#9670;&#160;</a></span>Server() <span class="overload">[2/3]</span></h2>
+<a id="aadaece83cb335b692e84baf0c538e492" name="aadaece83cb335b692e84baf0c538e492"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadaece83cb335b692e84baf0c538e492">&#9670;&#160;</a></span>Server() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -173,8 +154,18 @@ Public Member Functions</h2></td></tr>
           <td class="memname">opcua::Server::Server </td>
           <td>(</td>
           <td class="paramtype">uint16_t&#160;</td>
-          <td class="paramname"><em>port</em></td><td>)</td>
+          <td class="paramname"><em>port</em> = <code>4840</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1ByteString.html">ByteString</a>&#160;</td>
+          <td class="paramname"><em>certificate</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -184,12 +175,22 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Create server with custom port. </p>
+<p>Create server with default configuration (no encryption). </p>
+<p>Security policies:</p><ul>
+<li><a href="http://opcfoundation.org/UA/SecurityPolicy#None" target="_blank">None</a></li>
+</ul>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">port</td><td>Port number </td></tr>
+    <tr><td class="paramname">certificate</td><td>Optional X.509 v3 certificate in <code>DER</code> encoded format </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
-<a id="aaf4f826095437abc0b3e20b8366cd8c1" name="aaf4f826095437abc0b3e20b8366cd8c1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaf4f826095437abc0b3e20b8366cd8c1">&#9670;&#160;</a></span>Server() <span class="overload">[3/3]</span></h2>
+<a id="afe11cf9e2c5636db6cef861a102a62a7" name="afe11cf9e2c5636db6cef861a102a62a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe11cf9e2c5636db6cef861a102a62a7">&#9670;&#160;</a></span>Server() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -203,8 +204,32 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>certificate</em>&#160;</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1ByteString.html">ByteString</a> &amp;&#160;</td>
+          <td class="paramname"><em>certificate</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1ByteString.html">ByteString</a> &amp;&#160;</td>
+          <td class="paramname"><em>privateKey</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="classopcua_1_1ByteString.html">ByteString</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>trustList</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="classopcua_1_1ByteString.html">ByteString</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>issuerList</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="classopcua_1_1ByteString.html">ByteString</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>revocationList</em> = <code>{}</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -214,282 +239,73 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Create server with custom port and a server certificate. </p>
+<p>Create server with encryption enabled (PKI). </p>
+<p>Security policies:</p><ul>
+<li><a href="http://opcfoundation.org/UA/SecurityPolicy#None" target="_blank">None</a></li>
+<li><a href="http://opcfoundation.org/UA/SecurityPolicy#Basic128Rsa15" target="_blank">Basic128Rsa15</a></li>
+<li><a href="http://opcfoundation.org/UA/SecurityPolicy#Basic256" target="_blank">Basic256</a></li>
+<li><a href="http://opcfoundation.org/UA/SecurityPolicy#Basic256Sha256" target="_blank">Basic256Sha256</a></li>
+<li><a href="http://opcfoundation.org/UA/SecurityPolicy#Aes128_Sha256_RsaOaep" target="_blank">Aes128_Sha256_RsaOaep</a></li>
+</ul>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">port</td><td>Port number </td></tr>
+    <tr><td class="paramname">certificate</td><td>X.509 v3 certificate in <code>DER</code> encoded format </td></tr>
+    <tr><td class="paramname">privateKey</td><td>Private key in <code>PEM</code> encoded format </td></tr>
+    <tr><td class="paramname">trustList</td><td>List of trusted certificates in <code>DER</code> encoded format </td></tr>
+    <tr><td class="paramname">issuerList</td><td>List of issuer certificates (i.e. CAs) in <code>DER</code> encoded format </td></tr>
+    <tr><td class="paramname">revocationList</td><td>Certificate revocation lists (CRL) in <code>DER</code> encoded format</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/Core/Part2/v105/docs/8">https://reference.opcfoundation.org/Core/Part2/v105/docs/8</a> </dd>
+<dd>
+<a href="https://reference.opcfoundation.org/Core/Part4/v105/docs/6.1">https://reference.opcfoundation.org/Core/Part4/v105/docs/6.1</a> </dd>
+<dd>
+<a href="https://reference.opcfoundation.org/Core/Part6/v105/docs/6.2">https://reference.opcfoundation.org/Core/Part6/v105/docs/6.2</a> </dd></dl>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a7a80242dd95c529b6e7b68c8d60da91a" name="a7a80242dd95c529b6e7b68c8d60da91a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7a80242dd95c529b6e7b68c8d60da91a">&#9670;&#160;</a></span>createSubscription()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Subscription.html">Subscription</a>&lt; <a class="el" href="classopcua_1_1Server.html">Server</a> &gt; opcua::Server::createSubscription </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Create a (pseudo) subscription to monitor local data changes and events. </p>
-
-</div>
-</div>
-<a id="ae841b3cea5eff765a6ce5c0692b45724" name="ae841b3cea5eff765a6ce5c0692b45724"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae841b3cea5eff765a6ce5c0692b45724">&#9670;&#160;</a></span>getNamespaceArray()</h2>
+<a id="af917ca8ebe2f20dc0c262fed82464a7f" name="af917ca8ebe2f20dc0c262fed82464a7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af917ca8ebe2f20dc0c262fed82464a7f">&#9670;&#160;</a></span>setLogger()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; std::string &gt; opcua::Server::getNamespaceArray </td>
+          <td class="memname">void opcua::Server::setLogger </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#addbefbd9d221be59908c6f60dc54238a">Logger</a>&#160;</td>
+          <td class="paramname"><em>logger</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Get all defined namespaces. </p>
-
-</div>
-</div>
-<a id="af8163eca1c3e5e6ec20d6de12199e260" name="af8163eca1c3e5e6ec20d6de12199e260"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af8163eca1c3e5e6ec20d6de12199e260">&#9670;&#160;</a></span>getNode()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a>&lt; <a class="el" href="classopcua_1_1Server.html">Server</a> &gt; opcua::Server::getNode </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
-          <td class="paramname"><em>id</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_instantiation_8cpp-example.html#a1">server_instantiation.cpp</a>.</dd>
+<p>Set custom logging function. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_8cpp-example.html#a2">server.cpp</a>.</dd>
 </dl>
 
 </div>
 </div>
-<a id="a2f0b2aea96301c20affba76c6e441492" name="a2f0b2aea96301c20affba76c6e441492"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2f0b2aea96301c20affba76c6e441492">&#9670;&#160;</a></span>getObjectsNode()</h2>
+<a id="a50463492d9e0f1342b9a33b402931dc0" name="a50463492d9e0f1342b9a33b402931dc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50463492d9e0f1342b9a33b402931dc0">&#9670;&#160;</a></span>setCustomHostname()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a>&lt; <a class="el" href="classopcua_1_1Server.html">Server</a> &gt; opcua::Server::getObjectsNode </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_8cpp-example.html#a7">server.cpp</a>, <a class="el" href="server_instantiation_8cpp-example.html#a5">server_instantiation.cpp</a>, <a class="el" href="server_method_8cpp-example.html#a1">server_method.cpp</a>, and <a class="el" href="server_minimal_8cpp-example.html#a1">server_minimal.cpp</a>.</dd>
-</dl>
-
-</div>
-</div>
-<a id="a7a0fac46cfcdef394bff378308a5b71c" name="a7a0fac46cfcdef394bff378308a5b71c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7a0fac46cfcdef394bff378308a5b71c">&#9670;&#160;</a></span>getRootNode()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a>&lt; <a class="el" href="classopcua_1_1Server.html">Server</a> &gt; opcua::Server::getRootNode </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aa112cce347514fb25763c73872f6be66" name="aa112cce347514fb25763c73872f6be66"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa112cce347514fb25763c73872f6be66">&#9670;&#160;</a></span>getTypesNode()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a>&lt; <a class="el" href="classopcua_1_1Server.html">Server</a> &gt; opcua::Server::getTypesNode </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a846b7fa8de7bab8dd4fe81a42b10dd48" name="a846b7fa8de7bab8dd4fe81a42b10dd48"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a846b7fa8de7bab8dd4fe81a42b10dd48">&#9670;&#160;</a></span>getViewsNode()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a>&lt; <a class="el" href="classopcua_1_1Server.html">Server</a> &gt; opcua::Server::getViewsNode </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a8c558952ba75f4e938fa7102e3611e86" name="a8c558952ba75f4e938fa7102e3611e86"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8c558952ba75f4e938fa7102e3611e86">&#9670;&#160;</a></span>handle() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> * opcua::Server::handle </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="af78448a2823bfe2e6ba8badb987a8bc8" name="af78448a2823bfe2e6ba8badb987a8bc8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af78448a2823bfe2e6ba8badb987a8bc8">&#9670;&#160;</a></span>handle() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> * opcua::Server::handle </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ae355af01f75adbe8197353e5f5d6afd6" name="ae355af01f75adbe8197353e5f5d6afd6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae355af01f75adbe8197353e5f5d6afd6">&#9670;&#160;</a></span>isRunning()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool opcua::Server::isRunning </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Check if the server is running. </p>
-
-</div>
-</div>
-<a id="aebbf0356e35f42af50930448fe2245a4" name="aebbf0356e35f42af50930448fe2245a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aebbf0356e35f42af50930448fe2245a4">&#9670;&#160;</a></span>registerNamespace()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint16_t opcua::Server::registerNamespace </td>
+          <td class="memname">void opcua::Server::setCustomHostname </td>
           <td>(</td>
           <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>uri</em></td><td>)</td>
+          <td class="paramname"><em>hostname</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Register namespace. The new namespace index will be returned. </p>
-
-</div>
-</div>
-<a id="a7346a714c85e2d99fc8bc9fd1dd31d6d" name="a7346a714c85e2d99fc8bc9fd1dd31d6d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7346a714c85e2d99fc8bc9fd1dd31d6d">&#9670;&#160;</a></span>run()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void opcua::Server::run </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Run the server's main loop. This method will block until <a class="el" href="classopcua_1_1Server.html#a51f8bc0f79b2e5cea8fc094c58a76a9c" title="Stop the server&#39;s main loop.">Server::stop</a> is called. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_8cpp-example.html#a9">server.cpp</a>, <a class="el" href="server_instantiation_8cpp-example.html#a6">server_instantiation.cpp</a>, <a class="el" href="server_method_8cpp-example.html#a8">server_method.cpp</a>, and <a class="el" href="server_minimal_8cpp-example.html#a3">server_minimal.cpp</a>.</dd>
-</dl>
-
-</div>
-</div>
-<a id="a74af3b7dbfa031a19230a45dcf3f3a31" name="a74af3b7dbfa031a19230a45dcf3f3a31"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a74af3b7dbfa031a19230a45dcf3f3a31">&#9670;&#160;</a></span>runIterate()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint16_t opcua::Server::runIterate </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Run a single iteration of the server's main loop. </p>
-<dl class="section return"><dt>Returns</dt><dd>Maximum wait period until next <a class="el" href="classopcua_1_1Server.html#a74af3b7dbfa031a19230a45dcf3f3a31" title="Run a single iteration of the server&#39;s main loop.">Server::runIterate</a> call (in ms) </dd></dl>
+<p>Set custom hostname, default: system's host name. </p>
 
 </div>
 </div>
@@ -535,45 +351,23 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a50463492d9e0f1342b9a33b402931dc0" name="a50463492d9e0f1342b9a33b402931dc0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a50463492d9e0f1342b9a33b402931dc0">&#9670;&#160;</a></span>setCustomHostname()</h2>
+<a id="a480065442a39d201936bbfb35d2530f1" name="a480065442a39d201936bbfb35d2530f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a480065442a39d201936bbfb35d2530f1">&#9670;&#160;</a></span>setProductUri()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::Server::setCustomHostname </td>
+          <td class="memname">void opcua::Server::setProductUri </td>
           <td>(</td>
           <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>hostname</em></td><td>)</td>
+          <td class="paramname"><em>uri</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Set custom hostname, default: system's host name. </p>
-
-</div>
-</div>
-<a id="af917ca8ebe2f20dc0c262fed82464a7f" name="af917ca8ebe2f20dc0c262fed82464a7f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af917ca8ebe2f20dc0c262fed82464a7f">&#9670;&#160;</a></span>setLogger()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void opcua::Server::setLogger </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceopcua.html#addbefbd9d221be59908c6f60dc54238a">Logger</a>&#160;</td>
-          <td class="paramname"><em>logger</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Set custom logging function. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_8cpp-example.html#a2">server.cpp</a>.</dd>
-</dl>
+<p>Set product URI, default: <code><a href="http://open62541.org">http://open62541.org</a></code>. </p>
 
 </div>
 </div>
@@ -607,14 +401,33 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a480065442a39d201936bbfb35d2530f1" name="a480065442a39d201936bbfb35d2530f1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a480065442a39d201936bbfb35d2530f1">&#9670;&#160;</a></span>setProductUri()</h2>
+<a id="ae841b3cea5eff765a6ce5c0692b45724" name="ae841b3cea5eff765a6ce5c0692b45724"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae841b3cea5eff765a6ce5c0692b45724">&#9670;&#160;</a></span>getNamespaceArray()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::Server::setProductUri </td>
+          <td class="memname">std::vector&lt; std::string &gt; opcua::Server::getNamespaceArray </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get all defined namespaces. </p>
+
+</div>
+</div>
+<a id="aebbf0356e35f42af50930448fe2245a4" name="aebbf0356e35f42af50930448fe2245a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebbf0356e35f42af50930448fe2245a4">&#9670;&#160;</a></span>registerNamespace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t opcua::Server::registerNamespace </td>
           <td>(</td>
           <td class="paramtype">std::string_view&#160;</td>
           <td class="paramname"><em>uri</em></td><td>)</td>
@@ -623,7 +436,107 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Set product URI, default: <code><a href="http://open62541.org">http://open62541.org</a></code>. </p>
+<p>Register namespace. The new namespace index will be returned. </p>
+
+</div>
+</div>
+<a id="aa4f006cd9e70844e32b40251ce596cea" name="aa4f006cd9e70844e32b40251ce596cea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4f006cd9e70844e32b40251ce596cea">&#9670;&#160;</a></span>setVariableNodeValueCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::Server::setVariableNodeValueCallback </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structopcua_1_1ValueCallback.html">ValueCallback</a>&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set value callbacks to execute before every read and after every write operation. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_valuecallback_8cpp-example.html#a10">server_valuecallback.cpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="a7a80242dd95c529b6e7b68c8d60da91a" name="a7a80242dd95c529b6e7b68c8d60da91a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a80242dd95c529b6e7b68c8d60da91a">&#9670;&#160;</a></span>createSubscription()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1Subscription.html">Subscription</a>&lt; <a class="el" href="classopcua_1_1Server.html">Server</a> &gt; opcua::Server::createSubscription </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create a (pseudo) subscription to monitor local data changes and events. </p>
+
+</div>
+</div>
+<a id="a74af3b7dbfa031a19230a45dcf3f3a31" name="a74af3b7dbfa031a19230a45dcf3f3a31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74af3b7dbfa031a19230a45dcf3f3a31">&#9670;&#160;</a></span>runIterate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t opcua::Server::runIterate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Run a single iteration of the server's main loop. </p>
+<dl class="section return"><dt>Returns</dt><dd>Maximum wait period until next <a class="el" href="classopcua_1_1Server.html#a74af3b7dbfa031a19230a45dcf3f3a31" title="Run a single iteration of the server&#39;s main loop.">Server::runIterate</a> call (in ms) </dd></dl>
+
+</div>
+</div>
+<a id="a7346a714c85e2d99fc8bc9fd1dd31d6d" name="a7346a714c85e2d99fc8bc9fd1dd31d6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7346a714c85e2d99fc8bc9fd1dd31d6d">&#9670;&#160;</a></span>run()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::Server::run </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Run the server's main loop. This method will block until <a class="el" href="classopcua_1_1Server.html#a51f8bc0f79b2e5cea8fc094c58a76a9c" title="Stop the server&#39;s main loop.">Server::stop</a> is called. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_8cpp-example.html#a11">server.cpp</a>, <a class="el" href="server_instantiation_8cpp-example.html#a12">server_instantiation.cpp</a>, <a class="el" href="server_method_8cpp-example.html#a8">server_method.cpp</a>, <a class="el" href="server_minimal_8cpp-example.html#a7">server_minimal.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#a11">server_valuecallback.cpp</a>.</dd>
+</dl>
 
 </div>
 </div>
@@ -643,6 +556,173 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Stop the server's main loop. </p>
+
+</div>
+</div>
+<a id="ae355af01f75adbe8197353e5f5d6afd6" name="ae355af01f75adbe8197353e5f5d6afd6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae355af01f75adbe8197353e5f5d6afd6">&#9670;&#160;</a></span>isRunning()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool opcua::Server::isRunning </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if the server is running. </p>
+
+</div>
+</div>
+<a id="af8163eca1c3e5e6ec20d6de12199e260" name="af8163eca1c3e5e6ec20d6de12199e260"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8163eca1c3e5e6ec20d6de12199e260">&#9670;&#160;</a></span>getNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a>&lt; <a class="el" href="classopcua_1_1Server.html">Server</a> &gt; opcua::Server::getNode </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_instantiation_8cpp-example.html#a1">server_instantiation.cpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="a7a0fac46cfcdef394bff378308a5b71c" name="a7a0fac46cfcdef394bff378308a5b71c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7a0fac46cfcdef394bff378308a5b71c">&#9670;&#160;</a></span>getRootNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a>&lt; <a class="el" href="classopcua_1_1Server.html">Server</a> &gt; opcua::Server::getRootNode </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2f0b2aea96301c20affba76c6e441492" name="a2f0b2aea96301c20affba76c6e441492"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f0b2aea96301c20affba76c6e441492">&#9670;&#160;</a></span>getObjectsNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a>&lt; <a class="el" href="classopcua_1_1Server.html">Server</a> &gt; opcua::Server::getObjectsNode </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_8cpp-example.html#a7">server.cpp</a>, <a class="el" href="server_instantiation_8cpp-example.html#a9">server_instantiation.cpp</a>, <a class="el" href="server_method_8cpp-example.html#a1">server_method.cpp</a>, <a class="el" href="server_minimal_8cpp-example.html#a2">server_minimal.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#a2">server_valuecallback.cpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="aa112cce347514fb25763c73872f6be66" name="aa112cce347514fb25763c73872f6be66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa112cce347514fb25763c73872f6be66">&#9670;&#160;</a></span>getTypesNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a>&lt; <a class="el" href="classopcua_1_1Server.html">Server</a> &gt; opcua::Server::getTypesNode </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a846b7fa8de7bab8dd4fe81a42b10dd48" name="a846b7fa8de7bab8dd4fe81a42b10dd48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a846b7fa8de7bab8dd4fe81a42b10dd48">&#9670;&#160;</a></span>getViewsNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a>&lt; <a class="el" href="classopcua_1_1Server.html">Server</a> &gt; opcua::Server::getViewsNode </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af78448a2823bfe2e6ba8badb987a8bc8" name="af78448a2823bfe2e6ba8badb987a8bc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af78448a2823bfe2e6ba8badb987a8bc8">&#9670;&#160;</a></span>handle() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> * opcua::Server::handle </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8c558952ba75f4e938fa7102e3611e86" name="a8c558952ba75f4e938fa7102e3611e86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c558952ba75f4e938fa7102e3611e86">&#9670;&#160;</a></span>handle() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> * opcua::Server::handle </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>

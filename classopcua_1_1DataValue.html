@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.5.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.6.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -187,8 +187,6 @@ Static Public Member Functions</h2></td></tr>
 <tr class="inherit_header pub_static_methods_classopcua_1_1TypeWrapper"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_classopcua_1_1TypeWrapper')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_DataValue, UA_TYPES_DATAVALUE &gt;</a></td></tr>
 <tr class="memitem:a5e05524b2745c94d9b43037f8fd938de inherit pub_static_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">static constexpr <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a5e05524b2745c94d9b43037f8fd938de">getTypeIndex</a> ()</td></tr>
 <tr class="separator:a5e05524b2745c94d9b43037f8fd938de inherit pub_static_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a570e5661b87bdc4abc4fa96fca9dd493 inherit pub_static_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">static const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a570e5661b87bdc4abc4fa96fca9dd493">getDataType</a> ()</td></tr>
-<tr class="separator:a570e5661b87bdc4abc4fa96fca9dd493 inherit pub_static_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -203,13 +201,15 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:ac183e283c4619b5e6e84d80706034224 inherit pro_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#ac183e283c4619b5e6e84d80706034224">copy</a> (const <a class="elRef" target="_blank" href="open62541/structUA__DataValue.html">UA_DataValue</a> &amp;data)</td></tr>
 <tr class="separator:ac183e283c4619b5e6e84d80706034224 inherit pro_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_static_methods_classopcua_1_1TypeWrapper"><td colspan="2" onclick="javascript:toggleInherit('pro_static_methods_classopcua_1_1TypeWrapper')"><img src="closed.png" alt="-"/>&#160;Static Protected Member Functions inherited from <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_DataValue, UA_TYPES_DATAVALUE &gt;</a></td></tr>
+<tr class="memitem:a570e5661b87bdc4abc4fa96fca9dd493 inherit pro_static_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">static const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a570e5661b87bdc4abc4fa96fca9dd493">getDataType</a> ()</td></tr>
+<tr class="separator:a570e5661b87bdc4abc4fa96fca9dd493 inherit pro_static_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7794f5381651258794f075fdaf7bbcff inherit pro_static_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a7794f5381651258794f075fdaf7bbcff">checkMemSize</a> ()</td></tr>
 <tr class="separator:a7794f5381651258794f075fdaf7bbcff inherit pro_static_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="elRef" target="_blank" href="open62541/structUA__DataValue.html">UA_DataValue</a> wrapper class. </p>
 <dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/Core/Part4/v105/docs/7.11">https://reference.opcfoundation.org/Core/Part4/v105/docs/7.11</a> </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_subscription_8cpp-example.html#_a7">client_subscription.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_subscription_8cpp-example.html#_a7">client_subscription.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#_a7">server_valuecallback.cpp</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="DataValue_8h_source.html#l00019">19</a> of file <a class="el" href="DataValue_8h_source.html">DataValue.h</a>.</p>
@@ -267,43 +267,6 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a5659ac155dce977ecd88af7d8fe163cc" name="a5659ac155dce977ecd88af7d8fe163cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5659ac155dce977ecd88af7d8fe163cc">&#9670;&#160;</a></span>fromArray()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename... Args&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1DataValue.html">DataValue</a> opcua::DataValue::fromArray </td>
-          <td>(</td>
-          <td class="paramtype">Args &amp;&amp;...&#160;</td>
-          <td class="paramname"><em>args</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Create <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> from array. </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classopcua_1_1Variant.html#ac99619ea9e1b6f0774abf36c5c97a934" title="Create Variant from array (no copy if assignable without conversion)">Variant::fromArray</a> </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="DataValue_8h_source.html#l00097">97</a> of file <a class="el" href="DataValue_8h_source.html">DataValue.h</a>.</p>
-
-<p class="reference">References <a class="elRef" target="_blank" href="open62541/log_8h.html#a17b7d23b263b56363b9cd3364b529284">args</a>, and <a class="el" href="Variant_8h_source.html#l00205">opcua::Variant::fromArray()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Attribute_8h_source.html#l00414">opcua::services::writeArrayDimensions()</a>.</p>
-
-</div>
-</div>
 <a id="a0afdbe3fb4d251cadc85151a29fae00b" name="a0afdbe3fb4d251cadc85151a29fae00b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0afdbe3fb4d251cadc85151a29fae00b">&#9670;&#160;</a></span>fromScalar()</h2>
 
@@ -341,226 +304,45 @@ template&lt;typename... Args&gt; </div>
 
 </div>
 </div>
-<a id="a3632799d9b31d6d1deec55e32f1c7443" name="a3632799d9b31d6d1deec55e32f1c7443"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3632799d9b31d6d1deec55e32f1c7443">&#9670;&#160;</a></span>getServerPicoseconds()</h2>
+<a id="a5659ac155dce977ecd88af7d8fe163cc" name="a5659ac155dce977ecd88af7d8fe163cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5659ac155dce977ecd88af7d8fe163cc">&#9670;&#160;</a></span>fromArray()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint16_t opcua::DataValue::getServerPicoseconds </td>
+          <td class="memname"><a class="el" href="classopcua_1_1DataValue.html">DataValue</a> opcua::DataValue::fromArray </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get picoseconds interval added to the server timestamp. </p>
-
-</div>
-</div>
-<a id="a2a8e2d3f36ebdd5e4c11b1e066f5d76b" name="a2a8e2d3f36ebdd5e4c11b1e066f5d76b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2a8e2d3f36ebdd5e4c11b1e066f5d76b">&#9670;&#160;</a></span>getServerTimestamp()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1DateTime.html">DateTime</a> opcua::DataValue::getServerTimestamp </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get server timestamp for the value. </p>
-
-</div>
-</div>
-<a id="ad86005b9515a9002977481a872b8dc7d" name="ad86005b9515a9002977481a872b8dc7d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad86005b9515a9002977481a872b8dc7d">&#9670;&#160;</a></span>getSourcePicoseconds()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint16_t opcua::DataValue::getSourcePicoseconds </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get picoseconds interval added to the source timestamp. </p>
-
-</div>
-</div>
-<a id="af7a89342dbd67f06b88583da51f4bee6" name="af7a89342dbd67f06b88583da51f4bee6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af7a89342dbd67f06b88583da51f4bee6">&#9670;&#160;</a></span>getSourceTimestamp()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1DateTime.html">DateTime</a> opcua::DataValue::getSourceTimestamp </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get source timestamp for the value. </p>
-
-</div>
-</div>
-<a id="ab3a0b79308af2da2cdca66e906a368fb" name="ab3a0b79308af2da2cdca66e906a368fb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab3a0b79308af2da2cdca66e906a368fb">&#9670;&#160;</a></span>getStatusCode()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> opcua::DataValue::getStatusCode </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get status code. </p>
-
-</div>
-</div>
-<a id="a7ffe9a79c1954fd097c3593d8456d4ea" name="a7ffe9a79c1954fd097c3593d8456d4ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7ffe9a79c1954fd097c3593d8456d4ea">&#9670;&#160;</a></span>getValue() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp; opcua::DataValue::getValue </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get value. </p>
-
-</div>
-</div>
-<a id="a3bd76939b2f43a486d574f4c589df131" name="a3bd76939b2f43a486d574f4c589df131"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3bd76939b2f43a486d574f4c589df131">&#9670;&#160;</a></span>getValue() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp; opcua::DataValue::getValue </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get value. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_subscription_8cpp-example.html#a8">client_subscription.cpp</a>.</dd>
-</dl>
+<p>Create <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> from array. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classopcua_1_1Variant.html#ac99619ea9e1b6f0774abf36c5c97a934" title="Create Variant from array (no copy if assignable without conversion)">Variant::fromArray</a> </dd></dl>
 
-</div>
-</div>
-<a id="a2dc66eb5d7e53a3a68a270c9a46937e9" name="a2dc66eb5d7e53a3a68a270c9a46937e9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2dc66eb5d7e53a3a68a270c9a46937e9">&#9670;&#160;</a></span>getValuePtr() <span class="overload">[1/2]</span></h2>
+<p class="definition">Definition at line <a class="el" href="DataValue_8h_source.html#l00097">97</a> of file <a class="el" href="DataValue_8h_source.html">DataValue.h</a>.</p>
 
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="classopcua_1_1Variant.html">Variant</a> * opcua::DataValue::getValuePtr </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
+<p class="reference">References <a class="elRef" target="_blank" href="open62541/log_8h.html#a17b7d23b263b56363b9cd3364b529284">args</a>, and <a class="el" href="Variant_8h_source.html#l00205">opcua::Variant::fromArray()</a>.</p>
 
-<p>Get value as pointer (might be <code>nullptr</code> if not set). </p>
+<p class="reference">Referenced by <a class="el" href="Attribute_8h_source.html#l00414">opcua::services::writeArrayDimensions()</a>.</p>
 
 </div>
 </div>
 <a id="a7b18a6f6ec26780fc2233e7d9c3e26dc" name="a7b18a6f6ec26780fc2233e7d9c3e26dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7b18a6f6ec26780fc2233e7d9c3e26dc">&#9670;&#160;</a></span>getValuePtr() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b18a6f6ec26780fc2233e7d9c3e26dc">&#9670;&#160;</a></span>getValuePtr() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -586,8 +368,8 @@ template&lt;typename... Args&gt; </div>
 
 </div>
 </div>
-<a id="a028ba77835cdaef2039ab3507d543e9f" name="a028ba77835cdaef2039ab3507d543e9f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a028ba77835cdaef2039ab3507d543e9f">&#9670;&#160;</a></span>hasServerPicoseconds()</h2>
+<a id="a2dc66eb5d7e53a3a68a270c9a46937e9" name="a2dc66eb5d7e53a3a68a270c9a46937e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2dc66eb5d7e53a3a68a270c9a46937e9">&#9670;&#160;</a></span>getValuePtr() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -596,7 +378,59 @@ template&lt;typename... Args&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool opcua::DataValue::hasServerPicoseconds </td>
+          <td class="memname">const <a class="el" href="classopcua_1_1Variant.html">Variant</a> * opcua::DataValue::getValuePtr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get value as pointer (might be <code>nullptr</code> if not set). </p>
+
+</div>
+</div>
+<a id="a257e429eb800416b4ed028661d88d264" name="a257e429eb800416b4ed028661d88d264"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a257e429eb800416b4ed028661d88d264">&#9670;&#160;</a></span>hasValue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool opcua::DataValue::hasValue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a56ab026f3444ca48beba26b199e7aab5" name="a56ab026f3444ca48beba26b199e7aab5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56ab026f3444ca48beba26b199e7aab5">&#9670;&#160;</a></span>hasSourceTimestamp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool opcua::DataValue::hasSourceTimestamp </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -661,8 +495,8 @@ template&lt;typename... Args&gt; </div>
 
 </div>
 </div>
-<a id="a56ab026f3444ca48beba26b199e7aab5" name="a56ab026f3444ca48beba26b199e7aab5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a56ab026f3444ca48beba26b199e7aab5">&#9670;&#160;</a></span>hasSourceTimestamp()</h2>
+<a id="a028ba77835cdaef2039ab3507d543e9f" name="a028ba77835cdaef2039ab3507d543e9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a028ba77835cdaef2039ab3507d543e9f">&#9670;&#160;</a></span>hasServerPicoseconds()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -671,7 +505,7 @@ template&lt;typename... Args&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool opcua::DataValue::hasSourceTimestamp </td>
+          <td class="memname">bool opcua::DataValue::hasServerPicoseconds </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -711,8 +545,8 @@ template&lt;typename... Args&gt; </div>
 
 </div>
 </div>
-<a id="a257e429eb800416b4ed028661d88d264" name="a257e429eb800416b4ed028661d88d264"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a257e429eb800416b4ed028661d88d264">&#9670;&#160;</a></span>hasValue()</h2>
+<a id="a3bd76939b2f43a486d574f4c589df131" name="a3bd76939b2f43a486d574f4c589df131"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bd76939b2f43a486d574f4c589df131">&#9670;&#160;</a></span>getValue() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -721,7 +555,36 @@ template&lt;typename... Args&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool opcua::DataValue::hasValue </td>
+          <td class="memname"><a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp; opcua::DataValue::getValue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get value. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_subscription_8cpp-example.html#a8">client_subscription.cpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="a7ffe9a79c1954fd097c3593d8456d4ea" name="a7ffe9a79c1954fd097c3593d8456d4ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ffe9a79c1954fd097c3593d8456d4ea">&#9670;&#160;</a></span>getValue() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp; opcua::DataValue::getValue </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -734,25 +597,202 @@ template&lt;typename... Args&gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Get value. </p>
+
 </div>
 </div>
-<a id="a2c70c48aa03c4169442407547c4a6ccf" name="a2c70c48aa03c4169442407547c4a6ccf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2c70c48aa03c4169442407547c4a6ccf">&#9670;&#160;</a></span>setServerPicoseconds()</h2>
+<a id="af7a89342dbd67f06b88583da51f4bee6" name="af7a89342dbd67f06b88583da51f4bee6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7a89342dbd67f06b88583da51f4bee6">&#9670;&#160;</a></span>getSourceTimestamp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1DateTime.html">DateTime</a> opcua::DataValue::getSourceTimestamp </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get source timestamp for the value. </p>
+
+</div>
+</div>
+<a id="a2a8e2d3f36ebdd5e4c11b1e066f5d76b" name="a2a8e2d3f36ebdd5e4c11b1e066f5d76b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a8e2d3f36ebdd5e4c11b1e066f5d76b">&#9670;&#160;</a></span>getServerTimestamp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1DateTime.html">DateTime</a> opcua::DataValue::getServerTimestamp </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get server timestamp for the value. </p>
+
+</div>
+</div>
+<a id="ad86005b9515a9002977481a872b8dc7d" name="ad86005b9515a9002977481a872b8dc7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad86005b9515a9002977481a872b8dc7d">&#9670;&#160;</a></span>getSourcePicoseconds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t opcua::DataValue::getSourcePicoseconds </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get picoseconds interval added to the source timestamp. </p>
+
+</div>
+</div>
+<a id="a3632799d9b31d6d1deec55e32f1c7443" name="a3632799d9b31d6d1deec55e32f1c7443"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3632799d9b31d6d1deec55e32f1c7443">&#9670;&#160;</a></span>getServerPicoseconds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t opcua::DataValue::getServerPicoseconds </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get picoseconds interval added to the server timestamp. </p>
+
+</div>
+</div>
+<a id="ab3a0b79308af2da2cdca66e906a368fb" name="ab3a0b79308af2da2cdca66e906a368fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3a0b79308af2da2cdca66e906a368fb">&#9670;&#160;</a></span>getStatusCode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> opcua::DataValue::getStatusCode </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get status code. </p>
+
+</div>
+</div>
+<a id="aeeb04edf684c2157076679ac5f2047b8" name="aeeb04edf684c2157076679ac5f2047b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeeb04edf684c2157076679ac5f2047b8">&#9670;&#160;</a></span>setValue() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::DataValue::setServerPicoseconds </td>
+          <td class="memname">void opcua::DataValue::setValue </td>
           <td>(</td>
-          <td class="paramtype">uint16_t&#160;</td>
-          <td class="paramname"><em>serverPicoseconds</em></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Set picoseconds interval added to the server timestamp. </p>
+<p>Set value (copy). </p>
+
+</div>
+</div>
+<a id="aaa22ac2b62ed1da7507b15a3286cfe58" name="aaa22ac2b62ed1da7507b15a3286cfe58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa22ac2b62ed1da7507b15a3286cfe58">&#9670;&#160;</a></span>setValue() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::DataValue::setValue </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set value (move). </p>
+
+</div>
+</div>
+<a id="ac16e00429df8b7fa7917acc1182166ed" name="ac16e00429df8b7fa7917acc1182166ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac16e00429df8b7fa7917acc1182166ed">&#9670;&#160;</a></span>setSourceTimestamp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::DataValue::setSourceTimestamp </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1DateTime.html">DateTime</a>&#160;</td>
+          <td class="paramname"><em>sourceTimestamp</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set source timestamp for the value. </p>
 
 </div>
 </div>
@@ -796,23 +836,23 @@ template&lt;typename... Args&gt; </div>
 
 </div>
 </div>
-<a id="ac16e00429df8b7fa7917acc1182166ed" name="ac16e00429df8b7fa7917acc1182166ed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac16e00429df8b7fa7917acc1182166ed">&#9670;&#160;</a></span>setSourceTimestamp()</h2>
+<a id="a2c70c48aa03c4169442407547c4a6ccf" name="a2c70c48aa03c4169442407547c4a6ccf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c70c48aa03c4169442407547c4a6ccf">&#9670;&#160;</a></span>setServerPicoseconds()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::DataValue::setSourceTimestamp </td>
+          <td class="memname">void opcua::DataValue::setServerPicoseconds </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1DateTime.html">DateTime</a>&#160;</td>
-          <td class="paramname"><em>sourceTimestamp</em></td><td>)</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>serverPicoseconds</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Set source timestamp for the value. </p>
+<p>Set picoseconds interval added to the server timestamp. </p>
 
 </div>
 </div>
@@ -833,46 +873,6 @@ template&lt;typename... Args&gt; </div>
 </div><div class="memdoc">
 
 <p>Set status code. </p>
-
-</div>
-</div>
-<a id="aeeb04edf684c2157076679ac5f2047b8" name="aeeb04edf684c2157076679ac5f2047b8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeeb04edf684c2157076679ac5f2047b8">&#9670;&#160;</a></span>setValue() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void opcua::DataValue::setValue </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;&#160;</td>
-          <td class="paramname"><em>value</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Set value (copy). </p>
-
-</div>
-</div>
-<a id="aaa22ac2b62ed1da7507b15a3286cfe58" name="aaa22ac2b62ed1da7507b15a3286cfe58"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaa22ac2b62ed1da7507b15a3286cfe58">&#9670;&#160;</a></span>setValue() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void opcua::DataValue::setValue </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;&amp;&#160;</td>
-          <td class="paramname"><em>value</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Set value (move). </p>
 
 </div>
 </div>

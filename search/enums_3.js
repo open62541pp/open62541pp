@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['extensionobjectencoding_0',['ExtensionObjectEncoding',['../namespaceopcua.html#a12f473c742c5dee093677093bd19ab12',1,'opcua']]]
+  ['datatypeid_0',['DataTypeId',['../group__NodeIds.html#gadfeffe1a4352e8d89c5167a8c09d1692',1,'opcua']]]
 ];
