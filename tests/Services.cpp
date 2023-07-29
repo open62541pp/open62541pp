@@ -55,6 +55,19 @@ TEST_CASE("NodeManagement service set (server & client)") {
                 serverOrClient, {0, UA_NS0ID_BASEVARIABLETYPE}, {1, 1001}, "variabletype"
             );
             CHECK(services::readNodeClass(server, {1, 1001}) == NodeClass::VariableType);
+
+            services::addReferenceType(
+                serverOrClient, {0, UA_NS0ID_ORGANIZES}, {1, 1002}, "referenceType"
+            );
+            CHECK(services::readNodeClass(server, {1, 1002}) == NodeClass::ReferenceType);
+
+            services::addDataType(serverOrClient, {0, UA_NS0ID_STRUCTURE}, {1, 1003}, "dataType");
+            CHECK(services::readNodeClass(server, {1, 1003}) == NodeClass::DataType);
+        }
+
+        SUBCASE("View nodes") {
+            services::addView(serverOrClient, {0, UA_NS0ID_VIEWSFOLDER}, {1, 1000}, "view");
+            CHECK(services::readNodeClass(server, {1, 1000}) == NodeClass::View);
         }
 
         SUBCASE("Add reference") {

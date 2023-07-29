@@ -110,96 +110,6 @@ void addVariable<Client>(
     detail::throwOnBadStatus(status);
 }
 
-template <>
-void addObjectType<Server>(
-    Server& server,
-    const NodeId& parentId,
-    const NodeId& id,
-    std::string_view browseName,
-    const ObjectTypeAttributes& attributes,
-    const NodeId& referenceType
-) {
-    const auto status = UA_Server_addObjectTypeNode(
-        server.handle(),
-        id,
-        parentId,
-        referenceType,
-        QualifiedName(id.getNamespaceIndex(), browseName),
-        attributes,
-        nullptr,  // node context
-        nullptr  // output new node id
-    );
-    detail::throwOnBadStatus(status);
-}
-
-template <>
-void addObjectType<Client>(
-    Client& client,
-    const NodeId& parentId,
-    const NodeId& id,
-    std::string_view browseName,
-    const ObjectTypeAttributes& attributes,
-    const NodeId& referenceType
-) {
-    const auto status = UA_Client_addObjectTypeNode(
-        client.handle(),
-        id,
-        parentId,
-        referenceType,
-        QualifiedName(id.getNamespaceIndex(), browseName),
-        attributes,
-        nullptr  // output new node id
-    );
-    detail::throwOnBadStatus(status);
-}
-
-template <>
-void addVariableType<Server>(
-    Server& server,
-    const NodeId& parentId,
-    const NodeId& id,
-    std::string_view browseName,
-    const VariableTypeAttributes& attributes,
-    const NodeId& variableType,
-    const NodeId& referenceType
-) {
-    const auto status = UA_Server_addVariableTypeNode(
-        server.handle(),
-        id,
-        parentId,
-        referenceType,
-        QualifiedName(id.getNamespaceIndex(), browseName),
-        variableType,
-        attributes,
-        nullptr,  // node context
-        nullptr  // output new node id
-    );
-    detail::throwOnBadStatus(status);
-}
-
-template <>
-void addVariableType<Client>(
-    Client& client,
-    const NodeId& parentId,
-    const NodeId& id,
-    std::string_view browseName,
-    const VariableTypeAttributes& attributes,
-    const NodeId& variableType,
-    const NodeId& referenceType
-) {
-    (void)variableType;  // TODO: variableType is currently unused
-    const auto status = UA_Client_addVariableTypeNode(
-        client.handle(),
-        id,
-        parentId,
-        referenceType,
-        QualifiedName(id.getNamespaceIndex(), browseName),
-        attributes,
-        nullptr  // output new node id
-    );
-    detail::throwOnBadStatus(status);
-}
-
 #ifdef UA_ENABLE_METHODCALLS
 static UA_StatusCode methodCallback(
     [[maybe_unused]] UA_Server* server,
@@ -295,6 +205,225 @@ void addMethod(
     detail::throwOnBadStatus(status);
 }
 #endif
+
+template <>
+void addObjectType<Server>(
+    Server& server,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    const ObjectTypeAttributes& attributes,
+    const NodeId& referenceType
+) {
+    const auto status = UA_Server_addObjectTypeNode(
+        server.handle(),
+        id,
+        parentId,
+        referenceType,
+        QualifiedName(id.getNamespaceIndex(), browseName),
+        attributes,
+        nullptr,  // node context
+        nullptr  // output new node id
+    );
+    detail::throwOnBadStatus(status);
+}
+
+template <>
+void addObjectType<Client>(
+    Client& client,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    const ObjectTypeAttributes& attributes,
+    const NodeId& referenceType
+) {
+    const auto status = UA_Client_addObjectTypeNode(
+        client.handle(),
+        id,
+        parentId,
+        referenceType,
+        QualifiedName(id.getNamespaceIndex(), browseName),
+        attributes,
+        nullptr  // output new node id
+    );
+    detail::throwOnBadStatus(status);
+}
+
+template <>
+void addVariableType<Server>(
+    Server& server,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    const VariableTypeAttributes& attributes,
+    const NodeId& variableType,
+    const NodeId& referenceType
+) {
+    const auto status = UA_Server_addVariableTypeNode(
+        server.handle(),
+        id,
+        parentId,
+        referenceType,
+        QualifiedName(id.getNamespaceIndex(), browseName),
+        variableType,
+        attributes,
+        nullptr,  // node context
+        nullptr  // output new node id
+    );
+    detail::throwOnBadStatus(status);
+}
+
+template <>
+void addVariableType<Client>(
+    Client& client,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    const VariableTypeAttributes& attributes,
+    const NodeId& variableType,
+    const NodeId& referenceType
+) {
+    (void)variableType;  // TODO: variableType is currently unused
+    const auto status = UA_Client_addVariableTypeNode(
+        client.handle(),
+        id,
+        parentId,
+        referenceType,
+        QualifiedName(id.getNamespaceIndex(), browseName),
+        attributes,
+        nullptr  // output new node id
+    );
+    detail::throwOnBadStatus(status);
+}
+
+template <>
+void addReferenceType<Server>(
+    Server& server,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    const ReferenceTypeAttributes& attributes,
+    const NodeId& referenceType
+) {
+    const auto status = UA_Server_addReferenceTypeNode(
+        server.handle(),
+        id,
+        parentId,
+        referenceType,
+        QualifiedName(id.getNamespaceIndex(), browseName),
+        attributes,
+        nullptr,  // node context
+        nullptr  // output new node id
+    );
+    detail::throwOnBadStatus(status);
+}
+
+template <>
+void addReferenceType<Client>(
+    Client& client,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    const ReferenceTypeAttributes& attributes,
+    const NodeId& referenceType
+) {
+    const auto status = UA_Client_addReferenceTypeNode(
+        client.handle(),
+        id,
+        parentId,
+        referenceType,
+        QualifiedName(id.getNamespaceIndex(), browseName),
+        attributes,
+        nullptr  // output new node id
+    );
+    detail::throwOnBadStatus(status);
+}
+
+template <>
+void addDataType<Server>(
+    Server& server,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    const DataTypeAttributes& attributes,
+    const NodeId& referenceType
+) {
+    const auto status = UA_Server_addDataTypeNode(
+        server.handle(),
+        id,
+        parentId,
+        referenceType,
+        QualifiedName(id.getNamespaceIndex(), browseName),
+        attributes,
+        nullptr,  // node context
+        nullptr  // output new node id
+    );
+    detail::throwOnBadStatus(status);
+}
+
+template <>
+void addDataType<Client>(
+    Client& client,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    const DataTypeAttributes& attributes,
+    const NodeId& referenceType
+) {
+    const auto status = UA_Client_addDataTypeNode(
+        client.handle(),
+        id,
+        parentId,
+        referenceType,
+        QualifiedName(id.getNamespaceIndex(), browseName),
+        attributes,
+        nullptr  // output new node id
+    );
+    detail::throwOnBadStatus(status);
+}
+
+template <>
+void addView<Server>(
+    Server& server,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    const ViewAttributes& attributes,
+    const NodeId& referenceType
+) {
+    const auto status = UA_Server_addViewNode(
+        server.handle(),
+        id,
+        parentId,
+        referenceType,
+        QualifiedName(id.getNamespaceIndex(), browseName),
+        attributes,
+        nullptr,  // node context
+        nullptr  // output new node id
+    );
+    detail::throwOnBadStatus(status);
+}
+
+template <>
+void addView<Client>(
+    Client& client,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    const ViewAttributes& attributes,
+    const NodeId& referenceType
+) {
+    const auto status = UA_Client_addViewNode(
+        client.handle(),
+        id,
+        parentId,
+        referenceType,
+        QualifiedName(id.getNamespaceIndex(), browseName),
+        attributes,
+        nullptr  // output new node id
+    );
+    detail::throwOnBadStatus(status);
+}
 
 template <>
 void addReference<Server>(

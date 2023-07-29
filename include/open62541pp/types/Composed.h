@@ -297,6 +297,57 @@ public:
     UAPP_NODEATTR(bool, IsAbstract, isAbstract, UA_NODEATTRIBUTESMASK_ISABSTRACT)
 };
 
+/**
+ * UA_ReferenceTypeAttributes wrapper class.
+ * @ingroup TypeWrapper
+ */
+class ReferenceTypeAttributes
+    : public TypeWrapper<UA_ReferenceTypeAttributes, UA_TYPES_REFERENCETYPEATTRIBUTES> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    /// Construct with default attribute definitions.
+    ReferenceTypeAttributes();
+
+    UAPP_NODEATTR_COMMON
+    UAPP_NODEATTR(bool, IsAbstract, isAbstract, UA_NODEATTRIBUTESMASK_ISABSTRACT)
+    UAPP_NODEATTR(bool, Symmetric, symmetric, UA_NODEATTRIBUTESMASK_SYMMETRIC)
+    UAPP_NODEATTR_WRAPPER(
+        LocalizedText, InverseName, inverseName, UA_NODEATTRIBUTESMASK_INVERSENAME
+    )
+};
+
+/**
+ * UA_DataTypeAttributes wrapper class.
+ * @ingroup TypeWrapper
+ */
+class DataTypeAttributes : public TypeWrapper<UA_DataTypeAttributes, UA_TYPES_DATATYPEATTRIBUTES> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    /// Construct with default attribute definitions.
+    DataTypeAttributes();
+
+    UAPP_NODEATTR_COMMON
+    UAPP_NODEATTR(bool, IsAbstract, isAbstract, UA_NODEATTRIBUTESMASK_ISABSTRACT)
+};
+
+/**
+ * UA_ViewAttributes wrapper class.
+ * @ingroup TypeWrapper
+ */
+class ViewAttributes : public TypeWrapper<UA_ViewAttributes, UA_TYPES_VIEWATTRIBUTES> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    /// Construct with default attribute definitions.
+    ViewAttributes();
+
+    UAPP_NODEATTR_COMMON
+    UAPP_NODEATTR(bool, IsAbstract, containsNoLoops, UA_NODEATTRIBUTESMASK_CONTAINSNOLOOPS)
+    UAPP_NODEATTR(uint8_t, EventNotifier, eventNotifier, UA_NODEATTRIBUTESMASK_EVENTNOTIFIER)
+};
+
 #undef UAPP_NODEATTR
 #undef UAPP_NODEATTR_WRAPPER
 #undef UAPP_NODEATTR_ARRAY
