@@ -106,31 +106,6 @@ public:
         return {connection_, id, false};
     }
 
-    /// @copydoc services::addObjectType
-    Node addObjectType(
-        const NodeId& id,
-        std::string_view browseName,
-        const ObjectTypeAttributes& attributes = {},
-        const NodeId& referenceType = ReferenceTypeId::HasSubtype
-    ) {
-        services::addObjectType(connection_, nodeId_, id, browseName, attributes, referenceType);
-        return {connection_, id, false};
-    }
-
-    /// @copydoc services::addVariableType
-    Node addVariableType(
-        const NodeId& id,
-        std::string_view browseName,
-        const VariableTypeAttributes& attributes = {},
-        const NodeId& variableType = VariableTypeId::BaseDataVariableType,
-        const NodeId& referenceType = ReferenceTypeId::HasSubtype
-    ) {
-        services::addVariableType(
-            connection_, nodeId_, id, browseName, attributes, variableType, referenceType
-        );
-        return {connection_, id, false};
-    }
-
 #ifdef UA_ENABLE_METHODCALLS
     /// @copydoc services::addMethod
     Node addMethod(
@@ -156,6 +131,64 @@ public:
         return {connection_, id, false};
     }
 #endif
+
+    /// @copydoc services::addObjectType
+    Node addObjectType(
+        const NodeId& id,
+        std::string_view browseName,
+        const ObjectTypeAttributes& attributes = {},
+        const NodeId& referenceType = ReferenceTypeId::HasSubtype
+    ) {
+        services::addObjectType(connection_, nodeId_, id, browseName, attributes, referenceType);
+        return {connection_, id, false};
+    }
+
+    /// @copydoc services::addVariableType
+    Node addVariableType(
+        const NodeId& id,
+        std::string_view browseName,
+        const VariableTypeAttributes& attributes = {},
+        const NodeId& variableType = VariableTypeId::BaseDataVariableType,
+        const NodeId& referenceType = ReferenceTypeId::HasSubtype
+    ) {
+        services::addVariableType(
+            connection_, nodeId_, id, browseName, attributes, variableType, referenceType
+        );
+        return {connection_, id, false};
+    }
+
+    /// @copydoc services::addReferenceType
+    Node addReferenceType(
+        const NodeId& id,
+        std::string_view browseName,
+        const ReferenceTypeAttributes& attributes = {},
+        const NodeId& referenceType = ReferenceTypeId::HasSubtype
+    ) {
+        services::addReferenceType(connection_, nodeId_, id, browseName, attributes, referenceType);
+        return {connection_, id, false};
+    }
+
+    /// @copydoc services::addDataType
+    Node addDataType(
+        const NodeId& id,
+        std::string_view browseName,
+        const DataTypeAttributes& attributes = {},
+        const NodeId& referenceType = ReferenceTypeId::HasSubtype
+    ) {
+        services::addDataType(connection_, nodeId_, id, browseName, attributes, referenceType);
+        return {connection_, id, false};
+    }
+
+    /// @copydoc services::addView
+    Node addView(
+        const NodeId& id,
+        std::string_view browseName,
+        const ViewAttributes& attributes = {},
+        const NodeId& referenceType = ReferenceTypeId::Organizes
+    ) {
+        services::addView(connection_, nodeId_, id, browseName, attributes, referenceType);
+        return {connection_, id, false};
+    }
 
     /// @copydoc services::addReference
     /// @return Current node instance to chain multiple methods (fluent interface)

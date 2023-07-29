@@ -22,6 +22,15 @@ ObjectTypeAttributes::ObjectTypeAttributes()
 VariableTypeAttributes::VariableTypeAttributes()
     : TypeWrapperBase(UA_VariableTypeAttributes_default) {}
 
+ReferenceTypeAttributes::ReferenceTypeAttributes()
+    : TypeWrapperBase(UA_ReferenceTypeAttributes_default) {}
+
+DataTypeAttributes::DataTypeAttributes()
+    : TypeWrapperBase(UA_DataTypeAttributes_default) {}
+
+ViewAttributes::ViewAttributes()
+    : TypeWrapperBase(UA_ViewAttributes_default) {}
+
 BrowseDescription::BrowseDescription(
     const NodeId& nodeId,
     BrowseDirection browseDirection,
