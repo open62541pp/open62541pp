@@ -14,12 +14,10 @@ USE_MDFILE_AS_MAINPAGE = "${PROJECT_SOURCE_DIR}/README.md"
 
 # Build-related options
 EXTRACT_ALL            = YES
-DISABLE_INDEX          = NO
-GENERATE_TREEVIEW      = NO
-TREEVIEW_WIDTH         = 300
 SHOW_FILES             = YES
 SHOW_NAMESPACES        = YES
 SHOW_USED_FILES        = NO
+SORT_MEMBER_DOCS       = NO
 LAYOUT_FILE            = "${CMAKE_CURRENT_SOURCE_DIR}/DoxygenLayout.xml"
 QUIET                  = YES
 
@@ -53,6 +51,8 @@ HTML_OUTPUT            = "${doxygen_html_dir}"
 HTML_COLORSTYLE        = LIGHT
 
 ENUM_VALUES_PER_LINE   = 0
+GENERATE_TREEVIEW      = NO
+TREEVIEW_WIDTH         = 300
 EXT_LINKS_IN_WINDOW    = YES
 
 # Preprocessor
