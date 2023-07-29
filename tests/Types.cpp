@@ -324,6 +324,7 @@ TEST_CASE("Variant") {
         CHECK(varEmpty.isEmpty());
         CHECK(!varEmpty.isScalar());
         CHECK(!varEmpty.isArray());
+        CHECK(varEmpty.getDataType() == nullptr);
         CHECK(varEmpty.getVariantType() == std::nullopt);
         CHECK(varEmpty.getArrayLength() == 0);
         CHECK(varEmpty.getArrayDimensions().empty());
@@ -349,6 +350,12 @@ TEST_CASE("Variant") {
             CHECK(var.isScalar());
             CHECK(var->data == &value);
         }
+        SUBCASE("Assign with custom datatye") {
+            double value = 11.11;
+            const auto var = Variant::fromScalar(value, UA_TYPES[UA_TYPES_DOUBLE]);
+            CHECK(var.isScalar());
+            CHECK(var->data == &value);
+        }
         SUBCASE("Copy if const") {
             const double value = 11.11;
             const auto var = Variant::fromScalar(value);
@@ -360,9 +367,15 @@ TEST_CASE("Variant") {
             CHECK(var.isScalar());
             CHECK(var.getScalar<double>() == 11.11);
         }
-        SUBCASE("Copy if not assignable (const or conversion CHECKd)") {
+        SUBCASE("Copy if not assignable (const or conversion check failed)") {
             std::string value{"test"};
             const auto var = Variant::fromScalar<std::string, Type::String>(value);
+            CHECK(var.isScalar());
+            CHECK(var->data != &value);
+        }
+        SUBCASE("Copy with custom data tye") {
+            const double value = 11.11;
+            const auto var = Variant::fromScalar(value, UA_TYPES[UA_TYPES_DOUBLE]);
             CHECK(var.isScalar());
             CHECK(var->data != &value);
         }
@@ -372,6 +385,12 @@ TEST_CASE("Variant") {
         SUBCASE("Assign if possible") {
             std::vector<double> vec{1.1, 2.2, 3.3};
             const auto var = Variant::fromArray(vec.data(), vec.size());
+            CHECK(var.isArray());
+            CHECK(var->data == vec.data());
+        }
+        SUBCASE("Assign with custom data type") {
+            std::vector<double> vec{1.1, 2.2, 3.3};
+            const auto var = Variant::fromArray(vec.data(), vec.size(), UA_TYPES[UA_TYPES_DOUBLE]);
             CHECK(var.isArray());
             CHECK(var->data == vec.data());
         }
@@ -387,6 +406,12 @@ TEST_CASE("Variant") {
             CHECK(var.isArray());
             CHECK(var->data != vec.data());
         }
+        SUBCASE("Copy with custom data type") {
+            const std::vector<double> vec{1.1, 2.2, 3.3};
+            const auto var = Variant::fromArray(vec.data(), vec.size(), UA_TYPES[UA_TYPES_DOUBLE]);
+            CHECK(var.isArray());
+            CHECK(var->data != vec.data());
+        }
     }
 
     SUBCASE("Set/get scalar") {
@@ -398,6 +423,7 @@ TEST_CASE("Variant") {
         CHECK(var.isType(&UA_TYPES[UA_TYPES_INT32]));
         CHECK(var.isType(Type::Int32));
         CHECK(var.isType(NodeId{0, UA_NS0ID_INT32}));
+        CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_INT32]);
         CHECK(var.getVariantType().value() == Type::Int32);
 
         CHECK_THROWS(var.getScalar<bool>());
@@ -456,9 +482,10 @@ TEST_CASE("Variant") {
         CHECK(var.isArray());
         CHECK(var.isType(Type::Float));
         CHECK(var.isType(NodeId{0, UA_NS0ID_FLOAT}));
+        CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_FLOAT]);
         CHECK(var.getVariantType().value() == Type::Float);
         CHECK(var.getArrayLength() == array.size());
-        CHECK(var.handle()->data != array.data());
+        CHECK(var.getArray() != array.data());
 
         CHECK_THROWS(var.getArrayCopy<int32_t>());
         CHECK_THROWS(var.getArrayCopy<bool>());
@@ -488,7 +515,7 @@ TEST_CASE("Variant") {
 
         var.setArray<UA_String, Type::String>(array.data(), array.size());
         CHECK(var.getArrayLength() == array.size());
-        CHECK(var.handle()->data == array.data());
+        CHECK(var.getArray() == array.data());
 
         UA_clear(&array[0], &UA_TYPES[UA_TYPES_STRING]);
         UA_clear(&array[1], &UA_TYPES[UA_TYPES_STRING]);
@@ -501,7 +528,7 @@ TEST_CASE("Variant") {
 
         var.setArray(array);
         CHECK(var.getArrayLength() == array.size());
-        CHECK(var.handle()->data == array.data());
+        CHECK(var.getArray() == array.data());
         CHECK(var.getArray<String>() == array.data());
     }
 
@@ -513,12 +540,59 @@ TEST_CASE("Variant") {
         CHECK(var.isArray());
         CHECK(var.isType(Type::String));
         CHECK(var.isType(NodeId{0, UA_NS0ID_STRING}));
+        CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_STRING]);
         CHECK(var.getVariantType().value() == Type::String);
 
         CHECK_THROWS(var.getScalarCopy<std::string>());
         CHECK_THROWS(var.getArrayCopy<int32_t>());
         CHECK_THROWS(var.getArrayCopy<bool>());
         CHECK(var.getArrayCopy<std::string>() == value);
+    }
+
+    SUBCASE("Set/get non-builtin data types") {
+        using CustomType = UA_ApplicationDescription;
+        const auto& dt = UA_TYPES[UA_TYPES_APPLICATIONDESCRIPTION];
+
+        Variant var;
+        CustomType value{};
+        value.applicationType = UA_APPLICATIONTYPE_CLIENT;
+
+        SUBCASE("Scalar") {
+            var.setScalar(value, dt);
+            CHECK(var.isScalar());
+            CHECK(var.getDataType() == &dt);
+            CHECK(var.getScalar() == &value);
+            CHECK(var.getScalar<CustomType>().applicationType == UA_APPLICATIONTYPE_CLIENT);
+        }
+
+        SUBCASE("Scalar (copy)") {
+            var.setScalarCopy(value, dt);
+            CHECK(var.isScalar());
+            CHECK(var.getDataType() == &dt);
+            CHECK(var.getScalar() != &value);
+            CHECK(var.getScalar<CustomType>().applicationType == UA_APPLICATIONTYPE_CLIENT);
+        }
+
+        std::vector<CustomType> array(3);
+        array.at(0).applicationType = UA_APPLICATIONTYPE_CLIENT;
+
+        SUBCASE("Array") {
+            var.setArray(array.data(), array.size(), dt);
+            CHECK(var.isArray());
+            CHECK(var.getDataType() == &dt);
+            CHECK(var.getArrayLength() == 3);
+            CHECK(var.getArray() == array.data());
+            CHECK(var.getArray<CustomType>() == array.data());
+        }
+
+        SUBCASE("Array (copy)") {
+            var.setArrayCopy(array.data(), array.size(), dt);
+            CHECK(var.isArray());
+            CHECK(var.getDataType() == &dt);
+            CHECK(var.getArrayLength() == 3);
+            CHECK(var.getArray() != array.data());
+            CHECK(var.getArray<CustomType>() != array.data());
+        }
     }
 }
 
@@ -654,6 +728,46 @@ TEST_CASE("ExtensionObject") {
         CHECK(obj.getDecodedData<int>() == nullptr);
         CHECK(obj.getDecodedData<double>() == &value);
     }
+}
+
+TEST_CASE("NodeAttributes") {
+    // getters/setters are generated by specialized macros
+    // just test the macros with VariableAttributes here
+    VariableAttributes attr;
+    CHECK(attr.getSpecifiedAttributes() == 0U);
+
+    SUBCASE("Primitive type") {
+        attr.setWriteMask(UA_WRITEMASK_DATATYPE);
+        CHECK(attr.getWriteMask() == UA_WRITEMASK_DATATYPE);
+        CHECK(attr.getSpecifiedAttributes() == UA_NODEATTRIBUTESMASK_WRITEMASK);
+    }
+
+    SUBCASE("Cast type") {
+        attr.setValueRank(ValueRank::TwoDimensions);
+        CHECK(attr.getValueRank() == ValueRank::TwoDimensions);
+        CHECK(attr.getSpecifiedAttributes() == UA_NODEATTRIBUTESMASK_VALUERANK);
+    }
+
+    SUBCASE("Wrapper type") {
+        attr.setDisplayName({"", "Name"});
+        CHECK(attr.getDisplayName() == LocalizedText{"", "Name"});
+        CHECK(attr.getSpecifiedAttributes() == UA_NODEATTRIBUTESMASK_DISPLAYNAME);
+    }
+
+    SUBCASE("Array type") {
+        CHECK(attr.getArrayDimensions() == std::vector<uint32_t>{});
+        CHECK(attr.getArrayDimensionsSize() == 0);
+        attr.setArrayDimensions({1, 2});
+        CHECK(attr.getArrayDimensions() == std::vector<uint32_t>{1, 2});
+        CHECK(attr.getArrayDimensionsSize() == 2);
+        CHECK(attr.getSpecifiedAttributes() == UA_NODEATTRIBUTESMASK_ARRAYDIMENSIONS);
+    }
+}
+
+TEST_CASE("NodeAttributes fluent interface") {
+    const auto attr = NodeAttributes{}.setDisplayName({"", "displayName"}).setWriteMask(0xFFFFFFFF);
+    CHECK(attr.getDisplayName() == LocalizedText("", "displayName"));
+    CHECK(attr.getWriteMask() == 0xFFFFFFFF);
 }
 
 TEST_CASE("BrowseDescription") {

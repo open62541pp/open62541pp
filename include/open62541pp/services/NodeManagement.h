@@ -8,6 +8,7 @@
 #include "open62541pp/Common.h"  // ModellingRule
 #include "open62541pp/Config.h"
 #include "open62541pp/NodeIds.h"  // ReferenceTypeId
+#include "open62541pp/types/Composed.h"
 #include "open62541pp/types/NodeId.h"
 
 // forward declarations
@@ -27,7 +28,7 @@ namespace opcua::services {
  */
 
 /**
- * Add child object.
+ * Add object.
  * @exception BadStatus
  * @ingroup NodeManagement
  */
@@ -37,12 +38,13 @@ void addObject(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
+    const ObjectAttributes& attributes = {},
     const NodeId& objectType = ObjectTypeId::BaseObjectType,
     const NodeId& referenceType = ReferenceTypeId::HasComponent
 );
 
 /**
- * Add child folder.
+ * Add folder.
  * @exception BadStatus
  * @ingroup NodeManagement
  */
@@ -52,13 +54,22 @@ inline void addFolder(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
+    const ObjectAttributes& attributes = {},
     const NodeId& referenceType = ReferenceTypeId::HasComponent
 ) {
-    addObject(serverOrClient, parentId, id, browseName, ObjectTypeId::FolderType, referenceType);
+    addObject(
+        serverOrClient,
+        parentId,
+        id,
+        browseName,
+        attributes,
+        ObjectTypeId::FolderType,
+        referenceType
+    );
 }
 
 /**
- * Add child variable.
+ * Add variable.
  * @exception BadStatus
  * @ingroup NodeManagement
  */
@@ -68,57 +79,34 @@ void addVariable(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
+    const VariableAttributes& attributes = {},
     const NodeId& variableType = VariableTypeId::BaseDataVariableType,
     const NodeId& referenceType = ReferenceTypeId::HasComponent
 );
 
 /**
- * Add child property.
+ * Add property.
  * @exception BadStatus
  * @ingroup NodeManagement
  */
 template <typename T>
 inline void addProperty(
-    T& serverOrClient, const NodeId& parentId, const NodeId& id, std::string_view browseName
+    T& serverOrClient,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    const VariableAttributes& attributes = {}
 ) {
     addVariable(
         serverOrClient,
         parentId,
         id,
         browseName,
+        attributes,
         VariableTypeId::PropertyType,
         ReferenceTypeId::HasProperty
     );
 }
-
-/**
- * Add child object type.
- * @exception BadStatus
- * @ingroup NodeManagement
- */
-template <typename T>
-void addObjectType(
-    T& serverOrClient,
-    const NodeId& parentId,
-    const NodeId& id,
-    std::string_view browseName,
-    const NodeId& referenceType = ReferenceTypeId::HasSubtype
-);
-
-/**
- * Add child variable type.
- * @exception BadStatus
- * @ingroup NodeManagement
- */
-template <typename T>
-void addVariableType(
-    T& serverOrClient,
-    const NodeId& parentId,
-    const NodeId& id,
-    std::string_view browseName,
-    const NodeId& variableType = VariableTypeId::BaseDataVariableType,
-    const NodeId& referenceType = ReferenceTypeId::HasSubtype
-);
 
 #ifdef UA_ENABLE_METHODCALLS
 /**
@@ -128,7 +116,7 @@ void addVariableType(
 using MethodCallback = std::function<void(const std::vector<Variant>&, std::vector<Variant>&)>;
 
 /**
- * Add child method.
+ * Add method.
  * Callbacks can not be set by clients. Servers can assign callbacks to method nodes afterwards.
  * @exception BadStatus
  * @ingroup NodeManagement
@@ -142,9 +130,86 @@ void addMethod(
     MethodCallback callback,
     const std::vector<Argument>& inputArguments,
     const std::vector<Argument>& outputArguments,
+    const MethodAttributes& attributes = {},
     const NodeId& referenceType = ReferenceTypeId::HasComponent
 );
 #endif
+
+/**
+ * Add object type.
+ * @exception BadStatus
+ * @ingroup NodeManagement
+ */
+template <typename T>
+void addObjectType(
+    T& serverOrClient,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    const ObjectTypeAttributes& attributes = {},
+    const NodeId& referenceType = ReferenceTypeId::HasSubtype
+);
+
+/**
+ * Add variable type.
+ * @exception BadStatus
+ * @ingroup NodeManagement
+ */
+template <typename T>
+void addVariableType(
+    T& serverOrClient,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    const VariableTypeAttributes& attributes = {},
+    const NodeId& variableType = VariableTypeId::BaseDataVariableType,
+    const NodeId& referenceType = ReferenceTypeId::HasSubtype
+);
+
+/**
+ * Add reference type.
+ * @exception BadStatus
+ * @ingroup NodeManagement
+ */
+template <typename T>
+void addReferenceType(
+    T& serverOrClient,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    const ReferenceTypeAttributes& attributes = {},
+    const NodeId& referenceType = ReferenceTypeId::HasSubtype
+);
+
+/**
+ * Add data type.
+ * @exception BadStatus
+ * @ingroup NodeManagement
+ */
+template <typename T>
+void addDataType(
+    T& serverOrClient,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    const DataTypeAttributes& attributes = {},
+    const NodeId& referenceType = ReferenceTypeId::HasSubtype
+);
+
+/**
+ * Add view.
+ * @exception BadStatus
+ * @ingroup NodeManagement
+ */
+template <typename T>
+void addView(
+    T& serverOrClient,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    const ViewAttributes& attributes = {},
+    const NodeId& referenceType = ReferenceTypeId::Organizes
+);
 
 /**
  * Add reference.

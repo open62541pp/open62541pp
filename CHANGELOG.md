@@ -7,6 +7,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.0] - 2023-07-29
+
+### Added
+
+- Variable node value callbacks with `Server::setVariableNodeValueCallback` (#63)
+- Encryption (#64)
+  - `Client` constructor with `certificate`, `privateKey`, `trustList` and `revocationList`
+  - `Server` constructor with `certificate`, `privateKey`, `trustList`, `issuerList` and `revocationList`
+  - `crypto::createCertificate` function to create private keys and certificates
+  - `ByteString::fromFile` / `ByteString::toFile` to load and save certificates or private keys
+- `NumericRange` type (#73)
+- Equality overloads for `String`/`ByteString` and `std::string_view`
+- Fluent `Node` interface (#75)
+- Examples
+  - `server_valuecallback` (#63)
+
+### Changed
+
+- Hide `TypeWrapper::getDataType` method
+- Initial node attributes as first default parameter (usually after `browseName`) (#61):
+  - `Node::addFolder` / `services::addFolder`
+  - `Node::addObject` / `services::addObject`
+  - `Node::addVariable` / `services::addVariable`
+  - `Node::addObjectType` / `services::addObjectType`
+  - `Node::addVariableType` / `services::addVariableType`
+  - `Node::addMethod` / `services::addMethod`
+  - `Node::addFolder` / `services::addFolder`
+  - `Node::addFolder` / `services::addFolder`
+- `std::string` only convertible to/from `opcua::String`
+
+### Fixed
+
+- Typos (#67)
+- CMake code in README (#72)
+
 ## [0.5.0] - 2023-07-14
 
 ### Added
@@ -198,7 +233,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial public release
 
-[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.5.0...HEAD
+[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.6.0
 [0.5.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.5.0
 [0.4.1]: https://github.com/open62541pp/open62541pp/releases/tag/v0.4.1
 [0.4.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.4.0

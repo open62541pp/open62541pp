@@ -3,7 +3,33 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/detail/helper.h"
 
+#include "../open62541_impl.h"
+
 namespace opcua {
+
+ObjectAttributes::ObjectAttributes()
+    : TypeWrapperBase(UA_ObjectAttributes_default) {}
+
+VariableAttributes::VariableAttributes()
+    : TypeWrapperBase(UA_VariableAttributes_default) {}
+
+MethodAttributes::MethodAttributes()
+    : TypeWrapperBase(UA_MethodAttributes_default) {}
+
+ObjectTypeAttributes::ObjectTypeAttributes()
+    : TypeWrapperBase(UA_ObjectTypeAttributes_default) {}
+
+VariableTypeAttributes::VariableTypeAttributes()
+    : TypeWrapperBase(UA_VariableTypeAttributes_default) {}
+
+ReferenceTypeAttributes::ReferenceTypeAttributes()
+    : TypeWrapperBase(UA_ReferenceTypeAttributes_default) {}
+
+DataTypeAttributes::DataTypeAttributes()
+    : TypeWrapperBase(UA_DataTypeAttributes_default) {}
+
+ViewAttributes::ViewAttributes()
+    : TypeWrapperBase(UA_ViewAttributes_default) {}
 
 BrowseDescription::BrowseDescription(
     const NodeId& nodeId,

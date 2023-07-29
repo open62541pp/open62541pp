@@ -28,50 +28,83 @@ public:
     // NOLINTNEXTLINE, false positive?
     using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
 
-    /// Create Variant from scalar value (no copy if assignable without conversion)
+    /// Create Variant from scalar value (no copy if assignable without conversion).
     template <typename T, Type type = detail::guessType<T>()>
     [[nodiscard]] static Variant fromScalar(T& value);
 
-    /// Create Variant from scalar value (copy)
+    /// Create Variant from scalar value with custom data type.
+    template <typename T>
+    [[nodiscard]] static Variant fromScalar(T& value, const UA_DataType& dataType);
+
+    /// Create Variant from scalar value (copy).
     template <typename T, Type type = detail::guessType<T>()>
     [[nodiscard]] static Variant fromScalar(const T& value);
 
-    /// Create Variant from array (no copy if assignable without conversion)
+    /// Create Variant from scalar value with custom data type (copy).
+    template <typename T>
+    [[nodiscard]] static Variant fromScalar(const T& value, const UA_DataType& dataType);
+
+    /// Create Variant from array (no copy if assignable without conversion).
     template <typename T, Type type = detail::guessType<T>()>
     [[nodiscard]] static Variant fromArray(T* array, size_t size);
 
-    /// Create Variant from array (copy)
+    /// Create Variant from array with custom data type.
+    template <typename T, Type type = detail::guessType<T>()>
+    [[nodiscard]] static Variant fromArray(T* array, size_t size, const UA_DataType& dataType);
+
+    /// Create Variant from std::vector (no copy if assignable without conversion).
+    template <typename T, Type type = detail::guessType<T>()>
+    [[nodiscard]] static Variant fromArray(std::vector<T>& array) {
+        return fromArray<T, type>(array.data(), array.size());
+    }
+
+    /// Create Variant from array (copy).
     template <typename T, Type type = detail::guessType<T>()>
     [[nodiscard]] static Variant fromArray(const T* array, size_t size);
 
-    /// Create Variant from std::vector (no copy if assignable without conversion)
+    /// Create Variant from array with custom data type (copy).
     template <typename T, Type type = detail::guessType<T>()>
-    [[nodiscard]] static Variant fromArray(std::vector<T>& array);
+    [[nodiscard]] static Variant fromArray(
+        const T* array, size_t size, const UA_DataType& dataType
+    );
 
-    /// Create Variant from std::vector (copy)
+    /// Create Variant from std::vector (copy).
     template <typename T, Type type = detail::guessType<T>()>
-    [[nodiscard]] static Variant fromArray(const std::vector<T>& array);
+    [[nodiscard]] static Variant fromArray(const std::vector<T>& array) {
+        return fromArray<T, type>(array.data(), array.size());
+    }
 
-    /// Create Variant from range of elements (copy)
+    /// Create Variant from range of elements (copy).
     template <typename InputIt, Type type = detail::guessTypeFromIterator<InputIt>()>
     [[nodiscard]] static Variant fromArray(InputIt first, InputIt last);
 
-    /// Check if variant is empty
+    /// Check if variant is empty.
     bool isEmpty() const noexcept;
-    /// Check if variant is a scalar
+    /// Check if variant is a scalar.
     bool isScalar() const noexcept;
-    /// Check if variant is an array
+    /// Check if variant is an array.
     bool isArray() const noexcept;
 
-    /// Check if variant type is equal to data type
+    /// Check if variant type is equal to data type.
     bool isType(const UA_DataType* type) const noexcept;
-    /// Check if variant type is equal to type enum
+    /// Check if variant type is equal to type enum.
     bool isType(Type type) const noexcept;
-    /// Check if variant type is equal to data type node id
+    /// Check if variant type is equal to data type node id.
     bool isType(const NodeId& id) const noexcept;
 
-    /// Get variant type
+    /// Get data type.
+    const UA_DataType* getDataType() const noexcept;
+
+    /// Get variant type.
     std::optional<Type> getVariantType() const noexcept;
+
+    /// Get pointer to scalar value.
+    /// @exception BadVariantAccess If the variant is not a scalar
+    void* getScalar();
+
+    /// Get pointer to scalar value.
+    /// @exception BadVariantAccess If the variant is not a scalar
+    const void* getScalar() const;
 
     /// Get reference to scalar value with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not a scalar or not of type `T`.
@@ -94,6 +127,14 @@ public:
     /// Get array dimensions.
     std::vector<uint32_t> getArrayDimensions() const;
 
+    /// Get pointer to array value.
+    /// @exception BadVariantAccess If the variant is not an array
+    void* getArray();
+
+    /// Get pointer to array value.
+    /// @exception BadVariantAccess If the variant is not an array
+    const void* getArray() const;
+
     /// Get pointer to array with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not an array or not of type `T`.
     template <typename T>
@@ -113,34 +154,55 @@ public:
     template <typename T, Type type = detail::guessType<T>()>
     void setScalar(T& value) noexcept;
 
+    /// Assign scalar value to variant with custom data type.
+    template <typename T>
+    void setScalar(T& value, const UA_DataType& dataType) noexcept;
+
     /// Copy scalar value to variant.
     template <typename T, Type type = detail::guessType<T>()>
     void setScalarCopy(const T& value);
+
+    /// Copy scalar value to variant with custom data type.
+    template <typename T>
+    void setScalarCopy(const T& value, const UA_DataType& dataType);
 
     /// Assign array (raw) to variant.
     template <typename T, Type type = detail::guessType<T>()>
     void setArray(T* array, size_t size) noexcept;
 
+    /// Assign array (raw) to variant with custom data type.
+    template <typename T>
+    void setArray(T* array, size_t size, const UA_DataType& dataType) noexcept;
+
     /// Assign array (std::vector) to variant.
     template <typename T, Type type = detail::guessType<T>()>
-    void setArray(std::vector<T>& array) noexcept;
-
-    /// Copy range of elements as array to variant.
-    template <typename InputIt, Type type = detail::guessTypeFromIterator<InputIt>()>
-    void setArrayCopy(InputIt first, InputIt last);
+    void setArray(std::vector<T>& array) noexcept {
+        setArray<T, type>(array.data(), array.size());
+    }
 
     /// Copy array (raw) to variant.
     template <typename T, Type type = detail::guessType<T>()>
     void setArrayCopy(const T* array, size_t size);
 
+    /// Copy array (raw) to variant with custom data type.
+    template <typename T>
+    void setArrayCopy(const T* array, size_t size, const UA_DataType& dataType);
+
+    /// Copy range of elements as array to variant.
+    template <typename InputIt, Type type = detail::guessTypeFromIterator<InputIt>()>
+    void setArrayCopy(InputIt first, InputIt last);
+
     /// Copy array (std::vector) to variant.
     template <typename T, Type type = detail::guessType<T>()>
-    void setArrayCopy(const std::vector<T>& array);
+    void setArrayCopy(const std::vector<T>& array) {
+        setArrayCopy<T, type>(array.data(), array.size());
+    }
 
 private:
     template <typename T>
     static constexpr bool isConvertibleToNative() {
-        return detail::isBuiltinType<T>() || detail::IsTypeWrapper<T>::value;
+        // TypeWrapper<T> is pointer-interconvertible with T
+        return detail::isNativeType<T>() || detail::IsTypeWrapper<T>::value;
     }
 
     template <typename T>
@@ -159,18 +221,25 @@ private:
         );
     }
 
-    template <Type type>
+    template <typename T>
     static constexpr void assertNoVariant() {
-        static_assert(type != Type::Variant, "Variants cannot directly contain another variant");
+        static_assert(
+            !std::is_same_v<T, Variant> && !std::is_same_v<T, UA_Variant>,
+            "Variants cannot directly contain another variant"
+        );
     }
 
     void checkIsScalar() const;
     void checkIsArray() const;
 
     template <typename T>
+    inline static void checkDataType([[maybe_unused]] const UA_DataType& dataType) {
+        assert(sizeof(T) == dataType.memSize);
+    }
+
+    template <typename T>
     void checkReturnType() const {
-        const auto optType = getVariantType();
-        if (!optType || !detail::isValidTypeCombination<T>(*optType)) {
+        if (!detail::isValidTypeCombination<T>(getDataType())) {
             throw BadVariantAccess("Variant does not contain a value convertible to template type");
         }
     }
@@ -194,10 +263,24 @@ Variant Variant::fromScalar(T& value) {
     return variant;
 }
 
+template <typename T>
+Variant Variant::fromScalar(T& value, const UA_DataType& dataType) {
+    Variant variant;
+    variant.setScalar<T>(value, dataType);
+    return variant;
+}
+
 template <typename T, Type type>
 Variant Variant::fromScalar(const T& value) {
     Variant variant;
     variant.setScalarCopy<T, type>(value);
+    return variant;
+}
+
+template <typename T>
+Variant Variant::fromScalar(const T& value, const UA_DataType& dataType) {
+    Variant variant;
+    variant.setScalarCopy<T>(value, dataType);
     return variant;
 }
 
@@ -213,6 +296,13 @@ Variant Variant::fromArray(T* array, size_t size) {
 }
 
 template <typename T, Type type>
+Variant Variant::fromArray(T* array, size_t size, const UA_DataType& dataType) {
+    Variant variant;
+    variant.setArray<T>(array, size, dataType);
+    return variant;
+}
+
+template <typename T, Type type>
 Variant Variant::fromArray(const T* array, size_t size) {
     Variant variant;
     variant.setArrayCopy<T, type>(array, size);
@@ -220,13 +310,10 @@ Variant Variant::fromArray(const T* array, size_t size) {
 }
 
 template <typename T, Type type>
-Variant Variant::fromArray(std::vector<T>& array) {
-    return fromArray<T, type>(array.data(), array.size());
-}
-
-template <typename T, Type type>
-Variant Variant::fromArray(const std::vector<T>& array) {
-    return fromArray<T, type>(array.data(), array.size());
+Variant Variant::fromArray(const T* array, size_t size, const UA_DataType& dataType) {
+    Variant variant;
+    variant.setArrayCopy<T>(array, size, dataType);
+    return variant;
 }
 
 template <typename InputIt, Type type>
@@ -246,7 +333,7 @@ const T& Variant::getScalar() const {
     assertGetNoCopy<T>();
     checkIsScalar();
     checkReturnType<T>();
-    assert(sizeof(T) == handle()->type->memSize);  // NOLINT
+    checkDataType<T>(*getDataType());
     return *static_cast<const T*>(handle()->data);
 }
 
@@ -254,7 +341,7 @@ template <typename T>
 T Variant::getScalarCopy() const {
     checkIsScalar();
     checkReturnType<T>();
-    return detail::fromNative<T>(handle()->data, getVariantType().value());
+    return detail::fromNative<T>(handle()->data, getDataType());
 }
 
 template <typename T>
@@ -267,7 +354,7 @@ const T* Variant::getArray() const {
     assertGetNoCopy<T>();
     checkIsArray();
     checkReturnType<T>();
-    assert(sizeof(T) == handle()->type->memSize);  // NOLINT
+    checkDataType<T>(*getDataType());
     return static_cast<const T*>(handle()->data);
 }
 
@@ -275,26 +362,27 @@ template <typename T>
 std::vector<T> Variant::getArrayCopy() const {
     checkIsArray();
     checkReturnType<T>();
-    return detail::fromNativeArray<T>(
-        handle()->data, handle()->arrayLength, getVariantType().value()
-    );
+    return detail::fromNativeArray<T>(handle()->data, handle()->arrayLength, getDataType());
 }
 
 template <typename T, Type type>
 void Variant::setScalar(T& value) noexcept {
+    assertNoVariant<T>();
     assertSetNoCopy<T>();
-    assertNoVariant<type>();
     detail::assertTypeCombination<T, type>();
-    if constexpr (detail::IsTypeWrapper<T>::value) {
-        setScalarImpl(value.handle(), detail::getUaDataType<type>());
-    } else {
-        setScalarImpl(&value, detail::getUaDataType<type>());
-    }
+    setScalarImpl(&value, detail::getUaDataType<type>());
+}
+
+template <typename T>
+void Variant::setScalar(T& value, const UA_DataType& dataType) noexcept {
+    assertNoVariant<T>();
+    checkDataType<T>(dataType);
+    setScalarImpl(&value, &dataType);
 }
 
 template <typename T, Type type>
 void Variant::setScalarCopy(const T& value) {
-    assertNoVariant<type>();
+    assertNoVariant<T>();
     detail::assertTypeCombination<T, type>();
     setScalarImpl(
         detail::toNativeAlloc<T, static_cast<TypeIndex>(type)>(value),
@@ -303,21 +391,50 @@ void Variant::setScalarCopy(const T& value) {
     );
 }
 
+template <typename T>
+void Variant::setScalarCopy(const T& value, const UA_DataType& dataType) {
+    assertNoVariant<T>();
+    checkDataType<T>(dataType);
+    setScalarCopyImpl(&value, &dataType);
+}
+
 template <typename T, Type type>
 void Variant::setArray(T* array, size_t size) noexcept {
+    assertNoVariant<T>();
     assertSetNoCopy<T>();
     detail::assertTypeCombination<T, type>();
     setArrayImpl(array, size, detail::getUaDataType<type>());
 }
 
+template <typename T>
+void Variant::setArray(T* array, size_t size, const UA_DataType& dataType) noexcept {
+    assertNoVariant<T>();
+    checkDataType<T>(dataType);
+    setArrayImpl(array, size, &dataType);
+}
+
+template <typename T>
+void Variant::setArrayCopy(const T* array, size_t size, const UA_DataType& dataType) {
+    assertNoVariant<T>();
+    checkDataType<T>(dataType);
+    setArrayCopyImpl(array, size, &dataType);
+}
+
 template <typename T, Type type>
-void Variant::setArray(std::vector<T>& array) noexcept {
-    setArray<T, type>(array.data(), array.size());
+void Variant::setArrayCopy(const T* array, size_t size) {
+    assertNoVariant<T>();
+    detail::assertTypeCombination<T, type>();
+    if constexpr (detail::isBuiltinType<T>()) {
+        setArrayCopyImpl(array, size, detail::getUaDataType<type>());
+    } else {
+        setArrayCopy<const T*, type>(array, array + size);  // overload with iterator pair
+    }
 }
 
 template <typename InputIt, Type type>
 void Variant::setArrayCopy(InputIt first, InputIt last) {
     using ValueType = typename std::iterator_traits<InputIt>::value_type;
+    assertNoVariant<ValueType>();
     detail::assertTypeCombination<ValueType, type>();
     setArrayImpl(
         detail::toNativeArrayAlloc<InputIt, static_cast<TypeIndex>(type)>(first, last),
@@ -325,21 +442,6 @@ void Variant::setArrayCopy(InputIt first, InputIt last) {
         detail::getUaDataType<type>(),
         true  // move ownership
     );
-}
-
-template <typename T, Type type>
-void Variant::setArrayCopy(const T* array, size_t size) {
-    detail::assertTypeCombination<T, type>();
-    if constexpr (detail::isBuiltinType<T>()) {
-        setArrayCopyImpl(array, size, detail::getUaDataType<type>());
-    } else {
-        setArrayCopy<const T*, type>(array, array + size);
-    }
-}
-
-template <typename T, Type type>
-void Variant::setArrayCopy(const std::vector<T>& array) {
-    setArrayCopy<T, type>(array.data(), array.size());
 }
 
 }  // namespace opcua

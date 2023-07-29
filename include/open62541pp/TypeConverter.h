@@ -4,6 +4,7 @@
 #include <chrono>
 #include <iterator>  // distance
 #include <string>
+#include <string_view>
 #include <type_traits>
 #include <vector>
 
@@ -63,6 +64,20 @@ constexpr bool isValidTypeCombination(TypeIndexOrType typeOrTypeIndex) {
     return TypeConverter<T>::ValidTypes::contains(typeOrTypeIndex);
 }
 
+template <typename T>
+constexpr bool isValidTypeCombination(const UA_DataType* dataType) {
+    if (dataType == nullptr) {
+        return false;
+    }
+    for (auto typeIndex : TypeConverter<T>::ValidTypes::toArray()) {
+        // TODO: deep comparison
+        if (dataType == &UA_TYPES[typeIndex]) {  // NOLINT
+            return true;
+        }
+    }
+    return false;
+}
+
 template <typename T, auto typeOrTypeIndex>
 constexpr void assertTypeCombination() {
     static_assert(
@@ -117,8 +132,8 @@ template <typename T, typename NativeType = typename TypeConverter<T>::NativeTyp
 /// Convert and copy from native type.
 /// @warning Type erased version, use with caution.
 template <typename T, typename NativeType = typename TypeConverter<T>::NativeType>
-[[nodiscard]] T fromNative(void* value, [[maybe_unused]] Type type) {
-    assert(isValidTypeCombination<T>(type));  // NOLINT
+[[nodiscard]] T fromNative(void* value, [[maybe_unused]] const UA_DataType* dataType) {
+    assert(isValidTypeCombination<T>(dataType));  // NOLINT
     return fromNative<T>(static_cast<NativeType*>(value));
 }
 
@@ -139,8 +154,10 @@ template <typename T, typename NativeType = typename TypeConverter<T>::NativeTyp
 /// Create and convert vector from native array.
 /// @warning Type erased version, use with caution.
 template <typename T, typename NativeType = typename TypeConverter<T>::NativeType>
-[[nodiscard]] std::vector<T> fromNativeArray(void* array, size_t size, [[maybe_unused]] Type type) {
-    assert(isValidTypeCombination<T>(type));  // NOLINT
+[[nodiscard]] std::vector<T> fromNativeArray(
+    void* array, size_t size, [[maybe_unused]] const UA_DataType* dataType
+) {
+    assert(isValidTypeCombination<T>(dataType));  // NOLINT
     return fromNativeArray<T>(static_cast<NativeType*>(array), size);
 }
 
@@ -229,6 +246,13 @@ struct TypeConverterNative {
     }
 };
 
+template <typename T>
+constexpr bool isNativeType() {
+    using ValueType = typename TypeConverter<T>::ValueType;
+    using NativeType = typename TypeConverter<T>::NativeType;
+    return std::is_same_v<ValueType, NativeType>;
+}
+
 }  // namespace detail
 
 // NOLINTNEXTLINE
@@ -291,7 +315,7 @@ template <>
 struct TypeConverter<std::string> {
     using ValueType = std::string;
     using NativeType = UA_String;
-    using ValidTypes = TypeIndexList<UA_TYPES_STRING, UA_TYPES_BYTESTRING, UA_TYPES_XMLELEMENT>;
+    using ValidTypes = TypeIndexList<UA_TYPES_STRING>;
 
     static void fromNative(const NativeType& src, ValueType& dst) {
         dst = detail::toString(src);

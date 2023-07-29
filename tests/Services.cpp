@@ -55,6 +55,19 @@ TEST_CASE("NodeManagement service set (server & client)") {
                 serverOrClient, {0, UA_NS0ID_BASEVARIABLETYPE}, {1, 1001}, "variabletype"
             );
             CHECK(services::readNodeClass(server, {1, 1001}) == NodeClass::VariableType);
+
+            services::addReferenceType(
+                serverOrClient, {0, UA_NS0ID_ORGANIZES}, {1, 1002}, "referenceType"
+            );
+            CHECK(services::readNodeClass(server, {1, 1002}) == NodeClass::ReferenceType);
+
+            services::addDataType(serverOrClient, {0, UA_NS0ID_STRUCTURE}, {1, 1003}, "dataType");
+            CHECK(services::readNodeClass(server, {1, 1003}) == NodeClass::DataType);
+        }
+
+        SUBCASE("View nodes") {
+            services::addView(serverOrClient, {0, UA_NS0ID_VIEWSFOLDER}, {1, 1000}, "view");
+            CHECK(services::readNodeClass(server, {1, 1000}) == NodeClass::View);
         }
 
         SUBCASE("Add reference") {
@@ -88,11 +101,10 @@ TEST_CASE("Attribute service set (server)") {
     Server server;
     const NodeId objectsId{0, UA_NS0ID_OBJECTSFOLDER};
 
-    SUBCASE("Read/write node attributes") {
+    SUBCASE("Read default attributes") {
         const NodeId id{1, "testAttributes"};
         services::addVariable(server, objectsId, id, "testAttributes");
 
-        // read default attributes
         CHECK(services::readNodeId(server, id) == id);
         CHECK(services::readNodeClass(server, id) == NodeClass::Variable);
         CHECK(services::readBrowseName(server, id) == QualifiedName(1, "testAttributes"));
@@ -109,6 +121,45 @@ TEST_CASE("Attribute service set (server)") {
         const uint8_t adminUserAccessLevel = ~0;  // all bits set
         CHECK(services::readUserAccessLevel(server, id) == adminUserAccessLevel);
         CHECK(services::readMinimumSamplingInterval(server, id) == 0.0);
+    }
+
+    SUBCASE("Read initial attributes") {
+        VariableAttributes attr;
+        attr.setDisplayName({"", "testAttributes"});
+        attr.setDescription({"", "..."});
+        attr.setWriteMask(~0U);
+        attr.setDataType(DataTypeId::Int32);
+        attr.setValueRank(ValueRank::TwoDimensions);
+        attr.setArrayDimensions({2, 3});
+        attr.setAccessLevel(UA_ACCESSLEVELMASK_READ);
+        attr.setMinimumSamplingInterval(11.11);
+
+        const NodeId id{1, "testAttributes"};
+        services::addVariable(
+            server,
+            objectsId,
+            id,
+            "testAttributes",
+            attr,
+            VariableTypeId::BaseDataVariableType,
+            ReferenceTypeId::HasComponent
+        );
+
+        CHECK(services::readDisplayName(server, id) == attr.getDisplayName());
+        CHECK(services::readDescription(server, id) == attr.getDescription());
+        CHECK(services::readWriteMask(server, id) == attr.getWriteMask());
+        CHECK(services::readDataType(server, id) == attr.getDataType());
+        CHECK(services::readValueRank(server, id) == attr.getValueRank());
+        CHECK(services::readArrayDimensions(server, id) == attr.getArrayDimensions());
+        CHECK(services::readAccessLevel(server, id) == attr.getAccessLevel());
+        CHECK(
+            services::readMinimumSamplingInterval(server, id) == attr.getMinimumSamplingInterval()
+        );
+    }
+
+    SUBCASE("Read/write node attributes") {
+        const NodeId id{1, "testAttributes"};
+        services::addVariable(server, objectsId, id, "testAttributes");
 
         // write new attributes
         CHECK_NOTHROW(services::writeDisplayName(server, id, {"en-US", "newDisplayName"}));

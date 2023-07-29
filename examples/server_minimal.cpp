@@ -4,8 +4,8 @@ int main() {
     opcua::Server server;
 
     // Add a variable node to the Objects node
-    auto parentNode = server.getObjectsNode();
-    auto myIntegerNode = parentNode.addVariable({1, "the.answer"}, "the answer");
+    opcua::Node parentNode = server.getObjectsNode();
+    opcua::Node myIntegerNode = parentNode.addVariable({1, "the.answer"}, "the answer");
     // Write some node attributes
     myIntegerNode.writeDataType(opcua::Type::Int32)
         .writeDisplayName({"en-US", "the answer"})

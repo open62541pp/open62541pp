@@ -29,10 +29,10 @@ SpacesBeforeTrailingComments: 2
 PenaltyBreakAssignment: 100 # default: ?
 PenaltyBreakBeforeFirstCallParameter: 0 # default: 19
 PenaltyBreakComment: 300 # default: 300
-PenaltyBreakFirstLessLess: 120 # default: 120
+PenaltyBreakFirstLessLess: 0 # default: 120
 PenaltyBreakOpenParenthesis: 0 # default: 0
 PenaltyBreakString: 1000 # default: 1000
 PenaltyBreakTemplateDeclaration: 0 # default: ?
 PenaltyExcessCharacter: 1000000 # default: 1000000
-PenaltyIndentedWhitespace: 0 # default: 0
+PenaltyIndentedWhitespace: 5 # default: 0
 PenaltyReturnTypeOnItsOwnLine: 200 # default: 60
