@@ -8,6 +8,7 @@
 #include "open62541pp/Common.h"  // ModellingRule
 #include "open62541pp/Config.h"
 #include "open62541pp/NodeIds.h"  // ReferenceTypeId
+#include "open62541pp/types/Composed.h"
 #include "open62541pp/types/NodeId.h"
 
 // forward declarations
@@ -37,6 +38,7 @@ void addObject(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
+    const ObjectAttributes& attributes = {},
     const NodeId& objectType = ObjectTypeId::BaseObjectType,
     const NodeId& referenceType = ReferenceTypeId::HasComponent
 );
@@ -52,9 +54,18 @@ inline void addFolder(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
+    const ObjectAttributes& attributes = {},
     const NodeId& referenceType = ReferenceTypeId::HasComponent
 ) {
-    addObject(serverOrClient, parentId, id, browseName, ObjectTypeId::FolderType, referenceType);
+    addObject(
+        serverOrClient,
+        parentId,
+        id,
+        browseName,
+        attributes,
+        ObjectTypeId::FolderType,
+        referenceType
+    );
 }
 
 /**
@@ -68,6 +79,7 @@ void addVariable(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
+    const VariableAttributes& attributes = {},
     const NodeId& variableType = VariableTypeId::BaseDataVariableType,
     const NodeId& referenceType = ReferenceTypeId::HasComponent
 );
@@ -79,13 +91,18 @@ void addVariable(
  */
 template <typename T>
 inline void addProperty(
-    T& serverOrClient, const NodeId& parentId, const NodeId& id, std::string_view browseName
+    T& serverOrClient,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    const VariableAttributes& attributes = {}
 ) {
     addVariable(
         serverOrClient,
         parentId,
         id,
         browseName,
+        attributes,
         VariableTypeId::PropertyType,
         ReferenceTypeId::HasProperty
     );
@@ -102,6 +119,7 @@ void addObjectType(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
+    const ObjectTypeAttributes& attributes = {},
     const NodeId& referenceType = ReferenceTypeId::HasSubtype
 );
 
@@ -116,6 +134,7 @@ void addVariableType(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
+    const VariableTypeAttributes& attributes = {},
     const NodeId& variableType = VariableTypeId::BaseDataVariableType,
     const NodeId& referenceType = ReferenceTypeId::HasSubtype
 );
@@ -142,6 +161,7 @@ void addMethod(
     MethodCallback callback,
     const std::vector<Argument>& inputArguments,
     const std::vector<Argument>& outputArguments,
+    const MethodAttributes& attributes = {},
     const NodeId& referenceType = ReferenceTypeId::HasComponent
 );
 #endif

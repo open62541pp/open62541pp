@@ -63,9 +63,10 @@ public:
     Node addFolder(
         const NodeId& id,
         std::string_view browseName,
+        const ObjectAttributes& attributes = {},
         const NodeId& referenceType = ReferenceTypeId::HasComponent
     ) {
-        services::addFolder(connection_, nodeId_, id, browseName, referenceType);
+        services::addFolder(connection_, nodeId_, id, browseName, attributes, referenceType);
         return {connection_, id, false};
     }
 
@@ -73,10 +74,13 @@ public:
     Node addObject(
         const NodeId& id,
         std::string_view browseName,
+        const ObjectAttributes& attributes = {},
         const NodeId& objectType = ObjectTypeId::BaseObjectType,
         const NodeId& referenceType = ReferenceTypeId::HasComponent
     ) {
-        services::addObject(connection_, nodeId_, id, browseName, objectType, referenceType);
+        services::addObject(
+            connection_, nodeId_, id, browseName, attributes, objectType, referenceType
+        );
         return {connection_, id, false};
     }
 
@@ -84,16 +88,21 @@ public:
     Node addVariable(
         const NodeId& id,
         std::string_view browseName,
+        const VariableAttributes& attributes = {},
         const NodeId& variableType = VariableTypeId::BaseDataVariableType,
         const NodeId& referenceType = ReferenceTypeId::HasComponent
     ) {
-        services::addVariable(connection_, nodeId_, id, browseName, variableType, referenceType);
+        services::addVariable(
+            connection_, nodeId_, id, browseName, attributes, variableType, referenceType
+        );
         return {connection_, id, false};
     }
 
     /// @copydoc services::addProperty
-    Node addProperty(const NodeId& id, std::string_view browseName) {
-        services::addProperty(connection_, nodeId_, id, browseName);
+    Node addProperty(
+        const NodeId& id, std::string_view browseName, const VariableAttributes& attributes = {}
+    ) {
+        services::addProperty(connection_, nodeId_, id, browseName, attributes);
         return {connection_, id, false};
     }
 
@@ -101,9 +110,10 @@ public:
     Node addObjectType(
         const NodeId& id,
         std::string_view browseName,
+        const ObjectTypeAttributes& attributes = {},
         const NodeId& referenceType = ReferenceTypeId::HasSubtype
     ) {
-        services::addObjectType(connection_, nodeId_, id, browseName, referenceType);
+        services::addObjectType(connection_, nodeId_, id, browseName, attributes, referenceType);
         return {connection_, id, false};
     }
 
@@ -111,11 +121,12 @@ public:
     Node addVariableType(
         const NodeId& id,
         std::string_view browseName,
+        const VariableTypeAttributes& attributes = {},
         const NodeId& variableType = VariableTypeId::BaseDataVariableType,
         const NodeId& referenceType = ReferenceTypeId::HasSubtype
     ) {
         services::addVariableType(
-            connection_, nodeId_, id, browseName, variableType, referenceType
+            connection_, nodeId_, id, browseName, attributes, variableType, referenceType
         );
         return {connection_, id, false};
     }
@@ -128,6 +139,7 @@ public:
         services::MethodCallback callback,
         const std::vector<Argument>& inputArguments,
         const std::vector<Argument>& outputArguments,
+        const MethodAttributes& attributes = {},
         const NodeId& referenceType = ReferenceTypeId::HasComponent
     ) {
         services::addMethod(
@@ -138,6 +150,7 @@ public:
             std::move(callback),
             inputArguments,
             outputArguments,
+            attributes,
             referenceType
         );
         return {connection_, id, false};

@@ -13,12 +13,14 @@ int main() {
 
     // Add a variable node to the Objects node
     auto parentNode = server.getObjectsNode();
-    auto myIntegerNode = parentNode.addVariable({1, "the.answer"}, "the answer");
-
-    // Write some node attributes
-    myIntegerNode.writeDataType(opcua::Type::Int32)
-        .writeDisplayName({"en-US", "the answer"})
-        .writeDescription({"en-US", "the answer"});
+    auto myIntegerNode = parentNode.addVariable(
+        {1, "the.answer"},
+        "the answer",
+        opcua::VariableAttributes{}
+            .setDataType(opcua::DataTypeId::Int32)
+            .setDisplayName({"en-US", "the answer"})
+            .setDescription({"en-US", "the answer"})
+    );
 
     // Write a value (attribute) to the node
     myIntegerNode.writeScalar(42);

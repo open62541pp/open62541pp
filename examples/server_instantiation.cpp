@@ -10,34 +10,57 @@ int main() {
     //   + (OT) DogType
     //      + (V) Name
     auto nodeBaseObjectType = server.getNode(opcua::ObjectTypeId::BaseObjectType);
-    auto nodeMammalType = nodeBaseObjectType.addObjectType({1, 10000}, "MammalType");
-    nodeMammalType.writeDisplayName({"en-US", "MammalType"})
-        .writeDescription({"en-US", "A mammal"});
+    auto nodeMammalType = nodeBaseObjectType.addObjectType(
+        {1, 10000},
+        "MammalType",
+        opcua::ObjectTypeAttributes{}
+            .setDisplayName({"en-US", "MammalType"})
+            .setDescription({"en-US", "A mammal"})
+    );
 
-    nodeMammalType.addVariable({1, 10001}, "Age")
-        .addModellingRule(opcua::ModellingRule::Mandatory)  // create on new instance
-        .writeDisplayName({"en-US", "Age"})
-        .writeDescription({"en-US", "This mammals age in months"})
-        .writeScalar<uint32_t>(0);  // default age
+    nodeMammalType
+        .addVariable(
+            {1, 10001},
+            "Age",
+            opcua::VariableAttributes{}
+                .setDisplayName({"en-US", "Age"})
+                .setDescription({"en-US", "This mammals age in months"})
+                .setValueScalar(0U)  // default age
+        )
+        .addModellingRule(opcua::ModellingRule::Mandatory);  // create on new instance
 
-    auto nodeDogType = nodeMammalType.addObjectType({1, 10002}, "DogType");
-    nodeDogType.writeDisplayName({"en-US", "DogType"})
-        .writeDescription({"en-US", "A dog, subtype of mammal"});
+    auto nodeDogType = nodeMammalType.addObjectType(
+        {1, 10002},
+        "DogType",
+        opcua::ObjectTypeAttributes{}
+            .setDisplayName({"en-US", "DogType"})
+            .setDescription({"en-US", "A dog, subtype of mammal"})
+    );
 
-    nodeDogType.addVariable({1, 10003}, "Name")
-        .addModellingRule(opcua::ModellingRule::Mandatory)  // create on new instance
-        .writeDisplayName({"en-US", "Name"})
-        .writeDescription({"en-US", "This dogs name"})
-        .writeScalar(opcua::String("unnamed dog"));  // default name
+    nodeDogType
+        .addVariable(
+            {1, 10003},
+            "Name",
+            opcua::VariableAttributes{}
+                .setDisplayName({"en-US", "Name"})
+                .setDescription({"en-US", "This dogs name"})
+                .setValueScalar(opcua::String("unnamed dog"))  // default name
+        )
+        .addModellingRule(opcua::ModellingRule::Mandatory);  // create on new instance
 
     // Instatiate a dog named Bello:
     // (O) Objects
     //   + (O) Bello <DogType>
     //     + (V) Age
     //     + (V) Name
-    auto nodeObjects = server.getObjectsNode();
-    auto nodeBello = nodeObjects.addObject({1, 20000}, "Bello", nodeDogType.getNodeId());
-    nodeBello.writeDisplayName({"en-US", "Bello"}).writeDescription({"en-US", "A dog named Bello"});
+    auto nodeBello = server.getObjectsNode().addObject(
+        {1, 20000},
+        "Bello",
+        opcua::ObjectAttributes{}
+            .setDisplayName({"en-US", "Bello"})
+            .setDescription({"en-US", "A dog named Bello"}),
+        nodeDogType.getNodeId()
+    );
 
     // Set variables Age and Name
     nodeBello.browseChild({{1, "Age"}}).writeScalar(3U);
