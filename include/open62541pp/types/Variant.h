@@ -147,7 +147,7 @@ public:
 private:
     template <typename T>
     static constexpr bool isConvertibleToNative() {
-        return detail::isBuiltinType<T>() || detail::IsTypeWrapper<T>::value;
+        return detail::isNativeType<T>() || detail::IsTypeWrapper<T>::value;
     }
 
     template <typename T>

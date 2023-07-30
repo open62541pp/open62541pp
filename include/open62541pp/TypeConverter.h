@@ -230,6 +230,13 @@ struct TypeConverterNative {
     }
 };
 
+template <typename T>
+constexpr bool isNativeType() {
+    using ValueType = typename TypeConverter<T>::ValueType;
+    using NativeType = typename TypeConverter<T>::NativeType;
+    return std::is_same_v<ValueType, NativeType>;
+}
+
 }  // namespace detail
 
 // NOLINTNEXTLINE
