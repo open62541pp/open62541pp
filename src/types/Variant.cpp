@@ -61,6 +61,16 @@ size_t Variant::getArrayLength() const noexcept {
     return isArray() ? handle()->arrayLength : 0;
 }
 
+void* Variant::getArray() {
+    checkIsArray();
+    return handle()->data;
+}
+
+const void* Variant::getArray() const {
+    checkIsArray();
+    return handle()->data;
+}
+
 std::vector<uint32_t> Variant::getArrayDimensions() const {
     if (!isArray()) {
         return {};

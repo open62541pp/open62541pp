@@ -461,7 +461,7 @@ TEST_CASE("Variant") {
         CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_FLOAT]);
         CHECK(var.getVariantType().value() == Type::Float);
         CHECK(var.getArrayLength() == array.size());
-        CHECK(var.handle()->data != array.data());
+        CHECK(var.getArray() != array.data());
 
         CHECK_THROWS(var.getArrayCopy<int32_t>());
         CHECK_THROWS(var.getArrayCopy<bool>());
@@ -491,7 +491,7 @@ TEST_CASE("Variant") {
 
         var.setArray<UA_String, Type::String>(array.data(), array.size());
         CHECK(var.getArrayLength() == array.size());
-        CHECK(var.handle()->data == array.data());
+        CHECK(var.getArray() == array.data());
 
         UA_clear(&array[0], &UA_TYPES[UA_TYPES_STRING]);
         UA_clear(&array[1], &UA_TYPES[UA_TYPES_STRING]);
@@ -504,7 +504,7 @@ TEST_CASE("Variant") {
 
         var.setArray(array);
         CHECK(var.getArrayLength() == array.size());
-        CHECK(var.handle()->data == array.data());
+        CHECK(var.getArray() == array.data());
         CHECK(var.getArray<String>() == array.data());
     }
 
@@ -537,7 +537,6 @@ TEST_CASE("Variant") {
             var.setScalar(value, dt);
             CHECK(var.isScalar());
             CHECK(var.getDataType() == &dt);
-
             CHECK(var.getScalar() == &value);
             CHECK(var.getScalar<CustomType>().applicationType == UA_APPLICATIONTYPE_CLIENT);
         }
@@ -546,7 +545,6 @@ TEST_CASE("Variant") {
             var.setScalarCopy(value, dt);
             CHECK(var.isScalar());
             CHECK(var.getDataType() == &dt);
-
             CHECK(var.getScalar() != &value);
             CHECK(var.getScalar<CustomType>().applicationType == UA_APPLICATIONTYPE_CLIENT);
         }
@@ -558,6 +556,8 @@ TEST_CASE("Variant") {
             var.setArray(array.data(), array.size(), dt);
             CHECK(var.isArray());
             CHECK(var.getDataType() == &dt);
+            CHECK(var.getArray() == array.data());
+            CHECK(var.getArray<CustomType>() == array.data());
         }
     }
 }

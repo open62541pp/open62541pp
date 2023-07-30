@@ -109,6 +109,14 @@ public:
     /// Get array dimensions.
     std::vector<uint32_t> getArrayDimensions() const;
 
+    /// Get pointer to array value.
+    /// @exception BadVariantAccess If the variant is not an array
+    void* getArray();
+
+    /// Get pointer to array value.
+    /// @exception BadVariantAccess If the variant is not an array
+    const void* getArray() const;
+
     /// Get pointer to array with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not an array or not of type `T`.
     template <typename T>
