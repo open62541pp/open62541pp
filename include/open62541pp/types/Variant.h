@@ -144,6 +144,10 @@ public:
     template <typename T, Type type = detail::guessType<T>()>
     void setArray(T* array, size_t size) noexcept;
 
+    /// Assign array (raw) to variant with custom data type.
+    template <typename T>
+    void setArray(T* array, size_t size, const UA_DataType& dataType) noexcept;
+
     /// Assign array (std::vector) to variant.
     template <typename T, Type type = detail::guessType<T>()>
     void setArray(std::vector<T>& array) noexcept {
@@ -345,6 +349,13 @@ void Variant::setArray(T* array, size_t size) noexcept {
     assertSetNoCopy<T>();
     detail::assertTypeCombination<T, type>();
     setArrayImpl(array, size, detail::getUaDataType<type>());
+}
+
+template <typename T>
+void Variant::setArray(T* array, size_t size, const UA_DataType& dataType) noexcept {
+    assertNoVariant<T>();
+    checkDataType<T>(dataType);
+    setArrayImpl(array, size, &dataType);
 }
 
 template <typename InputIt, Type type>

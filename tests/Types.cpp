@@ -550,6 +550,15 @@ TEST_CASE("Variant") {
             CHECK(var.getScalar() != &value);
             CHECK(var.getScalar<CustomType>().applicationType == UA_APPLICATIONTYPE_CLIENT);
         }
+
+        std::vector<CustomType> array(3);
+        array.at(0).applicationType = UA_APPLICATIONTYPE_CLIENT;
+
+        SUBCASE("Array") {
+            var.setArray(array.data(), array.size(), dt);
+            CHECK(var.isArray());
+            CHECK(var.getDataType() == &dt);
+        }
     }
 }
 
