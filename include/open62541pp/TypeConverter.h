@@ -64,6 +64,20 @@ constexpr bool isValidTypeCombination(TypeIndexOrType typeOrTypeIndex) {
     return TypeConverter<T>::ValidTypes::contains(typeOrTypeIndex);
 }
 
+template <typename T>
+constexpr bool isValidTypeCombination(const UA_DataType* dataType) {
+    if (dataType == nullptr) {
+        return false;
+    }
+    for (auto typeIndex : TypeConverter<T>::ValidTypes::toArray()) {
+        // TODO: deep comparison
+        if (dataType == &UA_TYPES[typeIndex]) {  // NOLINT
+            return true;
+        }
+    }
+    return false;
+}
+
 template <typename T, auto typeOrTypeIndex>
 constexpr void assertTypeCombination() {
     static_assert(
@@ -119,7 +133,7 @@ template <typename T, typename NativeType = typename TypeConverter<T>::NativeTyp
 /// @warning Type erased version, use with caution.
 template <typename T, typename NativeType = typename TypeConverter<T>::NativeType>
 [[nodiscard]] T fromNative(void* value, [[maybe_unused]] Type type) {
-    assert(isValidTypeCombination<T>(type));  // NOLINT
+    assert(isValidTypeCombination<T>(getUaDataType(type)));  // NOLINT
     return fromNative<T>(static_cast<NativeType*>(value));
 }
 
@@ -141,7 +155,7 @@ template <typename T, typename NativeType = typename TypeConverter<T>::NativeTyp
 /// @warning Type erased version, use with caution.
 template <typename T, typename NativeType = typename TypeConverter<T>::NativeType>
 [[nodiscard]] std::vector<T> fromNativeArray(void* array, size_t size, [[maybe_unused]] Type type) {
-    assert(isValidTypeCombination<T>(type));  // NOLINT
+    assert(isValidTypeCombination<T>(getUaDataType(type)));  // NOLINT
     return fromNativeArray<T>(static_cast<NativeType*>(array), size);
 }
 

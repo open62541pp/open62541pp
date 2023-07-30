@@ -181,8 +181,7 @@ private:
 
     template <typename T>
     void checkReturnType() const {
-        const auto optType = getVariantType();
-        if (!optType || !detail::isValidTypeCombination<T>(*optType)) {
+        if (!detail::isValidTypeCombination<T>(getDataType())) {
             throw BadVariantAccess("Variant does not contain a value convertible to template type");
         }
     }
