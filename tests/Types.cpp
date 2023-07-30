@@ -324,6 +324,7 @@ TEST_CASE("Variant") {
         CHECK(varEmpty.isEmpty());
         CHECK(!varEmpty.isScalar());
         CHECK(!varEmpty.isArray());
+        CHECK(varEmpty.getDataType() == nullptr);
         CHECK(varEmpty.getVariantType() == std::nullopt);
         CHECK(varEmpty.getArrayLength() == 0);
         CHECK(varEmpty.getArrayDimensions().empty());
@@ -398,6 +399,7 @@ TEST_CASE("Variant") {
         CHECK(var.isType(&UA_TYPES[UA_TYPES_INT32]));
         CHECK(var.isType(Type::Int32));
         CHECK(var.isType(NodeId{0, UA_NS0ID_INT32}));
+        CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_INT32]);
         CHECK(var.getVariantType().value() == Type::Int32);
 
         CHECK_THROWS(var.getScalar<bool>());
@@ -456,9 +458,10 @@ TEST_CASE("Variant") {
         CHECK(var.isArray());
         CHECK(var.isType(Type::Float));
         CHECK(var.isType(NodeId{0, UA_NS0ID_FLOAT}));
+        CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_FLOAT]);
         CHECK(var.getVariantType().value() == Type::Float);
         CHECK(var.getArrayLength() == array.size());
-        CHECK(var.handle()->data != array.data());
+        CHECK(var.getArray() != array.data());
 
         CHECK_THROWS(var.getArrayCopy<int32_t>());
         CHECK_THROWS(var.getArrayCopy<bool>());
@@ -488,7 +491,7 @@ TEST_CASE("Variant") {
 
         var.setArray<UA_String, Type::String>(array.data(), array.size());
         CHECK(var.getArrayLength() == array.size());
-        CHECK(var.handle()->data == array.data());
+        CHECK(var.getArray() == array.data());
 
         UA_clear(&array[0], &UA_TYPES[UA_TYPES_STRING]);
         UA_clear(&array[1], &UA_TYPES[UA_TYPES_STRING]);
@@ -501,7 +504,7 @@ TEST_CASE("Variant") {
 
         var.setArray(array);
         CHECK(var.getArrayLength() == array.size());
-        CHECK(var.handle()->data == array.data());
+        CHECK(var.getArray() == array.data());
         CHECK(var.getArray<String>() == array.data());
     }
 
@@ -513,12 +516,59 @@ TEST_CASE("Variant") {
         CHECK(var.isArray());
         CHECK(var.isType(Type::String));
         CHECK(var.isType(NodeId{0, UA_NS0ID_STRING}));
+        CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_STRING]);
         CHECK(var.getVariantType().value() == Type::String);
 
         CHECK_THROWS(var.getScalarCopy<std::string>());
         CHECK_THROWS(var.getArrayCopy<int32_t>());
         CHECK_THROWS(var.getArrayCopy<bool>());
         CHECK(var.getArrayCopy<std::string>() == value);
+    }
+
+    SUBCASE("Set/get non-builtin data types") {
+        using CustomType = UA_ApplicationDescription;
+        const auto& dt = UA_TYPES[UA_TYPES_APPLICATIONDESCRIPTION];
+
+        Variant var;
+        CustomType value{};
+        value.applicationType = UA_APPLICATIONTYPE_CLIENT;
+
+        SUBCASE("Scalar") {
+            var.setScalar(value, dt);
+            CHECK(var.isScalar());
+            CHECK(var.getDataType() == &dt);
+            CHECK(var.getScalar() == &value);
+            CHECK(var.getScalar<CustomType>().applicationType == UA_APPLICATIONTYPE_CLIENT);
+        }
+
+        SUBCASE("Scalar (copy)") {
+            var.setScalarCopy(value, dt);
+            CHECK(var.isScalar());
+            CHECK(var.getDataType() == &dt);
+            CHECK(var.getScalar() != &value);
+            CHECK(var.getScalar<CustomType>().applicationType == UA_APPLICATIONTYPE_CLIENT);
+        }
+
+        std::vector<CustomType> array(3);
+        array.at(0).applicationType = UA_APPLICATIONTYPE_CLIENT;
+
+        SUBCASE("Array") {
+            var.setArray(array.data(), array.size(), dt);
+            CHECK(var.isArray());
+            CHECK(var.getDataType() == &dt);
+            CHECK(var.getArrayLength() == 3);
+            CHECK(var.getArray() == array.data());
+            CHECK(var.getArray<CustomType>() == array.data());
+        }
+
+        SUBCASE("Array (copy)") {
+            var.setArrayCopy(array.data(), array.size(), dt);
+            CHECK(var.isArray());
+            CHECK(var.getDataType() == &dt);
+            CHECK(var.getArrayLength() == 3);
+            CHECK(var.getArray() != array.data());
+            CHECK(var.getArray<CustomType>() != array.data());
+        }
     }
 }
 
