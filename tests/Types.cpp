@@ -533,6 +533,7 @@ TEST_CASE("Variant") {
         CustomType value{};
         value.applicationType = UA_APPLICATIONTYPE_CLIENT;
         CHECK_NOTHROW(var.setScalar(value, dt));
+        CHECK_NOTHROW(var.setScalarCopy(value, dt));
         CHECK(var.isScalar());
         CHECK(var.getDataType() == &dt);
         CHECK(var.getVariantType() == std::nullopt);

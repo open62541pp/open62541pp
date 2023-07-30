@@ -124,6 +124,10 @@ public:
     template <typename T, Type type = detail::guessType<T>()>
     void setScalarCopy(const T& value);
 
+    /// Copy scalar value to variant with custom data type.
+    template <typename T>
+    void setScalarCopy(const T& value, const UA_DataType& dataType);
+
     /// Assign array (raw) to variant.
     template <typename T, Type type = detail::guessType<T>()>
     void setArray(T* array, size_t size) noexcept;
@@ -316,6 +320,12 @@ void Variant::setScalarCopy(const T& value) {
         detail::getUaDataType<type>(),
         true  // move ownership
     );
+}
+
+template <typename T>
+void Variant::setScalarCopy(const T& value, const UA_DataType& dataType) {
+    checkDataType<T>(dataType);
+    setScalarCopyImpl(&value, &dataType);
 }
 
 template <typename T, Type type>
