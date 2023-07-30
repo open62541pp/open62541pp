@@ -47,6 +47,16 @@ std::optional<Type> Variant::getVariantType() const noexcept {
     return {};
 }
 
+void* Variant::getScalar() {
+    checkIsScalar();
+    return handle()->data;
+}
+
+const void* Variant::getScalar() const {
+    checkIsScalar();
+    return handle()->data;
+}
+
 size_t Variant::getArrayLength() const noexcept {
     return isArray() ? handle()->arrayLength : 0;
 }

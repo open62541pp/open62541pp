@@ -80,6 +80,14 @@ public:
     /// Get variant type.
     std::optional<Type> getVariantType() const noexcept;
 
+    /// Get pointer to scalar value.
+    /// @exception BadVariantAccess If the variant is not a scalar
+    void* getScalar();
+
+    /// Get pointer to scalar value.
+    /// @exception BadVariantAccess If the variant is not a scalar
+    const void* getScalar() const;
+
     /// Get reference to scalar value with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not a scalar or not of type `T`.
     template <typename T>

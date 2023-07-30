@@ -532,15 +532,24 @@ TEST_CASE("Variant") {
         Variant var;
         CustomType value{};
         value.applicationType = UA_APPLICATIONTYPE_CLIENT;
-        CHECK_NOTHROW(var.setScalar(value, dt));
-        CHECK_NOTHROW(var.setScalarCopy(value, dt));
-        CHECK(var.isScalar());
-        CHECK(var.getDataType() == &dt);
-        CHECK(var.getVariantType() == std::nullopt);
 
-        CHECK_NOTHROW(var.getScalar<CustomType>());
-        CHECK_NOTHROW(var.getScalarCopy<CustomType>());
-        CHECK(var.getScalar<CustomType>().applicationType == UA_APPLICATIONTYPE_CLIENT);
+        SUBCASE("Scalar") {
+            var.setScalar(value, dt);
+            CHECK(var.isScalar());
+            CHECK(var.getDataType() == &dt);
+
+            CHECK(var.getScalar() == &value);
+            CHECK(var.getScalar<CustomType>().applicationType == UA_APPLICATIONTYPE_CLIENT);
+        }
+
+        SUBCASE("Scalar (copy)") {
+            var.setScalarCopy(value, dt);
+            CHECK(var.isScalar());
+            CHECK(var.getDataType() == &dt);
+
+            CHECK(var.getScalar() != &value);
+            CHECK(var.getScalar<CustomType>().applicationType == UA_APPLICATIONTYPE_CLIENT);
+        }
     }
 }
 
