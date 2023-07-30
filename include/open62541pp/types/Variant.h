@@ -46,11 +46,15 @@ public:
 
     /// Create Variant from std::vector (no copy if assignable without conversion).
     template <typename T, Type type = detail::guessType<T>()>
-    [[nodiscard]] static Variant fromArray(std::vector<T>& array);
+    [[nodiscard]] static Variant fromArray(std::vector<T>& array) {
+        return fromArray<T, type>(array.data(), array.size());
+    }
 
     /// Create Variant from std::vector (copy).
     template <typename T, Type type = detail::guessType<T>()>
-    [[nodiscard]] static Variant fromArray(const std::vector<T>& array);
+    [[nodiscard]] static Variant fromArray(const std::vector<T>& array) {
+        return fromArray<T, type>(array.data(), array.size());
+    }
 
     /// Create Variant from range of elements (copy).
     template <typename InputIt, Type type = detail::guessTypeFromIterator<InputIt>()>
@@ -134,7 +138,9 @@ public:
 
     /// Assign array (std::vector) to variant.
     template <typename T, Type type = detail::guessType<T>()>
-    void setArray(std::vector<T>& array) noexcept;
+    void setArray(std::vector<T>& array) noexcept {
+        setArray<T, type>(array.data(), array.size());
+    }
 
     /// Copy range of elements as array to variant.
     template <typename InputIt, Type type = detail::guessTypeFromIterator<InputIt>()>
@@ -146,7 +152,9 @@ public:
 
     /// Copy array (std::vector) to variant.
     template <typename T, Type type = detail::guessType<T>()>
-    void setArrayCopy(const std::vector<T>& array);
+    void setArrayCopy(const std::vector<T>& array) {
+        setArrayCopy<T, type>(array.data(), array.size());
+    }
 
 private:
     template <typename T>
@@ -232,16 +240,6 @@ Variant Variant::fromArray(const T* array, size_t size) {
     Variant variant;
     variant.setArrayCopy<T, type>(array, size);
     return variant;
-}
-
-template <typename T, Type type>
-Variant Variant::fromArray(std::vector<T>& array) {
-    return fromArray<T, type>(array.data(), array.size());
-}
-
-template <typename T, Type type>
-Variant Variant::fromArray(const std::vector<T>& array) {
-    return fromArray<T, type>(array.data(), array.size());
 }
 
 template <typename InputIt, Type type>
@@ -335,11 +333,6 @@ void Variant::setArray(T* array, size_t size) noexcept {
     setArrayImpl(array, size, detail::getUaDataType<type>());
 }
 
-template <typename T, Type type>
-void Variant::setArray(std::vector<T>& array) noexcept {
-    setArray<T, type>(array.data(), array.size());
-}
-
 template <typename InputIt, Type type>
 void Variant::setArrayCopy(InputIt first, InputIt last) {
     using ValueType = typename std::iterator_traits<InputIt>::value_type;
@@ -360,11 +353,6 @@ void Variant::setArrayCopy(const T* array, size_t size) {
     } else {
         setArrayCopy<const T*, type>(array, array + size);
     }
-}
-
-template <typename T, Type type>
-void Variant::setArrayCopy(const std::vector<T>& array) {
-    setArrayCopy<T, type>(array.data(), array.size());
 }
 
 }  // namespace opcua
