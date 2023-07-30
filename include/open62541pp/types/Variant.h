@@ -162,13 +162,17 @@ public:
         setArray<T, type>(array.data(), array.size());
     }
 
-    /// Copy range of elements as array to variant.
-    template <typename InputIt, Type type = detail::guessTypeFromIterator<InputIt>()>
-    void setArrayCopy(InputIt first, InputIt last);
-
     /// Copy array (raw) to variant.
     template <typename T, Type type = detail::guessType<T>()>
     void setArrayCopy(const T* array, size_t size);
+
+    /// Copy array (raw) to variant with custom data type.
+    template <typename T>
+    void setArrayCopy(const T* array, size_t size, const UA_DataType& dataType);
+
+    /// Copy range of elements as array to variant.
+    template <typename InputIt, Type type = detail::guessTypeFromIterator<InputIt>()>
+    void setArrayCopy(InputIt first, InputIt last);
 
     /// Copy array (std::vector) to variant.
     template <typename T, Type type = detail::guessType<T>()>
@@ -366,17 +370,11 @@ void Variant::setArray(T* array, size_t size, const UA_DataType& dataType) noexc
     setArrayImpl(array, size, &dataType);
 }
 
-template <typename InputIt, Type type>
-void Variant::setArrayCopy(InputIt first, InputIt last) {
-    using ValueType = typename std::iterator_traits<InputIt>::value_type;
-    assertNoVariant<ValueType>();
-    detail::assertTypeCombination<ValueType, type>();
-    setArrayImpl(
-        detail::toNativeArrayAlloc<InputIt, static_cast<TypeIndex>(type)>(first, last),
-        std::distance(first, last),
-        detail::getUaDataType<type>(),
-        true  // move ownership
-    );
+template <typename T>
+void Variant::setArrayCopy(const T* array, size_t size, const UA_DataType& dataType) {
+    assertNoVariant<T>();
+    checkDataType<T>(dataType);
+    setArrayCopyImpl(array, size, &dataType);
 }
 
 template <typename T, Type type>
@@ -388,6 +386,19 @@ void Variant::setArrayCopy(const T* array, size_t size) {
     } else {
         setArrayCopy<const T*, type>(array, array + size);  // overload with iterator pair
     }
+}
+
+template <typename InputIt, Type type>
+void Variant::setArrayCopy(InputIt first, InputIt last) {
+    using ValueType = typename std::iterator_traits<InputIt>::value_type;
+    assertNoVariant<ValueType>();
+    detail::assertTypeCombination<ValueType, type>();
+    setArrayImpl(
+        detail::toNativeArrayAlloc<InputIt, static_cast<TypeIndex>(type)>(first, last),
+        std::distance(first, last),
+        detail::getUaDataType<type>(),
+        true  // move ownership
+    );
 }
 
 }  // namespace opcua

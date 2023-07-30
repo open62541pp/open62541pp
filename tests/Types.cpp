@@ -556,8 +556,18 @@ TEST_CASE("Variant") {
             var.setArray(array.data(), array.size(), dt);
             CHECK(var.isArray());
             CHECK(var.getDataType() == &dt);
+            CHECK(var.getArrayLength() == 3);
             CHECK(var.getArray() == array.data());
             CHECK(var.getArray<CustomType>() == array.data());
+        }
+
+        SUBCASE("Array (copy)") {
+            var.setArrayCopy(array.data(), array.size(), dt);
+            CHECK(var.isArray());
+            CHECK(var.getDataType() == &dt);
+            CHECK(var.getArrayLength() == 3);
+            CHECK(var.getArray() != array.data());
+            CHECK(var.getArray<CustomType>() != array.data());
         }
     }
 }
