@@ -178,9 +178,12 @@ private:
         );
     }
 
-    template <Type type>
+    template <typename T>
     static constexpr void assertNoVariant() {
-        static_assert(type != Type::Variant, "Variants cannot directly contain another variant");
+        static_assert(
+            !std::is_same_v<T, Variant> && !std::is_same_v<T, UA_Variant>,
+            "Variants cannot directly contain another variant"
+        );
     }
 
     void checkIsScalar() const;
@@ -293,8 +296,8 @@ std::vector<T> Variant::getArrayCopy() const {
 
 template <typename T, Type type>
 void Variant::setScalar(T& value) noexcept {
+    assertNoVariant<T>();
     assertSetNoCopy<T>();
-    assertNoVariant<type>();
     detail::assertTypeCombination<T, type>();
     if constexpr (detail::IsTypeWrapper<T>::value) {
         setScalarImpl(value.handle(), detail::getUaDataType<type>());
@@ -305,13 +308,14 @@ void Variant::setScalar(T& value) noexcept {
 
 template <typename T>
 void Variant::setScalar(T& value, const UA_DataType& dataType) noexcept {
+    assertNoVariant<T>();
     checkDataType<T>(dataType);
     setScalarImpl(&value, &dataType);
 }
 
 template <typename T, Type type>
 void Variant::setScalarCopy(const T& value) {
-    assertNoVariant<type>();
+    assertNoVariant<T>();
     detail::assertTypeCombination<T, type>();
     setScalarImpl(
         detail::toNativeAlloc<T, static_cast<TypeIndex>(type)>(value),
@@ -322,12 +326,14 @@ void Variant::setScalarCopy(const T& value) {
 
 template <typename T>
 void Variant::setScalarCopy(const T& value, const UA_DataType& dataType) {
+    assertNoVariant<T>();
     checkDataType<T>(dataType);
     setScalarCopyImpl(&value, &dataType);
 }
 
 template <typename T, Type type>
 void Variant::setArray(T* array, size_t size) noexcept {
+    assertNoVariant<T>();
     assertSetNoCopy<T>();
     detail::assertTypeCombination<T, type>();
     setArrayImpl(array, size, detail::getUaDataType<type>());
@@ -336,6 +342,7 @@ void Variant::setArray(T* array, size_t size) noexcept {
 template <typename InputIt, Type type>
 void Variant::setArrayCopy(InputIt first, InputIt last) {
     using ValueType = typename std::iterator_traits<InputIt>::value_type;
+    assertNoVariant<ValueType>();
     detail::assertTypeCombination<ValueType, type>();
     setArrayImpl(
         detail::toNativeArrayAlloc<InputIt, static_cast<TypeIndex>(type)>(first, last),
@@ -347,11 +354,12 @@ void Variant::setArrayCopy(InputIt first, InputIt last) {
 
 template <typename T, Type type>
 void Variant::setArrayCopy(const T* array, size_t size) {
+    assertNoVariant<T>();
     detail::assertTypeCombination<T, type>();
     if constexpr (detail::isBuiltinType<T>()) {
         setArrayCopyImpl(array, size, detail::getUaDataType<type>());
     } else {
-        setArrayCopy<const T*, type>(array, array + size);
+        setArrayCopy<const T*, type>(array, array + size);  // overload with iterator pair
     }
 }
 
