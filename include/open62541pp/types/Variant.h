@@ -265,7 +265,7 @@ template <typename T>
 T Variant::getScalarCopy() const {
     checkIsScalar();
     checkReturnType<T>();
-    return detail::fromNative<T>(handle()->data, getVariantType().value());
+    return detail::fromNative<T>(handle()->data, getDataType());
 }
 
 template <typename T>
@@ -286,9 +286,7 @@ template <typename T>
 std::vector<T> Variant::getArrayCopy() const {
     checkIsArray();
     checkReturnType<T>();
-    return detail::fromNativeArray<T>(
-        handle()->data, handle()->arrayLength, getVariantType().value()
-    );
+    return detail::fromNativeArray<T>(handle()->data, handle()->arrayLength, getDataType());
 }
 
 template <typename T, Type type>

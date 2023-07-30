@@ -132,8 +132,8 @@ template <typename T, typename NativeType = typename TypeConverter<T>::NativeTyp
 /// Convert and copy from native type.
 /// @warning Type erased version, use with caution.
 template <typename T, typename NativeType = typename TypeConverter<T>::NativeType>
-[[nodiscard]] T fromNative(void* value, [[maybe_unused]] Type type) {
-    assert(isValidTypeCombination<T>(getUaDataType(type)));  // NOLINT
+[[nodiscard]] T fromNative(void* value, [[maybe_unused]] const UA_DataType* dataType) {
+    assert(isValidTypeCombination<T>(dataType));  // NOLINT
     return fromNative<T>(static_cast<NativeType*>(value));
 }
 
@@ -154,8 +154,10 @@ template <typename T, typename NativeType = typename TypeConverter<T>::NativeTyp
 /// Create and convert vector from native array.
 /// @warning Type erased version, use with caution.
 template <typename T, typename NativeType = typename TypeConverter<T>::NativeType>
-[[nodiscard]] std::vector<T> fromNativeArray(void* array, size_t size, [[maybe_unused]] Type type) {
-    assert(isValidTypeCombination<T>(getUaDataType(type)));  // NOLINT
+[[nodiscard]] std::vector<T> fromNativeArray(
+    void* array, size_t size, [[maybe_unused]] const UA_DataType* dataType
+) {
+    assert(isValidTypeCombination<T>(dataType));  // NOLINT
     return fromNativeArray<T>(static_cast<NativeType*>(array), size);
 }
 

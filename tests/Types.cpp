@@ -525,17 +525,21 @@ TEST_CASE("Variant") {
         CHECK(var.getArrayCopy<std::string>() == value);
     }
 
-    SUBCASE("Set/get custom data types") {
+    SUBCASE("Set/get non-builtin data types") {
         using CustomType = UA_ApplicationDescription;
         const auto& dt = UA_TYPES[UA_TYPES_APPLICATIONDESCRIPTION];
 
         Variant var;
         CustomType value{};
         value.applicationType = UA_APPLICATIONTYPE_CLIENT;
-        var.setScalar(value, dt);
+        CHECK_NOTHROW(var.setScalar(value, dt));
         CHECK(var.isScalar());
         CHECK(var.getDataType() == &dt);
         CHECK(var.getVariantType() == std::nullopt);
+
+        CHECK_NOTHROW(var.getScalar<CustomType>());
+        CHECK_NOTHROW(var.getScalarCopy<CustomType>());
+        CHECK(var.getScalar<CustomType>().applicationType == UA_APPLICATIONTYPE_CLIENT);
     }
 }
 
