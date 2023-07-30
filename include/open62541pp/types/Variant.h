@@ -183,6 +183,7 @@ public:
 private:
     template <typename T>
     static constexpr bool isConvertibleToNative() {
+        // TypeWrapper<T> is pointer-interconvertible with T
         return detail::isNativeType<T>() || detail::IsTypeWrapper<T>::value;
     }
 
@@ -323,11 +324,7 @@ void Variant::setScalar(T& value) noexcept {
     assertNoVariant<T>();
     assertSetNoCopy<T>();
     detail::assertTypeCombination<T, type>();
-    if constexpr (detail::IsTypeWrapper<T>::value) {
-        setScalarImpl(value.handle(), detail::getUaDataType<type>());
-    } else {
-        setScalarImpl(&value, detail::getUaDataType<type>());
-    }
+    setScalarImpl(&value, detail::getUaDataType<type>());
 }
 
 template <typename T>
