@@ -32,23 +32,41 @@ public:
     template <typename T, Type type = detail::guessType<T>()>
     [[nodiscard]] static Variant fromScalar(T& value);
 
+    /// Create Variant from scalar value with custom data type.
+    template <typename T>
+    [[nodiscard]] static Variant fromScalar(T& value, const UA_DataType& dataType);
+
     /// Create Variant from scalar value (copy).
     template <typename T, Type type = detail::guessType<T>()>
     [[nodiscard]] static Variant fromScalar(const T& value);
+
+    /// Create Variant from scalar value with custom data type (copy).
+    template <typename T>
+    [[nodiscard]] static Variant fromScalar(const T& value, const UA_DataType& dataType);
 
     /// Create Variant from array (no copy if assignable without conversion).
     template <typename T, Type type = detail::guessType<T>()>
     [[nodiscard]] static Variant fromArray(T* array, size_t size);
 
-    /// Create Variant from array (copy).
+    /// Create Variant from array with custom data type.
     template <typename T, Type type = detail::guessType<T>()>
-    [[nodiscard]] static Variant fromArray(const T* array, size_t size);
+    [[nodiscard]] static Variant fromArray(T* array, size_t size, const UA_DataType& dataType);
 
     /// Create Variant from std::vector (no copy if assignable without conversion).
     template <typename T, Type type = detail::guessType<T>()>
     [[nodiscard]] static Variant fromArray(std::vector<T>& array) {
         return fromArray<T, type>(array.data(), array.size());
     }
+
+    /// Create Variant from array (copy).
+    template <typename T, Type type = detail::guessType<T>()>
+    [[nodiscard]] static Variant fromArray(const T* array, size_t size);
+
+    /// Create Variant from array with custom data type (copy).
+    template <typename T, Type type = detail::guessType<T>()>
+    [[nodiscard]] static Variant fromArray(
+        const T* array, size_t size, const UA_DataType& dataType
+    );
 
     /// Create Variant from std::vector (copy).
     template <typename T, Type type = detail::guessType<T>()>
@@ -245,10 +263,24 @@ Variant Variant::fromScalar(T& value) {
     return variant;
 }
 
+template <typename T>
+Variant Variant::fromScalar(T& value, const UA_DataType& dataType) {
+    Variant variant;
+    variant.setScalar<T>(value, dataType);
+    return variant;
+}
+
 template <typename T, Type type>
 Variant Variant::fromScalar(const T& value) {
     Variant variant;
     variant.setScalarCopy<T, type>(value);
+    return variant;
+}
+
+template <typename T>
+Variant Variant::fromScalar(const T& value, const UA_DataType& dataType) {
+    Variant variant;
+    variant.setScalarCopy<T>(value, dataType);
     return variant;
 }
 
@@ -264,9 +296,23 @@ Variant Variant::fromArray(T* array, size_t size) {
 }
 
 template <typename T, Type type>
+Variant Variant::fromArray(T* array, size_t size, const UA_DataType& dataType) {
+    Variant variant;
+    variant.setArray<T>(array, size, dataType);
+    return variant;
+}
+
+template <typename T, Type type>
 Variant Variant::fromArray(const T* array, size_t size) {
     Variant variant;
     variant.setArrayCopy<T, type>(array, size);
+    return variant;
+}
+
+template <typename T, Type type>
+Variant Variant::fromArray(const T* array, size_t size, const UA_DataType& dataType) {
+    Variant variant;
+    variant.setArrayCopy<T>(array, size, dataType);
     return variant;
 }
 

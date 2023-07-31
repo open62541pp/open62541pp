@@ -350,6 +350,12 @@ TEST_CASE("Variant") {
             CHECK(var.isScalar());
             CHECK(var->data == &value);
         }
+        SUBCASE("Assign with custom datatye") {
+            double value = 11.11;
+            const auto var = Variant::fromScalar(value, UA_TYPES[UA_TYPES_DOUBLE]);
+            CHECK(var.isScalar());
+            CHECK(var->data == &value);
+        }
         SUBCASE("Copy if const") {
             const double value = 11.11;
             const auto var = Variant::fromScalar(value);
@@ -361,9 +367,15 @@ TEST_CASE("Variant") {
             CHECK(var.isScalar());
             CHECK(var.getScalar<double>() == 11.11);
         }
-        SUBCASE("Copy if not assignable (const or conversion CHECKd)") {
+        SUBCASE("Copy if not assignable (const or conversion check failed)") {
             std::string value{"test"};
             const auto var = Variant::fromScalar<std::string, Type::String>(value);
+            CHECK(var.isScalar());
+            CHECK(var->data != &value);
+        }
+        SUBCASE("Copy with custom data tye") {
+            const double value = 11.11;
+            const auto var = Variant::fromScalar(value, UA_TYPES[UA_TYPES_DOUBLE]);
             CHECK(var.isScalar());
             CHECK(var->data != &value);
         }
@@ -376,6 +388,12 @@ TEST_CASE("Variant") {
             CHECK(var.isArray());
             CHECK(var->data == vec.data());
         }
+        SUBCASE("Assign with custom data type") {
+            std::vector<double> vec{1.1, 2.2, 3.3};
+            const auto var = Variant::fromArray(vec.data(), vec.size(), UA_TYPES[UA_TYPES_DOUBLE]);
+            CHECK(var.isArray());
+            CHECK(var->data == vec.data());
+        }
         SUBCASE("Copy if const") {
             const std::vector<double> vec{1.1, 2.2, 3.3};
             const auto var = Variant::fromArray(vec);
@@ -385,6 +403,12 @@ TEST_CASE("Variant") {
         SUBCASE("Copy from iterator") {
             const std::vector<double> vec{1.1, 2.2, 3.3};
             const auto var = Variant::fromArray(vec.begin(), vec.end());
+            CHECK(var.isArray());
+            CHECK(var->data != vec.data());
+        }
+        SUBCASE("Copy with custom data type") {
+            const std::vector<double> vec{1.1, 2.2, 3.3};
+            const auto var = Variant::fromArray(vec.data(), vec.size(), UA_TYPES[UA_TYPES_DOUBLE]);
             CHECK(var.isArray());
             CHECK(var->data != vec.data());
         }
