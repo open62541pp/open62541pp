@@ -255,7 +255,7 @@ static void valueCallbackOnRead(
     assert(nodeContext != nullptr && value != nullptr);  // NOLINT
     auto& cb = static_cast<ServerContext::NodeContext*>(nodeContext)->valueCallback.onBeforeRead;
     if (cb) {
-        cb(asWrapper<DataValue>(*value));
+        detail::invokeCatchStatus(cb, asWrapper<DataValue>(*value));
     }
 }
 
@@ -271,7 +271,7 @@ static void valueCallbackOnWrite(
     assert(nodeContext != nullptr && value != nullptr);  // NOLINT
     auto& cb = static_cast<ServerContext::NodeContext*>(nodeContext)->valueCallback.onAfterWrite;
     if (cb) {
-        cb(asWrapper<DataValue>(*value));
+        detail::invokeCatchStatus(cb, asWrapper<DataValue>(*value));
     }
 }
 
@@ -300,7 +300,9 @@ static UA_StatusCode valueSourceRead(
     auto& cb = static_cast<ServerContext::NodeContext*>(nodeContext)->dataSource.read;
     if (cb) {
         const auto nr = range == nullptr ? NumericRange() : NumericRange(*range);
-        return cb(asWrapper<DataValue>(*value), nr, includeSourceTimestamp);
+        return detail::invokeCatchStatus(
+            cb, asWrapper<DataValue>(*value), nr, includeSourceTimestamp
+        );
     }
     return UA_STATUSCODE_GOOD;
 }
@@ -318,7 +320,7 @@ static UA_StatusCode valueSourceWrite(
     auto& cb = static_cast<ServerContext::NodeContext*>(nodeContext)->dataSource.write;
     if (cb) {
         const auto nr = range == nullptr ? NumericRange() : NumericRange(*range);
-        return cb(asWrapper<DataValue>(*value), nr);
+        return detail::invokeCatchStatus(cb, asWrapper<DataValue>(*value), nr);
     }
     return UA_STATUSCODE_GOOD;
 }

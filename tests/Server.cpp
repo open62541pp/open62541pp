@@ -124,7 +124,7 @@ TEST_CASE("Server configuration") {
     }
 }
 
-TEST_CASE("Variable node value callback") {
+TEST_CASE("ValueCallback") {
     Server server;
 
     NodeId id{1, 1000};
@@ -161,7 +161,7 @@ TEST_CASE("Variable node value callback") {
     CHECK(valueAfterWrite == 2);
 }
 
-TEST_CASE("Variable node data source data") {
+TEST_CASE("DataSource") {
     Server server;
 
     NodeId id{1, 1000};
@@ -171,14 +171,14 @@ TEST_CASE("Variable node data source data") {
     int data = 0;
 
     ValueBackendDataSource dataSource;
-    dataSource.read = [&](DataValue& value, [[maybe_unused]] const NumericRange&, bool timestamp) {
+    dataSource.read = [&](DataValue& value, const NumericRange&, bool includeSourceTimestamp) {
         value.getValue().setScalar(data);
-        if (timestamp) {
+        if (includeSourceTimestamp) {
             value.setSourceTimestamp(DateTime::now());
         }
         return UA_STATUSCODE_GOOD;
     };
-    dataSource.write = [&](const DataValue& value, [[maybe_unused]] const NumericRange&) {
+    dataSource.write = [&](const DataValue& value, const NumericRange&) {
         data = value.getValue().getScalarCopy<int>();
         return UA_STATUSCODE_GOOD;
     };
@@ -188,4 +188,30 @@ TEST_CASE("Variable node data source data") {
     CHECK(node.readScalar<int>() == 0);
     CHECK_NOTHROW(node.writeScalar<int>(1));
     CHECK(data == 1);
+}
+
+TEST_CASE("DataSource with exception in callback") {
+    Server server;
+    NodeId id{1, 1000};
+    auto node = server.getObjectsNode().addVariable(id, "testVariable");
+
+    SUBCASE("BadStatus exception") {
+        ValueBackendDataSource dataSource;
+        dataSource.read = [&](DataValue&, const NumericRange&, bool) -> UA_StatusCode {
+            throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
+        };
+        server.setVariableNodeValueBackend(id, dataSource);
+        Variant variant;
+        CHECK_THROWS_AS_MESSAGE(node.readValue(variant), BadStatus, "BadUnexpectedError");
+    }
+
+    SUBCASE("Other exception types") {
+        ValueBackendDataSource dataSource;
+        dataSource.read = [&](DataValue&, const NumericRange&, bool) -> UA_StatusCode {
+            throw std::runtime_error("test");
+        };
+        server.setVariableNodeValueBackend(id, dataSource);
+        Variant variant;
+        CHECK_THROWS_AS_MESSAGE(node.readValue(variant), BadStatus, "BadInternalError");
+    }
 }
