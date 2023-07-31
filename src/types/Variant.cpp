@@ -17,12 +17,19 @@ bool Variant::isArray() const noexcept {
     return (handle()->arrayLength > 0) && (handle()->data != UA_EMPTY_ARRAY_SENTINEL);  // NOLINT
 }
 
-bool Variant::isType(const UA_DataType* type) const noexcept {
-    return getDataType() == type;
+bool Variant::isType(const UA_DataType* dataType) const noexcept {
+    const auto* dt = getDataType();
+    if (dt == nullptr || dataType == nullptr) {
+        return false;
+    }
+    if (dt == dataType) {
+        return true;
+    }
+    return dt->typeId == dataType->typeId;
 }
 
 bool Variant::isType(Type type) const noexcept {
-    return getDataType() == detail::getUaDataType(type);
+    return isType(detail::getUaDataType(type));
 }
 
 bool Variant::isType(const NodeId& id) const noexcept {
