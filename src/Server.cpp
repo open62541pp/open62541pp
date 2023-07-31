@@ -286,6 +286,54 @@ void Server::setVariableNodeValueCallback(const NodeId& id, ValueCallback callba
     detail::throwOnBadStatus(UA_Server_setVariableNode_valueCallback(handle(), id, callbackNative));
 }
 
+static UA_StatusCode valueSourceRead(
+    [[maybe_unused]] UA_Server* server,
+    [[maybe_unused]] const UA_NodeId* sessionId,
+    [[maybe_unused]] void* sessionContext,
+    [[maybe_unused]] const UA_NodeId* nodeId,
+    void* nodeContext,
+    UA_Boolean includeSourceTimestamp,
+    const UA_NumericRange* range,
+    UA_DataValue* value
+) {
+    assert(nodeContext != nullptr && value != nullptr);  // NOLINT
+    auto& cb = static_cast<ServerContext::NodeContext*>(nodeContext)->dataSource.read;
+    if (cb) {
+        const auto nr = range == nullptr ? NumericRange() : NumericRange(*range);
+        return cb(asWrapper<DataValue>(*value), nr, includeSourceTimestamp);
+    }
+    return UA_STATUSCODE_GOOD;
+}
+
+static UA_StatusCode valueSourceWrite(
+    [[maybe_unused]] UA_Server* server,
+    [[maybe_unused]] const UA_NodeId* sessionId,
+    [[maybe_unused]] void* sessionContext,
+    [[maybe_unused]] const UA_NodeId* nodeId,
+    void* nodeContext,
+    const UA_NumericRange* range,
+    const UA_DataValue* value
+) {
+    assert(nodeContext != nullptr && value != nullptr);  // NOLINT
+    auto& cb = static_cast<ServerContext::NodeContext*>(nodeContext)->dataSource.write;
+    if (cb) {
+        const auto nr = range == nullptr ? NumericRange() : NumericRange(*range);
+        return cb(asWrapper<DataValue>(*value), nr);
+    }
+    return UA_STATUSCODE_GOOD;
+}
+
+void Server::setVariableNodeValueBackend(const NodeId& id, ValueBackendDataSource backend) {
+    auto* nodeContext = getContext().getOrCreateNodeContext(id);
+    nodeContext->dataSource = std::move(backend);
+    detail::throwOnBadStatus(UA_Server_setNodeContext(handle(), id, nodeContext));
+
+    UA_DataSource dataSourceNative;
+    dataSourceNative.read = valueSourceRead;
+    dataSourceNative.write = valueSourceWrite;
+    detail::throwOnBadStatus(UA_Server_setVariableNode_dataSource(handle(), id, dataSourceNative));
+}
+
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 Subscription<Server> Server::createSubscription() noexcept {
     return {*this, 0U};
