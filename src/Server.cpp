@@ -304,7 +304,7 @@ static UA_StatusCode valueSourceRead(
             cb, asWrapper<DataValue>(*value), nr, includeSourceTimestamp
         );
     }
-    return UA_STATUSCODE_GOOD;
+    return UA_STATUSCODE_BADINTERNALERROR;
 }
 
 static UA_StatusCode valueSourceWrite(
@@ -322,7 +322,7 @@ static UA_StatusCode valueSourceWrite(
         const auto nr = range == nullptr ? NumericRange() : NumericRange(*range);
         return detail::invokeCatchStatus(cb, asWrapper<DataValue>(*value), nr);
     }
-    return UA_STATUSCODE_GOOD;
+    return UA_STATUSCODE_BADINTERNALERROR;
 }
 
 void Server::setVariableNodeValueBackend(const NodeId& id, ValueBackendDataSource backend) {
