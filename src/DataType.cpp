@@ -186,11 +186,6 @@ void DataType::setMembers(const std::vector<DataTypeMember>& members) {
 }
 
 bool operator==(const UA_DataTypeMember& lhs, const UA_DataTypeMember& rhs) noexcept {
-#ifdef UA_ENABLE_TYPEDESCRIPTION
-    if (std::strcmp(emptyIfNullptr(lhs.memberName), emptyIfNullptr(rhs.memberName)) != 0) {
-        return false;
-    }
-#endif
 #if UAPP_OPEN62541_VER_GE(1, 3)
     if (lhs.memberType != rhs.memberType) {
         return false;
@@ -211,6 +206,11 @@ bool operator==(const UA_DataTypeMember& lhs, const UA_DataTypeMember& rhs) noex
         return false;
     }
 #endif
+#ifdef UA_ENABLE_TYPEDESCRIPTION
+    if (std::strcmp(emptyIfNullptr(lhs.memberName), emptyIfNullptr(rhs.memberName)) != 0) {
+        return false;
+    }
+#endif
     return true;
 }
 
@@ -219,11 +219,6 @@ bool operator!=(const UA_DataTypeMember& lhs, const UA_DataTypeMember& rhs) noex
 }
 
 bool operator==(const UA_DataType& lhs, const UA_DataType& rhs) noexcept {
-#ifdef UA_ENABLE_TYPEDESCRIPTION
-    if (std::strcmp(emptyIfNullptr(lhs.typeName), emptyIfNullptr(rhs.typeName)) != 0) {
-        return false;
-    }
-#endif
     if (lhs.typeId != rhs.typeId) {
         return false;
     }
@@ -250,6 +245,11 @@ bool operator==(const UA_DataType& lhs, const UA_DataType& rhs) noexcept {
             return false;
         }
     }
+#ifdef UA_ENABLE_TYPEDESCRIPTION
+    if (std::strcmp(emptyIfNullptr(lhs.typeName), emptyIfNullptr(rhs.typeName)) != 0) {
+        return false;
+    }
+#endif
     return true;
 }
 
