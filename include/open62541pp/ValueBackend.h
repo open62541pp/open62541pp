@@ -55,34 +55,23 @@ struct ValueBackendDataSource {
      * To use zero-copy reads, set the value of the Variant (DataValue::getValue) without copying,
      * e.g. with Variant::setScalar or Variant::setArray.
      *
-     * @param includeSourceTimeStamp Set the source timestamp of `value` if `true`
      * @param value The DataValue that is returned to the reader
+     * @param range If not empty, then the data source shall return only a selection of the
+     *              (nonscalar) data.
+     *              Set `UA_STATUSCODE_BADINDEXRANGEINVALID` in `value` if this does not apply
+     * @param includeTimestamp Set the source timestamp of `value` if `true`
      */
-    std::function<void(bool includeSourceTimeStamp, DataValue& value)> read;
+    std::function<void(DataValue& value, const NumericRange& range, bool includeTimestamp)> read;
 
     /**
      * Callback to write the value into a data source.
      * This function can be empty if the operation is unsupported.
      *
      * @param value The DataValue that has been written by the writer
+     * @param range If not empty, then only this selection of (non-scalar) data should be written
+     *              into the data source
      */
-    std::function<void(const DataValue& value)> write;
+    std::function<void(const DataValue& value, const NumericRange& range)> write;
 };
-
-// struct ValueBackendInternal {
-//     DataValue value;
-//     ValueCallback callback;
-// };
-
-// struct ValueBackendExternal {
-//     DataValue* value;
-//     ValueCallback callback;
-// };
-
-// using ValueBackend = std::variant<
-//     ValueBackendInternal,
-//     ValueBackendExternal,
-//     ValueBackendDataSource
-// >;
 
 }  // namespace opcua
