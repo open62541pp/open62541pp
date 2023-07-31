@@ -26,12 +26,12 @@ int main() {
             opcua::VariableId::Server_ServerStatus_CurrentTime,  // monitored node id
             opcua::AttributeId::Value,  // monitored attribute
             [&](const auto& item, const opcua::DataValue& value) {
-                std::cout << "Data change notification:\n"
-                          << "- subscription id:   " << item.getSubscriptionId() << "\n"
-                          << "- monitored item id: " << item.getMonitoredItemId() << "\n"
-                          << "- node id:           " << item.getNodeId().toString() << "\n"
-                          << "- attribute id:      " << static_cast<int>(item.getAttributeId())
-                          << "\n";
+                std::cout
+                    << "Data change notification:\n"
+                    << "- subscription id:   " << item.getSubscriptionId() << "\n"
+                    << "- monitored item id: " << item.getMonitoredItemId() << "\n"
+                    << "- node id:           " << item.getNodeId().toString() << "\n"
+                    << "- attribute id:      " << static_cast<int>(item.getAttributeId()) << "\n";
 
                 const auto dt = value.getValue().getScalarCopy<opcua::DateTime>();
                 std::cout << "Current server time (UTC): " << dt.format("%H:%M:%S") << std::endl;
