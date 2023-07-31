@@ -16,6 +16,7 @@
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/Variant.h"
 
+#include "CustomDataTypes.h"
 #include "CustomLogger.h"
 #include "ServerContext.h"
 #include "open62541_impl.h"
@@ -38,6 +39,7 @@ class Server::Connection {
 public:
     Connection()
         : server_(UA_Server_new()),
+          customDataTypes_(&getConfig(server_)->customDataTypes),
           logger_(getConfig(server_)->logger) {}
 
     ~Connection() {
@@ -91,10 +93,6 @@ public:
         return running_;
     }
 
-    void setLogger(Logger logger) {
-        logger_.setLogger(std::move(logger));
-    }
-
     UA_Server* handle() noexcept {
         return server_;
     }
@@ -103,9 +101,18 @@ public:
         return context_;
     }
 
+    auto& getCustomDataTypes() noexcept {
+        return customDataTypes_;
+    }
+
+    auto& getCustomLogger() noexcept {
+        return logger_;
+    }
+
 private:
     UA_Server* server_;
     ServerContext context_;
+    CustomDataTypes customDataTypes_;
     CustomLogger logger_;
     std::atomic<bool> running_{false};
     std::mutex mutex_;
@@ -160,7 +167,7 @@ Server::Server(
 #endif
 
 void Server::setLogger(Logger logger) {
-    connection_->setLogger(std::move(logger));
+    connection_->getCustomLogger().setLogger(std::move(logger));
 }
 
 // copy to endpoints needed, see: https://github.com/open62541/open62541/issues/1175
@@ -241,6 +248,10 @@ std::vector<std::string> Server::getNamespaceArray() {
 
 uint16_t Server::registerNamespace(std::string_view uri) {
     return UA_Server_addNamespace(handle(), std::string(uri).c_str());
+}
+
+void Server::setCustomDataTypes(std::vector<DataType> dataTypes) {
+    connection_->getCustomDataTypes().setCustomDataTypes(std::move(dataTypes));
 }
 
 static void valueCallbackOnRead(

@@ -5,6 +5,7 @@ add_executable(
     main.cpp
     Client.cpp
     Crypto.cpp
+    CustomDataTypes.cpp
     DataType.cpp
     helper.cpp
     Logger.cpp
