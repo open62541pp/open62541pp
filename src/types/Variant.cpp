@@ -28,6 +28,10 @@ bool Variant::isType(const UA_DataType* dataType) const noexcept {
     return dt->typeId == dataType->typeId;
 }
 
+bool Variant::isType(const UA_DataType& dataType) const noexcept {
+    return isType(&dataType);
+}
+
 bool Variant::isType(Type type) const noexcept {
     return isType(detail::getUaDataType(type));
 }

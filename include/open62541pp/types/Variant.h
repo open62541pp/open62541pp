@@ -87,6 +87,8 @@ public:
 
     /// Check if variant type is equal to data type.
     bool isType(const UA_DataType* dataType) const noexcept;
+    /// Check if variant type is equal to data type.
+    bool isType(const UA_DataType& dataType) const noexcept;
     /// Check if variant type is equal to type enum.
     bool isType(Type type) const noexcept;
     /// Check if variant type is equal to data type node id.
