@@ -155,6 +155,7 @@ public:
     NumericRange();
     explicit NumericRange(std::string_view encodedRange);
     explicit NumericRange(std::vector<NumericRangeDimension> dimensions);
+    explicit NumericRange(const UA_NumericRange& native);
 
     bool empty() const noexcept;
 

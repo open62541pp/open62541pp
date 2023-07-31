@@ -124,6 +124,18 @@ TEST_CASE("NumericRangeDimension") {
 }
 
 TEST_CASE("NumericRange") {
+    SUBCASE("Construct from native") {
+        UA_NumericRange native{};
+        std::vector<UA_NumericRangeDimension> dimensions{{1, 2}, {3, 4}};
+        native.dimensionsSize = dimensions.size();
+        native.dimensions = dimensions.data();
+        const NumericRange nr(native);
+        CHECK(!nr.empty());
+        CHECK(nr.get().size() == 2);
+        CHECK(nr.get().at(0) == NumericRangeDimension{1, 2});
+        CHECK(nr.get().at(1) == NumericRangeDimension{3, 4});
+    }
+
     SUBCASE("Empty") {
         const NumericRange nr;
         CHECK(nr.empty());
