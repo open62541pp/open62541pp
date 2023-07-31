@@ -247,7 +247,7 @@ bool operator==(const UA_DataType& lhs, const UA_DataType& rhs) noexcept {
     }
 #ifdef UA_ENABLE_TYPEDESCRIPTION
     if (std::strcmp(emptyIfNullptr(lhs.typeName), emptyIfNullptr(rhs.typeName)) != 0) {
-        return false;
+        return false;  // NOLINT
     }
 #endif
     return true;

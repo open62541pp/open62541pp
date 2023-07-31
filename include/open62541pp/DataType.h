@@ -18,6 +18,8 @@ using DataTypeMember = UA_DataTypeMember;
  */
 class DataType {
 public:
+    using NativeType = UA_DataType;
+
     constexpr DataType() = default;
 
     explicit DataType(const UA_DataType& native);
