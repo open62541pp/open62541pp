@@ -11,4 +11,6 @@
 @example client_browse.cpp
 @example client_subscription.cpp
 @example client_method.cpp
+
+@example typeconversion.cpp
 */

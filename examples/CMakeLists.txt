@@ -62,3 +62,5 @@ endif()
 if(UA_ENABLE_SUBSCRIPTIONS)
     add_example(client_subscription.cpp)
 endif()
+
+add_example(typeconversion.cpp)

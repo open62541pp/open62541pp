@@ -427,7 +427,7 @@ void Variant::setArrayCopy(const T* array, size_t size) {
     if constexpr (detail::isBuiltinType<T>()) {
         setArrayCopyImpl(array, size, detail::getUaDataType<type>());
     } else {
-        setArrayCopy<const T*, type>(array, array + size);  // overload with iterator pair
+        setArrayCopy<const T*, type>(array, array + size);  // NOLINT
     }
 }
 
