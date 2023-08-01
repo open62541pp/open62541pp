@@ -163,7 +163,6 @@ TEST_CASE("ValueCallback") {
 
 TEST_CASE("DataSource") {
     Server server;
-
     NodeId id{1, 1000};
     auto node = server.getObjectsNode().addVariable(id, "testVariable");
 
@@ -188,6 +187,18 @@ TEST_CASE("DataSource") {
     CHECK(node.readScalar<int>() == 0);
     CHECK_NOTHROW(node.writeScalar<int>(1));
     CHECK(data == 1);
+}
+
+TEST_CASE("DataSource with empty callbacks") {
+    Server server;
+    NodeId id{1, 1000};
+    auto node = server.getObjectsNode().addVariable(id, "testVariable");
+
+    server.setVariableNodeValueBackend(id, ValueBackendDataSource{});
+
+    Variant variant;
+    CHECK_THROWS_AS_MESSAGE(node.readValue(variant), BadStatus, "BadInternalError");
+    CHECK_THROWS_AS_MESSAGE(node.writeValue(variant), BadStatus, "BadInternalError");
 }
 
 TEST_CASE("DataSource with exception in callback") {

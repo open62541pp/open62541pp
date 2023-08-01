@@ -142,9 +142,11 @@ TEST_CASE("NumericRange") {
         CHECK(nr.get().size() == 0);
     }
 
-    SUBCASE("Parse") {
+    SUBCASE("Parse invalid") {
         CHECK_THROWS(NumericRange("abc"));
+    }
 
+    SUBCASE("Parse") {
         const NumericRange nr("1:2,0:3,5");
         CHECK(nr.get().size() == 3);
         CHECK(nr.get().at(0) == NumericRangeDimension{1, 2});
