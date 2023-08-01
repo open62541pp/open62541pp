@@ -61,7 +61,9 @@ TEST_CASE("DataType") {
     SUBCASE("Construct from native") {
         DataType dt(pointType);
         CHECK(dt.handle() != &pointType);
+#ifdef UA_ENABLE_TYPEDESCRIPTION
         CHECK(dt.getTypeName() == pointType.typeName);
+#endif
         CHECK(dt.getTypeId() == NodeId(1, 1001));
         CHECK(dt.getBinaryEncodingId() == NodeId(1, 1));
         CHECK(dt.getMemSize() == sizeof(Point));
@@ -187,14 +189,13 @@ TEST_CASE("DataTypeBuilder") {
             measurementsMembers
         );
 
-        auto dt = DataTypeBuilder<Measurements>::createStructure("Measurements", {1, 1002}, {1, 2})
-                      .addField<&Measurements::description>(
-                          "description", UA_TYPES[UA_TYPES_STRING]
-                      )
-                      .addField<&Measurements::measurementsSize, &Measurements::measurements>(
-                          "measurements"
-                      )
-                      .build();
+        auto dt =
+            DataTypeBuilder<Measurements>::createStructure("Measurements", {1, 1002}, {1, 2})
+                .addField<&Measurements::description>("description", UA_TYPES[UA_TYPES_STRING])
+                .addField<&Measurements::measurementsSize, &Measurements::measurements>(
+                    "measurements"
+                )
+                .build();
 
         checkDataTypeEqual(dt, measurementsType);
     }
@@ -307,15 +308,17 @@ TEST_CASE("DataTypeBuilder") {
             int value;
         };
 
-        auto dtNative = DataTypeBuilder<SNative>::createStructure("S", {1, 1005}, {1, 5})
-                            .addField<&SNative::guid>("guid")
-                            .addField<&SNative::value>("value")
-                            .build();
+        auto dtNative =
+            DataTypeBuilder<SNative>::createStructure("S", {1, 1005}, {1, 5})
+                .addField<&SNative::guid>("guid")
+                .addField<&SNative::value>("value")
+                .build();
 
-        auto dtWrapper = DataTypeBuilder<SWrapper>::createStructure("S", {1, 1005}, {1, 5})
-                             .addField<&SWrapper::guid>("guid")
-                             .addField<&SWrapper::value>("value")
-                             .build();
+        auto dtWrapper =
+            DataTypeBuilder<SWrapper>::createStructure("S", {1, 1005}, {1, 5})
+                .addField<&SWrapper::guid>("guid")
+                .addField<&SWrapper::value>("value")
+                .build();
 
         CHECK(dtNative == dtWrapper);
     }
