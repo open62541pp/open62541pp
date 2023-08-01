@@ -1,6 +1,7 @@
 /**
  * Type conversions between arbitrary types and native `UA_*` types can be added.
- * The TypeConverter struct must be overloaded as shown below.
+ * Conversions are handled by the TypeConverter struct. A new template specialization must be added
+ * to define a new conversion - this can happen outside of this library.
  *
  * In this case, we will enable conversion between the new C++17 type `std::byte` and `UA_Byte`.
  */
