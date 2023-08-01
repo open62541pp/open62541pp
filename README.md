@@ -42,6 +42,8 @@
 
 ## ✍ Examples
 
+[Explore all examples in the `examples/` directory](https://github.com/open62541pp/open62541pp/tree/master/examples).
+
 ### Server
 
 <!-- [[[cog
@@ -100,6 +102,7 @@ int main() {
 ## ⇆ Type conversion
 
 Type conversion from and to native `UA_*` types are handled by the `opcua::TypeConverter` struct.
+Have a look at the [typeconversion example](https://github.com/open62541pp/open62541pp/blob/master/examples/typeconversion.cpp).
 
 Compile-time checks are used where possible:
 
