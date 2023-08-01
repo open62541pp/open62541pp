@@ -61,31 +61,31 @@ inline static UA_ClientConfig* getConfig(Client* client) noexcept {
 // |             | UA_SECURECHANNELSTATE_FRESH        | UA_SESSIONSTATE_CREATED            | 2158821376    |
 // clang-format on
 
-inline static void execStateCallback(ClientContext& context, ClientState state) {
+inline static void invokeStateCallback(ClientContext& context, ClientState state) noexcept {
     const auto& callbackArray = context.stateCallbacks;
     const auto& callback = callbackArray.at(static_cast<size_t>(state));
     if (callback) {
-        callback();
+        detail::invokeCatchIgnore(callback);
     }
 }
 
 #if UAPP_OPEN62541_VER_LE(1, 0)
 // state callback for v1.0
-static void stateCallback(UA_Client* client, UA_ClientState clientState) {
+static void stateCallback(UA_Client* client, UA_ClientState clientState) noexcept {
     auto& context = getContext(client);
     if (clientState != context.lastClientState) {
         switch (clientState) {
         case UA_CLIENTSTATE_DISCONNECTED:
-            execStateCallback(context, ClientState::Disconnected);
+            invokeStateCallback(context, ClientState::Disconnected);
             break;
         case UA_CLIENTSTATE_CONNECTED:
-            execStateCallback(context, ClientState::Connected);
+            invokeStateCallback(context, ClientState::Connected);
             break;
         case UA_CLIENTSTATE_SESSION:
-            execStateCallback(context, ClientState::SessionActivated);
+            invokeStateCallback(context, ClientState::SessionActivated);
             break;
         case UA_CLIENTSTATE_SESSION_DISCONNECTED:
-            execStateCallback(context, ClientState::SessionClosed);
+            invokeStateCallback(context, ClientState::SessionClosed);
             break;
         default:
             break;
@@ -100,16 +100,16 @@ static void stateCallback(
     UA_SecureChannelState channelState,
     UA_SessionState sessionState,
     [[maybe_unused]] UA_StatusCode connectStatus
-) {
+) noexcept {
     auto& context = getContext(client);
     // handle session state first, mainly to handle SessionClosed before Disconnected
     if (sessionState != context.lastSessionState) {
         switch (sessionState) {
         case UA_SESSIONSTATE_ACTIVATED:
-            execStateCallback(context, ClientState::SessionActivated);
+            invokeStateCallback(context, ClientState::SessionActivated);
             break;
         case UA_SESSIONSTATE_CLOSED:
-            execStateCallback(context, ClientState::SessionClosed);
+            invokeStateCallback(context, ClientState::SessionClosed);
             break;
         default:
             break;
@@ -118,10 +118,10 @@ static void stateCallback(
     if (channelState != context.lastChannelState) {
         switch (channelState) {
         case UA_SECURECHANNELSTATE_OPEN:
-            execStateCallback(context, ClientState::Connected);
+            invokeStateCallback(context, ClientState::Connected);
             break;
         case UA_SECURECHANNELSTATE_CLOSED:
-            execStateCallback(context, ClientState::Disconnected);
+            invokeStateCallback(context, ClientState::Disconnected);
             break;
         default:
             break;

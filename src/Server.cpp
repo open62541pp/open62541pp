@@ -251,11 +251,11 @@ static void valueCallbackOnRead(
     void* nodeContext,
     [[maybe_unused]] const UA_NumericRange* range,
     const UA_DataValue* value
-) {
+) noexcept {
     assert(nodeContext != nullptr && value != nullptr);  // NOLINT
     auto& cb = static_cast<ServerContext::NodeContext*>(nodeContext)->valueCallback.onBeforeRead;
     if (cb) {
-        detail::invokeCatchStatus(cb, asWrapper<DataValue>(*value));
+        detail::invokeCatchIgnore([&] { cb(asWrapper<DataValue>(*value)); });
     }
 }
 
@@ -267,11 +267,11 @@ static void valueCallbackOnWrite(
     void* nodeContext,
     [[maybe_unused]] const UA_NumericRange* range,
     const UA_DataValue* value
-) {
+) noexcept {
     assert(nodeContext != nullptr && value != nullptr);  // NOLINT
     auto& cb = static_cast<ServerContext::NodeContext*>(nodeContext)->valueCallback.onAfterWrite;
     if (cb) {
-        detail::invokeCatchStatus(cb, asWrapper<DataValue>(*value));
+        detail::invokeCatchIgnore([&] { cb(asWrapper<DataValue>(*value)); });
     }
 }
 
@@ -286,6 +286,10 @@ void Server::setVariableNodeValueCallback(const NodeId& id, ValueCallback callba
     detail::throwOnBadStatus(UA_Server_setVariableNode_valueCallback(handle(), id, callbackNative));
 }
 
+inline static NumericRange asRange(const UA_NumericRange* range) noexcept {
+    return range == nullptr ? NumericRange() : NumericRange(*range);
+}
+
 static UA_StatusCode valueSourceRead(
     [[maybe_unused]] UA_Server* server,
     [[maybe_unused]] const UA_NodeId* sessionId,
@@ -295,14 +299,13 @@ static UA_StatusCode valueSourceRead(
     UA_Boolean includeSourceTimestamp,
     const UA_NumericRange* range,
     UA_DataValue* value
-) {
+) noexcept {
     assert(nodeContext != nullptr && value != nullptr);  // NOLINT
-    auto& cb = static_cast<ServerContext::NodeContext*>(nodeContext)->dataSource.read;
-    if (cb) {
-        const auto nr = range == nullptr ? NumericRange() : NumericRange(*range);
-        return detail::invokeCatchStatus(
-            cb, asWrapper<DataValue>(*value), nr, includeSourceTimestamp
-        );
+    auto& callback = static_cast<ServerContext::NodeContext*>(nodeContext)->dataSource.read;
+    if (callback) {
+        return detail::invokeCatchStatus([&] {
+            callback(asWrapper<DataValue>(*value), asRange(range), includeSourceTimestamp);
+        });
     }
     return UA_STATUSCODE_BADINTERNALERROR;
 }
@@ -315,12 +318,13 @@ static UA_StatusCode valueSourceWrite(
     void* nodeContext,
     const UA_NumericRange* range,
     const UA_DataValue* value
-) {
+) noexcept {
     assert(nodeContext != nullptr && value != nullptr);  // NOLINT
-    auto& cb = static_cast<ServerContext::NodeContext*>(nodeContext)->dataSource.write;
-    if (cb) {
-        const auto nr = range == nullptr ? NumericRange() : NumericRange(*range);
-        return detail::invokeCatchStatus(cb, asWrapper<DataValue>(*value), nr);
+    auto& callback = static_cast<ServerContext::NodeContext*>(nodeContext)->dataSource.write;
+    if (callback) {
+        return detail::invokeCatchStatus([&] {
+            callback(asWrapper<DataValue>(*value), asRange(range));
+        });
     }
     return UA_STATUSCODE_BADINTERNALERROR;
 }
