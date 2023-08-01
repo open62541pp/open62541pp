@@ -246,10 +246,10 @@ private:
         }
     }
 
-    void setScalarImpl(void* value, const UA_DataType* type, bool own = false) noexcept;
-    void setScalarCopyImpl(const void* value, const UA_DataType* type);
-    void setArrayImpl(void* array, size_t size, const UA_DataType* type, bool own = false) noexcept;
-    void setArrayCopyImpl(const void* array, size_t size, const UA_DataType* type);
+    void setScalarImpl(void* value, const UA_DataType& type, bool own = false) noexcept;
+    void setScalarCopyImpl(const void* value, const UA_DataType& type);
+    void setArrayImpl(void* array, size_t size, const UA_DataType& type, bool own = false) noexcept;
+    void setArrayCopyImpl(const void* array, size_t size, const UA_DataType& type);
 };
 
 /* --------------------------------------- Implementation --------------------------------------- */
@@ -343,7 +343,7 @@ template <typename T>
 T Variant::getScalarCopy() const {
     checkIsScalar();
     checkReturnType<T>();
-    return detail::fromNative<T>(handle()->data, getDataType());
+    return detail::fromNative<T>(handle()->data, *getDataType());
 }
 
 template <typename T>
@@ -364,7 +364,7 @@ template <typename T>
 std::vector<T> Variant::getArrayCopy() const {
     checkIsArray();
     checkReturnType<T>();
-    return detail::fromNativeArray<T>(handle()->data, handle()->arrayLength, getDataType());
+    return detail::fromNativeArray<T>(handle()->data, handle()->arrayLength, *getDataType());
 }
 
 template <typename T, Type type>
@@ -379,7 +379,7 @@ template <typename T>
 void Variant::setScalar(T& value, const UA_DataType& dataType) noexcept {
     assertNoVariant<T>();
     checkDataType<T>(dataType);
-    setScalarImpl(&value, &dataType);
+    setScalarImpl(&value, dataType);
 }
 
 template <typename T, Type type>
@@ -397,7 +397,7 @@ template <typename T>
 void Variant::setScalarCopy(const T& value, const UA_DataType& dataType) {
     assertNoVariant<T>();
     checkDataType<T>(dataType);
-    setScalarCopyImpl(&value, &dataType);
+    setScalarCopyImpl(&value, dataType);
 }
 
 template <typename T, Type type>
@@ -412,14 +412,14 @@ template <typename T>
 void Variant::setArray(T* array, size_t size, const UA_DataType& dataType) noexcept {
     assertNoVariant<T>();
     checkDataType<T>(dataType);
-    setArrayImpl(array, size, &dataType);
+    setArrayImpl(array, size, dataType);
 }
 
 template <typename T>
 void Variant::setArrayCopy(const T* array, size_t size, const UA_DataType& dataType) {
     assertNoVariant<T>();
     checkDataType<T>(dataType);
-    setArrayCopyImpl(array, size, &dataType);
+    setArrayCopyImpl(array, size, dataType);
 }
 
 template <typename T, Type type>
@@ -429,7 +429,7 @@ void Variant::setArrayCopy(const T* array, size_t size) {
     if constexpr (detail::isBuiltinType<T>()) {
         setArrayCopyImpl(array, size, detail::getUaDataType<type>());
     } else {
-        setArrayCopy<const T*, type>(array, array + size);  // overload with iterator pair
+        setArrayCopy<const T*, type>(array, array + size);  // NOLINT
     }
 }
 

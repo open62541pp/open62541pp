@@ -223,6 +223,9 @@ NumericRange::NumericRange(std::string_view encodedRange) {
 NumericRange::NumericRange(std::vector<NumericRangeDimension> dimensions)
     : dimensions_(std::move(dimensions)) {}
 
+NumericRange::NumericRange(const UA_NumericRange& native)
+    : dimensions_(native.dimensions, native.dimensions + native.dimensionsSize) {}  // NOLINT
+
 bool NumericRange::empty() const noexcept {
     return dimensions_.empty();
 }

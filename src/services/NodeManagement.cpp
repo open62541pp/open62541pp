@@ -123,25 +123,21 @@ static UA_StatusCode methodCallback(
     const UA_Variant* input,
     size_t outputSize,
     UA_Variant* output
-) {
+) noexcept {
     assert(methodContext != nullptr);  // NOLINT
     const auto* nodeContext = static_cast<ServerContext::NodeContext*>(methodContext);
-    const std::vector<Variant> inputVector(input, input + inputSize);  // NOLINT
-    std::vector<Variant> outputVector(outputSize);
-    try {
-        if (nodeContext->methodCallback) {
-            nodeContext->methodCallback(inputVector, outputVector);
+    const auto& callback = nodeContext->methodCallback;
+    if (callback) {
+        return detail::invokeCatchStatus([&] {
+            const std::vector<Variant> inputVector(input, input + inputSize);  // NOLINT
+            std::vector<Variant> outputVector(outputSize);
+            callback(inputVector, outputVector);
             for (size_t i = 0; i < outputSize; ++i) {
                 outputVector[i].swap(output[i]);  // NOLINT
             }
-        }
-    } catch (const BadStatus& e) {
-        return e.code();
-    } catch (const std::exception&) {
-        // TODO: log exception what()
-        return 0x80000000;  // UA_STATUSCODE_BAD
+        });
     }
-    return UA_STATUSCODE_GOOD;
+    return UA_STATUSCODE_BADINTERNALERROR;
 }
 
 template <>

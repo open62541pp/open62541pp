@@ -376,7 +376,7 @@ inline void writeValue(T& serverOrClient, const NodeId& id, const Variant& value
  */
 template <typename T>
 inline void writeDataType(T& serverOrClient, const NodeId& id, Type type) {
-    const auto typeId = ::opcua::detail::getUaDataType(type)->typeId;
+    const auto typeId = ::opcua::detail::getUaDataType(type).typeId;
     writeAttribute(serverOrClient, id, AttributeId::DataType, DataValue::fromScalar(typeId));
 }
 

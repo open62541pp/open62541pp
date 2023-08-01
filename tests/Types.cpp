@@ -19,6 +19,43 @@
 
 using namespace opcua;
 
+TEST_CASE("StatusCode") {
+    SUBCASE("Good") {
+        StatusCode code;
+        CHECK(code == UA_STATUSCODE_GOOD);
+        CHECK(code.get() == UA_STATUSCODE_GOOD);
+        CHECK(code.name() == "Good");
+        CHECK(code.isGood());
+        CHECK(!code.isUncertain());
+        CHECK(!code.isBad());
+        CHECK_NOTHROW(code.throwIfBad());
+    }
+
+#ifdef UA_STATUSCODE_UNCERTAIN
+    SUBCASE("Uncertain") {
+        StatusCode code(UA_STATUSCODE_UNCERTAIN);
+        CHECK(code == UA_STATUSCODE_UNCERTAIN);
+        CHECK(code.get() == UA_STATUSCODE_UNCERTAIN);
+        CHECK(code.name() == "Uncertain");
+        CHECK(!code.isGood());
+        CHECK(code.isUncertain());
+        CHECK(!code.isBad());
+        CHECK_NOTHROW(code.throwIfBad());
+    }
+#endif
+
+    SUBCASE("Bad") {
+        StatusCode code(UA_STATUSCODE_BADTIMEOUT);
+        CHECK(code == UA_STATUSCODE_BADTIMEOUT);
+        CHECK(code.get() == UA_STATUSCODE_BADTIMEOUT);
+        CHECK(code.name() == "BadTimeout");
+        CHECK(!code.isGood());
+        CHECK(!code.isUncertain());
+        CHECK(code.isBad());
+        CHECK_THROWS_AS_MESSAGE(code.throwIfBad(), BadStatus, "BadTimeout");
+    }
+}
+
 TEST_CASE_TEMPLATE("StringLike", T, String, ByteString, XmlElement) {
     SUBCASE("Construct with const char*") {
         T wrapper("test");
@@ -124,15 +161,29 @@ TEST_CASE("NumericRangeDimension") {
 }
 
 TEST_CASE("NumericRange") {
+    SUBCASE("Construct from native") {
+        UA_NumericRange native{};
+        std::vector<UA_NumericRangeDimension> dimensions{{1, 2}, {3, 4}};
+        native.dimensionsSize = dimensions.size();
+        native.dimensions = dimensions.data();
+        const NumericRange nr(native);
+        CHECK(!nr.empty());
+        CHECK(nr.get().size() == 2);
+        CHECK(nr.get().at(0) == NumericRangeDimension{1, 2});
+        CHECK(nr.get().at(1) == NumericRangeDimension{3, 4});
+    }
+
     SUBCASE("Empty") {
         const NumericRange nr;
         CHECK(nr.empty());
         CHECK(nr.get().size() == 0);
     }
 
-    SUBCASE("Parse") {
+    SUBCASE("Parse invalid") {
         CHECK_THROWS(NumericRange("abc"));
+    }
 
+    SUBCASE("Parse") {
         const NumericRange nr("1:2,0:3,5");
         CHECK(nr.get().size() == 3);
         CHECK(nr.get().at(0) == NumericRangeDimension{1, 2});
@@ -695,7 +746,7 @@ TEST_CASE("ExtensionObject") {
 
     SUBCASE("fromDecoded (type erased variant)") {
         int32_t value = 11;
-        const auto obj = ExtensionObject::fromDecoded(&value, &UA_TYPES[UA_TYPES_INT32]);
+        const auto obj = ExtensionObject::fromDecoded(&value, UA_TYPES[UA_TYPES_INT32]);
         CHECK(obj.getEncoding() == ExtensionObjectEncoding::DecodedNoDelete);
         CHECK(obj.isDecoded());
         CHECK(obj.getDecodedDataType() == &UA_TYPES[UA_TYPES_INT32]);

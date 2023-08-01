@@ -66,12 +66,13 @@ constexpr bool isValidTypeCombination(TypeIndexOrType typeOrTypeIndex) {
 
 template <typename T>
 constexpr bool isValidTypeCombination(const UA_DataType* dataType) {
-    if (dataType == nullptr) {
-        return false;
-    }
     for (auto typeIndex : TypeConverter<T>::ValidTypes::toArray()) {
-        // TODO: deep comparison
+        // compare pointer
         if (dataType == &UA_TYPES[typeIndex]) {  // NOLINT
+            return true;
+        }
+        // compare type ids
+        if (dataType->typeId == UA_TYPES[typeIndex].typeId) {  // NOLINT
             return true;
         }
     }
@@ -132,8 +133,8 @@ template <typename T, typename NativeType = typename TypeConverter<T>::NativeTyp
 /// Convert and copy from native type.
 /// @warning Type erased version, use with caution.
 template <typename T, typename NativeType = typename TypeConverter<T>::NativeType>
-[[nodiscard]] T fromNative(void* value, [[maybe_unused]] const UA_DataType* dataType) {
-    assert(isValidTypeCombination<T>(dataType));  // NOLINT
+[[nodiscard]] T fromNative(void* value, [[maybe_unused]] const UA_DataType& dataType) {
+    assert(isValidTypeCombination<T>(&dataType));  // NOLINT
     return fromNative<T>(static_cast<NativeType*>(value));
 }
 
@@ -155,9 +156,9 @@ template <typename T, typename NativeType = typename TypeConverter<T>::NativeTyp
 /// @warning Type erased version, use with caution.
 template <typename T, typename NativeType = typename TypeConverter<T>::NativeType>
 [[nodiscard]] std::vector<T> fromNativeArray(
-    void* array, size_t size, [[maybe_unused]] const UA_DataType* dataType
+    void* array, size_t size, [[maybe_unused]] const UA_DataType& dataType
 ) {
-    assert(isValidTypeCombination<T>(dataType));  // NOLINT
+    assert(isValidTypeCombination<T>(&dataType));  // NOLINT
     return fromNativeArray<T>(static_cast<NativeType*>(array), size);
 }
 
@@ -165,7 +166,7 @@ template <typename T, typename NativeType = typename TypeConverter<T>::NativeTyp
 template <typename TNative, TypeIndex typeIndex = guessTypeIndex<TNative>()>
 [[nodiscard]] TNative* allocNative() {
     assertTypeCombination<TNative, typeIndex>();
-    auto* result = static_cast<TNative*>(UA_new(getUaDataType<typeIndex>()));
+    auto* result = static_cast<TNative*>(UA_new(&getUaDataType<typeIndex>()));
     if (result == nullptr) {
         throw std::bad_alloc();
     }
@@ -186,7 +187,7 @@ template <typename T, TypeIndex typeIndex = guessTypeIndex<T>()>
 template <typename TNative, TypeIndex typeIndex = guessTypeIndex<TNative>()>
 [[nodiscard]] auto* allocNativeArray(size_t size) {
     assertTypeCombination<TNative, typeIndex>();
-    auto* result = static_cast<TNative*>(UA_Array_new(size, getUaDataType<typeIndex>()));
+    auto* result = static_cast<TNative*>(UA_Array_new(size, &getUaDataType<typeIndex>()));
     if (result == nullptr) {
         throw std::bad_alloc();
     }
@@ -234,9 +235,9 @@ struct TypeConverterNative {
             // just take first type -> underlying memory layout of all types should be the same
             constexpr auto typeIndexGuess = ValidTypes::toArray().at(0);
             // clear first
-            UA_clear(&dst, getUaDataType<typeIndexGuess>());
+            UA_clear(&dst, &getUaDataType<typeIndexGuess>());
             // deep copy
-            const auto status = UA_copy(&src, &dst, getUaDataType<typeIndexGuess>());
+            const auto status = UA_copy(&src, &dst, &getUaDataType<typeIndexGuess>());
             throwOnBadStatus(status);
         }
     }
@@ -322,7 +323,7 @@ struct TypeConverter<std::string> {
     }
 
     static void toNative(const ValueType& src, NativeType& dst) {
-        UA_clear(&dst, detail::getUaDataType<UA_TYPES_STRING>());
+        UA_clear(&dst, &detail::getUaDataType<UA_TYPES_STRING>());
         dst = detail::allocUaString(src);
     }
 };

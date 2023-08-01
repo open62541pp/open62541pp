@@ -9,7 +9,7 @@ static UA_DataValue fromOptionals(
     const std::optional<DateTime>& serverTimestamp,
     const std::optional<uint16_t>& sourcePicoseconds,
     const std::optional<uint16_t>& serverPicoseconds,
-    const std::optional<UA_StatusCode>& statusCode
+    const std::optional<StatusCode>& statusCode
 ) {
     return {
         {},
@@ -17,7 +17,7 @@ static UA_DataValue fromOptionals(
         serverTimestamp.value_or(DateTime{}),
         sourcePicoseconds.value_or(uint16_t{}),
         serverPicoseconds.value_or(uint16_t{}),
-        statusCode.value_or(UA_StatusCode{}),
+        statusCode.value_or(StatusCode{}),
         false,
         sourceTimestamp.has_value(),
         serverTimestamp.has_value(),
@@ -33,7 +33,7 @@ DataValue::DataValue(
     std::optional<DateTime> serverTimestamp,  // NOLINT
     std::optional<uint16_t> sourcePicoseconds,
     std::optional<uint16_t> serverPicoseconds,
-    std::optional<UA_StatusCode> statusCode
+    std::optional<StatusCode> statusCode
 )
     : DataValue(fromOptionals(
           sourceTimestamp, serverTimestamp, sourcePicoseconds, serverPicoseconds, statusCode
@@ -89,7 +89,7 @@ uint16_t DataValue::getServerPicoseconds() const noexcept {
     return handle()->serverPicoseconds;
 }
 
-uint32_t DataValue::getStatusCode() const noexcept {
+StatusCode DataValue::getStatusCode() const noexcept {
     return handle()->status;
 }
 
@@ -123,7 +123,7 @@ void DataValue::setServerPicoseconds(uint16_t serverPicoseconds) {
     handle()->hasServerPicoseconds = true;
 }
 
-void DataValue::setStatusCode(UA_StatusCode statusCode) {
+void DataValue::setStatusCode(StatusCode statusCode) {
     handle()->status = statusCode;
     handle()->hasStatus = true;
 }

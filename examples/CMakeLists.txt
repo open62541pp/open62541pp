@@ -53,6 +53,7 @@ add_example(server.cpp)
 add_example(server_instantiation.cpp)
 add_example(server_minimal.cpp)
 add_example(server_valuecallback.cpp)
+add_example(server_datasource.cpp)
 
 add_example(custom_datatypes/client_custom_datatypes.cpp)
 add_example(custom_datatypes/server_custom_datatypes.cpp)
@@ -65,3 +66,5 @@ endif()
 if(UA_ENABLE_SUBSCRIPTIONS)
     add_example(client_subscription.cpp)
 endif()
+
+add_example(typeconversion.cpp)

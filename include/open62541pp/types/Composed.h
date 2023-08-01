@@ -149,7 +149,7 @@ public:
         UA_Array_delete(                                                                           \
             handle()->memberArray,                                                                 \
             handle()->memberSize,                                                                  \
-            detail::getUaDataType(detail::guessTypeIndex<Type>())                                  \
+            &detail::getUaDataType(detail::guessTypeIndex<Type>())                                 \
         );                                                                                         \
         handle()->memberArray = detail::toNativeArrayAlloc(                                        \
             memberArray.begin(), memberArray.end()                                                 \
@@ -422,7 +422,7 @@ class BrowseResult : public TypeWrapper<UA_BrowseResult, UA_TYPES_BROWSERESULT> 
 public:
     using TypeWrapperBase::TypeWrapperBase;
 
-    UAPP_COMPOSED_GETTER(UA_StatusCode, getStatusCode, statusCode)
+    UAPP_COMPOSED_GETTER(StatusCode, getStatusCode, statusCode)
     UAPP_COMPOSED_GETTER_WRAPPER(ByteString, getContinuationPoint, continuationPoint)
     UAPP_COMPOSED_GETTER_ARRAY(ReferenceDescription, getReferences, references, referencesSize)
 };
@@ -497,7 +497,7 @@ class BrowsePathResult : public TypeWrapper<UA_BrowsePathResult, UA_TYPES_BROWSE
 public:
     using TypeWrapperBase::TypeWrapperBase;
 
-    UAPP_COMPOSED_GETTER(UA_StatusCode, getStatusCode, statusCode)
+    UAPP_COMPOSED_GETTER(StatusCode, getStatusCode, statusCode)
     UAPP_COMPOSED_GETTER_ARRAY(BrowsePathTarget, getTargets, targets, targetsSize)
 };
 

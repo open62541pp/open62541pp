@@ -53,7 +53,7 @@ public:
     /// @param data Decoded data
     /// @param type Data type of the decoded data
     /// @warning Type erased version, use with caution.
-    static ExtensionObject fromDecoded(void* data, const UA_DataType* type) noexcept;
+    static ExtensionObject fromDecoded(void* data, const UA_DataType& type) noexcept;
 
     /// Create an ExtensionObject from a decoded object (copy).
     /// Set the "decoded" data to a copy of the given object.
@@ -65,7 +65,7 @@ public:
     /// @param data Decoded data
     /// @param type Data type of the decoded data
     /// @warning Type erased version, use with caution.
-    static ExtensionObject fromDecodedCopy(const void* data, const UA_DataType* type);
+    static ExtensionObject fromDecodedCopy(const void* data, const UA_DataType& type);
 
     bool isEmpty() const noexcept;
     /// Check if the ExtensionObject is encoded (usually if the data type is unknown).
@@ -118,7 +118,7 @@ constexpr bool isAssignableToExtensionObject() {
 template <typename T, TypeIndex typeIndex>
 T* ExtensionObject::getDecodedData() noexcept {
     detail::assertTypeCombination<T, typeIndex>();
-    if (getDecodedDataType() == detail::getUaDataType(typeIndex)) {
+    if (getDecodedDataType() == &detail::getUaDataType(typeIndex)) {
         return static_cast<T*>(getDecodedData());
     }
     return nullptr;

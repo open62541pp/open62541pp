@@ -159,7 +159,7 @@ struct TypeConverter<std::string> {
 | XmlElement               | `UA_XmlElement`      | `UA_String` | `opcua::XmlElement`               |                           |
 | NodeId                   | `UA_NodeId`          |             | `opcua::NodeId`                   |                           |
 | ExpandedNodeId           | `UA_ExpandedNodeId`  |             | `opcua::ExpandedNodeId`           |                           |
-| StatusCode               | `UA_StatusCode`      | `uint32_t`  |                                   |                           |
+| StatusCode               | `UA_StatusCode`      | `uint32_t`  | `opcua::StatusCode`               |                           |
 | QualifiedName            | `UA_QualifiedName`   |             | `opcua::QualifiedName`            |                           |
 | LocalizedText            | `UA_LocalizedText`   |             | `opcua::LocalizedText`            |                           |
 | ExtensionObjectDataValue | `UA_ExtensionObject` |             | `opcua::ExtensionObjectDataValue` |                           |

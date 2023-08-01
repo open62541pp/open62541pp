@@ -9,14 +9,17 @@ using namespace opcua;
 
 TEST_CASE("getUaDataType") {
     const auto* expected = &UA_TYPES[UA_TYPES_BOOLEAN];
+    CHECK(&detail::getUaDataType(UA_TYPES_BOOLEAN) == expected);
+    CHECK(&detail::getUaDataType(Type::Boolean) == expected);
+    CHECK(&detail::getUaDataType<UA_TYPES_BOOLEAN>() == expected);
+    CHECK(&detail::getUaDataType<Type::Boolean>() == expected);
+}
 
-    CHECK(detail::getUaDataType(UA_TYPES_BOOLEAN) == expected);
-    CHECK(detail::getUaDataType(Type::Boolean) == expected);
-    CHECK(detail::getUaDataType<UA_TYPES_BOOLEAN>() == expected);
-    CHECK(detail::getUaDataType<Type::Boolean>() == expected);
+TEST_CASE("findUaDataType") {
+    CHECK(detail::findUaDataType(UA_NODEID_NULL) == nullptr);
 
-    auto nodeId = UA_NODEID_NUMERIC(0, UA_NS0ID_BOOLEAN);
-    CHECK(detail::getUaDataType(nodeId) == expected);
+    const auto nodeId = UA_NODEID_NUMERIC(0, UA_NS0ID_BOOLEAN);
+    CHECK(detail::findUaDataType(nodeId) == &UA_TYPES[UA_TYPES_BOOLEAN]);
 }
 
 TEST_CASE("String conversion UA_String -> string") {

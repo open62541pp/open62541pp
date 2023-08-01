@@ -96,7 +96,7 @@ Argument::Argument(
         arrayDimensions.data(),
         arrayDimensions.size(),
         (void**)&handle()->arrayDimensions,  // NOLINT
-        detail::getUaDataType(UA_TYPES_UINT32)
+        &detail::getUaDataType(UA_TYPES_UINT32)
     );
     detail::throwOnBadStatus(status);
 }

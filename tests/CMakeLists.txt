@@ -7,6 +7,7 @@ add_executable(
     Crypto.cpp
     CustomDataTypes.cpp
     DataType.cpp
+    ErrorHandling.cpp
     helper.cpp
     Logger.cpp
     Node.cpp
