@@ -59,11 +59,10 @@ struct ValueBackendDataSource {
      * @param range If not empty, then the data source shall return only a selection of the
      *              (nonscalar) data.
      *              Set `UA_STATUSCODE_BADINDEXRANGEINVALID` in `value` if this does not apply
-     * @param includeSourceTimestamp Set the source timestamp of `value` if `true`
+     * @param timestamp Set the source timestamp of `value` if `true`
+     * @return StatusCode
      */
-    std::function<
-        UA_StatusCode(DataValue& value, const NumericRange& range, bool includeSourceTimestamp)>
-        read;
+    std::function<StatusCode(DataValue& value, const NumericRange& range, bool timestamp)> read;
 
     /**
      * Callback to write the value into a data source.
@@ -72,8 +71,9 @@ struct ValueBackendDataSource {
      * @param value The DataValue that has been written by the writer
      * @param range If not empty, then only this selection of (non-scalar) data should be written
      *              into the data source
+     * @return StatusCode
      */
-    std::function<UA_StatusCode(const DataValue& value, const NumericRange& range)> write;
+    std::function<StatusCode(const DataValue& value, const NumericRange& range)> write;
 };
 
 }  // namespace opcua

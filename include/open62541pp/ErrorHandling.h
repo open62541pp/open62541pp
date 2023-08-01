@@ -52,11 +52,15 @@ public:
 namespace detail {
 
 [[nodiscard]] inline constexpr bool isGoodStatus(UA_StatusCode code) noexcept {
-    return code == UA_STATUSCODE_GOOD;
+    return (code >> 30U) == 0x00;
+}
+
+[[nodiscard]] inline constexpr bool isUncertainStatus(UA_StatusCode code) noexcept {
+    return (code >> 30U) == 0x01;
 }
 
 [[nodiscard]] inline constexpr bool isBadStatus(UA_StatusCode code) noexcept {
-    return code != UA_STATUSCODE_GOOD;
+    return (code >> 30U) >= 0x02;
 }
 
 inline void throwOnBadStatus(UA_StatusCode code) {

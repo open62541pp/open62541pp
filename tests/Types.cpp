@@ -19,6 +19,43 @@
 
 using namespace opcua;
 
+TEST_CASE("StatusCode") {
+    SUBCASE("Good") {
+        StatusCode code;
+        CHECK(code == UA_STATUSCODE_GOOD);
+        CHECK(code.get() == UA_STATUSCODE_GOOD);
+        CHECK(code.name() == "Good");
+        CHECK(code.isGood());
+        CHECK(!code.isUncertain());
+        CHECK(!code.isBad());
+        CHECK_NOTHROW(code.throwIfBad());
+    }
+
+#ifdef UA_STATUSCODE_UNCERTAIN
+    SUBCASE("Uncertain") {
+        StatusCode code(UA_STATUSCODE_UNCERTAIN);
+        CHECK(code == UA_STATUSCODE_UNCERTAIN);
+        CHECK(code.get() == UA_STATUSCODE_UNCERTAIN);
+        CHECK(code.name() == "Uncertain");
+        CHECK(!code.isGood());
+        CHECK(code.isUncertain());
+        CHECK(!code.isBad());
+        CHECK_NOTHROW(code.throwIfBad());
+    }
+#endif
+
+    SUBCASE("Bad") {
+        StatusCode code(UA_STATUSCODE_BADTIMEOUT);
+        CHECK(code == UA_STATUSCODE_BADTIMEOUT);
+        CHECK(code.get() == UA_STATUSCODE_BADTIMEOUT);
+        CHECK(code.name() == "BadTimeout");
+        CHECK(!code.isGood());
+        CHECK(!code.isUncertain());
+        CHECK(code.isBad());
+        CHECK_THROWS_AS_MESSAGE(code.throwIfBad(), BadStatus, "BadTimeout");
+    }
+}
+
 TEST_CASE_TEMPLATE("StringLike", T, String, ByteString, XmlElement) {
     SUBCASE("Construct with const char*") {
         T wrapper("test");

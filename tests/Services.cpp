@@ -367,7 +367,7 @@ TEST_CASE("View service set (server & client)") {
             const BrowseDescription bd(id, BrowseDirection::Both);
             const auto result = services::browse(serverOrClient, bd);
 
-            CHECK(result.getStatusCode() == UA_STATUSCODE_GOOD);
+            CHECK(result.getStatusCode().isGood());
             CHECK(result.getContinuationPoint().empty());
 
             const auto refs = result.getReferences();
@@ -390,7 +390,7 @@ TEST_CASE("View service set (server & client)") {
             // restrict browse result to max 1 reference, more with browseNext
             auto resultBrowse = services::browse(serverOrClient, bd, 1);
 
-            CHECK(resultBrowse.getStatusCode() == UA_STATUSCODE_GOOD);
+            CHECK(resultBrowse.getStatusCode().isGood());
             CHECK(resultBrowse.getContinuationPoint().empty() == false);
             CHECK(resultBrowse.getReferences().size() == 1);
 
@@ -398,7 +398,7 @@ TEST_CASE("View service set (server & client)") {
             resultBrowse = services::browseNext(
                 serverOrClient, false, resultBrowse.getContinuationPoint()
             );
-            CHECK(resultBrowse.getStatusCode() == UA_STATUSCODE_GOOD);
+            CHECK(resultBrowse.getStatusCode().isGood());
             CHECK(resultBrowse.getContinuationPoint().empty() == false);
             CHECK(resultBrowse.getReferences().size() == 1);
 
@@ -406,7 +406,7 @@ TEST_CASE("View service set (server & client)") {
             resultBrowse = services::browseNext(
                 serverOrClient, true, resultBrowse.getContinuationPoint()
             );
-            CHECK(resultBrowse.getStatusCode() == UA_STATUSCODE_GOOD);
+            CHECK(resultBrowse.getStatusCode().isGood());
             CHECK(resultBrowse.getContinuationPoint().empty());
             CHECK(resultBrowse.getReferences().size() == 0);
         }
@@ -421,7 +421,7 @@ TEST_CASE("View service set (server & client)") {
             const auto result = services::browseSimplifiedBrowsePath(
                 serverOrClient, {0, UA_NS0ID_ROOTFOLDER}, {{0, "Objects"}, {1, "Variable"}}
             );
-            CHECK(result.getStatusCode() == UA_STATUSCODE_GOOD);
+            CHECK(result.getStatusCode().isGood());
             const auto targets = result.getTargets();
             CHECK(targets.size() == 1);
             // https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8
