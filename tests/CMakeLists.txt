@@ -5,6 +5,7 @@ add_executable(
     main.cpp
     Client.cpp
     Crypto.cpp
+    ErrorHandling.cpp
     helper.cpp
     Logger.cpp
     Node.cpp
