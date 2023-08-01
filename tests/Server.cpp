@@ -208,7 +208,7 @@ TEST_CASE("DataSource with exception in callback") {
 
     SUBCASE("BadStatus exception") {
         ValueBackendDataSource dataSource;
-        dataSource.read = [&](DataValue&, const NumericRange&, bool) -> UA_StatusCode {
+        dataSource.read = [&](DataValue&, const NumericRange&, bool) -> StatusCode {
             throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
         };
         server.setVariableNodeValueBackend(id, dataSource);
@@ -218,7 +218,7 @@ TEST_CASE("DataSource with exception in callback") {
 
     SUBCASE("Other exception types") {
         ValueBackendDataSource dataSource;
-        dataSource.read = [&](DataValue&, const NumericRange&, bool) -> UA_StatusCode {
+        dataSource.read = [&](DataValue&, const NumericRange&, bool) -> StatusCode {
             throw std::runtime_error("test");
         };
         server.setVariableNodeValueBackend(id, dataSource);
