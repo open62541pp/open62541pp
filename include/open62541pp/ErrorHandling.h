@@ -1,5 +1,6 @@
 #pragma once
 
+#include <functional>  // invoke
 #include <stdexcept>
 #include <string>
 
@@ -67,6 +68,38 @@ inline void throwOnBadStatus(UA_StatusCode code) {
         default:
             throw BadStatus(code);
         }
+    }
+}
+
+/**
+ * Invoke a function (with `void` return type), catch and ignore exceptions.
+ * This is especially useful for C-API callbacks, that are executed within the open62541 event loop.
+ */
+template <typename F, typename... Args>
+void invokeCatchIgnore(F&& fn, Args&&... args) noexcept {
+    try {
+        std::invoke(fn, std::forward<Args>(args)...);
+    } catch (...) {
+        // ignore
+    }
+}
+
+/**
+ * Invoke a function (with `void` return type) and catch exceptions.
+ * This is especially useful for C-API callbacks, that are executed within the open62541 event loop.
+ * If no exception is thrown, `UA_STATUSCODE_GOOD` is returned.
+ * If the exception if of type BadStatus, the underlying status code will be returned.
+ * All other exception types will yield `UA_STATUSCODE_BADINTERNALERROR`.
+ */
+template <typename F, typename... Args>
+[[nodiscard]] UA_StatusCode invokeCatchStatus(F&& fn, Args&&... args) noexcept {
+    try {
+        std::invoke(fn, std::forward<Args>(args)...);
+        return UA_STATUSCODE_GOOD;
+    } catch (const BadStatus& e) {
+        return e.code();
+    } catch (...) {
+        return UA_STATUSCODE_BADINTERNALERROR;
     }
 }
 

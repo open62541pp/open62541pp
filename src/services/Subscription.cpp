@@ -14,11 +14,14 @@
 
 namespace opcua::services {
 
-static void deleteSubscriptionCallback(UA_Client* client, uint32_t subId, void* subContext) {
+static void deleteSubscriptionCallback(
+    UA_Client* client, uint32_t subId, void* subContext
+) noexcept {
     if (subContext != nullptr) {
         auto* subscription = static_cast<ClientContext::Subscription*>(subContext);
-        if (subscription->deleteCallback) {
-            subscription->deleteCallback(subId);
+        auto& callback = subscription->deleteCallback;
+        if (callback) {
+            detail::invokeCatchIgnore([&] { callback(subId); });
         }
     }
     ClientContext& clientContext = getContext(client);
