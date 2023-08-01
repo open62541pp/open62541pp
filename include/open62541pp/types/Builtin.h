@@ -73,6 +73,22 @@ private:
     UA_StatusCode code_{};
 };
 
+constexpr bool operator==(StatusCode lhs, UA_StatusCode rhs) noexcept {
+    return lhs.get() == rhs;
+}
+
+constexpr bool operator==(UA_StatusCode lhs, StatusCode rhs) noexcept {
+    return lhs == rhs.get();
+}
+
+constexpr bool operator!=(StatusCode lhs, UA_StatusCode rhs) noexcept {
+    return !(lhs == rhs);
+}
+
+constexpr bool operator!=(UA_StatusCode lhs, StatusCode rhs) noexcept {
+    return !(lhs == rhs);
+}
+
 /**
  * UA_String wrapper class.
  * @ingroup TypeWrapper
