@@ -31,6 +31,7 @@ TEST_CASE("StatusCode") {
         CHECK_NOTHROW(code.throwIfBad());
     }
 
+#ifdef UA_STATUSCODE_UNCERTAIN
     SUBCASE("Uncertain") {
         StatusCode code(UA_STATUSCODE_UNCERTAIN);
         CHECK(code == UA_STATUSCODE_UNCERTAIN);
@@ -41,6 +42,7 @@ TEST_CASE("StatusCode") {
         CHECK(!code.isBad());
         CHECK_NOTHROW(code.throwIfBad());
     }
+#endif
 
     SUBCASE("Bad") {
         StatusCode code(UA_STATUSCODE_BADTIMEOUT);
