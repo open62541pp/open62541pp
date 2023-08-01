@@ -7,10 +7,71 @@
 #include <string_view>
 #include <vector>
 
+#include "open62541pp/ErrorHandling.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/open62541.h"
 
 namespace opcua {
+
+/**
+ * UA_StatusCode wrapper class.
+ * This type is not derived from TypeWrapper. @ref UA_StatusCode is just an alias for `uint32_t`.
+ * StatusCode can be used interchangeably with @ref UA_StatusCode due to implicit conversions
+ * (without any overhead) but provides some methods to simplify the handling with status codes.
+ * @see statuscodes.h
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.39
+ * @ingroup TypeWrapper
+ */
+class StatusCode {
+public:
+    /// Create a StatusCode with the default status code `UA_STATUSCODE_GOOD`.
+    constexpr StatusCode() noexcept = default;
+
+    constexpr StatusCode(UA_StatusCode code) noexcept  // NOLINT, implicit wanted
+        : code_(code) {}
+
+    /// Implicit conversion to UA_StatusCode.
+    constexpr operator UA_StatusCode() noexcept {  // NOLINT, implicit wanted
+        return code_;
+    }
+
+    /// Explicitly get underlying UA_StatusCode.
+    constexpr UA_StatusCode get() const noexcept {
+        return code_;
+    }
+
+    /// Get human-readable name of the StatusCode.
+    /// This feature might be disabled to create a smaller binary with the
+    /// `UA_ENABLE_STATUSCODE_DESCRIPTIONS` build-flag. Then the function returns an empty string
+    /// for every StatusCode.
+    std::string_view name() const noexcept {
+        return {UA_StatusCode_name(code_)};
+    }
+
+    /// Check if the status code is good.
+    constexpr bool isGood() const noexcept {
+        return detail::isGoodStatus(code_);
+    }
+
+    /// Check if the status code is uncertain.
+    constexpr bool isUncertain() const noexcept {
+        return detail::isUncertainStatus(code_);
+    }
+
+    /// Check if the status code is bad.
+    constexpr bool isBad() const noexcept {
+        return detail::isBadStatus(code_);
+    }
+
+    /// Throw a BadStatus exception if the status code is bad.
+    /// @exception BadStatus
+    void throwIfBad() const {
+        detail::throwOnBadStatus(code_);
+    }
+
+private:
+    UA_StatusCode code_{};
+};
 
 /**
  * UA_String wrapper class.
