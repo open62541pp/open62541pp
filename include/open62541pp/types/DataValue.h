@@ -41,11 +41,6 @@ public:
     template <typename... Args>
     static DataValue fromArray(Args&&... args);
 
-    /// Get value as pointer (might be `nullptr` if not set).
-    Variant* getValuePtr() noexcept;
-    /// Get value as pointer (might be `nullptr` if not set).
-    const Variant* getValuePtr() const noexcept;
-
     bool hasValue() const noexcept;
     bool hasSourceTimestamp() const noexcept;
     bool hasServerTimestamp() const noexcept;
