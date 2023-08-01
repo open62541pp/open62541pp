@@ -20,10 +20,10 @@ constexpr const UA_DataType& guessDataType() {
     using ValueType = typename detail::UnqualifiedT<T>;
     static_assert(
         TypeConverter<ValueType>::ValidTypes::size() == 1,
-        "Ambiguous member type, please specify data type manually"
+        "Ambiguous data type, please specify data type manually"
     );
     constexpr auto typeIndex = TypeConverter<ValueType>::ValidTypes::toArray().at(0);
-    return *detail::getUaDataType(typeIndex);
+    return detail::getUaDataType(typeIndex);
 }
 
 template <auto memberPtr>
