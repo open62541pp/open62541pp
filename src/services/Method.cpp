@@ -58,7 +58,7 @@ std::vector<Variant> call(
         &output
     );
     std::vector<Variant> result(output, output + outputSize);  // NOLINT
-    UA_Array_delete(output, outputSize, detail::getUaDataType(UA_TYPES_VARIANT));
+    UA_Array_delete(output, outputSize, &detail::getUaDataType(UA_TYPES_VARIANT));
     detail::throwOnBadStatus(status);
     return result;
 }

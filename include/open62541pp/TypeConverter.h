@@ -165,7 +165,7 @@ template <typename T, typename NativeType = typename TypeConverter<T>::NativeTyp
 template <typename TNative, TypeIndex typeIndex = guessTypeIndex<TNative>()>
 [[nodiscard]] TNative* allocNative() {
     assertTypeCombination<TNative, typeIndex>();
-    auto* result = static_cast<TNative*>(UA_new(getUaDataType<typeIndex>()));
+    auto* result = static_cast<TNative*>(UA_new(&getUaDataType<typeIndex>()));
     if (result == nullptr) {
         throw std::bad_alloc();
     }
@@ -186,7 +186,7 @@ template <typename T, TypeIndex typeIndex = guessTypeIndex<T>()>
 template <typename TNative, TypeIndex typeIndex = guessTypeIndex<TNative>()>
 [[nodiscard]] auto* allocNativeArray(size_t size) {
     assertTypeCombination<TNative, typeIndex>();
-    auto* result = static_cast<TNative*>(UA_Array_new(size, getUaDataType<typeIndex>()));
+    auto* result = static_cast<TNative*>(UA_Array_new(size, &getUaDataType<typeIndex>()));
     if (result == nullptr) {
         throw std::bad_alloc();
     }
@@ -234,9 +234,9 @@ struct TypeConverterNative {
             // just take first type -> underlying memory layout of all types should be the same
             constexpr auto typeIndexGuess = ValidTypes::toArray().at(0);
             // clear first
-            UA_clear(&dst, getUaDataType<typeIndexGuess>());
+            UA_clear(&dst, &getUaDataType<typeIndexGuess>());
             // deep copy
-            const auto status = UA_copy(&src, &dst, getUaDataType<typeIndexGuess>());
+            const auto status = UA_copy(&src, &dst, &getUaDataType<typeIndexGuess>());
             throwOnBadStatus(status);
         }
     }
@@ -322,7 +322,7 @@ struct TypeConverter<std::string> {
     }
 
     static void toNative(const ValueType& src, NativeType& dst) {
-        UA_clear(&dst, detail::getUaDataType<UA_TYPES_STRING>());
+        UA_clear(&dst, &detail::getUaDataType<UA_TYPES_STRING>());
         dst = detail::allocUaString(src);
     }
 };

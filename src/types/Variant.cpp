@@ -22,11 +22,11 @@ bool Variant::isType(const UA_DataType* type) const noexcept {
 }
 
 bool Variant::isType(Type type) const noexcept {
-    return getDataType() == detail::getUaDataType(type);
+    return getDataType() == &detail::getUaDataType(type);
 }
 
 bool Variant::isType(const NodeId& id) const noexcept {
-    return isType(detail::getUaDataType(id));
+    return getDataType() == detail::findUaDataType(id);
 }
 
 const UA_DataType* Variant::getDataType() const noexcept {

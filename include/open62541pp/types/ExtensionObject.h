@@ -118,7 +118,7 @@ constexpr bool isAssignableToExtensionObject() {
 template <typename T, TypeIndex typeIndex>
 T* ExtensionObject::getDecodedData() noexcept {
     detail::assertTypeCombination<T, typeIndex>();
-    if (getDecodedDataType() == detail::getUaDataType(typeIndex)) {
+    if (getDecodedDataType() == &detail::getUaDataType(typeIndex)) {
         return static_cast<T*>(getDecodedData());
     }
     return nullptr;
@@ -132,9 +132,9 @@ ExtensionObject ExtensionObject::fromDecoded(T& data) noexcept {
         "Template type must be convertible to native type to assign data without copy"
     );
     if constexpr (detail::IsTypeWrapper<T>::value) {
-        return fromDecoded(data.handle(), detail::getUaDataType<typeIndex>());
+        return fromDecoded(data.handle(), &detail::getUaDataType<typeIndex>());
     } else {
-        return fromDecoded(&data, detail::getUaDataType<typeIndex>());
+        return fromDecoded(&data, &detail::getUaDataType<typeIndex>());
     }
 }
 
@@ -142,9 +142,9 @@ template <typename T, TypeIndex typeIndex>
 ExtensionObject ExtensionObject::fromDecodedCopy(const T& data) {
     detail::assertTypeCombination<T, typeIndex>();
     if constexpr (detail::IsTypeWrapper<T>::value) {
-        return fromDecodedCopy(data.handle(), detail::getUaDataType<typeIndex>());
+        return fromDecodedCopy(data.handle(), &detail::getUaDataType<typeIndex>());
     } else {
-        return fromDecodedCopy(&data, detail::getUaDataType<typeIndex>());
+        return fromDecodedCopy(&data, &detail::getUaDataType<typeIndex>());
     }
 }
 

@@ -148,7 +148,7 @@ public:
         UA_Array_delete(                                                                           \
             handle()->memberArray,                                                                 \
             handle()->memberSize,                                                                  \
-            detail::getUaDataType(detail::guessTypeIndex<Type>())                                  \
+            &detail::getUaDataType(detail::guessTypeIndex<Type>())                                 \
         );                                                                                         \
         handle()->memberArray = detail::toNativeArrayAlloc(                                        \
             memberArray.begin(), memberArray.end()                                                 \
