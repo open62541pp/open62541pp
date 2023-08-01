@@ -66,12 +66,13 @@ constexpr bool isValidTypeCombination(TypeIndexOrType typeOrTypeIndex) {
 
 template <typename T>
 constexpr bool isValidTypeCombination(const UA_DataType* dataType) {
-    if (dataType == nullptr) {
-        return false;
-    }
     for (auto typeIndex : TypeConverter<T>::ValidTypes::toArray()) {
-        // TODO: deep comparison
+        // compare pointer
         if (dataType == &UA_TYPES[typeIndex]) {  // NOLINT
+            return true;
+        }
+        // compare type ids
+        if (dataType->typeId == UA_TYPES[typeIndex].typeId) {  // NOLINT
             return true;
         }
     }
@@ -132,8 +133,8 @@ template <typename T, typename NativeType = typename TypeConverter<T>::NativeTyp
 /// Convert and copy from native type.
 /// @warning Type erased version, use with caution.
 template <typename T, typename NativeType = typename TypeConverter<T>::NativeType>
-[[nodiscard]] T fromNative(void* value, [[maybe_unused]] const UA_DataType* dataType) {
-    assert(isValidTypeCombination<T>(dataType));  // NOLINT
+[[nodiscard]] T fromNative(void* value, [[maybe_unused]] const UA_DataType& dataType) {
+    assert(isValidTypeCombination<T>(&dataType));  // NOLINT
     return fromNative<T>(static_cast<NativeType*>(value));
 }
 
@@ -155,9 +156,9 @@ template <typename T, typename NativeType = typename TypeConverter<T>::NativeTyp
 /// @warning Type erased version, use with caution.
 template <typename T, typename NativeType = typename TypeConverter<T>::NativeType>
 [[nodiscard]] std::vector<T> fromNativeArray(
-    void* array, size_t size, [[maybe_unused]] const UA_DataType* dataType
+    void* array, size_t size, [[maybe_unused]] const UA_DataType& dataType
 ) {
-    assert(isValidTypeCombination<T>(dataType));  // NOLINT
+    assert(isValidTypeCombination<T>(&dataType));  // NOLINT
     return fromNativeArray<T>(static_cast<NativeType*>(array), size);
 }
 

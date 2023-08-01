@@ -53,7 +53,7 @@ public:
     /// @param data Decoded data
     /// @param type Data type of the decoded data
     /// @warning Type erased version, use with caution.
-    static ExtensionObject fromDecoded(void* data, const UA_DataType* type) noexcept;
+    static ExtensionObject fromDecoded(void* data, const UA_DataType& type) noexcept;
 
     /// Create an ExtensionObject from a decoded object (copy).
     /// Set the "decoded" data to a copy of the given object.
@@ -65,7 +65,7 @@ public:
     /// @param data Decoded data
     /// @param type Data type of the decoded data
     /// @warning Type erased version, use with caution.
-    static ExtensionObject fromDecodedCopy(const void* data, const UA_DataType* type);
+    static ExtensionObject fromDecodedCopy(const void* data, const UA_DataType& type);
 
     bool isEmpty() const noexcept;
     /// Check if the ExtensionObject is encoded (usually if the data type is unknown).
@@ -132,9 +132,9 @@ ExtensionObject ExtensionObject::fromDecoded(T& data) noexcept {
         "Template type must be convertible to native type to assign data without copy"
     );
     if constexpr (detail::IsTypeWrapper<T>::value) {
-        return fromDecoded(data.handle(), &detail::getUaDataType<typeIndex>());
+        return fromDecoded(data.handle(), detail::getUaDataType<typeIndex>());
     } else {
-        return fromDecoded(&data, &detail::getUaDataType<typeIndex>());
+        return fromDecoded(&data, detail::getUaDataType<typeIndex>());
     }
 }
 
@@ -142,9 +142,9 @@ template <typename T, TypeIndex typeIndex>
 ExtensionObject ExtensionObject::fromDecodedCopy(const T& data) {
     detail::assertTypeCombination<T, typeIndex>();
     if constexpr (detail::IsTypeWrapper<T>::value) {
-        return fromDecodedCopy(data.handle(), &detail::getUaDataType<typeIndex>());
+        return fromDecodedCopy(data.handle(), detail::getUaDataType<typeIndex>());
     } else {
-        return fromDecodedCopy(&data, &detail::getUaDataType<typeIndex>());
+        return fromDecodedCopy(&data, detail::getUaDataType<typeIndex>());
     }
 }
 

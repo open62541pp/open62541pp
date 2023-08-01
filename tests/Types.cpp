@@ -746,7 +746,7 @@ TEST_CASE("ExtensionObject") {
 
     SUBCASE("fromDecoded (type erased variant)") {
         int32_t value = 11;
-        const auto obj = ExtensionObject::fromDecoded(&value, &UA_TYPES[UA_TYPES_INT32]);
+        const auto obj = ExtensionObject::fromDecoded(&value, UA_TYPES[UA_TYPES_INT32]);
         CHECK(obj.getEncoding() == ExtensionObjectEncoding::DecodedNoDelete);
         CHECK(obj.isDecoded());
         CHECK(obj.getDecodedDataType() == &UA_TYPES[UA_TYPES_INT32]);
