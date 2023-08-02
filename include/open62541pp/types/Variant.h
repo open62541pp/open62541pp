@@ -49,7 +49,7 @@ public:
     [[nodiscard]] static Variant fromArray(T* array, size_t size);
 
     /// Create Variant from array with custom data type.
-    template <typename T, Type type = detail::guessType<T>()>
+    template <typename T>
     [[nodiscard]] static Variant fromArray(T* array, size_t size, const UA_DataType& dataType);
 
     /// Create Variant from std::vector (no copy if assignable without conversion).
@@ -63,7 +63,7 @@ public:
     [[nodiscard]] static Variant fromArray(const T* array, size_t size);
 
     /// Create Variant from array with custom data type (copy).
-    template <typename T, Type type = detail::guessType<T>()>
+    template <typename T>
     [[nodiscard]] static Variant fromArray(
         const T* array, size_t size, const UA_DataType& dataType
     );
@@ -72,6 +72,14 @@ public:
     template <typename T, Type type = detail::guessType<T>()>
     [[nodiscard]] static Variant fromArray(const std::vector<T>& array) {
         return fromArray<T, type>(array.data(), array.size());
+    }
+
+    /// Create Variant from std::vector with custom data type (copy).
+    template <typename T>
+    [[nodiscard]] static Variant fromArray(
+        const std::vector<T>& array, const UA_DataType& dataType
+    ) {
+        return fromArray<T>(array.data(), array.size(), dataType);
     }
 
     /// Create Variant from range of elements (copy).
@@ -297,7 +305,7 @@ Variant Variant::fromArray(T* array, size_t size) {
     return variant;
 }
 
-template <typename T, Type type>
+template <typename T>
 Variant Variant::fromArray(T* array, size_t size, const UA_DataType& dataType) {
     Variant variant;
     variant.setArray<T>(array, size, dataType);
@@ -311,7 +319,7 @@ Variant Variant::fromArray(const T* array, size_t size) {
     return variant;
 }
 
-template <typename T, Type type>
+template <typename T>
 Variant Variant::fromArray(const T* array, size_t size, const UA_DataType& dataType) {
     Variant variant;
     variant.setArrayCopy<T>(array, size, dataType);

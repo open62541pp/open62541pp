@@ -440,8 +440,10 @@ TEST_CASE("Variant") {
             CHECK(var->data == vec.data());
         }
         SUBCASE("Assign with custom data type") {
-            std::vector<double> vec{1.1, 2.2, 3.3};
-            const auto var = Variant::fromArray(vec.data(), vec.size(), UA_TYPES[UA_TYPES_DOUBLE]);
+            std::vector<UA_WriteValue> vec{{}, {}};
+            const auto var = Variant::fromArray(
+                vec.data(), vec.size(), UA_TYPES[UA_TYPES_WRITEVALUE]
+            );
             CHECK(var.isArray());
             CHECK(var->data == vec.data());
         }
@@ -458,8 +460,10 @@ TEST_CASE("Variant") {
             CHECK(var->data != vec.data());
         }
         SUBCASE("Copy with custom data type") {
-            const std::vector<double> vec{1.1, 2.2, 3.3};
-            const auto var = Variant::fromArray(vec.data(), vec.size(), UA_TYPES[UA_TYPES_DOUBLE]);
+            const std::vector<UA_WriteValue> vec{{}, {}};
+            const auto var = Variant::fromArray(
+                vec.data(), vec.size(), UA_TYPES[UA_TYPES_WRITEVALUE]
+            );
             CHECK(var.isArray());
             CHECK(var->data != vec.data());
         }
@@ -601,19 +605,19 @@ TEST_CASE("Variant") {
     }
 
     SUBCASE("Set/get non-builtin data types") {
-        using CustomType = UA_ApplicationDescription;
-        const auto& dt = UA_TYPES[UA_TYPES_APPLICATIONDESCRIPTION];
+        using CustomType = UA_WriteValue;
+        const auto& dt = UA_TYPES[UA_TYPES_WRITEVALUE];
 
         Variant var;
         CustomType value{};
-        value.applicationType = UA_APPLICATIONTYPE_CLIENT;
+        value.attributeId = 1;
 
         SUBCASE("Scalar") {
             var.setScalar(value, dt);
             CHECK(var.isScalar());
             CHECK(var.getDataType() == &dt);
             CHECK(var.getScalar() == &value);
-            CHECK(var.getScalar<CustomType>().applicationType == UA_APPLICATIONTYPE_CLIENT);
+            CHECK(var.getScalar<CustomType>().attributeId == 1);
         }
 
         SUBCASE("Scalar (copy)") {
@@ -621,11 +625,10 @@ TEST_CASE("Variant") {
             CHECK(var.isScalar());
             CHECK(var.getDataType() == &dt);
             CHECK(var.getScalar() != &value);
-            CHECK(var.getScalar<CustomType>().applicationType == UA_APPLICATIONTYPE_CLIENT);
+            CHECK(var.getScalar<CustomType>().attributeId == 1);
         }
 
         std::vector<CustomType> array(3);
-        array.at(0).applicationType = UA_APPLICATIONTYPE_CLIENT;
 
         SUBCASE("Array") {
             var.setArray(array.data(), array.size(), dt);
