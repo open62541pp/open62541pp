@@ -1,3 +1,5 @@
+#pragma once
+
 #include <vector>
 
 #include "open62541pp/Config.h"
