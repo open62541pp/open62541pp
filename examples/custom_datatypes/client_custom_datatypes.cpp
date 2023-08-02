@@ -34,19 +34,20 @@ int main() {
     client.getNode({1, "PointVec"}).readValue(variant);
     if (variant.isType(dataTypePoint)) {
         std::cout << "PointVec decoded as Point array\n";
-        const auto* p = static_cast<Point*>(variant.getArray());
+        const auto* arr = static_cast<Point*>(variant.getArray());
         for (size_t i = 0; i < variant.getArrayLength(); ++i) {
+            const auto& p = arr[i];  // NOLINT
             std::cout << "PointVec[" << i << "]:\n";
-            std::cout << "- x = " << p[i].x << "\n";  // NOLINT
-            std::cout << "- y = " << p[i].y << "\n";  // NOLINT
-            std::cout << "- z = " << p[i].z << "\n";  // NOLINT
+            std::cout << "- x = " << p.x << "\n";
+            std::cout << "- y = " << p.y << "\n";
+            std::cout << "- z = " << p.z << "\n";
         }
     }
     if (variant.isType(opcua::Type::ExtensionObject)) {
         std::cout << "PointVec decoded as ExtensionObject array\n";
-        auto* ext = variant.getArray<opcua::ExtensionObject>();
+        auto* arrExt = variant.getArray<opcua::ExtensionObject>();
         for (size_t i = 0; i < variant.getArrayLength(); ++i) {
-            const auto* p = static_cast<Point*>(ext[i].getDecodedData());  // NOLINT
+            const auto* p = static_cast<Point*>(arrExt[i].getDecodedData());  // NOLINT
             std::cout << "PointVec[" << i << "]:\n";
             std::cout << "- x = " << p->x << "\n";
             std::cout << "- y = " << p->y << "\n";
