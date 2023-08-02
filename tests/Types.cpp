@@ -632,6 +632,7 @@ TEST_CASE("Variant") {
 
         SUBCASE("Array") {
             var.setArray(array.data(), array.size(), dt);
+            var.setArray(array, dt);
             CHECK(var.isArray());
             CHECK(var.getDataType() == &dt);
             CHECK(var.getArrayLength() == 3);
@@ -641,6 +642,7 @@ TEST_CASE("Variant") {
 
         SUBCASE("Array (copy)") {
             var.setArrayCopy(array.data(), array.size(), dt);
+            var.setArrayCopy(array, dt);
             CHECK(var.isArray());
             CHECK(var.getDataType() == &dt);
             CHECK(var.getArrayLength() == 3);
