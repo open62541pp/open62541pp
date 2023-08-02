@@ -31,6 +31,29 @@ int main() {
         std::cout << "- z = " << p->z << "\n";
     }
 
+    client.getNode({1, "PointVec"}).readValue(variant);
+    if (variant.isType(dataTypePoint)) {
+        std::cout << "PointVec decoded as Point array\n";
+        const auto* p = static_cast<Point*>(variant.getArray());
+        for (size_t i = 0; i < variant.getArrayLength(); ++i) {
+            std::cout << "PointVec[" << i << "]:\n";
+            std::cout << "- x = " << p[i].x << "\n";  // NOLINT
+            std::cout << "- y = " << p[i].y << "\n";  // NOLINT
+            std::cout << "- z = " << p[i].z << "\n";  // NOLINT
+        }
+    }
+    if (variant.isType(opcua::Type::ExtensionObject)) {
+        std::cout << "PointVec decoded as ExtensionObject array\n";
+        auto* ext = variant.getArray<opcua::ExtensionObject>();
+        for (size_t i = 0; i < variant.getArrayLength(); ++i) {
+            const auto* p = static_cast<Point*>(ext[i].getDecodedData());  // NOLINT
+            std::cout << "PointVec[" << i << "]:\n";
+            std::cout << "- x = " << p->x << "\n";
+            std::cout << "- y = " << p->y << "\n";
+            std::cout << "- z = " << p->z << "\n";
+        }
+    }
+
     client.getNode({1, "Measurements"}).readValue(variant);
     if (variant.isType(dataTypeMeasurements)) {
         const auto* m = static_cast<Measurements*>(variant.getScalar());
@@ -47,7 +70,7 @@ int main() {
     };
     if (variant.isType(dataTypeOpt)) {
         const auto* opt = static_cast<Opt*>(variant.getScalar());
-        std::cout << "Point:\n";
+        std::cout << "Opt:\n";
         std::cout << "- a = " << opt->a << "\n";
         std::cout << "- b = " << formatOptional(opt->b) << "\n";
         std::cout << "- c = " << formatOptional(opt->c) << "\n";

@@ -28,7 +28,7 @@ int main() {
         "PointType",
         opcua::VariableTypeAttributes{}
             .setDataType(dataTypePoint.getTypeId())
-            .setValueRank(opcua::ValueRank::Scalar)
+            .setValueRank(opcua::ValueRank::ScalarOrOneDimension)
             .setValueScalar(Point{1, 2, 3}, dataTypePoint)
     );
     auto nodeVariableTypeMeasurement = nodeBaseDataVariableType.addVariableType(
@@ -67,6 +67,18 @@ int main() {
             .setDataType(dataTypePoint.getTypeId())
             .setValueRank(opcua::ValueRank::Scalar)
             .setValueScalar(point, dataTypePoint),
+        nodeVariableTypePoint.getNodeId()
+    );
+
+    const std::vector<Point> pointVec{{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}};
+    nodeObjects.addVariable(
+        {1, "PointVec"},
+        "PointVec",
+        opcua::VariableAttributes{}
+            .setDataType(dataTypePoint.getTypeId())
+            .setArrayDimensions({0})  // single dimension but unknown in size
+            .setValueRank(opcua::ValueRank::OneDimension)
+            .setValueArray(pointVec, dataTypePoint),
         nodeVariableTypePoint.getNodeId()
     );
 
