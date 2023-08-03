@@ -20,7 +20,7 @@ namespace opcua {
 class DataValue : public TypeWrapper<UA_DataValue, UA_TYPES_DATAVALUE> {
 public:
     // NOLINTNEXTLINE, false positive?
-    using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
+    using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
 
     DataValue(
         const Variant& value,

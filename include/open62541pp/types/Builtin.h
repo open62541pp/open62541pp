@@ -96,7 +96,7 @@ constexpr bool operator!=(UA_StatusCode lhs, StatusCode rhs) noexcept {
 class String : public TypeWrapper<UA_String, UA_TYPES_STRING> {
 public:
     // NOLINTNEXTLINE, false positive?
-    using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
+    using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
 
     explicit String(std::string_view str);
 
@@ -117,7 +117,7 @@ bool operator!=(std::string_view lhs, const String& rhs) noexcept;
 class Guid : public TypeWrapper<UA_Guid, UA_TYPES_GUID> {
 public:
     // NOLINTNEXTLINE, false positive?
-    using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
+    using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
 
     Guid(uint32_t data1, uint16_t data2, uint16_t data3, std::array<uint8_t, 8> data4);
 
@@ -133,7 +133,7 @@ public:
 class ByteString : public TypeWrapper<UA_ByteString, UA_TYPES_BYTESTRING> {
 public:
     // NOLINTNEXTLINE, false positive?
-    using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
+    using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
 
     explicit ByteString(std::string_view str);
     explicit ByteString(const std::vector<uint8_t>& bytes);
@@ -169,7 +169,7 @@ bool operator!=(std::string_view lhs, const ByteString& rhs) noexcept;
 class XmlElement : public TypeWrapper<UA_XmlElement, UA_TYPES_XMLELEMENT> {
 public:
     // NOLINTNEXTLINE, false positive?
-    using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
+    using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
 
     explicit XmlElement(std::string_view str);
 
@@ -185,7 +185,7 @@ public:
 class QualifiedName : public TypeWrapper<UA_QualifiedName, UA_TYPES_QUALIFIEDNAME> {
 public:
     // NOLINTNEXTLINE, false positive?
-    using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
+    using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
 
     QualifiedName(uint16_t namespaceIndex, std::string_view name);
 
@@ -206,7 +206,7 @@ public:
 class LocalizedText : public TypeWrapper<UA_LocalizedText, UA_TYPES_LOCALIZEDTEXT> {
 public:
     // NOLINTNEXTLINE, false positive?
-    using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
+    using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
 
     LocalizedText(std::string_view locale, std::string_view text, bool assertLocaleFormat = true);
 

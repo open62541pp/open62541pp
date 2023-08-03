@@ -4,11 +4,11 @@ int main() {
     opcua::Server server;
 
     // Create object types `MammalType` and `DogType`:
-    // (OT) BaseObjectType
-    // + (OT) MammalType
-    //   + (V) Age
-    //   + (OT) DogType
-    //      + (V) Name
+    // (ObjectType) BaseObjectType
+    // └─ (ObjectType) MammalType
+    //    ├─ (Variable) Age
+    //    └─ (ObjectType) DogType
+    //       └─ (Variable) Name
     auto nodeBaseObjectType = server.getNode(opcua::ObjectTypeId::BaseObjectType);
     auto nodeMammalType = nodeBaseObjectType.addObjectType(
         {1, 10000},
@@ -48,11 +48,11 @@ int main() {
         )
         .addModellingRule(opcua::ModellingRule::Mandatory);  // create on new instance
 
-    // Instatiate a dog named Bello:
-    // (O) Objects
-    //   + (O) Bello <DogType>
-    //     + (V) Age
-    //     + (V) Name
+    // Instantiate a dog named Bello:
+    // (Object) Objects
+    // └─ (Object) Bello <DogType>
+    //    ├─ (Variable) Age
+    //    └─ (Variable) Name
     auto nodeBello = server.getObjectsNode().addObject(
         {1, 20000},
         "Bello",

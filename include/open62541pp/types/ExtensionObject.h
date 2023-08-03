@@ -40,7 +40,7 @@ enum class ExtensionObjectEncoding {
 class ExtensionObject : public TypeWrapper<UA_ExtensionObject, UA_TYPES_EXTENSIONOBJECT> {
 public:
     // NOLINTNEXTLINE, false positive?
-    using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
+    using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
 
     /// Create an ExtensionObject from a decoded object (assign).
     /// The data will *not* be deleted when the ExtensionObject is destructed.

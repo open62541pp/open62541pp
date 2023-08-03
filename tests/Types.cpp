@@ -401,7 +401,7 @@ TEST_CASE("Variant") {
             CHECK(var.isScalar());
             CHECK(var->data == &value);
         }
-        SUBCASE("Assign with custom datatye") {
+        SUBCASE("Assign with custom datatype") {
             double value = 11.11;
             const auto var = Variant::fromScalar(value, UA_TYPES[UA_TYPES_DOUBLE]);
             CHECK(var.isScalar());
@@ -424,7 +424,7 @@ TEST_CASE("Variant") {
             CHECK(var.isScalar());
             CHECK(var->data != &value);
         }
-        SUBCASE("Copy with custom data tye") {
+        SUBCASE("Copy with custom data type") {
             const double value = 11.11;
             const auto var = Variant::fromScalar(value, UA_TYPES[UA_TYPES_DOUBLE]);
             CHECK(var.isScalar());
@@ -652,7 +652,7 @@ TEST_CASE("DataValue") {
         CHECK(DataValue::fromScalar(5).getValue().getScalar<int>() == 5);
     }
 
-    SUBCASE("Create from aray") {
+    SUBCASE("Create from array") {
         std::vector<int> vec{1, 2, 3};
         CHECK(DataValue::fromArray(vec).getValue().getArrayCopy<int>() == vec);
     }

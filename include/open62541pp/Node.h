@@ -25,7 +25,7 @@ namespace opcua {
  * The Node API is just a more convenient way of using the free functions in the `services`
  * namespace.
  *
- * Node objects are usefull as-is but they do not expose the entire OPC UA protocol. You can get
+ * Node objects are useful as-is but they do not expose the entire OPC UA protocol. You can get
  * access to the associated NodeId instance with the getNodeId() method and apply the native
  * open62541 functions or the free functions in the `services` namespace.
  *
