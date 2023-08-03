@@ -35,6 +35,10 @@ TEST_CASE("Node") {
             CHECK_THROWS(Node(serverOrClient, NodeId(0, "DoesNotExist"), true));
         }
 
+        SUBCASE("getConnection") {
+            CHECK(rootNode.getConnection() == serverOrClient);
+        }
+
         SUBCASE("Node class of default nodes") {
             CHECK(serverOrClient.getRootNode().readNodeClass() == NodeClass::Object);
             CHECK(serverOrClient.getObjectsNode().readNodeClass() == NodeClass::Object);

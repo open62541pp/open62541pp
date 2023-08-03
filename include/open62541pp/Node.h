@@ -36,8 +36,8 @@ class Node {
 public:
     /// Create a Node object.
     /// @exception BadStatus (BadNodeIdUnknown) If `checkExists` enabled and `id` not found
-    Node(ServerOrClient connection, NodeId id, bool checkExists = true)
-        : connection_(std::move(connection)),
+    Node(ServerOrClient& connection, NodeId id, bool checkExists = true)
+        : connection_(connection),
           nodeId_(std::move(id)) {
         if (checkExists) {
             services::readNodeId(connection_, nodeId_);
@@ -505,7 +505,7 @@ public:
     }
 
 private:
-    ServerOrClient connection_;
+    ServerOrClient& connection_;
     NodeId nodeId_;
 };
 
