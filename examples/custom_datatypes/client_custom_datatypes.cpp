@@ -32,19 +32,13 @@ int main() {
     }
 
     client.getNode({1, "PointVec"}).readValue(variant);
-    if (variant.isType(dataTypePoint)) {
-        std::cout << "PointVec decoded as Point array\n";
-        const auto* arr = static_cast<Point*>(variant.getArray());
-        for (size_t i = 0; i < variant.getArrayLength(); ++i) {
-            const auto& p = arr[i];  // NOLINT
-            std::cout << "PointVec[" << i << "]:\n";
-            std::cout << "- x = " << p.x << "\n";
-            std::cout << "- y = " << p.y << "\n";
-            std::cout << "- z = " << p.z << "\n";
-        }
-    }
+    // Variants store non-builtin data types as ExtensionObjects. If the data type is known to the
+    // client/server, open62541 unwraps scalar objects transparently in the encoding layer:
+    // https://www.open62541.org/doc/master/types.html#variant
+    // Arrays can not be unwrapped easily, because the array is an array of ExtensionObjects.
+    // The array of unwrapped objects isn't available contiguously in memory and open62541 won't
+    // transparently unwrap the array. So we have to do the unwrapping ourselves:
     if (variant.isType(opcua::Type::ExtensionObject)) {
-        std::cout << "PointVec decoded as ExtensionObject array\n";
         auto* arrExt = variant.getArray<opcua::ExtensionObject>();
         for (size_t i = 0; i < variant.getArrayLength(); ++i) {
             const auto* p = static_cast<Point*>(arrExt[i].getDecodedData());  // NOLINT
