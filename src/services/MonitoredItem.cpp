@@ -28,13 +28,16 @@ static void dataChangeNotificationCallback(
     [[maybe_unused]] void* nodeContext,
     [[maybe_unused]] uint32_t attributeId,
     const UA_DataValue* value
-) {
+) noexcept {
     if (monitoredItemContext == nullptr) {
         return;
     }
     auto* monitoredItem = static_cast<ServerContext::MonitoredItem*>(monitoredItemContext);
-    if (monitoredItem->dataChangeCallback) {
-        monitoredItem->dataChangeCallback(0U, monitoredItemId, asWrapper<DataValue>(*value));
+    auto& callback = monitoredItem->dataChangeCallback;
+    if (callback) {
+        detail::invokeCatchIgnore([&] {
+            callback(0U, monitoredItemId, asWrapper<DataValue>(*value));
+        });
     }
 }
 
@@ -45,13 +48,14 @@ static void dataChangeNotificationCallback(
     uint32_t monId,
     void* monContext,
     UA_DataValue* value
-) {
+) noexcept {
     if (monContext == nullptr) {
         return;
     }
     auto* monitoredItem = static_cast<ClientContext::MonitoredItem*>(monContext);
-    if (monitoredItem->dataChangeCallback) {
-        monitoredItem->dataChangeCallback(subId, monId, asWrapper<DataValue>(*value));
+    auto& callback = monitoredItem->dataChangeCallback;
+    if (callback) {
+        detail::invokeCatchIgnore([&] { callback(subId, monId, asWrapper<DataValue>(*value)); });
     }
 }
 
@@ -63,14 +67,17 @@ static void eventNotificationCallback(
     void* monContext,
     size_t nEventFields,
     UA_Variant* eventFields
-) {
+) noexcept {
     if (monContext == nullptr) {
         return;
     }
     auto* monitoredItem = static_cast<ClientContext::MonitoredItem*>(monContext);
-    if (monitoredItem->eventCallback) {
-        std::vector<Variant> eventFieldsVec(eventFields, eventFields + nEventFields);  // NOLINT
-        monitoredItem->eventCallback(subId, monId, eventFieldsVec);
+    auto& callback = monitoredItem->eventCallback;
+    if (callback) {
+        detail::invokeCatchIgnore([&] {
+            std::vector<Variant> eventFieldsVec(eventFields, eventFields + nEventFields);  // NOLINT
+            callback(subId, monId, eventFieldsVec);
+        });
     }
 }
 
@@ -80,7 +87,7 @@ static void deleteMonitoredItemCallback(
     [[maybe_unused]] void* subContext,
     uint32_t monId,
     void* monContext
-) {
+) noexcept {
     if (monContext != nullptr) {
         auto* monitoredItem = static_cast<ClientContext::MonitoredItem*>(monContext);
         if (monitoredItem->deleteCallback) {
@@ -91,7 +98,7 @@ static void deleteMonitoredItemCallback(
     clientContext.monitoredItems.erase({subId, monId});
 }
 
-static void copyMonitoringParametersToNative(
+inline static void copyMonitoringParametersToNative(
     const MonitoringParameters& parameters, UA_MonitoringParameters& native
 ) {
     native.samplingInterval = parameters.samplingInterval;
@@ -101,7 +108,7 @@ static void copyMonitoringParametersToNative(
 }
 
 template <typename T>
-static void reviseMonitoringParameters(MonitoringParameters& parameters, const T& result) {
+inline static void reviseMonitoringParameters(MonitoringParameters& parameters, const T& result) {
     // response type may be UA_MonitoredItemCreateResult or UA_MonitoredItemModifyResult
     parameters.samplingInterval = result->revisedSamplingInterval;
     parameters.queueSize = result->revisedQueueSize;

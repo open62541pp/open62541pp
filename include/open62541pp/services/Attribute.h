@@ -137,7 +137,7 @@ inline uint32_t readWriteMask(T& serverOrClient, const NodeId& id) {
  * Read the `UserWriteMask` attribute of a node.
  *
  * @copydetails readWriteMask
- * In constrast to the write mask, the user write mask is taking access rights into account.
+ * In contrast to the write mask, the user write mask is taking access rights into account.
  * @ingroup Attribute
  */
 template <typename T>
@@ -252,7 +252,7 @@ inline uint8_t readAccessLevel(T& serverOrClient, const NodeId& id) {
  * Read the `UserAccessLevel` attribute a variable node.
  *
  * @copydetails readAccessLevel
- * In constrast to the access level, the user acceess level is taking access rights into account.
+ * In contrast to the access level, the user access level is taking access rights into account.
  * @ingroup Attribute
  */
 template <typename T>
@@ -376,7 +376,7 @@ inline void writeValue(T& serverOrClient, const NodeId& id, const Variant& value
  */
 template <typename T>
 inline void writeDataType(T& serverOrClient, const NodeId& id, Type type) {
-    const auto typeId = ::opcua::detail::getUaDataType(type)->typeId;
+    const auto typeId = ::opcua::detail::getUaDataType(type).typeId;
     writeAttribute(serverOrClient, id, AttributeId::DataType, DataValue::fromScalar(typeId));
 }
 

@@ -6,11 +6,13 @@ int main() {
     opcua::Server server;
 
     opcua::NodeId currentTimeId(1, "CurrentTime");
-    auto currentTimeNode = server.getObjectsNode().addVariable(currentTimeId, "CurrentTime");
-    currentTimeNode.writeDataType(opcua::Type::DateTime);
-    currentTimeNode.writeDisplayName({"en-US", "Current time"});
-    currentTimeNode.writeDescription({"en-US", "Current time"});
-    currentTimeNode.writeScalar(opcua::DateTime::now());
+    auto currentTimeNode =
+        server.getObjectsNode()
+            .addVariable(currentTimeId, "CurrentTime")
+            .writeDataType(opcua::Type::DateTime)
+            .writeDisplayName({"en-US", "Current time"})
+            .writeDescription({"en-US", "Current time"})
+            .writeScalar(opcua::DateTime::now());
 
     // set variable value callback to write current time before every read operation
     opcua::ValueCallback valueCallback;

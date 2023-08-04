@@ -1,3 +1,5 @@
+#pragma once
+
 #include <vector>
 
 #include "open62541pp/Config.h"
@@ -24,7 +26,7 @@ struct CreateCertificateResult {
  *
  * It is recommended to store the generated certificate on disk for reuse, so the application can be
  * recognized across several executions, e.g. with ByteString::toFile, ByteString::fromFile.
- * 
+ *
  * @note Only available with open62541 >= v1.3 and OpenSSL/LibreSSL
  *
  * @param subject Elements for the subject,

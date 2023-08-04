@@ -30,7 +30,7 @@ namespace opcua::services {
  * @param serverOrClient Instance of type Server or Client
  * @param objectId NodeId of the object on which the method is invoked
  * @param methodId NodeId of the method to invoke
- * @param inputArguments Input argumet values
+ * @param inputArguments Input argument values
  * @exception BadStatus
  * @exception BadStatus (BadInvalidArgument) If input arguments don't match expected variant types
  * @exception BadStatus (BadArgumentsMissing) If input arguments are missing

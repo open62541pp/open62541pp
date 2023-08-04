@@ -42,6 +42,8 @@
 
 ## ✍ Examples
 
+[Explore all examples in the `examples/` directory](https://github.com/open62541pp/open62541pp/tree/master/examples).
+
 ### Server
 
 <!-- [[[cog
@@ -58,13 +60,13 @@ int main() {
     opcua::Server server;
 
     // Add a variable node to the Objects node
-    auto parentNode = server.getObjectsNode();
-    auto myIntegerNode = parentNode.addVariable({1, "the.answer"}, "the answer");
+    opcua::Node parentNode = server.getObjectsNode();
+    opcua::Node myIntegerNode = parentNode.addVariable({1, "the.answer"}, "the answer");
     // Write some node attributes
-    myIntegerNode.writeDataType(opcua::Type::Int32);
-    myIntegerNode.writeDisplayName({"en-US", "the answer"});
-    myIntegerNode.writeDescription({"en-US", "the answer"});
-    myIntegerNode.writeScalar(42);
+    myIntegerNode.writeDataType(opcua::Type::Int32)
+        .writeDisplayName({"en-US", "the answer"})
+        .writeDescription({"en-US", "the answer"})
+        .writeScalar(42);
 
     server.run();
 }
@@ -89,7 +91,7 @@ int main() {
     opcua::Client client;
     client.connect("opc.tcp://localhost:4840");
 
-    auto node = client.getNode(opcua::VariableId::Server_ServerStatus_CurrentTime);
+    opcua::Node node = client.getNode(opcua::VariableId::Server_ServerStatus_CurrentTime);
     const auto dt = node.readScalar<opcua::DateTime>();
 
     std::cout << "Server date (UTC): " << dt.format("%Y-%m-%d %H:%M:%S") << std::endl;
@@ -100,6 +102,7 @@ int main() {
 ## ⇆ Type conversion
 
 Type conversion from and to native `UA_*` types are handled by the `opcua::TypeConverter` struct.
+Have a look at the [typeconversion example](https://github.com/open62541pp/open62541pp/blob/master/examples/typeconversion.cpp).
 
 Compile-time checks are used where possible:
 
@@ -115,14 +118,8 @@ var.setArrayCopy<double>({1.1, 2.2, 3.3});
 std::string str{"test"};
 var.setScalar(str);
 
-// won't compile, because the type std::string is associated with more than one variant types:
-// - opcua::Type::String
-// - opcua::Type::ByteString
-// - opcua::Type::XmlElement
-var.setScalarCopy<std::string>("test");
-
-// finally compiles
-var.setScalarCopy<std::string, opcua::Type::String>("test");
+// will compile
+var.setScalarCopy(str);
 ```
 
 You can add template specializations to add conversions for arbitrary types:
@@ -161,11 +158,11 @@ struct TypeConverter<std::string> {
 | String                   | `UA_String`          |             | `opcua::String`                   | `std::string`             |
 | DateTime                 | `UA_DateTime`        | `int64_t`   | `opcua::DateTime`                 | `std::chrono::time_point` |
 | Guid                     | `UA_Guid`            |             | `opcua::Guid`                     |                           |
-| ByteString               | `UA_ByteString`      | `UA_String` | `opcua::ByteString`               | `std::string`             |
-| XmlElement               | `UA_XmlElement`      | `UA_String` | `opcua::XmlElement`               | `std::string`             |
+| ByteString               | `UA_ByteString`      | `UA_String` | `opcua::ByteString`               |                           |
+| XmlElement               | `UA_XmlElement`      | `UA_String` | `opcua::XmlElement`               |                           |
 | NodeId                   | `UA_NodeId`          |             | `opcua::NodeId`                   |                           |
 | ExpandedNodeId           | `UA_ExpandedNodeId`  |             | `opcua::ExpandedNodeId`           |                           |
-| StatusCode               | `UA_StatusCode`      | `uint32_t`  |                                   |                           |
+| StatusCode               | `UA_StatusCode`      | `uint32_t`  | `opcua::StatusCode`               |                           |
 | QualifiedName            | `UA_QualifiedName`   |             | `opcua::QualifiedName`            |                           |
 | LocalizedText            | `UA_LocalizedText`   |             | `opcua::LocalizedText`            |                           |
 | ExtensionObjectDataValue | `UA_ExtensionObject` |             | `opcua::ExtensionObjectDataValue` |                           |

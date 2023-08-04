@@ -3,6 +3,8 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/detail/helper.h"
 
+#include "../open62541_impl.h"
+
 namespace opcua {
 
 UserTokenPolicy::UserTokenPolicy(
@@ -18,6 +20,30 @@ UserTokenPolicy::UserTokenPolicy(
     asWrapper<String>(handle()->issuerEndpointUrl) = String(issuerEndpointUrl);
     asWrapper<String>(handle()->securityPolicyUri) = String(securityPolicyUri);
 }
+
+ObjectAttributes::ObjectAttributes()
+    : TypeWrapperBase(UA_ObjectAttributes_default) {}
+
+VariableAttributes::VariableAttributes()
+    : TypeWrapperBase(UA_VariableAttributes_default) {}
+
+MethodAttributes::MethodAttributes()
+    : TypeWrapperBase(UA_MethodAttributes_default) {}
+
+ObjectTypeAttributes::ObjectTypeAttributes()
+    : TypeWrapperBase(UA_ObjectTypeAttributes_default) {}
+
+VariableTypeAttributes::VariableTypeAttributes()
+    : TypeWrapperBase(UA_VariableTypeAttributes_default) {}
+
+ReferenceTypeAttributes::ReferenceTypeAttributes()
+    : TypeWrapperBase(UA_ReferenceTypeAttributes_default) {}
+
+DataTypeAttributes::DataTypeAttributes()
+    : TypeWrapperBase(UA_DataTypeAttributes_default) {}
+
+ViewAttributes::ViewAttributes()
+    : TypeWrapperBase(UA_ViewAttributes_default) {}
 
 BrowseDescription::BrowseDescription(
     const NodeId& nodeId,
@@ -84,7 +110,7 @@ Argument::Argument(
         arrayDimensions.data(),
         arrayDimensions.size(),
         (void**)&handle()->arrayDimensions,  // NOLINT
-        detail::getUaDataType(UA_TYPES_UINT32)
+        &detail::getUaDataType(UA_TYPES_UINT32)
     );
     detail::throwOnBadStatus(status);
 }

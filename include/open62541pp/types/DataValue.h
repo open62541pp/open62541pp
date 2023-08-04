@@ -6,6 +6,7 @@
 
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/open62541.h"
+#include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/DateTime.h"
 #include "open62541pp/types/Variant.h"
 
@@ -19,7 +20,7 @@ namespace opcua {
 class DataValue : public TypeWrapper<UA_DataValue, UA_TYPES_DATAVALUE> {
 public:
     // NOLINTNEXTLINE, false positive?
-    using TypeWrapperBase::TypeWrapperBase;  // inherit contructors
+    using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
 
     DataValue(
         const Variant& value,
@@ -27,7 +28,7 @@ public:
         std::optional<DateTime> serverTimestamp,  // NOLINT
         std::optional<uint16_t> sourcePicoseconds,
         std::optional<uint16_t> serverPicoseconds,
-        std::optional<UA_StatusCode> statusCode
+        std::optional<StatusCode> statusCode
     );
 
     /// Create Variant from scalar value.
@@ -39,11 +40,6 @@ public:
     /// @see Variant::fromArray
     template <typename... Args>
     static DataValue fromArray(Args&&... args);
-
-    /// Get value as pointer (might be `nullptr` if not set).
-    Variant* getValuePtr() noexcept;
-    /// Get value as pointer (might be `nullptr` if not set).
-    const Variant* getValuePtr() const noexcept;
 
     bool hasValue() const noexcept;
     bool hasSourceTimestamp() const noexcept;
@@ -65,7 +61,7 @@ public:
     /// Get picoseconds interval added to the server timestamp.
     uint16_t getServerPicoseconds() const noexcept;
     /// Get status code.
-    UA_StatusCode getStatusCode() const noexcept;
+    StatusCode getStatusCode() const noexcept;
 
     /// Set value (copy).
     void setValue(const Variant& value);
@@ -80,7 +76,7 @@ public:
     /// Set picoseconds interval added to the server timestamp.
     void setServerPicoseconds(uint16_t serverPicoseconds);
     /// Set status code.
-    void setStatusCode(UA_StatusCode statusCode);
+    void setStatusCode(StatusCode statusCode);
 };
 
 /* --------------------------------------- Implementation --------------------------------------- */

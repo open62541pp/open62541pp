@@ -29,7 +29,7 @@ CreateCertificateResult createCertificate(
     }
 
     // OpenSSL errors will generate a generic UA_STATUSCODE_BADINTERNALERROR status code
-    // detailled errors are reported through error log messages -> capture log messages
+    // detailed errors are reported through error log messages -> capture log messages
     UA_Logger logger{};
     CustomLogger customLogger(logger);
     std::vector<std::string> errorMessages;

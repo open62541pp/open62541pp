@@ -17,32 +17,69 @@ bool Variant::isArray() const noexcept {
     return (handle()->arrayLength > 0) && (handle()->data != UA_EMPTY_ARRAY_SENTINEL);  // NOLINT
 }
 
-bool Variant::isType(const UA_DataType* type) const noexcept {
-    return handle()->type == type;
+bool Variant::isType(const UA_DataType* dataType) const noexcept {
+    const auto* dt = getDataType();
+    if (dt == nullptr || dataType == nullptr) {
+        return false;
+    }
+    if (dt == dataType) {
+        return true;
+    }
+    return dt->typeId == dataType->typeId;
+}
+
+bool Variant::isType(const UA_DataType& dataType) const noexcept {
+    return isType(&dataType);
 }
 
 bool Variant::isType(Type type) const noexcept {
-    return handle()->type == detail::getUaDataType(type);
+    return getDataType() == &detail::getUaDataType(type);
 }
 
 bool Variant::isType(const NodeId& id) const noexcept {
-    return isType(detail::getUaDataType(id));
+    return getDataType() == detail::findUaDataType(id);
+}
+
+const UA_DataType* Variant::getDataType() const noexcept {
+    return handle()->type;
 }
 
 std::optional<Type> Variant::getVariantType() const noexcept {
-    // UA_DataType typeIndex member was removed in open62541 v1.3
-    // https://github.com/open62541/open62541/pull/4477
-    // https://github.com/open62541/open62541/issues/4960
-    for (size_t typeIndex = 0; typeIndex < detail::builtinTypesCount; ++typeIndex) {
-        if (handle()->type == detail::getUaDataType(typeIndex)) {
+    // UA_DataType::typeIndex member was removed in open62541 v1.3
+    // use typeKind instead: https://github.com/open62541/open62541/issues/4960
+    static_assert(UA_TYPES_BOOLEAN == UA_DATATYPEKIND_BOOLEAN);
+    static_assert(UA_TYPES_VARIANT == UA_DATATYPEKIND_VARIANT);
+    if (getDataType() != nullptr) {
+        const auto typeIndex = getDataType()->typeKind;
+        if (typeIndex <= UA_DATATYPEKIND_DIAGNOSTICINFO) {
             return static_cast<Type>(typeIndex);
         }
     }
     return {};
 }
 
+void* Variant::getScalar() {
+    checkIsScalar();
+    return handle()->data;
+}
+
+const void* Variant::getScalar() const {
+    checkIsScalar();
+    return handle()->data;
+}
+
 size_t Variant::getArrayLength() const noexcept {
     return isArray() ? handle()->arrayLength : 0;
+}
+
+void* Variant::getArray() {
+    checkIsArray();
+    return handle()->data;
+}
+
+const void* Variant::getArray() const {
+    checkIsArray();
+    return handle()->data;
 }
 
 std::vector<uint32_t> Variant::getArrayDimensions() const {
@@ -65,28 +102,28 @@ void Variant::checkIsArray() const {
     }
 }
 
-void Variant::setScalarImpl(void* value, const UA_DataType* type, bool own) noexcept {
+void Variant::setScalarImpl(void* value, const UA_DataType& type, bool own) noexcept {
     clear();
-    UA_Variant_setScalar(handle(), value, type);
+    UA_Variant_setScalar(handle(), value, &type);
     handle()->storageType = own ? UA_VARIANT_DATA : UA_VARIANT_DATA_NODELETE;
 }
 
-void Variant::setScalarCopyImpl(const void* value, const UA_DataType* type) {
+void Variant::setScalarCopyImpl(const void* value, const UA_DataType& type) {
     clear();
-    const auto status = UA_Variant_setScalarCopy(handle(), value, type);
+    const auto status = UA_Variant_setScalarCopy(handle(), value, &type);
     detail::throwOnBadStatus(status);
     handle()->storageType = UA_VARIANT_DATA;
 }
 
-void Variant::setArrayImpl(void* array, size_t size, const UA_DataType* type, bool own) noexcept {
+void Variant::setArrayImpl(void* array, size_t size, const UA_DataType& type, bool own) noexcept {
     clear();
-    UA_Variant_setArray(handle(), array, size, type);
+    UA_Variant_setArray(handle(), array, size, &type);
     handle()->storageType = own ? UA_VARIANT_DATA : UA_VARIANT_DATA_NODELETE;
 }
 
-void Variant::setArrayCopyImpl(const void* array, size_t size, const UA_DataType* type) {
+void Variant::setArrayCopyImpl(const void* array, size_t size, const UA_DataType& type) {
     clear();
-    const auto status = UA_Variant_setArrayCopy(handle(), array, size, type);
+    const auto status = UA_Variant_setArrayCopy(handle(), array, size, &type);
     detail::throwOnBadStatus(status);
     handle()->storageType = UA_VARIANT_DATA;
 }

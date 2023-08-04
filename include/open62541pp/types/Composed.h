@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <utility>  // forward
 
 #include "open62541pp/Common.h"
 #include "open62541pp/Config.h"
@@ -10,6 +11,7 @@
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/ExtensionObject.h"
 #include "open62541pp/types/NodeId.h"
+#include "open62541pp/types/Variant.h"
 
 #include <initializer_list>
 #include <string>
@@ -28,21 +30,27 @@
     }
 
 // NOLINTNEXTLINE
-#define UAPP_COMPOSED_GETTER_WRAPPER(WrapperType, getterName, member)                              \
-    WrapperType& getterName() noexcept {                                                           \
-        return asWrapper<WrapperType>(handle()->member);                                           \
-    }                                                                                              \
+#define UAPP_COMPOSED_GETTER_WRAPPER_CONST(WrapperType, getterName, member)                        \
     const WrapperType& getterName() const noexcept {                                               \
         return asWrapper<WrapperType>(handle()->member);                                           \
     }
+// NOLINTNEXTLINE
+#define UAPP_COMPOSED_GETTER_WRAPPER_NONCONST(WrapperType, getterName, member)                     \
+    WrapperType& getterName() noexcept {                                                           \
+        return asWrapper<WrapperType>(handle()->member);                                           \
+    }
+// NOLINTNEXTLINE
+#define UAPP_COMPOSED_GETTER_WRAPPER(WrapperType, getterName, member)                              \
+    UAPP_COMPOSED_GETTER_WRAPPER_CONST(WrapperType, getterName, member)                            \
+    UAPP_COMPOSED_GETTER_WRAPPER_NONCONST(WrapperType, getterName, member)
 
 // NOLINTNEXTLINE
-#define UAPP_COMPOSED_GETTER_ARRAY(Type, getterName, array, size)                                  \
+#define UAPP_COMPOSED_GETTER_ARRAY(Type, getterName, memberArray, memberSize)                      \
     size_t getterName##Size() const noexcept {                                                     \
-        return handle()->size;                                                                     \
+        return handle()->memberSize;                                                               \
     }                                                                                              \
     std::vector<Type> getterName() const {                                                         \
-        return detail::fromNativeArray<Type>(handle()->array, handle()->size);                     \
+        return detail::fromNativeArray<Type>(handle()->memberArray, handle()->memberSize);         \
     }
 
 namespace opcua {
@@ -122,6 +130,269 @@ public:
     UAPP_COMPOSED_GETTER_WRAPPER(String, getTransportProfileUri, transportProfileUri)
     UAPP_COMPOSED_GETTER(UA_Byte, getSecurityLevel, securityLevel)
 };
+
+/* --------------------------------------- Node attributes -------------------------------------- */
+
+// Specifialized macros to generate getters/setters for `UA_*Attribute` classes.
+// The `specifiedAttributes` mask is automatically updated in the setter methods.
+// A fluent interface is used for the setter methods.
+
+// NOLINTNEXTLINE
+#define UAPP_NODEATTR(Type, suffix, member, flag)                                                  \
+    UAPP_COMPOSED_GETTER(Type, get##suffix, member)                                                \
+    auto& set##suffix(Type member) noexcept {                                                      \
+        handle()->specifiedAttributes |= flag;                                                     \
+        handle()->member = member;                                                                 \
+        return *this;                                                                              \
+    }
+
+// NOLINTNEXTLINE
+#define UAPP_NODEATTR_CAST(Type, suffix, member, flag)                                             \
+    UAPP_COMPOSED_GETTER_CAST(Type, get##suffix, member)                                           \
+    auto& set##suffix(Type member) noexcept {                                                      \
+        handle()->specifiedAttributes |= flag;                                                     \
+        handle()->member = static_cast<decltype(handle()->member)>(member);                        \
+        return *this;                                                                              \
+    }
+
+// NOLINTNEXTLINE
+#define UAPP_NODEATTR_WRAPPER(WrapperType, suffix, member, flag)                                   \
+    UAPP_COMPOSED_GETTER_WRAPPER_CONST(WrapperType, get##suffix, member)                           \
+    auto& set##suffix(const WrapperType& member) {                                                 \
+        handle()->specifiedAttributes |= flag;                                                     \
+        asWrapper<WrapperType>(handle()->member) = member;                                         \
+        return *this;                                                                              \
+    }
+
+// NOLINTNEXTLINE
+#define UAPP_NODEATTR_ARRAY(Type, suffix, memberArray, memberSize, flag)                           \
+    UAPP_COMPOSED_GETTER_ARRAY(Type, get##suffix, memberArray, memberSize)                         \
+    auto& set##suffix(const std::vector<Type>& memberArray) {                                      \
+        handle()->specifiedAttributes |= flag;                                                     \
+        UA_Array_delete(                                                                           \
+            handle()->memberArray,                                                                 \
+            handle()->memberSize,                                                                  \
+            &detail::getUaDataType(detail::guessTypeIndex<Type>())                                 \
+        );                                                                                         \
+        handle()->memberArray = detail::toNativeArrayAlloc(                                        \
+            memberArray.begin(), memberArray.end()                                                 \
+        );                                                                                         \
+        handle()->memberSize = memberArray.size();                                                 \
+        return *this;                                                                              \
+    }
+
+// NOLINTNEXTLINT
+#define UAPP_NODEATTR_COMMON                                                                       \
+    UAPP_COMPOSED_GETTER(uint32_t, getSpecifiedAttributes, specifiedAttributes)                    \
+    UAPP_NODEATTR_WRAPPER(                                                                         \
+        LocalizedText, DisplayName, displayName, UA_NODEATTRIBUTESMASK_DISPLAYNAME                 \
+    )                                                                                              \
+    UAPP_NODEATTR_WRAPPER(                                                                         \
+        LocalizedText, Description, description, UA_NODEATTRIBUTESMASK_DESCRIPTION                 \
+    )                                                                                              \
+    UAPP_NODEATTR(uint32_t, WriteMask, writeMask, UA_NODEATTRIBUTESMASK_WRITEMASK)                 \
+    UAPP_NODEATTR(uint32_t, UserWriteMask, userWriteMask, UA_NODEATTRIBUTESMASK_USERWRITEMASK)
+
+/**
+ * UA_NodeAttributes wrapper class.
+ * @ingroup TypeWrapper
+ */
+class NodeAttributes : public TypeWrapper<UA_NodeAttributes, UA_TYPES_NODEATTRIBUTES> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    UAPP_NODEATTR_COMMON
+};
+
+/**
+ * UA_ObjectAttributes wrapper class.
+ * @ingroup TypeWrapper
+ */
+class ObjectAttributes : public TypeWrapper<UA_ObjectAttributes, UA_TYPES_OBJECTTYPEATTRIBUTES> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    /// Construct with default attribute definitions.
+    ObjectAttributes();
+
+    UAPP_NODEATTR_COMMON
+    UAPP_NODEATTR(uint8_t, EventNotifier, eventNotifier, UA_NODEATTRIBUTESMASK_EVENTNOTIFIER)
+};
+
+/**
+ * UA_VariableAttributes wrapper class.
+ * @ingroup TypeWrapper
+ */
+class VariableAttributes : public TypeWrapper<UA_VariableAttributes, UA_TYPES_VARIABLEATTRIBUTES> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    /// Construct with default attribute definitions.
+    VariableAttributes();
+
+    UAPP_NODEATTR_COMMON
+    UAPP_NODEATTR_WRAPPER(Variant, Value, value, UA_NODEATTRIBUTESMASK_VALUE)
+
+    /// @see Variant::fromScalar
+    template <typename... Args>
+    auto& setValueScalar(Args&&... args) {
+        return setValue(Variant::fromScalar(std::forward<Args>(args)...));
+    }
+
+    /// @see Variant::fromArray
+    template <typename... Args>
+    auto& setValueArray(Args&&... args) {
+        return setValue(Variant::fromArray(std::forward<Args>(args)...));
+    }
+
+    UAPP_NODEATTR_WRAPPER(NodeId, DataType, dataType, UA_NODEATTRIBUTESMASK_DATATYPE)
+    UAPP_NODEATTR_CAST(ValueRank, ValueRank, valueRank, UA_NODEATTRIBUTESMASK_VALUERANK)
+    UAPP_NODEATTR_ARRAY(
+        uint32_t,
+        ArrayDimensions,
+        arrayDimensions,
+        arrayDimensionsSize,
+        UA_NODEATTRIBUTESMASK_ARRAYDIMENSIONS
+    )
+    UAPP_NODEATTR(uint8_t, AccessLevel, accessLevel, UA_NODEATTRIBUTESMASK_ACCESSLEVEL)
+    UAPP_NODEATTR(uint8_t, UserAccessLevel, userAccessLevel, UA_NODEATTRIBUTESMASK_USERACCESSLEVEL)
+    UAPP_NODEATTR(
+        double,
+        MinimumSamplingInterval,
+        minimumSamplingInterval,
+        UA_NODEATTRIBUTESMASK_MINIMUMSAMPLINGINTERVAL
+    )
+    UAPP_NODEATTR(bool, Historizing, historizing, UA_NODEATTRIBUTESMASK_HISTORIZING)
+};
+
+/**
+ * UA_MethodAttributes wrapper class.
+ * @ingroup TypeWrapper
+ */
+class MethodAttributes : public TypeWrapper<UA_MethodAttributes, UA_TYPES_METHODATTRIBUTES> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    /// Construct with default attribute definitions.
+    MethodAttributes();
+
+    UAPP_NODEATTR_COMMON
+    UAPP_NODEATTR(bool, Executable, executable, UA_NODEATTRIBUTESMASK_EXECUTABLE)
+    UAPP_NODEATTR(bool, UserExecutable, userExecutable, UA_NODEATTRIBUTESMASK_USEREXECUTABLE)
+};
+
+/**
+ * UA_ObjectTypeAttributes wrapper class.
+ * @ingroup TypeWrapper
+ */
+class ObjectTypeAttributes
+    : public TypeWrapper<UA_ObjectTypeAttributes, UA_TYPES_OBJECTTYPEATTRIBUTES> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    /// Construct with default attribute definitions.
+    ObjectTypeAttributes();
+
+    UAPP_NODEATTR_COMMON
+    UAPP_NODEATTR(bool, IsAbstract, isAbstract, UA_NODEATTRIBUTESMASK_ISABSTRACT)
+};
+
+/**
+ * UA_VariableAttributes wrapper class.
+ * @ingroup TypeWrapper
+ */
+class VariableTypeAttributes
+    : public TypeWrapper<UA_VariableTypeAttributes, UA_TYPES_VARIABLETYPEATTRIBUTES> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    /// Construct with default attribute definitions.
+    VariableTypeAttributes();
+
+    UAPP_NODEATTR_COMMON
+    UAPP_NODEATTR_WRAPPER(Variant, Value, value, UA_NODEATTRIBUTESMASK_VALUE)
+
+    /// @see Variant::fromScalar
+    template <typename... Args>
+    auto& setValueScalar(Args&&... args) {
+        return setValue(Variant::fromScalar(std::forward<Args>(args)...));
+    }
+
+    /// @see Variant::fromArray
+    template <typename... Args>
+    auto& setValueArray(Args&&... args) {
+        return setValue(Variant::fromArray(std::forward<Args>(args)...));
+    }
+
+    UAPP_NODEATTR_WRAPPER(NodeId, DataType, dataType, UA_NODEATTRIBUTESMASK_DATATYPE)
+    UAPP_NODEATTR_CAST(ValueRank, ValueRank, valueRank, UA_NODEATTRIBUTESMASK_VALUERANK)
+    UAPP_NODEATTR_ARRAY(
+        uint32_t,
+        ArrayDimensions,
+        arrayDimensions,
+        arrayDimensionsSize,
+        UA_NODEATTRIBUTESMASK_ARRAYDIMENSIONS
+    )
+    UAPP_NODEATTR(bool, IsAbstract, isAbstract, UA_NODEATTRIBUTESMASK_ISABSTRACT)
+};
+
+/**
+ * UA_ReferenceTypeAttributes wrapper class.
+ * @ingroup TypeWrapper
+ */
+class ReferenceTypeAttributes
+    : public TypeWrapper<UA_ReferenceTypeAttributes, UA_TYPES_REFERENCETYPEATTRIBUTES> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    /// Construct with default attribute definitions.
+    ReferenceTypeAttributes();
+
+    UAPP_NODEATTR_COMMON
+    UAPP_NODEATTR(bool, IsAbstract, isAbstract, UA_NODEATTRIBUTESMASK_ISABSTRACT)
+    UAPP_NODEATTR(bool, Symmetric, symmetric, UA_NODEATTRIBUTESMASK_SYMMETRIC)
+    UAPP_NODEATTR_WRAPPER(
+        LocalizedText, InverseName, inverseName, UA_NODEATTRIBUTESMASK_INVERSENAME
+    )
+};
+
+/**
+ * UA_DataTypeAttributes wrapper class.
+ * @ingroup TypeWrapper
+ */
+class DataTypeAttributes : public TypeWrapper<UA_DataTypeAttributes, UA_TYPES_DATATYPEATTRIBUTES> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    /// Construct with default attribute definitions.
+    DataTypeAttributes();
+
+    UAPP_NODEATTR_COMMON
+    UAPP_NODEATTR(bool, IsAbstract, isAbstract, UA_NODEATTRIBUTESMASK_ISABSTRACT)
+};
+
+/**
+ * UA_ViewAttributes wrapper class.
+ * @ingroup TypeWrapper
+ */
+class ViewAttributes : public TypeWrapper<UA_ViewAttributes, UA_TYPES_VIEWATTRIBUTES> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    /// Construct with default attribute definitions.
+    ViewAttributes();
+
+    UAPP_NODEATTR_COMMON
+    UAPP_NODEATTR(bool, IsAbstract, containsNoLoops, UA_NODEATTRIBUTESMASK_CONTAINSNOLOOPS)
+    UAPP_NODEATTR(uint8_t, EventNotifier, eventNotifier, UA_NODEATTRIBUTESMASK_EVENTNOTIFIER)
+};
+
+#undef UAPP_NODEATTR
+#undef UAPP_NODEATTR_WRAPPER
+#undef UAPP_NODEATTR_ARRAY
+#undef UAPP_NODEATTR_COMMON
+
+/* ------------------------------------------- Browse ------------------------------------------- */
 
 /**
  * UA_UserIdentityToken wrapper class.
@@ -299,7 +570,7 @@ class BrowseResult : public TypeWrapper<UA_BrowseResult, UA_TYPES_BROWSERESULT> 
 public:
     using TypeWrapperBase::TypeWrapperBase;
 
-    UAPP_COMPOSED_GETTER(UA_StatusCode, getStatusCode, statusCode)
+    UAPP_COMPOSED_GETTER(StatusCode, getStatusCode, statusCode)
     UAPP_COMPOSED_GETTER_WRAPPER(ByteString, getContinuationPoint, continuationPoint)
     UAPP_COMPOSED_GETTER_ARRAY(ReferenceDescription, getReferences, references, referencesSize)
 };
@@ -374,7 +645,7 @@ class BrowsePathResult : public TypeWrapper<UA_BrowsePathResult, UA_TYPES_BROWSE
 public:
     using TypeWrapperBase::TypeWrapperBase;
 
-    UAPP_COMPOSED_GETTER(UA_StatusCode, getStatusCode, statusCode)
+    UAPP_COMPOSED_GETTER(StatusCode, getStatusCode, statusCode)
     UAPP_COMPOSED_GETTER_ARRAY(BrowsePathTarget, getTargets, targets, targetsSize)
 };
 
@@ -394,6 +665,8 @@ public:
     UAPP_COMPOSED_GETTER_WRAPPER(String, getIndexRange, indexRange)
     UAPP_COMPOSED_GETTER_WRAPPER(QualifiedName, getDataEncoding, dataEncoding)
 };
+
+/* ------------------------------------------- Method ------------------------------------------- */
 
 #ifdef UA_TYPES_ARGUMENT
 /**

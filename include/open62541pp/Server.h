@@ -19,6 +19,7 @@ struct UA_Server;
 namespace opcua {
 
 // forward declaration
+class DataType;
 class ServerContext;
 template <typename ServerOrClient>
 class Node;
@@ -91,8 +92,14 @@ public:
     /// Register namespace. The new namespace index will be returned.
     [[nodiscard]] uint16_t registerNamespace(std::string_view uri);
 
+    /// Set custom data types.
+    /// All data types provided are automatically considered for decoding of received messages.
+    void setCustomDataTypes(std::vector<DataType> dataTypes);
+
     /// Set value callbacks to execute before every read and after every write operation.
     void setVariableNodeValueCallback(const NodeId& id, ValueCallback callback);
+    /// Set data source backend for variable node.
+    void setVariableNodeValueBackend(const NodeId& id, ValueBackendDataSource backend);
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
     /// Create a (pseudo) subscription to monitor local data changes and events.

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.12)
 
 project(
     open62541++
-    VERSION 0.5.0
+    VERSION 0.6.0
     DESCRIPTION "C++ wrapper of open62541"
     HOMEPAGE_URL "https://github.com/open62541pp/open62541pp"
     LANGUAGES CXX
@@ -113,7 +113,9 @@ add_library(
     src/AccessControl.cpp
     src/Client.cpp
     src/Crypto.cpp
+    src/CustomDataTypes.cpp
     src/CustomLogger.cpp
+    src/DataType.cpp
     src/Logger.cpp
     src/MonitoredItem.cpp
     src/Node.cpp

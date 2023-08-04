@@ -29,6 +29,7 @@ public:
 
     struct NodeContext {
         ValueCallback valueCallback;
+        ValueBackendDataSource dataSource;
 #ifdef UA_ENABLE_METHODCALLS
         services::MethodCallback methodCallback;
 #endif

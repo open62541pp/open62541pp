@@ -135,11 +135,6 @@ public:
         return typeIndex;
     }
 
-    /// Get type as UA_DataType object.
-    static const UA_DataType* getDataType() {
-        return detail::getUaDataType<typeIndex>();
-    }
-
     /// Return pointer to native object.
     constexpr T* handle() noexcept {
         return &data_;
@@ -152,18 +147,18 @@ public:
 
 protected:
     inline static void checkMemSize() {
-        assert(sizeof(T) == getDataType()->memSize);  // NOLINT
+        assert(sizeof(T) == UA_TYPES[typeIndex].memSize);  // NOLINT
     }
 
     void clear() noexcept {
         checkMemSize();
-        UA_clear(&data_, getDataType());
+        UA_clear(&data_, &UA_TYPES[typeIndex]);
     }
 
     void copy(const T& data) {
         clear();
         checkMemSize();
-        auto status = UA_copy(&data, &data_, getDataType());  // deep copy of data
+        auto status = UA_copy(&data, &data_, &UA_TYPES[typeIndex]);  // deep copy of data
         detail::throwOnBadStatus(status);
     }
 
