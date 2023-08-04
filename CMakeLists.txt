@@ -112,7 +112,9 @@ add_library(
     open62541pp
     src/Client.cpp
     src/Crypto.cpp
+    src/CustomDataTypes.cpp
     src/CustomLogger.cpp
+    src/DataType.cpp
     src/Logger.cpp
     src/MonitoredItem.cpp
     src/Node.cpp

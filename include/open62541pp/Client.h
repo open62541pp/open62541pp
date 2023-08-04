@@ -22,6 +22,7 @@ namespace opcua {
 
 // forward declaration
 class ClientContext;
+class DataType;
 template <typename ServerOrClient>
 class Node;
 
@@ -89,6 +90,10 @@ public:
 
     /// Set message security mode.
     void setSecurityMode(MessageSecurityMode mode);
+
+    /// Set custom data types.
+    /// All data types provided are automatically considered for decoding of received messages.
+    void setCustomDataTypes(std::vector<DataType> dataTypes);
 
     /// Set a state callback that will be called after the client is connected.
     void onConnected(StateCallback callback);

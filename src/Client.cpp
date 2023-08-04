@@ -12,6 +12,7 @@
 #include "open62541pp/services/Subscription.h"
 
 #include "ClientContext.h"
+#include "CustomDataTypes.h"
 #include "CustomLogger.h"
 #include "open62541_impl.h"
 
@@ -138,6 +139,7 @@ class Client::Connection {
 public:
     Connection()
         : client_(UA_Client_new()),
+          customDataTypes_(&getConfig(client_)->customDataTypes),
           logger_(getConfig(client_)->logger) {
         applyDefaults();
     }
@@ -157,10 +159,6 @@ public:
         auto* config = getConfig(handle());
         config->clientContext = &context_;
         config->stateCallback = stateCallback;
-    }
-
-    void setLogger(Logger logger) {
-        logger_.setLogger(std::move(logger));
     }
 
     void runIterate(uint16_t timeoutMilliseconds) {
@@ -199,9 +197,18 @@ public:
         return context_;
     }
 
+    auto& getCustomDataTypes() noexcept {
+        return customDataTypes_;
+    }
+
+    auto& getCustomLogger() noexcept {
+        return logger_;
+    }
+
 private:
     UA_Client* client_;
     ClientContext context_;
+    CustomDataTypes customDataTypes_;
     CustomLogger logger_;
     std::atomic<bool> running_{false};
 };
@@ -274,7 +281,7 @@ std::vector<EndpointDescription> Client::getEndpoints(std::string_view serverUrl
 }
 
 void Client::setLogger(Logger logger) {
-    connection_->setLogger(std::move(logger));
+    connection_->getCustomLogger().setLogger(std::move(logger));
 }
 
 void Client::setTimeout(uint32_t milliseconds) {
@@ -283,6 +290,10 @@ void Client::setTimeout(uint32_t milliseconds) {
 
 void Client::setSecurityMode(MessageSecurityMode mode) {
     getConfig(this)->securityMode = static_cast<UA_MessageSecurityMode>(mode);
+}
+
+void Client::setCustomDataTypes(std::vector<DataType> dataTypes) {
+    connection_->getCustomDataTypes().setCustomDataTypes(std::move(dataTypes));
 }
 
 static void setStateCallback(ClientContext& context, ClientState state, StateCallback&& callback) {

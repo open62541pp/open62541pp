@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <utility>  // forward
 
 #include "open62541pp/Common.h"
 #include "open62541pp/Config.h"
@@ -209,14 +210,16 @@ public:
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR_WRAPPER(Variant, Value, value, UA_NODEATTRIBUTESMASK_VALUE)
 
-    template <typename T, Type type = detail::guessType<T>()>
-    auto& setValueScalar(const T& value) {
-        return setValue(Variant::fromScalar<T, type>(value));
+    /// @see Variant::fromScalar
+    template <typename... Args>
+    auto& setValueScalar(Args&&... args) {
+        return setValue(Variant::fromScalar(std::forward<Args>(args)...));
     }
 
-    template <typename T, Type type = detail::guessType<T>()>
-    auto& setValueArray(const std::vector<T>& array) {
-        return setValue(Variant::fromArray<T, type>(array));
+    /// @see Variant::fromArray
+    template <typename... Args>
+    auto& setValueArray(Args&&... args) {
+        return setValue(Variant::fromArray(std::forward<Args>(args)...));
     }
 
     UAPP_NODEATTR_WRAPPER(NodeId, DataType, dataType, UA_NODEATTRIBUTESMASK_DATATYPE)
@@ -285,6 +288,19 @@ public:
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR_WRAPPER(Variant, Value, value, UA_NODEATTRIBUTESMASK_VALUE)
+
+    /// @see Variant::fromScalar
+    template <typename... Args>
+    auto& setValueScalar(Args&&... args) {
+        return setValue(Variant::fromScalar(std::forward<Args>(args)...));
+    }
+
+    /// @see Variant::fromArray
+    template <typename... Args>
+    auto& setValueArray(Args&&... args) {
+        return setValue(Variant::fromArray(std::forward<Args>(args)...));
+    }
+
     UAPP_NODEATTR_WRAPPER(NodeId, DataType, dataType, UA_NODEATTRIBUTESMASK_DATATYPE)
     UAPP_NODEATTR_CAST(ValueRank, ValueRank, valueRank, UA_NODEATTRIBUTESMASK_VALUERANK)
     UAPP_NODEATTR_ARRAY(
