@@ -32,9 +32,9 @@ TEST_CASE("AccessControlDefault") {
             const auto activateSessionWithToken = [&](const ExtensionObject& userIdentityToken) {
                 return ac.activateSession(
                     server,
+                    sessionId,
                     endpointDescription,
                     secureChannelRemoteCertificate,
-                    sessionId,
                     userIdentityToken
                 );
             };
@@ -97,15 +97,15 @@ TEST_CASE("AccessControlDefault") {
         AccessControlDefault ac;
         const NodeId sessionId{};
 
-        CHECK(ac.getUserRightsMask(server, sessionId, {}, {}) == 0xFFFFFFFF);
-        CHECK(ac.getUserAccessLevel(server, sessionId, {}, {}) == 0xFF);
-        CHECK(ac.getUserExecutable(server, sessionId, {}, {}));
-        CHECK(ac.getUserExecutableOnObject(server, sessionId, {}, {}, {}, {}));
+        CHECK(ac.getUserRightsMask(server, sessionId, {}) == 0xFFFFFFFF);
+        CHECK(ac.getUserAccessLevel(server, sessionId, {}) == 0xFF);
+        CHECK(ac.getUserExecutable(server, sessionId, {}));
+        CHECK(ac.getUserExecutableOnObject(server, sessionId, {}, {}));
         CHECK(ac.allowAddNode(server, sessionId, {}));
         CHECK(ac.allowAddReference(server, sessionId, {}));
         CHECK(ac.allowDeleteNode(server, sessionId, {}));
         CHECK(ac.allowDeleteReference(server, sessionId, {}));
-        CHECK(ac.allowBrowseNode(server, sessionId, {}, {}));
+        CHECK(ac.allowBrowseNode(server, sessionId, {}));
 #ifdef UA_ENABLE_SUBSCRIPTIONS
         CHECK(ac.allowTransferSubscription(server, sessionId, sessionId));
 #endif

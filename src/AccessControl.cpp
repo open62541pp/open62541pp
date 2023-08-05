@@ -47,9 +47,9 @@ std::vector<UserTokenPolicy> AccessControlDefault::getUserTokenPolicies() noexce
 
 StatusCode AccessControlDefault::activateSession(
     [[maybe_unused]] Server& server,
+    [[maybe_unused]] const NodeId& sessionId,
     [[maybe_unused]] const EndpointDescription& endpointDescription,
     [[maybe_unused]] const ByteString& secureChannelRemoteCertificate,
-    [[maybe_unused]] const NodeId& sessionId,
     const ExtensionObject& userIdentityToken
 ) noexcept {
     // https://github.com/open62541/open62541/blob/v1.3.6/plugins/ua_accesscontrol_default.c#L38-L134
@@ -109,8 +109,7 @@ void AccessControlDefault::closeSesion(
 uint32_t AccessControlDefault::getUserRightsMask(
     [[maybe_unused]] Server& server,
     [[maybe_unused]] const NodeId& sessionId,
-    [[maybe_unused]] const NodeId& nodeId,
-    [[maybe_unused]] void* nodeContext
+    [[maybe_unused]] const NodeId& nodeId
 ) noexcept {
     return 0xFFFFFFFF;
 }
@@ -118,8 +117,7 @@ uint32_t AccessControlDefault::getUserRightsMask(
 uint8_t AccessControlDefault::getUserAccessLevel(
     [[maybe_unused]] Server& server,
     [[maybe_unused]] const NodeId& sessionId,
-    [[maybe_unused]] const NodeId& nodeId,
-    [[maybe_unused]] void* nodeContext
+    [[maybe_unused]] const NodeId& nodeId
 ) noexcept {
     return 0xFF;
 }
@@ -127,8 +125,7 @@ uint8_t AccessControlDefault::getUserAccessLevel(
 bool AccessControlDefault::getUserExecutable(
     [[maybe_unused]] Server& server,
     [[maybe_unused]] const NodeId& sessionId,
-    [[maybe_unused]] const NodeId& methodId,
-    [[maybe_unused]] void* methodContext
+    [[maybe_unused]] const NodeId& methodId
 ) noexcept {
     return true;
 }
@@ -137,9 +134,7 @@ bool AccessControlDefault::getUserExecutableOnObject(
     [[maybe_unused]] Server& server,
     [[maybe_unused]] const NodeId& sessionId,
     [[maybe_unused]] const NodeId& methodId,
-    [[maybe_unused]] void* methodContext,
-    [[maybe_unused]] const NodeId& objectId,
-    [[maybe_unused]] void* objectContext
+    [[maybe_unused]] const NodeId& objectId
 ) noexcept {
     return true;
 }
@@ -179,8 +174,7 @@ bool AccessControlDefault::allowDeleteReference(
 bool AccessControlDefault::allowBrowseNode(
     [[maybe_unused]] Server& server,
     [[maybe_unused]] const NodeId& sessionId,
-    [[maybe_unused]] const NodeId& nodeId,
-    [[maybe_unused]] void* nodeContext
+    [[maybe_unused]] const NodeId& nodeId
 ) noexcept {
     return true;
 }
@@ -201,7 +195,7 @@ bool AccessControlDefault::allowHistoryUpdate(
     [[maybe_unused]] const NodeId& sessionId,
     [[maybe_unused]] const NodeId& nodeId,
     [[maybe_unused]] PerformUpdateType performInsertReplace,  // TODO
-    [[maybe_unused]] const UA_DataValue& value
+    [[maybe_unused]] const DataValue& value
 ) noexcept {
     return true;
 }

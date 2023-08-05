@@ -57,9 +57,9 @@ public:
      */
     virtual StatusCode activateSession(
         Server& server,
+        const NodeId& sessionId,
         const EndpointDescription& endpointDescription,
         const ByteString& secureChannelRemoteCertificate,
-        const NodeId& sessionId,
         const ExtensionObject& userIdentityToken
     ) noexcept = 0;
 
@@ -68,27 +68,22 @@ public:
 
     /// Access control for all nodes.
     virtual uint32_t getUserRightsMask(
-        Server& server, const NodeId& sessionId, const NodeId& nodeId, void* nodeContext
+        Server& server, const NodeId& sessionId, const NodeId& nodeId
     ) noexcept = 0;
 
     /// Additional access control for variable nodes.
     virtual uint8_t getUserAccessLevel(
-        Server& server, const NodeId& sessionId, const NodeId& nodeId, void* nodeContext
+        Server& server, const NodeId& sessionId, const NodeId& nodeId
     ) noexcept = 0;
 
     /// Additional access control for method nodes.
     virtual bool getUserExecutable(
-        Server& server, const NodeId& sessionId, const NodeId& methodId, void* methodContext
+        Server& server, const NodeId& sessionId, const NodeId& methodId
     ) noexcept = 0;
 
     /// Additional access control for calling a method node in the context of a specific object.
     virtual bool getUserExecutableOnObject(
-        Server& server,
-        const NodeId& sessionId,
-        const NodeId& methodId,
-        void* methodContext,
-        const NodeId& objectId,
-        void* objectContext
+        Server& server, const NodeId& sessionId, const NodeId& methodId, const NodeId& objectId
     ) noexcept = 0;
 
     /// Allow adding a node.
@@ -113,7 +108,7 @@ public:
 
     /// Allow browsing a node.
     virtual bool allowBrowseNode(
-        Server& server, const NodeId& sessionId, const NodeId& nodeId, void* nodeContext
+        Server& server, const NodeId& sessionId, const NodeId& nodeId
     ) noexcept = 0;
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
@@ -163,33 +158,28 @@ public:
 
     StatusCode activateSession(
         Server& server,
+        const NodeId& sessionId,
         const EndpointDescription& endpointDescription,
         const ByteString& secureChannelRemoteCertificate,
-        const NodeId& sessionId,
         const ExtensionObject& userIdentityToken
     ) noexcept override;
 
     void closeSesion(Server& server, const NodeId& sessionId) noexcept override;
 
     uint32_t getUserRightsMask(
-        Server& server, const NodeId& sessionId, const NodeId& nodeId, void* nodeContext
+        Server& server, const NodeId& sessionId, const NodeId& nodeId
     ) noexcept override;
 
     uint8_t getUserAccessLevel(
-        Server& server, const NodeId& sessionId, const NodeId& nodeId, void* nodeContext
+        Server& server, const NodeId& sessionId, const NodeId& nodeId
     ) noexcept override;
 
     bool getUserExecutable(
-        Server& server, const NodeId& sessionId, const NodeId& methodId, void* methodContext
+        Server& server, const NodeId& sessionId, const NodeId& methodId
     ) noexcept override;
 
     bool getUserExecutableOnObject(
-        Server& server,
-        const NodeId& sessionId,
-        const NodeId& methodId,
-        void* methodContext,
-        const NodeId& objectId,
-        void* objectContext
+        Server& server, const NodeId& sessionId, const NodeId& methodId, const NodeId& objectId
     ) noexcept override;
 
     bool allowAddNode(
@@ -209,7 +199,7 @@ public:
     ) noexcept override;
 
     bool allowBrowseNode(
-        Server& server, const NodeId& sessionId, const NodeId& nodeId, void* nodeContext
+        Server& server, const NodeId& sessionId, const NodeId& nodeId
     ) noexcept override;
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
@@ -224,7 +214,7 @@ public:
         const NodeId& sessionId,
         const NodeId& nodeId,
         PerformUpdateType performInsertReplace,  // TODO
-        const UA_DataValue& value
+        const DataValue& value
     ) noexcept override;
 
     bool allowHistoryDelete(
