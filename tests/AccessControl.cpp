@@ -28,7 +28,6 @@ TEST_CASE("AccessControlDefault") {
             const EndpointDescription endpointDescription{};
             const ByteString secureChannelRemoteCertificate{};
             const NodeId sessionId{};
-            AccessControlBase::SessionContext sessionContext{};
 
             const auto activateSessionWithToken = [&](const ExtensionObject& userIdentityToken) {
                 return ac.activateSession(
@@ -36,8 +35,7 @@ TEST_CASE("AccessControlDefault") {
                     endpointDescription,
                     secureChannelRemoteCertificate,
                     sessionId,
-                    userIdentityToken,
-                    sessionContext
+                    userIdentityToken
                 );
             };
 
@@ -98,25 +96,22 @@ TEST_CASE("AccessControlDefault") {
     SUBCASE("Access control callbacks (all permissive)") {
         AccessControlDefault ac;
         const NodeId sessionId{};
-        AccessControlBase::SessionContext sessionContext{};
 
-        CHECK(ac.getUserRightsMask(server, sessionId, sessionContext, {}, {}) == 0xFFFFFFFF);
-        CHECK(ac.getUserAccessLevel(server, sessionId, sessionContext, {}, {}) == 0xFF);
-        CHECK(ac.getUserExecutable(server, sessionId, sessionContext, {}, {}));
-        CHECK(ac.getUserExecutableOnObject(server, sessionId, sessionContext, {}, {}, {}, {}));
-        CHECK(ac.allowAddNode(server, sessionId, sessionContext, {}));
-        CHECK(ac.allowAddReference(server, sessionId, sessionContext, {}));
-        CHECK(ac.allowDeleteNode(server, sessionId, sessionContext, {}));
-        CHECK(ac.allowDeleteReference(server, sessionId, sessionContext, {}));
-        CHECK(ac.allowBrowseNode(server, sessionId, sessionContext, {}, {}));
+        CHECK(ac.getUserRightsMask(server, sessionId, {}, {}) == 0xFFFFFFFF);
+        CHECK(ac.getUserAccessLevel(server, sessionId, {}, {}) == 0xFF);
+        CHECK(ac.getUserExecutable(server, sessionId, {}, {}));
+        CHECK(ac.getUserExecutableOnObject(server, sessionId, {}, {}, {}, {}));
+        CHECK(ac.allowAddNode(server, sessionId, {}));
+        CHECK(ac.allowAddReference(server, sessionId, {}));
+        CHECK(ac.allowDeleteNode(server, sessionId, {}));
+        CHECK(ac.allowDeleteReference(server, sessionId, {}));
+        CHECK(ac.allowBrowseNode(server, sessionId, {}, {}));
 #ifdef UA_ENABLE_SUBSCRIPTIONS
-        CHECK(ac.allowTransferSubscription(
-            server, sessionId, sessionContext, sessionId, sessionContext
-        ));
+        CHECK(ac.allowTransferSubscription(server, sessionId, sessionId));
 #endif
 #ifdef UA_ENABLE_HISTORIZING
-        CHECK(ac.allowHistoryUpdate(server, sessionId, sessionContext, {}, {}, {}));
-        CHECK(ac.allowHistoryDelete(server, sessionId, sessionContext, {}, {}, {}, {}));
+        CHECK(ac.allowHistoryUpdate(server, sessionId, {}, {}, {}));
+        CHECK(ac.allowHistoryDelete(server, sessionId, {}, {}, {}, {}));
 #endif
     }
 }
