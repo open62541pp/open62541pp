@@ -45,7 +45,7 @@ std::vector<UserTokenPolicy> AccessControlDefault::getUserTokenPolicies() noexce
     return result;
 }
 
-UA_StatusCode AccessControlDefault::activateSession(
+StatusCode AccessControlDefault::activateSession(
     [[maybe_unused]] Server& server,
     [[maybe_unused]] const EndpointDescription& endpointDescription,
     [[maybe_unused]] const ByteString& secureChannelRemoteCertificate,

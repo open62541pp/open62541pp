@@ -42,11 +42,11 @@ public:
 
     virtual ~AccessControlBase() = default;
 
-    AccessControlBase(const AccessControlBase& other) = default;
-    AccessControlBase(AccessControlBase&& other) noexcept = default;
+    AccessControlBase(const AccessControlBase&) = default;
+    AccessControlBase(AccessControlBase&&) noexcept = default;
 
-    AccessControlBase& operator=(const AccessControlBase& other) = default;
-    AccessControlBase& operator=(AccessControlBase&& other) noexcept = default;
+    AccessControlBase& operator=(const AccessControlBase&) = default;
+    AccessControlBase& operator=(AccessControlBase&&) noexcept = default;
 
     /// Get available user token policies.
     virtual std::vector<UserTokenPolicy> getUserTokenPolicies() noexcept = 0;
@@ -56,9 +56,9 @@ public:
      *
      * The session context is attached to the session and later passed into the access control
      * callbacks.
-     * The new session is rejected if a status code other than UA_STATUSCODE_GOOD is returned.
+     * The new session is rejected if a status code other than STATUSCODE_GOOD is returned.
      */
-    virtual UA_StatusCode activateSession(
+    virtual StatusCode activateSession(
         Server& server,
         const EndpointDescription& endpointDescription,
         const ByteString& secureChannelRemoteCertificate,
@@ -202,7 +202,7 @@ public:
 
     std::vector<UserTokenPolicy> getUserTokenPolicies() noexcept override;
 
-    UA_StatusCode activateSession(
+    StatusCode activateSession(
         Server& server,
         const EndpointDescription& endpointDescription,
         const ByteString& secureChannelRemoteCertificate,
