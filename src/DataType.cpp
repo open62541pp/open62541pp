@@ -86,8 +86,9 @@ DataType& DataType::operator=(DataType&& other) noexcept {
 const char* DataType::getTypeName() const noexcept {
 #ifdef UA_ENABLE_TYPEDESCRIPTION
     return handle()->typeName;
-#endif
+#else
     return nullptr;
+#endif
 }
 
 void DataType::setTypeName([[maybe_unused]] const char* typeName) noexcept {
