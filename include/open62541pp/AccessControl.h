@@ -1,13 +1,15 @@
 #pragma once
 
-#include <any>
 #include <vector>
 
 #include "open62541pp/Auth.h"  // Login
 #include "open62541pp/Config.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
+#include "open62541pp/types/DataValue.h"
+#include "open62541pp/types/DateTime.h"
 #include "open62541pp/types/ExtensionObject.h"
+#include "open62541pp/types/NodeId.h"
 
 // forward declare
 struct UA_AccessControl;
@@ -64,7 +66,7 @@ public:
     ) noexcept = 0;
 
     /// Deauthenticate a session and cleanup session context.
-    virtual void closeSesion(Server& server, const NodeId& sessionId) noexcept = 0;
+    virtual void closeSession(Server& server, const NodeId& sessionId) noexcept = 0;
 
     /// Access control for all nodes.
     virtual uint32_t getUserRightsMask(
@@ -125,7 +127,7 @@ public:
         const NodeId& sessionId,
         const NodeId& nodeId,
         PerformUpdateType performInsertReplace,  // TODO
-        const UA_DataValue& value
+        const DataValue& value
     ) noexcept = 0;
 
     /// Allow delete of historical data.
@@ -164,7 +166,7 @@ public:
         const ExtensionObject& userIdentityToken
     ) noexcept override;
 
-    void closeSesion(Server& server, const NodeId& sessionId) noexcept override;
+    void closeSession(Server& server, const NodeId& sessionId) noexcept override;
 
     uint32_t getUserRightsMask(
         Server& server, const NodeId& sessionId, const NodeId& nodeId

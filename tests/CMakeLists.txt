@@ -6,6 +6,7 @@ add_executable(
     AccessControl.cpp
     Client.cpp
     Crypto.cpp
+    CustomAccessControl.cpp
     CustomDataTypes.cpp
     DataType.cpp
     ErrorHandling.cpp

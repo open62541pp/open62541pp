@@ -1,10 +1,8 @@
 #include "open62541pp/AccessControl.h"
 
-#include <cassert>
 #include <utility>  // move
 
 #include "open62541pp/Server.h"
-#include "open62541pp/detail/helper.h"
 
 #include "open62541_impl.h"
 
@@ -102,7 +100,7 @@ StatusCode AccessControlDefault::activateSession(
     return UA_STATUSCODE_BADIDENTITYTOKENINVALID;
 }
 
-void AccessControlDefault::closeSesion(
+void AccessControlDefault::closeSession(
     [[maybe_unused]] Server& server, [[maybe_unused]] const NodeId& sessionId
 ) noexcept {}
 
