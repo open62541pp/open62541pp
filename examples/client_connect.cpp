@@ -4,7 +4,7 @@
 #include "open62541pp/open62541pp.h"
 
 int main(int argc, char* argv[]) {
-    CliParser parser(argc, argv);
+    const CliParser parser(argc, argv);
     if (parser.nargs() < 2 || parser.hasFlag("-h") || parser.hasFlag("--help")) {
         std::cout
             << "usage: client_connect [options] opc.tcp://<host>:<port>\n"

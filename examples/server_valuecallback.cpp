@@ -5,7 +5,7 @@
 int main() {
     opcua::Server server;
 
-    opcua::NodeId currentTimeId(1, "CurrentTime");
+    const opcua::NodeId currentTimeId(1, "CurrentTime");
     auto currentTimeNode =
         server.getObjectsNode()
             .addVariable(currentTimeId, "CurrentTime")
