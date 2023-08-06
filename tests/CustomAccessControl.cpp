@@ -39,7 +39,6 @@ TEST_CASE("CustomAccessControl") {
     customAccessControl.setAccessControl(accessControl);
 
     CHECK(native.context != nullptr);
-    CHECK(native.clear == nullptr);
 
     CHECK(native.userTokenPoliciesSize == 1);  // anonymous only
     CHECK(native.userTokenPolicies != nullptr);
@@ -160,6 +159,7 @@ TEST_CASE("CustomAccessControl") {
         ) == false
     );
 
+#if UAPP_OPEN62541_VER_GE(1, 1)
     CHECK(native.allowBrowseNode != nullptr);
     CHECK(
         native.allowBrowseNode(
@@ -171,8 +171,9 @@ TEST_CASE("CustomAccessControl") {
             nullptr  // node context
         ) == true
     );
+#endif
 
-#ifdef UA_ENABLE_SUBSCRIPTIONS
+#if UAPP_OPEN62541_VER_GE(1, 2) && defined(UA_ENABLE_SUBSCRIPTIONS)
     CHECK(native.allowTransferSubscription != nullptr);
     CHECK(
         native.allowTransferSubscription(
