@@ -152,7 +152,7 @@ static void checkDataTypeEqual(const DataType& dt, const UA_DataType& expected) 
         CHECK((bool)m.isOptional == (bool)expected.members[i].isOptional);  // NOLINT
 #endif
     }
-};
+}
 
 TEST_CASE("DataTypeBuilder") {
     SUBCASE("Struct") {

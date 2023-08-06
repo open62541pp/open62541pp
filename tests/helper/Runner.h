@@ -17,7 +17,7 @@ public:
             while (!stopFlag_) {
                 server.runIterate();
                 // no sleep here, process server events as fast a possible
-            };
+            }
         });
     }
 

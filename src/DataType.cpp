@@ -13,7 +13,7 @@ namespace opcua {
 
 [[maybe_unused]] inline static const char* emptyIfNullptr(const char* name) {
     return name == nullptr ? "" : name;
-};
+}
 
 static void clearMembers(UA_DataType* native) {
     if (native != nullptr) {
