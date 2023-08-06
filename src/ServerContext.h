@@ -21,7 +21,7 @@ public:
 #ifdef UA_ENABLE_SUBSCRIPTIONS
     struct MonitoredItem {
         ReadValueId itemToMonitor;
-        services::DataChangeNotificationCallback dataChangeCallback;
+        services::DataChangeNotificationCallback dataChangeCallback{};
     };
 
     std::map<uint32_t, std::unique_ptr<MonitoredItem>> monitoredItems;
