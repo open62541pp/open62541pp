@@ -10,7 +10,7 @@ using namespace opcua;
 /// Helper class to run server in background thread.
 class ServerRunner {
 public:
-    ServerRunner(Server& server) {
+    explicit ServerRunner(Server& server) {
         server.setLogger({});  // disable logging to prevent data races
         server.runIterate();  // make sure server is running within constructor
         thread_ = std::thread([&] {
