@@ -694,7 +694,11 @@ public:
 };
 #endif
 
-#ifdef UA_TYPES_PERFORMUPDATETYPE
+/**
+ * Perform update type for structured data history updates.
+ * @see UA_PerformUpdateType
+ * @see https://reference.opcfoundation.org/Core/Part11/v104/docs/6.8.3
+ */
 enum class PerformUpdateType : uint32_t {
     // clang-format off
     Insert  = 1,
@@ -703,6 +707,5 @@ enum class PerformUpdateType : uint32_t {
     Remove  = 4,
     // clang-format on
 };
-#endif
 
 }  // namespace opcua

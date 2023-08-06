@@ -106,12 +106,8 @@ TEST_CASE("AccessControlDefault") {
         CHECK(ac.allowDeleteNode(server, sessionId, {}));
         CHECK(ac.allowDeleteReference(server, sessionId, {}));
         CHECK(ac.allowBrowseNode(server, sessionId, {}));
-#ifdef UA_ENABLE_SUBSCRIPTIONS
         CHECK(ac.allowTransferSubscription(server, sessionId, sessionId));
-#endif
-#ifdef UA_ENABLE_HISTORIZING
         CHECK(ac.allowHistoryUpdate(server, sessionId, {}, {}, {}));
         CHECK(ac.allowHistoryDelete(server, sessionId, {}, {}, {}, {}));
-#endif
     }
 }

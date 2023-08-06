@@ -113,14 +113,11 @@ public:
         Server& server, const NodeId& sessionId, const NodeId& nodeId
     ) noexcept = 0;
 
-#ifdef UA_ENABLE_SUBSCRIPTIONS
     /// Allow transfer of a subscription to another session.
     virtual bool allowTransferSubscription(
         Server& server, const NodeId& oldSessionId, const NodeId& newSessionId
     ) noexcept = 0;
-#endif
 
-#ifdef UA_ENABLE_HISTORIZING
     /// Allow insert, replace, update of historical data.
     virtual bool allowHistoryUpdate(
         Server& server,
@@ -139,7 +136,6 @@ public:
         DateTime endTimestamp,
         bool isDeleteModified
     ) noexcept = 0;
-#endif
 };
 
 /* ----------------------------------- Default access control ----------------------------------- */
@@ -204,13 +200,10 @@ public:
         Server& server, const NodeId& sessionId, const NodeId& nodeId
     ) noexcept override;
 
-#ifdef UA_ENABLE_SUBSCRIPTIONS
     bool allowTransferSubscription(
         Server& server, const NodeId& oldSessionId, const NodeId& newSessionId
     ) noexcept override;
-#endif
 
-#ifdef UA_ENABLE_HISTORIZING
     bool allowHistoryUpdate(
         Server& server,
         const NodeId& sessionId,
@@ -227,7 +220,6 @@ public:
         DateTime endTimestamp,
         bool isDeleteModified
     ) noexcept override;
-#endif
 
 private:
     bool allowAnonymous_;

@@ -177,7 +177,6 @@ bool AccessControlDefault::allowBrowseNode(
     return true;
 }
 
-#ifdef UA_ENABLE_SUBSCRIPTIONS
 bool AccessControlDefault::allowTransferSubscription(
     [[maybe_unused]] Server& server,
     [[maybe_unused]] const NodeId& oldSessionId,
@@ -185,9 +184,7 @@ bool AccessControlDefault::allowTransferSubscription(
 ) noexcept {
     return true;
 }
-#endif
 
-#ifdef UA_ENABLE_HISTORIZING
 bool AccessControlDefault::allowHistoryUpdate(
     [[maybe_unused]] Server& server,
     [[maybe_unused]] const NodeId& sessionId,
@@ -208,6 +205,5 @@ bool AccessControlDefault::allowHistoryDelete(
 ) noexcept {
     return true;
 }
-#endif
 
 }  // namespace opcua
