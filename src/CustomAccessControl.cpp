@@ -1,12 +1,15 @@
 #include "CustomAccessControl.h"
 
 #include <cassert>
+#include <utility>  // move
 
 #include "open62541pp/AccessControl.h"
 #include "open62541pp/Config.h"
 #include "open62541pp/Server.h"
+#include "open62541pp/Session.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/DateTime.h"
+#include "open62541pp/types/NodeId.h"
 
 #include "open62541_impl.h"
 
@@ -52,12 +55,16 @@ static UA_StatusCode activateSession(
     [[maybe_unused]] void** sessionContext
 ) {
     auto session = getSession(ac, sessionId);
-    return getAccessControl(ac).activateSession(
+    const auto status = getAccessControl(ac).activateSession(
         session,
         asWrapperRef<EndpointDescription>(endpointDescription),
         asWrapperRef<ByteString>(secureChannelRemoteCertificate),
         asWrapperRef<ExtensionObject>(userIdentityToken)
     );
+    if (status.isGood()) {
+        getContext(ac).onSessionActivated(asWrapperRef<NodeId>(sessionId));
+    }
+    return status.get();
 }
 
 static void closeSession(
@@ -67,7 +74,8 @@ static void closeSession(
     [[maybe_unused]] void* sessionContext
 ) {
     auto session = getSession(ac, sessionId);
-    return getAccessControl(ac).closeSession(session);
+    getAccessControl(ac).closeSession(session);
+    getContext(ac).onSessionClosed(asWrapperRef<NodeId>(sessionId));
 }
 
 static UA_UInt32 getUserRightsMask(
@@ -285,6 +293,22 @@ void CustomAccessControl::setAccessControl(AccessControlBase& accessControl) {
     accessControl_ = &accessControl;
     userTokenPolicies_ = accessControl.getUserTokenPolicies();
     setAccessControl();
+}
+
+void CustomAccessControl::onSessionActivated(const NodeId& sessionId) {
+    sessionIds_.insert(sessionId);
+}
+
+void CustomAccessControl::onSessionClosed(const NodeId& sessionId) {
+    sessionIds_.erase(sessionId);
+}
+
+std::vector<Session> CustomAccessControl::getSessions() const {
+    std::vector<Session> result;
+    for (auto id : sessionIds_) {
+        result.emplace_back(server_, std::move(id));
+    }
+    return result;
 }
 
 Server& CustomAccessControl::getServer() noexcept {

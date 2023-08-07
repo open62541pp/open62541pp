@@ -32,13 +32,17 @@ TEST_CASE("CustomAccessControl") {
     CustomAccessControl customAccessControl(server, native);
     AccessControlTest accessControl;
 
+    CHECK(customAccessControl.getServer() == server);
+
     SUBCASE("Set non-existing access control") {
         CHECK_NOTHROW(customAccessControl.setAccessControl());
+        CHECK(customAccessControl.getAccessControl() == nullptr);
         CHECK(native.context == nullptr);
     }
 
     SUBCASE("Set custom access control") {
         CHECK_NOTHROW(customAccessControl.setAccessControl(accessControl));
+        CHECK(customAccessControl.getAccessControl() == &accessControl);
         CHECK(native.context != nullptr);
 
         CHECK(native.userTokenPoliciesSize == 1);  // anonymous only
@@ -230,5 +234,34 @@ TEST_CASE("CustomAccessControl") {
         CHECK_NOTHROW(customAccessControl.setAccessControl());
         CHECK(native.context != nullptr);
         CHECK(native.context == oldContext);
+    }
+
+    SUBCASE("Store active sessions") {
+        CHECK_NOTHROW(customAccessControl.setAccessControl(accessControl));
+        CHECK(customAccessControl.getSessions().empty());
+
+        // activate session
+        NodeId sessionId(0, 1000);
+        native.activateSession(
+            server.handle(),
+            &native,
+            nullptr,  // endpoint description
+            nullptr,  // secure channel remote certificate
+            sessionId.handle(),  // session id
+            nullptr,  // user identity token
+            nullptr  // session context
+        );
+        CHECK(customAccessControl.getSessions().size() == 1);
+        CHECK(customAccessControl.getSessions().at(0).getConnection() == server);
+        CHECK(customAccessControl.getSessions().at(0).getSessionId() == sessionId);
+
+        // close session
+        native.closeSession(
+            server.handle(),
+            &native,
+            sessionId.handle(),  // session id
+            nullptr  // session context
+        );
+        CHECK(customAccessControl.getSessions().empty());
     }
 }
