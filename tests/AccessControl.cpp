@@ -25,17 +25,13 @@ TEST_CASE("AccessControlDefault") {
             CAPTURE(allowAnonymous);
 
             AccessControlDefault ac(allowAnonymous, {{"username", "password"}});
+            Session session(server, NodeId{});
             const EndpointDescription endpointDescription{};
             const ByteString secureChannelRemoteCertificate{};
-            const NodeId sessionId{};
 
             const auto activateSessionWithToken = [&](const ExtensionObject& userIdentityToken) {
                 return ac.activateSession(
-                    server,
-                    sessionId,
-                    endpointDescription,
-                    secureChannelRemoteCertificate,
-                    userIdentityToken
+                    session, endpointDescription, secureChannelRemoteCertificate, userIdentityToken
                 );
             };
 
@@ -95,19 +91,19 @@ TEST_CASE("AccessControlDefault") {
 
     SUBCASE("Access control callbacks (all permissive)") {
         AccessControlDefault ac;
-        const NodeId sessionId{};
+        Session session(server, NodeId{});
 
-        CHECK(ac.getUserRightsMask(server, sessionId, {}) == 0xFFFFFFFF);
-        CHECK(ac.getUserAccessLevel(server, sessionId, {}) == 0xFF);
-        CHECK(ac.getUserExecutable(server, sessionId, {}));
-        CHECK(ac.getUserExecutableOnObject(server, sessionId, {}, {}));
-        CHECK(ac.allowAddNode(server, sessionId, {}));
-        CHECK(ac.allowAddReference(server, sessionId, {}));
-        CHECK(ac.allowDeleteNode(server, sessionId, {}));
-        CHECK(ac.allowDeleteReference(server, sessionId, {}));
-        CHECK(ac.allowBrowseNode(server, sessionId, {}));
-        CHECK(ac.allowTransferSubscription(server, sessionId, sessionId));
-        CHECK(ac.allowHistoryUpdate(server, sessionId, {}, {}, {}));
-        CHECK(ac.allowHistoryDelete(server, sessionId, {}, {}, {}, {}));
+        CHECK(ac.getUserRightsMask(session, {}) == 0xFFFFFFFF);
+        CHECK(ac.getUserAccessLevel(session, {}) == 0xFF);
+        CHECK(ac.getUserExecutable(session, {}));
+        CHECK(ac.getUserExecutableOnObject(session, {}, {}));
+        CHECK(ac.allowAddNode(session, {}));
+        CHECK(ac.allowAddReference(session, {}));
+        CHECK(ac.allowDeleteNode(session, {}));
+        CHECK(ac.allowDeleteReference(session, {}));
+        CHECK(ac.allowBrowseNode(session, {}));
+        CHECK(ac.allowTransferSubscription(session, session));
+        CHECK(ac.allowHistoryUpdate(session, {}, {}, {}));
+        CHECK(ac.allowHistoryDelete(session, {}, {}, {}, {}));
     }
 }

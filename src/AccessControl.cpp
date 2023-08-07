@@ -44,8 +44,7 @@ std::vector<UserTokenPolicy> AccessControlDefault::getUserTokenPolicies() noexce
 }
 
 StatusCode AccessControlDefault::activateSession(
-    [[maybe_unused]] Server& server,
-    [[maybe_unused]] const NodeId& sessionId,
+    [[maybe_unused]] Session& session,
     [[maybe_unused]] const EndpointDescription& endpointDescription,
     [[maybe_unused]] const ByteString& secureChannelRemoteCertificate,
     const ExtensionObject& userIdentityToken
@@ -100,37 +99,28 @@ StatusCode AccessControlDefault::activateSession(
     return UA_STATUSCODE_BADIDENTITYTOKENINVALID;
 }
 
-void AccessControlDefault::closeSession(
-    [[maybe_unused]] Server& server, [[maybe_unused]] const NodeId& sessionId
-) noexcept {}
+void AccessControlDefault::closeSession([[maybe_unused]] Session& session) noexcept {}
 
 uint32_t AccessControlDefault::getUserRightsMask(
-    [[maybe_unused]] Server& server,
-    [[maybe_unused]] const NodeId& sessionId,
-    [[maybe_unused]] const NodeId& nodeId
+    [[maybe_unused]] Session& session, [[maybe_unused]] const NodeId& nodeId
 ) noexcept {
     return 0xFFFFFFFF;
 }
 
 uint8_t AccessControlDefault::getUserAccessLevel(
-    [[maybe_unused]] Server& server,
-    [[maybe_unused]] const NodeId& sessionId,
-    [[maybe_unused]] const NodeId& nodeId
+    [[maybe_unused]] Session& session, [[maybe_unused]] const NodeId& nodeId
 ) noexcept {
     return 0xFF;
 }
 
 bool AccessControlDefault::getUserExecutable(
-    [[maybe_unused]] Server& server,
-    [[maybe_unused]] const NodeId& sessionId,
-    [[maybe_unused]] const NodeId& methodId
+    [[maybe_unused]] Session& session, [[maybe_unused]] const NodeId& methodId
 ) noexcept {
     return true;
 }
 
 bool AccessControlDefault::getUserExecutableOnObject(
-    [[maybe_unused]] Server& server,
-    [[maybe_unused]] const NodeId& sessionId,
+    [[maybe_unused]] Session& session,
     [[maybe_unused]] const NodeId& methodId,
     [[maybe_unused]] const NodeId& objectId
 ) noexcept {
@@ -138,56 +128,43 @@ bool AccessControlDefault::getUserExecutableOnObject(
 }
 
 bool AccessControlDefault::allowAddNode(
-    [[maybe_unused]] Server& server,
-    [[maybe_unused]] const NodeId& sessionId,
-    [[maybe_unused]] const AddNodesItem& item
+    [[maybe_unused]] Session& session, [[maybe_unused]] const AddNodesItem& item
 ) noexcept {
     return true;
 }
 
 bool AccessControlDefault::allowAddReference(
-    [[maybe_unused]] Server& server,
-    [[maybe_unused]] const NodeId& sessionId,
-    [[maybe_unused]] const AddReferencesItem& item
+    [[maybe_unused]] Session& session, [[maybe_unused]] const AddReferencesItem& item
 ) noexcept {
     return true;
 }
 
 bool AccessControlDefault::allowDeleteNode(
-    [[maybe_unused]] Server& server,
-    [[maybe_unused]] const NodeId& sessionId,
-    [[maybe_unused]] const DeleteNodesItem& item
+    [[maybe_unused]] Session& session, [[maybe_unused]] const DeleteNodesItem& item
 ) noexcept {
     return true;
 }
 
 bool AccessControlDefault::allowDeleteReference(
-    [[maybe_unused]] Server& server,
-    [[maybe_unused]] const NodeId& sessionId,
-    [[maybe_unused]] const DeleteReferencesItem& item
+    [[maybe_unused]] Session& session, [[maybe_unused]] const DeleteReferencesItem& item
 ) noexcept {
     return true;
 }
 
 bool AccessControlDefault::allowBrowseNode(
-    [[maybe_unused]] Server& server,
-    [[maybe_unused]] const NodeId& sessionId,
-    [[maybe_unused]] const NodeId& nodeId
+    [[maybe_unused]] Session& session, [[maybe_unused]] const NodeId& nodeId
 ) noexcept {
     return true;
 }
 
 bool AccessControlDefault::allowTransferSubscription(
-    [[maybe_unused]] Server& server,
-    [[maybe_unused]] const NodeId& oldSessionId,
-    [[maybe_unused]] const NodeId& newSessionId
+    [[maybe_unused]] Session& oldSession, [[maybe_unused]] Session& newSession
 ) noexcept {
     return true;
 }
 
 bool AccessControlDefault::allowHistoryUpdate(
-    [[maybe_unused]] Server& server,
-    [[maybe_unused]] const NodeId& sessionId,
+    [[maybe_unused]] Session& session,
     [[maybe_unused]] const NodeId& nodeId,
     [[maybe_unused]] PerformUpdateType performInsertReplace,  // TODO
     [[maybe_unused]] const DataValue& value
@@ -196,8 +173,7 @@ bool AccessControlDefault::allowHistoryUpdate(
 }
 
 bool AccessControlDefault::allowHistoryDelete(
-    [[maybe_unused]] Server& server,
-    [[maybe_unused]] const NodeId& sessionId,
+    [[maybe_unused]] Session& session,
     [[maybe_unused]] const NodeId& nodeId,
     [[maybe_unused]] DateTime startTimestamp,  // NOLINT
     [[maybe_unused]] DateTime endTimestamp,  // NOLINT

@@ -4,6 +4,7 @@
 
 #include "open62541pp/Auth.h"  // Login
 #include "open62541pp/Config.h"
+#include "open62541pp/Session.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/DataValue.h"
@@ -29,8 +30,8 @@ class Server;
  * The `sessionId` can originally be both `NULL` in open62541.
  * This is the case when, for example, a MonitoredItem (the underlying Subscription) is detached
  * from its Session but continues to run.
- * This wrapper passes `sessionId` by const reference, so it can't be `NULL`.
- * Instead, an empty `NodeId` will be created.
+ * This wrapper passes `session` by reference, so it can't be `NULL`.
+ * Instead, a `session` with an empty `sessionId` will be passed.
  *
  * @see UA_AccessControl
  * @see https://www.open62541.org/doc/1.3/plugin_accesscontrol.html
@@ -52,85 +53,63 @@ public:
 
     /**
      * Authenticate a session.
-     *
-     * The session context is attached to the session and later passed into the access control
-     * callbacks.
-     * The new session is rejected if a status code other than STATUSCODE_GOOD is returned.
+     * The new session is rejected if a status code other than `UA_STATUSCODE_GOOD` is returned.
      */
     virtual StatusCode activateSession(
-        Server& server,
-        const NodeId& sessionId,
+        Session& session,
         const EndpointDescription& endpointDescription,
         const ByteString& secureChannelRemoteCertificate,
         const ExtensionObject& userIdentityToken
     ) noexcept = 0;
 
     /// Deauthenticate a session and cleanup session context.
-    virtual void closeSession(Server& server, const NodeId& sessionId) noexcept = 0;
+    virtual void closeSession(Session& session) noexcept = 0;
 
     /// Access control for all nodes.
-    virtual uint32_t getUserRightsMask(
-        Server& server, const NodeId& sessionId, const NodeId& nodeId
-    ) noexcept = 0;
+    virtual uint32_t getUserRightsMask(Session& session, const NodeId& nodeId) noexcept = 0;
 
     /// Additional access control for variable nodes.
-    virtual uint8_t getUserAccessLevel(
-        Server& server, const NodeId& sessionId, const NodeId& nodeId
-    ) noexcept = 0;
+    virtual uint8_t getUserAccessLevel(Session& session, const NodeId& nodeId) noexcept = 0;
 
     /// Additional access control for method nodes.
-    virtual bool getUserExecutable(
-        Server& server, const NodeId& sessionId, const NodeId& methodId
-    ) noexcept = 0;
+    virtual bool getUserExecutable(Session& session, const NodeId& methodId) noexcept = 0;
 
     /// Additional access control for calling a method node in the context of a specific object.
     virtual bool getUserExecutableOnObject(
-        Server& server, const NodeId& sessionId, const NodeId& methodId, const NodeId& objectId
+        Session& session, const NodeId& methodId, const NodeId& objectId
     ) noexcept = 0;
 
     /// Allow adding a node.
-    virtual bool allowAddNode(
-        Server& server, const NodeId& sessionId, const AddNodesItem& item
-    ) noexcept = 0;
+    virtual bool allowAddNode(Session& session, const AddNodesItem& item) noexcept = 0;
 
     /// Allow adding a reference.
-    virtual bool allowAddReference(
-        Server& server, const NodeId& sessionId, const AddReferencesItem& item
-    ) noexcept = 0;
+    virtual bool allowAddReference(Session& session, const AddReferencesItem& item) noexcept = 0;
 
     /// Allow deleting a node.
-    virtual bool allowDeleteNode(
-        Server& server, const NodeId& sessionId, const DeleteNodesItem& item
-    ) noexcept = 0;
+    virtual bool allowDeleteNode(Session& session, const DeleteNodesItem& item) noexcept = 0;
 
     /// Allow deleting a reference.
     virtual bool allowDeleteReference(
-        Server& server, const NodeId& sessionId, const DeleteReferencesItem& item
+        Session& session, const DeleteReferencesItem& item
     ) noexcept = 0;
 
     /// Allow browsing a node.
-    virtual bool allowBrowseNode(
-        Server& server, const NodeId& sessionId, const NodeId& nodeId
-    ) noexcept = 0;
+    virtual bool allowBrowseNode(Session& session, const NodeId& nodeId) noexcept = 0;
 
     /// Allow transfer of a subscription to another session.
-    virtual bool allowTransferSubscription(
-        Server& server, const NodeId& oldSessionId, const NodeId& newSessionId
-    ) noexcept = 0;
+    virtual bool allowTransferSubscription(Session& oldSession, Session& newSession) noexcept = 0;
 
     /// Allow insert, replace, update of historical data.
     virtual bool allowHistoryUpdate(
-        Server& server,
-        const NodeId& sessionId,
+        Session& session,
         const NodeId& nodeId,
-        PerformUpdateType performInsertReplace,  // TODO
+        PerformUpdateType performInsertReplace,
         const DataValue& value
     ) noexcept = 0;
 
     /// Allow delete of historical data.
     virtual bool allowHistoryDelete(
-        Server& server,
-        const NodeId& sessionId,
+        Session& session,
         const NodeId& nodeId,
         DateTime startTimestamp,
         DateTime endTimestamp,
@@ -155,66 +134,45 @@ public:
     std::vector<UserTokenPolicy> getUserTokenPolicies() noexcept override;
 
     StatusCode activateSession(
-        Server& server,
-        const NodeId& sessionId,
+        Session& session,
         const EndpointDescription& endpointDescription,
         const ByteString& secureChannelRemoteCertificate,
         const ExtensionObject& userIdentityToken
     ) noexcept override;
 
-    void closeSession(Server& server, const NodeId& sessionId) noexcept override;
+    void closeSession(Session& session) noexcept override;
 
-    uint32_t getUserRightsMask(
-        Server& server, const NodeId& sessionId, const NodeId& nodeId
-    ) noexcept override;
+    uint32_t getUserRightsMask(Session& session, const NodeId& nodeId) noexcept override;
 
-    uint8_t getUserAccessLevel(
-        Server& server, const NodeId& sessionId, const NodeId& nodeId
-    ) noexcept override;
+    uint8_t getUserAccessLevel(Session& session, const NodeId& nodeId) noexcept override;
 
-    bool getUserExecutable(
-        Server& server, const NodeId& sessionId, const NodeId& methodId
-    ) noexcept override;
+    bool getUserExecutable(Session& session, const NodeId& methodId) noexcept override;
 
     bool getUserExecutableOnObject(
-        Server& server, const NodeId& sessionId, const NodeId& methodId, const NodeId& objectId
+        Session& session, const NodeId& methodId, const NodeId& objectId
     ) noexcept override;
 
-    bool allowAddNode(
-        Server& server, const NodeId& sessionId, const AddNodesItem& item
-    ) noexcept override;
+    bool allowAddNode(Session& session, const AddNodesItem& item) noexcept override;
 
-    bool allowAddReference(
-        Server& server, const NodeId& sessionId, const AddReferencesItem& item
-    ) noexcept override;
+    bool allowAddReference(Session& session, const AddReferencesItem& item) noexcept override;
 
-    bool allowDeleteNode(
-        Server& server, const NodeId& sessionId, const DeleteNodesItem& item
-    ) noexcept override;
+    bool allowDeleteNode(Session& session, const DeleteNodesItem& item) noexcept override;
 
-    bool allowDeleteReference(
-        Server& server, const NodeId& sessionId, const DeleteReferencesItem& item
-    ) noexcept override;
+    bool allowDeleteReference(Session& session, const DeleteReferencesItem& item) noexcept override;
 
-    bool allowBrowseNode(
-        Server& server, const NodeId& sessionId, const NodeId& nodeId
-    ) noexcept override;
+    bool allowBrowseNode(Session& session, const NodeId& nodeId) noexcept override;
 
-    bool allowTransferSubscription(
-        Server& server, const NodeId& oldSessionId, const NodeId& newSessionId
-    ) noexcept override;
+    bool allowTransferSubscription(Session& oldSession, Session& newSession) noexcept override;
 
     bool allowHistoryUpdate(
-        Server& server,
-        const NodeId& sessionId,
+        Session& session,
         const NodeId& nodeId,
-        PerformUpdateType performInsertReplace,  // TODO
+        PerformUpdateType performInsertReplace,
         const DataValue& value
     ) noexcept override;
 
     bool allowHistoryDelete(
-        Server& server,
-        const NodeId& sessionId,
+        Session& session,
         const NodeId& nodeId,
         DateTime startTimestamp,
         DateTime endTimestamp,

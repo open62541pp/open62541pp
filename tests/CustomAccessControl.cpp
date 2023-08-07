@@ -13,17 +13,13 @@ public:
     using AccessControlDefault::AccessControlDefault;
 
     bool allowDeleteNode(
-        [[maybe_unused]] Server& server,
-        [[maybe_unused]] const NodeId& sessionId,
-        [[maybe_unused]] const DeleteNodesItem& item
+        [[maybe_unused]] Session& session, [[maybe_unused]] const DeleteNodesItem& item
     ) noexcept override {
         return false;
     }
 
     bool allowDeleteReference(
-        [[maybe_unused]] Server& server,
-        [[maybe_unused]] const NodeId& sessionId,
-        [[maybe_unused]] const DeleteReferencesItem& item
+        [[maybe_unused]] Session& session, [[maybe_unused]] const DeleteReferencesItem& item
     ) noexcept override {
         return false;
     }

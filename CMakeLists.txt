@@ -121,6 +121,7 @@ add_library(
     src/MonitoredItem.cpp
     src/Node.cpp
     src/Server.cpp
+    src/Session.cpp
     src/Subscription.cpp
     src/detail/helper.cpp
     src/overloads/ostream.cpp
