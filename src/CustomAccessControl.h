@@ -23,16 +23,14 @@ public:
     /// Set and apply custom access control.
     void setAccessControl(AccessControlBase& accessControl);
 
-    // Data behind the UA_AccessControl context pointer.
-    struct Context {
-        Server& server;
-        AccessControlBase* accessControl;
-        std::vector<UserTokenPolicy> userTokenPolicies;
-    };
+    Server& getServer() noexcept;
+    AccessControlBase* getAccessControl() noexcept;
 
 private:
+    Server& server_;
     UA_AccessControl& native_;
-    Context context_;
+    AccessControlBase* accessControl_{};
+    std::vector<UserTokenPolicy> userTokenPolicies_;
 };
 
 }  // namespace opcua

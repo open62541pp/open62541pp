@@ -14,16 +14,14 @@ namespace opcua {
 
 /* -------------------------------------- Native callbacks -------------------------------------- */
 
-inline static CustomAccessControl::Context& getContext(UA_AccessControl* ac) noexcept {
+inline static CustomAccessControl& getContext(UA_AccessControl* ac) noexcept {
     assert(ac != nullptr);  // NOLINT
     assert(ac->context != nullptr);  // NOLINT
-    auto& context = *static_cast<CustomAccessControl::Context*>(ac->context);
-    assert(context.accessControl != nullptr);  // NOLINT
-    return context;
+    return *static_cast<CustomAccessControl*>(ac->context);
 }
 
 inline static Server& getServer(UA_AccessControl* ac) noexcept {
-    return getContext(ac).server;
+    return getContext(ac).getServer();
 }
 
 template <typename WrapperType, typename NativeType = typename WrapperType::NativeType>
@@ -39,7 +37,9 @@ inline static Session getSession(UA_AccessControl* ac, const UA_NodeId* sessionI
 }
 
 inline static AccessControlBase& getAccessControl(UA_AccessControl* ac) noexcept {
-    return *getContext(ac).accessControl;
+    auto* accessControl = getContext(ac).getAccessControl();
+    assert(accessControl != nullptr);  // NOLINT
+    return *accessControl;
 }
 
 static UA_StatusCode activateSession(
@@ -238,11 +238,11 @@ static UA_Boolean allowHistoryUpdateDeleteRawModified(
 /* ---------------------------------------------------------------------------------------------- */
 
 CustomAccessControl::CustomAccessControl(Server& server, UA_AccessControl& native)
-    : native_{native},
-      context_{server, nullptr, {}} {}
+    : server_(server),
+      native_{native} {}
 
 void CustomAccessControl::setAccessControl() {
-    if (context_.accessControl == nullptr) {
+    if (accessControl_ == nullptr) {
         return;
     }
 #if UAPP_OPEN62541_VER_GE(1, 1)
@@ -256,9 +256,9 @@ void CustomAccessControl::setAccessControl() {
 #endif
 
     native_ = UA_AccessControl{};
-    native_.context = &context_;
-    native_.userTokenPoliciesSize = context_.userTokenPolicies.size();
-    native_.userTokenPolicies = asNative(context_.userTokenPolicies.data());
+    native_.context = this;
+    native_.userTokenPoliciesSize = userTokenPolicies_.size();
+    native_.userTokenPolicies = asNative(userTokenPolicies_.data());
     native_.activateSession = activateSession;
     native_.closeSession = closeSession;
     native_.getUserRightsMask = getUserRightsMask;
@@ -282,9 +282,17 @@ void CustomAccessControl::setAccessControl() {
 }
 
 void CustomAccessControl::setAccessControl(AccessControlBase& accessControl) {
-    context_.accessControl = &accessControl;
-    context_.userTokenPolicies = accessControl.getUserTokenPolicies();
+    accessControl_ = &accessControl;
+    userTokenPolicies_ = accessControl.getUserTokenPolicies();
     setAccessControl();
+}
+
+Server& CustomAccessControl::getServer() noexcept {
+    return server_;
+}
+
+AccessControlBase* CustomAccessControl::getAccessControl() noexcept {
+    return accessControl_;
 }
 
 }  // namespace opcua
