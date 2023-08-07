@@ -11,9 +11,9 @@ set(doxygen_open62541_input_dir  ${CMAKE_CURRENT_BINARY_DIR}/open62541)  # gener
 set(doxygen_open62541_output_dir ${PROJECT_BINARY_DIR}/doxygen_open62541)
 set(doxygen_open62541_html_dir   ${PROJECT_BINARY_DIR}/doc_html/open62541)  # subdirectory of main documentation
 set(doxygen_open62541_tagfile    ${doxygen_open62541_output_dir}/open62541.tag)
-make_directory(${doxygen_open62541_input_dir})
-make_directory(${doxygen_open62541_output_dir})
-make_directory(${doxygen_open62541_html_dir})
+file(MAKE_DIRECTORY ${doxygen_open62541_input_dir})
+file(MAKE_DIRECTORY ${doxygen_open62541_output_dir})
+file(MAKE_DIRECTORY ${doxygen_open62541_html_dir})
 
 get_target_property(open62541_version     open62541::open62541 VERSION)
 get_target_property(open62541_source_dir  open62541::open62541 SOURCE_DIR)
@@ -72,8 +72,8 @@ add_custom_target(
 
 set(doxygen_output_dir ${PROJECT_BINARY_DIR}/doxygen)
 set(doxygen_html_dir   ${PROJECT_BINARY_DIR}/doc_html)
-make_directory(${doxygen_output_dir})
-make_directory(${doxygen_html_dir})
+file(MAKE_DIRECTORY ${doxygen_output_dir})
+file(MAKE_DIRECTORY ${doxygen_html_dir})
 
 configure_file(
     Doxyfile.in

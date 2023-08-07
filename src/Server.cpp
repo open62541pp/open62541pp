@@ -74,7 +74,7 @@ public:
             return;
         }
         runStartup();
-        std::lock_guard<std::mutex> lock(mutex_);
+        const std::lock_guard<std::mutex> lock(mutex_);
         while (running_) {
             // https://github.com/open62541/open62541/blob/master/examples/server_mainloop.c
             UA_Server_run_iterate(handle(), true /* wait for messages in the networklayer */);
@@ -84,7 +84,7 @@ public:
     void stop() {
         running_ = false;
         // wait for run loop to complete
-        std::lock_guard<std::mutex> lock(mutex_);
+        const std::lock_guard<std::mutex> lock(mutex_);
         const auto status = UA_Server_run_shutdown(handle());
         detail::throwOnBadStatus(status);
     }

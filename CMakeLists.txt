@@ -197,7 +197,7 @@ if(UAPP_BUILD_TESTS AND UAPP_ENABLE_COVERAGE)
             WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         )
         set(coverage_html_output_dir "${CMAKE_BINARY_DIR}/coverage_html")
-        make_directory(${coverage_html_output_dir})
+        file(MAKE_DIRECTORY ${coverage_html_output_dir})
         add_custom_target(
             open62541pp_coverage_report_html
             COMMAND ${GCOVR_EXE} ${gcovr_args} "--html-details" "${coverage_html_output_dir}/index.html"
