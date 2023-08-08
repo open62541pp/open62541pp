@@ -27,10 +27,13 @@ public:
 
 TEST_CASE("CustomAccessControl") {
     Server server;
-    UA_AccessControl native{};
 
-    CustomAccessControl customAccessControl(server, native);
+    CustomAccessControl customAccessControl(server);
     AccessControlTest accessControl;
+    UA_AccessControl& native = UA_Server_getConfig(server.handle())->accessControl;
+
+    // reset to empty UA_AccessControl
+    detail::clearUaAccessControl(native);
 
     CHECK(customAccessControl.getServer() == server);
 

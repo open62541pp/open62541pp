@@ -10,6 +10,12 @@ struct UA_AccessControl;
 
 namespace opcua {
 
+namespace detail {
+
+void clearUaAccessControl(UA_AccessControl& ac) noexcept;
+
+}  // namespace detail
+
 // forward declare
 class AccessControlBase;
 class NodeId;
@@ -19,7 +25,7 @@ class UserTokenPolicy;
 
 class CustomAccessControl {
 public:
-    CustomAccessControl(Server& server, UA_AccessControl& native);
+    CustomAccessControl(Server& server);
 
     /// Apply custom access control (after UA_ServerConfig was changed).
     void setAccessControl();
@@ -40,7 +46,6 @@ public:
 
 private:
     Server& server_;
-    UA_AccessControl& native_;
     std::variant<AccessControlBase*, std::unique_ptr<AccessControlBase>> accessControl_;
     std::vector<UserTokenPolicy> userTokenPolicies_;
     std::set<NodeId> sessionIds_;

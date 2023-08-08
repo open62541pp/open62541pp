@@ -245,48 +245,60 @@ static UA_Boolean allowHistoryUpdateDeleteRawModified(
 
 /* ---------------------------------------------------------------------------------------------- */
 
-CustomAccessControl::CustomAccessControl(Server& server, UA_AccessControl& native)
+namespace detail {
+
+void clearUaAccessControl(UA_AccessControl& ac) noexcept {
+#if UAPP_OPEN62541_VER_GE(1, 1)
+    if (ac.clear != nullptr) {
+        ac.clear(&ac);
+    }
+#else
+    if (ac.deleteMembers != nullptr) {
+        ac.deleteMembers(&ac);
+    }
+#endif
+    ac = UA_AccessControl{};
+}
+
+}  // namespace detail
+
+CustomAccessControl::CustomAccessControl(Server& server)
     : server_(server),
-      native_{native},
       accessControl_{nullptr} {}
 
 void CustomAccessControl::setAccessControl() {
     if (getAccessControl() == nullptr) {
         return;
     }
-#if UAPP_OPEN62541_VER_GE(1, 1)
-    if (native_.clear != nullptr) {
-        native_.clear(&native_);
-    }
-#else
-    if (native_.deleteMembers != nullptr) {
-        native_.deleteMembers(&native_);
-    }
-#endif
+    auto* config = UA_Server_getConfig(getServer().handle());
+    assert(config != nullptr);
+    auto& ac = config->accessControl;
 
-    native_ = UA_AccessControl{};
-    native_.context = this;
-    native_.userTokenPoliciesSize = userTokenPolicies_.size();
-    native_.userTokenPolicies = asNative(userTokenPolicies_.data());
-    native_.activateSession = activateSession;
-    native_.closeSession = closeSession;
-    native_.getUserRightsMask = getUserRightsMask;
-    native_.getUserAccessLevel = getUserAccessLevel;
-    native_.getUserExecutable = getUserExecutable;
-    native_.getUserExecutableOnObject = getUserExecutableOnObject;
-    native_.allowAddNode = allowAddNode;
-    native_.allowAddReference = allowAddReference;
-    native_.allowDeleteNode = allowDeleteNode;
-    native_.allowDeleteReference = allowDeleteReference;
+    detail::clearUaAccessControl(ac);
+
+    ac = UA_AccessControl{};
+    ac.context = this;
+    ac.userTokenPoliciesSize = userTokenPolicies_.size();
+    ac.userTokenPolicies = asNative(userTokenPolicies_.data());
+    ac.activateSession = activateSession;
+    ac.closeSession = closeSession;
+    ac.getUserRightsMask = getUserRightsMask;
+    ac.getUserAccessLevel = getUserAccessLevel;
+    ac.getUserExecutable = getUserExecutable;
+    ac.getUserExecutableOnObject = getUserExecutableOnObject;
+    ac.allowAddNode = allowAddNode;
+    ac.allowAddReference = allowAddReference;
+    ac.allowDeleteNode = allowDeleteNode;
+    ac.allowDeleteReference = allowDeleteReference;
 #if UAPP_OPEN62541_VER_GE(1, 1)
-    native_.allowBrowseNode = allowBrowseNode;
+    ac.allowBrowseNode = allowBrowseNode;
 #endif
 #if UAPP_OPEN62541_VER_GE(1, 2) && defined(UA_ENABLE_SUBSCRIPTIONS)
-    native_.allowTransferSubscription = allowTransferSubscription;
+    ac.allowTransferSubscription = allowTransferSubscription;
 #endif
 #ifdef UA_ENABLE_HISTORIZING
-    native_.allowHistoryUpdateUpdateData = allowHistoryUpdateUpdateData;
-    native_.allowHistoryUpdateDeleteRawModified = allowHistoryUpdateDeleteRawModified;
+    ac.allowHistoryUpdateUpdateData = allowHistoryUpdateUpdateData;
+    ac.allowHistoryUpdateDeleteRawModified = allowHistoryUpdateDeleteRawModified;
 #endif
 }
 
