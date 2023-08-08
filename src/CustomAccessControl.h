@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <set>
+#include <variant>
 #include <vector>
 
 // forward declare
@@ -25,6 +26,8 @@ public:
 
     /// Set and apply custom access control.
     void setAccessControl(AccessControlBase& accessControl);
+    /// Set and apply custom access control (transfer ownership).
+    void setAccessControl(std::unique_ptr<AccessControlBase> accessControl);
 
     void onSessionActivated(const NodeId& sessionId);
     void onSessionClosed(const NodeId& sessionId);
@@ -38,7 +41,7 @@ public:
 private:
     Server& server_;
     UA_AccessControl& native_;
-    AccessControlBase* accessControl_{};
+    std::variant<AccessControlBase*, std::unique_ptr<AccessControlBase>> accessControl_;
     std::vector<UserTokenPolicy> userTokenPolicies_;
     std::set<NodeId> sessionIds_;
 };

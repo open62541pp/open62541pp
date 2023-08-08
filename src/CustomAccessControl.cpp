@@ -247,10 +247,11 @@ static UA_Boolean allowHistoryUpdateDeleteRawModified(
 
 CustomAccessControl::CustomAccessControl(Server& server, UA_AccessControl& native)
     : server_(server),
-      native_{native} {}
+      native_{native},
+      accessControl_{nullptr} {}
 
 void CustomAccessControl::setAccessControl() {
-    if (accessControl_ == nullptr) {
+    if (getAccessControl() == nullptr) {
         return;
     }
 #if UAPP_OPEN62541_VER_GE(1, 1)
@@ -290,8 +291,14 @@ void CustomAccessControl::setAccessControl() {
 }
 
 void CustomAccessControl::setAccessControl(AccessControlBase& accessControl) {
-    accessControl_ = &accessControl;
     userTokenPolicies_ = accessControl.getUserTokenPolicies();
+    accessControl_ = &accessControl;
+    setAccessControl();
+}
+
+void CustomAccessControl::setAccessControl(std::unique_ptr<AccessControlBase> accessControl) {
+    userTokenPolicies_ = accessControl->getUserTokenPolicies();
+    accessControl_ = std::move(accessControl);
     setAccessControl();
 }
 
@@ -316,7 +323,13 @@ Server& CustomAccessControl::getServer() noexcept {
 }
 
 AccessControlBase* CustomAccessControl::getAccessControl() noexcept {
-    return accessControl_;
+    if (auto* ptr = std::get_if<0>(&accessControl_); ptr != nullptr) {
+        return *ptr;
+    }
+    if (auto* ptr = std::get_if<1>(&accessControl_); ptr != nullptr) {
+        return ptr->get();
+    }
+    return nullptr;
 }
 
 }  // namespace opcua
