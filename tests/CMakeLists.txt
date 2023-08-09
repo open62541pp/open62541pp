@@ -16,6 +16,7 @@ add_executable(
     overloads.cpp
     Server.cpp
     Services.cpp
+    Session.cpp
     Subscription_MonitoredItem.cpp
     TypeConverter.cpp
     Types.cpp

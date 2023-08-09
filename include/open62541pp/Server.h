@@ -22,6 +22,7 @@ namespace opcua {
 class AccessControlBase;
 class DataType;
 class ServerContext;
+class Session;
 template <typename ServerOrClient>
 class Node;
 
@@ -90,6 +91,9 @@ public:
     void setApplicationUri(std::string_view uri);
     /// Set product URI, default: `http://open62541.org`.
     void setProductUri(std::string_view uri);
+
+    /// Get active client session.
+    std::vector<Session> getSessions() const;
 
     /// Get all defined namespaces.
     std::vector<std::string> getNamespaceArray();

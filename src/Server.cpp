@@ -9,6 +9,7 @@
 #include "open62541pp/Config.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Node.h"
+#include "open62541pp/Session.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/helper.h"
 #include "open62541pp/services/Attribute.h"
@@ -221,6 +222,10 @@ void Server::setAccessControl(AccessControlBase& accessControl) {
 
 void Server::setAccessControl(std::unique_ptr<AccessControlBase> accessControl) {
     connection_->getCustomAccessControl().setAccessControl(std::move(accessControl));
+}
+
+std::vector<Session> Server::getSessions() const {
+    return connection_->getCustomAccessControl().getSessions();
 }
 
 std::vector<std::string> Server::getNamespaceArray() {
