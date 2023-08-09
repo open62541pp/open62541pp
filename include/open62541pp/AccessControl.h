@@ -49,6 +49,8 @@ public:
     AccessControlBase& operator=(AccessControlBase&&) noexcept = default;
 
     /// Get available user token policies.
+    /// If the `securityPolicyUri` is empty, the highest available security policy will be used to
+    /// transfer user tokens.
     virtual std::vector<UserTokenPolicy> getUserTokenPolicies() noexcept = 0;
 
     /**

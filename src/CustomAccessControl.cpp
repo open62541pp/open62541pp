@@ -290,13 +290,26 @@ void CustomAccessControl::setAccessControl() {
     if (getAccessControl() == nullptr) {
         return;
     }
-    auto* config = UA_Server_getConfig(getServer().handle());
-    assert(config != nullptr);
-    auto& ac = config->accessControl;
 
+    auto* config = UA_Server_getConfig(getServer().handle());
+    assert(config != nullptr);  // NOLINT
+
+    // use highest security policy to transfer user tokens
+    if (config->securityPoliciesSize > 0) {
+        const String highestSecurityPoliciyUri(
+            config->securityPolicies[config->securityPoliciesSize - 1].policyUri  // NOLINT
+        );
+        for (auto& userTokenPolicy : userTokenPolicies_) {
+            if (userTokenPolicy.getTokenType() != UserTokenType::Anonymous &&
+                userTokenPolicy.getSecurityPolicyUri().empty()) {
+                userTokenPolicy.getSecurityPolicyUri() = highestSecurityPoliciyUri;
+            }
+        }
+    }
+
+    auto& ac = config->accessControl;
     detail::clearUaAccessControl(ac);
 
-    ac = UA_AccessControl{};
     ac.context = this;
     ac.userTokenPoliciesSize = userTokenPolicies_.size();
     ac.userTokenPolicies = asNative(userTokenPolicies_.data());
