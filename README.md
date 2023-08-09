@@ -214,7 +214,7 @@ target_link_libraries(myexecutable PRIVATE open62541pp::open62541pp)
 git clone --recursive https://github.com/open62541pp/open62541pp.git
 cd open62541pp
 
-# build and run tests
+# build
 mkdir build
 cd build
 cmake -DCMAKE_BUILD_TYPE=Debug -DUAPP_BUILD_EXAMPLES=ON -DUAPP_BUILD_TESTS=ON ..
@@ -235,3 +235,8 @@ cmake --install .
 
 - [open62541](https://github.com/open62541/open62541) as integrated submodule or external dependency
 - [doctest](https://github.com/doctest/doctest) for tests as integrated submodule
+
+## 🤝 Contribute
+
+Contributions and feature requests are very welcome.
+Please have a look at the [contribution guidelines](https://github.com/open62541pp/open62541pp/blob/master/CONTRIBUTING.md).
