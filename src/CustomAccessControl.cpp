@@ -58,8 +58,20 @@ inline static void logException(
     log(server, LogLevel::Warning, LogCategory::Server, message);
 }
 
+template <typename F, typename ReturnType = std::invoke_result_t<F>>
+inline static auto invokeAccessCallback(
+    UA_Server* server, std::string_view callbackName, ReturnType returnOnException, F&& fn
+) noexcept {
+    try {
+        return std::invoke(fn);
+    } catch (const std::exception& e) {
+        logException(server, callbackName, e.what());
+        return returnOnException;
+    }
+}
+
 static UA_StatusCode activateSession(
-    [[maybe_unused]] UA_Server* server,
+    UA_Server* server,
     UA_AccessControl* ac,
     const UA_EndpointDescription* endpointDescription,
     const UA_ByteString* secureChannelRemoteCertificate,
@@ -67,7 +79,7 @@ static UA_StatusCode activateSession(
     const UA_ExtensionObject* userIdentityToken,
     [[maybe_unused]] void** sessionContext
 ) {
-    try {
+    return invokeAccessCallback(server, "activateSession", UA_STATUSCODE_BADINTERNALERROR, [&] {
         auto session = getSession(ac, sessionId);
         const auto status = getAccessControl(ac).activateSession(
             session,
@@ -79,14 +91,11 @@ static UA_StatusCode activateSession(
             getContext(ac).onSessionActivated(asWrapperRef<NodeId>(sessionId));
         }
         return status.get();
-    } catch (const std::exception& e) {
-        logException(server, "activateSession", e.what());
-        return UA_STATUSCODE_BADINTERNALERROR;
-    }
+    });
 }
 
 static void closeSession(
-    [[maybe_unused]] UA_Server* server,
+    UA_Server* server,
     UA_AccessControl* ac,
     const UA_NodeId* sessionId,
     [[maybe_unused]] void* sessionContext
@@ -101,58 +110,49 @@ static void closeSession(
 }
 
 static UA_UInt32 getUserRightsMask(
-    [[maybe_unused]] UA_Server* server,
+    UA_Server* server,
     UA_AccessControl* ac,
     const UA_NodeId* sessionId,
     [[maybe_unused]] void* sessionContext,
     const UA_NodeId* nodeId,
     [[maybe_unused]] void* nodeContext
 ) {
-    try {
+    return invokeAccessCallback(server, "getUserRightsMask", uint32_t{}, [&] {
         auto session = getSession(ac, sessionId);
         return getAccessControl(ac).getUserRightsMask(session, asWrapperRef<NodeId>(nodeId));
-    } catch (const std::exception& e) {
-        logException(server, "getUserRightsMask", e.what());
-        return 0x00000000;
-    }
+    });
 }
 
 static UA_Byte getUserAccessLevel(
-    [[maybe_unused]] UA_Server* server,
+    UA_Server* server,
     UA_AccessControl* ac,
     const UA_NodeId* sessionId,
     [[maybe_unused]] void* sessionContext,
     const UA_NodeId* nodeId,
     [[maybe_unused]] void* nodeContext
 ) {
-    try {
+    return invokeAccessCallback(server, "getUserAccessLevel", uint8_t{}, [&] {
         auto session = getSession(ac, sessionId);
         return getAccessControl(ac).getUserAccessLevel(session, asWrapperRef<NodeId>(nodeId));
-    } catch (const std::exception& e) {
-        logException(server, "getUserAccessLevel", e.what());
-        return 0x00;
-    }
+    });
 }
 
 static UA_Boolean getUserExecutable(
-    [[maybe_unused]] UA_Server* server,
+    UA_Server* server,
     UA_AccessControl* ac,
     const UA_NodeId* sessionId,
     [[maybe_unused]] void* sessionContext,
     const UA_NodeId* methodId,
     [[maybe_unused]] void* methodContext
 ) {
-    try {
+    return invokeAccessCallback(server, "getUserExecutable", false, [&] {
         auto session = getSession(ac, sessionId);
         return getAccessControl(ac).getUserExecutable(session, asWrapperRef<NodeId>(methodId));
-    } catch (const std::exception& e) {
-        logException(server, "getUserExecutable", e.what());
-        return false;
-    }
+    });
 }
 
 static UA_Boolean getUserExecutableOnObject(
-    [[maybe_unused]] UA_Server* server,
+    UA_Server* server,
     UA_AccessControl* ac,
     const UA_NodeId* sessionId,
     [[maybe_unused]] void* sessionContext,
@@ -161,125 +161,104 @@ static UA_Boolean getUserExecutableOnObject(
     const UA_NodeId* objectId,
     [[maybe_unused]] void* objectContext
 ) {
-    try {
+    return invokeAccessCallback(server, "getUserExecutableOnObject", false, [&] {
         auto session = getSession(ac, sessionId);
         return getAccessControl(ac).getUserExecutableOnObject(
             session, asWrapperRef<NodeId>(methodId), asWrapperRef<NodeId>(objectId)
         );
-    } catch (const std::exception& e) {
-        logException(server, "getUserExecutableOnObject", e.what());
-        return false;
-    }
+    });
 }
 
 static UA_Boolean allowAddNode(
-    [[maybe_unused]] UA_Server* server,
+    UA_Server* server,
     UA_AccessControl* ac,
     const UA_NodeId* sessionId,
     [[maybe_unused]] void* sessionContext,
     const UA_AddNodesItem* item
 ) {
-    try {
+    return invokeAccessCallback(server, "allowAddNode", false, [&] {
         auto session = getSession(ac, sessionId);
         return getAccessControl(ac).allowAddNode(session, asWrapperRef<AddNodesItem>(item));
-    } catch (const std::exception& e) {
-        logException(server, "allowAddNode", e.what());
-        return false;
-    }
+    });
 }
 
 static UA_Boolean allowAddReference(
-    [[maybe_unused]] UA_Server* server,
+    UA_Server* server,
     UA_AccessControl* ac,
     const UA_NodeId* sessionId,
     [[maybe_unused]] void* sessionContext,
     const UA_AddReferencesItem* item
 ) {
-    try {
+    return invokeAccessCallback(server, "allowAddReference", false, [&] {
         auto session = getSession(ac, sessionId);
         return getAccessControl(ac).allowAddReference(
             session, asWrapperRef<AddReferencesItem>(item)
         );
-    } catch (const std::exception& e) {
-        logException(server, "allowAddReference", e.what());
-        return false;
-    }
+    });
 }
 
 static UA_Boolean allowDeleteNode(
-    [[maybe_unused]] UA_Server* server,
+    UA_Server* server,
     UA_AccessControl* ac,
     const UA_NodeId* sessionId,
     [[maybe_unused]] void* sessionContext,
     const UA_DeleteNodesItem* item
 ) {
-    try {
+    return invokeAccessCallback(server, "allowDeleteNode", false, [&] {
         auto session = getSession(ac, sessionId);
         return getAccessControl(ac).allowDeleteNode(session, asWrapperRef<DeleteNodesItem>(item));
-    } catch (const std::exception& e) {
-        logException(server, "allowDeleteNode", e.what());
-        return false;
-    }
+    });
 }
 
 static UA_Boolean allowDeleteReference(
-    [[maybe_unused]] UA_Server* server,
+    UA_Server* server,
     UA_AccessControl* ac,
     const UA_NodeId* sessionId,
     [[maybe_unused]] void* sessionContext,
     const UA_DeleteReferencesItem* item
 ) {
-    try {
+    return invokeAccessCallback(server, "allowDeleteReference", false, [&] {
         auto session = getSession(ac, sessionId);
         return getAccessControl(ac).allowDeleteReference(
             session, asWrapperRef<DeleteReferencesItem>(item)
         );
-    } catch (const std::exception& e) {
-        logException(server, "allowDeleteReference", e.what());
-        return false;
-    }
+    });
 }
 
 [[maybe_unused]] static UA_Boolean allowBrowseNode(
-    [[maybe_unused]] UA_Server* server,
+    UA_Server* server,
     UA_AccessControl* ac,
     const UA_NodeId* sessionId,
     [[maybe_unused]] void* sessionContext,
     const UA_NodeId* nodeId,
     [[maybe_unused]] void* nodeContext
 ) {
-    try {
+    return invokeAccessCallback(server, "allowBrowseNode", false, [&] {
         auto session = getSession(ac, sessionId);
         return getAccessControl(ac).allowBrowseNode(session, asWrapperRef<NodeId>(nodeId));
-    } catch (const std::exception& e) {
-        logException(server, "allowBrowseNode", e.what());
-        return false;
-    }
+    });
 }
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 [[maybe_unused]] static UA_Boolean allowTransferSubscription(
-    [[maybe_unused]] UA_Server* server,
+    UA_Server* server,
     UA_AccessControl* ac,
     const UA_NodeId* oldSessionId,
     [[maybe_unused]] void* oldSessionContext,
     const UA_NodeId* newSessionId,
     [[maybe_unused]] void* newSessionContext
 ) {
-    try {
+    return invokeAccessCallback(server, "allowTransferSubscription", false, [&] {
         auto oldSession = getSession(ac, oldSessionId);
         auto newSession = getSession(ac, newSessionId);
         return getAccessControl(ac).allowTransferSubscription(oldSession, newSession);
-    } catch (const std::exception& e) {
-        logException(server, "allowTransferSubscription", e.what());
-        return false;
-    }
+    });
 }
 #endif
 
 #ifdef UA_ENABLE_HISTORIZING
 static UA_Boolean allowHistoryUpdateUpdateData(
-    [[maybe_unused]] UA_Server* server,
+    UA_Server* server,
     UA_AccessControl* ac,
     const UA_NodeId* sessionId,
     [[maybe_unused]] void* sessionContext,
@@ -287,7 +266,7 @@ static UA_Boolean allowHistoryUpdateUpdateData(
     UA_PerformUpdateType performInsertReplace,
     const UA_DataValue* value
 ) {
-    try {
+    return invokeAccessCallback(server, "allowHistoryUpdate", false, [&] {
         auto session = getSession(ac, sessionId);
         return getAccessControl(ac).allowHistoryUpdate(
             session,
@@ -295,14 +274,11 @@ static UA_Boolean allowHistoryUpdateUpdateData(
             static_cast<PerformUpdateType>(performInsertReplace),
             asWrapperRef<DataValue>(value)
         );
-    } catch (const std::exception& e) {
-        logException(server, "allowHistoryUpdate", e.what());
-        return false;
-    }
+    });
 }
 
 static UA_Boolean allowHistoryUpdateDeleteRawModified(
-    [[maybe_unused]] UA_Server* server,
+    UA_Server* server,
     UA_AccessControl* ac,
     const UA_NodeId* sessionId,
     [[maybe_unused]] void* sessionContext,
@@ -311,7 +287,7 @@ static UA_Boolean allowHistoryUpdateDeleteRawModified(
     UA_DateTime endTimestamp,
     bool isDeleteModified
 ) {
-    try {
+    return invokeAccessCallback(server, "allowHistoryDelete", false, [&] {
         auto session = getSession(ac, sessionId);
         return getAccessControl(ac).allowHistoryDelete(
             session,
@@ -320,10 +296,7 @@ static UA_Boolean allowHistoryUpdateDeleteRawModified(
             DateTime(endTimestamp),
             isDeleteModified
         );
-    } catch (const std::exception& e) {
-        logException(server, "allowHistoryDelete", e.what());
-        return false;
-    }
+    });
 }
 #endif
 
