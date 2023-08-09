@@ -8,6 +8,7 @@ using namespace opcua;
 // If a user logs in with the username "admin", a session attribute "isAdmin" is stored. As an
 // example, the user "admin" has write access level to the created variable node. So admins can
 // change the value of the created variable node, anonymous users and the user "user" can't.
+// Session attributes are available since open62541 v1.3, so this example requires at least v1.3.
 class AccessControlCustom : public AccessControlDefault {
 public:
     using Base = AccessControlDefault;

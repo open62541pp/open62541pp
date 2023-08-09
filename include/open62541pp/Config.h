@@ -11,6 +11,10 @@
 // open62541pp specific macros/defines
 
 // NOLINTNEXTLINE
+#define UAPP_OPEN62541_VER_EQ(MAJOR, MINOR)                                                        \
+    (UA_OPEN62541_VER_MAJOR == (MAJOR)) && (UA_OPEN62541_VER_MINOR == (MINOR))
+
+// NOLINTNEXTLINE
 #define UAPP_OPEN62541_VER_GE(MAJOR, MINOR)                                                        \
     (UA_OPEN62541_VER_MAJOR >= (MAJOR)) && (UA_OPEN62541_VER_MINOR >= (MINOR))
 
