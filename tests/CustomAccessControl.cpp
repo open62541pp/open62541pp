@@ -1,5 +1,7 @@
 #include <doctest/doctest.h>
 
+#include <stdexcept>
+
 #include "open62541pp/AccessControl.h"
 #include "open62541pp/Server.h"
 
@@ -11,6 +13,12 @@ using namespace opcua;
 class AccessControlTest : public AccessControlDefault {
 public:
     using AccessControlDefault::AccessControlDefault;
+
+    uint8_t getUserAccessLevel(
+        [[maybe_unused]] Session& session, [[maybe_unused]] const NodeId& nodeId
+    ) {
+        throw std::runtime_error("This exception should result in most restrictive access");
+    }
 
     bool allowDeleteNode(
         [[maybe_unused]] Session& session, [[maybe_unused]] const DeleteNodesItem& item
@@ -123,7 +131,7 @@ TEST_CASE("CustomAccessControl") {
                 nullptr,  // session context
                 nullptr,  // node id
                 nullptr  // node context
-            ) == 0xFF
+            ) == 0x00  // most restrictive access due to exception
         );
 
         CHECK(native.getUserExecutable != nullptr);
