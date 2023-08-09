@@ -21,7 +21,6 @@
 #include "open62541pp/detail/helper.h"
 #include "open62541pp/detail/traits.h"
 #include "open62541pp/overloads/comparison.h"
-#include "open62541pp/overloads/ostream.h"
 #include "open62541pp/services/services.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"

@@ -11,7 +11,6 @@ add_executable(
     helper.cpp
     Logger.cpp
     Node.cpp
-    overloads.cpp
     Server.cpp
     Services.cpp
     Subscription_MonitoredItem.cpp

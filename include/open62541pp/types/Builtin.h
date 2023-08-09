@@ -3,6 +3,7 @@
 #include <array>
 #include <cstdint>
 #include <filesystem>
+#include <iosfwd>  // forward declare ostream
 #include <string>
 #include <string_view>
 #include <vector>
@@ -110,6 +111,8 @@ bool operator!=(const String& lhs, std::string_view rhs) noexcept;
 bool operator==(std::string_view lhs, const String& rhs) noexcept;
 bool operator!=(std::string_view lhs, const String& rhs) noexcept;
 
+std::ostream& operator<<(std::ostream& os, const String& string);
+
 /**
  * UA_Guid wrapper class.
  * @ingroup TypeWrapper
@@ -125,6 +128,8 @@ public:
 
     std::string toString() const;
 };
+
+std::ostream& operator<<(std::ostream& os, const Guid& guid);
 
 /**
  * UA_ByteString wrapper class.
@@ -177,6 +182,8 @@ public:
 
     std::string_view get() const;
 };
+
+std::ostream& operator<<(std::ostream& os, const XmlElement& xmlElement);
 
 /**
  * UA_QualifiedName wrapper class.

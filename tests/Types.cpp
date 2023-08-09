@@ -1,4 +1,5 @@
 #include <array>
+#include <sstream>
 #include <string>
 #include <utility>  // move
 #include <vector>
@@ -88,6 +89,12 @@ TEST_CASE_TEMPLATE("StringLike equality overloads", T, String, ByteString) {
     CHECK(std::string("test") != T("abc"));
 }
 
+TEST_CASE_TEMPLATE("StringLike ostream overloads", T, String, XmlElement) {
+    std::ostringstream ss;
+    ss << T("test123");
+    CHECK(ss.str() == "test123");
+}
+
 TEST_CASE("ByteString") {
     SUBCASE("Construct from string") {
         const ByteString bs("XYZ");
@@ -151,6 +158,12 @@ TEST_CASE("Guid") {
             const Guid guid{3298187146, 3582, 19343, {135, 10, 116, 82, 56, 198, 174, 174}};
             CHECK(guid.toString() == "C496578A-0DFE-4B8F-870A-745238C6AEAE");
         }
+    }
+
+    SUBCASE("ostream overload") {
+        std::ostringstream ss;
+        ss << Guid{};
+        CHECK(ss.str() == "00000000-0000-0000-0000-000000000000");
     }
 }
 
