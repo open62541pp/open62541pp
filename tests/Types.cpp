@@ -294,6 +294,11 @@ TEST_CASE("NodeId") {
         CHECK(NodeId(1, "b") > NodeId(1, "a"));
     }
 
+    SUBCASE("isNull") {
+        CHECK(NodeId().isNull());
+        CHECK_FALSE(NodeId(0, 1).isNull());
+    }
+
     SUBCASE("Hash") {
         CHECK(NodeId(0, 1).hash() == NodeId(0, 1).hash());
         CHECK(NodeId(0, 1).hash() != NodeId(0, 2).hash());

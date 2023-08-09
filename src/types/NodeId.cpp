@@ -35,6 +35,10 @@ NodeId::NodeId(uint16_t namespaceIndex, const Guid& identifier)
 NodeId::NodeId(uint16_t namespaceIndex, const ByteString& identifier)
     : NodeId(fromStringView(namespaceIndex, UA_NODEIDTYPE_BYTESTRING, identifier.get())) {}
 
+bool NodeId::isNull() const noexcept {
+    return UA_NodeId_isNull(handle());
+}
+
 uint32_t NodeId::hash() const {
     return UA_NodeId_hash(handle());
 }

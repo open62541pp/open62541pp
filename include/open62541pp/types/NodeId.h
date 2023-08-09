@@ -75,6 +75,8 @@ public:
     NodeId(MethodId id) noexcept  // NOLINT, implicit wanted
         : NodeId(0, static_cast<uint32_t>(id)) {}
 
+    bool isNull() const noexcept;
+
     uint32_t hash() const;
 
     uint16_t getNamespaceIndex() const noexcept;
