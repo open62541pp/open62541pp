@@ -444,7 +444,7 @@ TEST_CASE("Variant") {
         }
         SUBCASE("Copy if not assignable (const or conversion check failed)") {
             std::string value{"test"};
-            const auto var = Variant::fromScalar<std::string, Type::String>(value);
+            const auto var = Variant::fromScalar<std::string>(value);
             CHECK(var.isScalar());
             CHECK(var->data != &value);
         }
@@ -592,7 +592,7 @@ TEST_CASE("Variant") {
             detail::allocUaString("item3"),
         };
 
-        var.setArray<UA_String, Type::String>(array.data(), array.size());
+        var.setArray<UA_String>(array.data(), array.size(), UA_TYPES[UA_TYPES_STRING]);
         CHECK(var.getArrayLength() == array.size());
         CHECK(var.getArray() == array.data());
 
@@ -614,7 +614,7 @@ TEST_CASE("Variant") {
     SUBCASE("Set/get array of strings") {
         Variant var;
         std::vector<std::string> value{"a", "b", "c"};
-        var.setArrayCopy<std::string, Type::String>(value);
+        var.setArrayCopy<std::string>(value);
 
         CHECK(var.isArray());
         CHECK(var.isType(Type::String));
