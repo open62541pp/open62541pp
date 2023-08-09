@@ -39,7 +39,7 @@ bool NodeId::isNull() const noexcept {
     return UA_NodeId_isNull(handle());
 }
 
-uint32_t NodeId::hash() const {
+uint32_t NodeId::hash() const noexcept {
     return UA_NodeId_hash(handle());
 }
 

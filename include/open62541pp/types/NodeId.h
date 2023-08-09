@@ -77,7 +77,7 @@ public:
 
     bool isNull() const noexcept;
 
-    uint32_t hash() const;
+    uint32_t hash() const noexcept;
 
     uint16_t getNamespaceIndex() const noexcept;
 
