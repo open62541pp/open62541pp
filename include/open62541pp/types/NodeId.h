@@ -128,6 +128,8 @@ public:
 
     bool isLocal() const noexcept;
 
+    uint32_t hash() const noexcept;
+
     NodeId& getNodeId() noexcept;
     const NodeId& getNodeId() const noexcept;
 

@@ -374,6 +374,12 @@ TEST_CASE("ExpandedNodeId") {
     CHECK(idLocal == idLocal);
     CHECK(idLocal != idFull);
 
+    SUBCASE("Hash") {
+        CHECK(ExpandedNodeId().hash() == ExpandedNodeId().hash());
+        CHECK(ExpandedNodeId().hash() != idLocal.hash());
+        CHECK(ExpandedNodeId().hash() != idFull.hash());
+    }
+
     SUBCASE("toString") {
         CHECK_EQ(ExpandedNodeId({2, 10157}).toString(), "ns=2;i=10157");
         CHECK_EQ(

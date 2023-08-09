@@ -107,6 +107,10 @@ bool ExpandedNodeId::isLocal() const noexcept {
     return detail::isEmpty(handle()->namespaceUri) && handle()->serverIndex == 0;
 }
 
+uint32_t ExpandedNodeId::hash() const noexcept {
+    return UA_ExpandedNodeId_hash(handle());
+}
+
 NodeId& ExpandedNodeId::getNodeId() noexcept {
     return asWrapper<NodeId>(handle()->nodeId);
 }
