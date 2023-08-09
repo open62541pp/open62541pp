@@ -707,13 +707,20 @@ TEST_CASE("DataValue") {
     }
 
     SUBCASE("Constructor with all optional parameter specified") {
-        DataValue dv(Variant::fromScalar(5), DateTime{1}, DateTime{2}, 3, 4, 5);
+        DataValue dv(
+            Variant::fromScalar(5),
+            DateTime{1},
+            DateTime{2},
+            uint16_t{3},
+            uint16_t{4},
+            UA_STATUSCODE_BADINTERNALERROR
+        );
         CHECK(dv.getValue().isScalar());
         CHECK(dv.getSourceTimestamp() == DateTime{1});
         CHECK(dv.getServerTimestamp() == DateTime{2});
         CHECK(dv.getSourcePicoseconds() == 3);
         CHECK(dv.getServerPicoseconds() == 4);
-        CHECK(dv.getStatusCode() == 5);
+        CHECK(dv.getStatusCode() == UA_STATUSCODE_BADINTERNALERROR);
     }
 
     SUBCASE("Setter methods") {

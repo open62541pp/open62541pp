@@ -59,9 +59,14 @@ struct TypeConverter {
 
 namespace detail {
 
-template <typename T, typename TypeIndexOrType>
-constexpr bool isValidTypeCombination(TypeIndexOrType typeOrTypeIndex) {
-    return TypeConverter<T>::ValidTypes::contains(typeOrTypeIndex);
+template <typename T>
+constexpr bool isValidTypeCombination(TypeIndex typeIndex) {
+    return TypeConverter<T>::ValidTypes::contains(typeIndex);
+}
+
+template <typename T>
+constexpr bool isValidTypeCombination(Type type) {
+    return TypeConverter<T>::ValidTypes::contains(type);
 }
 
 template <typename T>

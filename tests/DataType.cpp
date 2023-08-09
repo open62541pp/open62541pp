@@ -134,8 +134,8 @@ static void checkDataTypeEqual(const DataType& dt, const UA_DataType& expected) 
 #endif
     CHECK(dt.getMemSize() == expected.memSize);
     CHECK(dt.getTypeKind() == expected.typeKind);
-    CHECK(dt.getPointerFree() == expected.pointerFree);
-    CHECK(dt.getOverlayable() == expected.overlayable);
+    CHECK(dt.getPointerFree() == static_cast<bool>(expected.pointerFree));
+    CHECK(dt.getOverlayable() == static_cast<bool>(expected.overlayable));
     CHECK(dt.getMembersSize() == expected.membersSize);
     for (uint8_t i = 0; i < dt.getMembersSize(); ++i) {
         CAPTURE(i);

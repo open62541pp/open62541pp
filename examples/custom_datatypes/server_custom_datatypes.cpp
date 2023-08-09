@@ -82,7 +82,7 @@ int main() {
         nodeVariableTypePoint.getNodeId()
     );
 
-    std::vector<float> measurementsValues{19.1, 20.2, 19.7};
+    std::vector<float> measurementsValues{19.1F, 20.2F, 19.7F};
     const Measurements measurements{
         opcua::String("Test description"),
         measurementsValues.size(),

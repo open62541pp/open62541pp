@@ -301,7 +301,7 @@ DataTypeBuilder<T, Tag>& DataTypeBuilder<T, Tag>::addUnionField(
         detail::createDataTypeMember(
             fieldName,
             fieldType,
-            offset,  // padding = offset of each field
+            static_cast<uint8_t>(offset),  // padding = offset of each field
             false,
             std::is_pointer_v<TField>
         ),

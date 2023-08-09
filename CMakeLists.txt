@@ -42,6 +42,9 @@ if(MSVC)
             /permissive-
             /W4
             /w14640
+            /wd4127  # conditional expression is constant
+            /wd4661  # explicit template instantiations in cpp files
+            /wd4996  # deprecation gmtime, localtime
     )
 else()
     target_compile_options(
