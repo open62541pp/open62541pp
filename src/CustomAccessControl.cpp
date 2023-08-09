@@ -262,6 +262,26 @@ void clearUaAccessControl(UA_AccessControl& ac) noexcept {
 
 }  // namespace detail
 
+static void copyUserTokenPoliciesToEndpoints(UA_ServerConfig* config) {
+    // copy config->accessControl.userTokenPolicies -> config->endpoints[i].userIdentityTokens
+    for (size_t i = 0; i < config->endpointsSize; ++i) {
+        auto& endpoint = config->endpoints[i];  // NOLINT
+        UA_Array_delete(
+            endpoint.userIdentityTokens,
+            endpoint.userIdentityTokensSize,
+            &UA_TYPES[UA_TYPES_USERTOKENPOLICY]
+        );
+        const auto status = UA_Array_copy(
+            config->accessControl.userTokenPolicies,
+            config->accessControl.userTokenPoliciesSize,
+            (void**)&endpoint.userIdentityTokens,  // NOLINT
+            &UA_TYPES[UA_TYPES_USERTOKENPOLICY]
+        );
+        detail::throwOnBadStatus(status);
+        endpoint.userIdentityTokensSize = config->accessControl.userTokenPoliciesSize;
+    }
+}
+
 CustomAccessControl::CustomAccessControl(Server& server)
     : server_(server),
       accessControl_{nullptr} {}
@@ -300,6 +320,8 @@ void CustomAccessControl::setAccessControl() {
     ac.allowHistoryUpdateUpdateData = allowHistoryUpdateUpdateData;
     ac.allowHistoryUpdateDeleteRawModified = allowHistoryUpdateDeleteRawModified;
 #endif
+
+    copyUserTokenPoliciesToEndpoints(config);
 }
 
 void CustomAccessControl::setAccessControl(AccessControlBase& accessControl) {
