@@ -4,6 +4,7 @@
 
 #include <doctest/doctest.h>
 
+#include "open62541pp/AccessControl.h"
 #include "open62541pp/Client.h"
 #include "open62541pp/Server.h"
 
@@ -69,8 +70,9 @@ TEST_CASE("Client anonymous login") {
 }
 
 TEST_CASE("Client username/password login") {
+    AccessControlDefault accessControl(false, {{"username", "password"}});
     Server server;
-    server.setLogin({{"username", "password"}}, false);
+    server.setAccessControl(accessControl);
     ServerRunner serverRunner(server);
     Client client;
 

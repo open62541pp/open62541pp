@@ -19,6 +19,7 @@ struct UA_Server;
 namespace opcua {
 
 // forward declaration
+class AccessControlBase;
 class DataType;
 class ServerContext;
 template <typename ServerOrClient>
@@ -75,6 +76,12 @@ public:
 
     /// Set custom logging function.
     void setLogger(Logger logger);
+
+    /// Set custom access control.
+    void setAccessControl(AccessControlBase& accessControl);
+    /// Set custom access control (transfer ownership to Server).
+    void setAccessControl(std::unique_ptr<AccessControlBase> accessControl);
+
     /// Set custom hostname, default: system's host name.
     void setCustomHostname(std::string_view hostname);
     /// Set application name, default: `open62541-based OPC UA Application`.
@@ -83,9 +90,6 @@ public:
     void setApplicationUri(std::string_view uri);
     /// Set product URI, default: `http://open62541.org`.
     void setProductUri(std::string_view uri);
-
-    /// Set login credentials (username/password) and anonymous login.
-    void setLogin(const std::vector<Login>& logins, bool allowAnonymous = true);
 
     /// Get all defined namespaces.
     std::vector<std::string> getNamespaceArray();

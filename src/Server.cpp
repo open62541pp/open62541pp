@@ -5,6 +5,7 @@
 #include <mutex>
 #include <utility>  // move
 
+#include "open62541pp/AccessControl.h"
 #include "open62541pp/Config.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Node.h"
@@ -16,6 +17,7 @@
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/Variant.h"
 
+#include "CustomAccessControl.h"
 #include "CustomDataTypes.h"
 #include "CustomLogger.h"
 #include "ServerContext.h"
@@ -37,10 +39,11 @@ inline static UA_ServerConfig* getConfig(Server* server) noexcept {
 
 class Server::Connection {
 public:
-    Connection()
+    explicit Connection(Server& server)
         : server_(UA_Server_new()),
+          customAccessControl_(server),
           customDataTypes_(&getConfig(server_)->customDataTypes),
-          logger_(getConfig(server_)->logger) {}
+          customLogger_(getConfig(server_)->logger) {}
 
     ~Connection() {
         // don't use stop method here because it might throw an exception
@@ -101,19 +104,28 @@ public:
         return context_;
     }
 
+    auto& getCustomAccessControl() noexcept {
+        return customAccessControl_;
+    }
+
+    const auto& getCustomAccessControl() const noexcept {
+        return customAccessControl_;
+    }
+
     auto& getCustomDataTypes() noexcept {
         return customDataTypes_;
     }
 
     auto& getCustomLogger() noexcept {
-        return logger_;
+        return customLogger_;
     }
 
 private:
     UA_Server* server_;
     ServerContext context_;
+    CustomAccessControl customAccessControl_;
     CustomDataTypes customDataTypes_;
-    CustomLogger logger_;
+    CustomLogger customLogger_;
     std::atomic<bool> running_{false};
     std::mutex mutex_;
 };
@@ -131,12 +143,13 @@ static void applyDefaults(UA_ServerConfig* config) {
 }
 
 Server::Server(uint16_t port, ByteString certificate)
-    : connection_(std::make_shared<Connection>()) {
+    : connection_(std::make_shared<Connection>(*this)) {
     const auto status = UA_ServerConfig_setMinimal(
         getConfig(this), port, certificate.empty() ? nullptr : certificate.handle()
     );
     detail::throwOnBadStatus(status);
     applyDefaults(getConfig(this));
+    setAccessControl(std::make_unique<AccessControlDefault>());
 }
 
 #ifdef UA_ENABLE_ENCRYPTION
@@ -148,7 +161,7 @@ Server::Server(
     const std::vector<ByteString>& issuerList,
     const std::vector<ByteString>& revocationList
 )
-    : connection_(std::make_shared<Connection>()) {
+    : connection_(std::make_shared<Connection>(*this)) {
     const auto status = UA_ServerConfig_setDefaultWithSecurityPolicies(
         getConfig(this),
         port,
@@ -163,6 +176,7 @@ Server::Server(
     );
     detail::throwOnBadStatus(status);
     applyDefaults(getConfig(this));
+    setAccessControl(std::make_unique<AccessControlDefault>());
 }
 #endif
 
@@ -201,43 +215,12 @@ void Server::setProductUri(std::string_view uri) {
     copyApplicationDescriptionToEndpoints(getConfig(this));
 }
 
-void Server::setLogin(const std::vector<Login>& logins, bool allowAnonymous) {
-    const size_t number = logins.size();
-    auto loginsUa = std::vector<UA_UsernamePasswordLogin>(number);
+void Server::setAccessControl(AccessControlBase& accessControl) {
+    connection_->getCustomAccessControl().setAccessControl(accessControl);
+}
 
-    for (size_t i = 0; i < number; ++i) {
-        loginsUa[i].username = detail::allocUaString(logins[i].username);
-        loginsUa[i].password = detail::allocUaString(logins[i].password);
-    }
-
-    auto* config = getConfig(this);
-#if UAPP_OPEN62541_VER_GE(1, 1)
-    if (config->accessControl.clear != nullptr) {
-        config->accessControl.clear(&config->accessControl);
-    }
-#else
-    if (config->accessControl.deleteMembers != nullptr) {
-        config->accessControl.deleteMembers(&config->accessControl);
-    }
-#endif
-
-    const auto status = UA_AccessControl_default(
-        config,
-        allowAnonymous,
-#if UAPP_OPEN62541_VER_GE(1, 3)
-        nullptr,  // UA_CertificateVerification
-#endif
-        &config->securityPolicies[config->securityPoliciesSize - 1].policyUri,  // NOLINT
-        number,
-        loginsUa.data()
-    );
-
-    for (size_t i = 0; i < number; ++i) {
-        UA_String_clear(&loginsUa[i].username);
-        UA_String_clear(&loginsUa[i].password);
-    }
-
-    detail::throwOnBadStatus(status);
+void Server::setAccessControl(std::unique_ptr<AccessControlBase> accessControl) {
+    connection_->getCustomAccessControl().setAccessControl(std::move(accessControl));
 }
 
 std::vector<std::string> Server::getNamespaceArray() {
