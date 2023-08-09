@@ -66,7 +66,12 @@ int main() {
                     << "\t- Transport profile: " << endpoint.getTransportProfileUri().get() << "\n"
                     << "\t- Security mode:     " << getEnumName(endpoint.getSecurityMode()) << "\n"
                     << "\t- Security profile:  " << endpoint.getSecurityPolicyUri().get() << "\n"
-                    << "\t- Security level:    " << endpoint.getSecurityLevel() << std::endl;
+                    << "\t- Security level:    " << endpoint.getSecurityLevel() << "\n"
+                    << "\t- User identity token:\n";
+
+                for (const auto& token : endpoint.getUserIdentityTokens()) {
+                    std::cout << "\t  - " << token.getPolicyId() << "\n";
+                }
             }
         }
     }

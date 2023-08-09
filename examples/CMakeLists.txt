@@ -50,10 +50,11 @@ add_example(client_find_servers.cpp)
 add_example(client_minimal.cpp)
 
 add_example(server.cpp)
+add_example(server_accesscontrol.cpp)
+add_example(server_datasource.cpp)
 add_example(server_instantiation.cpp)
 add_example(server_minimal.cpp)
 add_example(server_valuecallback.cpp)
-add_example(server_datasource.cpp)
 
 add_example(custom_datatypes/client_custom_datatypes.cpp)
 add_example(custom_datatypes/server_custom_datatypes.cpp)
