@@ -1,9 +1,8 @@
 #pragma once
 
+#include <string>
 #include <vector>
 
-#include "open62541pp/Auth.h"  // Login
-#include "open62541pp/Config.h"
 #include "open62541pp/Session.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
@@ -19,6 +18,12 @@ namespace opcua {
 
 // forward declare
 class Server;
+
+/// Login credentials.
+struct Login {
+    std::string username;
+    std::string password;
+};
 
 /**
  * Access control base class.

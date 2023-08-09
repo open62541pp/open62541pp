@@ -4,6 +4,7 @@
 #include <string>
 #include <utility>  // move
 
+#include "open62541pp/AccessControl.h"  // Login
 #include "open62541pp/Config.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Node.h"
