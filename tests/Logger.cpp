@@ -25,4 +25,9 @@ TEST_CASE("Log with custom logger") {
     CHECK(lastLogLevel == LogLevel::Info);
     CHECK(lastLogCategory == LogCategory::Server);
     CHECK(lastMessage == "Some log message");
+
+    log(server.handle(), LogLevel::Warning, LogCategory::Server, "Some log message from native");
+    CHECK(lastLogLevel == LogLevel::Warning);
+    CHECK(lastLogCategory == LogCategory::Server);
+    CHECK(lastMessage == "Some log message from native");
 }
