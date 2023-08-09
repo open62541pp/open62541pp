@@ -45,7 +45,7 @@ public:
     /// Create an ExtensionObject from a decoded object (assign).
     /// The data will *not* be deleted when the ExtensionObject is destructed.
     /// @param data Decoded data
-    template <typename T, TypeIndex typeIndex = detail::guessTypeIndex<T>()>
+    template <typename T>
     static ExtensionObject fromDecoded(T& data) noexcept;
 
     /// Create an ExtensionObject from a decoded object (assign).
@@ -58,7 +58,7 @@ public:
     /// Create an ExtensionObject from a decoded object (copy).
     /// Set the "decoded" data to a copy of the given object.
     /// @param data Decoded data
-    template <typename T, TypeIndex typeIndex = detail::guessTypeIndex<T>()>
+    template <typename T>
     static ExtensionObject fromDecodedCopy(const T& data);
 
     /// Create an ExtensionObject from a decoded object (copy).
@@ -87,11 +87,11 @@ public:
 
     /// Get pointer to the encoded data with given template type. Returns `nullptr` if the
     /// ExtensionObject is either encoded or the decoded data not of type `T`.
-    template <typename T, TypeIndex typeIndex = detail::guessTypeIndex<T>()>
+    template <typename T>
     T* getDecodedData() noexcept;
 
     /// @copydoc getDecodedData
-    template <typename T, TypeIndex typeIndex = detail::guessTypeIndex<T>()>
+    template <typename T>
     const T* getDecodedData() const noexcept;
 
     /// Get pointer to the encoded data. Returns `nullptr` if the ExtensionObject is encoded.
@@ -115,36 +115,33 @@ constexpr bool isAssignableToExtensionObject() {
 
 /* --------------------------------------- Implementation --------------------------------------- */
 
-template <typename T, TypeIndex typeIndex>
+template <typename T>
 T* ExtensionObject::getDecodedData() noexcept {
-    detail::assertTypeCombination<T, typeIndex>();
-    if (getDecodedDataType() == &detail::getUaDataType(typeIndex)) {
+    if (getDecodedDataType() == &detail::guessDataType<T>()) {
         return static_cast<T*>(getDecodedData());
     }
     return nullptr;
 }
 
-template <typename T, TypeIndex typeIndex>
+template <typename T>
 ExtensionObject ExtensionObject::fromDecoded(T& data) noexcept {
-    detail::assertTypeCombination<T, typeIndex>();
     static_assert(
         detail::isAssignableToExtensionObject<T>(),
         "Template type must be convertible to native type to assign data without copy"
     );
     if constexpr (detail::IsTypeWrapper<T>::value) {
-        return fromDecoded(data.handle(), detail::getUaDataType<typeIndex>());
+        return fromDecoded(data.handle(), detail::guessDataType<T>());
     } else {
-        return fromDecoded(&data, detail::getUaDataType<typeIndex>());
+        return fromDecoded(&data, detail::guessDataType<T>());
     }
 }
 
-template <typename T, TypeIndex typeIndex>
+template <typename T>
 ExtensionObject ExtensionObject::fromDecodedCopy(const T& data) {
-    detail::assertTypeCombination<T, typeIndex>();
     if constexpr (detail::IsTypeWrapper<T>::value) {
-        return fromDecodedCopy(data.handle(), detail::getUaDataType<typeIndex>());
+        return fromDecodedCopy(data.handle(), detail::guessDataType<T>());
     } else {
-        return fromDecodedCopy(&data, detail::getUaDataType<typeIndex>());
+        return fromDecodedCopy(&data, detail::guessDataType<T>());
     }
 }
 

@@ -7,7 +7,6 @@
 
 #include "open62541pp/Common.h"
 #include "open62541pp/Config.h"
-#include "open62541pp/TypeConverter.h"  // guessType
 #include "open62541pp/services/Attribute.h"
 #include "open62541pp/services/Method.h"
 #include "open62541pp/services/NodeManagement.h"
@@ -420,37 +419,37 @@ public:
 
     /// Write scalar to variable node.
     /// @return Current node instance to chain multiple methods (fluent interface)
-    template <typename T, Type type = detail::guessType<T>()>
+    template <typename T>
     Node& writeScalar(const T& value) {
         // NOLINTNEXTLINE, variant isn't modified, try to avoid copy
-        const auto variant = Variant::fromScalar<T, type>(const_cast<T&>(value));
+        const auto variant = Variant::fromScalar<T>(const_cast<T&>(value));
         writeValue(variant);
         return *this;
     }
 
     /// Write array (raw) to variable node.
     /// @return Current node instance to chain multiple methods (fluent interface)
-    template <typename T, Type type = detail::guessType<T>()>
+    template <typename T>
     Node& writeArray(const T* array, size_t size) {
         // NOLINTNEXTLINE, variant isn't modified, try to avoid copy
-        const auto variant = Variant::fromArray<T, type>(const_cast<T*>(array), size);
+        const auto variant = Variant::fromArray<T>(const_cast<T*>(array), size);
         writeValue(variant);
         return *this;
     }
 
     /// Write array (std::vector) to variable node.
     /// @return Current node instance to chain multiple methods (fluent interface)
-    template <typename T, Type type = detail::guessType<T>()>
+    template <typename T>
     Node& writeArray(const std::vector<T>& array) {
-        writeArray<T, type>(array.data(), array.size());
+        writeArray<T>(array.data(), array.size());
         return *this;
     }
 
     /// Write range of elements as array to variable node.
     /// @return Current node instance to chain multiple methods (fluent interface)
-    template <typename InputIt, Type type = detail::guessTypeFromIterator<InputIt>()>
+    template <typename InputIt>
     Node& writeArray(InputIt first, InputIt last) {
-        const auto variant = Variant::fromArray<InputIt, type>(first, last);
+        const auto variant = Variant::fromArray<InputIt>(first, last);
         writeValue(variant);
         return *this;
     }
