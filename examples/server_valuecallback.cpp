@@ -9,9 +9,9 @@ int main() {
     auto currentTimeNode =
         server.getObjectsNode()
             .addVariable(currentTimeId, "CurrentTime")
-            .writeDataType(opcua::Type::DateTime)
             .writeDisplayName({"en-US", "Current time"})
             .writeDescription({"en-US", "Current time"})
+            .writeDataType<opcua::DateTime>()
             .writeScalar(opcua::DateTime::now());
 
     // set variable value callback to write current time before every read operation
