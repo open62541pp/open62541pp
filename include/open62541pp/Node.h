@@ -461,6 +461,14 @@ public:
         return *this;
     }
 
+    /// @overload
+    /// Deduce the `typeId` from the template type.
+    /// @return Current node instance to chain multiple methods (fluent interface)
+    template <typename T>
+    Node& writeDataType() {
+        return writeDataType(asWrapper<NodeId>(detail::guessDataType<T>().typeId));
+    }
+
     /// @copydoc services::writeValueRank
     /// @return Current node instance to chain multiple methods (fluent interface)
     Node& writeValueRank(ValueRank valueRank) {

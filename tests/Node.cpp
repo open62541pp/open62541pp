@@ -124,55 +124,67 @@ TEST_CASE("Node") {
             CHECK_EQ(objNode.browseParent(), rootNode);
         }
 
-        SUBCASE("Try read/write with node classes other than Variable") {
-            CHECK_THROWS(rootNode.template readScalar<int>());
-            CHECK_THROWS(rootNode.template writeScalar<int>({}));
+        SUBCASE("Read/write attributes") {
+            CHECK_EQ(
+                varNode.writeDataType(DataTypeId::Boolean).readDataType(),
+                NodeId(DataTypeId::Boolean)
+            );
+            CHECK_EQ(
+                varNode.template writeDataType<double>().readDataType(), NodeId(DataTypeId::Double)
+            );
         }
 
-        SUBCASE("Read/write scalar") {
-            CHECK_NOTHROW(varNode.writeDataType(Type::Float));
-
-            // write with wrong data type
-            CHECK_THROWS(varNode.template writeScalar<bool>({}));
-            CHECK_THROWS(varNode.template writeScalar<int>({}));
-
-            // write with correct data type
-            float value = 11.11f;
-            CHECK_NOTHROW(varNode.writeScalar(value));
-            CHECK(varNode.template readScalar<float>() == value);
-        }
-
-        SUBCASE("Read/write string") {
-            CHECK_NOTHROW(varNode.writeDataType(Type::String));
-
-            String str("test");
-            CHECK_NOTHROW(varNode.writeScalar(str));
-            CHECK(varNode.template readScalar<std::string>() == "test");
-        }
-
-        SUBCASE("Read/write array") {
-            CHECK_NOTHROW(varNode.writeDataType(Type::Double));
-
-            // write with wrong data type
-            CHECK_THROWS(varNode.template writeArray<int>({}));
-            CHECK_THROWS(varNode.template writeArray<float>({}));
-
-            // write with correct data type
-            std::vector<double> array{11.11, 22.22, 33.33};
-
-            SUBCASE("Write as std::vector") {
-                CHECK_NOTHROW(varNode.writeArray(array));
-                CHECK(varNode.template readArray<double>() == array);
+        SUBCASE("Read/write value") {
+            SUBCASE("Try read/write node classes other than Variable") {
+                CHECK_THROWS(rootNode.template readScalar<int>());
+                CHECK_THROWS(rootNode.template writeScalar<int>({}));
             }
 
-            SUBCASE("Write as raw array") {
-                CHECK_NOTHROW(varNode.writeArray(array.data(), array.size()));
-                CHECK(varNode.template readArray<double>() == array);
+            SUBCASE("Scalar") {
+                CHECK_NOTHROW(varNode.writeDataType(Type::Float));
+
+                // write with wrong data type
+                CHECK_THROWS(varNode.template writeScalar<bool>({}));
+                CHECK_THROWS(varNode.template writeScalar<int>({}));
+
+                // write with correct data type
+                float value = 11.11f;
+                CHECK_NOTHROW(varNode.writeScalar(value));
+                CHECK(varNode.template readScalar<float>() == value);
             }
 
-            SUBCASE("Write as iterator pair") {
-                CHECK_NOTHROW(varNode.writeArray(array.begin(), array.end()));
-                CHECK(varNode.template readArray<double>() == array);
+            SUBCASE("String") {
+                CHECK_NOTHROW(varNode.writeDataType(Type::String));
+
+                String str("test");
+                CHECK_NOTHROW(varNode.writeScalar(str));
+                CHECK(varNode.template readScalar<std::string>() == "test");
+            }
+
+            SUBCASE("Array") {
+                CHECK_NOTHROW(varNode.writeDataType(Type::Double));
+
+                // write with wrong data type
+                CHECK_THROWS(varNode.template writeArray<int>({}));
+                CHECK_THROWS(varNode.template writeArray<float>({}));
+
+                // write with correct data type
+                std::vector<double> array{11.11, 22.22, 33.33};
+
+                SUBCASE("Write as std::vector") {
+                    CHECK_NOTHROW(varNode.writeArray(array));
+                    CHECK(varNode.template readArray<double>() == array);
+                }
+
+                SUBCASE("Write as raw array") {
+                    CHECK_NOTHROW(varNode.writeArray(array.data(), array.size()));
+                    CHECK(varNode.template readArray<double>() == array);
+                }
+
+                SUBCASE("Write as iterator pair") {
+                    CHECK_NOTHROW(varNode.writeArray(array.begin(), array.end()));
+                    CHECK(varNode.template readArray<double>() == array);
+                }
             }
         }
 
