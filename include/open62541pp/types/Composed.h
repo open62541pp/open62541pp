@@ -221,6 +221,14 @@ public:
     }
 
     UAPP_NODEATTR_WRAPPER(NodeId, DataType, dataType, UA_NODEATTRIBUTESMASK_DATATYPE)
+
+    /// @overload
+    /// Deduce the `dataType` from the template type.
+    template <typename T>
+    auto& setDataType() {
+        return setDataType(asWrapper<NodeId>(detail::guessDataType<T>().typeId));
+    }
+
     UAPP_NODEATTR_CAST(ValueRank, ValueRank, valueRank, UA_NODEATTRIBUTESMASK_VALUERANK)
     UAPP_NODEATTR_ARRAY(
         uint32_t,
@@ -300,6 +308,14 @@ public:
     }
 
     UAPP_NODEATTR_WRAPPER(NodeId, DataType, dataType, UA_NODEATTRIBUTESMASK_DATATYPE)
+
+    /// @overload
+    /// Deduce the `dataType` from the template type.
+    template <typename T>
+    auto& setDataType() {
+        return setDataType(asWrapper<NodeId>(detail::guessDataType<T>().typeId));
+    }
+
     UAPP_NODEATTR_CAST(ValueRank, ValueRank, valueRank, UA_NODEATTRIBUTESMASK_VALUERANK)
     UAPP_NODEATTR_ARRAY(
         uint32_t,

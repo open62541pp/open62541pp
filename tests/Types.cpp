@@ -858,6 +858,11 @@ TEST_CASE("NodeAttributes fluent interface") {
     CHECK(attr.getWriteMask() == 0xFFFFFFFF);
 }
 
+TEST_CASE_TEMPLATE("NodeAttributes setDataType", T, VariableAttributes, VariableTypeAttributes) {
+    CHECK(T{}.setDataType(DataTypeId::Boolean).getDataType() == NodeId(DataTypeId::Boolean));
+    CHECK(T{}.template setDataType<bool>().getDataType() == NodeId(DataTypeId::Boolean));
+}
+
 TEST_CASE("BrowseDescription") {
     BrowseDescription bd(NodeId(1, 1000), BrowseDirection::Forward);
     CHECK(bd.getNodeId() == NodeId(1, 1000));
