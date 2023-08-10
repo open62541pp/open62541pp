@@ -13,7 +13,6 @@ add_executable(
     helper.cpp
     Logger.cpp
     Node.cpp
-    overloads.cpp
     Server.cpp
     Services.cpp
     Session.cpp
@@ -36,6 +35,15 @@ set_target_properties(
         OUTPUT_NAME tests
         CXX_CLANG_TIDY ""  # disable clang-tidy
 )
+# fix LNK4096 error with MSVC
+# https://learn.microsoft.com/en-us/cpp/error-messages/tool-errors/linker-tools-warning-lnk4098
+if(MSVC)
+    set_target_properties(
+        open62541pp_tests
+        PROPERTIES
+            LINK_FLAGS "/NODEFAULTLIB:libcmt.lib /NODEFAULTLIB:libcmtd.lib"
+    )
+endif()
 if(UAPP_ENABLE_PCH)
     target_precompile_headers(
         open62541pp_tests

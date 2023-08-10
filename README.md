@@ -34,7 +34,7 @@
 - [Safe wrapper classes][doc-typewrapper] for open62541 `UA_*` types to prevent memory leaks
 - Native open62541 objects can be accessed using the `handle()` method of the wrapping classes
 - [Extensible type conversion system](#-type-conversion) to convert arbitrary types to/from native `UA_*` types
-- Cross-platform (tested on Windows, Linux and MacOS)
+- Cross-platform (tested on Windows, Linux and macOS)
 - Compatible with all stable open62541 versions ≥ v1.0
 - [Easy installation and integration with CMake](#-getting-started)
 - Use modern C++ (C++ 17) and best practices
@@ -214,7 +214,7 @@ target_link_libraries(myexecutable PRIVATE open62541pp::open62541pp)
 git clone --recursive https://github.com/open62541pp/open62541pp.git
 cd open62541pp
 
-# build and run tests
+# build
 mkdir build
 cd build
 cmake -DCMAKE_BUILD_TYPE=Debug -DUAPP_BUILD_EXAMPLES=ON -DUAPP_BUILD_TESTS=ON ..
@@ -235,3 +235,8 @@ cmake --install .
 
 - [open62541](https://github.com/open62541/open62541) as integrated submodule or external dependency
 - [doctest](https://github.com/doctest/doctest) for tests as integrated submodule
+
+## 🤝 Contribute
+
+Contributions and feature requests are very welcome.
+Please have a look at the [contribution guidelines](https://github.com/open62541pp/open62541pp/blob/master/CONTRIBUTING.md).

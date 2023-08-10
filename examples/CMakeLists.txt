@@ -26,6 +26,15 @@ function(add_example source)
         PROPERTIES
             OUTPUT_NAME ${name}
     )
+    # fix LNK4096 error with MSVC
+    # https://learn.microsoft.com/en-us/cpp/error-messages/tool-errors/linker-tools-warning-lnk4098
+    if(MSVC)
+        set_target_properties(
+            ${target_name}
+            PROPERTIES
+                LINK_FLAGS "/NODEFAULTLIB:libcmt.lib /NODEFAULTLIB:libcmtd.lib"
+        )
+    endif()
     # disable clang-tidy check to avoid try/except blocks in examples
     if(CMAKE_CXX_CLANG_TIDY)
         set(checks "-bugprone-exception-escape")  # allow uncaught exceptions in main

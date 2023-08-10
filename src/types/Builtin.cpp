@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iomanip>
 #include <iterator>  // istreambuf_iterator
+#include <ostream>
 #include <sstream>
 #include <utility>  // move
 
@@ -42,6 +43,11 @@ bool operator!=(std::string_view lhs, const String& rhs) noexcept {
     return (lhs != rhs.get());
 }
 
+std::ostream& operator<<(std::ostream& os, const String& string) {
+    os << string.get();
+    return os;
+}
+
 /* -------------------------------------------- Guid -------------------------------------------- */
 
 Guid::Guid(UA_UInt32 data1, UA_UInt16 data2, UA_UInt16 data3, std::array<UA_Byte, 8> data4)
@@ -75,6 +81,11 @@ std::string Guid::toString() const {
         writeBit(handle()->data4[i]);  // NOLINT
     }
     return ss.str();
+}
+
+std::ostream& operator<<(std::ostream& os, const Guid& guid) {
+    os << guid.toString();
+    return os;
 }
 
 /* ----------------------------------------- ByteString ----------------------------------------- */
@@ -157,6 +168,11 @@ bool XmlElement::empty() const noexcept {
 
 std::string_view XmlElement::get() const {
     return detail::toStringView(*handle());
+}
+
+std::ostream& operator<<(std::ostream& os, const XmlElement& xmlElement) {
+    os << xmlElement.get();
+    return os;
 }
 
 /* ---------------------------------------- QualifiedName --------------------------------------- */

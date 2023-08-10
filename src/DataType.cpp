@@ -13,7 +13,7 @@ namespace opcua {
 
 [[maybe_unused]] inline static const char* emptyIfNullptr(const char* name) {
     return name == nullptr ? "" : name;
-};
+}
 
 static void clearMembers(UA_DataType* native) {
     if (native != nullptr) {
@@ -86,8 +86,9 @@ DataType& DataType::operator=(DataType&& other) noexcept {
 const char* DataType::getTypeName() const noexcept {
 #ifdef UA_ENABLE_TYPEDESCRIPTION
     return handle()->typeName;
-#endif
+#else
     return nullptr;
+#endif
 }
 
 void DataType::setTypeName([[maybe_unused]] const char* typeName) noexcept {

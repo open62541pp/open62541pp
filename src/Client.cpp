@@ -298,7 +298,7 @@ void Client::setCustomDataTypes(std::vector<DataType> dataTypes) {
 }
 
 static void setStateCallback(ClientContext& context, ClientState state, StateCallback&& callback) {
-    context.stateCallbacks.at(static_cast<size_t>(state)) = callback;
+    context.stateCallbacks.at(static_cast<size_t>(state)) = std::move(callback);
 }
 
 void Client::onConnected(StateCallback callback) {

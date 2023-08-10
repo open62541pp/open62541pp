@@ -15,17 +15,6 @@ namespace opcua {
 
 namespace detail {
 
-template <typename T>
-constexpr const UA_DataType& guessDataType() {
-    using ValueType = typename detail::UnqualifiedT<T>;
-    static_assert(
-        TypeConverter<ValueType>::ValidTypes::size() == 1,
-        "Ambiguous data type, please specify data type manually"
-    );
-    constexpr auto typeIndex = TypeConverter<ValueType>::ValidTypes::toArray().at(0);
-    return detail::getUaDataType(typeIndex);
-}
-
 template <auto memberPtr>
 constexpr const UA_DataType& guessMemberDataType() {
     return guessDataType<detail::MemberTypeT<decltype(memberPtr)>>();
@@ -301,7 +290,7 @@ DataTypeBuilder<T, Tag>& DataTypeBuilder<T, Tag>::addUnionField(
         detail::createDataTypeMember(
             fieldName,
             fieldType,
-            offset,  // padding = offset of each field
+            static_cast<uint8_t>(offset),  // padding = offset of each field
             false,
             std::is_pointer_v<TField>
         ),

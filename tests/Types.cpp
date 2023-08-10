@@ -1,4 +1,5 @@
 #include <array>
+#include <sstream>
 #include <string>
 #include <utility>  // move
 #include <vector>
@@ -88,6 +89,12 @@ TEST_CASE_TEMPLATE("StringLike equality overloads", T, String, ByteString) {
     CHECK(std::string("test") != T("abc"));
 }
 
+TEST_CASE_TEMPLATE("StringLike ostream overloads", T, String, XmlElement) {
+    std::ostringstream ss;
+    ss << T("test123");
+    CHECK(ss.str() == "test123");
+}
+
 TEST_CASE("ByteString") {
     SUBCASE("Construct from string") {
         const ByteString bs("XYZ");
@@ -151,6 +158,12 @@ TEST_CASE("Guid") {
             const Guid guid{3298187146, 3582, 19343, {135, 10, 116, 82, 56, 198, 174, 174}};
             CHECK(guid.toString() == "C496578A-0DFE-4B8F-870A-745238C6AEAE");
         }
+    }
+
+    SUBCASE("ostream overload") {
+        std::ostringstream ss;
+        ss << Guid{};
+        CHECK(ss.str() == "00000000-0000-0000-0000-000000000000");
     }
 }
 
@@ -294,6 +307,11 @@ TEST_CASE("NodeId") {
         CHECK(NodeId(1, "b") > NodeId(1, "a"));
     }
 
+    SUBCASE("isNull") {
+        CHECK(NodeId().isNull());
+        CHECK_FALSE(NodeId(0, 1).isNull());
+    }
+
     SUBCASE("Hash") {
         CHECK(NodeId(0, 1).hash() == NodeId(0, 1).hash());
         CHECK(NodeId(0, 1).hash() != NodeId(0, 2).hash());
@@ -355,6 +373,12 @@ TEST_CASE("ExpandedNodeId") {
 
     CHECK(idLocal == idLocal);
     CHECK(idLocal != idFull);
+
+    SUBCASE("Hash") {
+        CHECK(ExpandedNodeId().hash() == ExpandedNodeId().hash());
+        CHECK(ExpandedNodeId().hash() != idLocal.hash());
+        CHECK(ExpandedNodeId().hash() != idFull.hash());
+    }
 
     SUBCASE("toString") {
         CHECK_EQ(ExpandedNodeId({2, 10157}).toString(), "ns=2;i=10157");
@@ -420,7 +444,7 @@ TEST_CASE("Variant") {
         }
         SUBCASE("Copy if not assignable (const or conversion check failed)") {
             std::string value{"test"};
-            const auto var = Variant::fromScalar<std::string, Type::String>(value);
+            const auto var = Variant::fromScalar<std::string>(value);
             CHECK(var.isScalar());
             CHECK(var->data != &value);
         }
@@ -568,7 +592,7 @@ TEST_CASE("Variant") {
             detail::allocUaString("item3"),
         };
 
-        var.setArray<UA_String, Type::String>(array.data(), array.size());
+        var.setArray<UA_String>(array.data(), array.size(), UA_TYPES[UA_TYPES_STRING]);
         CHECK(var.getArrayLength() == array.size());
         CHECK(var.getArray() == array.data());
 
@@ -590,7 +614,7 @@ TEST_CASE("Variant") {
     SUBCASE("Set/get array of strings") {
         Variant var;
         std::vector<std::string> value{"a", "b", "c"};
-        var.setArrayCopy<std::string, Type::String>(value);
+        var.setArrayCopy<std::string>(value);
 
         CHECK(var.isArray());
         CHECK(var.isType(Type::String));
@@ -683,13 +707,20 @@ TEST_CASE("DataValue") {
     }
 
     SUBCASE("Constructor with all optional parameter specified") {
-        DataValue dv(Variant::fromScalar(5), DateTime{1}, DateTime{2}, 3, 4, 5);
+        DataValue dv(
+            Variant::fromScalar(5),
+            DateTime{1},
+            DateTime{2},
+            uint16_t{3},
+            uint16_t{4},
+            UA_STATUSCODE_BADINTERNALERROR
+        );
         CHECK(dv.getValue().isScalar());
         CHECK(dv.getSourceTimestamp() == DateTime{1});
         CHECK(dv.getServerTimestamp() == DateTime{2});
         CHECK(dv.getSourcePicoseconds() == 3);
         CHECK(dv.getServerPicoseconds() == 4);
-        CHECK(dv.getStatusCode() == 5);
+        CHECK(dv.getStatusCode() == UA_STATUSCODE_BADINTERNALERROR);
     }
 
     SUBCASE("Setter methods") {

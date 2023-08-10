@@ -35,7 +35,11 @@ NodeId::NodeId(uint16_t namespaceIndex, const Guid& identifier)
 NodeId::NodeId(uint16_t namespaceIndex, const ByteString& identifier)
     : NodeId(fromStringView(namespaceIndex, UA_NODEIDTYPE_BYTESTRING, identifier.get())) {}
 
-uint32_t NodeId::hash() const {
+bool NodeId::isNull() const noexcept {
+    return UA_NodeId_isNull(handle());
+}
+
+uint32_t NodeId::hash() const noexcept {
     return UA_NodeId_hash(handle());
 }
 
@@ -101,6 +105,10 @@ ExpandedNodeId::ExpandedNodeId(
 
 bool ExpandedNodeId::isLocal() const noexcept {
     return detail::isEmpty(handle()->namespaceUri) && handle()->serverIndex == 0;
+}
+
+uint32_t ExpandedNodeId::hash() const noexcept {
+    return UA_ExpandedNodeId_hash(handle());
 }
 
 NodeId& ExpandedNodeId::getNodeId() noexcept {

@@ -112,13 +112,13 @@ TEST_CASE("Attribute service set (server)") {
         CHECK(services::readDescription(server, id).getText().empty());
         CHECK(services::readDescription(server, id).getLocale().empty());
         CHECK(services::readWriteMask(server, id) == 0);
-        const uint32_t adminUserWriteMask = ~0;  // all bits set
+        const uint32_t adminUserWriteMask = 0xFFFFFFFF;  // all bits set
         CHECK(services::readUserWriteMask(server, id) == adminUserWriteMask);
         CHECK(services::readDataType(server, id) == NodeId(0, UA_NS0ID_BASEDATATYPE));
         CHECK(services::readValueRank(server, id) == ValueRank::Any);
         CHECK(services::readArrayDimensions(server, id).empty());
         CHECK(services::readAccessLevel(server, id) == UA_ACCESSLEVELMASK_READ);
-        const uint8_t adminUserAccessLevel = ~0;  // all bits set
+        const uint8_t adminUserAccessLevel = 0xFF;  // all bits set
         CHECK(services::readUserAccessLevel(server, id) == adminUserAccessLevel);
         CHECK(services::readMinimumSamplingInterval(server, id) == 0.0);
     }
@@ -269,7 +269,7 @@ TEST_CASE("Attribute service set (server)") {
 
         Variant variant;
         variant.setScalarCopy<int>(11);
-        DataValue valueWrite(variant, {}, DateTime::now(), {}, 1, UA_STATUSCODE_GOOD);
+        DataValue valueWrite(variant, {}, DateTime::now(), {}, uint16_t{1}, UA_STATUSCODE_GOOD);
         services::writeDataValue(server, id, valueWrite);
 
         DataValue valueRead;

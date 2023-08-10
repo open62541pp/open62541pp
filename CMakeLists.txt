@@ -42,6 +42,9 @@ if(MSVC)
             /permissive-
             /W4
             /w14640
+            /wd4127  # conditional expression is constant
+            /wd4661  # explicit template instantiations in cpp files
+            /wd4996  # deprecation gmtime, localtime
     )
 else()
     target_compile_options(
@@ -124,7 +127,6 @@ add_library(
     src/Session.cpp
     src/Subscription.cpp
     src/detail/helper.cpp
-    src/overloads/ostream.cpp
     src/services/Attribute.cpp
     src/services/Method.cpp
     src/services/MonitoredItem.cpp
@@ -200,7 +202,7 @@ if(UAPP_BUILD_TESTS AND UAPP_ENABLE_COVERAGE)
             WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         )
         set(coverage_html_output_dir "${CMAKE_BINARY_DIR}/coverage_html")
-        make_directory(${coverage_html_output_dir})
+        file(MAKE_DIRECTORY ${coverage_html_output_dir})
         add_custom_target(
             open62541pp_coverage_report_html
             COMMAND ${GCOVR_EXE} ${gcovr_args} "--html-details" "${coverage_html_output_dir}/index.html"

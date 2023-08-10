@@ -170,9 +170,7 @@ public:
     auto& set##suffix(const std::vector<Type>& memberArray) {                                      \
         handle()->specifiedAttributes |= flag;                                                     \
         UA_Array_delete(                                                                           \
-            handle()->memberArray,                                                                 \
-            handle()->memberSize,                                                                  \
-            &detail::getUaDataType(detail::guessTypeIndex<Type>())                                 \
+            handle()->memberArray, handle()->memberSize, &detail::guessDataType<Type>()            \
         );                                                                                         \
         handle()->memberArray = detail::toNativeArrayAlloc(                                        \
             memberArray.begin(), memberArray.end()                                                 \

@@ -75,7 +75,9 @@ public:
     NodeId(MethodId id) noexcept  // NOLINT, implicit wanted
         : NodeId(0, static_cast<uint32_t>(id)) {}
 
-    uint32_t hash() const;
+    bool isNull() const noexcept;
+
+    uint32_t hash() const noexcept;
 
     uint16_t getNamespaceIndex() const noexcept;
 
@@ -125,6 +127,8 @@ public:
     ExpandedNodeId(const NodeId& id, std::string_view namespaceUri, uint32_t serverIndex);
 
     bool isLocal() const noexcept;
+
+    uint32_t hash() const noexcept;
 
     NodeId& getNodeId() noexcept;
     const NodeId& getNodeId() const noexcept;
