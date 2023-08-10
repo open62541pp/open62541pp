@@ -20,13 +20,14 @@ TEST_CASE("Node") {
     // create variable node
     const NodeId varId{1, 1};
     services::addVariable(server, {0, UA_NS0ID_OBJECTSFOLDER}, varId, "variable");
-    services::writeAccessLevel(server, varId, UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE);
-    services::writeWriteMask(server, varId, ~0U);  // set all bits to 1 -> allow all
+    services::writeAccessLevel(server, varId, 0xFF);
+    services::writeWriteMask(server, varId, 0xFFFFFFFF);  // set all bits to 1 -> allow all
 
     const auto testNode = [&](auto& serverOrClient) {
         auto rootNode = serverOrClient.getRootNode();
         auto objNode = serverOrClient.getObjectsNode();
         auto varNode = serverOrClient.getNode(varId);
+        auto refNode = serverOrClient.getNode(ReferenceTypeId::References);
 
         SUBCASE("Constructor") {
             CHECK_NOTHROW(Node(serverOrClient, NodeId(0, UA_NS0ID_BOOLEAN), false));
@@ -124,13 +125,34 @@ TEST_CASE("Node") {
             CHECK_EQ(objNode.browseParent(), rootNode);
         }
 
-        SUBCASE("Read/write attributes") {
+        SUBCASE("Read/write variable attributes") {
+            CHECK_EQ(
+                varNode.writeDisplayName({"en-US", "name"}).readDisplayName(),
+                LocalizedText({"en-US", "name"})
+            );
+            CHECK_EQ(
+                varNode.writeDescription({"en-US", "desc"}).readDescription(),
+                LocalizedText({"en-US", "desc"})
+            );
+            CHECK_EQ(varNode.writeWriteMask(0xFFFFFFFF).readWriteMask(), 0xFFFFFFFF);
             CHECK_EQ(
                 varNode.writeDataType(DataTypeId::Boolean).readDataType(),
                 NodeId(DataTypeId::Boolean)
             );
             CHECK_EQ(
                 varNode.template writeDataType<double>().readDataType(), NodeId(DataTypeId::Double)
+            );
+            CHECK_EQ(
+                varNode.writeValueRank(ValueRank::TwoDimensions).readValueRank(),
+                ValueRank::TwoDimensions
+            );
+            CHECK_EQ(
+                varNode.writeArrayDimensions({2, 3}).readArrayDimensions(),
+                std::vector<uint32_t>{2, 3}
+            );
+            CHECK_EQ(varNode.writeAccessLevel(0xFF).readAccessLevel(), 0xFF);
+            CHECK_EQ(
+                varNode.writeMinimumSamplingInterval(11.11).readMinimumSamplingInterval(), 11.11
             );
         }
 
