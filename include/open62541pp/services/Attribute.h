@@ -375,17 +375,6 @@ inline void writeValue(T& serverOrClient, const NodeId& id, const Variant& value
  * @ingroup Attribute
  */
 template <typename T>
-inline void writeDataType(T& serverOrClient, const NodeId& id, Type type) {
-    const auto typeId = ::opcua::detail::getUaDataType(type).typeId;
-    writeAttribute(serverOrClient, id, AttributeId::DataType, DataValue::fromScalar(typeId));
-}
-
-/**
- * Write the `DataType` attribute of a variable (type) node by node id.
- * @copydetails readDataType
- * @ingroup Attribute
- */
-template <typename T>
 inline void writeDataType(T& serverOrClient, const NodeId& id, const NodeId& typeId) {
     writeAttribute(serverOrClient, id, AttributeId::DataType, DataValue::fromScalar(typeId));
 }

@@ -454,14 +454,7 @@ public:
         return *this;
     }
 
-    /// @copydoc services::writeDataType(T&, const NodeId&, Type)
-    /// @return Current node instance to chain multiple methods (fluent interface)
-    Node& writeDataType(Type type) {
-        services::writeDataType(connection_, nodeId_, type);
-        return *this;
-    }
-
-    /// @copydoc services::writeDataType(T&, const NodeId&, const NodeId&)
+    /// @copydoc services::writeDataType
     /// @return Current node instance to chain multiple methods (fluent interface)
     Node& writeDataType(const NodeId& typeId) {
         services::writeDataType(connection_, nodeId_, typeId);
