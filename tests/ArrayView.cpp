@@ -31,6 +31,14 @@ TEST_CASE("ArrayView") {
         CHECK(view.data() == vec.data());
     }
 
+    SUBCASE("From initializer list") {
+        std::initializer_list<int> values{0, 1, 2};
+        ArrayView<const int> view(values);
+        CHECK(view.size() == values.size());
+        CHECK(!view.empty());
+        CHECK(view.data() == values.begin());
+    }
+
     SUBCASE("Element access") {
         std::vector<int> vec{0, 1, 2};
         ArrayView view(vec);
