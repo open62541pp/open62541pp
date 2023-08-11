@@ -178,6 +178,18 @@ ArrayView(Container&) -> ArrayView<typename Container::value_type>;
 template <typename Container>
 ArrayView(const Container&) -> ArrayView<const typename Container::value_type>;
 
+/* ------------------------------------------- Helper ------------------------------------------- */
+
+namespace detail {
+
+template <typename>
+struct IsArrayView : std::false_type {};
+
+template <typename T>
+struct IsArrayView<ArrayView<T>> : std::true_type {};
+
+}  // namespace detail
+
 /* ----------------------------------------- Comparison ----------------------------------------- */
 
 namespace detail {
