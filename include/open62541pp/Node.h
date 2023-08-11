@@ -5,6 +5,7 @@
 #include <utility>  // move
 #include <vector>
 
+#include "open62541pp/ArrayView.h"
 #include "open62541pp/Common.h"
 #include "open62541pp/Config.h"
 #include "open62541pp/services/Attribute.h"
@@ -432,7 +433,7 @@ public:
     template <typename T>
     Node& writeArray(const T* array, size_t size) {
         // NOLINTNEXTLINE, variant isn't modified, try to avoid copy
-        const auto variant = Variant::fromArray<T>(const_cast<T*>(array), size);
+        const auto variant = Variant::fromArray<T>(ArrayView{const_cast<T*>(array), size});
         writeValue(variant);
         return *this;
     }

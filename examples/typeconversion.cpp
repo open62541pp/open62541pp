@@ -49,7 +49,8 @@ int main() {
 
     // Write array of bytes to variant
     std::array<std::byte, 3> array{};
-    variant.setArrayCopy(array.data(), array.size());  // use raw array and size
+    variant.setArrayCopy(array);  // use array container
+    variant.setArrayCopy(opcua::ArrayView{array.data(), array.size()});  // use raw array and size
     variant.setArrayCopy(array.begin(), array.end());  // use iterator pair
 
     std::cout << "Array size: " << variant.getArrayLength() << std::endl;

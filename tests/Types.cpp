@@ -459,15 +459,13 @@ TEST_CASE("Variant") {
     SUBCASE("Create from array") {
         SUBCASE("Assign if possible") {
             std::vector<double> vec{1.1, 2.2, 3.3};
-            const auto var = Variant::fromArray(vec.data(), vec.size());
+            const auto var = Variant::fromArray(vec);
             CHECK(var.isArray());
             CHECK(var->data == vec.data());
         }
         SUBCASE("Assign with custom data type") {
             std::vector<UA_WriteValue> vec{{}, {}};
-            const auto var = Variant::fromArray(
-                vec.data(), vec.size(), UA_TYPES[UA_TYPES_WRITEVALUE]
-            );
+            const auto var = Variant::fromArray(vec, UA_TYPES[UA_TYPES_WRITEVALUE]);
             CHECK(var.isArray());
             CHECK(var->data == vec.data());
         }
@@ -485,9 +483,7 @@ TEST_CASE("Variant") {
         }
         SUBCASE("Copy with custom data type") {
             const std::vector<UA_WriteValue> vec{{}, {}};
-            const auto var = Variant::fromArray(
-                vec.data(), vec.size(), UA_TYPES[UA_TYPES_WRITEVALUE]
-            );
+            const auto var = Variant::fromArray(vec, UA_TYPES[UA_TYPES_WRITEVALUE]);
             CHECK(var.isArray());
             CHECK(var->data != vec.data());
         }
@@ -592,7 +588,7 @@ TEST_CASE("Variant") {
             detail::allocUaString("item3"),
         };
 
-        var.setArray<UA_String>(array.data(), array.size(), UA_TYPES[UA_TYPES_STRING]);
+        var.setArray(ArrayView{array.data(), array.size()}, UA_TYPES[UA_TYPES_STRING]);
         CHECK(var.getArrayLength() == array.size());
         CHECK(var.getArray() == array.data());
 
@@ -614,7 +610,7 @@ TEST_CASE("Variant") {
     SUBCASE("Set/get array of strings") {
         Variant var;
         std::vector<std::string> value{"a", "b", "c"};
-        var.setArrayCopy<std::string>(value);
+        var.setArrayCopy(value);
 
         CHECK(var.isArray());
         CHECK(var.isType(Type::String));
@@ -655,7 +651,6 @@ TEST_CASE("Variant") {
         std::vector<CustomType> array(3);
 
         SUBCASE("Array") {
-            var.setArray(array.data(), array.size(), dt);
             var.setArray(array, dt);
             CHECK(var.isArray());
             CHECK(var.getDataType() == &dt);
@@ -665,7 +660,6 @@ TEST_CASE("Variant") {
         }
 
         SUBCASE("Array (copy)") {
-            var.setArrayCopy(array.data(), array.size(), dt);
             var.setArrayCopy(array, dt);
             CHECK(var.isArray());
             CHECK(var.getDataType() == &dt);
