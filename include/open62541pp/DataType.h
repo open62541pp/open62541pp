@@ -3,6 +3,7 @@
 #include <cstdint>
 #include <vector>
 
+#include "open62541pp/ArrayView.h"
 #include "open62541pp/Common.h"
 #include "open62541pp/open62541.h"
 
@@ -67,9 +68,8 @@ public:
     bool getOverlayable() const noexcept;
     void setOverlayable(bool overlayable) noexcept;
 
-    uint8_t getMembersSize() const noexcept;
-    std::vector<DataTypeMember> getMembers() const;
-    void setMembers(const std::vector<DataTypeMember>& members);
+    ArrayView<const DataTypeMember> getMembers() const noexcept;
+    void setMembers(ArrayView<const DataTypeMember> members);
 
     constexpr UA_DataType* handle() noexcept {
         return &data_;

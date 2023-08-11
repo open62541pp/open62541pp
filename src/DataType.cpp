@@ -166,21 +166,11 @@ void DataType::setOverlayable(bool overlayable) noexcept {
     handle()->overlayable = overlayable;
 }
 
-uint8_t DataType::getMembersSize() const noexcept {
-    return handle()->membersSize;
+ArrayView<const DataTypeMember> DataType::getMembers() const noexcept {
+    return {handle()->members, handle()->membersSize};
 }
 
-std::vector<DataTypeMember> DataType::getMembers() const {
-    std::vector<DataTypeMember> result(handle()->membersSize);
-    std::copy(
-        handle()->members,
-        handle()->members + handle()->membersSize,  // NOLINT
-        result.begin()
-    );
-    return result;
-}
-
-void DataType::setMembers(const std::vector<DataTypeMember>& members) {
+void DataType::setMembers(ArrayView<const DataTypeMember> members) {
     assert(members.size() < (1U << 8U));
     clearMembers(handle());
     copyMembers(members.data(), members.size(), handle());

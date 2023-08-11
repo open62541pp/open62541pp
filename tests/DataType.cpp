@@ -70,10 +70,10 @@ TEST_CASE("DataType") {
         CHECK(dt.getTypeKind() == UA_DATATYPEKIND_STRUCTURE);
         CHECK(dt.getPointerFree() == true);
         CHECK(dt.getOverlayable() == false);
-        CHECK(dt.getMembersSize() == 3);
-        CHECK(dt.getMembers().at(0) == pointMembers[0]);
-        CHECK(dt.getMembers().at(1) == pointMembers[1]);
-        CHECK(dt.getMembers().at(2) == pointMembers[2]);
+        CHECK(dt.getMembers().size() == 3);
+        CHECK(dt.getMembers()[0] == pointMembers[0]);
+        CHECK(dt.getMembers()[1] == pointMembers[1]);
+        CHECK(dt.getMembers()[2] == pointMembers[2]);
     }
 
     SUBCASE("Construct from type index") {
@@ -136,10 +136,9 @@ static void checkDataTypeEqual(const DataType& dt, const UA_DataType& expected) 
     CHECK(dt.getTypeKind() == expected.typeKind);
     CHECK(dt.getPointerFree() == static_cast<bool>(expected.pointerFree));
     CHECK(dt.getOverlayable() == static_cast<bool>(expected.overlayable));
-    CHECK(dt.getMembersSize() == expected.membersSize);
-    for (uint8_t i = 0; i < dt.getMembersSize(); ++i) {
+    for (uint8_t i = 0; i < dt.getMembers().size(); ++i) {
         CAPTURE(i);
-        auto m = dt.getMembers().at(i);
+        auto m = dt.getMembers()[i];
 #if UAPP_OPEN62541_VER_GE(1, 3)
         CHECK(m.memberType == expected.members[i].memberType);
 #else
