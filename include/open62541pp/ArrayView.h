@@ -1,5 +1,6 @@
 #pragma once
 
+#include <algorithm>
 #include <cstdint>
 #include <initializer_list>
 #include <iterator>
@@ -176,5 +177,26 @@ ArrayView(Container&) -> ArrayView<typename Container::value_type>;
 
 template <typename Container>
 ArrayView(const Container&) -> ArrayView<const typename Container::value_type>;
+
+/* ----------------------------------------- Comparison ----------------------------------------- */
+
+namespace detail {
+
+template <typename T, typename U>
+using EnableIfEqualityComparable = typename std::enable_if_t<
+    std::is_invocable_v<std::equal_to<>, const T&, const U&> &&
+    std::is_invocable_v<std::not_equal_to<>, const T&, const U&>>;
+
+}  // namespace detail
+
+template <typename T, typename U, typename = detail::EnableIfEqualityComparable<T, U>>
+constexpr bool operator==(ArrayView<T> lhs, ArrayView<U> rhs) {
+    return std::equal(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+}
+
+template <typename T, typename U, typename = detail::EnableIfEqualityComparable<T, U>>
+constexpr bool operator!=(ArrayView<T> lhs, ArrayView<U> rhs) {
+    return !(lhs == rhs);
+}
 
 }  // namespace opcua

@@ -104,3 +104,29 @@ TEST_CASE("ArrayView as generic function parameter") {
 
     CHECK(getSize({0, 1, 2}) == 3);
 }
+
+TEST_CASE("ArrayView comparison") {
+    std::vector<int> vec1{0, 1, 2};
+    std::vector<int> vec2{3, 4, 5};
+    std::vector<double> vec1Double{0, 1, 2};
+    std::vector<double> vec2Double{3, 4, 5};
+
+    CHECK(ArrayView(vec1) == ArrayView(vec1));
+    CHECK(ArrayView(vec2) == ArrayView(vec2));
+    CHECK(ArrayView(vec1) != ArrayView(vec2));
+    CHECK(ArrayView(vec2) != ArrayView(vec1));
+
+    SUBCASE("Mix non-const/const") {
+        CHECK(ArrayView<int>(vec1) == ArrayView<const int>(vec1));
+        CHECK(ArrayView<const int>(vec1) == ArrayView<int>(vec1));
+        CHECK(ArrayView<int>(vec1) != ArrayView<const int>(vec2));
+        CHECK(ArrayView<const int>(vec2) != ArrayView<int>(vec1));
+    }
+
+    SUBCASE("Mix comparable types") {
+        CHECK(ArrayView(vec1) == ArrayView(vec1Double));
+        CHECK(ArrayView(vec1Double) == ArrayView(vec1));
+        CHECK(ArrayView(vec1) != ArrayView(vec2Double));
+        CHECK(ArrayView(vec2Double) != ArrayView(vec1));
+    }
+}
