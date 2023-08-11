@@ -97,20 +97,38 @@ TEST_CASE("ArrayView") {
 }
 
 TEST_CASE("ArrayView as generic function parameter") {
-    auto getSize = [](ArrayView<const int> view) { return view.size(); };
+    SUBCASE("Const") {
+        auto getSize = [](ArrayView<const int> view) { return view.size(); };
 
-    const std::vector vec{0, 1, 2};
-    const std::array arr{0, 1, 2};
+        const std::vector vec{0, 1, 2};
+        const std::array arr{0, 1, 2};
 
-    CHECK(getSize({vec.data(), vec.size()}) == 3);
+        CHECK(getSize({vec.data(), vec.size()}) == 3);
 
-    CHECK(getSize(vec) == 3);
-    CHECK(getSize(arr) == 3);
+        CHECK(getSize(vec) == 3);
+        CHECK(getSize(arr) == 3);
 
-    CHECK(getSize(std::vector{0, 1, 2}) == 3);
-    CHECK(getSize(std::array{0, 1, 2}) == 3);
+        CHECK(getSize(std::vector{0, 1, 2}) == 3);
+        CHECK(getSize(std::array{0, 1, 2}) == 3);
+        CHECK(getSize({0, 1, 2}) == 3);
+    }
 
-    CHECK(getSize({0, 1, 2}) == 3);
+    SUBCASE("Non-const") {
+        auto getSize = [](ArrayView<int> view) { return view.size(); };
+
+        std::vector vec{0, 1, 2};
+        std::array arr{0, 1, 2};
+
+        CHECK(getSize({vec.data(), vec.size()}) == 3);
+
+        CHECK(getSize(vec) == 3);
+        CHECK(getSize(arr) == 3);
+
+        // rvalue references will fail
+        // CHECK(getSize(std::vector{0, 1, 2}) == 3);
+        // CHECK(getSize(std::array{0, 1, 2}) == 3);
+        // CHECK(getSize({0, 1, 2}) == 3);
+    }
 }
 
 TEST_CASE("ArrayView comparison") {
