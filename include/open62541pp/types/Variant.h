@@ -191,7 +191,7 @@ public:
         setArray(ArrayView{std::forward<ArrayLike>(array)}, dataType);
     }
 
-    /// Copy array (to variant.
+    /// Copy array to variant.
     template <typename T>
     void setArrayCopy(ArrayView<T> array);
 

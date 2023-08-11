@@ -431,26 +431,23 @@ public:
     /// Write array (raw) to variable node.
     /// @return Current node instance to chain multiple methods (fluent interface)
     template <typename T>
-    Node& writeArray(const T* array, size_t size) {
-        // NOLINTNEXTLINE, variant isn't modified, try to avoid copy
-        const auto variant = Variant::fromArray<T>(ArrayView{const_cast<T*>(array), size});
+    Node& writeArray(ArrayView<T> array) {
+        const auto variant = Variant::fromArray(array);
         writeValue(variant);
         return *this;
     }
 
-    /// Write array (std::vector) to variable node.
-    /// @return Current node instance to chain multiple methods (fluent interface)
-    template <typename T>
-    Node& writeArray(const std::vector<T>& array) {
-        writeArray<T>(array.data(), array.size());
-        return *this;
+    /// @overload
+    template <typename ArrayLike>
+    Node& writeArray(ArrayLike&& array) {
+        return writeArray(ArrayView{std::forward<ArrayLike>(array)});
     }
 
     /// Write range of elements as array to variable node.
     /// @return Current node instance to chain multiple methods (fluent interface)
     template <typename InputIt>
     Node& writeArray(InputIt first, InputIt last) {
-        const auto variant = Variant::fromArray<InputIt>(first, last);
+        const auto variant = Variant::fromArray(first, last);
         writeValue(variant);
         return *this;
     }
