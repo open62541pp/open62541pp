@@ -23,6 +23,23 @@ namespace opcua {
  */
 template <typename T>
 class ArrayView {
+private:
+    template <typename, typename = void>
+    struct HasSize : std::false_type {};
+
+    template <typename C>
+    struct HasSize<C, std::void_t<decltype(std::size(std::declval<C>()))>> : std::true_type {};
+
+    template <typename, typename = void>
+    struct HasData : std::false_type {};
+
+    template <typename C>
+    struct HasData<C, std::void_t<decltype(std::data(std::declval<C>()))>> : std::true_type {};
+
+    template <typename C>
+    using EnableIfHasSizeAndData =
+        typename std::enable_if_t<HasSize<C>::value && HasData<C>::value>;
+
 public:
     // clang-format off
     using element_type           = T;
@@ -41,23 +58,23 @@ public:
 
     constexpr ArrayView() noexcept = default;
 
-    constexpr ArrayView(element_type* data, size_t size) noexcept
+    constexpr ArrayView(T* data, size_t size) noexcept
         : size_(size),
           data_(data) {}
 
     /**
      * Implicit constructor from a container like `std::array` or `std::vector`.
      */
-    template <typename Container>
+    template <typename Container, typename = EnableIfHasSizeAndData<Container>>
     constexpr ArrayView(Container& container) noexcept  // NOLINT
-        : ArrayView(container.data(), container.size()) {}
+        : ArrayView(std::data(container), std::size(container)) {}
 
     /**
      * Implicit constructor from a container like `std::array` or `std::vector` (const).
      */
-    template <typename Container>
+    template <typename Container, typename = EnableIfHasSizeAndData<Container>>
     constexpr ArrayView(const Container& container) noexcept  // NOLINT
-        : ArrayView(container.data(), container.size()) {}
+        : ArrayView(std::data(container), std::size(container)) {}
 
     /**
      * Implicit constructor from an initializer list.

@@ -624,6 +624,11 @@ TEST_CASE("Variant") {
         CHECK(var.getArrayCopy<std::string>() == value);
     }
 
+    SUBCASE("Set array from initializer list") {
+        Variant var;
+        var.setArrayCopy<const int>({1, 2, 3});  // TODO: avoid manual template types
+    }
+
     SUBCASE("Set/get non-builtin data types") {
         using CustomType = UA_WriteValue;
         const auto& dt = UA_TYPES[UA_TYPES_WRITEVALUE];
