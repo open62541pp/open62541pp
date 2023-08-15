@@ -10,6 +10,7 @@
 namespace opcua {
 class ByteString;
 class QualifiedName;
+class Server;
 }  // namespace opcua
 
 namespace opcua::services {
@@ -54,6 +55,24 @@ template <typename T>
 std::vector<ReferenceDescription> browseAll(
     T& serverOrClient, const BrowseDescription& bd, uint32_t maxReferences = 0
 );
+
+/**
+ * Discover child nodes recursively (non-standard).
+ *
+ * Possible loops (that can occur for non-hierarchical references) are handled internally. Every
+ * node is added at most once to the results array. Nodes are only added if they match the
+ * `nodeClassMask` in the BrowseDescription. However, child nodes are still recursed into if the
+ * NodeClass does not match. So it is possible, for example, to get all VariableNodes below a
+ * certain ObjectNode, with additional objects in the hierarchy below.
+ *
+ * @note No implementation for `Client`.
+ *
+ * @param server Instance of type Server
+ * @param bd Browse description
+ * @see UA_Server_browseRecursive
+ * @ingroup View
+ */
+std::vector<ExpandedNodeId> browseRecursive(Server& server, const BrowseDescription& bd);
 
 /**
  * Translate a browse path to NodeIds.
