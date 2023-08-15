@@ -154,8 +154,8 @@ TEST_CASE("Node") {
             CHECK_NOTHROW(varNode.writeDataType(Type::Double));
 
             // write with wrong data type
-            CHECK_THROWS(varNode.template writeArray(std::vector<int>{}));
-            CHECK_THROWS(varNode.template writeArray(std::vector<float>{}));
+            CHECK_THROWS(varNode.writeArray(std::vector<int>{}));
+            CHECK_THROWS(varNode.writeArray(std::vector<float>{}));
 
             // write with correct data type
             std::vector<double> array{11.11, 22.22, 33.33};

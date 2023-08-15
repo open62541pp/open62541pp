@@ -155,7 +155,7 @@ public:
 
     /// Obtain a view over `count` elements of this Span starting at offset `offset`.
     [[nodiscard]] constexpr Span subview(
-        size_t offset, size_t count = std::numeric_limits<std::size_t>::max()
+        size_t offset, size_t count = (std::numeric_limits<std::size_t>::max)()
     ) const noexcept {
         if (offset >= size()) {
             return {};
