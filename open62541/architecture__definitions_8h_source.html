@@ -78,7 +78,15 @@ $(function() {
   <div class="headertitle"><div class="title">architecture_definitions.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="architecture__definitions_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<a href="architecture__definitions_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/** This Source Code Form is subject to the terms of the Mozilla Public</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * License, v. 2.0. If a copy of the MPL was not distributed with this</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * file, You can obtain one at http://mozilla.org/MPL/2.0/.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> *    Copyright 2017 (c) Fraunhofer IOSB (Author: Julius Pfrommer)</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> *    Copyright 2017 (c) Stefan Profanter, fortiss GmbH</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"> *    Copyright 2018 (c) Jose Cabral, fortiss GmbH</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#ifndef ARCH_UA_ARCHITECTURE_DEFINITIONS_H_</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#define ARCH_UA_ARCHITECTURE_DEFINITIONS_H_</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
@@ -87,7 +95,8 @@ $(function() {
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;string.h&gt;</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;stddef.h&gt;</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"></span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">/** Include stdint.h and stdbool.h or workaround for older Visual Studios */</span></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#ifdef UNDER_CE</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor"># include &quot;stdint.h&quot;</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#endif</span></div>
@@ -103,7 +112,8 @@ $(function() {
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#  define __bool_true_false_are_defined</span></div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor"># endif</span></div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment"></span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">/** Include inttypes.h or workaround for older Visual Studios */</span></div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="preprocessor">#if !defined(_MSC_VER) || _MSC_VER &gt;= 1800</span></div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor"># include &lt;inttypes.h&gt;</span></div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="preprocessor">#else</span></div>
@@ -163,7 +173,10 @@ $(function() {
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="preprocessor"># define UA_calloc(num, size) UA_callocSingleton(num, size)</span></div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="preprocessor"># define UA_realloc(ptr, size) UA_reallocSingleton(ptr, size)</span></div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment"></span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">/** Stack-allocation of memory. Use C99 variable-length arrays if possible.</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment"> * Otherwise revert to alloca. Note that alloca is not supported on some</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment"> * plattforms. */</span></div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="preprocessor">#ifndef UA_STACKARRAY</span></div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="preprocessor"># if defined(__GNUC__) || defined(__clang__)</span></div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="preprocessor">#  define UA_STACKARRAY(TYPE, NAME, SIZE) TYPE NAME[SIZE]</span></div>
@@ -189,7 +202,11 @@ $(function() {
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="preprocessor">#else</span></div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="architecture__definitions_8h.html#a134e6f8e1aa5c8625e22719513e10f1a">  123</a></span><span class="preprocessor"># define UA_assert(ignore) do {} while(0)</span></div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="comment"></span> </div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="comment">/** Outputs an error message at compile time if the assert fails.</span></div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="comment"> * Example usage:</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="comment"> * UA_STATIC_ASSERT(sizeof(long)==7, use_another_compiler_luke)</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="comment"> * See: https://stackoverflow.com/a/4815532/869402 */</span></div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="preprocessor">#if defined(__cplusplus) &amp;&amp; __cplusplus &gt;= 201103L </span><span class="comment">/* C++11 or above */</span><span class="preprocessor"></span></div>
 <div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="preprocessor"># define UA_STATIC_ASSERT(cond,msg) static_assert(cond, #msg)</span></div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="preprocessor">#elif defined(__STDC_VERSION__) &amp;&amp; __STDC_VERSION__ &gt;= 201112L </span><span class="comment">/* C11 or above */</span><span class="preprocessor"></span></div>
@@ -349,7 +366,10 @@ $(function() {
 <div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span><span class="preprocessor">#ifndef UA_LITTLE_ENDIAN</span></div>
 <div class="line"><a id="l00287" name="l00287"></a><span class="lineno"><a class="line" href="architecture__definitions_8h.html#a37746ec496effbeb193b05b13cbe9f5d">  287</a></span><span class="preprocessor"># define UA_LITTLE_ENDIAN 0</span></div>
 <div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span> </div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span><span class="comment"></span> </div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span><span class="comment">/** Can the integers be memcpy&#39;d onto the network buffer? Add additional checks</span></div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span><span class="comment"> * here. Some platforms (e.g. QNX) have sizeof(bool) &gt; 1. Manually disable</span></div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span><span class="comment"> * overlayed integer encoding if that is the case. */</span></div>
 <div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span><span class="preprocessor">#if (UA_LITTLE_ENDIAN == 1)</span></div>
 <div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span><a class="code hl_define" href="architecture__definitions_8h.html#a6ef2140f17af318af17f482484f498f9">UA_STATIC_ASSERT</a>(<span class="keyword">sizeof</span>(<span class="keywordtype">bool</span>) == 1, cannot_overlay_integers_with_large_bool);</div>
 <div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span><span class="preprocessor"># define UA_BINARY_OVERLAYABLE_INTEGER 1</span></div>
@@ -370,7 +390,12 @@ $(function() {
 <div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span><span class="preprocessor">#else</span></div>
 <div class="line"><a id="l00311" name="l00311"></a><span class="lineno"><a class="line" href="architecture__definitions_8h.html#a359c930ae5f00e5658a6980b3c26d21c">  311</a></span><span class="preprocessor"># define UA_FLOAT_IEEE754 0</span></div>
 <div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span> </div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span><span class="comment"></span> </div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span><span class="comment">/** Wikipedia says (https://en.wikipedia.org/wiki/Endianness): Although the</span></div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span><span class="comment"> * ubiquitous x86 processors of today use little-endian storage for all types of</span></div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span><span class="comment"> * data (integer, floating point, BCD), there are a number of hardware</span></div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span><span class="comment"> * architectures where floating-point numbers are represented in big-endian form</span></div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span><span class="comment"> * while integers are represented in little-endian form. */</span></div>
 <div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span><span class="preprocessor">#if defined(_WIN32)</span></div>
 <div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span><span class="preprocessor"># define UA_FLOAT_LITTLE_ENDIAN 1</span></div>
 <div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span><span class="preprocessor">#elif defined(__i386__) || defined(__x86_64__) || defined(__amd64__)</span></div>
@@ -385,13 +410,20 @@ $(function() {
 <div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span><span class="preprocessor">#ifndef UA_FLOAT_LITTLE_ENDIAN</span></div>
 <div class="line"><a id="l00331" name="l00331"></a><span class="lineno"><a class="line" href="architecture__definitions_8h.html#af67616b843b5b06424a885237542c068">  331</a></span><span class="preprocessor"># define UA_FLOAT_LITTLE_ENDIAN 0</span></div>
 <div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span> </div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span><span class="comment"></span> </div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span><span class="comment">/** Only if the floating points are litle-endian **and** in IEEE 754 format can</span></div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span><span class="comment"> * we memcpy directly onto the network buffer. */</span></div>
 <div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span><span class="preprocessor">#if (UA_FLOAT_IEEE754 == 1) &amp;&amp; (UA_FLOAT_LITTLE_ENDIAN == 1)</span></div>
 <div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span><span class="preprocessor"># define UA_BINARY_OVERLAYABLE_FLOAT 1</span></div>
 <div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span><span class="preprocessor">#else</span></div>
 <div class="line"><a id="l00339" name="l00339"></a><span class="lineno"><a class="line" href="architecture__definitions_8h.html#aa96f501e1f80b2b5eb4cc368a152c674">  339</a></span><span class="preprocessor"># define UA_BINARY_OVERLAYABLE_FLOAT 0</span></div>
 <div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span> </div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span><span class="comment"></span> </div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span><span class="comment">/** Atomic Operations</span></div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span><span class="comment"> * -----------------</span></div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span><span class="comment"> * Atomic operations that synchronize across processor cores (for</span></div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span><span class="comment"> * multithreading). Only the inline-functions defined next are used. Replace</span></div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span><span class="comment"> * with architecture-specific operations if necessary. */</span></div>
 <div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span><span class="preprocessor">#if UA_MULTITHREADING &gt;= 100</span></div>
 <div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span><span class="preprocessor">    #ifdef _MSC_VER </span><span class="comment">/* Visual Studio */</span><span class="preprocessor"></span></div>
 <div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span><span class="preprocessor">    #define UA_atomic_sync() _ReadWriteBarrier()</span></div>

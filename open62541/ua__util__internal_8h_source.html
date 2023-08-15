@@ -78,7 +78,20 @@ $(function() {
   <div class="headertitle"><div class="title">ua_util_internal.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="ua__util__internal_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<a href="ua__util__internal_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/** This Source Code Form is subject to the terms of the Mozilla Public</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * License, v. 2.0. If a copy of the MPL was not distributed with this</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * file, You can obtain one at http://mozilla.org/MPL/2.0/. </span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> *    Copyright 2014-2017 (c) Fraunhofer IOSB (Author: Julius Pfrommer)</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> *    Copyright 2014, 2017 (c) Florian Palm</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"> *    Copyright 2015 (c) LEvertz</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment"> *    Copyright 2015-2016 (c) Sten Grüner</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"> *    Copyright 2015 (c) Chris Iatrou</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment"> *    Copyright 2015-2016 (c) Oleksiy Vasylyev</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment"> *    Copyright 2017 (c) Stefan Profanter, fortiss GmbH</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"> *    Copyright 2021 (c) Fraunhofer IOSB (Author: Jan Hermes)</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#ifndef UA_UTIL_H_</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#define UA_UTIL_H_</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
@@ -90,9 +103,11 @@ $(function() {
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#include &quot;<a class="code" href="ua__types__encoding__binary_8h.html">ua_types_encoding_binary.h</a>&quot;</span></div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><a class="code hl_define" href="config_8h.html#aa397bffde7d792f38dcbb8e329486f9c">_UA_BEGIN_DECLS</a></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"></span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">/** Macro-Expand for MSVC workarounds */</span></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="ua__util__internal_8h.html#a273fd37bc8fedce6d53e7d0bf2be78bb">   28</a></span><span class="preprocessor">#define UA_MACRO_EXPAND(x) x</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment"></span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">/** Print a NodeId in logs */</span></div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="ua__util__internal_8h.html#a1f34e0cd8cfcdc24c0868b4c8e8449d6">   31</a></span><span class="preprocessor">#define UA_LOG_NODEID_INTERNAL(NODEID, LOG)          \</span></div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">    do {                                             \</span></div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">    UA_String nodeIdStr = UA_STRING_NULL;            \</span></div>
@@ -142,7 +157,9 @@ $(function() {
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="preprocessor">#else</span></div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="preprocessor"># define UA_LOG_NODEID_FATAL(NODEID, LOG)</span></div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment"></span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">/** Short names for integer. These are not exposed on the public API, since many</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment"> * user-applications make the same definitions in their headers. */</span></div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno"><a class="line" href="ua__util__internal_8h.html#a4815c48446777685ba3c51cfec5e2cfc">   83</a></span><span class="keyword">typedef</span> <a class="code hl_typedef" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a> <a class="code hl_typedef" href="ua__util__internal_8h.html#a4815c48446777685ba3c51cfec5e2cfc">u8</a>;</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="ua__util__internal_8h.html#a438c7fe1be183dd409864e35be77ee3a">   84</a></span><span class="keyword">typedef</span> <a class="code hl_typedef" href="types_8h.html#a4ba04733a2525e207fa5ea5337ad17f3">UA_SByte</a> <a class="code hl_typedef" href="ua__util__internal_8h.html#a438c7fe1be183dd409864e35be77ee3a">i8</a>;</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="ua__util__internal_8h.html#a87e798d80f950196077a616b6793c07d">   85</a></span><span class="keyword">typedef</span> <a class="code hl_typedef" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a> <a class="code hl_typedef" href="ua__util__internal_8h.html#a87e798d80f950196077a616b6793c07d">u16</a>;</div>
@@ -252,15 +269,18 @@ $(function() {
 <div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *</div>
 <div class="line"><a id="l00190" name="l00190"></a><span class="lineno"><a class="line" href="ua__util__internal_8h.html#a7a5947b0c847ffc83ccef7b7eb8383a4">  190</a></span><a class="code hl_function" href="ua__util__internal_8h.html#a7a5947b0c847ffc83ccef7b7eb8383a4">UA_findDataTypeWithCustom</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__NodeId.html">UA_NodeId</a> *typeId,</div>
 <div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>                          <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataTypeArray.html">UA_DataTypeArray</a> *customTypes);</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="comment"></span> </div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="comment">/** Get the number of optional fields contained in an structure type */</span></div>
 <div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="keywordtype">size_t</span></div>
 <div class="line"><a id="l00195" name="l00195"></a><span class="lineno"><a class="line" href="ua__util__internal_8h.html#afe517b7bcaceb4d38374da48ad616409">  195</a></span><a class="code hl_function" href="ua__util__internal_8h.html#afe517b7bcaceb4d38374da48ad616409">getCountOfOptionalFields</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type);</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span> </div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span><span class="comment"></span> </div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span><span class="comment">/** Dump packet for debugging / fuzzing */</span></div>
 <div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span><span class="preprocessor">#ifdef UA_DEBUG_DUMP_PKGS</span></div>
 <div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span><span class="keywordtype">void</span></div>
 <div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>UA_dump_hex_pkg(<a class="code hl_typedef" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a>* buffer, <span class="keywordtype">size_t</span> bufferLen);</div>
 <div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span> </div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span><span class="comment"></span> </div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span><span class="comment">/** Unions that represent any of the supported request or response message */</span></div>
 <div class="line"><a id="l00204" name="l00204"></a><span class="lineno"><a class="line" href="unionUA__Request.html">  204</a></span><span class="keyword">typedef</span> <span class="keyword">union </span>{</div>
 <div class="line"><a id="l00205" name="l00205"></a><span class="lineno"><a class="line" href="unionUA__Request.html#a89d5a6f7e1a02fc012e4be1f13d8c66e">  205</a></span>    <a class="code hl_struct" href="structUA__RequestHeader.html">UA_RequestHeader</a> <a class="code hl_variable" href="unionUA__Request.html#a89d5a6f7e1a02fc012e4be1f13d8c66e">requestHeader</a>;</div>
 <div class="line"><a id="l00206" name="l00206"></a><span class="lineno"><a class="line" href="unionUA__Request.html#aa357785ab50cf4ff21f69546027851a5">  206</a></span>    <a class="code hl_struct" href="structUA__FindServersRequest.html">UA_FindServersRequest</a> <a class="code hl_variable" href="unionUA__Request.html#aa357785ab50cf4ff21f69546027851a5">findServersRequest</a>;</div>
@@ -354,11 +374,16 @@ $(function() {
 <div class="line"><a id="l00294" name="l00294"></a><span class="lineno"><a class="line" href="unionUA__Response.html#a48289c8dcd72c97caf29b81de21c2cf0">  294</a></span>    <a class="code hl_struct" href="structUA__DeleteSubscriptionsResponse.html">UA_DeleteSubscriptionsResponse</a> <a class="code hl_variable" href="unionUA__Response.html#a48289c8dcd72c97caf29b81de21c2cf0">deleteSubscriptionsResponse</a>;</div>
 <div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>} <a class="code hl_union" href="unionUA__Response.html">UA_Response</a>;</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span> </div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span><span class="comment"></span> </div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span><span class="comment">/** Do not expose UA_String_equal_ignorecase to public API as it currently only handles</span></div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span><span class="comment"> * ASCII strings, and not UTF8! */</span></div>
 <div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span><a class="code hl_variable" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a></div>
 <div class="line"><a id="l00301" name="l00301"></a><span class="lineno"><a class="line" href="ua__util__internal_8h.html#a6b6e802e9aebe630a40a650904aff8ee">  301</a></span><a class="code hl_function" href="ua__util__internal_8h.html#a6b6e802e9aebe630a40a650904aff8ee">UA_String_equal_ignorecase</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__String.html">UA_String</a> *s1, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__String.html">UA_String</a> *s2);</div>
 <div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span> </div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span> </div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span><span class="comment"></span> </div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span><span class="comment">/** Encoding Helpers */</span></div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span> </div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span> </div>
 <div class="line"><a id="l00307" name="l00307"></a><span class="lineno"><a class="line" href="ua__util__internal_8h.html#a3af7fdaf6dca8a8a73331d74cd613cc2">  307</a></span><span class="preprocessor">#define UA_ENCODING_HELPERS(TYPE, UPCASE_TYPE)                          \</span></div>
 <div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span><span class="preprocessor">    static size_t                                             \</span></div>
 <div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span><span class="preprocessor">    UA_##TYPE##_calcSizeBinary(const UA_##TYPE *src) {                    \</span></div>

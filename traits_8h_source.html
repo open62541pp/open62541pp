@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.6.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.7.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -96,12 +96,39 @@ $(function() {
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Ts, <span class="keyword">typename</span> T&gt;</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="structopcua_1_1detail_1_1TupleHolds_3_01std_1_1tuple_3_01Ts_8_8_8_01_4_00_01T_01_4.html">   18</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1detail_1_1TupleHolds.html">TupleHolds</a>&lt;std::tuple&lt;Ts...&gt;, T&gt; : std::bool_constant&lt;(std::is_same_v&lt;Ts, T&gt; || ...)&gt; {};</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>}  <span class="comment">// namespace opcua::detail</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"></span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">/// Remove pointer, references and all qualifiers.</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="structopcua_1_1detail_1_1Unqualified.html">   22</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1detail_1_1Unqualified.html">Unqualified</a> {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="structopcua_1_1detail_1_1Unqualified.html#a10de2d5f024296925dfa570e4b5b1800">   23</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="structopcua_1_1detail_1_1Unqualified.html#a10de2d5f024296925dfa570e4b5b1800">type</a> = std::remove_cv_t&lt;std::remove_reference_t&lt;std::remove_pointer_t&lt;T&gt;&gt;&gt;;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>};</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#a1bfe0ab8e02bf3957719eee388681f25">   27</a></span><span class="keyword">using </span><a class="code hl_typedef" href="namespaceopcua_1_1detail.html#a1bfe0ab8e02bf3957719eee388681f25">UnqualifiedT</a> = <span class="keyword">typename</span> <a class="code hl_typedef" href="structopcua_1_1detail_1_1Unqualified.html#a10de2d5f024296925dfa570e4b5b1800">Unqualified&lt;T&gt;::type</a>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment"></span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">/// Derive member type from member pointer</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="structopcua_1_1detail_1_1MemberType.html">   31</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1detail_1_1MemberType.html">MemberType</a>;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> C, <span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="structopcua_1_1detail_1_1MemberType_3_01T_01C_1_1_5_01_4.html">   34</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1detail_1_1MemberType.html">MemberType</a>&lt;T C::*&gt; {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="structopcua_1_1detail_1_1MemberType_3_01T_01C_1_1_5_01_4.html#aca57ddf92ff5eb4881e713dd0ea50e80">   35</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="structopcua_1_1detail_1_1MemberType_3_01T_01C_1_1_5_01_4.html#aca57ddf92ff5eb4881e713dd0ea50e80">type</a> = T;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>};</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#a1362c4f8ccc80c1406fb24a00ec86397">   39</a></span><span class="keyword">using </span><a class="code hl_typedef" href="namespaceopcua_1_1detail.html#a1362c4f8ccc80c1406fb24a00ec86397">MemberTypeT</a> = <span class="keyword">typename</span> <a class="code hl_struct" href="structopcua_1_1detail_1_1MemberType.html">MemberType&lt;T&gt;::type</a>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>}  <span class="comment">// namespace opcua::detail</span></div>
 <div class="ttc" id="anamespaceopcua_1_1detail_html"><div class="ttname"><a href="namespaceopcua_1_1detail.html">opcua::detail</a></div><div class="ttdef"><b>Definition</b> <a href="Common_8h_source.html#l00215">Common.h:215</a></div></div>
+<div class="ttc" id="anamespaceopcua_1_1detail_html_a1362c4f8ccc80c1406fb24a00ec86397"><div class="ttname"><a href="namespaceopcua_1_1detail.html#a1362c4f8ccc80c1406fb24a00ec86397">opcua::detail::MemberTypeT</a></div><div class="ttdeci">typename MemberType&lt; T &gt;::type MemberTypeT</div><div class="ttdef"><b>Definition</b> <a href="traits_8h_source.html#l00039">traits.h:39</a></div></div>
+<div class="ttc" id="anamespaceopcua_1_1detail_html_a1bfe0ab8e02bf3957719eee388681f25"><div class="ttname"><a href="namespaceopcua_1_1detail.html#a1bfe0ab8e02bf3957719eee388681f25">opcua::detail::UnqualifiedT</a></div><div class="ttdeci">typename Unqualified&lt; T &gt;::type UnqualifiedT</div><div class="ttdef"><b>Definition</b> <a href="traits_8h_source.html#l00027">traits.h:27</a></div></div>
 <div class="ttc" id="anamespaceopcua_1_1detail_html_aad1cfbe232418a890fa98c35c9508acb"><div class="ttname"><a href="namespaceopcua_1_1detail.html#aad1cfbe232418a890fa98c35c9508acb">opcua::detail::IsOneOf</a></div><div class="ttdeci">std::disjunction&lt; std::is_same&lt; T, Ts &gt;... &gt; IsOneOf</div><div class="ttdef"><b>Definition</b> <a href="traits_8h_source.html#l00012">traits.h:12</a></div></div>
 <div class="ttc" id="astructopcua_1_1detail_1_1AlwaysFalse_html"><div class="ttname"><a href="structopcua_1_1detail_1_1AlwaysFalse.html">opcua::detail::AlwaysFalse</a></div><div class="ttdef"><b>Definition</b> <a href="traits_8h_source.html#l00009">traits.h:9</a></div></div>
+<div class="ttc" id="astructopcua_1_1detail_1_1MemberType_3_01T_01C_1_1_5_01_4_html_aca57ddf92ff5eb4881e713dd0ea50e80"><div class="ttname"><a href="structopcua_1_1detail_1_1MemberType_3_01T_01C_1_1_5_01_4.html#aca57ddf92ff5eb4881e713dd0ea50e80">opcua::detail::MemberType&lt; T C::* &gt;::type</a></div><div class="ttdeci">T type</div><div class="ttdef"><b>Definition</b> <a href="traits_8h_source.html#l00035">traits.h:35</a></div></div>
+<div class="ttc" id="astructopcua_1_1detail_1_1MemberType_html"><div class="ttname"><a href="structopcua_1_1detail_1_1MemberType.html">opcua::detail::MemberType</a></div><div class="ttdoc">Derive member type from member pointer.</div><div class="ttdef"><b>Definition</b> <a href="traits_8h_source.html#l00031">traits.h:31</a></div></div>
 <div class="ttc" id="astructopcua_1_1detail_1_1TupleHolds_html"><div class="ttname"><a href="structopcua_1_1detail_1_1TupleHolds.html">opcua::detail::TupleHolds</a></div><div class="ttdef"><b>Definition</b> <a href="traits_8h_source.html#l00015">traits.h:15</a></div></div>
+<div class="ttc" id="astructopcua_1_1detail_1_1Unqualified_html"><div class="ttname"><a href="structopcua_1_1detail_1_1Unqualified.html">opcua::detail::Unqualified</a></div><div class="ttdoc">Remove pointer, references and all qualifiers.</div><div class="ttdef"><b>Definition</b> <a href="traits_8h_source.html#l00022">traits.h:22</a></div></div>
+<div class="ttc" id="astructopcua_1_1detail_1_1Unqualified_html_a10de2d5f024296925dfa570e4b5b1800"><div class="ttname"><a href="structopcua_1_1detail_1_1Unqualified.html#a10de2d5f024296925dfa570e4b5b1800">opcua::detail::Unqualified::type</a></div><div class="ttdeci">std::remove_cv_t&lt; std::remove_reference_t&lt; std::remove_pointer_t&lt; T &gt; &gt; &gt; type</div><div class="ttdef"><b>Definition</b> <a href="traits_8h_source.html#l00023">traits.h:23</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

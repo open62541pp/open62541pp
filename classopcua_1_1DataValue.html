@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.6.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.7.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -92,12 +92,8 @@ Inheritance diagram for opcua::DataValue:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae67f4fd5dc37deb728ae27fab40288ae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataValue.html#ae67f4fd5dc37deb728ae27fab40288ae">DataValue</a> (const <a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;value, std::optional&lt; <a class="el" href="classopcua_1_1DateTime.html">DateTime</a> &gt; sourceTimestamp, std::optional&lt; <a class="el" href="classopcua_1_1DateTime.html">DateTime</a> &gt; serverTimestamp, std::optional&lt; uint16_t &gt; sourcePicoseconds, std::optional&lt; uint16_t &gt; serverPicoseconds, std::optional&lt; <a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> &gt; statusCode)</td></tr>
-<tr class="separator:ae67f4fd5dc37deb728ae27fab40288ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b18a6f6ec26780fc2233e7d9c3e26dc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Variant.html">Variant</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataValue.html#a7b18a6f6ec26780fc2233e7d9c3e26dc">getValuePtr</a> () noexcept</td></tr>
-<tr class="separator:a7b18a6f6ec26780fc2233e7d9c3e26dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2dc66eb5d7e53a3a68a270c9a46937e9"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classopcua_1_1Variant.html">Variant</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataValue.html#a2dc66eb5d7e53a3a68a270c9a46937e9">getValuePtr</a> () const noexcept</td></tr>
-<tr class="separator:a2dc66eb5d7e53a3a68a270c9a46937e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b77bb1bfe2eba17c7427d64143eff67"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataValue.html#a8b77bb1bfe2eba17c7427d64143eff67">DataValue</a> (const <a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;value, std::optional&lt; <a class="el" href="classopcua_1_1DateTime.html">DateTime</a> &gt; sourceTimestamp, std::optional&lt; <a class="el" href="classopcua_1_1DateTime.html">DateTime</a> &gt; serverTimestamp, std::optional&lt; uint16_t &gt; sourcePicoseconds, std::optional&lt; uint16_t &gt; serverPicoseconds, std::optional&lt; <a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a> &gt; statusCode)</td></tr>
+<tr class="separator:a8b77bb1bfe2eba17c7427d64143eff67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a257e429eb800416b4ed028661d88d264"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataValue.html#a257e429eb800416b4ed028661d88d264">hasValue</a> () const noexcept</td></tr>
 <tr class="separator:a257e429eb800416b4ed028661d88d264"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a56ab026f3444ca48beba26b199e7aab5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataValue.html#a56ab026f3444ca48beba26b199e7aab5">hasSourceTimestamp</a> () const noexcept</td></tr>
@@ -122,8 +118,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad86005b9515a9002977481a872b8dc7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3632799d9b31d6d1deec55e32f1c7443"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataValue.html#a3632799d9b31d6d1deec55e32f1c7443">getServerPicoseconds</a> () const noexcept</td></tr>
 <tr class="separator:a3632799d9b31d6d1deec55e32f1c7443"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab3a0b79308af2da2cdca66e906a368fb"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataValue.html#ab3a0b79308af2da2cdca66e906a368fb">getStatusCode</a> () const noexcept</td></tr>
-<tr class="separator:ab3a0b79308af2da2cdca66e906a368fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84db105550225fa5b2d0a5ed943c24e5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataValue.html#a84db105550225fa5b2d0a5ed943c24e5">getStatusCode</a> () const noexcept</td></tr>
+<tr class="separator:a84db105550225fa5b2d0a5ed943c24e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeeb04edf684c2157076679ac5f2047b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataValue.html#aeeb04edf684c2157076679ac5f2047b8">setValue</a> (const <a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;value)</td></tr>
 <tr class="separator:aeeb04edf684c2157076679ac5f2047b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa22ac2b62ed1da7507b15a3286cfe58"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataValue.html#aaa22ac2b62ed1da7507b15a3286cfe58">setValue</a> (<a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;&amp;value)</td></tr>
@@ -136,8 +132,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af2705bc80a9710fc0d075da998a298f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c70c48aa03c4169442407547c4a6ccf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataValue.html#a2c70c48aa03c4169442407547c4a6ccf">setServerPicoseconds</a> (uint16_t serverPicoseconds)</td></tr>
 <tr class="separator:a2c70c48aa03c4169442407547c4a6ccf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeaf91afea3e6e042ed4320e2e5b2a96e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataValue.html#aeaf91afea3e6e042ed4320e2e5b2a96e">setStatusCode</a> (<a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> statusCode)</td></tr>
-<tr class="separator:aeaf91afea3e6e042ed4320e2e5b2a96e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12c921c2fa99b1dbf4be2d3f6a017989"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataValue.html#a12c921c2fa99b1dbf4be2d3f6a017989">setStatusCode</a> (<a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a> statusCode)</td></tr>
+<tr class="separator:a12c921c2fa99b1dbf4be2d3f6a017989"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classopcua_1_1TypeWrapper"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classopcua_1_1TypeWrapper')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_DataValue, UA_TYPES_DATAVALUE &gt;</a></td></tr>
 <tr class="memitem:a29f2b376d3d2bc2cdae828f1ef6c1b9d inherit pub_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a29f2b376d3d2bc2cdae828f1ef6c1b9d">TypeWrapper</a> ()=default</td></tr>
 <tr class="separator:a29f2b376d3d2bc2cdae828f1ef6c1b9d inherit pub_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -201,21 +197,19 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:ac183e283c4619b5e6e84d80706034224 inherit pro_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#ac183e283c4619b5e6e84d80706034224">copy</a> (const <a class="elRef" target="_blank" href="open62541/structUA__DataValue.html">UA_DataValue</a> &amp;data)</td></tr>
 <tr class="separator:ac183e283c4619b5e6e84d80706034224 inherit pro_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_static_methods_classopcua_1_1TypeWrapper"><td colspan="2" onclick="javascript:toggleInherit('pro_static_methods_classopcua_1_1TypeWrapper')"><img src="closed.png" alt="-"/>&#160;Static Protected Member Functions inherited from <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_DataValue, UA_TYPES_DATAVALUE &gt;</a></td></tr>
-<tr class="memitem:a570e5661b87bdc4abc4fa96fca9dd493 inherit pro_static_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">static const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a570e5661b87bdc4abc4fa96fca9dd493">getDataType</a> ()</td></tr>
-<tr class="separator:a570e5661b87bdc4abc4fa96fca9dd493 inherit pro_static_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7794f5381651258794f075fdaf7bbcff inherit pro_static_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a7794f5381651258794f075fdaf7bbcff">checkMemSize</a> ()</td></tr>
 <tr class="separator:a7794f5381651258794f075fdaf7bbcff inherit pro_static_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="elRef" target="_blank" href="open62541/structUA__DataValue.html">UA_DataValue</a> wrapper class. </p>
 <dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/Core/Part4/v105/docs/7.11">https://reference.opcfoundation.org/Core/Part4/v105/docs/7.11</a> </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_subscription_8cpp-example.html#_a7">client_subscription.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#_a7">server_valuecallback.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_subscription_8cpp-example.html#_a7">client_subscription.cpp</a>, <a class="el" href="server_datasource_8cpp-example.html#_a8">server_datasource.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#_a6">server_valuecallback.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="DataValue_8h_source.html#l00019">19</a> of file <a class="el" href="DataValue_8h_source.html">DataValue.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DataValue_8h_source.html#l00020">20</a> of file <a class="el" href="DataValue_8h_source.html">DataValue.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ae67f4fd5dc37deb728ae27fab40288ae" name="ae67f4fd5dc37deb728ae27fab40288ae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae67f4fd5dc37deb728ae27fab40288ae">&#9670;&#160;</a></span>DataValue()</h2>
+<a id="a8b77bb1bfe2eba17c7427d64143eff67" name="a8b77bb1bfe2eba17c7427d64143eff67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b77bb1bfe2eba17c7427d64143eff67">&#9670;&#160;</a></span>DataValue()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -253,7 +247,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::optional&lt; <a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> &gt;&#160;</td>
+          <td class="paramtype">std::optional&lt; <a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a> &gt;&#160;</td>
           <td class="paramname"><em>statusCode</em>&#160;</td>
         </tr>
         <tr>
@@ -294,13 +288,11 @@ template&lt;typename... Args&gt; </div>
 </div><div class="memdoc">
 
 <p>Create <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> from scalar value. </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classopcua_1_1Variant.html#a6eee92f79f6910b7652bcc2719345339" title="Create Variant from scalar value (no copy if assignable without conversion)">Variant::fromScalar</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classopcua_1_1Variant.html#a264a214598c4089990e5cfdc7378474d" title="Create Variant from scalar value (no copy if assignable without conversion).">Variant::fromScalar</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="DataValue_8h_source.html#l00089">89</a> of file <a class="el" href="DataValue_8h_source.html">DataValue.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DataValue_8h_source.html#l00085">85</a> of file <a class="el" href="DataValue_8h_source.html">DataValue.h</a>.</p>
 
-<p class="reference">References <a class="elRef" target="_blank" href="open62541/log_8h.html#a17b7d23b263b56363b9cd3364b529284">args</a>, and <a class="el" href="Variant_8h_source.html#l00187">opcua::Variant::fromScalar()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Attribute_8h_source.html#l00428">opcua::services::writeAccessLevel()</a>, <a class="el" href="Attribute_8h_source.html#l00389">opcua::services::writeDataType()</a>, <a class="el" href="Attribute_8h_source.html#l00378">opcua::services::writeDataType()</a>, <a class="el" href="Attribute_8h_source.html#l00294">opcua::services::writeDescription()</a>, <a class="el" href="Attribute_8h_source.html#l00284">opcua::services::writeDisplayName()</a>, <a class="el" href="Attribute_8h_source.html#l00345">opcua::services::writeInverseName()</a>, <a class="el" href="Attribute_8h_source.html#l00325">opcua::services::writeIsAbstract()</a>, <a class="el" href="Attribute_8h_source.html#l00451">opcua::services::writeMinimumSamplingInterval()</a>, <a class="el" href="Attribute_8h_source.html#l00335">opcua::services::writeSymmetric()</a>, <a class="el" href="Attribute_8h_source.html#l00440">opcua::services::writeUserAccessLevel()</a>, <a class="el" href="Attribute_8h_source.html#l00315">opcua::services::writeUserWriteMask()</a>, <a class="el" href="Attribute_8h_source.html#l00399">opcua::services::writeValueRank()</a>, and <a class="el" href="Attribute_8h_source.html#l00304">opcua::services::writeWriteMask()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Attribute_8h_source.html#l00417">opcua::services::writeAccessLevel()</a>, <a class="el" href="Attribute_8h_source.html#l00378">opcua::services::writeDataType()</a>, <a class="el" href="Attribute_8h_source.html#l00294">opcua::services::writeDescription()</a>, <a class="el" href="Attribute_8h_source.html#l00284">opcua::services::writeDisplayName()</a>, <a class="el" href="Attribute_8h_source.html#l00345">opcua::services::writeInverseName()</a>, <a class="el" href="Attribute_8h_source.html#l00325">opcua::services::writeIsAbstract()</a>, <a class="el" href="Attribute_8h_source.html#l00440">opcua::services::writeMinimumSamplingInterval()</a>, <a class="el" href="Attribute_8h_source.html#l00335">opcua::services::writeSymmetric()</a>, <a class="el" href="Attribute_8h_source.html#l00429">opcua::services::writeUserAccessLevel()</a>, <a class="el" href="Attribute_8h_source.html#l00315">opcua::services::writeUserWriteMask()</a>, <a class="el" href="Attribute_8h_source.html#l00388">opcua::services::writeValueRank()</a>, and <a class="el" href="Attribute_8h_source.html#l00304">opcua::services::writeWriteMask()</a>.</p>
 
 </div>
 </div>
@@ -331,67 +323,11 @@ template&lt;typename... Args&gt; </div>
 </div><div class="memdoc">
 
 <p>Create <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> from array. </p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classopcua_1_1Variant.html#ac99619ea9e1b6f0774abf36c5c97a934" title="Create Variant from array (no copy if assignable without conversion)">Variant::fromArray</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classopcua_1_1Variant.html#a6d921f5e2a5dd0baa0dd918d5965c3fc" title="Create Variant from array (no copy if assignable without conversion).">Variant::fromArray</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="DataValue_8h_source.html#l00097">97</a> of file <a class="el" href="DataValue_8h_source.html">DataValue.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DataValue_8h_source.html#l00093">93</a> of file <a class="el" href="DataValue_8h_source.html">DataValue.h</a>.</p>
 
-<p class="reference">References <a class="elRef" target="_blank" href="open62541/log_8h.html#a17b7d23b263b56363b9cd3364b529284">args</a>, and <a class="el" href="Variant_8h_source.html#l00205">opcua::Variant::fromArray()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Attribute_8h_source.html#l00414">opcua::services::writeArrayDimensions()</a>.</p>
-
-</div>
-</div>
-<a id="a7b18a6f6ec26780fc2233e7d9c3e26dc" name="a7b18a6f6ec26780fc2233e7d9c3e26dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7b18a6f6ec26780fc2233e7d9c3e26dc">&#9670;&#160;</a></span>getValuePtr() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Variant.html">Variant</a> * opcua::DataValue::getValuePtr </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get value as pointer (might be <code>nullptr</code> if not set). </p>
-
-</div>
-</div>
-<a id="a2dc66eb5d7e53a3a68a270c9a46937e9" name="a2dc66eb5d7e53a3a68a270c9a46937e9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2dc66eb5d7e53a3a68a270c9a46937e9">&#9670;&#160;</a></span>getValuePtr() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="classopcua_1_1Variant.html">Variant</a> * opcua::DataValue::getValuePtr </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Get value as pointer (might be <code>nullptr</code> if not set). </p>
+<p class="reference">Referenced by <a class="el" href="Attribute_8h_source.html#l00403">opcua::services::writeArrayDimensions()</a>.</p>
 
 </div>
 </div>
@@ -569,7 +505,7 @@ template&lt;typename... Args&gt; </div>
 </div><div class="memdoc">
 
 <p>Get value. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_subscription_8cpp-example.html#a8">client_subscription.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_subscription_8cpp-example.html#a8">client_subscription.cpp</a>, and <a class="el" href="server_datasource_8cpp-example.html#a10">server_datasource.cpp</a>.</dd>
 </dl>
 
 </div>
@@ -709,8 +645,8 @@ template&lt;typename... Args&gt; </div>
 
 </div>
 </div>
-<a id="ab3a0b79308af2da2cdca66e906a368fb" name="ab3a0b79308af2da2cdca66e906a368fb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab3a0b79308af2da2cdca66e906a368fb">&#9670;&#160;</a></span>getStatusCode()</h2>
+<a id="a84db105550225fa5b2d0a5ed943c24e5" name="a84db105550225fa5b2d0a5ed943c24e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84db105550225fa5b2d0a5ed943c24e5">&#9670;&#160;</a></span>getStatusCode()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -719,7 +655,7 @@ template&lt;typename... Args&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> opcua::DataValue::getStatusCode </td>
+          <td class="memname"><a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a> opcua::DataValue::getStatusCode </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -793,6 +729,8 @@ template&lt;typename... Args&gt; </div>
 </div><div class="memdoc">
 
 <p>Set source timestamp for the value. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_datasource_8cpp-example.html#a12">server_datasource.cpp</a>.</dd>
+</dl>
 
 </div>
 </div>
@@ -856,8 +794,8 @@ template&lt;typename... Args&gt; </div>
 
 </div>
 </div>
-<a id="aeaf91afea3e6e042ed4320e2e5b2a96e" name="aeaf91afea3e6e042ed4320e2e5b2a96e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeaf91afea3e6e042ed4320e2e5b2a96e">&#9670;&#160;</a></span>setStatusCode()</h2>
+<a id="a12c921c2fa99b1dbf4be2d3f6a017989" name="a12c921c2fa99b1dbf4be2d3f6a017989"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12c921c2fa99b1dbf4be2d3f6a017989">&#9670;&#160;</a></span>setStatusCode()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -865,7 +803,7 @@ template&lt;typename... Args&gt; </div>
         <tr>
           <td class="memname">void opcua::DataValue::setStatusCode </td>
           <td>(</td>
-          <td class="paramtype"><a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1StatusCode.html">StatusCode</a>&#160;</td>
           <td class="paramname"><em>statusCode</em></td><td>)</td>
           <td></td>
         </tr>

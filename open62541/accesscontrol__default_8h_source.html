@@ -78,7 +78,13 @@ $(function() {
   <div class="headertitle"><div class="title">accesscontrol_default.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="accesscontrol__default_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<a href="accesscontrol__default_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/** This work is licensed under a Creative Commons CCZero 1.0 Universal License.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * See http://creativecommons.org/publicdomain/zero/1.0/ for more information.</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> *    Copyright 2016-2017 (c) Fraunhofer IOSB (Author: Julius Pfrommer)</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> *    Copyright 2017 (c) Stefan Profanter, fortiss GmbH</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#ifndef UA_ACCESSCONTROL_DEFAULT_H_</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#define UA_ACCESSCONTROL_DEFAULT_H_</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
@@ -91,7 +97,12 @@ $(function() {
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="structUA__UsernamePasswordLogin.html#a13c7e7e16b0d379f2b718a0c815ef37a">   17</a></span>    <a class="code hl_struct" href="structUA__String.html">UA_String</a> <a class="code hl_variable" href="structUA__UsernamePasswordLogin.html#a13c7e7e16b0d379f2b718a0c815ef37a">username</a>;</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="structUA__UsernamePasswordLogin.html#a133c7efa007df4d546059edd939a571d">   18</a></span>    <a class="code hl_struct" href="structUA__String.html">UA_String</a> <a class="code hl_variable" href="structUA__UsernamePasswordLogin.html#a133c7efa007df4d546059edd939a571d">password</a>;</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>} <a class="code hl_struct" href="structUA__UsernamePasswordLogin.html">UA_UsernamePasswordLogin</a>;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"></span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">/** Default access control. The log-in can be anonymous or username-password. A</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"> * logged-in user has all access rights.</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"> * The certificate verification plugin lifecycle is moved to the access control</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"> * system. So it is cleared up eventually together with the AccessControl. */</span></div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>UA_EXPORT <a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="accesscontrol__default_8h.html#a23c7493b2c29d8e93de5d216377027bc">   27</a></span><a class="code hl_function" href="accesscontrol__default_8h.html#a23c7493b2c29d8e93de5d216377027bc">UA_AccessControl_default</a>(<a class="code hl_struct" href="structUA__ServerConfig.html">UA_ServerConfig</a> *config,</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>                         <a class="code hl_variable" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> allowAnonymous,</div>

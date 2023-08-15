@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.6.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.7.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -88,11 +88,17 @@ $(function() {
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1AlwaysFalse.html">AlwaysFalse</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1MemberType.html">MemberType</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1MemberType_3_01T_01C_1_1_5_01_4.html">MemberType&lt; T C::* &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1TupleHolds.html">TupleHolds</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1TupleHolds_3_01std_1_1tuple_3_01Ts_8_8_8_01_4_00_01T_01_4.html">TupleHolds&lt; std::tuple&lt; Ts... &gt;, T &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1TypeConverterNative.html">TypeConverterNative</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1Unqualified.html">Unqualified</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
@@ -102,6 +108,12 @@ Typedefs</h2></td></tr>
 <tr class="memitem:aad1cfbe232418a890fa98c35c9508acb"><td class="memTemplParams" colspan="2">template&lt;typename T , typename... Ts&gt; </td></tr>
 <tr class="memitem:aad1cfbe232418a890fa98c35c9508acb"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#aad1cfbe232418a890fa98c35c9508acb">IsOneOf</a> = std::disjunction&lt; std::is_same&lt; T, Ts &gt;... &gt;</td></tr>
 <tr class="separator:aad1cfbe232418a890fa98c35c9508acb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bfe0ab8e02bf3957719eee388681f25"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a1bfe0ab8e02bf3957719eee388681f25"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a1bfe0ab8e02bf3957719eee388681f25">UnqualifiedT</a> = typename <a class="el" href="structopcua_1_1detail_1_1Unqualified.html">Unqualified</a>&lt; T &gt;::type</td></tr>
+<tr class="separator:a1bfe0ab8e02bf3957719eee388681f25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1362c4f8ccc80c1406fb24a00ec86397"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a1362c4f8ccc80c1406fb24a00ec86397"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a1362c4f8ccc80c1406fb24a00ec86397">MemberTypeT</a> = typename <a class="el" href="structopcua_1_1detail_1_1MemberType.html">MemberType</a>&lt; T &gt;::type</td></tr>
+<tr class="separator:a1362c4f8ccc80c1406fb24a00ec86397"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f6a9d9d89858dc4cd64637b4e252935"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a6f6a9d9d89858dc4cd64637b4e252935"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a6f6a9d9d89858dc4cd64637b4e252935">IsTypeWrapper</a> = decltype(<a class="el" href="namespaceopcua_1_1detail.html#a707bb945aff1a4a3769e64389fc34ffb">isTypeWrapperImpl</a>(std::declval&lt; T * &gt;()))</td></tr>
 <tr class="separator:a6f6a9d9d89858dc4cd64637b4e252935"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -111,15 +123,25 @@ Functions</h2></td></tr>
 <tr class="memitem:a8cbc875cd0a5f1b26e9468828e3ff3b5"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a8cbc875cd0a5f1b26e9468828e3ff3b5"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a8cbc875cd0a5f1b26e9468828e3ff3b5">isBuiltinType</a> ()</td></tr>
 <tr class="separator:a8cbc875cd0a5f1b26e9468828e3ff3b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3dd79824c549a582a404ef584ee412b3"><td class="memTemplParams" colspan="2">template&lt;auto typeIndexOrEnum&gt; </td></tr>
-<tr class="memitem:a3dd79824c549a582a404ef584ee412b3"><td class="memTemplItemLeft" align="right" valign="top">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a3dd79824c549a582a404ef584ee412b3">getUaDataType</a> () noexcept</td></tr>
-<tr class="separator:a3dd79824c549a582a404ef584ee412b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d3842183831d51c7cb5b3f60360ed87"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a2d3842183831d51c7cb5b3f60360ed87">getUaDataType</a> (<a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex) noexcept</td></tr>
-<tr class="separator:a2d3842183831d51c7cb5b3f60360ed87"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8959a532d3e6d0f9ca0d5c68df448e37"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a8959a532d3e6d0f9ca0d5c68df448e37">getUaDataType</a> (<a class="el" href="namespaceopcua.html#a83669427d4f4639c57ec0b499c5fdc10">Type</a> type) noexcept</td></tr>
-<tr class="separator:a8959a532d3e6d0f9ca0d5c68df448e37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a09950afa1b6187551b75e2c70ec160"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a9a09950afa1b6187551b75e2c70ec160">getUaDataType</a> (const <a class="elRef" target="_blank" href="open62541/structUA__NodeId.html">UA_NodeId</a> &amp;id) noexcept</td></tr>
-<tr class="separator:a9a09950afa1b6187551b75e2c70ec160"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdefd5014eb6cf87a14543b53cec358f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceopcua.html#a21735611a772b01f681597d220acf0d0">DataTypeMember</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#afdefd5014eb6cf87a14543b53cec358f">createDataTypeMember</a> (const char *memberName, const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;memberType, uint8_t padding, bool isArray, bool isOptional) noexcept</td></tr>
+<tr class="separator:afdefd5014eb6cf87a14543b53cec358f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa48bf20af106cd14395c4e9425504862"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#aa48bf20af106cd14395c4e9425504862">createDataType</a> (const char *typeName, <a class="elRef" target="_blank" href="open62541/structUA__NodeId.html">UA_NodeId</a> typeId, <a class="elRef" target="_blank" href="open62541/structUA__NodeId.html">UA_NodeId</a> binaryEncodingId, uint16_t memSize, uint8_t typeKind, bool pointerFree, bool overlayable, uint32_t membersSize, <a class="el" href="namespaceopcua.html#a21735611a772b01f681597d220acf0d0">DataTypeMember</a> *members) noexcept</td></tr>
+<tr class="separator:aa48bf20af106cd14395c4e9425504862"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd3a3cef3026862d5eb9b7a91e153ffe"><td class="memTemplParams" colspan="2">template&lt;auto memberPtr&gt; </td></tr>
+<tr class="memitem:afd3a3cef3026862d5eb9b7a91e153ffe"><td class="memTemplItemLeft" align="right" valign="top">constexpr const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#afd3a3cef3026862d5eb9b7a91e153ffe">guessMemberDataType</a> ()</td></tr>
+<tr class="separator:afd3a3cef3026862d5eb9b7a91e153ffe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3b1427a9f12b718c1705276fb398329"><td class="memTemplParams" colspan="2">template&lt;typename T , typename TMember &gt; </td></tr>
+<tr class="memitem:ac3b1427a9f12b718c1705276fb398329"><td class="memTemplItemLeft" align="right" valign="top">size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ac3b1427a9f12b718c1705276fb398329">offsetOfMember</a> (TMember T::*member)</td></tr>
+<tr class="separator:ac3b1427a9f12b718c1705276fb398329"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a180f86dc9005a840223ea7b50c2e3fc5"><td class="memTemplParams" colspan="2">template&lt;auto typeIndexOrEnum&gt; </td></tr>
+<tr class="memitem:a180f86dc9005a840223ea7b50c2e3fc5"><td class="memTemplItemLeft" align="right" valign="top">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a180f86dc9005a840223ea7b50c2e3fc5">getUaDataType</a> () noexcept</td></tr>
+<tr class="separator:a180f86dc9005a840223ea7b50c2e3fc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab50895687f819bf6885dbe0c67205050"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ab50895687f819bf6885dbe0c67205050">getUaDataType</a> (<a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex) noexcept</td></tr>
+<tr class="separator:ab50895687f819bf6885dbe0c67205050"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a629218e65ab5a66f0dd09c8fa44ed2b5"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a629218e65ab5a66f0dd09c8fa44ed2b5">getUaDataType</a> (<a class="el" href="namespaceopcua.html#a83669427d4f4639c57ec0b499c5fdc10">Type</a> type) noexcept</td></tr>
+<tr class="separator:a629218e65ab5a66f0dd09c8fa44ed2b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21ee894a8d416a30379c8d98e38356a1"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a21ee894a8d416a30379c8d98e38356a1">findUaDataType</a> (const <a class="elRef" target="_blank" href="open62541/structUA__NodeId.html">UA_NodeId</a> &amp;id) noexcept</td></tr>
+<tr class="separator:a21ee894a8d416a30379c8d98e38356a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a326f0e74460157371d1df10077703d94"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a326f0e74460157371d1df10077703d94">allocUaString</a> (const char *src)</td></tr>
 <tr class="separator:a326f0e74460157371d1df10077703d94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab086ba6c1c55e2be3746f614066d754a"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ab086ba6c1c55e2be3746f614066d754a">allocUaString</a> (const std::string &amp;src)</td></tr>
@@ -134,55 +156,57 @@ Functions</h2></td></tr>
 <tr class="separator:ab875dad9e8b6ae20d73250943b6df298"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a165af762713831e9cd7e0304bdfea5f4"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a165af762713831e9cd7e0304bdfea5f4">isGoodStatus</a> (<a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> code) noexcept</td></tr>
 <tr class="separator:a165af762713831e9cd7e0304bdfea5f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5a5ac6a4bc4e201003cd0a1469577bf"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ad5a5ac6a4bc4e201003cd0a1469577bf">isUncertainStatus</a> (<a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> code) noexcept</td></tr>
+<tr class="separator:ad5a5ac6a4bc4e201003cd0a1469577bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ce9349b09a0d878daa78d25fe734806"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a6ce9349b09a0d878daa78d25fe734806">isBadStatus</a> (<a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> code) noexcept</td></tr>
 <tr class="separator:a6ce9349b09a0d878daa78d25fe734806"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a223a3f0d15d7e67ba6432496b2b327c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a223a3f0d15d7e67ba6432496b2b327c2">throwOnBadStatus</a> (<a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> code)</td></tr>
 <tr class="separator:a223a3f0d15d7e67ba6432496b2b327c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af625eabeca3c69c95fbef8f5dfe78444"><td class="memTemplParams" colspan="2">template&lt;typename T , typename TypeIndexOrType &gt; </td></tr>
-<tr class="memitem:af625eabeca3c69c95fbef8f5dfe78444"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#af625eabeca3c69c95fbef8f5dfe78444">isValidTypeCombination</a> (TypeIndexOrType typeOrTypeIndex)</td></tr>
-<tr class="separator:af625eabeca3c69c95fbef8f5dfe78444"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02b02174800ccaf3368b03040c8450bd"><td class="memTemplParams" colspan="2">template&lt;typename T , auto typeOrTypeIndex&gt; </td></tr>
-<tr class="memitem:a02b02174800ccaf3368b03040c8450bd"><td class="memTemplItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a02b02174800ccaf3368b03040c8450bd">assertTypeCombination</a> ()</td></tr>
-<tr class="separator:a02b02174800ccaf3368b03040c8450bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad39ea86fdc84b9b4b45cfc8abb1115d2"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ad39ea86fdc84b9b4b45cfc8abb1115d2"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ad39ea86fdc84b9b4b45cfc8abb1115d2">guessTypeIndex</a> ()</td></tr>
-<tr class="separator:ad39ea86fdc84b9b4b45cfc8abb1115d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a51339ec722fa19c2edb7f9258d1f2b"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a5a51339ec722fa19c2edb7f9258d1f2b"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="namespaceopcua.html#a83669427d4f4639c57ec0b499c5fdc10">Type</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a5a51339ec722fa19c2edb7f9258d1f2b">guessType</a> ()</td></tr>
-<tr class="separator:a5a51339ec722fa19c2edb7f9258d1f2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95be9991da795aba58e12bad0a231d85"><td class="memTemplParams" colspan="2">template&lt;typename It &gt; </td></tr>
-<tr class="memitem:a95be9991da795aba58e12bad0a231d85"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a95be9991da795aba58e12bad0a231d85">guessTypeIndexFromIterator</a> ()</td></tr>
-<tr class="separator:a95be9991da795aba58e12bad0a231d85"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad3741feec42fb69708600af10cd851b"><td class="memTemplParams" colspan="2">template&lt;typename It &gt; </td></tr>
-<tr class="memitem:aad3741feec42fb69708600af10cd851b"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="namespaceopcua.html#a83669427d4f4639c57ec0b499c5fdc10">Type</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#aad3741feec42fb69708600af10cd851b">guessTypeFromIterator</a> ()</td></tr>
-<tr class="separator:aad3741feec42fb69708600af10cd851b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae31d2c1c59eb66c2fcae5c56f2e2c4d4"><td class="memTemplParams" colspan="2">template&lt;typename F , typename... Args&gt; </td></tr>
+<tr class="memitem:ae31d2c1c59eb66c2fcae5c56f2e2c4d4"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ae31d2c1c59eb66c2fcae5c56f2e2c4d4">invokeCatchIgnore</a> (F &amp;&amp;fn, Args &amp;&amp;... <a class="elRef" target="_blank" href="open62541/log_8h.html#a17b7d23b263b56363b9cd3364b529284">args</a>) noexcept</td></tr>
+<tr class="separator:ae31d2c1c59eb66c2fcae5c56f2e2c4d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b944ce55f73591be83957aff48d51b2"><td class="memTemplParams" colspan="2">template&lt;typename F , typename... Args&gt; </td></tr>
+<tr class="memitem:a0b944ce55f73591be83957aff48d51b2"><td class="memTemplItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a0b944ce55f73591be83957aff48d51b2">invokeCatchStatus</a> (F &amp;&amp;fn, Args &amp;&amp;... <a class="elRef" target="_blank" href="open62541/log_8h.html#a17b7d23b263b56363b9cd3364b529284">args</a>) noexcept</td></tr>
+<tr class="separator:a0b944ce55f73591be83957aff48d51b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a40a8dd2a14b0a91f5d6eb66fce9a00"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a4a40a8dd2a14b0a91f5d6eb66fce9a00"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a4a40a8dd2a14b0a91f5d6eb66fce9a00">isValidTypeCombination</a> (const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> *dataType)</td></tr>
+<tr class="separator:a4a40a8dd2a14b0a91f5d6eb66fce9a00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a202117bf88d865819b897c3fec67277c"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a202117bf88d865819b897c3fec67277c"><td class="memTemplItemLeft" align="right" valign="top">constexpr const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a202117bf88d865819b897c3fec67277c">guessDataType</a> ()</td></tr>
+<tr class="separator:a202117bf88d865819b897c3fec67277c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af357833cba7ef29e7cbd18ec1f7134a9"><td class="memTemplParams" colspan="2">template&lt;typename It &gt; </td></tr>
+<tr class="memitem:af357833cba7ef29e7cbd18ec1f7134a9"><td class="memTemplItemLeft" align="right" valign="top">constexpr const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#af357833cba7ef29e7cbd18ec1f7134a9">guessDataTypeFromIterator</a> ()</td></tr>
+<tr class="separator:af357833cba7ef29e7cbd18ec1f7134a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:addc8244542952640900bc8ac4d544e96"><td class="memTemplParams" colspan="2">template&lt;typename T , typename NativeType  = typename TypeConverter&lt;T&gt;::NativeType&gt; </td></tr>
 <tr class="memitem:addc8244542952640900bc8ac4d544e96"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#addc8244542952640900bc8ac4d544e96">fromNative</a> (NativeType *value)</td></tr>
 <tr class="separator:addc8244542952640900bc8ac4d544e96"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae665b941a5d66dfa2542c597db319b9a"><td class="memTemplParams" colspan="2">template&lt;typename T , typename NativeType  = typename TypeConverter&lt;T&gt;::NativeType&gt; </td></tr>
-<tr class="memitem:ae665b941a5d66dfa2542c597db319b9a"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ae665b941a5d66dfa2542c597db319b9a">fromNative</a> (void *value, <a class="el" href="namespaceopcua.html#a83669427d4f4639c57ec0b499c5fdc10">Type</a> type)</td></tr>
-<tr class="separator:ae665b941a5d66dfa2542c597db319b9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade0e4827d8c97cff325d6dd907607726"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ade0e4827d8c97cff325d6dd907607726"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ade0e4827d8c97cff325d6dd907607726">fromNative</a> (void *value, const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;dataType)</td></tr>
+<tr class="separator:ade0e4827d8c97cff325d6dd907607726"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53e1139f43b700520d896dc1cb457f0f"><td class="memTemplParams" colspan="2">template&lt;typename T , typename NativeType  = typename TypeConverter&lt;T&gt;::NativeType&gt; </td></tr>
 <tr class="memitem:a53e1139f43b700520d896dc1cb457f0f"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a53e1139f43b700520d896dc1cb457f0f">fromNativeArray</a> (NativeType *array, size_t size)</td></tr>
 <tr class="separator:a53e1139f43b700520d896dc1cb457f0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad5f56998a6b8a80518ce4ba5706d023"><td class="memTemplParams" colspan="2">template&lt;typename T , typename NativeType  = typename TypeConverter&lt;T&gt;::NativeType&gt; </td></tr>
-<tr class="memitem:aad5f56998a6b8a80518ce4ba5706d023"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#aad5f56998a6b8a80518ce4ba5706d023">fromNativeArray</a> (void *array, size_t size, <a class="el" href="namespaceopcua.html#a83669427d4f4639c57ec0b499c5fdc10">Type</a> type)</td></tr>
-<tr class="separator:aad5f56998a6b8a80518ce4ba5706d023"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2466b4065e5fb9f60d6d5d271fa8c5ab"><td class="memTemplParams" colspan="2">template&lt;typename TNative , <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex = guessTypeIndex&lt;TNative&gt;()&gt; </td></tr>
-<tr class="memitem:a2466b4065e5fb9f60d6d5d271fa8c5ab"><td class="memTemplItemLeft" align="right" valign="top">TNative *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a2466b4065e5fb9f60d6d5d271fa8c5ab">allocNative</a> ()</td></tr>
-<tr class="separator:a2466b4065e5fb9f60d6d5d271fa8c5ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8e85ff3f8211c776905f84e7b46f6e34"><td class="memTemplParams" colspan="2">template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex = guessTypeIndex&lt;T&gt;()&gt; </td></tr>
-<tr class="memitem:a8e85ff3f8211c776905f84e7b46f6e34"><td class="memTemplItemLeft" align="right" valign="top">auto *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a8e85ff3f8211c776905f84e7b46f6e34">toNativeAlloc</a> (const T &amp;value)</td></tr>
-<tr class="separator:a8e85ff3f8211c776905f84e7b46f6e34"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a398b8f362b471081c5aafe8507d26582"><td class="memTemplParams" colspan="2">template&lt;typename TNative , <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex = guessTypeIndex&lt;TNative&gt;()&gt; </td></tr>
-<tr class="memitem:a398b8f362b471081c5aafe8507d26582"><td class="memTemplItemLeft" align="right" valign="top">auto *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a398b8f362b471081c5aafe8507d26582">allocNativeArray</a> (size_t size)</td></tr>
-<tr class="separator:a398b8f362b471081c5aafe8507d26582"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d4607095da2e334b0585160c5db7d95"><td class="memTemplParams" colspan="2">template&lt;typename InputIt , <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex = guessTypeIndexFromIterator&lt;InputIt&gt;()&gt; </td></tr>
-<tr class="memitem:a9d4607095da2e334b0585160c5db7d95"><td class="memTemplItemLeft" align="right" valign="top">auto *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a9d4607095da2e334b0585160c5db7d95">toNativeArrayAlloc</a> (InputIt first, InputIt last)</td></tr>
-<tr class="separator:a9d4607095da2e334b0585160c5db7d95"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a5b73d9cf0de957c3237bf7a1d957e7"><td class="memTemplParams" colspan="2">template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex = guessTypeIndex&lt;T&gt;()&gt; </td></tr>
-<tr class="memitem:a5a5b73d9cf0de957c3237bf7a1d957e7"><td class="memTemplItemLeft" align="right" valign="top">auto *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a5a5b73d9cf0de957c3237bf7a1d957e7">toNativeArrayAlloc</a> (const T *array, size_t size)</td></tr>
-<tr class="separator:a5a5b73d9cf0de957c3237bf7a1d957e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a098b1f7fff729bea969fb90d39a91b8e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a098b1f7fff729bea969fb90d39a91b8e"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a098b1f7fff729bea969fb90d39a91b8e">fromNativeArray</a> (void *array, size_t size, const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;dataType)</td></tr>
+<tr class="separator:a098b1f7fff729bea969fb90d39a91b8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab637c5ceb4ce47b7dd7d8299d25518ab"><td class="memTemplParams" colspan="2">template&lt;typename TNative &gt; </td></tr>
+<tr class="memitem:ab637c5ceb4ce47b7dd7d8299d25518ab"><td class="memTemplItemLeft" align="right" valign="top">TNative *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ab637c5ceb4ce47b7dd7d8299d25518ab">allocNative</a> (const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;dataType)</td></tr>
+<tr class="separator:ab637c5ceb4ce47b7dd7d8299d25518ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a404138af4038ad53d30b65fef741a118"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a404138af4038ad53d30b65fef741a118"><td class="memTemplItemLeft" align="right" valign="top">auto *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a404138af4038ad53d30b65fef741a118">toNativeAlloc</a> (const T &amp;value)</td></tr>
+<tr class="separator:a404138af4038ad53d30b65fef741a118"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af027fda6edfd6da757e35144a7962b76"><td class="memTemplParams" colspan="2">template&lt;typename TNative &gt; </td></tr>
+<tr class="memitem:af027fda6edfd6da757e35144a7962b76"><td class="memTemplItemLeft" align="right" valign="top">auto *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#af027fda6edfd6da757e35144a7962b76">allocNativeArray</a> (size_t size, const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;dataType)</td></tr>
+<tr class="separator:af027fda6edfd6da757e35144a7962b76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae1f561d598634c31ff6450b46cc037e3"><td class="memTemplParams" colspan="2">template&lt;typename InputIt &gt; </td></tr>
+<tr class="memitem:ae1f561d598634c31ff6450b46cc037e3"><td class="memTemplItemLeft" align="right" valign="top">auto *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ae1f561d598634c31ff6450b46cc037e3">toNativeArrayAlloc</a> (InputIt first, InputIt last)</td></tr>
+<tr class="separator:ae1f561d598634c31ff6450b46cc037e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd7844bd9034ce1b26cacc5e61cc0892"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:acd7844bd9034ce1b26cacc5e61cc0892"><td class="memTemplItemLeft" align="right" valign="top">auto *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#acd7844bd9034ce1b26cacc5e61cc0892">toNativeArrayAlloc</a> (const T *array, size_t size)</td></tr>
+<tr class="separator:acd7844bd9034ce1b26cacc5e61cc0892"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6228aef2d981a7d08177926555fd752f"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a6228aef2d981a7d08177926555fd752f"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a6228aef2d981a7d08177926555fd752f">isNativeType</a> ()</td></tr>
+<tr class="separator:a6228aef2d981a7d08177926555fd752f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44352488091ce3a7fd5593b99a33a195"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a44352488091ce3a7fd5593b99a33a195"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a44352488091ce3a7fd5593b99a33a195">isAssignableToExtensionObject</a> ()</td></tr>
 <tr class="separator:a44352488091ce3a7fd5593b99a33a195"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -238,6 +262,42 @@ template&lt;typename T , typename... Ts&gt; </div>
 
 </div>
 </div>
+<a id="a1bfe0ab8e02bf3957719eee388681f25" name="a1bfe0ab8e02bf3957719eee388681f25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bfe0ab8e02bf3957719eee388681f25">&#9670;&#160;</a></span>UnqualifiedT</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespaceopcua_1_1detail.html#a1bfe0ab8e02bf3957719eee388681f25">opcua::detail::UnqualifiedT</a> = typedef typename <a class="el" href="structopcua_1_1detail_1_1Unqualified.html">Unqualified</a>&lt;T&gt;::type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="traits_8h_source.html#l00027">27</a> of file <a class="el" href="traits_8h_source.html">traits.h</a>.</p>
+
+</div>
+</div>
+<a id="a1362c4f8ccc80c1406fb24a00ec86397" name="a1362c4f8ccc80c1406fb24a00ec86397"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1362c4f8ccc80c1406fb24a00ec86397">&#9670;&#160;</a></span>MemberTypeT</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespaceopcua_1_1detail.html#a1362c4f8ccc80c1406fb24a00ec86397">opcua::detail::MemberTypeT</a> = typedef typename <a class="el" href="structopcua_1_1detail_1_1MemberType.html">MemberType</a>&lt;T&gt;::type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="traits_8h_source.html#l00039">39</a> of file <a class="el" href="traits_8h_source.html">traits.h</a>.</p>
+
+</div>
+</div>
 <a id="a6f6a9d9d89858dc4cd64637b4e252935" name="a6f6a9d9d89858dc4cd64637b4e252935"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6f6a9d9d89858dc4cd64637b4e252935">&#9670;&#160;</a></span>IsTypeWrapper</h2>
 
@@ -252,7 +312,7 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00183">183</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00179">179</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -286,8 +346,203 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a3dd79824c549a582a404ef584ee412b3" name="a3dd79824c549a582a404ef584ee412b3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3dd79824c549a582a404ef584ee412b3">&#9670;&#160;</a></span>getUaDataType() <span class="overload">[1/4]</span></h2>
+<a id="afdefd5014eb6cf87a14543b53cec358f" name="afdefd5014eb6cf87a14543b53cec358f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afdefd5014eb6cf87a14543b53cec358f">&#9670;&#160;</a></span>createDataTypeMember()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceopcua.html#a21735611a772b01f681597d220acf0d0">DataTypeMember</a> opcua::detail::createDataTypeMember </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>memberName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;&#160;</td>
+          <td class="paramname"><em>memberType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>padding</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isArray</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isOptional</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="DataTypeBuilder_8h_source.html#l00206">opcua::DataTypeBuilder&lt; T, Tag &gt;::addField()</a>, and <a class="el" href="DataTypeBuilder_8h_source.html#l00271">opcua::DataTypeBuilder&lt; T, Tag &gt;::addUnionField()</a>.</p>
+
+</div>
+</div>
+<a id="aa48bf20af106cd14395c4e9425504862" name="aa48bf20af106cd14395c4e9425504862"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa48bf20af106cd14395c4e9425504862">&#9670;&#160;</a></span>createDataType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> opcua::detail::createDataType </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>typeName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="elRef" target="_blank" href="open62541/structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>typeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="elRef" target="_blank" href="open62541/structUA__NodeId.html">UA_NodeId</a>&#160;</td>
+          <td class="paramname"><em>binaryEncodingId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>memSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>typeKind</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>pointerFree</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>overlayable</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>membersSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#a21735611a772b01f681597d220acf0d0">DataTypeMember</a> *&#160;</td>
+          <td class="paramname"><em>members</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afd3a3cef3026862d5eb9b7a91e153ffe" name="afd3a3cef3026862d5eb9b7a91e153ffe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd3a3cef3026862d5eb9b7a91e153ffe">&#9670;&#160;</a></span>guessMemberDataType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;auto memberPtr&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp; opcua::detail::guessMemberDataType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DataTypeBuilder_8h_source.html#l00019">19</a> of file <a class="el" href="DataTypeBuilder_8h_source.html">DataTypeBuilder.h</a>.</p>
+
+</div>
+</div>
+<a id="ac3b1427a9f12b718c1705276fb398329" name="ac3b1427a9f12b718c1705276fb398329"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3b1427a9f12b718c1705276fb398329">&#9670;&#160;</a></span>offsetOfMember()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename TMember &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t opcua::detail::offsetOfMember </td>
+          <td>(</td>
+          <td class="paramtype">TMember T::*&#160;</td>
+          <td class="paramname"><em>member</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DataTypeBuilder_8h_source.html#l00025">25</a> of file <a class="el" href="DataTypeBuilder_8h_source.html">DataTypeBuilder.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="DataTypeBuilder_8h_source.html#l00206">opcua::DataTypeBuilder&lt; T, Tag &gt;::addField()</a>, and <a class="el" href="DataTypeBuilder_8h_source.html#l00271">opcua::DataTypeBuilder&lt; T, Tag &gt;::addUnionField()</a>.</p>
+
+</div>
+</div>
+<a id="a180f86dc9005a840223ea7b50c2e3fc5" name="a180f86dc9005a840223ea7b50c2e3fc5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a180f86dc9005a840223ea7b50c2e3fc5">&#9670;&#160;</a></span>getUaDataType() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -298,7 +553,7 @@ template&lt;auto typeIndexOrEnum&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> * opcua::detail::getUaDataType </td>
+          <td class="memname">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp; opcua::detail::getUaDataType </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -315,14 +570,12 @@ template&lt;auto typeIndexOrEnum&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="helper_8h_source.html#l00014">14</a> of file <a class="el" href="helper_8h_source.html">helper.h</a>.</p>
 
-<p class="reference">References <a class="elRef" target="_blank" href="open62541/types__generated_8h.html#aba037b86f18a7b7bceef5c098910c2c7">UA_TYPES</a>, and <a class="elRef" target="_blank" href="open62541/types__generated_8h.html#ac9c453774b0045ce3fee7acaf01b1223">UA_TYPES_COUNT</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="ExtensionObject_8h_source.html#l00119">opcua::ExtensionObject::getDecodedData()</a>, <a class="el" href="helper_8h_source.html#l00027">getUaDataType()</a>, and <a class="el" href="Attribute_8h_source.html#l00378">opcua::services::writeDataType()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helper_8h_source.html#l00027">getUaDataType()</a>, and <a class="el" href="TypeConverter_8h_source.html#l00078">guessDataType()</a>.</p>
 
 </div>
 </div>
-<a id="a2d3842183831d51c7cb5b3f60360ed87" name="a2d3842183831d51c7cb5b3f60360ed87"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2d3842183831d51c7cb5b3f60360ed87">&#9670;&#160;</a></span>getUaDataType() <span class="overload">[2/4]</span></h2>
+<a id="ab50895687f819bf6885dbe0c67205050" name="ab50895687f819bf6885dbe0c67205050"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab50895687f819bf6885dbe0c67205050">&#9670;&#160;</a></span>getUaDataType() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -331,7 +584,7 @@ template&lt;auto typeIndexOrEnum&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> * opcua::detail::getUaDataType </td>
+          <td class="memname">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp; opcua::detail::getUaDataType </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a>&#160;</td>
           <td class="paramname"><em>typeIndex</em></td><td>)</td>
@@ -349,12 +602,10 @@ template&lt;auto typeIndexOrEnum&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="helper_8h_source.html#l00021">21</a> of file <a class="el" href="helper_8h_source.html">helper.h</a>.</p>
 
-<p class="reference">References <a class="elRef" target="_blank" href="open62541/types__generated_8h.html#aba037b86f18a7b7bceef5c098910c2c7">UA_TYPES</a>, and <a class="elRef" target="_blank" href="open62541/types__generated_8h.html#ac9c453774b0045ce3fee7acaf01b1223">UA_TYPES_COUNT</a>.</p>
-
 </div>
 </div>
-<a id="a8959a532d3e6d0f9ca0d5c68df448e37" name="a8959a532d3e6d0f9ca0d5c68df448e37"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8959a532d3e6d0f9ca0d5c68df448e37">&#9670;&#160;</a></span>getUaDataType() <span class="overload">[3/4]</span></h2>
+<a id="a629218e65ab5a66f0dd09c8fa44ed2b5" name="a629218e65ab5a66f0dd09c8fa44ed2b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a629218e65ab5a66f0dd09c8fa44ed2b5">&#9670;&#160;</a></span>getUaDataType() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -363,7 +614,7 @@ template&lt;auto typeIndexOrEnum&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> * opcua::detail::getUaDataType </td>
+          <td class="memname">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp; opcua::detail::getUaDataType </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceopcua.html#a83669427d4f4639c57ec0b499c5fdc10">Type</a>&#160;</td>
           <td class="paramname"><em>type</em></td><td>)</td>
@@ -381,12 +632,10 @@ template&lt;auto typeIndexOrEnum&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="helper_8h_source.html#l00027">27</a> of file <a class="el" href="helper_8h_source.html">helper.h</a>.</p>
 
-<p class="reference">References <a class="el" href="helper_8h_source.html#l00014">getUaDataType()</a>.</p>
-
 </div>
 </div>
-<a id="a9a09950afa1b6187551b75e2c70ec160" name="a9a09950afa1b6187551b75e2c70ec160"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9a09950afa1b6187551b75e2c70ec160">&#9670;&#160;</a></span>getUaDataType() <span class="overload">[4/4]</span></h2>
+<a id="a21ee894a8d416a30379c8d98e38356a1" name="a21ee894a8d416a30379c8d98e38356a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21ee894a8d416a30379c8d98e38356a1">&#9670;&#160;</a></span>findUaDataType()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -395,7 +644,7 @@ template&lt;auto typeIndexOrEnum&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> * opcua::detail::getUaDataType </td>
+          <td class="memname">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> * opcua::detail::findUaDataType </td>
           <td>(</td>
           <td class="paramtype">const <a class="elRef" target="_blank" href="open62541/structUA__NodeId.html">UA_NodeId</a> &amp;&#160;</td>
           <td class="paramname"><em>id</em></td><td>)</td>
@@ -409,12 +658,10 @@ template&lt;auto typeIndexOrEnum&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Get (custom) <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> by <a class="elRef" target="_blank" href="open62541/structUA__NodeId.html">UA_NodeId</a>. </p>
+<p>Find (custom) <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> by <a class="elRef" target="_blank" href="open62541/structUA__NodeId.html">UA_NodeId</a>. </p>
 <p>Return nullptr if no matching data type was found. </p>
 
 <p class="definition">Definition at line <a class="el" href="helper_8h_source.html#l00033">33</a> of file <a class="el" href="helper_8h_source.html">helper.h</a>.</p>
-
-<p class="reference">References <a class="elRef" target="_blank" href="open62541/types_8h.html#af02c29570c8fe2dd5d6e5df5189f474a">UA_findDataType()</a>.</p>
 
 </div>
 </div>
@@ -436,7 +683,7 @@ template&lt;auto typeIndexOrEnum&gt; </div>
 
 <p>Allocate <a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> from const char*. </p>
 
-<p class="reference">Referenced by <a class="el" href="TypeConverter_8h_source.html#l00301">opcua::TypeConverter&lt; std::string &gt;::toNative()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="TypeConverter_8h_source.html#l00296">opcua::TypeConverter&lt; std::string &gt;::toNative()</a>.</p>
 
 </div>
 </div>
@@ -508,8 +755,6 @@ template&lt;auto typeIndexOrEnum&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="helper_8h_source.html#l00047">47</a> of file <a class="el" href="helper_8h_source.html">helper.h</a>.</p>
 
-<p class="reference">References <a class="elRef" target="_blank" href="open62541/structUA__String.html#a337ab69f4b7d9c5e6ab1f1cb18844d07">UA_String::data</a>, and <a class="elRef" target="_blank" href="open62541/structUA__String.html#ab73e448dea6fc379598652f5da447b47">UA_String::length</a>.</p>
-
 <p class="reference">Referenced by <a class="el" href="helper_8h_source.html#l00052">toStringView()</a>.</p>
 
 </div>
@@ -541,8 +786,6 @@ template&lt;auto typeIndexOrEnum&gt; </div>
 <p>Convert <a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> to std::string_view. </p>
 
 <p class="definition">Definition at line <a class="el" href="helper_8h_source.html#l00052">52</a> of file <a class="el" href="helper_8h_source.html">helper.h</a>.</p>
-
-<p class="reference">References <a class="elRef" target="_blank" href="open62541/structUA__String.html#a337ab69f4b7d9c5e6ab1f1cb18844d07">UA_String::data</a>, <a class="el" href="helper_8h_source.html#l00047">isEmpty()</a>, and <a class="elRef" target="_blank" href="open62541/structUA__String.html#ab73e448dea6fc379598652f5da447b47">UA_String::length</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="helper_8h_source.html#l00060">toString()</a>.</p>
 
@@ -576,9 +819,7 @@ template&lt;auto typeIndexOrEnum&gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="helper_8h_source.html#l00060">60</a> of file <a class="el" href="helper_8h_source.html">helper.h</a>.</p>
 
-<p class="reference">References <a class="el" href="helper_8h_source.html#l00052">toStringView()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="TypeConverter_8h_source.html#l00297">opcua::TypeConverter&lt; std::string &gt;::fromNative()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="TypeConverter_8h_source.html#l00292">opcua::TypeConverter&lt; std::string &gt;::fromNative()</a>.</p>
 
 </div>
 </div>
@@ -606,9 +847,39 @@ template&lt;auto typeIndexOrEnum&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ErrorHandling_8h_source.html#l00053">53</a> of file <a class="el" href="ErrorHandling_8h_source.html">ErrorHandling.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ErrorHandling_8h_source.html#l00055">55</a> of file <a class="el" href="ErrorHandling_8h_source.html">ErrorHandling.h</a>.</p>
 
-<p class="reference">References <a class="elRef" target="_blank" href="open62541/statuscodes_8h.html#a3c68d30bc6f32228aa43be75fdc9d5aa">UA_STATUSCODE_GOOD</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Builtin_8h_source.html#l00053">opcua::StatusCode::isGood()</a>.</p>
+
+</div>
+</div>
+<a id="ad5a5ac6a4bc4e201003cd0a1469577bf" name="ad5a5ac6a4bc4e201003cd0a1469577bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5a5ac6a4bc4e201003cd0a1469577bf">&#9670;&#160;</a></span>isUncertainStatus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool opcua::detail::isUncertainStatus </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ErrorHandling_8h_source.html#l00059">59</a> of file <a class="el" href="ErrorHandling_8h_source.html">ErrorHandling.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Builtin_8h_source.html#l00058">opcua::StatusCode::isUncertain()</a>.</p>
 
 </div>
 </div>
@@ -636,11 +907,9 @@ template&lt;auto typeIndexOrEnum&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ErrorHandling_8h_source.html#l00057">57</a> of file <a class="el" href="ErrorHandling_8h_source.html">ErrorHandling.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ErrorHandling_8h_source.html#l00063">63</a> of file <a class="el" href="ErrorHandling_8h_source.html">ErrorHandling.h</a>.</p>
 
-<p class="reference">References <a class="elRef" target="_blank" href="open62541/statuscodes_8h.html#a3c68d30bc6f32228aa43be75fdc9d5aa">UA_STATUSCODE_GOOD</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="ErrorHandling_8h_source.html#l00061">throwOnBadStatus()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Builtin_8h_source.html#l00063">opcua::StatusCode::isBad()</a>, and <a class="el" href="ErrorHandling_8h_source.html#l00067">throwOnBadStatus()</a>.</p>
 
 </div>
 </div>
@@ -668,21 +937,105 @@ template&lt;auto typeIndexOrEnum&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ErrorHandling_8h_source.html#l00061">61</a> of file <a class="el" href="ErrorHandling_8h_source.html">ErrorHandling.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ErrorHandling_8h_source.html#l00067">67</a> of file <a class="el" href="ErrorHandling_8h_source.html">ErrorHandling.h</a>.</p>
 
-<p class="reference">References <a class="el" href="ErrorHandling_8h_source.html#l00057">isBadStatus()</a>, and <a class="elRef" target="_blank" href="open62541/statuscodes_8h.html#a62de6d9b2a661ea21ff8bceca7405b22">UA_STATUSCODE_BADDISCONNECT</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="TypeWrapper_8h_source.html#l00162">opcua::TypeWrapper&lt; T, typeIndex &gt;::copy()</a>, and <a class="el" href="TypeConverter_8h_source.html#l00214">opcua::detail::TypeConverterNative&lt; T, typeIndexes &gt;::fromNative()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="TypeWrapper_8h_source.html#l00158">opcua::TypeWrapper&lt; T, typeIndex &gt;::copy()</a>, <a class="el" href="TypeConverter_8h_source.html#l00202">opcua::detail::TypeConverterNative&lt; T, typeIndexes &gt;::fromNative()</a>, and <a class="el" href="Builtin_8h_source.html#l00069">opcua::StatusCode::throwIfBad()</a>.</p>
 
 </div>
 </div>
-<a id="af625eabeca3c69c95fbef8f5dfe78444" name="af625eabeca3c69c95fbef8f5dfe78444"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af625eabeca3c69c95fbef8f5dfe78444">&#9670;&#160;</a></span>isValidTypeCombination()</h2>
+<a id="ae31d2c1c59eb66c2fcae5c56f2e2c4d4" name="ae31d2c1c59eb66c2fcae5c56f2e2c4d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae31d2c1c59eb66c2fcae5c56f2e2c4d4">&#9670;&#160;</a></span>invokeCatchIgnore()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename TypeIndexOrType &gt; </div>
+template&lt;typename F , typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::detail::invokeCatchIgnore </td>
+          <td>(</td>
+          <td class="paramtype">F &amp;&amp;&#160;</td>
+          <td class="paramname"><em>fn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Invoke a function (with <code>void</code> return type), catch and ignore exceptions. </p>
+<p>This is especially useful for C-API callbacks, that are executed within the open62541 event loop. </p>
+
+<p class="definition">Definition at line <a class="el" href="ErrorHandling_8h_source.html#l00084">84</a> of file <a class="el" href="ErrorHandling_8h_source.html">ErrorHandling.h</a>.</p>
+
+</div>
+</div>
+<a id="a0b944ce55f73591be83957aff48d51b2" name="a0b944ce55f73591be83957aff48d51b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b944ce55f73591be83957aff48d51b2">&#9670;&#160;</a></span>invokeCatchStatus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename F , typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> opcua::detail::invokeCatchStatus </td>
+          <td>(</td>
+          <td class="paramtype">F &amp;&amp;&#160;</td>
+          <td class="paramname"><em>fn</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Invoke a function (with <code>void</code> or <code>UA_StatusCode</code> return type) and catch exceptions. </p>
+<p>This is especially useful for C-API callbacks, that are executed within the open62541 event loop. If no exception is thrown, the generated status code or <code>UA_STATUSCODE_GOOD</code> is returned. If the exception if of type <a class="el" href="classopcua_1_1BadStatus.html" title="Exception for bad status codes from open62541 UA_STATUSCODE_*.">BadStatus</a>, the underlying status code will be returned. All other exception types will yield <code>UA_STATUSCODE_BADINTERNALERROR</code>. </p>
+
+<p class="definition">Definition at line <a class="el" href="ErrorHandling_8h_source.html#l00102">102</a> of file <a class="el" href="ErrorHandling_8h_source.html">ErrorHandling.h</a>.</p>
+
+</div>
+</div>
+<a id="a4a40a8dd2a14b0a91f5d6eb66fce9a00" name="a4a40a8dd2a14b0a91f5d6eb66fce9a00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a40a8dd2a14b0a91f5d6eb66fce9a00">&#9670;&#160;</a></span>isValidTypeCombination()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -690,8 +1043,8 @@ template&lt;typename T , typename TypeIndexOrType &gt; </div>
         <tr>
           <td class="memname">constexpr bool opcua::detail::isValidTypeCombination </td>
           <td>(</td>
-          <td class="paramtype">TypeIndexOrType&#160;</td>
-          <td class="paramname"><em>typeOrTypeIndex</em></td><td>)</td>
+          <td class="paramtype">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td>
+          <td class="paramname"><em>dataType</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -704,41 +1057,10 @@ template&lt;typename T , typename TypeIndexOrType &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00063">63</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
-<p class="reference">References <a class="el" href="TypeConverter_8h_source.html#l00029">opcua::TypeIndexList&lt; typeIndexes &gt;::contains()</a>.</p>
-
 </div>
 </div>
-<a id="a02b02174800ccaf3368b03040c8450bd" name="a02b02174800ccaf3368b03040c8450bd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a02b02174800ccaf3368b03040c8450bd">&#9670;&#160;</a></span>assertTypeCombination()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , auto typeOrTypeIndex&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr void opcua::detail::assertTypeCombination </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00068">68</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
-
-</div>
-</div>
-<a id="ad39ea86fdc84b9b4b45cfc8abb1115d2" name="ad39ea86fdc84b9b4b45cfc8abb1115d2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad39ea86fdc84b9b4b45cfc8abb1115d2">&#9670;&#160;</a></span>guessTypeIndex()</h2>
+<a id="a202117bf88d865819b897c3fec67277c" name="a202117bf88d865819b897c3fec67277c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a202117bf88d865819b897c3fec67277c">&#9670;&#160;</a></span>guessDataType()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -749,7 +1071,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> opcua::detail::guessTypeIndex </td>
+          <td class="memname">constexpr const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp; opcua::detail::guessDataType </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -762,45 +1084,14 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00075">75</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00078">78</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
-<p class="reference">References <a class="el" href="TypeConverter_8h_source.html#l00025">opcua::TypeIndexList&lt; typeIndexes &gt;::size()</a>, and <a class="el" href="TypeConverter_8h_source.html#l00037">opcua::TypeIndexList&lt; typeIndexes &gt;::toArray()</a>.</p>
-
-</div>
-</div>
-<a id="a5a51339ec722fa19c2edb7f9258d1f2b" name="a5a51339ec722fa19c2edb7f9258d1f2b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a51339ec722fa19c2edb7f9258d1f2b">&#9670;&#160;</a></span>guessType()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr <a class="el" href="namespaceopcua.html#a83669427d4f4639c57ec0b499c5fdc10">Type</a> opcua::detail::guessType </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00085">85</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
-
-<p class="reference">References <a class="el" href="Common_8h_source.html#l00252">builtinTypesCount</a>, <a class="el" href="TypeConverter_8h_source.html#l00025">opcua::TypeIndexList&lt; typeIndexes &gt;::size()</a>, and <a class="el" href="TypeConverter_8h_source.html#l00037">opcua::TypeIndexList&lt; typeIndexes &gt;::toArray()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="DataTypeBuilder_8h_source.html#l00019">guessMemberDataType()</a>.</p>
 
 </div>
 </div>
-<a id="a95be9991da795aba58e12bad0a231d85" name="a95be9991da795aba58e12bad0a231d85"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a95be9991da795aba58e12bad0a231d85">&#9670;&#160;</a></span>guessTypeIndexFromIterator()</h2>
+<a id="af357833cba7ef29e7cbd18ec1f7134a9" name="af357833cba7ef29e7cbd18ec1f7134a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af357833cba7ef29e7cbd18ec1f7134a9">&#9670;&#160;</a></span>guessDataTypeFromIterator()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -811,7 +1102,7 @@ template&lt;typename It &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> opcua::detail::guessTypeIndexFromIterator </td>
+          <td class="memname">constexpr const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp; opcua::detail::guessDataTypeFromIterator </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -824,36 +1115,7 @@ template&lt;typename It &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00097">97</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
-
-</div>
-</div>
-<a id="aad3741feec42fb69708600af10cd851b" name="aad3741feec42fb69708600af10cd851b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aad3741feec42fb69708600af10cd851b">&#9670;&#160;</a></span>guessTypeFromIterator()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename It &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr <a class="el" href="namespaceopcua.html#a83669427d4f4639c57ec0b499c5fdc10">Type</a> opcua::detail::guessTypeFromIterator </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00103">103</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00089">89</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
 </div>
 </div>
@@ -877,19 +1139,17 @@ template&lt;typename T , typename NativeType  = typename TypeConverter&lt;T&gt;:
 
 <p>Convert and copy from native type. </p>
 
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00112">112</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
-
-<p class="reference">References <a class="el" href="structopcua_1_1TypeConverter.html#a500a9ff63f07a43c196ed64b02169694">opcua::TypeConverter&lt; T, Enable &gt;::fromNative()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00098">98</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
 </div>
 </div>
-<a id="ae665b941a5d66dfa2542c597db319b9a" name="ae665b941a5d66dfa2542c597db319b9a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae665b941a5d66dfa2542c597db319b9a">&#9670;&#160;</a></span>fromNative() <span class="overload">[2/2]</span></h2>
+<a id="ade0e4827d8c97cff325d6dd907607726" name="ade0e4827d8c97cff325d6dd907607726"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade0e4827d8c97cff325d6dd907607726">&#9670;&#160;</a></span>fromNative() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename NativeType  = typename TypeConverter&lt;T&gt;::NativeType&gt; </div>
+template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">T opcua::detail::fromNative </td>
@@ -900,8 +1160,8 @@ template&lt;typename T , typename NativeType  = typename TypeConverter&lt;T&gt;:
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceopcua.html#a83669427d4f4639c57ec0b499c5fdc10">Type</a>&#160;</td>
-          <td class="paramname"><em>type</em>&#160;</td>
+          <td class="paramtype">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;&#160;</td>
+          <td class="paramname"><em>dataType</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -914,7 +1174,7 @@ template&lt;typename T , typename NativeType  = typename TypeConverter&lt;T&gt;:
 <p>Convert and copy from native type. </p>
 <dl class="section warning"><dt>Warning</dt><dd>Type erased version, use with caution. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00121">121</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00107">107</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
 </div>
 </div>
@@ -948,19 +1208,17 @@ template&lt;typename T , typename NativeType  = typename TypeConverter&lt;T&gt;:
 
 <p>Create and convert vector from native array. </p>
 
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00128">128</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
-
-<p class="reference">References <a class="el" href="structopcua_1_1TypeConverter.html#a500a9ff63f07a43c196ed64b02169694">opcua::TypeConverter&lt; T, Enable &gt;::fromNative()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00115">115</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
 </div>
 </div>
-<a id="aad5f56998a6b8a80518ce4ba5706d023" name="aad5f56998a6b8a80518ce4ba5706d023"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aad5f56998a6b8a80518ce4ba5706d023">&#9670;&#160;</a></span>fromNativeArray() <span class="overload">[2/2]</span></h2>
+<a id="a098b1f7fff729bea969fb90d39a91b8e" name="a098b1f7fff729bea969fb90d39a91b8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a098b1f7fff729bea969fb90d39a91b8e">&#9670;&#160;</a></span>fromNativeArray() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , typename NativeType  = typename TypeConverter&lt;T&gt;::NativeType&gt; </div>
+template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">std::vector&lt; T &gt; opcua::detail::fromNativeArray </td>
@@ -977,8 +1235,8 @@ template&lt;typename T , typename NativeType  = typename TypeConverter&lt;T&gt;:
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceopcua.html#a83669427d4f4639c57ec0b499c5fdc10">Type</a>&#160;</td>
-          <td class="paramname"><em>type</em>&#160;</td>
+          <td class="paramtype">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;&#160;</td>
+          <td class="paramname"><em>dataType</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -991,22 +1249,23 @@ template&lt;typename T , typename NativeType  = typename TypeConverter&lt;T&gt;:
 <p>Create and convert vector from native array. </p>
 <dl class="section warning"><dt>Warning</dt><dd>Type erased version, use with caution. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00143">143</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00130">130</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
 </div>
 </div>
-<a id="a2466b4065e5fb9f60d6d5d271fa8c5ab" name="a2466b4065e5fb9f60d6d5d271fa8c5ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2466b4065e5fb9f60d6d5d271fa8c5ab">&#9670;&#160;</a></span>allocNative()</h2>
+<a id="ab637c5ceb4ce47b7dd7d8299d25518ab" name="ab637c5ceb4ce47b7dd7d8299d25518ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab637c5ceb4ce47b7dd7d8299d25518ab">&#9670;&#160;</a></span>allocNative()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename TNative , <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex = guessTypeIndex&lt;TNative&gt;()&gt; </div>
+template&lt;typename TNative &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">TNative * opcua::detail::allocNative </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;&#160;</td>
+          <td class="paramname"><em>dataType</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1014,19 +1273,17 @@ template&lt;typename TNative , <a class="el" href="namespaceopcua.html#a74df7467
 
 <p>Allocate native type. </p>
 
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00150">150</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
-
-<p class="reference">References <a class="elRef" target="_blank" href="open62541/types_8h.html#a921a4b0f6b27972f427493106673050e">UA_new()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00140">140</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
 </div>
 </div>
-<a id="a8e85ff3f8211c776905f84e7b46f6e34" name="a8e85ff3f8211c776905f84e7b46f6e34"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e85ff3f8211c776905f84e7b46f6e34">&#9670;&#160;</a></span>toNativeAlloc()</h2>
+<a id="a404138af4038ad53d30b65fef741a118" name="a404138af4038ad53d30b65fef741a118"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a404138af4038ad53d30b65fef741a118">&#9670;&#160;</a></span>toNativeAlloc()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex = guessTypeIndex&lt;T&gt;()&gt; </div>
+template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">auto * opcua::detail::toNativeAlloc </td>
@@ -1040,47 +1297,53 @@ template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebea
 
 <p>Allocate and copy to native type. </p>
 
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00161">161</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00151">151</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
-<p class="reference">References <a class="el" href="structopcua_1_1TypeConverter.html#a3a75022757c6255b3e75a0ed76519edb">opcua::TypeConverter&lt; T, Enable &gt;::toNative()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Variant_8h_source.html#l00296">opcua::Variant::setScalarCopy()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Variant_8h_source.html#l00405">opcua::Variant::setScalarCopy()</a>.</p>
 
 </div>
 </div>
-<a id="a398b8f362b471081c5aafe8507d26582" name="a398b8f362b471081c5aafe8507d26582"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a398b8f362b471081c5aafe8507d26582">&#9670;&#160;</a></span>allocNativeArray()</h2>
+<a id="af027fda6edfd6da757e35144a7962b76" name="af027fda6edfd6da757e35144a7962b76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af027fda6edfd6da757e35144a7962b76">&#9670;&#160;</a></span>allocNativeArray()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename TNative , <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex = guessTypeIndex&lt;TNative&gt;()&gt; </div>
+template&lt;typename TNative &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">auto * opcua::detail::allocNativeArray </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>size</em></td><td>)</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;&#160;</td>
+          <td class="paramname"><em>dataType</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Allocate native array. </p>
 
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00171">171</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
-
-<p class="reference">References <a class="elRef" target="_blank" href="open62541/types_8h.html#ab49966aa2cff36fe08c3052db3b51dd3">UA_Array_new()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00160">160</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
 </div>
 </div>
-<a id="a9d4607095da2e334b0585160c5db7d95" name="a9d4607095da2e334b0585160c5db7d95"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9d4607095da2e334b0585160c5db7d95">&#9670;&#160;</a></span>toNativeArrayAlloc() <span class="overload">[1/2]</span></h2>
+<a id="ae1f561d598634c31ff6450b46cc037e3" name="ae1f561d598634c31ff6450b46cc037e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1f561d598634c31ff6450b46cc037e3">&#9670;&#160;</a></span>toNativeArrayAlloc() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename InputIt , <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex = guessTypeIndexFromIterator&lt;InputIt&gt;()&gt; </div>
+template&lt;typename InputIt &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">auto * opcua::detail::toNativeArrayAlloc </td>
@@ -1104,21 +1367,19 @@ template&lt;typename InputIt , <a class="el" href="namespaceopcua.html#a74df7467
 
 <p>Allocate and copy iterator range to native array. </p>
 
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00182">182</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00171">171</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
-<p class="reference">References <a class="el" href="structopcua_1_1TypeConverter.html#a3a75022757c6255b3e75a0ed76519edb">opcua::TypeConverter&lt; T, Enable &gt;::toNative()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Variant_8h_source.html#l00319">opcua::Variant::setArrayCopy()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Variant_8h_source.html#l00453">opcua::Variant::setArrayCopy()</a>, and <a class="el" href="TypeConverter_8h_source.html#l00184">toNativeArrayAlloc()</a>.</p>
 
 </div>
 </div>
-<a id="a5a5b73d9cf0de957c3237bf7a1d957e7" name="a5a5b73d9cf0de957c3237bf7a1d957e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a5b73d9cf0de957c3237bf7a1d957e7">&#9670;&#160;</a></span>toNativeArrayAlloc() <span class="overload">[2/2]</span></h2>
+<a id="acd7844bd9034ce1b26cacc5e61cc0892" name="acd7844bd9034ce1b26cacc5e61cc0892"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd7844bd9034ce1b26cacc5e61cc0892">&#9670;&#160;</a></span>toNativeArrayAlloc() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex = guessTypeIndex&lt;T&gt;()&gt; </div>
+template&lt;typename T &gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">auto * opcua::detail::toNativeArrayAlloc </td>
@@ -1142,7 +1403,36 @@ template&lt;typename T , <a class="el" href="namespaceopcua.html#a74df74679bebea
 
 <p>Allocate and copy to native array. </p>
 
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00196">196</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00184">184</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+
+</div>
+</div>
+<a id="a6228aef2d981a7d08177926555fd752f" name="a6228aef2d981a7d08177926555fd752f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6228aef2d981a7d08177926555fd752f">&#9670;&#160;</a></span>isNativeType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool opcua::detail::isNativeType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00222">222</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
 </div>
 </div>
@@ -1172,8 +1462,6 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="ExtensionObject_8h_source.html#l00110">110</a> of file <a class="el" href="ExtensionObject_8h_source.html">ExtensionObject.h</a>.</p>
-
-<p class="reference">References <a class="el" href="ExtensionObject_8h_source.html#l00110">isAssignableToExtensionObject()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="ExtensionObject_8h_source.html#l00110">isAssignableToExtensionObject()</a>.</p>
 
@@ -1242,7 +1530,7 @@ template&lt;typename T1 , typename T2 &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00192">192</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00188">188</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -1271,7 +1559,7 @@ template&lt;typename WrapperType , typename NativeType &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00199">199</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00195">195</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
 
 </div>
 </div>
@@ -1297,8 +1585,6 @@ template&lt;typename WrapperType , typename NativeType &gt; </div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="Common_8h_source.html#l00252">252</a> of file <a class="el" href="Common_8h_source.html">Common.h</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="TypeConverter_8h_source.html#l00085">guessType()</a>.</p>
 
 </div>
 </div>

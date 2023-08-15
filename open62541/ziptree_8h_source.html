@@ -78,7 +78,13 @@ $(function() {
   <div class="headertitle"><div class="title">ziptree.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="ziptree_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno"><a class="line" href="ziptree_8h.html#a60749c5d35181da1378b6ae091b1c24e">    1</a></span> </div>
+<a href="ziptree_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno"><a class="line" href="ziptree_8h.html#a60749c5d35181da1378b6ae091b1c24e">    1</a></span><span class="comment">/** This Source Code Form is subject to the terms of the Mozilla Public</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * License, v. 2.0. If a copy of the MPL was not distributed with this</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * file, You can obtain one at http://mozilla.org/MPL/2.0/. </span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> *    Copyright 2018, 2021 (c) Julius Pfrommer</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#ifndef ZIPTREE_H_</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#define ZIPTREE_H_</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
@@ -89,7 +95,8 @@ $(function() {
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#else</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="ziptree_8h.html#afb01a2bd78edb72a7adfd4dbb301ad89">   16</a></span><span class="preprocessor"># define ZIP_INLINE inline</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"></span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment">/** Prevent warnings on unused static inline functions for some compilers */</span></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#if defined(__GNUC__) || defined(__clang__)</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor"># define ZIP_UNUSED __attribute__((unused))</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#else</span></div>
@@ -99,7 +106,18 @@ $(function() {
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#ifdef __cplusplus</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment"></span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">/** Reusable zip tree implementation. The style is inspired by the BSD</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment"> * sys/queue.h linked list definition.</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment"> * Zip trees were developed in: Tarjan, R. E., Levy, C. C., and Timmel, S. &quot;Zip</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment"> * Trees.&quot; arXiv preprint arXiv:1806.06726 (2018). The original definition was</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment"> * modified so that several elements with the same key can be inserted. However,</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment"> * ZIP_FIND will only return the topmost of these elements in the tree.</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment"> * The ZIP_ENTRY definitions are to be contained in the tree entries themselves.</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment"> * Use ZIP_FUNCTIONS to define the signature of the zip tree functions. */</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="ziptree_8h.html#a11d5b2cd9d32e36b1e58e6d13846a8b3">   41</a></span><span class="preprocessor">#define ZIP_HEAD(name, type)                    \</span></div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="preprocessor">struct name {                                   \</span></div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="preprocessor">    struct type *root;                          \</span></div>
@@ -125,7 +143,9 @@ $(function() {
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="ziptree_8h.html#a433e295a0e07d6014ea0437d45c30908">   63</a></span><span class="preprocessor">#define ZIP_LEFT(elm, field) (elm)-&gt;field.left</span></div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="ziptree_8h.html#aebbc3cfc0464b828546f960d2daea553">   64</a></span><span class="preprocessor">#define ZIP_RIGHT(elm, field) (elm)-&gt;field.right</span></div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="ziptree_8h.html#a3b3eac113b00bf3aa8ae8f7f9bf7a3aa">   65</a></span><span class="preprocessor">#define ZIP_RANK(elm, field) (elm)-&gt;field.rank</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="comment"></span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">/** Internal definitions. Don&#39;t use directly. */</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="ziptree_8h.html#a2de09e7932b9938221ef98de609bb094">   69</a></span><span class="keyword">typedef</span> void (*<a class="code hl_typedef" href="ziptree_8h.html#a2de09e7932b9938221ef98de609bb094">__zip_iter_cb</a>)(<span class="keywordtype">void</span> *elm, <span class="keywordtype">void</span> *context);</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="keywordtype">void</span> *</div>
@@ -147,9 +167,19 @@ $(function() {
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="ziptree_8h.html#aa9566e6705ee18849dacf6dce089ca07">   88</a></span><span class="keywordtype">void</span> * <a class="code hl_function" href="ziptree_8h.html#aa9566e6705ee18849dacf6dce089ca07">__ZIP_MIN</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> fieldoffset, <span class="keywordtype">void</span> *elm);</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="ziptree_8h.html#a342b1284c83b4eb58ff3911663e37cca">   89</a></span><span class="keywordtype">void</span> * <a class="code hl_function" href="ziptree_8h.html#a342b1284c83b4eb58ff3911663e37cca">__ZIP_MAX</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> fieldoffset, <span class="keywordtype">void</span> *elm);</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment"></span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">/** Zip trees are a probabilistic data structure. Entries are assigned a</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment"> * (non-negative) rank k with probability 1/2^{k+1}. A uniformly sampled random</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment"> * number has to be supplied with the insert method. __ZIP_FFS32 extracts from</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment"> * it least significant nonzero bit of a 32bit number. This then has the correct</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment"> * distribution. */</span></div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="ziptree_8h.html#a1ba74b2a8e7769faf8361112ba6497d5">   96</a></span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code hl_function" href="ziptree_8h.html#a1ba74b2a8e7769faf8361112ba6497d5">__ZIP_FFS32</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> v);</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment"></span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">/** Generate zip tree method definitions with the ZIP_FUNCTIONS macro. The</span></div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment"> * comparison method &quot;cmp&quot; defined for every zip tree has the signature</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment"> *   enum ZIP_CMP cmpDateTime(const keytype *a, const keytype *b); */</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="ziptree_8h.html#ab000c3c53ea3c32a703849f15dc62013">  103</a></span><span class="preprocessor">#define ZIP_INSERT(name, head, elm, rank) name##_ZIP_INSERT(head, elm, rank)</span></div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno"><a class="line" href="ziptree_8h.html#ade9bed4dd29b35890ce65c195220353d">  104</a></span><span class="preprocessor">#define ZIP_REMOVE(name, head, elm) name##_ZIP_REMOVE(head, elm)</span></div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno"><a class="line" href="ziptree_8h.html#a8611e8e86453459dea309411bada6498">  105</a></span><span class="preprocessor">#define ZIP_FIND(name, head, key) name##_ZIP_FIND(head, key)</span></div>

@@ -493,12 +493,16 @@ $(function() {
 <div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span><span class="preprocessor">    struct type *tqe_next;  </span><span class="comment">/* next element */</span><span class="preprocessor">          \</span></div>
 <div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span><span class="preprocessor">    struct type **tqe_prev; </span><span class="comment">/* address of previous next element */</span><span class="preprocessor">  \</span></div>
 <div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span><span class="preprocessor">}</span></div>
-<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span> </div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span><span class="comment"></span> </div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span><span class="comment">/** </span></div>
+<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span><span class="comment"> * tail queue access methods </span></div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00420" name="l00420"></a><span class="lineno"><a class="line" href="open62541__queue_8h.html#a7d6894360bd1c41e0e6f6d84998c1362">  420</a></span><span class="preprocessor">#define TAILQ_FIRST(head)       ((head)-&gt;tqh_first)</span></div>
 <div class="line"><a id="l00421" name="l00421"></a><span class="lineno"><a class="line" href="open62541__queue_8h.html#a4322b8461a6ab7632435ff4f57bb3a2e">  421</a></span><span class="preprocessor">#define TAILQ_END(head)         NULL</span></div>
 <div class="line"><a id="l00422" name="l00422"></a><span class="lineno"><a class="line" href="open62541__queue_8h.html#abd57fe9bdea6007a602f8c7d61bd5265">  422</a></span><span class="preprocessor">#define TAILQ_NEXT(elm, field)      ((elm)-&gt;field.tqe_next)</span></div>
 <div class="line"><a id="l00423" name="l00423"></a><span class="lineno"><a class="line" href="open62541__queue_8h.html#ac9154a9aebb3c15a3f2356349a1cc14f">  423</a></span><span class="preprocessor">#define TAILQ_LAST(head, headname)                  \</span></div>
-<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span><span class="preprocessor">    (*(((struct headname *)((head)-&gt;tqh_last))-&gt;tqh_last))</span></div>
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span><span class="preprocessor">    (*(((struct headname *)((head)-&gt;tqh_last))-&gt;tqh_last))</span><span class="comment"></span></div>
+<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span><span class="comment">/** XXX */</span><span class="preprocessor"></span></div>
 <div class="line"><a id="l00426" name="l00426"></a><span class="lineno"><a class="line" href="open62541__queue_8h.html#a524f93a0c21c390683fab4c27e840a10">  426</a></span><span class="preprocessor">#define TAILQ_PREV(elm, headname, field)                \</span></div>
 <div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span><span class="preprocessor">    (*(((struct headname *)((elm)-&gt;field.tqe_prev))-&gt;tqh_last))</span></div>
 <div class="line"><a id="l00428" name="l00428"></a><span class="lineno"><a class="line" href="open62541__queue_8h.html#ac3c9da7ac712eacbbad5cc54d7a3477e">  428</a></span><span class="preprocessor">#define TAILQ_EMPTY(head)                       \</span></div>

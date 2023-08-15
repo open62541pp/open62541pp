@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.6.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.7.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -78,17 +78,20 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#define-members">Macros</a>  </div>
+<a href="#define-members">Macros</a> &#124;
+<a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle"><div class="title">Composed.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;cstdint&gt;</code><br />
+<code>#include &lt;utility&gt;</code><br />
 <code>#include &quot;<a class="el" href="Common_8h_source.html">open62541pp/Common.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Config_8h_source.html">open62541pp/Config.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="NodeIds_8h_source.html">open62541pp/NodeIds.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="TypeConverter_8h_source.html">open62541pp/TypeConverter.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="TypeWrapper_8h_source.html">open62541pp/TypeWrapper.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Builtin_8h_source.html">open62541pp/types/Builtin.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="ExtensionObject_8h_source.html">open62541pp/types/ExtensionObject.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="NodeId_8h_source.html">open62541pp/types/NodeId.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Variant_8h_source.html">open62541pp/types/Variant.h</a>&quot;</code><br />
 <code>#include &lt;initializer_list&gt;</code><br />
@@ -97,12 +100,12 @@ $(function() {
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Composed.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="Composed_8h__incl.svg" width="2863" height="696"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="Composed_8h__incl.svg" width="3218" height="711"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="Composed_8h__dep__incl.svg" width="934" height="374"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="Composed_8h__dep__incl.svg" width="1216" height="374"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="Composed_8h_source.html">Go to the source code of this file.</a></p>
@@ -126,6 +129,30 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1ObjectTypeAttributes.html">opcua::ObjectTypeAttributes</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1VariableTypeAttributes.html">opcua::VariableTypeAttributes</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1ReferenceTypeAttributes.html">opcua::ReferenceTypeAttributes</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DataTypeAttributes.html">opcua::DataTypeAttributes</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1ViewAttributes.html">opcua::ViewAttributes</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1UserIdentityToken.html">opcua::UserIdentityToken</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1AnonymousIdentityToken.html">opcua::AnonymousIdentityToken</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1UserNameIdentityToken.html">opcua::UserNameIdentityToken</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1X509IdentityToken.html">opcua::X509IdentityToken</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1IssuedIdentityToken.html">opcua::IssuedIdentityToken</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1AddNodesItem.html">opcua::AddNodesItem</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1AddReferencesItem.html">opcua::AddReferencesItem</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DeleteNodesItem.html">opcua::DeleteNodesItem</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1DeleteReferencesItem.html">opcua::DeleteReferencesItem</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1BrowseDescription.html">opcua::BrowseDescription</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,6 +202,13 @@ Macros</h2></td></tr>
 <tr class="separator:ab9515ebeb0c270eef703f31a57b8d175"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeddb1e62140de62a9b15e9a9aeed1613"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Composed_8h.html#aeddb1e62140de62a9b15e9a9aeed1613">UAPP_NODEATTR_COMMON</a></td></tr>
 <tr class="separator:aeddb1e62140de62a9b15e9a9aeed1613"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a60d6286ecbbf42a472d98907c515c409"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a60d6286ecbbf42a472d98907c515c409">opcua::UserTokenType</a> : uint32_t </td></tr>
+<tr class="separator:a60d6286ecbbf42a472d98907c515c409"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a961641837f978cb3912fa72aeb6ceab9"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a961641837f978cb3912fa72aeb6ceab9">opcua::PerformUpdateType</a> : uint32_t </td></tr>
+<tr class="separator:a961641837f978cb3912fa72aeb6ceab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a9187278ea2c4ce87ef169bf71946d456" name="a9187278ea2c4ce87ef169bf71946d456"></a>
@@ -212,7 +246,7 @@ Macros</h2></td></tr>
 <div class="line">        <span class="keywordflow">return</span> handle()-&gt;member;                                                                   \</div>
 <div class="line">    }</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00019">19</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00021">21</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -251,7 +285,7 @@ Macros</h2></td></tr>
 <div class="line">        <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span>Type<span class="keyword">&gt;</span>(handle()-&gt;member);                                                \</div>
 <div class="line">    }</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00025">25</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00027">27</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -290,7 +324,7 @@ Macros</h2></td></tr>
 <div class="line">        <span class="keywordflow">return</span> asWrapper&lt;WrapperType&gt;(handle()-&gt;member);                                           \</div>
 <div class="line">    }</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00031">31</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00033">33</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -329,7 +363,7 @@ Macros</h2></td></tr>
 <div class="line">        <span class="keywordflow">return</span> asWrapper&lt;WrapperType&gt;(handle()-&gt;member);                                           \</div>
 <div class="line">    }</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00036">36</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00038">38</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -366,9 +400,9 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    <a class="code hl_define" href="Composed_8h.html#a8a865ac95936aefce51803586472d04a">UAPP_COMPOSED_GETTER_WRAPPER_CONST</a>(WrapperType, getterName, member)                            \</div>
 <div class="line">    UAPP_COMPOSED_GETTER_WRAPPER_NONCONST(WrapperType, getterName, member)</div>
-<div class="ttc" id="aComposed_8h_html_a8a865ac95936aefce51803586472d04a"><div class="ttname"><a href="Composed_8h.html#a8a865ac95936aefce51803586472d04a">UAPP_COMPOSED_GETTER_WRAPPER_CONST</a></div><div class="ttdeci">#define UAPP_COMPOSED_GETTER_WRAPPER_CONST(WrapperType, getterName, member)</div><div class="ttdef"><b>Definition</b> <a href="Composed_8h_source.html#l00031">Composed.h:31</a></div></div>
+<div class="ttc" id="aComposed_8h_html_a8a865ac95936aefce51803586472d04a"><div class="ttname"><a href="Composed_8h.html#a8a865ac95936aefce51803586472d04a">UAPP_COMPOSED_GETTER_WRAPPER_CONST</a></div><div class="ttdeci">#define UAPP_COMPOSED_GETTER_WRAPPER_CONST(WrapperType, getterName, member)</div><div class="ttdef"><b>Definition</b> <a href="Composed_8h_source.html#l00033">Composed.h:33</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00041">41</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00043">43</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -416,7 +450,7 @@ Macros</h2></td></tr>
 <div class="line">        <span class="keywordflow">return</span> detail::fromNativeArray&lt;Type&gt;(handle()-&gt;memberArray, handle()-&gt;memberSize);         \</div>
 <div class="line">    }</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00046">46</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00048">48</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -463,9 +497,9 @@ Macros</h2></td></tr>
 <div class="line">        handle()-&gt;member = member;                                                                 \</div>
 <div class="line">        <span class="keywordflow">return</span> *<span class="keyword">this</span>;                                                                              \</div>
 <div class="line">    }</div>
-<div class="ttc" id="aComposed_8h_html_a9187278ea2c4ce87ef169bf71946d456"><div class="ttname"><a href="Composed_8h.html#a9187278ea2c4ce87ef169bf71946d456">UAPP_COMPOSED_GETTER</a></div><div class="ttdeci">#define UAPP_COMPOSED_GETTER(Type, getterName, member)</div><div class="ttdef"><b>Definition</b> <a href="Composed_8h_source.html#l00019">Composed.h:19</a></div></div>
+<div class="ttc" id="aComposed_8h_html_a9187278ea2c4ce87ef169bf71946d456"><div class="ttname"><a href="Composed_8h.html#a9187278ea2c4ce87ef169bf71946d456">UAPP_COMPOSED_GETTER</a></div><div class="ttdeci">#define UAPP_COMPOSED_GETTER(Type, getterName, member)</div><div class="ttdef"><b>Definition</b> <a href="Composed_8h_source.html#l00021">Composed.h:21</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00117">117</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00141">141</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -512,9 +546,9 @@ Macros</h2></td></tr>
 <div class="line">        handle()-&gt;member = <span class="keyword">static_cast&lt;</span>decltype(handle()-<span class="keyword">&gt;</span>member)&gt;(member);                        \</div>
 <div class="line">        <span class="keywordflow">return</span> *<span class="keyword">this</span>;                                                                              \</div>
 <div class="line">    }</div>
-<div class="ttc" id="aComposed_8h_html_ab8f74777e46ff46aee07245a7c065748"><div class="ttname"><a href="Composed_8h.html#ab8f74777e46ff46aee07245a7c065748">UAPP_COMPOSED_GETTER_CAST</a></div><div class="ttdeci">#define UAPP_COMPOSED_GETTER_CAST(Type, getterName, member)</div><div class="ttdef"><b>Definition</b> <a href="Composed_8h_source.html#l00025">Composed.h:25</a></div></div>
+<div class="ttc" id="aComposed_8h_html_ab8f74777e46ff46aee07245a7c065748"><div class="ttname"><a href="Composed_8h.html#ab8f74777e46ff46aee07245a7c065748">UAPP_COMPOSED_GETTER_CAST</a></div><div class="ttdeci">#define UAPP_COMPOSED_GETTER_CAST(Type, getterName, member)</div><div class="ttdef"><b>Definition</b> <a href="Composed_8h_source.html#l00027">Composed.h:27</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00126">126</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00150">150</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -562,7 +596,7 @@ Macros</h2></td></tr>
 <div class="line">        <span class="keywordflow">return</span> *<span class="keyword">this</span>;                                                                              \</div>
 <div class="line">    }</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00135">135</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00159">159</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -613,9 +647,7 @@ Macros</h2></td></tr>
 <div class="line">    <span class="keyword">auto</span>&amp; set##suffix(<span class="keyword">const</span> std::vector&lt;Type&gt;&amp; memberArray) {                                      \</div>
 <div class="line">        handle()-&gt;specifiedAttributes |= flag;                                                     \</div>
 <div class="line">        UA_Array_delete(                                                                           \</div>
-<div class="line">            handle()-&gt;memberArray,                                                                 \</div>
-<div class="line">            handle()-&gt;memberSize,                                                                  \</div>
-<div class="line">            detail::getUaDataType(detail::guessTypeIndex&lt;Type&gt;())                                  \</div>
+<div class="line">            handle()-&gt;memberArray, handle()-&gt;memberSize, &amp;detail::guessDataType&lt;Type&gt;()            \</div>
 <div class="line">        );                                                                                         \</div>
 <div class="line">        handle()-&gt;memberArray = detail::toNativeArrayAlloc(                                        \</div>
 <div class="line">            memberArray.begin(), memberArray.end()                                                 \</div>
@@ -623,9 +655,9 @@ Macros</h2></td></tr>
 <div class="line">        handle()-&gt;memberSize = memberArray.size();                                                 \</div>
 <div class="line">        <span class="keywordflow">return</span> *<span class="keyword">this</span>;                                                                              \</div>
 <div class="line">    }</div>
-<div class="ttc" id="aComposed_8h_html_a5bdb8e3d0bca2e1b1a7429b1379b24b0"><div class="ttname"><a href="Composed_8h.html#a5bdb8e3d0bca2e1b1a7429b1379b24b0">UAPP_COMPOSED_GETTER_ARRAY</a></div><div class="ttdeci">#define UAPP_COMPOSED_GETTER_ARRAY(Type, getterName, memberArray, memberSize)</div><div class="ttdef"><b>Definition</b> <a href="Composed_8h_source.html#l00046">Composed.h:46</a></div></div>
+<div class="ttc" id="aComposed_8h_html_a5bdb8e3d0bca2e1b1a7429b1379b24b0"><div class="ttname"><a href="Composed_8h.html#a5bdb8e3d0bca2e1b1a7429b1379b24b0">UAPP_COMPOSED_GETTER_ARRAY</a></div><div class="ttdeci">#define UAPP_COMPOSED_GETTER_ARRAY(Type, getterName, memberArray, memberSize)</div><div class="ttdef"><b>Definition</b> <a href="Composed_8h_source.html#l00048">Composed.h:48</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00144">144</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00168">168</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -650,7 +682,7 @@ Macros</h2></td></tr>
 <div class="line">    UAPP_NODEATTR(uint32_t, WriteMask, writeMask, UA_NODEATTRIBUTESMASK_WRITEMASK)                 \</div>
 <div class="line">    UAPP_NODEATTR(uint32_t, UserWriteMask, userWriteMask, UA_NODEATTRIBUTESMASK_USERWRITEMASK)</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00161">161</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00183">183</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>

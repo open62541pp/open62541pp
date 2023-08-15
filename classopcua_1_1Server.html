@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.6.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.7.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -92,6 +92,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:afe11cf9e2c5636db6cef861a102a62a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af917ca8ebe2f20dc0c262fed82464a7f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#af917ca8ebe2f20dc0c262fed82464a7f">setLogger</a> (<a class="el" href="namespaceopcua.html#addbefbd9d221be59908c6f60dc54238a">Logger</a> logger)</td></tr>
 <tr class="separator:af917ca8ebe2f20dc0c262fed82464a7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90ff994ad5b54973ec64477eac2a1a74"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a90ff994ad5b54973ec64477eac2a1a74">setAccessControl</a> (<a class="el" href="classopcua_1_1AccessControlBase.html">AccessControlBase</a> &amp;accessControl)</td></tr>
+<tr class="separator:a90ff994ad5b54973ec64477eac2a1a74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accaf1536a9bf4e148ff81ca664daff67"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#accaf1536a9bf4e148ff81ca664daff67">setAccessControl</a> (std::unique_ptr&lt; <a class="el" href="classopcua_1_1AccessControlBase.html">AccessControlBase</a> &gt; accessControl)</td></tr>
+<tr class="separator:accaf1536a9bf4e148ff81ca664daff67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50463492d9e0f1342b9a33b402931dc0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a50463492d9e0f1342b9a33b402931dc0">setCustomHostname</a> (std::string_view hostname)</td></tr>
 <tr class="separator:a50463492d9e0f1342b9a33b402931dc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3096faf64ed93d3f2602a2371e55b644"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a3096faf64ed93d3f2602a2371e55b644">setApplicationName</a> (std::string_view name)</td></tr>
@@ -100,14 +104,18 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa20fc13af8bce1152e682515d75afc3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a480065442a39d201936bbfb35d2530f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a480065442a39d201936bbfb35d2530f1">setProductUri</a> (std::string_view uri)</td></tr>
 <tr class="separator:a480065442a39d201936bbfb35d2530f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b3b0886683dbcddd95709407ecda3e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a1b3b0886683dbcddd95709407ecda3e2">setLogin</a> (const std::vector&lt; <a class="el" href="structopcua_1_1Login.html">Login</a> &gt; &amp;logins, bool allowAnonymous=true)</td></tr>
-<tr class="separator:a1b3b0886683dbcddd95709407ecda3e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a932c5f49eaea1d6fde141297f2744351"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classopcua_1_1Session.html">Session</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a932c5f49eaea1d6fde141297f2744351">getSessions</a> () const</td></tr>
+<tr class="separator:a932c5f49eaea1d6fde141297f2744351"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae841b3cea5eff765a6ce5c0692b45724"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#ae841b3cea5eff765a6ce5c0692b45724">getNamespaceArray</a> ()</td></tr>
 <tr class="separator:ae841b3cea5eff765a6ce5c0692b45724"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebbf0356e35f42af50930448fe2245a4"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#aebbf0356e35f42af50930448fe2245a4">registerNamespace</a> (std::string_view uri)</td></tr>
 <tr class="separator:aebbf0356e35f42af50930448fe2245a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5811aacb30f065577073edd0b501c45c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a5811aacb30f065577073edd0b501c45c">setCustomDataTypes</a> (std::vector&lt; <a class="el" href="classopcua_1_1DataType.html">DataType</a> &gt; dataTypes)</td></tr>
+<tr class="separator:a5811aacb30f065577073edd0b501c45c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4f006cd9e70844e32b40251ce596cea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#aa4f006cd9e70844e32b40251ce596cea">setVariableNodeValueCallback</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="structopcua_1_1ValueCallback.html">ValueCallback</a> callback)</td></tr>
 <tr class="separator:aa4f006cd9e70844e32b40251ce596cea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bfa46321a223aa924e7b6315fd4567f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a1bfa46321a223aa924e7b6315fd4567f">setVariableNodeValueBackend</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="structopcua_1_1ValueBackendDataSource.html">ValueBackendDataSource</a> backend)</td></tr>
+<tr class="separator:a1bfa46321a223aa924e7b6315fd4567f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a80242dd95c529b6e7b68c8d60da91a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Subscription.html">Subscription</a>&lt; <a class="el" href="classopcua_1_1Server.html">Server</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a7a80242dd95c529b6e7b68c8d60da91a">createSubscription</a> () noexcept</td></tr>
 <tr class="separator:a7a80242dd95c529b6e7b68c8d60da91a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74af3b7dbfa031a19230a45dcf3f3a31"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Server.html#a74af3b7dbfa031a19230a45dcf3f3a31">runIterate</a> ()</td></tr>
@@ -136,10 +144,10 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>High-level server class. </p>
 <p>Exposes the most common functionality. Use the <a class="el" href="classopcua_1_1Server.html#af78448a2823bfe2e6ba8badb987a8bc8">handle()</a> method to get access the underlying <a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> instance and use the full power of open6254. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_8cpp-example.html#_a0">server.cpp</a>, <a class="el" href="server_instantiation_8cpp-example.html#_a0">server_instantiation.cpp</a>, <a class="el" href="server_method_8cpp-example.html#_a0">server_method.cpp</a>, <a class="el" href="server_minimal_8cpp-example.html#_a0">server_minimal.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#_a0">server_valuecallback.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2server_custom_datatypes_8cpp-example.html#_a0">custom_datatypes/server_custom_datatypes.cpp</a>, <a class="el" href="server_8cpp-example.html#_a0">server.cpp</a>, <a class="el" href="server_accesscontrol_8cpp-example.html#_a14">server_accesscontrol.cpp</a>, <a class="el" href="server_datasource_8cpp-example.html#_a0">server_datasource.cpp</a>, <a class="el" href="server_instantiation_8cpp-example.html#_a0">server_instantiation.cpp</a>, <a class="el" href="server_method_8cpp-example.html#_a0">server_method.cpp</a>, <a class="el" href="server_minimal_8cpp-example.html#_a0">server_minimal.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#_a0">server_valuecallback.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Server_8h_source.html#l00032">32</a> of file <a class="el" href="Server_8h_source.html">Server.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Server_8h_source.html#l00034">34</a> of file <a class="el" href="Server_8h_source.html">Server.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aadaece83cb335b692e84baf0c538e492" name="aadaece83cb335b692e84baf0c538e492"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aadaece83cb335b692e84baf0c538e492">&#9670;&#160;</a></span>Server() <span class="overload">[1/2]</span></h2>
@@ -289,6 +297,48 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a90ff994ad5b54973ec64477eac2a1a74" name="a90ff994ad5b54973ec64477eac2a1a74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90ff994ad5b54973ec64477eac2a1a74">&#9670;&#160;</a></span>setAccessControl() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::Server::setAccessControl </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1AccessControlBase.html">AccessControlBase</a> &amp;&#160;</td>
+          <td class="paramname"><em>accessControl</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set custom access control. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_accesscontrol_8cpp-example.html#a15">server_accesscontrol.cpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="accaf1536a9bf4e148ff81ca664daff67" name="accaf1536a9bf4e148ff81ca664daff67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accaf1536a9bf4e148ff81ca664daff67">&#9670;&#160;</a></span>setAccessControl() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::Server::setAccessControl </td>
+          <td>(</td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classopcua_1_1AccessControlBase.html">AccessControlBase</a> &gt;&#160;</td>
+          <td class="paramname"><em>accessControl</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set custom access control (transfer ownership to <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>). </p>
+
+</div>
+</div>
 <a id="a50463492d9e0f1342b9a33b402931dc0" name="a50463492d9e0f1342b9a33b402931dc0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a50463492d9e0f1342b9a33b402931dc0">&#9670;&#160;</a></span>setCustomHostname()</h2>
 
@@ -371,33 +421,22 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a1b3b0886683dbcddd95709407ecda3e2" name="a1b3b0886683dbcddd95709407ecda3e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1b3b0886683dbcddd95709407ecda3e2">&#9670;&#160;</a></span>setLogin()</h2>
+<a id="a932c5f49eaea1d6fde141297f2744351" name="a932c5f49eaea1d6fde141297f2744351"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a932c5f49eaea1d6fde141297f2744351">&#9670;&#160;</a></span>getSessions()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::Server::setLogin </td>
+          <td class="memname">std::vector&lt; <a class="el" href="classopcua_1_1Session.html">Session</a> &gt; opcua::Server::getSessions </td>
           <td>(</td>
-          <td class="paramtype">const std::vector&lt; <a class="el" href="structopcua_1_1Login.html">Login</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>logins</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>allowAnonymous</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Set login credentials (username/password) and anonymous login. </p>
+<p>Get active client session. </p>
 
 </div>
 </div>
@@ -440,6 +479,29 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a5811aacb30f065577073edd0b501c45c" name="a5811aacb30f065577073edd0b501c45c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5811aacb30f065577073edd0b501c45c">&#9670;&#160;</a></span>setCustomDataTypes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::Server::setCustomDataTypes </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classopcua_1_1DataType.html">DataType</a> &gt;&#160;</td>
+          <td class="paramname"><em>dataTypes</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set custom data types. </p>
+<p>All data types provided are automatically considered for decoding of received messages. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2server_custom_datatypes_8cpp-example.html#a1">custom_datatypes/server_custom_datatypes.cpp</a>.</dd>
+</dl>
+
+</div>
+</div>
 <a id="aa4f006cd9e70844e32b40251ce596cea" name="aa4f006cd9e70844e32b40251ce596cea"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa4f006cd9e70844e32b40251ce596cea">&#9670;&#160;</a></span>setVariableNodeValueCallback()</h2>
 
@@ -467,7 +529,39 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Set value callbacks to execute before every read and after every write operation. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_valuecallback_8cpp-example.html#a10">server_valuecallback.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_valuecallback_8cpp-example.html#a9">server_valuecallback.cpp</a>.</dd>
+</dl>
+
+</div>
+</div>
+<a id="a1bfa46321a223aa924e7b6315fd4567f" name="a1bfa46321a223aa924e7b6315fd4567f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bfa46321a223aa924e7b6315fd4567f">&#9670;&#160;</a></span>setVariableNodeValueBackend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::Server::setVariableNodeValueBackend </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structopcua_1_1ValueBackendDataSource.html">ValueBackendDataSource</a>&#160;</td>
+          <td class="paramname"><em>backend</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set data source backend for variable node. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_datasource_8cpp-example.html#a17">server_datasource.cpp</a>.</dd>
 </dl>
 
 </div>
@@ -535,7 +629,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Run the server's main loop. This method will block until <a class="el" href="classopcua_1_1Server.html#a51f8bc0f79b2e5cea8fc094c58a76a9c" title="Stop the server&#39;s main loop.">Server::stop</a> is called. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_8cpp-example.html#a11">server.cpp</a>, <a class="el" href="server_instantiation_8cpp-example.html#a12">server_instantiation.cpp</a>, <a class="el" href="server_method_8cpp-example.html#a8">server_method.cpp</a>, <a class="el" href="server_minimal_8cpp-example.html#a7">server_minimal.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#a11">server_valuecallback.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2server_custom_datatypes_8cpp-example.html#a15">custom_datatypes/server_custom_datatypes.cpp</a>, <a class="el" href="server_8cpp-example.html#a10">server.cpp</a>, <a class="el" href="server_accesscontrol_8cpp-example.html#a19">server_accesscontrol.cpp</a>, <a class="el" href="server_datasource_8cpp-example.html#a18">server_datasource.cpp</a>, <a class="el" href="server_instantiation_8cpp-example.html#a12">server_instantiation.cpp</a>, <a class="el" href="server_method_8cpp-example.html#a8">server_method.cpp</a>, <a class="el" href="server_minimal_8cpp-example.html#a7">server_minimal.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#a10">server_valuecallback.cpp</a>.</dd>
 </dl>
 
 </div>
@@ -601,7 +695,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_instantiation_8cpp-example.html#a1">server_instantiation.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2server_custom_datatypes_8cpp-example.html#a2">custom_datatypes/server_custom_datatypes.cpp</a>, and <a class="el" href="server_instantiation_8cpp-example.html#a1">server_instantiation.cpp</a>.</dd>
 </dl>
 
 </div>
@@ -637,7 +731,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_8cpp-example.html#a7">server.cpp</a>, <a class="el" href="server_instantiation_8cpp-example.html#a9">server_instantiation.cpp</a>, <a class="el" href="server_method_8cpp-example.html#a1">server_method.cpp</a>, <a class="el" href="server_minimal_8cpp-example.html#a2">server_minimal.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#a2">server_valuecallback.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2server_custom_datatypes_8cpp-example.html#a9">custom_datatypes/server_custom_datatypes.cpp</a>, <a class="el" href="server_8cpp-example.html#a7">server.cpp</a>, <a class="el" href="server_accesscontrol_8cpp-example.html#a16">server_accesscontrol.cpp</a>, <a class="el" href="server_datasource_8cpp-example.html#a1">server_datasource.cpp</a>, <a class="el" href="server_instantiation_8cpp-example.html#a9">server_instantiation.cpp</a>, <a class="el" href="server_method_8cpp-example.html#a1">server_method.cpp</a>, <a class="el" href="server_minimal_8cpp-example.html#a2">server_minimal.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#a2">server_valuecallback.cpp</a>.</dd>
 </dl>
 
 </div>

@@ -11,6 +11,5 @@ var searchData=
   ['open62541_2eh_8',['open62541.h',['../open62541_8h.html',1,'']]],
   ['open62541_5fqueue_2eh_9',['open62541_queue.h',['open62541/open62541__queue_8h.html',0,'']]],
   ['open62541pp_2eh_10',['open62541pp.h',['../open62541pp_8h.html',1,'']]],
-  ['openssl_5fsockets_2eh_11',['openssl_sockets.h',['open62541/openssl__sockets_8h.html',0,'']]],
-  ['ostream_2eh_12',['ostream.h',['../ostream_8h.html',1,'']]]
+  ['openssl_5fsockets_2eh_11',['openssl_sockets.h',['open62541/openssl__sockets_8h.html',0,'']]]
 ];

@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.6.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.7.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -82,18 +82,20 @@ $(function() {
   <div class="headertitle"><div class="title">ErrorHandling.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;stdexcept&gt;</code><br />
+<div class="textblock"><code>#include &lt;functional&gt;</code><br />
+<code>#include &lt;stdexcept&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
+<code>#include &lt;type_traits&gt;</code><br />
 <code>#include &quot;<a class="el" href="open62541_8h_source.html">open62541pp/open62541.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for ErrorHandling.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="ErrorHandling_8h__incl.svg" width="760" height="212"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="ErrorHandling_8h__incl.svg" width="938" height="212"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="ErrorHandling_8h__dep__incl.svg" width="2502" height="990"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="ErrorHandling_8h__dep__incl.svg" width="2939" height="990"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="ErrorHandling_8h_source.html">Go to the source code of this file.</a></p>
@@ -120,10 +122,18 @@ Namespaces</h2></td></tr>
 Functions</h2></td></tr>
 <tr class="memitem:a165af762713831e9cd7e0304bdfea5f4"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a165af762713831e9cd7e0304bdfea5f4">opcua::detail::isGoodStatus</a> (<a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> code) noexcept</td></tr>
 <tr class="separator:a165af762713831e9cd7e0304bdfea5f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5a5ac6a4bc4e201003cd0a1469577bf"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ad5a5ac6a4bc4e201003cd0a1469577bf">opcua::detail::isUncertainStatus</a> (<a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> code) noexcept</td></tr>
+<tr class="separator:ad5a5ac6a4bc4e201003cd0a1469577bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ce9349b09a0d878daa78d25fe734806"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a6ce9349b09a0d878daa78d25fe734806">opcua::detail::isBadStatus</a> (<a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> code) noexcept</td></tr>
 <tr class="separator:a6ce9349b09a0d878daa78d25fe734806"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a223a3f0d15d7e67ba6432496b2b327c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a223a3f0d15d7e67ba6432496b2b327c2">opcua::detail::throwOnBadStatus</a> (<a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> code)</td></tr>
 <tr class="separator:a223a3f0d15d7e67ba6432496b2b327c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae31d2c1c59eb66c2fcae5c56f2e2c4d4"><td class="memTemplParams" colspan="2">template&lt;typename F , typename... Args&gt; </td></tr>
+<tr class="memitem:ae31d2c1c59eb66c2fcae5c56f2e2c4d4"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ae31d2c1c59eb66c2fcae5c56f2e2c4d4">opcua::detail::invokeCatchIgnore</a> (F &amp;&amp;fn, Args &amp;&amp;... <a class="elRef" target="_blank" href="open62541/log_8h.html#a17b7d23b263b56363b9cd3364b529284">args</a>) noexcept</td></tr>
+<tr class="separator:ae31d2c1c59eb66c2fcae5c56f2e2c4d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b944ce55f73591be83957aff48d51b2"><td class="memTemplParams" colspan="2">template&lt;typename F , typename... Args&gt; </td></tr>
+<tr class="memitem:a0b944ce55f73591be83957aff48d51b2"><td class="memTemplItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a0b944ce55f73591be83957aff48d51b2">opcua::detail::invokeCatchStatus</a> (F &amp;&amp;fn, Args &amp;&amp;... <a class="elRef" target="_blank" href="open62541/log_8h.html#a17b7d23b263b56363b9cd3364b529284">args</a>) noexcept</td></tr>
+<tr class="separator:a0b944ce55f73591be83957aff48d51b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

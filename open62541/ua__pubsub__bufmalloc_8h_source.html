@@ -78,14 +78,24 @@ $(function() {
   <div class="headertitle"><div class="title">ua_pubsub_bufmalloc.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="ua__pubsub__bufmalloc_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<a href="ua__pubsub__bufmalloc_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/** This Source Code Form is subject to the terms of the Mozilla Public</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * License, v. 2.0. If a copy of the MPL was not distributed with this</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * file, You can obtain one at http://mozilla.org/MPL/2.0/.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> *    Copyright 2018 (c) Fraunhofer IOSB (Author: Julius Pfrommer)</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#ifndef UA_PUBSUB_BUFMALLOC_H_</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#define UA_PUBSUB_BUFMALLOC_H_</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;<a class="code" href="config_8h.html">open62541/config.h</a>&gt;</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><a class="code hl_define" href="config_8h.html#aa397bffde7d792f38dcbb8e329486f9c">_UA_BEGIN_DECLS</a></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"></span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">/** Build options UA_ENABLE_MALLOC_SINGLETON and UA_ENABLE_PUBSUB_BUFMALLOC required</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">    This module provides a switch for memory allocation on heap or static array</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">    for faster memory operations */</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="ua__pubsub__bufmalloc_8h.html#ad3ee8be241afa8a27fec059de0a22069">   19</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="ua__pubsub__bufmalloc_8h.html#ad3ee8be241afa8a27fec059de0a22069">resetMembuf</a>(<span class="keywordtype">void</span>);</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="ua__pubsub__bufmalloc_8h.html#a53d6a5f7683d18b9a04433ab0c16fd81">   20</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="ua__pubsub__bufmalloc_8h.html#a53d6a5f7683d18b9a04433ab0c16fd81">useMembufAlloc</a>(<span class="keywordtype">void</span>);</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="ua__pubsub__bufmalloc_8h.html#ab0c958e60e38ba501f2c565ae282ad19">   21</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="ua__pubsub__bufmalloc_8h.html#ab0c958e60e38ba501f2c565ae282ad19">useNormalAlloc</a>(<span class="keywordtype">void</span>);</div>

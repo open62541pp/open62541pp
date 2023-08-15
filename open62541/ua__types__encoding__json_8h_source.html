@@ -78,7 +78,14 @@ $(function() {
   <div class="headertitle"><div class="title">ua_types_encoding_json.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="ua__types__encoding__json_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<a href="ua__types__encoding__json_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/** This Source Code Form is subject to the terms of the Mozilla Public</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * License, v. 2.0. If a copy of the MPL was not distributed with this</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * file, You can obtain one at http://mozilla.org/MPL/2.0/.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> *    Copyright 2014-2017 (c) Fraunhofer IOSB (Author: Julius Pfrommer)</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> *    Copyright 2018 (c) Fraunhofer IOSB (Author: Lukas Meling)</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#ifndef UA_TYPES_ENCODING_JSON_H_</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#define UA_TYPES_ENCODING_JSON_H_</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
@@ -93,20 +100,40 @@ $(function() {
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><a class="code hl_define" href="config_8h.html#aa397bffde7d792f38dcbb8e329486f9c">_UA_BEGIN_DECLS</a></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="ua__types__encoding__json_8h.html#a6a89bba44ffe9069e0fb4b2f0caf8210">   22</a></span><span class="preprocessor">#define UA_JSON_MAXTOKENCOUNT 2048</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"></span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">/** Returns the number of bytes the value src takes in json encoding. Returns</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"> * zero if an error occurs. */</span></div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keywordtype">size_t</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="ua__types__encoding__json_8h.html#a5c4cd290044765e654fb850bb5a963f9">   27</a></span><a class="code hl_function" href="ua__types__encoding__json_8h.html#a5c4cd290044765e654fb850bb5a963f9">UA_calcSizeJsonInternal</a>(<span class="keyword">const</span> <span class="keywordtype">void</span> *src, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type,</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>                        <span class="keyword">const</span> <a class="code hl_struct" href="structUA__String.html">UA_String</a> *namespaces, <span class="keywordtype">size_t</span> namespaceSize,</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>                        <span class="keyword">const</span> <a class="code hl_struct" href="structUA__String.html">UA_String</a> *serverUris, <span class="keywordtype">size_t</span> serverUriSize,</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>                        <a class="code hl_variable" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> useReversible);</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment"></span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">/** Encodes the scalar value described by type to json encoding.</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment"> * @param src The value. Must not be NULL.</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment"> * @param type The value type. Must not be NULL.</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment"> * @param bufPos Points to a pointer to the current position in the encoding</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment"> *        buffer. Must not be NULL.</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment"> * @param bufEnd Points to a pointer to the end of the encoding buffer (encoding</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment"> *        always stops before *buf_end). Must not be NULL.</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment"> * @param namespaces An array of namespaces</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment"> * @param namespaceSize The size of the namespaces array</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment"> * @param serverUris An array of serverUris</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment"> * @param serverUriSize The size of the serverUris array</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment"> * @param useReversible preserve datatypes in json encoding</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment"> * @return Returns a statuscode whether encoding succeeded. */</span></div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="ua__types__encoding__json_8h.html#a2cd0d0399abba6748a61f09c5ae28da8">   47</a></span><a class="code hl_function" href="ua__types__encoding__json_8h.html#a2cd0d0399abba6748a61f09c5ae28da8">UA_encodeJsonInternal</a>(<span class="keyword">const</span> <span class="keywordtype">void</span> *src, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type, uint8_t **bufPos,</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>                      <span class="keyword">const</span> uint8_t **bufEnd, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__String.html">UA_String</a> *namespaces,</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                      <span class="keywordtype">size_t</span> namespaceSize, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__String.html">UA_String</a> *serverUris,</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                      <span class="keywordtype">size_t</span> serverUriSize,</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                      <a class="code hl_variable" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> useReversible);</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment"></span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">/** Interal Definitions</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment"> * For future by the PubSub encoding */</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="ua__types__encoding__json_8h.html#a19d18a4ce4ec31461795214f75edc1ee">   57</a></span><span class="preprocessor">#define UA_JSON_ENCODING_MAX_RECURSION 100</span></div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="structCtxJson.html">   58</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="structCtxJson.html#a613c9e186a5f2b1f4414f3dc8c1bdd29">   59</a></span>    uint8_t *<a class="code hl_variable" href="structCtxJson.html#a613c9e186a5f2b1f4414f3dc8c1bdd29">pos</a>;</div>
@@ -137,7 +164,8 @@ $(function() {
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="ua__types__encoding__json_8h.html#a605cc6c73cc81f18f9250d96fae9b4d9">   84</a></span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="code hl_function" href="ua__types__encoding__json_8h.html#a605cc6c73cc81f18f9250d96fae9b4d9">writeJsonKey</a>(<a class="code hl_struct" href="structCtxJson.html">CtxJson</a> *ctx, <span class="keyword">const</span> <span class="keywordtype">char</span>* key);</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="ua__types__encoding__json_8h.html#afb032d1cd39139c8f1d260cd2101214a">   85</a></span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="code hl_function" href="ua__types__encoding__json_8h.html#afb032d1cd39139c8f1d260cd2101214a">writeJsonCommaIfNeeded</a>(<a class="code hl_struct" href="structCtxJson.html">CtxJson</a> *ctx);</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno"><a class="line" href="ua__types__encoding__json_8h.html#a3eebb6cd1e547fc13cd078214c81e245">   86</a></span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> <a class="code hl_function" href="ua__types__encoding__json_8h.html#a3eebb6cd1e547fc13cd078214c81e245">writeJsonNull</a>(<a class="code hl_struct" href="structCtxJson.html">CtxJson</a> *ctx);</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment"></span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment">/** The encoding length is returned in ctx-&gt;pos */</span></div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="keyword">static</span> <a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>calcJsonObjStart(<a class="code hl_struct" href="structCtxJson.html">CtxJson</a> *ctx) {</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <a class="code hl_define" href="architecture__definitions_8h.html#a134e6f8e1aa5c8625e22719513e10f1a">UA_assert</a>(ctx-&gt;<a class="code hl_variable" href="structCtxJson.html#abaa9498fe86ff7140d023eb9550db16d">calcOnly</a>);</div>
@@ -199,7 +227,11 @@ $(function() {
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno"><a class="line" href="ua__types__encoding__json_8h.html#aec806a7f706e089220742e8d4e09d138">  147</a></span><span class="keyword">typedef</span> <a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>(*<a class="code hl_typedef" href="ua__types__encoding__json_8h.html#aec806a7f706e089220742e8d4e09d138">decodeJsonSignature</a>)(<span class="keywordtype">void</span> *dst, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type,</div>
 <div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>                       <a class="code hl_struct" href="structCtxJson.html">CtxJson</a> *ctx, <a class="code hl_struct" href="structParseCtx.html">ParseCtx</a> *parseCtx);</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><span class="comment"></span> </div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span><span class="comment">/** Map for decoding a Json Object. An array of this is passed to the</span></div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span><span class="comment"> * decodeFields function. If the key &quot;fieldName&quot; is found in the json object</span></div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="comment"> * (mark as found and) decode the value with the &quot;function&quot; and write result</span></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="comment"> * into &quot;fieldPointer&quot; (destination). */</span></div>
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno"><a class="line" href="structDecodeEntry.html">  155</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
 <div class="line"><a id="l00156" name="l00156"></a><span class="lineno"><a class="line" href="structDecodeEntry.html#a4b6333b64ec7b76214c7149240797449">  156</a></span>    <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code hl_variable" href="structDecodeEntry.html#a4b6333b64ec7b76214c7149240797449">fieldName</a>;</div>
 <div class="line"><a id="l00157" name="l00157"></a><span class="lineno"><a class="line" href="structDecodeEntry.html#a40bd5e36a073dcac9b486832f71c6117">  157</a></span>    <span class="keywordtype">void</span> *<a class="code hl_variable" href="structDecodeEntry.html#a40bd5e36a073dcac9b486832f71c6117">fieldPointer</a>;</div>
@@ -213,7 +245,8 @@ $(function() {
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno"><a class="line" href="ua__types__encoding__json_8h.html#af4432a71916dc6cfabb8478754c34349">  166</a></span><a class="code hl_function" href="ua__types__encoding__json_8h.html#af4432a71916dc6cfabb8478754c34349">decodeFields</a>(<a class="code hl_struct" href="structCtxJson.html">CtxJson</a> *ctx, <a class="code hl_struct" href="structParseCtx.html">ParseCtx</a> *parseCtx,</div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>             <a class="code hl_struct" href="structDecodeEntry.html">DecodeEntry</a> *entries, <span class="keywordtype">size_t</span> entryCount);</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span><span class="comment"></span> </div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="comment">/** Expose the jump tables and some methods for PubSub JSON decoding */</span></div>
 <div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="keyword">extern</span> <span class="keyword">const</span> <a class="code hl_typedef" href="ua__types__encoding__json_8h.html#a4925586299d56808579b9a643c683154">encodeJsonSignature</a> <a class="code hl_variable" href="ua__types__encoding__json_8h.html#a1c55c6abdba4aff1a453dca5f7a57a10">encodeJsonJumpTable</a>[<a class="code hl_define" href="types_8h.html#a2ce8ca747ea530a1f413d9cfd14eb2c6">UA_DATATYPEKINDS</a>];</div>
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="keyword">extern</span> <span class="keyword">const</span> <a class="code hl_typedef" href="ua__types__encoding__json_8h.html#aec806a7f706e089220742e8d4e09d138">decodeJsonSignature</a> <a class="code hl_variable" href="ua__types__encoding__json_8h.html#a105e012903d8dc70704b81ee34f2d9b3">decodeJsonJumpTable</a>[<a class="code hl_define" href="types_8h.html#a2ce8ca747ea530a1f413d9cfd14eb2c6">UA_DATATYPEKINDS</a>];</div>
 <div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>

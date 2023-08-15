@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.6.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.7.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -91,12 +91,14 @@ Inheritance diagram for opcua::UserTokenPolicy:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a65300d84bc19fa386a105927368d24d3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1UserTokenPolicy.html#a65300d84bc19fa386a105927368d24d3">UserTokenPolicy</a> (std::string_view policyId, <a class="el" href="namespaceopcua.html#a60d6286ecbbf42a472d98907c515c409">UserTokenType</a> tokenType, std::string_view issuedTokenType={}, std::string_view issuerEndpointUrl={}, std::string_view securityPolicyUri={})</td></tr>
+<tr class="separator:a65300d84bc19fa386a105927368d24d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac27acb7e2e6bb70c83d395eb31d0de01"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classopcua_1_1String.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1UserTokenPolicy.html#ac27acb7e2e6bb70c83d395eb31d0de01">getPolicyId</a> () const noexcept</td></tr>
 <tr class="separator:ac27acb7e2e6bb70c83d395eb31d0de01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae71ce11278490a67d4bf4117c54de370"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1String.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1UserTokenPolicy.html#ae71ce11278490a67d4bf4117c54de370">getPolicyId</a> () noexcept</td></tr>
 <tr class="separator:ae71ce11278490a67d4bf4117c54de370"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa304d40a6c7bf0f2302c1547846f5147"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/types__generated_8h.html#a7aa47af8bcfd290335f290d458ed8d2c">UA_UserTokenType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1UserTokenPolicy.html#aa304d40a6c7bf0f2302c1547846f5147">getTokenType</a> () const noexcept</td></tr>
-<tr class="separator:aa304d40a6c7bf0f2302c1547846f5147"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4255794ec392a7de4973e01ef6fb20bf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceopcua.html#a60d6286ecbbf42a472d98907c515c409">UserTokenType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1UserTokenPolicy.html#a4255794ec392a7de4973e01ef6fb20bf">getTokenType</a> () const noexcept</td></tr>
+<tr class="separator:a4255794ec392a7de4973e01ef6fb20bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4486ce05a5556c91a1df12b21a1a769b"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classopcua_1_1String.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1UserTokenPolicy.html#a4486ce05a5556c91a1df12b21a1a769b">getIssuedTokenType</a> () const noexcept</td></tr>
 <tr class="separator:a4486ce05a5556c91a1df12b21a1a769b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3dcc1b5626117fd65d6e87f6136311f4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1String.html">String</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1UserTokenPolicy.html#a3dcc1b5626117fd65d6e87f6136311f4">getIssuedTokenType</a> () noexcept</td></tr>
@@ -163,16 +165,62 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:ac183e283c4619b5e6e84d80706034224 inherit pro_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#ac183e283c4619b5e6e84d80706034224">copy</a> (const <a class="elRef" target="_blank" href="open62541/structUA__UserTokenPolicy.html">UA_UserTokenPolicy</a> &amp;data)</td></tr>
 <tr class="separator:ac183e283c4619b5e6e84d80706034224 inherit pro_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_static_methods_classopcua_1_1TypeWrapper"><td colspan="2" onclick="javascript:toggleInherit('pro_static_methods_classopcua_1_1TypeWrapper')"><img src="closed.png" alt="-"/>&#160;Static Protected Member Functions inherited from <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_UserTokenPolicy, UA_TYPES_USERTOKENPOLICY &gt;</a></td></tr>
-<tr class="memitem:a570e5661b87bdc4abc4fa96fca9dd493 inherit pro_static_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">static const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a570e5661b87bdc4abc4fa96fca9dd493">getDataType</a> ()</td></tr>
-<tr class="separator:a570e5661b87bdc4abc4fa96fca9dd493 inherit pro_static_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7794f5381651258794f075fdaf7bbcff inherit pro_static_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a7794f5381651258794f075fdaf7bbcff">checkMemSize</a> ()</td></tr>
 <tr class="separator:a7794f5381651258794f075fdaf7bbcff inherit pro_static_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="elRef" target="_blank" href="open62541/structUA__UserTokenPolicy.html">UA_UserTokenPolicy</a> wrapper class. </p>
+<dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/Core/Part4/v105/docs/7.42">https://reference.opcfoundation.org/Core/Part4/v105/docs/7.42</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00078">78</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00094">94</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a65300d84bc19fa386a105927368d24d3" name="a65300d84bc19fa386a105927368d24d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65300d84bc19fa386a105927368d24d3">&#9670;&#160;</a></span>UserTokenPolicy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">opcua::UserTokenPolicy::UserTokenPolicy </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>policyId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#a60d6286ecbbf42a472d98907c515c409">UserTokenType</a>&#160;</td>
+          <td class="paramname"><em>tokenType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>issuedTokenType</em> = <code>{}</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>issuerEndpointUrl</em> = <code>{}</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>securityPolicyUri</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="ac27acb7e2e6bb70c83d395eb31d0de01" name="ac27acb7e2e6bb70c83d395eb31d0de01"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac27acb7e2e6bb70c83d395eb31d0de01">&#9670;&#160;</a></span>getPolicyId() <span class="overload">[1/2]</span></h2>
 
@@ -196,7 +244,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00082">82</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00106">106</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -223,12 +271,12 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00082">82</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00106">106</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
-<a id="aa304d40a6c7bf0f2302c1547846f5147" name="aa304d40a6c7bf0f2302c1547846f5147"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa304d40a6c7bf0f2302c1547846f5147">&#9670;&#160;</a></span>getTokenType()</h2>
+<a id="a4255794ec392a7de4973e01ef6fb20bf" name="a4255794ec392a7de4973e01ef6fb20bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4255794ec392a7de4973e01ef6fb20bf">&#9670;&#160;</a></span>getTokenType()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -237,7 +285,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="elRef" target="_blank" href="open62541/types__generated_8h.html#a7aa47af8bcfd290335f290d458ed8d2c">UA_UserTokenType</a> opcua::UserTokenPolicy::getTokenType </td>
+          <td class="memname"><a class="el" href="namespaceopcua.html#a60d6286ecbbf42a472d98907c515c409">UserTokenType</a> opcua::UserTokenPolicy::getTokenType </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -250,7 +298,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00083">83</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00107">107</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -277,7 +325,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00084">84</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00108">108</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -304,7 +352,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00084">84</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00108">108</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -331,7 +379,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00085">85</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00109">109</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -358,7 +406,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00085">85</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00109">109</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -385,7 +433,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00086">86</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00110">110</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -412,7 +460,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00086">86</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00110">110</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>

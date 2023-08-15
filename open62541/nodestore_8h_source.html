@@ -78,15 +78,31 @@ $(function() {
   <div class="headertitle"><div class="title">nodestore.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="nodestore_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<a href="nodestore_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/** This Source Code Form is subject to the terms of the Mozilla Public</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * License, v. 2.0. If a copy of the MPL was not distributed with this</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * file, You can obtain one at http://mozilla.org/MPL/2.0/.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> *    Copyright 2017, 2021 (c) Fraunhofer IOSB (Author: Julius Pfrommer)</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> *    Copyright 2017 (c) Julian Grothoff</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"> *    Copyright 2017 (c) Stefan Profanter, fortiss GmbH</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#ifndef UA_SERVER_NODES_H_</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#define UA_SERVER_NODES_H_</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"></span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">/** !!! Warning !!!</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"> * If you are not developing a nodestore plugin, then you should not work with</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"> * the definitions from this file directly. The underlying node structures are</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"> * not meant to be used directly by end users. Please use the public server API</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"> * / OPC UA services to interact with the information model. */</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &lt;<a class="code" href="util_8h.html">open62541/util.h</a>&gt;</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &quot;<a class="code" href="aa__tree_8h.html">aa_tree.h</a>&quot;</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><a class="code hl_define" href="config_8h.html#aa397bffde7d792f38dcbb8e329486f9c">_UA_BEGIN_DECLS</a></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"></span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">/** Forward declaration */</span></div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#ifdef UA_ENABLE_SUBSCRIPTIONS</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keyword">struct </span><a class="code hl_struct" href="structUA__MonitoredItem.html">UA_MonitoredItem</a>;</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="nodestore_8h.html#a5169eb7ba94b7fc97e23860f4b5a1064">   28</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="structUA__MonitoredItem.html">UA_MonitoredItem</a> <a class="code hl_struct" href="structUA__MonitoredItem.html">UA_MonitoredItem</a>;</div>
@@ -185,7 +201,8 @@ $(function() {
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno"><a class="line" href="nodestore_8h.html#a17bb5c837bd136600b340ee283eed3e1">  121</a></span><span class="preprocessor">#define UA_REFERENCETYPEINDEX_HASNOTIFIER 15</span></div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno"><a class="line" href="nodestore_8h.html#a363d16f51b3f7e7ced097055c5ad1bc7">  122</a></span><span class="preprocessor">#define UA_REFERENCETYPEINDEX_HASORDEREDCOMPONENT 16</span></div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="nodestore_8h.html#a0a2bd3af0b7fe1d445528499f6633130">  123</a></span><span class="preprocessor">#define UA_REFERENCETYPEINDEX_HASINTERFACE 17</span></div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="comment"></span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="comment">/** The maximum number of ReferrenceTypes. Must be a multiple of 32. */</span></div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno"><a class="line" href="nodestore_8h.html#a5679526b66675747bf35e4ea1a0cf6a1">  126</a></span><span class="preprocessor">#define UA_REFERENCETYPESET_MAX 128</span></div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno"><a class="line" href="structUA__ReferenceTypeSet.html#a769f044f977ff3a4ed9981c823324397">  127</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{ <a class="code hl_typedef" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> bits[<a class="code hl_define" href="nodestore_8h.html#a5679526b66675747bf35e4ea1a0cf6a1">UA_REFERENCETYPESET_MAX</a> / 32]; } <a class="code hl_struct" href="structUA__ReferenceTypeSet.html">UA_ReferenceTypeSet</a>;</div>
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
@@ -224,26 +241,33 @@ $(function() {
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>}</div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span><span class="comment"></span> </div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="comment">/** Forward declaration. All node structures begin with the NodeHead. */</span></div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span><span class="keyword">struct </span><a class="code hl_struct" href="structUA__NodeHead.html">UA_NodeHead</a>;</div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno"><a class="line" href="nodestore_8h.html#aa1d4134b378a3b3dc61b14cc2bcbd595">  167</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="structUA__NodeHead.html">UA_NodeHead</a> <a class="code hl_struct" href="structUA__NodeHead.html">UA_NodeHead</a>;</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span> </div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span><span class="comment"></span> </div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="comment">/** Tagged Pointer structure. */</span></div>
 <div class="line"><a id="l00170" name="l00170"></a><span class="lineno"><a class="line" href="unionUA__NodePointer.html">  170</a></span><span class="keyword">typedef</span> <span class="keyword">union </span>{</div>
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno"><a class="line" href="unionUA__NodePointer.html#afdc63015306bc338ba8927e6459d094a">  171</a></span>    uintptr_t <a class="code hl_variable" href="unionUA__NodePointer.html#afdc63015306bc338ba8927e6459d094a">immediate</a>;                 <span class="comment">/* 00: Small numerical NodeId */</span></div>
 <div class="line"><a id="l00172" name="l00172"></a><span class="lineno"><a class="line" href="unionUA__NodePointer.html#a30ad69ea5640290560f8aaa8aef13b91">  172</a></span>    <span class="keyword">const</span> <a class="code hl_struct" href="structUA__NodeId.html">UA_NodeId</a> *<a class="code hl_variable" href="unionUA__NodePointer.html#a30ad69ea5640290560f8aaa8aef13b91">id</a>;                 <span class="comment">/* 01: Pointer to NodeId */</span></div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno"><a class="line" href="unionUA__NodePointer.html#a09bbf1378d5ad0f49a6700150bdf8dfa">  173</a></span>    <span class="keyword">const</span> <a class="code hl_struct" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> *<a class="code hl_variable" href="unionUA__NodePointer.html#a09bbf1378d5ad0f49a6700150bdf8dfa">expandedId</a>; <span class="comment">/* 10: Pointer to ExternalNodeId */</span></div>
 <div class="line"><a id="l00174" name="l00174"></a><span class="lineno"><a class="line" href="unionUA__NodePointer.html#ad42423747f4204a3b349decae34de5f4">  174</a></span>    <span class="keyword">const</span> <a class="code hl_struct" href="structUA__NodeHead.html">UA_NodeHead</a> *<a class="code hl_variable" href="unionUA__NodePointer.html#ad42423747f4204a3b349decae34de5f4">node</a>;             <span class="comment">/* 11: Pointer to a node */</span></div>
 <div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>} <a class="code hl_union" href="unionUA__NodePointer.html">UA_NodePointer</a>;</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span><span class="comment"></span> </div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="comment">/** Sets the pointer to an immediate NodeId &quot;ns=0;i=0&quot; similar to a freshly</span></div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span><span class="comment"> * initialized UA_NodeId */</span></div>
 <div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><span class="keyword">static</span> <span class="keywordtype">void</span></div>
 <div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>UA_NodePointer_init(<a class="code hl_union" href="unionUA__NodePointer.html">UA_NodePointer</a> *np) { np-&gt;<a class="code hl_variable" href="unionUA__NodePointer.html#afdc63015306bc338ba8927e6459d094a">immediate</a> = 0; }</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="comment"></span> </div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><span class="comment">/** NodeId and ExpandedNodeId targets are freed */</span></div>
 <div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span><span class="keywordtype">void</span></div>
 <div class="line"><a id="l00184" name="l00184"></a><span class="lineno"><a class="line" href="nodestore_8h.html#a92ab83b3815be5f770615ce210b5c778">  184</a></span><a class="code hl_function" href="nodestore_8h.html#a92ab83b3815be5f770615ce210b5c778">UA_NodePointer_clear</a>(<a class="code hl_union" href="unionUA__NodePointer.html">UA_NodePointer</a> *np);</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> </div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><span class="comment"></span> </div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span><span class="comment">/** Makes a deep copy */</span></div>
 <div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00188" name="l00188"></a><span class="lineno"><a class="line" href="nodestore_8h.html#a6178203646671a337e35c86ed69fb738">  188</a></span><a class="code hl_function" href="nodestore_8h.html#a6178203646671a337e35c86ed69fb738">UA_NodePointer_copy</a>(<a class="code hl_union" href="unionUA__NodePointer.html">UA_NodePointer</a> in, <a class="code hl_union" href="unionUA__NodePointer.html">UA_NodePointer</a> *out);</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="comment"></span> </div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="comment">/** Test if an ExpandedNodeId or a local NodeId */</span></div>
 <div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span><a class="code hl_variable" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a></div>
 <div class="line"><a id="l00192" name="l00192"></a><span class="lineno"><a class="line" href="nodestore_8h.html#ad653e04273f264bd20131e7e984d8d32">  192</a></span><a class="code hl_function" href="nodestore_8h.html#ad653e04273f264bd20131e7e984d8d32">UA_NodePointer_isLocal</a>(<a class="code hl_union" href="unionUA__NodePointer.html">UA_NodePointer</a> np);</div>
 <div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span> </div>
@@ -254,16 +278,24 @@ $(function() {
 <div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>UA_NodePointer_equal(<a class="code hl_union" href="unionUA__NodePointer.html">UA_NodePointer</a> p1, <a class="code hl_union" href="unionUA__NodePointer.html">UA_NodePointer</a> p2) {</div>
 <div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    <span class="keywordflow">return</span> (<a class="code hl_function" href="nodestore_8h.html#a047b08667b596b359fe7781aee2a58d7">UA_NodePointer_order</a>(p1, p2) == <a class="code hl_enumvalue" href="common_8h.html#adeb58a592483258f220c845c47622b15ac1afa08a35eb10505298c8b33e2afae3">UA_ORDER_EQ</a>);</div>
 <div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>}</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span><span class="comment"></span> </div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span><span class="comment">/** Cannot fail. The resulting NodePointer can point to the memory from the</span></div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span><span class="comment"> * NodeId. Make a deep copy if required. */</span></div>
 <div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><a class="code hl_union" href="unionUA__NodePointer.html">UA_NodePointer</a></div>
 <div class="line"><a id="l00205" name="l00205"></a><span class="lineno"><a class="line" href="nodestore_8h.html#a171b3fc2bb32bff3f8ec328c8f3d22d0">  205</a></span><a class="code hl_function" href="nodestore_8h.html#a171b3fc2bb32bff3f8ec328c8f3d22d0">UA_NodePointer_fromNodeId</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__NodeId.html">UA_NodeId</a> *<span class="keywordtype">id</span>);</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span> </div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span><span class="comment"></span> </div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span><span class="comment">/** Cannot fail. The resulting NodePointer can point to the memory from the</span></div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span><span class="comment"> * ExpandedNodeId. Make a deep copy if required. */</span></div>
 <div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><a class="code hl_union" href="unionUA__NodePointer.html">UA_NodePointer</a></div>
 <div class="line"><a id="l00210" name="l00210"></a><span class="lineno"><a class="line" href="nodestore_8h.html#a46ffc2e6816f310aa42f135624813825">  210</a></span><a class="code hl_function" href="nodestore_8h.html#a46ffc2e6816f310aa42f135624813825">UA_NodePointer_fromExpandedNodeId</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> *<span class="keywordtype">id</span>);</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span> </div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span><span class="comment"></span> </div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span><span class="comment">/** Can point to the memory from the NodePointer */</span></div>
 <div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span><a class="code hl_struct" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a></div>
 <div class="line"><a id="l00214" name="l00214"></a><span class="lineno"><a class="line" href="nodestore_8h.html#abb97a4947e7bf1bd1e5e764c9d46831f">  214</a></span><a class="code hl_function" href="nodestore_8h.html#abb97a4947e7bf1bd1e5e764c9d46831f">UA_NodePointer_toExpandedNodeId</a>(<a class="code hl_union" href="unionUA__NodePointer.html">UA_NodePointer</a> np);</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span> </div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span><span class="comment"></span> </div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span><span class="comment">/** Can point to the memory from the NodePointer. Discards the ServerIndex and</span></div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span><span class="comment"> * NamespaceUri of a potential ExpandedNodeId inside the NodePointer. Test</span></div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span><span class="comment"> * before if the NodePointer is local. */</span></div>
 <div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span><a class="code hl_struct" href="structUA__NodeId.html">UA_NodeId</a></div>
 <div class="line"><a id="l00220" name="l00220"></a><span class="lineno"><a class="line" href="nodestore_8h.html#a205e98507851ff4bfef0f3878de9cff1">  220</a></span><a class="code hl_function" href="nodestore_8h.html#a205e98507851ff4bfef0f3878de9cff1">UA_NodePointer_toNodeId</a>(<a class="code hl_union" href="unionUA__NodePointer.html">UA_NodePointer</a> np);</div>
 <div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span> </div>
@@ -281,7 +313,13 @@ $(function() {
 <div class="line"><a id="l00233" name="l00233"></a><span class="lineno"><a class="line" href="structUA__ReferenceTargetTreeElem.html#a434d28018acb711483a4e8efb95d0e19">  233</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structaa__entry.html">aa_entry</a> idTreeEntry; <span class="comment">/* Binary-Tree for fast lookup */</span></div>
 <div class="line"><a id="l00234" name="l00234"></a><span class="lineno"><a class="line" href="structUA__ReferenceTargetTreeElem.html#a2df85f5ff5cfb19427e8fba113f8cecd">  234</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structaa__entry.html">aa_entry</a> nameTreeEntry;</div>
 <div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>} <a class="code hl_struct" href="structUA__ReferenceTargetTreeElem.html">UA_ReferenceTargetTreeElem</a>;</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span> </div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span><span class="comment"></span> </div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span><span class="comment">/** List of reference targets with the same reference type and direction. Uses</span></div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span><span class="comment"> * either an array or a tree structure. The SDK will not change the type of</span></div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span><span class="comment"> * reference target structure internally. The nodestore implementations may</span></div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span><span class="comment"> * switch internally when a node is updated.</span></div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span><span class="comment"> * The recommendation is to switch to a tree once the number of refs &gt; 8. */</span></div>
 <div class="line"><a id="l00243" name="l00243"></a><span class="lineno"><a class="line" href="structUA__NodeReferenceKind.html">  243</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
 <div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    <span class="keyword">union </span>{</div>
 <div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>        <span class="comment">/* Organize the references in an array. Uses less memory, but incurs</span></div>
@@ -300,14 +338,22 @@ $(function() {
 <div class="line"><a id="l00258" name="l00258"></a><span class="lineno"><a class="line" href="structUA__NodeReferenceKind.html#adf4e83ea7ef1f5815cb4e4bda3e347dc">  258</a></span>    <a class="code hl_typedef" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a> <a class="code hl_variable" href="structUA__NodeReferenceKind.html#adf4e83ea7ef1f5815cb4e4bda3e347dc">referenceTypeIndex</a>;</div>
 <div class="line"><a id="l00259" name="l00259"></a><span class="lineno"><a class="line" href="structUA__NodeReferenceKind.html#aa688ed9b87f047938b82cda792ed5511">  259</a></span>    <a class="code hl_variable" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> <a class="code hl_variable" href="structUA__NodeReferenceKind.html#aa688ed9b87f047938b82cda792ed5511">isInverse</a>;</div>
 <div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>} <a class="code hl_struct" href="structUA__NodeReferenceKind.html">UA_NodeReferenceKind</a>;</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span> </div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span><span class="comment"></span> </div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span><span class="comment">/** Iterate over the references. Assumes that &quot;prev&quot; points to a</span></div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span><span class="comment"> * NodeReferenceKind. If prev == NULL, the first element is returned. At the end</span></div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span><span class="comment"> * of the iteration, NULL is returned.</span></div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span><span class="comment"> * Do not continue the iteration after the rk was modified. */</span></div>
 <div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>UA_EXPORT <span class="keyword">const</span> <a class="code hl_struct" href="structUA__ReferenceTarget.html">UA_ReferenceTarget</a> *</div>
 <div class="line"><a id="l00268" name="l00268"></a><span class="lineno"><a class="line" href="nodestore_8h.html#a4474d592e542a9fde7c111ae5af99ed8">  268</a></span><a class="code hl_function" href="nodestore_8h.html#a4474d592e542a9fde7c111ae5af99ed8">UA_NodeReferenceKind_iterate</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__NodeReferenceKind.html">UA_NodeReferenceKind</a> *rk,</div>
 <div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>                             <span class="keyword">const</span> <a class="code hl_struct" href="structUA__ReferenceTarget.html">UA_ReferenceTarget</a> *prev);</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span> </div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span><span class="comment"></span> </div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span><span class="comment">/** Switch between array and tree representation. Does nothing upon error (e.g.</span></div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span><span class="comment"> * out-of-memory). */</span></div>
 <div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>UA_EXPORT <a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00274" name="l00274"></a><span class="lineno"><a class="line" href="nodestore_8h.html#a38caf7dfbe51f78b32a1c98a55afb363">  274</a></span><a class="code hl_function" href="nodestore_8h.html#a38caf7dfbe51f78b32a1c98a55afb363">UA_NodeReferenceKind_switch</a>(<a class="code hl_struct" href="structUA__NodeReferenceKind.html">UA_NodeReferenceKind</a> *rk);</div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span> </div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span><span class="comment"></span> </div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span><span class="comment">/** Every Node starts with these attributes */</span></div>
 <div class="line"><a id="l00277" name="l00277"></a><span class="lineno"><a class="line" href="structUA__NodeHead.html">  277</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structUA__NodeHead.html">UA_NodeHead</a> {</div>
 <div class="line"><a id="l00278" name="l00278"></a><span class="lineno"><a class="line" href="structUA__NodeHead.html#a4232aeaa81cf205b7e11f303a2852afa">  278</a></span>    <a class="code hl_struct" href="structUA__NodeId.html">UA_NodeId</a> <a class="code hl_variable" href="structUA__NodeHead.html#a4232aeaa81cf205b7e11f303a2852afa">nodeId</a>;</div>
 <div class="line"><a id="l00279" name="l00279"></a><span class="lineno"><a class="line" href="structUA__NodeHead.html#a10d425ee9e4ead0510f2a0b30856299f">  279</a></span>    <a class="code hl_enumeration" href="types__generated_8h.html#adf98bb5a5ac8e50eece68338a046a904">UA_NodeClass</a> <a class="code hl_variable" href="structUA__NodeHead.html#a10d425ee9e4ead0510f2a0b30856299f">nodeClass</a>;</div>
@@ -328,7 +374,9 @@ $(function() {
 <div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>};</div>
 <div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span> </div>
 <div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span> </div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span> </div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span><span class="comment"></span> </div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span><span class="comment">/** Indicates whether a variable contains data inline or whether it points to an</span></div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span><span class="comment"> * external data source */</span></div>
 <div class="line"><a id="l00300" name="l00300"></a><span class="lineno"><a class="line" href="nodestore_8h.html#afbc37051f9c25a0b6264f9cab402d60a">  300</a></span><span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
 <div class="line"><a id="l00301" name="l00301"></a><span class="lineno"><a class="line" href="nodestore_8h.html#afbc37051f9c25a0b6264f9cab402d60aaa93b93145a1b000c9f47ae1b3860a39e">  301</a></span>    <a class="code hl_enumvalue" href="nodestore_8h.html#afbc37051f9c25a0b6264f9cab402d60aaa93b93145a1b000c9f47ae1b3860a39e">UA_VALUESOURCE_DATA</a>,</div>
 <div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>    <a class="code hl_enumvalue" href="nodestore_8h.html#afbc37051f9c25a0b6264f9cab402d60aa741dd1a2a9094b0282cc9b4b53f36ed7">UA_VALUESOURCE_DATASOURCE</a></div>
@@ -665,32 +713,46 @@ $(function() {
 <div class="line"><a id="l00633" name="l00633"></a><span class="lineno"><a class="line" href="structUA__Nodestore.html#a5361dd3910e4c91904d10edc326f843b">  633</a></span>    void (*iterate)(<span class="keywordtype">void</span> *nsCtx, <a class="code hl_typedef" href="nodestore_8h.html#a182a5a3bdc9323eae2cf82fb92d1a967">UA_NodestoreVisitor</a> visitor,</div>
 <div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span>                    <span class="keywordtype">void</span> *visitorCtx);</div>
 <div class="line"><a id="l00635" name="l00635"></a><span class="lineno">  635</span>} <a class="code hl_struct" href="structUA__Nodestore.html">UA_Nodestore</a>;</div>
-<div class="line"><a id="l00636" name="l00636"></a><span class="lineno">  636</span> </div>
+<div class="line"><a id="l00636" name="l00636"></a><span class="lineno">  636</span><span class="comment"></span> </div>
+<div class="line"><a id="l00637" name="l00637"></a><span class="lineno">  637</span><span class="comment">/** Attributes must be of a matching type (VariableAttributes, ObjectAttributes,</span></div>
+<div class="line"><a id="l00638" name="l00638"></a><span class="lineno">  638</span><span class="comment"> * and so on). The attributes are copied. Note that the attributes structs do</span></div>
+<div class="line"><a id="l00639" name="l00639"></a><span class="lineno">  639</span><span class="comment"> * not contain NodeId, NodeClass and BrowseName. The NodeClass of the node needs</span></div>
+<div class="line"><a id="l00640" name="l00640"></a><span class="lineno">  640</span><span class="comment"> * to be correctly set before calling this method. UA_Node_clear is called on</span></div>
+<div class="line"><a id="l00641" name="l00641"></a><span class="lineno">  641</span><span class="comment"> * the node when an error occurs internally. */</span></div>
 <div class="line"><a id="l00642" name="l00642"></a><span class="lineno">  642</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00643" name="l00643"></a><span class="lineno"><a class="line" href="nodestore_8h.html#a2dbb0f2b0ac2aad30f326728965b67a2">  643</a></span><a class="code hl_function" href="nodestore_8h.html#a2dbb0f2b0ac2aad30f326728965b67a2">UA_Node_setAttributes</a>(<a class="code hl_union" href="unionUA__Node.html">UA_Node</a> *node, <span class="keyword">const</span> <span class="keywordtype">void</span> *attributes,</div>
 <div class="line"><a id="l00644" name="l00644"></a><span class="lineno">  644</span>                      <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *attributeType);</div>
-<div class="line"><a id="l00645" name="l00645"></a><span class="lineno">  645</span> </div>
+<div class="line"><a id="l00645" name="l00645"></a><span class="lineno">  645</span><span class="comment"></span> </div>
+<div class="line"><a id="l00646" name="l00646"></a><span class="lineno">  646</span><span class="comment">/** Reset the destination node and copy the content of the source */</span></div>
 <div class="line"><a id="l00647" name="l00647"></a><span class="lineno">  647</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00648" name="l00648"></a><span class="lineno"><a class="line" href="nodestore_8h.html#ab2054f2b6573812604025a4be24adfea">  648</a></span><a class="code hl_function" href="nodestore_8h.html#ab2054f2b6573812604025a4be24adfea">UA_Node_copy</a>(<span class="keyword">const</span> <a class="code hl_union" href="unionUA__Node.html">UA_Node</a> *src, <a class="code hl_union" href="unionUA__Node.html">UA_Node</a> *dst);</div>
-<div class="line"><a id="l00649" name="l00649"></a><span class="lineno">  649</span> </div>
+<div class="line"><a id="l00649" name="l00649"></a><span class="lineno">  649</span><span class="comment"></span> </div>
+<div class="line"><a id="l00650" name="l00650"></a><span class="lineno">  650</span><span class="comment">/** Allocate new node and copy the values from src */</span></div>
 <div class="line"><a id="l00651" name="l00651"></a><span class="lineno">  651</span>UA_EXPORT <a class="code hl_union" href="unionUA__Node.html">UA_Node</a> *</div>
 <div class="line"><a id="l00652" name="l00652"></a><span class="lineno"><a class="line" href="nodestore_8h.html#a413c223d167eee1e32ee5cfbd13d14b1">  652</a></span><a class="code hl_function" href="nodestore_8h.html#a413c223d167eee1e32ee5cfbd13d14b1">UA_Node_copy_alloc</a>(<span class="keyword">const</span> <a class="code hl_union" href="unionUA__Node.html">UA_Node</a> *src);</div>
-<div class="line"><a id="l00653" name="l00653"></a><span class="lineno">  653</span> </div>
+<div class="line"><a id="l00653" name="l00653"></a><span class="lineno">  653</span><span class="comment"></span> </div>
+<div class="line"><a id="l00654" name="l00654"></a><span class="lineno">  654</span><span class="comment">/** Add a single reference to the node */</span></div>
 <div class="line"><a id="l00655" name="l00655"></a><span class="lineno">  655</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00656" name="l00656"></a><span class="lineno"><a class="line" href="nodestore_8h.html#adfd6c50615ae5f279b0a825ec4a8f972">  656</a></span><a class="code hl_function" href="nodestore_8h.html#adfd6c50615ae5f279b0a825ec4a8f972">UA_Node_addReference</a>(<a class="code hl_union" href="unionUA__Node.html">UA_Node</a> *node, <a class="code hl_typedef" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a> refTypeIndex, <a class="code hl_variable" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> isForward,</div>
 <div class="line"><a id="l00657" name="l00657"></a><span class="lineno">  657</span>                     <span class="keyword">const</span> <a class="code hl_struct" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> *targetNodeId,</div>
 <div class="line"><a id="l00658" name="l00658"></a><span class="lineno">  658</span>                     <a class="code hl_typedef" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> targetBrowseNameHash);</div>
-<div class="line"><a id="l00659" name="l00659"></a><span class="lineno">  659</span> </div>
+<div class="line"><a id="l00659" name="l00659"></a><span class="lineno">  659</span><span class="comment"></span> </div>
+<div class="line"><a id="l00660" name="l00660"></a><span class="lineno">  660</span><span class="comment">/** Delete a single reference from the node */</span></div>
 <div class="line"><a id="l00661" name="l00661"></a><span class="lineno">  661</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00662" name="l00662"></a><span class="lineno"><a class="line" href="nodestore_8h.html#ac3ceecd533c2dcf14eade22be4ce91da">  662</a></span><a class="code hl_function" href="nodestore_8h.html#ac3ceecd533c2dcf14eade22be4ce91da">UA_Node_deleteReference</a>(<a class="code hl_union" href="unionUA__Node.html">UA_Node</a> *node, <a class="code hl_typedef" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a> refTypeIndex, <a class="code hl_variable" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> isForward,</div>
 <div class="line"><a id="l00663" name="l00663"></a><span class="lineno">  663</span>                        <span class="keyword">const</span> <a class="code hl_struct" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> *targetNodeId);</div>
-<div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span> </div>
+<div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span><span class="comment"></span> </div>
+<div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span><span class="comment">/** Deletes references from the node which are not matching any type in the given</span></div>
+<div class="line"><a id="l00666" name="l00666"></a><span class="lineno">  666</span><span class="comment"> * array. Could be used to e.g. delete all the references, except</span></div>
+<div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span><span class="comment"> * &#39;HASMODELINGRULE&#39; */</span></div>
 <div class="line"><a id="l00668" name="l00668"></a><span class="lineno">  668</span><span class="keywordtype">void</span></div>
 <div class="line"><a id="l00669" name="l00669"></a><span class="lineno"><a class="line" href="nodestore_8h.html#a3afa263ee25e3587c7b9a0edd4a2005d">  669</a></span><a class="code hl_function" href="nodestore_8h.html#a3afa263ee25e3587c7b9a0edd4a2005d">UA_Node_deleteReferencesSubset</a>(<a class="code hl_union" href="unionUA__Node.html">UA_Node</a> *node, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__ReferenceTypeSet.html">UA_ReferenceTypeSet</a> *keepSet);</div>
-<div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span> </div>
+<div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span><span class="comment"></span> </div>
+<div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span><span class="comment">/** Delete all references of the node */</span></div>
 <div class="line"><a id="l00672" name="l00672"></a><span class="lineno">  672</span><span class="keywordtype">void</span></div>
 <div class="line"><a id="l00673" name="l00673"></a><span class="lineno"><a class="line" href="nodestore_8h.html#a017eb3fd2b6dfd6b0a1ef11ea2eb36d0">  673</a></span><a class="code hl_function" href="nodestore_8h.html#a017eb3fd2b6dfd6b0a1ef11ea2eb36d0">UA_Node_deleteReferences</a>(<a class="code hl_union" href="unionUA__Node.html">UA_Node</a> *node);</div>
-<div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span> </div>
+<div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span><span class="comment"></span> </div>
+<div class="line"><a id="l00675" name="l00675"></a><span class="lineno">  675</span><span class="comment">/** Remove all malloc&#39;ed members of the node and reset */</span></div>
 <div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span><span class="keywordtype">void</span></div>
 <div class="line"><a id="l00677" name="l00677"></a><span class="lineno"><a class="line" href="nodestore_8h.html#ab29f721bb38eb8a1f210cc81a76e6168">  677</a></span><a class="code hl_function" href="nodestore_8h.html#ab29f721bb38eb8a1f210cc81a76e6168">UA_Node_clear</a>(<a class="code hl_union" href="unionUA__Node.html">UA_Node</a> *node);</div>
 <div class="line"><a id="l00678" name="l00678"></a><span class="lineno">  678</span> </div>

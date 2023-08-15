@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.6.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.7.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -92,6 +92,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a279ec11ecafb310306192eab1271aca1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd05ef8f1bdf21cc3b22e04dfec9a058"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1NumericRange.html#abd05ef8f1bdf21cc3b22e04dfec9a058">NumericRange</a> (std::vector&lt; <a class="el" href="namespaceopcua.html#a8482df382d1d7a2fe9d7c1d1e79a5bfa">NumericRangeDimension</a> &gt; dimensions)</td></tr>
 <tr class="separator:abd05ef8f1bdf21cc3b22e04dfec9a058"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab90e6e2bbabaf387d7091dae21432b6e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1NumericRange.html#ab90e6e2bbabaf387d7091dae21432b6e">NumericRange</a> (const <a class="elRef" target="_blank" href="open62541/structUA__NumericRange.html">UA_NumericRange</a> &amp;native)</td></tr>
+<tr class="separator:ab90e6e2bbabaf387d7091dae21432b6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0bb2f22cf374af21a4e2ab83c3d45295"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1NumericRange.html#a0bb2f22cf374af21a4e2ab83c3d45295">empty</a> () const noexcept</td></tr>
 <tr class="separator:a0bb2f22cf374af21a4e2ab83c3d45295"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc6dfa569ac7b6f7386e9ade72e4b30b"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="namespaceopcua.html#a8482df382d1d7a2fe9d7c1d1e79a5bfa">NumericRangeDimension</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1NumericRange.html#afc6dfa569ac7b6f7386e9ade72e4b30b">get</a> () const noexcept</td></tr>
@@ -102,11 +104,13 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Numeric range to indicate subsets of (multidimensional) arrays. </p>
 <p>They are no official data type in the OPC UA standard and are transmitted only with a string encoding, such as "1:2,0:3,5". The colon separates min/max index and the comma separates dimensions. A single value indicates a range with a single element (min==max). </p><dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/Core/Part4/v105/docs/7.27">https://reference.opcfoundation.org/Core/Part4/v105/docs/7.27</a> </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_datasource_8cpp-example.html#_a9">server_datasource.cpp</a>.</dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="Builtin_8h_source.html#l00153">153</a> of file <a class="el" href="Builtin_8h_source.html">Builtin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Builtin_8h_source.html#l00237">237</a> of file <a class="el" href="Builtin_8h_source.html">Builtin.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="afdc06f0f00986ddc660904682c4d8213" name="afdc06f0f00986ddc660904682c4d8213"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afdc06f0f00986ddc660904682c4d8213">&#9670;&#160;</a></span>NumericRange() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#afdc06f0f00986ddc660904682c4d8213">&#9670;&#160;</a></span>NumericRange() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -123,7 +127,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="a279ec11ecafb310306192eab1271aca1" name="a279ec11ecafb310306192eab1271aca1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a279ec11ecafb310306192eab1271aca1">&#9670;&#160;</a></span>NumericRange() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a279ec11ecafb310306192eab1271aca1">&#9670;&#160;</a></span>NumericRange() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -149,7 +153,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="abd05ef8f1bdf21cc3b22e04dfec9a058" name="abd05ef8f1bdf21cc3b22e04dfec9a058"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abd05ef8f1bdf21cc3b22e04dfec9a058">&#9670;&#160;</a></span>NumericRange() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abd05ef8f1bdf21cc3b22e04dfec9a058">&#9670;&#160;</a></span>NumericRange() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -162,6 +166,32 @@ Public Member Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">std::vector&lt; <a class="el" href="namespaceopcua.html#a8482df382d1d7a2fe9d7c1d1e79a5bfa">NumericRangeDimension</a> &gt;&#160;</td>
           <td class="paramname"><em>dimensions</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab90e6e2bbabaf387d7091dae21432b6e" name="ab90e6e2bbabaf387d7091dae21432b6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab90e6e2bbabaf387d7091dae21432b6e">&#9670;&#160;</a></span>NumericRange() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">opcua::NumericRange::NumericRange </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="elRef" target="_blank" href="open62541/structUA__NumericRange.html">UA_NumericRange</a> &amp;&#160;</td>
+          <td class="paramname"><em>native</em></td><td>)</td>
           <td></td>
         </tr>
       </table>

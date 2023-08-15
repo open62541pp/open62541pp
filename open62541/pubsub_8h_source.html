@@ -78,7 +78,13 @@ $(function() {
   <div class="headertitle"><div class="title">pubsub.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="pubsub_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<a href="pubsub_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/** This Source Code Form is subject to the terms of the Mozilla Public</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * License, v. 2.0. If a copy of the MPL was not distributed with this</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * file, You can obtain one at http://mozilla.org/MPL/2.0/.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> * Copyright (c) 2017-2018 Fraunhofer IOSB (Author: Andreas Ebner)</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#ifndef UA_PLUGIN_PUBSUB_H_</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#define UA_PLUGIN_PUBSUB_H_</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
@@ -110,7 +116,8 @@ $(function() {
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>(*<a class="code hl_typedef" href="pubsub_8h.html#a80b86225bf43f9a4dd7404060c502d5f">UA_PubSubReceiveCallback</a>)(<a class="code hl_struct" href="structUA__PubSubChannel.html">UA_PubSubChannel</a> *channel,</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>                            <span class="keywordtype">void</span> *callbackContext,</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>                            <span class="keyword">const</span> <a class="code hl_struct" href="structUA__String.html">UA_ByteString</a> *buffer);</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment"></span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">/** Interface structure between network plugin and internal implementation */</span></div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="structUA__PubSubChannel.html">   41</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structUA__PubSubChannel.html">UA_PubSubChannel</a> {</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="structUA__PubSubChannel.html#a08b66ef2e4a44e2ea33af8f7e90d9df6">   42</a></span>    <a class="code hl_typedef" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> <a class="code hl_variable" href="structUA__PubSubChannel.html#a08b66ef2e4a44e2ea33af8f7e90d9df6">publisherId</a>; <span class="comment">/* unique identifier */</span></div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="structUA__PubSubChannel.html#aede7ee4ae432e7f638620e2dad6b3209">   43</a></span>    <a class="code hl_enumeration" href="pubsub_8h.html#acc235956ae4a42acec899f33129b43c3">UA_PubSubChannelState</a> <a class="code hl_variable" href="structUA__PubSubChannel.html#aede7ee4ae432e7f638620e2dad6b3209">state</a>;</div>

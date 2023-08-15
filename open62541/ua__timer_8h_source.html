@@ -78,7 +78,14 @@ $(function() {
   <div class="headertitle"><div class="title">ua_timer.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="ua__timer_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<a href="ua__timer_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/** This Source Code Form is subject to the terms of the Mozilla Public</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * License, v. 2.0. If a copy of the MPL was not distributed with this</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * file, You can obtain one at http://mozilla.org/MPL/2.0/. </span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> *    Copyright 2017, 2018, 2021 (c) Fraunhofer IOSB (Author: Julius Pfrommer)</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> *    Copyright 2017 (c) Stefan Profanter, fortiss GmbH</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#ifndef UA_TIMER_H_</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#define UA_TIMER_H_</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
@@ -86,7 +93,16 @@ $(function() {
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="aa__tree_8h.html">aa_tree.h</a>&quot;</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><a class="code hl_define" href="config_8h.html#aa397bffde7d792f38dcbb8e329486f9c">_UA_BEGIN_DECLS</a></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"></span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">/** The timer is protected by its own mutex. The mutex is released before calling</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"> * into the callbacks. So the timer can be modified from the callbacks it is</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"> * executing. Also, the timer mutex can never lead to locking. Because the timer</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"> * mutex will be left without acquiring another mutex.</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"> * Obviously, the timer must not be deleted from within one of its</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"> * callbacks. */</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"></span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">/** Callback where the application is either a client or a server */</span></div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="ua__timer_8h.html#a13808ef6ce16119f0f1be001ee23ecac">   26</a></span><span class="keyword">typedef</span> void (*<a class="code hl_variable" href="ua__timer_8h.html#a13808ef6ce16119f0f1be001ee23ecac">UA_ApplicationCallback</a>)(<span class="keywordtype">void</span> *application, <span class="keywordtype">void</span> *data);</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="structUA__TimerEntry.html">   28</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="structUA__TimerEntry.html">UA_TimerEntry</a> {</div>
@@ -123,7 +139,10 @@ $(function() {
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="ua__timer_8h.html#a37e97709d9f23b3ebfc349b2fe2830b8">   59</a></span><a class="code hl_function" href="ua__timer_8h.html#a37e97709d9f23b3ebfc349b2fe2830b8">UA_Timer_addTimedCallback</a>(<a class="code hl_struct" href="structUA__Timer.html">UA_Timer</a> *t, <a class="code hl_variable" href="ua__timer_8h.html#a13808ef6ce16119f0f1be001ee23ecac">UA_ApplicationCallback</a> callback,</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                          <span class="keywordtype">void</span> *application, <span class="keywordtype">void</span> *data, <a class="code hl_typedef" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> date,</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                          <a class="code hl_typedef" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a> *callbackId);</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment"></span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">/** Add a pre-allocated and pre-filled UA_TimerEntry. This cannot fail. It is</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment"> * used, for example, for delayed memory reclamation where the data structure</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment"> * begins with a UA_TimerEntry. */</span></div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="keywordtype">void</span></div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="ua__timer_8h.html#af8f0d18cef3e1c29dfc711dc6ff97d68">   67</a></span><a class="code hl_function" href="ua__timer_8h.html#af8f0d18cef3e1c29dfc711dc6ff97d68">UA_Timer_addTimerEntry</a>(<a class="code hl_struct" href="structUA__Timer.html">UA_Timer</a> *t, <a class="code hl_struct" href="structUA__TimerEntry.html">UA_TimerEntry</a> *te, <a class="code hl_typedef" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a> *callbackId);</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
@@ -140,7 +159,11 @@ $(function() {
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="keywordtype">void</span></div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="ua__timer_8h.html#ae504cae780f667d314c5ab3fc70adc06">   81</a></span><a class="code hl_function" href="ua__timer_8h.html#ae504cae780f667d314c5ab3fc70adc06">UA_Timer_removeCallback</a>(<a class="code hl_struct" href="structUA__Timer.html">UA_Timer</a> *t, <a class="code hl_typedef" href="types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a> callbackId);</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment"></span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment">/** Process (dispatch) the repeated callbacks that have timed out. Returns the</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment"> * timestamp of the next scheduled repeated callback. Not thread-safe.</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment"> * Application is a pointer to the client / server environment for the callback.</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment"> * Dispatched is set to true when at least one callback was run / dispatched. */</span></div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="ua__timer_8h.html#aa6d034e43d114a2622e41e922b8b7af6">   87</a></span><span class="keyword">typedef</span> void</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>(*<a class="code hl_typedef" href="ua__timer_8h.html#aa6d034e43d114a2622e41e922b8b7af6">UA_TimerExecutionCallback</a>)(<span class="keywordtype">void</span> *executionApplication, <a class="code hl_variable" href="ua__timer_8h.html#a13808ef6ce16119f0f1be001ee23ecac">UA_ApplicationCallback</a> cb,</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                             <span class="keywordtype">void</span> *callbackApplication, <span class="keywordtype">void</span> *data);</div>

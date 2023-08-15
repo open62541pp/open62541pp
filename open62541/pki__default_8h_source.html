@@ -78,19 +78,28 @@ $(function() {
   <div class="headertitle"><div class="title">pki_default.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="pki__default_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<a href="pki__default_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/** This work is licensed under a Creative Commons CCZero 1.0 Universal License.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * See http://creativecommons.org/publicdomain/zero/1.0/ for more information.</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> *    Copyright 2018 (c) Mark Giraud, Fraunhofer IOSB</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> *    Copyright 2019 (c) Kalycito Infotech Private Limited</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#ifndef UA_PKI_CERTIFICATE_H_</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#define UA_PKI_CERTIFICATE_H_</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;<a class="code" href="pki_8h.html">open62541/plugin/pki.h</a>&gt;</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><a class="code hl_define" href="config_8h.html#aa397bffde7d792f38dcbb8e329486f9c">_UA_BEGIN_DECLS</a></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"></span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">/** Default implementation that accepts all certificates */</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>UA_EXPORT <span class="keywordtype">void</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="pki__default_8h.html#ad0f7c5ae40a0fa3067d0ffaef1b3bf49">   17</a></span><a class="code hl_function" href="pki__default_8h.html#ad0f7c5ae40a0fa3067d0ffaef1b3bf49">UA_CertificateVerification_AcceptAll</a>(<a class="code hl_struct" href="structUA__CertificateVerification.html">UA_CertificateVerification</a> *cv);</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#ifdef UA_ENABLE_ENCRYPTION</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"></span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">/** Accept certificates based on a trust-list and a revocation-list. Based on</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"> * mbedTLS. */</span></div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>UA_EXPORT <a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="pki__default_8h.html#a278a1f5809da17bfb28166d5f5231b5a">   24</a></span><a class="code hl_function" href="pki__default_8h.html#a278a1f5809da17bfb28166d5f5231b5a">UA_CertificateVerification_Trustlist</a>(<a class="code hl_struct" href="structUA__CertificateVerification.html">UA_CertificateVerification</a> *cv,</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>                                     <span class="keyword">const</span> <a class="code hl_struct" href="structUA__String.html">UA_ByteString</a> *certificateTrustList,</div>

@@ -78,7 +78,12 @@ $(function() {
   <div class="headertitle"><div class="title">architecture_functions.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="architecture__functions_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<a href="architecture__functions_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/** This work is licensed under a Creative Commons CCZero 1.0 Universal License.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * See http://creativecommons.org/publicdomain/zero/1.0/ for more information.</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> *    Copyright 2018 (c) Jose Cabral, fortiss GmbH</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment">/*</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment"> * This header has all the functions that are architecture dependent. The</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"> * declaration is behind an ifndef since they can be previously defined in the</span></div>
@@ -91,11 +96,13 @@ $(function() {
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;<a class="code" href="config_8h.html">open62541/config.h</a>&gt;</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><a class="code hl_define" href="config_8h.html#aa397bffde7d792f38dcbb8e329486f9c">_UA_BEGIN_DECLS</a></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"></span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">/** Sleep function */</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#ifndef UA_sleep_ms</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="architecture__functions_8h.html#ab9cb9eec4e0303729f9bb8c8aff0f9e3">   22</a></span><span class="keywordtype">int</span> <a class="code hl_define" href="ua__freeRTOS_8h.html#a68ab0e0d384147e878346b43eac6ec6c">UA_sleep_ms</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> miliSeconds); <span class="comment">//suspend the thread for a certain amount of mili seconds</span></div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment"></span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">/** Socket functions */</span></div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#ifndef UA_send</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="architecture__functions_8h.html#a805379d7b703cde2edce2ad88d959f67">   27</a></span>ssize_t <a class="code hl_define" href="ua__lwip_8h.html#a2f86e35b5431b66270f5c245c5e9a403">UA_send</a>(<a class="code hl_define" href="ua__lwip_8h.html#ae7ee2eeb127467f5dc6860091e9500a8">UA_SOCKET</a> sockfd, <span class="keyword">const</span> <span class="keywordtype">void</span> *buf, <span class="keywordtype">size_t</span> len, <span class="keywordtype">int</span> flags); <span class="comment">//equivalent to posix send implementation</span></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#endif</span></div>
@@ -217,7 +224,8 @@ $(function() {
 <div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span><span class="preprocessor">#ifndef UA_deinitialize_architecture_network</span></div>
 <div class="line"><a id="l00145" name="l00145"></a><span class="lineno"><a class="line" href="architecture__functions_8h.html#aba26238708b214c2431638929501f6c3">  145</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="architecture__functions_8h.html#aba26238708b214c2431638929501f6c3">UA_deinitialize_architecture_network</a>(<span class="keywordtype">void</span>);<span class="comment">//de-initializes the network interfaces</span></div>
 <div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span><span class="comment"></span> </div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span><span class="comment">/** Print function */</span></div>
 <div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><span class="preprocessor">#ifndef UA_snprintf</span></div>
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno"><a class="line" href="architecture__functions_8h.html#aca7473e58f1899dec9b92e211ae9046b">  150</a></span><span class="keywordtype">int</span> <a class="code hl_define" href="ua__freeRTOS_8h.html#aecb791fc42e05b7081a11575d867aff9">UA_snprintf</a>(<span class="keywordtype">char</span>* pa_stream, <span class="keywordtype">size_t</span> pa_size, <span class="keyword">const</span> <span class="keywordtype">char</span>* pa_format, ...); <span class="comment">//prints text to output</span></div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span><span class="preprocessor">#endif</span></div>
@@ -225,7 +233,8 @@ $(function() {
 <div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="preprocessor">#ifndef UA_strncasecmp</span></div>
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno"><a class="line" href="architecture__functions_8h.html#aaefe807046f4198e583dbc788748f4cb">  154</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="architecture__functions_8h.html#aaefe807046f4198e583dbc788748f4cb">UA_strncasecmp</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* s1, <span class="keyword">const</span> <span class="keywordtype">char</span>* s2, <span class="keywordtype">size_t</span> n);</div>
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><span class="comment"></span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span><span class="comment">/** Access to file function */</span></div>
 <div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="preprocessor">#ifndef UA_access</span></div>
 <div class="line"><a id="l00159" name="l00159"></a><span class="lineno"><a class="line" href="architecture__functions_8h.html#ab5e195aabe3a8c65df8aa88dd054203e">  159</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="architecture__functions_8h.html#ab5e195aabe3a8c65df8aa88dd054203e">UA_access</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *pathname, <span class="keywordtype">int</span> mode); <span class="comment">//equivalent implementation of https://linux.die.net/man/2/access</span></div>
 <div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><span class="preprocessor">#endif</span></div>

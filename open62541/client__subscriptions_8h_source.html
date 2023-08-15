@@ -78,7 +78,10 @@ $(function() {
   <div class="headertitle"><div class="title">client_subscriptions.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="client__subscriptions_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<a href="client__subscriptions_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/** This Source Code Form is subject to the terms of the Mozilla Public</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * License, v. 2.0. If a copy of the MPL was not distributed with this</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * file, You can obtain one at http://mozilla.org/MPL/2.0/. */</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef UA_CLIENT_SUBSCRIPTIONS_H_</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define UA_CLIENT_SUBSCRIPTIONS_H_</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
@@ -89,14 +92,23 @@ $(function() {
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#ifdef UA_ENABLE_SUBSCRIPTIONS</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment"></span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">/** Callbacks defined for Subscriptions */</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="client__subscriptions_8h.html#a862767e5ef40da10b7d6d54c48f8647a">   17</a></span><span class="keyword">typedef</span> void (*<a class="code hl_variable" href="client__subscriptions_8h.html#a862767e5ef40da10b7d6d54c48f8647a">UA_Client_DeleteSubscriptionCallback</a>)</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    (<a class="code hl_struct" href="structUA__Client.html">UA_Client</a> *client, <a class="code hl_typedef" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> subId, <span class="keywordtype">void</span> *subContext);</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="client__subscriptions_8h.html#a65e21acba47802cff3cd33fe78ed0228">   20</a></span><span class="keyword">typedef</span> void (*<a class="code hl_typedef" href="client__subscriptions_8h.html#a65e21acba47802cff3cd33fe78ed0228">UA_Client_StatusChangeNotificationCallback</a>)</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    (<a class="code hl_struct" href="structUA__Client.html">UA_Client</a> *client, <a class="code hl_typedef" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> subId, <span class="keywordtype">void</span> *subContext,</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>     <a class="code hl_struct" href="structUA__StatusChangeNotification.html">UA_StatusChangeNotification</a> *notification);</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"></span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">/** Provides default values for a new subscription.</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"> * RequestedPublishingInterval:  500.0 [ms]</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment"> * RequestedLifetimeCount: 10000</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment"> * RequestedMaxKeepAliveCount: 10</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment"> * MaxNotificationsPerPublish: 0 (unlimited)</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment"> * PublishingEnabled: true</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment"> * Priority: 0 */</span></div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">static</span> <a class="code hl_struct" href="structUA__CreateSubscriptionRequest.html">UA_CreateSubscriptionRequest</a></div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>UA_CreateSubscriptionRequest_default(<span class="keywordtype">void</span>) {</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <a class="code hl_struct" href="structUA__CreateSubscriptionRequest.html">UA_CreateSubscriptionRequest</a> request;</div>
@@ -146,7 +158,8 @@ $(function() {
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DeleteSubscriptionsRequest.html">UA_DeleteSubscriptionsRequest</a> request,</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <a class="code hl_typedef" href="client_8h.html#a0798176d568f4a010e2b76430a81529f">UA_ClientAsyncServiceCallback</a> callback,</div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keywordtype">void</span> *userdata, <a class="code hl_typedef" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *requestId);</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment"></span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">/** Delete a single subscription */</span></div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="client__subscriptions_8h.html#a1dee69f5f7f9f39f5cfff2f7b6e20d28">   84</a></span><a class="code hl_function" href="client__subscriptions_8h.html#a1dee69f5f7f9f39f5cfff2f7b6e20d28">UA_Client_Subscriptions_deleteSingle</a>(<a class="code hl_struct" href="structUA__Client.html">UA_Client</a> *client, <a class="code hl_typedef" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> subscriptionId);</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
@@ -161,7 +174,8 @@ $(function() {
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>}</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment"></span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="comment">/** Provides default values for a new monitored item. */</span></div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="keyword">static</span> <a class="code hl_struct" href="structUA__MonitoredItemCreateRequest.html">UA_MonitoredItemCreateRequest</a></div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>UA_MonitoredItemCreateRequest_default(<a class="code hl_struct" href="structUA__NodeId.html">UA_NodeId</a> nodeId) {</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <a class="code hl_struct" href="structUA__MonitoredItemCreateRequest.html">UA_MonitoredItemCreateRequest</a> request;</div>
@@ -176,21 +190,25 @@ $(function() {
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>}</div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment"></span> </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="comment">/** Callback for the deletion of a MonitoredItem */</span></div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="client__subscriptions_8h.html#a351ee8bd9d3d3acf59951235fcf83c8e">  115</a></span><span class="keyword">typedef</span> void (*<a class="code hl_typedef" href="client__subscriptions_8h.html#a351ee8bd9d3d3acf59951235fcf83c8e">UA_Client_DeleteMonitoredItemCallback</a>)</div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    (<a class="code hl_struct" href="structUA__Client.html">UA_Client</a> *client, <a class="code hl_typedef" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> subId, <span class="keywordtype">void</span> *subContext,</div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>     <a class="code hl_typedef" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> monId, <span class="keywordtype">void</span> *monContext);</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="comment"></span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="comment">/** Callback for DataChange notifications */</span></div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno"><a class="line" href="client__subscriptions_8h.html#a9899bb6e9665889aceb6309dea1789c0">  120</a></span><span class="keyword">typedef</span> void (*<a class="code hl_typedef" href="client__subscriptions_8h.html#a9899bb6e9665889aceb6309dea1789c0">UA_Client_DataChangeNotificationCallback</a>)</div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    (<a class="code hl_struct" href="structUA__Client.html">UA_Client</a> *client, <a class="code hl_typedef" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> subId, <span class="keywordtype">void</span> *subContext,</div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>     <a class="code hl_typedef" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> monId, <span class="keywordtype">void</span> *monContext,</div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>     <a class="code hl_struct" href="structUA__DataValue.html">UA_DataValue</a> *value);</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span><span class="comment"></span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span><span class="comment">/** Callback for Event notifications */</span></div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno"><a class="line" href="client__subscriptions_8h.html#a2565ae31fb3bc75132ef88c68daa5a9c">  126</a></span><span class="keyword">typedef</span> void (*<a class="code hl_typedef" href="client__subscriptions_8h.html#a2565ae31fb3bc75132ef88c68daa5a9c">UA_Client_EventNotificationCallback</a>)</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    (<a class="code hl_struct" href="structUA__Client.html">UA_Client</a> *client, <a class="code hl_typedef" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> subId, <span class="keywordtype">void</span> *subContext,</div>
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>     <a class="code hl_typedef" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> monId, <span class="keywordtype">void</span> *monContext,</div>
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>     <span class="keywordtype">size_t</span> nEventFields, <a class="code hl_struct" href="structUA__Variant.html">UA_Variant</a> *eventFields);</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="comment"></span> </div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="comment">/** Don&#39;t use to monitor the EventNotifier attribute */</span></div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><a class="code hl_struct" href="structUA__CreateMonitoredItemsResponse.html">UA_CreateMonitoredItemsResponse</a></div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno"><a class="line" href="client__subscriptions_8h.html#aa59abf98e24e38ec5f72d2b5b9a1a100">  133</a></span><a class="code hl_function" href="client__subscriptions_8h.html#aa59abf98e24e38ec5f72d2b5b9a1a100">UA_Client_MonitoredItems_createDataChanges</a>(<a class="code hl_struct" href="structUA__Client.html">UA_Client</a> *client,</div>
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structUA__CreateMonitoredItemsRequest.html">UA_CreateMonitoredItemsRequest</a> request, <span class="keywordtype">void</span> **contexts,</div>
@@ -212,13 +230,15 @@ $(function() {
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structUA__MonitoredItemCreateRequest.html">UA_MonitoredItemCreateRequest</a> item,</div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keywordtype">void</span> *context, <a class="code hl_typedef" href="client__subscriptions_8h.html#a9899bb6e9665889aceb6309dea1789c0">UA_Client_DataChangeNotificationCallback</a> callback,</div>
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    <a class="code hl_typedef" href="client__subscriptions_8h.html#a351ee8bd9d3d3acf59951235fcf83c8e">UA_Client_DeleteMonitoredItemCallback</a> deleteCallback);</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="comment"></span> </div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="comment">/** Monitor the EventNotifier attribute only */</span></div>
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><a class="code hl_struct" href="structUA__CreateMonitoredItemsResponse.html">UA_CreateMonitoredItemsResponse</a></div>
 <div class="line"><a id="l00156" name="l00156"></a><span class="lineno"><a class="line" href="client__subscriptions_8h.html#aa99e189ebd6a1bc3899563d50eb8d0a3">  156</a></span><a class="code hl_function" href="client__subscriptions_8h.html#aa99e189ebd6a1bc3899563d50eb8d0a3">UA_Client_MonitoredItems_createEvents</a>(<a class="code hl_struct" href="structUA__Client.html">UA_Client</a> *client,</div>
 <div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structUA__CreateMonitoredItemsRequest.html">UA_CreateMonitoredItemsRequest</a> request, <span class="keywordtype">void</span> **contexts,</div>
 <div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    <a class="code hl_typedef" href="client__subscriptions_8h.html#a2565ae31fb3bc75132ef88c68daa5a9c">UA_Client_EventNotificationCallback</a> *callback,</div>
 <div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    <a class="code hl_typedef" href="client__subscriptions_8h.html#a351ee8bd9d3d3acf59951235fcf83c8e">UA_Client_DeleteMonitoredItemCallback</a> *deleteCallback);</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><span class="comment"></span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span><span class="comment">/** Monitor the EventNotifier attribute only */</span></div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno"><a class="line" href="client__subscriptions_8h.html#a5423737960a2157d6b3b075ae8ead1b8">  163</a></span><a class="code hl_function" href="client__subscriptions_8h.html#a5423737960a2157d6b3b075ae8ead1b8">UA_Client_MonitoredItems_createEvents_async</a>(<a class="code hl_struct" href="structUA__Client.html">UA_Client</a> *client,</div>
 <div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structUA__CreateMonitoredItemsRequest.html">UA_CreateMonitoredItemsRequest</a> request, <span class="keywordtype">void</span> **contexts,</div>
@@ -248,7 +268,8 @@ $(function() {
 <div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00189" name="l00189"></a><span class="lineno"><a class="line" href="client__subscriptions_8h.html#ab095796628c4850313363d3b90cb78ce">  189</a></span><a class="code hl_function" href="client__subscriptions_8h.html#ab095796628c4850313363d3b90cb78ce">UA_Client_MonitoredItems_deleteSingle</a>(<a class="code hl_struct" href="structUA__Client.html">UA_Client</a> *client,</div>
 <div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    <a class="code hl_typedef" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> subscriptionId, <a class="code hl_typedef" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> monitoredItemId);</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span><span class="comment"></span> </div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="comment">/** The clientHandle parameter will be filled automatically */</span></div>
 <div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><a class="code hl_struct" href="structUA__ModifyMonitoredItemsResponse.html">UA_ModifyMonitoredItemsResponse</a></div>
 <div class="line"><a id="l00194" name="l00194"></a><span class="lineno"><a class="line" href="client__subscriptions_8h.html#a9433d6c169cbbd4dc257bb8dadd58f51">  194</a></span><a class="code hl_function" href="client__subscriptions_8h.html#a9433d6c169cbbd4dc257bb8dadd58f51">UA_Client_MonitoredItems_modify</a>(<a class="code hl_struct" href="structUA__Client.html">UA_Client</a> *client,</div>
 <div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structUA__ModifyMonitoredItemsRequest.html">UA_ModifyMonitoredItemsRequest</a> request);</div>

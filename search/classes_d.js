@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['qualifiedname_0',['QualifiedName',['../classopcua_1_1QualifiedName.html',1,'opcua']]],
-  ['question_1',['question',['open62541/structquestion.html',0,'']]]
+  ['objectattributes_0',['ObjectAttributes',['../classopcua_1_1ObjectAttributes.html',1,'opcua']]],
+  ['objecttypeattributes_1',['ObjectTypeAttributes',['../classopcua_1_1ObjectTypeAttributes.html',1,'opcua']]]
 ];

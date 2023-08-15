@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.6.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.7.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -100,23 +100,100 @@ $(function() {
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>}  <span class="comment">// namespace opcua</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceopcua_1_1services.html">opcua::services</a> {</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="structopcua_1_1services_1_1MonitoringParameters.html">   47</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1services_1_1MonitoringParameters.html">MonitoringParameters</a> {</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="structopcua_1_1services_1_1MonitoringParameters.html#af190773a57ecf87dedd27ae0f6161087">   49</a></span>    <a class="code hl_enumeration" href="namespaceopcua.html#a5fe27bb15f3e5712b9f2dbe2b090b304">TimestampsToReturn</a> <a class="code hl_variable" href="structopcua_1_1services_1_1MonitoringParameters.html#af190773a57ecf87dedd27ae0f6161087">timestamps</a> = <a class="code hl_enumvalue" href="namespaceopcua.html#a5fe27bb15f3e5712b9f2dbe2b090b304a130c5b3473c57faa76e2a1c54e26f88e">TimestampsToReturn::Both</a>;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="structopcua_1_1services_1_1MonitoringParameters.html#aac8b360b3bdc6dd65c19a7bc3ed28e7e">   54</a></span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="structopcua_1_1services_1_1MonitoringParameters.html#aac8b360b3bdc6dd65c19a7bc3ed28e7e">samplingInterval</a> = 250.0;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="structopcua_1_1services_1_1MonitoringParameters.html#ab8683b795f0cd5994ebfc2b6940fbb61">   59</a></span>    <a class="code hl_class" href="classopcua_1_1ExtensionObject.html">ExtensionObject</a> <a class="code hl_variable" href="structopcua_1_1services_1_1MonitoringParameters.html#ab8683b795f0cd5994ebfc2b6940fbb61">filter</a>;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="structopcua_1_1services_1_1MonitoringParameters.html#a6b350c4b5ad90d83745d50957a8e8502">   66</a></span>    uint32_t <a class="code hl_variable" href="structopcua_1_1services_1_1MonitoringParameters.html#a6b350c4b5ad90d83745d50957a8e8502">queueSize</a> = 1;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="structopcua_1_1services_1_1MonitoringParameters.html#a6658f38cb9a74d39418b4e719ffeda01">   70</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="structopcua_1_1services_1_1MonitoringParameters.html#a6658f38cb9a74d39418b4e719ffeda01">discardOldest</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment"></span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"> * @defgroup MonitoredItem MonitoredItem service set</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment"> * Subscribe to data and events.</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment"> * Note the difference between Subscriptions and MonitoredItems. Subscriptions are used to report</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment"> * back notifications. MonitoredItems are used to generate notifications. Every MonitoredItem is</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment"> * attached to exactly one Subscription. And a Subscription can contain many MonitoredItems.</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment"> * MonitoredItems can also be registered locally (server-side). Notifications are then forwarded</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment"> * to a user-defined callback instead of a remote client.</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment"> * @see Subscription</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment"> * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment"> * @ingroup Services</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment"></span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment"> * Monitoring parameters with default values from open62541.</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment"> * Parameters are passed by reference because illegal parameters can be revised by the server.</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment"> * The updated parameters reflect the actual values that the server will use.</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment"> * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.21</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment"> * @ingroup MonitoredItem</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="structopcua_1_1services_1_1MonitoringParameters.html">   47</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1services_1_1MonitoringParameters.html">MonitoringParameters</a> {<span class="comment"></span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="comment">    /// Timestamps to be transmitted. Won&#39;t be revised by the server.</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="structopcua_1_1services_1_1MonitoringParameters.html#af190773a57ecf87dedd27ae0f6161087">   49</a></span><span class="comment"></span>    <a class="code hl_enumeration" href="namespaceopcua.html#a5fe27bb15f3e5712b9f2dbe2b090b304">TimestampsToReturn</a> <a class="code hl_variable" href="structopcua_1_1services_1_1MonitoringParameters.html#af190773a57ecf87dedd27ae0f6161087">timestamps</a> = <a class="code hl_enumvalue" href="namespaceopcua.html#a5fe27bb15f3e5712b9f2dbe2b090b304a130c5b3473c57faa76e2a1c54e26f88e">TimestampsToReturn::Both</a>;<span class="comment"></span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">    /// Interval in milliseconds that defines the fastest rate at which the MonitoredItem should be</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment">    /// accessed and evaluated. The following values have special meaning:</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">    /// - `0.0` to use the fastest practical rate</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">    /// - `-1.0` to use the default sampling interval (publishing interval of the subscription)</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="structopcua_1_1services_1_1MonitoringParameters.html#aac8b360b3bdc6dd65c19a7bc3ed28e7e">   54</a></span><span class="comment"></span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="structopcua_1_1services_1_1MonitoringParameters.html#aac8b360b3bdc6dd65c19a7bc3ed28e7e">samplingInterval</a> = 250.0;<span class="comment"></span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment">    /// Filter used by the Server to determine if the MonitoredItem should generate a Notification.</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">    /// The MonitoringFilter parameter type is an extensible parameter type and can be, for example,</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="comment">    /// of type `UA_DataChangeFilter`, `UA_EventFilter` or `UA_AggregateFilter`.</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="comment">    /// @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.22</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="structopcua_1_1services_1_1MonitoringParameters.html#ab8683b795f0cd5994ebfc2b6940fbb61">   59</a></span><span class="comment"></span>    <a class="code hl_class" href="classopcua_1_1ExtensionObject.html">ExtensionObject</a> <a class="code hl_variable" href="structopcua_1_1services_1_1MonitoringParameters.html#ab8683b795f0cd5994ebfc2b6940fbb61">filter</a>;<span class="comment"></span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">    /// Size of the MonitoringItem queue.</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">    /// The following values have special meaning:</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">    /// - `0` to retrieve the server&#39;s default queue size</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">    /// - `1` to retrieve the server&#39;s minimum queue size</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">    /// In the case of a queue overflow, an Event of the type EventQueueOverflowEventType is</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">    /// generated.</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="structopcua_1_1services_1_1MonitoringParameters.html#a6b350c4b5ad90d83745d50957a8e8502">   66</a></span><span class="comment"></span>    uint32_t <a class="code hl_variable" href="structopcua_1_1services_1_1MonitoringParameters.html#a6b350c4b5ad90d83745d50957a8e8502">queueSize</a> = 1;<span class="comment"></span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">    /// Discard policy when the queue is full.</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">    /// - `true`: the oldest (first) notification in the queue is discarded</span></div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="comment">    /// - `false`: the last notification added to the queue gets replaced with the new notification</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="structopcua_1_1services_1_1MonitoringParameters.html#a6658f38cb9a74d39418b4e719ffeda01">   70</a></span><span class="comment"></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="structopcua_1_1services_1_1MonitoringParameters.html#a6658f38cb9a74d39418b4e719ffeda01">discardOldest</a> = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>};</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment"></span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment"> * MonitoredItem deletion callback.</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment"> * @param subId Subscription identifier</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment"> * @param monId MonitoredItem identifier</span></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment"> * @ingroup MonitoredItem</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="group__MonitoredItem.html#gaf384cffce05f9a977663d479d6d1b479">   79</a></span><span class="keyword">using </span><a class="code hl_typedef" href="group__MonitoredItem.html#gaf384cffce05f9a977663d479d6d1b479">DeleteMonitoredItemCallback</a> = std::function&lt;void(uint32_t subId, uint32_t monId)&gt;;</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment"></span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment"> * Data change notification callback.</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment"> * @param subId Subscription identifier (`0U` for local (server-side) monitored item)</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment"> * @param monId MonitoredItem identifier</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="comment"> * @param value Changed value</span></div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment"> * @ingroup MonitoredItem</span></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno"><a class="line" href="group__MonitoredItem.html#gaea38470ae232e1ad600942ff0eed49a6">   88</a></span><span class="keyword">using </span><a class="code hl_typedef" href="group__MonitoredItem.html#gaea38470ae232e1ad600942ff0eed49a6">DataChangeNotificationCallback</a> =</div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    std::function&lt;void(uint32_t subId, uint32_t monId, <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1DataValue.html">DataValue</a>&amp; value)&gt;;</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="comment"></span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="comment"> * Event notification callback.</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="comment"> * @param subId Subscription identifier (`0U` for local (server-side) monitored item)</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="comment"> * @param monId MonitoredItem identifier</span></div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="comment"> * @param value Changed value</span></div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="comment"> * @ingroup MonitoredIte</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1services.html#a4158005ab020167a1c458f7ac94eea2b">   98</a></span><span class="keyword">using </span><a class="code hl_typedef" href="namespaceopcua_1_1services.html#a4158005ab020167a1c458f7ac94eea2b">EventNotificationCallback</a> =</div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    std::function&lt;void(uint32_t subId, uint32_t monId, <span class="keyword">const</span> std::vector&lt;Variant&gt;&amp; eventFields)&gt;;</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment"></span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="comment"> * Create and add a monitored item to a subscription for data change notifications.</span></div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment"> * Don&#39;t use this function to monitor the `EventNotifier` attribute.</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment"> * Create a monitored item with @ref createMonitoredItemEvent instead.</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment"> * @copydetails MonitoringParameters</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment"> * @param client Instance of type Client</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment"> * @param subscriptionId Identifier of the subscription returned by @ref createSubscription</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment"> * @param itemToMonitor Item to monitor</span></div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="comment"> * @param monitoringMode Monitoring mode</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="comment"> * @param parameters Monitoring parameters, may be revised by server</span></div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="comment"> * @param dataChangeCallback Invoked when the monitored item is changed</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment"> * @param deleteCallback Invoked when the monitored item is deleted</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="comment"> * @returns Server-assigned identifier of the monitored item</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="comment"> * @ingroup MonitoredItem</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="group__MonitoredItem.html#ga05a3d7a497ca3e1af1e31980b6647bc2">  117</a></span>[[nodiscard]] uint32_t <a class="code hl_function" href="group__MonitoredItem.html#ga05a3d7a497ca3e1af1e31980b6647bc2">createMonitoredItemDataChange</a>(</div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <a class="code hl_class" href="classopcua_1_1Client.html">Client</a>&amp; client,</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    uint32_t subscriptionId,</div>
@@ -126,7 +203,20 @@ $(function() {
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <a class="code hl_typedef" href="group__MonitoredItem.html#gaea38470ae232e1ad600942ff0eed49a6">DataChangeNotificationCallback</a> dataChangeCallback,</div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    <a class="code hl_typedef" href="group__MonitoredItem.html#gaf384cffce05f9a977663d479d6d1b479">DeleteMonitoredItemCallback</a> deleteCallback = {}</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>);</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><span class="comment"></span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="comment"> * Create a local monitored item for data change notifications.</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><span class="comment"> * Don&#39;t use this function to monitor the `EventNotifier` attribute.</span></div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="comment"> * @copydetails MonitoringParameters</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><span class="comment"> * @param server Instance of type Server</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span><span class="comment"> * @param itemToMonitor Item to monitor</span></div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span><span class="comment"> * @param monitoringMode Monitoring mode</span></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><span class="comment"> * @param parameters Monitoring parameters, may be revised by server</span></div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span><span class="comment"> * @param dataChangeCallback Invoked when the monitored item is changed</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span><span class="comment"> * @returns Server-assigned identifier of the monitored item</span></div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><span class="comment"> * @ingroup MonitoredItem</span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00140" name="l00140"></a><span class="lineno"><a class="line" href="group__MonitoredItem.html#gad0836a59c94d871059ecf919cc5a4ef1">  140</a></span>[[nodiscard]] uint32_t <a class="code hl_function" href="group__MonitoredItem.html#ga05a3d7a497ca3e1af1e31980b6647bc2">createMonitoredItemDataChange</a>(</div>
 <div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <a class="code hl_class" href="classopcua_1_1Server.html">Server</a>&amp; server,</div>
 <div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <span class="keyword">const</span> <a class="code hl_class" href="classopcua_1_1ReadValueId.html">ReadValueId</a>&amp; itemToMonitor,</div>
@@ -134,7 +224,22 @@ $(function() {
 <div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    <a class="code hl_struct" href="structopcua_1_1services_1_1MonitoringParameters.html">MonitoringParameters</a>&amp; parameters,</div>
 <div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    <a class="code hl_typedef" href="group__MonitoredItem.html#gaea38470ae232e1ad600942ff0eed49a6">DataChangeNotificationCallback</a> dataChangeCallback</div>
 <div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>);</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span><span class="comment"></span> </div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><span class="comment"> * Create and add a monitored item to a subscription for event notifications.</span></div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><span class="comment"> * The `attributeId` of ReadValueId must be set to AttributeId::EventNotifier.</span></div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span><span class="comment"> * @copydetails MonitoringParameters</span></div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="comment"> * @param client Instance of type Client</span></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="comment"> * @param subscriptionId Identifier of the subscription returned by @ref createSubscription</span></div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="comment"> * @param itemToMonitor Item to monitor</span></div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><span class="comment"> * @param monitoringMode Monitoring mode</span></div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span><span class="comment"> * @param parameters Monitoring parameters, may be revised by server</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="comment"> * @param eventCallback Invoked when an event is published</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span><span class="comment"> * @param deleteCallback Invoked when the monitored item is deleted</span></div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><span class="comment"> * @returns Server-assigned identifier of the monitored item</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span><span class="comment"> * @ingroup MonitoredItem</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno"><a class="line" href="group__MonitoredItem.html#ga514da22adbb9cef679d182ce33a02f7e">  163</a></span>[[nodiscard]] uint32_t <a class="code hl_function" href="group__MonitoredItem.html#ga514da22adbb9cef679d182ce33a02f7e">createMonitoredItemEvent</a>(</div>
 <div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <a class="code hl_class" href="classopcua_1_1Client.html">Client</a>&amp; client,</div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    uint32_t subscriptionId,</div>
@@ -144,18 +249,52 @@ $(function() {
 <div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    <a class="code hl_typedef" href="namespaceopcua_1_1services.html#a4158005ab020167a1c458f7ac94eea2b">EventNotificationCallback</a> eventCallback,</div>
 <div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>    <a class="code hl_typedef" href="group__MonitoredItem.html#gaf384cffce05f9a977663d479d6d1b479">DeleteMonitoredItemCallback</a> deleteCallback = {}</div>
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>);</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="comment"></span> </div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="comment"> * Modify a monitored item of a subscription.</span></div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><span class="comment"> * @copydetails MonitoringParameters</span></div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="comment"> * @param client Instance of type Client</span></div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span><span class="comment"> * @param subscriptionId Identifier of the subscription returned by @ref createSubscription</span></div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><span class="comment"> * @param monitoredItemId Identifier of the monitored item</span></div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span><span class="comment"> * @param parameters Monitoring parameters, may be revised by server</span></div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="comment"> * @ingroup MonitoredItem</span></div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00183" name="l00183"></a><span class="lineno"><a class="line" href="group__MonitoredItem.html#gaf94de46df704cffd3b421206613f6e74">  183</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group__MonitoredItem.html#gaf94de46df704cffd3b421206613f6e74">modifyMonitoredItem</a>(</div>
 <div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    <a class="code hl_class" href="classopcua_1_1Client.html">Client</a>&amp; client,</div>
 <div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    uint32_t subscriptionId,</div>
 <div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>    uint32_t monitoredItemId,</div>
 <div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    <a class="code hl_struct" href="structopcua_1_1services_1_1MonitoringParameters.html">MonitoringParameters</a>&amp; parameters</div>
 <div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>);</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span><span class="comment"></span> </div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span><span class="comment"> * Set the monitoring mode of a monitored item.</span></div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span><span class="comment"> * @param client Instance of type Client</span></div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span><span class="comment"> * @param subscriptionId Identifier of the subscription returned by @ref createSubscription</span></div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span><span class="comment"> * @param monitoredItemId Identifier of the monitored item</span></div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span><span class="comment"> * @param monitoringMode Monitoring mode</span></div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span><span class="comment"> * @ingroup MonitoredItem</span></div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00199" name="l00199"></a><span class="lineno"><a class="line" href="group__MonitoredItem.html#ga27e41a99a1fb597dc1364f4da42d5954">  199</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group__MonitoredItem.html#ga27e41a99a1fb597dc1364f4da42d5954">setMonitoringMode</a>(</div>
 <div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    <a class="code hl_class" href="classopcua_1_1Client.html">Client</a>&amp; client, uint32_t subscriptionId, uint32_t monitoredItemId, <a class="code hl_enumeration" href="namespaceopcua.html#ac7b72cb1f86ea818f1386642867ff381">MonitoringMode</a> monitoringMode</div>
 <div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>);</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span> </div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span><span class="comment"></span> </div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><span class="comment"> * Add and delete triggering links of a monitored item.</span></div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span><span class="comment"> * The triggering item and the items to report shall belong to the same subscription.</span></div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span><span class="comment"> * @note Supported since open62541 v1.2</span></div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span><span class="comment"> * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.1.6</span></div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><span class="comment"> * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.5</span></div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span><span class="comment"> * @param client Instance of type Client</span></div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span><span class="comment"> * @param subscriptionId Identifier of the subscription returned by @ref createSubscription</span></div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span><span class="comment"> * @param triggeringItemId Identifier of the triggering monitored item</span></div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span><span class="comment"> * @param linksToAdd List of monitoring item identifiers to be added as triggering links</span></div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span><span class="comment"> * @param linksToRemove List of monitoring item identifiers to be removed as triggering links</span></div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span><span class="comment"> * @ingroup MonitoredItem</span></div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00218" name="l00218"></a><span class="lineno"><a class="line" href="group__MonitoredItem.html#gab3335ae74968237d535c1293015c8702">  218</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group__MonitoredItem.html#gab3335ae74968237d535c1293015c8702">setTriggering</a>(</div>
 <div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    <a class="code hl_class" href="classopcua_1_1Client.html">Client</a>&amp; client,</div>
 <div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    uint32_t subscriptionId,</div>
@@ -163,9 +302,24 @@ $(function() {
 <div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    <span class="keyword">const</span> std::vector&lt;uint32_t&gt;&amp; linksToAdd,</div>
 <div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    <span class="keyword">const</span> std::vector&lt;uint32_t&gt;&amp; linksToRemove</div>
 <div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>);</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span><span class="comment"></span> </div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span><span class="comment"> * Delete a monitored item from a subscription.</span></div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span><span class="comment"> * @param client Instance of type Client</span></div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span><span class="comment"> * @param subscriptionId Identifier of the subscription returned by @ref createSubscription</span></div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span><span class="comment"> * @param monitoredItemId Identifier of the monitored item</span></div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span><span class="comment"> * @ingroup MonitoredItem</span></div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00234" name="l00234"></a><span class="lineno"><a class="line" href="group__MonitoredItem.html#ga8c2014ad46076f30dd32cda553d97db7">  234</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group__MonitoredItem.html#ga8c2014ad46076f30dd32cda553d97db7">deleteMonitoredItem</a>(<a class="code hl_class" href="classopcua_1_1Client.html">Client</a>&amp; client, uint32_t subscriptionId, uint32_t monitoredItemId);</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span> </div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span><span class="comment"></span> </div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span><span class="comment"> * Delete a local monitored item.</span></div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span><span class="comment"> * @param server Instance of type Server</span></div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span><span class="comment"> * @param monitoredItemId Identifier of the monitored item</span></div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span><span class="comment"> * @ingroup MonitoredItem</span></div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span><span class="comment"> */</span></div>
 <div class="line"><a id="l00243" name="l00243"></a><span class="lineno"><a class="line" href="group__MonitoredItem.html#ga37a88abf04f0e873db0b39bb8e2f470d">  243</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="group__MonitoredItem.html#ga8c2014ad46076f30dd32cda553d97db7">deleteMonitoredItem</a>(<a class="code hl_class" href="classopcua_1_1Server.html">Server</a>&amp; server, uint32_t monitoredItemId);</div>
 <div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span> </div>
 <div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>}  <span class="comment">// namespace opcua::services</span></div>
@@ -174,11 +328,11 @@ $(function() {
 <div class="ttc" id="aCommon_8h_html"><div class="ttname"><a href="Common_8h.html">Common.h</a></div></div>
 <div class="ttc" id="aConfig_8h_html"><div class="ttname"><a href="Config_8h.html">Config.h</a></div></div>
 <div class="ttc" id="aExtensionObject_8h_html"><div class="ttname"><a href="ExtensionObject_8h.html">ExtensionObject.h</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Client_html"><div class="ttname"><a href="classopcua_1_1Client.html">opcua::Client</a></div><div class="ttdoc">High-level client class.</div><div class="ttdef"><b>Definition</b> <a href="Client_8h_source.html#l00036">Client.h:36</a></div></div>
-<div class="ttc" id="aclassopcua_1_1DataValue_html"><div class="ttname"><a href="classopcua_1_1DataValue.html">opcua::DataValue</a></div><div class="ttdoc">UA_DataValue wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="DataValue_8h_source.html#l00019">DataValue.h:19</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Client_html"><div class="ttname"><a href="classopcua_1_1Client.html">opcua::Client</a></div><div class="ttdoc">High-level client class.</div><div class="ttdef"><b>Definition</b> <a href="Client_8h_source.html#l00037">Client.h:37</a></div></div>
+<div class="ttc" id="aclassopcua_1_1DataValue_html"><div class="ttname"><a href="classopcua_1_1DataValue.html">opcua::DataValue</a></div><div class="ttdoc">UA_DataValue wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="DataValue_8h_source.html#l00020">DataValue.h:20</a></div></div>
 <div class="ttc" id="aclassopcua_1_1ExtensionObject_html"><div class="ttname"><a href="classopcua_1_1ExtensionObject.html">opcua::ExtensionObject</a></div><div class="ttdoc">UA_ExtensionObject wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="ExtensionObject_8h_source.html#l00040">ExtensionObject.h:40</a></div></div>
-<div class="ttc" id="aclassopcua_1_1ReadValueId_html"><div class="ttname"><a href="classopcua_1_1ReadValueId.html">opcua::ReadValueId</a></div><div class="ttdoc">UA_ReadValueId wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="Composed_8h_source.html#l00442">Composed.h:442</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Server_html"><div class="ttname"><a href="classopcua_1_1Server.html">opcua::Server</a></div><div class="ttdoc">High-level server class.</div><div class="ttdef"><b>Definition</b> <a href="Server_8h_source.html#l00032">Server.h:32</a></div></div>
+<div class="ttc" id="aclassopcua_1_1ReadValueId_html"><div class="ttname"><a href="classopcua_1_1ReadValueId.html">opcua::ReadValueId</a></div><div class="ttdoc">UA_ReadValueId wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="Composed_8h_source.html#l00671">Composed.h:671</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Server_html"><div class="ttname"><a href="classopcua_1_1Server.html">opcua::Server</a></div><div class="ttdoc">High-level server class.</div><div class="ttdef"><b>Definition</b> <a href="Server_8h_source.html#l00034">Server.h:34</a></div></div>
 <div class="ttc" id="agroup__MonitoredItem_html_ga05a3d7a497ca3e1af1e31980b6647bc2"><div class="ttname"><a href="group__MonitoredItem.html#ga05a3d7a497ca3e1af1e31980b6647bc2">opcua::services::createMonitoredItemDataChange</a></div><div class="ttdeci">uint32_t createMonitoredItemDataChange(Client &amp;client, uint32_t subscriptionId, const ReadValueId &amp;itemToMonitor, MonitoringMode monitoringMode, MonitoringParameters &amp;parameters, DataChangeNotificationCallback dataChangeCallback, DeleteMonitoredItemCallback deleteCallback={})</div><div class="ttdoc">Create and add a monitored item to a subscription for data change notifications.</div></div>
 <div class="ttc" id="agroup__MonitoredItem_html_ga27e41a99a1fb597dc1364f4da42d5954"><div class="ttname"><a href="group__MonitoredItem.html#ga27e41a99a1fb597dc1364f4da42d5954">opcua::services::setMonitoringMode</a></div><div class="ttdeci">void setMonitoringMode(Client &amp;client, uint32_t subscriptionId, uint32_t monitoredItemId, MonitoringMode monitoringMode)</div><div class="ttdoc">Set the monitoring mode of a monitored item.</div></div>
 <div class="ttc" id="agroup__MonitoredItem_html_ga514da22adbb9cef679d182ce33a02f7e"><div class="ttname"><a href="group__MonitoredItem.html#ga514da22adbb9cef679d182ce33a02f7e">opcua::services::createMonitoredItemEvent</a></div><div class="ttdeci">uint32_t createMonitoredItemEvent(Client &amp;client, uint32_t subscriptionId, const ReadValueId &amp;itemToMonitor, MonitoringMode monitoringMode, MonitoringParameters &amp;parameters, EventNotificationCallback eventCallback, DeleteMonitoredItemCallback deleteCallback={})</div><div class="ttdoc">Create and add a monitored item to a subscription for event notifications.</div></div>
@@ -190,7 +344,7 @@ $(function() {
 <div class="ttc" id="agroup__NodeIds_html_ggadfeffe1a4352e8d89c5167a8c09d1692a38bada29008cfb116e1205bddf32e2e1"><div class="ttname"><a href="group__NodeIds.html#ggadfeffe1a4352e8d89c5167a8c09d1692a38bada29008cfb116e1205bddf32e2e1">opcua::DataTypeId::ReadValueId</a></div><div class="ttdeci">@ ReadValueId</div></div>
 <div class="ttc" id="anamespaceopcua_1_1services_html"><div class="ttname"><a href="namespaceopcua_1_1services.html">opcua::services</a></div><div class="ttdoc">OPC UA services as free functions.</div><div class="ttdef"><b>Definition</b> <a href="Attribute_8h_source.html#l00014">Attribute.h:14</a></div></div>
 <div class="ttc" id="anamespaceopcua_1_1services_html_a4158005ab020167a1c458f7ac94eea2b"><div class="ttname"><a href="namespaceopcua_1_1services.html#a4158005ab020167a1c458f7ac94eea2b">opcua::services::EventNotificationCallback</a></div><div class="ttdeci">std::function&lt; void(uint32_t subId, uint32_t monId, const std::vector&lt; Variant &gt; &amp;eventFields)&gt; EventNotificationCallback</div><div class="ttdoc">Event notification callback.</div><div class="ttdef"><b>Definition</b> <a href="services_2MonitoredItem_8h_source.html#l00098">MonitoredItem.h:99</a></div></div>
-<div class="ttc" id="anamespaceopcua_html"><div class="ttname"><a href="namespaceopcua.html">opcua</a></div><div class="ttdef"><b>Definition</b> <a href="Auth_8h_source.html#l00005">Auth.h:5</a></div></div>
+<div class="ttc" id="anamespaceopcua_html"><div class="ttname"><a href="namespaceopcua.html">opcua</a></div><div class="ttdef"><b>Definition</b> <a href="AccessControl_8h_source.html#l00017">AccessControl.h:17</a></div></div>
 <div class="ttc" id="anamespaceopcua_html_a5fe27bb15f3e5712b9f2dbe2b090b304"><div class="ttname"><a href="namespaceopcua.html#a5fe27bb15f3e5712b9f2dbe2b090b304">opcua::TimestampsToReturn</a></div><div class="ttdeci">TimestampsToReturn</div><div class="ttdoc">Timestamps to return.</div><div class="ttdef"><b>Definition</b> <a href="Common_8h_source.html#l00178">Common.h:178</a></div></div>
 <div class="ttc" id="anamespaceopcua_html_a5fe27bb15f3e5712b9f2dbe2b090b304a130c5b3473c57faa76e2a1c54e26f88e"><div class="ttname"><a href="namespaceopcua.html#a5fe27bb15f3e5712b9f2dbe2b090b304a130c5b3473c57faa76e2a1c54e26f88e">opcua::TimestampsToReturn::Both</a></div><div class="ttdeci">@ Both</div></div>
 <div class="ttc" id="anamespaceopcua_html_a5fe27bb15f3e5712b9f2dbe2b090b304a9aa1b03934893d7134a660af4204f2a9"><div class="ttname"><a href="namespaceopcua.html#a5fe27bb15f3e5712b9f2dbe2b090b304a9aa1b03934893d7134a660af4204f2a9">opcua::TimestampsToReturn::Server</a></div><div class="ttdeci">@ Server</div></div>

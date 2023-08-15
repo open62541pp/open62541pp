@@ -78,7 +78,10 @@ $(function() {
   <div class="headertitle"><div class="title">config.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="config_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<a href="config_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/** This Source Code Form is subject to the terms of the Mozilla Public</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * License, v. 2.0. If a copy of the MPL was not distributed with this</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * file, You can obtain one at http://mozilla.org/MPL/2.0/. */</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#ifndef UA_CONFIG_H_</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define UA_CONFIG_H_</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
@@ -93,26 +96,72 @@ $(function() {
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="config_8h.html#a04de75528c8ceeea2a205eb264181c2e">   18</a></span><span class="preprocessor">#define UA_LOGLEVEL 300</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#ifndef UA_ENABLE_AMALGAMATION</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#ifndef UA_ENABLE_AMALGAMATION</span><span class="comment"></span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">/** #undef UA_ENABLE_AMALGAMATION */</span><span class="preprocessor"></span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="config_8h.html#a4006dadfb3dfa60195d4f91945a8867c">   22</a></span><span class="preprocessor">#define UA_ENABLE_METHODCALLS</span></div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="config_8h.html#a548c053c50879d01eb95629ec267215e">   23</a></span><span class="preprocessor">#define UA_ENABLE_NODEMANAGEMENT</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="config_8h.html#a40b3e20bd96944c6fe9f3b10fffd5ca3">   24</a></span><span class="preprocessor">#define UA_ENABLE_SUBSCRIPTIONS</span></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="config_8h.html#ad9adf084d143ce816158de4bf4db924b">   32</a></span><span class="preprocessor">#define UA_ENABLE_DA</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="config_8h.html#ad99ca642961a9f3696bc7903c25a2d74">   35</a></span><span class="preprocessor">#define UA_ENABLE_PARSING</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="config_8h.html#ac5038359b4b45edda1d6b7cb98a9539f">   37</a></span><span class="preprocessor">#define UA_ENABLE_SUBSCRIPTIONS_EVENTS</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="config_8h.html#a40b3e20bd96944c6fe9f3b10fffd5ca3">   24</a></span><span class="preprocessor">#define UA_ENABLE_SUBSCRIPTIONS</span><span class="comment"></span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">/** #undef UA_ENABLE_PUBSUB */</span><span class="preprocessor"></span><span class="comment"></span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">/** #undef UA_ENABLE_PUBSUB_ENCRYPTION */</span><span class="preprocessor"></span><span class="comment"></span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">/** #undef UA_ENABLE_PUBSUB_FILE_CONFIG */</span><span class="preprocessor"></span><span class="comment"></span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">/** #undef UA_ENABLE_PUBSUB_ETH_UADP */</span><span class="preprocessor"></span><span class="comment"></span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">/** #undef UA_ENABLE_PUBSUB_DELTAFRAMES */</span><span class="preprocessor"></span><span class="comment"></span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">/** #undef UA_ENABLE_PUBSUB_INFORMATIONMODEL */</span><span class="preprocessor"></span><span class="comment"></span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">/** #undef UA_ENABLE_PUBSUB_INFORMATIONMODEL_METHODS */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="config_8h.html#ad9adf084d143ce816158de4bf4db924b">   32</a></span><span class="preprocessor">#define UA_ENABLE_DA</span><span class="comment"></span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">/** #undef UA_ENABLE_DIAGNOSTICS */</span><span class="preprocessor"></span><span class="comment"></span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">/** #undef UA_ENABLE_HISTORIZING */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="config_8h.html#ad99ca642961a9f3696bc7903c25a2d74">   35</a></span><span class="preprocessor">#define UA_ENABLE_PARSING</span><span class="comment"></span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="comment">/** #undef UA_ENABLE_EXPERIMENTAL_HISTORIZING */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="config_8h.html#ac5038359b4b45edda1d6b7cb98a9539f">   37</a></span><span class="preprocessor">#define UA_ENABLE_SUBSCRIPTIONS_EVENTS</span><span class="comment"></span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="comment">/** #undef UA_ENABLE_JSON_ENCODING */</span><span class="preprocessor"></span><span class="comment"></span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="comment">/** #undef UA_ENABLE_PUBSUB_MQTT */</span><span class="preprocessor"></span><span class="comment"></span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="comment">/** #undef UA_ENABLE_MQTT_TLS */</span><span class="preprocessor"></span><span class="comment"></span></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="comment">/** #undef UA_ENABLE_MQTT_TLS_OPENSSL */</span><span class="preprocessor"></span><span class="comment"></span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="comment">/** #undef UA_ENABLE_MQTT_TLS_MBEDTLS */</span><span class="preprocessor"></span><span class="comment"></span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">/** #undef UA_ENABLE_ENCRYPTION_MBEDTLS */</span><span class="preprocessor"></span><span class="comment"></span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="comment">/** #undef UA_ENABLE_TPM2_SECURITY */</span><span class="preprocessor"></span><span class="comment"></span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="comment">/** #undef UA_ENABLE_ENCRYPTION_OPENSSL */</span><span class="preprocessor"></span><span class="comment"></span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="comment">/** #undef UA_ENABLE_ENCRYPTION_LIBRESSL */</span><span class="preprocessor"></span></div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="preprocessor">#if defined(UA_ENABLE_ENCRYPTION_MBEDTLS) || defined(UA_ENABLE_ENCRYPTION_OPENSSL) || defined(UA_ENABLE_ENCRYPTION_LIBRESSL)</span></div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#define UA_ENABLE_ENCRYPTION</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#endif</span><span class="comment"></span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="comment">/** #undef UA_ENABLE_SUBSCRIPTIONS_ALARMS_CONDITIONS */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span><span class="comment"></span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">/** Multithreading */</span><span class="comment"></span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">/** #undef UA_ENABLE_IMMUTABLE_NODES */</span></div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="config_8h.html#a3fb520d50d28b6f12de3818245998a15">   54</a></span><span class="preprocessor">#define UA_MULTITHREADING 0</span></div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="comment"></span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="comment">/** Advanced Options */</span></div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="config_8h.html#aa17bee884fa30dc9e6ef2d194e4bc92d">   57</a></span><span class="preprocessor">#define UA_ENABLE_STATUSCODE_DESCRIPTIONS</span></div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="config_8h.html#a00bc1e482cdb07be10f8571671de803a">   58</a></span><span class="preprocessor">#define UA_ENABLE_TYPEDESCRIPTION</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="config_8h.html#aefdbb8d542ffb168e3458ca984eef0df">   59</a></span><span class="preprocessor">#define UA_ENABLE_NODESET_COMPILER_DESCRIPTIONS</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="config_8h.html#a0d580043222f714f393c159f4ee71fd1">   66</a></span><span class="preprocessor">#define UA_ENABLE_DISCOVERY_SEMAPHORE</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="config_8h.html#aefdbb8d542ffb168e3458ca984eef0df">   59</a></span><span class="preprocessor">#define UA_ENABLE_NODESET_COMPILER_DESCRIPTIONS</span><span class="comment"></span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="comment">/** #undef UA_ENABLE_DETERMINISTIC_RNG */</span><span class="preprocessor"></span><span class="comment"></span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="comment">/** #undef UA_ENABLE_DISCOVERY */</span><span class="preprocessor"></span><span class="comment"></span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="comment">/** #undef UA_ENABLE_DISCOVERY_MULTICAST */</span><span class="preprocessor"></span><span class="comment"></span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span><span class="comment">/** #undef UA_ENABLE_WEBSOCKET_SERVER */</span><span class="preprocessor"></span><span class="comment"></span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="comment">/** #undef UA_ENABLE_QUERY */</span><span class="preprocessor"></span><span class="comment"></span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="comment">/** #undef UA_ENABLE_MALLOC_SINGLETON */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="config_8h.html#a0d580043222f714f393c159f4ee71fd1">   66</a></span><span class="preprocessor">#define UA_ENABLE_DISCOVERY_SEMAPHORE</span><span class="comment"></span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">/** #undef UA_ENABLE_UNIT_TEST_FAILURE_HOOKS */</span><span class="preprocessor"></span><span class="comment"></span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="comment">/** #undef UA_ENABLE_VALGRIND_INTERACTIVE */</span><span class="preprocessor"></span></div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="config_8h.html#af5a35fbb5459cbd1e90a57e81b06d814">   69</a></span><span class="preprocessor">#define UA_VALGRIND_INTERACTIVE_INTERVAL 1000</span></div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="config_8h.html#aa0ea40ca59e55e38e6efeba6994cc007">   70</a></span><span class="preprocessor">#define UA_GENERATED_NAMESPACE_ZERO</span></div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="config_8h.html#a1893e58479ba0e17306bb323a5c94c88">   78</a></span><span class="preprocessor">#define UA_DEBUG</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="config_8h.html#aa0ea40ca59e55e38e6efeba6994cc007">   70</a></span><span class="preprocessor">#define UA_GENERATED_NAMESPACE_ZERO</span><span class="comment"></span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="comment">/** #undef UA_GENERATED_NAMESPACE_ZERO_FULL */</span><span class="preprocessor"></span><span class="comment"></span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="comment">/** #undef UA_ENABLE_PUBSUB_MONITORING */</span><span class="preprocessor"></span><span class="comment"></span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="comment">/** #undef UA_ENABLE_PUBSUB_BUFMALLOC */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="comment"></span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="comment">/** #undef UA_PACK_DEBIAN */</span></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="comment"></span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="comment">/** Options for Debugging */</span></div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="config_8h.html#a1893e58479ba0e17306bb323a5c94c88">   78</a></span><span class="preprocessor">#define UA_DEBUG</span><span class="comment"></span></div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">/** #undef UA_DEBUG_DUMP_PKGS */</span><span class="preprocessor"></span><span class="comment"></span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment">/** #undef UA_DEBUG_FILE_LINE_INFO */</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment"></span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment">/** #undef UA_DYNAMIC_LINKING */</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment"></span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="comment">/** Shortcuts for extern &quot;C&quot; declarations */</span></div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span><span class="preprocessor">#if !defined(_UA_BEGIN_DECLS)</span></div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="preprocessor"># ifdef __cplusplus</span></div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="preprocessor">#  define _UA_BEGIN_DECLS extern &quot;C&quot;</span> {</div>
@@ -127,7 +176,8 @@ $(function() {
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno"><a class="line" href="config_8h.html#ae2a857f3db1005cc1b5a41effd3adac6">   96</a></span><span class="preprocessor">#  define _UA_END_DECLS</span></div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="preprocessor"># endif</span></div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="comment"></span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span><span class="comment">/** Select default architecture if non is selected through CMake or compiler define */</span></div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="preprocessor">#if 1  &amp;&amp; !defined(UA_ARCHITECTURE_ECOS) &amp;&amp; !defined(UA_ARCHITECTURE_FREERTOSLWIP) &amp;&amp; !defined(UA_ARCHITECTURE_POSIX) &amp;&amp; !defined(UA_ARCHITECTURE_VXWORKS) &amp;&amp; !defined(UA_ARCHITECTURE_WEC7) &amp;&amp; !defined(UA_ARCHITECTURE_WIN32)</span></div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span><span class="preprocessor"># ifdef _WIN32</span></div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="preprocessor">#  define UA_ARCHITECTURE_WIN32</span></div>
@@ -143,7 +193,9 @@ $(function() {
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="preprocessor"># endif</span></div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="preprocessor"># ifndef _DEFAULT_SOURCE</span></div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="config_8h.html#a8fb447618db946a9e2a596d9ea18763f">  115</a></span><span class="preprocessor">#  define _DEFAULT_SOURCE</span></div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="preprocessor"># endif</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="preprocessor"># endif</span><span class="comment"></span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="comment">/** On older systems we need to define _BSD_SOURCE.</span></div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="comment"> * _DEFAULT_SOURCE is an alias for that. */</span><span class="preprocessor"></span></div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="preprocessor"># ifndef _BSD_SOURCE</span></div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno"><a class="line" href="config_8h.html#ad3d8a3bd0c0b677acef144f2c2ef6d73">  120</a></span><span class="preprocessor">#  define _BSD_SOURCE</span></div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="preprocessor"># endif</span></div>

@@ -78,7 +78,14 @@ $(function() {
   <div class="headertitle"><div class="title">network.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="network_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<a href="network_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/** This Source Code Form is subject to the terms of the Mozilla Public</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * License, v. 2.0. If a copy of the MPL was not distributed with this</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * file, You can obtain one at http://mozilla.org/MPL/2.0/.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> *    Copyright 2017 (c) Fraunhofer IOSB (Author: Julius Pfrommer)</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> *    Copyright 2017 (c) Stefan Profanter, fortiss GmbH</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#ifndef UA_PLUGIN_NETWORK_H_</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#define UA_PLUGIN_NETWORK_H_</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
@@ -86,7 +93,8 @@ $(function() {
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;<a class="code" href="log_8h.html">open62541/plugin/log.h</a>&gt;</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><a class="code hl_define" href="config_8h.html#aa397bffde7d792f38dcbb8e329486f9c">_UA_BEGIN_DECLS</a></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"></span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">/** Forward declarations */</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">struct </span><a class="code hl_struct" href="structUA__Connection.html">UA_Connection</a>;</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="network_8h.html#a3509b0096939fe9277440cf0c5dde5c9">   19</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="structUA__Connection.html">UA_Connection</a> <a class="code hl_struct" href="structUA__Connection.html">UA_Connection</a>;</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
@@ -174,11 +182,17 @@ $(function() {
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>};</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment"></span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment">/** Process a binary message (TCP packet). The message can contain partial</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment"> * chunks. (TCP is a streaming protocol and packets may be split/merge during</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="comment"> * transport.) After processing, the message is freed with</span></div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="comment"> * connection-&gt;releaseRecvBuffer. */</span></div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="keywordtype">void</span></div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno"><a class="line" href="network_8h.html#ab9e24a0d229b3c1e33d9593faab51c52">  111</a></span><a class="code hl_function" href="network_8h.html#ab9e24a0d229b3c1e33d9593faab51c52">UA_Server_processBinaryMessage</a>(<a class="code hl_struct" href="structUA__Server.html">UA_Server</a> *server, <a class="code hl_struct" href="structUA__Connection.html">UA_Connection</a> *connection,</div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                               <a class="code hl_struct" href="structUA__String.html">UA_ByteString</a> *<a class="code hl_struct" href="structmessage.html">message</a>);</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="comment"></span> </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="comment">/** The server internally cleans up the connection and then calls</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="comment"> * connection-&gt;free. */</span></div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="keywordtype">void</span></div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="network_8h.html#aa45c98f028fe13110a061fcc0e1e8359">  117</a></span><a class="code hl_function" href="network_8h.html#aa45c98f028fe13110a061fcc0e1e8359">UA_Server_removeConnection</a>(<a class="code hl_struct" href="structUA__Server.html">UA_Server</a> *server, <a class="code hl_struct" href="structUA__Connection.html">UA_Connection</a> *connection);</div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
@@ -227,7 +241,11 @@ $(function() {
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>};</div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span> </div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span><span class="comment"></span> </div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="comment">/** @param config the connection config for this client</span></div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span><span class="comment"> * @param endpointUrl to where to connect</span></div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span><span class="comment"> * @param timeout in ms until the connection try times out if remote not reachable</span></div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span><span class="comment"> * @param logger the logger to use */</span></div>
 <div class="line"><a id="l00169" name="l00169"></a><span class="lineno"><a class="line" href="network_8h.html#a08b21614cf776c5536da1b2bf6ef4abf">  169</a></span><span class="keyword">typedef</span> <a class="code hl_struct" href="structUA__Connection.html">UA_Connection</a></div>
 <div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>(*<a class="code hl_typedef" href="network_8h.html#a08b21614cf776c5536da1b2bf6ef4abf">UA_ConnectClientConnection</a>)(<a class="code hl_struct" href="structUA__ConnectionConfig.html">UA_ConnectionConfig</a> config, <a class="code hl_struct" href="structUA__String.html">UA_String</a> endpointUrl,</div>
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>                              <a class="code hl_typedef" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> timeout, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__Logger.html">UA_Logger</a> *logger);</div>

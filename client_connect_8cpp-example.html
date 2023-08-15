@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.6.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.7.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -80,14 +80,15 @@ $(function() {
 <div class="line"><span class="preprocessor">#include &quot;<a class="code" href="open62541pp_8h.html">open62541pp/open62541pp.h</a>&quot;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span>* argv[]) {</div>
-<div class="line">    CliParser parser(argc, argv);</div>
+<div class="line">    <span class="keyword">const</span> CliParser parser(argc, argv);</div>
 <div class="line">    <span class="keywordflow">if</span> (parser.nargs() &lt; 2 || parser.hasFlag(<span class="stringliteral">&quot;-h&quot;</span>) || parser.hasFlag(<span class="stringliteral">&quot;--help&quot;</span>)) {</div>
-<div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;usage: client_connect [options] opc.tcp://&lt;host&gt;:&lt;port&gt;\n&quot;</span></div>
-<div class="line">                  &lt;&lt; <span class="stringliteral">&quot;options:\n&quot;</span></div>
-<div class="line">                  &lt;&lt; <span class="stringliteral">&quot;  --username &lt;name&gt;\n&quot;</span></div>
-<div class="line">                  &lt;&lt; <span class="stringliteral">&quot;  --password &lt;password&gt;\n&quot;</span></div>
-<div class="line">                  &lt;&lt; <span class="stringliteral">&quot;  --help, -h\n&quot;</span></div>
-<div class="line">                  &lt;&lt; std::flush;</div>
+<div class="line">        std::cout</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;usage: client_connect [options] opc.tcp://&lt;host&gt;:&lt;port&gt;\n&quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;options:\n&quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;  --username &lt;name&gt;\n&quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;  --password &lt;password&gt;\n&quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;  --help, -h\n&quot;</span></div>
+<div class="line">            &lt;&lt; std::flush;</div>
 <div class="line">        <span class="keywordflow">return</span> 2;</div>
 <div class="line">    }</div>
 <div class="line"> </div>
@@ -112,7 +113,7 @@ $(function() {
 <div class="line"> </div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Server date (UTC): &quot;</span> &lt;&lt; dt.format(<span class="stringliteral">&quot;%Y-%m-%d %H:%M:%S&quot;</span>) &lt;&lt; std::endl;</div>
 <div class="line">}</div>
-<div class="ttc" id="aclassopcua_1_1Client_html"><div class="ttname"><a href="classopcua_1_1Client.html">opcua::Client</a></div><div class="ttdoc">High-level client class.</div><div class="ttdef"><b>Definition</b> <a href="Client_8h_source.html#l00036">Client.h:36</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Client_html"><div class="ttname"><a href="classopcua_1_1Client.html">opcua::Client</a></div><div class="ttdoc">High-level client class.</div><div class="ttdef"><b>Definition</b> <a href="Client_8h_source.html#l00037">Client.h:37</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Client_html_a5a4b84d41472ab996d825dd6c2dede11"><div class="ttname"><a href="classopcua_1_1Client.html#a5a4b84d41472ab996d825dd6c2dede11">opcua::Client::getNode</a></div><div class="ttdeci">Node&lt; Client &gt; getNode(const NodeId &amp;id)</div></div>
 <div class="ttc" id="aclassopcua_1_1Client_html_a6dbd84c74a6214369470379a355555ab"><div class="ttname"><a href="classopcua_1_1Client.html#a6dbd84c74a6214369470379a355555ab">opcua::Client::connect</a></div><div class="ttdeci">void connect(std::string_view endpointUrl)</div><div class="ttdoc">Connect to the selected server.</div></div>
 <div class="ttc" id="aclassopcua_1_1Client_html_ae03a726547da46698d93e781f2dfcff9"><div class="ttname"><a href="classopcua_1_1Client.html#ae03a726547da46698d93e781f2dfcff9">opcua::Client::disconnect</a></div><div class="ttdeci">void disconnect() noexcept</div><div class="ttdoc">Disconnect and close a connection to the server (async, without blocking).</div></div>
@@ -120,9 +121,9 @@ $(function() {
 <div class="ttc" id="agroup__NodeIds_html_gga0d0700fca6d7287fc710bdb115beab85a0d8ba6d48210c58515c100ffcdc9b1b2"><div class="ttname"><a href="group__NodeIds.html#gga0d0700fca6d7287fc710bdb115beab85a0d8ba6d48210c58515c100ffcdc9b1b2">opcua::VariableId::Server_ServerStatus_CurrentTime</a></div><div class="ttdeci">@ Server_ServerStatus_CurrentTime</div></div>
 <div class="ttc" id="ahelper_8h_html"><div class="ttname"><a href="helper_8h.html">helper.h</a></div></div>
 <div class="ttc" id="aopen62541pp_8h_html"><div class="ttname"><a href="open62541pp_8h.html">open62541pp.h</a></div></div>
-<div class="ttc" id="astructopcua_1_1Login_html"><div class="ttname"><a href="structopcua_1_1Login.html">opcua::Login</a></div><div class="ttdoc">Login credentials.</div><div class="ttdef"><b>Definition</b> <a href="Auth_8h_source.html#l00008">Auth.h:8</a></div></div>
-<div class="ttc" id="astructopcua_1_1Login_html_a92df088f423035168f7c4d6099bf9e04"><div class="ttname"><a href="structopcua_1_1Login.html#a92df088f423035168f7c4d6099bf9e04">opcua::Login::username</a></div><div class="ttdeci">std::string username</div><div class="ttdef"><b>Definition</b> <a href="Auth_8h_source.html#l00009">Auth.h:9</a></div></div>
-<div class="ttc" id="astructopcua_1_1Login_html_ac01afd22cff2e767dc5ad27966ccab8f"><div class="ttname"><a href="structopcua_1_1Login.html#ac01afd22cff2e767dc5ad27966ccab8f">opcua::Login::password</a></div><div class="ttdeci">std::string password</div><div class="ttdef"><b>Definition</b> <a href="Auth_8h_source.html#l00010">Auth.h:10</a></div></div>
+<div class="ttc" id="astructopcua_1_1Login_html"><div class="ttname"><a href="structopcua_1_1Login.html">opcua::Login</a></div><div class="ttdoc">Login credentials.</div><div class="ttdef"><b>Definition</b> <a href="AccessControl_8h_source.html#l00023">AccessControl.h:23</a></div></div>
+<div class="ttc" id="astructopcua_1_1Login_html_a92df088f423035168f7c4d6099bf9e04"><div class="ttname"><a href="structopcua_1_1Login.html#a92df088f423035168f7c4d6099bf9e04">opcua::Login::username</a></div><div class="ttdeci">std::string username</div><div class="ttdef"><b>Definition</b> <a href="AccessControl_8h_source.html#l00024">AccessControl.h:24</a></div></div>
+<div class="ttc" id="astructopcua_1_1Login_html_ac01afd22cff2e767dc5ad27966ccab8f"><div class="ttname"><a href="structopcua_1_1Login.html#ac01afd22cff2e767dc5ad27966ccab8f">opcua::Login::password</a></div><div class="ttdeci">std::string password</div><div class="ttdef"><b>Definition</b> <a href="AccessControl_8h_source.html#l00025">AccessControl.h:25</a></div></div>
 </div><!-- fragment --> </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

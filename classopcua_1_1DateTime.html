@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.6.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.7.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -180,8 +180,6 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memitem:ac183e283c4619b5e6e84d80706034224 inherit pro_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#ac183e283c4619b5e6e84d80706034224">copy</a> (const <a class="elRef" target="_blank" href="open62541/types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> &amp;data)</td></tr>
 <tr class="separator:ac183e283c4619b5e6e84d80706034224 inherit pro_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_static_methods_classopcua_1_1TypeWrapper"><td colspan="2" onclick="javascript:toggleInherit('pro_static_methods_classopcua_1_1TypeWrapper')"><img src="closed.png" alt="-"/>&#160;Static Protected Member Functions inherited from <a class="el" href="classopcua_1_1TypeWrapper.html">opcua::TypeWrapper&lt; UA_DateTime, UA_TYPES_DATETIME &gt;</a></td></tr>
-<tr class="memitem:a570e5661b87bdc4abc4fa96fca9dd493 inherit pro_static_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">static const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a570e5661b87bdc4abc4fa96fca9dd493">getDataType</a> ()</td></tr>
-<tr class="separator:a570e5661b87bdc4abc4fa96fca9dd493 inherit pro_static_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7794f5381651258794f075fdaf7bbcff inherit pro_static_methods_classopcua_1_1TypeWrapper"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1TypeWrapper.html#a7794f5381651258794f075fdaf7bbcff">checkMemSize</a> ()</td></tr>
 <tr class="separator:a7794f5381651258794f075fdaf7bbcff inherit pro_static_methods_classopcua_1_1TypeWrapper"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -189,7 +187,7 @@ Additional Inherited Members</h2></td></tr>
 <div class="textblock"><p>UA_DateTime wrapper class. </p>
 <p>An instance in time. A <a class="el" href="classopcua_1_1DateTime.html" title="UA_DateTime wrapper class.">DateTime</a> value is encoded as a 64-bit signed integer which represents the number of 100 nanosecond intervals since January 1, 1601 (UTC).</p>
 <dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/Core/Part6/v105/docs/5.2.2.5">https://reference.opcfoundation.org/Core/Part6/v105/docs/5.2.2.5</a> </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_connect_8cpp-example.html#_a7">client_connect.cpp</a>, <a class="el" href="client_minimal_8cpp-example.html#_a6">client_minimal.cpp</a>, <a class="el" href="client_subscription_8cpp-example.html#_a10">client_subscription.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#_a8">server_valuecallback.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_connect_8cpp-example.html#_a7">client_connect.cpp</a>, <a class="el" href="client_minimal_8cpp-example.html#_a6">client_minimal.cpp</a>, <a class="el" href="client_subscription_8cpp-example.html#_a10">client_subscription.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#_a7">server_valuecallback.cpp</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="DateTime_8h_source.html#l00023">23</a> of file <a class="el" href="DateTime_8h_source.html">DateTime.h</a>.</p>
@@ -282,7 +280,7 @@ template&lt;typename Clock , typename <a class="el" href="group__NodeIds.html#gg
 </div><div class="memdoc">
 
 <p>Get current <a class="el" href="classopcua_1_1DateTime.html" title="UA_DateTime wrapper class.">DateTime</a>. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_valuecallback_8cpp-example.html#a4">server_valuecallback.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_datasource_8cpp-example.html#a13">server_datasource.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#a3">server_valuecallback.cpp</a>.</dd>
 </dl>
 
 </div>
@@ -317,9 +315,7 @@ template&lt;typename Clock , typename <a class="el" href="group__NodeIds.html#gg
 
 <p class="definition">Definition at line <a class="el" href="DateTime_8h_source.html#l00067">67</a> of file <a class="el" href="DateTime_8h_source.html">DateTime.h</a>.</p>
 
-<p class="reference">References <a class="elRef" target="_blank" href="open62541/types_8h.html#a489381cc84a7d552fc23c907c7c5c9cb">UA_DATETIME_UNIX_EPOCH</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="TypeConverter_8h_source.html#l00317">opcua::TypeConverter&lt; std::chrono::time_point&lt; Clock, Duration &gt; &gt;::toNative()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="TypeConverter_8h_source.html#l00312">opcua::TypeConverter&lt; std::chrono::time_point&lt; Clock, Duration &gt; &gt;::toNative()</a>.</p>
 
 </div>
 </div>
@@ -396,9 +392,7 @@ template&lt;typename Clock , typename <a class="el" href="group__NodeIds.html#gg
 
 <p class="definition">Definition at line <a class="el" href="DateTime_8h_source.html#l00075">75</a> of file <a class="el" href="DateTime_8h_source.html">DateTime.h</a>.</p>
 
-<p class="reference">References <a class="el" href="classopcua_1_1DateTime.html#a20b227dfd968989c0b6d16d304215e38">get()</a>, and <a class="elRef" target="_blank" href="open62541/types_8h.html#a489381cc84a7d552fc23c907c7c5c9cb">UA_DATETIME_UNIX_EPOCH</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="TypeConverter_8h_source.html#l00313">opcua::TypeConverter&lt; std::chrono::time_point&lt; Clock, Duration &gt; &gt;::fromNative()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="TypeConverter_8h_source.html#l00308">opcua::TypeConverter&lt; std::chrono::time_point&lt; Clock, Duration &gt; &gt;::fromNative()</a>.</p>
 
 </div>
 </div>
@@ -473,7 +467,7 @@ template&lt;typename Clock , typename <a class="el" href="group__NodeIds.html#gg
 
 <p>Get <a class="el" href="classopcua_1_1DateTime.html" title="UA_DateTime wrapper class.">DateTime</a> value as 100 nanosecond intervals since January 1, 1601 (UTC). </p>
 
-<p class="reference">Referenced by <a class="el" href="TypeConverter_8h_source.html#l00317">opcua::TypeConverter&lt; std::chrono::time_point&lt; Clock, Duration &gt; &gt;::toNative()</a>, and <a class="el" href="DateTime_8h_source.html#l00075">toTimePoint()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="TypeConverter_8h_source.html#l00312">opcua::TypeConverter&lt; std::chrono::time_point&lt; Clock, Duration &gt; &gt;::toNative()</a>, and <a class="el" href="DateTime_8h_source.html#l00075">toTimePoint()</a>.</p>
 
 </div>
 </div>
@@ -505,7 +499,7 @@ template&lt;typename Clock , typename <a class="el" href="group__NodeIds.html#gg
 
 <p>Convert to string with given format (same format codes as strftime). </p>
 <dl class="section see"><dt>See also</dt><dd><a href="https://en.cppreference.com/w/cpp/chrono/c/strftime">https://en.cppreference.com/w/cpp/chrono/c/strftime</a> </dd></dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_minimal_8cpp-example.html#a7">client_minimal.cpp</a>, <a class="el" href="client_subscription_8cpp-example.html#a11">client_subscription.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#a9">server_valuecallback.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_minimal_8cpp-example.html#a7">client_minimal.cpp</a>, <a class="el" href="client_subscription_8cpp-example.html#a11">client_subscription.cpp</a>, and <a class="el" href="server_valuecallback_8cpp-example.html#a8">server_valuecallback.cpp</a>.</dd>
 </dl>
 
 </div>

@@ -78,7 +78,21 @@ $(function() {
   <div class="headertitle"><div class="title">types.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="types_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<a href="types_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/** This Source Code Form is subject to the terms of the Mozilla Public</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * License, v. 2.0. If a copy of the MPL was not distributed with this</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * file, You can obtain one at http://mozilla.org/MPL/2.0/.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> *    Copyright 2014 (c) Leon Urbas</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> *    Copyright 2014, 2016-2017 (c) Florian Palm</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"> *    Copyright 2014-2017 (c) Fraunhofer IOSB (Author: Julius Pfrommer)</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment"> *    Copyright 2015-2016 (c) Sten Grüner</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"> *    Copyright 2015-2016 (c) Chris Iatrou</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment"> *    Copyright 2015 (c) Nick Goossens</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment"> *    Copyright 2015-2016 (c) Oleksiy Vasylyev</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"> *    Copyright 2017 (c) Stefan Profanter, fortiss GmbH</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment"> *    Copyright 2017 (c) Thomas Stalder, Blue Time Concept SA</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#ifndef UA_TYPES_H_</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#define UA_TYPES_H_</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
@@ -141,10 +155,17 @@ $(function() {
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno"><a class="line" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">   77</a></span><span class="keyword">typedef</span> uint32_t <a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>;</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="comment"></span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="comment">/** Returns the human-readable name of the StatusCode. If no matching StatusCode</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="comment"> * is found, a default string for &quot;Unknown&quot; is returned. This feature might be</span></div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="comment"> * disabled to create a smaller binary with the</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="comment"> * UA_ENABLE_STATUSCODE_DESCRIPTIONS build-flag. Then the function returns an</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="comment"> * empty string for every StatusCode. */</span></div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>UA_EXPORT <span class="keyword">const</span> <span class="keywordtype">char</span> *</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="types_8h.html#a6f4095449612683166455cb8ef8d2399">   85</a></span><a class="code hl_function" href="types_8h.html#a6f4095449612683166455cb8ef8d2399">UA_StatusCode_name</a>(<a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> code);</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="comment"></span> </div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span><span class="comment">/** Extracts the severity from a StatusCode. See Part 4, Section 7.34 for</span></div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span><span class="comment"> * details. */</span></div>
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="keyword">static</span> <a class="code hl_variable" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a></div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>UA_StatusCode_isBad(<a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> code) {</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keywordflow">return</span> ((code &gt;&gt; 30) &gt;= 0x02);</div>
@@ -159,7 +180,11 @@ $(function() {
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>UA_StatusCode_isGood(<a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> code) {</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keywordflow">return</span> ((code &gt;&gt; 30) == 0x00);</div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>}</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="comment"></span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment">/** Compares the top 16 bits of two StatusCodes for equality. This should only</span></div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment"> * be used when processing user-defined StatusCodes e.g when processing a ReadResponse.</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment"> * As a convention, the lower bits of StatusCodes should not be used internally, meaning</span></div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span><span class="comment"> * can compare them without the use of this function. */</span></div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="keyword">static</span> <a class="code hl_variable" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a></div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>UA_StatusCode_isEqualTop (<a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> s1, <a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> s2) {</div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  <span class="keywordflow">return</span> ((s1 &amp; 0xFFFF0000) == (s2 &amp; 0xFFFF0000));</div>
@@ -170,7 +195,8 @@ $(function() {
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="structUA__String.html#ab73e448dea6fc379598652f5da447b47">  115</a></span>    <span class="keywordtype">size_t</span> <a class="code hl_variable" href="structUA__String.html#ab73e448dea6fc379598652f5da447b47">length</a>; <span class="comment">/* The length of the string */</span></div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="structUA__String.html#a337ab69f4b7d9c5e6ab1f1cb18844d07">  116</a></span>    <a class="code hl_typedef" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a> *<a class="code hl_variable" href="structUA__String.html#a337ab69f4b7d9c5e6ab1f1cb18844d07">data</a>; <span class="comment">/* The content (not null-terminated) */</span></div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>} <a class="code hl_struct" href="structUA__String.html">UA_String</a>;</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span><span class="comment"></span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="comment">/** Copies the content on the heap. Returns a null-string when alloc fails */</span></div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><a class="code hl_struct" href="structUA__String.html">UA_String</a></div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno"><a class="line" href="types_8h.html#ae87c3eb1ffcd3b4a36eb0ba444222888">  121</a></span><a class="code hl_function" href="types_8h.html#ae87c3eb1ffcd3b4a36eb0ba444222888">UA_String_fromChars</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *src);</div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
@@ -189,23 +215,30 @@ $(function() {
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>}</div>
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
 <div class="line"><a id="l00137" name="l00137"></a><span class="lineno"><a class="line" href="types_8h.html#ac6f19951777419d520d469d5130acae4">  137</a></span><span class="preprocessor">#define UA_STRING_ALLOC(CHARS) UA_String_fromChars(CHARS)</span></div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><span class="comment"></span> </div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span><span class="comment">/** Define strings at compile time (in ROM) */</span></div>
 <div class="line"><a id="l00140" name="l00140"></a><span class="lineno"><a class="line" href="types_8h.html#ae7812e33f125938e3af06b396298fbb3">  140</a></span><span class="preprocessor">#define UA_STRING_STATIC(CHARS) {sizeof(CHARS)-1, (UA_Byte*)CHARS}</span></div>
 <div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
 <div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
 <div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
 <div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">  144</a></span><span class="keyword">typedef</span> int64_t <a class="code hl_typedef" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a>;</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span><span class="comment"></span> </div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span><span class="comment">/** Multiples to convert durations to DateTime */</span></div>
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno"><a class="line" href="types_8h.html#ad25e26d74551e9e85ecf321eb5013297">  147</a></span><span class="preprocessor">#define UA_DATETIME_USEC 10LL</span></div>
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno"><a class="line" href="types_8h.html#a0e0ef74131ac3426383cb81def93be06">  148</a></span><span class="preprocessor">#define UA_DATETIME_MSEC (UA_DATETIME_USEC * 1000LL)</span></div>
 <div class="line"><a id="l00149" name="l00149"></a><span class="lineno"><a class="line" href="types_8h.html#a191bd5d32d06062c1f5fd06d48ce4c5e">  149</a></span><span class="preprocessor">#define UA_DATETIME_SEC (UA_DATETIME_MSEC * 1000LL)</span></div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><span class="comment"></span> </div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span><span class="comment">/** The current time in UTC time */</span></div>
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno"><a class="line" href="types_8h.html#ae56238574ba35e88e91f4c264c452284">  152</a></span><a class="code hl_typedef" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> <a class="code hl_function" href="types_8h.html#ae56238574ba35e88e91f4c264c452284">UA_DateTime_now</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><span class="comment"></span> </div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span><span class="comment">/** Offset between local time and UTC time */</span></div>
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno"><a class="line" href="types_8h.html#af9ca7a434892ec25c948b7025752798d">  155</a></span><a class="code hl_typedef" href="types_8h.html#ae5c13df54009d7a3e374bfc594af8059">UA_Int64</a> <a class="code hl_function" href="types_8h.html#af9ca7a434892ec25c948b7025752798d">UA_DateTime_localTimeUtcOffset</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><span class="comment"></span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span><span class="comment">/** CPU clock invariant to system time changes. Use only to measure durations,</span></div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span><span class="comment"> * not absolute time. */</span></div>
 <div class="line"><a id="l00159" name="l00159"></a><span class="lineno"><a class="line" href="types_8h.html#add827094c515e557adfe2a50fd7ddafc">  159</a></span><a class="code hl_typedef" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> <a class="code hl_function" href="types_8h.html#add827094c515e557adfe2a50fd7ddafc">UA_DateTime_nowMonotonic</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><span class="comment"></span> </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span><span class="comment">/** Represents a Datetime as a structure */</span></div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno"><a class="line" href="structUA__DateTimeStruct.html">  162</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="structUA__DateTimeStruct.html">UA_DateTimeStruct</a> {</div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno"><a class="line" href="structUA__DateTimeStruct.html#adc3e26d11f113d08316c246159c2d227">  163</a></span>    <a class="code hl_typedef" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a> <a class="code hl_variable" href="structUA__DateTimeStruct.html#adc3e26d11f113d08316c246159c2d227">nanoSec</a>;</div>
 <div class="line"><a id="l00164" name="l00164"></a><span class="lineno"><a class="line" href="structUA__DateTimeStruct.html#afb39870aa4d539fb90509c9eae8135dd">  164</a></span>    <a class="code hl_typedef" href="types_8h.html#a0a5ff540581b2a3ca4757de792c68f05">UA_UInt16</a> <a class="code hl_variable" href="structUA__DateTimeStruct.html#afb39870aa4d539fb90509c9eae8135dd">microSec</a>;</div>
@@ -220,7 +253,13 @@ $(function() {
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
 <div class="line"><a id="l00174" name="l00174"></a><span class="lineno"><a class="line" href="types_8h.html#a4d3d3375ba6c8deb2ba04449cfc6c61a">  174</a></span><a class="code hl_struct" href="structUA__DateTimeStruct.html">UA_DateTimeStruct</a> <a class="code hl_function" href="types_8h.html#a4d3d3375ba6c8deb2ba04449cfc6c61a">UA_DateTime_toStruct</a>(<a class="code hl_typedef" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> t);</div>
 <div class="line"><a id="l00175" name="l00175"></a><span class="lineno"><a class="line" href="types_8h.html#a42238d6ff579539e356922533266982a">  175</a></span><a class="code hl_typedef" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> <a class="code hl_function" href="types_8h.html#a42238d6ff579539e356922533266982a">UA_DateTime_fromStruct</a>(<a class="code hl_struct" href="structUA__DateTimeStruct.html">UA_DateTimeStruct</a> ts);</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span><span class="comment"></span> </div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="comment">/** The C99 standard (7.23.1) says: &quot;The range and precision of times</span></div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span><span class="comment"> * representable in clock_t and time_t are implementation-defined.&quot; On most</span></div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><span class="comment"> * systems, time_t is a 4 or 8 byte integer counting seconds since the UTC Unix</span></div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span><span class="comment"> * epoch. The following methods are used for conversion. */</span></div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="comment"></span> </div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><span class="comment">/** Datetime of 1 Jan 1970 00:00 */</span></div>
 <div class="line"><a id="l00183" name="l00183"></a><span class="lineno"><a class="line" href="types_8h.html#a489381cc84a7d552fc23c907c7c5c9cb">  183</a></span><span class="preprocessor">#define UA_DATETIME_UNIX_EPOCH (11644473600LL * UA_DATETIME_SEC)</span></div>
 <div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
 <div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><span class="keyword">static</span> <a class="code hl_typedef" href="types_8h.html#ae5c13df54009d7a3e374bfc594af8059">UA_Int64</a></div>
@@ -245,7 +284,11 @@ $(function() {
 <div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
 <div class="line"><a id="l00205" name="l00205"></a><span class="lineno"><a class="line" href="types_8h.html#aeadb12f99531c38134d0ad28a8dd3186">  205</a></span><a class="code hl_variable" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> <a class="code hl_function" href="types_8h.html#aeadb12f99531c38134d0ad28a8dd3186">UA_Guid_equal</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__Guid.html">UA_Guid</a> *g1, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__Guid.html">UA_Guid</a> *g2);</div>
 <div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span> </div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span><span class="preprocessor">#ifdef UA_ENABLE_PARSING</span></div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span><span class="preprocessor">#ifdef UA_ENABLE_PARSING</span><span class="comment"></span></div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span><span class="comment">/** Parse the Guid format defined in Part 6, 5.1.3.</span></div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><span class="comment"> * Format: C496578A-0DFE-4B8F-870A-745238C6AEAE</span></div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span><span class="comment"> *         |       |    |    |    |            |</span></div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span><span class="comment"> *         0       8    13   18   23           36 */</span><span class="preprocessor"></span></div>
 <div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>UA_Guid_parse(<a class="code hl_struct" href="structUA__Guid.html">UA_Guid</a> *guid, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__String.html">UA_String</a> str);</div>
 <div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span> </div>
@@ -261,14 +304,19 @@ $(function() {
 <div class="line"><a id="l00224" name="l00224"></a><span class="lineno"><a class="line" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">  224</a></span><span class="keyword">typedef</span> <a class="code hl_struct" href="structUA__String.html">UA_String</a> <a class="code hl_typedef" href="types_8h.html#a05a19615d5da9f034fabefd3d02225ee">UA_ByteString</a>;</div>
 <div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
 <div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>UA_EXPORT <span class="keyword">extern</span> <span class="keyword">const</span> <a class="code hl_struct" href="structUA__String.html">UA_ByteString</a> <a class="code hl_variable" href="types_8h.html#afa6e863144bb3d0e7cd92cb5ce6c1ea7">UA_BYTESTRING_NULL</a>;</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span> </div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span><span class="comment"></span> </div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span><span class="comment">/** Allocates memory of size length for the bytestring.</span></div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span><span class="comment"> * The content is not set to zero. */</span></div>
 <div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00231" name="l00231"></a><span class="lineno"><a class="line" href="types_8h.html#a61fa991809fbabf35b8f17e7d7438e5f">  231</a></span><a class="code hl_function" href="types_8h.html#a61fa991809fbabf35b8f17e7d7438e5f">UA_ByteString_allocBuffer</a>(<a class="code hl_struct" href="structUA__String.html">UA_ByteString</a> *bs, <span class="keywordtype">size_t</span> length);</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span> </div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span><span class="comment"></span> </div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span><span class="comment">/** Converts a ByteString to the corresponding</span></div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span><span class="comment"> * base64 representation */</span></div>
 <div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00236" name="l00236"></a><span class="lineno"><a class="line" href="types_8h.html#a79a3f03f01edb1c980c022443761d98f">  236</a></span><a class="code hl_function" href="types_8h.html#a79a3f03f01edb1c980c022443761d98f">UA_ByteString_toBase64</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__String.html">UA_ByteString</a> *bs,</div>
 <div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>                       <a class="code hl_struct" href="structUA__String.html">UA_String</a> *output);</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span> </div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span><span class="comment"></span> </div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span><span class="comment">/** Parse a ByteString from a base64 representation */</span></div>
 <div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00241" name="l00241"></a><span class="lineno"><a class="line" href="types_8h.html#a5b0a7ed540954fd7ae34cab805781a4d">  241</a></span><a class="code hl_function" href="types_8h.html#a5b0a7ed540954fd7ae34cab805781a4d">UA_ByteString_fromBase64</a>(<a class="code hl_struct" href="structUA__String.html">UA_ByteString</a> *bs,</div>
 <div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>                         <span class="keyword">const</span> <a class="code hl_struct" href="structUA__String.html">UA_String</a> *input);</div>
@@ -293,7 +341,8 @@ $(function() {
 <div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="types_8h.html#a1eae0133787497837706d72ad647b39d">UA_String_equal</a>((<span class="keyword">const</span> <a class="code hl_struct" href="structUA__String.html">UA_String</a>*)string1,</div>
 <div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>                           (<span class="keyword">const</span> <a class="code hl_struct" href="structUA__String.html">UA_String</a>*)string2);</div>
 <div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>}</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span> </div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span><span class="comment"></span> </div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span><span class="comment">/** Returns a non-cryptographic hash of a bytestring */</span></div>
 <div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span><a class="code hl_typedef" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a></div>
 <div class="line"><a id="l00267" name="l00267"></a><span class="lineno"><a class="line" href="types_8h.html#abeb69df996476f539296b29840c216a9">  267</a></span><a class="code hl_function" href="types_8h.html#abeb69df996476f539296b29840c216a9">UA_ByteString_hash</a>(<a class="code hl_typedef" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> initialHashValue,</div>
 <div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>                   <span class="keyword">const</span> <a class="code hl_typedef" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a> *data, <span class="keywordtype">size_t</span> size);</div>
@@ -325,11 +374,24 @@ $(function() {
 <div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>UA_EXPORT <span class="keyword">extern</span> <span class="keyword">const</span> <a class="code hl_struct" href="structUA__NodeId.html">UA_NodeId</a> <a class="code hl_variable" href="types_8h.html#a3c44491bc9a6be7fd37f27caffdfab6a">UA_NODEID_NULL</a>;</div>
 <div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span> </div>
 <div class="line"><a id="l00296" name="l00296"></a><span class="lineno"><a class="line" href="types_8h.html#a5d5eb7e9d541654965cdd0e43efadb73">  296</a></span><a class="code hl_variable" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> <a class="code hl_function" href="types_8h.html#a5d5eb7e9d541654965cdd0e43efadb73">UA_NodeId_isNull</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__NodeId.html">UA_NodeId</a> *p);</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span> </div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span><span class="comment"></span> </div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span><span class="comment">/** Print the NodeId in the human-readable format defined in Part 6,</span></div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span><span class="comment"> * 5.3.1.10.</span></div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span><span class="comment"> * Examples:</span></div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span><span class="comment"> *   UA_NODEID(&quot;i=13&quot;)</span></div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span><span class="comment"> *   UA_NODEID(&quot;ns=10;i=1&quot;)</span></div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span><span class="comment"> *   UA_NODEID(&quot;ns=10;s=Hello:World&quot;)</span></div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span><span class="comment"> *   UA_NODEID(&quot;g=09087e75-8e5e-499b-954f-f2a9603db28a&quot;)</span></div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span><span class="comment"> *   UA_NODEID(&quot;ns=1;b=b3BlbjYyNTQxIQ==&quot;) // base64</span></div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span><span class="comment"> * */</span></div>
 <div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00309" name="l00309"></a><span class="lineno"><a class="line" href="types_8h.html#a5fa03347b6292541b4cc01ff3b0dc8df">  309</a></span><a class="code hl_function" href="types_8h.html#a5fa03347b6292541b4cc01ff3b0dc8df">UA_NodeId_print</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__NodeId.html">UA_NodeId</a> *<span class="keywordtype">id</span>, <a class="code hl_struct" href="structUA__String.html">UA_String</a> *output);</div>
 <div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span> </div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span><span class="preprocessor">#ifdef UA_ENABLE_PARSING</span></div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span><span class="preprocessor">#ifdef UA_ENABLE_PARSING</span><span class="comment"></span></div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span><span class="comment">/** Parse the human-readable NodeId format. Attention! String and</span></div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span><span class="comment"> * ByteString NodeIds have their identifier malloc&#39;ed and need to be</span></div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span><span class="comment"> * cleaned up. */</span><span class="preprocessor"></span></div>
 <div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>UA_NodeId_parse(<a class="code hl_struct" href="structUA__NodeId.html">UA_NodeId</a> *<span class="keywordtype">id</span>, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__String.html">UA_String</a> str);</div>
 <div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span> </div>
@@ -383,15 +445,18 @@ $(function() {
 <div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>    <span class="keywordtype">id</span>.identifierType = <a class="code hl_enumvalue" href="types_8h.html#a026f31872abc03d18b81763d94f18904a914531b4b38f0a4812f08bcc2e39ab3e">UA_NODEIDTYPE_BYTESTRING</a>;</div>
 <div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>    <span class="keywordtype">id</span>.identifier.byteString = UA_BYTESTRING_ALLOC(chars); <span class="keywordflow">return</span> id;</div>
 <div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>}</div>
-<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span> </div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span><span class="comment"></span> </div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span><span class="comment">/** Total ordering of NodeId */</span></div>
 <div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span><a class="code hl_enumeration" href="common_8h.html#adeb58a592483258f220c845c47622b15">UA_Order</a></div>
 <div class="line"><a id="l00371" name="l00371"></a><span class="lineno"><a class="line" href="types_8h.html#a41a1e13672bb42319a1eefa4eacf0f6a">  371</a></span><a class="code hl_function" href="types_8h.html#a41a1e13672bb42319a1eefa4eacf0f6a">UA_NodeId_order</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__NodeId.html">UA_NodeId</a> *n1, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__NodeId.html">UA_NodeId</a> *n2);</div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span> </div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span><span class="comment"></span> </div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span><span class="comment">/** Check for equality */</span></div>
 <div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span><span class="keyword">static</span> <a class="code hl_variable" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a></div>
 <div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>UA_NodeId_equal(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__NodeId.html">UA_NodeId</a> *n1, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__NodeId.html">UA_NodeId</a> *n2) {</div>
 <div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>    <span class="keywordflow">return</span> (<a class="code hl_function" href="types_8h.html#a41a1e13672bb42319a1eefa4eacf0f6a">UA_NodeId_order</a>(n1, n2) == <a class="code hl_enumvalue" href="common_8h.html#adeb58a592483258f220c845c47622b15ac1afa08a35eb10505298c8b33e2afae3">UA_ORDER_EQ</a>);</div>
 <div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>}</div>
-<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span> </div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span><span class="comment"></span> </div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span><span class="comment">/** Returns a non-cryptographic hash for NodeId */</span></div>
 <div class="line"><a id="l00380" name="l00380"></a><span class="lineno"><a class="line" href="types_8h.html#a0ffe513ad3f755b8de55d06e22666cb6">  380</a></span><a class="code hl_typedef" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> <a class="code hl_function" href="types_8h.html#a0ffe513ad3f755b8de55d06e22666cb6">UA_NodeId_hash</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__NodeId.html">UA_NodeId</a> *n);</div>
 <div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span> </div>
 <div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span> </div>
@@ -406,7 +471,15 @@ $(function() {
 <div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00392" name="l00392"></a><span class="lineno"><a class="line" href="types_8h.html#a25c1439d3794dba263e398aac36bc744">  392</a></span><a class="code hl_function" href="types_8h.html#a25c1439d3794dba263e398aac36bc744">UA_ExpandedNodeId_print</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> *<span class="keywordtype">id</span>, <a class="code hl_struct" href="structUA__String.html">UA_String</a> *output);</div>
 <div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span> </div>
-<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span><span class="preprocessor">#ifdef UA_ENABLE_PARSING</span></div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span><span class="preprocessor">#ifdef UA_ENABLE_PARSING</span><span class="comment"></span></div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span><span class="comment">/** Parse the ExpandedNodeId format defined in Part 6, 5.3.1.11:</span></div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span><span class="comment"> *   svr=&lt;serverindex&gt;;ns=&lt;namespaceindex&gt;;&lt;type&gt;=&lt;value&gt;</span></div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span><span class="comment"> *     or</span></div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span><span class="comment"> *   svr=&lt;serverindex&gt;;nsu=&lt;uri&gt;;&lt;type&gt;=&lt;value&gt;</span></div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span><span class="comment"> * The definitions for svr, ns and nsu can be omitted and will be set to zero /</span></div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span><span class="comment"> * the empty string.*/</span><span class="preprocessor"></span></div>
 <div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>UA_ExpandedNodeId_parse(<a class="code hl_struct" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> *<span class="keywordtype">id</span>, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__String.html">UA_String</a> str);</div>
 <div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span> </div>
@@ -459,20 +532,27 @@ $(function() {
 <div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span>UA_EXPANDEDNODEID_NODEID(<a class="code hl_struct" href="structUA__NodeId.html">UA_NodeId</a> nodeId) {</div>
 <div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span>    <a class="code hl_struct" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> <span class="keywordtype">id</span> = {0}; <span class="keywordtype">id</span>.<a class="code hl_variable" href="structUA__ExpandedNodeId.html#a0149bc6bc248fdd89f84c6cea4c10376">nodeId</a> = nodeId; <span class="keywordflow">return</span> id;</div>
 <div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>}</div>
-<div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span> </div>
+<div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span><span class="comment"></span> </div>
+<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span><span class="comment">/** Does the ExpandedNodeId point to a local node? That is, are namespaceUri and</span></div>
+<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span><span class="comment"> * serverIndex empty? */</span></div>
 <div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span><a class="code hl_variable" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a></div>
 <div class="line"><a id="l00459" name="l00459"></a><span class="lineno"><a class="line" href="types_8h.html#a8a993678e30dd083c4860ff6506fb4c4">  459</a></span><a class="code hl_function" href="types_8h.html#a8a993678e30dd083c4860ff6506fb4c4">UA_ExpandedNodeId_isLocal</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> *n);</div>
-<div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span> </div>
+<div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span><span class="comment"></span> </div>
+<div class="line"><a id="l00461" name="l00461"></a><span class="lineno">  461</span><span class="comment">/** Total ordering of ExpandedNodeId */</span></div>
 <div class="line"><a id="l00462" name="l00462"></a><span class="lineno">  462</span><a class="code hl_enumeration" href="common_8h.html#adeb58a592483258f220c845c47622b15">UA_Order</a></div>
 <div class="line"><a id="l00463" name="l00463"></a><span class="lineno"><a class="line" href="types_8h.html#ac7cee556e0b4380bb8cf3efdad6f8986">  463</a></span><a class="code hl_function" href="types_8h.html#ac7cee556e0b4380bb8cf3efdad6f8986">UA_ExpandedNodeId_order</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> *n1,</div>
 <div class="line"><a id="l00464" name="l00464"></a><span class="lineno">  464</span>                        <span class="keyword">const</span> <a class="code hl_struct" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> *n2);</div>
-<div class="line"><a id="l00465" name="l00465"></a><span class="lineno">  465</span> </div>
+<div class="line"><a id="l00465" name="l00465"></a><span class="lineno">  465</span><span class="comment"></span> </div>
+<div class="line"><a id="l00466" name="l00466"></a><span class="lineno">  466</span><span class="comment">/** Check for equality */</span></div>
 <div class="line"><a id="l00467" name="l00467"></a><span class="lineno">  467</span><span class="keyword">static</span> <a class="code hl_variable" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a></div>
 <div class="line"><a id="l00468" name="l00468"></a><span class="lineno">  468</span>UA_ExpandedNodeId_equal(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> *n1,</div>
 <div class="line"><a id="l00469" name="l00469"></a><span class="lineno">  469</span>                        <span class="keyword">const</span> <a class="code hl_struct" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> *n2) {</div>
 <div class="line"><a id="l00470" name="l00470"></a><span class="lineno">  470</span>    <span class="keywordflow">return</span> (<a class="code hl_function" href="types_8h.html#ac7cee556e0b4380bb8cf3efdad6f8986">UA_ExpandedNodeId_order</a>(n1, n2) == <a class="code hl_enumvalue" href="common_8h.html#adeb58a592483258f220c845c47622b15ac1afa08a35eb10505298c8b33e2afae3">UA_ORDER_EQ</a>);</div>
 <div class="line"><a id="l00471" name="l00471"></a><span class="lineno">  471</span>}</div>
-<div class="line"><a id="l00472" name="l00472"></a><span class="lineno">  472</span> </div>
+<div class="line"><a id="l00472" name="l00472"></a><span class="lineno">  472</span><span class="comment"></span> </div>
+<div class="line"><a id="l00473" name="l00473"></a><span class="lineno">  473</span><span class="comment">/** Returns a non-cryptographic hash for ExpandedNodeId. The hash of an</span></div>
+<div class="line"><a id="l00474" name="l00474"></a><span class="lineno">  474</span><span class="comment"> * ExpandedNodeId is identical to the hash of the embedded (simple) NodeId if</span></div>
+<div class="line"><a id="l00475" name="l00475"></a><span class="lineno">  475</span><span class="comment"> * the ServerIndex is zero and no NamespaceUri is set. */</span></div>
 <div class="line"><a id="l00476" name="l00476"></a><span class="lineno">  476</span><a class="code hl_typedef" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a></div>
 <div class="line"><a id="l00477" name="l00477"></a><span class="lineno"><a class="line" href="types_8h.html#a3b346c7682df0b269f3d7c5f5a115ca6">  477</a></span><a class="code hl_function" href="types_8h.html#a3b346c7682df0b269f3d7c5f5a115ca6">UA_ExpandedNodeId_hash</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__ExpandedNodeId.html">UA_ExpandedNodeId</a> *n);</div>
 <div class="line"><a id="l00478" name="l00478"></a><span class="lineno">  478</span> </div>
@@ -486,7 +566,8 @@ $(function() {
 <div class="line"><a id="l00486" name="l00486"></a><span class="lineno">  486</span>UA_QualifiedName_isNull(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__QualifiedName.html">UA_QualifiedName</a> *q) {</div>
 <div class="line"><a id="l00487" name="l00487"></a><span class="lineno">  487</span>    <span class="keywordflow">return</span> (q-&gt;<a class="code hl_variable" href="structUA__QualifiedName.html#a62fdd63c5166b5d65476df30cde02464">namespaceIndex</a> == 0 &amp;&amp; q-&gt;<a class="code hl_variable" href="structUA__QualifiedName.html#a6145e4eb0c1024223e1b843bd8681e10">name</a>.<a class="code hl_variable" href="structUA__String.html#ab73e448dea6fc379598652f5da447b47">length</a> == 0);</div>
 <div class="line"><a id="l00488" name="l00488"></a><span class="lineno">  488</span>}</div>
-<div class="line"><a id="l00489" name="l00489"></a><span class="lineno">  489</span> </div>
+<div class="line"><a id="l00489" name="l00489"></a><span class="lineno">  489</span><span class="comment"></span> </div>
+<div class="line"><a id="l00490" name="l00490"></a><span class="lineno">  490</span><span class="comment">/** Returns a non-cryptographic hash for QualifiedName */</span></div>
 <div class="line"><a id="l00491" name="l00491"></a><span class="lineno">  491</span><a class="code hl_typedef" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a></div>
 <div class="line"><a id="l00492" name="l00492"></a><span class="lineno"><a class="line" href="types_8h.html#a8b418953628080bbe6b09ee0f82ea242">  492</a></span><a class="code hl_function" href="types_8h.html#a8b418953628080bbe6b09ee0f82ea242">UA_QualifiedName_hash</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__QualifiedName.html">UA_QualifiedName</a> *q);</div>
 <div class="line"><a id="l00493" name="l00493"></a><span class="lineno">  493</span> </div>
@@ -544,7 +625,8 @@ $(function() {
 <div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span>    <a class="code hl_function" href="types_8h.html#aaf061bae4099cf865f1f470c21da794a">UA_NumericRange_parse</a>(&amp;nr, UA_STRING((<span class="keywordtype">char</span>*)(uintptr_t)s)); <span class="keywordflow">return</span> nr;</div>
 <div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span>}</div>
 <div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span> </div>
-<div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span> </div>
+<div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span><span class="comment"></span> </div>
+<div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span><span class="comment">/** Forward declaration. See the section on Generic Type Handling */</span></div>
 <div class="line"><a id="l00550" name="l00550"></a><span class="lineno">  550</span><span class="keyword">struct </span><a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a>;</div>
 <div class="line"><a id="l00551" name="l00551"></a><span class="lineno"><a class="line" href="types_8h.html#a400f969e2e062f52d3cb7f060c9d9b44">  551</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a>;</div>
 <div class="line"><a id="l00552" name="l00552"></a><span class="lineno">  552</span> </div>
@@ -565,51 +647,122 @@ $(function() {
 <div class="line"><a id="l00567" name="l00567"></a><span class="lineno"><a class="line" href="structUA__Variant.html#aeb51badc8e696d0f9686ce805811f5cb">  567</a></span>    <span class="keywordtype">size_t</span> <a class="code hl_variable" href="structUA__Variant.html#aeb51badc8e696d0f9686ce805811f5cb">arrayDimensionsSize</a>;   <span class="comment">/* The number of dimensions */</span></div>
 <div class="line"><a id="l00568" name="l00568"></a><span class="lineno"><a class="line" href="structUA__Variant.html#adbd8e0b6eb85fa588bc38c313b70d84a">  568</a></span>    <a class="code hl_typedef" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> *<a class="code hl_variable" href="structUA__Variant.html#adbd8e0b6eb85fa588bc38c313b70d84a">arrayDimensions</a>;   <span class="comment">/* The length of each dimension */</span></div>
 <div class="line"><a id="l00569" name="l00569"></a><span class="lineno">  569</span>} <a class="code hl_struct" href="structUA__Variant.html">UA_Variant</a>;</div>
-<div class="line"><a id="l00570" name="l00570"></a><span class="lineno">  570</span> </div>
+<div class="line"><a id="l00570" name="l00570"></a><span class="lineno">  570</span><span class="comment"></span> </div>
+<div class="line"><a id="l00571" name="l00571"></a><span class="lineno">  571</span><span class="comment">/** Returns true if the variant has no value defined (contains neither an array</span></div>
+<div class="line"><a id="l00572" name="l00572"></a><span class="lineno">  572</span><span class="comment"> * nor a scalar value).</span></div>
+<div class="line"><a id="l00573" name="l00573"></a><span class="lineno">  573</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00574" name="l00574"></a><span class="lineno">  574</span><span class="comment"> * @param v The variant</span></div>
+<div class="line"><a id="l00575" name="l00575"></a><span class="lineno">  575</span><span class="comment"> * @return Is the variant empty */</span></div>
 <div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span><span class="keyword">static</span> <a class="code hl_variable" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a></div>
 <div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span>UA_Variant_isEmpty(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__Variant.html">UA_Variant</a> *v) {</div>
 <div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span>    <span class="keywordflow">return</span> v-&gt;<a class="code hl_variable" href="structUA__Variant.html#ab246eb2c59043a7e5df0c75edd3f538f">type</a> == NULL;</div>
 <div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span>}</div>
-<div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span> </div>
+<div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span><span class="comment"></span> </div>
+<div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span><span class="comment">/** Returns true if the variant contains a scalar value. Note that empty variants</span></div>
+<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span><span class="comment"> * contain an array of length -1 (undefined).</span></div>
+<div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span><span class="comment"> * @param v The variant</span></div>
+<div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span><span class="comment"> * @return Does the variant contain a scalar value */</span></div>
 <div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span><span class="keyword">static</span> <a class="code hl_variable" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a></div>
 <div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>UA_Variant_isScalar(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__Variant.html">UA_Variant</a> *v) {</div>
 <div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span>    <span class="keywordflow">return</span> (v-&gt;<a class="code hl_variable" href="structUA__Variant.html#ad67091bb86efe71a8b798cbd5c4f61d1">arrayLength</a> == 0 &amp;&amp; v-&gt;<a class="code hl_variable" href="structUA__Variant.html#ada37e83e1c07bafef77b7132403e1456">data</a> &gt; <a class="code hl_define" href="types_8h.html#a2cd952b4e4fae65bd5bbc1b90499ab5b">UA_EMPTY_ARRAY_SENTINEL</a>);</div>
 <div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span>}</div>
-<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span> </div>
+<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span><span class="comment"></span> </div>
+<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span><span class="comment">/** Returns true if the variant contains a scalar value of the given type.</span></div>
+<div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00593" name="l00593"></a><span class="lineno">  593</span><span class="comment"> * @param v The variant</span></div>
+<div class="line"><a id="l00594" name="l00594"></a><span class="lineno">  594</span><span class="comment"> * @param type The data type</span></div>
+<div class="line"><a id="l00595" name="l00595"></a><span class="lineno">  595</span><span class="comment"> * @return Does the variant contain a scalar value of the given type */</span></div>
 <div class="line"><a id="l00596" name="l00596"></a><span class="lineno">  596</span><span class="keyword">static</span> <a class="code hl_variable" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a></div>
 <div class="line"><a id="l00597" name="l00597"></a><span class="lineno">  597</span>UA_Variant_hasScalarType(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__Variant.html">UA_Variant</a> *v, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type) {</div>
 <div class="line"><a id="l00598" name="l00598"></a><span class="lineno">  598</span>    <span class="keywordflow">return</span> UA_Variant_isScalar(v) &amp;&amp; type == v-&gt;<a class="code hl_variable" href="structUA__Variant.html#ab246eb2c59043a7e5df0c75edd3f538f">type</a>;</div>
 <div class="line"><a id="l00599" name="l00599"></a><span class="lineno">  599</span>}</div>
-<div class="line"><a id="l00600" name="l00600"></a><span class="lineno">  600</span> </div>
+<div class="line"><a id="l00600" name="l00600"></a><span class="lineno">  600</span><span class="comment"></span> </div>
+<div class="line"><a id="l00601" name="l00601"></a><span class="lineno">  601</span><span class="comment">/** Returns true if the variant contains an array of the given type.</span></div>
+<div class="line"><a id="l00602" name="l00602"></a><span class="lineno">  602</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00603" name="l00603"></a><span class="lineno">  603</span><span class="comment"> * @param v The variant</span></div>
+<div class="line"><a id="l00604" name="l00604"></a><span class="lineno">  604</span><span class="comment"> * @param type The data type</span></div>
+<div class="line"><a id="l00605" name="l00605"></a><span class="lineno">  605</span><span class="comment"> * @return Does the variant contain an array of the given type */</span></div>
 <div class="line"><a id="l00606" name="l00606"></a><span class="lineno">  606</span><span class="keyword">static</span> <a class="code hl_variable" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a></div>
 <div class="line"><a id="l00607" name="l00607"></a><span class="lineno">  607</span>UA_Variant_hasArrayType(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__Variant.html">UA_Variant</a> *v, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type) {</div>
 <div class="line"><a id="l00608" name="l00608"></a><span class="lineno">  608</span>    <span class="keywordflow">return</span> (!UA_Variant_isScalar(v)) &amp;&amp; type == v-&gt;<a class="code hl_variable" href="structUA__Variant.html#ab246eb2c59043a7e5df0c75edd3f538f">type</a>;</div>
 <div class="line"><a id="l00609" name="l00609"></a><span class="lineno">  609</span>}</div>
-<div class="line"><a id="l00610" name="l00610"></a><span class="lineno">  610</span> </div>
+<div class="line"><a id="l00610" name="l00610"></a><span class="lineno">  610</span><span class="comment"></span> </div>
+<div class="line"><a id="l00611" name="l00611"></a><span class="lineno">  611</span><span class="comment">/** Set the variant to a scalar value that already resides in memory. The value</span></div>
+<div class="line"><a id="l00612" name="l00612"></a><span class="lineno">  612</span><span class="comment"> * takes on the lifecycle of the variant and is deleted with it.</span></div>
+<div class="line"><a id="l00613" name="l00613"></a><span class="lineno">  613</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00614" name="l00614"></a><span class="lineno">  614</span><span class="comment"> * @param v The variant</span></div>
+<div class="line"><a id="l00615" name="l00615"></a><span class="lineno">  615</span><span class="comment"> * @param p A pointer to the value data</span></div>
+<div class="line"><a id="l00616" name="l00616"></a><span class="lineno">  616</span><span class="comment"> * @param type The datatype of the value in question */</span></div>
 <div class="line"><a id="l00617" name="l00617"></a><span class="lineno">  617</span><span class="keywordtype">void</span></div>
 <div class="line"><a id="l00618" name="l00618"></a><span class="lineno"><a class="line" href="types_8h.html#aa5aea265c55455c36ec6385b27c87b2d">  618</a></span><a class="code hl_function" href="types_8h.html#aa5aea265c55455c36ec6385b27c87b2d">UA_Variant_setScalar</a>(<a class="code hl_struct" href="structUA__Variant.html">UA_Variant</a> *v, <span class="keywordtype">void</span> *p,</div>
 <div class="line"><a id="l00619" name="l00619"></a><span class="lineno">  619</span>                     <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type);</div>
-<div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span> </div>
+<div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span><span class="comment"></span> </div>
+<div class="line"><a id="l00621" name="l00621"></a><span class="lineno">  621</span><span class="comment">/** Set the variant to a scalar value that is copied from an existing variable.</span></div>
+<div class="line"><a id="l00622" name="l00622"></a><span class="lineno">  622</span><span class="comment"> * @param v The variant</span></div>
+<div class="line"><a id="l00623" name="l00623"></a><span class="lineno">  623</span><span class="comment"> * @param p A pointer to the value data</span></div>
+<div class="line"><a id="l00624" name="l00624"></a><span class="lineno">  624</span><span class="comment"> * @param type The datatype of the value</span></div>
+<div class="line"><a id="l00625" name="l00625"></a><span class="lineno">  625</span><span class="comment"> * @return Indicates whether the operation succeeded or returns an error code */</span></div>
 <div class="line"><a id="l00626" name="l00626"></a><span class="lineno">  626</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00627" name="l00627"></a><span class="lineno"><a class="line" href="types_8h.html#ab40084675fc8efaa4af30a5c6a1399e4">  627</a></span><a class="code hl_function" href="types_8h.html#ab40084675fc8efaa4af30a5c6a1399e4">UA_Variant_setScalarCopy</a>(<a class="code hl_struct" href="structUA__Variant.html">UA_Variant</a> *v, <span class="keyword">const</span> <span class="keywordtype">void</span> *p,</div>
 <div class="line"><a id="l00628" name="l00628"></a><span class="lineno">  628</span>                         <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type);</div>
-<div class="line"><a id="l00629" name="l00629"></a><span class="lineno">  629</span> </div>
+<div class="line"><a id="l00629" name="l00629"></a><span class="lineno">  629</span><span class="comment"></span> </div>
+<div class="line"><a id="l00630" name="l00630"></a><span class="lineno">  630</span><span class="comment">/** Set the variant to an array that already resides in memory. The array takes</span></div>
+<div class="line"><a id="l00631" name="l00631"></a><span class="lineno">  631</span><span class="comment"> * on the lifecycle of the variant and is deleted with it.</span></div>
+<div class="line"><a id="l00632" name="l00632"></a><span class="lineno">  632</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span><span class="comment"> * @param v The variant</span></div>
+<div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span><span class="comment"> * @param array A pointer to the array data</span></div>
+<div class="line"><a id="l00635" name="l00635"></a><span class="lineno">  635</span><span class="comment"> * @param arraySize The size of the array</span></div>
+<div class="line"><a id="l00636" name="l00636"></a><span class="lineno">  636</span><span class="comment"> * @param type The datatype of the array */</span></div>
 <div class="line"><a id="l00637" name="l00637"></a><span class="lineno">  637</span><span class="keywordtype">void</span></div>
 <div class="line"><a id="l00638" name="l00638"></a><span class="lineno"><a class="line" href="types_8h.html#a6202f2a1788fd254f46832e62544fe54">  638</a></span><a class="code hl_function" href="types_8h.html#a6202f2a1788fd254f46832e62544fe54">UA_Variant_setArray</a>(<a class="code hl_struct" href="structUA__Variant.html">UA_Variant</a> *v, <span class="keywordtype">void</span> *array,</div>
 <div class="line"><a id="l00639" name="l00639"></a><span class="lineno">  639</span>                    <span class="keywordtype">size_t</span> arraySize, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type);</div>
-<div class="line"><a id="l00640" name="l00640"></a><span class="lineno">  640</span> </div>
+<div class="line"><a id="l00640" name="l00640"></a><span class="lineno">  640</span><span class="comment"></span> </div>
+<div class="line"><a id="l00641" name="l00641"></a><span class="lineno">  641</span><span class="comment">/** Set the variant to an array that is copied from an existing array.</span></div>
+<div class="line"><a id="l00642" name="l00642"></a><span class="lineno">  642</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00643" name="l00643"></a><span class="lineno">  643</span><span class="comment"> * @param v The variant</span></div>
+<div class="line"><a id="l00644" name="l00644"></a><span class="lineno">  644</span><span class="comment"> * @param array A pointer to the array data</span></div>
+<div class="line"><a id="l00645" name="l00645"></a><span class="lineno">  645</span><span class="comment"> * @param arraySize The size of the array</span></div>
+<div class="line"><a id="l00646" name="l00646"></a><span class="lineno">  646</span><span class="comment"> * @param type The datatype of the array</span></div>
+<div class="line"><a id="l00647" name="l00647"></a><span class="lineno">  647</span><span class="comment"> * @return Indicates whether the operation succeeded or returns an error code */</span></div>
 <div class="line"><a id="l00648" name="l00648"></a><span class="lineno">  648</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00649" name="l00649"></a><span class="lineno"><a class="line" href="types_8h.html#aedcb0807aecd86b4aaed8bb993123b0f">  649</a></span><a class="code hl_function" href="types_8h.html#aedcb0807aecd86b4aaed8bb993123b0f">UA_Variant_setArrayCopy</a>(<a class="code hl_struct" href="structUA__Variant.html">UA_Variant</a> *v, <span class="keyword">const</span> <span class="keywordtype">void</span> *array,</div>
 <div class="line"><a id="l00650" name="l00650"></a><span class="lineno">  650</span>                        <span class="keywordtype">size_t</span> arraySize, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type);</div>
-<div class="line"><a id="l00651" name="l00651"></a><span class="lineno">  651</span> </div>
+<div class="line"><a id="l00651" name="l00651"></a><span class="lineno">  651</span><span class="comment"></span> </div>
+<div class="line"><a id="l00652" name="l00652"></a><span class="lineno">  652</span><span class="comment">/** Copy the variant, but use only a subset of the (multidimensional) array into</span></div>
+<div class="line"><a id="l00653" name="l00653"></a><span class="lineno">  653</span><span class="comment"> * a variant. Returns an error code if the variant is not an array or if the</span></div>
+<div class="line"><a id="l00654" name="l00654"></a><span class="lineno">  654</span><span class="comment"> * indicated range does not fit.</span></div>
+<div class="line"><a id="l00655" name="l00655"></a><span class="lineno">  655</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00656" name="l00656"></a><span class="lineno">  656</span><span class="comment"> * @param src The source variant</span></div>
+<div class="line"><a id="l00657" name="l00657"></a><span class="lineno">  657</span><span class="comment"> * @param dst The target variant</span></div>
+<div class="line"><a id="l00658" name="l00658"></a><span class="lineno">  658</span><span class="comment"> * @param range The range of the copied data</span></div>
+<div class="line"><a id="l00659" name="l00659"></a><span class="lineno">  659</span><span class="comment"> * @return Returns UA_STATUSCODE_GOOD or an error code */</span></div>
 <div class="line"><a id="l00660" name="l00660"></a><span class="lineno">  660</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00661" name="l00661"></a><span class="lineno"><a class="line" href="types_8h.html#afab08742473e57ff7b61f07b4fec099d">  661</a></span><a class="code hl_function" href="types_8h.html#afab08742473e57ff7b61f07b4fec099d">UA_Variant_copyRange</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__Variant.html">UA_Variant</a> *src, <a class="code hl_struct" href="structUA__Variant.html">UA_Variant</a> *dst,</div>
 <div class="line"><a id="l00662" name="l00662"></a><span class="lineno">  662</span>                     <span class="keyword">const</span> <a class="code hl_struct" href="structUA__NumericRange.html">UA_NumericRange</a> range);</div>
-<div class="line"><a id="l00663" name="l00663"></a><span class="lineno">  663</span> </div>
+<div class="line"><a id="l00663" name="l00663"></a><span class="lineno">  663</span><span class="comment"></span> </div>
+<div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span><span class="comment">/** Insert a range of data into an existing variant. The data array cannot be</span></div>
+<div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span><span class="comment"> * reused afterwards if it contains types without a fixed size (e.g. strings)</span></div>
+<div class="line"><a id="l00666" name="l00666"></a><span class="lineno">  666</span><span class="comment"> * since the members are moved into the variant and take on its lifecycle.</span></div>
+<div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00668" name="l00668"></a><span class="lineno">  668</span><span class="comment"> * @param v The variant</span></div>
+<div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span><span class="comment"> * @param dataArray The data array. The type must match the variant</span></div>
+<div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span><span class="comment"> * @param dataArraySize The length of the data array. This is checked to match</span></div>
+<div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span><span class="comment"> *        the range size.</span></div>
+<div class="line"><a id="l00672" name="l00672"></a><span class="lineno">  672</span><span class="comment"> * @param range The range of where the new data is inserted</span></div>
+<div class="line"><a id="l00673" name="l00673"></a><span class="lineno">  673</span><span class="comment"> * @return Returns UA_STATUSCODE_GOOD or an error code */</span></div>
 <div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00675" name="l00675"></a><span class="lineno"><a class="line" href="types_8h.html#a0bbb877b93b9e7ef814936651dc1d846">  675</a></span><a class="code hl_function" href="types_8h.html#a0bbb877b93b9e7ef814936651dc1d846">UA_Variant_setRange</a>(<a class="code hl_struct" href="structUA__Variant.html">UA_Variant</a> *v, <span class="keywordtype">void</span> *array,</div>
 <div class="line"><a id="l00676" name="l00676"></a><span class="lineno">  676</span>                    <span class="keywordtype">size_t</span> arraySize, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__NumericRange.html">UA_NumericRange</a> range);</div>
-<div class="line"><a id="l00677" name="l00677"></a><span class="lineno">  677</span> </div>
+<div class="line"><a id="l00677" name="l00677"></a><span class="lineno">  677</span><span class="comment"></span> </div>
+<div class="line"><a id="l00678" name="l00678"></a><span class="lineno">  678</span><span class="comment">/** Deep-copy a range of data into an existing variant.</span></div>
+<div class="line"><a id="l00679" name="l00679"></a><span class="lineno">  679</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00680" name="l00680"></a><span class="lineno">  680</span><span class="comment"> * @param v The variant</span></div>
+<div class="line"><a id="l00681" name="l00681"></a><span class="lineno">  681</span><span class="comment"> * @param dataArray The data array. The type must match the variant</span></div>
+<div class="line"><a id="l00682" name="l00682"></a><span class="lineno">  682</span><span class="comment"> * @param dataArraySize The length of the data array. This is checked to match</span></div>
+<div class="line"><a id="l00683" name="l00683"></a><span class="lineno">  683</span><span class="comment"> *        the range size.</span></div>
+<div class="line"><a id="l00684" name="l00684"></a><span class="lineno">  684</span><span class="comment"> * @param range The range of where the new data is inserted</span></div>
+<div class="line"><a id="l00685" name="l00685"></a><span class="lineno">  685</span><span class="comment"> * @return Returns UA_STATUSCODE_GOOD or an error code */</span></div>
 <div class="line"><a id="l00686" name="l00686"></a><span class="lineno">  686</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00687" name="l00687"></a><span class="lineno"><a class="line" href="types_8h.html#a3a106e737062fd5af7ffd34d0fadcdd8">  687</a></span><a class="code hl_function" href="types_8h.html#a3a106e737062fd5af7ffd34d0fadcdd8">UA_Variant_setRangeCopy</a>(<a class="code hl_struct" href="structUA__Variant.html">UA_Variant</a> *v, <span class="keyword">const</span> <span class="keywordtype">void</span> *array,</div>
 <div class="line"><a id="l00688" name="l00688"></a><span class="lineno">  688</span>                        <span class="keywordtype">size_t</span> arraySize, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__NumericRange.html">UA_NumericRange</a> range);</div>
@@ -638,17 +791,25 @@ $(function() {
 <div class="line"><a id="l00711" name="l00711"></a><span class="lineno"><a class="line" href="structUA__ExtensionObject.html#abd6c3a6838c0a3d4f74054f776d4f33f">  711</a></span>        } decoded;</div>
 <div class="line"><a id="l00712" name="l00712"></a><span class="lineno"><a class="line" href="structUA__ExtensionObject.html#ad8648a2c3b4da9d8e6b97ab38c1422b0">  712</a></span>    } content;</div>
 <div class="line"><a id="l00713" name="l00713"></a><span class="lineno">  713</span>} <a class="code hl_struct" href="structUA__ExtensionObject.html">UA_ExtensionObject</a>;</div>
-<div class="line"><a id="l00714" name="l00714"></a><span class="lineno">  714</span> </div>
+<div class="line"><a id="l00714" name="l00714"></a><span class="lineno">  714</span><span class="comment"></span> </div>
+<div class="line"><a id="l00715" name="l00715"></a><span class="lineno">  715</span><span class="comment">/** Initialize the ExtensionObject and set the &quot;decoded&quot; value to the given</span></div>
+<div class="line"><a id="l00716" name="l00716"></a><span class="lineno">  716</span><span class="comment"> * pointer. The value will be deleted when the ExtensionObject is cleared. */</span></div>
 <div class="line"><a id="l00717" name="l00717"></a><span class="lineno">  717</span><span class="keywordtype">void</span></div>
 <div class="line"><a id="l00718" name="l00718"></a><span class="lineno"><a class="line" href="types_8h.html#a02f7d34a62eeb65f8954ac8e68c5fd3d">  718</a></span><a class="code hl_function" href="types_8h.html#a02f7d34a62eeb65f8954ac8e68c5fd3d">UA_ExtensionObject_setValue</a>(<a class="code hl_struct" href="structUA__ExtensionObject.html">UA_ExtensionObject</a> *eo,</div>
 <div class="line"><a id="l00719" name="l00719"></a><span class="lineno">  719</span>                            <span class="keywordtype">void</span> *p,</div>
 <div class="line"><a id="l00720" name="l00720"></a><span class="lineno">  720</span>                            <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type);</div>
-<div class="line"><a id="l00721" name="l00721"></a><span class="lineno">  721</span> </div>
+<div class="line"><a id="l00721" name="l00721"></a><span class="lineno">  721</span><span class="comment"></span> </div>
+<div class="line"><a id="l00722" name="l00722"></a><span class="lineno">  722</span><span class="comment">/** Initialize the ExtensionObject and set the &quot;decoded&quot; value to the given</span></div>
+<div class="line"><a id="l00723" name="l00723"></a><span class="lineno">  723</span><span class="comment"> * pointer. The value will *not* be deleted when the ExtensionObject is</span></div>
+<div class="line"><a id="l00724" name="l00724"></a><span class="lineno">  724</span><span class="comment"> * cleared. */</span></div>
 <div class="line"><a id="l00725" name="l00725"></a><span class="lineno">  725</span><span class="keywordtype">void</span></div>
 <div class="line"><a id="l00726" name="l00726"></a><span class="lineno"><a class="line" href="types_8h.html#a5fb122d28efefff273b8ea8a84f9782f">  726</a></span><a class="code hl_function" href="types_8h.html#a5fb122d28efefff273b8ea8a84f9782f">UA_ExtensionObject_setValueNoDelete</a>(<a class="code hl_struct" href="structUA__ExtensionObject.html">UA_ExtensionObject</a> *eo,</div>
 <div class="line"><a id="l00727" name="l00727"></a><span class="lineno">  727</span>                                    <span class="keywordtype">void</span> *p,</div>
 <div class="line"><a id="l00728" name="l00728"></a><span class="lineno">  728</span>                                    <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type);</div>
-<div class="line"><a id="l00729" name="l00729"></a><span class="lineno">  729</span> </div>
+<div class="line"><a id="l00729" name="l00729"></a><span class="lineno">  729</span><span class="comment"></span> </div>
+<div class="line"><a id="l00730" name="l00730"></a><span class="lineno">  730</span><span class="comment">/** Initialize the ExtensionObject and set the &quot;decoded&quot; value to a fresh copy of</span></div>
+<div class="line"><a id="l00731" name="l00731"></a><span class="lineno">  731</span><span class="comment"> * the given value pointer. The value will be deleted when the ExtensionObject</span></div>
+<div class="line"><a id="l00732" name="l00732"></a><span class="lineno">  732</span><span class="comment"> * is cleared. */</span></div>
 <div class="line"><a id="l00733" name="l00733"></a><span class="lineno">  733</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00734" name="l00734"></a><span class="lineno"><a class="line" href="types_8h.html#a1d95dc7b7846e234ed73bc04d795085a">  734</a></span><a class="code hl_function" href="types_8h.html#a1d95dc7b7846e234ed73bc04d795085a">UA_ExtensionObject_setValueCopy</a>(<a class="code hl_struct" href="structUA__ExtensionObject.html">UA_ExtensionObject</a> *eo,</div>
 <div class="line"><a id="l00735" name="l00735"></a><span class="lineno">  735</span>                                <span class="keywordtype">void</span> *p,</div>
@@ -669,7 +830,15 @@ $(function() {
 <div class="line"><a id="l00750" name="l00750"></a><span class="lineno"><a class="line" href="structUA__DataValue.html#a09a0c6d09e75f20fc02774751bbba988">  750</a></span>    <a class="code hl_variable" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>    <a class="code hl_variable" href="structUA__DataValue.html#a09a0c6d09e75f20fc02774751bbba988">hasSourcePicoseconds</a> : 1;</div>
 <div class="line"><a id="l00751" name="l00751"></a><span class="lineno"><a class="line" href="structUA__DataValue.html#ae05b644e0d350d7e38c8eb1583a68b55">  751</a></span>    <a class="code hl_variable" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a>    <a class="code hl_variable" href="structUA__DataValue.html#ae05b644e0d350d7e38c8eb1583a68b55">hasServerPicoseconds</a> : 1;</div>
 <div class="line"><a id="l00752" name="l00752"></a><span class="lineno">  752</span>} <a class="code hl_struct" href="structUA__DataValue.html">UA_DataValue</a>;</div>
-<div class="line"><a id="l00753" name="l00753"></a><span class="lineno">  753</span> </div>
+<div class="line"><a id="l00753" name="l00753"></a><span class="lineno">  753</span><span class="comment"></span> </div>
+<div class="line"><a id="l00754" name="l00754"></a><span class="lineno">  754</span><span class="comment">/** Copy the DataValue, but use only a subset of the (multidimensional) array of</span></div>
+<div class="line"><a id="l00755" name="l00755"></a><span class="lineno">  755</span><span class="comment"> * of the variant of the source DataValue. Returns an error code if the variant</span></div>
+<div class="line"><a id="l00756" name="l00756"></a><span class="lineno">  756</span><span class="comment"> * of the DataValue is not an array or if the indicated range does not fit.</span></div>
+<div class="line"><a id="l00757" name="l00757"></a><span class="lineno">  757</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00758" name="l00758"></a><span class="lineno">  758</span><span class="comment"> * @param src The source DataValue</span></div>
+<div class="line"><a id="l00759" name="l00759"></a><span class="lineno">  759</span><span class="comment"> * @param dst The target DataValue</span></div>
+<div class="line"><a id="l00760" name="l00760"></a><span class="lineno">  760</span><span class="comment"> * @param range The range of the variant of the DataValue to copy</span></div>
+<div class="line"><a id="l00761" name="l00761"></a><span class="lineno">  761</span><span class="comment"> * @return Returns UA_STATUSCODE_GOOD or an error code */</span></div>
 <div class="line"><a id="l00762" name="l00762"></a><span class="lineno">  762</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00763" name="l00763"></a><span class="lineno"><a class="line" href="types_8h.html#abaff7ed599c86bb7891504e5d63df3d3">  763</a></span><a class="code hl_function" href="types_8h.html#abaff7ed599c86bb7891504e5d63df3d3">UA_DataValue_copyVariantRange</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataValue.html">UA_DataValue</a> *src, <a class="code hl_struct" href="structUA__DataValue.html">UA_DataValue</a> *dst,</div>
 <div class="line"><a id="l00764" name="l00764"></a><span class="lineno">  764</span>                              <span class="keyword">const</span> <a class="code hl_struct" href="structUA__NumericRange.html">UA_NumericRange</a> range);</div>
@@ -710,7 +879,9 @@ $(function() {
 <div class="line"><a id="l00799" name="l00799"></a><span class="lineno"><a class="line" href="structUA__DataTypeMember.html#a3aae258d5eb8c84c65d59ad90673a605">  799</a></span>    <a class="code hl_typedef" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a> <a class="code hl_variable" href="structUA__DataTypeMember.html#a3aae258d5eb8c84c65d59ad90673a605">isArray</a>    : 1;       <span class="comment">/* The member is an array */</span></div>
 <div class="line"><a id="l00800" name="l00800"></a><span class="lineno"><a class="line" href="structUA__DataTypeMember.html#af06712cc0df9515eaa65f71a0a156f3b">  800</a></span>    <a class="code hl_typedef" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a> <a class="code hl_variable" href="structUA__DataTypeMember.html#af06712cc0df9515eaa65f71a0a156f3b">isOptional</a> : 1;       <span class="comment">/* The member is an optional field */</span></div>
 <div class="line"><a id="l00801" name="l00801"></a><span class="lineno">  801</span>} <a class="code hl_struct" href="structUA__DataTypeMember.html">UA_DataTypeMember</a>;</div>
-<div class="line"><a id="l00802" name="l00802"></a><span class="lineno">  802</span> </div>
+<div class="line"><a id="l00802" name="l00802"></a><span class="lineno">  802</span><span class="comment"></span> </div>
+<div class="line"><a id="l00803" name="l00803"></a><span class="lineno">  803</span><span class="comment">/** The DataType &quot;kind&quot; is an internal type classification. It is used to</span></div>
+<div class="line"><a id="l00804" name="l00804"></a><span class="lineno">  804</span><span class="comment"> * dispatch handling to the correct routines. */</span></div>
 <div class="line"><a id="l00805" name="l00805"></a><span class="lineno"><a class="line" href="types_8h.html#a2ce8ca747ea530a1f413d9cfd14eb2c6">  805</a></span><span class="preprocessor">#define UA_DATATYPEKINDS 31</span></div>
 <div class="line"><a id="l00806" name="l00806"></a><span class="lineno"><a class="line" href="types_8h.html#a7684800c6442e92c5b2495fc2abc2ada">  806</a></span><span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
 <div class="line"><a id="l00807" name="l00807"></a><span class="lineno"><a class="line" href="types_8h.html#a7684800c6442e92c5b2495fc2abc2adaa158b0a738f5707bf1d468e126f6a2f96">  807</a></span>    <a class="code hl_enumvalue" href="types_8h.html#a7684800c6442e92c5b2495fc2abc2adaa158b0a738f5707bf1d468e126f6a2f96">UA_DATATYPEKIND_BOOLEAN</a> = 0,</div>
@@ -762,13 +933,20 @@ $(function() {
 <div class="line"><a id="l00853" name="l00853"></a><span class="lineno"><a class="line" href="structUA__DataType.html#aa2cfdaca812599703cf17420e2935b43">  853</a></span>    <a class="code hl_typedef" href="types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf">UA_UInt32</a> <a class="code hl_variable" href="structUA__DataType.html#aa2cfdaca812599703cf17420e2935b43">membersSize</a> : 8;  <span class="comment">/* How many members does the type have? */</span></div>
 <div class="line"><a id="l00854" name="l00854"></a><span class="lineno"><a class="line" href="structUA__DataType.html#a76ba2887bb843480d57307367c0bd989">  854</a></span>    <a class="code hl_struct" href="structUA__DataTypeMember.html">UA_DataTypeMember</a> *<a class="code hl_variable" href="structUA__DataType.html#a76ba2887bb843480d57307367c0bd989">members</a>;</div>
 <div class="line"><a id="l00855" name="l00855"></a><span class="lineno">  855</span>};</div>
-<div class="line"><a id="l00856" name="l00856"></a><span class="lineno">  856</span> </div>
+<div class="line"><a id="l00856" name="l00856"></a><span class="lineno">  856</span><span class="comment"></span> </div>
+<div class="line"><a id="l00857" name="l00857"></a><span class="lineno">  857</span><span class="comment">/** Datatype arrays with custom type definitions can be added in a linked list to</span></div>
+<div class="line"><a id="l00858" name="l00858"></a><span class="lineno">  858</span><span class="comment"> * the client or server configuration. */</span></div>
 <div class="line"><a id="l00859" name="l00859"></a><span class="lineno"><a class="line" href="structUA__DataTypeArray.html">  859</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="structUA__DataTypeArray.html">UA_DataTypeArray</a> {</div>
 <div class="line"><a id="l00860" name="l00860"></a><span class="lineno"><a class="line" href="structUA__DataTypeArray.html#a3ab613585615cdd4380034cc99585476">  860</a></span>    <span class="keyword">const</span> <span class="keyword">struct </span><a class="code hl_struct" href="structUA__DataTypeArray.html">UA_DataTypeArray</a> *<a class="code hl_variable" href="structUA__DataTypeArray.html#a3ab613585615cdd4380034cc99585476">next</a>;</div>
 <div class="line"><a id="l00861" name="l00861"></a><span class="lineno"><a class="line" href="structUA__DataTypeArray.html#abcd59e48b20e976cdb7f6c41c17d84a7">  861</a></span>    <span class="keyword">const</span> <span class="keywordtype">size_t</span> <a class="code hl_variable" href="structUA__DataTypeArray.html#abcd59e48b20e976cdb7f6c41c17d84a7">typesSize</a>;</div>
 <div class="line"><a id="l00862" name="l00862"></a><span class="lineno"><a class="line" href="structUA__DataTypeArray.html#a2b91abac38be738a7ea3ac06f2167e70">  862</a></span>    <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *<a class="code hl_variable" href="structUA__DataTypeArray.html#a2b91abac38be738a7ea3ac06f2167e70">types</a>;</div>
 <div class="line"><a id="l00863" name="l00863"></a><span class="lineno"><a class="line" href="types_8h.html#a0caa5432a7286ba7a30710952ee236dc">  863</a></span>} <a class="code hl_struct" href="structUA__DataTypeArray.html">UA_DataTypeArray</a>;</div>
-<div class="line"><a id="l00864" name="l00864"></a><span class="lineno">  864</span> </div>
+<div class="line"><a id="l00864" name="l00864"></a><span class="lineno">  864</span><span class="comment"></span> </div>
+<div class="line"><a id="l00865" name="l00865"></a><span class="lineno">  865</span><span class="comment">/** Returns the offset and type of a structure member. The return value is false</span></div>
+<div class="line"><a id="l00866" name="l00866"></a><span class="lineno">  866</span><span class="comment"> * if the member was not found.</span></div>
+<div class="line"><a id="l00867" name="l00867"></a><span class="lineno">  867</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00868" name="l00868"></a><span class="lineno">  868</span><span class="comment"> * If the member is an array, the offset points to the (size_t) length field.</span></div>
+<div class="line"><a id="l00869" name="l00869"></a><span class="lineno">  869</span><span class="comment"> * (The array pointer comes after the length field without any padding.) */</span></div>
 <div class="line"><a id="l00870" name="l00870"></a><span class="lineno">  870</span><span class="preprocessor">#ifdef UA_ENABLE_TYPEDESCRIPTION</span></div>
 <div class="line"><a id="l00871" name="l00871"></a><span class="lineno">  871</span><a class="code hl_variable" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a></div>
 <div class="line"><a id="l00872" name="l00872"></a><span class="lineno">  872</span>UA_DataType_getStructMember(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type,</div>
@@ -777,58 +955,131 @@ $(function() {
 <div class="line"><a id="l00875" name="l00875"></a><span class="lineno">  875</span>                            <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> **outMemberType,</div>
 <div class="line"><a id="l00876" name="l00876"></a><span class="lineno">  876</span>                            <a class="code hl_variable" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> *outIsArray);</div>
 <div class="line"><a id="l00877" name="l00877"></a><span class="lineno">  877</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00878" name="l00878"></a><span class="lineno">  878</span> </div>
+<div class="line"><a id="l00878" name="l00878"></a><span class="lineno">  878</span><span class="comment"></span> </div>
+<div class="line"><a id="l00879" name="l00879"></a><span class="lineno">  879</span><span class="comment">/** Test if the data type is a numeric builtin data type (via the typeKind field</span></div>
+<div class="line"><a id="l00880" name="l00880"></a><span class="lineno">  880</span><span class="comment"> * of UA_DataType). This includes integers and floating point numbers. Not</span></div>
+<div class="line"><a id="l00881" name="l00881"></a><span class="lineno">  881</span><span class="comment"> * included are Boolean, DateTime, StatusCode and Enums. */</span></div>
 <div class="line"><a id="l00882" name="l00882"></a><span class="lineno">  882</span><a class="code hl_variable" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a></div>
 <div class="line"><a id="l00883" name="l00883"></a><span class="lineno"><a class="line" href="types_8h.html#ab9faa940eb88b05ab723fad65a1a49e4">  883</a></span><a class="code hl_function" href="types_8h.html#ab9faa940eb88b05ab723fad65a1a49e4">UA_DataType_isNumeric</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type);</div>
-<div class="line"><a id="l00884" name="l00884"></a><span class="lineno">  884</span> </div>
+<div class="line"><a id="l00884" name="l00884"></a><span class="lineno">  884</span><span class="comment"></span> </div>
+<div class="line"><a id="l00885" name="l00885"></a><span class="lineno">  885</span><span class="comment">/** Return the Data Type Precedence-Rank defined in Part 4.</span></div>
+<div class="line"><a id="l00886" name="l00886"></a><span class="lineno">  886</span><span class="comment"> * If there is no Precedence-Rank assigned with the type -1 is returned.*/</span></div>
 <div class="line"><a id="l00887" name="l00887"></a><span class="lineno">  887</span><a class="code hl_typedef" href="types_8h.html#a2dfa954c25e6984956ab6fa8e8fd73db">UA_Int16</a></div>
 <div class="line"><a id="l00888" name="l00888"></a><span class="lineno"><a class="line" href="types_8h.html#a5c121c383d0958129f7a765e85b16859">  888</a></span><a class="code hl_function" href="types_8h.html#a5c121c383d0958129f7a765e85b16859">UA_DataType_getPrecedence</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type);</div>
 <div class="line"><a id="l00889" name="l00889"></a><span class="lineno">  889</span> </div>
 <div class="line"><a id="l00890" name="l00890"></a><span class="lineno">  890</span> </div>
-<div class="line"><a id="l00891" name="l00891"></a><span class="lineno">  891</span> </div>
+<div class="line"><a id="l00891" name="l00891"></a><span class="lineno">  891</span><span class="comment"></span> </div>
+<div class="line"><a id="l00892" name="l00892"></a><span class="lineno">  892</span><span class="comment">/** Returns the data type description for the type&#39;s identifier or NULL if no</span></div>
+<div class="line"><a id="l00893" name="l00893"></a><span class="lineno">  893</span><span class="comment"> * matching data type was found. */</span></div>
 <div class="line"><a id="l00894" name="l00894"></a><span class="lineno">  894</span><span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *</div>
 <div class="line"><a id="l00895" name="l00895"></a><span class="lineno"><a class="line" href="types_8h.html#af02c29570c8fe2dd5d6e5df5189f474a">  895</a></span><a class="code hl_function" href="types_8h.html#af02c29570c8fe2dd5d6e5df5189f474a">UA_findDataType</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__NodeId.html">UA_NodeId</a> *typeId);</div>
 <div class="line"><a id="l00896" name="l00896"></a><span class="lineno">  896</span> </div>
 <div class="line"><a id="l00897" name="l00897"></a><span class="lineno">  897</span> </div>
-<div class="line"><a id="l00898" name="l00898"></a><span class="lineno">  898</span> </div>
+<div class="line"><a id="l00898" name="l00898"></a><span class="lineno">  898</span><span class="comment"></span> </div>
+<div class="line"><a id="l00899" name="l00899"></a><span class="lineno">  899</span><span class="comment">/** Allocates and initializes a variable of type dataType</span></div>
+<div class="line"><a id="l00900" name="l00900"></a><span class="lineno">  900</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00901" name="l00901"></a><span class="lineno">  901</span><span class="comment"> * @param type The datatype description</span></div>
+<div class="line"><a id="l00902" name="l00902"></a><span class="lineno">  902</span><span class="comment"> * @return Returns the memory location of the variable or NULL if no</span></div>
+<div class="line"><a id="l00903" name="l00903"></a><span class="lineno">  903</span><span class="comment"> *         memory could be allocated */</span></div>
 <div class="line"><a id="l00904" name="l00904"></a><span class="lineno"><a class="line" href="types_8h.html#a921a4b0f6b27972f427493106673050e">  904</a></span><span class="keywordtype">void</span> * <a class="code hl_function" href="types_8h.html#a921a4b0f6b27972f427493106673050e">UA_new</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type);</div>
-<div class="line"><a id="l00905" name="l00905"></a><span class="lineno">  905</span> </div>
+<div class="line"><a id="l00905" name="l00905"></a><span class="lineno">  905</span><span class="comment"></span> </div>
+<div class="line"><a id="l00906" name="l00906"></a><span class="lineno">  906</span><span class="comment">/** Initializes a variable to default values</span></div>
+<div class="line"><a id="l00907" name="l00907"></a><span class="lineno">  907</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00908" name="l00908"></a><span class="lineno">  908</span><span class="comment"> * @param p The memory location of the variable</span></div>
+<div class="line"><a id="l00909" name="l00909"></a><span class="lineno">  909</span><span class="comment"> * @param type The datatype description */</span></div>
 <div class="line"><a id="l00910" name="l00910"></a><span class="lineno">  910</span><span class="keyword">static</span> <span class="keywordtype">void</span></div>
 <div class="line"><a id="l00911" name="l00911"></a><span class="lineno">  911</span>UA_init(<span class="keywordtype">void</span> *p, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type) {</div>
 <div class="line"><a id="l00912" name="l00912"></a><span class="lineno">  912</span>    memset(p, 0, type-&gt;<a class="code hl_variable" href="structUA__DataType.html#a5af370acd88614a6869e78bba0c5de17">memSize</a>);</div>
 <div class="line"><a id="l00913" name="l00913"></a><span class="lineno">  913</span>}</div>
-<div class="line"><a id="l00914" name="l00914"></a><span class="lineno">  914</span> </div>
+<div class="line"><a id="l00914" name="l00914"></a><span class="lineno">  914</span><span class="comment"></span> </div>
+<div class="line"><a id="l00915" name="l00915"></a><span class="lineno">  915</span><span class="comment">/** Copies the content of two variables. If copying fails (e.g. because no memory</span></div>
+<div class="line"><a id="l00916" name="l00916"></a><span class="lineno">  916</span><span class="comment"> * was available for an array), then dst is emptied and initialized to prevent</span></div>
+<div class="line"><a id="l00917" name="l00917"></a><span class="lineno">  917</span><span class="comment"> * memory leaks.</span></div>
+<div class="line"><a id="l00918" name="l00918"></a><span class="lineno">  918</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00919" name="l00919"></a><span class="lineno">  919</span><span class="comment"> * @param src The memory location of the source variable</span></div>
+<div class="line"><a id="l00920" name="l00920"></a><span class="lineno">  920</span><span class="comment"> * @param dst The memory location of the destination variable</span></div>
+<div class="line"><a id="l00921" name="l00921"></a><span class="lineno">  921</span><span class="comment"> * @param type The datatype description</span></div>
+<div class="line"><a id="l00922" name="l00922"></a><span class="lineno">  922</span><span class="comment"> * @return Indicates whether the operation succeeded or returns an error code */</span></div>
 <div class="line"><a id="l00923" name="l00923"></a><span class="lineno">  923</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00924" name="l00924"></a><span class="lineno"><a class="line" href="types_8h.html#a06dc3ec388f93ee9aab177e3b50ca7e4">  924</a></span><a class="code hl_function" href="types_8h.html#a06dc3ec388f93ee9aab177e3b50ca7e4">UA_copy</a>(<span class="keyword">const</span> <span class="keywordtype">void</span> *src, <span class="keywordtype">void</span> *dst, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type);</div>
-<div class="line"><a id="l00925" name="l00925"></a><span class="lineno">  925</span> </div>
+<div class="line"><a id="l00925" name="l00925"></a><span class="lineno">  925</span><span class="comment"></span> </div>
+<div class="line"><a id="l00926" name="l00926"></a><span class="lineno">  926</span><span class="comment">/** Deletes the dynamically allocated content of a variable (e.g. resets all</span></div>
+<div class="line"><a id="l00927" name="l00927"></a><span class="lineno">  927</span><span class="comment"> * arrays to undefined arrays). Afterwards, the variable can be safely deleted</span></div>
+<div class="line"><a id="l00928" name="l00928"></a><span class="lineno">  928</span><span class="comment"> * without causing memory leaks. But the variable is not initialized and may</span></div>
+<div class="line"><a id="l00929" name="l00929"></a><span class="lineno">  929</span><span class="comment"> * contain old data that is not memory-relevant.</span></div>
+<div class="line"><a id="l00930" name="l00930"></a><span class="lineno">  930</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00931" name="l00931"></a><span class="lineno">  931</span><span class="comment"> * @param p The memory location of the variable</span></div>
+<div class="line"><a id="l00932" name="l00932"></a><span class="lineno">  932</span><span class="comment"> * @param type The datatype description of the variable */</span></div>
 <div class="line"><a id="l00933" name="l00933"></a><span class="lineno"><a class="line" href="types_8h.html#ab615e6928fa544fb7caf34c9e241fd4b">  933</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="types_8h.html#ab615e6928fa544fb7caf34c9e241fd4b">UA_clear</a>(<span class="keywordtype">void</span> *p, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type);</div>
 <div class="line"><a id="l00934" name="l00934"></a><span class="lineno">  934</span> </div>
 <div class="line"><a id="l00935" name="l00935"></a><span class="lineno"><a class="line" href="types_8h.html#afef24008400149f4f22bd6d13a791501">  935</a></span><span class="preprocessor">#define UA_deleteMembers(p, type) UA_clear(p, type)</span></div>
-<div class="line"><a id="l00936" name="l00936"></a><span class="lineno">  936</span> </div>
+<div class="line"><a id="l00936" name="l00936"></a><span class="lineno">  936</span><span class="comment"></span> </div>
+<div class="line"><a id="l00937" name="l00937"></a><span class="lineno">  937</span><span class="comment">/** Frees a variable and all of its content.</span></div>
+<div class="line"><a id="l00938" name="l00938"></a><span class="lineno">  938</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00939" name="l00939"></a><span class="lineno">  939</span><span class="comment"> * @param p The memory location of the variable</span></div>
+<div class="line"><a id="l00940" name="l00940"></a><span class="lineno">  940</span><span class="comment"> * @param type The datatype description of the variable */</span></div>
 <div class="line"><a id="l00941" name="l00941"></a><span class="lineno"><a class="line" href="types_8h.html#ac1fe49fb8120e59038e6f4d276ffa1ec">  941</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="types_8h.html#ac1fe49fb8120e59038e6f4d276ffa1ec">UA_delete</a>(<span class="keywordtype">void</span> *p, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type);</div>
-<div class="line"><a id="l00942" name="l00942"></a><span class="lineno">  942</span> </div>
+<div class="line"><a id="l00942" name="l00942"></a><span class="lineno">  942</span><span class="comment"></span> </div>
+<div class="line"><a id="l00943" name="l00943"></a><span class="lineno">  943</span><span class="comment">/** Pretty-print the value from the datatype.</span></div>
+<div class="line"><a id="l00944" name="l00944"></a><span class="lineno">  944</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00945" name="l00945"></a><span class="lineno">  945</span><span class="comment"> * @param p The memory location of the variable</span></div>
+<div class="line"><a id="l00946" name="l00946"></a><span class="lineno">  946</span><span class="comment"> * @param type The datatype description of the variable</span></div>
+<div class="line"><a id="l00947" name="l00947"></a><span class="lineno">  947</span><span class="comment"> * @param output A string that is memory-allocated for the pretty-printed output</span></div>
+<div class="line"><a id="l00948" name="l00948"></a><span class="lineno">  948</span><span class="comment"> * @return Indicates whether the operation succeeded*/</span></div>
 <div class="line"><a id="l00949" name="l00949"></a><span class="lineno">  949</span><span class="preprocessor">#ifdef UA_ENABLE_TYPEDESCRIPTION</span></div>
 <div class="line"><a id="l00950" name="l00950"></a><span class="lineno">  950</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00951" name="l00951"></a><span class="lineno">  951</span>UA_print(<span class="keyword">const</span> <span class="keywordtype">void</span> *p, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type, <a class="code hl_struct" href="structUA__String.html">UA_String</a> *output);</div>
 <div class="line"><a id="l00952" name="l00952"></a><span class="lineno">  952</span><span class="preprocessor">#endif</span></div>
-<div class="line"><a id="l00953" name="l00953"></a><span class="lineno">  953</span> </div>
+<div class="line"><a id="l00953" name="l00953"></a><span class="lineno">  953</span><span class="comment"></span> </div>
+<div class="line"><a id="l00954" name="l00954"></a><span class="lineno">  954</span><span class="comment">/** Compare two variables and return their order. This can also be used to test</span></div>
+<div class="line"><a id="l00955" name="l00955"></a><span class="lineno">  955</span><span class="comment"> * for equality of two values.</span></div>
+<div class="line"><a id="l00956" name="l00956"></a><span class="lineno">  956</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00957" name="l00957"></a><span class="lineno">  957</span><span class="comment"> * For numerical types (including StatusCodes and Enums), their natural order is</span></div>
+<div class="line"><a id="l00958" name="l00958"></a><span class="lineno">  958</span><span class="comment"> * used. NaN is the &quot;smallest&quot; value for floating point values. Different bit</span></div>
+<div class="line"><a id="l00959" name="l00959"></a><span class="lineno">  959</span><span class="comment"> * representations of NaN are considered identical.</span></div>
+<div class="line"><a id="l00960" name="l00960"></a><span class="lineno">  960</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00961" name="l00961"></a><span class="lineno">  961</span><span class="comment"> * All other types have *some* absolute ordering so that a &lt; b, b &lt; c -&gt; a &lt; c.</span></div>
+<div class="line"><a id="l00962" name="l00962"></a><span class="lineno">  962</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00963" name="l00963"></a><span class="lineno">  963</span><span class="comment"> * The ordering of arrays (also strings) is in &quot;shortlex&quot;: A shorter array is</span></div>
+<div class="line"><a id="l00964" name="l00964"></a><span class="lineno">  964</span><span class="comment"> * always smaller than a longer array. Otherwise the first different element</span></div>
+<div class="line"><a id="l00965" name="l00965"></a><span class="lineno">  965</span><span class="comment"> * defines the order.</span></div>
+<div class="line"><a id="l00966" name="l00966"></a><span class="lineno">  966</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00967" name="l00967"></a><span class="lineno">  967</span><span class="comment"> * When members of different types are permitted (in Variants and</span></div>
+<div class="line"><a id="l00968" name="l00968"></a><span class="lineno">  968</span><span class="comment"> * ExtensionObjects), the memory address in the &quot;UA_DataType*&quot; pointer</span></div>
+<div class="line"><a id="l00969" name="l00969"></a><span class="lineno">  969</span><span class="comment"> * determines which variable is smaller.</span></div>
+<div class="line"><a id="l00970" name="l00970"></a><span class="lineno">  970</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00971" name="l00971"></a><span class="lineno">  971</span><span class="comment"> * @param p1 The memory location of the first value</span></div>
+<div class="line"><a id="l00972" name="l00972"></a><span class="lineno">  972</span><span class="comment"> * @param p2 The memory location of the first value</span></div>
+<div class="line"><a id="l00973" name="l00973"></a><span class="lineno">  973</span><span class="comment"> * @param type The datatype description of both values */</span></div>
 <div class="line"><a id="l00974" name="l00974"></a><span class="lineno">  974</span><a class="code hl_enumeration" href="common_8h.html#adeb58a592483258f220c845c47622b15">UA_Order</a></div>
 <div class="line"><a id="l00975" name="l00975"></a><span class="lineno"><a class="line" href="types_8h.html#a4e7a92f078dc587b4a364ed8cc6299c9">  975</a></span><a class="code hl_function" href="types_8h.html#a4e7a92f078dc587b4a364ed8cc6299c9">UA_order</a>(<span class="keyword">const</span> <span class="keywordtype">void</span> *p1, <span class="keyword">const</span> <span class="keywordtype">void</span> *p2, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type);</div>
 <div class="line"><a id="l00976" name="l00976"></a><span class="lineno">  976</span> </div>
 <div class="line"><a id="l00977" name="l00977"></a><span class="lineno">  977</span> </div>
-<div class="line"><a id="l00978" name="l00978"></a><span class="lineno">  978</span> </div>
+<div class="line"><a id="l00978" name="l00978"></a><span class="lineno">  978</span><span class="comment"></span> </div>
+<div class="line"><a id="l00979" name="l00979"></a><span class="lineno">  979</span><span class="comment">/** Returns the number of bytes the value p takes in binary encoding. Returns</span></div>
+<div class="line"><a id="l00980" name="l00980"></a><span class="lineno">  980</span><span class="comment"> * zero if an error occurs. */</span></div>
 <div class="line"><a id="l00981" name="l00981"></a><span class="lineno">  981</span>UA_EXPORT <span class="keywordtype">size_t</span></div>
 <div class="line"><a id="l00982" name="l00982"></a><span class="lineno"><a class="line" href="types_8h.html#a01c682f8a091957ce7aaf517f87a2134">  982</a></span><a class="code hl_function" href="types_8h.html#a01c682f8a091957ce7aaf517f87a2134">UA_calcSizeBinary</a>(<span class="keyword">const</span> <span class="keywordtype">void</span> *p, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type);</div>
-<div class="line"><a id="l00983" name="l00983"></a><span class="lineno">  983</span> </div>
+<div class="line"><a id="l00983" name="l00983"></a><span class="lineno">  983</span><span class="comment"></span> </div>
+<div class="line"><a id="l00984" name="l00984"></a><span class="lineno">  984</span><span class="comment">/** Encodes a data-structure in the binary format. If outBuf has a length of</span></div>
+<div class="line"><a id="l00985" name="l00985"></a><span class="lineno">  985</span><span class="comment"> * zero, a buffer of the required size is allocated. Otherwise, encoding into</span></div>
+<div class="line"><a id="l00986" name="l00986"></a><span class="lineno">  986</span><span class="comment"> * the existing outBuf is attempted (and may fail if the buffer is too</span></div>
+<div class="line"><a id="l00987" name="l00987"></a><span class="lineno">  987</span><span class="comment"> * small). */</span></div>
 <div class="line"><a id="l00988" name="l00988"></a><span class="lineno">  988</span>UA_EXPORT <a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00989" name="l00989"></a><span class="lineno"><a class="line" href="types_8h.html#adaff9c45e3b54d87ece28f5e71086b7a">  989</a></span><a class="code hl_function" href="types_8h.html#adaff9c45e3b54d87ece28f5e71086b7a">UA_encodeBinary</a>(<span class="keyword">const</span> <span class="keywordtype">void</span> *p, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type,</div>
 <div class="line"><a id="l00990" name="l00990"></a><span class="lineno">  990</span>                <a class="code hl_struct" href="structUA__String.html">UA_ByteString</a> *outBuf);</div>
-<div class="line"><a id="l00991" name="l00991"></a><span class="lineno">  991</span> </div>
+<div class="line"><a id="l00991" name="l00991"></a><span class="lineno">  991</span><span class="comment"></span> </div>
+<div class="line"><a id="l00992" name="l00992"></a><span class="lineno">  992</span><span class="comment">/** The structure with the decoding options may be extended in the future.</span></div>
+<div class="line"><a id="l00993" name="l00993"></a><span class="lineno">  993</span><span class="comment"> * Zero-out the entire structure initially to ensure code-compatibility when</span></div>
+<div class="line"><a id="l00994" name="l00994"></a><span class="lineno">  994</span><span class="comment"> * more fields are added in a later release. */</span></div>
 <div class="line"><a id="l00995" name="l00995"></a><span class="lineno"><a class="line" href="structUA__DecodeBinaryOptions.html">  995</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
 <div class="line"><a id="l00996" name="l00996"></a><span class="lineno"><a class="line" href="structUA__DecodeBinaryOptions.html#a1dfa45ac949b59d8f4070b47e2c15637">  996</a></span>    <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataTypeArray.html">UA_DataTypeArray</a> *<a class="code hl_variable" href="structUA__DecodeBinaryOptions.html#a1dfa45ac949b59d8f4070b47e2c15637">customTypes</a>; <span class="comment">/* Begin of a linked list with custom</span></div>
 <div class="line"><a id="l00997" name="l00997"></a><span class="lineno">  997</span><span class="comment">                                          * datatype definitions */</span></div>
 <div class="line"><a id="l00998" name="l00998"></a><span class="lineno">  998</span>} <a class="code hl_struct" href="structUA__DecodeBinaryOptions.html">UA_DecodeBinaryOptions</a>;</div>
-<div class="line"><a id="l00999" name="l00999"></a><span class="lineno">  999</span> </div>
+<div class="line"><a id="l00999" name="l00999"></a><span class="lineno">  999</span><span class="comment"></span> </div>
+<div class="line"><a id="l01000" name="l01000"></a><span class="lineno"> 1000</span><span class="comment">/** Decodes a data structure from the input buffer in the binary format. It is</span></div>
+<div class="line"><a id="l01001" name="l01001"></a><span class="lineno"> 1001</span><span class="comment"> * assumed that `p` points to valid memory (not necessarily zeroed out). The</span></div>
+<div class="line"><a id="l01002" name="l01002"></a><span class="lineno"> 1002</span><span class="comment"> * options can be NULL and will be disregarded in that case. */</span></div>
 <div class="line"><a id="l01003" name="l01003"></a><span class="lineno"> 1003</span>UA_EXPORT <a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l01004" name="l01004"></a><span class="lineno"><a class="line" href="types_8h.html#ab8d429a855d956f989b57e5486cd8fc3"> 1004</a></span><a class="code hl_function" href="types_8h.html#ab8d429a855d956f989b57e5486cd8fc3">UA_decodeBinary</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__String.html">UA_ByteString</a> *inBuf,</div>
 <div class="line"><a id="l01005" name="l01005"></a><span class="lineno"> 1005</span>                <span class="keywordtype">void</span> *p, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type,</div>
@@ -843,15 +1094,27 @@ $(function() {
 <div class="line"><a id="l01014" name="l01014"></a><span class="lineno"> 1014</span>    <span class="keywordtype">size_t</span> serverUrisSize;</div>
 <div class="line"><a id="l01015" name="l01015"></a><span class="lineno"> 1015</span>    <a class="code hl_variable" href="types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a> useReversible;</div>
 <div class="line"><a id="l01016" name="l01016"></a><span class="lineno"> 1016</span>} UA_EncodeJsonOptions;</div>
-<div class="line"><a id="l01017" name="l01017"></a><span class="lineno"> 1017</span> </div>
+<div class="line"><a id="l01017" name="l01017"></a><span class="lineno"> 1017</span><span class="comment"></span> </div>
+<div class="line"><a id="l01018" name="l01018"></a><span class="lineno"> 1018</span><span class="comment">/** Returns the number of bytes the value src takes in json encoding. Returns</span></div>
+<div class="line"><a id="l01019" name="l01019"></a><span class="lineno"> 1019</span><span class="comment"> * zero if an error occurs. */</span></div>
 <div class="line"><a id="l01020" name="l01020"></a><span class="lineno"> 1020</span>UA_EXPORT <span class="keywordtype">size_t</span></div>
 <div class="line"><a id="l01021" name="l01021"></a><span class="lineno"> 1021</span>UA_calcSizeJson(<span class="keyword">const</span> <span class="keywordtype">void</span> *src, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type,</div>
 <div class="line"><a id="l01022" name="l01022"></a><span class="lineno"> 1022</span>                <span class="keyword">const</span> UA_EncodeJsonOptions *options);</div>
-<div class="line"><a id="l01023" name="l01023"></a><span class="lineno"> 1023</span> </div>
+<div class="line"><a id="l01023" name="l01023"></a><span class="lineno"> 1023</span><span class="comment"></span> </div>
+<div class="line"><a id="l01024" name="l01024"></a><span class="lineno"> 1024</span><span class="comment">/** Encodes the scalar value described by type to json encoding.</span></div>
+<div class="line"><a id="l01025" name="l01025"></a><span class="lineno"> 1025</span><span class="comment"> *</span></div>
+<div class="line"><a id="l01026" name="l01026"></a><span class="lineno"> 1026</span><span class="comment"> * @param src The value. Must not be NULL.</span></div>
+<div class="line"><a id="l01027" name="l01027"></a><span class="lineno"> 1027</span><span class="comment"> * @param type The value type. Must not be NULL.</span></div>
+<div class="line"><a id="l01028" name="l01028"></a><span class="lineno"> 1028</span><span class="comment"> * @param outBuf Pointer to ByteString containing the result if the encoding</span></div>
+<div class="line"><a id="l01029" name="l01029"></a><span class="lineno"> 1029</span><span class="comment"> *        was successful</span></div>
+<div class="line"><a id="l01030" name="l01030"></a><span class="lineno"> 1030</span><span class="comment"> * @return Returns a statuscode whether encoding succeeded. */</span></div>
 <div class="line"><a id="l01031" name="l01031"></a><span class="lineno"> 1031</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l01032" name="l01032"></a><span class="lineno"> 1032</span>UA_encodeJson(<span class="keyword">const</span> <span class="keywordtype">void</span> *src, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type, <a class="code hl_struct" href="structUA__String.html">UA_ByteString</a> *outBuf,</div>
 <div class="line"><a id="l01033" name="l01033"></a><span class="lineno"> 1033</span>              <span class="keyword">const</span> UA_EncodeJsonOptions *options);</div>
-<div class="line"><a id="l01034" name="l01034"></a><span class="lineno"> 1034</span> </div>
+<div class="line"><a id="l01034" name="l01034"></a><span class="lineno"> 1034</span><span class="comment"></span> </div>
+<div class="line"><a id="l01035" name="l01035"></a><span class="lineno"> 1035</span><span class="comment">/** The structure with the decoding options may be extended in the future.</span></div>
+<div class="line"><a id="l01036" name="l01036"></a><span class="lineno"> 1036</span><span class="comment"> * Zero-out the entire structure initially to ensure code-compatibility when</span></div>
+<div class="line"><a id="l01037" name="l01037"></a><span class="lineno"> 1037</span><span class="comment"> * more fields are added in a later release. */</span></div>
 <div class="line"><a id="l01038" name="l01038"></a><span class="lineno"> 1038</span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
 <div class="line"><a id="l01039" name="l01039"></a><span class="lineno"> 1039</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structUA__String.html">UA_String</a> *namespaces;</div>
 <div class="line"><a id="l01040" name="l01040"></a><span class="lineno"> 1040</span>    <span class="keywordtype">size_t</span> namespacesSize;</div>
@@ -860,7 +1123,17 @@ $(function() {
 <div class="line"><a id="l01043" name="l01043"></a><span class="lineno"> 1043</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataTypeArray.html">UA_DataTypeArray</a> *customTypes; <span class="comment">/* Begin of a linked list with custom</span></div>
 <div class="line"><a id="l01044" name="l01044"></a><span class="lineno"> 1044</span><span class="comment">                                          * datatype definitions */</span></div>
 <div class="line"><a id="l01045" name="l01045"></a><span class="lineno"> 1045</span>} UA_DecodeJsonOptions;</div>
-<div class="line"><a id="l01046" name="l01046"></a><span class="lineno"> 1046</span> </div>
+<div class="line"><a id="l01046" name="l01046"></a><span class="lineno"> 1046</span><span class="comment"></span> </div>
+<div class="line"><a id="l01047" name="l01047"></a><span class="lineno"> 1047</span><span class="comment">/** Decodes a scalar value described by type from json encoding.</span></div>
+<div class="line"><a id="l01048" name="l01048"></a><span class="lineno"> 1048</span><span class="comment"> *</span></div>
+<div class="line"><a id="l01049" name="l01049"></a><span class="lineno"> 1049</span><span class="comment"> * @param src The buffer with the json encoded value. Must not be NULL.</span></div>
+<div class="line"><a id="l01050" name="l01050"></a><span class="lineno"> 1050</span><span class="comment"> * @param dst The target value. Must not be NULL. The target is assumed to have</span></div>
+<div class="line"><a id="l01051" name="l01051"></a><span class="lineno"> 1051</span><span class="comment"> *        size type-&gt;memSize. The value is reset to zero before decoding. If</span></div>
+<div class="line"><a id="l01052" name="l01052"></a><span class="lineno"> 1052</span><span class="comment"> *        decoding fails, members are deleted and the value is reset (zeroed)</span></div>
+<div class="line"><a id="l01053" name="l01053"></a><span class="lineno"> 1053</span><span class="comment"> *        again.</span></div>
+<div class="line"><a id="l01054" name="l01054"></a><span class="lineno"> 1054</span><span class="comment"> * @param type The value type. Must not be NULL.</span></div>
+<div class="line"><a id="l01055" name="l01055"></a><span class="lineno"> 1055</span><span class="comment"> * @param options The options struct for decoding, currently unused</span></div>
+<div class="line"><a id="l01056" name="l01056"></a><span class="lineno"> 1056</span><span class="comment"> * @return Returns a statuscode whether decoding succeeded. */</span></div>
 <div class="line"><a id="l01057" name="l01057"></a><span class="lineno"> 1057</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l01058" name="l01058"></a><span class="lineno"> 1058</span>UA_decodeJson(<span class="keyword">const</span> <a class="code hl_struct" href="structUA__String.html">UA_ByteString</a> *src, <span class="keywordtype">void</span> *dst, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type,</div>
 <div class="line"><a id="l01059" name="l01059"></a><span class="lineno"> 1059</span>              <span class="keyword">const</span> UA_DecodeJsonOptions *options);</div>
@@ -868,26 +1141,76 @@ $(function() {
 <div class="line"><a id="l01061" name="l01061"></a><span class="lineno"> 1061</span><span class="preprocessor">#endif </span><span class="comment">/* UA_ENABLE_JSON_ENCODING */</span><span class="preprocessor"></span></div>
 <div class="line"><a id="l01062" name="l01062"></a><span class="lineno"> 1062</span> </div>
 <div class="line"><a id="l01063" name="l01063"></a><span class="lineno"> 1063</span> </div>
-<div class="line"><a id="l01064" name="l01064"></a><span class="lineno"> 1064</span> </div>
+<div class="line"><a id="l01064" name="l01064"></a><span class="lineno"> 1064</span><span class="comment"></span> </div>
+<div class="line"><a id="l01065" name="l01065"></a><span class="lineno"> 1065</span><span class="comment">/** Allocates and initializes an array of variables of a specific type</span></div>
+<div class="line"><a id="l01066" name="l01066"></a><span class="lineno"> 1066</span><span class="comment"> *</span></div>
+<div class="line"><a id="l01067" name="l01067"></a><span class="lineno"> 1067</span><span class="comment"> * @param size The requested array length</span></div>
+<div class="line"><a id="l01068" name="l01068"></a><span class="lineno"> 1068</span><span class="comment"> * @param type The datatype description</span></div>
+<div class="line"><a id="l01069" name="l01069"></a><span class="lineno"> 1069</span><span class="comment"> * @return Returns the memory location of the variable or NULL if no memory</span></div>
+<div class="line"><a id="l01070" name="l01070"></a><span class="lineno"> 1070</span><span class="comment"> *         could be allocated */</span></div>
 <div class="line"><a id="l01071" name="l01071"></a><span class="lineno"> 1071</span><span class="keywordtype">void</span> *</div>
 <div class="line"><a id="l01072" name="l01072"></a><span class="lineno"><a class="line" href="types_8h.html#ab49966aa2cff36fe08c3052db3b51dd3"> 1072</a></span><a class="code hl_function" href="types_8h.html#ab49966aa2cff36fe08c3052db3b51dd3">UA_Array_new</a>(<span class="keywordtype">size_t</span> size, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type);</div>
-<div class="line"><a id="l01073" name="l01073"></a><span class="lineno"> 1073</span> </div>
+<div class="line"><a id="l01073" name="l01073"></a><span class="lineno"> 1073</span><span class="comment"></span> </div>
+<div class="line"><a id="l01074" name="l01074"></a><span class="lineno"> 1074</span><span class="comment">/** Allocates and copies an array</span></div>
+<div class="line"><a id="l01075" name="l01075"></a><span class="lineno"> 1075</span><span class="comment"> *</span></div>
+<div class="line"><a id="l01076" name="l01076"></a><span class="lineno"> 1076</span><span class="comment"> * @param src The memory location of the source array</span></div>
+<div class="line"><a id="l01077" name="l01077"></a><span class="lineno"> 1077</span><span class="comment"> * @param size The size of the array</span></div>
+<div class="line"><a id="l01078" name="l01078"></a><span class="lineno"> 1078</span><span class="comment"> * @param dst The location of the pointer to the new array</span></div>
+<div class="line"><a id="l01079" name="l01079"></a><span class="lineno"> 1079</span><span class="comment"> * @param type The datatype of the array members</span></div>
+<div class="line"><a id="l01080" name="l01080"></a><span class="lineno"> 1080</span><span class="comment"> * @return Returns UA_STATUSCODE_GOOD or UA_STATUSCODE_BADOUTOFMEMORY */</span></div>
 <div class="line"><a id="l01081" name="l01081"></a><span class="lineno"> 1081</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l01082" name="l01082"></a><span class="lineno"><a class="line" href="types_8h.html#af27a32f7f16ce2676dfadc56f15282a5"> 1082</a></span><a class="code hl_function" href="types_8h.html#af27a32f7f16ce2676dfadc56f15282a5">UA_Array_copy</a>(<span class="keyword">const</span> <span class="keywordtype">void</span> *src, <span class="keywordtype">size_t</span> size, <span class="keywordtype">void</span> **dst,</div>
 <div class="line"><a id="l01083" name="l01083"></a><span class="lineno"> 1083</span>              <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type);</div>
-<div class="line"><a id="l01084" name="l01084"></a><span class="lineno"> 1084</span> </div>
+<div class="line"><a id="l01084" name="l01084"></a><span class="lineno"> 1084</span><span class="comment"></span> </div>
+<div class="line"><a id="l01085" name="l01085"></a><span class="lineno"> 1085</span><span class="comment">/** Resizes (and reallocates) an array. The last entries are initialized to zero</span></div>
+<div class="line"><a id="l01086" name="l01086"></a><span class="lineno"> 1086</span><span class="comment"> * if the array length is increased. If the array length is decreased, the last</span></div>
+<div class="line"><a id="l01087" name="l01087"></a><span class="lineno"> 1087</span><span class="comment"> * entries are removed if the size is decreased.</span></div>
+<div class="line"><a id="l01088" name="l01088"></a><span class="lineno"> 1088</span><span class="comment"> *</span></div>
+<div class="line"><a id="l01089" name="l01089"></a><span class="lineno"> 1089</span><span class="comment"> * @param p Double pointer to the array memory. Can be overwritten by the result</span></div>
+<div class="line"><a id="l01090" name="l01090"></a><span class="lineno"> 1090</span><span class="comment"> *          of a realloc.</span></div>
+<div class="line"><a id="l01091" name="l01091"></a><span class="lineno"> 1091</span><span class="comment"> * @param size The current size of the array. Overwritten in case of success.</span></div>
+<div class="line"><a id="l01092" name="l01092"></a><span class="lineno"> 1092</span><span class="comment"> * @param newSize The new size of the array</span></div>
+<div class="line"><a id="l01093" name="l01093"></a><span class="lineno"> 1093</span><span class="comment"> * @param type The datatype of the array members</span></div>
+<div class="line"><a id="l01094" name="l01094"></a><span class="lineno"> 1094</span><span class="comment"> * @return Returns UA_STATUSCODE_GOOD or UA_STATUSCODE_BADOUTOFMEMORY. The</span></div>
+<div class="line"><a id="l01095" name="l01095"></a><span class="lineno"> 1095</span><span class="comment"> *         original array is left untouched in the failure case. */</span></div>
 <div class="line"><a id="l01096" name="l01096"></a><span class="lineno"> 1096</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l01097" name="l01097"></a><span class="lineno"><a class="line" href="types_8h.html#a36d905479fc599f3ef5d0cf96d7bcb9e"> 1097</a></span><a class="code hl_function" href="types_8h.html#a36d905479fc599f3ef5d0cf96d7bcb9e">UA_Array_resize</a>(<span class="keywordtype">void</span> **p, <span class="keywordtype">size_t</span> *size, <span class="keywordtype">size_t</span> newSize,</div>
 <div class="line"><a id="l01098" name="l01098"></a><span class="lineno"> 1098</span>                <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type);</div>
-<div class="line"><a id="l01099" name="l01099"></a><span class="lineno"> 1099</span> </div>
+<div class="line"><a id="l01099" name="l01099"></a><span class="lineno"> 1099</span><span class="comment"></span> </div>
+<div class="line"><a id="l01100" name="l01100"></a><span class="lineno"> 1100</span><span class="comment">/** Append the given element at the end of the array. The content is moved</span></div>
+<div class="line"><a id="l01101" name="l01101"></a><span class="lineno"> 1101</span><span class="comment"> * (shallow copy) and the original memory is _init&#39;ed if appending is</span></div>
+<div class="line"><a id="l01102" name="l01102"></a><span class="lineno"> 1102</span><span class="comment"> * successful.</span></div>
+<div class="line"><a id="l01103" name="l01103"></a><span class="lineno"> 1103</span><span class="comment"> *</span></div>
+<div class="line"><a id="l01104" name="l01104"></a><span class="lineno"> 1104</span><span class="comment"> * @param p Double pointer to the array memory. Can be overwritten by the result</span></div>
+<div class="line"><a id="l01105" name="l01105"></a><span class="lineno"> 1105</span><span class="comment"> *          of a realloc.</span></div>
+<div class="line"><a id="l01106" name="l01106"></a><span class="lineno"> 1106</span><span class="comment"> * @param size The current size of the array. Overwritten in case of success.</span></div>
+<div class="line"><a id="l01107" name="l01107"></a><span class="lineno"> 1107</span><span class="comment"> * @param newElem The element to be appended. The memory is reset upon success.</span></div>
+<div class="line"><a id="l01108" name="l01108"></a><span class="lineno"> 1108</span><span class="comment"> * @param type The datatype of the array members</span></div>
+<div class="line"><a id="l01109" name="l01109"></a><span class="lineno"> 1109</span><span class="comment"> * @return Returns UA_STATUSCODE_GOOD or UA_STATUSCODE_BADOUTOFMEMORY. The</span></div>
+<div class="line"><a id="l01110" name="l01110"></a><span class="lineno"> 1110</span><span class="comment"> *         original array is left untouched in the failure case. */</span></div>
 <div class="line"><a id="l01111" name="l01111"></a><span class="lineno"> 1111</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l01112" name="l01112"></a><span class="lineno"><a class="line" href="types_8h.html#ac342ed5f629d31e5079f4bf91953d139"> 1112</a></span><a class="code hl_function" href="types_8h.html#ac342ed5f629d31e5079f4bf91953d139">UA_Array_append</a>(<span class="keywordtype">void</span> **p, <span class="keywordtype">size_t</span> *size, <span class="keywordtype">void</span> *newElem,</div>
 <div class="line"><a id="l01113" name="l01113"></a><span class="lineno"> 1113</span>                <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type);</div>
-<div class="line"><a id="l01114" name="l01114"></a><span class="lineno"> 1114</span> </div>
+<div class="line"><a id="l01114" name="l01114"></a><span class="lineno"> 1114</span><span class="comment"></span> </div>
+<div class="line"><a id="l01115" name="l01115"></a><span class="lineno"> 1115</span><span class="comment">/** Append a copy of the given element at the end of the array.</span></div>
+<div class="line"><a id="l01116" name="l01116"></a><span class="lineno"> 1116</span><span class="comment"> *</span></div>
+<div class="line"><a id="l01117" name="l01117"></a><span class="lineno"> 1117</span><span class="comment"> * @param p Double pointer to the array memory. Can be overwritten by the result</span></div>
+<div class="line"><a id="l01118" name="l01118"></a><span class="lineno"> 1118</span><span class="comment"> *          of a realloc.</span></div>
+<div class="line"><a id="l01119" name="l01119"></a><span class="lineno"> 1119</span><span class="comment"> * @param size The current size of the array. Overwritten in case of success.</span></div>
+<div class="line"><a id="l01120" name="l01120"></a><span class="lineno"> 1120</span><span class="comment"> * @param newElem The element to be appended.</span></div>
+<div class="line"><a id="l01121" name="l01121"></a><span class="lineno"> 1121</span><span class="comment"> * @param type The datatype of the array members</span></div>
+<div class="line"><a id="l01122" name="l01122"></a><span class="lineno"> 1122</span><span class="comment"> * @return Returns UA_STATUSCODE_GOOD or UA_STATUSCODE_BADOUTOFMEMORY. The</span></div>
+<div class="line"><a id="l01123" name="l01123"></a><span class="lineno"> 1123</span><span class="comment"> *         original array is left untouched in the failure case. */</span></div>
+<div class="line"><a id="l01124" name="l01124"></a><span class="lineno"> 1124</span> </div>
 <div class="line"><a id="l01125" name="l01125"></a><span class="lineno"> 1125</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l01126" name="l01126"></a><span class="lineno"><a class="line" href="types_8h.html#a8f93398b32d6fc0845cd7d4c35030bc1"> 1126</a></span><a class="code hl_function" href="types_8h.html#a8f93398b32d6fc0845cd7d4c35030bc1">UA_Array_appendCopy</a>(<span class="keywordtype">void</span> **p, <span class="keywordtype">size_t</span> *size, <span class="keyword">const</span> <span class="keywordtype">void</span> *newElem,</div>
 <div class="line"><a id="l01127" name="l01127"></a><span class="lineno"> 1127</span>                    <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type);</div>
-<div class="line"><a id="l01128" name="l01128"></a><span class="lineno"> 1128</span> </div>
+<div class="line"><a id="l01128" name="l01128"></a><span class="lineno"> 1128</span><span class="comment"></span> </div>
+<div class="line"><a id="l01129" name="l01129"></a><span class="lineno"> 1129</span><span class="comment">/** Deletes an array.</span></div>
+<div class="line"><a id="l01130" name="l01130"></a><span class="lineno"> 1130</span><span class="comment"> *</span></div>
+<div class="line"><a id="l01131" name="l01131"></a><span class="lineno"> 1131</span><span class="comment"> * @param p The memory location of the array</span></div>
+<div class="line"><a id="l01132" name="l01132"></a><span class="lineno"> 1132</span><span class="comment"> * @param size The size of the array</span></div>
+<div class="line"><a id="l01133" name="l01133"></a><span class="lineno"> 1133</span><span class="comment"> * @param type The datatype of the array members */</span></div>
 <div class="line"><a id="l01134" name="l01134"></a><span class="lineno"> 1134</span><span class="keywordtype">void</span></div>
 <div class="line"><a id="l01135" name="l01135"></a><span class="lineno"><a class="line" href="types_8h.html#a05af722df9c9a11fd6b497a7a35b8cdb"> 1135</a></span><a class="code hl_function" href="types_8h.html#a05af722df9c9a11fd6b497a7a35b8cdb">UA_Array_delete</a>(<span class="keywordtype">void</span> *p, <span class="keywordtype">size_t</span> size, <span class="keyword">const</span> <a class="code hl_struct" href="structUA__DataType.html">UA_DataType</a> *type);</div>
 <div class="line"><a id="l01136" name="l01136"></a><span class="lineno"> 1136</span> </div>
@@ -897,7 +1220,9 @@ $(function() {
 <div class="line"><a id="l01140" name="l01140"></a><span class="lineno"><a class="line" href="types_8h.html#a312ed9d2d196f380d439ab7dadb4005c"> 1140</a></span><a class="code hl_struct" href="structUA__Guid.html">UA_Guid</a> <a class="code hl_function" href="types_8h.html#a312ed9d2d196f380d439ab7dadb4005c">UA_Guid_random</a>(<span class="keywordtype">void</span>);     <span class="comment">/* no cryptographic entropy */</span></div>
 <div class="line"><a id="l01141" name="l01141"></a><span class="lineno"> 1141</span> </div>
 <div class="line"><a id="l01142" name="l01142"></a><span class="lineno"> 1142</span> </div>
-<div class="line"><a id="l01143" name="l01143"></a><span class="lineno"> 1143</span> </div>
+<div class="line"><a id="l01143" name="l01143"></a><span class="lineno"> 1143</span><span class="comment"></span> </div>
+<div class="line"><a id="l01144" name="l01144"></a><span class="lineno"> 1144</span><span class="comment">/** The following is used to exclude type names in the definition of UA_DataType</span></div>
+<div class="line"><a id="l01145" name="l01145"></a><span class="lineno"> 1145</span><span class="comment"> * structures if the feature is disabled. */</span></div>
 <div class="line"><a id="l01146" name="l01146"></a><span class="lineno"> 1146</span><span class="preprocessor">#ifdef UA_ENABLE_TYPEDESCRIPTION</span></div>
 <div class="line"><a id="l01147" name="l01147"></a><span class="lineno"> 1147</span><span class="preprocessor"># define UA_TYPENAME(name) name,</span></div>
 <div class="line"><a id="l01148" name="l01148"></a><span class="lineno"> 1148</span><span class="preprocessor">#else</span></div>

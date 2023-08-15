@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.6.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.7.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -93,7 +93,7 @@ $(function() {
 <div class="line">        {1, <span class="stringliteral">&quot;the.answer&quot;</span>},</div>
 <div class="line">        <span class="stringliteral">&quot;the answer&quot;</span>,</div>
 <div class="line">        <a id="_a8" name="_a8"></a><a class="code hl_class" href="classopcua_1_1VariableAttributes.html">opcua::VariableAttributes</a>{}</div>
-<div class="line">            .<a id="a9" name="a9"></a><a class="code hl_function" href="classopcua_1_1VariableAttributes.html#a175f8395fce2a25238eab30a14c4b992">setDataType</a>(<a id="a10" name="a10"></a><a class="code hl_enumvalue" href="group__NodeIds.html#ggadfeffe1a4352e8d89c5167a8c09d1692ac06129f6e6e15c09328365e553f1dc31">opcua::DataTypeId::Int32</a>)</div>
+<div class="line">            .<a id="a9" name="a9"></a><a class="code hl_function" href="classopcua_1_1VariableAttributes.html#a175f8395fce2a25238eab30a14c4b992">setDataType</a>&lt;<span class="keywordtype">int</span>&gt;()</div>
 <div class="line">            .setDisplayName({<span class="stringliteral">&quot;en-US&quot;</span>, <span class="stringliteral">&quot;the answer&quot;</span>})</div>
 <div class="line">            .setDescription({<span class="stringliteral">&quot;en-US&quot;</span>, <span class="stringliteral">&quot;the answer&quot;</span>})</div>
 <div class="line">    );</div>
@@ -104,20 +104,19 @@ $(function() {
 <div class="line">    <span class="comment">// Read the value (attribute) from the node</span></div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;The answer is: &quot;</span> &lt;&lt; myIntegerNode.readScalar&lt;<span class="keywordtype">int</span>&gt;() &lt;&lt; std::endl;</div>
 <div class="line"> </div>
-<div class="line">    server.<a id="a11" name="a11"></a><a class="code hl_function" href="classopcua_1_1Server.html#a7346a714c85e2d99fc8bc9fd1dd31d6d">run</a>();</div>
+<div class="line">    server.<a id="a10" name="a10"></a><a class="code hl_function" href="classopcua_1_1Server.html#a7346a714c85e2d99fc8bc9fd1dd31d6d">run</a>();</div>
 <div class="line">}</div>
-<div class="ttc" id="aclassopcua_1_1Server_html"><div class="ttname"><a href="classopcua_1_1Server.html">opcua::Server</a></div><div class="ttdoc">High-level server class.</div><div class="ttdef"><b>Definition</b> <a href="Server_8h_source.html#l00032">Server.h:32</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Server_html"><div class="ttname"><a href="classopcua_1_1Server.html">opcua::Server</a></div><div class="ttdoc">High-level server class.</div><div class="ttdef"><b>Definition</b> <a href="Server_8h_source.html#l00034">Server.h:34</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Server_html_a2f0b2aea96301c20affba76c6e441492"><div class="ttname"><a href="classopcua_1_1Server.html#a2f0b2aea96301c20affba76c6e441492">opcua::Server::getObjectsNode</a></div><div class="ttdeci">Node&lt; Server &gt; getObjectsNode()</div></div>
 <div class="ttc" id="aclassopcua_1_1Server_html_a3096faf64ed93d3f2602a2371e55b644"><div class="ttname"><a href="classopcua_1_1Server.html#a3096faf64ed93d3f2602a2371e55b644">opcua::Server::setApplicationName</a></div><div class="ttdeci">void setApplicationName(std::string_view name)</div><div class="ttdoc">Set application name, default: open62541-based OPC UA Application.</div></div>
 <div class="ttc" id="aclassopcua_1_1Server_html_a7346a714c85e2d99fc8bc9fd1dd31d6d"><div class="ttname"><a href="classopcua_1_1Server.html#a7346a714c85e2d99fc8bc9fd1dd31d6d">opcua::Server::run</a></div><div class="ttdeci">void run()</div><div class="ttdoc">Run the server's main loop. This method will block until Server::stop is called.</div></div>
 <div class="ttc" id="aclassopcua_1_1Server_html_af917ca8ebe2f20dc0c262fed82464a7f"><div class="ttname"><a href="classopcua_1_1Server.html#af917ca8ebe2f20dc0c262fed82464a7f">opcua::Server::setLogger</a></div><div class="ttdeci">void setLogger(Logger logger)</div><div class="ttdoc">Set custom logging function.</div></div>
-<div class="ttc" id="aclassopcua_1_1VariableAttributes_html"><div class="ttname"><a href="classopcua_1_1VariableAttributes.html">opcua::VariableAttributes</a></div><div class="ttdoc">UA_VariableAttributes wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="Composed_8h_source.html#l00202">Composed.h:202</a></div></div>
-<div class="ttc" id="aclassopcua_1_1VariableAttributes_html_a175f8395fce2a25238eab30a14c4b992"><div class="ttname"><a href="classopcua_1_1VariableAttributes.html#a175f8395fce2a25238eab30a14c4b992">opcua::VariableAttributes::setDataType</a></div><div class="ttdeci">auto &amp; setDataType(const NodeId &amp;dataType)</div><div class="ttdef"><b>Definition</b> <a href="Composed_8h_source.html#l00222">Composed.h:222</a></div></div>
-<div class="ttc" id="agroup__NodeIds_html_ggadfeffe1a4352e8d89c5167a8c09d1692ac06129f6e6e15c09328365e553f1dc31"><div class="ttname"><a href="group__NodeIds.html#ggadfeffe1a4352e8d89c5167a8c09d1692ac06129f6e6e15c09328365e553f1dc31">opcua::DataTypeId::Int32</a></div><div class="ttdeci">@ Int32</div></div>
+<div class="ttc" id="aclassopcua_1_1VariableAttributes_html"><div class="ttname"><a href="classopcua_1_1VariableAttributes.html">opcua::VariableAttributes</a></div><div class="ttdoc">UA_VariableAttributes wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="Composed_8h_source.html#l00224">Composed.h:224</a></div></div>
+<div class="ttc" id="aclassopcua_1_1VariableAttributes_html_a175f8395fce2a25238eab30a14c4b992"><div class="ttname"><a href="classopcua_1_1VariableAttributes.html#a175f8395fce2a25238eab30a14c4b992">opcua::VariableAttributes::setDataType</a></div><div class="ttdeci">auto &amp; setDataType(const NodeId &amp;dataType)</div><div class="ttdef"><b>Definition</b> <a href="Composed_8h_source.html#l00246">Composed.h:246</a></div></div>
 <div class="ttc" id="alog_8h_html_a5603e94110fb2c3ab4c7f7ed85880580"><div class="ttname"><a href="open62541/log_8h.html#a5603e94110fb2c3ab4c7f7ed85880580">category</a></div><div class="ttdeci">static UA_LogCategory category</div></div>
 <div class="ttc" id="alog_8h_html_ae4899cf5c80d00f8c8e3703cb431ec2e"><div class="ttname"><a href="open62541/log_8h.html#ae4899cf5c80d00f8c8e3703cb431ec2e">msg</a></div><div class="ttdeci">static UA_LogCategory const char * msg</div></div>
-<div class="ttc" id="anamespaceopcua_html_a6e5737fb79424b815138aee1ea407f3f"><div class="ttname"><a href="namespaceopcua.html#a6e5737fb79424b815138aee1ea407f3f">opcua::getLogCategoryName</a></div><div class="ttdeci">constexpr std::string_view getLogCategoryName(LogCategory category)</div><div class="ttdoc">Get name of log category.</div><div class="ttdef"><b>Definition</b> <a href="Logger_8h_source.html#l00071">Logger.h:71</a></div></div>
-<div class="ttc" id="anamespaceopcua_html_aaf326c66a6effffc34bb0df2aa64aa55"><div class="ttname"><a href="namespaceopcua.html#aaf326c66a6effffc34bb0df2aa64aa55">opcua::getLogLevelName</a></div><div class="ttdeci">constexpr std::string_view getLogLevelName(LogLevel level)</div><div class="ttdoc">Get name of log level.</div><div class="ttdef"><b>Definition</b> <a href="Logger_8h_source.html#l00051">Logger.h:51</a></div></div>
+<div class="ttc" id="anamespaceopcua_html_a6e5737fb79424b815138aee1ea407f3f"><div class="ttname"><a href="namespaceopcua.html#a6e5737fb79424b815138aee1ea407f3f">opcua::getLogCategoryName</a></div><div class="ttdeci">constexpr std::string_view getLogCategoryName(LogCategory category)</div><div class="ttdoc">Get name of log category.</div><div class="ttdef"><b>Definition</b> <a href="Logger_8h_source.html#l00081">Logger.h:81</a></div></div>
+<div class="ttc" id="anamespaceopcua_html_aaf326c66a6effffc34bb0df2aa64aa55"><div class="ttname"><a href="namespaceopcua.html#aaf326c66a6effffc34bb0df2aa64aa55">opcua::getLogLevelName</a></div><div class="ttdeci">constexpr std::string_view getLogLevelName(LogLevel level)</div><div class="ttdoc">Get name of log level.</div><div class="ttdef"><b>Definition</b> <a href="Logger_8h_source.html#l00061">Logger.h:61</a></div></div>
 <div class="ttc" id="aopen62541pp_8h_html"><div class="ttname"><a href="open62541pp_8h.html">open62541pp.h</a></div></div>
 </div><!-- fragment --> </div><!-- contents -->
 <!-- start footer part -->

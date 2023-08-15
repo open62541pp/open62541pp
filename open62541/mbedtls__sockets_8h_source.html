@@ -92,7 +92,8 @@ $(function() {
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;mbedtls/net_sockets.h&gt;</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;mbedtls/ssl.h&gt;</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#if !defined(MBEDTLS_NET_POLL_READ)</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#if !defined(MBEDTLS_NET_POLL_READ)</span><span class="comment"></span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">/** compat for older mbedtls */</span><span class="preprocessor"></span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="mbedtls__sockets_8h.html#a7315a36b5a33a0ebc630315bde70c05c">   17</a></span><span class="preprocessor">#define MBEDTLS_NET_POLL_READ   1</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="mbedtls__sockets_8h.html#a78ab08a462896b76aa4edeefe57e9c59">   18</a></span><span class="preprocessor">#define MBEDTLS_NET_POLL_WRITE  1</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>

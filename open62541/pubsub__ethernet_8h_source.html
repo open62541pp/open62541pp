@@ -78,7 +78,12 @@ $(function() {
   <div class="headertitle"><div class="title">pubsub_ethernet.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="pubsub__ethernet_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<a href="pubsub__ethernet_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/** This work is licensed under a Creative Commons CCZero 1.0 Universal License.</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * See http://creativecommons.org/publicdomain/zero/1.0/ for more information.</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> *   Copyright 2018 (c) Kontron Europe GmbH (Author: Rudolf Hoyler)</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#ifndef UA_NETWORK_PUBSUB_ETHERNET_H_</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#define UA_NETWORK_PUBSUB_ETHERNET_H_</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
@@ -86,7 +91,9 @@ $(function() {
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><a class="code hl_define" href="config_8h.html#aa397bffde7d792f38dcbb8e329486f9c">_UA_BEGIN_DECLS</a></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"></span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">/** TODO: This can be removed once publishingOffset parameter set in place</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"> * and normal DatagramWriterGroupTransportDataType can be used */</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="structUA__EthernetWriterGroupTransportDataType.html">   17</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="structUA__EthernetWriterGroupTransportDataType.html#a06dafcf400f9b2ddc352074e377df298">   18</a></span>    <a class="code hl_typedef" href="types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a> <a class="code hl_variable" href="structUA__EthernetWriterGroupTransportDataType.html#a06dafcf400f9b2ddc352074e377df298">messageRepeatCount</a>;</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="structUA__EthernetWriterGroupTransportDataType.html#aa86b35d477ff840a1cfaae07a4c7ec60">   19</a></span>    <a class="code hl_typedef" href="types_8h.html#aac69e6c4659bdcafdb30498200a0ab07">UA_Double</a> <a class="code hl_variable" href="structUA__EthernetWriterGroupTransportDataType.html#aa86b35d477ff840a1cfaae07a4c7ec60">messageRepeatDelay</a>;</div>

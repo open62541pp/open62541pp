@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.6.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.7.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -100,6 +100,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae0a838841fe73437c0256c7655a5ca31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d417ca913abd0aa3a6ebd9352d0b650"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a8d417ca913abd0aa3a6ebd9352d0b650">setSecurityMode</a> (<a class="el" href="namespaceopcua.html#a7c1b18d5b5e54f86db43a65652ca7f79">MessageSecurityMode</a> mode)</td></tr>
 <tr class="separator:a8d417ca913abd0aa3a6ebd9352d0b650"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a718f1c02e4105c32446b7bb0dcb56ceb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a718f1c02e4105c32446b7bb0dcb56ceb">setCustomDataTypes</a> (std::vector&lt; <a class="el" href="classopcua_1_1DataType.html">DataType</a> &gt; dataTypes)</td></tr>
+<tr class="separator:a718f1c02e4105c32446b7bb0dcb56ceb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53f8f042ce80f247ba9ea9883a5e797f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a53f8f042ce80f247ba9ea9883a5e797f">onConnected</a> (<a class="el" href="namespaceopcua.html#a9378c706cc284e1cfca58dcb0af4cdb2">StateCallback</a> callback)</td></tr>
 <tr class="separator:a53f8f042ce80f247ba9ea9883a5e797f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a72243b9a462aeb9fcb1e5582fcc00b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Client.html#a7a72243b9a462aeb9fcb1e5582fcc00b">onDisconnected</a> (<a class="el" href="namespaceopcua.html#a9378c706cc284e1cfca58dcb0af4cdb2">StateCallback</a> callback)</td></tr>
@@ -150,10 +152,10 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>High-level client class. </p>
 <p>Exposes the most common functionality. Use the <a class="el" href="classopcua_1_1Client.html#a20b757a4e2e59e3f383164f22c4596f5">handle()</a> method to get access the underlying <a class="elRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a> instance and use the full power of open6254. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_browse_8cpp-example.html#_a2">client_browse.cpp</a>, <a class="el" href="client_connect_8cpp-example.html#_a0">client_connect.cpp</a>, <a class="el" href="client_find_servers_8cpp-example.html#_a8">client_find_servers.cpp</a>, <a class="el" href="client_method_8cpp-example.html#_a0">client_method.cpp</a>, <a class="el" href="client_minimal_8cpp-example.html#_a0">client_minimal.cpp</a>, and <a class="el" href="client_subscription_8cpp-example.html#_a0">client_subscription.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_browse_8cpp-example.html#_a2">client_browse.cpp</a>, <a class="el" href="client_connect_8cpp-example.html#_a0">client_connect.cpp</a>, <a class="el" href="client_find_servers_8cpp-example.html#_a8">client_find_servers.cpp</a>, <a class="el" href="client_method_8cpp-example.html#_a0">client_method.cpp</a>, <a class="el" href="client_minimal_8cpp-example.html#_a0">client_minimal.cpp</a>, <a class="el" href="client_subscription_8cpp-example.html#_a0">client_subscription.cpp</a>, and <a class="el" href="custom_datatypes_2client_custom_datatypes_8cpp-example.html#_a0">custom_datatypes/client_custom_datatypes.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Client_8h_source.html#l00036">36</a> of file <a class="el" href="Client_8h_source.html">Client.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Client_8h_source.html#l00037">37</a> of file <a class="el" href="Client_8h_source.html">Client.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a7fae9429a17e213b112fcfce046f2748" name="a7fae9429a17e213b112fcfce046f2748"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7fae9429a17e213b112fcfce046f2748">&#9670;&#160;</a></span>Client() <span class="overload">[1/2]</span></h2>
@@ -357,6 +359,29 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a718f1c02e4105c32446b7bb0dcb56ceb" name="a718f1c02e4105c32446b7bb0dcb56ceb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a718f1c02e4105c32446b7bb0dcb56ceb">&#9670;&#160;</a></span>setCustomDataTypes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::Client::setCustomDataTypes </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classopcua_1_1DataType.html">DataType</a> &gt;&#160;</td>
+          <td class="paramname"><em>dataTypes</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set custom data types. </p>
+<p>All data types provided are automatically considered for decoding of received messages. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2client_custom_datatypes_8cpp-example.html#a1">custom_datatypes/client_custom_datatypes.cpp</a>.</dd>
+</dl>
+
+</div>
+</div>
 <a id="a53f8f042ce80f247ba9ea9883a5e797f" name="a53f8f042ce80f247ba9ea9883a5e797f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a53f8f042ce80f247ba9ea9883a5e797f">&#9670;&#160;</a></span>onConnected()</h2>
 
@@ -462,7 +487,7 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_browse_8cpp-example.html#a3">client_browse.cpp</a>, <a class="el" href="client_connect_8cpp-example.html#a4">client_connect.cpp</a>, <a class="el" href="client_method_8cpp-example.html#a1">client_method.cpp</a>, <a class="el" href="client_minimal_8cpp-example.html#a1">client_minimal.cpp</a>, and <a class="el" href="client_subscription_8cpp-example.html#a15">client_subscription.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_browse_8cpp-example.html#a3">client_browse.cpp</a>, <a class="el" href="client_connect_8cpp-example.html#a4">client_connect.cpp</a>, <a class="el" href="client_method_8cpp-example.html#a1">client_method.cpp</a>, <a class="el" href="client_minimal_8cpp-example.html#a1">client_minimal.cpp</a>, <a class="el" href="client_subscription_8cpp-example.html#a15">client_subscription.cpp</a>, and <a class="el" href="custom_datatypes_2client_custom_datatypes_8cpp-example.html#a2">custom_datatypes/client_custom_datatypes.cpp</a>.</dd>
 </dl>
 
 </div>
@@ -747,7 +772,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_connect_8cpp-example.html#a5">client_connect.cpp</a>, and <a class="el" href="client_minimal_8cpp-example.html#a3">client_minimal.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_connect_8cpp-example.html#a5">client_connect.cpp</a>, <a class="el" href="client_minimal_8cpp-example.html#a3">client_minimal.cpp</a>, and <a class="el" href="custom_datatypes_2client_custom_datatypes_8cpp-example.html#a4">custom_datatypes/client_custom_datatypes.cpp</a>.</dd>
 </dl>
 
 </div>

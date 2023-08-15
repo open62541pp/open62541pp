@@ -78,7 +78,19 @@ $(function() {
   <div class="headertitle"><div class="title">ua_discovery_manager.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="ua__discovery__manager_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<a href="ua__discovery__manager_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="comment">/** This Source Code Form is subject to the terms of the Mozilla Public</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"> * License, v. 2.0. If a copy of the MPL was not distributed with this</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment"> * file, You can obtain one at http://mozilla.org/MPL/2.0/.</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> *</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> *    Copyright 2014-2018 (c) Fraunhofer IOSB (Author: Julius Pfrommer)</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> *    Copyright 2014, 2017 (c) Florian Palm</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"> *    Copyright 2015-2016 (c) Sten Grüner</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment"> *    Copyright 2015 (c) Chris Iatrou</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"> *    Copyright 2015-2016 (c) Oleksiy Vasylyev</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment"> *    Copyright 2016-2017 (c) Stefan Profanter, fortiss GmbH</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment"> *    Copyright 2017 (c) Julian Grothoff</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#ifndef UA_DISCOVERY_MANAGER_H_</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#define UA_DISCOVERY_MANAGER_H_</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
@@ -169,7 +181,9 @@ $(function() {
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno"><a class="line" href="ua__discovery__manager_8h.html#a04f2bc3f985d5dc93d80e0d1f4dd3b8d">  102</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="ua__discovery__manager_8h.html#a04f2bc3f985d5dc93d80e0d1f4dd3b8d">UA_DiscoveryManager_init</a>(<a class="code hl_struct" href="structUA__DiscoveryManager.html">UA_DiscoveryManager</a> *dm, <a class="code hl_struct" href="structUA__Server.html">UA_Server</a> *server);</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno"><a class="line" href="ua__discovery__manager_8h.html#ae8f7406f586e238f67186a3cf430ab3d">  103</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="ua__discovery__manager_8h.html#ae8f7406f586e238f67186a3cf430ab3d">UA_DiscoveryManager_clear</a>(<a class="code hl_struct" href="structUA__DiscoveryManager.html">UA_DiscoveryManager</a> *dm, <a class="code hl_struct" href="structUA__Server.html">UA_Server</a> *server);</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment"></span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment">/** Checks if a registration timed out and removes that registration.</span></div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment"> * Should be called periodically in main loop */</span></div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno"><a class="line" href="ua__discovery__manager_8h.html#afccaf258e7f57c3007665126d728b4d9">  107</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="ua__discovery__manager_8h.html#afccaf258e7f57c3007665126d728b4d9">UA_Discovery_cleanupTimedOut</a>(<a class="code hl_struct" href="structUA__Server.html">UA_Server</a> *server, <a class="code hl_typedef" href="types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a> nowMonotonic);</div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="preprocessor">#ifdef UA_ENABLE_DISCOVERY_MULTICAST</span></div>
@@ -211,7 +225,8 @@ $(function() {
 <div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    UA_DISCOVERY_TCP,     <span class="comment">/* OPC UA TCP mapping */</span></div>
 <div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    UA_DISCOVERY_TLS     <span class="comment">/* OPC UA HTTPS mapping */</span></div>
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>} UA_DiscoveryProtocol;</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span><span class="comment"></span> </div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span><span class="comment">/** Send a multicast probe to find any other OPC UA server on the network through mDNS. */</span></div>
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><a class="code hl_typedef" href="types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a></div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>UA_Discovery_multicastQuery(<a class="code hl_struct" href="structUA__Server.html">UA_Server</a>* server);</div>
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
