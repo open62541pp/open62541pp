@@ -357,6 +357,11 @@ TEST_CASE("NodeId") {
         CHECK(NodeId(1, ByteString("test123")).toString() == "ns=1;b=dGVzdDEyMw==");
 #endif
     }
+
+    SUBCASE("std::hash specialization") {
+        const NodeId id(1, "Test123");
+        CHECK(std::hash<NodeId>{}(id) == id.hash());
+    }
 }
 
 TEST_CASE("ExpandedNodeId") {
@@ -391,6 +396,10 @@ TEST_CASE("ExpandedNodeId") {
             ExpandedNodeId({2, 10157}, "http://test.org/UA/Data/", 1).toString(),
             "svr=1;nsu=http://test.org/UA/Data/;ns=2;i=10157"
         );
+    }
+
+    SUBCASE("std::hash specialization") {
+        CHECK(std::hash<ExpandedNodeId>()(idLocal) == idLocal.hash());
     }
 }
 

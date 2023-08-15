@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <functional>  // hash
 #include <string>
 #include <string_view>
 #include <variant>
@@ -148,3 +149,19 @@ public:
 };
 
 }  // namespace opcua
+
+/* ---------------------------------- std::hash specializations --------------------------------- */
+
+template <>
+struct std::hash<opcua::NodeId> {
+    std::size_t operator()(const opcua::NodeId& id) const noexcept {
+        return id.hash();
+    }
+};
+
+template <>
+struct std::hash<opcua::ExpandedNodeId> {
+    std::size_t operator()(const opcua::ExpandedNodeId& id) const noexcept {
+        return id.hash();
+    }
+};
