@@ -7,6 +7,7 @@
 
 #include "open62541pp/NodeIds.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/detail/helper.h"
 #include "open62541pp/open62541.h"
 #include "open62541pp/types/Builtin.h"
 
@@ -46,6 +47,10 @@ public:
 
     /// Create NodeId with ByteString identifier.
     NodeId(uint16_t namespaceIndex, const ByteString& identifier);
+
+    /// Create NodeId from Type (type id).
+    NodeId(Type type) noexcept  // NOLINT, implicit wanted
+        : NodeId(detail::getUaDataType(type).typeId) {}
 
     /// Create NodeId from DataTypeId.
     NodeId(DataTypeId id) noexcept  // NOLINT, implicit wanted

@@ -262,6 +262,7 @@ TEST_CASE("DateTime") {
 
 TEST_CASE("NodeId") {
     SUBCASE("Create from ids") {
+        CHECK(NodeId(Type::Boolean) == NodeId(0, UA_NS0ID_BOOLEAN));
         CHECK(NodeId(DataTypeId::Boolean) == NodeId(0, UA_NS0ID_BOOLEAN));
         CHECK(NodeId(ReferenceTypeId::References) == NodeId(0, UA_NS0ID_REFERENCES));
         CHECK(NodeId(ObjectTypeId::BaseObjectType) == NodeId(0, UA_NS0ID_BASEOBJECTTYPE));
@@ -870,6 +871,11 @@ TEST_CASE("NodeAttributes fluent interface") {
     const auto attr = NodeAttributes{}.setDisplayName({"", "displayName"}).setWriteMask(0xFFFFFFFF);
     CHECK(attr.getDisplayName() == LocalizedText("", "displayName"));
     CHECK(attr.getWriteMask() == 0xFFFFFFFF);
+}
+
+TEST_CASE_TEMPLATE("NodeAttributes setDataType", T, VariableAttributes, VariableTypeAttributes) {
+    CHECK(T{}.setDataType(DataTypeId::Boolean).getDataType() == NodeId(DataTypeId::Boolean));
+    CHECK(T{}.template setDataType<bool>().getDataType() == NodeId(DataTypeId::Boolean));
 }
 
 TEST_CASE("BrowseDescription") {

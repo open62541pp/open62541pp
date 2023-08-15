@@ -454,18 +454,19 @@ public:
         return *this;
     }
 
-    /// @copydoc services::writeDataType(T&, const NodeId&, Type)
-    /// @return Current node instance to chain multiple methods (fluent interface)
-    Node& writeDataType(Type type) {
-        services::writeDataType(connection_, nodeId_, type);
-        return *this;
-    }
-
-    /// @copydoc services::writeDataType(T&, const NodeId&, const NodeId&)
+    /// @copydoc services::writeDataType
     /// @return Current node instance to chain multiple methods (fluent interface)
     Node& writeDataType(const NodeId& typeId) {
         services::writeDataType(connection_, nodeId_, typeId);
         return *this;
+    }
+
+    /// @overload
+    /// Deduce the `typeId` from the template type.
+    /// @return Current node instance to chain multiple methods (fluent interface)
+    template <typename T>
+    Node& writeDataType() {
+        return writeDataType(asWrapper<NodeId>(detail::guessDataType<T>().typeId));
     }
 
     /// @copydoc services::writeValueRank

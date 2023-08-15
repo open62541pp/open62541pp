@@ -17,7 +17,7 @@ int main() {
         {1, "the.answer"},
         "the answer",
         opcua::VariableAttributes{}
-            .setDataType(opcua::DataTypeId::Int32)
+            .setDataType<int>()
             .setDisplayName({"en-US", "the answer"})
             .setDescription({"en-US", "the answer"})
     );
