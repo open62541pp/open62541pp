@@ -7,6 +7,56 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Set variable node value data source with `Server::setVariableNodeValueBackend` (#65)
+- Missing node management functions (#77):
+  - `Node::addReferenceType` / `services::addReferenceType`
+  - `Node::addDataType` / `services::addDataType`
+  - `Node::addView` / `services::addView`
+- `Variant` methods for custom types (#78):
+  - `Variant::getDataType`
+  - `Variant::getScalar` without template type (returns `void*`)
+  - `Variant::getArray` without template type (returns `void*`)
+  - `Variant::setScalar` overload with custom `UA_DataType`
+  - `Variant::setScalarCopy` overload with custom `UA_DataType`
+  - `Variant::setArray` overload with custom `UA_DataType`
+  - `Variant::setArrayCopy` overload with custom `UA_DataType`
+- `Variant::fromScalar` / `Variant::fromArray` overloads with custom data type (#78)
+- `StatusCode` class (#79)
+- Integration of custom data types (#76):
+  - `DataType` wrapper class
+  - `DataTypeBuilder` to generate `UA_DataType` definition for custom types
+  - `Variant::isType(const UA_DataType&)` overload
+  - `Server::setCustomDataTypes` / `Client::setCustomDataTypes`
+  - `Variant::set*` and `Variant::from*` methods with custom data type parameter
+- `NodeId::isNull` method
+- `ExpandedNodeId::hash` method
+- Custom access control (#74):
+  - `Session` class
+  - `AccessControlBase` base class and `AccessControlDefault` implementation
+  - `Server` methods:
+    - `Server::setAccessControl`
+    - `Server::getSessions`
+- Add examples:
+  - `typeconversion`
+  - `custom_datatypes/*` (#76)
+  - `server_accesscontrol` (#74)
+
+### Changed
+
+- Remove `type`/`typeIndex` template parameters (#83).
+  Infer data type in function body. Ambiguous types have to be specified in overloaded methods with `UA_DataType` parameter
+- Remove `Server::setLogin` method (#74).
+  Use `Server::setAccessControl` instead with `AccessControlDefault(bool allowAnonymous = true, std::vector<Login> logins = {})` instead.
+
+### Fixed
+
+- Catch exceptions in callbacks
+- Add include guard to `Crypto.h` (#80)
+- Clang-tidy fixes (#82)
+- MSVC warnings
+
 ## [0.6.0] - 2023-07-29
 
 ### Added
