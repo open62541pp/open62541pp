@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.0] - 2023-08-15
+
 ### Added
 
 - Set variable node value data source with `Server::setVariableNodeValueBackend` (#65)
@@ -38,6 +40,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `Server` methods:
     - `Server::setAccessControl`
     - `Server::getSessions`
+- Deduce data type from template type (#84).
+  Provide overloads to deduce the data type id of Variable or VariableType nodes from the template type `T`:
+  - `Node::writeDataType<T>()`
+  - `VariableAttributes::setDataType<T>()`
+  - `VariableTypeAttributes::setDataType<T>()`
+- `std::hash` specialization for `NodeId` and `ExpandedNodeId` (#90)
 - Add examples:
   - `typeconversion`
   - `custom_datatypes/*` (#76)
@@ -283,7 +291,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial public release
 
-[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.6.0...HEAD
+[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.7.0...HEAD
+[0.7.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.7.0
 [0.6.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.6.0
 [0.5.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.5.0
 [0.4.1]: https://github.com/open62541pp/open62541pp/releases/tag/v0.4.1
