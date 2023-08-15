@@ -16,5 +16,5 @@ int main() {
     const auto outputs = objNode.callMethod(
         greetMethodNode.getNodeId(), {opcua::Variant::fromScalar(opcua::String("World"))}
     );
-    std::cout << outputs.at(0).getScalarCopy<opcua::String>().get() << std::endl;
+    std::cout << outputs.at(0).getScalarCopy<opcua::String>() << std::endl;
 }
