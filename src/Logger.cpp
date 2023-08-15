@@ -7,12 +7,20 @@
 
 namespace opcua {
 
+inline static const UA_Logger& getLogger(UA_Client& client) {
+    return UA_Client_getConfig(&client)->logger;
+}
+
+inline static const UA_Logger& getLogger(UA_Server& server) {
+    return UA_Server_getConfig(&server)->logger;
+}
+
 inline static const UA_Logger& getLogger(Client& client) {
-    return UA_Client_getConfig(client.handle())->logger;
+    return getLogger(*client.handle());
 }
 
 inline static const UA_Logger& getLogger(Server& server) {
-    return UA_Server_getConfig(server.handle())->logger;
+    return getLogger(*server.handle());
 }
 
 template <typename T>
@@ -33,8 +41,20 @@ inline static void logImpl(
     );
 }
 
+void log(UA_Client* client, LogLevel level, LogCategory category, std::string_view msg) {
+    if (client != nullptr) {
+        logImpl(*client, level, category, msg);
+    }
+}
+
 void log(Client& client, LogLevel level, LogCategory category, std::string_view msg) {
     logImpl(client, level, category, msg);
+}
+
+void log(UA_Server* server, LogLevel level, LogCategory category, std::string_view msg) {
+    if (server != nullptr) {
+        logImpl(*server, level, category, msg);
+    }
 }
 
 void log(Server& server, LogLevel level, LogCategory category, std::string_view msg) {

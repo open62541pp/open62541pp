@@ -113,8 +113,10 @@ endif()
 include(GNUInstallDirs)
 add_library(
     open62541pp
+    src/AccessControl.cpp
     src/Client.cpp
     src/Crypto.cpp
+    src/CustomAccessControl.cpp
     src/CustomDataTypes.cpp
     src/CustomLogger.cpp
     src/DataType.cpp
@@ -122,6 +124,7 @@ add_library(
     src/MonitoredItem.cpp
     src/Node.cpp
     src/Server.cpp
+    src/Session.cpp
     src/Subscription.cpp
     src/detail/helper.cpp
     src/services/Attribute.cpp

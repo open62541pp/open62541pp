@@ -7,6 +7,20 @@
 
 namespace opcua {
 
+UserTokenPolicy::UserTokenPolicy(
+    std::string_view policyId,
+    UserTokenType tokenType,
+    std::string_view issuedTokenType,
+    std::string_view issuerEndpointUrl,
+    std::string_view securityPolicyUri
+) {
+    asWrapper<String>(handle()->policyId) = String(policyId);
+    handle()->tokenType = static_cast<UA_UserTokenType>(tokenType);
+    asWrapper<String>(handle()->issuedTokenType) = String(issuedTokenType);
+    asWrapper<String>(handle()->issuerEndpointUrl) = String(issuerEndpointUrl);
+    asWrapper<String>(handle()->securityPolicyUri) = String(securityPolicyUri);
+}
+
 ObjectAttributes::ObjectAttributes()
     : TypeWrapperBase(UA_ObjectAttributes_default) {}
 

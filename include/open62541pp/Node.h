@@ -19,7 +19,7 @@
 namespace opcua {
 
 /**
- * High-level node object to access node attribute, browse and populate address space.
+ * High-level node class to access node attribute, browse and populate address space.
  *
  * The Node API is just a more convenient way of using the free functions in the `services`
  * namespace.

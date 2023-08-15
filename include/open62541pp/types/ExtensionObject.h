@@ -124,6 +124,14 @@ T* ExtensionObject::getDecodedData() noexcept {
 }
 
 template <typename T>
+const T* ExtensionObject::getDecodedData() const noexcept {
+    if (getDecodedDataType() == &detail::guessDataType<T>()) {
+        return static_cast<const T*>(getDecodedData());
+    }
+    return nullptr;
+}
+
+template <typename T>
 ExtensionObject ExtensionObject::fromDecoded(T& data) noexcept {
     static_assert(
         detail::isAssignableToExtensionObject<T>(),
