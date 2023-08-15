@@ -6,7 +6,43 @@
 #include "open62541pp/services/View.h"
 #include "open62541pp/types/Composed.h"
 
+#include "open62541_impl.h"
+
 namespace opcua {
+
+template <>
+bool Node<Client>::exists() noexcept {
+    // create minimal request
+    UA_ReadValueId item{};
+    item.nodeId = *getNodeId().handle();
+    item.attributeId = UA_ATTRIBUTEID_NODECLASS;
+    UA_ReadRequest request{};
+    request.timestampsToReturn = UA_TIMESTAMPSTORETURN_NEITHER;
+    request.nodesToReadSize = 1;
+    request.nodesToRead = &item;
+
+    using ReadResponse = TypeWrapper<UA_ReadResponse, UA_TYPES_READRESPONSE>;
+    ReadResponse response = UA_Client_Service_read(getConnection().handle(), request);
+    if (response->responseHeader.serviceResult != UA_STATUSCODE_GOOD ||
+        response->resultsSize != 1) {
+        return false;
+    }
+    if (response->results->hasStatus && response->results->status != UA_STATUSCODE_GOOD) {
+        return false;
+    }
+    return true;
+}
+
+template <>
+bool Node<Server>::exists() noexcept {
+    auto* config = UA_Server_getConfig(getConnection().handle());
+    const auto* node = config->nodestore.getNode(config->nodestore.context, getNodeId().handle());
+    const bool exists = (node != nullptr);
+    if (node != nullptr) {
+        config->nodestore.releaseNode(config->nodestore.context, node);
+    }
+    return exists;
+}
 
 template <typename T>
 std::vector<ReferenceDescription> Node<T>::browseReferences(

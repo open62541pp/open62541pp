@@ -53,6 +53,11 @@ public:
         return nodeId_;
     }
 
+    /// Check if the Node exists in the most efficient manner.
+    /// If the instance is of type `Node<Server>`, the internal node store is searched.
+    /// If the instance is of type `Node<Client>`, an actual read request to the server is made.
+    bool exists() noexcept;
+
     /// @copydoc services::addFolder
     Node addFolder(
         const NodeId& id,

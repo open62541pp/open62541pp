@@ -38,6 +38,11 @@ TEST_CASE("Node") {
             CHECK(Node(serverOrClient, id).getNodeId() == id);
         }
 
+        SUBCASE("exists") {
+            CHECK(Node(serverOrClient, NodeId(0, UA_NS0ID_OBJECTSFOLDER)).exists());
+            CHECK_FALSE(Node(serverOrClient, NodeId(0, "DoesNotExist")).exists());
+        }
+
         SUBCASE("Node class of default nodes") {
             CHECK(serverOrClient.getRootNode().readNodeClass() == NodeClass::Object);
             CHECK(serverOrClient.getObjectsNode().readNodeClass() == NodeClass::Object);
