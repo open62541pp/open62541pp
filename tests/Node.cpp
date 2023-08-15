@@ -29,15 +29,13 @@ TEST_CASE("Node") {
         auto varNode = serverOrClient.getNode(varId);
         auto refNode = serverOrClient.getNode(ReferenceTypeId::References);
 
-        SUBCASE("Constructor") {
-            CHECK_NOTHROW(Node(serverOrClient, NodeId(0, UA_NS0ID_BOOLEAN), false));
-            CHECK_NOTHROW(Node(serverOrClient, NodeId(0, UA_NS0ID_BOOLEAN), true));
-            CHECK_NOTHROW(Node(serverOrClient, NodeId(0, "DoesNotExist"), false));
-            CHECK_THROWS(Node(serverOrClient, NodeId(0, "DoesNotExist"), true));
-        }
-
         SUBCASE("getConnection") {
             CHECK(rootNode.getConnection() == serverOrClient);
+        }
+
+        SUBCASE("getNodeId") {
+            const NodeId id(0, UA_NS0ID_OBJECTSFOLDER);
+            CHECK(Node(serverOrClient, id).getNodeId() == id);
         }
 
         SUBCASE("Node class of default nodes") {

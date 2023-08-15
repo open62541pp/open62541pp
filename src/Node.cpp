@@ -46,7 +46,7 @@ std::vector<Node<T>> Node<T>::browseReferencedNodes(
     nodes.reserve(refs.size());
     for (const auto& ref : refs) {
         if (ref.getNodeId().isLocal()) {
-            nodes.emplace_back(connection_, ref.getNodeId().getNodeId(), false);
+            nodes.emplace_back(connection_, ref.getNodeId().getNodeId());
         }
     }
     return nodes;
@@ -57,7 +57,7 @@ Node<T> Node<T>::browseChild(const std::vector<QualifiedName>& path) {
     const auto result = services::browseSimplifiedBrowsePath(connection_, nodeId_, path);
     for (auto&& target : result.getTargets()) {
         if (target.getTargetId().isLocal()) {
-            return {connection_, target.getTargetId().getNodeId(), false};
+            return {connection_, target.getTargetId().getNodeId()};
         }
     }
     throw BadStatus(UA_STATUSCODE_BADNOMATCH);
