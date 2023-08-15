@@ -166,7 +166,7 @@ TEST_CASE("Node") {
             }
 
             SUBCASE("Write as raw array") {
-                CHECK_NOTHROW(varNode.writeArray(ArrayView{array.data(), array.size()}));
+                CHECK_NOTHROW(varNode.writeArray(Span{array.data(), array.size()}));
                 CHECK(varNode.template readArray<double>() == array);
             }
 

@@ -7,9 +7,9 @@
 #include <utility>  // as_const
 #include <vector>
 
-#include "open62541pp/ArrayView.h"
 #include "open62541pp/Common.h"
 #include "open62541pp/ErrorHandling.h"
+#include "open62541pp/Span.h"
 #include "open62541pp/TypeConverter.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/helper.h"
@@ -51,30 +51,30 @@ public:
 
     /// Create Variant from array (no copy if assignable without conversion).
     template <typename T>
-    [[nodiscard]] static Variant fromArray(ArrayView<T> array);
+    [[nodiscard]] static Variant fromArray(Span<T> array);
 
     /// Create Variant from array with custom data type.
     template <typename T>
-    [[nodiscard]] static Variant fromArray(ArrayView<T> array, const UA_DataType& dataType);
+    [[nodiscard]] static Variant fromArray(Span<T> array, const UA_DataType& dataType);
 
     /// Create Variant from array (copy).
     template <typename T>
-    [[nodiscard]] static Variant fromArray(ArrayView<const T> array);
+    [[nodiscard]] static Variant fromArray(Span<const T> array);
 
     /// Create Variant from array with custom data type (copy).
     template <typename T>
-    [[nodiscard]] static Variant fromArray(ArrayView<const T> array, const UA_DataType& dataType);
+    [[nodiscard]] static Variant fromArray(Span<const T> array, const UA_DataType& dataType);
 
     /// @overload
     template <typename ArrayLike, typename = EnableIfNoArrayView<ArrayLike>>
     [[nodiscard]] static Variant fromArray(ArrayLike&& array) {
-        return Variant::fromArray(ArrayView{std::forward<ArrayLike>(array)});
+        return Variant::fromArray(Span{std::forward<ArrayLike>(array)});
     }
 
     /// @overload
     template <typename ArrayLike, typename = EnableIfNoArrayView<ArrayLike>>
     [[nodiscard]] static Variant fromArray(ArrayLike&& array, const UA_DataType& dataType) {
-        return Variant::fromArray(ArrayView{std::forward<ArrayLike>(array)}, dataType);
+        return Variant::fromArray(Span{std::forward<ArrayLike>(array)}, dataType);
     }
 
     /// Create Variant from range of elements (copy).
@@ -173,42 +173,42 @@ public:
 
     /// Assign array to variant.
     template <typename T>
-    void setArray(ArrayView<T> array) noexcept;
+    void setArray(Span<T> array) noexcept;
 
     /// @overload
     template <typename ArrayLike, typename = EnableIfNoArrayView<ArrayLike>>
     void setArray(ArrayLike&& array) noexcept {
-        setArray(ArrayView{std::forward<ArrayLike>(array)});
+        setArray(Span{std::forward<ArrayLike>(array)});
     }
 
     /// Assign array to variant with custom data type.
     template <typename T>
-    void setArray(ArrayView<T> array, const UA_DataType& dataType) noexcept;
+    void setArray(Span<T> array, const UA_DataType& dataType) noexcept;
 
     /// @overload
     template <typename ArrayLike, typename = EnableIfNoArrayView<ArrayLike>>
     void setArray(ArrayLike&& array, const UA_DataType& dataType) noexcept {
-        setArray(ArrayView{std::forward<ArrayLike>(array)}, dataType);
+        setArray(Span{std::forward<ArrayLike>(array)}, dataType);
     }
 
     /// Copy array to variant.
     template <typename T>
-    void setArrayCopy(ArrayView<T> array);
+    void setArrayCopy(Span<T> array);
 
     /// @overload
     template <typename ArrayLike, typename = EnableIfNoArrayView<ArrayLike>>
     void setArrayCopy(ArrayLike&& array) noexcept {
-        setArrayCopy(ArrayView{std::forward<ArrayLike>(array)});
+        setArrayCopy(Span{std::forward<ArrayLike>(array)});
     }
 
     /// Copy array to variant with custom data type.
     template <typename T>
-    void setArrayCopy(ArrayView<T> array, const UA_DataType& dataType);
+    void setArrayCopy(Span<T> array, const UA_DataType& dataType);
 
     /// @overload
     template <typename ArrayLike, typename = EnableIfNoArrayView<ArrayLike>>
     void setArrayCopy(ArrayLike&& array, const UA_DataType& dataType) noexcept {
-        setArrayCopy(ArrayView{std::forward<ArrayLike>(array)}, dataType);
+        setArrayCopy(Span{std::forward<ArrayLike>(array)}, dataType);
     }
 
     /// Copy range of elements as array to variant.
@@ -302,7 +302,7 @@ Variant Variant::fromScalar(const T& value, const UA_DataType& dataType) {
 }
 
 template <typename T>
-Variant Variant::fromArray(ArrayView<T> array) {
+Variant Variant::fromArray(Span<T> array) {
     Variant variant;
     if constexpr (isConvertibleToNative<T>()) {
         variant.setArray(array);  // NOLINT, variant isn't modified
@@ -313,21 +313,21 @@ Variant Variant::fromArray(ArrayView<T> array) {
 }
 
 template <typename T>
-Variant Variant::fromArray(ArrayView<T> array, const UA_DataType& dataType) {
+Variant Variant::fromArray(Span<T> array, const UA_DataType& dataType) {
     Variant variant;
     variant.setArray(array, dataType);
     return variant;
 }
 
 template <typename T>
-Variant Variant::fromArray(ArrayView<const T> array) {
+Variant Variant::fromArray(Span<const T> array) {
     Variant variant;
     variant.setArrayCopy(array);
     return variant;
 }
 
 template <typename T>
-Variant Variant::fromArray(ArrayView<const T> array, const UA_DataType& dataType) {
+Variant Variant::fromArray(Span<const T> array, const UA_DataType& dataType) {
     Variant variant;
     variant.setArrayCopy(array, dataType);
     return variant;
@@ -413,20 +413,20 @@ void Variant::setScalarCopy(const T& value, const UA_DataType& dataType) {
 }
 
 template <typename T>
-void Variant::setArray(ArrayView<T> array) noexcept {
+void Variant::setArray(Span<T> array) noexcept {
     assertSetNoCopy<T>();
     setArray(array, detail::guessDataType<T>());
 }
 
 template <typename T>
-void Variant::setArray(ArrayView<T> array, const UA_DataType& dataType) noexcept {
+void Variant::setArray(Span<T> array, const UA_DataType& dataType) noexcept {
     assertNoVariant<T>();
     checkDataType<T>(dataType);
     setArrayImpl(array.data(), array.size(), dataType);
 }
 
 template <typename T>
-void Variant::setArrayCopy(ArrayView<T> array) {
+void Variant::setArrayCopy(Span<T> array) {
     assertNoVariant<T>();
     if constexpr (detail::isBuiltinType<T>()) {
         setArrayCopyImpl(array.data(), array.size(), detail::guessDataType<T>());
@@ -436,7 +436,7 @@ void Variant::setArrayCopy(ArrayView<T> array) {
 }
 
 template <typename T>
-void Variant::setArrayCopy(ArrayView<T> array, const UA_DataType& dataType) {
+void Variant::setArrayCopy(Span<T> array, const UA_DataType& dataType) {
     assertNoVariant<T>();
     checkDataType<T>(dataType);
     setArrayCopyImpl(array.data(), array.size(), dataType);

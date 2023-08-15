@@ -166,11 +166,11 @@ void DataType::setOverlayable(bool overlayable) noexcept {
     handle()->overlayable = overlayable;
 }
 
-ArrayView<const DataTypeMember> DataType::getMembers() const noexcept {
+Span<const DataTypeMember> DataType::getMembers() const noexcept {
     return {handle()->members, handle()->membersSize};
 }
 
-void DataType::setMembers(ArrayView<const DataTypeMember> members) {
+void DataType::setMembers(Span<const DataTypeMember> members) {
     assert(members.size() < (1U << 8U));
     clearMembers(handle());
     copyMembers(members.data(), members.size(), handle());

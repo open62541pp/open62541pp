@@ -13,16 +13,16 @@ namespace opcua {
 /**
  * View to a contiguous sequence of objects, similar to `std::span` in C++20.
  *
- * ArrayViews are used to return open62541 arrays without copy and to use them with the standard
- * library algorithms. The view just holds two members: the pointer to `T` and the size, so it's
- * lightweight and trivially copyable.
+ * Spans are used to return open62541 arrays without copy and to use them with the standard library
+ * algorithms. The view just holds two members: the pointer to `T` and the size, so it's lightweight
+ * and trivially copyable.
  *
  * @tparam T Type of the array object, use `const T` for an immutable view
  *
  * @see https://en.cppreference.com/w/cpp/container/span
  */
 template <typename T>
-class ArrayView {
+class Span {
 private:
     template <typename, typename = void>
     struct HasSize : std::false_type {};
@@ -56,9 +56,9 @@ public:
     using const_reverse_iterator = std::reverse_iterator<const_iterator>;
     // clang-format on
 
-    constexpr ArrayView() noexcept = default;
+    constexpr Span() noexcept = default;
 
-    constexpr ArrayView(T* data, size_t size) noexcept
+    constexpr Span(T* data, size_t size) noexcept
         : size_(size),
           data_(data) {}
 
@@ -66,33 +66,33 @@ public:
      * Implicit constructor from a container like `std::array` or `std::vector`.
      */
     template <typename Container, typename = EnableIfHasSizeAndData<Container>>
-    constexpr ArrayView(Container& container) noexcept  // NOLINT
-        : ArrayView(std::data(container), std::size(container)) {}
+    constexpr Span(Container& container) noexcept  // NOLINT
+        : Span(std::data(container), std::size(container)) {}
 
     /**
      * Implicit constructor from a container like `std::array` or `std::vector` (const).
      */
     template <typename Container, typename = EnableIfHasSizeAndData<Container>>
-    constexpr ArrayView(const Container& container) noexcept  // NOLINT
-        : ArrayView(std::data(container), std::size(container)) {}
+    constexpr Span(const Container& container) noexcept  // NOLINT
+        : Span(std::data(container), std::size(container)) {}
 
     /**
      * Implicit constructor from an initializer list.
      *
-     * Only safe to use if `std::initializer_list` itself outlives the ArrayView:
+     * Only safe to use if `std::initializer_list` itself outlives the Span:
      * @code{.cpp}
-     * void takeView(ArrayView<const int> values);
+     * void takeView(Span<const int> values);
      * // ok
      * takeView({1, 2, 3});
      * // not ok
-     * ArrayView<const int> values = {1, 2, 3};
+     * Span<const int> values = {1, 2, 3};
      * takeView(values);
      * @endcode
      */
-    constexpr ArrayView(std::initializer_list<value_type> values) noexcept  // NOLINT
-        : ArrayView(values.begin(), values.size()) {}
+    constexpr Span(std::initializer_list<value_type> values) noexcept  // NOLINT
+        : Span(values.begin(), values.size()) {}
 
-    constexpr void swap(ArrayView& other) noexcept {
+    constexpr void swap(Span& other) noexcept {
         std::swap(data_, other.data_);
         std::swap(size_, other.size_);
     }
@@ -153,8 +153,8 @@ public:
         return const_reverse_iterator(cbegin());
     }
 
-    /// Obtain a view over `count` elements of this ArrayView starting at offset `offset`.
-    [[nodiscard]] constexpr ArrayView subview(
+    /// Obtain a view over `count` elements of this Span starting at offset `offset`.
+    [[nodiscard]] constexpr Span subview(
         size_t offset, size_t count = std::numeric_limits<std::size_t>::max()
     ) const noexcept {
         if (offset >= size()) {
@@ -166,16 +166,16 @@ public:
         return {data() + offset, count};
     }
 
-    /// Obtain a view over the first `count` elements of this ArrayView.
-    [[nodiscard]] constexpr ArrayView first(size_t count) const noexcept {
+    /// Obtain a view over the first `count` elements of this Span.
+    [[nodiscard]] constexpr Span first(size_t count) const noexcept {
         if (count >= size()) {
             return *this;
         }
         return {data(), count};
     }
 
-    /// Obtain a view over the last `count` elements of this ArrayView.
-    [[nodiscard]] constexpr ArrayView last(size_t count) const noexcept {
+    /// Obtain a view over the last `count` elements of this Span.
+    [[nodiscard]] constexpr Span last(size_t count) const noexcept {
         if (count >= size()) {
             return *this;
         }
@@ -190,10 +190,10 @@ private:
 /* -------------------------------------- Deduction guides -------------------------------------- */
 
 template <typename Container>
-ArrayView(Container&) -> ArrayView<typename Container::value_type>;
+Span(Container&) -> Span<typename Container::value_type>;
 
 template <typename Container>
-ArrayView(const Container&) -> ArrayView<const typename Container::value_type>;
+Span(const Container&) -> Span<const typename Container::value_type>;
 
 /* ------------------------------------------- Helper ------------------------------------------- */
 
@@ -203,7 +203,7 @@ template <typename>
 struct IsArrayView : std::false_type {};
 
 template <typename T>
-struct IsArrayView<ArrayView<T>> : std::true_type {};
+struct IsArrayView<Span<T>> : std::true_type {};
 
 }  // namespace detail
 
@@ -219,12 +219,12 @@ using EnableIfEqualityComparable = typename std::enable_if_t<
 }  // namespace detail
 
 template <typename T, typename U, typename = detail::EnableIfEqualityComparable<T, U>>
-constexpr bool operator==(ArrayView<T> lhs, ArrayView<U> rhs) {
+constexpr bool operator==(Span<T> lhs, Span<U> rhs) {
     return std::equal(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 }
 
 template <typename T, typename U, typename = detail::EnableIfEqualityComparable<T, U>>
-constexpr bool operator!=(ArrayView<T> lhs, ArrayView<U> rhs) {
+constexpr bool operator!=(Span<T> lhs, Span<U> rhs) {
     return !(lhs == rhs);
 }
 

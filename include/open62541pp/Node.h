@@ -5,9 +5,9 @@
 #include <utility>  // move
 #include <vector>
 
-#include "open62541pp/ArrayView.h"
 #include "open62541pp/Common.h"
 #include "open62541pp/Config.h"
+#include "open62541pp/Span.h"
 #include "open62541pp/services/Attribute.h"
 #include "open62541pp/services/Method.h"
 #include "open62541pp/services/NodeManagement.h"
@@ -431,7 +431,7 @@ public:
     /// Write array (raw) to variable node.
     /// @return Current node instance to chain multiple methods (fluent interface)
     template <typename T>
-    Node& writeArray(ArrayView<T> array) {
+    Node& writeArray(Span<T> array) {
         const auto variant = Variant::fromArray(array);
         writeValue(variant);
         return *this;
@@ -440,7 +440,7 @@ public:
     /// @overload
     template <typename ArrayLike>
     Node& writeArray(ArrayLike&& array) {
-        return writeArray(ArrayView{std::forward<ArrayLike>(array)});
+        return writeArray(Span{std::forward<ArrayLike>(array)});
     }
 
     /// Write range of elements as array to variable node.

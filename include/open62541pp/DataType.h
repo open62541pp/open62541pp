@@ -3,8 +3,8 @@
 #include <cstdint>
 #include <vector>
 
-#include "open62541pp/ArrayView.h"
 #include "open62541pp/Common.h"
+#include "open62541pp/Span.h"
 #include "open62541pp/open62541.h"
 
 namespace opcua {
@@ -68,8 +68,8 @@ public:
     bool getOverlayable() const noexcept;
     void setOverlayable(bool overlayable) noexcept;
 
-    ArrayView<const DataTypeMember> getMembers() const noexcept;
-    void setMembers(ArrayView<const DataTypeMember> members);
+    Span<const DataTypeMember> getMembers() const noexcept;
+    void setMembers(Span<const DataTypeMember> members);
 
     constexpr UA_DataType* handle() noexcept {
         return &data_;

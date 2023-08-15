@@ -3,7 +3,6 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/3rdparty/doctest doctest EXCLUDE_FROM_ALL
 add_executable(
     open62541pp_tests
     main.cpp
-    ArrayView.cpp
     Client.cpp
     Crypto.cpp
     CustomDataTypes.cpp
@@ -14,6 +13,7 @@ add_executable(
     Node.cpp
     Server.cpp
     Services.cpp
+    Span.cpp
     Subscription_MonitoredItem.cpp
     TypeConverter.cpp
     Types.cpp

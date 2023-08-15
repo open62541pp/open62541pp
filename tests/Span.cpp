@@ -3,13 +3,13 @@
 
 #include <doctest/doctest.h>
 
-#include "open62541pp/ArrayView.h"
+#include "open62541pp/Span.h"
 
 using namespace opcua;
 
-TEST_CASE("ArrayView") {
+TEST_CASE("Span") {
     SUBCASE("Empty") {
-        constexpr ArrayView<int> view;
+        constexpr Span<int> view;
         CHECK(view.size() == 0);
         CHECK(view.empty());
         CHECK(view.data() == nullptr);
@@ -17,7 +17,7 @@ TEST_CASE("ArrayView") {
 
     SUBCASE("From array") {
         constexpr std::array<int, 3> arr{0, 1, 2};
-        ArrayView view(arr);
+        Span view(arr);
         CHECK(view.size() == arr.size());
         CHECK(!view.empty());
         CHECK(view.data() == arr.data());
@@ -25,7 +25,7 @@ TEST_CASE("ArrayView") {
 
     SUBCASE("From vector") {
         std::vector<int> vec{0, 1, 2};
-        ArrayView view(vec);
+        Span view(vec);
         CHECK(view.size() == vec.size());
         CHECK(!view.empty());
         CHECK(view.data() == vec.data());
@@ -33,7 +33,7 @@ TEST_CASE("ArrayView") {
 
     SUBCASE("From initializer list") {
         std::initializer_list<int> values{0, 1, 2};
-        ArrayView<const int> view(values);
+        Span<const int> view(values);
         CHECK(view.size() == values.size());
         CHECK(!view.empty());
         CHECK(view.data() == values.begin());
@@ -41,7 +41,7 @@ TEST_CASE("ArrayView") {
 
     SUBCASE("Element access") {
         std::vector<int> vec{0, 1, 2};
-        ArrayView view(vec);
+        Span view(vec);
 
         CHECK(view.front() == 0);
         CHECK(view.back() == 2);
@@ -55,7 +55,7 @@ TEST_CASE("ArrayView") {
 
     SUBCASE("Iterators") {
         const std::vector<int> vec{0, 1, 2};
-        ArrayView view(vec);
+        Span view(vec);
 
         CHECK(std::vector<int>(view.begin(), view.end()) == std::vector{0, 1, 2});
         CHECK(std::vector<int>(view.cbegin(), view.cend()) == std::vector{0, 1, 2});
@@ -65,7 +65,7 @@ TEST_CASE("ArrayView") {
 
     SUBCASE("Subviews") {
         const std::vector<int> vec{0, 1, 2};
-        ArrayView view(vec);
+        Span view(vec);
 
         CHECK(view.subview(0).size() == 3);
         CHECK(view.subview(0).data() == view.begin());
@@ -96,9 +96,9 @@ TEST_CASE("ArrayView") {
     }
 }
 
-TEST_CASE("ArrayView as generic function parameter") {
+TEST_CASE("Span as generic function parameter") {
     SUBCASE("Const") {
-        auto getSize = [](ArrayView<const int> view) { return view.size(); };
+        auto getSize = [](Span<const int> view) { return view.size(); };
 
         const std::vector vec{0, 1, 2};
         const std::array arr{0, 1, 2};
@@ -114,7 +114,7 @@ TEST_CASE("ArrayView as generic function parameter") {
     }
 
     SUBCASE("Non-const") {
-        auto getSize = [](ArrayView<int> view) { return view.size(); };
+        auto getSize = [](Span<int> view) { return view.size(); };
 
         std::vector vec{0, 1, 2};
         std::array arr{0, 1, 2};
@@ -131,28 +131,28 @@ TEST_CASE("ArrayView as generic function parameter") {
     }
 }
 
-TEST_CASE("ArrayView comparison") {
+TEST_CASE("Span comparison") {
     std::vector<int> vec1{0, 1, 2};
     std::vector<int> vec2{3, 4, 5};
     std::vector<double> vec1Double{0, 1, 2};
     std::vector<double> vec2Double{3, 4, 5};
 
-    CHECK(ArrayView(vec1) == ArrayView(vec1));
-    CHECK(ArrayView(vec2) == ArrayView(vec2));
-    CHECK(ArrayView(vec1) != ArrayView(vec2));
-    CHECK(ArrayView(vec2) != ArrayView(vec1));
+    CHECK(Span(vec1) == Span(vec1));
+    CHECK(Span(vec2) == Span(vec2));
+    CHECK(Span(vec1) != Span(vec2));
+    CHECK(Span(vec2) != Span(vec1));
 
     SUBCASE("Mix non-const/const") {
-        CHECK(ArrayView<int>(vec1) == ArrayView<const int>(vec1));
-        CHECK(ArrayView<const int>(vec1) == ArrayView<int>(vec1));
-        CHECK(ArrayView<int>(vec1) != ArrayView<const int>(vec2));
-        CHECK(ArrayView<const int>(vec2) != ArrayView<int>(vec1));
+        CHECK(Span<int>(vec1) == Span<const int>(vec1));
+        CHECK(Span<const int>(vec1) == Span<int>(vec1));
+        CHECK(Span<int>(vec1) != Span<const int>(vec2));
+        CHECK(Span<const int>(vec2) != Span<int>(vec1));
     }
 
     SUBCASE("Mix comparable types") {
-        CHECK(ArrayView(vec1) == ArrayView(vec1Double));
-        CHECK(ArrayView(vec1Double) == ArrayView(vec1));
-        CHECK(ArrayView(vec1) != ArrayView(vec2Double));
-        CHECK(ArrayView(vec2Double) != ArrayView(vec1));
+        CHECK(Span(vec1) == Span(vec1Double));
+        CHECK(Span(vec1Double) == Span(vec1));
+        CHECK(Span(vec1) != Span(vec2Double));
+        CHECK(Span(vec2Double) != Span(vec1));
     }
 }

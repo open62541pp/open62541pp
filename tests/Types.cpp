@@ -588,7 +588,7 @@ TEST_CASE("Variant") {
             detail::allocUaString("item3"),
         };
 
-        var.setArray(ArrayView{array.data(), array.size()}, UA_TYPES[UA_TYPES_STRING]);
+        var.setArray(Span{array.data(), array.size()}, UA_TYPES[UA_TYPES_STRING]);
         CHECK(var.getArrayLength() == array.size());
         CHECK(var.getArray() == array.data());
 
