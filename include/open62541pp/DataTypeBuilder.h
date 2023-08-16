@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <type_traits>
 #include <utility>  // move
+#include <vector>
 
 #include "open62541pp/DataType.h"
 #include "open62541pp/TypeConverter.h"

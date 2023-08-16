@@ -1,7 +1,6 @@
 #pragma once
 
 #include <cstdint>
-#include <vector>
 
 #include "open62541pp/Common.h"
 #include "open62541pp/Span.h"
