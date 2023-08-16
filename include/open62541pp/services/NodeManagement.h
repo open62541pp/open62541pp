@@ -3,11 +3,11 @@
 #include <cstdint>
 #include <functional>
 #include <string_view>
-#include <vector>
 
 #include "open62541pp/Common.h"  // ModellingRule
 #include "open62541pp/Config.h"
 #include "open62541pp/NodeIds.h"  // ReferenceTypeId
+#include "open62541pp/Span.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/NodeId.h"
 
@@ -111,9 +111,11 @@ inline void addProperty(
 #ifdef UA_ENABLE_METHODCALLS
 /**
  * Method callback.
+ * @param input Input parameters
+ * @param output Output parameters
  * @ingroup NodeManagement
  */
-using MethodCallback = std::function<void(const std::vector<Variant>&, std::vector<Variant>&)>;
+using MethodCallback = std::function<void(Span<const Variant> input, Span<Variant> output)>;
 
 /**
  * Add method.
@@ -128,8 +130,8 @@ void addMethod(
     const NodeId& id,
     std::string_view browseName,
     MethodCallback callback,
-    const std::vector<Argument>& inputArguments,
-    const std::vector<Argument>& outputArguments,
+    Span<const Argument> inputArguments,
+    Span<const Argument> outputArguments,
     const MethodAttributes& attributes = {},
     const NodeId& referenceType = ReferenceTypeId::HasComponent
 );

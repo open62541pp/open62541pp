@@ -453,13 +453,13 @@ TEST_CASE("Method service set (server & client)") {
         objectsId,
         methodId,
         "add",
-        [&](const std::vector<Variant>& inputs, std::vector<Variant>& outputs) {
+        [&](Span<const Variant> inputs, Span<Variant> outputs) {
             if (throwException) {
                 throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
             }
-            const auto a = inputs.at(0).getScalarCopy<int32_t>();
-            const auto b = inputs.at(1).getScalarCopy<int32_t>();
-            outputs.at(0).setScalarCopy(a + b);
+            const auto a = inputs[0].getScalarCopy<int32_t>();
+            const auto b = inputs[1].getScalarCopy<int32_t>();
+            outputs[0].setScalarCopy(a + b);
         },
         {
             Argument("a", {"en-US", "first number"}, DataTypeId::Int32, ValueRank::Scalar),
