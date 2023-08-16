@@ -10,6 +10,7 @@
 #include "open62541pp/Common.h"
 #include "open62541pp/Config.h"
 #include "open62541pp/Logger.h"
+#include "open62541pp/Span.h"
 #include "open62541pp/Subscription.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
@@ -64,8 +65,8 @@ public:
     Client(
         const ByteString& certificate,
         const ByteString& privateKey,
-        const std::vector<ByteString>& trustList,
-        const std::vector<ByteString>& revocationList = {}
+        Span<const ByteString> trustList,
+        Span<const ByteString> revocationList = {}
     );
 #endif
 

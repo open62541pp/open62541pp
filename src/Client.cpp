@@ -227,8 +227,8 @@ Client::Client()
 Client::Client(
     const ByteString& certificate,
     const ByteString& privateKey,
-    const std::vector<ByteString>& trustList,
-    const std::vector<ByteString>& revocationList
+    Span<const ByteString> trustList,
+    Span<const ByteString> revocationList
 )
     : connection_(std::make_shared<Connection>()) {
     const auto status = UA_ClientConfig_setDefaultEncryption(
