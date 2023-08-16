@@ -1,6 +1,7 @@
 #include "open62541pp/Node.h"
 
 #include "open62541pp/Client.h"
+#include "open62541pp/Config.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/services/View.h"
@@ -35,13 +36,9 @@ bool Node<Client>::exists() noexcept {
 
 template <>
 bool Node<Server>::exists() noexcept {
-    auto* config = UA_Server_getConfig(getConnection().handle());
-    const auto* node = config->nodestore.getNode(config->nodestore.context, getNodeId().handle());
-    const bool exists = (node != nullptr);
-    if (node != nullptr) {
-        config->nodestore.releaseNode(config->nodestore.context, node);
-    }
-    return exists;
+    void* context{};
+    const auto status = UA_Server_getNodeContext(getConnection().handle(), getNodeId(), &context);
+    return (status == UA_STATUSCODE_GOOD);
 }
 
 template <typename T>
