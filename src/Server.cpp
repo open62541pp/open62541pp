@@ -144,9 +144,9 @@ Server::Server(
     uint16_t port,
     const ByteString& certificate,
     const ByteString& privateKey,
-    const std::vector<ByteString>& trustList,
-    const std::vector<ByteString>& issuerList,
-    const std::vector<ByteString>& revocationList
+    Span<const ByteString> trustList,
+    Span<const ByteString> issuerList,
+    Span<const ByteString> revocationList
 )
     : connection_(std::make_shared<Connection>()) {
     const auto status = UA_ServerConfig_setDefaultWithSecurityPolicies(

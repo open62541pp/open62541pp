@@ -8,6 +8,7 @@
 
 #include "open62541pp/Auth.h"
 #include "open62541pp/Logger.h"
+#include "open62541pp/Span.h"
 #include "open62541pp/Subscription.h"
 #include "open62541pp/ValueBackend.h"
 #include "open62541pp/types/Builtin.h"
@@ -67,9 +68,9 @@ public:
         uint16_t port,
         const ByteString& certificate,
         const ByteString& privateKey,
-        const std::vector<ByteString>& trustList,
-        const std::vector<ByteString>& issuerList,
-        const std::vector<ByteString>& revocationList = {}
+        Span<const ByteString> trustList,
+        Span<const ByteString> issuerList,
+        Span<const ByteString> revocationList = {}
     );
 #endif
 
