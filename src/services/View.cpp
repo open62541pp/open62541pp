@@ -132,7 +132,7 @@ BrowsePathResult translateBrowsePathToNodeIds<Client>(
 
 template <typename T>
 BrowsePathResult browseSimplifiedBrowsePath(
-    T& serverOrClient, const NodeId& origin, const std::vector<QualifiedName>& browsePath
+    T& serverOrClient, const NodeId& origin, Span<const QualifiedName> browsePath
 ) {
     std::vector<RelativePathElement> relativePathElements(browsePath.size());
     std::transform(
@@ -153,8 +153,8 @@ BrowsePathResult browseSimplifiedBrowsePath(
 template std::vector<ReferenceDescription> browseAll<Server>(Server&, const BrowseDescription&, uint32_t);
 template std::vector<ReferenceDescription> browseAll<Client>(Client&, const BrowseDescription&, uint32_t);
 
-template BrowsePathResult browseSimplifiedBrowsePath<Server>(Server&, const NodeId&, const std::vector<QualifiedName>&);
-template BrowsePathResult browseSimplifiedBrowsePath<Client>(Client&, const NodeId&, const std::vector<QualifiedName>&);
+template BrowsePathResult browseSimplifiedBrowsePath<Server>(Server&, const NodeId&, Span<const QualifiedName>);
+template BrowsePathResult browseSimplifiedBrowsePath<Client>(Client&, const NodeId&, Span<const QualifiedName>);
 
 // clang-format on
 
