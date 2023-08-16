@@ -161,7 +161,7 @@ MonitoredItem<Client> Subscription<Client>::subscribeEvent(
         monitoringMode,
         parameters,
         [connectionPtr = &connection_, callback = std::move(onEvent)](
-            uint32_t subId, uint32_t monId, const std::vector<Variant>& eventFields
+            uint32_t subId, uint32_t monId, Span<const Variant> eventFields
         ) {
             const MonitoredItem<Client> monitoredItem(*connectionPtr, subId, monId);
             callback(monitoredItem, eventFields);

@@ -2,10 +2,10 @@
 
 #include <cstdint>
 #include <functional>
-#include <vector>
 
 #include "open62541pp/Common.h"
 #include "open62541pp/Config.h"
+#include "open62541pp/Span.h"
 #include "open62541pp/types/ExtensionObject.h"
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
@@ -96,7 +96,7 @@ using DataChangeNotificationCallback =
  * @ingroup MonitoredIte
  */
 using EventNotificationCallback =
-    std::function<void(uint32_t subId, uint32_t monId, const std::vector<Variant>& eventFields)>;
+    std::function<void(uint32_t subId, uint32_t monId, Span<const Variant> eventFields)>;
 
 /**
  * Create and add a monitored item to a subscription for data change notifications.
@@ -219,8 +219,8 @@ void setTriggering(
     Client& client,
     uint32_t subscriptionId,
     uint32_t triggeringItemId,
-    const std::vector<uint32_t>& linksToAdd,
-    const std::vector<uint32_t>& linksToRemove
+    Span<const uint32_t> linksToAdd,
+    Span<const uint32_t> linksToRemove
 );
 
 /**

@@ -75,8 +75,7 @@ static void eventNotificationCallback(
     auto& callback = monitoredItem->eventCallback;
     if (callback) {
         detail::invokeCatchIgnore([&] {
-            std::vector<Variant> eventFieldsVec(eventFields, eventFields + nEventFields);  // NOLINT
-            callback(subId, monId, eventFieldsVec);
+            callback(subId, monId, {asWrapper<Variant>(eventFields), nEventFields});
         });
     }
 }
@@ -285,8 +284,8 @@ void setTriggering(
     Client& client,
     uint32_t subscriptionId,
     uint32_t triggeringItemId,
-    const std::vector<uint32_t>& linksToAdd,
-    const std::vector<uint32_t>& linksToRemove
+    Span<const uint32_t> linksToAdd,
+    Span<const uint32_t> linksToRemove
 ) {
     UA_SetTriggeringRequest request{};
     request.subscriptionId = subscriptionId;

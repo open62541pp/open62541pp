@@ -649,7 +649,7 @@ TEST_CASE("MonitoredItem service set (client)") {
             {ObjectId::Server, AttributeId::EventNotifier},
             MonitoringMode::Reporting,
             monitoringParameters,
-            [&](uint32_t, uint32_t, const std::vector<Variant>&) {}
+            [&](uint32_t, uint32_t, Span<const Variant>) {}
         );
         CAPTURE(monId);
 
