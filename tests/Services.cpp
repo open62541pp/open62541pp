@@ -437,6 +437,31 @@ TEST_CASE("View service set (server & client)") {
     // clang-format on
 }
 
+TEST_CASE("View service set (server)") {
+    Server server;
+
+    SUBCASE("browseRecursive") {
+        const BrowseDescription bd(
+            ObjectId::Server,
+            BrowseDirection::Forward,
+            ReferenceTypeId::References,
+            true,
+            UA_NODECLASS_VARIABLE
+        );
+
+        const auto results = services::browseRecursive(server, bd);
+        CHECK(!results.empty());
+
+        auto contains = [&](const NodeId& id) {
+            return std::find(results.begin(), results.end(), ExpandedNodeId(id)) != results.end();
+        };
+
+        CHECK(contains(VariableId::Server_ServerStatus));
+        CHECK(contains(VariableId::Server_ServerStatus_BuildInfo));
+        CHECK(contains(VariableId::Server_ServerStatus_BuildInfo_SoftwareVersion));
+    }
+}
+
 #ifdef UA_ENABLE_METHODCALLS
 TEST_CASE("Method service set (server & client)") {
     Server server;
