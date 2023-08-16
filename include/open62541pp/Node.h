@@ -112,8 +112,8 @@ public:
         const NodeId& id,
         std::string_view browseName,
         services::MethodCallback callback,
-        const std::vector<Argument>& inputArguments,
-        const std::vector<Argument>& outputArguments,
+        Span<const Argument> inputArguments,
+        Span<const Argument> outputArguments,
         const MethodAttributes& attributes = {},
         const NodeId& referenceType = ReferenceTypeId::HasComponent
     ) {
@@ -236,7 +236,7 @@ public:
     /// Browse child node specified by its relative path from this node (only local nodes).
     /// The relative path is specified using browse names.
     /// @exception BadStatus (BadNoMatch) If path not found
-    Node browseChild(const std::vector<QualifiedName>& path);
+    Node browseChild(Span<const QualifiedName> path);
 
     /// Browse parent node.
     /// A Node may have several parents, the first found is returned.
@@ -247,9 +247,7 @@ public:
     /// Call a server method and return results.
     /// @param methodId NodeId of the method (`HasComponent` reference to current node required)
     /// @param inputArguments Input argument values
-    std::vector<Variant> callMethod(
-        const NodeId& methodId, const std::vector<Variant>& inputArguments
-    ) {
+    std::vector<Variant> callMethod(const NodeId& methodId, Span<const Variant> inputArguments) {
         return services::call(connection_, nodeId_, methodId, inputArguments);
     }
 #endif
@@ -475,7 +473,7 @@ public:
 
     /// @copydoc services::writeArrayDimensions
     /// @return Current node instance to chain multiple methods (fluent interface)
-    Node& writeArrayDimensions(const std::vector<uint32_t>& dimensions) {
+    Node& writeArrayDimensions(Span<const uint32_t> dimensions) {
         services::writeArrayDimensions(connection_, nodeId_, dimensions);
         return *this;
     }

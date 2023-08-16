@@ -53,7 +53,7 @@ std::vector<Node<T>> Node<T>::browseReferencedNodes(
 }
 
 template <typename T>
-Node<T> Node<T>::browseChild(const std::vector<QualifiedName>& path) {
+Node<T> Node<T>::browseChild(Span<const QualifiedName> path) {
     const auto result = services::browseSimplifiedBrowsePath(connection_, nodeId_, path);
     for (auto&& target : result.getTargets()) {
         if (target.getTargetId().isLocal()) {
