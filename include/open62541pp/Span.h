@@ -13,9 +13,9 @@ namespace opcua {
 /**
  * View to a contiguous sequence of objects, similar to `std::span` in C++20.
  *
- * Spans are used to return open62541 arrays without copy and to use them with the standard library
- * algorithms. The view just holds two members: the pointer to `T` and the size, so it's lightweight
- * and trivially copyable.
+ * Spans are used to pass and return open62541 arrays without copy and to use them with the standard
+ * library algorithms. The view just holds two members: the pointer to `T` and the size, so it's
+ * lightweight and trivially copyable.
  *
  * @tparam T Type of the array object, use `const T` for an immutable view
  *

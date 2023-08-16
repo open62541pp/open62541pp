@@ -6,6 +6,7 @@
 #include "open62541pp/Common.h"
 #include "open62541pp/Config.h"
 #include "open62541pp/NodeIds.h"  // ReferenceTypeId
+#include "open62541pp/Span.h"
 #include "open62541pp/TypeConverter.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/types/Builtin.h"
@@ -456,7 +457,7 @@ public:
     using TypeWrapperBase::TypeWrapperBase;
 
     RelativePath(std::initializer_list<RelativePathElement> elements);
-    explicit RelativePath(const std::vector<RelativePathElement>& elements);
+    explicit RelativePath(Span<const RelativePathElement> elements);
 
     UAPP_COMPOSED_GETTER_ARRAY(RelativePathElement, getElements, elements, elementsSize)
 };
@@ -533,7 +534,7 @@ public:
         const LocalizedText& description,
         const NodeId& dataType,
         ValueRank valueRank = {},
-        const std::vector<uint32_t>& arrayDimensions = {}
+        Span<const uint32_t> arrayDimensions = {}
     );
 
     UAPP_COMPOSED_GETTER_WRAPPER(String, getName, name)
