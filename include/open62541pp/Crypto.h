@@ -1,8 +1,7 @@
 #pragma once
 
-#include <vector>
-
 #include "open62541pp/Config.h"
+#include "open62541pp/Span.h"
 #include "open62541pp/types/Builtin.h"
 
 #ifdef UA_ENABLE_ENCRYPTION
@@ -43,8 +42,8 @@ struct CreateCertificateResult {
  * @see UA_CreateCertificate
  */
 CreateCertificateResult createCertificate(
-    const std::vector<String>& subject,
-    const std::vector<String>& subjectAltName,
+    Span<const String> subject,
+    Span<const String> subjectAltName,
     size_t keySizeBits = 2048,
     CertificateFormat certificateFormat = CertificateFormat::DER
 );

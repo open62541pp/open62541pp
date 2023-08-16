@@ -19,8 +19,8 @@ static_assert(static_cast<int>(CertificateFormat::DER) == UA_CERTIFICATEFORMAT_D
 static_assert(static_cast<int>(CertificateFormat::PEM) == UA_CERTIFICATEFORMAT_PEM);
 
 CreateCertificateResult createCertificate(
-    const std::vector<String>& subject,
-    const std::vector<String>& subjectAltName,
+    Span<const String> subject,
+    Span<const String> subjectAltName,
     size_t keySizeBits,
     CertificateFormat certificateFormat
 ) {
