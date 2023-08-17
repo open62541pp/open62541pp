@@ -143,12 +143,12 @@ public:
     /// Get pointer to array with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not an array or not of type `T`.
     template <typename T>
-    T* getArray();
+    Span<T> getArray();
 
     /// Get const pointer to array with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not an array or not of type `T`.
     template <typename T>
-    const T* getArray() const;
+    Span<const T> getArray() const;
 
     /// Get copy of array with given template type and return it as a std::vector.
     /// @exception BadVariantAccess If the variant is not an array or not convertible to `T`.
@@ -362,17 +362,21 @@ T Variant::getScalarCopy() const {
 }
 
 template <typename T>
-T* Variant::getArray() {
-    return const_cast<T*>(std::as_const(*this).getArray<T>());  // NOLINT, avoid code duplication
-}
-
-template <typename T>
-const T* Variant::getArray() const {
+Span<T> Variant::getArray() {
     assertGetNoCopy<T>();
     checkIsArray();
     checkReturnType<T>();
     checkDataType<T>(*getDataType());
-    return static_cast<const T*>(handle()->data);
+    return {static_cast<T*>(handle()->data), handle()->arrayLength};
+}
+
+template <typename T>
+Span<const T> Variant::getArray() const {
+    assertGetNoCopy<T>();
+    checkIsArray();
+    checkReturnType<T>();
+    checkDataType<T>(*getDataType());
+    return {static_cast<const T*>(handle()->data), handle()->arrayLength};
 }
 
 template <typename T>

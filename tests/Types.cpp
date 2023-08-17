@@ -581,8 +581,8 @@ TEST_CASE("Variant") {
         Variant var;
         std::vector<float> array{0, 1, 2};
         var.setArray(array);
-        CHECK(var.getArray<float>() == array.data());
-        CHECK(std::as_const(var).getArray<float>() == array.data());
+        CHECK(var.getArray<float>().data() == array.data());
+        CHECK(std::as_const(var).getArray<float>().data() == array.data());
         CHECK(var.getArrayCopy<float>() == array);
 
         std::vector<float> arrayChanged({3, 4, 5});
@@ -614,7 +614,7 @@ TEST_CASE("Variant") {
         var.setArray(array);
         CHECK(var.getArrayLength() == array.size());
         CHECK(var.getArray() == array.data());
-        CHECK(var.getArray<String>() == array.data());
+        CHECK(var.getArray<String>().data() == array.data());
     }
 
     SUBCASE("Set/get array of strings") {
@@ -671,7 +671,7 @@ TEST_CASE("Variant") {
             CHECK(var.getDataType() == &dt);
             CHECK(var.getArrayLength() == 3);
             CHECK(var.getArray() == array.data());
-            CHECK(var.getArray<CustomType>() == array.data());
+            CHECK(var.getArray<CustomType>().data() == array.data());
         }
 
         SUBCASE("Array (copy)") {
@@ -680,7 +680,7 @@ TEST_CASE("Variant") {
             CHECK(var.getDataType() == &dt);
             CHECK(var.getArrayLength() == 3);
             CHECK(var.getArray() != array.data());
-            CHECK(var.getArray<CustomType>() != array.data());
+            CHECK(var.getArray<CustomType>().data() != array.data());
         }
     }
 }

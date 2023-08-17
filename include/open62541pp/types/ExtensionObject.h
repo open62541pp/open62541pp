@@ -85,7 +85,7 @@ public:
     /// Get the decoded data type. Returns `nullptr` if ExtensionObject is encoded.
     const UA_DataType* getDecodedDataType() const noexcept;
 
-    /// Get pointer to the encoded data with given template type. Returns `nullptr` if the
+    /// Get pointer to the decoded data with given template type. Returns `nullptr` if the
     /// ExtensionObject is either encoded or the decoded data not of type `T`.
     template <typename T>
     T* getDecodedData() noexcept;
@@ -94,7 +94,7 @@ public:
     template <typename T>
     const T* getDecodedData() const noexcept;
 
-    /// Get pointer to the encoded data. Returns `nullptr` if the ExtensionObject is encoded.
+    /// Get pointer to the decoded data. Returns `nullptr` if the ExtensionObject is encoded.
     /// @warning Type erased version, use with caution.
     void* getDecodedData() noexcept;
 

@@ -39,10 +39,10 @@ int main() {
     // The array of unwrapped objects isn't available contiguously in memory and open62541 won't
     // transparently unwrap the array. So we have to do the unwrapping ourselves:
     if (variant.isType(opcua::Type::ExtensionObject)) {
-        auto* arrExt = variant.getArray<opcua::ExtensionObject>();
-        for (size_t i = 0; i < variant.getArrayLength(); ++i) {
-            const auto* p = static_cast<Point*>(arrExt[i].getDecodedData());  // NOLINT
-            std::cout << "PointVec[" << i << "]:\n";
+        size_t i = 0;
+        for (auto&& extObj : variant.getArray<opcua::ExtensionObject>()) {
+            const auto* p = static_cast<Point*>(extObj.getDecodedData());
+            std::cout << "PointVec[" << i++ << "]:\n";
             std::cout << "- x = " << p->x << "\n";
             std::cout << "- y = " << p->y << "\n";
             std::cout << "- z = " << p->z << "\n";
@@ -54,8 +54,9 @@ int main() {
         const auto* m = static_cast<Measurements*>(variant.getScalar());
         std::cout << "Measurements:\n";
         std::cout << "- description = " << m->description << "\n";
-        for (size_t i = 0; i < m->measurementsSize; ++i) {
-            std::cout << "- measurements[" << i << "] = " << m->measurements[i] << "\n";  // NOLINT
+        size_t i = 0;
+        for (auto&& value : opcua::Span(m->measurements, m->measurementsSize)) {
+            std::cout << "- measurements[" << i++ << "] = " << value << "\n";
         }
     }
 
