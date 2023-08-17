@@ -1,6 +1,7 @@
 #pragma once
 
 #include <algorithm>
+#include <cassert>
 #include <cstdint>
 #include <initializer_list>
 #include <iterator>
@@ -110,14 +111,17 @@ public:
     }
 
     [[nodiscard]] constexpr reference operator[](size_t index) const noexcept {
+        assert(index < size());
         return data()[index];
     }
 
     [[nodiscard]] constexpr reference front() const noexcept {
+        assert(!empty());
         return *data();
     }
 
     [[nodiscard]] constexpr reference back() const noexcept {
+        assert(!empty());
         return *(data() + size() - 1);
     }
 
