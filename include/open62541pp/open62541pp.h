@@ -1,6 +1,6 @@
 #pragma once
 
-#include "open62541pp/Auth.h"
+#include "open62541pp/AccessControl.h"
 #include "open62541pp/Client.h"
 #include "open62541pp/Common.h"
 #include "open62541pp/Config.h"
@@ -13,6 +13,7 @@
 #include "open62541pp/Node.h"
 #include "open62541pp/NodeIds.h"
 #include "open62541pp/Server.h"
+#include "open62541pp/Session.h"
 #include "open62541pp/Span.h"
 #include "open62541pp/Subscription.h"
 #include "open62541pp/TypeConverter.h"

@@ -3,9 +3,13 @@
 #include <functional>
 #include <string_view>
 
+// forward declare
+struct UA_Client;
+struct UA_Server;
+
 namespace opcua {
 
-// forward declarations
+// forward declare
 class Client;
 class Server;
 
@@ -40,7 +44,13 @@ enum class LogCategory {
 using Logger = std::function<void(LogLevel, LogCategory, std::string_view msg)>;
 
 /// Generate log message with client's logger.
+void log(UA_Client* client, LogLevel level, LogCategory category, std::string_view msg);
+
+/// Generate log message with client's logger.
 void log(Client& client, LogLevel level, LogCategory category, std::string_view msg);
+
+/// Generate log message with servers's logger.
+void log(UA_Server* server, LogLevel level, LogCategory category, std::string_view msg);
 
 /// Generate log message with servers's logger.
 void log(Server& server, LogLevel level, LogCategory category, std::string_view msg);

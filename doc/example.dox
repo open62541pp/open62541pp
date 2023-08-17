@@ -5,6 +5,7 @@
 @example server_method.cpp
 @example server_valuecallback.cpp
 @example server_datasource.cpp
+@example server_accesscontrol.cpp
 
 @example client_minimal.cpp
 @example client_connect.cpp

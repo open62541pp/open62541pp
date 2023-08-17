@@ -14,7 +14,7 @@ int main() {
         "Counter",
         opcua::VariableAttributes{}
             .setAccessLevel(UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE)
-            .setDataType(opcua::DataTypeId::Int32)
+            .setDataType<int>()
             .setValueScalar(counter)
     );
 

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.12)
 
 project(
     open62541++
-    VERSION 0.6.0
+    VERSION 0.7.0
     DESCRIPTION "C++ wrapper of open62541"
     HOMEPAGE_URL "https://github.com/open62541pp/open62541pp"
     LANGUAGES CXX
@@ -113,8 +113,10 @@ endif()
 include(GNUInstallDirs)
 add_library(
     open62541pp
+    src/AccessControl.cpp
     src/Client.cpp
     src/Crypto.cpp
+    src/CustomAccessControl.cpp
     src/CustomDataTypes.cpp
     src/CustomLogger.cpp
     src/DataType.cpp
@@ -122,6 +124,7 @@ add_library(
     src/MonitoredItem.cpp
     src/Node.cpp
     src/Server.cpp
+    src/Session.cpp
     src/Subscription.cpp
     src/detail/helper.cpp
     src/services/Attribute.cpp

@@ -40,12 +40,12 @@ int main() {
     const auto servers = client.findServers("opc.tcp://localhost:4840");
     size_t serverIndex = 0;
     for (const auto& server : servers) {
-        const auto name = server.getApplicationUri().get();
+        const auto& name = server.getApplicationUri();
         std::cout
             << "Server[" << serverIndex++ << "] " << name << "\n"
             << "\tName:             " << server.getApplicationName().getText() << "\n"
-            << "\tApplication URI:  " << server.getApplicationUri().get() << "\n"
-            << "\tProduct URI:      " << server.getProductUri().get() << "\n"
+            << "\tApplication URI:  " << server.getApplicationUri() << "\n"
+            << "\tProduct URI:      " << server.getProductUri() << "\n"
             << "\tApplication type: " << getEnumName(server.getApplicationType()) << "\n"
             << "\tDiscovery URLs:\n";
 
@@ -62,11 +62,16 @@ int main() {
             for (const auto& endpoint : client.getEndpoints(url)) {
                 std::cout
                     << "\tEndpoint[" << endpointIndex++ << "]:\n"
-                    << "\t- Endpoint URL:      " << endpoint.getEndpointUrl().get() << "\n"
-                    << "\t- Transport profile: " << endpoint.getTransportProfileUri().get() << "\n"
+                    << "\t- Endpoint URL:      " << endpoint.getEndpointUrl() << "\n"
+                    << "\t- Transport profile: " << endpoint.getTransportProfileUri() << "\n"
                     << "\t- Security mode:     " << getEnumName(endpoint.getSecurityMode()) << "\n"
-                    << "\t- Security profile:  " << endpoint.getSecurityPolicyUri().get() << "\n"
-                    << "\t- Security level:    " << endpoint.getSecurityLevel() << std::endl;
+                    << "\t- Security profile:  " << endpoint.getSecurityPolicyUri() << "\n"
+                    << "\t- Security level:    " << endpoint.getSecurityLevel() << "\n"
+                    << "\t- User identity token:\n";
+
+                for (const auto& token : endpoint.getUserIdentityTokens()) {
+                    std::cout << "\t  - " << token.getPolicyId() << "\n";
+                }
             }
         }
     }

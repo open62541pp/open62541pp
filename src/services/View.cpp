@@ -96,6 +96,21 @@ std::vector<ReferenceDescription> browseAll(
     return refs;
 }
 
+std::vector<ExpandedNodeId> browseRecursive(Server& server, const BrowseDescription& bd) {
+    UA_ExpandedNodeId* resultsNative{};
+    size_t resultsSize{};
+    const auto status = UA_Server_browseRecursive(
+        server.handle(), bd.handle(), &resultsSize, &resultsNative
+    );
+    detail::throwOnBadStatus(status);
+    std::vector<ExpandedNodeId> results(resultsSize);
+    for (size_t i = 0; i < resultsSize; ++i) {
+        results[i].swap(resultsNative[i]);  // NOLINT
+    }
+    UA_Array_delete(resultsNative, resultsSize, &detail::getUaDataType(UA_TYPES_EXPANDEDNODEID));
+    return results;
+}
+
 template <>
 BrowsePathResult translateBrowsePathToNodeIds<Server>(
     Server& server, const BrowsePath& browsePath

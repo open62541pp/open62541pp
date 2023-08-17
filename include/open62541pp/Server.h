@@ -6,7 +6,6 @@
 #include <string_view>
 #include <vector>
 
-#include "open62541pp/Auth.h"
 #include "open62541pp/Logger.h"
 #include "open62541pp/Span.h"
 #include "open62541pp/Subscription.h"
@@ -20,8 +19,10 @@ struct UA_Server;
 namespace opcua {
 
 // forward declaration
+class AccessControlBase;
 class DataType;
 class ServerContext;
+class Session;
 template <typename ServerOrClient>
 class Node;
 
@@ -76,6 +77,12 @@ public:
 
     /// Set custom logging function.
     void setLogger(Logger logger);
+
+    /// Set custom access control.
+    void setAccessControl(AccessControlBase& accessControl);
+    /// Set custom access control (transfer ownership to Server).
+    void setAccessControl(std::unique_ptr<AccessControlBase> accessControl);
+
     /// Set custom hostname, default: system's host name.
     void setCustomHostname(std::string_view hostname);
     /// Set application name, default: `open62541-based OPC UA Application`.
@@ -85,8 +92,8 @@ public:
     /// Set product URI, default: `http://open62541.org`.
     void setProductUri(std::string_view uri);
 
-    /// Set login credentials (username/password) and anonymous login.
-    void setLogin(const std::vector<Login>& logins, bool allowAnonymous = true);
+    /// Get active client session.
+    std::vector<Session> getSessions() const;
 
     /// Get all defined namespaces.
     std::vector<std::string> getNamespaceArray();

@@ -1,12 +1,14 @@
 #pragma once
 
 #include <cstdint>
+#include <functional>  // hash
 #include <string>
 #include <string_view>
 #include <variant>
 
 #include "open62541pp/NodeIds.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/detail/helper.h"
 #include "open62541pp/open62541.h"
 #include "open62541pp/types/Builtin.h"
 
@@ -46,6 +48,10 @@ public:
 
     /// Create NodeId with ByteString identifier.
     NodeId(uint16_t namespaceIndex, const ByteString& identifier);
+
+    /// Create NodeId from Type (type id).
+    NodeId(Type type) noexcept  // NOLINT, implicit wanted
+        : NodeId(detail::getUaDataType(type).typeId) {}
 
     /// Create NodeId from DataTypeId.
     NodeId(DataTypeId id) noexcept  // NOLINT, implicit wanted
@@ -143,3 +149,19 @@ public:
 };
 
 }  // namespace opcua
+
+/* ---------------------------------- std::hash specializations --------------------------------- */
+
+template <>
+struct std::hash<opcua::NodeId> {
+    std::size_t operator()(const opcua::NodeId& id) const noexcept {
+        return id.hash();
+    }
+};
+
+template <>
+struct std::hash<opcua::ExpandedNodeId> {
+    std::size_t operator()(const opcua::ExpandedNodeId& id) const noexcept {
+        return id.hash();
+    }
+};

@@ -6,7 +6,6 @@
 #include <string_view>
 #include <vector>
 
-#include "open62541pp/Auth.h"
 #include "open62541pp/Common.h"
 #include "open62541pp/Config.h"
 #include "open62541pp/Logger.h"
@@ -24,6 +23,7 @@ namespace opcua {
 // forward declaration
 class ClientContext;
 class DataType;
+struct Login;
 template <typename ServerOrClient>
 class Node;
 
