@@ -103,13 +103,17 @@ public:
     /// Get variant type.
     std::optional<Type> getVariantType() const noexcept;
 
-    /// Get pointer to scalar value.
-    /// @exception BadVariantAccess If the variant is not a scalar
-    void* getScalar();
+    /// Get pointer to the underlying data.
+    /// Check the properties and data type before casting it to the actual type.
+    /// Use the methods @ref isScalar, @ref isArray, @ref isType / @ref getDataType.
+    void* data() noexcept;
 
-    /// Get pointer to scalar value.
-    /// @exception BadVariantAccess If the variant is not a scalar
-    const void* getScalar() const;
+    /// @copydoc data
+    const void* data() const noexcept;
+
+    [[deprecated("Use the methods isScalar() and data() instead")]] void* getScalar();
+
+    [[deprecated("Use the methods isScalar() and data() instead")]] const void* getScalar() const;
 
     /// Get reference to scalar value with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not a scalar or not of type `T`.
@@ -132,20 +136,16 @@ public:
     /// Get array dimensions.
     Span<const uint32_t> getArrayDimensions() const noexcept;
 
-    /// Get pointer to array value.
-    /// @exception BadVariantAccess If the variant is not an array
-    void* getArray();
+    [[deprecated("Use the methods isArray() and data() instead")]] void* getArray();
 
-    /// Get pointer to array value.
-    /// @exception BadVariantAccess If the variant is not an array
-    const void* getArray() const;
+    [[deprecated("Use the methods isArray() and data() instead")]] const void* getArray() const;
 
-    /// Get pointer to array with given template type (only native or wrapper types).
+    /// Get array with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not an array or not of type `T`.
     template <typename T>
     Span<T> getArray();
 
-    /// Get const pointer to array with given template type (only native or wrapper types).
+    /// Get array with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not an array or not of type `T`.
     template <typename T>
     Span<const T> getArray() const;

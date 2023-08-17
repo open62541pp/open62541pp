@@ -23,8 +23,8 @@ int main() {
     opcua::Variant variant;
 
     client.getNode({1, "Point"}).readValue(variant);
-    if (variant.isType(dataTypePoint)) {
-        const auto* p = static_cast<Point*>(variant.getScalar());
+    if (variant.isScalar() && variant.isType(dataTypePoint)) {
+        const auto* p = static_cast<Point*>(variant.data());
         std::cout << "Point:\n";
         std::cout << "- x = " << p->x << "\n";
         std::cout << "- y = " << p->y << "\n";
@@ -38,7 +38,7 @@ int main() {
     // Arrays can not be unwrapped easily, because the array is an array of ExtensionObjects.
     // The array of unwrapped objects isn't available contiguously in memory and open62541 won't
     // transparently unwrap the array. So we have to do the unwrapping ourselves:
-    if (variant.isType(opcua::Type::ExtensionObject)) {
+    if (variant.isArray() && variant.isType(opcua::Type::ExtensionObject)) {
         size_t i = 0;
         for (auto&& extObj : variant.getArray<opcua::ExtensionObject>()) {
             const auto* p = static_cast<Point*>(extObj.getDecodedData());
@@ -50,8 +50,8 @@ int main() {
     }
 
     client.getNode({1, "Measurements"}).readValue(variant);
-    if (variant.isType(dataTypeMeasurements)) {
-        const auto* m = static_cast<Measurements*>(variant.getScalar());
+    if (variant.isScalar() && variant.isType(dataTypeMeasurements)) {
+        const auto* m = static_cast<Measurements*>(variant.data());
         std::cout << "Measurements:\n";
         std::cout << "- description = " << m->description << "\n";
         size_t i = 0;
@@ -64,8 +64,8 @@ int main() {
     auto formatOptional = [](const auto* ptr) {
         return ptr == nullptr ? "NULL" : std::to_string(*ptr);
     };
-    if (variant.isType(dataTypeOpt)) {
-        const auto* opt = static_cast<Opt*>(variant.getScalar());
+    if (variant.isScalar() && variant.isType(dataTypeOpt)) {
+        const auto* opt = static_cast<Opt*>(variant.data());
         std::cout << "Opt:\n";
         std::cout << "- a = " << opt->a << "\n";
         std::cout << "- b = " << formatOptional(opt->b) << "\n";
@@ -73,8 +73,8 @@ int main() {
     }
 
     client.getNode({1, "Uni"}).readValue(variant);
-    if (variant.isType(dataTypeUni)) {
-        const auto* uni = static_cast<Uni*>(variant.getScalar());
+    if (variant.isScalar() && variant.isType(dataTypeUni)) {
+        const auto* uni = static_cast<Uni*>(variant.data());
         std::cout << "Uni:\n";
         std::cout << "- switchField = " << static_cast<int>(uni->switchField) << "\n";
         if (uni->switchField == UniSwitch::OptionA) {

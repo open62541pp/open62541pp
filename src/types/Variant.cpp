@@ -58,6 +58,14 @@ std::optional<Type> Variant::getVariantType() const noexcept {
     return {};
 }
 
+void* Variant::data() noexcept {
+    return handle()->data;
+}
+
+const void* Variant::data() const noexcept {
+    return handle()->data;
+}
+
 void* Variant::getScalar() {
     checkIsScalar();
     return handle()->data;

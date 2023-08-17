@@ -510,6 +510,7 @@ TEST_CASE("Variant") {
         CHECK(var.isType(NodeId{0, UA_NS0ID_INT32}));
         CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_INT32]);
         CHECK(var.getVariantType().value() == Type::Int32);
+        CHECK(var.data() == &value);
 
         CHECK_THROWS(var.getScalar<bool>());
         CHECK_THROWS(var.getScalar<int16_t>());
@@ -569,8 +570,8 @@ TEST_CASE("Variant") {
         CHECK(var.isType(NodeId{0, UA_NS0ID_FLOAT}));
         CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_FLOAT]);
         CHECK(var.getVariantType().value() == Type::Float);
+        CHECK(var.data() != array.data());
         CHECK(var.getArrayLength() == array.size());
-        CHECK(var.getArray() != array.data());
 
         CHECK_THROWS(var.getArrayCopy<int32_t>());
         CHECK_THROWS(var.getArrayCopy<bool>());
@@ -599,8 +600,8 @@ TEST_CASE("Variant") {
         };
 
         var.setArray(Span{array.data(), array.size()}, UA_TYPES[UA_TYPES_STRING]);
+        CHECK(var.data() == array.data());
         CHECK(var.getArrayLength() == array.size());
-        CHECK(var.getArray() == array.data());
 
         UA_clear(&array[0], &UA_TYPES[UA_TYPES_STRING]);
         UA_clear(&array[1], &UA_TYPES[UA_TYPES_STRING]);
@@ -612,8 +613,8 @@ TEST_CASE("Variant") {
         std::vector<String> array{String{"item1"}, String{"item2"}, String{"item3"}};
 
         var.setArray(array);
+        CHECK(var.data() == array.data());
         CHECK(var.getArrayLength() == array.size());
-        CHECK(var.getArray() == array.data());
         CHECK(var.getArray<String>().data() == array.data());
     }
 
@@ -651,7 +652,7 @@ TEST_CASE("Variant") {
             var.setScalar(value, dt);
             CHECK(var.isScalar());
             CHECK(var.getDataType() == &dt);
-            CHECK(var.getScalar() == &value);
+            CHECK(var.data() == &value);
             CHECK(var.getScalar<CustomType>().attributeId == 1);
         }
 
@@ -659,7 +660,7 @@ TEST_CASE("Variant") {
             var.setScalarCopy(value, dt);
             CHECK(var.isScalar());
             CHECK(var.getDataType() == &dt);
-            CHECK(var.getScalar() != &value);
+            CHECK(var.data() != &value);
             CHECK(var.getScalar<CustomType>().attributeId == 1);
         }
 
@@ -669,8 +670,8 @@ TEST_CASE("Variant") {
             var.setArray(array, dt);
             CHECK(var.isArray());
             CHECK(var.getDataType() == &dt);
+            CHECK(var.data() == array.data());
             CHECK(var.getArrayLength() == 3);
-            CHECK(var.getArray() == array.data());
             CHECK(var.getArray<CustomType>().data() == array.data());
         }
 
@@ -678,8 +679,8 @@ TEST_CASE("Variant") {
             var.setArrayCopy(array, dt);
             CHECK(var.isArray());
             CHECK(var.getDataType() == &dt);
+            CHECK(var.data() != array.data());
             CHECK(var.getArrayLength() == 3);
-            CHECK(var.getArray() != array.data());
             CHECK(var.getArray<CustomType>().data() != array.data());
         }
     }
