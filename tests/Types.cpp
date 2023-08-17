@@ -866,11 +866,9 @@ TEST_CASE("NodeAttributes") {
     }
 
     SUBCASE("Array type") {
-        CHECK(attr.getArrayDimensions() == std::vector<uint32_t>{});
-        CHECK(attr.getArrayDimensionsSize() == 0);
+        CHECK(attr.getArrayDimensions().empty());
         attr.setArrayDimensions({1, 2});
-        CHECK(attr.getArrayDimensions() == std::vector<uint32_t>{1, 2});
-        CHECK(attr.getArrayDimensionsSize() == 2);
+        CHECK(attr.getArrayDimensions() == Span<const uint32_t>{1, 2});
         CHECK(attr.getSpecifiedAttributes() == UA_NODEATTRIBUTESMASK_ARRAYDIMENSIONS);
     }
 }
@@ -911,8 +909,8 @@ TEST_CASE("RelativePath") {
     };
     const auto elements = rp.getElements();
     CHECK(elements.size() == 2);
-    CHECK(elements.at(0).getTargetName() == QualifiedName(0, "child1"));
-    CHECK(elements.at(1).getTargetName() == QualifiedName(0, "child2"));
+    CHECK(elements[0].getTargetName() == QualifiedName(0, "child1"));
+    CHECK(elements[1].getTargetName() == QualifiedName(0, "child2"));
 }
 
 TEST_CASE("BrowsePath") {

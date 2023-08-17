@@ -1,6 +1,8 @@
 #pragma once
 
 #include <cstdint>
+#include <initializer_list>
+#include <string>
 #include <utility>  // forward
 
 #include "open62541pp/Common.h"
@@ -13,10 +15,6 @@
 #include "open62541pp/types/ExtensionObject.h"
 #include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"
-
-#include <initializer_list>
-#include <string>
-#include <vector>
 
 // NOLINTNEXTLINE
 #define UAPP_COMPOSED_GETTER(Type, getterName, member)                                             \
@@ -46,12 +44,14 @@
     UAPP_COMPOSED_GETTER_WRAPPER_NONCONST(WrapperType, getterName, member)
 
 // NOLINTNEXTLINE
-#define UAPP_COMPOSED_GETTER_ARRAY(Type, getterName, memberArray, memberSize)                      \
-    size_t getterName##Size() const noexcept {                                                     \
-        return handle()->memberSize;                                                               \
-    }                                                                                              \
-    std::vector<Type> getterName() const {                                                         \
-        return detail::fromNativeArray<Type>(handle()->memberArray, handle()->memberSize);         \
+#define UAPP_COMPOSED_GETTER_SPAN(Type, getterName, memberArray, memberSize)                       \
+    Span<const Type> getterName() const noexcept {                                                 \
+        return {handle()->memberArray, handle()->memberSize};                                      \
+    }
+// NOLINTNEXTLINE
+#define UAPP_COMPOSED_GETTER_SPAN_WRAPPER(Type, getterName, memberArray, memberSize)               \
+    Span<const Type> getterName() const noexcept {                                                 \
+        return {asWrapper<Type>(handle()->memberArray), handle()->memberSize};                     \
     }
 
 namespace opcua {
@@ -71,7 +71,7 @@ public:
     UAPP_COMPOSED_GETTER(UA_ApplicationType, getApplicationType, applicationType)
     UAPP_COMPOSED_GETTER_WRAPPER(String, getGatewayServerUri, gatewayServerUri)
     UAPP_COMPOSED_GETTER_WRAPPER(String, getDiscoveryProfileUri, discoveryProfileUri)
-    UAPP_COMPOSED_GETTER_ARRAY(std::string, getDiscoveryUrls, discoveryUrls, discoveryUrlsSize)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(String, getDiscoveryUrls, discoveryUrls, discoveryUrlsSize)
 };
 
 /**
@@ -125,7 +125,7 @@ public:
     UAPP_COMPOSED_GETTER_WRAPPER(ByteString, getServerCertificate, serverCertificate)
     UAPP_COMPOSED_GETTER(UA_MessageSecurityMode, getSecurityMode, securityMode)
     UAPP_COMPOSED_GETTER_WRAPPER(String, getSecurityPolicyUri, securityPolicyUri)
-    UAPP_COMPOSED_GETTER_ARRAY(
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
         UserTokenPolicy, getUserIdentityTokens, userIdentityTokens, userIdentityTokensSize
     )
     UAPP_COMPOSED_GETTER_WRAPPER(String, getTransportProfileUri, transportProfileUri)
@@ -167,8 +167,8 @@ public:
 
 // NOLINTNEXTLINE
 #define UAPP_NODEATTR_ARRAY(Type, suffix, memberArray, memberSize, flag)                           \
-    UAPP_COMPOSED_GETTER_ARRAY(Type, get##suffix, memberArray, memberSize)                         \
-    auto& set##suffix(const std::vector<Type>& memberArray) {                                      \
+    UAPP_COMPOSED_GETTER_SPAN(Type, get##suffix, memberArray, memberSize)                          \
+    auto& set##suffix(Span<const Type> memberArray) {                                              \
         handle()->specifiedAttributes |= flag;                                                     \
         UA_Array_delete(                                                                           \
             handle()->memberArray, handle()->memberSize, &detail::guessDataType<Type>()            \
@@ -584,10 +584,11 @@ public:
 class BrowseResult : public TypeWrapper<UA_BrowseResult, UA_TYPES_BROWSERESULT> {
 public:
     using TypeWrapperBase::TypeWrapperBase;
-
     UAPP_COMPOSED_GETTER(StatusCode, getStatusCode, statusCode)
     UAPP_COMPOSED_GETTER_WRAPPER(ByteString, getContinuationPoint, continuationPoint)
-    UAPP_COMPOSED_GETTER_ARRAY(ReferenceDescription, getReferences, references, referencesSize)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        ReferenceDescription, getReferences, references, referencesSize
+    )
 };
 
 /**
@@ -623,7 +624,7 @@ public:
     RelativePath(std::initializer_list<RelativePathElement> elements);
     explicit RelativePath(Span<const RelativePathElement> elements);
 
-    UAPP_COMPOSED_GETTER_ARRAY(RelativePathElement, getElements, elements, elementsSize)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(RelativePathElement, getElements, elements, elementsSize)
 };
 
 /**
@@ -661,7 +662,7 @@ public:
     using TypeWrapperBase::TypeWrapperBase;
 
     UAPP_COMPOSED_GETTER(StatusCode, getStatusCode, statusCode)
-    UAPP_COMPOSED_GETTER_ARRAY(BrowsePathTarget, getTargets, targets, targetsSize)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(BrowsePathTarget, getTargets, targets, targetsSize)
 };
 
 /**
@@ -705,7 +706,7 @@ public:
     UAPP_COMPOSED_GETTER_WRAPPER(LocalizedText, getDescription, description)
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getDataType, dataType)
     UAPP_COMPOSED_GETTER_CAST(ValueRank, getValueRank, valueRank)
-    UAPP_COMPOSED_GETTER_ARRAY(uint32_t, getArrayDimensions, arrayDimensions, arrayDimensionsSize)
+    UAPP_COMPOSED_GETTER_SPAN(uint32_t, getArrayDimensions, arrayDimensions, arrayDimensionsSize)
 };
 #endif
 
