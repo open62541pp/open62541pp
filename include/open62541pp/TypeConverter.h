@@ -106,7 +106,7 @@ template <typename T, typename NativeType = typename TypeConverter<T>::NativeTyp
 template <typename T>
 [[nodiscard]] T fromNative(void* value, [[maybe_unused]] const UA_DataType& dataType) {
     using NativeType = typename TypeConverter<T>::NativeType;
-    assert(isValidTypeCombination<T>(&dataType));  // NOLINT
+    assert(isValidTypeCombination<T>(&dataType));
     return fromNative<T>(static_cast<NativeType*>(value));
 }
 
@@ -131,14 +131,14 @@ template <typename T>
     void* array, size_t size, [[maybe_unused]] const UA_DataType& dataType
 ) {
     using NativeType = typename TypeConverter<T>::NativeType;
-    assert(isValidTypeCombination<T>(&dataType));  // NOLINT
+    assert(isValidTypeCombination<T>(&dataType));
     return fromNativeArray<T>(static_cast<NativeType*>(array), size);
 }
 
 /// Allocate native type.
 template <typename TNative>
 [[nodiscard]] TNative* allocNative(const UA_DataType& dataType) {
-    assert(isValidTypeCombination<TNative>(&dataType));  // NOLINT
+    assert(isValidTypeCombination<TNative>(&dataType));
     auto* result = static_cast<TNative*>(UA_new(&dataType));
     if (result == nullptr) {
         throw std::bad_alloc();
@@ -158,7 +158,7 @@ template <typename T>
 /// Allocate native array
 template <typename TNative>
 [[nodiscard]] auto* allocNativeArray(size_t size, const UA_DataType& dataType) {
-    assert(isValidTypeCombination<TNative>(&dataType));  // NOLINT
+    assert(isValidTypeCombination<TNative>(&dataType));
     auto* result = static_cast<TNative*>(UA_Array_new(size, &dataType));
     if (result == nullptr) {
         throw std::bad_alloc();

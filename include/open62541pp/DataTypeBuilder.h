@@ -212,7 +212,7 @@ DataTypeBuilder<T, Tag>& DataTypeBuilder<T, Tag>::addField(
         std::is_same_v<Tag, detail::TagDataTypeStruct>,
         "Built type must be a struct or class to add members"
     );
-    assert(sizeof(detail::UnqualifiedT<TMember>) == fieldType.memSize);  // NOLINT
+    assert(sizeof(detail::UnqualifiedT<TMember>) == fieldType.memSize);
     if (std::is_pointer_v<TMember>) {
         dataType_.setTypeKind(UA_DATATYPEKIND_OPTSTRUCT);
     }
@@ -251,7 +251,7 @@ DataTypeBuilder<T, Tag>& DataTypeBuilder<T, Tag>::addField(
         detail::offsetOfMember(fieldArray) == detail::offsetOfMember(fieldSize) + sizeof(TSize) &&
         "No padding between members size and array allowed"
     );
-    assert(sizeof(detail::UnqualifiedT<TArray>) == fieldType.memSize);  // NOLINT
+    assert(sizeof(detail::UnqualifiedT<TArray>) == fieldType.memSize);
     dataType_.setPointerFree(false);
     fields_.push_back({
         sizeof(TSize) + sizeof(TArray),
@@ -280,8 +280,8 @@ DataTypeBuilder<T, Tag>& DataTypeBuilder<T, Tag>::addUnionField(
     static_assert(std::is_union_v<TUnion>, "TUnion must be a union");
     static_assert(sizeof(TField) <= sizeof(TUnion), "TField exceeds size of union");
     const auto offset = detail::offsetOfMember(memberUnion);
-    assert(offset > 0 && "A union type must consist of a switch field and a union");  // NOLINT
-    assert(sizeof(detail::UnqualifiedT<TField>) == fieldType.memSize);  // NOLINT
+    assert(offset > 0 && "A union type must consist of a switch field and a union");
+    assert(sizeof(detail::UnqualifiedT<TField>) == fieldType.memSize);
     if (std::is_pointer_v<TField> || !fieldType.pointerFree) {
         dataType_.setPointerFree(false);
     }

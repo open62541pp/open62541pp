@@ -124,7 +124,7 @@ static UA_StatusCode methodCallback(
     size_t outputSize,
     UA_Variant* output
 ) noexcept {
-    assert(methodContext != nullptr);  // NOLINT
+    assert(methodContext != nullptr);
     const auto* nodeContext = static_cast<ServerContext::NodeContext*>(methodContext);
     const auto& callback = nodeContext->methodCallback;
     if (callback) {

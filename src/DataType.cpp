@@ -53,7 +53,7 @@ DataType::DataType(UA_DataType&& native)
 DataType::DataType(TypeIndex typeIndex)
     : DataType(UA_TYPES[typeIndex])  // NOLINT
 {
-    assert(typeIndex < UA_TYPES_COUNT);  // NOLINT
+    assert(typeIndex < UA_TYPES_COUNT);
 }
 
 DataType::~DataType() {
@@ -146,7 +146,7 @@ uint8_t DataType::getTypeKind() const noexcept {
 }
 
 void DataType::setTypeKind(uint8_t typeKind) noexcept {
-    assert(typeKind < UA_DATATYPEKINDS);  // NOLINT
+    assert(typeKind < UA_DATATYPEKINDS);
     handle()->typeKind = typeKind;
 }
 
@@ -302,7 +302,7 @@ UA_DataType createDataType(
 #if UAPP_OPEN62541_VER_GE(1, 2)
     result.binaryEncodingId = binaryEncodingId;
 #else
-    assert(binaryEncodingId.identifierType == UA_NODEIDTYPE_NUMERIC);  // NOLINT
+    assert(binaryEncodingId.identifierType == UA_NODEIDTYPE_NUMERIC);
     result.binaryEncodingId = binaryEncodingId.identifier.numeric;  // NOLINT
 #endif
     result.memSize = memSize;

@@ -298,11 +298,11 @@ void setTriggering(
     using Response = TypeWrapper<UA_SetTriggeringResponse, UA_TYPES_SETTRIGGERINGRESPONSE>;
     const Response response = UA_Client_MonitoredItems_setTriggering(client.handle(), request);
     detail::throwOnBadStatus(response->responseHeader.serviceResult);
-    for (size_t i = 0; i < response->addResultsSize; ++i) {
-        detail::throwOnBadStatus(response->addResults[i]);  // NOLINT
+    for (auto&& status : Span(response->addResults, response->addResultsSize)) {
+        detail::throwOnBadStatus(status);
     }
-    for (size_t i = 0; i < response->removeResultsSize; ++i) {
-        detail::throwOnBadStatus(response->removeResults[i]);  // NOLINT
+    for (auto&& status : Span(response->removeResults, response->removeResultsSize)) {
+        detail::throwOnBadStatus(status);
     }
 }
 
