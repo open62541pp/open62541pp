@@ -130,7 +130,7 @@ public:
     size_t getArrayLength() const noexcept;
 
     /// Get array dimensions.
-    std::vector<uint32_t> getArrayDimensions() const;
+    Span<const uint32_t> getArrayDimensions() const noexcept;
 
     /// Get pointer to array value.
     /// @exception BadVariantAccess If the variant is not an array
