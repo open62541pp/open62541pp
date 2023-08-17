@@ -39,6 +39,12 @@ TEST_CASE("Span") {
         CHECK(view.data() == values.begin());
     }
 
+    SUBCASE("Explicit conversion to std::vector") {
+        std::vector<int> vec{0, 1, 2};
+        Span view(vec);
+        CHECK(std::vector<int>(view) == vec);
+    }
+
     SUBCASE("Element access") {
         std::vector<int> vec{0, 1, 2};
         Span view(vec);
