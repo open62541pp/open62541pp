@@ -101,6 +101,11 @@ public:
 
     explicit String(std::string_view str);
 
+    /// Implicit conversion to std::string_view.
+    operator std::string_view() const {  // NOLINT, implicit wanted
+        return get();
+    }
+
     bool empty() const noexcept;
 
     std::string_view get() const;
@@ -177,6 +182,11 @@ public:
     using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
 
     explicit XmlElement(std::string_view str);
+
+    /// Implicit conversion to std::string_view.
+    operator std::string_view() const {  // NOLINT, implicit wanted
+        return get();
+    }
 
     bool empty() const noexcept;
 
