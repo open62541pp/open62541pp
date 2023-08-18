@@ -322,16 +322,28 @@ public:
         value = services::readValue(connection_, nodeId_);
     }
 
-    /// Read scalar from variable node.
+    /// Read scalar value from variable node.
     template <typename T>
-    T readScalar() {
+    T readValueScalar() {
         return readValue().template getScalarCopy<T>();
     }
 
-    /// Read array from variable node.
+    /// @copydoc readValueScalar
     template <typename T>
-    std::vector<T> readArray() {
+    [[deprecated("Use Node::readValueScalar instead")]] T readScalar() {
+        return readValueScalar<T>();
+    }
+
+    /// Read array value from variable node.
+    template <typename T>
+    std::vector<T> readValueArray() {
         return readValue().template getArrayCopy<T>();
+    }
+
+    /// @copydoc readValueArray
+    template <typename T>
+    [[deprecated("Use Node::readValueArray instead")]] std::vector<T> readArray() {
+        return readValueArray<T>();
     }
 
     /// @copydoc services::readDataType
@@ -430,38 +442,49 @@ public:
     /// Write scalar to variable node.
     /// @return Current node instance to chain multiple methods (fluent interface)
     template <typename T>
-    Node& writeScalar(const T& value) {
+    Node& writeValueScalar(const T& value) {
         // NOLINTNEXTLINE, variant isn't modified, try to avoid copy
         const auto variant = Variant::fromScalar<T>(const_cast<T&>(value));
         writeValue(variant);
         return *this;
     }
 
-    /// Write array (raw) to variable node.
+    /// @copydoc writeValueScalar
+    template <typename T>
+    [[deprecated("Use Node::writeValueScalar instead")]] Node& writeScalar(const T& value) {
+        return writeValueScalar<T>(value);
+    }
+
+    /// Write array value (raw) to variable node.
     /// @return Current node instance to chain multiple methods (fluent interface)
     template <typename T>
-    Node& writeArray(const T* array, size_t size) {
+    Node& writeValueArray(const T* array, size_t size) {
         // NOLINTNEXTLINE, variant isn't modified, try to avoid copy
         const auto variant = Variant::fromArray<T>(const_cast<T*>(array), size);
         writeValue(variant);
         return *this;
     }
 
-    /// Write array (std::vector) to variable node.
+    /// Write array value (std::vector) to variable node.
     /// @return Current node instance to chain multiple methods (fluent interface)
     template <typename T>
-    Node& writeArray(const std::vector<T>& array) {
-        writeArray<T>(array.data(), array.size());
-        return *this;
+    Node& writeValueArray(const std::vector<T>& array) {
+        return writeValueArray<T>(array.data(), array.size());
     }
 
-    /// Write range of elements as array to variable node.
+    /// Write range of elements as array value to variable node.
     /// @return Current node instance to chain multiple methods (fluent interface)
     template <typename InputIt>
-    Node& writeArray(InputIt first, InputIt last) {
+    Node& writeValueArray(InputIt first, InputIt last) {
         const auto variant = Variant::fromArray<InputIt>(first, last);
         writeValue(variant);
         return *this;
+    }
+
+    /// @copydoc  writeValueArray
+    template <typename... Args>
+    [[deprecated("Use Node::writeValueArray instead")]] Node& writeArray(Args&&... args) {
+        return writeValueArray(std::forward<Args>(args)...);
     }
 
     /// @copydoc services::writeDataType

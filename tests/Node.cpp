@@ -158,54 +158,54 @@ TEST_CASE("Node") {
 
         SUBCASE("Read/write value") {
             SUBCASE("Try read/write node classes other than Variable") {
-                CHECK_THROWS(rootNode.template readScalar<int>());
-                CHECK_THROWS(rootNode.template writeScalar<int>({}));
+                CHECK_THROWS(rootNode.template readValueScalar<int>());
+                CHECK_THROWS(rootNode.template writeValueScalar<int>({}));
             }
 
             SUBCASE("Scalar") {
                 CHECK_NOTHROW(varNode.writeDataType(Type::Float));
 
                 // write with wrong data type
-                CHECK_THROWS(varNode.template writeScalar<bool>({}));
-                CHECK_THROWS(varNode.template writeScalar<int>({}));
+                CHECK_THROWS(varNode.template writeValueScalar<bool>({}));
+                CHECK_THROWS(varNode.template writeValueScalar<int>({}));
 
                 // write with correct data type
                 float value = 11.11f;
-                CHECK_NOTHROW(varNode.writeScalar(value));
-                CHECK(varNode.template readScalar<float>() == value);
+                CHECK_NOTHROW(varNode.writeValueScalar(value));
+                CHECK(varNode.template readValueScalar<float>() == value);
             }
 
             SUBCASE("String") {
                 CHECK_NOTHROW(varNode.writeDataType(Type::String));
 
                 String str("test");
-                CHECK_NOTHROW(varNode.writeScalar(str));
-                CHECK(varNode.template readScalar<std::string>() == "test");
+                CHECK_NOTHROW(varNode.writeValueScalar(str));
+                CHECK(varNode.template readValueScalar<std::string>() == "test");
             }
 
             SUBCASE("Array") {
                 CHECK_NOTHROW(varNode.writeDataType(Type::Double));
 
                 // write with wrong data type
-                CHECK_THROWS(varNode.template writeArray<int>({}));
-                CHECK_THROWS(varNode.template writeArray<float>({}));
+                CHECK_THROWS(varNode.template writeValueArray<int>({}));
+                CHECK_THROWS(varNode.template writeValueArray<float>({}));
 
                 // write with correct data type
                 std::vector<double> array{11.11, 22.22, 33.33};
 
                 SUBCASE("Write as std::vector") {
-                    CHECK_NOTHROW(varNode.writeArray(array));
-                    CHECK(varNode.template readArray<double>() == array);
+                    CHECK_NOTHROW(varNode.writeValueArray(array));
+                    CHECK(varNode.template readValueArray<double>() == array);
                 }
 
                 SUBCASE("Write as raw array") {
-                    CHECK_NOTHROW(varNode.writeArray(array.data(), array.size()));
-                    CHECK(varNode.template readArray<double>() == array);
+                    CHECK_NOTHROW(varNode.writeValueArray(array.data(), array.size()));
+                    CHECK(varNode.template readValueArray<double>() == array);
                 }
 
                 SUBCASE("Write as iterator pair") {
-                    CHECK_NOTHROW(varNode.writeArray(array.begin(), array.end()));
-                    CHECK(varNode.template readArray<double>() == array);
+                    CHECK_NOTHROW(varNode.writeValueArray(array.begin(), array.end()));
+                    CHECK(varNode.template readValueArray<double>() == array);
                 }
             }
         }
