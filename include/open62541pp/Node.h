@@ -299,29 +299,39 @@ public:
     }
 
     /// @copydoc services::readDataValue
-    void readDataValue(DataValue& value) {
-        services::readDataValue(connection_, nodeId_, value);
+    DataValue readDataValue() {
+        return services::readDataValue(connection_, nodeId_);
+    }
+
+    /// @copydoc services::readDataValue
+    [[deprecated("No performance benefit to pass DataValue by reference, return by value instead"
+    )]] void
+    readDataValue(DataValue& value) {
+        value = services::readDataValue(connection_, nodeId_);
     }
 
     /// @copydoc services::readValue
-    void readValue(Variant& value) {
-        services::readValue(connection_, nodeId_, value);
+    Variant readValue() {
+        return services::readValue(connection_, nodeId_);
+    }
+
+    /// @copydoc services::readValue
+    [[deprecated("No performance benefit to pass Variant by reference, return by value instead"
+    )]] void
+    readValue(Variant& value) {
+        value = services::readValue(connection_, nodeId_);
     }
 
     /// Read scalar from variable node.
     template <typename T>
     T readScalar() {
-        Variant variant;
-        readValue(variant);
-        return variant.getScalarCopy<T>();
+        return readValue().template getScalarCopy<T>();
     }
 
     /// Read array from variable node.
     template <typename T>
     std::vector<T> readArray() {
-        Variant variant;
-        readValue(variant);
-        return variant.getArrayCopy<T>();
+        return readValue().template getArrayCopy<T>();
     }
 
     /// @copydoc services::readDataType

@@ -258,8 +258,7 @@ TEST_CASE("Attribute service set (server)") {
         variantWrite.setScalarCopy(11.11);
         services::writeValue(server, id, variantWrite);
 
-        Variant variantRead;
-        services::readValue(server, id, variantRead);
+        Variant variantRead = services::readValue(server, id);
         CHECK(variantRead.getScalar<double>() == 11.11);
     }
 
@@ -272,8 +271,7 @@ TEST_CASE("Attribute service set (server)") {
         DataValue valueWrite(variant, {}, DateTime::now(), {}, uint16_t{1}, UA_STATUSCODE_GOOD);
         services::writeDataValue(server, id, valueWrite);
 
-        DataValue valueRead;
-        services::readDataValue(server, id, valueRead);
+        DataValue valueRead = services::readDataValue(server, id);
 
         CHECK_EQ(valueRead->hasValue, true);
         CHECK_EQ(valueRead->hasServerTimestamp, true);
@@ -330,14 +328,11 @@ TEST_CASE("Attribute service set (server & client)") {
         const std::vector<double> array{1, 2, 3};
         const auto variant = Variant::fromArray(array);
         CHECK_NOTHROW(services::writeValue(writer, id, variant));
-        Variant variantRead;
-        CHECK_NOTHROW(services::readValue(reader, id, variantRead));
-        CHECK(variantRead.getArrayCopy<double>() == array);
+        CHECK(services::readValue(reader, id).template getArrayCopy<double>() == array);
 
         const auto dataValue = DataValue::fromArray(array);
         CHECK_NOTHROW(services::writeDataValue(writer, id, dataValue));
-        DataValue dataValueRead;
-        CHECK_NOTHROW(services::readDataValue(reader, id, dataValueRead));
+        DataValue dataValueRead = services::readDataValue(reader, id);
         CHECK_EQ(dataValueRead->hasValue, true);
         CHECK_EQ(dataValueRead->hasSourceTimestamp, true);
         CHECK_EQ(dataValueRead->hasServerTimestamp, true);

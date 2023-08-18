@@ -229,9 +229,8 @@ std::vector<Session> Server::getSessions() const {
 }
 
 std::vector<std::string> Server::getNamespaceArray() {
-    Variant variant;
-    services::readValue(*this, {0, UA_NS0ID_SERVER_NAMESPACEARRAY}, variant);
-    return variant.getArrayCopy<std::string>();
+    return services::readValue(*this, {0, UA_NS0ID_SERVER_NAMESPACEARRAY})
+        .getArrayCopy<std::string>();
 }
 
 uint16_t Server::registerNamespace(std::string_view uri) {
