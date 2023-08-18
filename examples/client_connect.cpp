@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
     }
 
     auto node = client.getNode(opcua::VariableId::Server_ServerStatus_CurrentTime);
-    const auto dt = node.readScalar<opcua::DateTime>();
+    const auto dt = node.readValueScalar<opcua::DateTime>();
     client.disconnect();
 
     std::cout << "Server date (UTC): " << dt.format("%Y-%m-%d %H:%M:%S") << std::endl;

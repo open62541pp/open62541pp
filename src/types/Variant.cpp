@@ -33,11 +33,15 @@ bool Variant::isType(const UA_DataType& dataType) const noexcept {
 }
 
 bool Variant::isType(Type type) const noexcept {
-    return getDataType() == &detail::getUaDataType(type);
+    return isType(&detail::getUaDataType(type));
 }
 
 bool Variant::isType(const NodeId& id) const noexcept {
-    return getDataType() == detail::findUaDataType(id);
+    const auto* dt = getDataType();
+    if (dt == nullptr) {
+        return false;
+    }
+    return dt->typeId == id;
 }
 
 const UA_DataType* Variant::getDataType() const noexcept {

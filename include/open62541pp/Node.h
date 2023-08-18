@@ -298,29 +298,51 @@ public:
     }
 
     /// @copydoc services::readDataValue
-    void readDataValue(DataValue& value) {
-        services::readDataValue(connection_, nodeId_, value);
+    DataValue readDataValue() {
+        return services::readDataValue(connection_, nodeId_);
+    }
+
+    /// @copydoc services::readDataValue
+    [[deprecated("No performance benefit to pass DataValue by reference, return by value instead"
+    )]] void
+    readDataValue(DataValue& value) {
+        value = services::readDataValue(connection_, nodeId_);
     }
 
     /// @copydoc services::readValue
-    void readValue(Variant& value) {
-        services::readValue(connection_, nodeId_, value);
+    Variant readValue() {
+        return services::readValue(connection_, nodeId_);
     }
 
-    /// Read scalar from variable node.
-    template <typename T>
-    T readScalar() {
-        Variant variant;
-        readValue(variant);
-        return variant.getScalarCopy<T>();
+    /// @copydoc services::readValue
+    [[deprecated("No performance benefit to pass Variant by reference, return by value instead"
+    )]] void
+    readValue(Variant& value) {
+        value = services::readValue(connection_, nodeId_);
     }
 
-    /// Read array from variable node.
+    /// Read scalar value from variable node.
     template <typename T>
-    std::vector<T> readArray() {
-        Variant variant;
-        readValue(variant);
-        return variant.getArrayCopy<T>();
+    T readValueScalar() {
+        return readValue().template getScalarCopy<T>();
+    }
+
+    /// @copydoc readValueScalar
+    template <typename T>
+    [[deprecated("Use Node::readValueScalar instead")]] T readScalar() {
+        return readValueScalar<T>();
+    }
+
+    /// Read array value from variable node.
+    template <typename T>
+    std::vector<T> readValueArray() {
+        return readValue().template getArrayCopy<T>();
+    }
+
+    /// @copydoc readValueArray
+    template <typename T>
+    [[deprecated("Use Node::readValueArray instead")]] std::vector<T> readArray() {
+        return readValueArray<T>();
     }
 
     /// @copydoc services::readDataType
@@ -419,35 +441,45 @@ public:
     /// Write scalar to variable node.
     /// @return Current node instance to chain multiple methods (fluent interface)
     template <typename T>
-    Node& writeScalar(const T& value) {
+    Node& writeValueScalar(const T& value) {
         // NOLINTNEXTLINE, variant isn't modified, try to avoid copy
         const auto variant = Variant::fromScalar<T>(const_cast<T&>(value));
         writeValue(variant);
         return *this;
     }
 
-    /// Write array (raw) to variable node.
+    /// @copydoc writeValueScalar
+    template <typename T>
+    [[deprecated("Use Node::writeValueScalar instead")]] Node& writeScalar(const T& value) {
+        return writeValueScalar<T>(value);
+    }
+
+    /// Write array value to variable node.
     /// @return Current node instance to chain multiple methods (fluent interface)
     template <typename T>
-    Node& writeArray(Span<T> array) {
-        const auto variant = Variant::fromArray(array);
-        writeValue(variant);
+    Node& writeValueArray(Span<T> array) {
+        writeValue(Variant::fromArray(array));
         return *this;
     }
 
     /// @overload
     template <typename ArrayLike>
-    Node& writeArray(ArrayLike&& array) {
-        return writeArray(Span{std::forward<ArrayLike>(array)});
+    Node& writeValueArray(ArrayLike&& array) {
+        return writeValueArray(Span{std::forward<ArrayLike>(array)});
     }
 
-    /// Write range of elements as array to variable node.
+    /// Write range of elements as array value to variable node.
     /// @return Current node instance to chain multiple methods (fluent interface)
     template <typename InputIt>
-    Node& writeArray(InputIt first, InputIt last) {
-        const auto variant = Variant::fromArray(first, last);
-        writeValue(variant);
+    Node& writeValueArray(InputIt first, InputIt last) {
+        writeValue(Variant::fromArray(first, last));
         return *this;
+    }
+
+    /// @copydoc  writeValueArray
+    template <typename... Args>
+    [[deprecated("Use Node::writeValueArray instead")]] Node& writeArray(Args&&... args) {
+        return writeValueArray(std::forward<Args>(args)...);
     }
 
     /// @copydoc services::writeDataType

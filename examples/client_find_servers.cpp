@@ -59,7 +59,7 @@ int main() {
 
         for (const auto& url : discoveryUrls) {
             size_t endpointIndex = 0;
-            for (const auto& endpoint : client.getEndpoints(url.get())) {
+            for (const auto& endpoint : client.getEndpoints(url)) {
                 std::cout
                     << "\tEndpoint[" << endpointIndex++ << "]:\n"
                     << "\t- Endpoint URL:      " << endpoint.getEndpointUrl() << "\n"

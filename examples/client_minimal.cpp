@@ -7,7 +7,7 @@ int main() {
     client.connect("opc.tcp://localhost:4840");
 
     opcua::Node node = client.getNode(opcua::VariableId::Server_ServerStatus_CurrentTime);
-    const auto dt = node.readScalar<opcua::DateTime>();
+    const auto dt = node.readValueScalar<opcua::DateTime>();
 
     std::cout << "Server date (UTC): " << dt.format("%Y-%m-%d %H:%M:%S") << std::endl;
 }

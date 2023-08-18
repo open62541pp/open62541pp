@@ -129,7 +129,7 @@ TEST_CASE("ValueCallback") {
 
     NodeId id{1, 1000};
     auto node = server.getObjectsNode().addVariable(id, "testVariable");
-    node.writeScalar<int>(1);
+    node.writeValueScalar<int>(1);
 
     bool onBeforeReadCalled = false;
     bool onAfterWriteCalled = false;
@@ -148,14 +148,14 @@ TEST_CASE("ValueCallback") {
     server.setVariableNodeValueCallback(id, valueCallback);
 
     // trigger onBeforeRead callback with read operation
-    const auto valueRead = node.readScalar<int>();
+    const auto valueRead = node.readValueScalar<int>();
     CHECK(onBeforeReadCalled == true);
     CHECK(onAfterWriteCalled == false);
     CHECK(valueBeforeRead == 1);
     CHECK(valueRead == 1);
 
     // trigger onAfterWrite callback with write operation
-    node.writeScalar<int>(2);
+    node.writeValueScalar<int>(2);
     CHECK(onBeforeReadCalled == true);
     CHECK(onAfterWriteCalled == true);
     CHECK(valueAfterWrite == 2);
@@ -184,8 +184,8 @@ TEST_CASE("DataSource") {
 
     CHECK_NOTHROW(server.setVariableNodeValueBackend(id, dataSource));
 
-    CHECK(node.readScalar<int>() == 0);
-    CHECK_NOTHROW(node.writeScalar<int>(1));
+    CHECK(node.readValueScalar<int>() == 0);
+    CHECK_NOTHROW(node.writeValueScalar<int>(1));
     CHECK(data == 1);
 }
 
@@ -197,7 +197,7 @@ TEST_CASE("DataSource with empty callbacks") {
     server.setVariableNodeValueBackend(id, ValueBackendDataSource{});
 
     Variant variant;
-    CHECK_THROWS_AS_MESSAGE(node.readValue(variant), BadStatus, "BadInternalError");
+    CHECK_THROWS_AS_MESSAGE(node.readValue(), BadStatus, "BadInternalError");
     CHECK_THROWS_AS_MESSAGE(node.writeValue(variant), BadStatus, "BadInternalError");
 }
 
@@ -213,7 +213,7 @@ TEST_CASE("DataSource with exception in callback") {
         };
         server.setVariableNodeValueBackend(id, dataSource);
         Variant variant;
-        CHECK_THROWS_AS_MESSAGE(node.readValue(variant), BadStatus, "BadUnexpectedError");
+        CHECK_THROWS_AS_MESSAGE(node.readValue(), BadStatus, "BadUnexpectedError");
     }
 
     SUBCASE("Other exception types") {
@@ -223,6 +223,6 @@ TEST_CASE("DataSource with exception in callback") {
         };
         server.setVariableNodeValueBackend(id, dataSource);
         Variant variant;
-        CHECK_THROWS_AS_MESSAGE(node.readValue(variant), BadStatus, "BadInternalError");
+        CHECK_THROWS_AS_MESSAGE(node.readValue(), BadStatus, "BadInternalError");
     }
 }

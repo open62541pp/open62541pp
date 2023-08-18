@@ -67,6 +67,7 @@ public:
     /// @warning Type erased version, use with caution.
     static ExtensionObject fromDecodedCopy(const void* data, const UA_DataType& type);
 
+    /// Check if the ExtensionObject is empty
     bool isEmpty() const noexcept;
     /// Check if the ExtensionObject is encoded (usually if the data type is unknown).
     bool isEncoded() const noexcept;

@@ -10,7 +10,7 @@ int main() {
     myIntegerNode.writeDataType(opcua::Type::Int32)
         .writeDisplayName({"en-US", "the answer"})
         .writeDescription({"en-US", "the answer"})
-        .writeScalar(42);
+        .writeValueScalar(42);
 
     server.run();
 }
