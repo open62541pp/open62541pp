@@ -184,8 +184,16 @@ inline LocalizedText readInverseName(T& serverOrClient, const NodeId& id) {
  * @ingroup Attribute
  */
 template <typename T>
-inline void readDataValue(T& serverOrClient, const NodeId& id, DataValue& value) {
-    value = readAttribute(serverOrClient, id, AttributeId::Value, TimestampsToReturn::Both);
+inline DataValue readDataValue(T& serverOrClient, const NodeId& id) {
+    return readAttribute(serverOrClient, id, AttributeId::Value, TimestampsToReturn::Both);
+}
+
+/// @copydoc readDataValue
+template <typename T>
+[[deprecated("No performance benefit to pass DataValue by reference, return by value instead"
+)]] inline void
+readDataValue(T& serverOrClient, const NodeId& id, DataValue& value) {
+    value = readDataValue(serverOrClient, id);
 }
 
 /**
@@ -193,9 +201,19 @@ inline void readDataValue(T& serverOrClient, const NodeId& id, DataValue& value)
  * @ingroup Attribute
  */
 template <typename T>
-inline void readValue(T& serverOrClient, const NodeId& id, Variant& value) {
+inline Variant readValue(T& serverOrClient, const NodeId& id) {
     DataValue dv = readAttribute(serverOrClient, id, AttributeId::Value);
-    value.swap(dv->value);
+    Variant var;
+    var.swap(dv->value);
+    return var;
+}
+
+/// @copydoc readValue
+template <typename T>
+[[deprecated("No performance benefit to pass Variant by reference, return by value instead."
+)]] inline void
+readValue(T& serverOrClient, const NodeId& id, Variant& value) {
+    value = readValue(serverOrClient, id);
 }
 
 /**

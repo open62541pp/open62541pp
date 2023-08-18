@@ -22,7 +22,7 @@ int main() {
     // Read custom variables
     opcua::Variant variant;
 
-    client.getNode({1, "Point"}).readValue(variant);
+    variant = client.getNode({1, "Point"}).readValue();
     if (variant.isType(dataTypePoint)) {
         const auto* p = static_cast<Point*>(variant.getScalar());
         std::cout << "Point:\n";
@@ -31,7 +31,7 @@ int main() {
         std::cout << "- z = " << p->z << "\n";
     }
 
-    client.getNode({1, "PointVec"}).readValue(variant);
+    variant = client.getNode({1, "PointVec"}).readValue();
     // Variants store non-builtin data types as ExtensionObjects. If the data type is known to the
     // client/server, open62541 unwraps scalar objects transparently in the encoding layer:
     // https://www.open62541.org/doc/master/types.html#variant
@@ -49,7 +49,7 @@ int main() {
         }
     }
 
-    client.getNode({1, "Measurements"}).readValue(variant);
+    variant = client.getNode({1, "Measurements"}).readValue();
     if (variant.isType(dataTypeMeasurements)) {
         const auto* m = static_cast<Measurements*>(variant.getScalar());
         std::cout << "Measurements:\n";
@@ -59,7 +59,7 @@ int main() {
         }
     }
 
-    client.getNode({1, "Opt"}).readValue(variant);
+    variant = client.getNode({1, "Opt"}).readValue();
     auto formatOptional = [](const auto* ptr) {
         return ptr == nullptr ? "NULL" : std::to_string(*ptr);
     };
@@ -71,7 +71,7 @@ int main() {
         std::cout << "- c = " << formatOptional(opt->c) << "\n";
     }
 
-    client.getNode({1, "Uni"}).readValue(variant);
+    variant = client.getNode({1, "Uni"}).readValue();
     if (variant.isType(dataTypeUni)) {
         const auto* uni = static_cast<Uni*>(variant.getScalar());
         std::cout << "Uni:\n";

@@ -349,9 +349,8 @@ bool Client::isConnected() noexcept {
 }
 
 std::vector<std::string> Client::getNamespaceArray() {
-    Variant variant;
-    services::readValue(*this, {0, UA_NS0ID_SERVER_NAMESPACEARRAY}, variant);
-    return variant.getArrayCopy<std::string>();
+    return services::readValue(*this, {0, UA_NS0ID_SERVER_NAMESPACEARRAY})
+        .getArrayCopy<std::string>();
 }
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
