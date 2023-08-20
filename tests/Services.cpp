@@ -70,7 +70,7 @@ TEST_CASE("NodeManagement service set (server & client)") {
             CHECK(services::readNodeClass(server, {1, 1000}) == NodeClass::View);
         }
 
-        SUBCASE("Add reference") {
+        SUBCASE("Add/delete reference") {
             services::addFolder(serverOrClient, objectsId, {1, 1000}, "folder");
             services::addObject(serverOrClient, objectsId, {1, 1001}, "object");
             services::addReference(
@@ -82,6 +82,9 @@ TEST_CASE("NodeManagement service set (server & client)") {
                 ),
                 "BadDuplicateReferenceNotAllowed"
             );
+            CHECK_NOTHROW(services::deleteReference(
+                serverOrClient, {1, 1000}, {1, 1001}, ReferenceTypeId::Organizes, true, true
+            ));
         }
 
         SUBCASE("Delete node") {
