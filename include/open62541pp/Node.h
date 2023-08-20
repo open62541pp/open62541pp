@@ -376,6 +376,10 @@ public:
         return services::readMinimumSamplingInterval(connection_, nodeId_);
     }
 
+    /// Read the value of an object property.
+    /// @param propertyName Browse name of the property (variable node)
+    Variant readObjectProperty(const QualifiedName& propertyName);
+
     /// @copydoc services::writeDisplayName
     /// @return Current node instance to chain multiple methods (fluent interface)
     Node& writeDisplayName(const LocalizedText& name) {
@@ -536,6 +540,12 @@ public:
         services::writeMinimumSamplingInterval(connection_, nodeId_, milliseconds);
         return *this;
     }
+
+    /// Write the value of an object property.
+    /// @param propertyName Browse name of the property (variable node)
+    /// @param value New value
+    /// @return Current node instance to chain multiple methods (fluent interface)
+    Node& writeObjectProperty(const QualifiedName& propertyName, const Variant& value);
 
 private:
     ServerOrClient& connection_;

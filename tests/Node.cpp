@@ -210,6 +210,23 @@ TEST_CASE("Node") {
             }
         }
 
+        SUBCASE("Read/write object property") {
+            auto node = objNode.addObject({1, 1000}, "Object");
+            node.addProperty(
+                {1, 1001},
+                "Property",
+                VariableAttributes{}
+                    .setWriteMask(0xFFFFFFFF)
+                    .setAccessLevel(0xFF)
+                    .setDataType<double>()
+                    .setValueScalar(11.11)
+            );
+
+            CHECK(node.readObjectProperty({1, "Property"}).template getScalar<double>() == 11.11);
+            CHECK_NOTHROW(node.writeObjectProperty({1, "Property"}, Variant::fromScalar(22.22)));
+            CHECK(node.readObjectProperty({1, "Property"}).template getScalar<double>() == 22.22);
+        }
+
         SUBCASE("Equality") {
             CHECK(rootNode == rootNode);
             CHECK(rootNode != objNode);
