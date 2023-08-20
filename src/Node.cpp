@@ -77,6 +77,33 @@ Node<T> Node<T>::browseParent() {
     return nodes[0];
 }
 
+template <typename T>
+static Node<T> browseObjectProperty(Node<T>& objectNode, const QualifiedName& propertyName) {
+    const BrowsePath bp(
+        objectNode.getNodeId(), {{ReferenceTypeId::HasProperty, false, true, propertyName}}
+    );
+    const auto result = services::translateBrowsePathToNodeIds(objectNode.getConnection(), bp);
+    result.getStatusCode().throwIfBad();
+    for (auto&& target : result.getTargets()) {
+        const auto id = target.getTargetId();
+        if (id.isLocal()) {
+            return {objectNode.getConnection(), id.getNodeId()};
+        }
+    }
+    throw BadStatus(UA_STATUSCODE_BADNOTFOUND);
+}
+
+template <typename T>
+Variant Node<T>::readObjectProperty(const QualifiedName& propertyName) {
+    return browseObjectProperty(*this, propertyName).readValue();
+}
+
+template <typename T>
+Node<T>& Node<T>::writeObjectProperty(const QualifiedName& propertyName, const Variant& value) {
+    browseObjectProperty(*this, propertyName).writeValue(value);
+    return *this;
+}
+
 /* ---------------------------------------------------------------------------------------------- */
 
 // explicit template instantiation
