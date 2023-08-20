@@ -249,6 +249,19 @@ inline void addModellingRule(T& serverOrClient, const NodeId& id, ModellingRule 
 template <typename T>
 void deleteNode(T& serverOrClient, const NodeId& id, bool deleteReferences = true);
 
-// TODO: deleteReferences
+/**
+ * Delete reference.
+ * @exception BadStatus
+ * @ingroup NodeManagement
+ */
+template <typename T>
+void deleteReference(
+    T& serverOrClient,
+    const NodeId& sourceId,
+    const NodeId& targetId,
+    const NodeId& referenceType,
+    bool isForward,
+    bool deleteBidirectional
+);
 
 }  // namespace opcua::services

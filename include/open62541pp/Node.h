@@ -208,6 +208,20 @@ public:
         services::deleteNode(connection_, nodeId_, deleteReferences);
     }
 
+    /// @copydoc services::deleteReference
+    /// @return Current node instance to chain multiple methods (fluent interface)
+    Node& deleteReference(
+        const NodeId& targetId,
+        const NodeId& referenceType,
+        bool isForward,
+        bool deleteBidirectional
+    ) {
+        services::deleteReference(
+            connection_, nodeId_, targetId, referenceType, isForward, deleteBidirectional
+        );
+        return *this;
+    }
+
     /// Browse references.
     std::vector<ReferenceDescription> browseReferences(
         BrowseDirection browseDirection = BrowseDirection::Both,
