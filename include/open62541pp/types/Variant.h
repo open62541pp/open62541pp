@@ -27,7 +27,7 @@ class NodeId;
 class Variant : public TypeWrapper<UA_Variant, UA_TYPES_VARIANT> {
 private:
     template <typename T>
-    using EnableIfNoArrayView = typename std::enable_if_t<!detail::IsSpan<T>::value>;
+    using EnableIfNoSpan = typename std::enable_if_t<!detail::IsSpan<T>::value>;
 
 public:
     // NOLINTNEXTLINE, false positive?
@@ -66,13 +66,13 @@ public:
     [[nodiscard]] static Variant fromArray(Span<const T> array, const UA_DataType& dataType);
 
     /// @overload
-    template <typename ArrayLike, typename = EnableIfNoArrayView<ArrayLike>>
+    template <typename ArrayLike, typename = EnableIfNoSpan<ArrayLike>>
     [[nodiscard]] static Variant fromArray(ArrayLike&& array) {
         return Variant::fromArray(Span{std::forward<ArrayLike>(array)});
     }
 
     /// @overload
-    template <typename ArrayLike, typename = EnableIfNoArrayView<ArrayLike>>
+    template <typename ArrayLike, typename = EnableIfNoSpan<ArrayLike>>
     [[nodiscard]] static Variant fromArray(ArrayLike&& array, const UA_DataType& dataType) {
         return Variant::fromArray(Span{std::forward<ArrayLike>(array)}, dataType);
     }
@@ -176,7 +176,7 @@ public:
     void setArray(Span<T> array) noexcept;
 
     /// @overload
-    template <typename ArrayLike, typename = EnableIfNoArrayView<ArrayLike>>
+    template <typename ArrayLike, typename = EnableIfNoSpan<ArrayLike>>
     void setArray(ArrayLike&& array) noexcept {
         setArray(Span{std::forward<ArrayLike>(array)});
     }
@@ -186,7 +186,7 @@ public:
     void setArray(Span<T> array, const UA_DataType& dataType) noexcept;
 
     /// @overload
-    template <typename ArrayLike, typename = EnableIfNoArrayView<ArrayLike>>
+    template <typename ArrayLike, typename = EnableIfNoSpan<ArrayLike>>
     void setArray(ArrayLike&& array, const UA_DataType& dataType) noexcept {
         setArray(Span{std::forward<ArrayLike>(array)}, dataType);
     }
@@ -196,7 +196,7 @@ public:
     void setArrayCopy(Span<T> array);
 
     /// @overload
-    template <typename ArrayLike, typename = EnableIfNoArrayView<ArrayLike>>
+    template <typename ArrayLike, typename = EnableIfNoSpan<ArrayLike>>
     void setArrayCopy(ArrayLike&& array) noexcept {
         setArrayCopy(Span{std::forward<ArrayLike>(array)});
     }
@@ -206,7 +206,7 @@ public:
     void setArrayCopy(Span<T> array, const UA_DataType& dataType);
 
     /// @overload
-    template <typename ArrayLike, typename = EnableIfNoArrayView<ArrayLike>>
+    template <typename ArrayLike, typename = EnableIfNoSpan<ArrayLike>>
     void setArrayCopy(ArrayLike&& array, const UA_DataType& dataType) noexcept {
         setArrayCopy(Span{std::forward<ArrayLike>(array)}, dataType);
     }
