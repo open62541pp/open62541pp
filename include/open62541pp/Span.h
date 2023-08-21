@@ -211,10 +211,10 @@ Span(const Container&) -> Span<const typename Container::value_type>;
 namespace detail {
 
 template <typename>
-struct IsArrayView : std::false_type {};
+struct IsSpan : std::false_type {};
 
 template <typename T>
-struct IsArrayView<Span<T>> : std::true_type {};
+struct IsSpan<Span<T>> : std::true_type {};
 
 }  // namespace detail
 

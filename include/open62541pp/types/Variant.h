@@ -27,7 +27,7 @@ class NodeId;
 class Variant : public TypeWrapper<UA_Variant, UA_TYPES_VARIANT> {
 private:
     template <typename T>
-    using EnableIfNoArrayView = typename std::enable_if_t<!detail::IsArrayView<T>::value>;
+    using EnableIfNoArrayView = typename std::enable_if_t<!detail::IsSpan<T>::value>;
 
 public:
     // NOLINTNEXTLINE, false positive?
