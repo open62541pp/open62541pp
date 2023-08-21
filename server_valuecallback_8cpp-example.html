@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.7.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.8.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -88,7 +88,7 @@ $(function() {
 <div class="line">            .writeDisplayName({<span class="stringliteral">&quot;en-US&quot;</span>, <span class="stringliteral">&quot;Current time&quot;</span>})</div>
 <div class="line">            .writeDescription({<span class="stringliteral">&quot;en-US&quot;</span>, <span class="stringliteral">&quot;Current time&quot;</span>})</div>
 <div class="line">            .writeDataType&lt;opcua::DateTime&gt;()</div>
-<div class="line">            .writeScalar(<a id="a3" name="a3"></a><a class="code hl_function" href="classopcua_1_1DateTime.html#a18b5241e57fe24c2ac88661fed11ba8b">opcua::DateTime::now</a>());</div>
+<div class="line">            .writeValueScalar(<a id="a3" name="a3"></a><a class="code hl_function" href="classopcua_1_1DateTime.html#a18b5241e57fe24c2ac88661fed11ba8b">opcua::DateTime::now</a>());</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// set variable value callback to write current time before every read operation</span></div>
 <div class="line">    <a id="_a4" name="_a4"></a><a class="code hl_struct" href="structopcua_1_1ValueCallback.html">opcua::ValueCallback</a> valueCallback;</div>
@@ -97,7 +97,7 @@ $(function() {
 <div class="line">        <span class="keyword">const</span> <span class="keyword">auto</span> timeNow = <a class="code hl_function" href="classopcua_1_1DateTime.html#a18b5241e57fe24c2ac88661fed11ba8b">opcua::DateTime::now</a>();</div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;Time before read: &quot;</span> &lt;&lt; timeOld.format(<span class="stringliteral">&quot;%Y-%m-%d %H:%M:%S&quot;</span>) &lt;&lt; std::endl;</div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;Set current time: &quot;</span> &lt;&lt; timeNow.<a id="a8" name="a8"></a><a class="code hl_function" href="classopcua_1_1DateTime.html#adc058b53ee4123c5ea3be4bba633cb2a">format</a>(<span class="stringliteral">&quot;%Y-%m-%d %H:%M:%S&quot;</span>) &lt;&lt; std::endl;</div>
-<div class="line">        currentTimeNode.writeScalar(timeNow);</div>
+<div class="line">        currentTimeNode.writeValueScalar(timeNow);</div>
 <div class="line">    };</div>
 <div class="line">    server.<a id="a9" name="a9"></a><a class="code hl_function" href="classopcua_1_1Server.html#aa4f006cd9e70844e32b40251ce596cea">setVariableNodeValueCallback</a>(currentTimeId, valueCallback);</div>
 <div class="line"> </div>

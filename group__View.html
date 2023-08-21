@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.7.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.8.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -93,6 +93,8 @@ Functions</h2></td></tr>
 <tr class="memitem:ga6d317eefc3363365241f630bc076c325"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ga6d317eefc3363365241f630bc076c325"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classopcua_1_1ReferenceDescription.html">ReferenceDescription</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__View.html#ga6d317eefc3363365241f630bc076c325">opcua::services::browseAll</a> (T &amp;serverOrClient, const <a class="el" href="classopcua_1_1BrowseDescription.html">BrowseDescription</a> &amp;bd, uint32_t maxReferences=0)</td></tr>
 <tr class="separator:ga6d317eefc3363365241f630bc076c325"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga49caa5e69ae7473b90896b9e1dbba424"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classopcua_1_1ExpandedNodeId.html">ExpandedNodeId</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__View.html#ga49caa5e69ae7473b90896b9e1dbba424">opcua::services::browseRecursive</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server, const <a class="el" href="classopcua_1_1BrowseDescription.html">BrowseDescription</a> &amp;bd)</td></tr>
+<tr class="separator:ga49caa5e69ae7473b90896b9e1dbba424"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga4362595d4b93ece9f5471164e2abc4dd"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ga4362595d4b93ece9f5471164e2abc4dd"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1BrowsePathResult.html">BrowsePathResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__View.html#ga4362595d4b93ece9f5471164e2abc4dd">opcua::services::translateBrowsePathToNodeIds</a> (T &amp;serverOrClient, const <a class="el" href="classopcua_1_1BrowsePath.html">BrowsePath</a> &amp;browsePath)</td></tr>
 <tr class="separator:ga4362595d4b93ece9f5471164e2abc4dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -241,6 +243,46 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.2">https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.2</a>   </dd></dl>
+
+</div>
+</div>
+<a id="ga49caa5e69ae7473b90896b9e1dbba424" name="ga49caa5e69ae7473b90896b9e1dbba424"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga49caa5e69ae7473b90896b9e1dbba424">&#9670;&#160;</a></span>browseRecursive()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="classopcua_1_1ExpandedNodeId.html">ExpandedNodeId</a> &gt; opcua::services::browseRecursive </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Server.html">Server</a> &amp;&#160;</td>
+          <td class="paramname"><em>server</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1BrowseDescription.html">BrowseDescription</a> &amp;&#160;</td>
+          <td class="paramname"><em>bd</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Discover child nodes recursively (non-standard). </p>
+<p>Possible loops (that can occur for non-hierarchical references) are handled internally. Every node is added at most once to the results array. Nodes are only added if they match the <code>nodeClassMask</code> in the <a class="el" href="classopcua_1_1BrowseDescription.html" title="UA_BrowseDescription wrapper class.">BrowseDescription</a>. However, child nodes are still recursed into if the NodeClass does not match. So it is possible, for example, to get all VariableNodes below a certain ObjectNode, with additional objects in the hierarchy below.</p>
+<dl class="section note"><dt>Note</dt><dd>No implementation for <code><a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a></code>.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">server</td><td>Instance of type <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a> </td></tr>
+    <tr><td class="paramname">bd</td><td>Browse description </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section see"><dt>See also</dt><dd><a class="elRef" target="_blank" href="open62541/server_8h.html#abd91488c4120e25e8bfe0ecb67ef7487">UA_Server_browseRecursive</a> </dd></dl>
 
 </div>
 </div>

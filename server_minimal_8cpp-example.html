@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.7.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.8.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -86,14 +86,14 @@ $(function() {
 <div class="line">    myIntegerNode.<a id="a4" name="a4"></a><a class="code hl_function" href="classopcua_1_1Node.html#a717073a3865bd95a3ab6ed9cec7be6d7">writeDataType</a>(<a id="a5" name="a5"></a><a class="code hl_enumvalue" href="namespaceopcua.html#a83669427d4f4639c57ec0b499c5fdc10ac06129f6e6e15c09328365e553f1dc31">opcua::Type::Int32</a>)</div>
 <div class="line">        .<a id="a6" name="a6"></a><a class="code hl_function" href="classopcua_1_1Node.html#a5a700d1fd37fb563652d712c6da61de9">writeDisplayName</a>({<span class="stringliteral">&quot;en-US&quot;</span>, <span class="stringliteral">&quot;the answer&quot;</span>})</div>
 <div class="line">        .writeDescription({<span class="stringliteral">&quot;en-US&quot;</span>, <span class="stringliteral">&quot;the answer&quot;</span>})</div>
-<div class="line">        .writeScalar(42);</div>
+<div class="line">        .writeValueScalar(42);</div>
 <div class="line"> </div>
 <div class="line">    server.<a id="a7" name="a7"></a><a class="code hl_function" href="classopcua_1_1Server.html#a7346a714c85e2d99fc8bc9fd1dd31d6d">run</a>();</div>
 <div class="line">}</div>
 <div class="ttc" id="aclassopcua_1_1Node_html"><div class="ttname"><a href="classopcua_1_1Node.html">opcua::Node</a></div><div class="ttdoc">High-level node class to access node attribute, browse and populate address space.</div><div class="ttdef"><b>Definition</b> <a href="Node_8h_source.html#l00034">Node.h:34</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Node_html_a475744803b5460be83062d92326bff75"><div class="ttname"><a href="classopcua_1_1Node.html#a475744803b5460be83062d92326bff75">opcua::Node::addVariable</a></div><div class="ttdeci">Node addVariable(const NodeId &amp;id, std::string_view browseName, const VariableAttributes &amp;attributes={}, const NodeId &amp;variableType=VariableTypeId::BaseDataVariableType, const NodeId &amp;referenceType=ReferenceTypeId::HasComponent)</div><div class="ttdoc">Add variable.</div><div class="ttdef"><b>Definition</b> <a href="Node_8h_source.html#l00087">Node.h:87</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Node_html_a5a700d1fd37fb563652d712c6da61de9"><div class="ttname"><a href="classopcua_1_1Node.html#a5a700d1fd37fb563652d712c6da61de9">opcua::Node::writeDisplayName</a></div><div class="ttdeci">Node &amp; writeDisplayName(const LocalizedText &amp;name)</div><div class="ttdoc">Write the DisplayName attribute of a node.</div><div class="ttdef"><b>Definition</b> <a href="Node_8h_source.html#l00359">Node.h:359</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Node_html_a717073a3865bd95a3ab6ed9cec7be6d7"><div class="ttname"><a href="classopcua_1_1Node.html#a717073a3865bd95a3ab6ed9cec7be6d7">opcua::Node::writeDataType</a></div><div class="ttdeci">Node &amp; writeDataType(const NodeId &amp;typeId)</div><div class="ttdoc">Write the DataType attribute of a variable (type) node.</div><div class="ttdef"><b>Definition</b> <a href="Node_8h_source.html#l00459">Node.h:459</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Node_html_a5a700d1fd37fb563652d712c6da61de9"><div class="ttname"><a href="classopcua_1_1Node.html#a5a700d1fd37fb563652d712c6da61de9">opcua::Node::writeDisplayName</a></div><div class="ttdeci">Node &amp; writeDisplayName(const LocalizedText &amp;name)</div><div class="ttdoc">Write the DisplayName attribute of a node.</div><div class="ttdef"><b>Definition</b> <a href="Node_8h_source.html#l00399">Node.h:399</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Node_html_a717073a3865bd95a3ab6ed9cec7be6d7"><div class="ttname"><a href="classopcua_1_1Node.html#a717073a3865bd95a3ab6ed9cec7be6d7">opcua::Node::writeDataType</a></div><div class="ttdeci">Node &amp; writeDataType(const NodeId &amp;typeId)</div><div class="ttdoc">Write the DataType attribute of a variable (type) node.</div><div class="ttdef"><b>Definition</b> <a href="Node_8h_source.html#l00510">Node.h:510</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Server_html"><div class="ttname"><a href="classopcua_1_1Server.html">opcua::Server</a></div><div class="ttdoc">High-level server class.</div><div class="ttdef"><b>Definition</b> <a href="Server_8h_source.html#l00034">Server.h:34</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Server_html_a2f0b2aea96301c20affba76c6e441492"><div class="ttname"><a href="classopcua_1_1Server.html#a2f0b2aea96301c20affba76c6e441492">opcua::Server::getObjectsNode</a></div><div class="ttdeci">Node&lt; Server &gt; getObjectsNode()</div></div>
 <div class="ttc" id="aclassopcua_1_1Server_html_a7346a714c85e2d99fc8bc9fd1dd31d6d"><div class="ttname"><a href="classopcua_1_1Server.html#a7346a714c85e2d99fc8bc9fd1dd31d6d">opcua::Server::run</a></div><div class="ttdeci">void run()</div><div class="ttdoc">Run the server's main loop. This method will block until Server::stop is called.</div></div>

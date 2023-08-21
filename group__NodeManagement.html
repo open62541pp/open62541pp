@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.7.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.8.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -129,6 +129,9 @@ Functions</h2></td></tr>
 <tr class="memitem:gab4857bb65ada82b0a6c1f14325904a63"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:gab4857bb65ada82b0a6c1f14325904a63"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__NodeManagement.html#gab4857bb65ada82b0a6c1f14325904a63">opcua::services::deleteNode</a> (T &amp;serverOrClient, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, bool deleteReferences=true)</td></tr>
 <tr class="separator:gab4857bb65ada82b0a6c1f14325904a63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae5d75d8d4a15e4345460fd4ac8731ad0"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:gae5d75d8d4a15e4345460fd4ac8731ad0"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__NodeManagement.html#gae5d75d8d4a15e4345460fd4ac8731ad0">opcua::services::deleteReference</a> (T &amp;serverOrClient, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;sourceId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;targetId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;referenceType, bool isForward, bool deleteBidirectional)</td></tr>
+<tr class="separator:gae5d75d8d4a15e4345460fd4ac8731ad0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Add/delete nodes and references. </p>
@@ -979,6 +982,70 @@ template&lt;typename T &gt; </div>
 </dl>
 
 <p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00207">opcua::Node&lt; ServerOrClient &gt;::deleteNode()</a>.</p>
+
+</div>
+</div>
+<a id="gae5d75d8d4a15e4345460fd4ac8731ad0" name="gae5d75d8d4a15e4345460fd4ac8731ad0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae5d75d8d4a15e4345460fd4ac8731ad0">&#9670;&#160;</a></span>deleteReference()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void opcua::services::deleteReference </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&#160;</td>
+          <td class="paramname"><em>serverOrClient</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>sourceId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>targetId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>referenceType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isForward</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>deleteBidirectional</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Delete reference. </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html" title="Exception for bad status codes from open62541 UA_STATUSCODE_*.">BadStatus</a></td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00213">opcua::Node&lt; ServerOrClient &gt;::deleteReference()</a>.</p>
 
 </div>
 </div>

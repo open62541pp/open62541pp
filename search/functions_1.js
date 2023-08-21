@@ -10,9 +10,10 @@ var searchData=
   ['browsenext_7',['browseNext',['../group__View.html#gaab0c3d3008133ccbde6f9c973e0dc29a',1,'opcua::services']]],
   ['browseparent_8',['browseParent',['../classopcua_1_1Node.html#a74f9cb68814d444ae603524b21b640e0',1,'opcua::Node']]],
   ['browsepath_9',['BrowsePath',['../classopcua_1_1BrowsePath.html#ae58f70065ed40a8fec6520c491c1b997',1,'opcua::BrowsePath']]],
-  ['browsereferencednodes_10',['browseReferencedNodes',['../classopcua_1_1Node.html#ac92e7b010286789156bb91fe628735e7',1,'opcua::Node']]],
-  ['browsereferences_11',['browseReferences',['../classopcua_1_1Node.html#ac77a95e7e2480495b3d825edad61c125',1,'opcua::Node']]],
-  ['browsesimplifiedbrowsepath_12',['browseSimplifiedBrowsePath',['../group__View.html#ga881816279700702618773d9cb2568f2e',1,'opcua::services']]],
-  ['build_13',['build',['../classopcua_1_1DataTypeBuilder.html#a8e7026016bcec34d0e2b53b76875fe77',1,'opcua::DataTypeBuilder']]],
-  ['bytestring_14',['ByteString',['../classopcua_1_1ByteString.html#a70f01be183a1da6ca80d4d6eddad65df',1,'opcua::ByteString::ByteString(std::string_view str)'],['../classopcua_1_1ByteString.html#a6ff43a288b6dc2c4896cbbdd0eca9d6b',1,'opcua::ByteString::ByteString(const std::vector&lt; uint8_t &gt; &amp;bytes)']]]
+  ['browserecursive_10',['browseRecursive',['../group__View.html#ga49caa5e69ae7473b90896b9e1dbba424',1,'opcua::services']]],
+  ['browsereferencednodes_11',['browseReferencedNodes',['../classopcua_1_1Node.html#ac92e7b010286789156bb91fe628735e7',1,'opcua::Node']]],
+  ['browsereferences_12',['browseReferences',['../classopcua_1_1Node.html#ac77a95e7e2480495b3d825edad61c125',1,'opcua::Node']]],
+  ['browsesimplifiedbrowsepath_13',['browseSimplifiedBrowsePath',['../group__View.html#ga881816279700702618773d9cb2568f2e',1,'opcua::services']]],
+  ['build_14',['build',['../classopcua_1_1DataTypeBuilder.html#a8e7026016bcec34d0e2b53b76875fe77',1,'opcua::DataTypeBuilder']]],
+  ['bytestring_15',['ByteString',['../classopcua_1_1ByteString.html#a6ff43a288b6dc2c4896cbbdd0eca9d6b',1,'opcua::ByteString::ByteString(const std::vector&lt; uint8_t &gt; &amp;bytes)'],['../classopcua_1_1ByteString.html#a70f01be183a1da6ca80d4d6eddad65df',1,'opcua::ByteString::ByteString(std::string_view str)']]]
 ];

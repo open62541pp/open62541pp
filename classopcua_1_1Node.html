@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.7.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.8.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -120,6 +120,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af6835e539c1630c5ebaf3f1df668edd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f3f59979c66c52e54b26bd2af34a92c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a4f3f59979c66c52e54b26bd2af34a92c">deleteNode</a> (bool deleteReferences=true)</td></tr>
 <tr class="separator:a4f3f59979c66c52e54b26bd2af34a92c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0642dfaca40323486ddb50989a24041f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a0642dfaca40323486ddb50989a24041f">deleteReference</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;targetId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;referenceType, bool isForward, bool deleteBidirectional)</td></tr>
+<tr class="separator:a0642dfaca40323486ddb50989a24041f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac77a95e7e2480495b3d825edad61c125"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classopcua_1_1ReferenceDescription.html">ReferenceDescription</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#ac77a95e7e2480495b3d825edad61c125">browseReferences</a> (<a class="el" href="namespaceopcua.html#a2d01a00b56739c335fc3c57deb05c02c">BrowseDirection</a> browseDirection=<a class="el" href="namespaceopcua.html#a2d01a00b56739c335fc3c57deb05c02ca130c5b3473c57faa76e2a1c54e26f88e">BrowseDirection::Both</a>, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;referenceType=<a class="el" href="group__NodeIds.html#ggac0d1520cbf625748c86c5c75943242c9ad95867deadfe690e40f42068d6b59df8">ReferenceTypeId::References</a>, bool includeSubtypes=true, uint32_t nodeClassMask=<a class="elRef" target="_blank" href="open62541/types__generated_8h.html#adf98bb5a5ac8e50eece68338a046a904abef631a9e3bd8c4131488d08452f12dc">UA_NODECLASS_UNSPECIFIED</a>)</td></tr>
 <tr class="separator:ac77a95e7e2480495b3d825edad61c125"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac92e7b010286789156bb91fe628735e7"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classopcua_1_1Node.html">Node</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#ac92e7b010286789156bb91fe628735e7">browseReferencedNodes</a> (<a class="el" href="namespaceopcua.html#a2d01a00b56739c335fc3c57deb05c02c">BrowseDirection</a> browseDirection=<a class="el" href="namespaceopcua.html#a2d01a00b56739c335fc3c57deb05c02ca130c5b3473c57faa76e2a1c54e26f88e">BrowseDirection::Both</a>, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;referenceType=<a class="el" href="group__NodeIds.html#ggac0d1520cbf625748c86c5c75943242c9ad95867deadfe690e40f42068d6b59df8">ReferenceTypeId::References</a>, bool includeSubtypes=true, uint32_t nodeClassMask=<a class="elRef" target="_blank" href="open62541/types__generated_8h.html#adf98bb5a5ac8e50eece68338a046a904abef631a9e3bd8c4131488d08452f12dc">UA_NODECLASS_UNSPECIFIED</a>)</td></tr>
@@ -150,13 +152,23 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a25a0dfca391ca1693257f4afe0742663"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a68b37681118b057287929c829796b145"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a68b37681118b057287929c829796b145">readInverseName</a> ()</td></tr>
 <tr class="separator:a68b37681118b057287929c829796b145"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb4159c7aa5e250297255a8cc4bd2614"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1DataValue.html">DataValue</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#abb4159c7aa5e250297255a8cc4bd2614">readDataValue</a> ()</td></tr>
+<tr class="separator:abb4159c7aa5e250297255a8cc4bd2614"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5225a58418d8d36d97beab31811487b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#ae5225a58418d8d36d97beab31811487b">readDataValue</a> (<a class="el" href="classopcua_1_1DataValue.html">DataValue</a> &amp;value)</td></tr>
 <tr class="separator:ae5225a58418d8d36d97beab31811487b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3d92f3acff1eba128da232f51598858"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Variant.html">Variant</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#af3d92f3acff1eba128da232f51598858">readValue</a> ()</td></tr>
+<tr class="separator:af3d92f3acff1eba128da232f51598858"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52e334e9ad22f6d8c605cf7748b2f96f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a52e334e9ad22f6d8c605cf7748b2f96f">readValue</a> (<a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;value)</td></tr>
 <tr class="separator:a52e334e9ad22f6d8c605cf7748b2f96f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdbbefd6dd9ac0d96a4c22a71a6d643a"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:abdbbefd6dd9ac0d96a4c22a71a6d643a"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#abdbbefd6dd9ac0d96a4c22a71a6d643a">readValueScalar</a> ()</td></tr>
+<tr class="separator:abdbbefd6dd9ac0d96a4c22a71a6d643a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3a500a359bd17292d093ab6b2090822"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ac3a500a359bd17292d093ab6b2090822"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#ac3a500a359bd17292d093ab6b2090822">readScalar</a> ()</td></tr>
 <tr class="separator:ac3a500a359bd17292d093ab6b2090822"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93f1f1816000950c00c562ce889b331d"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a93f1f1816000950c00c562ce889b331d"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a93f1f1816000950c00c562ce889b331d">readValueArray</a> ()</td></tr>
+<tr class="separator:a93f1f1816000950c00c562ce889b331d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aace7116c9f0f5832c02d3b9b79e9d847"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:aace7116c9f0f5832c02d3b9b79e9d847"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#aace7116c9f0f5832c02d3b9b79e9d847">readArray</a> ()</td></tr>
 <tr class="separator:aace7116c9f0f5832c02d3b9b79e9d847"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -172,6 +184,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa67f2538e50deeb12ae02c2914c7186b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a863f9c531c77b0b317973df0108c2430"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a863f9c531c77b0b317973df0108c2430">readMinimumSamplingInterval</a> ()</td></tr>
 <tr class="separator:a863f9c531c77b0b317973df0108c2430"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f85a1083deb86c5c530fc8fe00ea047"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Variant.html">Variant</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a2f85a1083deb86c5c530fc8fe00ea047">readObjectProperty</a> (const <a class="el" href="classopcua_1_1QualifiedName.html">QualifiedName</a> &amp;propertyName)</td></tr>
+<tr class="separator:a2f85a1083deb86c5c530fc8fe00ea047"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a700d1fd37fb563652d712c6da61de9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a5a700d1fd37fb563652d712c6da61de9">writeDisplayName</a> (const <a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a> &amp;name)</td></tr>
 <tr class="separator:a5a700d1fd37fb563652d712c6da61de9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a432f4f290721ff46b2192b49ba0ce590"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a432f4f290721ff46b2192b49ba0ce590">writeDescription</a> (const <a class="el" href="classopcua_1_1LocalizedText.html">LocalizedText</a> &amp;desc)</td></tr>
@@ -190,18 +204,24 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9408e064d05a61c4455f0d7d51a11635"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a066737566a478f7ff91c9143fdad595f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a066737566a478f7ff91c9143fdad595f">writeValue</a> (const <a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;value)</td></tr>
 <tr class="separator:a066737566a478f7ff91c9143fdad595f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8d0c6ca98627ce952cd185bc4ef1126"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ae8d0c6ca98627ce952cd185bc4ef1126"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#ae8d0c6ca98627ce952cd185bc4ef1126">writeValueScalar</a> (const T &amp;value)</td></tr>
+<tr class="separator:ae8d0c6ca98627ce952cd185bc4ef1126"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d0832ac059e08f53af0f09719b40406"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a1d0832ac059e08f53af0f09719b40406"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a1d0832ac059e08f53af0f09719b40406">writeScalar</a> (const T &amp;value)</td></tr>
 <tr class="separator:a1d0832ac059e08f53af0f09719b40406"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a16f391d5391a1686fde9bdd946139000"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:a16f391d5391a1686fde9bdd946139000"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a16f391d5391a1686fde9bdd946139000">writeArray</a> (const T *array, size_t size)</td></tr>
-<tr class="separator:a16f391d5391a1686fde9bdd946139000"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1715cd37e4fe5f5319fa65913be51c8"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ad1715cd37e4fe5f5319fa65913be51c8"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#ad1715cd37e4fe5f5319fa65913be51c8">writeArray</a> (const std::vector&lt; T &gt; &amp;array)</td></tr>
-<tr class="separator:ad1715cd37e4fe5f5319fa65913be51c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afadfcd7401e73f88beeba66256db4d1a"><td class="memTemplParams" colspan="2">template&lt;typename InputIt &gt; </td></tr>
-<tr class="memitem:afadfcd7401e73f88beeba66256db4d1a"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#afadfcd7401e73f88beeba66256db4d1a">writeArray</a> (InputIt first, InputIt last)</td></tr>
-<tr class="separator:afadfcd7401e73f88beeba66256db4d1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3a36fb0d17db212762b1d1362ceb316"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ab3a36fb0d17db212762b1d1362ceb316"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#ab3a36fb0d17db212762b1d1362ceb316">writeValueArray</a> (const T *array, size_t size)</td></tr>
+<tr class="separator:ab3a36fb0d17db212762b1d1362ceb316"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5c5bb9d4fe0bf7ed846f1a3d38cc30a"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:af5c5bb9d4fe0bf7ed846f1a3d38cc30a"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#af5c5bb9d4fe0bf7ed846f1a3d38cc30a">writeValueArray</a> (const std::vector&lt; T &gt; &amp;array)</td></tr>
+<tr class="separator:af5c5bb9d4fe0bf7ed846f1a3d38cc30a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c505c31f4d589a7e5d414dcba82d054"><td class="memTemplParams" colspan="2">template&lt;typename InputIt &gt; </td></tr>
+<tr class="memitem:a9c505c31f4d589a7e5d414dcba82d054"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a9c505c31f4d589a7e5d414dcba82d054">writeValueArray</a> (InputIt first, InputIt last)</td></tr>
+<tr class="separator:a9c505c31f4d589a7e5d414dcba82d054"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab61cc12458b599778eb1762b786b04a2"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:ab61cc12458b599778eb1762b786b04a2"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a> &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#ab61cc12458b599778eb1762b786b04a2">writeArray</a> (Args &amp;&amp;... <a class="elRef" target="_blank" href="open62541/log_8h.html#a17b7d23b263b56363b9cd3364b529284">args</a>)</td></tr>
+<tr class="separator:ab61cc12458b599778eb1762b786b04a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a717073a3865bd95a3ab6ed9cec7be6d7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a717073a3865bd95a3ab6ed9cec7be6d7">writeDataType</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;typeId)</td></tr>
 <tr class="separator:a717073a3865bd95a3ab6ed9cec7be6d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a513868f4dce3e6ad6afa1eaeda3f13ac"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
@@ -217,6 +237,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa7c082e052f1943baef3eff6e4eb6468"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71a1a52e935254eb7a8580ef5556bf97"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a71a1a52e935254eb7a8580ef5556bf97">writeMinimumSamplingInterval</a> (double milliseconds)</td></tr>
 <tr class="separator:a71a1a52e935254eb7a8580ef5556bf97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fd1308cf88140fc3448d9cbcce34cb6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Node.html">Node</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1Node.html#a4fd1308cf88140fc3448d9cbcce34cb6">writeObjectProperty</a> (const <a class="el" href="classopcua_1_1QualifiedName.html">QualifiedName</a> &amp;propertyName, const <a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;value)</td></tr>
+<tr class="separator:a4fd1308cf88140fc3448d9cbcce34cb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename ServerOrClient&gt;<br />
@@ -1141,6 +1163,67 @@ template&lt;typename ServerOrClient &gt; </div>
 
 </div>
 </div>
+<a id="a0642dfaca40323486ddb50989a24041f" name="a0642dfaca40323486ddb50989a24041f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0642dfaca40323486ddb50989a24041f">&#9670;&#160;</a></span>deleteReference()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a> &amp; <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::deleteReference </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>targetId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td>
+          <td class="paramname"><em>referenceType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isForward</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>deleteBidirectional</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Delete reference.   </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="classopcua_1_1BadStatus.html" title="Exception for bad status codes from open62541 UA_STATUSCODE_*.">BadStatus</a></td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Current node instance to chain multiple methods (fluent interface) </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00213">213</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+
+</div>
+</div>
 <a id="ac77a95e7e2480495b3d825edad61c125" name="ac77a95e7e2480495b3d825edad61c125"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac77a95e7e2480495b3d825edad61c125">&#9670;&#160;</a></span>browseReferences()</h2>
 
@@ -1227,7 +1310,7 @@ template&lt;typename ServerOrClient &gt; </div>
 
 <p>Browse referenced nodes (only local nodes). </p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00228">opcua::Node&lt; ServerOrClient &gt;::browseChildren()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00242">opcua::Node&lt; ServerOrClient &gt;::browseChildren()</a>.</p>
 
 </div>
 </div>
@@ -1269,7 +1352,7 @@ template&lt;typename ServerOrClient &gt; </div>
 
 <p>Browse child nodes (only local nodes). </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00228">228</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00242">242</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -1373,7 +1456,7 @@ template&lt;typename ServerOrClient &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00249">249</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00263">263</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -1404,7 +1487,7 @@ template&lt;typename ServerOrClient &gt; </div>
 
 <p>Read the <code>NodeClass</code> attribute of a node.   </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00257">257</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00271">271</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -1436,7 +1519,7 @@ template&lt;typename ServerOrClient &gt; </div>
 <p>Read the <code>BrowseName</code> attribute of a node.   </p>
 <p>A non-localised human-readable name used to browse the address space. The browse name of a reference type must be unique in a server.   </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00262">262</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00276">276</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -1468,7 +1551,7 @@ template&lt;typename ServerOrClient &gt; </div>
 <p>Read the <code>DisplayName</code> attribute of a node.   </p>
 <p>Used to display the node to the user.   </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00267">267</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00281">281</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -1500,7 +1583,7 @@ template&lt;typename ServerOrClient &gt; </div>
 <p>Read the <code>Description</code> attribute of a node.   </p>
 <p>The description shall explain the meaning of the node.   </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00272">272</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00286">286</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -1532,7 +1615,7 @@ template&lt;typename ServerOrClient &gt; </div>
 <p>Read the <code>WriteMask</code> attribute of a node.   </p>
 <p>For example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#ada81db626738ee2eada8215ea9c5ca6f">UA_WRITEMASK_VALUEFORVARIABLETYPE</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a35003ddcccde5610e1c95ec92305398d">UA_WRITEMASK_VALUERANK</a></code>.   </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00277">277</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00291">291</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -1564,7 +1647,7 @@ template&lt;typename ServerOrClient &gt; </div>
 <p>Read the <code>UserWriteMask</code> attribute of a node.   </p>
 <p>For example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#ada81db626738ee2eada8215ea9c5ca6f">UA_WRITEMASK_VALUEFORVARIABLETYPE</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a35003ddcccde5610e1c95ec92305398d">UA_WRITEMASK_VALUERANK</a></code>.     In contrast to the write mask, the user write mask is taking access rights into account.   </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00282">282</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00296">296</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -1596,7 +1679,7 @@ template&lt;typename ServerOrClient &gt; </div>
 <p>Read the <code>IsAbtract</code> attribute of a reference type node.   </p>
 <p>If a reference is abstract, no reference of this type shall exist, only of its subtypes.   </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00287">287</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00301">301</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -1628,7 +1711,7 @@ template&lt;typename ServerOrClient &gt; </div>
 <p>Read the <code>Symmetric</code> attribute of a reference type node.   </p>
 <p>If a reference is symmetric it can seen from both the source and target node.   </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00292">292</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00306">306</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -1660,12 +1743,43 @@ template&lt;typename ServerOrClient &gt; </div>
 <p>Read the <code>InverseName</code> attribute of a reference type node.   </p>
 <p>The inverse name describes the reference type as seen from the target node. For example, the reference type <code>HasSubtype</code> has the inverse name <code>HasSupertype</code>.   </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00297">297</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00311">311</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+
+</div>
+</div>
+<a id="abb4159c7aa5e250297255a8cc4bd2614" name="abb4159c7aa5e250297255a8cc4bd2614"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb4159c7aa5e250297255a8cc4bd2614">&#9670;&#160;</a></span>readDataValue() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1DataValue.html">DataValue</a> <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::readDataValue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read the <code>Value</code> attribute of a variable node as a <a class="el" href="classopcua_1_1DataValue.html" title="UA_DataValue wrapper class.">DataValue</a> object.   </p>
+
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00316">316</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
 <a id="ae5225a58418d8d36d97beab31811487b" name="ae5225a58418d8d36d97beab31811487b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae5225a58418d8d36d97beab31811487b">&#9670;&#160;</a></span>readDataValue()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5225a58418d8d36d97beab31811487b">&#9670;&#160;</a></span>readDataValue() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1692,12 +1806,45 @@ template&lt;typename ServerOrClient &gt; </div>
 
 <p>Read the <code>Value</code> attribute of a variable node as a <a class="el" href="classopcua_1_1DataValue.html" title="UA_DataValue wrapper class.">DataValue</a> object.   </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00302">302</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00323">323</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+
+</div>
+</div>
+<a id="af3d92f3acff1eba128da232f51598858" name="af3d92f3acff1eba128da232f51598858"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3d92f3acff1eba128da232f51598858">&#9670;&#160;</a></span>readValue() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1Variant.html">Variant</a> <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::readValue </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read the <code>Value</code> attribute of a variable node as a <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> object.   </p>
+
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00328">328</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00353">opcua::Node&lt; ServerOrClient &gt;::readValueArray()</a>, and <a class="el" href="Node_8h_source.html#l00341">opcua::Node&lt; ServerOrClient &gt;::readValueScalar()</a>.</p>
 
 </div>
 </div>
 <a id="a52e334e9ad22f6d8c605cf7748b2f96f" name="a52e334e9ad22f6d8c605cf7748b2f96f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52e334e9ad22f6d8c605cf7748b2f96f">&#9670;&#160;</a></span>readValue()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a52e334e9ad22f6d8c605cf7748b2f96f">&#9670;&#160;</a></span>readValue() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1724,9 +1871,42 @@ template&lt;typename ServerOrClient &gt; </div>
 
 <p>Read the <code>Value</code> attribute of a variable node as a <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> object.   </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00307">307</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00335">335</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00321">opcua::Node&lt; ServerOrClient &gt;::readArray()</a>, and <a class="el" href="Node_8h_source.html#l00313">opcua::Node&lt; ServerOrClient &gt;::readScalar()</a>.</p>
+</div>
+</div>
+<a id="abdbbefd6dd9ac0d96a4c22a71a6d643a" name="abdbbefd6dd9ac0d96a4c22a71a6d643a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abdbbefd6dd9ac0d96a4c22a71a6d643a">&#9670;&#160;</a></span>readValueScalar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::readValueScalar </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read scalar value from variable node. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_minimal_8cpp-example.html#a5">client_minimal.cpp</a>.</dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00341">341</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -1757,11 +1937,42 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Read scalar from variable node. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="client_minimal_8cpp-example.html#a5">client_minimal.cpp</a>.</dd>
-</dl>
+<p>Read scalar value from variable node.   </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00313">313</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00347">347</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+
+</div>
+</div>
+<a id="a93f1f1816000950c00c562ce889b331d" name="a93f1f1816000950c00c562ce889b331d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93f1f1816000950c00c562ce889b331d">&#9670;&#160;</a></span>readValueArray()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; T &gt; <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::readValueArray </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Read array value from variable node. </p>
+
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00353">353</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -1792,9 +2003,9 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Read array from variable node. </p>
+<p>Read array value from variable node.   </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00321">321</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00359">359</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -1825,7 +2036,7 @@ template&lt;typename ServerOrClient &gt; </div>
 
 <p>Read the <code><a class="el" href="classopcua_1_1DataType.html" title="UA_DataType wrapper class.">DataType</a></code> attribute of a variable (type) node as <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a>.   </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00328">328</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00364">364</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -1857,7 +2068,7 @@ template&lt;typename ServerOrClient &gt; </div>
 <p>Read the <code>ValueRank</code> attribute of a variable (type) node.   </p>
 <p>Indicates whether the value attribute of the variable node is an array and how many dimensions the array has.   </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00333">333</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00369">369</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -1889,7 +2100,7 @@ template&lt;typename ServerOrClient &gt; </div>
 <p>Read the <code>ArrayDimensions</code> attribute of a variable (type) node.   </p>
 <p>Specifies the maximum supported length of each dimension (0 if unknown).   </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00338">338</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00374">374</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -1921,7 +2132,7 @@ template&lt;typename ServerOrClient &gt; </div>
 <p>Read the <code>AccessLevel</code> attribute of a variable node.   </p>
 <p>For example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a40ea076d6ef4c0aaccdc0d14fb2573c4">UA_ACCESSLEVELMASK_READ</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a92380e13ac90946ba3d5a7e975dfc5d3">UA_ACCESSLEVELMASK_WRITE</a></code>. The access level attribute is used to indicate how the value of a variable can be accessed (read/write) and if it contains current and/or historic data.   </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00343">343</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00379">379</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -1953,7 +2164,7 @@ template&lt;typename ServerOrClient &gt; </div>
 <p>Read the <code>UserAccessLevel</code> attribute a variable node.   </p>
 <p>For example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a40ea076d6ef4c0aaccdc0d14fb2573c4">UA_ACCESSLEVELMASK_READ</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a92380e13ac90946ba3d5a7e975dfc5d3">UA_ACCESSLEVELMASK_WRITE</a></code>. The access level attribute is used to indicate how the value of a variable can be accessed (read/write) and if it contains current and/or historic data.     In contrast to the access level, the user access level is taking access rights into account.   </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00348">348</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00384">384</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -1985,7 +2196,35 @@ template&lt;typename ServerOrClient &gt; </div>
 <p>Read the <code>MinimumSamplingInterval</code> attribute of a variable node.   </p>
 <p>Specifies (in milliseconds) how fast the server can reasonably sample the value for changes. A minimum sampling interval of 0 indicates that the server is to monitor the item continuously. A minimum sampling interval of -1 means indeterminate.   </p>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00353">353</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00389">389</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+
+</div>
+</div>
+<a id="a2f85a1083deb86c5c530fc8fe00ea047" name="a2f85a1083deb86c5c530fc8fe00ea047"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f85a1083deb86c5c530fc8fe00ea047">&#9670;&#160;</a></span>readObjectProperty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1Variant.html">Variant</a> <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::readObjectProperty </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1QualifiedName.html">QualifiedName</a> &amp;&#160;</td>
+          <td class="paramname"><em>propertyName</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read the value of an object property. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">propertyName</td><td>Browse name of the property (variable node) </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -2020,7 +2259,7 @@ template&lt;typename ServerOrClient &gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_minimal_8cpp-example.html#a6">server_minimal.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00359">359</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00399">399</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -2053,7 +2292,7 @@ template&lt;typename ServerOrClient &gt; </div>
 <p>Write the <code>Description</code> attribute of a node.   </p>
 <p>The description shall explain the meaning of the node.       </p><dl class="section return"><dt>Returns</dt><dd>Current node instance to chain multiple methods (fluent interface) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00366">366</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00406">406</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -2086,7 +2325,7 @@ template&lt;typename ServerOrClient &gt; </div>
 <p>Write the <code>WriteMask</code> attribute of a node.   </p>
 <p>For example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#ada81db626738ee2eada8215ea9c5ca6f">UA_WRITEMASK_VALUEFORVARIABLETYPE</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a35003ddcccde5610e1c95ec92305398d">UA_WRITEMASK_VALUERANK</a></code>.       </p><dl class="section return"><dt>Returns</dt><dd>Current node instance to chain multiple methods (fluent interface) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00373">373</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00413">413</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -2119,7 +2358,7 @@ template&lt;typename ServerOrClient &gt; </div>
 <p>Write the <code>WriteMask</code> attribute of a node.   </p>
 <p>For example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#ada81db626738ee2eada8215ea9c5ca6f">UA_WRITEMASK_VALUEFORVARIABLETYPE</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a35003ddcccde5610e1c95ec92305398d">UA_WRITEMASK_VALUERANK</a></code>.       </p><dl class="section return"><dt>Returns</dt><dd>Current node instance to chain multiple methods (fluent interface) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00380">380</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00420">420</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -2152,7 +2391,7 @@ template&lt;typename ServerOrClient &gt; </div>
 <p>Write the <code>IsAbstract</code> attribute of a reference type node.   </p>
 <p>If a reference is abstract, no reference of this type shall exist, only of its subtypes.       </p><dl class="section return"><dt>Returns</dt><dd>Current node instance to chain multiple methods (fluent interface) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00387">387</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00427">427</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -2185,7 +2424,7 @@ template&lt;typename ServerOrClient &gt; </div>
 <p>Write the <code>Symmetric</code> attribute of a reference type node.   </p>
 <p>If a reference is symmetric it can seen from both the source and target node.       </p><dl class="section return"><dt>Returns</dt><dd>Current node instance to chain multiple methods (fluent interface) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00394">394</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00434">434</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -2218,7 +2457,7 @@ template&lt;typename ServerOrClient &gt; </div>
 <p>Write the <code>InverseName</code> of a reference type node.   </p>
 <p>The inverse name describes the reference type as seen from the target node. For example, the reference type <code>HasSubtype</code> has the inverse name <code>HasSupertype</code>.       </p><dl class="section return"><dt>Returns</dt><dd>Current node instance to chain multiple methods (fluent interface) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00401">401</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00441">441</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -2251,7 +2490,7 @@ template&lt;typename ServerOrClient &gt; </div>
 <p>Write the <code>Value</code> attribute of a variable node as a <a class="el" href="classopcua_1_1DataValue.html" title="UA_DataValue wrapper class.">DataValue</a> object.   </p>
 <dl class="section return"><dt>Returns</dt><dd>Current node instance to chain multiple methods (fluent interface) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00408">408</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00448">448</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -2284,9 +2523,44 @@ template&lt;typename ServerOrClient &gt; </div>
 <p>Write the <code>Value</code> attribute of a variable node as a <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> object.   </p>
 <dl class="section return"><dt>Returns</dt><dd>Current node instance to chain multiple methods (fluent interface) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00415">415</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00455">455</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00433">opcua::Node&lt; ServerOrClient &gt;::writeArray()</a>, <a class="el" href="Node_8h_source.html#l00451">opcua::Node&lt; ServerOrClient &gt;::writeArray()</a>, and <a class="el" href="Node_8h_source.html#l00423">opcua::Node&lt; ServerOrClient &gt;::writeScalar()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00479">opcua::Node&lt; ServerOrClient &gt;::writeValueArray()</a>, <a class="el" href="Node_8h_source.html#l00496">opcua::Node&lt; ServerOrClient &gt;::writeValueArray()</a>, and <a class="el" href="Node_8h_source.html#l00463">opcua::Node&lt; ServerOrClient &gt;::writeValueScalar()</a>.</p>
+
+</div>
+</div>
+<a id="ae8d0c6ca98627ce952cd185bc4ef1126" name="ae8d0c6ca98627ce952cd185bc4ef1126"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8d0c6ca98627ce952cd185bc4ef1126">&#9670;&#160;</a></span>writeValueScalar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a> &amp; <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::writeValueScalar </td>
+          <td>(</td>
+          <td class="paramtype">const T &amp;&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write scalar to variable node. </p>
+<dl class="section return"><dt>Returns</dt><dd>Current node instance to chain multiple methods (fluent interface) </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00463">463</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -2318,15 +2592,15 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Write scalar to variable node. </p>
-<dl class="section return"><dt>Returns</dt><dd>Current node instance to chain multiple methods (fluent interface) </dd></dl>
+<p>Write scalar to variable node.   </p>
+<dl class="section return"><dt>Returns</dt><dd>Current node instance to chain multiple methods (fluent interface)   </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00423">423</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00472">472</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
-<a id="a16f391d5391a1686fde9bdd946139000" name="a16f391d5391a1686fde9bdd946139000"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a16f391d5391a1686fde9bdd946139000">&#9670;&#160;</a></span>writeArray() <span class="overload">[1/3]</span></h2>
+<a id="ab3a36fb0d17db212762b1d1362ceb316" name="ab3a36fb0d17db212762b1d1362ceb316"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3a36fb0d17db212762b1d1362ceb316">&#9670;&#160;</a></span>writeValueArray() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2339,7 +2613,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a> &amp; <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::writeArray </td>
+          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a> &amp; <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::writeValueArray </td>
           <td>(</td>
           <td class="paramtype">const T *&#160;</td>
           <td class="paramname"><em>array</em>, </td>
@@ -2363,15 +2637,17 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Write array (raw) to variable node. </p>
+<p>Write array value (raw) to variable node. </p>
 <dl class="section return"><dt>Returns</dt><dd>Current node instance to chain multiple methods (fluent interface) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00433">433</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00479">479</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00504">opcua::Node&lt; ServerOrClient &gt;::writeArray()</a>.</p>
 
 </div>
 </div>
-<a id="ad1715cd37e4fe5f5319fa65913be51c8" name="ad1715cd37e4fe5f5319fa65913be51c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1715cd37e4fe5f5319fa65913be51c8">&#9670;&#160;</a></span>writeArray() <span class="overload">[2/3]</span></h2>
+<a id="af5c5bb9d4fe0bf7ed846f1a3d38cc30a" name="af5c5bb9d4fe0bf7ed846f1a3d38cc30a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5c5bb9d4fe0bf7ed846f1a3d38cc30a">&#9670;&#160;</a></span>writeValueArray() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2384,7 +2660,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a> &amp; <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::writeArray </td>
+          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a> &amp; <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::writeValueArray </td>
           <td>(</td>
           <td class="paramtype">const std::vector&lt; T &gt; &amp;&#160;</td>
           <td class="paramname"><em>array</em></td><td>)</td>
@@ -2398,15 +2674,15 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Write array (std::vector) to variable node. </p>
+<p>Write array value (std::vector) to variable node. </p>
 <dl class="section return"><dt>Returns</dt><dd>Current node instance to chain multiple methods (fluent interface) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00443">443</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00489">489</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
-<a id="afadfcd7401e73f88beeba66256db4d1a" name="afadfcd7401e73f88beeba66256db4d1a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afadfcd7401e73f88beeba66256db4d1a">&#9670;&#160;</a></span>writeArray() <span class="overload">[3/3]</span></h2>
+<a id="a9c505c31f4d589a7e5d414dcba82d054" name="a9c505c31f4d589a7e5d414dcba82d054"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c505c31f4d589a7e5d414dcba82d054">&#9670;&#160;</a></span>writeValueArray() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2419,7 +2695,7 @@ template&lt;typename InputIt &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a> &amp; <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::writeArray </td>
+          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a> &amp; <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::writeValueArray </td>
           <td>(</td>
           <td class="paramtype">InputIt&#160;</td>
           <td class="paramname"><em>first</em>, </td>
@@ -2443,10 +2719,45 @@ template&lt;typename InputIt &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Write range of elements as array to variable node. </p>
+<p>Write range of elements as array value to variable node. </p>
 <dl class="section return"><dt>Returns</dt><dd>Current node instance to chain multiple methods (fluent interface) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00451">451</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00496">496</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+
+</div>
+</div>
+<a id="ab61cc12458b599778eb1762b786b04a2" name="ab61cc12458b599778eb1762b786b04a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab61cc12458b599778eb1762b786b04a2">&#9670;&#160;</a></span>writeArray()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a> &amp; <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::writeArray </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Write array value (raw) to variable node.   </p>
+<dl class="section return"><dt>Returns</dt><dd>Current node instance to chain multiple methods (fluent interface)   </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00504">504</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -2481,7 +2792,7 @@ template&lt;typename ServerOrClient &gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_minimal_8cpp-example.html#a4">server_minimal.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00459">459</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00510">510</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -2515,9 +2826,9 @@ template&lt;typename T &gt; </div>
 <p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. Deduce the <code>typeId</code> from the template type. </p>
 <dl class="section return"><dt>Returns</dt><dd>Current node instance to chain multiple methods (fluent interface) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00468">468</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00519">519</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00468">opcua::Node&lt; ServerOrClient &gt;::writeDataType()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00519">opcua::Node&lt; ServerOrClient &gt;::writeDataType()</a>.</p>
 
 </div>
 </div>
@@ -2550,7 +2861,7 @@ template&lt;typename ServerOrClient &gt; </div>
 <p>Write the <code>ValueRank</code> attribute of a variable (type) node.   </p>
 <p>Indicates whether the value attribute of the variable node is an array and how many dimensions the array has.       </p><dl class="section return"><dt>Returns</dt><dd>Current node instance to chain multiple methods (fluent interface) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00474">474</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00525">525</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -2584,7 +2895,7 @@ template&lt;typename ServerOrClient &gt; </div>
 <p>Should be unspecified if ValueRank is &lt;= 0 (<a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383aed36a1ef76a59ee3f15180e0441188ad">ValueRank::Any</a>, <a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383af60357a8d17e45793298323f1b372a74">ValueRank::Scalar</a>, <a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383abc975004cfa0419c12cf23c09de61693">ValueRank::ScalarOrOneDimension</a>, <a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383ab175b16c7f24cc7dff60de6707c4739f">ValueRank::OneOrMoreDimensions</a>). The dimension zero is a wildcard and the actual value may have any length in this dimension.</p>
 <p>Specifies the maximum supported length of each dimension (0 if unknown).       </p><dl class="section return"><dt>Returns</dt><dd>Current node instance to chain multiple methods (fluent interface) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00481">481</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00532">532</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -2617,7 +2928,7 @@ template&lt;typename ServerOrClient &gt; </div>
 <p>Write the <code>AccessLevel</code> attribute of a variable node.   </p>
 <p>For example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a40ea076d6ef4c0aaccdc0d14fb2573c4">UA_ACCESSLEVELMASK_READ</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a92380e13ac90946ba3d5a7e975dfc5d3">UA_ACCESSLEVELMASK_WRITE</a></code>. The access level attribute is used to indicate how the value of a variable can be accessed (read/write) and if it contains current and/or historic data.       </p><dl class="section return"><dt>Returns</dt><dd>Current node instance to chain multiple methods (fluent interface) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00488">488</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00539">539</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -2651,7 +2962,7 @@ template&lt;typename ServerOrClient &gt; </div>
 <p>For example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a40ea076d6ef4c0aaccdc0d14fb2573c4">UA_ACCESSLEVELMASK_READ</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a92380e13ac90946ba3d5a7e975dfc5d3">UA_ACCESSLEVELMASK_WRITE</a></code>. The access level attribute is used to indicate how the value of a variable can be accessed (read/write) and if it contains current and/or historic data.     In contrast to the access level, the user access level is taking access rights into account.     </p><dl class="section note"><dt>Note</dt><dd>Cannot be written from the server.   </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>Current node instance to chain multiple methods (fluent interface) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00495">495</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00546">546</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
 
 </div>
 </div>
@@ -2684,7 +2995,47 @@ template&lt;typename ServerOrClient &gt; </div>
 <p>Write the <code>MinimumSamplingInterval</code> attribute of a variable node.   </p>
 <p>Specifies (in milliseconds) how fast the server can reasonably sample the value for changes. A minimum sampling interval of 0 indicates that the server is to monitor the item continuously. A minimum sampling interval of -1 means indeterminate.       </p><dl class="section return"><dt>Returns</dt><dd>Current node instance to chain multiple methods (fluent interface) </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00502">502</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Node_8h_source.html#l00553">553</a> of file <a class="el" href="Node_8h_source.html">Node.h</a>.</p>
+
+</div>
+</div>
+<a id="a4fd1308cf88140fc3448d9cbcce34cb6" name="a4fd1308cf88140fc3448d9cbcce34cb6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fd1308cf88140fc3448d9cbcce34cb6">&#9670;&#160;</a></span>writeObjectProperty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename ServerOrClient &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1Node.html">Node</a> &amp; <a class="el" href="classopcua_1_1Node.html">opcua::Node</a>&lt; ServerOrClient &gt;::writeObjectProperty </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1QualifiedName.html">QualifiedName</a> &amp;&#160;</td>
+          <td class="paramname"><em>propertyName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1Variant.html">Variant</a> &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Write the value of an object property. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">propertyName</td><td>Browse name of the property (variable node) </td></tr>
+    <tr><td class="paramname">value</td><td>New value </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Current node instance to chain multiple methods (fluent interface) </dd></dl>
 
 </div>
 </div>

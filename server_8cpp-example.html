@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.7.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.8.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -99,10 +99,10 @@ $(function() {
 <div class="line">    );</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Write a value (attribute) to the node</span></div>
-<div class="line">    myIntegerNode.writeScalar(42);</div>
+<div class="line">    myIntegerNode.writeValueScalar(42);</div>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Read the value (attribute) from the node</span></div>
-<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;The answer is: &quot;</span> &lt;&lt; myIntegerNode.readScalar&lt;<span class="keywordtype">int</span>&gt;() &lt;&lt; std::endl;</div>
+<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;The answer is: &quot;</span> &lt;&lt; myIntegerNode.readValueScalar&lt;<span class="keywordtype">int</span>&gt;() &lt;&lt; std::endl;</div>
 <div class="line"> </div>
 <div class="line">    server.<a id="a10" name="a10"></a><a class="code hl_function" href="classopcua_1_1Server.html#a7346a714c85e2d99fc8bc9fd1dd31d6d">run</a>();</div>
 <div class="line">}</div>

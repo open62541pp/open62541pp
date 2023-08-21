@@ -75,15 +75,14 @@ var searchData=
   ['viewdescription_5fencoding_5fdefaultbinary_72',['ViewDescription_Encoding_DefaultBinary',['../group__NodeIds.html#ggad6d1c9a92cf8a3d1113d816ef3d11e35a9b0c0898e6b1ba4a788965bb221cd80f',1,'opcua']]],
   ['viewdescription_5fencoding_5fdefaultjson_73',['ViewDescription_Encoding_DefaultJson',['../group__NodeIds.html#ggad6d1c9a92cf8a3d1113d816ef3d11e35a7c34302794dfd211b0aaf1dd8a35a1bb',1,'opcua']]],
   ['viewdescription_5fencoding_5fdefaultxml_74',['ViewDescription_Encoding_DefaultXml',['../group__NodeIds.html#ggad6d1c9a92cf8a3d1113d816ef3d11e35a1a26a756e3f9568a749ed2146bdd4553',1,'opcua']]],
-  ['viewid_75',['viewId',['open62541/structUA__ViewDescription.html#adf230a0ad5f4f86d11a61cd5eaeb169c',0,'UA_ViewDescription']]],
-  ['viewid_76',['ViewId',['open62541/struct__OpcUa__ViewDescription.html#ade3c4e1dad4277d1349d9ed4edfc0219',0,'_OpcUa_ViewDescription']]],
+  ['viewid_75',['ViewId',['open62541/struct__OpcUa__ViewDescription.html#ade3c4e1dad4277d1349d9ed4edfc0219',0,'_OpcUa_ViewDescription']]],
+  ['viewid_76',['viewId',['open62541/structUA__ViewDescription.html#adf230a0ad5f4f86d11a61cd5eaeb169c',0,'UA_ViewDescription']]],
   ['viewnode_77',['viewNode',['open62541/unionUA__Node.html#aeac73cc1091420e5c2331e301758dbaf',0,'UA_Node']]],
   ['viewnode_78',['ViewNode',['../group__NodeIds.html#ggadfeffe1a4352e8d89c5167a8c09d1692aa13f94919649138bd102adcd8d52a5d1',1,'opcua']]],
   ['viewnode_5fencoding_5fdefaultbinary_79',['ViewNode_Encoding_DefaultBinary',['../group__NodeIds.html#ggad6d1c9a92cf8a3d1113d816ef3d11e35a75729a504a2cb8cc252cffd147bc2082',1,'opcua']]],
   ['viewnode_5fencoding_5fdefaultjson_80',['ViewNode_Encoding_DefaultJson',['../group__NodeIds.html#ggad6d1c9a92cf8a3d1113d816ef3d11e35a541484eb51dd6841ac3afe238082d8a3',1,'opcua']]],
   ['viewnode_5fencoding_5fdefaultxml_81',['ViewNode_Encoding_DefaultXml',['../group__NodeIds.html#ggad6d1c9a92cf8a3d1113d816ef3d11e35a03327bed0a9d4a2fa54f04930ca44d05',1,'opcua']]],
   ['viewsfolder_82',['ViewsFolder',['../group__NodeIds.html#ggad6d1c9a92cf8a3d1113d816ef3d11e35a8490525dce44b772620fa43bedb6bbaa',1,'opcua']]],
-  ['viewversion_83',['ViewVersion',['open62541/struct__OpcUa__ViewDescription.html#a19a01ff828a456ae0b1215242dcd94f6',0,'_OpcUa_ViewDescription']]],
-  ['viewversion_84',['viewVersion',['open62541/structUA__ViewDescription.html#a656a664b5149ccf0c079e2d6997b0f18',0,'UA_ViewDescription']]],
-  ['viewversion_85',['ViewVersion',['../group__NodeIds.html#gga0d0700fca6d7287fc710bdb115beab85a65e36dc2bb697f959e7339b7a5415f49',1,'opcua']]]
+  ['viewversion_83',['viewVersion',['open62541/structUA__ViewDescription.html#a656a664b5149ccf0c079e2d6997b0f18',0,'UA_ViewDescription']]],
+  ['viewversion_84',['ViewVersion',['open62541/struct__OpcUa__ViewDescription.html#a19a01ff828a456ae0b1215242dcd94f6',0,'_OpcUa_ViewDescription::ViewVersion'],['../group__NodeIds.html#gga0d0700fca6d7287fc710bdb115beab85a65e36dc2bb697f959e7339b7a5415f49',1,'opcua::ViewVersion']]]
 ];

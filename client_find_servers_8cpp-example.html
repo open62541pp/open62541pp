@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.7.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.8.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -116,12 +116,12 @@ $(function() {
 <div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> servers = client.<a id="a10" name="a10"></a><a class="code hl_function" href="classopcua_1_1Client.html#ad8a9d4f6aad75f6dca79c13f856ae9d8">findServers</a>(<span class="stringliteral">&quot;opc.tcp://localhost:4840&quot;</span>);</div>
 <div class="line">    <span class="keywordtype">size_t</span> serverIndex = 0;</div>
 <div class="line">    <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; server : servers) {</div>
-<div class="line">        <span class="keyword">const</span> <span class="keyword">auto</span> name = server.getApplicationUri().get();</div>
+<div class="line">        <span class="keyword">const</span> <span class="keyword">auto</span>&amp; name = server.getApplicationUri();</div>
 <div class="line">        std::cout</div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot;Server[&quot;</span> &lt;&lt; serverIndex++ &lt;&lt; <span class="stringliteral">&quot;] &quot;</span> &lt;&lt; name &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot;\tName:             &quot;</span> &lt;&lt; server.getApplicationName().getText() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
-<div class="line">            &lt;&lt; <span class="stringliteral">&quot;\tApplication URI:  &quot;</span> &lt;&lt; server.getApplicationUri().get() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
-<div class="line">            &lt;&lt; <span class="stringliteral">&quot;\tProduct URI:      &quot;</span> &lt;&lt; server.getProductUri().get() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;\tApplication URI:  &quot;</span> &lt;&lt; server.getApplicationUri() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;\tProduct URI:      &quot;</span> &lt;&lt; server.getProductUri() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot;\tApplication type: &quot;</span> &lt;&lt; getEnumName(server.getApplicationType()) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot;\tDiscovery URLs:\n&quot;</span>;</div>
 <div class="line"> </div>
@@ -138,10 +138,10 @@ $(function() {
 <div class="line">            <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; endpoint : client.getEndpoints(url)) {</div>
 <div class="line">                std::cout</div>
 <div class="line">                    &lt;&lt; <span class="stringliteral">&quot;\tEndpoint[&quot;</span> &lt;&lt; endpointIndex++ &lt;&lt; <span class="stringliteral">&quot;]:\n&quot;</span></div>
-<div class="line">                    &lt;&lt; <span class="stringliteral">&quot;\t- Endpoint URL:      &quot;</span> &lt;&lt; endpoint.getEndpointUrl().get() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
-<div class="line">                    &lt;&lt; <span class="stringliteral">&quot;\t- Transport profile: &quot;</span> &lt;&lt; endpoint.getTransportProfileUri().get() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
+<div class="line">                    &lt;&lt; <span class="stringliteral">&quot;\t- Endpoint URL:      &quot;</span> &lt;&lt; endpoint.getEndpointUrl() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
+<div class="line">                    &lt;&lt; <span class="stringliteral">&quot;\t- Transport profile: &quot;</span> &lt;&lt; endpoint.getTransportProfileUri() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
 <div class="line">                    &lt;&lt; <span class="stringliteral">&quot;\t- Security mode:     &quot;</span> &lt;&lt; getEnumName(endpoint.getSecurityMode()) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
-<div class="line">                    &lt;&lt; <span class="stringliteral">&quot;\t- Security profile:  &quot;</span> &lt;&lt; endpoint.getSecurityPolicyUri().get() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
+<div class="line">                    &lt;&lt; <span class="stringliteral">&quot;\t- Security profile:  &quot;</span> &lt;&lt; endpoint.getSecurityPolicyUri() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
 <div class="line">                    &lt;&lt; <span class="stringliteral">&quot;\t- Security level:    &quot;</span> &lt;&lt; endpoint.getSecurityLevel() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span></div>
 <div class="line">                    &lt;&lt; <span class="stringliteral">&quot;\t- User identity token:\n&quot;</span>;</div>
 <div class="line"> </div>
