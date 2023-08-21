@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.0] - 2023-08-21
+
 ### Added
 
 - `services::browseRecursive` as a wrapper for `UA_Server_browseRecursive` (#91)
@@ -316,7 +318,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial public release
 
-[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.7.0...HEAD
+[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.8.0...HEAD
+[0.8.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.8.0
 [0.7.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.7.0
 [0.6.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.6.0
 [0.5.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.5.0
