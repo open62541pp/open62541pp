@@ -284,6 +284,22 @@ struct TypeConverter<WrapperType, std::enable_if_t<detail::IsTypeWrapper<Wrapper
 /* ---------------------------- Implementations for std library types --------------------------- */
 
 template <>
+struct TypeConverter<std::string_view> {
+    using ValueType = std::string_view;
+    using NativeType = UA_String;
+    using ValidTypes = TypeIndexList<UA_TYPES_STRING>;
+
+    static void fromNative(const NativeType& src, std::string_view& dst) {
+        dst = detail::toStringView(src);
+    }
+
+    static void toNative(std::string_view src, NativeType& dst) {
+        UA_clear(&dst, &detail::getUaDataType<UA_TYPES_STRING>());
+        dst = detail::allocUaString(src);
+    }
+};
+
+template <>
 struct TypeConverter<std::string> {
     using ValueType = std::string;
     using NativeType = UA_String;
@@ -294,8 +310,29 @@ struct TypeConverter<std::string> {
     }
 
     static void toNative(const ValueType& src, NativeType& dst) {
-        UA_clear(&dst, &detail::getUaDataType<UA_TYPES_STRING>());
-        dst = detail::allocUaString(src);
+        TypeConverter<std::string_view>::toNative({src}, dst);
+    }
+};
+
+template <>
+struct TypeConverter<const char*> {
+    using ValueType = const char*;
+    using NativeType = UA_String;
+    using ValidTypes = TypeIndexList<UA_TYPES_STRING>;
+
+    static void toNative(const char* src, NativeType& dst) {
+        TypeConverter<std::string_view>::toNative({src}, dst);
+    }
+};
+
+template <size_t N>
+struct TypeConverter<char[N]> {  // NOLINT
+    using ValueType = char[N];  // NOLINT
+    using NativeType = UA_String;
+    using ValidTypes = TypeIndexList<UA_TYPES_STRING>;
+
+    static void toNative(const ValueType& src, NativeType& dst) {
+        TypeConverter<std::string_view>::toNative({static_cast<const char*>(src), N}, dst);
     }
 };
 
