@@ -44,7 +44,7 @@ int main() {
             opcua::VariableAttributes{}
                 .setDisplayName({"en-US", "Name"})
                 .setDescription({"en-US", "This dogs name"})
-                .setValueScalar(opcua::String("unnamed dog"))  // default name
+                .setValueScalar("unnamed dog")  // default name
         )
         .addModellingRule(opcua::ModellingRule::Mandatory);  // create on new instance
 
@@ -64,7 +64,7 @@ int main() {
 
     // Set variables Age and Name
     nodeBello.browseChild({{1, "Age"}}).writeValueScalar(3U);
-    nodeBello.browseChild({{1, "Name"}}).writeValueScalar(opcua::String("Bello"));
+    nodeBello.browseChild({{1, "Name"}}).writeValueScalar("Bello");
 
     server.run();
 }

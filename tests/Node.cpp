@@ -77,6 +77,14 @@ TEST_CASE("Node") {
             );
         }
 
+        SUBCASE("Add/delete reference") {
+            auto folder = objNode.addFolder({1, 1000}, "folder");
+            auto object = objNode.addObject({1, 1001}, "object");
+            CHECK_NOTHROW(folder.addReference({1, 1001}, ReferenceTypeId::Organizes, true));
+            CHECK_NOTHROW(folder.deleteReference({1, 1001}, ReferenceTypeId::Organizes, true, true)
+            );
+        }
+
         SUBCASE("Delete node") {
             auto node = objNode.addObject({1, 1000}, "object");
             CHECK_NOTHROW(node.deleteNode());
@@ -208,6 +216,23 @@ TEST_CASE("Node") {
                     CHECK(varNode.template readValueArray<double>() == array);
                 }
             }
+        }
+
+        SUBCASE("Read/write object property") {
+            auto node = objNode.addObject({1, 1000}, "Object");
+            node.addProperty(
+                {1, 1001},
+                "Property",
+                VariableAttributes{}
+                    .setWriteMask(0xFFFFFFFF)
+                    .setAccessLevel(0xFF)
+                    .setDataType<double>()
+                    .setValueScalar(11.11)
+            );
+
+            CHECK(node.readObjectProperty({1, "Property"}).template getScalar<double>() == 11.11);
+            CHECK_NOTHROW(node.writeObjectProperty({1, "Property"}, Variant::fromScalar(22.22)));
+            CHECK(node.readObjectProperty({1, "Property"}).template getScalar<double>() == 22.22);
         }
 
         SUBCASE("Equality") {

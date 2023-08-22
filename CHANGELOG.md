@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.0] - 2023-08-21
+
+### Added
+
+- `services::browseRecursive` as a wrapper for `UA_Server_browseRecursive` (#91)
+- Implicit conversion from `String` / `XmlElement` to `std::string_view` (#93)
+- Convenience functions to read/write object properties (#96):
+  - `Node::readObjectProperty`
+  - `Node::writeObjectProperty`
+- Delete reference (#97):
+  - `services::deleteReference`
+  - `Node::deleteReference`
+
+### Changed
+
+- Return `Variant`/`DataValue` by value from read functions (no performance penalty), deprecate old functions (#94):
+  - `void services::readDataValue(T&, const NodeId&, DataValue&)` -> `DataValue services::readDataValue(T&, const NodeId&)`
+  - `void services::readValue(T&, const NodeId&, Variant&)` -> `Variant services::readValue(T&, const NodeId&)`
+  - `void Node::readDataValue(DataValue&)` -> `DataValue Node::readDataValue()`
+  - `void Node::readValue(Variant&)` -> `Variant Node::readValue()`
+
+- Specific naming of methods to read/write scalar/array values, deprecate old methods (#95):
+  - `Node::readScalar` -> `Node::readValueScalar`
+  - `Node::readArray` -> `Node::readValueArray`
+  - `Node::writeScalar` -> `Node::writeValueScalar`
+  - `Node::writeArray` -> `Node::writeValueArray`
+
 ## [0.7.0] - 2023-08-15
 
 ### Added
@@ -291,7 +318,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial public release
 
-[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.7.0...HEAD
+[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.8.0...HEAD
+[0.8.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.8.0
 [0.7.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.7.0
 [0.6.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.6.0
 [0.5.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.5.0

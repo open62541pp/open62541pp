@@ -468,4 +468,44 @@ void deleteNode<Client>(Client& client, const NodeId& id, bool deleteReferences)
     detail::throwOnBadStatus(status);
 }
 
+template <>
+void deleteReference<Server>(
+    Server& server,
+    const NodeId& sourceId,
+    const NodeId& targetId,
+    const NodeId& referenceType,
+    bool isForward,
+    bool deleteBidirectional
+) {
+    const auto status = UA_Server_deleteReference(
+        server.handle(),
+        sourceId,
+        referenceType,
+        isForward,
+        ExpandedNodeId(targetId),
+        deleteBidirectional
+    );
+    detail::throwOnBadStatus(status);
+}
+
+template <>
+void deleteReference<Client>(
+    Client& client,
+    const NodeId& sourceId,
+    const NodeId& targetId,
+    const NodeId& referenceType,
+    bool isForward,
+    bool deleteBidirectional
+) {
+    const auto status = UA_Client_deleteReference(
+        client.handle(),
+        sourceId,
+        referenceType,
+        isForward,
+        ExpandedNodeId(targetId),
+        deleteBidirectional
+    );
+    detail::throwOnBadStatus(status);
+}
+
 }  // namespace opcua::services

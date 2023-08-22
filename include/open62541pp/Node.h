@@ -209,6 +209,20 @@ public:
         services::deleteNode(connection_, nodeId_, deleteReferences);
     }
 
+    /// @copydoc services::deleteReference
+    /// @return Current node instance to chain multiple methods (fluent interface)
+    Node& deleteReference(
+        const NodeId& targetId,
+        const NodeId& referenceType,
+        bool isForward,
+        bool deleteBidirectional
+    ) {
+        services::deleteReference(
+            connection_, nodeId_, targetId, referenceType, isForward, deleteBidirectional
+        );
+        return *this;
+    }
+
     /// Browse references.
     std::vector<ReferenceDescription> browseReferences(
         BrowseDirection browseDirection = BrowseDirection::Both,
@@ -375,6 +389,10 @@ public:
         return services::readMinimumSamplingInterval(connection_, nodeId_);
     }
 
+    /// Read the value of an object property.
+    /// @param propertyName Browse name of the property (variable node)
+    Variant readObjectProperty(const QualifiedName& propertyName);
+
     /// @copydoc services::writeDisplayName
     /// @return Current node instance to chain multiple methods (fluent interface)
     Node& writeDisplayName(const LocalizedText& name) {
@@ -531,6 +549,12 @@ public:
         services::writeMinimumSamplingInterval(connection_, nodeId_, milliseconds);
         return *this;
     }
+
+    /// Write the value of an object property.
+    /// @param propertyName Browse name of the property (variable node)
+    /// @param value New value
+    /// @return Current node instance to chain multiple methods (fluent interface)
+    Node& writeObjectProperty(const QualifiedName& propertyName, const Variant& value);
 
 private:
     ServerOrClient& connection_;
