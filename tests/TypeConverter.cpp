@@ -1,6 +1,7 @@
 #include <doctest/doctest.h>
 
 #include "open62541pp/TypeConverter.h"
+#include "open62541pp/detail/traits.h"
 
 using namespace opcua;
 
@@ -76,22 +77,46 @@ TEST_CASE_TEMPLATE("TypeConverter native strings", T, UA_String, UA_ByteString, 
     UA_clear(&dst, &UA_TYPES[UA_TYPES_STRING]);
 }
 
-TEST_CASE("TypeConverter std::string") {
+TEST_CASE_TEMPLATE("TypeConverter string", T, std::string, std::string_view) {
     SUBCASE("fromNative") {
         UA_String src = detail::allocUaString("Test123");
-        std::string dst;
+        T dst;
 
-        TypeConverter<std::string>::fromNative(src, dst);
-        CHECK(dst == "Test123");
+        TypeConverter<T>::fromNative(src, dst);
+        CHECK(std::string(dst) == "Test123");
 
         UA_clear(&src, &UA_TYPES[UA_TYPES_STRING]);
     }
 
     SUBCASE("toNative") {
-        std::string src{"Test123"};
+        T src{"Test123"};
         UA_String dst{};
 
-        TypeConverter<std::string>::toNative(src, dst);
+        TypeConverter<T>::toNative(src, dst);
+        CHECK(detail::toString(dst) == "Test123");
+
+        UA_clear(&dst, &UA_TYPES[UA_TYPES_STRING]);
+    }
+}
+
+TEST_CASE("TypeConverter const char*") {
+    SUBCASE("toNative") {
+        const char* src = "Test123";
+        UA_String dst{};
+
+        TypeConverter<const char*>::toNative(src, dst);
+        CHECK(detail::toString(dst) == "Test123");
+
+        UA_clear(&dst, &UA_TYPES[UA_TYPES_STRING]);
+    }
+}
+
+TEST_CASE("TypeConverter char[N]") {
+    SUBCASE("toNative") {
+        char src[7] = {'T', 'e', 's', 't', '1', '2', '3'};
+        UA_String dst{};
+
+        TypeConverter<char[7]>::toNative(src, dst);
         CHECK(detail::toString(dst) == "Test123");
 
         UA_clear(&dst, &UA_TYPES[UA_TYPES_STRING]);
