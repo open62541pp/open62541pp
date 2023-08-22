@@ -83,7 +83,7 @@ TEST_CASE_TEMPLATE("TypeConverter string", T, std::string, std::string_view) {
         T dst;
 
         TypeConverter<T>::fromNative(src, dst);
-        CHECK(dst == "Test123");
+        CHECK(std::string(dst) == "Test123");
 
         UA_clear(&src, &UA_TYPES[UA_TYPES_STRING]);
     }
