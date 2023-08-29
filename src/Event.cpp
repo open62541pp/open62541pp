@@ -13,13 +13,21 @@ namespace opcua {
 #ifdef UA_ENABLE_SUBSCRIPTIONS_EVENTS
 
 Event::Event(Server& server, const NodeId& eventType)
-    : server_(server) {
-    const auto status = UA_Server_createEvent(server_.handle(), eventType, id_.handle());
+    : connection_(server) {
+    const auto status = UA_Server_createEvent(server.handle(), eventType, id_.handle());
     detail::throwOnBadStatus(status);
 }
 
 Event::~Event() {
-    UA_Server_deleteNode(server_.handle(), id_, true /* deleteReferences */);  // ignore status
+    UA_Server_deleteNode(getConnection().handle(), getNodeId(), true /* deleteReferences */);
+}
+
+Server& Event::getConnection() noexcept {
+    return connection_;
+}
+
+const Server& Event::getConnection() const noexcept {
+    return connection_;
 }
 
 const NodeId& Event::getNodeId() const noexcept {
@@ -43,7 +51,9 @@ Event& Event::writeMessage(const LocalizedText& message) {
 }
 
 Event& Event::writeProperty(const QualifiedName& propertyName, const Variant& value) {
-    const auto status = UA_Server_writeObjectProperty(server_.handle(), id_, propertyName, value);
+    const auto status = UA_Server_writeObjectProperty(
+        getConnection().handle(), getNodeId(), propertyName, value
+    );
     detail::throwOnBadStatus(status);
     return *this;
 }
@@ -51,7 +61,11 @@ Event& Event::writeProperty(const QualifiedName& propertyName, const Variant& va
 ByteString Event::trigger(const NodeId& originId) {
     ByteString eventId;
     const auto status = UA_Server_triggerEvent(
-        server_.handle(), id_, originId, eventId.handle(), false /* deleteEventNode */
+        getConnection().handle(),
+        getNodeId(),
+        originId,
+        eventId.handle(),
+        false  // deleteEventNode
     );
     detail::throwOnBadStatus(status);
     return eventId;

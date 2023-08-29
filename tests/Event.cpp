@@ -28,6 +28,10 @@ TEST_CASE("Event") {
 
     SUBCASE("Create and trigger event") {
         Event event(server);
+
+        CHECK(&event.getConnection() == &server);
+        CHECK(&std::as_const(event).getConnection() == &server);
+
         CHECK_NOTHROW(event.writeSourceName("SourceName"));
         CHECK_NOTHROW(event.writeTime(DateTime::now()));
         CHECK_NOTHROW(event.writeSeverity(200U));

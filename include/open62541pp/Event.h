@@ -35,6 +35,11 @@ public:
     Event& operator=(const Event&) = delete;
     Event& operator=(Event&&) noexcept = delete;
 
+    /// Get the server instance.
+    Server& getConnection() noexcept;
+    /// Get the server instance.
+    const Server& getConnection() const noexcept;
+
     /// Get the NodeId of the underlying node representation.
     const NodeId& getNodeId() const noexcept;
 
@@ -62,7 +67,7 @@ public:
     ByteString trigger(const NodeId& originId = ObjectId::Server);
 
 private:
-    Server& server_;
+    Server& connection_;
     NodeId id_;
 };
 
