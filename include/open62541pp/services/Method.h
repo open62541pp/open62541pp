@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "open62541pp/Config.h"
+#include "open62541pp/Span.h"
 
 #ifdef UA_ENABLE_METHODCALLS
 
@@ -42,7 +43,7 @@ std::vector<Variant> call(
     T& serverOrClient,
     const NodeId& objectId,
     const NodeId& methodId,
-    const std::vector<Variant>& inputArguments
+    Span<const Variant> inputArguments
 );
 
 }  // namespace opcua::services

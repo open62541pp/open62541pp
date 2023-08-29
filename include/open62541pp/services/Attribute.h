@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "open62541pp/Common.h"
+#include "open62541pp/Span.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/helper.h"
 #include "open62541pp/types/Builtin.h"
@@ -419,7 +420,7 @@ inline void writeValueRank(T& serverOrClient, const NodeId& id, ValueRank valueR
  */
 template <typename T>
 inline void writeArrayDimensions(
-    T& serverOrClient, const NodeId& id, const std::vector<uint32_t>& dimensions
+    T& serverOrClient, const NodeId& id, Span<const uint32_t> dimensions
 ) {
     writeAttribute(
         serverOrClient, id, AttributeId::ArrayDimensions, DataValue::fromArray(dimensions)

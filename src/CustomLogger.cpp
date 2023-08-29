@@ -6,7 +6,6 @@
 #include <string>
 #include <string_view>
 #include <utility>  // move
-#include <vector>
 
 namespace opcua {
 
@@ -26,7 +25,7 @@ static std::string printfFormatToString(const char* msg, va_list args) noexcept 
 static void log(
     void* context, UA_LogLevel level, UA_LogCategory category, const char* msg, va_list args
 ) {
-    assert(context != nullptr);  // NOLINT
+    assert(context != nullptr);
     const auto* instance = static_cast<CustomLogger*>(context);
     const Logger& logger = instance->getLogger();
 

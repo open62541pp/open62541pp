@@ -62,9 +62,9 @@ public:
 /* ---------------------------------------------------------------------------------------------- */
 
 inline ClientContext& getContext(UA_Client* client) {
-    assert(client != nullptr);  // NOLINT
+    assert(client != nullptr);
     void* context = UA_Client_getConfig(client)->clientContext;
-    assert(context != nullptr);  // NOLINT
+    assert(context != nullptr);
     return *static_cast<ClientContext*>(context);
 }
 

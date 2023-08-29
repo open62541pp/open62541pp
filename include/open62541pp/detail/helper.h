@@ -19,7 +19,7 @@ inline const UA_DataType& getUaDataType() noexcept {
 
 /// Get UA_DataType by type index.
 inline const UA_DataType& getUaDataType(TypeIndex typeIndex) noexcept {
-    assert(typeIndex < UA_TYPES_COUNT);  // NOLINT
+    assert(typeIndex < UA_TYPES_COUNT);
     return UA_TYPES[typeIndex];  // NOLINT
 }
 

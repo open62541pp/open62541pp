@@ -125,17 +125,14 @@ static UA_StatusCode methodCallback(
     size_t outputSize,
     UA_Variant* output
 ) noexcept {
-    assert(methodContext != nullptr);  // NOLINT
+    assert(methodContext != nullptr);
     const auto* nodeContext = static_cast<ServerContext::NodeContext*>(methodContext);
     const auto& callback = nodeContext->methodCallback;
     if (callback) {
         return detail::invokeCatchStatus([&] {
-            const std::vector<Variant> inputVector(input, input + inputSize);  // NOLINT
-            std::vector<Variant> outputVector(outputSize);
-            callback(inputVector, outputVector);
-            for (size_t i = 0; i < outputSize; ++i) {
-                outputVector[i].swap(output[i]);  // NOLINT
-            }
+            callback(
+                {asWrapper<Variant>(input), inputSize}, {asWrapper<Variant>(output), outputSize}
+            );
         });
     }
     return UA_STATUSCODE_BADINTERNALERROR;
@@ -148,8 +145,8 @@ void addMethod(
     const NodeId& id,
     std::string_view browseName,
     MethodCallback callback,
-    const std::vector<Argument>& inputArguments,
-    const std::vector<Argument>& outputArguments,
+    Span<const Argument> inputArguments,
+    Span<const Argument> outputArguments,
     const MethodAttributes& attributes,
     const NodeId& referenceType
 ) {
@@ -180,8 +177,8 @@ void addMethod(
     const NodeId& id,
     std::string_view browseName,
     MethodCallback callback,  // NOLINT
-    const std::vector<Argument>& inputArguments,
-    const std::vector<Argument>& outputArguments,
+    Span<const Argument> inputArguments,
+    Span<const Argument> outputArguments,
     const MethodAttributes& attributes,
     const NodeId& referenceType
 ) {

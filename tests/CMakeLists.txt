@@ -17,6 +17,7 @@ add_executable(
     Server.cpp
     Services.cpp
     Session.cpp
+    Span.cpp
     Subscription_MonitoredItem.cpp
     TypeConverter.cpp
     Types.cpp

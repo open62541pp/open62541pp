@@ -8,7 +8,7 @@ int main() {
     server.getObjectsNode().addMethod(
         {1, 1000},
         "GenerateEvent",
-        [&](const std::vector<opcua::Variant>& input, std::vector<opcua::Variant>&) {
+        [&](opcua::Span<const opcua::Variant> input, opcua::Span<opcua::Variant>) {
             const auto severity = input[0].getScalar<uint16_t>();
             const auto& message = input[1].getScalar<opcua::String>();
 

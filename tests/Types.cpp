@@ -475,15 +475,13 @@ TEST_CASE("Variant") {
     SUBCASE("Create from array") {
         SUBCASE("Assign if possible") {
             std::vector<double> vec{1.1, 2.2, 3.3};
-            const auto var = Variant::fromArray(vec.data(), vec.size());
+            const auto var = Variant::fromArray(vec);
             CHECK(var.isArray());
             CHECK(var->data == vec.data());
         }
         SUBCASE("Assign with custom data type") {
             std::vector<UA_WriteValue> vec{{}, {}};
-            const auto var = Variant::fromArray(
-                vec.data(), vec.size(), UA_TYPES[UA_TYPES_WRITEVALUE]
-            );
+            const auto var = Variant::fromArray(vec, UA_TYPES[UA_TYPES_WRITEVALUE]);
             CHECK(var.isArray());
             CHECK(var->data == vec.data());
         }
@@ -501,9 +499,7 @@ TEST_CASE("Variant") {
         }
         SUBCASE("Copy with custom data type") {
             const std::vector<UA_WriteValue> vec{{}, {}};
-            const auto var = Variant::fromArray(
-                vec.data(), vec.size(), UA_TYPES[UA_TYPES_WRITEVALUE]
-            );
+            const auto var = Variant::fromArray(vec, UA_TYPES[UA_TYPES_WRITEVALUE]);
             CHECK(var.isArray());
             CHECK(var->data != vec.data());
         }
@@ -520,6 +516,7 @@ TEST_CASE("Variant") {
         CHECK(var.isType(NodeId{0, UA_NS0ID_INT32}));
         CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_INT32]);
         CHECK(var.getVariantType().value() == Type::Int32);
+        CHECK(var.data() == &value);
 
         CHECK_THROWS(var.getScalar<bool>());
         CHECK_THROWS(var.getScalar<int16_t>());
@@ -579,8 +576,8 @@ TEST_CASE("Variant") {
         CHECK(var.isType(NodeId{0, UA_NS0ID_FLOAT}));
         CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_FLOAT]);
         CHECK(var.getVariantType().value() == Type::Float);
+        CHECK(var.data() != array.data());
         CHECK(var.getArrayLength() == array.size());
-        CHECK(var.getArray() != array.data());
 
         CHECK_THROWS(var.getArrayCopy<int32_t>());
         CHECK_THROWS(var.getArrayCopy<bool>());
@@ -591,8 +588,8 @@ TEST_CASE("Variant") {
         Variant var;
         std::vector<float> array{0, 1, 2};
         var.setArray(array);
-        CHECK(var.getArray<float>() == array.data());
-        CHECK(std::as_const(var).getArray<float>() == array.data());
+        CHECK(var.getArray<float>().data() == array.data());
+        CHECK(std::as_const(var).getArray<float>().data() == array.data());
         CHECK(var.getArrayCopy<float>() == array);
 
         std::vector<float> arrayChanged({3, 4, 5});
@@ -608,9 +605,9 @@ TEST_CASE("Variant") {
             detail::allocUaString("item3"),
         };
 
-        var.setArray<UA_String>(array.data(), array.size(), UA_TYPES[UA_TYPES_STRING]);
+        var.setArray(Span{array.data(), array.size()}, UA_TYPES[UA_TYPES_STRING]);
+        CHECK(var.data() == array.data());
         CHECK(var.getArrayLength() == array.size());
-        CHECK(var.getArray() == array.data());
 
         UA_clear(&array[0], &UA_TYPES[UA_TYPES_STRING]);
         UA_clear(&array[1], &UA_TYPES[UA_TYPES_STRING]);
@@ -622,15 +619,15 @@ TEST_CASE("Variant") {
         std::vector<String> array{String{"item1"}, String{"item2"}, String{"item3"}};
 
         var.setArray(array);
+        CHECK(var.data() == array.data());
         CHECK(var.getArrayLength() == array.size());
-        CHECK(var.getArray() == array.data());
-        CHECK(var.getArray<String>() == array.data());
+        CHECK(var.getArray<String>().data() == array.data());
     }
 
     SUBCASE("Set/get array of strings") {
         Variant var;
         std::vector<std::string> value{"a", "b", "c"};
-        var.setArrayCopy<std::string>(value);
+        var.setArrayCopy(value);
 
         CHECK(var.isArray());
         CHECK(var.isType(Type::String));
@@ -642,6 +639,11 @@ TEST_CASE("Variant") {
         CHECK_THROWS(var.getArrayCopy<int32_t>());
         CHECK_THROWS(var.getArrayCopy<bool>());
         CHECK(var.getArrayCopy<std::string>() == value);
+    }
+
+    SUBCASE("Set array from initializer list") {
+        Variant var;
+        var.setArrayCopy<const int>({1, 2, 3});  // TODO: avoid manual template types
     }
 
     SUBCASE("Set/get non-builtin data types") {
@@ -656,7 +658,7 @@ TEST_CASE("Variant") {
             var.setScalar(value, dt);
             CHECK(var.isScalar());
             CHECK(var.getDataType() == &dt);
-            CHECK(var.getScalar() == &value);
+            CHECK(var.data() == &value);
             CHECK(var.getScalar<CustomType>().attributeId == 1);
         }
 
@@ -664,30 +666,28 @@ TEST_CASE("Variant") {
             var.setScalarCopy(value, dt);
             CHECK(var.isScalar());
             CHECK(var.getDataType() == &dt);
-            CHECK(var.getScalar() != &value);
+            CHECK(var.data() != &value);
             CHECK(var.getScalar<CustomType>().attributeId == 1);
         }
 
         std::vector<CustomType> array(3);
 
         SUBCASE("Array") {
-            var.setArray(array.data(), array.size(), dt);
             var.setArray(array, dt);
             CHECK(var.isArray());
             CHECK(var.getDataType() == &dt);
+            CHECK(var.data() == array.data());
             CHECK(var.getArrayLength() == 3);
-            CHECK(var.getArray() == array.data());
-            CHECK(var.getArray<CustomType>() == array.data());
+            CHECK(var.getArray<CustomType>().data() == array.data());
         }
 
         SUBCASE("Array (copy)") {
-            var.setArrayCopy(array.data(), array.size(), dt);
             var.setArrayCopy(array, dt);
             CHECK(var.isArray());
             CHECK(var.getDataType() == &dt);
+            CHECK(var.data() != array.data());
             CHECK(var.getArrayLength() == 3);
-            CHECK(var.getArray() != array.data());
-            CHECK(var.getArray<CustomType>() != array.data());
+            CHECK(var.getArray<CustomType>().data() != array.data());
         }
     }
 }
@@ -873,11 +873,9 @@ TEST_CASE("NodeAttributes") {
     }
 
     SUBCASE("Array type") {
-        CHECK(attr.getArrayDimensions() == std::vector<uint32_t>{});
-        CHECK(attr.getArrayDimensionsSize() == 0);
+        CHECK(attr.getArrayDimensions().empty());
         attr.setArrayDimensions({1, 2});
-        CHECK(attr.getArrayDimensions() == std::vector<uint32_t>{1, 2});
-        CHECK(attr.getArrayDimensionsSize() == 2);
+        CHECK(attr.getArrayDimensions() == Span<const uint32_t>{1, 2});
         CHECK(attr.getSpecifiedAttributes() == UA_NODEATTRIBUTESMASK_ARRAYDIMENSIONS);
     }
 }
@@ -918,8 +916,8 @@ TEST_CASE("RelativePath") {
     };
     const auto elements = rp.getElements();
     CHECK(elements.size() == 2);
-    CHECK(elements.at(0).getTargetName() == QualifiedName(0, "child1"));
-    CHECK(elements.at(1).getTargetName() == QualifiedName(0, "child2"));
+    CHECK(elements[0].getTargetName() == QualifiedName(0, "child1"));
+    CHECK(elements[1].getTargetName() == QualifiedName(0, "child2"));
 }
 
 TEST_CASE("BrowsePath") {

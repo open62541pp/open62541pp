@@ -9,6 +9,7 @@
 
 #include "open62541pp/Common.h"
 #include "open62541pp/ErrorHandling.h"
+#include "open62541pp/Span.h"
 #include "open62541pp/TypeConverter.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/helper.h"
@@ -24,6 +25,10 @@ class NodeId;
  * @ingroup TypeWrapper
  */
 class Variant : public TypeWrapper<UA_Variant, UA_TYPES_VARIANT> {
+private:
+    template <typename T>
+    using EnableIfNoSpan = typename std::enable_if_t<!detail::IsSpan<T>::value>;
+
 public:
     // NOLINTNEXTLINE, false positive?
     using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
@@ -46,40 +51,30 @@ public:
 
     /// Create Variant from array (no copy if assignable without conversion).
     template <typename T>
-    [[nodiscard]] static Variant fromArray(T* array, size_t size);
+    [[nodiscard]] static Variant fromArray(Span<T> array);
 
     /// Create Variant from array with custom data type.
     template <typename T>
-    [[nodiscard]] static Variant fromArray(T* array, size_t size, const UA_DataType& dataType);
-
-    /// Create Variant from std::vector (no copy if assignable without conversion).
-    template <typename T>
-    [[nodiscard]] static Variant fromArray(std::vector<T>& array) {
-        return fromArray<T>(array.data(), array.size());
-    }
+    [[nodiscard]] static Variant fromArray(Span<T> array, const UA_DataType& dataType);
 
     /// Create Variant from array (copy).
     template <typename T>
-    [[nodiscard]] static Variant fromArray(const T* array, size_t size);
+    [[nodiscard]] static Variant fromArray(Span<const T> array);
 
     /// Create Variant from array with custom data type (copy).
     template <typename T>
-    [[nodiscard]] static Variant fromArray(
-        const T* array, size_t size, const UA_DataType& dataType
-    );
+    [[nodiscard]] static Variant fromArray(Span<const T> array, const UA_DataType& dataType);
 
-    /// Create Variant from std::vector (copy).
-    template <typename T>
-    [[nodiscard]] static Variant fromArray(const std::vector<T>& array) {
-        return fromArray<T>(array.data(), array.size());
+    /// @overload
+    template <typename ArrayLike, typename = EnableIfNoSpan<ArrayLike>>
+    [[nodiscard]] static Variant fromArray(ArrayLike&& array) {
+        return Variant::fromArray(Span{std::forward<ArrayLike>(array)});
     }
 
-    /// Create Variant from std::vector with custom data type (copy).
-    template <typename T>
-    [[nodiscard]] static Variant fromArray(
-        const std::vector<T>& array, const UA_DataType& dataType
-    ) {
-        return fromArray<T>(array.data(), array.size(), dataType);
+    /// @overload
+    template <typename ArrayLike, typename = EnableIfNoSpan<ArrayLike>>
+    [[nodiscard]] static Variant fromArray(ArrayLike&& array, const UA_DataType& dataType) {
+        return Variant::fromArray(Span{std::forward<ArrayLike>(array)}, dataType);
     }
 
     /// Create Variant from range of elements (copy).
@@ -108,13 +103,17 @@ public:
     /// Get variant type.
     std::optional<Type> getVariantType() const noexcept;
 
-    /// Get pointer to scalar value.
-    /// @exception BadVariantAccess If the variant is not a scalar
-    void* getScalar();
+    /// Get pointer to the underlying data.
+    /// Check the properties and data type before casting it to the actual type.
+    /// Use the methods @ref isScalar, @ref isArray, @ref isType / @ref getDataType.
+    void* data() noexcept;
 
-    /// Get pointer to scalar value.
-    /// @exception BadVariantAccess If the variant is not a scalar
-    const void* getScalar() const;
+    /// @copydoc data
+    const void* data() const noexcept;
+
+    [[deprecated("Use the methods isScalar() and data() instead")]] void* getScalar();
+
+    [[deprecated("Use the methods isScalar() and data() instead")]] const void* getScalar() const;
 
     /// Get reference to scalar value with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not a scalar or not of type `T`.
@@ -135,25 +134,21 @@ public:
     size_t getArrayLength() const noexcept;
 
     /// Get array dimensions.
-    std::vector<uint32_t> getArrayDimensions() const;
+    Span<const uint32_t> getArrayDimensions() const noexcept;
 
-    /// Get pointer to array value.
-    /// @exception BadVariantAccess If the variant is not an array
-    void* getArray();
+    [[deprecated("Use the methods isArray() and data() instead")]] void* getArray();
 
-    /// Get pointer to array value.
-    /// @exception BadVariantAccess If the variant is not an array
-    const void* getArray() const;
+    [[deprecated("Use the methods isArray() and data() instead")]] const void* getArray() const;
 
-    /// Get pointer to array with given template type (only native or wrapper types).
+    /// Get array with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not an array or not of type `T`.
     template <typename T>
-    T* getArray();
+    Span<T> getArray();
 
-    /// Get const pointer to array with given template type (only native or wrapper types).
+    /// Get array with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not an array or not of type `T`.
     template <typename T>
-    const T* getArray() const;
+    Span<const T> getArray() const;
 
     /// Get copy of array with given template type and return it as a std::vector.
     /// @exception BadVariantAccess If the variant is not an array or not convertible to `T`.
@@ -176,44 +171,44 @@ public:
     template <typename T>
     void setScalarCopy(const T& value, const UA_DataType& dataType);
 
-    /// Assign array (raw) to variant.
+    /// Assign array to variant.
     template <typename T>
-    void setArray(T* array, size_t size) noexcept;
+    void setArray(Span<T> array) noexcept;
 
-    /// Assign array (raw) to variant with custom data type.
-    template <typename T>
-    void setArray(T* array, size_t size, const UA_DataType& dataType) noexcept;
-
-    /// Assign array (std::vector) to variant.
-    template <typename T>
-    void setArray(std::vector<T>& array) noexcept {
-        setArray<T>(array.data(), array.size());
+    /// @overload
+    template <typename ArrayLike, typename = EnableIfNoSpan<ArrayLike>>
+    void setArray(ArrayLike&& array) noexcept {
+        setArray(Span{std::forward<ArrayLike>(array)});
     }
 
-    /// Assign array (std::vector) to variant with custom data type.
+    /// Assign array to variant with custom data type.
     template <typename T>
-    void setArray(std::vector<T>& array, const UA_DataType& dataType) noexcept {
-        setArray<T>(array.data(), array.size(), dataType);
+    void setArray(Span<T> array, const UA_DataType& dataType) noexcept;
+
+    /// @overload
+    template <typename ArrayLike, typename = EnableIfNoSpan<ArrayLike>>
+    void setArray(ArrayLike&& array, const UA_DataType& dataType) noexcept {
+        setArray(Span{std::forward<ArrayLike>(array)}, dataType);
     }
 
-    /// Copy array (raw) to variant.
+    /// Copy array to variant.
     template <typename T>
-    void setArrayCopy(const T* array, size_t size);
+    void setArrayCopy(Span<T> array);
 
-    /// Copy array (raw) to variant with custom data type.
-    template <typename T>
-    void setArrayCopy(const T* array, size_t size, const UA_DataType& dataType);
-
-    /// Copy array (std::vector) to variant.
-    template <typename T>
-    void setArrayCopy(const std::vector<T>& array) {
-        setArrayCopy<T>(array.data(), array.size());
+    /// @overload
+    template <typename ArrayLike, typename = EnableIfNoSpan<ArrayLike>>
+    void setArrayCopy(ArrayLike&& array) noexcept {
+        setArrayCopy(Span{std::forward<ArrayLike>(array)});
     }
 
-    /// Copy array (std::vector) to variant with custom data type.
+    /// Copy array to variant with custom data type.
     template <typename T>
-    void setArrayCopy(const std::vector<T>& array, const UA_DataType& dataType) noexcept {
-        setArrayCopy<T>(array.data(), array.size(), dataType);
+    void setArrayCopy(Span<T> array, const UA_DataType& dataType);
+
+    /// @overload
+    template <typename ArrayLike, typename = EnableIfNoSpan<ArrayLike>>
+    void setArrayCopy(ArrayLike&& array, const UA_DataType& dataType) noexcept {
+        setArrayCopy(Span{std::forward<ArrayLike>(array)}, dataType);
     }
 
     /// Copy range of elements as array to variant.
@@ -278,9 +273,9 @@ template <typename T>
 Variant Variant::fromScalar(T& value) {
     Variant variant;
     if constexpr (isConvertibleToNative<T>()) {
-        variant.setScalar<T>(value);
+        variant.setScalar(value);
     } else {
-        variant.setScalarCopy<T>(value);
+        variant.setScalarCopy(value);
     }
     return variant;
 }
@@ -288,60 +283,60 @@ Variant Variant::fromScalar(T& value) {
 template <typename T>
 Variant Variant::fromScalar(T& value, const UA_DataType& dataType) {
     Variant variant;
-    variant.setScalar<T>(value, dataType);
+    variant.setScalar(value, dataType);
     return variant;
 }
 
 template <typename T>
 Variant Variant::fromScalar(const T& value) {
     Variant variant;
-    variant.setScalarCopy<T>(value);
+    variant.setScalarCopy(value);
     return variant;
 }
 
 template <typename T>
 Variant Variant::fromScalar(const T& value, const UA_DataType& dataType) {
     Variant variant;
-    variant.setScalarCopy<T>(value, dataType);
+    variant.setScalarCopy(value, dataType);
     return variant;
 }
 
 template <typename T>
-Variant Variant::fromArray(T* array, size_t size) {
+Variant Variant::fromArray(Span<T> array) {
     Variant variant;
     if constexpr (isConvertibleToNative<T>()) {
-        variant.setArray<T>(array, size);  // NOLINT, variant isn't modified
+        variant.setArray(array);  // NOLINT, variant isn't modified
     } else {
-        variant.setArrayCopy<T>(array, size);
+        variant.setArrayCopy(array);
     }
     return variant;
 }
 
 template <typename T>
-Variant Variant::fromArray(T* array, size_t size, const UA_DataType& dataType) {
+Variant Variant::fromArray(Span<T> array, const UA_DataType& dataType) {
     Variant variant;
-    variant.setArray<T>(array, size, dataType);
+    variant.setArray(array, dataType);
     return variant;
 }
 
 template <typename T>
-Variant Variant::fromArray(const T* array, size_t size) {
+Variant Variant::fromArray(Span<const T> array) {
     Variant variant;
-    variant.setArrayCopy<T>(array, size);
+    variant.setArrayCopy(array);
     return variant;
 }
 
 template <typename T>
-Variant Variant::fromArray(const T* array, size_t size, const UA_DataType& dataType) {
+Variant Variant::fromArray(Span<const T> array, const UA_DataType& dataType) {
     Variant variant;
-    variant.setArrayCopy<T>(array, size, dataType);
+    variant.setArrayCopy(array, dataType);
     return variant;
 }
 
 template <typename InputIt>
 Variant Variant::fromArray(InputIt first, InputIt last) {
     Variant variant;
-    variant.setArrayCopy<InputIt>(first, last);
+    variant.setArrayCopy(first, last);
     return variant;
 }
 
@@ -367,17 +362,21 @@ T Variant::getScalarCopy() const {
 }
 
 template <typename T>
-T* Variant::getArray() {
-    return const_cast<T*>(std::as_const(*this).getArray<T>());  // NOLINT, avoid code duplication
-}
-
-template <typename T>
-const T* Variant::getArray() const {
+Span<T> Variant::getArray() {
     assertGetNoCopy<T>();
     checkIsArray();
     checkReturnType<T>();
     checkDataType<T>(*getDataType());
-    return static_cast<const T*>(handle()->data);
+    return {static_cast<T*>(handle()->data), handle()->arrayLength};
+}
+
+template <typename T>
+Span<const T> Variant::getArray() const {
+    assertGetNoCopy<T>();
+    checkIsArray();
+    checkReturnType<T>();
+    checkDataType<T>(*getDataType());
+    return {static_cast<const T*>(handle()->data), handle()->arrayLength};
 }
 
 template <typename T>
@@ -389,9 +388,8 @@ std::vector<T> Variant::getArrayCopy() const {
 
 template <typename T>
 void Variant::setScalar(T& value) noexcept {
-    assertNoVariant<T>();
     assertSetNoCopy<T>();
-    setScalarImpl(&value, detail::guessDataType<T>());
+    setScalar(value, detail::guessDataType<T>());
 }
 
 template <typename T>
@@ -419,34 +417,33 @@ void Variant::setScalarCopy(const T& value, const UA_DataType& dataType) {
 }
 
 template <typename T>
-void Variant::setArray(T* array, size_t size) noexcept {
-    assertNoVariant<T>();
+void Variant::setArray(Span<T> array) noexcept {
     assertSetNoCopy<T>();
-    setArrayImpl(array, size, detail::guessDataType<T>());
+    setArray(array, detail::guessDataType<T>());
 }
 
 template <typename T>
-void Variant::setArray(T* array, size_t size, const UA_DataType& dataType) noexcept {
+void Variant::setArray(Span<T> array, const UA_DataType& dataType) noexcept {
     assertNoVariant<T>();
     checkDataType<T>(dataType);
-    setArrayImpl(array, size, dataType);
+    setArrayImpl(array.data(), array.size(), dataType);
 }
 
 template <typename T>
-void Variant::setArrayCopy(const T* array, size_t size) {
+void Variant::setArrayCopy(Span<T> array) {
     assertNoVariant<T>();
     if constexpr (detail::isBuiltinType<T>()) {
-        setArrayCopyImpl(array, size, detail::guessDataType<T>());
+        setArrayCopyImpl(array.data(), array.size(), detail::guessDataType<T>());
     } else {
-        setArrayCopy<const T*>(array, array + size);  // NOLINT
+        setArrayCopy(array.begin(), array.end());
     }
 }
 
 template <typename T>
-void Variant::setArrayCopy(const T* array, size_t size, const UA_DataType& dataType) {
+void Variant::setArrayCopy(Span<T> array, const UA_DataType& dataType) {
     assertNoVariant<T>();
     checkDataType<T>(dataType);
-    setArrayCopyImpl(array, size, dataType);
+    setArrayCopyImpl(array.data(), array.size(), dataType);
 }
 
 template <typename InputIt>

@@ -7,6 +7,7 @@
 #include "open62541pp/Common.h"
 #include "open62541pp/Config.h"
 #include "open62541pp/MonitoredItem.h"
+#include "open62541pp/Span.h"
 #include "open62541pp/services/MonitoredItem.h"
 #include "open62541pp/services/Subscription.h"
 #include "open62541pp/types/NodeId.h"
@@ -34,7 +35,7 @@ using DataChangeCallback =
 /// @tparam T Server or Client
 template <typename T>
 using EventCallback =
-    std::function<void(const MonitoredItem<T>& item, const std::vector<Variant>& eventFields)>;
+    std::function<void(const MonitoredItem<T>& item, Span<const Variant> eventFields)>;
 
 /**
  * High-level subscription class.

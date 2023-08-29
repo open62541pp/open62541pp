@@ -7,6 +7,7 @@
 
 #include "open62541pp/Common.h"
 #include "open62541pp/Config.h"
+#include "open62541pp/Span.h"
 #include "open62541pp/services/Attribute.h"
 #include "open62541pp/services/Method.h"
 #include "open62541pp/services/NodeManagement.h"
@@ -111,8 +112,8 @@ public:
         const NodeId& id,
         std::string_view browseName,
         services::MethodCallback callback,
-        const std::vector<Argument>& inputArguments,
-        const std::vector<Argument>& outputArguments,
+        Span<const Argument> inputArguments,
+        Span<const Argument> outputArguments,
         const MethodAttributes& attributes = {},
         const NodeId& referenceType = ReferenceTypeId::HasComponent
     ) {
@@ -249,7 +250,7 @@ public:
     /// Browse child node specified by its relative path from this node (only local nodes).
     /// The relative path is specified using browse names.
     /// @exception BadStatus (BadNoMatch) If path not found
-    Node browseChild(const std::vector<QualifiedName>& path);
+    Node browseChild(Span<const QualifiedName> path);
 
     /// Browse parent node.
     /// A Node may have several parents, the first found is returned.
@@ -260,9 +261,7 @@ public:
     /// Call a server method and return results.
     /// @param methodId NodeId of the method (`HasComponent` reference to current node required)
     /// @param inputArguments Input argument values
-    std::vector<Variant> callMethod(
-        const NodeId& methodId, const std::vector<Variant>& inputArguments
-    ) {
+    std::vector<Variant> callMethod(const NodeId& methodId, Span<const Variant> inputArguments) {
         return services::call(connection_, nodeId_, methodId, inputArguments);
     }
 #endif
@@ -473,29 +472,25 @@ public:
         return writeValueScalar<T>(value);
     }
 
-    /// Write array value (raw) to variable node.
+    /// Write array value to variable node.
     /// @return Current node instance to chain multiple methods (fluent interface)
     template <typename T>
-    Node& writeValueArray(const T* array, size_t size) {
-        // NOLINTNEXTLINE, variant isn't modified, try to avoid copy
-        const auto variant = Variant::fromArray<T>(const_cast<T*>(array), size);
-        writeValue(variant);
+    Node& writeValueArray(Span<T> array) {
+        writeValue(Variant::fromArray(array));
         return *this;
     }
 
-    /// Write array value (std::vector) to variable node.
-    /// @return Current node instance to chain multiple methods (fluent interface)
-    template <typename T>
-    Node& writeValueArray(const std::vector<T>& array) {
-        return writeValueArray<T>(array.data(), array.size());
+    /// @overload
+    template <typename ArrayLike>
+    Node& writeValueArray(ArrayLike&& array) {
+        return writeValueArray(Span{std::forward<ArrayLike>(array)});
     }
 
     /// Write range of elements as array value to variable node.
     /// @return Current node instance to chain multiple methods (fluent interface)
     template <typename InputIt>
     Node& writeValueArray(InputIt first, InputIt last) {
-        const auto variant = Variant::fromArray<InputIt>(first, last);
-        writeValue(variant);
+        writeValue(Variant::fromArray(first, last));
         return *this;
     }
 
@@ -529,7 +524,7 @@ public:
 
     /// @copydoc services::writeArrayDimensions
     /// @return Current node instance to chain multiple methods (fluent interface)
-    Node& writeArrayDimensions(const std::vector<uint32_t>& dimensions) {
+    Node& writeArrayDimensions(Span<const uint32_t> dimensions) {
         services::writeArrayDimensions(connection_, nodeId_, dimensions);
         return *this;
     }

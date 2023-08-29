@@ -18,7 +18,7 @@ std::vector<Variant> call(
     Server& server,
     const NodeId& objectId,
     const NodeId& methodId,
-    const std::vector<Variant>& inputArguments
+    Span<const Variant> inputArguments
 ) {
     UA_CallMethodRequest request{};
     request.objectId = objectId;
@@ -44,7 +44,7 @@ std::vector<Variant> call(
     Client& client,
     const NodeId& objectId,
     const NodeId& methodId,
-    const std::vector<Variant>& inputArguments
+    Span<const Variant> inputArguments
 ) {
     size_t outputSize{};
     UA_Variant* output{};

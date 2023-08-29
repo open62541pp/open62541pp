@@ -75,8 +75,7 @@ static void eventNotificationCallback(
     auto& callback = monitoredItem->eventCallback;
     if (callback) {
         detail::invokeCatchIgnore([&] {
-            std::vector<Variant> eventFieldsVec(eventFields, eventFields + nEventFields);  // NOLINT
-            callback(subId, monId, eventFieldsVec);
+            callback(subId, monId, {asWrapper<Variant>(eventFields), nEventFields});
         });
     }
 }
@@ -285,8 +284,8 @@ void setTriggering(
     Client& client,
     uint32_t subscriptionId,
     uint32_t triggeringItemId,
-    const std::vector<uint32_t>& linksToAdd,
-    const std::vector<uint32_t>& linksToRemove
+    Span<const uint32_t> linksToAdd,
+    Span<const uint32_t> linksToRemove
 ) {
     UA_SetTriggeringRequest request{};
     request.subscriptionId = subscriptionId;
@@ -299,11 +298,11 @@ void setTriggering(
     using Response = TypeWrapper<UA_SetTriggeringResponse, UA_TYPES_SETTRIGGERINGRESPONSE>;
     const Response response = UA_Client_MonitoredItems_setTriggering(client.handle(), request);
     detail::throwOnBadStatus(response->responseHeader.serviceResult);
-    for (size_t i = 0; i < response->addResultsSize; ++i) {
-        detail::throwOnBadStatus(response->addResults[i]);  // NOLINT
+    for (auto&& status : Span(response->addResults, response->addResultsSize)) {
+        detail::throwOnBadStatus(status);
     }
-    for (size_t i = 0; i < response->removeResultsSize; ++i) {
-        detail::throwOnBadStatus(response->removeResults[i]);  // NOLINT
+    for (auto&& status : Span(response->removeResults, response->removeResultsSize)) {
+        detail::throwOnBadStatus(status);
     }
 }
 

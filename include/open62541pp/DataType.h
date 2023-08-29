@@ -1,9 +1,9 @@
 #pragma once
 
 #include <cstdint>
-#include <vector>
 
 #include "open62541pp/Common.h"
+#include "open62541pp/Span.h"
 #include "open62541pp/open62541.h"
 
 namespace opcua {
@@ -67,9 +67,8 @@ public:
     bool getOverlayable() const noexcept;
     void setOverlayable(bool overlayable) noexcept;
 
-    uint8_t getMembersSize() const noexcept;
-    std::vector<DataTypeMember> getMembers() const;
-    void setMembers(const std::vector<DataTypeMember>& members);
+    Span<const DataTypeMember> getMembers() const noexcept;
+    void setMembers(Span<const DataTypeMember> members);
 
     constexpr UA_DataType* handle() noexcept {
         return &data_;

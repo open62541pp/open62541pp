@@ -62,6 +62,14 @@ std::optional<Type> Variant::getVariantType() const noexcept {
     return {};
 }
 
+void* Variant::data() noexcept {
+    return handle()->data;
+}
+
+const void* Variant::data() const noexcept {
+    return handle()->data;
+}
+
 void* Variant::getScalar() {
     checkIsScalar();
     return handle()->data;
@@ -86,12 +94,11 @@ const void* Variant::getArray() const {
     return handle()->data;
 }
 
-std::vector<uint32_t> Variant::getArrayDimensions() const {
+Span<const uint32_t> Variant::getArrayDimensions() const noexcept {
     if (!isArray()) {
         return {};
     }
-    const auto* ptr = handle()->arrayDimensions;
-    return {ptr, ptr + handle()->arrayDimensionsSize};  // NOLINT
+    return {handle()->arrayDimensions, handle()->arrayDimensionsSize};
 }
 
 void Variant::checkIsScalar() const {

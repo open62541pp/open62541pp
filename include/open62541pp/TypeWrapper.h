@@ -147,7 +147,7 @@ public:
 
 protected:
     inline static void checkMemSize() {
-        assert(sizeof(T) == UA_TYPES[typeIndex].memSize);  // NOLINT
+        assert(sizeof(T) == UA_TYPES[typeIndex].memSize);
     }
 
     void clear() noexcept {

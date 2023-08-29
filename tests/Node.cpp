@@ -177,8 +177,8 @@ TEST_CASE("Node") {
                 CHECK_NOTHROW(varNode.writeDataType(Type::Float));
 
                 // write with wrong data type
-                CHECK_THROWS(varNode.template writeValueScalar<bool>({}));
-                CHECK_THROWS(varNode.template writeValueScalar<int>({}));
+                CHECK_THROWS(varNode.writeValueScalar(bool{}));
+                CHECK_THROWS(varNode.writeValueScalar(int{}));
 
                 // write with correct data type
                 float value = 11.11f;
@@ -198,8 +198,8 @@ TEST_CASE("Node") {
                 CHECK_NOTHROW(varNode.writeDataType(Type::Double));
 
                 // write with wrong data type
-                CHECK_THROWS(varNode.template writeValueArray<int>({}));
-                CHECK_THROWS(varNode.template writeValueArray<float>({}));
+                CHECK_THROWS(varNode.writeValueArray(std::vector<int>{}));
+                CHECK_THROWS(varNode.writeValueArray(std::vector<float>{}));
 
                 // write with correct data type
                 std::vector<double> array{11.11, 22.22, 33.33};
@@ -210,7 +210,7 @@ TEST_CASE("Node") {
                 }
 
                 SUBCASE("Write as raw array") {
-                    CHECK_NOTHROW(varNode.writeValueArray(array.data(), array.size()));
+                    CHECK_NOTHROW(varNode.writeValueArray(Span{array.data(), array.size()}));
                     CHECK(varNode.template readValueArray<double>() == array);
                 }
 

@@ -78,7 +78,7 @@ RelativePath::RelativePath(std::initializer_list<RelativePathElement> elements) 
     handle()->elements = detail::toNativeArrayAlloc(elements.begin(), elements.end());
 }
 
-RelativePath::RelativePath(const std::vector<RelativePathElement>& elements) {
+RelativePath::RelativePath(Span<const RelativePathElement> elements) {
     handle()->elementsSize = elements.size();
     handle()->elements = detail::toNativeArrayAlloc(elements.begin(), elements.end());
 }
@@ -99,7 +99,7 @@ Argument::Argument(
     const LocalizedText& description,
     const NodeId& dataType,
     ValueRank valueRank,
-    const std::vector<uint32_t>& arrayDimensions
+    Span<const uint32_t> arrayDimensions
 ) {
     asWrapper<String>(handle()->name) = String(name);
     asWrapper<LocalizedText>(handle()->description) = description;

@@ -11,10 +11,10 @@ int main() {
     objectNode.addMethod(
         {1, 1000},
         "Greet",
-        [](const std::vector<opcua::Variant>& input, std::vector<opcua::Variant>& output) {
-            const auto& name = input.at(0).getScalar<opcua::String>();
-            const auto greeting = std::string("Hello ").append(name.get());
-            output.at(0).setScalarCopy(greeting);
+        [](opcua::Span<const opcua::Variant> input, opcua::Span<opcua::Variant> output) {
+            const auto& name = input[0].getScalar<opcua::String>();
+            const auto greeting = std::string("Hello ").append(name);
+            output[0].setScalarCopy(greeting);
         },
         {{"name", {"en-US", "your name"}, opcua::DataTypeId::String, opcua::ValueRank::Scalar}},
         {{"greeting", {"en-US", "greeting"}, opcua::DataTypeId::String, opcua::ValueRank::Scalar}}
@@ -25,11 +25,11 @@ int main() {
     objectNode.addMethod(
         {1, 1001},
         "IncInt32ArrayValues",
-        [](const std::vector<opcua::Variant>& input, std::vector<opcua::Variant>& output) {
-            auto array = input.at(0).getArrayCopy<int32_t>();
-            const auto delta = input.at(1).getScalarCopy<int32_t>();
+        [](opcua::Span<const opcua::Variant> input, opcua::Span<opcua::Variant> output) {
+            auto array = input[0].getArrayCopy<int32_t>();
+            const auto delta = input[1].getScalarCopy<int32_t>();
             std::for_each(array.begin(), array.end(), [&](auto& v) { v += delta; });
-            output.at(0).setArrayCopy(array);
+            output[0].setArrayCopy(array);
         },
         {
             opcua::Argument(

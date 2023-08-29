@@ -20,8 +20,8 @@ namespace opcua {
 /* -------------------------------------- Native callbacks -------------------------------------- */
 
 inline static CustomAccessControl& getContext(UA_AccessControl* ac) noexcept {
-    assert(ac != nullptr);  // NOLINT
-    assert(ac->context != nullptr);  // NOLINT
+    assert(ac != nullptr);
+    assert(ac->context != nullptr);
     return *static_cast<CustomAccessControl*>(ac->context);
 }
 
@@ -43,7 +43,7 @@ inline static Session getSession(UA_AccessControl* ac, const UA_NodeId* sessionI
 
 inline static AccessControlBase& getAccessControl(UA_AccessControl* ac) noexcept {
     auto* accessControl = getContext(ac).getAccessControl();
-    assert(accessControl != nullptr);  // NOLINT
+    assert(accessControl != nullptr);
     return *accessControl;
 }
 
@@ -349,7 +349,7 @@ void CustomAccessControl::setAccessControl() {
     }
 
     auto* config = UA_Server_getConfig(getServer().handle());
-    assert(config != nullptr);  // NOLINT
+    assert(config != nullptr);
 
     // use highest security policy to transfer user tokens
     if (config->securityPoliciesSize > 0) {

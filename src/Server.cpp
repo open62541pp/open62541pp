@@ -159,9 +159,9 @@ Server::Server(
     uint16_t port,
     const ByteString& certificate,
     const ByteString& privateKey,
-    const std::vector<ByteString>& trustList,
-    const std::vector<ByteString>& issuerList,
-    const std::vector<ByteString>& revocationList
+    Span<const ByteString> trustList,
+    Span<const ByteString> issuerList,
+    Span<const ByteString> revocationList
 )
     : connection_(std::make_shared<Connection>(*this)) {
     const auto status = UA_ServerConfig_setDefaultWithSecurityPolicies(
@@ -251,7 +251,7 @@ static void valueCallbackOnRead(
     [[maybe_unused]] const UA_NumericRange* range,
     const UA_DataValue* value
 ) noexcept {
-    assert(nodeContext != nullptr && value != nullptr);  // NOLINT
+    assert(nodeContext != nullptr && value != nullptr);
     auto& cb = static_cast<ServerContext::NodeContext*>(nodeContext)->valueCallback.onBeforeRead;
     if (cb) {
         detail::invokeCatchIgnore([&] { cb(asWrapper<DataValue>(*value)); });
@@ -267,7 +267,7 @@ static void valueCallbackOnWrite(
     [[maybe_unused]] const UA_NumericRange* range,
     const UA_DataValue* value
 ) noexcept {
-    assert(nodeContext != nullptr && value != nullptr);  // NOLINT
+    assert(nodeContext != nullptr && value != nullptr);
     auto& cb = static_cast<ServerContext::NodeContext*>(nodeContext)->valueCallback.onAfterWrite;
     if (cb) {
         detail::invokeCatchIgnore([&] { cb(asWrapper<DataValue>(*value)); });
@@ -299,7 +299,7 @@ static UA_StatusCode valueSourceRead(
     const UA_NumericRange* range,
     UA_DataValue* value
 ) noexcept {
-    assert(nodeContext != nullptr && value != nullptr);  // NOLINT
+    assert(nodeContext != nullptr && value != nullptr);
     auto& callback = static_cast<ServerContext::NodeContext*>(nodeContext)->dataSource.read;
     if (callback) {
         return detail::invokeCatchStatus([&] {
@@ -318,7 +318,7 @@ static UA_StatusCode valueSourceWrite(
     const UA_NumericRange* range,
     const UA_DataValue* value
 ) noexcept {
-    assert(nodeContext != nullptr && value != nullptr);  // NOLINT
+    assert(nodeContext != nullptr && value != nullptr);
     auto& callback = static_cast<ServerContext::NodeContext*>(nodeContext)->dataSource.write;
     if (callback) {
         return detail::invokeCatchStatus([&] {

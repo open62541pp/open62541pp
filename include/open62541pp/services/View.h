@@ -3,6 +3,7 @@
 #include <cstdint>
 #include <vector>
 
+#include "open62541pp/Span.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/NodeId.h"
 
@@ -98,7 +99,7 @@ BrowsePathResult translateBrowsePathToNodeIds(T& serverOrClient, const BrowsePat
  */
 template <typename T>
 BrowsePathResult browseSimplifiedBrowsePath(
-    T& serverOrClient, const NodeId& origin, const std::vector<QualifiedName>& browsePath
+    T& serverOrClient, const NodeId& origin, Span<const QualifiedName> browsePath
 );
 
 }  // namespace opcua::services

@@ -1,7 +1,6 @@
 #include "open62541pp/services/View.h"
 
 #include <algorithm>  // transform
-#include <iterator>  // make_move_iterator
 
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
@@ -79,16 +78,12 @@ std::vector<ReferenceDescription> browseAll(
     T& serverOrClient, const BrowseDescription& bd, uint32_t maxReferences
 ) {
     auto response = browse(serverOrClient, bd, maxReferences);
-    std::vector<ReferenceDescription> refs = response.getReferences();
+    std::vector<ReferenceDescription> refs(response.getReferences());
     while (!response.getContinuationPoint().empty()) {
         const bool release = (refs.size() >= maxReferences);
         response = browseNext(serverOrClient, release, response.getContinuationPoint());
         auto refsNext = response.getReferences();
-        refs.insert(
-            refs.end(),
-            std::make_move_iterator(refsNext.begin()),
-            std::make_move_iterator(refsNext.end())
-        );
+        refs.insert(refs.end(), refsNext.begin(), refsNext.end());
     }
     if ((maxReferences > 0) && (refs.size() > maxReferences)) {
         refs.resize(maxReferences);
@@ -147,7 +142,7 @@ BrowsePathResult translateBrowsePathToNodeIds<Client>(
 
 template <typename T>
 BrowsePathResult browseSimplifiedBrowsePath(
-    T& serverOrClient, const NodeId& origin, const std::vector<QualifiedName>& browsePath
+    T& serverOrClient, const NodeId& origin, Span<const QualifiedName> browsePath
 ) {
     std::vector<RelativePathElement> relativePathElements(browsePath.size());
     std::transform(
@@ -168,8 +163,8 @@ BrowsePathResult browseSimplifiedBrowsePath(
 template std::vector<ReferenceDescription> browseAll<Server>(Server&, const BrowseDescription&, uint32_t);
 template std::vector<ReferenceDescription> browseAll<Client>(Client&, const BrowseDescription&, uint32_t);
 
-template BrowsePathResult browseSimplifiedBrowsePath<Server>(Server&, const NodeId&, const std::vector<QualifiedName>&);
-template BrowsePathResult browseSimplifiedBrowsePath<Client>(Client&, const NodeId&, const std::vector<QualifiedName>&);
+template BrowsePathResult browseSimplifiedBrowsePath<Server>(Server&, const NodeId&, Span<const QualifiedName>);
+template BrowsePathResult browseSimplifiedBrowsePath<Client>(Client&, const NodeId&, Span<const QualifiedName>);
 
 // clang-format on
 

@@ -166,7 +166,7 @@ bool AccessControlDefault::allowTransferSubscription(
 bool AccessControlDefault::allowHistoryUpdate(
     [[maybe_unused]] Session& session,
     [[maybe_unused]] const NodeId& nodeId,
-    [[maybe_unused]] PerformUpdateType performInsertReplace,  // TODO
+    [[maybe_unused]] PerformUpdateType performInsertReplace,
     [[maybe_unused]] const DataValue& value
 ) {
     return true;

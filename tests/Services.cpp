@@ -153,7 +153,10 @@ TEST_CASE("Attribute service set (server)") {
         CHECK(services::readWriteMask(server, id) == attr.getWriteMask());
         CHECK(services::readDataType(server, id) == attr.getDataType());
         CHECK(services::readValueRank(server, id) == attr.getValueRank());
-        CHECK(services::readArrayDimensions(server, id) == attr.getArrayDimensions());
+        CHECK(
+            services::readArrayDimensions(server, id) ==
+            std::vector<uint32_t>(attr.getArrayDimensions())
+        );
         CHECK(services::readAccessLevel(server, id) == attr.getAccessLevel());
         CHECK(
             services::readMinimumSamplingInterval(server, id) == attr.getMinimumSamplingInterval()
@@ -371,15 +374,15 @@ TEST_CASE("View service set (server & client)") {
             const auto refs = result.getReferences();
             CHECK(refs.size() == 2);
             // 1. ComponentOf Objects
-            CHECK(refs.at(0).getReferenceTypeId() == NodeId(0, UA_NS0ID_HASCOMPONENT));
-            CHECK(refs.at(0).getIsForward() == false);
-            CHECK(refs.at(0).getNodeId() == ExpandedNodeId({0, UA_NS0ID_OBJECTSFOLDER}));
-            CHECK(refs.at(0).getBrowseName() == QualifiedName(0, "Objects"));
+            CHECK(refs[0].getReferenceTypeId() == NodeId(0, UA_NS0ID_HASCOMPONENT));
+            CHECK(refs[0].getIsForward() == false);
+            CHECK(refs[0].getNodeId() == ExpandedNodeId({0, UA_NS0ID_OBJECTSFOLDER}));
+            CHECK(refs[0].getBrowseName() == QualifiedName(0, "Objects"));
             // 2. HasTypeDefinition BaseDataVariableType
-            CHECK(refs.at(1).getReferenceTypeId() == NodeId(0, UA_NS0ID_HASTYPEDEFINITION));
-            CHECK(refs.at(1).getIsForward() == true);
-            CHECK(refs.at(1).getNodeId() == ExpandedNodeId({0, UA_NS0ID_BASEDATAVARIABLETYPE}));
-            CHECK(refs.at(1).getBrowseName() == QualifiedName(0, "BaseDataVariableType"));
+            CHECK(refs[1].getReferenceTypeId() == NodeId(0, UA_NS0ID_HASTYPEDEFINITION));
+            CHECK(refs[1].getIsForward() == true);
+            CHECK(refs[1].getNodeId() == ExpandedNodeId({0, UA_NS0ID_BASEDATAVARIABLETYPE}));
+            CHECK(refs[1].getBrowseName() == QualifiedName(0, "BaseDataVariableType"));
         }
 
         SUBCASE("browseNext") {
@@ -424,8 +427,8 @@ TEST_CASE("View service set (server & client)") {
             CHECK(targets.size() == 1);
             // https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8
             // value shall be equal to the maximum value of uint32 if all elements processed
-            CHECK(targets.at(0).getRemainingPathIndex() == 0xffffffff);
-            CHECK(targets.at(0).getTargetId().getNodeId() == id);
+            CHECK(targets[0].getRemainingPathIndex() == 0xffffffff);
+            CHECK(targets[0].getTargetId().getNodeId() == id);
         }
     };
 
@@ -476,13 +479,13 @@ TEST_CASE("Method service set (server & client)") {
         objectsId,
         methodId,
         "add",
-        [&](const std::vector<Variant>& inputs, std::vector<Variant>& outputs) {
+        [&](Span<const Variant> inputs, Span<Variant> outputs) {
             if (throwException) {
                 throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
             }
-            const auto a = inputs.at(0).getScalarCopy<int32_t>();
-            const auto b = inputs.at(1).getScalarCopy<int32_t>();
-            outputs.at(0).setScalarCopy(a + b);
+            const auto a = inputs[0].getScalarCopy<int32_t>();
+            const auto b = inputs[1].getScalarCopy<int32_t>();
+            outputs[0].setScalarCopy(a + b);
         },
         {
             Argument("a", {"en-US", "first number"}, DataTypeId::Int32, ValueRank::Scalar),
@@ -672,7 +675,7 @@ TEST_CASE("MonitoredItem service set (client)") {
             {ObjectId::Server, AttributeId::EventNotifier},
             MonitoringMode::Reporting,
             monitoringParameters,
-            [&](uint32_t, uint32_t, const std::vector<Variant>&) {}
+            [&](uint32_t, uint32_t, Span<const Variant>) {}
         );
         CAPTURE(monId);
 
