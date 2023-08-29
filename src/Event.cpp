@@ -26,6 +26,10 @@ const NodeId& Event::getNodeId() const noexcept {
     return id_;
 }
 
+Event& Event::writeSourceName(std::string_view sourceName) {
+    return writeProperty({0, "SourceName"}, Variant::fromScalar(String(sourceName)));
+}
+
 Event& Event::writeTime(DateTime time) {
     return writeProperty({0, "Time"}, Variant::fromScalar(time));
 }

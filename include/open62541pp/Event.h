@@ -20,7 +20,7 @@ class Variant;
  *
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/4.6
  * @see https://reference.opcfoundation.org/Core/Part5/v105/docs/6.4.2
-*/
+ */
 class Event {
 public:
     /// Create an event with the underlying (abstract) node representation.
@@ -37,6 +37,9 @@ public:
 
     /// Get the NodeId of the underlying node representation.
     const NodeId& getNodeId() const noexcept;
+
+    /// Set the source name (optional).
+    Event& writeSourceName(std::string_view sourceName);
 
     /// Set the time of the event (UTC).
     Event& writeTime(DateTime time);

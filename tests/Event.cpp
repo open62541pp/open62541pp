@@ -28,9 +28,10 @@ TEST_CASE("Event") {
 
     SUBCASE("Create and trigger event") {
         Event event(server);
+        CHECK_NOTHROW(event.writeSourceName("SourceName"));
         CHECK_NOTHROW(event.writeTime(DateTime::now()));
         CHECK_NOTHROW(event.writeSeverity(200U));
-        CHECK_NOTHROW(event.writeMessage({"", "Test123"}));
+        CHECK_NOTHROW(event.writeMessage({"", "Message"}));
 
         CHECK_NOTHROW(event.trigger());
         CHECK(event.trigger() != event.trigger());  // unique event ids
