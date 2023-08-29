@@ -7,6 +7,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `Span` class to pass and return open62541 arrays without copy and use them with the standard library algorithms (#86)
+  - `Span` objects just hold two members: the pointer to `T` and the size, so they are lightweight and trivially copyable
+  - Spans are views of contiguous sequences of objects, similar to [`std::span`](https://en.cppreference.com/w/cpp/container/span) in C++20. Differences to `std::span`:
+    - Constructor with `std::initializer_list<T>`
+    - Explicit conversion to `std::vector<T>`
+- `Node::exists` method with most efficient implementation to check node existance (#92)
+- Conversions from `string_view`, `const char*`, `char[N]` to `UA_String` (#98)
+- `Event` class to create and trigger events (#99)
+- `Server::createEvent` method (#99)
+- Equality operator overloads for `Session`
+- Add examples:
+  - `events/server_events` (#99)
+
+### Changed
+
+- Use `Span` to represent open62541 arrays (#86)
+  - `EventNotificationCallback` signature:
+    - `eventFields`: `Span<const Variant>` instead of `const std::vector<Variant>&`
+  - `MethodCallback` signature:
+    - `input`: `Span<const Variant>` instead of `const std::vector<Variant>&`
+    - `output`: `Span<Variant>` instead of `std::vector<Variant>&`
+  - Return (no-copy) array as `Span<T>` from `Variant` methods:
+    - `Span<const uint32_t> getArrayDimensions() const`
+    - `Span<T> getArray()`
+    - `Span<const T> getArray() const`
+  - Composed wrapper return `Span<T>` instead of `std::vector<T>` for array attributes:
+    - `ApplicationDescription::getDiscoveryUrls()`
+    - `EndpointDescription::getUserIdentityTokens()`
+    - `BrowseResult::getReferences()`
+    - `RelativePath::getElements()`
+    - `Argument::getArrayDimensions()`
+  - Remove getters for array size, e.g.:
+    - `DataType::getMembersSize()`, use `DataType::getMembers().size()` instead
+- Deprecate type-erased versions of `Variant::getScalar()` and `Variant::getArray()`, use `Variant::data()` instead (#86)
+- Remove existance check from `Node` constructor (#92)
+
 ## [0.8.0] - 2023-08-21
 
 ### Added
