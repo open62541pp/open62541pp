@@ -18,5 +18,7 @@
 @example custom_datatypes/server_custom_datatypes.cpp
 @example custom_datatypes/client_custom_datatypes.cpp
 
+@example events/server_events.cpp
+
 @example typeconversion.cpp
 */
