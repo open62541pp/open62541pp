@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.8.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.9.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -99,7 +99,7 @@ $(function() {
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"></span> </div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment">/// Get UA_DataType by type index.</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#ab50895687f819bf6885dbe0c67205050">   21</a></span><span class="comment"></span><span class="keyword">inline</span> <span class="keyword">const</span> <a class="code hl_structRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>&amp; <a class="code hl_function" href="namespaceopcua_1_1detail.html#a180f86dc9005a840223ea7b50c2e3fc5">getUaDataType</a>(<a class="code hl_typedef" href="namespaceopcua.html#a74df74679bebeab23f76d25d97fa80bb">TypeIndex</a> typeIndex) <span class="keyword">noexcept</span> {</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    assert(typeIndex &lt; <a class="code hl_defineRef" target="_blank" href="open62541/types__generated_8h.html#ac9c453774b0045ce3fee7acaf01b1223">UA_TYPES_COUNT</a>);  <span class="comment">// NOLINT</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    assert(typeIndex &lt; <a class="code hl_defineRef" target="_blank" href="open62541/types__generated_8h.html#ac9c453774b0045ce3fee7acaf01b1223">UA_TYPES_COUNT</a>);</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordflow">return</span> <a class="code hl_variableRef" target="_blank" href="open62541/types__generated_8h.html#aba037b86f18a7b7bceef5c098910c2c7">UA_TYPES</a>[typeIndex];  <span class="comment">// NOLINT</span></div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>}</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment"></span> </div>

@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.8.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.9.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -100,7 +100,7 @@ $(function() {
 <div class="line"> </div>
 <div class="line">    variant = client.<a id="a4" name="a4"></a><a class="code hl_function" href="classopcua_1_1Client.html#a5a4b84d41472ab996d825dd6c2dede11">getNode</a>({1, <span class="stringliteral">&quot;Point&quot;</span>}).readValue();</div>
 <div class="line">    <span class="keywordflow">if</span> (variant.<a id="a5" name="a5"></a><a class="code hl_function" href="classopcua_1_1Variant.html#a0b7d4c49967e248e03db995b1a979007">isType</a>(dataTypePoint)) {</div>
-<div class="line">        <span class="keyword">const</span> <span class="keyword">auto</span>* p = <span class="keyword">static_cast&lt;</span>Point*<span class="keyword">&gt;</span>(variant.<a id="a6" name="a6"></a><a class="code hl_function" href="classopcua_1_1Variant.html#ae42e2fed116615b6aaa5068680ee3a09">getScalar</a>());</div>
+<div class="line">        <span class="keyword">const</span> <span class="keyword">auto</span>* p = <span class="keyword">static_cast&lt;</span>Point*<span class="keyword">&gt;</span>(variant.<a id="a6" name="a6"></a><a class="code hl_function" href="classopcua_1_1Variant.html#afcd9830976356a86b289bc18ac4a3bc4">data</a>());</div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;Point:\n&quot;</span>;</div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;- x = &quot;</span> &lt;&lt; p-&gt;x &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;- y = &quot;</span> &lt;&lt; p-&gt;y &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
@@ -114,11 +114,11 @@ $(function() {
 <div class="line">    <span class="comment">// Arrays can not be unwrapped easily, because the array is an array of ExtensionObjects.</span></div>
 <div class="line">    <span class="comment">// The array of unwrapped objects isn&#39;t available contiguously in memory and open62541 won&#39;t</span></div>
 <div class="line">    <span class="comment">// transparently unwrap the array. So we have to do the unwrapping ourselves:</span></div>
-<div class="line">    <span class="keywordflow">if</span> (variant.<a class="code hl_function" href="classopcua_1_1Variant.html#a0b7d4c49967e248e03db995b1a979007">isType</a>(<a id="a7" name="a7"></a><a class="code hl_enumvalue" href="namespaceopcua.html#a83669427d4f4639c57ec0b499c5fdc10a1adf19f65f9aa28f3b51d77b73f6b688">opcua::Type::ExtensionObject</a>)) {</div>
-<div class="line">        <span class="keyword">auto</span>* arrExt = variant.<a id="a8" name="a8"></a><a class="code hl_function" href="classopcua_1_1Variant.html#acffcb8fb72e0e6c91ab44ddc950c7cc6">getArray</a>&lt;<a id="_a9" name="_a9"></a><a class="code hl_class" href="classopcua_1_1ExtensionObject.html">opcua::ExtensionObject</a>&gt;();</div>
-<div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; variant.<a id="a10" name="a10"></a><a class="code hl_function" href="classopcua_1_1Variant.html#a54698bd6ada60d5f20556403f1e4d163">getArrayLength</a>(); ++i) {</div>
-<div class="line">            <span class="keyword">const</span> <span class="keyword">auto</span>* p = <span class="keyword">static_cast&lt;</span>Point*<span class="keyword">&gt;</span>(arrExt[i].getDecodedData());  <span class="comment">// NOLINT</span></div>
-<div class="line">            std::cout &lt;&lt; <span class="stringliteral">&quot;PointVec[&quot;</span> &lt;&lt; i &lt;&lt; <span class="stringliteral">&quot;]:\n&quot;</span>;</div>
+<div class="line">    <span class="keywordflow">if</span> (variant.<a id="a7" name="a7"></a><a class="code hl_function" href="classopcua_1_1Variant.html#ab2ef10e5ae385c175e646eedf347e209">isArray</a>() &amp;&amp; variant.<a class="code hl_function" href="classopcua_1_1Variant.html#a0b7d4c49967e248e03db995b1a979007">isType</a>(<a id="a8" name="a8"></a><a class="code hl_enumvalue" href="namespaceopcua.html#a83669427d4f4639c57ec0b499c5fdc10a1adf19f65f9aa28f3b51d77b73f6b688">opcua::Type::ExtensionObject</a>)) {</div>
+<div class="line">        <span class="keywordtype">size_t</span> i = 0;</div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; extObj : variant.<a id="a9" name="a9"></a><a class="code hl_function" href="classopcua_1_1Variant.html#acffcb8fb72e0e6c91ab44ddc950c7cc6">getArray</a>&lt;<a id="_a10" name="_a10"></a><a class="code hl_class" href="classopcua_1_1ExtensionObject.html">opcua::ExtensionObject</a>&gt;()) {</div>
+<div class="line">            <span class="keyword">const</span> <span class="keyword">auto</span>* p = <span class="keyword">static_cast&lt;</span>Point*<span class="keyword">&gt;</span>(extObj.getDecodedData());</div>
+<div class="line">            std::cout &lt;&lt; <span class="stringliteral">&quot;PointVec[&quot;</span> &lt;&lt; i++ &lt;&lt; <span class="stringliteral">&quot;]:\n&quot;</span>;</div>
 <div class="line">            std::cout &lt;&lt; <span class="stringliteral">&quot;- x = &quot;</span> &lt;&lt; p-&gt;x &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">            std::cout &lt;&lt; <span class="stringliteral">&quot;- y = &quot;</span> &lt;&lt; p-&gt;y &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">            std::cout &lt;&lt; <span class="stringliteral">&quot;- z = &quot;</span> &lt;&lt; p-&gt;z &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
@@ -127,11 +127,12 @@ $(function() {
 <div class="line"> </div>
 <div class="line">    variant = client.<a class="code hl_function" href="classopcua_1_1Client.html#a5a4b84d41472ab996d825dd6c2dede11">getNode</a>({1, <span class="stringliteral">&quot;Measurements&quot;</span>}).readValue();</div>
 <div class="line">    <span class="keywordflow">if</span> (variant.<a class="code hl_function" href="classopcua_1_1Variant.html#a0b7d4c49967e248e03db995b1a979007">isType</a>(dataTypeMeasurements)) {</div>
-<div class="line">        <span class="keyword">const</span> <span class="keyword">auto</span>* m = <span class="keyword">static_cast&lt;</span>Measurements*<span class="keyword">&gt;</span>(variant.<a class="code hl_function" href="classopcua_1_1Variant.html#ae42e2fed116615b6aaa5068680ee3a09">getScalar</a>());</div>
+<div class="line">        <span class="keyword">const</span> <span class="keyword">auto</span>* m = <span class="keyword">static_cast&lt;</span>Measurements*<span class="keyword">&gt;</span>(variant.<a class="code hl_function" href="classopcua_1_1Variant.html#afcd9830976356a86b289bc18ac4a3bc4">data</a>());</div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;Measurements:\n&quot;</span>;</div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;- description = &quot;</span> &lt;&lt; m-&gt;description &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; m-&gt;measurementsSize; ++i) {</div>
-<div class="line">            std::cout &lt;&lt; <span class="stringliteral">&quot;- measurements[&quot;</span> &lt;&lt; i &lt;&lt; <span class="stringliteral">&quot;] = &quot;</span> &lt;&lt; m-&gt;measurements[i] &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;  <span class="comment">// NOLINT</span></div>
+<div class="line">        <span class="keywordtype">size_t</span> i = 0;</div>
+<div class="line">        <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp;&amp; value : <a id="_a11" name="_a11"></a><a class="code hl_class" href="classopcua_1_1Span.html">opcua::Span</a>(m-&gt;measurements, m-&gt;measurementsSize)) {</div>
+<div class="line">            std::cout &lt;&lt; <span class="stringliteral">&quot;- measurements[&quot;</span> &lt;&lt; i++ &lt;&lt; <span class="stringliteral">&quot;] = &quot;</span> &lt;&lt; value &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">        }</div>
 <div class="line">    }</div>
 <div class="line"> </div>
@@ -139,8 +140,8 @@ $(function() {
 <div class="line">    <span class="keyword">auto</span> formatOptional = [](<span class="keyword">const</span> <span class="keyword">auto</span>* ptr) {</div>
 <div class="line">        <span class="keywordflow">return</span> ptr == <span class="keyword">nullptr</span> ? <span class="stringliteral">&quot;NULL&quot;</span> : std::to_string(*ptr);</div>
 <div class="line">    };</div>
-<div class="line">    <span class="keywordflow">if</span> (variant.<a class="code hl_function" href="classopcua_1_1Variant.html#a0b7d4c49967e248e03db995b1a979007">isType</a>(dataTypeOpt)) {</div>
-<div class="line">        <span class="keyword">const</span> <span class="keyword">auto</span>* opt = <span class="keyword">static_cast&lt;</span>Opt*<span class="keyword">&gt;</span>(variant.<a class="code hl_function" href="classopcua_1_1Variant.html#ae42e2fed116615b6aaa5068680ee3a09">getScalar</a>());</div>
+<div class="line">    <span class="keywordflow">if</span> (variant.<a id="a12" name="a12"></a><a class="code hl_function" href="classopcua_1_1Variant.html#ae528dcb9d819364f9590c310dc8e8f2a">isScalar</a>() &amp;&amp; variant.<a class="code hl_function" href="classopcua_1_1Variant.html#a0b7d4c49967e248e03db995b1a979007">isType</a>(dataTypeOpt)) {</div>
+<div class="line">        <span class="keyword">const</span> <span class="keyword">auto</span>* opt = <span class="keyword">static_cast&lt;</span>Opt*<span class="keyword">&gt;</span>(variant.<a class="code hl_function" href="classopcua_1_1Variant.html#afcd9830976356a86b289bc18ac4a3bc4">data</a>());</div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;Opt:\n&quot;</span>;</div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;- a = &quot;</span> &lt;&lt; opt-&gt;a &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;- b = &quot;</span> &lt;&lt; formatOptional(opt-&gt;b) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
@@ -149,28 +150,30 @@ $(function() {
 <div class="line"> </div>
 <div class="line">    variant = client.<a class="code hl_function" href="classopcua_1_1Client.html#a5a4b84d41472ab996d825dd6c2dede11">getNode</a>({1, <span class="stringliteral">&quot;Uni&quot;</span>}).readValue();</div>
 <div class="line">    <span class="keywordflow">if</span> (variant.<a class="code hl_function" href="classopcua_1_1Variant.html#a0b7d4c49967e248e03db995b1a979007">isType</a>(dataTypeUni)) {</div>
-<div class="line">        <span class="keyword">const</span> <span class="keyword">auto</span>* uni = <span class="keyword">static_cast&lt;</span>Uni*<span class="keyword">&gt;</span>(variant.<a class="code hl_function" href="classopcua_1_1Variant.html#ae42e2fed116615b6aaa5068680ee3a09">getScalar</a>());</div>
+<div class="line">        <span class="keyword">const</span> <span class="keyword">auto</span>* uni = <span class="keyword">static_cast&lt;</span>Uni*<span class="keyword">&gt;</span>(variant.<a class="code hl_function" href="classopcua_1_1Variant.html#afcd9830976356a86b289bc18ac4a3bc4">data</a>());</div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;Uni:\n&quot;</span>;</div>
 <div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;- switchField = &quot;</span> &lt;&lt; <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(uni-&gt;switchField) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">        <span class="keywordflow">if</span> (uni-&gt;switchField == UniSwitch::OptionA) {</div>
 <div class="line">            std::cout &lt;&lt; <span class="stringliteral">&quot;- optionA = &quot;</span> &lt;&lt; uni-&gt;fields.optionA &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;  <span class="comment">// NOLINT</span></div>
 <div class="line">        }</div>
 <div class="line">        <span class="keywordflow">if</span> (uni-&gt;switchField == UniSwitch::OptionB) {</div>
-<div class="line">            std::cout &lt;&lt; <span class="stringliteral">&quot;- optionB = &quot;</span> &lt;&lt; <a id="_a11" name="_a11"></a><a class="code hl_class" href="classopcua_1_1String.html">opcua::String</a>(uni-&gt;fields.optionB) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;  <span class="comment">// NOLINT</span></div>
+<div class="line">            std::cout &lt;&lt; <span class="stringliteral">&quot;- optionB = &quot;</span> &lt;&lt; <a id="_a13" name="_a13"></a><a class="code hl_class" href="classopcua_1_1String.html">opcua::String</a>(uni-&gt;fields.optionB) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;  <span class="comment">// NOLINT</span></div>
 <div class="line">        }</div>
 <div class="line">    }</div>
 <div class="line">}</div>
-<div class="ttc" id="aclassopcua_1_1Client_html"><div class="ttname"><a href="classopcua_1_1Client.html">opcua::Client</a></div><div class="ttdoc">High-level client class.</div><div class="ttdef"><b>Definition</b> <a href="Client_8h_source.html#l00037">Client.h:37</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Client_html"><div class="ttname"><a href="classopcua_1_1Client.html">opcua::Client</a></div><div class="ttdoc">High-level client class.</div><div class="ttdef"><b>Definition</b> <a href="Client_8h_source.html#l00038">Client.h:38</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Client_html_a5a4b84d41472ab996d825dd6c2dede11"><div class="ttname"><a href="classopcua_1_1Client.html#a5a4b84d41472ab996d825dd6c2dede11">opcua::Client::getNode</a></div><div class="ttdeci">Node&lt; Client &gt; getNode(const NodeId &amp;id)</div></div>
 <div class="ttc" id="aclassopcua_1_1Client_html_a6dbd84c74a6214369470379a355555ab"><div class="ttname"><a href="classopcua_1_1Client.html#a6dbd84c74a6214369470379a355555ab">opcua::Client::connect</a></div><div class="ttdeci">void connect(std::string_view endpointUrl)</div><div class="ttdoc">Connect to the selected server.</div></div>
 <div class="ttc" id="aclassopcua_1_1Client_html_a718f1c02e4105c32446b7bb0dcb56ceb"><div class="ttname"><a href="classopcua_1_1Client.html#a718f1c02e4105c32446b7bb0dcb56ceb">opcua::Client::setCustomDataTypes</a></div><div class="ttdeci">void setCustomDataTypes(std::vector&lt; DataType &gt; dataTypes)</div><div class="ttdoc">Set custom data types.</div></div>
 <div class="ttc" id="aclassopcua_1_1ExtensionObject_html"><div class="ttname"><a href="classopcua_1_1ExtensionObject.html">opcua::ExtensionObject</a></div><div class="ttdoc">UA_ExtensionObject wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="ExtensionObject_8h_source.html#l00040">ExtensionObject.h:40</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Span_html"><div class="ttname"><a href="classopcua_1_1Span.html">opcua::Span</a></div><div class="ttdoc">View to a contiguous sequence of objects, similar to std::span in C++20.</div><div class="ttdef"><b>Definition</b> <a href="Span_8h_source.html#l00027">Span.h:27</a></div></div>
 <div class="ttc" id="aclassopcua_1_1String_html"><div class="ttname"><a href="classopcua_1_1String.html">opcua::String</a></div><div class="ttdoc">UA_String wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="Builtin_8h_source.html#l00097">Builtin.h:97</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Variant_html"><div class="ttname"><a href="classopcua_1_1Variant.html">opcua::Variant</a></div><div class="ttdoc">UA_Variant wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="Variant_8h_source.html#l00026">Variant.h:26</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html"><div class="ttname"><a href="classopcua_1_1Variant.html">opcua::Variant</a></div><div class="ttdoc">UA_Variant wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="Variant_8h_source.html#l00027">Variant.h:27</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Variant_html_a0b7d4c49967e248e03db995b1a979007"><div class="ttname"><a href="classopcua_1_1Variant.html#a0b7d4c49967e248e03db995b1a979007">opcua::Variant::isType</a></div><div class="ttdeci">bool isType(const UA_DataType *dataType) const noexcept</div><div class="ttdoc">Check if variant type is equal to data type.</div></div>
-<div class="ttc" id="aclassopcua_1_1Variant_html_a54698bd6ada60d5f20556403f1e4d163"><div class="ttname"><a href="classopcua_1_1Variant.html#a54698bd6ada60d5f20556403f1e4d163">opcua::Variant::getArrayLength</a></div><div class="ttdeci">size_t getArrayLength() const noexcept</div><div class="ttdoc">Get array length or 0 if variant is not an array.</div></div>
-<div class="ttc" id="aclassopcua_1_1Variant_html_acffcb8fb72e0e6c91ab44ddc950c7cc6"><div class="ttname"><a href="classopcua_1_1Variant.html#acffcb8fb72e0e6c91ab44ddc950c7cc6">opcua::Variant::getArray</a></div><div class="ttdeci">void * getArray()</div><div class="ttdoc">Get pointer to array value.</div></div>
-<div class="ttc" id="aclassopcua_1_1Variant_html_ae42e2fed116615b6aaa5068680ee3a09"><div class="ttname"><a href="classopcua_1_1Variant.html#ae42e2fed116615b6aaa5068680ee3a09">opcua::Variant::getScalar</a></div><div class="ttdeci">void * getScalar()</div><div class="ttdoc">Get pointer to scalar value.</div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html_ab2ef10e5ae385c175e646eedf347e209"><div class="ttname"><a href="classopcua_1_1Variant.html#ab2ef10e5ae385c175e646eedf347e209">opcua::Variant::isArray</a></div><div class="ttdeci">bool isArray() const noexcept</div><div class="ttdoc">Check if variant is an array.</div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html_acffcb8fb72e0e6c91ab44ddc950c7cc6"><div class="ttname"><a href="classopcua_1_1Variant.html#acffcb8fb72e0e6c91ab44ddc950c7cc6">opcua::Variant::getArray</a></div><div class="ttdeci">void * getArray()</div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html_ae528dcb9d819364f9590c310dc8e8f2a"><div class="ttname"><a href="classopcua_1_1Variant.html#ae528dcb9d819364f9590c310dc8e8f2a">opcua::Variant::isScalar</a></div><div class="ttdeci">bool isScalar() const noexcept</div><div class="ttdoc">Check if variant is a scalar.</div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html_afcd9830976356a86b289bc18ac4a3bc4"><div class="ttname"><a href="classopcua_1_1Variant.html#afcd9830976356a86b289bc18ac4a3bc4">opcua::Variant::data</a></div><div class="ttdeci">void * data() noexcept</div><div class="ttdoc">Get pointer to the underlying data.</div></div>
 <div class="ttc" id="anamespaceopcua_html_a83669427d4f4639c57ec0b499c5fdc10a1adf19f65f9aa28f3b51d77b73f6b688"><div class="ttname"><a href="namespaceopcua.html#a83669427d4f4639c57ec0b499c5fdc10a1adf19f65f9aa28f3b51d77b73f6b688">opcua::Type::ExtensionObject</a></div><div class="ttdeci">@ ExtensionObject</div></div>
 <div class="ttc" id="aopen62541pp_8h_html"><div class="ttname"><a href="open62541pp_8h.html">open62541pp.h</a></div></div>
 </div><!-- fragment --> </div><!-- contents -->

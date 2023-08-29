@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.8.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.9.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -112,7 +112,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Callback to set the read value, the result status and optionally a source timestamp. </p>
-<dl class="section note"><dt>Note</dt><dd>Zero-copy operations are possible. It is not required to return a copy of the actual content data. You can return a pointer to memory owned by the user. Memory can be reused between read callbacks of a data source, as the result is already encoded on the network buffer between each read operation. To use zero-copy reads, set the value of the <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> (<a class="el" href="classopcua_1_1DataValue.html#a3bd76939b2f43a486d574f4c589df131" title="Get value.">DataValue::getValue</a>) without copying, e.g. with <a class="el" href="classopcua_1_1Variant.html#a7e3a2d65d098b7ef39d775044ca80a0b" title="Assign scalar value to variant.">Variant::setScalar</a> or <a class="el" href="classopcua_1_1Variant.html#aedb879d8bbdbdeca7c4b285ba5dfafff" title="Assign array (raw) to variant.">Variant::setArray</a>.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Zero-copy operations are possible. It is not required to return a copy of the actual content data. You can return a pointer to memory owned by the user. Memory can be reused between read callbacks of a data source, as the result is already encoded on the network buffer between each read operation. To use zero-copy reads, set the value of the <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> (<a class="el" href="classopcua_1_1DataValue.html#a3bd76939b2f43a486d574f4c589df131" title="Get value.">DataValue::getValue</a>) without copying, e.g. with <a class="el" href="classopcua_1_1Variant.html#a7e3a2d65d098b7ef39d775044ca80a0b" title="Assign scalar value to variant.">Variant::setScalar</a> or <a class="el" href="classopcua_1_1Variant.html#abb84742fda00f97aafbaa9aa279b4be2" title="Assign array to variant.">Variant::setArray</a>.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">value</td><td>The <a class="el" href="classopcua_1_1DataValue.html" title="UA_DataValue wrapper class.">DataValue</a> that is returned to the reader </td></tr>

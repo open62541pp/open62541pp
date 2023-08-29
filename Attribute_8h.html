@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.8.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.9.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -84,6 +84,7 @@ $(function() {
 <div class="textblock"><code>#include &lt;cstdint&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
 <code>#include &quot;<a class="el" href="Common_8h_source.html">open62541pp/Common.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Span_8h_source.html">open62541pp/Span.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="TypeWrapper_8h_source.html">open62541pp/TypeWrapper.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="helper_8h_source.html">open62541pp/detail/helper.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Builtin_8h_source.html">open62541pp/types/Builtin.h</a>&quot;</code><br />
@@ -93,7 +94,7 @@ $(function() {
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Attribute.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="Attribute_8h__incl.svg" width="3150" height="770"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="Attribute_8h__incl.svg" width="3758" height="770"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
@@ -214,9 +215,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga89d92760c369fe3557cb5e5329ad9832"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ga89d92760c369fe3557cb5e5329ad9832"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Attribute.html#ga89d92760c369fe3557cb5e5329ad9832">opcua::services::writeValueRank</a> (T &amp;serverOrClient, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383">ValueRank</a> valueRank)</td></tr>
 <tr class="separator:ga89d92760c369fe3557cb5e5329ad9832"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7578f30b4b51b890cd4529d61a37ee9c"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ga7578f30b4b51b890cd4529d61a37ee9c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Attribute.html#ga7578f30b4b51b890cd4529d61a37ee9c">opcua::services::writeArrayDimensions</a> (T &amp;serverOrClient, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, const std::vector&lt; uint32_t &gt; &amp;dimensions)</td></tr>
-<tr class="separator:ga7578f30b4b51b890cd4529d61a37ee9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga87dbf727c0b8ae0f18ffb0c44467a89e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ga87dbf727c0b8ae0f18ffb0c44467a89e"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Attribute.html#ga87dbf727c0b8ae0f18ffb0c44467a89e">opcua::services::writeArrayDimensions</a> (T &amp;serverOrClient, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const uint32_t &gt; dimensions)</td></tr>
+<tr class="separator:ga87dbf727c0b8ae0f18ffb0c44467a89e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0c1440e93b0f5a54b57d57cb45f2069b"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ga0c1440e93b0f5a54b57d57cb45f2069b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Attribute.html#ga0c1440e93b0f5a54b57d57cb45f2069b">opcua::services::writeAccessLevel</a> (T &amp;serverOrClient, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, uint8_t mask)</td></tr>
 <tr class="separator:ga0c1440e93b0f5a54b57d57cb45f2069b"><td class="memSeparator" colspan="2">&#160;</td></tr>

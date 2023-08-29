@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.8.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.9.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -85,8 +85,8 @@ Collaboration diagram for NodeManagement service set:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:ga71e2b4bfd1d0e4d2750b6e256e83304e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__NodeManagement.html#ga71e2b4bfd1d0e4d2750b6e256e83304e">opcua::services::MethodCallback</a> = std::function&lt; void(const std::vector&lt; <a class="el" href="classopcua_1_1Variant.html">Variant</a> &gt; &amp;, std::vector&lt; <a class="el" href="classopcua_1_1Variant.html">Variant</a> &gt; &amp;)&gt;</td></tr>
-<tr class="separator:ga71e2b4bfd1d0e4d2750b6e256e83304e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0dce1b14793b144bbafe4124c77dde5e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__NodeManagement.html#ga0dce1b14793b144bbafe4124c77dde5e">opcua::services::MethodCallback</a> = std::function&lt; void(<a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1Variant.html">Variant</a> &gt; input, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; <a class="el" href="classopcua_1_1Variant.html">Variant</a> &gt; output)&gt;</td></tr>
+<tr class="separator:ga0dce1b14793b144bbafe4124c77dde5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -102,9 +102,9 @@ Functions</h2></td></tr>
 <tr class="memitem:gacda15665f74800153e757c2b3476377d"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:gacda15665f74800153e757c2b3476377d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__NodeManagement.html#gacda15665f74800153e757c2b3476377d">opcua::services::addProperty</a> (T &amp;serverOrClient, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;parentId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::string_view browseName, const <a class="el" href="classopcua_1_1VariableAttributes.html">VariableAttributes</a> &amp;attributes={})</td></tr>
 <tr class="separator:gacda15665f74800153e757c2b3476377d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae2caf64028580e791d4e6b0b79495a21"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:gae2caf64028580e791d4e6b0b79495a21"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__NodeManagement.html#gae2caf64028580e791d4e6b0b79495a21">opcua::services::addMethod</a> (T &amp;serverOrClient, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;parentId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::string_view browseName, <a class="el" href="group__NodeManagement.html#ga71e2b4bfd1d0e4d2750b6e256e83304e">MethodCallback</a> callback, const std::vector&lt; <a class="el" href="group__NodeIds.html#ggadfeffe1a4352e8d89c5167a8c09d1692a1853680a6d666b9fea2d789dd00bc7eb">Argument</a> &gt; &amp;inputArguments, const std::vector&lt; <a class="el" href="group__NodeIds.html#ggadfeffe1a4352e8d89c5167a8c09d1692a1853680a6d666b9fea2d789dd00bc7eb">Argument</a> &gt; &amp;outputArguments, const <a class="el" href="classopcua_1_1MethodAttributes.html">MethodAttributes</a> &amp;attributes={}, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;referenceType=<a class="el" href="group__NodeIds.html#ggac0d1520cbf625748c86c5c75943242c9aded9b3813b9f642b7166ee3000a3e14f">ReferenceTypeId::HasComponent</a>)</td></tr>
-<tr class="separator:gae2caf64028580e791d4e6b0b79495a21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaa1d81eb938432c7f9501f6f61db2f1e7"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:gaa1d81eb938432c7f9501f6f61db2f1e7"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__NodeManagement.html#gaa1d81eb938432c7f9501f6f61db2f1e7">opcua::services::addMethod</a> (T &amp;serverOrClient, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;parentId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::string_view browseName, <a class="el" href="group__NodeManagement.html#ga0dce1b14793b144bbafe4124c77dde5e">MethodCallback</a> callback, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="group__NodeIds.html#ggadfeffe1a4352e8d89c5167a8c09d1692a1853680a6d666b9fea2d789dd00bc7eb">Argument</a> &gt; inputArguments, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="group__NodeIds.html#ggadfeffe1a4352e8d89c5167a8c09d1692a1853680a6d666b9fea2d789dd00bc7eb">Argument</a> &gt; outputArguments, const <a class="el" href="classopcua_1_1MethodAttributes.html">MethodAttributes</a> &amp;attributes={}, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;referenceType=<a class="el" href="group__NodeIds.html#ggac0d1520cbf625748c86c5c75943242c9aded9b3813b9f642b7166ee3000a3e14f">ReferenceTypeId::HasComponent</a>)</td></tr>
+<tr class="separator:gaa1d81eb938432c7f9501f6f61db2f1e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3bf2114cdb7c5f0cf7f7e63be9930b9c"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ga3bf2114cdb7c5f0cf7f7e63be9930b9c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__NodeManagement.html#ga3bf2114cdb7c5f0cf7f7e63be9930b9c">opcua::services::addObjectType</a> (T &amp;serverOrClient, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;parentId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, std::string_view browseName, const <a class="el" href="classopcua_1_1ObjectTypeAttributes.html">ObjectTypeAttributes</a> &amp;attributes={}, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;referenceType=<a class="el" href="group__NodeIds.html#ggac0d1520cbf625748c86c5c75943242c9a79d00b2a3fd425da35a27ef5f903b18f">ReferenceTypeId::HasSubtype</a>)</td></tr>
 <tr class="separator:ga3bf2114cdb7c5f0cf7f7e63be9930b9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -136,21 +136,28 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Add/delete nodes and references. </p>
 <h2 class="groupheader">Typedef Documentation</h2>
-<a id="ga71e2b4bfd1d0e4d2750b6e256e83304e" name="ga71e2b4bfd1d0e4d2750b6e256e83304e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga71e2b4bfd1d0e4d2750b6e256e83304e">&#9670;&#160;</a></span>MethodCallback</h2>
+<a id="ga0dce1b14793b144bbafe4124c77dde5e" name="ga0dce1b14793b144bbafe4124c77dde5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0dce1b14793b144bbafe4124c77dde5e">&#9670;&#160;</a></span>MethodCallback</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="group__NodeManagement.html#ga71e2b4bfd1d0e4d2750b6e256e83304e">opcua::services::MethodCallback</a> = typedef std::function&lt;void(const std::vector&lt;<a class="el" href="classopcua_1_1Variant.html">Variant</a>&gt;&amp;, std::vector&lt;<a class="el" href="classopcua_1_1Variant.html">Variant</a>&gt;&amp;)&gt;</td>
+          <td class="memname">using <a class="el" href="group__NodeManagement.html#ga0dce1b14793b144bbafe4124c77dde5e">opcua::services::MethodCallback</a> = typedef std::function&lt;void(<a class="el" href="classopcua_1_1Span.html">Span</a>&lt;const <a class="el" href="classopcua_1_1Variant.html">Variant</a>&gt; input, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt;<a class="el" href="classopcua_1_1Variant.html">Variant</a>&gt; output)&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Method callback. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">input</td><td>Input parameters </td></tr>
+    <tr><td class="paramname">output</td><td>Output parameters </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="NodeManagement_8h_source.html#l00116">116</a> of file <a class="el" href="NodeManagement_8h_source.html">NodeManagement.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="NodeManagement_8h_source.html#l00118">118</a> of file <a class="el" href="NodeManagement_8h_source.html">NodeManagement.h</a>.</p>
 
 </div>
 </div>
@@ -429,8 +436,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="gae2caf64028580e791d4e6b0b79495a21" name="gae2caf64028580e791d4e6b0b79495a21"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gae2caf64028580e791d4e6b0b79495a21">&#9670;&#160;</a></span>addMethod()</h2>
+<a id="gaa1d81eb938432c7f9501f6f61db2f1e7" name="gaa1d81eb938432c7f9501f6f61db2f1e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa1d81eb938432c7f9501f6f61db2f1e7">&#9670;&#160;</a></span>addMethod()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -464,19 +471,19 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__NodeManagement.html#ga71e2b4bfd1d0e4d2750b6e256e83304e">MethodCallback</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__NodeManagement.html#ga0dce1b14793b144bbafe4124c77dde5e">MethodCallback</a>&#160;</td>
           <td class="paramname"><em>callback</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::vector&lt; <a class="el" href="group__NodeIds.html#ggadfeffe1a4352e8d89c5167a8c09d1692a1853680a6d666b9fea2d789dd00bc7eb">Argument</a> &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="group__NodeIds.html#ggadfeffe1a4352e8d89c5167a8c09d1692a1853680a6d666b9fea2d789dd00bc7eb">Argument</a> &gt;&#160;</td>
           <td class="paramname"><em>inputArguments</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::vector&lt; <a class="el" href="group__NodeIds.html#ggadfeffe1a4352e8d89c5167a8c09d1692a1853680a6d666b9fea2d789dd00bc7eb">Argument</a> &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="group__NodeIds.html#ggadfeffe1a4352e8d89c5167a8c09d1692a1853680a6d666b9fea2d789dd00bc7eb">Argument</a> &gt;&#160;</td>
           <td class="paramname"><em>outputArguments</em>, </td>
         </tr>
         <tr>
@@ -879,7 +886,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="reference">Referenced by <a class="el" href="NodeManagement_8h_source.html#l00234">opcua::services::addModellingRule()</a>, and <a class="el" href="Node_8h_source.html#l00194">opcua::Node&lt; ServerOrClient &gt;::addReference()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="NodeManagement_8h_source.html#l00236">opcua::services::addModellingRule()</a>, and <a class="el" href="Node_8h_source.html#l00195">opcua::Node&lt; ServerOrClient &gt;::addReference()</a>.</p>
 
 </div>
 </div>
@@ -933,9 +940,9 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="NodeManagement_8h_source.html#l00234">234</a> of file <a class="el" href="NodeManagement_8h_source.html">NodeManagement.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="NodeManagement_8h_source.html#l00236">236</a> of file <a class="el" href="NodeManagement_8h_source.html">NodeManagement.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00201">opcua::Node&lt; ServerOrClient &gt;::addModellingRule()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00202">opcua::Node&lt; ServerOrClient &gt;::addModellingRule()</a>.</p>
 
 </div>
 </div>
@@ -981,7 +988,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00207">opcua::Node&lt; ServerOrClient &gt;::deleteNode()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00208">opcua::Node&lt; ServerOrClient &gt;::deleteNode()</a>.</p>
 
 </div>
 </div>
@@ -1045,7 +1052,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00213">opcua::Node&lt; ServerOrClient &gt;::deleteReference()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00214">opcua::Node&lt; ServerOrClient &gt;::deleteReference()</a>.</p>
 
 </div>
 </div>

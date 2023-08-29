@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.8.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.9.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -102,14 +102,14 @@ Functions</h2></td></tr>
 <tr class="separator:ga05a3d7a497ca3e1af1e31980b6647bc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad0836a59c94d871059ecf919cc5a4ef1"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__MonitoredItem.html#gad0836a59c94d871059ecf919cc5a4ef1">opcua::services::createMonitoredItemDataChange</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server, const <a class="el" href="classopcua_1_1ReadValueId.html">ReadValueId</a> &amp;itemToMonitor, <a class="el" href="namespaceopcua.html#ac7b72cb1f86ea818f1386642867ff381">MonitoringMode</a> monitoringMode, <a class="el" href="structopcua_1_1services_1_1MonitoringParameters.html">MonitoringParameters</a> &amp;parameters, <a class="el" href="group__MonitoredItem.html#gaea38470ae232e1ad600942ff0eed49a6">DataChangeNotificationCallback</a> dataChangeCallback)</td></tr>
 <tr class="separator:gad0836a59c94d871059ecf919cc5a4ef1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga514da22adbb9cef679d182ce33a02f7e"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__MonitoredItem.html#ga514da22adbb9cef679d182ce33a02f7e">opcua::services::createMonitoredItemEvent</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;client, uint32_t subscriptionId, const <a class="el" href="classopcua_1_1ReadValueId.html">ReadValueId</a> &amp;itemToMonitor, <a class="el" href="namespaceopcua.html#ac7b72cb1f86ea818f1386642867ff381">MonitoringMode</a> monitoringMode, <a class="el" href="structopcua_1_1services_1_1MonitoringParameters.html">MonitoringParameters</a> &amp;parameters, <a class="el" href="namespaceopcua_1_1services.html#a4158005ab020167a1c458f7ac94eea2b">EventNotificationCallback</a> eventCallback, <a class="el" href="group__MonitoredItem.html#gaf384cffce05f9a977663d479d6d1b479">DeleteMonitoredItemCallback</a> deleteCallback={})</td></tr>
+<tr class="memitem:ga514da22adbb9cef679d182ce33a02f7e"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__MonitoredItem.html#ga514da22adbb9cef679d182ce33a02f7e">opcua::services::createMonitoredItemEvent</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;client, uint32_t subscriptionId, const <a class="el" href="classopcua_1_1ReadValueId.html">ReadValueId</a> &amp;itemToMonitor, <a class="el" href="namespaceopcua.html#ac7b72cb1f86ea818f1386642867ff381">MonitoringMode</a> monitoringMode, <a class="el" href="structopcua_1_1services_1_1MonitoringParameters.html">MonitoringParameters</a> &amp;parameters, <a class="el" href="namespaceopcua_1_1services.html#af0f62d9c887c3365c3bf95f42404a7f8">EventNotificationCallback</a> eventCallback, <a class="el" href="group__MonitoredItem.html#gaf384cffce05f9a977663d479d6d1b479">DeleteMonitoredItemCallback</a> deleteCallback={})</td></tr>
 <tr class="separator:ga514da22adbb9cef679d182ce33a02f7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gaf94de46df704cffd3b421206613f6e74"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__MonitoredItem.html#gaf94de46df704cffd3b421206613f6e74">opcua::services::modifyMonitoredItem</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;client, uint32_t subscriptionId, uint32_t monitoredItemId, <a class="el" href="structopcua_1_1services_1_1MonitoringParameters.html">MonitoringParameters</a> &amp;parameters)</td></tr>
 <tr class="separator:gaf94de46df704cffd3b421206613f6e74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga27e41a99a1fb597dc1364f4da42d5954"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__MonitoredItem.html#ga27e41a99a1fb597dc1364f4da42d5954">opcua::services::setMonitoringMode</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;client, uint32_t subscriptionId, uint32_t monitoredItemId, <a class="el" href="namespaceopcua.html#ac7b72cb1f86ea818f1386642867ff381">MonitoringMode</a> monitoringMode)</td></tr>
 <tr class="separator:ga27e41a99a1fb597dc1364f4da42d5954"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab3335ae74968237d535c1293015c8702"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__MonitoredItem.html#gab3335ae74968237d535c1293015c8702">opcua::services::setTriggering</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;client, uint32_t subscriptionId, uint32_t triggeringItemId, const std::vector&lt; uint32_t &gt; &amp;linksToAdd, const std::vector&lt; uint32_t &gt; &amp;linksToRemove)</td></tr>
-<tr class="separator:gab3335ae74968237d535c1293015c8702"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf8bd721a866674f5de84c4b3f8d0fb34"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__MonitoredItem.html#gaf8bd721a866674f5de84c4b3f8d0fb34">opcua::services::setTriggering</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;client, uint32_t subscriptionId, uint32_t triggeringItemId, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const uint32_t &gt; linksToAdd, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const uint32_t &gt; linksToRemove)</td></tr>
+<tr class="separator:gaf8bd721a866674f5de84c4b3f8d0fb34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga8c2014ad46076f30dd32cda553d97db7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__MonitoredItem.html#ga8c2014ad46076f30dd32cda553d97db7">opcua::services::deleteMonitoredItem</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;client, uint32_t subscriptionId, uint32_t monitoredItemId)</td></tr>
 <tr class="separator:ga8c2014ad46076f30dd32cda553d97db7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga37a88abf04f0e873db0b39bb8e2f470d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__MonitoredItem.html#ga37a88abf04f0e873db0b39bb8e2f470d">opcua::services::deleteMonitoredItem</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server, uint32_t monitoredItemId)</td></tr>
@@ -350,7 +350,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceopcua_1_1services.html#a4158005ab020167a1c458f7ac94eea2b">EventNotificationCallback</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceopcua_1_1services.html#af0f62d9c887c3365c3bf95f42404a7f8">EventNotificationCallback</a>&#160;</td>
           <td class="paramname"><em>eventCallback</em>, </td>
         </tr>
         <tr>
@@ -489,8 +489,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="gab3335ae74968237d535c1293015c8702" name="gab3335ae74968237d535c1293015c8702"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab3335ae74968237d535c1293015c8702">&#9670;&#160;</a></span>setTriggering()</h2>
+<a id="gaf8bd721a866674f5de84c4b3f8d0fb34" name="gaf8bd721a866674f5de84c4b3f8d0fb34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf8bd721a866674f5de84c4b3f8d0fb34">&#9670;&#160;</a></span>setTriggering()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -516,13 +516,13 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::vector&lt; uint32_t &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const uint32_t &gt;&#160;</td>
           <td class="paramname"><em>linksToAdd</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::vector&lt; uint32_t &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const uint32_t &gt;&#160;</td>
           <td class="paramname"><em>linksToRemove</em>&#160;</td>
         </tr>
         <tr>

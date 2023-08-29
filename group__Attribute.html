@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.8.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.9.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -177,9 +177,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga89d92760c369fe3557cb5e5329ad9832"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ga89d92760c369fe3557cb5e5329ad9832"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Attribute.html#ga89d92760c369fe3557cb5e5329ad9832">opcua::services::writeValueRank</a> (T &amp;serverOrClient, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383">ValueRank</a> valueRank)</td></tr>
 <tr class="separator:ga89d92760c369fe3557cb5e5329ad9832"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7578f30b4b51b890cd4529d61a37ee9c"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ga7578f30b4b51b890cd4529d61a37ee9c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Attribute.html#ga7578f30b4b51b890cd4529d61a37ee9c">opcua::services::writeArrayDimensions</a> (T &amp;serverOrClient, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, const std::vector&lt; uint32_t &gt; &amp;dimensions)</td></tr>
-<tr class="separator:ga7578f30b4b51b890cd4529d61a37ee9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga87dbf727c0b8ae0f18ffb0c44467a89e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ga87dbf727c0b8ae0f18ffb0c44467a89e"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Attribute.html#ga87dbf727c0b8ae0f18ffb0c44467a89e">opcua::services::writeArrayDimensions</a> (T &amp;serverOrClient, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const uint32_t &gt; dimensions)</td></tr>
+<tr class="separator:ga87dbf727c0b8ae0f18ffb0c44467a89e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0c1440e93b0f5a54b57d57cb45f2069b"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ga0c1440e93b0f5a54b57d57cb45f2069b"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Attribute.html#ga0c1440e93b0f5a54b57d57cb45f2069b">opcua::services::writeAccessLevel</a> (T &amp;serverOrClient, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, uint8_t mask)</td></tr>
 <tr class="separator:ga0c1440e93b0f5a54b57d57cb45f2069b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -249,7 +249,7 @@ template&lt;typename T &gt; </div>
 
 <p>Generic function to read node attributes. </p>
 
-<p class="reference">Referenced by <a class="el" href="Attribute_8h_source.html#l00248">opcua::services::readArrayDimensions()</a>, <a class="el" href="Attribute_8h_source.html#l00053">opcua::services::readAttributeScalar()</a>, <a class="el" href="Attribute_8h_source.html#l00187">opcua::services::readDataValue()</a>, <a class="el" href="Attribute_8h_source.html#l00085">opcua::services::readNodeClass()</a>, and <a class="el" href="Attribute_8h_source.html#l00204">opcua::services::readValue()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Attribute_8h_source.html#l00249">opcua::services::readArrayDimensions()</a>, <a class="el" href="Attribute_8h_source.html#l00054">opcua::services::readAttributeScalar()</a>, <a class="el" href="Attribute_8h_source.html#l00188">opcua::services::readDataValue()</a>, <a class="el" href="Attribute_8h_source.html#l00086">opcua::services::readNodeClass()</a>, and <a class="el" href="Attribute_8h_source.html#l00205">opcua::services::readValue()</a>.</p>
 
 </div>
 </div>
@@ -295,7 +295,7 @@ template&lt;typename T &gt; </div>
 
 <p>Generic function to write node attributes. </p>
 
-<p class="reference">Referenced by <a class="el" href="Attribute_8h_source.html#l00435">opcua::services::writeAccessLevel()</a>, <a class="el" href="Attribute_8h_source.html#l00421">opcua::services::writeArrayDimensions()</a>, <a class="el" href="Attribute_8h_source.html#l00396">opcua::services::writeDataType()</a>, <a class="el" href="Attribute_8h_source.html#l00373">opcua::services::writeDataValue()</a>, <a class="el" href="Attribute_8h_source.html#l00312">opcua::services::writeDescription()</a>, <a class="el" href="Attribute_8h_source.html#l00302">opcua::services::writeDisplayName()</a>, <a class="el" href="Attribute_8h_source.html#l00363">opcua::services::writeInverseName()</a>, <a class="el" href="Attribute_8h_source.html#l00343">opcua::services::writeIsAbstract()</a>, <a class="el" href="Attribute_8h_source.html#l00458">opcua::services::writeMinimumSamplingInterval()</a>, <a class="el" href="Attribute_8h_source.html#l00353">opcua::services::writeSymmetric()</a>, <a class="el" href="Attribute_8h_source.html#l00447">opcua::services::writeUserAccessLevel()</a>, <a class="el" href="Attribute_8h_source.html#l00333">opcua::services::writeUserWriteMask()</a>, <a class="el" href="Attribute_8h_source.html#l00383">opcua::services::writeValue()</a>, <a class="el" href="Attribute_8h_source.html#l00406">opcua::services::writeValueRank()</a>, and <a class="el" href="Attribute_8h_source.html#l00322">opcua::services::writeWriteMask()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Attribute_8h_source.html#l00436">opcua::services::writeAccessLevel()</a>, <a class="el" href="Attribute_8h_source.html#l00422">opcua::services::writeArrayDimensions()</a>, <a class="el" href="Attribute_8h_source.html#l00397">opcua::services::writeDataType()</a>, <a class="el" href="Attribute_8h_source.html#l00374">opcua::services::writeDataValue()</a>, <a class="el" href="Attribute_8h_source.html#l00313">opcua::services::writeDescription()</a>, <a class="el" href="Attribute_8h_source.html#l00303">opcua::services::writeDisplayName()</a>, <a class="el" href="Attribute_8h_source.html#l00364">opcua::services::writeInverseName()</a>, <a class="el" href="Attribute_8h_source.html#l00344">opcua::services::writeIsAbstract()</a>, <a class="el" href="Attribute_8h_source.html#l00459">opcua::services::writeMinimumSamplingInterval()</a>, <a class="el" href="Attribute_8h_source.html#l00354">opcua::services::writeSymmetric()</a>, <a class="el" href="Attribute_8h_source.html#l00448">opcua::services::writeUserAccessLevel()</a>, <a class="el" href="Attribute_8h_source.html#l00334">opcua::services::writeUserWriteMask()</a>, <a class="el" href="Attribute_8h_source.html#l00384">opcua::services::writeValue()</a>, <a class="el" href="Attribute_8h_source.html#l00407">opcua::services::writeValueRank()</a>, and <a class="el" href="Attribute_8h_source.html#l00323">opcua::services::writeWriteMask()</a>.</p>
 
 </div>
 </div>
@@ -338,9 +338,7 @@ template&lt;typename T &gt; </div>
 <p>Read the <code><a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a></code> attribute of a node. </p>
 <p>This function is mainly used to check the existence of a node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00076">76</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00038">opcua::Node&lt; ServerOrClient &gt;::Node()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00077">77</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
 </div>
 </div>
@@ -382,9 +380,9 @@ template&lt;typename T &gt; </div>
 
 <p>Read the <code>NodeClass</code> attribute of a node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00085">85</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00086">86</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00271">opcua::Node&lt; ServerOrClient &gt;::readNodeClass()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00270">opcua::Node&lt; ServerOrClient &gt;::readNodeClass()</a>.</p>
 
 </div>
 </div>
@@ -427,9 +425,9 @@ template&lt;typename T &gt; </div>
 <p>Read the <code>BrowseName</code> attribute of a node. </p>
 <p>A non-localised human-readable name used to browse the address space. The browse name of a reference type must be unique in a server. </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00099">99</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00100">100</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00276">opcua::Node&lt; ServerOrClient &gt;::readBrowseName()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00275">opcua::Node&lt; ServerOrClient &gt;::readBrowseName()</a>.</p>
 
 </div>
 </div>
@@ -472,9 +470,9 @@ template&lt;typename T &gt; </div>
 <p>Read the <code>DisplayName</code> attribute of a node. </p>
 <p>Used to display the node to the user. </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00110">110</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00111">111</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00281">opcua::Node&lt; ServerOrClient &gt;::readDisplayName()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00280">opcua::Node&lt; ServerOrClient &gt;::readDisplayName()</a>.</p>
 
 </div>
 </div>
@@ -517,9 +515,9 @@ template&lt;typename T &gt; </div>
 <p>Read the <code>Description</code> attribute of a node. </p>
 <p>The description shall explain the meaning of the node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00121">121</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00122">122</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00286">opcua::Node&lt; ServerOrClient &gt;::readDescription()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00285">opcua::Node&lt; ServerOrClient &gt;::readDescription()</a>.</p>
 
 </div>
 </div>
@@ -562,9 +560,9 @@ template&lt;typename T &gt; </div>
 <p>Read the <code>WriteMask</code> attribute of a node. </p>
 <p>For example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#ada81db626738ee2eada8215ea9c5ca6f">UA_WRITEMASK_VALUEFORVARIABLETYPE</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a35003ddcccde5610e1c95ec92305398d">UA_WRITEMASK_VALUERANK</a></code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00132">132</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00133">133</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00291">opcua::Node&lt; ServerOrClient &gt;::readWriteMask()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00290">opcua::Node&lt; ServerOrClient &gt;::readWriteMask()</a>.</p>
 
 </div>
 </div>
@@ -607,9 +605,9 @@ template&lt;typename T &gt; </div>
 <p>Read the <code>UserWriteMask</code> attribute of a node. </p>
 <p>For example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#ada81db626738ee2eada8215ea9c5ca6f">UA_WRITEMASK_VALUEFORVARIABLETYPE</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a35003ddcccde5610e1c95ec92305398d">UA_WRITEMASK_VALUERANK</a></code>.   In contrast to the write mask, the user write mask is taking access rights into account. </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00144">144</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00145">145</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00296">opcua::Node&lt; ServerOrClient &gt;::readUserWriteMask()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00295">opcua::Node&lt; ServerOrClient &gt;::readUserWriteMask()</a>.</p>
 
 </div>
 </div>
@@ -652,9 +650,9 @@ template&lt;typename T &gt; </div>
 <p>Read the <code>IsAbtract</code> attribute of a reference type node. </p>
 <p>If a reference is abstract, no reference of this type shall exist, only of its subtypes. </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00155">155</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00156">156</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00301">opcua::Node&lt; ServerOrClient &gt;::readIsAbstract()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00300">opcua::Node&lt; ServerOrClient &gt;::readIsAbstract()</a>.</p>
 
 </div>
 </div>
@@ -697,9 +695,9 @@ template&lt;typename T &gt; </div>
 <p>Read the <code>Symmetric</code> attribute of a reference type node. </p>
 <p>If a reference is symmetric it can seen from both the source and target node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00166">166</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00167">167</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00306">opcua::Node&lt; ServerOrClient &gt;::readSymmetric()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00305">opcua::Node&lt; ServerOrClient &gt;::readSymmetric()</a>.</p>
 
 </div>
 </div>
@@ -742,9 +740,9 @@ template&lt;typename T &gt; </div>
 <p>Read the <code>InverseName</code> attribute of a reference type node. </p>
 <p>The inverse name describes the reference type as seen from the target node. For example, the reference type <code>HasSubtype</code> has the inverse name <code>HasSupertype</code>. </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00178">178</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00179">179</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00311">opcua::Node&lt; ServerOrClient &gt;::readInverseName()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00310">opcua::Node&lt; ServerOrClient &gt;::readInverseName()</a>.</p>
 
 </div>
 </div>
@@ -786,9 +784,9 @@ template&lt;typename T &gt; </div>
 
 <p>Read the <code>Value</code> attribute of a variable node as a <a class="el" href="classopcua_1_1DataValue.html" title="UA_DataValue wrapper class.">DataValue</a> object. </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00187">187</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00188">188</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00316">opcua::Node&lt; ServerOrClient &gt;::readDataValue()</a>, <a class="el" href="Node_8h_source.html#l00323">opcua::Node&lt; ServerOrClient &gt;::readDataValue()</a>, and <a class="el" href="Attribute_8h_source.html#l00195">opcua::services::readDataValue()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00315">opcua::Node&lt; ServerOrClient &gt;::readDataValue()</a>, <a class="el" href="Node_8h_source.html#l00322">opcua::Node&lt; ServerOrClient &gt;::readDataValue()</a>, and <a class="el" href="Attribute_8h_source.html#l00196">opcua::services::readDataValue()</a>.</p>
 
 </div>
 </div>
@@ -830,9 +828,9 @@ template&lt;typename T &gt; </div>
 
 <p>Read the <code>Value</code> attribute of a variable node as a <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> object. </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00204">204</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00205">205</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00328">opcua::Node&lt; ServerOrClient &gt;::readValue()</a>, <a class="el" href="Attribute_8h_source.html#l00215">opcua::services::readValue()</a>, and <a class="el" href="Node_8h_source.html#l00335">opcua::Node&lt; ServerOrClient &gt;::readValue()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00327">opcua::Node&lt; ServerOrClient &gt;::readValue()</a>, <a class="el" href="Attribute_8h_source.html#l00216">opcua::services::readValue()</a>, and <a class="el" href="Node_8h_source.html#l00334">opcua::Node&lt; ServerOrClient &gt;::readValue()</a>.</p>
 
 </div>
 </div>
@@ -874,9 +872,9 @@ template&lt;typename T &gt; </div>
 
 <p>Read the <code><a class="el" href="classopcua_1_1DataType.html" title="UA_DataType wrapper class.">DataType</a></code> attribute of a variable (type) node as <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00224">224</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00225">225</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00364">opcua::Node&lt; ServerOrClient &gt;::readDataType()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00363">opcua::Node&lt; ServerOrClient &gt;::readDataType()</a>.</p>
 
 </div>
 </div>
@@ -919,9 +917,9 @@ template&lt;typename T &gt; </div>
 <p>Read the <code>ValueRank</code> attribute of a variable (type) node. </p>
 <p>Indicates whether the value attribute of the variable node is an array and how many dimensions the array has. </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00236">236</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00237">237</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00369">opcua::Node&lt; ServerOrClient &gt;::readValueRank()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00368">opcua::Node&lt; ServerOrClient &gt;::readValueRank()</a>.</p>
 
 </div>
 </div>
@@ -964,9 +962,9 @@ template&lt;typename T &gt; </div>
 <p>Read the <code>ArrayDimensions</code> attribute of a variable (type) node. </p>
 <p>Specifies the maximum supported length of each dimension (0 if unknown). </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00248">248</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00249">249</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00374">opcua::Node&lt; ServerOrClient &gt;::readArrayDimensions()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00373">opcua::Node&lt; ServerOrClient &gt;::readArrayDimensions()</a>.</p>
 
 </div>
 </div>
@@ -1009,9 +1007,9 @@ template&lt;typename T &gt; </div>
 <p>Read the <code>AccessLevel</code> attribute of a variable node. </p>
 <p>For example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a40ea076d6ef4c0aaccdc0d14fb2573c4">UA_ACCESSLEVELMASK_READ</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a92380e13ac90946ba3d5a7e975dfc5d3">UA_ACCESSLEVELMASK_WRITE</a></code>. The access level attribute is used to indicate how the value of a variable can be accessed (read/write) and if it contains current and/or historic data. </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00265">265</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00266">266</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00379">opcua::Node&lt; ServerOrClient &gt;::readAccessLevel()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00378">opcua::Node&lt; ServerOrClient &gt;::readAccessLevel()</a>.</p>
 
 </div>
 </div>
@@ -1054,9 +1052,9 @@ template&lt;typename T &gt; </div>
 <p>Read the <code>UserAccessLevel</code> attribute a variable node. </p>
 <p>For example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a40ea076d6ef4c0aaccdc0d14fb2573c4">UA_ACCESSLEVELMASK_READ</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a92380e13ac90946ba3d5a7e975dfc5d3">UA_ACCESSLEVELMASK_WRITE</a></code>. The access level attribute is used to indicate how the value of a variable can be accessed (read/write) and if it contains current and/or historic data.   In contrast to the access level, the user access level is taking access rights into account. </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00277">277</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00278">278</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00384">opcua::Node&lt; ServerOrClient &gt;::readUserAccessLevel()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00383">opcua::Node&lt; ServerOrClient &gt;::readUserAccessLevel()</a>.</p>
 
 </div>
 </div>
@@ -1099,9 +1097,9 @@ template&lt;typename T &gt; </div>
 <p>Read the <code>MinimumSamplingInterval</code> attribute of a variable node. </p>
 <p>Specifies (in milliseconds) how fast the server can reasonably sample the value for changes. A minimum sampling interval of 0 indicates that the server is to monitor the item continuously. A minimum sampling interval of -1 means indeterminate. </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00290">290</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00291">291</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00389">opcua::Node&lt; ServerOrClient &gt;::readMinimumSamplingInterval()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00388">opcua::Node&lt; ServerOrClient &gt;::readMinimumSamplingInterval()</a>.</p>
 
 </div>
 </div>
@@ -1150,9 +1148,9 @@ template&lt;typename T &gt; </div>
 <p>Write the <code>DisplayName</code> attribute of a node. </p>
 <p>Used to display the node to the user.   </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00302">302</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00303">303</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00399">opcua::Node&lt; ServerOrClient &gt;::writeDisplayName()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00398">opcua::Node&lt; ServerOrClient &gt;::writeDisplayName()</a>.</p>
 
 </div>
 </div>
@@ -1201,9 +1199,9 @@ template&lt;typename T &gt; </div>
 <p>Write the <code>Description</code> attribute of a node. </p>
 <p>The description shall explain the meaning of the node.   </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00312">312</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00313">313</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00406">opcua::Node&lt; ServerOrClient &gt;::writeDescription()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00405">opcua::Node&lt; ServerOrClient &gt;::writeDescription()</a>.</p>
 
 </div>
 </div>
@@ -1252,9 +1250,9 @@ template&lt;typename T &gt; </div>
 <p>Write the <code>WriteMask</code> attribute of a node. </p>
 <p>For example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#ada81db626738ee2eada8215ea9c5ca6f">UA_WRITEMASK_VALUEFORVARIABLETYPE</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a35003ddcccde5610e1c95ec92305398d">UA_WRITEMASK_VALUERANK</a></code>.   </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00322">322</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00323">323</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00413">opcua::Node&lt; ServerOrClient &gt;::writeWriteMask()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00412">opcua::Node&lt; ServerOrClient &gt;::writeWriteMask()</a>.</p>
 
 </div>
 </div>
@@ -1303,9 +1301,9 @@ template&lt;typename T &gt; </div>
 <p>Write the <code>UserWriteMask</code> attribute of a node. </p>
 <p>For example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#ada81db626738ee2eada8215ea9c5ca6f">UA_WRITEMASK_VALUEFORVARIABLETYPE</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a35003ddcccde5610e1c95ec92305398d">UA_WRITEMASK_VALUERANK</a></code>.   In contrast to the write mask, the user write mask is taking access rights into account.   </p><dl class="section note"><dt>Note</dt><dd>Cannot be written from the server. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00333">333</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00334">334</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00420">opcua::Node&lt; ServerOrClient &gt;::writeUserWriteMask()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00419">opcua::Node&lt; ServerOrClient &gt;::writeUserWriteMask()</a>.</p>
 
 </div>
 </div>
@@ -1354,9 +1352,9 @@ template&lt;typename T &gt; </div>
 <p>Write the <code>IsAbstract</code> attribute of a reference type node. </p>
 <p>If a reference is abstract, no reference of this type shall exist, only of its subtypes.   </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00343">343</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00344">344</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00427">opcua::Node&lt; ServerOrClient &gt;::writeIsAbstract()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00426">opcua::Node&lt; ServerOrClient &gt;::writeIsAbstract()</a>.</p>
 
 </div>
 </div>
@@ -1405,9 +1403,9 @@ template&lt;typename T &gt; </div>
 <p>Write the <code>Symmetric</code> attribute of a reference type node. </p>
 <p>If a reference is symmetric it can seen from both the source and target node.   </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00353">353</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00354">354</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00434">opcua::Node&lt; ServerOrClient &gt;::writeSymmetric()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00433">opcua::Node&lt; ServerOrClient &gt;::writeSymmetric()</a>.</p>
 
 </div>
 </div>
@@ -1456,9 +1454,9 @@ template&lt;typename T &gt; </div>
 <p>Write the <code>InverseName</code> of a reference type node. </p>
 <p>The inverse name describes the reference type as seen from the target node. For example, the reference type <code>HasSubtype</code> has the inverse name <code>HasSupertype</code>.   </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00363">363</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00364">364</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00441">opcua::Node&lt; ServerOrClient &gt;::writeInverseName()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00440">opcua::Node&lt; ServerOrClient &gt;::writeInverseName()</a>.</p>
 
 </div>
 </div>
@@ -1506,9 +1504,9 @@ template&lt;typename T &gt; </div>
 
 <p>Write the <code>Value</code> attribute of a variable node as a <a class="el" href="classopcua_1_1DataValue.html" title="UA_DataValue wrapper class.">DataValue</a> object. </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00373">373</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00374">374</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00448">opcua::Node&lt; ServerOrClient &gt;::writeDataValue()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00447">opcua::Node&lt; ServerOrClient &gt;::writeDataValue()</a>.</p>
 
 </div>
 </div>
@@ -1556,9 +1554,9 @@ template&lt;typename T &gt; </div>
 
 <p>Write the <code>Value</code> attribute of a variable node as a <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a> object. </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00383">383</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00384">384</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00455">opcua::Node&lt; ServerOrClient &gt;::writeValue()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00454">opcua::Node&lt; ServerOrClient &gt;::writeValue()</a>.</p>
 
 </div>
 </div>
@@ -1606,9 +1604,9 @@ template&lt;typename T &gt; </div>
 
 <p>Write the <code><a class="el" href="classopcua_1_1DataType.html" title="UA_DataType wrapper class.">DataType</a></code> attribute of a variable (type) node. </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00396">396</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00397">397</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00510">opcua::Node&lt; ServerOrClient &gt;::writeDataType()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00505">opcua::Node&lt; ServerOrClient &gt;::writeDataType()</a>.</p>
 
 </div>
 </div>
@@ -1657,14 +1655,14 @@ template&lt;typename T &gt; </div>
 <p>Write the <code>ValueRank</code> attribute of a variable (type) node. </p>
 <p>Indicates whether the value attribute of the variable node is an array and how many dimensions the array has.   </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00406">406</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00407">407</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00525">opcua::Node&lt; ServerOrClient &gt;::writeValueRank()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00520">opcua::Node&lt; ServerOrClient &gt;::writeValueRank()</a>.</p>
 
 </div>
 </div>
-<a id="ga7578f30b4b51b890cd4529d61a37ee9c" name="ga7578f30b4b51b890cd4529d61a37ee9c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga7578f30b4b51b890cd4529d61a37ee9c">&#9670;&#160;</a></span>writeArrayDimensions()</h2>
+<a id="ga87dbf727c0b8ae0f18ffb0c44467a89e" name="ga87dbf727c0b8ae0f18ffb0c44467a89e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga87dbf727c0b8ae0f18ffb0c44467a89e">&#9670;&#160;</a></span>writeArrayDimensions()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1689,7 +1687,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::vector&lt; uint32_t &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const uint32_t &gt;&#160;</td>
           <td class="paramname"><em>dimensions</em>&#160;</td>
         </tr>
         <tr>
@@ -1709,9 +1707,9 @@ template&lt;typename T &gt; </div>
 <p>Should be unspecified if ValueRank is &lt;= 0 (<a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383aed36a1ef76a59ee3f15180e0441188ad">ValueRank::Any</a>, <a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383af60357a8d17e45793298323f1b372a74">ValueRank::Scalar</a>, <a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383abc975004cfa0419c12cf23c09de61693">ValueRank::ScalarOrOneDimension</a>, <a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383ab175b16c7f24cc7dff60de6707c4739f">ValueRank::OneOrMoreDimensions</a>). The dimension zero is a wildcard and the actual value may have any length in this dimension.</p>
 <p>Specifies the maximum supported length of each dimension (0 if unknown).   </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00421">421</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00422">422</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00532">opcua::Node&lt; ServerOrClient &gt;::writeArrayDimensions()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00527">opcua::Node&lt; ServerOrClient &gt;::writeArrayDimensions()</a>.</p>
 
 </div>
 </div>
@@ -1760,9 +1758,9 @@ template&lt;typename T &gt; </div>
 <p>Write the <code>AccessLevel</code> attribute of a variable node. </p>
 <p>For example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a40ea076d6ef4c0aaccdc0d14fb2573c4">UA_ACCESSLEVELMASK_READ</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a92380e13ac90946ba3d5a7e975dfc5d3">UA_ACCESSLEVELMASK_WRITE</a></code>. The access level attribute is used to indicate how the value of a variable can be accessed (read/write) and if it contains current and/or historic data.   </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00435">435</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00436">436</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00539">opcua::Node&lt; ServerOrClient &gt;::writeAccessLevel()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00534">opcua::Node&lt; ServerOrClient &gt;::writeAccessLevel()</a>.</p>
 
 </div>
 </div>
@@ -1811,9 +1809,9 @@ template&lt;typename T &gt; </div>
 <p>Write the <code>UserAccessLevel</code> attribute of a variable node. </p>
 <p>For example <code><a class="elRef" target="_blank" href="open62541/common_8h.html#a40ea076d6ef4c0aaccdc0d14fb2573c4">UA_ACCESSLEVELMASK_READ</a> | <a class="elRef" target="_blank" href="open62541/common_8h.html#a92380e13ac90946ba3d5a7e975dfc5d3">UA_ACCESSLEVELMASK_WRITE</a></code>. The access level attribute is used to indicate how the value of a variable can be accessed (read/write) and if it contains current and/or historic data.   In contrast to the access level, the user access level is taking access rights into account.   </p><dl class="section note"><dt>Note</dt><dd>Cannot be written from the server. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00447">447</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00448">448</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00546">opcua::Node&lt; ServerOrClient &gt;::writeUserAccessLevel()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00541">opcua::Node&lt; ServerOrClient &gt;::writeUserAccessLevel()</a>.</p>
 
 </div>
 </div>
@@ -1862,9 +1860,9 @@ template&lt;typename T &gt; </div>
 <p>Write the <code>MinimumSamplingInterval</code> attribute of a variable node. </p>
 <p>Specifies (in milliseconds) how fast the server can reasonably sample the value for changes. A minimum sampling interval of 0 indicates that the server is to monitor the item continuously. A minimum sampling interval of -1 means indeterminate.   </p>
 
-<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00458">458</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Attribute_8h_source.html#l00459">459</a> of file <a class="el" href="Attribute_8h_source.html">Attribute.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00553">opcua::Node&lt; ServerOrClient &gt;::writeMinimumSamplingInterval()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Node_8h_source.html#l00548">opcua::Node&lt; ServerOrClient &gt;::writeMinimumSamplingInterval()</a>.</p>
 
 </div>
 </div>

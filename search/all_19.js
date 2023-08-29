@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['x_0',['X',['open62541/struct__OpcUa__XVType.html#ad58a84b48af37032bbc317c7f0e554db',0,'_OpcUa_XVType']]],
-  ['x_1',['x',['open62541/structUA__XVType.html#a7261d77838fa03112a041eaf4ce20d31',0,'UA_XVType']]],
+  ['x_0',['x',['open62541/structUA__XVType.html#a7261d77838fa03112a041eaf4ce20d31',0,'UA_XVType']]],
+  ['x_1',['X',['open62541/struct__OpcUa__XVType.html#ad58a84b48af37032bbc317c7f0e554db',0,'_OpcUa_XVType']]],
   ['x509identitytoken_2',['X509IdentityToken',['../classopcua_1_1X509IdentityToken.html',1,'opcua::X509IdentityToken'],['../group__NodeIds.html#ggadfeffe1a4352e8d89c5167a8c09d1692a24369d0781942b589e106af644cd3037',1,'opcua::X509IdentityToken']]],
   ['x509identitytoken_5fencoding_5fdefaultbinary_3',['X509IdentityToken_Encoding_DefaultBinary',['../group__NodeIds.html#ggad6d1c9a92cf8a3d1113d816ef3d11e35ac17af2c5c5014cea55e739a022dc440a',1,'opcua']]],
   ['x509identitytoken_5fencoding_5fdefaultjson_4',['X509IdentityToken_Encoding_DefaultJson',['../group__NodeIds.html#ggad6d1c9a92cf8a3d1113d816ef3d11e35a687f7c68a7cc9074d7e0b7e316e5e78a',1,'opcua']]],

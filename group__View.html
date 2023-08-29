@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.8.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.9.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -98,9 +98,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga4362595d4b93ece9f5471164e2abc4dd"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ga4362595d4b93ece9f5471164e2abc4dd"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1BrowsePathResult.html">BrowsePathResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__View.html#ga4362595d4b93ece9f5471164e2abc4dd">opcua::services::translateBrowsePathToNodeIds</a> (T &amp;serverOrClient, const <a class="el" href="classopcua_1_1BrowsePath.html">BrowsePath</a> &amp;browsePath)</td></tr>
 <tr class="separator:ga4362595d4b93ece9f5471164e2abc4dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga881816279700702618773d9cb2568f2e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
-<tr class="memitem:ga881816279700702618773d9cb2568f2e"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1BrowsePathResult.html">BrowsePathResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__View.html#ga881816279700702618773d9cb2568f2e">opcua::services::browseSimplifiedBrowsePath</a> (T &amp;serverOrClient, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;origin, const std::vector&lt; <a class="el" href="classopcua_1_1QualifiedName.html">QualifiedName</a> &gt; &amp;browsePath)</td></tr>
-<tr class="separator:ga881816279700702618773d9cb2568f2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga29a41d53efbc734411e061d3c93ea47e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ga29a41d53efbc734411e061d3c93ea47e"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1BrowsePathResult.html">BrowsePathResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__View.html#ga29a41d53efbc734411e061d3c93ea47e">opcua::services::browseSimplifiedBrowsePath</a> (T &amp;serverOrClient, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;origin, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1QualifiedName.html">QualifiedName</a> &gt; browsePath)</td></tr>
+<tr class="separator:ga29a41d53efbc734411e061d3c93ea47e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Browse the address space / view created by a server. </p>
@@ -326,8 +326,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="ga881816279700702618773d9cb2568f2e" name="ga881816279700702618773d9cb2568f2e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga881816279700702618773d9cb2568f2e">&#9670;&#160;</a></span>browseSimplifiedBrowsePath()</h2>
+<a id="ga29a41d53efbc734411e061d3c93ea47e" name="ga29a41d53efbc734411e061d3c93ea47e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga29a41d53efbc734411e061d3c93ea47e">&#9670;&#160;</a></span>browseSimplifiedBrowsePath()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -349,7 +349,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::vector&lt; <a class="el" href="classopcua_1_1QualifiedName.html">QualifiedName</a> &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1QualifiedName.html">QualifiedName</a> &gt;&#160;</td>
           <td class="paramname"><em>browsePath</em>&#160;</td>
         </tr>
         <tr>

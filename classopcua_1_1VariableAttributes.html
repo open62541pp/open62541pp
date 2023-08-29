@@ -22,7 +22,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.8.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.9.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -132,12 +132,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a02dfab7c0ea45fa917c3fb610571e620"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a282b7f6fb336fdba53cd66b2cb69184f"><td class="memItemLeft" align="right" valign="top">auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1VariableAttributes.html#a282b7f6fb336fdba53cd66b2cb69184f">setValueRank</a> (<a class="el" href="namespaceopcua.html#a41f8481e3c1494130327dca210329383">ValueRank</a> valueRank) noexcept</td></tr>
 <tr class="separator:a282b7f6fb336fdba53cd66b2cb69184f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a16c19af59ebe63f0173db7450b873588"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1VariableAttributes.html#a16c19af59ebe63f0173db7450b873588">getArrayDimensionsSize</a> () const noexcept</td></tr>
-<tr class="separator:a16c19af59ebe63f0173db7450b873588"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a01904dcd043097d44b684b8b71b7e46a"><td class="memItemLeft" align="right" valign="top">std::vector&lt; uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1VariableAttributes.html#a01904dcd043097d44b684b8b71b7e46a">getArrayDimensions</a> () const</td></tr>
-<tr class="separator:a01904dcd043097d44b684b8b71b7e46a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48a0d963d23408901bebcb4e947ebce4"><td class="memItemLeft" align="right" valign="top">auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1VariableAttributes.html#a48a0d963d23408901bebcb4e947ebce4">setArrayDimensions</a> (const std::vector&lt; uint32_t &gt; &amp;arrayDimensions)</td></tr>
-<tr class="separator:a48a0d963d23408901bebcb4e947ebce4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a322b1cbf42a404ec11e91b5aebfad0a9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const uint32_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1VariableAttributes.html#a322b1cbf42a404ec11e91b5aebfad0a9">getArrayDimensions</a> () const noexcept</td></tr>
+<tr class="separator:a322b1cbf42a404ec11e91b5aebfad0a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a470dd943112d79b3e5f8d4eed2526810"><td class="memItemLeft" align="right" valign="top">auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1VariableAttributes.html#a470dd943112d79b3e5f8d4eed2526810">setArrayDimensions</a> (<a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const uint32_t &gt; arrayDimensions)</td></tr>
+<tr class="separator:a470dd943112d79b3e5f8d4eed2526810"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43a623d29a601c86cb2df21d720b9f84"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1VariableAttributes.html#a43a623d29a601c86cb2df21d720b9f84">getAccessLevel</a> () const noexcept</td></tr>
 <tr class="separator:a43a623d29a601c86cb2df21d720b9f84"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a110d3e684edd8ea112c15647eb05655f"><td class="memItemLeft" align="right" valign="top">auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1VariableAttributes.html#a110d3e684edd8ea112c15647eb05655f">setAccessLevel</a> (uint8_t accessLevel) noexcept</td></tr>
@@ -216,7 +214,7 @@ Additional Inherited Members</h2></td></tr>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2server_custom_datatypes_8cpp-example.html#_a10">custom_datatypes/server_custom_datatypes.cpp</a>, <a class="el" href="server_8cpp-example.html#_a8">server.cpp</a>, <a class="el" href="server_accesscontrol_8cpp-example.html#_a17">server_accesscontrol.cpp</a>, <a class="el" href="server_datasource_8cpp-example.html#_a2">server_datasource.cpp</a>, and <a class="el" href="server_instantiation_8cpp-example.html#_a5">server_instantiation.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00224">224</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00225">225</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aeb2f338400f4ff43119d131da6d17c39" name="aeb2f338400f4ff43119d131da6d17c39"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aeb2f338400f4ff43119d131da6d17c39">&#9670;&#160;</a></span>VariableAttributes()</h2>
@@ -261,7 +259,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00231">231</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00232">232</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -288,7 +286,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00231">231</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00232">232</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -318,7 +316,7 @@ Additional Inherited Members</h2></td></tr>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_instantiation_8cpp-example.html#a6">server_instantiation.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00231">231</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00232">232</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -345,7 +343,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00231">231</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00232">232</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -373,7 +371,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00231">231</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00232">232</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -400,7 +398,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00231">231</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00232">232</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -428,7 +426,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00231">231</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00232">232</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -455,7 +453,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00231">231</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00232">232</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -483,7 +481,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00231">231</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00232">232</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -510,7 +508,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00232">232</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00233">233</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -538,7 +536,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00232">232</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00233">233</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -569,7 +567,7 @@ template&lt;typename... Args&gt; </div>
 </div><div class="memdoc">
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="classopcua_1_1Variant.html#a264a214598c4089990e5cfdc7378474d" title="Create Variant from scalar value (no copy if assignable without conversion).">Variant::fromScalar</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00236">236</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00237">237</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -598,9 +596,9 @@ template&lt;typename... Args&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classopcua_1_1Variant.html#a6d921f5e2a5dd0baa0dd918d5965c3fc" title="Create Variant from array (no copy if assignable without conversion).">Variant::fromArray</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classopcua_1_1Variant.html#ab6b12d3ed538f9ce4016f8fc198581c8" title="Create Variant from array (no copy if assignable without conversion).">Variant::fromArray</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00242">242</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00243">243</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -627,7 +625,7 @@ template&lt;typename... Args&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00246">246</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00247">247</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -657,7 +655,7 @@ template&lt;typename... Args&gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2server_custom_datatypes_8cpp-example.html#a11">custom_datatypes/server_custom_datatypes.cpp</a>, and <a class="el" href="server_8cpp-example.html#a9">server.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00246">246</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00247">247</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -688,7 +686,7 @@ template&lt;typename T &gt; </div>
 
 <p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. Deduce the <code>dataType</code> from the template type. </p>
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00251">251</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00252">252</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -715,7 +713,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00255">255</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00256">256</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -743,12 +741,12 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00255">255</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00256">256</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
-<a id="a16c19af59ebe63f0173db7450b873588" name="a16c19af59ebe63f0173db7450b873588"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a16c19af59ebe63f0173db7450b873588">&#9670;&#160;</a></span>getArrayDimensionsSize()</h2>
+<a id="a322b1cbf42a404ec11e91b5aebfad0a9" name="a322b1cbf42a404ec11e91b5aebfad0a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a322b1cbf42a404ec11e91b5aebfad0a9">&#9670;&#160;</a></span>getArrayDimensions()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -757,7 +755,7 @@ template&lt;typename T &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t opcua::VariableAttributes::getArrayDimensionsSize </td>
+          <td class="memname"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const uint32_t &gt; opcua::VariableAttributes::getArrayDimensions </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -770,39 +768,12 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00262">262</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00263">263</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
-<a id="a01904dcd043097d44b684b8b71b7e46a" name="a01904dcd043097d44b684b8b71b7e46a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a01904dcd043097d44b684b8b71b7e46a">&#9670;&#160;</a></span>getArrayDimensions()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt; uint32_t &gt; opcua::VariableAttributes::getArrayDimensions </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00262">262</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
-
-</div>
-</div>
-<a id="a48a0d963d23408901bebcb4e947ebce4" name="a48a0d963d23408901bebcb4e947ebce4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a48a0d963d23408901bebcb4e947ebce4">&#9670;&#160;</a></span>setArrayDimensions()</h2>
+<a id="a470dd943112d79b3e5f8d4eed2526810" name="a470dd943112d79b3e5f8d4eed2526810"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a470dd943112d79b3e5f8d4eed2526810">&#9670;&#160;</a></span>setArrayDimensions()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -813,7 +784,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="memname">auto &amp; opcua::VariableAttributes::setArrayDimensions </td>
           <td>(</td>
-          <td class="paramtype">const std::vector&lt; uint32_t &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const uint32_t &gt;&#160;</td>
           <td class="paramname"><em>arrayDimensions</em></td><td>)</td>
           <td></td>
         </tr>
@@ -825,7 +796,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00262">262</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00263">263</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -852,7 +823,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00263">263</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00264">264</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -882,7 +853,7 @@ template&lt;typename T &gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_accesscontrol_8cpp-example.html#a18">server_accesscontrol.cpp</a>, and <a class="el" href="server_datasource_8cpp-example.html#a3">server_datasource.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00263">263</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00264">264</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -909,7 +880,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00264">264</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00265">265</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -937,7 +908,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00264">264</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00265">265</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -964,7 +935,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00270">270</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00271">271</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -992,7 +963,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00270">270</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00271">271</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -1019,7 +990,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00271">271</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00272">272</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -1047,7 +1018,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00271">271</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00272">272</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
