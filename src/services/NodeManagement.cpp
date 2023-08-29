@@ -8,6 +8,7 @@
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
+#include "open62541pp/TypeWrapper.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/Variant.h"
 
@@ -163,9 +164,9 @@ void addMethod(
         attributes,
         methodCallback,
         inputArguments.size(),
-        inputArguments.data()->handle(),
+        asNative(inputArguments.data()),
         outputArguments.size(),
-        outputArguments.data()->handle(),
+        asNative(outputArguments.data()),
         nodeContext,
         nullptr  // outNewNodeId
     );

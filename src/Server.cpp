@@ -8,6 +8,7 @@
 #include "open62541pp/AccessControl.h"
 #include "open62541pp/Config.h"
 #include "open62541pp/ErrorHandling.h"
+#include "open62541pp/Event.h"
 #include "open62541pp/Node.h"
 #include "open62541pp/Session.h"
 #include "open62541pp/TypeWrapper.h"
@@ -341,6 +342,12 @@ void Server::setVariableNodeValueBackend(const NodeId& id, ValueBackendDataSourc
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 Subscription<Server> Server::createSubscription() noexcept {
     return {*this, 0U};
+}
+#endif
+
+#ifdef UA_ENABLE_SUBSCRIPTIONS_EVENTS
+Event Server::createEvent(const NodeId& eventType) {
+    return Event(*this, eventType);
 }
 #endif
 

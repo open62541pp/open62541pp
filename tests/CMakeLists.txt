@@ -10,6 +10,7 @@ add_executable(
     CustomDataTypes.cpp
     DataType.cpp
     ErrorHandling.cpp
+    Event.cpp
     helper.cpp
     Logger.cpp
     Node.cpp

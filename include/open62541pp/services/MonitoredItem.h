@@ -92,7 +92,7 @@ using DataChangeNotificationCallback =
  * Event notification callback.
  * @param subId Subscription identifier (`0U` for local (server-side) monitored item)
  * @param monId MonitoredItem identifier
- * @param value Changed value
+ * @param eventFields Event fields
  * @ingroup MonitoredIte
  */
 using EventNotificationCallback =
