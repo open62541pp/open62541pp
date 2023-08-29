@@ -120,6 +120,7 @@ add_library(
     src/CustomDataTypes.cpp
     src/CustomLogger.cpp
     src/DataType.cpp
+    src/Event.cpp
     src/Logger.cpp
     src/MonitoredItem.cpp
     src/Node.cpp

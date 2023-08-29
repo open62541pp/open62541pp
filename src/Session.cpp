@@ -77,4 +77,13 @@ void Session::close() {
 #endif
 }
 
+bool operator==(const Session& lhs, const Session& rhs) noexcept {
+    return (lhs.getConnection() == rhs.getConnection()) &&
+           (lhs.getSessionId() == rhs.getSessionId());
+}
+
+bool operator!=(const Session& lhs, const Session& rhs) noexcept {
+    return !(lhs == rhs);
+}
+
 }  // namespace opcua

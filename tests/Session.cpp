@@ -54,4 +54,9 @@ TEST_CASE("Session") {
 #endif
     }
 #endif
+
+    SUBCASE("Equality") {
+        CHECK(Session(server, {1, 1000}) == Session(server, {1, 1000}));
+        CHECK(Session(server, {1, 1000}) != Session(server, {1, 1001}));
+    }
 }

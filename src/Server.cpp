@@ -8,6 +8,7 @@
 #include "open62541pp/AccessControl.h"
 #include "open62541pp/Config.h"
 #include "open62541pp/ErrorHandling.h"
+#include "open62541pp/Event.h"
 #include "open62541pp/Node.h"
 #include "open62541pp/Session.h"
 #include "open62541pp/TypeWrapper.h"
@@ -344,6 +345,12 @@ Subscription<Server> Server::createSubscription() noexcept {
 }
 #endif
 
+#ifdef UA_ENABLE_SUBSCRIPTIONS_EVENTS
+Event Server::createEvent(const NodeId& eventType) {
+    return Event(*this, eventType);
+}
+#endif
+
 uint16_t Server::runIterate() {
     return connection_->runIterate();
 }
@@ -361,23 +368,23 @@ bool Server::isRunning() const noexcept {
 }
 
 Node<Server> Server::getNode(const NodeId& id) {
-    return {*this, id, true};
+    return {*this, id};
 }
 
 Node<Server> Server::getRootNode() {
-    return {*this, {0, UA_NS0ID_ROOTFOLDER}, false};
+    return {*this, {0, UA_NS0ID_ROOTFOLDER}};
 }
 
 Node<Server> Server::getObjectsNode() {
-    return {*this, {0, UA_NS0ID_OBJECTSFOLDER}, false};
+    return {*this, {0, UA_NS0ID_OBJECTSFOLDER}};
 }
 
 Node<Server> Server::getTypesNode() {
-    return {*this, {0, UA_NS0ID_TYPESFOLDER}, false};
+    return {*this, {0, UA_NS0ID_TYPESFOLDER}};
 }
 
 Node<Server> Server::getViewsNode() {
-    return {*this, {0, UA_NS0ID_VIEWSFOLDER}, false};
+    return {*this, {0, UA_NS0ID_VIEWSFOLDER}};
 }
 
 UA_Server* Server::handle() noexcept {
