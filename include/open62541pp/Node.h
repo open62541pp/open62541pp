@@ -34,14 +34,9 @@ template <typename ServerOrClient>
 class Node {
 public:
     /// Create a Node object.
-    /// @exception BadStatus (BadNodeIdUnknown) If `checkExists` enabled and `id` not found
-    Node(ServerOrClient& connection, NodeId id, bool checkExists = true)
+    Node(ServerOrClient& connection, NodeId id)
         : connection_(connection),
-          nodeId_(std::move(id)) {
-        if (checkExists) {
-            services::readNodeId(connection_, nodeId_);
-        }
-    }
+          nodeId_(std::move(id)) {}
 
     /// Get the server/client instance.
     ServerOrClient& getConnection() noexcept {
@@ -58,6 +53,11 @@ public:
         return nodeId_;
     }
 
+    /// Check if the Node exists in the most efficient manner.
+    /// If the instance is of type `Node<Server>`, the internal node store is searched.
+    /// If the instance is of type `Node<Client>`, an actual read request to the server is made.
+    bool exists() noexcept;
+
     /// @copydoc services::addFolder
     Node addFolder(
         const NodeId& id,
@@ -66,7 +66,7 @@ public:
         const NodeId& referenceType = ReferenceTypeId::HasComponent
     ) {
         services::addFolder(connection_, nodeId_, id, browseName, attributes, referenceType);
-        return {connection_, id, false};
+        return {connection_, id};
     }
 
     /// @copydoc services::addObject
@@ -80,7 +80,7 @@ public:
         services::addObject(
             connection_, nodeId_, id, browseName, attributes, objectType, referenceType
         );
-        return {connection_, id, false};
+        return {connection_, id};
     }
 
     /// @copydoc services::addVariable
@@ -94,7 +94,7 @@ public:
         services::addVariable(
             connection_, nodeId_, id, browseName, attributes, variableType, referenceType
         );
-        return {connection_, id, false};
+        return {connection_, id};
     }
 
     /// @copydoc services::addProperty
@@ -102,7 +102,7 @@ public:
         const NodeId& id, std::string_view browseName, const VariableAttributes& attributes = {}
     ) {
         services::addProperty(connection_, nodeId_, id, browseName, attributes);
-        return {connection_, id, false};
+        return {connection_, id};
     }
 
 #ifdef UA_ENABLE_METHODCALLS
@@ -127,7 +127,7 @@ public:
             attributes,
             referenceType
         );
-        return {connection_, id, false};
+        return {connection_, id};
     }
 #endif
 
@@ -139,7 +139,7 @@ public:
         const NodeId& referenceType = ReferenceTypeId::HasSubtype
     ) {
         services::addObjectType(connection_, nodeId_, id, browseName, attributes, referenceType);
-        return {connection_, id, false};
+        return {connection_, id};
     }
 
     /// @copydoc services::addVariableType
@@ -153,7 +153,7 @@ public:
         services::addVariableType(
             connection_, nodeId_, id, browseName, attributes, variableType, referenceType
         );
-        return {connection_, id, false};
+        return {connection_, id};
     }
 
     /// @copydoc services::addReferenceType
@@ -164,7 +164,7 @@ public:
         const NodeId& referenceType = ReferenceTypeId::HasSubtype
     ) {
         services::addReferenceType(connection_, nodeId_, id, browseName, attributes, referenceType);
-        return {connection_, id, false};
+        return {connection_, id};
     }
 
     /// @copydoc services::addDataType
@@ -175,7 +175,7 @@ public:
         const NodeId& referenceType = ReferenceTypeId::HasSubtype
     ) {
         services::addDataType(connection_, nodeId_, id, browseName, attributes, referenceType);
-        return {connection_, id, false};
+        return {connection_, id};
     }
 
     /// @copydoc services::addView
@@ -186,7 +186,7 @@ public:
         const NodeId& referenceType = ReferenceTypeId::Organizes
     ) {
         services::addView(connection_, nodeId_, id, browseName, attributes, referenceType);
-        return {connection_, id, false};
+        return {connection_, id};
     }
 
     /// @copydoc services::addReference
