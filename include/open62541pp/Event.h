@@ -49,9 +49,6 @@ public:
     /// Set the time of the event (UTC).
     Event& writeTime(DateTime time);
 
-    /// Set the local time offset (optional).
-    // Event& writeLocalTime(UA_TimeZoneDataType localTime);
-
     /// Set the urgency/priority of the event from 1 (lowest) to 1000 (highest).
     Event& writeSeverity(uint16_t severity);
 

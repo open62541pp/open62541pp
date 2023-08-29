@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "open62541pp/Logger.h"
+#include "open62541pp/NodeIds.h"
 #include "open62541pp/Subscription.h"
 #include "open62541pp/ValueBackend.h"
 #include "open62541pp/types/Builtin.h"
@@ -20,6 +21,7 @@ namespace opcua {
 // forward declaration
 class AccessControlBase;
 class DataType;
+class Event;
 class ServerContext;
 class Session;
 template <typename ServerOrClient>
@@ -111,6 +113,11 @@ public:
 #ifdef UA_ENABLE_SUBSCRIPTIONS
     /// Create a (pseudo) subscription to monitor local data changes and events.
     Subscription<Server> createSubscription() noexcept;
+#endif
+
+#ifdef UA_ENABLE_SUBSCRIPTIONS_EVENTS
+    /// Create an event object to generate and trigger events.
+    Event createEvent(const NodeId& eventType = ObjectTypeId::BaseEventType);
 #endif
 
     /// Run a single iteration of the server's main loop.

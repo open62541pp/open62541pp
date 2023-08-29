@@ -42,8 +42,8 @@ TEST_CASE("Event") {
     }
 
     SUBCASE("Equality") {
-        Event event1(server);
-        Event event2(server);
+        auto event1 = server.createEvent();
+        auto event2 = server.createEvent();
         CHECK(event1 == event1);
         CHECK(event1 != event2);
     }
