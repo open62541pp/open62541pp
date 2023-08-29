@@ -73,4 +73,12 @@ ByteString Event::trigger(const NodeId& originId) {
 
 #endif
 
+bool operator==(const Event& lhs, const Event& rhs) noexcept {
+    return (lhs.getConnection() == rhs.getConnection()) && (lhs.getNodeId() == rhs.getNodeId());
+}
+
+bool operator!=(const Event& lhs, const Event& rhs) noexcept {
+    return !(lhs == rhs);
+}
+
 }  // namespace opcua

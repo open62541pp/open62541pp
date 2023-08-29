@@ -40,6 +40,13 @@ TEST_CASE("Event") {
         CHECK_NOTHROW(event.trigger());
         CHECK(event.trigger() != event.trigger());  // unique event ids
     }
+
+    SUBCASE("Equality") {
+        Event event1(server);
+        Event event2(server);
+        CHECK(event1 == event1);
+        CHECK(event1 != event2);
+    }
 }
 
 #endif

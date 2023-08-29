@@ -71,4 +71,7 @@ private:
     NodeId id_;
 };
 
+bool operator==(const Event& lhs, const Event& rhs) noexcept;
+bool operator!=(const Event& lhs, const Event& rhs) noexcept;
+
 }  // namespace opcua
