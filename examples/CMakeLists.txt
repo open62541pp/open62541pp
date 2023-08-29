@@ -77,4 +77,8 @@ if(UA_ENABLE_SUBSCRIPTIONS)
     add_example(client_subscription.cpp)
 endif()
 
+if(UA_ENABLE_SUBSCRIPTIONS_EVENTS AND UA_ENABLE_METHODCALLS)
+    add_example(events/server_events.cpp)
+endif()
+
 add_example(typeconversion.cpp)
