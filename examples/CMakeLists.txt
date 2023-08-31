@@ -78,6 +78,7 @@ if(UA_ENABLE_SUBSCRIPTIONS)
 endif()
 
 if(UA_ENABLE_SUBSCRIPTIONS_EVENTS AND UA_ENABLE_METHODCALLS)
+    add_example(events/client_eventfilter.cpp)
     add_example(events/server_events.cpp)
 endif()
 
