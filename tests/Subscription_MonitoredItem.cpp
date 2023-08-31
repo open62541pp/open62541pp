@@ -8,6 +8,7 @@
 #include "open62541pp/MonitoredItem.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/Subscription.h"
+#include "open62541pp/types/Composed.h"
 #include "open62541pp/types/Variant.h"
 
 #include "helper/Runner.h"
@@ -173,11 +174,17 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
     SUBCASE("Monitor event") {
         auto sub = client.createSubscription();
 
-        MonitoringParameters monitoringParameters{};
+        EventFilter eventFilter(
+            {
+                {ObjectTypeId::BaseEventType, {{0, "Time"}}, AttributeId::Value},
+                {ObjectTypeId::BaseEventType, {{0, "Severity"}}, AttributeId::Value},
+                {ObjectTypeId::BaseEventType, {{0, "Message"}}, AttributeId::Value},
+            },
+            {}  // where clause -> no filter
+        );
         auto mon = sub.subscribeEvent(
             ObjectId::Server,
-            MonitoringMode::Reporting,
-            monitoringParameters,
+            eventFilter,
             [](const auto& item, const auto& eventFields) {
                 CAPTURE(item.getSubscriptionId());
                 CAPTURE(item.getMonitoredItemId());

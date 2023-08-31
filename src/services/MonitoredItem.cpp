@@ -196,17 +196,9 @@ uint32_t createMonitoredItemEvent(
     EventNotificationCallback eventCallback,
     DeleteMonitoredItemCallback deleteCallback
 ) {
-    // TODO: add EventFilter wrapper class
-    using EventFilter = TypeWrapper<UA_EventFilter, UA_TYPES_EVENTFILTER>;
-
     UA_MonitoredItemCreateRequest request{};
     request.itemToMonitor = *itemToMonitor.handle();
     request.monitoringMode = static_cast<UA_MonitoringMode>(monitoringMode);
-    if (parameters.filter.isEmpty()) {
-        // empty filter object will throw BadEventFilterInvalid
-        // use an empty EventFilter instead
-        parameters.filter = ExtensionObject::fromDecodedCopy(EventFilter{});
-    }
     copyMonitoringParametersToNative(parameters, request.requestedParameters);
 
     auto monitoredItemContext = std::make_unique<ClientContext::MonitoredItem>();

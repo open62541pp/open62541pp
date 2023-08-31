@@ -1,5 +1,4 @@
 #include <chrono>
-#include <functional>  // reference_wrapper
 #include <thread>
 #include <utility>  // pair
 #include <variant>
@@ -9,9 +8,13 @@
 
 #include "open62541pp/Client.h"
 #include "open62541pp/Config.h"
+#include "open62541pp/Event.h"
+#include "open62541pp/NodeIds.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/services/services.h"
 #include "open62541pp/types/Composed.h"
+#include "open62541pp/types/DateTime.h"
+#include "open62541pp/types/ExtensionObject.h"
 
 #include "helper/Runner.h"
 
@@ -669,17 +672,39 @@ TEST_CASE("MonitoredItem service set (client)") {
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS_EVENTS
     SUBCASE("createMonitoredItemEvent") {
+        const EventFilter eventFilter(
+            // select clause
+            {
+                {ObjectTypeId::BaseEventType, {{0, "Time"}}, AttributeId::Value},
+                {ObjectTypeId::BaseEventType, {{0, "Severity"}}, AttributeId::Value},
+                {ObjectTypeId::BaseEventType, {{0, "Message"}}, AttributeId::Value},
+            },
+            // where clause
+            {}
+        );
+        monitoringParameters.filter = ExtensionObject::fromDecodedCopy(eventFilter);
+
+        size_t notificationCount = 0;
+        size_t eventFieldsSize = 0;
         const auto monId = services::createMonitoredItemEvent(
             client,
             subId,
             {ObjectId::Server, AttributeId::EventNotifier},
             MonitoringMode::Reporting,
             monitoringParameters,
-            [&](uint32_t, uint32_t, Span<const Variant>) {}
+            [&](uint32_t, uint32_t, Span<const Variant> eventFields) {
+                notificationCount++;
+                eventFieldsSize = eventFields.size();
+            }
         );
         CAPTURE(monId);
 
-        // TODO: trigger event and check if callback was called
+        Event event(server);
+        event.writeTime(DateTime::now());
+        event.trigger();
+        client.runIterate();
+        CHECK(notificationCount == 1);
+        CHECK(eventFieldsSize == 3);
     }
 #endif
 

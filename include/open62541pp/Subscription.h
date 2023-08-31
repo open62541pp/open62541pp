@@ -18,8 +18,9 @@ namespace opcua {
 
 // forward declarations
 class Client;
-class Server;
 class DataValue;
+class EventFilter;
+class Server;
 class Variant;
 
 using SubscriptionParameters = services::SubscriptionParameters;
@@ -95,6 +96,14 @@ public:
         MonitoringMode monitoringMode,
         MonitoringParameters& parameters,
         DataChangeCallback<ServerOrClient> onDataChange
+    );
+
+    /// Create a monitored item for event notifications (default settings).
+    /// The monitoring mode is set to MonitoringMode::Reporting and the default open62541
+    /// MonitoringParameters are used.
+    /// @note Not implemented for Server.
+    MonitoredItem<ServerOrClient> subscribeEvent(
+        const NodeId& id, const EventFilter& eventFilter, EventCallback<ServerOrClient> onEvent
     );
 
     /// Create a monitored item for event notifications.

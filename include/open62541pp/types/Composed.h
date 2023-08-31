@@ -4,6 +4,7 @@
 #include <initializer_list>
 #include <string>
 #include <utility>  // forward
+#include <variant>
 
 #include "open62541pp/Common.h"
 #include "open62541pp/Config.h"
@@ -11,6 +12,7 @@
 #include "open62541pp/Span.h"
 #include "open62541pp/TypeConverter.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/detail/traits.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/ExtensionObject.h"
 #include "open62541pp/types/NodeId.h"
@@ -684,7 +686,8 @@ public:
 
 /* ------------------------------------------- Method ------------------------------------------- */
 
-#ifdef UA_TYPES_ARGUMENT
+#ifdef UA_ENABLE_METHODCALLS
+
 /**
  * UA_Argument wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.6
@@ -708,7 +711,292 @@ public:
     UAPP_COMPOSED_GETTER_CAST(ValueRank, getValueRank, valueRank)
     UAPP_COMPOSED_GETTER_SPAN(uint32_t, getArrayDimensions, arrayDimensions, arrayDimensionsSize)
 };
+
 #endif
+
+/* ---------------------------------------- Subscriptions --------------------------------------- */
+
+#ifdef UA_ENABLE_SUBSCRIPTIONS
+
+/**
+ * Filter operator.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.7.3
+ * @ingroup TypeWrapper
+ */
+enum class FilterOperator : uint32_t {
+    // clang-format off
+    Equals             = 0,
+    IsNull             = 1,
+    GreaterThan        = 2,
+    LessThan           = 3,
+    GreaterThanOrEqual = 4,
+    LessThanOrEqual    = 5,
+    Like               = 6,
+    Not                = 7,
+    Between            = 8,
+    InList             = 9,
+    And                = 10,
+    Or                 = 11,
+    Cast               = 12,
+    InView             = 13,
+    OfType             = 14,
+    RelatedTo          = 15,
+    BitwiseAnd         = 16,
+    BitwiseOr          = 17,
+    // clang-format on
+};
+
+/**
+ * UA_ElementOperand wrapper class.
+ * Reference a sub-element in the ContentFilter elements array by index.
+ * The index must be greater than the element index it is part of.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.7.4.2
+ * @ingroup TypeWrapper
+ */
+class ElementOperand : public TypeWrapper<UA_ElementOperand, UA_TYPES_ELEMENTOPERAND> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    explicit ElementOperand(uint32_t index);
+
+    UAPP_COMPOSED_GETTER(uint32_t, getIndex, index)
+};
+
+/**
+ * UA_LiteralOperand wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.7.4.3
+ * @ingroup TypeWrapper
+ */
+class LiteralOperand : public TypeWrapper<UA_LiteralOperand, UA_TYPES_LITERALOPERAND> {
+private:
+    template <typename T>
+    using EnableIfLiteral =
+        std::enable_if_t<!detail::IsOneOf<T, Variant, UA_LiteralOperand, LiteralOperand>::value>;
+
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    explicit LiteralOperand(const Variant& value);
+
+    template <typename T, typename = EnableIfLiteral<T>>
+    explicit LiteralOperand(T&& literal)
+        : LiteralOperand(Variant::fromScalar(std::forward<T>(literal))) {}
+
+    UAPP_COMPOSED_GETTER_WRAPPER(Variant, getValue, value)
+};
+
+/**
+ * UA_AttributeOperand wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.7.4.4
+ * @ingroup TypeWrapper
+ */
+class AttributeOperand : public TypeWrapper<UA_AttributeOperand, UA_TYPES_ATTRIBUTEOPERAND> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    AttributeOperand(
+        const NodeId& nodeId,
+        std::string_view alias,
+        const RelativePath& browsePath,
+        AttributeId attributeId,
+        std::string_view indexRange = {}
+    );
+
+    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getNodeId, nodeId)
+    UAPP_COMPOSED_GETTER_WRAPPER(String, getAlias, alias)
+    UAPP_COMPOSED_GETTER_WRAPPER(RelativePath, getBrowsePath, browsePath)
+    UAPP_COMPOSED_GETTER_CAST(AttributeId, getAttributeId, attributeId)
+    UAPP_COMPOSED_GETTER_WRAPPER(String, getIndexRange, indexRange)
+};
+
+/**
+ * UA_SimpleAttributeOperand wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.7.4.5
+ * @ingroup TypeWrapper
+ */
+class SimpleAttributeOperand
+    : public TypeWrapper<UA_SimpleAttributeOperand, UA_TYPES_SIMPLEATTRIBUTEOPERAND> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    SimpleAttributeOperand(
+        const NodeId& typeDefinitionId,
+        Span<const QualifiedName> browsePath,
+        AttributeId attributeId,
+        std::string_view indexRange = {}
+    );
+
+    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getTypeDefinitionId, typeDefinitionId)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(QualifiedName, getBrowsePath, browsePath, browsePathSize)
+    UAPP_COMPOSED_GETTER_CAST(AttributeId, getAttributeId, attributeId)
+    UAPP_COMPOSED_GETTER_WRAPPER(String, getIndexRange, indexRange)
+};
+
+/**
+ * Filter operand.
+ *
+ * The FilterOperand is an extensible parameter and can be of type:
+ * - ElementOperand
+ * - LiteralOperand
+ * - AttributeOperand
+ * - SimpleAttributeOperand
+ * - ExtensionObject (other types)
+ *
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.7.4
+ * @ingroup TypeWrapper
+ */
+using FilterOperand = std::variant<
+    ElementOperand,
+    LiteralOperand,
+    AttributeOperand,
+    SimpleAttributeOperand,
+    ExtensionObject>;
+
+/**
+ * UA_ContentFilterElement wrapper class.
+ *
+ * ContentFilterElements compose a filter criteria with an operator and its operands.
+ * ContentFilterElements can be composed to ContentFilter objects with the `&&`/`||` operators and
+ * negated with the `!` operator.
+ *
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.7.1
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/B.1
+ * @ingroup TypeWrapper
+ */
+class ContentFilterElement
+    : public TypeWrapper<UA_ContentFilterElement, UA_TYPES_CONTENTFILTERELEMENT> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    ContentFilterElement(FilterOperator filterOperator, Span<const FilterOperand> operands);
+
+    UAPP_COMPOSED_GETTER_CAST(FilterOperator, getFilterOperator, filterOperator)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        ExtensionObject, getFilterOperands, filterOperands, filterOperandsSize
+    )
+};
+
+/**
+ * UA_ContentFilter wrapper class.
+ *
+ * A collection of ContentFilterElement objects that define a filter criteria. The ContentFilter has
+ * a tree-like structure with references to sub-elements (of type ElementOperand). The evaluation of
+ * the ContentFilter starts with the first entry of the elements.
+ * ContentFilter objects can be composed with `&&`/`||` operators and negated with the `!` operator.
+ *
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.7.1
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/B.1
+ * @ingroup TypeWrapper
+ */
+class ContentFilter : public TypeWrapper<UA_ContentFilter, UA_TYPES_CONTENTFILTER> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    ContentFilter(std::initializer_list<ContentFilterElement> elements);
+    explicit ContentFilter(Span<const ContentFilterElement> elements);
+
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(ContentFilterElement, getElements, elements, elementsSize)
+};
+
+ContentFilter operator!(const ContentFilterElement& filterElement);
+ContentFilter operator!(const ContentFilter& filter);
+
+ContentFilter operator&&(const ContentFilterElement& lhs, const ContentFilterElement& rhs);
+ContentFilter operator&&(const ContentFilterElement& lhs, const ContentFilter& rhs);
+ContentFilter operator&&(const ContentFilter& lhs, const ContentFilterElement& rhs);
+ContentFilter operator&&(const ContentFilter& lhs, const ContentFilter& rhs);
+
+ContentFilter operator||(const ContentFilterElement& lhs, const ContentFilterElement& rhs);
+ContentFilter operator||(const ContentFilterElement& lhs, const ContentFilter& rhs);
+ContentFilter operator||(const ContentFilter& lhs, const ContentFilterElement& rhs);
+ContentFilter operator||(const ContentFilter& lhs, const ContentFilter& rhs);
+
+/**
+ * Data change trigger.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.10
+ * @ingroup TypeWrapper
+ */
+enum class DataChangeTrigger : uint32_t {
+    // clang-format off
+    Status               = 0,
+    StatusValue          = 1,
+    StatusValueTimestamp = 2,
+    // clang-format on
+};
+
+/**
+ * Deadband type.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.22.2
+ * @ingroup TypeWrapper
+ */
+enum class DeadbandType : uint32_t {
+    // clang-format off
+    None     = 0,
+    Absolute = 1,
+    Percent  = 2,
+    // clang-format on
+};
+
+/**
+ * UA_DataChangeFilter wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.22.2
+ * @ingroup TypeWrapper
+ */
+class DataChangeFilter : public TypeWrapper<UA_DataChangeFilter, UA_TYPES_DATACHANGEFILTER> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    DataChangeFilter(DataChangeTrigger trigger, DeadbandType deadbandType, double deadbandValue);
+
+    UAPP_COMPOSED_GETTER_CAST(DataChangeTrigger, getTrigger, trigger)
+    UAPP_COMPOSED_GETTER_CAST(DeadbandType, getDeadbandType, deadbandType)
+    UAPP_COMPOSED_GETTER(double, getDeadbandValue, deadbandValue)
+};
+
+/**
+ * UA_EventFilter wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.22.3
+ * @ingroup TypeWrapper
+ */
+class EventFilter : public TypeWrapper<UA_EventFilter, UA_TYPES_EVENTFILTER> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    EventFilter(Span<const SimpleAttributeOperand> selectClauses, const ContentFilter& whereClause);
+
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        SimpleAttributeOperand, getSelectClauses, selectClauses, selectClausesSize
+    )
+    UAPP_COMPOSED_GETTER_WRAPPER(ContentFilter, getWhereClause, whereClause)
+};
+
+using AggregateConfiguration = UA_AggregateConfiguration;
+
+/**
+ * UA_AggregateFilter wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.22.4
+ * @ingroup TypeWrapper
+ */
+class AggregateFilter : public TypeWrapper<UA_AggregateFilter, UA_TYPES_AGGREGATEFILTER> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    AggregateFilter(
+        DateTime startTime,
+        const NodeId& aggregateType,
+        double processingInterval,
+        AggregateConfiguration aggregateConfiguration
+    );
+
+    UAPP_COMPOSED_GETTER_WRAPPER(DateTime, getStartTime, startTime)
+    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getAggregateType, aggregateType)
+    UAPP_COMPOSED_GETTER(double, getProcessingInterval, processingInterval)
+    UAPP_COMPOSED_GETTER(AggregateConfiguration, getAggregateConfiguration, aggregateConfiguration)
+};
+
+#endif
+
+/* ----------------------------------------- Historizing ---------------------------------------- */
 
 /**
  * Perform update type for structured data history updates.
