@@ -8,6 +8,8 @@
 #include "open62541pp/Client.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/services/MonitoredItem.h"
+#include "open62541pp/types/Composed.h"
+#include "open62541pp/types/ExtensionObject.h"
 
 #include "ClientContext.h"
 #include "ServerContext.h"
@@ -168,6 +170,15 @@ MonitoredItem<Client> Subscription<Client>::subscribeEvent(
         }
     );
     return {connection_, subscriptionId_, monitoredItemId};
+}
+
+template <>
+MonitoredItem<Client> Subscription<Client>::subscribeEvent(
+    const NodeId& id, const EventFilter& eventFilter, EventCallback<Client> onEvent
+) {
+    MonitoringParameters parameters;
+    parameters.filter = ExtensionObject::fromDecodedCopy(eventFilter);
+    return subscribeEvent(id, MonitoringMode::Reporting, parameters, std::move(onEvent));
 }
 
 template <>
