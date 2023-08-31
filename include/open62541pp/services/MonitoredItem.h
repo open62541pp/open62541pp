@@ -52,9 +52,9 @@ struct MonitoringParameters {
     /// - `0.0` to use the fastest practical rate
     /// - `-1.0` to use the default sampling interval (publishing interval of the subscription)
     double samplingInterval = 250.0;
-    /// Filter used by the Server to determine if the MonitoredItem should generate a Notification.
-    /// The MonitoringFilter parameter type is an extensible parameter type and can be, for example,
-    /// of type `UA_DataChangeFilter`, `UA_EventFilter` or `UA_AggregateFilter`.
+    /// Filter is used by the server to determine if the MonitoredItem should generate
+    /// notifications. The filter parameter type is an extensible parameter type and can be, for
+    /// example, of type DataChangeFilter, EventFilter or AggregateFilter.
     /// @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.22
     ExtensionObject filter;
     /// Size of the MonitoringItem queue.

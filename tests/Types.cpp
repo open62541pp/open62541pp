@@ -935,3 +935,203 @@ TEST_CASE("ReadValueId") {
     CHECK(rvid.getIndexRange().empty());
     CHECK(rvid.getDataEncoding() == QualifiedName());
 }
+
+#ifdef UA_ENABLE_METHODCALLS
+
+TEST_CASE("Argument") {
+    const Argument argument(
+        "name", {"", "description"}, DataTypeId::Int32, ValueRank::TwoDimensions, {2, 3}
+    );
+    CHECK(argument.getName() == String("name"));
+    CHECK(argument.getDescription() == LocalizedText("", "description"));
+    CHECK(argument.getDataType() == NodeId(DataTypeId::Int32));
+    CHECK(argument.getValueRank() == ValueRank::TwoDimensions);
+    CHECK(argument.getArrayDimensions().size() == 2);
+    CHECK(argument.getArrayDimensions()[0] == 2);
+    CHECK(argument.getArrayDimensions()[1] == 3);
+}
+
+#endif
+
+#ifdef UA_ENABLE_SUBSCRIPTIONS
+
+TEST_CASE("ElementOperand") {
+    CHECK(ElementOperand(11).getIndex() == 11);
+}
+
+TEST_CASE("LiteralOperand") {
+    CHECK(LiteralOperand(Variant::fromScalar(11)).getValue().getScalar<int>() == 11);
+    CHECK(LiteralOperand(11).getValue().getScalar<int>() == 11);
+}
+
+TEST_CASE("AttributeOperand") {
+    const AttributeOperand operand(
+        ObjectTypeId::BaseEventType,
+        "alias",
+        {
+            {ReferenceTypeId::HasComponent, false, false, {0, "child1"}},
+            {ReferenceTypeId::HasComponent, false, false, {0, "child2"}},
+        },
+        AttributeId::Value,
+        {}
+    );
+    CHECK(operand.getNodeId() == NodeId(ObjectTypeId::BaseEventType));
+    CHECK(operand.getAlias() == String("alias"));
+    CHECK(operand.getBrowsePath().getElements().size() == 2);
+    CHECK(operand.getAttributeId() == AttributeId::Value);
+    CHECK(operand.getIndexRange().empty());
+}
+
+TEST_CASE("SimpleAttributeOperand") {
+    const SimpleAttributeOperand operand(
+        ObjectTypeId::BaseEventType, {{0, "child1"}, {0, "child2"}}, AttributeId::Value, {}
+    );
+    CHECK(operand.getTypeDefinitionId() == NodeId(ObjectTypeId::BaseEventType));
+    CHECK(operand.getBrowsePath().size() == 2);
+    CHECK(operand.getAttributeId() == AttributeId::Value);
+    CHECK(operand.getIndexRange().empty());
+}
+
+TEST_CASE("ContentFilter(Element)") {
+    const ContentFilter contentFilter{
+        {FilterOperator::And, {ElementOperand(1), ElementOperand(2)}},
+        {FilterOperator::OfType, {LiteralOperand(NodeId(ObjectTypeId::BaseEventType))}},
+        {FilterOperator::Equals, {LiteralOperand(99), LiteralOperand(99)}},
+    };
+
+    auto elements = contentFilter.getElements();
+    CHECK(elements.size() == 3);
+    CHECK(elements[0].getFilterOperator() == FilterOperator::And);
+    CHECK(elements[0].getFilterOperands().size() == 2);
+    CHECK(elements[0].getFilterOperands()[0].getDecodedData<ElementOperand>()->getIndex() == 1);
+    CHECK(elements[0].getFilterOperands()[1].getDecodedData<ElementOperand>()->getIndex() == 2);
+    CHECK(elements[1].getFilterOperator() == FilterOperator::OfType);
+    CHECK(elements[1].getFilterOperands().size() == 1);
+    CHECK(elements[1].getFilterOperands()[0].getDecodedData<LiteralOperand>() != nullptr);
+    CHECK(elements[2].getFilterOperator() == FilterOperator::Equals);
+    CHECK(elements[2].getFilterOperands().size() == 2);
+    CHECK(elements[2].getFilterOperands()[0].getDecodedData<LiteralOperand>() != nullptr);
+    CHECK(elements[2].getFilterOperands()[1].getDecodedData<LiteralOperand>() != nullptr);
+}
+
+TEST_CASE("ContentFilter(Element) operators") {
+    const ContentFilterElement filterElement(
+        FilterOperator::GreaterThan,
+        {
+            SimpleAttributeOperand(
+                ObjectTypeId::BaseEventType, {{0, "Severity"}}, AttributeId::Value
+            ),
+            LiteralOperand(200),
+        }
+    );
+
+    const ContentFilter filter{
+        {FilterOperator::And, {ElementOperand(1), ElementOperand(2)}},
+        {FilterOperator::OfType, {LiteralOperand(NodeId(ObjectTypeId::BaseEventType))}},
+        {FilterOperator::Equals, {LiteralOperand(99), LiteralOperand(99)}},
+    };
+
+    auto elementOperandIndex = [](const ExtensionObject& operand) {
+        return operand.getDecodedData<ElementOperand>()->getIndex();
+    };
+
+    auto firstOperator = [](const ContentFilter& contentFilter) {
+        return contentFilter.getElements()[0].getFilterOperator();
+    };
+
+    SUBCASE("Not") {
+        const ContentFilter filterElementNot = !filterElement;
+        CHECK(filterElementNot.getElements().size() == 2);
+        CHECK(firstOperator(filterElementNot) == FilterOperator::Not);
+        CHECK(elementOperandIndex(filterElementNot.getElements()[0].getFilterOperands()[0]) == 1);
+        CHECK(filterElementNot.getElements()[1].getFilterOperator() == FilterOperator::GreaterThan);
+
+        const ContentFilter filterNot = !filter;
+        CHECK(filterNot.getElements().size() == 4);
+        CHECK(firstOperator(filterNot) == FilterOperator::Not);
+        CHECK(elementOperandIndex(filterNot.getElements()[0].getFilterOperands()[0]) == 1);
+        CHECK(elementOperandIndex(filterNot.getElements()[1].getFilterOperands()[0]) == 2);
+        CHECK(elementOperandIndex(filterNot.getElements()[1].getFilterOperands()[1]) == 3);
+    }
+
+    SUBCASE("And") {
+        CHECK((filterElement && filterElement).getElements().size() == 3);
+        CHECK((filterElement && filter).getElements().size() == 5);
+        CHECK((filter && filterElement).getElements().size() == 5);
+        CHECK((filter && filter).getElements().size() == 7);
+
+        CHECK(firstOperator(filterElement && filterElement) == FilterOperator::And);
+        CHECK(firstOperator(filterElement && filter) == FilterOperator::And);
+        CHECK(firstOperator(filter && filterElement) == FilterOperator::And);
+        CHECK(firstOperator(filter && filter) == FilterOperator::And);
+
+        SUBCASE("Increment operand indexes") {
+            const ContentFilter filterAdd = filter && filter;
+            CHECK(filterAdd.getElements().size() == 7);
+            // and
+            CHECK(elementOperandIndex(filterAdd.getElements()[0].getFilterOperands()[0]) == 1);
+            CHECK(elementOperandIndex(filterAdd.getElements()[0].getFilterOperands()[1]) == 4);
+            // lhs and
+            CHECK(elementOperandIndex(filterAdd.getElements()[1].getFilterOperands()[0]) == 2);
+            CHECK(elementOperandIndex(filterAdd.getElements()[1].getFilterOperands()[1]) == 3);
+            // rhs and
+            CHECK(elementOperandIndex(filterAdd.getElements()[4].getFilterOperands()[0]) == 5);
+            CHECK(elementOperandIndex(filterAdd.getElements()[4].getFilterOperands()[1]) == 6);
+        }
+    }
+
+    SUBCASE("Or") {
+        CHECK((filterElement || filterElement).getElements().size() == 3);
+        CHECK((filterElement || filter).getElements().size() == 5);
+        CHECK((filter || filterElement).getElements().size() == 5);
+        CHECK((filter || filter).getElements().size() == 7);
+
+        CHECK(firstOperator(filterElement || filterElement) == FilterOperator::Or);
+        CHECK(firstOperator(filterElement || filter) == FilterOperator::Or);
+        CHECK(firstOperator(filter || filterElement) == FilterOperator::Or);
+        CHECK(firstOperator(filter || filter) == FilterOperator::Or);
+    }
+}
+
+TEST_CASE("DataChangeFilter") {
+    const DataChangeFilter dataChangeFilter(
+        DataChangeTrigger::StatusValue, DeadbandType::Percent, 11.11
+    );
+
+    CHECK(dataChangeFilter.getTrigger() == DataChangeTrigger::StatusValue);
+    CHECK(dataChangeFilter.getDeadbandType() == DeadbandType::Percent);
+    CHECK(dataChangeFilter.getDeadbandValue() == 11.11);
+}
+
+TEST_CASE("EventFilter") {
+    const EventFilter eventFilter(
+        {
+            {{}, {{0, "Time"}}, AttributeId::Value},
+            {{}, {{0, "Severity"}}, AttributeId::Value},
+            {{}, {{0, "Message"}}, AttributeId::Value},
+        },
+        {
+            {FilterOperator::OfType, {LiteralOperand(NodeId(ObjectTypeId::BaseEventType))}},
+        }
+    );
+
+    CHECK(eventFilter.getSelectClauses().size() == 3);
+    CHECK(eventFilter.getWhereClause().getElements().size() == 1);
+}
+
+TEST_CASE("AggregateFilter") {
+    const DateTime startTime = DateTime::now();
+    AggregateConfiguration aggregateConfiguration{};
+    aggregateConfiguration.useSlopedExtrapolation = true;
+
+    const AggregateFilter aggregateFilter(
+        startTime, ObjectId::AggregateFunction_Average, 11.11, aggregateConfiguration
+    );
+
+    CHECK(aggregateFilter.getStartTime() == startTime);
+    CHECK(aggregateFilter.getAggregateType() == NodeId(ObjectId::AggregateFunction_Average));
+    CHECK(aggregateFilter.getProcessingInterval() == 11.11);
+    CHECK(aggregateFilter.getAggregateConfiguration().useSlopedExtrapolation == true);
+}
+
+#endif
