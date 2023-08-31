@@ -15,10 +15,10 @@ UA_String allocUaString(const std::string& src) {
 }
 
 UA_String allocUaString(std::string_view src) {
-    UA_String s;
-    s.length = src.size();
-    s.data = nullptr;
-
+    UA_String s{src.size(), nullptr};
+    if (src.data() == nullptr) {
+        return s;
+    }
     if (!src.empty()) {
         s.data = (UA_Byte*)UA_malloc(s.length);  // NOLINT
         std::memcpy(s.data, src.data(), src.size());
