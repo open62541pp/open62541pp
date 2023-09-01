@@ -183,7 +183,8 @@ open62541++ provides additional build options:
 - `UAPP_BUILD_EXAMPLES`: Build examples for `examples` directory
 - `UAPP_BUILD_TESTS`: Build unit tests
 - `UAPP_BUILD_TESTS_AUTORUN`: Run unit tests after build
-- `UAPP_ENABLE_CLANG_TIDY`: Enable static code analysis with Clang-Tidy
+- `UAPP_ENABLE_CLANG_TIDY`: Enable static code analysis with [Clang-Tidy](https://clang.llvm.org/extra/clang-tidy/)
+- `UAPP_ENABLE_INCLUDE_WHAT_YOU_USE`: Enable static code analysis with [Include What You Use](https://github.com/include-what-you-use/include-what-you-use)
 - `UAPP_ENABLE_COVERAGE`: Enable coverage analysis
 - `UAPP_ENABLE_PCH`: Use precompiled headers to speed up compilation
 - `UAPP_ENABLE_SANITIZER_ADDRESS/LEAK/MEMORY/THREAD/UNDEFINED_BEHAVIOUR`: Enable sanitizers

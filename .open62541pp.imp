@@ -1,0 +1,12 @@
+[
+  { include: ["\"open62541/config.h\"", private, "\"open62541pp/Config.h\"", public] },
+  { include: ["\"open62541/config.h\"", private, "\"open62541pp/open62541.h\"", public] },
+  { include: ["\"open62541/common.h\"", private, "\"open62541pp/open62541.h\"", public] },
+  { include: ["\"open62541/nodeids.h\"", private, "\"open62541pp/open62541.h\"", public] },
+  { include: ["\"open62541/statuscodes.h\"", private, "\"open62541pp/open62541.h\"", public] },
+  { include: ["\"open62541/types.h\"", private, "\"open62541pp/open62541.h\"", public] },
+  { include: ["\"open62541/types_generated.h\"", private, "\"open62541pp/open62541.h\"", public] },
+
+  { include: ["@\"open62541/.*\"", private, "\"open62541_impl.h\"", public] },
+  { include: ["@\"open62541/.*\"", private, "\"../open62541_impl.h\"", public] },
+]
