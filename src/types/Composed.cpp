@@ -3,7 +3,6 @@
 #include <algorithm>
 #include <cstddef>
 
-#include "open62541pp/Config.h"
 #include "open62541pp/ErrorHandling.h"
 
 #include "../open62541_impl.h"

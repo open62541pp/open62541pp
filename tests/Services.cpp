@@ -12,7 +12,6 @@
 #include "open62541pp/NodeIds.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/services/services.h"
-#include "open62541pp/types/Composed.h"
 #include "open62541pp/types/DateTime.h"
 #include "open62541pp/types/ExtensionObject.h"
 

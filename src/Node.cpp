@@ -1,7 +1,6 @@
 #include "open62541pp/Node.h"
 
 #include "open62541pp/Client.h"
-#include "open62541pp/Config.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/services/View.h"

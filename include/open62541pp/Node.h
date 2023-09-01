@@ -7,9 +7,11 @@
 
 #include "open62541pp/Common.h"
 #include "open62541pp/Config.h"
+#include "open62541pp/NodeIds.h"
 #include "open62541pp/Span.h"
 #include "open62541pp/TypeConverter.h"  // guessDataType
 #include "open62541pp/TypeWrapper.h"  // asWrapper
+#include "open62541pp/open62541.h"
 #include "open62541pp/services/Attribute.h"
 #include "open62541pp/services/Method.h"
 #include "open62541pp/services/NodeManagement.h"

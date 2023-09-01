@@ -7,6 +7,8 @@
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
+#include "open62541pp/Subscription.h"
+#include "open62541pp/open62541.h"
 
 #include "ClientContext.h"
 #include "ServerContext.h"

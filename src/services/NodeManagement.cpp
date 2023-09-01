@@ -7,7 +7,6 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeWrapper.h"
-#include "open62541pp/types/Composed.h"
 #include "open62541pp/types/Variant.h"
 
 #include "../ServerContext.h"
