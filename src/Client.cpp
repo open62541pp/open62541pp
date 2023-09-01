@@ -1,16 +1,22 @@
 #include "open62541pp/Client.h"
 
 #include <atomic>
+#include <cstddef>
 #include <string>
 #include <utility>  // move
 
 #include "open62541pp/AccessControl.h"  // Login
 #include "open62541pp/Config.h"
+#include "open62541pp/DataType.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Node.h"
 #include "open62541pp/TypeConverter.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/open62541.h"
+#include "open62541pp/services/Attribute.h"  // readValue
 #include "open62541pp/services/Subscription.h"
+#include "open62541pp/types/Builtin.h"
+#include "open62541pp/types/Composed.h"
 
 #include "ClientContext.h"
 #include "CustomDataTypes.h"

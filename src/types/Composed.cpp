@@ -1,9 +1,10 @@
 #include "open62541pp/types/Composed.h"
 
 #include <algorithm>
+#include <cstddef>
 
+#include "open62541pp/Config.h"
 #include "open62541pp/ErrorHandling.h"
-#include "open62541pp/detail/helper.h"
 
 #include "../open62541_impl.h"
 
@@ -224,7 +225,7 @@ static ContentFilter concatFilterElements(
             for (auto& operand : operands) {
                 auto* elementOperand = operand.getDecodedData<ElementOperand>();
                 if (elementOperand != nullptr) {
-                    elementOperand->handle()->index += offset;
+                    elementOperand->handle()->index += static_cast<uint32_t>(offset);
                 }
             }
         }
@@ -249,7 +250,13 @@ inline static ContentFilter applyBinaryOperator(
     Span<const ContentFilterElement> rhs
 ) {
     return concatFilterElements({
-        {{binaryOperator, {ElementOperand(1), ElementOperand(1 + lhs.size())}}},
+        {{
+            binaryOperator,
+            {
+                ElementOperand(1),
+                ElementOperand(1 + static_cast<uint32_t>(lhs.size())),
+            },
+        }},
         lhs,
         rhs,
     });

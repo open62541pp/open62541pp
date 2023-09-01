@@ -2,17 +2,19 @@
 
 #include <atomic>
 #include <cassert>
+#include <cstddef>
 #include <mutex>
 #include <utility>  // move
 
 #include "open62541pp/AccessControl.h"
 #include "open62541pp/Config.h"
+#include "open62541pp/DataType.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Event.h"
 #include "open62541pp/Node.h"
 #include "open62541pp/Session.h"
 #include "open62541pp/TypeWrapper.h"
-#include "open62541pp/detail/helper.h"
+#include "open62541pp/ValueBackend.h"
 #include "open62541pp/services/Attribute.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"

@@ -2,8 +2,6 @@
 
 #include <cstring>
 
-#include "../open62541_impl.h"
-
 namespace opcua::detail {
 
 UA_String allocUaString(const char* src) {

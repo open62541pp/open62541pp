@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstdint>
 #include <functional>
 #include <memory>
 #include <string>
@@ -11,8 +12,6 @@
 #include "open62541pp/Logger.h"
 #include "open62541pp/Span.h"
 #include "open62541pp/Subscription.h"
-#include "open62541pp/types/Builtin.h"
-#include "open62541pp/types/Composed.h"
 #include "open62541pp/types/NodeId.h"
 
 // forward declaration open62541
@@ -21,8 +20,11 @@ struct UA_Client;
 namespace opcua {
 
 // forward declaration
+class ApplicationDescription;
+class ByteString;
 class ClientContext;
 class DataType;
+class EndpointDescription;
 struct Login;
 template <typename ServerOrClient>
 class Node;

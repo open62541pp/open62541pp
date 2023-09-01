@@ -5,6 +5,9 @@
 #include <variant>
 #include <vector>
 
+#include "open62541pp/types/Composed.h"
+#include "open62541pp/types/NodeId.h"
+
 // forward declare
 struct UA_AccessControl;
 
@@ -18,10 +21,8 @@ void clearUaAccessControl(UA_AccessControl& ac) noexcept;
 
 // forward declare
 class AccessControlBase;
-class NodeId;
 class Server;
 class Session;
-class UserTokenPolicy;
 
 class CustomAccessControl {
 public:

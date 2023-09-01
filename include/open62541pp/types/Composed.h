@@ -2,18 +2,20 @@
 
 #include <cstdint>
 #include <initializer_list>
-#include <string>
+#include <string_view>
+#include <type_traits>
 #include <utility>  // forward
 #include <variant>
 
 #include "open62541pp/Common.h"
-#include "open62541pp/Config.h"
 #include "open62541pp/NodeIds.h"  // ReferenceTypeId
 #include "open62541pp/Span.h"
 #include "open62541pp/TypeConverter.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/traits.h"
+#include "open62541pp/open62541.h"
 #include "open62541pp/types/Builtin.h"
+#include "open62541pp/types/DateTime.h"
 #include "open62541pp/types/ExtensionObject.h"
 #include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"

@@ -1,12 +1,14 @@
 #include "open62541pp/services/View.h"
 
 #include <algorithm>  // transform
+#include <cstddef>
 
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/NodeIds.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/detail/helper.h"  // getUaDataType
 #include "open62541pp/types/Builtin.h"
 
 #include "../open62541_impl.h"

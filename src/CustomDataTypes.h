@@ -4,9 +4,7 @@
 #include <vector>
 
 #include "open62541pp/DataType.h"
-
-// forward declare
-struct UA_DataTypeArray;
+#include "open62541pp/open62541.h"
 
 namespace opcua {
 

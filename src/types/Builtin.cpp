@@ -1,6 +1,8 @@
 #include "open62541pp/types/Builtin.h"
 
+#include <algorithm>  // copy
 #include <cassert>
+#include <cstddef>
 #include <fstream>
 #include <iomanip>
 #include <iterator>  // istreambuf_iterator

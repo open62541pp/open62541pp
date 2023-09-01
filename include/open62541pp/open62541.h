@@ -19,8 +19,10 @@
 #include <open62541.h>
 #else
 // UA_ENABLE_AMALGAMATION=OFF
+#include <open62541/common.h>
 #include <open62541/config.h>
 #include <open62541/nodeids.h>
+#include <open62541/statuscodes.h>
 #include <open62541/types.h>
 #include <open62541/types_generated.h>
 #endif

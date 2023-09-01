@@ -1,9 +1,11 @@
 #pragma once
 
 #include <cassert>
+#include <cstddef>
 #include <cstdint>
 #include <iterator>  // distance
 #include <optional>
+#include <type_traits>  // enable_if
 #include <utility>  // as_const
 #include <vector>
 
@@ -12,7 +14,6 @@
 #include "open62541pp/Span.h"
 #include "open62541pp/TypeConverter.h"
 #include "open62541pp/TypeWrapper.h"
-#include "open62541pp/detail/helper.h"
 #include "open62541pp/open62541.h"
 
 namespace opcua {

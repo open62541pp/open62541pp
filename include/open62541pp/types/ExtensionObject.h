@@ -2,6 +2,7 @@
 
 #include <optional>
 
+#include "open62541pp/Common.h"  // isBuiltinType
 #include "open62541pp/TypeConverter.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/open62541.h"

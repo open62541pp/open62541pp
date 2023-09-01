@@ -6,7 +6,7 @@
 #include "open62541pp/Common.h"
 #include "open62541pp/Span.h"
 #include "open62541pp/TypeWrapper.h"
-#include "open62541pp/detail/helper.h"
+#include "open62541pp/open62541.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/NodeId.h"

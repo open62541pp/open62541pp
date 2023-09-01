@@ -6,12 +6,11 @@
 #include <string_view>
 #include <vector>
 
+#include "open62541pp/Config.h"
 #include "open62541pp/Logger.h"
 #include "open62541pp/NodeIds.h"
 #include "open62541pp/Span.h"
 #include "open62541pp/Subscription.h"
-#include "open62541pp/ValueBackend.h"
-#include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/NodeId.h"
 
 // forward declaration open62541
@@ -21,12 +20,15 @@ namespace opcua {
 
 // forward declaration
 class AccessControlBase;
+class ByteString;
 class DataType;
 class Event;
-class ServerContext;
-class Session;
 template <typename ServerOrClient>
 class Node;
+class ServerContext;
+class Session;
+struct ValueBackendDataSource;
+struct ValueCallback;
 
 /**
  * High-level server class.

@@ -7,7 +7,6 @@
 #include "open62541pp/Common.h"
 #include "open62541pp/Config.h"
 #include "open62541pp/MonitoredItem.h"
-#include "open62541pp/Span.h"
 #include "open62541pp/services/MonitoredItem.h"
 #include "open62541pp/services/Subscription.h"
 #include "open62541pp/types/NodeId.h"
@@ -21,6 +20,8 @@ class Client;
 class DataValue;
 class EventFilter;
 class Server;
+template <typename T>
+class Span;
 class Variant;
 
 using SubscriptionParameters = services::SubscriptionParameters;

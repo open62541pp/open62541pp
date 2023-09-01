@@ -1,17 +1,16 @@
 #pragma once
 
 #include <cstdint>
+#include <string_view>
 
 #include "open62541pp/NodeIds.h"
-#include "open62541pp/open62541.h"
-#include "open62541pp/types/DateTime.h"
+#include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/NodeId.h"
 
 namespace opcua {
 
 // forward declare
-class QualifiedName;
-class LocalizedText;
+class DateTime;
 class Server;
 class Variant;
 

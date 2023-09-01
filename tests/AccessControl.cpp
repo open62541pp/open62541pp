@@ -2,6 +2,8 @@
 
 #include "open62541pp/AccessControl.h"
 #include "open62541pp/Server.h"
+#include "open62541pp/Session.h"
+#include "open62541pp/types/DataValue.h"
 
 using namespace opcua;
 

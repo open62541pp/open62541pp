@@ -1,11 +1,13 @@
 #pragma once
 
+#include <cstddef>
 #include <cstdint>
 #include <functional>  // hash
 #include <string>
 #include <string_view>
 #include <variant>
 
+#include "open62541pp/Common.h"  // Type
 #include "open62541pp/NodeIds.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/helper.h"

@@ -4,8 +4,6 @@
 #include <iomanip>  // put_time
 #include <sstream>
 
-#include "../open62541_impl.h"
-
 namespace opcua {
 
 DateTime DateTime::now() {

@@ -4,8 +4,6 @@
 
 #include "open62541pp/detail/helper.h"
 
-#include "../open62541_impl.h"
-
 namespace opcua {
 
 static UA_NodeId fromStringView(

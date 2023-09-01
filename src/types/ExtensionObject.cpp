@@ -4,8 +4,6 @@
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/NodeId.h"
 
-#include "../open62541_impl.h"
-
 namespace opcua {
 
 ExtensionObject ExtensionObject::fromDecoded(void* data, const UA_DataType& type) noexcept {

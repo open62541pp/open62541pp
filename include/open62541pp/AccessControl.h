@@ -1,23 +1,20 @@
 #pragma once
 
+#include <cstdint>
 #include <string>
 #include <vector>
 
-#include "open62541pp/Session.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
-#include "open62541pp/types/DataValue.h"
-#include "open62541pp/types/DateTime.h"
-#include "open62541pp/types/ExtensionObject.h"
 #include "open62541pp/types/NodeId.h"
-
-// forward declare
-struct UA_AccessControl;
 
 namespace opcua {
 
 // forward declare
-class Server;
+class DataValue;
+class DateTime;
+class ExtensionObject;
+class Session;
 
 /// Login credentials.
 struct Login {

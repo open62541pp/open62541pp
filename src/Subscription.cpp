@@ -7,6 +7,7 @@
 
 #include "open62541pp/Client.h"
 #include "open62541pp/Server.h"
+#include "open62541pp/Span.h"
 #include "open62541pp/services/MonitoredItem.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/ExtensionObject.h"

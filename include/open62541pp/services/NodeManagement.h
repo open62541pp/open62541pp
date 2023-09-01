@@ -8,15 +8,23 @@
 #include "open62541pp/Config.h"
 #include "open62541pp/NodeIds.h"  // ReferenceTypeId
 #include "open62541pp/Span.h"
-#include "open62541pp/types/Composed.h"
 #include "open62541pp/types/NodeId.h"
 
 // forward declarations
 namespace opcua {
 #ifdef UA_ENABLE_METHODCALLS
 class Argument;
+class MethodAttributes;
 #endif
+class DataTypeAttributes;
+class ObjectAttributes;
+class ObjectTypeAttributes;
+class ReferenceTypeAttributes;
+class VariableAttributes;
+class VariableTypeAttributes;
 class Variant;
+class ViewAttributes;
+
 }  // namespace opcua
 
 namespace opcua::services {

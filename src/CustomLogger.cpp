@@ -4,7 +4,6 @@
 #include <cstdarg>  // va_list, va_copy
 #include <cstdio>
 #include <string>
-#include <string_view>
 #include <utility>  // move
 
 namespace opcua {

@@ -6,6 +6,7 @@
 #include <utility>  // move, swap
 
 #include "open62541pp/Config.h"
+#include "open62541pp/TypeWrapper.h"  // asWrapper
 #include "open62541pp/overloads/comparison.h"
 #include "open62541pp/types/NodeId.h"
 

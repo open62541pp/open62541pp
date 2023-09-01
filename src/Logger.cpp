@@ -1,5 +1,8 @@
 #include "open62541pp/Logger.h"
 
+#include <cstdarg>  // va_list
+#include <string>
+
 #include "open62541pp/Client.h"
 #include "open62541pp/Server.h"
 

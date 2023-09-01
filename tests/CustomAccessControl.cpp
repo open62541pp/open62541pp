@@ -4,6 +4,7 @@
 
 #include "open62541pp/AccessControl.h"
 #include "open62541pp/Server.h"
+#include "open62541pp/Session.h"
 
 #include "CustomAccessControl.h"
 #include "open62541_impl.h"

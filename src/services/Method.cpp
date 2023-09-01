@@ -2,10 +2,13 @@
 
 #ifdef UA_ENABLE_METHODCALLS
 
+#include <cstddef>
+
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/detail/helper.h"  // getUaDataType
 #include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"
 

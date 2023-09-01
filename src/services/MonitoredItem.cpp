@@ -2,6 +2,7 @@
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 
+#include <cstddef>
 #include <memory>
 #include <type_traits>  // is_same_v
 #include <utility>  // move
