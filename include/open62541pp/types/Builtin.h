@@ -25,6 +25,8 @@ namespace opcua {
  */
 class StatusCode {
 public:
+    using NativeType = UA_StatusCode;
+
     /// Create a StatusCode with the default status code `UA_STATUSCODE_GOOD`.
     constexpr StatusCode() noexcept = default;
 
@@ -231,6 +233,34 @@ public:
 
     std::string_view getLocale() const;
 };
+
+/**
+ * UA_DiagnosticInfo wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.12
+ * @ingroup TypeWrapper
+ */
+class DiagnosticInfo : public TypeWrapper<UA_DiagnosticInfo, UA_TYPES_DIAGNOSTICINFO> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    bool hasSymbolicId() const noexcept;
+    bool hasNamespaceUri() const noexcept;
+    bool hasLocalizedText() const noexcept;
+    bool hasLocale() const noexcept;
+    bool hasAdditionalInfo() const noexcept;
+    bool hasInnerStatusCode() const noexcept;
+    bool hasInnerDiagnosticInfo() const noexcept;
+
+    int32_t getSymbolicId() const noexcept;
+    int32_t getNamespaceUri() const noexcept;
+    int32_t getLocalizedText() const noexcept;
+    int32_t getLocale() const noexcept;
+    const String& getAdditionalInfo() const noexcept;
+    StatusCode getInnerStatusCode() const noexcept;
+    const DiagnosticInfo* getInnerDiagnosticInfo() const noexcept;
+};
+
+/* ---------------------------------------------------------------------------------------------- */
 
 using NumericRangeDimension = UA_NumericRangeDimension;
 

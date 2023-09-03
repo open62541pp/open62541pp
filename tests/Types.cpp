@@ -833,6 +833,39 @@ TEST_CASE("ExtensionObject") {
     }
 }
 
+TEST_CASE("DiagnosticInfo") {
+    UA_DiagnosticInfo infoNative{};
+    infoNative.hasSymbolicId = true;
+    infoNative.hasNamespaceUri = true;
+    infoNative.hasLocalizedText = true;
+    infoNative.hasLocale = true;
+    infoNative.hasAdditionalInfo = false;
+    infoNative.hasInnerStatusCode = true;
+    infoNative.hasInnerDiagnosticInfo = false;
+    infoNative.symbolicId = 0;
+    infoNative.namespaceUri = 1;
+    infoNative.localizedText = 2;
+    infoNative.locale = 3;
+    infoNative.additionalInfo = UA_STRING_NULL;
+    infoNative.innerStatusCode = UA_STATUSCODE_GOOD;
+    infoNative.innerDiagnosticInfo = nullptr;
+
+    const DiagnosticInfo info(infoNative);
+    CHECK(info.hasSymbolicId() == true);
+    CHECK(info.hasNamespaceUri() == true);
+    CHECK(info.hasLocalizedText() == true);
+    CHECK(info.hasLocale() == true);
+    CHECK(info.hasAdditionalInfo() == false);
+    CHECK(info.hasInnerStatusCode() == true);
+    CHECK(info.hasInnerDiagnosticInfo() == false);
+    CHECK(info.getSymbolicId() == 0);
+    CHECK(info.getNamespaceUri() == 1);
+    CHECK(info.getLocalizedText() == 2);
+    CHECK(info.getAdditionalInfo().empty());
+    CHECK(info.getInnerStatusCode() == UA_STATUSCODE_GOOD);
+    CHECK(info.getInnerDiagnosticInfo() == nullptr);
+}
+
 TEST_CASE("UserTokenPolicy") {
     UserTokenPolicy userTokenPolicy(
         "policyId",
