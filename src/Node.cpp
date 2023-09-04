@@ -21,8 +21,7 @@ bool Node<Client>::exists() noexcept {
     request.nodesToReadSize = 1;
     request.nodesToRead = &item;
 
-    using ReadResponse = TypeWrapper<UA_ReadResponse, UA_TYPES_READRESPONSE>;
-    ReadResponse response = UA_Client_Service_read(getConnection().handle(), request);
+    const ReadResponse response = UA_Client_Service_read(getConnection().handle(), request);
     if (response->responseHeader.serviceResult != UA_STATUSCODE_GOOD ||
         response->resultsSize != 1) {
         return false;

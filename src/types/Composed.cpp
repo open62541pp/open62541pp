@@ -22,6 +22,24 @@ static void copyArray(Span<const T> src, Native** dst, size_t& dstSize) {
     detail::throwOnBadStatus(status);
 }
 
+RequestHeader::RequestHeader(
+    const NodeId& authenticationToken,
+    DateTime timestamp,
+    uint32_t requestHandle,
+    uint32_t returnDiagnostics,
+    std::string_view auditEntryId,
+    uint32_t timeoutHint,
+    const ExtensionObject& additionalHeader
+) {
+    asWrapper<NodeId>(handle()->authenticationToken) = authenticationToken;
+    handle()->timestamp = timestamp;
+    handle()->requestHandle = requestHandle;
+    handle()->returnDiagnostics = returnDiagnostics;
+    asWrapper<String>(handle()->auditEntryId) = String(auditEntryId);
+    handle()->timeoutHint = timeoutHint;
+    asWrapper<ExtensionObject>(handle()->additionalHeader) = additionalHeader;
+}
+
 UserTokenPolicy::UserTokenPolicy(
     std::string_view policyId,
     UserTokenType tokenType,
@@ -103,9 +121,40 @@ BrowsePath::BrowsePath(const NodeId& startingNode, const RelativePath& relativeP
     asWrapper<RelativePath>(handle()->relativePath) = relativePath;
 }
 
-ReadValueId::ReadValueId(const NodeId& id, AttributeId attributeId) {
-    asWrapper<NodeId>(handle()->nodeId) = id;
+ReadValueId::ReadValueId(const NodeId& nodeId, AttributeId attributeId) {
+    asWrapper<NodeId>(handle()->nodeId) = nodeId;
     handle()->attributeId = static_cast<uint32_t>(attributeId);
+}
+
+ReadRequest::ReadRequest(
+    const RequestHeader& requestHeader,
+    double maxAge,
+    TimestampsToReturn timestampsToReturn,
+    Span<const ReadValueId> nodesToRead
+) {
+    asWrapper<RequestHeader>(handle()->requestHeader) = requestHeader;
+    handle()->maxAge = maxAge;
+    handle()->timestampsToReturn = static_cast<UA_TimestampsToReturn>(timestampsToReturn);
+    copyArray(nodesToRead, &handle()->nodesToRead, handle()->nodesToReadSize);
+}
+
+WriteValue::WriteValue(
+    const NodeId& nodeId,
+    AttributeId attributeId,
+    std::string_view indexRange,
+    const DataValue& value
+) {
+    asWrapper<NodeId>(handle()->nodeId) = nodeId;
+    handle()->attributeId = static_cast<uint32_t>(attributeId);
+    asWrapper<String>(handle()->indexRange) = String(indexRange);
+    asWrapper<DataValue>(handle()->value) = value;
+}
+
+WriteRequest::WriteRequest(
+    const RequestHeader& requestHeader, Span<const WriteValue> nodesToWrite
+) {
+    asWrapper<RequestHeader>(handle()->requestHeader) = requestHeader;
+    copyArray(nodesToWrite, &handle()->nodesToWrite, handle()->nodesToWriteSize);
 }
 
 #ifdef UA_ENABLE_METHODCALLS

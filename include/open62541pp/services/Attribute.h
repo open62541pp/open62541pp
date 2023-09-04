@@ -38,6 +38,22 @@ namespace opcua::services {
  */
 
 /**
+ * Generic function to read one or more attributes of one or more nodes.
+ * @ingroup Attribute
+ */
+// ReadResponse read(Client& client, const ReadRequest& request);
+
+/**
+ * @overload
+ * @ingroup Attribute
+ */
+// ReadResponse read(
+//     Client& client,
+//     Span<const ReadValueId> nodesToRead,
+//     TimestampsToReturn timestamps = TimestampsToReturn::Neither
+// );
+
+/**
  * Generic function to read node attributes.
  * @ingroup Attribute
  */
