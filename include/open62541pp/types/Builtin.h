@@ -34,7 +34,7 @@ public:
         : code_(code) {}
 
     /// Implicit conversion to UA_StatusCode.
-    constexpr operator UA_StatusCode() noexcept {  // NOLINT, implicit wanted
+    constexpr operator UA_StatusCode() const noexcept {  // NOLINT, implicit wanted
         return code_;
     }
 
@@ -75,22 +75,6 @@ public:
 private:
     UA_StatusCode code_{};
 };
-
-constexpr bool operator==(StatusCode lhs, UA_StatusCode rhs) noexcept {
-    return lhs.get() == rhs;
-}
-
-constexpr bool operator==(UA_StatusCode lhs, StatusCode rhs) noexcept {
-    return lhs == rhs.get();
-}
-
-constexpr bool operator!=(StatusCode lhs, UA_StatusCode rhs) noexcept {
-    return !(lhs == rhs);
-}
-
-constexpr bool operator!=(UA_StatusCode lhs, StatusCode rhs) noexcept {
-    return !(lhs == rhs);
-}
 
 /**
  * UA_String wrapper class.
