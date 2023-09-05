@@ -79,6 +79,18 @@ inline auto readAttributeScalar(T& serverOrClient, const NodeId& id, AttributeId
 }
 
 /**
+ * Generic function to write one or more attributes of one or more nodes (client only).
+ * @ingroup Attribute
+ */
+WriteResponse write(Client& client, const WriteRequest& request);
+
+/**
+ * @overload
+ * @ingroup Attribute
+ */
+WriteResponse write(Client& client, Span<const WriteValue> nodesToWrite);
+
+/**
  * Generic function to write node attributes.
  * @ingroup Attribute
  */

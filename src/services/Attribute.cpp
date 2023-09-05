@@ -60,10 +60,25 @@ DataValue readAttribute<Client>(
     return result;
 }
 
+WriteResponse write(Client& client, const WriteRequest& request) {
+    WriteResponse response = UA_Client_Service_write(client.handle(), request);
+    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    return response;
+}
+
+WriteResponse write(Client& client, Span<const WriteValue> nodesToWrite) {
+    // avoid copy of nodesToWrite
+    UA_WriteRequest request{};
+    request.nodesToWriteSize = nodesToWrite.size();
+    request.nodesToWrite = asNative(const_cast<WriteValue*>(nodesToWrite.data()));  // NOLINT
+    return write(client, asWrapper<WriteRequest>(request));
+}
+
 template <>
 void writeAttribute<Server>(
     Server& server, const NodeId& id, AttributeId attributeId, const DataValue& value
 ) {
+    // avoid copy of value
     UA_WriteValue item{};
     item.nodeId = *id.handle();
     item.attributeId = static_cast<uint32_t>(attributeId);
@@ -78,25 +93,19 @@ template <>
 void writeAttribute<Client>(
     Client& client, const NodeId& id, AttributeId attributeId, const DataValue& value
 ) {
-    // https://github.com/open62541/open62541/blob/v1.3.5/src/client/ua_client_highlevel.c#L285
+    // avoid copy of value
     UA_WriteValue item{};
     item.nodeId = *id.handle();
     item.attributeId = static_cast<uint32_t>(attributeId);
     item.value = *value.handle();  // shallow copy
     item.value.hasValue = true;
 
-    UA_WriteRequest request{};
-    request.nodesToWrite = &item;
-    request.nodesToWriteSize = 1;
-
-    using WriteResponse = TypeWrapper<UA_WriteResponse, UA_TYPES_WRITERESPONSE>;
-    WriteResponse response = UA_Client_Service_write(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
-
-    if (response->resultsSize != 1) {
+    auto response = write(client, {asWrapper<WriteValue>(&item), 1});
+    auto results = response.getResults();
+    if (results.size() != 1) {
         throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
     }
-    detail::throwOnBadStatus(*response->results);
+    detail::throwOnBadStatus(results[0]);
 }
 
 }  // namespace opcua::services
