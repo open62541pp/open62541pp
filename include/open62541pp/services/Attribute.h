@@ -8,9 +8,15 @@
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/open62541.h"
 #include "open62541pp/types/Builtin.h"
+#include "open62541pp/types/Composed.h"
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"
+
+// forward declare
+namespace opcua {
+class Client;
+}
 
 namespace opcua::services {
 
@@ -38,20 +44,20 @@ namespace opcua::services {
  */
 
 /**
- * Generic function to read one or more attributes of one or more nodes.
+ * Generic function to read one or more attributes of one or more nodes (client only).
  * @ingroup Attribute
  */
-// ReadResponse read(Client& client, const ReadRequest& request);
+ReadResponse read(Client& client, const ReadRequest& request);
 
 /**
  * @overload
  * @ingroup Attribute
  */
-// ReadResponse read(
-//     Client& client,
-//     Span<const ReadValueId> nodesToRead,
-//     TimestampsToReturn timestamps = TimestampsToReturn::Neither
-// );
+ReadResponse read(
+    Client& client,
+    Span<const ReadValueId> nodesToRead,
+    TimestampsToReturn timestamps = TimestampsToReturn::Neither
+);
 
 /**
  * Generic function to read node attributes.
