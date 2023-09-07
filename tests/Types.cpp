@@ -833,6 +833,63 @@ TEST_CASE("ExtensionObject") {
     }
 }
 
+TEST_CASE("DiagnosticInfo") {
+    UA_DiagnosticInfo infoNative{};
+    infoNative.hasSymbolicId = true;
+    infoNative.hasNamespaceUri = true;
+    infoNative.hasLocalizedText = true;
+    infoNative.hasLocale = true;
+    infoNative.hasAdditionalInfo = false;
+    infoNative.hasInnerStatusCode = true;
+    infoNative.hasInnerDiagnosticInfo = false;
+    infoNative.symbolicId = 0;
+    infoNative.namespaceUri = 1;
+    infoNative.localizedText = 2;
+    infoNative.locale = 3;
+    infoNative.additionalInfo = UA_STRING_NULL;
+    infoNative.innerStatusCode = UA_STATUSCODE_GOOD;
+    infoNative.innerDiagnosticInfo = nullptr;
+
+    const DiagnosticInfo info(infoNative);
+    CHECK(info.hasSymbolicId() == true);
+    CHECK(info.hasNamespaceUri() == true);
+    CHECK(info.hasLocalizedText() == true);
+    CHECK(info.hasLocale() == true);
+    CHECK(info.hasAdditionalInfo() == false);
+    CHECK(info.hasInnerStatusCode() == true);
+    CHECK(info.hasInnerDiagnosticInfo() == false);
+    CHECK(info.getSymbolicId() == 0);
+    CHECK(info.getNamespaceUri() == 1);
+    CHECK(info.getLocalizedText() == 2);
+    CHECK(info.getAdditionalInfo().empty());
+    CHECK(info.getInnerStatusCode() == UA_STATUSCODE_GOOD);
+    CHECK(info.getInnerDiagnosticInfo() == nullptr);
+}
+
+TEST_CASE("RequestHeader") {
+    const auto now = DateTime::now();
+    const RequestHeader header({1, 1000}, now, 1, 2, "auditEntryId", 10, {});
+    CHECK(header.getAuthenticationToken() == NodeId(1, 1000));
+    CHECK(header.getTimestamp() == now);
+    CHECK(header.getRequestHandle() == 1);
+    CHECK(header.getReturnDiagnostics() == 2);
+    CHECK(header.getAuditEntryId() == String("auditEntryId"));
+    CHECK(header.getAdditionalHeader().isEmpty());
+}
+
+TEST_CASE("ResponseHeader") {
+    ResponseHeader header;
+    header->timestamp = 111;
+    header->requestHandle = 1;
+    header->serviceResult = UA_STATUSCODE_GOOD;
+    CHECK(header.getTimestamp() == 111);
+    CHECK(header.getRequestHandle() == 1);
+    CHECK(header.getServiceResult() == UA_STATUSCODE_GOOD);
+    CHECK_NOTHROW(header.getServiceDiagnostics());
+    CHECK(header.getStringTable().empty());
+    CHECK(header.getAdditionalHeader().isEmpty());
+}
+
 TEST_CASE("UserTokenPolicy") {
     UserTokenPolicy userTokenPolicy(
         "policyId",
@@ -934,6 +991,59 @@ TEST_CASE("ReadValueId") {
     CHECK(rvid.getAttributeId() == AttributeId::Value);
     CHECK(rvid.getIndexRange().empty());
     CHECK(rvid.getDataEncoding() == QualifiedName());
+}
+
+TEST_CASE("ReadRequest") {
+    const ReadRequest request(
+        {},
+        111.11,
+        TimestampsToReturn::Both,
+        {
+            {{1, 1000}, AttributeId::Value},
+        }
+    );
+    CHECK_NOTHROW(request.getRequestHeader());
+    CHECK(request.getMaxAge() == 111.11);
+    CHECK(request.getTimestampsToReturn() == TimestampsToReturn::Both);
+    CHECK(request.getNodesToRead().size() == 1);
+    CHECK(request.getNodesToRead()[0].getNodeId() == NodeId(1, 1000));
+    CHECK(request.getNodesToRead()[0].getAttributeId() == AttributeId::Value);
+}
+
+TEST_CASE("ReadResponse") {
+    const ReadResponse response;
+    CHECK_NOTHROW(response.getResponseHeader());
+    CHECK(response.getResults().empty());
+    CHECK(response.getDiagnosticInfos().empty());
+}
+
+TEST_CASE("WriteValue") {
+    const WriteValue wv({1, 1000}, AttributeId::Value, {}, DataValue::fromScalar(11.11));
+    CHECK(wv.getNodeId() == NodeId(1, 1000));
+    CHECK(wv.getAttributeId() == AttributeId::Value);
+    CHECK(wv.getIndexRange().empty());
+    CHECK(wv.getValue().getValue().getScalar<double>() == 11.11);
+}
+
+TEST_CASE("WriteRequest") {
+    const WriteRequest request(
+        {},
+        {
+            {{1, 1000}, AttributeId::Value, {}, DataValue::fromScalar(11.11)},
+        }
+    );
+    CHECK_NOTHROW(request.getRequestHeader());
+    CHECK(request.getNodesToWrite().size() == 1);
+    CHECK(request.getNodesToWrite()[0].getNodeId() == NodeId(1, 1000));
+    CHECK(request.getNodesToWrite()[0].getAttributeId() == AttributeId::Value);
+    CHECK(request.getNodesToWrite()[0].getValue().getValue().getScalar<double>() == 11.11);
+}
+
+TEST_CASE("WriteResponse") {
+    const WriteResponse response;
+    CHECK_NOTHROW(response.getResponseHeader());
+    CHECK(response.getResults().empty());
+    CHECK(response.getDiagnosticInfos().empty());
 }
 
 #ifdef UA_ENABLE_METHODCALLS

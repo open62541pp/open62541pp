@@ -15,6 +15,7 @@
 #include "open62541pp/detail/traits.h"
 #include "open62541pp/open62541.h"
 #include "open62541pp/types/Builtin.h"
+#include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/DateTime.h"
 #include "open62541pp/types/ExtensionObject.h"
 #include "open62541pp/types/NodeId.h"
@@ -62,6 +63,7 @@ namespace opcua {
 
 /**
  * UA_ApplicationDescription wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.2
  * @ingroup TypeWrapper
  */
 class ApplicationDescription
@@ -79,8 +81,54 @@ public:
 };
 
 /**
+ * UA_RequestHeader wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.33
+ * @ingroup TypeWrapper
+ */
+class RequestHeader : public TypeWrapper<UA_RequestHeader, UA_TYPES_REQUESTHEADER> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    RequestHeader(
+        const NodeId& authenticationToken,
+        DateTime timestamp,
+        uint32_t requestHandle,
+        uint32_t returnDiagnostics,
+        std::string_view auditEntryId,
+        uint32_t timeoutHint,
+        const ExtensionObject& additionalHeader
+    );
+
+    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getAuthenticationToken, authenticationToken)
+    UAPP_COMPOSED_GETTER_WRAPPER(DateTime, getTimestamp, timestamp)
+    UAPP_COMPOSED_GETTER(uint32_t, getRequestHandle, requestHandle)
+    UAPP_COMPOSED_GETTER(uint32_t, getReturnDiagnostics, returnDiagnostics)
+    UAPP_COMPOSED_GETTER_WRAPPER(String, getAuditEntryId, auditEntryId)
+    UAPP_COMPOSED_GETTER(uint32_t, getTimeoutHint, timeoutHint)
+    UAPP_COMPOSED_GETTER_WRAPPER(ExtensionObject, getAdditionalHeader, additionalHeader)
+};
+
+/**
+ * UA_ResponseHeader wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.34
+ * @ingroup TypeWrapper
+ */
+class ResponseHeader : public TypeWrapper<UA_ResponseHeader, UA_TYPES_RESPONSEHEADER> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    UAPP_COMPOSED_GETTER_WRAPPER(DateTime, getTimestamp, timestamp)
+    UAPP_COMPOSED_GETTER(uint32_t, getRequestHandle, requestHandle)
+    UAPP_COMPOSED_GETTER(StatusCode, getServiceResult, serviceResult)
+    UAPP_COMPOSED_GETTER_WRAPPER(DiagnosticInfo, getServiceDiagnostics, serviceDiagnostics)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(String, getStringTable, stringTable, stringTableSize)
+    UAPP_COMPOSED_GETTER_WRAPPER(ExtensionObject, getAdditionalHeader, additionalHeader)
+};
+
+/**
  * User identity token type.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.43
+ * @ingroup TypeWrapper
  */
 enum class UserTokenType : uint32_t {
     // clang-format off
@@ -117,6 +165,7 @@ public:
 
 /**
  * UA_EndpointDescription wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.14
  * @ingroup TypeWrapper
  */
 class EndpointDescription
@@ -198,6 +247,7 @@ public:
 
 /**
  * UA_NodeAttributes wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.24
  * @ingroup TypeWrapper
  */
 class NodeAttributes : public TypeWrapper<UA_NodeAttributes, UA_TYPES_NODEATTRIBUTES> {
@@ -209,6 +259,7 @@ public:
 
 /**
  * UA_ObjectAttributes wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.24.2
  * @ingroup TypeWrapper
  */
 class ObjectAttributes : public TypeWrapper<UA_ObjectAttributes, UA_TYPES_OBJECTTYPEATTRIBUTES> {
@@ -224,6 +275,7 @@ public:
 
 /**
  * UA_VariableAttributes wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.24.3
  * @ingroup TypeWrapper
  */
 class VariableAttributes : public TypeWrapper<UA_VariableAttributes, UA_TYPES_VARIABLEATTRIBUTES> {
@@ -278,6 +330,7 @@ public:
 
 /**
  * UA_MethodAttributes wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.24.4
  * @ingroup TypeWrapper
  */
 class MethodAttributes : public TypeWrapper<UA_MethodAttributes, UA_TYPES_METHODATTRIBUTES> {
@@ -294,6 +347,7 @@ public:
 
 /**
  * UA_ObjectTypeAttributes wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.24.5
  * @ingroup TypeWrapper
  */
 class ObjectTypeAttributes
@@ -310,6 +364,7 @@ public:
 
 /**
  * UA_VariableAttributes wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.24.6
  * @ingroup TypeWrapper
  */
 class VariableTypeAttributes
@@ -357,6 +412,7 @@ public:
 
 /**
  * UA_ReferenceTypeAttributes wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.24.7
  * @ingroup TypeWrapper
  */
 class ReferenceTypeAttributes
@@ -377,6 +433,7 @@ public:
 
 /**
  * UA_DataTypeAttributes wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.24.8
  * @ingroup TypeWrapper
  */
 class DataTypeAttributes : public TypeWrapper<UA_DataTypeAttributes, UA_TYPES_DATATYPEATTRIBUTES> {
@@ -392,6 +449,7 @@ public:
 
 /**
  * UA_ViewAttributes wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.24.9
  * @ingroup TypeWrapper
  */
 class ViewAttributes : public TypeWrapper<UA_ViewAttributes, UA_TYPES_VIEWATTRIBUTES> {
@@ -415,6 +473,7 @@ public:
 
 /**
  * UA_UserIdentityToken wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.41
  * @ingroup TypeWrapper
  */
 class UserIdentityToken : public TypeWrapper<UA_UserIdentityToken, UA_TYPES_USERIDENTITYTOKEN> {
@@ -426,6 +485,7 @@ public:
 
 /**
  * UA_AnonymousIdentityToken wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.41.3
  * @ingroup TypeWrapper
  */
 class AnonymousIdentityToken
@@ -438,6 +498,7 @@ public:
 
 /**
  * UA_UserNameIdentityToken wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.41.4
  * @ingroup TypeWrapper
  */
 class UserNameIdentityToken
@@ -453,6 +514,7 @@ public:
 
 /**
  * UA_X509IdentityToken wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.41.5
  * @ingroup TypeWrapper
  */
 class X509IdentityToken : public TypeWrapper<UA_X509IdentityToken, UA_TYPES_X509IDENTITYTOKEN> {
@@ -465,6 +527,7 @@ public:
 
 /**
  * UA_IssuedIdentityToken wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.41.6
  * @ingroup TypeWrapper
  */
 class IssuedIdentityToken
@@ -678,12 +741,103 @@ class ReadValueId : public TypeWrapper<UA_ReadValueId, UA_TYPES_READVALUEID> {
 public:
     using TypeWrapperBase::TypeWrapperBase;
 
-    ReadValueId(const NodeId& id, AttributeId attributeId);
+    ReadValueId(const NodeId& nodeId, AttributeId attributeId);
 
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getNodeId, nodeId)
     UAPP_COMPOSED_GETTER_CAST(AttributeId, getAttributeId, attributeId)
     UAPP_COMPOSED_GETTER_WRAPPER(String, getIndexRange, indexRange)
     UAPP_COMPOSED_GETTER_WRAPPER(QualifiedName, getDataEncoding, dataEncoding)
+};
+
+/**
+ * UA_ReadRequest wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.10.2
+ * @ingroup TypeWrapper
+ */
+class ReadRequest : public TypeWrapper<UA_ReadRequest, UA_TYPES_READREQUEST> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    ReadRequest(
+        const RequestHeader& requestHeader,
+        double maxAge,
+        TimestampsToReturn timestampsToReturn,
+        Span<const ReadValueId> nodesToRead
+    );
+
+    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_COMPOSED_GETTER(double, getMaxAge, maxAge)
+    UAPP_COMPOSED_GETTER_CAST(TimestampsToReturn, getTimestampsToReturn, timestampsToReturn)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(ReadValueId, getNodesToRead, nodesToRead, nodesToReadSize)
+};
+
+/**
+ * UA_ReadResponse wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.10.2
+ * @ingroup TypeWrapper
+ */
+class ReadResponse : public TypeWrapper<UA_ReadResponse, UA_TYPES_READRESPONSE> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(DataValue, getResults, results, resultsSize)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        DiagnosticInfo, getDiagnosticInfos, diagnosticInfos, diagnosticInfosSize
+    )
+};
+
+/**
+ * UA_WriteValue wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.10.4
+ * @ingroup TypeWrapper
+ */
+class WriteValue : public TypeWrapper<UA_WriteValue, UA_TYPES_WRITEVALUE> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    WriteValue(
+        const NodeId& nodeId,
+        AttributeId attributeId,
+        std::string_view indexRange,
+        const DataValue& value
+    );
+
+    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getNodeId, nodeId)
+    UAPP_COMPOSED_GETTER_CAST(AttributeId, getAttributeId, attributeId)
+    UAPP_COMPOSED_GETTER_WRAPPER(String, getIndexRange, indexRange)
+    UAPP_COMPOSED_GETTER_WRAPPER(DataValue, getValue, value)
+};
+
+/**
+ * UA_WriteRequest wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.10.4
+ * @ingroup TypeWrapper
+ */
+class WriteRequest : public TypeWrapper<UA_WriteRequest, UA_TYPES_WRITEREQUEST> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    WriteRequest(const RequestHeader& requestHeader, Span<const WriteValue> nodesToWrite);
+
+    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(WriteValue, getNodesToWrite, nodesToWrite, nodesToWriteSize)
+};
+
+/**
+ * UA_WriteResponse wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.10.4
+ * @ingroup TypeWrapper
+ */
+class WriteResponse : public TypeWrapper<UA_WriteResponse, UA_TYPES_WRITERESPONSE> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(StatusCode, getResults, results, resultsSize)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        DiagnosticInfo, getDiagnosticInfos, diagnosticInfos, diagnosticInfosSize
+    )
 };
 
 /* ------------------------------------------- Method ------------------------------------------- */
