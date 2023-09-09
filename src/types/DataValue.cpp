@@ -28,7 +28,7 @@ static UA_DataValue fromOptionals(
 }
 
 DataValue::DataValue(
-    const Variant& value,
+    Variant value,
     std::optional<DateTime> sourceTimestamp,  // NOLINT
     std::optional<DateTime> serverTimestamp,  // NOLINT
     std::optional<uint16_t> sourcePicoseconds,
@@ -38,7 +38,7 @@ DataValue::DataValue(
     : DataValue(fromOptionals(
           sourceTimestamp, serverTimestamp, sourcePicoseconds, serverPicoseconds, statusCode
       )) {
-    setValue(value);
+    setValue(std::move(value));
 }
 
 bool DataValue::hasValue() const noexcept {

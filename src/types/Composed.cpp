@@ -23,21 +23,21 @@ static void copyArray(Span<const T> src, Native** dst, size_t& dstSize) {
 }
 
 RequestHeader::RequestHeader(
-    const NodeId& authenticationToken,
+    NodeId authenticationToken,
     DateTime timestamp,
     uint32_t requestHandle,
     uint32_t returnDiagnostics,
     std::string_view auditEntryId,
     uint32_t timeoutHint,
-    const ExtensionObject& additionalHeader
+    ExtensionObject additionalHeader
 ) {
-    asWrapper<NodeId>(handle()->authenticationToken) = authenticationToken;
+    asWrapper<NodeId>(handle()->authenticationToken) = std::move(authenticationToken);
     handle()->timestamp = timestamp;
     handle()->requestHandle = requestHandle;
     handle()->returnDiagnostics = returnDiagnostics;
     asWrapper<String>(handle()->auditEntryId) = String(auditEntryId);
     handle()->timeoutHint = timeoutHint;
-    asWrapper<ExtensionObject>(handle()->additionalHeader) = additionalHeader;
+    asWrapper<ExtensionObject>(handle()->additionalHeader) = std::move(additionalHeader);
 }
 
 UserTokenPolicy::UserTokenPolicy(
@@ -79,31 +79,28 @@ ViewAttributes::ViewAttributes()
     : TypeWrapperBase(UA_ViewAttributes_default) {}
 
 BrowseDescription::BrowseDescription(
-    const NodeId& nodeId,
+    NodeId nodeId,
     BrowseDirection browseDirection,
-    const NodeId& referenceType,
+    NodeId referenceType,
     bool includeSubtypes,
     uint32_t nodeClassMask,
     uint32_t resultMask
 ) {
-    asWrapper<NodeId>(handle()->nodeId) = nodeId;
+    asWrapper<NodeId>(handle()->nodeId) = std::move(nodeId);
     handle()->browseDirection = static_cast<UA_BrowseDirection>(browseDirection);
-    asWrapper<NodeId>(handle()->referenceTypeId) = referenceType;
+    asWrapper<NodeId>(handle()->referenceTypeId) = std::move(referenceType);
     handle()->includeSubtypes = includeSubtypes;
     handle()->nodeClassMask = nodeClassMask;
     handle()->resultMask = resultMask;
 }
 
 RelativePathElement::RelativePathElement(
-    const NodeId& referenceType,
-    bool isInverse,
-    bool includeSubtypes,
-    const QualifiedName& targetName
+    NodeId referenceType, bool isInverse, bool includeSubtypes, QualifiedName targetName
 ) {
-    asWrapper<NodeId>(handle()->referenceTypeId) = referenceType;
+    asWrapper<NodeId>(handle()->referenceTypeId) = std::move(referenceType);
     handle()->isInverse = isInverse;
     handle()->includeSubtypes = includeSubtypes;
-    asWrapper<QualifiedName>(handle()->targetName) = targetName;
+    asWrapper<QualifiedName>(handle()->targetName) = std::move(targetName);
 }
 
 RelativePath::RelativePath(std::initializer_list<RelativePathElement> elements) {
@@ -116,44 +113,39 @@ RelativePath::RelativePath(Span<const RelativePathElement> elements) {
     handle()->elements = detail::toNativeArrayAlloc(elements.begin(), elements.end());
 }
 
-BrowsePath::BrowsePath(const NodeId& startingNode, const RelativePath& relativePath) {
-    asWrapper<NodeId>(handle()->startingNode) = startingNode;
-    asWrapper<RelativePath>(handle()->relativePath) = relativePath;
+BrowsePath::BrowsePath(NodeId startingNode, RelativePath relativePath) {
+    asWrapper<NodeId>(handle()->startingNode) = std::move(startingNode);
+    asWrapper<RelativePath>(handle()->relativePath) = std::move(relativePath);
 }
 
-ReadValueId::ReadValueId(const NodeId& nodeId, AttributeId attributeId) {
-    asWrapper<NodeId>(handle()->nodeId) = nodeId;
+ReadValueId::ReadValueId(NodeId nodeId, AttributeId attributeId) {
+    asWrapper<NodeId>(handle()->nodeId) = std::move(nodeId);
     handle()->attributeId = static_cast<uint32_t>(attributeId);
 }
 
 ReadRequest::ReadRequest(
-    const RequestHeader& requestHeader,
+    RequestHeader requestHeader,
     double maxAge,
     TimestampsToReturn timestampsToReturn,
     Span<const ReadValueId> nodesToRead
 ) {
-    asWrapper<RequestHeader>(handle()->requestHeader) = requestHeader;
+    asWrapper<RequestHeader>(handle()->requestHeader) = std::move(requestHeader);
     handle()->maxAge = maxAge;
     handle()->timestampsToReturn = static_cast<UA_TimestampsToReturn>(timestampsToReturn);
     copyArray(nodesToRead, &handle()->nodesToRead, handle()->nodesToReadSize);
 }
 
 WriteValue::WriteValue(
-    const NodeId& nodeId,
-    AttributeId attributeId,
-    std::string_view indexRange,
-    const DataValue& value
+    NodeId nodeId, AttributeId attributeId, std::string_view indexRange, DataValue value
 ) {
-    asWrapper<NodeId>(handle()->nodeId) = nodeId;
+    asWrapper<NodeId>(handle()->nodeId) = std::move(nodeId);
     handle()->attributeId = static_cast<uint32_t>(attributeId);
     asWrapper<String>(handle()->indexRange) = String(indexRange);
-    asWrapper<DataValue>(handle()->value) = value;
+    asWrapper<DataValue>(handle()->value) = std::move(value);
 }
 
-WriteRequest::WriteRequest(
-    const RequestHeader& requestHeader, Span<const WriteValue> nodesToWrite
-) {
-    asWrapper<RequestHeader>(handle()->requestHeader) = requestHeader;
+WriteRequest::WriteRequest(RequestHeader requestHeader, Span<const WriteValue> nodesToWrite) {
+    asWrapper<RequestHeader>(handle()->requestHeader) = std::move(requestHeader);
     copyArray(nodesToWrite, &handle()->nodesToWrite, handle()->nodesToWriteSize);
 }
 
@@ -161,14 +153,14 @@ WriteRequest::WriteRequest(
 
 Argument::Argument(
     std::string_view name,
-    const LocalizedText& description,
-    const NodeId& dataType,
+    LocalizedText description,
+    NodeId dataType,
     ValueRank valueRank,
     Span<const uint32_t> arrayDimensions
 ) {
     asWrapper<String>(handle()->name) = String(name);
-    asWrapper<LocalizedText>(handle()->description) = description;
-    asWrapper<NodeId>(handle()->dataType) = dataType;
+    asWrapper<LocalizedText>(handle()->description) = std::move(description);
+    asWrapper<NodeId>(handle()->dataType) = std::move(dataType);
     handle()->valueRank = static_cast<UA_Int32>(valueRank);
     copyArray(arrayDimensions, &handle()->arrayDimensions, handle()->arrayDimensionsSize);
 }
@@ -181,31 +173,31 @@ ElementOperand::ElementOperand(uint32_t index) {
     handle()->index = index;
 }
 
-LiteralOperand::LiteralOperand(const Variant& value) {
-    asWrapper<Variant>(handle()->value) = value;
+LiteralOperand::LiteralOperand(Variant value) {
+    asWrapper<Variant>(handle()->value) = std::move(value);
 }
 
 AttributeOperand::AttributeOperand(
-    const NodeId& nodeId,
+    NodeId nodeId,
     std::string_view alias,
-    const RelativePath& browsePath,
+    RelativePath browsePath,
     AttributeId attributeId,
     [[maybe_unused]] std::string_view indexRange
 ) {
-    asWrapper<NodeId>(handle()->nodeId) = nodeId;
+    asWrapper<NodeId>(handle()->nodeId) = std::move(nodeId);
     asWrapper<String>(handle()->alias) = String(alias);
-    asWrapper<RelativePath>(handle()->browsePath) = browsePath;
+    asWrapper<RelativePath>(handle()->browsePath) = std::move(browsePath);
     handle()->attributeId = static_cast<uint32_t>(attributeId);
     asWrapper<String>(handle()->indexRange) = String(indexRange);
 }
 
 SimpleAttributeOperand::SimpleAttributeOperand(
-    const NodeId& typeDefinitionId,
+    NodeId typeDefinitionId,
     Span<const QualifiedName> browsePath,
     AttributeId attributeId,
     [[maybe_unused]] std::string_view indexRange
 ) {
-    asWrapper<NodeId>(handle()->typeDefinitionId) = typeDefinitionId;
+    asWrapper<NodeId>(handle()->typeDefinitionId) = std::move(typeDefinitionId);
     copyArray(browsePath, &handle()->browsePath, handle()->browsePathSize);
     handle()->attributeId = static_cast<uint32_t>(attributeId);
     asWrapper<String>(handle()->indexRange) = String(indexRange);
@@ -361,20 +353,20 @@ DataChangeFilter::DataChangeFilter(
 }
 
 EventFilter::EventFilter(
-    Span<const SimpleAttributeOperand> selectClauses, const ContentFilter& whereClause
+    Span<const SimpleAttributeOperand> selectClauses, ContentFilter whereClause
 ) {
     copyArray(selectClauses, &handle()->selectClauses, handle()->selectClausesSize);
-    asWrapper<ContentFilter>(handle()->whereClause) = whereClause;
+    asWrapper<ContentFilter>(handle()->whereClause) = std::move(whereClause);
 }
 
 AggregateFilter::AggregateFilter(
     DateTime startTime,
-    const NodeId& aggregateType,
+    NodeId aggregateType,
     double processingInterval,
     AggregateConfiguration aggregateConfiguration
 ) {
-    asWrapper<DateTime>(handle()->startTime) = std::move(startTime);
-    asWrapper<NodeId>(handle()->aggregateType) = aggregateType;
+    handle()->startTime = startTime;
+    asWrapper<NodeId>(handle()->aggregateType) = std::move(aggregateType);
     handle()->processingInterval = processingInterval;
     handle()->aggregateConfiguration = aggregateConfiguration;
 }

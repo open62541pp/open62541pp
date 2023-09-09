@@ -90,13 +90,13 @@ public:
     using TypeWrapperBase::TypeWrapperBase;
 
     RequestHeader(
-        const NodeId& authenticationToken,
+        NodeId authenticationToken,
         DateTime timestamp,
         uint32_t requestHandle,
         uint32_t returnDiagnostics,
         std::string_view auditEntryId,
         uint32_t timeoutHint,
-        const ExtensionObject& additionalHeader
+        ExtensionObject additionalHeader
     );
 
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getAuthenticationToken, authenticationToken)
@@ -610,9 +610,9 @@ public:
     using TypeWrapperBase::TypeWrapperBase;
 
     BrowseDescription(
-        const NodeId& nodeId,
+        NodeId nodeId,
         BrowseDirection browseDirection,
-        const NodeId& referenceType = ReferenceTypeId::References,
+        NodeId referenceType = ReferenceTypeId::References,
         bool includeSubtypes = true,
         uint32_t nodeClassMask = UA_NODECLASS_UNSPECIFIED,
         uint32_t resultMask = UA_BROWSERESULTMASK_ALL
@@ -651,6 +651,7 @@ public:
 class BrowseResult : public TypeWrapper<UA_BrowseResult, UA_TYPES_BROWSERESULT> {
 public:
     using TypeWrapperBase::TypeWrapperBase;
+
     UAPP_COMPOSED_GETTER(StatusCode, getStatusCode, statusCode)
     UAPP_COMPOSED_GETTER_WRAPPER(ByteString, getContinuationPoint, continuationPoint)
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
@@ -668,10 +669,7 @@ public:
     using TypeWrapperBase::TypeWrapperBase;
 
     RelativePathElement(
-        const NodeId& referenceType,
-        bool isInverse,
-        bool includeSubtypes,
-        const QualifiedName& targetName
+        NodeId referenceType, bool isInverse, bool includeSubtypes, QualifiedName targetName
     );
 
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getReferenceTypeId, referenceTypeId)
@@ -702,7 +700,7 @@ class BrowsePath : public TypeWrapper<UA_BrowsePath, UA_TYPES_BROWSEPATH> {
 public:
     using TypeWrapperBase::TypeWrapperBase;
 
-    BrowsePath(const NodeId& startingNode, const RelativePath& relativePath);
+    BrowsePath(NodeId startingNode, RelativePath relativePath);
 
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getStartingNode, startingNode)
     UAPP_COMPOSED_GETTER_WRAPPER(RelativePath, getRelativePath, relativePath)
@@ -741,7 +739,7 @@ class ReadValueId : public TypeWrapper<UA_ReadValueId, UA_TYPES_READVALUEID> {
 public:
     using TypeWrapperBase::TypeWrapperBase;
 
-    ReadValueId(const NodeId& nodeId, AttributeId attributeId);
+    ReadValueId(NodeId nodeId, AttributeId attributeId);
 
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getNodeId, nodeId)
     UAPP_COMPOSED_GETTER_CAST(AttributeId, getAttributeId, attributeId)
@@ -759,7 +757,7 @@ public:
     using TypeWrapperBase::TypeWrapperBase;
 
     ReadRequest(
-        const RequestHeader& requestHeader,
+        RequestHeader requestHeader,
         double maxAge,
         TimestampsToReturn timestampsToReturn,
         Span<const ReadValueId> nodesToRead
@@ -797,10 +795,7 @@ public:
     using TypeWrapperBase::TypeWrapperBase;
 
     WriteValue(
-        const NodeId& nodeId,
-        AttributeId attributeId,
-        std::string_view indexRange,
-        const DataValue& value
+        NodeId nodeId, AttributeId attributeId, std::string_view indexRange, DataValue value
     );
 
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getNodeId, nodeId)
@@ -818,7 +813,7 @@ class WriteRequest : public TypeWrapper<UA_WriteRequest, UA_TYPES_WRITEREQUEST> 
 public:
     using TypeWrapperBase::TypeWrapperBase;
 
-    WriteRequest(const RequestHeader& requestHeader, Span<const WriteValue> nodesToWrite);
+    WriteRequest(RequestHeader requestHeader, Span<const WriteValue> nodesToWrite);
 
     UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(WriteValue, getNodesToWrite, nodesToWrite, nodesToWriteSize)
@@ -855,8 +850,8 @@ public:
 
     Argument(
         std::string_view name,
-        const LocalizedText& description,
-        const NodeId& dataType,
+        LocalizedText description,
+        NodeId dataType,
         ValueRank valueRank = {},
         Span<const uint32_t> arrayDimensions = {}
     );
@@ -932,7 +927,7 @@ private:
 public:
     using TypeWrapperBase::TypeWrapperBase;
 
-    explicit LiteralOperand(const Variant& value);
+    explicit LiteralOperand(Variant value);
 
     template <typename T, typename = EnableIfLiteral<T>>
     explicit LiteralOperand(T&& literal)
@@ -951,9 +946,9 @@ public:
     using TypeWrapperBase::TypeWrapperBase;
 
     AttributeOperand(
-        const NodeId& nodeId,
+        NodeId nodeId,
         std::string_view alias,
-        const RelativePath& browsePath,
+        RelativePath browsePath,
         AttributeId attributeId,
         std::string_view indexRange = {}
     );
@@ -976,7 +971,7 @@ public:
     using TypeWrapperBase::TypeWrapperBase;
 
     SimpleAttributeOperand(
-        const NodeId& typeDefinitionId,
+        NodeId typeDefinitionId,
         Span<const QualifiedName> browsePath,
         AttributeId attributeId,
         std::string_view indexRange = {}
@@ -1118,7 +1113,7 @@ class EventFilter : public TypeWrapper<UA_EventFilter, UA_TYPES_EVENTFILTER> {
 public:
     using TypeWrapperBase::TypeWrapperBase;
 
-    EventFilter(Span<const SimpleAttributeOperand> selectClauses, const ContentFilter& whereClause);
+    EventFilter(Span<const SimpleAttributeOperand> selectClauses, ContentFilter whereClause);
 
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
         SimpleAttributeOperand, getSelectClauses, selectClauses, selectClausesSize
@@ -1139,7 +1134,7 @@ public:
 
     AggregateFilter(
         DateTime startTime,
-        const NodeId& aggregateType,
+        NodeId aggregateType,
         double processingInterval,
         AggregateConfiguration aggregateConfiguration
     );
