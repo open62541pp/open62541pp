@@ -118,9 +118,13 @@ BrowsePath::BrowsePath(NodeId startingNode, RelativePath relativePath) {
     asWrapper<RelativePath>(handle()->relativePath) = std::move(relativePath);
 }
 
-ReadValueId::ReadValueId(NodeId nodeId, AttributeId attributeId) {
+ReadValueId::ReadValueId(
+    NodeId nodeId, AttributeId attributeId, std::string_view indexRange, QualifiedName dataEncoding
+) {
     asWrapper<NodeId>(handle()->nodeId) = std::move(nodeId);
     handle()->attributeId = static_cast<uint32_t>(attributeId);
+    asWrapper<String>(handle()->indexRange) = String(indexRange);
+    asWrapper<QualifiedName>(handle()->dataEncoding) = std::move(dataEncoding);
 }
 
 ReadRequest::ReadRequest(

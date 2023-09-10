@@ -739,7 +739,12 @@ class ReadValueId : public TypeWrapper<UA_ReadValueId, UA_TYPES_READVALUEID> {
 public:
     using TypeWrapperBase::TypeWrapperBase;
 
-    ReadValueId(NodeId nodeId, AttributeId attributeId);
+    ReadValueId(
+        NodeId nodeId,
+        AttributeId attributeId,
+        std::string_view indexRange = {},
+        QualifiedName dataEncoding = {}
+    );
 
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getNodeId, nodeId)
     UAPP_COMPOSED_GETTER_CAST(AttributeId, getAttributeId, attributeId)
