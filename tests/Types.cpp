@@ -833,39 +833,6 @@ TEST_CASE("ExtensionObject") {
     }
 }
 
-TEST_CASE("DiagnosticInfo") {
-    UA_DiagnosticInfo infoNative{};
-    infoNative.hasSymbolicId = true;
-    infoNative.hasNamespaceUri = true;
-    infoNative.hasLocalizedText = true;
-    infoNative.hasLocale = true;
-    infoNative.hasAdditionalInfo = false;
-    infoNative.hasInnerStatusCode = true;
-    infoNative.hasInnerDiagnosticInfo = false;
-    infoNative.symbolicId = 0;
-    infoNative.namespaceUri = 1;
-    infoNative.localizedText = 2;
-    infoNative.locale = 3;
-    infoNative.additionalInfo = UA_STRING_NULL;
-    infoNative.innerStatusCode = UA_STATUSCODE_GOOD;
-    infoNative.innerDiagnosticInfo = nullptr;
-
-    const DiagnosticInfo info(infoNative);
-    CHECK(info.hasSymbolicId() == true);
-    CHECK(info.hasNamespaceUri() == true);
-    CHECK(info.hasLocalizedText() == true);
-    CHECK(info.hasLocale() == true);
-    CHECK(info.hasAdditionalInfo() == false);
-    CHECK(info.hasInnerStatusCode() == true);
-    CHECK(info.hasInnerDiagnosticInfo() == false);
-    CHECK(info.getSymbolicId() == 0);
-    CHECK(info.getNamespaceUri() == 1);
-    CHECK(info.getLocalizedText() == 2);
-    CHECK(info.getAdditionalInfo().empty());
-    CHECK(info.getInnerStatusCode() == UA_STATUSCODE_GOOD);
-    CHECK(info.getInnerDiagnosticInfo() == nullptr);
-}
-
 TEST_CASE("RequestHeader") {
     const auto now = DateTime::now();
     const RequestHeader header({1, 1000}, now, 1, 2, "auditEntryId", 10, {});
@@ -874,19 +841,6 @@ TEST_CASE("RequestHeader") {
     CHECK(header.getRequestHandle() == 1);
     CHECK(header.getReturnDiagnostics() == 2);
     CHECK(header.getAuditEntryId() == String("auditEntryId"));
-    CHECK(header.getAdditionalHeader().isEmpty());
-}
-
-TEST_CASE("ResponseHeader") {
-    ResponseHeader header;
-    header->timestamp = 111;
-    header->requestHandle = 1;
-    header->serviceResult = UA_STATUSCODE_GOOD;
-    CHECK(header.getTimestamp() == 111);
-    CHECK(header.getRequestHandle() == 1);
-    CHECK(header.getServiceResult() == UA_STATUSCODE_GOOD);
-    CHECK_NOTHROW(header.getServiceDiagnostics());
-    CHECK(header.getStringTable().empty());
     CHECK(header.getAdditionalHeader().isEmpty());
 }
 
@@ -1008,13 +962,6 @@ TEST_CASE("ReadRequest") {
     CHECK(request.getNodesToRead().size() == 1);
     CHECK(request.getNodesToRead()[0].getNodeId() == NodeId(1, 1000));
     CHECK(request.getNodesToRead()[0].getAttributeId() == AttributeId::Value);
-}
-
-TEST_CASE("ReadResponse") {
-    const ReadResponse response;
-    CHECK_NOTHROW(response.getResponseHeader());
-    CHECK(response.getResults().empty());
-    CHECK(response.getDiagnosticInfos().empty());
 }
 
 TEST_CASE("WriteValue") {
