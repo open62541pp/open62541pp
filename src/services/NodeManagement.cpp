@@ -173,17 +173,14 @@ void addMethod(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    MethodCallback callback,  // NOLINT
-    Span<const Argument> inputArguments,
-    Span<const Argument> outputArguments,
+    [[maybe_unused]] MethodCallback callback,  // NOLINT
+    [[maybe_unused]] Span<const Argument> inputArguments,
+    [[maybe_unused]] Span<const Argument> outputArguments,
     const MethodAttributes& attributes,
     const NodeId& referenceType
 ) {
     // callback can be added later by server with UA_Server_setMethodNodeCallback
-    (void)callback;
     // arguments can not be passed to UA_Client_addMethodNode... why?
-    (void)inputArguments;
-    (void)outputArguments;
     const auto status = UA_Client_addMethodNode(
         client.handle(),
         id,
@@ -271,10 +268,9 @@ void addVariableType<Client>(
     const NodeId& id,
     std::string_view browseName,
     const VariableTypeAttributes& attributes,
-    const NodeId& variableType,
+    [[maybe_unused]] const NodeId& variableType,
     const NodeId& referenceType
 ) {
-    (void)variableType;  // TODO: variableType is currently unused
     const auto status = UA_Client_addVariableTypeNode(
         client.handle(),
         id,

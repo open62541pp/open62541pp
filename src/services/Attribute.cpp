@@ -56,7 +56,7 @@ DataValue readAttribute<Client>(
         detail::throwOnBadStatus(results[0]->status);
     }
     DataValue result;
-    result.swap(*response->results);  // TODO: non-const response.getResults()
+    result.swap(response.getResults()[0]);
     return result;
 }
 

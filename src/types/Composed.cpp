@@ -262,11 +262,7 @@ static ContentFilter concatFilterElements(
         std::copy(filterElements.begin(), filterElements.end(), resultElementsView.begin());
         // increment element operand indexes by offset
         for (auto& element : resultElementsView) {
-            // TODO: non-const get* method to return span
-            auto operands = Span(
-                asWrapper<ExtensionObject>(element->filterOperands), element->filterOperandsSize
-            );
-            for (auto& operand : operands) {
+            for (auto& operand : element.getFilterOperands()) {
                 auto* elementOperand = operand.getDecodedData<ElementOperand>();
                 if (elementOperand != nullptr) {
                     elementOperand->handle()->index += static_cast<uint32_t>(offset);

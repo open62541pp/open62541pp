@@ -52,10 +52,16 @@
 #define UAPP_COMPOSED_GETTER_SPAN(Type, getterName, memberArray, memberSize)                       \
     Span<const Type> getterName() const noexcept {                                                 \
         return {handle()->memberArray, handle()->memberSize};                                      \
+    }                                                                                              \
+    Span<Type> getterName() noexcept {                                                             \
+        return {handle()->memberArray, handle()->memberSize};                                      \
     }
 // NOLINTNEXTLINE
 #define UAPP_COMPOSED_GETTER_SPAN_WRAPPER(Type, getterName, memberArray, memberSize)               \
     Span<const Type> getterName() const noexcept {                                                 \
+        return {asWrapper<Type>(handle()->memberArray), handle()->memberSize};                     \
+    }                                                                                              \
+    Span<Type> getterName() noexcept {                                                             \
         return {asWrapper<Type>(handle()->memberArray), handle()->memberSize};                     \
     }
 
