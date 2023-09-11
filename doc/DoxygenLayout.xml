@@ -10,6 +10,7 @@
     <tab type="user" url="@ref opcua::Node" title="Node"/>
     <tab type="user" url="@ref TypeWrapper" title="Wrapper"/>
     <tab type="user" url="@ref Services" title="Services"/>
+    <tab type="user" url="@ref NodeIds" title="NodeIds"/>
 
     <tab type="usergroup" title="API Reference">
       <!-- <tab type="pages" visible="yes" title="" intro=""/> -->
