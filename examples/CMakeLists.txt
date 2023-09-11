@@ -69,8 +69,8 @@ add_example(custom_datatypes/client_custom_datatypes.cpp)
 add_example(custom_datatypes/server_custom_datatypes.cpp)
 
 if(UA_ENABLE_METHODCALLS)
-    add_example(client_method.cpp)
-    add_example(server_method.cpp)
+    add_example(method/client_method.cpp)
+    add_example(method/server_method.cpp)
 endif()
 
 if(UA_ENABLE_SUBSCRIPTIONS)

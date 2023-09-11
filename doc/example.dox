@@ -2,7 +2,6 @@
 @example server_minimal.cpp
 @example server.cpp
 @example server_instantiation.cpp
-@example server_method.cpp
 @example server_valuecallback.cpp
 @example server_datasource.cpp
 @example server_accesscontrol.cpp
@@ -12,14 +11,16 @@
 @example client_find_servers.cpp
 @example client_browse.cpp
 @example client_subscription.cpp
-@example client_method.cpp
+
+@example method/server_method.cpp
+@example method/client_method.cpp
+
+@example events/server_events.cpp
+@example events/client_eventfilter.cpp
 
 @example custom_datatypes/custom_datatypes.h
 @example custom_datatypes/server_custom_datatypes.cpp
 @example custom_datatypes/client_custom_datatypes.cpp
-
-@example events/server_events.cpp
-@example events/client_eventfilter.cpp
 
 @example typeconversion.cpp
 */
