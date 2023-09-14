@@ -1,5 +1,6 @@
 #pragma once
 
+#include <future>
 #include <vector>
 
 #include "open62541pp/Config.h"
@@ -9,6 +10,7 @@
 
 // forward declarations
 namespace opcua {
+class Client;
 class NodeId;
 class Variant;
 }  // namespace opcua
@@ -41,6 +43,23 @@ namespace opcua::services {
 template <typename T>
 std::vector<Variant> call(
     T& serverOrClient,
+    const NodeId& objectId,
+    const NodeId& methodId,
+    Span<const Variant> inputArguments
+);
+
+/**
+ * Asynchronously call a server method and return results.
+ *
+ * @param client Instance of type Client
+ * @param objectId NodeId of the object on which the method is invoked
+ * @param methodId NodeId of the method to invoke
+ * @param inputArguments Input argument values
+ * @exception BadStatus
+ * @ingroup Method
+ */
+std::future<std::vector<Variant>> callAsync(
+    Client& client,
     const NodeId& objectId,
     const NodeId& methodId,
     Span<const Variant> inputArguments

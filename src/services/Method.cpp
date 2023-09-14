@@ -2,7 +2,9 @@
 
 #ifdef UA_ENABLE_METHODCALLS
 
+#include <cassert>
 #include <cstddef>
+#include <memory>
 
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
@@ -61,9 +63,51 @@ std::vector<Variant> call(
         &output
     );
     std::vector<Variant> result(output, output + outputSize);  // NOLINT
-    UA_Array_delete(output, outputSize, &detail::getUaDataType(UA_TYPES_VARIANT));
+    UA_Array_delete(output, outputSize, &UA_TYPES[UA_TYPES_VARIANT]);
     detail::throwOnBadStatus(status);
     return result;
+}
+
+std::future<std::vector<Variant>> callAsync(
+    Client& client,
+    const NodeId& objectId,
+    const NodeId& methodId,
+    Span<const Variant> inputArguments
+) {
+    using Result = std::vector<Variant>;
+    auto promise = std::make_unique<std::promise<Result>>();
+    auto future = promise->get_future();
+    const auto status = UA_Client_call_async(
+        client.handle(),
+        objectId,
+        methodId,
+        inputArguments.size(),
+        asNative(inputArguments.data()),
+        [](UA_Client*, void* userdata, uint32_t, UA_CallResponse* response) {
+            assert(userdata != nullptr);
+            auto* promisePtr = static_cast<std::promise<Result>*>(userdata);
+            try {
+                detail::throwOnBadStatus(response->responseHeader.serviceResult);
+                if (response->resultsSize != 1 || response->results == nullptr) {
+                    throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
+                }
+                auto& result = *response->results;
+                detail::throwOnBadStatus(result.statusCode);
+                // TODO: check status codes of inputArgumentResults
+                promisePtr->set_value(std::vector<Variant>(
+                    result.outputArguments,
+                    result.outputArguments + result.outputArgumentsSize  // NOLINT
+                ));
+            } catch (...) {
+                promisePtr->set_exception(std::current_exception());
+            }
+            delete promisePtr;  // NOLINT
+        },
+        promise.release(),  // userdata
+        nullptr
+    );
+    detail::throwOnBadStatus(status);
+    return future;
 }
 
 }  // namespace opcua::services
