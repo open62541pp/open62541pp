@@ -291,12 +291,8 @@ void setTriggering(
     using Response = TypeWrapper<UA_SetTriggeringResponse, UA_TYPES_SETTRIGGERINGRESPONSE>;
     const Response response = UA_Client_MonitoredItems_setTriggering(client.handle(), request);
     detail::throwOnBadStatus(response->responseHeader.serviceResult);
-    for (auto&& status : Span(response->addResults, response->addResultsSize)) {
-        detail::throwOnBadStatus(status);
-    }
-    for (auto&& status : Span(response->removeResults, response->removeResultsSize)) {
-        detail::throwOnBadStatus(status);
-    }
+    detail::throwOnBadStatus(response->addResults, response->addResultsSize);
+    detail::throwOnBadStatus(response->removeResults, response->removeResultsSize);
 }
 
 void deleteMonitoredItem(Client& client, uint32_t subscriptionId, uint32_t monitoredItemId) {

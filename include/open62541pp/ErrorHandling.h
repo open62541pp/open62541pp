@@ -76,6 +76,12 @@ inline void throwOnBadStatus(UA_StatusCode code) {
     }
 }
 
+inline void throwOnBadStatus(const UA_StatusCode* codes, size_t codesSize) {
+    for (size_t i = 0; i < codesSize; ++i) {
+        throwOnBadStatus(codes[i]);  // NOLINT
+    }
+}
+
 /**
  * Invoke a function (with `void` return type), catch and ignore exceptions.
  * This is especially useful for C-API callbacks, that are executed within the open62541 event loop.

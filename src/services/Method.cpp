@@ -2,7 +2,6 @@
 
 #ifdef UA_ENABLE_METHODCALLS
 
-#include <cassert>
 #include <cstddef>
 #include <memory>
 
@@ -10,11 +9,11 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeWrapper.h"
-#include "open62541pp/detail/helper.h"  // getUaDataType
 #include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"
 
 #include "../open62541_impl.h"
+#include "async.h"
 
 namespace opcua::services {
 
@@ -34,9 +33,7 @@ std::vector<Variant> call(
     using Result = TypeWrapper<UA_CallMethodResult, UA_TYPES_CALLMETHODRESULT>;
     const Result result = UA_Server_call(server.handle(), &request);
     detail::throwOnBadStatus(result->statusCode);
-    for (size_t i = 0; i < result->inputArgumentResultsSize; ++i) {
-        detail::throwOnBadStatus(result->inputArgumentResults[i]);  // NOLINT
-    }
+    detail::throwOnBadStatus(result->inputArgumentResults, result->inputArgumentResultsSize);
 
     return {
         result->outputArguments,
@@ -74,40 +71,31 @@ std::future<std::vector<Variant>> callAsync(
     const NodeId& methodId,
     Span<const Variant> inputArguments
 ) {
-    using Result = std::vector<Variant>;
-    auto promise = std::make_unique<std::promise<Result>>();
-    auto future = promise->get_future();
-    const auto status = UA_Client_call_async(
-        client.handle(),
-        objectId,
-        methodId,
-        inputArguments.size(),
-        asNative(inputArguments.data()),
-        [](UA_Client*, void* userdata, uint32_t, UA_CallResponse* response) {
-            assert(userdata != nullptr);
-            auto* promisePtr = static_cast<std::promise<Result>*>(userdata);
-            try {
-                detail::throwOnBadStatus(response->responseHeader.serviceResult);
-                if (response->resultsSize != 1 || response->results == nullptr) {
-                    throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
-                }
-                auto& result = *response->results;
-                detail::throwOnBadStatus(result.statusCode);
-                // TODO: check status codes of inputArgumentResults
-                promisePtr->set_value(std::vector<Variant>(
-                    result.outputArguments,
-                    result.outputArguments + result.outputArgumentsSize  // NOLINT
-                ));
-            } catch (...) {
-                promisePtr->set_exception(std::current_exception());
+    UA_CallMethodRequest requestMethod{};
+    requestMethod.objectId = objectId;
+    requestMethod.methodId = methodId;
+    requestMethod.inputArguments = asNative(const_cast<Variant*>(inputArguments.data()));  // NOLINT
+    requestMethod.inputArgumentsSize = inputArguments.size();
+    UA_CallRequest request{};
+    request.methodsToCall = &requestMethod;
+    request.methodsToCallSize = 1;
+
+    return sendAsyncRequest<UA_CallRequest, UA_CallResponse>(
+        client,
+        request,
+        [](UA_CallResponse& response) {
+            if (response.resultsSize != 1 || response.results == nullptr) {
+                throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
             }
-            delete promisePtr;  // NOLINT
-        },
-        promise.release(),  // userdata
-        nullptr
+            auto& result = *response.results;
+            detail::throwOnBadStatus(result.statusCode);
+            detail::throwOnBadStatus(result.inputArgumentResults, result.inputArgumentResultsSize);
+            return std::vector<Variant>(
+                result.outputArguments,
+                result.outputArguments + result.outputArgumentsSize  // NOLINT
+            );
+        }
     );
-    detail::throwOnBadStatus(status);
-    return future;
 }
 
 }  // namespace opcua::services
