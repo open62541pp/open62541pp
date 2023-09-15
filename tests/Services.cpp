@@ -565,6 +565,22 @@ TEST_CASE("Method service set (server & client)") {
     SUBCASE("Server") { testCall(server); };
     SUBCASE("Client") { testCall(client); };
     // clang-format on
+
+    SUBCASE("Client async") {
+        auto future = services::callAsync(
+            client,
+            objectsId,
+            methodId,
+            {
+                Variant::fromScalar<int32_t>(1),
+                Variant::fromScalar<int32_t>(2),
+            }
+        );
+        client.runIterate();
+        const auto outputs = future.get();
+        CHECK(outputs.size() == 1);
+        CHECK(outputs.at(0).getScalarCopy<int32_t>() == 3);
+    }
 }
 #endif
 
