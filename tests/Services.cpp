@@ -20,6 +20,15 @@
 using namespace opcua;
 using namespace std::literals::chrono_literals;
 
+template <typename F>
+constexpr auto syncWrapper(Client& client, F&& asyncClientFunction) {
+    return [&](auto&&... args) {
+        auto future = asyncClientFunction(args...);
+        client.runIterate();
+        return future.get();
+    };
+};
+
 TEST_CASE("NodeManagement service set (server & client)") {
     Server server;
     ServerRunner serverRunner(server);
@@ -498,13 +507,13 @@ TEST_CASE("Method service set (server & client)") {
         }
     );
 
-    const auto testCall = [&](auto& serverOrClient) {
+    const auto testCall = [&](auto& serverOrClient, auto&& callFunc) {
         SUBCASE("Check result") {
-            const std::vector<Variant> outputs = services::call(
+            const std::vector<Variant> outputs = callFunc(
                 serverOrClient,
                 objectsId,
                 methodId,
-                {
+                Span<const Variant>{
                     Variant::fromScalar<int32_t>(1),
                     Variant::fromScalar<int32_t>(2),
                 }
@@ -516,11 +525,11 @@ TEST_CASE("Method service set (server & client)") {
         SUBCASE("Propagate exception") {
             throwException = true;
             CHECK_THROWS_WITH(
-                services::call(
+                callFunc(
                     serverOrClient,
                     objectsId,
                     methodId,
-                    {
+                    Span<const Variant>{
                         Variant::fromScalar<int32_t>(1),
                         Variant::fromScalar<int32_t>(2),
                     }
@@ -531,11 +540,11 @@ TEST_CASE("Method service set (server & client)") {
 
         SUBCASE("Invalid input arguments") {
             CHECK_THROWS_WITH(
-                services::call(
+                callFunc(
                     serverOrClient,
                     objectsId,
                     methodId,
-                    {
+                    Span<const Variant>{
                         Variant::fromScalar<bool>(true),
                         Variant::fromScalar<float>(11.11f),
                     }
@@ -543,14 +552,15 @@ TEST_CASE("Method service set (server & client)") {
                 "BadInvalidArgument"
             );
             CHECK_THROWS_WITH(
-                services::call(serverOrClient, objectsId, methodId, {}), "BadArgumentsMissing"
+                callFunc(serverOrClient, objectsId, methodId, Span<const Variant>{}),
+                "BadArgumentsMissing"
             );
             CHECK_THROWS_WITH(
-                services::call(
+                callFunc(
                     serverOrClient,
                     objectsId,
                     methodId,
-                    {
+                    Span<const Variant>{
                         Variant::fromScalar<int32_t>(1),
                         Variant::fromScalar<int32_t>(2),
                         Variant::fromScalar<int32_t>(3),
@@ -561,25 +571,14 @@ TEST_CASE("Method service set (server & client)") {
         }
     };
 
-    // clang-format off
-    SUBCASE("Server") { testCall(server); };
-    SUBCASE("Client") { testCall(client); };
-    // clang-format on
-
+    SUBCASE("Server") {
+        testCall(server, services::call<Server>);
+    };
+    SUBCASE("Client") {
+        testCall(client, services::call<Client>);
+    };
     SUBCASE("Client async") {
-        auto future = services::callAsync(
-            client,
-            objectsId,
-            methodId,
-            {
-                Variant::fromScalar<int32_t>(1),
-                Variant::fromScalar<int32_t>(2),
-            }
-        );
-        client.runIterate();
-        const auto outputs = future.get();
-        CHECK(outputs.size() == 1);
-        CHECK(outputs.at(0).getScalarCopy<int32_t>() == 3);
+        testCall(client, syncWrapper(client, services::callAsync));
     }
 }
 #endif
