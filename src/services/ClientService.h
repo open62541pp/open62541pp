@@ -3,14 +3,40 @@
 #include <cassert>
 #include <future>
 #include <type_traits>
+#include <utility>  // move
 
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/TypeConverter.h"  // guessDataType
+#include "open62541pp/TypeWrapper.h"
 
 #include "../open62541_impl.h"
 
 namespace opcua::services {
+
+template <typename Request, typename Response, typename F>
+auto sendRequest(
+    Client& client,
+    const Request& request,
+    F&& transformResponse = [](Response&& response) { return response; }
+) {
+    static_assert(detail::isNativeType<Request>());
+    static_assert(detail::isNativeType<Response>());
+
+    // use wrapper to automatically clean up response
+    constexpr auto typeIndexResponse = TypeConverter<Response>::ValidTypes::toArray().at(0);
+    TypeWrapper<Response, typeIndexResponse> response;
+
+    __UA_Client_Service(
+        client.handle(),
+        &request,
+        &detail::guessDataType<Request>(),
+        response.handle(),
+        &detail::guessDataType<Response>()
+    );
+    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    return transformResponse(response);
+}
 
 template <typename Request, typename Response, typename F>
 auto sendAsyncRequest(
@@ -25,11 +51,11 @@ auto sendAsyncRequest(
 
     struct CallbackContext {
         std::promise<Result> promise;
-        F* transform{};
+        F transform;
     };
 
     auto callbackContext = std::make_unique<CallbackContext>();
-    callbackContext->transform = &transformResponse;
+    callbackContext->transform = std::move(transformResponse);
 
     auto callback = [](UA_Client*, void* userdata, uint32_t /* requestId */, void* responsePtr) {
         assert(userdata != nullptr);
@@ -49,7 +75,7 @@ auto sendAsyncRequest(
     };
 
     auto future = callbackContext->promise.get_future();
-    const auto status = UA_Client_sendAsyncRequest(
+    const auto status = __UA_Client_AsyncService(
         client.handle(),
         &request,
         &detail::guessDataType<Request>(),

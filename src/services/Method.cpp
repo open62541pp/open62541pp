@@ -13,9 +13,36 @@
 #include "open62541pp/types/Variant.h"
 
 #include "../open62541_impl.h"
-#include "async.h"
+#include "ClientService.h"
 
 namespace opcua::services {
+
+inline static UA_CallMethodRequest createCallMethodRequest(
+    const NodeId& objectId, const NodeId& methodId, Span<const Variant> inputArguments
+) {
+    UA_CallMethodRequest request{};
+    request.objectId = objectId;
+    request.methodId = methodId;
+    request.inputArguments = asNative(const_cast<Variant*>(inputArguments.data()));  // NOLINT
+    request.inputArgumentsSize = inputArguments.size();
+    return request;
+}
+
+inline static auto transformCallMethodResult(UA_CallMethodResult& result) {
+    detail::throwOnBadStatus(result.statusCode);
+    detail::throwOnBadStatus(result.inputArgumentResults, result.inputArgumentResultsSize);
+    return std::vector<Variant>(
+        result.outputArguments,
+        result.outputArguments + result.outputArgumentsSize  // NOLINT
+    );
+}
+
+static auto transformCallResponse(UA_CallResponse& response) {
+    if (response.resultsSize != 1 || response.results == nullptr) {
+        throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
+    }
+    return transformCallMethodResult(*response.results);
+}
 
 template <>
 std::vector<Variant> call(
@@ -24,21 +51,10 @@ std::vector<Variant> call(
     const NodeId& methodId,
     Span<const Variant> inputArguments
 ) {
-    UA_CallMethodRequest request{};
-    request.objectId = objectId;
-    request.methodId = methodId;
-    request.inputArgumentsSize = inputArguments.size();
-    request.inputArguments = const_cast<UA_Variant*>(asNative(inputArguments.data()));  // NOLINT
-
+    UA_CallMethodRequest request = createCallMethodRequest(objectId, methodId, inputArguments);
     using Result = TypeWrapper<UA_CallMethodResult, UA_TYPES_CALLMETHODRESULT>;
-    const Result result = UA_Server_call(server.handle(), &request);
-    detail::throwOnBadStatus(result->statusCode);
-    detail::throwOnBadStatus(result->inputArgumentResults, result->inputArgumentResultsSize);
-
-    return {
-        result->outputArguments,
-        result->outputArguments + result->outputArgumentsSize  // NOLINT
-    };
+    Result result = UA_Server_call(server.handle(), &request);
+    return transformCallMethodResult(result);
 }
 
 template <>
@@ -48,21 +64,11 @@ std::vector<Variant> call(
     const NodeId& methodId,
     Span<const Variant> inputArguments
 ) {
-    size_t outputSize{};
-    UA_Variant* output{};
-    const auto status = UA_Client_call(
-        client.handle(),
-        objectId,
-        methodId,
-        inputArguments.size(),
-        asNative(inputArguments.data()),
-        &outputSize,
-        &output
-    );
-    std::vector<Variant> result(output, output + outputSize);  // NOLINT
-    UA_Array_delete(output, outputSize, &UA_TYPES[UA_TYPES_VARIANT]);
-    detail::throwOnBadStatus(status);
-    return result;
+    UA_CallMethodRequest item = createCallMethodRequest(objectId, methodId, inputArguments);
+    UA_CallRequest request{};
+    request.methodsToCall = &item;
+    request.methodsToCallSize = 1;
+    return sendRequest<UA_CallRequest, UA_CallResponse>(client, request, &transformCallResponse);
 }
 
 std::future<std::vector<Variant>> callAsync(
@@ -71,30 +77,12 @@ std::future<std::vector<Variant>> callAsync(
     const NodeId& methodId,
     Span<const Variant> inputArguments
 ) {
-    UA_CallMethodRequest requestMethod{};
-    requestMethod.objectId = objectId;
-    requestMethod.methodId = methodId;
-    requestMethod.inputArguments = asNative(const_cast<Variant*>(inputArguments.data()));  // NOLINT
-    requestMethod.inputArgumentsSize = inputArguments.size();
+    UA_CallMethodRequest item = createCallMethodRequest(objectId, methodId, inputArguments);
     UA_CallRequest request{};
-    request.methodsToCall = &requestMethod;
+    request.methodsToCall = &item;
     request.methodsToCallSize = 1;
-
     return sendAsyncRequest<UA_CallRequest, UA_CallResponse>(
-        client,
-        request,
-        [](UA_CallResponse& response) {
-            if (response.resultsSize != 1 || response.results == nullptr) {
-                throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
-            }
-            auto& result = *response.results;
-            detail::throwOnBadStatus(result.statusCode);
-            detail::throwOnBadStatus(result.inputArgumentResults, result.inputArgumentResultsSize);
-            return std::vector<Variant>(
-                result.outputArguments,
-                result.outputArguments + result.outputArgumentsSize  // NOLINT
-            );
-        }
+        client, request, &transformCallResponse
     );
 }
 
