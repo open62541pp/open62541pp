@@ -1,7 +1,10 @@
 var searchData=
 [
-  ['element_5ftype_0',['element_type',['../classopcua_1_1Span.html#a0ab16c5049b4f1a9e790c3e922ff13dd',1,'opcua::Span']]],
-  ['enableifequalitycomparable_1',['EnableIfEqualityComparable',['../namespaceopcua_1_1detail.html#a28218f878c98a8f3cb7099e5db81bfd5',1,'opcua::detail']]],
-  ['eventcallback_2',['EventCallback',['../namespaceopcua.html#a7cbaa92a83abf61f2190aea7322079b2',1,'opcua']]],
-  ['eventnotificationcallback_3',['EventNotificationCallback',['../namespaceopcua_1_1services.html#af0f62d9c887c3365c3bf95f42404a7f8',1,'opcua::services']]]
+  ['datachangecallback_0',['DataChangeCallback',['../namespaceopcua.html#a23647db4c1e20e3f56c8baac3556f705',1,'opcua']]],
+  ['datachangenotificationcallback_1',['DataChangeNotificationCallback',['../group__MonitoredItem.html#gaea38470ae232e1ad600942ff0eed49a6',1,'opcua::services']]],
+  ['datatypemember_2',['DataTypeMember',['../namespaceopcua.html#a21735611a772b01f681597d220acf0d0',1,'opcua']]],
+  ['defaultclock_3',['DefaultClock',['../classopcua_1_1DateTime.html#ae7375ebfe4e6809021b759bee9774329',1,'opcua::DateTime']]],
+  ['deletemonitoreditemcallback_4',['DeleteMonitoredItemCallback',['../group__MonitoredItem.html#gaf384cffce05f9a977663d479d6d1b479',1,'opcua::services']]],
+  ['deletesubscriptioncallback_5',['DeleteSubscriptionCallback',['../group__Subscription.html#ga1801ab4aec7011ab6c9f3fbcad7a468a',1,'opcua::services']]],
+  ['difference_5ftype_6',['difference_type',['../classopcua_1_1Span.html#ab8c77debe56a4b74d3d37cc5ade01121',1,'opcua::Span']]]
 ];

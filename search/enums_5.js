@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['logcategory_0',['LogCategory',['../namespaceopcua.html#a82c59334b1772f47ada395785f5bf70a',1,'opcua']]],
-  ['loglevel_1',['LogLevel',['../namespaceopcua.html#a016225e750f216587c011ea43f212d8d',1,'opcua']]]
+  ['filteroperator_0',['FilterOperator',['../group__TypeWrapper.html#ga7f650de56d5f18b08f1e79d6c9d8e240',1,'opcua']]]
 ];

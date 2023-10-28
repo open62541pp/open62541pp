@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['x509identitytoken_0',['X509IdentityToken',['../classopcua_1_1X509IdentityToken.html',1,'opcua']]],
-  ['xmlelement_1',['XmlElement',['../classopcua_1_1XmlElement.html',1,'opcua']]]
+  ['writerequest_0',['WriteRequest',['../classopcua_1_1WriteRequest.html',1,'opcua']]],
+  ['writeresponse_1',['WriteResponse',['../classopcua_1_1WriteResponse.html',1,'opcua']]],
+  ['writevalue_2',['WriteValue',['../classopcua_1_1WriteValue.html',1,'opcua']]]
 ];

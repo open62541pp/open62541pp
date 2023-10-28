@@ -73,7 +73,7 @@ var searchData=
   ['ua_5fmethodcallback_70',['UA_MethodCallback',['../nodestore_8h.html#a943f95365533842bb0938f2c6609a216',1,'nodestore.h']]],
   ['ua_5fmonitoreditem_71',['UA_MonitoredItem',['../nodestore_8h.html#a5169eb7ba94b7fc97e23860f4b5a1064',1,'nodestore.h']]],
   ['ua_5fnodehead_72',['UA_NodeHead',['../nodestore_8h.html#aa1d4134b378a3b3dc61b14cc2bcbd595',1,'nodestore.h']]],
-  ['ua_5fnodeiteratorcallback_73',['UA_NodeIteratorCallback',['../client__highlevel_8h.html#a0fd3dfee2e93e99b09030830a8c23dc4',1,'UA_NodeIteratorCallback:&#160;client_highlevel.h'],['../server_8h.html#a0fd3dfee2e93e99b09030830a8c23dc4',1,'UA_NodeIteratorCallback:&#160;server.h']]],
+  ['ua_5fnodeiteratorcallback_73',['ua_nodeiteratorcallback',['../client__highlevel_8h.html#a0fd3dfee2e93e99b09030830a8c23dc4',1,'UA_NodeIteratorCallback:&#160;client_highlevel.h'],['../server_8h.html#a0fd3dfee2e93e99b09030830a8c23dc4',1,'UA_NodeIteratorCallback:&#160;server.h']]],
   ['ua_5fnodestorevisitor_74',['UA_NodestoreVisitor',['../nodestore_8h.html#a182a5a3bdc9323eae2cf82fb92d1a967',1,'nodestore.h']]],
   ['ua_5fnotification_75',['UA_Notification',['../ua__subscription_8h.html#a800596948fbe59e8607ddd88e6e7b886',1,'ua_subscription.h']]],
   ['ua_5fnotificationmessageentry_76',['UA_NotificationMessageEntry',['../ua__subscription_8h.html#a14cba6817873e1adfd34f799e6421816',1,'ua_subscription.h']]],
@@ -107,7 +107,8 @@ var searchData=
   ['ua_5fuint16_104',['UA_UInt16',['../types_8h.html#a0a5ff540581b2a3ca4757de792c68f05',1,'types.h']]],
   ['ua_5fuint32_105',['UA_UInt32',['../types_8h.html#a5f0721b034e4c44a7f81589b15ba1baf',1,'types.h']]],
   ['ua_5fuint64_106',['UA_UInt64',['../types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51',1,'types.h']]],
-  ['ua_5futctime_107',['UA_UtcTime',['../types__generated_8h.html#a59cc9908e0fa28db0933f5bb04fe5863',1,'types_generated.h']]],
-  ['ua_5fwritergroup_108',['UA_WriterGroup',['../ua__pubsub_8h.html#a08d3eb1b1a59eab951e8abcd721d9d60',1,'ua_pubsub.h']]],
-  ['ua_5fxmlelement_109',['UA_XmlElement',['../types_8h.html#a5f27ea2177086218de8bb542fc4476cc',1,'types.h']]]
+  ['ua_5fusernamepasswordlogincallback_107',['UA_UsernamePasswordLoginCallback',['../accesscontrol__default_8h.html#adb62e1672b01e9c3494ac5b2387ff177',1,'accesscontrol_default.h']]],
+  ['ua_5futctime_108',['UA_UtcTime',['../types__generated_8h.html#a59cc9908e0fa28db0933f5bb04fe5863',1,'types_generated.h']]],
+  ['ua_5fwritergroup_109',['UA_WriterGroup',['../ua__pubsub_8h.html#a08d3eb1b1a59eab951e8abcd721d9d60',1,'ua_pubsub.h']]],
+  ['ua_5fxmlelement_110',['UA_XmlElement',['../types_8h.html#a5f27ea2177086218de8bb542fc4476cc',1,'types.h']]]
 ];

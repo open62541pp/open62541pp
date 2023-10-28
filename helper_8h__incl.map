@@ -8,8 +8,8 @@
 <area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="191,61,172,134,159,176,154,175,167,133,186,60"/>
 <area shape="rect" id="Node000005" href="$Common_8h.html" title=" " alt="" coords="233,108,418,133"/>
 <area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="236,58,298,98,295,103,233,62"/>
-<area shape="rect" id="Node000010" href="$open62541_8h.html" title=" " alt="" coords="593,189,791,214"/>
-<area shape="poly" id="edge16_Node000001_Node000010" title=" " alt="" coords="280,58,430,105,649,182,647,187,428,111,279,63"/>
+<area shape="rect" id="Node000010" href="$open62541_8h.html" title=" " alt="" coords="649,189,847,214"/>
+<area shape="poly" id="edge17_Node000001_Node000010" title=" " alt="" coords="282,58,697,182,696,187,281,63"/>
 <area shape="poly" id="edge6_Node000005_Node000004" title=" " alt="" coords="301,136,187,186,185,181,298,131"/>
 <area shape="rect" id="Node000006" title=" " alt="" coords="221,189,288,214"/>
 <area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="317,135,276,180,272,177,313,132"/>
@@ -17,16 +17,18 @@
 <area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="328,133,328,255,323,255,323,133"/>
 <area shape="rect" id="Node000008" href="$traits_8h.html" title=" " alt="" coords="363,181,514,221"/>
 <area shape="poly" id="edge8_Node000005_Node000008" title=" " alt="" coords="344,131,402,171,399,176,341,136"/>
-<area shape="poly" id="edge11_Node000005_Node000010" title=" " alt="" coords="379,131,626,183,625,188,378,136"/>
+<area shape="poly" id="edge11_Node000005_Node000010" title=" " alt="" coords="387,131,674,184,673,189,386,136"/>
 <area shape="poly" id="edge9_Node000008_Node000007" title=" " alt="" coords="413,224,355,263,352,259,410,219"/>
 <area shape="rect" id="Node000009" title=" " alt="" coords="377,269,469,295"/>
 <area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="437,222,430,256,425,255,432,221"/>
 <area shape="rect" id="Node000011" href="/home/runner/work/open62541pp/open62541pp/build/doxygen_open62541/open62541.tag$config_8h.html" title=" " alt="" coords="493,269,643,295"/>
-<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="675,216,599,264,596,260,672,212"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="723,216,608,266,606,261,721,212"/>
 <area shape="rect" id="Node000012" href="/home/runner/work/open62541pp/open62541pp/build/doxygen_open62541/open62541.tag$nodeids_8h.html" title=" " alt="" coords="667,269,829,295"/>
-<area shape="poly" id="edge13_Node000010_Node000012" title=" " alt="" coords="702,213,734,257,730,260,698,216"/>
-<area shape="rect" id="Node000013" href="/home/runner/work/open62541pp/open62541pp/build/doxygen_open62541/open62541.tag$types_8h.html" title=" " alt="" coords="853,269,1000,295"/>
-<area shape="poly" id="edge14_Node000010_Node000013" title=" " alt="" coords="727,211,881,263,879,268,725,217"/>
-<area shape="rect" id="Node000014" href="/home/runner/work/open62541pp/open62541pp/build/doxygen_open62541/open62541.tag$types__generated_8h.html" title=" " alt="" coords="1024,269,1243,295"/>
-<area shape="poly" id="edge15_Node000010_Node000014" title=" " alt="" coords="757,211,1056,264,1055,270,756,217"/>
+<area shape="poly" id="edge13_Node000010_Node000012" title=" " alt="" coords="751,214,751,255,745,255,745,214"/>
+<area shape="rect" id="Node000013" href="/home/runner/work/open62541pp/open62541pp/build/doxygen_open62541/open62541.tag$statuscodes_8h.html" title=" " alt="" coords="853,269,1041,295"/>
+<area shape="poly" id="edge14_Node000010_Node000013" title=" " alt="" coords="778,212,906,262,904,267,776,216"/>
+<area shape="rect" id="Node000014" href="/home/runner/work/open62541pp/open62541pp/build/doxygen_open62541/open62541.tag$types_8h.html" title=" " alt="" coords="1065,269,1212,295"/>
+<area shape="poly" id="edge15_Node000010_Node000014" title=" " alt="" coords="805,211,1069,264,1068,269,804,217"/>
+<area shape="rect" id="Node000015" href="/home/runner/work/open62541pp/open62541pp/build/doxygen_open62541/open62541.tag$types__generated_8h.html" title=" " alt="" coords="1236,269,1455,295"/>
+<area shape="poly" id="edge16_Node000010_Node000015" title=" " alt="" coords="835,211,1245,265,1245,270,835,217"/>
 </map>

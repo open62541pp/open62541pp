@@ -6,9 +6,8 @@ var searchData=
   ['network_5fws_2eh_3',['network_ws.h',['open62541/network__ws_8h.html',0,'']]],
   ['node_2eh_4',['Node.h',['../Node_8h.html',1,'']]],
   ['nodeid_2eh_5',['NodeId.h',['../NodeId_8h.html',1,'']]],
-  ['nodeids_2eh_6',['NodeIds.h',['../NodeIds_8h.html',1,'']]],
-  ['nodeids_2eh_7',['nodeids.h',['open62541/nodeids_8h.html',0,'']]],
-  ['nodemanagement_2eh_8',['NodeManagement.h',['../NodeManagement_8h.html',1,'']]],
-  ['nodestore_2eh_9',['nodestore.h',['open62541/nodestore_8h.html',0,'']]],
-  ['nodestore_5fdefault_2eh_10',['nodestore_default.h',['open62541/nodestore__default_8h.html',0,'']]]
+  ['nodeids_2eh_6',['nodeids.h',['../NodeIds_8h.html',1,'(Global Namespace)'],['open62541/nodeids_8h.html',0,'(Global Namespace)']]],
+  ['nodemanagement_2eh_7',['NodeManagement.h',['../NodeManagement_8h.html',1,'']]],
+  ['nodestore_2eh_8',['nodestore.h',['open62541/nodestore_8h.html',0,'']]],
+  ['nodestore_5fdefault_2eh_9',['nodestore_default.h',['open62541/nodestore__default_8h.html',0,'']]]
 ];

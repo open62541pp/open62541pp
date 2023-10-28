@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['usertokentype_0',['UserTokenType',['../namespaceopcua.html#a60d6286ecbbf42a472d98907c515c409',1,'opcua']]]
+  ['timestampstoreturn_0',['TimestampsToReturn',['../namespaceopcua.html#a5fe27bb15f3e5712b9f2dbe2b090b304',1,'opcua']]],
+  ['type_1',['Type',['../namespaceopcua.html#a83669427d4f4639c57ec0b499c5fdc10',1,'opcua']]]
 ];

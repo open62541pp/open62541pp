@@ -1,8 +1,5 @@
 <map id="/home/runner/work/open62541pp/open62541pp/include/open62541pp/Session.h" name="/home/runner/work/open62541pp/open62541pp/include/open62541pp/Session.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="88,5,345,60"/>
-<area shape="rect" id="Node000002" href="$AccessControl_8h.html" title=" " alt="" coords="5,108,263,163"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="188,72,158,110,154,106,184,69"/>
-<area shape="rect" id="Node000003" href="$open62541pp_8h.html" title=" " alt="" coords="88,211,345,265"/>
-<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="255,69,268,87,278,107,284,135,278,164,264,190,247,212,242,209,260,187,273,162,279,135,273,109,264,90,251,72"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="166,172,197,209,193,212,162,175"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,263,60"/>
+<area shape="rect" id="Node000002" href="$open62541pp_8h.html" title=" " alt="" coords="5,108,263,163"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="137,74,137,108,131,108,131,74"/>
 </map>

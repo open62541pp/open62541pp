@@ -1,26 +1,5 @@
 var searchData=
 [
-  ['z_0',['z',['../structmessage.html#af5da9cce34dd5c3068475f53d4d733fa',1,'message']]],
-  ['zip_5fcmp_1',['ZIP_CMP',['../ziptree_8h.html#a407a7df5c5bf26a848f1b1ac2a2a1b5c',1,'ziptree.h']]],
-  ['zip_5fcmp_5fcb_2',['zip_cmp_cb',['../ziptree_8h.html#a60749c5d35181da1378b6ae091b1c24e',1,'ziptree.h']]],
-  ['zip_5fcmp_5feq_3',['ZIP_CMP_EQ',['../ziptree_8h.html#a407a7df5c5bf26a848f1b1ac2a2a1b5ca9e08b71dd71f719aa68e4aa41a51448f',1,'ziptree.h']]],
-  ['zip_5fcmp_5fless_4',['ZIP_CMP_LESS',['../ziptree_8h.html#a407a7df5c5bf26a848f1b1ac2a2a1b5ca8c39768fa7e90f2d9bfa6891ff3f11e4',1,'ziptree.h']]],
-  ['zip_5fcmp_5fmore_5',['ZIP_CMP_MORE',['../ziptree_8h.html#a407a7df5c5bf26a848f1b1ac2a2a1b5caf1ea2b023f23423a8425766caf962cb6',1,'ziptree.h']]],
-  ['zip_5fentry_6',['ZIP_ENTRY',['../structRefEntry.html#af4cbc5615ad5d80202ddbca2f79c5cb6',1,'RefEntry::ZIP_ENTRY()'],['../ziptree_8h.html#aa29a43c2c3a45f784642f5303bd5d96c',1,'ZIP_ENTRY:&#160;ziptree.h']]],
-  ['zip_5ffind_7',['ZIP_FIND',['../ziptree_8h.html#a8611e8e86453459dea309411bada6498',1,'ziptree.h']]],
-  ['zip_5ffunctions_8',['ZIP_FUNCTIONS',['../ziptree_8h.html#ac1bd36d61d4608b2c1299258a62b9bd9',1,'ziptree.h']]],
-  ['zip_5fhead_9',['ZIP_HEAD',['../ua__server__internal_8h.html#a769bfb04d625c6add2b402bb4aa2be67',1,'ZIP_HEAD(RefHead, RefEntry):&#160;ua_server_internal.h'],['../ziptree_8h.html#a11d5b2cd9d32e36b1e58e6d13846a8b3',1,'ZIP_HEAD:&#160;ziptree.h']]],
-  ['zip_5finit_10',['ZIP_INIT',['../ziptree_8h.html#adcc7df8d7a17f85c84626b9dd26244a7',1,'ziptree.h']]],
-  ['zip_5finline_11',['ZIP_INLINE',['../ziptree_8h.html#afb01a2bd78edb72a7adfd4dbb301ad89',1,'ziptree.h']]],
-  ['zip_5finsert_12',['ZIP_INSERT',['../ziptree_8h.html#ab000c3c53ea3c32a703849f15dc62013',1,'ziptree.h']]],
-  ['zip_5fiter_13',['ZIP_ITER',['../ziptree_8h.html#ac93e4e9a55b3145fdc525034e47886d4',1,'ziptree.h']]],
-  ['zip_5fleft_14',['ZIP_LEFT',['../ziptree_8h.html#a433e295a0e07d6014ea0437d45c30908',1,'ziptree.h']]],
-  ['zip_5fmax_15',['ZIP_MAX',['../ziptree_8h.html#a6159e5fbdd4de1df7035835120797ae8',1,'ziptree.h']]],
-  ['zip_5fmin_16',['ZIP_MIN',['../ziptree_8h.html#a69ea35b1ce9a81b72af1d16866ce9ec1',1,'ziptree.h']]],
-  ['zip_5frank_17',['ZIP_RANK',['../ziptree_8h.html#a3b3eac113b00bf3aa8ae8f7f9bf7a3aa',1,'ziptree.h']]],
-  ['zip_5fremove_18',['ZIP_REMOVE',['../ziptree_8h.html#ade9bed4dd29b35890ce65c195220353d',1,'ziptree.h']]],
-  ['zip_5fright_19',['ZIP_RIGHT',['../ziptree_8h.html#aebbc3cfc0464b828546f960d2daea553',1,'ziptree.h']]],
-  ['zip_5froot_20',['ZIP_ROOT',['../ziptree_8h.html#a7ccbff25437de80bbb3ea7a7de6bdf30',1,'ziptree.h']]],
-  ['zip_5funused_21',['ZIP_UNUSED',['../ziptree_8h.html#a83f70964e777e1c3eb655989427ab853',1,'ziptree.h']]],
-  ['ziptree_2eh_22',['ziptree.h',['../ziptree_8h.html',1,'']]]
+  ['year_0',['year',['../structUA__DateTimeStruct.html#a770b483a1e65dfb8c4992e1a79dc35ee',1,'UA_DateTimeStruct']]],
+  ['yield_1',['yield',['../structUA__PubSubChannel.html#aa11aa8fa0db9f1a43a4b1353b67489b4',1,'UA_PubSubChannel']]]
 ];

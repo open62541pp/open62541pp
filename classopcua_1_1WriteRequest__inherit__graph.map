@@ -1,0 +1,5 @@
+<map id="opcua::WriteRequest" name="opcua::WriteRequest">
+<area shape="rect" id="Node000001" title="UA_WriteRequest wrapper class." alt="" coords="24,108,181,133"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,5,200,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="105,74,105,108,100,108,100,74"/>
+</map>

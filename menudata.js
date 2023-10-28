@@ -30,6 +30,7 @@ var menudata={children:[
 {text:"Node",url:"classopcua_1_1Node.html"},
 {text:"Wrapper",url:"group__TypeWrapper.html"},
 {text:"Services",url:"group__Services.html"},
+{text:"NodeIds",url:"group__NodeIds.html"},
 {text:"API Reference",url:"usergroup0.html",children:[
 {text:"Namespace List",url:"namespaces.html",children:[
 {text:"Namespace List",url:"namespaces.html"},
