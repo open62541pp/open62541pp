@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.10.0] - 2023-10-28
+
+### Added
+
+- Event filter (#101)
+  - Add filter wrapper types: `ContentFilterElement`, `ContentFilter`, `DataChangeFilter`, `EventFilter`, `AggregateFilter`
+  - Example how to filter events client-side: `client_eventfilter`
+- Bundle multiple read/write requests (#103)
+  - Add `DiagnosticInfo `wrapper
+  - Add missing request/response wrapper
+  - Add `services::read` function overload for bundled read requests
+  - Add `services::write` function overload for bundled write requests
+- Non-const getter for composed types (#106)
+- GCC 7 support (#110)
+- Update open62541 to v1.3.8 (#115)
+
 ## [0.9.0] - 2023-08-29
 
 ### Added
@@ -16,7 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Spans are views of contiguous sequences of objects, similar to [`std::span`](https://en.cppreference.com/w/cpp/container/span) in C++20. Differences to `std::span`:
     - Constructor with `std::initializer_list<T>`
     - Explicit conversion to `std::vector<T>`
-- `Node::exists` method with most efficient implementation to check node existance (#92)
+- `Node::exists` method with most efficient implementation to check node existence (#92)
 - Conversions from `string_view`, `const char*`, `char[N]` to `UA_String` (#98)
 - `Event` class to create and trigger events (#99)
 - `Server::createEvent` method (#99)
@@ -45,7 +61,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Remove getters for array size, e.g.:
     - `DataType::getMembersSize()`, use `DataType::getMembers().size()` instead
 - Deprecate type-erased versions of `Variant::getScalar()` and `Variant::getArray()`, use `Variant::data()` instead (#86)
-- Remove existance check from `Node` constructor (#92)
+- Remove existence check from `Node` constructor (#92)
 
 ## [0.8.0] - 2023-08-21
 
@@ -358,7 +374,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial public release
 
-[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.9.0...HEAD
+[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.10.0...HEAD
+[0.10.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.10.0
 [0.9.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.9.0
 [0.8.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.8.0
 [0.7.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.7.0
