@@ -31,7 +31,7 @@ namespace opcua::services {
  * @ingroup NodeManagement
  */
 template <typename T>
-void addObject(
+NodeId addObject(
     T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
@@ -72,7 +72,7 @@ inline void addFolder(
  * @ingroup NodeManagement
  */
 template <typename T>
-void addVariable(
+NodeId addVariable(
     T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
@@ -122,7 +122,7 @@ using MethodCallback = std::function<void(Span<const Variant> input, Span<Varian
  * @ingroup NodeManagement
  */
 template <typename T>
-void addMethod(
+NodeId addMethod(
     T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
@@ -141,7 +141,7 @@ void addMethod(
  * @ingroup NodeManagement
  */
 template <typename T>
-void addObjectType(
+NodeId addObjectType(
     T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
@@ -156,7 +156,7 @@ void addObjectType(
  * @ingroup NodeManagement
  */
 template <typename T>
-void addVariableType(
+NodeId addVariableType(
     T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
@@ -172,7 +172,7 @@ void addVariableType(
  * @ingroup NodeManagement
  */
 template <typename T>
-void addReferenceType(
+NodeId addReferenceType(
     T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
@@ -187,7 +187,7 @@ void addReferenceType(
  * @ingroup NodeManagement
  */
 template <typename T>
-void addDataType(
+NodeId addDataType(
     T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
@@ -202,7 +202,7 @@ void addDataType(
  * @ingroup NodeManagement
  */
 template <typename T>
-void addView(
+NodeId addView(
     T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
