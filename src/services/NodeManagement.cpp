@@ -34,7 +34,7 @@ NodeId addObject<Server>(
         objectType,
         attributes,
         nullptr,  // node context
-        outputNodeId.handle()  // output new node id
+        outputNodeId.handle()
     );
     detail::throwOnBadStatus(status);
     return outputNodeId;
@@ -85,7 +85,7 @@ NodeId addVariable<Server>(
         variableType,
         attributes,
         nullptr,  // node context
-        outputNodeId.handle()  // output new node id
+        outputNodeId.handle()
     );
     detail::throwOnBadStatus(status);
     return outputNodeId;
@@ -110,7 +110,7 @@ NodeId addVariable<Client>(
         QualifiedName(id.getNamespaceIndex(), browseName),
         variableType,
         attributes,
-        outputNodeId.handle()  // output new node id
+        outputNodeId.handle()
     );
     detail::throwOnBadStatus(status);
     return outputNodeId;
@@ -224,7 +224,7 @@ NodeId addObjectType<Server>(
         QualifiedName(id.getNamespaceIndex(), browseName),
         attributes,
         nullptr,  // node context
-        outputNodeId.handle()  // output new node id
+        outputNodeId.handle()
     );
     detail::throwOnBadStatus(status);
     return outputNodeId;
@@ -247,7 +247,7 @@ NodeId addObjectType<Client>(
         referenceType,
         QualifiedName(id.getNamespaceIndex(), browseName),
         attributes,
-        outputNodeId.handle()  // output new node id
+        outputNodeId.handle()
     );
     detail::throwOnBadStatus(status);
     return outputNodeId;
@@ -273,7 +273,7 @@ NodeId addVariableType<Server>(
         variableType,
         attributes,
         nullptr,  // node context
-        outputNodeId.handle()  // output new node id
+        outputNodeId.handle()
     );
     detail::throwOnBadStatus(status);
     return outputNodeId;
@@ -297,7 +297,7 @@ NodeId addVariableType<Client>(
         referenceType,
         QualifiedName(id.getNamespaceIndex(), browseName),
         attributes,
-        outputNodeId.handle()  // output new node id
+        outputNodeId.handle()
     );
     detail::throwOnBadStatus(status);
     return outputNodeId;
@@ -321,7 +321,7 @@ NodeId addReferenceType<Server>(
         QualifiedName(id.getNamespaceIndex(), browseName),
         attributes,
         nullptr,  // node context
-        outputNodeId.handle()  // output new node id
+        outputNodeId.handle()
     );
     detail::throwOnBadStatus(status);
     return outputNodeId;
@@ -344,7 +344,7 @@ NodeId addReferenceType<Client>(
         referenceType,
         QualifiedName(id.getNamespaceIndex(), browseName),
         attributes,
-        outputNodeId.handle()  // output new node id
+        outputNodeId.handle()
     );
     detail::throwOnBadStatus(status);
     return outputNodeId;
@@ -368,7 +368,7 @@ NodeId addDataType<Server>(
         QualifiedName(id.getNamespaceIndex(), browseName),
         attributes,
         nullptr,  // node context
-        outputNodeId.handle()  // output new node id
+        outputNodeId.handle()
     );
     detail::throwOnBadStatus(status);
     return outputNodeId;
@@ -391,7 +391,7 @@ NodeId addDataType<Client>(
         referenceType,
         QualifiedName(id.getNamespaceIndex(), browseName),
         attributes,
-        outputNodeId.handle()  // output new node id
+        outputNodeId.handle()
     );
     detail::throwOnBadStatus(status);
     return outputNodeId;
@@ -415,7 +415,7 @@ NodeId addView<Server>(
         QualifiedName(id.getNamespaceIndex(), browseName),
         attributes,
         nullptr,  // node context
-        outputNodeId.handle()  // output new node id
+        outputNodeId.handle()
     );
     detail::throwOnBadStatus(status);
     return outputNodeId;
@@ -438,7 +438,7 @@ NodeId addView<Client>(
         referenceType,
         QualifiedName(id.getNamespaceIndex(), browseName),
         attributes,
-        outputNodeId.handle()  // output new node id
+        outputNodeId.handle()
     );
     detail::throwOnBadStatus(status);
     return outputNodeId;
