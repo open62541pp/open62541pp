@@ -47,7 +47,7 @@ NodeId addObject(
  * @ingroup NodeManagement
  */
 template <typename T>
-inline void addFolder(
+inline NodeId addFolder(
     T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
@@ -55,7 +55,7 @@ inline void addFolder(
     const ObjectAttributes& attributes = {},
     const NodeId& referenceType = ReferenceTypeId::HasComponent
 ) {
-    addObject(
+    return addObject(
         serverOrClient,
         parentId,
         id,
@@ -88,14 +88,14 @@ NodeId addVariable(
  * @ingroup NodeManagement
  */
 template <typename T>
-inline void addProperty(
+inline NodeId addProperty(
     T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
     const VariableAttributes& attributes = {}
 ) {
-    addVariable(
+    return addVariable(
         serverOrClient,
         parentId,
         id,
