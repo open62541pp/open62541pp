@@ -29,77 +29,75 @@ TEST_CASE("NodeManagement service set (server & client)") {
 
     const auto testNodeManagement = [&](auto& serverOrClient) {
         SUBCASE("Non-type nodes") {
-            CHECK_EQ(
-                services::addObject(serverOrClient, objectsId, {1, 1000}, "object"), NodeId(1, 1000)
+            CHECK(
+                services::addObject(serverOrClient, objectsId, {1, 1000}, "object") ==
+                NodeId(1, 1000)
             );
-            CHECK_EQ(services::readNodeClass(server, {1, 1000}), NodeClass::Object);
+            CHECK(services::readNodeClass(server, {1, 1000}) == NodeClass::Object);
 
-            CHECK_EQ(
-                services::addFolder(serverOrClient, objectsId, {1, 1001}, "folder"), NodeId(1, 1001)
+            CHECK(
+                services::addFolder(serverOrClient, objectsId, {1, 1001}, "folder") ==
+                NodeId(1, 1001)
             );
-            CHECK_EQ(services::readNodeClass(server, {1, 1001}), NodeClass::Object);
+            CHECK(services::readNodeClass(server, {1, 1001}) == NodeClass::Object);
 
-            CHECK_EQ(
-                services::addVariable(serverOrClient, objectsId, {1, 1002}, "variable"),
+            CHECK(
+                services::addVariable(serverOrClient, objectsId, {1, 1002}, "variable") ==
                 NodeId(1, 1002)
             );
-            CHECK_EQ(services::readNodeClass(server, {1, 1002}), NodeClass::Variable);
+            CHECK(services::readNodeClass(server, {1, 1002}) == NodeClass::Variable);
 
-            CHECK_EQ(
-                services::addProperty(serverOrClient, objectsId, {1, 1003}, "property"),
+            CHECK(
+                services::addProperty(serverOrClient, objectsId, {1, 1003}, "property") ==
                 NodeId(1, 1003)
             );
-            CHECK_EQ(services::readNodeClass(server, {1, 1003}), NodeClass::Variable);
+            CHECK(services::readNodeClass(server, {1, 1003}) == NodeClass::Variable);
 
 #ifdef UA_ENABLE_METHODCALLS
-            CHECK_EQ(
-                services::addMethod(serverOrClient, objectsId, {1, 1004}, "method", {}, {}, {}),
+            CHECK(
+                services::addMethod(serverOrClient, objectsId, {1, 1004}, "method", {}, {}, {}) ==
                 NodeId(1, 1004)
             );
-            CHECK_EQ(services::readNodeClass(server, {1, 1004}), NodeClass::Method);
+            CHECK(services::readNodeClass(server, {1, 1004}) == NodeClass::Method);
 #endif
         }
 
         SUBCASE("Type nodes") {
-            CHECK_EQ(
+            CHECK(
                 services::addObjectType(
                     serverOrClient, {0, UA_NS0ID_BASEOBJECTTYPE}, {1, 1000}, "objecttype"
-                ),
-                NodeId(1, 1000)
+                ) == NodeId(1, 1000)
             );
-            CHECK_EQ(services::readNodeClass(server, {1, 1000}), NodeClass::ObjectType);
+            CHECK(services::readNodeClass(server, {1, 1000}) == NodeClass::ObjectType);
 
-            CHECK_EQ(
+            CHECK(
                 services::addVariableType(
                     serverOrClient, {0, UA_NS0ID_BASEVARIABLETYPE}, {1, 1001}, "variabletype"
-                ),
-                NodeId(1, 1001)
+                ) == NodeId(1, 1001)
             );
-            CHECK_EQ(services::readNodeClass(server, {1, 1001}), NodeClass::VariableType);
+            CHECK(services::readNodeClass(server, {1, 1001}) == NodeClass::VariableType);
 
-            CHECK_EQ(
+            CHECK(
                 services::addReferenceType(
                     serverOrClient, {0, UA_NS0ID_ORGANIZES}, {1, 1002}, "referenceType"
-                ),
-                NodeId(1, 1002)
+                ) == NodeId(1, 1002)
             );
-            CHECK_EQ(services::readNodeClass(server, {1, 1002}), NodeClass::ReferenceType);
+            CHECK(services::readNodeClass(server, {1, 1002}) == NodeClass::ReferenceType);
 
-            CHECK_EQ(
+            CHECK(
                 services::addDataType(
                     serverOrClient, {0, UA_NS0ID_STRUCTURE}, {1, 1003}, "dataType"
-                ),
-                NodeId(1, 1003)
+                ) == NodeId(1, 1003)
             );
-            CHECK_EQ(services::readNodeClass(server, {1, 1003}), NodeClass::DataType);
+            CHECK(services::readNodeClass(server, {1, 1003}) == NodeClass::DataType);
         }
 
         SUBCASE("View nodes") {
-            CHECK_EQ(
-                services::addView(serverOrClient, {0, UA_NS0ID_VIEWSFOLDER}, {1, 1000}, "view"),
+            CHECK(
+                services::addView(serverOrClient, {0, UA_NS0ID_VIEWSFOLDER}, {1, 1000}, "view") ==
                 NodeId(1, 1000)
             );
-            CHECK_EQ(services::readNodeClass(server, {1, 1000}), NodeClass::View);
+            CHECK(services::readNodeClass(server, {1, 1000}) == NodeClass::View);
         }
 
         SUBCASE("Random node id") {
