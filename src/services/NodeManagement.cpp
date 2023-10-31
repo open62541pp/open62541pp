@@ -15,7 +15,7 @@
 namespace opcua::services {
 
 template <>
-void addObject<Server>(
+NodeId addObject<Server>(
     Server& server,
     const NodeId& parentId,
     const NodeId& id,
@@ -24,6 +24,7 @@ void addObject<Server>(
     const NodeId& objectType,
     const NodeId& referenceType
 ) {
+    NodeId outputNodeId;
     const auto status = UA_Server_addObjectNode(
         server.handle(),
         id,
@@ -33,13 +34,14 @@ void addObject<Server>(
         objectType,
         attributes,
         nullptr,  // node context
-        nullptr  // output new node id
+        outputNodeId.handle()  // output new node id
     );
     detail::throwOnBadStatus(status);
+    return outputNodeId;
 }
 
 template <>
-void addObject<Client>(
+NodeId addObject<Client>(
     Client& client,
     const NodeId& parentId,
     const NodeId& id,
@@ -48,6 +50,7 @@ void addObject<Client>(
     const NodeId& objectType,
     const NodeId& referenceType
 ) {
+    NodeId outputNodeId;
     const auto status = UA_Client_addObjectNode(
         client.handle(),
         id,
@@ -56,13 +59,14 @@ void addObject<Client>(
         QualifiedName(id.getNamespaceIndex(), browseName),
         objectType,
         attributes,
-        nullptr  // output new node id
+        outputNodeId.handle()
     );
     detail::throwOnBadStatus(status);
+    return outputNodeId;
 }
 
 template <>
-void addVariable<Server>(
+NodeId addVariable<Server>(
     Server& server,
     const NodeId& parentId,
     const NodeId& id,
@@ -71,6 +75,7 @@ void addVariable<Server>(
     const NodeId& variableType,
     const NodeId& referenceType
 ) {
+    NodeId outputNodeId;
     const auto status = UA_Server_addVariableNode(
         server.handle(),
         id,
@@ -80,13 +85,14 @@ void addVariable<Server>(
         variableType,
         attributes,
         nullptr,  // node context
-        nullptr  // output new node id
+        outputNodeId.handle()  // output new node id
     );
     detail::throwOnBadStatus(status);
+    return outputNodeId;
 }
 
 template <>
-void addVariable<Client>(
+NodeId addVariable<Client>(
     Client& client,
     const NodeId& parentId,
     const NodeId& id,
@@ -95,6 +101,7 @@ void addVariable<Client>(
     const NodeId& variableType,
     const NodeId& referenceType
 ) {
+    NodeId outputNodeId;
     const auto status = UA_Client_addVariableNode(
         client.handle(),
         id,
@@ -103,9 +110,10 @@ void addVariable<Client>(
         QualifiedName(id.getNamespaceIndex(), browseName),
         variableType,
         attributes,
-        nullptr  // output new node id
+        outputNodeId.handle()  // output new node id
     );
     detail::throwOnBadStatus(status);
+    return outputNodeId;
 }
 
 #ifdef UA_ENABLE_METHODCALLS
@@ -136,7 +144,7 @@ static UA_StatusCode methodCallback(
 }
 
 template <>
-void addMethod(
+NodeId addMethod(
     Server& server,
     const NodeId& parentId,
     const NodeId& id,
@@ -149,6 +157,7 @@ void addMethod(
 ) {
     auto* nodeContext = server.getContext().getOrCreateNodeContext(id);
     nodeContext->methodCallback = std::move(callback);
+    NodeId outputNodeId;
     const auto status = UA_Server_addMethodNode(
         server.handle(),
         id,
@@ -162,13 +171,14 @@ void addMethod(
         outputArguments.size(),
         asNative(outputArguments.data()),
         nodeContext,
-        nullptr  // outNewNodeId
+        outputNodeId.handle()  // outNewNodeId
     );
     detail::throwOnBadStatus(status);
+    return outputNodeId;
 }
 
 template <>
-void addMethod(
+NodeId addMethod(
     Client& client,
     const NodeId& parentId,
     const NodeId& id,
@@ -179,6 +189,7 @@ void addMethod(
     const MethodAttributes& attributes,
     const NodeId& referenceType
 ) {
+    NodeId outputNodeId;
     // callback can be added later by server with UA_Server_setMethodNodeCallback
     // arguments can not be passed to UA_Client_addMethodNode... why?
     const auto status = UA_Client_addMethodNode(
@@ -188,14 +199,15 @@ void addMethod(
         referenceType,
         QualifiedName(id.getNamespaceIndex(), browseName),
         attributes,
-        nullptr  // outNewNodeId
+        outputNodeId.handle()  // outNewNodeId
     );
     detail::throwOnBadStatus(status);
+    return outputNodeId;
 }
 #endif
 
 template <>
-void addObjectType<Server>(
+NodeId addObjectType<Server>(
     Server& server,
     const NodeId& parentId,
     const NodeId& id,
@@ -203,6 +215,7 @@ void addObjectType<Server>(
     const ObjectTypeAttributes& attributes,
     const NodeId& referenceType
 ) {
+    NodeId outputNodeId;
     const auto status = UA_Server_addObjectTypeNode(
         server.handle(),
         id,
@@ -211,13 +224,14 @@ void addObjectType<Server>(
         QualifiedName(id.getNamespaceIndex(), browseName),
         attributes,
         nullptr,  // node context
-        nullptr  // output new node id
+        outputNodeId.handle()  // output new node id
     );
     detail::throwOnBadStatus(status);
+    return outputNodeId;
 }
 
 template <>
-void addObjectType<Client>(
+NodeId addObjectType<Client>(
     Client& client,
     const NodeId& parentId,
     const NodeId& id,
@@ -225,6 +239,7 @@ void addObjectType<Client>(
     const ObjectTypeAttributes& attributes,
     const NodeId& referenceType
 ) {
+    NodeId outputNodeId;
     const auto status = UA_Client_addObjectTypeNode(
         client.handle(),
         id,
@@ -232,13 +247,14 @@ void addObjectType<Client>(
         referenceType,
         QualifiedName(id.getNamespaceIndex(), browseName),
         attributes,
-        nullptr  // output new node id
+        outputNodeId.handle()  // output new node id
     );
     detail::throwOnBadStatus(status);
+    return outputNodeId;
 }
 
 template <>
-void addVariableType<Server>(
+NodeId addVariableType<Server>(
     Server& server,
     const NodeId& parentId,
     const NodeId& id,
@@ -247,6 +263,7 @@ void addVariableType<Server>(
     const NodeId& variableType,
     const NodeId& referenceType
 ) {
+    NodeId outputNodeId;
     const auto status = UA_Server_addVariableTypeNode(
         server.handle(),
         id,
@@ -256,13 +273,14 @@ void addVariableType<Server>(
         variableType,
         attributes,
         nullptr,  // node context
-        nullptr  // output new node id
+        outputNodeId.handle()  // output new node id
     );
     detail::throwOnBadStatus(status);
+    return outputNodeId;
 }
 
 template <>
-void addVariableType<Client>(
+NodeId addVariableType<Client>(
     Client& client,
     const NodeId& parentId,
     const NodeId& id,
@@ -271,6 +289,7 @@ void addVariableType<Client>(
     [[maybe_unused]] const NodeId& variableType,
     const NodeId& referenceType
 ) {
+    NodeId outputNodeId;
     const auto status = UA_Client_addVariableTypeNode(
         client.handle(),
         id,
@@ -278,13 +297,14 @@ void addVariableType<Client>(
         referenceType,
         QualifiedName(id.getNamespaceIndex(), browseName),
         attributes,
-        nullptr  // output new node id
+        outputNodeId.handle()  // output new node id
     );
     detail::throwOnBadStatus(status);
+    return outputNodeId;
 }
 
 template <>
-void addReferenceType<Server>(
+NodeId addReferenceType<Server>(
     Server& server,
     const NodeId& parentId,
     const NodeId& id,
@@ -292,6 +312,7 @@ void addReferenceType<Server>(
     const ReferenceTypeAttributes& attributes,
     const NodeId& referenceType
 ) {
+    NodeId outputNodeId;
     const auto status = UA_Server_addReferenceTypeNode(
         server.handle(),
         id,
@@ -300,13 +321,14 @@ void addReferenceType<Server>(
         QualifiedName(id.getNamespaceIndex(), browseName),
         attributes,
         nullptr,  // node context
-        nullptr  // output new node id
+        outputNodeId.handle()  // output new node id
     );
     detail::throwOnBadStatus(status);
+    return outputNodeId;
 }
 
 template <>
-void addReferenceType<Client>(
+NodeId addReferenceType<Client>(
     Client& client,
     const NodeId& parentId,
     const NodeId& id,
@@ -314,6 +336,7 @@ void addReferenceType<Client>(
     const ReferenceTypeAttributes& attributes,
     const NodeId& referenceType
 ) {
+    NodeId outputNodeId;
     const auto status = UA_Client_addReferenceTypeNode(
         client.handle(),
         id,
@@ -321,13 +344,14 @@ void addReferenceType<Client>(
         referenceType,
         QualifiedName(id.getNamespaceIndex(), browseName),
         attributes,
-        nullptr  // output new node id
+        outputNodeId.handle()  // output new node id
     );
     detail::throwOnBadStatus(status);
+    return outputNodeId;
 }
 
 template <>
-void addDataType<Server>(
+NodeId addDataType<Server>(
     Server& server,
     const NodeId& parentId,
     const NodeId& id,
@@ -335,6 +359,7 @@ void addDataType<Server>(
     const DataTypeAttributes& attributes,
     const NodeId& referenceType
 ) {
+    NodeId outputNodeId;
     const auto status = UA_Server_addDataTypeNode(
         server.handle(),
         id,
@@ -343,13 +368,14 @@ void addDataType<Server>(
         QualifiedName(id.getNamespaceIndex(), browseName),
         attributes,
         nullptr,  // node context
-        nullptr  // output new node id
+        outputNodeId.handle()  // output new node id
     );
     detail::throwOnBadStatus(status);
+    return outputNodeId;
 }
 
 template <>
-void addDataType<Client>(
+NodeId addDataType<Client>(
     Client& client,
     const NodeId& parentId,
     const NodeId& id,
@@ -357,6 +383,7 @@ void addDataType<Client>(
     const DataTypeAttributes& attributes,
     const NodeId& referenceType
 ) {
+    NodeId outputNodeId;
     const auto status = UA_Client_addDataTypeNode(
         client.handle(),
         id,
@@ -364,13 +391,14 @@ void addDataType<Client>(
         referenceType,
         QualifiedName(id.getNamespaceIndex(), browseName),
         attributes,
-        nullptr  // output new node id
+        outputNodeId.handle()  // output new node id
     );
     detail::throwOnBadStatus(status);
+    return outputNodeId;
 }
 
 template <>
-void addView<Server>(
+NodeId addView<Server>(
     Server& server,
     const NodeId& parentId,
     const NodeId& id,
@@ -378,6 +406,7 @@ void addView<Server>(
     const ViewAttributes& attributes,
     const NodeId& referenceType
 ) {
+    NodeId outputNodeId;
     const auto status = UA_Server_addViewNode(
         server.handle(),
         id,
@@ -386,13 +415,14 @@ void addView<Server>(
         QualifiedName(id.getNamespaceIndex(), browseName),
         attributes,
         nullptr,  // node context
-        nullptr  // output new node id
+        outputNodeId.handle()  // output new node id
     );
     detail::throwOnBadStatus(status);
+    return outputNodeId;
 }
 
 template <>
-void addView<Client>(
+NodeId addView<Client>(
     Client& client,
     const NodeId& parentId,
     const NodeId& id,
@@ -400,6 +430,7 @@ void addView<Client>(
     const ViewAttributes& attributes,
     const NodeId& referenceType
 ) {
+    NodeId outputNodeId;
     const auto status = UA_Client_addViewNode(
         client.handle(),
         id,
@@ -407,9 +438,10 @@ void addView<Client>(
         referenceType,
         QualifiedName(id.getNamespaceIndex(), browseName),
         attributes,
-        nullptr  // output new node id
+        outputNodeId.handle()  // output new node id
     );
     detail::throwOnBadStatus(status);
+    return outputNodeId;
 }
 
 template <>
