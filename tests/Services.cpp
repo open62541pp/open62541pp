@@ -104,13 +104,9 @@ TEST_CASE("NodeManagement service set (server & client)") {
 
         SUBCASE("Random node id") {
             // https://www.open62541.org/doc/1.3/server.html#node-addition-and-deletion
-            CHECK(
-                services::addObject(serverOrClient, objectsId, {1, 0}, "random1") != NodeId(1, 0)
-            );
-            CHECK(
-                services::addObject(serverOrClient, objectsId, {1, 0}, "random2")
-                    .getNamespaceIndex() == 1
-            );
+            const auto id = services::addObject(serverOrClient, objectsId, {1, 0}, "random");
+            CHECK(id != NodeId(1, 0));
+            CHECK(id.getNamespaceIndex() == 1);
         }
 
         SUBCASE("Add/delete reference") {
