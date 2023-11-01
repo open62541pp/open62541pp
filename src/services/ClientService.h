@@ -14,44 +14,63 @@
 
 namespace opcua::services {
 
-template <typename Request, typename Response, typename F>
-auto sendRequest(
-    Client& client,
-    const Request& request,
-    F&& transformResponse = [](Response&& response) { return response; }
-) {
+template <typename Response>
+struct ForwardResponse {
+    constexpr Response operator()(Response& response) noexcept {
+        return response;
+    }
+
+    constexpr Response operator()(Response&& response) noexcept {
+        return response;
+    }
+};
+
+template <typename Request, typename Response, typename Fn>
+auto sendRequest(Client& client, const Request& request, Fn&& transformResponse) {
     static_assert(detail::isNativeType<Request>());
     static_assert(detail::isNativeType<Response>());
 
-    // use wrapper to automatically clean up response
-    constexpr auto typeIndexResponse = TypeConverter<Response>::ValidTypes::toArray().at(0);
-    TypeWrapper<Response, typeIndexResponse> response;
+    constexpr bool rvalue = std::is_invocable_v<Fn, Response&&>;
+
+    Response response{};
+    auto clearResponse = [&] { UA_clear(&response, &detail::guessDataType<Response>()); };
 
     __UA_Client_Service(
         client.handle(),
         &request,
         &detail::guessDataType<Request>(),
-        response.handle(),
+        &response,
         &detail::guessDataType<Response>()
     );
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
-    return transformResponse(response);
+
+    try {
+        detail::throwOnBadStatus(response.responseHeader.serviceResult);
+        if constexpr (rvalue) {
+            // move ownership to callback
+            // static_assert(std::is_nothrow_invocable_v<Fn, Response&&>);
+            return transformResponse(std::move(response));
+        } else {
+            auto result = transformResponse(response);
+            clearResponse();
+            return result;
+        }
+    } catch (...) {
+        clearResponse();
+        throw;
+    }
 }
 
-template <typename Request, typename Response, typename F>
-auto sendAsyncRequest(
-    Client& client,
-    const Request& request,
-    F&& transformResponse = [](Response&& response) { return response; }
-) {
+template <typename Request, typename Response, typename Fn>
+auto sendAsyncRequest(Client& client, const Request& request, Fn&& transformResponse) {
     static_assert(detail::isNativeType<Request>());
     static_assert(detail::isNativeType<Response>());
 
-    using Result = std::invoke_result_t<F, Response&>;
+    constexpr bool rvalue = std::is_invocable_v<Fn, Response&&>;
+    using Result = std::invoke_result_t<Fn, std::conditional_t<rvalue, Response&&, Response&>>;
 
     struct CallbackContext {
         std::promise<Result> promise;
-        F transform;
+        Fn transform;
     };
 
     auto callbackContext = std::make_unique<CallbackContext>();
@@ -67,7 +86,13 @@ auto sendAsyncRequest(
             }
             auto& response = *static_cast<Response*>(responsePtr);
             detail::throwOnBadStatus(response.responseHeader.serviceResult);
-            promise.set_value((*context->transform)(response));
+            if constexpr (rvalue) {
+                Response responseMove;
+                std::swap(response, responseMove);
+                promise.set_value((*context->transform)(std::move(responseMove)));
+            } else {
+                promise.set_value((*context->transform)(response));
+            }
         } catch (...) {
             promise.set_exception(std::current_exception());
         }
