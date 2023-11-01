@@ -30,8 +30,6 @@ auto sendRequest(Client& client, const Request& request, Fn&& transformResponse)
     static_assert(detail::isNativeType<Request>());
     static_assert(detail::isNativeType<Response>());
 
-    constexpr bool rvalue = std::is_invocable_v<Fn, Response&&>;
-
     Response response{};
     auto clearResponse = [&] { UA_clear(&response, &detail::guessDataType<Response>()); };
 
@@ -45,7 +43,7 @@ auto sendRequest(Client& client, const Request& request, Fn&& transformResponse)
 
     try {
         detail::throwOnBadStatus(response.responseHeader.serviceResult);
-        if constexpr (rvalue) {
+        if constexpr (std::is_invocable_v<Fn, Response&&>) {
             // move ownership to callback
             // static_assert(std::is_nothrow_invocable_v<Fn, Response&&>);
             return transformResponse(std::move(response));
@@ -86,7 +84,7 @@ auto sendAsyncRequest(Client& client, const Request& request, Fn&& transformResp
             }
             auto& response = *static_cast<Response*>(responsePtr);
             detail::throwOnBadStatus(response.responseHeader.serviceResult);
-            if constexpr (rvalue) {
+            if constexpr (std::is_invocable_v<Fn, Response&&>) {
                 Response responseMove;
                 std::swap(response, responseMove);
                 promise.set_value((*context->transform)(std::move(responseMove)));
