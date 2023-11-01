@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.11.0] - 2023-11-01
+
+### Changed
+
+- Return output `NodeId` from node creation functions (#118):
+  - `services::addObject`
+  - `services::addFolder`
+  - `services::addVariable`
+  - `services::addProperty`
+  - `services::addMethod`
+  - `services::addObjectType`
+  - `services::addVariableType`
+  - `services::addReferenceType`
+  - `services::addDataType`
+  - `services::addView`
+
+### Fixed
+
+- Return *true* output `NodeId` from `Node::add*` methods to allow random node ids with e.g. `NodeId(1, 0)` (#118)
+
 ## [0.10.0] - 2023-10-28
 
 ### Added
@@ -374,7 +394,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial public release
 
-[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.10.0...HEAD
+[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.11.0...HEAD
+[0.11.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.11.0
 [0.10.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.10.0
 [0.9.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.9.0
 [0.8.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.8.0
