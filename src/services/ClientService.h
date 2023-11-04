@@ -29,6 +29,7 @@ template <typename Request, typename Response, typename Fn>
 auto sendRequest(Client& client, const Request& request, Fn&& transformResponse) {
     static_assert(detail::isNativeType<Request>());
     static_assert(detail::isNativeType<Response>());
+    static_assert(std::is_invocable_v<Fn, Response&> || std::is_invocable_v<Fn, Response&&>);
 
     Response response{};
     auto clearResponse = [&] { UA_clear(&response, &detail::guessDataType<Response>()); };
@@ -62,6 +63,7 @@ template <typename Request, typename Response, typename Fn>
 auto sendAsyncRequest(Client& client, const Request& request, Fn&& transformResponse) {
     static_assert(detail::isNativeType<Request>());
     static_assert(detail::isNativeType<Response>());
+    static_assert(std::is_invocable_v<Fn, Response&> || std::is_invocable_v<Fn, Response&&>);
 
     constexpr bool rvalue = std::is_invocable_v<Fn, Response&&>;
     using Result = std::invoke_result_t<Fn, std::conditional_t<rvalue, Response&&, Response&>>;
