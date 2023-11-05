@@ -2,12 +2,34 @@
 
 #include <algorithm>
 #include <cstddef>
+#include <string_view>
+#include <type_traits>
 
 #include "open62541pp/ErrorHandling.h"
 
 #include "../open62541_impl.h"
 
 namespace opcua {
+
+template <typename T, typename = std::enable_if_t<std::is_integral_v<T>>>
+static inline void assign(T src, T& dst) noexcept {
+    dst = src;
+}
+
+template <typename T, typename Native, typename = std::enable_if_t<std::is_enum_v<T>>>
+static inline void assign(T src, Native& dst) noexcept {
+    dst = static_cast<Native>(src);
+}
+
+static inline void assign(std::string_view src, UA_String& dst) {
+    asWrapper<String>(dst) = String(src);
+}
+
+template <typename T, typename Native, typename = std::enable_if_t<detail::IsTypeWrapper<T>::value>>
+static inline void assign(T&& src, Native& dst) {
+    static_assert(std::is_same_v<typename T::NativeType, Native>);
+    asWrapper<T>(dst) = std::forward<T>(src);
+}
 
 template <typename T, typename Native>
 static void copyArray(Span<const T> src, Native** dst, size_t& dstSize) {
@@ -78,26 +100,105 @@ DataTypeAttributes::DataTypeAttributes()
 ViewAttributes::ViewAttributes()
     : TypeWrapperBase(UA_ViewAttributes_default) {}
 
+AddNodesItem::AddNodesItem(
+    ExpandedNodeId parentNodeId,
+    NodeId referenceTypeId,
+    ExpandedNodeId requestedNewNodeId,
+    QualifiedName browseName,
+    NodeClass nodeClass,
+    ExtensionObject nodeAttributes,
+    ExpandedNodeId typeDefinition
+) {
+    assign(std::move(parentNodeId), handle()->parentNodeId);
+    assign(std::move(referenceTypeId), handle()->referenceTypeId);
+    assign(std::move(requestedNewNodeId), handle()->requestedNewNodeId);
+    assign(std::move(browseName), handle()->browseName);
+    assign(nodeClass, handle()->nodeClass);
+    assign(std::move(nodeAttributes), handle()->nodeAttributes);
+    assign(std::move(typeDefinition), handle()->typeDefinition);
+}
+
+AddNodesRequest::AddNodesRequest(RequestHeader requestHeader, Span<const AddNodesItem> nodesToAdd) {
+    assign(std::move(requestHeader), handle()->requestHeader);
+    copyArray(nodesToAdd, &handle()->nodesToAdd, handle()->nodesToAddSize);
+}
+
+AddReferencesItem::AddReferencesItem(
+    NodeId sourceNodeId,
+    NodeId referenceTypeId,
+    bool isForward,
+    std::string_view targetServerUri,
+    ExpandedNodeId targetNodeId,
+    NodeClass targetNodeClass
+) {
+    assign(std::move(sourceNodeId), handle()->sourceNodeId);
+    assign(std::move(referenceTypeId), handle()->referenceTypeId);
+    assign(isForward, handle()->isForward);
+    assign(targetServerUri, handle()->targetServerUri);
+    assign(std::move(targetNodeId), handle()->targetNodeId);
+    assign(targetNodeClass, handle()->targetNodeClass);
+}
+
+AddReferencesRequest::AddReferencesRequest(
+    RequestHeader requestHeader, Span<const AddReferencesItem> referencesToAdd
+) {
+    assign(std::move(requestHeader), handle()->requestHeader);
+    copyArray(referencesToAdd, &handle()->referencesToAdd, handle()->referencesToAddSize);
+}
+
+DeleteNodesItem::DeleteNodesItem(NodeId nodeId, bool deleteTargetReferences) {
+    assign(std::move(nodeId), handle()->nodeId);
+    assign(deleteTargetReferences, handle()->deleteTargetReferences);
+}
+
+DeleteNodesRequest::DeleteNodesRequest(
+    RequestHeader requestHeader, Span<const DeleteNodesItem> nodesToDelete
+) {
+    assign(std::move(requestHeader), handle()->requestHeader);
+    copyArray(nodesToDelete, &handle()->nodesToDelete, handle()->nodesToDeleteSize);
+}
+
+DeleteReferencesItem::DeleteReferencesItem(
+    NodeId sourceNodeId,
+    NodeId referenceTypeId,
+    bool isForward,
+    ExpandedNodeId targetNodeId,
+    bool deleteBidirectional
+) {
+    assign(std::move(sourceNodeId), handle()->sourceNodeId);
+    assign(std::move(referenceTypeId), handle()->referenceTypeId);
+    assign(isForward, handle()->isForward);
+    assign(std::move(targetNodeId), handle()->targetNodeId);
+    assign(deleteBidirectional, handle()->deleteBidirectional);
+}
+
+DeleteReferencesRequest::DeleteReferencesRequest(
+    RequestHeader requestHeader, Span<const DeleteReferencesItem> referencesToDelete
+) {
+    assign(std::move(requestHeader), handle()->requestHeader);
+    copyArray(referencesToDelete, &handle()->referencesToDelete, handle()->referencesToDeleteSize);
+}
+
 BrowseDescription::BrowseDescription(
     NodeId nodeId,
     BrowseDirection browseDirection,
-    NodeId referenceType,
+    NodeId referenceTypeId,
     bool includeSubtypes,
     uint32_t nodeClassMask,
     uint32_t resultMask
 ) {
     asWrapper<NodeId>(handle()->nodeId) = std::move(nodeId);
     handle()->browseDirection = static_cast<UA_BrowseDirection>(browseDirection);
-    asWrapper<NodeId>(handle()->referenceTypeId) = std::move(referenceType);
+    asWrapper<NodeId>(handle()->referenceTypeId) = std::move(referenceTypeId);
     handle()->includeSubtypes = includeSubtypes;
     handle()->nodeClassMask = nodeClassMask;
     handle()->resultMask = resultMask;
 }
 
 RelativePathElement::RelativePathElement(
-    NodeId referenceType, bool isInverse, bool includeSubtypes, QualifiedName targetName
+    NodeId referenceTypeId, bool isInverse, bool includeSubtypes, QualifiedName targetName
 ) {
-    asWrapper<NodeId>(handle()->referenceTypeId) = std::move(referenceType);
+    asWrapper<NodeId>(handle()->referenceTypeId) = std::move(referenceTypeId);
     handle()->isInverse = isInverse;
     handle()->includeSubtypes = includeSubtypes;
     asWrapper<QualifiedName>(handle()->targetName) = std::move(targetName);

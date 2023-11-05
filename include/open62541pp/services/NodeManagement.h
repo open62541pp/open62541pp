@@ -13,6 +13,7 @@
 
 // forward declarations
 namespace opcua {
+class Client;
 class Variant;
 
 }  // namespace opcua
@@ -22,8 +23,60 @@ namespace opcua::services {
 /**
  * @defgroup NodeManagement NodeManagement service set
  * Add/delete nodes and references.
+ *
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7
  * @ingroup Services
  */
+
+/**
+ * Generic function to add one or more nodes (client only).
+ * @ingroup NodeManagement
+ */
+AddNodesResponse addNodes(Client& client, const AddNodesRequest& request);
+
+/**
+ * @overload
+ * @ingroup NodeManagement
+ */
+AddNodesResponse addNodes(Client& client, Span<const AddNodesItem> nodesToAdd);
+
+/**
+ * Generic function to add one or more references (client only).
+ * @ingroup NodeManagement
+ */
+AddReferencesResponse addReferences(Client& client, const AddReferencesRequest& request);
+
+/**
+ * @overload
+ * @ingroup NodeManagement
+ */
+AddReferencesResponse addReferences(Client& client, Span<const AddReferencesItem> referencesToAdd);
+
+/**
+ * Generic function to delete one or more nodes (client only).
+ * @ingroup NodeManagement
+ */
+DeleteNodesResponse deleteNodes(Client& client, const DeleteNodesRequest& request);
+
+/**
+ * @overload
+ * @ingroup NodeManagement
+ */
+DeleteNodesResponse deleteNodes(Client& client, Span<const DeleteNodesItem> nodesToDelete);
+
+/**
+ * Generic function to delete one or more references (client only).
+ * @ingroup NodeManagement
+ */
+DeleteReferencesResponse deleteReferences(Client& client, const DeleteReferencesRequest& request);
+
+/**
+ * @overload
+ * @ingroup NodeManagement
+ */
+DeleteReferencesResponse deleteReferences(
+    Client& client, Span<const DeleteReferencesItem> referencesToDelete
+);
 
 /**
  * Add object.
