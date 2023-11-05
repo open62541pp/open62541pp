@@ -475,7 +475,7 @@ public:
 #undef UAPP_NODEATTR_ARRAY
 #undef UAPP_NODEATTR_COMMON
 
-/* ------------------------------------------- Browse ------------------------------------------- */
+/* ---------------------------------------------------------------------------------------------- */
 
 /**
  * UA_UserIdentityToken wrapper class.
@@ -548,11 +548,22 @@ public:
 
 /**
  * UA_AddNodesItem wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.2
  * @ingroup TypeWrapper
  */
 class AddNodesItem : public TypeWrapper<UA_AddNodesItem, UA_TYPES_ADDNODESITEM> {
 public:
     using TypeWrapperBase::TypeWrapperBase;
+
+    AddNodesItem(
+        ExpandedNodeId parentNodeId,
+        NodeId referenceTypeId,
+        ExpandedNodeId requestedNewNodeId,
+        QualifiedName browseName,
+        NodeClass nodeClass,
+        ExtensionObject nodeAttributes,
+        ExpandedNodeId typeDefinition
+    );
 
     UAPP_COMPOSED_GETTER_WRAPPER(ExpandedNodeId, getParentNodeId, parentNodeId)
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getReferenceTypeId, referenceTypeId)
@@ -564,12 +575,66 @@ public:
 };
 
 /**
+ * UA_AddNodesResult wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.2
+ * @ingroup TypeWrapper
+ */
+class AddNodesResult : public TypeWrapper<UA_AddNodesResult, UA_TYPES_ADDNODESRESULT> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    UAPP_COMPOSED_GETTER(StatusCode, getStatusCode, statusCode)
+    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getAddedNodeId, addedNodeId)
+};
+
+/**
+ * UA_AddNodesRequest wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.2
+ * @ingroup TypeWrapper
+ */
+class AddNodesRequest : public TypeWrapper<UA_AddNodesRequest, UA_TYPES_ADDNODESREQUEST> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    AddNodesRequest(RequestHeader requestHeader, Span<const AddNodesItem> nodesToAdd);
+
+    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(AddNodesItem, getNodesToAdd, nodesToAdd, nodesToAddSize)
+};
+
+/**
+ * UA_AddNodesResponse wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.2
+ * @ingroup TypeWrapper
+ */
+class AddNodesResponse : public TypeWrapper<UA_AddNodesResponse, UA_TYPES_ADDNODESRESPONSE> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(AddNodesResult, getResults, results, resultsSize)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        DiagnosticInfo, getDiagnosticInfos, diagnosticInfos, diagnosticInfosSize
+    )
+};
+
+/**
  * UA_AddReferencesItem wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.3
  * @ingroup TypeWrapper
  */
 class AddReferencesItem : public TypeWrapper<UA_AddReferencesItem, UA_TYPES_ADDREFERENCESITEM> {
 public:
     using TypeWrapperBase::TypeWrapperBase;
+
+    AddReferencesItem(
+        NodeId sourceNodeId,
+        NodeId referenceTypeId,
+        bool isForward,
+        std::string_view targetServerUri,
+        ExpandedNodeId targetNodeId,
+        NodeClass targetNodeClass
+    );
 
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getSourceNodeId, sourceNodeId)
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getReferenceTypeId, referenceTypeId)
@@ -580,19 +645,94 @@ public:
 };
 
 /**
+ * UA_AddReferencesRequest wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.3
+ * @ingroup TypeWrapper
+ */
+class AddReferencesRequest
+    : public TypeWrapper<UA_AddReferencesRequest, UA_TYPES_ADDREFERENCESREQUEST> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    AddReferencesRequest(
+        RequestHeader requestHeader, Span<const AddReferencesItem> referencesToAdd
+    );
+
+    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        AddReferencesItem, getReferencesToAdd, referencesToAdd, referencesToAddSize
+    )
+};
+
+/**
+ * UA_AddReferencesResponse wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.3
+ * @ingroup TypeWrapper
+ */
+class AddReferencesResponse
+    : public TypeWrapper<UA_AddReferencesResponse, UA_TYPES_ADDREFERENCESRESPONSE> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(StatusCode, getResults, results, resultsSize)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        DiagnosticInfo, getDiagnosticInfos, diagnosticInfos, diagnosticInfosSize
+    )
+};
+
+/**
  * UA_DeleteNodesItem wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.4
  * @ingroup TypeWrapper
  */
 class DeleteNodesItem : public TypeWrapper<UA_DeleteNodesItem, UA_TYPES_DELETENODESITEM> {
 public:
     using TypeWrapperBase::TypeWrapperBase;
 
+    DeleteNodesItem(NodeId nodeId, bool deleteTargetReferences);
+
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getNodeId, nodeId)
     UAPP_COMPOSED_GETTER(bool, getDeleteTargetReferences, deleteTargetReferences)
 };
 
 /**
+ * UA_DeleteNodesRequest wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.4
+ * @ingroup TypeWrapper
+ */
+class DeleteNodesRequest : public TypeWrapper<UA_DeleteNodesRequest, UA_TYPES_DELETENODESREQUEST> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    DeleteNodesRequest(RequestHeader requestHeader, Span<const DeleteNodesItem> nodesToDelete);
+
+    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        DeleteNodesItem, getNodesToDelete, nodesToDelete, nodesToDeleteSize
+    )
+};
+
+/**
+ * UA_DeleteNodesResponse wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.4
+ * @ingroup TypeWrapper
+ */
+class DeleteNodesResponse
+    : public TypeWrapper<UA_DeleteNodesResponse, UA_TYPES_DELETENODESRESPONSE> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(StatusCode, getResults, results, resultsSize)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        DiagnosticInfo, getDiagnosticInfos, diagnosticInfos, diagnosticInfosSize
+    )
+};
+
+/**
  * UA_DeleteReferencesItem wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.5
  * @ingroup TypeWrapper
  */
 class DeleteReferencesItem
@@ -600,11 +740,56 @@ class DeleteReferencesItem
 public:
     using TypeWrapperBase::TypeWrapperBase;
 
+    DeleteReferencesItem(
+        NodeId sourceNodeId,
+        NodeId referenceTypeId,
+        bool isForward,
+        ExpandedNodeId targetNodeId,
+        bool deleteBidirectional
+    );
+
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getSourceNodeId, sourceNodeId)
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getReferenceTypeId, referenceTypeId)
     UAPP_COMPOSED_GETTER(bool, getIsForward, isForward)
     UAPP_COMPOSED_GETTER_WRAPPER(ExpandedNodeId, getTargetNodeId, targetNodeId)
     UAPP_COMPOSED_GETTER(bool, getDeleteBidirectional, deleteBidirectional)
+};
+
+/**
+ * UA_DeleteReferencesRequest wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.5
+ * @ingroup TypeWrapper
+ */
+class DeleteReferencesRequest
+    : public TypeWrapper<UA_DeleteReferencesRequest, UA_TYPES_DELETEREFERENCESREQUEST> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    DeleteReferencesRequest(
+        RequestHeader requestHeader, Span<const DeleteReferencesItem> referencesToDelete
+    );
+
+    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        DeleteReferencesItem, getReferencesToDelete, referencesToDelete, referencesToDeleteSize
+    )
+};
+
+/**
+ * UA_DeleteReferencesResponse wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.5
+ * @ingroup TypeWrapper
+ */
+class DeleteReferencesResponse
+    : public TypeWrapper<UA_DeleteReferencesResponse, UA_TYPES_DELETEREFERENCESRESPONSE> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(StatusCode, getResults, results, resultsSize)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        DiagnosticInfo, getDiagnosticInfos, diagnosticInfos, diagnosticInfosSize
+    )
 };
 
 /**
@@ -618,7 +803,7 @@ public:
     BrowseDescription(
         NodeId nodeId,
         BrowseDirection browseDirection,
-        NodeId referenceType = ReferenceTypeId::References,
+        NodeId referenceTypeId = ReferenceTypeId::References,
         bool includeSubtypes = true,
         uint32_t nodeClassMask = UA_NODECLASS_UNSPECIFIED,
         uint32_t resultMask = UA_BROWSERESULTMASK_ALL
@@ -675,7 +860,7 @@ public:
     using TypeWrapperBase::TypeWrapperBase;
 
     RelativePathElement(
-        NodeId referenceType, bool isInverse, bool includeSubtypes, QualifiedName targetName
+        NodeId referenceTypeId, bool isInverse, bool includeSubtypes, QualifiedName targetName
     );
 
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getReferenceTypeId, referenceTypeId)

@@ -902,8 +902,70 @@ TEST_CASE_TEMPLATE("NodeAttributes setDataType", T, VariableAttributes, Variable
     CHECK(T{}.template setDataType<bool>().getDataType() == NodeId(DataTypeId::Boolean));
 }
 
+TEST_CASE("AddNodesItem / AddNodesRequest") {
+    const AddNodesItem item(
+        ExpandedNodeId({1, 1000}),
+        {1, 1001},
+        ExpandedNodeId({1, 1002}),
+        {1, "item"},
+        NodeClass::Object,
+        ExtensionObject::fromDecodedCopy(ObjectAttributes{}),
+        ExpandedNodeId({1, 1003})
+    );
+    CHECK(item.getParentNodeId().getNodeId() == NodeId(1, 1000));
+    CHECK(item.getReferenceTypeId() == NodeId(1, 1001));
+    CHECK(item.getRequestedNewNodeId().getNodeId() == NodeId(1, 1002));
+    CHECK(item.getBrowseName() == QualifiedName(1, "item"));
+    CHECK(item.getNodeClass() == NodeClass::Object);
+    CHECK(item.getNodeAttributes().getDecodedDataType() == &UA_TYPES[UA_TYPES_OBJECTATTRIBUTES]);
+    CHECK(item.getTypeDefinition().getNodeId() == NodeId(1, 1003));
+
+    const AddNodesRequest request({}, {item});
+    CHECK_NOTHROW(request.getRequestHeader());
+    CHECK(request.getNodesToAdd().size() == 1);
+}
+
+TEST_CASE("AddReferencesItem / AddReferencesRequest") {
+    const AddReferencesItem item(
+        {1, 1000}, {1, 1001}, true, {}, ExpandedNodeId({1, 1002}), NodeClass::Object
+    );
+    CHECK(item.getSourceNodeId() == NodeId(1, 1000));
+    CHECK(item.getReferenceTypeId() == NodeId(1, 1001));
+    CHECK(item.getIsForward() == true);
+    CHECK(item.getTargetServerUri().empty());
+    CHECK(item.getTargetNodeId().getNodeId() == NodeId(1, 1002));
+    CHECK(item.getTargetNodeClass() == NodeClass::Object);
+
+    const AddReferencesRequest request({}, {item});
+    CHECK_NOTHROW(request.getRequestHeader());
+    CHECK(request.getReferencesToAdd().size() == 1);
+}
+
+TEST_CASE("DeleteNodesItem / DeleteNodesRequest") {
+    const DeleteNodesItem item({1, 1000}, true);
+    CHECK(item.getNodeId() == NodeId(1, 1000));
+    CHECK(item.getDeleteTargetReferences() == true);
+
+    const DeleteNodesRequest request({}, {item});
+    CHECK_NOTHROW(request.getRequestHeader());
+    CHECK(request.getNodesToDelete().size() == 1);
+}
+
+TEST_CASE("DeleteReferencesItem / DeleteReferencesRequest") {
+    const DeleteReferencesItem item({1, 1000}, {1, 1001}, true, ExpandedNodeId({1, 1002}), true);
+    CHECK(item.getSourceNodeId() == NodeId(1, 1000));
+    CHECK(item.getReferenceTypeId() == NodeId(1, 1001));
+    CHECK(item.getIsForward() == true);
+    CHECK(item.getTargetNodeId().getNodeId() == NodeId(1, 1002));
+    CHECK(item.getDeleteBidirectional() == true);
+
+    const DeleteReferencesRequest request({}, {item});
+    CHECK_NOTHROW(request.getRequestHeader());
+    CHECK(request.getReferencesToDelete().size() == 1);
+}
+
 TEST_CASE("BrowseDescription") {
-    BrowseDescription bd(NodeId(1, 1000), BrowseDirection::Forward);
+    const BrowseDescription bd(NodeId(1, 1000), BrowseDirection::Forward);
     CHECK(bd.getNodeId() == NodeId(1, 1000));
     CHECK(bd.getBrowseDirection() == BrowseDirection::Forward);
     CHECK(bd.getReferenceTypeId() == NodeId(0, UA_NS0ID_REFERENCES));
