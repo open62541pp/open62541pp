@@ -19,6 +19,8 @@ namespace opcua::services {
 /**
  * @defgroup View View service set
  * Browse the address space / view created by a server.
+ *
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8
  * @ingroup Services
  */
 

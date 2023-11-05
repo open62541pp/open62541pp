@@ -23,6 +23,8 @@ namespace opcua::services {
 /**
  * @defgroup NodeManagement NodeManagement service set
  * Add/delete nodes and references.
+ *
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7
  * @ingroup Services
  */
 
