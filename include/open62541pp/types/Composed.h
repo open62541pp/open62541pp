@@ -268,7 +268,7 @@ public:
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.24.2
  * @ingroup TypeWrapper
  */
-class ObjectAttributes : public TypeWrapper<UA_ObjectAttributes, UA_TYPES_OBJECTTYPEATTRIBUTES> {
+class ObjectAttributes : public TypeWrapper<UA_ObjectAttributes, UA_TYPES_OBJECTATTRIBUTES> {
 public:
     using TypeWrapperBase::TypeWrapperBase;
 
