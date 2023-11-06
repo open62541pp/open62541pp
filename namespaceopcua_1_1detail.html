@@ -135,10 +135,8 @@ Functions</h2></td></tr>
 <tr class="separator:a629218e65ab5a66f0dd09c8fa44ed2b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21ee894a8d416a30379c8d98e38356a1" id="r_a21ee894a8d416a30379c8d98e38356a1"><td class="memItemLeft" align="right" valign="top">const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a21ee894a8d416a30379c8d98e38356a1">findUaDataType</a> (const <a class="elRef" target="_blank" href="open62541/structUA__NodeId.html">UA_NodeId</a> &amp;id) noexcept</td></tr>
 <tr class="separator:a21ee894a8d416a30379c8d98e38356a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a326f0e74460157371d1df10077703d94" id="r_a326f0e74460157371d1df10077703d94"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a326f0e74460157371d1df10077703d94">allocUaString</a> (const char *src)</td></tr>
-<tr class="separator:a326f0e74460157371d1df10077703d94"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab086ba6c1c55e2be3746f614066d754a" id="r_ab086ba6c1c55e2be3746f614066d754a"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ab086ba6c1c55e2be3746f614066d754a">allocUaString</a> (const std::string &amp;src)</td></tr>
-<tr class="separator:ab086ba6c1c55e2be3746f614066d754a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3b923f4ecbce96dbf6736c3c6ea1537" id="r_ae3b923f4ecbce96dbf6736c3c6ea1537"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ae3b923f4ecbce96dbf6736c3c6ea1537">toUaString</a> (std::string_view src) noexcept</td></tr>
+<tr class="separator:ae3b923f4ecbce96dbf6736c3c6ea1537"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a161e9f5f92971da039857209d69cc103" id="r_a161e9f5f92971da039857209d69cc103"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a161e9f5f92971da039857209d69cc103">allocUaString</a> (std::string_view src)</td></tr>
 <tr class="separator:a161e9f5f92971da039857209d69cc103"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7bc12ad80fd3f05ffe2cf152c85409d" id="r_ad7bc12ad80fd3f05ffe2cf152c85409d"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ad7bc12ad80fd3f05ffe2cf152c85409d">isEmpty</a> (const <a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> &amp;value)</td></tr>
@@ -495,50 +493,36 @@ template&lt;auto typeIndexOrEnum&gt; </div>
 
 </div>
 </div>
-<a id="a326f0e74460157371d1df10077703d94" name="a326f0e74460157371d1df10077703d94"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a326f0e74460157371d1df10077703d94">&#9670;&#160;</a></span>allocUaString() <span class="overload">[1/3]</span></h2>
+<a id="ae3b923f4ecbce96dbf6736c3c6ea1537" name="ae3b923f4ecbce96dbf6736c3c6ea1537"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3b923f4ecbce96dbf6736c3c6ea1537">&#9670;&#160;</a></span>toUaString()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> opcua::detail::allocUaString </td>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> opcua::detail::toUaString </td>
           <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
+          <td class="paramtype">std::string_view&#160;</td>
           <td class="paramname"><em>src</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p>Allocate <a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> from const char*. </p>
-
-<p class="reference">Referenced by <a class="el" href="TypeConverter_8h_source.html#l00296">opcua::TypeConverter&lt; std::string_view &gt;::toNative()</a>.</p>
-
-</div>
-</div>
-<a id="ab086ba6c1c55e2be3746f614066d754a" name="ab086ba6c1c55e2be3746f614066d754a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab086ba6c1c55e2be3746f614066d754a">&#9670;&#160;</a></span>allocUaString() <span class="overload">[2/3]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> opcua::detail::allocUaString </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>src</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Allocate <a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> from std::string. </p>
+<p>Convert std::string_view to <a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> (no copy) </p>
 
 </div>
 </div>
 <a id="a161e9f5f92971da039857209d69cc103" name="a161e9f5f92971da039857209d69cc103"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a161e9f5f92971da039857209d69cc103">&#9670;&#160;</a></span>allocUaString() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a161e9f5f92971da039857209d69cc103">&#9670;&#160;</a></span>allocUaString()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -554,6 +538,8 @@ template&lt;auto typeIndexOrEnum&gt; </div>
 </div><div class="memdoc">
 
 <p>Allocate <a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> from std::string_view. </p>
+
+<p class="reference">Referenced by <a class="el" href="TypeConverter_8h_source.html#l00296">opcua::TypeConverter&lt; std::string_view &gt;::toNative()</a>.</p>
 
 </div>
 </div>
@@ -583,9 +569,9 @@ template&lt;auto typeIndexOrEnum&gt; </div>
 
 <p>Check if <a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> is empty. </p>
 
-<p class="definition">Definition at line <a class="el" href="helper_8h_source.html#l00047">47</a> of file <a class="el" href="helper_8h_source.html">helper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helper_8h_source.html#l00044">44</a> of file <a class="el" href="helper_8h_source.html">helper.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helper_8h_source.html#l00052">toStringView()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="helper_8h_source.html#l00049">toStringView()</a>.</p>
 
 </div>
 </div>
@@ -615,9 +601,9 @@ template&lt;auto typeIndexOrEnum&gt; </div>
 
 <p>Convert <a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> to std::string_view. </p>
 
-<p class="definition">Definition at line <a class="el" href="helper_8h_source.html#l00052">52</a> of file <a class="el" href="helper_8h_source.html">helper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helper_8h_source.html#l00049">49</a> of file <a class="el" href="helper_8h_source.html">helper.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="TypeConverter_8h_source.html#l00292">opcua::TypeConverter&lt; std::string_view &gt;::fromNative()</a>, and <a class="el" href="helper_8h_source.html#l00060">toString()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="TypeConverter_8h_source.html#l00292">opcua::TypeConverter&lt; std::string_view &gt;::fromNative()</a>, and <a class="el" href="helper_8h_source.html#l00057">toString()</a>.</p>
 
 </div>
 </div>
@@ -647,7 +633,7 @@ template&lt;auto typeIndexOrEnum&gt; </div>
 
 <p>Convert <a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> to std::string. </p>
 
-<p class="definition">Definition at line <a class="el" href="helper_8h_source.html#l00060">60</a> of file <a class="el" href="helper_8h_source.html">helper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="helper_8h_source.html#l00057">57</a> of file <a class="el" href="helper_8h_source.html">helper.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="TypeConverter_8h_source.html#l00308">opcua::TypeConverter&lt; std::string &gt;::fromNative()</a>.</p>
 

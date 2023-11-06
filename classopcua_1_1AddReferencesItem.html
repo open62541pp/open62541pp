@@ -91,6 +91,8 @@ Inheritance diagram for opcua::AddReferencesItem:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:ac6d1b8ffc59ebb3b35d39ea385fdb314" id="r_ac6d1b8ffc59ebb3b35d39ea385fdb314"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1AddReferencesItem.html#ac6d1b8ffc59ebb3b35d39ea385fdb314">AddReferencesItem</a> (<a class="el" href="classopcua_1_1NodeId.html">NodeId</a> sourceNodeId, <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> referenceTypeId, bool isForward, std::string_view targetServerUri, <a class="el" href="classopcua_1_1ExpandedNodeId.html">ExpandedNodeId</a> targetNodeId, <a class="el" href="namespaceopcua.html#a73517e637628b7e96a5dfa0e2e84e64a">NodeClass</a> targetNodeClass)</td></tr>
+<tr class="separator:ac6d1b8ffc59ebb3b35d39ea385fdb314"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa289bd9dc777f7fb7adf272821433670" id="r_aa289bd9dc777f7fb7adf272821433670"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1AddReferencesItem.html#aa289bd9dc777f7fb7adf272821433670">getSourceNodeId</a> () const noexcept</td></tr>
 <tr class="separator:aa289bd9dc777f7fb7adf272821433670"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09a12842ad6e7745aed69b5974704deb" id="r_a09a12842ad6e7745aed69b5974704deb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1AddReferencesItem.html#a09a12842ad6e7745aed69b5974704deb">getSourceNodeId</a> () noexcept</td></tr>
@@ -170,9 +172,63 @@ Additional Inherited Members</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="elRef" target="_blank" href="open62541/structUA__AddReferencesItem.html">UA_AddReferencesItem</a> wrapper class. </p>
+<dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.3">https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.3</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00570">570</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00626">626</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ac6d1b8ffc59ebb3b35d39ea385fdb314" name="ac6d1b8ffc59ebb3b35d39ea385fdb314"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6d1b8ffc59ebb3b35d39ea385fdb314">&#9670;&#160;</a></span>AddReferencesItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">opcua::AddReferencesItem::AddReferencesItem </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1NodeId.html">NodeId</a>&#160;</td>
+          <td class="paramname"><em>sourceNodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1NodeId.html">NodeId</a>&#160;</td>
+          <td class="paramname"><em>referenceTypeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isForward</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>targetServerUri</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1ExpandedNodeId.html">ExpandedNodeId</a>&#160;</td>
+          <td class="paramname"><em>targetNodeId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#a73517e637628b7e96a5dfa0e2e84e64a">NodeClass</a>&#160;</td>
+          <td class="paramname"><em>targetNodeClass</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="aa289bd9dc777f7fb7adf272821433670" name="aa289bd9dc777f7fb7adf272821433670"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa289bd9dc777f7fb7adf272821433670">&#9670;&#160;</a></span>getSourceNodeId() <span class="overload">[1/2]</span></h2>
 
@@ -196,7 +252,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00574">574</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00639">639</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -223,7 +279,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00574">574</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00639">639</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -250,7 +306,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00575">575</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00640">640</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -277,7 +333,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00575">575</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00640">640</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -304,7 +360,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00576">576</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00641">641</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -331,7 +387,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00577">577</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00642">642</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -358,7 +414,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00577">577</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00642">642</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -385,7 +441,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00578">578</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00643">643</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -412,7 +468,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00578">578</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00643">643</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>
@@ -439,7 +495,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00579">579</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Composed_8h_source.html#l00644">644</a> of file <a class="el" href="Composed_8h_source.html">Composed.h</a>.</p>
 
 </div>
 </div>

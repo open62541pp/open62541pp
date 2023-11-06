@@ -8,7 +8,7 @@ var searchData=
   ['browseall_5',['browseAll',['../group__View.html#ga6d317eefc3363365241f630bc076c325',1,'opcua::services']]],
   ['browsechild_6',['browseChild',['../classopcua_1_1Node.html#a3a4330663fa76cab74f1d93c04201c24',1,'opcua::Node']]],
   ['browsechildren_7',['browseChildren',['../classopcua_1_1Node.html#ae76ddc0823202d2da2c249bfb86aa842',1,'opcua::Node']]],
-  ['browsedescription_8',['BrowseDescription',['../classopcua_1_1BrowseDescription.html#abfe1a5fa5cf8919d0a346acd22a1d716',1,'opcua::BrowseDescription']]],
+  ['browsedescription_8',['BrowseDescription',['../classopcua_1_1BrowseDescription.html#aad377d268b7469b142184a9e8a76f134',1,'opcua::BrowseDescription']]],
   ['browsenext_9',['browseNext',['../group__View.html#gaab0c3d3008133ccbde6f9c973e0dc29a',1,'opcua::services']]],
   ['browseparent_10',['browseParent',['../classopcua_1_1Node.html#a74f9cb68814d444ae603524b21b640e0',1,'opcua::Node']]],
   ['browsepath_11',['BrowsePath',['../classopcua_1_1BrowsePath.html#a45bdbdf5e0418d5021274f73a93bf5d3',1,'opcua::BrowsePath']]],
