@@ -52,6 +52,7 @@ HTML_DYNAMIC_SECTIONS  = NO
 HTML_OUTPUT            = "${doxygen_html_dir}"
 HTML_COLORSTYLE        = LIGHT
 
+SITEMAP_URL            = "https://open62541pp.github.io/open62541pp/"
 ENUM_VALUES_PER_LINE   = 0
 GENERATE_TREEVIEW      = NO
 TREEVIEW_WIDTH         = 300
