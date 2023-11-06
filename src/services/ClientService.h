@@ -46,7 +46,6 @@ auto sendRequest(Client& client, const Request& request, Fn&& transformResponse)
         detail::throwOnBadStatus(response.responseHeader.serviceResult);
         if constexpr (std::is_invocable_v<Fn, Response&&>) {
             // move ownership to callback
-            // static_assert(std::is_nothrow_invocable_v<Fn, Response&&>);
             return transformResponse(std::move(response));
         } else {
             auto result = transformResponse(response);

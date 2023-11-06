@@ -12,6 +12,7 @@
 
 #include "../ServerContext.h"
 #include "../open62541_impl.h"
+#include "ClientService.h"
 
 namespace opcua::services {
 
@@ -22,9 +23,9 @@ inline static void assignArray(Span<const T> array, Native*& ptr, size_t& length
 }
 
 AddNodesResponse addNodes(Client& client, const AddNodesRequest& request) {
-    AddNodesResponse response = UA_Client_Service_addNodes(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
-    return response;
+    return sendRequest<UA_AddNodesRequest, UA_AddNodesResponse>(
+        client, request, ForwardResponse<UA_AddNodesResponse>{}
+    );
 }
 
 AddNodesResponse addNodes(Client& client, Span<const AddNodesItem> nodesToAdd) {
@@ -35,9 +36,9 @@ AddNodesResponse addNodes(Client& client, Span<const AddNodesItem> nodesToAdd) {
 }
 
 AddReferencesResponse addReferences(Client& client, const AddReferencesRequest& request) {
-    AddReferencesResponse response = UA_Client_Service_addReferences(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
-    return response;
+    return sendRequest<UA_AddReferencesRequest, UA_AddReferencesResponse>(
+        client, request, ForwardResponse<UA_AddReferencesResponse>{}
+    );
 }
 
 AddReferencesResponse addReferences(Client& client, Span<const AddReferencesItem> referencesToAdd) {
@@ -48,9 +49,9 @@ AddReferencesResponse addReferences(Client& client, Span<const AddReferencesItem
 }
 
 DeleteNodesResponse deleteNodes(Client& client, const DeleteNodesRequest& request) {
-    DeleteNodesResponse response = UA_Client_Service_deleteNodes(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
-    return response;
+    return sendRequest<UA_DeleteNodesRequest, UA_DeleteNodesResponse>(
+        client, request, ForwardResponse<UA_DeleteNodesResponse>{}
+    );
 }
 
 DeleteNodesResponse deleteNodes(Client& client, Span<const DeleteNodesItem> nodesToDelete) {
@@ -61,11 +62,9 @@ DeleteNodesResponse deleteNodes(Client& client, Span<const DeleteNodesItem> node
 }
 
 DeleteReferencesResponse deleteReferences(Client& client, const DeleteReferencesRequest& request) {
-    DeleteReferencesResponse response = UA_Client_Service_deleteReferences(
-        client.handle(), request
+    return sendRequest<UA_DeleteReferencesRequest, UA_DeleteReferencesResponse>(
+        client, request, ForwardResponse<UA_DeleteReferencesResponse>{}
     );
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
-    return response;
 }
 
 DeleteReferencesResponse deleteReferences(
