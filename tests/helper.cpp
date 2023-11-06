@@ -22,38 +22,34 @@ TEST_CASE("findUaDataType") {
     CHECK(detail::findUaDataType(nodeId) == &UA_TYPES[UA_TYPES_BOOLEAN]);
 }
 
-TEST_CASE("String conversion UA_String -> string") {
-    UA_String testString = UA_STRING_ALLOC("test123");
-    CHECK(detail::toString(testString) == "test123");
-    UA_String_clear(&testString);
+TEST_CASE("UA_String from string_view") {
+    SUBCASE("Test string") {
+        std::string_view sv("test123");
+        UA_String str = detail::toUaString(sv);
+        CHECK(str.length == sv.size());
+        CHECK((void*)str.data == (void*)sv.data());
+    }
 
     SUBCASE("Null string") {
-        UA_String nullString{};
-        CHECK(detail::toString(nullString) == "");
+        UA_String str = detail::toUaString({});
+        CHECK(str.length == 0);
+        CHECK(str.data == nullptr);
     }
 
     SUBCASE("Empty string") {
-        UA_String emptyString = UA_STRING_ALLOC("");
-        CHECK(detail::toString(emptyString) == "");
-        UA_String_clear(&emptyString);
+        UA_String str = detail::toUaString("");
+        CHECK(str.length == 0);
+        CHECK(str.data != nullptr);
     }
 }
 
-TEST_CASE("Alloc UA_String from string") {
-    std::string str("test123");
-    auto uaString = detail::allocUaString(str);
-    CHECK(uaString.length == 7);
-    CHECK(std::strncmp((char*)uaString.data, str.c_str(), 7) == 0);  // NOLINT
-    UA_String_clear(&uaString);
-}
-
 TEST_CASE("Alloc UA_String from string_view") {
-    const char* str = "test123";
-    std::string_view sv(str);
-    auto uaString = detail::allocUaString(sv);
-    CHECK(uaString.length == 7);
-    CHECK(std::strncmp((char*)uaString.data, sv.data(), 7) == 0);  // NOLINT
-    UA_String_clear(&uaString);
+    const char* cstr = "test123";
+    std::string_view sv(cstr);
+    auto str = detail::allocUaString(sv);
+    CHECK(str.length == 7);
+    CHECK(std::strncmp((char*)str.data, sv.data(), 7) == 0);  // NOLINT
+    UA_String_clear(&str);
 }
 
 TEST_CASE("Alloc UA_String from non-null-terminated string_view") {
@@ -63,4 +59,23 @@ TEST_CASE("Alloc UA_String from non-null-terminated string_view") {
     CHECK(uaString.length == 4);
     CHECK(std::strncmp((char*)uaString.data, sv.data(), 4) == 0);  // NOLINT
     UA_String_clear(&uaString);
+}
+
+TEST_CASE("String conversion UA_String -> string") {
+    SUBCASE("Test string") {
+        UA_String str = UA_STRING_ALLOC("test123");
+        CHECK(detail::toString(str) == "test123");
+        UA_String_clear(&str);
+    }
+
+    SUBCASE("Null string") {
+        UA_String str{};
+        CHECK(detail::toString(str) == "");
+    }
+
+    SUBCASE("Empty string") {
+        UA_String str = UA_STRING_ALLOC("");
+        CHECK(detail::toString(str) == "");
+        UA_String_clear(&str);
+    }
 }

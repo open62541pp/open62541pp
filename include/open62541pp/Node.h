@@ -70,8 +70,10 @@ public:
         const ObjectAttributes& attributes = {},
         const NodeId& referenceType = ReferenceTypeId::HasComponent
     ) {
-        services::addFolder(connection_, nodeId_, id, browseName, attributes, referenceType);
-        return {connection_, id};
+        NodeId resultingId = services::addFolder(
+            connection_, nodeId_, id, browseName, attributes, referenceType
+        );
+        return {connection_, resultingId};
     }
 
     /// @copydoc services::addObject
@@ -82,10 +84,10 @@ public:
         const NodeId& objectType = ObjectTypeId::BaseObjectType,
         const NodeId& referenceType = ReferenceTypeId::HasComponent
     ) {
-        services::addObject(
+        NodeId resultingId = services::addObject(
             connection_, nodeId_, id, browseName, attributes, objectType, referenceType
         );
-        return {connection_, id};
+        return {connection_, resultingId};
     }
 
     /// @copydoc services::addVariable
@@ -96,18 +98,20 @@ public:
         const NodeId& variableType = VariableTypeId::BaseDataVariableType,
         const NodeId& referenceType = ReferenceTypeId::HasComponent
     ) {
-        services::addVariable(
+        NodeId resultingId = services::addVariable(
             connection_, nodeId_, id, browseName, attributes, variableType, referenceType
         );
-        return {connection_, id};
+        return {connection_, resultingId};
     }
 
     /// @copydoc services::addProperty
     Node addProperty(
         const NodeId& id, std::string_view browseName, const VariableAttributes& attributes = {}
     ) {
-        services::addProperty(connection_, nodeId_, id, browseName, attributes);
-        return {connection_, id};
+        NodeId resultingId = services::addProperty(
+            connection_, nodeId_, id, browseName, attributes
+        );
+        return {connection_, resultingId};
     }
 
 #ifdef UA_ENABLE_METHODCALLS
@@ -121,7 +125,7 @@ public:
         const MethodAttributes& attributes = {},
         const NodeId& referenceType = ReferenceTypeId::HasComponent
     ) {
-        services::addMethod(
+        NodeId resultingId = services::addMethod(
             connection_,
             nodeId_,
             id,
@@ -132,7 +136,7 @@ public:
             attributes,
             referenceType
         );
-        return {connection_, id};
+        return {connection_, resultingId};
     }
 #endif
 
@@ -143,8 +147,10 @@ public:
         const ObjectTypeAttributes& attributes = {},
         const NodeId& referenceType = ReferenceTypeId::HasSubtype
     ) {
-        services::addObjectType(connection_, nodeId_, id, browseName, attributes, referenceType);
-        return {connection_, id};
+        NodeId resultingId = services::addObjectType(
+            connection_, nodeId_, id, browseName, attributes, referenceType
+        );
+        return {connection_, resultingId};
     }
 
     /// @copydoc services::addVariableType
@@ -155,10 +161,10 @@ public:
         const NodeId& variableType = VariableTypeId::BaseDataVariableType,
         const NodeId& referenceType = ReferenceTypeId::HasSubtype
     ) {
-        services::addVariableType(
+        NodeId resultingId = services::addVariableType(
             connection_, nodeId_, id, browseName, attributes, variableType, referenceType
         );
-        return {connection_, id};
+        return {connection_, resultingId};
     }
 
     /// @copydoc services::addReferenceType
@@ -168,8 +174,10 @@ public:
         const ReferenceTypeAttributes& attributes = {},
         const NodeId& referenceType = ReferenceTypeId::HasSubtype
     ) {
-        services::addReferenceType(connection_, nodeId_, id, browseName, attributes, referenceType);
-        return {connection_, id};
+        NodeId resultingId = services::addReferenceType(
+            connection_, nodeId_, id, browseName, attributes, referenceType
+        );
+        return {connection_, resultingId};
     }
 
     /// @copydoc services::addDataType
@@ -179,8 +187,10 @@ public:
         const DataTypeAttributes& attributes = {},
         const NodeId& referenceType = ReferenceTypeId::HasSubtype
     ) {
-        services::addDataType(connection_, nodeId_, id, browseName, attributes, referenceType);
-        return {connection_, id};
+        NodeId resultingId = services::addDataType(
+            connection_, nodeId_, id, browseName, attributes, referenceType
+        );
+        return {connection_, resultingId};
     }
 
     /// @copydoc services::addView
@@ -190,8 +200,10 @@ public:
         const ViewAttributes& attributes = {},
         const NodeId& referenceType = ReferenceTypeId::Organizes
     ) {
-        services::addView(connection_, nodeId_, id, browseName, attributes, referenceType);
-        return {connection_, id};
+        NodeId resultingId = services::addView(
+            connection_, nodeId_, id, browseName, attributes, referenceType
+        );
+        return {connection_, resultingId};
     }
 
     /// @copydoc services::addReference

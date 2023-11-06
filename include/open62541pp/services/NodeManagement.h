@@ -13,6 +13,7 @@
 
 // forward declarations
 namespace opcua {
+class Client;
 class Variant;
 
 }  // namespace opcua
@@ -22,8 +23,77 @@ namespace opcua::services {
 /**
  * @defgroup NodeManagement NodeManagement service set
  * Add/delete nodes and references.
+ *
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7
  * @ingroup Services
  */
+
+/**
+ * Generic function to add one or more nodes (client only).
+ * @ingroup NodeManagement
+ */
+AddNodesResponse addNodes(Client& client, const AddNodesRequest& request);
+
+/**
+ * @overload
+ * @ingroup NodeManagement
+ */
+AddNodesResponse addNodes(Client& client, Span<const AddNodesItem> nodesToAdd);
+
+/**
+ * Generic function to add one or more references (client only).
+ * @ingroup NodeManagement
+ */
+AddReferencesResponse addReferences(Client& client, const AddReferencesRequest& request);
+
+/**
+ * @overload
+ * @ingroup NodeManagement
+ */
+AddReferencesResponse addReferences(Client& client, Span<const AddReferencesItem> referencesToAdd);
+
+/**
+ * Generic function to delete one or more nodes (client only).
+ * @ingroup NodeManagement
+ */
+DeleteNodesResponse deleteNodes(Client& client, const DeleteNodesRequest& request);
+
+/**
+ * @overload
+ * @ingroup NodeManagement
+ */
+DeleteNodesResponse deleteNodes(Client& client, Span<const DeleteNodesItem> nodesToDelete);
+
+/**
+ * Generic function to delete one or more references (client only).
+ * @ingroup NodeManagement
+ */
+DeleteReferencesResponse deleteReferences(Client& client, const DeleteReferencesRequest& request);
+
+/**
+ * @overload
+ * @ingroup NodeManagement
+ */
+DeleteReferencesResponse deleteReferences(
+    Client& client, Span<const DeleteReferencesItem> referencesToDelete
+);
+
+/**
+ * Add node.
+ * @exception BadStatus
+ * @ingroup NodeManagement
+ */
+template <typename T>
+NodeId addNode(
+    T& serverOrClient,
+    NodeClass nodeClass,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    const ExtensionObject& nodeAttributes,
+    const NodeId& typeDefinition,
+    const NodeId& referenceType
+);
 
 /**
  * Add object.
@@ -31,7 +101,7 @@ namespace opcua::services {
  * @ingroup NodeManagement
  */
 template <typename T>
-void addObject(
+inline NodeId addObject(
     T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
@@ -39,7 +109,18 @@ void addObject(
     const ObjectAttributes& attributes = {},
     const NodeId& objectType = ObjectTypeId::BaseObjectType,
     const NodeId& referenceType = ReferenceTypeId::HasComponent
-);
+) {
+    return addNode(
+        serverOrClient,
+        NodeClass::Object,
+        parentId,
+        id,
+        browseName,
+        ExtensionObject::fromDecoded(const_cast<ObjectAttributes&>(attributes)),  // NOLINT
+        objectType,
+        referenceType
+    );
+}
 
 /**
  * Add folder.
@@ -47,7 +128,7 @@ void addObject(
  * @ingroup NodeManagement
  */
 template <typename T>
-inline void addFolder(
+inline NodeId addFolder(
     T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
@@ -55,7 +136,7 @@ inline void addFolder(
     const ObjectAttributes& attributes = {},
     const NodeId& referenceType = ReferenceTypeId::HasComponent
 ) {
-    addObject(
+    return addObject(
         serverOrClient,
         parentId,
         id,
@@ -72,7 +153,7 @@ inline void addFolder(
  * @ingroup NodeManagement
  */
 template <typename T>
-void addVariable(
+inline NodeId addVariable(
     T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
@@ -80,7 +161,18 @@ void addVariable(
     const VariableAttributes& attributes = {},
     const NodeId& variableType = VariableTypeId::BaseDataVariableType,
     const NodeId& referenceType = ReferenceTypeId::HasComponent
-);
+) {
+    return addNode(
+        serverOrClient,
+        NodeClass::Variable,
+        parentId,
+        id,
+        browseName,
+        ExtensionObject::fromDecoded(const_cast<VariableAttributes&>(attributes)),  // NOLINT
+        variableType,
+        referenceType
+    );
+}
 
 /**
  * Add property.
@@ -88,14 +180,14 @@ void addVariable(
  * @ingroup NodeManagement
  */
 template <typename T>
-inline void addProperty(
+inline NodeId addProperty(
     T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
     const VariableAttributes& attributes = {}
 ) {
-    addVariable(
+    return addVariable(
         serverOrClient,
         parentId,
         id,
@@ -122,7 +214,7 @@ using MethodCallback = std::function<void(Span<const Variant> input, Span<Varian
  * @ingroup NodeManagement
  */
 template <typename T>
-void addMethod(
+NodeId addMethod(
     T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
@@ -141,14 +233,25 @@ void addMethod(
  * @ingroup NodeManagement
  */
 template <typename T>
-void addObjectType(
+inline NodeId addObjectType(
     T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
     const ObjectTypeAttributes& attributes = {},
     const NodeId& referenceType = ReferenceTypeId::HasSubtype
-);
+) {
+    return addNode(
+        serverOrClient,
+        NodeClass::ObjectType,
+        parentId,
+        id,
+        browseName,
+        ExtensionObject::fromDecoded(const_cast<ObjectTypeAttributes&>(attributes)),  // NOLINT
+        {},
+        referenceType
+    );
+}
 
 /**
  * Add variable type.
@@ -156,7 +259,7 @@ void addObjectType(
  * @ingroup NodeManagement
  */
 template <typename T>
-void addVariableType(
+inline NodeId addVariableType(
     T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
@@ -164,7 +267,18 @@ void addVariableType(
     const VariableTypeAttributes& attributes = {},
     const NodeId& variableType = VariableTypeId::BaseDataVariableType,
     const NodeId& referenceType = ReferenceTypeId::HasSubtype
-);
+) {
+    return addNode(
+        serverOrClient,
+        NodeClass::VariableType,
+        parentId,
+        id,
+        browseName,
+        ExtensionObject::fromDecoded(const_cast<VariableTypeAttributes&>(attributes)),  // NOLINT
+        variableType,
+        referenceType
+    );
+}
 
 /**
  * Add reference type.
@@ -172,14 +286,25 @@ void addVariableType(
  * @ingroup NodeManagement
  */
 template <typename T>
-void addReferenceType(
+inline NodeId addReferenceType(
     T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
     const ReferenceTypeAttributes& attributes = {},
     const NodeId& referenceType = ReferenceTypeId::HasSubtype
-);
+) {
+    return addNode(
+        serverOrClient,
+        NodeClass::ReferenceType,
+        parentId,
+        id,
+        browseName,
+        ExtensionObject::fromDecoded(const_cast<ReferenceTypeAttributes&>(attributes)),  // NOLINT
+        {},
+        referenceType
+    );
+}
 
 /**
  * Add data type.
@@ -187,14 +312,25 @@ void addReferenceType(
  * @ingroup NodeManagement
  */
 template <typename T>
-void addDataType(
+inline NodeId addDataType(
     T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
     const DataTypeAttributes& attributes = {},
     const NodeId& referenceType = ReferenceTypeId::HasSubtype
-);
+) {
+    return addNode(
+        serverOrClient,
+        NodeClass::DataType,
+        parentId,
+        id,
+        browseName,
+        ExtensionObject::fromDecoded(const_cast<DataTypeAttributes&>(attributes)),  // NOLINT
+        {},
+        referenceType
+    );
+}
 
 /**
  * Add view.
@@ -202,14 +338,25 @@ void addDataType(
  * @ingroup NodeManagement
  */
 template <typename T>
-void addView(
+inline NodeId addView(
     T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
     const ViewAttributes& attributes = {},
     const NodeId& referenceType = ReferenceTypeId::Organizes
-);
+) {
+    return addNode(
+        serverOrClient,
+        NodeClass::View,
+        parentId,
+        id,
+        browseName,
+        ExtensionObject::fromDecoded(const_cast<ViewAttributes&>(attributes)),  // NOLINT
+        {},
+        referenceType
+    );
+}
 
 /**
  * Add reference.

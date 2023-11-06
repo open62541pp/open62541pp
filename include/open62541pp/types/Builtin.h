@@ -2,11 +2,20 @@
 
 #include <array>
 #include <cstdint>
-#include <filesystem>
 #include <iosfwd>  // forward declare ostream
 #include <string>
 #include <string_view>
 #include <vector>
+
+// Workaround for GCC 7 with partial C++17 support
+// https://github.com/open62541pp/open62541pp/issues/109
+#if !__has_include(<filesystem>) && __has_include(<experimental/filesystem>)
+#include <experimental/filesystem>
+namespace fs = std::experimental::filesystem;
+#else
+#include <filesystem>
+namespace fs = std::filesystem;
+#endif
 
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/TypeWrapper.h"
@@ -135,14 +144,14 @@ public:
     explicit ByteString(const std::vector<uint8_t>& bytes);
 
     /// Read ByteString from binary file.
-    static ByteString fromFile(const std::filesystem::path& filepath);
+    static ByteString fromFile(const fs::path& filepath);
 
     /// Parse ByteString from Base64 encoded string.
     /// @note Only supported since open62541 v1.1
     static ByteString fromBase64(std::string_view encoded);
 
     /// Write ByteString to binary file.
-    void toFile(const std::filesystem::path& filepath) const;
+    void toFile(const fs::path& filepath) const;
 
     /// Convert to Base64 encoded string.
     /// @note Only supported since open62541 v1.1

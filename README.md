@@ -3,6 +3,7 @@
 [doc-client]: https://open62541pp.github.io/open62541pp/classopcua_1_1Client.html
 [doc-node]: https://open62541pp.github.io/open62541pp/classopcua_1_1Node.html
 [doc-typewrapper]: https://open62541pp.github.io/open62541pp/group__TypeWrapper.html
+[doc-services]: https://open62541pp.github.io/open62541pp/group__Services.html
 
 <div align="center">
   <h1>open62541++</h1>
@@ -31,6 +32,7 @@
   - [`opcua::Server`][doc-server]
   - [`opcua::Client`][doc-client]
   - [`opcua::Node`][doc-node]
+- [Free functions in `services` namespace][doc-services] as an alternative to the high-level classes
 - [Safe wrapper classes][doc-typewrapper] for open62541 `UA_*` types to prevent memory leaks
 - Native open62541 objects can be accessed using the `handle()` method of the wrapping classes
 - [Extensible type conversion system](#-type-conversion) to convert arbitrary types to/from native `UA_*` types

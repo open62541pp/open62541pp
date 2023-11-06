@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.12)
 
 project(
     open62541++
-    VERSION 0.9.0
+    VERSION 0.11.0
     DESCRIPTION "C++ wrapper of open62541"
     HOMEPAGE_URL "https://github.com/open62541pp/open62541pp"
     LANGUAGES CXX
@@ -93,7 +93,7 @@ if(UAPP_INTERNAL_OPEN62541)
         set(UA_FORCE_WERROR OFF OFF CACHE BOOL "")
     endif()
 
-    set(OPEN62541_VERSION v1.3.7)  # set manually for CI
+    set(OPEN62541_VERSION v1.3.8)  # set manually for CI
     add_subdirectory(3rdparty/open62541)  # target open62541::open62541
 else()
     set(CMAKE_FIND_PACKAGE_PREFER_CONFIG ON)  # prefer open62541's own config file
