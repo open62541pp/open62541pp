@@ -46,6 +46,7 @@ GENERATE_HTML          = YES
 GENERATE_XML           = NO
 
 HTML_EXTRA_STYLESHEET  = "${CMAKE_CURRENT_SOURCE_DIR}/doxygen-awesome-css/doxygen-awesome.css"
+HTML_EXTRA_FILES       = "${CMAKE_CURRENT_SOURCE_DIR}/googleeace6f5ccc88b340.html"
 HTML_DYNAMIC_MENUS     = YES
 HTML_DYNAMIC_SECTIONS  = NO
 HTML_OUTPUT            = "${doxygen_html_dir}"
