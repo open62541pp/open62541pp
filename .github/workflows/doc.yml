@@ -23,14 +23,9 @@ jobs:
           cd build
           cmake -DUAPP_BUILD_DOCUMENTATION=ON ..
           cmake --build . --target open62541pp_doc
-      - uses: actions/upload-artifact@v3
-        with:
-          name: doc-html
-          path: build/doc_html/
-          retention-days: 7
       - name: Deploy
         if: ${{ github.event_name == 'release' }}
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: build/doc_html/
+          publish_dir: build/doc_html
