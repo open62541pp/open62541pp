@@ -6,6 +6,9 @@ namespace opcua::detail {
 
 UA_String toUaString(std::string_view src) noexcept {
     UA_String s{src.size(), nullptr};
+    if (src.data() == nullptr) {
+        return s;
+    }
     if (!src.empty()) {
         s.data = (UA_Byte*)src.data();  // NOLINT
     } else {
