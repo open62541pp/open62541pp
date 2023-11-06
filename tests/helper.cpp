@@ -39,14 +39,6 @@ TEST_CASE("String conversion UA_String -> string") {
     }
 }
 
-TEST_CASE("Alloc UA_String from string") {
-    std::string str("test123");
-    auto uaString = detail::allocUaString(str);
-    CHECK(uaString.length == 7);
-    CHECK(std::strncmp((char*)uaString.data, str.c_str(), 7) == 0);  // NOLINT
-    UA_String_clear(&uaString);
-}
-
 TEST_CASE("Alloc UA_String from string_view") {
     const char* str = "test123";
     std::string_view sv(str);

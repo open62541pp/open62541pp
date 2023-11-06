@@ -600,18 +600,14 @@ TEST_CASE("Variant") {
     SUBCASE("Set array of native strings") {
         Variant var;
         std::array array{
-            detail::allocUaString("item1"),
-            detail::allocUaString("item2"),
-            detail::allocUaString("item3"),
+            detail::toUaString("item1"),
+            detail::toUaString("item2"),
+            detail::toUaString("item3"),
         };
 
         var.setArray(Span{array.data(), array.size()}, UA_TYPES[UA_TYPES_STRING]);
         CHECK(var.data() == array.data());
         CHECK(var.getArrayLength() == array.size());
-
-        UA_clear(&array[0], &UA_TYPES[UA_TYPES_STRING]);
-        UA_clear(&array[1], &UA_TYPES[UA_TYPES_STRING]);
-        UA_clear(&array[2], &UA_TYPES[UA_TYPES_STRING]);
     }
 
     SUBCASE("Set array of wrapper strings") {
