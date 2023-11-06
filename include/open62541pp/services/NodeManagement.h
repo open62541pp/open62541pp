@@ -79,12 +79,29 @@ DeleteReferencesResponse deleteReferences(
 );
 
 /**
+ * Add node.
+ * @exception BadStatus
+ * @ingroup NodeManagement
+ */
+template <typename T>
+NodeId addNode(
+    T& serverOrClient,
+    NodeClass nodeClass,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    const ExtensionObject& nodeAttributes,
+    const NodeId& typeDefinition,
+    const NodeId& referenceType
+);
+
+/**
  * Add object.
  * @exception BadStatus
  * @ingroup NodeManagement
  */
 template <typename T>
-NodeId addObject(
+inline NodeId addObject(
     T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
@@ -92,7 +109,18 @@ NodeId addObject(
     const ObjectAttributes& attributes = {},
     const NodeId& objectType = ObjectTypeId::BaseObjectType,
     const NodeId& referenceType = ReferenceTypeId::HasComponent
-);
+) {
+    return addNode(
+        serverOrClient,
+        NodeClass::Object,
+        parentId,
+        id,
+        browseName,
+        ExtensionObject::fromDecoded(const_cast<ObjectAttributes&>(attributes)),  // NOLINT
+        objectType,
+        referenceType
+    );
+}
 
 /**
  * Add folder.
@@ -125,7 +153,7 @@ inline NodeId addFolder(
  * @ingroup NodeManagement
  */
 template <typename T>
-NodeId addVariable(
+inline NodeId addVariable(
     T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
@@ -133,7 +161,18 @@ NodeId addVariable(
     const VariableAttributes& attributes = {},
     const NodeId& variableType = VariableTypeId::BaseDataVariableType,
     const NodeId& referenceType = ReferenceTypeId::HasComponent
-);
+) {
+    return addNode(
+        serverOrClient,
+        NodeClass::Variable,
+        parentId,
+        id,
+        browseName,
+        ExtensionObject::fromDecoded(const_cast<VariableAttributes&>(attributes)),  // NOLINT
+        variableType,
+        referenceType
+    );
+}
 
 /**
  * Add property.
@@ -194,14 +233,25 @@ NodeId addMethod(
  * @ingroup NodeManagement
  */
 template <typename T>
-NodeId addObjectType(
+inline NodeId addObjectType(
     T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
     const ObjectTypeAttributes& attributes = {},
     const NodeId& referenceType = ReferenceTypeId::HasSubtype
-);
+) {
+    return addNode(
+        serverOrClient,
+        NodeClass::ObjectType,
+        parentId,
+        id,
+        browseName,
+        ExtensionObject::fromDecoded(const_cast<ObjectTypeAttributes&>(attributes)),  // NOLINT
+        {},
+        referenceType
+    );
+}
 
 /**
  * Add variable type.
@@ -209,7 +259,7 @@ NodeId addObjectType(
  * @ingroup NodeManagement
  */
 template <typename T>
-NodeId addVariableType(
+inline NodeId addVariableType(
     T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
@@ -217,7 +267,18 @@ NodeId addVariableType(
     const VariableTypeAttributes& attributes = {},
     const NodeId& variableType = VariableTypeId::BaseDataVariableType,
     const NodeId& referenceType = ReferenceTypeId::HasSubtype
-);
+) {
+    return addNode(
+        serverOrClient,
+        NodeClass::VariableType,
+        parentId,
+        id,
+        browseName,
+        ExtensionObject::fromDecoded(const_cast<VariableTypeAttributes&>(attributes)),  // NOLINT
+        variableType,
+        referenceType
+    );
+}
 
 /**
  * Add reference type.
@@ -225,14 +286,25 @@ NodeId addVariableType(
  * @ingroup NodeManagement
  */
 template <typename T>
-NodeId addReferenceType(
+inline NodeId addReferenceType(
     T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
     const ReferenceTypeAttributes& attributes = {},
     const NodeId& referenceType = ReferenceTypeId::HasSubtype
-);
+) {
+    return addNode(
+        serverOrClient,
+        NodeClass::ReferenceType,
+        parentId,
+        id,
+        browseName,
+        ExtensionObject::fromDecoded(const_cast<ReferenceTypeAttributes&>(attributes)),  // NOLINT
+        {},
+        referenceType
+    );
+}
 
 /**
  * Add data type.
@@ -240,14 +312,25 @@ NodeId addReferenceType(
  * @ingroup NodeManagement
  */
 template <typename T>
-NodeId addDataType(
+inline NodeId addDataType(
     T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
     const DataTypeAttributes& attributes = {},
     const NodeId& referenceType = ReferenceTypeId::HasSubtype
-);
+) {
+    return addNode(
+        serverOrClient,
+        NodeClass::DataType,
+        parentId,
+        id,
+        browseName,
+        ExtensionObject::fromDecoded(const_cast<DataTypeAttributes&>(attributes)),  // NOLINT
+        {},
+        referenceType
+    );
+}
 
 /**
  * Add view.
@@ -255,14 +338,25 @@ NodeId addDataType(
  * @ingroup NodeManagement
  */
 template <typename T>
-NodeId addView(
+inline NodeId addView(
     T& serverOrClient,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
     const ViewAttributes& attributes = {},
     const NodeId& referenceType = ReferenceTypeId::Organizes
-);
+) {
+    return addNode(
+        serverOrClient,
+        NodeClass::View,
+        parentId,
+        id,
+        browseName,
+        ExtensionObject::fromDecoded(const_cast<ViewAttributes&>(attributes)),  // NOLINT
+        {},
+        referenceType
+    );
+}
 
 /**
  * Add reference.

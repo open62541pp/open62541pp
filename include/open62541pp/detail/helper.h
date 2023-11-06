@@ -34,11 +34,8 @@ inline const UA_DataType* findUaDataType(const UA_NodeId& id) noexcept {
     return UA_findDataType(&id);
 }
 
-/// Allocate UA_String from const char*
-[[nodiscard]] UA_String allocUaString(const char* src);
-
-/// Allocate UA_String from std::string
-[[nodiscard]] UA_String allocUaString(const std::string& src);
+/// Convert std::string_view to UA_String (no copy)
+UA_String toUaString(std::string_view src) noexcept;
 
 /// Allocate UA_String from std::string_view
 [[nodiscard]] UA_String allocUaString(std::string_view src);
