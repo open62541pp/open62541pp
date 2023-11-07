@@ -102,23 +102,22 @@ public:
 
     /// @copydoc getDecodedData
     const void* getDecodedData() const noexcept;
+
+private:
+    template <typename T>
+    static constexpr void assertDecodedType() {
+        static_assert(
+            detail::isNativeType<T> || detail::isTypeWrapper<T>,
+            "Template type must be a native or wrapper type to set/get decoded data"
+        );
+    }
 };
-
-/* ------------------------------------------- Helper ------------------------------------------- */
-
-namespace detail {
-
-template <typename T>
-constexpr bool isAssignableToExtensionObject() {
-    return detail::isBuiltinType<T>() || detail::IsTypeWrapper<T>::value;
-}
-
-}  // namespace detail
 
 /* --------------------------------------- Implementation --------------------------------------- */
 
 template <typename T>
 T* ExtensionObject::getDecodedData() noexcept {
+    assertDecodedType<T>();
     if (getDecodedDataType() == &detail::guessDataType<T>()) {
         return static_cast<T*>(getDecodedData());
     }
@@ -127,6 +126,7 @@ T* ExtensionObject::getDecodedData() noexcept {
 
 template <typename T>
 const T* ExtensionObject::getDecodedData() const noexcept {
+    assertDecodedType<T>();
     if (getDecodedDataType() == &detail::guessDataType<T>()) {
         return static_cast<const T*>(getDecodedData());
     }
@@ -135,24 +135,14 @@ const T* ExtensionObject::getDecodedData() const noexcept {
 
 template <typename T>
 ExtensionObject ExtensionObject::fromDecoded(T& data) noexcept {
-    static_assert(
-        detail::isAssignableToExtensionObject<T>(),
-        "Template type must be convertible to native type to assign data without copy"
-    );
-    if constexpr (detail::IsTypeWrapper<T>::value) {
-        return fromDecoded(data.handle(), detail::guessDataType<T>());
-    } else {
-        return fromDecoded(&data, detail::guessDataType<T>());
-    }
+    assertDecodedType<T>();
+    return fromDecoded(&data, detail::guessDataType<T>());
 }
 
 template <typename T>
 ExtensionObject ExtensionObject::fromDecodedCopy(const T& data) {
-    if constexpr (detail::IsTypeWrapper<T>::value) {
-        return fromDecodedCopy(data.handle(), detail::guessDataType<T>());
-    } else {
-        return fromDecodedCopy(&data, detail::guessDataType<T>());
-    }
+    assertDecodedType<T>();
+    return fromDecodedCopy(&data, detail::guessDataType<T>());
 }
 
 }  // namespace opcua
