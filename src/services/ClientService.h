@@ -7,7 +7,6 @@
 
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
-#include "open62541pp/TypeConverter.h"  // isNativeType, guessDataType
 #include "open62541pp/TypeWrapper.h"
 
 #include "../open62541_impl.h"
@@ -27,41 +26,31 @@ struct ForwardResponse {
 
 template <typename Request, typename Response, typename Fn>
 auto sendRequest(Client& client, const Request& request, Fn&& transformResponse) {
-    static_assert(detail::isNativeType<Request>);
-    static_assert(detail::isNativeType<Response>);
+    static_assert(detail::isTypeWrapper<Request>);
+    static_assert(detail::isTypeWrapper<Response>);
     static_assert(std::is_invocable_v<Fn, Response&> || std::is_invocable_v<Fn, Response&&>);
 
     Response response{};
-    auto clearResponse = [&] { UA_clear(&response, &detail::guessDataType<Response>()); };
-
     __UA_Client_Service(
         client.handle(),
-        &request,
-        &detail::guessDataType<Request>(),
-        &response,
-        &detail::guessDataType<Response>()
+        request.handle(),
+        &UA_TYPES[Request::getTypeIndex()],
+        response.handle(),
+        &UA_TYPES[Response::getTypeIndex()]
     );
 
-    try {
-        detail::throwOnBadStatus(response.responseHeader.serviceResult);
-        if constexpr (std::is_invocable_v<Fn, Response&&>) {
-            // move ownership to callback
-            return transformResponse(std::move(response));
-        } else {
-            auto result = transformResponse(response);
-            clearResponse();
-            return result;
-        }
-    } catch (...) {
-        clearResponse();
-        throw;
+    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    if constexpr (std::is_invocable_v<Fn, Response&&>) {
+        return transformResponse(std::move(response));
+    } else {
+        return transformResponse(response);
     }
 }
 
 template <typename Request, typename Response, typename Fn>
 auto sendAsyncRequest(Client& client, const Request& request, Fn&& transformResponse) {
-    static_assert(detail::isNativeType<Request>);
-    static_assert(detail::isNativeType<Response>);
+    static_assert(detail::isTypeWrapper<Request>);
+    static_assert(detail::isTypeWrapper<Response>);
     static_assert(std::is_invocable_v<Fn, Response&> || std::is_invocable_v<Fn, Response&&>);
 
     constexpr bool rvalue = std::is_invocable_v<Fn, Response&&>;
@@ -84,7 +73,7 @@ auto sendAsyncRequest(Client& client, const Request& request, Fn&& transformResp
                 throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
             }
             auto& response = *static_cast<Response*>(responsePtr);
-            detail::throwOnBadStatus(response.responseHeader.serviceResult);
+            detail::throwOnBadStatus(response->responseHeader.serviceResult);
             if constexpr (std::is_invocable_v<Fn, Response&&>) {
                 Response responseMove;
                 std::swap(response, responseMove);
@@ -101,10 +90,10 @@ auto sendAsyncRequest(Client& client, const Request& request, Fn&& transformResp
     auto future = callbackContext->promise.get_future();
     const auto status = __UA_Client_AsyncService(
         client.handle(),
-        &request,
-        &detail::guessDataType<Request>(),
+        request.handle(),
+        &UA_TYPES[Request::getTypeIndex()],
         callback,
-        &detail::guessDataType<Response>(),
+        &UA_TYPES[Response::getTypeIndex()],
         callbackContext.release(),  // userdata, transfer ownership to callback
         nullptr
     );

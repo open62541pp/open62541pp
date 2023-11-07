@@ -9,6 +9,7 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/types/Composed.h"
 #include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"
 
@@ -68,7 +69,9 @@ std::vector<Variant> call(
     UA_CallRequest request{};
     request.methodsToCall = &item;
     request.methodsToCallSize = 1;
-    return sendRequest<UA_CallRequest, UA_CallResponse>(client, request, &transformCallResponse);
+    return sendRequest<CallRequest, CallResponse>(
+        client, asWrapper<CallRequest>(request), &transformCallResponse
+    );
 }
 
 std::future<std::vector<Variant>> callAsync(
@@ -81,8 +84,8 @@ std::future<std::vector<Variant>> callAsync(
     UA_CallRequest request{};
     request.methodsToCall = &item;
     request.methodsToCallSize = 1;
-    return sendAsyncRequest<UA_CallRequest, UA_CallResponse>(
-        client, request, &transformCallResponse
+    return sendAsyncRequest<CallRequest, CallResponse>(
+        client, asWrapper<CallRequest>(request), &transformCallResponse
     );
 }
 

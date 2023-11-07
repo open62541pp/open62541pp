@@ -17,26 +17,26 @@
 namespace opcua::services {
 
 AddNodesResponse addNodes(Client& client, const AddNodesRequest& request) {
-    return sendRequest<UA_AddNodesRequest, UA_AddNodesResponse>(
-        client, request, ForwardResponse<UA_AddNodesResponse>{}
+    return sendRequest<AddNodesRequest, AddNodesResponse>(
+        client, request, ForwardResponse<AddNodesResponse>{}
     );
 }
 
 AddReferencesResponse addReferences(Client& client, const AddReferencesRequest& request) {
-    return sendRequest<UA_AddReferencesRequest, UA_AddReferencesResponse>(
-        client, request, ForwardResponse<UA_AddReferencesResponse>{}
+    return sendRequest<AddReferencesRequest, AddReferencesResponse>(
+        client, request, ForwardResponse<AddReferencesResponse>{}
     );
 }
 
 DeleteNodesResponse deleteNodes(Client& client, const DeleteNodesRequest& request) {
-    return sendRequest<UA_DeleteNodesRequest, UA_DeleteNodesResponse>(
-        client, request, ForwardResponse<UA_DeleteNodesResponse>{}
+    return sendRequest<DeleteNodesRequest, DeleteNodesResponse>(
+        client, request, ForwardResponse<DeleteNodesResponse>{}
     );
 }
 
 DeleteReferencesResponse deleteReferences(Client& client, const DeleteReferencesRequest& request) {
-    return sendRequest<UA_DeleteReferencesRequest, UA_DeleteReferencesResponse>(
-        client, request, ForwardResponse<UA_DeleteReferencesResponse>{}
+    return sendRequest<DeleteReferencesRequest, DeleteReferencesResponse>(
+        client, request, ForwardResponse<DeleteReferencesResponse>{}
     );
 }
 
@@ -179,8 +179,6 @@ NodeId addMethod(
     const MethodAttributes& attributes,
     const NodeId& referenceType
 ) {
-    // callback can be added later by server with UA_Server_setMethodNodeCallback
-    // arguments can not be passed to UA_Client_addMethodNode... why?
     return addNode(
         client,
         NodeClass::Method,
@@ -192,7 +190,6 @@ NodeId addMethod(
         referenceType
     );
 }
-
 #endif
 
 template <>

@@ -8,7 +8,6 @@
 #include "open62541pp/NodeIds.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeWrapper.h"
-#include "open62541pp/detail/helper.h"  // getUaDataType
 #include "open62541pp/types/Builtin.h"
 
 #include "../open62541_impl.h"
@@ -17,8 +16,8 @@
 namespace opcua::services {
 
 BrowseResponse browse(Client& client, const BrowseRequest& request) {
-    return sendRequest<UA_BrowseRequest, UA_BrowseResponse>(
-        client, request, ForwardResponse<UA_BrowseResponse>{}
+    return sendRequest<BrowseRequest, BrowseResponse>(
+        client, request, ForwardResponse<BrowseResponse>{}
     );
 }
 
@@ -47,8 +46,8 @@ BrowseResult browse<Client>(Client& client, const BrowseDescription& bd, uint32_
 }
 
 BrowseNextResponse browseNext(Client& client, const BrowseNextRequest& request) {
-    return sendRequest<UA_BrowseNextRequest, UA_BrowseNextResponse>(
-        client, request, ForwardResponse<UA_BrowseNextResponse>{}
+    return sendRequest<BrowseNextRequest, BrowseNextResponse>(
+        client, request, ForwardResponse<BrowseNextResponse>{}
     );
 }
 
@@ -111,18 +110,16 @@ std::vector<ExpandedNodeId> browseRecursive(Server& server, const BrowseDescript
     for (size_t i = 0; i < resultsSize; ++i) {
         results[i].swap(resultsNative[i]);  // NOLINT
     }
-    UA_Array_delete(resultsNative, resultsSize, &detail::getUaDataType(UA_TYPES_EXPANDEDNODEID));
+    UA_Array_delete(resultsNative, resultsSize, &UA_TYPES[UA_TYPES_EXPANDEDNODEID]);
     return results;
 }
 
 TranslateBrowsePathsToNodeIdsResponse translateBrowsePathsToNodeIds(
     Client& client, const TranslateBrowsePathsToNodeIdsRequest& request
 ) {
-    using NativeRequest = UA_TranslateBrowsePathsToNodeIdsRequest;
-    using NativeResponse = UA_TranslateBrowsePathsToNodeIdsResponse;
-    return sendRequest<NativeRequest, NativeResponse>(
-        client, request, ForwardResponse<NativeResponse>{}
-    );
+    using Request = TranslateBrowsePathsToNodeIdsRequest;
+    using Response = TranslateBrowsePathsToNodeIdsResponse;
+    return sendRequest<Request, Response>(client, request, ForwardResponse<Response>{});
 }
 
 template <>
@@ -174,14 +171,14 @@ BrowsePathResult browseSimplifiedBrowsePath(
 }
 
 RegisterNodesResponse registerNodes(Client& client, const RegisterNodesRequest& request) {
-    return sendRequest<UA_RegisterNodesRequest, UA_RegisterNodesResponse>(
-        client, request, ForwardResponse<UA_RegisterNodesResponse>{}
+    return sendRequest<RegisterNodesRequest, RegisterNodesResponse>(
+        client, request, ForwardResponse<RegisterNodesResponse>{}
     );
 }
 
 UnregisterNodesResponse unregisterNodes(Client& client, const UnregisterNodesRequest& request) {
-    return sendRequest<UA_UnregisterNodesRequest, UA_UnregisterNodesResponse>(
-        client, request, ForwardResponse<UA_UnregisterNodesResponse>{}
+    return sendRequest<UnregisterNodesRequest, UnregisterNodesResponse>(
+        client, request, ForwardResponse<UnregisterNodesResponse>{}
     );
 }
 
