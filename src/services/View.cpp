@@ -12,13 +12,14 @@
 #include "open62541pp/types/Builtin.h"
 
 #include "../open62541_impl.h"
+#include "ClientService.h"
 
 namespace opcua::services {
 
 BrowseResponse browse(Client& client, const BrowseRequest& request) {
-    BrowseResponse response = UA_Client_Service_browse(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
-    return response;
+    return sendRequest<UA_BrowseRequest, UA_BrowseResponse>(
+        client, request, ForwardResponse<UA_BrowseResponse>{}
+    );
 }
 
 template <>
@@ -46,9 +47,9 @@ BrowseResult browse<Client>(Client& client, const BrowseDescription& bd, uint32_
 }
 
 BrowseNextResponse browseNext(Client& client, const BrowseNextRequest& request) {
-    BrowseNextResponse response = UA_Client_Service_browseNext(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
-    return response;
+    return sendRequest<UA_BrowseNextRequest, UA_BrowseNextResponse>(
+        client, request, ForwardResponse<UA_BrowseNextResponse>{}
+    );
 }
 
 template <>
@@ -117,10 +118,11 @@ std::vector<ExpandedNodeId> browseRecursive(Server& server, const BrowseDescript
 TranslateBrowsePathsToNodeIdsResponse translateBrowsePathsToNodeIds(
     Client& client, const TranslateBrowsePathsToNodeIdsRequest& request
 ) {
-    TranslateBrowsePathsToNodeIdsResponse response =
-        UA_Client_Service_translateBrowsePathsToNodeIds(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
-    return response;
+    using NativeRequest = UA_TranslateBrowsePathsToNodeIdsRequest;
+    using NativeResponse = UA_TranslateBrowsePathsToNodeIdsResponse;
+    return sendRequest<NativeRequest, NativeResponse>(
+        client, request, ForwardResponse<NativeResponse>{}
+    );
 }
 
 template <>
@@ -172,15 +174,15 @@ BrowsePathResult browseSimplifiedBrowsePath(
 }
 
 RegisterNodesResponse registerNodes(Client& client, const RegisterNodesRequest& request) {
-    RegisterNodesResponse response = UA_Client_Service_registerNodes(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
-    return response;
+    return sendRequest<UA_RegisterNodesRequest, UA_RegisterNodesResponse>(
+        client, request, ForwardResponse<UA_RegisterNodesResponse>{}
+    );
 }
 
 UnregisterNodesResponse unregisterNodes(Client& client, const UnregisterNodesRequest& request) {
-    UnregisterNodesResponse response = UA_Client_Service_unregisterNodes(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
-    return response;
+    return sendRequest<UA_UnregisterNodesRequest, UA_UnregisterNodesResponse>(
+        client, request, ForwardResponse<UA_UnregisterNodesResponse>{}
+    );
 }
 
 // explicit template instantiations
