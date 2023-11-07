@@ -1246,6 +1246,81 @@ public:
     UAPP_COMPOSED_GETTER_SPAN(uint32_t, getArrayDimensions, arrayDimensions, arrayDimensionsSize)
 };
 
+/**
+ * UA_CallMethodRequest wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.11.2
+ * @ingroup TypeWrapper
+ */
+class CallMethodRequest : public TypeWrapper<UA_CallMethodRequest, UA_TYPES_CALLMETHODREQUEST> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    CallMethodRequest(NodeId objectId, NodeId methodId, Span<const Variant> inputArguments);
+
+    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getObjectId, objectId)
+    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getMethodId, methodId)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        Variant, getInputArguments, inputArguments, inputArgumentsSize
+    )
+};
+
+/**
+ * UA_CallMethodResult wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.11.2
+ * @ingroup TypeWrapper
+ */
+class CallMethodResult : public TypeWrapper<UA_CallMethodResult, UA_TYPES_CALLMETHODRESULT> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    UAPP_COMPOSED_GETTER_WRAPPER(StatusCode, getStatusCode, statusCode)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        StatusCode, getInputArgumentResults, inputArgumentResults, inputArgumentResultsSize
+    )
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        DiagnosticInfo,
+        getInputArgumentDiagnosticInfos,
+        inputArgumentDiagnosticInfos,
+        inputArgumentDiagnosticInfosSize
+    )
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        Variant, getOutputArguments, outputArguments, outputArgumentsSize
+    )
+};
+
+/**
+ * UA_CallRequest wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.11.2
+ * @ingroup TypeWrapper
+ */
+class CallRequest : public TypeWrapper<UA_CallRequest, UA_TYPES_CALLREQUEST> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    CallRequest(RequestHeader requestHeader, Span<const CallMethodRequest> methodsToCall);
+
+    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        CallMethodRequest, getMethodsToCall, methodsToCall, methodsToCallSize
+    )
+};
+
+/**
+ * UA_CallResponse wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.11.2
+ * @ingroup TypeWrapper
+ */
+class CallResponse : public TypeWrapper<UA_CallResponse, UA_TYPES_CALLRESPONSE> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(CallMethodResult, getResults, results, resultsSize)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        DiagnosticInfo, getDiagnosticInfos, diagnosticInfos, diagnosticInfosSize
+    )
+};
+
 #endif
 
 /* ---------------------------------------- Subscriptions --------------------------------------- */
