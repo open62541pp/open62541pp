@@ -220,7 +220,7 @@ private:
     template <typename T>
     static constexpr bool isConvertibleToNative() {
         // TypeWrapper<T> is pointer-interconvertible with T
-        return detail::isNativeType<T>() || detail::IsTypeWrapper<T>::value;
+        return detail::isNativeType<T> || detail::isTypeWrapper<T>;
     }
 
     template <typename T>
@@ -433,7 +433,7 @@ void Variant::setArray(Span<T> array, const UA_DataType& dataType) noexcept {
 template <typename T>
 void Variant::setArrayCopy(Span<T> array) {
     assertNoVariant<T>();
-    if constexpr (detail::isBuiltinType<T>()) {
+    if constexpr (detail::isBuiltinType<T>) {
         setArrayCopyImpl(array.data(), array.size(), detail::guessDataType<T>());
     } else {
         setArrayCopy(array.begin(), array.end());

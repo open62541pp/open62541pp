@@ -170,13 +170,20 @@ private:
 
 namespace detail {
 
-// https://stackoverflow.com/a/51910887
-template <typename T, TypeIndex typeIndex>
-std::true_type isTypeWrapperImpl(TypeWrapper<T, typeIndex>*);
-std::false_type isTypeWrapperImpl(...);
+template <typename T>
+struct IsTypeWrapper {
+    // https://stackoverflow.com/a/51910887
+    template <typename U, TypeIndex typeIndex>
+    static std::true_type check(const TypeWrapper<U, typeIndex>&);
+
+    static std::false_type check(...);
+
+    using type = decltype(check(std::declval<T&>()));  // NOLINT
+    static constexpr bool value = type::value;
+};
 
 template <typename T>
-using IsTypeWrapper = decltype(isTypeWrapperImpl(std::declval<T*>()));
+inline constexpr bool isTypeWrapper = IsTypeWrapper<T>::value;
 
 }  // namespace detail
 
@@ -280,32 +287,32 @@ constexpr const NativeType& asNative(const WrapperType& wrapper) noexcept {
 
 // generate from UA_* type comparison
 
-template <typename T, typename = std::enable_if_t<detail::IsTypeWrapper<T>::value>>
+template <typename T, typename = std::enable_if_t<detail::isTypeWrapper<T>>>
 inline bool operator==(const T& lhs, const T& rhs) noexcept {
     return (*lhs.handle() == *rhs.handle());
 }
 
-template <typename T, typename = std::enable_if_t<detail::IsTypeWrapper<T>::value>>
+template <typename T, typename = std::enable_if_t<detail::isTypeWrapper<T>>>
 inline bool operator!=(const T& lhs, const T& rhs) noexcept {
     return (*lhs.handle() != *rhs.handle());
 }
 
-template <typename T, typename = std::enable_if_t<detail::IsTypeWrapper<T>::value>>
+template <typename T, typename = std::enable_if_t<detail::isTypeWrapper<T>>>
 inline bool operator<(const T& lhs, const T& rhs) noexcept {
     return (*lhs.handle() < *rhs.handle());
 }
 
-template <typename T, typename = std::enable_if_t<detail::IsTypeWrapper<T>::value>>
+template <typename T, typename = std::enable_if_t<detail::isTypeWrapper<T>>>
 inline bool operator>(const T& lhs, const T& rhs) noexcept {
     return (*lhs.handle() > *rhs.handle());
 }
 
-template <typename T, typename = std::enable_if_t<detail::IsTypeWrapper<T>::value>>
+template <typename T, typename = std::enable_if_t<detail::isTypeWrapper<T>>>
 inline bool operator<=(const T& lhs, const T& rhs) noexcept {
     return (*lhs.handle() <= *rhs.handle());
 }
 
-template <typename T, typename = std::enable_if_t<detail::IsTypeWrapper<T>::value>>
+template <typename T, typename = std::enable_if_t<detail::isTypeWrapper<T>>>
 inline bool operator>=(const T& lhs, const T& rhs) noexcept {
     return (*lhs.handle() >= *rhs.handle());
 }

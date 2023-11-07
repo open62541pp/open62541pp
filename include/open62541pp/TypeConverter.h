@@ -113,7 +113,7 @@ template <typename T>
 /// Create and convert vector from native array.
 template <typename T, typename NativeType = typename TypeConverter<T>::NativeType>
 [[nodiscard]] std::vector<T> fromNativeArray(NativeType* array, size_t size) {
-    if constexpr (isBuiltinType<T>() && std::is_fundamental_v<T>) {
+    if constexpr (isBuiltinType<T> && std::is_fundamental_v<T>) {
         return std::vector<T>(array, array + size);  // NOLINT
     } else {
         std::vector<T> result(size);
@@ -219,11 +219,8 @@ struct TypeConverterNative {
 };
 
 template <typename T>
-constexpr bool isNativeType() {
-    using ValueType = typename TypeConverter<T>::ValueType;
-    using NativeType = typename TypeConverter<T>::NativeType;
-    return std::is_same_v<ValueType, NativeType>;
-}
+inline constexpr bool isNativeType =
+    std::is_same_v<typename TypeConverter<T>::ValueType, typename TypeConverter<T>::NativeType>;
 
 }  // namespace detail
 
@@ -265,7 +262,7 @@ UAPP_TYPECONVERTER_NATIVE(UA_DiagnosticInfo, UA_TYPES_DIAGNOSTICINFO)
 /* ------------------------------- Implementation for TypeWrapper ------------------------------- */
 
 template <typename WrapperType>
-struct TypeConverter<WrapperType, std::enable_if_t<detail::IsTypeWrapper<WrapperType>::value>> {
+struct TypeConverter<WrapperType, std::enable_if_t<detail::isTypeWrapper<WrapperType>>> {
     using NativeConverter = TypeConverter<typename WrapperType::NativeType>;
 
     using ValueType = WrapperType;

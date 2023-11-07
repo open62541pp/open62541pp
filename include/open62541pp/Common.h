@@ -242,14 +242,7 @@ using BuiltinTypes = std::tuple<
     UA_DiagnosticInfo>;
 
 template <typename T>
-constexpr bool isBuiltinType() {
-    return TupleHolds<BuiltinTypes, T>::value;
-}
-
-// template <size_t Index>
-// using BuiltinType = std::tuple_element<Index, BuiltinTypes>;
-
-inline constexpr auto builtinTypesCount = std::tuple_size_v<BuiltinTypes>;
+inline constexpr bool isBuiltinType = TupleHolds<BuiltinTypes, T>::value;
 
 }  // namespace detail
 
