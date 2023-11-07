@@ -7,7 +7,7 @@
 
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
-#include "open62541pp/TypeConverter.h"  // guessDataType
+#include "open62541pp/TypeConverter.h"  // isNativeType, guessDataType
 #include "open62541pp/TypeWrapper.h"
 
 #include "../open62541_impl.h"
@@ -27,8 +27,8 @@ struct ForwardResponse {
 
 template <typename Request, typename Response, typename Fn>
 auto sendRequest(Client& client, const Request& request, Fn&& transformResponse) {
-    static_assert(detail::isNativeType<Request>());
-    static_assert(detail::isNativeType<Response>());
+    static_assert(detail::isNativeType<Request>);
+    static_assert(detail::isNativeType<Response>);
     static_assert(std::is_invocable_v<Fn, Response&> || std::is_invocable_v<Fn, Response&&>);
 
     Response response{};
@@ -60,8 +60,8 @@ auto sendRequest(Client& client, const Request& request, Fn&& transformResponse)
 
 template <typename Request, typename Response, typename Fn>
 auto sendAsyncRequest(Client& client, const Request& request, Fn&& transformResponse) {
-    static_assert(detail::isNativeType<Request>());
-    static_assert(detail::isNativeType<Response>());
+    static_assert(detail::isNativeType<Request>);
+    static_assert(detail::isNativeType<Response>);
     static_assert(std::is_invocable_v<Fn, Response&> || std::is_invocable_v<Fn, Response&&>);
 
     constexpr bool rvalue = std::is_invocable_v<Fn, Response&&>;
