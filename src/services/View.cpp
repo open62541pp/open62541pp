@@ -171,6 +171,18 @@ BrowsePathResult browseSimplifiedBrowsePath(
     return translateBrowsePathToNodeIds(serverOrClient, bp);
 }
 
+RegisterNodesResponse registerNodes(Client& client, const RegisterNodesRequest& request) {
+    RegisterNodesResponse response = UA_Client_Service_registerNodes(client.handle(), request);
+    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    return response;
+}
+
+UnregisterNodesResponse unregisterNodes(Client& client, const UnregisterNodesRequest& request) {
+    UnregisterNodesResponse response = UA_Client_Service_unregisterNodes(client.handle(), request);
+    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    return response;
+}
+
 // explicit template instantiations
 // clang-format off
 

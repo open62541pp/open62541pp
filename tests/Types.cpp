@@ -1027,6 +1027,20 @@ TEST_CASE("TranslateBrowsePathsToNodeIdsRequest") {
     CHECK(request.getBrowsePaths().empty());
 }
 
+TEST_CASE("RegisterNodesRequest") {
+    const RegisterNodesRequest request({}, {{1, 1000}});
+    CHECK_NOTHROW(request.getRequestHeader());
+    CHECK(request.getNodesToRegister().size() == 1);
+    CHECK(request.getNodesToRegister()[0] == NodeId(1, 1000));
+}
+
+TEST_CASE("UnregisterNodesRequest") {
+    const UnregisterNodesRequest request({}, {{1, 1000}});
+    CHECK_NOTHROW(request.getRequestHeader());
+    CHECK(request.getNodesToUnregister().size() == 1);
+    CHECK(request.getNodesToUnregister()[0] == NodeId(1, 1000));
+}
+
 TEST_CASE("ReadValueId") {
     const ReadValueId rvid(NodeId(1, 1000), AttributeId::Value);
     CHECK(rvid.getNodeId() == NodeId(1, 1000));

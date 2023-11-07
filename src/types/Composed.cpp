@@ -255,6 +255,20 @@ TranslateBrowsePathsToNodeIdsRequest::TranslateBrowsePathsToNodeIdsRequest(
     copyArray(browsePaths, &handle()->browsePaths, handle()->browsePathsSize);
 }
 
+RegisterNodesRequest::RegisterNodesRequest(
+    RequestHeader requestHeader, Span<const NodeId> nodesToRegister
+) {
+    assign(std::move(requestHeader), handle()->requestHeader);
+    copyArray(nodesToRegister, &handle()->nodesToRegister, handle()->nodesToRegisterSize);
+}
+
+UnregisterNodesRequest::UnregisterNodesRequest(
+    RequestHeader requestHeader, Span<const NodeId> nodesToUnregister
+) {
+    assign(std::move(requestHeader), handle()->requestHeader);
+    copyArray(nodesToUnregister, &handle()->nodesToUnregister, handle()->nodesToUnregisterSize);
+}
+
 ReadValueId::ReadValueId(
     NodeId nodeId, AttributeId attributeId, std::string_view indexRange, QualifiedName dataEncoding
 ) {

@@ -128,4 +128,19 @@ BrowsePathResult browseSimplifiedBrowsePath(
     T& serverOrClient, const NodeId& origin, Span<const QualifiedName> browsePath
 );
 
+/**
+ * Register nodes for efficient access operations (client only).
+ * Clients shall unregister unneeded nodes immediately to free up resources.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.5
+ * @ingroup View
+ */
+RegisterNodesResponse registerNodes(Client& client, const RegisterNodesRequest& request);
+
+/**
+ * Unregister nodes (client only).
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.6
+ * @ingroup View
+ */
+UnregisterNodesResponse unregisterNodes(Client& client, const UnregisterNodesRequest& request);
+
 }  // namespace opcua::services

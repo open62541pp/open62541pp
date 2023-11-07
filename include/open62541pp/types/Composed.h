@@ -1048,6 +1048,67 @@ public:
 };
 
 /**
+ * UA_RegisterNodesRequest wrapper class.
+ * @ingroup TypeWrapper
+ */
+class RegisterNodesRequest
+    : public TypeWrapper<UA_RegisterNodesRequest, UA_TYPES_REGISTERNODESREQUEST> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    RegisterNodesRequest(RequestHeader requestHeader, Span<const NodeId> nodesToRegister);
+
+    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        NodeId, getNodesToRegister, nodesToRegister, nodesToRegisterSize
+    )
+};
+
+/**
+ * UA_RegisterNodesResponse wrapper class.
+ * @ingroup TypeWrapper
+ */
+class RegisterNodesResponse
+    : public TypeWrapper<UA_RegisterNodesResponse, UA_TYPES_REGISTERNODESRESPONSE> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        NodeId, getRegisteredNodeIds, registeredNodeIds, registeredNodeIdsSize
+    )
+};
+
+/**
+ * UA_UnregisterNodesRequest wrapper class.
+ * @ingroup TypeWrapper
+ */
+class UnregisterNodesRequest
+    : public TypeWrapper<UA_UnregisterNodesRequest, UA_TYPES_UNREGISTERNODESREQUEST> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    UnregisterNodesRequest(RequestHeader requestHeader, Span<const NodeId> nodesToUnregister);
+
+    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        NodeId, getNodesToUnregister, nodesToUnregister, nodesToUnregisterSize
+    )
+};
+
+/**
+ * UA_UnregisterNodesResponse wrapper class.
+ * @ingroup TypeWrapper
+ */
+class UnregisterNodesResponse
+    : public TypeWrapper<UA_UnregisterNodesResponse, UA_TYPES_UNREGISTERNODESRESPONSE> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+};
+
+/**
  * UA_ReadValueId wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.29
  * @ingroup TypeWrapper
