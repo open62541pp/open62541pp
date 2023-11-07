@@ -793,6 +793,21 @@ public:
 };
 
 /**
+ * UA_ViewDescription wrapper class.
+ * @ingroup TypeWrapper
+ */
+class ViewDescription : public TypeWrapper<UA_ViewDescription, UA_TYPES_VIEWDESCRIPTION> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    ViewDescription(NodeId viewId, DateTime timestamp, uint32_t viewVersion);
+
+    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getViewId, viewId)
+    UAPP_COMPOSED_GETTER_WRAPPER(DateTime, getTimestamp, timestamp)
+    UAPP_COMPOSED_GETTER(uint32_t, getViewVersion, viewVersion)
+};
+
+/**
  * UA_BrowseDescription wrapper class.
  * @ingroup TypeWrapper
  */
@@ -847,6 +862,80 @@ public:
     UAPP_COMPOSED_GETTER_WRAPPER(ByteString, getContinuationPoint, continuationPoint)
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
         ReferenceDescription, getReferences, references, referencesSize
+    )
+};
+
+/**
+ * UA_BrowseRequest wrapper class.
+ * @ingroup TypeWrapper
+ */
+class BrowseRequest : public TypeWrapper<UA_BrowseRequest, UA_TYPES_BROWSEREQUEST> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    BrowseRequest(
+        RequestHeader requestHeader,
+        ViewDescription view,
+        uint32_t requestedMaxReferencesPerNode,
+        Span<const BrowseDescription> nodesToBrowse
+    );
+
+    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_COMPOSED_GETTER_WRAPPER(ViewDescription, getView, view)
+    UAPP_COMPOSED_GETTER(uint32_t, getRequestedMaxReferencesPerNode, requestedMaxReferencesPerNode)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        BrowseDescription, getNodesToBrowse, nodesToBrowse, nodesToBrowseSize
+    )
+};
+
+/**
+ * UA_BrowseResponse wrapper class.
+ * @ingroup TypeWrapper
+ */
+class BrowseResponse : public TypeWrapper<UA_BrowseResponse, UA_TYPES_BROWSERESPONSE> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(BrowseResult, getResults, results, resultsSize)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        DiagnosticInfo, getDiagnosticInfos, diagnosticInfos, diagnosticInfosSize
+    )
+};
+
+/**
+ * UA_BrowseNextRequest wrapper class.
+ * @ingroup TypeWrapper
+ */
+class BrowseNextRequest : public TypeWrapper<UA_BrowseNextRequest, UA_TYPES_BROWSENEXTREQUEST> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    BrowseNextRequest(
+        RequestHeader requestHeader,
+        bool releaseContinuationPoints,
+        Span<const ByteString> continuationPoints
+    );
+
+    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_COMPOSED_GETTER(bool, getReleaseContinuationPoints, releaseContinuationPoints)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        ByteString, getContinuationPoints, continuationPoints, continuationPointsSize
+    )
+};
+
+/**
+ * UA_BrowseNextResponse wrapper class.
+ * @ingroup TypeWrapper
+ */
+class BrowseNextResponse : public TypeWrapper<UA_BrowseNextResponse, UA_TYPES_BROWSENEXTRESPONSE> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(BrowseResult, getResults, results, resultsSize)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        DiagnosticInfo, getDiagnosticInfos, diagnosticInfos, diagnosticInfosSize
     )
 };
 
@@ -919,6 +1008,104 @@ public:
 
     UAPP_COMPOSED_GETTER(StatusCode, getStatusCode, statusCode)
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(BrowsePathTarget, getTargets, targets, targetsSize)
+};
+
+/**
+ * UA_TranslateBrowsePathsToNodeIdsRequest wrapper class.
+ * @ingroup TypeWrapper
+ */
+class TranslateBrowsePathsToNodeIdsRequest
+    : public TypeWrapper<
+          UA_TranslateBrowsePathsToNodeIdsRequest,
+          UA_TYPES_TRANSLATEBROWSEPATHSTONODEIDSREQUEST> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    TranslateBrowsePathsToNodeIdsRequest(
+        RequestHeader requestHeader, Span<const BrowsePath> browsePaths
+    );
+
+    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(BrowsePath, getBrowsePaths, browsePaths, browsePathsSize)
+};
+
+/**
+ * UA_TranslateBrowsePathsToNodeIdsResponse wrapper class.
+ * @ingroup TypeWrapper
+ */
+class TranslateBrowsePathsToNodeIdsResponse
+    : public TypeWrapper<
+          UA_TranslateBrowsePathsToNodeIdsResponse,
+          UA_TYPES_TRANSLATEBROWSEPATHSTONODEIDSRESPONSE> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(BrowsePathResult, getResults, results, resultsSize)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        DiagnosticInfo, getDiagnosticInfos, diagnosticInfos, diagnosticInfosSize
+    )
+};
+
+/**
+ * UA_RegisterNodesRequest wrapper class.
+ * @ingroup TypeWrapper
+ */
+class RegisterNodesRequest
+    : public TypeWrapper<UA_RegisterNodesRequest, UA_TYPES_REGISTERNODESREQUEST> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    RegisterNodesRequest(RequestHeader requestHeader, Span<const NodeId> nodesToRegister);
+
+    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        NodeId, getNodesToRegister, nodesToRegister, nodesToRegisterSize
+    )
+};
+
+/**
+ * UA_RegisterNodesResponse wrapper class.
+ * @ingroup TypeWrapper
+ */
+class RegisterNodesResponse
+    : public TypeWrapper<UA_RegisterNodesResponse, UA_TYPES_REGISTERNODESRESPONSE> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        NodeId, getRegisteredNodeIds, registeredNodeIds, registeredNodeIdsSize
+    )
+};
+
+/**
+ * UA_UnregisterNodesRequest wrapper class.
+ * @ingroup TypeWrapper
+ */
+class UnregisterNodesRequest
+    : public TypeWrapper<UA_UnregisterNodesRequest, UA_TYPES_UNREGISTERNODESREQUEST> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    UnregisterNodesRequest(RequestHeader requestHeader, Span<const NodeId> nodesToUnregister);
+
+    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        NodeId, getNodesToUnregister, nodesToUnregister, nodesToUnregisterSize
+    )
+};
+
+/**
+ * UA_UnregisterNodesResponse wrapper class.
+ * @ingroup TypeWrapper
+ */
+class UnregisterNodesResponse
+    : public TypeWrapper<UA_UnregisterNodesResponse, UA_TYPES_UNREGISTERNODESRESPONSE> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
 };
 
 /**

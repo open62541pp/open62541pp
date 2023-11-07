@@ -475,6 +475,16 @@ TEST_CASE("View service set (server & client)") {
     SUBCASE("Server") { testBrowse(server); };
     SUBCASE("Client") { testBrowse(client); };
     // clang-format on
+
+    SUBCASE("Register/unregister nodes") {
+        const auto response = services::registerNodes(
+            client, RegisterNodesRequest({}, {{1, 1000}})
+        );
+        CHECK(response.getRegisteredNodeIds().size() == 1);
+        CHECK(response.getRegisteredNodeIds()[0] == NodeId(1, 1000));
+
+        CHECK_NOTHROW(services::unregisterNodes(client, UnregisterNodesRequest({}, {{1, 1000}})));
+    }
 }
 
 TEST_CASE("View service set (server)") {
