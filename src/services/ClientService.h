@@ -79,7 +79,12 @@ auto sendAsyncRequest(Client& client, const Request& request, Fn&& transformResp
                 std::swap(response, responseMove);
                 promise.set_value((*context->transform)(std::move(responseMove)));
             } else {
-                promise.set_value((*context->transform)(response));
+                if constexpr (std::is_void_v<Result>) {
+                    (*context->transform)(response);
+                    promise.set_value();
+                } else {
+                    promise.set_value((*context->transform)(response));
+                }
             }
         } catch (...) {
             promise.set_exception(std::current_exception());
