@@ -15,6 +15,12 @@
 
 namespace opcua::services {
 
+BrowseResponse browse(Client& client, const BrowseRequest& request) {
+    BrowseResponse response = UA_Client_Service_browse(client.handle(), request);
+    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    return response;
+}
+
 template <>
 BrowseResult browse<Server>(Server& server, const BrowseDescription& bd, uint32_t maxReferences) {
     BrowseResult result = UA_Server_browse(server.handle(), maxReferences, bd.handle());
@@ -27,12 +33,9 @@ BrowseResult browse<Client>(Client& client, const BrowseDescription& bd, uint32_
     UA_BrowseRequest request{};
     request.requestedMaxReferencesPerNode = maxReferences;
     request.nodesToBrowseSize = 1;
-    // NOLINTNEXTLINE, won't be modified
-    request.nodesToBrowse = const_cast<UA_BrowseDescription*>(bd.handle());
+    request.nodesToBrowse = const_cast<UA_BrowseDescription*>(bd.handle());  // NOLINT
 
-    using Response = TypeWrapper<UA_BrowseResponse, UA_TYPES_BROWSERESPONSE>;
-    Response response = UA_Client_Service_browse(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    auto response = browse(client, asWrapper<BrowseRequest>(request));
     if (response->resultsSize != 1) {
         throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
     }
@@ -40,6 +43,12 @@ BrowseResult browse<Client>(Client& client, const BrowseDescription& bd, uint32_
     BrowseResult result;
     result.swap(*response->results);
     return result;
+}
+
+BrowseNextResponse browseNext(Client& client, const BrowseNextRequest& request) {
+    BrowseNextResponse response = UA_Client_Service_browseNext(client.handle(), request);
+    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    return response;
 }
 
 template <>
@@ -60,12 +69,9 @@ BrowseResult browseNext<Client>(
     UA_BrowseNextRequest request{};
     request.releaseContinuationPoints = releaseContinuationPoint;
     request.continuationPointsSize = 1;
-    // NOLINTNEXTLINE, won't be modified
-    request.continuationPoints = const_cast<UA_ByteString*>(continuationPoint.handle());
+    request.continuationPoints = const_cast<UA_ByteString*>(continuationPoint.handle());  // NOLINT
 
-    using Response = TypeWrapper<UA_BrowseNextResponse, UA_TYPES_BROWSENEXTRESPONSE>;
-    Response response = UA_Client_Service_browseNext(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    auto response = browseNext(client, asWrapper<BrowseNextRequest>(request));
     if (response->resultsSize != 1) {
         throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
     }
@@ -108,6 +114,15 @@ std::vector<ExpandedNodeId> browseRecursive(Server& server, const BrowseDescript
     return results;
 }
 
+TranslateBrowsePathsToNodeIdsResponse translateBrowsePathsToNodeIds(
+    Client& client, const TranslateBrowsePathsToNodeIdsRequest& request
+) {
+    TranslateBrowsePathsToNodeIdsResponse response =
+        UA_Client_Service_translateBrowsePathsToNodeIds(client.handle(), request);
+    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    return response;
+}
+
 template <>
 BrowsePathResult translateBrowsePathToNodeIds<Server>(
     Server& server, const BrowsePath& browsePath
@@ -125,14 +140,11 @@ BrowsePathResult translateBrowsePathToNodeIds<Client>(
 ) {
     UA_TranslateBrowsePathsToNodeIdsRequest request{};
     request.browsePathsSize = 1;
-    // NOLINTNEXTLINE, won't be modified
-    request.browsePaths = const_cast<UA_BrowsePath*>(browsePath.handle());
+    request.browsePaths = const_cast<UA_BrowsePath*>(browsePath.handle());  // NOLINT
 
-    using Response = TypeWrapper<
-        UA_TranslateBrowsePathsToNodeIdsResponse,
-        UA_TYPES_TRANSLATEBROWSEPATHSTONODEIDSRESPONSE>;
-    Response response = UA_Client_Service_translateBrowsePathsToNodeIds(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    auto response = translateBrowsePathsToNodeIds(
+        client, asWrapper<TranslateBrowsePathsToNodeIdsRequest>(request)
+    );
     if (response->resultsSize != 1) {
         throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
     }

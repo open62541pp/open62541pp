@@ -6,6 +6,7 @@
 #include <type_traits>
 
 #include "open62541pp/ErrorHandling.h"
+#include "open62541pp/TypeWrapper.h"
 
 #include "../open62541_impl.h"
 
@@ -25,7 +26,7 @@ static inline void assign(std::string_view src, UA_String& dst) {
     asWrapper<String>(dst) = String(src);
 }
 
-template <typename T, typename Native, typename = std::enable_if_t<detail::IsTypeWrapper<T>::value>>
+template <typename T, typename Native, typename = std::enable_if_t<detail::isTypeWrapper<T>>>
 static inline void assign(T&& src, Native& dst) {
     static_assert(std::is_same_v<typename T::NativeType, Native>);
     asWrapper<T>(dst) = std::forward<T>(src);
@@ -179,6 +180,12 @@ DeleteReferencesRequest::DeleteReferencesRequest(
     copyArray(referencesToDelete, &handle()->referencesToDelete, handle()->referencesToDeleteSize);
 }
 
+ViewDescription::ViewDescription(NodeId viewId, DateTime timestamp, uint32_t viewVersion) {
+    assign(std::move(viewId), handle()->viewId);
+    assign(std::move(timestamp), handle()->timestamp);
+    assign(viewVersion, handle()->viewVersion);
+}
+
 BrowseDescription::BrowseDescription(
     NodeId nodeId,
     BrowseDirection browseDirection,
@@ -217,6 +224,35 @@ RelativePath::RelativePath(Span<const RelativePathElement> elements) {
 BrowsePath::BrowsePath(NodeId startingNode, RelativePath relativePath) {
     asWrapper<NodeId>(handle()->startingNode) = std::move(startingNode);
     asWrapper<RelativePath>(handle()->relativePath) = std::move(relativePath);
+}
+
+BrowseRequest::BrowseRequest(
+    RequestHeader requestHeader,
+    ViewDescription view,
+    uint32_t requestedMaxReferencesPerNode,
+    Span<const BrowseDescription> nodesToBrowse
+) {
+    assign(std::move(requestHeader), handle()->requestHeader);
+    assign(std::move(view), handle()->view);
+    assign(requestedMaxReferencesPerNode, handle()->requestedMaxReferencesPerNode);
+    copyArray(nodesToBrowse, &handle()->nodesToBrowse, handle()->nodesToBrowseSize);
+}
+
+BrowseNextRequest::BrowseNextRequest(
+    RequestHeader requestHeader,
+    bool releaseContinuationPoints,
+    Span<const ByteString> continuationPoints
+) {
+    assign(std::move(requestHeader), handle()->requestHeader);
+    assign(releaseContinuationPoints, handle()->releaseContinuationPoints);
+    copyArray(continuationPoints, &handle()->continuationPoints, handle()->continuationPointsSize);
+}
+
+TranslateBrowsePathsToNodeIdsRequest::TranslateBrowsePathsToNodeIdsRequest(
+    RequestHeader requestHeader, Span<const BrowsePath> browsePaths
+) {
+    assign(std::move(requestHeader), handle()->requestHeader);
+    copyArray(browsePaths, &handle()->browsePaths, handle()->browsePathsSize);
 }
 
 ReadValueId::ReadValueId(

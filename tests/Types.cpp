@@ -960,6 +960,13 @@ TEST_CASE("DeleteReferencesItem / DeleteReferencesRequest") {
     CHECK(request.getReferencesToDelete().size() == 1);
 }
 
+TEST_CASE("ViewDescription") {
+    const ViewDescription vd({1, 1000}, 12345U, 2U);
+    CHECK(vd.getViewId() == NodeId(1, 1000));
+    CHECK(vd.getTimestamp() == 12345U);
+    CHECK(vd.getViewVersion() == 2U);
+}
+
 TEST_CASE("BrowseDescription") {
     const BrowseDescription bd(NodeId(1, 1000), BrowseDirection::Forward);
     CHECK(bd.getNodeId() == NodeId(1, 1000));
@@ -991,10 +998,33 @@ TEST_CASE("RelativePath") {
 
 TEST_CASE("BrowsePath") {
     const BrowsePath bp(
-        {0, UA_NS0ID_OBJECTSFOLDER}, {{ReferenceTypeId::HasComponent, false, false, {0, "child"}}}
+        ObjectId::ObjectsFolder, {{ReferenceTypeId::HasComponent, false, false, {0, "child"}}}
     );
     CHECK(bp.getStartingNode() == NodeId(0, UA_NS0ID_OBJECTSFOLDER));
     CHECK(bp.getRelativePath().getElements().size() == 1);
+}
+
+TEST_CASE("BrowseRequest") {
+    const BrowseRequest request({}, {{1, 1000}, {}, 1}, 11U, {});
+    CHECK_NOTHROW(request.getRequestHeader());
+    CHECK(request.getView().getViewId() == NodeId(1, 1000));
+    CHECK(request.getView().getViewVersion() == 1);
+    CHECK(request.getRequestedMaxReferencesPerNode() == 11U);
+    CHECK(request.getNodesToBrowse().empty());
+}
+
+TEST_CASE("BrowseNextRequest") {
+    const BrowseNextRequest request({}, true, {ByteString("123")});
+    CHECK_NOTHROW(request.getRequestHeader());
+    CHECK(request.getReleaseContinuationPoints() == true);
+    CHECK(request.getContinuationPoints().size() == 1);
+    CHECK(request.getContinuationPoints()[0] == ByteString("123"));
+}
+
+TEST_CASE("TranslateBrowsePathsToNodeIdsRequest") {
+    const TranslateBrowsePathsToNodeIdsRequest request({}, {});
+    CHECK_NOTHROW(request.getRequestHeader());
+    CHECK(request.getBrowsePaths().empty());
 }
 
 TEST_CASE("ReadValueId") {

@@ -10,6 +10,7 @@
 // forward declarations
 namespace opcua {
 class ByteString;
+class Client;
 class QualifiedName;
 class Server;
 }  // namespace opcua
@@ -25,6 +26,13 @@ namespace opcua::services {
  */
 
 /**
+ * Discover the references of one or more nodes (client only).
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.2
+ * @ingroup View
+ */
+BrowseResponse browse(Client& client, const BrowseRequest& request);
+
+/**
  * Discover the references of a specified node.
  * @param serverOrClient Instance of type Server or Client
  * @param bd Browse description
@@ -34,6 +42,13 @@ namespace opcua::services {
  */
 template <typename T>
 BrowseResult browse(T& serverOrClient, const BrowseDescription& bd, uint32_t maxReferences = 0);
+
+/**
+ * Request the next sets of @ref browse / @ref browseNext responses (client only).
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.3
+ * @ingroup View
+ */
+BrowseNextResponse browseNext(Client& client, const BrowseNextRequest& request);
 
 /**
  * Request the next set of a @ref browse or @ref browseNext response.
@@ -76,6 +91,15 @@ std::vector<ReferenceDescription> browseAll(
  * @ingroup View
  */
 std::vector<ExpandedNodeId> browseRecursive(Server& server, const BrowseDescription& bd);
+
+/**
+ * Translate browse paths to NodeIds (client only).
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.4
+ * @ingroup View
+ */
+TranslateBrowsePathsToNodeIdsResponse translateBrowsePathsToNodeIds(
+    Client& client, const TranslateBrowsePathsToNodeIdsRequest& request
+);
 
 /**
  * Translate a browse path to NodeIds.
