@@ -16,23 +16,10 @@
 
 namespace opcua::services {
 
-template <typename T, typename Native>
-inline static void assignArray(Span<const T> array, Native*& ptr, size_t& length) noexcept {
-    ptr = asNative(const_cast<T*>(array.data()));  // NOLINT, won't be modified
-    length = array.size();
-}
-
 AddNodesResponse addNodes(Client& client, const AddNodesRequest& request) {
     return sendRequest<UA_AddNodesRequest, UA_AddNodesResponse>(
         client, request, ForwardResponse<UA_AddNodesResponse>{}
     );
-}
-
-AddNodesResponse addNodes(Client& client, Span<const AddNodesItem> nodesToAdd) {
-    // avoid copy of nodesToAdd
-    UA_AddNodesRequest request{};
-    assignArray(nodesToAdd, request.nodesToAdd, request.nodesToAddSize);
-    return addNodes(client, asWrapper<AddNodesRequest>(request));
 }
 
 AddReferencesResponse addReferences(Client& client, const AddReferencesRequest& request) {
@@ -41,39 +28,16 @@ AddReferencesResponse addReferences(Client& client, const AddReferencesRequest& 
     );
 }
 
-AddReferencesResponse addReferences(Client& client, Span<const AddReferencesItem> referencesToAdd) {
-    // avoid copy of referencesToAdd
-    UA_AddReferencesRequest request{};
-    assignArray(referencesToAdd, request.referencesToAdd, request.referencesToAddSize);
-    return addReferences(client, asWrapper<AddReferencesRequest>(request));
-}
-
 DeleteNodesResponse deleteNodes(Client& client, const DeleteNodesRequest& request) {
     return sendRequest<UA_DeleteNodesRequest, UA_DeleteNodesResponse>(
         client, request, ForwardResponse<UA_DeleteNodesResponse>{}
     );
 }
 
-DeleteNodesResponse deleteNodes(Client& client, Span<const DeleteNodesItem> nodesToDelete) {
-    // avoid copy of nodesToDelete
-    UA_DeleteNodesRequest request{};
-    assignArray(nodesToDelete, request.nodesToDelete, request.nodesToDeleteSize);
-    return deleteNodes(client, asWrapper<DeleteNodesRequest>(request));
-}
-
 DeleteReferencesResponse deleteReferences(Client& client, const DeleteReferencesRequest& request) {
     return sendRequest<UA_DeleteReferencesRequest, UA_DeleteReferencesResponse>(
         client, request, ForwardResponse<UA_DeleteReferencesResponse>{}
     );
-}
-
-DeleteReferencesResponse deleteReferences(
-    Client& client, Span<const DeleteReferencesItem> referencesToDelete
-) {
-    // avoid copy of referencesToDelete
-    UA_DeleteReferencesRequest request{};
-    assignArray(referencesToDelete, request.referencesToDelete, request.referencesToDeleteSize);
-    return deleteReferences(client, asWrapper<DeleteReferencesRequest>(request));
 }
 
 template <>
@@ -126,7 +90,11 @@ NodeId addNode<Client>(
     item.nodeAttributes = nodeAttributes;
     item.typeDefinition.nodeId = typeDefinition;
 
-    auto response = addNodes(client, {asWrapper<AddNodesItem>(&item), 1});
+    UA_AddNodesRequest request{};
+    request.nodesToAddSize = 1;
+    request.nodesToAdd = &item;
+
+    auto response = addNodes(client, asWrapper<AddNodesRequest>(request));
     auto results = response.getResults();
     if (results.size() != 1) {
         throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
@@ -261,7 +229,11 @@ void addReference<Client>(
     item.targetNodeId.nodeId = targetId;
     item.targetNodeClass = UA_NODECLASS_UNSPECIFIED;  // necessary?
 
-    auto response = addReferences(client, {asWrapper<AddReferencesItem>(&item), 1});
+    UA_AddReferencesRequest request{};
+    request.referencesToAddSize = 1;
+    request.referencesToAdd = &item;
+
+    auto response = addReferences(client, asWrapper<AddReferencesRequest>(request));
     auto results = response.getResults();
     if (results.size() != 1) {
         throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
@@ -281,7 +253,11 @@ void deleteNode<Client>(Client& client, const NodeId& id, bool deleteReferences)
     item.nodeId = id;
     item.deleteTargetReferences = deleteReferences;
 
-    auto response = deleteNodes(client, {asWrapper<DeleteNodesItem>(&item), 1});
+    UA_DeleteNodesRequest request{};
+    request.nodesToDeleteSize = 1;
+    request.nodesToDelete = &item;
+
+    auto response = deleteNodes(client, asWrapper<DeleteNodesRequest>(request));
     auto results = response.getResults();
     if (results.size() != 1) {
         throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
@@ -320,7 +296,11 @@ void deleteReference<Client>(
     item.targetNodeId.nodeId = targetId;
     item.deleteBidirectional = deleteBidirectional;
 
-    auto response = deleteReferences(client, {asWrapper<DeleteReferencesItem>(&item), 1});
+    UA_DeleteReferencesRequest request{};
+    request.referencesToDeleteSize = 1;
+    request.referencesToDelete = &item;
+
+    auto response = deleteReferences(client, asWrapper<DeleteReferencesRequest>(request));
     auto results = response.getResults();
     if (results.size() != 1) {
         throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
