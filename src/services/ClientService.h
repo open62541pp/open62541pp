@@ -106,4 +106,14 @@ auto sendAsyncRequest(Client& client, const Request& request, Fn&& transformResp
     return future;
 }
 
+template <typename Response>
+auto& getSingleResultFromResponse(Response& response) {
+    static_assert(detail::isTypeWrapper<Response>);
+    auto results = response.getResults();
+    if (results.data() == nullptr || results.size() != 1) {
+        throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
+    }
+    return results[0];
+}
+
 }  // namespace opcua::services

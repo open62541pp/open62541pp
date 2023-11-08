@@ -29,20 +29,17 @@ inline static UA_CallMethodRequest createCallMethodRequest(
     return request;
 }
 
-inline static auto transformCallMethodResult(UA_CallMethodResult& result) {
-    detail::throwOnBadStatus(result.statusCode);
-    detail::throwOnBadStatus(result.inputArgumentResults, result.inputArgumentResultsSize);
+inline static auto getOutputArguments(CallMethodResult& result) {
+    detail::throwOnBadStatus(result->statusCode);
+    detail::throwOnBadStatus(result->inputArgumentResults, result->inputArgumentResultsSize);
     return std::vector<Variant>(
-        result.outputArguments,
-        result.outputArguments + result.outputArgumentsSize  // NOLINT
+        result->outputArguments,
+        result->outputArguments + result->outputArgumentsSize  // NOLINT
     );
 }
 
-static auto transformCallResponse(UA_CallResponse& response) {
-    if (response.resultsSize != 1 || response.results == nullptr) {
-        throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
-    }
-    return transformCallMethodResult(*response.results);
+static auto getSingleResultOutputArguments(CallResponse& response) {
+    return getOutputArguments(getSingleResultFromResponse(response));
 }
 
 template <>
@@ -52,10 +49,9 @@ std::vector<Variant> call(
     const NodeId& methodId,
     Span<const Variant> inputArguments
 ) {
-    UA_CallMethodRequest request = createCallMethodRequest(objectId, methodId, inputArguments);
-    using Result = TypeWrapper<UA_CallMethodResult, UA_TYPES_CALLMETHODRESULT>;
-    Result result = UA_Server_call(server.handle(), &request);
-    return transformCallMethodResult(result);
+    UA_CallMethodRequest item = createCallMethodRequest(objectId, methodId, inputArguments);
+    CallMethodResult result = UA_Server_call(server.handle(), &item);
+    return getOutputArguments(result);
 }
 
 template <>
@@ -70,7 +66,7 @@ std::vector<Variant> call(
     request.methodsToCall = &item;
     request.methodsToCallSize = 1;
     return sendRequest<CallRequest, CallResponse>(
-        client, asWrapper<CallRequest>(request), &transformCallResponse
+        client, asWrapper<CallRequest>(request), &getSingleResultOutputArguments
     );
 }
 
@@ -85,7 +81,7 @@ std::future<std::vector<Variant>> callAsync(
     request.methodsToCall = &item;
     request.methodsToCallSize = 1;
     return sendAsyncRequest<CallRequest, CallResponse>(
-        client, asWrapper<CallRequest>(request), &transformCallResponse
+        client, asWrapper<CallRequest>(request), &getSingleResultOutputArguments
     );
 }
 

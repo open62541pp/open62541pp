@@ -89,20 +89,14 @@ NodeId addNode<Client>(
     item.nodeClass = static_cast<UA_NodeClass>(nodeClass);
     item.nodeAttributes = nodeAttributes;
     item.typeDefinition.nodeId = typeDefinition;
-
     UA_AddNodesRequest request{};
     request.nodesToAddSize = 1;
     request.nodesToAdd = &item;
 
     auto response = addNodes(client, asWrapper<AddNodesRequest>(request));
-    auto results = response.getResults();
-    if (results.size() != 1) {
-        throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
-    }
-    detail::throwOnBadStatus(results[0]->statusCode);
-    NodeId addedNodeId;
-    addedNodeId.swap(results[0]->addedNodeId);
-    return addedNodeId;
+    auto& result = getSingleResultFromResponse(response);
+    detail::throwOnBadStatus(result.getStatusCode());
+    return std::move(result.getAddedNodeId());
 }
 
 #ifdef UA_ENABLE_METHODCALLS
@@ -210,13 +204,8 @@ void addReference<Server>(
     detail::throwOnBadStatus(status);
 }
 
-template <>
-void addReference<Client>(
-    Client& client,
-    const NodeId& sourceId,
-    const NodeId& targetId,
-    const NodeId& referenceType,
-    bool forward
+inline static UA_AddReferencesItem createAddReferencesItem(
+    const NodeId& sourceId, const NodeId& targetId, const NodeId& referenceType, bool forward
 ) {
     UA_AddReferencesItem item{};
     item.sourceNodeId = sourceId;
@@ -225,17 +214,28 @@ void addReference<Client>(
     item.targetServerUri = UA_STRING_NULL;
     item.targetNodeId.nodeId = targetId;
     item.targetNodeClass = UA_NODECLASS_UNSPECIFIED;  // necessary?
+    return item;
+}
 
+inline static void checkAddReferencesResponse(AddReferencesResponse& response) {
+    detail::throwOnBadStatus(getSingleResultFromResponse(response));
+}
+
+template <>
+void addReference<Client>(
+    Client& client,
+    const NodeId& sourceId,
+    const NodeId& targetId,
+    const NodeId& referenceType,
+    bool forward
+) {
+    UA_AddReferencesItem item = createAddReferencesItem(sourceId, targetId, referenceType, forward);
     UA_AddReferencesRequest request{};
     request.referencesToAddSize = 1;
     request.referencesToAdd = &item;
-
-    auto response = addReferences(client, asWrapper<AddReferencesRequest>(request));
-    auto results = response.getResults();
-    if (results.size() != 1) {
-        throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
-    }
-    detail::throwOnBadStatus(results[0]);
+    return sendRequest<AddReferencesRequest, AddReferencesResponse>(
+        client, asWrapper<AddReferencesRequest>(request), &checkAddReferencesResponse
+    );
 }
 
 template <>
@@ -249,17 +249,12 @@ void deleteNode<Client>(Client& client, const NodeId& id, bool deleteReferences)
     UA_DeleteNodesItem item{};
     item.nodeId = id;
     item.deleteTargetReferences = deleteReferences;
-
     UA_DeleteNodesRequest request{};
     request.nodesToDeleteSize = 1;
     request.nodesToDelete = &item;
 
     auto response = deleteNodes(client, asWrapper<DeleteNodesRequest>(request));
-    auto results = response.getResults();
-    if (results.size() != 1) {
-        throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
-    }
-    detail::throwOnBadStatus(results[0]);
+    detail::throwOnBadStatus(getSingleResultFromResponse(response));
 }
 
 template <>
@@ -292,17 +287,12 @@ void deleteReference<Client>(
     item.isForward = isForward;
     item.targetNodeId.nodeId = targetId;
     item.deleteBidirectional = deleteBidirectional;
-
     UA_DeleteReferencesRequest request{};
     request.referencesToDeleteSize = 1;
     request.referencesToDelete = &item;
 
     auto response = deleteReferences(client, asWrapper<DeleteReferencesRequest>(request));
-    auto results = response.getResults();
-    if (results.size() != 1) {
-        throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
-    }
-    detail::throwOnBadStatus(results[0]);
+    detail::throwOnBadStatus(getSingleResultFromResponse(response));
 }
 
 }  // namespace opcua::services

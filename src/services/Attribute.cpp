@@ -59,16 +59,11 @@ DataValue readAttribute<Client>(
     const auto item = createReadValueId(id, attributeId);
     const auto request = createReadRequest(timestamps, {asWrapper<ReadValueId>(&item), 1});
     auto response = read(client, asWrapper<ReadRequest>(request));
-    auto results = response.getResults();
-    if (results.size() != 1 || !results[0]->hasValue) {
-        throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
+    auto& result = getSingleResultFromResponse(response);
+    if (result->hasStatus) {
+        detail::throwOnBadStatus(result->status);
     }
-    if (results[0]->hasStatus) {
-        detail::throwOnBadStatus(results[0]->status);
-    }
-    DataValue result;
-    result.swap(response.getResults()[0]);
-    return result;
+    return std::move(result);
 }
 
 WriteResponse write(Client& client, const WriteRequest& request) {
@@ -111,11 +106,8 @@ void writeAttribute<Client>(
 ) {
     const auto item = createWriteValue(id, attributeId, value);
     auto response = write(client, {asWrapper<WriteValue>(&item), 1});
-    auto results = response.getResults();
-    if (results.size() != 1) {
-        throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
-    }
-    detail::throwOnBadStatus(results[0]);
+    auto& result = getSingleResultFromResponse(response);
+    detail::throwOnBadStatus(result);
 }
 
 }  // namespace opcua::services

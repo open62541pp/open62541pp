@@ -36,13 +36,7 @@ BrowseResult browse<Client>(Client& client, const BrowseDescription& bd, uint32_
     request.nodesToBrowse = const_cast<UA_BrowseDescription*>(bd.handle());  // NOLINT
 
     auto response = browse(client, asWrapper<BrowseRequest>(request));
-    if (response->resultsSize != 1) {
-        throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
-    }
-
-    BrowseResult result;
-    result.swap(*response->results);
-    return result;
+    return std::move(getSingleResultFromResponse(response));
 }
 
 BrowseNextResponse browseNext(Client& client, const BrowseNextRequest& request) {
@@ -72,13 +66,7 @@ BrowseResult browseNext<Client>(
     request.continuationPoints = const_cast<UA_ByteString*>(continuationPoint.handle());  // NOLINT
 
     auto response = browseNext(client, asWrapper<BrowseNextRequest>(request));
-    if (response->resultsSize != 1) {
-        throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
-    }
-
-    BrowseResult result;
-    result.swap(*response->results);
-    return result;
+    return std::move(getSingleResultFromResponse(response));
 }
 
 template <typename T>
@@ -144,13 +132,7 @@ BrowsePathResult translateBrowsePathToNodeIds<Client>(
     auto response = translateBrowsePathsToNodeIds(
         client, asWrapper<TranslateBrowsePathsToNodeIdsRequest>(request)
     );
-    if (response->resultsSize != 1) {
-        throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
-    }
-
-    BrowsePathResult result;
-    result.swap(*response->results);
-    return result;
+    return std::move(getSingleResultFromResponse(response));
 }
 
 template <typename T>
