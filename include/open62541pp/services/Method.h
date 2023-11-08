@@ -22,6 +22,7 @@ namespace opcua::services {
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/4.7
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.11
  * @ingroup Services
+ * @{
  */
 
 /**
@@ -36,7 +37,6 @@ namespace opcua::services {
  * @exception BadStatus (BadInvalidArgument) If input arguments don't match expected variant types
  * @exception BadStatus (BadArgumentsMissing) If input arguments are missing
  * @exception BadStatus (BadTooManyArguments) If too many input arguments provided
- * @ingroup Method
  */
 template <typename T>
 std::vector<Variant> call(
@@ -45,6 +45,10 @@ std::vector<Variant> call(
     const NodeId& methodId,
     Span<const Variant> inputArguments
 );
+
+/**
+ * @}
+ */
 
 }  // namespace opcua::services
 

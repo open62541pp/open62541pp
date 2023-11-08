@@ -25,36 +25,32 @@ namespace opcua::services {
  *
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7
  * @ingroup Services
+ * @{
  */
 
 /**
  * Add one or more nodes (client only).
- * @ingroup NodeManagement
  */
 AddNodesResponse addNodes(Client& client, const AddNodesRequest& request);
 
 /**
  * Add one or more references (client only).
- * @ingroup NodeManagement
  */
 AddReferencesResponse addReferences(Client& client, const AddReferencesRequest& request);
 
 /**
  * Delete one or more nodes (client only).
- * @ingroup NodeManagement
  */
 DeleteNodesResponse deleteNodes(Client& client, const DeleteNodesRequest& request);
 
 /**
  * Delete one or more references (client only).
- * @ingroup NodeManagement
  */
 DeleteReferencesResponse deleteReferences(Client& client, const DeleteReferencesRequest& request);
 
 /**
  * Add a node.
  * @exception BadStatus
- * @ingroup NodeManagement
  */
 template <typename T>
 NodeId addNode(
@@ -73,7 +69,6 @@ NodeId addNode(
 /**
  * Add object.
  * @exception BadStatus
- * @ingroup NodeManagement
  */
 template <typename T>
 inline NodeId addObject(
@@ -100,7 +95,6 @@ inline NodeId addObject(
 /**
  * Add folder.
  * @exception BadStatus
- * @ingroup NodeManagement
  */
 template <typename T>
 inline NodeId addFolder(
@@ -125,7 +119,6 @@ inline NodeId addFolder(
 /**
  * Add variable.
  * @exception BadStatus
- * @ingroup NodeManagement
  */
 template <typename T>
 inline NodeId addVariable(
@@ -152,7 +145,6 @@ inline NodeId addVariable(
 /**
  * Add property.
  * @exception BadStatus
- * @ingroup NodeManagement
  */
 template <typename T>
 inline NodeId addProperty(
@@ -178,7 +170,6 @@ inline NodeId addProperty(
  * Method callback.
  * @param input Input parameters
  * @param output Output parameters
- * @ingroup NodeManagement
  */
 using MethodCallback = std::function<void(Span<const Variant> input, Span<Variant> output)>;
 
@@ -186,7 +177,6 @@ using MethodCallback = std::function<void(Span<const Variant> input, Span<Varian
  * Add method.
  * Callbacks can not be set by clients. Servers can assign callbacks to method nodes afterwards.
  * @exception BadStatus
- * @ingroup NodeManagement
  */
 template <typename T>
 NodeId addMethod(
@@ -205,7 +195,6 @@ NodeId addMethod(
 /**
  * Add object type.
  * @exception BadStatus
- * @ingroup NodeManagement
  */
 template <typename T>
 inline NodeId addObjectType(
@@ -231,7 +220,6 @@ inline NodeId addObjectType(
 /**
  * Add variable type.
  * @exception BadStatus
- * @ingroup NodeManagement
  */
 template <typename T>
 inline NodeId addVariableType(
@@ -258,7 +246,6 @@ inline NodeId addVariableType(
 /**
  * Add reference type.
  * @exception BadStatus
- * @ingroup NodeManagement
  */
 template <typename T>
 inline NodeId addReferenceType(
@@ -284,7 +271,6 @@ inline NodeId addReferenceType(
 /**
  * Add data type.
  * @exception BadStatus
- * @ingroup NodeManagement
  */
 template <typename T>
 inline NodeId addDataType(
@@ -310,7 +296,6 @@ inline NodeId addDataType(
 /**
  * Add view.
  * @exception BadStatus
- * @ingroup NodeManagement
  */
 template <typename T>
 inline NodeId addView(
@@ -336,7 +321,6 @@ inline NodeId addView(
 /**
  * Add reference.
  * @exception BadStatus
- * @ingroup NodeManagement
  */
 template <typename T>
 void addReference(
@@ -350,7 +334,6 @@ void addReference(
 /**
  * Add modelling rule.
  * @exception BadStatus
- * @ingroup NodeManagement
  */
 template <typename T>
 inline void addModellingRule(T& serverOrClient, const NodeId& id, ModellingRule rule) {
@@ -366,7 +349,6 @@ inline void addModellingRule(T& serverOrClient, const NodeId& id, ModellingRule 
 /**
  * Delete node.
  * @exception BadStatus
- * @ingroup NodeManagement
  */
 template <typename T>
 void deleteNode(T& serverOrClient, const NodeId& id, bool deleteReferences = true);
@@ -374,7 +356,6 @@ void deleteNode(T& serverOrClient, const NodeId& id, bool deleteReferences = tru
 /**
  * Delete reference.
  * @exception BadStatus
- * @ingroup NodeManagement
  */
 template <typename T>
 void deleteReference(
@@ -385,5 +366,9 @@ void deleteReference(
     bool isForward,
     bool deleteBidirectional
 );
+
+/**
+ * @}
+ */
 
 }  // namespace opcua::services

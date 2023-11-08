@@ -25,6 +25,7 @@ namespace opcua::services {
  * @see MonitoredItem
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13
  * @ingroup Services
+ * @{
  */
 
 /**
@@ -32,7 +33,6 @@ namespace opcua::services {
  *
  * Parameters are passed by reference because illegal parameters can be revised by the server.
  * The updated parameters reflect the actual values that the server will use.
- * @ingroup Subscription
  */
 struct SubscriptionParameters {
     /// Cyclic interval in milliseconds that the subscription is requested to return notifications.
@@ -50,7 +50,6 @@ struct SubscriptionParameters {
 /**
  * Subscription deletion callback.
  * @param subId Subscription identifier
- * @ingroup Subscription
  */
 using DeleteSubscriptionCallback = std::function<void(uint32_t subId)>;
 
@@ -63,7 +62,6 @@ using DeleteSubscriptionCallback = std::function<void(uint32_t subId)>;
  * @param publishingEnabled Enable/disable publishing of the subscription
  * @param deleteCallback Invoked when the subscription is deleted
  * @returns Server-assigned identifier of the subscription
- * @ingroup Subscription
  */
 [[nodiscard]] uint32_t createSubscription(
     Client& client,
@@ -79,7 +77,6 @@ using DeleteSubscriptionCallback = std::function<void(uint32_t subId)>;
  * @param client Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @param parameters Subscription parameters, may be revised by server
- * @ingroup Subscription
  */
 void modifySubscription(
     Client& client, uint32_t subscriptionId, SubscriptionParameters& parameters
@@ -93,7 +90,6 @@ void modifySubscription(
  * @param client Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @param publishing Enable/disable publishing
- * @ingroup Subscription
  */
 void setPublishingMode(Client& client, uint32_t subscriptionId, bool publishing);
 
@@ -102,9 +98,12 @@ void setPublishingMode(Client& client, uint32_t subscriptionId, bool publishing)
  *
  * @param client Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
- * @ingroup Subscription
  */
 void deleteSubscription(Client& client, uint32_t subscriptionId);
+
+/**
+ * @}
+ */
 
 }  // namespace opcua::services
 

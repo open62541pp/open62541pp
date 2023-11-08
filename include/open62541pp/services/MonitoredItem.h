@@ -35,6 +35,7 @@ namespace opcua::services {
  * @see Subscription
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12
  * @ingroup Services
+ * @{
  */
 
 /**
@@ -42,7 +43,6 @@ namespace opcua::services {
  * Parameters are passed by reference because illegal parameters can be revised by the server.
  * The updated parameters reflect the actual values that the server will use.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.21
- * @ingroup MonitoredItem
  */
 struct MonitoringParameters {
     /// Timestamps to be transmitted. Won't be revised by the server.
@@ -74,7 +74,6 @@ struct MonitoringParameters {
  * MonitoredItem deletion callback.
  * @param subId Subscription identifier
  * @param monId MonitoredItem identifier
- * @ingroup MonitoredItem
  */
 using DeleteMonitoredItemCallback = std::function<void(uint32_t subId, uint32_t monId)>;
 
@@ -83,7 +82,6 @@ using DeleteMonitoredItemCallback = std::function<void(uint32_t subId, uint32_t 
  * @param subId Subscription identifier (`0U` for local (server-side) monitored item)
  * @param monId MonitoredItem identifier
  * @param value Changed value
- * @ingroup MonitoredItem
  */
 using DataChangeNotificationCallback =
     std::function<void(uint32_t subId, uint32_t monId, const DataValue& value)>;
@@ -112,7 +110,6 @@ using EventNotificationCallback =
  * @param dataChangeCallback Invoked when the monitored item is changed
  * @param deleteCallback Invoked when the monitored item is deleted
  * @returns Server-assigned identifier of the monitored item
- * @ingroup MonitoredItem
  */
 [[nodiscard]] uint32_t createMonitoredItemDataChange(
     Client& client,
@@ -135,7 +132,6 @@ using EventNotificationCallback =
  * @param parameters Monitoring parameters, may be revised by server
  * @param dataChangeCallback Invoked when the monitored item is changed
  * @returns Server-assigned identifier of the monitored item
- * @ingroup MonitoredItem
  */
 [[nodiscard]] uint32_t createMonitoredItemDataChange(
     Server& server,
@@ -158,7 +154,6 @@ using EventNotificationCallback =
  * @param eventCallback Invoked when an event is published
  * @param deleteCallback Invoked when the monitored item is deleted
  * @returns Server-assigned identifier of the monitored item
- * @ingroup MonitoredItem
  */
 [[nodiscard]] uint32_t createMonitoredItemEvent(
     Client& client,
@@ -178,7 +173,6 @@ using EventNotificationCallback =
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @param monitoredItemId Identifier of the monitored item
  * @param parameters Monitoring parameters, may be revised by server
- * @ingroup MonitoredItem
  */
 void modifyMonitoredItem(
     Client& client,
@@ -194,7 +188,6 @@ void modifyMonitoredItem(
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @param monitoredItemId Identifier of the monitored item
  * @param monitoringMode Monitoring mode
- * @ingroup MonitoredItem
  */
 void setMonitoringMode(
     Client& client, uint32_t subscriptionId, uint32_t monitoredItemId, MonitoringMode monitoringMode
@@ -213,7 +206,6 @@ void setMonitoringMode(
  * @param triggeringItemId Identifier of the triggering monitored item
  * @param linksToAdd List of monitoring item identifiers to be added as triggering links
  * @param linksToRemove List of monitoring item identifiers to be removed as triggering links
- * @ingroup MonitoredItem
  */
 void setTriggering(
     Client& client,
@@ -229,7 +221,6 @@ void setTriggering(
  * @param client Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @param monitoredItemId Identifier of the monitored item
- * @ingroup MonitoredItem
  */
 void deleteMonitoredItem(Client& client, uint32_t subscriptionId, uint32_t monitoredItemId);
 
@@ -238,9 +229,12 @@ void deleteMonitoredItem(Client& client, uint32_t subscriptionId, uint32_t monit
  *
  * @param server Instance of type Server
  * @param monitoredItemId Identifier of the monitored item
- * @ingroup MonitoredItem
  */
 void deleteMonitoredItem(Server& server, uint32_t monitoredItemId);
+
+/**
+ * @}
+ */
 
 }  // namespace opcua::services
 
