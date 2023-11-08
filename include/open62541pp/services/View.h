@@ -23,12 +23,12 @@ namespace opcua::services {
  *
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8
  * @ingroup Services
+ * @{
  */
 
 /**
  * Discover the references of one or more nodes (client only).
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.2
- * @ingroup View
  */
 BrowseResponse browse(Client& client, const BrowseRequest& request);
 
@@ -38,7 +38,6 @@ BrowseResponse browse(Client& client, const BrowseRequest& request);
  * @param bd Browse description
  * @param maxReferences The maximum number of references to return (0 if no limit)
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.2
- * @ingroup View
  */
 template <typename T>
 BrowseResult browse(T& serverOrClient, const BrowseDescription& bd, uint32_t maxReferences = 0);
@@ -46,7 +45,6 @@ BrowseResult browse(T& serverOrClient, const BrowseDescription& bd, uint32_t max
 /**
  * Request the next sets of @ref browse / @ref browseNext responses (client only).
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.3
- * @ingroup View
  */
 BrowseNextResponse browseNext(Client& client, const BrowseNextRequest& request);
 
@@ -57,7 +55,6 @@ BrowseNextResponse browseNext(Client& client, const BrowseNextRequest& request);
  * @param releaseContinuationPoint Free resources in server if `true`, get next result if `false`
  * @param continuationPoint Continuation point from a preview browse/browseNext request
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.3
- * @ingroup View
  */
 template <typename T>
 BrowseResult browseNext(
@@ -67,7 +64,6 @@ BrowseResult browseNext(
 /**
  * Discover all the references of a specified node (without calling @ref browseNext).
  * @copydetails browse
- * @ingroup View
  */
 template <typename T>
 std::vector<ReferenceDescription> browseAll(
@@ -88,14 +84,12 @@ std::vector<ReferenceDescription> browseAll(
  * @param server Instance of type Server
  * @param bd Browse description
  * @see UA_Server_browseRecursive
- * @ingroup View
  */
 std::vector<ExpandedNodeId> browseRecursive(Server& server, const BrowseDescription& bd);
 
 /**
  * Translate browse paths to NodeIds (client only).
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.4
- * @ingroup View
  */
 TranslateBrowsePathsToNodeIdsResponse translateBrowsePathsToNodeIds(
     Client& client, const TranslateBrowsePathsToNodeIdsRequest& request
@@ -106,7 +100,6 @@ TranslateBrowsePathsToNodeIdsResponse translateBrowsePathsToNodeIds(
  * @param serverOrClient Instance of type Server or Client
  * @param browsePath Browse path (starting node & relative path)
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.4
- * @ingroup View
  */
 template <typename T>
 BrowsePathResult translateBrowsePathToNodeIds(T& serverOrClient, const BrowsePath& browsePath);
@@ -121,7 +114,6 @@ BrowsePathResult translateBrowsePathToNodeIds(T& serverOrClient, const BrowsePat
  * @param serverOrClient Instance of type Server or Client
  * @param origin Starting node of the browse path
  * @param browsePath Browse path as a list of browse names
- * @ingroup View
  */
 template <typename T>
 BrowsePathResult browseSimplifiedBrowsePath(
@@ -132,15 +124,17 @@ BrowsePathResult browseSimplifiedBrowsePath(
  * Register nodes for efficient access operations (client only).
  * Clients shall unregister unneeded nodes immediately to free up resources.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.5
- * @ingroup View
  */
 RegisterNodesResponse registerNodes(Client& client, const RegisterNodesRequest& request);
 
 /**
  * Unregister nodes (client only).
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.6
- * @ingroup View
  */
 UnregisterNodesResponse unregisterNodes(Client& client, const UnregisterNodesRequest& request);
+
+/**
+ * @}
+ */
 
 }  // namespace opcua::services

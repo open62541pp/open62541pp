@@ -68,9 +68,13 @@
 namespace opcua {
 
 /**
+ * \addtogroup TypeWrapper
+ * @{
+ */
+
+/**
  * UA_ApplicationDescription wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.2
- * @ingroup TypeWrapper
  */
 class ApplicationDescription
     : public TypeWrapper<UA_ApplicationDescription, UA_TYPES_APPLICATIONDESCRIPTION> {
@@ -89,7 +93,6 @@ public:
 /**
  * UA_RequestHeader wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.33
- * @ingroup TypeWrapper
  */
 class RequestHeader : public TypeWrapper<UA_RequestHeader, UA_TYPES_REQUESTHEADER> {
 public:
@@ -117,7 +120,6 @@ public:
 /**
  * UA_ResponseHeader wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.34
- * @ingroup TypeWrapper
  */
 class ResponseHeader : public TypeWrapper<UA_ResponseHeader, UA_TYPES_RESPONSEHEADER> {
 public:
@@ -134,7 +136,6 @@ public:
 /**
  * User identity token type.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.43
- * @ingroup TypeWrapper
  */
 enum class UserTokenType : uint32_t {
     // clang-format off
@@ -148,7 +149,6 @@ enum class UserTokenType : uint32_t {
 /**
  * UA_UserTokenPolicy wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.42
- * @ingroup TypeWrapper
  */
 class UserTokenPolicy : public TypeWrapper<UA_UserTokenPolicy, UA_TYPES_USERTOKENPOLICY> {
 public:
@@ -172,7 +172,6 @@ public:
 /**
  * UA_EndpointDescription wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.14
- * @ingroup TypeWrapper
  */
 class EndpointDescription
     : public TypeWrapper<UA_EndpointDescription, UA_TYPES_ENDPOINTDESCRIPTION> {
@@ -254,7 +253,6 @@ public:
 /**
  * UA_NodeAttributes wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.24
- * @ingroup TypeWrapper
  */
 class NodeAttributes : public TypeWrapper<UA_NodeAttributes, UA_TYPES_NODEATTRIBUTES> {
 public:
@@ -266,7 +264,6 @@ public:
 /**
  * UA_ObjectAttributes wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.24.2
- * @ingroup TypeWrapper
  */
 class ObjectAttributes : public TypeWrapper<UA_ObjectAttributes, UA_TYPES_OBJECTATTRIBUTES> {
 public:
@@ -282,7 +279,6 @@ public:
 /**
  * UA_VariableAttributes wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.24.3
- * @ingroup TypeWrapper
  */
 class VariableAttributes : public TypeWrapper<UA_VariableAttributes, UA_TYPES_VARIABLEATTRIBUTES> {
 public:
@@ -337,7 +333,6 @@ public:
 /**
  * UA_MethodAttributes wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.24.4
- * @ingroup TypeWrapper
  */
 class MethodAttributes : public TypeWrapper<UA_MethodAttributes, UA_TYPES_METHODATTRIBUTES> {
 public:
@@ -354,7 +349,6 @@ public:
 /**
  * UA_ObjectTypeAttributes wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.24.5
- * @ingroup TypeWrapper
  */
 class ObjectTypeAttributes
     : public TypeWrapper<UA_ObjectTypeAttributes, UA_TYPES_OBJECTTYPEATTRIBUTES> {
@@ -371,7 +365,6 @@ public:
 /**
  * UA_VariableAttributes wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.24.6
- * @ingroup TypeWrapper
  */
 class VariableTypeAttributes
     : public TypeWrapper<UA_VariableTypeAttributes, UA_TYPES_VARIABLETYPEATTRIBUTES> {
@@ -419,7 +412,6 @@ public:
 /**
  * UA_ReferenceTypeAttributes wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.24.7
- * @ingroup TypeWrapper
  */
 class ReferenceTypeAttributes
     : public TypeWrapper<UA_ReferenceTypeAttributes, UA_TYPES_REFERENCETYPEATTRIBUTES> {
@@ -440,7 +432,6 @@ public:
 /**
  * UA_DataTypeAttributes wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.24.8
- * @ingroup TypeWrapper
  */
 class DataTypeAttributes : public TypeWrapper<UA_DataTypeAttributes, UA_TYPES_DATATYPEATTRIBUTES> {
 public:
@@ -456,7 +447,6 @@ public:
 /**
  * UA_ViewAttributes wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.24.9
- * @ingroup TypeWrapper
  */
 class ViewAttributes : public TypeWrapper<UA_ViewAttributes, UA_TYPES_VIEWATTRIBUTES> {
 public:
@@ -480,7 +470,6 @@ public:
 /**
  * UA_UserIdentityToken wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.41
- * @ingroup TypeWrapper
  */
 class UserIdentityToken : public TypeWrapper<UA_UserIdentityToken, UA_TYPES_USERIDENTITYTOKEN> {
 public:
@@ -492,7 +481,6 @@ public:
 /**
  * UA_AnonymousIdentityToken wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.41.3
- * @ingroup TypeWrapper
  */
 class AnonymousIdentityToken
     : public TypeWrapper<UA_AnonymousIdentityToken, UA_TYPES_ANONYMOUSIDENTITYTOKEN> {
@@ -505,7 +493,6 @@ public:
 /**
  * UA_UserNameIdentityToken wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.41.4
- * @ingroup TypeWrapper
  */
 class UserNameIdentityToken
     : public TypeWrapper<UA_UserNameIdentityToken, UA_TYPES_USERNAMEIDENTITYTOKEN> {
@@ -521,7 +508,6 @@ public:
 /**
  * UA_X509IdentityToken wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.41.5
- * @ingroup TypeWrapper
  */
 class X509IdentityToken : public TypeWrapper<UA_X509IdentityToken, UA_TYPES_X509IDENTITYTOKEN> {
 public:
@@ -534,7 +520,6 @@ public:
 /**
  * UA_IssuedIdentityToken wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.41.6
- * @ingroup TypeWrapper
  */
 class IssuedIdentityToken
     : public TypeWrapper<UA_IssuedIdentityToken, UA_TYPES_ISSUEDIDENTITYTOKEN> {
@@ -549,7 +534,6 @@ public:
 /**
  * UA_AddNodesItem wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.2
- * @ingroup TypeWrapper
  */
 class AddNodesItem : public TypeWrapper<UA_AddNodesItem, UA_TYPES_ADDNODESITEM> {
 public:
@@ -577,7 +561,6 @@ public:
 /**
  * UA_AddNodesResult wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.2
- * @ingroup TypeWrapper
  */
 class AddNodesResult : public TypeWrapper<UA_AddNodesResult, UA_TYPES_ADDNODESRESULT> {
 public:
@@ -590,7 +573,6 @@ public:
 /**
  * UA_AddNodesRequest wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.2
- * @ingroup TypeWrapper
  */
 class AddNodesRequest : public TypeWrapper<UA_AddNodesRequest, UA_TYPES_ADDNODESREQUEST> {
 public:
@@ -605,7 +587,6 @@ public:
 /**
  * UA_AddNodesResponse wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.2
- * @ingroup TypeWrapper
  */
 class AddNodesResponse : public TypeWrapper<UA_AddNodesResponse, UA_TYPES_ADDNODESRESPONSE> {
 public:
@@ -621,7 +602,6 @@ public:
 /**
  * UA_AddReferencesItem wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.3
- * @ingroup TypeWrapper
  */
 class AddReferencesItem : public TypeWrapper<UA_AddReferencesItem, UA_TYPES_ADDREFERENCESITEM> {
 public:
@@ -647,7 +627,6 @@ public:
 /**
  * UA_AddReferencesRequest wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.3
- * @ingroup TypeWrapper
  */
 class AddReferencesRequest
     : public TypeWrapper<UA_AddReferencesRequest, UA_TYPES_ADDREFERENCESREQUEST> {
@@ -667,7 +646,6 @@ public:
 /**
  * UA_AddReferencesResponse wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.3
- * @ingroup TypeWrapper
  */
 class AddReferencesResponse
     : public TypeWrapper<UA_AddReferencesResponse, UA_TYPES_ADDREFERENCESRESPONSE> {
@@ -684,7 +662,6 @@ public:
 /**
  * UA_DeleteNodesItem wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.4
- * @ingroup TypeWrapper
  */
 class DeleteNodesItem : public TypeWrapper<UA_DeleteNodesItem, UA_TYPES_DELETENODESITEM> {
 public:
@@ -699,7 +676,6 @@ public:
 /**
  * UA_DeleteNodesRequest wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.4
- * @ingroup TypeWrapper
  */
 class DeleteNodesRequest : public TypeWrapper<UA_DeleteNodesRequest, UA_TYPES_DELETENODESREQUEST> {
 public:
@@ -716,7 +692,6 @@ public:
 /**
  * UA_DeleteNodesResponse wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.4
- * @ingroup TypeWrapper
  */
 class DeleteNodesResponse
     : public TypeWrapper<UA_DeleteNodesResponse, UA_TYPES_DELETENODESRESPONSE> {
@@ -733,7 +708,6 @@ public:
 /**
  * UA_DeleteReferencesItem wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.5
- * @ingroup TypeWrapper
  */
 class DeleteReferencesItem
     : public TypeWrapper<UA_DeleteReferencesItem, UA_TYPES_DELETEREFERENCESITEM> {
@@ -758,7 +732,6 @@ public:
 /**
  * UA_DeleteReferencesRequest wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.5
- * @ingroup TypeWrapper
  */
 class DeleteReferencesRequest
     : public TypeWrapper<UA_DeleteReferencesRequest, UA_TYPES_DELETEREFERENCESREQUEST> {
@@ -778,7 +751,6 @@ public:
 /**
  * UA_DeleteReferencesResponse wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.5
- * @ingroup TypeWrapper
  */
 class DeleteReferencesResponse
     : public TypeWrapper<UA_DeleteReferencesResponse, UA_TYPES_DELETEREFERENCESRESPONSE> {
@@ -794,7 +766,6 @@ public:
 
 /**
  * UA_ViewDescription wrapper class.
- * @ingroup TypeWrapper
  */
 class ViewDescription : public TypeWrapper<UA_ViewDescription, UA_TYPES_VIEWDESCRIPTION> {
 public:
@@ -809,7 +780,6 @@ public:
 
 /**
  * UA_BrowseDescription wrapper class.
- * @ingroup TypeWrapper
  */
 class BrowseDescription : public TypeWrapper<UA_BrowseDescription, UA_TYPES_BROWSEDESCRIPTION> {
 public:
@@ -834,7 +804,6 @@ public:
 
 /**
  * UA_ReferenceDescription wrapper class.
- * @ingroup TypeWrapper
  */
 class ReferenceDescription
     : public TypeWrapper<UA_ReferenceDescription, UA_TYPES_REFERENCEDESCRIPTION> {
@@ -852,7 +821,6 @@ public:
 
 /**
  * UA_BrowseResult wrapper class.
- * @ingroup TypeWrapper
  */
 class BrowseResult : public TypeWrapper<UA_BrowseResult, UA_TYPES_BROWSERESULT> {
 public:
@@ -867,7 +835,6 @@ public:
 
 /**
  * UA_BrowseRequest wrapper class.
- * @ingroup TypeWrapper
  */
 class BrowseRequest : public TypeWrapper<UA_BrowseRequest, UA_TYPES_BROWSEREQUEST> {
 public:
@@ -890,7 +857,6 @@ public:
 
 /**
  * UA_BrowseResponse wrapper class.
- * @ingroup TypeWrapper
  */
 class BrowseResponse : public TypeWrapper<UA_BrowseResponse, UA_TYPES_BROWSERESPONSE> {
 public:
@@ -905,7 +871,6 @@ public:
 
 /**
  * UA_BrowseNextRequest wrapper class.
- * @ingroup TypeWrapper
  */
 class BrowseNextRequest : public TypeWrapper<UA_BrowseNextRequest, UA_TYPES_BROWSENEXTREQUEST> {
 public:
@@ -926,7 +891,6 @@ public:
 
 /**
  * UA_BrowseNextResponse wrapper class.
- * @ingroup TypeWrapper
  */
 class BrowseNextResponse : public TypeWrapper<UA_BrowseNextResponse, UA_TYPES_BROWSENEXTRESPONSE> {
 public:
@@ -941,7 +905,6 @@ public:
 
 /**
  * UA_RelativePathElement wrapper class.
- * @ingroup TypeWrapper
  */
 class RelativePathElement
     : public TypeWrapper<UA_RelativePathElement, UA_TYPES_RELATIVEPATHELEMENT> {
@@ -960,7 +923,6 @@ public:
 
 /**
  * UA_RelativePath wrapper class.
- * @ingroup TypeWrapper
  */
 class RelativePath : public TypeWrapper<UA_RelativePath, UA_TYPES_RELATIVEPATH> {
 public:
@@ -974,7 +936,6 @@ public:
 
 /**
  * UA_BrowsePath wrapper class.
- * @ingroup TypeWrapper
  */
 class BrowsePath : public TypeWrapper<UA_BrowsePath, UA_TYPES_BROWSEPATH> {
 public:
@@ -988,7 +949,6 @@ public:
 
 /**
  * UA_BrowsePathTarget wrapper class.
- * @ingroup TypeWrapper
  */
 class BrowsePathTarget : public TypeWrapper<UA_BrowsePathTarget, UA_TYPES_BROWSEPATHTARGET> {
 public:
@@ -1000,7 +960,6 @@ public:
 
 /**
  * UA_BrowsePathResult wrapper class.
- * @ingroup TypeWrapper
  */
 class BrowsePathResult : public TypeWrapper<UA_BrowsePathResult, UA_TYPES_BROWSEPATHRESULT> {
 public:
@@ -1012,7 +971,6 @@ public:
 
 /**
  * UA_TranslateBrowsePathsToNodeIdsRequest wrapper class.
- * @ingroup TypeWrapper
  */
 class TranslateBrowsePathsToNodeIdsRequest
     : public TypeWrapper<
@@ -1031,7 +989,6 @@ public:
 
 /**
  * UA_TranslateBrowsePathsToNodeIdsResponse wrapper class.
- * @ingroup TypeWrapper
  */
 class TranslateBrowsePathsToNodeIdsResponse
     : public TypeWrapper<
@@ -1049,7 +1006,6 @@ public:
 
 /**
  * UA_RegisterNodesRequest wrapper class.
- * @ingroup TypeWrapper
  */
 class RegisterNodesRequest
     : public TypeWrapper<UA_RegisterNodesRequest, UA_TYPES_REGISTERNODESREQUEST> {
@@ -1066,7 +1022,6 @@ public:
 
 /**
  * UA_RegisterNodesResponse wrapper class.
- * @ingroup TypeWrapper
  */
 class RegisterNodesResponse
     : public TypeWrapper<UA_RegisterNodesResponse, UA_TYPES_REGISTERNODESRESPONSE> {
@@ -1081,7 +1036,6 @@ public:
 
 /**
  * UA_UnregisterNodesRequest wrapper class.
- * @ingroup TypeWrapper
  */
 class UnregisterNodesRequest
     : public TypeWrapper<UA_UnregisterNodesRequest, UA_TYPES_UNREGISTERNODESREQUEST> {
@@ -1098,7 +1052,6 @@ public:
 
 /**
  * UA_UnregisterNodesResponse wrapper class.
- * @ingroup TypeWrapper
  */
 class UnregisterNodesResponse
     : public TypeWrapper<UA_UnregisterNodesResponse, UA_TYPES_UNREGISTERNODESRESPONSE> {
@@ -1111,7 +1064,6 @@ public:
 /**
  * UA_ReadValueId wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.29
- * @ingroup TypeWrapper
  */
 class ReadValueId : public TypeWrapper<UA_ReadValueId, UA_TYPES_READVALUEID> {
 public:
@@ -1133,7 +1085,6 @@ public:
 /**
  * UA_ReadRequest wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.10.2
- * @ingroup TypeWrapper
  */
 class ReadRequest : public TypeWrapper<UA_ReadRequest, UA_TYPES_READREQUEST> {
 public:
@@ -1155,7 +1106,6 @@ public:
 /**
  * UA_ReadResponse wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.10.2
- * @ingroup TypeWrapper
  */
 class ReadResponse : public TypeWrapper<UA_ReadResponse, UA_TYPES_READRESPONSE> {
 public:
@@ -1171,7 +1121,6 @@ public:
 /**
  * UA_WriteValue wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.10.4
- * @ingroup TypeWrapper
  */
 class WriteValue : public TypeWrapper<UA_WriteValue, UA_TYPES_WRITEVALUE> {
 public:
@@ -1190,7 +1139,6 @@ public:
 /**
  * UA_WriteRequest wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.10.4
- * @ingroup TypeWrapper
  */
 class WriteRequest : public TypeWrapper<UA_WriteRequest, UA_TYPES_WRITEREQUEST> {
 public:
@@ -1205,7 +1153,6 @@ public:
 /**
  * UA_WriteResponse wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.10.4
- * @ingroup TypeWrapper
  */
 class WriteResponse : public TypeWrapper<UA_WriteResponse, UA_TYPES_WRITERESPONSE> {
 public:
@@ -1225,7 +1172,6 @@ public:
 /**
  * UA_Argument wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.6
- * @ingroup TypeWrapper
  */
 class Argument : public TypeWrapper<UA_Argument, UA_TYPES_ARGUMENT> {
 public:
@@ -1330,7 +1276,6 @@ public:
 /**
  * Filter operator.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.7.3
- * @ingroup TypeWrapper
  */
 enum class FilterOperator : uint32_t {
     // clang-format off
@@ -1360,7 +1305,6 @@ enum class FilterOperator : uint32_t {
  * Reference a sub-element in the ContentFilter elements array by index.
  * The index must be greater than the element index it is part of.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.7.4.2
- * @ingroup TypeWrapper
  */
 class ElementOperand : public TypeWrapper<UA_ElementOperand, UA_TYPES_ELEMENTOPERAND> {
 public:
@@ -1374,7 +1318,6 @@ public:
 /**
  * UA_LiteralOperand wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.7.4.3
- * @ingroup TypeWrapper
  */
 class LiteralOperand : public TypeWrapper<UA_LiteralOperand, UA_TYPES_LITERALOPERAND> {
 private:
@@ -1397,7 +1340,6 @@ public:
 /**
  * UA_AttributeOperand wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.7.4.4
- * @ingroup TypeWrapper
  */
 class AttributeOperand : public TypeWrapper<UA_AttributeOperand, UA_TYPES_ATTRIBUTEOPERAND> {
 public:
@@ -1421,7 +1363,6 @@ public:
 /**
  * UA_SimpleAttributeOperand wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.7.4.5
- * @ingroup TypeWrapper
  */
 class SimpleAttributeOperand
     : public TypeWrapper<UA_SimpleAttributeOperand, UA_TYPES_SIMPLEATTRIBUTEOPERAND> {
@@ -1452,7 +1393,6 @@ public:
  * - ExtensionObject (other types)
  *
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.7.4
- * @ingroup TypeWrapper
  */
 using FilterOperand = std::variant<
     ElementOperand,
@@ -1470,7 +1410,6 @@ using FilterOperand = std::variant<
  *
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.7.1
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/B.1
- * @ingroup TypeWrapper
  */
 class ContentFilterElement
     : public TypeWrapper<UA_ContentFilterElement, UA_TYPES_CONTENTFILTERELEMENT> {
@@ -1495,7 +1434,6 @@ public:
  *
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.7.1
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/B.1
- * @ingroup TypeWrapper
  */
 class ContentFilter : public TypeWrapper<UA_ContentFilter, UA_TYPES_CONTENTFILTER> {
 public:
@@ -1523,7 +1461,6 @@ ContentFilter operator||(const ContentFilter& lhs, const ContentFilter& rhs);
 /**
  * Data change trigger.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.10
- * @ingroup TypeWrapper
  */
 enum class DataChangeTrigger : uint32_t {
     // clang-format off
@@ -1536,7 +1473,6 @@ enum class DataChangeTrigger : uint32_t {
 /**
  * Deadband type.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.22.2
- * @ingroup TypeWrapper
  */
 enum class DeadbandType : uint32_t {
     // clang-format off
@@ -1549,7 +1485,6 @@ enum class DeadbandType : uint32_t {
 /**
  * UA_DataChangeFilter wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.22.2
- * @ingroup TypeWrapper
  */
 class DataChangeFilter : public TypeWrapper<UA_DataChangeFilter, UA_TYPES_DATACHANGEFILTER> {
 public:
@@ -1565,7 +1500,6 @@ public:
 /**
  * UA_EventFilter wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.22.3
- * @ingroup TypeWrapper
  */
 class EventFilter : public TypeWrapper<UA_EventFilter, UA_TYPES_EVENTFILTER> {
 public:
@@ -1584,7 +1518,6 @@ using AggregateConfiguration = UA_AggregateConfiguration;
 /**
  * UA_AggregateFilter wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.22.4
- * @ingroup TypeWrapper
  */
 class AggregateFilter : public TypeWrapper<UA_AggregateFilter, UA_TYPES_AGGREGATEFILTER> {
 public:
@@ -1620,5 +1553,9 @@ enum class PerformUpdateType : uint32_t {
     Remove  = 4,
     // clang-format on
 };
+
+/**
+ * @}
+ */
 
 }  // namespace opcua
