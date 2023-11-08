@@ -32,7 +32,7 @@
   - [`opcua::Server`][doc-server]
   - [`opcua::Client`][doc-client]
   - [`opcua::Node`][doc-node]
-- [Free functions in `services` namespace][doc-services] as an alternative to the high-level classes
+- [Free functions in `services` namespace][doc-services] as an alternative to the [`opcua::Node` class][doc-node]
 - [Safe wrapper classes][doc-typewrapper] for open62541 `UA_*` types to prevent memory leaks
 - Native open62541 objects can be accessed using the `handle()` method of the wrapping classes
 - [Extensible type conversion system](#-type-conversion) to convert arbitrary types to/from native `UA_*` types
