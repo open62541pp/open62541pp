@@ -1,12 +1,14 @@
 #include "open62541pp/types/Composed.h"
 
 #include <algorithm>
+#include <cassert>
 #include <cstddef>
 #include <string_view>
 #include <type_traits>
 
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/detail/helper.h"
 
 #include "../open62541_impl.h"
 
@@ -23,7 +25,9 @@ inline static void assign(T src, Native& dst) noexcept {
 }
 
 inline static void assign(std::string_view src, UA_String& dst) {
-    asWrapper<String>(dst) = String(src);
+    // UA_String is empty in constructor call, no clear necessary
+    assert(dst.data == nullptr);
+    dst = detail::allocUaString(src);
 }
 
 template <typename T, typename Native, typename = std::enable_if_t<detail::isTypeWrapper<T>>>
