@@ -25,11 +25,11 @@ struct ForwardResponse {
 };
 
 struct ClientService {
-    template <typename Request, typename Response, typename Fn>
-    static auto sendRequest(Client& client, const Request& request, Fn&& transformResponse) {
+    template <typename Request, typename Response, typename F>
+    static auto sendRequest(Client& client, const Request& request, F&& processResponse) {
         static_assert(detail::isTypeWrapper<Request>);
         static_assert(detail::isTypeWrapper<Response>);
-        static_assert(std::is_invocable_v<Fn, Response&> || std::is_invocable_v<Fn, Response&&>);
+        static_assert(std::is_invocable_v<F, Response&> || std::is_invocable_v<F, Response&&>);
 
         Response response{};
         __UA_Client_Service(
@@ -41,31 +41,33 @@ struct ClientService {
         );
 
         detail::throwOnBadStatus(response->responseHeader.serviceResult);
-        if constexpr (std::is_invocable_v<Fn, Response&&>) {
-            return transformResponse(std::move(response));
+        if constexpr (std::is_invocable_v<F, Response&&>) {
+            return processResponse(std::move(response));
         } else {
-            return transformResponse(response);
+            return processResponse(response);
         }
     }
 };
 
 struct ClientServiceAsync {
-    template <typename Request, typename Response, typename Fn>
-    static auto sendRequest(Client& client, const Request& request, Fn&& transformResponse) {
+    template <typename Request, typename Response, typename F>
+    static auto sendRequest(Client& client, const Request& request, F&& processResponse) {
         static_assert(detail::isTypeWrapper<Request>);
         static_assert(detail::isTypeWrapper<Response>);
-        static_assert(std::is_invocable_v<Fn, Response&> || std::is_invocable_v<Fn, Response&&>);
+        static_assert(std::is_invocable_v<F, Response&> || std::is_invocable_v<F, Response&&>);
 
-        constexpr bool rvalue = std::is_invocable_v<Fn, Response&&>;
-        using Result = std::invoke_result_t<Fn, std::conditional_t<rvalue, Response&&, Response&>>;
+        constexpr bool rvalue = std::is_invocable_v<F, Response&&>;
+        using Result = std::invoke_result_t<F, std::conditional_t<rvalue, Response&&, Response&>>;
 
         struct CallbackContext {
+            CallbackContext(F&& func)
+                : process(func) {}
+
             std::promise<Result> promise;
-            Fn transform;
+            F process;
         };
 
-        auto callbackContext = std::make_unique<CallbackContext>();
-        callbackContext->transform = std::move(transformResponse);
+        auto callbackContext = std::make_unique<CallbackContext>(std::forward<F>(processResponse));
 
         auto callback = [](UA_Client*, void* userdata, uint32_t /* reqId */, void* responsePtr) {
             assert(userdata != nullptr);
@@ -77,16 +79,14 @@ struct ClientServiceAsync {
                 }
                 auto& response = *static_cast<Response*>(responsePtr);
                 detail::throwOnBadStatus(response->responseHeader.serviceResult);
-                if constexpr (std::is_invocable_v<Fn, Response&&>) {
-                    Response responseMove;
-                    std::swap(response, responseMove);
-                    promise.set_value((*context->transform)(std::move(responseMove)));
+                if constexpr (std::is_invocable_v<F, Response&&>) {
+                    promise.set_value((*context->process)(std::move(response)));
                 } else {
                     if constexpr (std::is_void_v<Result>) {
-                        (*context->transform)(response);
+                        (*context->process)(response);
                         promise.set_value();
                     } else {
-                        promise.set_value((*context->transform)(response));
+                        promise.set_value((*context->process)(response));
                     }
                 }
             } catch (...) {

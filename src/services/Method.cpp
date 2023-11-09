@@ -38,10 +38,6 @@ inline static auto getOutputArguments(CallMethodResult& result) {
     );
 }
 
-static auto getSingleResultOutputArguments(CallResponse& response) {
-    return getOutputArguments(getSingleResultFromResponse(response));
-}
-
 template <>
 std::vector<Variant> call(
     Server& server,
@@ -54,8 +50,8 @@ std::vector<Variant> call(
     return getOutputArguments(result);
 }
 
-template <>
-std::vector<Variant> call(
+template <typename TClientService>
+static auto callImpl(
     Client& client,
     const NodeId& objectId,
     const NodeId& methodId,
@@ -65,9 +61,23 @@ std::vector<Variant> call(
     UA_CallRequest request{};
     request.methodsToCall = &item;
     request.methodsToCallSize = 1;
-    return sendRequest<CallRequest, CallResponse>(
-        client, asWrapper<CallRequest>(request), &getSingleResultOutputArguments
+    return TClientService::template sendRequest<CallRequest, CallResponse>(
+        client,
+        asWrapper<CallRequest>(request),
+        [](CallResponse& response) {
+            return getOutputArguments(getSingleResultFromResponse(response));
+        }
     );
+}
+
+template <>
+std::vector<Variant> call(
+    Client& client,
+    const NodeId& objectId,
+    const NodeId& methodId,
+    Span<const Variant> inputArguments
+) {
+    return callImpl<ClientService>(client, objectId, methodId, inputArguments);
 }
 
 std::future<std::vector<Variant>> callAsync(
@@ -76,13 +86,7 @@ std::future<std::vector<Variant>> callAsync(
     const NodeId& methodId,
     Span<const Variant> inputArguments
 ) {
-    UA_CallMethodRequest item = createCallMethodRequest(objectId, methodId, inputArguments);
-    UA_CallRequest request{};
-    request.methodsToCall = &item;
-    request.methodsToCallSize = 1;
-    return sendAsyncRequest<CallRequest, CallResponse>(
-        client, asWrapper<CallRequest>(request), &getSingleResultOutputArguments
-    );
+    return callImpl<ClientServiceAsync>(client, objectId, methodId, inputArguments);
 }
 
 }  // namespace opcua::services

@@ -17,25 +17,25 @@
 namespace opcua::services {
 
 AddNodesResponse addNodes(Client& client, const AddNodesRequest& request) {
-    return sendRequest<AddNodesRequest, AddNodesResponse>(
+    return ClientService::sendRequest<AddNodesRequest, AddNodesResponse>(
         client, request, ForwardResponse<AddNodesResponse>{}
     );
 }
 
 AddReferencesResponse addReferences(Client& client, const AddReferencesRequest& request) {
-    return sendRequest<AddReferencesRequest, AddReferencesResponse>(
+    return ClientService::sendRequest<AddReferencesRequest, AddReferencesResponse>(
         client, request, ForwardResponse<AddReferencesResponse>{}
     );
 }
 
 DeleteNodesResponse deleteNodes(Client& client, const DeleteNodesRequest& request) {
-    return sendRequest<DeleteNodesRequest, DeleteNodesResponse>(
+    return ClientService::sendRequest<DeleteNodesRequest, DeleteNodesResponse>(
         client, request, ForwardResponse<DeleteNodesResponse>{}
     );
 }
 
 DeleteReferencesResponse deleteReferences(Client& client, const DeleteReferencesRequest& request) {
-    return sendRequest<DeleteReferencesRequest, DeleteReferencesResponse>(
+    return ClientService::sendRequest<DeleteReferencesRequest, DeleteReferencesResponse>(
         client, request, ForwardResponse<DeleteReferencesResponse>{}
     );
 }
@@ -69,7 +69,9 @@ NodeId addNode<Server>(
     return addedNodeId;
 }
 
-inline static UA_AddNodesItem createAddNodesItem(
+template <typename TClientService>
+static auto addNodeImpl(
+    Client& client,
     NodeClass nodeClass,
     const NodeId& parentId,
     const NodeId& id,
@@ -87,13 +89,18 @@ inline static UA_AddNodesItem createAddNodesItem(
     item.nodeClass = static_cast<UA_NodeClass>(nodeClass);
     item.nodeAttributes = nodeAttributes;
     item.typeDefinition.nodeId = typeDefinition;
-    return item;
-}
-
-static NodeId getAddedNodeId(AddNodesResponse& response) {
-    auto& result = getSingleResultFromResponse(response);
-    detail::throwOnBadStatus(result.getStatusCode());
-    return std::move(result.getAddedNodeId());
+    UA_AddNodesRequest request{};
+    request.nodesToAddSize = 1;
+    request.nodesToAdd = &item;
+    return TClientService::template sendRequest<AddNodesRequest, AddNodesResponse>(
+        client,
+        asWrapper<AddNodesRequest>(request),
+        [](AddNodesResponse& response) {
+            auto& result = getSingleResultFromResponse(response);
+            detail::throwOnBadStatus(result.getStatusCode());
+            return std::move(result.getAddedNodeId());
+        }
+    );
 }
 
 template <>
@@ -107,14 +114,8 @@ NodeId addNode<Client>(
     const NodeId& typeDefinition,
     const NodeId& referenceType
 ) {
-    UA_AddNodesItem item = createAddNodesItem(
-        nodeClass, parentId, id, browseName, nodeAttributes, typeDefinition, referenceType
-    );
-    UA_AddNodesRequest request{};
-    request.nodesToAddSize = 1;
-    request.nodesToAdd = &item;
-    return sendRequest<AddNodesRequest, AddNodesResponse>(
-        client, asWrapper<AddNodesRequest>(request), &getAddedNodeId
+    return addNodeImpl<ClientService>(
+        client, nodeClass, parentId, id, browseName, nodeAttributes, typeDefinition, referenceType
     );
 }
 
@@ -128,14 +129,8 @@ std::future<NodeId> addNodeAsync(
     const NodeId& typeDefinition,
     const NodeId& referenceType
 ) {
-    UA_AddNodesItem item = createAddNodesItem(
-        nodeClass, parentId, id, browseName, nodeAttributes, typeDefinition, referenceType
-    );
-    UA_AddNodesRequest request{};
-    request.nodesToAddSize = 1;
-    request.nodesToAdd = &item;
-    return sendAsyncRequest<AddNodesRequest, AddNodesResponse>(
-        client, asWrapper<AddNodesRequest>(request), &getAddedNodeId
+    return addNodeImpl<ClientServiceAsync>(
+        client, nodeClass, parentId, id, browseName, nodeAttributes, typeDefinition, referenceType
     );
 }
 
@@ -244,8 +239,13 @@ void addReference<Server>(
     detail::throwOnBadStatus(status);
 }
 
-inline static UA_AddReferencesItem createAddReferencesItem(
-    const NodeId& sourceId, const NodeId& targetId, const NodeId& referenceType, bool forward
+template <typename TClientService>
+static auto addReferenceImpl(
+    Client& client,
+    const NodeId& sourceId,
+    const NodeId& targetId,
+    const NodeId& referenceType,
+    bool forward
 ) {
     UA_AddReferencesItem item{};
     item.sourceNodeId = sourceId;
@@ -254,11 +254,16 @@ inline static UA_AddReferencesItem createAddReferencesItem(
     item.targetServerUri = UA_STRING_NULL;
     item.targetNodeId.nodeId = targetId;
     item.targetNodeClass = UA_NODECLASS_UNSPECIFIED;  // necessary?
-    return item;
-}
-
-static void checkAddReferencesResponse(AddReferencesResponse& response) {
-    detail::throwOnBadStatus(getSingleResultFromResponse(response));
+    UA_AddReferencesRequest request{};
+    request.referencesToAddSize = 1;
+    request.referencesToAdd = &item;
+    return TClientService::template sendRequest<AddReferencesRequest, AddReferencesResponse>(
+        client,
+        asWrapper<AddReferencesRequest>(request),
+        [](AddReferencesResponse& response) {
+            detail::throwOnBadStatus(getSingleResultFromResponse(response));
+        }
+    );
 }
 
 template <>
@@ -269,13 +274,7 @@ void addReference<Client>(
     const NodeId& referenceType,
     bool forward
 ) {
-    UA_AddReferencesItem item = createAddReferencesItem(sourceId, targetId, referenceType, forward);
-    UA_AddReferencesRequest request{};
-    request.referencesToAddSize = 1;
-    request.referencesToAdd = &item;
-    return sendRequest<AddReferencesRequest, AddReferencesResponse>(
-        client, asWrapper<AddReferencesRequest>(request), &checkAddReferencesResponse
-    );
+    return addReferenceImpl<ClientService>(client, sourceId, targetId, referenceType, forward);
 }
 
 std::future<void> addReferenceAsync(
@@ -285,13 +284,7 @@ std::future<void> addReferenceAsync(
     const NodeId& referenceType,
     bool forward
 ) {
-    UA_AddReferencesItem item = createAddReferencesItem(sourceId, targetId, referenceType, forward);
-    UA_AddReferencesRequest request{};
-    request.referencesToAddSize = 1;
-    request.referencesToAdd = &item;
-    return sendAsyncRequest<AddReferencesRequest, AddReferencesResponse>(
-        client, asWrapper<AddReferencesRequest>(request), &checkAddReferencesResponse
-    );
+    return addReferenceImpl<ClientServiceAsync>(client, sourceId, targetId, referenceType, forward);
 }
 
 template <>
@@ -300,36 +293,30 @@ void deleteNode<Server>(Server& server, const NodeId& id, bool deleteReferences)
     detail::throwOnBadStatus(status);
 }
 
-inline static UA_DeleteNodesItem createDeleteNodesItem(const NodeId& id, bool deleteReferences) {
+template <typename TClientService>
+static auto deleteNodeImpl(Client& client, const NodeId& id, bool deleteReferences) {
     UA_DeleteNodesItem item{};
     item.nodeId = id;
     item.deleteTargetReferences = deleteReferences;
-    return item;
-}
-
-static void checkDeleteNodesResponse(DeleteNodesResponse& response) {
-    detail::throwOnBadStatus(getSingleResultFromResponse(response));
+    UA_DeleteNodesRequest request{};
+    request.nodesToDeleteSize = 1;
+    request.nodesToDelete = &item;
+    return TClientService::template sendRequest<DeleteNodesRequest, DeleteNodesResponse>(
+        client,
+        asWrapper<DeleteNodesRequest>(request),
+        [](DeleteNodesResponse& response) {
+            detail::throwOnBadStatus(getSingleResultFromResponse(response));
+        }
+    );
 }
 
 template <>
 void deleteNode<Client>(Client& client, const NodeId& id, bool deleteReferences) {
-    UA_DeleteNodesItem item = createDeleteNodesItem(id, deleteReferences);
-    UA_DeleteNodesRequest request{};
-    request.nodesToDeleteSize = 1;
-    request.nodesToDelete = &item;
-    return sendRequest<DeleteNodesRequest, DeleteNodesResponse>(
-        client, asWrapper<DeleteNodesRequest>(request), &checkDeleteNodesResponse
-    );
+    return deleteNodeImpl<ClientService>(client, id, deleteReferences);
 }
 
 std::future<void> deleteNodeAsync(Client& client, const NodeId& id, bool deleteReferences) {
-    UA_DeleteNodesItem item = createDeleteNodesItem(id, deleteReferences);
-    UA_DeleteNodesRequest request{};
-    request.nodesToDeleteSize = 1;
-    request.nodesToDelete = &item;
-    return sendAsyncRequest<DeleteNodesRequest, DeleteNodesResponse>(
-        client, asWrapper<DeleteNodesRequest>(request), &checkDeleteNodesResponse
-    );
+    return deleteNodeImpl<ClientServiceAsync>(client, id, deleteReferences);
 }
 
 template <>
@@ -347,7 +334,9 @@ void deleteReference<Server>(
     detail::throwOnBadStatus(status);
 }
 
-inline static UA_DeleteReferencesItem createDeleteReferencesItem(
+template <typename TClientService>
+static auto deleteReferenceImpl(
+    Client& client,
     const NodeId& sourceId,
     const NodeId& targetId,
     const NodeId& referenceType,
@@ -360,11 +349,16 @@ inline static UA_DeleteReferencesItem createDeleteReferencesItem(
     item.isForward = isForward;
     item.targetNodeId.nodeId = targetId;
     item.deleteBidirectional = deleteBidirectional;
-    return item;
-}
-
-static void checkDeleteReferencesResponse(DeleteReferencesResponse& response) {
-    detail::throwOnBadStatus(getSingleResultFromResponse(response));
+    UA_DeleteReferencesRequest request{};
+    request.referencesToDeleteSize = 1;
+    request.referencesToDelete = &item;
+    return TClientService::template sendRequest<DeleteReferencesRequest, DeleteReferencesResponse>(
+        client,
+        asWrapper<DeleteReferencesRequest>(request),
+        [](DeleteReferencesResponse& response) {
+            detail::throwOnBadStatus(getSingleResultFromResponse(response));
+        }
+    );
 }
 
 template <>
@@ -376,14 +370,8 @@ void deleteReference<Client>(
     bool isForward,
     bool deleteBidirectional
 ) {
-    UA_DeleteReferencesItem item = createDeleteReferencesItem(
-        sourceId, targetId, referenceType, isForward, deleteBidirectional
-    );
-    UA_DeleteReferencesRequest request{};
-    request.referencesToDeleteSize = 1;
-    request.referencesToDelete = &item;
-    return sendRequest<DeleteReferencesRequest, DeleteReferencesResponse>(
-        client, asWrapper<DeleteReferencesRequest>(request), &checkDeleteReferencesResponse
+    return deleteReferenceImpl<ClientService>(
+        client, sourceId, targetId, referenceType, isForward, deleteBidirectional
     );
 }
 
@@ -395,14 +383,8 @@ std::future<void> deleteReferenceAsync(
     bool isForward,
     bool deleteBidirectional
 ) {
-    UA_DeleteReferencesItem item = createDeleteReferencesItem(
-        sourceId, targetId, referenceType, isForward, deleteBidirectional
-    );
-    UA_DeleteReferencesRequest request{};
-    request.referencesToDeleteSize = 1;
-    request.referencesToDelete = &item;
-    return sendAsyncRequest<DeleteReferencesRequest, DeleteReferencesResponse>(
-        client, asWrapper<DeleteReferencesRequest>(request), &checkDeleteReferencesResponse
+    return deleteReferenceImpl<ClientServiceAsync>(
+        client, sourceId, targetId, referenceType, isForward, deleteBidirectional
     );
 }
 
