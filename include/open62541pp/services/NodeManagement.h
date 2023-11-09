@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <functional>
+#include <future>
 #include <string_view>
 
 #include "open62541pp/Common.h"  // ModellingRule
@@ -16,6 +17,14 @@ namespace opcua {
 class Client;
 class Variant;
 }  // namespace opcua
+
+namespace opcua::detail {
+template <typename T>
+inline ExtensionObject convertNodeAttributes(const T& attributes) {
+    // NOLINTNEXTLINE, won't be modified
+    return ExtensionObject::fromDecoded(const_cast<T&>(attributes));
+}
+}  // namespace opcua::detail
 
 namespace opcua::services {
 
@@ -34,9 +43,21 @@ namespace opcua::services {
 AddNodesResponse addNodes(Client& client, const AddNodesRequest& request);
 
 /**
+ * Asynchronously add one or more nodes (client only).
+ */
+std::future<AddNodesResponse> addNodesAsync(Client& client, const AddNodesRequest& request);
+
+/**
  * Add one or more references (client only).
  */
 AddReferencesResponse addReferences(Client& client, const AddReferencesRequest& request);
+
+/**
+ * Asynchronously add one or more references (client only).
+ */
+std::future<AddReferencesResponse> addReferencesAsync(
+    Client& client, const AddReferencesRequest& request
+);
 
 /**
  * Delete one or more nodes (client only).
@@ -44,9 +65,23 @@ AddReferencesResponse addReferences(Client& client, const AddReferencesRequest& 
 DeleteNodesResponse deleteNodes(Client& client, const DeleteNodesRequest& request);
 
 /**
+ * Asynchronously delete one or more nodes (client only).
+ */
+std::future<DeleteNodesResponse> deleteNodesAsync(
+    Client& client, const DeleteNodesRequest& request
+);
+
+/**
  * Delete one or more references (client only).
  */
 DeleteReferencesResponse deleteReferences(Client& client, const DeleteReferencesRequest& request);
+
+/**
+ * Asynchronously delete one or more references (client only).
+ */
+std::future<DeleteReferencesResponse> deleteReferencesAsync(
+    Client& client, const DeleteReferencesRequest& request
+);
 
 /**
  * Add a node.
@@ -55,6 +90,21 @@ DeleteReferencesResponse deleteReferences(Client& client, const DeleteReferences
 template <typename T>
 NodeId addNode(
     T& serverOrClient,
+    NodeClass nodeClass,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    const ExtensionObject& nodeAttributes,
+    const NodeId& typeDefinition,
+    const NodeId& referenceType
+);
+
+/**
+ * Asynchronously add a node.
+ * @copydetails addNode
+ */
+std::future<NodeId> addNodeAsync(
+    Client& client,
     NodeClass nodeClass,
     const NodeId& parentId,
     const NodeId& id,
@@ -86,7 +136,32 @@ inline NodeId addObject(
         parentId,
         id,
         browseName,
-        ExtensionObject::fromDecoded(const_cast<ObjectAttributes&>(attributes)),  // NOLINT
+        detail::convertNodeAttributes(attributes),
+        objectType,
+        referenceType
+    );
+}
+
+/**
+ * Asynchronously add object.
+ * @copydetails addObject
+ */
+inline std::future<NodeId> addObjectAsync(
+    Client& client,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    const ObjectAttributes& attributes = {},
+    const NodeId& objectType = ObjectTypeId::BaseObjectType,
+    const NodeId& referenceType = ReferenceTypeId::HasComponent
+) {
+    return addNodeAsync(
+        client,
+        NodeClass::Object,
+        parentId,
+        id,
+        browseName,
+        detail::convertNodeAttributes(attributes),
         objectType,
         referenceType
     );
@@ -117,6 +192,23 @@ inline NodeId addFolder(
 }
 
 /**
+ * Asynchronously add folder.
+ * @copydetails addFolder
+ */
+inline std::future<NodeId> addFolderAsync(
+    Client& client,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    const ObjectAttributes& attributes = {},
+    const NodeId& referenceType = ReferenceTypeId::HasComponent
+) {
+    return addObjectAsync(
+        client, parentId, id, browseName, attributes, ObjectTypeId::FolderType, referenceType
+    );
+}
+
+/**
  * Add variable.
  * @exception BadStatus
  */
@@ -136,7 +228,32 @@ inline NodeId addVariable(
         parentId,
         id,
         browseName,
-        ExtensionObject::fromDecoded(const_cast<VariableAttributes&>(attributes)),  // NOLINT
+        detail::convertNodeAttributes(attributes),
+        variableType,
+        referenceType
+    );
+}
+
+/**
+ * Asynchronously add variable.
+ * @copydetails addVariable
+ */
+inline std::future<NodeId> addVariableAsync(
+    Client& client,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    const VariableAttributes& attributes = {},
+    const NodeId& variableType = VariableTypeId::BaseDataVariableType,
+    const NodeId& referenceType = ReferenceTypeId::HasComponent
+) {
+    return addNodeAsync(
+        client,
+        NodeClass::Variable,
+        parentId,
+        id,
+        browseName,
+        detail::convertNodeAttributes(attributes),
         variableType,
         referenceType
     );
@@ -156,6 +273,28 @@ inline NodeId addProperty(
 ) {
     return addVariable(
         serverOrClient,
+        parentId,
+        id,
+        browseName,
+        attributes,
+        VariableTypeId::PropertyType,
+        ReferenceTypeId::HasProperty
+    );
+}
+
+/**
+ * Asynchronously add property.
+ * @copydetails addProperty
+ */
+inline std::future<NodeId> addPropertyAsync(
+    Client& client,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    const VariableAttributes& attributes = {}
+) {
+    return addVariableAsync(
+        client,
         parentId,
         id,
         browseName,
@@ -190,6 +329,33 @@ NodeId addMethod(
     const MethodAttributes& attributes = {},
     const NodeId& referenceType = ReferenceTypeId::HasComponent
 );
+
+/**
+ * Asynchronously add method.
+ * @copydetails addMethod
+ */
+inline std::future<NodeId> addMethodAsync(
+    Client& client,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    [[maybe_unused]] MethodCallback callback,  // NOLINT
+    [[maybe_unused]] Span<const Argument> inputArguments,
+    [[maybe_unused]] Span<const Argument> outputArguments,
+    const MethodAttributes& attributes = {},
+    const NodeId& referenceType = ReferenceTypeId::HasComponent
+) {
+    return addNodeAsync(
+        client,
+        NodeClass::Method,
+        parentId,
+        id,
+        browseName,
+        detail::convertNodeAttributes(attributes),
+        {},
+        referenceType
+    );
+}
 #endif
 
 /**
@@ -211,7 +377,31 @@ inline NodeId addObjectType(
         parentId,
         id,
         browseName,
-        ExtensionObject::fromDecoded(const_cast<ObjectTypeAttributes&>(attributes)),  // NOLINT
+        detail::convertNodeAttributes(attributes),
+        {},
+        referenceType
+    );
+}
+
+/**
+ * Asynchronously add object type.
+ * @copydetails addObjectType
+ */
+inline std::future<NodeId> addObjectTypeAsync(
+    Client& client,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    const ObjectTypeAttributes& attributes = {},
+    const NodeId& referenceType = ReferenceTypeId::HasSubtype
+) {
+    return addNodeAsync(
+        client,
+        NodeClass::ObjectType,
+        parentId,
+        id,
+        browseName,
+        detail::convertNodeAttributes(attributes),
         {},
         referenceType
     );
@@ -237,7 +427,32 @@ inline NodeId addVariableType(
         parentId,
         id,
         browseName,
-        ExtensionObject::fromDecoded(const_cast<VariableTypeAttributes&>(attributes)),  // NOLINT
+        detail::convertNodeAttributes(attributes),
+        variableType,
+        referenceType
+    );
+}
+
+/**
+ * Asynchronously add variable type.
+ * @copydetails addVariableType
+ */
+inline std::future<NodeId> addVariableTypeAsync(
+    Client& client,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    const VariableTypeAttributes& attributes = {},
+    const NodeId& variableType = VariableTypeId::BaseDataVariableType,
+    const NodeId& referenceType = ReferenceTypeId::HasSubtype
+) {
+    return addNodeAsync(
+        client,
+        NodeClass::VariableType,
+        parentId,
+        id,
+        browseName,
+        detail::convertNodeAttributes(attributes),
         variableType,
         referenceType
     );
@@ -262,7 +477,32 @@ inline NodeId addReferenceType(
         parentId,
         id,
         browseName,
-        ExtensionObject::fromDecoded(const_cast<ReferenceTypeAttributes&>(attributes)),  // NOLINT
+        detail::convertNodeAttributes(attributes),
+        {},
+        referenceType
+    );
+}
+
+/**
+ * Asynchronously add reference type.
+ * @copydetails addReferenceType
+ */
+template <typename T>
+inline std::future<NodeId> addReferenceTypeAsync(
+    Client& client,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    const ReferenceTypeAttributes& attributes = {},
+    const NodeId& referenceType = ReferenceTypeId::HasSubtype
+) {
+    return addNodeAsync(
+        client,
+        NodeClass::ReferenceType,
+        parentId,
+        id,
+        browseName,
+        detail::convertNodeAttributes(attributes),
         {},
         referenceType
     );
@@ -287,7 +527,31 @@ inline NodeId addDataType(
         parentId,
         id,
         browseName,
-        ExtensionObject::fromDecoded(const_cast<DataTypeAttributes&>(attributes)),  // NOLINT
+        detail::convertNodeAttributes(attributes),
+        {},
+        referenceType
+    );
+}
+
+/**
+ * Asynchronously add data type.
+ * @copydetails addDataType
+ */
+inline std::future<NodeId> addDataTypeAsync(
+    Client& client,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    const DataTypeAttributes& attributes = {},
+    const NodeId& referenceType = ReferenceTypeId::HasSubtype
+) {
+    return addNodeAsync(
+        client,
+        NodeClass::DataType,
+        parentId,
+        id,
+        browseName,
+        detail::convertNodeAttributes(attributes),
         {},
         referenceType
     );
@@ -312,7 +576,31 @@ inline NodeId addView(
         parentId,
         id,
         browseName,
-        ExtensionObject::fromDecoded(const_cast<ViewAttributes&>(attributes)),  // NOLINT
+        detail::convertNodeAttributes(attributes),
+        {},
+        referenceType
+    );
+}
+
+/**
+ * Asynchronously add view.
+ * @copydetails addView
+ */
+inline std::future<NodeId> addViewAsync(
+    Client& client,
+    const NodeId& parentId,
+    const NodeId& id,
+    std::string_view browseName,
+    const ViewAttributes& attributes = {},
+    const NodeId& referenceType = ReferenceTypeId::Organizes
+) {
+    return addNodeAsync(
+        client,
+        NodeClass::View,
+        parentId,
+        id,
+        browseName,
+        detail::convertNodeAttributes(attributes),
         {},
         referenceType
     );
@@ -332,17 +620,43 @@ void addReference(
 );
 
 /**
+ * Asynchronously add reference.
+ * @copydetails addReference
+ */
+std::future<void> addReferenceAsync(
+    Client& client,
+    const NodeId& sourceId,
+    const NodeId& targetId,
+    const NodeId& referenceType,
+    bool forward = true
+);
+
+/**
  * Add modelling rule.
  * @exception BadStatus
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/6.4.4
  */
 template <typename T>
 inline void addModellingRule(T& serverOrClient, const NodeId& id, ModellingRule rule) {
-    addReference(
+    return addReference(
         serverOrClient,
         id,
         {0, static_cast<uint32_t>(rule)},
         ReferenceTypeId::HasModellingRule,
         true
+    );
+}
+
+/**
+ * Asynchronously add modelling rule.
+ * @copydetails addModellingRule
+ */
+template <typename T>
+inline std::future<void> addModellingRuleAsync(
+    Client& client, const NodeId& id, ModellingRule rule
+) {
+    return addReferenceAsync(
+        client, id, {0, static_cast<uint32_t>(rule)}, ReferenceTypeId::HasModellingRule, true
     );
 }
 
@@ -354,12 +668,31 @@ template <typename T>
 void deleteNode(T& serverOrClient, const NodeId& id, bool deleteReferences = true);
 
 /**
+ * Asynchronously delete node.
+ * @copydetails deleteNode
+ */
+std::future<void> deleteNodeAsync(Client& client, const NodeId& id, bool deleteReferences = true);
+
+/**
  * Delete reference.
  * @exception BadStatus
  */
 template <typename T>
 void deleteReference(
     T& serverOrClient,
+    const NodeId& sourceId,
+    const NodeId& targetId,
+    const NodeId& referenceType,
+    bool isForward,
+    bool deleteBidirectional
+);
+
+/**
+ * Asynchronously delete reference.
+ * @copydetails deleteReference
+ */
+std::future<void> deleteReferenceAsync(
+    Client& client,
     const NodeId& sourceId,
     const NodeId& targetId,
     const NodeId& referenceType,
