@@ -42,9 +42,9 @@ struct ClientService {
 
         detail::throwOnBadStatus(response->responseHeader.serviceResult);
         if constexpr (std::is_invocable_v<F, Response&&>) {
-            return processResponse(std::move(response));
+            return std::invoke(processResponse, std::move(response));
         } else {
-            return processResponse(response);
+            return std::invoke(processResponse, response);
         }
     }
 };
@@ -80,13 +80,13 @@ struct ClientServiceAsync {
                 auto& response = *static_cast<Response*>(responsePtr);
                 detail::throwOnBadStatus(response->responseHeader.serviceResult);
                 if constexpr (std::is_invocable_v<F, Response&&>) {
-                    promise.set_value((*context->process)(std::move(response)));
+                    promise.set_value(std::invoke(context->process, std::move(response)));
                 } else {
                     if constexpr (std::is_void_v<Result>) {
-                        (*context->process)(response);
+                        std::invoke(context->process, response);
                         promise.set_value();
                     } else {
-                        promise.set_value((*context->process)(response));
+                        promise.set_value(std::invoke(context->process, response));
                     }
                 }
             } catch (...) {
