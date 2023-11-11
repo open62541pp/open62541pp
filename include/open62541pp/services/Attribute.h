@@ -221,9 +221,7 @@ readDataValue(T& serverOrClient, const NodeId& id, DataValue& value) {
 template <typename T>
 inline Variant readValue(T& serverOrClient, const NodeId& id) {
     DataValue dv = readAttribute(serverOrClient, id, AttributeId::Value);
-    Variant var;
-    var.swap(dv->value);
-    return var;
+    return std::move(dv.getValue());
 }
 
 /// @copydoc readValue
