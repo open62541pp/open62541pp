@@ -42,6 +42,9 @@
 - Use modern C++ (C++ 17) and best practices
 - Less hurdle to get started with OPC UA
 
+The project is currently in `beta` stage but already used in production.
+Version [`v1.0.0` is planned for the beginning of 2024](https://github.com/open62541pp/open62541pp/milestone/1). No (major) breaking changes are expected.
+
 ## ✍ Examples
 
 [Explore all examples in the `examples/` directory](https://github.com/open62541pp/open62541pp/tree/master/examples).
