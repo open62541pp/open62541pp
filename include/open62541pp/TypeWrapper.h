@@ -3,7 +3,7 @@
 #include <cassert>
 #include <cstdint>
 #include <type_traits>
-#include <utility>  // move, swap
+#include <utility>  // exchange, swap
 
 #include "open62541pp/Common.h"
 #include "open62541pp/ErrorHandling.h"
@@ -63,9 +63,8 @@ public:
     }
 
     /// Move constructor.
-    TypeWrapper(TypeWrapper&& other) noexcept {
-        swap(other);
-    }
+    TypeWrapper(TypeWrapper&& other) noexcept
+        : data_(std::exchange(other.data_, {})) {}
 
     /// Copy assignment (deep copy).
     TypeWrapper& operator=(const TypeWrapper& other) {  // NOLINT, false positive
@@ -87,7 +86,7 @@ public:
         if (this == &other) {
             return *this;
         }
-        swap(other);
+        std::swap(data_, other.data_);
         return *this;
     }
 

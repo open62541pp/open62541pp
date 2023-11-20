@@ -3,7 +3,7 @@
 #include <algorithm>  // copy
 #include <cassert>
 #include <cstring>
-#include <utility>  // move, swap
+#include <utility>  // exchange, move, swap
 
 #include "open62541pp/Config.h"
 #include "open62541pp/TypeWrapper.h"  // asWrapper
@@ -65,9 +65,8 @@ DataType::DataType(const DataType& other) {
     copy(other.handle(), handle());
 }
 
-DataType::DataType(DataType&& other) noexcept {
-    std::swap(data_, other.data_);
-}
+DataType::DataType(DataType&& other) noexcept
+    : data_(std::exchange(other.data_, {})) {}
 
 DataType& DataType::operator=(const DataType& other) {
     if (this != &other) {
