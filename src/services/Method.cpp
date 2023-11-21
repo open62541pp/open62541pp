@@ -3,12 +3,12 @@
 #ifdef UA_ENABLE_METHODCALLS
 
 #include <cstddef>
+#include <iterator>
 
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeWrapper.h"
-#include "open62541pp/detail/helper.h"  // getDataType
 #include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"
 
@@ -37,8 +37,8 @@ std::vector<Variant> call(
     }
 
     return {
-        result->outputArguments,
-        result->outputArguments + result->outputArgumentsSize  // NOLINT
+        std::make_move_iterator(result->outputArguments),
+        std::make_move_iterator(result->outputArguments + result->outputArgumentsSize)  // NOLINT
     };
 }
 
@@ -60,8 +60,11 @@ std::vector<Variant> call(
         &outputSize,
         &output
     );
-    std::vector<Variant> result(output, output + outputSize);  // NOLINT
-    UA_Array_delete(output, outputSize, &detail::getDataType(UA_TYPES_VARIANT));
+    std::vector<Variant> result(
+        std::make_move_iterator(output),
+        std::make_move_iterator(output + outputSize)  // NOLINT
+    );
+    UA_free(output);  // NOLINT
     detail::throwOnBadStatus(status);
     return result;
 }
