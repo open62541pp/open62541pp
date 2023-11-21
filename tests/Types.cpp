@@ -267,7 +267,48 @@ TEST_CASE("DateTime") {
 }
 
 TEST_CASE("NodeId") {
-    SUBCASE("Create from ids") {
+    SUBCASE("Constructors") {
+        SUBCASE("Numeric") {
+            NodeId id(1, 123);
+            CHECK(id.getIdentifierType() == NodeIdType::Numeric);
+            CHECK(id.getNamespaceIndex() == 1);
+            CHECK(id.getIdentifierAs<NodeIdType::Numeric>() == 123);
+        }
+
+        SUBCASE("string_view") {
+            std::string_view sv("Test123");
+            NodeId id(1, sv);
+            CHECK(id.getIdentifierType() == NodeIdType::String);
+            CHECK(id.getNamespaceIndex() == 1);
+            CHECK(id.getIdentifierAs<String>().get() == sv);
+        }
+
+        SUBCASE("String") {
+            String string("Test456");
+            NodeId id(2, string);
+            CHECK(id.getIdentifierType() == NodeIdType::String);
+            CHECK(id.getNamespaceIndex() == 2);
+            CHECK(id.getIdentifierAs<String>() == string);
+        }
+
+        SUBCASE("Guid") {
+            Guid guid(11, 22, 33, {1, 2, 3, 4, 5, 6, 7, 8});
+            NodeId id(3, guid);
+            CHECK(id.getIdentifierType() == NodeIdType::Guid);
+            CHECK(id.getNamespaceIndex() == 3);
+            CHECK(id.getIdentifierAs<Guid>() == guid);
+        }
+
+        SUBCASE("ByteString") {
+            ByteString byteString("Test789");
+            NodeId id(4, byteString);
+            CHECK(id.getIdentifierType() == NodeIdType::ByteString);
+            CHECK(id.getNamespaceIndex() == 4);
+            CHECK(id.getIdentifierAs<ByteString>() == byteString);
+        }
+    }
+
+    SUBCASE("Construct from ids") {
         CHECK(NodeId(Type::Boolean) == NodeId(0, UA_NS0ID_BOOLEAN));
         CHECK(NodeId(DataTypeId::Boolean) == NodeId(0, UA_NS0ID_BOOLEAN));
         CHECK(NodeId(ReferenceTypeId::References) == NodeId(0, UA_NS0ID_REFERENCES));
@@ -276,24 +317,6 @@ TEST_CASE("NodeId") {
         CHECK(NodeId(ObjectId::RootFolder) == NodeId(0, UA_NS0ID_ROOTFOLDER));
         CHECK(NodeId(VariableId::LocalTime) == NodeId(0, UA_NS0ID_LOCALTIME));
         CHECK(NodeId(MethodId::AddCommentMethodType) == NodeId(0, UA_NS0ID_ADDCOMMENTMETHODTYPE));
-    }
-
-    SUBCASE("Copy") {
-        NodeId src(1, 0);
-        NodeId dst(src);
-        CHECK(dst == src);
-    }
-
-    SUBCASE("Assignment") {
-        NodeId src(1, 0);
-        NodeId dst(2, 1);
-        dst = src;
-        CHECK(dst == src);
-    }
-
-    SUBCASE("Namespace index") {
-        CHECK(NodeId(2, 1).getNamespaceIndex() == 2);
-        CHECK(NodeId(0, 1).getNamespaceIndex() == 0);
     }
 
     SUBCASE("Comparison") {
@@ -323,36 +346,6 @@ TEST_CASE("NodeId") {
         CHECK(NodeId(0, 1).hash() == NodeId(0, 1).hash());
         CHECK(NodeId(0, 1).hash() != NodeId(0, 2).hash());
         CHECK(NodeId(0, 1).hash() != NodeId(1, 1).hash());
-    }
-
-    SUBCASE("Get properties (getIdentifierType, getNamespaceIndex, getIdentifier") {
-        {
-            NodeId id(1, 123);
-            CHECK(id.getIdentifierType() == NodeIdType::Numeric);
-            CHECK(id.getNamespaceIndex() == 1);
-            CHECK(id.getIdentifierAs<NodeIdType::Numeric>() == 123);
-        }
-        {
-            String string("Test456");
-            NodeId id(2, string);
-            CHECK(id.getIdentifierType() == NodeIdType::String);
-            CHECK(id.getNamespaceIndex() == 2);
-            CHECK(id.getIdentifierAs<String>() == string);
-        }
-        {
-            Guid guid(11, 22, 33, {1, 2, 3, 4, 5, 6, 7, 8});
-            NodeId id(3, guid);
-            CHECK(id.getIdentifierType() == NodeIdType::Guid);
-            CHECK(id.getNamespaceIndex() == 3);
-            CHECK(id.getIdentifierAs<Guid>() == guid);
-        }
-        {
-            ByteString byteString("Test789");
-            NodeId id(4, byteString);
-            CHECK(id.getIdentifierType() == NodeIdType::ByteString);
-            CHECK(id.getNamespaceIndex() == 4);
-            CHECK(id.getIdentifierAs<ByteString>() == byteString);
-        }
     }
 
     SUBCASE("toString") {
