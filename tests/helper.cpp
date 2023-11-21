@@ -15,13 +15,6 @@ TEST_CASE("getUaDataType") {
     CHECK(&detail::getUaDataType<Type::Boolean>() == expected);
 }
 
-TEST_CASE("findUaDataType") {
-    CHECK(detail::findUaDataType(UA_NODEID_NULL) == nullptr);
-
-    const auto nodeId = UA_NODEID_NUMERIC(0, UA_NS0ID_BOOLEAN);
-    CHECK(detail::findUaDataType(nodeId) == &UA_TYPES[UA_TYPES_BOOLEAN]);
-}
-
 TEST_CASE("UA_String from string_view") {
     SUBCASE("Test string") {
         std::string_view sv("test123");

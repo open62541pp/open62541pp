@@ -74,12 +74,6 @@ inline const UA_DataType& getUaDataType(Type type) noexcept {
     return getUaDataType(static_cast<TypeIndex>(type));
 }
 
-/// Find (custom) UA_DataType by UA_NodeId.
-/// Return nullptr if no matching data type was found.
-inline const UA_DataType* findUaDataType(const UA_NodeId& id) noexcept {
-    return UA_findDataType(&id);
-}
-
 /* ---------------------------------------- String utils ---------------------------------------- */
 
 /// Convert std::string_view to UA_String (no copy)
