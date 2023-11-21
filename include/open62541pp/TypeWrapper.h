@@ -50,7 +50,7 @@ public:
 
     /// Constructor with native object (move rvalue).
     constexpr TypeWrapper(T&& native) noexcept  // NOLINT, implicit wanted
-        : native_(native) {}
+        : native_(std::exchange(native, {})) {}
 
     ~TypeWrapper() {  // NOLINT
         clear();
