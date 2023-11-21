@@ -25,7 +25,7 @@ struct ClientService {
     static auto sendRequest(Client& client, const Request& request, F&& processResponse) {
         static_assert(detail::isTypeWrapper<Request>);
         static_assert(detail::isTypeWrapper<Response>);
-        static_assert(std::is_invocable_v<F, Response&> || std::is_invocable_v<F, Response&&>);
+        static_assert(std::is_invocable_v<F, Response&>);
 
         Response response{};
         __UA_Client_Service(
@@ -37,11 +37,7 @@ struct ClientService {
         );
 
         detail::throwOnBadStatus(response->responseHeader.serviceResult);
-        if constexpr (std::is_invocable_v<F, Response&&>) {
-            return std::invoke(processResponse, std::move(response));
-        } else {
-            return std::invoke(processResponse, response);
-        }
+        return std::invoke(processResponse, response);
     }
 };
 
@@ -50,10 +46,9 @@ struct ClientServiceAsync {
     static auto sendRequest(Client& client, const Request& request, F&& processResponse) {
         static_assert(detail::isTypeWrapper<Request>);
         static_assert(detail::isTypeWrapper<Response>);
-        static_assert(std::is_invocable_v<F, Response&> || std::is_invocable_v<F, Response&&>);
+        static_assert(std::is_invocable_v<F, Response&>);
 
-        constexpr bool rvalue = std::is_invocable_v<F, Response&&>;
-        using Result = std::invoke_result_t<F, std::conditional_t<rvalue, Response&&, Response&>>;
+        using Result = std::invoke_result_t<F, Response&>;
 
         struct CallbackContext {
             CallbackContext(F&& func)
@@ -75,15 +70,11 @@ struct ClientServiceAsync {
                 }
                 auto& response = *static_cast<Response*>(responsePtr);
                 detail::throwOnBadStatus(response->responseHeader.serviceResult);
-                if constexpr (std::is_invocable_v<F, Response&&>) {
-                    promise.set_value(std::invoke(context->process, std::move(response)));
+                if constexpr (std::is_void_v<Result>) {
+                    std::invoke(context->process, response);
+                    promise.set_value();
                 } else {
-                    if constexpr (std::is_void_v<Result>) {
-                        std::invoke(context->process, response);
-                        promise.set_value();
-                    } else {
-                        promise.set_value(std::invoke(context->process, response));
-                    }
+                    promise.set_value(std::invoke(context->process, response));
                 }
             } catch (...) {
                 promise.set_exception(std::current_exception());
