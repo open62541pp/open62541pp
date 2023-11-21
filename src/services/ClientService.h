@@ -13,14 +13,10 @@
 
 namespace opcua::services {
 
-template <typename Response>
 struct ForwardResponse {
-    constexpr Response operator()(Response& response) noexcept {
-        return response;
-    }
-
-    constexpr Response operator()(Response&& response) noexcept {
-        return response;
+    template <typename Response>
+    constexpr auto operator()(Response&& value) {
+        return std::forward<Response>(value);
     }
 };
 

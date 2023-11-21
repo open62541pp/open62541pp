@@ -12,7 +12,7 @@ namespace opcua::services {
 
 ReadResponse read(Client& client, const ReadRequest& request) {
     return ClientService::sendRequest<ReadRequest, ReadResponse>(
-        client, request, ForwardResponse<ReadResponse>{}
+        client, request, ForwardResponse{}
     );
 }
 
@@ -70,7 +70,7 @@ DataValue readAttribute<Client>(
 
 WriteResponse write(Client& client, const WriteRequest& request) {
     return ClientService::sendRequest<WriteRequest, WriteResponse>(
-        client, request, ForwardResponse<WriteResponse>{}
+        client, request, ForwardResponse{}
     );
 }
 

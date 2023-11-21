@@ -18,25 +18,25 @@ namespace opcua::services {
 
 AddNodesResponse addNodes(Client& client, const AddNodesRequest& request) {
     return ClientService::sendRequest<AddNodesRequest, AddNodesResponse>(
-        client, request, ForwardResponse<AddNodesResponse>{}
+        client, request, ForwardResponse{}
     );
 }
 
 AddReferencesResponse addReferences(Client& client, const AddReferencesRequest& request) {
     return ClientService::sendRequest<AddReferencesRequest, AddReferencesResponse>(
-        client, request, ForwardResponse<AddReferencesResponse>{}
+        client, request, ForwardResponse{}
     );
 }
 
 DeleteNodesResponse deleteNodes(Client& client, const DeleteNodesRequest& request) {
     return ClientService::sendRequest<DeleteNodesRequest, DeleteNodesResponse>(
-        client, request, ForwardResponse<DeleteNodesResponse>{}
+        client, request, ForwardResponse{}
     );
 }
 
 DeleteReferencesResponse deleteReferences(Client& client, const DeleteReferencesRequest& request) {
     return ClientService::sendRequest<DeleteReferencesRequest, DeleteReferencesResponse>(
-        client, request, ForwardResponse<DeleteReferencesResponse>{}
+        client, request, ForwardResponse{}
     );
 }
 
