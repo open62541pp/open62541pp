@@ -68,32 +68,34 @@ public:
 
     /// Copy assignment (deep copy).
     TypeWrapper& operator=(const TypeWrapper& other) {  // NOLINT, false positive
-        if (this == &other) {
-            return *this;
+        if (this != &other) {
+            copy(other.data_);
         }
-        copy(other.data_);
         return *this;
     }
 
     /// Copy assignment with native object (deep copy).
     TypeWrapper& operator=(const T& other) {
-        copy(other);
+        if (&data_ != &other) {
+            copy(other);
+        }
         return *this;
     }
 
     /// Move assignment.
     TypeWrapper& operator=(TypeWrapper&& other) noexcept {
-        if (this == &other) {
-            return *this;
+        if (this != &other) {
+            std::swap(data_, other.data_);
         }
-        std::swap(data_, other.data_);
         return *this;
     }
 
     /// Move assignment with native object.
     TypeWrapper& operator=(T&& other) noexcept {
-        clear();
-        data_ = other;
+        if (&data_ != &other) {
+            clear();
+            data_ = other;
+        }
         return *this;
     }
 
