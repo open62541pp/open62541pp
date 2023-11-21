@@ -82,7 +82,7 @@ constexpr const UA_DataType& guessDataType() {
         "Ambiguous data type, please specify data type manually"
     );
     constexpr auto typeIndex = TypeConverter<ValueType>::ValidTypes::toArray().at(0);
-    return detail::getUaDataType(typeIndex);
+    return detail::getDataType(typeIndex);
 }
 
 template <typename It>

@@ -34,7 +34,7 @@ bool Variant::isType(const UA_DataType& dataType) const noexcept {
 }
 
 bool Variant::isType(Type type) const noexcept {
-    return isType(&detail::getUaDataType(type));
+    return isType(&detail::getDataType(type));
 }
 
 bool Variant::isType(const NodeId& id) const noexcept {

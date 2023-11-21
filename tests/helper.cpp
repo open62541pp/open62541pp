@@ -7,12 +7,12 @@
 
 using namespace opcua;
 
-TEST_CASE("getUaDataType") {
+TEST_CASE("getDataType") {
     const auto* expected = &UA_TYPES[UA_TYPES_BOOLEAN];
-    CHECK(&detail::getUaDataType(UA_TYPES_BOOLEAN) == expected);
-    CHECK(&detail::getUaDataType(Type::Boolean) == expected);
-    CHECK(&detail::getUaDataType<UA_TYPES_BOOLEAN>() == expected);
-    CHECK(&detail::getUaDataType<Type::Boolean>() == expected);
+    CHECK(&detail::getDataType(UA_TYPES_BOOLEAN) == expected);
+    CHECK(&detail::getDataType(Type::Boolean) == expected);
+    CHECK(&detail::getDataType<UA_TYPES_BOOLEAN>() == expected);
+    CHECK(&detail::getDataType<Type::Boolean>() == expected);
 }
 
 TEST_CASE("UA_String from string_view") {
