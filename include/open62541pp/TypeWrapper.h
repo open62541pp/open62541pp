@@ -45,9 +45,8 @@ public:
     TypeWrapper() = default;
 
     /// Constructor with native object (deep copy).
-    explicit TypeWrapper(const T& native) {
-        copy(native);
-    }
+    explicit TypeWrapper(const T& native)
+        : native_(detail::copy(native, UA_TYPES[typeIndex])) {}
 
     /// Constructor with native object (move rvalue).
     constexpr TypeWrapper(T&& native) noexcept  // NOLINT, implicit wanted
@@ -58,9 +57,8 @@ public:
     };
 
     /// Copy constructor (deep copy).
-    TypeWrapper(const TypeWrapper& other) {
-        copy(other.native_);
-    }
+    TypeWrapper(const TypeWrapper& other)
+        : native_(detail::copy(other.native_, UA_TYPES[typeIndex])) {}
 
     /// Move constructor.
     TypeWrapper(TypeWrapper&& other) noexcept
@@ -69,7 +67,8 @@ public:
     /// Copy assignment (deep copy).
     TypeWrapper& operator=(const TypeWrapper& other) {  // NOLINT, false positive
         if (this != &other) {
-            copy(other.native_);
+            clear();
+            native_ = detail::copy(other.native_, UA_TYPES[typeIndex]);
         }
         return *this;
     }
@@ -77,7 +76,8 @@ public:
     /// Copy assignment with native object (deep copy).
     TypeWrapper& operator=(const T& native) {
         if (&native_ != &native) {
-            copy(native);
+            clear();
+            native_ = detail::copy(native, UA_TYPES[typeIndex]);
         }
         return *this;
     }
@@ -147,20 +147,8 @@ public:
     };
 
 protected:
-    inline static void checkMemSize() {
-        assert(sizeof(T) == UA_TYPES[typeIndex].memSize);
-    }
-
     void clear() noexcept {
-        checkMemSize();
-        UA_clear(&native_, &UA_TYPES[typeIndex]);
-    }
-
-    void copy(const T& native) {
-        clear();
-        checkMemSize();
-        auto status = UA_copy(&native, &native_, &UA_TYPES[typeIndex]);  // deep copy
-        detail::throwOnBadStatus(status);
+        detail::clear(native_, UA_TYPES[typeIndex]);
     }
 
 private:

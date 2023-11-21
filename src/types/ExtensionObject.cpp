@@ -17,7 +17,7 @@ ExtensionObject ExtensionObject::fromDecoded(void* data, const UA_DataType& type
 ExtensionObject ExtensionObject::fromDecodedCopy(const void* data, const UA_DataType& type) {
     // manual implementation instead of UA_ExtensionObject_setValueCopy to support open62541 v1.0
     // https://github.com/open62541/open62541/blob/v1.3.5/src/ua_types.c#L503-L524
-    void* dataCopy = UA_malloc(type.memSize);  // NOLINT
+    void* dataCopy = UA_new(&type);
     if (dataCopy == nullptr) {
         throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
     }
