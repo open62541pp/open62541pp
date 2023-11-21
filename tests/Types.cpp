@@ -267,45 +267,43 @@ TEST_CASE("DateTime") {
 }
 
 TEST_CASE("NodeId") {
-    SUBCASE("Constructors") {
-        SUBCASE("Numeric") {
-            NodeId id(1, 123);
-            CHECK(id.getIdentifierType() == NodeIdType::Numeric);
-            CHECK(id.getNamespaceIndex() == 1);
-            CHECK(id.getIdentifierAs<NodeIdType::Numeric>() == 123);
-        }
+    SUBCASE("Construct with numeric identifier") {
+        NodeId id(1, 123);
+        CHECK(id.getIdentifierType() == NodeIdType::Numeric);
+        CHECK(id.getNamespaceIndex() == 1);
+        CHECK(id.getIdentifierAs<NodeIdType::Numeric>() == 123);
+    }
 
-        SUBCASE("string_view") {
-            std::string_view sv("Test123");
-            NodeId id(1, sv);
-            CHECK(id.getIdentifierType() == NodeIdType::String);
-            CHECK(id.getNamespaceIndex() == 1);
-            CHECK(id.getIdentifierAs<String>().get() == sv);
-        }
+    SUBCASE("Constructor with string identifier from string_view") {
+        std::string_view sv("Test123");
+        NodeId id(1, sv);
+        CHECK(id.getIdentifierType() == NodeIdType::String);
+        CHECK(id.getNamespaceIndex() == 1);
+        CHECK(id.getIdentifierAs<String>().get() == sv);
+    }
 
-        SUBCASE("String") {
-            String string("Test456");
-            NodeId id(2, string);
-            CHECK(id.getIdentifierType() == NodeIdType::String);
-            CHECK(id.getNamespaceIndex() == 2);
-            CHECK(id.getIdentifierAs<String>() == string);
-        }
+    SUBCASE("Constructor with string identifier") {
+        String string("Test456");
+        NodeId id(2, string);
+        CHECK(id.getIdentifierType() == NodeIdType::String);
+        CHECK(id.getNamespaceIndex() == 2);
+        CHECK(id.getIdentifierAs<String>() == string);
+    }
 
-        SUBCASE("Guid") {
-            Guid guid(11, 22, 33, {1, 2, 3, 4, 5, 6, 7, 8});
-            NodeId id(3, guid);
-            CHECK(id.getIdentifierType() == NodeIdType::Guid);
-            CHECK(id.getNamespaceIndex() == 3);
-            CHECK(id.getIdentifierAs<Guid>() == guid);
-        }
+    SUBCASE("Constructor with guid identifier") {
+        Guid guid(11, 22, 33, {1, 2, 3, 4, 5, 6, 7, 8});
+        NodeId id(3, guid);
+        CHECK(id.getIdentifierType() == NodeIdType::Guid);
+        CHECK(id.getNamespaceIndex() == 3);
+        CHECK(id.getIdentifierAs<Guid>() == guid);
+    }
 
-        SUBCASE("ByteString") {
-            ByteString byteString("Test789");
-            NodeId id(4, byteString);
-            CHECK(id.getIdentifierType() == NodeIdType::ByteString);
-            CHECK(id.getNamespaceIndex() == 4);
-            CHECK(id.getIdentifierAs<ByteString>() == byteString);
-        }
+    SUBCASE("Constructor with byte string identifier") {
+        ByteString byteString("Test789");
+        NodeId id(4, byteString);
+        CHECK(id.getIdentifierType() == NodeIdType::ByteString);
+        CHECK(id.getNamespaceIndex() == 4);
+        CHECK(id.getIdentifierAs<ByteString>() == byteString);
     }
 
     SUBCASE("Construct from ids") {
