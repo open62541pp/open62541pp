@@ -32,7 +32,7 @@
   - [`opcua::Server`][doc-server]
   - [`opcua::Client`][doc-client]
   - [`opcua::Node`][doc-node]
-- [Free functions in `services` namespace][doc-services] as an alternative to the high-level classes
+- [Free functions in `services` namespace][doc-services] as an alternative to the [`opcua::Node` class][doc-node]
 - [Safe wrapper classes][doc-typewrapper] for open62541 `UA_*` types to prevent memory leaks
 - Native open62541 objects can be accessed using the `handle()` method of the wrapping classes
 - [Extensible type conversion system](#-type-conversion) to convert arbitrary types to/from native `UA_*` types
@@ -41,6 +41,9 @@
 - [Easy installation and integration with CMake](#-getting-started)
 - Use modern C++ (C++ 17) and best practices
 - Less hurdle to get started with OPC UA
+
+The project is currently in `beta` stage but already used in production.
+Version [`v1.0.0` is planned for the beginning of 2024](https://github.com/open62541pp/open62541pp/milestone/1). No (major) breaking changes are expected.
 
 ## ✍ Examples
 

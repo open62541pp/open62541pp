@@ -4,7 +4,7 @@
 
 namespace opcua::detail {
 
-UA_String toUaString(std::string_view src) noexcept {
+UA_String toNativeString(std::string_view src) noexcept {
     UA_String s{src.size(), nullptr};
     if (src.data() == nullptr) {
         return s;
@@ -17,7 +17,7 @@ UA_String toUaString(std::string_view src) noexcept {
     return s;
 }
 
-UA_String allocUaString(std::string_view src) {
+UA_String allocNativeString(std::string_view src) {
     UA_String s{src.size(), nullptr};
     if (src.data() == nullptr) {
         return s;

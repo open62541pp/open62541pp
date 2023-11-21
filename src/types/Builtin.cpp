@@ -19,7 +19,7 @@ namespace opcua {
 /* ------------------------------------------- String ------------------------------------------- */
 
 String::String(std::string_view str)
-    : String(UA_String{detail::allocUaString(str)}) {}
+    : String(detail::allocNativeString(str)) {}
 
 bool String::empty() const noexcept {
     return handle()->length == 0U;
@@ -93,7 +93,7 @@ std::ostream& operator<<(std::ostream& os, const Guid& guid) {
 /* ----------------------------------------- ByteString ----------------------------------------- */
 
 ByteString::ByteString(std::string_view str)
-    : ByteString(UA_ByteString{detail::allocUaString(str)}) {}
+    : ByteString(detail::allocNativeString(str)) {}
 
 ByteString::ByteString(const std::vector<uint8_t>& bytes) {
     const auto status = UA_ByteString_allocBuffer(handle(), bytes.size());
@@ -162,7 +162,7 @@ bool operator!=(std::string_view lhs, const ByteString& rhs) noexcept {
 /* ----------------------------------------- XmlElement ----------------------------------------- */
 
 XmlElement::XmlElement(std::string_view str)
-    : XmlElement(UA_XmlElement{detail::allocUaString(str)}) {}
+    : XmlElement(detail::allocNativeString(str)) {}
 
 bool XmlElement::empty() const noexcept {
     return handle()->length == 0U;
@@ -179,8 +179,10 @@ std::ostream& operator<<(std::ostream& os, const XmlElement& xmlElement) {
 
 /* ---------------------------------------- QualifiedName --------------------------------------- */
 
-QualifiedName::QualifiedName(uint16_t namespaceIndex, std::string_view name)
-    : QualifiedName(UA_QualifiedName{namespaceIndex, detail::allocUaString(name)}) {}
+QualifiedName::QualifiedName(uint16_t namespaceIndex, std::string_view name) {
+    handle()->namespaceIndex = namespaceIndex;
+    handle()->name = detail::allocNativeString(name);
+}
 
 uint16_t QualifiedName::getNamespaceIndex() const noexcept {
     return handle()->namespaceIndex;
@@ -194,8 +196,9 @@ std::string_view QualifiedName::getName() const {
 
 LocalizedText::LocalizedText(
     std::string_view locale, std::string_view text, bool assertLocaleFormat
-)
-    : LocalizedText(UA_LocalizedText{detail::allocUaString(locale), detail::allocUaString(text)}) {
+) {
+    handle()->locale = detail::allocNativeString(locale);
+    handle()->text = detail::allocNativeString(text);
     if (assertLocaleFormat) {
         // NOLINTNEXTLINE
         assert(

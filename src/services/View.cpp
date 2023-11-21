@@ -88,18 +88,16 @@ std::vector<ReferenceDescription> browseAll(
 }
 
 std::vector<ExpandedNodeId> browseRecursive(Server& server, const BrowseDescription& bd) {
-    UA_ExpandedNodeId* resultsNative{};
-    size_t resultsSize{};
-    const auto status = UA_Server_browseRecursive(
-        server.handle(), bd.handle(), &resultsSize, &resultsNative
+    size_t arraySize{};
+    UA_ExpandedNodeId* array{};
+    const auto status = UA_Server_browseRecursive(server.handle(), bd.handle(), &arraySize, &array);
+    std::vector<ExpandedNodeId> result(
+        std::make_move_iterator(array),
+        std::make_move_iterator(array + arraySize)  // NOLINT
     );
+    UA_free(array);  // NOLINT
     detail::throwOnBadStatus(status);
-    std::vector<ExpandedNodeId> results(resultsSize);
-    for (size_t i = 0; i < resultsSize; ++i) {
-        results[i].swap(resultsNative[i]);  // NOLINT
-    }
-    UA_Array_delete(resultsNative, resultsSize, &UA_TYPES[UA_TYPES_EXPANDEDNODEID]);
-    return results;
+    return result;
 }
 
 TranslateBrowsePathsToNodeIdsResponse translateBrowsePathsToNodeIds(

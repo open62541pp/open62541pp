@@ -43,17 +43,17 @@ public:
     NodeId(uint16_t namespaceIndex, std::string_view identifier);
 
     /// Create NodeId with String identifier from String wrapper class.
-    NodeId(uint16_t namespaceIndex, const String& identifier);
+    NodeId(uint16_t namespaceIndex, String identifier) noexcept;
 
     /// Create NodeId with Guid identifier.
-    NodeId(uint16_t namespaceIndex, const Guid& identifier);
+    NodeId(uint16_t namespaceIndex, Guid identifier) noexcept;
 
     /// Create NodeId with ByteString identifier.
-    NodeId(uint16_t namespaceIndex, const ByteString& identifier);
+    NodeId(uint16_t namespaceIndex, ByteString identifier) noexcept;
 
     /// Create NodeId from Type (type id).
     NodeId(Type type) noexcept  // NOLINT, implicit wanted
-        : NodeId(detail::getUaDataType(type).typeId) {}
+        : NodeId(detail::getDataType(type).typeId) {}
 
     /// Create NodeId from DataTypeId.
     NodeId(DataTypeId id) noexcept  // NOLINT, implicit wanted

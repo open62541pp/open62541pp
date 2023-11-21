@@ -3,7 +3,7 @@
 #ifdef UA_ENABLE_METHODCALLS
 
 #include <cstddef>
-#include <memory>
+#include <iterator>
 
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
@@ -33,8 +33,8 @@ inline static auto getOutputArguments(CallMethodResult& result) {
     detail::throwOnBadStatus(result->statusCode);
     detail::throwOnBadStatus(result->inputArgumentResults, result->inputArgumentResultsSize);
     return std::vector<Variant>(
-        result->outputArguments,
-        result->outputArguments + result->outputArgumentsSize  // NOLINT
+        std::make_move_iterator(result->outputArguments),
+        std::make_move_iterator(result->outputArguments + result->outputArgumentsSize)  // NOLINT
     );
 }
 

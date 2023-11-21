@@ -2,6 +2,7 @@
 
 #include <atomic>
 #include <cstddef>
+#include <iterator>
 #include <string>
 #include <utility>  // move
 
@@ -10,7 +11,6 @@
 #include "open62541pp/DataType.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Node.h"
-#include "open62541pp/TypeConverter.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/open62541.h"
 #include "open62541pp/services/Attribute.h"  // readValue
@@ -254,8 +254,8 @@ Client::Client(
 #endif
 
 std::vector<ApplicationDescription> Client::findServers(std::string_view serverUrl) {
-    UA_ApplicationDescription* array = nullptr;
-    size_t arraySize = 0;
+    size_t arraySize{};
+    UA_ApplicationDescription* array{};
     const auto status = UA_Client_findServers(
         handle(),
         std::string(serverUrl).c_str(),  // serverUrl
@@ -266,23 +266,29 @@ std::vector<ApplicationDescription> Client::findServers(std::string_view serverU
         &arraySize,  // registeredServersSize
         &array  // registeredServers
     );
-    auto result = detail::fromNativeArray<ApplicationDescription>(array, arraySize);
-    UA_Array_delete(array, arraySize, &UA_TYPES[UA_TYPES_APPLICATIONDESCRIPTION]);
+    std::vector<ApplicationDescription> result(
+        std::make_move_iterator(array),
+        std::make_move_iterator(array + arraySize)  // NOLINT
+    );
+    UA_free(array);  // NOLINT
     detail::throwOnBadStatus(status);
     return result;
 }
 
 std::vector<EndpointDescription> Client::getEndpoints(std::string_view serverUrl) {
-    UA_EndpointDescription* array = nullptr;
-    size_t arraySize = 0;
+    size_t arraySize{};
+    UA_EndpointDescription* array{};
     const auto status = UA_Client_getEndpoints(
         handle(),
         std::string(serverUrl).c_str(),  // serverUrl
         &arraySize,  // endpointDescriptionsSize,
         &array  // endpointDescriptions
     );
-    auto result = detail::fromNativeArray<EndpointDescription>(array, arraySize);
-    UA_Array_delete(array, arraySize, &UA_TYPES[UA_TYPES_ENDPOINTDESCRIPTION]);
+    std::vector<EndpointDescription> result(
+        std::make_move_iterator(array),
+        std::make_move_iterator(array + arraySize)  // NOLINT
+    );
+    UA_free(array);  // NOLINT
     detail::throwOnBadStatus(status);
     return result;
 }
@@ -397,8 +403,8 @@ bool Client::isRunning() const noexcept {
     return connection_->isRunning();
 }
 
-Node<Client> Client::getNode(const NodeId& id) {
-    return {*this, id};
+Node<Client> Client::getNode(NodeId id) {
+    return {*this, std::move(id)};
 }
 
 Node<Client> Client::getRootNode() {

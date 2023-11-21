@@ -133,7 +133,7 @@ public:
     /// Check if the server is running.
     bool isRunning() const noexcept;
 
-    Node<Server> getNode(const NodeId& id);
+    Node<Server> getNode(NodeId id);
     Node<Server> getRootNode();
     Node<Server> getObjectsNode();
     Node<Server> getTypesNode();
