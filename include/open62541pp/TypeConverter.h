@@ -287,7 +287,7 @@ struct TypeConverter<std::string_view> {
 
     static void toNative(std::string_view src, NativeType& dst) {
         detail::clear(dst, UA_TYPES[UA_TYPES_STRING]);
-        dst = detail::allocUaString(src);
+        dst = detail::allocNativeString(src);
     }
 };
 

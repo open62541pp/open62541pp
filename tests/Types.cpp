@@ -600,9 +600,9 @@ TEST_CASE("Variant") {
     SUBCASE("Set array of native strings") {
         Variant var;
         std::array array{
-            detail::toUaString("item1"),
-            detail::toUaString("item2"),
-            detail::toUaString("item3"),
+            detail::toNativeString("item1"),
+            detail::toNativeString("item2"),
+            detail::toNativeString("item3"),
         };
 
         var.setArray(Span{array.data(), array.size()}, UA_TYPES[UA_TYPES_STRING]);

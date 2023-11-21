@@ -18,19 +18,19 @@ TEST_CASE("getUaDataType") {
 TEST_CASE("UA_String from string_view") {
     SUBCASE("Test string") {
         std::string_view sv("test123");
-        UA_String str = detail::toUaString(sv);
+        UA_String str = detail::toNativeString(sv);
         CHECK(str.length == sv.size());
         CHECK((void*)str.data == (void*)sv.data());
     }
 
     SUBCASE("Null string") {
-        UA_String str = detail::toUaString({});
+        UA_String str = detail::toNativeString({});
         CHECK(str.length == 0);
         CHECK(str.data == nullptr);
     }
 
     SUBCASE("Empty string") {
-        UA_String str = detail::toUaString("");
+        UA_String str = detail::toNativeString("");
         CHECK(str.length == 0);
         CHECK(str.data != nullptr);
     }
@@ -39,7 +39,7 @@ TEST_CASE("UA_String from string_view") {
 TEST_CASE("Alloc UA_String from string_view") {
     const char* cstr = "test123";
     std::string_view sv(cstr);
-    auto str = detail::allocUaString(sv);
+    auto str = detail::allocNativeString(sv);
     CHECK(str.length == 7);
     CHECK(std::strncmp((char*)str.data, sv.data(), 7) == 0);  // NOLINT
     UA_String_clear(&str);
@@ -48,7 +48,7 @@ TEST_CASE("Alloc UA_String from string_view") {
 TEST_CASE("Alloc UA_String from non-null-terminated string_view") {
     std::string str("test123");
     std::string_view sv(str.c_str(), 4);
-    auto uaString = detail::allocUaString(sv);
+    auto uaString = detail::allocNativeString(sv);
     CHECK(uaString.length == 4);
     CHECK(std::strncmp((char*)uaString.data, sv.data(), 4) == 0);  // NOLINT
     UA_String_clear(&uaString);

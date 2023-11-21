@@ -27,7 +27,7 @@ inline static void assign(T src, Native& dst) noexcept {
 inline static void assign(std::string_view src, UA_String& dst) {
     // UA_String is empty in constructor call, no clear necessary
     assert(dst.data == nullptr);
-    dst = detail::allocUaString(src);
+    dst = detail::allocNativeString(src);
 }
 
 template <typename T, typename Native, typename = std::enable_if_t<detail::isTypeWrapper<T>>>

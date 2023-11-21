@@ -77,10 +77,10 @@ inline const UA_DataType& getUaDataType(Type type) noexcept {
 /* ---------------------------------------- String utils ---------------------------------------- */
 
 /// Convert std::string_view to UA_String (no copy)
-UA_String toUaString(std::string_view src) noexcept;
+UA_String toNativeString(std::string_view src) noexcept;
 
 /// Allocate UA_String from std::string_view
-[[nodiscard]] UA_String allocUaString(std::string_view src);
+[[nodiscard]] UA_String allocNativeString(std::string_view src);
 
 /// Check if UA_String is empty
 constexpr bool isEmpty(const UA_String& value) {
