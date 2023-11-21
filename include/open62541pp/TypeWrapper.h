@@ -45,13 +45,13 @@ public:
     TypeWrapper() = default;
 
     /// Constructor with native object (deep copy).
-    explicit TypeWrapper(const T& data) {
-        copy(data);
+    explicit TypeWrapper(const T& native) {
+        copy(native);
     }
 
     /// Constructor with native object (move rvalue).
-    constexpr TypeWrapper(T&& data) noexcept  // NOLINT, implicit wanted
-        : data_(data) {}
+    constexpr TypeWrapper(T&& native) noexcept  // NOLINT, implicit wanted
+        : native_(native) {}
 
     ~TypeWrapper() {  // NOLINT
         clear();
@@ -59,25 +59,25 @@ public:
 
     /// Copy constructor (deep copy).
     TypeWrapper(const TypeWrapper& other) {
-        copy(other.data_);
+        copy(other.native_);
     }
 
     /// Move constructor.
     TypeWrapper(TypeWrapper&& other) noexcept
-        : data_(std::exchange(other.data_, {})) {}
+        : native_(std::exchange(other.native_, {})) {}
 
     /// Copy assignment (deep copy).
     TypeWrapper& operator=(const TypeWrapper& other) {  // NOLINT, false positive
         if (this != &other) {
-            copy(other.data_);
+            copy(other.native_);
         }
         return *this;
     }
 
     /// Copy assignment with native object (deep copy).
-    TypeWrapper& operator=(const T& other) {
-        if (&data_ != &other) {
-            copy(other);
+    TypeWrapper& operator=(const T& native) {
+        if (&native_ != &native) {
+            copy(native);
         }
         return *this;
     }
@@ -85,50 +85,50 @@ public:
     /// Move assignment.
     TypeWrapper& operator=(TypeWrapper&& other) noexcept {
         if (this != &other) {
-            std::swap(data_, other.data_);
+            std::swap(native_, other.native_);
         }
         return *this;
     }
 
     /// Move assignment with native object.
-    TypeWrapper& operator=(T&& other) noexcept {
-        if (&data_ != &other) {
+    TypeWrapper& operator=(T&& native) noexcept {
+        if (&native_ != &native) {
             clear();
-            data_ = std::exchange(other, {});
+            native_ = std::exchange(native, {});
         }
         return *this;
     }
 
     /// Implicit conversion to native object.
     constexpr operator T&() noexcept {  // NOLINT
-        return data_;
+        return native_;
     }
 
     /// Implicit conversion to native object.
     constexpr operator const T&() const noexcept {  // NOLINT
-        return data_;
+        return native_;
     }
 
     /// Member access to native object.
     constexpr T* operator->() noexcept {
-        return &data_;
+        return &native_;
     }
 
     /// Member access to native object.
     constexpr const T* operator->() const noexcept {
-        return &data_;
+        return &native_;
     }
 
     /// Swap with wrapper object.
     void swap(TypeWrapper& other) noexcept {
         static_assert(std::is_swappable_v<T>);
-        std::swap(data_, other.data_);
+        std::swap(native_, other.native_);
     }
 
     /// Swap with native object.
-    void swap(T& other) noexcept {
+    void swap(T& native) noexcept {
         static_assert(std::is_swappable_v<T>);
-        std::swap(data_, other);
+        std::swap(native_, native);
     }
 
     /// Get type as type index of the ::UA_TYPES array.
@@ -138,12 +138,12 @@ public:
 
     /// Return pointer to native object.
     constexpr T* handle() noexcept {
-        return &data_;
+        return &native_;
     }
 
     /// Return const pointer to native object.
     constexpr const T* handle() const noexcept {
-        return &data_;
+        return &native_;
     };
 
 protected:
@@ -153,18 +153,18 @@ protected:
 
     void clear() noexcept {
         checkMemSize();
-        UA_clear(&data_, &UA_TYPES[typeIndex]);
+        UA_clear(&native_, &UA_TYPES[typeIndex]);
     }
 
-    void copy(const T& data) {
+    void copy(const T& native) {
         clear();
         checkMemSize();
-        auto status = UA_copy(&data, &data_, &UA_TYPES[typeIndex]);  // deep copy of data
+        auto status = UA_copy(&native, &native_, &UA_TYPES[typeIndex]);  // deep copy
         detail::throwOnBadStatus(status);
     }
 
 private:
-    T data_{};
+    T native_{};
 };
 
 /* -------------------------------------------- Trait ------------------------------------------- */

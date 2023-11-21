@@ -49,7 +49,7 @@ DataType::DataType(const UA_DataType& native) {
 }
 
 DataType::DataType(UA_DataType&& native)
-    : data_(native) {}
+    : native_(native) {}
 
 DataType::DataType(TypeIndex typeIndex)
     : DataType(UA_TYPES[typeIndex])  // NOLINT
@@ -66,7 +66,7 @@ DataType::DataType(const DataType& other) {
 }
 
 DataType::DataType(DataType&& other) noexcept
-    : data_(std::exchange(other.data_, {})) {}
+    : native_(std::exchange(other.native_, {})) {}
 
 DataType& DataType::operator=(const DataType& other) {
     if (this != &other) {
@@ -77,7 +77,7 @@ DataType& DataType::operator=(const DataType& other) {
 
 DataType& DataType::operator=(DataType&& other) noexcept {
     if (this != &other) {
-        std::swap(data_, other.data_);
+        std::swap(native_, other.native_);
     }
     return *this;
 }
