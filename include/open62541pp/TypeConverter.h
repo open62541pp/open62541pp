@@ -82,7 +82,7 @@ constexpr const UA_DataType& guessDataType() {
         "Ambiguous data type, please specify data type manually"
     );
     constexpr auto typeIndex = TypeConverter<ValueType>::ValidTypes::toArray().at(0);
-    return detail::getUaDataType(typeIndex);
+    return detail::getDataType(typeIndex);
 }
 
 template <typename It>
@@ -200,17 +200,12 @@ struct TypeConverterNative {
     static_assert(ValidTypes::size() >= 1);
 
     static void fromNative(const T& src, T& dst) {
-        if constexpr (std::is_fundamental_v<T>) {
-            dst = src;
-        } else {
-            // just take first type -> underlying memory layout of all types should be the same
-            constexpr auto typeIndexGuess = ValidTypes::toArray().at(0);
-            // clear first
-            UA_clear(&dst, &getUaDataType<typeIndexGuess>());
-            // deep copy
-            const auto status = UA_copy(&src, &dst, &getUaDataType<typeIndexGuess>());
-            throwOnBadStatus(status);
-        }
+        // just take first type -> underlying memory layout of all types should be the same
+        constexpr auto typeIndexGuess = ValidTypes::toArray().at(0);
+        // clear first
+        detail::clear(dst, UA_TYPES[typeIndexGuess]);
+        // deep copy
+        dst = detail::copy(src, UA_TYPES[typeIndexGuess]);
     }
 
     static void toNative(const T& src, T& dst) {
@@ -291,8 +286,8 @@ struct TypeConverter<std::string_view> {
     }
 
     static void toNative(std::string_view src, NativeType& dst) {
-        UA_clear(&dst, &detail::getUaDataType<UA_TYPES_STRING>());
-        dst = detail::allocUaString(src);
+        detail::clear(dst, UA_TYPES[UA_TYPES_STRING]);
+        dst = detail::allocNativeString(src);
     }
 };
 

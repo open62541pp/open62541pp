@@ -8,7 +8,7 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeWrapper.h"
-#include "open62541pp/detail/helper.h"  // getUaDataType
+#include "open62541pp/detail/helper.h"  // getDataType
 #include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"
 
@@ -61,7 +61,7 @@ std::vector<Variant> call(
         &output
     );
     std::vector<Variant> result(output, output + outputSize);  // NOLINT
-    UA_Array_delete(output, outputSize, &detail::getUaDataType(UA_TYPES_VARIANT));
+    UA_Array_delete(output, outputSize, &detail::getDataType(UA_TYPES_VARIANT));
     detail::throwOnBadStatus(status);
     return result;
 }

@@ -66,8 +66,8 @@ TEST_CASE("TypeConverter wrapper types") {
 }
 
 TEST_CASE_TEMPLATE("TypeConverter native strings", T, UA_String, UA_ByteString, UA_XmlElement) {
-    T src = detail::allocUaString("Test123");
-    T dst = detail::allocUaString("Overwrite me");
+    T src = detail::allocNativeString("Test123");
+    T dst = detail::allocNativeString("Overwrite me");
 
     TypeConverter<T>::fromNative(src, dst);
     CHECK(UA_String_equal(&src, &dst));
@@ -79,7 +79,7 @@ TEST_CASE_TEMPLATE("TypeConverter native strings", T, UA_String, UA_ByteString, 
 
 TEST_CASE_TEMPLATE("TypeConverter string", T, std::string, std::string_view) {
     SUBCASE("fromNative") {
-        UA_String src = detail::allocUaString("Test123");
+        UA_String src = detail::allocNativeString("Test123");
         T dst;
 
         TypeConverter<T>::fromNative(src, dst);

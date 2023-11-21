@@ -59,7 +59,7 @@ NodeId addNode<Server>(
         id.handle(),
         parentId.handle(),
         referenceType.handle(),
-        {id.getNamespaceIndex(), detail::toUaString(browseName)},
+        {id.getNamespaceIndex(), detail::toNativeString(browseName)},
         typeDefinition.handle(),
         static_cast<const UA_NodeAttributes*>(nodeAttributes.getDecodedData()),
         nodeAttributes.getDecodedDataType(),
@@ -86,7 +86,7 @@ NodeId addNode<Client>(
     item.referenceTypeId = referenceType;
     item.requestedNewNodeId.nodeId = id;
     item.browseName.namespaceIndex = id.getNamespaceIndex();
-    item.browseName.name = detail::toUaString(browseName);
+    item.browseName.name = detail::toNativeString(browseName);
     item.nodeClass = static_cast<UA_NodeClass>(nodeClass);
     item.nodeAttributes = nodeAttributes;
     item.typeDefinition.nodeId = typeDefinition;
@@ -154,7 +154,7 @@ NodeId addMethod(
         id,
         parentId,
         referenceType,
-        {id.getNamespaceIndex(), detail::toUaString(browseName)},
+        {id.getNamespaceIndex(), detail::toNativeString(browseName)},
         attributes,
         methodCallback,
         inputArguments.size(),

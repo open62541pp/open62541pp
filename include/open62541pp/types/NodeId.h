@@ -53,7 +53,7 @@ public:
 
     /// Create NodeId from Type (type id).
     NodeId(Type type) noexcept  // NOLINT, implicit wanted
-        : NodeId(detail::getUaDataType(type).typeId) {}
+        : NodeId(detail::getDataType(type).typeId) {}
 
     /// Create NodeId from DataTypeId.
     NodeId(DataTypeId id) noexcept  // NOLINT, implicit wanted

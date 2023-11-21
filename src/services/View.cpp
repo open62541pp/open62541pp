@@ -8,7 +8,7 @@
 #include "open62541pp/NodeIds.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeWrapper.h"
-#include "open62541pp/detail/helper.h"  // getUaDataType
+#include "open62541pp/detail/helper.h"  // getDataType
 #include "open62541pp/types/Builtin.h"
 
 #include "../open62541_impl.h"
@@ -110,7 +110,7 @@ std::vector<ExpandedNodeId> browseRecursive(Server& server, const BrowseDescript
     for (size_t i = 0; i < resultsSize; ++i) {
         results[i].swap(resultsNative[i]);  // NOLINT
     }
-    UA_Array_delete(resultsNative, resultsSize, &detail::getUaDataType(UA_TYPES_EXPANDEDNODEID));
+    UA_Array_delete(resultsNative, resultsSize, &detail::getDataType(UA_TYPES_EXPANDEDNODEID));
     return results;
 }
 

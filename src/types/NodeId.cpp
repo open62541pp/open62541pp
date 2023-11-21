@@ -14,7 +14,7 @@ static UA_NodeId fromStringView(
     UA_NodeId result;
     result.namespaceIndex = namespaceIndex;
     result.identifierType = identifierType;
-    result.identifier.string = detail::allocUaString(identifier);  // NOLINT
+    result.identifier.string = detail::allocNativeString(identifier);  // NOLINT
     return result;
 }
 
@@ -97,7 +97,7 @@ ExpandedNodeId::ExpandedNodeId(
     const NodeId& id, std::string_view namespaceUri, uint32_t serverIndex
 ) {
     getNodeId() = id;
-    handle()->namespaceUri = detail::allocUaString(namespaceUri);
+    handle()->namespaceUri = detail::allocNativeString(namespaceUri);
     handle()->serverIndex = serverIndex;
 }
 
