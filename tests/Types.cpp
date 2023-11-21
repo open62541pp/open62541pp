@@ -327,16 +327,17 @@ TEST_CASE("NodeId") {
 
     SUBCASE("Get properties (getIdentifierType, getNamespaceIndex, getIdentifier") {
         {
-            NodeId id(UA_NODEID_NUMERIC(1, 111));
+            NodeId id(1, 123);
             CHECK(id.getIdentifierType() == NodeIdType::Numeric);
             CHECK(id.getNamespaceIndex() == 1);
-            CHECK(id.getIdentifierAs<NodeIdType::Numeric>() == 111);
+            CHECK(id.getIdentifierAs<NodeIdType::Numeric>() == 123);
         }
         {
-            NodeId id(UA_NODEID_STRING_ALLOC(2, "Test123"));
+            String string("Test456");
+            NodeId id(2, string);
             CHECK(id.getIdentifierType() == NodeIdType::String);
             CHECK(id.getNamespaceIndex() == 2);
-            CHECK(id.getIdentifierAs<String>() == String("Test123"));
+            CHECK(id.getIdentifierAs<String>() == string);
         }
         {
             Guid guid(11, 22, 33, {1, 2, 3, 4, 5, 6, 7, 8});
@@ -346,7 +347,7 @@ TEST_CASE("NodeId") {
             CHECK(id.getIdentifierAs<Guid>() == guid);
         }
         {
-            ByteString byteString("Test456");
+            ByteString byteString("Test789");
             NodeId id(4, byteString);
             CHECK(id.getIdentifierType() == NodeIdType::ByteString);
             CHECK(id.getNamespaceIndex() == 4);
