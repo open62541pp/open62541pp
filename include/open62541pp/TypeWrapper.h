@@ -94,7 +94,7 @@ public:
     TypeWrapper& operator=(T&& other) noexcept {
         if (&data_ != &other) {
             clear();
-            data_ = other;
+            data_ = std::exchange(other, {});
         }
         return *this;
     }
