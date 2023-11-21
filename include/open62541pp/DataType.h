@@ -36,12 +36,12 @@ public:
 
     /// Implicit conversion to UA_DataType.
     constexpr operator UA_DataType&() noexcept {  // NOLINT
-        return data_;
+        return native_;
     }
 
     /// Implicit conversion to UA_DataType.
     constexpr operator const UA_DataType&() const noexcept {  // NOLINT
-        return data_;
+        return native_;
     }
 
     const char* getTypeName() const noexcept;
@@ -71,15 +71,15 @@ public:
     void setMembers(Span<const DataTypeMember> members);
 
     constexpr UA_DataType* handle() noexcept {
-        return &data_;
+        return &native_;
     }
 
     constexpr const UA_DataType* handle() const noexcept {
-        return &data_;
+        return &native_;
     }
 
 private:
-    UA_DataType data_{};
+    UA_DataType native_{};
 };
 
 bool operator==(const UA_DataTypeMember& lhs, const UA_DataTypeMember& rhs) noexcept;

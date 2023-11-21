@@ -152,7 +152,7 @@ public:
     /// Check if the client's main loop is running.
     bool isRunning() const noexcept;
 
-    Node<Client> getNode(const NodeId& id);
+    Node<Client> getNode(NodeId id);
     Node<Client> getRootNode();
     Node<Client> getObjectsNode();
     Node<Client> getTypesNode();

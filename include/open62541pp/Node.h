@@ -39,7 +39,12 @@ template <typename ServerOrClient>
 class Node {
 public:
     /// Create a Node object.
-    Node(ServerOrClient& connection, NodeId id)
+    Node(ServerOrClient& connection, const NodeId& id)
+        : connection_(connection),
+          nodeId_(id) {}
+
+    /// Create a Node object.
+    Node(ServerOrClient& connection, NodeId&& id)
         : connection_(connection),
           nodeId_(std::move(id)) {}
 

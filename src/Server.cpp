@@ -369,8 +369,8 @@ bool Server::isRunning() const noexcept {
     return connection_->isRunning();
 }
 
-Node<Server> Server::getNode(const NodeId& id) {
-    return {*this, id};
+Node<Server> Server::getNode(NodeId id) {
+    return {*this, std::move(id)};
 }
 
 Node<Server> Server::getRootNode() {
