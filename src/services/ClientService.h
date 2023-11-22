@@ -58,13 +58,11 @@ struct ClientServiceAsync {
 
         struct CallbackContext {
             CallbackContext(F&& func)
-                : process(func) {}
+                : process(std::move(func)) {}
 
             std::promise<Result> promise;
             F process;
         };
-
-        auto callbackContext = std::make_unique<CallbackContext>(std::forward<F>(processResponse));
 
         auto callback = [](UA_Client*, void* userdata, uint32_t /* reqId */, void* responsePtr) {
             assert(userdata != nullptr);
@@ -88,7 +86,9 @@ struct ClientServiceAsync {
             delete context;  // NOLINT
         };
 
+        auto callbackContext = std::make_unique<CallbackContext>(std::forward<F>(processResponse));
         auto future = callbackContext->promise.get_future();
+
         const auto status = __UA_Client_AsyncService(
             client.handle(),
             &request,
@@ -105,7 +105,6 @@ struct ClientServiceAsync {
 
 template <typename Response>
 auto& getSingleResultFromResponse(Response& response) {
-    static_assert(detail::isNativeType<Response> || detail::isTypeWrapper<Response>);
     if constexpr (detail::isNativeType<Response>) {
         if (response.results == nullptr || response.resultsSize != 1) {
             throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
