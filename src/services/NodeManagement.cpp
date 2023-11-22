@@ -17,26 +17,26 @@
 namespace opcua::services {
 
 AddNodesResponse addNodes(Client& client, const AddNodesRequest& request) {
-    return ClientService::sendRequest<AddNodesRequest, AddNodesResponse>(
-        client, request, ForwardResponse{}
+    return ClientService::sendRequest<UA_AddNodesRequest, UA_AddNodesResponse>(
+        client, request, MoveResponse{}
     );
 }
 
 AddReferencesResponse addReferences(Client& client, const AddReferencesRequest& request) {
-    return ClientService::sendRequest<AddReferencesRequest, AddReferencesResponse>(
-        client, request, ForwardResponse{}
+    return ClientService::sendRequest<UA_AddReferencesRequest, UA_AddReferencesResponse>(
+        client, request, MoveResponse{}
     );
 }
 
 DeleteNodesResponse deleteNodes(Client& client, const DeleteNodesRequest& request) {
-    return ClientService::sendRequest<DeleteNodesRequest, DeleteNodesResponse>(
-        client, request, ForwardResponse{}
+    return ClientService::sendRequest<UA_DeleteNodesRequest, UA_DeleteNodesResponse>(
+        client, request, MoveResponse{}
     );
 }
 
 DeleteReferencesResponse deleteReferences(Client& client, const DeleteReferencesRequest& request) {
-    return ClientService::sendRequest<DeleteReferencesRequest, DeleteReferencesResponse>(
-        client, request, ForwardResponse{}
+    return ClientService::sendRequest<UA_DeleteReferencesRequest, UA_DeleteReferencesResponse>(
+        client, request, MoveResponse{}
     );
 }
 
@@ -92,13 +92,13 @@ static auto addNodeImpl(
     UA_AddNodesRequest request{};
     request.nodesToAddSize = 1;
     request.nodesToAdd = &item;
-    return TClientService::template sendRequest<AddNodesRequest, AddNodesResponse>(
+    return TClientService::template sendRequest<UA_AddNodesRequest, UA_AddNodesResponse>(
         client,
-        asWrapper<AddNodesRequest>(request),
-        [](AddNodesResponse& response) {
+        request,
+        [](UA_AddNodesResponse& response) {
             auto& result = getSingleResultFromResponse(response);
-            detail::throwOnBadStatus(result.getStatusCode());
-            return std::move(result.getAddedNodeId());
+            detail::throwOnBadStatus(result.statusCode);
+            return NodeId(std::exchange(result.addedNodeId, {}));
         }
     );
 }
@@ -257,10 +257,10 @@ static auto addReferenceImpl(
     UA_AddReferencesRequest request{};
     request.referencesToAddSize = 1;
     request.referencesToAdd = &item;
-    return TClientService::template sendRequest<AddReferencesRequest, AddReferencesResponse>(
+    return TClientService::template sendRequest<UA_AddReferencesRequest, UA_AddReferencesResponse>(
         client,
-        asWrapper<AddReferencesRequest>(request),
-        [](AddReferencesResponse& response) {
+        request,
+        [](UA_AddReferencesResponse& response) {
             detail::throwOnBadStatus(getSingleResultFromResponse(response));
         }
     );
@@ -301,10 +301,10 @@ static auto deleteNodeImpl(Client& client, const NodeId& id, bool deleteReferenc
     UA_DeleteNodesRequest request{};
     request.nodesToDeleteSize = 1;
     request.nodesToDelete = &item;
-    return TClientService::template sendRequest<DeleteNodesRequest, DeleteNodesResponse>(
+    return TClientService::template sendRequest<UA_DeleteNodesRequest, UA_DeleteNodesResponse>(
         client,
-        asWrapper<DeleteNodesRequest>(request),
-        [](DeleteNodesResponse& response) {
+        request,
+        [](UA_DeleteNodesResponse& response) {
             detail::throwOnBadStatus(getSingleResultFromResponse(response));
         }
     );
@@ -352,13 +352,11 @@ static auto deleteReferenceImpl(
     UA_DeleteReferencesRequest request{};
     request.referencesToDeleteSize = 1;
     request.referencesToDelete = &item;
-    return TClientService::template sendRequest<DeleteReferencesRequest, DeleteReferencesResponse>(
-        client,
-        asWrapper<DeleteReferencesRequest>(request),
-        [](DeleteReferencesResponse& response) {
-            detail::throwOnBadStatus(getSingleResultFromResponse(response));
-        }
-    );
+    return TClientService::template sendRequest<
+        UA_DeleteReferencesRequest,
+        UA_DeleteReferencesResponse>(client, request, [](UA_DeleteReferencesResponse& response) {
+        detail::throwOnBadStatus(getSingleResultFromResponse(response));
+    });
 }
 
 template <>

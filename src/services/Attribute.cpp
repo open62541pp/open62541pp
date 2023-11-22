@@ -1,5 +1,7 @@
 #include "open62541pp/services/Attribute.h"
 
+#include <utility>
+
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
@@ -11,8 +13,8 @@
 namespace opcua::services {
 
 ReadResponse read(Client& client, const ReadRequest& request) {
-    return ClientService::sendRequest<ReadRequest, ReadResponse>(
-        client, request, ForwardResponse{}
+    return ClientService::sendRequest<UA_ReadRequest, UA_ReadResponse>(
+        client, request, MoveResponse{}
     );
 }
 
@@ -69,8 +71,8 @@ DataValue readAttribute<Client>(
 }
 
 WriteResponse write(Client& client, const WriteRequest& request) {
-    return ClientService::sendRequest<WriteRequest, WriteResponse>(
-        client, request, ForwardResponse{}
+    return ClientService::sendRequest<UA_WriteRequest, UA_WriteResponse>(
+        client, request, MoveResponse{}
     );
 }
 

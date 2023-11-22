@@ -2,6 +2,7 @@
 
 #include <algorithm>  // transform
 #include <cstddef>
+#include <utility>  // exchange
 
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
@@ -16,8 +17,8 @@
 namespace opcua::services {
 
 BrowseResponse browse(Client& client, const BrowseRequest& request) {
-    return ClientService::sendRequest<BrowseRequest, BrowseResponse>(
-        client, request, ForwardResponse{}
+    return ClientService::sendRequest<UA_BrowseRequest, UA_BrowseResponse>(
+        client, request, MoveResponse{}
     );
 }
 
@@ -40,8 +41,8 @@ BrowseResult browse<Client>(Client& client, const BrowseDescription& bd, uint32_
 }
 
 BrowseNextResponse browseNext(Client& client, const BrowseNextRequest& request) {
-    return ClientService::sendRequest<BrowseNextRequest, BrowseNextResponse>(
-        client, request, ForwardResponse{}
+    return ClientService::sendRequest<UA_BrowseNextRequest, UA_BrowseNextResponse>(
+        client, request, MoveResponse{}
     );
 }
 
@@ -52,7 +53,7 @@ BrowseResult browseNext<Server>(
     BrowseResult result = UA_Server_browseNext(
         server.handle(), releaseContinuationPoint, continuationPoint.handle()
     );
-    detail::throwOnBadStatus(result->statusCode);
+    detail::throwOnBadStatus(result->statusCode);  // TODO: remove?
     return result;
 }
 
@@ -103,9 +104,9 @@ std::vector<ExpandedNodeId> browseRecursive(Server& server, const BrowseDescript
 TranslateBrowsePathsToNodeIdsResponse translateBrowsePathsToNodeIds(
     Client& client, const TranslateBrowsePathsToNodeIdsRequest& request
 ) {
-    using Request = TranslateBrowsePathsToNodeIdsRequest;
-    using Response = TranslateBrowsePathsToNodeIdsResponse;
-    return ClientService::sendRequest<Request, Response>(client, request, ForwardResponse{});
+    return ClientService::sendRequest<
+        UA_TranslateBrowsePathsToNodeIdsRequest,
+        UA_TranslateBrowsePathsToNodeIdsResponse>(client, request, MoveResponse{});
 }
 
 template <>
@@ -151,14 +152,14 @@ BrowsePathResult browseSimplifiedBrowsePath(
 }
 
 RegisterNodesResponse registerNodes(Client& client, const RegisterNodesRequest& request) {
-    return ClientService::sendRequest<RegisterNodesRequest, RegisterNodesResponse>(
-        client, request, ForwardResponse{}
+    return ClientService::sendRequest<UA_RegisterNodesRequest, UA_RegisterNodesResponse>(
+        client, request, MoveResponse{}
     );
 }
 
 UnregisterNodesResponse unregisterNodes(Client& client, const UnregisterNodesRequest& request) {
-    return ClientService::sendRequest<UnregisterNodesRequest, UnregisterNodesResponse>(
-        client, request, ForwardResponse{}
+    return ClientService::sendRequest<UA_UnregisterNodesRequest, UA_UnregisterNodesResponse>(
+        client, request, MoveResponse{}
     );
 }
 

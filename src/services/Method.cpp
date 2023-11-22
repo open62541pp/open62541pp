@@ -29,12 +29,12 @@ inline static UA_CallMethodRequest createCallMethodRequest(
     return request;
 }
 
-inline static auto getOutputArguments(CallMethodResult& result) {
-    detail::throwOnBadStatus(result->statusCode);
-    detail::throwOnBadStatus(result->inputArgumentResults, result->inputArgumentResultsSize);
+inline static auto getOutputArguments(UA_CallMethodResult& result) {
+    detail::throwOnBadStatus(result.statusCode);
+    detail::throwOnBadStatus(result.inputArgumentResults, result.inputArgumentResultsSize);
     return std::vector<Variant>(
-        std::make_move_iterator(result->outputArguments),
-        std::make_move_iterator(result->outputArguments + result->outputArgumentsSize)  // NOLINT
+        std::make_move_iterator(result.outputArguments),
+        std::make_move_iterator(result.outputArguments + result.outputArgumentsSize)  // NOLINT
     );
 }
 
@@ -61,10 +61,10 @@ static auto callImpl(
     UA_CallRequest request{};
     request.methodsToCall = &item;
     request.methodsToCallSize = 1;
-    return TClientService::template sendRequest<CallRequest, CallResponse>(
+    return TClientService::template sendRequest<UA_CallRequest, UA_CallResponse>(
         client,
-        asWrapper<CallRequest>(request),
-        [](CallResponse& response) {
+        request,
+        [](UA_CallResponse& response) {
             return getOutputArguments(getSingleResultFromResponse(response));
         }
     );

@@ -3,49 +3,68 @@
 #include <cassert>
 #include <future>
 #include <type_traits>
-#include <utility>  // move
+#include <utility>  // exchange, move
 
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
+#include "open62541pp/TypeConverter.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/detail/helper.h"
 
 #include "../open62541_impl.h"
 
 namespace opcua::services {
 
-struct ForwardResponse {
+struct MoveResponse {
     template <typename Response>
-    constexpr auto operator()(Response&& value) {
-        return std::forward<Response>(value);
+    [[nodiscard]] constexpr auto operator()(Response&& value) noexcept {
+        return std::exchange(std::forward<Response>(value), {});
     }
 };
 
 struct ClientService {
     template <typename Request, typename Response, typename F>
     static auto sendRequest(Client& client, const Request& request, F&& processResponse) {
-        static_assert(detail::isTypeWrapper<Request>);
-        static_assert(detail::isTypeWrapper<Response>);
+        static_assert(detail::isNativeType<Request>);
+        static_assert(detail::isNativeType<Response>);
         static_assert(std::is_invocable_v<F, Response&>);
 
+        using Result = std::invoke_result_t<F, Response&>;
+
         Response response{};
+        auto clearResponse = [&] { detail::clear(response, detail::guessDataType<Response>()); };
+
         __UA_Client_Service(
             client.handle(),
-            request.handle(),
-            &UA_TYPES[Request::getTypeIndex()],
-            response.handle(),
-            &UA_TYPES[Response::getTypeIndex()]
+            &request,
+            &detail::guessDataType<Request>(),
+            &response,
+            &detail::guessDataType<Response>()
         );
 
-        detail::throwOnBadStatus(response->responseHeader.serviceResult);
-        return std::invoke(processResponse, response);
+        try {
+            detail::throwOnBadStatus(response.responseHeader.serviceResult);
+            if constexpr (std::is_void_v<Result>) {
+                std::invoke(processResponse, response);
+                clearResponse();
+                return;
+            } else {
+                auto result = std::invoke(processResponse, response);
+                clearResponse();
+                return result;
+            }
+        } catch (...) {
+            clearResponse();
+            throw;
+        }
     }
 };
 
 struct ClientServiceAsync {
     template <typename Request, typename Response, typename F>
     static auto sendRequest(Client& client, const Request& request, F&& processResponse) {
-        static_assert(detail::isTypeWrapper<Request>);
-        static_assert(detail::isTypeWrapper<Response>);
+        static_assert(detail::isNativeType<Request>);
+        static_assert(detail::isNativeType<Response>);
         static_assert(std::is_invocable_v<F, Response&>);
 
         using Result = std::invoke_result_t<F, Response&>;
@@ -69,7 +88,7 @@ struct ClientServiceAsync {
                     throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
                 }
                 auto& response = *static_cast<Response*>(responsePtr);
-                detail::throwOnBadStatus(response->responseHeader.serviceResult);
+                detail::throwOnBadStatus(response.responseHeader.serviceResult);
                 if constexpr (std::is_void_v<Result>) {
                     std::invoke(context->process, response);
                     promise.set_value();
@@ -85,10 +104,10 @@ struct ClientServiceAsync {
         auto future = callbackContext->promise.get_future();
         const auto status = __UA_Client_AsyncService(
             client.handle(),
-            request.handle(),
-            &UA_TYPES[Request::getTypeIndex()],
+            &request,
+            &detail::guessDataType<Request>(),
             callback,
-            &UA_TYPES[Response::getTypeIndex()],
+            &detail::guessDataType<Response>(),
             callbackContext.release(),  // userdata, transfer ownership to callback
             nullptr
         );
@@ -99,12 +118,20 @@ struct ClientServiceAsync {
 
 template <typename Response>
 auto& getSingleResultFromResponse(Response& response) {
-    static_assert(detail::isTypeWrapper<Response>);
-    auto results = response.getResults();
-    if (results.data() == nullptr || results.size() != 1) {
-        throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
+    static_assert(detail::isNativeType<Response> || detail::isTypeWrapper<Response>);
+    if constexpr (detail::isNativeType<Response>) {
+        if (response.results == nullptr || response.resultsSize != 1) {
+            throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
+        }
+        return *response.results;
     }
-    return results[0];
+    if constexpr (detail::isTypeWrapper<Response>) {
+        auto results = response.getResults();
+        if (results.data() == nullptr || results.size() != 1) {
+            throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
+        }
+        return results[0];
+    }
 }
 
 }  // namespace opcua::services
