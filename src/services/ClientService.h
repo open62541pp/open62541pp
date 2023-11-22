@@ -29,10 +29,10 @@ struct ClientService {
         static_assert(detail::isNativeType<Response>);
         static_assert(std::is_invocable_v<F, Response&>);
 
-        using Result = std::invoke_result_t<F, Response&>;
-
         Response response{};
-        auto clearResponse = [&] { detail::clear(response, detail::guessDataType<Response>()); };
+        const auto responseDeleter = detail::ScopeExit([&] {
+            detail::clear(response, detail::guessDataType<Response>());
+        });
 
         __UA_Client_Service(
             client.handle(),
@@ -42,21 +42,8 @@ struct ClientService {
             &detail::guessDataType<Response>()
         );
 
-        try {
-            detail::throwOnBadStatus(response.responseHeader.serviceResult);
-            if constexpr (std::is_void_v<Result>) {
-                std::invoke(processResponse, response);
-                clearResponse();
-                return;
-            } else {
-                auto result = std::invoke(processResponse, response);
-                clearResponse();
-                return result;
-            }
-        } catch (...) {
-            clearResponse();
-            throw;
-        }
+        detail::throwOnBadStatus(response.responseHeader.serviceResult);
+        return std::invoke(processResponse, response);
     }
 };
 
