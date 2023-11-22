@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <future>
+#include <tuple>
 #include <type_traits>
 #include <utility>  // exchange, move
 
@@ -21,6 +22,11 @@ struct MoveResponse {
         return std::exchange(std::forward<Response>(value), {});
     }
 };
+
+template <typename Response>
+inline static void checkServiceResult(Response& response) {
+    detail::throwOnBadStatus(response.responseHeader.serviceResult);
+}
 
 struct ClientService {
     template <typename Request, typename Response, typename F>
@@ -42,7 +48,7 @@ struct ClientService {
             &detail::guessDataType<Response>()
         );
 
-        detail::throwOnBadStatus(response.responseHeader.serviceResult);
+        checkServiceResult(response);
         return std::invoke(processResponse, response);
     }
 };
@@ -55,30 +61,24 @@ struct ClientServiceAsync {
         static_assert(std::is_invocable_v<F, Response&>);
 
         using Result = std::invoke_result_t<F, Response&>;
-
-        struct CallbackContext {
-            CallbackContext(F&& func)
-                : process(std::move(func)) {}
-
-            std::promise<Result> promise;
-            F process;
-        };
+        using Promise = std::promise<Result>;
+        using Context = std::tuple<Promise, F>;
 
         auto callback = [](UA_Client*, void* userdata, uint32_t /* reqId */, void* responsePtr) {
             assert(userdata != nullptr);
-            auto* context = static_cast<CallbackContext*>(userdata);
-            auto& promise = context->promise;
+            auto* context = static_cast<Context*>(userdata);
+            auto& [promise, func] = *context;
             try {
                 if (responsePtr == nullptr) {
                     throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
                 }
                 auto& response = *static_cast<Response*>(responsePtr);
-                detail::throwOnBadStatus(response.responseHeader.serviceResult);
+                checkServiceResult(response);
                 if constexpr (std::is_void_v<Result>) {
-                    std::invoke(context->process, response);
+                    std::invoke(func, response);
                     promise.set_value();
                 } else {
-                    promise.set_value(std::invoke(context->process, response));
+                    promise.set_value(std::invoke(func, response));
                 }
             } catch (...) {
                 promise.set_exception(std::current_exception());
@@ -86,8 +86,8 @@ struct ClientServiceAsync {
             delete context;  // NOLINT
         };
 
-        auto callbackContext = std::make_unique<CallbackContext>(std::forward<F>(processResponse));
-        auto future = callbackContext->promise.get_future();
+        auto context = std::make_unique<Context>(Promise{}, std::forward<F>(processResponse));
+        auto future = std::get<Promise>(*context).get_future();
 
         const auto status = __UA_Client_AsyncService(
             client.handle(),
@@ -95,9 +95,10 @@ struct ClientServiceAsync {
             &detail::guessDataType<Request>(),
             callback,
             &detail::guessDataType<Response>(),
-            callbackContext.release(),  // userdata, transfer ownership to callback
+            context.release(),  // userdata, transfer ownership to callback
             nullptr
         );
+
         detail::throwOnBadStatus(status);
         return future;
     }
