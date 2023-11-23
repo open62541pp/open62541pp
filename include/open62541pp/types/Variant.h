@@ -218,15 +218,14 @@ public:
 
 private:
     template <typename T>
-    static constexpr bool isConvertibleToNative() {
-        // TypeWrapper<T> is pointer-interconvertible with T
+    static constexpr bool isPointerInterconvertibleWithNative() {
         return detail::isNativeType<T> || detail::isTypeWrapper<T>;
     }
 
     template <typename T>
     static constexpr void assertGetNoCopy() {
         static_assert(
-            isConvertibleToNative<T>(),
+            isPointerInterconvertibleWithNative<T>(),
             "Template type must be a native or wrapper type to get scalar/array without copy"
         );
     }
@@ -234,7 +233,7 @@ private:
     template <typename T>
     static constexpr void assertSetNoCopy() {
         static_assert(
-            isConvertibleToNative<T>(),
+            isPointerInterconvertibleWithNative<T>(),
             "Template type must be a native or wrapper type to assign scalar/array without copy"
         );
     }
@@ -278,7 +277,7 @@ private:
 template <typename T>
 Variant Variant::fromScalar(T& value) {
     Variant variant;
-    if constexpr (isConvertibleToNative<T>()) {
+    if constexpr (isPointerInterconvertibleWithNative<T>()) {
         variant.setScalar(value);
     } else {
         variant.setScalarCopy(value);
@@ -310,7 +309,7 @@ Variant Variant::fromScalar(const T& value, const UA_DataType& dataType) {
 template <typename T>
 Variant Variant::fromArray(Span<T> array) {
     Variant variant;
-    if constexpr (isConvertibleToNative<T>()) {
+    if constexpr (isPointerInterconvertibleWithNative<T>()) {
         variant.setArray(array);
     } else {
         variant.setArrayCopy(array);
@@ -408,7 +407,7 @@ void Variant::setScalar(T& value, const UA_DataType& dataType) noexcept {
 template <typename T>
 void Variant::setScalarCopy(const T& value) {
     assertNoVariant<T>();
-    if constexpr (isConvertibleToNative<T>()) {
+    if constexpr (isPointerInterconvertibleWithNative<T>()) {
         setScalarCopyImpl(&value, detail::guessDataType<T>());
     } else {
         setScalarCopyConvertImpl(value);
@@ -437,7 +436,7 @@ void Variant::setArray(Span<T> array, const UA_DataType& dataType) noexcept {
 
 template <typename T>
 void Variant::setArrayCopy(Span<T> array) {
-    if constexpr (isConvertibleToNative<T>()) {
+    if constexpr (isPointerInterconvertibleWithNative<T>()) {
         assertNoVariant<T>();
         setArrayCopyImpl(array.data(), array.size(), detail::guessDataType<T>());
     } else {
