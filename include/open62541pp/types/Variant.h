@@ -266,6 +266,11 @@ private:
     void setScalarCopyImpl(const void* value, const UA_DataType& type);
     void setArrayImpl(void* array, size_t size, const UA_DataType& type, bool own = false) noexcept;
     void setArrayCopyImpl(const void* array, size_t size, const UA_DataType& type);
+
+    template <typename T>
+    inline void setScalarCopyConvertImpl(const T& value);
+    template <typename InputIt>
+    inline void setArrayCopyConvertImpl(InputIt first, InputIt last);
 };
 
 /* --------------------------------------- Implementation --------------------------------------- */
@@ -306,7 +311,7 @@ template <typename T>
 Variant Variant::fromArray(Span<T> array) {
     Variant variant;
     if constexpr (isConvertibleToNative<T>()) {
-        variant.setArray(array);  // NOLINT, variant isn't modified
+        variant.setArray(array);
     } else {
         variant.setArrayCopy(array);
     }
@@ -403,11 +408,11 @@ void Variant::setScalar(T& value, const UA_DataType& dataType) noexcept {
 template <typename T>
 void Variant::setScalarCopy(const T& value) {
     assertNoVariant<T>();
-    setScalarImpl(
-        detail::toNativeAlloc(value),
-        detail::guessDataType<T>(),
-        true  // move ownership
-    );
+    if constexpr (isConvertibleToNative<T>()) {
+        setScalarCopyImpl(&value, detail::guessDataType<T>());
+    } else {
+        setScalarCopyConvertImpl(value);
+    }
 }
 
 template <typename T>
@@ -436,7 +441,7 @@ void Variant::setArrayCopy(Span<T> array) {
         assertNoVariant<T>();
         setArrayCopyImpl(array.data(), array.size(), detail::guessDataType<T>());
     } else {
-        setArrayCopy(array.begin(), array.end());
+        setArrayCopyConvertImpl(array.begin(), array.end());
     }
 }
 
@@ -449,10 +454,27 @@ void Variant::setArrayCopy(Span<T> array, const UA_DataType& dataType) {
 
 template <typename InputIt>
 void Variant::setArrayCopy(InputIt first, InputIt last) {
+    setArrayCopyConvertImpl(first, last);
+}
+
+template <typename T>
+void Variant::setScalarCopyConvertImpl(const T& value) {
+    auto* native = detail::toNativeAlloc(value);
+    assertNoVariant<std::remove_pointer_t<decltype(value)>>();
+    setScalarImpl(
+        native,
+        detail::guessDataType<T>(),
+        true  // move ownership
+    );
+}
+
+template <typename InputIt>
+void Variant::setArrayCopyConvertImpl(InputIt first, InputIt last) {
     using ValueType = typename std::iterator_traits<InputIt>::value_type;
-    assertNoVariant<ValueType>();
+    auto* native = detail::toNativeArrayAlloc(first, last);
+    assertNoVariant<std::remove_pointer_t<decltype(native)>>();
     setArrayImpl(
-        detail::toNativeArrayAlloc(first, last),
+        native,
         std::distance(first, last),
         detail::guessDataType<ValueType>(),
         true  // move ownership
