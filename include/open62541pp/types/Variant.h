@@ -454,7 +454,7 @@ void Variant::setArrayCopy(InputIt first, InputIt last) {
     setArrayImpl(
         detail::toNativeArrayAlloc(first, last),
         std::distance(first, last),
-        detail::guessDataTypeFromIterator<InputIt>(),
+        detail::guessDataType<ValueType>(),
         true  // move ownership
     );
 }
