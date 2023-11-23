@@ -432,8 +432,8 @@ void Variant::setArray(Span<T> array, const UA_DataType& dataType) noexcept {
 
 template <typename T>
 void Variant::setArrayCopy(Span<T> array) {
-    assertNoVariant<T>();
-    if constexpr (detail::isBuiltinType<T>) {
+    if constexpr (isConvertibleToNative<T>()) {
+        assertNoVariant<T>();
         setArrayCopyImpl(array.data(), array.size(), detail::guessDataType<T>());
     } else {
         setArrayCopy(array.begin(), array.end());
