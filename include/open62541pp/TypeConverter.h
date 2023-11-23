@@ -214,8 +214,9 @@ struct TypeConverterNative {
 };
 
 template <typename T>
-inline constexpr bool isNativeType =
-    std::is_same_v<typename TypeConverter<T>::ValueType, typename TypeConverter<T>::NativeType>;
+inline constexpr bool isNativeType = std::is_same_v<
+    typename TypeConverter<UnqualifiedT<T>>::ValueType,
+    typename TypeConverter<UnqualifiedT<T>>::NativeType>;
 
 }  // namespace detail
 
