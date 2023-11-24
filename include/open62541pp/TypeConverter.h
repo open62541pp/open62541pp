@@ -85,12 +85,6 @@ constexpr const UA_DataType& guessDataType() {
     return detail::getDataType(typeIndex);
 }
 
-template <typename It>
-constexpr const UA_DataType& guessDataTypeFromIterator() {
-    using ValueType = typename std::iterator_traits<It>::value_type;
-    return guessDataType<ValueType>();
-}
-
 /* ------------------------------------- Converter functions ------------------------------------ */
 
 /// Convert and copy from native type.
@@ -172,7 +166,7 @@ template <typename InputIt>
     using ValueType = typename std::iterator_traits<InputIt>::value_type;
     using NativeType = typename TypeConverter<ValueType>::NativeType;
     const size_t size = std::distance(first, last);
-    auto* result = allocNativeArray<NativeType>(size, guessDataTypeFromIterator<InputIt>());
+    auto* result = allocNativeArray<NativeType>(size, guessDataType<ValueType>());
     for (size_t i = 0; i < size; ++i) {
         TypeConverter<ValueType>::toNative(*first++, result[i]);  // NOLINT
     }
@@ -214,8 +208,9 @@ struct TypeConverterNative {
 };
 
 template <typename T>
-inline constexpr bool isNativeType =
-    std::is_same_v<typename TypeConverter<T>::ValueType, typename TypeConverter<T>::NativeType>;
+inline constexpr bool isNativeType = std::is_same_v<
+    typename TypeConverter<UnqualifiedT<T>>::ValueType,
+    typename TypeConverter<UnqualifiedT<T>>::NativeType>;
 
 }  // namespace detail
 
