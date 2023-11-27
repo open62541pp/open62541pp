@@ -7,7 +7,7 @@
 #include <vector>
 
 #include "open62541pp/DataType.h"
-#include "open62541pp/TypeConverter.h"
+#include "open62541pp/TypeRegistry.h"  // getDataType
 #include "open62541pp/detail/helper.h"
 #include "open62541pp/detail/traits.h"
 #include "open62541pp/types/NodeId.h"
@@ -18,7 +18,7 @@ namespace detail {
 
 template <auto memberPtr>
 constexpr const UA_DataType& guessMemberDataType() {
-    return guessDataType<detail::MemberTypeT<decltype(memberPtr)>>();
+    return getDataType<detail::MemberTypeT<decltype(memberPtr)>>();
 }
 
 // https://gist.github.com/graphitemaster/494f21190bb2c63c5516
@@ -127,7 +127,7 @@ public:
      */
     template <auto T::*memberUnion, typename TField>
     DataTypeBuilder<T, Tag>& addUnionField(const char* fieldName) {
-        return addUnionField<memberUnion, TField>(fieldName, detail::guessDataType<TField>());
+        return addUnionField<memberUnion, TField>(fieldName, detail::getDataType<TField>());
     }
 
     /**

@@ -2,8 +2,7 @@
 
 #include <optional>
 
-#include "open62541pp/Common.h"  // isBuiltinType
-#include "open62541pp/TypeConverter.h"
+#include "open62541pp/TypeRegistry.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/open62541.h"
 
@@ -102,23 +101,13 @@ public:
 
     /// @copydoc getDecodedData
     const void* getDecodedData() const noexcept;
-
-private:
-    template <typename T>
-    static constexpr void assertDecodedType() {
-        static_assert(
-            detail::isNativeType<T> || detail::isTypeWrapper<T>,
-            "Template type must be a native or wrapper type to set/get decoded data"
-        );
-    }
 };
 
 /* --------------------------------------- Implementation --------------------------------------- */
 
 template <typename T>
 T* ExtensionObject::getDecodedData() noexcept {
-    assertDecodedType<T>();
-    if (getDecodedDataType() == &detail::guessDataType<T>()) {
+    if (getDecodedDataType() == &detail::getDataType<T>()) {
         return static_cast<T*>(getDecodedData());
     }
     return nullptr;
@@ -126,8 +115,7 @@ T* ExtensionObject::getDecodedData() noexcept {
 
 template <typename T>
 const T* ExtensionObject::getDecodedData() const noexcept {
-    assertDecodedType<T>();
-    if (getDecodedDataType() == &detail::guessDataType<T>()) {
+    if (getDecodedDataType() == &detail::getDataType<T>()) {
         return static_cast<const T*>(getDecodedData());
     }
     return nullptr;
@@ -135,14 +123,12 @@ const T* ExtensionObject::getDecodedData() const noexcept {
 
 template <typename T>
 ExtensionObject ExtensionObject::fromDecoded(T& data) noexcept {
-    assertDecodedType<T>();
-    return fromDecoded(&data, detail::guessDataType<T>());
+    return fromDecoded(&data, detail::getDataType<T>());
 }
 
 template <typename T>
 ExtensionObject ExtensionObject::fromDecodedCopy(const T& data) {
-    assertDecodedType<T>();
-    return fromDecodedCopy(&data, detail::guessDataType<T>());
+    return fromDecodedCopy(&data, detail::getDataType<T>());
 }
 
 }  // namespace opcua

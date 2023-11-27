@@ -10,7 +10,7 @@
 #include "open62541pp/Common.h"
 #include "open62541pp/NodeIds.h"  // ReferenceTypeId
 #include "open62541pp/Span.h"
-#include "open62541pp/TypeConverter.h"
+#include "open62541pp/TypeRegistry.h"  // getDataType
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/traits.h"
 #include "open62541pp/open62541.h"
@@ -229,7 +229,7 @@ public:
     auto& set##suffix(Span<const Type> memberArray) {                                              \
         handle()->specifiedAttributes |= flag;                                                     \
         UA_Array_delete(                                                                           \
-            handle()->memberArray, handle()->memberSize, &detail::guessDataType<Type>()            \
+            handle()->memberArray, handle()->memberSize, &detail::getDataType<Type>()              \
         );                                                                                         \
         handle()->memberArray = detail::toNativeArrayAlloc(                                        \
             memberArray.begin(), memberArray.end()                                                 \
@@ -308,7 +308,7 @@ public:
     /// Deduce the `dataType` from the template type.
     template <typename T>
     auto& setDataType() {
-        return setDataType(asWrapper<NodeId>(detail::guessDataType<T>().typeId));
+        return setDataType(asWrapper<NodeId>(detail::getDataType<T>().typeId));
     }
 
     UAPP_NODEATTR_CAST(ValueRank, ValueRank, valueRank, UA_NODEATTRIBUTESMASK_VALUERANK)
@@ -395,7 +395,7 @@ public:
     /// Deduce the `dataType` from the template type.
     template <typename T>
     auto& setDataType() {
-        return setDataType(asWrapper<NodeId>(detail::guessDataType<T>().typeId));
+        return setDataType(asWrapper<NodeId>(detail::getDataType<T>().typeId));
     }
 
     UAPP_NODEATTR_CAST(ValueRank, ValueRank, valueRank, UA_NODEATTRIBUTESMASK_VALUERANK)

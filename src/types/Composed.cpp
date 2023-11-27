@@ -44,7 +44,7 @@ static void copyArray(Span<const T> src, Native** dst, size_t& dstSize) {
         src.data(),
         src.size(),
         (void**)dst,  // NOLINT
-        &detail::guessDataType<T>()
+        &detail::getDataType<T>()
     );
     detail::throwOnBadStatus(status);
 }
