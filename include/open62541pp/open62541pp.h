@@ -19,6 +19,8 @@
 #include "open62541pp/Subscription.h"
 #include "open62541pp/TypeConverter.h"
 #include "open62541pp/TypeConverterNative.h"
+#include "open62541pp/TypeRegistry.h"
+#include "open62541pp/TypeRegistryNative.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/ValueBackend.h"
 #include "open62541pp/detail/helper.h"
