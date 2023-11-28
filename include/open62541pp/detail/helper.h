@@ -3,18 +3,19 @@
 #include <cassert>
 #include <string>
 #include <string_view>
-#include <tuple>
 
-#include "open62541pp/Common.h"
+#include "open62541pp/Common.h"  // TypeIndex
 #include "open62541pp/ErrorHandling.h"
-#include "open62541pp/detail/traits.h"
+#include "open62541pp/detail/traits.h"  // IsOneOf
 #include "open62541pp/open62541.h"
 
 namespace opcua::detail {
 
 /* ------------------------------------ Generic type handling ----------------------------------- */
 
-using PointerFreeTypes = std::tuple<
+template <typename T>
+inline constexpr bool isPointerFree = IsOneOf<
+    T,
     UA_Boolean,
     UA_SByte,
     UA_Byte,
@@ -28,10 +29,7 @@ using PointerFreeTypes = std::tuple<
     UA_Double,
     UA_DateTime,
     UA_Guid,
-    UA_StatusCode>;
-
-template <typename T>
-inline constexpr bool isPointerFree = TupleHolds<PointerFreeTypes, T>::value;
+    UA_StatusCode>::value;
 
 template <typename T>
 [[nodiscard]] T* allocate(const UA_DataType& type) {
@@ -56,7 +54,7 @@ template <typename T>
     assert(sizeof(T) == type.memSize);
     if constexpr (!isPointerFree<T>) {
         T dst;  // NOLINT, initialized in UA_copy function
-        detail::throwOnBadStatus(UA_copy(&src, &dst, &type));
+        throwOnBadStatus(UA_copy(&src, &dst, &type));
         return dst;
     } else {
         return src;
@@ -86,7 +84,7 @@ template <typename T>
     assert(sizeof(T) == type.memSize);
     T* dst{};
     const auto status = UA_Array_copy(src, size, (void**)&dst, &type);  // NOLINT
-    detail::throwOnBadStatus(status);
+    throwOnBadStatus(status);
     return dst;
 }
 
@@ -131,7 +129,7 @@ constexpr bool isEmpty(const UA_String& value) {
 }
 
 /// Convert UA_String to std::string_view
-inline std::string_view toStringView(const UA_String& src) {
+inline constexpr std::string_view toStringView(const UA_String& src) {
     if (isEmpty(src)) {
         return {};
     }

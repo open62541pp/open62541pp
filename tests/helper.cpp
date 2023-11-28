@@ -7,6 +7,15 @@
 
 using namespace opcua;
 
+TEST_CASE("isPointerFree") {
+    CHECK(detail::isPointerFree<bool>);
+    CHECK(detail::isPointerFree<int>);
+    CHECK(detail::isPointerFree<float>);
+    CHECK(detail::isPointerFree<UA_Guid>);
+    CHECK_FALSE(detail::isPointerFree<UA_String>);
+    CHECK_FALSE(detail::isPointerFree<UA_NodeId>);
+}
+
 TEST_CASE("getDataType") {
     const auto* expected = &UA_TYPES[UA_TYPES_BOOLEAN];
     CHECK(&detail::getDataType(UA_TYPES_BOOLEAN) == expected);
