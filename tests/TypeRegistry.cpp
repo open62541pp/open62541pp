@@ -22,9 +22,14 @@ struct TypeRegistry<Custom> {
 
 TEST_CASE("TypeRegistry") {
     SUBCASE("Builtin") {
+        CHECK(detail::isRegisteredType<float>);
+        CHECK_FALSE(detail::isRegisteredType<const volatile float>);
+        CHECK_FALSE(detail::isRegisteredType<float*>);
+        CHECK_FALSE(detail::isRegisteredType<float&>);
+
         CHECK(&TypeRegistry<float>::getDataType() == &UA_TYPES[UA_TYPES_FLOAT]);
         CHECK(&detail::getDataType<float>() == &UA_TYPES[UA_TYPES_FLOAT]);
-        CHECK(&detail::getDataType<const float*>() == &UA_TYPES[UA_TYPES_FLOAT]);
+        CHECK(&detail::getDataType<const volatile float>() == &UA_TYPES[UA_TYPES_FLOAT]);
     }
 
     SUBCASE("Generated") {

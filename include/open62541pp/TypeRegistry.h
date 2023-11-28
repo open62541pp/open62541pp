@@ -42,7 +42,7 @@ inline constexpr bool isRegisteredType = IsRegisteredType<T>::value;
 
 template <typename T>
 inline const UA_DataType& getDataType() noexcept {
-    using ValueType = typename detail::UnqualifiedT<T>;
+    using ValueType = typename std::remove_cv_t<T>;
     static_assert(
         isRegisteredType<ValueType>,
         "The provided template type is not registered. "

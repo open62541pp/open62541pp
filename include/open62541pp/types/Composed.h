@@ -34,19 +34,19 @@
     }
 
 // NOLINTNEXTLINE
-#define UAPP_COMPOSED_GETTER_WRAPPER_CONST(WrapperType, getterName, member)                        \
-    const WrapperType& getterName() const noexcept {                                               \
-        return asWrapper<WrapperType>(handle()->member);                                           \
+#define UAPP_COMPOSED_GETTER_WRAPPER_CONST(Type, getterName, member)                               \
+    const Type& getterName() const noexcept {                                                      \
+        return asWrapper<Type>(handle()->member);                                                  \
     }
 // NOLINTNEXTLINE
-#define UAPP_COMPOSED_GETTER_WRAPPER_NONCONST(WrapperType, getterName, member)                     \
-    WrapperType& getterName() noexcept {                                                           \
-        return asWrapper<WrapperType>(handle()->member);                                           \
+#define UAPP_COMPOSED_GETTER_WRAPPER_NONCONST(Type, getterName, member)                            \
+    Type& getterName() noexcept {                                                                  \
+        return asWrapper<Type>(handle()->member);                                                  \
     }
 // NOLINTNEXTLINE
-#define UAPP_COMPOSED_GETTER_WRAPPER(WrapperType, getterName, member)                              \
-    UAPP_COMPOSED_GETTER_WRAPPER_CONST(WrapperType, getterName, member)                            \
-    UAPP_COMPOSED_GETTER_WRAPPER_NONCONST(WrapperType, getterName, member)
+#define UAPP_COMPOSED_GETTER_WRAPPER(Type, getterName, member)                                     \
+    UAPP_COMPOSED_GETTER_WRAPPER_CONST(Type, getterName, member)                                   \
+    UAPP_COMPOSED_GETTER_WRAPPER_NONCONST(Type, getterName, member)
 
 // NOLINTNEXTLINE
 #define UAPP_COMPOSED_GETTER_SPAN(Type, getterName, memberArray, memberSize)                       \
@@ -215,11 +215,11 @@ public:
     }
 
 // NOLINTNEXTLINE
-#define UAPP_NODEATTR_WRAPPER(WrapperType, suffix, member, flag)                                   \
-    UAPP_COMPOSED_GETTER_WRAPPER_CONST(WrapperType, get##suffix, member)                           \
-    auto& set##suffix(const WrapperType& member) {                                                 \
+#define UAPP_NODEATTR_WRAPPER(Type, suffix, member, flag)                                          \
+    UAPP_COMPOSED_GETTER_WRAPPER_CONST(Type, get##suffix, member)                                  \
+    auto& set##suffix(const Type& member) {                                                        \
         handle()->specifiedAttributes |= flag;                                                     \
-        asWrapper<WrapperType>(handle()->member) = member;                                         \
+        asWrapper<Type>(handle()->member) = member;                                                \
         return *this;                                                                              \
     }
 
