@@ -33,8 +33,17 @@ inline constexpr bool isPointerFree = IsOneOf<
     UA_StatusCode>::value;
 
 template <typename T>
-[[nodiscard]] T* allocate(const UA_DataType& type) {
-    assert(sizeof(T) == type.memSize);
+constexpr bool isValidTypeCombination(const UA_DataType& type) {
+    if constexpr (std::is_void_v<T>) {
+        return true;  // allow type-erasure
+    } else {
+        return sizeof(T) == type.memSize;
+    }
+}
+
+template <typename T>
+[[nodiscard]] inline T* allocate(const UA_DataType& type) {
+    assert(isValidTypeCombination<T>(type));
     auto* result = static_cast<T*>(UA_new(&type));
     if (result == nullptr) {
         throw std::bad_alloc();
@@ -44,7 +53,7 @@ template <typename T>
 
 template <typename T>
 constexpr void clear(T& native, const UA_DataType& type) noexcept {
-    assert(sizeof(T) == type.memSize);
+    assert(isValidTypeCombination<T>(type));
     if constexpr (!isPointerFree<T>) {
         UA_clear(&native, &type);
     }
@@ -52,7 +61,7 @@ constexpr void clear(T& native, const UA_DataType& type) noexcept {
 
 template <typename T>
 [[nodiscard]] constexpr T copy(const T& src, const UA_DataType& type) noexcept(isPointerFree<T>) {
-    assert(sizeof(T) == type.memSize);
+    assert(isValidTypeCombination<T>(type));
     if constexpr (!isPointerFree<T>) {
         T dst;  // NOLINT, initialized in UA_copy function
         throwOnBadStatus(UA_copy(&src, &dst, &type));
@@ -63,16 +72,16 @@ template <typename T>
 }
 
 template <typename T>
-void deallocate(T& native, const UA_DataType& type) noexcept {
-    assert(sizeof(T) == type.memSize);
+inline void deallocate(T& native, const UA_DataType& type) noexcept {
+    assert(isValidTypeCombination<T>(type));
     UA_delete(&native, &type);
 }
 
 /* ----------------------------------- Generic array handling ----------------------------------- */
 
 template <typename T>
-[[nodiscard]] T* allocateArray(size_t size, const UA_DataType& type) {
-    assert(sizeof(T) == type.memSize);
+[[nodiscard]] inline T* allocateArray(size_t size, const UA_DataType& type) {
+    assert(isValidTypeCombination<T>(type));
     auto* result = static_cast<T*>(UA_Array_new(size, &type));
     if (result == nullptr) {
         throw std::bad_alloc();
@@ -81,8 +90,8 @@ template <typename T>
 }
 
 template <typename T>
-[[nodiscard]] T* copyArray(const T* src, size_t size, const UA_DataType& type) {
-    assert(sizeof(T) == type.memSize);
+[[nodiscard]] inline T* copyArray(const T* src, size_t size, const UA_DataType& type) {
+    assert(isValidTypeCombination<T>(type));
     if constexpr (!isPointerFree<T>) {
         T* dst{};
         throwOnBadStatus(UA_Array_copy(src, size, (void**)&dst, &type));  // NOLINT
@@ -95,8 +104,8 @@ template <typename T>
 }
 
 template <typename T>
-void deallocateArray(T* array, size_t size, const UA_DataType& type) noexcept {
-    assert(sizeof(T) == type.memSize);
+inline void deallocateArray(T* array, size_t size, const UA_DataType& type) noexcept {
+    assert(isValidTypeCombination<T>(type));
     UA_Array_delete(array, size, &type);
 }
 
@@ -135,7 +144,7 @@ constexpr bool isEmpty(const UA_String& value) {
 }
 
 /// Convert UA_String to std::string_view
-inline constexpr std::string_view toStringView(const UA_String& src) {
+constexpr std::string_view toStringView(const UA_String& src) {
     if (isEmpty(src)) {
         return {};
     }
