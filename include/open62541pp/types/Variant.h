@@ -13,6 +13,7 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Span.h"
 #include "open62541pp/TypeConverter.h"
+#include "open62541pp/TypeRegistry.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/open62541.h"
 
@@ -218,14 +219,9 @@ public:
 
 private:
     template <typename T>
-    static constexpr bool isPointerInterconvertibleWithNative() {
-        return detail::isNativeType<T> || detail::isTypeWrapper<T>;
-    }
-
-    template <typename T>
     static constexpr void assertGetNoCopy() {
         static_assert(
-            isPointerInterconvertibleWithNative<T>(),
+            detail::isRegisteredType<T>,
             "Template type must be a native or wrapper type to get scalar/array without copy"
         );
     }
@@ -233,7 +229,7 @@ private:
     template <typename T>
     static constexpr void assertSetNoCopy() {
         static_assert(
-            isPointerInterconvertibleWithNative<T>(),
+            detail::isRegisteredType<T>,
             "Template type must be a native or wrapper type to assign scalar/array without copy"
         );
     }
@@ -256,7 +252,7 @@ private:
 
     template <typename T>
     void checkReturnType() const {
-        if (!detail::isValidTypeCombination<T>(getDataType())) {
+        if (getDataType() != &detail::getDataType<T>()) {
             throw BadVariantAccess("Variant does not contain a value convertible to template type");
         }
     }
@@ -269,6 +265,8 @@ private:
     template <typename T>
     inline void setScalarCopyConvertImpl(const T& value);
     template <typename InputIt>
+    inline void setArrayCopyImpl(InputIt first, InputIt last);
+    template <typename InputIt>
     inline void setArrayCopyConvertImpl(InputIt first, InputIt last);
 };
 
@@ -277,7 +275,7 @@ private:
 template <typename T>
 Variant Variant::fromScalar(T& value) {
     Variant variant;
-    if constexpr (isPointerInterconvertibleWithNative<T>()) {
+    if constexpr (detail::isRegisteredType<T>) {
         variant.setScalar(value);
     } else {
         variant.setScalarCopy(value);
@@ -309,7 +307,7 @@ Variant Variant::fromScalar(const T& value, const UA_DataType& dataType) {
 template <typename T>
 Variant Variant::fromArray(Span<T> array) {
     Variant variant;
-    if constexpr (isPointerInterconvertibleWithNative<T>()) {
+    if constexpr (detail::isRegisteredType<T>) {
         variant.setArray(array);
     } else {
         variant.setArrayCopy(array);
@@ -355,15 +353,20 @@ const T& Variant::getScalar() const {
     assertGetNoCopy<T>();
     checkIsScalar();
     checkReturnType<T>();
-    checkDataType<T>(*getDataType());
     return *static_cast<const T*>(handle()->data);
 }
 
 template <typename T>
 T Variant::getScalarCopy() const {
-    checkIsScalar();
-    checkReturnType<T>();
-    return detail::fromNative<T>(handle()->data, *getDataType());
+    if constexpr (detail::isRegisteredType<T>) {
+        return detail::copy(getScalar<T>(), detail::getDataType<T>());
+    } else {
+        using Native = typename TypeConverter<T>::NativeType;
+        const auto& native = getScalar<Native>();
+        T result{};
+        TypeConverter<T>::fromNative(native, result);
+        return result;
+    }
 }
 
 template <typename T>
@@ -371,8 +374,7 @@ Span<T> Variant::getArray() {
     assertGetNoCopy<T>();
     checkIsArray();
     checkReturnType<T>();
-    checkDataType<T>(*getDataType());
-    return {static_cast<T*>(handle()->data), handle()->arrayLength};
+    return Span<T>(static_cast<T*>(handle()->data), handle()->arrayLength);
 }
 
 template <typename T>
@@ -380,21 +382,31 @@ Span<const T> Variant::getArray() const {
     assertGetNoCopy<T>();
     checkIsArray();
     checkReturnType<T>();
-    checkDataType<T>(*getDataType());
-    return {static_cast<const T*>(handle()->data), handle()->arrayLength};
+    return Span<const T>(static_cast<const T*>(handle()->data), handle()->arrayLength);
 }
 
 template <typename T>
 std::vector<T> Variant::getArrayCopy() const {
-    checkIsArray();
-    checkReturnType<T>();
-    return detail::fromNativeArray<T>(handle()->data, handle()->arrayLength, *getDataType());
+    std::vector<T> result(handle()->arrayLength);
+    if constexpr (detail::isRegisteredType<T>) {
+        auto native = getArray<T>();
+        for (size_t i = 0; i < native.size(); ++i) {
+            result[i] = detail::copy(native[i], detail::getDataType<T>());
+        }
+    } else {
+        using Native = typename TypeConverter<T>::NativeType;
+        auto native = getArray<Native>();
+        for (size_t i = 0; i < native.size(); ++i) {
+            TypeConverter<T>::fromNative(native[i], result[i]);
+        }
+    }
+    return result;
 }
 
 template <typename T>
 void Variant::setScalar(T& value) noexcept {
     assertSetNoCopy<T>();
-    setScalar(value, detail::guessDataType<T>());
+    setScalar(value, detail::getDataType<T>());
 }
 
 template <typename T>
@@ -406,9 +418,9 @@ void Variant::setScalar(T& value, const UA_DataType& dataType) noexcept {
 
 template <typename T>
 void Variant::setScalarCopy(const T& value) {
-    assertNoVariant<T>();
-    if constexpr (isPointerInterconvertibleWithNative<T>()) {
-        setScalarCopyImpl(&value, detail::guessDataType<T>());
+    if constexpr (detail::isRegisteredType<T>) {
+        assertNoVariant<T>();
+        setScalarCopyImpl(&value, detail::getDataType<T>());
     } else {
         setScalarCopyConvertImpl(value);
     }
@@ -424,7 +436,7 @@ void Variant::setScalarCopy(const T& value, const UA_DataType& dataType) {
 template <typename T>
 void Variant::setArray(Span<T> array) noexcept {
     assertSetNoCopy<T>();
-    setArray(array, detail::guessDataType<T>());
+    setArray(array, detail::getDataType<T>());
 }
 
 template <typename T>
@@ -436,9 +448,10 @@ void Variant::setArray(Span<T> array, const UA_DataType& dataType) noexcept {
 
 template <typename T>
 void Variant::setArrayCopy(Span<T> array) {
-    if constexpr (isPointerInterconvertibleWithNative<T>()) {
-        assertNoVariant<T>();
-        setArrayCopyImpl(array.data(), array.size(), detail::guessDataType<T>());
+    using ValueType = typename Span<T>::value_type;
+    if constexpr (detail::isRegisteredType<ValueType>) {
+        assertNoVariant<ValueType>();
+        setArrayCopyImpl(array.data(), array.size(), detail::getDataType<ValueType>());
     } else {
         setArrayCopyConvertImpl(array.begin(), array.end());
     }
@@ -446,38 +459,57 @@ void Variant::setArrayCopy(Span<T> array) {
 
 template <typename T>
 void Variant::setArrayCopy(Span<T> array, const UA_DataType& dataType) {
-    assertNoVariant<T>();
-    checkDataType<T>(dataType);
+    using ValueType = typename Span<T>::value_type;
+    assertNoVariant<ValueType>();
+    checkDataType<ValueType>(dataType);
     setArrayCopyImpl(array.data(), array.size(), dataType);
 }
 
 template <typename InputIt>
 void Variant::setArrayCopy(InputIt first, InputIt last) {
-    setArrayCopyConvertImpl(first, last);
+    using ValueType = typename std::iterator_traits<InputIt>::value_type;
+    if constexpr (detail::isRegisteredType<ValueType>) {
+        setArrayCopyImpl(first, last);
+    } else {
+        setArrayCopyConvertImpl(first, last);
+    }
 }
 
 template <typename T>
 void Variant::setScalarCopyConvertImpl(const T& value) {
-    auto* native = detail::toNativeAlloc(value);
-    assertNoVariant<std::remove_pointer_t<decltype(value)>>();
-    setScalarImpl(
-        native,
-        detail::guessDataType<T>(),
-        true  // move ownership
-    );
+    using Native = typename TypeConverter<T>::NativeType;
+    assertNoVariant<Native>();
+    const auto& dataType = detail::getDataType<Native>();
+    auto* native = detail::allocate<Native>(dataType);
+    TypeConverter<T>::toNative(value, *native);
+    setScalarImpl(native, dataType, true /* move ownership */);
+}
+
+template <typename InputIt>
+inline void Variant::setArrayCopyImpl(InputIt first, InputIt last) {
+    using ValueType = typename std::iterator_traits<InputIt>::value_type;
+    assertNoVariant<ValueType>();
+    const auto& dataType = detail::getDataType<ValueType>();
+    const size_t size = std::distance(first, last);
+    auto* native = detail::allocateArray<ValueType>(size, dataType);
+    for (size_t i = 0; i < size; ++i) {
+        native[i] = detail::copy(*first++, dataType);  // NOLINT
+    }
+    setArrayImpl(native, size, dataType, true /* move ownership */);
 }
 
 template <typename InputIt>
 void Variant::setArrayCopyConvertImpl(InputIt first, InputIt last) {
     using ValueType = typename std::iterator_traits<InputIt>::value_type;
-    auto* native = detail::toNativeArrayAlloc(first, last);
-    assertNoVariant<std::remove_pointer_t<decltype(native)>>();
-    setArrayImpl(
-        native,
-        std::distance(first, last),
-        detail::guessDataType<ValueType>(),
-        true  // move ownership
-    );
+    using Native = typename TypeConverter<ValueType>::NativeType;
+    assertNoVariant<Native>();
+    const auto& dataType = detail::getDataType<Native>();
+    const size_t size = std::distance(first, last);
+    auto* native = detail::allocateArray<Native>(size, dataType);
+    for (size_t i = 0; i < size; ++i) {
+        TypeConverter<ValueType>::toNative(*first++, native[i]);  // NOLINT
+    }
+    setArrayImpl(native, size, dataType, true /* move ownership */);
 }
 
 }  // namespace opcua

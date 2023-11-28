@@ -873,6 +873,8 @@ TEST_CASE("NodeAttributes") {
 
     SUBCASE("Array type") {
         CHECK(attr.getArrayDimensions().empty());
+        // assign twice to check deallocation
+        attr.setArrayDimensions({1});
         attr.setArrayDimensions({1, 2});
         CHECK(attr.getArrayDimensions() == Span<const uint32_t>{1, 2});
         CHECK(attr.getSpecifiedAttributes() == UA_NODEATTRIBUTESMASK_ARRAYDIMENSIONS);

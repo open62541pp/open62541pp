@@ -224,17 +224,14 @@ public:
     }
 
 // NOLINTNEXTLINE
-#define UAPP_NODEATTR_ARRAY(Type, suffix, memberArray, memberSize, flag)                           \
-    UAPP_COMPOSED_GETTER_SPAN(Type, get##suffix, memberArray, memberSize)                          \
-    auto& set##suffix(Span<const Type> memberArray) {                                              \
+#define UAPP_NODEATTR_ARRAY(Type, suffix, member, memberSize, flag)                                \
+    UAPP_COMPOSED_GETTER_SPAN(Type, get##suffix, member, memberSize)                               \
+    auto& set##suffix(Span<const Type> member) {                                                   \
+        const auto& dataType = detail::getDataType<Type>();                                        \
         handle()->specifiedAttributes |= flag;                                                     \
-        UA_Array_delete(                                                                           \
-            handle()->memberArray, handle()->memberSize, &detail::getDataType<Type>()              \
-        );                                                                                         \
-        handle()->memberArray = detail::toNativeArrayAlloc(                                        \
-            memberArray.begin(), memberArray.end()                                                 \
-        );                                                                                         \
-        handle()->memberSize = memberArray.size();                                                 \
+        detail::deallocateArray(handle()->member, handle()->memberSize, dataType);                 \
+        handle()->member = detail::copyArray(member.data(), member.size(), dataType);              \
+        handle()->memberSize = member.size();                                                      \
         return *this;                                                                              \
     }
 

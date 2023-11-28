@@ -34,6 +34,16 @@ template <typename T>
 inline constexpr bool isPointerFree = TupleHolds<PointerFreeTypes, T>::value;
 
 template <typename T>
+[[nodiscard]] T* allocate(const UA_DataType& type) {
+    assert(sizeof(T) == type.memSize);
+    auto* result = static_cast<T*>(UA_new(&type));
+    if (result == nullptr) {
+        throw std::bad_alloc();
+    }
+    return result;
+}
+
+template <typename T>
 constexpr void clear(T& native, const UA_DataType& type) noexcept {
     assert(sizeof(T) == type.memSize);
     if constexpr (!isPointerFree<T>) {
@@ -51,6 +61,39 @@ template <typename T>
     } else {
         return src;
     }
+}
+
+template <typename T>
+void deallocate(T& native, const UA_DataType& type) noexcept {
+    assert(sizeof(T) == type.memSize);
+    UA_delete(&native, &type);
+}
+
+/* ----------------------------------- Generic array handling ----------------------------------- */
+
+template <typename T>
+[[nodiscard]] T* allocateArray(size_t size, const UA_DataType& type) {
+    assert(sizeof(T) == type.memSize);
+    auto* result = static_cast<T*>(UA_Array_new(size, &type));
+    if (result == nullptr) {
+        throw std::bad_alloc();
+    }
+    return result;
+}
+
+template <typename T>
+[[nodiscard]] T* copyArray(const T* src, size_t size, const UA_DataType& type) {
+    assert(sizeof(T) == type.memSize);
+    T* dst{};
+    const auto status = UA_Array_copy(src, size, (void**)&dst, &type);  // NOLINT
+    detail::throwOnBadStatus(status);
+    return dst;
+}
+
+template <typename T>
+void deallocateArray(T* array, size_t size, const UA_DataType& type) noexcept {
+    assert(sizeof(T) == type.memSize);
+    UA_Array_delete(array, size, &type);
 }
 
 /* ------------------------------------------ Data type ----------------------------------------- */
