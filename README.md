@@ -132,10 +132,9 @@ You can add template specializations to add conversions for arbitrary types:
 namespace opcua {
 
 template <>
-struct TypeConverter<std::string> {
-    using ValueType = std::string;
-    using NativeType = UA_String;
-    using ValidTypes = TypeIndexList<UA_TYPES_STRING, UA_TYPES_BYTESTRING, UA_TYPES_XMLELEMENT>;
+struct TypeConverter<std::byte> {
+    using ValueType = std::byte;
+    using NativeType = UA_Byte;
 
     static void fromNative(const NativeType& src, ValueType& dst) { /* ... */ }
     static void toNative(const ValueType& src, NativeType& dst) { /* ... */ }

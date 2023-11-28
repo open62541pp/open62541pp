@@ -15,7 +15,10 @@
 namespace opcua {
 
 template <TypeIndex... typeIndexes>
-struct TypeIndexList {
+struct [[deprecated(
+    "Not required anymore. Remove TypeConverter<T>::ValidTypes from your template specializations. "
+    "The type index / UA_DataType is retrieved from the TypeRegistry<NativeType> specialization."
+)]] TypeIndexList {
     using TypeIndexes = std::integer_sequence<TypeIndex, typeIndexes...>;
 
     static constexpr size_t size() {
@@ -45,7 +48,6 @@ struct TypeConverter {
 
     using ValueType = T;
     using NativeType = std::nullptr_t;
-    using ValidTypes = TypeIndexList<>;
 
     static void fromNative(const NativeType& src, ValueType& dst);
     static void toNative(const ValueType& src, NativeType& dst);
@@ -72,7 +74,6 @@ template <>
 struct TypeConverter<std::string_view> {
     using ValueType = std::string_view;
     using NativeType = String;
-    using ValidTypes = TypeIndexList<UA_TYPES_STRING>;
 
     static void fromNative(const NativeType& src, std::string_view& dst) {
         dst = src.get();
@@ -87,7 +88,6 @@ template <>
 struct TypeConverter<std::string> {
     using ValueType = std::string;
     using NativeType = String;
-    using ValidTypes = TypeIndexList<UA_TYPES_STRING>;
 
     static void fromNative(const NativeType& src, ValueType& dst) {
         dst = src.get();
@@ -102,7 +102,6 @@ template <>
 struct TypeConverter<const char*> {
     using ValueType = const char*;
     using NativeType = String;
-    using ValidTypes = TypeIndexList<UA_TYPES_STRING>;
 
     static void toNative(const char* src, NativeType& dst) {
         dst = String(src);
@@ -113,7 +112,6 @@ template <size_t N>
 struct TypeConverter<char[N]> {  // NOLINT
     using ValueType = char[N];  // NOLINT
     using NativeType = String;
-    using ValidTypes = TypeIndexList<UA_TYPES_STRING>;
 
     static void toNative(const ValueType& src, NativeType& dst) {
         dst = String({static_cast<const char*>(src), N});
@@ -124,7 +122,6 @@ template <typename Clock, typename Duration>
 struct TypeConverter<std::chrono::time_point<Clock, Duration>> {
     using ValueType = std::chrono::time_point<Clock, Duration>;
     using NativeType = DateTime;
-    using ValidTypes = TypeIndexList<UA_TYPES_DATETIME>;
 
     static void fromNative(const NativeType& src, ValueType& dst) {
         dst = src.toTimePoint<Clock, Duration>();
