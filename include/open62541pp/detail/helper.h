@@ -1,5 +1,6 @@
 #pragma once
 
+#include <algorithm>  // copy_n
 #include <cassert>
 #include <string>
 #include <string_view>
@@ -82,10 +83,15 @@ template <typename T>
 template <typename T>
 [[nodiscard]] T* copyArray(const T* src, size_t size, const UA_DataType& type) {
     assert(sizeof(T) == type.memSize);
-    T* dst{};
-    const auto status = UA_Array_copy(src, size, (void**)&dst, &type);  // NOLINT
-    throwOnBadStatus(status);
-    return dst;
+    if constexpr (!isPointerFree<T>) {
+        T* dst{};
+        throwOnBadStatus(UA_Array_copy(src, size, (void**)&dst, &type));  // NOLINT
+        return dst;
+    } else {
+        T* dst = allocateArray<T>(size, type);
+        std::copy_n(src, size, dst);
+        return dst;
+    }
 }
 
 template <typename T>
