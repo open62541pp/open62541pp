@@ -7,7 +7,6 @@
 #include <type_traits>
 
 #include "open62541pp/Common.h"  // TypeIndex
-#include "open62541pp/detail/traits.h"
 #include "open62541pp/open62541.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/DateTime.h"
@@ -39,19 +38,31 @@ struct [[deprecated(
 };
 
 /**
- * Type conversion from and to native `UA_*` types.
- * Template specializations can be added for conversions of arbitrary types.
+ * Type conversion from and to native types.
+ *
+ * Native types can be both `UA_*` types and wrapper classes (like `UA_Guid` and `Guid`).
+ * The `TypeConverter` is mainly used within the `Variant` class to set/get non-native types.
+ *
+ * Template specializations can be added for conversions of arbitrary types:
+ * @code
+ * namespace ::opcua {
+ * template <>
+ * struct TypeConverter<MyCustomType> {
+ *     using NativeType = Guid;
+ *
+ *     static void fromNative(const NativeType& src, MyCustomType& dst) {
+ *         // ...
+ *     }
+ *
+ *     static void toNative(const MyCustomType& src, NativeType& dst) {
+ *         // ...
+ *     }
+ * };
+ * }
+ * @endcode
  */
 template <typename T, typename Enable = void>
-struct TypeConverter {
-    static_assert(detail::AlwaysFalse<T>::value, "Missing specialization of TypeConverter");
-
-    using ValueType = T;
-    using NativeType = std::nullptr_t;
-
-    static void fromNative(const NativeType& src, ValueType& dst);
-    static void toNative(const ValueType& src, NativeType& dst);
-};
+struct TypeConverter;
 
 /* -------------------------------------- Traits and helper ------------------------------------- */
 

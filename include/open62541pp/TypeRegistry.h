@@ -11,7 +11,9 @@ namespace opcua {
 
 /**
  * Type registry.
+ *
  * The type registry is used to derive the corresponding `UA_DataType` object from template types.
+ *
  * Custom data types can be registered with template specializations:
  * @code
  * namespace ::opcua {
