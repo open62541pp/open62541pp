@@ -260,14 +260,13 @@ private:
 
     void setScalarImpl(void* value, const UA_DataType& type, bool own = false) noexcept;
     void setArrayImpl(void* array, size_t size, const UA_DataType& type, bool own = false) noexcept;
-    void setArrayCopyImpl(const void* array, size_t size, const UA_DataType& type);
 
     template <typename T>
     inline void setScalarCopyImpl(const T& value, const UA_DataType& dataType);
     template <typename T>
     inline void setScalarCopyConvertImpl(const T& value);
     template <typename InputIt>
-    inline void setArrayCopyImpl(InputIt first, InputIt last);
+    inline void setArrayCopyImpl(InputIt first, InputIt last, const UA_DataType& dataType);
     template <typename InputIt>
     inline void setArrayCopyConvertImpl(InputIt first, InputIt last);
 };
@@ -364,9 +363,8 @@ T Variant::getScalarCopy() const {
         return detail::copy(getScalar<T>(), detail::getDataType<T>());
     } else {
         using Native = typename TypeConverter<T>::NativeType;
-        const auto& native = getScalar<Native>();
         T result{};
-        TypeConverter<T>::fromNative(native, result);
+        TypeConverter<T>::fromNative(getScalar<Native>(), result);
         return result;
     }
 }
@@ -421,7 +419,6 @@ void Variant::setScalar(T& value, const UA_DataType& dataType) noexcept {
 template <typename T>
 void Variant::setScalarCopy(const T& value) {
     if constexpr (detail::isRegisteredType<T>) {
-        assertNoVariant<T>();
         setScalarCopyImpl(value, detail::getDataType<T>());
     } else {
         setScalarCopyConvertImpl(value);
@@ -430,7 +427,6 @@ void Variant::setScalarCopy(const T& value) {
 
 template <typename T>
 void Variant::setScalarCopy(const T& value, const UA_DataType& dataType) {
-    assertNoVariant<T>();
     checkDataType<T>(dataType);
     setScalarCopyImpl(value, dataType);
 }
@@ -452,8 +448,7 @@ template <typename T>
 void Variant::setArrayCopy(Span<T> array) {
     using ValueType = typename Span<T>::value_type;
     if constexpr (detail::isRegisteredType<ValueType>) {
-        assertNoVariant<ValueType>();
-        setArrayCopyImpl(array.data(), array.size(), detail::getDataType<ValueType>());
+        setArrayCopyImpl(array.begin(), array.end(), detail::getDataType<ValueType>());
     } else {
         setArrayCopyConvertImpl(array.begin(), array.end());
     }
@@ -462,16 +457,15 @@ void Variant::setArrayCopy(Span<T> array) {
 template <typename T>
 void Variant::setArrayCopy(Span<T> array, const UA_DataType& dataType) {
     using ValueType = typename Span<T>::value_type;
-    assertNoVariant<ValueType>();
     checkDataType<ValueType>(dataType);
-    setArrayCopyImpl(array.data(), array.size(), dataType);
+    setArrayCopyImpl(array.begin(), array.end(), dataType);
 }
 
 template <typename InputIt>
 void Variant::setArrayCopy(InputIt first, InputIt last) {
     using ValueType = typename std::iterator_traits<InputIt>::value_type;
     if constexpr (detail::isRegisteredType<ValueType>) {
-        setArrayCopyImpl(first, last);
+        setArrayCopyImpl(first, last, detail::getDataType<ValueType>());
     } else {
         setArrayCopyConvertImpl(first, last);
     }
@@ -479,6 +473,7 @@ void Variant::setArrayCopy(InputIt first, InputIt last) {
 
 template <typename T>
 void Variant::setScalarCopyImpl(const T& value, const UA_DataType& dataType) {
+    assertNoVariant<T>();
     auto* native = detail::allocate<T>(dataType);
     *native = detail::copy(value, dataType);
     setScalarImpl(native, dataType, true /* move ownership */);
@@ -495,10 +490,9 @@ void Variant::setScalarCopyConvertImpl(const T& value) {
 }
 
 template <typename InputIt>
-inline void Variant::setArrayCopyImpl(InputIt first, InputIt last) {
+void Variant::setArrayCopyImpl(InputIt first, InputIt last, const UA_DataType& dataType) {
     using ValueType = typename std::iterator_traits<InputIt>::value_type;
     assertNoVariant<ValueType>();
-    const auto& dataType = detail::getDataType<ValueType>();
     const size_t size = std::distance(first, last);
     auto* native = detail::allocateArray<ValueType>(size, dataType);
     std::transform(first, last, native, [&](auto&& value) {
