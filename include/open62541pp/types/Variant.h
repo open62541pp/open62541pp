@@ -1,5 +1,6 @@
 #pragma once
 
+#include <algorithm>  // transform
 #include <cassert>
 #include <cstddef>
 #include <cstdint>
@@ -390,9 +391,9 @@ std::vector<T> Variant::getArrayCopy() const {
     std::vector<T> result(handle()->arrayLength);
     if constexpr (detail::isRegisteredType<T>) {
         auto native = getArray<T>();
-        for (size_t i = 0; i < native.size(); ++i) {
-            result[i] = detail::copy(native[i], detail::getDataType<T>());
-        }
+        std::transform(native.begin(), native.end(), result.begin(), [](auto&& value) {
+            return detail::copy(value, detail::getDataType<T>());
+        });
     } else {
         using Native = typename TypeConverter<T>::NativeType;
         auto native = getArray<Native>();
@@ -492,9 +493,9 @@ inline void Variant::setArrayCopyImpl(InputIt first, InputIt last) {
     const auto& dataType = detail::getDataType<ValueType>();
     const size_t size = std::distance(first, last);
     auto* native = detail::allocateArray<ValueType>(size, dataType);
-    for (size_t i = 0; i < size; ++i) {
-        native[i] = detail::copy(*first++, dataType);  // NOLINT
-    }
+    std::transform(first, last, native, [&](auto&& value) {
+        return detail::copy(value, dataType);
+    });
     setArrayImpl(native, size, dataType, true /* move ownership */);
 }
 
