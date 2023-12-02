@@ -114,16 +114,4 @@ void Variant::checkIsArray() const {
     }
 }
 
-void Variant::setScalarImpl(void* value, const UA_DataType& type, bool own) noexcept {
-    clear();
-    UA_Variant_setScalar(handle(), value, &type);
-    handle()->storageType = own ? UA_VARIANT_DATA : UA_VARIANT_DATA_NODELETE;
-}
-
-void Variant::setArrayImpl(void* array, size_t size, const UA_DataType& type, bool own) noexcept {
-    clear();
-    UA_Variant_setArray(handle(), array, size, &type);
-    handle()->storageType = own ? UA_VARIANT_DATA : UA_VARIANT_DATA_NODELETE;
-}
-
 }  // namespace opcua
