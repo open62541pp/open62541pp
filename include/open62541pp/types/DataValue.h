@@ -34,12 +34,22 @@ public:
     /// Create Variant from scalar value.
     /// @see Variant::fromScalar
     template <typename... Args>
-    static DataValue fromScalar(Args&&... args);
+    [[nodiscard]] static DataValue fromScalar(Args&&... args) {
+        DataValue dv;
+        asWrapper<Variant>(dv->value) = Variant::fromScalar(std::forward<Args>(args)...);
+        dv->hasValue = true;
+        return dv;
+    }
 
     /// Create Variant from array.
     /// @see Variant::fromArray
     template <typename... Args>
-    static DataValue fromArray(Args&&... args);
+    [[nodiscard]] static DataValue fromArray(Args&&... args) {
+        DataValue dv;
+        asWrapper<Variant>(dv->value) = Variant::fromArray(std::forward<Args>(args)...);
+        dv->hasValue = true;
+        return dv;
+    }
 
     bool hasValue() const noexcept;
     bool hasSourceTimestamp() const noexcept;
@@ -78,23 +88,5 @@ public:
     /// Set status code.
     void setStatusCode(StatusCode statusCode);
 };
-
-/* --------------------------------------- Implementation --------------------------------------- */
-
-template <typename... Args>
-DataValue DataValue::fromScalar(Args&&... args) {
-    DataValue dv{};
-    asWrapper<Variant>(dv->value) = Variant::fromScalar(std::forward<Args>(args)...);
-    dv->hasValue = true;
-    return dv;
-}
-
-template <typename... Args>
-DataValue DataValue::fromArray(Args&&... args) {
-    DataValue dv{};
-    asWrapper<Variant>(dv->value) = Variant::fromArray(std::forward<Args>(args)...);
-    dv->hasValue = true;
-    return dv;
-}
 
 }  // namespace opcua

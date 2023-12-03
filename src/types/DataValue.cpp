@@ -1,31 +1,6 @@
 #include "open62541pp/types/DataValue.h"
 
-#include "../open62541_impl.h"
-
 namespace opcua {
-
-static UA_DataValue fromOptionals(
-    const std::optional<DateTime>& sourceTimestamp,
-    const std::optional<DateTime>& serverTimestamp,
-    const std::optional<uint16_t>& sourcePicoseconds,
-    const std::optional<uint16_t>& serverPicoseconds,
-    const std::optional<StatusCode>& statusCode
-) {
-    return {
-        {},
-        sourceTimestamp.value_or(DateTime{}),
-        serverTimestamp.value_or(DateTime{}),
-        sourcePicoseconds.value_or(uint16_t{}),
-        serverPicoseconds.value_or(uint16_t{}),
-        statusCode.value_or(StatusCode{}),
-        false,
-        sourceTimestamp.has_value(),
-        serverTimestamp.has_value(),
-        sourcePicoseconds.has_value(),
-        serverPicoseconds.has_value(),
-        statusCode.has_value(),
-    };
-}
 
 DataValue::DataValue(
     Variant value,
@@ -35,9 +10,20 @@ DataValue::DataValue(
     std::optional<uint16_t> serverPicoseconds,
     std::optional<StatusCode> statusCode
 )
-    : DataValue(fromOptionals(
-          sourceTimestamp, serverTimestamp, sourcePicoseconds, serverPicoseconds, statusCode
-      )) {
+    : DataValue(UA_DataValue{
+          UA_Variant{},
+          sourceTimestamp.value_or(UA_DateTime{}),
+          serverTimestamp.value_or(UA_DateTime{}),
+          sourcePicoseconds.value_or(uint16_t{}),
+          serverPicoseconds.value_or(uint16_t{}),
+          statusCode.value_or(UA_StatusCode{}),
+          false,
+          sourceTimestamp.has_value(),
+          serverTimestamp.has_value(),
+          sourcePicoseconds.has_value(),
+          serverPicoseconds.has_value(),
+          statusCode.has_value(),
+      }) {
     setValue(std::move(value));
 }
 
@@ -94,12 +80,12 @@ StatusCode DataValue::getStatusCode() const noexcept {
 }
 
 void DataValue::setValue(const Variant& value) {
-    UA_Variant_copy(value.handle(), &handle()->value);
+    asWrapper<Variant>(handle()->value) = value;
     handle()->hasValue = true;
 }
 
 void DataValue::setValue(Variant&& value) {
-    value.swap(handle()->value);
+    asWrapper<Variant>(handle()->value) = std::move(value);
     handle()->hasValue = true;
 }
 
