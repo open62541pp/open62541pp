@@ -411,6 +411,8 @@ TEST_CASE("Variant") {
         CHECK(varEmpty.getVariantType() == std::nullopt);
         CHECK(varEmpty.getArrayLength() == 0);
         CHECK(varEmpty.getArrayDimensions().empty());
+        CHECK(varEmpty.data() == nullptr);
+        CHECK(std::as_const(varEmpty).data() == nullptr);
     }
 
     SUBCASE("Type checks") {
