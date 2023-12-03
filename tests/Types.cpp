@@ -431,35 +431,41 @@ TEST_CASE("Variant") {
             double value = 11.11;
             const auto var = Variant::fromScalar(value);
             CHECK(var.isScalar());
+            CHECK(var->type == &UA_TYPES[UA_TYPES_DOUBLE]);
             CHECK(var->data == &value);
         }
         SUBCASE("Assign with custom datatype") {
             double value = 11.11;
             const auto var = Variant::fromScalar(value, UA_TYPES[UA_TYPES_DOUBLE]);
             CHECK(var.isScalar());
+            CHECK(var->type == &UA_TYPES[UA_TYPES_DOUBLE]);
             CHECK(var->data == &value);
         }
         SUBCASE("Copy if const") {
             const double value = 11.11;
             const auto var = Variant::fromScalar(value);
             CHECK(var.isScalar());
+            CHECK(var->type == &UA_TYPES[UA_TYPES_DOUBLE]);
             CHECK(var->data != &value);
         }
         SUBCASE("Copy rvalue") {
             auto var = Variant::fromScalar(11.11);
             CHECK(var.isScalar());
+            CHECK(var->type == &UA_TYPES[UA_TYPES_DOUBLE]);
             CHECK(var.getScalar<double>() == 11.11);
         }
         SUBCASE("Copy if not assignable (const or conversion check failed)") {
             std::string value{"test"};
             const auto var = Variant::fromScalar<std::string>(value);
             CHECK(var.isScalar());
+            CHECK(var->type == &UA_TYPES[UA_TYPES_STRING]);
             CHECK(var->data != &value);
         }
         SUBCASE("Copy with custom data type") {
             const double value = 11.11;
             const auto var = Variant::fromScalar(value, UA_TYPES[UA_TYPES_DOUBLE]);
             CHECK(var.isScalar());
+            CHECK(var->type == &UA_TYPES[UA_TYPES_DOUBLE]);
             CHECK(var->data != &value);
         }
     }
@@ -469,30 +475,42 @@ TEST_CASE("Variant") {
             std::vector<double> vec{1.1, 2.2, 3.3};
             const auto var = Variant::fromArray(vec);
             CHECK(var.isArray());
+            CHECK(var->type == &UA_TYPES[UA_TYPES_DOUBLE]);
             CHECK(var->data == vec.data());
         }
         SUBCASE("Assign with custom data type") {
             std::vector<UA_WriteValue> vec{{}, {}};
             const auto var = Variant::fromArray(vec, UA_TYPES[UA_TYPES_WRITEVALUE]);
             CHECK(var.isArray());
+            CHECK(var->type == &UA_TYPES[UA_TYPES_WRITEVALUE]);
             CHECK(var->data == vec.data());
         }
         SUBCASE("Copy if const") {
             const std::vector<double> vec{1.1, 2.2, 3.3};
             const auto var = Variant::fromArray(vec);
             CHECK(var.isArray());
-            CHECK(var->data != vec.data());
-        }
-        SUBCASE("Copy from iterator") {
-            const std::vector<double> vec{1.1, 2.2, 3.3};
-            const auto var = Variant::fromArray(vec.begin(), vec.end());
-            CHECK(var.isArray());
+            CHECK(var->type == &UA_TYPES[UA_TYPES_DOUBLE]);
             CHECK(var->data != vec.data());
         }
         SUBCASE("Copy with custom data type") {
             const std::vector<UA_WriteValue> vec{{}, {}};
             const auto var = Variant::fromArray(vec, UA_TYPES[UA_TYPES_WRITEVALUE]);
             CHECK(var.isArray());
+            CHECK(var->type == &UA_TYPES[UA_TYPES_WRITEVALUE]);
+            CHECK(var->data != vec.data());
+        }
+        SUBCASE("Copy from iterator") {
+            const std::vector<double> vec{1.1, 2.2, 3.3};
+            const auto var = Variant::fromArray(vec.begin(), vec.end());
+            CHECK(var.isArray());
+            CHECK(var->type == &UA_TYPES[UA_TYPES_DOUBLE]);
+            CHECK(var->data != vec.data());
+        }
+        SUBCASE("Copy from iterator with custom data type") {
+            const std::vector<double> vec{1.1, 2.2, 3.3};
+            const auto var = Variant::fromArray(vec.begin(), vec.end(), UA_TYPES[UA_TYPES_DOUBLE]);
+            CHECK(var.isArray());
+            CHECK(var->type == &UA_TYPES[UA_TYPES_DOUBLE]);
             CHECK(var->data != vec.data());
         }
     }
@@ -596,23 +614,21 @@ TEST_CASE("Variant") {
             detail::toNativeString("item2"),
             detail::toNativeString("item3"),
         };
-
         var.setArray(Span{array.data(), array.size()}, UA_TYPES[UA_TYPES_STRING]);
         CHECK(var.data() == array.data());
         CHECK(var.getArrayLength() == array.size());
     }
 
-    SUBCASE("Set array of wrapper strings") {
+    SUBCASE("Set array of string wrapper") {
         Variant var;
         std::vector<String> array{String{"item1"}, String{"item2"}, String{"item3"}};
-
         var.setArray(array);
         CHECK(var.data() == array.data());
         CHECK(var.getArrayLength() == array.size());
         CHECK(var.getArray<String>().data() == array.data());
     }
 
-    SUBCASE("Set/get array of strings") {
+    SUBCASE("Set/get array of std::string") {
         Variant var;
         std::vector<std::string> value{"a", "b", "c"};
         var.setArrayCopy(value);

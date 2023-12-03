@@ -84,6 +84,12 @@ public:
     template <typename InputIt>
     [[nodiscard]] static Variant fromArray(InputIt first, InputIt last);
 
+    /// Create Variant from range of elements with custom data type (copy).
+    template <typename InputIt>
+    [[nodiscard]] static Variant fromArray(
+        InputIt first, InputIt last, const UA_DataType& dataType
+    );
+
     /// Check if variant is empty.
     bool isEmpty() const noexcept;
     /// Check if variant is a scalar.
@@ -218,6 +224,10 @@ public:
     template <typename InputIt>
     void setArrayCopy(InputIt first, InputIt last);
 
+    /// Copy range of elements as array to variant with custom data type.
+    template <typename InputIt>
+    void setArrayCopy(InputIt first, InputIt last, const UA_DataType& dataType);
+
 private:
     template <typename T>
     static constexpr void assertGetNoCopy() {
@@ -344,6 +354,13 @@ Variant Variant::fromArray(InputIt first, InputIt last) {
     return variant;
 }
 
+template <typename InputIt>
+Variant Variant::fromArray(InputIt first, InputIt last, const UA_DataType& dataType) {
+    Variant variant;
+    variant.setArrayCopy(first, last, dataType);
+    return variant;
+}
+
 template <typename T>
 T& Variant::getScalar() {
     return const_cast<T&>(std::as_const(*this).getScalar<T>());  // NOLINT, avoid code duplication
@@ -462,6 +479,11 @@ void Variant::setArrayCopy(InputIt first, InputIt last) {
     } else {
         setArrayCopyConvertImpl(first, last);
     }
+}
+
+template <typename InputIt>
+void Variant::setArrayCopy(InputIt first, InputIt last, const UA_DataType& dataType) {
+    setArrayCopyImpl(first, last, dataType);
 }
 
 template <typename T>
