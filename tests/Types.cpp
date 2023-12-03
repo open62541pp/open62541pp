@@ -411,19 +411,22 @@ TEST_CASE("Variant") {
         CHECK(varEmpty.getVariantType() == std::nullopt);
         CHECK(varEmpty.getArrayLength() == 0);
         CHECK(varEmpty.getArrayDimensions().empty());
+    }
 
-        SUBCASE("Type checks") {
-            CHECK_FALSE(varEmpty.isType(Type::Boolean));
-            CHECK_FALSE(varEmpty.isType(Type::Int16));
-            CHECK_FALSE(varEmpty.isType(Type::UInt16));
-            CHECK_FALSE(varEmpty.isType(Type::Int32));
-            CHECK_FALSE(varEmpty.isType(Type::UInt32));
-            CHECK_FALSE(varEmpty.isType(Type::Int64));
-            CHECK_FALSE(varEmpty.isType(Type::UInt64));
-            CHECK_FALSE(varEmpty.isType(Type::Float));
-            CHECK_FALSE(varEmpty.isType(Type::Double));
-            // ...
-        }
+    SUBCASE("Type checks") {
+        Variant var;
+        CHECK_FALSE(var.isType(UA_TYPES[UA_TYPES_STRING]));
+        CHECK_FALSE(var.isType(DataTypeId::String));
+        CHECK_FALSE(var.isType(Type::String));
+        CHECK(var.getDataType() == nullptr);
+        CHECK(var.getVariantType() == std::nullopt);
+
+        var->type = &UA_TYPES[UA_TYPES_STRING];
+        CHECK(var.isType(UA_TYPES[UA_TYPES_STRING]));
+        CHECK(var.isType(DataTypeId::String));
+        CHECK(var.isType(Type::String));
+        CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_STRING]);
+        CHECK(var.getVariantType().value() == Type::String);
     }
 
     SUBCASE("Create from scalar") {
