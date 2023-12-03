@@ -36,8 +36,7 @@ public:
     template <typename... Args>
     [[nodiscard]] static DataValue fromScalar(Args&&... args) {
         DataValue dv;
-        asWrapper<Variant>(dv->value) = Variant::fromScalar(std::forward<Args>(args)...);
-        dv->hasValue = true;
+        dv.setValue(Variant::fromScalar(std::forward<Args>(args)...));
         return dv;
     }
 
@@ -46,8 +45,7 @@ public:
     template <typename... Args>
     [[nodiscard]] static DataValue fromArray(Args&&... args) {
         DataValue dv;
-        asWrapper<Variant>(dv->value) = Variant::fromArray(std::forward<Args>(args)...);
-        dv->hasValue = true;
+        dv.setValue(Variant::fromArray(std::forward<Args>(args)...));
         return dv;
     }
 
