@@ -38,35 +38,75 @@ public:
 
     /// Create Variant from scalar value (no copy if assignable without conversion).
     template <typename T>
-    [[nodiscard]] static Variant fromScalar(T& value);
+    [[nodiscard]] static Variant fromScalar(T& value) {
+        Variant variant;
+        if constexpr (detail::isRegisteredType<T>) {
+            variant.setScalar(value);
+        } else {
+            variant.setScalarCopy(value);
+        }
+        return variant;
+    }
 
     /// Create Variant from scalar value with custom data type.
     template <typename T>
-    [[nodiscard]] static Variant fromScalar(T& value, const UA_DataType& dataType);
+    [[nodiscard]] static Variant fromScalar(T& value, const UA_DataType& dataType) {
+        Variant variant;
+        variant.setScalar(value, dataType);
+        return variant;
+    }
 
     /// Create Variant from scalar value (copy).
     template <typename T>
-    [[nodiscard]] static Variant fromScalar(const T& value);
+    [[nodiscard]] static Variant fromScalar(const T& value) {
+        Variant variant;
+        variant.setScalarCopy(value);
+        return variant;
+    }
 
     /// Create Variant from scalar value with custom data type (copy).
     template <typename T>
-    [[nodiscard]] static Variant fromScalar(const T& value, const UA_DataType& dataType);
+    [[nodiscard]] static Variant fromScalar(const T& value, const UA_DataType& dataType) {
+        Variant variant;
+        variant.setScalarCopy(value, dataType);
+        return variant;
+    }
 
     /// Create Variant from array (no copy if assignable without conversion).
     template <typename T>
-    [[nodiscard]] static Variant fromArray(Span<T> array);
+    [[nodiscard]] static Variant fromArray(Span<T> array) {
+        Variant variant;
+        if constexpr (detail::isRegisteredType<T>) {
+            variant.setArray(array);
+        } else {
+            variant.setArrayCopy(array);
+        }
+        return variant;
+    }
 
     /// Create Variant from array with custom data type.
     template <typename T>
-    [[nodiscard]] static Variant fromArray(Span<T> array, const UA_DataType& dataType);
+    [[nodiscard]] static Variant fromArray(Span<T> array, const UA_DataType& dataType) {
+        Variant variant;
+        variant.setArray(array, dataType);
+        return variant;
+    }
 
     /// Create Variant from array (copy).
     template <typename T>
-    [[nodiscard]] static Variant fromArray(Span<const T> array);
+    [[nodiscard]] static Variant fromArray(Span<const T> array) {
+        Variant variant;
+        variant.setArrayCopy(array);
+        return variant;
+    }
 
     /// Create Variant from array with custom data type (copy).
     template <typename T>
-    [[nodiscard]] static Variant fromArray(Span<const T> array, const UA_DataType& dataType);
+    [[nodiscard]] static Variant fromArray(Span<const T> array, const UA_DataType& dataType) {
+        Variant variant;
+        variant.setArrayCopy(array, dataType);
+        return variant;
+    }
 
     /// @overload
     template <typename ArrayLike, typename = EnableIfNoSpan<ArrayLike>>
@@ -82,13 +122,21 @@ public:
 
     /// Create Variant from range of elements (copy).
     template <typename InputIt>
-    [[nodiscard]] static Variant fromArray(InputIt first, InputIt last);
+    [[nodiscard]] static Variant fromArray(InputIt first, InputIt last) {
+        Variant variant;
+        variant.setArrayCopy(first, last);
+        return variant;
+    }
 
     /// Create Variant from range of elements with custom data type (copy).
     template <typename InputIt>
     [[nodiscard]] static Variant fromArray(
         InputIt first, InputIt last, const UA_DataType& dataType
-    );
+    ) {
+        Variant variant;
+        variant.setArrayCopy(first, last, dataType);
+        return variant;
+    }
 
     /// Check if variant is empty.
     bool isEmpty() const noexcept;
@@ -282,84 +330,6 @@ private:
 };
 
 /* --------------------------------------- Implementation --------------------------------------- */
-
-template <typename T>
-Variant Variant::fromScalar(T& value) {
-    Variant variant;
-    if constexpr (detail::isRegisteredType<T>) {
-        variant.setScalar(value);
-    } else {
-        variant.setScalarCopy(value);
-    }
-    return variant;
-}
-
-template <typename T>
-Variant Variant::fromScalar(T& value, const UA_DataType& dataType) {
-    Variant variant;
-    variant.setScalar(value, dataType);
-    return variant;
-}
-
-template <typename T>
-Variant Variant::fromScalar(const T& value) {
-    Variant variant;
-    variant.setScalarCopy(value);
-    return variant;
-}
-
-template <typename T>
-Variant Variant::fromScalar(const T& value, const UA_DataType& dataType) {
-    Variant variant;
-    variant.setScalarCopy(value, dataType);
-    return variant;
-}
-
-template <typename T>
-Variant Variant::fromArray(Span<T> array) {
-    Variant variant;
-    if constexpr (detail::isRegisteredType<T>) {
-        variant.setArray(array);
-    } else {
-        variant.setArrayCopy(array);
-    }
-    return variant;
-}
-
-template <typename T>
-Variant Variant::fromArray(Span<T> array, const UA_DataType& dataType) {
-    Variant variant;
-    variant.setArray(array, dataType);
-    return variant;
-}
-
-template <typename T>
-Variant Variant::fromArray(Span<const T> array) {
-    Variant variant;
-    variant.setArrayCopy(array);
-    return variant;
-}
-
-template <typename T>
-Variant Variant::fromArray(Span<const T> array, const UA_DataType& dataType) {
-    Variant variant;
-    variant.setArrayCopy(array, dataType);
-    return variant;
-}
-
-template <typename InputIt>
-Variant Variant::fromArray(InputIt first, InputIt last) {
-    Variant variant;
-    variant.setArrayCopy(first, last);
-    return variant;
-}
-
-template <typename InputIt>
-Variant Variant::fromArray(InputIt first, InputIt last, const UA_DataType& dataType) {
-    Variant variant;
-    variant.setArrayCopy(first, last, dataType);
-    return variant;
-}
 
 template <typename T>
 T& Variant::getScalar() {
