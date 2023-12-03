@@ -29,7 +29,7 @@ public:
         std::optional<uint16_t> sourcePicoseconds,
         std::optional<uint16_t> serverPicoseconds,
         std::optional<StatusCode> statusCode
-    );
+    ) noexcept;
 
     /// Create Variant from scalar value.
     /// @see Variant::fromScalar
@@ -76,17 +76,17 @@ public:
     /// Set value (copy).
     void setValue(const Variant& value);
     /// Set value (move).
-    void setValue(Variant&& value);
+    void setValue(Variant&& value) noexcept;
     /// Set source timestamp for the value.
-    void setSourceTimestamp(DateTime sourceTimestamp);
+    void setSourceTimestamp(DateTime sourceTimestamp) noexcept;
     /// Set server timestamp for the value.
-    void setServerTimestamp(DateTime serverTimestamp);
+    void setServerTimestamp(DateTime serverTimestamp) noexcept;
     /// Set picoseconds interval added to the source timestamp.
-    void setSourcePicoseconds(uint16_t sourcePicoseconds);
+    void setSourcePicoseconds(uint16_t sourcePicoseconds) noexcept;
     /// Set picoseconds interval added to the server timestamp.
-    void setServerPicoseconds(uint16_t serverPicoseconds);
+    void setServerPicoseconds(uint16_t serverPicoseconds) noexcept;
     /// Set status code.
-    void setStatusCode(StatusCode statusCode);
+    void setStatusCode(StatusCode statusCode) noexcept;
 };
 
 }  // namespace opcua
