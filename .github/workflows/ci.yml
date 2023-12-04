@@ -66,8 +66,9 @@ jobs:
           mkdir build
           cd build
           cmake -G Ninja \
-            -DUAPP_BUILD_TESTS=ON \
+            -DCMAKE_BUILD_TYPE=Debug \
             -DUA_ENABLE_ENCRYPTION=OPENSSL \
+            -DUAPP_BUILD_TESTS=ON \
             -DUAPP_ENABLE_COVERAGE=ON \
             ..
           cmake --build .
