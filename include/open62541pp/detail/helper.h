@@ -72,9 +72,9 @@ template <typename T>
 }
 
 template <typename T>
-inline void deallocate(T& native, const UA_DataType& type) noexcept {
+inline void deallocate(T* native, const UA_DataType& type) noexcept {
     assert(isValidTypeCombination<T>(type));
-    UA_delete(&native, &type);
+    UA_delete(native, &type);
 }
 
 /* ----------------------------------- Generic array handling ----------------------------------- */
