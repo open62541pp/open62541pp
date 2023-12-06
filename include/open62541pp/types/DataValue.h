@@ -29,17 +29,25 @@ public:
         std::optional<uint16_t> sourcePicoseconds,
         std::optional<uint16_t> serverPicoseconds,
         std::optional<StatusCode> statusCode
-    );
+    ) noexcept;
 
     /// Create Variant from scalar value.
     /// @see Variant::fromScalar
     template <typename... Args>
-    static DataValue fromScalar(Args&&... args);
+    [[nodiscard]] static DataValue fromScalar(Args&&... args) {
+        DataValue dv;
+        dv.setValue(Variant::fromScalar(std::forward<Args>(args)...));
+        return dv;
+    }
 
     /// Create Variant from array.
     /// @see Variant::fromArray
     template <typename... Args>
-    static DataValue fromArray(Args&&... args);
+    [[nodiscard]] static DataValue fromArray(Args&&... args) {
+        DataValue dv;
+        dv.setValue(Variant::fromArray(std::forward<Args>(args)...));
+        return dv;
+    }
 
     bool hasValue() const noexcept;
     bool hasSourceTimestamp() const noexcept;
@@ -66,35 +74,17 @@ public:
     /// Set value (copy).
     void setValue(const Variant& value);
     /// Set value (move).
-    void setValue(Variant&& value);
+    void setValue(Variant&& value) noexcept;
     /// Set source timestamp for the value.
-    void setSourceTimestamp(DateTime sourceTimestamp);
+    void setSourceTimestamp(DateTime sourceTimestamp) noexcept;
     /// Set server timestamp for the value.
-    void setServerTimestamp(DateTime serverTimestamp);
+    void setServerTimestamp(DateTime serverTimestamp) noexcept;
     /// Set picoseconds interval added to the source timestamp.
-    void setSourcePicoseconds(uint16_t sourcePicoseconds);
+    void setSourcePicoseconds(uint16_t sourcePicoseconds) noexcept;
     /// Set picoseconds interval added to the server timestamp.
-    void setServerPicoseconds(uint16_t serverPicoseconds);
+    void setServerPicoseconds(uint16_t serverPicoseconds) noexcept;
     /// Set status code.
-    void setStatusCode(StatusCode statusCode);
+    void setStatusCode(StatusCode statusCode) noexcept;
 };
-
-/* --------------------------------------- Implementation --------------------------------------- */
-
-template <typename... Args>
-DataValue DataValue::fromScalar(Args&&... args) {
-    DataValue dv{};
-    asWrapper<Variant>(dv->value) = Variant::fromScalar(std::forward<Args>(args)...);
-    dv->hasValue = true;
-    return dv;
-}
-
-template <typename... Args>
-DataValue DataValue::fromArray(Args&&... args) {
-    DataValue dv{};
-    asWrapper<Variant>(dv->value) = Variant::fromArray(std::forward<Args>(args)...);
-    dv->hasValue = true;
-    return dv;
-}
 
 }  // namespace opcua

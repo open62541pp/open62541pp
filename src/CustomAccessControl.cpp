@@ -16,6 +16,7 @@
 #include "open62541pp/Server.h"
 #include "open62541pp/Session.h"
 #include "open62541pp/TypeWrapper.h"  // asWrapper, asNative
+#include "open62541pp/detail/helper.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/DateTime.h"
@@ -331,18 +332,16 @@ static void copyUserTokenPoliciesToEndpoints(UA_ServerConfig* config) {
     // copy config->accessControl.userTokenPolicies -> config->endpoints[i].userIdentityTokens
     for (size_t i = 0; i < config->endpointsSize; ++i) {
         auto& endpoint = config->endpoints[i];  // NOLINT
-        UA_Array_delete(
+        detail::deallocateArray(
             endpoint.userIdentityTokens,
             endpoint.userIdentityTokensSize,
-            &UA_TYPES[UA_TYPES_USERTOKENPOLICY]
+            UA_TYPES[UA_TYPES_USERTOKENPOLICY]
         );
-        const auto status = UA_Array_copy(
+        endpoint.userIdentityTokens = detail::copyArray(
             config->accessControl.userTokenPolicies,
             config->accessControl.userTokenPoliciesSize,
-            (void**)&endpoint.userIdentityTokens,  // NOLINT
-            &UA_TYPES[UA_TYPES_USERTOKENPOLICY]
+            UA_TYPES[UA_TYPES_USERTOKENPOLICY]
         );
-        detail::throwOnBadStatus(status);
         endpoint.userIdentityTokensSize = config->accessControl.userTokenPoliciesSize;
     }
 }

@@ -18,7 +18,6 @@ template <>
 struct TypeConverter<std::byte> {
     using ValueType = std::byte;
     using NativeType = UA_Byte;
-    using ValidTypes = TypeIndexList<UA_TYPES_BYTE>;  // type index of UA_TYPES array
 
     // use `const NativeType& src` for non-primitive types
     static void fromNative(NativeType src, ValueType& dst) {

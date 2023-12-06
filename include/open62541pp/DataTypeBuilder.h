@@ -7,7 +7,7 @@
 #include <vector>
 
 #include "open62541pp/DataType.h"
-#include "open62541pp/TypeConverter.h"
+#include "open62541pp/TypeRegistry.h"  // getDataType
 #include "open62541pp/detail/helper.h"
 #include "open62541pp/detail/traits.h"
 #include "open62541pp/types/NodeId.h"
@@ -17,8 +17,9 @@ namespace opcua {
 namespace detail {
 
 template <auto memberPtr>
-constexpr const UA_DataType& guessMemberDataType() {
-    return guessDataType<detail::MemberTypeT<decltype(memberPtr)>>();
+inline const UA_DataType& getMemberDataType() {
+    using TMember = detail::MemberTypeT<decltype(memberPtr)>;
+    return getDataType<std::remove_pointer_t<TMember>>();
 }
 
 // https://gist.github.com/graphitemaster/494f21190bb2c63c5516
@@ -85,7 +86,7 @@ public:
      */
     template <auto T::*field>
     DataTypeBuilder<T, Tag>& addField(const char* fieldName) {
-        return addField<field>(fieldName, detail::guessMemberDataType<field>());
+        return addField<field>(fieldName, detail::getMemberDataType<field>());
     }
 
     /**
@@ -106,9 +107,7 @@ public:
      */
     template <auto T::*fieldSize, auto T::*fieldArray>
     DataTypeBuilder<T, Tag>& addField(const char* fieldName) {
-        return addField<fieldSize, fieldArray>(
-            fieldName, detail::guessMemberDataType<fieldArray>()
-        );
+        return addField<fieldSize, fieldArray>(fieldName, detail::getMemberDataType<fieldArray>());
     }
 
     /**
@@ -127,7 +126,7 @@ public:
      */
     template <auto T::*memberUnion, typename TField>
     DataTypeBuilder<T, Tag>& addUnionField(const char* fieldName) {
-        return addUnionField<memberUnion, TField>(fieldName, detail::guessDataType<TField>());
+        return addUnionField<memberUnion, TField>(fieldName, detail::getDataType<TField>());
     }
 
     /**
@@ -212,7 +211,7 @@ DataTypeBuilder<T, Tag>& DataTypeBuilder<T, Tag>::addField(
         std::is_same_v<Tag, detail::TagDataTypeStruct>,
         "Built type must be a struct or class to add members"
     );
-    assert(sizeof(detail::UnqualifiedT<TMember>) == fieldType.memSize);
+    assert(sizeof(std::remove_pointer_t<TMember>) == fieldType.memSize);
     if (std::is_pointer_v<TMember>) {
         dataType_.setTypeKind(UA_DATATYPEKIND_OPTSTRUCT);
     }
@@ -251,7 +250,7 @@ DataTypeBuilder<T, Tag>& DataTypeBuilder<T, Tag>::addField(
         detail::offsetOfMember(fieldArray) == detail::offsetOfMember(fieldSize) + sizeof(TSize) &&
         "No padding between members size and array allowed"
     );
-    assert(sizeof(detail::UnqualifiedT<TArray>) == fieldType.memSize);
+    assert(sizeof(std::remove_pointer_t<TArray>) == fieldType.memSize);
     dataType_.setPointerFree(false);
     fields_.push_back({
         sizeof(TSize) + sizeof(TArray),
@@ -281,7 +280,7 @@ DataTypeBuilder<T, Tag>& DataTypeBuilder<T, Tag>::addUnionField(
     static_assert(sizeof(TField) <= sizeof(TUnion), "TField exceeds size of union");
     const auto offset = detail::offsetOfMember(memberUnion);
     assert(offset > 0 && "A union type must consist of a switch field and a union");
-    assert(sizeof(detail::UnqualifiedT<TField>) == fieldType.memSize);
+    assert(sizeof(std::remove_pointer_t<TField>) == fieldType.memSize);
     if (std::is_pointer_v<TField> || !fieldType.pointerFree) {
         dataType_.setPointerFree(false);
     }
