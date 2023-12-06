@@ -183,7 +183,7 @@ public:
     /// @exception BadVariantAccess If the variant is not a scalar or not of type `T`.
     template <typename T>
     const T& getScalar() const {
-        assertGetNoCopy<T>();
+        assertIsNative<T>();
         checkIsScalar();
         checkIsDataType<T>();
         return *static_cast<const T*>(handle()->data);
@@ -193,6 +193,7 @@ public:
     /// @exception BadVariantAccess If the variant is not a scalar or not convertible to `T`.
     template <typename T>
     T getScalarCopy() const {
+        assertIsCopyableOrConvertible<T>();
         return getScalarCopyImpl<T>();
     }
 
@@ -210,7 +211,7 @@ public:
     /// @exception BadVariantAccess If the variant is not an array or not of type `T`.
     template <typename T>
     Span<T> getArray() {
-        assertGetNoCopy<T>();
+        assertIsNative<T>();
         checkIsArray();
         checkIsDataType<T>();
         return Span<T>(static_cast<T*>(handle()->data), handle()->arrayLength);
@@ -220,7 +221,7 @@ public:
     /// @exception BadVariantAccess If the variant is not an array or not of type `T`.
     template <typename T>
     Span<const T> getArray() const {
-        assertGetNoCopy<T>();
+        assertIsNative<T>();
         checkIsArray();
         checkIsDataType<T>();
         return Span<const T>(static_cast<const T*>(handle()->data), handle()->arrayLength);
@@ -230,13 +231,14 @@ public:
     /// @exception BadVariantAccess If the variant is not an array or not convertible to `T`.
     template <typename T>
     std::vector<T> getArrayCopy() const {
+        assertIsCopyableOrConvertible<T>();
         return getArrayCopyImpl<T>();
     }
 
     /// Assign scalar value to variant.
     template <typename T>
     void setScalar(T& value) noexcept {
-        assertSetNoCopy<T>();
+        assertIsNative<T>();
         setScalar(value, detail::getDataType<T>());
     }
 
@@ -249,6 +251,7 @@ public:
     /// Copy scalar value to variant.
     template <typename T>
     void setScalarCopy(const T& value) {
+        assertIsCopyableOrConvertible<T>();
         if constexpr (detail::isRegisteredType<T>) {
             setScalarCopyImpl(value, detail::getDataType<T>());
         } else {
@@ -265,8 +268,9 @@ public:
     /// Assign array to variant.
     template <typename T>
     void setArray(Span<T> array) noexcept {
-        assertSetNoCopy<T>();
-        setArray(array, detail::getDataType<T>());
+        using ValueType = typename decltype(array)::value_type;
+        assertIsNative<ValueType>();
+        setArray(array, detail::getDataType<ValueType>());
     }
 
     /// @overload
@@ -290,7 +294,8 @@ public:
     /// Copy array to variant.
     template <typename T>
     void setArrayCopy(Span<T> array) {
-        using ValueType = typename Span<T>::value_type;
+        using ValueType = typename decltype(array)::value_type;
+        assertIsCopyableOrConvertible<ValueType>();
         if constexpr (detail::isRegisteredType<ValueType>) {
             setArrayCopyImpl(array.begin(), array.end(), detail::getDataType<ValueType>());
         } else {
@@ -335,18 +340,21 @@ public:
 
 private:
     template <typename T>
-    static constexpr void assertGetNoCopy() {
+    static constexpr void assertIsNative() {
         static_assert(
             detail::isRegisteredType<T>,
-            "Template type must be a native or wrapper type to get scalar/array without copy"
+            "Template type must be a native/wrapper type to assign or get scalar/array without copy"
         );
     }
 
     template <typename T>
-    static constexpr void assertSetNoCopy() {
+    static constexpr void assertIsCopyableOrConvertible() {
         static_assert(
-            detail::isRegisteredType<T>,
-            "Template type must be a native or wrapper type to assign scalar/array without copy"
+            detail::isRegisteredType<T> || detail::isConvertibleType<T>,
+            "Template type must be either a native/wrapper type (copyable) or a convertible type. "
+            "If the type is a native type: Provide the data type (UA_DataType) manually "
+            "or register the type with a TypeRegistry template specialization. "
+            "If the type should be converted: Add a template specialization for TypeConverter."
         );
     }
 
