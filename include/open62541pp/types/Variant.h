@@ -185,7 +185,7 @@ public:
     const T& getScalar() const {
         assertGetNoCopy<T>();
         checkIsScalar();
-        checkReturnType<T>();
+        checkIsDataType<T>();
         return *static_cast<const T*>(handle()->data);
     }
 
@@ -212,7 +212,7 @@ public:
     Span<T> getArray() {
         assertGetNoCopy<T>();
         checkIsArray();
-        checkReturnType<T>();
+        checkIsDataType<T>();
         return Span<T>(static_cast<T*>(handle()->data), handle()->arrayLength);
     }
 
@@ -222,7 +222,7 @@ public:
     Span<const T> getArray() const {
         assertGetNoCopy<T>();
         checkIsArray();
-        checkReturnType<T>();
+        checkIsDataType<T>();
         return Span<const T>(static_cast<const T*>(handle()->data), handle()->arrayLength);
     }
 
@@ -362,7 +362,7 @@ private:
     void checkIsArray() const;
 
     template <typename T>
-    void checkReturnType() const {
+    void checkIsDataType() const {
         if (getDataType() != &detail::getDataType<T>()) {
             throw BadVariantAccess("Variant does not contain a value convertible to template type");
         }
