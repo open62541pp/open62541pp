@@ -48,7 +48,7 @@ public:
         return variant;
     }
 
-    /// Create Variant from scalar value with custom data type.
+    /// Create Variant from scalar value with custom data type (no copy).
     template <typename T>
     [[nodiscard]] static Variant fromScalar(T& value, const UA_DataType& dataType) {
         Variant variant;
@@ -84,7 +84,7 @@ public:
         return variant;
     }
 
-    /// Create Variant from array with custom data type.
+    /// Create Variant from array with custom data type (no copy).
     template <typename T>
     [[nodiscard]] static Variant fromArray(Span<T> array, const UA_DataType& dataType) {
         Variant variant;
