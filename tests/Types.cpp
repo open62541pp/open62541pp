@@ -424,6 +424,7 @@ TEST_CASE("Variant") {
         CHECK_FALSE(var.isType(UA_TYPES[UA_TYPES_STRING]));
         CHECK_FALSE(var.isType(DataTypeId::String));
         CHECK_FALSE(var.isType(Type::String));
+        CHECK_FALSE(var.isType<String>());
         CHECK(var.getDataType() == nullptr);
         CHECK(var.getVariantType() == std::nullopt);
 
@@ -431,6 +432,7 @@ TEST_CASE("Variant") {
         CHECK(var.isType(UA_TYPES[UA_TYPES_STRING]));
         CHECK(var.isType(DataTypeId::String));
         CHECK(var.isType(Type::String));
+        CHECK(var.isType<String>());
         CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_STRING]);
         CHECK(var.getVariantType().value() == Type::String);
     }

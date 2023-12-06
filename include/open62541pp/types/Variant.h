@@ -138,21 +138,27 @@ public:
         return variant;
     }
 
-    /// Check if variant is empty.
+    /// Check if the variant is empty.
     bool isEmpty() const noexcept;
-    /// Check if variant is a scalar.
+    /// Check if the variant is a scalar.
     bool isScalar() const noexcept;
-    /// Check if variant is an array.
+    /// Check if the variant is an array.
     bool isArray() const noexcept;
 
-    /// Check if variant type is equal to data type.
+    /// Check if the variant type is equal to the provided data type.
     bool isType(const UA_DataType* dataType) const noexcept;
-    /// Check if variant type is equal to data type.
+    /// Check if the variant type is equal to the provided data type.
     bool isType(const UA_DataType& dataType) const noexcept;
-    /// Check if variant type is equal to type enum.
+    /// Check if the variant type is equal to the provided type enum.
     bool isType(Type type) const noexcept;
-    /// Check if variant type is equal to data type node id.
+    /// Check if the variant type is equal to the provided data type node id.
     bool isType(const NodeId& id) const noexcept;
+
+    /// Check if the variant type is equal to the provided template type.
+    template <typename T>
+    bool isType() const noexcept {
+        return isType(detail::getDataType<T>());
+    }
 
     /// Get data type.
     const UA_DataType* getDataType() const noexcept;
