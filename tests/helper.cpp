@@ -1,4 +1,6 @@
 #include <cstring>
+#include <limits>
+#include <stdexcept>
 
 #include <doctest/doctest.h>
 
@@ -14,6 +16,38 @@ TEST_CASE("isPointerFree") {
     CHECK(detail::isPointerFree<UA_Guid>);
     CHECK_FALSE(detail::isPointerFree<UA_String>);
     CHECK_FALSE(detail::isPointerFree<UA_NodeId>);
+}
+
+TEST_CASE("Allocate / deallocate") {
+    auto* ptr = detail::allocate<UA_String>(UA_TYPES[UA_TYPES_STRING]);
+    CHECK(ptr != nullptr);
+    detail::deallocate(ptr, UA_TYPES[UA_TYPES_STRING]);
+}
+
+TEST_CASE("Allocate as unique_ptr") {
+    auto ptr = detail::allocateUniquePtr<UA_String>(UA_TYPES[UA_TYPES_STRING]);
+    CHECK(ptr.get() != nullptr);
+}
+
+TEST_CASE("Allocate / deallocate array") {
+    auto* ptr = detail::allocateArray<UA_String>(3, UA_TYPES[UA_TYPES_STRING]);
+    CHECK(ptr != nullptr);
+    detail::deallocateArray(ptr, 3, UA_TYPES[UA_TYPES_STRING]);
+
+    SUBCASE("Exceed memory") {
+        CHECK_THROWS_AS(
+            []() {
+                const auto huge = std::numeric_limits<size_t>::max();
+                return detail::allocateArray<UA_String>(huge, UA_TYPES[UA_TYPES_STRING]);
+            }(),
+            std::bad_alloc
+        );
+    }
+}
+
+TEST_CASE("Allocate array as unique_ptr") {
+    auto ptr = detail::allocateArrayUniquePtr<UA_String>(3, UA_TYPES[UA_TYPES_STRING]);
+    CHECK(ptr.get() != nullptr);
 }
 
 TEST_CASE("getDataType") {
