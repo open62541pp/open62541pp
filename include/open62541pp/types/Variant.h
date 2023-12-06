@@ -450,29 +450,29 @@ void Variant::setArrayImpl(
 
 template <typename T>
 void Variant::setScalarCopyImpl(const T& value, const UA_DataType& dataType) {
-    auto* native = detail::allocate<T>(dataType);
+    auto native = detail::allocateUniquePtr<T>(dataType);
     *native = detail::copy(value, dataType);
-    setScalarImpl(native, dataType, UA_VARIANT_DATA);  // move ownership
+    setScalarImpl(native.release(), dataType, UA_VARIANT_DATA);  // move ownership
 }
 
 template <typename T>
 void Variant::setScalarCopyConvertImpl(const T& value) {
     using Native = typename TypeConverter<T>::NativeType;
     const auto& dataType = detail::getDataType<Native>();
-    auto* native = detail::allocate<Native>(dataType);
+    auto native = detail::allocateUniquePtr<Native>(dataType);
     TypeConverter<T>::toNative(value, *native);
-    setScalarImpl(native, dataType, UA_VARIANT_DATA);  // move ownership
+    setScalarImpl(native.release(), dataType, UA_VARIANT_DATA);  // move ownership
 }
 
 template <typename InputIt>
 void Variant::setArrayCopyImpl(InputIt first, InputIt last, const UA_DataType& dataType) {
     using ValueType = typename std::iterator_traits<InputIt>::value_type;
     const size_t size = std::distance(first, last);
-    auto* native = detail::allocateArray<ValueType>(size, dataType);
-    std::transform(first, last, native, [&](auto&& value) {
+    auto native = detail::allocateArrayUniquePtr<ValueType>(size, dataType);
+    std::transform(first, last, native.get(), [&](auto&& value) {
         return detail::copy(value, dataType);
     });
-    setArrayImpl(native, size, dataType, UA_VARIANT_DATA);  // move ownership
+    setArrayImpl(native.release(), size, dataType, UA_VARIANT_DATA);  // move ownership
 }
 
 template <typename InputIt>
@@ -481,11 +481,11 @@ void Variant::setArrayCopyConvertImpl(InputIt first, InputIt last) {
     using Native = typename TypeConverter<ValueType>::NativeType;
     const auto& dataType = detail::getDataType<Native>();
     const size_t size = std::distance(first, last);
-    auto* native = detail::allocateArray<Native>(size, dataType);
+    auto native = detail::allocateArrayUniquePtr<Native>(size, dataType);
     for (size_t i = 0; i < size; ++i) {
-        TypeConverter<ValueType>::toNative(*first++, native[i]);  // NOLINT
+        TypeConverter<ValueType>::toNative(*first++, native.get()[i]);  // NOLINT
     }
-    setArrayImpl(native, size, dataType, UA_VARIANT_DATA);  // move ownership
+    setArrayImpl(native.release(), size, dataType, UA_VARIANT_DATA);  // move ownership
 }
 
 }  // namespace opcua

@@ -2,6 +2,7 @@
 
 #include <algorithm>  // copy_n
 #include <cassert>
+#include <memory>
 #include <string>
 #include <string_view>
 
@@ -42,6 +43,20 @@ constexpr bool isValidTypeCombination(const UA_DataType& type) {
 }
 
 template <typename T>
+constexpr void clear(T& native, const UA_DataType& type) noexcept {
+    assert(isValidTypeCombination<T>(type));
+    if constexpr (!isPointerFree<T>) {
+        UA_clear(&native, &type);
+    }
+}
+
+template <typename T>
+inline void deallocate(T* native, const UA_DataType& type) noexcept {
+    assert(isValidTypeCombination<T>(type));
+    UA_delete(native, &type);
+}
+
+template <typename T>
 [[nodiscard]] inline T* allocate(const UA_DataType& type) {
     assert(isValidTypeCombination<T>(type));
     auto* result = static_cast<T*>(UA_new(&type));
@@ -52,11 +67,9 @@ template <typename T>
 }
 
 template <typename T>
-constexpr void clear(T& native, const UA_DataType& type) noexcept {
-    assert(isValidTypeCombination<T>(type));
-    if constexpr (!isPointerFree<T>) {
-        UA_clear(&native, &type);
-    }
+[[nodiscard]] inline auto allocateUniquePtr(const UA_DataType& type) {
+    auto deleter = [&type](T* native) { deallocate(native, type); };
+    return std::unique_ptr<T, decltype(deleter)>(allocate<T>(type), deleter);
 }
 
 template <typename T>
@@ -71,13 +84,13 @@ template <typename T>
     }
 }
 
-template <typename T>
-inline void deallocate(T* native, const UA_DataType& type) noexcept {
-    assert(isValidTypeCombination<T>(type));
-    UA_delete(native, &type);
-}
-
 /* ----------------------------------- Generic array handling ----------------------------------- */
+
+template <typename T>
+inline void deallocateArray(T* array, size_t size, const UA_DataType& type) noexcept {
+    assert(isValidTypeCombination<T>(type));
+    UA_Array_delete(array, size, &type);
+}
 
 template <typename T>
 [[nodiscard]] inline T* allocateArray(size_t size, const UA_DataType& type) {
@@ -87,6 +100,12 @@ template <typename T>
         throw std::bad_alloc();
     }
     return result;
+}
+
+template <typename T>
+[[nodiscard]] inline auto allocateArrayUniquePtr(size_t size, const UA_DataType& type) {
+    auto deleter = [&type, size](T* native) { deallocateArray(native, size, type); };
+    return std::unique_ptr<T, decltype(deleter)>(allocateArray<T>(size, type), deleter);
 }
 
 template <typename T>
@@ -101,12 +120,6 @@ template <typename T>
         std::copy_n(src, size, dst);
         return dst;
     }
-}
-
-template <typename T>
-inline void deallocateArray(T* array, size_t size, const UA_DataType& type) noexcept {
-    assert(isValidTypeCombination<T>(type));
-    UA_Array_delete(array, size, &type);
 }
 
 /* ------------------------------------------ Data type ----------------------------------------- */
