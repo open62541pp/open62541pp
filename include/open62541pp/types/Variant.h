@@ -214,23 +214,39 @@ public:
 
     /// Assign scalar value to variant.
     template <typename T>
-    void setScalar(T& value) noexcept;
+    void setScalar(T& value) noexcept {
+        assertSetNoCopy<T>();
+        setScalar(value, detail::getDataType<T>());
+    }
 
     /// Assign scalar value to variant with custom data type.
     template <typename T>
-    void setScalar(T& value, const UA_DataType& dataType) noexcept;
+    void setScalar(T& value, const UA_DataType& dataType) noexcept {
+        setScalarImpl(&value, dataType, UA_VARIANT_DATA_NODELETE);
+    }
 
     /// Copy scalar value to variant.
     template <typename T>
-    void setScalarCopy(const T& value);
+    void setScalarCopy(const T& value) {
+        if constexpr (detail::isRegisteredType<T>) {
+            setScalarCopyImpl(value, detail::getDataType<T>());
+        } else {
+            setScalarCopyConvertImpl(value);
+        }
+    }
 
     /// Copy scalar value to variant with custom data type.
     template <typename T>
-    void setScalarCopy(const T& value, const UA_DataType& dataType);
+    void setScalarCopy(const T& value, const UA_DataType& dataType) {
+        setScalarCopyImpl(value, dataType);
+    }
 
     /// Assign array to variant.
     template <typename T>
-    void setArray(Span<T> array) noexcept;
+    void setArray(Span<T> array) noexcept {
+        assertSetNoCopy<T>();
+        setArray(array, detail::getDataType<T>());
+    }
 
     /// @overload
     template <typename ArrayLike, typename = EnableIfNoSpan<ArrayLike>>
@@ -240,7 +256,9 @@ public:
 
     /// Assign array to variant with custom data type.
     template <typename T>
-    void setArray(Span<T> array, const UA_DataType& dataType) noexcept;
+    void setArray(Span<T> array, const UA_DataType& dataType) noexcept {
+        setArrayImpl(array.data(), array.size(), dataType, UA_VARIANT_DATA_NODELETE);
+    }
 
     /// @overload
     template <typename ArrayLike, typename = EnableIfNoSpan<ArrayLike>>
@@ -250,7 +268,14 @@ public:
 
     /// Copy array to variant.
     template <typename T>
-    void setArrayCopy(Span<T> array);
+    void setArrayCopy(Span<T> array) {
+        using ValueType = typename Span<T>::value_type;
+        if constexpr (detail::isRegisteredType<ValueType>) {
+            setArrayCopyImpl(array.begin(), array.end(), detail::getDataType<ValueType>());
+        } else {
+            setArrayCopyConvertImpl(array.begin(), array.end());
+        }
+    }
 
     /// @overload
     template <typename ArrayLike, typename = EnableIfNoSpan<ArrayLike>>
@@ -260,7 +285,9 @@ public:
 
     /// Copy array to variant with custom data type.
     template <typename T>
-    void setArrayCopy(Span<T> array, const UA_DataType& dataType);
+    void setArrayCopy(Span<T> array, const UA_DataType& dataType) {
+        setArrayCopyImpl(array.begin(), array.end(), dataType);
+    }
 
     /// @overload
     template <typename ArrayLike, typename = EnableIfNoSpan<ArrayLike>>
@@ -270,11 +297,20 @@ public:
 
     /// Copy range of elements as array to variant.
     template <typename InputIt>
-    void setArrayCopy(InputIt first, InputIt last);
+    void setArrayCopy(InputIt first, InputIt last) {
+        using ValueType = typename std::iterator_traits<InputIt>::value_type;
+        if constexpr (detail::isRegisteredType<ValueType>) {
+            setArrayCopyImpl(first, last, detail::getDataType<ValueType>());
+        } else {
+            setArrayCopyConvertImpl(first, last);
+        }
+    }
 
     /// Copy range of elements as array to variant with custom data type.
     template <typename InputIt>
-    void setArrayCopy(InputIt first, InputIt last, const UA_DataType& dataType);
+    void setArrayCopy(InputIt first, InputIt last, const UA_DataType& dataType) {
+        setArrayCopyImpl(first, last, dataType);
+    }
 
 private:
     template <typename T>
@@ -388,72 +424,6 @@ std::vector<T> Variant::getArrayCopy() const {
         }
     }
     return result;
-}
-
-template <typename T>
-void Variant::setScalar(T& value) noexcept {
-    assertSetNoCopy<T>();
-    setScalar(value, detail::getDataType<T>());
-}
-
-template <typename T>
-void Variant::setScalar(T& value, const UA_DataType& dataType) noexcept {
-    setScalarImpl(&value, dataType, UA_VARIANT_DATA_NODELETE);
-}
-
-template <typename T>
-void Variant::setScalarCopy(const T& value) {
-    if constexpr (detail::isRegisteredType<T>) {
-        setScalarCopyImpl(value, detail::getDataType<T>());
-    } else {
-        setScalarCopyConvertImpl(value);
-    }
-}
-
-template <typename T>
-void Variant::setScalarCopy(const T& value, const UA_DataType& dataType) {
-    setScalarCopyImpl(value, dataType);
-}
-
-template <typename T>
-void Variant::setArray(Span<T> array) noexcept {
-    assertSetNoCopy<T>();
-    setArray(array, detail::getDataType<T>());
-}
-
-template <typename T>
-void Variant::setArray(Span<T> array, const UA_DataType& dataType) noexcept {
-    setArrayImpl(array.data(), array.size(), dataType, UA_VARIANT_DATA_NODELETE);
-}
-
-template <typename T>
-void Variant::setArrayCopy(Span<T> array) {
-    using ValueType = typename Span<T>::value_type;
-    if constexpr (detail::isRegisteredType<ValueType>) {
-        setArrayCopyImpl(array.begin(), array.end(), detail::getDataType<ValueType>());
-    } else {
-        setArrayCopyConvertImpl(array.begin(), array.end());
-    }
-}
-
-template <typename T>
-void Variant::setArrayCopy(Span<T> array, const UA_DataType& dataType) {
-    setArrayCopyImpl(array.begin(), array.end(), dataType);
-}
-
-template <typename InputIt>
-void Variant::setArrayCopy(InputIt first, InputIt last) {
-    using ValueType = typename std::iterator_traits<InputIt>::value_type;
-    if constexpr (detail::isRegisteredType<ValueType>) {
-        setArrayCopyImpl(first, last, detail::getDataType<ValueType>());
-    } else {
-        setArrayCopyConvertImpl(first, last);
-    }
-}
-
-template <typename InputIt>
-void Variant::setArrayCopy(InputIt first, InputIt last, const UA_DataType& dataType) {
-    setArrayCopyImpl(first, last, dataType);
 }
 
 template <typename T>
