@@ -175,17 +175,26 @@ public:
     /// Get reference to scalar value with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not a scalar or not of type `T`.
     template <typename T>
-    T& getScalar();
+    T& getScalar() {
+        return const_cast<T&>(std::as_const(*this).getScalar<T>());  // NOLINT
+    }
 
     /// Get const reference to scalar value with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not a scalar or not of type `T`.
     template <typename T>
-    const T& getScalar() const;
+    const T& getScalar() const {
+        assertGetNoCopy<T>();
+        checkIsScalar();
+        checkReturnType<T>();
+        return *static_cast<const T*>(handle()->data);
+    }
 
     /// Get copy of scalar value with given template type.
     /// @exception BadVariantAccess If the variant is not a scalar or not convertible to `T`.
     template <typename T>
-    T getScalarCopy() const;
+    T getScalarCopy() const {
+        return getScalarCopyImpl<T>();
+    }
 
     /// Get array length or 0 if variant is not an array.
     size_t getArrayLength() const noexcept;
@@ -200,17 +209,29 @@ public:
     /// Get array with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not an array or not of type `T`.
     template <typename T>
-    Span<T> getArray();
+    Span<T> getArray() {
+        assertGetNoCopy<T>();
+        checkIsArray();
+        checkReturnType<T>();
+        return Span<T>(static_cast<T*>(handle()->data), handle()->arrayLength);
+    }
 
     /// Get array with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not an array or not of type `T`.
     template <typename T>
-    Span<const T> getArray() const;
+    Span<const T> getArray() const {
+        assertGetNoCopy<T>();
+        checkIsArray();
+        checkReturnType<T>();
+        return Span<const T>(static_cast<const T*>(handle()->data), handle()->arrayLength);
+    }
 
     /// Get copy of array with given template type and return it as a std::vector.
     /// @exception BadVariantAccess If the variant is not an array or not convertible to `T`.
     template <typename T>
-    std::vector<T> getArrayCopy() const;
+    std::vector<T> getArrayCopy() const {
+        return getArrayCopyImpl<T>();
+    }
 
     /// Assign scalar value to variant.
     template <typename T>
@@ -348,6 +369,11 @@ private:
     }
 
     template <typename T>
+    inline T getScalarCopyImpl() const;
+    template <typename T>
+    inline std::vector<T> getArrayCopyImpl() const;
+
+    template <typename T>
     inline void setScalarImpl(
         T* data, const UA_DataType& dataType, UA_VariantStorageType storageType
     ) noexcept;
@@ -368,20 +394,7 @@ private:
 /* --------------------------------------- Implementation --------------------------------------- */
 
 template <typename T>
-T& Variant::getScalar() {
-    return const_cast<T&>(std::as_const(*this).getScalar<T>());  // NOLINT, avoid code duplication
-}
-
-template <typename T>
-const T& Variant::getScalar() const {
-    assertGetNoCopy<T>();
-    checkIsScalar();
-    checkReturnType<T>();
-    return *static_cast<const T*>(handle()->data);
-}
-
-template <typename T>
-T Variant::getScalarCopy() const {
+T Variant::getScalarCopyImpl() const {
     if constexpr (detail::isRegisteredType<T>) {
         return detail::copy(getScalar<T>(), detail::getDataType<T>());
     } else {
@@ -393,23 +406,7 @@ T Variant::getScalarCopy() const {
 }
 
 template <typename T>
-Span<T> Variant::getArray() {
-    assertGetNoCopy<T>();
-    checkIsArray();
-    checkReturnType<T>();
-    return Span<T>(static_cast<T*>(handle()->data), handle()->arrayLength);
-}
-
-template <typename T>
-Span<const T> Variant::getArray() const {
-    assertGetNoCopy<T>();
-    checkIsArray();
-    checkReturnType<T>();
-    return Span<const T>(static_cast<const T*>(handle()->data), handle()->arrayLength);
-}
-
-template <typename T>
-std::vector<T> Variant::getArrayCopy() const {
+std::vector<T> Variant::getArrayCopyImpl() const {
     std::vector<T> result(handle()->arrayLength);
     if constexpr (detail::isRegisteredType<T>) {
         auto native = getArray<T>();
