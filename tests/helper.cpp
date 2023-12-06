@@ -1,5 +1,4 @@
 #include <cstring>
-#include <limits>
 #include <stdexcept>
 
 #include <doctest/doctest.h>
@@ -37,7 +36,7 @@ TEST_CASE("Allocate / deallocate array") {
     SUBCASE("Exceed memory") {
         CHECK_THROWS_AS(
             []() {
-                const auto huge = std::numeric_limits<size_t>::max();
+                const auto huge = size_t(-1);
                 return detail::allocateArray<UA_String>(huge, UA_TYPES[UA_TYPES_STRING]);
             }(),
             std::bad_alloc
