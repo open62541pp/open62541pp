@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `TypeRegistry<T>` to derive the corresponding `UA_DataType` object from template types.
   Custom data types can be registered with template specializations. (#136)
 - Check `Variant` data type by template type, e.g. `var.isType<int>()` (#139)
+- Update open62541 to v1.3.9
 
 ### Changed
 
