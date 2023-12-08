@@ -4,18 +4,22 @@
 [doc-node]: https://open62541pp.github.io/open62541pp/classopcua_1_1Node.html
 [doc-typewrapper]: https://open62541pp.github.io/open62541pp/group__TypeWrapper.html
 [doc-services]: https://open62541pp.github.io/open62541pp/group__Services.html
+[ci]: https://github.com/open62541pp/open62541pp/actions/workflows/ci.yml
+[ci-compatibility]: https://github.com/open62541pp/open62541pp/actions/workflows/open62541-compatibility.yml
 
 <div align="center">
   <h1>open62541++</h1>
 
   [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-blue.svg)](https://github.com/open62541pp/open62541pp/blob/master/LICENSE)
-  [![CI](https://github.com/open62541pp/open62541pp/actions/workflows/ci.yml/badge.svg)](https://github.com/open62541pp/open62541pp/actions/workflows/ci.yml)
-  [![Compatibility](https://github.com/open62541pp/open62541pp/actions/workflows/open62541-compatibility.yml/badge.svg)](https://github.com/open62541pp/open62541pp/actions/workflows/open62541-compatibility.yml)
+  [![CI](https://github.com/open62541pp/open62541pp/actions/workflows/ci.yml/badge.svg)][ci]
+  [![Compatibility](https://github.com/open62541pp/open62541pp/actions/workflows/open62541-compatibility.yml/badge.svg)][ci-compatibility]
   [![Package](https://github.com/open62541pp/open62541pp/actions/workflows/package.yml/badge.svg)](https://github.com/open62541pp/open62541pp/actions/workflows/package.yml)
   [![Documentation](https://github.com/open62541pp/open62541pp/actions/workflows/doc.yml/badge.svg)](https://github.com/open62541pp/open62541pp/actions/workflows/doc.yml)
   [![Coverage](https://codecov.io/gh/open62541pp/open62541pp/branch/master/graph/badge.svg?token=P87N1WRXC4)](https://codecov.io/gh/open62541pp/open62541pp)
 
   <h3>C++ wrapper of the amazing <a href="https://open62541.org">open62541</a> OPC UA library.</h3>
+
+  <em>Open source and free implementation licensed under the Mozilla Public License v2.0.</em>
 
   <p>
     <b>
@@ -41,6 +45,9 @@
 - [Easy installation and integration with CMake](#-getting-started)
 - Use modern C++ (C++ 17) and best practices
 - Less hurdle to get started with OPC UA
+
+The latest stable open62541 release is integrated as a submodule. Depending on the value of the CMake flag `UAPP_INTERNAL_OPEN62541`, the submodule or an external open62541 installation is used.
+All open62541 releases since v1.0 are supported and tested in a [CI pipeline][ci-compatibility] with debug/release builds and as static/dynamic library.
 
 The project is currently in `beta` stage but already used in production.
 Version [`v1.0.0` is planned for the beginning of 2024](https://github.com/open62541pp/open62541pp/milestone/1). No (major) breaking changes are expected.
