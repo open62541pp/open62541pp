@@ -1080,6 +1080,13 @@ TEST_CASE("WriteResponse") {
     CHECK(response.getDiagnosticInfos().empty());
 }
 
+TEST_CASE("EnumValueType") {
+    const EnumValueType enumValueType(1, {"", "Name"}, {"", "Description"});
+    CHECK(enumValueType.getValue() == 1);
+    CHECK(enumValueType.getDisplayName() == LocalizedText("", "Name"));
+    CHECK(enumValueType.getDescription() == LocalizedText("", "Description"));
+}
+
 #ifdef UA_ENABLE_METHODCALLS
 
 TEST_CASE("Argument") {

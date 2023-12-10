@@ -303,6 +303,12 @@ WriteRequest::WriteRequest(RequestHeader requestHeader, Span<const WriteValue> n
     assignArray(nodesToWrite, handle()->nodesToWrite, handle()->nodesToWriteSize);
 }
 
+EnumValueType::EnumValueType(int64_t value, LocalizedText displayName, LocalizedText description) {
+    assign(value, handle()->value);
+    assign(std::move(displayName), handle()->displayName);
+    assign(std::move(description), handle()->description);
+}
+
 #ifdef UA_ENABLE_METHODCALLS
 
 Argument::Argument(
