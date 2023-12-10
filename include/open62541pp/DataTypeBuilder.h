@@ -42,7 +42,7 @@ struct TagDataTypeUnion;
  * The attributes `memSize`, `padding`, `pointerFree`, `isArray` and `isOptional` are automatically
  * deduced from the types itself.
  */
-template <typename T, typename Tag = detail::TagDataTypeAny>
+template <typename T, typename Tag = detail::TagDataTypeAny, typename U = struct DeferT>
 class DataTypeBuilder {
 public:
     /**
@@ -77,15 +77,15 @@ public:
      * @param fieldName Human-readable field name
      * @param fieldType Member data type
      */
-    template <auto T::*field>
-    DataTypeBuilder<T, Tag>& addField(const char* fieldName, const UA_DataType& fieldType);
+    template <auto U::*field>
+    auto& addField(const char* fieldName, const UA_DataType& fieldType);
 
     /**
      * Add a structure field (derive DataType from `field`).
      * @overload
      */
-    template <auto T::*field>
-    DataTypeBuilder<T, Tag>& addField(const char* fieldName) {
+    template <auto U::*field>
+    auto& addField(const char* fieldName) {
         return addField<field>(fieldName, detail::getMemberDataType<field>());
     }
 
@@ -98,15 +98,15 @@ public:
      * @param fieldName Human-readable field name
      * @param fieldType Member data type
      */
-    template <auto T::*fieldSize, auto T::*fieldArray>
-    DataTypeBuilder<T, Tag>& addField(const char* fieldName, const UA_DataType& fieldType);
+    template <auto U::*fieldSize, auto U::*fieldArray>
+    auto& addField(const char* fieldName, const UA_DataType& fieldType);
 
     /**
      * Add a structure array field (derive DataType from `fieldArray`).
      * @overload
      */
-    template <auto T::*fieldSize, auto T::*fieldArray>
-    DataTypeBuilder<T, Tag>& addField(const char* fieldName) {
+    template <auto U::*fieldSize, auto U::*fieldArray>
+    auto& addField(const char* fieldName) {
         return addField<fieldSize, fieldArray>(fieldName, detail::getMemberDataType<fieldArray>());
     }
 
@@ -117,15 +117,15 @@ public:
      * @param fieldName Human-readable field name
      * @param fieldType Data type of the union field
      */
-    template <auto T::*memberUnion, typename TField>
-    DataTypeBuilder<T, Tag>& addUnionField(const char* fieldName, const UA_DataType& fieldType);
+    template <auto U::*memberUnion, typename TField>
+    auto& addUnionField(const char* fieldName, const UA_DataType& fieldType);
 
     /**
      * Add a union field (derive DataType from `TField`).
      * @overload
      */
-    template <auto T::*memberUnion, typename TField>
-    DataTypeBuilder<T, Tag>& addUnionField(const char* fieldName) {
+    template <auto U::*memberUnion, typename TField>
+    auto& addUnionField(const char* fieldName) {
         return addUnionField<memberUnion, TField>(fieldName, detail::getDataType<TField>());
     }
 
@@ -135,7 +135,7 @@ public:
     [[nodiscard]] DataType build();
 
 private:
-    template <typename, typename>
+    template <typename, typename, typename>
     friend class DataTypeBuilder;
 
     explicit DataTypeBuilder(DataType dataType)
@@ -153,8 +153,8 @@ private:
 
 /* --------------------------------------- Implementation --------------------------------------- */
 
-template <typename T, typename Tag>
-auto DataTypeBuilder<T, Tag>::createEnum(
+template <typename T, typename Tag, typename U>
+auto DataTypeBuilder<T, Tag, U>::createEnum(
     const char* typeName, NodeId typeId, NodeId binaryEncodingId
 ) {
     static_assert(std::is_enum_v<T>, "T must be an enum");
@@ -169,8 +169,8 @@ auto DataTypeBuilder<T, Tag>::createEnum(
     return DataTypeBuilder<T, detail::TagDataTypeEnum>(dt);
 }
 
-template <typename T, typename Tag>
-auto DataTypeBuilder<T, Tag>::createStructure(
+template <typename T, typename Tag, typename U>
+auto DataTypeBuilder<T, Tag, U>::createStructure(
     const char* typeName, NodeId typeId, NodeId binaryEncodingId
 ) {
     static_assert(std::is_class_v<T>, "T must be a struct or class");
@@ -182,11 +182,11 @@ auto DataTypeBuilder<T, Tag>::createStructure(
     dt.setTypeKind(UA_DATATYPEKIND_STRUCTURE);
     dt.setPointerFree(true);
     dt.setOverlayable(false);
-    return DataTypeBuilder<T, detail::TagDataTypeStruct>(dt);
+    return DataTypeBuilder<T, detail::TagDataTypeStruct, T>(dt);
 }
 
-template <typename T, typename Tag>
-auto DataTypeBuilder<T, Tag>::createUnion(
+template <typename T, typename Tag, typename U>
+auto DataTypeBuilder<T, Tag, U>::createUnion(
     const char* typeName, NodeId typeId, NodeId binaryEncodingId
 ) {
     static_assert(std::is_class_v<T>, "T must be a struct or class");
@@ -198,14 +198,12 @@ auto DataTypeBuilder<T, Tag>::createUnion(
     dt.setTypeKind(UA_DATATYPEKIND_UNION);
     dt.setPointerFree(true);
     dt.setOverlayable(false);
-    return DataTypeBuilder<T, detail::TagDataTypeUnion>(dt);
+    return DataTypeBuilder<T, detail::TagDataTypeUnion, T>(dt);
 }
 
-template <typename T, typename Tag>
-template <auto T::*field>
-DataTypeBuilder<T, Tag>& DataTypeBuilder<T, Tag>::addField(
-    const char* fieldName, const UA_DataType& fieldType
-) {
+template <typename T, typename Tag, typename U>
+template <auto U::*field>
+auto& DataTypeBuilder<T, Tag, U>::addField(const char* fieldName, const UA_DataType& fieldType) {
     using TMember = detail::MemberTypeT<decltype(field)>;
     static_assert(
         std::is_same_v<Tag, detail::TagDataTypeStruct>,
@@ -232,11 +230,9 @@ DataTypeBuilder<T, Tag>& DataTypeBuilder<T, Tag>::addField(
     return *this;
 }
 
-template <typename T, typename Tag>
-template <auto T::*fieldSize, auto T::*fieldArray>
-DataTypeBuilder<T, Tag>& DataTypeBuilder<T, Tag>::addField(
-    const char* fieldName, const UA_DataType& fieldType
-) {
+template <typename T, typename Tag, typename U>
+template <auto U::*fieldSize, auto U::*fieldArray>
+auto& DataTypeBuilder<T, Tag, U>::addField(const char* fieldName, const UA_DataType& fieldType) {
     using TSize = detail::MemberTypeT<decltype(fieldSize)>;
     using TArray = detail::MemberTypeT<decltype(fieldArray)>;
     static_assert(
@@ -266,9 +262,9 @@ DataTypeBuilder<T, Tag>& DataTypeBuilder<T, Tag>::addField(
     return *this;
 }
 
-template <typename T, typename Tag>
-template <auto T::*memberUnion, typename TField>
-DataTypeBuilder<T, Tag>& DataTypeBuilder<T, Tag>::addUnionField(
+template <typename T, typename Tag, typename U>
+template <auto U::*memberUnion, typename TField>
+auto& DataTypeBuilder<T, Tag, U>::addUnionField(
     const char* fieldName, const UA_DataType& fieldType
 ) {
     using TUnion = detail::MemberTypeT<decltype(memberUnion)>;
@@ -298,8 +294,8 @@ DataTypeBuilder<T, Tag>& DataTypeBuilder<T, Tag>::addUnionField(
     return *this;
 }
 
-template <typename T, typename Tag>
-[[nodiscard]] DataType DataTypeBuilder<T, Tag>::build() {
+template <typename T, typename Tag, typename U>
+[[nodiscard]] DataType DataTypeBuilder<T, Tag, U>::build() {
     static_assert(!std::is_same_v<Tag, detail::TagDataTypeAny>);
     // sort members by offset
     std::sort(fields_.begin(), fields_.end(), [](const auto& lhs, const auto& rhs) {
