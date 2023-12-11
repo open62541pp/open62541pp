@@ -74,3 +74,16 @@ const opcua::DataType& getUniDataType() {
             .build();
     return dt;
 }
+
+// Example enumeration
+enum class Color : int32_t {
+    Red = 0,
+    Green = 1,
+    Yellow = 2,
+};
+
+const opcua::DataType& getColorDataType() {
+    static const opcua::DataType dt =
+        opcua::DataTypeBuilder<Color>::createEnum("Color", {1, 4946}, {1, 5}).build();
+    return dt;
+}

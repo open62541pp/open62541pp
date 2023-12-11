@@ -10,9 +10,16 @@ int main() {
     const auto& dataTypeMeasurements = getMeasurementsDataType();
     const auto& dataTypeOpt = getOptDataType();
     const auto& dataTypeUni = getUniDataType();
+    const auto& dataTypeColor = getColorDataType();
 
     // Provide custom data type definitions to server
-    server.setCustomDataTypes({dataTypePoint, dataTypeMeasurements, dataTypeOpt, dataTypeUni});
+    server.setCustomDataTypes({
+        dataTypePoint,
+        dataTypeMeasurements,
+        dataTypeOpt,
+        dataTypeUni,
+        dataTypeColor,
+    });
 
     // Add data type nodes
     auto nodeStructureDataType = server.getNode(opcua::DataTypeId::Structure);
@@ -20,8 +27,24 @@ int main() {
     nodeStructureDataType.addDataType(dataTypeMeasurements.getTypeId(), "Measurements");
     nodeStructureDataType.addDataType(dataTypeOpt.getTypeId(), "Opt");
     nodeStructureDataType.addDataType(dataTypeUni.getTypeId(), "Uni");
+    auto nodeEnumerationDataType = server.getNode(opcua::DataTypeId::Enumeration);
+    nodeEnumerationDataType.addDataType(dataTypeColor.getTypeId(), "Color")
+        .addProperty(
+            {0, 0},  // auto-generate node id
+            "EnumValues",
+            opcua::VariableAttributes{}
+                .setDataType<opcua::EnumValueType>()
+                .setValueRank(opcua::ValueRank::OneDimension)
+                .setArrayDimensions({0})
+                .setValueArray(opcua::Span<const opcua::EnumValueType>{
+                    {0, {"", "Red"}, {}},
+                    {1, {"", "Green"}, {}},
+                    {2, {"", "Yellow"}, {}},
+                })
+        )
+        .addModellingRule(opcua::ModellingRule::Mandatory);
 
-    // Add variable type nodes
+    // Add variable type nodes (optional)
     auto nodeBaseDataVariableType = server.getNode(opcua::VariableTypeId::BaseDataVariableType);
     auto nodeVariableTypePoint = nodeBaseDataVariableType.addVariableType(
         {1, 4243},
@@ -121,6 +144,15 @@ int main() {
             .setValueRank(opcua::ValueRank::Scalar)
             .setValueScalar(uni, dataTypeUni),
         nodeVariableTypeUni.getNodeId()
+    );
+
+    nodeObjects.addVariable(
+        {1, "Color"},
+        "Color",
+        opcua::VariableAttributes{}
+            .setDataType(dataTypeColor.getTypeId())
+            .setValueRank(opcua::ValueRank::Scalar)
+            .setValueScalar(Color::Green, dataTypeColor)
     );
 
     server.run();

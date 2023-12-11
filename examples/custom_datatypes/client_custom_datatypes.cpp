@@ -13,9 +13,16 @@ int main() {
     const auto& dataTypeMeasurements = getMeasurementsDataType();
     const auto& dataTypeOpt = getOptDataType();
     const auto& dataTypeUni = getUniDataType();
+    const auto& dataTypeColor = getColorDataType();
 
     // Provide custom data type definitions to client
-    client.setCustomDataTypes({dataTypePoint, dataTypeMeasurements, dataTypeOpt, dataTypeUni});
+    client.setCustomDataTypes({
+        dataTypePoint,
+        dataTypeMeasurements,
+        dataTypeOpt,
+        dataTypeUni,
+        dataTypeColor,
+    });
 
     client.connect("opc.tcp://localhost:4840");
 
@@ -83,5 +90,10 @@ int main() {
         if (uni->switchField == UniSwitch::OptionB) {
             std::cout << "- optionB = " << opcua::String(uni->fields.optionB) << "\n";  // NOLINT
         }
+    }
+
+    variant = client.getNode({1, "Color"}).readValue();
+    if (variant.isType<int32_t>()) {
+        std::cout << "Color: " << variant.getScalar<int32_t>() << "\n";
     }
 }
