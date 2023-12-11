@@ -154,12 +154,23 @@ static void checkDataTypeEqual(const DataType& dt, const UA_DataType& expected) 
 }
 
 TEST_CASE("DataTypeBuilder") {
+    SUBCASE("Enum") {
+        enum class TestEnum {};
+        const auto dt = DataTypeBuilder<TestEnum>::createEnum("TestEnum", {1, 1}, {1, 1}).build();
+
+        CHECK(dt.getMemSize() == sizeof(TestEnum));
+        CHECK(dt.getTypeKind() == UA_DATATYPEKIND_ENUM);
+        CHECK(dt.getPointerFree() == true);
+        CHECK(dt.getMembers().empty());
+    }
+
     SUBCASE("Struct") {
-        auto dt = DataTypeBuilder<Point>::createStructure("Point", {1, 1001}, {1, 1})
-                      .addField<&Point::x>("x")
-                      .addField<&Point::y>("y")
-                      .addField<&Point::z>("z")
-                      .build();
+        const auto dt =
+            DataTypeBuilder<Point>::createStructure("Point", {1, 1001}, {1, 1})
+                .addField<&Point::x>("x")
+                .addField<&Point::y>("y")
+                .addField<&Point::z>("z")
+                .build();
 
         checkDataTypeEqual(dt, pointType);
     }
@@ -188,7 +199,7 @@ TEST_CASE("DataTypeBuilder") {
             measurementsMembers
         );
 
-        auto dt =
+        const auto dt =
             DataTypeBuilder<Measurements>::createStructure("Measurements", {1, 1002}, {1, 2})
                 .addField<&Measurements::description>("description", UA_TYPES[UA_TYPES_STRING])
                 .addField<&Measurements::measurementsSize, &Measurements::measurements>(
@@ -242,11 +253,12 @@ TEST_CASE("DataTypeBuilder") {
             optMembers
         );
 
-        auto dt = DataTypeBuilder<Opt>::createStructure("Opt", {1, 1003}, {1, 3})
-                      .addField<&Opt::a>("a")
-                      .addField<&Opt::b>("b")
-                      .addField<&Opt::c>("c")
-                      .build();
+        const auto dt =
+            DataTypeBuilder<Opt>::createStructure("Opt", {1, 1003}, {1, 3})
+                .addField<&Opt::a>("a")
+                .addField<&Opt::b>("b")
+                .addField<&Opt::c>("c")
+                .build();
 
         checkDataTypeEqual(dt, optType);
     }
@@ -288,10 +300,11 @@ TEST_CASE("DataTypeBuilder") {
             uniMembers
         );
 
-        auto dt = DataTypeBuilder<Uni>::createUnion("Uni", {1, 1004}, {1, 4})
-                      .addUnionField<&Uni::fields, double>("optionA")
-                      .addUnionField<&Uni::fields, UA_String>("optionB", UA_TYPES[UA_TYPES_STRING])
-                      .build();
+        const auto dt =
+            DataTypeBuilder<Uni>::createUnion("Uni", {1, 1004}, {1, 4})
+                .addUnionField<&Uni::fields, double>("optionA")
+                .addUnionField<&Uni::fields, UA_String>("optionB", UA_TYPES[UA_TYPES_STRING])
+                .build();
 
         checkDataTypeEqual(dt, uniType);
     }
@@ -307,13 +320,13 @@ TEST_CASE("DataTypeBuilder") {
             int value;
         };
 
-        auto dtNative =
+        const auto dtNative =
             DataTypeBuilder<SNative>::createStructure("S", {1, 1005}, {1, 5})
                 .addField<&SNative::guid>("guid")
                 .addField<&SNative::value>("value")
                 .build();
 
-        auto dtWrapper =
+        const auto dtWrapper =
             DataTypeBuilder<SWrapper>::createStructure("S", {1, 1005}, {1, 5})
                 .addField<&SWrapper::guid>("guid")
                 .addField<&SWrapper::value>("value")
