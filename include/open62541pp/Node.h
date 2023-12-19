@@ -410,6 +410,11 @@ public:
         return services::readMinimumSamplingInterval(connection_, nodeId_);
     }
 
+    /// @copydoc services::readDataTypeDefinition
+    Variant readDataTypeDefinition() {
+        return services::readDataTypeDefinition(connection_, nodeId_);
+    }
+
     /// Read the value of an object property.
     /// @param propertyName Browse name of the property (variable node)
     Variant readObjectProperty(const QualifiedName& propertyName);
@@ -568,6 +573,13 @@ public:
     /// @return Current node instance to chain multiple methods (fluent interface)
     Node& writeMinimumSamplingInterval(double milliseconds) {
         services::writeMinimumSamplingInterval(connection_, nodeId_, milliseconds);
+        return *this;
+    }
+
+    /// @copydoc services::writeDataTypeDefinition
+    /// @return Current node instance to chain multiple methods (fluent interface)
+    Node& writeDataTypeDefinition(const Variant& definition) {
+        services::writeDataTypeDefinition(connection_, nodeId_, definition);
         return *this;
     }
 

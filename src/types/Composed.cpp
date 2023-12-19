@@ -47,6 +47,31 @@ static void assignArray(Span<const T> src, Native*& dst, size_t& dstSize) {
     dstSize = src.size();
 }
 
+EnumValueType::EnumValueType(int64_t value, LocalizedText displayName, LocalizedText description) {
+    assign(value, handle()->value);
+    assign(std::move(displayName), handle()->displayName);
+    assign(std::move(description), handle()->description);
+}
+
+EnumField::EnumField(int64_t value, std::string_view name)
+    : EnumField(value, {"", name}, {}, name) {}
+
+EnumField::EnumField(
+    int64_t value, LocalizedText displayName, LocalizedText description, std::string_view name
+) {
+    assign(value, handle()->value);
+    assign(std::move(displayName), handle()->displayName);
+    assign(std::move(description), handle()->description);
+    assign(name, handle()->name);
+}
+
+EnumDefinition::EnumDefinition(std::initializer_list<EnumField> fields)
+    : EnumDefinition({fields.begin(), fields.size()}) {}
+
+EnumDefinition::EnumDefinition(Span<const EnumField> fields) {
+    assignArray(fields, handle()->fields, handle()->fieldsSize);
+}
+
 RequestHeader::RequestHeader(
     NodeId authenticationToken,
     DateTime timestamp,
@@ -303,12 +328,6 @@ WriteRequest::WriteRequest(RequestHeader requestHeader, Span<const WriteValue> n
     assignArray(nodesToWrite, handle()->nodesToWrite, handle()->nodesToWriteSize);
 }
 
-EnumValueType::EnumValueType(int64_t value, LocalizedText displayName, LocalizedText description) {
-    assign(value, handle()->value);
-    assign(std::move(displayName), handle()->displayName);
-    assign(std::move(description), handle()->description);
-}
-
 #ifdef UA_ENABLE_METHODCALLS
 
 Argument::Argument(
@@ -386,7 +405,7 @@ ContentFilterElement::ContentFilterElement(
 }
 
 ContentFilter::ContentFilter(std::initializer_list<ContentFilterElement> elements)
-    : ContentFilter(Span<const ContentFilterElement>(elements)) {}
+    : ContentFilter({elements.begin(), elements.size()}) {}
 
 ContentFilter::ContentFilter(Span<const ContentFilterElement> elements) {
     assignArray(elements, handle()->elements, handle()->elementsSize);

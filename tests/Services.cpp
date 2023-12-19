@@ -329,6 +329,17 @@ TEST_CASE("Attribute service set (server)") {
         CHECK(valueRead->sourceTimestamp == valueWrite->sourceTimestamp);
         CHECK(valueRead->sourcePicoseconds == valueWrite->sourcePicoseconds);
     }
+
+    SUBCASE("Data type definition (enum)") {
+        const NodeId id{1, "MyEnum"};
+        services::addDataType(server, {0, UA_NS0ID_ENUMERATION}, id, "MyEnum");
+
+        const EnumDefinition enumDefinition{{0, "Zero"}, {1, "One"}};
+        services::writeDataTypeDefinition(server, id, Variant::fromScalar(enumDefinition));
+
+        const auto enumDefinitionRead = services::readDataTypeDefinition(server, id);
+        CHECK(enumDefinitionRead.isType<EnumDefinition>());
+    }
 }
 
 TEST_CASE("Attribute service set (server & client)") {
