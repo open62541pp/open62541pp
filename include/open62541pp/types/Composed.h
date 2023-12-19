@@ -73,6 +73,54 @@ namespace opcua {
  */
 
 /**
+ * UA_EnumValueType wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.39
+ */
+class EnumValueType : public TypeWrapper<UA_EnumValueType, UA_TYPES_ENUMVALUETYPE> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    EnumValueType(int64_t value, LocalizedText displayName, LocalizedText description);
+
+    UAPP_COMPOSED_GETTER(int64_t, getValue, value)
+    UAPP_COMPOSED_GETTER_WRAPPER(LocalizedText, getDisplayName, displayName)
+    UAPP_COMPOSED_GETTER_WRAPPER(LocalizedText, getDescription, description)
+};
+
+/**
+ * UA_EnumField wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.52
+ */
+class EnumField : public TypeWrapper<UA_EnumField, UA_TYPES_ENUMFIELD> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    EnumField(int64_t value, std::string_view name);
+    EnumField(
+        int64_t value, LocalizedText displayName, LocalizedText description, std::string_view name
+    );
+
+    UAPP_COMPOSED_GETTER(int64_t, getValue, value)
+    UAPP_COMPOSED_GETTER_WRAPPER(LocalizedText, getDisplayName, displayName)
+    UAPP_COMPOSED_GETTER_WRAPPER(LocalizedText, getDescription, description)
+    UAPP_COMPOSED_GETTER_WRAPPER(String, getName, name)
+};
+
+/**
+ * UA_EnumDefinition wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.50
+ */
+class EnumDefinition : public TypeWrapper<UA_EnumDefinition, UA_TYPES_ENUMDEFINITION> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    EnumDefinition(std::initializer_list<EnumField> fields);
+    explicit EnumDefinition(Span<const EnumField> fields);
+
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(EnumField, getFields, fields, fieldsSize)
+};
+
+/**
  * UA_ApplicationDescription wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.2
  */
@@ -1160,21 +1208,6 @@ public:
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
         DiagnosticInfo, getDiagnosticInfos, diagnosticInfos, diagnosticInfosSize
     )
-};
-
-/**
- * UA_EnumValueType wrapper class.
- * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.39
- */
-class EnumValueType : public TypeWrapper<UA_EnumValueType, UA_TYPES_ENUMVALUETYPE> {
-public:
-    using TypeWrapperBase::TypeWrapperBase;
-
-    EnumValueType(int64_t value, LocalizedText displayName, LocalizedText description);
-
-    UAPP_COMPOSED_GETTER(int64_t, getValue, value)
-    UAPP_COMPOSED_GETTER_WRAPPER(LocalizedText, getDisplayName, displayName)
-    UAPP_COMPOSED_GETTER_WRAPPER(LocalizedText, getDescription, description)
 };
 
 /* ------------------------------------------- Method ------------------------------------------- */

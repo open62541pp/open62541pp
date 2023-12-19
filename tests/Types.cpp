@@ -812,6 +812,28 @@ TEST_CASE("ExtensionObject") {
     }
 }
 
+/* ------------------------------------------ Composed ------------------------------------------ */
+
+TEST_CASE("EnumValueType") {
+    const EnumValueType enumValueType(1, {"", "Name"}, {"", "Description"});
+    CHECK(enumValueType.getValue() == 1);
+    CHECK(enumValueType.getDisplayName() == LocalizedText("", "Name"));
+    CHECK(enumValueType.getDescription() == LocalizedText("", "Description"));
+}
+
+TEST_CASE("EnumField / EnumDefinition") {
+    const EnumDefinition enumDefinition{{0, "Zero"}, {1, "One"}};
+    CHECK(enumDefinition.getFields().size() == 2);
+    CHECK(enumDefinition.getFields()[0].getValue() == 0);
+    CHECK(enumDefinition.getFields()[0].getDisplayName() == LocalizedText("", "Zero"));
+    CHECK(enumDefinition.getFields()[0].getDescription() == LocalizedText());
+    CHECK(enumDefinition.getFields()[0].getName() == "Zero");
+    CHECK(enumDefinition.getFields()[1].getValue() == 1);
+    CHECK(enumDefinition.getFields()[1].getDisplayName() == LocalizedText("", "One"));
+    CHECK(enumDefinition.getFields()[1].getDescription() == LocalizedText());
+    CHECK(enumDefinition.getFields()[1].getName() == "One");
+}
+
 TEST_CASE("RequestHeader") {
     const auto now = DateTime::now();
     const RequestHeader header({1, 1000}, now, 1, 2, "auditEntryId", 10, {});
@@ -1078,13 +1100,6 @@ TEST_CASE("WriteResponse") {
     CHECK_NOTHROW(response.getResponseHeader());
     CHECK(response.getResults().empty());
     CHECK(response.getDiagnosticInfos().empty());
-}
-
-TEST_CASE("EnumValueType") {
-    const EnumValueType enumValueType(1, {"", "Name"}, {"", "Description"});
-    CHECK(enumValueType.getValue() == 1);
-    CHECK(enumValueType.getDisplayName() == LocalizedText("", "Name"));
-    CHECK(enumValueType.getDescription() == LocalizedText("", "Description"));
 }
 
 #ifdef UA_ENABLE_METHODCALLS
