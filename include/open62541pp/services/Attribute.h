@@ -301,6 +301,15 @@ inline double readMinimumSamplingInterval(T& serverOrClient, const NodeId& id) {
     return readAttributeScalar<double>(serverOrClient, id, AttributeId::MinimumSamplingInterval);
 }
 
+/**
+ * Read the `DataTypeDefinition` attribute of a data type node.
+ * @return Data type definition, e.g. of type `EnumDefinition`
+ */
+template <typename T>
+inline Variant readDataTypeDefinition(T& serverOrClient, const NodeId& id) {
+    return readAttribute(serverOrClient, id, AttributeId::DataTypeDefinition).getValue();
+}
+
 /* ---------------------------------------------------------------------------------------------- */
 
 /**
@@ -457,6 +466,20 @@ inline void writeMinimumSamplingInterval(T& serverOrClient, const NodeId& id, do
         AttributeId::MinimumSamplingInterval,
         DataValue::fromScalar(milliseconds)
     );
+}
+
+/**
+ * Write the `DataTypeDefinition` attribute of a data type node.
+ * The data type definition can be e.g. of type `EnumDefinition`.
+ */
+template <typename T>
+inline void writeDataTypeDefinition(
+    T& serverOrClient, const NodeId& id, const Variant& definition
+) {
+    UA_DataValue dv{};
+    dv.value = *definition.handle();  // shallow copy
+    dv.hasValue = true;
+    writeAttribute(serverOrClient, id, AttributeId::DataTypeDefinition, asWrapper<DataValue>(dv));
 }
 
 /**
