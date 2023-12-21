@@ -3,13 +3,30 @@ cmake_minimum_required(VERSION 3.12)
 project(
     open62541++
     VERSION 0.11.0
-    DESCRIPTION "C++ wrapper of open62541"
+    DESCRIPTION "C++17 OPC UA library based on open62541"
     HOMEPAGE_URL "https://github.com/open62541pp/open62541pp"
     LANGUAGES CXX
 )
 
-# set c++ standard explicitly, compile feature "cxx_std_17" does not set -std=c++17 compile flag
-set(CMAKE_CXX_STANDARD 17)
+if(DEFINED CMAKE_CXX_STANDARD)
+    if(CMAKE_CXX_STANDARD LESS 17)
+        message(
+            FATAL_ERROR
+            "CMAKE_CXX_STANDARD=${CMAKE_CXX_STANDARD} is unsupported.\n"
+            "Supported standards are C++17 and above."
+        ) 
+    endif()
+    message(STATUS "Using explicitly defined C++${CMAKE_CXX_STANDARD} standard")
+else()
+    # use C++20 if possible
+    if("cxx_std_20" IN_LIST CMAKE_CXX_COMPILE_FEATURES)
+        message(STATUS "Using C++20 standard")
+        set(CMAKE_CXX_STANDARD 20)
+    else()
+        message(STATUS "Using C++17 standard")
+        set(CMAKE_CXX_STANDARD 17)
+    endif()
+endif()
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 

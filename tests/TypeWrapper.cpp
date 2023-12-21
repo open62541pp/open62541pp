@@ -3,6 +3,7 @@
 #include <doctest/doctest.h>
 
 #include "open62541pp/Common.h"
+#include "open62541pp/Config.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/helper.h"  // detail::toString
 
@@ -20,6 +21,14 @@ TEST_CASE("TypeWrapper") {
         TypeWrapper<UA_Boolean, UA_TYPES_BOOLEAN> wrapper(value);
         CHECK(*wrapper.handle() == true);
     }
+
+#ifdef UAPP_CONSTEXPR_WRAPPER
+    SUBCASE("Constructor with native type (constexpr)") {
+        constexpr UA_Boolean value{true};
+        constexpr TypeWrapper<UA_Boolean, UA_TYPES_BOOLEAN> wrapper(value);
+        CHECK(*wrapper.handle() == true);
+    }
+#endif
 
     SUBCASE("Constructor with native type (implicit)") {
         TypeWrapper<UA_Int32, UA_TYPES_INT32> wrapper = UA_Int32{123};

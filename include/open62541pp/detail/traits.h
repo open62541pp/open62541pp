@@ -4,6 +4,14 @@
 
 namespace opcua::detail {
 
+constexpr bool isConstantEvaluated() noexcept {
+#if __cpp_lib_is_constant_evaluated >= 201811L
+    return std::is_constant_evaluated();
+#else
+    return false;
+#endif
+}
+
 template <typename...>
 struct AlwaysFalse : std::false_type {};
 

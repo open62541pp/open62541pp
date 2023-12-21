@@ -6,6 +6,7 @@
 #include <utility>  // exchange, swap
 
 #include "open62541pp/Common.h"
+#include "open62541pp/Config.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/detail/helper.h"
 #include "open62541pp/open62541.h"
@@ -38,34 +39,42 @@ template <typename T, TypeIndex typeIndex>
 class TypeWrapper {
 public:
     static_assert(typeIndex < UA_TYPES_COUNT);
+    static_assert(std::is_nothrow_default_constructible_v<T>);
+    static_assert(std::is_nothrow_constructible_v<T>);
+    static_assert(std::is_nothrow_destructible_v<T>);
+    static_assert(std::is_nothrow_copy_constructible_v<T>);
+    static_assert(std::is_nothrow_move_constructible_v<T>);
+    static_assert(std::is_nothrow_copy_assignable_v<T>);
+    static_assert(std::is_nothrow_move_assignable_v<T>);
+    static_assert(std::is_nothrow_swappable_v<T>);
 
     using TypeWrapperBase = TypeWrapper<T, typeIndex>;
     using NativeType = T;
 
-    TypeWrapper() = default;
+    constexpr TypeWrapper() noexcept = default;
 
     /// Constructor with native object (deep copy).
-    explicit TypeWrapper(const T& native)
+    explicit constexpr TypeWrapper(const T& native)
         : native_(detail::copy(native, UA_TYPES[typeIndex])) {}
 
     /// Constructor with native object (move rvalue).
     constexpr TypeWrapper(T&& native) noexcept  // NOLINT, implicit wanted
         : native_(std::exchange(native, {})) {}
 
-    ~TypeWrapper() {  // NOLINT
+    UAPP_CONSTEXPR_DTOR ~TypeWrapper() {  // NOLINT
         clear();
     };
 
     /// Copy constructor (deep copy).
-    TypeWrapper(const TypeWrapper& other)
+    constexpr TypeWrapper(const TypeWrapper& other)
         : native_(detail::copy(other.native_, UA_TYPES[typeIndex])) {}
 
     /// Move constructor.
-    TypeWrapper(TypeWrapper&& other) noexcept
+    constexpr TypeWrapper(TypeWrapper&& other) noexcept
         : native_(std::exchange(other.native_, {})) {}
 
     /// Copy assignment (deep copy).
-    TypeWrapper& operator=(const TypeWrapper& other) {  // NOLINT, false positive
+    constexpr TypeWrapper& operator=(const TypeWrapper& other) {  // NOLINT, false positive
         if (this != &other) {
             clear();
             native_ = detail::copy(other.native_, UA_TYPES[typeIndex]);
@@ -74,7 +83,7 @@ public:
     }
 
     /// Copy assignment with native object (deep copy).
-    TypeWrapper& operator=(const T& native) {
+    constexpr TypeWrapper& operator=(const T& native) {
         if (&native_ != &native) {
             clear();
             native_ = detail::copy(native, UA_TYPES[typeIndex]);
@@ -83,7 +92,7 @@ public:
     }
 
     /// Move assignment.
-    TypeWrapper& operator=(TypeWrapper&& other) noexcept {
+    constexpr TypeWrapper& operator=(TypeWrapper&& other) noexcept {
         if (this != &other) {
             std::swap(native_, other.native_);
         }
@@ -91,7 +100,7 @@ public:
     }
 
     /// Move assignment with native object.
-    TypeWrapper& operator=(T&& native) noexcept {
+    constexpr TypeWrapper& operator=(T&& native) noexcept {
         if (&native_ != &native) {
             clear();
             native_ = std::exchange(native, {});
@@ -120,14 +129,12 @@ public:
     }
 
     /// Swap with wrapper object.
-    void swap(TypeWrapper& other) noexcept {
-        static_assert(std::is_swappable_v<T>);
+    UAPP_CONSTEXPR_SWAP void swap(TypeWrapper& other) noexcept {
         std::swap(native_, other.native_);
     }
 
     /// Swap with native object.
-    void swap(T& native) noexcept {
-        static_assert(std::is_swappable_v<T>);
+    UAPP_CONSTEXPR_SWAP void swap(T& native) noexcept {
         std::swap(native_, native);
     }
 
@@ -147,7 +154,7 @@ public:
     };
 
 protected:
-    void clear() noexcept {
+    constexpr void clear() noexcept {
         detail::clear(native_, UA_TYPES[typeIndex]);
     }
 

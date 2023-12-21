@@ -8,7 +8,7 @@
 
 #include "open62541pp/Common.h"  // TypeIndex
 #include "open62541pp/ErrorHandling.h"
-#include "open62541pp/detail/traits.h"  // IsOneOf
+#include "open62541pp/detail/traits.h"  // isConstantEvaluated, IsOneOf
 #include "open62541pp/open62541.h"
 
 namespace opcua::detail {
@@ -44,8 +44,14 @@ constexpr bool isValidTypeCombination(const UA_DataType& type) {
 
 template <typename T>
 constexpr void clear(T& native, const UA_DataType& type) noexcept {
-    assert(isValidTypeCombination<T>(type));
-    if constexpr (!isPointerFree<T>) {
+    if (isConstantEvaluated()) {
+        native = T{};
+        return;
+    }
+    if constexpr (isPointerFree<T>) {
+        native = T{};
+    } else {
+        assert(isValidTypeCombination<T>(type));
         UA_clear(&native, &type);
     }
 }
@@ -74,13 +80,16 @@ template <typename T>
 
 template <typename T>
 [[nodiscard]] constexpr T copy(const T& src, const UA_DataType& type) noexcept(isPointerFree<T>) {
-    assert(isValidTypeCombination<T>(type));
-    if constexpr (!isPointerFree<T>) {
+    if (isConstantEvaluated()) {
+        return src;
+    }
+    if constexpr (isPointerFree<T>) {
+        return src;
+    } else {
+        assert(isValidTypeCombination<T>(type));
         T dst;  // NOLINT, initialized in UA_copy function
         throwOnBadStatus(UA_copy(&src, &dst, &type));
         return dst;
-    } else {
-        return src;
     }
 }
 
