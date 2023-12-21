@@ -113,7 +113,7 @@ jobs:
           mkdir build
           cd build
           cmake `
-            -DCMAKE_CXX_STANDARD=${{ matrix.cxx_standard }}
+            -DCMAKE_CXX_STANDARD=${{ matrix.cxx_standard }} `
             -DBUILD_SHARED_LIBS=${{ matrix.library_type == 'shared' }} `
             -DUAPP_BUILD_TESTS=ON `
             -DUAPP_BUILD_EXAMPLES=ON `
