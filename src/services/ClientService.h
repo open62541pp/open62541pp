@@ -102,6 +102,39 @@ struct ClientServiceAsync {
         detail::throwOnBadStatus(status);
         return future;
     }
+
+    template <typename Request, typename Response, typename F>
+    static auto sendRequestCallbackOnly(
+        Client& client, const Request& request, F&& processResponse
+    ) {
+        static_assert(detail::isNativeType<Request>);
+        static_assert(detail::isNativeType<Response>);
+        static_assert(std::is_invocable_v<F, Response*>);
+
+        using Context = F;
+
+        auto callback = [](UA_Client*, void* userdata, uint32_t /* reqId */, void* responsePtr) {
+            assert(userdata != nullptr);
+            auto* context = static_cast<Context*>(userdata);
+            auto& func = *context;
+            std::invoke(func, static_cast<Response*>(responsePtr));
+            delete context;  // NOLINT
+        };
+
+        auto context = std::make_unique<Context>(std::forward<F>(processResponse));
+
+        const auto status = __UA_Client_AsyncService(
+            client.handle(),
+            &request,
+            &detail::guessDataType<Request>(),
+            callback,
+            &detail::guessDataType<Response>(),
+            context.release(),  // userdata, transfer ownership to callback
+            nullptr
+        );
+
+        detail::throwOnBadStatus(status);
+    }
 };
 
 template <typename Response>

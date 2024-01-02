@@ -146,7 +146,7 @@ public:
      */
     void runIterate(uint16_t timeoutMilliseconds = 1000);
     /// Run the client's main loop by. This method will block until Client::stop is called.
-    void run();
+    void run(uint16_t timeoutMilliseconds = 1000);
     /// Stop the client's main loop.
     void stop();
     /// Check if the client's main loop is running.

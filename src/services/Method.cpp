@@ -89,6 +89,38 @@ std::future<std::vector<Variant>> callAsync(
     return callImpl<ClientServiceAsync>(client, objectId, methodId, inputArguments);
 }
 
+void callAsync(
+    Client& client,
+    const NodeId& objectId,
+    const NodeId& methodId,
+    Span<const Variant> inputArguments,
+    ResponseCallback callback
+) {
+    UA_CallMethodRequest item = createCallMethodRequest(objectId, methodId, inputArguments);
+    UA_CallRequest request{};
+    request.methodsToCall = &item;
+    request.methodsToCallSize = 1;
+
+    auto lambda = [callback = std::move(callback)](UA_CallResponse* responsePtr) {
+        std::vector<Variant> output;
+        UA_StatusCode code = UA_STATUSCODE_GOOD;
+        try {
+            if (responsePtr == nullptr) {
+                throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
+            }
+            checkServiceResult(*responsePtr);
+            output = getOutputArguments(getSingleResultFromResponse(*responsePtr));
+        } catch (const BadStatus& e) {
+            code = e.code();
+        }
+        std::invoke(callback, code, std::move(output));
+    };
+
+    ClientServiceAsync::template sendRequestCallbackOnly<UA_CallRequest, UA_CallResponse>(
+        client, request, std::move(lambda)
+    );
+}
+
 }  // namespace opcua::services
 
 #endif

@@ -173,14 +173,14 @@ public:
         detail::throwOnBadStatus(status);
     }
 
-    void run() {
+    void run(uint16_t timeoutMilliseconds) {
         if (running_) {
             return;
         }
         running_ = true;
         try {
             while (running_) {
-                runIterate(1000);
+                runIterate(timeoutMilliseconds);
             }
         } catch (...) {
             running_ = false;
@@ -391,8 +391,8 @@ void Client::runIterate(uint16_t timeoutMilliseconds) {
     connection_->runIterate(timeoutMilliseconds);
 }
 
-void Client::run() {
-    connection_->run();
+void Client::run(uint16_t timeoutMilliseconds) {
+    connection_->run(timeoutMilliseconds);
 }
 
 void Client::stop() {
