@@ -115,10 +115,9 @@ struct ClientServiceAsync {
 
         auto callback = [](UA_Client*, void* userdata, uint32_t /* reqId */, void* responsePtr) {
             assert(userdata != nullptr);
-            auto* context = static_cast<Context*>(userdata);
+            std::unique_ptr<Context> context{static_cast<Context*>(userdata)};
             auto& func = *context;
             std::invoke(func, static_cast<Response*>(responsePtr));
-            delete context;  // NOLINT
         };
 
         auto context = std::make_unique<Context>(std::forward<F>(processResponse));

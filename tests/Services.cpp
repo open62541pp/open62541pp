@@ -1,4 +1,5 @@
 #include <chrono>
+#include <exception>
 #include <thread>
 #include <utility>  // pair
 #include <variant>
@@ -32,16 +33,17 @@ constexpr auto syncWrapper(Client& client, F&& asyncClientFunction) {
 template <typename F>
 constexpr auto syncWrapperWithCallback(Client& client, F&& asyncClientFunction) {
     return [&](auto&&... args) {
-        std::vector<opcua::Variant> out;
-        auto callback = [&out](UA_StatusCode code, std::vector<opcua::Variant> output) {
+        std::promise<std::vector<opcua::Variant>> promise;
+        auto callback = [&promise](UA_StatusCode code, std::vector<opcua::Variant> output) {
             if (code != UA_STATUSCODE_GOOD) {
-                throw BadStatus(code);
+                promise.set_exception(std::make_exception_ptr(BadStatus(code)));
+            } else {
+                promise.set_value(output);
             }
-            out = std::move(output);
         };
         asyncClientFunction(args..., callback);
         client.runIterate();
-        return out;
+        return promise.get_future().get();
     };
 };
 
