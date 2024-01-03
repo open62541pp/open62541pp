@@ -17,6 +17,20 @@ int main() {
     // Run client event loop in separate thread
     auto clientThread = std::thread([&] { client.run(); });
 
+    // Asynchronously call method (callback variant)
+    {
+        opcua::services::callAsyncWithCallback(
+            client,
+            objNode.getNodeId(),
+            greetMethodNode.getNodeId(),
+            {opcua::Variant::fromScalar("Callback World")},
+            [](UA_StatusCode code, std::vector<opcua::Variant> output) {
+                std::cout << "Callback with status code " << code << ", get method output\n";
+                std::cout << output.at(0).getScalar<opcua::String>() << std::endl;
+            }
+        );
+    }
+
     // Asynchronously call method (future variant)
     {
         auto future = opcua::services::callAsync(
@@ -24,36 +38,6 @@ int main() {
             objNode.getNodeId(),
             greetMethodNode.getNodeId(),
             {opcua::Variant::fromScalar("Future World")}
-        );
-
-        std::cout << "Waiting for asynchronous operation to complete\n";
-        future.wait();
-
-        std::cout << "Future ready, get method output\n";
-        auto output = future.get();
-        std::cout << output.at(0).getScalar<opcua::String>() << std::endl;
-    }
-
-    // Asynchronously call method (callback variant)
-    {
-        // We use a promise similar to the future variant to determine when the callback is
-        // executed.
-        std::promise<std::vector<opcua::Variant>> promise;
-        auto future = promise.get_future();
-        auto callback = [&promise](UA_StatusCode code, std::vector<opcua::Variant> output) {
-            if (code == UA_STATUSCODE_GOOD) {
-                promise.set_value(std::move(output));
-            } else {
-                promise.set_exception(std::make_exception_ptr(opcua::BadStatus(code)));
-            }
-        };
-
-        opcua::services::callAsync(
-            client,
-            objNode.getNodeId(),
-            greetMethodNode.getNodeId(),
-            {opcua::Variant::fromScalar("Callback World")},
-            callback
         );
 
         std::cout << "Waiting for asynchronous operation to complete\n";

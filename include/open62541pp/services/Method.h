@@ -86,7 +86,7 @@ using ResponseCallback = std::function<void(UA_StatusCode code, std::vector<Vari
  * @param inputArguments Input argument values
  * @exception BadStatus
  */
-void callAsync(
+void callAsyncWithCallback(
     Client& client,
     const NodeId& objectId,
     const NodeId& methodId,

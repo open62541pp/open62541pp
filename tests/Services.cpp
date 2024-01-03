@@ -20,10 +20,8 @@
 using namespace opcua;
 using namespace std::literals::chrono_literals;
 
-template <typename... Args>
-constexpr auto syncWrapper(
-    Client& client, std::future<std::vector<Variant>> (&asyncClientFunction)(Args...)
-) {
+template <typename F>
+constexpr auto syncWrapper(Client& client, F&& asyncClientFunction) {
     return [&](auto&&... args) {
         auto future = asyncClientFunction(args...);
         client.runIterate();
@@ -31,8 +29,8 @@ constexpr auto syncWrapper(
     };
 };
 
-template <typename... Args>
-constexpr auto syncWrapper(Client& client, void (&asyncClientFunction)(Args...)) {
+template <typename F>
+constexpr auto syncWrapperWithCallback(Client& client, F&& asyncClientFunction) {
     return [&](auto&&... args) {
         std::vector<opcua::Variant> out;
         auto callback = [&out](UA_StatusCode code, std::vector<opcua::Variant> output) {
@@ -642,33 +640,12 @@ TEST_CASE("Method service set (server & client)") {
     SUBCASE("Client") {
         testCall(client, services::call<Client>);
     };
-    SUBCASE("Client async (future)") {
-        testCall(
-            client,
-            syncWrapper(
-                client,
-                static_cast<std::future<std::vector<
-                    Variant>> (&)(Client&, const NodeId&, const NodeId&, Span<const Variant>)>(
-                    services::callAsync
-                )
-            )
-        );
-    }
     SUBCASE("Client async (callback)") {
-        testCall(
-            client,
-            syncWrapper(
-                client,
-                static_cast<void (&)(
-                    Client&,
-                    const NodeId&,
-                    const NodeId&,
-                    Span<const Variant>,
-                    opcua::services::ResponseCallback
-                )>(services::callAsync)
-            )
-        );
-    }
+        testCall(client, syncWrapperWithCallback(client, services::callAsyncWithCallback));
+    };
+    SUBCASE("Client async (future)") {
+        testCall(client, syncWrapper(client, services::callAsync));
+    };
 }
 #endif
 
