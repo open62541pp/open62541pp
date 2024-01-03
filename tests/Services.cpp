@@ -31,6 +31,22 @@ constexpr auto syncWrapper(
     };
 };
 
+template <typename... Args>
+constexpr auto syncWrapper(Client& client, void (&asyncClientFunction)(Args...)) {
+    return [&](auto&&... args) {
+        std::vector<opcua::Variant> out;
+        auto callback = [&out](UA_StatusCode code, std::vector<opcua::Variant> output) {
+            if (code != UA_STATUSCODE_GOOD) {
+                throw BadStatus(code);
+            }
+            out = std::move(output);
+        };
+        asyncClientFunction(args..., callback);
+        client.runIterate();
+        return out;
+    };
+};
+
 TEST_CASE("NodeManagement service set (server & client)") {
     Server server;
     ServerRunner serverRunner(server);
@@ -626,8 +642,32 @@ TEST_CASE("Method service set (server & client)") {
     SUBCASE("Client") {
         testCall(client, services::call<Client>);
     };
-    SUBCASE("Client async") {
-        testCall(client, syncWrapper(client, services::callAsync));
+    SUBCASE("Client async (future)") {
+        testCall(
+            client,
+            syncWrapper(
+                client,
+                static_cast<std::future<std::vector<
+                    Variant>> (&)(Client&, const NodeId&, const NodeId&, Span<const Variant>)>(
+                    services::callAsync
+                )
+            )
+        );
+    }
+    SUBCASE("Client async (callback)") {
+        testCall(
+            client,
+            syncWrapper(
+                client,
+                static_cast<void (&)(
+                    Client&,
+                    const NodeId&,
+                    const NodeId&,
+                    Span<const Variant>,
+                    opcua::services::ResponseCallback
+                )>(services::callAsync)
+            )
+        );
     }
 }
 #endif
