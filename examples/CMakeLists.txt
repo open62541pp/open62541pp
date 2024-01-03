@@ -70,7 +70,6 @@ add_example(custom_datatypes/server_custom_datatypes.cpp)
 
 if(UA_ENABLE_METHODCALLS)
     add_example(method/client_method.cpp)
-    add_example(method/client_method_async_callback.cpp)
     add_example(method/client_method_async.cpp)
     add_example(method/server_method.cpp)
 endif()
