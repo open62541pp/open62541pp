@@ -20,8 +20,10 @@
 using namespace opcua;
 using namespace std::literals::chrono_literals;
 
-template <typename F>
-constexpr auto syncWrapper(Client& client, F&& asyncClientFunction) {
+template <typename... Args>
+constexpr auto syncWrapper(
+    Client& client, std::future<std::vector<Variant>> (&asyncClientFunction)(Args...)
+) {
     return [&](auto&&... args) {
         auto future = asyncClientFunction(args...);
         client.runIterate();
