@@ -19,7 +19,7 @@ int main() {
 
     // Asynchronously call method (callback variant)
     {
-        opcua::services::callAsyncWithCallback(
+        opcua::services::callAsync(
             client,
             objNode.getNodeId(),
             greetMethodNode.getNodeId(),

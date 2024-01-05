@@ -89,7 +89,7 @@ std::future<std::vector<Variant>> callAsync(
     return callImpl<ClientServiceAsync>(client, objectId, methodId, inputArguments);
 }
 
-void callAsyncWithCallback(
+void callAsync(
     Client& client,
     const NodeId& objectId,
     const NodeId& methodId,

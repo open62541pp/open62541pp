@@ -80,14 +80,9 @@ std::future<std::vector<Variant>> callAsync(
 
 /**
  * Asynchronously call a server method and invoke a callback.
- *
- * @param client Instance of type Client
- * @param objectId NodeId of the object on which the method is invoked
- * @param methodId NodeId of the method to invoke
- * @param inputArguments Input argument values
- * @exception BadStatus
+ * @overload
  */
-void callAsyncWithCallback(
+void callAsync(
     Client& client,
     const NodeId& objectId,
     const NodeId& methodId,

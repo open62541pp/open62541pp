@@ -22,7 +22,7 @@ using namespace opcua;
 using namespace std::literals::chrono_literals;
 
 template <typename F>
-constexpr auto syncWrapper(Client& client, F&& asyncClientFunction) {
+constexpr auto syncWrapperFuture(Client& client, F&& asyncClientFunction) {
     return [&](auto&&... args) {
         auto future = asyncClientFunction(args...);
         client.runIterate();
@@ -31,7 +31,7 @@ constexpr auto syncWrapper(Client& client, F&& asyncClientFunction) {
 };
 
 template <typename F>
-constexpr auto syncWrapperWithCallback(Client& client, F&& asyncClientFunction) {
+constexpr auto syncWrapperCallback(Client& client, F&& asyncClientFunction) {
     return [&](auto&&... args) {
         std::promise<std::vector<opcua::Variant>> promise;
         auto callback = [&promise](UA_StatusCode code, std::vector<opcua::Variant> output) {
@@ -642,11 +642,15 @@ TEST_CASE("Method service set (server & client)") {
     SUBCASE("Client") {
         testCall(client, services::call<Client>);
     };
-    SUBCASE("Client async (callback)") {
-        testCall(client, syncWrapperWithCallback(client, services::callAsyncWithCallback));
-    };
     SUBCASE("Client async (future)") {
-        testCall(client, syncWrapper(client, services::callAsync));
+        auto (*callAsyncOverload)(Client&, const NodeId&, const NodeId&, Span<const Variant>) =
+            services::callAsync;
+        testCall(client, syncWrapperFuture(client, callAsyncOverload));
+    };
+    SUBCASE("Client async (callback)") {
+        auto (*callAsyncOverload)(Client&, const NodeId&, const NodeId&, Span<const Variant>, services::AsyncCallback<std::vector<Variant>>) =
+            services::callAsync;
+        testCall(client, syncWrapperCallback(client, callAsyncOverload));
     };
 }
 #endif
