@@ -103,24 +103,55 @@ struct ClientServiceAsync {
         return future;
     }
 
-    template <typename Request, typename Response, typename F>
+    template <typename Request, typename Response, typename F, typename CompletionHandler>
     static auto sendRequestCallbackOnly(
-        Client& client, const Request& request, F&& processResponse
+        Client& client,
+        const Request& request,
+        F&& processResponse,
+        CompletionHandler&& completionHandler
     ) {
         static_assert(detail::isNativeType<Request>);
         static_assert(detail::isNativeType<Response>);
-        static_assert(std::is_invocable_v<F, Response*>);
+        static_assert(std::is_invocable_v<F, Response&>);
 
-        using Context = F;
+        using Result = std::invoke_result_t<F, Response&>;
+        static_assert(std::is_invocable_v<CompletionHandler, UA_StatusCode, Result>);
+
+        using Context = std::tuple<F, CompletionHandler>;
 
         auto callback = [](UA_Client*, void* userdata, uint32_t /* reqId */, void* responsePtr) {
             assert(userdata != nullptr);
             std::unique_ptr<Context> context{static_cast<Context*>(userdata)};
-            auto& func = *context;
-            std::invoke(func, static_cast<Response*>(responsePtr));
+
+            UA_StatusCode status = UA_STATUSCODE_GOOD;
+            Response response{};
+            if (responsePtr == nullptr) {
+                status = UA_STATUSCODE_BADUNEXPECTEDERROR;
+            } else {
+                response = *static_cast<Response*>(responsePtr);
+            }
+
+            Result result{};
+            try {
+                checkServiceResult(response);
+                result = std::invoke(std::get<F>(*context), response);
+            } catch (const BadStatus& e) {
+                status = e.code();
+            } catch (const std::exception&) {
+                status = UA_STATUSCODE_BADUNEXPECTEDERROR;
+                // TODO: log exception message
+            }
+
+            try {
+                std::invoke(std::get<CompletionHandler>(*context), status, result);
+            } catch (const std::exception&) {
+                // TODO: log exception message
+            }
         };
 
-        auto context = std::make_unique<Context>(std::forward<F>(processResponse));
+        auto context = std::make_unique<Context>(
+            std::forward<F>(processResponse), std::forward<CompletionHandler>(completionHandler)
+        );
 
         const auto status = __UA_Client_AsyncService(
             client.handle(),
