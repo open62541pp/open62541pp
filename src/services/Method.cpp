@@ -94,7 +94,7 @@ void callAsyncWithCallback(
     const NodeId& objectId,
     const NodeId& methodId,
     Span<const Variant> inputArguments,
-    ResponseCallback callback
+    AsyncCallback<std::vector<Variant>> callback
 ) {
     UA_CallMethodRequest item = createCallMethodRequest(objectId, methodId, inputArguments);
     UA_CallRequest request{};
