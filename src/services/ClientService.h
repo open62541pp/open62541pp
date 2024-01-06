@@ -24,8 +24,8 @@ struct MoveResponse {
 };
 
 template <typename Response>
-inline static void checkServiceResult(Response& response) {
-    detail::throwOnBadStatus(response.responseHeader.serviceResult);
+inline static UA_StatusCode getServiceResult(const Response& response) noexcept {
+    return response.responseHeader.serviceResult;
 }
 
 struct ClientService {
@@ -48,7 +48,7 @@ struct ClientService {
             &detail::guessDataType<Response>()
         );
 
-        checkServiceResult(response);
+        detail::throwOnBadStatus(getServiceResult(response));
         return std::invoke(processResponse, response);
     }
 };
@@ -61,45 +61,21 @@ struct ClientServiceAsync {
         static_assert(std::is_invocable_v<F, Response&>);
 
         using Result = std::invoke_result_t<F, Response&>;
-        using Promise = std::promise<Result>;
-        using Context = std::tuple<Promise, F>;
+        std::promise<Result> promise;
+        auto future = promise.get_future();
 
-        auto callback = [](UA_Client*, void* userdata, uint32_t /* reqId */, void* responsePtr) {
-            assert(userdata != nullptr);
-            auto* context = static_cast<Context*>(userdata);
-            auto& [promise, func] = *context;
-            try {
-                if (responsePtr == nullptr) {
-                    throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
-                }
-                auto& response = *static_cast<Response*>(responsePtr);
-                checkServiceResult(response);
-                if constexpr (std::is_void_v<Result>) {
-                    std::invoke(func, response);
-                    promise.set_value();
+        sendRequestCallbackOnly<Request, Response>(
+            client,
+            request,
+            std::forward<F>(processResponse),
+            [p = std::move(promise)](UA_StatusCode code, auto&&... result) mutable {
+                if (code != UA_STATUSCODE_GOOD) {
+                    p.set_exception(std::make_exception_ptr(BadStatus(code)));
                 } else {
-                    promise.set_value(std::invoke(func, response));
+                    p.set_value(std::forward<decltype(result)>(result)...);
                 }
-            } catch (...) {
-                promise.set_exception(std::current_exception());
             }
-            delete context;  // NOLINT
-        };
-
-        auto context = std::make_unique<Context>(Promise{}, std::forward<F>(processResponse));
-        auto future = std::get<Promise>(*context).get_future();
-
-        const auto status = __UA_Client_AsyncService(
-            client.handle(),
-            &request,
-            &detail::guessDataType<Request>(),
-            callback,
-            &detail::guessDataType<Response>(),
-            context.release(),  // userdata, transfer ownership to callback
-            nullptr
         );
-
-        detail::throwOnBadStatus(status);
         return future;
     }
 
@@ -115,35 +91,37 @@ struct ClientServiceAsync {
         static_assert(std::is_invocable_v<F, Response&>);
 
         using Result = std::invoke_result_t<F, Response&>;
-        static_assert(std::is_invocable_v<CompletionHandler, UA_StatusCode, Result>);
+        if constexpr (std::is_void_v<Result>) {
+            static_assert(std::is_invocable_v<CompletionHandler, UA_StatusCode>);
+        } else {
+            static_assert(std::is_invocable_v<CompletionHandler, UA_StatusCode, Result>);
+        }
 
         using Context = std::tuple<F, CompletionHandler>;
 
         auto callback = [](UA_Client*, void* userdata, uint32_t /* reqId */, void* responsePtr) {
             assert(userdata != nullptr);
             std::unique_ptr<Context> context{static_cast<Context*>(userdata)};
-
-            UA_StatusCode status = UA_STATUSCODE_GOOD;
-            Response response{};
-            if (responsePtr == nullptr) {
-                status = UA_STATUSCODE_BADUNEXPECTEDERROR;
-            } else {
-                response = *static_cast<Response*>(responsePtr);
-            }
-
-            Result result{};
-            try {
-                checkServiceResult(response);
-                result = std::invoke(std::get<F>(*context), response);
-            } catch (const BadStatus& e) {
-                status = e.code();
-            } catch (const std::exception&) {
-                status = UA_STATUSCODE_BADUNEXPECTEDERROR;
-                // TODO: log exception message
-            }
+            auto& handler = std::get<CompletionHandler>(*context);
 
             try {
-                std::invoke(std::get<CompletionHandler>(*context), status, result);
+                if (responsePtr == nullptr) {
+                    if constexpr (std::is_void_v<Result>) {
+                        std::invoke(handler, UA_STATUSCODE_BADUNEXPECTEDERROR);
+                    } else {
+                        std::invoke(handler, UA_STATUSCODE_BADUNEXPECTEDERROR, Result{});
+                    }
+                }
+
+                Response& response = *static_cast<Response*>(responsePtr);
+                UA_StatusCode code = getServiceResult(response);
+                auto result = detail::invokeCapture(std::get<F>(*context), response);
+                code |= result.code();
+                if constexpr (std::is_void_v<Result>) {
+                    std::invoke(handler, code);
+                } else {
+                    std::invoke(handler, code, std::move(result.get()));
+                }
             } catch (const std::exception&) {
                 // TODO: log exception message
             }

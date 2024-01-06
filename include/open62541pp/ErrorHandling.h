@@ -64,6 +64,20 @@ namespace detail {
     return (code >> 30U) >= 0x02;
 }
 
+// NOLINTNEXTLINE, pass by value ok
+[[nodiscard]] inline UA_StatusCode getStatusCode(std::exception_ptr eptr) noexcept {
+    try {
+        if (eptr) {
+            std::rethrow_exception(eptr);
+        }
+    } catch (const BadStatus& e) {
+        return e.code();
+    } catch (...) {
+        return UA_STATUSCODE_BADINTERNALERROR;
+    }
+    return UA_STATUSCODE_GOOD;
+}
+
 inline void throwOnBadStatus(UA_StatusCode code) {
     if (isBadStatus(code)) {
         // NOLINTNEXTLINE
@@ -118,10 +132,86 @@ template <typename F, typename... Args>
             std::invoke(fn, std::forward<Args>(args)...);
             return UA_STATUSCODE_GOOD;
         }
-    } catch (const BadStatus& e) {
-        return e.code();
     } catch (...) {
-        return UA_STATUSCODE_BADINTERNALERROR;
+        return getStatusCode(std::current_exception());
+    }
+}
+
+/**
+ * Capture of function invocation (result, exception pointer and status code).
+ * The class is specizalized for `void` return types to allow generic handling.
+ * It can only be instantiated by calling `invokeCapture`.
+ */
+template <typename T>
+class InvokeCapture {
+public:
+    using ResultType = T;
+
+    explicit InvokeCapture(T result)
+        : result_(std::move(result)) {}
+
+    explicit InvokeCapture(std::exception_ptr eptr)
+        : eptr_(std::move(eptr)) {}
+
+    T& get() noexcept {
+        return result_;
+    }
+
+    const T& get() const noexcept {
+        return result_;
+    }
+
+    std::exception_ptr exception() const noexcept {
+        return eptr_;
+    }
+
+    UA_StatusCode code() const noexcept {
+        return getStatusCode(eptr_);
+    }
+
+private:
+    T result_{};
+    std::exception_ptr eptr_{};
+};
+
+template <>
+class InvokeCapture<void> {
+public:
+    using ResultType = void;
+
+    explicit InvokeCapture() = default;
+
+    explicit InvokeCapture(std::exception_ptr eptr)
+        : eptr_(std::move(eptr)) {}
+
+    void get() const noexcept {}
+
+    std::exception_ptr exception() const noexcept {
+        return eptr_;
+    }
+
+    UA_StatusCode code() const noexcept {
+        return detail::getStatusCode(eptr_);
+    }
+
+private:
+    std::exception_ptr eptr_{};
+};
+
+template <typename F, typename... Args>
+inline static auto invokeCapture(F&& func, Args&&... args) noexcept {
+    using FuncResult = std::invoke_result_t<F, Args...>;
+    using Result = InvokeCapture<FuncResult>;
+
+    try {
+        if constexpr (std::is_void_v<FuncResult>) {
+            std::invoke(std::forward<F>(func), std::forward<Args>(args)...);
+            return Result();
+        } else {
+            return Result(std::invoke(std::forward<F>(func), std::forward<Args>(args)...));
+        }
+    } catch (...) {
+        return Result(std::current_exception());
     }
 }
 
