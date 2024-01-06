@@ -17,8 +17,8 @@
 namespace opcua::services {
 
 BrowseResponse browse(Client& client, const BrowseRequest& request) {
-    return ClientService::sendRequest<UA_BrowseRequest, UA_BrowseResponse>(
-        client, request, MoveResponse{}
+    return sendRequest<UA_BrowseRequest, UA_BrowseResponse>(
+        client, request, MoveResponse{}, UseSync{}
     );
 }
 
@@ -41,8 +41,8 @@ BrowseResult browse<Client>(Client& client, const BrowseDescription& bd, uint32_
 }
 
 BrowseNextResponse browseNext(Client& client, const BrowseNextRequest& request) {
-    return ClientService::sendRequest<UA_BrowseNextRequest, UA_BrowseNextResponse>(
-        client, request, MoveResponse{}
+    return sendRequest<UA_BrowseNextRequest, UA_BrowseNextResponse>(
+        client, request, MoveResponse{}, UseSync{}
     );
 }
 
@@ -104,9 +104,9 @@ std::vector<ExpandedNodeId> browseRecursive(Server& server, const BrowseDescript
 TranslateBrowsePathsToNodeIdsResponse translateBrowsePathsToNodeIds(
     Client& client, const TranslateBrowsePathsToNodeIdsRequest& request
 ) {
-    return ClientService::sendRequest<
+    return sendRequest<
         UA_TranslateBrowsePathsToNodeIdsRequest,
-        UA_TranslateBrowsePathsToNodeIdsResponse>(client, request, MoveResponse{});
+        UA_TranslateBrowsePathsToNodeIdsResponse>(client, request, MoveResponse{}, UseSync{});
 }
 
 template <>
@@ -152,14 +152,14 @@ BrowsePathResult browseSimplifiedBrowsePath(
 }
 
 RegisterNodesResponse registerNodes(Client& client, const RegisterNodesRequest& request) {
-    return ClientService::sendRequest<UA_RegisterNodesRequest, UA_RegisterNodesResponse>(
-        client, request, MoveResponse{}
+    return sendRequest<UA_RegisterNodesRequest, UA_RegisterNodesResponse>(
+        client, request, MoveResponse{}, UseSync{}
     );
 }
 
 UnregisterNodesResponse unregisterNodes(Client& client, const UnregisterNodesRequest& request) {
-    return ClientService::sendRequest<UA_UnregisterNodesRequest, UA_UnregisterNodesResponse>(
-        client, request, MoveResponse{}
+    return sendRequest<UA_UnregisterNodesRequest, UA_UnregisterNodesResponse>(
+        client, request, MoveResponse{}, UseSync{}
     );
 }
 
