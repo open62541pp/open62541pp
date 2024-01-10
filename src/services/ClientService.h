@@ -43,17 +43,7 @@ static auto sendRequest(
     F&& processResponse,
     CompletionHandler&& completionHandler
 ) {
-    static_assert(detail::isRegisteredType<Request>);
-    static_assert(detail::isRegisteredType<Response>);
-    static_assert(std::is_invocable_v<F, Response&>);
-
     using Result = std::invoke_result_t<F, Response&>;
-    if constexpr (std::is_void_v<Result>) {
-        static_assert(std::is_invocable_v<CompletionHandler, UA_StatusCode>);
-    } else {
-        static_assert(std::is_invocable_v<CompletionHandler, UA_StatusCode, Result>);
-    }
-
     using Context = std::tuple<F, CompletionHandler>;
 
     auto callback = [](UA_Client*, void* userdata, uint32_t /* reqId */, void* responsePtr) {
@@ -104,10 +94,6 @@ static auto sendRequest(
 /// Overload for async client requests returning `std::future` objects (`UseFuture`flag).
 template <typename Request, typename Response, typename F>
 static auto sendRequest(Client& client, const Request& request, F&& processResponse, UseFuture) {
-    static_assert(detail::isRegisteredType<Request>);
-    static_assert(detail::isRegisteredType<Response>);
-    static_assert(std::is_invocable_v<F, Response&>);
-
     using Result = std::invoke_result_t<F, Response&>;
     std::promise<Result> promise;
     auto future = promise.get_future();
@@ -130,10 +116,6 @@ static auto sendRequest(Client& client, const Request& request, F&& processRespo
 /// Overload for sync client requests (`UseSync` flag).
 template <typename Request, typename Response, typename F>
 static auto sendRequest(Client& client, const Request& request, F&& processResponse, UseSync) {
-    static_assert(detail::isRegisteredType<Request>);
-    static_assert(detail::isRegisteredType<Response>);
-    static_assert(std::is_invocable_v<F, Response&>);
-
     Response response{};
     const auto responseDeleter = detail::ScopeExit([&] {
         detail::clear(response, detail::getDataType<Response>());
