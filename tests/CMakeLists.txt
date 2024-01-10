@@ -14,6 +14,7 @@ add_executable(
     helper.cpp
     Logger.cpp
     Node.cpp
+    Result.cpp
     Server.cpp
     Services.cpp
     Session.cpp

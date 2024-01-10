@@ -49,6 +49,20 @@ std::vector<Variant> call(
 );
 
 /**
+ * Async response callback.
+ *
+ * The callback gets invoked in the receiver thread's context once a response has been received or a
+ * timeout occurred.
+ * The status code needs to be checked to determine validity of the result.
+ *
+ * @tparam T Result type
+ * @param code Status code
+ * @param result Result
+ */
+template <typename T>
+using AsyncCallback = std::function<void(UA_StatusCode code, T result)>;
+
+/**
  * Asynchronously call a server method and return results.
  *
  * @param client Instance of type Client
@@ -62,6 +76,18 @@ std::future<std::vector<Variant>> callAsync(
     const NodeId& objectId,
     const NodeId& methodId,
     Span<const Variant> inputArguments
+);
+
+/**
+ * Asynchronously call a server method and invoke a callback.
+ * @overload
+ */
+void callAsync(
+    Client& client,
+    const NodeId& objectId,
+    const NodeId& methodId,
+    Span<const Variant> inputArguments,
+    AsyncCallback<std::vector<Variant>> callback
 );
 
 /**

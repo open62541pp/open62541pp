@@ -50,23 +50,25 @@ std::vector<Variant> call(
     return getOutputArguments(result);
 }
 
-template <typename TClientService>
+template <typename CompletionHandler>
 static auto callImpl(
     Client& client,
     const NodeId& objectId,
     const NodeId& methodId,
-    Span<const Variant> inputArguments
+    Span<const Variant> inputArguments,
+    CompletionHandler&& completionHandler
 ) {
     UA_CallMethodRequest item = createCallMethodRequest(objectId, methodId, inputArguments);
     UA_CallRequest request{};
     request.methodsToCall = &item;
     request.methodsToCallSize = 1;
-    return TClientService::template sendRequest<UA_CallRequest, UA_CallResponse>(
+    return sendRequest<UA_CallRequest, UA_CallResponse>(
         client,
         request,
         [](UA_CallResponse& response) {
             return getOutputArguments(getSingleResultFromResponse(response));
-        }
+        },
+        std::forward<CompletionHandler>(completionHandler)
     );
 }
 
@@ -77,7 +79,7 @@ std::vector<Variant> call(
     const NodeId& methodId,
     Span<const Variant> inputArguments
 ) {
-    return callImpl<ClientService>(client, objectId, methodId, inputArguments);
+    return callImpl(client, objectId, methodId, inputArguments, UseSync{});
 }
 
 std::future<std::vector<Variant>> callAsync(
@@ -86,7 +88,17 @@ std::future<std::vector<Variant>> callAsync(
     const NodeId& methodId,
     Span<const Variant> inputArguments
 ) {
-    return callImpl<ClientServiceAsync>(client, objectId, methodId, inputArguments);
+    return callImpl(client, objectId, methodId, inputArguments, UseFuture{});
+}
+
+void callAsync(
+    Client& client,
+    const NodeId& objectId,
+    const NodeId& methodId,
+    Span<const Variant> inputArguments,
+    AsyncCallback<std::vector<Variant>> callback
+) {
+    return callImpl(client, objectId, methodId, inputArguments, std::move(callback));
 }
 
 }  // namespace opcua::services

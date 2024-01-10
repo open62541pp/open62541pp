@@ -8,6 +8,7 @@
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/detail/Result.h"  // tryInvoke
 #include "open62541pp/open62541.h"
 
 #include "../ClientContext.h"
@@ -22,7 +23,7 @@ static void deleteSubscriptionCallback(
         auto* subscription = static_cast<ClientContext::Subscription*>(subContext);
         auto& callback = subscription->deleteCallback;
         if (callback) {
-            detail::invokeCatchIgnore([&] { callback(subId); });
+            detail::tryInvoke([&] { callback(subId); });
         }
     }
     ClientContext& clientContext = getContext(client);
