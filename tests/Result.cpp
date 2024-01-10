@@ -6,10 +6,10 @@
 
 using namespace opcua;
 
-TEST_CASE("Result") {
-    const auto badCode = UA_STATUSCODE_BADUNEXPECTEDERROR;
-    const detail::BadResult badResult(badCode);
+static constexpr StatusCode badCode(UA_STATUSCODE_BADUNEXPECTEDERROR);
+static constexpr detail::BadResult badResult(badCode);
 
+TEST_CASE("Result") {
     SUBCASE("code") {
         CHECK(detail::Result<int>(1).code() == UA_STATUSCODE_GOOD);
         CHECK(detail::Result<int>(badResult).code() == badCode);
@@ -80,9 +80,6 @@ TEST_CASE("Result") {
 }
 
 TEST_CASE("Result (void template specialization)") {
-    const auto badCode = UA_STATUSCODE_BADUNEXPECTEDERROR;
-    const detail::BadResult badResult(badCode);
-
     SUBCASE("code") {
         CHECK(detail::Result<void>().code() == UA_STATUSCODE_GOOD);
         CHECK(detail::Result<void>(badResult).code() == badCode);
@@ -108,9 +105,9 @@ TEST_CASE("tryInvoke") {
     }
 
     SUBCASE("BadStatus exception") {
-        auto result = detail::tryInvoke([] { throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR); });
+        auto result = detail::tryInvoke([] { throw BadStatus(badCode); });
         CHECK_FALSE(result.isGood());
-        CHECK(result.code() == UA_STATUSCODE_BADUNEXPECTEDERROR);
+        CHECK(result.code() == badCode);
     }
 
     SUBCASE("Other exception types") {
@@ -121,7 +118,6 @@ TEST_CASE("tryInvoke") {
 }
 
 TEST_CASE("tryInvokeGetStatus") {
-    const auto badCode = UA_STATUSCODE_BADUNEXPECTEDERROR;
     CHECK(detail::tryInvokeGetStatus([]() -> void { return; }) == UA_STATUSCODE_GOOD);
     CHECK(detail::tryInvokeGetStatus([]() -> void { throw BadStatus(badCode); }) == badCode);
     CHECK(detail::tryInvokeGetStatus([]() -> StatusCode { return 1; }) == 1);
