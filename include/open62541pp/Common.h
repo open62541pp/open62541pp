@@ -2,9 +2,7 @@
 
 #include <cstdint>
 #include <string_view>
-#include <tuple>
 
-#include "open62541pp/detail/traits.h"
 #include "open62541pp/open62541.h"
 
 namespace opcua {
@@ -211,39 +209,5 @@ enum class MessageSecurityMode : uint32_t {
     SignAndEncrypt = 3,  ///< All messages are signed and encrypted
     // clang-format on
 };
-
-namespace detail {
-
-using BuiltinTypes = std::tuple<
-    UA_Boolean,
-    UA_SByte,
-    UA_Byte,
-    UA_Int16,
-    UA_UInt16,
-    UA_Int32,
-    UA_UInt32,
-    UA_Int64,
-    UA_UInt64,
-    UA_Float,
-    UA_Double,
-    UA_String,
-    UA_DateTime,
-    UA_Guid,
-    UA_ByteString,
-    UA_XmlElement,
-    UA_NodeId,
-    UA_ExpandedNodeId,
-    UA_StatusCode,
-    UA_QualifiedName,
-    UA_LocalizedText,
-    UA_ExtensionObject,
-    UA_DataValue,
-    UA_Variant,
-    UA_DiagnosticInfo>;
-
-template <typename T>
-inline constexpr bool isBuiltinType = TupleHolds<BuiltinTypes, T>::value;
-
-}  // namespace detail
 
 }  // namespace opcua

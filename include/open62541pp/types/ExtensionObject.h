@@ -2,8 +2,7 @@
 
 #include <optional>
 
-#include "open62541pp/Common.h"  // isBuiltinType
-#include "open62541pp/TypeConverter.h"
+#include "open62541pp/TypeRegistry.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/open62541.h"
 
@@ -47,26 +46,30 @@ public:
     /// The data will *not* be deleted when the ExtensionObject is destructed.
     /// @param data Decoded data
     template <typename T>
-    static ExtensionObject fromDecoded(T& data) noexcept;
+    [[nodiscard]] static ExtensionObject fromDecoded(T& data) noexcept {
+        return fromDecoded(&data, detail::getDataType<T>());
+    }
 
     /// Create an ExtensionObject from a decoded object (assign).
     /// The data will *not* be deleted when the ExtensionObject is destructed.
     /// @param data Decoded data
     /// @param type Data type of the decoded data
     /// @warning Type erased version, use with caution.
-    static ExtensionObject fromDecoded(void* data, const UA_DataType& type) noexcept;
+    [[nodiscard]] static ExtensionObject fromDecoded(void* data, const UA_DataType& type) noexcept;
 
     /// Create an ExtensionObject from a decoded object (copy).
     /// Set the "decoded" data to a copy of the given object.
     /// @param data Decoded data
     template <typename T>
-    static ExtensionObject fromDecodedCopy(const T& data);
+    [[nodiscard]] static ExtensionObject fromDecodedCopy(const T& data) {
+        return fromDecodedCopy(&data, detail::getDataType<T>());
+    }
 
     /// Create an ExtensionObject from a decoded object (copy).
     /// @param data Decoded data
     /// @param type Data type of the decoded data
     /// @warning Type erased version, use with caution.
-    static ExtensionObject fromDecodedCopy(const void* data, const UA_DataType& type);
+    [[nodiscard]] static ExtensionObject fromDecodedCopy(const void* data, const UA_DataType& type);
 
     /// Check if the ExtensionObject is empty
     bool isEmpty() const noexcept;
@@ -90,11 +93,21 @@ public:
     /// Get pointer to the decoded data with given template type. Returns `nullptr` if the
     /// ExtensionObject is either encoded or the decoded data not of type `T`.
     template <typename T>
-    T* getDecodedData() noexcept;
+    T* getDecodedData() noexcept {
+        if (getDecodedDataType() == &detail::getDataType<T>()) {
+            return static_cast<T*>(getDecodedData());
+        }
+        return nullptr;
+    }
 
     /// @copydoc getDecodedData
     template <typename T>
-    const T* getDecodedData() const noexcept;
+    const T* getDecodedData() const noexcept {
+        if (getDecodedDataType() == &detail::getDataType<T>()) {
+            return static_cast<const T*>(getDecodedData());
+        }
+        return nullptr;
+    }
 
     /// Get pointer to the decoded data. Returns `nullptr` if the ExtensionObject is encoded.
     /// @warning Type erased version, use with caution.
@@ -102,47 +115,6 @@ public:
 
     /// @copydoc getDecodedData
     const void* getDecodedData() const noexcept;
-
-private:
-    template <typename T>
-    static constexpr void assertDecodedType() {
-        static_assert(
-            detail::isNativeType<T> || detail::isTypeWrapper<T>,
-            "Template type must be a native or wrapper type to set/get decoded data"
-        );
-    }
 };
-
-/* --------------------------------------- Implementation --------------------------------------- */
-
-template <typename T>
-T* ExtensionObject::getDecodedData() noexcept {
-    assertDecodedType<T>();
-    if (getDecodedDataType() == &detail::guessDataType<T>()) {
-        return static_cast<T*>(getDecodedData());
-    }
-    return nullptr;
-}
-
-template <typename T>
-const T* ExtensionObject::getDecodedData() const noexcept {
-    assertDecodedType<T>();
-    if (getDecodedDataType() == &detail::guessDataType<T>()) {
-        return static_cast<const T*>(getDecodedData());
-    }
-    return nullptr;
-}
-
-template <typename T>
-ExtensionObject ExtensionObject::fromDecoded(T& data) noexcept {
-    assertDecodedType<T>();
-    return fromDecoded(&data, detail::guessDataType<T>());
-}
-
-template <typename T>
-ExtensionObject ExtensionObject::fromDecodedCopy(const T& data) {
-    assertDecodedType<T>();
-    return fromDecodedCopy(&data, detail::guessDataType<T>());
-}
 
 }  // namespace opcua

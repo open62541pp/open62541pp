@@ -17,20 +17,11 @@ ExtensionObject ExtensionObject::fromDecoded(void* data, const UA_DataType& type
 ExtensionObject ExtensionObject::fromDecodedCopy(const void* data, const UA_DataType& type) {
     // manual implementation instead of UA_ExtensionObject_setValueCopy to support open62541 v1.0
     // https://github.com/open62541/open62541/blob/v1.3.5/src/ua_types.c#L503-L524
-    void* dataCopy = UA_new(&type);
-    if (dataCopy == nullptr) {
-        throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
-    }
-    const auto status = UA_copy(data, dataCopy, &type);
-    if (detail::isBadStatus(status)) {
-        UA_delete(dataCopy, &type);
-        throw BadStatus(status);
-    }
-
     ExtensionObject obj;
     obj->encoding = UA_EXTENSIONOBJECT_DECODED;
-    obj->content.decoded.data = dataCopy;  // NOLINT
+    obj->content.decoded.data = detail::allocate<void>(type);  // NOLINT
     obj->content.decoded.type = &type;  // NOLINT
+    detail::throwOnBadStatus(UA_copy(data, obj->content.decoded.data, &type));  // NOLINT
     return obj;
 }
 

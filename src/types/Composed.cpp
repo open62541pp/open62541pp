@@ -37,16 +37,14 @@ inline static void assign(T&& src, Native& dst) {
 }
 
 template <typename T, typename Native>
-static void copyArray(Span<const T> src, Native** dst, size_t& dstSize) {
+static void assignArray(Span<const T> src, Native*& dst, size_t& dstSize) {
     static_assert(sizeof(T) == sizeof(Native));
+    if constexpr (detail::isTypeWrapper<T>) {
+        dst = detail::copyArray(asNative(src.data()), src.size(), detail::getDataType<T>());
+    } else {
+        dst = detail::copyArray(src.data(), src.size(), detail::getDataType<T>());
+    }
     dstSize = src.size();
-    const auto status = UA_Array_copy(
-        src.data(),
-        src.size(),
-        (void**)dst,  // NOLINT
-        &detail::guessDataType<T>()
-    );
-    detail::throwOnBadStatus(status);
 }
 
 RequestHeader::RequestHeader(
@@ -125,7 +123,7 @@ AddNodesItem::AddNodesItem(
 
 AddNodesRequest::AddNodesRequest(RequestHeader requestHeader, Span<const AddNodesItem> nodesToAdd) {
     assign(std::move(requestHeader), handle()->requestHeader);
-    copyArray(nodesToAdd, &handle()->nodesToAdd, handle()->nodesToAddSize);
+    assignArray(nodesToAdd, handle()->nodesToAdd, handle()->nodesToAddSize);
 }
 
 AddReferencesItem::AddReferencesItem(
@@ -148,7 +146,7 @@ AddReferencesRequest::AddReferencesRequest(
     RequestHeader requestHeader, Span<const AddReferencesItem> referencesToAdd
 ) {
     assign(std::move(requestHeader), handle()->requestHeader);
-    copyArray(referencesToAdd, &handle()->referencesToAdd, handle()->referencesToAddSize);
+    assignArray(referencesToAdd, handle()->referencesToAdd, handle()->referencesToAddSize);
 }
 
 DeleteNodesItem::DeleteNodesItem(NodeId nodeId, bool deleteTargetReferences) {
@@ -160,7 +158,7 @@ DeleteNodesRequest::DeleteNodesRequest(
     RequestHeader requestHeader, Span<const DeleteNodesItem> nodesToDelete
 ) {
     assign(std::move(requestHeader), handle()->requestHeader);
-    copyArray(nodesToDelete, &handle()->nodesToDelete, handle()->nodesToDeleteSize);
+    assignArray(nodesToDelete, handle()->nodesToDelete, handle()->nodesToDeleteSize);
 }
 
 DeleteReferencesItem::DeleteReferencesItem(
@@ -181,7 +179,7 @@ DeleteReferencesRequest::DeleteReferencesRequest(
     RequestHeader requestHeader, Span<const DeleteReferencesItem> referencesToDelete
 ) {
     assign(std::move(requestHeader), handle()->requestHeader);
-    copyArray(referencesToDelete, &handle()->referencesToDelete, handle()->referencesToDeleteSize);
+    assignArray(referencesToDelete, handle()->referencesToDelete, handle()->referencesToDeleteSize);
 }
 
 ViewDescription::ViewDescription(NodeId viewId, DateTime timestamp, uint32_t viewVersion) {
@@ -219,7 +217,7 @@ RelativePath::RelativePath(std::initializer_list<RelativePathElement> elements)
     : RelativePath({elements.begin(), elements.size()}) {}
 
 RelativePath::RelativePath(Span<const RelativePathElement> elements) {
-    copyArray(elements, &handle()->elements, handle()->elementsSize);
+    assignArray(elements, handle()->elements, handle()->elementsSize);
 }
 
 BrowsePath::BrowsePath(NodeId startingNode, RelativePath relativePath) {
@@ -236,7 +234,7 @@ BrowseRequest::BrowseRequest(
     assign(std::move(requestHeader), handle()->requestHeader);
     assign(std::move(view), handle()->view);
     assign(requestedMaxReferencesPerNode, handle()->requestedMaxReferencesPerNode);
-    copyArray(nodesToBrowse, &handle()->nodesToBrowse, handle()->nodesToBrowseSize);
+    assignArray(nodesToBrowse, handle()->nodesToBrowse, handle()->nodesToBrowseSize);
 }
 
 BrowseNextRequest::BrowseNextRequest(
@@ -246,28 +244,28 @@ BrowseNextRequest::BrowseNextRequest(
 ) {
     assign(std::move(requestHeader), handle()->requestHeader);
     assign(releaseContinuationPoints, handle()->releaseContinuationPoints);
-    copyArray(continuationPoints, &handle()->continuationPoints, handle()->continuationPointsSize);
+    assignArray(continuationPoints, handle()->continuationPoints, handle()->continuationPointsSize);
 }
 
 TranslateBrowsePathsToNodeIdsRequest::TranslateBrowsePathsToNodeIdsRequest(
     RequestHeader requestHeader, Span<const BrowsePath> browsePaths
 ) {
     assign(std::move(requestHeader), handle()->requestHeader);
-    copyArray(browsePaths, &handle()->browsePaths, handle()->browsePathsSize);
+    assignArray(browsePaths, handle()->browsePaths, handle()->browsePathsSize);
 }
 
 RegisterNodesRequest::RegisterNodesRequest(
     RequestHeader requestHeader, Span<const NodeId> nodesToRegister
 ) {
     assign(std::move(requestHeader), handle()->requestHeader);
-    copyArray(nodesToRegister, &handle()->nodesToRegister, handle()->nodesToRegisterSize);
+    assignArray(nodesToRegister, handle()->nodesToRegister, handle()->nodesToRegisterSize);
 }
 
 UnregisterNodesRequest::UnregisterNodesRequest(
     RequestHeader requestHeader, Span<const NodeId> nodesToUnregister
 ) {
     assign(std::move(requestHeader), handle()->requestHeader);
-    copyArray(nodesToUnregister, &handle()->nodesToUnregister, handle()->nodesToUnregisterSize);
+    assignArray(nodesToUnregister, handle()->nodesToUnregister, handle()->nodesToUnregisterSize);
 }
 
 ReadValueId::ReadValueId(
@@ -288,7 +286,7 @@ ReadRequest::ReadRequest(
     assign(std::move(requestHeader), handle()->requestHeader);
     assign(maxAge, handle()->maxAge);
     assign(timestampsToReturn, handle()->timestampsToReturn);
-    copyArray(nodesToRead, &handle()->nodesToRead, handle()->nodesToReadSize);
+    assignArray(nodesToRead, handle()->nodesToRead, handle()->nodesToReadSize);
 }
 
 WriteValue::WriteValue(
@@ -302,7 +300,13 @@ WriteValue::WriteValue(
 
 WriteRequest::WriteRequest(RequestHeader requestHeader, Span<const WriteValue> nodesToWrite) {
     assign(std::move(requestHeader), handle()->requestHeader);
-    copyArray(nodesToWrite, &handle()->nodesToWrite, handle()->nodesToWriteSize);
+    assignArray(nodesToWrite, handle()->nodesToWrite, handle()->nodesToWriteSize);
+}
+
+EnumValueType::EnumValueType(int64_t value, LocalizedText displayName, LocalizedText description) {
+    assign(value, handle()->value);
+    assign(std::move(displayName), handle()->displayName);
+    assign(std::move(description), handle()->description);
 }
 
 #ifdef UA_ENABLE_METHODCALLS
@@ -318,7 +322,7 @@ Argument::Argument(
     assign(std::move(description), handle()->description);
     assign(std::move(dataType), handle()->dataType);
     assign(valueRank, handle()->valueRank);
-    copyArray(arrayDimensions, &handle()->arrayDimensions, handle()->arrayDimensionsSize);
+    assignArray(arrayDimensions, handle()->arrayDimensions, handle()->arrayDimensionsSize);
 }
 
 CallMethodRequest::CallMethodRequest(
@@ -367,7 +371,7 @@ SimpleAttributeOperand::SimpleAttributeOperand(
     [[maybe_unused]] std::string_view indexRange
 ) {
     assign(std::move(typeDefinitionId), handle()->typeDefinitionId);
-    copyArray(browsePath, &handle()->browsePath, handle()->browsePathSize);
+    assignArray(browsePath, handle()->browsePath, handle()->browsePathSize);
     assign(attributeId, handle()->attributeId);
     assign(indexRange, handle()->indexRange);
 }
@@ -377,8 +381,8 @@ ContentFilterElement::ContentFilterElement(
 ) {
     assign(filterOperator, handle()->filterOperator);
     handle()->filterOperandsSize = operands.size();
-    handle()->filterOperands = static_cast<UA_ExtensionObject*>(
-        UA_Array_new(operands.size(), &UA_TYPES[UA_TYPES_EXTENSIONOBJECT])
+    handle()->filterOperands = detail::allocateArray<UA_ExtensionObject>(
+        operands.size(), UA_TYPES[UA_TYPES_EXTENSIONOBJECT]
     );
 
     // transform array of operand variants to array of extension objects
@@ -398,7 +402,7 @@ ContentFilter::ContentFilter(std::initializer_list<ContentFilterElement> element
     : ContentFilter(Span<const ContentFilterElement>(elements)) {}
 
 ContentFilter::ContentFilter(Span<const ContentFilterElement> elements) {
-    copyArray(elements, &handle()->elements, handle()->elementsSize);
+    assignArray(elements, handle()->elements, handle()->elementsSize);
 }
 
 /* ----------------------------------- ContentFilter operators ---------------------------------- */
@@ -413,9 +417,10 @@ static ContentFilter concatFilterElements(
 
     ContentFilter result;
     result->elementsSize = totalSize;
-    result->elements = static_cast<UA_ContentFilterElement*>(
-        UA_Array_new(totalSize, &UA_TYPES[UA_TYPES_CONTENTFILTERELEMENT])
+    result->elements = detail::allocateArray<UA_ContentFilterElement>(
+        totalSize, UA_TYPES[UA_TYPES_CONTENTFILTERELEMENT]
     );
+
     Span<ContentFilterElement> resultElements(
         asWrapper<ContentFilterElement>(result->elements), totalSize
     );
@@ -520,7 +525,7 @@ DataChangeFilter::DataChangeFilter(
 EventFilter::EventFilter(
     Span<const SimpleAttributeOperand> selectClauses, ContentFilter whereClause
 ) {
-    copyArray(selectClauses, &handle()->selectClauses, handle()->selectClausesSize);
+    assignArray(selectClauses, handle()->selectClauses, handle()->selectClausesSize);
     assign(std::move(whereClause), handle()->whereClause);
 }
 

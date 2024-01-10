@@ -114,30 +114,4 @@ void Variant::checkIsArray() const {
     }
 }
 
-void Variant::setScalarImpl(void* value, const UA_DataType& type, bool own) noexcept {
-    clear();
-    UA_Variant_setScalar(handle(), value, &type);
-    handle()->storageType = own ? UA_VARIANT_DATA : UA_VARIANT_DATA_NODELETE;
-}
-
-void Variant::setScalarCopyImpl(const void* value, const UA_DataType& type) {
-    clear();
-    const auto status = UA_Variant_setScalarCopy(handle(), value, &type);
-    detail::throwOnBadStatus(status);
-    handle()->storageType = UA_VARIANT_DATA;
-}
-
-void Variant::setArrayImpl(void* array, size_t size, const UA_DataType& type, bool own) noexcept {
-    clear();
-    UA_Variant_setArray(handle(), array, size, &type);
-    handle()->storageType = own ? UA_VARIANT_DATA : UA_VARIANT_DATA_NODELETE;
-}
-
-void Variant::setArrayCopyImpl(const void* array, size_t size, const UA_DataType& type) {
-    clear();
-    const auto status = UA_Variant_setArrayCopy(handle(), array, size, &type);
-    detail::throwOnBadStatus(status);
-    handle()->storageType = UA_VARIANT_DATA;
-}
-
 }  // namespace opcua

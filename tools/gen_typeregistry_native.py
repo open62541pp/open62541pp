@@ -2,7 +2,7 @@ from pathlib import Path
 
 HERE = Path(__file__).parent
 SCHEMA_DIR = HERE.parent / "3rdparty" / "open62541" / "tools" / "schema"
-HEADER_FILE = HERE.parent / "include" / "open62541pp" / "TypeConverterNative.h"
+HEADER_FILE = HERE.parent / "include" / "open62541pp" / "TypeRegistryNative.h"
 
 FILES_DATATYPES = [
     SCHEMA_DIR / "datatypes_minimal.txt",
@@ -23,7 +23,7 @@ TEMPLATE_HEADER = """
 
 #pragma once
 
-#include "open62541pp/TypeConverter.h"
+#include "open62541pp/TypeRegistry.h"
 #include "open62541pp/open62541.h"
 
 namespace opcua {{
@@ -39,7 +39,7 @@ namespace opcua {{
 
 TEMPLATE_MACRO = """
 #ifdef {typeindex_define}
-UAPP_TYPECONVERTER_NATIVE({type}, {typeindex_define})
+UAPP_TYPEREGISTRY_NATIVE({type}, {typeindex_define})
 #endif
 """.strip()
 
@@ -88,15 +88,13 @@ EXCLUDE_TYPES = [
 
 def main():
     # remove duplicates to prevent redefinitions
-    typenames = set.union(*(
-        set(f.read_text().strip().splitlines())
-        for f in FILES_DATATYPES
-    ))
+    typenames = set.union(
+        *(set(f.read_text().strip().splitlines()) for f in FILES_DATATYPES)
+    )
     typenames -= set(EXCLUDE_TYPES)
     body = "\n".join(
         TEMPLATE_MACRO.format(
-            type=f"UA_{typename}",
-            typeindex_define = f"UA_TYPES_{typename.upper()}"
+            type=f"UA_{typename}", typeindex_define=f"UA_TYPES_{typename.upper()}"
         )
         for typename in sorted(typenames)
     )

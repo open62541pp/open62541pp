@@ -9,7 +9,7 @@
 #include "open62541pp/Config.h"
 #include "open62541pp/NodeIds.h"
 #include "open62541pp/Span.h"
-#include "open62541pp/TypeConverter.h"  // guessDataType
+#include "open62541pp/TypeRegistry.h"  // getDataType
 #include "open62541pp/TypeWrapper.h"  // asWrapper
 #include "open62541pp/open62541.h"
 #include "open62541pp/services/Attribute.h"
@@ -533,7 +533,7 @@ public:
     /// @return Current node instance to chain multiple methods (fluent interface)
     template <typename T>
     Node& writeDataType() {
-        return writeDataType(asWrapper<NodeId>(detail::guessDataType<T>().typeId));
+        return writeDataType(asWrapper<NodeId>(detail::getDataType<T>().typeId));
     }
 
     /// @copydoc services::writeValueRank

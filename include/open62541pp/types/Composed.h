@@ -10,7 +10,7 @@
 #include "open62541pp/Common.h"
 #include "open62541pp/NodeIds.h"  // ReferenceTypeId
 #include "open62541pp/Span.h"
-#include "open62541pp/TypeConverter.h"
+#include "open62541pp/TypeRegistry.h"  // getDataType
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/traits.h"
 #include "open62541pp/open62541.h"
@@ -34,19 +34,19 @@
     }
 
 // NOLINTNEXTLINE
-#define UAPP_COMPOSED_GETTER_WRAPPER_CONST(WrapperType, getterName, member)                        \
-    const WrapperType& getterName() const noexcept {                                               \
-        return asWrapper<WrapperType>(handle()->member);                                           \
+#define UAPP_COMPOSED_GETTER_WRAPPER_CONST(Type, getterName, member)                               \
+    const Type& getterName() const noexcept {                                                      \
+        return asWrapper<Type>(handle()->member);                                                  \
     }
 // NOLINTNEXTLINE
-#define UAPP_COMPOSED_GETTER_WRAPPER_NONCONST(WrapperType, getterName, member)                     \
-    WrapperType& getterName() noexcept {                                                           \
-        return asWrapper<WrapperType>(handle()->member);                                           \
+#define UAPP_COMPOSED_GETTER_WRAPPER_NONCONST(Type, getterName, member)                            \
+    Type& getterName() noexcept {                                                                  \
+        return asWrapper<Type>(handle()->member);                                                  \
     }
 // NOLINTNEXTLINE
-#define UAPP_COMPOSED_GETTER_WRAPPER(WrapperType, getterName, member)                              \
-    UAPP_COMPOSED_GETTER_WRAPPER_CONST(WrapperType, getterName, member)                            \
-    UAPP_COMPOSED_GETTER_WRAPPER_NONCONST(WrapperType, getterName, member)
+#define UAPP_COMPOSED_GETTER_WRAPPER(Type, getterName, member)                                     \
+    UAPP_COMPOSED_GETTER_WRAPPER_CONST(Type, getterName, member)                                   \
+    UAPP_COMPOSED_GETTER_WRAPPER_NONCONST(Type, getterName, member)
 
 // NOLINTNEXTLINE
 #define UAPP_COMPOSED_GETTER_SPAN(Type, getterName, memberArray, memberSize)                       \
@@ -215,26 +215,23 @@ public:
     }
 
 // NOLINTNEXTLINE
-#define UAPP_NODEATTR_WRAPPER(WrapperType, suffix, member, flag)                                   \
-    UAPP_COMPOSED_GETTER_WRAPPER_CONST(WrapperType, get##suffix, member)                           \
-    auto& set##suffix(const WrapperType& member) {                                                 \
+#define UAPP_NODEATTR_WRAPPER(Type, suffix, member, flag)                                          \
+    UAPP_COMPOSED_GETTER_WRAPPER_CONST(Type, get##suffix, member)                                  \
+    auto& set##suffix(const Type& member) {                                                        \
         handle()->specifiedAttributes |= flag;                                                     \
-        asWrapper<WrapperType>(handle()->member) = member;                                         \
+        asWrapper<Type>(handle()->member) = member;                                                \
         return *this;                                                                              \
     }
 
 // NOLINTNEXTLINE
-#define UAPP_NODEATTR_ARRAY(Type, suffix, memberArray, memberSize, flag)                           \
-    UAPP_COMPOSED_GETTER_SPAN(Type, get##suffix, memberArray, memberSize)                          \
-    auto& set##suffix(Span<const Type> memberArray) {                                              \
+#define UAPP_NODEATTR_ARRAY(Type, suffix, member, memberSize, flag)                                \
+    UAPP_COMPOSED_GETTER_SPAN(Type, get##suffix, member, memberSize)                               \
+    auto& set##suffix(Span<const Type> member) {                                                   \
+        const auto& dataType = detail::getDataType<Type>();                                        \
         handle()->specifiedAttributes |= flag;                                                     \
-        UA_Array_delete(                                                                           \
-            handle()->memberArray, handle()->memberSize, &detail::guessDataType<Type>()            \
-        );                                                                                         \
-        handle()->memberArray = detail::toNativeArrayAlloc(                                        \
-            memberArray.begin(), memberArray.end()                                                 \
-        );                                                                                         \
-        handle()->memberSize = memberArray.size();                                                 \
+        detail::deallocateArray(handle()->member, handle()->memberSize, dataType);                 \
+        handle()->member = detail::copyArray(member.data(), member.size(), dataType);              \
+        handle()->memberSize = member.size();                                                      \
         return *this;                                                                              \
     }
 
@@ -308,7 +305,7 @@ public:
     /// Deduce the `dataType` from the template type.
     template <typename T>
     auto& setDataType() {
-        return setDataType(asWrapper<NodeId>(detail::guessDataType<T>().typeId));
+        return setDataType(asWrapper<NodeId>(detail::getDataType<T>().typeId));
     }
 
     UAPP_NODEATTR_CAST(ValueRank, ValueRank, valueRank, UA_NODEATTRIBUTESMASK_VALUERANK)
@@ -395,7 +392,7 @@ public:
     /// Deduce the `dataType` from the template type.
     template <typename T>
     auto& setDataType() {
-        return setDataType(asWrapper<NodeId>(detail::guessDataType<T>().typeId));
+        return setDataType(asWrapper<NodeId>(detail::getDataType<T>().typeId));
     }
 
     UAPP_NODEATTR_CAST(ValueRank, ValueRank, valueRank, UA_NODEATTRIBUTESMASK_VALUERANK)
@@ -1163,6 +1160,21 @@ public:
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
         DiagnosticInfo, getDiagnosticInfos, diagnosticInfos, diagnosticInfosSize
     )
+};
+
+/**
+ * UA_EnumValueType wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.39
+ */
+class EnumValueType : public TypeWrapper<UA_EnumValueType, UA_TYPES_ENUMVALUETYPE> {
+public:
+    using TypeWrapperBase::TypeWrapperBase;
+
+    EnumValueType(int64_t value, LocalizedText displayName, LocalizedText description);
+
+    UAPP_COMPOSED_GETTER(int64_t, getValue, value)
+    UAPP_COMPOSED_GETTER_WRAPPER(LocalizedText, getDisplayName, displayName)
+    UAPP_COMPOSED_GETTER_WRAPPER(LocalizedText, getDescription, description)
 };
 
 /* ------------------------------------------- Method ------------------------------------------- */

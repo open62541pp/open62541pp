@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `TypeRegistry<T>` to derive the corresponding `UA_DataType` object from template types.
+  Custom data types can be registered with template specializations. (#136)
+- Check `Variant` data type by template type, e.g. `var.isType<int>()` (#139)
+- Update open62541 to v1.3.9
+
+### Changed
+
+- Deprecate `TypeIndexList` (`TypeConverter::ValidTypes`) because it's not required anymore.
+  Just remove `TypeConverter<T>::ValidTypes` from your template specializations.
+  The `UA_DataType` is retrieved from the `TypeRegistry<NativeType>` specialization. (#136)
+
 ## [0.11.0] - 2023-11-01
 
 ### Changed

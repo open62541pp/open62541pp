@@ -1,20 +1,23 @@
 #pragma once
 
+#include <algorithm>  // copy_n
 #include <cassert>
+#include <memory>
 #include <string>
 #include <string_view>
-#include <tuple>
 
-#include "open62541pp/Common.h"
+#include "open62541pp/Common.h"  // TypeIndex
 #include "open62541pp/ErrorHandling.h"
-#include "open62541pp/detail/traits.h"
+#include "open62541pp/detail/traits.h"  // IsOneOf
 #include "open62541pp/open62541.h"
 
 namespace opcua::detail {
 
 /* ------------------------------------ Generic type handling ----------------------------------- */
 
-using PointerFreeTypes = std::tuple<
+template <typename T>
+inline constexpr bool isPointerFree = IsOneOf<
+    T,
     UA_Boolean,
     UA_SByte,
     UA_Byte,
@@ -28,28 +31,94 @@ using PointerFreeTypes = std::tuple<
     UA_Double,
     UA_DateTime,
     UA_Guid,
-    UA_StatusCode>;
+    UA_StatusCode>::value;
 
 template <typename T>
-inline constexpr bool isPointerFree = TupleHolds<PointerFreeTypes, T>::value;
+constexpr bool isValidTypeCombination(const UA_DataType& type) {
+    if constexpr (std::is_void_v<T>) {
+        return true;  // allow type-erasure
+    } else {
+        return sizeof(T) == type.memSize;
+    }
+}
 
 template <typename T>
 constexpr void clear(T& native, const UA_DataType& type) noexcept {
-    assert(sizeof(T) == type.memSize);
+    assert(isValidTypeCombination<T>(type));
     if constexpr (!isPointerFree<T>) {
         UA_clear(&native, &type);
     }
 }
 
 template <typename T>
+inline void deallocate(T* native, const UA_DataType& type) noexcept {
+    assert(isValidTypeCombination<T>(type));
+    UA_delete(native, &type);
+}
+
+template <typename T>
+[[nodiscard]] inline T* allocate(const UA_DataType& type) {
+    assert(isValidTypeCombination<T>(type));
+    auto* result = static_cast<T*>(UA_new(&type));
+    if (result == nullptr) {
+        throw std::bad_alloc();
+    }
+    return result;
+}
+
+template <typename T>
+[[nodiscard]] inline auto allocateUniquePtr(const UA_DataType& type) {
+    auto deleter = [&type](T* native) { deallocate(native, type); };
+    return std::unique_ptr<T, decltype(deleter)>(allocate<T>(type), deleter);
+}
+
+template <typename T>
 [[nodiscard]] constexpr T copy(const T& src, const UA_DataType& type) noexcept(isPointerFree<T>) {
-    assert(sizeof(T) == type.memSize);
+    assert(isValidTypeCombination<T>(type));
     if constexpr (!isPointerFree<T>) {
         T dst;  // NOLINT, initialized in UA_copy function
-        detail::throwOnBadStatus(UA_copy(&src, &dst, &type));
+        throwOnBadStatus(UA_copy(&src, &dst, &type));
         return dst;
     } else {
         return src;
+    }
+}
+
+/* ----------------------------------- Generic array handling ----------------------------------- */
+
+template <typename T>
+inline void deallocateArray(T* array, size_t size, const UA_DataType& type) noexcept {
+    assert(isValidTypeCombination<T>(type));
+    UA_Array_delete(array, size, &type);
+}
+
+template <typename T>
+[[nodiscard]] inline T* allocateArray(size_t size, const UA_DataType& type) {
+    assert(isValidTypeCombination<T>(type));
+    auto* result = static_cast<T*>(UA_Array_new(size, &type));
+    if (result == nullptr) {
+        throw std::bad_alloc();
+    }
+    return result;
+}
+
+template <typename T>
+[[nodiscard]] inline auto allocateArrayUniquePtr(size_t size, const UA_DataType& type) {
+    auto deleter = [&type, size](T* native) { deallocateArray(native, size, type); };
+    return std::unique_ptr<T, decltype(deleter)>(allocateArray<T>(size, type), deleter);
+}
+
+template <typename T>
+[[nodiscard]] inline T* copyArray(const T* src, size_t size, const UA_DataType& type) {
+    assert(isValidTypeCombination<T>(type));
+    if constexpr (!isPointerFree<T>) {
+        T* dst{};
+        throwOnBadStatus(UA_Array_copy(src, size, (void**)&dst, &type));  // NOLINT
+        return dst;
+    } else {
+        T* dst = allocateArray<T>(size, type);
+        std::copy_n(src, size, dst);
+        return dst;
     }
 }
 
@@ -88,7 +157,7 @@ constexpr bool isEmpty(const UA_String& value) {
 }
 
 /// Convert UA_String to std::string_view
-inline std::string_view toStringView(const UA_String& src) {
+constexpr std::string_view toStringView(const UA_String& src) {
     if (isEmpty(src)) {
         return {};
     }

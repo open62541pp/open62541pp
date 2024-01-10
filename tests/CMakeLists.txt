@@ -21,6 +21,7 @@ add_executable(
     Span.cpp
     Subscription_MonitoredItem.cpp
     TypeConverter.cpp
+    TypeRegistry.cpp
     Types.cpp
     TypeWrapper.cpp
 )

@@ -16,7 +16,7 @@ namespace opcua {
 /**
  * @defgroup TypeWrapper Wrapper classes of UA_* types
  *
- * Safe wrapper classes for heap-allocated open62541 `UA_*` types to prevent memory leaks.
+ * Safe wrapper classes for open62541 `UA_*` types to prevent memory leaks.
  * @n
  * All wrapper classes inherit from opcua::TypeWrapper.
  * Native open62541 objects can be accessed using the opcua::TypeWrapper::handle() method.
