@@ -77,7 +77,7 @@ public:
 
     /// Throw a BadStatus exception if the status code is bad.
     /// @exception BadStatus
-    void throwIfBad() const {
+    constexpr void throwIfBad() const {
         detail::throwOnBadStatus(code_);
     }
 

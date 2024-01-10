@@ -10,6 +10,7 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/TypeConverter.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/detail/Result.h"
 #include "open62541pp/detail/helper.h"
 
 #include "../open62541_impl.h"
@@ -71,12 +72,12 @@ static auto sendRequest(
 
             Response& response = *static_cast<Response*>(responsePtr);
             UA_StatusCode code = getServiceResult(response);
-            auto result = detail::invokeCapture(std::get<F>(*context), response);
+            auto result = detail::tryInvoke(std::get<F>(*context), response);
             code |= result.code();
             if constexpr (std::is_void_v<Result>) {
                 std::invoke(handler, code);
             } else {
-                std::invoke(handler, code, std::move(result.get()));
+                std::invoke(handler, code, std::move(*result));
             }
         } catch (const std::exception&) {
             // TODO: log exception message

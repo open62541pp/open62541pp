@@ -15,6 +15,7 @@
 #include "open62541pp/Session.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/ValueBackend.h"
+#include "open62541pp/detail/Result.h"  // tryInvoke
 #include "open62541pp/services/Attribute.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
@@ -256,7 +257,7 @@ static void valueCallbackOnRead(
     assert(nodeContext != nullptr && value != nullptr);
     auto& cb = static_cast<ServerContext::NodeContext*>(nodeContext)->valueCallback.onBeforeRead;
     if (cb) {
-        detail::invokeCatchIgnore([&] { cb(asWrapper<DataValue>(*value)); });
+        detail::tryInvoke([&] { cb(asWrapper<DataValue>(*value)); });
     }
 }
 
@@ -272,7 +273,7 @@ static void valueCallbackOnWrite(
     assert(nodeContext != nullptr && value != nullptr);
     auto& cb = static_cast<ServerContext::NodeContext*>(nodeContext)->valueCallback.onAfterWrite;
     if (cb) {
-        detail::invokeCatchIgnore([&] { cb(asWrapper<DataValue>(*value)); });
+        detail::tryInvoke([&] { cb(asWrapper<DataValue>(*value)); });
     }
 }
 
@@ -304,7 +305,7 @@ static UA_StatusCode valueSourceRead(
     assert(nodeContext != nullptr && value != nullptr);
     auto& callback = static_cast<ServerContext::NodeContext*>(nodeContext)->dataSource.read;
     if (callback) {
-        return detail::invokeCatchStatus([&] {
+        return detail::tryInvokeGetStatus([&] {
             callback(asWrapper<DataValue>(*value), asRange(range), includeSourceTimestamp);
         });
     }
@@ -323,7 +324,7 @@ static UA_StatusCode valueSourceWrite(
     assert(nodeContext != nullptr && value != nullptr);
     auto& callback = static_cast<ServerContext::NodeContext*>(nodeContext)->dataSource.write;
     if (callback) {
-        return detail::invokeCatchStatus([&] {
+        return detail::tryInvokeGetStatus([&] {
             callback(asWrapper<DataValue>(*value), asRange(range));
         });
     }

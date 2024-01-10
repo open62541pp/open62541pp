@@ -11,6 +11,7 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/detail/Result.h"  // tryInvoke
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/Variant.h"
@@ -36,9 +37,7 @@ static void dataChangeNotificationCallback(
     auto* monitoredItem = static_cast<ServerContext::MonitoredItem*>(monitoredItemContext);
     auto& callback = monitoredItem->dataChangeCallback;
     if (callback) {
-        detail::invokeCatchIgnore([&] {
-            callback(0U, monitoredItemId, asWrapper<DataValue>(*value));
-        });
+        detail::tryInvoke([&] { callback(0U, monitoredItemId, asWrapper<DataValue>(*value)); });
     }
 }
 
@@ -56,7 +55,7 @@ static void dataChangeNotificationCallback(
     auto* monitoredItem = static_cast<ClientContext::MonitoredItem*>(monContext);
     auto& callback = monitoredItem->dataChangeCallback;
     if (callback) {
-        detail::invokeCatchIgnore([&] { callback(subId, monId, asWrapper<DataValue>(*value)); });
+        detail::tryInvoke([&] { callback(subId, monId, asWrapper<DataValue>(*value)); });
     }
 }
 
@@ -75,7 +74,7 @@ static void eventNotificationCallback(
     auto* monitoredItem = static_cast<ClientContext::MonitoredItem*>(monContext);
     auto& callback = monitoredItem->eventCallback;
     if (callback) {
-        detail::invokeCatchIgnore([&] {
+        detail::tryInvoke([&] {
             callback(subId, monId, {asWrapper<Variant>(eventFields), nEventFields});
         });
     }

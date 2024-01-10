@@ -7,6 +7,7 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/detail/Result.h"  // tryInvoke
 #include "open62541pp/detail/helper.h"
 #include "open62541pp/types/Variant.h"
 
@@ -171,7 +172,7 @@ static UA_StatusCode methodCallback(
     const auto* nodeContext = static_cast<ServerContext::NodeContext*>(methodContext);
     const auto& callback = nodeContext->methodCallback;
     if (callback) {
-        return detail::invokeCatchStatus([&] {
+        return detail::tryInvokeGetStatus([&] {
             callback(
                 {asWrapper<Variant>(input), inputSize}, {asWrapper<Variant>(output), outputSize}
             );

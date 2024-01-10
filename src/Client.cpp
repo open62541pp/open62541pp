@@ -12,6 +12,7 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Node.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/detail/Result.h"  // tryInvoke
 #include "open62541pp/open62541.h"
 #include "open62541pp/services/Attribute.h"  // readValue
 #include "open62541pp/services/Subscription.h"
@@ -73,7 +74,7 @@ inline static void invokeStateCallback(ClientContext& context, ClientState state
     const auto& callbackArray = context.stateCallbacks;
     const auto& callback = callbackArray.at(static_cast<size_t>(state));
     if (callback) {
-        detail::invokeCatchIgnore(callback);
+        detail::tryInvoke(callback);
     }
 }
 
