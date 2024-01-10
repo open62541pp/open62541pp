@@ -8,7 +8,7 @@
 
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
-#include "open62541pp/TypeConverter.h"
+#include "open62541pp/TypeRegistry.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/Result.h"
 #include "open62541pp/detail/helper.h"
@@ -43,8 +43,8 @@ static auto sendRequest(
     F&& processResponse,
     CompletionHandler&& completionHandler
 ) {
-    static_assert(detail::isNativeType<Request>);
-    static_assert(detail::isNativeType<Response>);
+    static_assert(detail::isRegisteredType<Request>);
+    static_assert(detail::isRegisteredType<Response>);
     static_assert(std::is_invocable_v<F, Response&>);
 
     using Result = std::invoke_result_t<F, Response&>;
@@ -91,9 +91,9 @@ static auto sendRequest(
     const auto status = __UA_Client_AsyncService(
         client.handle(),
         &request,
-        &detail::guessDataType<Request>(),
+        &detail::getDataType<Request>(),
         callback,
-        &detail::guessDataType<Response>(),
+        &detail::getDataType<Response>(),
         context.release(),  // userdata, transfer ownership to callback
         nullptr
     );
@@ -104,8 +104,8 @@ static auto sendRequest(
 /// Overload for async client requests returning `std::future` objects (`UseFuture`flag).
 template <typename Request, typename Response, typename F>
 static auto sendRequest(Client& client, const Request& request, F&& processResponse, UseFuture) {
-    static_assert(detail::isNativeType<Request>);
-    static_assert(detail::isNativeType<Response>);
+    static_assert(detail::isRegisteredType<Request>);
+    static_assert(detail::isRegisteredType<Response>);
     static_assert(std::is_invocable_v<F, Response&>);
 
     using Result = std::invoke_result_t<F, Response&>;
@@ -130,21 +130,21 @@ static auto sendRequest(Client& client, const Request& request, F&& processRespo
 /// Overload for sync client requests (`UseSync` flag).
 template <typename Request, typename Response, typename F>
 static auto sendRequest(Client& client, const Request& request, F&& processResponse, UseSync) {
-    static_assert(detail::isNativeType<Request>);
-    static_assert(detail::isNativeType<Response>);
+    static_assert(detail::isRegisteredType<Request>);
+    static_assert(detail::isRegisteredType<Response>);
     static_assert(std::is_invocable_v<F, Response&>);
 
     Response response{};
     const auto responseDeleter = detail::ScopeExit([&] {
-        detail::clear(response, detail::guessDataType<Response>());
+        detail::clear(response, detail::getDataType<Response>());
     });
 
     __UA_Client_Service(
         client.handle(),
         &request,
-        &detail::guessDataType<Request>(),
+        &detail::getDataType<Request>(),
         &response,
-        &detail::guessDataType<Response>()
+        &detail::getDataType<Response>()
     );
 
     detail::throwOnBadStatus(getServiceResult(response));
@@ -153,18 +153,17 @@ static auto sendRequest(Client& client, const Request& request, F&& processRespo
 
 template <typename Response>
 auto& getSingleResultFromResponse(Response& response) {
-    if constexpr (detail::isNativeType<Response>) {
-        if (response.results == nullptr || response.resultsSize != 1) {
-            throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
-        }
-        return *response.results;
-    }
     if constexpr (detail::isTypeWrapper<Response>) {
         auto results = response.getResults();
         if (results.data() == nullptr || results.size() != 1) {
             throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
         }
         return results[0];
+    } else {
+        if (response.results == nullptr || response.resultsSize != 1) {
+            throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
+        }
+        return *response.results;
     }
 }
 

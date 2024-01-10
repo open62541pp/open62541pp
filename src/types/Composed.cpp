@@ -330,12 +330,12 @@ CallMethodRequest::CallMethodRequest(
 ) {
     assign(std::move(objectId), handle()->objectId);
     assign(std::move(methodId), handle()->methodId);
-    copyArray(inputArguments, &handle()->inputArguments, handle()->inputArgumentsSize);
+    assignArray(inputArguments, handle()->inputArguments, handle()->inputArgumentsSize);
 }
 
 CallRequest::CallRequest(RequestHeader requestHeader, Span<const CallMethodRequest> methodsToCall) {
     assign(std::move(requestHeader), handle()->requestHeader);
-    copyArray(methodsToCall, &handle()->methodsToCall, handle()->methodsToCallSize);
+    assignArray(methodsToCall, handle()->methodsToCall, handle()->methodsToCallSize);
 }
 
 #endif
