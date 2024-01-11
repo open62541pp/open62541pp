@@ -1,6 +1,5 @@
 // This example requires the server example `server_method` to be running.
 
-#include <exception>
 #include <iostream>
 #include <thread>
 
@@ -17,21 +16,7 @@ int main() {
     // Run client event loop in separate thread
     auto clientThread = std::thread([&] { client.run(); });
 
-    // Asynchronously call method (callback variant)
-    {
-        opcua::services::callAsync(
-            client,
-            objNode.getNodeId(),
-            greetMethodNode.getNodeId(),
-            {opcua::Variant::fromScalar("Callback World")},
-            [](UA_StatusCode code, std::vector<opcua::Variant> output) {
-                std::cout << "Callback with status code " << code << ", get method output\n";
-                std::cout << output.at(0).getScalar<opcua::String>() << std::endl;
-            }
-        );
-    }
-
-    // Asynchronously call method (future variant)
+    // Asynchronously call method (future variant - default)
     {
         auto future = opcua::services::callAsync(
             client,
@@ -46,6 +31,20 @@ int main() {
         std::cout << "Future ready, get method output\n";
         auto output = future.get();
         std::cout << output.at(0).getScalar<opcua::String>() << std::endl;
+    }
+
+    // Asynchronously call method (callback variant)
+    {
+        opcua::services::callAsync(
+            client,
+            objNode.getNodeId(),
+            greetMethodNode.getNodeId(),
+            {opcua::Variant::fromScalar("Callback World")},
+            [](opcua::StatusCode code, std::vector<opcua::Variant>& output) {
+                std::cout << "Callback with status code " << code << ", get method output\n";
+                std::cout << output.at(0).getScalar<opcua::String>() << std::endl;
+            }
+        );
     }
 
     client.stop();

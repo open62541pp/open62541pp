@@ -31,7 +31,11 @@ struct AsyncResult {
         if constexpr (std::is_void_v<Result>) {
             static_assert(std::is_invocable_v<CompletionHandler, StatusCode>);
         } else {
-            static_assert(std::is_invocable_v<CompletionHandler, StatusCode, Result>);
+            static_assert(
+                (std::is_invocable_v<CompletionHandler, StatusCode, Result> ||
+                 std::is_invocable_v<CompletionHandler, StatusCode, Result&> ||
+                 std::is_invocable_v<CompletionHandler, StatusCode, const Result&>)
+            );
         }
         std::invoke(
             std::forward<Initiation>(initiation),

@@ -65,7 +65,7 @@ auto sendRequest(
                 if constexpr (std::is_void_v<Result>) {
                     std::invoke(handler, code);
                 } else {
-                    std::invoke(handler, code, std::move(*result));
+                    std::invoke(handler, code, *result);
                 }
             } catch (const std::exception&) {
                 // TODO: log exception message
