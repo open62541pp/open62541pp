@@ -3,17 +3,17 @@
 #include <future>
 #include <vector>
 
+#include "open62541pp/Client.h"
 #include "open62541pp/Config.h"
 #include "open62541pp/Span.h"
+#include "open62541pp/async.h"
+#include "open62541pp/detail/ClientService.h"
+#include "open62541pp/detail/RequestHandling.h"
+#include "open62541pp/detail/ResponseHandling.h"
+#include "open62541pp/types/NodeId.h"
+#include "open62541pp/types/Variant.h"
 
 #ifdef UA_ENABLE_METHODCALLS
-
-// forward declarations
-namespace opcua {
-class Client;
-class NodeId;
-class Variant;
-}  // namespace opcua
 
 namespace opcua::services {
 
@@ -49,46 +49,42 @@ std::vector<Variant> call(
 );
 
 /**
- * Async response callback.
- *
- * The callback gets invoked in the receiver thread's context once a response has been received or a
- * timeout occurred.
- * The status code needs to be checked to determine validity of the result.
- *
- * @tparam T Result type
- * @param code Status code
- * @param result Result
- */
-template <typename T>
-using AsyncCallback = std::function<void(UA_StatusCode code, T result)>;
-
-/**
  * Asynchronously call a server method and return results.
  *
  * @param client Instance of type Client
  * @param objectId NodeId of the object on which the method is invoked
  * @param methodId NodeId of the method to invoke
  * @param inputArguments Input argument values
+ * @param token Completion handler with the signature `void(StatusCode, std::vector<Variant>&)`.
+ *              The callback gets invoked in the receiver thread's context once a response has been
+ *              received or a timeout occurred.
+ *              The status code needs to be checked to determine validity of the result.
+ *              Following special tokens can be used:
+ *              - @ref useFuture to return a future object `std::future<std::vector<Variant>>`
+ *              - @ref useDeferred to return a callable for deferred execution
  * @exception BadStatus
  */
-std::future<std::vector<Variant>> callAsync(
-    Client& client,
-    const NodeId& objectId,
-    const NodeId& methodId,
-    Span<const Variant> inputArguments
-);
-
-/**
- * Asynchronously call a server method and invoke a callback.
- * @overload
- */
-void callAsync(
+template <typename CompletionToken = DefaultCompletionToken>
+auto callAsync(
     Client& client,
     const NodeId& objectId,
     const NodeId& methodId,
     Span<const Variant> inputArguments,
-    AsyncCallback<std::vector<Variant>> callback
-);
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    UA_CallMethodRequest item = detail::createCallMethodRequest(objectId, methodId, inputArguments);
+    UA_CallRequest request{};
+    request.methodsToCall = &item;
+    request.methodsToCallSize = 1;
+    return detail::sendRequest<UA_CallRequest, UA_CallResponse>(
+        client,
+        request,
+        [](UA_CallResponse& response) {
+            return detail::getOutputArguments(detail::getSingleResult(response));
+        },
+        std::forward<CompletionToken>(token)
+    );
+}
 
 /**
  * @}

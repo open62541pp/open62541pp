@@ -114,20 +114,4 @@ static auto sendRequest(
     return std::invoke(processResponse, response);
 }
 
-template <typename Response>
-auto& getSingleResultFromResponse(Response& response) {
-    if constexpr (isTypeWrapper<Response>) {
-        auto results = response.getResults();
-        if (results.data() == nullptr || results.size() != 1) {
-            throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
-        }
-        return results[0];
-    } else {
-        if (response.results == nullptr || response.resultsSize != 1) {
-            throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
-        }
-        return *response.results;
-    }
-}
-
 }  // namespace opcua::detail

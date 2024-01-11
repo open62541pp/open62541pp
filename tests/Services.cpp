@@ -1,5 +1,6 @@
 #include <chrono>
 #include <exception>
+#include <functional>  // invoke
 #include <thread>
 #include <utility>  // pair
 #include <variant>
@@ -22,28 +23,15 @@ using namespace opcua;
 using namespace std::literals::chrono_literals;
 
 template <typename F>
-constexpr auto syncWrapperFuture(Client& client, F&& asyncClientFunction) {
+constexpr auto syncWrapper(Client& client, F&& asyncClientFunction) {
     return [&](auto&&... args) {
-        auto future = asyncClientFunction(args...);
+        auto future = std::invoke(
+            std::forward<F>(asyncClientFunction),
+            std::forward<decltype(args)>(args)...,
+            UseFutureToken{}
+        );
         client.runIterate();
         return future.get();
-    };
-};
-
-template <typename F>
-constexpr auto syncWrapperCallback(Client& client, F&& asyncClientFunction) {
-    return [&](auto&&... args) {
-        std::promise<std::vector<opcua::Variant>> promise;
-        auto callback = [&promise](UA_StatusCode code, std::vector<opcua::Variant> output) {
-            if (code != UA_STATUSCODE_GOOD) {
-                promise.set_exception(std::make_exception_ptr(BadStatus(code)));
-            } else {
-                promise.set_value(output);
-            }
-        };
-        asyncClientFunction(args..., callback);
-        client.runIterate();
-        return promise.get_future().get();
     };
 };
 
@@ -642,15 +630,8 @@ TEST_CASE("Method service set (server & client)") {
     SUBCASE("Client") {
         testCall(client, services::call<Client>);
     };
-    SUBCASE("Client async (future)") {
-        auto (*callAsyncOverload)(Client&, const NodeId&, const NodeId&, Span<const Variant>) =
-            services::callAsync;
-        testCall(client, syncWrapperFuture(client, callAsyncOverload));
-    };
-    SUBCASE("Client async (callback)") {
-        auto (*callAsyncOverload)(Client&, const NodeId&, const NodeId&, Span<const Variant>, services::AsyncCallback<std::vector<Variant>>) =
-            services::callAsync;
-        testCall(client, syncWrapperCallback(client, callAsyncOverload));
+    SUBCASE("Client async") {
+        testCall(client, syncWrapper(client, services::callAsync<>));
     };
 }
 #endif

@@ -10,6 +10,7 @@
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/ClientService.h"
+#include "open62541pp/detail/ResponseHandling.h"
 #include "open62541pp/types/Builtin.h"
 
 #include "../open62541_impl.h"
@@ -37,7 +38,7 @@ BrowseResult browse<Client>(Client& client, const BrowseDescription& bd, uint32_
     request.nodesToBrowse = const_cast<UA_BrowseDescription*>(bd.handle());  // NOLINT
 
     auto response = browse(client, asWrapper<BrowseRequest>(request));
-    return std::move(detail::getSingleResultFromResponse(response));
+    return std::move(detail::getSingleResult(response));
 }
 
 BrowseNextResponse browseNext(Client& client, const BrowseNextRequest& request) {
@@ -67,7 +68,7 @@ BrowseResult browseNext<Client>(
     request.continuationPoints = const_cast<UA_ByteString*>(continuationPoint.handle());  // NOLINT
 
     auto response = browseNext(client, asWrapper<BrowseNextRequest>(request));
-    return std::move(detail::getSingleResultFromResponse(response));
+    return std::move(detail::getSingleResult(response));
 }
 
 template <typename T>
@@ -133,7 +134,7 @@ BrowsePathResult translateBrowsePathToNodeIds<Client>(
     auto response = translateBrowsePathsToNodeIds(
         client, asWrapper<TranslateBrowsePathsToNodeIdsRequest>(request)
     );
-    return std::move(detail::getSingleResultFromResponse(response));
+    return std::move(detail::getSingleResult(response));
 }
 
 template <typename T>

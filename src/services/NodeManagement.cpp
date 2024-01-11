@@ -8,6 +8,7 @@
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/ClientService.h"
+#include "open62541pp/detail/ResponseHandling.h"
 #include "open62541pp/detail/Result.h"  // tryInvoke
 #include "open62541pp/detail/helper.h"
 #include "open62541pp/types/Variant.h"
@@ -98,7 +99,7 @@ static auto addNodeImpl(
         client,
         request,
         [](UA_AddNodesResponse& response) {
-            auto& result = detail::getSingleResultFromResponse(response);
+            auto& result = detail::getSingleResult(response);
             detail::throwOnBadStatus(result.statusCode);
             return NodeId(std::exchange(result.addedNodeId, {}));
         },
@@ -281,7 +282,7 @@ static auto addReferenceImpl(
         client,
         request,
         [](UA_AddReferencesResponse& response) {
-            detail::throwOnBadStatus(detail::getSingleResultFromResponse(response));
+            detail::throwOnBadStatus(detail::getSingleResult(response));
         },
         std::forward<CompletionHandler>(completionHandler)
     );
@@ -330,7 +331,7 @@ static auto deleteNodeImpl(
         client,
         request,
         [](UA_DeleteNodesResponse& response) {
-            detail::throwOnBadStatus(detail::getSingleResultFromResponse(response));
+            detail::throwOnBadStatus(detail::getSingleResult(response));
         },
         std::forward<CompletionHandler>(completionHandler)
     );
@@ -383,7 +384,7 @@ static auto deleteReferenceImpl(
         client,
         request,
         [](UA_DeleteReferencesResponse& response) {
-            detail::throwOnBadStatus(detail::getSingleResultFromResponse(response));
+            detail::throwOnBadStatus(detail::getSingleResult(response));
         },
         std::forward<CompletionHandler>(completionHandler)
     );
