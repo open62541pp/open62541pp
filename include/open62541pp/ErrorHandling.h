@@ -1,9 +1,6 @@
 #pragma once
 
-#include <functional>  // invoke
 #include <stdexcept>
-#include <string>
-#include <type_traits>  // invoke_result_t
 
 #include "open62541pp/open62541.h"
 

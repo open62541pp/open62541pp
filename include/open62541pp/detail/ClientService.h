@@ -24,11 +24,6 @@ struct MoveResponse {
     }
 };
 
-template <typename Response>
-inline static UA_StatusCode getServiceResult(const Response& response) noexcept {
-    return response.responseHeader.serviceResult;
-}
-
 template <typename Request, typename Response, typename TransformResponse, typename CompletionToken>
 auto sendRequest(
     Client& client,
@@ -59,13 +54,11 @@ auto sendRequest(
                 }
 
                 Response& response = *static_cast<Response*>(responsePtr);
-                UA_StatusCode code = getServiceResult(response);
                 auto result = tryInvoke(std::get<TransformResponse>(*context), response);
-                code |= result.code();
                 if constexpr (std::is_void_v<Result>) {
-                    std::invoke(handler, code);
+                    std::invoke(handler, result.code());
                 } else {
-                    std::invoke(handler, code, *result);
+                    std::invoke(handler, result.code(), *result);
                 }
             } catch (const std::exception&) {
                 // TODO: log exception message
@@ -99,9 +92,12 @@ auto sendRequest(
 struct SyncOperation {};
 
 /// Overload for sync client requests.
-template <typename Request, typename Response, typename F>
+template <typename Request, typename Response, typename TransformResponse>
 static auto sendRequest(
-    Client& client, const Request& request, F&& processResponse, SyncOperation /* unused */
+    Client& client,
+    const Request& request,
+    TransformResponse&& transformResponse,
+    SyncOperation /* unused */
 ) {
     Response response{};
     const auto responseDeleter = ScopeExit([&] { clear(response, getDataType<Response>()); });
@@ -110,8 +106,7 @@ static auto sendRequest(
         client.handle(), &request, &getDataType<Request>(), &response, &getDataType<Response>()
     );
 
-    throwOnBadStatus(getServiceResult(response));
-    return std::invoke(processResponse, response);
+    return std::invoke(std::forward<TransformResponse>(transformResponse), response);
 }
 
 }  // namespace opcua::detail
