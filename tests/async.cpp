@@ -7,7 +7,7 @@ using namespace opcua;
 template <typename CompletionHandler>
 static auto asyncTest(StatusCode code, CompletionHandler&& completionHandler) {
     return asyncInitiate<void>(
-        [](auto&& handler, StatusCode code_) {
+        [](auto handler, StatusCode code_) {
             INFO("Init async operation (void result) with code ", code_);
             std::invoke(handler, code_);
         },
@@ -19,7 +19,7 @@ static auto asyncTest(StatusCode code, CompletionHandler&& completionHandler) {
 template <typename T, typename CompletionHandler>
 static auto asyncTest(StatusCode code, T value, CompletionHandler&& completionHandler) {
     return asyncInitiate<T>(
-        [](auto&& handler, StatusCode code_, T value_) {
+        [](auto handler, StatusCode code_, T value_) {
             INFO("Init async operation with code ", code_, " and value ", value_);
             std::invoke(handler, code_, value_);
         },
@@ -77,5 +77,15 @@ TEST_CASE("Async (deferred completion token)") {
         auto func = asyncTest(UA_STATUSCODE_BADUNEXPECTEDERROR, useDeferred);
         std::future<void> future = func(useFuture);
         CHECK_THROWS_WITH_AS(future.get(), "BadUnexpectedError", BadStatus);
+    }
+}
+
+TEST_CASE("Async (detached completion token)") {
+    SUBCASE("Result") {
+        CHECK_NOTHROW(asyncTest(UA_STATUSCODE_GOOD, 11, useDetached));
+    }
+
+    SUBCASE("Error") {
+        CHECK_NOTHROW(asyncTest(UA_STATUSCODE_BADUNEXPECTEDERROR, 11, useDetached));
     }
 }

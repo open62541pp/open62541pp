@@ -124,6 +124,35 @@ struct AsyncResult<UseDeferredToken, Result> {
     }
 };
 
+/* ------------------------------------------ Detached ------------------------------------------ */
+
+/**
+ * Detached completion token type.
+ * The token is used used to indicate that an asynchronous operation is detached. That is, there is
+ * no completion handler waiting for the operation's result.
+ */
+struct UseDetachedToken {};
+
+/**
+ * Detached completion token object.
+ * @see UseDetachedToken
+ */
+constexpr UseDetachedToken useDetached;
+
+template <typename Result>
+struct AsyncResult<UseDetachedToken, Result> {
+    template <typename Initiation, typename... Args>
+    static auto initiate(Initiation&& initiation, UseDetachedToken /* unused */, Args&&... args) {
+        std::invoke(
+            std::forward<Initiation>(initiation),
+            [](auto&&...) {
+                // ...
+            },
+            std::forward<Args>(args)...
+        );
+    }
+};
+
 /* ------------------------------------------ Defaults ------------------------------------------ */
 
 /**
