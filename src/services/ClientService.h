@@ -10,6 +10,7 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/TypeRegistry.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/async.h"
 #include "open62541pp/detail/Result.h"
 #include "open62541pp/detail/helper.h"
 
@@ -29,93 +30,80 @@ inline static UA_StatusCode getServiceResult(const Response& response) noexcept 
     return response.responseHeader.serviceResult;
 }
 
-/// Completion handler flag for sync client operations.
-struct UseSync {};
-
-/// Completion handler flag for async client operations returning `std::future` objects.
-struct UseFuture {};
-
-/// Overload for async client requests using callback completion handler.
-template <typename Request, typename Response, typename F, typename CompletionHandler>
-static auto sendRequest(
+template <typename Request, typename Response, typename TransformResponse, typename CompletionToken>
+auto sendRequest(
     Client& client,
     const Request& request,
-    F&& processResponse,
-    CompletionHandler&& completionHandler
+    TransformResponse&& transformResponse,
+    CompletionToken&& token
 ) {
-    using Result = std::invoke_result_t<F, Response&>;
-    using Context = std::tuple<F, CompletionHandler>;
+    static_assert(std::is_invocable_v<TransformResponse, Response&>);
+    using Result = std::invoke_result_t<TransformResponse, Response&>;
 
-    auto callback = [](UA_Client*, void* userdata, uint32_t /* reqId */, void* responsePtr) {
-        assert(userdata != nullptr);
-        std::unique_ptr<Context> context{static_cast<Context*>(userdata)};
-        auto& handler = std::get<CompletionHandler>(*context);
+    auto init = [&](auto completionHandler, auto transform) {
+        using CompletionHandler = decltype(completionHandler);
+        using Context = std::tuple<TransformResponse, CompletionHandler>;
 
-        try {
-            if (responsePtr == nullptr) {
-                if constexpr (std::is_void_v<Result>) {
-                    std::invoke(handler, UA_STATUSCODE_BADUNEXPECTEDERROR);
-                } else {
-                    std::invoke(handler, UA_STATUSCODE_BADUNEXPECTEDERROR, Result{});
+        auto callback = [](UA_Client*, void* userdata, uint32_t /* reqId */, void* responsePtr) {
+            assert(userdata != nullptr);
+            std::unique_ptr<Context> context{static_cast<Context*>(userdata)};
+            auto& handler = std::get<CompletionHandler>(*context);
+
+            try {
+                if (responsePtr == nullptr) {
+                    if constexpr (std::is_void_v<Result>) {
+                        std::invoke(handler, UA_STATUSCODE_BADUNEXPECTEDERROR);
+                    } else {
+                        Result emptyResult{};
+                        std::invoke(handler, UA_STATUSCODE_BADUNEXPECTEDERROR, emptyResult);
+                    }
                 }
-            }
 
-            Response& response = *static_cast<Response*>(responsePtr);
-            UA_StatusCode code = getServiceResult(response);
-            auto result = detail::tryInvoke(std::get<F>(*context), response);
-            code |= result.code();
-            if constexpr (std::is_void_v<Result>) {
-                std::invoke(handler, code);
-            } else {
-                std::invoke(handler, code, std::move(*result));
+                Response& response = *static_cast<Response*>(responsePtr);
+                UA_StatusCode code = getServiceResult(response);
+                auto result = detail::tryInvoke(std::get<TransformResponse>(*context), response);
+                code |= result.code();
+                if constexpr (std::is_void_v<Result>) {
+                    std::invoke(handler, code);
+                } else {
+                    std::invoke(handler, code, std::move(*result));
+                }
+            } catch (const std::exception&) {
+                // TODO: log exception message
             }
-        } catch (const std::exception&) {
-            // TODO: log exception message
-        }
+        };
+
+        auto context = std::make_unique<Context>(
+            std::move(transform), std::move(completionHandler)
+        );
+
+        const auto status = __UA_Client_AsyncService(
+            client.handle(),
+            &request,
+            &detail::getDataType<Request>(),
+            callback,
+            &detail::getDataType<Response>(),
+            context.release(),  // userdata, transfer ownership to callback
+            nullptr
+        );
+        detail::throwOnBadStatus(status);
     };
 
-    auto context = std::make_unique<Context>(
-        std::forward<F>(processResponse), std::forward<CompletionHandler>(completionHandler)
+    return asyncInitiate<Result>(
+        init,
+        std::forward<CompletionToken>(token),
+        std::forward<TransformResponse>(transformResponse)
     );
-
-    const auto status = __UA_Client_AsyncService(
-        client.handle(),
-        &request,
-        &detail::getDataType<Request>(),
-        callback,
-        &detail::getDataType<Response>(),
-        context.release(),  // userdata, transfer ownership to callback
-        nullptr
-    );
-
-    detail::throwOnBadStatus(status);
 }
 
-/// Overload for async client requests returning `std::future` objects (`UseFuture`flag).
-template <typename Request, typename Response, typename F>
-static auto sendRequest(Client& client, const Request& request, F&& processResponse, UseFuture) {
-    using Result = std::invoke_result_t<F, Response&>;
-    std::promise<Result> promise;
-    auto future = promise.get_future();
+/// Completion token for sync client operations.
+struct SyncOperation {};
 
-    sendRequest<Request, Response>(
-        client,
-        request,
-        std::forward<F>(processResponse),
-        [p = std::move(promise)](UA_StatusCode code, auto&&... result) mutable {
-            if (code != UA_STATUSCODE_GOOD) {
-                p.set_exception(std::make_exception_ptr(BadStatus(code)));
-            } else {
-                p.set_value(std::forward<decltype(result)>(result)...);
-            }
-        }
-    );
-    return future;
-}
-
-/// Overload for sync client requests (`UseSync` flag).
+/// Overload for sync client requests.
 template <typename Request, typename Response, typename F>
-static auto sendRequest(Client& client, const Request& request, F&& processResponse, UseSync) {
+static auto sendRequest(
+    Client& client, const Request& request, F&& processResponse, SyncOperation
+) {
     Response response{};
     const auto responseDeleter = detail::ScopeExit([&] {
         detail::clear(response, detail::getDataType<Response>());

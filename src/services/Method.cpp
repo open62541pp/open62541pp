@@ -50,13 +50,13 @@ std::vector<Variant> call(
     return getOutputArguments(result);
 }
 
-template <typename CompletionHandler>
+template <typename CompletionToken>
 static auto callImpl(
     Client& client,
     const NodeId& objectId,
     const NodeId& methodId,
     Span<const Variant> inputArguments,
-    CompletionHandler&& completionHandler
+    CompletionToken&& token
 ) {
     UA_CallMethodRequest item = createCallMethodRequest(objectId, methodId, inputArguments);
     UA_CallRequest request{};
@@ -68,7 +68,7 @@ static auto callImpl(
         [](UA_CallResponse& response) {
             return getOutputArguments(getSingleResultFromResponse(response));
         },
-        std::forward<CompletionHandler>(completionHandler)
+        std::forward<CompletionToken>(token)
     );
 }
 
@@ -79,7 +79,7 @@ std::vector<Variant> call(
     const NodeId& methodId,
     Span<const Variant> inputArguments
 ) {
-    return callImpl(client, objectId, methodId, inputArguments, UseSync{});
+    return callImpl(client, objectId, methodId, inputArguments, SyncOperation{});
 }
 
 std::future<std::vector<Variant>> callAsync(
@@ -88,7 +88,7 @@ std::future<std::vector<Variant>> callAsync(
     const NodeId& methodId,
     Span<const Variant> inputArguments
 ) {
-    return callImpl(client, objectId, methodId, inputArguments, UseFuture{});
+    return callImpl(client, objectId, methodId, inputArguments, useFuture);
 }
 
 void callAsync(

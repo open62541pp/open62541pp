@@ -13,7 +13,9 @@
 namespace opcua::services {
 
 ReadResponse read(Client& client, const ReadRequest& request) {
-    return sendRequest<UA_ReadRequest, UA_ReadResponse>(client, request, MoveResponse{}, UseSync{});
+    return sendRequest<UA_ReadRequest, UA_ReadResponse>(
+        client, request, MoveResponse{}, SyncOperation{}
+    );
 }
 
 inline static auto createReadValueId(const NodeId& id, AttributeId attributeId) {
@@ -70,7 +72,7 @@ DataValue readAttribute<Client>(
 
 WriteResponse write(Client& client, const WriteRequest& request) {
     return sendRequest<UA_WriteRequest, UA_WriteResponse>(
-        client, request, MoveResponse{}, UseSync{}
+        client, request, MoveResponse{}, SyncOperation{}
     );
 }
 

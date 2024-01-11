@@ -18,7 +18,7 @@ namespace opcua::services {
 
 BrowseResponse browse(Client& client, const BrowseRequest& request) {
     return sendRequest<UA_BrowseRequest, UA_BrowseResponse>(
-        client, request, MoveResponse{}, UseSync{}
+        client, request, MoveResponse{}, SyncOperation{}
     );
 }
 
@@ -42,7 +42,7 @@ BrowseResult browse<Client>(Client& client, const BrowseDescription& bd, uint32_
 
 BrowseNextResponse browseNext(Client& client, const BrowseNextRequest& request) {
     return sendRequest<UA_BrowseNextRequest, UA_BrowseNextResponse>(
-        client, request, MoveResponse{}, UseSync{}
+        client, request, MoveResponse{}, SyncOperation{}
     );
 }
 
@@ -106,7 +106,7 @@ TranslateBrowsePathsToNodeIdsResponse translateBrowsePathsToNodeIds(
 ) {
     return sendRequest<
         UA_TranslateBrowsePathsToNodeIdsRequest,
-        UA_TranslateBrowsePathsToNodeIdsResponse>(client, request, MoveResponse{}, UseSync{});
+        UA_TranslateBrowsePathsToNodeIdsResponse>(client, request, MoveResponse{}, SyncOperation{});
 }
 
 template <>
@@ -153,13 +153,13 @@ BrowsePathResult browseSimplifiedBrowsePath(
 
 RegisterNodesResponse registerNodes(Client& client, const RegisterNodesRequest& request) {
     return sendRequest<UA_RegisterNodesRequest, UA_RegisterNodesResponse>(
-        client, request, MoveResponse{}, UseSync{}
+        client, request, MoveResponse{}, SyncOperation{}
     );
 }
 
 UnregisterNodesResponse unregisterNodes(Client& client, const UnregisterNodesRequest& request) {
     return sendRequest<UA_UnregisterNodesRequest, UA_UnregisterNodesResponse>(
-        client, request, MoveResponse{}, UseSync{}
+        client, request, MoveResponse{}, SyncOperation{}
     );
 }
 

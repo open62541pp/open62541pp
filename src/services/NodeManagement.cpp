@@ -19,25 +19,25 @@ namespace opcua::services {
 
 AddNodesResponse addNodes(Client& client, const AddNodesRequest& request) {
     return sendRequest<UA_AddNodesRequest, UA_AddNodesResponse>(
-        client, request, MoveResponse{}, UseSync{}
+        client, request, MoveResponse{}, SyncOperation{}
     );
 }
 
 AddReferencesResponse addReferences(Client& client, const AddReferencesRequest& request) {
     return sendRequest<UA_AddReferencesRequest, UA_AddReferencesResponse>(
-        client, request, MoveResponse{}, UseSync{}
+        client, request, MoveResponse{}, SyncOperation{}
     );
 }
 
 DeleteNodesResponse deleteNodes(Client& client, const DeleteNodesRequest& request) {
     return sendRequest<UA_DeleteNodesRequest, UA_DeleteNodesResponse>(
-        client, request, MoveResponse{}, UseSync{}
+        client, request, MoveResponse{}, SyncOperation{}
     );
 }
 
 DeleteReferencesResponse deleteReferences(Client& client, const DeleteReferencesRequest& request) {
     return sendRequest<UA_DeleteReferencesRequest, UA_DeleteReferencesResponse>(
-        client, request, MoveResponse{}, UseSync{}
+        client, request, MoveResponse{}, SyncOperation{}
     );
 }
 
@@ -126,7 +126,7 @@ NodeId addNode<Client>(
         nodeAttributes,
         typeDefinition,
         referenceType,
-        UseSync{}
+        SyncOperation{}
     );
 }
 
@@ -149,7 +149,7 @@ std::future<NodeId> addNodeAsync(
         nodeAttributes,
         typeDefinition,
         referenceType,
-        UseFuture{}
+        useFuture
     );
 }
 
@@ -295,7 +295,7 @@ void addReference<Client>(
     const NodeId& referenceType,
     bool forward
 ) {
-    return addReferenceImpl(client, sourceId, targetId, referenceType, forward, UseSync{});
+    return addReferenceImpl(client, sourceId, targetId, referenceType, forward, SyncOperation{});
 }
 
 std::future<void> addReferenceAsync(
@@ -305,7 +305,7 @@ std::future<void> addReferenceAsync(
     const NodeId& referenceType,
     bool forward
 ) {
-    return addReferenceImpl(client, sourceId, targetId, referenceType, forward, UseFuture{});
+    return addReferenceImpl(client, sourceId, targetId, referenceType, forward, useFuture);
 }
 
 template <>
@@ -336,11 +336,11 @@ static auto deleteNodeImpl(
 
 template <>
 void deleteNode<Client>(Client& client, const NodeId& id, bool deleteReferences) {
-    return deleteNodeImpl(client, id, deleteReferences, UseSync{});
+    return deleteNodeImpl(client, id, deleteReferences, SyncOperation{});
 }
 
 std::future<void> deleteNodeAsync(Client& client, const NodeId& id, bool deleteReferences) {
-    return deleteNodeImpl(client, id, deleteReferences, UseFuture{});
+    return deleteNodeImpl(client, id, deleteReferences, useFuture);
 }
 
 template <>
@@ -397,7 +397,7 @@ void deleteReference<Client>(
     bool deleteBidirectional
 ) {
     return deleteReferenceImpl(
-        client, sourceId, targetId, referenceType, isForward, deleteBidirectional, UseSync{}
+        client, sourceId, targetId, referenceType, isForward, deleteBidirectional, SyncOperation{}
     );
 }
 
@@ -410,7 +410,7 @@ std::future<void> deleteReferenceAsync(
     bool deleteBidirectional
 ) {
     return deleteReferenceImpl(
-        client, sourceId, targetId, referenceType, isForward, deleteBidirectional, UseFuture{}
+        client, sourceId, targetId, referenceType, isForward, deleteBidirectional, useFuture
     );
 }
 
