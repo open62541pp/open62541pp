@@ -22,6 +22,7 @@
 #include "open62541pp/TypeRegistryNative.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/ValueBackend.h"
+#include "open62541pp/async.h"
 #include "open62541pp/detail/Result.h"
 #include "open62541pp/detail/helper.h"
 #include "open62541pp/detail/traits.h"
