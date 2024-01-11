@@ -4,7 +4,7 @@
 #include <future>
 #include <tuple>
 #include <type_traits>
-#include <utility>  // exchange, move
+#include <utility>  // exchange, forward, move
 
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
@@ -13,10 +13,9 @@
 #include "open62541pp/async.h"
 #include "open62541pp/detail/Result.h"
 #include "open62541pp/detail/helper.h"
+#include "open62541pp/open62541.h"
 
-#include "../open62541_impl.h"
-
-namespace opcua::services {
+namespace opcua::detail {
 
 struct MoveResponse {
     template <typename Response>
@@ -61,7 +60,7 @@ auto sendRequest(
 
                 Response& response = *static_cast<Response*>(responsePtr);
                 UA_StatusCode code = getServiceResult(response);
-                auto result = detail::tryInvoke(std::get<TransformResponse>(*context), response);
+                auto result = tryInvoke(std::get<TransformResponse>(*context), response);
                 code |= result.code();
                 if constexpr (std::is_void_v<Result>) {
                     std::invoke(handler, code);
@@ -80,13 +79,13 @@ auto sendRequest(
         const auto status = __UA_Client_AsyncService(
             client.handle(),
             &request,
-            &detail::getDataType<Request>(),
+            &getDataType<Request>(),
             callback,
-            &detail::getDataType<Response>(),
+            &getDataType<Response>(),
             context.release(),  // userdata, transfer ownership to callback
             nullptr
         );
-        detail::throwOnBadStatus(status);
+        throwOnBadStatus(status);
     };
 
     return asyncInitiate<Result>(
@@ -102,28 +101,22 @@ struct SyncOperation {};
 /// Overload for sync client requests.
 template <typename Request, typename Response, typename F>
 static auto sendRequest(
-    Client& client, const Request& request, F&& processResponse, SyncOperation
+    Client& client, const Request& request, F&& processResponse, SyncOperation /* unused */
 ) {
     Response response{};
-    const auto responseDeleter = detail::ScopeExit([&] {
-        detail::clear(response, detail::getDataType<Response>());
-    });
+    const auto responseDeleter = ScopeExit([&] { clear(response, getDataType<Response>()); });
 
     __UA_Client_Service(
-        client.handle(),
-        &request,
-        &detail::getDataType<Request>(),
-        &response,
-        &detail::getDataType<Response>()
+        client.handle(), &request, &getDataType<Request>(), &response, &getDataType<Response>()
     );
 
-    detail::throwOnBadStatus(getServiceResult(response));
+    throwOnBadStatus(getServiceResult(response));
     return std::invoke(processResponse, response);
 }
 
 template <typename Response>
 auto& getSingleResultFromResponse(Response& response) {
-    if constexpr (detail::isTypeWrapper<Response>) {
+    if constexpr (isTypeWrapper<Response>) {
         auto results = response.getResults();
         if (results.data() == nullptr || results.size() != 1) {
             throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
@@ -137,4 +130,4 @@ auto& getSingleResultFromResponse(Response& response) {
     }
 }
 
-}  // namespace opcua::services
+}  // namespace opcua::detail

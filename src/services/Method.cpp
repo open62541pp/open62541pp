@@ -9,12 +9,12 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/detail/ClientService.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"
 
 #include "../open62541_impl.h"
-#include "ClientService.h"
 
 namespace opcua::services {
 
@@ -62,11 +62,11 @@ static auto callImpl(
     UA_CallRequest request{};
     request.methodsToCall = &item;
     request.methodsToCallSize = 1;
-    return sendRequest<UA_CallRequest, UA_CallResponse>(
+    return detail::sendRequest<UA_CallRequest, UA_CallResponse>(
         client,
         request,
         [](UA_CallResponse& response) {
-            return getOutputArguments(getSingleResultFromResponse(response));
+            return getOutputArguments(detail::getSingleResultFromResponse(response));
         },
         std::forward<CompletionToken>(token)
     );
@@ -79,7 +79,7 @@ std::vector<Variant> call(
     const NodeId& methodId,
     Span<const Variant> inputArguments
 ) {
-    return callImpl(client, objectId, methodId, inputArguments, SyncOperation{});
+    return callImpl(client, objectId, methodId, inputArguments, detail::SyncOperation{});
 }
 
 std::future<std::vector<Variant>> callAsync(

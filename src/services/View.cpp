@@ -9,16 +9,16 @@
 #include "open62541pp/NodeIds.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/detail/ClientService.h"
 #include "open62541pp/types/Builtin.h"
 
 #include "../open62541_impl.h"
-#include "ClientService.h"
 
 namespace opcua::services {
 
 BrowseResponse browse(Client& client, const BrowseRequest& request) {
-    return sendRequest<UA_BrowseRequest, UA_BrowseResponse>(
-        client, request, MoveResponse{}, SyncOperation{}
+    return detail::sendRequest<UA_BrowseRequest, UA_BrowseResponse>(
+        client, request, detail::MoveResponse{}, detail::SyncOperation{}
     );
 }
 
@@ -37,12 +37,12 @@ BrowseResult browse<Client>(Client& client, const BrowseDescription& bd, uint32_
     request.nodesToBrowse = const_cast<UA_BrowseDescription*>(bd.handle());  // NOLINT
 
     auto response = browse(client, asWrapper<BrowseRequest>(request));
-    return std::move(getSingleResultFromResponse(response));
+    return std::move(detail::getSingleResultFromResponse(response));
 }
 
 BrowseNextResponse browseNext(Client& client, const BrowseNextRequest& request) {
-    return sendRequest<UA_BrowseNextRequest, UA_BrowseNextResponse>(
-        client, request, MoveResponse{}, SyncOperation{}
+    return detail::sendRequest<UA_BrowseNextRequest, UA_BrowseNextResponse>(
+        client, request, detail::MoveResponse{}, detail::SyncOperation{}
     );
 }
 
@@ -67,7 +67,7 @@ BrowseResult browseNext<Client>(
     request.continuationPoints = const_cast<UA_ByteString*>(continuationPoint.handle());  // NOLINT
 
     auto response = browseNext(client, asWrapper<BrowseNextRequest>(request));
-    return std::move(getSingleResultFromResponse(response));
+    return std::move(detail::getSingleResultFromResponse(response));
 }
 
 template <typename T>
@@ -104,9 +104,11 @@ std::vector<ExpandedNodeId> browseRecursive(Server& server, const BrowseDescript
 TranslateBrowsePathsToNodeIdsResponse translateBrowsePathsToNodeIds(
     Client& client, const TranslateBrowsePathsToNodeIdsRequest& request
 ) {
-    return sendRequest<
+    return detail::sendRequest<
         UA_TranslateBrowsePathsToNodeIdsRequest,
-        UA_TranslateBrowsePathsToNodeIdsResponse>(client, request, MoveResponse{}, SyncOperation{});
+        UA_TranslateBrowsePathsToNodeIdsResponse>(
+        client, request, detail::MoveResponse{}, detail::SyncOperation{}
+    );
 }
 
 template <>
@@ -131,7 +133,7 @@ BrowsePathResult translateBrowsePathToNodeIds<Client>(
     auto response = translateBrowsePathsToNodeIds(
         client, asWrapper<TranslateBrowsePathsToNodeIdsRequest>(request)
     );
-    return std::move(getSingleResultFromResponse(response));
+    return std::move(detail::getSingleResultFromResponse(response));
 }
 
 template <typename T>
@@ -152,14 +154,14 @@ BrowsePathResult browseSimplifiedBrowsePath(
 }
 
 RegisterNodesResponse registerNodes(Client& client, const RegisterNodesRequest& request) {
-    return sendRequest<UA_RegisterNodesRequest, UA_RegisterNodesResponse>(
-        client, request, MoveResponse{}, SyncOperation{}
+    return detail::sendRequest<UA_RegisterNodesRequest, UA_RegisterNodesResponse>(
+        client, request, detail::MoveResponse{}, detail::SyncOperation{}
     );
 }
 
 UnregisterNodesResponse unregisterNodes(Client& client, const UnregisterNodesRequest& request) {
-    return sendRequest<UA_UnregisterNodesRequest, UA_UnregisterNodesResponse>(
-        client, request, MoveResponse{}, SyncOperation{}
+    return detail::sendRequest<UA_UnregisterNodesRequest, UA_UnregisterNodesResponse>(
+        client, request, detail::MoveResponse{}, detail::SyncOperation{}
     );
 }
 

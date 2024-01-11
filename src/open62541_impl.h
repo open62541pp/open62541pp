@@ -26,7 +26,7 @@
 #endif
 
 // client
-#include <open62541/client.h>
+// #include <open62541/client.h>  // included in open62541.h
 #if __has_include(<open62541/client_config.h>)  // merged into client.h in v1.2
 #include <open62541/client_config.h>
 #endif

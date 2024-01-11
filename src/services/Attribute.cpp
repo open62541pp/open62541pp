@@ -6,15 +6,15 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeWrapper.h"  // asWrapper, asNative
+#include "open62541pp/detail/ClientService.h"
 
 #include "../open62541_impl.h"
-#include "ClientService.h"
 
 namespace opcua::services {
 
 ReadResponse read(Client& client, const ReadRequest& request) {
-    return sendRequest<UA_ReadRequest, UA_ReadResponse>(
-        client, request, MoveResponse{}, SyncOperation{}
+    return detail::sendRequest<UA_ReadRequest, UA_ReadResponse>(
+        client, request, detail::MoveResponse{}, detail::SyncOperation{}
     );
 }
 
@@ -63,7 +63,7 @@ DataValue readAttribute<Client>(
     const auto item = createReadValueId(id, attributeId);
     const auto request = createReadRequest(timestamps, {asWrapper<ReadValueId>(&item), 1});
     auto response = read(client, asWrapper<ReadRequest>(request));
-    auto& result = getSingleResultFromResponse(response);
+    auto& result = detail::getSingleResultFromResponse(response);
     if (result->hasStatus) {
         detail::throwOnBadStatus(result->status);
     }
@@ -71,8 +71,8 @@ DataValue readAttribute<Client>(
 }
 
 WriteResponse write(Client& client, const WriteRequest& request) {
-    return sendRequest<UA_WriteRequest, UA_WriteResponse>(
-        client, request, MoveResponse{}, SyncOperation{}
+    return detail::sendRequest<UA_WriteRequest, UA_WriteResponse>(
+        client, request, detail::MoveResponse{}, detail::SyncOperation{}
     );
 }
 
@@ -110,7 +110,7 @@ void writeAttribute<Client>(
 ) {
     const auto item = createWriteValue(id, attributeId, value);
     auto response = write(client, {asWrapper<WriteValue>(&item), 1});
-    auto& result = getSingleResultFromResponse(response);
+    auto& result = detail::getSingleResultFromResponse(response);
     detail::throwOnBadStatus(result);
 }
 

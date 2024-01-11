@@ -7,37 +7,37 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/detail/ClientService.h"
 #include "open62541pp/detail/Result.h"  // tryInvoke
 #include "open62541pp/detail/helper.h"
 #include "open62541pp/types/Variant.h"
 
 #include "../ServerContext.h"
 #include "../open62541_impl.h"
-#include "ClientService.h"
 
 namespace opcua::services {
 
 AddNodesResponse addNodes(Client& client, const AddNodesRequest& request) {
-    return sendRequest<UA_AddNodesRequest, UA_AddNodesResponse>(
-        client, request, MoveResponse{}, SyncOperation{}
+    return detail::sendRequest<UA_AddNodesRequest, UA_AddNodesResponse>(
+        client, request, detail::MoveResponse{}, detail::SyncOperation{}
     );
 }
 
 AddReferencesResponse addReferences(Client& client, const AddReferencesRequest& request) {
-    return sendRequest<UA_AddReferencesRequest, UA_AddReferencesResponse>(
-        client, request, MoveResponse{}, SyncOperation{}
+    return detail::sendRequest<UA_AddReferencesRequest, UA_AddReferencesResponse>(
+        client, request, detail::MoveResponse{}, detail::SyncOperation{}
     );
 }
 
 DeleteNodesResponse deleteNodes(Client& client, const DeleteNodesRequest& request) {
-    return sendRequest<UA_DeleteNodesRequest, UA_DeleteNodesResponse>(
-        client, request, MoveResponse{}, SyncOperation{}
+    return detail::sendRequest<UA_DeleteNodesRequest, UA_DeleteNodesResponse>(
+        client, request, detail::MoveResponse{}, detail::SyncOperation{}
     );
 }
 
 DeleteReferencesResponse deleteReferences(Client& client, const DeleteReferencesRequest& request) {
-    return sendRequest<UA_DeleteReferencesRequest, UA_DeleteReferencesResponse>(
-        client, request, MoveResponse{}, SyncOperation{}
+    return detail::sendRequest<UA_DeleteReferencesRequest, UA_DeleteReferencesResponse>(
+        client, request, detail::MoveResponse{}, detail::SyncOperation{}
     );
 }
 
@@ -94,11 +94,11 @@ static auto addNodeImpl(
     UA_AddNodesRequest request{};
     request.nodesToAddSize = 1;
     request.nodesToAdd = &item;
-    return sendRequest<UA_AddNodesRequest, UA_AddNodesResponse>(
+    return detail::sendRequest<UA_AddNodesRequest, UA_AddNodesResponse>(
         client,
         request,
         [](UA_AddNodesResponse& response) {
-            auto& result = getSingleResultFromResponse(response);
+            auto& result = detail::getSingleResultFromResponse(response);
             detail::throwOnBadStatus(result.statusCode);
             return NodeId(std::exchange(result.addedNodeId, {}));
         },
@@ -126,7 +126,7 @@ NodeId addNode<Client>(
         nodeAttributes,
         typeDefinition,
         referenceType,
-        SyncOperation{}
+        detail::SyncOperation{}
     );
 }
 
@@ -277,11 +277,11 @@ static auto addReferenceImpl(
     UA_AddReferencesRequest request{};
     request.referencesToAddSize = 1;
     request.referencesToAdd = &item;
-    return sendRequest<UA_AddReferencesRequest, UA_AddReferencesResponse>(
+    return detail::sendRequest<UA_AddReferencesRequest, UA_AddReferencesResponse>(
         client,
         request,
         [](UA_AddReferencesResponse& response) {
-            detail::throwOnBadStatus(getSingleResultFromResponse(response));
+            detail::throwOnBadStatus(detail::getSingleResultFromResponse(response));
         },
         std::forward<CompletionHandler>(completionHandler)
     );
@@ -295,7 +295,9 @@ void addReference<Client>(
     const NodeId& referenceType,
     bool forward
 ) {
-    return addReferenceImpl(client, sourceId, targetId, referenceType, forward, SyncOperation{});
+    return addReferenceImpl(
+        client, sourceId, targetId, referenceType, forward, detail::SyncOperation{}
+    );
 }
 
 std::future<void> addReferenceAsync(
@@ -324,11 +326,11 @@ static auto deleteNodeImpl(
     UA_DeleteNodesRequest request{};
     request.nodesToDeleteSize = 1;
     request.nodesToDelete = &item;
-    return sendRequest<UA_DeleteNodesRequest, UA_DeleteNodesResponse>(
+    return detail::sendRequest<UA_DeleteNodesRequest, UA_DeleteNodesResponse>(
         client,
         request,
         [](UA_DeleteNodesResponse& response) {
-            detail::throwOnBadStatus(getSingleResultFromResponse(response));
+            detail::throwOnBadStatus(detail::getSingleResultFromResponse(response));
         },
         std::forward<CompletionHandler>(completionHandler)
     );
@@ -336,7 +338,7 @@ static auto deleteNodeImpl(
 
 template <>
 void deleteNode<Client>(Client& client, const NodeId& id, bool deleteReferences) {
-    return deleteNodeImpl(client, id, deleteReferences, SyncOperation{});
+    return deleteNodeImpl(client, id, deleteReferences, detail::SyncOperation{});
 }
 
 std::future<void> deleteNodeAsync(Client& client, const NodeId& id, bool deleteReferences) {
@@ -377,11 +379,11 @@ static auto deleteReferenceImpl(
     UA_DeleteReferencesRequest request{};
     request.referencesToDeleteSize = 1;
     request.referencesToDelete = &item;
-    return sendRequest<UA_DeleteReferencesRequest, UA_DeleteReferencesResponse>(
+    return detail::sendRequest<UA_DeleteReferencesRequest, UA_DeleteReferencesResponse>(
         client,
         request,
         [](UA_DeleteReferencesResponse& response) {
-            detail::throwOnBadStatus(getSingleResultFromResponse(response));
+            detail::throwOnBadStatus(detail::getSingleResultFromResponse(response));
         },
         std::forward<CompletionHandler>(completionHandler)
     );
@@ -397,7 +399,13 @@ void deleteReference<Client>(
     bool deleteBidirectional
 ) {
     return deleteReferenceImpl(
-        client, sourceId, targetId, referenceType, isForward, deleteBidirectional, SyncOperation{}
+        client,
+        sourceId,
+        targetId,
+        referenceType,
+        isForward,
+        deleteBidirectional,
+        detail::SyncOperation{}
     );
 }
 
