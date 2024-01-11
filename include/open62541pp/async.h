@@ -11,6 +11,19 @@
 
 namespace opcua {
 
+/**
+ * @defgroup Async Asynchronous operations
+ * The asynchronous model is based on (Boost) Asio's universal model for asynchronous operations.
+ * Each async function takes a `CompletionToken` as it's last parameter.
+ * The completion token can be a callable with the signature `void(StatusCode code, T result)` where
+ * `T` is a function-specific result type.
+ *
+ * @see https://think-async.com/asio/asio-1.28.0/doc/asio/overview/model/async_ops.html
+ * @see https://think-async.com/asio/asio-1.28.0/doc/asio/overview/model/completion_tokens.html
+ * @see https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2013/n3747.pdf
+ * @{
+ */
+
 template <class CompletionToken, typename Result>
 struct AsyncResult {
     template <typename Initiation, typename CompletionHandler, typename... Args>
@@ -39,8 +52,16 @@ inline auto asyncInitiate(Initiation&& initiation, CompletionToken&& token, Args
 
 /* ------------------------------------------- Future ------------------------------------------- */
 
+/**
+ * Future completion token type.
+ * A completion token that causes an asynchronous operation to return a future.
+ */
 struct UseFutureToken {};
 
+/**
+ * Future completion token object.
+ * @see UseFutureToken
+ */
 constexpr UseFutureToken useFuture;
 
 template <typename Result>
@@ -66,9 +87,18 @@ struct AsyncResult<UseFutureToken, Result> {
 
 /* ------------------------------------------ Deferred ------------------------------------------ */
 
+/**
+ * Deferred completion token type.
+ * The token is used to indicate that an asynchronous operation should return a function object to
+ * lazily launch the operation.
+ */
 struct UseDeferredToken {};
 
-constexpr UseDeferredToken useDeferred{};
+/**
+ * Deferred completion token object.
+ * @see UseDeferredToken
+ */
+constexpr UseDeferredToken useDeferred;
 
 template <typename Result>
 struct AsyncResult<UseDeferredToken, Result> {
@@ -89,5 +119,17 @@ struct AsyncResult<UseDeferredToken, Result> {
         };
     }
 };
+
+/* ------------------------------------------ Defaults ------------------------------------------ */
+
+/**
+ * Default completion token for async operations.
+ * @see UseFutureToken
+ */
+using DefaultCompletionToken = UseFutureToken;
+
+/**
+ * @}
+ */
 
 }  // namespace opcua
