@@ -58,6 +58,29 @@ inline void checkReadResult(const UA_DataValue& dv) {
     }
 }
 
+template <typename T>
+inline T getAttribute(DataValue&& dv) {
+    return dv.getValue().getScalar<T>();
+}
+
+template <>
+inline NodeClass getAttribute<NodeClass>(DataValue&& dv) {
+    // workaround to read enum from variant...
+    return *static_cast<NodeClass*>(dv.getValue().data());
+}
+
+template <>
+inline ValueRank getAttribute<ValueRank>(DataValue&& dv) {
+    return static_cast<ValueRank>(dv.getValue().getScalar<int32_t>());
+}
+
+inline std::vector<uint32_t> getArrayDimensions(DataValue&& dv) {
+    if (dv.getValue().isArray()) {
+        return dv.getValue().getArrayCopy<uint32_t>();
+    }
+    return {};
+}
+
 inline std::vector<Variant> getOutputArguments(UA_CallMethodResult& result) {
     throwOnBadStatus(result.statusCode);
     throwOnBadStatus(result.inputArgumentResults, result.inputArgumentResultsSize);
