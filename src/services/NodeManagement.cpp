@@ -3,15 +3,11 @@
 #include <cassert>
 #include <utility>  // move
 
-#include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeWrapper.h"
-#include "open62541pp/detail/ClientService.h"
-#include "open62541pp/detail/ResponseHandling.h"
 #include "open62541pp/detail/Result.h"  // tryInvoke
 #include "open62541pp/detail/helper.h"
-#include "open62541pp/types/Variant.h"
 
 #include "../ServerContext.h"
 #include "../open62541_impl.h"
@@ -19,27 +15,19 @@
 namespace opcua::services {
 
 AddNodesResponse addNodes(Client& client, const AddNodesRequest& request) {
-    return detail::sendRequest<UA_AddNodesRequest, UA_AddNodesResponse>(
-        client, request, detail::MoveResponse{}, detail::SyncOperation{}
-    );
+    return addNodesAsync(client, request, detail::SyncOperation{});
 }
 
 AddReferencesResponse addReferences(Client& client, const AddReferencesRequest& request) {
-    return detail::sendRequest<UA_AddReferencesRequest, UA_AddReferencesResponse>(
-        client, request, detail::MoveResponse{}, detail::SyncOperation{}
-    );
+    return addReferencesAsync(client, request, detail::SyncOperation{});
 }
 
 DeleteNodesResponse deleteNodes(Client& client, const DeleteNodesRequest& request) {
-    return detail::sendRequest<UA_DeleteNodesRequest, UA_DeleteNodesResponse>(
-        client, request, detail::MoveResponse{}, detail::SyncOperation{}
-    );
+    return deleteNodesAsync(client, request, detail::SyncOperation{});
 }
 
 DeleteReferencesResponse deleteReferences(Client& client, const DeleteReferencesRequest& request) {
-    return detail::sendRequest<UA_DeleteReferencesRequest, UA_DeleteReferencesResponse>(
-        client, request, detail::MoveResponse{}, detail::SyncOperation{}
-    );
+    return deleteReferencesAsync(client, request, detail::SyncOperation{});
 }
 
 template <>
@@ -71,42 +59,6 @@ NodeId addNode<Server>(
     return addedNodeId;
 }
 
-template <typename CompletionHandler>
-static auto addNodeImpl(
-    Client& client,
-    NodeClass nodeClass,
-    const NodeId& parentId,
-    const NodeId& id,
-    std::string_view browseName,
-    const ExtensionObject& nodeAttributes,
-    const NodeId& typeDefinition,
-    const NodeId& referenceType,
-    CompletionHandler&& completionHandler
-) {
-    UA_AddNodesItem item{};
-    item.parentNodeId.nodeId = parentId;
-    item.referenceTypeId = referenceType;
-    item.requestedNewNodeId.nodeId = id;
-    item.browseName.namespaceIndex = id.getNamespaceIndex();
-    item.browseName.name = detail::toNativeString(browseName);
-    item.nodeClass = static_cast<UA_NodeClass>(nodeClass);
-    item.nodeAttributes = nodeAttributes;
-    item.typeDefinition.nodeId = typeDefinition;
-    UA_AddNodesRequest request{};
-    request.nodesToAddSize = 1;
-    request.nodesToAdd = &item;
-    return detail::sendRequest<UA_AddNodesRequest, UA_AddNodesResponse>(
-        client,
-        request,
-        [](UA_AddNodesResponse& response) {
-            auto& result = detail::getSingleResult(response);
-            detail::throwOnBadStatus(result.statusCode);
-            return NodeId(std::exchange(result.addedNodeId, {}));
-        },
-        std::forward<CompletionHandler>(completionHandler)
-    );
-}
-
 template <>
 NodeId addNode<Client>(
     Client& client,
@@ -118,7 +70,7 @@ NodeId addNode<Client>(
     const NodeId& typeDefinition,
     const NodeId& referenceType
 ) {
-    return addNodeImpl(
+    return addNodeAsync(
         client,
         nodeClass,
         parentId,
@@ -128,29 +80,6 @@ NodeId addNode<Client>(
         typeDefinition,
         referenceType,
         detail::SyncOperation{}
-    );
-}
-
-std::future<NodeId> addNodeAsync(
-    Client& client,
-    NodeClass nodeClass,
-    const NodeId& parentId,
-    const NodeId& id,
-    std::string_view browseName,
-    const ExtensionObject& nodeAttributes,
-    const NodeId& typeDefinition,
-    const NodeId& referenceType
-) {
-    return addNodeImpl(
-        client,
-        nodeClass,
-        parentId,
-        id,
-        browseName,
-        nodeAttributes,
-        typeDefinition,
-        referenceType,
-        useFuture
     );
 }
 
@@ -222,21 +151,23 @@ NodeId addMethod(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    [[maybe_unused]] MethodCallback callback,  // NOLINT
-    [[maybe_unused]] Span<const Argument> inputArguments,
-    [[maybe_unused]] Span<const Argument> outputArguments,
+    MethodCallback callback,
+    Span<const Argument> inputArguments,
+    Span<const Argument> outputArguments,
     const MethodAttributes& attributes,
     const NodeId& referenceType
 ) {
-    return addNode(
+    return addMethodAsync(
         client,
-        NodeClass::Method,
         parentId,
         id,
         browseName,
-        ExtensionObject::fromDecoded(const_cast<MethodAttributes&>(attributes)),  // NOLINT
-        {},
-        referenceType
+        std::move(callback),
+        inputArguments,
+        outputArguments,
+        attributes,
+        referenceType,
+        detail::SyncOperation{}
     );
 }
 #endif
@@ -259,35 +190,6 @@ void addReference<Server>(
     detail::throwOnBadStatus(status);
 }
 
-template <typename CompletionHandler>
-static auto addReferenceImpl(
-    Client& client,
-    const NodeId& sourceId,
-    const NodeId& targetId,
-    const NodeId& referenceType,
-    bool forward,
-    CompletionHandler&& completionHandler
-) {
-    UA_AddReferencesItem item{};
-    item.sourceNodeId = sourceId;
-    item.referenceTypeId = referenceType;
-    item.isForward = forward;
-    item.targetServerUri = UA_STRING_NULL;
-    item.targetNodeId.nodeId = targetId;
-    item.targetNodeClass = UA_NODECLASS_UNSPECIFIED;  // necessary?
-    UA_AddReferencesRequest request{};
-    request.referencesToAddSize = 1;
-    request.referencesToAdd = &item;
-    return detail::sendRequest<UA_AddReferencesRequest, UA_AddReferencesResponse>(
-        client,
-        request,
-        [](UA_AddReferencesResponse& response) {
-            detail::throwOnBadStatus(detail::getSingleResult(response));
-        },
-        std::forward<CompletionHandler>(completionHandler)
-    );
-}
-
 template <>
 void addReference<Client>(
     Client& client,
@@ -296,19 +198,9 @@ void addReference<Client>(
     const NodeId& referenceType,
     bool forward
 ) {
-    return addReferenceImpl(
+    return addReferenceAsync(
         client, sourceId, targetId, referenceType, forward, detail::SyncOperation{}
     );
-}
-
-std::future<void> addReferenceAsync(
-    Client& client,
-    const NodeId& sourceId,
-    const NodeId& targetId,
-    const NodeId& referenceType,
-    bool forward
-) {
-    return addReferenceImpl(client, sourceId, targetId, referenceType, forward, useFuture);
 }
 
 template <>
@@ -317,33 +209,9 @@ void deleteNode<Server>(Server& server, const NodeId& id, bool deleteReferences)
     detail::throwOnBadStatus(status);
 }
 
-template <typename CompletionHandler>
-static auto deleteNodeImpl(
-    Client& client, const NodeId& id, bool deleteReferences, CompletionHandler&& completionHandler
-) {
-    UA_DeleteNodesItem item{};
-    item.nodeId = id;
-    item.deleteTargetReferences = deleteReferences;
-    UA_DeleteNodesRequest request{};
-    request.nodesToDeleteSize = 1;
-    request.nodesToDelete = &item;
-    return detail::sendRequest<UA_DeleteNodesRequest, UA_DeleteNodesResponse>(
-        client,
-        request,
-        [](UA_DeleteNodesResponse& response) {
-            detail::throwOnBadStatus(detail::getSingleResult(response));
-        },
-        std::forward<CompletionHandler>(completionHandler)
-    );
-}
-
 template <>
 void deleteNode<Client>(Client& client, const NodeId& id, bool deleteReferences) {
-    return deleteNodeImpl(client, id, deleteReferences, detail::SyncOperation{});
-}
-
-std::future<void> deleteNodeAsync(Client& client, const NodeId& id, bool deleteReferences) {
-    return deleteNodeImpl(client, id, deleteReferences, useFuture);
+    return deleteNodeAsync(client, id, deleteReferences, detail::SyncOperation{});
 }
 
 template <>
@@ -361,35 +229,6 @@ void deleteReference<Server>(
     detail::throwOnBadStatus(status);
 }
 
-template <typename CompletionHandler>
-static auto deleteReferenceImpl(
-    Client& client,
-    const NodeId& sourceId,
-    const NodeId& targetId,
-    const NodeId& referenceType,
-    bool isForward,
-    bool deleteBidirectional,
-    CompletionHandler&& completionHandler
-) {
-    UA_DeleteReferencesItem item{};
-    item.sourceNodeId = sourceId;
-    item.referenceTypeId = referenceType;
-    item.isForward = isForward;
-    item.targetNodeId.nodeId = targetId;
-    item.deleteBidirectional = deleteBidirectional;
-    UA_DeleteReferencesRequest request{};
-    request.referencesToDeleteSize = 1;
-    request.referencesToDelete = &item;
-    return detail::sendRequest<UA_DeleteReferencesRequest, UA_DeleteReferencesResponse>(
-        client,
-        request,
-        [](UA_DeleteReferencesResponse& response) {
-            detail::throwOnBadStatus(detail::getSingleResult(response));
-        },
-        std::forward<CompletionHandler>(completionHandler)
-    );
-}
-
 template <>
 void deleteReference<Client>(
     Client& client,
@@ -399,7 +238,7 @@ void deleteReference<Client>(
     bool isForward,
     bool deleteBidirectional
 ) {
-    return deleteReferenceImpl(
+    return deleteReferenceAsync(
         client,
         sourceId,
         targetId,
@@ -407,19 +246,6 @@ void deleteReference<Client>(
         isForward,
         deleteBidirectional,
         detail::SyncOperation{}
-    );
-}
-
-std::future<void> deleteReferenceAsync(
-    Client& client,
-    const NodeId& sourceId,
-    const NodeId& targetId,
-    const NodeId& referenceType,
-    bool isForward,
-    bool deleteBidirectional
-) {
-    return deleteReferenceImpl(
-        client, sourceId, targetId, referenceType, isForward, deleteBidirectional, useFuture
     );
 }
 

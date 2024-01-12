@@ -1,6 +1,5 @@
 #pragma once
 
-#include <future>
 #include <vector>
 
 #include "open62541pp/Client.h"

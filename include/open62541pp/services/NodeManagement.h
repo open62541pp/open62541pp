@@ -2,21 +2,20 @@
 
 #include <cstdint>
 #include <functional>
-#include <future>
 #include <string_view>
 
+#include "open62541pp/Client.h"
 #include "open62541pp/Common.h"  // ModellingRule
 #include "open62541pp/Config.h"
 #include "open62541pp/NodeIds.h"  // *TypeId
 #include "open62541pp/Span.h"
+#include "open62541pp/async.h"
+#include "open62541pp/detail/ClientService.h"
+#include "open62541pp/detail/RequestHandling.h"
+#include "open62541pp/detail/ResponseHandling.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/NodeId.h"
-
-// forward declarations
-namespace opcua {
-class Client;
-class Variant;
-}  // namespace opcua
+#include "open62541pp/types/Variant.h"
 
 namespace opcua::detail {
 template <typename T>
@@ -44,8 +43,18 @@ AddNodesResponse addNodes(Client& client, const AddNodesRequest& request);
 
 /**
  * Asynchronously add one or more nodes (client only).
+ * @param token Completion handler with the signature `void(StatusCode, AddNodesResponse&)`.
  */
-std::future<AddNodesResponse> addNodesAsync(Client& client, const AddNodesRequest& request);
+template <typename CompletionToken = DefaultCompletionToken>
+auto addNodesAsync(
+    Client& client,
+    const AddNodesRequest& request,
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    return detail::sendRequest<UA_AddNodesRequest, UA_AddNodesResponse>(
+        client, request, detail::MoveResponse{}, std::forward<CompletionToken>(token)
+    );
+}
 
 /**
  * Add one or more references (client only).
@@ -55,9 +64,16 @@ AddReferencesResponse addReferences(Client& client, const AddReferencesRequest& 
 /**
  * Asynchronously add one or more references (client only).
  */
-std::future<AddReferencesResponse> addReferencesAsync(
-    Client& client, const AddReferencesRequest& request
-);
+template <typename CompletionToken = DefaultCompletionToken>
+auto addReferencesAsync(
+    Client& client,
+    const AddReferencesRequest& request,
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    return detail::sendRequest<UA_AddReferencesRequest, UA_AddReferencesResponse>(
+        client, request, detail::MoveResponse{}, std::forward<CompletionToken>(token)
+    );
+}
 
 /**
  * Delete one or more nodes (client only).
@@ -67,9 +83,16 @@ DeleteNodesResponse deleteNodes(Client& client, const DeleteNodesRequest& reques
 /**
  * Asynchronously delete one or more nodes (client only).
  */
-std::future<DeleteNodesResponse> deleteNodesAsync(
-    Client& client, const DeleteNodesRequest& request
-);
+template <typename CompletionToken = DefaultCompletionToken>
+auto deleteNodesAsync(
+    Client& client,
+    const DeleteNodesRequest& request,
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    return detail::sendRequest<UA_DeleteNodesRequest, UA_DeleteNodesResponse>(
+        client, request, detail::MoveResponse{}, std::forward<CompletionToken>(token)
+    );
+}
 
 /**
  * Delete one or more references (client only).
@@ -79,9 +102,16 @@ DeleteReferencesResponse deleteReferences(Client& client, const DeleteReferences
 /**
  * Asynchronously delete one or more references (client only).
  */
-std::future<DeleteReferencesResponse> deleteReferencesAsync(
-    Client& client, const DeleteReferencesRequest& request
-);
+template <typename CompletionToken = DefaultCompletionToken>
+auto deleteReferencesAsync(
+    Client& client,
+    const DeleteReferencesRequest& request,
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    return detail::sendRequest<UA_DeleteReferencesRequest, UA_DeleteReferencesResponse>(
+        client, request, detail::MoveResponse{}, std::forward<CompletionToken>(token)
+    );
+}
 
 /**
  * Add a node.
@@ -103,7 +133,8 @@ NodeId addNode(
  * Asynchronously add a node.
  * @copydetails addNode
  */
-std::future<NodeId> addNodeAsync(
+template <typename CompletionToken = DefaultCompletionToken>
+auto addNodeAsync(
     Client& client,
     NodeClass nodeClass,
     const NodeId& parentId,
@@ -111,8 +142,32 @@ std::future<NodeId> addNodeAsync(
     std::string_view browseName,
     const ExtensionObject& nodeAttributes,
     const NodeId& typeDefinition,
-    const NodeId& referenceType
-);
+    const NodeId& referenceType,
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    UA_AddNodesItem item{};
+    item.parentNodeId.nodeId = parentId;
+    item.referenceTypeId = referenceType;
+    item.requestedNewNodeId.nodeId = id;
+    item.browseName.namespaceIndex = id.getNamespaceIndex();
+    item.browseName.name = detail::toNativeString(browseName);
+    item.nodeClass = static_cast<UA_NodeClass>(nodeClass);
+    item.nodeAttributes = nodeAttributes;
+    item.typeDefinition.nodeId = typeDefinition;
+    UA_AddNodesRequest request{};
+    request.nodesToAddSize = 1;
+    request.nodesToAdd = &item;
+    return detail::sendRequest<UA_AddNodesRequest, UA_AddNodesResponse>(
+        client,
+        request,
+        [](UA_AddNodesResponse& response) {
+            auto& result = detail::getSingleResult(response);
+            detail::throwOnBadStatus(result.statusCode);
+            return NodeId(std::exchange(result.addedNodeId, {}));
+        },
+        std::forward<CompletionToken>(token)
+    );
+}
 
 /* ------------------------------- Specialized (inline) functions ------------------------------- */
 
@@ -146,14 +201,16 @@ inline NodeId addObject(
  * Asynchronously add object.
  * @copydetails addObject
  */
-inline std::future<NodeId> addObjectAsync(
+template <typename CompletionToken = DefaultCompletionToken>
+inline auto addObjectAsync(
     Client& client,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
     const ObjectAttributes& attributes = {},
     const NodeId& objectType = ObjectTypeId::BaseObjectType,
-    const NodeId& referenceType = ReferenceTypeId::HasComponent
+    const NodeId& referenceType = ReferenceTypeId::HasComponent,
+    CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addNodeAsync(
         client,
@@ -163,7 +220,8 @@ inline std::future<NodeId> addObjectAsync(
         browseName,
         detail::convertNodeAttributes(attributes),
         objectType,
-        referenceType
+        referenceType,
+        std::forward<CompletionToken>(token)
     );
 }
 
@@ -195,16 +253,25 @@ inline NodeId addFolder(
  * Asynchronously add folder.
  * @copydetails addFolder
  */
-inline std::future<NodeId> addFolderAsync(
+template <typename CompletionToken = DefaultCompletionToken>
+inline auto addFolderAsync(
     Client& client,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
     const ObjectAttributes& attributes = {},
-    const NodeId& referenceType = ReferenceTypeId::HasComponent
+    const NodeId& referenceType = ReferenceTypeId::HasComponent,
+    CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addObjectAsync(
-        client, parentId, id, browseName, attributes, ObjectTypeId::FolderType, referenceType
+        client,
+        parentId,
+        id,
+        browseName,
+        attributes,
+        ObjectTypeId::FolderType,
+        referenceType,
+        std::forward<CompletionToken>(token)
     );
 }
 
@@ -238,14 +305,16 @@ inline NodeId addVariable(
  * Asynchronously add variable.
  * @copydetails addVariable
  */
-inline std::future<NodeId> addVariableAsync(
+template <typename CompletionToken = DefaultCompletionToken>
+inline auto addVariableAsync(
     Client& client,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
     const VariableAttributes& attributes = {},
     const NodeId& variableType = VariableTypeId::BaseDataVariableType,
-    const NodeId& referenceType = ReferenceTypeId::HasComponent
+    const NodeId& referenceType = ReferenceTypeId::HasComponent,
+    CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addNodeAsync(
         client,
@@ -255,7 +324,8 @@ inline std::future<NodeId> addVariableAsync(
         browseName,
         detail::convertNodeAttributes(attributes),
         variableType,
-        referenceType
+        referenceType,
+        std::forward<CompletionToken>(token)
     );
 }
 
@@ -286,12 +356,14 @@ inline NodeId addProperty(
  * Asynchronously add property.
  * @copydetails addProperty
  */
-inline std::future<NodeId> addPropertyAsync(
+template <typename CompletionToken = DefaultCompletionToken>
+inline auto addPropertyAsync(
     Client& client,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    const VariableAttributes& attributes = {}
+    const VariableAttributes& attributes = {},
+    CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addVariableAsync(
         client,
@@ -300,7 +372,8 @@ inline std::future<NodeId> addPropertyAsync(
         browseName,
         attributes,
         VariableTypeId::PropertyType,
-        ReferenceTypeId::HasProperty
+        ReferenceTypeId::HasProperty,
+        std::forward<CompletionToken>(token)
     );
 }
 
@@ -334,7 +407,8 @@ NodeId addMethod(
  * Asynchronously add method.
  * @copydetails addMethod
  */
-inline std::future<NodeId> addMethodAsync(
+template <typename CompletionToken = DefaultCompletionToken>
+inline auto addMethodAsync(
     Client& client,
     const NodeId& parentId,
     const NodeId& id,
@@ -343,7 +417,8 @@ inline std::future<NodeId> addMethodAsync(
     [[maybe_unused]] Span<const Argument> inputArguments,
     [[maybe_unused]] Span<const Argument> outputArguments,
     const MethodAttributes& attributes = {},
-    const NodeId& referenceType = ReferenceTypeId::HasComponent
+    const NodeId& referenceType = ReferenceTypeId::HasComponent,
+    CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addNodeAsync(
         client,
@@ -353,7 +428,8 @@ inline std::future<NodeId> addMethodAsync(
         browseName,
         detail::convertNodeAttributes(attributes),
         {},
-        referenceType
+        referenceType,
+        std::forward<CompletionToken>(token)
     );
 }
 #endif
@@ -387,13 +463,15 @@ inline NodeId addObjectType(
  * Asynchronously add object type.
  * @copydetails addObjectType
  */
-inline std::future<NodeId> addObjectTypeAsync(
+template <typename CompletionToken = DefaultCompletionToken>
+inline auto addObjectTypeAsync(
     Client& client,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
     const ObjectTypeAttributes& attributes = {},
-    const NodeId& referenceType = ReferenceTypeId::HasSubtype
+    const NodeId& referenceType = ReferenceTypeId::HasSubtype,
+    CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addNodeAsync(
         client,
@@ -403,7 +481,8 @@ inline std::future<NodeId> addObjectTypeAsync(
         browseName,
         detail::convertNodeAttributes(attributes),
         {},
-        referenceType
+        referenceType,
+        std::forward<CompletionToken>(token)
     );
 }
 
@@ -437,14 +516,16 @@ inline NodeId addVariableType(
  * Asynchronously add variable type.
  * @copydetails addVariableType
  */
-inline std::future<NodeId> addVariableTypeAsync(
+template <typename CompletionToken = DefaultCompletionToken>
+inline auto addVariableTypeAsync(
     Client& client,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
     const VariableTypeAttributes& attributes = {},
     const NodeId& variableType = VariableTypeId::BaseDataVariableType,
-    const NodeId& referenceType = ReferenceTypeId::HasSubtype
+    const NodeId& referenceType = ReferenceTypeId::HasSubtype,
+    CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addNodeAsync(
         client,
@@ -454,7 +535,8 @@ inline std::future<NodeId> addVariableTypeAsync(
         browseName,
         detail::convertNodeAttributes(attributes),
         variableType,
-        referenceType
+        referenceType,
+        std::forward<CompletionToken>(token)
     );
 }
 
@@ -487,14 +569,15 @@ inline NodeId addReferenceType(
  * Asynchronously add reference type.
  * @copydetails addReferenceType
  */
-template <typename T>
-inline std::future<NodeId> addReferenceTypeAsync(
+template <typename CompletionToken = DefaultCompletionToken>
+inline auto addReferenceTypeAsync(
     Client& client,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
     const ReferenceTypeAttributes& attributes = {},
-    const NodeId& referenceType = ReferenceTypeId::HasSubtype
+    const NodeId& referenceType = ReferenceTypeId::HasSubtype,
+    CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addNodeAsync(
         client,
@@ -504,7 +587,8 @@ inline std::future<NodeId> addReferenceTypeAsync(
         browseName,
         detail::convertNodeAttributes(attributes),
         {},
-        referenceType
+        referenceType,
+        std::forward<CompletionToken>(token)
     );
 }
 
@@ -537,13 +621,15 @@ inline NodeId addDataType(
  * Asynchronously add data type.
  * @copydetails addDataType
  */
-inline std::future<NodeId> addDataTypeAsync(
+template <typename CompletionToken = DefaultCompletionToken>
+inline auto addDataTypeAsync(
     Client& client,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
     const DataTypeAttributes& attributes = {},
-    const NodeId& referenceType = ReferenceTypeId::HasSubtype
+    const NodeId& referenceType = ReferenceTypeId::HasSubtype,
+    CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addNodeAsync(
         client,
@@ -553,7 +639,8 @@ inline std::future<NodeId> addDataTypeAsync(
         browseName,
         detail::convertNodeAttributes(attributes),
         {},
-        referenceType
+        referenceType,
+        std::forward<CompletionToken>(token)
     );
 }
 
@@ -586,13 +673,15 @@ inline NodeId addView(
  * Asynchronously add view.
  * @copydetails addView
  */
-inline std::future<NodeId> addViewAsync(
+template <typename CompletionToken = DefaultCompletionToken>
+inline auto addViewAsync(
     Client& client,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
     const ViewAttributes& attributes = {},
-    const NodeId& referenceType = ReferenceTypeId::Organizes
+    const NodeId& referenceType = ReferenceTypeId::Organizes,
+    CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addNodeAsync(
         client,
@@ -602,7 +691,8 @@ inline std::future<NodeId> addViewAsync(
         browseName,
         detail::convertNodeAttributes(attributes),
         {},
-        referenceType
+        referenceType,
+        std::forward<CompletionToken>(token)
     );
 }
 
@@ -623,13 +713,33 @@ void addReference(
  * Asynchronously add reference.
  * @copydetails addReference
  */
-std::future<void> addReferenceAsync(
+template <typename CompletionToken = DefaultCompletionToken>
+auto addReferenceAsync(
     Client& client,
     const NodeId& sourceId,
     const NodeId& targetId,
     const NodeId& referenceType,
-    bool forward = true
-);
+    bool forward = true,
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    UA_AddReferencesItem item{};
+    item.sourceNodeId = sourceId;
+    item.referenceTypeId = referenceType;
+    item.isForward = forward;
+    item.targetServerUri = UA_STRING_NULL;
+    item.targetNodeId.nodeId = targetId;
+    UA_AddReferencesRequest request{};
+    request.referencesToAddSize = 1;
+    request.referencesToAdd = &item;
+    return detail::sendRequest<UA_AddReferencesRequest, UA_AddReferencesResponse>(
+        client,
+        request,
+        [](UA_AddReferencesResponse& response) {
+            detail::throwOnBadStatus(detail::getSingleResult(response));
+        },
+        std::forward<CompletionToken>(token)
+    );
+}
 
 /**
  * Add modelling rule.
@@ -651,12 +761,20 @@ inline void addModellingRule(T& serverOrClient, const NodeId& id, ModellingRule 
  * Asynchronously add modelling rule.
  * @copydetails addModellingRule
  */
-template <typename T>
-inline std::future<void> addModellingRuleAsync(
-    Client& client, const NodeId& id, ModellingRule rule
+template <typename CompletionToken = DefaultCompletionToken>
+inline auto addModellingRuleAsync(
+    Client& client,
+    const NodeId& id,
+    ModellingRule rule,
+    CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addReferenceAsync(
-        client, id, {0, static_cast<uint32_t>(rule)}, ReferenceTypeId::HasModellingRule, true
+        client,
+        id,
+        {0, static_cast<uint32_t>(rule)},
+        ReferenceTypeId::HasModellingRule,
+        true,
+        std::forward<CompletionToken>(token)
     );
 }
 
@@ -671,7 +789,28 @@ void deleteNode(T& serverOrClient, const NodeId& id, bool deleteReferences = tru
  * Asynchronously delete node.
  * @copydetails deleteNode
  */
-std::future<void> deleteNodeAsync(Client& client, const NodeId& id, bool deleteReferences = true);
+template <typename CompletionToken = DefaultCompletionToken>
+auto deleteNodeAsync(
+    Client& client,
+    const NodeId& id,
+    bool deleteReferences = true,
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    UA_DeleteNodesItem item{};
+    item.nodeId = id;
+    item.deleteTargetReferences = deleteReferences;
+    UA_DeleteNodesRequest request{};
+    request.nodesToDeleteSize = 1;
+    request.nodesToDelete = &item;
+    return detail::sendRequest<UA_DeleteNodesRequest, UA_DeleteNodesResponse>(
+        client,
+        request,
+        [](UA_DeleteNodesResponse& response) {
+            detail::throwOnBadStatus(detail::getSingleResult(response));
+        },
+        std::forward<CompletionToken>(token)
+    );
+}
 
 /**
  * Delete reference.
@@ -691,14 +830,34 @@ void deleteReference(
  * Asynchronously delete reference.
  * @copydetails deleteReference
  */
-std::future<void> deleteReferenceAsync(
+template <typename CompletionToken = DefaultCompletionToken>
+auto deleteReferenceAsync(
     Client& client,
     const NodeId& sourceId,
     const NodeId& targetId,
     const NodeId& referenceType,
     bool isForward,
-    bool deleteBidirectional
-);
+    bool deleteBidirectional,
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    UA_DeleteReferencesItem item{};
+    item.sourceNodeId = sourceId;
+    item.referenceTypeId = referenceType;
+    item.isForward = isForward;
+    item.targetNodeId.nodeId = targetId;
+    item.deleteBidirectional = deleteBidirectional;
+    UA_DeleteReferencesRequest request{};
+    request.referencesToDeleteSize = 1;
+    request.referencesToDelete = &item;
+    return detail::sendRequest<UA_DeleteReferencesRequest, UA_DeleteReferencesResponse>(
+        client,
+        request,
+        [](UA_DeleteReferencesResponse& response) {
+            detail::throwOnBadStatus(detail::getSingleResult(response));
+        },
+        std::forward<CompletionToken>(token)
+    );
+}
 
 /**
  * @}
