@@ -16,6 +16,7 @@ add_executable(
     Logger.cpp
     Node.cpp
     Result.cpp
+    ScopeExit.cpp
     Server.cpp
     Services.cpp
     Session.cpp

@@ -1,7 +1,6 @@
 #pragma once
 
 #include <cassert>
-#include <future>
 #include <tuple>
 #include <type_traits>
 #include <utility>  // exchange, forward, move
@@ -9,10 +8,9 @@
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/TypeRegistry.h"
-#include "open62541pp/TypeWrapper.h"
 #include "open62541pp/async.h"
 #include "open62541pp/detail/Result.h"
-#include "open62541pp/detail/helper.h"
+#include "open62541pp/detail/ScopeExit.h"
 #include "open62541pp/open62541.h"
 
 namespace opcua::detail {
