@@ -26,6 +26,13 @@ TEST_CASE("Server constructors") {
     SUBCASE("Custom port and certificate") {
         Server server(4850, ByteString("certificate"));
     }
+
+    SUBCASE("custom logger") {
+        bool gotMessage = false;
+        Server server(4850, {}, [&gotMessage](auto&&...) { gotMessage = true; });
+        // the server should have logged something during construction
+        CHECK(gotMessage == true);
+    }
 }
 
 #ifdef UA_ENABLE_ENCRYPTION

@@ -146,8 +146,9 @@ static void applyDefaults(UA_ServerConfig* config) {
 #endif
 }
 
-Server::Server(uint16_t port, ByteString certificate)
+Server::Server(uint16_t port, ByteString certificate, Logger logger)
     : connection_(std::make_shared<Connection>(*this)) {
+    setLogger(std::move(logger));
     const auto status = UA_ServerConfig_setMinimal(
         getConfig(this), port, certificate.empty() ? nullptr : certificate.handle()
     );
