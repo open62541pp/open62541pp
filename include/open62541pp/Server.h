@@ -80,6 +80,7 @@ public:
 #endif
 
     /// Set custom logging function.
+    /// Does nothing if the passed function is empty or a nullptr.
     void setLogger(Logger logger);
 
     /// Set custom access control.
