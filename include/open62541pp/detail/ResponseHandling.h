@@ -49,6 +49,15 @@ inline auto& getSingleResult(Response& response) {
     return results[0];
 }
 
+inline void checkReadResult(const UA_DataValue& dv) {
+    if (dv.hasStatus) {
+        throwOnBadStatus(dv.status);
+    }
+    if (!dv.hasValue) {
+        throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
+    }
+}
+
 inline std::vector<Variant> getOutputArguments(UA_CallMethodResult& result) {
     throwOnBadStatus(result.statusCode);
     throwOnBadStatus(result.inputArgumentResults, result.inputArgumentResultsSize);

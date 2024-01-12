@@ -3,6 +3,7 @@
 #include <cstdint>
 #include <functional>
 #include <string_view>
+#include <utility>  // exchange, forward
 
 #include "open62541pp/Client.h"
 #include "open62541pp/Common.h"  // ModellingRule
@@ -16,14 +17,6 @@
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"
-
-namespace opcua::detail {
-template <typename T>
-inline ExtensionObject convertNodeAttributes(const T& attributes) {
-    // NOLINTNEXTLINE, won't be modified
-    return ExtensionObject::fromDecoded(const_cast<T&>(attributes));
-}
-}  // namespace opcua::detail
 
 namespace opcua::services {
 
@@ -191,7 +184,7 @@ inline NodeId addObject(
         parentId,
         id,
         browseName,
-        detail::convertNodeAttributes(attributes),
+        detail::wrapNodeAttributes(attributes),
         objectType,
         referenceType
     );
@@ -218,7 +211,7 @@ inline auto addObjectAsync(
         parentId,
         id,
         browseName,
-        detail::convertNodeAttributes(attributes),
+        detail::wrapNodeAttributes(attributes),
         objectType,
         referenceType,
         std::forward<CompletionToken>(token)
@@ -295,7 +288,7 @@ inline NodeId addVariable(
         parentId,
         id,
         browseName,
-        detail::convertNodeAttributes(attributes),
+        detail::wrapNodeAttributes(attributes),
         variableType,
         referenceType
     );
@@ -322,7 +315,7 @@ inline auto addVariableAsync(
         parentId,
         id,
         browseName,
-        detail::convertNodeAttributes(attributes),
+        detail::wrapNodeAttributes(attributes),
         variableType,
         referenceType,
         std::forward<CompletionToken>(token)
@@ -426,7 +419,7 @@ inline auto addMethodAsync(
         parentId,
         id,
         browseName,
-        detail::convertNodeAttributes(attributes),
+        detail::wrapNodeAttributes(attributes),
         {},
         referenceType,
         std::forward<CompletionToken>(token)
@@ -453,7 +446,7 @@ inline NodeId addObjectType(
         parentId,
         id,
         browseName,
-        detail::convertNodeAttributes(attributes),
+        detail::wrapNodeAttributes(attributes),
         {},
         referenceType
     );
@@ -479,7 +472,7 @@ inline auto addObjectTypeAsync(
         parentId,
         id,
         browseName,
-        detail::convertNodeAttributes(attributes),
+        detail::wrapNodeAttributes(attributes),
         {},
         referenceType,
         std::forward<CompletionToken>(token)
@@ -506,7 +499,7 @@ inline NodeId addVariableType(
         parentId,
         id,
         browseName,
-        detail::convertNodeAttributes(attributes),
+        detail::wrapNodeAttributes(attributes),
         variableType,
         referenceType
     );
@@ -533,7 +526,7 @@ inline auto addVariableTypeAsync(
         parentId,
         id,
         browseName,
-        detail::convertNodeAttributes(attributes),
+        detail::wrapNodeAttributes(attributes),
         variableType,
         referenceType,
         std::forward<CompletionToken>(token)
@@ -559,7 +552,7 @@ inline NodeId addReferenceType(
         parentId,
         id,
         browseName,
-        detail::convertNodeAttributes(attributes),
+        detail::wrapNodeAttributes(attributes),
         {},
         referenceType
     );
@@ -585,7 +578,7 @@ inline auto addReferenceTypeAsync(
         parentId,
         id,
         browseName,
-        detail::convertNodeAttributes(attributes),
+        detail::wrapNodeAttributes(attributes),
         {},
         referenceType,
         std::forward<CompletionToken>(token)
@@ -611,7 +604,7 @@ inline NodeId addDataType(
         parentId,
         id,
         browseName,
-        detail::convertNodeAttributes(attributes),
+        detail::wrapNodeAttributes(attributes),
         {},
         referenceType
     );
@@ -637,7 +630,7 @@ inline auto addDataTypeAsync(
         parentId,
         id,
         browseName,
-        detail::convertNodeAttributes(attributes),
+        detail::wrapNodeAttributes(attributes),
         {},
         referenceType,
         std::forward<CompletionToken>(token)
@@ -663,7 +656,7 @@ inline NodeId addView(
         parentId,
         id,
         browseName,
-        detail::convertNodeAttributes(attributes),
+        detail::wrapNodeAttributes(attributes),
         {},
         referenceType
     );
@@ -689,7 +682,7 @@ inline auto addViewAsync(
         parentId,
         id,
         browseName,
-        detail::convertNodeAttributes(attributes),
+        detail::wrapNodeAttributes(attributes),
         {},
         referenceType,
         std::forward<CompletionToken>(token)

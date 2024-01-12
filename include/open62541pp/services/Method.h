@@ -1,5 +1,6 @@
 #pragma once
 
+#include <utility>  // forward
 #include <vector>
 
 #include "open62541pp/Client.h"

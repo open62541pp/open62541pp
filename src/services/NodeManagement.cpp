@@ -1,7 +1,6 @@
 #include "open62541pp/services/NodeManagement.h"
 
 #include <cassert>
-#include <utility>  // move
 
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
