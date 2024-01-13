@@ -21,6 +21,9 @@ TEST_CASE_TEMPLATE("Log with custom logger", T, Server, Client) {
         lastMessage = message;
     });
 
+    // passing a nullptr should do nothing
+    serverOrClient.setLogger(nullptr);
+
     log(serverOrClient, LogLevel::Info, LogCategory::Server, "Message");
     CHECK(lastLogLevel == LogLevel::Info);
     CHECK(lastLogCategory == LogCategory::Server);

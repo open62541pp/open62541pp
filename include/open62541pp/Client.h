@@ -86,6 +86,7 @@ public:
     std::vector<EndpointDescription> getEndpoints(std::string_view serverUrl);
 
     /// Set custom logging function.
+    /// Does nothing if the passed function is empty or a nullptr.
     void setLogger(Logger logger);
 
     /// Set response timeout in milliseconds.

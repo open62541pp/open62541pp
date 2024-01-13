@@ -45,8 +45,10 @@ public:
      *
      * @param port Port number
      * @param certificate Optional X.509 v3 certificate in `DER` encoded format
+     * @param logger Custom log function. If the passed function is empty, the default logger is
+     * used.
      */
-    explicit Server(uint16_t port = 4840, ByteString certificate = {});
+    explicit Server(uint16_t port = 4840, ByteString certificate = {}, Logger logger = nullptr);
 
 #ifdef UA_ENABLE_ENCRYPTION
     /**
@@ -80,6 +82,7 @@ public:
 #endif
 
     /// Set custom logging function.
+    /// Does nothing if the passed function is empty or a nullptr.
     void setLogger(Logger logger);
 
     /// Set custom access control.
