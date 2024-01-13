@@ -27,7 +27,7 @@ TEST_CASE("Server constructors") {
         Server server(4850, ByteString("certificate"));
     }
 
-    SUBCASE("custom logger") {
+    SUBCASE("Custom logger") {
         bool gotMessage = false;
         Server server(4850, {}, [&gotMessage](auto&&...) { gotMessage = true; });
         log(server, LogLevel::Error, LogCategory::Server, "Message");
