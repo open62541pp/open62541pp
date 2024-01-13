@@ -30,8 +30,8 @@ TEST_CASE("Server constructors") {
     SUBCASE("custom logger") {
         bool gotMessage = false;
         Server server(4850, {}, [&gotMessage](auto&&...) { gotMessage = true; });
-        // the server should have logged something during construction
-        CHECK(gotMessage == true);
+        log(server, LogLevel::Error, LogCategory::Server, "Message");
+        CHECK(gotMessage);
     }
 }
 
