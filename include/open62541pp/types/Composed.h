@@ -137,7 +137,7 @@ public:
  * User identity token type.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.43
  */
-enum class UserTokenType : uint32_t {
+enum class UserTokenType : int32_t {
     // clang-format off
     Anonymous   = 0,  ///< No token is required
     Username    = 1,  ///< A username/password token
@@ -1214,7 +1214,7 @@ public:
  * Filter operator.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.7.3
  */
-enum class FilterOperator : uint32_t {
+enum class FilterOperator : int32_t {
     // clang-format off
     Equals             = 0,
     IsNull             = 1,
@@ -1399,7 +1399,7 @@ ContentFilter operator||(const ContentFilter& lhs, const ContentFilter& rhs);
  * Data change trigger.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.10
  */
-enum class DataChangeTrigger : uint32_t {
+enum class DataChangeTrigger : int32_t {
     // clang-format off
     Status               = 0,
     StatusValue          = 1,
@@ -1411,7 +1411,7 @@ enum class DataChangeTrigger : uint32_t {
  * Deadband type.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.22.2
  */
-enum class DeadbandType : uint32_t {
+enum class DeadbandType : int32_t {
     // clang-format off
     None     = 0,
     Absolute = 1,
@@ -1482,7 +1482,7 @@ public:
  * @see UA_PerformUpdateType
  * @see https://reference.opcfoundation.org/Core/Part11/v104/docs/6.8.3
  */
-enum class PerformUpdateType : uint32_t {
+enum class PerformUpdateType : int32_t {
     // clang-format off
     Insert  = 1,
     Replace = 2,

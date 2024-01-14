@@ -49,7 +49,7 @@ enum class Type : TypeIndex {
  * @see UA_AttributeId
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/A.1/
  */
-enum class AttributeId : uint32_t {
+enum class AttributeId : int32_t {
     // clang-format off
     NodeId                  = 1,
     NodeClass               = 2,
@@ -86,7 +86,7 @@ enum class AttributeId : uint32_t {
  * @see UA_NodeClass
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.29
  */
-enum class NodeClass : uint32_t {
+enum class NodeClass : int32_t {
     // clang-format off
     Unspecified   = 0,
     Object        = 1,
@@ -159,7 +159,7 @@ enum class ModellingRule : uint16_t {
  * @see UA_BrowseDirection
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.5
  */
-enum class BrowseDirection : uint32_t {
+enum class BrowseDirection : int32_t {
     // clang-format off
     Forward = 0,
     Inverse = 1,
@@ -173,7 +173,7 @@ enum class BrowseDirection : uint32_t {
  * @see UA_TimestampsToReturn
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.40
  */
-enum class TimestampsToReturn : uint32_t {
+enum class TimestampsToReturn : int32_t {
     // clang-format off
     Source   = 0,
     Server   = 1,
@@ -188,7 +188,7 @@ enum class TimestampsToReturn : uint32_t {
  * @see UA_MonitoringMode
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.23
  */
-enum class MonitoringMode : uint32_t {
+enum class MonitoringMode : int32_t {
     // clang-format off
     Disabled  = 0,
     Sampling  = 1,
@@ -201,7 +201,7 @@ enum class MonitoringMode : uint32_t {
  * @see UA_MessageSecurityMode
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.20
  */
-enum class MessageSecurityMode : uint32_t {
+enum class MessageSecurityMode : int32_t {
     // clang-format off
     Invalid        = 0,  ///< Will always be rejected
     None           = 1,  ///< No security applied
