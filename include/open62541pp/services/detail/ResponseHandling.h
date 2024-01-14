@@ -11,11 +11,11 @@
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/Variant.h"
 
-namespace opcua::detail {
+namespace opcua::services::detail {
 
 template <typename Response>
 inline UA_ResponseHeader& getResponseHeader(Response& response) noexcept {
-    if constexpr (isTypeWrapper<Response>) {
+    if constexpr (opcua::detail::isTypeWrapper<Response>) {
         return response->responseHeader;
     } else {
         return response.responseHeader;
@@ -29,13 +29,13 @@ inline UA_StatusCode getServiceResult(Response& response) noexcept {
 
 template <typename Response>
 inline void checkServiceResult(Response& response) {
-    throwOnBadStatus(getServiceResult(response));
+    opcua::detail::throwOnBadStatus(getServiceResult(response));
 }
 
 template <typename Response>
 inline auto getResults(Response& response) {
     checkServiceResult(response);
-    if constexpr (isTypeWrapper<Response>) {
+    if constexpr (opcua::detail::isTypeWrapper<Response>) {
         return response.getResults();
     } else {
         return Span(response.results, response.resultsSize);
@@ -53,7 +53,7 @@ inline auto& getSingleResult(Response& response) {
 
 inline void checkReadResult(const UA_DataValue& dv) {
     if (dv.hasStatus) {
-        throwOnBadStatus(dv.status);
+        opcua::detail::throwOnBadStatus(dv.status);
     }
     if (!dv.hasValue) {
         throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
@@ -178,12 +178,12 @@ template <>
 struct AttributeHandler<AttributeId::Executable> : AttributeHandlerScalar<bool> {};
 
 inline std::vector<Variant> getOutputArguments(UA_CallMethodResult& result) {
-    throwOnBadStatus(result.statusCode);
-    throwOnBadStatus(result.inputArgumentResults, result.inputArgumentResultsSize);
+    opcua::detail::throwOnBadStatus(result.statusCode);
+    opcua::detail::throwOnBadStatus(result.inputArgumentResults, result.inputArgumentResultsSize);
     return {
         std::make_move_iterator(result.outputArguments),
         std::make_move_iterator(result.outputArguments + result.outputArgumentsSize)  // NOLINT
     };
 }
 
-}  // namespace opcua::detail
+}  // namespace opcua::services::detail

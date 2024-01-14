@@ -11,9 +11,9 @@
 #include "open62541pp/NodeIds.h"  // *TypeId
 #include "open62541pp/Span.h"
 #include "open62541pp/async.h"
-#include "open62541pp/detail/ClientService.h"
-#include "open62541pp/detail/RequestHandling.h"
-#include "open62541pp/detail/ResponseHandling.h"
+#include "open62541pp/services/detail/ClientService.h"
+#include "open62541pp/services/detail/RequestHandling.h"
+#include "open62541pp/services/detail/ResponseHandling.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"
@@ -143,7 +143,7 @@ auto addNodeAsync(
     item.referenceTypeId = referenceType;
     item.requestedNewNodeId.nodeId = id;
     item.browseName.namespaceIndex = id.getNamespaceIndex();
-    item.browseName.name = detail::toNativeString(browseName);
+    item.browseName.name = opcua::detail::toNativeString(browseName);
     item.nodeClass = static_cast<UA_NodeClass>(nodeClass);
     item.nodeAttributes = nodeAttributes;
     item.typeDefinition.nodeId = typeDefinition;
@@ -155,7 +155,7 @@ auto addNodeAsync(
         request,
         [](UA_AddNodesResponse& response) {
             auto& result = detail::getSingleResult(response);
-            detail::throwOnBadStatus(result.statusCode);
+            opcua::detail::throwOnBadStatus(result.statusCode);
             return NodeId(std::exchange(result.addedNodeId, {}));
         },
         std::forward<CompletionToken>(token)
@@ -728,7 +728,7 @@ auto addReferenceAsync(
         client,
         request,
         [](UA_AddReferencesResponse& response) {
-            detail::throwOnBadStatus(detail::getSingleResult(response));
+            opcua::detail::throwOnBadStatus(detail::getSingleResult(response));
         },
         std::forward<CompletionToken>(token)
     );
@@ -799,7 +799,7 @@ auto deleteNodeAsync(
         client,
         request,
         [](UA_DeleteNodesResponse& response) {
-            detail::throwOnBadStatus(detail::getSingleResult(response));
+            opcua::detail::throwOnBadStatus(detail::getSingleResult(response));
         },
         std::forward<CompletionToken>(token)
     );
@@ -846,7 +846,7 @@ auto deleteReferenceAsync(
         client,
         request,
         [](UA_DeleteReferencesResponse& response) {
-            detail::throwOnBadStatus(detail::getSingleResult(response));
+            opcua::detail::throwOnBadStatus(detail::getSingleResult(response));
         },
         std::forward<CompletionToken>(token)
     );

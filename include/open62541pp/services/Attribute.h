@@ -11,10 +11,10 @@
 #include "open62541pp/Span.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/async.h"
-#include "open62541pp/detail/ClientService.h"
-#include "open62541pp/detail/RequestHandling.h"
-#include "open62541pp/detail/ResponseHandling.h"
 #include "open62541pp/open62541.h"
+#include "open62541pp/services/detail/ClientService.h"
+#include "open62541pp/services/detail/RequestHandling.h"
+#include "open62541pp/services/detail/ResponseHandling.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/DataValue.h"
@@ -187,7 +187,7 @@ void writeAttributeAsync(
         client,
         request,
         [](UA_WriteResponse& response) {
-            detail::throwOnBadStatus(detail::getSingleResult(response));
+            opcua::detail::throwOnBadStatus(detail::getSingleResult(response));
         },
         std::forward<CompletionToken>(token)
     );

@@ -47,14 +47,14 @@ NodeId addNode<Server>(
         id.handle(),
         parentId.handle(),
         referenceType.handle(),
-        {id.getNamespaceIndex(), detail::toNativeString(browseName)},
+        {id.getNamespaceIndex(), opcua::detail::toNativeString(browseName)},
         typeDefinition.handle(),
         static_cast<const UA_NodeAttributes*>(nodeAttributes.getDecodedData()),
         nodeAttributes.getDecodedDataType(),
         nullptr,  // nodeContext
         addedNodeId.handle()
     );
-    detail::throwOnBadStatus(status);
+    opcua::detail::throwOnBadStatus(status);
     return addedNodeId;
 }
 
@@ -101,7 +101,7 @@ static UA_StatusCode methodCallback(
     const auto* nodeContext = static_cast<ServerContext::NodeContext*>(methodContext);
     const auto& callback = nodeContext->methodCallback;
     if (callback) {
-        return detail::tryInvokeGetStatus([&] {
+        return opcua::detail::tryInvokeGetStatus([&] {
             callback(
                 {asWrapper<Variant>(input), inputSize}, {asWrapper<Variant>(output), outputSize}
             );
@@ -130,7 +130,7 @@ NodeId addMethod(
         id,
         parentId,
         referenceType,
-        {id.getNamespaceIndex(), detail::toNativeString(browseName)},
+        {id.getNamespaceIndex(), opcua::detail::toNativeString(browseName)},
         attributes,
         methodCallback,
         inputArguments.size(),
@@ -140,7 +140,7 @@ NodeId addMethod(
         nodeContext,
         outputNodeId.handle()  // outNewNodeId
     );
-    detail::throwOnBadStatus(status);
+    opcua::detail::throwOnBadStatus(status);
     return outputNodeId;
 }
 
@@ -186,7 +186,7 @@ void addReference<Server>(
         {targetId, {}, 0},
         forward  // isForward
     );
-    detail::throwOnBadStatus(status);
+    opcua::detail::throwOnBadStatus(status);
 }
 
 template <>
@@ -205,7 +205,7 @@ void addReference<Client>(
 template <>
 void deleteNode<Server>(Server& server, const NodeId& id, bool deleteReferences) {
     const auto status = UA_Server_deleteNode(server.handle(), id, deleteReferences);
-    detail::throwOnBadStatus(status);
+    opcua::detail::throwOnBadStatus(status);
 }
 
 template <>
@@ -225,7 +225,7 @@ void deleteReference<Server>(
     const auto status = UA_Server_deleteReference(
         server.handle(), sourceId, referenceType, isForward, {targetId, {}, 0}, deleteBidirectional
     );
-    detail::throwOnBadStatus(status);
+    opcua::detail::throwOnBadStatus(status);
 }
 
 template <>

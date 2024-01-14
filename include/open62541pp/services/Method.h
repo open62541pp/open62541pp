@@ -7,9 +7,9 @@
 #include "open62541pp/Config.h"
 #include "open62541pp/Span.h"
 #include "open62541pp/async.h"
-#include "open62541pp/detail/ClientService.h"
-#include "open62541pp/detail/RequestHandling.h"
-#include "open62541pp/detail/ResponseHandling.h"
+#include "open62541pp/services/detail/ClientService.h"
+#include "open62541pp/services/detail/RequestHandling.h"
+#include "open62541pp/services/detail/ResponseHandling.h"
 #include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"
 

@@ -37,7 +37,9 @@ static void dataChangeNotificationCallback(
     auto* monitoredItem = static_cast<ServerContext::MonitoredItem*>(monitoredItemContext);
     auto& callback = monitoredItem->dataChangeCallback;
     if (callback) {
-        detail::tryInvoke([&] { callback(0U, monitoredItemId, asWrapper<DataValue>(*value)); });
+        opcua::detail::tryInvoke([&] {
+            callback(0U, monitoredItemId, asWrapper<DataValue>(*value));
+        });
     }
 }
 
@@ -55,7 +57,7 @@ static void dataChangeNotificationCallback(
     auto* monitoredItem = static_cast<ClientContext::MonitoredItem*>(monContext);
     auto& callback = monitoredItem->dataChangeCallback;
     if (callback) {
-        detail::tryInvoke([&] { callback(subId, monId, asWrapper<DataValue>(*value)); });
+        opcua::detail::tryInvoke([&] { callback(subId, monId, asWrapper<DataValue>(*value)); });
     }
 }
 
@@ -74,7 +76,7 @@ static void eventNotificationCallback(
     auto* monitoredItem = static_cast<ClientContext::MonitoredItem*>(monContext);
     auto& callback = monitoredItem->eventCallback;
     if (callback) {
-        detail::tryInvoke([&] {
+        opcua::detail::tryInvoke([&] {
             callback(subId, monId, {asWrapper<Variant>(eventFields), nEventFields});
         });
     }
@@ -143,7 +145,7 @@ uint32_t createMonitoredItemDataChange(
         dataChangeNotificationCallback,
         deleteMonitoredItemCallback
     );
-    detail::throwOnBadStatus(result->statusCode);
+    opcua::detail::throwOnBadStatus(result->statusCode);
     reviseMonitoringParameters(parameters, result);
 
     const auto monitoredItemId = result->monitoredItemId;
@@ -177,7 +179,7 @@ uint32_t createMonitoredItemDataChange(
         monitoredItemContext.get(),
         dataChangeNotificationCallback
     );
-    detail::throwOnBadStatus(result->statusCode);
+    opcua::detail::throwOnBadStatus(result->statusCode);
     reviseMonitoringParameters(parameters, result);
 
     const auto monitoredItemId = result->monitoredItemId;
@@ -216,7 +218,7 @@ uint32_t createMonitoredItemEvent(
         eventNotificationCallback,
         deleteMonitoredItemCallback
     );
-    detail::throwOnBadStatus(result->statusCode);
+    opcua::detail::throwOnBadStatus(result->statusCode);
     reviseMonitoringParameters(parameters, result);
 
     const auto monitoredItemId = result->monitoredItemId;
@@ -245,12 +247,12 @@ void modifyMonitoredItem(
     using Response =
         TypeWrapper<UA_ModifyMonitoredItemsResponse, UA_TYPES_MODIFYMONITOREDITEMSRESPONSE>;
     const Response response = UA_Client_MonitoredItems_modify(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    opcua::detail::throwOnBadStatus(response->responseHeader.serviceResult);
     if (response->resultsSize != 1) {
         throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
     }
     auto* result = response->results;
-    detail::throwOnBadStatus(result->statusCode);
+    opcua::detail::throwOnBadStatus(result->statusCode);
     reviseMonitoringParameters(parameters, result);
 }
 
@@ -265,11 +267,11 @@ void setMonitoringMode(
 
     using Response = TypeWrapper<UA_SetMonitoringModeResponse, UA_TYPES_SETMONITORINGMODERESPONSE>;
     const Response response = UA_Client_MonitoredItems_setMonitoringMode(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    opcua::detail::throwOnBadStatus(response->responseHeader.serviceResult);
     if (response->resultsSize != 1) {
         throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
     }
-    detail::throwOnBadStatus(*response->results);
+    opcua::detail::throwOnBadStatus(*response->results);
 }
 
 void setTriggering(
@@ -289,21 +291,21 @@ void setTriggering(
 
     using Response = TypeWrapper<UA_SetTriggeringResponse, UA_TYPES_SETTRIGGERINGRESPONSE>;
     const Response response = UA_Client_MonitoredItems_setTriggering(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
-    detail::throwOnBadStatus(response->addResults, response->addResultsSize);
-    detail::throwOnBadStatus(response->removeResults, response->removeResultsSize);
+    opcua::detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    opcua::detail::throwOnBadStatus(response->addResults, response->addResultsSize);
+    opcua::detail::throwOnBadStatus(response->removeResults, response->removeResultsSize);
 }
 
 void deleteMonitoredItem(Client& client, uint32_t subscriptionId, uint32_t monitoredItemId) {
     const auto status = UA_Client_MonitoredItems_deleteSingle(
         client.handle(), subscriptionId, monitoredItemId
     );
-    detail::throwOnBadStatus(status);
+    opcua::detail::throwOnBadStatus(status);
 }
 
 void deleteMonitoredItem(Server& server, uint32_t monitoredItemId) {
     const auto status = UA_Server_deleteMonitoredItem(server.handle(), monitoredItemId);
-    detail::throwOnBadStatus(status);
+    opcua::detail::throwOnBadStatus(status);
     server.getContext().monitoredItems.erase(monitoredItemId);
 }
 

@@ -9,8 +9,8 @@
 #include "open62541pp/NodeIds.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeWrapper.h"
-#include "open62541pp/detail/ClientService.h"
-#include "open62541pp/detail/ResponseHandling.h"
+#include "open62541pp/services/detail/ClientService.h"
+#include "open62541pp/services/detail/ResponseHandling.h"
 #include "open62541pp/types/Builtin.h"
 
 #include "../open62541_impl.h"
@@ -26,7 +26,7 @@ BrowseResponse browse(Client& client, const BrowseRequest& request) {
 template <>
 BrowseResult browse<Server>(Server& server, const BrowseDescription& bd, uint32_t maxReferences) {
     BrowseResult result = UA_Server_browse(server.handle(), maxReferences, bd.handle());
-    detail::throwOnBadStatus(result->statusCode);
+    opcua::detail::throwOnBadStatus(result->statusCode);
     return result;
 }
 
@@ -54,7 +54,7 @@ BrowseResult browseNext<Server>(
     BrowseResult result = UA_Server_browseNext(
         server.handle(), releaseContinuationPoint, continuationPoint.handle()
     );
-    detail::throwOnBadStatus(result->statusCode);  // TODO: remove?
+    opcua::detail::throwOnBadStatus(result->statusCode);  // TODO: remove?
     return result;
 }
 
@@ -98,7 +98,7 @@ std::vector<ExpandedNodeId> browseRecursive(Server& server, const BrowseDescript
         std::make_move_iterator(array + arraySize)  // NOLINT
     );
     UA_free(array);  // NOLINT
-    detail::throwOnBadStatus(status);
+    opcua::detail::throwOnBadStatus(status);
     return result;
 }
 
@@ -119,7 +119,7 @@ BrowsePathResult translateBrowsePathToNodeIds<Server>(
     BrowsePathResult result = UA_Server_translateBrowsePathToNodeIds(
         server.handle(), browsePath.handle()
     );
-    detail::throwOnBadStatus(result->statusCode);
+    opcua::detail::throwOnBadStatus(result->statusCode);
     return result;
 }
 

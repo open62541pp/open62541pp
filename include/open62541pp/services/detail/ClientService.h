@@ -13,7 +13,7 @@
 #include "open62541pp/detail/ScopeExit.h"
 #include "open62541pp/open62541.h"
 
-namespace opcua::detail {
+namespace opcua::services::detail {
 
 struct MoveResponse {
     template <typename Response>
@@ -52,7 +52,9 @@ auto sendRequest(
                 }
 
                 Response& response = *static_cast<Response*>(responsePtr);
-                auto result = tryInvoke(std::get<TransformResponse>(*context), response);
+                auto result = opcua::detail::tryInvoke(
+                    std::get<TransformResponse>(*context), response
+                );
                 if constexpr (std::is_void_v<Result>) {
                     std::invoke(handler, result.code());
                 } else {
@@ -70,13 +72,13 @@ auto sendRequest(
         const auto status = __UA_Client_AsyncService(
             client.handle(),
             &request,
-            &getDataType<Request>(),
+            &opcua::detail::getDataType<Request>(),
             callback,
-            &getDataType<Response>(),
+            &opcua::detail::getDataType<Response>(),
             context.release(),  // userdata, transfer ownership to callback
             nullptr
         );
-        throwOnBadStatus(status);
+        opcua::detail::throwOnBadStatus(status);
     };
 
     return asyncInitiate<Result>(
@@ -98,13 +100,19 @@ static auto sendRequest(
     SyncOperation /*unused*/
 ) {
     Response response{};
-    const auto responseDeleter = ScopeExit([&] { clear(response, getDataType<Response>()); });
+    const auto responseDeleter = opcua::detail::ScopeExit([&] {
+        opcua::detail::clear(response, opcua::detail::getDataType<Response>());
+    });
 
     __UA_Client_Service(
-        client.handle(), &request, &getDataType<Request>(), &response, &getDataType<Response>()
+        client.handle(),
+        &request,
+        &opcua::detail::getDataType<Request>(),
+        &response,
+        &opcua::detail::getDataType<Response>()
     );
 
     return std::invoke(std::forward<TransformResponse>(transformResponse), response);
 }
 
-}  // namespace opcua::detail
+}  // namespace opcua::services::detail

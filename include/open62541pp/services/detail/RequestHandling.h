@@ -12,7 +12,7 @@
 #include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"
 
-namespace opcua::detail {
+namespace opcua::services::detail {
 
 template <typename T>
 inline ExtensionObject wrapNodeAttributes(const T& attributes) {
@@ -89,4 +89,4 @@ inline UA_CallMethodRequest createCallMethodRequest(
     return request;
 }
 
-}  // namespace opcua::detail
+}  // namespace opcua::services::detail

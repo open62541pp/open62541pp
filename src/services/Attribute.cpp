@@ -39,7 +39,7 @@ void writeAttribute<Server>(
 ) {
     const auto item = detail::createWriteValue(id, attributeId, value);
     const auto status = UA_Server_write(server.handle(), &item);
-    detail::throwOnBadStatus(status);
+    opcua::detail::throwOnBadStatus(status);
 }
 
 template <>
