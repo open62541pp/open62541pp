@@ -49,14 +49,6 @@ TEST_CASE("Allocate array as unique_ptr") {
     CHECK(ptr.get() != nullptr);
 }
 
-TEST_CASE("getDataType") {
-    const auto* expected = &UA_TYPES[UA_TYPES_BOOLEAN];
-    CHECK(&detail::getDataType(UA_TYPES_BOOLEAN) == expected);
-    CHECK(&detail::getDataType(Type::Boolean) == expected);
-    CHECK(&detail::getDataType<UA_TYPES_BOOLEAN>() == expected);
-    CHECK(&detail::getDataType<Type::Boolean>() == expected);
-}
-
 TEST_CASE("UA_String from string_view") {
     SUBCASE("Test string") {
         std::string_view sv("test123");

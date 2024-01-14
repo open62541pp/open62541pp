@@ -54,7 +54,7 @@ NodeId addNode<Server>(
         nullptr,  // nodeContext
         addedNodeId.handle()
     );
-    opcua::detail::throwOnBadStatus(status);
+    throwIfBad(status);
     return addedNodeId;
 }
 
@@ -140,7 +140,7 @@ NodeId addMethod(
         nodeContext,
         outputNodeId.handle()  // outNewNodeId
     );
-    opcua::detail::throwOnBadStatus(status);
+    throwIfBad(status);
     return outputNodeId;
 }
 
@@ -186,7 +186,7 @@ void addReference<Server>(
         {targetId, {}, 0},
         forward  // isForward
     );
-    opcua::detail::throwOnBadStatus(status);
+    throwIfBad(status);
 }
 
 template <>
@@ -205,7 +205,7 @@ void addReference<Client>(
 template <>
 void deleteNode<Server>(Server& server, const NodeId& id, bool deleteReferences) {
     const auto status = UA_Server_deleteNode(server.handle(), id, deleteReferences);
-    opcua::detail::throwOnBadStatus(status);
+    throwIfBad(status);
 }
 
 template <>
@@ -225,7 +225,7 @@ void deleteReference<Server>(
     const auto status = UA_Server_deleteReference(
         server.handle(), sourceId, referenceType, isForward, {targetId, {}, 0}, deleteBidirectional
     );
-    opcua::detail::throwOnBadStatus(status);
+    throwIfBad(status);
 }
 
 template <>

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <algorithm>  // for_each_n
 #include <iterator>  // make_move_iterator
 #include <type_traits>
 #include <vector>
@@ -29,7 +30,7 @@ inline UA_StatusCode getServiceResult(Response& response) noexcept {
 
 template <typename Response>
 inline void checkServiceResult(Response& response) {
-    opcua::detail::throwOnBadStatus(getServiceResult(response));
+    throwIfBad(getServiceResult(response));
 }
 
 template <typename Response>
@@ -53,7 +54,7 @@ inline auto& getSingleResult(Response& response) {
 
 inline void checkReadResult(const UA_DataValue& dv) {
     if (dv.hasStatus) {
-        opcua::detail::throwOnBadStatus(dv.status);
+        throwIfBad(dv.status);
     }
     if (!dv.hasValue) {
         throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
@@ -178,8 +179,8 @@ template <>
 struct AttributeHandler<AttributeId::Executable> : AttributeHandlerScalar<bool> {};
 
 inline std::vector<Variant> getOutputArguments(UA_CallMethodResult& result) {
-    opcua::detail::throwOnBadStatus(result.statusCode);
-    opcua::detail::throwOnBadStatus(result.inputArgumentResults, result.inputArgumentResultsSize);
+    throwIfBad(result.statusCode);
+    std::for_each_n(result.inputArgumentResults, result.inputArgumentResultsSize, throwIfBad);
     return {
         std::make_move_iterator(result.outputArguments),
         std::make_move_iterator(result.outputArguments + result.outputArgumentsSize)  // NOLINT

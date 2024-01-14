@@ -26,7 +26,7 @@ namespace opcua {
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/A.3
  * @ingroup NodeIds
  */
-enum class DataTypeId : uint32_t {
+enum class DataTypeId : int32_t {
     Boolean = 1,
     SByte = 2,
     Byte = 3,
@@ -441,7 +441,7 @@ enum class DataTypeId : uint32_t {
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/A.3
  * @ingroup NodeIds
  */
-enum class ReferenceTypeId : uint32_t {
+enum class ReferenceTypeId : int32_t {
     References = 31,
     NonHierarchicalReferences = 32,
     HierarchicalReferences = 33,
@@ -495,7 +495,7 @@ enum class ReferenceTypeId : uint32_t {
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/A.3
  * @ingroup NodeIds
  */
-enum class ObjectTypeId : uint32_t {
+enum class ObjectTypeId : int32_t {
     BaseObjectType = 58,
     FolderType = 61,
     DataTypeSystemType = 75,
@@ -736,7 +736,7 @@ enum class ObjectTypeId : uint32_t {
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/A.3
  * @ingroup NodeIds
  */
-enum class VariableTypeId : uint32_t {
+enum class VariableTypeId : int32_t {
     BaseVariableType = 62,
     BaseDataVariableType = 63,
     PropertyType = 68,
@@ -803,7 +803,7 @@ enum class VariableTypeId : uint32_t {
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/A.3
  * @ingroup NodeIds
  */
-enum class ObjectId : uint32_t {
+enum class ObjectId : int32_t {
     ModellingRule_Mandatory = 78,
     ModellingRule_Optional = 80,
     ModellingRule_ExposesItsArray = 83,
@@ -2180,7 +2180,7 @@ enum class ObjectId : uint32_t {
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/A.3
  * @ingroup NodeIds
  */
-enum class VariableId : uint32_t {
+enum class VariableId : int32_t {
     DataTypeDescriptionType_DataTypeVersion = 104,
     DataTypeDescriptionType_DictionaryFragment = 105,
     DataTypeDictionaryType_DataTypeVersion = 106,
@@ -13406,7 +13406,7 @@ enum class VariableId : uint32_t {
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/A.3
  * @ingroup NodeIds
  */
-enum class MethodId : uint32_t {
+enum class MethodId : int32_t {
     ProgramStateMachineType_Start = 2426,
     ProgramStateMachineType_Suspend = 2427,
     ProgramStateMachineType_Resume = 2428,

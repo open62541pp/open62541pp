@@ -26,7 +26,7 @@ BrowseResponse browse(Client& client, const BrowseRequest& request) {
 template <>
 BrowseResult browse<Server>(Server& server, const BrowseDescription& bd, uint32_t maxReferences) {
     BrowseResult result = UA_Server_browse(server.handle(), maxReferences, bd.handle());
-    opcua::detail::throwOnBadStatus(result->statusCode);
+    throwIfBad(result->statusCode);
     return result;
 }
 
@@ -54,7 +54,7 @@ BrowseResult browseNext<Server>(
     BrowseResult result = UA_Server_browseNext(
         server.handle(), releaseContinuationPoint, continuationPoint.handle()
     );
-    opcua::detail::throwOnBadStatus(result->statusCode);  // TODO: remove?
+    throwIfBad(result->statusCode);  // TODO: remove?
     return result;
 }
 
@@ -98,7 +98,7 @@ std::vector<ExpandedNodeId> browseRecursive(Server& server, const BrowseDescript
         std::make_move_iterator(array + arraySize)  // NOLINT
     );
     UA_free(array);  // NOLINT
-    opcua::detail::throwOnBadStatus(status);
+    throwIfBad(status);
     return result;
 }
 
@@ -119,7 +119,7 @@ BrowsePathResult translateBrowsePathToNodeIds<Server>(
     BrowsePathResult result = UA_Server_translateBrowsePathToNodeIds(
         server.handle(), browsePath.handle()
     );
-    opcua::detail::throwOnBadStatus(result->statusCode);
+    throwIfBad(result->statusCode);
     return result;
 }
 

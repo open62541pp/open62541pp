@@ -72,13 +72,13 @@ auto sendRequest(
         const auto status = __UA_Client_AsyncService(
             client.handle(),
             &request,
-            &opcua::detail::getDataType<Request>(),
+            &getDataType<Request>(),
             callback,
-            &opcua::detail::getDataType<Response>(),
+            &getDataType<Response>(),
             context.release(),  // userdata, transfer ownership to callback
             nullptr
         );
-        opcua::detail::throwOnBadStatus(status);
+        throwIfBad(status);
     };
 
     return asyncInitiate<Result>(
@@ -101,15 +101,11 @@ static auto sendRequest(
 ) {
     Response response{};
     const auto responseDeleter = opcua::detail::ScopeExit([&] {
-        opcua::detail::clear(response, opcua::detail::getDataType<Response>());
+        opcua::detail::clear(response, getDataType<Response>());
     });
 
     __UA_Client_Service(
-        client.handle(),
-        &request,
-        &opcua::detail::getDataType<Request>(),
-        &response,
-        &opcua::detail::getDataType<Response>()
+        client.handle(), &request, &getDataType<Request>(), &response, &getDataType<Response>()
     );
 
     return std::invoke(std::forward<TransformResponse>(transformResponse), response);

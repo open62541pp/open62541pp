@@ -2,6 +2,7 @@
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 
+#include <algorithm>  // for_each_n
 #include <cstddef>
 #include <memory>
 #include <type_traits>  // is_same_v
@@ -145,7 +146,7 @@ uint32_t createMonitoredItemDataChange(
         dataChangeNotificationCallback,
         deleteMonitoredItemCallback
     );
-    opcua::detail::throwOnBadStatus(result->statusCode);
+    throwIfBad(result->statusCode);
     reviseMonitoringParameters(parameters, result);
 
     const auto monitoredItemId = result->monitoredItemId;
@@ -179,7 +180,7 @@ uint32_t createMonitoredItemDataChange(
         monitoredItemContext.get(),
         dataChangeNotificationCallback
     );
-    opcua::detail::throwOnBadStatus(result->statusCode);
+    throwIfBad(result->statusCode);
     reviseMonitoringParameters(parameters, result);
 
     const auto monitoredItemId = result->monitoredItemId;
@@ -218,7 +219,7 @@ uint32_t createMonitoredItemEvent(
         eventNotificationCallback,
         deleteMonitoredItemCallback
     );
-    opcua::detail::throwOnBadStatus(result->statusCode);
+    throwIfBad(result->statusCode);
     reviseMonitoringParameters(parameters, result);
 
     const auto monitoredItemId = result->monitoredItemId;
@@ -247,12 +248,12 @@ void modifyMonitoredItem(
     using Response =
         TypeWrapper<UA_ModifyMonitoredItemsResponse, UA_TYPES_MODIFYMONITOREDITEMSRESPONSE>;
     const Response response = UA_Client_MonitoredItems_modify(client.handle(), request);
-    opcua::detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    throwIfBad(response->responseHeader.serviceResult);
     if (response->resultsSize != 1) {
         throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
     }
     auto* result = response->results;
-    opcua::detail::throwOnBadStatus(result->statusCode);
+    throwIfBad(result->statusCode);
     reviseMonitoringParameters(parameters, result);
 }
 
@@ -267,11 +268,11 @@ void setMonitoringMode(
 
     using Response = TypeWrapper<UA_SetMonitoringModeResponse, UA_TYPES_SETMONITORINGMODERESPONSE>;
     const Response response = UA_Client_MonitoredItems_setMonitoringMode(client.handle(), request);
-    opcua::detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    throwIfBad(response->responseHeader.serviceResult);
     if (response->resultsSize != 1) {
         throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
     }
-    opcua::detail::throwOnBadStatus(*response->results);
+    throwIfBad(*response->results);
 }
 
 void setTriggering(
@@ -291,21 +292,21 @@ void setTriggering(
 
     using Response = TypeWrapper<UA_SetTriggeringResponse, UA_TYPES_SETTRIGGERINGRESPONSE>;
     const Response response = UA_Client_MonitoredItems_setTriggering(client.handle(), request);
-    opcua::detail::throwOnBadStatus(response->responseHeader.serviceResult);
-    opcua::detail::throwOnBadStatus(response->addResults, response->addResultsSize);
-    opcua::detail::throwOnBadStatus(response->removeResults, response->removeResultsSize);
+    throwIfBad(response->responseHeader.serviceResult);
+    std::for_each_n(response->addResults, response->addResultsSize, throwIfBad);
+    std::for_each_n(response->removeResults, response->removeResultsSize, throwIfBad);
 }
 
 void deleteMonitoredItem(Client& client, uint32_t subscriptionId, uint32_t monitoredItemId) {
     const auto status = UA_Client_MonitoredItems_deleteSingle(
         client.handle(), subscriptionId, monitoredItemId
     );
-    opcua::detail::throwOnBadStatus(status);
+    throwIfBad(status);
 }
 
 void deleteMonitoredItem(Server& server, uint32_t monitoredItemId) {
     const auto status = UA_Server_deleteMonitoredItem(server.handle(), monitoredItemId);
-    opcua::detail::throwOnBadStatus(status);
+    throwIfBad(status);
     server.getContext().monitoredItems.erase(monitoredItemId);
 }
 

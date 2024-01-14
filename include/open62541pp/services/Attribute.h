@@ -186,9 +186,7 @@ void writeAttributeAsync(
     return detail::sendRequest<UA_WriteRequest, UA_WriteResponse>(
         client,
         request,
-        [](UA_WriteResponse& response) {
-            opcua::detail::throwOnBadStatus(detail::getSingleResult(response));
-        },
+        [](UA_WriteResponse& response) { throwIfBad(detail::getSingleResult(response)); },
         std::forward<CompletionToken>(token)
     );
 }

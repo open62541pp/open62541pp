@@ -77,7 +77,7 @@ template <typename T>
     assert(isValidTypeCombination<T>(type));
     if constexpr (!isPointerFree<T>) {
         T dst;  // NOLINT, initialized in UA_copy function
-        throwOnBadStatus(UA_copy(&src, &dst, &type));
+        throwIfBad(UA_copy(&src, &dst, &type));
         return dst;
     } else {
         return src;
@@ -113,34 +113,13 @@ template <typename T>
     assert(isValidTypeCombination<T>(type));
     if constexpr (!isPointerFree<T>) {
         T* dst{};
-        throwOnBadStatus(UA_Array_copy(src, size, (void**)&dst, &type));  // NOLINT
+        throwIfBad(UA_Array_copy(src, size, (void**)&dst, &type));  // NOLINT
         return dst;
     } else {
         T* dst = allocateArray<T>(size, type);
         std::copy_n(src, size, dst);
         return dst;
     }
-}
-
-/* ------------------------------------------ Data type ----------------------------------------- */
-
-/// Get UA_DataType by type index or enum (template parameter).
-template <auto typeIndexOrEnum>
-inline const UA_DataType& getDataType() noexcept {
-    constexpr auto typeIndex = static_cast<TypeIndex>(typeIndexOrEnum);
-    static_assert(typeIndex < UA_TYPES_COUNT);
-    return UA_TYPES[typeIndex];  // NOLINT
-}
-
-/// Get UA_DataType by type index.
-inline const UA_DataType& getDataType(TypeIndex typeIndex) noexcept {
-    assert(typeIndex < UA_TYPES_COUNT);
-    return UA_TYPES[typeIndex];  // NOLINT
-}
-
-/// Get UA_DataType by type enum.
-inline const UA_DataType& getDataType(Type type) noexcept {
-    return getDataType(static_cast<TypeIndex>(type));
 }
 
 /* ---------------------------------------- String utils ---------------------------------------- */

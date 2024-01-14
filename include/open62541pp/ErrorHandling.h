@@ -49,15 +49,15 @@ public:
 
 namespace detail {
 
-[[nodiscard]] constexpr bool isGoodStatus(UA_StatusCode code) noexcept {
+[[nodiscard]] constexpr bool isGood(UA_StatusCode code) noexcept {
     return (code >> 30U) == 0x00;
 }
 
-[[nodiscard]] constexpr bool isUncertainStatus(UA_StatusCode code) noexcept {
+[[nodiscard]] constexpr bool isUncertain(UA_StatusCode code) noexcept {
     return (code >> 30U) == 0x01;
 }
 
-[[nodiscard]] constexpr bool isBadStatus(UA_StatusCode code) noexcept {
+[[nodiscard]] constexpr bool isBad(UA_StatusCode code) noexcept {
     return (code >> 30U) >= 0x02;
 }
 
@@ -75,8 +75,13 @@ namespace detail {
     return UA_STATUSCODE_GOOD;
 }
 
-constexpr void throwOnBadStatus(UA_StatusCode code) {
-    if (isBadStatus(code)) {
+}  // namespace detail
+
+/**
+ * Check the status code and throw a BadStatus exception if the status code is bad.
+ */
+constexpr void throwIfBad(UA_StatusCode code) {
+    if (detail::isBad(code)) {
         // NOLINTNEXTLINE
         switch (code) {
         case UA_STATUSCODE_BADDISCONNECT:
@@ -86,13 +91,5 @@ constexpr void throwOnBadStatus(UA_StatusCode code) {
         }
     }
 }
-
-constexpr void throwOnBadStatus(const UA_StatusCode* codes, size_t codesSize) {
-    for (size_t i = 0; i < codesSize; ++i) {
-        throwOnBadStatus(codes[i]);  // NOLINT
-    }
-}
-
-}  // namespace detail
 
 }  // namespace opcua

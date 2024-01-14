@@ -97,7 +97,7 @@ ByteString::ByteString(std::string_view str)
 
 ByteString::ByteString(const std::vector<uint8_t>& bytes) {
     const auto status = UA_ByteString_allocBuffer(handle(), bytes.size());
-    detail::throwOnBadStatus(status);
+    throwIfBad(status);
     std::copy(bytes.begin(), bytes.end(), handle()->data);
 }
 
@@ -298,7 +298,7 @@ NumericRange::NumericRange(std::string_view encodedRange) {
         native.dimensions + native.dimensionsSize  // NOLINT
     );
     UA_free(native.dimensions);  // NOLINT
-    detail::throwOnBadStatus(status);
+    throwIfBad(status);
 }
 
 NumericRange::NumericRange(std::vector<NumericRangeDimension> dimensions)

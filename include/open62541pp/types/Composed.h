@@ -137,7 +137,7 @@ public:
  * User identity token type.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.43
  */
-enum class UserTokenType : uint32_t {
+enum class UserTokenType : int32_t {
     // clang-format off
     Anonymous   = 0,  ///< No token is required
     Username    = 1,  ///< A username/password token
@@ -227,7 +227,7 @@ public:
 #define UAPP_NODEATTR_ARRAY(Type, suffix, member, memberSize, flag)                                \
     UAPP_COMPOSED_GETTER_SPAN(Type, get##suffix, member, memberSize)                               \
     auto& set##suffix(Span<const Type> member) {                                                   \
-        const auto& dataType = detail::getDataType<Type>();                                        \
+        const auto& dataType = opcua::getDataType<Type>();                                         \
         handle()->specifiedAttributes |= flag;                                                     \
         detail::deallocateArray(handle()->member, handle()->memberSize, dataType);                 \
         handle()->member = detail::copyArray(member.data(), member.size(), dataType);              \
@@ -305,7 +305,7 @@ public:
     /// Deduce the `dataType` from the template type.
     template <typename T>
     auto& setDataType() {
-        return setDataType(asWrapper<NodeId>(detail::getDataType<T>().typeId));
+        return setDataType(asWrapper<NodeId>(opcua::getDataType<T>().typeId));
     }
 
     UAPP_NODEATTR_CAST(ValueRank, ValueRank, valueRank, UA_NODEATTRIBUTESMASK_VALUERANK)
@@ -392,7 +392,7 @@ public:
     /// Deduce the `dataType` from the template type.
     template <typename T>
     auto& setDataType() {
-        return setDataType(asWrapper<NodeId>(detail::getDataType<T>().typeId));
+        return setDataType(asWrapper<NodeId>(opcua::getDataType<T>().typeId));
     }
 
     UAPP_NODEATTR_CAST(ValueRank, ValueRank, valueRank, UA_NODEATTRIBUTESMASK_VALUERANK)
@@ -1289,7 +1289,7 @@ public:
  * Filter operator.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.7.3
  */
-enum class FilterOperator : uint32_t {
+enum class FilterOperator : int32_t {
     // clang-format off
     Equals             = 0,
     IsNull             = 1,
@@ -1474,7 +1474,7 @@ ContentFilter operator||(const ContentFilter& lhs, const ContentFilter& rhs);
  * Data change trigger.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.10
  */
-enum class DataChangeTrigger : uint32_t {
+enum class DataChangeTrigger : int32_t {
     // clang-format off
     Status               = 0,
     StatusValue          = 1,
@@ -1486,7 +1486,7 @@ enum class DataChangeTrigger : uint32_t {
  * Deadband type.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.22.2
  */
-enum class DeadbandType : uint32_t {
+enum class DeadbandType : int32_t {
     // clang-format off
     None     = 0,
     Absolute = 1,
@@ -1557,7 +1557,7 @@ public:
  * @see UA_PerformUpdateType
  * @see https://reference.opcfoundation.org/Core/Part11/v104/docs/6.8.3
  */
-enum class PerformUpdateType : uint32_t {
+enum class PerformUpdateType : int32_t {
     // clang-format off
     Insert  = 1,
     Replace = 2,

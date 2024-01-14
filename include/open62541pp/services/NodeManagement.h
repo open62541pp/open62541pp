@@ -155,7 +155,7 @@ auto addNodeAsync(
         request,
         [](UA_AddNodesResponse& response) {
             auto& result = detail::getSingleResult(response);
-            opcua::detail::throwOnBadStatus(result.statusCode);
+            throwIfBad(result.statusCode);
             return NodeId(std::exchange(result.addedNodeId, {}));
         },
         std::forward<CompletionToken>(token)
@@ -727,9 +727,7 @@ auto addReferenceAsync(
     return detail::sendRequest<UA_AddReferencesRequest, UA_AddReferencesResponse>(
         client,
         request,
-        [](UA_AddReferencesResponse& response) {
-            opcua::detail::throwOnBadStatus(detail::getSingleResult(response));
-        },
+        [](UA_AddReferencesResponse& response) { throwIfBad(detail::getSingleResult(response)); },
         std::forward<CompletionToken>(token)
     );
 }
@@ -798,9 +796,7 @@ auto deleteNodeAsync(
     return detail::sendRequest<UA_DeleteNodesRequest, UA_DeleteNodesResponse>(
         client,
         request,
-        [](UA_DeleteNodesResponse& response) {
-            opcua::detail::throwOnBadStatus(detail::getSingleResult(response));
-        },
+        [](UA_DeleteNodesResponse& response) { throwIfBad(detail::getSingleResult(response)); },
         std::forward<CompletionToken>(token)
     );
 }
@@ -846,7 +842,7 @@ auto deleteReferenceAsync(
         client,
         request,
         [](UA_DeleteReferencesResponse& response) {
-            opcua::detail::throwOnBadStatus(detail::getSingleResult(response));
+            throwIfBad(detail::getSingleResult(response));
         },
         std::forward<CompletionToken>(token)
     );

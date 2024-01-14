@@ -40,9 +40,9 @@ template <typename T, typename Native>
 static void assignArray(Span<const T> src, Native*& dst, size_t& dstSize) {
     static_assert(sizeof(T) == sizeof(Native));
     if constexpr (detail::isTypeWrapper<T>) {
-        dst = detail::copyArray(asNative(src.data()), src.size(), detail::getDataType<T>());
+        dst = detail::copyArray(asNative(src.data()), src.size(), getDataType<T>());
     } else {
-        dst = detail::copyArray(src.data(), src.size(), detail::getDataType<T>());
+        dst = detail::copyArray(src.data(), src.size(), getDataType<T>());
     }
     dstSize = src.size();
 }

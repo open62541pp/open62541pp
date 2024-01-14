@@ -47,7 +47,7 @@ public:
     /// @param data Decoded data
     template <typename T>
     [[nodiscard]] static ExtensionObject fromDecoded(T& data) noexcept {
-        return fromDecoded(&data, detail::getDataType<T>());
+        return fromDecoded(&data, getDataType<T>());
     }
 
     /// Create an ExtensionObject from a decoded object (assign).
@@ -62,7 +62,7 @@ public:
     /// @param data Decoded data
     template <typename T>
     [[nodiscard]] static ExtensionObject fromDecodedCopy(const T& data) {
-        return fromDecodedCopy(&data, detail::getDataType<T>());
+        return fromDecodedCopy(&data, getDataType<T>());
     }
 
     /// Create an ExtensionObject from a decoded object (copy).
@@ -94,7 +94,7 @@ public:
     /// ExtensionObject is either encoded or the decoded data not of type `T`.
     template <typename T>
     T* getDecodedData() noexcept {
-        if (getDecodedDataType() == &detail::getDataType<T>()) {
+        if (getDecodedDataType() == &getDataType<T>()) {
             return static_cast<T*>(getDecodedData());
         }
         return nullptr;
@@ -103,7 +103,7 @@ public:
     /// @copydoc getDecodedData
     template <typename T>
     const T* getDecodedData() const noexcept {
-        if (getDecodedDataType() == &detail::getDataType<T>()) {
+        if (getDecodedDataType() == &getDataType<T>()) {
             return static_cast<const T*>(getDecodedData());
         }
         return nullptr;
