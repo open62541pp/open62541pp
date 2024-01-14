@@ -95,7 +95,7 @@ static auto sendRequest(
     Client& client,
     const Request& request,
     TransformResponse&& transformResponse,
-    SyncOperation /* unused */
+    SyncOperation /*unused*/
 ) {
     Response response{};
     const auto responseDeleter = ScopeExit([&] { clear(response, getDataType<Response>()); });

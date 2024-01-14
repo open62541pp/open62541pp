@@ -71,7 +71,7 @@ constexpr UseFutureToken useFuture;
 template <typename Result>
 struct AsyncResult<UseFutureToken, Result> {
     template <typename Initiation, typename... Args>
-    static auto initiate(Initiation&& initiation, UseFutureToken /* unused */, Args&&... args) {
+    static auto initiate(Initiation&& initiation, UseFutureToken /*unused*/, Args&&... args) {
         std::promise<Result> promise;
         auto future = promise.get_future();
         std::invoke(
@@ -107,7 +107,7 @@ constexpr UseDeferredToken useDeferred;
 template <typename Result>
 struct AsyncResult<UseDeferredToken, Result> {
     template <typename Initiation, typename... Args>
-    static auto initiate(Initiation&& initiation, UseDeferredToken /* unused */, Args&&... args) {
+    static auto initiate(Initiation&& initiation, UseDeferredToken /*unused*/, Args&&... args) {
         return [initiation = std::forward<Initiation>(initiation),
                 argsPack = std::make_tuple(std::forward<Args>(args)...)](auto&& token) mutable {
             return std::apply(
@@ -142,7 +142,7 @@ constexpr UseDetachedToken useDetached;
 template <typename Result>
 struct AsyncResult<UseDetachedToken, Result> {
     template <typename Initiation, typename... Args>
-    static auto initiate(Initiation&& initiation, UseDetachedToken /* unused */, Args&&... args) {
+    static auto initiate(Initiation&& initiation, UseDetachedToken /*unused*/, Args&&... args) {
         std::invoke(
             std::forward<Initiation>(initiation),
             [](auto&&...) {

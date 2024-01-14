@@ -119,11 +119,7 @@ auto readAttributeAsync(
     return detail::sendRequest<UA_ReadRequest, UA_ReadResponse>(
         client,
         request,
-        [](UA_ReadResponse& response) {
-            auto& result = detail::getSingleResult(response);
-            detail::checkReadResult(result);
-            return DataValue(std::exchange(result, {}));
-        },
+        [](UA_ReadResponse& response) { return detail::getReadResult(response); },
         std::forward<CompletionToken>(token)
     );
 }
@@ -199,6 +195,29 @@ void writeAttributeAsync(
 
 /* -------------------------------- Specialized inline functions -------------------------------- */
 
+// TODO: hide helper functions without namespace ambiguity
+
+template <AttributeId Attribute, typename T>
+inline auto readAttributeImpl(T& serverOrClient, const NodeId& id) {
+    using Tag = typename detail::AttributeTag<Attribute>;
+    return detail::getAttribute(readAttribute(serverOrClient, id, Attribute), Tag{});
+}
+
+template <AttributeId Attribute, typename CompletionToken>
+inline auto readAttributeAsyncImpl(Client& client, const NodeId& id, CompletionToken&& token) {
+    auto item = detail::createReadValueId(id, Attribute);
+    auto request = detail::createReadRequest(TimestampsToReturn::Neither, item);
+    return detail::sendRequest<UA_ReadRequest, UA_ReadResponse>(
+        client,
+        request,
+        [](UA_ReadResponse& response) {
+            using Tag = typename detail::AttributeTag<Attribute>;
+            return detail::getAttribute(detail::getReadResult(response), Tag{});
+        },
+        std::forward<CompletionToken>(token)
+    );
+}
+
 /**
  * Read the `NodeId` attribute of a node.
  *
@@ -206,7 +225,16 @@ void writeAttributeAsync(
  */
 template <typename T>
 inline NodeId readNodeId(T& serverOrClient, const NodeId& id) {
-    return detail::getAttribute<NodeId>(readAttribute(serverOrClient, id, AttributeId::NodeId));
+    return readAttributeImpl<AttributeId::NodeId>(serverOrClient, id);
+}
+
+template <typename CompletionToken = DefaultCompletionToken>
+inline auto readNodeIdAsync(
+    Client& client, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
+) {
+    return readAttributeAsyncImpl<AttributeId::NodeId>(
+        client, id, std::forward<CompletionToken>(token)
+    );
 }
 
 /**
@@ -214,8 +242,7 @@ inline NodeId readNodeId(T& serverOrClient, const NodeId& id) {
  */
 template <typename T>
 inline NodeClass readNodeClass(T& serverOrClient, const NodeId& id) {
-    return detail::getAttribute<NodeClass>(readAttribute(serverOrClient, id, AttributeId::NodeClass)
-    );
+    return readAttributeImpl<AttributeId::NodeClass>(serverOrClient, id);
 }
 
 /**
@@ -226,9 +253,7 @@ inline NodeClass readNodeClass(T& serverOrClient, const NodeId& id) {
  */
 template <typename T>
 inline QualifiedName readBrowseName(T& serverOrClient, const NodeId& id) {
-    return detail::getAttribute<QualifiedName>(
-        readAttribute(serverOrClient, id, AttributeId::BrowseName)
-    );
+    return readAttributeImpl<AttributeId::BrowseName>(serverOrClient, id);
 }
 
 /**
@@ -238,9 +263,7 @@ inline QualifiedName readBrowseName(T& serverOrClient, const NodeId& id) {
  */
 template <typename T>
 inline LocalizedText readDisplayName(T& serverOrClient, const NodeId& id) {
-    return detail::getAttribute<LocalizedText>(
-        readAttribute(serverOrClient, id, AttributeId::DisplayName)
-    );
+    return readAttributeImpl<AttributeId::DisplayName>(serverOrClient, id);
 }
 
 /**
@@ -250,9 +273,7 @@ inline LocalizedText readDisplayName(T& serverOrClient, const NodeId& id) {
  */
 template <typename T>
 inline LocalizedText readDescription(T& serverOrClient, const NodeId& id) {
-    return detail::getAttribute<LocalizedText>(
-        readAttribute(serverOrClient, id, AttributeId::Description)
-    );
+    return readAttributeImpl<AttributeId::Description>(serverOrClient, id);
 }
 
 /**
@@ -262,8 +283,7 @@ inline LocalizedText readDescription(T& serverOrClient, const NodeId& id) {
  */
 template <typename T>
 inline uint32_t readWriteMask(T& serverOrClient, const NodeId& id) {
-    return detail::getAttribute<uint32_t>(readAttribute(serverOrClient, id, AttributeId::WriteMask)
-    );
+    return readAttributeImpl<AttributeId::WriteMask>(serverOrClient, id);
 }
 
 /**
@@ -274,9 +294,7 @@ inline uint32_t readWriteMask(T& serverOrClient, const NodeId& id) {
  */
 template <typename T>
 inline uint32_t readUserWriteMask(T& serverOrClient, const NodeId& id) {
-    return detail::getAttribute<uint32_t>(
-        readAttribute(serverOrClient, id, AttributeId::UserWriteMask)
-    );
+    return readAttributeImpl<AttributeId::UserWriteMask>(serverOrClient, id);
 }
 
 /**
@@ -286,7 +304,7 @@ inline uint32_t readUserWriteMask(T& serverOrClient, const NodeId& id) {
  */
 template <typename T>
 inline bool readIsAbstract(T& serverOrClient, const NodeId& id) {
-    return detail::getAttribute<bool>(readAttribute(serverOrClient, id, AttributeId::IsAbstract));
+    return readAttributeImpl<AttributeId::IsAbstract>(serverOrClient, id);
 }
 
 /**
@@ -296,7 +314,7 @@ inline bool readIsAbstract(T& serverOrClient, const NodeId& id) {
  */
 template <typename T>
 inline bool readSymmetric(T& serverOrClient, const NodeId& id) {
-    return detail::getAttribute<bool>(readAttribute(serverOrClient, id, AttributeId::Symmetric));
+    return readAttributeImpl<AttributeId::Symmetric>(serverOrClient, id);
 }
 
 /**
@@ -307,9 +325,7 @@ inline bool readSymmetric(T& serverOrClient, const NodeId& id) {
  */
 template <typename T>
 inline LocalizedText readInverseName(T& serverOrClient, const NodeId& id) {
-    return detail::getAttribute<LocalizedText>(
-        readAttribute(serverOrClient, id, AttributeId::InverseName)
-    );
+    return readAttributeImpl<AttributeId::InverseName>(serverOrClient, id);
 }
 
 /**
@@ -333,7 +349,7 @@ readDataValue(T& serverOrClient, const NodeId& id, DataValue& value) {
  */
 template <typename T>
 inline Variant readValue(T& serverOrClient, const NodeId& id) {
-    return readAttribute(serverOrClient, id, AttributeId::Value).getValue();
+    return readAttributeImpl<AttributeId::Value>(serverOrClient, id);
 }
 
 /// @copydoc readValue
@@ -349,7 +365,7 @@ readValue(T& serverOrClient, const NodeId& id, Variant& value) {
  */
 template <typename T>
 inline NodeId readDataType(T& serverOrClient, const NodeId& id) {
-    return detail::getAttribute<NodeId>(readAttribute(serverOrClient, id, AttributeId::DataType));
+    return readAttributeImpl<AttributeId::DataType>(serverOrClient, id);
 }
 
 /**
@@ -360,8 +376,7 @@ inline NodeId readDataType(T& serverOrClient, const NodeId& id) {
  */
 template <typename T>
 inline ValueRank readValueRank(T& serverOrClient, const NodeId& id) {
-    return detail::getAttribute<ValueRank>(readAttribute(serverOrClient, id, AttributeId::ValueRank)
-    );
+    return readAttributeImpl<AttributeId::ValueRank>(serverOrClient, id);
 }
 
 /**
@@ -371,9 +386,7 @@ inline ValueRank readValueRank(T& serverOrClient, const NodeId& id) {
  */
 template <typename T>
 inline std::vector<uint32_t> readArrayDimensions(T& serverOrClient, const NodeId& id) {
-    return detail::getArrayDimensions(
-        readAttribute(serverOrClient, id, AttributeId::ArrayDimensions)
-    );
+    return readAttributeImpl<AttributeId::ArrayDimensions>(serverOrClient, id);
 }
 
 /**
@@ -385,8 +398,7 @@ inline std::vector<uint32_t> readArrayDimensions(T& serverOrClient, const NodeId
  */
 template <typename T>
 inline uint8_t readAccessLevel(T& serverOrClient, const NodeId& id) {
-    return detail::getAttribute<uint8_t>(readAttribute(serverOrClient, id, AttributeId::AccessLevel)
-    );
+    return readAttributeImpl<AttributeId::AccessLevel>(serverOrClient, id);
 }
 
 /**
@@ -397,9 +409,7 @@ inline uint8_t readAccessLevel(T& serverOrClient, const NodeId& id) {
  */
 template <typename T>
 inline uint8_t readUserAccessLevel(T& serverOrClient, const NodeId& id) {
-    return detail::getAttribute<uint8_t>(
-        readAttribute(serverOrClient, id, AttributeId::UserAccessLevel)
-    );
+    return readAttributeImpl<AttributeId::UserAccessLevel>(serverOrClient, id);
 }
 
 /**
@@ -411,9 +421,7 @@ inline uint8_t readUserAccessLevel(T& serverOrClient, const NodeId& id) {
  */
 template <typename T>
 inline double readMinimumSamplingInterval(T& serverOrClient, const NodeId& id) {
-    return detail::getAttribute<double>(
-        readAttribute(serverOrClient, id, AttributeId::MinimumSamplingInterval)
-    );
+    return readAttributeImpl<AttributeId::MinimumSamplingInterval>(serverOrClient, id);
 }
 
 /* ---------------------------------------------------------------------------------------------- */
