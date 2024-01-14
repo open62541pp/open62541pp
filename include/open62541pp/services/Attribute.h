@@ -199,8 +199,8 @@ void writeAttributeAsync(
 
 template <AttributeId Attribute, typename T>
 inline auto readAttributeImpl(T& serverOrClient, const NodeId& id) {
-    using Tag = typename detail::AttributeTag<Attribute>;
-    return detail::getAttribute(readAttribute(serverOrClient, id, Attribute), Tag{});
+    using Handler = typename detail::AttributeHandler<Attribute>;
+    return Handler::fromDataValue(readAttribute(serverOrClient, id, Attribute));
 }
 
 template <AttributeId Attribute, typename CompletionToken>
@@ -211,8 +211,8 @@ inline auto readAttributeAsyncImpl(Client& client, const NodeId& id, CompletionT
         client,
         request,
         [](UA_ReadResponse& response) {
-            using Tag = typename detail::AttributeTag<Attribute>;
-            return detail::getAttribute(detail::getReadResult(response), Tag{});
+            using Handler = typename detail::AttributeHandler<Attribute>;
+            return Handler::fromDataValue(detail::getReadResult(response));
         },
         std::forward<CompletionToken>(token)
     );

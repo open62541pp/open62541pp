@@ -67,99 +67,115 @@ inline DataValue getReadResult(UA_ReadResponse& response) {
 }
 
 /**
- * Attribute tag type for compile-time tag dispatching based on the AttributeId.
+ * Attribute handler to convert DataValue objects to/from the attribute specific types.
+ * Template specializations must be provided for all AttributeIds.
  */
 template <AttributeId Attribute>
-using AttributeTag = std::integral_constant<AttributeId, Attribute>;
+struct AttributeHandler;
 
-inline auto getAttribute(DataValue&& dv, AttributeTag<AttributeId::NodeId> /*unused*/) {
-    return dv.getValue().getScalar<NodeId>();
-}
+template <typename T, typename Enable = void>
+struct AttributeHandlerScalar {
+    using Type = T;
 
-inline auto getAttribute(DataValue&& dv, AttributeTag<AttributeId::NodeClass> /*unused*/) {
-    // workaround to read enum from variant...
-    return *static_cast<NodeClass*>(dv.getValue().data());
-}
-
-inline auto getAttribute(DataValue&& dv, AttributeTag<AttributeId::BrowseName> /*unused*/) {
-    return dv.getValue().getScalar<QualifiedName>();
-}
-
-inline auto getAttribute(DataValue&& dv, AttributeTag<AttributeId::DisplayName> /*unused*/) {
-    return dv.getValue().getScalar<LocalizedText>();
-}
-
-inline auto getAttribute(DataValue&& dv, AttributeTag<AttributeId::Description> /*unused*/) {
-    return dv.getValue().getScalar<LocalizedText>();
-}
-
-inline auto getAttribute(DataValue&& dv, AttributeTag<AttributeId::WriteMask> /*unused*/) {
-    return dv.getValue().getScalar<uint32_t>();
-}
-
-inline auto getAttribute(DataValue&& dv, AttributeTag<AttributeId::UserWriteMask> /*unused*/) {
-    return dv.getValue().getScalar<uint32_t>();
-}
-
-inline auto getAttribute(DataValue&& dv, AttributeTag<AttributeId::IsAbstract> /*unused*/) {
-    return dv.getValue().getScalar<bool>();
-}
-
-inline auto getAttribute(DataValue&& dv, AttributeTag<AttributeId::Symmetric> /*unused*/) {
-    return dv.getValue().getScalar<bool>();
-}
-
-inline auto getAttribute(DataValue&& dv, AttributeTag<AttributeId::InverseName> /*unused*/) {
-    return dv.getValue().getScalar<LocalizedText>();
-}
-
-inline auto getAttribute(DataValue&& dv, AttributeTag<AttributeId::ContainsNoLoops> /*unused*/) {
-    return dv.getValue().getScalar<bool>();
-}
-
-inline auto getAttribute(DataValue&& dv, AttributeTag<AttributeId::EventNotifier> /*unused*/) {
-    return dv.getValue().getScalar<uint8_t>();
-}
-
-inline auto getAttribute(DataValue&& dv, AttributeTag<AttributeId::Value> /*unused*/) {
-    return dv.getValue();
-}
-
-inline auto getAttribute(DataValue&& dv, AttributeTag<AttributeId::DataType> /*unused*/) {
-    return dv.getValue().getScalar<NodeId>();
-}
-
-inline auto getAttribute(DataValue&& dv, AttributeTag<AttributeId::ValueRank> /*unused*/) {
-    return static_cast<ValueRank>(dv.getValue().getScalar<int32_t>());
-}
-
-inline auto getAttribute(DataValue&& dv, AttributeTag<AttributeId::ArrayDimensions> /*unused*/) {
-    if (dv.getValue().isArray()) {
-        return dv.getValue().getArrayCopy<uint32_t>();
+    static auto fromDataValue(DataValue&& dv) {
+        return dv.getValue().getScalar<Type>();
     }
-    return std::vector<uint32_t>{};
-}
+};
 
-inline auto getAttribute(DataValue&& dv, AttributeTag<AttributeId::AccessLevel> /*unused*/) {
-    return dv.getValue().getScalar<uint8_t>();
-}
+template <typename T>
+struct AttributeHandlerScalar<T, std::enable_if_t<std::is_enum_v<T>>> {
+    using Type = T;
+    using UnderlyingType = std::underlying_type_t<T>;
 
-inline auto getAttribute(DataValue&& dv, AttributeTag<AttributeId::UserAccessLevel> /*unused*/) {
-    return dv.getValue().getScalar<uint8_t>();
-}
+    static auto fromDataValue(DataValue&& dv) {
+        return static_cast<Type>(dv.getValue().getScalar<UnderlyingType>());
+    }
+};
 
-inline auto
-getAttribute(DataValue&& dv, AttributeTag<AttributeId::MinimumSamplingInterval> /*unused*/) {
-    return dv.getValue().getScalar<double>();
-}
+template <>
+struct AttributeHandler<AttributeId::NodeId> : AttributeHandlerScalar<NodeId> {};
 
-inline auto getAttribute(DataValue&& dv, AttributeTag<AttributeId::Historizing> /*unused*/) {
-    return dv.getValue().getScalar<bool>();
-}
+template <>
+struct AttributeHandler<AttributeId::NodeClass> {
+    using Type = NodeClass;
 
-inline auto getAttribute(DataValue&& dv, AttributeTag<AttributeId::Executable> /*unused*/) {
-    return dv.getValue().getScalar<bool>();
-}
+    static auto fromDataValue(DataValue&& dv) noexcept {
+        // workaround to read enum from variant...
+        return *static_cast<NodeClass*>(dv.getValue().data());
+    }
+};
+
+template <>
+struct AttributeHandler<AttributeId::BrowseName> : AttributeHandlerScalar<QualifiedName> {};
+
+template <>
+struct AttributeHandler<AttributeId::DisplayName> : AttributeHandlerScalar<LocalizedText> {};
+
+template <>
+struct AttributeHandler<AttributeId::Description> : AttributeHandlerScalar<LocalizedText> {};
+
+template <>
+struct AttributeHandler<AttributeId::WriteMask> : AttributeHandlerScalar<uint32_t> {};
+
+template <>
+struct AttributeHandler<AttributeId::UserWriteMask> : AttributeHandlerScalar<uint32_t> {};
+
+template <>
+struct AttributeHandler<AttributeId::IsAbstract> : AttributeHandlerScalar<bool> {};
+
+template <>
+struct AttributeHandler<AttributeId::Symmetric> : AttributeHandlerScalar<bool> {};
+
+template <>
+struct AttributeHandler<AttributeId::InverseName> : AttributeHandlerScalar<LocalizedText> {};
+
+template <>
+struct AttributeHandler<AttributeId::ContainsNoLoops> : AttributeHandlerScalar<bool> {};
+
+template <>
+struct AttributeHandler<AttributeId::EventNotifier> : AttributeHandlerScalar<uint8_t> {};
+
+template <>
+struct AttributeHandler<AttributeId::Value> {
+    using Type = Variant;
+
+    static auto fromDataValue(DataValue&& dv) {
+        return dv.getValue();
+    }
+};
+
+template <>
+struct AttributeHandler<AttributeId::DataType> : AttributeHandlerScalar<NodeId> {};
+
+template <>
+struct AttributeHandler<AttributeId::ValueRank> : AttributeHandlerScalar<ValueRank> {};
+
+template <>
+struct AttributeHandler<AttributeId::ArrayDimensions> {
+    using Type = std::vector<uint32_t>;
+
+    static auto fromDataValue(DataValue&& dv) {
+        if (dv.getValue().isArray()) {
+            return dv.getValue().getArrayCopy<uint32_t>();
+        }
+        return std::vector<uint32_t>{};
+    }
+};
+
+template <>
+struct AttributeHandler<AttributeId::AccessLevel> : AttributeHandlerScalar<uint8_t> {};
+
+template <>
+struct AttributeHandler<AttributeId::UserAccessLevel> : AttributeHandlerScalar<uint8_t> {};
+
+template <>
+struct AttributeHandler<AttributeId::MinimumSamplingInterval> : AttributeHandlerScalar<double> {};
+
+template <>
+struct AttributeHandler<AttributeId::Historizing> : AttributeHandlerScalar<bool> {};
+
+template <>
+struct AttributeHandler<AttributeId::Executable> : AttributeHandlerScalar<bool> {};
 
 inline std::vector<Variant> getOutputArguments(UA_CallMethodResult& result) {
     throwOnBadStatus(result.statusCode);
