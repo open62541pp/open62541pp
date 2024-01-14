@@ -227,7 +227,7 @@ public:
 #define UAPP_NODEATTR_ARRAY(Type, suffix, member, memberSize, flag)                                \
     UAPP_COMPOSED_GETTER_SPAN(Type, get##suffix, member, memberSize)                               \
     auto& set##suffix(Span<const Type> member) {                                                   \
-        const auto& dataType = detail::getDataType<Type>();                                        \
+        const auto& dataType = opcua::getDataType<Type>();                                         \
         handle()->specifiedAttributes |= flag;                                                     \
         detail::deallocateArray(handle()->member, handle()->memberSize, dataType);                 \
         handle()->member = detail::copyArray(member.data(), member.size(), dataType);              \
@@ -305,7 +305,7 @@ public:
     /// Deduce the `dataType` from the template type.
     template <typename T>
     auto& setDataType() {
-        return setDataType(asWrapper<NodeId>(detail::getDataType<T>().typeId));
+        return setDataType(asWrapper<NodeId>(opcua::getDataType<T>().typeId));
     }
 
     UAPP_NODEATTR_CAST(ValueRank, ValueRank, valueRank, UA_NODEATTRIBUTESMASK_VALUERANK)
@@ -392,7 +392,7 @@ public:
     /// Deduce the `dataType` from the template type.
     template <typename T>
     auto& setDataType() {
-        return setDataType(asWrapper<NodeId>(detail::getDataType<T>().typeId));
+        return setDataType(asWrapper<NodeId>(opcua::getDataType<T>().typeId));
     }
 
     UAPP_NODEATTR_CAST(ValueRank, ValueRank, valueRank, UA_NODEATTRIBUTESMASK_VALUERANK)
