@@ -16,7 +16,7 @@ namespace opcua {
 Event::Event(Server& server, const NodeId& eventType)
     : connection_(server) {
     const auto status = UA_Server_createEvent(server.handle(), eventType, id_.handle());
-    detail::throwOnBadStatus(status);
+    throwIfBad(status);
 }
 
 Event::~Event() {
@@ -55,7 +55,7 @@ Event& Event::writeProperty(const QualifiedName& propertyName, const Variant& va
     const auto status = UA_Server_writeObjectProperty(
         getConnection().handle(), getNodeId(), propertyName, value
     );
-    detail::throwOnBadStatus(status);
+    throwIfBad(status);
     return *this;
 }
 
@@ -68,7 +68,7 @@ ByteString Event::trigger(const NodeId& originId) {
         eventId.handle(),
         false  // deleteEventNode
     );
-    detail::throwOnBadStatus(status);
+    throwIfBad(status);
     return eventId;
 }
 

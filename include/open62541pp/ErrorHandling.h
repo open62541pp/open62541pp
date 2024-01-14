@@ -52,28 +52,16 @@ public:
 
 namespace detail {
 
-[[nodiscard]] inline constexpr bool isGoodStatus(UA_StatusCode code) noexcept {
+[[nodiscard]] constexpr bool isGood(UA_StatusCode code) noexcept {
     return (code >> 30U) == 0x00;
 }
 
-[[nodiscard]] inline constexpr bool isUncertainStatus(UA_StatusCode code) noexcept {
+[[nodiscard]] constexpr bool isUncertain(UA_StatusCode code) noexcept {
     return (code >> 30U) == 0x01;
 }
 
-[[nodiscard]] inline constexpr bool isBadStatus(UA_StatusCode code) noexcept {
+[[nodiscard]] constexpr bool isBad(UA_StatusCode code) noexcept {
     return (code >> 30U) >= 0x02;
-}
-
-inline void throwOnBadStatus(UA_StatusCode code) {
-    if (isBadStatus(code)) {
-        // NOLINTNEXTLINE
-        switch (code) {
-        case UA_STATUSCODE_BADDISCONNECT:
-            throw BadDisconnect();
-        default:
-            throw BadStatus(code);
-        }
-    }
 }
 
 /**
@@ -120,5 +108,20 @@ template <typename F, typename... Args>
 }
 
 }  // namespace detail
+
+/**
+ * Check the status code and throw a BadStatus exception if the status code is bad.
+ */
+constexpr void throwIfBad(UA_StatusCode code) {
+    if (detail::isBad(code)) {
+        // NOLINTNEXTLINE
+        switch (code) {
+        case UA_STATUSCODE_BADDISCONNECT:
+            throw BadDisconnect();
+        default:
+            throw BadStatus(code);
+        }
+    }
+}
 
 }  // namespace opcua

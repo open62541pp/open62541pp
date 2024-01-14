@@ -16,14 +16,14 @@ namespace opcua::services {
 
 BrowseResponse browse(Client& client, const BrowseRequest& request) {
     BrowseResponse response = UA_Client_Service_browse(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    throwIfBad(response->responseHeader.serviceResult);
     return response;
 }
 
 template <>
 BrowseResult browse<Server>(Server& server, const BrowseDescription& bd, uint32_t maxReferences) {
     BrowseResult result = UA_Server_browse(server.handle(), maxReferences, bd.handle());
-    detail::throwOnBadStatus(result->statusCode);
+    throwIfBad(result->statusCode);
     return result;
 }
 
@@ -46,7 +46,7 @@ BrowseResult browse<Client>(Client& client, const BrowseDescription& bd, uint32_
 
 BrowseNextResponse browseNext(Client& client, const BrowseNextRequest& request) {
     BrowseNextResponse response = UA_Client_Service_browseNext(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    throwIfBad(response->responseHeader.serviceResult);
     return response;
 }
 
@@ -57,7 +57,7 @@ BrowseResult browseNext<Server>(
     BrowseResult result = UA_Server_browseNext(
         server.handle(), releaseContinuationPoint, continuationPoint.handle()
     );
-    detail::throwOnBadStatus(result->statusCode);
+    throwIfBad(result->statusCode);
     return result;
 }
 
@@ -107,7 +107,7 @@ std::vector<ExpandedNodeId> browseRecursive(Server& server, const BrowseDescript
         std::make_move_iterator(array + arraySize)  // NOLINT
     );
     UA_free(array);  // NOLINT
-    detail::throwOnBadStatus(status);
+    throwIfBad(status);
     return result;
 }
 
@@ -116,7 +116,7 @@ TranslateBrowsePathsToNodeIdsResponse translateBrowsePathsToNodeIds(
 ) {
     TranslateBrowsePathsToNodeIdsResponse response =
         UA_Client_Service_translateBrowsePathsToNodeIds(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    throwIfBad(response->responseHeader.serviceResult);
     return response;
 }
 
@@ -127,7 +127,7 @@ BrowsePathResult translateBrowsePathToNodeIds<Server>(
     BrowsePathResult result = UA_Server_translateBrowsePathToNodeIds(
         server.handle(), browsePath.handle()
     );
-    detail::throwOnBadStatus(result->statusCode);
+    throwIfBad(result->statusCode);
     return result;
 }
 
@@ -170,13 +170,13 @@ BrowsePathResult browseSimplifiedBrowsePath(
 
 RegisterNodesResponse registerNodes(Client& client, const RegisterNodesRequest& request) {
     RegisterNodesResponse response = UA_Client_Service_registerNodes(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    throwIfBad(response->responseHeader.serviceResult);
     return response;
 }
 
 UnregisterNodesResponse unregisterNodes(Client& client, const UnregisterNodesRequest& request) {
     UnregisterNodesResponse response = UA_Client_Service_unregisterNodes(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    throwIfBad(response->responseHeader.serviceResult);
     return response;
 }
 

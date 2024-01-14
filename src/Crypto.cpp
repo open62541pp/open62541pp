@@ -60,7 +60,7 @@ CreateCertificateResult createCertificate(
         throw CreateCertificateError(errorMessages.front());  // throw first error
     }
     // handle errors without error logging
-    detail::throwOnBadStatus(status);
+    throwIfBad(status);
 
     return result;
 }

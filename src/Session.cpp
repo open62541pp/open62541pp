@@ -45,7 +45,7 @@ Variant Session::getSessionAttribute([[maybe_unused]] const QualifiedName& key) 
         unqualifiedKey(key).c_str(),
         variant.handle()
     );
-    detail::throwOnBadStatus(status);
+    throwIfBad(status);
 #endif
     return variant;
 }
@@ -60,7 +60,7 @@ void Session::setSessionAttribute(
         unqualifiedKey(key).c_str(),
         value.handle()
     );
-    detail::throwOnBadStatus(status);
+    throwIfBad(status);
 #endif
 }
 
@@ -75,7 +75,7 @@ void Session::deleteSessionAttribute([[maybe_unused]] const QualifiedName& key) 
 void Session::close() {
 #if UAPP_OPEN62541_VER_EQ(1, 3)
     const auto status = UA_Server_closeSession(getConnection().handle(), getSessionId().handle());
-    detail::throwOnBadStatus(status);
+    throwIfBad(status);
 #endif
 }
 

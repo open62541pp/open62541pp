@@ -17,19 +17,19 @@ namespace opcua::services {
 
 AddNodesResponse addNodes(Client& client, const AddNodesRequest& request) {
     AddNodesResponse response = UA_Client_Service_addNodes(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    throwIfBad(response->responseHeader.serviceResult);
     return response;
 }
 
 AddReferencesResponse addReferences(Client& client, const AddReferencesRequest& request) {
     AddReferencesResponse response = UA_Client_Service_addReferences(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    throwIfBad(response->responseHeader.serviceResult);
     return response;
 }
 
 DeleteNodesResponse deleteNodes(Client& client, const DeleteNodesRequest& request) {
     DeleteNodesResponse response = UA_Client_Service_deleteNodes(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    throwIfBad(response->responseHeader.serviceResult);
     return response;
 }
 
@@ -37,7 +37,7 @@ DeleteReferencesResponse deleteReferences(Client& client, const DeleteReferences
     DeleteReferencesResponse response = UA_Client_Service_deleteReferences(
         client.handle(), request
     );
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    throwIfBad(response->responseHeader.serviceResult);
     return response;
 }
 
@@ -66,7 +66,7 @@ NodeId addNode<Server>(
         nullptr,  // nodeContext
         addedNodeId.handle()
     );
-    detail::throwOnBadStatus(status);
+    throwIfBad(status);
     return addedNodeId;
 }
 
@@ -100,7 +100,7 @@ NodeId addNode<Client>(
     if (results.size() != 1) {
         throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
     }
-    detail::throwOnBadStatus(results[0]->statusCode);
+    throwIfBad(results[0]->statusCode);
     NodeId addedNodeId;
     addedNodeId.swap(results[0]->addedNodeId);
     return addedNodeId;
@@ -164,7 +164,7 @@ NodeId addMethod(
         nodeContext,
         outputNodeId.handle()  // outNewNodeId
     );
-    detail::throwOnBadStatus(status);
+    throwIfBad(status);
     return outputNodeId;
 }
 
@@ -211,7 +211,7 @@ void addReference<Server>(
         {targetId, {}, 0},
         forward  // isForward
     );
-    detail::throwOnBadStatus(status);
+    throwIfBad(status);
 }
 
 template <>
@@ -239,13 +239,13 @@ void addReference<Client>(
     if (results.size() != 1) {
         throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
     }
-    detail::throwOnBadStatus(results[0]);
+    throwIfBad(results[0]);
 }
 
 template <>
 void deleteNode<Server>(Server& server, const NodeId& id, bool deleteReferences) {
     const auto status = UA_Server_deleteNode(server.handle(), id, deleteReferences);
-    detail::throwOnBadStatus(status);
+    throwIfBad(status);
 }
 
 template <>
@@ -263,7 +263,7 @@ void deleteNode<Client>(Client& client, const NodeId& id, bool deleteReferences)
     if (results.size() != 1) {
         throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
     }
-    detail::throwOnBadStatus(results[0]);
+    throwIfBad(results[0]);
 }
 
 template <>
@@ -278,7 +278,7 @@ void deleteReference<Server>(
     const auto status = UA_Server_deleteReference(
         server.handle(), sourceId, referenceType, isForward, {targetId, {}, 0}, deleteBidirectional
     );
-    detail::throwOnBadStatus(status);
+    throwIfBad(status);
 }
 
 template <>
@@ -306,7 +306,7 @@ void deleteReference<Client>(
     if (results.size() != 1) {
         throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
     }
-    detail::throwOnBadStatus(results[0]);
+    throwIfBad(results[0]);
 }
 
 }  // namespace opcua::services

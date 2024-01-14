@@ -31,9 +31,9 @@ std::vector<Variant> call(
 
     using Result = TypeWrapper<UA_CallMethodResult, UA_TYPES_CALLMETHODRESULT>;
     const Result result = UA_Server_call(server.handle(), &request);
-    detail::throwOnBadStatus(result->statusCode);
+    throwIfBad(result->statusCode);
     for (size_t i = 0; i < result->inputArgumentResultsSize; ++i) {
-        detail::throwOnBadStatus(result->inputArgumentResults[i]);  // NOLINT
+        throwIfBad(result->inputArgumentResults[i]);  // NOLINT
     }
 
     return {
@@ -65,7 +65,7 @@ std::vector<Variant> call(
         std::make_move_iterator(output + outputSize)  // NOLINT
     );
     UA_free(output);  // NOLINT
-    detail::throwOnBadStatus(status);
+    throwIfBad(status);
     return result;
 }
 
