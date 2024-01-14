@@ -53,7 +53,7 @@ public:
 
     /// Create NodeId from Type (type id).
     NodeId(Type type) noexcept  // NOLINT, implicit wanted
-        : NodeId(detail::getDataType(type).typeId) {}
+        : NodeId(UA_TYPES[static_cast<TypeIndex>(type)].typeId) {}  // NOLINT
 
     /// Create NodeId from DataTypeId.
     NodeId(DataTypeId id) noexcept  // NOLINT, implicit wanted

@@ -122,27 +122,6 @@ template <typename T>
     }
 }
 
-/* ------------------------------------------ Data type ----------------------------------------- */
-
-/// Get UA_DataType by type index or enum (template parameter).
-template <auto typeIndexOrEnum>
-inline const UA_DataType& getDataType() noexcept {
-    constexpr auto typeIndex = static_cast<TypeIndex>(typeIndexOrEnum);
-    static_assert(typeIndex < UA_TYPES_COUNT);
-    return UA_TYPES[typeIndex];  // NOLINT
-}
-
-/// Get UA_DataType by type index.
-inline const UA_DataType& getDataType(TypeIndex typeIndex) noexcept {
-    assert(typeIndex < UA_TYPES_COUNT);
-    return UA_TYPES[typeIndex];  // NOLINT
-}
-
-/// Get UA_DataType by type enum.
-inline const UA_DataType& getDataType(Type type) noexcept {
-    return getDataType(static_cast<TypeIndex>(type));
-}
-
 /* ---------------------------------------- String utils ---------------------------------------- */
 
 /// Convert std::string_view to UA_String (no copy)

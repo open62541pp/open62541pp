@@ -533,7 +533,7 @@ public:
     /// @return Current node instance to chain multiple methods (fluent interface)
     template <typename T>
     Node& writeDataType() {
-        return writeDataType(asWrapper<NodeId>(detail::getDataType<T>().typeId));
+        return writeDataType(asWrapper<NodeId>(getDataType<T>().typeId));
     }
 
     /// @copydoc services::writeValueRank

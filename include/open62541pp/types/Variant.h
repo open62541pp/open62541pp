@@ -157,7 +157,7 @@ public:
     /// Check if the variant type is equal to the provided template type.
     template <typename T>
     bool isType() const noexcept {
-        return isType(detail::getDataType<T>());
+        return isType(opcua::getDataType<T>());
     }
 
     /// Get data type.
@@ -245,7 +245,7 @@ public:
     template <typename T>
     void setScalar(T& value) noexcept {
         assertIsNative<T>();
-        setScalar(value, detail::getDataType<T>());
+        setScalar(value, opcua::getDataType<T>());
     }
 
     /// Assign scalar value to variant with custom data type.
@@ -259,7 +259,7 @@ public:
     void setScalarCopy(const T& value) {
         assertIsCopyableOrConvertible<T>();
         if constexpr (detail::isRegisteredType<T>) {
-            setScalarCopyImpl(value, detail::getDataType<T>());
+            setScalarCopyImpl(value, opcua::getDataType<T>());
         } else {
             setScalarCopyConvertImpl(value);
         }
@@ -276,7 +276,7 @@ public:
     void setArray(Span<T> array) noexcept {
         using ValueType = typename decltype(array)::value_type;
         assertIsNative<ValueType>();
-        setArray(array, detail::getDataType<ValueType>());
+        setArray(array, opcua::getDataType<ValueType>());
     }
 
     /// @overload
@@ -303,7 +303,7 @@ public:
         using ValueType = typename decltype(array)::value_type;
         assertIsCopyableOrConvertible<ValueType>();
         if constexpr (detail::isRegisteredType<ValueType>) {
-            setArrayCopyImpl(array.begin(), array.end(), detail::getDataType<ValueType>());
+            setArrayCopyImpl(array.begin(), array.end(), opcua::getDataType<ValueType>());
         } else {
             setArrayCopyConvertImpl(array.begin(), array.end());
         }
@@ -332,7 +332,7 @@ public:
     void setArrayCopy(InputIt first, InputIt last) {
         using ValueType = typename std::iterator_traits<InputIt>::value_type;
         if constexpr (detail::isRegisteredType<ValueType>) {
-            setArrayCopyImpl(first, last, detail::getDataType<ValueType>());
+            setArrayCopyImpl(first, last, opcua::getDataType<ValueType>());
         } else {
             setArrayCopyConvertImpl(first, last);
         }
@@ -377,7 +377,7 @@ private:
 
     template <typename T>
     void checkIsDataType() const {
-        if (getDataType() != &detail::getDataType<T>()) {
+        if (getDataType() != &opcua::getDataType<T>()) {
             throw BadVariantAccess("Variant does not contain a value convertible to template type");
         }
     }
@@ -410,7 +410,7 @@ private:
 template <typename T>
 T Variant::getScalarCopyImpl() const {
     if constexpr (detail::isRegisteredType<T>) {
-        return detail::copy(getScalar<T>(), detail::getDataType<T>());
+        return detail::copy(getScalar<T>(), opcua::getDataType<T>());
     } else {
         using Native = typename TypeConverter<T>::NativeType;
         T result{};
@@ -425,7 +425,7 @@ std::vector<T> Variant::getArrayCopyImpl() const {
     if constexpr (detail::isRegisteredType<T>) {
         auto native = getArray<T>();
         std::transform(native.begin(), native.end(), result.begin(), [](auto&& value) {
-            return detail::copy(value, detail::getDataType<T>());
+            return detail::copy(value, opcua::getDataType<T>());
         });
     } else {
         using Native = typename TypeConverter<T>::NativeType;
@@ -472,7 +472,7 @@ void Variant::setScalarCopyImpl(const T& value, const UA_DataType& dataType) {
 template <typename T>
 void Variant::setScalarCopyConvertImpl(const T& value) {
     using Native = typename TypeConverter<T>::NativeType;
-    const auto& dataType = detail::getDataType<Native>();
+    const auto& dataType = opcua::getDataType<Native>();
     auto native = detail::allocateUniquePtr<Native>(dataType);
     TypeConverter<T>::toNative(value, *native);
     setScalarImpl(native.release(), dataType, UA_VARIANT_DATA);  // move ownership
@@ -493,7 +493,7 @@ template <typename InputIt>
 void Variant::setArrayCopyConvertImpl(InputIt first, InputIt last) {
     using ValueType = typename std::iterator_traits<InputIt>::value_type;
     using Native = typename TypeConverter<ValueType>::NativeType;
-    const auto& dataType = detail::getDataType<Native>();
+    const auto& dataType = opcua::getDataType<Native>();
     const size_t size = std::distance(first, last);
     auto native = detail::allocateArrayUniquePtr<Native>(size, dataType);
     for (size_t i = 0; i < size; ++i) {

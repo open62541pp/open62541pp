@@ -126,7 +126,7 @@ public:
      */
     template <auto U::*memberUnion, typename TField>
     auto& addUnionField(const char* fieldName) {
-        return addUnionField<memberUnion, TField>(fieldName, detail::getDataType<TField>());
+        return addUnionField<memberUnion, TField>(fieldName, getDataType<TField>());
     }
 
     /**
