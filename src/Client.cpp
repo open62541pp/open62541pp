@@ -170,7 +170,7 @@ public:
 
     void runIterate(uint16_t timeoutMilliseconds) {
         const auto status = UA_Client_run_iterate(handle(), timeoutMilliseconds);
-        detail::throwOnBadStatus(status);
+        throwIfBad(status);
     }
 
     void run() {
@@ -225,7 +225,7 @@ private:
 Client::Client()
     : connection_(std::make_shared<Connection>()) {
     const auto status = UA_ClientConfig_setDefault(getConfig(this));
-    detail::throwOnBadStatus(status);
+    throwIfBad(status);
     getConfig(this)->securityMode = UA_MESSAGESECURITYMODE_NONE;
     connection_->applyDefaults();
 }
@@ -247,7 +247,7 @@ Client::Client(
         asNative(revocationList.data()),
         revocationList.size()
     );
-    detail::throwOnBadStatus(status);
+    throwIfBad(status);
     getConfig(this)->securityMode = UA_MESSAGESECURITYMODE_SIGNANDENCRYPT;
     connection_->applyDefaults();
 }
@@ -271,7 +271,7 @@ std::vector<ApplicationDescription> Client::findServers(std::string_view serverU
         std::make_move_iterator(array + arraySize)  // NOLINT
     );
     UA_free(array);  // NOLINT
-    detail::throwOnBadStatus(status);
+    throwIfBad(status);
     return result;
 }
 
@@ -289,7 +289,7 @@ std::vector<EndpointDescription> Client::getEndpoints(std::string_view serverUrl
         std::make_move_iterator(array + arraySize)  // NOLINT
     );
     UA_free(array);  // NOLINT
-    detail::throwOnBadStatus(status);
+    throwIfBad(status);
     return result;
 }
 
@@ -331,7 +331,7 @@ void Client::onSessionClosed(StateCallback callback) {
 
 void Client::connect(std::string_view endpointUrl) {
     const auto status = UA_Client_connect(handle(), std::string(endpointUrl).c_str());
-    detail::throwOnBadStatus(status);
+    throwIfBad(status);
 }
 
 void Client::connect(std::string_view endpointUrl, const Login& login) {
@@ -343,7 +343,7 @@ void Client::connect(std::string_view endpointUrl, const Login& login) {
     const auto status = func(
         handle(), std::string(endpointUrl).c_str(), login.username.c_str(), login.password.c_str()
     );
-    detail::throwOnBadStatus(status);
+    throwIfBad(status);
 }
 
 void Client::disconnect() noexcept {

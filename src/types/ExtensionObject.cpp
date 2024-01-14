@@ -21,7 +21,7 @@ ExtensionObject ExtensionObject::fromDecodedCopy(const void* data, const UA_Data
     obj->encoding = UA_EXTENSIONOBJECT_DECODED;
     obj->content.decoded.data = detail::allocate<void>(type);  // NOLINT
     obj->content.decoded.type = &type;  // NOLINT
-    detail::throwOnBadStatus(UA_copy(data, obj->content.decoded.data, &type));  // NOLINT
+    throwIfBad(UA_copy(data, obj->content.decoded.data, &type));  // NOLINT
     return obj;
 }
 

@@ -77,7 +77,7 @@ template <typename T>
     assert(isValidTypeCombination<T>(type));
     if constexpr (!isPointerFree<T>) {
         T dst;  // NOLINT, initialized in UA_copy function
-        throwOnBadStatus(UA_copy(&src, &dst, &type));
+        throwIfBad(UA_copy(&src, &dst, &type));
         return dst;
     } else {
         return src;
@@ -113,7 +113,7 @@ template <typename T>
     assert(isValidTypeCombination<T>(type));
     if constexpr (!isPointerFree<T>) {
         T* dst{};
-        throwOnBadStatus(UA_Array_copy(src, size, (void**)&dst, &type));  // NOLINT
+        throwIfBad(UA_Array_copy(src, size, (void**)&dst, &type));  // NOLINT
         return dst;
     } else {
         T* dst = allocateArray<T>(size, type);

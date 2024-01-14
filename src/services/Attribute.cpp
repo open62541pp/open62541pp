@@ -11,7 +11,7 @@ namespace opcua::services {
 
 ReadResponse read(Client& client, const ReadRequest& request) {
     ReadResponse response = UA_Client_Service_read(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    throwIfBad(response->responseHeader.serviceResult);
     return response;
 }
 
@@ -38,7 +38,7 @@ DataValue readAttribute<Server>(
         server.handle(), &item, static_cast<UA_TimestampsToReturn>(timestamps)
     );
     if (result->hasStatus) {
-        detail::throwOnBadStatus(result->status);
+        throwIfBad(result->status);
     }
     return result;
 }
@@ -53,7 +53,7 @@ DataValue readAttribute<Client>(
         throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
     }
     if (results[0]->hasStatus) {
-        detail::throwOnBadStatus(results[0]->status);
+        throwIfBad(results[0]->status);
     }
     DataValue result;
     result.swap(response.getResults()[0]);
@@ -62,7 +62,7 @@ DataValue readAttribute<Client>(
 
 WriteResponse write(Client& client, const WriteRequest& request) {
     WriteResponse response = UA_Client_Service_write(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    throwIfBad(response->responseHeader.serviceResult);
     return response;
 }
 
@@ -86,7 +86,7 @@ void writeAttribute<Server>(
     item.value.hasValue = true;
 
     const auto status = UA_Server_write(server.handle(), &item);
-    detail::throwOnBadStatus(status);
+    throwIfBad(status);
 }
 
 template <>
@@ -105,7 +105,7 @@ void writeAttribute<Client>(
     if (results.size() != 1) {
         throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
     }
-    detail::throwOnBadStatus(results[0]);
+    throwIfBad(results[0]);
 }
 
 }  // namespace opcua::services

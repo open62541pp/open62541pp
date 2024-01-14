@@ -144,7 +144,7 @@ uint32_t createMonitoredItemDataChange(
         dataChangeNotificationCallback,
         deleteMonitoredItemCallback
     );
-    detail::throwOnBadStatus(result->statusCode);
+    throwIfBad(result->statusCode);
     reviseMonitoringParameters(parameters, result);
 
     const auto monitoredItemId = result->monitoredItemId;
@@ -178,7 +178,7 @@ uint32_t createMonitoredItemDataChange(
         monitoredItemContext.get(),
         dataChangeNotificationCallback
     );
-    detail::throwOnBadStatus(result->statusCode);
+    throwIfBad(result->statusCode);
     reviseMonitoringParameters(parameters, result);
 
     const auto monitoredItemId = result->monitoredItemId;
@@ -217,7 +217,7 @@ uint32_t createMonitoredItemEvent(
         eventNotificationCallback,
         deleteMonitoredItemCallback
     );
-    detail::throwOnBadStatus(result->statusCode);
+    throwIfBad(result->statusCode);
     reviseMonitoringParameters(parameters, result);
 
     const auto monitoredItemId = result->monitoredItemId;
@@ -246,12 +246,12 @@ void modifyMonitoredItem(
     using Response =
         TypeWrapper<UA_ModifyMonitoredItemsResponse, UA_TYPES_MODIFYMONITOREDITEMSRESPONSE>;
     const Response response = UA_Client_MonitoredItems_modify(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    throwIfBad(response->responseHeader.serviceResult);
     if (response->resultsSize != 1) {
         throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
     }
     auto* result = response->results;
-    detail::throwOnBadStatus(result->statusCode);
+    throwIfBad(result->statusCode);
     reviseMonitoringParameters(parameters, result);
 }
 
@@ -266,11 +266,11 @@ void setMonitoringMode(
 
     using Response = TypeWrapper<UA_SetMonitoringModeResponse, UA_TYPES_SETMONITORINGMODERESPONSE>;
     const Response response = UA_Client_MonitoredItems_setMonitoringMode(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    throwIfBad(response->responseHeader.serviceResult);
     if (response->resultsSize != 1) {
         throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
     }
-    detail::throwOnBadStatus(*response->results);
+    throwIfBad(*response->results);
 }
 
 void setTriggering(
@@ -290,12 +290,12 @@ void setTriggering(
 
     using Response = TypeWrapper<UA_SetTriggeringResponse, UA_TYPES_SETTRIGGERINGRESPONSE>;
     const Response response = UA_Client_MonitoredItems_setTriggering(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    throwIfBad(response->responseHeader.serviceResult);
     for (auto&& status : Span(response->addResults, response->addResultsSize)) {
-        detail::throwOnBadStatus(status);
+        throwIfBad(status);
     }
     for (auto&& status : Span(response->removeResults, response->removeResultsSize)) {
-        detail::throwOnBadStatus(status);
+        throwIfBad(status);
     }
 }
 
@@ -303,12 +303,12 @@ void deleteMonitoredItem(Client& client, uint32_t subscriptionId, uint32_t monit
     const auto status = UA_Client_MonitoredItems_deleteSingle(
         client.handle(), subscriptionId, monitoredItemId
     );
-    detail::throwOnBadStatus(status);
+    throwIfBad(status);
 }
 
 void deleteMonitoredItem(Server& server, uint32_t monitoredItemId) {
     const auto status = UA_Server_deleteMonitoredItem(server.handle(), monitoredItemId);
-    detail::throwOnBadStatus(status);
+    throwIfBad(status);
     server.getContext().monitoredItems.erase(monitoredItemId);
 }
 

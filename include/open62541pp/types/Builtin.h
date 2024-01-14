@@ -62,23 +62,23 @@ public:
 
     /// Check if the status code is good.
     constexpr bool isGood() const noexcept {
-        return detail::isGoodStatus(code_);
+        return detail::isGood(code_);
     }
 
     /// Check if the status code is uncertain.
     constexpr bool isUncertain() const noexcept {
-        return detail::isUncertainStatus(code_);
+        return detail::isUncertain(code_);
     }
 
     /// Check if the status code is bad.
     constexpr bool isBad() const noexcept {
-        return detail::isBadStatus(code_);
+        return detail::isBad(code_);
     }
 
     /// Throw a BadStatus exception if the status code is bad.
     /// @exception BadStatus
     void throwIfBad() const {
-        detail::throwOnBadStatus(code_);
+        opcua::throwIfBad(code_);
     }
 
 private:

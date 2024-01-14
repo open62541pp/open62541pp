@@ -55,7 +55,7 @@ uint32_t createSubscription(
         nullptr,  // statusChangeCallback
         deleteSubscriptionCallback
     );
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    throwIfBad(response->responseHeader.serviceResult);
 
     // update revised parameters
     parameters.publishingInterval = response->revisedPublishingInterval;
@@ -84,7 +84,7 @@ void modifySubscription(
     using Response =
         TypeWrapper<UA_ModifySubscriptionResponse, UA_TYPES_MODIFYSUBSCRIPTIONRESPONSE>;
     const Response response = UA_Client_Subscriptions_modify(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    throwIfBad(response->responseHeader.serviceResult);
 
     // update revised parameters
     parameters.publishingInterval = response->revisedPublishingInterval;
@@ -100,17 +100,17 @@ void setPublishingMode(Client& client, uint32_t subscriptionId, bool publishing)
 
     using Response = TypeWrapper<UA_SetPublishingModeResponse, UA_TYPES_SETPUBLISHINGMODERESPONSE>;
     const Response response = UA_Client_Subscriptions_setPublishingMode(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
+    throwIfBad(response->responseHeader.serviceResult);
 
     if (response->resultsSize != 1) {
         throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
     }
-    detail::throwOnBadStatus(*response->results);
+    throwIfBad(*response->results);
 }
 
 void deleteSubscription(Client& client, uint32_t subscriptionId) {
     const auto status = UA_Client_Subscriptions_deleteSingle(client.handle(), subscriptionId);
-    detail::throwOnBadStatus(status);
+    throwIfBad(status);
 }
 
 }  // namespace opcua::services
