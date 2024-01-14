@@ -47,7 +47,7 @@ TEMPLATE_ENUM = """
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/A.3
  * @ingroup NodeIds
  */
-enum class {enum_name} : uint32_t {{
+enum class {enum_name} : int32_t {{
 {body}
 }};
 """.strip()
