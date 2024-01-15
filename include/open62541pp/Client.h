@@ -46,7 +46,7 @@ public:
      * @param logger Custom log function. If the passed function is empty, the default logger is
      * used.
      */
-    Client(Logger logger = nullptr);
+    explicit Client(Logger logger = nullptr);
 
 #ifdef UA_ENABLE_ENCRYPTION
     /**
