@@ -128,8 +128,8 @@ struct AsyncResult<UseDeferredToken, Result> {
 
 /**
  * Detached completion token type.
- * The token is used used to indicate that an asynchronous operation is detached. That is, there is
- * no completion handler waiting for the operation's result.
+ * The token is used to indicate that an asynchronous operation is detached. That is, there is no
+ * completion handler waiting for the operation's result.
  */
 struct UseDetachedToken {};
 

@@ -1,8 +1,8 @@
 <doxygenlayout version="1.0">
   <!-- Navigation index tabs for HTML output -->
   <navindex>
-    <tab type="mainpage" visible="yes" title="Overview"/>
-
+    <tab type="mainpage" visible="yes" title="Main"/>
+    <tab type="user" url="@ref overview" title="Overview"/>
     <tab type="examples" visible="yes" title="" intro=""/>
 
     <tab type="user" url="@ref opcua::Server" title="Server"/>

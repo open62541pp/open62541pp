@@ -55,13 +55,7 @@ std::vector<Variant> call(
  * @param objectId NodeId of the object on which the method is invoked
  * @param methodId NodeId of the method to invoke
  * @param inputArguments Input argument values
- * @param token Completion handler with the signature `void(StatusCode, std::vector<Variant>&)`.
- *              The callback gets invoked in the receiver thread's context once a response has been
- *              received or a timeout occurred.
- *              The status code needs to be checked to determine validity of the result.
- *              Following special tokens can be used:
- *              - @ref useFuture to return a future object `std::future<std::vector<Variant>>`
- *              - @ref useDeferred to return a callable for deferred execution
+ * @param token @completiontoken{void(opcua::StatusCode, std::vector<opcua::Variant>&)}
  * @exception BadStatus
  */
 template <typename CompletionToken = DefaultCompletionToken>

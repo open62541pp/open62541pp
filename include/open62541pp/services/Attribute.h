@@ -65,6 +65,8 @@ inline ReadResponse read(
 
 /**
  * Asynchronously read one or more attributes of one or more nodes (client only).
+ * @copydetails read
+ * @param token @completiontoken{void(opcua::StatusCode, opcua::ReadResponse&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto readAsync(
@@ -105,6 +107,8 @@ DataValue readAttribute(
 
 /**
  * Asynchronously read node attribute.
+ * @copydetails readAttribute
+ * @param token @completiontoken{void(opcua::StatusCode, opcua::DataValue&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto readAttributeAsync(
@@ -138,6 +142,8 @@ inline WriteResponse write(Client& client, Span<const WriteValue> nodesToWrite) 
 
 /**
  * Asynchronously write one or more attributes of one or more nodes (client only).
+ * @copydetails write
+ * @param token @completiontoken{void(opcua::StatusCode, opcua::WriteResponse&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 WriteResponse writeAsync(
@@ -152,7 +158,7 @@ WriteResponse writeAsync(
  * @overload
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline WriteResponse writeAsync(
+inline auto writeAsync(
     Client& client,
     Span<const WriteValue> nodesToWrite,
     CompletionToken&& token = DefaultCompletionToken()
@@ -172,9 +178,11 @@ void writeAttribute(
 
 /**
  * Asynchronously write node attribute.
+ * @copydetails writeAttribute
+ * @param token @completiontoken{void(opcua::StatusCode)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-void writeAttributeAsync(
+auto writeAttributeAsync(
     Client& client,
     const NodeId& id,
     AttributeId attributeId,

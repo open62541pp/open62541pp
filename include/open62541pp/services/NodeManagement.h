@@ -31,12 +31,15 @@ namespace opcua::services {
 
 /**
  * Add one or more nodes (client only).
+ * @param client Instance of type Client
+ * @param request Add nodes request
  */
 AddNodesResponse addNodes(Client& client, const AddNodesRequest& request);
 
 /**
  * Asynchronously add one or more nodes (client only).
- * @param token Completion handler with the signature `void(StatusCode, AddNodesResponse&)`.
+ * @copydetails addNodes
+ * @param token @completiontoken{void(opcua::StatusCode, opcua::AddNodesResponse&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto addNodesAsync(
@@ -51,11 +54,15 @@ auto addNodesAsync(
 
 /**
  * Add one or more references (client only).
+ * @param client Instance of type Client
+ * @param request Add references request
  */
 AddReferencesResponse addReferences(Client& client, const AddReferencesRequest& request);
 
 /**
  * Asynchronously add one or more references (client only).
+ * @copydetails addReferences
+ * @param token @completiontoken{void(opcua::StatusCode, opcua::AddReferencesResponse&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto addReferencesAsync(
@@ -70,11 +77,15 @@ auto addReferencesAsync(
 
 /**
  * Delete one or more nodes (client only).
+ * @param client Instance of type Client
+ * @param request Delete nodes request
  */
 DeleteNodesResponse deleteNodes(Client& client, const DeleteNodesRequest& request);
 
 /**
  * Asynchronously delete one or more nodes (client only).
+ * @copydetails deleteNodes
+ * @param token @completiontoken{void(opcua::StatusCode, opcua::DeleteNodesResponse&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto deleteNodesAsync(
@@ -89,11 +100,15 @@ auto deleteNodesAsync(
 
 /**
  * Delete one or more references (client only).
+ * @param client Instance of type Client
+ * @param request Delete references request
  */
 DeleteReferencesResponse deleteReferences(Client& client, const DeleteReferencesRequest& request);
 
 /**
  * Asynchronously delete one or more references (client only).
+ * @copydetails deleteReferences
+ * @param token @completiontoken{void(opcua::StatusCode, opcua::DeleteReferencesResponse&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto deleteReferencesAsync(
@@ -108,7 +123,6 @@ auto deleteReferencesAsync(
 
 /**
  * Add a node.
- * @exception BadStatus
  */
 template <typename T>
 NodeId addNode(
@@ -125,6 +139,7 @@ NodeId addNode(
 /**
  * Asynchronously add a node.
  * @copydetails addNode
+ * @param token @completiontoken{void(opcua::StatusCode, opcua::NodeId&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto addNodeAsync(
@@ -166,7 +181,6 @@ auto addNodeAsync(
 
 /**
  * Add object.
- * @exception BadStatus
  */
 template <typename T>
 inline NodeId addObject(
@@ -193,6 +207,7 @@ inline NodeId addObject(
 /**
  * Asynchronously add object.
  * @copydetails addObject
+ * @param token @completiontoken{void(opcua::StatusCode, opcua::NodeId&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addObjectAsync(
@@ -220,7 +235,6 @@ inline auto addObjectAsync(
 
 /**
  * Add folder.
- * @exception BadStatus
  */
 template <typename T>
 inline NodeId addFolder(
@@ -245,6 +259,7 @@ inline NodeId addFolder(
 /**
  * Asynchronously add folder.
  * @copydetails addFolder
+ * @param token @completiontoken{void(opcua::StatusCode, opcua::NodeId&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addFolderAsync(
@@ -270,7 +285,6 @@ inline auto addFolderAsync(
 
 /**
  * Add variable.
- * @exception BadStatus
  */
 template <typename T>
 inline NodeId addVariable(
@@ -297,6 +311,7 @@ inline NodeId addVariable(
 /**
  * Asynchronously add variable.
  * @copydetails addVariable
+ * @param token @completiontoken{void(opcua::StatusCode, opcua::NodeId&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addVariableAsync(
@@ -324,7 +339,6 @@ inline auto addVariableAsync(
 
 /**
  * Add property.
- * @exception BadStatus
  */
 template <typename T>
 inline NodeId addProperty(
@@ -348,6 +362,7 @@ inline NodeId addProperty(
 /**
  * Asynchronously add property.
  * @copydetails addProperty
+ * @param token @completiontoken{void(opcua::StatusCode, opcua::NodeId&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addPropertyAsync(
@@ -381,7 +396,6 @@ using MethodCallback = std::function<void(Span<const Variant> input, Span<Varian
 /**
  * Add method.
  * Callbacks can not be set by clients. Servers can assign callbacks to method nodes afterwards.
- * @exception BadStatus
  */
 template <typename T>
 NodeId addMethod(
@@ -399,6 +413,7 @@ NodeId addMethod(
 /**
  * Asynchronously add method.
  * @copydetails addMethod
+ * @param token @completiontoken{void(opcua::StatusCode, opcua::NodeId&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addMethodAsync(
@@ -429,7 +444,6 @@ inline auto addMethodAsync(
 
 /**
  * Add object type.
- * @exception BadStatus
  */
 template <typename T>
 inline NodeId addObjectType(
@@ -455,6 +469,7 @@ inline NodeId addObjectType(
 /**
  * Asynchronously add object type.
  * @copydetails addObjectType
+ * @param token @completiontoken{void(opcua::StatusCode, opcua::NodeId&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addObjectTypeAsync(
@@ -481,7 +496,6 @@ inline auto addObjectTypeAsync(
 
 /**
  * Add variable type.
- * @exception BadStatus
  */
 template <typename T>
 inline NodeId addVariableType(
@@ -508,6 +522,7 @@ inline NodeId addVariableType(
 /**
  * Asynchronously add variable type.
  * @copydetails addVariableType
+ * @param token @completiontoken{void(opcua::StatusCode, opcua::NodeId&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addVariableTypeAsync(
@@ -535,7 +550,6 @@ inline auto addVariableTypeAsync(
 
 /**
  * Add reference type.
- * @exception BadStatus
  */
 template <typename T>
 inline NodeId addReferenceType(
@@ -561,6 +575,7 @@ inline NodeId addReferenceType(
 /**
  * Asynchronously add reference type.
  * @copydetails addReferenceType
+ * @param token @completiontoken{void(opcua::StatusCode, opcua::NodeId&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addReferenceTypeAsync(
@@ -587,7 +602,6 @@ inline auto addReferenceTypeAsync(
 
 /**
  * Add data type.
- * @exception BadStatus
  */
 template <typename T>
 inline NodeId addDataType(
@@ -613,6 +627,7 @@ inline NodeId addDataType(
 /**
  * Asynchronously add data type.
  * @copydetails addDataType
+ * @param token @completiontoken{void(opcua::StatusCode, opcua::NodeId&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addDataTypeAsync(
@@ -639,7 +654,6 @@ inline auto addDataTypeAsync(
 
 /**
  * Add view.
- * @exception BadStatus
  */
 template <typename T>
 inline NodeId addView(
@@ -665,6 +679,7 @@ inline NodeId addView(
 /**
  * Asynchronously add view.
  * @copydetails addView
+ * @param token @completiontoken{void(opcua::StatusCode, opcua::NodeId&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addViewAsync(
@@ -691,7 +706,6 @@ inline auto addViewAsync(
 
 /**
  * Add reference.
- * @exception BadStatus
  */
 template <typename T>
 void addReference(
@@ -705,6 +719,7 @@ void addReference(
 /**
  * Asynchronously add reference.
  * @copydetails addReference
+ * @param token @completiontoken{void(opcua::StatusCode)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto addReferenceAsync(
@@ -734,7 +749,6 @@ auto addReferenceAsync(
 
 /**
  * Add modelling rule.
- * @exception BadStatus
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/6.4.4
  */
 template <typename T>
@@ -751,6 +765,7 @@ inline void addModellingRule(T& serverOrClient, const NodeId& id, ModellingRule 
 /**
  * Asynchronously add modelling rule.
  * @copydetails addModellingRule
+ * @param token @completiontoken{void(opcua::StatusCode)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addModellingRuleAsync(
@@ -771,7 +786,6 @@ inline auto addModellingRuleAsync(
 
 /**
  * Delete node.
- * @exception BadStatus
  */
 template <typename T>
 void deleteNode(T& serverOrClient, const NodeId& id, bool deleteReferences = true);
@@ -779,6 +793,7 @@ void deleteNode(T& serverOrClient, const NodeId& id, bool deleteReferences = tru
 /**
  * Asynchronously delete node.
  * @copydetails deleteNode
+ * @param token @completiontoken{void(opcua::StatusCode)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto deleteNodeAsync(
@@ -803,7 +818,6 @@ auto deleteNodeAsync(
 
 /**
  * Delete reference.
- * @exception BadStatus
  */
 template <typename T>
 void deleteReference(
@@ -818,6 +832,7 @@ void deleteReference(
 /**
  * Asynchronously delete reference.
  * @copydetails deleteReference
+ * @param token @completiontoken{void(opcua::StatusCode)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto deleteReferenceAsync(
