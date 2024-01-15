@@ -307,7 +307,6 @@ TEST_CASE("NodeId") {
     }
 
     SUBCASE("Construct from ids") {
-        CHECK(NodeId(Type::Boolean) == NodeId(0, UA_NS0ID_BOOLEAN));
         CHECK(NodeId(DataTypeId::Boolean) == NodeId(0, UA_NS0ID_BOOLEAN));
         CHECK(NodeId(ReferenceTypeId::References) == NodeId(0, UA_NS0ID_REFERENCES));
         CHECK(NodeId(ObjectTypeId::BaseObjectType) == NodeId(0, UA_NS0ID_BASEOBJECTTYPE));
@@ -408,7 +407,6 @@ TEST_CASE("Variant") {
         CHECK(!var.isScalar());
         CHECK(!var.isArray());
         CHECK(var.getDataType() == nullptr);
-        CHECK(var.getVariantType() == std::nullopt);
         CHECK(var.data() == nullptr);
         CHECK(std::as_const(var).data() == nullptr);
         CHECK(var.getArrayLength() == 0);
@@ -423,18 +421,14 @@ TEST_CASE("Variant") {
         Variant var;
         CHECK_FALSE(var.isType(UA_TYPES[UA_TYPES_STRING]));
         CHECK_FALSE(var.isType(DataTypeId::String));
-        CHECK_FALSE(var.isType(Type::String));
         CHECK_FALSE(var.isType<String>());
         CHECK(var.getDataType() == nullptr);
-        CHECK(var.getVariantType() == std::nullopt);
 
         var->type = &UA_TYPES[UA_TYPES_STRING];
         CHECK(var.isType(UA_TYPES[UA_TYPES_STRING]));
         CHECK(var.isType(DataTypeId::String));
-        CHECK(var.isType(Type::String));
         CHECK(var.isType<String>());
         CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_STRING]);
-        CHECK(var.getVariantType().value() == Type::String);
     }
 
     SUBCASE("Create from scalar") {
@@ -589,10 +583,8 @@ TEST_CASE("Variant") {
         var.setArrayCopy(value);
 
         CHECK(var.isArray());
-        CHECK(var.isType(Type::String));
         CHECK(var.isType(NodeId{0, UA_NS0ID_STRING}));
         CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_STRING]);
-        CHECK(var.getVariantType().value() == Type::String);
 
         CHECK_THROWS(var.getScalarCopy<std::string>());
         CHECK_THROWS(var.getArrayCopy<int32_t>());
@@ -606,10 +598,8 @@ TEST_CASE("Variant") {
         var.setArrayCopy(array);
 
         CHECK(var.isArray());
-        CHECK(var.isType(Type::Float));
         CHECK(var.isType(NodeId{0, UA_NS0ID_FLOAT}));
         CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_FLOAT]);
-        CHECK(var.getVariantType().value() == Type::Float);
         CHECK(var.data() != array.data());
         CHECK(var.getArrayLength() == array.size());
 

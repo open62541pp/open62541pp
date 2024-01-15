@@ -338,9 +338,8 @@ public:
     }
 
     /// @copydoc services::readDataValue
-    [[deprecated("No performance benefit to pass DataValue by reference, return by value instead"
-    )]] void
-    readDataValue(DataValue& value) {
+    [[deprecated("No performance benefit to pass DataValue by reference, return by value instead")]]
+    void readDataValue(DataValue& value) {
         value = services::readDataValue(connection_, nodeId_);
     }
 
@@ -350,9 +349,8 @@ public:
     }
 
     /// @copydoc services::readValue
-    [[deprecated("No performance benefit to pass Variant by reference, return by value instead"
-    )]] void
-    readValue(Variant& value) {
+    [[deprecated("No performance benefit to pass Variant by reference, return by value instead")]]
+    void readValue(Variant& value) {
         value = services::readValue(connection_, nodeId_);
     }
 
@@ -364,7 +362,8 @@ public:
 
     /// @copydoc readValueScalar
     template <typename T>
-    [[deprecated("Use Node::readValueScalar instead")]] T readScalar() {
+    [[deprecated("Use Node::readValueScalar<T>() instead")]]
+    T readScalar() {
         return readValueScalar<T>();
     }
 
@@ -376,7 +375,8 @@ public:
 
     /// @copydoc readValueArray
     template <typename T>
-    [[deprecated("Use Node::readValueArray instead")]] std::vector<T> readArray() {
+    [[deprecated("Use Node::readValueArray<T>() instead")]]
+    std::vector<T> readArray() {
         return readValueArray<T>();
     }
 
@@ -489,7 +489,8 @@ public:
 
     /// @copydoc writeValueScalar
     template <typename T>
-    [[deprecated("Use Node::writeValueScalar instead")]] Node& writeScalar(const T& value) {
+    [[deprecated("Use Node::writeValueScalar instead")]]
+    Node& writeScalar(const T& value) {
         return writeValueScalar<T>(value);
     }
 
@@ -517,7 +518,8 @@ public:
 
     /// @copydoc  writeValueArray
     template <typename... Args>
-    [[deprecated("Use Node::writeValueArray instead")]] Node& writeArray(Args&&... args) {
+    [[deprecated("Use Node::writeValueArray instead")]]
+    Node& writeArray(Args&&... args) {
         return writeValueArray(std::forward<Args>(args)...);
     }
 
