@@ -222,10 +222,23 @@ private:
 
 /* ------------------------------------------- Client ------------------------------------------- */
 
-Client::Client()
+Client::Client(Logger logger)
     : connection_(std::make_shared<Connection>()) {
-    const auto status = UA_ClientConfig_setDefault(getConfig(this));
-    throwIfBad(status);
+    // The logger should be set as soon as possible, ideally even before UA_ClientConfig_setDefault.
+    // However, the logger gets overwritten by UA_ClientConfig_setDefault() in older versions of
+    // open62541. The best we can do in this case, is to first call UA_ClientConfig_setDefault and
+    // then setLogger.
+    auto setConfig = [&] {
+        const auto status = UA_ClientConfig_setDefault(getConfig(this));
+        throwIfBad(status);
+    };
+#if UAPP_OPEN62541_VER_GE(1, 1)
+    setLogger(std::move(logger));
+    setConfig();
+#else
+    setConfig();
+    setLogger(std::move(logger));
+#endif
     getConfig(this)->securityMode = UA_MESSAGESECURITYMODE_NONE;
     connection_->applyDefaults();
 }

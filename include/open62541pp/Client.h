@@ -43,8 +43,10 @@ public:
      * Create client with default configuration (no encryption).
      * Security policies:
      * - [None](http://opcfoundation.org/UA/SecurityPolicy#None)
+     * @param logger Custom log function. If the passed function is empty, the default logger is
+     * used.
      */
-    Client();
+    Client(Logger logger = nullptr);
 
 #ifdef UA_ENABLE_ENCRYPTION
     /**
