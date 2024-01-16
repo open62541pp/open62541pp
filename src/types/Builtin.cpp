@@ -276,14 +276,6 @@ const DiagnosticInfo* DiagnosticInfo::getInnerDiagnosticInfo() const noexcept {
 
 /* ---------------------------------------- NumericRange ---------------------------------------- */
 
-bool operator==(const NumericRangeDimension& lhs, const NumericRangeDimension& rhs) noexcept {
-    return (lhs.min == rhs.min) && (lhs.max == rhs.max);
-}
-
-bool operator!=(const NumericRangeDimension& lhs, const NumericRangeDimension& rhs) noexcept {
-    return !(lhs == rhs);
-}
-
 NumericRange::NumericRange(std::string_view encodedRange) {
     UA_String encodedRangeNative = detail::toNativeString(encodedRange);
     UA_NumericRange native{};

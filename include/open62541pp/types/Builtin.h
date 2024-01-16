@@ -257,8 +257,17 @@ public:
 
 using NumericRangeDimension = UA_NumericRangeDimension;
 
-bool operator==(const NumericRangeDimension& lhs, const NumericRangeDimension& rhs) noexcept;
-bool operator!=(const NumericRangeDimension& lhs, const NumericRangeDimension& rhs) noexcept;
+inline bool operator==(
+    const NumericRangeDimension& lhs, const NumericRangeDimension& rhs
+) noexcept {
+    return (lhs.min == rhs.min) && (lhs.max == rhs.max);
+}
+
+inline bool operator!=(
+    const NumericRangeDimension& lhs, const NumericRangeDimension& rhs
+) noexcept {
+    return !(lhs == rhs);
+}
 
 /**
  * Numeric range to indicate subsets of (multidimensional) arrays.
