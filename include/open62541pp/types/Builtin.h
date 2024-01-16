@@ -97,13 +97,13 @@ public:
     explicit String(std::string_view str);
 
     /// Implicit conversion to std::string_view.
-    operator std::string_view() const {  // NOLINT, implicit wanted
+    operator std::string_view() const noexcept {  // NOLINT, implicit wanted
         return get();
     }
 
     bool empty() const noexcept;
 
-    std::string_view get() const;
+    std::string_view get() const noexcept;
 };
 
 bool operator==(const String& lhs, std::string_view rhs) noexcept;
@@ -159,7 +159,7 @@ public:
 
     bool empty() const noexcept;
 
-    std::string_view get() const;
+    std::string_view get() const noexcept;
 };
 
 bool operator==(const ByteString& lhs, std::string_view rhs) noexcept;
@@ -185,7 +185,7 @@ public:
 
     bool empty() const noexcept;
 
-    std::string_view get() const;
+    std::string_view get() const noexcept;
 };
 
 std::ostream& operator<<(std::ostream& os, const XmlElement& xmlElement);
@@ -203,7 +203,7 @@ public:
 
     uint16_t getNamespaceIndex() const noexcept;
 
-    std::string_view getName() const;
+    std::string_view getName() const noexcept;
 };
 
 /**
@@ -222,9 +222,9 @@ public:
 
     LocalizedText(std::string_view locale, std::string_view text, bool assertLocaleFormat = true);
 
-    std::string_view getText() const;
+    std::string_view getText() const noexcept;
 
-    std::string_view getLocale() const;
+    std::string_view getLocale() const noexcept;
 };
 
 /**

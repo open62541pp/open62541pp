@@ -25,7 +25,7 @@ bool String::empty() const noexcept {
     return handle()->length == 0U;
 }
 
-std::string_view String::get() const {
+std::string_view String::get() const noexcept {
     return detail::toStringView(*handle());
 }
 
@@ -105,7 +105,7 @@ bool ByteString::empty() const noexcept {
     return handle()->length == 0U;
 }
 
-std::string_view ByteString::get() const {
+std::string_view ByteString::get() const noexcept {
     return detail::toStringView(*handle());
 }
 
@@ -168,7 +168,7 @@ bool XmlElement::empty() const noexcept {
     return handle()->length == 0U;
 }
 
-std::string_view XmlElement::get() const {
+std::string_view XmlElement::get() const noexcept {
     return detail::toStringView(*handle());
 }
 
@@ -188,7 +188,7 @@ uint16_t QualifiedName::getNamespaceIndex() const noexcept {
     return handle()->namespaceIndex;
 }
 
-std::string_view QualifiedName::getName() const {
+std::string_view QualifiedName::getName() const noexcept {
     return detail::toStringView(handle()->name);
 }
 
@@ -208,11 +208,11 @@ LocalizedText::LocalizedText(
     }
 }
 
-std::string_view LocalizedText::getText() const {
+std::string_view LocalizedText::getText() const noexcept {
     return detail::toStringView(handle()->text);
 }
 
-std::string_view LocalizedText::getLocale() const {
+std::string_view LocalizedText::getLocale() const noexcept {
     return detail::toStringView(handle()->locale);
 }
 
