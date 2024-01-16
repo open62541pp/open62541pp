@@ -10,8 +10,8 @@ namespace opcua {
  * @code{.cpp}
  * // define enum (class)
  * enum class Access {
- *     Read  = 0x01U << 0U,
- *     Write = 0x01U << 1U,
+ *     Read  = 1 << 0,
+ *     Write = 1 << 1,
  * };
  *
  * // allow bitwise operations
