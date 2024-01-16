@@ -777,7 +777,37 @@ public:
 };
 
 /**
+ * Browse result mask.
+ *
+ * The enum can be used as a bitmask and allows bitwise operations, e.g.:
+ * @code
+ * auto mask = BrowseResultMask::ReferenceTypeId | BrowseResultMask::IsForward;
+ * @endcode
+ *
+ * @see UA_BrowseResultMask
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.2
+ */
+enum class BrowseResultMask : uint32_t {
+    // clang-format off
+    None              = UA_BROWSERESULTMASK_NONE,
+    ReferenceTypeId   = UA_BROWSERESULTMASK_REFERENCETYPEID,
+    IsForward         = UA_BROWSERESULTMASK_ISFORWARD,
+    NodeClass         = UA_BROWSERESULTMASK_NODECLASS,
+    BrowseName        = UA_BROWSERESULTMASK_BROWSENAME,
+    DisplayName       = UA_BROWSERESULTMASK_DISPLAYNAME,
+    TypeDefinition    = UA_BROWSERESULTMASK_TYPEDEFINITION,
+    All               = UA_BROWSERESULTMASK_ALL,
+    ReferenceTypeInfo = UA_BROWSERESULTMASK_REFERENCETYPEINFO,
+    TargetInfo        = UA_BROWSERESULTMASK_TARGETINFO,
+    // clang-format on
+};
+
+template <>
+struct IsBitMaskEnum<BrowseResultMask> : std::true_type {};
+
+/**
  * UA_BrowseDescription wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.2
  */
 class BrowseDescription : public TypeWrapper<UA_BrowseDescription, UA_TYPES_BROWSEDESCRIPTION> {
 public:
@@ -789,7 +819,7 @@ public:
         NodeId referenceTypeId = ReferenceTypeId::References,
         bool includeSubtypes = true,
         BitMask<NodeClass> nodeClassMask = NodeClass::Unspecified,
-        uint32_t resultMask = UA_BROWSERESULTMASK_ALL
+        BitMask<BrowseResultMask> resultMask = BrowseResultMask::All
     );
 
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getNodeId, nodeId)
@@ -797,11 +827,12 @@ public:
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getReferenceTypeId, referenceTypeId)
     UAPP_COMPOSED_GETTER(bool, getIncludeSubtypes, includeSubtypes)
     UAPP_COMPOSED_GETTER(BitMask<NodeClass>, getNodeClassMask, nodeClassMask)
-    UAPP_COMPOSED_GETTER(uint32_t, getResultMask, resultMask)
+    UAPP_COMPOSED_GETTER(BitMask<BrowseResultMask>, getResultMask, resultMask)
 };
 
 /**
  * UA_ReferenceDescription wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.30
  */
 class ReferenceDescription
     : public TypeWrapper<UA_ReferenceDescription, UA_TYPES_REFERENCEDESCRIPTION> {
@@ -819,6 +850,7 @@ public:
 
 /**
  * UA_BrowseResult wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.6
  */
 class BrowseResult : public TypeWrapper<UA_BrowseResult, UA_TYPES_BROWSERESULT> {
 public:

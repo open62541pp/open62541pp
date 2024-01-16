@@ -953,7 +953,7 @@ TEST_CASE("BrowseDescription") {
     CHECK(bd.getReferenceTypeId() == NodeId(0, UA_NS0ID_REFERENCES));
     CHECK(bd.getIncludeSubtypes() == true);
     CHECK(bd.getNodeClassMask().get() == UA_NODECLASS_UNSPECIFIED);
-    CHECK(bd.getResultMask() == UA_BROWSERESULTMASK_ALL);
+    CHECK(bd.getResultMask().get() == UA_BROWSERESULTMASK_ALL);
 }
 
 TEST_CASE("RelativePathElement") {

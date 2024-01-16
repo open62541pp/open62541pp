@@ -199,7 +199,7 @@ BrowseDescription::BrowseDescription(
     NodeId referenceTypeId,
     bool includeSubtypes,
     BitMask<NodeClass> nodeClassMask,
-    uint32_t resultMask
+    BitMask<BrowseResultMask> resultMask
 ) {
     assign(std::move(nodeId), handle()->nodeId);
     assign(browseDirection, handle()->browseDirection);
