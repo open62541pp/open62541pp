@@ -7,22 +7,23 @@
 
 using namespace opcua;
 
-namespace {
-
+namespace testenv {
 using Underlying = uint8_t;
 
 enum class Access : Underlying {
     Read = 1,
     Write = 2,
 };
-}  // namespace
+}  // namespace testenv
 
 namespace opcua {
 template <>
-struct IsBitMaskEnum<Access> : std::true_type {};
+struct IsBitMaskEnum<testenv::Access> : std::true_type {};
 }  // namespace opcua
 
 TEST_CASE("Bitwise operations with enum (enabled with IsBitMaskEnum trait)") {
+    using namespace testenv;
+
     CHECK(IsBitMaskEnum<Access>::value == true);
 
     SUBCASE("AND") {
@@ -79,6 +80,8 @@ TEST_CASE("Bitwise operations with enum (enabled with IsBitMaskEnum trait)") {
 }
 
 TEST_CASE("BitMask") {
+    using namespace testenv;
+
     SUBCASE("Constructors") {
         CHECK_NOTHROW(BitMask<Access>());
         CHECK_NOTHROW(BitMask<Access>(Access::Read));
