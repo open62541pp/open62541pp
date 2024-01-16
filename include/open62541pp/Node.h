@@ -249,7 +249,7 @@ public:
         BrowseDirection browseDirection = BrowseDirection::Both,
         const NodeId& referenceType = ReferenceTypeId::References,
         bool includeSubtypes = true,
-        uint32_t nodeClassMask = UA_NODECLASS_UNSPECIFIED
+        BitMask<NodeClass> nodeClassMask = NodeClass::Unspecified
     );
 
     /// Browse referenced nodes (only local nodes).
@@ -257,13 +257,13 @@ public:
         BrowseDirection browseDirection = BrowseDirection::Both,
         const NodeId& referenceType = ReferenceTypeId::References,
         bool includeSubtypes = true,
-        uint32_t nodeClassMask = UA_NODECLASS_UNSPECIFIED
+        BitMask<NodeClass> nodeClassMask = NodeClass::Unspecified
     );
 
     /// Browse child nodes (only local nodes).
     std::vector<Node> browseChildren(
         const NodeId& referenceType = ReferenceTypeId::HierarchicalReferences,
-        uint32_t nodeClassMask = UA_NODECLASS_UNSPECIFIED
+        BitMask<NodeClass> nodeClassMask = NodeClass::Unspecified
     ) {
         return browseReferencedNodes(BrowseDirection::Forward, referenceType, true, nodeClassMask);
     }

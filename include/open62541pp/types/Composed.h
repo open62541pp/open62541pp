@@ -7,6 +7,7 @@
 #include <utility>  // forward
 #include <variant>
 
+#include "open62541pp/BitMask.h"
 #include "open62541pp/Common.h"
 #include "open62541pp/NodeIds.h"  // ReferenceTypeId
 #include "open62541pp/Span.h"
@@ -787,7 +788,7 @@ public:
         BrowseDirection browseDirection,
         NodeId referenceTypeId = ReferenceTypeId::References,
         bool includeSubtypes = true,
-        uint32_t nodeClassMask = UA_NODECLASS_UNSPECIFIED,
+        BitMask<NodeClass> nodeClassMask = NodeClass::Unspecified,
         uint32_t resultMask = UA_BROWSERESULTMASK_ALL
     );
 
@@ -795,7 +796,7 @@ public:
     UAPP_COMPOSED_GETTER_CAST(BrowseDirection, getBrowseDirection, browseDirection)
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getReferenceTypeId, referenceTypeId)
     UAPP_COMPOSED_GETTER(bool, getIncludeSubtypes, includeSubtypes)
-    UAPP_COMPOSED_GETTER(uint32_t, getNodeClassMask, nodeClassMask)
+    UAPP_COMPOSED_GETTER(BitMask<NodeClass>, getNodeClassMask, nodeClassMask)
     UAPP_COMPOSED_GETTER(uint32_t, getResultMask, resultMask)
 };
 

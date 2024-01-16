@@ -7,6 +7,10 @@
 
 namespace opcua {
 
+// forward declare
+template <typename T>
+struct IsBitMaskEnum;
+
 /// Type index of the ::UA_TYPES array.
 using TypeIndex = uint16_t;
 
@@ -82,7 +86,13 @@ enum class AttributeId : int32_t {
 };
 
 /**
- * Node classes.
+ * Node class.
+ *
+ * The enum can be used as a bitmask and allows bitwise operations, e.g.:
+ * @code
+ * auto mask = NodeClass::Object | NodeClass::Variable;
+ * @endcode
+ *
  * @see UA_NodeClass
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.29
  */
@@ -99,6 +109,9 @@ enum class NodeClass : int32_t {
     View          = 128,
     // clang-format on
 };
+
+template <>
+struct IsBitMaskEnum<NodeClass> : std::true_type {};
 
 /// Get name of node class.
 constexpr std::string_view getNodeClassName(NodeClass nodeClass) {

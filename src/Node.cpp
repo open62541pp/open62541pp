@@ -44,7 +44,7 @@ std::vector<ReferenceDescription> Node<T>::browseReferences(
     BrowseDirection browseDirection,
     const NodeId& referenceType,
     bool includeSubtypes,
-    uint32_t nodeClassMask
+    BitMask<NodeClass> nodeClassMask
 ) {
     const BrowseDescription bd(
         nodeId_,
@@ -62,7 +62,7 @@ std::vector<Node<T>> Node<T>::browseReferencedNodes(
     BrowseDirection browseDirection,
     const NodeId& referenceType,
     bool includeSubtypes,
-    uint32_t nodeClassMask
+    BitMask<NodeClass> nodeClassMask
 ) {
     const BrowseDescription bd(
         nodeId_,
