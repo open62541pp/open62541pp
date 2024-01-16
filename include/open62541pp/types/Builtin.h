@@ -124,7 +124,7 @@ public:
 
     Guid(uint32_t data1, uint16_t data2, uint16_t data3, std::array<uint8_t, 8> data4) noexcept;
 
-    static Guid random();
+    static Guid random() noexcept;
 
     std::string toString() const;
 };

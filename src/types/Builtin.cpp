@@ -60,7 +60,7 @@ Guid::Guid(UA_UInt32 data1, UA_UInt16 data2, UA_UInt16 data3, std::array<UA_Byte
           {data4[0], data4[1], data4[2], data4[3], data4[4], data4[5], data4[6], data4[7]},
       }) {}
 
-Guid Guid::random() {
+Guid Guid::random() noexcept {
     return Guid(UA_Guid_random());  // NOLINT
 }
 
