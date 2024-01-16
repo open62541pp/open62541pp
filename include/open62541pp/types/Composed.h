@@ -255,6 +255,15 @@ struct IsBitMaskEnum<NodeAttributesMask> : std::true_type {};
     }
 
 // NOLINTNEXTLINE
+#define UAPP_NODEATTR_BITMASK(Type, suffix, member, flag)                                          \
+    UAPP_COMPOSED_GETTER(Type, get##suffix, member)                                                \
+    auto& set##suffix(Type member) noexcept {                                                      \
+        handle()->specifiedAttributes |= flag;                                                     \
+        handle()->member = member.get();                                                           \
+        return *this;                                                                              \
+    }
+
+// NOLINTNEXTLINE
 #define UAPP_NODEATTR_CAST(Type, suffix, member, flag)                                             \
     UAPP_COMPOSED_GETTER_CAST(Type, get##suffix, member)                                           \
     auto& set##suffix(Type member) noexcept {                                                      \
@@ -293,8 +302,12 @@ struct IsBitMaskEnum<NodeAttributesMask> : std::true_type {};
     UAPP_NODEATTR_WRAPPER(                                                                         \
         LocalizedText, Description, description, UA_NODEATTRIBUTESMASK_DESCRIPTION                 \
     )                                                                                              \
-    UAPP_NODEATTR(uint32_t, WriteMask, writeMask, UA_NODEATTRIBUTESMASK_WRITEMASK)                 \
-    UAPP_NODEATTR(uint32_t, UserWriteMask, userWriteMask, UA_NODEATTRIBUTESMASK_USERWRITEMASK)
+    UAPP_NODEATTR_BITMASK(                                                                         \
+        BitMask<WriteMask>, WriteMask, writeMask, UA_NODEATTRIBUTESMASK_WRITEMASK                  \
+    )                                                                                              \
+    UAPP_NODEATTR_BITMASK(                                                                         \
+        BitMask<WriteMask>, UserWriteMask, userWriteMask, UA_NODEATTRIBUTESMASK_USERWRITEMASK      \
+    )
 
 /**
  * UA_NodeAttributes wrapper class.

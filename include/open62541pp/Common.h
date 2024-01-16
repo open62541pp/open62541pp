@@ -138,7 +138,47 @@ constexpr std::string_view getNodeClassName(NodeClass nodeClass) {
 }
 
 /**
+ * WriteMask.
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/5.2.7
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.60
+ */
+enum class WriteMask : uint32_t {
+    // clang-format off
+    AccessLevel             = 1 << 0,
+    ArrayDimensions         = 1 << 1,
+    BrowseName              = 1 << 2,
+    ContainsNoLoops         = 1 << 3,
+    DataType                = 1 << 4,
+    Description             = 1 << 5,
+    DisplayName             = 1 << 6,
+    EventNotifier           = 1 << 7,
+    Executable              = 1 << 8,
+    Historizing             = 1 << 9,
+    InverseName             = 1 << 10,
+    IsAbstract              = 1 << 11,
+    MinimumSamplingInterval = 1 << 12,
+    NodeClass               = 1 << 13,
+    NodeId                  = 1 << 14,
+    Symmetric               = 1 << 15,
+    UserAccessLevel         = 1 << 16,
+    UserExecutable          = 1 << 17,
+    UserWriteMask           = 1 << 18,
+    ValueRank               = 1 << 19,
+    WriteMask               = 1 << 20,
+    ValueForVariableType    = 1 << 21,
+    DataTypeDefinition      = 1 << 22,
+    RolePermissions         = 1 << 23,
+    AccessRestrictions      = 1 << 24,
+    AccessLevelEx           = 1 << 25,
+    // clang-format on
+};
+
+template <>
+struct IsBitMaskEnum<WriteMask> : std::true_type {};
+
+/**
  * Value rank.
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/5.6.2
  */
 enum class ValueRank : int32_t {
     // clang-format off

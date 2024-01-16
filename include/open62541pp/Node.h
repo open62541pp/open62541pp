@@ -5,6 +5,7 @@
 #include <utility>  // move
 #include <vector>
 
+#include "open62541pp/BitMask.h"
 #include "open62541pp/Common.h"
 #include "open62541pp/Config.h"
 #include "open62541pp/NodeIds.h"
@@ -308,12 +309,12 @@ public:
     }
 
     /// @copydoc services::readWriteMask
-    uint32_t readWriteMask() {
+    BitMask<WriteMask> readWriteMask() {
         return services::readWriteMask(connection_, nodeId_);
     }
 
     /// @copydoc services::readUserWriteMask
-    uint32_t readUserWriteMask() {
+    BitMask<WriteMask> readUserWriteMask() {
         return services::readUserWriteMask(connection_, nodeId_);
     }
 
@@ -430,14 +431,14 @@ public:
 
     /// @copydoc services::writeWriteMask
     /// @return Current node instance to chain multiple methods (fluent interface)
-    Node& writeWriteMask(uint32_t mask) {
+    Node& writeWriteMask(BitMask<WriteMask> mask) {
         services::writeWriteMask(connection_, nodeId_, mask);
         return *this;
     }
 
     /// @copydoc services::writeWriteMask
     /// @return Current node instance to chain multiple methods (fluent interface)
-    Node& writeUserWriteMask(uint32_t mask) {
+    Node& writeUserWriteMask(BitMask<WriteMask> mask) {
         services::writeUserWriteMask(connection_, nodeId_, mask);
         return *this;
     }

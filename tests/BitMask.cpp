@@ -76,23 +76,18 @@ TEST_CASE("Bitwise operations with enum (enabled with IsBitMaskEnum trait)") {
 }
 
 TEST_CASE("BitMask") {
-    SUBCASE("Constructors") {
-        // BitMask<BitMaskEnum>();
-        // BitMask<BitMaskEnum>(BitMaskEnum::One);
-        // BitMask<BitMaskEnum>(2);
-    }
-
     SUBCASE("Conversion to enum") {
         CHECK(static_cast<BitMaskEnum>(BitMask<BitMaskEnum>(BitMaskEnum::One)) == BitMaskEnum::One);
     }
 
     SUBCASE("Conversion to uint16_t") {
-        // CHECK(static_cast<uint16_t>(BitMask<BitMaskEnum>(2)) == 2);  // deprecated
+        // deprecated, enable when deprecation is removed and conversion marked explicit
+        // CHECK(static_cast<uint16_t>(BitMask<BitMaskEnum>(2)) == 2);
     }
 
     SUBCASE("get()") {
         CHECK(BitMask<BitMaskEnum>().get() == 0);
         CHECK(BitMask<BitMaskEnum>(BitMaskEnum::One).get() == 1);
-        CHECK(BitMask<BitMaskEnum>(BitMaskEnum::Two).get() == 2);
+        CHECK(BitMask<BitMaskEnum>(2).get() == 2);
     }
 }

@@ -3,6 +3,7 @@
 #include <cstdint>
 #include <vector>
 
+#include "open62541pp/BitMask.h"
 #include "open62541pp/Common.h"
 #include "open62541pp/Span.h"
 #include "open62541pp/TypeWrapper.h"
@@ -149,22 +150,19 @@ inline LocalizedText readDescription(T& serverOrClient, const NodeId& id) {
 
 /**
  * Read the `WriteMask` attribute of a node.
- *
- * For example `::UA_WRITEMASK_VALUEFORVARIABLETYPE | ::UA_WRITEMASK_VALUERANK`.
  */
 template <typename T>
-inline uint32_t readWriteMask(T& serverOrClient, const NodeId& id) {
+inline BitMask<WriteMask> readWriteMask(T& serverOrClient, const NodeId& id) {
     return readAttributeScalar<uint32_t>(serverOrClient, id, AttributeId::WriteMask);
 }
 
 /**
  * Read the `UserWriteMask` attribute of a node.
  *
- * @copydetails readWriteMask
  * In contrast to the write mask, the user write mask is taking access rights into account.
  */
 template <typename T>
-inline uint32_t readUserWriteMask(T& serverOrClient, const NodeId& id) {
+inline BitMask<WriteMask> readUserWriteMask(T& serverOrClient, const NodeId& id) {
     return readAttributeScalar<uint32_t>(serverOrClient, id, AttributeId::UserWriteMask);
 }
 
@@ -324,8 +322,8 @@ inline void writeDescription(T& serverOrClient, const NodeId& id, const Localize
  * @copydetails readWriteMask
  */
 template <typename T>
-inline void writeWriteMask(T& serverOrClient, const NodeId& id, uint32_t mask) {
-    writeAttribute(serverOrClient, id, AttributeId::WriteMask, DataValue::fromScalar(mask));
+inline void writeWriteMask(T& serverOrClient, const NodeId& id, BitMask<WriteMask> mask) {
+    writeAttribute(serverOrClient, id, AttributeId::WriteMask, DataValue::fromScalar(mask.get()));
 }
 
 /**
@@ -334,8 +332,10 @@ inline void writeWriteMask(T& serverOrClient, const NodeId& id, uint32_t mask) {
  * @note Cannot be written from the server.
  */
 template <typename T>
-inline void writeUserWriteMask(T& serverOrClient, const NodeId& id, uint32_t mask) {
-    writeAttribute(serverOrClient, id, AttributeId::UserWriteMask, DataValue::fromScalar(mask));
+inline void writeUserWriteMask(T& serverOrClient, const NodeId& id, BitMask<WriteMask> mask) {
+    writeAttribute(
+        serverOrClient, id, AttributeId::UserWriteMask, DataValue::fromScalar(mask.get())
+    );
 }
 
 /**

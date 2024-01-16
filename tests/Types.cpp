@@ -839,8 +839,8 @@ TEST_CASE("NodeAttributes") {
     CHECK(attr.getSpecifiedAttributes().get() == UA_NODEATTRIBUTESMASK_NONE);
 
     SUBCASE("Primitive type") {
-        attr.setWriteMask(UA_WRITEMASK_DATATYPE);
-        CHECK(attr.getWriteMask() == UA_WRITEMASK_DATATYPE);
+        attr.setWriteMask(WriteMask::DataType);
+        CHECK(attr.getWriteMask().get() == UA_WRITEMASK_DATATYPE);
         CHECK(attr.getSpecifiedAttributes().get() == UA_NODEATTRIBUTESMASK_WRITEMASK);
     }
 
@@ -869,7 +869,7 @@ TEST_CASE("NodeAttributes") {
 TEST_CASE("NodeAttributes fluent interface") {
     const auto attr = NodeAttributes{}.setDisplayName({"", "displayName"}).setWriteMask(0xFFFFFFFF);
     CHECK(attr.getDisplayName() == LocalizedText("", "displayName"));
-    CHECK(attr.getWriteMask() == 0xFFFFFFFF);
+    CHECK(attr.getWriteMask().get() == 0xFFFFFFFF);
 }
 
 TEST_CASE_TEMPLATE("NodeAttributes setDataType", T, VariableAttributes, VariableTypeAttributes) {

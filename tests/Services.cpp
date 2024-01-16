@@ -153,9 +153,9 @@ TEST_CASE("Attribute service set (server)") {
         //_EQ CHECK(services::readDisplayName(server, id), LocalizedText("", "testAttributes"));
         CHECK(services::readDescription(server, id).getText().empty());
         CHECK(services::readDescription(server, id).getLocale().empty());
-        CHECK(services::readWriteMask(server, id) == 0);
+        CHECK(services::readWriteMask(server, id).get() == 0);
         const uint32_t adminUserWriteMask = 0xFFFFFFFF;  // all bits set
-        CHECK(services::readUserWriteMask(server, id) == adminUserWriteMask);
+        CHECK(services::readUserWriteMask(server, id).get() == adminUserWriteMask);
         CHECK(services::readDataType(server, id) == NodeId(0, UA_NS0ID_BASEDATATYPE));
         CHECK(services::readValueRank(server, id) == ValueRank::Any);
         CHECK(services::readArrayDimensions(server, id).empty());
@@ -189,7 +189,7 @@ TEST_CASE("Attribute service set (server)") {
 
         CHECK(services::readDisplayName(server, id) == attr.getDisplayName());
         CHECK(services::readDescription(server, id) == attr.getDescription());
-        CHECK(services::readWriteMask(server, id) == attr.getWriteMask());
+        CHECK(services::readWriteMask(server, id).get() == attr.getWriteMask().get());
         CHECK(services::readDataType(server, id) == attr.getDataType());
         CHECK(services::readValueRank(server, id) == attr.getValueRank());
         CHECK(
@@ -209,7 +209,7 @@ TEST_CASE("Attribute service set (server)") {
         // write new attributes
         CHECK_NOTHROW(services::writeDisplayName(server, id, {"en-US", "newDisplayName"}));
         CHECK_NOTHROW(services::writeDescription(server, id, {"de-DE", "newDescription"}));
-        CHECK_NOTHROW(services::writeWriteMask(server, id, 11));
+        CHECK_NOTHROW(services::writeWriteMask(server, id, WriteMask::Executable));
         CHECK_NOTHROW(services::writeDataType(server, id, NodeId{0, 2}));
         CHECK_NOTHROW(services::writeValueRank(server, id, ValueRank::TwoDimensions));
         CHECK_NOTHROW(services::writeArrayDimensions(server, id, {3, 2}));
@@ -220,7 +220,7 @@ TEST_CASE("Attribute service set (server)") {
         // read new attributes
         CHECK(services::readDisplayName(server, id) == LocalizedText("en-US", "newDisplayName"));
         CHECK(services::readDescription(server, id) == LocalizedText("de-DE", "newDescription"));
-        CHECK(services::readWriteMask(server, id) == 11);
+        CHECK(services::readWriteMask(server, id).get() == UA_WRITEMASK_EXECUTABLE);
         CHECK(services::readDataType(server, id) == NodeId(0, 2));
         CHECK(services::readValueRank(server, id) == ValueRank::TwoDimensions);
         CHECK(services::readArrayDimensions(server, id).size() == 2);
