@@ -83,7 +83,7 @@ constexpr typename std::enable_if_t<IsBitMaskEnum<T>::value, T> operator^=(T& lh
  * @code{.cpp}
  * // construct with scoped enums
  * BitMask<NodeClass> mask = NodeClass::Variable | NodeClass::Object;
- * // construct with unscoped (native) enums or ints
+ * // construct with unscoped enums or ints
  * BitMask<NodeClass> mask = UA_NODECLASS_VARIABLE | UA_NODECLASS_OBJECT;
  * @endcode
  *
@@ -111,11 +111,18 @@ public:
     constexpr BitMask(Underlying value) noexcept  // NOLINT, implicit wanted
         : mask_(value) {}
 
+    /// Conversion to the enum type.
     constexpr explicit operator T() const noexcept {
         return static_cast<T>(mask_);
     }
 
+    /// Conversion to the underlying type.
     constexpr explicit operator Underlying() const noexcept {
+        return mask_;
+    }
+
+    /// Get the bitmask as the underlying type (integer).
+    constexpr Underlying get() const noexcept {
         return mask_;
     }
 

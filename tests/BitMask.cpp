@@ -79,8 +79,23 @@ TEST_CASE("Bitwise operations with enum (enabled with IsBitMaskEnum trait)") {
 }
 
 TEST_CASE("BitMask") {
-    CHECK(std::is_same_v<BitMask<Access>::Underlying, Underlying>);
+    SUBCASE("Constructors") {
+        CHECK_NOTHROW(BitMask<Access>());
+        CHECK_NOTHROW(BitMask<Access>(Access::Read));
+        CHECK_NOTHROW(BitMask<Access>(2));
+    }
 
-    CHECK(static_cast<Access>(BitMask<Access>(Access::Read)) == Access::Read);
-    CHECK(static_cast<Underlying>(BitMask<Access>(2)) == 2);
+    SUBCASE("Conversion to enum") {
+        CHECK(static_cast<Access>(BitMask<Access>(Access::Read)) == Access::Read);
+    }
+
+    SUBCASE("Conversion to underlying") {
+        CHECK(static_cast<Underlying>(BitMask<Access>(2)) == 2);
+    }
+
+    SUBCASE("get()") {
+        CHECK(BitMask<Access>().get() == 0);
+        CHECK(BitMask<Access>(Access::Read).get() == 1);
+        CHECK(BitMask<Access>(Access::Write).get() == 2);
+    }
 }
