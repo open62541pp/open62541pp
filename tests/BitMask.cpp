@@ -90,7 +90,7 @@ TEST_CASE("BitMask") {
     }
 
     SUBCASE("Conversion to underlying") {
-        CHECK(static_cast<Underlying>(BitMask<Access>(2)) == 2);
+        // CHECK(static_cast<Underlying>(BitMask<Access>(2)) == 2);  // deprecated
     }
 
     SUBCASE("get()") {

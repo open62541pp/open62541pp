@@ -117,7 +117,9 @@ public:
     }
 
     /// Conversion to the underlying type.
-    constexpr explicit operator Underlying() const noexcept {
+    [[deprecated("Implicit conversion to integer will be removed. Use the get() method instead."
+    )]] constexpr
+    operator Underlying() const noexcept {  // NOLINT
         return mask_;
     }
 
