@@ -174,7 +174,7 @@ TEST_CASE("Node") {
             }
 
             SUBCASE("Scalar") {
-                CHECK_NOTHROW(varNode.writeDataType(Type::Float));
+                CHECK_NOTHROW(varNode.writeDataType(DataTypeId::Float));
 
                 // write with wrong data type
                 CHECK_THROWS(varNode.writeValueScalar(bool{}));
@@ -187,7 +187,7 @@ TEST_CASE("Node") {
             }
 
             SUBCASE("String") {
-                CHECK_NOTHROW(varNode.writeDataType(Type::String));
+                CHECK_NOTHROW(varNode.writeDataType(DataTypeId::String));
 
                 String str("test");
                 CHECK_NOTHROW(varNode.writeValueScalar(str));
@@ -195,7 +195,7 @@ TEST_CASE("Node") {
             }
 
             SUBCASE("Array") {
-                CHECK_NOTHROW(varNode.writeDataType(Type::Double));
+                CHECK_NOTHROW(varNode.writeDataType(DataTypeId::Double));
 
                 // write with wrong data type
                 CHECK_THROWS(varNode.writeValueArray(std::vector<int>{}));

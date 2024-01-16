@@ -150,6 +150,7 @@ public:
     /// Check if the variant type is equal to the provided data type.
     bool isType(const UA_DataType& dataType) const noexcept;
     /// Check if the variant type is equal to the provided type enum.
+    [[deprecated("Use isType<T>() instead, the Type enum will be removed")]]
     bool isType(Type type) const noexcept;
     /// Check if the variant type is equal to the provided data type node id.
     bool isType(const NodeId& id) const noexcept;
@@ -164,6 +165,7 @@ public:
     const UA_DataType* getDataType() const noexcept;
 
     /// Get variant type.
+    [[deprecated("Use getDataType() or isType<T>() instead, the Type enum will be removed")]]
     std::optional<Type> getVariantType() const noexcept;
 
     /// Get pointer to the underlying data.
@@ -174,9 +176,11 @@ public:
     /// @copydoc data
     const void* data() const noexcept;
 
-    [[deprecated("Use the methods isScalar() and data() instead")]] void* getScalar();
+    [[deprecated("Use the methods isScalar() and data() instead")]]
+    void* getScalar();
 
-    [[deprecated("Use the methods isScalar() and data() instead")]] const void* getScalar() const;
+    [[deprecated("Use the methods isScalar() and data() instead")]]
+    const void* getScalar() const;
 
     /// Get reference to scalar value with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not a scalar or not of type `T`.
@@ -209,9 +213,11 @@ public:
     /// Get array dimensions.
     Span<const uint32_t> getArrayDimensions() const noexcept;
 
-    [[deprecated("Use the methods isArray() and data() instead")]] void* getArray();
+    [[deprecated("Use the methods isArray() and data() instead")]]
+    void* getArray();
 
-    [[deprecated("Use the methods isArray() and data() instead")]] const void* getArray() const;
+    [[deprecated("Use the methods isArray() and data() instead")]]
+    const void* getArray() const;
 
     /// Get array with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not an array or not of type `T`.

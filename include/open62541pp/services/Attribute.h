@@ -209,9 +209,8 @@ inline DataValue readDataValue(T& serverOrClient, const NodeId& id) {
 
 /// @copydoc readDataValue
 template <typename T>
-[[deprecated("No performance benefit to pass DataValue by reference, return by value instead"
-)]] inline void
-readDataValue(T& serverOrClient, const NodeId& id, DataValue& value) {
+[[deprecated("No performance benefit to pass DataValue by reference, return by value instead")]]
+inline void readDataValue(T& serverOrClient, const NodeId& id, DataValue& value) {
     value = readDataValue(serverOrClient, id);
 }
 
@@ -226,9 +225,8 @@ inline Variant readValue(T& serverOrClient, const NodeId& id) {
 
 /// @copydoc readValue
 template <typename T>
-[[deprecated("No performance benefit to pass Variant by reference, return by value instead."
-)]] inline void
-readValue(T& serverOrClient, const NodeId& id, Variant& value) {
+[[deprecated("No performance benefit to pass Variant by reference, return by value instead.")]]
+inline void readValue(T& serverOrClient, const NodeId& id, Variant& value) {
     value = readValue(serverOrClient, id);
 }
 

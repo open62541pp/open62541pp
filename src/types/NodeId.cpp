@@ -27,7 +27,7 @@ NodeId::NodeId(uint16_t namespaceIndex, String identifier) noexcept {
 NodeId::NodeId(uint16_t namespaceIndex, Guid identifier) noexcept {
     handle()->namespaceIndex = namespaceIndex;
     handle()->identifierType = UA_NODEIDTYPE_GUID;
-    asWrapper<Guid>(handle()->identifier.guid) = std::move(identifier);  // NOLINT
+    handle()->identifier.guid = identifier;  // NOLINT
 }
 
 NodeId::NodeId(uint16_t namespaceIndex, ByteString identifier) noexcept {

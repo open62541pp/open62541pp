@@ -28,6 +28,7 @@ struct [[deprecated(
         return ((typeIndex == typeIndexes) || ...);
     }
 
+    [[deprecated("The Type enum will be removed in the future")]]
     static constexpr bool contains(Type type) {
         return contains(static_cast<TypeIndex>(type));
     }

@@ -45,7 +45,7 @@ int main() {
     // Arrays can not be unwrapped easily, because the array is an array of ExtensionObjects.
     // The array of unwrapped objects isn't available contiguously in memory and open62541 won't
     // transparently unwrap the array. So we have to do the unwrapping ourselves:
-    if (variant.isArray() && variant.isType(opcua::Type::ExtensionObject)) {
+    if (variant.isArray() && variant.isType<opcua::ExtensionObject>()) {
         size_t i = 0;
         for (auto&& extObj : variant.getArray<opcua::ExtensionObject>()) {
             const auto* p = static_cast<Point*>(extObj.getDecodedData());
