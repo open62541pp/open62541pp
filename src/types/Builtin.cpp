@@ -52,7 +52,7 @@ std::ostream& operator<<(std::ostream& os, const String& string) {
 
 /* -------------------------------------------- Guid -------------------------------------------- */
 
-Guid::Guid(UA_UInt32 data1, UA_UInt16 data2, UA_UInt16 data3, std::array<UA_Byte, 8> data4)
+Guid::Guid(UA_UInt32 data1, UA_UInt16 data2, UA_UInt16 data3, std::array<UA_Byte, 8> data4) noexcept
     : Guid(UA_Guid{
           data1,
           data2,
