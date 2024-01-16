@@ -269,14 +269,18 @@ bool operator!=(const NumericRangeDimension& lhs, const NumericRangeDimension& r
  */
 class NumericRange {
 public:
-    NumericRange();
+    NumericRange() = default;
     explicit NumericRange(std::string_view encodedRange);
     explicit NumericRange(std::vector<NumericRangeDimension> dimensions);
     explicit NumericRange(const UA_NumericRange& native);
 
-    bool empty() const noexcept;
+    bool empty() const noexcept {
+        return dimensions_.empty();
+    }
 
-    const std::vector<NumericRangeDimension>& get() const noexcept;
+    const std::vector<NumericRangeDimension>& get() const noexcept {
+        return dimensions_;
+    }
 
     std::string toString() const;
 
