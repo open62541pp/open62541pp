@@ -257,8 +257,17 @@ public:
 
 using NumericRangeDimension = UA_NumericRangeDimension;
 
-bool operator==(const NumericRangeDimension& lhs, const NumericRangeDimension& rhs) noexcept;
-bool operator!=(const NumericRangeDimension& lhs, const NumericRangeDimension& rhs) noexcept;
+inline bool operator==(
+    const NumericRangeDimension& lhs, const NumericRangeDimension& rhs
+) noexcept {
+    return (lhs.min == rhs.min) && (lhs.max == rhs.max);
+}
+
+inline bool operator!=(
+    const NumericRangeDimension& lhs, const NumericRangeDimension& rhs
+) noexcept {
+    return !(lhs == rhs);
+}
 
 /**
  * Numeric range to indicate subsets of (multidimensional) arrays.
@@ -269,14 +278,18 @@ bool operator!=(const NumericRangeDimension& lhs, const NumericRangeDimension& r
  */
 class NumericRange {
 public:
-    NumericRange();
+    NumericRange() = default;
     explicit NumericRange(std::string_view encodedRange);
     explicit NumericRange(std::vector<NumericRangeDimension> dimensions);
     explicit NumericRange(const UA_NumericRange& native);
 
-    bool empty() const noexcept;
+    bool empty() const noexcept {
+        return dimensions_.empty();
+    }
 
-    const std::vector<NumericRangeDimension>& get() const noexcept;
+    const std::vector<NumericRangeDimension>& get() const noexcept {
+        return dimensions_;
+    }
 
     std::string toString() const;
 

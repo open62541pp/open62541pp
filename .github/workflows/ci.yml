@@ -7,7 +7,7 @@ on:
 
 jobs:
   linux:
-    # https://github.com/actions/runner-images/blob/main/images/linux/Ubuntu2204-Readme.md
+    # https://github.com/actions/runner-images/blob/main/images/ubuntu/Ubuntu2204-Readme.md
     name: Linux ${{ matrix.config.name }} (${{ matrix.build_type }})
     runs-on: ubuntu-22.04
     strategy:
@@ -85,8 +85,8 @@ jobs:
           files: build/coverage.xml
 
   windows:
-    # https://github.com/actions/runner-images/blob/main/images/win/Windows2019-Readme.md
-    # https://github.com/actions/runner-images/blob/main/images/win/Windows2022-Readme.md
+    # https://github.com/actions/runner-images/blob/main/images/windows/Windows2019-Readme.md
+    # https://github.com/actions/runner-images/blob/main/images/windows/Windows2022-Readme.md
     name: Windows ${{ matrix.config.name }} (${{ matrix.build_type }}, ${{ matrix.library_type }})
     runs-on: ${{ matrix.config.os }}
     strategy:

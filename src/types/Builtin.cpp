@@ -276,24 +276,15 @@ const DiagnosticInfo* DiagnosticInfo::getInnerDiagnosticInfo() const noexcept {
 
 /* ---------------------------------------- NumericRange ---------------------------------------- */
 
-bool operator==(const NumericRangeDimension& lhs, const NumericRangeDimension& rhs) noexcept {
-    return (lhs.min == rhs.min) && (lhs.max == rhs.max);
-}
-
-bool operator!=(const NumericRangeDimension& lhs, const NumericRangeDimension& rhs) noexcept {
-    return !(lhs == rhs);
-}
-
-NumericRange::NumericRange() = default;
-
 NumericRange::NumericRange(std::string_view encodedRange) {
+    UA_String encodedRangeNative = detail::toNativeString(encodedRange);
     UA_NumericRange native{};
 #if UAPP_OPEN62541_VER_GE(1, 1)
-    const auto status = UA_NumericRange_parse(&native, String(encodedRange));
+    const auto status = UA_NumericRange_parse(&native, encodedRangeNative);
 #else
-    const auto status = UA_NumericRange_parseFromString(&native, String(encodedRange).handle());
+    const auto status = UA_NumericRange_parseFromString(&native, &encodedRangeNative);
 #endif
-    dimensions_ = std::vector<NumericRangeDimension>(
+    dimensions_.assign(
         native.dimensions,
         native.dimensions + native.dimensionsSize  // NOLINT
     );
@@ -306,14 +297,6 @@ NumericRange::NumericRange(std::vector<NumericRangeDimension> dimensions)
 
 NumericRange::NumericRange(const UA_NumericRange& native)
     : dimensions_(native.dimensions, native.dimensions + native.dimensionsSize) {}  // NOLINT
-
-bool NumericRange::empty() const noexcept {
-    return dimensions_.empty();
-}
-
-const std::vector<NumericRangeDimension>& NumericRange::get() const noexcept {
-    return dimensions_;
-}
 
 std::string NumericRange::toString() const {
     std::ostringstream ss;
