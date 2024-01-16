@@ -287,13 +287,14 @@ bool operator!=(const NumericRangeDimension& lhs, const NumericRangeDimension& r
 NumericRange::NumericRange() = default;
 
 NumericRange::NumericRange(std::string_view encodedRange) {
+    UA_String encodedRangeNative = detail::toNativeString(encodedRange);
     UA_NumericRange native{};
 #if UAPP_OPEN62541_VER_GE(1, 1)
-    const auto status = UA_NumericRange_parse(&native, String(encodedRange));
+    const auto status = UA_NumericRange_parse(&native, encodedRangeNative);
 #else
-    const auto status = UA_NumericRange_parseFromString(&native, String(encodedRange).handle());
+    const auto status = UA_NumericRange_parseFromString(&native, &encodedRangeNative);
 #endif
-    dimensions_ = std::vector<NumericRangeDimension>(
+    dimensions_.assign(
         native.dimensions,
         native.dimensions + native.dimensionsSize  // NOLINT
     );
