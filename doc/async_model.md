@@ -83,7 +83,7 @@ opcua::services::writeValueAsync(client, id, opcua::Variant::fromScalar(1));
 
 ### Custom completion token
 
-The `opcua::AsyncResult` trait is an customization point to define user-defined completion tokens via template specialization:
+The `opcua::AsyncResult` trait is a customization point to define user-defined completion tokens via template specialization:
 
 ```cpp
 struct PrintResultToken {};
