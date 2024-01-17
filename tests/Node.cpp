@@ -8,6 +8,7 @@
 #include "open62541pp/Server.h"
 
 #include "helper/Runner.h"
+#include "helper/stringify.h"
 
 using namespace opcua;
 

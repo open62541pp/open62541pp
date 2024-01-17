@@ -16,6 +16,7 @@
 #include "open62541pp/types/ExtensionObject.h"
 
 #include "helper/Runner.h"
+#include "helper/stringify.h"
 
 using namespace opcua;
 using namespace std::literals::chrono_literals;
@@ -153,9 +154,9 @@ TEST_CASE("Attribute service set (server)") {
         //_EQ CHECK(services::readDisplayName(server, id), LocalizedText("", "testAttributes"));
         CHECK(services::readDescription(server, id).getText().empty());
         CHECK(services::readDescription(server, id).getLocale().empty());
-        CHECK(services::readWriteMask(server, id).get() == 0);
+        CHECK(services::readWriteMask(server, id) == 0);
         const uint32_t adminUserWriteMask = 0xFFFFFFFF;  // all bits set
-        CHECK(services::readUserWriteMask(server, id).get() == adminUserWriteMask);
+        CHECK(services::readUserWriteMask(server, id) == adminUserWriteMask);
         CHECK(services::readDataType(server, id) == NodeId(0, UA_NS0ID_BASEDATATYPE));
         CHECK(services::readValueRank(server, id) == ValueRank::Any);
         CHECK(services::readArrayDimensions(server, id).empty());
@@ -173,7 +174,7 @@ TEST_CASE("Attribute service set (server)") {
         attr.setDataType(DataTypeId::Int32);
         attr.setValueRank(ValueRank::TwoDimensions);
         attr.setArrayDimensions({2, 3});
-        attr.setAccessLevel(UA_ACCESSLEVELMASK_READ);
+        attr.setAccessLevel(AccessLevelType::CurrentRead | AccessLevelType::CurrentWrite);
         attr.setMinimumSamplingInterval(11.11);
 
         const NodeId id{1, "testAttributes"};
@@ -189,7 +190,7 @@ TEST_CASE("Attribute service set (server)") {
 
         CHECK(services::readDisplayName(server, id) == attr.getDisplayName());
         CHECK(services::readDescription(server, id) == attr.getDescription());
-        CHECK(services::readWriteMask(server, id).get() == attr.getWriteMask());
+        CHECK(services::readWriteMask(server, id) == attr.getWriteMask());
         CHECK(services::readDataType(server, id) == attr.getDataType());
         CHECK(services::readValueRank(server, id) == attr.getValueRank());
         CHECK(
@@ -213,14 +214,14 @@ TEST_CASE("Attribute service set (server)") {
         CHECK_NOTHROW(services::writeDataType(server, id, NodeId{0, 2}));
         CHECK_NOTHROW(services::writeValueRank(server, id, ValueRank::TwoDimensions));
         CHECK_NOTHROW(services::writeArrayDimensions(server, id, {3, 2}));
-        const uint8_t newAccessLevel = UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE;
+        const auto newAccessLevel = AccessLevelType::CurrentRead | AccessLevelType::CurrentWrite;
         CHECK_NOTHROW(services::writeAccessLevel(server, id, newAccessLevel));
         CHECK_NOTHROW(services::writeMinimumSamplingInterval(server, id, 10.0));
 
         // read new attributes
         CHECK(services::readDisplayName(server, id) == LocalizedText("en-US", "newDisplayName"));
         CHECK(services::readDescription(server, id) == LocalizedText("de-DE", "newDescription"));
-        CHECK(services::readWriteMask(server, id).get() == UA_WRITEMASK_EXECUTABLE);
+        CHECK(services::readWriteMask(server, id) == UA_WRITEMASK_EXECUTABLE);
         CHECK(services::readDataType(server, id) == NodeId(0, 2));
         CHECK(services::readValueRank(server, id) == ValueRank::TwoDimensions);
         CHECK(services::readArrayDimensions(server, id).size() == 2);

@@ -265,12 +265,11 @@ inline std::vector<uint32_t> readArrayDimensions(T& serverOrClient, const NodeId
 /**
  * Read the `AccessLevel` attribute of a variable node.
  *
- * For example `::UA_ACCESSLEVELMASK_READ | ::UA_ACCESSLEVELMASK_WRITE`.
  * The access level attribute is used to indicate how the value of a variable can be accessed
  * (read/write) and if it contains current and/or historic data.
  */
 template <typename T>
-inline uint8_t readAccessLevel(T& serverOrClient, const NodeId& id) {
+inline BitMask<AccessLevelType> readAccessLevel(T& serverOrClient, const NodeId& id) {
     return readAttributeScalar<uint8_t>(serverOrClient, id, AttributeId::AccessLevel);
 }
 
@@ -281,7 +280,7 @@ inline uint8_t readAccessLevel(T& serverOrClient, const NodeId& id) {
  * In contrast to the access level, the user access level is taking access rights into account.
  */
 template <typename T>
-inline uint8_t readUserAccessLevel(T& serverOrClient, const NodeId& id) {
+inline BitMask<AccessLevelType> readUserAccessLevel(T& serverOrClient, const NodeId& id) {
     return readAttributeScalar<uint8_t>(serverOrClient, id, AttributeId::UserAccessLevel);
 }
 
@@ -427,9 +426,8 @@ inline void writeArrayDimensions(
  * @copydetails readAccessLevel
  */
 template <typename T>
-inline void writeAccessLevel(T& serverOrClient, const NodeId& id, uint8_t mask) {
-    const auto native = static_cast<UA_Byte>(mask);
-    writeAttribute(serverOrClient, id, AttributeId::AccessLevel, DataValue::fromScalar(native));
+inline void writeAccessLevel(T& serverOrClient, const NodeId& id, BitMask<AccessLevelType> mask) {
+    writeAttribute(serverOrClient, id, AttributeId::AccessLevel, DataValue::fromScalar(mask.get()));
 }
 
 /**
@@ -438,9 +436,12 @@ inline void writeAccessLevel(T& serverOrClient, const NodeId& id, uint8_t mask) 
  * @note Cannot be written from the server.
  */
 template <typename T>
-inline void writeUserAccessLevel(T& serverOrClient, const NodeId& id, uint8_t mask) {
-    const auto native = static_cast<UA_Byte>(mask);
-    writeAttribute(serverOrClient, id, AttributeId::UserAccessLevel, DataValue::fromScalar(native));
+inline void writeUserAccessLevel(
+    T& serverOrClient, const NodeId& id, BitMask<AccessLevelType> mask
+) {
+    writeAttribute(
+        serverOrClient, id, AttributeId::UserAccessLevel, DataValue::fromScalar(mask.get())
+    );
 }
 
 /**

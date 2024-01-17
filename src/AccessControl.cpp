@@ -108,7 +108,7 @@ uint32_t AccessControlDefault::getUserRightsMask(
     return 0xFFFFFFFF;
 }
 
-uint8_t AccessControlDefault::getUserAccessLevel(
+BitMask<AccessLevelType> AccessControlDefault::getUserAccessLevel(
     [[maybe_unused]] Session& session, [[maybe_unused]] const NodeId& nodeId
 ) {
     return 0xFF;

@@ -138,7 +138,29 @@ constexpr std::string_view getNodeClassName(NodeClass nodeClass) {
 }
 
 /**
- * WriteMask.
+ * Access level type.
+ * Indicates how the value of an variable can be accessed (read/write) and if it contains current
+ * and/or historic data.
+ * @see https://reference.opcfoundation.org/Core/Part3/v104/docs/8.57
+ */
+enum class AccessLevelType : uint8_t {
+    // clang-format off
+    CurrentRead    = 1U << 0U,
+    CurrentWrite   = 1U << 1U,
+    HistoryRead    = 1U << 2U,
+    HistoryWrite   = 1U << 3U,
+    SemanticChange = 1U << 4U,
+    StatusWrite    = 1U << 5U,
+    TimestampWrite = 1U << 6U,
+    // clang-format on
+};
+
+template <>
+struct IsBitMaskEnum<AccessLevelType> : std::true_type {};
+
+/**
+ * Write mask.
+ * Indicates which attributes of a node a writeable.
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/5.2.7
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.60
  */

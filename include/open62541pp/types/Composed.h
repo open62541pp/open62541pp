@@ -378,8 +378,15 @@ public:
         arrayDimensionsSize,
         UA_NODEATTRIBUTESMASK_ARRAYDIMENSIONS
     )
-    UAPP_NODEATTR(uint8_t, AccessLevel, accessLevel, UA_NODEATTRIBUTESMASK_ACCESSLEVEL)
-    UAPP_NODEATTR(uint8_t, UserAccessLevel, userAccessLevel, UA_NODEATTRIBUTESMASK_USERACCESSLEVEL)
+    UAPP_NODEATTR_BITMASK(
+        BitMask<AccessLevelType>, AccessLevel, accessLevel, UA_NODEATTRIBUTESMASK_ACCESSLEVEL
+    )
+    UAPP_NODEATTR_BITMASK(
+        BitMask<AccessLevelType>,
+        UserAccessLevel,
+        userAccessLevel,
+        UA_NODEATTRIBUTESMASK_USERACCESSLEVEL
+    )
     UAPP_NODEATTR(
         double,
         MinimumSamplingInterval,
