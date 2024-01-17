@@ -145,7 +145,7 @@ TEST_CASE("Node") {
                 varNode.writeDescription({"en-US", "desc"}).readDescription(),
                 LocalizedText({"en-US", "desc"})
             );
-            CHECK_EQ(varNode.writeWriteMask(0xFFFFFFFF).readWriteMask().get(), 0xFFFFFFFF);
+            CHECK_EQ(varNode.writeWriteMask(0xFFFFFFFF).readWriteMask(), 0xFFFFFFFF);
             CHECK_EQ(
                 varNode.writeDataType(DataTypeId::Boolean).readDataType(),
                 NodeId(DataTypeId::Boolean)

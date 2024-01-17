@@ -5,6 +5,11 @@
 namespace opcua {
 
 /**
+ * \addtogroup BitMaskAbstraction BitMask abstraction
+ * @{
+ */
+
+/**
  * Trait to define an enum (class) as a bit mask and allow bitwise operations.
  *
  * @code{.cpp}
@@ -27,24 +32,28 @@ struct IsBitMaskEnum : std::false_type {};
 
 /* -------------------------------------- Bitwise operators ------------------------------------- */
 
+/// @relates IsBitMaskEnum
 template <typename T>
 constexpr typename std::enable_if_t<IsBitMaskEnum<T>::value, T> operator&(T lhs, T rhs) noexcept {
     using U = typename std::underlying_type_t<T>;
     return static_cast<T>(static_cast<U>(lhs) & static_cast<U>(rhs));
 }
 
+/// @relates IsBitMaskEnum
 template <typename T>
 constexpr typename std::enable_if_t<IsBitMaskEnum<T>::value, T> operator|(T lhs, T rhs) noexcept {
     using U = typename std::underlying_type_t<T>;
     return static_cast<T>(static_cast<U>(lhs) | static_cast<U>(rhs));
 }
 
+/// @relates IsBitMaskEnum
 template <typename T>
 constexpr typename std::enable_if_t<IsBitMaskEnum<T>::value, T> operator^(T lhs, T rhs) noexcept {
     using U = typename std::underlying_type_t<T>;
     return static_cast<T>(static_cast<U>(lhs) ^ static_cast<U>(rhs));
 }
 
+/// @relates IsBitMaskEnum
 template <typename T>
 constexpr typename std::enable_if_t<IsBitMaskEnum<T>::value, T> operator~(T rhs) noexcept {
     using U = typename std::underlying_type_t<T>;
@@ -53,6 +62,7 @@ constexpr typename std::enable_if_t<IsBitMaskEnum<T>::value, T> operator~(T rhs)
 
 /* -------------------------------- Bitwise assignment operators -------------------------------- */
 
+/// @relates IsBitMaskEnum
 template <typename T>
 constexpr typename std::enable_if_t<IsBitMaskEnum<T>::value, T> operator|=(T& lhs, T rhs) noexcept {
     using U = typename std::underlying_type_t<T>;
@@ -60,6 +70,7 @@ constexpr typename std::enable_if_t<IsBitMaskEnum<T>::value, T> operator|=(T& lh
     return lhs;
 }
 
+/// @relates IsBitMaskEnum
 template <typename T>
 constexpr typename std::enable_if_t<IsBitMaskEnum<T>::value, T> operator&=(T& lhs, T rhs) noexcept {
     using U = typename std::underlying_type_t<T>;
@@ -67,6 +78,7 @@ constexpr typename std::enable_if_t<IsBitMaskEnum<T>::value, T> operator&=(T& lh
     return lhs;
 }
 
+/// @relates IsBitMaskEnum
 template <typename T>
 constexpr typename std::enable_if_t<IsBitMaskEnum<T>::value, T> operator^=(T& lhs, T rhs) noexcept {
     using U = typename std::underlying_type_t<T>;
@@ -131,5 +143,57 @@ public:
 private:
     Underlying mask_;
 };
+
+/// @relates BitMask
+template <typename T>
+constexpr bool operator==(BitMask<T> lhs, BitMask<T> rhs) noexcept {
+    return (lhs.get() == rhs.get());
+}
+
+/// @relates BitMask
+template <typename T>
+constexpr bool operator!=(BitMask<T> lhs, BitMask<T> rhs) noexcept {
+    return !(lhs == rhs);
+}
+
+/// @relates BitMask
+template <
+    typename T,
+    typename U,
+    typename = std::enable_if_t<std::is_constructible_v<BitMask<T>, U>>>
+constexpr bool operator==(BitMask<T> lhs, U rhs) noexcept {
+    return (lhs == BitMask<T>(rhs));
+}
+
+/// @relates BitMask
+template <
+    typename T,
+    typename U,
+    typename = std::enable_if_t<std::is_constructible_v<BitMask<T>, U>>>
+constexpr bool operator!=(BitMask<T> lhs, U rhs) noexcept {
+    return !(lhs == rhs);
+}
+
+/// @relates BitMask
+template <
+    typename T,
+    typename U,
+    typename = std::enable_if_t<std::is_constructible_v<BitMask<T>, U>>>
+constexpr bool operator==(U lhs, BitMask<T> rhs) noexcept {
+    return (BitMask<T>(lhs) == rhs);
+}
+
+/// @relates BitMask
+template <
+    typename T,
+    typename U,
+    typename = std::enable_if_t<std::is_constructible_v<BitMask<T>, U>>>
+constexpr bool operator!=(U lhs, BitMask<T> rhs) noexcept {
+    return !(lhs == rhs);
+}
+
+/**
+ * @}
+ */
 
 }  // namespace opcua

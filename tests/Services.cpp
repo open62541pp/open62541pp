@@ -189,7 +189,7 @@ TEST_CASE("Attribute service set (server)") {
 
         CHECK(services::readDisplayName(server, id) == attr.getDisplayName());
         CHECK(services::readDescription(server, id) == attr.getDescription());
-        CHECK(services::readWriteMask(server, id).get() == attr.getWriteMask().get());
+        CHECK(services::readWriteMask(server, id).get() == attr.getWriteMask());
         CHECK(services::readDataType(server, id) == attr.getDataType());
         CHECK(services::readValueRank(server, id) == attr.getValueRank());
         CHECK(
