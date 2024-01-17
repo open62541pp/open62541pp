@@ -145,51 +145,27 @@ private:
 };
 
 /// @relates BitMask
-template <typename T>
-constexpr bool operator==(BitMask<T> lhs, BitMask<T> rhs) noexcept {
-    return (lhs.get() == rhs.get());
-}
-
-/// @relates BitMask
-template <typename T>
-constexpr bool operator!=(BitMask<T> lhs, BitMask<T> rhs) noexcept {
-    return !(lhs == rhs);
-}
-
-/// @relates BitMask
-template <
-    typename T,
-    typename U,
-    typename = std::enable_if_t<std::is_constructible_v<BitMask<T>, U>>>
+template <typename T, typename U>
 constexpr bool operator==(BitMask<T> lhs, U rhs) noexcept {
-    return (lhs == BitMask<T>(rhs));
+    return lhs.get() == BitMask<T>(rhs).get();
 }
 
 /// @relates BitMask
-template <
-    typename T,
-    typename U,
-    typename = std::enable_if_t<std::is_constructible_v<BitMask<T>, U>>>
+template <typename T, typename U>
 constexpr bool operator!=(BitMask<T> lhs, U rhs) noexcept {
-    return !(lhs == rhs);
+    return lhs.get() != BitMask<T>(rhs).get();
 }
 
 /// @relates BitMask
-template <
-    typename T,
-    typename U,
-    typename = std::enable_if_t<std::is_constructible_v<BitMask<T>, U>>>
+template <typename T, typename U>
 constexpr bool operator==(U lhs, BitMask<T> rhs) noexcept {
-    return (BitMask<T>(lhs) == rhs);
+    return BitMask<T>(lhs).get() == rhs.get();
 }
 
 /// @relates BitMask
-template <
-    typename T,
-    typename U,
-    typename = std::enable_if_t<std::is_constructible_v<BitMask<T>, U>>>
+template <typename T, typename U>
 constexpr bool operator!=(U lhs, BitMask<T> rhs) noexcept {
-    return !(lhs == rhs);
+    return BitMask<T>(lhs).get() != rhs.get();
 }
 
 /**

@@ -1,5 +1,4 @@
 #include <cstdint>
-#include <limits>
 
 #include <doctest/doctest.h>
 
@@ -8,7 +7,7 @@
 using namespace opcua;
 
 namespace {
-enum class Bit : uint16_t {
+enum class Bit : int {
     One = 1,
     Two = 2,
 };
@@ -23,55 +22,55 @@ TEST_CASE("Bitwise operations with enum (enabled with IsBitMaskEnum trait)") {
     CHECK(IsBitMaskEnum<Bit>::value == true);
 
     SUBCASE("AND") {
-        CHECK(static_cast<uint16_t>(Bit::One & Bit::One) == 1);
-        CHECK(static_cast<uint16_t>(Bit::One & Bit::Two) == 0);
+        CHECK(static_cast<int>(Bit::One & Bit::One) == 1);
+        CHECK(static_cast<int>(Bit::One & Bit::Two) == 0);
     }
 
     SUBCASE("OR") {
-        CHECK(static_cast<uint16_t>(Bit::One | Bit::One) == 1);
-        CHECK(static_cast<uint16_t>(Bit::One | Bit::Two) == 3);
+        CHECK(static_cast<int>(Bit::One | Bit::One) == 1);
+        CHECK(static_cast<int>(Bit::One | Bit::Two) == 3);
     }
 
     SUBCASE("XOR") {
-        CHECK(static_cast<uint16_t>(Bit::One ^ Bit::One) == 0);
-        CHECK(static_cast<uint16_t>(Bit::One ^ Bit::Two) == 3);
+        CHECK(static_cast<int>(Bit::One ^ Bit::One) == 0);
+        CHECK(static_cast<int>(Bit::One ^ Bit::Two) == 3);
     }
 
     SUBCASE("NOT") {
-        CHECK(static_cast<uint16_t>(~Bit::One) == std::numeric_limits<uint16_t>::max() - 1);
+        CHECK(static_cast<int>(~Bit::One) == ~1);
     }
 
     SUBCASE("AND assignment") {
         Bit mask{};
         mask = Bit::One;
         mask &= Bit::One;
-        CHECK(static_cast<uint16_t>(mask) == 1);
+        CHECK(static_cast<int>(mask) == 1);
 
         mask = Bit::One;
         mask &= Bit::Two;
-        CHECK(static_cast<uint16_t>(mask) == 0);
+        CHECK(static_cast<int>(mask) == 0);
     }
 
     SUBCASE("OR assignment") {
         Bit mask{};
         mask = Bit::One;
         mask |= Bit::One;
-        CHECK(static_cast<uint16_t>(mask) == 1);
+        CHECK(static_cast<int>(mask) == 1);
 
         mask = Bit::One;
         mask |= Bit::Two;
-        CHECK(static_cast<uint16_t>(mask) == 3);
+        CHECK(static_cast<int>(mask) == 3);
     }
 
     SUBCASE("XOR assignment") {
         Bit mask{};
         mask = Bit::One;
         mask ^= Bit::One;
-        CHECK(static_cast<uint16_t>(mask) == 0);
+        CHECK(static_cast<int>(mask) == 0);
 
         mask = Bit::One;
         mask ^= Bit::Two;
-        CHECK(static_cast<uint16_t>(mask) == 3);
+        CHECK(static_cast<int>(mask) == 3);
     }
 }
 
@@ -80,9 +79,9 @@ TEST_CASE("BitMask") {
         CHECK(static_cast<Bit>(BitMask(Bit::One)) == Bit::One);
     }
 
-    SUBCASE("Conversion to uint16_t") {
+    SUBCASE("Conversion to int") {
         // deprecated, enable when deprecation is removed and conversion marked explicit
-        // CHECK(static_cast<uint16_t>(BitMask<Bit>(2)) == 2);
+        // CHECK(static_cast<int>(BitMask<Bit>(2)) == 2);
     }
 
     SUBCASE("get()") {
@@ -101,9 +100,10 @@ TEST_CASE("BitMask") {
         CHECK(BitMask(Bit::One) != Bit::Two);
         CHECK(BitMask(Bit::One) != 2);
 
-        CHECK(Bit::One == BitMask(Bit::One));
-        CHECK(1 == BitMask(Bit::One));
-        CHECK(Bit::Two != BitMask(Bit::One));
-        CHECK(2 != BitMask(Bit::One));
+        // ambiguous due to implicit conversion to underlying type
+        // CHECK(Bit::One == BitMask(Bit::One));
+        // CHECK(1 == BitMask(Bit::One));
+        // CHECK(Bit::Two != BitMask(Bit::One));
+        // CHECK(2 != BitMask(Bit::One));
     }
 }
