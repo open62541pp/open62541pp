@@ -2,7 +2,7 @@
 
 @tableofcontents
 
-Open62541++ adapts the the well-proven [asynchronous model of (Boost) Asio](https://think-async.com/asio/asio-1.28.0/doc/asio/overview/model.html). A key goal of Asio's asynchronous model is to support multiple composition mechanisms. This is achieved via completion tokens.
+Open62541++ adapts the well-proven [asynchronous model of (Boost) Asio](https://think-async.com/asio/asio-1.28.0/doc/asio/overview/model.html). A key goal of Asio's asynchronous model is to support multiple composition mechanisms. This is achieved via completion tokens.
 
 ## Completion tokens
 
