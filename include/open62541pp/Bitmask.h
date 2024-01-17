@@ -140,6 +140,31 @@ public:
         return mask_;
     }
 
+    /// Set all bits.
+    constexpr void set() noexcept {
+        mask_ = ~empty;
+    }
+
+    /// Set specified bits.
+    constexpr void set(T mask) noexcept {
+        mask_ |= static_cast<Underlying>(mask);
+    }
+
+    /// Reset all bits.
+    constexpr void reset() noexcept {
+        mask_ = empty;
+    }
+
+    /// Reset specified bits.
+    constexpr void reset(T mask) noexcept {
+        mask_ &= ~static_cast<Underlying>(mask);
+    }
+
+    /// Flip all bits.
+    constexpr void flip() noexcept {
+        mask_ = ~mask_;
+    }
+
     /// Check if all bits are set.
     constexpr bool all() const noexcept {
         return Underlying(~mask_) == empty;
@@ -172,7 +197,7 @@ public:
 
 private:
     static constexpr Underlying empty{};
-    Underlying mask_;
+    Underlying mask_{};
 };
 
 /// @relates Bitmask

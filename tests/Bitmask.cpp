@@ -126,6 +126,40 @@ TEST_CASE("Bitmask") {
         CHECK(Bitmask<Bit>(Bit::One).noneOf(Bit::One | Bit::Two) == false);
     }
 
+    SUBCASE("set") {
+        Bitmask<Bit> mask;
+
+        SUBCASE("all") {
+            mask.set();
+            CHECK(mask.all());
+        }
+
+        SUBCASE("specific") {
+            mask.set(Bit::One);
+            CHECK(mask.get() == 1);
+        }
+    }
+
+    SUBCASE("reset") {
+        Bitmask<Bit> mask(Bit::One | Bit::Two);
+
+        SUBCASE("all") {
+            mask.reset();
+            CHECK(mask.none());
+        }
+
+        SUBCASE("specific") {
+            mask.reset(Bit::One);
+            CHECK(mask.get() == 2);
+        }
+    }
+
+    SUBCASE("flip") {
+        Bitmask<Bit> mask(1);
+        mask.flip();
+        CHECK(mask.get() == 0xFFFFFFFF - 1);
+    }
+
     SUBCASE("Equality") {
         CHECK(Bitmask<Bit>() == Bitmask<Bit>());
         CHECK(Bitmask(Bit::One) == Bitmask(Bit::One));
