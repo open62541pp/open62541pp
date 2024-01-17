@@ -332,7 +332,9 @@ public:
     ObjectAttributes();
 
     UAPP_NODEATTR_COMMON
-    UAPP_NODEATTR(uint8_t, EventNotifier, eventNotifier, UA_NODEATTRIBUTESMASK_EVENTNOTIFIER)
+    UAPP_NODEATTR_BITMASK(
+        BitMask<EventNotifier>, EventNotifier, eventNotifier, UA_NODEATTRIBUTESMASK_EVENTNOTIFIER
+    )
 };
 
 /**
@@ -523,7 +525,9 @@ public:
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR(bool, IsAbstract, containsNoLoops, UA_NODEATTRIBUTESMASK_CONTAINSNOLOOPS)
-    UAPP_NODEATTR(uint8_t, EventNotifier, eventNotifier, UA_NODEATTRIBUTESMASK_EVENTNOTIFIER)
+    UAPP_NODEATTR_BITMASK(
+        BitMask<EventNotifier>, EventNotifier, eventNotifier, UA_NODEATTRIBUTESMASK_EVENTNOTIFIER
+    )
 };
 
 #undef UAPP_NODEATTR

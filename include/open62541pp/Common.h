@@ -202,6 +202,8 @@ struct IsBitMaskEnum<WriteMask> : std::true_type {};
 
 /**
  * Value rank.
+ * Indicates whether the value attribute of the variable is an array and how many dimensions the
+ * array has.
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/5.6.2
  */
 enum class ValueRank : int32_t {
@@ -215,6 +217,23 @@ enum class ValueRank : int32_t {
     ThreeDimensions      = UA_VALUERANK_THREE_DIMENSIONS,
     // clang-format on
 };
+
+/**
+ * Event notifier.
+ * Indicates if a node can be used to subscribe to events or read/write historic events.
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.59
+ */
+enum class EventNotifier : uint8_t {
+    // clang-format off
+    None              = 0,
+    SubscribeToEvents = 1,
+    HistoryRead       = 4,
+    HistoryWrite      = 8,
+    // clang-format on
+};
+
+template <>
+struct IsBitMaskEnum<EventNotifier> : std::true_type {};
 
 /**
  * Modelling rules.
