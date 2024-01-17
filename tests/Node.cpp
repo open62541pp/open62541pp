@@ -229,7 +229,7 @@ TEST_CASE("Node") {
                 "Property",
                 VariableAttributes{}
                     .setWriteMask(WriteMask::None)
-                    .setAccessLevel(AccessLevel::CurrentRead)
+                    .setAccessLevel(AccessLevel::CurrentRead | AccessLevel::CurrentWrite)
                     .setDataType<double>()
                     .setValueScalar(11.11)
             );
