@@ -108,7 +108,7 @@ BitMask<WriteMask> AccessControlDefault::getUserRightsMask(
     return 0xFFFFFFFF;
 }
 
-BitMask<AccessLevelType> AccessControlDefault::getUserAccessLevel(
+BitMask<AccessLevel> AccessControlDefault::getUserAccessLevel(
     [[maybe_unused]] Session& session, [[maybe_unused]] const NodeId& nodeId
 ) {
     return 0xFF;

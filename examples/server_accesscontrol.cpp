@@ -31,12 +31,12 @@ public:
         );
     }
 
-    BitMask<AccessLevelType> getUserAccessLevel(Session& session, const NodeId& nodeId) override {
+    BitMask<AccessLevel> getUserAccessLevel(Session& session, const NodeId& nodeId) override {
         const bool isAdmin = session.getSessionAttribute({0, "isAdmin"}).getScalar<bool>();
         std::cout << "Get user access level of node id " << nodeId.toString() << std::endl;
         std::cout << "Admin rights granted: " << isAdmin << std::endl;
-        return isAdmin ? AccessLevelType::CurrentRead | AccessLevelType::CurrentWrite
-                       : AccessLevelType::CurrentRead;
+        return isAdmin ? AccessLevel::CurrentRead | AccessLevel::CurrentWrite
+                       : AccessLevel::CurrentRead;
     }
 };
 
@@ -59,7 +59,7 @@ int main() {
         {1, 1000},
         "Variable",
         VariableAttributes{}
-            .setAccessLevel(AccessLevelType::CurrentRead | AccessLevelType::CurrentWrite)
+            .setAccessLevel(AccessLevel::CurrentRead | AccessLevel::CurrentWrite)
             .setDataType(DataTypeId::Int32)
             .setValueRank(ValueRank::Scalar)
             .setValueScalar(0)

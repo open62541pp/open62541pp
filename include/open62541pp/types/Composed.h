@@ -379,10 +379,10 @@ public:
         UA_NODEATTRIBUTESMASK_ARRAYDIMENSIONS
     )
     UAPP_NODEATTR_BITMASK(
-        BitMask<AccessLevelType>, AccessLevel, accessLevel, UA_NODEATTRIBUTESMASK_ACCESSLEVEL
+        BitMask<AccessLevel>, AccessLevel, accessLevel, UA_NODEATTRIBUTESMASK_ACCESSLEVEL
     )
     UAPP_NODEATTR_BITMASK(
-        BitMask<AccessLevelType>,
+        BitMask<AccessLevel>,
         UserAccessLevel,
         userAccessLevel,
         UA_NODEATTRIBUTESMASK_USERACCESSLEVEL

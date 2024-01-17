@@ -174,7 +174,7 @@ TEST_CASE("Attribute service set (server)") {
         attr.setDataType(DataTypeId::Int32);
         attr.setValueRank(ValueRank::TwoDimensions);
         attr.setArrayDimensions({2, 3});
-        attr.setAccessLevel(AccessLevelType::CurrentRead | AccessLevelType::CurrentWrite);
+        attr.setAccessLevel(AccessLevel::CurrentRead | AccessLevel::CurrentWrite);
         attr.setMinimumSamplingInterval(11.11);
 
         const NodeId id{1, "testAttributes"};
@@ -214,7 +214,7 @@ TEST_CASE("Attribute service set (server)") {
         CHECK_NOTHROW(services::writeDataType(server, id, NodeId{0, 2}));
         CHECK_NOTHROW(services::writeValueRank(server, id, ValueRank::TwoDimensions));
         CHECK_NOTHROW(services::writeArrayDimensions(server, id, {3, 2}));
-        const auto newAccessLevel = AccessLevelType::CurrentRead | AccessLevelType::CurrentWrite;
+        const auto newAccessLevel = AccessLevel::CurrentRead | AccessLevel::CurrentWrite;
         CHECK_NOTHROW(services::writeAccessLevel(server, id, newAccessLevel));
         CHECK_NOTHROW(services::writeMinimumSamplingInterval(server, id, 10.0));
 

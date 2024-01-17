@@ -81,7 +81,7 @@ public:
     virtual BitMask<WriteMask> getUserRightsMask(Session& session, const NodeId& nodeId) = 0;
 
     /// Additional access control for variable nodes.
-    virtual BitMask<AccessLevelType> getUserAccessLevel(Session& session, const NodeId& nodeId) = 0;
+    virtual BitMask<AccessLevel> getUserAccessLevel(Session& session, const NodeId& nodeId) = 0;
 
     /// Additional access control for method nodes.
     virtual bool getUserExecutable(Session& session, const NodeId& methodId) = 0;
@@ -154,7 +154,7 @@ public:
 
     BitMask<WriteMask> getUserRightsMask(Session& session, const NodeId& nodeId) override;
 
-    BitMask<AccessLevelType> getUserAccessLevel(Session& session, const NodeId& nodeId) override;
+    BitMask<AccessLevel> getUserAccessLevel(Session& session, const NodeId& nodeId) override;
 
     bool getUserExecutable(Session& session, const NodeId& methodId) override;
 

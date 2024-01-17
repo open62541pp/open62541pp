@@ -269,7 +269,7 @@ inline std::vector<uint32_t> readArrayDimensions(T& serverOrClient, const NodeId
  * (read/write) and if it contains current and/or historic data.
  */
 template <typename T>
-inline BitMask<AccessLevelType> readAccessLevel(T& serverOrClient, const NodeId& id) {
+inline BitMask<AccessLevel> readAccessLevel(T& serverOrClient, const NodeId& id) {
     return readAttributeScalar<uint8_t>(serverOrClient, id, AttributeId::AccessLevel);
 }
 
@@ -280,7 +280,7 @@ inline BitMask<AccessLevelType> readAccessLevel(T& serverOrClient, const NodeId&
  * In contrast to the access level, the user access level is taking access rights into account.
  */
 template <typename T>
-inline BitMask<AccessLevelType> readUserAccessLevel(T& serverOrClient, const NodeId& id) {
+inline BitMask<AccessLevel> readUserAccessLevel(T& serverOrClient, const NodeId& id) {
     return readAttributeScalar<uint8_t>(serverOrClient, id, AttributeId::UserAccessLevel);
 }
 
@@ -426,7 +426,7 @@ inline void writeArrayDimensions(
  * @copydetails readAccessLevel
  */
 template <typename T>
-inline void writeAccessLevel(T& serverOrClient, const NodeId& id, BitMask<AccessLevelType> mask) {
+inline void writeAccessLevel(T& serverOrClient, const NodeId& id, BitMask<AccessLevel> mask) {
     writeAttribute(serverOrClient, id, AttributeId::AccessLevel, DataValue::fromScalar(mask.get()));
 }
 
@@ -436,9 +436,7 @@ inline void writeAccessLevel(T& serverOrClient, const NodeId& id, BitMask<Access
  * @note Cannot be written from the server.
  */
 template <typename T>
-inline void writeUserAccessLevel(
-    T& serverOrClient, const NodeId& id, BitMask<AccessLevelType> mask
-) {
+inline void writeUserAccessLevel(T& serverOrClient, const NodeId& id, BitMask<AccessLevel> mask) {
     writeAttribute(
         serverOrClient, id, AttributeId::UserAccessLevel, DataValue::fromScalar(mask.get())
     );

@@ -397,12 +397,12 @@ public:
     }
 
     /// @copydoc services::readAccessLevel
-    BitMask<AccessLevelType> readAccessLevel() {
+    BitMask<AccessLevel> readAccessLevel() {
         return services::readAccessLevel(connection_, nodeId_);
     }
 
     /// @copydoc services::readUserAccessLevel
-    BitMask<AccessLevelType> readUserAccessLevel() {
+    BitMask<AccessLevel> readUserAccessLevel() {
         return services::readUserAccessLevel(connection_, nodeId_);
     }
 
@@ -555,14 +555,14 @@ public:
 
     /// @copydoc services::writeAccessLevel
     /// @return Current node instance to chain multiple methods (fluent interface)
-    Node& writeAccessLevel(BitMask<AccessLevelType> mask) {
+    Node& writeAccessLevel(BitMask<AccessLevel> mask) {
         services::writeAccessLevel(connection_, nodeId_, mask);
         return *this;
     }
 
     /// @copydoc services::writeUserAccessLevel
     /// @return Current node instance to chain multiple methods (fluent interface)
-    Node& writeUserAccessLevel(BitMask<AccessLevelType> mask) {
+    Node& writeUserAccessLevel(BitMask<AccessLevel> mask) {
         services::writeUserAccessLevel(connection_, nodeId_, mask);
         return *this;
     }
