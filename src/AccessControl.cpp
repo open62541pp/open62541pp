@@ -102,7 +102,7 @@ StatusCode AccessControlDefault::activateSession(
 
 void AccessControlDefault::closeSession([[maybe_unused]] Session& session) {}
 
-uint32_t AccessControlDefault::getUserRightsMask(
+BitMask<WriteMask> AccessControlDefault::getUserRightsMask(
     [[maybe_unused]] Session& session, [[maybe_unused]] const NodeId& nodeId
 ) {
     return 0xFFFFFFFF;

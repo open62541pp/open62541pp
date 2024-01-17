@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "open62541pp/BitMask.h"
+#include "open62541pp/Common.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/NodeId.h"
@@ -77,7 +78,7 @@ public:
     virtual void closeSession(Session& session) = 0;
 
     /// Access control for all nodes.
-    virtual uint32_t getUserRightsMask(Session& session, const NodeId& nodeId) = 0;
+    virtual BitMask<WriteMask> getUserRightsMask(Session& session, const NodeId& nodeId) = 0;
 
     /// Additional access control for variable nodes.
     virtual BitMask<AccessLevelType> getUserAccessLevel(Session& session, const NodeId& nodeId) = 0;
@@ -151,7 +152,7 @@ public:
 
     void closeSession(Session& session) override;
 
-    uint32_t getUserRightsMask(Session& session, const NodeId& nodeId) override;
+    BitMask<WriteMask> getUserRightsMask(Session& session, const NodeId& nodeId) override;
 
     BitMask<AccessLevelType> getUserAccessLevel(Session& session, const NodeId& nodeId) override;
 
