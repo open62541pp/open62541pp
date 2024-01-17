@@ -32,8 +32,8 @@ struct Login {
  * control callbacks.
  *
  * If exceptions are thrown within the access control callbacks, they are caught in the C callbacks
- * and will return the most restrictive access rights, e.g. `0x00` in `getUserAccessLevel` or
- * `false` in `allowAddNode`. A warning log message with the exception will be generated.
+ * and will return the most restrictive access rights, e.g. `AccessLevel::None` in
+ * `getUserAccessLevel` or `false` in `allowAddNode`. The exception will be logged (warning level).
  *
  * The `sessionId` can originally be both `NULL` in open62541.
  * This is the case when, for example, a MonitoredItem (the underlying Subscription) is detached

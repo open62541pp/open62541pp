@@ -162,7 +162,7 @@ TEST_CASE("Node") {
                 varNode.writeArrayDimensions({2, 3}).readArrayDimensions(),
                 std::vector<uint32_t>{2, 3}
             );
-            CHECK_EQ(varNode.writeAccessLevel(0xFF).readAccessLevel(), 0xFF);
+            CHECK_EQ(varNode.writeAccessLevel(0xFF).readAccessLevel(), uint8_t{0xFF});
             CHECK_EQ(
                 varNode.writeMinimumSamplingInterval(11.11).readMinimumSamplingInterval(), 11.11
             );
@@ -228,8 +228,8 @@ TEST_CASE("Node") {
                 {1, 1001},
                 "Property",
                 VariableAttributes{}
-                    .setWriteMask(0xFFFFFFFF)
-                    .setAccessLevel(0xFF)
+                    .setWriteMask(WriteMask::None)
+                    .setAccessLevel(AccessLevel::CurrentRead)
                     .setDataType<double>()
                     .setValueScalar(11.11)
             );

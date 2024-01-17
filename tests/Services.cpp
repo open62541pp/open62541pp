@@ -160,7 +160,7 @@ TEST_CASE("Attribute service set (server)") {
         CHECK(services::readDataType(server, id) == NodeId(0, UA_NS0ID_BASEDATATYPE));
         CHECK(services::readValueRank(server, id) == ValueRank::Any);
         CHECK(services::readArrayDimensions(server, id).empty());
-        CHECK(services::readAccessLevel(server, id) == UA_ACCESSLEVELMASK_READ);
+        CHECK(services::readAccessLevel(server, id) == AccessLevel::CurrentRead);
         const uint8_t adminUserAccessLevel = 0xFF;  // all bits set
         CHECK(services::readUserAccessLevel(server, id) == adminUserAccessLevel);
         CHECK(services::readMinimumSamplingInterval(server, id) == 0.0);

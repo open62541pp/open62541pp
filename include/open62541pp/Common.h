@@ -145,6 +145,7 @@ constexpr std::string_view getNodeClassName(NodeClass nodeClass) {
  */
 enum class AccessLevel : uint8_t {
     // clang-format off
+    None           = 0U,
     CurrentRead    = 1U << 0U,
     CurrentWrite   = 1U << 1U,
     HistoryRead    = 1U << 2U,
@@ -166,6 +167,7 @@ struct IsBitMaskEnum<AccessLevel> : std::true_type {};
  */
 enum class WriteMask : uint32_t {
     // clang-format off
+    None                    = 0U,
     AccessLevel             = 1U << 0U,
     ArrayDimensions         = 1U << 1U,
     BrowseName              = 1U << 2U,
