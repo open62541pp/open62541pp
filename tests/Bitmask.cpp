@@ -127,37 +127,18 @@ TEST_CASE("Bitmask") {
     }
 
     SUBCASE("set") {
-        Bitmask<Bit> mask;
-
-        SUBCASE("all") {
-            mask.set();
-            CHECK(mask.all());
-        }
-
-        SUBCASE("specific") {
-            mask.set(Bit::One);
-            CHECK(mask.get() == 1);
-        }
+        CHECK_EQ(Bitmask<Bit>().set().get(), 0xFFFFFFFF);
+        CHECK_EQ(Bitmask<Bit>().set(Bit::One).get(), 1);
     }
 
     SUBCASE("reset") {
-        Bitmask<Bit> mask(Bit::One | Bit::Two);
-
-        SUBCASE("all") {
-            mask.reset();
-            CHECK(mask.none());
-        }
-
-        SUBCASE("specific") {
-            mask.reset(Bit::One);
-            CHECK(mask.get() == 2);
-        }
+        CHECK_EQ(Bitmask<Bit>(Bit::One | Bit::Two).reset().get(), 0);
+        CHECK_EQ(Bitmask<Bit>(Bit::One | Bit::Two).reset(Bit::One).get(), 2);
     }
 
     SUBCASE("flip") {
-        Bitmask<Bit> mask(1);
-        mask.flip();
-        CHECK(mask.get() == 0xFFFFFFFF - 1);
+        CHECK_EQ(Bitmask<Bit>(0).flip().get(), 0xFFFFFFFF);
+        CHECK_EQ(Bitmask<Bit>(1).flip().get(), 0xFFFFFFFF - 1);
     }
 
     SUBCASE("Equality") {
