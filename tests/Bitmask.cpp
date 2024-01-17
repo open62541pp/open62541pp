@@ -84,10 +84,46 @@ TEST_CASE("Bitmask") {
         // CHECK(static_cast<int>(Bitmask<Bit>(2)) == 2);
     }
 
-    SUBCASE("get()") {
+    SUBCASE("get") {
         CHECK(Bitmask<Bit>().get() == 0);
         CHECK(Bitmask<Bit>(Bit::One).get() == 1);
         CHECK(Bitmask<Bit>(2).get() == 2);
+    }
+
+    SUBCASE("all") {
+        CHECK(Bitmask<Bit>(0x00000000).all() == false);
+        CHECK(Bitmask<Bit>(0xF0F0F0F0).all() == false);
+        CHECK(Bitmask<Bit>(0xFFFFFFFF).all());
+    }
+
+    SUBCASE("any") {
+        CHECK(Bitmask<Bit>(0x00000000).any() == false);
+        CHECK(Bitmask<Bit>(0xF0F0F0F0).any());
+        CHECK(Bitmask<Bit>(0xFFFFFFFF).any());
+    }
+
+    SUBCASE("none") {
+        CHECK(Bitmask<Bit>(0x00000000).none());
+        CHECK(Bitmask<Bit>(0xF0F0F0F0).none() == false);
+        CHECK(Bitmask<Bit>(0xFFFFFFFF).none() == false);
+    }
+
+    SUBCASE("allOf") {
+        CHECK(Bitmask<Bit>(Bit::One).allOf(Bit::One) == true);
+        CHECK(Bitmask<Bit>(Bit::One).allOf(Bit::Two) == false);
+        CHECK(Bitmask<Bit>(Bit::One).allOf(Bit::One | Bit::Two) == false);
+    }
+
+    SUBCASE("anyOf") {
+        CHECK(Bitmask<Bit>(Bit::One).anyOf(Bit::One) == true);
+        CHECK(Bitmask<Bit>(Bit::One).anyOf(Bit::Two) == false);
+        CHECK(Bitmask<Bit>(Bit::One).anyOf(Bit::One | Bit::Two) == true);
+    }
+
+    SUBCASE("noneOf") {
+        CHECK(Bitmask<Bit>(Bit::One).noneOf(Bit::One) == false);
+        CHECK(Bitmask<Bit>(Bit::One).noneOf(Bit::Two) == true);
+        CHECK(Bitmask<Bit>(Bit::One).noneOf(Bit::One | Bit::Two) == false);
     }
 
     SUBCASE("Equality") {
