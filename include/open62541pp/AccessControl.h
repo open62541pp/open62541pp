@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-#include "open62541pp/BitMask.h"
+#include "open62541pp/Bitmask.h"
 #include "open62541pp/Common.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
@@ -78,10 +78,10 @@ public:
     virtual void closeSession(Session& session) = 0;
 
     /// Access control for all nodes.
-    virtual BitMask<WriteMask> getUserRightsMask(Session& session, const NodeId& nodeId) = 0;
+    virtual Bitmask<WriteMask> getUserRightsMask(Session& session, const NodeId& nodeId) = 0;
 
     /// Additional access control for variable nodes.
-    virtual BitMask<AccessLevel> getUserAccessLevel(Session& session, const NodeId& nodeId) = 0;
+    virtual Bitmask<AccessLevel> getUserAccessLevel(Session& session, const NodeId& nodeId) = 0;
 
     /// Additional access control for method nodes.
     virtual bool getUserExecutable(Session& session, const NodeId& methodId) = 0;
@@ -152,9 +152,9 @@ public:
 
     void closeSession(Session& session) override;
 
-    BitMask<WriteMask> getUserRightsMask(Session& session, const NodeId& nodeId) override;
+    Bitmask<WriteMask> getUserRightsMask(Session& session, const NodeId& nodeId) override;
 
-    BitMask<AccessLevel> getUserAccessLevel(Session& session, const NodeId& nodeId) override;
+    Bitmask<AccessLevel> getUserAccessLevel(Session& session, const NodeId& nodeId) override;
 
     bool getUserExecutable(Session& session, const NodeId& methodId) override;
 

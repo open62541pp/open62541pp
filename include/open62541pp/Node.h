@@ -5,7 +5,7 @@
 #include <utility>  // move
 #include <vector>
 
-#include "open62541pp/BitMask.h"
+#include "open62541pp/Bitmask.h"
 #include "open62541pp/Common.h"
 #include "open62541pp/Config.h"
 #include "open62541pp/NodeIds.h"
@@ -250,7 +250,7 @@ public:
         BrowseDirection browseDirection = BrowseDirection::Both,
         const NodeId& referenceType = ReferenceTypeId::References,
         bool includeSubtypes = true,
-        BitMask<NodeClass> nodeClassMask = NodeClass::Unspecified
+        Bitmask<NodeClass> nodeClassMask = NodeClass::Unspecified
     );
 
     /// Browse referenced nodes (only local nodes).
@@ -258,13 +258,13 @@ public:
         BrowseDirection browseDirection = BrowseDirection::Both,
         const NodeId& referenceType = ReferenceTypeId::References,
         bool includeSubtypes = true,
-        BitMask<NodeClass> nodeClassMask = NodeClass::Unspecified
+        Bitmask<NodeClass> nodeClassMask = NodeClass::Unspecified
     );
 
     /// Browse child nodes (only local nodes).
     std::vector<Node> browseChildren(
         const NodeId& referenceType = ReferenceTypeId::HierarchicalReferences,
-        BitMask<NodeClass> nodeClassMask = NodeClass::Unspecified
+        Bitmask<NodeClass> nodeClassMask = NodeClass::Unspecified
     ) {
         return browseReferencedNodes(BrowseDirection::Forward, referenceType, true, nodeClassMask);
     }
@@ -309,12 +309,12 @@ public:
     }
 
     /// @copydoc services::readWriteMask
-    BitMask<WriteMask> readWriteMask() {
+    Bitmask<WriteMask> readWriteMask() {
         return services::readWriteMask(connection_, nodeId_);
     }
 
     /// @copydoc services::readUserWriteMask
-    BitMask<WriteMask> readUserWriteMask() {
+    Bitmask<WriteMask> readUserWriteMask() {
         return services::readUserWriteMask(connection_, nodeId_);
     }
 
@@ -397,12 +397,12 @@ public:
     }
 
     /// @copydoc services::readAccessLevel
-    BitMask<AccessLevel> readAccessLevel() {
+    Bitmask<AccessLevel> readAccessLevel() {
         return services::readAccessLevel(connection_, nodeId_);
     }
 
     /// @copydoc services::readUserAccessLevel
-    BitMask<AccessLevel> readUserAccessLevel() {
+    Bitmask<AccessLevel> readUserAccessLevel() {
         return services::readUserAccessLevel(connection_, nodeId_);
     }
 
@@ -431,14 +431,14 @@ public:
 
     /// @copydoc services::writeWriteMask
     /// @return Current node instance to chain multiple methods (fluent interface)
-    Node& writeWriteMask(BitMask<WriteMask> mask) {
+    Node& writeWriteMask(Bitmask<WriteMask> mask) {
         services::writeWriteMask(connection_, nodeId_, mask);
         return *this;
     }
 
     /// @copydoc services::writeWriteMask
     /// @return Current node instance to chain multiple methods (fluent interface)
-    Node& writeUserWriteMask(BitMask<WriteMask> mask) {
+    Node& writeUserWriteMask(Bitmask<WriteMask> mask) {
         services::writeUserWriteMask(connection_, nodeId_, mask);
         return *this;
     }
@@ -555,14 +555,14 @@ public:
 
     /// @copydoc services::writeAccessLevel
     /// @return Current node instance to chain multiple methods (fluent interface)
-    Node& writeAccessLevel(BitMask<AccessLevel> mask) {
+    Node& writeAccessLevel(Bitmask<AccessLevel> mask) {
         services::writeAccessLevel(connection_, nodeId_, mask);
         return *this;
     }
 
     /// @copydoc services::writeUserAccessLevel
     /// @return Current node instance to chain multiple methods (fluent interface)
-    Node& writeUserAccessLevel(BitMask<AccessLevel> mask) {
+    Node& writeUserAccessLevel(Bitmask<AccessLevel> mask) {
         services::writeUserAccessLevel(connection_, nodeId_, mask);
         return *this;
     }

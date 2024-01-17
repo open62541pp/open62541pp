@@ -5,12 +5,12 @@
 namespace opcua {
 
 /**
- * \addtogroup BitMaskAbstraction BitMask abstraction
+ * \addtogroup BitmaskAbstraction Bitmask abstraction
  * @{
  */
 
 /**
- * Trait to define an enum (class) as a bit mask and allow bitwise operations.
+ * Trait to define an enum (class) as a bitmask and allow bitwise operations.
  *
  * @code{.cpp}
  * // define enum (class)
@@ -21,82 +21,82 @@ namespace opcua {
  *
  * // allow bitwise operations
  * template <>
- * struct IsBitMaskEnum<Access> : std::true_type {};
+ * struct IsBitmaskEnum<Access> : std::true_type {};
  *
  * // use bitwise operations
  * Access mask = Access::Read | Access::Write;
  * @endcode
  */
 template <typename T>
-struct IsBitMaskEnum : std::false_type {};
+struct IsBitmaskEnum : std::false_type {};
 
 /* -------------------------------------- Bitwise operators ------------------------------------- */
 
-/// @relates IsBitMaskEnum
+/// @relates IsBitmaskEnum
 template <typename T>
-constexpr typename std::enable_if_t<IsBitMaskEnum<T>::value, T> operator&(T lhs, T rhs) noexcept {
+constexpr typename std::enable_if_t<IsBitmaskEnum<T>::value, T> operator&(T lhs, T rhs) noexcept {
     using U = typename std::underlying_type_t<T>;
     return static_cast<T>(static_cast<U>(lhs) & static_cast<U>(rhs));
 }
 
-/// @relates IsBitMaskEnum
+/// @relates IsBitmaskEnum
 template <typename T>
-constexpr typename std::enable_if_t<IsBitMaskEnum<T>::value, T> operator|(T lhs, T rhs) noexcept {
+constexpr typename std::enable_if_t<IsBitmaskEnum<T>::value, T> operator|(T lhs, T rhs) noexcept {
     using U = typename std::underlying_type_t<T>;
     return static_cast<T>(static_cast<U>(lhs) | static_cast<U>(rhs));
 }
 
-/// @relates IsBitMaskEnum
+/// @relates IsBitmaskEnum
 template <typename T>
-constexpr typename std::enable_if_t<IsBitMaskEnum<T>::value, T> operator^(T lhs, T rhs) noexcept {
+constexpr typename std::enable_if_t<IsBitmaskEnum<T>::value, T> operator^(T lhs, T rhs) noexcept {
     using U = typename std::underlying_type_t<T>;
     return static_cast<T>(static_cast<U>(lhs) ^ static_cast<U>(rhs));
 }
 
-/// @relates IsBitMaskEnum
+/// @relates IsBitmaskEnum
 template <typename T>
-constexpr typename std::enable_if_t<IsBitMaskEnum<T>::value, T> operator~(T rhs) noexcept {
+constexpr typename std::enable_if_t<IsBitmaskEnum<T>::value, T> operator~(T rhs) noexcept {
     using U = typename std::underlying_type_t<T>;
     return static_cast<T>(~static_cast<U>(rhs));
 }
 
 /* -------------------------------- Bitwise assignment operators -------------------------------- */
 
-/// @relates IsBitMaskEnum
+/// @relates IsBitmaskEnum
 template <typename T>
-constexpr typename std::enable_if_t<IsBitMaskEnum<T>::value, T> operator|=(T& lhs, T rhs) noexcept {
+constexpr typename std::enable_if_t<IsBitmaskEnum<T>::value, T> operator|=(T& lhs, T rhs) noexcept {
     using U = typename std::underlying_type_t<T>;
     lhs = static_cast<T>(static_cast<U>(lhs) | static_cast<U>(rhs));
     return lhs;
 }
 
-/// @relates IsBitMaskEnum
+/// @relates IsBitmaskEnum
 template <typename T>
-constexpr typename std::enable_if_t<IsBitMaskEnum<T>::value, T> operator&=(T& lhs, T rhs) noexcept {
+constexpr typename std::enable_if_t<IsBitmaskEnum<T>::value, T> operator&=(T& lhs, T rhs) noexcept {
     using U = typename std::underlying_type_t<T>;
     lhs = static_cast<T>(static_cast<U>(lhs) & static_cast<U>(rhs));
     return lhs;
 }
 
-/// @relates IsBitMaskEnum
+/// @relates IsBitmaskEnum
 template <typename T>
-constexpr typename std::enable_if_t<IsBitMaskEnum<T>::value, T> operator^=(T& lhs, T rhs) noexcept {
+constexpr typename std::enable_if_t<IsBitmaskEnum<T>::value, T> operator^=(T& lhs, T rhs) noexcept {
     using U = typename std::underlying_type_t<T>;
     lhs = static_cast<T>(static_cast<U>(lhs) ^ static_cast<U>(rhs));
     return lhs;
 }
 
-/* --------------------------------------- Bit mask class --------------------------------------- */
+/* ---------------------------------------- Bitmask class --------------------------------------- */
 
 /**
- * Bit mask using (scoped) enums.
- * Zero-cost abstraction to specify bit masks with enums/ints or enum classes.
+ * Bitmask using (scoped) enums.
+ * Zero-cost abstraction to specify bitmasks with enums/ints or enum classes.
  *
  * @code{.cpp}
  * // construct with scoped enums
- * BitMask<NodeClass> mask = NodeClass::Variable | NodeClass::Object;
+ * Bitmask<NodeClass> mask = NodeClass::Variable | NodeClass::Object;
  * // construct with unscoped enums or ints
- * BitMask<NodeClass> mask = UA_NODECLASS_VARIABLE | UA_NODECLASS_OBJECT;
+ * Bitmask<NodeClass> mask = UA_NODECLASS_VARIABLE | UA_NODECLASS_OBJECT;
  * @endcode
  *
  * @tparam T Enumeration type
@@ -105,22 +105,22 @@ constexpr typename std::enable_if_t<IsBitMaskEnum<T>::value, T> operator^=(T& lh
  * @see https://andreasfertig.blog/2024/01/cpp20-concepts-applied/
  */
 template <typename T>
-class BitMask {
+class Bitmask {
 public:
     static_assert(std::is_enum_v<T>);
-    static_assert(IsBitMaskEnum<T>::value);
+    static_assert(IsBitmaskEnum<T>::value);
 
     using Underlying = std::underlying_type_t<T>;
 
-    /// Create an empty bit mask.
-    constexpr BitMask() noexcept = default;
+    /// Create an empty bitmask.
+    constexpr Bitmask() noexcept = default;
 
-    /// Create a bit mask from the enumeration type.
-    constexpr BitMask(T value) noexcept  // NOLINT, implicit wanted
+    /// Create a bitmask from the enumeration type.
+    constexpr Bitmask(T value) noexcept  // NOLINT, implicit wanted
         : mask_(static_cast<Underlying>(value)) {}
 
-    /// Create a bit mask from the underlying type.
-    constexpr BitMask(Underlying value) noexcept  // NOLINT, implicit wanted
+    /// Create a bitmask from the underlying type.
+    constexpr Bitmask(Underlying value) noexcept  // NOLINT, implicit wanted
         : mask_(value) {}
 
     /// Conversion to the enum type.
@@ -144,28 +144,28 @@ private:
     Underlying mask_;
 };
 
-/// @relates BitMask
+/// @relates Bitmask
 template <typename T, typename U>
-constexpr bool operator==(BitMask<T> lhs, U rhs) noexcept {
-    return lhs.get() == BitMask<T>(rhs).get();
+constexpr bool operator==(Bitmask<T> lhs, U rhs) noexcept {
+    return lhs.get() == Bitmask<T>(rhs).get();
 }
 
-/// @relates BitMask
+/// @relates Bitmask
 template <typename T, typename U>
-constexpr bool operator!=(BitMask<T> lhs, U rhs) noexcept {
-    return lhs.get() != BitMask<T>(rhs).get();
+constexpr bool operator!=(Bitmask<T> lhs, U rhs) noexcept {
+    return lhs.get() != Bitmask<T>(rhs).get();
 }
 
-/// @relates BitMask
+/// @relates Bitmask
 template <typename T, typename U>
-constexpr bool operator==(U lhs, BitMask<T> rhs) noexcept {
-    return BitMask<T>(lhs).get() == rhs.get();
+constexpr bool operator==(U lhs, Bitmask<T> rhs) noexcept {
+    return Bitmask<T>(lhs).get() == rhs.get();
 }
 
-/// @relates BitMask
+/// @relates Bitmask
 template <typename T, typename U>
-constexpr bool operator!=(U lhs, BitMask<T> rhs) noexcept {
-    return BitMask<T>(lhs).get() != rhs.get();
+constexpr bool operator!=(U lhs, Bitmask<T> rhs) noexcept {
+    return Bitmask<T>(lhs).get() != rhs.get();
 }
 
 /**

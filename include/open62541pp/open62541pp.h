@@ -1,7 +1,7 @@
 #pragma once
 
 #include "open62541pp/AccessControl.h"
-#include "open62541pp/BitMask.h"
+#include "open62541pp/Bitmask.h"
 #include "open62541pp/Client.h"
 #include "open62541pp/Common.h"
 #include "open62541pp/Config.h"

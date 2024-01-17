@@ -3,7 +3,7 @@
 #include <cstdint>
 #include <vector>
 
-#include "open62541pp/BitMask.h"
+#include "open62541pp/Bitmask.h"
 #include "open62541pp/Common.h"
 #include "open62541pp/Span.h"
 #include "open62541pp/TypeWrapper.h"
@@ -152,7 +152,7 @@ inline LocalizedText readDescription(T& serverOrClient, const NodeId& id) {
  * Read the `WriteMask` attribute of a node.
  */
 template <typename T>
-inline BitMask<WriteMask> readWriteMask(T& serverOrClient, const NodeId& id) {
+inline Bitmask<WriteMask> readWriteMask(T& serverOrClient, const NodeId& id) {
     return readAttributeScalar<uint32_t>(serverOrClient, id, AttributeId::WriteMask);
 }
 
@@ -162,7 +162,7 @@ inline BitMask<WriteMask> readWriteMask(T& serverOrClient, const NodeId& id) {
  * In contrast to the write mask, the user write mask is taking access rights into account.
  */
 template <typename T>
-inline BitMask<WriteMask> readUserWriteMask(T& serverOrClient, const NodeId& id) {
+inline Bitmask<WriteMask> readUserWriteMask(T& serverOrClient, const NodeId& id) {
     return readAttributeScalar<uint32_t>(serverOrClient, id, AttributeId::UserWriteMask);
 }
 
@@ -269,7 +269,7 @@ inline std::vector<uint32_t> readArrayDimensions(T& serverOrClient, const NodeId
  * (read/write) and if it contains current and/or historic data.
  */
 template <typename T>
-inline BitMask<AccessLevel> readAccessLevel(T& serverOrClient, const NodeId& id) {
+inline Bitmask<AccessLevel> readAccessLevel(T& serverOrClient, const NodeId& id) {
     return readAttributeScalar<uint8_t>(serverOrClient, id, AttributeId::AccessLevel);
 }
 
@@ -280,7 +280,7 @@ inline BitMask<AccessLevel> readAccessLevel(T& serverOrClient, const NodeId& id)
  * In contrast to the access level, the user access level is taking access rights into account.
  */
 template <typename T>
-inline BitMask<AccessLevel> readUserAccessLevel(T& serverOrClient, const NodeId& id) {
+inline Bitmask<AccessLevel> readUserAccessLevel(T& serverOrClient, const NodeId& id) {
     return readAttributeScalar<uint8_t>(serverOrClient, id, AttributeId::UserAccessLevel);
 }
 
@@ -321,7 +321,7 @@ inline void writeDescription(T& serverOrClient, const NodeId& id, const Localize
  * @copydetails readWriteMask
  */
 template <typename T>
-inline void writeWriteMask(T& serverOrClient, const NodeId& id, BitMask<WriteMask> mask) {
+inline void writeWriteMask(T& serverOrClient, const NodeId& id, Bitmask<WriteMask> mask) {
     writeAttribute(serverOrClient, id, AttributeId::WriteMask, DataValue::fromScalar(mask.get()));
 }
 
@@ -331,7 +331,7 @@ inline void writeWriteMask(T& serverOrClient, const NodeId& id, BitMask<WriteMas
  * @note Cannot be written from the server.
  */
 template <typename T>
-inline void writeUserWriteMask(T& serverOrClient, const NodeId& id, BitMask<WriteMask> mask) {
+inline void writeUserWriteMask(T& serverOrClient, const NodeId& id, Bitmask<WriteMask> mask) {
     writeAttribute(
         serverOrClient, id, AttributeId::UserWriteMask, DataValue::fromScalar(mask.get())
     );
@@ -426,7 +426,7 @@ inline void writeArrayDimensions(
  * @copydetails readAccessLevel
  */
 template <typename T>
-inline void writeAccessLevel(T& serverOrClient, const NodeId& id, BitMask<AccessLevel> mask) {
+inline void writeAccessLevel(T& serverOrClient, const NodeId& id, Bitmask<AccessLevel> mask) {
     writeAttribute(serverOrClient, id, AttributeId::AccessLevel, DataValue::fromScalar(mask.get()));
 }
 
@@ -436,7 +436,7 @@ inline void writeAccessLevel(T& serverOrClient, const NodeId& id, BitMask<Access
  * @note Cannot be written from the server.
  */
 template <typename T>
-inline void writeUserAccessLevel(T& serverOrClient, const NodeId& id, BitMask<AccessLevel> mask) {
+inline void writeUserAccessLevel(T& serverOrClient, const NodeId& id, Bitmask<AccessLevel> mask) {
     writeAttribute(
         serverOrClient, id, AttributeId::UserAccessLevel, DataValue::fromScalar(mask.get())
     );

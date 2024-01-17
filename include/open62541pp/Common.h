@@ -9,7 +9,7 @@ namespace opcua {
 
 // forward declare
 template <typename T>
-struct IsBitMaskEnum;
+struct IsBitmaskEnum;
 
 /// Type index of the ::UA_TYPES array.
 using TypeIndex = uint16_t;
@@ -111,7 +111,7 @@ enum class NodeClass : int32_t {
 };
 
 template <>
-struct IsBitMaskEnum<NodeClass> : std::true_type {};
+struct IsBitmaskEnum<NodeClass> : std::true_type {};
 
 /// Get name of node class.
 constexpr std::string_view getNodeClassName(NodeClass nodeClass) {
@@ -157,7 +157,7 @@ enum class AccessLevel : uint8_t {
 };
 
 template <>
-struct IsBitMaskEnum<AccessLevel> : std::true_type {};
+struct IsBitmaskEnum<AccessLevel> : std::true_type {};
 
 /**
  * Write mask.
@@ -198,7 +198,7 @@ enum class WriteMask : uint32_t {
 };
 
 template <>
-struct IsBitMaskEnum<WriteMask> : std::true_type {};
+struct IsBitmaskEnum<WriteMask> : std::true_type {};
 
 /**
  * Value rank.
@@ -233,7 +233,7 @@ enum class EventNotifier : uint8_t {
 };
 
 template <>
-struct IsBitMaskEnum<EventNotifier> : std::true_type {};
+struct IsBitmaskEnum<EventNotifier> : std::true_type {};
 
 /**
  * Modelling rules.

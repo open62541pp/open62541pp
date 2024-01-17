@@ -7,7 +7,7 @@
 #include <utility>  // forward
 #include <variant>
 
-#include "open62541pp/BitMask.h"
+#include "open62541pp/Bitmask.h"
 #include "open62541pp/Common.h"
 #include "open62541pp/NodeIds.h"  // ReferenceTypeId
 #include "open62541pp/Span.h"
@@ -195,7 +195,7 @@ public:
 
 /**
  * Node attributes mask.
- * Bit mask used in the node attributes parameters to specify which attributes are set.
+ * Bitmask used in the node attributes parameters to specify which attributes are set.
  * @see UA_NodeAttributesMask
  */
 enum class NodeAttributesMask : uint32_t {
@@ -239,7 +239,7 @@ enum class NodeAttributesMask : uint32_t {
 };
 
 template <>
-struct IsBitMaskEnum<NodeAttributesMask> : std::true_type {};
+struct IsBitmaskEnum<NodeAttributesMask> : std::true_type {};
 
 // Specifialized macros to generate getters/setters for `UA_*Attribute` classes.
 // The `specifiedAttributes` mask is automatically updated in the setter methods.
@@ -295,7 +295,7 @@ struct IsBitMaskEnum<NodeAttributesMask> : std::true_type {};
 
 // NOLINTNEXTLINT
 #define UAPP_NODEATTR_COMMON                                                                       \
-    UAPP_COMPOSED_GETTER(BitMask<NodeAttributesMask>, getSpecifiedAttributes, specifiedAttributes) \
+    UAPP_COMPOSED_GETTER(Bitmask<NodeAttributesMask>, getSpecifiedAttributes, specifiedAttributes) \
     UAPP_NODEATTR_WRAPPER(                                                                         \
         LocalizedText, DisplayName, displayName, UA_NODEATTRIBUTESMASK_DISPLAYNAME                 \
     )                                                                                              \
@@ -303,10 +303,10 @@ struct IsBitMaskEnum<NodeAttributesMask> : std::true_type {};
         LocalizedText, Description, description, UA_NODEATTRIBUTESMASK_DESCRIPTION                 \
     )                                                                                              \
     UAPP_NODEATTR_BITMASK(                                                                         \
-        BitMask<WriteMask>, WriteMask, writeMask, UA_NODEATTRIBUTESMASK_WRITEMASK                  \
+        Bitmask<WriteMask>, WriteMask, writeMask, UA_NODEATTRIBUTESMASK_WRITEMASK                  \
     )                                                                                              \
     UAPP_NODEATTR_BITMASK(                                                                         \
-        BitMask<WriteMask>, UserWriteMask, userWriteMask, UA_NODEATTRIBUTESMASK_USERWRITEMASK      \
+        Bitmask<WriteMask>, UserWriteMask, userWriteMask, UA_NODEATTRIBUTESMASK_USERWRITEMASK      \
     )
 
 /**
@@ -333,7 +333,7 @@ public:
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR_BITMASK(
-        BitMask<EventNotifier>, EventNotifier, eventNotifier, UA_NODEATTRIBUTESMASK_EVENTNOTIFIER
+        Bitmask<EventNotifier>, EventNotifier, eventNotifier, UA_NODEATTRIBUTESMASK_EVENTNOTIFIER
     )
 };
 
@@ -381,10 +381,10 @@ public:
         UA_NODEATTRIBUTESMASK_ARRAYDIMENSIONS
     )
     UAPP_NODEATTR_BITMASK(
-        BitMask<AccessLevel>, AccessLevel, accessLevel, UA_NODEATTRIBUTESMASK_ACCESSLEVEL
+        Bitmask<AccessLevel>, AccessLevel, accessLevel, UA_NODEATTRIBUTESMASK_ACCESSLEVEL
     )
     UAPP_NODEATTR_BITMASK(
-        BitMask<AccessLevel>,
+        Bitmask<AccessLevel>,
         UserAccessLevel,
         userAccessLevel,
         UA_NODEATTRIBUTESMASK_USERACCESSLEVEL
@@ -526,7 +526,7 @@ public:
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR(bool, IsAbstract, containsNoLoops, UA_NODEATTRIBUTESMASK_CONTAINSNOLOOPS)
     UAPP_NODEATTR_BITMASK(
-        BitMask<EventNotifier>, EventNotifier, eventNotifier, UA_NODEATTRIBUTESMASK_EVENTNOTIFIER
+        Bitmask<EventNotifier>, EventNotifier, eventNotifier, UA_NODEATTRIBUTESMASK_EVENTNOTIFIER
     )
 };
 
@@ -875,7 +875,7 @@ enum class BrowseResultMask : uint32_t {
 };
 
 template <>
-struct IsBitMaskEnum<BrowseResultMask> : std::true_type {};
+struct IsBitmaskEnum<BrowseResultMask> : std::true_type {};
 
 /**
  * UA_BrowseDescription wrapper class.
@@ -890,16 +890,16 @@ public:
         BrowseDirection browseDirection,
         NodeId referenceTypeId = ReferenceTypeId::References,
         bool includeSubtypes = true,
-        BitMask<NodeClass> nodeClassMask = NodeClass::Unspecified,
-        BitMask<BrowseResultMask> resultMask = BrowseResultMask::All
+        Bitmask<NodeClass> nodeClassMask = NodeClass::Unspecified,
+        Bitmask<BrowseResultMask> resultMask = BrowseResultMask::All
     );
 
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getNodeId, nodeId)
     UAPP_COMPOSED_GETTER_CAST(BrowseDirection, getBrowseDirection, browseDirection)
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getReferenceTypeId, referenceTypeId)
     UAPP_COMPOSED_GETTER(bool, getIncludeSubtypes, includeSubtypes)
-    UAPP_COMPOSED_GETTER(BitMask<NodeClass>, getNodeClassMask, nodeClassMask)
-    UAPP_COMPOSED_GETTER(BitMask<BrowseResultMask>, getResultMask, resultMask)
+    UAPP_COMPOSED_GETTER(Bitmask<NodeClass>, getNodeClassMask, nodeClassMask)
+    UAPP_COMPOSED_GETTER(Bitmask<BrowseResultMask>, getResultMask, resultMask)
 };
 
 /**

@@ -25,7 +25,7 @@ inline static void assign(T src, Native& dst) noexcept {
 }
 
 template <typename T, typename Native>
-inline static void assign(BitMask<T> src, Native& dst) noexcept {
+inline static void assign(Bitmask<T> src, Native& dst) noexcept {
     dst = src.get();
 }
 
@@ -198,8 +198,8 @@ BrowseDescription::BrowseDescription(
     BrowseDirection browseDirection,
     NodeId referenceTypeId,
     bool includeSubtypes,
-    BitMask<NodeClass> nodeClassMask,
-    BitMask<BrowseResultMask> resultMask
+    Bitmask<NodeClass> nodeClassMask,
+    Bitmask<BrowseResultMask> resultMask
 ) {
     assign(std::move(nodeId), handle()->nodeId);
     assign(browseDirection, handle()->browseDirection);

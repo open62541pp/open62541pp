@@ -4,7 +4,7 @@ add_executable(
     open62541pp_tests
     main.cpp
     AccessControl.cpp
-    BitMask.cpp
+    Bitmask.cpp
     Client.cpp
     Crypto.cpp
     CustomAccessControl.cpp

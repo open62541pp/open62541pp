@@ -15,7 +15,7 @@ class AccessControlTest : public AccessControlDefault {
 public:
     using AccessControlDefault::AccessControlDefault;
 
-    BitMask<AccessLevel> getUserAccessLevel(
+    Bitmask<AccessLevel> getUserAccessLevel(
         [[maybe_unused]] Session& session, [[maybe_unused]] const NodeId& nodeId
     ) override {
         throw std::runtime_error("This exception should result in most restrictive access");
