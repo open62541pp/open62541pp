@@ -117,7 +117,7 @@ public:
 
     /// Create a bitmask from the enumeration type.
     constexpr Bitmask(T mask) noexcept  // NOLINT, implicit wanted
-        : mask_(static_cast<Underlying>(mask)) {}
+        : mask_(toUnderlying(mask)) {}
 
     /// Create a bitmask from the underlying type.
     constexpr Bitmask(Underlying mask) noexcept  // NOLINT, implicit wanted
@@ -148,7 +148,7 @@ public:
 
     /// Set specified bits.
     constexpr Bitmask& set(T mask) noexcept {
-        mask_ |= static_cast<Underlying>(mask);
+        mask_ |= toUnderlying(mask);
         return *this;
     }
 
@@ -160,7 +160,7 @@ public:
 
     /// Reset specified bits.
     constexpr Bitmask& reset(T mask) noexcept {
-        mask_ &= ~static_cast<Underlying>(mask);
+        mask_ &= ~toUnderlying(mask);
         return *this;
     }
 
@@ -177,7 +177,7 @@ public:
 
     /// Check if all of the specified bits are set.
     constexpr bool allOf(T mask) const noexcept {
-        return (mask_ & static_cast<Underlying>(mask)) == static_cast<Underlying>(mask);
+        return (mask_ & toUnderlying(mask)) == toUnderlying(mask);
     }
 
     /// Check if any bits are set.
@@ -187,7 +187,7 @@ public:
 
     /// Check if any of the specified bits are set.
     constexpr bool anyOf(T mask) const noexcept {
-        return (mask_ & static_cast<Underlying>(mask)) != empty;
+        return (mask_ & toUnderlying(mask)) != empty;
     }
 
     /// Check if none bits are set.
@@ -197,10 +197,14 @@ public:
 
     /// Check if none of the specified bits are set.
     constexpr bool noneOf(T mask) const noexcept {
-        return (mask_ & static_cast<Underlying>(mask)) == empty;
+        return (mask_ & toUnderlying(mask)) == empty;
     }
 
 private:
+    static constexpr Underlying toUnderlying(T mask) noexcept {
+        return static_cast<Underlying>(mask);
+    }
+
     static constexpr Underlying empty{};
     Underlying mask_{};
 };
