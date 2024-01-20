@@ -82,7 +82,7 @@ configure_file(
 
 file(GLOB_RECURSE open62541pp_headers "${PROJECT_SOURCE_DIR}/include/*.h")
 file(GLOB_RECURSE open62541pp_examples "${PROJECT_SOURCE_DIR}/examples/*.cpp")
-file(GLOB open62541pp_doc_files "*.dox" "*.md" "snippets/*")
+file(GLOB_RECURSE open62541pp_doc_files "*.dox" "*.md" "fragments/*")
 
 add_custom_command(
     OUTPUT ${doxygen_html_dir}/index.html  # as dummy dependency for target

@@ -91,7 +91,6 @@ using DataChangeNotificationCallback =
  * @param subId Subscription identifier (`0U` for local (server-side) monitored item)
  * @param monId MonitoredItem identifier
  * @param eventFields Event fields
- * @ingroup MonitoredIte
  */
 using EventNotificationCallback =
     std::function<void(uint32_t subId, uint32_t monId, Span<const Variant> eventFields)>;
