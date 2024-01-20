@@ -30,3 +30,8 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: build/doc_html
+      - uses: actions/upload-artifact@v4
+        with:
+          name: doc-html
+          path: build/doc_html/
+          compression-level: 1
