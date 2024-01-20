@@ -1,0 +1,2 @@
+Indicates whether the `Value` attribute of the variable node is an array and how many dimensions the array has.
+@see ValueRank

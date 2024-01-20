@@ -1,0 +1,3 @@
+Specifies (in milliseconds) how fast the server can reasonably sample the value for changes.
+A minimum sampling interval of `0` indicates that the server is to monitor the item continuously.
+A minimum sampling interval of `-1` means indeterminate.

@@ -1,0 +1,2 @@
+Exposes the possibilities of a client to write the attributes of the node.
+In contrast to the write mask, the user write mask is taking access rights into account.

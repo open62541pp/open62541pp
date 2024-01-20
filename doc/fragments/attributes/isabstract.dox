@@ -1,0 +1,1 @@
+If a reference is abstract, no reference of this type shall exist, only of its subtypes.
