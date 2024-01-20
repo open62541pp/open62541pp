@@ -47,7 +47,7 @@ opcua::services::readValueAsync(
 ```
 
 The status code `opcua::StatusCode` needs to be checked to determine the validity of the result.
-The callback is executed within the client's or server's event loop. Please make sure not to block the event loop with synchronous requests.
+The callback is executed within the client's or server's event loop. Please make sure not to block the event loop. Waiting for asynchronous results within the callback will block the further execution of the event loop.
 
 ### Future completion token
 
