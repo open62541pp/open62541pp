@@ -52,7 +52,8 @@ public:
     NodeId(uint16_t namespaceIndex, ByteString identifier) noexcept;
 
     /// Create NodeId from Type (type id).
-    NodeId(Type type) noexcept  // NOLINT, implicit wanted
+    [[deprecated("Use the constructor NodeId(DataTypeId) instead, the Type enum will be removed"
+    )]] NodeId(Type type) noexcept  // NOLINT, implicit wanted
         : NodeId(UA_TYPES[static_cast<TypeIndex>(type)].typeId) {}  // NOLINT
 
     /// Create NodeId from DataTypeId.

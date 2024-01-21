@@ -97,13 +97,13 @@ public:
     explicit String(std::string_view str);
 
     /// Implicit conversion to std::string_view.
-    operator std::string_view() const {  // NOLINT, implicit wanted
+    operator std::string_view() const noexcept {  // NOLINT, implicit wanted
         return get();
     }
 
     bool empty() const noexcept;
 
-    std::string_view get() const;
+    std::string_view get() const noexcept;
 };
 
 bool operator==(const String& lhs, std::string_view rhs) noexcept;
@@ -122,9 +122,9 @@ public:
     // NOLINTNEXTLINE, false positive?
     using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
 
-    Guid(uint32_t data1, uint16_t data2, uint16_t data3, std::array<uint8_t, 8> data4);
+    Guid(uint32_t data1, uint16_t data2, uint16_t data3, std::array<uint8_t, 8> data4) noexcept;
 
-    static Guid random();
+    static Guid random() noexcept;
 
     std::string toString() const;
 };
@@ -159,7 +159,7 @@ public:
 
     bool empty() const noexcept;
 
-    std::string_view get() const;
+    std::string_view get() const noexcept;
 };
 
 bool operator==(const ByteString& lhs, std::string_view rhs) noexcept;
@@ -178,14 +178,9 @@ public:
 
     explicit XmlElement(std::string_view str);
 
-    /// Implicit conversion to std::string_view.
-    operator std::string_view() const {  // NOLINT, implicit wanted
-        return get();
-    }
-
     bool empty() const noexcept;
 
-    std::string_view get() const;
+    std::string_view get() const noexcept;
 };
 
 std::ostream& operator<<(std::ostream& os, const XmlElement& xmlElement);
@@ -203,7 +198,7 @@ public:
 
     uint16_t getNamespaceIndex() const noexcept;
 
-    std::string_view getName() const;
+    std::string_view getName() const noexcept;
 };
 
 /**
@@ -222,9 +217,9 @@ public:
 
     LocalizedText(std::string_view locale, std::string_view text, bool assertLocaleFormat = true);
 
-    std::string_view getText() const;
+    std::string_view getText() const noexcept;
 
-    std::string_view getLocale() const;
+    std::string_view getLocale() const noexcept;
 };
 
 /**
@@ -257,8 +252,17 @@ public:
 
 using NumericRangeDimension = UA_NumericRangeDimension;
 
-bool operator==(const NumericRangeDimension& lhs, const NumericRangeDimension& rhs) noexcept;
-bool operator!=(const NumericRangeDimension& lhs, const NumericRangeDimension& rhs) noexcept;
+inline bool operator==(
+    const NumericRangeDimension& lhs, const NumericRangeDimension& rhs
+) noexcept {
+    return (lhs.min == rhs.min) && (lhs.max == rhs.max);
+}
+
+inline bool operator!=(
+    const NumericRangeDimension& lhs, const NumericRangeDimension& rhs
+) noexcept {
+    return !(lhs == rhs);
+}
 
 /**
  * Numeric range to indicate subsets of (multidimensional) arrays.
@@ -269,14 +273,18 @@ bool operator!=(const NumericRangeDimension& lhs, const NumericRangeDimension& r
  */
 class NumericRange {
 public:
-    NumericRange();
+    NumericRange() = default;
     explicit NumericRange(std::string_view encodedRange);
     explicit NumericRange(std::vector<NumericRangeDimension> dimensions);
     explicit NumericRange(const UA_NumericRange& native);
 
-    bool empty() const noexcept;
+    bool empty() const noexcept {
+        return dimensions_.empty();
+    }
 
-    const std::vector<NumericRangeDimension>& get() const noexcept;
+    const std::vector<NumericRangeDimension>& get() const noexcept {
+        return dimensions_;
+    }
 
     std::string toString() const;
 

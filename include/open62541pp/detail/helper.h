@@ -131,16 +131,17 @@ UA_String toNativeString(std::string_view src) noexcept;
 [[nodiscard]] UA_String allocNativeString(std::string_view src);
 
 /// Check if UA_String is empty
-constexpr bool isEmpty(const UA_String& value) {
-    return (value.data == nullptr) || (value.length == 0);
+constexpr bool isEmpty(const UA_String& value) noexcept {
+    return (value.data == nullptr) || (value.length == 0U);
 }
 
 /// Convert UA_String to std::string_view
-constexpr std::string_view toStringView(const UA_String& src) {
+/// Can be marked noexcept: https://stackoverflow.com/a/62061549/9967707
+inline std::string_view toStringView(const UA_String& src) noexcept {
     if (isEmpty(src)) {
         return {};
     }
-    return {(char*)src.data, src.length};  // NOLINT
+    return {(const char*)src.data, src.length};  // NOLINT
 }
 
 /// Convert UA_String to std::string

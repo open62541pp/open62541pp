@@ -214,7 +214,7 @@ If you build and install this package to your system, a `open62541ppConfig.cmake
 The installed library can be found and linked within CMake:
 
 ```cmake 
-find_package(open62541pp::open62541pp CONFIG REQUIRED)
+find_package(open62541pp CONFIG REQUIRED)
 target_link_libraries(myexecutable PRIVATE open62541pp::open62541pp)
 ```
 
