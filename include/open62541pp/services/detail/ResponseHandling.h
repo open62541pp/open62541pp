@@ -81,15 +81,24 @@ struct AttributeHandlerScalar {
     static auto fromDataValue(DataValue&& dv) {
         return dv.getValue().getScalar<Type>();
     }
+
+    template <typename U>
+    static auto toDataValue(U&& value) {
+        return DataValue::fromScalar(std::forward<U>(value));
+    }
 };
 
 template <typename T>
 struct AttributeHandlerScalar<T, std::enable_if_t<std::is_enum_v<T>>> {
     using Type = T;
-    using UnderlyingType = std::underlying_type_t<T>;
+    using UnderlyingType = std::underlying_type_t<Type>;
 
     static auto fromDataValue(DataValue&& dv) {
         return static_cast<Type>(dv.getValue().getScalar<UnderlyingType>());
+    }
+
+    static auto toDataValue(Type value) {
+        return DataValue::fromScalar(static_cast<UnderlyingType>(value));
     }
 };
 
@@ -143,6 +152,13 @@ struct AttributeHandler<AttributeId::Value> {
     static auto fromDataValue(DataValue&& dv) {
         return dv.getValue();
     }
+
+    static auto toDataValue(const Variant& value) {
+        // TODO: avoid copy, proxy?
+        DataValue dv;
+        dv.setValue(value);
+        return dv;
+    }
 };
 
 template <>
@@ -160,6 +176,10 @@ struct AttributeHandler<AttributeId::ArrayDimensions> {
             return dv.getValue().getArrayCopy<uint32_t>();
         }
         return std::vector<uint32_t>{};
+    }
+
+    static auto toDataValue(Span<const uint32_t> dimensions) {
+        return DataValue::fromArray(dimensions);
     }
 };
 
