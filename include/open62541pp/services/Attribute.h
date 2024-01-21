@@ -207,13 +207,6 @@ inline DataValue readDataValue(T& serverOrClient, const NodeId& id) {
     return readAttribute(serverOrClient, id, AttributeId::Value, TimestampsToReturn::Both);
 }
 
-/// @copydoc readDataValue
-template <typename T>
-[[deprecated("No performance benefit to pass DataValue by reference, return by value instead")]]
-inline void readDataValue(T& serverOrClient, const NodeId& id, DataValue& value) {
-    value = readDataValue(serverOrClient, id);
-}
-
 /**
  * Read the `Value` attribute of a variable node as a Variant object.
  */
@@ -221,13 +214,6 @@ template <typename T>
 inline Variant readValue(T& serverOrClient, const NodeId& id) {
     DataValue dv = readAttribute(serverOrClient, id, AttributeId::Value);
     return std::move(dv.getValue());
-}
-
-/// @copydoc readValue
-template <typename T>
-[[deprecated("No performance benefit to pass Variant by reference, return by value instead.")]]
-inline void readValue(T& serverOrClient, const NodeId& id, Variant& value) {
-    value = readValue(serverOrClient, id);
 }
 
 /**
