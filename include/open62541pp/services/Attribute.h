@@ -12,6 +12,7 @@
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/async.h"
 #include "open62541pp/open62541.h"
+#include "open62541pp/services/detail/AttributeHandler.h"
 #include "open62541pp/services/detail/ClientService.h"
 #include "open62541pp/services/detail/RequestHandling.h"
 #include "open62541pp/services/detail/ResponseHandling.h"
