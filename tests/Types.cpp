@@ -623,6 +623,26 @@ TEST_CASE("Variant") {
         var.setArrayCopy<const int>({1, 2, 3});  // TODO: avoid manual template types
     }
 
+    SUBCASE("Set/get array with std::vector<bool> (copy") {
+        // std::vector<bool> is a possibly space optimized template specialization which caused
+        // several problems. (See https://github.com/open62541pp/open62541pp/issues/164)
+        Variant var;
+        std::vector<bool> array{true, false, true};
+
+        SUBCASE("Copy from iterator") {
+            var.setArrayCopy(array.begin(), array.end());
+        }
+
+        SUBCASE("Copy directly") {
+            var.setArrayCopy(array);
+        }
+
+        CHECK(var.isType(Type::Boolean));
+        CHECK(var.getArrayLength() == array.size());
+
+        CHECK(var.getArrayCopy<bool>() == array);
+    }
+
     SUBCASE("Set/get non-builtin data types") {
         using CustomType = UA_WriteValue;
         const auto& dt = UA_TYPES[UA_TYPES_WRITEVALUE];

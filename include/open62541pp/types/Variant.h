@@ -311,8 +311,14 @@ public:
 
     /// @overload
     template <typename ArrayLike, typename = EnableIfNoSpan<ArrayLike>>
-    void setArrayCopy(ArrayLike&& array) noexcept {
-        setArrayCopy(Span{std::forward<ArrayLike>(array)});
+    void setArrayCopy(ArrayLike&& array) {
+        using ValueType = typename std::remove_reference_t<ArrayLike>::value_type;
+        using SpanType = Span<const ValueType>;
+        if constexpr (std::is_constructible_v<SpanType, ArrayLike>) {
+            setArrayCopy(Span{std::forward<ArrayLike>(array)});
+        } else {
+            setArrayCopy(array.begin(), array.end());
+        }
     }
 
     /// Copy array to variant with custom data type.
@@ -323,8 +329,14 @@ public:
 
     /// @overload
     template <typename ArrayLike, typename = EnableIfNoSpan<ArrayLike>>
-    void setArrayCopy(ArrayLike&& array, const UA_DataType& dataType) noexcept {
-        setArrayCopy(Span{std::forward<ArrayLike>(array)}, dataType);
+    void setArrayCopy(ArrayLike&& array, const UA_DataType& dataType) {
+        using ValueType = typename std::remove_reference_t<ArrayLike>::value_type;
+        using SpanType = Span<const ValueType>;
+        if constexpr (std::is_constructible_v<SpanType, ArrayLike>) {
+            setArrayCopy(Span{std::forward<ArrayLike>(array)}, dataType);
+        } else {
+            setArrayCopy(array.begin(), array.end(), dataType);
+        }
     }
 
     /// Copy range of elements as array to variant.
@@ -483,7 +495,7 @@ void Variant::setArrayCopyImpl(InputIt first, InputIt last, const UA_DataType& d
     using ValueType = typename std::iterator_traits<InputIt>::value_type;
     const size_t size = std::distance(first, last);
     auto native = detail::allocateArrayUniquePtr<ValueType>(size, dataType);
-    std::transform(first, last, native.get(), [&](auto&& value) {
+    std::transform(first, last, native.get(), [&](const ValueType& value) {
         return detail::copy(value, dataType);
     });
     setArrayImpl(native.release(), size, dataType, UA_VARIANT_DATA);  // move ownership
