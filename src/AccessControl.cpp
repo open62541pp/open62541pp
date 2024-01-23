@@ -102,13 +102,13 @@ StatusCode AccessControlDefault::activateSession(
 
 void AccessControlDefault::closeSession([[maybe_unused]] Session& session) {}
 
-uint32_t AccessControlDefault::getUserRightsMask(
+Bitmask<WriteMask> AccessControlDefault::getUserRightsMask(
     [[maybe_unused]] Session& session, [[maybe_unused]] const NodeId& nodeId
 ) {
     return 0xFFFFFFFF;
 }
 
-uint8_t AccessControlDefault::getUserAccessLevel(
+Bitmask<AccessLevel> AccessControlDefault::getUserAccessLevel(
     [[maybe_unused]] Session& session, [[maybe_unused]] const NodeId& nodeId
 ) {
     return 0xFF;

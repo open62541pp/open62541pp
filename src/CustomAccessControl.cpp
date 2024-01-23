@@ -128,7 +128,7 @@ static UA_UInt32 getUserRightsMask(
 ) {
     return invokeAccessCallback(server, "getUserRightsMask", uint32_t{}, [&] {
         auto session = getSession(ac, sessionId);
-        return getAccessControl(ac).getUserRightsMask(session, asWrapperRef<NodeId>(nodeId));
+        return getAccessControl(ac).getUserRightsMask(session, asWrapperRef<NodeId>(nodeId)).get();
     });
 }
 
@@ -142,7 +142,7 @@ static UA_Byte getUserAccessLevel(
 ) {
     return invokeAccessCallback(server, "getUserAccessLevel", uint8_t{}, [&] {
         auto session = getSession(ac, sessionId);
-        return getAccessControl(ac).getUserAccessLevel(session, asWrapperRef<NodeId>(nodeId));
+        return getAccessControl(ac).getUserAccessLevel(session, asWrapperRef<NodeId>(nodeId)).get();
     });
 }
 
