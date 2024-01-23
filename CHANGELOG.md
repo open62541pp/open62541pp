@@ -20,6 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New function `void throwIfBad(UA_StatusCode)` (#153)
 - New function `UA_DataType& getDataType<T>()` (#154)
 - Add missing `noexcept` specifiers (#160)
+- `AccessLevel`, `WriteMask` and `EventNotifier` enum classes (#163)
+- `Bitmask<T>` type to allow both enum classes and native enums/ints to define bitmasks (#163)
 
 ### Changed
 
@@ -36,6 +38,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `Node::readArray<T>()`, use `Node::readValueArray<T>()` instead
   - `services::readDataValue(T&, const NodeId&, DataValue&)`, use `services::readDataValue(T&, const NodeId&)` instead
   - `services::readValue(T&, const NodeId&, Variant&)`, use `services::readValue(T&, const NodeId&)` instead
+- Use `Bitmask<Enum>` instead of integers (#163)
+  - Use `Bitmask<AccessLevel>` instead of `uint8_t` with implicit conversions to/from `uint8_t`
+  - Use `Bitmask<WriteMask>` instead of `uint32_t` with implicit conversions to/from `uint32_t`
+  - Virtual function `AccessControlBase::getUserRightsMask` returns `Bitmask<WriteMask>` instead of `uint32_t`
+  - Virtual function `AccessControlBase::getUserAccessLevel` returns `Bitmask<AccessLevel>` instead of `uint8_t`
+  - Implicit conversion from `Bitmask<T>` to underlying integer are deprecated and will be made explicit in the future.
+    Please migrate to `Bitmask<T>::get()`.
 
 ### Fixed
 
