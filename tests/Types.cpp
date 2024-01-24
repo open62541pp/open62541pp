@@ -617,9 +617,9 @@ TEST_CASE("Variant") {
         var.setArrayCopy<const int>({1, 2, 3});  // TODO: avoid manual template types
     }
 
-    SUBCASE("Set/get array with std::vector<bool> (copy") {
+    SUBCASE("Set/get array with std::vector<bool> (copy)") {
         // std::vector<bool> is a possibly space optimized template specialization which caused
-        // several problems. (See https://github.com/open62541pp/open62541pp/issues/164)
+        // several problems: https://github.com/open62541pp/open62541pp/issues/164
         Variant var;
         std::vector<bool> array{true, false, true};
 
@@ -631,9 +631,8 @@ TEST_CASE("Variant") {
             var.setArrayCopy(array);
         }
 
-        CHECK(var.isType(Type::Boolean));
         CHECK(var.getArrayLength() == array.size());
-
+        CHECK(var.isType<bool>());
         CHECK(var.getArrayCopy<bool>() == array);
     }
 
