@@ -133,7 +133,6 @@ add_library(
     src/services/View.cpp
     src/types/Builtin.cpp
     src/types/Composed.cpp
-    src/types/DataValue.cpp
     src/types/DateTime.cpp
     src/types/ExtensionObject.cpp
     src/types/NodeId.cpp

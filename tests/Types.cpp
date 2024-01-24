@@ -773,6 +773,30 @@ TEST_CASE("DataValue") {
             CHECK(dv.getStatusCode() == statusCode);
         }
     }
+
+    SUBCASE("getValue (lvalue & rvalue)") {
+        DataValue dv(Variant::fromScalar(11));
+        void* data = dv.getValue().data();
+
+        Variant var;
+        SUBCASE("rvalue") {
+            var = dv.getValue();
+            CHECK(var.data() != data);  // copy
+        }
+        SUBCASE("const rvalue") {
+            var = std::as_const(dv).getValue();
+            CHECK(var.data() != data);  // copy
+        }
+        SUBCASE("lvalue") {
+            var = std::move(dv).getValue();
+            CHECK(var.data() == data);  // move
+        }
+        SUBCASE("const lvalue") {
+            var = std::move(std::as_const(dv)).getValue();
+            CHECK(var.data() != data);  // can not move const -> copy
+        }
+        CHECK(var.getScalar<int>() == 11);
+    }
 }
 
 TEST_CASE("ExtensionObject") {
