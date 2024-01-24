@@ -56,9 +56,25 @@ public:
     bool hasStatusCode() const noexcept;
 
     /// Get value.
-    Variant& getValue() noexcept;
+    Variant& getValue() & noexcept {
+        return asWrapper<Variant>(handle()->value);
+    }
+
     /// Get value.
-    const Variant& getValue() const noexcept;
+    const Variant& getValue() const& noexcept {
+        return asWrapper<Variant>(handle()->value);
+    }
+
+    /// Get value (rvalue).
+    Variant&& getValue() && noexcept {
+        return static_cast<Variant&&>(asWrapper<Variant>(handle()->value));
+    }
+
+    /// Get value (rvalue).
+    const Variant&& getValue() const&& noexcept {
+        return static_cast<const Variant&&>(asWrapper<Variant>(handle()->value));
+    }
+
     /// Get source timestamp for the value.
     DateTime getSourceTimestamp() const noexcept;
     /// Get server timestamp for the value.

@@ -51,14 +51,6 @@ bool DataValue::hasStatusCode() const noexcept {
     return handle()->hasStatus;
 }
 
-Variant& DataValue::getValue() noexcept {
-    return asWrapper<Variant>(handle()->value);
-}
-
-const Variant& DataValue::getValue() const noexcept {
-    return asWrapper<Variant>(handle()->value);
-}
-
 DateTime DataValue::getSourceTimestamp() const noexcept {
     return DateTime(handle()->sourceTimestamp);  // NOLINT
 }
