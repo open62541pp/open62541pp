@@ -19,8 +19,11 @@ namespace opcua {
  */
 class DataValue : public TypeWrapper<UA_DataValue, UA_TYPES_DATAVALUE> {
 public:
-    // NOLINTNEXTLINE, false positive?
     using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
+
+    explicit DataValue(Variant value) noexcept {
+        setValue(std::move(value));
+    }
 
     DataValue(
         Variant value,
@@ -31,22 +34,18 @@ public:
         std::optional<StatusCode> statusCode
     ) noexcept;
 
-    /// Create Variant from scalar value.
+    /// Create DataValue from scalar value.
     /// @see Variant::fromScalar
     template <typename... Args>
     [[nodiscard]] static DataValue fromScalar(Args&&... args) {
-        DataValue dv;
-        dv.setValue(Variant::fromScalar(std::forward<Args>(args)...));
-        return dv;
+        return DataValue(Variant::fromScalar(std::forward<Args>(args)...));
     }
 
-    /// Create Variant from array.
+    /// Create DataValue from array.
     /// @see Variant::fromArray
     template <typename... Args>
     [[nodiscard]] static DataValue fromArray(Args&&... args) {
-        DataValue dv;
-        dv.setValue(Variant::fromArray(std::forward<Args>(args)...));
-        return dv;
+        return DataValue(Variant::fromArray(std::forward<Args>(args)...));
     }
 
     bool hasValue() const noexcept;
