@@ -198,6 +198,22 @@ inline LocalizedText readInverseName(T& serverOrClient, const NodeId& id) {
 }
 
 /**
+ * Read the `ContainsNoLoops` attribute of a view node.
+ */
+template <typename T>
+inline bool readContainsNoLoops(T& serverOrClient, const NodeId& id) {
+    return readAttributeScalar<bool>(serverOrClient, id, AttributeId::ContainsNoLoops);
+}
+
+/**
+ * Read the `EventNotifier` attribute of an object or view node.
+ */
+template <typename T>
+inline Bitmask<EventNotifier> readEventNotifier(T& serverOrClient, const NodeId& id) {
+    return readAttributeScalar<uint8_t>(serverOrClient, id, AttributeId::EventNotifier);
+}
+
+/**
  * Read the `Value` attribute of a variable node as a DataValue object.
  */
 template <typename T>
@@ -282,6 +298,30 @@ inline double readMinimumSamplingInterval(T& serverOrClient, const NodeId& id) {
     return readAttributeScalar<double>(serverOrClient, id, AttributeId::MinimumSamplingInterval);
 }
 
+/**
+ * Read the `Historizing` attribute of a variable node.
+ */
+template <typename T>
+inline bool readHistorizing(T& serverOrClient, const NodeId& id) {
+    return readAttributeScalar<bool>(serverOrClient, id, AttributeId::Historizing);
+}
+
+/**
+ * Read the `Executable` attribute of a method node.
+ */
+template <typename T>
+inline bool readExecutable(T& serverOrClient, const NodeId& id) {
+    return readAttributeScalar<bool>(serverOrClient, id, AttributeId::Executable);
+}
+
+/**
+ * Read the `UserExecutable` attribute of a method node.
+ */
+template <typename T>
+inline bool readUserExecutable(T& serverOrClient, const NodeId& id) {
+    return readAttributeScalar<bool>(serverOrClient, id, AttributeId::UserExecutable);
+}
+
 /* ---------------------------------------------------------------------------------------------- */
 
 /**
@@ -348,6 +388,28 @@ inline void writeSymmetric(T& serverOrClient, const NodeId& id, bool symmetric) 
 template <typename T>
 inline void writeInverseName(T& serverOrClient, const NodeId& id, const LocalizedText& name) {
     writeAttribute(serverOrClient, id, AttributeId::InverseName, DataValue::fromScalar(name));
+}
+
+/**
+ * Write the `ContainsNoLoops` attribute of a view node.
+ * @copydetails readContainsNoLoops
+ */
+template <typename T>
+inline void writeContainsNoLoops(T& serverOrClient, const NodeId& id, bool containsNoLoops) {
+    writeAttribute(
+        serverOrClient, id, AttributeId::ContainsNoLoops, DataValue::fromScalar(containsNoLoops)
+    );
+}
+
+/**
+ * Write the `EventNotifier` attribute of an object or view node.
+ * @copydetails readEventNotifier
+ */
+template <typename T>
+inline void writeEventNotifier(T& serverOrClient, const NodeId& id, Bitmask<EventNotifier> mask) {
+    writeAttribute(
+        serverOrClient, id, AttributeId::EventNotifier, DataValue::fromScalar(mask.get())
+    );
 }
 
 /**
@@ -439,6 +501,37 @@ inline void writeMinimumSamplingInterval(T& serverOrClient, const NodeId& id, do
         id,
         AttributeId::MinimumSamplingInterval,
         DataValue::fromScalar(milliseconds)
+    );
+}
+
+/**
+ * Write the `Historizing` attribute of a variable node.
+ * @copydetails readHistorizing
+ */
+template <typename T>
+inline void writeHistorizing(T& serverOrClient, const NodeId& id, bool historizing) {
+    writeAttribute(
+        serverOrClient, id, AttributeId::Historizing, DataValue::fromScalar(historizing)
+    );
+}
+
+/**
+ * Write the `Executable` attribute of a method node.
+ * @copydetails readExecutable
+ */
+template <typename T>
+inline void writeExecutable(T& serverOrClient, const NodeId& id, bool executable) {
+    writeAttribute(serverOrClient, id, AttributeId::Executable, DataValue::fromScalar(executable));
+}
+
+/**
+ * Write the `UserExecutable` attribute of a method node.
+ * @copydetails readUserExecutable
+ */
+template <typename T>
+inline void writeUserExecutable(T& serverOrClient, const NodeId& id, bool userExecutable) {
+    writeAttribute(
+        serverOrClient, id, AttributeId::UserExecutable, DataValue::fromScalar(userExecutable)
     );
 }
 
