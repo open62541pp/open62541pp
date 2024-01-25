@@ -16,6 +16,7 @@
 #include "open62541pp/services/Attribute.h"
 #include "open62541pp/services/Method.h"
 #include "open62541pp/services/NodeManagement.h"
+#include "open62541pp/services/View.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/DataValue.h"
@@ -251,7 +252,19 @@ public:
         const NodeId& referenceType = ReferenceTypeId::References,
         bool includeSubtypes = true,
         Bitmask<NodeClass> nodeClassMask = NodeClass::Unspecified
-    );
+    ) {
+        return services::browseAll(
+            connection_,
+            BrowseDescription(
+                nodeId_,
+                browseDirection,
+                referenceType,
+                includeSubtypes,
+                nodeClassMask,
+                BrowseResultMask::All
+            )
+        );
+    }
 
     /// Browse referenced nodes (only local nodes).
     std::vector<Node> browseReferencedNodes(
@@ -259,7 +272,27 @@ public:
         const NodeId& referenceType = ReferenceTypeId::References,
         bool includeSubtypes = true,
         Bitmask<NodeClass> nodeClassMask = NodeClass::Unspecified
-    );
+    ) {
+        auto refs = services::browseAll(
+            connection_,
+            BrowseDescription(
+                nodeId_,
+                browseDirection,
+                referenceType,
+                includeSubtypes,
+                nodeClassMask,
+                BrowseResultMask::TargetInfo  // only node id required here
+            )
+        );
+        std::vector<Node> nodes;
+        nodes.reserve(refs.size());
+        for (auto&& ref : refs) {
+            if (ref.getNodeId().isLocal()) {
+                nodes.emplace_back(connection_, std::move(ref.getNodeId().getNodeId()));
+            }
+        }
+        return nodes;
+    }
 
     /// Browse child nodes (only local nodes).
     std::vector<Node> browseChildren(
@@ -272,12 +305,31 @@ public:
     /// Browse child node specified by its relative path from this node (only local nodes).
     /// The relative path is specified using browse names.
     /// @exception BadStatus (BadNoMatch) If path not found
-    Node browseChild(Span<const QualifiedName> path);
+    Node browseChild(Span<const QualifiedName> path) {
+        auto result = services::browseSimplifiedBrowsePath(connection_, nodeId_, path);
+        for (auto&& target : result.getTargets()) {
+            if (target.getTargetId().isLocal()) {
+                return {connection_, std::move(target.getTargetId().getNodeId())};
+            }
+        }
+        throw BadStatus(UA_STATUSCODE_BADNOMATCH);
+    }
 
     /// Browse parent node.
     /// A Node may have several parents, the first found is returned.
     /// @exception BadStatus (BadNotFound) If no parent node found
-    Node browseParent();
+    Node browseParent() {
+        const auto nodes = browseReferencedNodes(
+            BrowseDirection::Inverse,
+            ReferenceTypeId::HierarchicalReferences,
+            true,
+            UA_NODECLASS_UNSPECIFIED
+        );
+        if (nodes.empty()) {
+            throw BadStatus(UA_STATUSCODE_BADNOTFOUND);
+        }
+        return nodes[0];
+    }
 
 #ifdef UA_ENABLE_METHODCALLS
     /// Call a server method and return results.
@@ -387,7 +439,9 @@ public:
 
     /// Read the value of an object property.
     /// @param propertyName Browse name of the property (variable node)
-    Variant readObjectProperty(const QualifiedName& propertyName);
+    Variant readObjectProperty(const QualifiedName& propertyName) {
+        return browseObjectProperty(propertyName).readValue();
+    }
 
     /// @copydoc services::writeDisplayName
     /// @return Current node instance to chain multiple methods (fluent interface)
@@ -538,9 +592,26 @@ public:
     /// @param propertyName Browse name of the property (variable node)
     /// @param value New value
     /// @return Current node instance to chain multiple methods (fluent interface)
-    Node& writeObjectProperty(const QualifiedName& propertyName, const Variant& value);
+    Node& writeObjectProperty(const QualifiedName& propertyName, const Variant& value) {
+        browseObjectProperty(propertyName).writeValue(value);
+        return *this;
+    }
 
 private:
+    Node browseObjectProperty(const QualifiedName& propertyName) {
+        auto result = services::translateBrowsePathToNodeIds(
+            connection_,
+            BrowsePath(nodeId_, {{ReferenceTypeId::HasProperty, false, true, propertyName}})
+        );
+        result.getStatusCode().throwIfBad();
+        for (auto&& target : result.getTargets()) {
+            if (target.getTargetId().isLocal()) {
+                return {connection_, std::move(target.getTargetId().getNodeId())};
+            }
+        }
+        throw BadStatus(UA_STATUSCODE_BADNOTFOUND);
+    }
+
     ServerOrClient& connection_;
     NodeId nodeId_;
 };
