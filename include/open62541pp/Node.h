@@ -385,6 +385,16 @@ public:
         return services::readInverseName(connection_, nodeId_);
     }
 
+    /// @copydoc services::readContainsNoLoops
+    bool readContainsNoLoops() {
+        return services::readContainsNoLoops(connection_, nodeId_);
+    }
+
+    /// @copydoc services::readEventNotifier
+    Bitmask<EventNotifier> readEventNotifier() {
+        return services::readEventNotifier(connection_, nodeId_);
+    }
+
     /// @copydoc services::readDataValue
     DataValue readDataValue() {
         return services::readDataValue(connection_, nodeId_);
@@ -435,6 +445,21 @@ public:
     /// @copydoc services::readMinimumSamplingInterval
     double readMinimumSamplingInterval() {
         return services::readMinimumSamplingInterval(connection_, nodeId_);
+    }
+
+    /// @copydoc services::readHistorizing
+    bool readHistorizing() {
+        return services::readHistorizing(connection_, nodeId_);
+    }
+
+    /// @copydoc services::readExecutable
+    bool readExecutable() {
+        return services::readExecutable(connection_, nodeId_);
+    }
+
+    /// @copydoc services::readUserExecutable
+    bool readUserExecutable() {
+        return services::readUserExecutable(connection_, nodeId_);
     }
 
     /// Read the value of an object property.
@@ -489,6 +514,20 @@ public:
     /// @return Current node instance to chain multiple methods (fluent interface)
     Node& writeInverseName(const LocalizedText& name) {
         services::writeInverseName(connection_, nodeId_, name);
+        return *this;
+    }
+
+    /// @copydoc services::writeContainsNoLoops
+    /// @return Current node instance to chain multiple methods (fluent interface)
+    Node& writeContainsNoLoops(bool containsNoLoops) {
+        services::writeContainsNoLoops(connection_, nodeId_, containsNoLoops);
+        return *this;
+    }
+
+    /// @copydoc services::writeEventNotifier
+    /// @return Current node instance to chain multiple methods (fluent interface)
+    Node& writeEventNotifier(Bitmask<EventNotifier> mask) {
+        services::writeEventNotifier(connection_, nodeId_, mask);
         return *this;
     }
 
@@ -585,6 +624,27 @@ public:
     /// @return Current node instance to chain multiple methods (fluent interface)
     Node& writeMinimumSamplingInterval(double milliseconds) {
         services::writeMinimumSamplingInterval(connection_, nodeId_, milliseconds);
+        return *this;
+    }
+
+    /// @copydoc services::writeHistorizing
+    /// @return Current node instance to chain multiple methods (fluent interface)
+    Node& writeHistorizing(bool historizing) {
+        services::writeHistorizing(connection_, nodeId_, historizing);
+        return *this;
+    }
+
+    /// @copydoc services::writeExecutable
+    /// @return Current node instance to chain multiple methods (fluent interface)
+    Node& writeExecutable(bool executable) {
+        services::writeExecutable(connection_, nodeId_, executable);
+        return *this;
+    }
+
+    /// @copydoc services::writeUserExecutable
+    /// @return Current node instance to chain multiple methods (fluent interface)
+    Node& writeUserExecutable(bool userExecutable) {
+        services::writeUserExecutable(connection_, nodeId_, userExecutable);
         return *this;
     }
 

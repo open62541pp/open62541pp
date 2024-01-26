@@ -144,7 +144,7 @@ TEST_CASE("Attribute service set (server)") {
     Server server;
     const NodeId objectsId{0, UA_NS0ID_OBJECTSFOLDER};
 
-    SUBCASE("Read default attributes") {
+    SUBCASE("Read default variable node attributes") {
         const NodeId id{1, "testAttributes"};
         services::addVariable(server, objectsId, id, "testAttributes");
 
@@ -164,9 +164,10 @@ TEST_CASE("Attribute service set (server)") {
         const uint8_t adminUserAccessLevel = 0xFF;  // all bits set
         CHECK(services::readUserAccessLevel(server, id) == adminUserAccessLevel);
         CHECK(services::readMinimumSamplingInterval(server, id) == 0.0);
+        CHECK(services::readHistorizing(server, id) == false);
     }
 
-    SUBCASE("Read initial attributes") {
+    SUBCASE("Read initial variable node attributes") {
         VariableAttributes attr;
         attr.setDisplayName({"", "testAttributes"});
         attr.setDescription({"", "..."});
@@ -203,7 +204,19 @@ TEST_CASE("Attribute service set (server)") {
         );
     }
 
-    SUBCASE("Read/write node attributes") {
+    SUBCASE("Read/write object node attributes") {
+        const NodeId id{1, "testAttributes"};
+        services::addObject(server, objectsId, id, "testAttributes");
+
+        // write new attributes
+        const auto eventNotifier = EventNotifier::HistoryRead | EventNotifier::HistoryWrite;
+        CHECK_NOTHROW(services::writeEventNotifier(server, id, eventNotifier));
+
+        // read new attributes
+        CHECK(services::readEventNotifier(server, id).allOf(eventNotifier));
+    }
+
+    SUBCASE("Read/write variable node attributes") {
         const NodeId id{1, "testAttributes"};
         services::addVariable(server, objectsId, id, "testAttributes");
 
@@ -217,6 +230,7 @@ TEST_CASE("Attribute service set (server)") {
         const auto newAccessLevel = AccessLevel::CurrentRead | AccessLevel::CurrentWrite;
         CHECK_NOTHROW(services::writeAccessLevel(server, id, newAccessLevel));
         CHECK_NOTHROW(services::writeMinimumSamplingInterval(server, id, 10.0));
+        CHECK_NOTHROW(services::writeHistorizing(server, id, true));
 
         // read new attributes
         CHECK(services::readDisplayName(server, id) == LocalizedText("en-US", "newDisplayName"));
@@ -229,7 +243,22 @@ TEST_CASE("Attribute service set (server)") {
         CHECK(services::readArrayDimensions(server, id).at(1) == 2);
         CHECK(services::readAccessLevel(server, id) == newAccessLevel);
         CHECK(services::readMinimumSamplingInterval(server, id) == 10.0);
+        CHECK(services::readHistorizing(server, id) == true);
     }
+
+#ifdef UA_ENABLE_METHODCALLS
+    SUBCASE("Read/write method node attributes") {
+        const NodeId id{1, "testMethod"};
+        services::addMethod(server, objectsId, id, "testMethod", nullptr, {}, {});
+
+        // write new attributes
+        CHECK_NOTHROW(services::writeExecutable(server, id, true));
+
+        // read new attributes
+        CHECK(services::readExecutable(server, id));
+        CHECK(services::readUserExecutable(server, id));
+    }
+#endif
 
     SUBCASE("Read/write reference node attributes") {
         const NodeId id{0, UA_NS0ID_REFERENCES};
