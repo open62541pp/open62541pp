@@ -16,6 +16,7 @@
 #include "open62541pp/TypeConverter.h"
 #include "open62541pp/TypeRegistry.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/detail/traits.h"
 #include "open62541pp/open62541.h"
 
 namespace opcua {
@@ -72,11 +73,14 @@ public:
         return variant;
     }
 
-    /// Create Variant from array (no copy if assignable without conversion).
-    template <typename T>
-    [[nodiscard]] static Variant fromArray(Span<T> array) {
+    /// Create Variant from array (no copy if assignable).
+    template <typename ArrayLike>
+    [[nodiscard]] static Variant fromArray(ArrayLike&& array) {
+        using ValueType = typename std::remove_reference_t<ArrayLike>::value_type;
+        constexpr bool isMutable = detail::IsMutableContainer<ArrayLike>::value;
+        constexpr bool isContiguous = detail::IsContiguousContainer<ArrayLike>::value;
         Variant variant;
-        if constexpr (detail::isRegisteredType<T>) {
+        if constexpr (isMutable && isContiguous && detail::isRegisteredType<ValueType>) {
             variant.setArray(array);
         } else {
             variant.setArrayCopy(array);
@@ -84,40 +88,18 @@ public:
         return variant;
     }
 
-    /// Create Variant from array with custom data type (no copy).
-    template <typename T>
-    [[nodiscard]] static Variant fromArray(Span<T> array, const UA_DataType& dataType) {
-        Variant variant;
-        variant.setArray(array, dataType);
-        return variant;
-    }
-
-    /// Create Variant from array (copy).
-    template <typename T>
-    [[nodiscard]] static Variant fromArray(Span<const T> array) {
-        Variant variant;
-        variant.setArrayCopy(array);
-        return variant;
-    }
-
-    /// Create Variant from array with custom data type (copy).
-    template <typename T>
-    [[nodiscard]] static Variant fromArray(Span<const T> array, const UA_DataType& dataType) {
-        Variant variant;
-        variant.setArrayCopy(array, dataType);
-        return variant;
-    }
-
-    /// @overload
-    template <typename ArrayLike, typename = EnableIfNoSpan<ArrayLike>>
-    [[nodiscard]] static Variant fromArray(ArrayLike&& array) {
-        return Variant::fromArray(Span{std::forward<ArrayLike>(array)});
-    }
-
-    /// @overload
-    template <typename ArrayLike, typename = EnableIfNoSpan<ArrayLike>>
+    /// Create Variant from array with custom data type (no copy if assignable).
+    template <typename ArrayLike>
     [[nodiscard]] static Variant fromArray(ArrayLike&& array, const UA_DataType& dataType) {
-        return Variant::fromArray(Span{std::forward<ArrayLike>(array)}, dataType);
+        constexpr bool isMutable = detail::IsMutableContainer<ArrayLike>::value;
+        constexpr bool isContiguous = detail::IsContiguousContainer<ArrayLike>::value;
+        Variant variant;
+        if constexpr (isMutable && isContiguous) {
+            variant.setArray(array, dataType);
+        } else {
+            variant.setArrayCopy(array, dataType);
+        }
+        return variant;
     }
 
     /// Create Variant from range of elements (copy).
@@ -277,78 +259,56 @@ public:
         setScalarCopyImpl(value, dataType);
     }
 
-    /// Assign array to variant.
-    template <typename T>
-    void setArray(Span<T> array) noexcept {
-        using ValueType = typename decltype(array)::value_type;
-        assertIsNative<ValueType>();
-        setArray(array, opcua::getDataType<ValueType>());
-    }
-
-    /// @overload
-    template <typename ArrayLike, typename = EnableIfNoSpan<ArrayLike>>
+    /**
+     * Assign array to variant.
+     * @param array Container with a contiguous sequence of elements.
+     *              For example `std::array`, `std::vector` or `Span`.
+     *              The underlying array must be accessible with `std::data` and `std::size`.
+     */
+    template <typename ArrayLike>
     void setArray(ArrayLike&& array) noexcept {
-        setArray(Span{std::forward<ArrayLike>(array)});
+        using ValueType = typename std::remove_reference_t<ArrayLike>::value_type;
+        assertIsNative<ValueType>();
+        setArray(std::forward<ArrayLike>(array), opcua::getDataType<ValueType>());
     }
 
-    /// Assign array to variant with custom data type.
-    template <typename T>
-    void setArray(Span<T> array, const UA_DataType& dataType) noexcept {
-        setArrayImpl(array.data(), array.size(), dataType, UA_VARIANT_DATA_NODELETE);
-    }
-
-    /// @overload
-    template <typename ArrayLike, typename = EnableIfNoSpan<ArrayLike>>
+    /**
+     * Assign array to variant with custom data type.
+     * @copydetails setArray
+     * @param dataType Custom data type.
+     */
+    template <typename ArrayLike>
     void setArray(ArrayLike&& array, const UA_DataType& dataType) noexcept {
-        setArray(Span{std::forward<ArrayLike>(array)}, dataType);
+        setArrayImpl(std::data(array), std::size(array), dataType, UA_VARIANT_DATA_NODELETE);
     }
 
-    /// Copy array to variant.
-    template <typename T>
-    void setArrayCopy(Span<T> array) {
-        using ValueType = typename decltype(array)::value_type;
-        assertIsCopyableOrConvertible<ValueType>();
-        if constexpr (detail::isRegisteredType<ValueType>) {
-            setArrayCopyImpl(array.begin(), array.end(), opcua::getDataType<ValueType>());
-        } else {
-            setArrayCopyConvertImpl(array.begin(), array.end());
-        }
-    }
-
-    /// @overload
-    template <typename ArrayLike, typename = EnableIfNoSpan<ArrayLike>>
+    /**
+     * Copy array to variant.
+     * @param array Iterable container, for example `std::vector`, `std::list` or `Span`.
+     *              The container must implement `begin()` and `end()`.
+     */
+    template <typename ArrayLike>
     void setArrayCopy(ArrayLike&& array) {
-        using ValueType = typename std::remove_reference_t<ArrayLike>::value_type;
-        using SpanType = Span<const ValueType>;
-        if constexpr (std::is_constructible_v<SpanType, ArrayLike>) {
-            setArrayCopy(Span{std::forward<ArrayLike>(array)});
-        } else {
-            setArrayCopy(array.begin(), array.end());
-        }
+        setArrayCopy(array.begin(), array.end());
     }
 
-    /// Copy array to variant with custom data type.
-    template <typename T>
-    void setArrayCopy(Span<T> array, const UA_DataType& dataType) {
-        setArrayCopyImpl(array.begin(), array.end(), dataType);
-    }
-
-    /// @overload
-    template <typename ArrayLike, typename = EnableIfNoSpan<ArrayLike>>
+    /**
+     * Copy array to variant with custom data type.
+     * @copydetails setArrayCopy
+     * @param dataType Custom data type.
+     */
+    template <typename ArrayLike>
     void setArrayCopy(ArrayLike&& array, const UA_DataType& dataType) {
-        using ValueType = typename std::remove_reference_t<ArrayLike>::value_type;
-        using SpanType = Span<const ValueType>;
-        if constexpr (std::is_constructible_v<SpanType, ArrayLike>) {
-            setArrayCopy(Span{std::forward<ArrayLike>(array)}, dataType);
-        } else {
-            setArrayCopy(array.begin(), array.end(), dataType);
-        }
+        setArrayCopy(array.begin(), array.end(), dataType);
     }
 
-    /// Copy range of elements as array to variant.
+    /**
+     * Copy range of elements as array to variant.
+     */
     template <typename InputIt>
     void setArrayCopy(InputIt first, InputIt last) {
         using ValueType = typename std::iterator_traits<InputIt>::value_type;
+        assertIsCopyableOrConvertible<ValueType>();
         if constexpr (detail::isRegisteredType<ValueType>) {
             setArrayCopyImpl(first, last, opcua::getDataType<ValueType>());
         } else {
@@ -356,7 +316,9 @@ public:
         }
     }
 
-    /// Copy range of elements as array to variant with custom data type.
+    /**
+     * Copy range of elements as array to variant with custom data type.
+     */
     template <typename InputIt>
     void setArrayCopy(InputIt first, InputIt last, const UA_DataType& dataType) {
         setArrayCopyImpl(first, last, dataType);

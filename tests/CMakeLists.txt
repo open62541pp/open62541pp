@@ -20,6 +20,7 @@ add_executable(
     Session.cpp
     Span.cpp
     Subscription_MonitoredItem.cpp
+    traits.cpp
     TypeConverter.cpp
     TypeRegistry.cpp
     Types.cpp

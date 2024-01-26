@@ -465,7 +465,7 @@ TEST_CASE("Variant") {
         }
         SUBCASE("Copy if not assignable (const or conversion check failed)") {
             std::string value{"test"};
-            const auto var = Variant::fromScalar<std::string>(value);
+            const auto var = Variant::fromScalar(value);
             CHECK(var.isScalar());
             CHECK(var->type == &UA_TYPES[UA_TYPES_STRING]);
             CHECK(var->data != &value);
@@ -614,7 +614,7 @@ TEST_CASE("Variant") {
 
     SUBCASE("Set array from initializer list (copy)") {
         Variant var;
-        var.setArrayCopy<const int>({1, 2, 3});  // TODO: avoid manual template types
+        var.setArrayCopy(Span<const int>{1, 2, 3});  // TODO: avoid manual template types
     }
 
     SUBCASE("Set/get array with std::vector<bool> (copy)") {
@@ -622,6 +622,10 @@ TEST_CASE("Variant") {
         // several problems: https://github.com/open62541pp/open62541pp/issues/164
         Variant var;
         std::vector<bool> array{true, false, true};
+
+        SUBCASE("From vector") {
+            var = Variant::fromArray(array);
+        }
 
         SUBCASE("Copy from iterator") {
             var.setArrayCopy(array.begin(), array.end());
