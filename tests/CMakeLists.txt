@@ -5,6 +5,7 @@ add_executable(
     main.cpp
     AccessControl.cpp
     async.cpp
+    Bitmask.cpp
     Client.cpp
     Crypto.cpp
     CustomAccessControl.cpp

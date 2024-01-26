@@ -1,11 +1,15 @@
 #pragma once
 
 #include <cstdint>
-#include <string_view>
+#include <type_traits>
 
 #include "open62541pp/open62541.h"
 
 namespace opcua {
+
+// forward declare
+template <typename T>
+struct IsBitmaskEnum;
 
 /// Type index of the ::UA_TYPES array.
 using TypeIndex = uint16_t;
@@ -82,7 +86,13 @@ enum class AttributeId : int32_t {
 };
 
 /**
- * Node classes.
+ * Node class.
+ *
+ * The enum can be used as a bitmask and allows bitwise operations, e.g.:
+ * @code
+ * auto mask = NodeClass::Object | NodeClass::Variable;
+ * @endcode
+ *
  * @see UA_NodeClass
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.29
  */
@@ -100,32 +110,77 @@ enum class NodeClass : int32_t {
     // clang-format on
 };
 
-/// Get name of node class.
-constexpr std::string_view getNodeClassName(NodeClass nodeClass) {
-    switch (nodeClass) {
-    case NodeClass::Object:
-        return "Object";
-    case NodeClass::Variable:
-        return "Variable";
-    case NodeClass::Method:
-        return "Method";
-    case NodeClass::ObjectType:
-        return "ObjectType";
-    case NodeClass::VariableType:
-        return "VariableType";
-    case NodeClass::ReferenceType:
-        return "ReferenceType";
-    case NodeClass::DataType:
-        return "DataType";
-    case NodeClass::View:
-        return "View";
-    default:
-        return "Unknown";
-    }
-}
+template <>
+struct IsBitmaskEnum<NodeClass> : std::true_type {};
+
+/**
+ * Access level.
+ * Indicates how the value of an variable can be accessed (read/write) and if it contains current
+ * and/or historic data.
+ * @see https://reference.opcfoundation.org/Core/Part3/v104/docs/8.57
+ */
+enum class AccessLevel : uint8_t {
+    // clang-format off
+    None           = 0U,
+    CurrentRead    = 1U << 0U,
+    CurrentWrite   = 1U << 1U,
+    HistoryRead    = 1U << 2U,
+    HistoryWrite   = 1U << 3U,
+    SemanticChange = 1U << 4U,
+    StatusWrite    = 1U << 5U,
+    TimestampWrite = 1U << 6U,
+    // clang-format on
+};
+
+template <>
+struct IsBitmaskEnum<AccessLevel> : std::true_type {};
+
+/**
+ * Write mask.
+ * Indicates which attributes of a node a writeable.
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/5.2.7
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.60
+ */
+enum class WriteMask : uint32_t {
+    // clang-format off
+    None                    = 0U,
+    AccessLevel             = 1U << 0U,
+    ArrayDimensions         = 1U << 1U,
+    BrowseName              = 1U << 2U,
+    ContainsNoLoops         = 1U << 3U,
+    DataType                = 1U << 4U,
+    Description             = 1U << 5U,
+    DisplayName             = 1U << 6U,
+    EventNotifier           = 1U << 7U,
+    Executable              = 1U << 8U,
+    Historizing             = 1U << 9U,
+    InverseName             = 1U << 10U,
+    IsAbstract              = 1U << 11U,
+    MinimumSamplingInterval = 1U << 12U,
+    NodeClass               = 1U << 13U,
+    NodeId                  = 1U << 14U,
+    Symmetric               = 1U << 15U,
+    UserAccessLevel         = 1U << 16U,
+    UserExecutable          = 1U << 17U,
+    UserWriteMask           = 1U << 18U,
+    ValueRank               = 1U << 19U,
+    WriteMask               = 1U << 20U,
+    ValueForVariableType    = 1U << 21U,
+    DataTypeDefinition      = 1U << 22U,
+    RolePermissions         = 1U << 23U,
+    AccessRestrictions      = 1U << 24U,
+    AccessLevelEx           = 1U << 25U,
+    // clang-format on
+};
+
+template <>
+struct IsBitmaskEnum<WriteMask> : std::true_type {};
 
 /**
  * Value rank.
+ * Indicates whether the value attribute of the variable is an array and how many dimensions the
+ * array has.
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/5.6.2
  */
 enum class ValueRank : int32_t {
     // clang-format off
@@ -138,6 +193,23 @@ enum class ValueRank : int32_t {
     ThreeDimensions      = UA_VALUERANK_THREE_DIMENSIONS,
     // clang-format on
 };
+
+/**
+ * Event notifier.
+ * Indicates if a node can be used to subscribe to events or read/write historic events.
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.59
+ */
+enum class EventNotifier : uint8_t {
+    // clang-format off
+    None              = 0,
+    SubscribeToEvents = 1,
+    HistoryRead       = 4,
+    HistoryWrite      = 8,
+    // clang-format on
+};
+
+template <>
+struct IsBitmaskEnum<EventNotifier> : std::true_type {};
 
 /**
  * Modelling rules.

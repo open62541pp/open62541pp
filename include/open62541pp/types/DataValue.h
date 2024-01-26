@@ -19,8 +19,11 @@ namespace opcua {
  */
 class DataValue : public TypeWrapper<UA_DataValue, UA_TYPES_DATAVALUE> {
 public:
-    // NOLINTNEXTLINE, false positive?
     using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
+
+    explicit DataValue(Variant value) noexcept {
+        setValue(std::move(value));
+    }
 
     DataValue(
         Variant value,
@@ -29,62 +32,148 @@ public:
         std::optional<uint16_t> sourcePicoseconds,
         std::optional<uint16_t> serverPicoseconds,
         std::optional<StatusCode> statusCode
-    ) noexcept;
+    ) noexcept
+        : DataValue(UA_DataValue{
+              UA_Variant{},
+              sourceTimestamp.value_or(UA_DateTime{}),
+              serverTimestamp.value_or(UA_DateTime{}),
+              sourcePicoseconds.value_or(uint16_t{}),
+              serverPicoseconds.value_or(uint16_t{}),
+              statusCode.value_or(UA_StatusCode{}),
+              false,
+              sourceTimestamp.has_value(),
+              serverTimestamp.has_value(),
+              sourcePicoseconds.has_value(),
+              serverPicoseconds.has_value(),
+              statusCode.has_value(),
+          }) {
+        setValue(std::move(value));
+    }
 
-    /// Create Variant from scalar value.
+    /// Create DataValue from scalar value.
     /// @see Variant::fromScalar
     template <typename... Args>
     [[nodiscard]] static DataValue fromScalar(Args&&... args) {
-        DataValue dv;
-        dv.setValue(Variant::fromScalar(std::forward<Args>(args)...));
-        return dv;
+        return DataValue(Variant::fromScalar(std::forward<Args>(args)...));
     }
 
-    /// Create Variant from array.
+    /// Create DataValue from array.
     /// @see Variant::fromArray
     template <typename... Args>
     [[nodiscard]] static DataValue fromArray(Args&&... args) {
-        DataValue dv;
-        dv.setValue(Variant::fromArray(std::forward<Args>(args)...));
-        return dv;
+        return DataValue(Variant::fromArray(std::forward<Args>(args)...));
     }
 
-    bool hasValue() const noexcept;
-    bool hasSourceTimestamp() const noexcept;
-    bool hasServerTimestamp() const noexcept;
-    bool hasSourcePicoseconds() const noexcept;
-    bool hasServerPicoseconds() const noexcept;
-    bool hasStatusCode() const noexcept;
+    bool hasValue() const noexcept {
+        return handle()->hasValue;
+    }
+
+    bool hasSourceTimestamp() const noexcept {
+        return handle()->hasSourceTimestamp;
+    }
+
+    bool hasServerTimestamp() const noexcept {
+        return handle()->hasServerTimestamp;
+    }
+
+    bool hasSourcePicoseconds() const noexcept {
+        return handle()->hasSourcePicoseconds;
+    }
+
+    bool hasServerPicoseconds() const noexcept {
+        return handle()->hasServerPicoseconds;
+    }
+
+    bool hasStatusCode() const noexcept {
+        return handle()->hasStatus;
+    }
 
     /// Get value.
-    Variant& getValue() noexcept;
+    Variant& getValue() & noexcept {
+        return asWrapper<Variant>(handle()->value);
+    }
+
     /// Get value.
-    const Variant& getValue() const noexcept;
+    const Variant& getValue() const& noexcept {
+        return asWrapper<Variant>(handle()->value);
+    }
+
+    /// Get value (rvalue).
+    Variant&& getValue() && noexcept {
+        return std::move(asWrapper<Variant>(handle()->value));
+    }
+
+    /// Get value (rvalue).
+    const Variant&& getValue() const&& noexcept {
+        return std::move(asWrapper<Variant>(handle()->value));  // NOLINT
+    }
+
     /// Get source timestamp for the value.
-    DateTime getSourceTimestamp() const noexcept;
+    DateTime getSourceTimestamp() const noexcept {
+        return DateTime(handle()->sourceTimestamp);  // NOLINT
+    }
+
     /// Get server timestamp for the value.
-    DateTime getServerTimestamp() const noexcept;
+    DateTime getServerTimestamp() const noexcept {
+        return DateTime(handle()->serverTimestamp);  // NOLINT
+    }
+
     /// Get picoseconds interval added to the source timestamp.
-    uint16_t getSourcePicoseconds() const noexcept;
+    uint16_t getSourcePicoseconds() const noexcept {
+        return handle()->sourcePicoseconds;
+    }
+
     /// Get picoseconds interval added to the server timestamp.
-    uint16_t getServerPicoseconds() const noexcept;
+    uint16_t getServerPicoseconds() const noexcept {
+        return handle()->serverPicoseconds;
+    }
+
     /// Get status code.
-    StatusCode getStatusCode() const noexcept;
+    StatusCode getStatusCode() const noexcept {
+        return handle()->status;
+    }
 
     /// Set value (copy).
-    void setValue(const Variant& value);
+    void setValue(const Variant& value) {
+        asWrapper<Variant>(handle()->value) = value;
+        handle()->hasValue = true;
+    }
+
     /// Set value (move).
-    void setValue(Variant&& value) noexcept;
+    void setValue(Variant&& value) noexcept {
+        asWrapper<Variant>(handle()->value) = std::move(value);
+        handle()->hasValue = true;
+    }
+
     /// Set source timestamp for the value.
-    void setSourceTimestamp(DateTime sourceTimestamp) noexcept;
+    void setSourceTimestamp(DateTime sourceTimestamp) noexcept {  // NOLINT
+        handle()->sourceTimestamp = sourceTimestamp.get();
+        handle()->hasSourceTimestamp = true;
+    }
+
     /// Set server timestamp for the value.
-    void setServerTimestamp(DateTime serverTimestamp) noexcept;
+    void setServerTimestamp(DateTime serverTimestamp) noexcept {  // NOLINT
+        handle()->serverTimestamp = serverTimestamp.get();
+        handle()->hasServerTimestamp = true;
+    }
+
     /// Set picoseconds interval added to the source timestamp.
-    void setSourcePicoseconds(uint16_t sourcePicoseconds) noexcept;
+    void setSourcePicoseconds(uint16_t sourcePicoseconds) noexcept {
+        handle()->sourcePicoseconds = sourcePicoseconds;
+        handle()->hasSourcePicoseconds = true;
+    }
+
     /// Set picoseconds interval added to the server timestamp.
-    void setServerPicoseconds(uint16_t serverPicoseconds) noexcept;
+    void setServerPicoseconds(uint16_t serverPicoseconds) noexcept {
+        handle()->serverPicoseconds = serverPicoseconds;
+        handle()->hasServerPicoseconds = true;
+    }
+
     /// Set status code.
-    void setStatusCode(StatusCode statusCode) noexcept;
+    void setStatusCode(StatusCode statusCode) noexcept {
+        handle()->status = statusCode;
+        handle()->hasStatus = true;
+    }
 };
 
 }  // namespace opcua

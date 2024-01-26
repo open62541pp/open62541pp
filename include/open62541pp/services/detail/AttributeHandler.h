@@ -5,7 +5,8 @@
 #include <utility>  // exchange
 #include <vector>
 
-#include "open62541pp/Common.h"  // AttributeId
+#include "open62541pp/Bitmask.h"
+#include "open62541pp/Common.h"  // AttributeId, WriteMask, EventNotifier, AccessLevel
 #include "open62541pp/open62541.h"
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/NodeId.h"
@@ -48,6 +49,20 @@ struct AttributeHandlerScalar<T, std::enable_if_t<std::is_enum_v<T>>> {
     }
 };
 
+template <typename T>
+struct AttributeHandlerScalar<Bitmask<T>> {
+    using Type = Bitmask<T>;
+    using UnderlyingType = typename Bitmask<T>::Underlying;
+
+    static auto fromDataValue(DataValue&& dv) {
+        return Bitmask<T>(dv.getValue().getScalar<UnderlyingType>());
+    }
+
+    static auto toDataValue(Type value) {
+        return DataValue::fromScalar(value.get());
+    }
+};
+
 template <>
 struct AttributeHandler<AttributeId::NodeId> : AttributeHandlerScalar<NodeId> {};
 
@@ -71,10 +86,10 @@ template <>
 struct AttributeHandler<AttributeId::Description> : AttributeHandlerScalar<LocalizedText> {};
 
 template <>
-struct AttributeHandler<AttributeId::WriteMask> : AttributeHandlerScalar<uint32_t> {};
+struct AttributeHandler<AttributeId::WriteMask> : AttributeHandlerScalar<Bitmask<WriteMask>> {};
 
 template <>
-struct AttributeHandler<AttributeId::UserWriteMask> : AttributeHandlerScalar<uint32_t> {};
+struct AttributeHandler<AttributeId::UserWriteMask> : AttributeHandlerScalar<Bitmask<WriteMask>> {};
 
 template <>
 struct AttributeHandler<AttributeId::IsAbstract> : AttributeHandlerScalar<bool> {};
@@ -89,7 +104,8 @@ template <>
 struct AttributeHandler<AttributeId::ContainsNoLoops> : AttributeHandlerScalar<bool> {};
 
 template <>
-struct AttributeHandler<AttributeId::EventNotifier> : AttributeHandlerScalar<uint8_t> {};
+struct AttributeHandler<AttributeId::EventNotifier>
+    : AttributeHandlerScalar<Bitmask<EventNotifier>> {};
 
 template <>
 struct AttributeHandler<AttributeId::Value> {
@@ -131,10 +147,11 @@ struct AttributeHandler<AttributeId::ArrayDimensions> {
 };
 
 template <>
-struct AttributeHandler<AttributeId::AccessLevel> : AttributeHandlerScalar<uint8_t> {};
+struct AttributeHandler<AttributeId::AccessLevel> : AttributeHandlerScalar<Bitmask<AccessLevel>> {};
 
 template <>
-struct AttributeHandler<AttributeId::UserAccessLevel> : AttributeHandlerScalar<uint8_t> {};
+struct AttributeHandler<AttributeId::UserAccessLevel>
+    : AttributeHandlerScalar<Bitmask<AccessLevel>> {};
 
 template <>
 struct AttributeHandler<AttributeId::MinimumSamplingInterval> : AttributeHandlerScalar<double> {};
@@ -144,5 +161,8 @@ struct AttributeHandler<AttributeId::Historizing> : AttributeHandlerScalar<bool>
 
 template <>
 struct AttributeHandler<AttributeId::Executable> : AttributeHandlerScalar<bool> {};
+
+template <>
+struct AttributeHandler<AttributeId::UserExecutable> : AttributeHandlerScalar<bool> {};
 
 }  // namespace opcua::services::detail

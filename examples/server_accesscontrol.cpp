@@ -11,8 +11,7 @@ using namespace opcua;
 // Session attributes are available since open62541 v1.3, so this example requires at least v1.3.
 class AccessControlCustom : public AccessControlDefault {
 public:
-    using Base = AccessControlDefault;
-    using Base::Base;  // inherit constructors
+    using AccessControlDefault::AccessControlDefault;  // inherit constructors
 
     StatusCode activateSession(
         Session& session,
@@ -27,17 +26,17 @@ public:
         std::cout << "User has admin rights: " << isAdmin << std::endl;
         session.setSessionAttribute({0, "isAdmin"}, Variant::fromScalar(isAdmin));
 
-        return Base::activateSession(
+        return AccessControlDefault::activateSession(
             session, endpointDescription, secureChannelRemoteCertificate, userIdentityToken
         );
     }
 
-    uint8_t getUserAccessLevel(Session& session, const NodeId& nodeId) override {
+    Bitmask<AccessLevel> getUserAccessLevel(Session& session, const NodeId& nodeId) override {
         const bool isAdmin = session.getSessionAttribute({0, "isAdmin"}).getScalar<bool>();
         std::cout << "Get user access level of node id " << nodeId.toString() << std::endl;
         std::cout << "Admin rights granted: " << isAdmin << std::endl;
-        return isAdmin ? UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE
-                       : UA_ACCESSLEVELMASK_READ;
+        return isAdmin ? AccessLevel::CurrentRead | AccessLevel::CurrentWrite
+                       : AccessLevel::CurrentRead;
     }
 };
 
@@ -60,7 +59,7 @@ int main() {
         {1, 1000},
         "Variable",
         VariableAttributes{}
-            .setAccessLevel(UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE)
+            .setAccessLevel(AccessLevel::CurrentRead | AccessLevel::CurrentWrite)
             .setDataType(DataTypeId::Int32)
             .setValueRank(ValueRank::Scalar)
             .setValueScalar(0)

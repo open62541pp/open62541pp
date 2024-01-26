@@ -9,16 +9,48 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Raw `NodeManagement` functions in `opcua::services` (#121, #124)
+- Raw `View` functions in `opcua::services` (#125)
+- Pass `NodeId` identifier by value in constructors, mark as noexcept (#133) 
 - `TypeRegistry<T>` to derive the corresponding `UA_DataType` object from template types.
   Custom data types can be registered with template specializations. (#136)
 - Check `Variant` data type by template type, e.g. `var.isType<int>()` (#139)
-- Update open62541 to v1.3.9
+- Update open62541 to v1.3.9 (#140)
+- Pass custom logger to constructor of `Server` and `Client` (#150, #155)
+- New function `void throwIfBad(UA_StatusCode)` (#153)
+- New function `UA_DataType& getDataType<T>()` (#154)
+- Add missing `noexcept` specifiers (#160)
+- `AccessLevel`, `WriteMask` and `EventNotifier` enum classes (#163)
+- `Bitmask<T>` type to allow both enum classes and native enums/ints to define bitmasks (#163)
 
 ### Changed
 
 - Deprecate `TypeIndexList` (`TypeConverter::ValidTypes`) because it's not required anymore.
   Just remove `TypeConverter<T>::ValidTypes` from your template specializations.
   The `UA_DataType` is retrieved from the `TypeRegistry<NativeType>` specialization. (#136)
+- Passing an empty function to `setLogger` does nothing (#150)
+- Deprecate `Type` enum (#157)
+- Remove implicit conversion from `XmlElement` to `std::string_view` (#159)
+- Remove deprecated functions to read/write attributes (#166):
+  - `Node::readDataValue(DataValue&)`, use `Node::readDataValue()` instead
+  - `Node::readValue(DataValue&)`, use `Node::readValue()` instead
+  - `Node::readScalar<T>()`, use `Node::readValueScalar<T>()` instead
+  - `Node::readArray<T>()`, use `Node::readValueArray<T>()` instead
+  - `services::readDataValue(T&, const NodeId&, DataValue&)`, use `services::readDataValue(T&, const NodeId&)` instead
+  - `services::readValue(T&, const NodeId&, Variant&)`, use `services::readValue(T&, const NodeId&)` instead
+- Use `Bitmask<Enum>` instead of integers (#163)
+  - Use `Bitmask<AccessLevel>` instead of `uint8_t` with implicit conversions to/from `uint8_t`
+  - Use `Bitmask<WriteMask>` instead of `uint32_t` with implicit conversions to/from `uint32_t`
+  - Virtual function `AccessControlBase::getUserRightsMask` returns `Bitmask<WriteMask>` instead of `uint32_t`
+  - Virtual function `AccessControlBase::getUserAccessLevel` returns `Bitmask<AccessLevel>` instead of `uint8_t`
+  - Implicit conversion from `Bitmask<T>` to underlying integer are deprecated and will be made explicit in the future.
+    Please migrate to `Bitmask<T>::get()`.
+
+### Fixed
+
+- `setLogger` memory leak (#127)
+- `DataTypeBuilder::createEnum` (#143)
+- Underlying data type of enums (#152)
 
 ## [0.11.0] - 2023-11-01
 

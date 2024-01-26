@@ -189,13 +189,13 @@ inline void writeDescriptionAsync(
  * Read the AttributeId::WriteMask attribute of a node.
  */
 template <typename T>
-inline uint32_t readWriteMask(T& serverOrClient, const NodeId& id) {
+inline Bitmask<WriteMask> readWriteMask(T& serverOrClient, const NodeId& id) {
     return detail::readAttributeImpl<AttributeId::WriteMask>(serverOrClient, id);
 }
 
 /**
  * Asynchronously read the AttributeId::WriteMask attribute of a node.
- * @param token @completiontoken{void(opcua::StatusCode, uint32_t)}
+ * @param token @completiontoken{void(opcua::StatusCode, opcua::Bitmask<WriteMask>)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readWriteMaskAsync(
@@ -210,7 +210,7 @@ inline auto readWriteMaskAsync(
  * Write the AttributeId::WriteMask attribute of a node.
  */
 template <typename T>
-inline void writeWriteMask(T& serverOrClient, const NodeId& id, uint32_t writeMask) {
+inline void writeWriteMask(T& serverOrClient, const NodeId& id, Bitmask<WriteMask> writeMask) {
     detail::writeAttributeImpl<AttributeId::WriteMask>(serverOrClient, id, writeMask);
 }
 
@@ -220,7 +220,7 @@ inline void writeWriteMask(T& serverOrClient, const NodeId& id, uint32_t writeMa
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline void writeWriteMaskAsync(
-    Client& client, const NodeId& id, uint32_t writeMask, CompletionToken&& token
+    Client& client, const NodeId& id, Bitmask<WriteMask> writeMask, CompletionToken&& token
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::WriteMask>(
         client, id, writeMask, std::forward<CompletionToken>(token)
@@ -231,13 +231,13 @@ inline void writeWriteMaskAsync(
  * Read the AttributeId::UserWriteMask attribute of a node.
  */
 template <typename T>
-inline uint32_t readUserWriteMask(T& serverOrClient, const NodeId& id) {
+inline Bitmask<WriteMask> readUserWriteMask(T& serverOrClient, const NodeId& id) {
     return detail::readAttributeImpl<AttributeId::UserWriteMask>(serverOrClient, id);
 }
 
 /**
  * Asynchronously read the AttributeId::UserWriteMask attribute of a node.
- * @param token @completiontoken{void(opcua::StatusCode, uint32_t)}
+ * @param token @completiontoken{void(opcua::StatusCode, opcua::Bitmask<WriteMask>)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readUserWriteMaskAsync(
@@ -252,7 +252,9 @@ inline auto readUserWriteMaskAsync(
  * Write the AttributeId::UserWriteMask attribute of a node.
  */
 template <typename T>
-inline void writeUserWriteMask(T& serverOrClient, const NodeId& id, uint32_t userWriteMask) {
+inline void writeUserWriteMask(
+    T& serverOrClient, const NodeId& id, Bitmask<WriteMask> userWriteMask
+) {
     detail::writeAttributeImpl<AttributeId::UserWriteMask>(serverOrClient, id, userWriteMask);
 }
 
@@ -262,7 +264,7 @@ inline void writeUserWriteMask(T& serverOrClient, const NodeId& id, uint32_t use
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline void writeUserWriteMaskAsync(
-    Client& client, const NodeId& id, uint32_t userWriteMask, CompletionToken&& token
+    Client& client, const NodeId& id, Bitmask<WriteMask> userWriteMask, CompletionToken&& token
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::UserWriteMask>(
         client, id, userWriteMask, std::forward<CompletionToken>(token)
@@ -443,13 +445,13 @@ inline void writeContainsNoLoopsAsync(
  * Read the AttributeId::EventNotifier attribute of a node.
  */
 template <typename T>
-inline uint8_t readEventNotifier(T& serverOrClient, const NodeId& id) {
+inline Bitmask<EventNotifier> readEventNotifier(T& serverOrClient, const NodeId& id) {
     return detail::readAttributeImpl<AttributeId::EventNotifier>(serverOrClient, id);
 }
 
 /**
  * Asynchronously read the AttributeId::EventNotifier attribute of a node.
- * @param token @completiontoken{void(opcua::StatusCode, uint8_t )}
+ * @param token @completiontoken{void(opcua::StatusCode, opcua::Bitmask<EventNotifier>)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readEventNotifierAsync(
@@ -464,7 +466,9 @@ inline auto readEventNotifierAsync(
  * Write the AttributeId::EventNotifier attribute of a node.
  */
 template <typename T>
-inline void writeEventNotifier(T& serverOrClient, const NodeId& id, uint8_t eventNotifier) {
+inline void writeEventNotifier(
+    T& serverOrClient, const NodeId& id, Bitmask<EventNotifier> eventNotifier
+) {
     detail::writeAttributeImpl<AttributeId::EventNotifier>(serverOrClient, id, eventNotifier);
 }
 
@@ -474,7 +478,7 @@ inline void writeEventNotifier(T& serverOrClient, const NodeId& id, uint8_t even
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline void writeEventNotifierAsync(
-    Client& client, const NodeId& id, uint8_t eventNotifier, CompletionToken&& token
+    Client& client, const NodeId& id, Bitmask<EventNotifier> eventNotifier, CompletionToken&& token
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::EventNotifier>(
         client, id, eventNotifier, std::forward<CompletionToken>(token)
@@ -655,13 +659,13 @@ inline void writeArrayDimensionsAsync(
  * Read the AttributeId::AccessLevel attribute of a node.
  */
 template <typename T>
-inline uint8_t readAccessLevel(T& serverOrClient, const NodeId& id) {
+inline Bitmask<AccessLevel> readAccessLevel(T& serverOrClient, const NodeId& id) {
     return detail::readAttributeImpl<AttributeId::AccessLevel>(serverOrClient, id);
 }
 
 /**
  * Asynchronously read the AttributeId::AccessLevel attribute of a node.
- * @param token @completiontoken{void(opcua::StatusCode, uint8_t)}
+ * @param token @completiontoken{void(opcua::StatusCode, opcua::Bitmask<AccessLevel>)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readAccessLevelAsync(
@@ -676,7 +680,9 @@ inline auto readAccessLevelAsync(
  * Write the AttributeId::AccessLevel attribute of a node.
  */
 template <typename T>
-inline void writeAccessLevel(T& serverOrClient, const NodeId& id, uint8_t accessLevel) {
+inline void writeAccessLevel(
+    T& serverOrClient, const NodeId& id, Bitmask<AccessLevel> accessLevel
+) {
     detail::writeAttributeImpl<AttributeId::AccessLevel>(serverOrClient, id, accessLevel);
 }
 
@@ -686,7 +692,7 @@ inline void writeAccessLevel(T& serverOrClient, const NodeId& id, uint8_t access
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline void writeAccessLevelAsync(
-    Client& client, const NodeId& id, uint8_t accessLevel, CompletionToken&& token
+    Client& client, const NodeId& id, Bitmask<AccessLevel> accessLevel, CompletionToken&& token
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::AccessLevel>(
         client, id, accessLevel, std::forward<CompletionToken>(token)
@@ -697,13 +703,13 @@ inline void writeAccessLevelAsync(
  * Read the AttributeId::UserAccessLevel attribute of a node.
  */
 template <typename T>
-inline uint8_t readUserAccessLevel(T& serverOrClient, const NodeId& id) {
+inline Bitmask<AccessLevel> readUserAccessLevel(T& serverOrClient, const NodeId& id) {
     return detail::readAttributeImpl<AttributeId::UserAccessLevel>(serverOrClient, id);
 }
 
 /**
  * Asynchronously read the AttributeId::UserAccessLevel attribute of a node.
- * @param token @completiontoken{void(opcua::StatusCode, uint8_t)}
+ * @param token @completiontoken{void(opcua::StatusCode, opcua::Bitmask<AccessLevel>)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readUserAccessLevelAsync(
@@ -718,7 +724,9 @@ inline auto readUserAccessLevelAsync(
  * Write the AttributeId::UserAccessLevel attribute of a node.
  */
 template <typename T>
-inline void writeUserAccessLevel(T& serverOrClient, const NodeId& id, uint8_t userAccessLevel) {
+inline void writeUserAccessLevel(
+    T& serverOrClient, const NodeId& id, Bitmask<AccessLevel> userAccessLevel
+) {
     detail::writeAttributeImpl<AttributeId::UserAccessLevel>(serverOrClient, id, userAccessLevel);
 }
 
@@ -728,7 +736,7 @@ inline void writeUserAccessLevel(T& serverOrClient, const NodeId& id, uint8_t us
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline void writeUserAccessLevelAsync(
-    Client& client, const NodeId& id, uint8_t userAccessLevel, CompletionToken&& token
+    Client& client, const NodeId& id, Bitmask<AccessLevel> userAccessLevel, CompletionToken&& token
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::UserAccessLevel>(
         client, id, userAccessLevel, std::forward<CompletionToken>(token)
@@ -778,6 +786,132 @@ inline void writeMinimumSamplingIntervalAsync(
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::MinimumSamplingInterval>(
         client, id, minimumSamplingInterval, std::forward<CompletionToken>(token)
+    );
+}
+
+/**
+ * Read the AttributeId::Historizing attribute of a node.
+ */
+template <typename T>
+inline bool readHistorizing(T& serverOrClient, const NodeId& id) {
+    return detail::readAttributeImpl<AttributeId::Historizing>(serverOrClient, id);
+}
+
+/**
+ * Asynchronously read the AttributeId::Historizing attribute of a node.
+ * @param token @completiontoken{void(opcua::StatusCode, bool)}
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+inline auto readHistorizingAsync(
+    Client& client, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
+) {
+    return detail::readAttributeAsyncImpl<AttributeId::Historizing>(
+        client, id, std::forward<CompletionToken>(token)
+    );
+}
+
+/**
+ * Write the AttributeId::Historizing attribute of a node.
+ */
+template <typename T>
+inline void writeHistorizing(T& serverOrClient, const NodeId& id, bool historizing) {
+    detail::writeAttributeImpl<AttributeId::Historizing>(serverOrClient, id, historizing);
+}
+
+/**
+ * Asynchronously write the AttributeId::Historizing attribute of a node.
+ * @param token @completiontoken{void(opcua::StatusCode)}
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+inline void writeHistorizingAsync(
+    Client& client, const NodeId& id, bool historizing, CompletionToken&& token
+) {
+    detail::writeAttributeAsyncImpl<AttributeId::Historizing>(
+        client, id, historizing, std::forward<CompletionToken>(token)
+    );
+}
+
+/**
+ * Read the AttributeId::Executable attribute of a node.
+ */
+template <typename T>
+inline bool readExecutable(T& serverOrClient, const NodeId& id) {
+    return detail::readAttributeImpl<AttributeId::Executable>(serverOrClient, id);
+}
+
+/**
+ * Asynchronously read the AttributeId::Executable attribute of a node.
+ * @param token @completiontoken{void(opcua::StatusCode, bool)}
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+inline auto readExecutableAsync(
+    Client& client, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
+) {
+    return detail::readAttributeAsyncImpl<AttributeId::Executable>(
+        client, id, std::forward<CompletionToken>(token)
+    );
+}
+
+/**
+ * Write the AttributeId::Executable attribute of a node.
+ */
+template <typename T>
+inline void writeExecutable(T& serverOrClient, const NodeId& id, bool executable) {
+    detail::writeAttributeImpl<AttributeId::Executable>(serverOrClient, id, executable);
+}
+
+/**
+ * Asynchronously write the AttributeId::Executable attribute of a node.
+ * @param token @completiontoken{void(opcua::StatusCode)}
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+inline void writeExecutableAsync(
+    Client& client, const NodeId& id, bool executable, CompletionToken&& token
+) {
+    detail::writeAttributeAsyncImpl<AttributeId::Executable>(
+        client, id, executable, std::forward<CompletionToken>(token)
+    );
+}
+
+/**
+ * Read the AttributeId::UserExecutable attribute of a node.
+ */
+template <typename T>
+inline bool readUserExecutable(T& serverOrClient, const NodeId& id) {
+    return detail::readAttributeImpl<AttributeId::UserExecutable>(serverOrClient, id);
+}
+
+/**
+ * Asynchronously read the AttributeId::UserExecutable attribute of a node.
+ * @param token @completiontoken{void(opcua::StatusCode, bool)}
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+inline auto readUserExecutableAsync(
+    Client& client, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
+) {
+    return detail::readAttributeAsyncImpl<AttributeId::UserExecutable>(
+        client, id, std::forward<CompletionToken>(token)
+    );
+}
+
+/**
+ * Write the AttributeId::UserExecutable attribute of a node.
+ */
+template <typename T>
+inline void writeUserExecutable(T& serverOrClient, const NodeId& id, bool userExecutable) {
+    detail::writeAttributeImpl<AttributeId::UserExecutable>(serverOrClient, id, userExecutable);
+}
+
+/**
+ * Asynchronously write the AttributeId::UserExecutable attribute of a node.
+ * @param token @completiontoken{void(opcua::StatusCode)}
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+inline void writeUserExecutableAsync(
+    Client& client, const NodeId& id, bool userExecutable, CompletionToken&& token
+) {
+    detail::writeAttributeAsyncImpl<AttributeId::UserExecutable>(
+        client, id, userExecutable, std::forward<CompletionToken>(token)
     );
 }
 

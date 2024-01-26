@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#include "open62541pp/Bitmask.h"
+#include "open62541pp/Common.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/NodeId.h"
@@ -30,8 +32,8 @@ struct Login {
  * control callbacks.
  *
  * If exceptions are thrown within the access control callbacks, they are caught in the C callbacks
- * and will return the most restrictive access rights, e.g. `0x00` in `getUserAccessLevel` or
- * `false` in `allowAddNode`. A warning log message with the exception will be generated.
+ * and will return the most restrictive access rights, e.g. `AccessLevel::None` in
+ * `getUserAccessLevel` or `false` in `allowAddNode`. The exception will be logged (warning level).
  *
  * The `sessionId` can originally be both `NULL` in open62541.
  * This is the case when, for example, a MonitoredItem (the underlying Subscription) is detached
@@ -76,10 +78,10 @@ public:
     virtual void closeSession(Session& session) = 0;
 
     /// Access control for all nodes.
-    virtual uint32_t getUserRightsMask(Session& session, const NodeId& nodeId) = 0;
+    virtual Bitmask<WriteMask> getUserRightsMask(Session& session, const NodeId& nodeId) = 0;
 
     /// Additional access control for variable nodes.
-    virtual uint8_t getUserAccessLevel(Session& session, const NodeId& nodeId) = 0;
+    virtual Bitmask<AccessLevel> getUserAccessLevel(Session& session, const NodeId& nodeId) = 0;
 
     /// Additional access control for method nodes.
     virtual bool getUserExecutable(Session& session, const NodeId& methodId) = 0;
@@ -150,9 +152,9 @@ public:
 
     void closeSession(Session& session) override;
 
-    uint32_t getUserRightsMask(Session& session, const NodeId& nodeId) override;
+    Bitmask<WriteMask> getUserRightsMask(Session& session, const NodeId& nodeId) override;
 
-    uint8_t getUserAccessLevel(Session& session, const NodeId& nodeId) override;
+    Bitmask<AccessLevel> getUserAccessLevel(Session& session, const NodeId& nodeId) override;
 
     bool getUserExecutable(Session& session, const NodeId& methodId) override;
 

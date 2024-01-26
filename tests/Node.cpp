@@ -8,6 +8,7 @@
 #include "open62541pp/Server.h"
 
 #include "helper/Runner.h"
+#include "helper/stringify.h"
 
 using namespace opcua;
 
@@ -136,7 +137,7 @@ TEST_CASE("Node") {
             CHECK_EQ(objNode.browseParent(), rootNode);
         }
 
-        SUBCASE("Read/write variable attributes") {
+        SUBCASE("Read/write variable node attributes") {
             CHECK_EQ(
                 varNode.writeDisplayName({"en-US", "name"}).readDisplayName(),
                 LocalizedText({"en-US", "name"})
@@ -161,10 +162,11 @@ TEST_CASE("Node") {
                 varNode.writeArrayDimensions({2, 3}).readArrayDimensions(),
                 std::vector<uint32_t>{2, 3}
             );
-            CHECK_EQ(varNode.writeAccessLevel(0xFF).readAccessLevel(), 0xFF);
+            CHECK_EQ(varNode.writeAccessLevel(0xFF).readAccessLevel(), uint8_t{0xFF});
             CHECK_EQ(
                 varNode.writeMinimumSamplingInterval(11.11).readMinimumSamplingInterval(), 11.11
             );
+            CHECK_EQ(varNode.writeHistorizing(true).readHistorizing(), true);
         }
 
         SUBCASE("Read/write value") {
@@ -227,8 +229,8 @@ TEST_CASE("Node") {
                 {1, 1001},
                 "Property",
                 VariableAttributes{}
-                    .setWriteMask(0xFFFFFFFF)
-                    .setAccessLevel(0xFF)
+                    .setWriteMask(WriteMask::None)
+                    .setAccessLevel(AccessLevel::CurrentRead | AccessLevel::CurrentWrite)
                     .setDataType<double>()
                     .setValueScalar(11.11)
             );

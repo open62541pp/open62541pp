@@ -33,7 +33,6 @@ private:
     using EnableIfNoSpan = typename std::enable_if_t<!detail::IsSpan<T>::value>;
 
 public:
-    // NOLINTNEXTLINE, false positive?
     using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
 
     /// Create Variant from scalar value (no copy if assignable without conversion).
@@ -185,18 +184,29 @@ public:
     /// Get reference to scalar value with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not a scalar or not of type `T`.
     template <typename T>
-    T& getScalar() {
+    T& getScalar() & {
         return const_cast<T&>(std::as_const(*this).getScalar<T>());  // NOLINT
     }
 
-    /// Get const reference to scalar value with given template type (only native or wrapper types).
-    /// @exception BadVariantAccess If the variant is not a scalar or not of type `T`.
+    /// @copydoc getScalar()&
     template <typename T>
-    const T& getScalar() const {
+    const T& getScalar() const& {
         assertIsNative<T>();
         checkIsScalar();
         checkIsDataType<T>();
         return *static_cast<const T*>(handle()->data);
+    }
+
+    /// @copydoc getScalar()&
+    template <typename T>
+    T&& getScalar() && {
+        return std::move(getScalar<T>());
+    }
+
+    /// @copydoc getScalar()&
+    template <typename T>
+    const T&& getScalar() const&& {
+        return std::move(getScalar<T>());
     }
 
     /// Get copy of scalar value with given template type.
@@ -317,8 +327,14 @@ public:
 
     /// @overload
     template <typename ArrayLike, typename = EnableIfNoSpan<ArrayLike>>
-    void setArrayCopy(ArrayLike&& array) noexcept {
-        setArrayCopy(Span{std::forward<ArrayLike>(array)});
+    void setArrayCopy(ArrayLike&& array) {
+        using ValueType = typename std::remove_reference_t<ArrayLike>::value_type;
+        using SpanType = Span<const ValueType>;
+        if constexpr (std::is_constructible_v<SpanType, ArrayLike>) {
+            setArrayCopy(Span{std::forward<ArrayLike>(array)});
+        } else {
+            setArrayCopy(array.begin(), array.end());
+        }
     }
 
     /// Copy array to variant with custom data type.
@@ -329,8 +345,14 @@ public:
 
     /// @overload
     template <typename ArrayLike, typename = EnableIfNoSpan<ArrayLike>>
-    void setArrayCopy(ArrayLike&& array, const UA_DataType& dataType) noexcept {
-        setArrayCopy(Span{std::forward<ArrayLike>(array)}, dataType);
+    void setArrayCopy(ArrayLike&& array, const UA_DataType& dataType) {
+        using ValueType = typename std::remove_reference_t<ArrayLike>::value_type;
+        using SpanType = Span<const ValueType>;
+        if constexpr (std::is_constructible_v<SpanType, ArrayLike>) {
+            setArrayCopy(Span{std::forward<ArrayLike>(array)}, dataType);
+        } else {
+            setArrayCopy(array.begin(), array.end(), dataType);
+        }
     }
 
     /// Copy range of elements as array to variant.
@@ -489,7 +511,7 @@ void Variant::setArrayCopyImpl(InputIt first, InputIt last, const UA_DataType& d
     using ValueType = typename std::iterator_traits<InputIt>::value_type;
     const size_t size = std::distance(first, last);
     auto native = detail::allocateArrayUniquePtr<ValueType>(size, dataType);
-    std::transform(first, last, native.get(), [&](auto&& value) {
+    std::transform(first, last, native.get(), [&](const ValueType& value) {
         return detail::copy(value, dataType);
     });
     setArrayImpl(native.release(), size, dataType, UA_VARIANT_DATA);  // move ownership

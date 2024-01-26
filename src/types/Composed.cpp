@@ -24,6 +24,11 @@ inline static void assign(T src, Native& dst) noexcept {
     dst = static_cast<Native>(src);
 }
 
+template <typename T, typename Native>
+inline static void assign(Bitmask<T> src, Native& dst) noexcept {
+    dst = src.get();
+}
+
 inline static void assign(std::string_view src, UA_String& dst) {
     // UA_String is empty in constructor call, no clear necessary
     assert(dst.data == nullptr);
@@ -193,8 +198,8 @@ BrowseDescription::BrowseDescription(
     BrowseDirection browseDirection,
     NodeId referenceTypeId,
     bool includeSubtypes,
-    uint32_t nodeClassMask,
-    uint32_t resultMask
+    Bitmask<NodeClass> nodeClassMask,
+    Bitmask<BrowseResultMask> resultMask
 ) {
     assign(std::move(nodeId), handle()->nodeId);
     assign(browseDirection, handle()->browseDirection);

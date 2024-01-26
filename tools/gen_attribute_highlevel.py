@@ -21,23 +21,23 @@ ATTRIBUTES = [
     Attribute(name="BrowseName", type_value="opcua::QualifiedName", copy=False, writeable=True),
     Attribute(name="DisplayName", type_value="opcua::LocalizedText", copy=False, writeable=True),
     Attribute(name="Description", type_value="opcua::LocalizedText", copy=False, writeable=True),
-    Attribute(name="WriteMask", type_value="uint32_t", copy=True, writeable=True),
-    Attribute(name="UserWriteMask", type_value="uint32_t", copy=True, writeable=True),
+    Attribute(name="WriteMask", type_value="opcua::Bitmask<WriteMask>", copy=True, writeable=True),
+    Attribute(name="UserWriteMask", type_value="opcua::Bitmask<WriteMask>", copy=True, writeable=True),
     Attribute(name="IsAbstract", type_value="bool", copy=True, writeable=True),
     Attribute(name="Symmetric", type_value="bool", copy=True, writeable=True),
     Attribute(name="InverseName", type_value="opcua::LocalizedText", copy=False, writeable=True),
     Attribute(name="ContainsNoLoops", type_value="bool", copy=False, writeable=True),
-    Attribute(name="EventNotifier", type_value="uint8_t ", copy=True, writeable=True),
+    Attribute(name="EventNotifier", type_value="opcua::Bitmask<EventNotifier>", copy=True, writeable=True),
     Attribute(name="Value", type_value="opcua::Variant", copy=False, writeable=True),
     Attribute(name="DataType", type_value="opcua::NodeId", copy=False, writeable=True),
     Attribute(name="ValueRank", type_value="opcua::ValueRank", copy=True, writeable=True),
     Attribute(name="ArrayDimensions", type_value="std::vector<uint32_t>", type_view="Span<const uint32_t>", copy=False, writeable=True),
-    Attribute(name="AccessLevel", type_value="uint8_t", copy=True, writeable=True),
-    Attribute(name="UserAccessLevel", type_value="uint8_t", copy=True, writeable=True),
+    Attribute(name="AccessLevel", type_value="opcua::Bitmask<AccessLevel>", copy=True, writeable=True),
+    Attribute(name="UserAccessLevel", type_value="opcua::Bitmask<AccessLevel>", copy=True, writeable=True),
     Attribute(name="MinimumSamplingInterval", type_value="double", copy=True, writeable=True),
-    # Attribute(name="Historizing", type_value="bool", copy=True, writeable=True),
-    # Attribute(name="Executable", type_value="bool", copy=True, writeable=True),
-    # Attribute(name="UserExecutable", type_value="bool", copy=True, writeable=True),
+    Attribute(name="Historizing", type_value="bool", copy=True, writeable=True),
+    Attribute(name="Executable", type_value="bool", copy=True, writeable=True),
+    Attribute(name="UserExecutable", type_value="bool", copy=True, writeable=True),
 ]
 
 TEMPLATE_HEADER = """
@@ -77,7 +77,7 @@ inline {type_without_ns} read{attr}(T& serverOrClient, const NodeId& id) {{
 /**
  * Asynchronously read the AttributeId::{attr} attribute of a node.
  * @param token @completiontoken{{void(opcua::StatusCode, {type_completion})}}
-*/
+ */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto read{attr}Async(
     Client& client, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
