@@ -680,6 +680,29 @@ TEST_CASE("Variant") {
             CHECK(var.getArray<CustomType>().data() != array.data());
         }
     }
+
+    SUBCASE("getScalar (lvalue & rvalue)") {
+        auto var = Variant::fromScalar("test");
+        void* data = var.getScalar<String>()->data;
+
+        String str;
+        SUBCASE("rvalue") {
+            str = var.getScalar<String>();
+            CHECK(str->data != data);  // copy
+        }
+        SUBCASE("const rvalue") {
+            str = std::as_const(var).getScalar<String>();
+            CHECK(str->data != data);  // copy
+        }
+        SUBCASE("lvalue") {
+            str = std::move(var).getScalar<String>();
+            CHECK(str->data == data);  // move
+        }
+        SUBCASE("const lvalue") {
+            str = std::move(std::as_const(var)).getScalar<String>();
+            CHECK(str->data != data);  // can not move const -> copy
+        }
+    }
 }
 
 TEST_CASE("DataValue") {
