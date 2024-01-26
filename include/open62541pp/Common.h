@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cstdint>
-#include <string_view>
+#include <type_traits>
 
 #include "open62541pp/open62541.h"
 
@@ -112,30 +112,6 @@ enum class NodeClass : int32_t {
 
 template <>
 struct IsBitmaskEnum<NodeClass> : std::true_type {};
-
-/// Get name of node class.
-constexpr std::string_view getNodeClassName(NodeClass nodeClass) {
-    switch (nodeClass) {
-    case NodeClass::Object:
-        return "Object";
-    case NodeClass::Variable:
-        return "Variable";
-    case NodeClass::Method:
-        return "Method";
-    case NodeClass::ObjectType:
-        return "ObjectType";
-    case NodeClass::VariableType:
-        return "VariableType";
-    case NodeClass::ReferenceType:
-        return "ReferenceType";
-    case NodeClass::DataType:
-        return "DataType";
-    case NodeClass::View:
-        return "View";
-    default:
-        return "Unknown";
-    }
-}
 
 /**
  * Access level.
