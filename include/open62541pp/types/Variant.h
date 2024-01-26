@@ -29,10 +29,6 @@ class NodeId;
  * @ingroup TypeWrapper
  */
 class Variant : public TypeWrapper<UA_Variant, UA_TYPES_VARIANT> {
-private:
-    template <typename T>
-    using EnableIfNoSpan = typename std::enable_if_t<!detail::IsSpan<T>::value>;
-
 public:
     // NOLINTNEXTLINE, false positive?
     using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
