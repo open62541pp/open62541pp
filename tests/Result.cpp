@@ -7,13 +7,17 @@
 using namespace opcua;
 
 static constexpr StatusCode badCode(UA_STATUSCODE_BADUNEXPECTEDERROR);
+static constexpr detail::BadResult badResult(badCode);
 
 TEST_CASE("Result") {
-    const detail::BadResult badResult(badCode);
-
     SUBCASE("code") {
         CHECK(detail::Result<int>(1).code() == UA_STATUSCODE_GOOD);
         CHECK(detail::Result<int>(badResult).code() == badCode);
+    }
+
+    SUBCASE("isGood") {
+        CHECK(detail::Result<int>(1).isGood());
+        CHECK_FALSE(detail::Result<int>(badResult).isGood());
     }
 
     SUBCASE("operator->") {
@@ -39,6 +43,11 @@ TEST_CASE("Result") {
             CHECK(*detail::Result<int>(1) == 1);
             CHECK(*detail::Result<int>(badResult) == 0);
         }
+    }
+
+    SUBCASE("isGood") {
+        CHECK(detail::Result<int>(1).isGood());
+        CHECK_FALSE(detail::Result<int>(badResult).isGood());
     }
 
     SUBCASE("value") {
@@ -71,11 +80,14 @@ TEST_CASE("Result") {
 }
 
 TEST_CASE("Result (void template specialization)") {
-    const detail::BadResult badResult(badCode);
-
     SUBCASE("code") {
         CHECK(detail::Result<void>().code() == UA_STATUSCODE_GOOD);
         CHECK(detail::Result<void>(badResult).code() == badCode);
+    }
+
+    SUBCASE("isGood") {
+        CHECK(detail::Result<void>().isGood());
+        CHECK_FALSE(detail::Result<void>(badResult).isGood());
     }
 
     SUBCASE("value") {
@@ -87,24 +99,21 @@ TEST_CASE("Result (void template specialization)") {
 TEST_CASE("tryInvoke") {
     SUBCASE("Result") {
         auto result = detail::tryInvoke([] { return 1; });
-        CHECK(result.hasException() == false);
+        CHECK(result.isGood());
         CHECK(result.value() == 1);
         CHECK(result.code() == 0);
     }
 
     SUBCASE("BadStatus exception") {
         auto result = detail::tryInvoke([] { throw BadStatus(badCode); });
-        CHECK(result.hasException() == false);
+        CHECK_FALSE(result.isGood());
         CHECK(result.code() == badCode);
     }
 
     SUBCASE("Other exception types") {
         auto result = detail::tryInvoke([] { throw std::runtime_error("test"); });
-        CHECK(result.hasException() == true);
-        CHECK_THROWS_WITH_AS(
-            std::rethrow_exception(result.exception()), "test", std::runtime_error
-        );
-        CHECK(result.code() == UA_STATUSCODE_BAD);
+        CHECK_FALSE(result.isGood());
+        CHECK(result.code() == UA_STATUSCODE_BADINTERNALERROR);
     }
 }
 

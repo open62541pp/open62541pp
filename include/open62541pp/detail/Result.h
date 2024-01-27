@@ -1,7 +1,6 @@
 #pragma once
 
 #include <cassert>
-#include <exception>
 
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/types/Builtin.h"  // StatusCode
@@ -13,31 +12,9 @@ namespace opcua::detail {
  */
 class BadResult {
 public:
-    explicit BadResult(StatusCode code) noexcept
+    constexpr explicit BadResult(StatusCode code) noexcept
         : code_(code) {
-        assert(code_.isBad());
-    }
-
-    explicit BadResult(std::exception_ptr exception) noexcept
-        : code_(UA_STATUSCODE_BAD),
-          exception_(std::move(exception)) {  // NOLINT
-        assert(exception_ != nullptr);
-    }
-
-    constexpr const std::exception_ptr& exception() const& noexcept {
-        return exception_;
-    }
-
-    constexpr std::exception_ptr& exception() & noexcept {
-        return exception_;
-    }
-
-    constexpr const std::exception_ptr&& exception() const&& noexcept {
-        return std::move(exception_);  // NOLINT
-    }
-
-    constexpr std::exception_ptr&& exception() && noexcept {
-        return std::move(exception_);
+        assert(code.isBad());
     }
 
     constexpr StatusCode code() const noexcept {
@@ -45,8 +22,7 @@ public:
     }
 
 private:
-    StatusCode code_{};
-    std::exception_ptr exception_{};
+    StatusCode code_;
 };
 
 /**
@@ -67,9 +43,8 @@ public:
         : value_(std::move(value)) {}
 
     // NOLINTNEXTLINE, implicit wanted
-    Result(BadResult error) noexcept
-        : code_(error.code()),
-          exception_(std::move(error).exception()) {}
+    constexpr Result(BadResult error) noexcept
+        : code_(error.code()) {}
 
     constexpr Result(
         StatusCode code, const T& value
@@ -105,62 +80,54 @@ public:
         return std::move(value_);
     }
 
-    bool hasException() const noexcept {
-        return exception_ != nullptr;
-    }
-
-    constexpr const std::exception_ptr& exception() const noexcept {
-        return exception_;
-    }
-
     constexpr StatusCode code() const noexcept {
         return code_;
     }
 
+    constexpr bool isGood() const noexcept {
+        return code().isGood();
+    }
+
+    constexpr bool isBad() const noexcept {
+        return code().isBad();
+    }
+
     constexpr const T& value() const& {
-        throwExceptionOrBadStatus();
+        checkIsBad();
         return **this;
     }
 
     constexpr T& value() & {
-        throwExceptionOrBadStatus();
+        checkIsBad();
         return **this;
     }
 
     constexpr const T&& value() const&& {
-        throwExceptionOrBadStatus();
+        checkIsBad();
         return std::move(**this);
     }
 
     constexpr T&& value() && {
-        throwExceptionOrBadStatus();
+        checkIsBad();
         return std::move(**this);
     }
 
     template <typename U>
     constexpr T valueOr(U&& defaultValue) const& {
-        return isGood() ? **this : static_cast<T>(std::forward<U>(defaultValue));
+        return !isBad() ? **this : static_cast<T>(std::forward<U>(defaultValue));
     }
 
     template <typename U>
     constexpr T valueOr(U&& defaultValue) && {
-        return isGood() ? std::move(**this) : static_cast<T>(std::forward<U>(defaultValue));
+        return !isBad() ? std::move(**this) : static_cast<T>(std::forward<U>(defaultValue));
     }
 
 private:
-    constexpr bool isGood() const {
-        return !hasException() && !code().isBad();
-    }
-
-    constexpr void throwExceptionOrBadStatus() const {
-        if (hasException()) {
-            std::rethrow_exception(exception());
-        }
+    constexpr void checkIsBad() const {
         code().throwIfBad();
     }
 
     StatusCode code_{};
-    std::exception_ptr exception_{};
     T value_{};
 };
 
@@ -170,9 +137,8 @@ public:
     constexpr Result() noexcept = default;
 
     // NOLINTNEXTLINE, implicit wanted
-    Result(BadResult error) noexcept
-        : code_(error.code()),
-          exception_(std::move(error).exception()) {}
+    constexpr Result(BadResult error) noexcept
+        : code_(error.code()) {}
 
     constexpr const void* operator->() const noexcept {
         return nullptr;
@@ -184,16 +150,16 @@ public:
 
     constexpr void operator*() const noexcept {}
 
-    bool hasException() const noexcept {
-        return exception_ != nullptr;
-    }
-
-    constexpr const std::exception_ptr& exception() const noexcept {
-        return exception_;
-    }
-
     constexpr StatusCode code() const noexcept {
         return code_;
+    }
+
+    constexpr bool isGood() const noexcept {
+        return code().isGood();
+    }
+
+    constexpr bool isBad() const noexcept {
+        return code().isBad();
     }
 
     constexpr void value() const {
@@ -202,7 +168,6 @@ public:
 
 private:
     StatusCode code_{};
-    std::exception_ptr exception_{};
 };
 
 /**
@@ -219,10 +184,8 @@ auto tryInvoke(F&& func, Args&&... args) noexcept -> Result<std::invoke_result_t
         } else {
             return std::invoke(std::forward<F>(func), std::forward<Args>(args)...);
         }
-    } catch (const BadStatus& e) {
-        return BadResult(e.code());
     } catch (...) {
-        return BadResult(std::current_exception());
+        return BadResult(getStatusCode(std::current_exception()));
     }
 }
 
