@@ -15,11 +15,6 @@ TEST_CASE("Result") {
         CHECK(detail::Result<int>(badResult).code() == badCode);
     }
 
-    SUBCASE("isGood") {
-        CHECK(detail::Result<int>(1).isGood());
-        CHECK_FALSE(detail::Result<int>(badResult).isGood());
-    }
-
     SUBCASE("operator->") {
         struct S {
             int a;
@@ -43,11 +38,6 @@ TEST_CASE("Result") {
             CHECK(*detail::Result<int>(1) == 1);
             CHECK(*detail::Result<int>(badResult) == 0);
         }
-    }
-
-    SUBCASE("isGood") {
-        CHECK(detail::Result<int>(1).isGood());
-        CHECK_FALSE(detail::Result<int>(badResult).isGood());
     }
 
     SUBCASE("value") {
@@ -84,35 +74,22 @@ TEST_CASE("Result (void template specialization)") {
         CHECK(detail::Result<void>().code() == UA_STATUSCODE_GOOD);
         CHECK(detail::Result<void>(badResult).code() == badCode);
     }
-
-    SUBCASE("isGood") {
-        CHECK(detail::Result<void>().isGood());
-        CHECK_FALSE(detail::Result<void>(badResult).isGood());
-    }
-
-    SUBCASE("value") {
-        CHECK_NOTHROW(detail::Result<void>().value());
-        CHECK_THROWS_AS(detail::Result<void>(badResult).value(), BadStatus);
-    }
 }
 
 TEST_CASE("tryInvoke") {
     SUBCASE("Result") {
         auto result = detail::tryInvoke([] { return 1; });
-        CHECK(result.isGood());
         CHECK(result.value() == 1);
         CHECK(result.code() == 0);
     }
 
     SUBCASE("BadStatus exception") {
         auto result = detail::tryInvoke([] { throw BadStatus(badCode); });
-        CHECK_FALSE(result.isGood());
         CHECK(result.code() == badCode);
     }
 
     SUBCASE("Other exception types") {
         auto result = detail::tryInvoke([] { throw std::runtime_error("test"); });
-        CHECK_FALSE(result.isGood());
         CHECK(result.code() == UA_STATUSCODE_BADINTERNALERROR);
     }
 }

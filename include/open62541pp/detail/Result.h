@@ -84,14 +84,6 @@ public:
         return code_;
     }
 
-    constexpr bool isGood() const noexcept {
-        return code().isGood();
-    }
-
-    constexpr bool isBad() const noexcept {
-        return code().isBad();
-    }
-
     constexpr const T& value() const& {
         checkIsBad();
         return **this;
@@ -123,6 +115,10 @@ public:
     }
 
 private:
+    constexpr bool isBad() const noexcept {
+        return code().isBad();
+    }
+
     constexpr void checkIsBad() const {
         code().throwIfBad();
     }
@@ -152,14 +148,6 @@ public:
 
     constexpr StatusCode code() const noexcept {
         return code_;
-    }
-
-    constexpr bool isGood() const noexcept {
-        return code().isGood();
-    }
-
-    constexpr bool isBad() const noexcept {
-        return code().isBad();
     }
 
     constexpr void value() const {
