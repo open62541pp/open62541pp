@@ -4,7 +4,7 @@
 #include <cassert>
 #include <cstddef>
 #include <cstdint>
-#include <iterator>  // distance
+#include <iterator>  // distance, iterator_traits
 #include <optional>
 #include <type_traits>  // enable_if
 #include <utility>  // as_const
@@ -76,7 +76,7 @@ public:
         constexpr bool isMutable = detail::IsMutableContainer<ArrayLike>::value;
         constexpr bool isContiguous = detail::IsContiguousContainer<ArrayLike>::value;
         Variant variant;
-        if constexpr (isMutable && isContiguous && detail::isRegisteredType<ValueType>) {
+        if constexpr (!std::is_rvalue_reference_v<ArrayLike> && isMutable && isContiguous && detail::isRegisteredType<ValueType>) {
             variant.setArray(std::forward<ArrayLike>(array));
         } else {
             variant.setArrayCopy(std::forward<ArrayLike>(array));
@@ -90,7 +90,7 @@ public:
         constexpr bool isMutable = detail::IsMutableContainer<ArrayLike>::value;
         constexpr bool isContiguous = detail::IsContiguousContainer<ArrayLike>::value;
         Variant variant;
-        if constexpr (isMutable && isContiguous) {
+        if constexpr (!std::is_rvalue_reference_v<ArrayLike> && isMutable && isContiguous) {
             variant.setArray(std::forward<ArrayLike>(array), dataType);
         } else {
             variant.setArrayCopy(std::forward<ArrayLike>(array), dataType);
@@ -275,6 +275,7 @@ public:
      */
     template <typename ArrayLike>
     void setArray(ArrayLike&& array, const UA_DataType& dataType) noexcept {
+        static_assert(!std::is_rvalue_reference_v<ArrayLike>);
         setArrayImpl(std::data(array), std::size(array), dataType, UA_VARIANT_DATA_NODELETE);
     }
 
