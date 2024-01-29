@@ -1,6 +1,5 @@
 #pragma once
 
-#include <iterator>
 #include <type_traits>
 
 namespace opcua::detail {
@@ -37,15 +36,17 @@ struct IsContiguousContainer<
     : std::is_pointer<decltype(std::declval<T>().data())>  // detect proxy iterator of vector<bool>
 {};
 
-template <typename Iterator>
-struct IsMutableIterator
-    : std::negation<std::is_const<
-          std::remove_reference_t<typename std::iterator_traits<Iterator>::reference>>> {};
-
 template <typename T>
 struct IsMutableContainer
     : std::conjunction<
-          IsMutableIterator<decltype(std::declval<T>().begin())>,
-          IsMutableIterator<decltype(std::declval<T>().end())>> {};
+          std::is_same<
+              decltype(std::declval<T>().begin()),
+              typename std::remove_reference_t<T>::iterator>,
+          std::is_same<
+              decltype(std::declval<T>().end()),
+              typename std::remove_reference_t<T>::iterator>,
+          std::negation<std::is_same<
+              typename std::remove_reference_t<T>::iterator,
+              typename std::remove_reference_t<T>::const_iterator>>> {};
 
 }  // namespace opcua::detail
