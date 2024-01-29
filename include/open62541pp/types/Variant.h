@@ -76,7 +76,7 @@ public:
         constexpr bool isMutable = detail::IsMutableContainer<ArrayLike>::value;
         constexpr bool isContiguous = detail::IsContiguousContainer<ArrayLike>::value;
         Variant variant;
-        if constexpr (!std::is_rvalue_reference_v<ArrayLike> && isMutable && isContiguous && detail::isRegisteredType<ValueType>) {
+        if constexpr (!std::is_rvalue_reference_v<decltype(array)> && isMutable && isContiguous && detail::isRegisteredType<ValueType>) {
             variant.setArray(std::forward<ArrayLike>(array));
         } else {
             variant.setArrayCopy(std::forward<ArrayLike>(array));
@@ -90,7 +90,7 @@ public:
         constexpr bool isMutable = detail::IsMutableContainer<ArrayLike>::value;
         constexpr bool isContiguous = detail::IsContiguousContainer<ArrayLike>::value;
         Variant variant;
-        if constexpr (!std::is_rvalue_reference_v<ArrayLike> && isMutable && isContiguous) {
+        if constexpr (!std::is_rvalue_reference_v<decltype(array)> && isMutable && isContiguous) {
             variant.setArray(std::forward<ArrayLike>(array), dataType);
         } else {
             variant.setArrayCopy(std::forward<ArrayLike>(array), dataType);
@@ -262,10 +262,10 @@ public:
      *              The underlying array must be accessible with `std::data` and `std::size`.
      */
     template <typename ArrayLike>
-    void setArray(ArrayLike&& array) noexcept {
+    void setArray(ArrayLike& array) noexcept {
         using ValueType = typename std::remove_reference_t<ArrayLike>::value_type;
         assertIsNative<ValueType>();
-        setArray(std::forward<ArrayLike>(array), opcua::getDataType<ValueType>());
+        setArray(array, opcua::getDataType<ValueType>());
     }
 
     /**
@@ -274,8 +274,7 @@ public:
      * @param dataType Custom data type.
      */
     template <typename ArrayLike>
-    void setArray(ArrayLike&& array, const UA_DataType& dataType) noexcept {
-        static_assert(!std::is_rvalue_reference_v<ArrayLike>);
+    void setArray(ArrayLike& array, const UA_DataType& dataType) noexcept {
         setArrayImpl(std::data(array), std::size(array), dataType, UA_VARIANT_DATA_NODELETE);
     }
 
@@ -285,7 +284,7 @@ public:
      *              The container must implement `begin()` and `end()`.
      */
     template <typename ArrayLike>
-    void setArrayCopy(ArrayLike&& array) {
+    void setArrayCopy(const ArrayLike& array) {
         setArrayCopy(array.begin(), array.end());
     }
 
@@ -295,7 +294,7 @@ public:
      * @param dataType Custom data type.
      */
     template <typename ArrayLike>
-    void setArrayCopy(ArrayLike&& array, const UA_DataType& dataType) {
+    void setArrayCopy(const ArrayLike& array, const UA_DataType& dataType) {
         setArrayCopy(array.begin(), array.end(), dataType);
     }
 
