@@ -31,7 +31,7 @@ public:
         std::optional<DateTime> serverTimestamp,  // NOLINT
         std::optional<uint16_t> sourcePicoseconds,
         std::optional<uint16_t> serverPicoseconds,
-        std::optional<StatusCode> statusCode
+        std::optional<StatusCode> status
     ) noexcept
         : DataValue(UA_DataValue{
               UA_Variant{},
@@ -39,13 +39,13 @@ public:
               serverTimestamp.value_or(UA_DateTime{}),
               sourcePicoseconds.value_or(uint16_t{}),
               serverPicoseconds.value_or(uint16_t{}),
-              statusCode.value_or(UA_StatusCode{}),
+              status.value_or(UA_StatusCode{}),
               false,
               sourceTimestamp.has_value(),
               serverTimestamp.has_value(),
               sourcePicoseconds.has_value(),
               serverPicoseconds.has_value(),
-              statusCode.has_value(),
+              status.has_value(),
           }) {
         setValue(std::move(value));
     }
@@ -84,8 +84,13 @@ public:
         return handle()->hasServerPicoseconds;
     }
 
-    bool hasStatusCode() const noexcept {
+    bool hasStatus() const noexcept {
         return handle()->hasStatus;
+    }
+
+    [[deprecated("Use hasStatus() instead")]]
+    bool hasStatusCode() const noexcept {
+        return hasStatus();
     }
 
     /// Get value.
@@ -128,9 +133,14 @@ public:
         return handle()->serverPicoseconds;
     }
 
-    /// Get status code.
-    StatusCode getStatusCode() const noexcept {
+    /// Get status.
+    StatusCode getStatus() const noexcept {
         return handle()->status;
+    }
+
+    [[deprecated("Use getStatus() instead")]]
+    StatusCode getStatusCode() const noexcept {
+        return getStatus();
     }
 
     /// Set value (copy).
@@ -169,10 +179,15 @@ public:
         handle()->hasServerPicoseconds = true;
     }
 
-    /// Set status code.
-    void setStatusCode(StatusCode statusCode) noexcept {
-        handle()->status = statusCode;
+    /// Set status.
+    void setStatus(StatusCode status) noexcept {
+        handle()->status = status;
         handle()->hasStatus = true;
+    }
+
+    [[deprecated("Use setStatus(StatusCode) instead.")]]
+    void setStatusCode(StatusCode statusCode) noexcept {
+        setStatus(statusCode);
     }
 };
 
