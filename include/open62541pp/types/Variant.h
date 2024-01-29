@@ -77,9 +77,9 @@ public:
         constexpr bool isContiguous = detail::IsContiguousContainer<ArrayLike>::value;
         Variant variant;
         if constexpr (isMutable && isContiguous && detail::isRegisteredType<ValueType>) {
-            variant.setArray(array);
+            variant.setArray(std::forward<ArrayLike>(array));
         } else {
-            variant.setArrayCopy(array);
+            variant.setArrayCopy(std::forward<ArrayLike>(array));
         }
         return variant;
     }
@@ -91,9 +91,9 @@ public:
         constexpr bool isContiguous = detail::IsContiguousContainer<ArrayLike>::value;
         Variant variant;
         if constexpr (isMutable && isContiguous) {
-            variant.setArray(array, dataType);
+            variant.setArray(std::forward<ArrayLike>(array), dataType);
         } else {
-            variant.setArrayCopy(array, dataType);
+            variant.setArrayCopy(std::forward<ArrayLike>(array), dataType);
         }
         return variant;
     }
