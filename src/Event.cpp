@@ -39,7 +39,7 @@ Event& Event::writeSourceName(std::string_view sourceName) {
     return writeProperty({0, "SourceName"}, Variant::fromScalar(String(sourceName)));
 }
 
-Event& Event::writeTime(DateTime time) {
+Event& Event::writeTime(DateTime time) {  // NOLINT
     return writeProperty({0, "Time"}, Variant::fromScalar(time));
 }
 
