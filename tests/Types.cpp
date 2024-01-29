@@ -567,7 +567,7 @@ TEST_CASE("Variant") {
             detail::toNativeString("item2"),
             detail::toNativeString("item3"),
         };
-        var.setArray(array, UA_TYPES[UA_TYPES_STRING]);
+        var.setArray(Span{array.data(), array.size()}, UA_TYPES[UA_TYPES_STRING]);
         CHECK(var.data() == array.data());
         CHECK(var.getArrayLength() == array.size());
     }

@@ -73,10 +73,8 @@ public:
     template <typename ArrayLike>
     [[nodiscard]] static Variant fromArray(ArrayLike&& array) {
         using ValueType = typename std::remove_reference_t<ArrayLike>::value_type;
-        constexpr bool isMutable = detail::IsMutableContainer<ArrayLike>::value;
-        constexpr bool isContiguous = detail::IsContiguousContainer<ArrayLike>::value;
         Variant variant;
-        if constexpr (!std::is_rvalue_reference_v<decltype(array)> && isMutable && isContiguous && detail::isRegisteredType<ValueType>) {
+        if constexpr (isAssignableArray<decltype(array)>() && detail::isRegisteredType<ValueType>) {
             variant.setArray(std::forward<ArrayLike>(array));
         } else {
             variant.setArrayCopy(std::forward<ArrayLike>(array));
@@ -87,10 +85,8 @@ public:
     /// Create Variant from array with custom data type (no copy if assignable).
     template <typename ArrayLike>
     [[nodiscard]] static Variant fromArray(ArrayLike&& array, const UA_DataType& dataType) {
-        constexpr bool isMutable = detail::IsMutableContainer<ArrayLike>::value;
-        constexpr bool isContiguous = detail::IsContiguousContainer<ArrayLike>::value;
         Variant variant;
-        if constexpr (!std::is_rvalue_reference_v<decltype(array)> && isMutable && isContiguous) {
+        if constexpr (isAssignableArray<decltype(array)>()) {
             variant.setArray(std::forward<ArrayLike>(array), dataType);
         } else {
             variant.setArrayCopy(std::forward<ArrayLike>(array), dataType);
@@ -262,10 +258,10 @@ public:
      *              The underlying array must be accessible with `std::data` and `std::size`.
      */
     template <typename ArrayLike>
-    void setArray(ArrayLike& array) noexcept {
+    void setArray(ArrayLike&& array) noexcept {
         using ValueType = typename std::remove_reference_t<ArrayLike>::value_type;
         assertIsNative<ValueType>();
-        setArray(array, opcua::getDataType<ValueType>());
+        setArray(std::forward<ArrayLike>(array), opcua::getDataType<ValueType>());
     }
 
     /**
@@ -274,7 +270,8 @@ public:
      * @param dataType Custom data type.
      */
     template <typename ArrayLike>
-    void setArray(ArrayLike& array, const UA_DataType& dataType) noexcept {
+    void setArray(ArrayLike&& array, const UA_DataType& dataType) noexcept {
+        static_assert(!isTemporaryArray<decltype(array)>());
         setArrayImpl(std::data(array), std::size(array), dataType, UA_VARIANT_DATA_NODELETE);
     }
 
@@ -321,6 +318,21 @@ public:
     }
 
 private:
+    template <typename ArrayLike>
+    static constexpr bool isTemporaryArray() {
+        constexpr bool isTemporary = std::is_rvalue_reference_v<ArrayLike>;
+        constexpr bool isView = detail::IsSpan<std::remove_reference_t<ArrayLike>>::value;
+        return isTemporary && !isView;
+    }
+
+    template <typename ArrayLike>
+    static constexpr bool isAssignableArray() {
+        constexpr bool isTemporary = isTemporaryArray<ArrayLike>();
+        constexpr bool isMutable = detail::IsMutableContainer<ArrayLike>::value;
+        constexpr bool isContiguous = detail::IsContiguousContainer<ArrayLike>::value;
+        return !isTemporary && isMutable && isContiguous;
+    }
+
     template <typename T>
     static constexpr void assertIsNative() {
         static_assert(
