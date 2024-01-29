@@ -27,7 +27,7 @@ TEST_CASE_TEMPLATE("IsContiguousContainer false", T, std::list<int>, std::vector
     CHECK_FALSE(detail::IsContiguousContainer<const T&&>::value);
 }
 
-TEST_CASE_TEMPLATE("IsMutableContainer true", T, std::vector<int>, std::array<int, 3>, Span<int>) {
+TEST_CASE_TEMPLATE("IsMutableContainer true", T, std::vector<int>, std::array<int, 3>, Span<int>, std::vector<bool>) {
     CHECK(detail::IsMutableContainer<T>::value);
     CHECK(detail::IsMutableContainer<T&>::value);
     CHECK(detail::IsMutableContainer<T&&>::value);
