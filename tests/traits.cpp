@@ -33,7 +33,7 @@ TEST_CASE_TEMPLATE("IsMutableContainer true", T, std::vector<int>, std::array<in
     CHECK(detail::IsMutableContainer<T&&>::value);
 }
 
-TEST_CASE_TEMPLATE("IsMutableContainer false", T, const std::vector<int>, const std::array<int, 3>, const Span<const int>) {
+TEST_CASE_TEMPLATE("IsMutableContainer false", T, const std::vector<int>, const std::array<int, 3>, const Span<const int>, const std::vector<bool>) {
     CHECK_FALSE(detail::IsMutableContainer<T>::value);
     CHECK_FALSE(detail::IsMutableContainer<T&>::value);
     CHECK_FALSE(detail::IsMutableContainer<T&&>::value);
