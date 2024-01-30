@@ -73,7 +73,7 @@ inline static void invokeStateCallback(ClientContext& context, ClientState state
     const auto& callbackArray = context.stateCallbacks;
     const auto& callback = callbackArray.at(static_cast<size_t>(state));
     if (callback) {
-        detail::invokeCatchIgnore(callback);
+        context.exceptionHandler.invoke(callback);
     }
 }
 
@@ -171,6 +171,7 @@ public:
     void runIterate(uint16_t timeoutMilliseconds) {
         const auto status = UA_Client_run_iterate(handle(), timeoutMilliseconds);
         throwIfBad(status);
+        getContext().exceptionHandler.rethrow();
     }
 
     void run() {
@@ -181,6 +182,7 @@ public:
         try {
             while (running_) {
                 runIterate(1000);
+                getContext().exceptionHandler.rethrow();
             }
         } catch (...) {
             running_ = false;

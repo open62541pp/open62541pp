@@ -73,7 +73,9 @@ public:
         if (!running_) {
             runStartup();
         }
-        return UA_Server_run_iterate(handle(), false /* don't wait */);
+        auto interval = UA_Server_run_iterate(handle(), false /* don't wait */);
+        getContext().exceptionHandler.rethrow();
+        return interval;
     }
 
     void run() {
@@ -82,9 +84,15 @@ public:
         }
         runStartup();
         const std::lock_guard<std::mutex> lock(mutex_);
-        while (running_) {
-            // https://github.com/open62541/open62541/blob/master/examples/server_mainloop.c
-            UA_Server_run_iterate(handle(), true /* wait for messages in the networklayer */);
+        try {
+            while (running_) {
+                // https://github.com/open62541/open62541/blob/master/examples/server_mainloop.c
+                UA_Server_run_iterate(handle(), true /* wait for messages in the networklayer */);
+                getContext().exceptionHandler.rethrow();
+            }
+        } catch (...) {
+            running_ = false;
+            throw;
         }
     }
 

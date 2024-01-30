@@ -12,6 +12,7 @@
 #include "open62541pp/services/Subscription.h"
 #include "open62541pp/types/Composed.h"
 
+#include "ExceptionHandler.h"
 #include "open62541_impl.h"
 
 namespace opcua {
@@ -57,6 +58,7 @@ public:
     UA_SessionState lastSessionState{};
 #endif
     std::array<StateCallback, clientStateCount> stateCallbacks;
+    ExceptionHandler exceptionHandler;
 };
 
 /* ---------------------------------------------------------------------------------------------- */

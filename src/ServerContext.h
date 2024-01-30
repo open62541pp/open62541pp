@@ -10,6 +10,8 @@
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/NodeId.h"
 
+#include "ExceptionHandler.h"
+
 namespace opcua {
 
 /**
@@ -40,6 +42,8 @@ public:
     NodeContext* getOrCreateNodeContext(const NodeId& id) {
         return nodeContexts.emplace(id, std::make_unique<NodeContext>()).first->second.get();
     }
+
+    ExceptionHandler exceptionHandler;
 };
 
 }  // namespace opcua
