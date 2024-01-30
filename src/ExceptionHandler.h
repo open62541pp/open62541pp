@@ -23,7 +23,7 @@ public:
     }
 
     template <typename Callback, typename... Args>
-    void invoke(Callback&& callback, Args&&... args) {
+    void invoke(Callback&& callback, Args&&... args) noexcept {
         static_assert(std::is_void_v<std::invoke_result_t<Callback, Args&&...>>);
         try {
             std::invoke(std::forward<Callback>(callback), std::forward<Args>(args)...);
@@ -46,7 +46,7 @@ public:
     // }
 
     template <typename Callback>
-    auto wrapCallback(Callback&& callback) {
+    auto wrapCallback(Callback&& callback) noexcept {
         return [this, callback_ = std::forward<Callback>(callback)](auto&&... args) {
             this->invoke(std::move(callback_), std::forward<decltype(args)>(args)...);
         };
