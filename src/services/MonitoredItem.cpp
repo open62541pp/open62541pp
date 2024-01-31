@@ -125,7 +125,7 @@ uint32_t createMonitoredItemDataChange(
     request.monitoringMode = static_cast<UA_MonitoringMode>(monitoringMode);
     copyMonitoringParametersToNative(parameters, request.requestedParameters);
 
-    auto& exceptionHandler = client.getContext().exceptionHandler;
+    auto& exceptionHandler = detail::getExceptionHandler(client);
     auto context = std::make_unique<ClientContext::MonitoredItem>();
     context->itemToMonitor = itemToMonitor;
     context->dataChangeCallback = exceptionHandler.wrapCallback(std::move(dataChangeCallback));
@@ -163,7 +163,7 @@ uint32_t createMonitoredItemDataChange(
     request.monitoringMode = static_cast<UA_MonitoringMode>(monitoringMode);
     copyMonitoringParametersToNative(parameters, request.requestedParameters);
 
-    auto& exceptionHandler = server.getContext().exceptionHandler;
+    auto& exceptionHandler = detail::getExceptionHandler(server);
     auto context = std::make_unique<ServerContext::MonitoredItem>();
     context->itemToMonitor = itemToMonitor;
     context->dataChangeCallback = exceptionHandler.wrapCallback(std::move(dataChangeCallback));
@@ -198,7 +198,7 @@ uint32_t createMonitoredItemEvent(
     request.monitoringMode = static_cast<UA_MonitoringMode>(monitoringMode);
     copyMonitoringParametersToNative(parameters, request.requestedParameters);
 
-    auto& exceptionHandler = client.getContext().exceptionHandler;
+    auto& exceptionHandler = detail::getExceptionHandler(client);
     auto context = std::make_unique<ClientContext::MonitoredItem>();
     context->itemToMonitor = itemToMonitor;
     context->eventCallback = exceptionHandler.wrapCallback(std::move(eventCallback));

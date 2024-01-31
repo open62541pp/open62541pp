@@ -5,12 +5,11 @@
 
 #include "open62541pp/Config.h"
 #include "open62541pp/ValueBackend.h"
+#include "open62541pp/detail/ExceptionHandler.h"
 #include "open62541pp/services/NodeManagement.h"
 #include "open62541pp/services/Subscription.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/NodeId.h"
-
-#include "ExceptionHandler.h"
 
 namespace opcua {
 
@@ -43,7 +42,7 @@ public:
         return nodeContexts.emplace(id, std::make_unique<NodeContext>()).first->second.get();
     }
 
-    ExceptionHandler exceptionHandler;
+    detail::ExceptionHandler exceptionHandler;
 };
 
 }  // namespace opcua

@@ -5,6 +5,20 @@
 #include <utility>  // exchange
 
 namespace opcua {
+class Client;
+class ClientContext;
+class Server;
+class ServerContext;
+}  // namespace opcua
+
+namespace opcua::detail {
+
+class ExceptionHandler;
+
+ExceptionHandler& getExceptionHandler(ClientContext& context) noexcept;
+ExceptionHandler& getExceptionHandler(Client& client) noexcept;
+ExceptionHandler& getExceptionHandler(ServerContext& context) noexcept;
+ExceptionHandler& getExceptionHandler(Server& server) noexcept;
 
 class ExceptionHandler {
 public:
@@ -47,8 +61,8 @@ public:
 
     template <typename Callback>
     auto wrapCallback(Callback&& callback) noexcept {
-        return [this, callback_ = std::forward<Callback>(callback)](auto&&... args) {
-            this->invoke(std::move(callback_), std::forward<decltype(args)>(args)...);
+        return [this, cb = std::forward<Callback>(callback)](auto&&... args) {
+            this->invoke(std::move(cb), std::forward<decltype(args)>(args)...);
         };
     }
 
@@ -68,4 +82,4 @@ private:
     std::exception_ptr exception_;
 };
 
-}  // namespace opcua
+}  // namespace opcua::detail
