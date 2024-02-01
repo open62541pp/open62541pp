@@ -20,6 +20,10 @@ ExceptionHandler& getExceptionHandler(Client& client) noexcept;
 ExceptionHandler& getExceptionHandler(ServerContext& context) noexcept;
 ExceptionHandler& getExceptionHandler(Server& server) noexcept;
 
+/**
+ * Store exceptions from user-defined callbacks in an exception-unaware context (open62541).
+ * The stored exception can be rethrown in a different context.
+ */
 class ExceptionHandler {
 public:
     void setException(std::exception_ptr exception) noexcept {
