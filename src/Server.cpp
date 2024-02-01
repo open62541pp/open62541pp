@@ -74,7 +74,7 @@ public:
             runStartup();
         }
         auto interval = UA_Server_run_iterate(handle(), false /* don't wait */);
-        detail::getExceptionHandler(getContext()).rethrow();
+        detail::getExceptionCatcher(getContext()).rethrow();
         return interval;
     }
 
@@ -88,7 +88,7 @@ public:
             while (running_) {
                 // https://github.com/open62541/open62541/blob/master/examples/server_mainloop.c
                 UA_Server_run_iterate(handle(), true /* wait for messages in the networklayer */);
-                detail::getExceptionHandler(getContext()).rethrow();
+                detail::getExceptionCatcher(getContext()).rethrow();
             }
         } catch (...) {
             running_ = false;

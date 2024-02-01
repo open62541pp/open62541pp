@@ -125,11 +125,11 @@ uint32_t createMonitoredItemDataChange(
     request.monitoringMode = static_cast<UA_MonitoringMode>(monitoringMode);
     copyMonitoringParametersToNative(parameters, request.requestedParameters);
 
-    auto& exceptionHandler = detail::getExceptionHandler(client);
+    auto& exceptionCatcher = detail::getExceptionCatcher(client);
     auto context = std::make_unique<ClientContext::MonitoredItem>();
     context->itemToMonitor = itemToMonitor;
-    context->dataChangeCallback = exceptionHandler.wrapCallback(std::move(dataChangeCallback));
-    context->deleteCallback = exceptionHandler.wrapCallback(std::move(deleteCallback));
+    context->dataChangeCallback = exceptionCatcher.wrapCallback(std::move(dataChangeCallback));
+    context->deleteCallback = exceptionCatcher.wrapCallback(std::move(deleteCallback));
 
     using Result = TypeWrapper<UA_MonitoredItemCreateResult, UA_TYPES_MONITOREDITEMCREATERESULT>;
     const Result result = UA_Client_MonitoredItems_createDataChange(
@@ -163,10 +163,10 @@ uint32_t createMonitoredItemDataChange(
     request.monitoringMode = static_cast<UA_MonitoringMode>(monitoringMode);
     copyMonitoringParametersToNative(parameters, request.requestedParameters);
 
-    auto& exceptionHandler = detail::getExceptionHandler(server);
+    auto& exceptionCatcher = detail::getExceptionCatcher(server);
     auto context = std::make_unique<ServerContext::MonitoredItem>();
     context->itemToMonitor = itemToMonitor;
-    context->dataChangeCallback = exceptionHandler.wrapCallback(std::move(dataChangeCallback));
+    context->dataChangeCallback = exceptionCatcher.wrapCallback(std::move(dataChangeCallback));
 
     using Result = TypeWrapper<UA_MonitoredItemCreateResult, UA_TYPES_MONITOREDITEMCREATERESULT>;
     const Result result = UA_Server_createDataChangeMonitoredItem(
@@ -198,11 +198,11 @@ uint32_t createMonitoredItemEvent(
     request.monitoringMode = static_cast<UA_MonitoringMode>(monitoringMode);
     copyMonitoringParametersToNative(parameters, request.requestedParameters);
 
-    auto& exceptionHandler = detail::getExceptionHandler(client);
+    auto& exceptionCatcher = detail::getExceptionCatcher(client);
     auto context = std::make_unique<ClientContext::MonitoredItem>();
     context->itemToMonitor = itemToMonitor;
-    context->eventCallback = exceptionHandler.wrapCallback(std::move(eventCallback));
-    context->deleteCallback = exceptionHandler.wrapCallback(std::move(deleteCallback));
+    context->eventCallback = exceptionCatcher.wrapCallback(std::move(eventCallback));
+    context->deleteCallback = exceptionCatcher.wrapCallback(std::move(deleteCallback));
 
     using Result = TypeWrapper<UA_MonitoredItemCreateResult, UA_TYPES_MONITOREDITEMCREATERESULT>;
     const Result result = UA_Client_MonitoredItems_createEvent(
