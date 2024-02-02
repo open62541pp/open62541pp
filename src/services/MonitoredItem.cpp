@@ -127,7 +127,7 @@ uint32_t createMonitoredItemDataChange(
     request.monitoringMode = static_cast<UA_MonitoringMode>(monitoringMode);
     copyMonitoringParametersToNative(parameters, request.requestedParameters);
 
-    auto& exceptionCatcher = detail::getExceptionCatcher(client);
+    auto& exceptionCatcher = opcua::detail::getExceptionCatcher(client);
     auto context = std::make_unique<ClientContext::MonitoredItem>();
     context->itemToMonitor = itemToMonitor;
     context->dataChangeCallback = exceptionCatcher.wrapCallback(std::move(dataChangeCallback));
@@ -165,7 +165,7 @@ uint32_t createMonitoredItemDataChange(
     request.monitoringMode = static_cast<UA_MonitoringMode>(monitoringMode);
     copyMonitoringParametersToNative(parameters, request.requestedParameters);
 
-    auto& exceptionCatcher = detail::getExceptionCatcher(server);
+    auto& exceptionCatcher = opcua::detail::getExceptionCatcher(server);
     auto context = std::make_unique<ServerContext::MonitoredItem>();
     context->itemToMonitor = itemToMonitor;
     context->dataChangeCallback = exceptionCatcher.wrapCallback(std::move(dataChangeCallback));
@@ -200,7 +200,7 @@ uint32_t createMonitoredItemEvent(
     request.monitoringMode = static_cast<UA_MonitoringMode>(monitoringMode);
     copyMonitoringParametersToNative(parameters, request.requestedParameters);
 
-    auto& exceptionCatcher = detail::getExceptionCatcher(client);
+    auto& exceptionCatcher = opcua::detail::getExceptionCatcher(client);
     auto context = std::make_unique<ClientContext::MonitoredItem>();
     context->itemToMonitor = itemToMonitor;
     context->eventCallback = exceptionCatcher.wrapCallback(std::move(eventCallback));

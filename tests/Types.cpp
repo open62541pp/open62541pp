@@ -722,7 +722,7 @@ TEST_CASE("DataValue") {
         CHECK_FALSE(dv.hasServerTimestamp());
         CHECK_FALSE(dv.hasSourcePicoseconds());
         CHECK_FALSE(dv.hasServerPicoseconds());
-        CHECK_FALSE(dv.hasStatusCode());
+        CHECK_FALSE(dv.hasStatus());
     }
 
     SUBCASE("Constructor with all optional parameter empty") {
