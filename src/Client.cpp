@@ -285,7 +285,7 @@ std::vector<ApplicationDescription> Client::findServers(std::string_view serverU
         std::make_move_iterator(array),
         std::make_move_iterator(array + arraySize)  // NOLINT
     );
-    UA_free(array);  // NOLINT
+    UA_Array_delete(array, arraySize, &UA_TYPES[UA_TYPES_APPLICATIONDESCRIPTION]);
     throwIfBad(status);
     return result;
 }
@@ -303,7 +303,7 @@ std::vector<EndpointDescription> Client::getEndpoints(std::string_view serverUrl
         std::make_move_iterator(array),
         std::make_move_iterator(array + arraySize)  // NOLINT
     );
-    UA_free(array);  // NOLINT
+    UA_Array_delete(array, arraySize, &UA_TYPES[UA_TYPES_ENDPOINTDESCRIPTION]);
     throwIfBad(status);
     return result;
 }
