@@ -48,7 +48,10 @@ auto addNodesAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::sendRequest<UA_AddNodesRequest, UA_AddNodesResponse>(
-        client, request, detail::MoveResponse{}, std::forward<CompletionToken>(token)
+        client,
+        request,
+        detail::WrapResponse<AddNodesResponse>{},
+        std::forward<CompletionToken>(token)
     );
 }
 
@@ -71,7 +74,10 @@ auto addReferencesAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::sendRequest<UA_AddReferencesRequest, UA_AddReferencesResponse>(
-        client, request, detail::MoveResponse{}, std::forward<CompletionToken>(token)
+        client,
+        request,
+        detail::WrapResponse<AddReferencesResponse>{},
+        std::forward<CompletionToken>(token)
     );
 }
 
@@ -94,7 +100,10 @@ auto deleteNodesAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::sendRequest<UA_DeleteNodesRequest, UA_DeleteNodesResponse>(
-        client, request, detail::MoveResponse{}, std::forward<CompletionToken>(token)
+        client,
+        request,
+        detail::WrapResponse<DeleteNodesResponse>{},
+        std::forward<CompletionToken>(token)
     );
 }
 
@@ -117,7 +126,10 @@ auto deleteReferencesAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::sendRequest<UA_DeleteReferencesRequest, UA_DeleteReferencesResponse>(
-        client, request, detail::MoveResponse{}, std::forward<CompletionToken>(token)
+        client,
+        request,
+        detail::WrapResponse<DeleteReferencesResponse>{},
+        std::forward<CompletionToken>(token)
     );
 }
 

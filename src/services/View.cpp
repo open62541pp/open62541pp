@@ -19,7 +19,7 @@ namespace opcua::services {
 
 BrowseResponse browse(Client& client, const BrowseRequest& request) {
     return detail::sendRequest<UA_BrowseRequest, UA_BrowseResponse>(
-        client, request, detail::MoveResponse{}, detail::SyncOperation{}
+        client, request, detail::WrapResponse<BrowseResponse>{}, detail::SyncOperation{}
     );
 }
 
@@ -43,7 +43,7 @@ BrowseResult browse<Client>(Client& client, const BrowseDescription& bd, uint32_
 
 BrowseNextResponse browseNext(Client& client, const BrowseNextRequest& request) {
     return detail::sendRequest<UA_BrowseNextRequest, UA_BrowseNextResponse>(
-        client, request, detail::MoveResponse{}, detail::SyncOperation{}
+        client, request, detail::WrapResponse<BrowseNextResponse>{}, detail::SyncOperation{}
     );
 }
 
@@ -108,7 +108,10 @@ TranslateBrowsePathsToNodeIdsResponse translateBrowsePathsToNodeIds(
     return detail::sendRequest<
         UA_TranslateBrowsePathsToNodeIdsRequest,
         UA_TranslateBrowsePathsToNodeIdsResponse>(
-        client, request, detail::MoveResponse{}, detail::SyncOperation{}
+        client,
+        request,
+        detail::WrapResponse<TranslateBrowsePathsToNodeIdsResponse>{},
+        detail::SyncOperation{}
     );
 }
 
@@ -156,13 +159,13 @@ BrowsePathResult browseSimplifiedBrowsePath(
 
 RegisterNodesResponse registerNodes(Client& client, const RegisterNodesRequest& request) {
     return detail::sendRequest<UA_RegisterNodesRequest, UA_RegisterNodesResponse>(
-        client, request, detail::MoveResponse{}, detail::SyncOperation{}
+        client, request, detail::WrapResponse<RegisterNodesResponse>{}, detail::SyncOperation{}
     );
 }
 
 UnregisterNodesResponse unregisterNodes(Client& client, const UnregisterNodesRequest& request) {
     return detail::sendRequest<UA_UnregisterNodesRequest, UA_UnregisterNodesResponse>(
-        client, request, detail::MoveResponse{}, detail::SyncOperation{}
+        client, request, detail::WrapResponse<UnregisterNodesResponse>{}, detail::SyncOperation{}
     );
 }
 

@@ -3,6 +3,7 @@
 #include <algorithm>  // for_each_n
 #include <iterator>  // make_move_iterator
 #include <type_traits>
+#include <utility>  // exchange
 #include <vector>
 
 #include "open62541pp/ErrorHandling.h"
@@ -14,8 +15,18 @@
 
 namespace opcua::services::detail {
 
+template <typename WrapperType>
+struct WrapResponse {
+    static_assert(opcua::detail::isTypeWrapper<WrapperType>);
+
+    template <typename Response = typename WrapperType::NativeType>
+    [[nodiscard]] constexpr WrapperType operator()(Response&& value) noexcept {
+        return {std::exchange(std::forward<Response>(value), {})};
+    }
+};
+
 template <typename Response>
-inline UA_ResponseHeader& getResponseHeader(Response& response) noexcept {
+inline const UA_ResponseHeader& getResponseHeader(const Response& response) noexcept {
     if constexpr (opcua::detail::isTypeWrapper<Response>) {
         return response->responseHeader;
     } else {
@@ -24,12 +35,12 @@ inline UA_ResponseHeader& getResponseHeader(Response& response) noexcept {
 }
 
 template <typename Response>
-inline UA_StatusCode getServiceResult(Response& response) noexcept {
+inline UA_StatusCode getServiceResult(const Response& response) noexcept {
     return getResponseHeader(response).serviceResult;
 }
 
 template <typename Response>
-inline void checkServiceResult(Response& response) {
+inline void checkServiceResult(const Response& response) {
     throwIfBad(getServiceResult(response));
 }
 

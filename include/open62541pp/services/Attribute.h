@@ -75,7 +75,7 @@ auto readAsync(
     Client& client, const ReadRequest& request, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::sendRequest<UA_ReadRequest, UA_ReadResponse>(
-        client, request, detail::MoveResponse{}, std::forward<CompletionToken>(token)
+        client, request, detail::WrapResponse<ReadResponse>{}, std::forward<CompletionToken>(token)
     );
 }
 
@@ -148,11 +148,11 @@ inline WriteResponse write(Client& client, Span<const WriteValue> nodesToWrite) 
  * @param token @completiontoken{void(opcua::StatusCode, opcua::WriteResponse&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-WriteResponse writeAsync(
+auto writeAsync(
     Client& client, const WriteRequest& request, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::sendRequest<UA_WriteRequest, UA_WriteResponse>(
-        client, request, detail::MoveResponse{}, std::forward<CompletionToken>(token)
+        client, request, detail::WrapResponse<WriteResponse>{}, std::forward<CompletionToken>(token)
     );
 }
 

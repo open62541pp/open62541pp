@@ -46,7 +46,7 @@ public:
         try {
             std::invoke(std::forward<Callback>(callback), std::forward<Args>(args)...);
         } catch (...) {
-            this->setException(std::current_exception());
+            setException(std::current_exception());
         }
     }
 
@@ -58,7 +58,7 @@ public:
     //     try {
     //         return std::invoke(std::forward<Callback>(callback), std::forward<Args>(args)...);
     //     } catch (...) {
-    //         this->setException(std::current_exception());
+    //         setException(std::current_exception());
     //         return std::invoke(std::forward<OnException>(onException), std::current_exception());
     //     }
     // }
