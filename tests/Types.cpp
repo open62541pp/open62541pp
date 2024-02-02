@@ -732,7 +732,7 @@ TEST_CASE("DataValue") {
         CHECK_FALSE(dv.hasServerTimestamp());
         CHECK_FALSE(dv.hasSourcePicoseconds());
         CHECK_FALSE(dv.hasServerPicoseconds());
-        CHECK_FALSE(dv.hasStatusCode());
+        CHECK_FALSE(dv.hasStatus());
     }
 
     SUBCASE("Constructor with all optional parameter specified") {
@@ -749,7 +749,7 @@ TEST_CASE("DataValue") {
         CHECK(dv.getServerTimestamp() == DateTime{2});
         CHECK(dv.getSourcePicoseconds() == 3);
         CHECK(dv.getServerPicoseconds() == 4);
-        CHECK(dv.getStatusCode() == UA_STATUSCODE_BADINTERNALERROR);
+        CHECK(dv.getStatus() == UA_STATUSCODE_BADINTERNALERROR);
     }
 
     SUBCASE("Setter methods") {
@@ -760,6 +760,7 @@ TEST_CASE("DataValue") {
             var.setScalar(value);
             CHECK(var->data == &value);
             dv.setValue(std::move(var));
+            CHECK(dv.hasValue());
             CHECK(dv.getValue().getScalar<float>() == value);
             CHECK(dv->value.data == &value);
         }
@@ -768,32 +769,38 @@ TEST_CASE("DataValue") {
             Variant var;
             var.setScalar(value);
             dv.setValue(var);
+            CHECK(dv.hasValue());
             CHECK(dv.getValue().getScalar<float>() == value);
         }
         SUBCASE("Source timestamp") {
             DateTime dt{123};
             dv.setSourceTimestamp(dt);
+            CHECK(dv.hasSourceTimestamp());
             CHECK(dv.getSourceTimestamp() == dt);
         }
         SUBCASE("Server timestamp") {
             DateTime dt{456};
             dv.setServerTimestamp(dt);
+            CHECK(dv.hasServerTimestamp());
             CHECK(dv.getServerTimestamp() == dt);
         }
         SUBCASE("Source picoseconds") {
             const uint16_t ps = 123;
             dv.setSourcePicoseconds(ps);
+            CHECK(dv.hasSourcePicoseconds());
             CHECK(dv.getSourcePicoseconds() == ps);
         }
         SUBCASE("Server picoseconds") {
             const uint16_t ps = 456;
             dv.setServerPicoseconds(ps);
+            CHECK(dv.hasServerPicoseconds());
             CHECK(dv.getServerPicoseconds() == ps);
         }
-        SUBCASE("Status code") {
+        SUBCASE("Status") {
             const UA_StatusCode statusCode = UA_STATUSCODE_BADALREADYEXISTS;
-            dv.setStatusCode(statusCode);
-            CHECK(dv.getStatusCode() == statusCode);
+            dv.setStatus(statusCode);
+            CHECK(dv.hasStatus());
+            CHECK(dv.getStatus() == statusCode);
         }
     }
 

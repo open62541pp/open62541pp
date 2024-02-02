@@ -38,9 +38,7 @@ static void dataChangeNotificationCallback(
     auto* monitoredItem = static_cast<ServerContext::MonitoredItem*>(monitoredItemContext);
     auto& callback = monitoredItem->dataChangeCallback;
     if (callback) {
-        opcua::detail::tryInvoke([&] {
-            callback(0U, monitoredItemId, asWrapper<DataValue>(*value));
-        });
+        callback(0U, monitoredItemId, asWrapper<DataValue>(*value));
     }
 }
 
@@ -58,7 +56,7 @@ static void dataChangeNotificationCallback(
     auto* monitoredItem = static_cast<ClientContext::MonitoredItem*>(monContext);
     auto& callback = monitoredItem->dataChangeCallback;
     if (callback) {
-        opcua::detail::tryInvoke([&] { callback(subId, monId, asWrapper<DataValue>(*value)); });
+        callback(subId, monId, asWrapper<DataValue>(*value));
     }
 }
 
@@ -77,9 +75,7 @@ static void eventNotificationCallback(
     auto* monitoredItem = static_cast<ClientContext::MonitoredItem*>(monContext);
     auto& callback = monitoredItem->eventCallback;
     if (callback) {
-        opcua::detail::tryInvoke([&] {
-            callback(subId, monId, {asWrapper<Variant>(eventFields), nEventFields});
-        });
+        callback(subId, monId, {asWrapper<Variant>(eventFields), nEventFields});
     }
 }
 
@@ -131,10 +127,11 @@ uint32_t createMonitoredItemDataChange(
     request.monitoringMode = static_cast<UA_MonitoringMode>(monitoringMode);
     copyMonitoringParametersToNative(parameters, request.requestedParameters);
 
-    auto monitoredItemContext = std::make_unique<ClientContext::MonitoredItem>();
-    monitoredItemContext->itemToMonitor = itemToMonitor;
-    monitoredItemContext->dataChangeCallback = std::move(dataChangeCallback);
-    monitoredItemContext->deleteCallback = std::move(deleteCallback);
+    auto& exceptionCatcher = detail::getExceptionCatcher(client);
+    auto context = std::make_unique<ClientContext::MonitoredItem>();
+    context->itemToMonitor = itemToMonitor;
+    context->dataChangeCallback = exceptionCatcher.wrapCallback(std::move(dataChangeCallback));
+    context->deleteCallback = exceptionCatcher.wrapCallback(std::move(deleteCallback));
 
     using Result = TypeWrapper<UA_MonitoredItemCreateResult, UA_TYPES_MONITOREDITEMCREATERESULT>;
     const Result result = UA_Client_MonitoredItems_createDataChange(
@@ -142,7 +139,7 @@ uint32_t createMonitoredItemDataChange(
         subscriptionId,
         static_cast<UA_TimestampsToReturn>(parameters.timestamps),
         request,
-        monitoredItemContext.get(),
+        context.get(),
         dataChangeNotificationCallback,
         deleteMonitoredItemCallback
     );
@@ -151,7 +148,7 @@ uint32_t createMonitoredItemDataChange(
 
     const auto monitoredItemId = result->monitoredItemId;
     client.getContext().monitoredItems.insert_or_assign(
-        {subscriptionId, monitoredItemId}, std::move(monitoredItemContext)
+        {subscriptionId, monitoredItemId}, std::move(context)
     );
     return monitoredItemId;
 }
@@ -168,25 +165,24 @@ uint32_t createMonitoredItemDataChange(
     request.monitoringMode = static_cast<UA_MonitoringMode>(monitoringMode);
     copyMonitoringParametersToNative(parameters, request.requestedParameters);
 
-    auto monitoredItemContext = std::make_unique<ServerContext::MonitoredItem>();
-    monitoredItemContext->itemToMonitor = itemToMonitor;
-    monitoredItemContext->dataChangeCallback = std::move(dataChangeCallback);
+    auto& exceptionCatcher = detail::getExceptionCatcher(server);
+    auto context = std::make_unique<ServerContext::MonitoredItem>();
+    context->itemToMonitor = itemToMonitor;
+    context->dataChangeCallback = exceptionCatcher.wrapCallback(std::move(dataChangeCallback));
 
     using Result = TypeWrapper<UA_MonitoredItemCreateResult, UA_TYPES_MONITOREDITEMCREATERESULT>;
     const Result result = UA_Server_createDataChangeMonitoredItem(
         server.handle(),
         static_cast<UA_TimestampsToReturn>(parameters.timestamps),
         request,
-        monitoredItemContext.get(),
+        context.get(),
         dataChangeNotificationCallback
     );
     throwIfBad(result->statusCode);
     reviseMonitoringParameters(parameters, result);
 
     const auto monitoredItemId = result->monitoredItemId;
-    server.getContext().monitoredItems.insert_or_assign(
-        monitoredItemId, std::move(monitoredItemContext)
-    );
+    server.getContext().monitoredItems.insert_or_assign(monitoredItemId, std::move(context));
     return monitoredItemId;
 }
 
@@ -204,10 +200,11 @@ uint32_t createMonitoredItemEvent(
     request.monitoringMode = static_cast<UA_MonitoringMode>(monitoringMode);
     copyMonitoringParametersToNative(parameters, request.requestedParameters);
 
-    auto monitoredItemContext = std::make_unique<ClientContext::MonitoredItem>();
-    monitoredItemContext->itemToMonitor = itemToMonitor;
-    monitoredItemContext->eventCallback = std::move(eventCallback);
-    monitoredItemContext->deleteCallback = std::move(deleteCallback);
+    auto& exceptionCatcher = detail::getExceptionCatcher(client);
+    auto context = std::make_unique<ClientContext::MonitoredItem>();
+    context->itemToMonitor = itemToMonitor;
+    context->eventCallback = exceptionCatcher.wrapCallback(std::move(eventCallback));
+    context->deleteCallback = exceptionCatcher.wrapCallback(std::move(deleteCallback));
 
     using Result = TypeWrapper<UA_MonitoredItemCreateResult, UA_TYPES_MONITOREDITEMCREATERESULT>;
     const Result result = UA_Client_MonitoredItems_createEvent(
@@ -215,7 +212,7 @@ uint32_t createMonitoredItemEvent(
         subscriptionId,
         static_cast<UA_TimestampsToReturn>(parameters.timestamps),
         request,
-        monitoredItemContext.get(),
+        context.get(),
         eventNotificationCallback,
         deleteMonitoredItemCallback
     );
@@ -224,7 +221,7 @@ uint32_t createMonitoredItemEvent(
 
     const auto monitoredItemId = result->monitoredItemId;
     client.getContext().monitoredItems.insert_or_assign(
-        {subscriptionId, monitoredItemId}, std::move(monitoredItemContext)
+        {subscriptionId, monitoredItemId}, std::move(context)
     );
     return monitoredItemId;
 }

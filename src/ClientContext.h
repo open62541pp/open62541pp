@@ -8,6 +8,7 @@
 
 #include "open62541pp/Client.h"
 #include "open62541pp/Config.h"
+#include "open62541pp/detail/ExceptionCatcher.h"
 #include "open62541pp/services/MonitoredItem.h"
 #include "open62541pp/services/Subscription.h"
 #include "open62541pp/types/Composed.h"
@@ -57,6 +58,7 @@ public:
     UA_SessionState lastSessionState{};
 #endif
     std::array<StateCallback, clientStateCount> stateCallbacks;
+    detail::ExceptionCatcher exceptionCatcher;
 };
 
 /* ---------------------------------------------------------------------------------------------- */

@@ -5,6 +5,7 @@
 
 #include "open62541pp/Config.h"
 #include "open62541pp/ValueBackend.h"
+#include "open62541pp/detail/ExceptionCatcher.h"
 #include "open62541pp/services/NodeManagement.h"
 #include "open62541pp/services/Subscription.h"
 #include "open62541pp/types/Composed.h"
@@ -40,6 +41,8 @@ public:
     NodeContext* getOrCreateNodeContext(const NodeId& id) {
         return nodeContexts.emplace(id, std::make_unique<NodeContext>()).first->second.get();
     }
+
+    detail::ExceptionCatcher exceptionCatcher;
 };
 
 }  // namespace opcua

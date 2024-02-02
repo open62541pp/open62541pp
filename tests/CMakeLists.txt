@@ -11,6 +11,7 @@ add_executable(
     CustomAccessControl.cpp
     CustomDataTypes.cpp
     DataType.cpp
+    ExceptionCatcher.cpp
     ErrorHandling.cpp
     Event.cpp
     helper.cpp
