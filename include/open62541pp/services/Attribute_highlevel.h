@@ -89,7 +89,7 @@ inline void writeBrowseName(T& serverOrClient, const NodeId& id, const Qualified
  * @param token @completiontoken{void(opcua::StatusCode)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline void writeBrowseNameAsync(
+inline auto writeBrowseNameAsync(
     Client& client, const NodeId& id, const QualifiedName& browseName, CompletionToken&& token
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::BrowseName>(
@@ -133,7 +133,7 @@ inline void writeDisplayName(
  * @param token @completiontoken{void(opcua::StatusCode)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline void writeDisplayNameAsync(
+inline auto writeDisplayNameAsync(
     Client& client, const NodeId& id, const LocalizedText& displayName, CompletionToken&& token
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::DisplayName>(
@@ -177,7 +177,7 @@ inline void writeDescription(
  * @param token @completiontoken{void(opcua::StatusCode)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline void writeDescriptionAsync(
+inline auto writeDescriptionAsync(
     Client& client, const NodeId& id, const LocalizedText& description, CompletionToken&& token
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::Description>(
@@ -219,7 +219,7 @@ inline void writeWriteMask(T& serverOrClient, const NodeId& id, Bitmask<WriteMas
  * @param token @completiontoken{void(opcua::StatusCode)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline void writeWriteMaskAsync(
+inline auto writeWriteMaskAsync(
     Client& client, const NodeId& id, Bitmask<WriteMask> writeMask, CompletionToken&& token
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::WriteMask>(
@@ -263,7 +263,7 @@ inline void writeUserWriteMask(
  * @param token @completiontoken{void(opcua::StatusCode)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline void writeUserWriteMaskAsync(
+inline auto writeUserWriteMaskAsync(
     Client& client, const NodeId& id, Bitmask<WriteMask> userWriteMask, CompletionToken&& token
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::UserWriteMask>(
@@ -305,7 +305,7 @@ inline void writeIsAbstract(T& serverOrClient, const NodeId& id, bool isAbstract
  * @param token @completiontoken{void(opcua::StatusCode)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline void writeIsAbstractAsync(
+inline auto writeIsAbstractAsync(
     Client& client, const NodeId& id, bool isAbstract, CompletionToken&& token
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::IsAbstract>(
@@ -347,7 +347,7 @@ inline void writeSymmetric(T& serverOrClient, const NodeId& id, bool symmetric) 
  * @param token @completiontoken{void(opcua::StatusCode)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline void writeSymmetricAsync(
+inline auto writeSymmetricAsync(
     Client& client, const NodeId& id, bool symmetric, CompletionToken&& token
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::Symmetric>(
@@ -391,7 +391,7 @@ inline void writeInverseName(
  * @param token @completiontoken{void(opcua::StatusCode)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline void writeInverseNameAsync(
+inline auto writeInverseNameAsync(
     Client& client, const NodeId& id, const LocalizedText& inverseName, CompletionToken&& token
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::InverseName>(
@@ -433,7 +433,7 @@ inline void writeContainsNoLoops(T& serverOrClient, const NodeId& id, const bool
  * @param token @completiontoken{void(opcua::StatusCode)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline void writeContainsNoLoopsAsync(
+inline auto writeContainsNoLoopsAsync(
     Client& client, const NodeId& id, const bool& containsNoLoops, CompletionToken&& token
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::ContainsNoLoops>(
@@ -477,7 +477,7 @@ inline void writeEventNotifier(
  * @param token @completiontoken{void(opcua::StatusCode)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline void writeEventNotifierAsync(
+inline auto writeEventNotifierAsync(
     Client& client, const NodeId& id, Bitmask<EventNotifier> eventNotifier, CompletionToken&& token
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::EventNotifier>(
@@ -519,7 +519,7 @@ inline void writeValue(T& serverOrClient, const NodeId& id, const Variant& value
  * @param token @completiontoken{void(opcua::StatusCode)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline void writeValueAsync(
+inline auto writeValueAsync(
     Client& client, const NodeId& id, const Variant& value, CompletionToken&& token
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::Value>(
@@ -561,7 +561,7 @@ inline void writeDataType(T& serverOrClient, const NodeId& id, const NodeId& dat
  * @param token @completiontoken{void(opcua::StatusCode)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline void writeDataTypeAsync(
+inline auto writeDataTypeAsync(
     Client& client, const NodeId& id, const NodeId& dataType, CompletionToken&& token
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::DataType>(
@@ -603,7 +603,7 @@ inline void writeValueRank(T& serverOrClient, const NodeId& id, ValueRank valueR
  * @param token @completiontoken{void(opcua::StatusCode)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline void writeValueRankAsync(
+inline auto writeValueRankAsync(
     Client& client, const NodeId& id, ValueRank valueRank, CompletionToken&& token
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::ValueRank>(
@@ -647,7 +647,7 @@ inline void writeArrayDimensions(
  * @param token @completiontoken{void(opcua::StatusCode)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline void writeArrayDimensionsAsync(
+inline auto writeArrayDimensionsAsync(
     Client& client, const NodeId& id, Span<const uint32_t> arrayDimensions, CompletionToken&& token
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::ArrayDimensions>(
@@ -691,7 +691,7 @@ inline void writeAccessLevel(
  * @param token @completiontoken{void(opcua::StatusCode)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline void writeAccessLevelAsync(
+inline auto writeAccessLevelAsync(
     Client& client, const NodeId& id, Bitmask<AccessLevel> accessLevel, CompletionToken&& token
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::AccessLevel>(
@@ -735,7 +735,7 @@ inline void writeUserAccessLevel(
  * @param token @completiontoken{void(opcua::StatusCode)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline void writeUserAccessLevelAsync(
+inline auto writeUserAccessLevelAsync(
     Client& client, const NodeId& id, Bitmask<AccessLevel> userAccessLevel, CompletionToken&& token
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::UserAccessLevel>(
@@ -781,7 +781,7 @@ inline void writeMinimumSamplingInterval(
  * @param token @completiontoken{void(opcua::StatusCode)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline void writeMinimumSamplingIntervalAsync(
+inline auto writeMinimumSamplingIntervalAsync(
     Client& client, const NodeId& id, double minimumSamplingInterval, CompletionToken&& token
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::MinimumSamplingInterval>(
@@ -823,7 +823,7 @@ inline void writeHistorizing(T& serverOrClient, const NodeId& id, bool historizi
  * @param token @completiontoken{void(opcua::StatusCode)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline void writeHistorizingAsync(
+inline auto writeHistorizingAsync(
     Client& client, const NodeId& id, bool historizing, CompletionToken&& token
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::Historizing>(
@@ -865,7 +865,7 @@ inline void writeExecutable(T& serverOrClient, const NodeId& id, bool executable
  * @param token @completiontoken{void(opcua::StatusCode)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline void writeExecutableAsync(
+inline auto writeExecutableAsync(
     Client& client, const NodeId& id, bool executable, CompletionToken&& token
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::Executable>(
@@ -907,7 +907,7 @@ inline void writeUserExecutable(T& serverOrClient, const NodeId& id, bool userEx
  * @param token @completiontoken{void(opcua::StatusCode)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline void writeUserExecutableAsync(
+inline auto writeUserExecutableAsync(
     Client& client, const NodeId& id, bool userExecutable, CompletionToken&& token
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::UserExecutable>(

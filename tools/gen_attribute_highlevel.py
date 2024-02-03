@@ -102,7 +102,7 @@ inline void write{attr}(T& serverOrClient, const NodeId& id, {type_parameter} {p
  * @param token @completiontoken{{void(opcua::StatusCode)}}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline void write{attr}Async(
+inline auto write{attr}Async(
     Client& client, const NodeId& id, {type_parameter} {parameter_name}, CompletionToken&& token
 ) {{
     detail::writeAttributeAsyncImpl<AttributeId::{attr}>(

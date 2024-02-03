@@ -261,7 +261,7 @@ inline DataValue readDataValue(T& serverOrClient, const NodeId& id) {
  * @param token @completiontoken{void(opcua::StatusCode, opcua::DataValue&)}
  */
 template <typename T, typename CompletionToken = DefaultCompletionToken>
-inline DataValue readDataValueAsync(T& serverOrClient, const NodeId& id, CompletionToken&& token) {
+inline auto readDataValueAsync(T& serverOrClient, const NodeId& id, CompletionToken&& token) {
     return readAttributeAsync(
         serverOrClient,
         id,
@@ -284,7 +284,7 @@ inline void writeDataValue(T& serverOrClient, const NodeId& id, const DataValue&
  * @param token @completiontoken{void(opcua::StatusCode)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
-inline void writeDataValueAsync(
+inline auto writeDataValueAsync(
     Client& client,
     const NodeId& id,
     const DataValue& value,
