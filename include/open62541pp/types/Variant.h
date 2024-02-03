@@ -6,7 +6,6 @@
 #include <cstdint>
 #include <iterator>  // distance
 #include <optional>
-#include <type_traits>  // enable_if
 #include <utility>  // as_const
 #include <vector>
 
@@ -24,9 +23,22 @@ namespace opcua {
 // forward declarations
 class NodeId;
 
+/**
+ * Policies for variant factory methods Variant::fromScalar, Variant::fromArray.
+ */
+enum class VariantPolicy {
+    // clang-format off
+    Copy,                 ///< Store copy of scalar/array inside the variant.
+    Reference,            ///< Store reference to scalar/array inside the variant.
+                          ///< Both scalars and arrays must be mutable native/wrapper types.
+                          ///< Arrays must store the elements contiguously in memory.
+    ReferenceIfPossible,  ///< Favor referencing but fall back to copying if necessary.
+    // clang-format on
+};
+
 namespace detail {
 
-template <typename Policy>
+template <VariantPolicy>
 struct VariantHandler;
 
 }  // namespace detail
@@ -36,62 +48,32 @@ struct VariantHandler;
  * @ingroup TypeWrapper
  */
 class Variant : public TypeWrapper<UA_Variant, UA_TYPES_VARIANT> {
-private:
-    struct Policy {};
-
-    template <typename T>
-    using EnableIfPolicy = std::enable_if_t<std::is_base_of_v<Policy, T>>;
-
 public:
     using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
 
-    /// @name Policies
-    /// Policies for variant factory methods Variant::fromScalar, Variant::fromArray
-    /// @{
-
-    /// Policy to enforce copying of scalars/arrays to variants.
-    struct CopyPolicy : Policy {};
-
-    /// Policy to enforce referencing of scalars/arrays to variants (forbids copies).
-    struct ReferencePolicy : Policy {};
-
-    /// Policy to favor referencing over copying.
-    /// Scalars/arrays are only copied to the variant if necessary.
-    struct ReferenceIfPossiblePolicy : Policy {};
-
-    using DefaultPolicy = ReferenceIfPossiblePolicy;
-
-    static constexpr CopyPolicy useCopy{};
-    static constexpr ReferencePolicy useReference{};
-    static constexpr ReferenceIfPossiblePolicy useReferenceIfPossible{};
-
-    /// @}
-
     /// Create Variant from scalar value.
-    template <typename T, typename Policy = DefaultPolicy, typename = EnableIfPolicy<Policy>>
-    [[nodiscard]] static Variant fromScalar(T&& value, Policy policy = DefaultPolicy{}) {
+    /// @tparam Policy Policy (@ref VariantPolicy) how to store the scalar inside the variant
+    template <VariantPolicy Policy = VariantPolicy::ReferenceIfPossible, typename T>
+    [[nodiscard]] static Variant fromScalar(T&& value) {
         Variant var;
-        detail::VariantHandler<decltype(policy)>::setScalar(var, std::forward<T>(value));
+        detail::VariantHandler<Policy>::setScalar(var, std::forward<T>(value));
         return var;
     }
 
     /// Create Variant from scalar value with custom data type.
-    template <typename T, typename Policy = DefaultPolicy, typename = EnableIfPolicy<Policy>>
-    [[nodiscard]] static Variant fromScalar(
-        T&& value, const UA_DataType& dataType, Policy policy = DefaultPolicy{}
-    ) {
+    /// @tparam Policy Policy (@ref VariantPolicy) how to store the scalar inside the variant
+    template <VariantPolicy Policy = VariantPolicy::ReferenceIfPossible, typename T>
+    [[nodiscard]] static Variant fromScalar(T&& value, const UA_DataType& dataType) {
         Variant var;
-        detail::VariantHandler<decltype(policy)>::setScalar(var, std::forward<T>(value), dataType);
+        detail::VariantHandler<Policy>::setScalar(var, std::forward<T>(value), dataType);
         return var;
     }
 
     /// Create Variant from array.
-    template <
-        typename ArrayLike,
-        typename Policy = DefaultPolicy,
-        typename = EnableIfPolicy<Policy>>
-    [[nodiscard]] static Variant fromArray(ArrayLike&& array, Policy policy = DefaultPolicy{}) {
-        using Handler = detail::VariantHandler<decltype(policy)>;
+    /// @tparam Policy Policy (@ref VariantPolicy) how to store the array inside the variant
+    template <VariantPolicy Policy = VariantPolicy::ReferenceIfPossible, typename ArrayLike>
+    [[nodiscard]] static Variant fromArray(ArrayLike&& array) {
+        using Handler = detail::VariantHandler<Policy>;
         Variant var;
         if constexpr (detail::IsContiguousContainer<ArrayLike>::value) {
             Handler::setArray(var, Span{std::forward<ArrayLike>(array)});
@@ -102,14 +84,10 @@ public:
     }
 
     /// Create Variant from array with custom data type.
-    template <
-        typename ArrayLike,
-        typename Policy = DefaultPolicy,
-        typename = EnableIfPolicy<Policy>>
-    [[nodiscard]] static Variant fromArray(
-        ArrayLike&& array, const UA_DataType& dataType, Policy policy = DefaultPolicy{}
-    ) {
-        using Handler = detail::VariantHandler<decltype(policy)>;
+    /// @tparam Policy Policy (@ref VariantPolicy) how to store the array inside the variant
+    template <VariantPolicy Policy = VariantPolicy::ReferenceIfPossible, typename ArrayLike>
+    [[nodiscard]] static Variant fromArray(ArrayLike&& array, const UA_DataType& dataType) {
+        using Handler = detail::VariantHandler<Policy>;
         Variant var;
         if constexpr (detail::IsContiguousContainer<ArrayLike>::value) {
             Handler::setArray(var, Span{std::forward<ArrayLike>(array)}, dataType);
@@ -119,16 +97,18 @@ public:
         return var;
     }
 
-    /// Create Variant from range of elements (copy).
-    template <typename InputIt, typename Policy = CopyPolicy>
+    /// Create Variant from range of elements (copy required).
+    /// @tparam Policy Policy (@ref VariantPolicy) how to store the array inside the variant
+    template <VariantPolicy Policy = VariantPolicy::ReferenceIfPossible, typename InputIt>
     [[nodiscard]] static Variant fromArray(InputIt first, InputIt last) {
         Variant var;
         detail::VariantHandler<Policy>::setArray(var, first, last);
         return var;
     }
 
-    /// Create Variant from range of elements with custom data type (copy).
-    template <typename InputIt, typename Policy = CopyPolicy>
+    /// Create Variant from range of elements with custom data type (copy required).
+    /// @tparam Policy Policy (@ref VariantPolicy) how to store the array inside the variant
+    template <VariantPolicy Policy = VariantPolicy::ReferenceIfPossible, typename InputIt>
     [[nodiscard]] static Variant fromArray(
         InputIt first, InputIt last, const UA_DataType& dataType
     ) {
@@ -350,14 +330,6 @@ private:
         return isTemporary && !isView;
     }
 
-    template <typename ArrayLike>
-    static constexpr bool isAssignableArray() {
-        constexpr bool isTemporary = isTemporaryArray<ArrayLike>();
-        constexpr bool isMutable = detail::IsMutableContainer<ArrayLike>::value;
-        constexpr bool isContiguous = detail::IsContiguousContainer<ArrayLike>::value;
-        return !isTemporary && isMutable && isContiguous;
-    }
-
     template <typename T>
     static constexpr void assertIsNative() {
         static_assert(
@@ -520,7 +492,7 @@ void Variant::setArrayCopyConvertImpl(InputIt first, InputIt last) {
 namespace detail {
 
 template <>
-struct VariantHandler<Variant::CopyPolicy> {
+struct VariantHandler<VariantPolicy::Copy> {
     template <typename T>
     static void setScalar(Variant& var, const T& value) {
         var.setScalarCopy(value);
@@ -553,7 +525,7 @@ struct VariantHandler<Variant::CopyPolicy> {
 };
 
 template <>
-struct VariantHandler<Variant::ReferencePolicy> {
+struct VariantHandler<VariantPolicy::Reference> {
     template <typename T>
     static void setScalar(Variant& var, T& value) {
         var.setScalar(value);
@@ -576,9 +548,9 @@ struct VariantHandler<Variant::ReferencePolicy> {
 };
 
 template <>
-struct VariantHandler<Variant::ReferenceIfPossiblePolicy> : VariantHandler<Variant::CopyPolicy> {
-    using VariantHandler<Variant::CopyPolicy>::setScalar;
-    using VariantHandler<Variant::CopyPolicy>::setArray;
+struct VariantHandler<VariantPolicy::ReferenceIfPossible> : VariantHandler<VariantPolicy::Copy> {
+    using VariantHandler<VariantPolicy::Copy>::setScalar;
+    using VariantHandler<VariantPolicy::Copy>::setArray;
 
     template <typename T>
     static void setScalar(Variant& var, T& value) {
