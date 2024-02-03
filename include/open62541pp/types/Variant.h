@@ -538,22 +538,22 @@ struct VariantHandler<VariantPolicy::Copy> {
 template <>
 struct VariantHandler<VariantPolicy::Reference> {
     template <typename T>
-    static void setScalar(Variant& var, T& value) {
+    static void setScalar(Variant& var, T& value) noexcept {
         var.setScalar(value);
     }
 
     template <typename T>
-    static void setScalar(Variant& var, T& value, const UA_DataType& dtype) {
+    static void setScalar(Variant& var, T& value, const UA_DataType& dtype) noexcept {
         var.setScalar(value, dtype);
     }
 
     template <typename T>
-    static void setArray(Variant& var, Span<T> array) {
+    static void setArray(Variant& var, Span<T> array) noexcept {
         var.setArray(array);
     }
 
     template <typename T>
-    static void setArray(Variant& var, Span<T> array, const UA_DataType& dtype) {
+    static void setArray(Variant& var, Span<T> array, const UA_DataType& dtype) noexcept {
         var.setArray(array, dtype);
     }
 };
@@ -564,7 +564,7 @@ struct VariantHandler<VariantPolicy::ReferenceIfPossible> : VariantHandler<Varia
     using VariantHandler<VariantPolicy::Copy>::setArray;
 
     template <typename T>
-    static void setScalar(Variant& var, T& value) {
+    static void setScalar(Variant& var, T& value) noexcept(detail::isRegisteredType<T>) {
         if constexpr (detail::isRegisteredType<T>) {
             var.setScalar(value);
         } else {
@@ -573,12 +573,12 @@ struct VariantHandler<VariantPolicy::ReferenceIfPossible> : VariantHandler<Varia
     }
 
     template <typename T>
-    static void setScalar(Variant& var, T& value, const UA_DataType& dtype) {
+    static void setScalar(Variant& var, T& value, const UA_DataType& dtype) noexcept {
         var.setScalar(value, dtype);
     }
 
     template <typename T>
-    static void setArray(Variant& var, Span<T> array) {
+    static void setArray(Variant& var, Span<T> array) noexcept(detail::isRegisteredType<T>) {
         if constexpr (detail::isRegisteredType<T>) {
             var.setArray(array);
         } else {
@@ -587,7 +587,7 @@ struct VariantHandler<VariantPolicy::ReferenceIfPossible> : VariantHandler<Varia
     }
 
     template <typename T>
-    static void setArray(Variant& var, Span<T> array, const UA_DataType& dtype) {
+    static void setArray(Variant& var, Span<T> array, const UA_DataType& dtype) noexcept {
         var.setArray(array, dtype);
     }
 };
