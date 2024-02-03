@@ -20,9 +20,6 @@
 
 namespace opcua {
 
-// forward declarations
-class NodeId;
-
 /**
  * Policies for variant factory methods Variant::fromScalar, Variant::fromArray.
  */
@@ -36,11 +33,12 @@ enum class VariantPolicy {
     // clang-format on
 };
 
-namespace detail {
+// forward declarations
+class NodeId;
 
+namespace detail {
 template <VariantPolicy>
 struct VariantHandler;
-
 }  // namespace detail
 
 /**
