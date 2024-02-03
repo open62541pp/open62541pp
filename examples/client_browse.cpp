@@ -1,7 +1,32 @@
 #include <iomanip>
 #include <iostream>
+#include <string_view>
 
 #include "open62541pp/open62541pp.h"
+
+/// Get name of node class.
+constexpr std::string_view getEnumName(opcua::NodeClass nodeClass) {
+    switch (nodeClass) {
+    case opcua::NodeClass::Object:
+        return "Object";
+    case opcua::NodeClass::Variable:
+        return "Variable";
+    case opcua::NodeClass::Method:
+        return "Method";
+    case opcua::NodeClass::ObjectType:
+        return "ObjectType";
+    case opcua::NodeClass::VariableType:
+        return "VariableType";
+    case opcua::NodeClass::ReferenceType:
+        return "ReferenceType";
+    case opcua::NodeClass::DataType:
+        return "DataType";
+    case opcua::NodeClass::View:
+        return "View";
+    default:
+        return "Unknown";
+    }
+}
 
 // Separate definition for recursion
 void printNodeTree(opcua::Node<opcua::Client>& node, int indent);
@@ -20,7 +45,7 @@ void printNodeTree(opcua::Node<opcua::Client>& node, int indent);
 void printNodeTree(opcua::Node<opcua::Client>& node, int indent) {  // NOLINT
     for (auto&& child : node.browseChildren()) {
         std::cout << std::setw(indent) << "- " << child.readBrowseName().getName() << " ("
-                  << opcua::getNodeClassName(child.readNodeClass()) << ")\n";
+                  << getEnumName(child.readNodeClass()) << ")\n";
         printNodeTree(child, indent + 2);
     }
 }

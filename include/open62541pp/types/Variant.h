@@ -164,18 +164,29 @@ public:
     /// Get reference to scalar value with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not a scalar or not of type `T`.
     template <typename T>
-    T& getScalar() {
+    T& getScalar() & {
         return const_cast<T&>(std::as_const(*this).getScalar<T>());  // NOLINT
     }
 
-    /// Get const reference to scalar value with given template type (only native or wrapper types).
-    /// @exception BadVariantAccess If the variant is not a scalar or not of type `T`.
+    /// @copydoc getScalar()&
     template <typename T>
-    const T& getScalar() const {
+    const T& getScalar() const& {
         assertIsNative<T>();
         checkIsScalar();
         checkIsDataType<T>();
         return *static_cast<const T*>(handle()->data);
+    }
+
+    /// @copydoc getScalar()&
+    template <typename T>
+    T&& getScalar() && {
+        return std::move(getScalar<T>());
+    }
+
+    /// @copydoc getScalar()&
+    template <typename T>
+    const T&& getScalar() const&& {
+        return std::move(getScalar<T>());
     }
 
     /// Get copy of scalar value with given template type.

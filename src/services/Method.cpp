@@ -64,7 +64,7 @@ std::vector<Variant> call(
         std::make_move_iterator(output),
         std::make_move_iterator(output + outputSize)  // NOLINT
     );
-    UA_free(output);  // NOLINT
+    UA_Array_delete(output, outputSize, &UA_TYPES[UA_TYPES_VARIANT]);
     throwIfBad(status);
     return result;
 }
