@@ -1,8 +1,6 @@
 #include "open62541pp/services/View.h"
 
-#include <algorithm>  // transform
-#include <cstddef>
-#include <utility>  // exchange
+#include <cstddef>  // size_t
 
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
@@ -17,82 +15,52 @@
 
 namespace opcua::services {
 
-BrowseResponse browse(Client& client, const BrowseRequest& request) {
-    return detail::sendRequest<UA_BrowseRequest, UA_BrowseResponse>(
-        client, request, detail::WrapResponse<BrowseResponse>{}, detail::SyncOperation{}
-    );
+BrowseResponse browse(Client& connection, const BrowseRequest& request) {
+    return browseAsync(connection, request, detail::SyncOperation{});
 }
 
 template <>
-BrowseResult browse<Server>(Server& server, const BrowseDescription& bd, uint32_t maxReferences) {
-    BrowseResult result = UA_Server_browse(server.handle(), maxReferences, bd.handle());
-    throwIfBad(result->statusCode);
-    return result;
+BrowseResult browse<Server>(
+    Server& connection, const BrowseDescription& bd, uint32_t maxReferences
+) {
+    return UA_Server_browse(connection.handle(), maxReferences, bd.handle());
 }
 
 template <>
-BrowseResult browse<Client>(Client& client, const BrowseDescription& bd, uint32_t maxReferences) {
-    UA_BrowseRequest request{};
-    request.requestedMaxReferencesPerNode = maxReferences;
-    request.nodesToBrowseSize = 1;
-    request.nodesToBrowse = const_cast<UA_BrowseDescription*>(bd.handle());  // NOLINT
-
-    auto response = browse(client, asWrapper<BrowseRequest>(request));
-    return std::move(detail::getSingleResult(response));
+BrowseResult browse<Client>(
+    Client& connection, const BrowseDescription& bd, uint32_t maxReferences
+) {
+    return browseAsync(connection, bd, maxReferences, detail::SyncOperation{});
 }
 
-BrowseNextResponse browseNext(Client& client, const BrowseNextRequest& request) {
-    return detail::sendRequest<UA_BrowseNextRequest, UA_BrowseNextResponse>(
-        client, request, detail::WrapResponse<BrowseNextResponse>{}, detail::SyncOperation{}
-    );
+BrowseNextResponse browseNext(Client& connection, const BrowseNextRequest& request) {
+    return browseNextAsync(connection, request, detail::SyncOperation{});
 }
 
 template <>
 BrowseResult browseNext<Server>(
-    Server& server, bool releaseContinuationPoint, const ByteString& continuationPoint
+    Server& connection, bool releaseContinuationPoint, const ByteString& continuationPoint
 ) {
-    BrowseResult result = UA_Server_browseNext(
-        server.handle(), releaseContinuationPoint, continuationPoint.handle()
+    return UA_Server_browseNext(
+        connection.handle(), releaseContinuationPoint, continuationPoint.handle()
     );
-    throwIfBad(result->statusCode);  // TODO: remove?
-    return result;
 }
 
 template <>
 BrowseResult browseNext<Client>(
-    Client& client, bool releaseContinuationPoint, const ByteString& continuationPoint
+    Client& connection, bool releaseContinuationPoint, const ByteString& continuationPoint
 ) {
-    UA_BrowseNextRequest request{};
-    request.releaseContinuationPoints = releaseContinuationPoint;
-    request.continuationPointsSize = 1;
-    request.continuationPoints = const_cast<UA_ByteString*>(continuationPoint.handle());  // NOLINT
-
-    auto response = browseNext(client, asWrapper<BrowseNextRequest>(request));
-    return std::move(detail::getSingleResult(response));
+    return browseNextAsync(
+        connection, releaseContinuationPoint, continuationPoint, detail::SyncOperation{}
+    );
 }
 
-template <typename T>
-std::vector<ReferenceDescription> browseAll(
-    T& serverOrClient, const BrowseDescription& bd, uint32_t maxReferences
-) {
-    auto response = browse(serverOrClient, bd, maxReferences);
-    std::vector<ReferenceDescription> refs(response.getReferences());
-    while (!response.getContinuationPoint().empty()) {
-        const bool release = (refs.size() >= maxReferences);
-        response = browseNext(serverOrClient, release, response.getContinuationPoint());
-        auto refsNext = response.getReferences();
-        refs.insert(refs.end(), refsNext.begin(), refsNext.end());
-    }
-    if ((maxReferences > 0) && (refs.size() > maxReferences)) {
-        refs.resize(maxReferences);
-    }
-    return refs;
-}
-
-std::vector<ExpandedNodeId> browseRecursive(Server& server, const BrowseDescription& bd) {
+std::vector<ExpandedNodeId> browseRecursive(Server& connection, const BrowseDescription& bd) {
     size_t arraySize{};
     UA_ExpandedNodeId* array{};
-    const auto status = UA_Server_browseRecursive(server.handle(), bd.handle(), &arraySize, &array);
+    const auto status = UA_Server_browseRecursive(
+        connection.handle(), bd.handle(), &arraySize, &array
+    );
     std::vector<ExpandedNodeId> result(
         std::make_move_iterator(array),
         std::make_move_iterator(array + arraySize)  // NOLINT
@@ -103,81 +71,31 @@ std::vector<ExpandedNodeId> browseRecursive(Server& server, const BrowseDescript
 }
 
 TranslateBrowsePathsToNodeIdsResponse translateBrowsePathsToNodeIds(
-    Client& client, const TranslateBrowsePathsToNodeIdsRequest& request
+    Client& connection, const TranslateBrowsePathsToNodeIdsRequest& request
 ) {
-    return detail::sendRequest<
-        UA_TranslateBrowsePathsToNodeIdsRequest,
-        UA_TranslateBrowsePathsToNodeIdsResponse>(
-        client,
-        request,
-        detail::WrapResponse<TranslateBrowsePathsToNodeIdsResponse>{},
-        detail::SyncOperation{}
-    );
+    return translateBrowsePathsToNodeIdsAsync(connection, request, detail::SyncOperation{});
 }
 
 template <>
 BrowsePathResult translateBrowsePathToNodeIds<Server>(
-    Server& server, const BrowsePath& browsePath
+    Server& connection, const BrowsePath& browsePath
 ) {
-    BrowsePathResult result = UA_Server_translateBrowsePathToNodeIds(
-        server.handle(), browsePath.handle()
-    );
-    throwIfBad(result->statusCode);
-    return result;
+    return UA_Server_translateBrowsePathToNodeIds(connection.handle(), browsePath.handle());
 }
 
 template <>
 BrowsePathResult translateBrowsePathToNodeIds<Client>(
-    Client& client, const BrowsePath& browsePath
+    Client& connection, const BrowsePath& browsePath
 ) {
-    UA_TranslateBrowsePathsToNodeIdsRequest request{};
-    request.browsePathsSize = 1;
-    request.browsePaths = const_cast<UA_BrowsePath*>(browsePath.handle());  // NOLINT
-
-    auto response = translateBrowsePathsToNodeIds(
-        client, asWrapper<TranslateBrowsePathsToNodeIdsRequest>(request)
-    );
-    return std::move(detail::getSingleResult(response));
+    return translateBrowsePathToNodeIdsAsync(connection, browsePath, detail::SyncOperation{});
 }
 
-template <typename T>
-BrowsePathResult browseSimplifiedBrowsePath(
-    T& serverOrClient, const NodeId& origin, Span<const QualifiedName> browsePath
-) {
-    std::vector<RelativePathElement> relativePathElements(browsePath.size());
-    std::transform(
-        browsePath.begin(),
-        browsePath.end(),
-        relativePathElements.begin(),
-        [](const auto& qn) {
-            return RelativePathElement(ReferenceTypeId::HierarchicalReferences, false, true, qn);
-        }
-    );
-    const BrowsePath bp(origin, RelativePath(relativePathElements));
-    return translateBrowsePathToNodeIds(serverOrClient, bp);
+RegisterNodesResponse registerNodes(Client& connection, const RegisterNodesRequest& request) {
+    return registerNodesAsync(connection, request, detail::SyncOperation{});
 }
 
-RegisterNodesResponse registerNodes(Client& client, const RegisterNodesRequest& request) {
-    return detail::sendRequest<UA_RegisterNodesRequest, UA_RegisterNodesResponse>(
-        client, request, detail::WrapResponse<RegisterNodesResponse>{}, detail::SyncOperation{}
-    );
+UnregisterNodesResponse unregisterNodes(Client& connection, const UnregisterNodesRequest& request) {
+    return unregisterNodesAsync(connection, request, detail::SyncOperation{});
 }
-
-UnregisterNodesResponse unregisterNodes(Client& client, const UnregisterNodesRequest& request) {
-    return detail::sendRequest<UA_UnregisterNodesRequest, UA_UnregisterNodesResponse>(
-        client, request, detail::WrapResponse<UnregisterNodesResponse>{}, detail::SyncOperation{}
-    );
-}
-
-// explicit template instantiations
-// clang-format off
-
-template std::vector<ReferenceDescription> browseAll<Server>(Server&, const BrowseDescription&, uint32_t);
-template std::vector<ReferenceDescription> browseAll<Client>(Client&, const BrowseDescription&, uint32_t);
-
-template BrowsePathResult browseSimplifiedBrowsePath<Server>(Server&, const NodeId&, Span<const QualifiedName>);
-template BrowsePathResult browseSimplifiedBrowsePath<Client>(Client&, const NodeId&, Span<const QualifiedName>);
-
-// clang-format on
 
 }  // namespace opcua::services

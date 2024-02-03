@@ -63,6 +63,11 @@ inline auto& getSingleResult(Response& response) {
     return results[0];
 }
 
+template <typename Response>
+inline auto getSingleResultMove(Response& response) {
+    return std::exchange(getSingleResult(response), {});
+}
+
 inline void checkReadResult(const UA_DataValue& dv) {
     if (dv.hasStatus) {
         throwIfBad(dv.status);

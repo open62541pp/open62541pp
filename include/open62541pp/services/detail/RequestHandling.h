@@ -1,6 +1,8 @@
 #pragma once
 
+#include <algorithm>  // transform
 #include <type_traits>  // remove_const_t
+#include <vector>
 
 #include "open62541pp/Common.h"
 #include "open62541pp/Span.h"
@@ -18,6 +20,12 @@ template <typename T>
 inline ExtensionObject wrapNodeAttributes(const T& attributes) {
     // NOLINTNEXTLINE, won't be modified
     return ExtensionObject::fromDecoded(const_cast<T&>(attributes));
+}
+
+template <typename T>
+inline auto* getNativePointer(T& wrapper) noexcept {
+    // NOLINTNEXTLINE, request object won't be modified
+    return asNative(const_cast<std::remove_const_t<T>*>(&wrapper));
 }
 
 template <typename T>
@@ -87,6 +95,48 @@ inline UA_CallMethodRequest createCallMethodRequest(
     request.inputArgumentsSize = inputArguments.size();
     request.inputArguments = getNativePointer(inputArguments);
     return request;
+}
+
+inline UA_BrowseRequest createBrowseRequest(
+    const BrowseDescription& bd, uint32_t maxReferences
+) noexcept {
+    UA_BrowseRequest request{};
+    request.requestedMaxReferencesPerNode = maxReferences;
+    request.nodesToBrowseSize = 1;
+    request.nodesToBrowse = getNativePointer(bd);
+    return request;
+}
+
+inline UA_BrowseNextRequest createBrowseNextRequest(
+    bool releaseContinuationPoint, const ByteString& continuationPoint
+) noexcept {
+    UA_BrowseNextRequest request{};
+    request.releaseContinuationPoints = releaseContinuationPoint;
+    request.continuationPointsSize = 1;
+    request.continuationPoints = getNativePointer(continuationPoint);
+    return request;
+}
+
+inline UA_TranslateBrowsePathsToNodeIdsRequest createTranslateBrowsePathsToNodeIdsRequest(
+    const BrowsePath& browsePath
+) {
+    UA_TranslateBrowsePathsToNodeIdsRequest request{};
+    request.browsePathsSize = 1;
+    request.browsePaths = getNativePointer(browsePath);
+    return request;
+}
+
+inline BrowsePath createBrowsePath(const NodeId& origin, Span<const QualifiedName> browsePath) {
+    std::vector<RelativePathElement> relativePathElements(browsePath.size());
+    std::transform(
+        browsePath.begin(),
+        browsePath.end(),
+        relativePathElements.begin(),
+        [](const auto& qn) {
+            return RelativePathElement(ReferenceTypeId::HierarchicalReferences, false, true, qn);
+        }
+    );
+    return {origin, RelativePath(relativePathElements)};
 }
 
 }  // namespace opcua::services::detail
