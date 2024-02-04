@@ -26,10 +26,10 @@ namespace opcua::services {
  * Subscribe to data and events.
  *
  * Note the difference between Subscriptions and MonitoredItems. Subscriptions are used to report
- * back notifications. MonitoredItems are used to generate notifications. Every MonitoredItem is
- * attached to exactly one Subscription. And a Subscription can contain many MonitoredItems.
+ * back notifications. Monitored items are used to generate notifications. Every monitored item is
+ * attached to exactly one subscription. And a subscription can contain many monitored items.
  *
- * MonitoredItems can also be registered locally (server-side). Notifications are then forwarded
+ * Monitored items can also be registered locally (server-side). Notifications are then forwarded
  * to a user-defined callback instead of a remote client.
  *
  * @see Subscription
@@ -69,6 +69,13 @@ struct MonitoringParameters {
     /// - `false`: the last notification added to the queue gets replaced with the new notification
     bool discardOldest = true;
 };
+
+/**
+ * @defgroup CreateMonitoredItems
+ * Create and add a monitored item to a subscription.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.2
+ * @{
+ */
 
 /**
  * MonitoredItem deletion callback.
@@ -165,6 +172,14 @@ using EventNotificationCallback =
 );
 
 /**
+ * @}
+ * @defgroup ModifyMonitoredItems
+ * Modify a monitored items of a subscription.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.3
+ * @{
+ */
+
+/**
  * Modify a monitored item of a subscription.
  * @copydetails MonitoringParameters
  *
@@ -181,6 +196,14 @@ void modifyMonitoredItem(
 );
 
 /**
+ * @}
+ * @defgroup SetMonitoringMode
+ * Set the monitoring mode of a monitored items.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.4
+ * @{
+ */
+
+/**
  * Set the monitoring mode of a monitored item.
  *
  * @param client Instance of type Client
@@ -193,12 +216,18 @@ void setMonitoringMode(
 );
 
 /**
- * Add and delete triggering links of a monitored item.
- * The triggering item and the items to report shall belong to the same subscription.
- *
- * @note Supported since open62541 v1.2
+ * @}
+ * @defgroup SetTriggering
+ * Create and delete triggering links for a triggering item.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.1.6
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.5
+ * @{
+ */
+
+/**
+ * Add and delete triggering links of a monitored item.
+ * The triggering item and the items to report shall belong to the same subscription.
+ * @note Supported since open62541 v1.2
  *
  * @param client Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
@@ -213,6 +242,14 @@ void setTriggering(
     Span<const uint32_t> linksToAdd,
     Span<const uint32_t> linksToRemove
 );
+
+/**
+ * @}
+ * @defgroup DeleteMonitoredItems
+ * Delete a monitored items from subscriptions.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.6
+ * @{
+ */
 
 /**
  * Delete a monitored item from a subscription.
@@ -232,6 +269,7 @@ void deleteMonitoredItem(Client& client, uint32_t subscriptionId, uint32_t monit
 void deleteMonitoredItem(Server& server, uint32_t monitoredItemId);
 
 /**
+ * @}
  * @}
  */
 

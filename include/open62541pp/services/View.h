@@ -25,9 +25,15 @@ namespace opcua::services {
 /**
  * @defgroup View View service set
  * Browse the address space / view created by a server.
- *
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8
  * @ingroup Services
+ * @{
+ */
+
+/**
+ * @defgroup Browse
+ * Discover references of nodes.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.2
  * @{
  */
 
@@ -90,6 +96,15 @@ auto browseAsync(
         std::forward<CompletionToken>(token)
     );
 }
+
+/**
+ * @}
+ * @defgroup BrowseNext
+ * Request the next set of a Browse or BrowseNext response information that is too large to be sent
+ * in a single response. Discover references of nodes.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.3
+ * @{
+ */
 
 /**
  * Request the next sets of @ref browse / @ref browseNext responses (client only).
@@ -155,43 +170,12 @@ auto browseNextAsync(
 }
 
 /**
- * Discover all the references of a specified node (without calling @ref browseNext).
- * @copydetails browse(T&, const BrowseDescription&, uint32_t)
+ * @}
+ * @defgroup TranslateBrowsePathsToNodeIds
+ * Request that the server translates browse paths to node ids.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.4
+ * @{
  */
-template <typename T>
-std::vector<ReferenceDescription> browseAll(
-    T& connection, const BrowseDescription& bd, uint32_t maxReferences = 0
-) {
-    auto response = browse(connection, bd, maxReferences);
-    std::vector<ReferenceDescription> refs(response.getReferences());
-    while (!response.getContinuationPoint().empty()) {
-        const bool release = (refs.size() >= maxReferences);
-        response = browseNext(connection, release, response.getContinuationPoint());
-        auto refsNext = response.getReferences();
-        refs.insert(refs.end(), refsNext.begin(), refsNext.end());
-    }
-    if ((maxReferences > 0) && (refs.size() > maxReferences)) {
-        refs.resize(maxReferences);
-    }
-    return refs;
-}
-
-/**
- * Discover child nodes recursively (non-standard).
- *
- * Possible loops (that can occur for non-hierarchical references) are handled internally. Every
- * node is added at most once to the results array. Nodes are only added if they match the
- * `nodeClassMask` in the BrowseDescription. However, child nodes are still recursed into if the
- * NodeClass does not match. So it is possible, for example, to get all VariableNodes below a
- * certain ObjectNode, with additional objects in the hierarchy below.
- *
- * @note No implementation for `Client`.
- *
- * @param connection Instance of type Server
- * @param bd Browse description
- * @see UA_Server_browseRecursive
- */
-std::vector<ExpandedNodeId> browseRecursive(Server& connection, const BrowseDescription& bd);
 
 /**
  * Translate browse paths to NodeIds (client only).
@@ -297,9 +281,16 @@ inline auto browseSimplifiedBrowsePathAsync(
 }
 
 /**
- * Register nodes for efficient access operations (client only).
+ * @}
+ * @defgroup RegisterNodes
+ * Register nodes for efficient access operations.
  * Clients shall unregister unneeded nodes immediately to free up resources.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.5
+ * @{
+ */
+
+/**
+ * Register nodes for efficient access operations (client only).
  * @param connection Instance of type Client
  * @param request Request
  */
@@ -323,6 +314,14 @@ auto registerNodesAsync(
         std::forward<CompletionToken>(token)
     );
 }
+
+/**
+ * @}
+ * @defgroup UnregisterNodes
+ * Unregister nodes that have been obtained via the RegisterNodes service.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.6
+ * @{
+ */
 
 /**
  * Unregister nodes (client only).
@@ -350,6 +349,53 @@ auto unregisterNodesAsync(
         std::forward<CompletionToken>(token)
     );
 }
+
+/**
+ * @}
+ */
+
+/* ----------------------------------- Non-standard functions ----------------------------------- */
+
+/**
+ * Discover all the references of a specified node (without calling @ref browseNext).
+ * @copydetails browse(T&, const BrowseDescription&, uint32_t)
+ * @ingroup Browse
+ */
+template <typename T>
+std::vector<ReferenceDescription> browseAll(
+    T& connection, const BrowseDescription& bd, uint32_t maxReferences = 0
+) {
+    auto response = browse(connection, bd, maxReferences);
+    std::vector<ReferenceDescription> refs(response.getReferences());
+    while (!response.getContinuationPoint().empty()) {
+        const bool release = (refs.size() >= maxReferences);
+        response = browseNext(connection, release, response.getContinuationPoint());
+        auto refsNext = response.getReferences();
+        refs.insert(refs.end(), refsNext.begin(), refsNext.end());
+    }
+    if ((maxReferences > 0) && (refs.size() > maxReferences)) {
+        refs.resize(maxReferences);
+    }
+    return refs;
+}
+
+/**
+ * Discover child nodes recursively (non-standard).
+ *
+ * Possible loops (that can occur for non-hierarchical references) are handled internally. Every
+ * node is added at most once to the results array. Nodes are only added if they match the
+ * `nodeClassMask` in the BrowseDescription. However, child nodes are still recursed into if the
+ * NodeClass does not match. So it is possible, for example, to get all VariableNodes below a
+ * certain ObjectNode, with additional objects in the hierarchy below.
+ *
+ * @note No implementation for `Client`.
+ *
+ * @param connection Instance of type Server
+ * @param bd Browse description
+ * @see UA_Server_browseRecursive
+ * @ingroup Browse
+ */
+std::vector<ExpandedNodeId> browseRecursive(Server& connection, const BrowseDescription& bd);
 
 /**
  * @}

@@ -9,12 +9,8 @@
 namespace opcua::services {
 
 /**
- * @addtogroup Attribute
- * @{
- */
-
-/**
  * Read the AttributeId::NodeId attribute of a node.
+ * @ingroup Read
  */
 template <typename T>
 inline NodeId readNodeId(T& serverOrClient, const NodeId& id) {
@@ -24,6 +20,7 @@ inline NodeId readNodeId(T& serverOrClient, const NodeId& id) {
 /**
  * Asynchronously read the AttributeId::NodeId attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode, opcua::NodeId&)}
+ * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readNodeIdAsync(
@@ -36,6 +33,7 @@ inline auto readNodeIdAsync(
 
 /**
  * Read the AttributeId::NodeClass attribute of a node.
+ * @ingroup Read
  */
 template <typename T>
 inline NodeClass readNodeClass(T& serverOrClient, const NodeId& id) {
@@ -45,6 +43,7 @@ inline NodeClass readNodeClass(T& serverOrClient, const NodeId& id) {
 /**
  * Asynchronously read the AttributeId::NodeClass attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode, opcua::NodeClass)}
+ * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readNodeClassAsync(
@@ -57,6 +56,7 @@ inline auto readNodeClassAsync(
 
 /**
  * Read the AttributeId::BrowseName attribute of a node.
+ * @ingroup Read
  */
 template <typename T>
 inline QualifiedName readBrowseName(T& serverOrClient, const NodeId& id) {
@@ -66,6 +66,7 @@ inline QualifiedName readBrowseName(T& serverOrClient, const NodeId& id) {
 /**
  * Asynchronously read the AttributeId::BrowseName attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode, opcua::QualifiedName&)}
+ * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readBrowseNameAsync(
@@ -78,6 +79,7 @@ inline auto readBrowseNameAsync(
 
 /**
  * Write the AttributeId::BrowseName attribute of a node.
+ * @ingroup Write
  */
 template <typename T>
 inline void writeBrowseName(T& serverOrClient, const NodeId& id, const QualifiedName& browseName) {
@@ -87,6 +89,7 @@ inline void writeBrowseName(T& serverOrClient, const NodeId& id, const Qualified
 /**
  * Asynchronously write the AttributeId::BrowseName attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode)}
+ * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeBrowseNameAsync(
@@ -99,6 +102,7 @@ inline auto writeBrowseNameAsync(
 
 /**
  * Read the AttributeId::DisplayName attribute of a node.
+ * @ingroup Read
  */
 template <typename T>
 inline LocalizedText readDisplayName(T& serverOrClient, const NodeId& id) {
@@ -108,6 +112,7 @@ inline LocalizedText readDisplayName(T& serverOrClient, const NodeId& id) {
 /**
  * Asynchronously read the AttributeId::DisplayName attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode, opcua::LocalizedText&)}
+ * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readDisplayNameAsync(
@@ -120,6 +125,7 @@ inline auto readDisplayNameAsync(
 
 /**
  * Write the AttributeId::DisplayName attribute of a node.
+ * @ingroup Write
  */
 template <typename T>
 inline void writeDisplayName(
@@ -131,6 +137,7 @@ inline void writeDisplayName(
 /**
  * Asynchronously write the AttributeId::DisplayName attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode)}
+ * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeDisplayNameAsync(
@@ -143,6 +150,7 @@ inline auto writeDisplayNameAsync(
 
 /**
  * Read the AttributeId::Description attribute of a node.
+ * @ingroup Read
  */
 template <typename T>
 inline LocalizedText readDescription(T& serverOrClient, const NodeId& id) {
@@ -152,6 +160,7 @@ inline LocalizedText readDescription(T& serverOrClient, const NodeId& id) {
 /**
  * Asynchronously read the AttributeId::Description attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode, opcua::LocalizedText&)}
+ * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readDescriptionAsync(
@@ -164,6 +173,7 @@ inline auto readDescriptionAsync(
 
 /**
  * Write the AttributeId::Description attribute of a node.
+ * @ingroup Write
  */
 template <typename T>
 inline void writeDescription(
@@ -175,6 +185,7 @@ inline void writeDescription(
 /**
  * Asynchronously write the AttributeId::Description attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode)}
+ * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeDescriptionAsync(
@@ -187,6 +198,7 @@ inline auto writeDescriptionAsync(
 
 /**
  * Read the AttributeId::WriteMask attribute of a node.
+ * @ingroup Read
  */
 template <typename T>
 inline Bitmask<WriteMask> readWriteMask(T& serverOrClient, const NodeId& id) {
@@ -196,6 +208,7 @@ inline Bitmask<WriteMask> readWriteMask(T& serverOrClient, const NodeId& id) {
 /**
  * Asynchronously read the AttributeId::WriteMask attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode, opcua::Bitmask<WriteMask>)}
+ * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readWriteMaskAsync(
@@ -208,6 +221,7 @@ inline auto readWriteMaskAsync(
 
 /**
  * Write the AttributeId::WriteMask attribute of a node.
+ * @ingroup Write
  */
 template <typename T>
 inline void writeWriteMask(T& serverOrClient, const NodeId& id, Bitmask<WriteMask> writeMask) {
@@ -217,6 +231,7 @@ inline void writeWriteMask(T& serverOrClient, const NodeId& id, Bitmask<WriteMas
 /**
  * Asynchronously write the AttributeId::WriteMask attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode)}
+ * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeWriteMaskAsync(
@@ -229,6 +244,7 @@ inline auto writeWriteMaskAsync(
 
 /**
  * Read the AttributeId::UserWriteMask attribute of a node.
+ * @ingroup Read
  */
 template <typename T>
 inline Bitmask<WriteMask> readUserWriteMask(T& serverOrClient, const NodeId& id) {
@@ -238,6 +254,7 @@ inline Bitmask<WriteMask> readUserWriteMask(T& serverOrClient, const NodeId& id)
 /**
  * Asynchronously read the AttributeId::UserWriteMask attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode, opcua::Bitmask<WriteMask>)}
+ * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readUserWriteMaskAsync(
@@ -250,6 +267,7 @@ inline auto readUserWriteMaskAsync(
 
 /**
  * Write the AttributeId::UserWriteMask attribute of a node.
+ * @ingroup Write
  */
 template <typename T>
 inline void writeUserWriteMask(
@@ -261,6 +279,7 @@ inline void writeUserWriteMask(
 /**
  * Asynchronously write the AttributeId::UserWriteMask attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode)}
+ * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeUserWriteMaskAsync(
@@ -273,6 +292,7 @@ inline auto writeUserWriteMaskAsync(
 
 /**
  * Read the AttributeId::IsAbstract attribute of a node.
+ * @ingroup Read
  */
 template <typename T>
 inline bool readIsAbstract(T& serverOrClient, const NodeId& id) {
@@ -282,6 +302,7 @@ inline bool readIsAbstract(T& serverOrClient, const NodeId& id) {
 /**
  * Asynchronously read the AttributeId::IsAbstract attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode, bool)}
+ * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readIsAbstractAsync(
@@ -294,6 +315,7 @@ inline auto readIsAbstractAsync(
 
 /**
  * Write the AttributeId::IsAbstract attribute of a node.
+ * @ingroup Write
  */
 template <typename T>
 inline void writeIsAbstract(T& serverOrClient, const NodeId& id, bool isAbstract) {
@@ -303,6 +325,7 @@ inline void writeIsAbstract(T& serverOrClient, const NodeId& id, bool isAbstract
 /**
  * Asynchronously write the AttributeId::IsAbstract attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode)}
+ * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeIsAbstractAsync(
@@ -315,6 +338,7 @@ inline auto writeIsAbstractAsync(
 
 /**
  * Read the AttributeId::Symmetric attribute of a node.
+ * @ingroup Read
  */
 template <typename T>
 inline bool readSymmetric(T& serverOrClient, const NodeId& id) {
@@ -324,6 +348,7 @@ inline bool readSymmetric(T& serverOrClient, const NodeId& id) {
 /**
  * Asynchronously read the AttributeId::Symmetric attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode, bool)}
+ * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readSymmetricAsync(
@@ -336,6 +361,7 @@ inline auto readSymmetricAsync(
 
 /**
  * Write the AttributeId::Symmetric attribute of a node.
+ * @ingroup Write
  */
 template <typename T>
 inline void writeSymmetric(T& serverOrClient, const NodeId& id, bool symmetric) {
@@ -345,6 +371,7 @@ inline void writeSymmetric(T& serverOrClient, const NodeId& id, bool symmetric) 
 /**
  * Asynchronously write the AttributeId::Symmetric attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode)}
+ * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeSymmetricAsync(
@@ -357,6 +384,7 @@ inline auto writeSymmetricAsync(
 
 /**
  * Read the AttributeId::InverseName attribute of a node.
+ * @ingroup Read
  */
 template <typename T>
 inline LocalizedText readInverseName(T& serverOrClient, const NodeId& id) {
@@ -366,6 +394,7 @@ inline LocalizedText readInverseName(T& serverOrClient, const NodeId& id) {
 /**
  * Asynchronously read the AttributeId::InverseName attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode, opcua::LocalizedText&)}
+ * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readInverseNameAsync(
@@ -378,6 +407,7 @@ inline auto readInverseNameAsync(
 
 /**
  * Write the AttributeId::InverseName attribute of a node.
+ * @ingroup Write
  */
 template <typename T>
 inline void writeInverseName(
@@ -389,6 +419,7 @@ inline void writeInverseName(
 /**
  * Asynchronously write the AttributeId::InverseName attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode)}
+ * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeInverseNameAsync(
@@ -401,6 +432,7 @@ inline auto writeInverseNameAsync(
 
 /**
  * Read the AttributeId::ContainsNoLoops attribute of a node.
+ * @ingroup Read
  */
 template <typename T>
 inline bool readContainsNoLoops(T& serverOrClient, const NodeId& id) {
@@ -410,6 +442,7 @@ inline bool readContainsNoLoops(T& serverOrClient, const NodeId& id) {
 /**
  * Asynchronously read the AttributeId::ContainsNoLoops attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode, bool&)}
+ * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readContainsNoLoopsAsync(
@@ -422,6 +455,7 @@ inline auto readContainsNoLoopsAsync(
 
 /**
  * Write the AttributeId::ContainsNoLoops attribute of a node.
+ * @ingroup Write
  */
 template <typename T>
 inline void writeContainsNoLoops(T& serverOrClient, const NodeId& id, const bool& containsNoLoops) {
@@ -431,6 +465,7 @@ inline void writeContainsNoLoops(T& serverOrClient, const NodeId& id, const bool
 /**
  * Asynchronously write the AttributeId::ContainsNoLoops attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode)}
+ * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeContainsNoLoopsAsync(
@@ -443,6 +478,7 @@ inline auto writeContainsNoLoopsAsync(
 
 /**
  * Read the AttributeId::EventNotifier attribute of a node.
+ * @ingroup Read
  */
 template <typename T>
 inline Bitmask<EventNotifier> readEventNotifier(T& serverOrClient, const NodeId& id) {
@@ -452,6 +488,7 @@ inline Bitmask<EventNotifier> readEventNotifier(T& serverOrClient, const NodeId&
 /**
  * Asynchronously read the AttributeId::EventNotifier attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode, opcua::Bitmask<EventNotifier>)}
+ * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readEventNotifierAsync(
@@ -464,6 +501,7 @@ inline auto readEventNotifierAsync(
 
 /**
  * Write the AttributeId::EventNotifier attribute of a node.
+ * @ingroup Write
  */
 template <typename T>
 inline void writeEventNotifier(
@@ -475,6 +513,7 @@ inline void writeEventNotifier(
 /**
  * Asynchronously write the AttributeId::EventNotifier attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode)}
+ * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeEventNotifierAsync(
@@ -487,6 +526,7 @@ inline auto writeEventNotifierAsync(
 
 /**
  * Read the AttributeId::Value attribute of a node.
+ * @ingroup Read
  */
 template <typename T>
 inline Variant readValue(T& serverOrClient, const NodeId& id) {
@@ -496,6 +536,7 @@ inline Variant readValue(T& serverOrClient, const NodeId& id) {
 /**
  * Asynchronously read the AttributeId::Value attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode, opcua::Variant&)}
+ * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readValueAsync(
@@ -508,6 +549,7 @@ inline auto readValueAsync(
 
 /**
  * Write the AttributeId::Value attribute of a node.
+ * @ingroup Write
  */
 template <typename T>
 inline void writeValue(T& serverOrClient, const NodeId& id, const Variant& value) {
@@ -517,6 +559,7 @@ inline void writeValue(T& serverOrClient, const NodeId& id, const Variant& value
 /**
  * Asynchronously write the AttributeId::Value attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode)}
+ * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeValueAsync(
@@ -529,6 +572,7 @@ inline auto writeValueAsync(
 
 /**
  * Read the AttributeId::DataType attribute of a node.
+ * @ingroup Read
  */
 template <typename T>
 inline NodeId readDataType(T& serverOrClient, const NodeId& id) {
@@ -538,6 +582,7 @@ inline NodeId readDataType(T& serverOrClient, const NodeId& id) {
 /**
  * Asynchronously read the AttributeId::DataType attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode, opcua::NodeId&)}
+ * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readDataTypeAsync(
@@ -550,6 +595,7 @@ inline auto readDataTypeAsync(
 
 /**
  * Write the AttributeId::DataType attribute of a node.
+ * @ingroup Write
  */
 template <typename T>
 inline void writeDataType(T& serverOrClient, const NodeId& id, const NodeId& dataType) {
@@ -559,6 +605,7 @@ inline void writeDataType(T& serverOrClient, const NodeId& id, const NodeId& dat
 /**
  * Asynchronously write the AttributeId::DataType attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode)}
+ * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeDataTypeAsync(
@@ -571,6 +618,7 @@ inline auto writeDataTypeAsync(
 
 /**
  * Read the AttributeId::ValueRank attribute of a node.
+ * @ingroup Read
  */
 template <typename T>
 inline ValueRank readValueRank(T& serverOrClient, const NodeId& id) {
@@ -580,6 +628,7 @@ inline ValueRank readValueRank(T& serverOrClient, const NodeId& id) {
 /**
  * Asynchronously read the AttributeId::ValueRank attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode, opcua::ValueRank)}
+ * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readValueRankAsync(
@@ -592,6 +641,7 @@ inline auto readValueRankAsync(
 
 /**
  * Write the AttributeId::ValueRank attribute of a node.
+ * @ingroup Write
  */
 template <typename T>
 inline void writeValueRank(T& serverOrClient, const NodeId& id, ValueRank valueRank) {
@@ -601,6 +651,7 @@ inline void writeValueRank(T& serverOrClient, const NodeId& id, ValueRank valueR
 /**
  * Asynchronously write the AttributeId::ValueRank attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode)}
+ * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeValueRankAsync(
@@ -613,6 +664,7 @@ inline auto writeValueRankAsync(
 
 /**
  * Read the AttributeId::ArrayDimensions attribute of a node.
+ * @ingroup Read
  */
 template <typename T>
 inline std::vector<uint32_t> readArrayDimensions(T& serverOrClient, const NodeId& id) {
@@ -622,6 +674,7 @@ inline std::vector<uint32_t> readArrayDimensions(T& serverOrClient, const NodeId
 /**
  * Asynchronously read the AttributeId::ArrayDimensions attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode, std::vector<uint32_t>&)}
+ * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readArrayDimensionsAsync(
@@ -634,6 +687,7 @@ inline auto readArrayDimensionsAsync(
 
 /**
  * Write the AttributeId::ArrayDimensions attribute of a node.
+ * @ingroup Write
  */
 template <typename T>
 inline void writeArrayDimensions(
@@ -645,6 +699,7 @@ inline void writeArrayDimensions(
 /**
  * Asynchronously write the AttributeId::ArrayDimensions attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode)}
+ * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeArrayDimensionsAsync(
@@ -657,6 +712,7 @@ inline auto writeArrayDimensionsAsync(
 
 /**
  * Read the AttributeId::AccessLevel attribute of a node.
+ * @ingroup Read
  */
 template <typename T>
 inline Bitmask<AccessLevel> readAccessLevel(T& serverOrClient, const NodeId& id) {
@@ -666,6 +722,7 @@ inline Bitmask<AccessLevel> readAccessLevel(T& serverOrClient, const NodeId& id)
 /**
  * Asynchronously read the AttributeId::AccessLevel attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode, opcua::Bitmask<AccessLevel>)}
+ * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readAccessLevelAsync(
@@ -678,6 +735,7 @@ inline auto readAccessLevelAsync(
 
 /**
  * Write the AttributeId::AccessLevel attribute of a node.
+ * @ingroup Write
  */
 template <typename T>
 inline void writeAccessLevel(
@@ -689,6 +747,7 @@ inline void writeAccessLevel(
 /**
  * Asynchronously write the AttributeId::AccessLevel attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode)}
+ * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeAccessLevelAsync(
@@ -701,6 +760,7 @@ inline auto writeAccessLevelAsync(
 
 /**
  * Read the AttributeId::UserAccessLevel attribute of a node.
+ * @ingroup Read
  */
 template <typename T>
 inline Bitmask<AccessLevel> readUserAccessLevel(T& serverOrClient, const NodeId& id) {
@@ -710,6 +770,7 @@ inline Bitmask<AccessLevel> readUserAccessLevel(T& serverOrClient, const NodeId&
 /**
  * Asynchronously read the AttributeId::UserAccessLevel attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode, opcua::Bitmask<AccessLevel>)}
+ * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readUserAccessLevelAsync(
@@ -722,6 +783,7 @@ inline auto readUserAccessLevelAsync(
 
 /**
  * Write the AttributeId::UserAccessLevel attribute of a node.
+ * @ingroup Write
  */
 template <typename T>
 inline void writeUserAccessLevel(
@@ -733,6 +795,7 @@ inline void writeUserAccessLevel(
 /**
  * Asynchronously write the AttributeId::UserAccessLevel attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode)}
+ * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeUserAccessLevelAsync(
@@ -745,6 +808,7 @@ inline auto writeUserAccessLevelAsync(
 
 /**
  * Read the AttributeId::MinimumSamplingInterval attribute of a node.
+ * @ingroup Read
  */
 template <typename T>
 inline double readMinimumSamplingInterval(T& serverOrClient, const NodeId& id) {
@@ -754,6 +818,7 @@ inline double readMinimumSamplingInterval(T& serverOrClient, const NodeId& id) {
 /**
  * Asynchronously read the AttributeId::MinimumSamplingInterval attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode, double)}
+ * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readMinimumSamplingIntervalAsync(
@@ -766,6 +831,7 @@ inline auto readMinimumSamplingIntervalAsync(
 
 /**
  * Write the AttributeId::MinimumSamplingInterval attribute of a node.
+ * @ingroup Write
  */
 template <typename T>
 inline void writeMinimumSamplingInterval(
@@ -779,6 +845,7 @@ inline void writeMinimumSamplingInterval(
 /**
  * Asynchronously write the AttributeId::MinimumSamplingInterval attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode)}
+ * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeMinimumSamplingIntervalAsync(
@@ -791,6 +858,7 @@ inline auto writeMinimumSamplingIntervalAsync(
 
 /**
  * Read the AttributeId::Historizing attribute of a node.
+ * @ingroup Read
  */
 template <typename T>
 inline bool readHistorizing(T& serverOrClient, const NodeId& id) {
@@ -800,6 +868,7 @@ inline bool readHistorizing(T& serverOrClient, const NodeId& id) {
 /**
  * Asynchronously read the AttributeId::Historizing attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode, bool)}
+ * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readHistorizingAsync(
@@ -812,6 +881,7 @@ inline auto readHistorizingAsync(
 
 /**
  * Write the AttributeId::Historizing attribute of a node.
+ * @ingroup Write
  */
 template <typename T>
 inline void writeHistorizing(T& serverOrClient, const NodeId& id, bool historizing) {
@@ -821,6 +891,7 @@ inline void writeHistorizing(T& serverOrClient, const NodeId& id, bool historizi
 /**
  * Asynchronously write the AttributeId::Historizing attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode)}
+ * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeHistorizingAsync(
@@ -833,6 +904,7 @@ inline auto writeHistorizingAsync(
 
 /**
  * Read the AttributeId::Executable attribute of a node.
+ * @ingroup Read
  */
 template <typename T>
 inline bool readExecutable(T& serverOrClient, const NodeId& id) {
@@ -842,6 +914,7 @@ inline bool readExecutable(T& serverOrClient, const NodeId& id) {
 /**
  * Asynchronously read the AttributeId::Executable attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode, bool)}
+ * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readExecutableAsync(
@@ -854,6 +927,7 @@ inline auto readExecutableAsync(
 
 /**
  * Write the AttributeId::Executable attribute of a node.
+ * @ingroup Write
  */
 template <typename T>
 inline void writeExecutable(T& serverOrClient, const NodeId& id, bool executable) {
@@ -863,6 +937,7 @@ inline void writeExecutable(T& serverOrClient, const NodeId& id, bool executable
 /**
  * Asynchronously write the AttributeId::Executable attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode)}
+ * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeExecutableAsync(
@@ -875,6 +950,7 @@ inline auto writeExecutableAsync(
 
 /**
  * Read the AttributeId::UserExecutable attribute of a node.
+ * @ingroup Read
  */
 template <typename T>
 inline bool readUserExecutable(T& serverOrClient, const NodeId& id) {
@@ -884,6 +960,7 @@ inline bool readUserExecutable(T& serverOrClient, const NodeId& id) {
 /**
  * Asynchronously read the AttributeId::UserExecutable attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode, bool)}
+ * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readUserExecutableAsync(
@@ -896,6 +973,7 @@ inline auto readUserExecutableAsync(
 
 /**
  * Write the AttributeId::UserExecutable attribute of a node.
+ * @ingroup Write
  */
 template <typename T>
 inline void writeUserExecutable(T& serverOrClient, const NodeId& id, bool userExecutable) {
@@ -905,6 +983,7 @@ inline void writeUserExecutable(T& serverOrClient, const NodeId& id, bool userEx
 /**
  * Asynchronously write the AttributeId::UserExecutable attribute of a node.
  * @param token @completiontoken{void(opcua::StatusCode)}
+ * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeUserExecutableAsync(
@@ -914,9 +993,5 @@ inline auto writeUserExecutableAsync(
         client, id, userExecutable, std::forward<CompletionToken>(token)
     );
 }
-
-/**
- * @}
- */
 
 }  // namespace opcua::services

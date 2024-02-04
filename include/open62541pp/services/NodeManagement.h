@@ -30,6 +30,13 @@ namespace opcua::services {
  */
 
 /**
+ * @defgroup AddNodes
+ * Add nodes into the address space hierarchy.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.2
+ * @{
+ */
+
+/**
  * Add one or more nodes (client only).
  * @param client Instance of type Client
  * @param request Add nodes request
@@ -51,84 +58,6 @@ auto addNodesAsync(
         client,
         request,
         detail::WrapResponse<AddNodesResponse>{},
-        std::forward<CompletionToken>(token)
-    );
-}
-
-/**
- * Add one or more references (client only).
- * @param client Instance of type Client
- * @param request Add references request
- */
-AddReferencesResponse addReferences(Client& client, const AddReferencesRequest& request);
-
-/**
- * Asynchronously add one or more references (client only).
- * @copydetails addReferences
- * @param token @completiontoken{void(opcua::StatusCode, opcua::AddReferencesResponse&)}
- */
-template <typename CompletionToken = DefaultCompletionToken>
-auto addReferencesAsync(
-    Client& client,
-    const AddReferencesRequest& request,
-    CompletionToken&& token = DefaultCompletionToken()
-) {
-    return detail::sendRequest<UA_AddReferencesRequest, UA_AddReferencesResponse>(
-        client,
-        request,
-        detail::WrapResponse<AddReferencesResponse>{},
-        std::forward<CompletionToken>(token)
-    );
-}
-
-/**
- * Delete one or more nodes (client only).
- * @param client Instance of type Client
- * @param request Delete nodes request
- */
-DeleteNodesResponse deleteNodes(Client& client, const DeleteNodesRequest& request);
-
-/**
- * Asynchronously delete one or more nodes (client only).
- * @copydetails deleteNodes
- * @param token @completiontoken{void(opcua::StatusCode, opcua::DeleteNodesResponse&)}
- */
-template <typename CompletionToken = DefaultCompletionToken>
-auto deleteNodesAsync(
-    Client& client,
-    const DeleteNodesRequest& request,
-    CompletionToken&& token = DefaultCompletionToken()
-) {
-    return detail::sendRequest<UA_DeleteNodesRequest, UA_DeleteNodesResponse>(
-        client,
-        request,
-        detail::WrapResponse<DeleteNodesResponse>{},
-        std::forward<CompletionToken>(token)
-    );
-}
-
-/**
- * Delete one or more references (client only).
- * @param client Instance of type Client
- * @param request Delete references request
- */
-DeleteReferencesResponse deleteReferences(Client& client, const DeleteReferencesRequest& request);
-
-/**
- * Asynchronously delete one or more references (client only).
- * @copydetails deleteReferences
- * @param token @completiontoken{void(opcua::StatusCode, opcua::DeleteReferencesResponse&)}
- */
-template <typename CompletionToken = DefaultCompletionToken>
-auto deleteReferencesAsync(
-    Client& client,
-    const DeleteReferencesRequest& request,
-    CompletionToken&& token = DefaultCompletionToken()
-) {
-    return detail::sendRequest<UA_DeleteReferencesRequest, UA_DeleteReferencesResponse>(
-        client,
-        request,
-        detail::WrapResponse<DeleteReferencesResponse>{},
         std::forward<CompletionToken>(token)
     );
 }
@@ -189,7 +118,240 @@ auto addNodeAsync(
     );
 }
 
+/**
+ * @}
+ * @defgroup AddReferences
+ * Add references to nodes.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.3
+ * @{
+ */
+
+/**
+ * Add one or more references (client only).
+ * @param client Instance of type Client
+ * @param request Add references request
+ */
+AddReferencesResponse addReferences(Client& client, const AddReferencesRequest& request);
+
+/**
+ * Asynchronously add one or more references (client only).
+ * @copydetails addReferences
+ * @param token @completiontoken{void(opcua::StatusCode, opcua::AddReferencesResponse&)}
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+auto addReferencesAsync(
+    Client& client,
+    const AddReferencesRequest& request,
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    return detail::sendRequest<UA_AddReferencesRequest, UA_AddReferencesResponse>(
+        client,
+        request,
+        detail::WrapResponse<AddReferencesResponse>{},
+        std::forward<CompletionToken>(token)
+    );
+}
+
+/**
+ * Add reference.
+ */
+template <typename T>
+void addReference(
+    T& serverOrClient,
+    const NodeId& sourceId,
+    const NodeId& targetId,
+    const NodeId& referenceType,
+    bool forward = true
+);
+
+/**
+ * Asynchronously add reference.
+ * @copydetails addReference
+ * @param token @completiontoken{void(opcua::StatusCode)}
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+auto addReferenceAsync(
+    Client& client,
+    const NodeId& sourceId,
+    const NodeId& targetId,
+    const NodeId& referenceType,
+    bool forward = true,
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    UA_AddReferencesItem item{};
+    item.sourceNodeId = sourceId;
+    item.referenceTypeId = referenceType;
+    item.isForward = forward;
+    item.targetServerUri = UA_STRING_NULL;
+    item.targetNodeId.nodeId = targetId;
+    UA_AddReferencesRequest request{};
+    request.referencesToAddSize = 1;
+    request.referencesToAdd = &item;
+    return detail::sendRequest<UA_AddReferencesRequest, UA_AddReferencesResponse>(
+        client,
+        request,
+        [](UA_AddReferencesResponse& response) { throwIfBad(detail::getSingleResult(response)); },
+        std::forward<CompletionToken>(token)
+    );
+}
+
+/**
+ * @}
+ * @defgroup DeleteNodes
+ * Delete nodes from the address space.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.4
+ * @{
+ */
+
+/**
+ * Delete one or more nodes (client only).
+ * @param client Instance of type Client
+ * @param request Delete nodes request
+ */
+DeleteNodesResponse deleteNodes(Client& client, const DeleteNodesRequest& request);
+
+/**
+ * Asynchronously delete one or more nodes (client only).
+ * @copydetails deleteNodes
+ * @param token @completiontoken{void(opcua::StatusCode, opcua::DeleteNodesResponse&)}
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+auto deleteNodesAsync(
+    Client& client,
+    const DeleteNodesRequest& request,
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    return detail::sendRequest<UA_DeleteNodesRequest, UA_DeleteNodesResponse>(
+        client,
+        request,
+        detail::WrapResponse<DeleteNodesResponse>{},
+        std::forward<CompletionToken>(token)
+    );
+}
+
+/**
+ * Delete node.
+ */
+template <typename T>
+void deleteNode(T& serverOrClient, const NodeId& id, bool deleteReferences = true);
+
+/**
+ * Asynchronously delete node.
+ * @copydetails deleteNode
+ * @param token @completiontoken{void(opcua::StatusCode)}
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+auto deleteNodeAsync(
+    Client& client,
+    const NodeId& id,
+    bool deleteReferences = true,
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    UA_DeleteNodesItem item{};
+    item.nodeId = id;
+    item.deleteTargetReferences = deleteReferences;
+    UA_DeleteNodesRequest request{};
+    request.nodesToDeleteSize = 1;
+    request.nodesToDelete = &item;
+    return detail::sendRequest<UA_DeleteNodesRequest, UA_DeleteNodesResponse>(
+        client,
+        request,
+        [](UA_DeleteNodesResponse& response) { throwIfBad(detail::getSingleResult(response)); },
+        std::forward<CompletionToken>(token)
+    );
+}
+
+/**
+ * @}
+ * @defgroup DeleteReferences
+ * Delete references from nodes.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.5
+ * @{
+ */
+
+/**
+ * Delete one or more references (client only).
+ * @param client Instance of type Client
+ * @param request Delete references request
+ */
+DeleteReferencesResponse deleteReferences(Client& client, const DeleteReferencesRequest& request);
+
+/**
+ * Asynchronously delete one or more references (client only).
+ * @copydetails deleteReferences
+ * @param token @completiontoken{void(opcua::StatusCode, opcua::DeleteReferencesResponse&)}
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+auto deleteReferencesAsync(
+    Client& client,
+    const DeleteReferencesRequest& request,
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    return detail::sendRequest<UA_DeleteReferencesRequest, UA_DeleteReferencesResponse>(
+        client,
+        request,
+        detail::WrapResponse<DeleteReferencesResponse>{},
+        std::forward<CompletionToken>(token)
+    );
+}
+
+/**
+ * Delete reference.
+ */
+template <typename T>
+void deleteReference(
+    T& serverOrClient,
+    const NodeId& sourceId,
+    const NodeId& targetId,
+    const NodeId& referenceType,
+    bool isForward,
+    bool deleteBidirectional
+);
+
+/**
+ * Asynchronously delete reference.
+ * @copydetails deleteReference
+ * @param token @completiontoken{void(opcua::StatusCode)}
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+auto deleteReferenceAsync(
+    Client& client,
+    const NodeId& sourceId,
+    const NodeId& targetId,
+    const NodeId& referenceType,
+    bool isForward,
+    bool deleteBidirectional,
+    CompletionToken&& token = DefaultCompletionToken()
+) {
+    UA_DeleteReferencesItem item{};
+    item.sourceNodeId = sourceId;
+    item.referenceTypeId = referenceType;
+    item.isForward = isForward;
+    item.targetNodeId.nodeId = targetId;
+    item.deleteBidirectional = deleteBidirectional;
+    UA_DeleteReferencesRequest request{};
+    request.referencesToDeleteSize = 1;
+    request.referencesToDelete = &item;
+    return detail::sendRequest<UA_DeleteReferencesRequest, UA_DeleteReferencesResponse>(
+        client,
+        request,
+        [](UA_DeleteReferencesResponse& response) {
+            throwIfBad(detail::getSingleResult(response));
+        },
+        std::forward<CompletionToken>(token)
+    );
+}
+
+/**
+ * @}
+ */
+
 /* ------------------------------- Specialized (inline) functions ------------------------------- */
+
+/**
+ * @addtogroup AddNodes
+ * @{
+ */
 
 /**
  * Add object.
@@ -717,47 +879,10 @@ inline auto addViewAsync(
 }
 
 /**
- * Add reference.
+ * @}
+ * @addtogroup AddReferences
+ * @{
  */
-template <typename T>
-void addReference(
-    T& serverOrClient,
-    const NodeId& sourceId,
-    const NodeId& targetId,
-    const NodeId& referenceType,
-    bool forward = true
-);
-
-/**
- * Asynchronously add reference.
- * @copydetails addReference
- * @param token @completiontoken{void(opcua::StatusCode)}
- */
-template <typename CompletionToken = DefaultCompletionToken>
-auto addReferenceAsync(
-    Client& client,
-    const NodeId& sourceId,
-    const NodeId& targetId,
-    const NodeId& referenceType,
-    bool forward = true,
-    CompletionToken&& token = DefaultCompletionToken()
-) {
-    UA_AddReferencesItem item{};
-    item.sourceNodeId = sourceId;
-    item.referenceTypeId = referenceType;
-    item.isForward = forward;
-    item.targetServerUri = UA_STRING_NULL;
-    item.targetNodeId.nodeId = targetId;
-    UA_AddReferencesRequest request{};
-    request.referencesToAddSize = 1;
-    request.referencesToAdd = &item;
-    return detail::sendRequest<UA_AddReferencesRequest, UA_AddReferencesResponse>(
-        client,
-        request,
-        [](UA_AddReferencesResponse& response) { throwIfBad(detail::getSingleResult(response)); },
-        std::forward<CompletionToken>(token)
-    );
-}
 
 /**
  * Add modelling rule.
@@ -797,85 +922,7 @@ inline auto addModellingRuleAsync(
 }
 
 /**
- * Delete node.
- */
-template <typename T>
-void deleteNode(T& serverOrClient, const NodeId& id, bool deleteReferences = true);
-
-/**
- * Asynchronously delete node.
- * @copydetails deleteNode
- * @param token @completiontoken{void(opcua::StatusCode)}
- */
-template <typename CompletionToken = DefaultCompletionToken>
-auto deleteNodeAsync(
-    Client& client,
-    const NodeId& id,
-    bool deleteReferences = true,
-    CompletionToken&& token = DefaultCompletionToken()
-) {
-    UA_DeleteNodesItem item{};
-    item.nodeId = id;
-    item.deleteTargetReferences = deleteReferences;
-    UA_DeleteNodesRequest request{};
-    request.nodesToDeleteSize = 1;
-    request.nodesToDelete = &item;
-    return detail::sendRequest<UA_DeleteNodesRequest, UA_DeleteNodesResponse>(
-        client,
-        request,
-        [](UA_DeleteNodesResponse& response) { throwIfBad(detail::getSingleResult(response)); },
-        std::forward<CompletionToken>(token)
-    );
-}
-
-/**
- * Delete reference.
- */
-template <typename T>
-void deleteReference(
-    T& serverOrClient,
-    const NodeId& sourceId,
-    const NodeId& targetId,
-    const NodeId& referenceType,
-    bool isForward,
-    bool deleteBidirectional
-);
-
-/**
- * Asynchronously delete reference.
- * @copydetails deleteReference
- * @param token @completiontoken{void(opcua::StatusCode)}
- */
-template <typename CompletionToken = DefaultCompletionToken>
-auto deleteReferenceAsync(
-    Client& client,
-    const NodeId& sourceId,
-    const NodeId& targetId,
-    const NodeId& referenceType,
-    bool isForward,
-    bool deleteBidirectional,
-    CompletionToken&& token = DefaultCompletionToken()
-) {
-    UA_DeleteReferencesItem item{};
-    item.sourceNodeId = sourceId;
-    item.referenceTypeId = referenceType;
-    item.isForward = isForward;
-    item.targetNodeId.nodeId = targetId;
-    item.deleteBidirectional = deleteBidirectional;
-    UA_DeleteReferencesRequest request{};
-    request.referencesToDeleteSize = 1;
-    request.referencesToDelete = &item;
-    return detail::sendRequest<UA_DeleteReferencesRequest, UA_DeleteReferencesResponse>(
-        client,
-        request,
-        [](UA_DeleteReferencesResponse& response) {
-            throwIfBad(detail::getSingleResult(response));
-        },
-        std::forward<CompletionToken>(token)
-    );
-}
-
-/**
+ * @}
  * @}
  */
 

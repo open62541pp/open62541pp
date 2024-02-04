@@ -55,21 +55,6 @@ BrowseResult browseNext<Client>(
     );
 }
 
-std::vector<ExpandedNodeId> browseRecursive(Server& connection, const BrowseDescription& bd) {
-    size_t arraySize{};
-    UA_ExpandedNodeId* array{};
-    const auto status = UA_Server_browseRecursive(
-        connection.handle(), bd.handle(), &arraySize, &array
-    );
-    std::vector<ExpandedNodeId> result(
-        std::make_move_iterator(array),
-        std::make_move_iterator(array + arraySize)  // NOLINT
-    );
-    UA_free(array);  // NOLINT
-    throwIfBad(status);
-    return result;
-}
-
 TranslateBrowsePathsToNodeIdsResponse translateBrowsePathsToNodeIds(
     Client& connection, const TranslateBrowsePathsToNodeIdsRequest& request
 ) {
@@ -96,6 +81,21 @@ RegisterNodesResponse registerNodes(Client& connection, const RegisterNodesReque
 
 UnregisterNodesResponse unregisterNodes(Client& connection, const UnregisterNodesRequest& request) {
     return unregisterNodesAsync(connection, request, detail::SyncOperation{});
+}
+
+std::vector<ExpandedNodeId> browseRecursive(Server& connection, const BrowseDescription& bd) {
+    size_t arraySize{};
+    UA_ExpandedNodeId* array{};
+    const auto status = UA_Server_browseRecursive(
+        connection.handle(), bd.handle(), &arraySize, &array
+    );
+    std::vector<ExpandedNodeId> result(
+        std::make_move_iterator(array),
+        std::make_move_iterator(array + arraySize)  // NOLINT
+    );
+    UA_free(array);  // NOLINT
+    throwIfBad(status);
+    return result;
 }
 
 }  // namespace opcua::services

@@ -15,6 +15,7 @@ class Attribute:
     writeable: bool = True
 
 
+# fmt: off
 ATTRIBUTES = [
     Attribute(name="NodeId", type_value="opcua::NodeId", copy=False, writeable=False),
     Attribute(name="NodeClass", type_value="opcua::NodeClass", copy=True, writeable=False),
@@ -39,6 +40,7 @@ ATTRIBUTES = [
     Attribute(name="Executable", type_value="bool", copy=True, writeable=True),
     Attribute(name="UserExecutable", type_value="bool", copy=True, writeable=True),
 ]
+# fmt: on
 
 TEMPLATE_HEADER = """
 /* ---------------------------------------------------------------------------------------------- */
@@ -51,16 +53,7 @@ TEMPLATE_HEADER = """
 
 namespace opcua::services {{
 
-/**
- * @addtogroup Attribute
- * @{{
- */
-
 {body}
-
-/**
- * @}}
- */
 
 }}  // namespace opcua::services
 """.lstrip()
@@ -68,6 +61,7 @@ namespace opcua::services {{
 TEMPLATE_READ = """
 /**
  * Read the AttributeId::{attr} attribute of a node.
+ * @ingroup Read
  */
 template <typename T>
 inline {type_without_ns} read{attr}(T& serverOrClient, const NodeId& id) {{
@@ -77,6 +71,7 @@ inline {type_without_ns} read{attr}(T& serverOrClient, const NodeId& id) {{
 /**
  * Asynchronously read the AttributeId::{attr} attribute of a node.
  * @param token @completiontoken{{void(opcua::StatusCode, {type_completion})}}
+ * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto read{attr}Async(
@@ -91,6 +86,7 @@ inline auto read{attr}Async(
 TEMPLATE_WRITE = """
 /**
  * Write the AttributeId::{attr} attribute of a node.
+ * @ingroup Write
  */
 template <typename T>
 inline void write{attr}(T& serverOrClient, const NodeId& id, {type_parameter} {parameter_name}) {{
@@ -100,6 +96,7 @@ inline void write{attr}(T& serverOrClient, const NodeId& id, {type_parameter} {p
 /**
  * Asynchronously write the AttributeId::{attr} attribute of a node.
  * @param token @completiontoken{{void(opcua::StatusCode)}}
+ * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto write{attr}Async(
@@ -111,12 +108,15 @@ inline auto write{attr}Async(
 }}
 """.lstrip()
 
+
 def gen_functions():
     for attr in ATTRIBUTES:
         pass_by_value = attr.copy
         type_completion = attr.type_value if pass_by_value else f"{attr.type_value}&"
         type_without_ns = attr.type_value.removeprefix("opcua::")
-        type_parameter = type_without_ns if pass_by_value else f"const {type_without_ns}&"
+        type_parameter = (
+            type_without_ns if pass_by_value else f"const {type_without_ns}&"
+        )
         parameter_name = attr.name[0].lower() + attr.name[1:]
         format_args = {
             "attr": attr.name,

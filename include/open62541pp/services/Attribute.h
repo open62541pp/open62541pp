@@ -30,22 +30,15 @@ namespace opcua::services {
 /**
  * @defgroup Attribute Attribute service set
  * Read and write node attributes.
- *
- * The following node attributes cannot be changed once a node has been created:
- * - AttributeId::NodeClass
- * - AttributeId::NodeId
- * - AttributeId::Symmetric
- * - AttributeId::ContainsNoLoops
- *
- * The following attributes cannot be written from the server, as they are specific to the different
- * users and set by the access control callback:
- * - AttributeId::UserWriteMask
- * - AttributeId::UserAccessLevel
- * - AttributeId::UserExecutable
- *
- * @see https://www.open62541.org/doc/1.3/server.html
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.10
  * @ingroup Services
+ * @{
+ */
+
+/**
+ * @defgroup Read
+ * This service is used to read attributes of nodes.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.10.2
  * @{
  */
 
@@ -131,6 +124,27 @@ auto readAttributeAsync(
 }
 
 /**
+ * @}
+ * @defgroup Write
+ * This service is used to write attributes of nodes.
+ *
+ * The following node attributes cannot be changed once a node has been created:
+ * - AttributeId::NodeClass
+ * - AttributeId::NodeId
+ * - AttributeId::Symmetric
+ * - AttributeId::ContainsNoLoops
+ *
+ * The following attributes cannot be written from the server, as they are specific to the different
+ * users and set by the access control callback:
+ * - AttributeId::UserWriteMask
+ * - AttributeId::UserAccessLevel
+ * - AttributeId::UserExecutable
+ *
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.10.4
+ * @{
+ */
+
+/**
  * Write one or more attributes of one or more nodes (client only).
  */
 WriteResponse write(Client& client, const WriteRequest& request);
@@ -201,6 +215,10 @@ auto writeAttributeAsync(
     );
 }
 
+/**
+ * @}
+ */
+
 /* ----------------------------- Specializated inline read functions ---------------------------- */
 
 namespace detail {
@@ -250,6 +268,7 @@ inline auto writeAttributeAsyncImpl(
 
 /**
  * Read the `AttributeId::Value` attribute of a node as a DataValue object.
+ * @ingroup Read
  */
 template <typename T>
 inline DataValue readDataValue(T& serverOrClient, const NodeId& id) {
@@ -259,6 +278,7 @@ inline DataValue readDataValue(T& serverOrClient, const NodeId& id) {
 /**
  * Asynchronously read the `AttributeId::Value` of a node as a DataValue object.
  * @param token @completiontoken{void(opcua::StatusCode, opcua::DataValue&)}
+ * @ingroup Read
  */
 template <typename T, typename CompletionToken = DefaultCompletionToken>
 inline auto readDataValueAsync(T& serverOrClient, const NodeId& id, CompletionToken&& token) {
@@ -273,6 +293,7 @@ inline auto readDataValueAsync(T& serverOrClient, const NodeId& id, CompletionTo
 
 /**
  * Write the AttributeId::Value attribute of a node as a DataValue object.
+ * @ingroup Write
  */
 template <typename T>
 inline void writeDataValue(T& serverOrClient, const NodeId& id, const DataValue& value) {
@@ -282,6 +303,7 @@ inline void writeDataValue(T& serverOrClient, const NodeId& id, const DataValue&
 /**
  * Asynchronously write the AttributeId::Value attribute of a node as a DataValue object.
  * @param token @completiontoken{void(opcua::StatusCode)}
+ * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeDataValueAsync(
