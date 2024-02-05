@@ -295,7 +295,7 @@ public:
      *              The container must implement `begin()` and `end()`.
      */
     template <typename ArrayLike>
-    void setArrayCopy(ArrayLike&& array) {
+    void setArrayCopy(const ArrayLike& array) {
         setArrayCopy(array.begin(), array.end());
     }
 
@@ -305,7 +305,7 @@ public:
      * @param dataType Custom data type.
      */
     template <typename ArrayLike>
-    void setArrayCopy(ArrayLike&& array, const UA_DataType& dataType) {
+    void setArrayCopy(const ArrayLike& array, const UA_DataType& dataType) {
         setArrayCopy(array.begin(), array.end(), dataType);
     }
 
