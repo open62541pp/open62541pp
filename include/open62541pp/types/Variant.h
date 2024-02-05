@@ -6,7 +6,7 @@
 #include <cstdint>
 #include <iterator>  // distance
 #include <optional>
-#include <utility>  // as_const
+#include <utility>  // as_const, exchange
 #include <vector>
 
 #include "open62541pp/Common.h"
@@ -249,20 +249,23 @@ public:
     }
 
     /// Copy scalar value to variant.
+    /// Rvalue references are moved if possible.
     template <typename T>
-    void setScalarCopy(const T& value) {
-        assertIsCopyableOrConvertible<T>();
-        if constexpr (detail::isRegisteredType<T>) {
-            setScalarCopyImpl(value, opcua::getDataType<T>());
+    void setScalarCopy(T&& value) {
+        using ValueType = std::remove_cv_t<std::remove_reference_t<T>>;
+        assertIsCopyableOrConvertible<ValueType>();
+        if constexpr (detail::isRegisteredType<ValueType>) {
+            setScalarCopyImpl(std::forward<T>(value), opcua::getDataType<ValueType>());
         } else {
-            setScalarCopyConvertImpl(value);
+            setScalarCopyConvertImpl(std::forward<T>(value));
         }
     }
 
     /// Copy scalar value to variant with custom data type.
+    /// @copydetails setScalarCopy
     template <typename T>
-    void setScalarCopy(const T& value, const UA_DataType& dataType) {
-        setScalarCopyImpl(value, dataType);
+    void setScalarCopy(T&& value, const UA_DataType& dataType) {
+        setScalarCopyImpl(std::forward<T>(value), dataType);
     }
 
     /**
@@ -390,7 +393,7 @@ private:
         T* data, size_t arrayLength, const UA_DataType& dataType, UA_VariantStorageType storageType
     ) noexcept;
     template <typename T>
-    inline void setScalarCopyImpl(const T& value, const UA_DataType& dataType);
+    inline void setScalarCopyImpl(T&& value, const UA_DataType& dataType);
     template <typename T>
     inline void setScalarCopyConvertImpl(const T& value);
     template <typename InputIt>
@@ -457,9 +460,15 @@ void Variant::setArrayImpl(
 }
 
 template <typename T>
-void Variant::setScalarCopyImpl(const T& value, const UA_DataType& dataType) {
-    auto native = detail::allocateUniquePtr<T>(dataType);
-    *native = detail::copy(value, dataType);
+void Variant::setScalarCopyImpl(T&& value, const UA_DataType& dataType) {
+    using ValueType = std::remove_cv_t<std::remove_reference_t<T>>;
+    auto native = detail::allocateUniquePtr<ValueType>(dataType);
+    // https://stackoverflow.com/a/50086839/9967707
+    if constexpr (std::is_lvalue_reference_v<T>) {
+        *native = detail::copy(value, dataType);
+    } else {
+        *native = std::exchange(value, {});
+    }
     setScalarImpl(native.release(), dataType, UA_VARIANT_DATA);  // move ownership
 }
 
@@ -507,9 +516,19 @@ struct VariantHandler<VariantPolicy::Copy> {
         var.setScalarCopy(value);
     }
 
+    template <typename T, typename = std::enable_if_t<!std::is_reference_v<T>>>
+    static void setScalar(Variant& var, T&& value) {
+        var.setScalarCopy(std::forward<T>(value));
+    }
+
     template <typename T>
     static void setScalar(Variant& var, const T& value, const UA_DataType& dtype) {
         var.setScalarCopy(value, dtype);
+    }
+
+    template <typename T, typename = std::enable_if_t<!std::is_reference_v<T>>>
+    static void setScalar(Variant& var, T&& value, const UA_DataType& dtype) {
+        var.setScalarCopy(std::forward<T>(value), dtype);
     }
 
     template <typename T>

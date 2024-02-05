@@ -550,6 +550,18 @@ TEST_CASE("Variant") {
         CHECK(var.getScalarCopy<double>() == 11.11);
     }
 
+    SUBCASE("Set/get scalar (copy rvalue optimization)") {
+        Variant var;
+        String str("test");
+        auto* data = str->data;
+        var.setScalarCopy(std::move(str));
+        // check if object was moved
+        CHECK(str->data == nullptr);
+        CHECK(var.getScalar<String>()->data == data);
+        CHECK(var.getScalar<String>() == String("test"));
+        CHECK(var.getScalarCopy<String>() == String("test"));
+    }
+
     SUBCASE("Set/get array") {
         Variant var;
         std::vector<float> array{0, 1, 2};
