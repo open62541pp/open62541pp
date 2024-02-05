@@ -51,7 +51,7 @@ public:
 
     /// Create Variant from scalar value.
     /// @tparam Policy Policy (@ref VariantPolicy) how to store the scalar inside the variant
-    template <VariantPolicy Policy = VariantPolicy::ReferenceIfPossible, typename T>
+    template <VariantPolicy Policy = VariantPolicy::Copy, typename T>
     [[nodiscard]] static Variant fromScalar(T&& value) {
         Variant var;
         detail::VariantHandler<Policy>::setScalar(var, std::forward<T>(value));
@@ -60,7 +60,7 @@ public:
 
     /// Create Variant from scalar value with custom data type.
     /// @tparam Policy Policy (@ref VariantPolicy) how to store the scalar inside the variant
-    template <VariantPolicy Policy = VariantPolicy::ReferenceIfPossible, typename T>
+    template <VariantPolicy Policy = VariantPolicy::Copy, typename T>
     [[nodiscard]] static Variant fromScalar(T&& value, const UA_DataType& dataType) {
         Variant var;
         detail::VariantHandler<Policy>::setScalar(var, std::forward<T>(value), dataType);
@@ -69,7 +69,7 @@ public:
 
     /// Create Variant from array.
     /// @tparam Policy Policy (@ref VariantPolicy) how to store the array inside the variant
-    template <VariantPolicy Policy = VariantPolicy::ReferenceIfPossible, typename ArrayLike>
+    template <VariantPolicy Policy = VariantPolicy::Copy, typename ArrayLike>
     [[nodiscard]] static Variant fromArray(ArrayLike&& array) {
         using Handler = detail::VariantHandler<Policy>;
         Variant var;
@@ -83,7 +83,7 @@ public:
 
     /// Create Variant from array with custom data type.
     /// @tparam Policy Policy (@ref VariantPolicy) how to store the array inside the variant
-    template <VariantPolicy Policy = VariantPolicy::ReferenceIfPossible, typename ArrayLike>
+    template <VariantPolicy Policy = VariantPolicy::Copy, typename ArrayLike>
     [[nodiscard]] static Variant fromArray(ArrayLike&& array, const UA_DataType& dataType) {
         using Handler = detail::VariantHandler<Policy>;
         Variant var;
@@ -97,7 +97,7 @@ public:
 
     /// Create Variant from range of elements (copy required).
     /// @tparam Policy Policy (@ref VariantPolicy) how to store the array inside the variant
-    template <VariantPolicy Policy = VariantPolicy::ReferenceIfPossible, typename InputIt>
+    template <VariantPolicy Policy = VariantPolicy::Copy, typename InputIt>
     [[nodiscard]] static Variant fromArray(InputIt first, InputIt last) {
         Variant var;
         detail::VariantHandler<Policy>::setArray(var, first, last);
@@ -106,7 +106,7 @@ public:
 
     /// Create Variant from range of elements with custom data type (copy required).
     /// @tparam Policy Policy (@ref VariantPolicy) how to store the array inside the variant
-    template <VariantPolicy Policy = VariantPolicy::ReferenceIfPossible, typename InputIt>
+    template <VariantPolicy Policy = VariantPolicy::Copy, typename InputIt>
     [[nodiscard]] static Variant fromArray(
         InputIt first, InputIt last, const UA_DataType& dataType
     ) {

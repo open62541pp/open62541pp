@@ -36,7 +36,7 @@ const NodeId& Event::getNodeId() const noexcept {
 }
 
 Event& Event::writeSourceName(std::string_view sourceName) {
-    return writeProperty({0, "SourceName"}, Variant::fromScalar(String(sourceName)));
+    return writeProperty({0, "SourceName"}, Variant::fromScalar(sourceName));
 }
 
 Event& Event::writeTime(DateTime time) {  // NOLINT
