@@ -13,7 +13,75 @@
 
 using namespace opcua;
 
-TEST_CASE("ClientService") {
+TEST_CASE("AsyncServiceAdapter") {
+    SUBCASE("createCallbackAndContext") {
+        using Response = int;
+        using Adapter = services::detail::AsyncServiceAdapter<Response>;
+
+        StatusCode status;
+        Response result;
+        bool throwInTransform = false;
+        bool throwInCompletionHandler = false;
+        detail::ExceptionCatcher catcher;
+
+        auto callbackAndContext = Adapter::createCallbackAndContext(
+            catcher,
+            [&](int value) {
+                if (throwInTransform) {
+                    throw std::runtime_error("Transform");
+                }
+                return value;
+            },
+            [&](StatusCode code, int value) {
+                status = code;
+                result = value;
+                if (throwInCompletionHandler) {
+                    throw std::runtime_error("CompletionHandler");
+                }
+            }
+        );
+
+        auto invokeCallback = [&](int* response) {
+            callbackAndContext.callback(
+                nullptr,  // client
+                callbackAndContext.context.release(),
+                0,  // requestId
+                response
+            );
+        };
+
+        Response response = 5;
+        SUBCASE("Success") {
+            invokeCallback(&response);
+            CHECK(status == UA_STATUSCODE_GOOD);
+            CHECK(result == 5);
+            CHECK_FALSE(catcher.hasException());
+        }
+        SUBCASE("Response nullptr") {
+            invokeCallback(nullptr);
+            CHECK(status == UA_STATUSCODE_BADUNEXPECTEDERROR);
+            CHECK(result == 0);
+            CHECK_FALSE(catcher.hasException());
+        }
+        SUBCASE("Exception in transform function") {
+            throwInTransform = true;
+            invokeCallback(&response);
+            CHECK(status == UA_STATUSCODE_BADINTERNALERROR);
+            CHECK(result == 0);
+            CHECK_FALSE(catcher.hasException());
+        }
+        SUBCASE("Exception in completion handler") {
+            throwInCompletionHandler = true;
+            invokeCallback(&response);
+            CHECK(status == UA_STATUSCODE_GOOD);
+            CHECK(result == response);
+            CHECK(catcher.hasException());
+            CHECK_THROWS_AS_MESSAGE(catcher.rethrow(), std::runtime_error, "CompletionHandler");
+        }
+    }
+}
+
+TEST_CASE("sendRequest") {
     Server server;
     ServerRunner serverRunner(server);
     Client client;
