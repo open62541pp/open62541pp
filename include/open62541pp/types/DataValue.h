@@ -52,14 +52,14 @@ public:
 
     /// Create DataValue from scalar value.
     /// @see Variant::fromScalar
-    template <VariantPolicy Policy = VariantPolicy::ReferenceIfPossible, typename... Args>
+    template <VariantPolicy Policy = VariantPolicy::Copy, typename... Args>
     [[nodiscard]] static DataValue fromScalar(Args&&... args) {
         return DataValue(Variant::fromScalar<Policy>(std::forward<Args>(args)...));
     }
 
     /// Create DataValue from array.
     /// @see Variant::fromArray
-    template <VariantPolicy Policy = VariantPolicy::ReferenceIfPossible, typename... Args>
+    template <VariantPolicy Policy = VariantPolicy::Copy, typename... Args>
     [[nodiscard]] static DataValue fromArray(Args&&... args) {
         return DataValue(Variant::fromArray<Policy>(std::forward<Args>(args)...));
     }
