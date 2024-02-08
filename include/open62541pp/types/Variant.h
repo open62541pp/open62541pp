@@ -513,12 +513,12 @@ struct VariantHandler<VariantPolicy::Copy> {
     }
 
     template <typename T>
-    static void setArray(Variant& var, Span<const T> array) {
+    static void setArray(Variant& var, Span<T> array) {
         var.setArrayCopy(array.begin(), array.end());
     }
 
     template <typename T>
-    static void setArray(Variant& var, Span<const T> array, const UA_DataType& dtype) {
+    static void setArray(Variant& var, Span<T> array, const UA_DataType& dtype) {
         var.setArrayCopy(array.begin(), array.end(), dtype);
     }
 
@@ -587,6 +587,16 @@ struct VariantHandler<VariantPolicy::ReferenceIfPossible> : VariantHandler<Varia
     template <typename T>
     static void setArray(Variant& var, Span<T> array, const UA_DataType& dtype) noexcept {
         var.setArray(array, dtype);
+    }
+
+    template <typename T>
+    static void setArray(Variant& var, Span<const T> array) {
+        var.setArrayCopy(array.begin(), array.end());
+    }
+
+    template <typename T>
+    static void setArray(Variant& var, Span<const T> array, const UA_DataType& dtype) {
+        var.setArrayCopy(array.begin(), array.end(), dtype);
     }
 };
 
