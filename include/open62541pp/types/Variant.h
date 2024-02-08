@@ -235,14 +235,14 @@ public:
         return getArrayCopyImpl<T>();
     }
 
-    /// Assign scalar value to variant.
+    /// Assign scalar value to variant (no copy).
     template <typename T>
     void setScalar(T& value) noexcept {
         assertIsNative<T>();
         setScalar(value, opcua::getDataType<T>());
     }
 
-    /// Assign scalar value to variant with custom data type.
+    /// Assign scalar value to variant with custom data type (no copy).
     template <typename T>
     void setScalar(T& value, const UA_DataType& dataType) noexcept {
         setScalarImpl(&value, dataType, UA_VARIANT_DATA_NODELETE);
@@ -266,7 +266,7 @@ public:
     }
 
     /**
-     * Assign array to variant.
+     * Assign array to variant (no copy).
      * @param array Container with a contiguous sequence of elements.
      *              For example `std::array`, `std::vector` or `Span`.
      *              The underlying array must be accessible with `std::data` and `std::size`.
@@ -279,7 +279,7 @@ public:
     }
 
     /**
-     * Assign array to variant with custom data type.
+     * Assign array to variant with custom data type (no copy).
      * @copydetails setArray
      * @param dataType Custom data type.
      */
