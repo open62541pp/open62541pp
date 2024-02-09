@@ -1,16 +1,13 @@
 #pragma once
 
-#include <map>
-#include <memory>
+#include <cstdint>
 
 #include "open62541pp/Config.h"
 #include "open62541pp/ValueBackend.h"
 #include "open62541pp/detail/ContextMap.h"
 #include "open62541pp/detail/ExceptionCatcher.h"
-#include "open62541pp/services/NodeManagement.h"
-#include "open62541pp/services/Subscription.h"
+#include "open62541pp/services/NodeManagement.h"  // MethodCallback
 #include "open62541pp/services/detail/MonitoredItemContext.h"
-#include "open62541pp/types/Composed.h"
 #include "open62541pp/types/NodeId.h"
 
 namespace opcua {

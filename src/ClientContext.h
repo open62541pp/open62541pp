@@ -3,21 +3,15 @@
 #include <array>
 #include <cassert>
 #include <cstdint>
-#include <map>
-#include <memory>
 #include <utility>  // pair
 
 #include "open62541pp/Client.h"
 #include "open62541pp/Config.h"
 #include "open62541pp/detail/ContextMap.h"
 #include "open62541pp/detail/ExceptionCatcher.h"
-#include "open62541pp/services/MonitoredItem.h"
-#include "open62541pp/services/Subscription.h"
+#include "open62541pp/open62541.h"
 #include "open62541pp/services/detail/MonitoredItemContext.h"
 #include "open62541pp/services/detail/SubscriptionContext.h"
-#include "open62541pp/types/Composed.h"
-
-#include "open62541_impl.h"
 
 namespace opcua {
 
@@ -51,6 +45,7 @@ public:
     UA_SessionState lastSessionState{};
 #endif
     std::array<StateCallback, clientStateCount> stateCallbacks;
+
     detail::ExceptionCatcher exceptionCatcher;
 };
 
