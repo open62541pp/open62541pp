@@ -98,8 +98,7 @@ static UA_StatusCode methodCallback(
     UA_Variant* output
 ) noexcept {
     assert(methodContext != nullptr);
-    const auto* nodeContext = static_cast<opcua::detail::ServerContext::NodeContext*>(methodContext
-    );
+    const auto* nodeContext = static_cast<opcua::detail::NodeContext*>(methodContext);
     const auto& callback = nodeContext->methodCallback;
     if (callback) {
         return opcua::detail::tryInvokeGetStatus([&] {

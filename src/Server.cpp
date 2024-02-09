@@ -276,8 +276,7 @@ static void valueCallbackOnRead(
     const UA_DataValue* value
 ) noexcept {
     assert(nodeContext != nullptr && value != nullptr);
-    auto& cb =
-        static_cast<detail::ServerContext::NodeContext*>(nodeContext)->valueCallback.onBeforeRead;
+    auto& cb = static_cast<detail::NodeContext*>(nodeContext)->valueCallback.onBeforeRead;
     if (cb) {
         detail::tryInvoke([&] { cb(asWrapper<DataValue>(*value)); });
     }
@@ -293,8 +292,7 @@ static void valueCallbackOnWrite(
     const UA_DataValue* value
 ) noexcept {
     assert(nodeContext != nullptr && value != nullptr);
-    auto& cb =
-        static_cast<detail::ServerContext::NodeContext*>(nodeContext)->valueCallback.onAfterWrite;
+    auto& cb = static_cast<detail::NodeContext*>(nodeContext)->valueCallback.onAfterWrite;
     if (cb) {
         detail::tryInvoke([&] { cb(asWrapper<DataValue>(*value)); });
     }
@@ -326,7 +324,7 @@ static UA_StatusCode valueSourceRead(
     UA_DataValue* value
 ) noexcept {
     assert(nodeContext != nullptr && value != nullptr);
-    auto& callback = static_cast<detail::ServerContext::NodeContext*>(nodeContext)->dataSource.read;
+    auto& callback = static_cast<detail::NodeContext*>(nodeContext)->dataSource.read;
     if (callback) {
         return detail::tryInvokeGetStatus([&] {
             callback(asWrapper<DataValue>(*value), asRange(range), includeSourceTimestamp);
@@ -345,8 +343,7 @@ static UA_StatusCode valueSourceWrite(
     const UA_DataValue* value
 ) noexcept {
     assert(nodeContext != nullptr && value != nullptr);
-    auto& callback =
-        static_cast<detail::ServerContext::NodeContext*>(nodeContext)->dataSource.write;
+    auto& callback = static_cast<detail::NodeContext*>(nodeContext)->dataSource.write;
     if (callback) {
         return detail::tryInvokeGetStatus([&] {
             callback(asWrapper<DataValue>(*value), asRange(range));

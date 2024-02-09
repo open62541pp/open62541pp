@@ -33,7 +33,6 @@ public:
     using SubId = uint32_t;
     using MonId = uint32_t;
     using SubMonId = std::pair<uint32_t, uint32_t>;
-
     detail::ContextMap<SubId, services::detail::SubscriptionContext> subscriptions;
     detail::ContextMap<SubMonId, services::detail::MonitoredItemContext> monitoredItems;
 #endif
