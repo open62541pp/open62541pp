@@ -5,9 +5,11 @@
 
 #include "open62541pp/Config.h"
 #include "open62541pp/ValueBackend.h"
+#include "open62541pp/detail/ContextMap.h"
 #include "open62541pp/detail/ExceptionCatcher.h"
 #include "open62541pp/services/NodeManagement.h"
 #include "open62541pp/services/Subscription.h"
+#include "open62541pp/services/detail/MonitoredItemContext.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/NodeId.h"
 
@@ -20,12 +22,11 @@ namespace opcua {
 class ServerContext {
 public:
 #ifdef UA_ENABLE_SUBSCRIPTIONS
-    struct MonitoredItem {
-        ReadValueId itemToMonitor;
-        services::DataChangeNotificationCallback dataChangeCallback;
-    };
+    using SubId = uint32_t;  // always 0
+    using MonId = uint32_t;
+    using SubMonId = std::pair<uint32_t, uint32_t>;
 
-    std::map<uint32_t, std::unique_ptr<MonitoredItem>> monitoredItems;
+    detail::ContextMap<SubMonId, services::detail::MonitoredItemContext> monitoredItems;
 #endif
 
     struct NodeContext {
@@ -36,11 +37,7 @@ public:
 #endif
     };
 
-    std::map<NodeId, std::unique_ptr<NodeContext>> nodeContexts;
-
-    NodeContext* getOrCreateNodeContext(const NodeId& id) {
-        return nodeContexts.emplace(id, std::make_unique<NodeContext>()).first->second.get();
-    }
+    detail::ContextMap<NodeId, NodeContext> nodeContexts;
 
     detail::ExceptionCatcher exceptionCatcher;
 };

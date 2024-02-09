@@ -393,10 +393,13 @@ Subscription<Client> Client::createSubscription(SubscriptionParameters& paramete
 }
 
 std::vector<Subscription<Client>> Client::getSubscriptions() {
-    const auto& subscriptions = getContext().subscriptions;
+    auto& subscriptions = getContext().subscriptions;
+    subscriptions.eraseStale();
+    auto lock = subscriptions.acquireLock();
+    const auto& map = subscriptions.underlying();
     std::vector<Subscription<Client>> result;
-    result.reserve(subscriptions.size());
-    for (const auto& [subId, _] : subscriptions) {
+    result.reserve(map.size());
+    for (const auto& [subId, _] : map) {
         result.emplace_back(*this, subId);
     }
     return result;

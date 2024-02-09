@@ -10,25 +10,12 @@
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/Result.h"  // tryInvoke
 #include "open62541pp/open62541.h"
+#include "open62541pp/services/detail/SubscriptionContext.h"
 
 #include "../ClientContext.h"
 #include "../open62541_impl.h"
 
 namespace opcua::services {
-
-static void deleteSubscriptionCallback(
-    UA_Client* client, uint32_t subId, void* subContext
-) noexcept {
-    if (subContext != nullptr) {
-        auto* subscription = static_cast<ClientContext::Subscription*>(subContext);
-        auto& callback = subscription->deleteCallback;
-        if (callback) {
-            detail::tryInvoke([&] { callback(subId); });
-        }
-    }
-    ClientContext& clientContext = getContext(client);
-    clientContext.subscriptions.erase(subId);
-}
 
 uint32_t createSubscription(
     Client& client,
@@ -44,17 +31,18 @@ uint32_t createSubscription(
     request.publishingEnabled = publishingEnabled;
     request.priority = parameters.priority;
 
-    auto subscriptionContext = std::make_unique<ClientContext::Subscription>();
-    subscriptionContext->deleteCallback = std::move(deleteCallback);
+    auto context = std::make_unique<detail::SubscriptionContext>();
+    context->catcher = &opcua::detail::getExceptionCatcher(client);
+    context->deleteCallback = std::move(deleteCallback);
 
     using Response =
         TypeWrapper<UA_CreateSubscriptionResponse, UA_TYPES_CREATESUBSCRIPTIONRESPONSE>;
     const Response response = UA_Client_Subscriptions_create(
         client.handle(),
         request,
-        subscriptionContext.get(),
+        context.get(),
         nullptr,  // statusChangeCallback
-        deleteSubscriptionCallback
+        context->deleteCallbackNative
     );
     throwIfBad(response->responseHeader.serviceResult);
 
@@ -64,10 +52,7 @@ uint32_t createSubscription(
     parameters.maxKeepAliveCount = response->revisedMaxKeepAliveCount;
 
     const auto subscriptionId = response->subscriptionId;
-    client.getContext().subscriptions.insert_or_assign(
-        subscriptionId, std::move(subscriptionContext)
-    );
-
+    client.getContext().subscriptions.insert(subscriptionId, std::move(context));
     return subscriptionId;
 }
 

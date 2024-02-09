@@ -122,7 +122,7 @@ NodeId addMethod(
     const MethodAttributes& attributes,
     const NodeId& referenceType
 ) {
-    auto* nodeContext = server.getContext().getOrCreateNodeContext(id);
+    auto* nodeContext = server.getContext().nodeContexts[id];
     nodeContext->methodCallback = std::move(callback);
     NodeId outputNodeId;
     const auto status = UA_Server_addMethodNode(

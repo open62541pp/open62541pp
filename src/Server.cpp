@@ -299,7 +299,7 @@ static void valueCallbackOnWrite(
 }
 
 void Server::setVariableNodeValueCallback(const NodeId& id, ValueCallback callback) {
-    auto* nodeContext = getContext().getOrCreateNodeContext(id);
+    auto* nodeContext = getContext().nodeContexts[id];
     nodeContext->valueCallback = std::move(callback);
     throwIfBad(UA_Server_setNodeContext(handle(), id, nodeContext));
 
@@ -353,7 +353,7 @@ static UA_StatusCode valueSourceWrite(
 }
 
 void Server::setVariableNodeValueBackend(const NodeId& id, ValueBackendDataSource backend) {
-    auto* nodeContext = getContext().getOrCreateNodeContext(id);
+    auto* nodeContext = getContext().nodeContexts[id];
     nodeContext->dataSource = std::move(backend);
     throwIfBad(UA_Server_setNodeContext(handle(), id, nodeContext));
 
