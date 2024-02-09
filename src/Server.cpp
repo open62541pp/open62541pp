@@ -16,6 +16,7 @@
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/ValueBackend.h"
 #include "open62541pp/detail/Result.h"  // tryInvoke
+#include "open62541pp/detail/ServerContext.h"
 #include "open62541pp/services/Attribute.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
@@ -25,7 +26,6 @@
 #include "CustomAccessControl.h"
 #include "CustomDataTypes.h"
 #include "CustomLogger.h"
-#include "ServerContext.h"
 #include "open62541_impl.h"
 
 namespace opcua {
@@ -113,7 +113,7 @@ public:
         return server_;
     }
 
-    ServerContext& getContext() noexcept {
+    detail::ServerContext& getContext() noexcept {
         return context_;
     }
 
@@ -135,7 +135,7 @@ public:
 
 private:
     UA_Server* server_;
-    ServerContext context_;
+    detail::ServerContext context_;
     CustomAccessControl customAccessControl_;
     CustomDataTypes customDataTypes_;
     CustomLogger customLogger_;
@@ -276,7 +276,8 @@ static void valueCallbackOnRead(
     const UA_DataValue* value
 ) noexcept {
     assert(nodeContext != nullptr && value != nullptr);
-    auto& cb = static_cast<ServerContext::NodeContext*>(nodeContext)->valueCallback.onBeforeRead;
+    auto& cb =
+        static_cast<detail::ServerContext::NodeContext*>(nodeContext)->valueCallback.onBeforeRead;
     if (cb) {
         detail::tryInvoke([&] { cb(asWrapper<DataValue>(*value)); });
     }
@@ -292,7 +293,8 @@ static void valueCallbackOnWrite(
     const UA_DataValue* value
 ) noexcept {
     assert(nodeContext != nullptr && value != nullptr);
-    auto& cb = static_cast<ServerContext::NodeContext*>(nodeContext)->valueCallback.onAfterWrite;
+    auto& cb =
+        static_cast<detail::ServerContext::NodeContext*>(nodeContext)->valueCallback.onAfterWrite;
     if (cb) {
         detail::tryInvoke([&] { cb(asWrapper<DataValue>(*value)); });
     }
@@ -324,7 +326,7 @@ static UA_StatusCode valueSourceRead(
     UA_DataValue* value
 ) noexcept {
     assert(nodeContext != nullptr && value != nullptr);
-    auto& callback = static_cast<ServerContext::NodeContext*>(nodeContext)->dataSource.read;
+    auto& callback = static_cast<detail::ServerContext::NodeContext*>(nodeContext)->dataSource.read;
     if (callback) {
         return detail::tryInvokeGetStatus([&] {
             callback(asWrapper<DataValue>(*value), asRange(range), includeSourceTimestamp);
@@ -343,7 +345,8 @@ static UA_StatusCode valueSourceWrite(
     const UA_DataValue* value
 ) noexcept {
     assert(nodeContext != nullptr && value != nullptr);
-    auto& callback = static_cast<ServerContext::NodeContext*>(nodeContext)->dataSource.write;
+    auto& callback =
+        static_cast<detail::ServerContext::NodeContext*>(nodeContext)->dataSource.write;
     if (callback) {
         return detail::tryInvokeGetStatus([&] {
             callback(asWrapper<DataValue>(*value), asRange(range));
@@ -419,7 +422,7 @@ const UA_Server* Server::handle() const noexcept {
     return connection_->handle();
 }
 
-ServerContext& Server::getContext() noexcept {
+detail::ServerContext& Server::getContext() noexcept {
     return connection_->getContext();
 }
 

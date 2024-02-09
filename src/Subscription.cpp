@@ -8,12 +8,11 @@
 #include "open62541pp/Client.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/Span.h"
+#include "open62541pp/detail/ClientContext.h"
+#include "open62541pp/detail/ServerContext.h"
 #include "open62541pp/services/MonitoredItem.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/ExtensionObject.h"
-
-#include "ClientContext.h"
-#include "ServerContext.h"
 
 namespace opcua {
 

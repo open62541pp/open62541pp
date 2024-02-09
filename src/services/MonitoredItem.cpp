@@ -12,13 +12,13 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/detail/ClientContext.h"
 #include "open62541pp/detail/Result.h"  // tryInvoke
+#include "open62541pp/detail/ServerContext.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/Variant.h"
 
-#include "../ClientContext.h"
-#include "../ServerContext.h"
 #include "../open62541_impl.h"
 
 namespace opcua::services {

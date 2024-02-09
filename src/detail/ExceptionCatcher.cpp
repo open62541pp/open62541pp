@@ -2,9 +2,8 @@
 
 #include "open62541pp/Client.h"
 #include "open62541pp/Server.h"
-
-#include "../ClientContext.h"
-#include "../ServerContext.h"
+#include "open62541pp/detail/ClientContext.h"
+#include "open62541pp/detail/ServerContext.h"
 
 namespace opcua::detail {
 

@@ -13,7 +13,7 @@
 #include "open62541pp/services/detail/MonitoredItemContext.h"
 #include "open62541pp/services/detail/SubscriptionContext.h"
 
-namespace opcua {
+namespace opcua::detail {
 
 enum class ClientState {
     Disconnected,
@@ -58,4 +58,4 @@ inline ClientContext& getContext(UA_Client* client) {
     return *static_cast<ClientContext*>(context);
 }
 
-}  // namespace opcua
+}  // namespace opcua::detail

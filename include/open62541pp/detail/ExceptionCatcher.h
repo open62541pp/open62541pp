@@ -6,18 +6,21 @@
 
 namespace opcua {
 class Client;
-class ClientContext;
 class Server;
-class ServerContext;
 }  // namespace opcua
+
+namespace opcua::detail {
+class ClientContext;
+class ServerContext;
+}  // namespace opcua::detail
 
 namespace opcua::detail {
 
 class ExceptionCatcher;
 
-ExceptionCatcher& getExceptionCatcher(ClientContext& context) noexcept;
+ExceptionCatcher& getExceptionCatcher(detail::ClientContext& context) noexcept;
 ExceptionCatcher& getExceptionCatcher(Client& client) noexcept;
-ExceptionCatcher& getExceptionCatcher(ServerContext& context) noexcept;
+ExceptionCatcher& getExceptionCatcher(detail::ServerContext& context) noexcept;
 ExceptionCatcher& getExceptionCatcher(Server& server) noexcept;
 
 /**

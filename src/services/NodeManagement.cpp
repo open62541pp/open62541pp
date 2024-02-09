@@ -6,9 +6,9 @@
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/Result.h"  // tryInvoke
+#include "open62541pp/detail/ServerContext.h"
 #include "open62541pp/detail/helper.h"
 
-#include "../ServerContext.h"
 #include "../open62541_impl.h"
 
 namespace opcua::services {
@@ -98,7 +98,8 @@ static UA_StatusCode methodCallback(
     UA_Variant* output
 ) noexcept {
     assert(methodContext != nullptr);
-    const auto* nodeContext = static_cast<ServerContext::NodeContext*>(methodContext);
+    const auto* nodeContext = static_cast<opcua::detail::ServerContext::NodeContext*>(methodContext
+    );
     const auto& callback = nodeContext->methodCallback;
     if (callback) {
         return opcua::detail::tryInvokeGetStatus([&] {

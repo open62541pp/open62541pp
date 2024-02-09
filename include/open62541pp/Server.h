@@ -25,10 +25,13 @@ class DataType;
 class Event;
 template <typename ServerOrClient>
 class Node;
-class ServerContext;
 class Session;
 struct ValueBackendDataSource;
 struct ValueCallback;
+
+namespace detail {
+class ServerContext;
+}  // namespace detail
 
 /**
  * High-level server class.
@@ -147,7 +150,7 @@ public:
 
     /// Get client context (for internal use only).
     /// @private
-    ServerContext& getContext() noexcept;
+    detail::ServerContext& getContext() noexcept;
 
 private:
     class Connection;

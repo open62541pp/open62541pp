@@ -12,6 +12,7 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Node.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/detail/ClientContext.h"
 #include "open62541pp/detail/Result.h"  // tryInvoke
 #include "open62541pp/open62541.h"
 #include "open62541pp/services/Attribute.h"  // readValue
@@ -19,7 +20,6 @@
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
 
-#include "ClientContext.h"
 #include "CustomDataTypes.h"
 #include "CustomLogger.h"
 #include "open62541_impl.h"
@@ -70,7 +70,9 @@ inline static UA_ClientConfig* getConfig(Client* client) noexcept {
 // |             | UA_SECURECHANNELSTATE_FRESH        | UA_SESSIONSTATE_CREATED            | 2158821376    |
 // clang-format on
 
-inline static void invokeStateCallback(ClientContext& context, ClientState state) noexcept {
+inline static void invokeStateCallback(
+    detail::ClientContext& context, detail::ClientState state
+) noexcept {
     const auto& callbackArray = context.stateCallbacks;
     const auto& callback = callbackArray.at(static_cast<size_t>(state));
     if (callback) {
@@ -81,7 +83,7 @@ inline static void invokeStateCallback(ClientContext& context, ClientState state
 #if UAPP_OPEN62541_VER_LE(1, 0)
 // state callback for v1.0
 static void stateCallback(UA_Client* client, UA_ClientState clientState) noexcept {
-    auto& context = getContext(client);
+    auto& context = detail::getContext(client);
     if (clientState != context.lastClientState) {
         switch (clientState) {
         case UA_CLIENTSTATE_DISCONNECTED:
@@ -110,15 +112,15 @@ static void stateCallback(
     UA_SessionState sessionState,
     [[maybe_unused]] UA_StatusCode connectStatus
 ) noexcept {
-    auto& context = getContext(client);
+    auto& context = detail::getContext(client);
     // handle session state first, mainly to handle SessionClosed before Disconnected
     if (sessionState != context.lastSessionState) {
         switch (sessionState) {
         case UA_SESSIONSTATE_ACTIVATED:
-            invokeStateCallback(context, ClientState::SessionActivated);
+            invokeStateCallback(context, detail::ClientState::SessionActivated);
             break;
         case UA_SESSIONSTATE_CLOSED:
-            invokeStateCallback(context, ClientState::SessionClosed);
+            invokeStateCallback(context, detail::ClientState::SessionClosed);
             break;
         default:
             break;
@@ -127,10 +129,10 @@ static void stateCallback(
     if (channelState != context.lastChannelState) {
         switch (channelState) {
         case UA_SECURECHANNELSTATE_OPEN:
-            invokeStateCallback(context, ClientState::Connected);
+            invokeStateCallback(context, detail::ClientState::Connected);
             break;
         case UA_SECURECHANNELSTATE_CLOSED:
-            invokeStateCallback(context, ClientState::Disconnected);
+            invokeStateCallback(context, detail::ClientState::Disconnected);
             break;
         default:
             break;
@@ -203,7 +205,7 @@ public:
         return client_;
     }
 
-    ClientContext& getContext() noexcept {
+    detail::ClientContext& getContext() noexcept {
         return context_;
     }
 
@@ -217,7 +219,7 @@ public:
 
 private:
     UA_Client* client_;
-    ClientContext context_;
+    detail::ClientContext context_;
     CustomDataTypes customDataTypes_;
     CustomLogger logger_;
     std::atomic<bool> running_{false};
@@ -325,24 +327,26 @@ void Client::setCustomDataTypes(std::vector<DataType> dataTypes) {
     connection_->getCustomDataTypes().setCustomDataTypes(std::move(dataTypes));
 }
 
-static void setStateCallback(ClientContext& context, ClientState state, StateCallback&& callback) {
+static void setStateCallback(
+    detail::ClientContext& context, detail::ClientState state, StateCallback&& callback
+) {
     context.stateCallbacks.at(static_cast<size_t>(state)) = std::move(callback);
 }
 
 void Client::onConnected(StateCallback callback) {
-    setStateCallback(getContext(), ClientState::Connected, std::move(callback));
+    setStateCallback(getContext(), detail::ClientState::Connected, std::move(callback));
 }
 
 void Client::onDisconnected(StateCallback callback) {
-    setStateCallback(getContext(), ClientState::Disconnected, std::move(callback));
+    setStateCallback(getContext(), detail::ClientState::Disconnected, std::move(callback));
 }
 
 void Client::onSessionActivated(StateCallback callback) {
-    setStateCallback(getContext(), ClientState::SessionActivated, std::move(callback));
+    setStateCallback(getContext(), detail::ClientState::SessionActivated, std::move(callback));
 }
 
 void Client::onSessionClosed(StateCallback callback) {
-    setStateCallback(getContext(), ClientState::SessionClosed, std::move(callback));
+    setStateCallback(getContext(), detail::ClientState::SessionClosed, std::move(callback));
 }
 
 void Client::connect(std::string_view endpointUrl) {
@@ -450,7 +454,7 @@ const UA_Client* Client::handle() const noexcept {
     return connection_->handle();
 }
 
-ClientContext& Client::getContext() noexcept {
+detail::ClientContext& Client::getContext() noexcept {
     return connection_->getContext();
 }
 

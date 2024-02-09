@@ -10,7 +10,7 @@
 #include "open62541pp/services/detail/MonitoredItemContext.h"
 #include "open62541pp/types/NodeId.h"
 
-namespace opcua {
+namespace opcua::detail {
 
 /**
  * Internal storage for Server class.
@@ -39,4 +39,4 @@ public:
     detail::ExceptionCatcher exceptionCatcher;
 };
 
-}  // namespace opcua
+}  // namespace opcua::detail
