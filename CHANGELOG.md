@@ -23,9 +23,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Bitmask<T>` type to allow both enum classes and native enums/ints to define bitmasks (#163)
 - Propagate callback exceptions to event loop run method (#179)
 - Policy template parameter for `Variant` factory functions `Variant::fromScalar`, `Variant::fromArray` (#174)
-  - `VariantPolicy::Copy`: Store copy of scalar/array inside the variant
+  - `VariantPolicy::Copy`: Store copy of scalar/array inside the variant (**default**)
   - `VariantPolicy::Reference`: Store reference to scalar/array inside the variant
-  - `VariantPolicy::ReferenceIfPossible`: Favor referencing but fall back to copying if necessary (**default**)
+  - `VariantPolicy::ReferenceIfPossible`: Favor referencing but fall back to copying if necessary
 
 ### Changed
 
@@ -58,7 +58,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `setLogger` memory leak (#127)
 - `DataTypeBuilder::createEnum` (#143)
 - Underlying data type of enums (#152)
-- - Add missing `noexcept` specifiers (#160)
+- Add missing `noexcept` specifiers (#160)
 - Internal deletion of native arrays (#181)
 
 ## [0.11.0] - 2023-11-01
