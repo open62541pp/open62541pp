@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.12.0] - 2024-02-10
+
 ### Added
 
 - Raw `NodeManagement` functions in `opcua::services` (#121, #124)
@@ -448,7 +450,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial public release
 
-[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.11.0...HEAD
+[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.12.0...HEAD
+[0.12.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.12.0
 [0.11.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.11.0
 [0.10.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.10.0
 [0.9.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.9.0
