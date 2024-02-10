@@ -1,8 +1,5 @@
 #include <chrono>
-#include <exception>
-#include <functional>  // invoke
 #include <thread>
-#include <utility>  // pair
 #include <variant>
 #include <vector>
 
@@ -20,19 +17,6 @@
 
 using namespace opcua;
 using namespace std::literals::chrono_literals;
-
-template <typename F>
-constexpr auto syncWrapper(Client& client, F&& asyncClientFunction) {
-    return [&](auto&&... args) {
-        auto future = std::invoke(
-            std::forward<F>(asyncClientFunction),
-            std::forward<decltype(args)>(args)...,
-            UseFutureToken{}
-        );
-        client.runIterate();
-        return future.get();
-    };
-};
 
 TEST_CASE_TEMPLATE("NodeManagement service set", ServerOrClient, Server, Client) {
     ServerClientSetup setup;
