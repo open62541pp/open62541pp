@@ -32,7 +32,7 @@ uint32_t createSubscription(
     request.priority = parameters.priority;
 
     auto context = std::make_unique<detail::SubscriptionContext>();
-    context->catcher = &opcua::detail::getExceptionCatcher(client);
+    context->catcher = &opcua::detail::getContext(client).exceptionCatcher;
     context->deleteCallback = std::move(deleteCallback);
 
     using Response =
@@ -52,7 +52,7 @@ uint32_t createSubscription(
     parameters.maxKeepAliveCount = response->revisedMaxKeepAliveCount;
 
     const auto subscriptionId = response->subscriptionId;
-    client.getContext().subscriptions.insert(subscriptionId, std::move(context));
+    opcua::detail::getContext(client).subscriptions.insert(subscriptionId, std::move(context));
     return subscriptionId;
 }
 

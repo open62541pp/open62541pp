@@ -75,7 +75,7 @@ public:
             runStartup();
         }
         auto interval = UA_Server_run_iterate(handle(), false /* don't wait */);
-        detail::getExceptionCatcher(getContext()).rethrow();
+        context_.exceptionCatcher.rethrow();
         return interval;
     }
 
@@ -89,7 +89,7 @@ public:
             while (running_) {
                 // https://github.com/open62541/open62541/blob/master/examples/server_mainloop.c
                 UA_Server_run_iterate(handle(), true /* wait for messages in the networklayer */);
-                detail::getExceptionCatcher(getContext()).rethrow();
+                context_.exceptionCatcher.rethrow();
             }
         } catch (...) {
             running_ = false;
@@ -299,7 +299,7 @@ static void valueCallbackOnWrite(
 }
 
 void Server::setVariableNodeValueCallback(const NodeId& id, ValueCallback callback) {
-    auto* nodeContext = getContext().nodeContexts[id];
+    auto* nodeContext = detail::getContext(*this).nodeContexts[id];
     nodeContext->valueCallback = std::move(callback);
     throwIfBad(UA_Server_setNodeContext(handle(), id, nodeContext));
 
@@ -353,7 +353,7 @@ static UA_StatusCode valueSourceWrite(
 }
 
 void Server::setVariableNodeValueBackend(const NodeId& id, ValueBackendDataSource backend) {
-    auto* nodeContext = getContext().nodeContexts[id];
+    auto* nodeContext = detail::getContext(*this).nodeContexts[id];
     nodeContext->dataSource = std::move(backend);
     throwIfBad(UA_Server_setNodeContext(handle(), id, nodeContext));
 
@@ -419,10 +419,6 @@ const UA_Server* Server::handle() const noexcept {
     return connection_->handle();
 }
 
-detail::ServerContext& Server::getContext() noexcept {
-    return connection_->getContext();
-}
-
 /* ---------------------------------------------------------------------------------------------- */
 
 bool operator==(const Server& lhs, const Server& rhs) noexcept {
@@ -432,5 +428,15 @@ bool operator==(const Server& lhs, const Server& rhs) noexcept {
 bool operator!=(const Server& lhs, const Server& rhs) noexcept {
     return !(lhs == rhs);
 }
+
+/* ------------------------------------------- Context ------------------------------------------ */
+
+namespace detail {
+
+ServerContext& getContext(Server& server) noexcept {
+    return server.connection_->getContext();
+}
+
+}  // namespace detail
 
 }  // namespace opcua

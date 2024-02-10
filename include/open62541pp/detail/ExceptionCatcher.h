@@ -16,13 +16,6 @@ class ServerContext;
 
 namespace opcua::detail {
 
-class ExceptionCatcher;
-
-ExceptionCatcher& getExceptionCatcher(detail::ClientContext& context) noexcept;
-ExceptionCatcher& getExceptionCatcher(Client& client) noexcept;
-ExceptionCatcher& getExceptionCatcher(detail::ServerContext& context) noexcept;
-ExceptionCatcher& getExceptionCatcher(Server& server) noexcept;
-
 /**
  * Catch & store exceptions from user-defined callbacks in an exception-unaware context (open62541).
  * The stored exception can be rethrown in a different context.

@@ -51,9 +51,8 @@ template <typename T>
 inline static auto& getMonitoredItemContext(
     T& connection, uint32_t subscriptionId, uint32_t monitoredItemId
 ) {
-    const auto* context = connection.getContext().monitoredItems.find(
-        {subscriptionId, monitoredItemId}
-    );
+    const auto* context =
+        detail::getContext(connection).monitoredItems.find({subscriptionId, monitoredItemId});
     if (context == nullptr) {
         throw BadStatus(UA_STATUSCODE_BADMONITOREDITEMIDINVALID);
     }

@@ -25,12 +25,14 @@ class DataType;
 class Event;
 template <typename ServerOrClient>
 class Node;
+class Server;
 class Session;
 struct ValueBackendDataSource;
 struct ValueCallback;
 
 namespace detail {
 class ServerContext;
+ServerContext& getContext(Server& server) noexcept;
 }  // namespace detail
 
 /**
@@ -148,11 +150,9 @@ public:
     UA_Server* handle() noexcept;
     const UA_Server* handle() const noexcept;
 
-    /// Get client context (for internal use only).
-    /// @private
-    detail::ServerContext& getContext() noexcept;
-
 private:
+    friend detail::ServerContext& detail::getContext(Server& server) noexcept;
+
     class Connection;
     std::shared_ptr<Connection> connection_;
 };

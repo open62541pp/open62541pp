@@ -76,7 +76,7 @@ inline static void invokeStateCallback(
     const auto& callbackArray = context.stateCallbacks;
     const auto& callback = callbackArray.at(static_cast<size_t>(state));
     if (callback) {
-        detail::getExceptionCatcher(context).invoke(callback);
+        context.exceptionCatcher.invoke(callback);
     }
 }
 
@@ -174,7 +174,7 @@ public:
     void runIterate(uint16_t timeoutMilliseconds) {
         const auto status = UA_Client_run_iterate(handle(), timeoutMilliseconds);
         throwIfBad(status);
-        detail::getExceptionCatcher(getContext()).rethrow();
+        context_.exceptionCatcher.rethrow();
     }
 
     void run() {
@@ -185,7 +185,7 @@ public:
         try {
             while (running_) {
                 runIterate(1000);
-                detail::getExceptionCatcher(getContext()).rethrow();
+                context_.exceptionCatcher.rethrow();
             }
         } catch (...) {
             running_ = false;
@@ -327,26 +327,24 @@ void Client::setCustomDataTypes(std::vector<DataType> dataTypes) {
     connection_->getCustomDataTypes().setCustomDataTypes(std::move(dataTypes));
 }
 
-static void setStateCallback(
-    detail::ClientContext& context, detail::ClientState state, StateCallback&& callback
-) {
-    context.stateCallbacks.at(static_cast<size_t>(state)) = std::move(callback);
+static void setStateCallback(Client& client, detail::ClientState state, StateCallback&& callback) {
+    detail::getContext(client).stateCallbacks.at(static_cast<size_t>(state)) = std::move(callback);
 }
 
 void Client::onConnected(StateCallback callback) {
-    setStateCallback(getContext(), detail::ClientState::Connected, std::move(callback));
+    setStateCallback(*this, detail::ClientState::Connected, std::move(callback));
 }
 
 void Client::onDisconnected(StateCallback callback) {
-    setStateCallback(getContext(), detail::ClientState::Disconnected, std::move(callback));
+    setStateCallback(*this, detail::ClientState::Disconnected, std::move(callback));
 }
 
 void Client::onSessionActivated(StateCallback callback) {
-    setStateCallback(getContext(), detail::ClientState::SessionActivated, std::move(callback));
+    setStateCallback(*this, detail::ClientState::SessionActivated, std::move(callback));
 }
 
 void Client::onSessionClosed(StateCallback callback) {
-    setStateCallback(getContext(), detail::ClientState::SessionClosed, std::move(callback));
+    setStateCallback(*this, detail::ClientState::SessionClosed, std::move(callback));
 }
 
 void Client::connect(std::string_view endpointUrl) {
@@ -397,7 +395,7 @@ Subscription<Client> Client::createSubscription(SubscriptionParameters& paramete
 }
 
 std::vector<Subscription<Client>> Client::getSubscriptions() {
-    auto& subscriptions = getContext().subscriptions;
+    auto& subscriptions = detail::getContext(*this).subscriptions;
     subscriptions.eraseStale();
     auto lock = subscriptions.acquireLock();
     const auto& map = subscriptions.underlying();
@@ -454,10 +452,6 @@ const UA_Client* Client::handle() const noexcept {
     return connection_->handle();
 }
 
-detail::ClientContext& Client::getContext() noexcept {
-    return connection_->getContext();
-}
-
 /* ---------------------------------------------------------------------------------------------- */
 
 bool operator==(const Client& lhs, const Client& rhs) noexcept {
@@ -467,5 +461,15 @@ bool operator==(const Client& lhs, const Client& rhs) noexcept {
 bool operator!=(const Client& lhs, const Client& rhs) noexcept {
     return !(lhs == rhs);
 }
+
+/* ------------------------------------------- Context ------------------------------------------ */
+
+namespace detail {
+
+ClientContext& getContext(Client& client) noexcept {
+    return client.connection_->getContext();
+}
+
+}  // namespace detail
 
 }  // namespace opcua

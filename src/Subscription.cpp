@@ -43,7 +43,7 @@ MonitoredItem<T> Subscription<T>::subscribeDataChange(
 
 template <typename T>
 std::vector<MonitoredItem<T>> Subscription<T>::getMonitoredItems() {
-    auto& monitoredItems = connection_.getContext().monitoredItems;
+    auto& monitoredItems = opcua::detail::getContext(connection_).monitoredItems;
     monitoredItems.eraseStale();
     auto lock = monitoredItems.acquireLock();
     const auto& map = monitoredItems.underlying();
@@ -88,7 +88,7 @@ MonitoredItem<Server> Subscription<Server>::subscribeDataChange(
             // -> wait until inserted in map
             static std::atomic<bool> initialized = false;
             if (!initialized) {
-                if (!connection_.getContext().monitoredItems.contains({subId, monId})) {
+                if (!detail::getContext(connection_).monitoredItems.contains({subId, monId})) {
                     return;  // not initialized yet, skip
                 }
                 initialized = true;

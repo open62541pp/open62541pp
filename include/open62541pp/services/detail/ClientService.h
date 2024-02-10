@@ -10,6 +10,7 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/TypeRegistry.h"
 #include "open62541pp/async.h"
+#include "open62541pp/detail/ClientContext.h"
 #include "open62541pp/detail/ExceptionCatcher.h"
 #include "open62541pp/detail/Result.h"
 #include "open62541pp/detail/ScopeExit.h"
@@ -93,7 +94,7 @@ struct AsyncServiceAdapter {
             [&](auto&& completionHandler, auto&& transform) {
                 // NOLINTNEXTLINE, false positive?
                 auto callbackAndContext = createCallbackAndContext(
-                    opcua::detail::getExceptionCatcher(client),
+                    opcua::detail::getContext(client).exceptionCatcher,
                     std::forward<decltype(transform)>(transform),
                     std::forward<decltype(completionHandler)>(completionHandler)
                 );

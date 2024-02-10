@@ -55,7 +55,7 @@ uint32_t createMonitoredItemDataChange(
     copyMonitoringParametersToNative(parameters, request.requestedParameters);
 
     auto context = std::make_unique<detail::MonitoredItemContext>();
-    context->catcher = &opcua::detail::getExceptionCatcher(client);
+    context->catcher = &opcua::detail::getContext(client).exceptionCatcher;
     context->itemToMonitor = itemToMonitor;
     context->dataChangeCallback = std::move(dataChangeCallback);
     context->deleteCallback = std::move(deleteCallback);
@@ -74,7 +74,7 @@ uint32_t createMonitoredItemDataChange(
     reviseMonitoringParameters(parameters, result);
 
     const auto monitoredItemId = result->monitoredItemId;
-    client.getContext().monitoredItems.insert(
+    opcua::detail::getContext(client).monitoredItems.insert(
         {subscriptionId, monitoredItemId}, std::move(context)
     );
     return monitoredItemId;
@@ -93,7 +93,7 @@ uint32_t createMonitoredItemDataChange(
     copyMonitoringParametersToNative(parameters, request.requestedParameters);
 
     auto context = std::make_unique<detail::MonitoredItemContext>();
-    context->catcher = &opcua::detail::getExceptionCatcher(server);
+    context->catcher = &opcua::detail::getContext(server).exceptionCatcher;
     context->itemToMonitor = itemToMonitor;
     context->dataChangeCallback = std::move(dataChangeCallback);
 
@@ -109,7 +109,9 @@ uint32_t createMonitoredItemDataChange(
     reviseMonitoringParameters(parameters, result);
 
     const auto monitoredItemId = result->monitoredItemId;
-    server.getContext().monitoredItems.insert({0U, monitoredItemId}, std::move(context));
+    opcua::detail::getContext(server).monitoredItems.insert(
+        {0U, monitoredItemId}, std::move(context)
+    );
     return monitoredItemId;
 }
 
@@ -128,7 +130,7 @@ uint32_t createMonitoredItemEvent(
     copyMonitoringParametersToNative(parameters, request.requestedParameters);
 
     auto context = std::make_unique<detail::MonitoredItemContext>();
-    context->catcher = &opcua::detail::getExceptionCatcher(client);
+    context->catcher = &opcua::detail::getContext(client).exceptionCatcher;
     context->itemToMonitor = itemToMonitor;
     context->eventCallback = std::move(eventCallback);
     context->deleteCallback = std::move(deleteCallback);
@@ -147,7 +149,7 @@ uint32_t createMonitoredItemEvent(
     reviseMonitoringParameters(parameters, result);
 
     const auto monitoredItemId = result->monitoredItemId;
-    client.getContext().monitoredItems.insert(
+    opcua::detail::getContext(client).monitoredItems.insert(
         {subscriptionId, monitoredItemId}, std::move(context)
     );
     return monitoredItemId;
@@ -231,7 +233,7 @@ void deleteMonitoredItem(Client& client, uint32_t subscriptionId, uint32_t monit
 void deleteMonitoredItem(Server& server, uint32_t monitoredItemId) {
     const auto status = UA_Server_deleteMonitoredItem(server.handle(), monitoredItemId);
     throwIfBad(status);
-    server.getContext().monitoredItems.erase({0U, monitoredItemId});
+    opcua::detail::getContext(server).monitoredItems.erase({0U, monitoredItemId});
 }
 
 }  // namespace opcua::services
