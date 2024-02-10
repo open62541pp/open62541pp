@@ -13,7 +13,6 @@
 #include "open62541pp/Node.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/ClientContext.h"
-#include "open62541pp/detail/Result.h"  // tryInvoke
 #include "open62541pp/open62541.h"
 #include "open62541pp/services/Attribute.h"  // readValue
 #include "open62541pp/services/Subscription.h"
@@ -22,7 +21,6 @@
 
 #include "CustomDataTypes.h"
 #include "CustomLogger.h"
-#include "open62541_impl.h"
 
 namespace opcua {
 
@@ -73,8 +71,7 @@ inline static UA_ClientConfig* getConfig(Client* client) noexcept {
 inline static void invokeStateCallback(
     detail::ClientContext& context, detail::ClientState state
 ) noexcept {
-    const auto& callbackArray = context.stateCallbacks;
-    const auto& callback = callbackArray.at(static_cast<size_t>(state));
+    const auto& callback = context.stateCallbacks.at(static_cast<size_t>(state));
     if (callback) {
         context.exceptionCatcher.invoke(callback);
     }

@@ -47,7 +47,7 @@ public:
     }
 
     // template <typename OnException, typename Callback, typename... Args>
-    // auto invoke(OnException&& onException, Callback&& callback, Args&&... args) {
+    // auto invokeOr(OnException&& onException, Callback&& callback, Args&&... args) {
     //     static_assert(std::is_same_v<
     //                   std::invoke_result_t<OnException, std::exception_ptr>,
     //                   std::invoke_result_t<Callback, Args&&...>>);
@@ -65,18 +65,6 @@ public:
             this->invoke(std::move(cb), std::forward<decltype(args)>(args)...);
         };
     }
-
-    // template <typename OnException, typename Callback>
-    // auto wrapCallback(OnException&& onException, Callback&& callback) {
-    //     return [this,
-    //             onException_ = std::forward<OnException>(onException),
-    //             callback_ = std::forward<Callback>(callback)](auto&&... args) {
-    //         return this->invoke(
-    //             std::move(onException_), std::move(callback_),
-    //             std::forward<decltype(args)>(args)...
-    //         );
-    //     };
-    // }
 
 private:
     std::exception_ptr exception_;

@@ -101,11 +101,11 @@ static UA_StatusCode methodCallback(
     const auto* nodeContext = static_cast<opcua::detail::NodeContext*>(methodContext);
     const auto& callback = nodeContext->methodCallback;
     if (callback) {
-        return opcua::detail::tryInvokeGetStatus([&] {
-            callback(
-                {asWrapper<Variant>(input), inputSize}, {asWrapper<Variant>(output), outputSize}
-            );
-        });
+        return opcua::detail::tryInvokeGetStatus(
+            callback,
+            Span<const Variant>{asWrapper<Variant>(input), inputSize},
+            Span<Variant>{asWrapper<Variant>(output), outputSize}
+        );
     }
     return UA_STATUSCODE_BADINTERNALERROR;
 }
