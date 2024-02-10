@@ -9,8 +9,10 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/ClientContext.h"
-#include "open62541pp/detail/Result.h"  // tryInvoke
 #include "open62541pp/open62541.h"
+#include "open62541pp/services/detail/ClientService.h"
+#include "open62541pp/services/detail/RequestHandling.h"
+#include "open62541pp/services/detail/ResponseHandling.h"
 #include "open62541pp/services/detail/SubscriptionContext.h"
 
 #include "../open62541_impl.h"
@@ -23,14 +25,6 @@ uint32_t createSubscription(
     bool publishingEnabled,
     DeleteSubscriptionCallback deleteCallback
 ) {
-    UA_CreateSubscriptionRequest request{};
-    request.requestedPublishingInterval = parameters.publishingInterval;
-    request.requestedLifetimeCount = parameters.lifetimeCount;
-    request.requestedMaxKeepAliveCount = parameters.maxKeepAliveCount;
-    request.maxNotificationsPerPublish = parameters.maxNotificationsPerPublish;
-    request.publishingEnabled = publishingEnabled;
-    request.priority = parameters.priority;
-
     auto context = std::make_unique<detail::SubscriptionContext>();
     context->catcher = &opcua::detail::getContext(client).exceptionCatcher;
     context->deleteCallback = std::move(deleteCallback);
@@ -39,17 +33,13 @@ uint32_t createSubscription(
         TypeWrapper<UA_CreateSubscriptionResponse, UA_TYPES_CREATESUBSCRIPTIONRESPONSE>;
     const Response response = UA_Client_Subscriptions_create(
         client.handle(),
-        request,
+        detail::createCreateSubscriptionRequest(parameters, publishingEnabled),
         context.get(),
         nullptr,  // statusChangeCallback
         context->deleteCallbackNative
     );
     throwIfBad(response->responseHeader.serviceResult);
-
-    // update revised parameters
-    parameters.publishingInterval = response->revisedPublishingInterval;
-    parameters.lifetimeCount = response->revisedLifetimeCount;
-    parameters.maxKeepAliveCount = response->revisedMaxKeepAliveCount;
+    detail::reviseSubscriptionParameters(parameters, asNative(response));
 
     const auto subscriptionId = response->subscriptionId;
     opcua::detail::getContext(client).subscriptions.insert(subscriptionId, std::move(context));
@@ -59,39 +49,24 @@ uint32_t createSubscription(
 void modifySubscription(
     Client& client, uint32_t subscriptionId, SubscriptionParameters& parameters
 ) {
-    UA_ModifySubscriptionRequest request{};
-    request.subscriptionId = subscriptionId;
-    request.requestedPublishingInterval = parameters.publishingInterval;
-    request.requestedLifetimeCount = parameters.lifetimeCount;
-    request.requestedMaxKeepAliveCount = parameters.maxKeepAliveCount;
-    request.maxNotificationsPerPublish = parameters.maxNotificationsPerPublish;
-    request.priority = parameters.priority;
-
     using Response =
         TypeWrapper<UA_ModifySubscriptionResponse, UA_TYPES_MODIFYSUBSCRIPTIONRESPONSE>;
-    const Response response = UA_Client_Subscriptions_modify(client.handle(), request);
+    const Response response = UA_Client_Subscriptions_modify(
+        client.handle(), detail::createModifySubscriptionRequest(subscriptionId, parameters)
+    );
     throwIfBad(response->responseHeader.serviceResult);
-
-    // update revised parameters
-    parameters.publishingInterval = response->revisedPublishingInterval;
-    parameters.lifetimeCount = response->revisedLifetimeCount;
-    parameters.maxKeepAliveCount = response->revisedMaxKeepAliveCount;
+    detail::reviseSubscriptionParameters(parameters, asNative(response));
 }
 
 void setPublishingMode(Client& client, uint32_t subscriptionId, bool publishing) {
-    UA_SetPublishingModeRequest request{};
-    request.publishingEnabled = publishing;
-    request.subscriptionIdsSize = 1;
-    request.subscriptionIds = &subscriptionId;
-
-    using Response = TypeWrapper<UA_SetPublishingModeResponse, UA_TYPES_SETPUBLISHINGMODERESPONSE>;
-    const Response response = UA_Client_Subscriptions_setPublishingMode(client.handle(), request);
-    throwIfBad(response->responseHeader.serviceResult);
-
-    if (response->resultsSize != 1) {
-        throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
-    }
-    throwIfBad(*response->results);
+    detail::sendRequest<UA_SetPublishingModeRequest, UA_SetPublishingModeResponse>(
+        client,
+        detail::createSetPublishingModeRequest({&subscriptionId, 1}, publishing),
+        [](UA_SetPublishingModeResponse& response) {
+            throwIfBad(detail::getSingleResult(response));
+        },
+        detail::SyncOperation{}
+    );
 }
 
 void deleteSubscription(Client& client, uint32_t subscriptionId) {

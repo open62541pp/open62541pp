@@ -92,4 +92,13 @@ inline std::vector<Variant> getOutputArguments(UA_CallMethodResult& result) {
     };
 }
 
+template <typename Response, typename SubscriptionParameters>
+inline void reviseSubscriptionParameters(
+    SubscriptionParameters& parameters, const Response& response
+) {
+    parameters.publishingInterval = response.revisedPublishingInterval;
+    parameters.lifetimeCount = response.revisedLifetimeCount;
+    parameters.maxKeepAliveCount = response.revisedMaxKeepAliveCount;
+}
+
 }  // namespace opcua::services::detail

@@ -64,7 +64,6 @@ using DeleteSubscriptionCallback = std::function<void(uint32_t subId)>;
 /**
  * Create a subscription.
  * @copydetails SubscriptionParameters
- *
  * @param client Instance of type Client
  * @param parameters Subscription parameters, may be revised by server
  * @param publishingEnabled Enable/disable publishing of the subscription
@@ -89,7 +88,6 @@ using DeleteSubscriptionCallback = std::function<void(uint32_t subId)>;
 /**
  * Modify a subscription.
  * @copydetails SubscriptionParameters
- *
  * @param client Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @param parameters Subscription parameters, may be revised by server
@@ -126,7 +124,6 @@ void setPublishingMode(Client& client, uint32_t subscriptionId, bool publishing)
 
 /**
  * Delete a subscription.
- *
  * @param client Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  */

@@ -139,4 +139,44 @@ inline BrowsePath createBrowsePath(const NodeId& origin, Span<const QualifiedNam
     return {origin, RelativePath(relativePathElements)};
 }
 
+// avoid include of services/Subscription.h for definition of SubscriptionParameters
+
+template <typename SubscriptionParameters>
+inline UA_CreateSubscriptionRequest createCreateSubscriptionRequest(
+    const SubscriptionParameters& parameters, bool publishingEnabled
+) {
+    UA_CreateSubscriptionRequest request{};
+    request.requestedPublishingInterval = parameters.publishingInterval;
+    request.requestedLifetimeCount = parameters.lifetimeCount;
+    request.requestedMaxKeepAliveCount = parameters.maxKeepAliveCount;
+    request.maxNotificationsPerPublish = parameters.maxNotificationsPerPublish;
+    request.publishingEnabled = publishingEnabled;
+    request.priority = parameters.priority;
+    return request;
+}
+
+template <typename SubscriptionParameters>
+inline UA_ModifySubscriptionRequest createModifySubscriptionRequest(
+    uint32_t subscriptionId, const SubscriptionParameters& parameters
+) {
+    UA_ModifySubscriptionRequest request{};
+    request.subscriptionId = subscriptionId;
+    request.requestedPublishingInterval = parameters.publishingInterval;
+    request.requestedLifetimeCount = parameters.lifetimeCount;
+    request.requestedMaxKeepAliveCount = parameters.maxKeepAliveCount;
+    request.maxNotificationsPerPublish = parameters.maxNotificationsPerPublish;
+    request.priority = parameters.priority;
+    return request;
+}
+
+inline UA_SetPublishingModeRequest createSetPublishingModeRequest(
+    Span<const uint32_t> subscriptionIds, bool publishing
+) {
+    UA_SetPublishingModeRequest request{};
+    request.publishingEnabled = publishing;
+    request.subscriptionIdsSize = subscriptionIds.size();
+    request.subscriptionIds = const_cast<uint32_t*>(subscriptionIds.data());  // NOLINT
+    return request;
+}
+
 }  // namespace opcua::services::detail
