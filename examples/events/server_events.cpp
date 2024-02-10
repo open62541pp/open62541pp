@@ -3,6 +3,9 @@
 int main() {
     opcua::Server server;
 
+    // Objects node can be used to subscribe to events.
+    server.getObjectsNode().writeEventNotifier(opcua::EventNotifier::SubscribeToEvents);
+
     // Add a method to generate and trigger events.
     opcua::Event event(server);
     server.getObjectsNode().addMethod(
