@@ -92,13 +92,21 @@ inline std::vector<Variant> getOutputArguments(UA_CallMethodResult& result) {
     };
 }
 
-template <typename Response, typename SubscriptionParameters>
+template <typename SubscriptionParameters, typename Response>
 inline void reviseSubscriptionParameters(
     SubscriptionParameters& parameters, const Response& response
 ) {
     parameters.publishingInterval = response.revisedPublishingInterval;
     parameters.lifetimeCount = response.revisedLifetimeCount;
     parameters.maxKeepAliveCount = response.revisedMaxKeepAliveCount;
+}
+
+template <typename MonitoringParameters, typename Result>
+inline void reviseMonitoringParameters(MonitoringParameters& parameters, const Result& result) {
+    // result type may be UA_MonitoredItemCreateResult or UA_MonitoredItemModifyResult
+    parameters.samplingInterval = result.revisedSamplingInterval;
+    parameters.queueSize = result.revisedQueueSize;
+    parameters.filter = asWrapper<ExtensionObject>(result.filterResult);
 }
 
 }  // namespace opcua::services::detail

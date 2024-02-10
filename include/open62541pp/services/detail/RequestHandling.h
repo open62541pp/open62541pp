@@ -179,4 +179,76 @@ inline UA_SetPublishingModeRequest createSetPublishingModeRequest(
     return request;
 }
 
+template <typename MonitoringParameters>
+inline void copyMonitoringParametersToNative(
+    const MonitoringParameters& parameters, UA_MonitoringParameters& native
+) {
+    native.samplingInterval = parameters.samplingInterval;
+    native.filter = parameters.filter;
+    native.queueSize = parameters.queueSize;
+    native.discardOldest = parameters.discardOldest;
+}
+
+template <typename MonitoringParameters>
+inline UA_MonitoredItemCreateRequest createMonitoredItemCreateRequest(
+    const ReadValueId& itemToMonitor,
+    MonitoringMode monitoringMode,
+    MonitoringParameters& parameters
+) {
+    UA_MonitoredItemCreateRequest request{};
+    request.itemToMonitor = itemToMonitor;
+    request.monitoringMode = static_cast<UA_MonitoringMode>(monitoringMode);
+    copyMonitoringParametersToNative(parameters, request.requestedParameters);
+    return request;
+}
+
+template <typename MonitoringParameters>
+inline UA_MonitoredItemModifyRequest createMonitoredItemModifyRequest(
+    uint32_t monitoredItemId, MonitoringParameters& parameters
+) {
+    UA_MonitoredItemModifyRequest item{};
+    item.monitoredItemId = monitoredItemId;
+    copyMonitoringParametersToNative(parameters, item.requestedParameters);
+    return item;
+}
+
+template <typename MonitoringParameters>
+inline UA_ModifyMonitoredItemsRequest createModifyMonitoredItemsRequest(
+    uint32_t subscriptionId, MonitoringParameters& parameters, UA_MonitoredItemModifyRequest& item
+) {
+    UA_ModifyMonitoredItemsRequest request{};
+    request.subscriptionId = subscriptionId;
+    request.timestampsToReturn = static_cast<UA_TimestampsToReturn>(parameters.timestamps);
+    request.itemsToModifySize = 1;
+    request.itemsToModify = &item;
+    return request;
+}
+
+inline UA_SetMonitoringModeRequest createSetMonitoringModeRequest(
+    uint32_t subscriptionId, Span<const uint32_t> monitoredItemIds, MonitoringMode monitoringMode
+) {
+    UA_SetMonitoringModeRequest request{};
+    request.subscriptionId = subscriptionId;
+    request.monitoringMode = static_cast<UA_MonitoringMode>(monitoringMode);
+    request.monitoredItemIdsSize = monitoredItemIds.size();
+    request.monitoredItemIds = const_cast<uint32_t*>(monitoredItemIds.data());  // NOLINT
+    return request;
+}
+
+inline UA_SetTriggeringRequest createSetTriggeringRequest(
+    uint32_t subscriptionId,
+    uint32_t triggeringItemId,
+    Span<const uint32_t> linksToAdd,
+    Span<const uint32_t> linksToRemove
+) {
+    UA_SetTriggeringRequest request{};
+    request.subscriptionId = subscriptionId;
+    request.triggeringItemId = triggeringItemId;
+    request.linksToAddSize = linksToAdd.size();
+    request.linksToAdd = const_cast<uint32_t*>(linksToAdd.data());  // NOLINT
+    request.linksToRemoveSize = linksToRemove.size();
+    request.linksToRemove = const_cast<uint32_t*>(linksToRemove.data());  // NOLINT
+    return request;
+}
+
 }  // namespace opcua::services::detail
