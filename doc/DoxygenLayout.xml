@@ -16,7 +16,7 @@
 
     <tab type="usergroup" title="Reference">
       <tab type="pages" visible="yes" title="" intro=""/>
-      <tab type="modules" visible="yes" title="" intro=""/>
+      <!-- <tab type="modules" visible="yes" title="" intro=""/> -->
       <tab type="namespaces" visible="yes" title="">
         <tab type="namespacelist" visible="yes" title="" intro=""/>
         <tab type="namespacemembers" visible="yes" title="" intro=""/>
@@ -54,7 +54,7 @@
     </tab>
   </navindex>
 
-  <!-- Edit: move "detaileddescription" up -->
+  <!-- Edit: move "detaileddescription" before "memberdecl" -->
 
   <!-- Layout definition for a class page -->
   <class>
@@ -190,11 +190,11 @@
     <detaileddescription title=""/>
     <memberdecl>
       <nestedgroups visible="yes" title=""/>
-      <modules visible="yes" title=""/>
+      <!-- <modules visible="yes" title=""/> -->
       <dirs visible="yes" title=""/>
       <files visible="yes" title=""/>
       <namespaces visible="yes" title=""/>
-      <concepts visible="yes" title=""/>
+      <!-- <concepts visible="yes" title=""/> -->
       <classes visible="yes" title=""/>
       <defines title=""/>
       <typedefs title=""/>
