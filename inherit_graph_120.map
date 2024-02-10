@@ -1,0 +1,15 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,159,124,184"/>
+<area shape="rect" id="Node000001" href="$structopcua_1_1IsBitmaskEnum.html" title="Trait to define an enum (class) as a bitmask and allow bitwise operations." alt="" coords="172,5,381,31"/>
+<area shape="poly" id="edge87_Node000000_Node000001" title=" " alt="" coords="77,145,115,92,141,64,171,41,198,28,200,33,173,46,144,68,119,96,82,148"/>
+<area shape="rect" id="Node000002" href="$structopcua_1_1detail_1_1AlwaysFalse.html" title=" " alt="" coords="179,55,374,95"/>
+<area shape="poly" id="edge88_Node000000_Node000002" title=" " alt="" coords="94,149,130,126,171,105,202,93,204,98,173,110,132,131,97,153"/>
+<area shape="rect" id="Node000003" href="$structopcua_1_1detail_1_1IsContiguousContainer.html" title=" " alt="" coords="177,119,376,159"/>
+<area shape="poly" id="edge89_Node000000_Node000003" title=" " alt="" coords="137,158,177,152,178,157,138,163"/>
+<area shape="rect" id="Node000004" href="$structopcua_1_1detail_1_1IsConvertibleType.html" title=" " alt="" coords="177,183,377,223"/>
+<area shape="poly" id="edge90_Node000000_Node000004" title=" " alt="" coords="138,180,177,186,176,191,137,185"/>
+<area shape="rect" id="Node000005" href="$structopcua_1_1detail_1_1IsRegisteredType.html" title=" " alt="" coords="179,247,374,287"/>
+<area shape="poly" id="edge91_Node000000_Node000005" title=" " alt="" coords="97,189,132,212,173,233,204,245,202,250,171,238,130,216,94,194"/>
+<area shape="rect" id="Node000006" href="$structopcua_1_1detail_1_1IsSpan.html" title=" " alt="" coords="198,311,355,351"/>
+<area shape="poly" id="edge92_Node000000_Node000006" title=" " alt="" coords="82,194,120,246,145,274,173,297,199,311,197,315,171,302,141,278,115,250,78,197"/>
+</map>

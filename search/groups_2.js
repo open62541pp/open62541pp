@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['generated_20nodeids_0',['Generated NodeIds',['../group__NodeIds.html',1,'']]]
+  ['classes_20of_20ua_5f_20types_0',['Wrapper classes of UA_* types',['../group__TypeWrapper.html',1,'']]]
 ];

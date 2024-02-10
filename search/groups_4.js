@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['nodeids_0',['Generated NodeIds',['../group__NodeIds.html',1,'']]],
-  ['nodemanagement_20service_20set_1',['NodeManagement service set',['../group__NodeManagement.html',1,'']]]
+  ['method_20service_20set_0',['Method service set',['../group__Method.html',1,'']]],
+  ['monitoreditem_20service_20set_1',['MonitoredItem service set',['../group__MonitoredItem.html',1,'']]]
 ];

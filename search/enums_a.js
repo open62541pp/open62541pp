@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['performupdatetype_0',['PerformUpdateType',['../namespaceopcua.html#a961641837f978cb3912fa72aeb6ceab9',1,'opcua']]]
+  ['performupdatetype_0',['PerformUpdateType',['../group__TypeWrapper.html#ga6e530a8c63e6df75d62238b012dcc329',1,'opcua']]]
 ];

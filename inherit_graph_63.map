@@ -1,5 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,5,183,60"/>
-<area shape="rect" id="Node000001" href="$classopcua_1_1EventFilter.html" title="UA_EventFilter wrapper class." alt="" coords="231,20,369,45"/>
-<area shape="poly" id="edge35_Node000000_Node000001" title=" " alt="" coords="196,30,230,30,230,35,196,35"/>
+<area shape="rect" id="Node000000" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,5,247,60"/>
+<area shape="rect" id="Node000001" href="$classopcua_1_1DeleteNodesItem.html" title="UA_DeleteNodesItem wrapper class." alt="" coords="295,20,477,45"/>
+<area shape="poly" id="edge31_Node000000_Node000001" title=" " alt="" coords="260,30,295,30,295,35,260,35"/>
 </map>

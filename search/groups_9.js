@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['view_20service_20set_0',['View service set',['../group__View.html',1,'']]]
+  ['ua_5f_20types_0',['Wrapper classes of UA_* types',['../group__TypeWrapper.html',1,'']]]
 ];

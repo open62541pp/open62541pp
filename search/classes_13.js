@@ -280,8 +280,9 @@ var searchData=
   ['ua_5fwritevalue_277',['UA_WriteValue',['open62541/structUA__WriteValue.html',0,'']]],
   ['ua_5fx509identitytoken_278',['UA_X509IdentityToken',['open62541/structUA__X509IdentityToken.html',0,'']]],
   ['ua_5fxvtype_279',['UA_XVType',['open62541/structUA__XVType.html',0,'']]],
-  ['unqualified_280',['Unqualified',['../structopcua_1_1detail_1_1Unqualified.html',1,'opcua::detail']]],
-  ['useridentitytoken_281',['UserIdentityToken',['../classopcua_1_1UserIdentityToken.html',1,'opcua']]],
-  ['usernameidentitytoken_282',['UserNameIdentityToken',['../classopcua_1_1UserNameIdentityToken.html',1,'opcua']]],
-  ['usertokenpolicy_283',['UserTokenPolicy',['../classopcua_1_1UserTokenPolicy.html',1,'opcua']]]
+  ['unregisternodesrequest_280',['UnregisterNodesRequest',['../classopcua_1_1UnregisterNodesRequest.html',1,'opcua']]],
+  ['unregisternodesresponse_281',['UnregisterNodesResponse',['../classopcua_1_1UnregisterNodesResponse.html',1,'opcua']]],
+  ['useridentitytoken_282',['UserIdentityToken',['../classopcua_1_1UserIdentityToken.html',1,'opcua']]],
+  ['usernameidentitytoken_283',['UserNameIdentityToken',['../classopcua_1_1UserNameIdentityToken.html',1,'opcua']]],
+  ['usertokenpolicy_284',['UserTokenPolicy',['../classopcua_1_1UserTokenPolicy.html',1,'opcua']]]
 ];

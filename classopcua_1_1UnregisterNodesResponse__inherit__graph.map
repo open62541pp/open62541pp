@@ -1,0 +1,5 @@
+<map id="opcua::UnregisterNodesResponse" name="opcua::UnregisterNodesResponse">
+<area shape="rect" id="Node000001" title="UA_UnregisterNodesResponse wrapper class." alt="" coords="367,20,608,45"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,5,319,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="332,30,366,30,366,35,332,35"/>
+</map>

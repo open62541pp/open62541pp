@@ -65,6 +65,9 @@
     <loc>https://open62541pp.github.io/open62541pp/AccessControl_8h_source.html</loc>
   </url>
   <url>
+    <loc>https://open62541pp.github.io/open62541pp/Bitmask_8h_source.html</loc>
+  </url>
+  <url>
     <loc>https://open62541pp.github.io/open62541pp/Client_8h_source.html</loc>
   </url>
   <url>
@@ -81,6 +84,9 @@
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/DataTypeBuilder_8h_source.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/ExceptionCatcher_8h_source.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/helper_8h_source.html</loc>
@@ -152,7 +158,10 @@
     <loc>https://open62541pp.github.io/open62541pp/TypeConverter_8h_source.html</loc>
   </url>
   <url>
-    <loc>https://open62541pp.github.io/open62541pp/TypeConverterNative_8h_source.html</loc>
+    <loc>https://open62541pp.github.io/open62541pp/TypeRegistry_8h_source.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/TypeRegistryNative_8h_source.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/Builtin_8h_source.html</loc>
@@ -188,6 +197,9 @@
     <loc>https://open62541pp.github.io/open62541pp/AccessControl_8h.html</loc>
   </url>
   <url>
+    <loc>https://open62541pp.github.io/open62541pp/Bitmask_8h.html</loc>
+  </url>
+  <url>
     <loc>https://open62541pp.github.io/open62541pp/Client_8h.html</loc>
   </url>
   <url>
@@ -204,6 +216,9 @@
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/DataTypeBuilder_8h.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/ExceptionCatcher_8h.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/helper_8h.html</loc>
@@ -275,7 +290,10 @@
     <loc>https://open62541pp.github.io/open62541pp/TypeConverter_8h.html</loc>
   </url>
   <url>
-    <loc>https://open62541pp.github.io/open62541pp/TypeConverterNative_8h.html</loc>
+    <loc>https://open62541pp.github.io/open62541pp/TypeRegistry_8h.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/TypeRegistryNative_8h.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/Builtin_8h.html</loc>
@@ -333,6 +351,9 @@
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/group__TypeWrapper.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/group__BitmaskAbstraction.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/namespaceopcua.html</loc>
@@ -437,10 +458,28 @@
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1BadVariantAccess.html</loc>
   </url>
   <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1Bitmask.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1Bitmask-members.html</loc>
+  </url>
+  <url>
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1BrowseDescription.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1BrowseDescription-members.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1BrowseNextRequest.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1BrowseNextRequest-members.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1BrowseNextResponse.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1BrowseNextResponse-members.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1BrowsePath.html</loc>
@@ -459,6 +498,18 @@
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1BrowsePathTarget-members.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1BrowseRequest.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1BrowseRequest-members.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1BrowseResponse.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1BrowseResponse-members.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1BrowseResult.html</loc>
@@ -584,6 +635,12 @@
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1EndpointDescription-members.html</loc>
   </url>
   <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1EnumValueType.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1EnumValueType-members.html</loc>
+  </url>
+  <url>
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1Event.html</loc>
   </url>
   <url>
@@ -612,6 +669,30 @@
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1Guid-members.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1IsBitmaskEnum.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1IsBitmaskEnum-members.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1IsBitmaskEnum_3_01AccessLevel_01_4.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1IsBitmaskEnum_3_01BrowseResultMask_01_4.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1IsBitmaskEnum_3_01EventNotifier_01_4.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1IsBitmaskEnum_3_01NodeAttributesMask_01_4.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1IsBitmaskEnum_3_01NodeClass_01_4.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1IsBitmaskEnum_3_01WriteMask_01_4.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1IssuedIdentityToken.html</loc>
@@ -722,6 +803,18 @@
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1ReferenceTypeAttributes-members.html</loc>
   </url>
   <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1RegisterNodesRequest.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1RegisterNodesRequest-members.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1RegisterNodesResponse.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1RegisterNodesResponse-members.html</loc>
+  </url>
+  <url>
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1RelativePath.html</loc>
   </url>
   <url>
@@ -788,10 +881,19 @@
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1Subscription-members.html</loc>
   </url>
   <url>
-    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1TypeConverter.html</loc>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1TranslateBrowsePathsToNodeIdsRequest.html</loc>
   </url>
   <url>
-    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1TypeConverter-members.html</loc>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1TranslateBrowsePathsToNodeIdsRequest-members.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1TranslateBrowsePathsToNodeIdsResponse.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1TranslateBrowsePathsToNodeIdsResponse-members.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1TypeConverter.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1TypeConverter_3_01char_0fN_0e_4.html</loc>
@@ -824,22 +926,37 @@
     <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1TypeConverter_3_01std_1_1string__view_01_4-members.html</loc>
   </url>
   <url>
-    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1TypeConverter_3_01WrapperType_00_01std_1_1enable__if__t_3_01detail_1_1IsTypeWrappcc7e8e511c407d0e9e16d044c83436e7.html</loc>
-  </url>
-  <url>
-    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1TypeConverter_3_01WrapperType_00_01std_1_1enable__if__t_3_01detail_1_1IsTypeWrapp6b82e133d0ea0e6ac8c35be24b04d545.html</loc>
-  </url>
-  <url>
     <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1TypeIndexList.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1TypeIndexList-members.html</loc>
   </url>
   <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1TypeRegistry.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1TypeRegistry_3_01T_00_01std_1_1enable__if__t_3_01detail_1_1isTypeWrapper_3_01T_01_4_01_4_01_4.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1TypeRegistry_3_01T_00_01std_1_1enable__if__t_3_01detail_1_1isTypeWrapper_3_01T_01_4_01_4_01_4-members.html</loc>
+  </url>
+  <url>
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1TypeWrapper.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1TypeWrapper-members.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1UnregisterNodesRequest.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1UnregisterNodesRequest-members.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1UnregisterNodesResponse.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1UnregisterNodesResponse-members.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1UserIdentityToken.html</loc>
@@ -896,6 +1013,12 @@
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1ViewAttributes-members.html</loc>
   </url>
   <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1ViewDescription.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1ViewDescription-members.html</loc>
+  </url>
+  <url>
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1WriteRequest.html</loc>
   </url>
   <url>
@@ -941,6 +1064,45 @@
     <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1AlwaysFalse.html</loc>
   </url>
   <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1detail_1_1ExceptionCatcher.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1detail_1_1ExceptionCatcher-members.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1IsContiguousContainer.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1IsContiguousContainer_3_01T_00_01std_1_1void__t_3_01decltype_07std_1_1de9f866bf4ee62095afcf3e91d3b4c0f7.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1IsConvertibleType.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1IsConvertibleType_3_01T_00_01std_1_1void__t_3_01decltype_07TypeConverter_3_01T_01_4_02_03_08_4_01_4.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1IsMutableContainer.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1IsRegisteredType.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1IsRegisteredType_3_01T_00_01std_1_1void__t_3_01decltype_07TypeRegistry_3_01T_01_4_02_03_08_4_01_4.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1IsSpan.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1IsSpan_3_01Span_3_01T_01_4_01_4.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1IsTypeWrapper.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1IsTypeWrapper-members.html</loc>
+  </url>
+  <url>
     <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1MemberType.html</loc>
   </url>
   <url>
@@ -950,22 +1112,25 @@
     <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1MemberType_3_01T_01C_1_1_5_01_4-members.html</loc>
   </url>
   <url>
-    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1TupleHolds.html</loc>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1VariantHandler.html</loc>
   </url>
   <url>
-    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1TupleHolds_3_01std_1_1tuple_3_01Ts_8_8_8_01_4_00_01T_01_4.html</loc>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1VariantHandler_3_01VariantPolicy_1_1Copy_01_4.html</loc>
   </url>
   <url>
-    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1TypeConverterNative.html</loc>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1VariantHandler_3_01VariantPolicy_1_1Copy_01_4-members.html</loc>
   </url>
   <url>
-    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1TypeConverterNative-members.html</loc>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1VariantHandler_3_01VariantPolicy_1_1Reference_01_4.html</loc>
   </url>
   <url>
-    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1Unqualified.html</loc>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1VariantHandler_3_01VariantPolicy_1_1Reference_01_4-members.html</loc>
   </url>
   <url>
-    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1Unqualified-members.html</loc>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1VariantHandler_3_01VariantPolicy_1_1ReferenceIfPossible_01_4.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1VariantHandler_3_01VariantPolicy_1_1ReferenceIfPossible_01_4-members.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/namespaceopcua_1_1services.html</loc>
@@ -1020,6 +1185,9 @@
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/index.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/doxygen_crawl.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/examples.html</loc>
@@ -1163,10 +1331,7 @@
     <loc>https://open62541pp.github.io/open62541pp/namespacemembers_type.html</loc>
   </url>
   <url>
-    <loc>https://open62541pp.github.io/open62541pp/namespacemembers_type.html</loc>
-  </url>
-  <url>
-    <loc>https://open62541pp.github.io/open62541pp/namespacemembers_type.html</loc>
+    <loc>https://open62541pp.github.io/open62541pp/namespacemembers_enum.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/namespacemembers_enum.html</loc>
@@ -1359,6 +1524,9 @@
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/functions_func_~.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/functions_vars.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/functions_vars.html</loc>

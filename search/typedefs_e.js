@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['uaduration_0',['UaDuration',['../classopcua_1_1DateTime.html#acb96457b8f19d74ccfaa720fdc7c9aa2',1,'opcua::DateTime']]],
-  ['unqualifiedt_1',['UnqualifiedT',['../namespaceopcua_1_1detail.html#a1bfe0ab8e02bf3957719eee388681f25',1,'opcua::detail']]]
+  ['value_5ftype_0',['value_type',['../classopcua_1_1Span.html#a092ad24a0cfe22fe585529fad3cbd52b',1,'opcua::Span']]],
+  ['valuetype_1',['ValueType',['../structopcua_1_1TypeConverter_3_01std_1_1string__view_01_4.html#a7d095c48ec29a53e88b4716a9b297919',1,'opcua::TypeConverter&lt; std::string_view &gt;::ValueType'],['../structopcua_1_1TypeConverter_3_01std_1_1string_01_4.html#a46ec6dbf2d781a4c9ad6f23415c692d3',1,'opcua::TypeConverter&lt; std::string &gt;::ValueType'],['../structopcua_1_1TypeConverter_3_01const_01char_01_5_01_4.html#af810f91e57a769e4d3bfad353a1e999f',1,'opcua::TypeConverter&lt; const char * &gt;::ValueType'],['../structopcua_1_1TypeConverter_3_01char_0fN_0e_4.html#a627b5c129d14a97903defe5d23696786',1,'opcua::TypeConverter&lt; char[N]&gt;::ValueType'],['../structopcua_1_1TypeConverter_3_01std_1_1chrono_1_1time__point_3_01Clock_00_01Duration_01_4_01_4.html#adca33f7fc27df6db8553b5d0e45939af',1,'opcua::TypeConverter&lt; std::chrono::time_point&lt; Clock, Duration &gt; &gt;::ValueType']]]
 ];

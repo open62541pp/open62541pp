@@ -12,12 +12,13 @@ var searchData=
   ['qtype_5fsrv_9',['QTYPE_SRV',['../1035_8h.html#a8eafe7f5bb91c03cdb93c3120f594600',1,'1035.h']]],
   ['qtype_5ftxt_10',['QTYPE_TXT',['../1035_8h.html#a6d3461ceb72695d7f41123f66c99968c',1,'1035.h']]],
   ['quality_11',['Code Quality',['../index.html#autotoc_md14',1,'']]],
-  ['querydatasets_12',['querydatasets',['../struct__OpcUa__QueryNextResponse.html#ae454ae52732b0f29f7d6969a9833bf09',1,'_OpcUa_QueryNextResponse::QueryDataSets'],['../struct__OpcUa__QueryFirstResponse.html#ac7dfad13687bfe690358677d85713935',1,'_OpcUa_QueryFirstResponse::QueryDataSets']]],
+  ['querydatasets_12',['QueryDataSets',['../struct__OpcUa__QueryFirstResponse.html#ac7dfad13687bfe690358677d85713935',1,'_OpcUa_QueryFirstResponse::QueryDataSets'],['../struct__OpcUa__QueryNextResponse.html#ae454ae52732b0f29f7d6969a9833bf09',1,'_OpcUa_QueryNextResponse::QueryDataSets']]],
   ['queryfirstcount_13',['QueryFirstCount',['../struct__OpcUa__SessionDiagnosticsDataType.html#a1ae6f993480ac7fd96a0d1d8c6c4b6ab',1,'_OpcUa_SessionDiagnosticsDataType']]],
   ['querynextcount_14',['QueryNextCount',['../struct__OpcUa__SessionDiagnosticsDataType.html#a4eb7a8411f6b19206b2ddf2026e5ce5f',1,'_OpcUa_SessionDiagnosticsDataType']]],
   ['question_15',['question',['../structquestion.html',1,'']]],
   ['queue_16',['queue',['../structUA__MonitoredItem.html#accf1448924276df7c624c0a572a87ff9',1,'UA_MonitoredItem']]],
   ['queue_5ftail_17',['queue_tail',['../structmqtt__message__queue.html#a7b3bbfe183900ced02927b883486d522',1,'mqtt_message_queue']]],
-  ['queuesize_18',['queuesize',['../structUA__MonitoringParameters.html#a3d2faace93a35e76c106f7af7be23b9d',1,'UA_MonitoringParameters::queueSize'],['../struct__OpcUa__MonitoringParameters.html#a3e7bb46cf95a666f429acf24aede495c',1,'_OpcUa_MonitoringParameters::QueueSize'],['../structUA__MonitoredItem.html#a3e85bcbbbaf831ea4b86d58c055d10a3',1,'UA_MonitoredItem::queueSize']]],
-  ['queuesizelimits_19',['queueSizeLimits',['../structUA__ServerConfig.html#ab156741f91ae1fab57864a116d75e1d4',1,'UA_ServerConfig']]]
+  ['queuesize_18',['queueSize',['../structUA__MonitoredItem.html#a3e85bcbbbaf831ea4b86d58c055d10a3',1,'UA_MonitoredItem::queueSize'],['../structUA__MonitoringParameters.html#a3d2faace93a35e76c106f7af7be23b9d',1,'UA_MonitoringParameters::queueSize']]],
+  ['queuesize_19',['QueueSize',['../struct__OpcUa__MonitoringParameters.html#a3e7bb46cf95a666f429acf24aede495c',1,'_OpcUa_MonitoringParameters']]],
+  ['queuesizelimits_20',['queueSizeLimits',['../structUA__ServerConfig.html#ab156741f91ae1fab57864a116d75e1d4',1,'UA_ServerConfig']]]
 ];

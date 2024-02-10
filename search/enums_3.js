@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['datachangetrigger_0',['DataChangeTrigger',['../group__TypeWrapper.html#gaa1c294a0b5f7b5a6be9316278f6468b1',1,'opcua']]],
-  ['datatypeid_1',['DataTypeId',['../group__NodeIds.html#gadfeffe1a4352e8d89c5167a8c09d1692',1,'opcua']]],
-  ['deadbandtype_2',['DeadbandType',['../group__TypeWrapper.html#gab653fd7de6baddfba5fa3ea05ff11090',1,'opcua']]]
+  ['datachangetrigger_0',['DataChangeTrigger',['../group__TypeWrapper.html#ga35ddb594d16f1bc6d6ae707031f9bbeb',1,'opcua']]],
+  ['datatypeid_1',['DataTypeId',['../group__NodeIds.html#ga5d7e0b8d020dc1893a646f9ea8ae780a',1,'opcua']]],
+  ['deadbandtype_2',['DeadbandType',['../group__TypeWrapper.html#gae0dc9a333e88500f625a7c3747b4d9e0',1,'opcua']]]
 ];

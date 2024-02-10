@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['filteroperand_0',['FilterOperand',['../group__TypeWrapper.html#ga417af5bf3fe281fe3d66167e18088b1c',1,'opcua']]]
+  ['isoneof_0',['IsOneOf',['../namespaceopcua_1_1detail.html#ac0d6cbb3b0e3542b582052e179f65b6d',1,'opcua::detail']]],
+  ['iterator_1',['iterator',['../classopcua_1_1Span.html#a654dfa1bf6d430941bdca00c32ea90f0',1,'opcua::Span']]]
 ];

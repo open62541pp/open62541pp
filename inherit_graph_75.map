@@ -1,5 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,5,228,60"/>
-<area shape="rect" id="Node000001" href="$classopcua_1_1QualifiedName.html" title="UA_QualifiedName wrapper class." alt="" coords="276,20,443,45"/>
-<area shape="poly" id="edge47_Node000000_Node000001" title=" " alt="" coords="242,30,276,30,276,35,242,35"/>
+<area shape="rect" id="Node000000" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,5,243,60"/>
+<area shape="rect" id="Node000001" href="$classopcua_1_1ExtensionObject.html" title="UA_ExtensionObject wrapper class." alt="" coords="291,20,465,45"/>
+<area shape="poly" id="edge43_Node000000_Node000001" title=" " alt="" coords="256,30,290,30,290,35,256,35"/>
 </map>
