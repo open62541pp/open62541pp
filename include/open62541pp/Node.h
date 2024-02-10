@@ -550,30 +550,25 @@ public:
     template <typename T>
     Node& writeValueScalar(const T& value) {
         // NOLINTNEXTLINE, variant isn't modified, try to avoid copy
-        const auto variant = Variant::fromScalar<T>(const_cast<T&>(value));
-        writeValue(variant);
+        writeValue(Variant::fromScalar<VariantPolicy::ReferenceIfPossible>(const_cast<T&>(value)));
         return *this;
     }
 
     /// Write array value to variable node.
     /// @return Current node instance to chain multiple methods (fluent interface)
-    template <typename T>
-    Node& writeValueArray(Span<T> array) {
-        writeValue(Variant::fromArray(array));
-        return *this;
-    }
-
-    /// @overload
     template <typename ArrayLike>
     Node& writeValueArray(ArrayLike&& array) {
-        return writeValueArray(Span{std::forward<ArrayLike>(array)});
+        writeValue(
+            Variant::fromArray<VariantPolicy::ReferenceIfPossible>(std::forward<ArrayLike>(array))
+        );
+        return *this;
     }
 
     /// Write range of elements as array value to variable node.
     /// @return Current node instance to chain multiple methods (fluent interface)
     template <typename InputIt>
     Node& writeValueArray(InputIt first, InputIt last) {
-        writeValue(Variant::fromArray(first, last));
+        writeValue(Variant::fromArray<VariantPolicy::ReferenceIfPossible>(first, last));
         return *this;
     }
 

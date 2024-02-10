@@ -52,16 +52,16 @@ public:
 
     /// Create DataValue from scalar value.
     /// @see Variant::fromScalar
-    template <typename... Args>
+    template <VariantPolicy Policy = VariantPolicy::Copy, typename... Args>
     [[nodiscard]] static DataValue fromScalar(Args&&... args) {
-        return DataValue(Variant::fromScalar(std::forward<Args>(args)...));
+        return DataValue(Variant::fromScalar<Policy>(std::forward<Args>(args)...));
     }
 
     /// Create DataValue from array.
     /// @see Variant::fromArray
-    template <typename... Args>
+    template <VariantPolicy Policy = VariantPolicy::Copy, typename... Args>
     [[nodiscard]] static DataValue fromArray(Args&&... args) {
-        return DataValue(Variant::fromArray(std::forward<Args>(args)...));
+        return DataValue(Variant::fromArray<Policy>(std::forward<Args>(args)...));
     }
 
     bool hasValue() const noexcept {
