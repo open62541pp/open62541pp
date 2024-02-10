@@ -608,8 +608,8 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
             objectsId,
             methodId,
             Span<const Variant>{
-                Variant::fromScalar<int32_t>(1),
-                Variant::fromScalar<int32_t>(2),
+                Variant::fromScalar(int32_t{1}),
+                Variant::fromScalar(int32_t{2}),
             }
         );
         CHECK(outputs.size() == 1);
@@ -624,8 +624,8 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
                 objectsId,
                 methodId,
                 Span<const Variant>{
-                    Variant::fromScalar<int32_t>(1),
-                    Variant::fromScalar<int32_t>(2),
+                    Variant::fromScalar(int32_t{1}),
+                    Variant::fromScalar(int32_t{2}),
                 }
             ),
             "BadUnexpectedError"
@@ -639,8 +639,8 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
                 objectsId,
                 methodId,
                 Span<const Variant>{
-                    Variant::fromScalar<bool>(true),
-                    Variant::fromScalar<float>(11.11f),
+                    Variant::fromScalar(true),
+                    Variant::fromScalar(11.11f),
                 }
             ),
             "BadInvalidArgument"
@@ -655,9 +655,9 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
                 objectsId,
                 methodId,
                 Span<const Variant>{
-                    Variant::fromScalar<int32_t>(1),
-                    Variant::fromScalar<int32_t>(2),
-                    Variant::fromScalar<int32_t>(3),
+                    Variant::fromScalar(int32_t{1}),
+                    Variant::fromScalar(int32_t{2}),
+                    Variant::fromScalar(int32_t{3}),
                 }
             ),
             "BadTooManyArguments"

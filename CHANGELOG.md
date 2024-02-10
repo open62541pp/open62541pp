@@ -19,9 +19,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Pass custom logger to constructor of `Server` and `Client` (#150, #155)
 - New function `void throwIfBad(UA_StatusCode)` (#153)
 - New function `UA_DataType& getDataType<T>()` (#154)
-- Add missing `noexcept` specifiers (#160)
 - `AccessLevel`, `WriteMask` and `EventNotifier` enum classes (#163)
 - `Bitmask<T>` type to allow both enum classes and native enums/ints to define bitmasks (#163)
+- Propagate callback exceptions to event loop run method (#179)
+- Policy template parameter for `Variant` factory functions `Variant::fromScalar`, `Variant::fromArray` (#174)
+  - `VariantPolicy::Copy`: Store copy of scalar/array inside the variant (**default**)
+  - `VariantPolicy::Reference`: Store reference to scalar/array inside the variant
+  - `VariantPolicy::ReferenceIfPossible`: Favor referencing but fall back to copying if necessary
 
 ### Changed
 
@@ -45,12 +49,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Virtual function `AccessControlBase::getUserAccessLevel` returns `Bitmask<AccessLevel>` instead of `uint8_t`
   - Implicit conversion from `Bitmask<T>` to underlying integer are deprecated and will be made explicit in the future.
     Please migrate to `Bitmask<T>::get()`.
+- Rename DataValue methods from has/get/setStatusCode to has/get/setStatus (#177)
+- `Variant` factory functions `Variant::fromScalar` and `Variant::fromArray` will create copies by default.
+  Choose other policies, `VariantPolicy::Reference` or `VariantPolicy::ReferenceIfPossible`, if needed. (#174)
 
 ### Fixed
 
 - `setLogger` memory leak (#127)
 - `DataTypeBuilder::createEnum` (#143)
 - Underlying data type of enums (#152)
+- Add missing `noexcept` specifiers (#160)
+- Internal deletion of native arrays (#181)
 
 ## [0.11.0] - 2023-11-01
 
