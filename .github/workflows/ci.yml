@@ -25,7 +25,6 @@ jobs:
           - { name: Clang 14,   CC: clang-14, CXX: clang++-14, flags: "" }
           - { name: Clang-Tidy, CC: clang-14, CXX: clang++-14, flags: "-DUAPP_ENABLE_CLANG_TIDY=ON" }
           - { name: ASan,       CC: clang-14, CXX: clang++-14, flags: "-DUAPP_ENABLE_SANITIZER_ADDRESS=ON" }
-          - { name: LSan,       CC: clang-14, CXX: clang++-14, flags: "-DUAPP_ENABLE_SANITIZER_LEAK=ON" }
           - { name: TSan,       CC: clang-14, CXX: clang++-14, flags: "-DUAPP_ENABLE_SANITIZER_THREAD=ON" }
           - { name: UBSan,      CC: clang-14, CXX: clang++-14, flags: "-DUAPP_ENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON" }
     steps:
