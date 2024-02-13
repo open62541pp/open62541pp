@@ -1,0 +1,3 @@
+Specifies the maximum supported length of each dimension of the `Value` attribute.
+Should be unspecified if `ValueRank <= 0` (ValueRank::Any, ValueRank::Scalar, ValueRank::ScalarOrOneDimension, ValueRank::OneOrMoreDimensions).
+The dimension `0` is a wildcard and the actual value may have any length in this dimension.

@@ -1,6 +1,5 @@
 #include <chrono>
 #include <thread>
-#include <utility>  // pair
 #include <variant>
 #include <vector>
 
@@ -19,82 +18,216 @@
 using namespace opcua;
 using namespace std::literals::chrono_literals;
 
-TEST_CASE_TEMPLATE("NodeManagement service set", ServerOrClient, Server, Client) {
+TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client>) {
     ServerClientSetup setup;
     setup.client.connect(setup.endpointUrl);
     auto& server = setup.server;
-    auto& serverOrClient = setup.getInstance<ServerOrClient>();
+    auto& serverOrClient = setup.getInstance<T>();
 
     const NodeId objectsId{0, UA_NS0ID_OBJECTSFOLDER};
+    const NodeId newId{1, 1000};
 
-    SUBCASE("Non-type nodes") {
-        CHECK_EQ(
-            services::addObject(serverOrClient, objectsId, {1, 1000}, "object"), NodeId(1, 1000)
-        );
-        CHECK_EQ(services::readNodeClass(server, {1, 1000}), NodeClass::Object);
+    SUBCASE("addObject") {
+        NodeId id;
+        if constexpr (isAsync<T>) {
+            auto future = services::addObjectAsync(serverOrClient, objectsId, newId, "object");
+            setup.client.runIterate();
+            id = future.get();
+        } else {
+            id = services::addObject(serverOrClient, objectsId, newId, "object");
+        }
+        CHECK_EQ(id, newId);
+        CHECK_EQ(services::readNodeClass(server, newId), NodeClass::Object);
+    }
 
-        CHECK_EQ(
-            services::addFolder(serverOrClient, objectsId, {1, 1001}, "folder"), NodeId(1, 1001)
-        );
-        CHECK_EQ(services::readNodeClass(server, {1, 1001}), NodeClass::Object);
+    SUBCASE("addFolder") {
+        NodeId id;
+        if constexpr (isAsync<T>) {
+            auto future = services::addFolderAsync(serverOrClient, objectsId, newId, "folder");
+            setup.client.runIterate();
+            id = future.get();
+        } else {
+            id = services::addFolder(serverOrClient, objectsId, newId, "folder");
+        }
+        CHECK_EQ(id, newId);
+        CHECK_EQ(services::readNodeClass(server, newId), NodeClass::Object);
+    }
 
-        CHECK_EQ(
-            services::addVariable(serverOrClient, objectsId, {1, 1002}, "variable"), NodeId(1, 1002)
-        );
-        CHECK_EQ(services::readNodeClass(server, {1, 1002}), NodeClass::Variable);
+    SUBCASE("addVariable") {
+        NodeId id;
+        if constexpr (isAsync<T>) {
+            auto future = services::addVariableAsync(serverOrClient, objectsId, newId, "variable");
+            setup.client.runIterate();
+            id = future.get();
+        } else {
+            id = services::addVariable(serverOrClient, objectsId, newId, "variable");
+        }
+        CHECK_EQ(id, newId);
+        CHECK_EQ(services::readNodeClass(server, newId), NodeClass::Variable);
+    }
 
-        CHECK_EQ(
-            services::addProperty(serverOrClient, objectsId, {1, 1003}, "property"), NodeId(1, 1003)
-        );
-        CHECK_EQ(services::readNodeClass(server, {1, 1003}), NodeClass::Variable);
+    SUBCASE("addProperty") {
+        NodeId id;
+        if constexpr (isAsync<T>) {
+            auto future = services::addPropertyAsync(serverOrClient, objectsId, newId, "property");
+            setup.client.runIterate();
+            id = future.get();
+        } else {
+            id = services::addProperty(serverOrClient, objectsId, newId, "property");
+        }
+        CHECK_EQ(id, newId);
+        CHECK_EQ(services::readNodeClass(server, newId), NodeClass::Variable);
+    }
 
 #ifdef UA_ENABLE_METHODCALLS
-        CHECK_EQ(
-            services::addMethod(serverOrClient, objectsId, {1, 1004}, "method", {}, {}, {}),
-            NodeId(1, 1004)
-        );
-        CHECK_EQ(services::readNodeClass(server, {1, 1004}), NodeClass::Method);
+    SUBCASE("addMethod") {
+        NodeId id;
+        if constexpr (isAsync<T>) {
+            auto future = services::addMethodAsync(
+                serverOrClient, objectsId, newId, "method", {}, {}, {}
+            );
+            setup.client.runIterate();
+            id = future.get();
+        } else {
+            id = services::addMethod(serverOrClient, objectsId, newId, "method", {}, {}, {});
+        }
+        CHECK_EQ(id, newId);
+        CHECK_EQ(services::readNodeClass(server, newId), NodeClass::Method);
+    }
 #endif
+
+    SUBCASE("addObjectType") {
+        NodeId id;
+        if constexpr (isAsync<T>) {
+            auto future = services::addObjectTypeAsync(
+                serverOrClient, {0, UA_NS0ID_BASEOBJECTTYPE}, newId, "objecttype"
+            );
+            setup.client.runIterate();
+            id = future.get();
+        } else {
+            id = services::addObjectType(
+                serverOrClient, {0, UA_NS0ID_BASEOBJECTTYPE}, newId, "objecttype"
+            );
+        }
+        CHECK_EQ(id, newId);
+        CHECK_EQ(services::readNodeClass(server, newId), NodeClass::ObjectType);
     }
 
-    SUBCASE("Type nodes") {
-        CHECK_EQ(
-            services::addObjectType(
-                serverOrClient, {0, UA_NS0ID_BASEOBJECTTYPE}, {1, 1000}, "objecttype"
-            ),
-            NodeId(1, 1000)
-        );
-        CHECK_EQ(services::readNodeClass(server, {1, 1000}), NodeClass::ObjectType);
-
-        CHECK_EQ(
-            services::addVariableType(
-                serverOrClient, {0, UA_NS0ID_BASEVARIABLETYPE}, {1, 1001}, "variabletype"
-            ),
-            NodeId(1, 1001)
-        );
-        CHECK_EQ(services::readNodeClass(server, {1, 1001}), NodeClass::VariableType);
-
-        CHECK_EQ(
-            services::addReferenceType(
-                serverOrClient, {0, UA_NS0ID_ORGANIZES}, {1, 1002}, "referenceType"
-            ),
-            NodeId(1, 1002)
-        );
-        CHECK_EQ(services::readNodeClass(server, {1, 1002}), NodeClass::ReferenceType);
-
-        CHECK_EQ(
-            services::addDataType(serverOrClient, {0, UA_NS0ID_STRUCTURE}, {1, 1003}, "dataType"),
-            NodeId(1, 1003)
-        );
-        CHECK_EQ(services::readNodeClass(server, {1, 1003}), NodeClass::DataType);
+    SUBCASE("addVariableType") {
+        NodeId id;
+        if constexpr (isAsync<T>) {
+            auto future = services::addVariableTypeAsync(
+                serverOrClient, {0, UA_NS0ID_BASEVARIABLETYPE}, newId, "variabletype"
+            );
+            setup.client.runIterate();
+            id = future.get();
+        } else {
+            id = services::addVariableType(
+                serverOrClient, {0, UA_NS0ID_BASEVARIABLETYPE}, newId, "variabletype"
+            );
+        }
+        CHECK_EQ(id, newId);
+        CHECK_EQ(services::readNodeClass(server, newId), NodeClass::VariableType);
     }
 
-    SUBCASE("View nodes") {
-        CHECK_EQ(
-            services::addView(serverOrClient, {0, UA_NS0ID_VIEWSFOLDER}, {1, 1000}, "view"),
-            NodeId(1, 1000)
-        );
-        CHECK_EQ(services::readNodeClass(server, {1, 1000}), NodeClass::View);
+    SUBCASE("addReferenceType") {
+        NodeId id;
+        if constexpr (isAsync<T>) {
+            auto future = services::addReferenceTypeAsync(
+                serverOrClient, {0, UA_NS0ID_ORGANIZES}, newId, "referencetype"
+            );
+            setup.client.runIterate();
+            id = future.get();
+        } else {
+            id = services::addReferenceType(
+                serverOrClient, {0, UA_NS0ID_ORGANIZES}, newId, "referencetype"
+            );
+        }
+        CHECK_EQ(id, newId);
+        CHECK_EQ(services::readNodeClass(server, newId), NodeClass::ReferenceType);
+    }
+
+    SUBCASE("addDataType") {
+        NodeId id;
+        if constexpr (isAsync<T>) {
+            auto future = services::addDataTypeAsync(
+                serverOrClient, {0, UA_NS0ID_STRUCTURE}, newId, "datatype"
+            );
+            setup.client.runIterate();
+            id = future.get();
+        } else {
+            id = services::addDataType(serverOrClient, {0, UA_NS0ID_STRUCTURE}, newId, "datatype");
+        }
+        CHECK_EQ(id, newId);
+        CHECK_EQ(services::readNodeClass(server, newId), NodeClass::DataType);
+    }
+
+    SUBCASE("addView") {
+        NodeId id;
+        if constexpr (isAsync<T>) {
+            auto future = services::addViewAsync(
+                serverOrClient, {0, UA_NS0ID_VIEWSFOLDER}, newId, "view"
+            );
+            setup.client.runIterate();
+            id = future.get();
+        } else {
+            id = services::addView(serverOrClient, {0, UA_NS0ID_VIEWSFOLDER}, newId, "view");
+        }
+        CHECK_EQ(id, newId);
+        CHECK_EQ(services::readNodeClass(server, newId), NodeClass::View);
+    }
+
+    SUBCASE("Add/delete reference") {
+        services::addFolder(serverOrClient, objectsId, {1, 1000}, "folder");
+        services::addObject(serverOrClient, objectsId, {1, 1001}, "object");
+
+        auto addReference = [&] {
+            if constexpr (isAsync<T>) {
+                auto future = services::addReferenceAsync(
+                    serverOrClient, {1, 1000}, {1, 1001}, ReferenceTypeId::Organizes
+                );
+                setup.client.runIterate();
+                future.get();
+            } else {
+                services::addReference(
+                    serverOrClient, {1, 1000}, {1, 1001}, ReferenceTypeId::Organizes
+                );
+            }
+        };
+        CHECK_NOTHROW(addReference());
+        CHECK_THROWS_WITH(addReference(), "BadDuplicateReferenceNotAllowed");
+
+        auto deleteReference = [&] {
+            if constexpr (isAsync<T>) {
+                auto future = services::deleteReferenceAsync(
+                    serverOrClient, {1, 1000}, {1, 1001}, ReferenceTypeId::Organizes, true, true
+                );
+                setup.client.runIterate();
+                future.get();
+            } else {
+                services::deleteReference(
+                    serverOrClient, {1, 1000}, {1, 1001}, ReferenceTypeId::Organizes, true, true
+                );
+            }
+        };
+        CHECK_NOTHROW(deleteReference());
+        CHECK_NOTHROW(deleteReference());
+    }
+
+    SUBCASE("Delete node") {
+        services::addObject(serverOrClient, objectsId, {1, 1000}, "object");
+
+        auto deleteNode = [&] {
+            if constexpr (isAsync<T>) {
+                auto future = services::deleteNodeAsync(serverOrClient, {1, 1000});
+                setup.client.runIterate();
+                future.get();
+            } else {
+                services::deleteNode(serverOrClient, {1, 1000});
+            }
+        };
+        CHECK_NOTHROW(deleteNode());
+        CHECK_THROWS_WITH(deleteNode(), "BadNodeIdUnknown");
     }
 
     SUBCASE("Random node id") {
@@ -102,27 +235,6 @@ TEST_CASE_TEMPLATE("NodeManagement service set", ServerOrClient, Server, Client)
         const auto id = services::addObject(serverOrClient, objectsId, {1, 0}, "random");
         CHECK(id != NodeId(1, 0));
         CHECK(id.getNamespaceIndex() == 1);
-    }
-
-    SUBCASE("Add/delete reference") {
-        services::addFolder(serverOrClient, objectsId, {1, 1000}, "folder");
-        services::addObject(serverOrClient, objectsId, {1, 1001}, "object");
-        services::addReference(serverOrClient, {1, 1000}, {1, 1001}, ReferenceTypeId::Organizes);
-        CHECK_THROWS_WITH(
-            services::addReference(
-                serverOrClient, {1, 1000}, {1, 1001}, ReferenceTypeId::Organizes
-            ),
-            "BadDuplicateReferenceNotAllowed"
-        );
-        CHECK_NOTHROW(services::deleteReference(
-            serverOrClient, {1, 1000}, {1, 1001}, ReferenceTypeId::Organizes, true, true
-        ));
-    }
-
-    SUBCASE("Delete node") {
-        services::addObject(serverOrClient, objectsId, {1, 1000}, "object");
-        services::deleteNode(serverOrClient, {1, 1000});
-        CHECK_THROWS_WITH(services::deleteNode(serverOrClient, {1, 1000}), "BadNodeIdUnknown");
     }
 }
 
@@ -137,7 +249,7 @@ TEST_CASE("Attribute service set (highlevel)") {
         CHECK(services::readNodeId(server, id) == id);
         CHECK(services::readNodeClass(server, id) == NodeClass::Variable);
         CHECK(services::readBrowseName(server, id) == QualifiedName(1, "testAttributes"));
-        //_EQ CHECK(services::readDisplayName(server, id), LocalizedText("", "testAttributes"));
+        // CHECK(services::readDisplayName(server, id), LocalizedText("", "testAttributes"));
         CHECK(services::readDescription(server, id).getText().empty());
         CHECK(services::readDescription(server, id).getLocale().empty());
         CHECK(services::readWriteMask(server, id) == 0);
@@ -347,67 +459,56 @@ TEST_CASE("Attribute service set (highlevel)") {
     }
 }
 
-TEST_CASE_TEMPLATE("Attribute service set write/read", Pair, std::pair<Server, Server>, std::pair<Server, Client>, std::pair<Client, Server>, std::pair<Client, Client>) {
+TEST_CASE_TEMPLATE("Attribute service set write/read", T, Server, Client, Async<Client>) {
     ServerClientSetup setup;
     setup.client.connect(setup.endpointUrl);
-    auto& server = setup.server;
     auto& client = setup.client;
+    auto& serverOrClient = setup.getInstance<T>();
 
     // create variable node
     const NodeId id{1, 1000};
-    services::addVariable(server, {0, UA_NS0ID_OBJECTSFOLDER}, id, "variable");
-    services::writeAccessLevel(server, id, UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE);
-    services::writeWriteMask(server, id, ~0U);  // set all bits to 1 -> allow all
+    services::addVariable(
+        setup.server,
+        {0, UA_NS0ID_OBJECTSFOLDER},
+        id,
+        "variable",
+        VariableAttributes{}.setAccessLevel(AccessLevel::CurrentRead | AccessLevel::CurrentWrite)
+    );
 
-    // check read-only attributes
-    CHECK(services::readNodeId(server, id) == services::readNodeId(client, id));
-    CHECK(services::readNodeClass(server, id) == services::readNodeClass(client, id));
-    CHECK(services::readBrowseName(server, id) == services::readBrowseName(client, id));
+    const double value = 11.11;
+    DataValue result;
 
-    // check remaining attributes with possible writer/reader combinations
-    auto& writer = setup.getInstance<typename Pair::first_type>();
-    auto& reader = setup.getInstance<typename Pair::second_type>();
+    // write
+    if constexpr (isAsync<T>) {
+        auto future = services::writeAttributeAsync(
+            serverOrClient, id, AttributeId::Value, DataValue::fromScalar(value)
+        );
+        client.runIterate();
+        future.get();
+    } else {
+        services::writeAttribute(
+            serverOrClient, id, AttributeId::Value, DataValue::fromScalar(value)
+        );
+    }
 
-    const LocalizedText displayName("", "display name");
-    CHECK_NOTHROW(services::writeDisplayName(writer, id, displayName));
-    CHECK(services::readDisplayName(reader, id) == displayName);
+    // read
+    if constexpr (isAsync<T>) {
+        auto future = services::readAttributeAsync(serverOrClient, id, AttributeId::Value);
+        client.runIterate();
+        result = future.get();
+    } else {
+        result = services::readAttribute(serverOrClient, id, AttributeId::Value);
+    }
 
-    const LocalizedText description("en-US", "description...");
-    CHECK_NOTHROW(services::writeDescription(writer, id, description));
-    CHECK(services::readDescription(reader, id) == description);
-
-    const NodeId dataType(0, UA_NS0ID_DOUBLE);
-    CHECK_NOTHROW(services::writeDataType(writer, id, dataType));
-    CHECK(services::readDataType(reader, id) == dataType);
-
-    const ValueRank valueRank = ValueRank::OneDimension;
-    CHECK_NOTHROW(services::writeValueRank(writer, id, valueRank));
-    CHECK(services::readValueRank(reader, id) == valueRank);
-
-    std::vector<uint32_t> arrayDimensions{3};
-    CHECK_NOTHROW(services::writeArrayDimensions(writer, id, arrayDimensions));
-    CHECK(services::readArrayDimensions(reader, id) == arrayDimensions);
-
-    const std::vector<double> array{1, 2, 3};
-    const auto variant = Variant::fromArray(array);
-    CHECK_NOTHROW(services::writeValue(writer, id, variant));
-    CHECK(services::readValue(reader, id).template getArrayCopy<double>() == array);
-
-    const auto dataValue = DataValue::fromArray(array);
-    CHECK_NOTHROW(services::writeDataValue(writer, id, dataValue));
-    DataValue dataValueRead = services::readDataValue(reader, id);
-    CHECK_EQ(dataValueRead->hasValue, true);
-    CHECK_EQ(dataValueRead->hasSourceTimestamp, true);
-    CHECK_EQ(dataValueRead->hasServerTimestamp, true);
-    CHECK(dataValueRead.getValue().getArrayCopy<double>() == array);
+    CHECK(result.getValue().getScalar<double>() == value);
 }
 
-TEST_CASE_TEMPLATE("View service set", ServerOrClient, Server, Client) {
+TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
     ServerClientSetup setup;
     setup.client.connect(setup.endpointUrl);
     auto& server = setup.server;
     auto& client = setup.client;
-    auto& serverOrClient = setup.getInstance<ServerOrClient>();
+    auto& serverOrClient = setup.getInstance<T>();
 
     // add node to query references
     const NodeId id{1, 1000};
@@ -415,7 +516,15 @@ TEST_CASE_TEMPLATE("View service set", ServerOrClient, Server, Client) {
 
     SUBCASE("browse") {
         const BrowseDescription bd(id, BrowseDirection::Both);
-        const auto result = services::browse(serverOrClient, bd);
+        BrowseResult result;
+
+        if constexpr (isAsync<T>) {
+            auto future = services::browseAsync(serverOrClient, bd);
+            client.runIterate();
+            result = future.get();
+        } else {
+            result = services::browse(serverOrClient, bd);
+        }
 
         CHECK(result.getStatusCode().isGood());
         CHECK(result.getContinuationPoint().empty());
@@ -437,31 +546,42 @@ TEST_CASE_TEMPLATE("View service set", ServerOrClient, Server, Client) {
     SUBCASE("browseNext") {
         // https://github.com/open62541/open62541/blob/v1.3.5/tests/client/check_client_highlevel.c#L252-L318
         const BrowseDescription bd({0, UA_NS0ID_SERVER}, BrowseDirection::Both);
-        // restrict browse result to max 1 reference, more with browseNext
-        auto resultBrowse = services::browse(serverOrClient, bd, 1);
+        BrowseResult result;
 
-        CHECK(resultBrowse.getStatusCode().isGood());
-        CHECK(resultBrowse.getContinuationPoint().empty() == false);
-        CHECK(resultBrowse.getReferences().size() == 1);
+        // restrict browse result to max 1 reference, more with browseNext
+        result = services::browse(serverOrClient, bd, 1);
+        CHECK(result.getStatusCode().isGood());
+        CHECK(result.getContinuationPoint().empty() == false);
+        CHECK(result.getReferences().size() == 1);
+
+        auto browseNext = [&](bool releaseContinuationPoint) {
+            if constexpr (isAsync<T>) {
+                auto future = services::browseNextAsync(
+                    serverOrClient, releaseContinuationPoint, result.getContinuationPoint()
+                );
+                client.runIterate();
+                result = future.get();
+            } else {
+                result = services::browseNext(
+                    serverOrClient, releaseContinuationPoint, result.getContinuationPoint()
+                );
+            }
+        };
 
         // get next result
-        resultBrowse = services::browseNext(
-            serverOrClient, false, resultBrowse.getContinuationPoint()
-        );
-        CHECK(resultBrowse.getStatusCode().isGood());
-        CHECK(resultBrowse.getContinuationPoint().empty() == false);
-        CHECK(resultBrowse.getReferences().size() == 1);
+        browseNext(false);
+        CHECK(result.getStatusCode().isGood());
+        CHECK(result.getContinuationPoint().empty() == false);
+        CHECK(result.getReferences().size() == 1);
 
         // release continuation point, result should be empty
-        resultBrowse = services::browseNext(
-            serverOrClient, true, resultBrowse.getContinuationPoint()
-        );
-        CHECK(resultBrowse.getStatusCode().isGood());
-        CHECK(resultBrowse.getContinuationPoint().empty());
-        CHECK(resultBrowse.getReferences().size() == 0);
+        browseNext(true);
+        CHECK(result.getStatusCode().isGood());
+        CHECK(result.getContinuationPoint().empty());
+        CHECK(result.getReferences().size() == 0);
     }
 
-    if constexpr (isServer<ServerOrClient>) {
+    if constexpr (isServer<T>) {
         SUBCASE("browseRecursive") {
             const BrowseDescription bd(
                 ObjectId::Server,
@@ -492,9 +612,18 @@ TEST_CASE_TEMPLATE("View service set", ServerOrClient, Server, Client) {
     }
 
     SUBCASE("browseSimplifiedBrowsePath") {
-        const auto result = services::browseSimplifiedBrowsePath(
-            serverOrClient, {0, UA_NS0ID_ROOTFOLDER}, {{0, "Objects"}, {1, "Variable"}}
-        );
+        BrowsePathResult result;
+        if constexpr (isAsync<T>) {
+            auto future = services::browseSimplifiedBrowsePathAsync(
+                serverOrClient, {0, UA_NS0ID_ROOTFOLDER}, {{0, "Objects"}, {1, "Variable"}}
+            );
+            client.runIterate();
+            result = future.get();
+        } else {
+            result = services::browseSimplifiedBrowsePath(
+                serverOrClient, {0, UA_NS0ID_ROOTFOLDER}, {{0, "Objects"}, {1, "Variable"}}
+            );
+        }
         CHECK(result.getStatusCode().isGood());
         const auto targets = result.getTargets();
         CHECK(targets.size() == 1);
@@ -505,29 +634,41 @@ TEST_CASE_TEMPLATE("View service set", ServerOrClient, Server, Client) {
     }
 
     SUBCASE("Register/unregister nodes") {
-        const auto response = services::registerNodes(
-            client, RegisterNodesRequest({}, {{1, 1000}})
-        );
+        RegisterNodesResponse response;
+        RegisterNodesRequest requestRegister({}, {{1, 1000}});
+        if constexpr (isAsync<T>) {
+            auto future = services::registerNodesAsync(client, requestRegister);
+            client.runIterate();
+            response = future.get();
+        } else {
+            response = services::registerNodes(client, requestRegister);
+        }
         CHECK(response.getRegisteredNodeIds().size() == 1);
         CHECK(response.getRegisteredNodeIds()[0] == NodeId(1, 1000));
 
-        CHECK_NOTHROW(services::unregisterNodes(client, UnregisterNodesRequest({}, {{1, 1000}})));
+        UnregisterNodesRequest requestUnregister({}, {{1, 1000}});
+        if constexpr (isAsync<T>) {
+            auto future = services::unregisterNodesAsync(client, requestUnregister);
+            client.runIterate();
+            CHECK_NOTHROW(future.get());
+        } else {
+            CHECK_NOTHROW(services::unregisterNodes(client, requestUnregister));
+        }
     }
 }
 
 #ifdef UA_ENABLE_METHODCALLS
-TEST_CASE_TEMPLATE("Method service set", ServerOrClient, Server, Client) {
+TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
     ServerClientSetup setup;
     setup.client.connect(setup.endpointUrl);
-    auto& server = setup.server;
-    auto& serverOrClient = setup.getInstance<ServerOrClient>();
+    auto& serverOrClient = setup.getInstance<T>();
 
     const NodeId objectsId{ObjectId::ObjectsFolder};
     const NodeId methodId{1, 1000};
 
     bool throwException = false;
     services::addMethod(
-        server,
+        setup.server,
         objectsId,
         methodId,
         "add",
@@ -548,12 +689,22 @@ TEST_CASE_TEMPLATE("Method service set", ServerOrClient, Server, Client) {
         }
     );
 
+    auto call = [&](auto&&... args) {
+        if constexpr (isAsync<T>) {
+            auto future = services::callAsync(std::forward<decltype(args)>(args)...);
+            setup.client.runIterate();
+            return future.get();
+        } else {
+            return services::call(std::forward<decltype(args)>(args)...);
+        }
+    };
+
     SUBCASE("Check result") {
-        const std::vector<Variant> outputs = services::call(
+        const std::vector<Variant> outputs = call(
             serverOrClient,
             objectsId,
             methodId,
-            {
+            Span<const Variant>{
                 Variant::fromScalar(int32_t{1}),
                 Variant::fromScalar(int32_t{2}),
             }
@@ -565,11 +716,11 @@ TEST_CASE_TEMPLATE("Method service set", ServerOrClient, Server, Client) {
     SUBCASE("Propagate exception") {
         throwException = true;
         CHECK_THROWS_WITH(
-            services::call(
+            call(
                 serverOrClient,
                 objectsId,
                 methodId,
-                {
+                Span<const Variant>{
                     Variant::fromScalar(int32_t{1}),
                     Variant::fromScalar(int32_t{2}),
                 }
@@ -580,11 +731,11 @@ TEST_CASE_TEMPLATE("Method service set", ServerOrClient, Server, Client) {
 
     SUBCASE("Invalid input arguments") {
         CHECK_THROWS_WITH(
-            services::call(
+            call(
                 serverOrClient,
                 objectsId,
                 methodId,
-                {
+                Span<const Variant>{
                     Variant::fromScalar(true),
                     Variant::fromScalar(11.11f),
                 }
@@ -592,14 +743,14 @@ TEST_CASE_TEMPLATE("Method service set", ServerOrClient, Server, Client) {
             "BadInvalidArgument"
         );
         CHECK_THROWS_WITH(
-            services::call(serverOrClient, objectsId, methodId, {}), "BadArgumentsMissing"
+            call(serverOrClient, objectsId, methodId, Span<const Variant>{}), "BadArgumentsMissing"
         );
         CHECK_THROWS_WITH(
-            services::call(
+            call(
                 serverOrClient,
                 objectsId,
                 methodId,
-                {
+                Span<const Variant>{
                     Variant::fromScalar(int32_t{1}),
                     Variant::fromScalar(int32_t{2}),
                     Variant::fromScalar(int32_t{3}),

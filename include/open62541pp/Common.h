@@ -51,37 +51,37 @@ enum class Type : TypeIndex {
 /**
  * Attribute identifiers.
  * @see UA_AttributeId
- * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/A.1/
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/5.9
  */
 enum class AttributeId : int32_t {
     // clang-format off
-    NodeId                  = 1,
-    NodeClass               = 2,
-    BrowseName              = 3,
-    DisplayName             = 4,
-    Description             = 5,
-    WriteMask               = 6,
-    UserWriteMask           = 7,
-    IsAbstract              = 8,
-    Symmetric               = 9,
-    InverseName             = 10,
-    ContainsNoLoops         = 11,
-    EventNotifier           = 12,
-    Value                   = 13,
-    DataType                = 14,
-    ValueRank               = 15,
-    ArrayDimensions         = 16,
-    AccessLevel             = 17,
-    UserAccessLevel         = 18,
-    MinimumSamplingInterval = 19,
-    Historizing             = 20,
-    Executable              = 21,
-    UserExecutable          = 22,
-    DataTypeDefinition      = 23,
-    RolePermissions         = 24,
-    UserRolePermissions     = 25,
-    AccessRestrictions      = 26,
-    AccessLevelEx           = 27,
+    NodeId                  = 1,   /**< @include{doc} attributes/nodeid.dox */
+    NodeClass               = 2,   /**< @include{doc} attributes/nodeclass.dox */
+    BrowseName              = 3,   /**< @include{doc} attributes/browsename.dox */
+    DisplayName             = 4,   /**< @include{doc} attributes/displayname.dox */
+    Description             = 5,   /**< @include{doc} attributes/description.dox */
+    WriteMask               = 6,   /**< @include{doc} attributes/writemask.dox */
+    UserWriteMask           = 7,   /**< @include{doc} attributes/userwritemask.dox */
+    IsAbstract              = 8,   /**< @include{doc} attributes/isabstract.dox */
+    Symmetric               = 9,   /**< @include{doc} attributes/symmetric.dox */
+    InverseName             = 10,  /**< @include{doc} attributes/inversename.dox */
+    ContainsNoLoops         = 11,  /**< @include{doc} attributes/containsnoloops.dox */
+    EventNotifier           = 12,  /**< @include{doc} attributes/eventnotifier.dox */
+    Value                   = 13,  /**< @include{doc} attributes/value.dox */
+    DataType                = 14,  /**< @include{doc} attributes/datatype.dox */
+    ValueRank               = 15,  /**< @include{doc} attributes/valuerank.dox */
+    ArrayDimensions         = 16,  /**< @include{doc} attributes/arraydimensions.dox */
+    AccessLevel             = 17,  /**< @include{doc} attributes/accesslevel.dox */
+    UserAccessLevel         = 18,  /**< @include{doc} attributes/useraccesslevel.dox */
+    MinimumSamplingInterval = 19,  /**< @include{doc} attributes/minimumsamplinginterval.dox */
+    Historizing             = 20,  /**< @include{doc} attributes/historizing.dox */
+    Executable              = 21,  /**< @include{doc} attributes/executable.dox */
+    UserExecutable          = 22,  /**< @include{doc} attributes/userexecutable.dox */
+    DataTypeDefinition      = 23,  /**< @include{doc} attributes/datatypedefinition.dox */
+    RolePermissions         = 24,  /**< @include{doc} attributes/rolepermissions.dox */
+    UserRolePermissions     = 25,  /**< @include{doc} attributes/userrolepermissions.dox */
+    AccessRestrictions      = 26,  /**< @include{doc} attributes/accessrestrictions.dox */
+    AccessLevelEx           = 27,  /**< @include{doc} attributes/accesslevelex.dox */
     // clang-format on
 };
 

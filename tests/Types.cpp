@@ -1173,6 +1173,15 @@ TEST_CASE("Argument") {
     CHECK(argument.getArrayDimensions()[1] == 3);
 }
 
+TEST_CASE("CallMethodRequest / CallRequest") {
+    const CallMethodRequest item({1, 1000}, {1, 1001}, {Variant::fromScalar(11)});
+    const CallRequest request({}, {item});
+    CHECK(request.getMethodsToCall().size() == 1);
+    CHECK(request.getMethodsToCall()[0].getObjectId() == NodeId(1, 1000));
+    CHECK(request.getMethodsToCall()[0].getMethodId() == NodeId(1, 1001));
+    CHECK(request.getMethodsToCall()[0].getInputArguments().size() == 1);
+}
+
 #endif
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS

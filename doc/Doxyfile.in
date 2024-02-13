@@ -11,6 +11,7 @@ JAVADOC_AUTOBRIEF      = YES
 MARKDOWN_SUPPORT       = YES
 AUTOLINK_SUPPORT       = YES
 USE_MDFILE_AS_MAINPAGE = "${PROJECT_SOURCE_DIR}/README.md"
+ALIASES                = completiontoken{1}="@parblock ^^ @include{doc} alias_completiontoken.dox ^^ @code \1 @endcode ^^ @endparblock"
 
 # Build-related options
 EXTRACT_ALL            = YES
@@ -20,14 +21,18 @@ SHOW_USED_FILES        = NO
 SORT_MEMBER_DOCS       = NO
 LAYOUT_FILE            = "${CMAKE_CURRENT_SOURCE_DIR}/DoxygenLayout.xml"
 QUIET                  = YES
+WARN_IF_INCOMPLETE_DOC = NO
 
 # Input files
 INPUT                  = "${PROJECT_SOURCE_DIR}/include/" \
                          "${PROJECT_SOURCE_DIR}/README.md" \
-                         "${CMAKE_CURRENT_SOURCE_DIR}/example.dox"
+                         "${CMAKE_CURRENT_SOURCE_DIR}/examples.dox" \
+                         "${CMAKE_CURRENT_SOURCE_DIR}/overview.dox" \
+                         "${CMAKE_CURRENT_SOURCE_DIR}/async_model.md"
 FILE_PATTERNS          = *.h *.hpp *.cpp
 RECURSIVE              = YES
-EXAMPLE_PATH           = "${PROJECT_SOURCE_DIR}/examples"
+EXAMPLE_PATH           = "${PROJECT_SOURCE_DIR}/examples" \
+                         "${CMAKE_CURRENT_SOURCE_DIR}/fragments"
 EXAMPLE_PATTERNS       = *.h *.hpp *.cpp
 EXAMPLE_RECURSIVE      = YES
 

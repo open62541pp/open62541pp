@@ -22,12 +22,17 @@ namespace opcua {
 // forward declaration
 class ApplicationDescription;
 class ByteString;
-class ClientContext;
+class Client;
 class DataType;
 class EndpointDescription;
 struct Login;
 template <typename ServerOrClient>
 class Node;
+
+namespace detail {
+class ClientContext;
+ClientContext& getContext(Client& client) noexcept;
+}  // namespace detail
 
 using StateCallback = std::function<void()>;
 
@@ -164,11 +169,9 @@ public:
     UA_Client* handle() noexcept;
     const UA_Client* handle() const noexcept;
 
-    /// Get client context (for internal use only).
-    /// @private
-    ClientContext& getContext() noexcept;
-
 private:
+    friend detail::ClientContext& detail::getContext(Client& client) noexcept;
+
     class Connection;
     std::shared_ptr<Connection> connection_;
 };

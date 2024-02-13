@@ -8,10 +8,9 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/Subscription.h"
+#include "open62541pp/detail/ClientContext.h"
+#include "open62541pp/detail/ServerContext.h"
 #include "open62541pp/open62541.h"
-
-#include "ClientContext.h"
-#include "ServerContext.h"
 
 namespace opcua {
 
@@ -48,28 +47,16 @@ Subscription<T> MonitoredItem<T>::getSubscription() const {
     return {connection_, subscriptionId_};
 }
 
-inline static ServerContext::MonitoredItem& getMonitoredItemContext(
-    Server& server, [[maybe_unused]] uint32_t subscriptionId, uint32_t monitoredItemId
+template <typename T>
+inline static auto& getMonitoredItemContext(
+    T& connection, uint32_t subscriptionId, uint32_t monitoredItemId
 ) {
-    auto& monitoredItems = server.getContext().monitoredItems;
-    auto it = monitoredItems.find(monitoredItemId);
-    if (it == monitoredItems.end()) {
+    const auto* context =
+        detail::getContext(connection).monitoredItems.find({subscriptionId, monitoredItemId});
+    if (context == nullptr) {
         throw BadStatus(UA_STATUSCODE_BADMONITOREDITEMIDINVALID);
     }
-    assert(it->second != nullptr);
-    return *(it->second);
-}
-
-inline static ClientContext::MonitoredItem& getMonitoredItemContext(
-    Client& client, uint32_t subscriptionId, uint32_t monitoredItemId
-) {
-    auto& monitoredItems = client.getContext().monitoredItems;
-    auto it = monitoredItems.find({subscriptionId, monitoredItemId});
-    if (it == monitoredItems.end()) {
-        throw BadStatus(UA_STATUSCODE_BADMONITOREDITEMIDINVALID);
-    }
-    assert(it->second != nullptr);
-    return *(it->second);
+    return *context;
 }
 
 template <typename T>

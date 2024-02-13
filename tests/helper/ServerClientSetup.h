@@ -7,6 +7,7 @@
 #include "open62541pp/Client.h"
 #include "open62541pp/Server.h"
 
+#include "AsyncTrait.h"
 #include "Runner.h"
 
 template <typename T>
@@ -21,7 +22,12 @@ struct ServerClientSetup {
 
     template <typename T>
     auto& getInstance() noexcept {
-        return std::get<T&>(std::tie(server, client));
+        if constexpr (IsTrait<T>::value) {
+            using U = typename T::type;
+            return std::get<U&>(std::tie(server, client));
+        } else {
+            return std::get<T&>(std::tie(server, client));
+        }
     }
 
     static constexpr std::string_view endpointUrl = "opc.tcp://localhost:4840";

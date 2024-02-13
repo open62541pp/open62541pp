@@ -28,8 +28,9 @@ namespace opcua {
  * Zero cost abstraction to wrap the C API objects and delete them on destruction. The derived
  * classes should implement specific constructors to convert from other data types.
  *
- * `TypeWrapper<T, typeIndex>` is pointer-interconvertible to `T`. Use asWrapper(NativeType&) or
- * asWrapper(constNativeType&) to cast native object references to wrapper object references.
+ * `TypeWrapper<T, typeIndex>` is pointer-interconvertible to `T`:
+ * - Use asWrapper(NativeType&) to cast native object references to wrapper object references.
+ * - Use asNative(WrapperType&) to cast wrapper object references to native object references.
  *
  * @warning No virtual constructor defined, don't implement a destructor in the derived classes.
  * @ingroup TypeWrapper

@@ -1,26 +1,23 @@
 #include <doctest/doctest.h>
 
+#include <stdexcept>
+
 #include "open62541pp/ErrorHandling.h"
 
 using namespace opcua;
 
-TEST_CASE("invokeCatchIgnore") {
-    CHECK_NOTHROW(detail::invokeCatchIgnore([] { return; }));
-    CHECK_NOTHROW(detail::invokeCatchIgnore([] { throw BadStatus(UA_STATUSCODE_BADTIMEOUT); }));
-    CHECK_NOTHROW(detail::invokeCatchIgnore([] { throw std::runtime_error("test"); }));
-}
-
-TEST_CASE("invokeCatchStatus") {
-    CHECK_EQ(detail::invokeCatchStatus([] { return; }), UA_STATUSCODE_GOOD);
-    CHECK_EQ(
-        detail::invokeCatchStatus([] { return UA_STATUSCODE_BADTIMEOUT; }), UA_STATUSCODE_BADTIMEOUT
+TEST_CASE("getStatusCode") {
+    CHECK(detail::getStatusCode(nullptr) == UA_STATUSCODE_GOOD);
+    CHECK(
+        detail::getStatusCode(std::make_exception_ptr(BadStatus(UA_STATUSCODE_GOOD))) ==
+        UA_STATUSCODE_GOOD
     );
-    CHECK_EQ(
-        detail::invokeCatchStatus([] { throw BadStatus(UA_STATUSCODE_BADTIMEOUT); }),
-        UA_STATUSCODE_BADTIMEOUT
+    CHECK(
+        detail::getStatusCode(std::make_exception_ptr(BadStatus(UA_STATUSCODE_BADDISCONNECT))) ==
+        UA_STATUSCODE_BADDISCONNECT
     );
-    CHECK_EQ(
-        detail::invokeCatchStatus([] { throw std::runtime_error("test"); }),
+    CHECK(
+        detail::getStatusCode(std::make_exception_ptr(std::runtime_error("test"))) ==
         UA_STATUSCODE_BADINTERNALERROR
     );
 }

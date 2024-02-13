@@ -1,44 +1,32 @@
 #include "open62541pp/services/NodeManagement.h"
 
 #include <cassert>
-#include <utility>  // move
 
-#include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/detail/Result.h"  // tryInvoke
+#include "open62541pp/detail/ServerContext.h"
 #include "open62541pp/detail/helper.h"
-#include "open62541pp/types/Variant.h"
 
-#include "../ServerContext.h"
 #include "../open62541_impl.h"
 
 namespace opcua::services {
 
 AddNodesResponse addNodes(Client& client, const AddNodesRequest& request) {
-    AddNodesResponse response = UA_Client_Service_addNodes(client.handle(), request);
-    throwIfBad(response->responseHeader.serviceResult);
-    return response;
+    return addNodesAsync(client, request, detail::SyncOperation{});
 }
 
 AddReferencesResponse addReferences(Client& client, const AddReferencesRequest& request) {
-    AddReferencesResponse response = UA_Client_Service_addReferences(client.handle(), request);
-    throwIfBad(response->responseHeader.serviceResult);
-    return response;
+    return addReferencesAsync(client, request, detail::SyncOperation{});
 }
 
 DeleteNodesResponse deleteNodes(Client& client, const DeleteNodesRequest& request) {
-    DeleteNodesResponse response = UA_Client_Service_deleteNodes(client.handle(), request);
-    throwIfBad(response->responseHeader.serviceResult);
-    return response;
+    return deleteNodesAsync(client, request, detail::SyncOperation{});
 }
 
 DeleteReferencesResponse deleteReferences(Client& client, const DeleteReferencesRequest& request) {
-    DeleteReferencesResponse response = UA_Client_Service_deleteReferences(
-        client.handle(), request
-    );
-    throwIfBad(response->responseHeader.serviceResult);
-    return response;
+    return deleteReferencesAsync(client, request, detail::SyncOperation{});
 }
 
 template <>
@@ -59,7 +47,7 @@ NodeId addNode<Server>(
         id.handle(),
         parentId.handle(),
         referenceType.handle(),
-        {id.getNamespaceIndex(), detail::toNativeString(browseName)},
+        {id.getNamespaceIndex(), opcua::detail::toNativeString(browseName)},
         typeDefinition.handle(),
         static_cast<const UA_NodeAttributes*>(nodeAttributes.getDecodedData()),
         nodeAttributes.getDecodedDataType(),
@@ -81,29 +69,17 @@ NodeId addNode<Client>(
     const NodeId& typeDefinition,
     const NodeId& referenceType
 ) {
-    UA_AddNodesItem item{};
-    item.parentNodeId.nodeId = parentId;
-    item.referenceTypeId = referenceType;
-    item.requestedNewNodeId.nodeId = id;
-    item.browseName.namespaceIndex = id.getNamespaceIndex();
-    item.browseName.name = detail::toNativeString(browseName);
-    item.nodeClass = static_cast<UA_NodeClass>(nodeClass);
-    item.nodeAttributes = nodeAttributes;
-    item.typeDefinition.nodeId = typeDefinition;
-
-    UA_AddNodesRequest request{};
-    request.nodesToAddSize = 1;
-    request.nodesToAdd = &item;
-
-    auto response = addNodes(client, asWrapper<AddNodesRequest>(request));
-    auto results = response.getResults();
-    if (results.size() != 1) {
-        throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
-    }
-    throwIfBad(results[0]->statusCode);
-    NodeId addedNodeId;
-    addedNodeId.swap(results[0]->addedNodeId);
-    return addedNodeId;
+    return addNodeAsync(
+        client,
+        nodeClass,
+        parentId,
+        id,
+        browseName,
+        nodeAttributes,
+        typeDefinition,
+        referenceType,
+        detail::SyncOperation{}
+    );
 }
 
 #ifdef UA_ENABLE_METHODCALLS
@@ -122,14 +98,14 @@ static UA_StatusCode methodCallback(
     UA_Variant* output
 ) noexcept {
     assert(methodContext != nullptr);
-    const auto* nodeContext = static_cast<ServerContext::NodeContext*>(methodContext);
+    const auto* nodeContext = static_cast<opcua::detail::NodeContext*>(methodContext);
     const auto& callback = nodeContext->methodCallback;
     if (callback) {
-        return detail::invokeCatchStatus([&] {
-            callback(
-                {asWrapper<Variant>(input), inputSize}, {asWrapper<Variant>(output), outputSize}
-            );
-        });
+        return opcua::detail::tryInvokeGetStatus(
+            callback,
+            Span<const Variant>{asWrapper<Variant>(input), inputSize},
+            Span<Variant>{asWrapper<Variant>(output), outputSize}
+        );
     }
     return UA_STATUSCODE_BADINTERNALERROR;
 }
@@ -146,7 +122,7 @@ NodeId addMethod(
     const MethodAttributes& attributes,
     const NodeId& referenceType
 ) {
-    auto* nodeContext = server.getContext().getOrCreateNodeContext(id);
+    auto* nodeContext = opcua::detail::getContext(server).nodeContexts[id];
     nodeContext->methodCallback = std::move(callback);
     NodeId outputNodeId;
     const auto status = UA_Server_addMethodNode(
@@ -154,7 +130,7 @@ NodeId addMethod(
         id,
         parentId,
         referenceType,
-        {id.getNamespaceIndex(), detail::toNativeString(browseName)},
+        {id.getNamespaceIndex(), opcua::detail::toNativeString(browseName)},
         attributes,
         methodCallback,
         inputArguments.size(),
@@ -174,26 +150,25 @@ NodeId addMethod(
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
-    [[maybe_unused]] MethodCallback callback,  // NOLINT
-    [[maybe_unused]] Span<const Argument> inputArguments,
-    [[maybe_unused]] Span<const Argument> outputArguments,
+    MethodCallback callback,
+    Span<const Argument> inputArguments,
+    Span<const Argument> outputArguments,
     const MethodAttributes& attributes,
     const NodeId& referenceType
 ) {
-    // callback can be added later by server with UA_Server_setMethodNodeCallback
-    // arguments can not be passed to UA_Client_addMethodNode... why?
-    return addNode(
+    return addMethodAsync(
         client,
-        NodeClass::Method,
         parentId,
         id,
         browseName,
-        ExtensionObject::fromDecoded(const_cast<MethodAttributes&>(attributes)),  // NOLINT
-        {},
-        referenceType
+        std::move(callback),
+        inputArguments,
+        outputArguments,
+        attributes,
+        referenceType,
+        detail::SyncOperation{}
     );
 }
-
 #endif
 
 template <>
@@ -222,24 +197,9 @@ void addReference<Client>(
     const NodeId& referenceType,
     bool forward
 ) {
-    UA_AddReferencesItem item{};
-    item.sourceNodeId = sourceId;
-    item.referenceTypeId = referenceType;
-    item.isForward = forward;
-    item.targetServerUri = UA_STRING_NULL;
-    item.targetNodeId.nodeId = targetId;
-    item.targetNodeClass = UA_NODECLASS_UNSPECIFIED;  // necessary?
-
-    UA_AddReferencesRequest request{};
-    request.referencesToAddSize = 1;
-    request.referencesToAdd = &item;
-
-    auto response = addReferences(client, asWrapper<AddReferencesRequest>(request));
-    auto results = response.getResults();
-    if (results.size() != 1) {
-        throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
-    }
-    throwIfBad(results[0]);
+    return addReferenceAsync(
+        client, sourceId, targetId, referenceType, forward, detail::SyncOperation{}
+    );
 }
 
 template <>
@@ -250,20 +210,7 @@ void deleteNode<Server>(Server& server, const NodeId& id, bool deleteReferences)
 
 template <>
 void deleteNode<Client>(Client& client, const NodeId& id, bool deleteReferences) {
-    UA_DeleteNodesItem item{};
-    item.nodeId = id;
-    item.deleteTargetReferences = deleteReferences;
-
-    UA_DeleteNodesRequest request{};
-    request.nodesToDeleteSize = 1;
-    request.nodesToDelete = &item;
-
-    auto response = deleteNodes(client, asWrapper<DeleteNodesRequest>(request));
-    auto results = response.getResults();
-    if (results.size() != 1) {
-        throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
-    }
-    throwIfBad(results[0]);
+    return deleteNodeAsync(client, id, deleteReferences, detail::SyncOperation{});
 }
 
 template <>
@@ -290,23 +237,15 @@ void deleteReference<Client>(
     bool isForward,
     bool deleteBidirectional
 ) {
-    UA_DeleteReferencesItem item{};
-    item.sourceNodeId = sourceId;
-    item.referenceTypeId = referenceType;
-    item.isForward = isForward;
-    item.targetNodeId.nodeId = targetId;
-    item.deleteBidirectional = deleteBidirectional;
-
-    UA_DeleteReferencesRequest request{};
-    request.referencesToDeleteSize = 1;
-    request.referencesToDelete = &item;
-
-    auto response = deleteReferences(client, asWrapper<DeleteReferencesRequest>(request));
-    auto results = response.getResults();
-    if (results.size() != 1) {
-        throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
-    }
-    throwIfBad(results[0]);
+    return deleteReferenceAsync(
+        client,
+        sourceId,
+        targetId,
+        referenceType,
+        isForward,
+        deleteBidirectional,
+        detail::SyncOperation{}
+    );
 }
 
 }  // namespace opcua::services

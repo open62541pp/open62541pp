@@ -2,20 +2,18 @@
 
 #include <array>
 #include <cassert>
-#include <map>
-#include <memory>
+#include <cstdint>
 #include <utility>  // pair
 
 #include "open62541pp/Client.h"
 #include "open62541pp/Config.h"
+#include "open62541pp/detail/ContextMap.h"
 #include "open62541pp/detail/ExceptionCatcher.h"
-#include "open62541pp/services/MonitoredItem.h"
-#include "open62541pp/services/Subscription.h"
-#include "open62541pp/types/Composed.h"
+#include "open62541pp/open62541.h"
+#include "open62541pp/services/detail/MonitoredItemContext.h"
+#include "open62541pp/services/detail/SubscriptionContext.h"
 
-#include "open62541_impl.h"
-
-namespace opcua {
+namespace opcua::detail {
 
 enum class ClientState {
     Disconnected,
@@ -32,23 +30,11 @@ inline constexpr size_t clientStateCount = 4;
 class ClientContext {
 public:
 #ifdef UA_ENABLE_SUBSCRIPTIONS
-    struct Subscription {
-        services::DeleteSubscriptionCallback deleteCallback;
-    };
-
-    struct MonitoredItem {
-        ReadValueId itemToMonitor;
-        services::DataChangeNotificationCallback dataChangeCallback;
-        services::EventNotificationCallback eventCallback;
-        services::DeleteMonitoredItemCallback deleteCallback;
-    };
-
     using SubId = uint32_t;
     using MonId = uint32_t;
     using SubMonId = std::pair<uint32_t, uint32_t>;
-
-    std::map<SubId, std::unique_ptr<Subscription>> subscriptions;
-    std::map<SubMonId, std::unique_ptr<MonitoredItem>> monitoredItems;
+    detail::ContextMap<SubId, services::detail::SubscriptionContext> subscriptions;
+    detail::ContextMap<SubMonId, services::detail::MonitoredItemContext> monitoredItems;
 #endif
 
 #if UAPP_OPEN62541_VER_LE(1, 0)
@@ -58,6 +44,7 @@ public:
     UA_SessionState lastSessionState{};
 #endif
     std::array<StateCallback, clientStateCount> stateCallbacks;
+
     detail::ExceptionCatcher exceptionCatcher;
 };
 
@@ -70,4 +57,4 @@ inline ClientContext& getContext(UA_Client* client) {
     return *static_cast<ClientContext*>(context);
 }
 
-}  // namespace opcua
+}  // namespace opcua::detail

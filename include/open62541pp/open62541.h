@@ -24,6 +24,9 @@
 #include <open62541/statuscodes.h>
 #include <open62541/types.h>
 #include <open62541/types_generated.h>
+
+// client
+#include <open62541/client.h>
 #endif
 
 #ifndef _MSC_VER

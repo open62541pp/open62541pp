@@ -48,6 +48,14 @@ struct SubscriptionParameters {
 };
 
 /**
+ * @defgroup CreateSubscription
+ * Create subscriptions. Subscriptions monitor a set of monitored items for notifications and return
+ * them to the client.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.2
+ * @{
+ */
+
+/**
  * Subscription deletion callback.
  * @param subId Subscription identifier
  */
@@ -56,7 +64,6 @@ using DeleteSubscriptionCallback = std::function<void(uint32_t subId)>;
 /**
  * Create a subscription.
  * @copydetails SubscriptionParameters
- *
  * @param client Instance of type Client
  * @param parameters Subscription parameters, may be revised by server
  * @param publishingEnabled Enable/disable publishing of the subscription
@@ -71,9 +78,16 @@ using DeleteSubscriptionCallback = std::function<void(uint32_t subId)>;
 );
 
 /**
+ * @}
+ * @defgroup ModifySubscription
+ * Modify subscriptions.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.3
+ * @{
+ */
+
+/**
  * Modify a subscription.
  * @copydetails SubscriptionParameters
- *
  * @param client Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @param parameters Subscription parameters, may be revised by server
@@ -83,10 +97,17 @@ void modifySubscription(
 );
 
 /**
- * Enable/disable publishing of notification messages.
+ * @}
+ * @defgroup SetPublishingMode
+ * Enable/disable sending of notifications on subscriptions.
  * Disable publishing of NotificationMessages of the subscription doesn't discontinue the sending
  * of keep-alive messages, nor change the monitoring mode.
- *
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.4
+ * @{
+ */
+
+/**
+ * Enable/disable publishing of notification messages.
  * @param client Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @param publishing Enable/disable publishing
@@ -94,14 +115,22 @@ void modifySubscription(
 void setPublishingMode(Client& client, uint32_t subscriptionId, bool publishing);
 
 /**
+ * @}
+ * @defgroup DeleteSubscriptions
+ * Delete subscriptions.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.8
+ * @{
+ */
+
+/**
  * Delete a subscription.
- *
  * @param client Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  */
 void deleteSubscription(Client& client, uint32_t subscriptionId);
 
 /**
+ * @}
  * @}
  */
 

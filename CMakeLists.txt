@@ -124,7 +124,6 @@ add_library(
     src/Server.cpp
     src/Session.cpp
     src/Subscription.cpp
-    src/detail/ExceptionCatcher.cpp
     src/detail/helper.cpp
     src/services/Attribute.cpp
     src/services/Method.cpp

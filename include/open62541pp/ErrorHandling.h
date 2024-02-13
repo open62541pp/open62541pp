@@ -1,9 +1,6 @@
 #pragma once
 
-#include <functional>  // invoke
 #include <stdexcept>
-#include <string>
-#include <type_traits>  // invoke_result_t
 
 #include "open62541pp/open62541.h"
 
@@ -64,47 +61,18 @@ namespace detail {
     return (code >> 30U) >= 0x02;
 }
 
-/**
- * Invoke a function (with `void` return type), catch and ignore exceptions.
- * This is especially useful for C-API callbacks, that are executed within the open62541 event loop.
- */
-template <typename F, typename... Args>
-void invokeCatchIgnore(F&& fn, Args&&... args) noexcept {
-    using ReturnType = std::invoke_result_t<F, Args&&...>;
-    static_assert(std::is_same_v<ReturnType, void>, "Only return types of type void allowed");
+// NOLINTNEXTLINE, pass by value ok
+[[nodiscard]] inline UA_StatusCode getStatusCode(std::exception_ptr eptr) noexcept {
     try {
-        std::invoke(fn, std::forward<Args>(args)...);
-    } catch (...) {
-        // ignore
-    }
-}
-
-/**
- * Invoke a function (with `void` or `UA_StatusCode` return type) and catch exceptions.
- * This is especially useful for C-API callbacks, that are executed within the open62541 event loop.
- * If no exception is thrown, the generated status code or `UA_STATUSCODE_GOOD` is returned.
- * If the exception if of type BadStatus, the underlying status code will be returned.
- * All other exception types will yield `UA_STATUSCODE_BADINTERNALERROR`.
- */
-template <typename F, typename... Args>
-[[nodiscard]] UA_StatusCode invokeCatchStatus(F&& fn, Args&&... args) noexcept {
-    using ReturnType = std::invoke_result_t<F, Args&&...>;
-    static_assert(
-        std::is_same_v<ReturnType, void> || std::is_same_v<ReturnType, UA_StatusCode>,
-        "Only return types of type void or UA_StatusCode allowed"
-    );
-    try {
-        if constexpr (std::is_same_v<ReturnType, UA_StatusCode>) {
-            return std::invoke(fn, std::forward<Args>(args)...);
-        } else {
-            std::invoke(fn, std::forward<Args>(args)...);
-            return UA_STATUSCODE_GOOD;
+        if (eptr) {
+            std::rethrow_exception(eptr);
         }
     } catch (const BadStatus& e) {
         return e.code();
     } catch (...) {
         return UA_STATUSCODE_BADINTERNALERROR;
     }
+    return UA_STATUSCODE_GOOD;
 }
 
 }  // namespace detail

@@ -6,19 +6,15 @@
 
 namespace opcua {
 class Client;
-class ClientContext;
 class Server;
-class ServerContext;
 }  // namespace opcua
 
 namespace opcua::detail {
+class ClientContext;
+class ServerContext;
+}  // namespace opcua::detail
 
-class ExceptionCatcher;
-
-ExceptionCatcher& getExceptionCatcher(ClientContext& context) noexcept;
-ExceptionCatcher& getExceptionCatcher(Client& client) noexcept;
-ExceptionCatcher& getExceptionCatcher(ServerContext& context) noexcept;
-ExceptionCatcher& getExceptionCatcher(Server& server) noexcept;
+namespace opcua::detail {
 
 /**
  * Catch & store exceptions from user-defined callbacks in an exception-unaware context (open62541).
@@ -46,19 +42,19 @@ public:
         try {
             std::invoke(std::forward<Callback>(callback), std::forward<Args>(args)...);
         } catch (...) {
-            this->setException(std::current_exception());
+            setException(std::current_exception());
         }
     }
 
     // template <typename OnException, typename Callback, typename... Args>
-    // auto invoke(OnException&& onException, Callback&& callback, Args&&... args) {
+    // auto invokeOr(OnException&& onException, Callback&& callback, Args&&... args) {
     //     static_assert(std::is_same_v<
     //                   std::invoke_result_t<OnException, std::exception_ptr>,
     //                   std::invoke_result_t<Callback, Args&&...>>);
     //     try {
     //         return std::invoke(std::forward<Callback>(callback), std::forward<Args>(args)...);
     //     } catch (...) {
-    //         this->setException(std::current_exception());
+    //         setException(std::current_exception());
     //         return std::invoke(std::forward<OnException>(onException), std::current_exception());
     //     }
     // }
@@ -69,18 +65,6 @@ public:
             this->invoke(std::move(cb), std::forward<decltype(args)>(args)...);
         };
     }
-
-    // template <typename OnException, typename Callback>
-    // auto wrapCallback(OnException&& onException, Callback&& callback) {
-    //     return [this,
-    //             onException_ = std::forward<OnException>(onException),
-    //             callback_ = std::forward<Callback>(callback)](auto&&... args) {
-    //         return this->invoke(
-    //             std::move(onException_), std::move(callback_),
-    //             std::forward<decltype(args)>(args)...
-    //         );
-    //     };
-    // }
 
 private:
     std::exception_ptr exception_;

@@ -15,6 +15,8 @@
 #include "open62541pp/Session.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/ValueBackend.h"
+#include "open62541pp/detail/Result.h"  // tryInvoke
+#include "open62541pp/detail/ServerContext.h"
 #include "open62541pp/services/Attribute.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
@@ -24,7 +26,6 @@
 #include "CustomAccessControl.h"
 #include "CustomDataTypes.h"
 #include "CustomLogger.h"
-#include "ServerContext.h"
 #include "open62541_impl.h"
 
 namespace opcua {
@@ -74,7 +75,7 @@ public:
             runStartup();
         }
         auto interval = UA_Server_run_iterate(handle(), false /* don't wait */);
-        detail::getExceptionCatcher(getContext()).rethrow();
+        context_.exceptionCatcher.rethrow();
         return interval;
     }
 
@@ -88,7 +89,7 @@ public:
             while (running_) {
                 // https://github.com/open62541/open62541/blob/master/examples/server_mainloop.c
                 UA_Server_run_iterate(handle(), true /* wait for messages in the networklayer */);
-                detail::getExceptionCatcher(getContext()).rethrow();
+                context_.exceptionCatcher.rethrow();
             }
         } catch (...) {
             running_ = false;
@@ -112,7 +113,7 @@ public:
         return server_;
     }
 
-    ServerContext& getContext() noexcept {
+    detail::ServerContext& getContext() noexcept {
         return context_;
     }
 
@@ -134,7 +135,7 @@ public:
 
 private:
     UA_Server* server_;
-    ServerContext context_;
+    detail::ServerContext context_;
     CustomAccessControl customAccessControl_;
     CustomDataTypes customDataTypes_;
     CustomLogger customLogger_;
@@ -275,9 +276,9 @@ static void valueCallbackOnRead(
     const UA_DataValue* value
 ) noexcept {
     assert(nodeContext != nullptr && value != nullptr);
-    auto& cb = static_cast<ServerContext::NodeContext*>(nodeContext)->valueCallback.onBeforeRead;
+    auto& cb = static_cast<detail::NodeContext*>(nodeContext)->valueCallback.onBeforeRead;
     if (cb) {
-        detail::invokeCatchIgnore([&] { cb(asWrapper<DataValue>(*value)); });
+        detail::tryInvoke([&] { cb(asWrapper<DataValue>(*value)); });
     }
 }
 
@@ -291,14 +292,14 @@ static void valueCallbackOnWrite(
     const UA_DataValue* value
 ) noexcept {
     assert(nodeContext != nullptr && value != nullptr);
-    auto& cb = static_cast<ServerContext::NodeContext*>(nodeContext)->valueCallback.onAfterWrite;
+    auto& cb = static_cast<detail::NodeContext*>(nodeContext)->valueCallback.onAfterWrite;
     if (cb) {
-        detail::invokeCatchIgnore([&] { cb(asWrapper<DataValue>(*value)); });
+        detail::tryInvoke([&] { cb(asWrapper<DataValue>(*value)); });
     }
 }
 
 void Server::setVariableNodeValueCallback(const NodeId& id, ValueCallback callback) {
-    auto* nodeContext = getContext().getOrCreateNodeContext(id);
+    auto* nodeContext = detail::getContext(*this).nodeContexts[id];
     nodeContext->valueCallback = std::move(callback);
     throwIfBad(UA_Server_setNodeContext(handle(), id, nodeContext));
 
@@ -323,11 +324,11 @@ static UA_StatusCode valueSourceRead(
     UA_DataValue* value
 ) noexcept {
     assert(nodeContext != nullptr && value != nullptr);
-    auto& callback = static_cast<ServerContext::NodeContext*>(nodeContext)->dataSource.read;
+    auto& callback = static_cast<detail::NodeContext*>(nodeContext)->dataSource.read;
     if (callback) {
-        return detail::invokeCatchStatus([&] {
-            callback(asWrapper<DataValue>(*value), asRange(range), includeSourceTimestamp);
-        });
+        return detail::tryInvokeGetStatus(
+            callback, asWrapper<DataValue>(*value), asRange(range), includeSourceTimestamp
+        );
     }
     return UA_STATUSCODE_BADINTERNALERROR;
 }
@@ -342,17 +343,15 @@ static UA_StatusCode valueSourceWrite(
     const UA_DataValue* value
 ) noexcept {
     assert(nodeContext != nullptr && value != nullptr);
-    auto& callback = static_cast<ServerContext::NodeContext*>(nodeContext)->dataSource.write;
+    auto& callback = static_cast<detail::NodeContext*>(nodeContext)->dataSource.write;
     if (callback) {
-        return detail::invokeCatchStatus([&] {
-            callback(asWrapper<DataValue>(*value), asRange(range));
-        });
+        return detail::tryInvokeGetStatus(callback, asWrapper<DataValue>(*value), asRange(range));
     }
     return UA_STATUSCODE_BADINTERNALERROR;
 }
 
 void Server::setVariableNodeValueBackend(const NodeId& id, ValueBackendDataSource backend) {
-    auto* nodeContext = getContext().getOrCreateNodeContext(id);
+    auto* nodeContext = detail::getContext(*this).nodeContexts[id];
     nodeContext->dataSource = std::move(backend);
     throwIfBad(UA_Server_setNodeContext(handle(), id, nodeContext));
 
@@ -418,10 +417,6 @@ const UA_Server* Server::handle() const noexcept {
     return connection_->handle();
 }
 
-ServerContext& Server::getContext() noexcept {
-    return connection_->getContext();
-}
-
 /* ---------------------------------------------------------------------------------------------- */
 
 bool operator==(const Server& lhs, const Server& rhs) noexcept {
@@ -431,5 +426,15 @@ bool operator==(const Server& lhs, const Server& rhs) noexcept {
 bool operator!=(const Server& lhs, const Server& rhs) noexcept {
     return !(lhs == rhs);
 }
+
+/* ------------------------------------------- Context ------------------------------------------ */
+
+namespace detail {
+
+ServerContext& getContext(Server& server) noexcept {
+    return server.connection_->getContext();
+}
+
+}  // namespace detail
 
 }  // namespace opcua

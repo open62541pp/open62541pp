@@ -24,15 +24,13 @@
 #if __has_include(<open62541/plugin/create_certificate.h>)  // since v1.3
 #include <open62541/plugin/create_certificate.h>
 #endif
-#include <open62541/types_generated_handling.h>
 
 // client
-#include <open62541/client.h>
+// #include <open62541/client.h>  // included in open62541.h
 #if __has_include(<open62541/client_config.h>)  // merged into client.h in v1.2
 #include <open62541/client_config.h>
 #endif
 #include <open62541/client_config_default.h>
-#include <open62541/client_highlevel.h>
 #include <open62541/client_subscriptions.h>
 
 // server

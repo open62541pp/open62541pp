@@ -330,6 +330,19 @@ Argument::Argument(
     assignArray(arrayDimensions, handle()->arrayDimensions, handle()->arrayDimensionsSize);
 }
 
+CallMethodRequest::CallMethodRequest(
+    NodeId objectId, NodeId methodId, Span<const Variant> inputArguments
+) {
+    assign(std::move(objectId), handle()->objectId);
+    assign(std::move(methodId), handle()->methodId);
+    assignArray(inputArguments, handle()->inputArguments, handle()->inputArgumentsSize);
+}
+
+CallRequest::CallRequest(RequestHeader requestHeader, Span<const CallMethodRequest> methodsToCall) {
+    assign(std::move(requestHeader), handle()->requestHeader);
+    assignArray(methodsToCall, handle()->methodsToCall, handle()->methodsToCallSize);
+}
+
 #endif
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS

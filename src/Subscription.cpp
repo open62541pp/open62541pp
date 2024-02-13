@@ -8,12 +8,11 @@
 #include "open62541pp/Client.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/Span.h"
+#include "open62541pp/detail/ClientContext.h"
+#include "open62541pp/detail/ServerContext.h"
 #include "open62541pp/services/MonitoredItem.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/ExtensionObject.h"
-
-#include "ClientContext.h"
-#include "ServerContext.h"
 
 namespace opcua {
 
@@ -42,6 +41,23 @@ MonitoredItem<T> Subscription<T>::subscribeDataChange(
     );
 }
 
+template <typename T>
+std::vector<MonitoredItem<T>> Subscription<T>::getMonitoredItems() {
+    auto& monitoredItems = opcua::detail::getContext(connection_).monitoredItems;
+    monitoredItems.eraseStale();
+    auto lock = monitoredItems.acquireLock();
+    const auto& map = monitoredItems.underlying();
+    std::vector<MonitoredItem<T>> result;
+    result.reserve(map.size());
+    for (const auto& [subMonId, _] : map) {
+        const auto [subId, monId] = subMonId;
+        if (subId == subscriptionId_) {
+            result.emplace_back(connection_, subId, monId);
+        }
+    }
+    return result;
+}
+
 /* ----------------------------------- Server specializations ----------------------------------- */
 
 template <>
@@ -50,17 +66,6 @@ Subscription<Server>::Subscription(
     [[maybe_unused]] uint32_t subscriptionId  // ignore specified id and use default 0U
 ) noexcept
     : connection_(connection) {}
-
-template <>
-std::vector<MonitoredItem<Server>> Subscription<Server>::getMonitoredItems() {
-    const auto& monitoredItems = connection_.getContext().monitoredItems;
-    std::vector<MonitoredItem<Server>> result;
-    result.reserve(monitoredItems.size());
-    for (const auto& [monId, _] : monitoredItems) {
-        result.emplace_back(connection_, 0U, monId);
-    }
-    return result;
-}
 
 template <>
 MonitoredItem<Server> Subscription<Server>::subscribeDataChange(
@@ -76,20 +81,20 @@ MonitoredItem<Server> Subscription<Server>::subscribeDataChange(
         monitoringMode,
         parameters,
         [&, callback = std::move(onDataChange)](
-            [[maybe_unused]] uint32_t subId, uint32_t monId, const DataValue& value
+            uint32_t subId, uint32_t monId, const DataValue& value
         ) {
             // workaround to prevent immediate callbacks, e.g. MonitoredItem::getNodeId() would
             // throw an exception (BadMonitoredItemidInvalid)
-            // -> wait until monitoredItemContext is inserted in ServerContext::monitoredItems
+            // -> wait until inserted in map
             static std::atomic<bool> initialized = false;
             if (!initialized) {
-                if (connection_.getContext().monitoredItems.count(monId) == 0) {
+                if (!detail::getContext(connection_).monitoredItems.contains({subId, monId})) {
                     return;  // not initialized yet, skip
                 }
                 initialized = true;
             }
 
-            static const MonitoredItem<Server> monitoredItem(connection_, 0U, monId);
+            static const MonitoredItem<Server> monitoredItem(connection_, subId, monId);
             callback(monitoredItem, value);
         }
     );
@@ -102,19 +107,6 @@ template <>
 Subscription<Client>::Subscription(Client& connection, uint32_t subscriptionId) noexcept
     : connection_(connection),
       subscriptionId_(subscriptionId) {}
-
-template <>
-std::vector<MonitoredItem<Client>> Subscription<Client>::getMonitoredItems() {
-    const auto& monitoredItems = connection_.getContext().monitoredItems;
-    std::vector<MonitoredItem<Client>> result;
-    for (const auto& [subMonId, _] : monitoredItems) {
-        const auto [subId, monId] = subMonId;
-        if (subId == subscriptionId_) {
-            result.emplace_back(connection_, subId, monId);
-        }
-    }
-    return result;
-}
 
 template <>
 void Subscription<Client>::setSubscriptionParameters(SubscriptionParameters& parameters) {

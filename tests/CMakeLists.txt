@@ -4,8 +4,10 @@ add_executable(
     open62541pp_tests
     main.cpp
     AccessControl.cpp
+    async.cpp
     Bitmask.cpp
     Client.cpp
+    ClientService.cpp
     Crypto.cpp
     CustomAccessControl.cpp
     CustomDataTypes.cpp
@@ -16,6 +18,8 @@ add_executable(
     helper.cpp
     Logger.cpp
     Node.cpp
+    Result.cpp
+    ScopeExit.cpp
     Server.cpp
     Services.cpp
     Session.cpp
