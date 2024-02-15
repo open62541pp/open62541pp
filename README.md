@@ -218,6 +218,17 @@ find_package(open62541pp CONFIG REQUIRED)
 target_link_libraries(myexecutable PRIVATE open62541pp::open62541pp)
 ```
 
+### Integrate via package managers
+
+The library is available through the following package managers:
+
+- [**vcpkg**](https://vcpkg.io): Please refer to the [vcpkg documentation](https://vcpkg.io/en/getting-started) how to use it within your project.
+  You can easily use vcpkg to build and install open62541pp:
+
+  ```shell
+  vcpkg install open62541pp
+  ```
+
 ### Build and install
 
 ```shell
