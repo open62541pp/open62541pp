@@ -826,16 +826,14 @@ TEST_CASE("MonitoredItem service set (client)") {
     services::MonitoringParameters monitoringParameters{};
 
     SUBCASE("createMonitoredItemDataChange without subscription") {
-        CHECK_THROWS(
-            services::createMonitoredItemDataChange(
-                client,
-                11U,  // random subId
-                {id, AttributeId::Value},
-                MonitoringMode::Reporting,
-                monitoringParameters,
-                {}
-            ) == 1
-        );
+        CHECK_THROWS(services::createMonitoredItemDataChange(
+            client,
+            11U,  // random subId
+            {id, AttributeId::Value},
+            MonitoringMode::Reporting,
+            monitoringParameters,
+            {}
+        ));
     }
 
     const auto subId = services::createSubscription(client, subscriptionParameters);
