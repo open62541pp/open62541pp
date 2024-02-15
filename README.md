@@ -152,33 +152,33 @@ struct TypeConverter<std::byte> {
 
 ### Type map of built-in types
 
-| Type Enum `opcua::Type`  | Type                 | Typedef     | Wrapper                           | Conversions                                                 |
+| Type                     | Type open62541       | Typedef     | Wrapper                           | Conversions                                                 |
 | ------------------------ | -------------------- | ----------- | --------------------------------- | ----------------------------------------------------------- |
-| Boolean         | `UA_Boolean`         | `bool`      |                          |                                                             |
-| SByte           | `UA_SByte`           | `int8_t`    |                          |                                                             |
-| Byte            | `UA_Byte`            | `uint8_t`   |                          |                                                             |
-| Int16           | `UA_Int16`           | `int16_t`   |                          |                                                             |
-| UInt16          | `UA_UInt16`          | `uint16_t`  |                          |                                                             |
-| Int32           | `UA_Int32`           | `int32_t`   |                          |                                                             |
-| UInt32          | `UA_UInt32`          | `uint32_t`  |                          |                                                             |
-| Int64           | `UA_Int64`           | `int64_t`   |                          |                                                             |
-| UInt64          | `UA_UInt64`          | `uint64_t`  |                          |                                                             |
-| Float           | `UA_Float`           | `float`     |                          |                                                             |
-| Double          | `UA_Double`          | `double`    |                          |                                                             |
-| String          | `UA_String`          |             | `opcua::String`          | `std::string`, `std::string_view`, `const char*`, `char[N]` |
-| DateTime        | `UA_DateTime`        | `int64_t`   | `opcua::DateTime`        | `std::chrono::time_point`                                   |
-| Guid            | `UA_Guid`            |             | `opcua::Guid`            |                                                             |
-| ByteString      | `UA_ByteString`      | `UA_String` | `opcua::ByteString`      |                                                             |
-| XmlElement      | `UA_XmlElement`      | `UA_String` | `opcua::XmlElement`      |                                                             |
-| NodeId          | `UA_NodeId`          |             | `opcua::NodeId`          |                                                             |
-| ExpandedNodeId  | `UA_ExpandedNodeId`  |             | `opcua::ExpandedNodeId`  |                                                             |
-| StatusCode      | `UA_StatusCode`      | `uint32_t`  | `opcua::StatusCode`      |                                                             |
-| QualifiedName   | `UA_QualifiedName`   |             | `opcua::QualifiedName`   |                                                             |
-| LocalizedText   | `UA_LocalizedText`   |             | `opcua::LocalizedText`   |                                                             |
-| ExtensionObject | `UA_ExtensionObject` |             | `opcua::ExtensionObject` |                                                             |
-| DataValue       | `UA_DataValue`       |             | `opcua::DataValue`       |                                                             |
-| Variant         | `UA_Variant`         |             | `opcua::Variant`         |                                                             |
-| DiagnosticInfo  | `UA_DiagnosticInfo`  |             | `opcua::DiagnosticInfo`  |                                                             |
+| Boolean                  | `UA_Boolean`         | `bool`      |                                   |                                                             |
+| SByte                    | `UA_SByte`           | `int8_t`    |                                   |                                                             |
+| Byte                     | `UA_Byte`            | `uint8_t`   |                                   |                                                             |
+| Int16                    | `UA_Int16`           | `int16_t`   |                                   |                                                             |
+| UInt16                   | `UA_UInt16`          | `uint16_t`  |                                   |                                                             |
+| Int32                    | `UA_Int32`           | `int32_t`   |                                   |                                                             |
+| UInt32                   | `UA_UInt32`          | `uint32_t`  |                                   |                                                             |
+| Int64                    | `UA_Int64`           | `int64_t`   |                                   |                                                             |
+| UInt64                   | `UA_UInt64`          | `uint64_t`  |                                   |                                                             |
+| Float                    | `UA_Float`           | `float`     |                                   |                                                             |
+| Double                   | `UA_Double`          | `double`    |                                   |                                                             |
+| String                   | `UA_String`          |             | `opcua::String`                   | `std::string`, `std::string_view`, `const char*`, `char[N]` |
+| DateTime                 | `UA_DateTime`        | `int64_t`   | `opcua::DateTime`                 | `std::chrono::time_point`                                   |
+| Guid                     | `UA_Guid`            |             | `opcua::Guid`                     |                                                             |
+| ByteString               | `UA_ByteString`      | `UA_String` | `opcua::ByteString`               |                                                             |
+| XmlElement               | `UA_XmlElement`      | `UA_String` | `opcua::XmlElement`               |                                                             |
+| NodeId                   | `UA_NodeId`          |             | `opcua::NodeId`                   |                                                             |
+| ExpandedNodeId           | `UA_ExpandedNodeId`  |             | `opcua::ExpandedNodeId`           |                                                             |
+| StatusCode               | `UA_StatusCode`      | `uint32_t`  | `opcua::StatusCode`               |                                                             |
+| QualifiedName            | `UA_QualifiedName`   |             | `opcua::QualifiedName`            |                                                             |
+| LocalizedText            | `UA_LocalizedText`   |             | `opcua::LocalizedText`            |                                                             |
+| ExtensionObject          | `UA_ExtensionObject` |             | `opcua::ExtensionObject`          |                                                             |
+| DataValue                | `UA_DataValue`       |             | `opcua::DataValue`                |                                                             |
+| Variant                  | `UA_Variant`         |             | `opcua::Variant`                  |                                                             |
+| DiagnosticInfo           | `UA_DiagnosticInfo`  |             | `opcua::DiagnosticInfo`           |                                                             |
 
 ## 🚀 Getting started
 
@@ -217,6 +217,17 @@ The installed library can be found and linked within CMake:
 find_package(open62541pp CONFIG REQUIRED)
 target_link_libraries(myexecutable PRIVATE open62541pp::open62541pp)
 ```
+
+### Integrate via package managers
+
+The library is available through the following package managers:
+
+- [**vcpkg**](https://vcpkg.io): Please refer to the [vcpkg documentation](https://vcpkg.io/en/getting-started) how to use it within your project.
+  You can easily use vcpkg to build and install open62541pp:
+
+  ```shell
+  vcpkg install open62541pp
+  ```
 
 ### Build and install
 
