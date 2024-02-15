@@ -25,6 +25,7 @@ if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.16.0")
     option(UAPP_ENABLE_PCH "Use precompiled headers to speed up compilation" OFF)
 endif()
 option(UAPP_ENABLE_COVERAGE "Enable coverage reporting for gcc/clang" OFF)
+option(UAPP_WARNINGS_AS_ERRORS "Treat warnings as errors" OFF)
 
 # interface "library" to set the c++ standard / compile-time options requested
 add_library(open62541pp_project_options INTERFACE)
@@ -34,26 +35,30 @@ include(cmake/Sanitizers.cmake)
 include(cmake/StaticAnalyzers.cmake)
 
 if(MSVC)
-    target_compile_options(
-        open62541pp_project_options
-        INTERFACE
-            /permissive-
-            /W4
-            /w14640
-            /wd4127  # conditional expression is constant
-            /wd4661  # explicit template instantiations in cpp files
-            /wd4996  # deprecation gmtime, localtime
+    set(warnings
+        /permissive-
+        /W4
+        /w14640
+        /wd4127  # conditional expression is constant
+        /wd4661  # explicit template instantiations in cpp files
+        /wd4996  # deprecation gmtime, localtime
     )
+    if(UAPP_WARNINGS_AS_ERRORS)
+        list(APPEND warnings /WX)
+    endif()
+    target_compile_options(open62541pp_project_options INTERFACE ${warnings})
 else()
-    target_compile_options(
-        open62541pp_project_options
-        INTERFACE
-            -Wall
-            -Wextra
-            -Wshadow
-            -Wnon-virtual-dtor
-            -Wpedantic
+    set(warnings
+        -Wall
+        -Wextra
+        -Wshadow
+        -Wnon-virtual-dtor
+        -Wpedantic
     )
+    if(UAPP_WARNINGS_AS_ERRORS)
+        list(APPEND warnings -Werror)
+    endif()
+    target_compile_options(open62541pp_project_options INTERFACE ${warnings})
 
     if(UAPP_ENABLE_COVERAGE)
         target_compile_options(open62541pp_project_options INTERFACE --coverage -O0 -g)

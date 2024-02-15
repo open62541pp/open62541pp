@@ -31,4 +31,3 @@ CheckOptions:
     value: aNy_CasE
 
 HeaderFilterRegex: "include/open62541pp"
-WarningsAsErrors: "*"
