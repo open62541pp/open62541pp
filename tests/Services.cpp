@@ -13,6 +13,7 @@
 #include "open62541pp/types/ExtensionObject.h"
 
 #include "helper/ServerClientSetup.h"
+#include "helper/discard.h"
 #include "helper/stringify.h"
 
 using namespace opcua;
@@ -826,14 +827,14 @@ TEST_CASE("MonitoredItem service set (client)") {
     services::MonitoringParameters monitoringParameters{};
 
     SUBCASE("createMonitoredItemDataChange without subscription") {
-        CHECK_THROWS(services::createMonitoredItemDataChange(
+        CHECK_THROWS(discard(services::createMonitoredItemDataChange(
             client,
             11U,  // random subId
             {id, AttributeId::Value},
             MonitoringMode::Reporting,
             monitoringParameters,
             {}
-        ));
+        )));
     }
 
     const auto subId = services::createSubscription(client, subscriptionParameters);
