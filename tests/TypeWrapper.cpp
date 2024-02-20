@@ -45,9 +45,6 @@ TEST_CASE("TypeWrapper") {
 
         CHECK(wrapperAssignment.handle()->data != wrapper.handle()->data);
         CHECK(detail::toString(*wrapperAssignment.handle()) == "test");
-
-        // self assignment
-        CHECK_NOTHROW(wrapper = wrapper);
     }
 
     SUBCASE("Copy assignment with native type") {
@@ -72,9 +69,6 @@ TEST_CASE("TypeWrapper") {
 
         CHECK(wrapper.handle()->data == nullptr);
         CHECK(detail::toString(*wrapperAssignment.handle()) == "test");
-
-        // self assignment
-        CHECK_NOTHROW(wrapper = std::move(wrapper));
     }
 
     SUBCASE("Move assignment with native type") {

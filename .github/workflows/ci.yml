@@ -43,6 +43,7 @@ jobs:
             -DUA_ENABLE_ENCRYPTION=OPENSSL \
             -DUAPP_BUILD_TESTS=ON \
             -DUAPP_BUILD_EXAMPLES=ON \
+            -DUAPP_WARNINGS_AS_ERRORS=ON \
             ${{ matrix.config.flags }} \
             ..
           cmake --build .
@@ -108,6 +109,7 @@ jobs:
             -DBUILD_SHARED_LIBS=${{ matrix.library_type == 'shared' }} `
             -DUAPP_BUILD_TESTS=ON `
             -DUAPP_BUILD_EXAMPLES=ON `
+            -DUAPP_WARNINGS_AS_ERRORS=ON `
             ..
           cmake --build . --config ${{ matrix.build_type }}
       - name: Run tests
@@ -138,6 +140,7 @@ jobs:
             -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
             -DUAPP_BUILD_TESTS=ON \
             -DUAPP_BUILD_EXAMPLES=ON \
+            -DUAPP_WARNINGS_AS_ERRORS=ON \
             ..
           cmake --build .
       - name: Run tests

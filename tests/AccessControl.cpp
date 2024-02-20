@@ -1,3 +1,5 @@
+#include <cstdint>
+
 #include <doctest/doctest.h>
 
 #include "open62541pp/AccessControl.h"
@@ -98,7 +100,7 @@ TEST_CASE("AccessControlDefault") {
         Session session(server, NodeId{});
 
         CHECK(ac.getUserRightsMask(session, {}) == 0xFFFFFFFF);
-        CHECK(ac.getUserAccessLevel(session, {}) == 0xFF);
+        CHECK(ac.getUserAccessLevel(session, {}) == static_cast<uint8_t>(0xFF));
         CHECK(ac.getUserExecutable(session, {}));
         CHECK(ac.getUserExecutableOnObject(session, {}, {}));
         CHECK(ac.allowAddNode(session, {}));
