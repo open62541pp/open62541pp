@@ -42,7 +42,7 @@ TEST_CASE("Subscription & MonitoredItem (server)") {
     );
     CHECK(sub.getMonitoredItems().size() == 1);
 
-    std::this_thread::sleep_for(100ms);
+    std::this_thread::sleep_for(200ms);
     server.runIterate();
     CHECK(notificationCount > 0);
 
