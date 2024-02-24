@@ -4,7 +4,6 @@
 
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
-#include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/Result.h"  // tryInvoke
 #include "open62541pp/detail/ServerContext.h"
 #include "open62541pp/detail/helper.h"

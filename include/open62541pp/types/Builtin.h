@@ -25,31 +25,23 @@ namespace opcua {
 
 /**
  * UA_StatusCode wrapper class.
- * This type is not derived from TypeWrapper. @ref UA_StatusCode is just an alias for `uint32_t`.
  * StatusCode can be used interchangeably with @ref UA_StatusCode due to implicit conversions
  * (without any overhead) but provides some methods to simplify the handling with status codes.
  * @see statuscodes.h
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.39
- * @ingroup TypeWrapper
+ * @ingroup Wrapper
  */
-class StatusCode {
+class StatusCode : public Wrapper<UA_StatusCode> {
 public:
-    using NativeType = UA_StatusCode;
-
     /// Create a StatusCode with the default status code `UA_STATUSCODE_GOOD`.
     constexpr StatusCode() noexcept = default;
 
     constexpr StatusCode(UA_StatusCode code) noexcept  // NOLINT, implicit wanted
-        : code_(code) {}
-
-    /// Implicit conversion to UA_StatusCode.
-    constexpr operator UA_StatusCode() const noexcept {  // NOLINT, implicit wanted
-        return code_;
-    }
+        : Wrapper(code) {}
 
     /// Explicitly get underlying UA_StatusCode.
     constexpr UA_StatusCode get() const noexcept {
-        return code_;
+        return native();
     }
 
     /// Get human-readable name of the StatusCode.
@@ -57,37 +49,34 @@ public:
     /// `UA_ENABLE_STATUSCODE_DESCRIPTIONS` build-flag. Then the function returns an empty string
     /// for every StatusCode.
     std::string_view name() const noexcept {
-        return {UA_StatusCode_name(code_)};
+        return {UA_StatusCode_name(native())};
     }
 
     /// Check if the status code is good.
     constexpr bool isGood() const noexcept {
-        return detail::isGood(code_);
+        return detail::isGood(native());
     }
 
     /// Check if the status code is uncertain.
     constexpr bool isUncertain() const noexcept {
-        return detail::isUncertain(code_);
+        return detail::isUncertain(native());
     }
 
     /// Check if the status code is bad.
     constexpr bool isBad() const noexcept {
-        return detail::isBad(code_);
+        return detail::isBad(native());
     }
 
     /// Throw a BadStatus exception if the status code is bad.
     /// @exception BadStatus
     constexpr void throwIfBad() const {
-        opcua::throwIfBad(code_);
+        opcua::throwIfBad(native());
     }
-
-private:
-    UA_StatusCode code_{};
 };
 
 /**
  * UA_String wrapper class.
- * @ingroup TypeWrapper
+ * @ingroup Wrapper
  */
 class String : public TypeWrapper<UA_String, UA_TYPES_STRING> {
 public:
@@ -115,7 +104,7 @@ std::ostream& operator<<(std::ostream& os, const String& string);
 
 /**
  * UA_Guid wrapper class.
- * @ingroup TypeWrapper
+ * @ingroup Wrapper
  */
 class Guid : public TypeWrapper<UA_Guid, UA_TYPES_GUID> {
 public:
@@ -133,7 +122,7 @@ std::ostream& operator<<(std::ostream& os, const Guid& guid);
 
 /**
  * UA_ByteString wrapper class.
- * @ingroup TypeWrapper
+ * @ingroup Wrapper
  */
 class ByteString : public TypeWrapper<UA_ByteString, UA_TYPES_BYTESTRING> {
 public:
@@ -169,7 +158,7 @@ bool operator!=(std::string_view lhs, const ByteString& rhs) noexcept;
 
 /**
  * UA_XmlElement wrapper class.
- * @ingroup TypeWrapper
+ * @ingroup Wrapper
  */
 class XmlElement : public TypeWrapper<UA_XmlElement, UA_TYPES_XMLELEMENT> {
 public:
@@ -187,7 +176,7 @@ std::ostream& operator<<(std::ostream& os, const XmlElement& xmlElement);
 
 /**
  * UA_QualifiedName wrapper class.
- * @ingroup TypeWrapper
+ * @ingroup Wrapper
  */
 class QualifiedName : public TypeWrapper<UA_QualifiedName, UA_TYPES_QUALIFIEDNAME> {
 public:
@@ -208,7 +197,7 @@ public:
  * - `<country/region>` is the two letter ISO 3166 code for the country/region
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.5/
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.4/
- * @ingroup TypeWrapper
+ * @ingroup Wrapper
  */
 class LocalizedText : public TypeWrapper<UA_LocalizedText, UA_TYPES_LOCALIZEDTEXT> {
 public:
@@ -225,7 +214,7 @@ public:
 /**
  * UA_DiagnosticInfo wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.12
- * @ingroup TypeWrapper
+ * @ingroup Wrapper
  */
 class DiagnosticInfo : public TypeWrapper<UA_DiagnosticInfo, UA_TYPES_DIAGNOSTICINFO> {
 public:

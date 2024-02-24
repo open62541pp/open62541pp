@@ -124,9 +124,9 @@ TEST_CASE("TypeWrapper") {
 }
 
 TEST_CASE("asWrapper / asNative") {
-    class Int32Wrapper : public TypeWrapper<int32_t, UA_TYPES_INT32> {
+    class Int32Wrapper : public Wrapper<int32_t> {
     public:
-        using TypeWrapperBase::TypeWrapperBase;
+        using Wrapper<int32_t>::Wrapper;
 
         void increment() {
             auto& ref = *handle();

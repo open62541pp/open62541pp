@@ -43,7 +43,7 @@ struct VariantHandler;
 
 /**
  * UA_Variant wrapper class.
- * @ingroup TypeWrapper
+ * @ingroup Wrapper
  */
 class Variant : public TypeWrapper<UA_Variant, UA_TYPES_VARIANT> {
 public:

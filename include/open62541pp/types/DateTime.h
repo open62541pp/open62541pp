@@ -18,7 +18,7 @@ namespace opcua {
  * number of 100 nanosecond intervals since January 1, 1601 (UTC).
  *
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/5.2.2.5
- * @ingroup TypeWrapper
+ * @ingroup Wrapper
  */
 class DateTime : public TypeWrapper<UA_DateTime, UA_TYPES_DATETIME> {
 public:

@@ -69,7 +69,7 @@
 namespace opcua {
 
 /**
- * \addtogroup TypeWrapper
+ * @addtogroup Wrapper
  * @{
  */
 
@@ -1312,7 +1312,6 @@ public:
 /**
  * UA_CallMethodRequest wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.11.2
- * @ingroup TypeWrapper
  */
 class CallMethodRequest : public TypeWrapper<UA_CallMethodRequest, UA_TYPES_CALLMETHODREQUEST> {
 public:
@@ -1330,7 +1329,6 @@ public:
 /**
  * UA_CallMethodResult wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.11.2
- * @ingroup TypeWrapper
  */
 class CallMethodResult : public TypeWrapper<UA_CallMethodResult, UA_TYPES_CALLMETHODRESULT> {
 public:
@@ -1354,7 +1352,6 @@ public:
 /**
  * UA_CallRequest wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.11.2
- * @ingroup TypeWrapper
  */
 class CallRequest : public TypeWrapper<UA_CallRequest, UA_TYPES_CALLREQUEST> {
 public:
@@ -1371,7 +1368,6 @@ public:
 /**
  * UA_CallResponse wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.11.2
- * @ingroup TypeWrapper
  */
 class CallResponse : public TypeWrapper<UA_CallResponse, UA_TYPES_CALLRESPONSE> {
 public:
