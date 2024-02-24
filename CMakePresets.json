@@ -9,10 +9,7 @@
         {
             "name": "base",
             "hidden": true,
-            "binaryDir": "${sourceDir}/build/${presetName}",
-            "environment": {
-                "CMAKE_GENERATOR": "Ninja"
-            }
+            "binaryDir": "${sourceDir}/build/${presetName}"
         },
         {
             "name": "dev",
