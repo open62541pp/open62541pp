@@ -239,15 +239,12 @@ cd open62541pp
 # build
 mkdir build
 cd build
-cmake -DCMAKE_BUILD_TYPE=Debug -DUAPP_BUILD_EXAMPLES=ON -DUAPP_BUILD_TESTS=ON ..
-cmake --build .
+cmake -DCMAKE_BUILD_TYPE=Release -DUAPP_BUILD_EXAMPLES=ON -DUAPP_BUILD_TESTS=ON ..
+cmake --build .                   # single-configuration generator like Make or Ninja
+cmake --build . --config Release  # multi-configuration generator like Visual Studio, Xcode
 
 # run tests
 ctest --output-on-failure
-
-# generate coverage reports (text or html) with UAPP_ENABLE_COVERAGE option enabled
-cmake --build . --target open62541pp_coverage_report
-cmake --build . --target open62541pp_coverage_report_html
 
 # install to system
 cmake --install .
