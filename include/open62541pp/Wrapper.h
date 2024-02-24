@@ -17,8 +17,9 @@ namespace opcua {
  * - Use asNative(WrapperType&) to cast wrapper object references to native object references.
  *
  * According to the standard:
- * > One is a standard-layout class object (wrapper) and the other is the first non-static data
- * > member of that object (wrapped native type)
+ * > Two objects `a` and `b` are pointer-interconvertible if:
+ * > One is a standard-layout class object [wrapper] and the other is the first non-static data
+ * > member of that object [wrapped native type].
  * Derived classes must fulfill the requirements of standard-layout types to be convertible.
  * @see https://en.cppreference.com/w/cpp/language/static_cast#pointer-interconvertible
  */
