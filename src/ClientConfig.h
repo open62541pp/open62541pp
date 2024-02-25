@@ -38,8 +38,8 @@ public:
 
 private:
     UA_ClientConfig& config_;
-    CustomDataTypes customDataTypes_;
     CustomLogger customLogger_;
+    CustomDataTypes customDataTypes_;
 };
 
 }  // namespace opcua

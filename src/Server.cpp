@@ -23,9 +23,6 @@
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/Variant.h"
 
-#include "CustomAccessControl.h"
-#include "CustomDataTypes.h"
-#include "CustomLogger.h"
 #include "ServerConfig.h"
 #include "open62541_impl.h"
 
@@ -46,9 +43,7 @@ inline static UA_ServerConfig* getConfig(Server* server) noexcept {
 struct Server::Connection {
     explicit Connection(Server& parent)
         : server(UA_Server_new()),
-          config(*getConfig(server)) {
-        customAccessControl.setServer(parent);
-    }
+          config(*getConfig(server), parent) {}
 
     ~Connection() {
         // don't use stop method here because it might throw an exception
@@ -107,7 +102,6 @@ struct Server::Connection {
 
     UA_Server* server;
     ServerConfig config;
-    CustomAccessControl customAccessControl;
     detail::ServerContext context;
     std::atomic<bool> running{false};
     std::mutex mutexRun;
@@ -212,15 +206,15 @@ void Server::setProductUri(std::string_view uri) {
 }
 
 void Server::setAccessControl(AccessControlBase& accessControl) {
-    connection_->customAccessControl.setAccessControl(accessControl);
+    connection_->config.setAccessControl(accessControl);
 }
 
 void Server::setAccessControl(std::unique_ptr<AccessControlBase> accessControl) {
-    connection_->customAccessControl.setAccessControl(std::move(accessControl));
+    connection_->config.setAccessControl(std::move(accessControl));
 }
 
 std::vector<Session> Server::getSessions() const {
-    return connection_->customAccessControl.getSessions();
+    return connection_->config.getSessions();
 }
 
 std::vector<std::string> Server::getNamespaceArray() {

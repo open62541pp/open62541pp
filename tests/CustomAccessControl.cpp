@@ -1,6 +1,6 @@
-#include <doctest/doctest.h>
-
 #include <stdexcept>
+
+#include <doctest/doctest.h>
 
 #include "open62541pp/AccessControl.h"
 #include "open62541pp/Server.h"
@@ -47,43 +47,22 @@ TEST_CASE("CustomAccessControl") {
 
     CHECK(customAccessControl.getServer() == server);
 
-    SUBCASE("Set non-existing access control") {
-        CHECK_NOTHROW(customAccessControl.setAccessControl());
-        CHECK(customAccessControl.getAccessControl() == nullptr);
-        CHECK(native.context == nullptr);
-    }
-
     SUBCASE("Set custom access control by reference") {
         AccessControlTest accessControl;
-        CHECK_NOTHROW(customAccessControl.setAccessControl(accessControl));
+        CHECK_NOTHROW(customAccessControl.setAccessControl(native, accessControl));
         CHECK(customAccessControl.getAccessControl() == &accessControl);
         CHECK(native.context != nullptr);
     }
 
     SUBCASE("Set custom access control by unique_ptr") {
-        CHECK_NOTHROW(customAccessControl.setAccessControl(std::make_unique<AccessControlTest>()));
+        CHECK_NOTHROW(customAccessControl.setAccessControl(native, std::make_unique<AccessControlTest>()));
         CHECK(customAccessControl.getAccessControl() != nullptr);
         CHECK(native.context != nullptr);
     }
 
-    SUBCASE("Reset custom access control") {
-        AccessControlTest accessControl;
-        CHECK_NOTHROW(customAccessControl.setAccessControl(accessControl));
-        CHECK(native.context != nullptr);
-        auto* oldContext = native.context;
-
-        // manipulate native object
-        native.context = nullptr;
-
-        // reset should re-populate native object
-        CHECK_NOTHROW(customAccessControl.setAccessControl());
-        CHECK(native.context != nullptr);
-        CHECK(native.context == oldContext);
-    }
-
     SUBCASE("Generated native UA_AccessControl") {
         AccessControlTest accessControl;
-        CHECK_NOTHROW(customAccessControl.setAccessControl(accessControl));
+        CHECK_NOTHROW(customAccessControl.setAccessControl(native, accessControl));
         CHECK(customAccessControl.getAccessControl() == &accessControl);
 
         CHECK(native.context != nullptr);
@@ -266,7 +245,7 @@ TEST_CASE("CustomAccessControl") {
 
     SUBCASE("Store active sessions") {
         AccessControlTest accessControl;
-        CHECK_NOTHROW(customAccessControl.setAccessControl(accessControl));
+        CHECK_NOTHROW(customAccessControl.setAccessControl(native, accessControl));
         CHECK(customAccessControl.getSessions().empty());
 
         // activate session
@@ -292,45 +271,5 @@ TEST_CASE("CustomAccessControl") {
             nullptr  // session context
         );
         CHECK(customAccessControl.getSessions().empty());
-    }
-
-    SUBCASE("Copy user token policies to endpoints") {
-        CHECK(config->endpointsSize > 0);
-
-        // delete endpoint user identity tokens first
-        for (size_t i = 0; i < config->endpointsSize; ++i) {
-            auto& endpoint = config->endpoints[i];
-            UA_Array_delete(
-                endpoint.userIdentityTokens,
-                endpoint.userIdentityTokensSize,
-                &UA_TYPES[UA_TYPES_USERTOKENPOLICY]
-            );
-            endpoint.userIdentityTokens = (UA_UserTokenPolicy*)UA_EMPTY_ARRAY_SENTINEL;
-            endpoint.userIdentityTokensSize = 0;
-        }
-
-        AccessControlTest accessControl;
-        CHECK_NOTHROW(customAccessControl.setAccessControl(accessControl));
-
-        for (size_t i = 0; i < config->endpointsSize; ++i) {
-            auto& endpoint = config->endpoints[i];
-            CHECK(endpoint.userIdentityTokensSize == native.userTokenPoliciesSize);
-        }
-    }
-
-    SUBCASE("Use highest security policy to transfer user tokens") {
-        AccessControlTest accessControl(true, {{"user", "password"}});
-        CHECK_NOTHROW(customAccessControl.setAccessControl(accessControl));
-
-        CHECK(native.userTokenPoliciesSize == 2);
-
-        CHECK(native.userTokenPolicies[0].tokenType == UA_USERTOKENTYPE_ANONYMOUS);
-        CHECK(asWrapper<String>(native.userTokenPolicies[0].securityPolicyUri).empty());
-
-        CHECK(native.userTokenPolicies[1].tokenType == UA_USERTOKENTYPE_USERNAME);
-        CHECK(
-            asWrapper<String>(native.userTokenPolicies[1].securityPolicyUri).get() ==
-            "http://opcfoundation.org/UA/SecurityPolicy#None"
-        );
     }
 }

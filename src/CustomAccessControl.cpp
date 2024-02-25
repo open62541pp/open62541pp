@@ -328,50 +328,11 @@ void clear(UA_AccessControl& ac) noexcept {
 
 }  // namespace detail
 
-static void copyUserTokenPoliciesToEndpoints(UA_ServerConfig* config) {
-    // copy config->accessControl.userTokenPolicies -> config->endpoints[i].userIdentityTokens
-    for (size_t i = 0; i < config->endpointsSize; ++i) {
-        auto& endpoint = config->endpoints[i];  // NOLINT
-        detail::deallocateArray(
-            endpoint.userIdentityTokens,
-            endpoint.userIdentityTokensSize,
-            UA_TYPES[UA_TYPES_USERTOKENPOLICY]
-        );
-        endpoint.userIdentityTokens = detail::copyArray(
-            config->accessControl.userTokenPolicies,
-            config->accessControl.userTokenPoliciesSize,
-            UA_TYPES[UA_TYPES_USERTOKENPOLICY]
-        );
-        endpoint.userIdentityTokensSize = config->accessControl.userTokenPoliciesSize;
-    }
-}
-
-void CustomAccessControl::setServer(Server& server) noexcept {
-    server_ = &server;
-}
-
-void CustomAccessControl::setAccessControl() {
+void CustomAccessControl::setAccessControl(UA_AccessControl& ac) {
     if (getAccessControl() == nullptr) {
         return;
     }
 
-    auto* config = UA_Server_getConfig(getServer().handle());
-    assert(config != nullptr);
-
-    // use highest security policy to transfer user tokens
-    if (config->securityPoliciesSize > 0) {
-        const String highestSecurityPoliciyUri(
-            config->securityPolicies[config->securityPoliciesSize - 1].policyUri  // NOLINT
-        );
-        for (auto& userTokenPolicy : userTokenPolicies_) {
-            if (userTokenPolicy.getTokenType() != UserTokenType::Anonymous &&
-                userTokenPolicy.getSecurityPolicyUri().empty()) {
-                userTokenPolicy.getSecurityPolicyUri() = highestSecurityPoliciyUri;
-            }
-        }
-    }
-
-    auto& ac = config->accessControl;
     detail::clear(ac);
 
     ac.context = this;
@@ -397,20 +358,22 @@ void CustomAccessControl::setAccessControl() {
     ac.allowHistoryUpdateUpdateData = allowHistoryUpdateUpdateData;
     ac.allowHistoryUpdateDeleteRawModified = allowHistoryUpdateDeleteRawModified;
 #endif
-
-    copyUserTokenPoliciesToEndpoints(config);
 }
 
-void CustomAccessControl::setAccessControl(AccessControlBase& accessControl) {
+void CustomAccessControl::setAccessControl(
+    UA_AccessControl& native, AccessControlBase& accessControl
+) {
     userTokenPolicies_ = accessControl.getUserTokenPolicies();
     accessControl_ = &accessControl;
-    setAccessControl();
+    setAccessControl(native);
 }
 
-void CustomAccessControl::setAccessControl(std::unique_ptr<AccessControlBase> accessControl) {
+void CustomAccessControl::setAccessControl(
+    UA_AccessControl& native, std::unique_ptr<AccessControlBase> accessControl
+) {
     userTokenPolicies_ = accessControl->getUserTokenPolicies();
     accessControl_ = std::move(accessControl);
-    setAccessControl();
+    setAccessControl(native);
 }
 
 void CustomAccessControl::onSessionActivated(const NodeId& sessionId) {
@@ -428,6 +391,10 @@ std::vector<Session> CustomAccessControl::getSessions() const {
         result.emplace_back(*server_, std::move(id));
     }
     return result;
+}
+
+void CustomAccessControl::setServer(Server& server) noexcept {
+    server_ = &server;
 }
 
 Server& CustomAccessControl::getServer() noexcept {
