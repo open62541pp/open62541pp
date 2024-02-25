@@ -45,8 +45,7 @@ inline static UA_ServerConfig* getConfig(Server* server) noexcept {
 struct Server::Connection {
     explicit Connection(Server& parent)
         : server(UA_Server_new()),
-          customAccessControl(parent),
-          customLogger(getConfig(server)->logger) {}
+          customAccessControl(parent) {}
 
     ~Connection() {
         // don't use stop method here because it might throw an exception
@@ -176,7 +175,7 @@ Server::Server(
 #endif
 
 void Server::setLogger(Logger logger) {
-    connection_->customLogger.setLogger(std::move(logger));
+    connection_->customLogger.set(getConfig(this)->logger, std::move(logger));
 }
 
 // copy to endpoints needed, see: https://github.com/open62541/open62541/issues/1175

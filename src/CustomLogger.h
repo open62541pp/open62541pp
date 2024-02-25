@@ -8,13 +8,10 @@ namespace opcua {
 
 class CustomLogger {
 public:
-    explicit CustomLogger(UA_Logger& logger);
-
-    void setLogger(Logger logger);
-    const Logger& getLogger() const noexcept;
+    void set(UA_Logger& native, Logger logger);
+    const Logger& get() const noexcept;
 
 private:
-    UA_Logger& nativeLogger_;
     Logger logger_;
 };
 

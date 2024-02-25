@@ -144,8 +144,7 @@ static void stateCallback(
 
 struct Client::Connection {
     Connection()
-        : client(UA_Client_new()),
-          customLogger(getConfig(client)->logger) {
+        : client(UA_Client_new()) {
         applyDefaults();
     }
 
@@ -286,7 +285,7 @@ std::vector<EndpointDescription> Client::getEndpoints(std::string_view serverUrl
 }
 
 void Client::setLogger(Logger logger) {
-    connection_->customLogger.setLogger(std::move(logger));
+    connection_->customLogger.set(getConfig(this)->logger, std::move(logger));
 }
 
 void Client::setTimeout(uint32_t milliseconds) {
