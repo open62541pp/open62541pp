@@ -298,9 +298,7 @@ void Client::setSecurityMode(MessageSecurityMode mode) {
 }
 
 void Client::setCustomDataTypes(std::vector<DataType> dataTypes) {
-    connection_->customDataTypes.setCustomDataTypes(
-        getConfig(this)->customDataTypes, std::move(dataTypes)
-    );
+    connection_->customDataTypes.set(getConfig(this)->customDataTypes, std::move(dataTypes));
 }
 
 static void setStateCallback(Client& client, detail::ClientState state, StateCallback&& callback) {

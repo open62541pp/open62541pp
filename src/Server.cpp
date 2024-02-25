@@ -13,8 +13,8 @@
 #include "open62541pp/Event.h"
 #include "open62541pp/Node.h"
 #include "open62541pp/Session.h"
-#include "open62541pp/Wrapper.h"  // asWrapper
 #include "open62541pp/ValueBackend.h"
+#include "open62541pp/Wrapper.h"  // asWrapper
 #include "open62541pp/detail/Result.h"  // tryInvoke
 #include "open62541pp/detail/ServerContext.h"
 #include "open62541pp/services/Attribute.h"
@@ -232,9 +232,7 @@ uint16_t Server::registerNamespace(std::string_view uri) {
 }
 
 void Server::setCustomDataTypes(std::vector<DataType> dataTypes) {
-    connection_->customDataTypes.setCustomDataTypes(
-        getConfig(this)->customDataTypes, std::move(dataTypes)
-    );
+    connection_->customDataTypes.set(getConfig(this)->customDataTypes, std::move(dataTypes));
 }
 
 static void valueCallbackOnRead(

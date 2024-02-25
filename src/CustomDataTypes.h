@@ -12,7 +12,7 @@ namespace opcua {
 
 class CustomDataTypes {
 public:
-    void setCustomDataTypes(const UA_DataTypeArray*& array, std::vector<DataType> dataTypes) {
+    void set(const UA_DataTypeArray*& array, std::vector<DataType> dataTypes) {
         dataTypes_ = std::move(dataTypes);
         // NOLINTNEXTLINE
         array_ = std::unique_ptr<UA_DataTypeArray>(new UA_DataTypeArray{

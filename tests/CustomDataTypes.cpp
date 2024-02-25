@@ -12,7 +12,7 @@ TEST_CASE("CustomDataTypes") {
     CHECK(dataTypeArray == nullptr);
 
     CustomDataTypes customDataTypes;
-    customDataTypes.setCustomDataTypes(
+    customDataTypes.set(
         dataTypeArray,
         {
             DataType{UA_TYPES[UA_TYPES_INT32]},
