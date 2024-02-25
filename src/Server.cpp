@@ -26,6 +26,7 @@
 #include "CustomAccessControl.h"
 #include "CustomDataTypes.h"
 #include "CustomLogger.h"
+#include "ServerConfig.h"
 #include "open62541_impl.h"
 
 namespace opcua {
@@ -44,7 +45,8 @@ inline static UA_ServerConfig* getConfig(Server* server) noexcept {
 
 struct Server::Connection {
     explicit Connection(Server& parent)
-        : server(UA_Server_new()) {
+        : server(UA_Server_new()),
+          config(*getConfig(server)) {
         customAccessControl.setServer(parent);
     }
 
@@ -104,10 +106,9 @@ struct Server::Connection {
     }
 
     UA_Server* server;
-    detail::ServerContext context;
+    ServerConfig config;
     CustomAccessControl customAccessControl;
-    CustomDataTypes customDataTypes;
-    CustomLogger customLogger;
+    detail::ServerContext context;
     std::atomic<bool> running{false};
     std::mutex mutexRun;
 };
@@ -176,7 +177,7 @@ Server::Server(
 #endif
 
 void Server::setLogger(Logger logger) {
-    connection_->customLogger.set(getConfig(this)->logger, std::move(logger));
+    connection_->config.setLogger(std::move(logger));
 }
 
 // copy to endpoints needed, see: https://github.com/open62541/open62541/issues/1175
@@ -232,7 +233,7 @@ uint16_t Server::registerNamespace(std::string_view uri) {
 }
 
 void Server::setCustomDataTypes(std::vector<DataType> dataTypes) {
-    connection_->customDataTypes.set(getConfig(this)->customDataTypes, std::move(dataTypes));
+    connection_->config.setCustomDataTypes(std::move(dataTypes));
 }
 
 static void valueCallbackOnRead(

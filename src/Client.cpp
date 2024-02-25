@@ -19,8 +19,7 @@
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
 
-#include "CustomDataTypes.h"
-#include "CustomLogger.h"
+#include "ClientConfig.h"
 
 namespace opcua {
 
@@ -144,7 +143,8 @@ static void stateCallback(
 
 struct Client::Connection {
     Connection()
-        : client(UA_Client_new()) {
+        : client(UA_Client_new()),
+          config(*getConfig(client)) {
         applyDefaults();
     }
 
@@ -160,7 +160,6 @@ struct Client::Connection {
     Connection& operator=(Connection&&) noexcept = delete;
 
     void applyDefaults() {
-        auto* config = getConfig(client);
         config->clientContext = &context;
         config->stateCallback = stateCallback;
     }
@@ -192,9 +191,8 @@ struct Client::Connection {
     }
 
     UA_Client* client;
+    ClientConfig config;
     detail::ClientContext context;
-    CustomDataTypes customDataTypes;
-    CustomLogger customLogger;
     std::atomic<bool> running{false};
 };
 
@@ -285,7 +283,7 @@ std::vector<EndpointDescription> Client::getEndpoints(std::string_view serverUrl
 }
 
 void Client::setLogger(Logger logger) {
-    connection_->customLogger.set(getConfig(this)->logger, std::move(logger));
+    connection_->config.setLogger(std::move(logger));
 }
 
 void Client::setTimeout(uint32_t milliseconds) {
@@ -297,7 +295,7 @@ void Client::setSecurityMode(MessageSecurityMode mode) {
 }
 
 void Client::setCustomDataTypes(std::vector<DataType> dataTypes) {
-    connection_->customDataTypes.set(getConfig(this)->customDataTypes, std::move(dataTypes));
+    connection_->config.setCustomDataTypes(std::move(dataTypes));
 }
 
 static void setStateCallback(Client& client, detail::ClientState state, StateCallback&& callback) {
