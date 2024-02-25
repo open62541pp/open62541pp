@@ -346,9 +346,9 @@ static void copyUserTokenPoliciesToEndpoints(UA_ServerConfig* config) {
     }
 }
 
-CustomAccessControl::CustomAccessControl(Server& server)
-    : server_(server),
-      accessControl_{nullptr} {}
+void CustomAccessControl::setServer(Server& server) noexcept {
+    server_ = &server;
+}
 
 void CustomAccessControl::setAccessControl() {
     if (getAccessControl() == nullptr) {
@@ -422,15 +422,17 @@ void CustomAccessControl::onSessionClosed(const NodeId& sessionId) {
 }
 
 std::vector<Session> CustomAccessControl::getSessions() const {
+    assert(server_ != nullptr);
     std::vector<Session> result;
     for (auto id : sessionIds_) {
-        result.emplace_back(server_, std::move(id));
+        result.emplace_back(*server_, std::move(id));
     }
     return result;
 }
 
 Server& CustomAccessControl::getServer() noexcept {
-    return server_;
+    assert(server_ != nullptr);
+    return *server_;
 }
 
 AccessControlBase* CustomAccessControl::getAccessControl() noexcept {

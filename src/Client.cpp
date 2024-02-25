@@ -31,7 +31,7 @@ inline static UA_ClientConfig* getConfig(UA_Client* client) noexcept {
 }
 
 inline static UA_ClientConfig* getConfig(Client* client) noexcept {
-    return UA_Client_getConfig(client->handle());
+    return getConfig(client->handle());
 }
 
 /* --------------------------------------- State callbacks -------------------------------------- */

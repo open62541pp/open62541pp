@@ -37,7 +37,8 @@ public:
 TEST_CASE("CustomAccessControl") {
     Server server;
 
-    CustomAccessControl customAccessControl(server);
+    CustomAccessControl customAccessControl;
+    customAccessControl.setServer(server);
     auto* config = UA_Server_getConfig(server.handle());
     UA_AccessControl& native = config->accessControl;
 

@@ -26,7 +26,7 @@ class Session;
 
 class CustomAccessControl {
 public:
-    CustomAccessControl(Server& server);
+    void setServer(Server& server) noexcept;
 
     /// Apply custom access control (after UA_ServerConfig was changed).
     void setAccessControl();
@@ -46,8 +46,8 @@ public:
     AccessControlBase* getAccessControl() noexcept;
 
 private:
-    Server& server_;
-    std::variant<AccessControlBase*, std::unique_ptr<AccessControlBase>> accessControl_;
+    Server* server_{nullptr};
+    std::variant<AccessControlBase*, std::unique_ptr<AccessControlBase>> accessControl_{nullptr};
     std::vector<UserTokenPolicy> userTokenPolicies_;
     std::set<NodeId> sessionIds_;
 };

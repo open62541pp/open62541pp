@@ -37,15 +37,16 @@ inline static UA_ServerConfig* getConfig(UA_Server* server) noexcept {
 }
 
 inline static UA_ServerConfig* getConfig(Server* server) noexcept {
-    return UA_Server_getConfig(server->handle());
+    return getConfig(server->handle());
 }
 
 /* ----------------------------------------- Connection ----------------------------------------- */
 
 struct Server::Connection {
     explicit Connection(Server& parent)
-        : server(UA_Server_new()),
-          customAccessControl(parent) {}
+        : server(UA_Server_new()) {
+        customAccessControl.setServer(parent);
+    }
 
     ~Connection() {
         // don't use stop method here because it might throw an exception
