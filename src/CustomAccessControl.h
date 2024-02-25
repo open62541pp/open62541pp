@@ -15,7 +15,7 @@ namespace opcua {
 
 namespace detail {
 
-void clearUaAccessControl(UA_AccessControl& ac) noexcept;
+void clear(UA_AccessControl& ac) noexcept;
 
 }  // namespace detail
 

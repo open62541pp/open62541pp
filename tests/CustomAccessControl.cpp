@@ -43,7 +43,7 @@ TEST_CASE("CustomAccessControl") {
     UA_AccessControl& native = config->accessControl;
 
     // reset to empty UA_AccessControl
-    detail::clearUaAccessControl(native);
+    detail::clear(native);
 
     CHECK(customAccessControl.getServer() == server);
 

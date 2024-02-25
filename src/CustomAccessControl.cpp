@@ -313,7 +313,7 @@ static UA_Boolean allowHistoryUpdateDeleteRawModified(
 
 namespace detail {
 
-void clearUaAccessControl(UA_AccessControl& ac) noexcept {
+void clear(UA_AccessControl& ac) noexcept {
 #if UAPP_OPEN62541_VER_GE(1, 1)
     if (ac.clear != nullptr) {
         ac.clear(&ac);
@@ -372,7 +372,7 @@ void CustomAccessControl::setAccessControl() {
     }
 
     auto& ac = config->accessControl;
-    detail::clearUaAccessControl(ac);
+    detail::clear(ac);
 
     ac.context = this;
     ac.userTokenPoliciesSize = userTokenPolicies_.size();
