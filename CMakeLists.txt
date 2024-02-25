@@ -119,7 +119,6 @@ add_library(
     src/Client.cpp
     src/Crypto.cpp
     src/CustomAccessControl.cpp
-    src/CustomDataTypes.cpp
     src/CustomLogger.cpp
     src/DataType.cpp
     src/Event.cpp

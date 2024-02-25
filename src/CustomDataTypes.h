@@ -1,21 +1,29 @@
 #pragma once
 
 #include <memory>
+#include <utility>  // move
 #include <vector>
 
 #include "open62541pp/DataType.h"
+#include "open62541pp/Wrapper.h"  // asNative
 #include "open62541pp/open62541.h"
 
 namespace opcua {
 
 class CustomDataTypes {
 public:
-    explicit CustomDataTypes(const UA_DataTypeArray** arrayConfig);
-
-    void setCustomDataTypes(std::vector<DataType> dataTypes);
+    void setCustomDataTypes(const UA_DataTypeArray*& array, std::vector<DataType> dataTypes) {
+        dataTypes_ = std::move(dataTypes);
+        // NOLINTNEXTLINE
+        array_ = std::unique_ptr<UA_DataTypeArray>(new UA_DataTypeArray{
+            nullptr,  // next
+            dataTypes_.size(),
+            asNative(dataTypes_.data()),
+        });
+        array = array_.get();
+    }
 
 private:
-    const UA_DataTypeArray** arrayConfig_;
     std::unique_ptr<UA_DataTypeArray> array_;
     std::vector<DataType> dataTypes_;
 };

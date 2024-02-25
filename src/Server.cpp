@@ -46,7 +46,6 @@ struct Server::Connection {
     explicit Connection(Server& parent)
         : server(UA_Server_new()),
           customAccessControl(parent),
-          customDataTypes(&getConfig(server)->customDataTypes),
           customLogger(getConfig(server)->logger) {}
 
     ~Connection() {
@@ -233,7 +232,9 @@ uint16_t Server::registerNamespace(std::string_view uri) {
 }
 
 void Server::setCustomDataTypes(std::vector<DataType> dataTypes) {
-    connection_->customDataTypes.setCustomDataTypes(std::move(dataTypes));
+    connection_->customDataTypes.setCustomDataTypes(
+        getConfig(this)->customDataTypes, std::move(dataTypes)
+    );
 }
 
 static void valueCallbackOnRead(

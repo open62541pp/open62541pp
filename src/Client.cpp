@@ -145,7 +145,6 @@ static void stateCallback(
 struct Client::Connection {
     Connection()
         : client(UA_Client_new()),
-          customDataTypes(&getConfig(client)->customDataTypes),
           customLogger(getConfig(client)->logger) {
         applyDefaults();
     }
@@ -299,7 +298,9 @@ void Client::setSecurityMode(MessageSecurityMode mode) {
 }
 
 void Client::setCustomDataTypes(std::vector<DataType> dataTypes) {
-    connection_->customDataTypes.setCustomDataTypes(std::move(dataTypes));
+    connection_->customDataTypes.setCustomDataTypes(
+        getConfig(this)->customDataTypes, std::move(dataTypes)
+    );
 }
 
 static void setStateCallback(Client& client, detail::ClientState state, StateCallback&& callback) {
