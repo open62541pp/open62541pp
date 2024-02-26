@@ -6,7 +6,6 @@
 #include <utility>  // exchange, move, swap
 
 #include "open62541pp/Config.h"
-#include "open62541pp/TypeWrapper.h"  // asWrapper
 #include "open62541pp/overloads/comparison.h"
 #include "open62541pp/types/NodeId.h"
 
@@ -16,68 +15,65 @@ namespace opcua {
     return name == nullptr ? "" : name;
 }
 
-static void clearMembers(UA_DataType* native) {
-    if (native != nullptr) {
-        delete[] native->members;  // NOLINT
-        native->members = nullptr;
-        native->membersSize = 0;
-    }
+static void clearMembers(UA_DataType& native) noexcept {
+    delete[] native.members;  // NOLINT
+    native.members = nullptr;
+    native.membersSize = 0;
 }
 
-static void copyMembers(const DataTypeMember* members, size_t membersSize, UA_DataType* dst) {
-    if (dst != nullptr) {
-        dst->members = new DataTypeMember[membersSize];  // NOLINT
-        dst->membersSize = membersSize;
-        std::copy(
-            members,
-            members + membersSize,  // NOLINT
-            dst->members
-        );
-    }
+static void clear(UA_DataType& native) noexcept {
+    clearMembers(native);
 }
 
-static void copy(const UA_DataType* src, UA_DataType* dst) {
-    if (src != nullptr && dst != nullptr) {
-        clearMembers(dst);
-        *dst = *src;
-        copyMembers(dst->members, dst->membersSize, dst);
-    }
+static void copyMembers(const DataTypeMember* members, size_t membersSize, UA_DataType& dst) {
+    dst.members = new DataTypeMember[membersSize];  // NOLINT
+    dst.membersSize = membersSize;
+    std::copy(
+        members,
+        members + membersSize,  // NOLINT
+        dst.members
+    );
 }
 
-DataType::DataType(const UA_DataType& native) {
-    copy(&native, handle());
+[[nodiscard]] static UA_DataType copy(const UA_DataType& other) {
+    UA_DataType result{other};
+    copyMembers(other.members, other.membersSize, result);
+    return result;
 }
+
+DataType::DataType(const UA_DataType& native)
+    : Wrapper(copy(native)) {}
 
 DataType::DataType(UA_DataType&& native)
-    : native_(native) {}
+    : Wrapper(native) {}
 
 DataType::DataType(TypeIndex typeIndex)
-    : DataType(UA_TYPES[typeIndex])  // NOLINT
-{
+    : DataType(UA_TYPES[typeIndex]) {  // NOLINT
     assert(typeIndex < UA_TYPES_COUNT);
 }
 
 DataType::~DataType() {
-    clearMembers(handle());
+    clear(native());
 }
 
-DataType::DataType(const DataType& other) {
-    copy(other.handle(), handle());
-}
+DataType::DataType(const DataType& other)
+    : Wrapper(copy(other.native())) {}
 
 DataType::DataType(DataType&& other) noexcept
-    : native_(std::exchange(other.native_, {})) {}
+    : Wrapper(std::exchange(other.native(), {})) {}
 
 DataType& DataType::operator=(const DataType& other) {
     if (this != &other) {
-        copy(other.handle(), handle());
+        clear(native());
+        native() = copy(other.native());
     }
     return *this;
 }
 
 DataType& DataType::operator=(DataType&& other) noexcept {
     if (this != &other) {
-        std::swap(native_, other.native_);
+        clear(native());
+        native() = std::exchange(other.native(), {});
     }
     return *this;
 }
@@ -172,8 +168,8 @@ Span<const DataTypeMember> DataType::getMembers() const noexcept {
 
 void DataType::setMembers(Span<const DataTypeMember> members) {
     assert(members.size() < (1U << 8U));
-    clearMembers(handle());
-    copyMembers(members.data(), members.size(), handle());
+    clearMembers(native());
+    copyMembers(members.data(), members.size(), native());
 }
 
 bool operator==(const UA_DataTypeMember& lhs, const UA_DataTypeMember& rhs) noexcept {

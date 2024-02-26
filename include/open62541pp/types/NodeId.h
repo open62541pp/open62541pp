@@ -29,7 +29,7 @@ enum class NodeIdType : uint8_t {
 
 /**
  * UA_NodeId wrapper class.
- * @ingroup TypeWrapper
+ * @ingroup Wrapper
  */
 class NodeId : public TypeWrapper<UA_NodeId, UA_TYPES_NODEID> {
 public:
@@ -125,7 +125,7 @@ public:
 
 /**
  * UA_ExpandedNodeId wrapper class.
- * @ingroup TypeWrapper
+ * @ingroup Wrapper
  */
 class ExpandedNodeId : public TypeWrapper<UA_ExpandedNodeId, UA_TYPES_EXPANDEDNODEID> {
 public:

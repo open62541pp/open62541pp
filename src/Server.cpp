@@ -13,7 +13,7 @@
 #include "open62541pp/Event.h"
 #include "open62541pp/Node.h"
 #include "open62541pp/Session.h"
-#include "open62541pp/TypeWrapper.h"
+#include "open62541pp/Wrapper.h"  // asWrapper
 #include "open62541pp/ValueBackend.h"
 #include "open62541pp/detail/Result.h"  // tryInvoke
 #include "open62541pp/detail/ServerContext.h"

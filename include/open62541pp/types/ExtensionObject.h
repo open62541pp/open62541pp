@@ -35,7 +35,7 @@ enum class ExtensionObjectEncoding {
  *
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/5.1.6
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/5.2.2.15
- * @ingroup TypeWrapper
+ * @ingroup Wrapper
  */
 class ExtensionObject : public TypeWrapper<UA_ExtensionObject, UA_TYPES_EXTENSIONOBJECT> {
 public:

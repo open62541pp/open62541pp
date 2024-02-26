@@ -8,7 +8,7 @@
 
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Span.h"
-#include "open62541pp/TypeWrapper.h"  // isTypeWrapper
+#include "open62541pp/Wrapper.h"  // asWrapper, isWrapper
 #include "open62541pp/open62541.h"
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/Variant.h"
@@ -17,7 +17,7 @@ namespace opcua::services::detail {
 
 template <typename WrapperType>
 struct WrapResponse {
-    static_assert(opcua::detail::isTypeWrapper<WrapperType>);
+    static_assert(opcua::detail::isWrapper<WrapperType>);
 
     template <typename Response = typename WrapperType::NativeType>
     [[nodiscard]] constexpr WrapperType operator()(Response&& value) noexcept {
@@ -27,7 +27,7 @@ struct WrapResponse {
 
 template <typename Response>
 inline const UA_ResponseHeader& getResponseHeader(const Response& response) noexcept {
-    if constexpr (opcua::detail::isTypeWrapper<Response>) {
+    if constexpr (opcua::detail::isWrapper<Response>) {
         return response->responseHeader;
     } else {
         return response.responseHeader;
@@ -47,7 +47,7 @@ inline void checkServiceResult(const Response& response) {
 template <typename Response>
 inline auto getResults(Response& response) {
     checkServiceResult(response);
-    if constexpr (opcua::detail::isTypeWrapper<Response>) {
+    if constexpr (opcua::detail::isWrapper<Response>) {
         return response.getResults();
     } else {
         return Span(response.results, response.resultsSize);

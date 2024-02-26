@@ -15,7 +15,7 @@ namespace opcua {
 /**
  * UA_DataValue wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.11
- * @ingroup TypeWrapper
+ * @ingroup Wrapper
  */
 class DataValue : public TypeWrapper<UA_DataValue, UA_TYPES_DATAVALUE> {
 public:

@@ -4,6 +4,7 @@
 
 #include "open62541pp/Common.h"
 #include "open62541pp/Span.h"
+#include "open62541pp/Wrapper.h"
 #include "open62541pp/open62541.h"
 
 namespace opcua {
@@ -16,10 +17,8 @@ using DataTypeMember = UA_DataTypeMember;
 /**
  * UA_DataType wrapper class.
  */
-class DataType {
+class DataType : public Wrapper<UA_DataType> {
 public:
-    using NativeType = UA_DataType;
-
     constexpr DataType() = default;
 
     explicit DataType(const UA_DataType& native);
@@ -33,16 +32,6 @@ public:
 
     DataType& operator=(const DataType& other);
     DataType& operator=(DataType&& other) noexcept;
-
-    /// Implicit conversion to UA_DataType.
-    constexpr operator UA_DataType&() noexcept {  // NOLINT
-        return native_;
-    }
-
-    /// Implicit conversion to UA_DataType.
-    constexpr operator const UA_DataType&() const noexcept {  // NOLINT
-        return native_;
-    }
 
     const char* getTypeName() const noexcept;
     void setTypeName(const char* typeName) noexcept;
@@ -69,17 +58,6 @@ public:
 
     Span<const DataTypeMember> getMembers() const noexcept;
     void setMembers(Span<const DataTypeMember> members);
-
-    constexpr UA_DataType* handle() noexcept {
-        return &native_;
-    }
-
-    constexpr const UA_DataType* handle() const noexcept {
-        return &native_;
-    }
-
-private:
-    UA_DataType native_{};
 };
 
 bool operator==(const UA_DataTypeMember& lhs, const UA_DataTypeMember& rhs) noexcept;

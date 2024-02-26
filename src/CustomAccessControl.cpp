@@ -15,7 +15,7 @@
 #include "open62541pp/Logger.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/Session.h"
-#include "open62541pp/TypeWrapper.h"  // asWrapper, asNative
+#include "open62541pp/Wrapper.h"  // asWrapper, asNative
 #include "open62541pp/detail/helper.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/DataValue.h"
