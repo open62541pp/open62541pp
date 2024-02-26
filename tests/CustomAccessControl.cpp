@@ -55,7 +55,9 @@ TEST_CASE("CustomAccessControl") {
     }
 
     SUBCASE("Set custom access control by unique_ptr") {
-        CHECK_NOTHROW(customAccessControl.setAccessControl(native, std::make_unique<AccessControlTest>()));
+        CHECK_NOTHROW(
+            customAccessControl.setAccessControl(native, std::make_unique<AccessControlTest>())
+        );
         CHECK(customAccessControl.getAccessControl() != nullptr);
         CHECK(native.context != nullptr);
     }
