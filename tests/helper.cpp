@@ -3,7 +3,6 @@
 
 #include <doctest/doctest.h>
 
-#include "open62541_impl.h"  // UA_String_clear
 #include "open62541pp/detail/helper.h"
 
 using namespace opcua;
@@ -76,7 +75,7 @@ TEST_CASE("Alloc UA_String from string_view") {
     auto str = detail::allocNativeString(sv);
     CHECK(str.length == 7);
     CHECK(std::strncmp((char*)str.data, sv.data(), 7) == 0);  // NOLINT
-    UA_String_clear(&str);
+    UA_clear(&str, &UA_TYPES[UA_TYPES_STRING]);
 }
 
 TEST_CASE("Alloc UA_String from non-null-terminated string_view") {
@@ -85,14 +84,14 @@ TEST_CASE("Alloc UA_String from non-null-terminated string_view") {
     auto uaString = detail::allocNativeString(sv);
     CHECK(uaString.length == 4);
     CHECK(std::strncmp((char*)uaString.data, sv.data(), 4) == 0);  // NOLINT
-    UA_String_clear(&uaString);
+    UA_clear(&uaString, &UA_TYPES[UA_TYPES_STRING]);
 }
 
 TEST_CASE("String conversion UA_String -> string") {
     SUBCASE("Test string") {
         UA_String str = UA_STRING_ALLOC("test123");
         CHECK(detail::toString(str) == "test123");
-        UA_String_clear(&str);
+        UA_clear(&str, &UA_TYPES[UA_TYPES_STRING]);
     }
 
     SUBCASE("Null string") {
@@ -103,6 +102,6 @@ TEST_CASE("String conversion UA_String -> string") {
     SUBCASE("Empty string") {
         UA_String str = UA_STRING_ALLOC("");
         CHECK(detail::toString(str) == "");
-        UA_String_clear(&str);
+        UA_clear(&str, &UA_TYPES[UA_TYPES_STRING]);
     }
 }

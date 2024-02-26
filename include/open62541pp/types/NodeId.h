@@ -11,7 +11,7 @@
 #include "open62541pp/NodeIds.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/helper.h"
-#include "open62541pp/open62541.h"
+#include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/types/Builtin.h"
 
 namespace opcua {

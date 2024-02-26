@@ -18,6 +18,7 @@
 #include "open62541pp/detail/ConnectionRegistry.h"
 #include "open62541pp/detail/Result.h"  // tryInvoke
 #include "open62541pp/detail/ServerContext.h"
+#include "open62541pp/detail/open62541/server.h"
 #include "open62541pp/services/Attribute.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
@@ -25,7 +26,6 @@
 #include "open62541pp/types/Variant.h"
 
 #include "ServerConfig.h"
-#include "open62541_impl.h"
 
 namespace opcua {
 

@@ -7,8 +7,6 @@
 #include "open62541pp/Crypto.h"
 #include "open62541pp/Server.h"
 
-#include "open62541_impl.h"
-
 #include "helper/Runner.h"
 
 using namespace opcua;

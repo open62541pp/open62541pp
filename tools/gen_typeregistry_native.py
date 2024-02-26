@@ -24,7 +24,7 @@ TEMPLATE_HEADER = """
 #pragma once
 
 #include "open62541pp/TypeRegistry.h"
-#include "open62541pp/open62541.h"
+#include "open62541pp/detail/open62541/common.h"
 
 namespace opcua {{
 

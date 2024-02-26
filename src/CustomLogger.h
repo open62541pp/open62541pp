@@ -1,8 +1,7 @@
 #pragma once
 
 #include "open62541pp/Logger.h"
-
-#include "open62541_impl.h"  // UA_Logger
+#include "open62541pp/detail/open62541/common.h"  // UA_Logger
 
 namespace opcua {
 
