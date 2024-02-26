@@ -159,7 +159,12 @@ private:
 
 /* ---------------------------------------------------------------------------------------------- */
 
-bool operator==(const Server& lhs, const Server& rhs) noexcept;
-bool operator!=(const Server& lhs, const Server& rhs) noexcept;
+inline bool operator==(const Server& lhs, const Server& rhs) noexcept {
+    return (lhs.handle() == rhs.handle());
+}
+
+inline bool operator!=(const Server& lhs, const Server& rhs) noexcept {
+    return !(lhs == rhs);
+}
 
 }  // namespace opcua

@@ -64,8 +64,6 @@ bool operator==(const UA_DataTypeMember& lhs, const UA_DataTypeMember& rhs) noex
 bool operator!=(const UA_DataTypeMember& lhs, const UA_DataTypeMember& rhs) noexcept;
 bool operator==(const UA_DataType& lhs, const UA_DataType& rhs) noexcept;
 bool operator!=(const UA_DataType& lhs, const UA_DataType& rhs) noexcept;
-bool operator==(const DataType& lhs, const DataType& rhs) noexcept;
-bool operator!=(const DataType& lhs, const DataType& rhs) noexcept;
 
 /* ------------------------------------------- Helper ------------------------------------------- */
 

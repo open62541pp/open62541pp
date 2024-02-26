@@ -381,16 +381,6 @@ const UA_Server* Server::handle() const noexcept {
     return connection_->server;
 }
 
-/* ---------------------------------------------------------------------------------------------- */
-
-bool operator==(const Server& lhs, const Server& rhs) noexcept {
-    return (lhs.handle() == rhs.handle());
-}
-
-bool operator!=(const Server& lhs, const Server& rhs) noexcept {
-    return !(lhs == rhs);
-}
-
 /* ------------------------------------------- Context ------------------------------------------ */
 
 namespace detail {

@@ -2,7 +2,6 @@
 
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
-#include "open62541pp/TypeWrapper.h"  // operator==
 #include "open62541pp/detail/open62541/config.h"
 #include "open62541pp/detail/open62541/server.h"
 #include "open62541pp/types/DateTime.h"

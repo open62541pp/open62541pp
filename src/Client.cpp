@@ -424,16 +424,6 @@ const UA_Client* Client::handle() const noexcept {
     return connection_->client;
 }
 
-/* ---------------------------------------------------------------------------------------------- */
-
-bool operator==(const Client& lhs, const Client& rhs) noexcept {
-    return (lhs.handle() == rhs.handle());
-}
-
-bool operator!=(const Client& lhs, const Client& rhs) noexcept {
-    return !(lhs == rhs);
-}
-
 /* ------------------------------------------- Context ------------------------------------------ */
 
 namespace detail {
