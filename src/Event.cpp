@@ -6,6 +6,7 @@
 #include "open62541pp/detail/open62541/config.h"
 #include "open62541pp/detail/open62541/server.h"
 #include "open62541pp/types/DateTime.h"
+#include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"
 
 namespace opcua {
