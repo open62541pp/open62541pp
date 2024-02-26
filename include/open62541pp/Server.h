@@ -16,6 +16,7 @@
 
 // forward declaration
 struct UA_Server;
+struct UA_ServerConfig;
 
 namespace opcua {
 class AccessControlBase;

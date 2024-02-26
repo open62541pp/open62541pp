@@ -13,10 +13,8 @@
 #include "open62541pp/Logger.h"
 #include "open62541pp/Span.h"
 #include "open62541pp/Subscription.h"
+#include "open62541pp/open62541.h"  // UA_Client, UA_ClientConfig
 #include "open62541pp/types/NodeId.h"
-
-// forward declaration
-struct UA_Client;
 
 namespace opcua {
 class ApplicationDescription;
