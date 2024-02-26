@@ -123,6 +123,30 @@ public:
     std::string toString() const;
 };
 
+inline bool operator==(const UA_NodeId& lhs, const UA_NodeId& rhs) noexcept {
+    return UA_NodeId_equal(&lhs, &rhs);
+}
+
+inline bool operator!=(const UA_NodeId& lhs, const UA_NodeId& rhs) noexcept {
+    return !(lhs == rhs);
+}
+
+inline bool operator<(const UA_NodeId& lhs, const UA_NodeId& rhs) noexcept {
+    return UA_NodeId_order(&lhs, &rhs) == UA_ORDER_LESS;
+}
+
+inline bool operator>(const UA_NodeId& lhs, const UA_NodeId& rhs) noexcept {
+    return UA_NodeId_order(&lhs, &rhs) == UA_ORDER_MORE;
+}
+
+inline bool operator<=(const UA_NodeId& lhs, const UA_NodeId& rhs) noexcept {
+    return (lhs < rhs) || (lhs == rhs);
+}
+
+inline bool operator>=(const UA_NodeId& lhs, const UA_NodeId& rhs) noexcept {
+    return (lhs > rhs) || (lhs == rhs);
+}
+
 /**
  * UA_ExpandedNodeId wrapper class.
  * @ingroup Wrapper
@@ -150,6 +174,30 @@ public:
     /// @see https://reference.opcfoundation.org/Core/Part6/v105/docs/5.3.1.11
     std::string toString() const;
 };
+
+inline bool operator==(const UA_ExpandedNodeId& lhs, const UA_ExpandedNodeId& rhs) noexcept {
+    return UA_ExpandedNodeId_equal(&lhs, &rhs);
+}
+
+inline bool operator!=(const UA_ExpandedNodeId& lhs, const UA_ExpandedNodeId& rhs) noexcept {
+    return !(lhs == rhs);
+}
+
+inline bool operator<(const UA_ExpandedNodeId& lhs, const UA_ExpandedNodeId& rhs) noexcept {
+    return UA_ExpandedNodeId_order(&lhs, &rhs) == UA_ORDER_LESS;
+}
+
+inline bool operator>(const UA_ExpandedNodeId& lhs, const UA_ExpandedNodeId& rhs) noexcept {
+    return UA_ExpandedNodeId_order(&lhs, &rhs) == UA_ORDER_MORE;
+}
+
+inline bool operator<=(const UA_ExpandedNodeId& lhs, const UA_ExpandedNodeId& rhs) noexcept {
+    return (lhs < rhs) || (lhs == rhs);
+}
+
+inline bool operator>=(const UA_ExpandedNodeId& lhs, const UA_ExpandedNodeId& rhs) noexcept {
+    return (lhs > rhs) || (lhs == rhs);
+}
 
 }  // namespace opcua
 
