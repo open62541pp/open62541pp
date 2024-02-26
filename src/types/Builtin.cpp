@@ -29,22 +29,6 @@ std::string_view String::get() const noexcept {
     return detail::toStringView(*handle());
 }
 
-bool operator==(const String& lhs, std::string_view rhs) noexcept {
-    return (lhs.get() == rhs);
-}
-
-bool operator!=(const String& lhs, std::string_view rhs) noexcept {
-    return (lhs.get() != rhs);
-}
-
-bool operator==(std::string_view lhs, const String& rhs) noexcept {
-    return (lhs == rhs.get());
-}
-
-bool operator!=(std::string_view lhs, const String& rhs) noexcept {
-    return (lhs != rhs.get());
-}
-
 std::ostream& operator<<(std::ostream& os, const String& string) {
     os << string.get();
     return os;
@@ -141,22 +125,6 @@ std::string ByteString::toBase64() const {
 void ByteString::toFile(const fs::path& filepath) const {
     std::ofstream fp(filepath, std::ios::binary);
     fp.write(reinterpret_cast<char*>(handle()->data), handle()->length);  // NOLINT
-}
-
-bool operator==(const ByteString& lhs, std::string_view rhs) noexcept {
-    return (lhs.get() == rhs);
-}
-
-bool operator!=(const ByteString& lhs, std::string_view rhs) noexcept {
-    return (lhs.get() != rhs);
-}
-
-bool operator==(std::string_view lhs, const ByteString& rhs) noexcept {
-    return (lhs == rhs.get());
-}
-
-bool operator!=(std::string_view lhs, const ByteString& rhs) noexcept {
-    return (lhs != rhs.get());
 }
 
 /* ----------------------------------------- XmlElement ----------------------------------------- */
