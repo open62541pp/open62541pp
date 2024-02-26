@@ -17,6 +17,7 @@
 #include "open62541pp/Session.h"
 #include "open62541pp/Wrapper.h"  // asWrapper, asNative
 #include "open62541pp/detail/helper.h"
+#include "open62541pp/detail/traits.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/DateTime.h"
@@ -403,13 +404,13 @@ Server& CustomAccessControl::getServer() noexcept {
 }
 
 AccessControlBase* CustomAccessControl::getAccessControl() noexcept {
-    if (auto* ptr = std::get_if<0>(&accessControl_); ptr != nullptr) {
-        return *ptr;
-    }
-    if (auto* ptr = std::get_if<1>(&accessControl_); ptr != nullptr) {
-        return ptr->get();
-    }
-    return nullptr;
+    return std::visit(
+        detail::Overload{
+            [](AccessControlBase* ptr) { return ptr; },
+            [](std::unique_ptr<AccessControlBase>& ptr) { return ptr.get(); }
+        },
+        accessControl_
+    );
 }
 
 }  // namespace opcua
