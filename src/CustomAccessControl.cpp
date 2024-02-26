@@ -51,7 +51,7 @@ inline static Session getSession(UA_AccessControl* ac, const UA_NodeId* sessionI
     return {getServer(ac), asWrapperRef<NodeId>(sessionId)};
 }
 
-inline static AccessControlBase& getAccessControl(UA_AccessControl* ac) noexcept {
+inline static AccessControlBase& getAccessControl(UA_AccessControl* ac) {
     auto* accessControl = getContext(ac).getAccessControl();
     assert(accessControl != nullptr);
     return *accessControl;
@@ -403,6 +403,7 @@ Server& CustomAccessControl::getServer() noexcept {
     return *server_;
 }
 
+// NOLINTNEXTLINE, https://stackoverflow.com/questions/53946674/noexcept-visitation-for-stdvariant
 AccessControlBase* CustomAccessControl::getAccessControl() noexcept {
     return std::visit(
         detail::Overload{
