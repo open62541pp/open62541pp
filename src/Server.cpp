@@ -120,7 +120,7 @@ static void applyDefaults(UA_ServerConfig* config) {
 }
 
 Server::Server(uint16_t port, ByteString certificate, Logger logger)
-    : connection_(std::make_shared<Connection>(*this)) {
+    : connection_(std::make_unique<Connection>(*this)) {
     // The logger should be set as soon as possible, ideally even before UA_ServerConfig_setMinimal.
     // However, the logger gets overwritten by UA_ServerConfig_setMinimal() in older versions of
     // open62541. The best we can do in this case, is to first call UA_ServerConfig_setMinimal and
@@ -151,7 +151,7 @@ Server::Server(
     Span<const ByteString> issuerList,
     Span<const ByteString> revocationList
 )
-    : connection_(std::make_shared<Connection>(*this)) {
+    : connection_(std::make_unique<Connection>(*this)) {
     const auto status = UA_ServerConfig_setDefaultWithSecurityPolicies(
         getConfig(this),
         port,
@@ -169,6 +169,8 @@ Server::Server(
     setAccessControl(std::make_unique<AccessControlDefault>());
 }
 #endif
+
+Server::~Server() = default;
 
 void Server::setLogger(Logger logger) {
     connection_->config.setLogger(std::move(logger));

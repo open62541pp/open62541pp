@@ -86,6 +86,8 @@ public:
     );
 #endif
 
+    ~Server();
+
     /// Set custom logging function.
     /// Does nothing if the passed function is empty or a nullptr.
     void setLogger(Logger logger);
@@ -154,7 +156,7 @@ private:
     friend detail::ServerContext& detail::getContext(Server& server) noexcept;
 
     struct Connection;
-    std::shared_ptr<Connection> connection_;
+    std::unique_ptr<Connection> connection_;
 };
 
 /* ---------------------------------------------------------------------------------------------- */
