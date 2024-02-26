@@ -9,7 +9,7 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Span.h"
 #include "open62541pp/Wrapper.h"  // asWrapper, isWrapper
-#include "open62541pp/open62541.h"
+#include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/Variant.h"
 

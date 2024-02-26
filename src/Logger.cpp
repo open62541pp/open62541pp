@@ -5,8 +5,9 @@
 
 #include "open62541pp/Client.h"
 #include "open62541pp/Server.h"
-
-#include "open62541_impl.h"
+#include "open62541pp/detail/open62541/common.h"
+#include "open62541pp/detail/open62541/client.h"
+#include "open62541pp/detail/open62541/server.h"
 
 namespace opcua {
 

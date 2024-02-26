@@ -1,7 +1,7 @@
 #include <doctest/doctest.h>
 
 #include "open62541pp/DataType.h"
-#include "open62541pp/open62541.h"
+#include "open62541pp/detail/open62541/common.h"
 
 #include "CustomDataTypes.h"
 

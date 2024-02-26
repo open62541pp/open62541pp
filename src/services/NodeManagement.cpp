@@ -7,8 +7,7 @@
 #include "open62541pp/detail/Result.h"  // tryInvoke
 #include "open62541pp/detail/ServerContext.h"
 #include "open62541pp/detail/helper.h"
-
-#include "../open62541_impl.h"
+#include "open62541pp/detail/open62541/server.h"
 
 namespace opcua::services {
 

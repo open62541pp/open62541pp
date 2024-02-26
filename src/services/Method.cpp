@@ -3,9 +3,8 @@
 #ifdef UA_ENABLE_METHODCALLS
 
 #include "open62541pp/Server.h"
+#include "open62541pp/detail/open62541/server.h"
 #include "open62541pp/types/Composed.h"
-
-#include "../open62541_impl.h"
 
 namespace opcua::services {
 

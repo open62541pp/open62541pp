@@ -6,7 +6,7 @@
 #include "open62541pp/Client.h"
 #include "open62541pp/Span.h"
 #include "open62541pp/async.h"
-#include "open62541pp/open62541.h"
+#include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/services/detail/ClientService.h"
 #include "open62541pp/services/detail/RequestHandling.h"
 #include "open62541pp/services/detail/ResponseHandling.h"

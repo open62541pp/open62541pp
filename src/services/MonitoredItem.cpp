@@ -14,14 +14,14 @@
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/ClientContext.h"
 #include "open62541pp/detail/ServerContext.h"
+#include "open62541pp/detail/open62541/client.h"
+#include "open62541pp/detail/open62541/server.h"
 #include "open62541pp/services/detail/ClientService.h"
 #include "open62541pp/services/detail/RequestHandling.h"
 #include "open62541pp/services/detail/ResponseHandling.h"
 #include "open62541pp/types/Composed.h"  // ReadValueId
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/Variant.h"
-
-#include "../open62541_impl.h"
 
 namespace opcua::services {
 

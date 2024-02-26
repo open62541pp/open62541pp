@@ -6,8 +6,6 @@
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/helper.h"  // detail::toString
 
-#include "open62541_impl.h"
-
 using namespace opcua;
 
 TEST_CASE("TypeWrapper") {
@@ -52,7 +50,7 @@ TEST_CASE("TypeWrapper") {
         UA_String str = UA_STRING_ALLOC("test");
         wrapper = str;
         CHECK(detail::toString(*wrapper.handle()) == "test");
-        UA_String_clear(&str);
+        UA_clear(&str, &UA_TYPES[UA_TYPES_STRING]);
     }
 
     SUBCASE("Move constructor") {
@@ -119,7 +117,7 @@ TEST_CASE("TypeWrapper") {
         CHECK(wrapper.handle()->data != nullptr);
         CHECK(str.data == nullptr);
 
-        // UA_String_clear not necessary, because data is now owned by wrapper
+        // UA_clear not necessary, because data is now owned by wrapper
     }
 }
 

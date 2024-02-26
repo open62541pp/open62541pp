@@ -9,7 +9,8 @@
 #include "open62541pp/Config.h"
 #include "open62541pp/detail/ContextMap.h"
 #include "open62541pp/detail/ExceptionCatcher.h"
-#include "open62541pp/open62541.h"
+#include "open62541pp/detail/open62541/config.h"
+#include "open62541pp/detail/open62541/client.h"
 #include "open62541pp/services/detail/MonitoredItemContext.h"
 #include "open62541pp/services/detail/SubscriptionContext.h"
 
