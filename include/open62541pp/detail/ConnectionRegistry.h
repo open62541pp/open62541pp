@@ -36,8 +36,8 @@ public:
     }
 
 private:
-    inline static std::map<Handle, std::weak_ptr<Connection>> instances;
-    inline static std::mutex instancesMutex;
+    inline static std::map<Handle, std::weak_ptr<Connection>> instances;  // NOLINT
+    inline static std::mutex instancesMutex;  // NOLINT
 
     static void removeExpiredInstances() {
         for (auto it = instances.begin(); it != instances.end();) {
