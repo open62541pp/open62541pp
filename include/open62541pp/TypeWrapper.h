@@ -131,38 +131,4 @@ inline constexpr bool isTypeWrapper = IsTypeWrapper<T>::value;
 
 }  // namespace detail
 
-/* ----------------------------------------- Comparison ----------------------------------------- */
-
-// generate from UA_* type comparison
-
-template <typename T, typename = std::enable_if_t<detail::isTypeWrapper<T>>>
-inline bool operator==(const T& lhs, const T& rhs) noexcept {
-    return (*lhs.handle() == *rhs.handle());
-}
-
-template <typename T, typename = std::enable_if_t<detail::isTypeWrapper<T>>>
-inline bool operator!=(const T& lhs, const T& rhs) noexcept {
-    return (*lhs.handle() != *rhs.handle());
-}
-
-template <typename T, typename = std::enable_if_t<detail::isTypeWrapper<T>>>
-inline bool operator<(const T& lhs, const T& rhs) noexcept {
-    return (*lhs.handle() < *rhs.handle());
-}
-
-template <typename T, typename = std::enable_if_t<detail::isTypeWrapper<T>>>
-inline bool operator>(const T& lhs, const T& rhs) noexcept {
-    return (*lhs.handle() > *rhs.handle());
-}
-
-template <typename T, typename = std::enable_if_t<detail::isTypeWrapper<T>>>
-inline bool operator<=(const T& lhs, const T& rhs) noexcept {
-    return (*lhs.handle() <= *rhs.handle());
-}
-
-template <typename T, typename = std::enable_if_t<detail::isTypeWrapper<T>>>
-inline bool operator>=(const T& lhs, const T& rhs) noexcept {
-    return (*lhs.handle() >= *rhs.handle());
-}
-
 }  // namespace opcua

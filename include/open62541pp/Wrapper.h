@@ -104,6 +104,38 @@ inline constexpr bool isWrapper = IsWrapper<T>::value;
 
 }  // namespace detail
 
+/* ----------------------------------------- Comparison ----------------------------------------- */
+
+template <typename T, typename = std::enable_if_t<detail::isWrapper<T>>>
+constexpr bool operator==(const T& lhs, const T& rhs) {
+    return (*lhs.handle() == *rhs.handle());
+}
+
+template <typename T, typename = std::enable_if_t<detail::isWrapper<T>>>
+constexpr bool operator!=(const T& lhs, const T& rhs) {
+    return (*lhs.handle() != *rhs.handle());
+}
+
+template <typename T, typename = std::enable_if_t<detail::isWrapper<T>>>
+constexpr bool operator<(const T& lhs, const T& rhs) {
+    return (*lhs.handle() < *rhs.handle());
+}
+
+template <typename T, typename = std::enable_if_t<detail::isWrapper<T>>>
+constexpr bool operator>(const T& lhs, const T& rhs) {
+    return (*lhs.handle() > *rhs.handle());
+}
+
+template <typename T, typename = std::enable_if_t<detail::isWrapper<T>>>
+constexpr bool operator<=(const T& lhs, const T& rhs) {
+    return (*lhs.handle() <= *rhs.handle());
+}
+
+template <typename T, typename = std::enable_if_t<detail::isWrapper<T>>>
+constexpr bool operator>=(const T& lhs, const T& rhs) {
+    return (*lhs.handle() >= *rhs.handle());
+}
+
 /* ------------------------------ Cast native type to wrapper type ------------------------------ */
 
 namespace detail {
