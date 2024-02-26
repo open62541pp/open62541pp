@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <memory>
+#include <optional>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -13,12 +14,10 @@
 #include "open62541pp/Subscription.h"
 #include "open62541pp/types/NodeId.h"
 
-// forward declaration open62541
+// forward declaration
 struct UA_Server;
 
 namespace opcua {
-
-// forward declaration
 class AccessControlBase;
 class ByteString;
 class DataType;
@@ -31,9 +30,27 @@ struct ValueBackendDataSource;
 struct ValueCallback;
 
 namespace detail {
+template <typename T>
+class ConnectionRegistry;
 class ServerContext;
-ServerContext& getContext(Server& server) noexcept;
 }  // namespace detail
+
+/* -------------------------------------- Helper functions -------------------------------------- */
+
+namespace detail {
+
+UA_ServerConfig* getConfig(UA_Server* server) noexcept;
+UA_ServerConfig* getConfig(Server* server) noexcept;
+UA_ServerConfig& getConfig(Server& server) noexcept;
+
+std::optional<Server> getConnection(UA_Server* server);
+
+ServerContext* getContext(UA_Server* server);
+ServerContext& getContext(Server& server) noexcept;
+
+}  // namespace detail
+
+/* ------------------------------------------- Server ------------------------------------------- */
 
 /**
  * High-level server class.
@@ -151,10 +168,14 @@ public:
     const UA_Server* handle() const noexcept;
 
 private:
-    friend detail::ServerContext& detail::getContext(Server& server) noexcept;
-
     struct Connection;
     std::shared_ptr<Connection> connection_;
+
+    explicit Server(std::shared_ptr<Connection>&& connection) noexcept
+        : connection_(std::move(connection)) {}
+
+    friend class detail::ConnectionRegistry<Server>;
+    friend detail::ServerContext& detail::getContext(Server& server) noexcept;
 };
 
 /* ---------------------------------------------------------------------------------------------- */

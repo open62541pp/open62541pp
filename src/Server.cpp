@@ -15,6 +15,7 @@
 #include "open62541pp/Session.h"
 #include "open62541pp/ValueBackend.h"
 #include "open62541pp/Wrapper.h"  // asWrapper
+#include "open62541pp/detail/ConnectionRegistry.h"
 #include "open62541pp/detail/Result.h"  // tryInvoke
 #include "open62541pp/detail/ServerContext.h"
 #include "open62541pp/services/Attribute.h"
@@ -28,22 +29,21 @@
 
 namespace opcua {
 
-/* ------------------------------------------- Helper ------------------------------------------- */
-
-inline static UA_ServerConfig* getConfig(UA_Server* server) noexcept {
-    return UA_Server_getConfig(server);
-}
-
-inline static UA_ServerConfig* getConfig(Server* server) noexcept {
-    return getConfig(server->handle());
-}
-
 /* ----------------------------------------- Connection ----------------------------------------- */
 
 struct Server::Connection {
+private:
     explicit Connection(Server& parent)
         : server(UA_Server_new()),
-          config(*getConfig(server), parent) {}
+          config(*detail::getConfig(server), parent) {}
+
+public:
+    static auto create(Server& parent) {
+        std::shared_ptr<Connection> ptr(new Connection(parent));  // NOLINT
+        detail::ConnectionRegistry<Server>::registerInstance(ptr->server, ptr);
+        assert(detail::ConnectionRegistry<Server>::findInstance(ptr->server).has_value());
+        return ptr;
+    }
 
     ~Connection() {
         // don't use stop method here because it might throw an exception
@@ -120,14 +120,14 @@ static void applyDefaults(UA_ServerConfig* config) {
 }
 
 Server::Server(uint16_t port, ByteString certificate, Logger logger)
-    : connection_(std::make_shared<Connection>(*this)) {
+    : connection_(Connection::create(*this)) {
     // The logger should be set as soon as possible, ideally even before UA_ServerConfig_setMinimal.
     // However, the logger gets overwritten by UA_ServerConfig_setMinimal() in older versions of
     // open62541. The best we can do in this case, is to first call UA_ServerConfig_setMinimal and
     // then setLogger.
     auto setConfig = [&] {
         const auto status = UA_ServerConfig_setMinimal(
-            getConfig(this), port, certificate.empty() ? nullptr : certificate.handle()
+            detail::getConfig(this), port, certificate.empty() ? nullptr : certificate.handle()
         );
         throwIfBad(status);
     };
@@ -138,7 +138,7 @@ Server::Server(uint16_t port, ByteString certificate, Logger logger)
     setConfig();
     setLogger(std::move(logger));
 #endif
-    applyDefaults(getConfig(this));
+    applyDefaults(detail::getConfig(this));
     setAccessControl(std::make_unique<AccessControlDefault>());
 }
 
@@ -151,9 +151,9 @@ Server::Server(
     Span<const ByteString> issuerList,
     Span<const ByteString> revocationList
 )
-    : connection_(std::make_shared<Connection>(*this)) {
+    : connection_(Connection::create(*this)) {
     const auto status = UA_ServerConfig_setDefaultWithSecurityPolicies(
-        getConfig(this),
+        detail::getConfig(this),
         port,
         certificate.handle(),
         privateKey.handle(),
@@ -165,13 +165,21 @@ Server::Server(
         revocationList.size()
     );
     throwIfBad(status);
-    applyDefaults(getConfig(this));
+    applyDefaults(detail::getConfig(this));
     setAccessControl(std::make_unique<AccessControlDefault>());
 }
 #endif
 
 void Server::setLogger(Logger logger) {
     connection_->config.setLogger(std::move(logger));
+}
+
+void Server::setCustomHostname(std::string_view hostname) {
+    asWrapper<String>(detail::getConfig(this)->customHostname) = String(hostname);
+}
+
+inline static auto& getApplicationDescription(Server* server) {
+    return asWrapper<ApplicationDescription>(detail::getConfig(server)->applicationDescription);
 }
 
 // copy to endpoints needed, see: https://github.com/open62541/open62541/issues/1175
@@ -182,27 +190,19 @@ static void copyApplicationDescriptionToEndpoints(UA_ServerConfig* config) {
     }
 }
 
-void Server::setCustomHostname(std::string_view hostname) {
-    auto& ref = asWrapper<String>(getConfig(this)->customHostname);
-    ref = String(hostname);
-}
-
 void Server::setApplicationName(std::string_view name) {
-    auto& ref = asWrapper<LocalizedText>(getConfig(this)->applicationDescription.applicationName);
-    ref = LocalizedText("", name);
-    copyApplicationDescriptionToEndpoints(getConfig(this));
+    getApplicationDescription(this).getApplicationName() = LocalizedText("", name);
+    copyApplicationDescriptionToEndpoints(detail::getConfig(this));
 }
 
 void Server::setApplicationUri(std::string_view uri) {
-    auto& ref = asWrapper<String>(getConfig(this)->applicationDescription.applicationUri);
-    ref = String(uri);
-    copyApplicationDescriptionToEndpoints(getConfig(this));
+    getApplicationDescription(this).getApplicationUri() = String(uri);
+    copyApplicationDescriptionToEndpoints(detail::getConfig(this));
 }
 
 void Server::setProductUri(std::string_view uri) {
-    auto& ref = asWrapper<String>(getConfig(this)->applicationDescription.productUri);
-    ref = String(uri);
-    copyApplicationDescriptionToEndpoints(getConfig(this));
+    getApplicationDescription(this).getProductUri() = String(uri);
+    copyApplicationDescriptionToEndpoints(detail::getConfig(this));
 }
 
 void Server::setAccessControl(AccessControlBase& accessControl) {
@@ -391,9 +391,34 @@ bool operator!=(const Server& lhs, const Server& rhs) noexcept {
     return !(lhs == rhs);
 }
 
-/* ------------------------------------------- Context ------------------------------------------ */
+/* -------------------------------------- Helper functions -------------------------------------- */
 
 namespace detail {
+
+UA_ServerConfig* getConfig(UA_Server* server) noexcept {
+    return UA_Server_getConfig(server);
+}
+
+UA_ServerConfig* getConfig(Server* server) noexcept {
+    return server == nullptr ? nullptr : getConfig(server->handle());
+}
+
+UA_ServerConfig& getConfig(Server& server) noexcept {
+    assert(server.handle() != nullptr);
+    return *getConfig(server.handle());
+}
+
+std::optional<Server> getConnection(UA_Server* server) {
+    return ConnectionRegistry<Server>::findInstance(server);
+}
+
+ServerContext* getContext(UA_Server* server) {
+    if (server == nullptr) {
+        return nullptr;
+    }
+    auto opt = getConnection(server);
+    return opt ? &getContext(opt.value()) : nullptr;
+}
 
 ServerContext& getContext(Server& server) noexcept {
     return server.connection_->context;

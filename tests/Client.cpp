@@ -170,12 +170,11 @@ TEST_CASE("Client state callbacks") {
 
 TEST_CASE("Client configuration") {
     Client client;
-    UA_ClientConfig* config = UA_Client_getConfig(client.handle());
-    CHECK(config != nullptr);
+    UA_ClientConfig& config = detail::getConfig(client);
 
     SUBCASE("Set timeout") {
         client.setTimeout(333);
-        CHECK(config->timeout == 333);
+        CHECK(config.timeout == 333);
     }
 }
 

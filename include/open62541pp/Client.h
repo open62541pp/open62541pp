@@ -3,6 +3,7 @@
 #include <cstdint>
 #include <functional>
 #include <memory>
+#include <optional>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -14,12 +15,10 @@
 #include "open62541pp/Subscription.h"
 #include "open62541pp/types/NodeId.h"
 
-// forward declaration open62541
+// forward declaration
 struct UA_Client;
 
 namespace opcua {
-
-// forward declaration
 class ApplicationDescription;
 class ByteString;
 class Client;
@@ -30,9 +29,27 @@ template <typename ServerOrClient>
 class Node;
 
 namespace detail {
+template <typename T>
+class ConnectionRegistry;
 class ClientContext;
-ClientContext& getContext(Client& client) noexcept;
 }  // namespace detail
+
+/* -------------------------------------- Helper functions -------------------------------------- */
+
+namespace detail {
+
+UA_ClientConfig* getConfig(UA_Client* client) noexcept;
+UA_ClientConfig* getConfig(Client* client) noexcept;
+UA_ClientConfig& getConfig(Client& client) noexcept;
+
+std::optional<Client> getConnection(UA_Client* client);
+
+ClientContext* getContext(UA_Client* client);
+ClientContext& getContext(Client& client) noexcept;
+
+}  // namespace detail
+
+/* ------------------------------------------- Client ------------------------------------------- */
 
 using StateCallback = std::function<void()>;
 
@@ -170,10 +187,14 @@ public:
     const UA_Client* handle() const noexcept;
 
 private:
-    friend detail::ClientContext& detail::getContext(Client& client) noexcept;
-
     struct Connection;
     std::shared_ptr<Connection> connection_;
+
+    explicit Client(std::shared_ptr<Connection>&& connection) noexcept
+        : connection_(std::move(connection)) {}
+
+    friend class detail::ConnectionRegistry<Client>;
+    friend detail::ClientContext& detail::getContext(Client& client) noexcept;
 };
 
 /* ---------------------------------------------------------------------------------------------- */
