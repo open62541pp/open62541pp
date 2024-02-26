@@ -92,7 +92,7 @@ static void stateCallback(UA_Client* client, UA_ClientState clientState) noexcep
             break;
         };
     }
-    context.lastClientState = clientState;
+    context->lastClientState = clientState;
 }
 #else
 // state callback for >= v1.1
