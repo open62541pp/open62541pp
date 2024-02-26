@@ -8,7 +8,12 @@
 
 #else
 
+#if __has_include(<open62541/common.h>)  // since v1.1
 #include <open62541/common.h>
+#endif
+#if __has_include(<open62541/constants.h>)  // v1.0
+#include <open62541/constants.h>
+#endif
 #include <open62541/nodeids.h>
 #include <open62541/statuscodes.h>
 #include <open62541/types.h>
