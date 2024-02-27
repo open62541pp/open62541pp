@@ -1,28 +1,55 @@
 #pragma once
 
 #include <cassert>
+#include <optional>
 
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/types/Builtin.h"  // StatusCode
 
 namespace opcua::detail {
 
+template <typename T>
+class Result;
+
 /**
- * Represents a bad result stored in `Result`.
+ * Result<void> type.
+ * A result with void specialization contains only a status code.
  */
-class BadResult {
+template <>
+class Result<void> {
 public:
-    constexpr explicit BadResult(StatusCode code) noexcept
-        : code_(code) {
-        assert(code.isBad());
-    }
+    constexpr Result() noexcept = default;
+
+    // NOLINTNEXTLINE, implicit wanted
+    constexpr Result(opcua::StatusCode code) noexcept
+        : code_(code) {}
+
+    // TODO:
+    // Think about conversion operator to StatusCode
+
+    constexpr void operator*() const noexcept {}
 
     constexpr StatusCode code() const noexcept {
         return code_;
     }
 
+    constexpr void value() const {
+        code().throwIfBad();
+    }
+
 private:
-    StatusCode code_;
+    StatusCode code_{};
+};
+
+/**
+ * Represents a bad result stored in `Result`.
+ */
+class BadResult : public Result<void> {
+public:
+    constexpr explicit BadResult(StatusCode code) noexcept
+        : Result(code) {
+        assert(code.isBad());
+    }
 };
 
 /**
@@ -32,15 +59,15 @@ private:
 template <typename T>
 class Result {
 public:
-    constexpr Result() noexcept(std::is_nothrow_default_constructible_v<T>) = default;
+    constexpr Result() noexcept = default;
 
     // NOLINTNEXTLINE, implicit wanted
     constexpr Result(const T& value) noexcept(std::is_nothrow_copy_constructible_v<T>)
-        : value_(value) {}
+        : maybeValue_(value) {}
 
     // NOLINTNEXTLINE, implicit wanted
     constexpr Result(T&& value) noexcept(std::is_nothrow_move_constructible_v<T>)
-        : value_(std::move(value)) {}
+        : maybeValue_(std::move(value)) {}
 
     // NOLINTNEXTLINE, implicit wanted
     constexpr Result(BadResult error) noexcept
@@ -50,38 +77,46 @@ public:
         StatusCode code, const T& value
     ) noexcept(std::is_nothrow_copy_constructible_v<T>)
         : code_(code),
-          value_(value) {}
+          maybeValue_(value) {}
 
     constexpr Result(StatusCode code, T&& value) noexcept(std::is_nothrow_move_constructible_v<T>)
         : code_(code),
-          value_(std::move(value)) {}
+          maybeValue_(std::move(value)) {}
+
+    // TODO:
+    // Think about conversion operator to StatusCode
+    // Think about conversion operator to value
 
     constexpr const T* operator->() const noexcept {
-        return &value_;
+        return &(*maybeValue_);
     }
 
     constexpr T* operator->() noexcept {
-        return &value_;
+        return &(*maybeValue_);
     }
 
     constexpr const T& operator*() const& noexcept {
-        return value_;
+        return *maybeValue_;
     }
 
     constexpr T& operator*() & noexcept {
-        return value_;
+        return *maybeValue_;
     }
 
     constexpr const T&& operator*() const&& noexcept {
-        return std::move(value_);
+        return std::move(*maybeValue_);
     }
 
     constexpr T&& operator*() && noexcept {
-        return std::move(value_);
+        return std::move(*maybeValue_);
     }
 
     constexpr StatusCode code() const noexcept {
         return code_;
+    }
+
+    bool hasValue() const noexcept {
+        return maybeValue_.has_value();
     }
 
     constexpr const T& value() const& {
@@ -124,38 +159,22 @@ private:
     }
 
     StatusCode code_{};
-    T value_{};
+    std::optional<T> maybeValue_{};
+};
+
+template <typename T>
+struct ResultSelector {
+    using Result = detail::Result<T>;
 };
 
 template <>
-class Result<void> {
-public:
-    constexpr Result() noexcept = default;
+struct ResultSelector<StatusCode> {
+    using Result = detail::Result<void>;
+};
 
-    // NOLINTNEXTLINE, implicit wanted
-    constexpr Result(BadResult error) noexcept
-        : code_(error.code()) {}
-
-    constexpr const void* operator->() const noexcept {
-        return nullptr;
-    }
-
-    constexpr void* operator->() noexcept {
-        return nullptr;
-    }
-
-    constexpr void operator*() const noexcept {}
-
-    constexpr StatusCode code() const noexcept {
-        return code_;
-    }
-
-    constexpr void value() const {
-        code().throwIfBad();
-    }
-
-private:
-    StatusCode code_{};
+template <>
+struct ResultSelector<UA_StatusCode> {
+    using Result = detail::Result<void>;
 };
 
 /**
@@ -163,7 +182,8 @@ private:
  * This is especially useful for C-API callbacks, that are executed within the open62541 event loop.
  */
 template <typename F, typename... Args>
-auto tryInvoke(F&& func, Args&&... args) noexcept -> Result<std::invoke_result_t<F, Args...>> {
+auto tryInvoke(F&& func, Args&&... args) noexcept ->
+    typename ResultSelector<std::invoke_result_t<F, Args...>>::Result {
     using ReturnType = std::invoke_result_t<F, Args...>;
     try {
         if constexpr (std::is_void_v<ReturnType>) {
@@ -179,17 +199,13 @@ auto tryInvoke(F&& func, Args&&... args) noexcept -> Result<std::invoke_result_t
 
 /**
  * Invoke a function and get the status code of the operation.
- * This is especially useful for C-API callbacks, that are executed within the open62541 event loop.
+ * This is especially useful for C-API callbacks, that are executed within the open62541 event
+ * loop.
  */
 template <typename F, typename... Args>
 StatusCode tryInvokeGetStatus(F&& func, Args&&... args) noexcept {
-    using ReturnType = std::invoke_result_t<F, Args...>;
     auto result = tryInvoke(std::forward<F>(func), std::forward<Args>(args)...);
-    if constexpr (std::is_same_v<ReturnType, StatusCode> || std::is_same_v<ReturnType, UA_StatusCode>) {
-        return result.valueOr(result.code());
-    } else {
-        return result.code();
-    }
+    return result.code();
 }
 
 }  // namespace opcua::detail
