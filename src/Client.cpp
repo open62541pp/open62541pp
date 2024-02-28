@@ -235,7 +235,7 @@ Client::Client(
     Span<const ByteString> trustList,
     Span<const ByteString> revocationList
 )
-    : connection_(std::make_shared<Connection>()) {
+    : connection_(std::make_shared<detail::ClientConnection>()) {
     const auto status = UA_ClientConfig_setDefaultEncryption(
         getConfig(handle()),
         certificate,
