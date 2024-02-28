@@ -13,8 +13,8 @@
 #include "open62541pp/Event.h"
 #include "open62541pp/Node.h"
 #include "open62541pp/Session.h"
-#include "open62541pp/Wrapper.h"  // asWrapper
 #include "open62541pp/ValueBackend.h"
+#include "open62541pp/Wrapper.h"  // asWrapper
 #include "open62541pp/detail/Result.h"  // tryInvoke
 #include "open62541pp/detail/ServerContext.h"
 #include "open62541pp/services/Attribute.h"
@@ -23,9 +23,7 @@
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/Variant.h"
 
-#include "CustomAccessControl.h"
-#include "CustomDataTypes.h"
-#include "CustomLogger.h"
+#include "ServerConfig.h"
 #include "open62541_impl.h"
 
 namespace opcua {
@@ -37,25 +35,22 @@ inline static UA_ServerConfig* getConfig(UA_Server* server) noexcept {
 }
 
 inline static UA_ServerConfig* getConfig(Server* server) noexcept {
-    return UA_Server_getConfig(server->handle());
+    return getConfig(server->handle());
 }
 
 /* ----------------------------------------- Connection ----------------------------------------- */
 
-class Server::Connection {
-public:
-    explicit Connection(Server& server)
-        : server_(UA_Server_new()),
-          customAccessControl_(server),
-          customDataTypes_(&getConfig(server_)->customDataTypes),
-          customLogger_(getConfig(server_)->logger) {}
+struct Server::Connection {
+    explicit Connection(Server& parent)
+        : server(UA_Server_new()),
+          config(*getConfig(server), parent) {}
 
     ~Connection() {
         // don't use stop method here because it might throw an exception
-        if (running_) {
-            UA_Server_run_shutdown(handle());
+        if (running) {
+            UA_Server_run_shutdown(server);
         }
-        UA_Server_delete(handle());
+        UA_Server_delete(server);
     }
 
     // prevent copy & move
@@ -65,82 +60,51 @@ public:
     Connection& operator=(Connection&&) noexcept = delete;
 
     void runStartup() {
-        const auto status = UA_Server_run_startup(handle());
+        const auto status = UA_Server_run_startup(server);
         throwIfBad(status);
-        running_ = true;
+        running = true;
     }
 
     uint16_t runIterate() {
-        if (!running_) {
+        if (!running) {
             runStartup();
         }
-        auto interval = UA_Server_run_iterate(handle(), false /* don't wait */);
-        context_.exceptionCatcher.rethrow();
+        auto interval = UA_Server_run_iterate(server, false /* don't wait */);
+        context.exceptionCatcher.rethrow();
         return interval;
     }
 
     void run() {
-        if (running_) {
+        if (running) {
             return;
         }
         runStartup();
-        const std::lock_guard<std::mutex> lock(mutex_);
+        const std::lock_guard lock(mutexRun);
         try {
-            while (running_) {
+            while (running) {
                 // https://github.com/open62541/open62541/blob/master/examples/server_mainloop.c
-                UA_Server_run_iterate(handle(), true /* wait for messages in the networklayer */);
-                context_.exceptionCatcher.rethrow();
+                UA_Server_run_iterate(server, true /* wait for messages in the networklayer */);
+                context.exceptionCatcher.rethrow();
             }
         } catch (...) {
-            running_ = false;
+            running = false;
             throw;
         }
     }
 
     void stop() {
-        running_ = false;
+        running = false;
         // wait for run loop to complete
-        const std::lock_guard<std::mutex> lock(mutex_);
-        const auto status = UA_Server_run_shutdown(handle());
+        const std::lock_guard<std::mutex> lock(mutexRun);
+        const auto status = UA_Server_run_shutdown(server);
         throwIfBad(status);
     }
 
-    bool isRunning() const noexcept {
-        return running_;
-    }
-
-    UA_Server* handle() noexcept {
-        return server_;
-    }
-
-    detail::ServerContext& getContext() noexcept {
-        return context_;
-    }
-
-    auto& getCustomAccessControl() noexcept {
-        return customAccessControl_;
-    }
-
-    const auto& getCustomAccessControl() const noexcept {
-        return customAccessControl_;
-    }
-
-    auto& getCustomDataTypes() noexcept {
-        return customDataTypes_;
-    }
-
-    auto& getCustomLogger() noexcept {
-        return customLogger_;
-    }
-
-private:
-    UA_Server* server_;
-    detail::ServerContext context_;
-    CustomAccessControl customAccessControl_;
-    CustomDataTypes customDataTypes_;
-    CustomLogger customLogger_;
-    std::atomic<bool> running_{false};
-    std::mutex mutex_;
+    UA_Server* server;
+    ServerConfig config;
+    detail::ServerContext context;
+    std::atomic<bool> running{false};
+    std::mutex mutexRun;
 };
 
 /* ------------------------------------------- Server ------------------------------------------- */
@@ -207,7 +171,7 @@ Server::Server(
 #endif
 
 void Server::setLogger(Logger logger) {
-    connection_->getCustomLogger().setLogger(std::move(logger));
+    connection_->config.setLogger(std::move(logger));
 }
 
 // copy to endpoints needed, see: https://github.com/open62541/open62541/issues/1175
@@ -242,15 +206,15 @@ void Server::setProductUri(std::string_view uri) {
 }
 
 void Server::setAccessControl(AccessControlBase& accessControl) {
-    connection_->getCustomAccessControl().setAccessControl(accessControl);
+    connection_->config.setAccessControl(accessControl);
 }
 
 void Server::setAccessControl(std::unique_ptr<AccessControlBase> accessControl) {
-    connection_->getCustomAccessControl().setAccessControl(std::move(accessControl));
+    connection_->config.setAccessControl(std::move(accessControl));
 }
 
 std::vector<Session> Server::getSessions() const {
-    return connection_->getCustomAccessControl().getSessions();
+    return connection_->config.getSessions();
 }
 
 std::vector<std::string> Server::getNamespaceArray() {
@@ -263,7 +227,7 @@ uint16_t Server::registerNamespace(std::string_view uri) {
 }
 
 void Server::setCustomDataTypes(std::vector<DataType> dataTypes) {
-    connection_->getCustomDataTypes().setCustomDataTypes(std::move(dataTypes));
+    connection_->config.setCustomDataTypes(std::move(dataTypes));
 }
 
 static void valueCallbackOnRead(
@@ -386,7 +350,7 @@ void Server::stop() {
 }
 
 bool Server::isRunning() const noexcept {
-    return connection_->isRunning();
+    return connection_->running;
 }
 
 Node<Server> Server::getNode(NodeId id) {
@@ -410,11 +374,11 @@ Node<Server> Server::getViewsNode() {
 }
 
 UA_Server* Server::handle() noexcept {
-    return connection_->handle();
+    return connection_->server;
 }
 
 const UA_Server* Server::handle() const noexcept {
-    return connection_->handle();
+    return connection_->server;
 }
 
 /* ---------------------------------------------------------------------------------------------- */
@@ -432,7 +396,7 @@ bool operator!=(const Server& lhs, const Server& rhs) noexcept {
 namespace detail {
 
 ServerContext& getContext(Server& server) noexcept {
-    return server.connection_->getContext();
+    return server.connection_->context;
 }
 
 }  // namespace detail

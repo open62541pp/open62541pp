@@ -15,7 +15,7 @@ namespace opcua {
 
 namespace detail {
 
-void clearUaAccessControl(UA_AccessControl& ac) noexcept;
+void clear(UA_AccessControl& ac) noexcept;
 
 }  // namespace detail
 
@@ -26,15 +26,10 @@ class Session;
 
 class CustomAccessControl {
 public:
-    CustomAccessControl(Server& server);
-
-    /// Apply custom access control (after UA_ServerConfig was changed).
-    void setAccessControl();
-
     /// Set and apply custom access control.
-    void setAccessControl(AccessControlBase& accessControl);
+    void setAccessControl(UA_AccessControl& native, AccessControlBase& accessControl);
     /// Set and apply custom access control (transfer ownership).
-    void setAccessControl(std::unique_ptr<AccessControlBase> accessControl);
+    void setAccessControl(UA_AccessControl& native, std::unique_ptr<AccessControlBase> accessControl);
 
     void onSessionActivated(const NodeId& sessionId);
     void onSessionClosed(const NodeId& sessionId);
@@ -42,12 +37,15 @@ public:
     /// Get active sessions.
     std::vector<Session> getSessions() const;
 
+    void setServer(Server& server) noexcept;
     Server& getServer() noexcept;
     AccessControlBase* getAccessControl() noexcept;
 
 private:
-    Server& server_;
-    std::variant<AccessControlBase*, std::unique_ptr<AccessControlBase>> accessControl_;
+    void setAccessControl(UA_AccessControl& ac);
+
+    Server* server_{nullptr};
+    std::variant<AccessControlBase*, std::unique_ptr<AccessControlBase>> accessControl_{nullptr};
     std::vector<UserTokenPolicy> userTokenPolicies_;
     std::set<NodeId> sessionIds_;
 };

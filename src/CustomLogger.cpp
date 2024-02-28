@@ -26,7 +26,7 @@ static void log(
 ) {
     assert(context != nullptr);
     const auto* instance = static_cast<CustomLogger*>(context);
-    const Logger& logger = instance->getLogger();
+    const Logger& logger = instance->get();
 
     // skip if no logger set
     if (!logger) {
@@ -40,25 +40,22 @@ static void log(
     );
 }
 
-CustomLogger::CustomLogger(UA_Logger& logger)
-    : nativeLogger_(logger) {}
-
-void CustomLogger::setLogger(Logger logger) {
+void CustomLogger::set(UA_Logger& native, Logger logger) {
     if (!logger) {
         return;
     }
 
-    if (nativeLogger_.clear != nullptr) {
-        nativeLogger_.clear(nativeLogger_.context);
-        nativeLogger_.context = nullptr;
+    if (native.clear != nullptr) {
+        native.clear(native.context);
+        native.context = nullptr;
     }
     logger_ = std::move(logger);
-    nativeLogger_.log = log;
-    nativeLogger_.context = this;
-    nativeLogger_.clear = nullptr;
+    native.log = log;
+    native.context = this;
+    native.clear = nullptr;
 }
 
-const Logger& CustomLogger::getLogger() const noexcept {
+const Logger& CustomLogger::get() const noexcept {
     return logger_;
 }
 
