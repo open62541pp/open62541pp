@@ -26,19 +26,30 @@ TEST_CASE_TEMPLATE("Log with custom logger", T, Server, Client) {
     // passing a nullptr should do nothing
     serverOrClient.setLogger(nullptr);
 
-    log(serverOrClient, LogLevel::Info, LogCategory::Server, "Message");
-    CHECK(counter == 1);
-    CHECK(lastLogLevel == LogLevel::Info);
-    CHECK(lastLogCategory == LogCategory::Server);
-    CHECK(lastMessage == "Message");
+    SUBCASE("Wrapper") {
+        counter = 0;
+        log(serverOrClient, LogLevel::Info, LogCategory::Server, "Message");
+        CHECK(counter == 1);
+        CHECK(lastLogLevel == LogLevel::Info);
+        CHECK(lastLogCategory == LogCategory::Server);
+        CHECK(lastMessage == "Message");
+    }
 
-    log(serverOrClient.handle(), LogLevel::Warning, LogCategory::Server, "Message from native");
-    CHECK(counter == 2);
-    CHECK(lastLogLevel == LogLevel::Warning);
-    CHECK(lastLogCategory == LogCategory::Server);
-    CHECK(lastMessage == "Message from native");
+    SUBCASE("Native") {
+        auto native = serverOrClient.handle();
+        counter = 0;
+        log(native, LogLevel::Warning, LogCategory::Server, "Message from native");
+        CHECK(counter == 1);
+        CHECK(lastLogLevel == LogLevel::Warning);
+        CHECK(lastLogCategory == LogCategory::Server);
+        CHECK(lastMessage == "Message from native");
+    }
 
-    using NativePtr = decltype(serverOrClient.handle());
-    log(NativePtr{nullptr}, LogLevel::Warning, LogCategory::Server, "Message from null");
-    CHECK(counter == 2);
+    SUBCASE("Native nullptr") {
+        auto native = serverOrClient.handle();
+        native = nullptr;
+        counter = 0;
+        log(native, LogLevel::Warning, LogCategory::Server, "Message from null");
+        CHECK(counter == 0);
+    }
 }
