@@ -193,14 +193,19 @@ TEST_CASE("Client methods") {
 }
 
 TEST_CASE("Client helper functions") {
+    UA_Client* clientNull{nullptr};
     Client client;
 
+    CHECK(detail::getConfig(clientNull) == nullptr);
     CHECK(&detail::getConfig(client) == detail::getConfig(client.handle()));
 
+    CHECK(detail::getConnection(clientNull) == nullptr);
     CHECK(&detail::getConnection(client) == detail::getConnection(client.handle()));
 
+    CHECK(detail::getWrapper(clientNull) == nullptr);
     CHECK(detail::getWrapper(client.handle()) != nullptr);
     CHECK(detail::getWrapper(client.handle())->handle() == client.handle());
 
+    CHECK(detail::getContext(clientNull) == nullptr);
     CHECK(&detail::getContext(client) == detail::getContext(client.handle()));
 }
