@@ -2,17 +2,7 @@
 
 #include <exception>
 #include <functional>
-#include <utility>  // exchange
-
-namespace opcua {
-class Client;
-class Server;
-}  // namespace opcua
-
-namespace opcua::detail {
-class ClientContext;
-class ServerContext;
-}  // namespace opcua::detail
+#include <utility>  // exchange, move
 
 namespace opcua::detail {
 

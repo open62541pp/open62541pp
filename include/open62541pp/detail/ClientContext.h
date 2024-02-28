@@ -28,8 +28,7 @@ inline constexpr size_t clientStateCount = 4;
  * Internal storage for Client class.
  * Mainly used to store stateful function pointers.
  */
-class ClientContext {
-public:
+struct ClientContext {
 #ifdef UA_ENABLE_SUBSCRIPTIONS
     using SubId = uint32_t;
     using MonId = uint32_t;
@@ -48,14 +47,5 @@ public:
 
     detail::ExceptionCatcher exceptionCatcher;
 };
-
-/* ---------------------------------------------------------------------------------------------- */
-
-inline ClientContext& getContext(UA_Client* client) {
-    assert(client != nullptr);
-    void* context = UA_Client_getConfig(client)->clientContext;
-    assert(context != nullptr);
-    return *static_cast<ClientContext*>(context);
-}
 
 }  // namespace opcua::detail

@@ -15,8 +15,7 @@ namespace opcua::detail {
  * Internal storage for Server class.
  * Mainly used to store stateful function pointers.
  */
-class ServerContext {
-public:
+struct ServerContext {
 #ifdef UA_ENABLE_SUBSCRIPTIONS
     using SubId = uint32_t;  // always 0
     using MonId = uint32_t;

@@ -191,3 +191,16 @@ TEST_CASE("Client methods") {
         CHECK(namespaces.at(1) == "urn:open62541.server.application");
     }
 }
+
+TEST_CASE("Client helper functions") {
+    Client client;
+
+    CHECK(&detail::getConfig(client) == detail::getConfig(client.handle()));
+
+    CHECK(&detail::getConnection(client) == detail::getConnection(client.handle()));
+
+    CHECK(detail::getWrapper(client.handle()) != nullptr);
+    CHECK(detail::getWrapper(client.handle())->handle() == client.handle());
+
+    CHECK(&detail::getContext(client) == detail::getContext(client.handle()));
+}
