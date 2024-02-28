@@ -6,7 +6,7 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/types/Builtin.h"  // StatusCode
 
-namespace opcua::detail {
+namespace opcua {
 
 template <typename T>
 class Result;
@@ -24,8 +24,15 @@ public:
     constexpr Result(opcua::StatusCode code) noexcept
         : code_(code) {}
 
-    // TODO:
-    // Think about conversion operator to StatusCode
+    // NOLINTNEXTLINE, implicit wanted
+    operator StatusCode() {
+        return code_;
+    }
+
+    // NOLINTNEXTLINE, implicit wanted
+    operator UA_StatusCode() {
+        return code_;
+    }
 
     constexpr void operator*() const noexcept {}
 
@@ -33,11 +40,19 @@ public:
         return code_;
     }
 
-    constexpr void value() const {
-        code().throwIfBad();
+    constexpr void value() const& {
+        checkIsBad();
+    }
+
+    constexpr void value() && {
+        checkIsBad();
     }
 
 private:
+    constexpr void checkIsBad() const {
+        code().throwIfBad();
+    }
+
     StatusCode code_{};
 };
 
@@ -84,7 +99,6 @@ public:
           maybeValue_(std::move(value)) {}
 
     // TODO:
-    // Think about conversion operator to StatusCode
     // Think about conversion operator to value
 
     constexpr const T* operator->() const noexcept {
@@ -162,50 +176,4 @@ private:
     std::optional<T> maybeValue_{};
 };
 
-template <typename T>
-struct ResultSelector {
-    using Result = detail::Result<T>;
-};
-
-template <>
-struct ResultSelector<StatusCode> {
-    using Result = detail::Result<void>;
-};
-
-template <>
-struct ResultSelector<UA_StatusCode> {
-    using Result = detail::Result<void>;
-};
-
-/**
- * Invoke a function and capture its Result (value or status code).
- * This is especially useful for C-API callbacks, that are executed within the open62541 event loop.
- */
-template <typename F, typename... Args>
-auto tryInvoke(F&& func, Args&&... args) noexcept ->
-    typename ResultSelector<std::invoke_result_t<F, Args...>>::Result {
-    using ReturnType = std::invoke_result_t<F, Args...>;
-    try {
-        if constexpr (std::is_void_v<ReturnType>) {
-            std::invoke(std::forward<F>(func), std::forward<Args>(args)...);
-            return {};
-        } else {
-            return std::invoke(std::forward<F>(func), std::forward<Args>(args)...);
-        }
-    } catch (...) {
-        return BadResult(getStatusCode(std::current_exception()));
-    }
-}
-
-/**
- * Invoke a function and get the status code of the operation.
- * This is especially useful for C-API callbacks, that are executed within the open62541 event
- * loop.
- */
-template <typename F, typename... Args>
-StatusCode tryInvokeGetStatus(F&& func, Args&&... args) noexcept {
-    auto result = tryInvoke(std::forward<F>(func), std::forward<Args>(args)...);
-    return result.code();
-}
-
-}  // namespace opcua::detail
+}  // namespace opcua

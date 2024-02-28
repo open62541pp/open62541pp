@@ -2,17 +2,18 @@
 
 #include <stdexcept>
 
-#include "open62541pp/detail/Result.h"
+#include "open62541pp/Result.h"
+#include "open62541pp/detail/result_util.h"
 
 using namespace opcua;
 
 static constexpr StatusCode badCode(UA_STATUSCODE_BADUNEXPECTEDERROR);
-static constexpr detail::BadResult badResult(badCode);
+static constexpr BadResult badResult(badCode);
 
 TEST_CASE("Result") {
     SUBCASE("code") {
-        CHECK(detail::Result<int>(1).code() == UA_STATUSCODE_GOOD);
-        CHECK(detail::Result<int>(badResult).code() == badCode);
+        CHECK(Result<int>(1).code() == UA_STATUSCODE_GOOD);
+        CHECK(Result<int>(badResult).code() == badCode);
     }
 
     SUBCASE("operator->") {
@@ -20,67 +21,77 @@ TEST_CASE("Result") {
             int a;
         };
 
-        detail::Result<S> result(S{1});
+        Result<S> result(S{1});
         CHECK(result->a == 1);
         CHECK(std::as_const(result)->a == 1);
     }
 
     SUBCASE("operator*") {
-        detail::Result<int> result(1);
+        Result<int> result(1);
         CHECK(*result == 1);
         CHECK(*std::as_const(result) == 1);
 
-        detail::Result<int> resultError(badResult);
+        Result<int> resultError(badResult);
         CHECK(*resultError == 0);
         CHECK(*std::as_const(resultError) == 0);
 
         SUBCASE("rvalue") {
-            CHECK(*detail::Result<int>(1) == 1);
-            CHECK(*detail::Result<int>(badResult) == 0);
+            CHECK(*Result<int>(1) == 1);
+            CHECK(*Result<int>(badResult) == 0);
         }
     }
 
     SUBCASE("value") {
-        detail::Result<int> result(1);
+        Result<int> result(1);
         CHECK(result.value() == 1);
         CHECK(std::as_const(result).value() == 1);
 
-        detail::Result<int> resultError(badResult);
+        Result<int> resultError(badResult);
         CHECK_THROWS_AS(resultError.value(), BadStatus);
         CHECK_THROWS_AS(std::as_const(resultError).value(), BadStatus);
 
         SUBCASE("rvalue") {
-            CHECK(detail::Result<int>(1).value() == 1);
-            CHECK_THROWS_AS(detail::Result<int>(badResult).value(), BadStatus);
+            CHECK(Result<int>(1).value() == 1);
+            CHECK_THROWS_AS(Result<int>(badResult).value(), BadStatus);
         }
     }
 
     SUBCASE("valueOr") {
-        detail::Result<int> result(1);
+        Result<int> result(1);
         CHECK(result.valueOr(2) == 1);
 
-        detail::Result<int> resultError(badResult);
+        Result<int> resultError(badResult);
         CHECK(resultError.valueOr(2) == 2);
 
         SUBCASE("rvalue") {
-            CHECK(detail::Result<int>(1).valueOr(2) == 1);
-            CHECK(detail::Result<int>(badResult).valueOr(2) == 2);
+            CHECK(Result<int>(1).valueOr(2) == 1);
+            CHECK(Result<int>(badResult).valueOr(2) == 2);
         }
     }
 }
 
 TEST_CASE("Result (void template specialization)") {
     SUBCASE("code") {
-        CHECK(detail::Result<void>().code() == UA_STATUSCODE_GOOD);
-        CHECK(detail::Result<void>(badResult).code() == badCode);
+        CHECK(Result<void>().code() == UA_STATUSCODE_GOOD);
+        CHECK(Result<void>(badResult).code() == badCode);
     }
 }
 
 TEST_CASE("tryInvoke") {
-    SUBCASE("Result") {
+    SUBCASE("Result<int>") {
         auto result = detail::tryInvoke([] { return 1; });
         CHECK(result.value() == 1);
         CHECK(result.code() == 0);
+    }
+
+    SUBCASE("Result<void> (conversion to StatusCode)") {
+        StatusCode result = detail::tryInvoke([] { return; });
+        CHECK(result == 0);
+    }
+
+    SUBCASE("Result<void> (conversion to UA_StatusCode)") {
+        UA_StatusCode result = detail::tryInvoke([] { return; });
+        CHECK(result == 0);
     }
 
     SUBCASE("BadStatus exception") {
@@ -92,11 +103,4 @@ TEST_CASE("tryInvoke") {
         auto result = detail::tryInvoke([] { throw std::runtime_error("test"); });
         CHECK(result.code() == UA_STATUSCODE_BADINTERNALERROR);
     }
-}
-
-TEST_CASE("tryInvokeGetStatus") {
-    CHECK(detail::tryInvokeGetStatus([]() -> void { return; }) == UA_STATUSCODE_GOOD);
-    CHECK(detail::tryInvokeGetStatus([]() -> void { throw BadStatus(badCode); }) == badCode);
-    CHECK(detail::tryInvokeGetStatus([]() -> StatusCode { return 1; }) == 1);
-    CHECK(detail::tryInvokeGetStatus([]() -> StatusCode { throw BadStatus(badCode); }) == badCode);
 }

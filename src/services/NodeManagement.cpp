@@ -4,9 +4,9 @@
 
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
-#include "open62541pp/detail/Result.h"  // tryInvoke
 #include "open62541pp/detail/ServerContext.h"
 #include "open62541pp/detail/helper.h"
+#include "open62541pp/detail/result_util.h"  // tryInvoke
 
 #include "../open62541_impl.h"
 
@@ -100,7 +100,7 @@ static UA_StatusCode methodCallback(
     const auto* nodeContext = static_cast<opcua::detail::NodeContext*>(methodContext);
     const auto& callback = nodeContext->methodCallback;
     if (callback) {
-        return opcua::detail::tryInvokeGetStatus(
+        return opcua::detail::tryInvoke(
             callback,
             Span<const Variant>{asWrapper<Variant>(input), inputSize},
             Span<Variant>{asWrapper<Variant>(output), outputSize}

@@ -12,10 +12,10 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Event.h"
 #include "open62541pp/Node.h"
+#include "open62541pp/Result.h"  // tryInvoke
 #include "open62541pp/Session.h"
-#include "open62541pp/Wrapper.h"  // asWrapper
 #include "open62541pp/ValueBackend.h"
-#include "open62541pp/detail/Result.h"  // tryInvoke
+#include "open62541pp/Wrapper.h"  // asWrapper
 #include "open62541pp/detail/ServerContext.h"
 #include "open62541pp/services/Attribute.h"
 #include "open62541pp/types/Builtin.h"
@@ -326,7 +326,7 @@ static UA_StatusCode valueSourceRead(
     assert(nodeContext != nullptr && value != nullptr);
     auto& callback = static_cast<detail::NodeContext*>(nodeContext)->dataSource.read;
     if (callback) {
-        return detail::tryInvokeGetStatus(
+        return detail::tryInvoke(
             callback, asWrapper<DataValue>(*value), asRange(range), includeSourceTimestamp
         );
     }
@@ -345,7 +345,7 @@ static UA_StatusCode valueSourceWrite(
     assert(nodeContext != nullptr && value != nullptr);
     auto& callback = static_cast<detail::NodeContext*>(nodeContext)->dataSource.write;
     if (callback) {
-        return detail::tryInvokeGetStatus(callback, asWrapper<DataValue>(*value), asRange(range));
+        return detail::tryInvoke(callback, asWrapper<DataValue>(*value), asRange(range));
     }
     return UA_STATUSCODE_BADINTERNALERROR;
 }
