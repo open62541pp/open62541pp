@@ -172,7 +172,7 @@ public:
 private:
     friend detail::ClientContext& detail::getContext(Client& client) noexcept;
 
-    class Connection;
+    struct Connection;
     std::shared_ptr<Connection> connection_;
 };
 

@@ -8,6 +8,7 @@ add_executable(
     Bitmask.cpp
     Client.cpp
     ClientService.cpp
+    Config.cpp
     Crypto.cpp
     CustomAccessControl.cpp
     CustomDataTypes.cpp

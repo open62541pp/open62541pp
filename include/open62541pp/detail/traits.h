@@ -4,6 +4,14 @@
 
 namespace opcua::detail {
 
+template <typename... Ts>
+struct Overload : Ts... {
+    using Ts::operator()...;
+};
+
+template <typename... Ts>
+Overload(Ts...) -> Overload<Ts...>;
+
 template <typename...>
 struct AlwaysFalse : std::false_type {};
 

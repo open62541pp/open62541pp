@@ -17,6 +17,7 @@
 #include "open62541pp/Session.h"
 #include "open62541pp/Wrapper.h"  // asWrapper, asNative
 #include "open62541pp/detail/helper.h"
+#include "open62541pp/detail/traits.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/DateTime.h"
@@ -50,7 +51,7 @@ inline static Session getSession(UA_AccessControl* ac, const UA_NodeId* sessionI
     return {getServer(ac), asWrapperRef<NodeId>(sessionId)};
 }
 
-inline static AccessControlBase& getAccessControl(UA_AccessControl* ac) noexcept {
+inline static AccessControlBase& getAccessControl(UA_AccessControl* ac) {
     auto* accessControl = getContext(ac).getAccessControl();
     assert(accessControl != nullptr);
     return *accessControl;
@@ -313,7 +314,7 @@ static UA_Boolean allowHistoryUpdateDeleteRawModified(
 
 namespace detail {
 
-void clearUaAccessControl(UA_AccessControl& ac) noexcept {
+void clear(UA_AccessControl& ac) noexcept {
 #if UAPP_OPEN62541_VER_GE(1, 1)
     if (ac.clear != nullptr) {
         ac.clear(&ac);
@@ -328,51 +329,12 @@ void clearUaAccessControl(UA_AccessControl& ac) noexcept {
 
 }  // namespace detail
 
-static void copyUserTokenPoliciesToEndpoints(UA_ServerConfig* config) {
-    // copy config->accessControl.userTokenPolicies -> config->endpoints[i].userIdentityTokens
-    for (size_t i = 0; i < config->endpointsSize; ++i) {
-        auto& endpoint = config->endpoints[i];  // NOLINT
-        detail::deallocateArray(
-            endpoint.userIdentityTokens,
-            endpoint.userIdentityTokensSize,
-            UA_TYPES[UA_TYPES_USERTOKENPOLICY]
-        );
-        endpoint.userIdentityTokens = detail::copyArray(
-            config->accessControl.userTokenPolicies,
-            config->accessControl.userTokenPoliciesSize,
-            UA_TYPES[UA_TYPES_USERTOKENPOLICY]
-        );
-        endpoint.userIdentityTokensSize = config->accessControl.userTokenPoliciesSize;
-    }
-}
-
-CustomAccessControl::CustomAccessControl(Server& server)
-    : server_(server),
-      accessControl_{nullptr} {}
-
-void CustomAccessControl::setAccessControl() {
+void CustomAccessControl::setAccessControl(UA_AccessControl& ac) {
     if (getAccessControl() == nullptr) {
         return;
     }
 
-    auto* config = UA_Server_getConfig(getServer().handle());
-    assert(config != nullptr);
-
-    // use highest security policy to transfer user tokens
-    if (config->securityPoliciesSize > 0) {
-        const String highestSecurityPoliciyUri(
-            config->securityPolicies[config->securityPoliciesSize - 1].policyUri  // NOLINT
-        );
-        for (auto& userTokenPolicy : userTokenPolicies_) {
-            if (userTokenPolicy.getTokenType() != UserTokenType::Anonymous &&
-                userTokenPolicy.getSecurityPolicyUri().empty()) {
-                userTokenPolicy.getSecurityPolicyUri() = highestSecurityPoliciyUri;
-            }
-        }
-    }
-
-    auto& ac = config->accessControl;
-    detail::clearUaAccessControl(ac);
+    detail::clear(ac);
 
     ac.context = this;
     ac.userTokenPoliciesSize = userTokenPolicies_.size();
@@ -397,20 +359,22 @@ void CustomAccessControl::setAccessControl() {
     ac.allowHistoryUpdateUpdateData = allowHistoryUpdateUpdateData;
     ac.allowHistoryUpdateDeleteRawModified = allowHistoryUpdateDeleteRawModified;
 #endif
-
-    copyUserTokenPoliciesToEndpoints(config);
 }
 
-void CustomAccessControl::setAccessControl(AccessControlBase& accessControl) {
+void CustomAccessControl::setAccessControl(
+    UA_AccessControl& native, AccessControlBase& accessControl
+) {
     userTokenPolicies_ = accessControl.getUserTokenPolicies();
     accessControl_ = &accessControl;
-    setAccessControl();
+    setAccessControl(native);
 }
 
-void CustomAccessControl::setAccessControl(std::unique_ptr<AccessControlBase> accessControl) {
+void CustomAccessControl::setAccessControl(
+    UA_AccessControl& native, std::unique_ptr<AccessControlBase> accessControl
+) {
     userTokenPolicies_ = accessControl->getUserTokenPolicies();
     accessControl_ = std::move(accessControl);
-    setAccessControl();
+    setAccessControl(native);
 }
 
 void CustomAccessControl::onSessionActivated(const NodeId& sessionId) {
@@ -422,25 +386,32 @@ void CustomAccessControl::onSessionClosed(const NodeId& sessionId) {
 }
 
 std::vector<Session> CustomAccessControl::getSessions() const {
+    assert(server_ != nullptr);
     std::vector<Session> result;
     for (auto id : sessionIds_) {
-        result.emplace_back(server_, std::move(id));
+        result.emplace_back(*server_, std::move(id));
     }
     return result;
 }
 
-Server& CustomAccessControl::getServer() noexcept {
-    return server_;
+void CustomAccessControl::setServer(Server& server) noexcept {
+    server_ = &server;
 }
 
+Server& CustomAccessControl::getServer() noexcept {
+    assert(server_ != nullptr);
+    return *server_;
+}
+
+// NOLINTNEXTLINE, https://stackoverflow.com/questions/53946674/noexcept-visitation-for-stdvariant
 AccessControlBase* CustomAccessControl::getAccessControl() noexcept {
-    if (auto* ptr = std::get_if<0>(&accessControl_); ptr != nullptr) {
-        return *ptr;
-    }
-    if (auto* ptr = std::get_if<1>(&accessControl_); ptr != nullptr) {
-        return ptr->get();
-    }
-    return nullptr;
+    return std::visit(
+        detail::Overload{
+            [](AccessControlBase* ptr) { return ptr; },
+            [](std::unique_ptr<AccessControlBase>& ptr) { return ptr.get(); }
+        },
+        accessControl_
+    );
 }
 
 }  // namespace opcua

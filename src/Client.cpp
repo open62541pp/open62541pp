@@ -19,8 +19,7 @@
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
 
-#include "CustomDataTypes.h"
-#include "CustomLogger.h"
+#include "ClientConfig.h"
 
 namespace opcua {
 
@@ -31,7 +30,7 @@ inline static UA_ClientConfig* getConfig(UA_Client* client) noexcept {
 }
 
 inline static UA_ClientConfig* getConfig(Client* client) noexcept {
-    return UA_Client_getConfig(client->handle());
+    return getConfig(client->handle());
 }
 
 /* --------------------------------------- State callbacks -------------------------------------- */
@@ -142,18 +141,16 @@ static void stateCallback(
 
 /* ----------------------------------------- Connection ----------------------------------------- */
 
-class Client::Connection {
-public:
+struct Client::Connection {
     Connection()
-        : client_(UA_Client_new()),
-          customDataTypes_(&getConfig(client_)->customDataTypes),
-          logger_(getConfig(client_)->logger) {
+        : client(UA_Client_new()),
+          config(*getConfig(client)) {
         applyDefaults();
     }
 
     ~Connection() {
-        UA_Client_disconnect(handle());
-        UA_Client_delete(handle());
+        UA_Client_disconnect(client);
+        UA_Client_delete(client);
     }
 
     // prevent copy & move
@@ -163,63 +160,40 @@ public:
     Connection& operator=(Connection&&) noexcept = delete;
 
     void applyDefaults() {
-        auto* config = getConfig(handle());
-        config->clientContext = &context_;
+        config->clientContext = &context;
         config->stateCallback = stateCallback;
     }
 
     void runIterate(uint16_t timeoutMilliseconds) {
-        const auto status = UA_Client_run_iterate(handle(), timeoutMilliseconds);
+        const auto status = UA_Client_run_iterate(client, timeoutMilliseconds);
         throwIfBad(status);
-        context_.exceptionCatcher.rethrow();
+        context.exceptionCatcher.rethrow();
     }
 
     void run() {
-        if (running_) {
+        if (running) {
             return;
         }
-        running_ = true;
+        running = true;
         try {
-            while (running_) {
+            while (running) {
                 runIterate(1000);
-                context_.exceptionCatcher.rethrow();
+                context.exceptionCatcher.rethrow();
             }
         } catch (...) {
-            running_ = false;
+            running = false;
             throw;
         }
     }
 
     void stop() {
-        running_ = false;
+        running = false;
     }
 
-    bool isRunning() const noexcept {
-        return running_;
-    }
-
-    UA_Client* handle() noexcept {
-        return client_;
-    }
-
-    detail::ClientContext& getContext() noexcept {
-        return context_;
-    }
-
-    auto& getCustomDataTypes() noexcept {
-        return customDataTypes_;
-    }
-
-    auto& getCustomLogger() noexcept {
-        return logger_;
-    }
-
-private:
-    UA_Client* client_;
-    detail::ClientContext context_;
-    CustomDataTypes customDataTypes_;
-    CustomLogger logger_;
-    std::atomic<bool> running_{false};
+    UA_Client* client;
+    ClientConfig config;
+    detail::ClientContext context;
+    std::atomic<bool> running{false};
 };
 
 /* ------------------------------------------- Client ------------------------------------------- */
@@ -309,7 +283,7 @@ std::vector<EndpointDescription> Client::getEndpoints(std::string_view serverUrl
 }
 
 void Client::setLogger(Logger logger) {
-    connection_->getCustomLogger().setLogger(std::move(logger));
+    connection_->config.setLogger(std::move(logger));
 }
 
 void Client::setTimeout(uint32_t milliseconds) {
@@ -321,7 +295,7 @@ void Client::setSecurityMode(MessageSecurityMode mode) {
 }
 
 void Client::setCustomDataTypes(std::vector<DataType> dataTypes) {
-    connection_->getCustomDataTypes().setCustomDataTypes(std::move(dataTypes));
+    connection_->config.setCustomDataTypes(std::move(dataTypes));
 }
 
 static void setStateCallback(Client& client, detail::ClientState state, StateCallback&& callback) {
@@ -418,7 +392,7 @@ void Client::stop() {
 }
 
 bool Client::isRunning() const noexcept {
-    return connection_->isRunning();
+    return connection_->running;
 }
 
 Node<Client> Client::getNode(NodeId id) {
@@ -442,11 +416,11 @@ Node<Client> Client::getViewsNode() {
 }
 
 UA_Client* Client::handle() noexcept {
-    return connection_->handle();
+    return connection_->client;
 }
 
 const UA_Client* Client::handle() const noexcept {
-    return connection_->handle();
+    return connection_->client;
 }
 
 /* ---------------------------------------------------------------------------------------------- */
@@ -464,7 +438,7 @@ bool operator!=(const Client& lhs, const Client& rhs) noexcept {
 namespace detail {
 
 ClientContext& getContext(Client& client) noexcept {
-    return client.connection_->getContext();
+    return client.connection_->context;
 }
 
 }  // namespace detail
