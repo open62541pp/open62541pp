@@ -78,16 +78,16 @@ static void stateCallback(UA_Client* client, UA_ClientState clientState) noexcep
     if (clientState != context->lastClientState) {
         switch (clientState) {
         case UA_CLIENTSTATE_DISCONNECTED:
-            invokeStateCallback(context, detail::ClientState::Disconnected);
+            invokeStateCallback(*context, detail::ClientState::Disconnected);
             break;
         case UA_CLIENTSTATE_CONNECTED:
-            invokeStateCallback(context, detail::ClientState::Connected);
+            invokeStateCallback(*context, detail::ClientState::Connected);
             break;
         case UA_CLIENTSTATE_SESSION:
-            invokeStateCallback(context, detail::ClientState::SessionActivated);
+            invokeStateCallback(*context, detail::ClientState::SessionActivated);
             break;
         case UA_CLIENTSTATE_SESSION_DISCONNECTED:
-            invokeStateCallback(context, detail::ClientState::SessionClosed);
+            invokeStateCallback(*context, detail::ClientState::SessionClosed);
             break;
         default:
             break;
