@@ -237,7 +237,7 @@ Client::Client(
 )
     : connection_(std::make_shared<detail::ClientConnection>()) {
     const auto status = UA_ClientConfig_setDefaultEncryption(
-        getConfig(handle()),
+        detail::getConfig(handle()),
         certificate,
         privateKey,
         asNative(trustList.data()),
@@ -246,7 +246,7 @@ Client::Client(
         revocationList.size()
     );
     throwIfBad(status);
-    getConfig(*this).securityMode = UA_MESSAGESECURITYMODE_SIGNANDENCRYPT;
+    detail::getConfig(*this).securityMode = UA_MESSAGESECURITYMODE_SIGNANDENCRYPT;
     connection_->applyDefaults();
 }
 #endif
