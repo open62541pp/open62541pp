@@ -1,6 +1,6 @@
 #pragma once
 
-#include "open62541pp/open62541.h"
+#include "open62541pp/detail/open62541/config.h"
 
 // expose open62541 compile options defined in open62541/config.h
 

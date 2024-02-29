@@ -7,11 +7,10 @@
 #include "open62541pp/NodeIds.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/detail/open62541/server.h"
 #include "open62541pp/services/detail/ClientService.h"
 #include "open62541pp/services/detail/ResponseHandling.h"
 #include "open62541pp/types/Builtin.h"
-
-#include "../open62541_impl.h"
 
 namespace opcua::services {
 

@@ -7,8 +7,7 @@
 #include "open62541pp/AccessControl.h"
 #include "open62541pp/Client.h"
 #include "open62541pp/Server.h"
-
-#include "open62541_impl.h"
+#include "open62541pp/detail/open62541/client.h"
 
 #include "helper/Runner.h"
 

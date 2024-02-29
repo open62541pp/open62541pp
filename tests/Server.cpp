@@ -7,9 +7,8 @@
 #include "open62541pp/Server.h"
 #include "open62541pp/ValueBackend.h"
 #include "open62541pp/detail/helper.h"
+#include "open62541pp/detail/open62541/server.h"
 #include "open62541pp/types/NodeId.h"
-
-#include "open62541_impl.h"
 
 using namespace std::chrono_literals;
 using namespace opcua;

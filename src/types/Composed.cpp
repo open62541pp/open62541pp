@@ -9,8 +9,8 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/helper.h"
-
-#include "../open62541_impl.h"
+#include "open62541pp/detail/open62541/common.h"
+#include "open62541pp/detail/open62541/server.h"  // UA_*Attributes_default
 
 namespace opcua {
 

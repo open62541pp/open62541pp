@@ -9,9 +9,9 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Logger.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/detail/open62541/common.h"
 
 #include "CustomLogger.h"
-#include "open62541_impl.h"
 
 namespace opcua::crypto {
 

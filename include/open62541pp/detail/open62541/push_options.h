@@ -1,8 +1,6 @@
-#pragma once
+// no include guard
 
-// public open62541 headers needed by open62541++
-
-#ifndef _MSC_VER
+#if defined(__GNUC__)
 // ignore compile warnings of open62541:
 // - missing initializer for member ‘UA_NodeId::identifier’
 // - missing initializer for member ‘UA_ExpandedNodeId::namespaceUri’
@@ -12,23 +10,5 @@
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wmissing-field-initializers"
 #pragma GCC diagnostic ignored "-Wmissing-braces"
-#endif
-
-#if __has_include(<open62541.h>)
-// UA_ENABLE_AMALGAMATION=ON
-#include <open62541.h>
-#else
-// UA_ENABLE_AMALGAMATION=OFF
-#include <open62541/config.h>
-#include <open62541/nodeids.h>
-#include <open62541/statuscodes.h>
-#include <open62541/types.h>
-#include <open62541/types_generated.h>
-
-// client
-#include <open62541/client.h>
-#endif
-
-#ifndef _MSC_VER
-#pragma GCC diagnostic pop
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 #endif
