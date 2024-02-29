@@ -95,10 +95,29 @@ public:
     std::string_view get() const noexcept;
 };
 
-bool operator==(const String& lhs, std::string_view rhs) noexcept;
-bool operator!=(const String& lhs, std::string_view rhs) noexcept;
-bool operator==(std::string_view lhs, const String& rhs) noexcept;
-bool operator!=(std::string_view lhs, const String& rhs) noexcept;
+inline bool operator==(const UA_String& lhs, const UA_String& rhs) noexcept {
+    return UA_String_equal(&lhs, &rhs);
+}
+
+inline bool operator!=(const UA_String& lhs, const UA_String& rhs) noexcept {
+    return !(lhs == rhs);
+}
+
+inline bool operator==(const String& lhs, std::string_view rhs) noexcept {
+    return (lhs.get() == rhs);
+}
+
+inline bool operator!=(const String& lhs, std::string_view rhs) noexcept {
+    return (lhs.get() != rhs);
+}
+
+inline bool operator==(std::string_view lhs, const String& rhs) noexcept {
+    return (lhs == rhs.get());
+}
+
+inline bool operator!=(std::string_view lhs, const String& rhs) noexcept {
+    return (lhs != rhs.get());
+}
 
 std::ostream& operator<<(std::ostream& os, const String& string);
 
@@ -117,6 +136,14 @@ public:
 
     std::string toString() const;
 };
+
+inline bool operator==(const UA_Guid& lhs, const UA_Guid& rhs) noexcept {
+    return UA_Guid_equal(&lhs, &rhs);
+}
+
+inline bool operator!=(const UA_Guid& lhs, const UA_Guid& rhs) noexcept {
+    return !(lhs == rhs);
+}
 
 std::ostream& operator<<(std::ostream& os, const Guid& guid);
 
@@ -151,10 +178,21 @@ public:
     std::string_view get() const noexcept;
 };
 
-bool operator==(const ByteString& lhs, std::string_view rhs) noexcept;
-bool operator!=(const ByteString& lhs, std::string_view rhs) noexcept;
-bool operator==(std::string_view lhs, const ByteString& rhs) noexcept;
-bool operator!=(std::string_view lhs, const ByteString& rhs) noexcept;
+inline bool operator==(const ByteString& lhs, std::string_view rhs) noexcept {
+    return (lhs.get() == rhs);
+}
+
+inline bool operator!=(const ByteString& lhs, std::string_view rhs) noexcept {
+    return (lhs.get() != rhs);
+}
+
+inline bool operator==(std::string_view lhs, const ByteString& rhs) noexcept {
+    return (lhs == rhs.get());
+}
+
+inline bool operator!=(std::string_view lhs, const ByteString& rhs) noexcept {
+    return (lhs != rhs.get());
+}
 
 /**
  * UA_XmlElement wrapper class.
@@ -190,6 +228,14 @@ public:
     std::string_view getName() const noexcept;
 };
 
+inline bool operator==(const UA_QualifiedName& lhs, const UA_QualifiedName& rhs) noexcept {
+    return (lhs.namespaceIndex == rhs.namespaceIndex) && (lhs.name == rhs.name);
+}
+
+inline bool operator!=(const UA_QualifiedName& lhs, const UA_QualifiedName& rhs) noexcept {
+    return !(lhs == rhs);
+}
+
 /**
  * UA_LocalizedText wrapper class.
  * The format of locale is `<language>[-<country/region>]`:
@@ -210,6 +256,14 @@ public:
 
     std::string_view getLocale() const noexcept;
 };
+
+inline bool operator==(const UA_LocalizedText& lhs, const UA_LocalizedText& rhs) noexcept {
+    return (lhs.locale == rhs.locale) && (lhs.text == rhs.text);
+}
+
+inline bool operator!=(const UA_LocalizedText& lhs, const UA_LocalizedText& rhs) noexcept {
+    return !(lhs == rhs);
+}
 
 /**
  * UA_DiagnosticInfo wrapper class.
