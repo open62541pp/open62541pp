@@ -79,6 +79,13 @@ public:
     );
 #endif
 
+    ~Client();
+
+    Client(const Client&) = delete;
+    Client(Client&&) noexcept = default;
+    Client& operator=(const Client&) = delete;
+    Client& operator=(Client&&) noexcept = default;
+
     /**
      * Gets a list of all registered servers at the given server.
      * @param serverUrl Server URL (for example `opc.tcp://localhost:4840`)
@@ -173,7 +180,7 @@ private:
     friend detail::ClientContext& detail::getContext(Client& client) noexcept;
 
     struct Connection;
-    std::shared_ptr<Connection> connection_;
+    std::unique_ptr<Connection> connection_;
 };
 
 /* ---------------------------------------------------------------------------------------------- */

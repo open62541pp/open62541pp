@@ -200,7 +200,7 @@ struct Client::Connection {
 /* ------------------------------------------- Client ------------------------------------------- */
 
 Client::Client(Logger logger)
-    : connection_(std::make_shared<Connection>()) {
+    : connection_(std::make_unique<Connection>()) {
     // The logger should be set as soon as possible, ideally even before UA_ClientConfig_setDefault.
     // However, the logger gets overwritten by UA_ClientConfig_setDefault() in older versions of
     // open62541. The best we can do in this case, is to first call UA_ClientConfig_setDefault and
@@ -227,7 +227,7 @@ Client::Client(
     Span<const ByteString> trustList,
     Span<const ByteString> revocationList
 )
-    : connection_(std::make_shared<Connection>()) {
+    : connection_(std::make_unique<Connection>()) {
     const auto status = UA_ClientConfig_setDefaultEncryption(
         getConfig(this),
         certificate,
@@ -242,6 +242,8 @@ Client::Client(
     connection_->applyDefaults();
 }
 #endif
+
+Client::~Client() = default;
 
 std::vector<ApplicationDescription> Client::findServers(std::string_view serverUrl) {
     size_t arraySize{};
