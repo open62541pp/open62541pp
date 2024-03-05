@@ -18,34 +18,45 @@ class Result;
 template <>
 class Result<void> {
 public:
+    /**
+     * Create a default Result (good status code).
+     */
     constexpr Result() noexcept = default;
 
-    // NOLINTNEXTLINE, implicit wanted
-    constexpr Result(opcua::StatusCode code) noexcept
+    /**
+     * Create a Result with the given code.
+     */
+    constexpr Result(opcua::StatusCode code) noexcept  // NOLINT, implicit wanted
         : code_(code) {}
 
-    // NOLINTNEXTLINE, implicit wanted
-    operator StatusCode() {
+    /**
+     * Check if the Result's status code is good.
+     */
+    explicit operator bool() const noexcept {
+        return code().isGood();
+    }
+
+    /**
+     * Convert the Result to a StatusCode.
+     */
+    operator StatusCode() const noexcept {  // NOLINT, implicit wanted
         return code_;
     }
 
-    // NOLINTNEXTLINE, implicit wanted
-    operator UA_StatusCode() {
+    /**
+     * Convert the Result to a UA_StatusCode.
+     */
+    operator UA_StatusCode() const noexcept {  // NOLINT, implicit wanted
         return code_;
     }
 
     constexpr void operator*() const noexcept {}
 
+    /**
+     * Get the code of the Result.
+     */
     constexpr StatusCode code() const noexcept {
         return code_;
-    }
-
-    constexpr void value() const& {
-        checkIsBad();
-    }
-
-    constexpr void value() && {
-        checkIsBad();
     }
 
 private:
@@ -68,13 +79,16 @@ public:
 };
 
 /**
- * Result encapsulates a result value and a status code.
- * A result may contain just an error status code, just the return value or both.
+ * Result encapsulates a status code and a result value.
+ * A result may have one of the following contents:
+ * - just an error status code
+ * - a good status code and a return value
+ * - an uncertain status code and a return value
  */
 template <typename T>
 class Result {
 public:
-    constexpr Result() noexcept = default;
+    using ValueType = T;
 
     // NOLINTNEXTLINE, implicit wanted
     constexpr Result(const T& value) noexcept(std::is_nothrow_copy_constructible_v<T>)
@@ -98,66 +112,123 @@ public:
         : code_(code),
           maybeValue_(std::move(value)) {}
 
+    /**
+     * Check if the Result's status code is good.
+     */
+    explicit operator bool() const noexcept {
+        return code().isGood();
+    }
+
     // TODO:
     // Think about conversion operator to value
 
+    /**
+     * Get the value of the Result.
+     * Accessing a Result without a value leads to undefined behavior.
+     */
     constexpr const T* operator->() const noexcept {
         return &(*maybeValue_);
     }
 
+    /**
+     * Get the value of the Result.
+     * Accessing a Result without a value leads to undefined behavior.
+     */
     constexpr T* operator->() noexcept {
         return &(*maybeValue_);
     }
 
+    /**
+     * Get the value of the Result.
+     * Accessing a Result without a value leads to undefined behavior.
+     */
     constexpr const T& operator*() const& noexcept {
         return *maybeValue_;
     }
 
+    /**
+     * Get the value of the Result.
+     * Accessing a Result without a value leads to undefined behavior.
+     */
     constexpr T& operator*() & noexcept {
         return *maybeValue_;
     }
 
+    /**
+     * Get the value of the Result.
+     * Accessing a Result without a value leads to undefined behavior.
+     */
     constexpr const T&& operator*() const&& noexcept {
         return std::move(*maybeValue_);
     }
 
+    /**
+     * Get the value of the Result.
+     * Accessing a Result without a value leads to undefined behavior.
+     */
     constexpr T&& operator*() && noexcept {
         return std::move(*maybeValue_);
     }
 
+    /**
+     * Get the code of the Result.
+     */
     constexpr StatusCode code() const noexcept {
         return code_;
     }
 
+    /**
+     * Check if the Result has a value.
+     */
     bool hasValue() const noexcept {
         return maybeValue_.has_value();
     }
 
+    /**
+     * Get the value of the Result.
+     */
     constexpr const T& value() const& {
         checkIsBad();
         return **this;
     }
 
+    /**
+     * Get the value of the Result.
+     */
     constexpr T& value() & {
         checkIsBad();
         return **this;
     }
 
+    /**
+     * Get the value of the Result.
+     */
     constexpr const T&& value() const&& {
         checkIsBad();
         return std::move(**this);
     }
 
+    /**
+     * Get the value of the Result.
+     */
     constexpr T&& value() && {
         checkIsBad();
         return std::move(**this);
     }
 
+    /**
+     * Get the value of the Result or a default value.
+     * The default value is returned in case of an error status code.
+     */
     template <typename U>
     constexpr T valueOr(U&& defaultValue) const& {
         return !isBad() ? **this : static_cast<T>(std::forward<U>(defaultValue));
     }
 
+    /**
+     * Get the value of the Result or a default value.
+     * The default value is returned in case of an error status code.
+     */
     template <typename U>
     constexpr T valueOr(U&& defaultValue) && {
         return !isBad() ? std::move(**this) : static_cast<T>(std::forward<U>(defaultValue));

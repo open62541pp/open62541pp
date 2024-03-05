@@ -16,6 +16,11 @@ TEST_CASE("Result") {
         CHECK(Result<int>(badResult).code() == badCode);
     }
 
+    SUBCASE("operator bool") {
+        CHECK(static_cast<bool>(Result<int>(1)) == true);
+        CHECK(static_cast<bool>(Result<int>(badResult)) == false);
+    }
+
     SUBCASE("operator->") {
         struct S {
             int a;
@@ -31,13 +36,8 @@ TEST_CASE("Result") {
         CHECK(*result == 1);
         CHECK(*std::as_const(result) == 1);
 
-        Result<int> resultError(badResult);
-        CHECK(*resultError == 0);
-        CHECK(*std::as_const(resultError) == 0);
-
         SUBCASE("rvalue") {
             CHECK(*Result<int>(1) == 1);
-            CHECK(*Result<int>(badResult) == 0);
         }
     }
 
@@ -74,6 +74,23 @@ TEST_CASE("Result (void template specialization)") {
     SUBCASE("code") {
         CHECK(Result<void>().code() == UA_STATUSCODE_GOOD);
         CHECK(Result<void>(badResult).code() == badCode);
+    }
+
+    SUBCASE("operator bool") {
+        CHECK(static_cast<bool>(Result<void>()) == true);
+        CHECK(static_cast<bool>(Result<void>(badResult)) == false);
+    }
+
+    SUBCASE("operator StatusCode") {
+        CHECK(static_cast<StatusCode>(Result<void>()) == UA_STATUSCODE_GOOD);
+        CHECK(static_cast<StatusCode>(Result<void>(badResult)) == UA_STATUSCODE_BADUNEXPECTEDERROR);
+    }
+
+    SUBCASE("operator UA_StatusCode") {
+        CHECK(static_cast<UA_StatusCode>(Result<void>()) == UA_STATUSCODE_GOOD);
+        CHECK(
+            static_cast<UA_StatusCode>(Result<void>(badResult)) == UA_STATUSCODE_BADUNEXPECTEDERROR
+        );
     }
 }
 
