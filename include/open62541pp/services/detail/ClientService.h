@@ -13,8 +13,8 @@
 #include "open62541pp/detail/ClientContext.h"
 #include "open62541pp/detail/ExceptionCatcher.h"
 #include "open62541pp/detail/ScopeExit.h"
+#include "open62541pp/detail/open62541/client.h"
 #include "open62541pp/detail/result_util.h"
-#include "open62541pp/open62541.h"
 
 namespace opcua::services::detail {
 

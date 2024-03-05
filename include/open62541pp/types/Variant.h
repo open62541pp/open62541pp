@@ -15,8 +15,8 @@
 #include "open62541pp/TypeConverter.h"
 #include "open62541pp/TypeRegistry.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/detail/traits.h"
-#include "open62541pp/open62541.h"
 
 namespace opcua {
 

@@ -8,8 +8,8 @@
 
 #include "open62541pp/Common.h"  // TypeIndex
 #include "open62541pp/ErrorHandling.h"
+#include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/detail/traits.h"  // IsOneOf
-#include "open62541pp/open62541.h"
 
 namespace opcua::detail {
 

@@ -5,7 +5,7 @@
 #include "open62541pp/Common.h"
 #include "open62541pp/Span.h"
 #include "open62541pp/Wrapper.h"
-#include "open62541pp/open62541.h"
+#include "open62541pp/detail/open62541/common.h"
 
 namespace opcua {
 
@@ -64,8 +64,6 @@ bool operator==(const UA_DataTypeMember& lhs, const UA_DataTypeMember& rhs) noex
 bool operator!=(const UA_DataTypeMember& lhs, const UA_DataTypeMember& rhs) noexcept;
 bool operator==(const UA_DataType& lhs, const UA_DataType& rhs) noexcept;
 bool operator!=(const UA_DataType& lhs, const UA_DataType& rhs) noexcept;
-bool operator==(const DataType& lhs, const DataType& rhs) noexcept;
-bool operator!=(const DataType& lhs, const DataType& rhs) noexcept;
 
 /* ------------------------------------------- Helper ------------------------------------------- */
 

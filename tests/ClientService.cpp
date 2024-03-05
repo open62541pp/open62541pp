@@ -4,7 +4,7 @@
 
 #include "open62541pp/Client.h"
 #include "open62541pp/Server.h"
-#include "open62541pp/open62541.h"
+#include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/services/detail/ClientService.h"
 #include "open62541pp/services/detail/ResponseHandling.h"
 #include "open62541pp/types/Composed.h"  // ReadResponse

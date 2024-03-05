@@ -5,7 +5,7 @@
 #include <utility>  // forward
 
 #include "open62541pp/TypeWrapper.h"
-#include "open62541pp/open62541.h"
+#include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/DateTime.h"
 #include "open62541pp/types/Variant.h"

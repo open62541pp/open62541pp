@@ -7,7 +7,7 @@
 
 #include "open62541pp/Bitmask.h"
 #include "open62541pp/Common.h"  // AttributeId, WriteMask, EventNotifier, AccessLevel
-#include "open62541pp/open62541.h"
+#include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"

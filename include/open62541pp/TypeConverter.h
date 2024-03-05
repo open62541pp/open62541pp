@@ -7,7 +7,6 @@
 #include <type_traits>
 
 #include "open62541pp/Common.h"  // TypeIndex
-#include "open62541pp/open62541.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/DateTime.h"
 

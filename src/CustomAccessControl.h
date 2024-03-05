@@ -29,7 +29,9 @@ public:
     /// Set and apply custom access control.
     void setAccessControl(UA_AccessControl& native, AccessControlBase& accessControl);
     /// Set and apply custom access control (transfer ownership).
-    void setAccessControl(UA_AccessControl& native, std::unique_ptr<AccessControlBase> accessControl);
+    void setAccessControl(
+        UA_AccessControl& native, std::unique_ptr<AccessControlBase> accessControl
+    );
 
     void onSessionActivated(const NodeId& sessionId);
     void onSessionClosed(const NodeId& sessionId);

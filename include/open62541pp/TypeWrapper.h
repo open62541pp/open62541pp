@@ -9,8 +9,7 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Wrapper.h"
 #include "open62541pp/detail/helper.h"
-#include "open62541pp/open62541.h"
-#include "open62541pp/overloads/comparison.h"
+#include "open62541pp/detail/open62541/common.h"
 
 namespace opcua {
 
@@ -131,39 +130,5 @@ template <typename T>
 inline constexpr bool isTypeWrapper = IsTypeWrapper<T>::value;
 
 }  // namespace detail
-
-/* ----------------------------------------- Comparison ----------------------------------------- */
-
-// generate from UA_* type comparison
-
-template <typename T, typename = std::enable_if_t<detail::isTypeWrapper<T>>>
-inline bool operator==(const T& lhs, const T& rhs) noexcept {
-    return (*lhs.handle() == *rhs.handle());
-}
-
-template <typename T, typename = std::enable_if_t<detail::isTypeWrapper<T>>>
-inline bool operator!=(const T& lhs, const T& rhs) noexcept {
-    return (*lhs.handle() != *rhs.handle());
-}
-
-template <typename T, typename = std::enable_if_t<detail::isTypeWrapper<T>>>
-inline bool operator<(const T& lhs, const T& rhs) noexcept {
-    return (*lhs.handle() < *rhs.handle());
-}
-
-template <typename T, typename = std::enable_if_t<detail::isTypeWrapper<T>>>
-inline bool operator>(const T& lhs, const T& rhs) noexcept {
-    return (*lhs.handle() > *rhs.handle());
-}
-
-template <typename T, typename = std::enable_if_t<detail::isTypeWrapper<T>>>
-inline bool operator<=(const T& lhs, const T& rhs) noexcept {
-    return (*lhs.handle() <= *rhs.handle());
-}
-
-template <typename T, typename = std::enable_if_t<detail::isTypeWrapper<T>>>
-inline bool operator>=(const T& lhs, const T& rhs) noexcept {
-    return (*lhs.handle() >= *rhs.handle());
-}
 
 }  // namespace opcua

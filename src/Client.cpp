@@ -13,7 +13,8 @@
 #include "open62541pp/Node.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/ClientContext.h"
-#include "open62541pp/open62541.h"
+#include "open62541pp/detail/open62541/client.h"
+#include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/services/Attribute.h"  // readValue
 #include "open62541pp/services/Subscription.h"
 #include "open62541pp/types/Builtin.h"
@@ -421,16 +422,6 @@ UA_Client* Client::handle() noexcept {
 
 const UA_Client* Client::handle() const noexcept {
     return connection_->client;
-}
-
-/* ---------------------------------------------------------------------------------------------- */
-
-bool operator==(const Client& lhs, const Client& rhs) noexcept {
-    return (lhs.handle() == rhs.handle());
-}
-
-bool operator!=(const Client& lhs, const Client& rhs) noexcept {
-    return !(lhs == rhs);
 }
 
 /* ------------------------------------------- Context ------------------------------------------ */

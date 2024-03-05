@@ -1,6 +1,6 @@
 #pragma once
 
-#include "open62541pp/open62541.h"  // UA_ClientConfig
+#include "open62541pp/detail/open62541/client.h"  // UA_ClientConfig
 
 #include "CustomDataTypes.h"
 #include "CustomLogger.h"

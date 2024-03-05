@@ -12,7 +12,7 @@
 #include "open62541pp/Span.h"
 #include "open62541pp/TypeRegistry.h"  // getDataType
 #include "open62541pp/Wrapper.h"  // asWrapper
-#include "open62541pp/open62541.h"
+#include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/services/Attribute.h"
 #include "open62541pp/services/Method.h"
 #include "open62541pp/services/NodeManagement.h"

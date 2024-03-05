@@ -17,6 +17,7 @@
 #include "open62541pp/ValueBackend.h"
 #include "open62541pp/Wrapper.h"  // asWrapper
 #include "open62541pp/detail/ServerContext.h"
+#include "open62541pp/detail/open62541/server.h"
 #include "open62541pp/services/Attribute.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
@@ -24,7 +25,6 @@
 #include "open62541pp/types/Variant.h"
 
 #include "ServerConfig.h"
-#include "open62541_impl.h"
 
 namespace opcua {
 
@@ -379,16 +379,6 @@ UA_Server* Server::handle() noexcept {
 
 const UA_Server* Server::handle() const noexcept {
     return connection_->server;
-}
-
-/* ---------------------------------------------------------------------------------------------- */
-
-bool operator==(const Server& lhs, const Server& rhs) noexcept {
-    return (lhs.handle() == rhs.handle());
-}
-
-bool operator!=(const Server& lhs, const Server& rhs) noexcept {
-    return !(lhs == rhs);
 }
 
 /* ------------------------------------------- Context ------------------------------------------ */
