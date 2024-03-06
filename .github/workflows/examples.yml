@@ -1,0 +1,25 @@
+name: Examples
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  linux:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: aminya/setup-cpp@v1
+        with:
+          ninja: true
+      - name: Build
+        run: |
+          mkdir build
+          cd build
+          cmake -G Ninja -DUAPP_BUILD_EXAMPLES=ON ..
+          cmake --build .
+      - name: Run examples
+        run: python3 ./tools/run_examples.py ./build/bin/examples/
