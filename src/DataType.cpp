@@ -5,8 +5,6 @@
 #include <cstring>
 #include <utility>  // exchange, move, swap
 
-#include "open62541pp/Config.h"
-
 namespace opcua {
 
 static void clearMembers(UA_DataType& native) noexcept {
