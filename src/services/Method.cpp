@@ -8,6 +8,10 @@
 
 namespace opcua::services {
 
+CallResponse call(Client& client, const CallRequest& request) {
+    return callAsync(client, request, detail::SyncOperation{});
+}
+
 template <>
 std::vector<Variant> call(
     Server& server,

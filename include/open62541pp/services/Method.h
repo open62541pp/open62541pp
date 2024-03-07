@@ -10,6 +10,7 @@
 #include "open62541pp/services/detail/ClientService.h"
 #include "open62541pp/services/detail/RequestHandling.h"
 #include "open62541pp/services/detail/ResponseHandling.h"
+#include "open62541pp/types/Composed.h"
 #include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"
 
@@ -29,6 +30,27 @@ namespace opcua::services {
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.11.2
  * @{
  */
+
+/**
+ * Call server methods and return results.
+ * @param client Instance of type Client
+ * @param request Call request
+ */
+CallResponse call(Client& client, const CallRequest& request);
+
+/**
+ * Asynchronously call server methods and return results.
+ * @copydetails call
+ * @param token @completiontoken{void(opcua::StatusCode, CallResponse&)}
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+auto callAsync(
+    Client& client, const CallRequest& request, CompletionToken&& token = DefaultCompletionToken()
+) {
+    return detail::sendRequest<UA_CallRequest, UA_CallResponse>(
+        client, request, detail::WrapResponse<CallResponse>{}, std::forward<CompletionToken>(token)
+    );
+}
 
 /**
  * Call a server method and return results.
