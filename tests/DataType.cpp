@@ -57,7 +57,6 @@ static const UA_DataType pointType = detail::createDataType(
 
 /* ---------------------------------------------------------------------------------------------- */
 
-
 static void checkDataTypeEqual(const UA_DataType& dt, const UA_DataType& expected) {
 #ifdef UA_ENABLE_TYPEDESCRIPTION
     CHECK(std::string_view(dt.typeName) == std::string_view(expected.typeName));
@@ -69,17 +68,19 @@ static void checkDataTypeEqual(const UA_DataType& dt, const UA_DataType& expecte
     CHECK(dt.pointerFree == expected.pointerFree);
     CHECK(dt.overlayable == expected.overlayable);
     for (uint8_t i = 0; i < dt.membersSize; ++i) {
+        auto& member = dt.members[i];
+        auto& memberExpected = expected.members[i];
         CAPTURE(i);
 #if UAPP_OPEN62541_VER_GE(1, 3)
-        CHECK(dt.members[i].memberType == expected.members[i].memberType);  // NOLINT
+        CHECK(member.memberType == memberExpected.memberType);  // NOLINT
 #else
-        CHECK(dt.members[i].memberTypeIndex == expected.members[i].memberTypeIndex);  // NOLINT
-        CHECK(dt.members[i].namespaceZero == expected.members[i].namespaceZero);  // NOLINT
+        CHECK(member.memberTypeIndex == memberExpected.memberTypeIndex);  // NOLINT
+        CHECK((bool)dt.members[i].namespaceZero == (bool)memberExpected.namespaceZero);  // NOLINT
 #endif
-        CHECK((uint8_t)dt.members[i].padding == (uint8_t)expected.members[i].padding);  // NOLINT
-        CHECK((bool)dt.members[i].isArray == (bool)expected.members[i].isArray);  // NOLINT
+        CHECK((uint8_t)member.padding == (uint8_t)memberExpected.padding);  // NOLINT
+        CHECK((bool)member.isArray == (bool)memberExpected.isArray);  // NOLINT
 #if UAPP_OPEN62541_VER_GE(1, 1)
-        CHECK((bool)dt.members[i].isOptional == (bool)expected.members[i].isOptional);  // NOLINT
+        CHECK((bool)member.isOptional == (bool)memberExpected.isOptional);  // NOLINT
 #endif
     }
 }
