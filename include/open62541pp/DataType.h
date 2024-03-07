@@ -3,6 +3,7 @@
 #include <cstdint>
 
 #include "open62541pp/Common.h"  // TypeIndex
+#include "open62541pp/Config.h"
 #include "open62541pp/Span.h"
 #include "open62541pp/Wrapper.h"
 #include "open62541pp/detail/open62541/common.h"
@@ -67,10 +68,14 @@ inline bool operator!=(const UA_DataType& lhs, const UA_DataType& rhs) noexcept 
 }
 
 inline bool operator==(const UA_DataTypeMember& lhs, const UA_DataTypeMember& rhs) noexcept {
+#if UAPP_OPEN62541_VER_GE(1, 3)
     if (lhs.memberType == nullptr || rhs.memberType == nullptr) {
         return false;
     }
     return (lhs.memberType == rhs.memberType) || (*lhs.memberType == *rhs.memberType);
+#else
+    return lhs.memberTypeIndex == rhs.memberTypeIndex;
+#endif
 }
 
 inline bool operator!=(const UA_DataTypeMember& lhs, const UA_DataTypeMember& rhs) noexcept {
