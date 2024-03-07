@@ -32,14 +32,14 @@ namespace opcua::services {
  */
 
 /**
- * Call server methods and return results.
+ * Call server methods.
  * @param client Instance of type Client
  * @param request Call request
  */
 CallResponse call(Client& client, const CallRequest& request);
 
 /**
- * Asynchronously call server methods and return results.
+ * Asynchronously call server methods.
  * @copydetails call
  * @param token @completiontoken{void(opcua::StatusCode, CallResponse&)}
  */
@@ -53,7 +53,7 @@ auto callAsync(
 }
 
 /**
- * Call a server method and return results.
+ * Call a server method and return outputs.
  * The `objectId` must have a `HasComponent` reference to the method specified in `methodId`.
  *
  * @param serverOrClient Instance of type Server or Client
@@ -74,7 +74,7 @@ std::vector<Variant> call(
 );
 
 /**
- * Asynchronously call a server method and return results.
+ * Asynchronously call a server method and return outputs.
  *
  * @param client Instance of type Client
  * @param objectId NodeId of the object on which the method is invoked
