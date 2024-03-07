@@ -8,7 +8,6 @@
 #include <utility>  // move
 
 #include "open62541pp/Client.h"
-#include "open62541pp/Common.h"  // MonitoringMode
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeWrapper.h"

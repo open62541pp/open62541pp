@@ -2,7 +2,7 @@
 
 #include <cstdint>
 
-#include "open62541pp/Common.h"
+#include "open62541pp/Common.h"  // TypeIndex
 #include "open62541pp/Span.h"
 #include "open62541pp/Wrapper.h"
 #include "open62541pp/detail/open62541/common.h"
