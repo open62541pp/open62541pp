@@ -25,7 +25,7 @@ class Span;
 class Variant;
 
 using SubscriptionParameters = services::SubscriptionParameters;
-using MonitoringParameters = services::MonitoringParameters;
+using MonitoringParametersEx = services::MonitoringParametersEx;
 
 /// Data change notification callback.
 /// @tparam T Server or Client
@@ -83,37 +83,37 @@ public:
 
     /// Create a monitored item for data change notifications (default settings).
     /// The monitoring mode is set to MonitoringMode::Reporting and the default open62541
-    /// MonitoringParameters are used.
-    /// @see services::MonitoringParameters
+    /// MonitoringParametersEx are used.
+    /// @see services::MonitoringParametersEx
     MonitoredItem<ServerOrClient> subscribeDataChange(
         const NodeId& id, AttributeId attribute, DataChangeCallback<ServerOrClient> onDataChange
     );
 
     /// Create a monitored item for data change notifications.
-    /// @copydetails services::MonitoringParameters
+    /// @copydetails services::MonitoringParametersEx
     MonitoredItem<ServerOrClient> subscribeDataChange(
         const NodeId& id,
         AttributeId attribute,
         MonitoringMode monitoringMode,
-        MonitoringParameters& parameters,
+        MonitoringParametersEx& parameters,
         DataChangeCallback<ServerOrClient> onDataChange
     );
 
     /// Create a monitored item for event notifications (default settings).
     /// The monitoring mode is set to MonitoringMode::Reporting and the default open62541
-    /// MonitoringParameters are used.
+    /// MonitoringParametersEx are used.
     /// @note Not implemented for Server.
     MonitoredItem<ServerOrClient> subscribeEvent(
         const NodeId& id, const EventFilter& eventFilter, EventCallback<ServerOrClient> onEvent
     );
 
     /// Create a monitored item for event notifications.
-    /// @copydetails services::MonitoringParameters
+    /// @copydetails services::MonitoringParametersEx
     /// @note Not implemented for Server.
     MonitoredItem<ServerOrClient> subscribeEvent(
         const NodeId& id,
         MonitoringMode monitoringMode,
-        MonitoringParameters& parameters,
+        MonitoringParametersEx& parameters,
         EventCallback<ServerOrClient> onEvent
     );
 

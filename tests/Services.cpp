@@ -824,7 +824,7 @@ TEST_CASE("MonitoredItem service set (client)") {
     services::addVariable(server, {0, UA_NS0ID_OBJECTSFOLDER}, id, "Variable");
 
     services::SubscriptionParameters subscriptionParameters{};
-    services::MonitoringParameters monitoringParameters{};
+    services::MonitoringParametersEx monitoringParameters{};
 
     SUBCASE("createMonitoredItemDataChange without subscription") {
         CHECK_THROWS(discard(services::createMonitoredItemDataChange(
@@ -911,7 +911,7 @@ TEST_CASE("MonitoredItem service set (client)") {
         );
         CAPTURE(monId);
 
-        services::MonitoringParameters modifiedParameters{};
+        services::MonitoringParametersEx modifiedParameters{};
         modifiedParameters.samplingInterval = 1000.0;
         CHECK_NOTHROW(services::modifyMonitoredItem(client, subId, monId, modifiedParameters));
         CHECK(modifiedParameters.samplingInterval == 1000.0);  // should not be revised
@@ -997,7 +997,7 @@ TEST_CASE("MonitoredItem service set (client)") {
 TEST_CASE("MonitoredItem service set (server)") {
     Server server;
 
-    services::MonitoringParameters monitoringParameters{};
+    services::MonitoringParametersEx monitoringParameters{};
 
     SUBCASE("createMonitoredItemDataChange") {
         size_t notificationCount = 0;

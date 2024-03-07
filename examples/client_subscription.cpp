@@ -39,7 +39,7 @@ int main() {
         );
 
         // Modify and delete the monitored item via the returned MonitoredItem<T> object
-        opcua::MonitoringParameters monitoringParameters{};
+        opcua::MonitoringParametersEx monitoringParameters{};
         monitoringParameters.samplingInterval = 100.0;
         mon.setMonitoringParameters(monitoringParameters);
         mon.setMonitoringMode(opcua::MonitoringMode::Reporting);
