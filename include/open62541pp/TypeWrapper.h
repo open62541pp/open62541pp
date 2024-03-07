@@ -5,7 +5,7 @@
 #include <type_traits>
 #include <utility>  // exchange, swap
 
-#include "open62541pp/Common.h"
+#include "open62541pp/Common.h"  // TypeIndex
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Wrapper.h"
 #include "open62541pp/detail/helper.h"

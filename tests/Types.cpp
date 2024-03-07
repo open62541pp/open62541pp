@@ -6,7 +6,6 @@
 
 #include <doctest/doctest.h>
 
-#include "open62541pp/Common.h"
 #include "open62541pp/Config.h"
 #include "open62541pp/NodeIds.h"
 #include "open62541pp/detail/helper.h"  // detail::toString

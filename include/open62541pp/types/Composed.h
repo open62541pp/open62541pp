@@ -8,7 +8,7 @@
 #include <variant>
 
 #include "open62541pp/Bitmask.h"
-#include "open62541pp/Common.h"
+#include "open62541pp/Common.h"  // AttributeId, TimestampsToReturn, ...
 #include "open62541pp/Config.h"
 #include "open62541pp/NodeIds.h"  // ReferenceTypeId
 #include "open62541pp/Span.h"

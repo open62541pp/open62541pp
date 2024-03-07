@@ -4,7 +4,7 @@
 #include <type_traits>  // remove_const_t
 #include <vector>
 
-#include "open62541pp/Common.h"
+#include "open62541pp/Common.h"  // AttributeId, TimestampsToReturn, MonitoringMode
 #include "open62541pp/Span.h"
 #include "open62541pp/TypeWrapper.h"  // asNative
 #include "open62541pp/detail/open62541/common.h"

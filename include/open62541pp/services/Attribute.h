@@ -7,7 +7,7 @@
 
 #include "open62541pp/Bitmask.h"
 #include "open62541pp/Client.h"
-#include "open62541pp/Common.h"
+#include "open62541pp/Common.h"  // TimestampsToReturn
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Span.h"
 #include "open62541pp/TypeWrapper.h"

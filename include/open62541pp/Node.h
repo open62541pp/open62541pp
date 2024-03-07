@@ -6,7 +6,7 @@
 #include <vector>
 
 #include "open62541pp/Bitmask.h"
-#include "open62541pp/Common.h"
+#include "open62541pp/Common.h"  // BrowseDirection
 #include "open62541pp/Config.h"
 #include "open62541pp/NodeIds.h"
 #include "open62541pp/Span.h"

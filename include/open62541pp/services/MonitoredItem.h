@@ -3,7 +3,7 @@
 #include <cstdint>
 #include <functional>
 
-#include "open62541pp/Common.h"
+#include "open62541pp/Common.h"  // TimestampsToReturn, MonitoringMode
 #include "open62541pp/Config.h"
 #include "open62541pp/Span.h"
 #include "open62541pp/types/ExtensionObject.h"
