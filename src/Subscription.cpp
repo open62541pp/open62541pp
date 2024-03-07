@@ -35,7 +35,7 @@ template <typename T>
 MonitoredItem<T> Subscription<T>::subscribeDataChange(
     const NodeId& id, AttributeId attribute, DataChangeCallback<T> onDataChange
 ) {
-    MonitoringParameters parameters;
+    MonitoringParametersEx parameters;
     return subscribeDataChange(
         id, attribute, MonitoringMode::Reporting, parameters, std::move(onDataChange)
     );
@@ -72,7 +72,7 @@ MonitoredItem<Server> Subscription<Server>::subscribeDataChange(
     const NodeId& id,
     AttributeId attribute,
     MonitoringMode monitoringMode,
-    MonitoringParameters& parameters,
+    MonitoringParametersEx& parameters,
     DataChangeCallback<Server> onDataChange
 ) {
     const uint32_t monitoredItemId = services::createMonitoredItemDataChange(
@@ -123,7 +123,7 @@ MonitoredItem<Client> Subscription<Client>::subscribeDataChange(
     const NodeId& id,
     AttributeId attribute,
     MonitoringMode monitoringMode,
-    MonitoringParameters& parameters,
+    MonitoringParametersEx& parameters,
     DataChangeCallback<Client> onDataChange
 ) {
     const uint32_t monitoredItemId = services::createMonitoredItemDataChange(
@@ -146,7 +146,7 @@ template <>
 MonitoredItem<Client> Subscription<Client>::subscribeEvent(
     const NodeId& id,
     MonitoringMode monitoringMode,
-    MonitoringParameters& parameters,
+    MonitoringParametersEx& parameters,
     EventCallback<Client> onEvent
 ) {
     const uint32_t monitoredItemId = services::createMonitoredItemEvent(
@@ -169,7 +169,7 @@ template <>
 MonitoredItem<Client> Subscription<Client>::subscribeEvent(
     const NodeId& id, const EventFilter& eventFilter, EventCallback<Client> onEvent
 ) {
-    MonitoringParameters parameters;
+    MonitoringParametersEx parameters;
     parameters.filter = ExtensionObject::fromDecodedCopy(eventFilter);
     return subscribeEvent(id, MonitoringMode::Reporting, parameters, std::move(onEvent));
 }

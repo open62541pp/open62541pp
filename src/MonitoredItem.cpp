@@ -88,7 +88,7 @@ void MonitoredItem<Server>::deleteMonitoredItem() {
 /* ----------------------------------- Client specializations ----------------------------------- */
 
 template <>
-void MonitoredItem<Client>::setMonitoringParameters(MonitoringParameters& parameters) {
+void MonitoredItem<Client>::setMonitoringParameters(MonitoringParametersEx& parameters) {
     services::modifyMonitoredItem(connection_, subscriptionId_, monitoredItemId_, parameters);
 }
 

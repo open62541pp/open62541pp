@@ -25,7 +25,7 @@ TEST_CASE("Subscription & MonitoredItem (server)") {
     CHECK(sub.getConnection() == server);
     CHECK(sub.getMonitoredItems().empty());
 
-    MonitoringParameters monitoringParameters{};
+    MonitoringParametersEx monitoringParameters{};
     monitoringParameters.samplingInterval = 0.0;  // = fastest practical
 
     size_t notificationCount = 0;
@@ -87,7 +87,7 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
 
     SUBCASE("Monitor data change") {
         SubscriptionParameters subscriptionParameters{};
-        MonitoringParameters monitoringParameters{};
+        MonitoringParametersEx monitoringParameters{};
 
         auto sub = client.createSubscription(subscriptionParameters);
         sub.setPublishingMode(false);  // enable later
@@ -164,7 +164,7 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
 
         mon.setMonitoringMode(MonitoringMode::Disabled);
 
-        MonitoringParameters monitoringParameters{};
+        MonitoringParametersEx monitoringParameters{};
         monitoringParameters.samplingInterval = 0.0;  // = fastest practical rate
         mon.setMonitoringParameters(monitoringParameters);
         CHECK(monitoringParameters.samplingInterval > 0.0);
