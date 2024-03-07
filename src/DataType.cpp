@@ -6,7 +6,6 @@
 #include <utility>  // exchange, move, swap
 
 #include "open62541pp/Config.h"
-#include "open62541pp/types/NodeId.h"
 
 namespace opcua {
 
@@ -169,86 +168,6 @@ void DataType::setMembers(Span<const DataTypeMember> members) {
     assert(members.size() < (1U << 8U));
     clearMembers(native());
     copyMembers(members.data(), members.size(), native());
-}
-
-bool operator==(const UA_DataTypeMember& lhs, const UA_DataTypeMember& rhs) noexcept {
-#if UAPP_OPEN62541_VER_GE(1, 3)
-    if (lhs.memberType != rhs.memberType) {
-        return false;
-    }
-#else
-    if ((lhs.memberTypeIndex != rhs.memberTypeIndex) && (lhs.namespaceZero != rhs.namespaceZero)) {
-        return false;
-    }
-#endif
-    if (lhs.padding != rhs.padding) {
-        return false;
-    }
-    if (lhs.isArray != rhs.isArray) {
-        return false;
-    }
-#if UAPP_OPEN62541_VER_GE(1, 1)
-    if (lhs.isOptional != rhs.isOptional) {
-        return false;
-    }
-#endif
-#ifdef UA_ENABLE_TYPEDESCRIPTION
-    if (std::strcmp(emptyIfNullptr(lhs.memberName), emptyIfNullptr(rhs.memberName)) != 0) {
-        return false;
-    }
-#endif
-    return true;
-}
-
-bool operator!=(const UA_DataTypeMember& lhs, const UA_DataTypeMember& rhs) noexcept {
-    return !(lhs == rhs);
-}
-
-bool operator==(const UA_DataType& lhs, const UA_DataType& rhs) noexcept {
-    if (lhs.typeId != rhs.typeId) {
-        return false;
-    }
-    if (lhs.binaryEncodingId != rhs.binaryEncodingId) {
-        return false;
-    }
-    if (lhs.memSize != rhs.memSize) {
-        return false;
-    }
-    if (lhs.typeKind != rhs.typeKind) {
-        return false;
-    }
-    if (lhs.pointerFree != rhs.pointerFree) {
-        return false;
-    }
-    if (lhs.overlayable != rhs.overlayable) {
-        return false;
-    }
-    if (lhs.membersSize != rhs.membersSize) {
-        return false;
-    }
-    for (size_t i = 0; i < lhs.membersSize; ++i) {
-        if (lhs.members[i] != rhs.members[i]) {  // NOLINT
-            return false;
-        }
-    }
-#ifdef UA_ENABLE_TYPEDESCRIPTION
-    if (std::strcmp(emptyIfNullptr(lhs.typeName), emptyIfNullptr(rhs.typeName)) != 0) {
-        return false;  // NOLINT
-    }
-#endif
-    return true;
-}
-
-bool operator!=(const UA_DataType& lhs, const UA_DataType& rhs) noexcept {
-    return !(lhs == rhs);
-}
-
-bool operator==(const DataType& lhs, const DataType& rhs) noexcept {
-    return (*lhs.handle() == *rhs.handle());
-}
-
-bool operator!=(const DataType& lhs, const DataType& rhs) noexcept {
-    return !(lhs == rhs);
 }
 
 namespace detail {

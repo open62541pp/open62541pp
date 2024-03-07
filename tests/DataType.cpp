@@ -57,6 +57,33 @@ static const UA_DataType pointType = detail::createDataType(
 
 /* ---------------------------------------------------------------------------------------------- */
 
+
+static void checkDataTypeEqual(const UA_DataType& dt, const UA_DataType& expected) {
+#ifdef UA_ENABLE_TYPEDESCRIPTION
+    CHECK(std::string_view(dt.typeName) == std::string_view(expected.typeName));
+#endif
+    CHECK(dt.typeId == expected.typeId);
+    CHECK(dt.binaryEncodingId == expected.binaryEncodingId);
+    CHECK(dt.memSize == expected.memSize);
+    CHECK(dt.typeKind == expected.typeKind);
+    CHECK(dt.pointerFree == expected.pointerFree);
+    CHECK(dt.overlayable == expected.overlayable);
+    for (uint8_t i = 0; i < dt.membersSize; ++i) {
+        CAPTURE(i);
+#if UAPP_OPEN62541_VER_GE(1, 3)
+        CHECK(dt.members[i].memberType == expected.members[i].memberType);  // NOLINT
+#else
+        CHECK(dt.members[i].memberTypeIndex == expected.members[i].memberTypeIndex);  // NOLINT
+        CHECK(dt.members[i].namespaceZero == expected.members[i].namespaceZero);  // NOLINT
+#endif
+        CHECK((uint8_t)dt.members[i].padding == (uint8_t)expected.members[i].padding);  // NOLINT
+        CHECK((bool)dt.members[i].isArray == (bool)expected.members[i].isArray);  // NOLINT
+#if UAPP_OPEN62541_VER_GE(1, 1)
+        CHECK((bool)dt.members[i].isOptional == (bool)expected.members[i].isOptional);  // NOLINT
+#endif
+    }
+}
+
 TEST_CASE("DataType") {
     SUBCASE("Construct from native") {
         DataType dt(pointType);
@@ -118,38 +145,8 @@ TEST_CASE("DataType") {
         dt.setPointerFree(true);
         dt.setOverlayable(false);
         dt.setMembers({pointMembers[0], pointMembers[1], pointMembers[2]});
-        CHECK(dt == pointType);
-    }
-}
 
-static void checkDataTypeEqual(const DataType& dt, const UA_DataType& expected) {
-#ifdef UA_ENABLE_TYPEDESCRIPTION
-    CHECK(std::string_view(dt.getTypeName()) == std::string_view(expected.typeName));
-#endif
-    CHECK(dt.getTypeId() == expected.typeId);
-#if UAPP_OPEN62541_VER_GE(1, 2)
-    CHECK(dt.getBinaryEncodingId() == expected.binaryEncodingId);
-#else
-    CHECK(dt.getBinaryEncodingId().getIdentifierAs<uint32_t>() == expected.binaryEncodingId);
-#endif
-    CHECK(dt.getMemSize() == expected.memSize);
-    CHECK(dt.getTypeKind() == expected.typeKind);
-    CHECK(dt.getPointerFree() == static_cast<bool>(expected.pointerFree));
-    CHECK(dt.getOverlayable() == static_cast<bool>(expected.overlayable));
-    for (uint8_t i = 0; i < dt.getMembers().size(); ++i) {
-        CAPTURE(i);
-        auto m = dt.getMembers()[i];
-#if UAPP_OPEN62541_VER_GE(1, 3)
-        CHECK(m.memberType == expected.members[i].memberType);
-#else
-        CHECK(m.memberTypeIndex == expected.members[i].memberTypeIndex);
-        CHECK((bool)m.namespaceZero == (bool)expected.members[i].namespaceZero);  // NOLINT
-#endif
-        CHECK((uint8_t)m.padding == (uint8_t)expected.members[i].padding);  // NOLINT
-        CHECK((bool)m.isArray == (bool)expected.members[i].isArray);  // NOLINT
-#if UAPP_OPEN62541_VER_GE(1, 1)
-        CHECK((bool)m.isOptional == (bool)expected.members[i].isOptional);  // NOLINT
-#endif
+        checkDataTypeEqual(dt, pointType);
     }
 }
 
@@ -332,6 +329,6 @@ TEST_CASE("DataTypeBuilder") {
                 .addField<&SWrapper::value>("value")
                 .build();
 
-        CHECK(dtNative == dtWrapper);
+        checkDataTypeEqual(dtNative, dtWrapper);
     }
 }

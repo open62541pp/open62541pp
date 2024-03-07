@@ -6,11 +6,9 @@
 #include "open62541pp/Span.h"
 #include "open62541pp/Wrapper.h"
 #include "open62541pp/detail/open62541/common.h"
+#include "open62541pp/types/NodeId.h"
 
 namespace opcua {
-
-// forward declare
-class NodeId;
 
 using DataTypeMember = UA_DataTypeMember;
 
@@ -60,16 +58,30 @@ public:
     void setMembers(Span<const DataTypeMember> members);
 };
 
-bool operator==(const UA_DataTypeMember& lhs, const UA_DataTypeMember& rhs) noexcept;
-bool operator!=(const UA_DataTypeMember& lhs, const UA_DataTypeMember& rhs) noexcept;
-bool operator==(const UA_DataType& lhs, const UA_DataType& rhs) noexcept;
-bool operator!=(const UA_DataType& lhs, const UA_DataType& rhs) noexcept;
+inline bool operator==(const UA_DataType& lhs, const UA_DataType& rhs) noexcept {
+    return lhs.typeId == rhs.typeId;
+}
+
+inline bool operator!=(const UA_DataType& lhs, const UA_DataType& rhs) noexcept {
+    return !(lhs == rhs);
+}
+
+inline bool operator==(const UA_DataTypeMember& lhs, const UA_DataTypeMember& rhs) noexcept {
+    if (lhs.memberType == nullptr || rhs.memberType == nullptr) {
+        return false;
+    }
+    return (lhs.memberType == rhs.memberType) || (*lhs.memberType == *rhs.memberType);
+}
+
+inline bool operator!=(const UA_DataTypeMember& lhs, const UA_DataTypeMember& rhs) noexcept {
+    return !(lhs == rhs);
+}
 
 /* ------------------------------------------- Helper ------------------------------------------- */
 
 namespace detail {
 
-[[nodiscard]] DataTypeMember createDataTypeMember(
+[[nodiscard]] UA_DataTypeMember createDataTypeMember(
     const char* memberName,
     const UA_DataType& memberType,
     uint8_t padding,
