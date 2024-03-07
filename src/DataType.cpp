@@ -9,10 +9,6 @@
 
 namespace opcua {
 
-[[maybe_unused]] inline static const char* emptyIfNullptr(const char* name) {
-    return name == nullptr ? "" : name;
-}
-
 static void clearMembers(UA_DataType& native) noexcept {
     delete[] native.members;  // NOLINT
     native.members = nullptr;
@@ -43,7 +39,7 @@ DataType::DataType(const UA_DataType& native)
     : Wrapper(copy(native)) {}
 
 DataType::DataType(UA_DataType&& native)
-    : Wrapper(native) {}
+    : Wrapper(std::move(native)) {}
 
 DataType::DataType(TypeIndex typeIndex)
     : DataType(UA_TYPES[typeIndex]) {  // NOLINT
