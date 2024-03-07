@@ -1,15 +1,10 @@
 #pragma once
 
 #include <cstdint>
-#include <type_traits>
 
-#include "open62541pp/detail/open62541/common.h"
+#include "open62541pp/Bitmask.h"
 
 namespace opcua {
-
-// forward declare
-template <typename T>
-struct IsBitmaskEnum;
 
 /// Type index of the ::UA_TYPES array.
 using TypeIndex = uint16_t;
@@ -20,31 +15,31 @@ using TypeIndex = uint16_t;
  */
 enum class Type : TypeIndex {
     // clang-format off
-    Boolean         = UA_TYPES_BOOLEAN,
-    SByte           = UA_TYPES_SBYTE,
-    Byte            = UA_TYPES_BYTE,
-    Int16           = UA_TYPES_INT16,
-    UInt16          = UA_TYPES_UINT16,
-    Int32           = UA_TYPES_INT32,
-    UInt32          = UA_TYPES_UINT32,
-    Int64           = UA_TYPES_INT64,
-    UInt64          = UA_TYPES_UINT64,
-    Float           = UA_TYPES_FLOAT,
-    Double          = UA_TYPES_DOUBLE,
-    String          = UA_TYPES_STRING,
-    DateTime        = UA_TYPES_DATETIME,
-    Guid            = UA_TYPES_GUID,
-    ByteString      = UA_TYPES_BYTESTRING,
-    XmlElement      = UA_TYPES_XMLELEMENT,
-    NodeId          = UA_TYPES_NODEID,
-    ExpandedNodeId  = UA_TYPES_EXPANDEDNODEID,
-    StatusCode      = UA_TYPES_STATUSCODE,
-    QualifiedName   = UA_TYPES_QUALIFIEDNAME,
-    LocalizedText   = UA_TYPES_LOCALIZEDTEXT,
-    ExtensionObject = UA_TYPES_EXTENSIONOBJECT,
-    DataValue       = UA_TYPES_DATAVALUE,
-    Variant         = UA_TYPES_VARIANT,
-    DiagnosticInfo  = UA_TYPES_DIAGNOSTICINFO
+    Boolean         = 0,   // UA_TYPES_BOOLEAN
+    SByte           = 1,   // UA_TYPES_SBYTE
+    Byte            = 2,   // UA_TYPES_BYTE
+    Int16           = 3,   // UA_TYPES_INT16
+    UInt16          = 4,   // UA_TYPES_UINT16
+    Int32           = 5,   // UA_TYPES_INT32
+    UInt32          = 6,   // UA_TYPES_UINT32
+    Int64           = 7,   // UA_TYPES_INT64
+    UInt64          = 8,   // UA_TYPES_UINT64
+    Float           = 9,   // UA_TYPES_FLOAT
+    Double          = 10,  // UA_TYPES_DOUBLE
+    String          = 11,  // UA_TYPES_STRING
+    DateTime        = 12,  // UA_TYPES_DATETIME
+    Guid            = 13,  // UA_TYPES_GUID
+    ByteString      = 14,  // UA_TYPES_BYTESTRING
+    XmlElement      = 15,  // UA_TYPES_XMLELEMENT
+    NodeId          = 16,  // UA_TYPES_NODEID
+    ExpandedNodeId  = 17,  // UA_TYPES_EXPANDEDNODEID
+    StatusCode      = 18,  // UA_TYPES_STATUSCODE
+    QualifiedName   = 19,  // UA_TYPES_QUALIFIEDNAME
+    LocalizedText   = 20,  // UA_TYPES_LOCALIZEDTEXT
+    ExtensionObject = 21,  // UA_TYPES_EXTENSIONOBJECT
+    DataValue       = 22,  // UA_TYPES_DATAVALUE
+    Variant         = 23,  // UA_TYPES_VARIANT
+    DiagnosticInfo  = 24,  // UA_TYPES_DIAGNOSTICINF
     // clang-format on
 };
 
@@ -184,13 +179,13 @@ struct IsBitmaskEnum<WriteMask> : std::true_type {};
  */
 enum class ValueRank : int32_t {
     // clang-format off
-    ScalarOrOneDimension = UA_VALUERANK_SCALAR_OR_ONE_DIMENSION,
-    Any                  = UA_VALUERANK_ANY,
-    Scalar               = UA_VALUERANK_SCALAR,
-    OneOrMoreDimensions  = UA_VALUERANK_ONE_OR_MORE_DIMENSIONS,
-    OneDimension         = UA_VALUERANK_ONE_DIMENSION,
-    TwoDimensions        = UA_VALUERANK_TWO_DIMENSIONS,
-    ThreeDimensions      = UA_VALUERANK_THREE_DIMENSIONS,
+    ScalarOrOneDimension = -3,  // UA_VALUERANK_SCALAR_OR_ONE_DIMENSION
+    Any                  = -2,  // UA_VALUERANK_ANY
+    Scalar               = -1,  // UA_VALUERANK_SCALAR
+    OneOrMoreDimensions  = 0,   // UA_VALUERANK_ONE_OR_MORE_DIMENSIONS
+    OneDimension         = 1,   // UA_VALUERANK_ONE_DIMENSION
+    TwoDimensions        = 2,   // UA_VALUERANK_TWO_DIMENSIONS
+    ThreeDimensions      = 3,   // UA_VALUERANK_THREE_DIMENSIONS
     // clang-format on
 };
 
@@ -217,11 +212,11 @@ struct IsBitmaskEnum<EventNotifier> : std::true_type {};
  */
 enum class ModellingRule : uint16_t {
     // clang-format off
-    Mandatory            = UA_NS0ID_MODELLINGRULE_MANDATORY,
-    Optional             = UA_NS0ID_MODELLINGRULE_OPTIONAL,
-    ExposesItsArray      = UA_NS0ID_MODELLINGRULE_EXPOSESITSARRAY,
-    OptionalPlaceholder  = UA_NS0ID_MODELLINGRULE_OPTIONALPLACEHOLDER,
-    MandatoryPlaceholder = UA_NS0ID_MODELLINGRULE_MANDATORYPLACEHOLDER,
+    Mandatory            = 78,     // UA_NS0ID_MODELLINGRULE_MANDATORY
+    Optional             = 80,     // UA_NS0ID_MODELLINGRULE_OPTIONAL
+    ExposesItsArray      = 83,     // UA_NS0ID_MODELLINGRULE_EXPOSESITSARRAY
+    OptionalPlaceholder  = 11508,  // UA_NS0ID_MODELLINGRULE_OPTIONALPLACEHOLDER
+    MandatoryPlaceholder = 11510,  // UA_NS0ID_MODELLINGRULE_MANDATORYPLACEHOLDER
     // clang-format on
 };
 
