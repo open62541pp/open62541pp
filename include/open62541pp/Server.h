@@ -6,6 +6,7 @@
 #include <string_view>
 #include <vector>
 
+#include "open62541pp/Common.h"  // NamespaceIndex
 #include "open62541pp/Config.h"
 #include "open62541pp/Logger.h"
 #include "open62541pp/NodeIds.h"
@@ -127,7 +128,7 @@ public:
     /// Get all defined namespaces.
     std::vector<std::string> getNamespaceArray();
     /// Register namespace. The new namespace index will be returned.
-    [[nodiscard]] uint16_t registerNamespace(std::string_view uri);
+    [[nodiscard]] NamespaceIndex registerNamespace(std::string_view uri);
 
     /// Set custom data types.
     /// All data types provided are automatically considered for decoding of received messages.

@@ -229,7 +229,7 @@ std::vector<std::string> Server::getNamespaceArray() {
         .getArrayCopy<std::string>();
 }
 
-uint16_t Server::registerNamespace(std::string_view uri) {
+NamespaceIndex Server::registerNamespace(std::string_view uri) {
     return UA_Server_addNamespace(handle(), std::string(uri).c_str());
 }
 

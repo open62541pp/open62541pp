@@ -6,31 +6,31 @@
 
 namespace opcua {
 
-NodeId::NodeId(uint16_t namespaceIndex, uint32_t identifier) noexcept {
+NodeId::NodeId(NamespaceIndex namespaceIndex, uint32_t identifier) noexcept {
     handle()->namespaceIndex = namespaceIndex;
     handle()->identifierType = UA_NODEIDTYPE_NUMERIC;
     handle()->identifier.numeric = identifier;  // NOLINT
 }
 
-NodeId::NodeId(uint16_t namespaceIndex, std::string_view identifier) {
+NodeId::NodeId(NamespaceIndex namespaceIndex, std::string_view identifier) {
     handle()->namespaceIndex = namespaceIndex;
     handle()->identifierType = UA_NODEIDTYPE_STRING;
     handle()->identifier.string = detail::allocNativeString(identifier);  // NOLINT
 }
 
-NodeId::NodeId(uint16_t namespaceIndex, String identifier) noexcept {
+NodeId::NodeId(NamespaceIndex namespaceIndex, String identifier) noexcept {
     handle()->namespaceIndex = namespaceIndex;
     handle()->identifierType = UA_NODEIDTYPE_STRING;
     asWrapper<String>(handle()->identifier.string) = std::move(identifier);  // NOLINT
 }
 
-NodeId::NodeId(uint16_t namespaceIndex, Guid identifier) noexcept {
+NodeId::NodeId(NamespaceIndex namespaceIndex, Guid identifier) noexcept {
     handle()->namespaceIndex = namespaceIndex;
     handle()->identifierType = UA_NODEIDTYPE_GUID;
     handle()->identifier.guid = identifier;  // NOLINT
 }
 
-NodeId::NodeId(uint16_t namespaceIndex, ByteString identifier) noexcept {
+NodeId::NodeId(NamespaceIndex namespaceIndex, ByteString identifier) noexcept {
     handle()->namespaceIndex = namespaceIndex;
     handle()->identifierType = UA_NODEIDTYPE_BYTESTRING;
     asWrapper<ByteString>(handle()->identifier.byteString) = std::move(identifier);  // NOLINT
@@ -44,7 +44,7 @@ uint32_t NodeId::hash() const noexcept {
     return UA_NodeId_hash(handle());
 }
 
-uint16_t NodeId::getNamespaceIndex() const noexcept {
+NamespaceIndex NodeId::getNamespaceIndex() const noexcept {
     return handle()->namespaceIndex;
 }
 
