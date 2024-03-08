@@ -37,19 +37,19 @@ public:
     using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
 
     /// Create NodeId with numeric identifier.
-    NodeId(uint16_t namespaceIndex, uint32_t identifier) noexcept;
+    NodeId(NamespaceIndex namespaceIndex, uint32_t identifier) noexcept;
 
     /// Create NodeId with String identifier from standard strings.
-    NodeId(uint16_t namespaceIndex, std::string_view identifier);
+    NodeId(NamespaceIndex namespaceIndex, std::string_view identifier);
 
     /// Create NodeId with String identifier from String wrapper class.
-    NodeId(uint16_t namespaceIndex, String identifier) noexcept;
+    NodeId(NamespaceIndex namespaceIndex, String identifier) noexcept;
 
     /// Create NodeId with Guid identifier.
-    NodeId(uint16_t namespaceIndex, Guid identifier) noexcept;
+    NodeId(NamespaceIndex namespaceIndex, Guid identifier) noexcept;
 
     /// Create NodeId with ByteString identifier.
-    NodeId(uint16_t namespaceIndex, ByteString identifier) noexcept;
+    NodeId(NamespaceIndex namespaceIndex, ByteString identifier) noexcept;
 
     /// Create NodeId from Type (type id).
     [[deprecated("Use the constructor NodeId(DataTypeId) instead, the Type enum will be removed"
@@ -88,7 +88,7 @@ public:
 
     uint32_t hash() const noexcept;
 
-    uint16_t getNamespaceIndex() const noexcept;
+    NamespaceIndex getNamespaceIndex() const noexcept;
 
     NodeIdType getIdentifierType() const noexcept;
 

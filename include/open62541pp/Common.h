@@ -6,6 +6,10 @@
 
 namespace opcua {
 
+/// Namespace index.
+/// @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.2.2
+using NamespaceIndex = uint16_t;
+
 /// Type index of the ::UA_TYPES array.
 using TypeIndex = uint16_t;
 

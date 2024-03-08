@@ -17,6 +17,7 @@ namespace fs = std::experimental::filesystem;
 namespace fs = std::filesystem;
 #endif
 
+#include "open62541pp/Common.h"  // NamespaceIndex
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/open62541/common.h"
@@ -221,9 +222,9 @@ public:
     // NOLINTNEXTLINE, false positive?
     using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
 
-    QualifiedName(uint16_t namespaceIndex, std::string_view name);
+    QualifiedName(NamespaceIndex namespaceIndex, std::string_view name);
 
-    uint16_t getNamespaceIndex() const noexcept;
+    NamespaceIndex getNamespaceIndex() const noexcept;
 
     std::string_view getName() const noexcept;
 };
