@@ -47,7 +47,7 @@ public:
     }
 
     NodeId getTypeId() const noexcept {
-        return NodeId(handle()->typeId);
+        return NodeId(handle()->typeId);  // NOLINT
     }
 
     void setTypeId(const NodeId& typeId) {
@@ -56,9 +56,9 @@ public:
 
     NodeId getBinaryEncodingId() const noexcept {
 #if UAPP_OPEN62541_VER_GE(1, 2)
-        return NodeId(handle()->binaryEncodingId);
+        return NodeId(handle()->binaryEncodingId);  // NOLINT
 #else
-        return NodeId(handle()->typeId.namespaceIndex, handle()->binaryEncodingId);
+        return NodeId(handle()->typeId.namespaceIndex, handle()->binaryEncodingId);  // NOLINT
 #endif
     }
 
