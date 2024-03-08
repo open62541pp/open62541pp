@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <utility>  // move
 
 #include "open62541pp/Common.h"  // TypeIndex
 #include "open62541pp/Config.h"
@@ -50,8 +51,8 @@ public:
         return NodeId(handle()->typeId);  // NOLINT
     }
 
-    void setTypeId(const NodeId& typeId) {
-        asWrapper<NodeId>(handle()->typeId) = typeId;
+    void setTypeId(NodeId typeId) {
+        asWrapper<NodeId>(handle()->typeId) = std::move(typeId);
     }
 
     NodeId getBinaryEncodingId() const noexcept {
@@ -62,9 +63,9 @@ public:
 #endif
     }
 
-    void setBinaryEncodingId(const NodeId& binaryEncodingId) {
+    void setBinaryEncodingId(NodeId binaryEncodingId) {
 #if UAPP_OPEN62541_VER_GE(1, 2)
-        asWrapper<NodeId>(handle()->binaryEncodingId) = binaryEncodingId;
+        asWrapper<NodeId>(handle()->binaryEncodingId) = std::move(binaryEncodingId);
 #else
         handle()->binaryEncodingId = binaryEncodingId.getIdentifierAs<uint32_t>();
 #endif

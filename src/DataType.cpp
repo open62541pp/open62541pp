@@ -2,7 +2,6 @@
 
 #include <algorithm>  // copy_n
 #include <cassert>
-#include <utility>  // exchange
 
 namespace opcua {
 
