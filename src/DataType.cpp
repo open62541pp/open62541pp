@@ -1,9 +1,7 @@
 #include "open62541pp/DataType.h"
 
-#include <algorithm>  // copy
+#include <algorithm>  // copy_n
 #include <cassert>
-#include <cstring>
-#include <utility>  // exchange, move, swap
 
 namespace opcua {
 
@@ -20,9 +18,9 @@ static void clear(UA_DataType& native) noexcept {
 static void copyMembers(const DataTypeMember* members, size_t membersSize, UA_DataType& dst) {
     dst.members = new DataTypeMember[membersSize];  // NOLINT
     dst.membersSize = membersSize;
-    std::copy(
+    std::copy_n(
         members,
-        members + membersSize,  // NOLINT
+        membersSize,
         dst.members
     );
 }
@@ -68,94 +66,6 @@ DataType& DataType::operator=(DataType&& other) noexcept {
         native() = std::exchange(other.native(), {});
     }
     return *this;
-}
-
-// NOLINTNEXTLINE
-const char* DataType::getTypeName() const noexcept {
-#ifdef UA_ENABLE_TYPEDESCRIPTION
-    return handle()->typeName;
-#else
-    return nullptr;
-#endif
-}
-
-void DataType::setTypeName([[maybe_unused]] const char* typeName) noexcept {
-#ifdef UA_ENABLE_TYPEDESCRIPTION
-    handle()->typeName = typeName;
-#endif
-}
-
-NodeId DataType::getTypeId() const noexcept {
-    return NodeId(handle()->typeId);  // NOLINT
-}
-
-void DataType::setTypeId(const NodeId& typeId) {
-    asWrapper<NodeId>(handle()->typeId) = typeId;
-}
-
-void DataType::setTypeId(NodeId&& typeId) noexcept {
-    asWrapper<NodeId>(handle()->typeId) = std::move(typeId);
-}
-
-NodeId DataType::getBinaryEncodingId() const noexcept {
-#if UAPP_OPEN62541_VER_GE(1, 2)
-    return NodeId(handle()->binaryEncodingId);  // NOLINT
-#else
-    return NodeId(handle()->typeId.namespaceIndex, handle()->binaryEncodingId);  // NOLINT
-#endif
-}
-
-void DataType::setBinaryEncodingId(const NodeId& binaryEncodingId) {
-#if UAPP_OPEN62541_VER_GE(1, 2)
-    asWrapper<NodeId>(handle()->binaryEncodingId) = binaryEncodingId;
-#else
-    handle()->binaryEncodingId = binaryEncodingId.getIdentifierAs<uint32_t>();
-#endif
-}
-
-void DataType::setBinaryEncodingId(NodeId&& binaryEncodingId) {
-#if UAPP_OPEN62541_VER_GE(1, 2)
-    asWrapper<NodeId>(handle()->binaryEncodingId) = std::move(binaryEncodingId);
-#else
-    handle()->binaryEncodingId = binaryEncodingId.getIdentifierAs<uint32_t>();
-#endif
-}
-
-uint16_t DataType::getMemSize() const noexcept {
-    return handle()->memSize;
-}
-
-void DataType::setMemSize(uint16_t memSize) noexcept {
-    handle()->memSize = memSize;
-}
-
-uint8_t DataType::getTypeKind() const noexcept {
-    return handle()->typeKind;
-}
-
-void DataType::setTypeKind(uint8_t typeKind) noexcept {
-    assert(typeKind < UA_DATATYPEKINDS);
-    handle()->typeKind = typeKind;
-}
-
-bool DataType::getPointerFree() const noexcept {
-    return handle()->pointerFree;
-}
-
-void DataType::setPointerFree(bool pointerFree) noexcept {
-    handle()->pointerFree = pointerFree;
-}
-
-bool DataType::getOverlayable() const noexcept {
-    return handle()->overlayable;
-}
-
-void DataType::setOverlayable(bool overlayable) noexcept {
-    handle()->overlayable = overlayable;
-}
-
-Span<const DataTypeMember> DataType::getMembers() const noexcept {
-    return {handle()->members, handle()->membersSize};
 }
 
 void DataType::setMembers(Span<const DataTypeMember> members) {
