@@ -46,19 +46,19 @@ public:
 #endif
     }
 
-    const NodeId& getTypeId() const noexcept {
-        return asWrapper<NodeId>(handle()->typeId);
+    NodeId getTypeId() const noexcept {
+        return NodeId(handle()->typeId);
     }
 
     void setTypeId(const NodeId& typeId) {
         asWrapper<NodeId>(handle()->typeId) = typeId;
     }
 
-    const NodeId& getBinaryEncodingId() const noexcept {
+    NodeId getBinaryEncodingId() const noexcept {
 #if UAPP_OPEN62541_VER_GE(1, 2)
-        return asWrapper<NodeId>(handle()->binaryEncodingId);
+        return NodeId(handle()->binaryEncodingId);
 #else
-        return asWrapper<NodeId>(handle()->typeId.namespaceIndex, handle()->binaryEncodingId);
+        return NodeId(handle()->typeId.namespaceIndex, handle()->binaryEncodingId);
 #endif
     }
 
