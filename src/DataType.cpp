@@ -37,7 +37,7 @@ DataType::DataType(const UA_DataType& native)
     : Wrapper(copy(native)) {}
 
 DataType::DataType(UA_DataType&& native)
-    : Wrapper(std::move(native)) {}
+    : Wrapper(native) {}
 
 DataType::DataType(TypeIndex typeIndex)
     : DataType(UA_TYPES[typeIndex]) {  // NOLINT
