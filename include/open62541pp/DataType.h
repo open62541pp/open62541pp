@@ -32,30 +32,80 @@ public:
     DataType& operator=(const DataType& other);
     DataType& operator=(DataType&& other) noexcept;
 
-    const char* getTypeName() const noexcept;
-    void setTypeName(const char* typeName) noexcept;
+    const char* getTypeName() const noexcept {
+#ifdef UA_ENABLE_TYPEDESCRIPTION
+        return handle()->typeName;
+#else
+        return nullptr;
+#endif
+    }
 
-    NodeId getTypeId() const noexcept;
-    void setTypeId(const NodeId& typeId);
-    void setTypeId(NodeId&& typeId) noexcept;
+    void setTypeName(const char* typeName) noexcept {
+#ifdef UA_ENABLE_TYPEDESCRIPTION
+        handle()->typeName = typeName;
+#endif
+    }
 
-    NodeId getBinaryEncodingId() const noexcept;
-    void setBinaryEncodingId(const NodeId& binaryEncodingId);
-    void setBinaryEncodingId(NodeId&& binaryEncodingId);
+    const NodeId& getTypeId() const noexcept {
+        return asWrapper<NodeId>(handle()->typeId);
+    }
 
-    uint16_t getMemSize() const noexcept;
-    void setMemSize(uint16_t memSize) noexcept;
+    void setTypeId(const NodeId& typeId) {
+        asWrapper<NodeId>(handle()->typeId) = typeId;
+    }
 
-    uint8_t getTypeKind() const noexcept;
-    void setTypeKind(uint8_t typeKind) noexcept;
+    const NodeId& getBinaryEncodingId() const noexcept {
+#if UAPP_OPEN62541_VER_GE(1, 2)
+        return asWrapper<NodeId>(handle()->binaryEncodingId);
+#else
+        return asWrapper<NodeId>(handle()->typeId.namespaceIndex, handle()->binaryEncodingId);
+#endif
+    }
 
-    bool getPointerFree() const noexcept;
-    void setPointerFree(bool pointerFree) noexcept;
+    void setBinaryEncodingId(const NodeId& binaryEncodingId) {
+#if UAPP_OPEN62541_VER_GE(1, 2)
+        asWrapper<NodeId>(handle()->binaryEncodingId) = binaryEncodingId;
+#else
+        handle()->binaryEncodingId = binaryEncodingId.getIdentifierAs<uint32_t>();
+#endif
+    }
 
-    bool getOverlayable() const noexcept;
-    void setOverlayable(bool overlayable) noexcept;
+    uint16_t getMemSize() const noexcept {
+        return handle()->memSize;
+    }
 
-    Span<const DataTypeMember> getMembers() const noexcept;
+    void setMemSize(uint16_t memSize) noexcept {
+        handle()->memSize = memSize;
+    }
+
+    uint8_t getTypeKind() const noexcept {
+        return handle()->typeKind;
+    }
+
+    void setTypeKind(uint8_t typeKind) noexcept {
+        handle()->typeKind = typeKind;
+    }
+
+    bool getPointerFree() const noexcept {
+        return handle()->pointerFree;
+    }
+
+    void setPointerFree(bool pointerFree) noexcept {
+        handle()->pointerFree = pointerFree;
+    }
+
+    bool getOverlayable() const noexcept {
+        return handle()->overlayable;
+    }
+
+    void setOverlayable(bool overlayable) noexcept {
+        handle()->overlayable = overlayable;
+    }
+
+    Span<const DataTypeMember> getMembers() const noexcept {
+        return {handle()->members, handle()->membersSize};
+    }
+
     void setMembers(Span<const DataTypeMember> members);
 };
 
