@@ -106,11 +106,15 @@ public:
         StatusCode code, const T& value
     ) noexcept(std::is_nothrow_copy_constructible_v<T>)
         : code_(code),
-          maybeValue_(value) {}
+          maybeValue_(value) {
+        assert(!code.isBad());
+    }
 
     constexpr Result(StatusCode code, T&& value) noexcept(std::is_nothrow_move_constructible_v<T>)
         : code_(code),
-          maybeValue_(std::move(value)) {}
+          maybeValue_(std::move(value)) {
+        assert(!code.isBad());
+    }
 
     /**
      * Check if the Result's status code is good.
@@ -118,9 +122,6 @@ public:
     explicit operator bool() const noexcept {
         return code().isGood();
     }
-
-    // TODO:
-    // Think about conversion operator to value
 
     /**
      * Get the value of the Result.

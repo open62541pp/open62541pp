@@ -11,11 +11,6 @@ static constexpr StatusCode badCode(UA_STATUSCODE_BADUNEXPECTEDERROR);
 static constexpr BadResult badResult(badCode);
 
 TEST_CASE("Result") {
-    SUBCASE("code") {
-        CHECK(Result<int>(1).code() == UA_STATUSCODE_GOOD);
-        CHECK(Result<int>(badResult).code() == badCode);
-    }
-
     SUBCASE("operator bool") {
         CHECK(static_cast<bool>(Result<int>(1)) == true);
         CHECK(static_cast<bool>(Result<int>(badResult)) == false);
@@ -39,6 +34,19 @@ TEST_CASE("Result") {
         SUBCASE("rvalue") {
             CHECK(*Result<int>(1) == 1);
         }
+    }
+
+    SUBCASE("code") {
+        CHECK(Result<int>(1).code() == UA_STATUSCODE_GOOD);
+        CHECK(Result<int>(badResult).code() == badCode);
+    }
+
+    SUBCASE("hasValue") {
+        Result<int> result(1);
+        CHECK(result.hasValue());
+
+        Result<int> resultError(badResult);
+        CHECK_FALSE(resultError.hasValue());
     }
 
     SUBCASE("value") {
@@ -71,11 +79,6 @@ TEST_CASE("Result") {
 }
 
 TEST_CASE("Result (void template specialization)") {
-    SUBCASE("code") {
-        CHECK(Result<void>().code() == UA_STATUSCODE_GOOD);
-        CHECK(Result<void>(badResult).code() == badCode);
-    }
-
     SUBCASE("operator bool") {
         CHECK(static_cast<bool>(Result<void>()) == true);
         CHECK(static_cast<bool>(Result<void>(badResult)) == false);
@@ -91,6 +94,11 @@ TEST_CASE("Result (void template specialization)") {
         CHECK(
             static_cast<UA_StatusCode>(Result<void>(badResult)) == UA_STATUSCODE_BADUNEXPECTEDERROR
         );
+    }
+
+    SUBCASE("code") {
+        CHECK(Result<void>().code() == UA_STATUSCODE_GOOD);
+        CHECK(Result<void>(badResult).code() == badCode);
     }
 }
 

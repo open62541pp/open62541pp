@@ -55,11 +55,7 @@ struct AsyncServiceAdapter {
                 return opcua::detail::tryInvoke(std::get<TransformResponse>(*context), response);
             }();
 
-            if constexpr (std::is_void_v<TransformResult>) {
-                catcher.invoke(handler, result.code());
-            } else {
-                catcher.invoke(handler, result.code(), *result);
-            }
+            catcher.invoke(handler, result);
         };
 
         return CallbackAndContext<Context>{

@@ -18,23 +18,21 @@ TEST_CASE("AsyncServiceAdapter") {
         using Response = int;
         using Adapter = services::detail::AsyncServiceAdapter<Response>;
 
-        StatusCode status;
-        Response result;
+        std::optional<Result<Response>> result;
         bool throwInTransform = false;
         bool throwInCompletionHandler = false;
         detail::ExceptionCatcher catcher;
 
         auto callbackAndContext = Adapter::createCallbackAndContext(
             catcher,
-            [&](int value) {
+            [&](int val) {
                 if (throwInTransform) {
                     throw std::runtime_error("Transform");
                 }
-                return value;
+                return val;
             },
-            [&](StatusCode code, int value) {
-                status = code;
-                result = value;
+            [&](Result<Response> res) {
+                result = res;
                 if (throwInCompletionHandler) {
                     throw std::runtime_error("CompletionHandler");
                 }
@@ -53,28 +51,30 @@ TEST_CASE("AsyncServiceAdapter") {
         Response response = 5;
         SUBCASE("Success") {
             invokeCallback(&response);
-            CHECK(status == UA_STATUSCODE_GOOD);
-            CHECK(result == 5);
+            CHECK(result.has_value());
+            CHECK(result->code() == UA_STATUSCODE_GOOD);  // NOLINT, false positive
+            CHECK(result->value() == 5);  // NOLINT, false positive
             CHECK_FALSE(catcher.hasException());
         }
         SUBCASE("Response nullptr") {
             invokeCallback(nullptr);
-            CHECK(status == UA_STATUSCODE_BADUNEXPECTEDERROR);
-            CHECK(result == 0);
+            CHECK(result.has_value());
+            CHECK(result->code() == UA_STATUSCODE_BADUNEXPECTEDERROR);  // NOLINT, false positive
             CHECK_FALSE(catcher.hasException());
         }
         SUBCASE("Exception in transform function") {
             throwInTransform = true;
             invokeCallback(&response);
-            CHECK(status == UA_STATUSCODE_BADINTERNALERROR);
-            CHECK(result == 0);
+            CHECK(result.has_value());
+            CHECK(result->code() == UA_STATUSCODE_BADINTERNALERROR);  // NOLINT, false positive
             CHECK_FALSE(catcher.hasException());
         }
         SUBCASE("Exception in completion handler") {
             throwInCompletionHandler = true;
             invokeCallback(&response);
-            CHECK(status == UA_STATUSCODE_GOOD);
-            CHECK(result == response);
+            CHECK(result.has_value());
+            CHECK(result->code() == UA_STATUSCODE_GOOD);  // NOLINT, false positive
+            CHECK(result->value() == response);  // NOLINT, false positive
             CHECK(catcher.hasException());
             CHECK_THROWS_AS_MESSAGE(catcher.rethrow(), std::runtime_error, "CompletionHandler");
         }
@@ -116,9 +116,9 @@ TEST_CASE("sendRequest") {
         SUBCASE("Success") {
             sendReadRequest(
                 services::detail::WrapResponse<ReadResponse>{},
-                [&](StatusCode code, ReadResponse& response) {
-                    CHECK(code.isGood());
-                    checkReadResponse(response);
+                [&](Result<ReadResponse> result) {
+                    CHECK(result.code().isGood());
+                    checkReadResponse(*result);
                 }
             );
             CHECK_NOTHROW(client.runIterate());
