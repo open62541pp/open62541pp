@@ -700,6 +700,28 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
         }
     };
 
+    if constexpr (isClient<T>) {
+        SUBCASE("Check result (raw)") {
+            const CallRequest request(
+                {},
+                {CallMethodRequest(
+                    objectsId,
+                    methodId,
+                    Span<const Variant>{
+                        Variant::fromScalar(int32_t{1}),
+                        Variant::fromScalar(int32_t{2}),
+                    }
+                )}
+            );
+            const CallResponse response = call(serverOrClient, request);
+            CHECK(response.getResults().size() == 1);
+            auto& result = response.getResults()[0];
+            CHECK(result.getStatusCode().isGood());
+            CHECK(result.getOutputArguments().size() == 1);
+            CHECK(result.getOutputArguments()[0].getScalarCopy<int32_t>() == 3);
+        }
+    }
+
     SUBCASE("Check result") {
         const std::vector<Variant> outputs = call(
             serverOrClient,
@@ -711,7 +733,7 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
             }
         );
         CHECK(outputs.size() == 1);
-        CHECK(outputs.at(0).getScalarCopy<int32_t>() == 3);
+        CHECK(outputs[0].getScalarCopy<int32_t>() == 3);
     }
 
     SUBCASE("Propagate exception") {
@@ -824,7 +846,7 @@ TEST_CASE("MonitoredItem service set (client)") {
     services::addVariable(server, {0, UA_NS0ID_OBJECTSFOLDER}, id, "Variable");
 
     services::SubscriptionParameters subscriptionParameters{};
-    services::MonitoringParameters monitoringParameters{};
+    services::MonitoringParametersEx monitoringParameters{};
 
     SUBCASE("createMonitoredItemDataChange without subscription") {
         CHECK_THROWS(discard(services::createMonitoredItemDataChange(
@@ -911,7 +933,7 @@ TEST_CASE("MonitoredItem service set (client)") {
         );
         CAPTURE(monId);
 
-        services::MonitoringParameters modifiedParameters{};
+        services::MonitoringParametersEx modifiedParameters{};
         modifiedParameters.samplingInterval = 1000.0;
         CHECK_NOTHROW(services::modifyMonitoredItem(client, subId, monId, modifiedParameters));
         CHECK(modifiedParameters.samplingInterval == 1000.0);  // should not be revised
@@ -997,7 +1019,7 @@ TEST_CASE("MonitoredItem service set (client)") {
 TEST_CASE("MonitoredItem service set (server)") {
     Server server;
 
-    services::MonitoringParameters monitoringParameters{};
+    services::MonitoringParametersEx monitoringParameters{};
 
     SUBCASE("createMonitoredItemDataChange") {
         size_t notificationCount = 0;

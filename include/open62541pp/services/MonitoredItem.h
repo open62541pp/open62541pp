@@ -3,7 +3,7 @@
 #include <cstdint>
 #include <functional>
 
-#include "open62541pp/Common.h"
+#include "open62541pp/Common.h"  // TimestampsToReturn, MonitoringMode
 #include "open62541pp/Config.h"
 #include "open62541pp/Span.h"
 #include "open62541pp/types/ExtensionObject.h"
@@ -39,12 +39,13 @@ namespace opcua::services {
  */
 
 /**
- * Monitoring parameters with default values from open62541.
+ * Extended monitoring parameters with default values from open62541.
+ * This is an extended version of `UA_MonitoringParameters` with the `timestamps` parameter.
  * Parameters are passed by reference because illegal parameters can be revised by the server.
  * The updated parameters reflect the actual values that the server will use.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.21
  */
-struct MonitoringParameters {
+struct MonitoringParametersEx {
     /// Timestamps to be transmitted. Won't be revised by the server.
     TimestampsToReturn timestamps = TimestampsToReturn::Both;
     /// Interval in milliseconds that defines the fastest rate at which the MonitoredItem should be
@@ -69,6 +70,9 @@ struct MonitoringParameters {
     /// - `false`: the last notification added to the queue gets replaced with the new notification
     bool discardOldest = true;
 };
+
+using MonitoringParameters
+    [[deprecated("Use alias MonitoringParametersEx instead")]] = MonitoringParametersEx;
 
 /**
  * @defgroup CreateMonitoredItems
@@ -106,7 +110,7 @@ using EventNotificationCallback =
  * Create and add a monitored item to a subscription for data change notifications.
  * Don't use this function to monitor the `EventNotifier` attribute.
  * Create a monitored item with @ref createMonitoredItemEvent instead.
- * @copydetails MonitoringParameters
+ * @copydetails MonitoringParametersEx
  *
  * @param client Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
@@ -122,7 +126,7 @@ using EventNotificationCallback =
     uint32_t subscriptionId,
     const ReadValueId& itemToMonitor,
     MonitoringMode monitoringMode,
-    MonitoringParameters& parameters,
+    MonitoringParametersEx& parameters,
     DataChangeNotificationCallback dataChangeCallback,
     DeleteMonitoredItemCallback deleteCallback = {}
 );
@@ -130,7 +134,7 @@ using EventNotificationCallback =
 /**
  * Create a local monitored item for data change notifications.
  * Don't use this function to monitor the `EventNotifier` attribute.
- * @copydetails MonitoringParameters
+ * @copydetails MonitoringParametersEx
  *
  * @param server Instance of type Server
  * @param itemToMonitor Item to monitor
@@ -143,14 +147,14 @@ using EventNotificationCallback =
     Server& server,
     const ReadValueId& itemToMonitor,
     MonitoringMode monitoringMode,
-    MonitoringParameters& parameters,
+    MonitoringParametersEx& parameters,
     DataChangeNotificationCallback dataChangeCallback
 );
 
 /**
  * Create and add a monitored item to a subscription for event notifications.
  * The `attributeId` of ReadValueId must be set to AttributeId::EventNotifier.
- * @copydetails MonitoringParameters
+ * @copydetails MonitoringParametersEx
  *
  * @param client Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
@@ -166,7 +170,7 @@ using EventNotificationCallback =
     uint32_t subscriptionId,
     const ReadValueId& itemToMonitor,
     MonitoringMode monitoringMode,
-    MonitoringParameters& parameters,
+    MonitoringParametersEx& parameters,
     EventNotificationCallback eventCallback,
     DeleteMonitoredItemCallback deleteCallback = {}
 );
@@ -181,7 +185,7 @@ using EventNotificationCallback =
 
 /**
  * Modify a monitored item of a subscription.
- * @copydetails MonitoringParameters
+ * @copydetails MonitoringParametersEx
  *
  * @param client Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
@@ -192,7 +196,7 @@ void modifyMonitoredItem(
     Client& client,
     uint32_t subscriptionId,
     uint32_t monitoredItemId,
-    MonitoringParameters& parameters
+    MonitoringParametersEx& parameters
 );
 
 /**

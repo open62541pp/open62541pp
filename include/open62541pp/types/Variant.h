@@ -9,7 +9,7 @@
 #include <utility>  // as_const
 #include <vector>
 
-#include "open62541pp/Common.h"
+#include "open62541pp/Common.h"  // Type
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Span.h"
 #include "open62541pp/TypeConverter.h"

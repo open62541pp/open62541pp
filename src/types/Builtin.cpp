@@ -147,12 +147,12 @@ std::ostream& operator<<(std::ostream& os, const XmlElement& xmlElement) {
 
 /* ---------------------------------------- QualifiedName --------------------------------------- */
 
-QualifiedName::QualifiedName(uint16_t namespaceIndex, std::string_view name) {
+QualifiedName::QualifiedName(NamespaceIndex namespaceIndex, std::string_view name) {
     handle()->namespaceIndex = namespaceIndex;
     handle()->name = detail::allocNativeString(name);
 }
 
-uint16_t QualifiedName::getNamespaceIndex() const noexcept {
+NamespaceIndex QualifiedName::getNamespaceIndex() const noexcept {
     return handle()->namespaceIndex;
 }
 

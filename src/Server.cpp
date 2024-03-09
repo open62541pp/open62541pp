@@ -7,45 +7,45 @@
 #include <utility>  // move
 
 #include "open62541pp/AccessControl.h"
-#include "open62541pp/Config.h"
 #include "open62541pp/DataType.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Event.h"
 #include "open62541pp/Node.h"
-#include "open62541pp/Result.h"  // tryInvoke
 #include "open62541pp/Session.h"
 #include "open62541pp/ValueBackend.h"
 #include "open62541pp/Wrapper.h"  // asWrapper
+#include "open62541pp/detail/ConnectionBase.h"
 #include "open62541pp/detail/ServerContext.h"
-#include "open62541pp/detail/open62541/server.h"
+#include "open62541pp/detail/result_util.h"  // tryInvoke
 #include "open62541pp/services/Attribute.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/DataValue.h"
+#include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"
 
 #include "ServerConfig.h"
 
 namespace opcua {
 
-/* ------------------------------------------- Helper ------------------------------------------- */
+/* --------------------------------------- ConnectionBase -------------------------------------- */
 
-inline static UA_ServerConfig* getConfig(UA_Server* server) noexcept {
-    return UA_Server_getConfig(server);
+namespace detail {
+
+[[nodiscard]] static UA_Server* allocateServer() {
+    auto* server = UA_Server_new();
+    if (server == nullptr) {
+        throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
+    }
+    return server;
 }
 
-inline static UA_ServerConfig* getConfig(Server* server) noexcept {
-    return getConfig(server->handle());
-}
+struct ServerConnection : public ConnectionBase<Server> {
+    explicit ServerConnection(Server& parent)
+        : server(allocateServer()),
+          config(*detail::getConfig(server), parent) {}
 
-/* ----------------------------------------- Connection ----------------------------------------- */
-
-struct Server::Connection {
-    explicit Connection(Server& parent)
-        : server(UA_Server_new()),
-          config(*getConfig(server), parent) {}
-
-    ~Connection() {
+    ~ServerConnection() {
         // don't use stop method here because it might throw an exception
         if (running) {
             UA_Server_run_shutdown(server);
@@ -53,11 +53,23 @@ struct Server::Connection {
         UA_Server_delete(server);
     }
 
-    // prevent copy & move
-    Connection(const Connection&) = delete;
-    Connection(Connection&&) noexcept = delete;
-    Connection& operator=(const Connection&) = delete;
-    Connection& operator=(Connection&&) noexcept = delete;
+    ServerConnection(const ServerConnection&) = delete;
+    ServerConnection(ServerConnection&&) noexcept = delete;
+    ServerConnection& operator=(const ServerConnection&) = delete;
+    ServerConnection& operator=(ServerConnection&&) noexcept = delete;
+
+    void applyDefaults() {
+#ifdef UA_ENABLE_SUBSCRIPTIONS
+        config->publishingIntervalLimits.min = 10;  // ms
+        config->samplingIntervalLimits.min = 10;  // ms
+#endif
+#if UAPP_OPEN62541_VER_GE(1, 2)
+        config->allowEmptyVariables = UA_RULEHANDLING_ACCEPT;  // allow empty variables
+#endif
+#if UAPP_OPEN62541_VER_GE(1, 3)
+        config->context = this;
+#endif
+    }
 
     void runStartup() {
         const auto status = UA_Server_run_startup(server);
@@ -107,27 +119,19 @@ struct Server::Connection {
     std::mutex mutexRun;
 };
 
+}  // namespace detail
+
 /* ------------------------------------------- Server ------------------------------------------- */
 
-static void applyDefaults(UA_ServerConfig* config) {
-#ifdef UA_ENABLE_SUBSCRIPTIONS
-    config->publishingIntervalLimits.min = 10;  // ms
-    config->samplingIntervalLimits.min = 10;  // ms
-#endif
-#if UAPP_OPEN62541_VER_GE(1, 2)
-    config->allowEmptyVariables = UA_RULEHANDLING_ACCEPT;  // allow empty variables
-#endif
-}
-
 Server::Server(uint16_t port, ByteString certificate, Logger logger)
-    : connection_(std::make_shared<Connection>(*this)) {
+    : connection_(std::make_shared<detail::ServerConnection>(*this)) {
     // The logger should be set as soon as possible, ideally even before UA_ServerConfig_setMinimal.
     // However, the logger gets overwritten by UA_ServerConfig_setMinimal() in older versions of
     // open62541. The best we can do in this case, is to first call UA_ServerConfig_setMinimal and
     // then setLogger.
     auto setConfig = [&] {
         const auto status = UA_ServerConfig_setMinimal(
-            getConfig(this), port, certificate.empty() ? nullptr : certificate.handle()
+            detail::getConfig(handle()), port, certificate.empty() ? nullptr : certificate.handle()
         );
         throwIfBad(status);
     };
@@ -138,7 +142,7 @@ Server::Server(uint16_t port, ByteString certificate, Logger logger)
     setConfig();
     setLogger(std::move(logger));
 #endif
-    applyDefaults(getConfig(this));
+    connection_->applyDefaults();
     setAccessControl(std::make_unique<AccessControlDefault>());
 }
 
@@ -151,9 +155,9 @@ Server::Server(
     Span<const ByteString> issuerList,
     Span<const ByteString> revocationList
 )
-    : connection_(std::make_shared<Connection>(*this)) {
+    : connection_(std::make_shared<detail::ServerConnection>(*this)) {
     const auto status = UA_ServerConfig_setDefaultWithSecurityPolicies(
-        getConfig(this),
+        detail::getConfig(handle()),
         port,
         certificate.handle(),
         privateKey.handle(),
@@ -165,7 +169,7 @@ Server::Server(
         revocationList.size()
     );
     throwIfBad(status);
-    applyDefaults(getConfig(this));
+    connection_->applyDefaults();
     setAccessControl(std::make_unique<AccessControlDefault>());
 }
 #endif
@@ -174,35 +178,38 @@ void Server::setLogger(Logger logger) {
     connection_->config.setLogger(std::move(logger));
 }
 
+inline static ApplicationDescription& getApplicationDescription(Server& server) noexcept {
+    return asWrapper<ApplicationDescription>(detail::getConfig(server).applicationDescription);
+}
+
 // copy to endpoints needed, see: https://github.com/open62541/open62541/issues/1175
-static void copyApplicationDescriptionToEndpoints(UA_ServerConfig* config) {
-    for (size_t i = 0; i < config->endpointsSize; ++i) {
-        auto& ref = asWrapper<ApplicationDescription>(config->endpoints[i].server);  // NOLINT
-        ref = ApplicationDescription(config->applicationDescription);
+inline static void copyApplicationDescriptionToEndpoints(Server& server) {
+    auto endpoints = Span(
+        asWrapper<EndpointDescription>(detail::getConfig(server).endpoints),
+        detail::getConfig(server).endpointsSize
+    );
+    for (auto& endpoint : endpoints) {
+        endpoint.getServer() = getApplicationDescription(server);
     }
 }
 
 void Server::setCustomHostname(std::string_view hostname) {
-    auto& ref = asWrapper<String>(getConfig(this)->customHostname);
-    ref = String(hostname);
+    asWrapper<String>(detail::getConfig(*this).customHostname) = String(hostname);
 }
 
 void Server::setApplicationName(std::string_view name) {
-    auto& ref = asWrapper<LocalizedText>(getConfig(this)->applicationDescription.applicationName);
-    ref = LocalizedText("", name);
-    copyApplicationDescriptionToEndpoints(getConfig(this));
+    getApplicationDescription(*this).getApplicationName() = LocalizedText("", name);
+    copyApplicationDescriptionToEndpoints(*this);
 }
 
 void Server::setApplicationUri(std::string_view uri) {
-    auto& ref = asWrapper<String>(getConfig(this)->applicationDescription.applicationUri);
-    ref = String(uri);
-    copyApplicationDescriptionToEndpoints(getConfig(this));
+    getApplicationDescription(*this).getApplicationUri() = String(uri);
+    copyApplicationDescriptionToEndpoints(*this);
 }
 
 void Server::setProductUri(std::string_view uri) {
-    auto& ref = asWrapper<String>(getConfig(this)->applicationDescription.productUri);
-    ref = String(uri);
-    copyApplicationDescriptionToEndpoints(getConfig(this));
+    getApplicationDescription(*this).getProductUri() = String(uri);
+    copyApplicationDescriptionToEndpoints(*this);
 }
 
 void Server::setAccessControl(AccessControlBase& accessControl) {
@@ -222,7 +229,7 @@ std::vector<std::string> Server::getNamespaceArray() {
         .getArrayCopy<std::string>();
 }
 
-uint16_t Server::registerNamespace(std::string_view uri) {
+NamespaceIndex Server::registerNamespace(std::string_view uri) {
     return UA_Server_addNamespace(handle(), std::string(uri).c_str());
 }
 
@@ -381,12 +388,58 @@ const UA_Server* Server::handle() const noexcept {
     return connection_->server;
 }
 
-/* ------------------------------------------- Context ------------------------------------------ */
+/* -------------------------------------- Helper functions -------------------------------------- */
 
 namespace detail {
 
+UA_ServerConfig* getConfig(UA_Server* server) noexcept {
+    return UA_Server_getConfig(server);
+}
+
+UA_ServerConfig& getConfig(Server& server) noexcept {
+    return *getConfig(server.handle());
+}
+
+ServerConnection* getConnection([[maybe_unused]] UA_Server* server) noexcept {
+#if UAPP_OPEN62541_VER_GE(1, 3)
+    auto* config = getConfig(server);
+    if (config == nullptr) {
+        return nullptr;
+    }
+    // UA_ServerConfig.context pointer available since open62541 v1.3
+    auto* state = static_cast<detail::ServerConnection*>(config->context);
+    assert(state != nullptr);
+    assert(state->server == server);
+    return state;
+#else
+    return nullptr;
+#endif
+}
+
+ServerConnection& getConnection(Server& server) noexcept {
+    auto* state = server.connection_.get();
+    assert(state != nullptr);
+    return *state;
+}
+
+Server* getWrapper(UA_Server* server) noexcept {
+    auto* state = getConnection(server);
+    if (state == nullptr) {
+        return nullptr;
+    }
+    return state->wrapperPtr();
+}
+
+ServerContext* getContext(UA_Server* server) noexcept {
+    auto* state = getConnection(server);
+    if (state == nullptr) {
+        return nullptr;
+    }
+    return &state->context;
+}
+
 ServerContext& getContext(Server& server) noexcept {
-    return server.connection_->context;
+    return getConnection(server).context;
 }
 
 }  // namespace detail

@@ -5,33 +5,11 @@
 
 #include "open62541pp/Client.h"
 #include "open62541pp/Server.h"
-#include "open62541pp/detail/open62541/client.h"
 #include "open62541pp/detail/open62541/common.h"
-#include "open62541pp/detail/open62541/server.h"
 
 namespace opcua {
 
-inline static const UA_Logger& getLogger(UA_Client& client) {
-    return UA_Client_getConfig(&client)->logger;
-}
-
-inline static const UA_Logger& getLogger(UA_Server& server) {
-    return UA_Server_getConfig(&server)->logger;
-}
-
-inline static const UA_Logger& getLogger(Client& client) {
-    return getLogger(*client.handle());
-}
-
-inline static const UA_Logger& getLogger(Server& server) {
-    return getLogger(*server.handle());
-}
-
-template <typename T>
-inline static void logImpl(
-    T& serverOrClient, LogLevel level, LogCategory category, std::string_view msg
-) {
-    const auto& logger = getLogger(serverOrClient);
+static void logImpl(UA_Logger& logger, LogLevel level, LogCategory category, std::string_view msg) {
     if (logger.log == nullptr) {
         return;
     }
@@ -46,23 +24,25 @@ inline static void logImpl(
 }
 
 void log(UA_Client* client, LogLevel level, LogCategory category, std::string_view msg) {
-    if (client != nullptr) {
-        logImpl(*client, level, category, msg);
+    auto* config = detail::getConfig(client);
+    if (config != nullptr) {
+        logImpl(config->logger, level, category, msg);
     }
 }
 
 void log(Client& client, LogLevel level, LogCategory category, std::string_view msg) {
-    logImpl(client, level, category, msg);
+    log(client.handle(), level, category, msg);
 }
 
 void log(UA_Server* server, LogLevel level, LogCategory category, std::string_view msg) {
-    if (server != nullptr) {
-        logImpl(*server, level, category, msg);
+    auto* config = detail::getConfig(server);
+    if (config != nullptr) {
+        logImpl(config->logger, level, category, msg);
     }
 }
 
 void log(Server& server, LogLevel level, LogCategory category, std::string_view msg) {
-    logImpl(server, level, category, msg);
+    log(server.handle(), level, category, msg);
 }
 
 }  // namespace opcua

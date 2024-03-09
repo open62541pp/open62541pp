@@ -8,7 +8,6 @@
 #include <utility>  // move
 
 #include "open62541pp/Client.h"
-#include "open62541pp/Common.h"  // MonitoringMode
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/TypeWrapper.h"
@@ -30,7 +29,7 @@ uint32_t createMonitoredItemDataChange(
     uint32_t subscriptionId,
     const ReadValueId& itemToMonitor,
     MonitoringMode monitoringMode,
-    MonitoringParameters& parameters,
+    MonitoringParametersEx& parameters,
     DataChangeNotificationCallback dataChangeCallback,
     DeleteMonitoredItemCallback deleteCallback
 ) {
@@ -64,7 +63,7 @@ uint32_t createMonitoredItemDataChange(
     Server& server,
     const ReadValueId& itemToMonitor,
     MonitoringMode monitoringMode,
-    MonitoringParameters& parameters,
+    MonitoringParametersEx& parameters,
     DataChangeNotificationCallback dataChangeCallback
 ) {
     auto context = std::make_unique<detail::MonitoredItemContext>();
@@ -95,7 +94,7 @@ uint32_t createMonitoredItemEvent(
     uint32_t subscriptionId,
     const ReadValueId& itemToMonitor,
     MonitoringMode monitoringMode,
-    MonitoringParameters& parameters,
+    MonitoringParametersEx& parameters,
     EventNotificationCallback eventCallback,
     DeleteMonitoredItemCallback deleteCallback
 ) {
@@ -129,7 +128,7 @@ void modifyMonitoredItem(
     Client& client,
     uint32_t subscriptionId,
     uint32_t monitoredItemId,
-    MonitoringParameters& parameters
+    MonitoringParametersEx& parameters
 ) {
     auto item = detail::createMonitoredItemModifyRequest(monitoredItemId, parameters);
     auto request = detail::createModifyMonitoredItemsRequest(subscriptionId, parameters, item);

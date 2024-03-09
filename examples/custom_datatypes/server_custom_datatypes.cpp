@@ -23,10 +23,10 @@ int main() {
 
     // Add data type nodes
     auto nodeStructureDataType = server.getNode(opcua::DataTypeId::Structure);
-    nodeStructureDataType.addDataType(dataTypePoint.getTypeId(), "Point");
-    nodeStructureDataType.addDataType(dataTypeMeasurements.getTypeId(), "Measurements");
-    nodeStructureDataType.addDataType(dataTypeOpt.getTypeId(), "Opt");
-    nodeStructureDataType.addDataType(dataTypeUni.getTypeId(), "Uni");
+    nodeStructureDataType.addDataType(dataTypePoint.getTypeId(), "PointDataType");
+    nodeStructureDataType.addDataType(dataTypeMeasurements.getTypeId(), "MeasurementsDataType");
+    nodeStructureDataType.addDataType(dataTypeOpt.getTypeId(), "OptDataType");
+    nodeStructureDataType.addDataType(dataTypeUni.getTypeId(), "UniDataType");
     auto nodeEnumerationDataType = server.getNode(opcua::DataTypeId::Enumeration);
     nodeEnumerationDataType.addDataType(dataTypeColor.getTypeId(), "Color")
         .addProperty(

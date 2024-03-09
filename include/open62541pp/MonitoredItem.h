@@ -2,7 +2,6 @@
 
 #include <cstdint>
 
-#include "open62541pp/Common.h"
 #include "open62541pp/Config.h"
 #include "open62541pp/services/MonitoredItem.h"
 
@@ -17,7 +16,9 @@ class NodeId;
 template <typename ServerOrClient>
 class Subscription;
 
-using MonitoringParameters = services::MonitoringParameters;
+using MonitoringParametersEx = services::MonitoringParametersEx;
+using MonitoringParameters
+    [[deprecated("Use alias MonitoringParametersEx instead")]] = MonitoringParametersEx;
 
 /**
  * High-level monitored item class.
@@ -58,7 +59,7 @@ public:
     /// Modify this monitored item.
     /// @note Not implemented for Server.
     /// @see services::modifyMonitoredItem
-    void setMonitoringParameters(MonitoringParameters& parameters);
+    void setMonitoringParameters(MonitoringParametersEx& parameters);
 
     /// Set the monitoring mode of this monitored item.
     /// @note Not implemented for Server.
