@@ -298,8 +298,9 @@ static UA_StatusCode valueSourceRead(
     auto& callback = static_cast<detail::NodeContext*>(nodeContext)->dataSource.read;
     if (callback) {
         return detail::tryInvoke(
-            callback, asWrapper<DataValue>(*value), asRange(range), includeSourceTimestamp
-        );
+                   callback, asWrapper<DataValue>(*value), asRange(range), includeSourceTimestamp
+        )
+            .code();
     }
     return UA_STATUSCODE_BADINTERNALERROR;
 }
@@ -316,7 +317,7 @@ static UA_StatusCode valueSourceWrite(
     assert(nodeContext != nullptr && value != nullptr);
     auto& callback = static_cast<detail::NodeContext*>(nodeContext)->dataSource.write;
     if (callback) {
-        return detail::tryInvoke(callback, asWrapper<DataValue>(*value), asRange(range));
+        return detail::tryInvoke(callback, asWrapper<DataValue>(*value), asRange(range)).code();
     }
     return UA_STATUSCODE_BADINTERNALERROR;
 }

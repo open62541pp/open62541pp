@@ -20,4 +20,8 @@ TEST_CASE("getStatusCode") {
         detail::getStatusCode(std::make_exception_ptr(std::runtime_error("test"))) ==
         UA_STATUSCODE_BADINTERNALERROR
     );
+    CHECK(
+        detail::getStatusCode(std::make_exception_ptr(std::bad_alloc())) ==
+        UA_STATUSCODE_BADOUTOFMEMORY
+    );
 }

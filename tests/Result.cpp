@@ -79,13 +79,6 @@ TEST_CASE("Result (void template specialization)") {
         CHECK(static_cast<StatusCode>(Result<void>(badResult)) == UA_STATUSCODE_BADUNEXPECTEDERROR);
     }
 
-    SUBCASE("operator UA_StatusCode") {
-        CHECK(static_cast<UA_StatusCode>(Result<void>()) == UA_STATUSCODE_GOOD);
-        CHECK(
-            static_cast<UA_StatusCode>(Result<void>(badResult)) == UA_STATUSCODE_BADUNEXPECTEDERROR
-        );
-    }
-
     SUBCASE("code") {
         CHECK(Result<void>().code() == UA_STATUSCODE_GOOD);
         CHECK(Result<void>(badResult).code() == badCode);
@@ -108,18 +101,13 @@ TEST_CASE("Result (void template specialization)") {
 TEST_CASE("tryInvoke") {
     SUBCASE("Result<int>") {
         auto result = detail::tryInvoke([] { return 1; });
+        CHECK(result.code() == UA_STATUSCODE_GOOD);
         CHECK(result.value() == 1);
-        CHECK(result.code() == 0);
     }
 
-    SUBCASE("Result<void> (conversion to StatusCode)") {
-        StatusCode result = detail::tryInvoke([] { return; });
-        CHECK(result == 0);
-    }
-
-    SUBCASE("Result<void> (conversion to UA_StatusCode)") {
-        UA_StatusCode result = detail::tryInvoke([] { return; });
-        CHECK(result == 0);
+    SUBCASE("Result<void>") {
+        auto result = detail::tryInvoke([] { return; });
+        CHECK(result.code() == UA_STATUSCODE_GOOD);
     }
 
     SUBCASE("BadStatus exception") {

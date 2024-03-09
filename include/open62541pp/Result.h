@@ -36,13 +36,6 @@ public:
         return code_;
     }
 
-    /**
-     * Convert the Result to a UA_StatusCode.
-     */
-    operator UA_StatusCode() const noexcept {  // NOLINT, implicit wanted
-        return code_;
-    }
-
     constexpr void operator*() const noexcept {}
 
     /**
@@ -96,6 +89,14 @@ template <typename T>
 class Result {
 public:
     using ValueType = T;
+
+#ifdef _MSC_VER
+    // Workaround required for MSVC
+    // (https://developercommunity.visualstudio.com/t/c-shared-state-futuresstate-default-constructs-the/60897).
+    constexpr Result() noexcept
+        : code_(UA_STATUSCODE_BADINTERNALERROR) {}
+
+#endif
 
     // NOLINTNEXTLINE, implicit wanted
     constexpr Result(const T& value) noexcept(std::is_nothrow_copy_constructible_v<T>)
