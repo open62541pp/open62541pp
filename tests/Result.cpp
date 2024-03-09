@@ -12,8 +12,8 @@ static constexpr BadResult badResult(badCode);
 
 TEST_CASE("Result") {
     SUBCASE("operator bool") {
-        CHECK(static_cast<bool>(Result<int>(1)) == true);
-        CHECK(static_cast<bool>(Result<int>(badResult)) == false);
+        CHECK(static_cast<bool>(Result<int>(1)));
+        CHECK_FALSE(static_cast<bool>(Result<int>(badResult)));
     }
 
     SUBCASE("operator->") {
