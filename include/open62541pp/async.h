@@ -16,7 +16,7 @@ namespace opcua {
  * @defgroup Async Asynchronous operations
  * The asynchronous model is based on (Boost) Asio's universal model for asynchronous operations.
  * Each async function takes a `CompletionToken` as it's last parameter.
- * The completion token can be a callable with the signature `void(StatusCode code, T result)` where
+ * The completion token can be a callable with the signature `void(Result<T>)` where
  * `T` is a function-specific result type.
  *
  * @see https://think-async.com/asio/asio-1.28.0/doc/asio/overview/model/async_ops.html
