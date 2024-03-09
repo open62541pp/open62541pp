@@ -69,21 +69,11 @@ template <typename T>
 struct AsyncResult<UseFutureToken, T> {
     template <typename Initiation, typename... Args>
     static auto initiate(Initiation&& initiation, UseFutureToken /*unused*/, Args&&... args) {
-        std::promise<T> promise;
+        std::promise<Result<T>> promise;
         auto future = promise.get_future();
         std::invoke(
             std::forward<Initiation>(initiation),
-            [p = std::move(promise)](Result<T>& result) mutable {
-                if (result.code().isBad()) {
-                    p.set_exception(std::make_exception_ptr(BadStatus(result.code())));
-                } else {
-                    if constexpr (std::is_void_v<T>) {
-                        p.set_value();
-                    } else {
-                        p.set_value(std::move(*result));
-                    }
-                }
-            },
+            [p = std::move(promise)](Result<T>& result) mutable { p.set_value(std::move(result)); },
             std::forward<Args>(args)...
         );
         return future;

@@ -44,20 +44,21 @@ TEST_CASE("Async (callback completion token)") {
 TEST_CASE("Async (future completion token)") {
     SUBCASE("Void") {
         Result<void> result{};
-        std::future<void> future = asyncTest(result, useFuture);
-        CHECK_NOTHROW(future.get());
+        auto future = asyncTest(result, useFuture);
+        CHECK_NOTHROW(future.get().value());
     }
 
     SUBCASE("Result") {
         Result<double> result{11.11};
-        std::future<double> future = asyncTest(result, useFuture);
-        CHECK(future.get() == 11.11);
+        *result;
+        auto future = asyncTest(result, useFuture);
+        CHECK_EQ(future.get().value(), 11.11);
     }
 
     SUBCASE("Error") {
-        Result<void> result{BadResult{UA_STATUSCODE_BADUNEXPECTEDERROR}};
-        std::future<void> future = asyncTest(result, useFuture);
-        CHECK_THROWS_WITH_AS(future.get(), "BadUnexpectedError", BadStatus);
+        Result<int> result{BadResult{UA_STATUSCODE_BADUNEXPECTEDERROR}};
+        auto future = asyncTest(result, useFuture);
+        CHECK_THROWS_WITH_AS(future.get().value(), "BadUnexpectedError", BadStatus);
     }
 }
 
@@ -65,16 +66,16 @@ TEST_CASE("Async (deferred completion token)") {
     SUBCASE("Result") {
         Result<int> result{11};
         auto func = asyncTest(result, useDeferred);
-        std::future<int> future = func(useFuture);
-        CHECK(future.get() == 11);
-        CHECK(func(useFuture).get() == 11);  // execute again
+        auto future = func(useFuture);
+        CHECK_EQ(future.get().value(), 11);
+        CHECK_EQ(func(useFuture).get().value(), 11);  // execute again
     }
 
     SUBCASE("Error") {
-        Result<void> result{BadResult{UA_STATUSCODE_BADUNEXPECTEDERROR}};
+        Result<int> result{BadResult{UA_STATUSCODE_BADUNEXPECTEDERROR}};
         auto func = asyncTest(result, useDeferred);
-        std::future<void> future = func(useFuture);
-        CHECK_THROWS_WITH_AS(future.get(), "BadUnexpectedError", BadStatus);
+        auto future = func(useFuture);
+        CHECK_THROWS_WITH_AS(future.get().value(), "BadUnexpectedError", BadStatus);
     }
 }
 

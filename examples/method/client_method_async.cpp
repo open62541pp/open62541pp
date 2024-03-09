@@ -29,8 +29,8 @@ int main() {
         future.wait();
 
         std::cout << "Future ready, get method output\n";
-        auto output = future.get();
-        std::cout << output.at(0).getScalar<opcua::String>() << std::endl;
+        auto result = future.get();
+        std::cout << result.value().at(0).getScalar<opcua::String>() << std::endl;
     }
 
     // Asynchronously call method (callback variant)

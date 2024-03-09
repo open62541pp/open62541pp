@@ -11,11 +11,6 @@ static constexpr StatusCode badCode(UA_STATUSCODE_BADUNEXPECTEDERROR);
 static constexpr BadResult badResult(badCode);
 
 TEST_CASE("Result") {
-    SUBCASE("operator bool") {
-        CHECK(static_cast<bool>(Result<int>(1)));
-        CHECK_FALSE(static_cast<bool>(Result<int>(badResult)));
-    }
-
     SUBCASE("operator->") {
         struct S {
             int a;
@@ -79,11 +74,6 @@ TEST_CASE("Result") {
 }
 
 TEST_CASE("Result (void template specialization)") {
-    SUBCASE("operator bool") {
-        CHECK(static_cast<bool>(Result<void>()) == true);
-        CHECK(static_cast<bool>(Result<void>(badResult)) == false);
-    }
-
     SUBCASE("operator StatusCode") {
         CHECK(static_cast<StatusCode>(Result<void>()) == UA_STATUSCODE_GOOD);
         CHECK(static_cast<StatusCode>(Result<void>(badResult)) == UA_STATUSCODE_BADUNEXPECTEDERROR);
@@ -99,6 +89,19 @@ TEST_CASE("Result (void template specialization)") {
     SUBCASE("code") {
         CHECK(Result<void>().code() == UA_STATUSCODE_GOOD);
         CHECK(Result<void>(badResult).code() == badCode);
+    }
+
+    SUBCASE("value") {
+        Result<void> result{};
+        CHECK_NOTHROW(result.value());
+
+        Result<void> resultError(badResult);
+        CHECK_THROWS_AS(resultError.value(), BadStatus);
+
+        SUBCASE("rvalue") {
+            CHECK_NOTHROW(Result<void>().value());
+            CHECK_THROWS_AS(Result<void>(badResult).value(), BadStatus);
+        }
     }
 }
 

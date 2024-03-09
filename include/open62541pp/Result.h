@@ -30,13 +30,6 @@ public:
         : code_(code) {}
 
     /**
-     * Check if the Result's status code is good.
-     */
-    explicit operator bool() const noexcept {
-        return code().isGood();
-    }
-
-    /**
      * Convert the Result to a StatusCode.
      */
     operator StatusCode() const noexcept {  // NOLINT, implicit wanted
@@ -57,6 +50,20 @@ public:
      */
     constexpr StatusCode code() const noexcept {
         return code_;
+    }
+
+    /**
+     * Get the value of the Result.
+     */
+    constexpr void value() const& {
+        checkIsBad();
+    }
+
+    /**
+     * Get the value of the Result.
+     */
+    constexpr void value() && {
+        checkIsBad();
     }
 
 private:
@@ -116,11 +123,14 @@ public:
         assert(!code.isBad());
     }
 
-    /**
-     * Check if the Result's status code is good.
-     */
-    explicit operator bool() const noexcept {
-        return code().isGood();
+    // NOLINTNEXTLINE, implicit wanted
+    operator T&() {
+        return value();
+    }
+
+    // NOLINTNEXTLINE, implicit wanted
+    operator const T&() const {
+        return value();
     }
 
     /**
