@@ -101,6 +101,7 @@ def main():
     run(path / exe("typeconversion"))
 
     run(path / exe("server"))
+    run(path / exe("server_logger"))
     run(path / exe("server_instantiation"))
     run(path / exe("server_valuecallback"))
     run(path / exe("server_datasource"))
