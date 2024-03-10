@@ -23,10 +23,8 @@ class AccessControlBase;
 
 class ServerConfig {
 public:
-    ServerConfig(UA_ServerConfig& config, Server& server /* TODO: remove dependency */)
-        : config_(config) {
-        customAccessControl_.setServer(server);
-    }
+    ServerConfig(UA_ServerConfig& config)
+        : config_(config) {}
 
     void setLogger(Logger logger) {
         customLogger_.set(config_.logger, std::move(logger));
@@ -49,8 +47,8 @@ public:
     }
 
     // TODO: decouple from CustomAccessControl and ServerConfig
-    std::vector<Session> getSessions() const {
-        return customAccessControl_.getSessions();
+    std::vector<NodeId> getSessionIds() const {
+        return customAccessControl_.getSessionIds();
     }
 
     constexpr UA_ServerConfig* operator->() noexcept {

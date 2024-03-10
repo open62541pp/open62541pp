@@ -41,9 +41,9 @@ namespace detail {
 }
 
 struct ServerConnection : public ConnectionBase<Server> {
-    explicit ServerConnection(Server& parent)
+    explicit ServerConnection()
         : server(allocateServer()),
-          config(*detail::getConfig(server), parent) {}
+          config(*detail::getConfig(server)) {}
 
     ~ServerConnection() {
         // don't use stop method here because it might throw an exception
@@ -124,7 +124,7 @@ struct ServerConnection : public ConnectionBase<Server> {
 /* ------------------------------------------- Server ------------------------------------------- */
 
 Server::Server(uint16_t port, ByteString certificate, Logger logger)
-    : connection_(std::make_shared<detail::ServerConnection>(*this)) {
+    : connection_(std::make_shared<detail::ServerConnection>()) {
     // The logger should be set as soon as possible, ideally even before UA_ServerConfig_setMinimal.
     // However, the logger gets overwritten by UA_ServerConfig_setMinimal() in older versions of
     // open62541. The best we can do in this case, is to first call UA_ServerConfig_setMinimal and
@@ -155,7 +155,7 @@ Server::Server(
     Span<const ByteString> issuerList,
     Span<const ByteString> revocationList
 )
-    : connection_(std::make_shared<detail::ServerConnection>(*this)) {
+    : connection_(std::make_shared<detail::ServerConnection>()) {
     const auto status = UA_ServerConfig_setDefaultWithSecurityPolicies(
         detail::getConfig(handle()),
         port,
@@ -220,8 +220,12 @@ void Server::setAccessControl(std::unique_ptr<AccessControlBase> accessControl) 
     connection_->config.setAccessControl(std::move(accessControl));
 }
 
-std::vector<Session> Server::getSessions() const {
-    return connection_->config.getSessions();
+std::vector<Session> Server::getSessions() {
+    std::vector<Session> sessions;
+    for (auto&& id : connection_->config.getSessionIds()) {
+        sessions.emplace_back(*this, id);
+    }
+    return sessions;
 }
 
 std::vector<std::string> Server::getNamespaceArray() {

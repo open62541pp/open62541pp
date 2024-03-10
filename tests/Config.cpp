@@ -1,15 +1,16 @@
 #include <doctest/doctest.h>
 
 #include "open62541pp/AccessControl.h"
-#include "open62541pp/Server.h"
 
 #include "ServerConfig.h"
 
 using namespace opcua;
 
 TEST_CASE("ServerConfig") {
-    Server server;
-    ServerConfig config(*UA_Server_getConfig(server.handle()), server);
+    UA_ServerConfig native{};
+    UA_ServerConfig_setDefault(&native);
+
+    ServerConfig config(native);
 
     SUBCASE("AccessControl") {
         SUBCASE("Copy user token policies to endpoints") {

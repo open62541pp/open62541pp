@@ -36,17 +36,14 @@ public:
     void onSessionActivated(const NodeId& sessionId);
     void onSessionClosed(const NodeId& sessionId);
 
-    /// Get active sessions.
-    std::vector<Session> getSessions() const;
+    /// Get active session ids.
+    std::vector<NodeId> getSessionIds() const;
 
-    void setServer(Server& server) noexcept;
-    Server& getServer() noexcept;
     AccessControlBase* getAccessControl() noexcept;
 
 private:
     void setAccessControl(UA_AccessControl& ac);
 
-    Server* server_{nullptr};
     std::variant<AccessControlBase*, std::unique_ptr<AccessControlBase>> accessControl_{nullptr};
     std::vector<UserTokenPolicy> userTokenPolicies_;
     std::set<NodeId> sessionIds_;

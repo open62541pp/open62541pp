@@ -3,6 +3,7 @@
 #include <doctest/doctest.h>
 
 #include "open62541pp/AccessControl.h"
+#include "open62541pp/Config.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/Session.h"
 #include "open62541pp/detail/open62541/server.h"
@@ -38,14 +39,11 @@ TEST_CASE("CustomAccessControl") {
     Server server;
 
     CustomAccessControl customAccessControl;
-    customAccessControl.setServer(server);
     auto* config = UA_Server_getConfig(server.handle());
     UA_AccessControl& native = config->accessControl;
 
     // reset to empty UA_AccessControl
     detail::clear(native);
-
-    CHECK(customAccessControl.getServer() == server);
 
     SUBCASE("Set custom access control by reference") {
         AccessControlTest accessControl;
@@ -248,7 +246,7 @@ TEST_CASE("CustomAccessControl") {
     SUBCASE("Store active sessions") {
         AccessControlTest accessControl;
         CHECK_NOTHROW(customAccessControl.setAccessControl(native, accessControl));
-        CHECK(customAccessControl.getSessions().empty());
+        CHECK(customAccessControl.getSessionIds().empty());
 
         // activate session
         NodeId sessionId(0, 1000);
@@ -261,9 +259,8 @@ TEST_CASE("CustomAccessControl") {
             nullptr,  // user identity token
             nullptr  // session context
         );
-        CHECK(customAccessControl.getSessions().size() == 1);
-        CHECK(customAccessControl.getSessions().at(0).getConnection() == server);
-        CHECK(customAccessControl.getSessions().at(0).getSessionId() == sessionId);
+        CHECK(customAccessControl.getSessionIds().size() == 1);
+        CHECK(customAccessControl.getSessionIds().at(0) == sessionId);
 
         // close session
         native.closeSession(
@@ -272,6 +269,6 @@ TEST_CASE("CustomAccessControl") {
             sessionId.handle(),  // session id
             nullptr  // session context
         );
-        CHECK(customAccessControl.getSessions().empty());
+        CHECK(customAccessControl.getSessionIds().empty());
     }
 }
