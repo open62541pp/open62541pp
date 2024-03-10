@@ -55,4 +55,6 @@ TEST_CASE("ServerConfig") {
             );
         }
     }
+
+    UA_ServerConfig_clean(&native);
 }
