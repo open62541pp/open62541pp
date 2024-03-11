@@ -341,8 +341,8 @@ void CustomAccessControl::setAccessControl(UA_AccessControl& ac) {
     detail::clear(ac);
 
     ac.context = this;
-    ac.userTokenPoliciesSize = userTokenPolicies_.size();
-    ac.userTokenPolicies = asNative(userTokenPolicies_.data());
+    ac.userTokenPoliciesSize = getAccessControl()->getUserTokenPolicies().size();
+    ac.userTokenPolicies = asNative(getAccessControl()->getUserTokenPolicies().data());
     ac.activateSession = activateSession;
     ac.closeSession = closeSession;
     ac.getUserRightsMask = getUserRightsMask;
@@ -368,7 +368,6 @@ void CustomAccessControl::setAccessControl(UA_AccessControl& ac) {
 void CustomAccessControl::setAccessControl(
     UA_AccessControl& native, AccessControlBase& accessControl
 ) {
-    userTokenPolicies_ = accessControl.getUserTokenPolicies();
     accessControl_ = &accessControl;
     setAccessControl(native);
 }
@@ -376,7 +375,6 @@ void CustomAccessControl::setAccessControl(
 void CustomAccessControl::setAccessControl(
     UA_AccessControl& native, std::unique_ptr<AccessControlBase> accessControl
 ) {
-    userTokenPolicies_ = accessControl->getUserTokenPolicies();
     accessControl_ = std::move(accessControl);
     setAccessControl(native);
 }
