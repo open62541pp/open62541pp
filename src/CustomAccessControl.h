@@ -12,17 +12,16 @@
 struct UA_AccessControl;
 
 namespace opcua {
+class AccessControlBase;
+}  // namespace opcua
+
+namespace opcua {
 
 namespace detail {
 
 void clear(UA_AccessControl& ac) noexcept;
 
 }  // namespace detail
-
-// forward declare
-class AccessControlBase;
-class Server;
-class Session;
 
 class CustomAccessControl {
 public:
@@ -32,9 +31,6 @@ public:
     void setAccessControl(
         UA_AccessControl& native, std::unique_ptr<AccessControlBase> accessControl
     );
-
-    void onSessionActivated(const NodeId& sessionId);
-    void onSessionClosed(const NodeId& sessionId);
 
     AccessControlBase* getAccessControl() noexcept;
 

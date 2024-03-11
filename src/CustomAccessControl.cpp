@@ -1,7 +1,6 @@
 #include "CustomAccessControl.h"
 
 #include <cassert>
-#include <cstddef>
 #include <cstdint>
 #include <exception>
 #include <functional>  // invoke
