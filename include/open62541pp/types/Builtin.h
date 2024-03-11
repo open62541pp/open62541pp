@@ -164,14 +164,14 @@ public:
     static ByteString fromFile(const fs::path& filepath);
 
     /// Parse ByteString from Base64 encoded string.
-    /// @note Only supported since open62541 v1.1
+    /// @note Supported since open62541 v1.1
     static ByteString fromBase64(std::string_view encoded);
 
     /// Write ByteString to binary file.
     void toFile(const fs::path& filepath) const;
 
     /// Convert to Base64 encoded string.
-    /// @note Only supported since open62541 v1.1
+    /// @note Supported since open62541 v1.1
     std::string toBase64() const;
 
     bool empty() const noexcept;

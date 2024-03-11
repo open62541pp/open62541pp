@@ -1,10 +1,10 @@
 #include "CustomAccessControl.h"
 
 #include <cassert>
-#include <cstddef>
 #include <cstdint>
 #include <exception>
 #include <functional>  // invoke
+#include <optional>
 #include <string>
 #include <string_view>
 #include <utility>  // move
@@ -16,9 +16,7 @@
 #include "open62541pp/Server.h"
 #include "open62541pp/Session.h"
 #include "open62541pp/Wrapper.h"  // asWrapper, asNative
-#include "open62541pp/detail/helper.h"
-#include "open62541pp/detail/open62541/server.h"
-#include "open62541pp/detail/traits.h"
+#include "open62541pp/detail/traits.h"  // Overload
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/DateTime.h"
@@ -34,8 +32,10 @@ inline static CustomAccessControl& getContext(UA_AccessControl* ac) noexcept {
     return *static_cast<CustomAccessControl*>(ac->context);
 }
 
-inline static Server& getServer(UA_AccessControl* ac) noexcept {
-    return getContext(ac).getServer();
+inline static AccessControlBase& getAccessControl(UA_AccessControl* ac) {
+    auto* accessControl = getContext(ac).getAccessControl();
+    assert(accessControl != nullptr);
+    return *accessControl;
 }
 
 template <typename WrapperType, typename NativeType = typename WrapperType::NativeType>
@@ -44,19 +44,17 @@ inline static const WrapperType& asWrapperRef(const NativeType* nativePtr) {
     return nativePtr == nullptr ? empty : asWrapper<WrapperType>(*nativePtr);
 }
 
-inline static Session getSession(UA_AccessControl* ac, const UA_NodeId* sessionId) noexcept {
-    // session constructed with every call to access control
-    // future optimization: store session object in sessionContext
-    return {getServer(ac), asWrapperRef<NodeId>(sessionId)};
+inline static std::optional<Session> getSession(
+    UA_Server* server, const UA_NodeId* sessionId
+) noexcept {
+    auto* wrapper = detail::getWrapper(server);
+    if (wrapper == nullptr) {
+        return std::nullopt;
+    }
+    return Session(*wrapper, asWrapperRef<NodeId>(sessionId));
 }
 
-inline static AccessControlBase& getAccessControl(UA_AccessControl* ac) {
-    auto* accessControl = getContext(ac).getAccessControl();
-    assert(accessControl != nullptr);
-    return *accessControl;
-}
-
-inline static void logException(
+static void logException(
     UA_Server* server, std::string_view callbackName, std::string_view exceptionMessage
 ) {
     const auto message =
@@ -89,17 +87,15 @@ static UA_StatusCode activateSession(
     [[maybe_unused]] void** sessionContext
 ) {
     return invokeAccessCallback(server, "activateSession", UA_STATUSCODE_BADINTERNALERROR, [&] {
-        auto session = getSession(ac, sessionId);
-        const auto status = getAccessControl(ac).activateSession(
-            session,
-            asWrapperRef<EndpointDescription>(endpointDescription),
-            asWrapperRef<ByteString>(secureChannelRemoteCertificate),
-            asWrapperRef<ExtensionObject>(userIdentityToken)
-        );
-        if (status.isGood()) {
-            getContext(ac).onSessionActivated(asWrapperRef<NodeId>(sessionId));
-        }
-        return status.get();
+        auto session = getSession(server, sessionId);
+        return getAccessControl(ac)
+            .activateSession(
+                session.value(),
+                asWrapperRef<EndpointDescription>(endpointDescription),
+                asWrapperRef<ByteString>(secureChannelRemoteCertificate),
+                asWrapperRef<ExtensionObject>(userIdentityToken)
+            )
+            .get();
     });
 }
 
@@ -110,9 +106,8 @@ static void closeSession(
     [[maybe_unused]] void* sessionContext
 ) {
     try {
-        auto session = getSession(ac, sessionId);
-        getAccessControl(ac).closeSession(session);
-        getContext(ac).onSessionClosed(asWrapperRef<NodeId>(sessionId));
+        auto session = getSession(server, sessionId);
+        getAccessControl(ac).closeSession(session.value());
     } catch (const std::exception& e) {
         logException(server, "closeSession", e.what());
     }
@@ -127,8 +122,10 @@ static UA_UInt32 getUserRightsMask(
     [[maybe_unused]] void* nodeContext
 ) {
     return invokeAccessCallback(server, "getUserRightsMask", uint32_t{}, [&] {
-        auto session = getSession(ac, sessionId);
-        return getAccessControl(ac).getUserRightsMask(session, asWrapperRef<NodeId>(nodeId)).get();
+        auto session = getSession(server, sessionId);
+        return getAccessControl(ac)
+            .getUserRightsMask(session.value(), asWrapperRef<NodeId>(nodeId))
+            .get();
     });
 }
 
@@ -141,8 +138,10 @@ static UA_Byte getUserAccessLevel(
     [[maybe_unused]] void* nodeContext
 ) {
     return invokeAccessCallback(server, "getUserAccessLevel", uint8_t{}, [&] {
-        auto session = getSession(ac, sessionId);
-        return getAccessControl(ac).getUserAccessLevel(session, asWrapperRef<NodeId>(nodeId)).get();
+        auto session = getSession(server, sessionId);
+        return getAccessControl(ac)
+            .getUserAccessLevel(session.value(), asWrapperRef<NodeId>(nodeId))
+            .get();
     });
 }
 
@@ -155,8 +154,10 @@ static UA_Boolean getUserExecutable(
     [[maybe_unused]] void* methodContext
 ) {
     return invokeAccessCallback(server, "getUserExecutable", false, [&] {
-        auto session = getSession(ac, sessionId);
-        return getAccessControl(ac).getUserExecutable(session, asWrapperRef<NodeId>(methodId));
+        auto session = getSession(server, sessionId);
+        return getAccessControl(ac).getUserExecutable(
+            session.value(), asWrapperRef<NodeId>(methodId)
+        );
     });
 }
 
@@ -171,9 +172,9 @@ static UA_Boolean getUserExecutableOnObject(
     [[maybe_unused]] void* objectContext
 ) {
     return invokeAccessCallback(server, "getUserExecutableOnObject", false, [&] {
-        auto session = getSession(ac, sessionId);
+        auto session = getSession(server, sessionId);
         return getAccessControl(ac).getUserExecutableOnObject(
-            session, asWrapperRef<NodeId>(methodId), asWrapperRef<NodeId>(objectId)
+            session.value(), asWrapperRef<NodeId>(methodId), asWrapperRef<NodeId>(objectId)
         );
     });
 }
@@ -186,8 +187,8 @@ static UA_Boolean allowAddNode(
     const UA_AddNodesItem* item
 ) {
     return invokeAccessCallback(server, "allowAddNode", false, [&] {
-        auto session = getSession(ac, sessionId);
-        return getAccessControl(ac).allowAddNode(session, asWrapperRef<AddNodesItem>(item));
+        auto session = getSession(server, sessionId);
+        return getAccessControl(ac).allowAddNode(session.value(), asWrapperRef<AddNodesItem>(item));
     });
 }
 
@@ -199,9 +200,9 @@ static UA_Boolean allowAddReference(
     const UA_AddReferencesItem* item
 ) {
     return invokeAccessCallback(server, "allowAddReference", false, [&] {
-        auto session = getSession(ac, sessionId);
+        auto session = getSession(server, sessionId);
         return getAccessControl(ac).allowAddReference(
-            session, asWrapperRef<AddReferencesItem>(item)
+            session.value(), asWrapperRef<AddReferencesItem>(item)
         );
     });
 }
@@ -214,8 +215,10 @@ static UA_Boolean allowDeleteNode(
     const UA_DeleteNodesItem* item
 ) {
     return invokeAccessCallback(server, "allowDeleteNode", false, [&] {
-        auto session = getSession(ac, sessionId);
-        return getAccessControl(ac).allowDeleteNode(session, asWrapperRef<DeleteNodesItem>(item));
+        auto session = getSession(server, sessionId);
+        return getAccessControl(ac).allowDeleteNode(
+            session.value(), asWrapperRef<DeleteNodesItem>(item)
+        );
     });
 }
 
@@ -227,9 +230,9 @@ static UA_Boolean allowDeleteReference(
     const UA_DeleteReferencesItem* item
 ) {
     return invokeAccessCallback(server, "allowDeleteReference", false, [&] {
-        auto session = getSession(ac, sessionId);
+        auto session = getSession(server, sessionId);
         return getAccessControl(ac).allowDeleteReference(
-            session, asWrapperRef<DeleteReferencesItem>(item)
+            session.value(), asWrapperRef<DeleteReferencesItem>(item)
         );
     });
 }
@@ -243,8 +246,8 @@ static UA_Boolean allowDeleteReference(
     [[maybe_unused]] void* nodeContext
 ) {
     return invokeAccessCallback(server, "allowBrowseNode", false, [&] {
-        auto session = getSession(ac, sessionId);
-        return getAccessControl(ac).allowBrowseNode(session, asWrapperRef<NodeId>(nodeId));
+        auto session = getSession(server, sessionId);
+        return getAccessControl(ac).allowBrowseNode(session.value(), asWrapperRef<NodeId>(nodeId));
     });
 }
 
@@ -258,9 +261,11 @@ static UA_Boolean allowDeleteReference(
     [[maybe_unused]] void* newSessionContext
 ) {
     return invokeAccessCallback(server, "allowTransferSubscription", false, [&] {
-        auto oldSession = getSession(ac, oldSessionId);
-        auto newSession = getSession(ac, newSessionId);
-        return getAccessControl(ac).allowTransferSubscription(oldSession, newSession);
+        auto oldSession = getSession(server, oldSessionId);
+        auto newSession = getSession(server, newSessionId);
+        return getAccessControl(ac).allowTransferSubscription(
+            oldSession.value(), newSession.value()
+        );
     });
 }
 #endif
@@ -276,9 +281,9 @@ static UA_Boolean allowHistoryUpdateUpdateData(
     const UA_DataValue* value
 ) {
     return invokeAccessCallback(server, "allowHistoryUpdate", false, [&] {
-        auto session = getSession(ac, sessionId);
+        auto session = getSession(server, sessionId);
         return getAccessControl(ac).allowHistoryUpdate(
-            session,
+            session.value(),
             asWrapperRef<NodeId>(nodeId),
             static_cast<PerformUpdateType>(performInsertReplace),
             asWrapperRef<DataValue>(value)
@@ -297,9 +302,9 @@ static UA_Boolean allowHistoryUpdateDeleteRawModified(
     bool isDeleteModified
 ) {
     return invokeAccessCallback(server, "allowHistoryDelete", false, [&] {
-        auto session = getSession(ac, sessionId);
+        auto session = getSession(server, sessionId);
         return getAccessControl(ac).allowHistoryDelete(
-            session,
+            session.value(),
             asWrapperRef<NodeId>(nodeId),
             DateTime(startTimestamp),
             DateTime(endTimestamp),
@@ -376,38 +381,13 @@ void CustomAccessControl::setAccessControl(
     setAccessControl(native);
 }
 
-void CustomAccessControl::onSessionActivated(const NodeId& sessionId) {
-    sessionIds_.insert(sessionId);
-}
-
-void CustomAccessControl::onSessionClosed(const NodeId& sessionId) {
-    sessionIds_.erase(sessionId);
-}
-
-std::vector<Session> CustomAccessControl::getSessions() const {
-    assert(server_ != nullptr);
-    std::vector<Session> result;
-    for (auto id : sessionIds_) {
-        result.emplace_back(*server_, std::move(id));
-    }
-    return result;
-}
-
-void CustomAccessControl::setServer(Server& server) noexcept {
-    server_ = &server;
-}
-
-Server& CustomAccessControl::getServer() noexcept {
-    assert(server_ != nullptr);
-    return *server_;
-}
-
 // NOLINTNEXTLINE, https://stackoverflow.com/questions/53946674/noexcept-visitation-for-stdvariant
 AccessControlBase* CustomAccessControl::getAccessControl() noexcept {
     return std::visit(
         detail::Overload{
             [](AccessControlBase* ptr) { return ptr; },
-            [](std::unique_ptr<AccessControlBase>& ptr) { return ptr.get(); }},
+            [](std::unique_ptr<AccessControlBase>& ptr) { return ptr.get(); }
+        },
         accessControl_
     );
 }
