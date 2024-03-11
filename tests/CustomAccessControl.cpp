@@ -242,33 +242,4 @@ TEST_CASE("CustomAccessControl") {
         );
 #endif
     }
-
-    SUBCASE("Store active sessions") {
-        AccessControlTest accessControl;
-        CHECK_NOTHROW(customAccessControl.setAccessControl(native, accessControl));
-        CHECK(customAccessControl.getSessionIds().empty());
-
-        // activate session
-        NodeId sessionId(0, 1000);
-        native.activateSession(
-            server.handle(),
-            &native,
-            nullptr,  // endpoint description
-            nullptr,  // secure channel remote certificate
-            sessionId.handle(),  // session id
-            nullptr,  // user identity token
-            nullptr  // session context
-        );
-        CHECK(customAccessControl.getSessionIds().size() == 1);
-        CHECK(customAccessControl.getSessionIds().at(0) == sessionId);
-
-        // close session
-        native.closeSession(
-            server.handle(),
-            &native,
-            sessionId.handle(),  // session id
-            nullptr  // session context
-        );
-        CHECK(customAccessControl.getSessionIds().empty());
-    }
 }

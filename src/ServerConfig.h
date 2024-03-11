@@ -46,11 +46,6 @@ public:
         copyUserTokenPoliciesToEndpoints();
     }
 
-    // TODO: decouple from CustomAccessControl and ServerConfig
-    std::vector<NodeId> getSessionIds() const {
-        return customAccessControl_.getSessionIds();
-    }
-
     constexpr UA_ServerConfig* operator->() noexcept {
         return &config_;
     }

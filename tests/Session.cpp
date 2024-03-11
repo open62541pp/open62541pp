@@ -17,6 +17,7 @@ TEST_CASE("Session") {
     ServerRunner serverRunner(server);
     Client client;
 
+#if UAPP_OPEN62541_VER_GE(1, 3)
     SUBCASE("Get active session") {
         CHECK(server.getSessions().empty());
         client.connect(localServerUrl);
@@ -25,7 +26,6 @@ TEST_CASE("Session") {
         CHECK(server.getSessions().empty());
     }
 
-#if UAPP_OPEN62541_VER_GE(1, 3)
     SUBCASE("Session attributes") {
         client.connect(localServerUrl);
         auto session = server.getSessions().at(0);

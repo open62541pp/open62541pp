@@ -36,9 +36,6 @@ public:
     void onSessionActivated(const NodeId& sessionId);
     void onSessionClosed(const NodeId& sessionId);
 
-    /// Get active session ids.
-    std::vector<NodeId> getSessionIds() const;
-
     AccessControlBase* getAccessControl() noexcept;
 
 private:
@@ -46,7 +43,6 @@ private:
 
     std::variant<AccessControlBase*, std::unique_ptr<AccessControlBase>> accessControl_{nullptr};
     std::vector<UserTokenPolicy> userTokenPolicies_;
-    std::set<NodeId> sessionIds_;
 };
 
 }  // namespace opcua

@@ -17,9 +17,7 @@
 #include "open62541pp/Server.h"
 #include "open62541pp/Session.h"
 #include "open62541pp/Wrapper.h"  // asWrapper, asNative
-#include "open62541pp/detail/helper.h"
-#include "open62541pp/detail/open62541/server.h"
-#include "open62541pp/detail/traits.h"
+#include "open62541pp/detail/traits.h"  // Overload
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/DateTime.h"
@@ -33,6 +31,12 @@ inline static CustomAccessControl& getContext(UA_AccessControl* ac) noexcept {
     assert(ac != nullptr);
     assert(ac->context != nullptr);
     return *static_cast<CustomAccessControl*>(ac->context);
+}
+
+inline static AccessControlBase& getAccessControl(UA_AccessControl* ac) {
+    auto* accessControl = getContext(ac).getAccessControl();
+    assert(accessControl != nullptr);
+    return *accessControl;
 }
 
 template <typename WrapperType, typename NativeType = typename WrapperType::NativeType>
@@ -49,12 +53,6 @@ inline static std::optional<Session> getSession(
         return std::nullopt;
     }
     return Session(*wrapper, asWrapperRef<NodeId>(sessionId));
-}
-
-inline static AccessControlBase& getAccessControl(UA_AccessControl* ac) {
-    auto* accessControl = getContext(ac).getAccessControl();
-    assert(accessControl != nullptr);
-    return *accessControl;
 }
 
 static void logException(
@@ -91,16 +89,14 @@ static UA_StatusCode activateSession(
 ) {
     return invokeAccessCallback(server, "activateSession", UA_STATUSCODE_BADINTERNALERROR, [&] {
         auto session = getSession(server, sessionId);
-        const auto status = getAccessControl(ac).activateSession(
-            session.value(),
-            asWrapperRef<EndpointDescription>(endpointDescription),
-            asWrapperRef<ByteString>(secureChannelRemoteCertificate),
-            asWrapperRef<ExtensionObject>(userIdentityToken)
-        );
-        if (status.isGood()) {
-            getContext(ac).onSessionActivated(asWrapperRef<NodeId>(sessionId));
-        }
-        return status.get();
+        return getAccessControl(ac)
+            .activateSession(
+                session.value(),
+                asWrapperRef<EndpointDescription>(endpointDescription),
+                asWrapperRef<ByteString>(secureChannelRemoteCertificate),
+                asWrapperRef<ExtensionObject>(userIdentityToken)
+            )
+            .get();
     });
 }
 
@@ -113,7 +109,6 @@ static void closeSession(
     try {
         auto session = getSession(server, sessionId);
         getAccessControl(ac).closeSession(session.value());
-        getContext(ac).onSessionClosed(asWrapperRef<NodeId>(sessionId));
     } catch (const std::exception& e) {
         logException(server, "closeSession", e.what());
     }
@@ -385,18 +380,6 @@ void CustomAccessControl::setAccessControl(
     userTokenPolicies_ = accessControl->getUserTokenPolicies();
     accessControl_ = std::move(accessControl);
     setAccessControl(native);
-}
-
-void CustomAccessControl::onSessionActivated(const NodeId& sessionId) {
-    sessionIds_.insert(sessionId);
-}
-
-void CustomAccessControl::onSessionClosed(const NodeId& sessionId) {
-    sessionIds_.erase(sessionId);
-}
-
-std::vector<NodeId> CustomAccessControl::getSessionIds() const {
-    return {sessionIds_.begin(), sessionIds_.end()};
 }
 
 // NOLINTNEXTLINE, https://stackoverflow.com/questions/53946674/noexcept-visitation-for-stdvariant
