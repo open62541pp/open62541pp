@@ -16,15 +16,12 @@ constexpr std::string_view policyIdUsername = "open62541-username-policy";
 
 AccessControlDefault::AccessControlDefault(bool allowAnonymous, std::vector<Login> logins)
     : allowAnonymous_(allowAnonymous),
-      logins_(std::move(logins)) {}
-
-std::vector<UserTokenPolicy> AccessControlDefault::getUserTokenPolicies() {
-    std::vector<UserTokenPolicy> result;
+      logins_(std::move(logins)) {
     std::string_view issuedTokenType{};
     std::string_view issuerEndpointUrl{};
     std::string_view securityPolicyUri{};
     if (allowAnonymous_) {
-        result.emplace_back(
+        userTokenPolicies_.emplace_back(
             policyIdAnonymous,
             UserTokenType::Anonymous,
             issuedTokenType,
@@ -33,7 +30,7 @@ std::vector<UserTokenPolicy> AccessControlDefault::getUserTokenPolicies() {
         );
     }
     if (!logins_.empty()) {
-        result.emplace_back(
+        userTokenPolicies_.emplace_back(
             policyIdUsername,
             UserTokenType::Username,
             issuedTokenType,
@@ -41,7 +38,10 @@ std::vector<UserTokenPolicy> AccessControlDefault::getUserTokenPolicies() {
             securityPolicyUri
         );
     }
-    return result;
+}
+
+Span<UserTokenPolicy> AccessControlDefault::getUserTokenPolicies() {
+    return userTokenPolicies_;
 }
 
 StatusCode AccessControlDefault::activateSession(

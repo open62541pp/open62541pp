@@ -17,13 +17,12 @@ TEST_CASE("AccessControlDefault") {
     SUBCASE("getUserTokenPolicies") {
         AccessControlDefault ac(true, {{"username", "password"}});
 
-        const auto userTokenPolicies = ac.getUserTokenPolicies();
-        CHECK(userTokenPolicies.size() == 2);
-        CHECK(userTokenPolicies.at(0).getPolicyId() == "open62541-anonymous-policy");
-        CHECK(userTokenPolicies.at(0).getTokenType() == UserTokenType::Anonymous);
+        CHECK(ac.getUserTokenPolicies().size() == 2);
+        CHECK(ac.getUserTokenPolicies()[0].getPolicyId() == "open62541-anonymous-policy");
+        CHECK(ac.getUserTokenPolicies()[0].getTokenType() == UserTokenType::Anonymous);
 
-        CHECK(userTokenPolicies.at(1).getPolicyId() == "open62541-username-policy");
-        CHECK(userTokenPolicies.at(1).getTokenType() == UserTokenType::Username);
+        CHECK(ac.getUserTokenPolicies()[1].getPolicyId() == "open62541-username-policy");
+        CHECK(ac.getUserTokenPolicies()[1].getTokenType() == UserTokenType::Username);
     }
 
     SUBCASE("activateSession") {
