@@ -35,6 +35,8 @@ public:
     }
 };
 
+#if UAPP_OPEN62541_VER_GE(1, 3)
+
 TEST_CASE("CustomAccessControl") {
     Server server;
 
@@ -185,7 +187,6 @@ TEST_CASE("CustomAccessControl") {
             ) == false
         );
 
-#if UAPP_OPEN62541_VER_GE(1, 1)
         CHECK(native.allowBrowseNode != nullptr);
         CHECK(
             native.allowBrowseNode(
@@ -197,9 +198,8 @@ TEST_CASE("CustomAccessControl") {
                 nullptr  // node context
             ) == true
         );
-#endif
 
-#if UAPP_OPEN62541_VER_GE(1, 2) && defined(UA_ENABLE_SUBSCRIPTIONS)
+#ifdef UA_ENABLE_SUBSCRIPTIONS
         CHECK(native.allowTransferSubscription != nullptr);
         CHECK(
             native.allowTransferSubscription(
@@ -243,3 +243,5 @@ TEST_CASE("CustomAccessControl") {
 #endif
     }
 }
+
+#endif
