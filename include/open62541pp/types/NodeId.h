@@ -84,13 +84,21 @@ public:
     NodeId(MethodId id) noexcept  // NOLINT, implicit wanted
         : NodeId(0, static_cast<uint32_t>(id)) {}
 
-    bool isNull() const noexcept;
+    bool isNull() const noexcept {
+        return UA_NodeId_isNull(handle());
+    }
 
-    uint32_t hash() const noexcept;
+    uint32_t hash() const noexcept {
+        return UA_NodeId_hash(handle());
+    }
 
-    NamespaceIndex getNamespaceIndex() const noexcept;
+    NamespaceIndex getNamespaceIndex() const noexcept {
+        return handle()->namespaceIndex;
+    }
 
-    NodeIdType getIdentifierType() const noexcept;
+    NodeIdType getIdentifierType() const noexcept {
+        return static_cast<NodeIdType>(handle()->identifierType);
+    }
 
     /// Get identifier variant.
     std::variant<uint32_t, String, Guid, ByteString> getIdentifier() const;
@@ -161,14 +169,25 @@ public:
 
     bool isLocal() const noexcept;
 
-    uint32_t hash() const noexcept;
+    uint32_t hash() const noexcept {
+        return UA_ExpandedNodeId_hash(handle());
+    }
 
-    NodeId& getNodeId() noexcept;
-    const NodeId& getNodeId() const noexcept;
+    NodeId& getNodeId() noexcept {
+        return asWrapper<NodeId>(handle()->nodeId);
+    }
 
-    std::string_view getNamespaceUri() const;
+    const NodeId& getNodeId() const noexcept {
+        return asWrapper<NodeId>(handle()->nodeId);
+    }
 
-    uint32_t getServerIndex() const noexcept;
+    std::string_view getNamespaceUri() const {
+        return detail::toStringView(handle()->namespaceUri);
+    }
+
+    uint32_t getServerIndex() const noexcept {
+        return handle()->serverIndex;
+    }
 
     /// Encode ExpandedNodeId as a string like `svr=1;nsu=http://test.org/UA/Data/;ns=2;i=10157`.
     /// @see https://reference.opcfoundation.org/Core/Part6/v105/docs/5.3.1.11
