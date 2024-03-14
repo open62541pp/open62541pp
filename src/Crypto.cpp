@@ -11,7 +11,7 @@
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/open62541/common.h"
 
-#include "CustomLogger.h"
+#include "plugins/LoggerAdapter.h"
 
 namespace opcua::crypto {
 
@@ -32,17 +32,15 @@ CreateCertificateResult createCertificate(
 
     // OpenSSL errors will generate a generic UA_STATUSCODE_BADINTERNALERROR status code
     // detailed errors are reported through error log messages -> capture log messages
-    UA_Logger logger{};
-    CustomLogger customLogger;
     std::vector<std::string> errorMessages;
-    customLogger.set(
-        logger,
+    LoggerAdapter loggerAdapter(
         [&](LogLevel level, [[maybe_unused]] LogCategory category, std::string_view msg) {
             if (level >= LogLevel::Error) {
                 errorMessages.emplace_back(msg);
             }
         }
     );
+    UA_Logger logger = loggerAdapter.create();
 
     CreateCertificateResult result;
     const auto status = UA_CreateCertificate(

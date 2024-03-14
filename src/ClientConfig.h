@@ -3,7 +3,8 @@
 #include "open62541pp/detail/open62541/client.h"  // UA_ClientConfig
 
 #include "CustomDataTypes.h"
-#include "CustomLogger.h"
+#include "plugins/PluginManager.h"
+#include "plugins/LoggerAdapter.h"
 
 namespace opcua {
 
@@ -13,11 +14,13 @@ public:
         : config_(config) {}
 
     void setLogger(Logger logger) {
-        customLogger_.set(config_.logger, std::move(logger));
+        if (logger) {
+            logger_.assign(LoggerAdapter(std::move(logger)));
+        }
     }
 
     void setCustomDataTypes(std::vector<DataType> dataTypes) {
-        customDataTypes_.set(config_.customDataTypes, std::move(dataTypes));
+        customDataTypes_.assign(std::move(dataTypes));
     }
 
     constexpr UA_ClientConfig* operator->() noexcept {
@@ -38,8 +41,8 @@ public:
 
 private:
     UA_ClientConfig& config_;
-    CustomLogger customLogger_;
-    CustomDataTypes customDataTypes_;
+    CustomDataTypes customDataTypes_{config_.customDataTypes};
+    PluginManager<UA_Logger> logger_{config_.logger};
 };
 
 }  // namespace opcua

@@ -10,7 +10,6 @@ add_executable(
     ClientService.cpp
     Config.cpp
     Crypto.cpp
-    CustomAccessControl.cpp
     CustomDataTypes.cpp
     DataType.cpp
     ExceptionCatcher.cpp

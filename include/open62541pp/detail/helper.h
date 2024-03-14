@@ -2,6 +2,7 @@
 
 #include <algorithm>  // copy_n
 #include <cassert>
+#include <cstdarg>  // va_list
 #include <memory>
 #include <string>
 #include <string_view>
@@ -147,5 +148,18 @@ inline std::string_view toStringView(const UA_String& src) noexcept {
 inline std::string toString(const UA_String& src) {
     return std::string(toStringView(src));
 }
+
+/// Convert format string with args to std::string
+std::string toString(const char* format, va_list args);
+
+// NOLINTBEGIN
+inline std::string toString(const char* format, ...) {
+    va_list args;
+    va_start(args, format);
+    std::string result = toString(format, args);
+    va_end(args);
+    return result;
+}
+// NOLINTEND
 
 }  // namespace opcua::detail
