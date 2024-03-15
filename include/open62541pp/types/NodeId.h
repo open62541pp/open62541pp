@@ -164,8 +164,8 @@ public:
     // NOLINTNEXTLINE, false positive?
     using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
 
-    explicit ExpandedNodeId(const NodeId& id);
-    ExpandedNodeId(const NodeId& id, std::string_view namespaceUri, uint32_t serverIndex);
+    explicit ExpandedNodeId(NodeId id) noexcept;
+    ExpandedNodeId(NodeId id, std::string_view namespaceUri, uint32_t serverIndex);
 
     bool isLocal() const noexcept;
 

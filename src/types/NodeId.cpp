@@ -76,14 +76,12 @@ std::string NodeId::toString() const {
 
 /* --------------------------------------- ExpandedNodeId --------------------------------------- */
 
-ExpandedNodeId::ExpandedNodeId(const NodeId& id) {
-    getNodeId() = id;
+ExpandedNodeId::ExpandedNodeId(NodeId id) noexcept {
+    asWrapper<NodeId>(handle()->nodeId) = std::move(id);
 }
 
-ExpandedNodeId::ExpandedNodeId(
-    const NodeId& id, std::string_view namespaceUri, uint32_t serverIndex
-) {
-    getNodeId() = id;
+ExpandedNodeId::ExpandedNodeId(NodeId id, std::string_view namespaceUri, uint32_t serverIndex) {
+    asWrapper<NodeId>(handle()->nodeId) = std::move(id);
     handle()->namespaceUri = detail::allocNativeString(namespaceUri);
     handle()->serverIndex = serverIndex;
 }
