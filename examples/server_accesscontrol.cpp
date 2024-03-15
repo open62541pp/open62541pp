@@ -45,14 +45,14 @@ int main() {
     // We are doing this just for demonstration, don't use it in production!
     Server server;
 
-    AccessControlCustom accessControl(
+    // Create AccessControlCustom instance and transfer ownership to server
+    server.setAccessControl(std::make_unique<AccessControlCustom>(
         true,  // allow anonymous
-        {
+        std::vector<Login>{
             {"admin", "admin"},
             {"user", "user"},
         }
-    );
-    server.setAccessControl(accessControl);
+    ));
 
     // Add variable node. Try to change its value as a client with different logins.
     server.getObjectsNode().addVariable(

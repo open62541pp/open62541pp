@@ -25,7 +25,7 @@ public:
         }
     }
 
-    // TODO: deprecate, pointer might get invalided
+    [[deprecated("Lifetime can not be controlled and pointer might become dangling")]]
     void assign(AdapterType* adapter) {
         if (adapter != nullptr) {
             adapter_ = adapter;
