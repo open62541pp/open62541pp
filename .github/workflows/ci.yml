@@ -122,13 +122,14 @@ jobs:
   macos:
     # https://github.com/actions/runner-images/blob/main/images/macos/macos-12-Readme.md
     name: macOS ${{ matrix.config.name }} (${{ matrix.build_type }})
-    runs-on: macos-12
+    runs-on: ${{ matrix.config.os }}
     strategy:
       fail-fast: false
       matrix:
         build_type: ["Debug", "Release"]
         config:
-          - { name: AppleClang 14, CC: clang, CXX: clang++ }
+          - { name: AppleClang 14, os: macos-12, CC: clang, CXX: clang++ }
+          - { name: AppleClang 15, os: macos-13, CC: clang, CXX: clang++ }
     steps:
       - uses: actions/checkout@v4
         with:
