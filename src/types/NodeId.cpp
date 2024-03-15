@@ -88,10 +88,6 @@ ExpandedNodeId::ExpandedNodeId(
     handle()->serverIndex = serverIndex;
 }
 
-bool ExpandedNodeId::isLocal() const noexcept {
-    return detail::isEmpty(handle()->namespaceUri) && handle()->serverIndex == 0;
-}
-
 std::string ExpandedNodeId::toString() const {
     std::string result;
     const auto svr = getServerIndex();

@@ -29,6 +29,7 @@ enum class NodeIdType : uint8_t {
 
 /**
  * UA_NodeId wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.2
  * @ingroup Wrapper
  */
 class NodeId : public TypeWrapper<UA_NodeId, UA_TYPES_NODEID> {
@@ -157,6 +158,7 @@ inline bool operator>=(const UA_NodeId& lhs, const UA_NodeId& rhs) noexcept {
 
 /**
  * UA_ExpandedNodeId wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.16
  * @ingroup Wrapper
  */
 class ExpandedNodeId : public TypeWrapper<UA_ExpandedNodeId, UA_TYPES_EXPANDEDNODEID> {
@@ -167,7 +169,9 @@ public:
     explicit ExpandedNodeId(const NodeId& id);
     ExpandedNodeId(const NodeId& id, std::string_view namespaceUri, uint32_t serverIndex);
 
-    bool isLocal() const noexcept;
+    bool isLocal() const noexcept {
+        return handle()->serverIndex == 0;
+    }
 
     uint32_t hash() const noexcept {
         return UA_ExpandedNodeId_hash(handle());
