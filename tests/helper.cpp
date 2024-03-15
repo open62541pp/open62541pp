@@ -105,3 +105,9 @@ TEST_CASE("String conversion UA_String -> string") {
         UA_clear(&str, &UA_TYPES[UA_TYPES_STRING]);
     }
 }
+
+TEST_CASE("String conversion format string and args -> string") {
+    CHECK(detail::toString("test") == "test");
+    CHECK(detail::toString("test %d", 11) == "test 11");
+    CHECK(detail::toString("test %.2f", 11.11) == "test 11.11");
+}
