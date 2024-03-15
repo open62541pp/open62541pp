@@ -21,7 +21,7 @@ NodeId::NodeId(NamespaceIndex namespaceIndex, std::string_view identifier) {
 NodeId::NodeId(NamespaceIndex namespaceIndex, String identifier) noexcept {
     handle()->namespaceIndex = namespaceIndex;
     handle()->identifierType = UA_NODEIDTYPE_STRING;
-    asWrapper<String>(handle()->identifier.string) = std::move(identifier);  // NOLINT
+    handle()->identifier.string = std::exchange(asNative(identifier), {});  // NOLINT
 }
 
 NodeId::NodeId(NamespaceIndex namespaceIndex, Guid identifier) noexcept {
@@ -33,7 +33,7 @@ NodeId::NodeId(NamespaceIndex namespaceIndex, Guid identifier) noexcept {
 NodeId::NodeId(NamespaceIndex namespaceIndex, ByteString identifier) noexcept {
     handle()->namespaceIndex = namespaceIndex;
     handle()->identifierType = UA_NODEIDTYPE_BYTESTRING;
-    asWrapper<ByteString>(handle()->identifier.byteString) = std::move(identifier);  // NOLINT
+    handle()->identifier.byteString = std::exchange(asNative(identifier), {});  // NOLINT
 }
 
 std::variant<uint32_t, String, Guid, ByteString> NodeId::getIdentifier() const {

@@ -281,7 +281,6 @@ TEST_CASE("NodeId") {
         CHECK(id.getIdentifierAs<String>().get() == sv);
     }
 
-#ifndef __APPLE__  // weird SIGABRT in macOS test runner
     SUBCASE("Constructor with string identifier") {
         String str("Test456");
         NodeId id(2, str);
@@ -289,7 +288,6 @@ TEST_CASE("NodeId") {
         CHECK(id.getNamespaceIndex() == 2);
         CHECK(id.getIdentifierAs<String>() == str);
     }
-#endif
 
     SUBCASE("Constructor with guid identifier") {
         Guid guid(11, 22, 33, {1, 2, 3, 4, 5, 6, 7, 8});
