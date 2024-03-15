@@ -9,7 +9,7 @@
 
 namespace opcua {
 
-class LoggerAdapter : public PluginAdapter<UA_Logger> {
+class LoggerAdapter final : public PluginAdapter<UA_Logger> {
 public:
     explicit LoggerAdapter(Logger logger)
         : logger_(std::move(logger)) {}
