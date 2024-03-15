@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cassert>
+#include <functional>  // invoke
 
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/types/Builtin.h"  // StatusCode
