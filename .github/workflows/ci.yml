@@ -128,8 +128,12 @@ jobs:
       matrix:
         build_type: ["Debug", "Release"]
         config:
+          # prettier-ignore
           - { name: AppleClang 14, os: macos-12, CC: clang, CXX: clang++ }
           - { name: AppleClang 15, os: macos-13, CC: clang, CXX: clang++ }
+          - { name: ASan,          os: macos-13, CC: clang, CXX: clang++, flags: "-DUAPP_ENABLE_SANITIZER_ADDRESS=ON" }
+          - { name: TSan,          os: macos-13, CC: clang, CXX: clang++, flags: "-DUAPP_ENABLE_SANITIZER_THREAD=ON" }
+          - { name: UBSan,         os: macos-13, CC: clang, CXX: clang++, flags: "-DUAPP_ENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON" }
     steps:
       - uses: actions/checkout@v4
         with:
