@@ -715,10 +715,9 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
             );
             const CallResponse response = call(serverOrClient, request);
             CHECK(response.getResults().size() == 1);
-            auto& result = response.getResults()[0];
-            CHECK(result.getStatusCode().isGood());
-            CHECK(result.getOutputArguments().size() == 1);
-            CHECK(result.getOutputArguments()[0].getScalarCopy<int32_t>() == 3);
+            CHECK(response.getResults()[0].getStatusCode().isGood());
+            CHECK(response.getResults()[0].getOutputArguments().size() == 1);
+            CHECK(response.getResults()[0].getOutputArguments()[0].getScalarCopy<int32_t>() == 3);
         }
     }
 
