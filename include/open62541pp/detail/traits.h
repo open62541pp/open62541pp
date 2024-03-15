@@ -40,9 +40,12 @@ struct IsContiguousContainer<
         decltype(std::declval<T>().data()),
         decltype(std::declval<T>().size()),
         decltype(std::declval<T>().begin()),
-        decltype(std::declval<T>().end())>>
-    : std::is_pointer<decltype(std::declval<T>().data())>  // detect proxy iterator of vector<bool>
-{};
+        decltype(std::declval<T>().end())>> : std::true_type {
+    using value_type = bool;
+    // detect vector<bool>::data() void return type
+    static constexpr bool value = std::is_pointer_v<decltype(std::declval<T>().data())>;
+    using type = std::bool_constant<value>;
+};
 
 template <typename T>
 struct IsMutableContainer
