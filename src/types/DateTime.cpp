@@ -6,33 +6,6 @@
 
 namespace opcua {
 
-DateTime DateTime::now() noexcept {
-    return DateTime(UA_DateTime_now());  // NOLINT
-}
-
-DateTime DateTime::fromUnixTime(int64_t unixTime) noexcept {
-    return DateTime(UA_DateTime_fromUnixTime(unixTime));  // NOLINT
-}
-
-int64_t DateTime::localTimeUtcOffset() noexcept {
-    return UA_DateTime_localTimeUtcOffset();
-}
-
-int64_t DateTime::toUnixTime() const noexcept {
-    if (get() < UA_DATETIME_UNIX_EPOCH) {
-        return 0;
-    }
-    return UA_DateTime_toUnixTime(get());
-}
-
-UA_DateTimeStruct DateTime::toStruct() const noexcept {
-    return UA_DateTime_toStruct(get());
-}
-
-int64_t DateTime::get() const noexcept {
-    return *handle();
-}
-
 std::string DateTime::format(std::string_view format, bool localtime) const {
     const std::time_t unixTime = toUnixTime();
     std::ostringstream ss;

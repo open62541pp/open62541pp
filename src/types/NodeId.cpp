@@ -36,22 +36,6 @@ NodeId::NodeId(NamespaceIndex namespaceIndex, ByteString identifier) noexcept {
     asWrapper<ByteString>(handle()->identifier.byteString) = std::move(identifier);  // NOLINT
 }
 
-bool NodeId::isNull() const noexcept {
-    return UA_NodeId_isNull(handle());
-}
-
-uint32_t NodeId::hash() const noexcept {
-    return UA_NodeId_hash(handle());
-}
-
-NamespaceIndex NodeId::getNamespaceIndex() const noexcept {
-    return handle()->namespaceIndex;
-}
-
-NodeIdType NodeId::getIdentifierType() const noexcept {
-    return static_cast<NodeIdType>(handle()->identifierType);
-}
-
 std::variant<uint32_t, String, Guid, ByteString> NodeId::getIdentifier() const {
     switch (handle()->identifierType) {
     case UA_NODEIDTYPE_NUMERIC:
@@ -106,26 +90,6 @@ ExpandedNodeId::ExpandedNodeId(
 
 bool ExpandedNodeId::isLocal() const noexcept {
     return detail::isEmpty(handle()->namespaceUri) && handle()->serverIndex == 0;
-}
-
-uint32_t ExpandedNodeId::hash() const noexcept {
-    return UA_ExpandedNodeId_hash(handle());
-}
-
-NodeId& ExpandedNodeId::getNodeId() noexcept {
-    return asWrapper<NodeId>(handle()->nodeId);
-}
-
-const NodeId& ExpandedNodeId::getNodeId() const noexcept {
-    return asWrapper<NodeId>(handle()->nodeId);
-}
-
-std::string_view ExpandedNodeId::getNamespaceUri() const {
-    return detail::toStringView(handle()->namespaceUri);
-}
-
-uint32_t ExpandedNodeId::getServerIndex() const noexcept {
-    return handle()->serverIndex;
 }
 
 std::string ExpandedNodeId::toString() const {
