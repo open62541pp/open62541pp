@@ -20,13 +20,17 @@ jobs:
           - { name: GCC 10,     CC: gcc-10,   CXX: g++-10,     flags: ""}
           - { name: GCC 11,     CC: gcc-11,   CXX: g++-11,     flags: ""}
           - { name: GCC 12,     CC: gcc-12,   CXX: g++-12,     flags: ""}
-          - { name: Clang 12,   CC: clang-12, CXX: clang++-12, flags: "" }
+          - { name: GCC 13,     CC: gcc-13,   CXX: g++-13,     flags: ""}
           - { name: Clang 13,   CC: clang-13, CXX: clang++-13, flags: "" }
           - { name: Clang 14,   CC: clang-14, CXX: clang++-14, flags: "" }
-          - { name: Clang-Tidy, CC: clang-14, CXX: clang++-14, flags: "-DUAPP_ENABLE_CLANG_TIDY=ON" }
-          - { name: ASan,       CC: clang-14, CXX: clang++-14, flags: "-DUAPP_ENABLE_SANITIZER_ADDRESS=ON" }
-          - { name: TSan,       CC: clang-14, CXX: clang++-14, flags: "-DUAPP_ENABLE_SANITIZER_THREAD=ON" }
-          - { name: UBSan,      CC: clang-14, CXX: clang++-14, flags: "-DUAPP_ENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON" }
+          - { name: Clang 15,   CC: clang-15, CXX: clang++-15, flags: "" }
+          - { name: Clang-Tidy, CC: clang-15, CXX: clang++-15, flags: "-DUAPP_ENABLE_CLANG_TIDY=ON" }
+          - { name: ASan,       CC: clang-15, CXX: clang++-15, flags: "-DUAPP_ENABLE_SANITIZER_ADDRESS=ON" }
+          - { name: TSan,       CC: clang-15, CXX: clang++-15, flags: "-DUAPP_ENABLE_SANITIZER_THREAD=ON" }
+          - { name: UBSan,      CC: clang-15, CXX: clang++-15, flags: "-DUAPP_ENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON" }
+    env:
+      CC: ${{ matrix.config.CC }}
+      CXX: ${{ matrix.config.CXX }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -118,13 +122,18 @@ jobs:
   macos:
     # https://github.com/actions/runner-images/blob/main/images/macos/macos-12-Readme.md
     name: macOS ${{ matrix.config.name }} (${{ matrix.build_type }})
-    runs-on: macos-12
+    runs-on: ${{ matrix.config.os }}
     strategy:
       fail-fast: false
       matrix:
         build_type: ["Debug", "Release"]
         config:
-          - { name: AppleClang 14, CC: clang, CXX: clang++ }
+          # prettier-ignore
+          - { name: AppleClang 14, os: macos-12, CC: clang, CXX: clang++ }
+          - { name: AppleClang 15, os: macos-13, CC: clang, CXX: clang++ }
+          - { name: ASan,          os: macos-13, CC: clang, CXX: clang++, flags: "-DUAPP_ENABLE_SANITIZER_ADDRESS=ON" }
+          - { name: TSan,          os: macos-13, CC: clang, CXX: clang++, flags: "-DUAPP_ENABLE_SANITIZER_THREAD=ON" }
+          - { name: UBSan,         os: macos-13, CC: clang, CXX: clang++, flags: "-DUAPP_ENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON" }
     steps:
       - uses: actions/checkout@v4
         with:
