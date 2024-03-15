@@ -27,6 +27,9 @@ jobs:
           - { name: ASan,       CC: clang-14, CXX: clang++-14, flags: "-DUAPP_ENABLE_SANITIZER_ADDRESS=ON" }
           - { name: TSan,       CC: clang-14, CXX: clang++-14, flags: "-DUAPP_ENABLE_SANITIZER_THREAD=ON" }
           - { name: UBSan,      CC: clang-14, CXX: clang++-14, flags: "-DUAPP_ENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON" }
+    env:
+      CC: ${{ matrix.config.CC }}
+      CXX: ${{ matrix.config.CXX }}
     steps:
       - uses: actions/checkout@v4
         with:
