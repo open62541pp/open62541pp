@@ -114,10 +114,9 @@ jobs:
       - name: Enable coverage
         id: coverage
         if: ${{ runner.os == 'Linux' && matrix.build_type == 'Debug' }}
-        run: echo "enabled=1" >> "$GITHUB_OUTPUT"
 
       - name: Install gcovr
-        if: steps.coverage.outputs.enabled
+        if: steps.coverage
         run: pipx install gcovr==7.2
 
       - name: Configure CMake
@@ -139,7 +138,7 @@ jobs:
         run: ctest --test-dir ./build --output-on-failure
 
       - name: Generate coverage reports
-        if: steps.coverage.outputs.enabled
+        if: steps.coverage
         env:
           GCOV: ${{ matrix.config.gcov }}
         run: |
@@ -147,7 +146,7 @@ jobs:
           cmake --build ./build --target open62541pp_coverage_report_xml
 
       - name: Upload coverage reports to Codecov
-        if: steps.coverage.outputs.enabled
+        if: steps.coverage
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
