@@ -83,6 +83,7 @@ jobs:
           -DUAPP_WARNINGS_AS_ERRORS=ON
           ${{ matrix.config.flags }}
       - name: Build
+        env: ${{ matrix.config.env }}
         run: cmake --build ./build --config ${{ matrix.build_type }}
       - name: Run tests
         run: ctest --test-dir build --output-on-failure

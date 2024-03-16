@@ -185,6 +185,7 @@ endif()
 
 # coverage report
 if(UAPP_BUILD_TESTS AND UAPP_ENABLE_COVERAGE)
+    message(STATUS "Coverage reports enabled")
     find_program(GCOVR_EXE NAMES gcovr)
     if(GCOVR_EXE)
         set(gcovr_args "-f" "include/" "-f" "src/" "${CMAKE_BINARY_DIR}")
