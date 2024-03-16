@@ -61,7 +61,7 @@ else()
     target_compile_options(open62541pp_project_options INTERFACE ${warnings})
 
     if(UAPP_ENABLE_COVERAGE)
-        target_compile_options(open62541pp_project_options INTERFACE --coverage -O0 -g)
+        target_compile_options(open62541pp_project_options INTERFACE --coverage -g)
         target_link_libraries(open62541pp_project_options INTERFACE --coverage)
     endif()
 endif()
@@ -187,6 +187,7 @@ endif()
 if(UAPP_BUILD_TESTS AND UAPP_ENABLE_COVERAGE)
     find_program(GCOVR_EXE NAMES gcovr)
     if(GCOVR_EXE)
+        message(STATUS "Found gcovr: ${GCOVR_EXE}")
         set(gcovr_args "-f" "include/" "-f" "src/" "${CMAKE_BINARY_DIR}")
         add_custom_target(
             open62541pp_coverage_report
@@ -208,6 +209,8 @@ if(UAPP_BUILD_TESTS AND UAPP_ENABLE_COVERAGE)
             COMMENT "Generate coverage report (html)"
             WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         )
+    else()
+        message(WARNING "gcovr requested but executable not found")
     endif()
 endif()
 
