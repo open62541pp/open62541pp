@@ -125,7 +125,10 @@ jobs:
           cmake -S . -B ./build
           -DCMAKE_CXX_COMPILER=${{ matrix.config.compiler }}
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
-          -DUA_ENABLE_ENCRYPTION=OPENSSL
+          -DUA_ENABLE_ENCRYPTION=${{ runner.os == 'Windows' && 'OFF' || 'OPENSSL' }}
+          -DUA_ENABLE_METHODCALLS=ON
+          -DUA_ENABLE_SUBSCRIPTIONS=ON
+          -DUA_ENABLE_SUBSCRIPTIONS_EVENTS=ON
           -DUAPP_BUILD_TESTS=ON
           -DUAPP_BUILD_EXAMPLES=ON
           -DUAPP_ENABLE_COVERAGE=${{ matrix.build_type == 'Debug' }}
