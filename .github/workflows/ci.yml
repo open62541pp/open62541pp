@@ -11,9 +11,6 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        build_type:
-          - Debug
-          - Release
         config:
           - name: Linux GCC 9
             os: ubuntu-22.04
@@ -83,6 +80,10 @@ jobs:
             os: macos-13
             compiler: clang++
 
+        build_type:
+          - Debug
+          - Release
+
     runs-on: ${{ matrix.config.os }}
     steps: 
       - name: Temporary workaround for sanitizer crashes
@@ -112,7 +113,7 @@ jobs:
         run: cmake --build ./build --config ${{ matrix.build_type }}
 
       - name: Run tests
-        run: ctest --test-dir build --output-on-failure
+        run: ctest --test-dir ./build --output-on-failure
 
       - name: Generate coverage reports
         if: ${{ runner.os != 'Windows' && matrix.build_type == 'Debug' }}
