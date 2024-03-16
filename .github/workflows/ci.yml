@@ -54,21 +54,21 @@ jobs:
 
           - name: Linux ASan
             os: ubuntu-22.04
-            compiler: clang++
+            compiler: clang++-15
             flags: "-DUAPP_ENABLE_SANITIZER_ADDRESS=ON"
-            gcov: llvm-cov gcov
+            gcov: llvm-cov-15 gcov
 
           - name: Linux TSan
             os: ubuntu-22.04
-            compiler: clang++
+            compiler: clang++-15
             flags: "-DUAPP_ENABLE_SANITIZER_THREAD=ON"
-            gcov: llvm-cov gcov
+            gcov: llvm-cov-15 gcov
 
           - name: Linux UBSan
             os: ubuntu-22.04
-            compiler: clang++
+            compiler: clang++-15
             flags: "-DUAPP_ENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON"
-            gcov: llvm-cov gcov
+            gcov: llvm-cov-15 gcov
 
           - name: Windows Visual Studio 16
             os: windows-2019
@@ -106,6 +106,11 @@ jobs:
         # https://github.com/actions/runner-images/pull/9513
         if: matrix.config.os == 'ubuntu-22.04'
         run: sudo sysctl vm.mmap_rnd_bits=28
+
+      - name: Enable coverage
+        id: coverage
+        if: ${{ runner.os != 'Windows' && matrix.build_type == 'Debug' }}
+        run: echo "enabled=1" >> "$GITHUB_OUTPUT"
 
       - uses: actions/checkout@v4
         with:
