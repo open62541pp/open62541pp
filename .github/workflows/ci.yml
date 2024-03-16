@@ -93,6 +93,10 @@ jobs:
         if: matrix.config.os == 'ubuntu-22.04'
         run: sudo sysctl vm.mmap_rnd_bits=28
 
+      - uses: aminya/setup-cpp@v1
+        with:
+          gcovr: "6.0"
+
       - uses: actions/checkout@v4
         with:
           submodules: recursive
@@ -118,10 +122,6 @@ jobs:
       - name: Generate coverage reports
         if: ${{ runner.os != 'Windows' && matrix.build_type == 'Debug' }}
         run: |
-          pip install gcovr==6.0
-          pwd
-          ls
-          cmake --build ./build --target help
           cmake --build ./build --target open62541pp_coverage_report
           cmake --build ./build --target open62541pp_coverage_report_xml
 
