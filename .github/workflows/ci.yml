@@ -44,11 +44,6 @@ jobs:
             os: ubuntu-22.04
             compiler: clang++-15
 
-          - name: Linux Clang-Tidy
-            os: ubuntu-22.04
-            compiler: clang++
-            flags: "-DUAPP_ENABLE_CLANG_TIDY=ON"
-
           - name: Linux ASan
             os: ubuntu-22.04
             compiler: clang++
@@ -83,6 +78,14 @@ jobs:
         build_type:
           - Debug
           - Release
+
+        include:
+          - config:
+              name: Linux Clang-Tidy
+              os: ubuntu-22.04
+              compiler: clang++
+              flags: "-DUAPP_ENABLE_CLANG_TIDY=ON"
+            build_type: Debug
 
     runs-on: ${{ matrix.config.os }}
     steps: 
