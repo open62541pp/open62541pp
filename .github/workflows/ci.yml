@@ -44,7 +44,7 @@ jobs:
 
           - name: Linux Clang 14
             os: ubuntu-22.04
-            compiler: clang++-14´
+            compiler: clang++-14
             gcov: llvm-cov-14 gcov
 
           - name: Linux Clang 15
