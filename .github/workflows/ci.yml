@@ -70,6 +70,16 @@ jobs:
             flags: "-DUAPP_ENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON"
             gcov: llvm-cov-15 gcov
 
+          - name: macOS AppleClang 14
+            os: macos-12
+            compiler: clang++
+            gcov: llvm-cov gcov
+
+          - name: macOS AppleClang 15
+            os: macos-13
+            compiler: clang++
+            gcov: llvm-cov gcov
+
           - name: Windows Visual Studio 16
             os: windows-2019
             compiler: msvc
@@ -78,21 +88,13 @@ jobs:
             os: windows-2022
             compiler: msvc
 
-          - name: macOS AppleClang 14
-            os: macos-12
-            compiler: clang++
-
-          - name: macOS AppleClang 15
-            os: macos-13
-            compiler: clang++
-
         build_type:
           - Debug
           - Release
 
         include:
           - config:
-              name: Linux Clang-Tidy
+              name: Clang-Tidy
               os: ubuntu-22.04
               compiler: clang++
               flags: "-DUAPP_ENABLE_CLANG_TIDY=ON"
