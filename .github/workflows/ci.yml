@@ -155,3 +155,4 @@ jobs:
           disable_search: true
           flags: ${{ runner.os }}
           name: ${{ matrix.config.name }}
+          verbose: true
