@@ -151,7 +151,7 @@ jobs:
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./build/coverage.xml
+          file: ./build/coverage.xml
           disable_search: true
           flags: ${{ runner.os }}
           name: ${{ matrix.config.name }}
