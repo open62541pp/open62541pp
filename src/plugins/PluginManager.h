@@ -25,7 +25,7 @@ public:
         }
     }
 
-    [[deprecated("Lifetime can not be controlled and pointer might become dangling")]]
+    // deprecated: lifetime can not be controlled and pointer might become dangling
     void assign(AdapterType* adapter) {
         if (adapter != nullptr) {
             adapter_ = adapter;
