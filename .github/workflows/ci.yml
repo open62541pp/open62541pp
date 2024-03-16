@@ -17,50 +17,72 @@ jobs:
         config:
           - name: Linux GCC 9
             os: ubuntu-22.04
-            env: { CC: gcc-9, CXX: gcc++-9 }
+            compiler: gcc++-9
+
           - name: Linux GCC 10
             os: ubuntu-22.04
-            env: { CC: gcc-10, CXX: gcc++-10 }
+            compiler: gcc++-10
+
           - name: Linux GCC 11
             os: ubuntu-22.04
-            env: { CC: gcc-11, CXX: gcc++-11 }
+            compiler: gcc++-11
+
           - name: Linux GCC 12
             os: ubuntu-22.04
-            env: { CC: gcc-12, CXX: gcc++-12 }
+            compiler: gcc++-12
+
           - name: Linux GCC 13
             os: ubuntu-22.04
-            env: { CC: gcc-13, CXX: gcc++-13 }
+            compiler: gcc++-13
+
           - name: Linux Clang 13
             os: ubuntu-22.04
-            env: { CC: clang-13, CXX: clang++-13 }
+            compiler: clang++-13
+
           - name: Linux Clang 14
             os: ubuntu-22.04
-            env: { CC: clang-14, CXX: clang++-14 }
+            compiler: clang++-14
+
           - name: Linux Clang 15
             os: ubuntu-22.04
-            env: { CC: clang-15, CXX: clang++-15 }
+            compiler: clang++-15
+
           - name: Linux Clang-Tidy
             os: ubuntu-22.04
-            env: { CC: clang, CXX: clang++ }
+            compiler: clang++
             flags: "-DUAPP_ENABLE_CLANG_TIDY=ON"
+
           - name: Linux ASan
             os: ubuntu-22.04
-            env: { CC: clang, CXX: clang++ }
+            compiler: clang++
             flags: "-DUAPP_ENABLE_SANITIZER_ADDRESS=ON"
+
           - name: Linux TSan
             os: ubuntu-22.04
-            env: { CC: clang, CXX: clang++ }
+            compiler: clang++
             flags: "-DUAPP_ENABLE_SANITIZER_THREAD=ON"
+
           - name: Linux UBSan
             os: ubuntu-22.04
-            env: { CC: clang, CXX: clang++ }
+            compiler: clang++
             flags: "-DUAPP_ENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON"
+
           - name: Windows Visual Studio 16
             os: windows-2019
+            compiler: msvc
+
+          - name: Windows Visual Studio 17
+            os: windows-2022
+            compiler: msvc
+
           - name: macOS AppleClang 14
             os: macos-12
+            compiler: clang++
+
           - name: macOS AppleClang 15
             os: macos-13
+            compiler: clang++
+
     runs-on: ${{ matrix.config.os }}
     steps: 
       - name: Temporary workaround for sanitizer crashes
@@ -69,30 +91,36 @@ jobs:
         # https://github.com/actions/runner-images/pull/9513
         if: matrix.config.os == 'ubuntu-22.04'
         run: sudo sysctl vm.mmap_rnd_bits=28
+
       - uses: actions/checkout@v4
         with:
           submodules: recursive
+
       - name: Configure CMake
         run: >
           cmake -S . -B ./build
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+          -DCMAKE_CXX_COMPILER=${{ matrix.config.compiler }}
           -DUA_ENABLE_ENCRYPTION=OPENSSL
           -DUAPP_BUILD_TESTS=ON
           -DUAPP_BUILD_EXAMPLES=ON
           -DUAPP_ENABLE_COVERAGE=${{ matrix.build_type == 'Debug' }}
           -DUAPP_WARNINGS_AS_ERRORS=ON
           ${{ matrix.config.flags }}
+
       - name: Build
-        env: ${{ matrix.config.env }}
         run: cmake --build ./build --config ${{ matrix.build_type }}
+
       - name: Run tests
         run: ctest --test-dir build --output-on-failure
+
       - name: Generate coverage reports
         if: ${{ runner.os != 'Windows' && matrix.build_type == 'Debug' }}
         run: |
           pip install gcovr==6.0
           cmake --build ./build --target open62541pp_coverage_report
           cmake --build ./build --target open62541pp_coverage_report_xml
+
       - name: Upload coverage reports to Codecov
         if: ${{ runner.os != 'Windows' && matrix.build_type == 'Debug' }}
         uses: codecov/codecov-action@v4
