@@ -119,6 +119,9 @@ jobs:
         if: ${{ runner.os != 'Windows' && matrix.build_type == 'Debug' }}
         run: |
           pip install gcovr==6.0
+          pwd
+          ls
+          cmake --build ./build --target help
           cmake --build ./build --target open62541pp_coverage_report
           cmake --build ./build --target open62541pp_coverage_report_xml
 
