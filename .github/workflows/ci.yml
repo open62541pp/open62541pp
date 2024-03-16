@@ -73,12 +73,10 @@ jobs:
           - name: macOS AppleClang 14
             os: macos-12
             compiler: clang++
-            gcov: llvm-cov gcov
 
           - name: macOS AppleClang 15
             os: macos-13
             compiler: clang++
-            gcov: llvm-cov gcov
 
           - name: Windows Visual Studio 16
             os: windows-2019
@@ -120,7 +118,7 @@ jobs:
 
       - name: Install gcovr
         if: steps.coverage.outputs.enabled
-        run: pipx install gcovr==7.2
+        run: pipx install gcovr==6.0
 
       - name: Configure CMake
         run: >
