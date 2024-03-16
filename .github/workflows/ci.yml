@@ -100,6 +100,10 @@ jobs:
 
     runs-on: ${{ matrix.config.os }}
     steps: 
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
       - name: Temporary workaround for sanitizer crashes
         # https://github.com/actions/runner-images/issues/9491
         # the issue should be fixed in the next runner image for Ubuntu 22.04:
@@ -109,16 +113,12 @@ jobs:
 
       - name: Enable coverage
         id: coverage
-        if: ${{ runner.os != 'Windows' && matrix.build_type == 'Debug' }}
+        if: ${{ runner.os == 'Linux' && matrix.build_type == 'Debug' }}
         run: echo "enabled=1" >> "$GITHUB_OUTPUT"
-
-      - uses: actions/checkout@v4
-        with:
-          submodules: recursive
 
       - name: Install gcovr
         if: steps.coverage.outputs.enabled
-        run: pipx install gcovr==6.0
+        run: pipx install gcovr==7.2
 
       - name: Configure CMake
         run: >
