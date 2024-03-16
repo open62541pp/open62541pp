@@ -15,60 +15,65 @@ jobs:
           - name: Linux GCC 9
             os: ubuntu-22.04
             compiler: g++-9
+            coverage: true
             gcov: gcov-9
 
           - name: Linux GCC 10
             os: ubuntu-22.04
             compiler: g++-10
+            coverage: true
             gcov: gcov-10
 
           - name: Linux GCC 11
             os: ubuntu-22.04
             compiler: g++-11
+            coverage: true
             gcov: gcov-11
 
           - name: Linux GCC 12
             os: ubuntu-22.04
             compiler: g++-12
+            coverage: true
             gcov: gcov-12
 
           - name: Linux GCC 13
             os: ubuntu-22.04
             compiler: g++-13
+            coverage: true
             gcov: gcov-13
 
           - name: Linux Clang 13
             os: ubuntu-22.04
             compiler: clang++-13
+            coverage: true
             gcov: llvm-cov-13 gcov
 
           - name: Linux Clang 14
             os: ubuntu-22.04
             compiler: clang++-14
+            coverage: true
             gcov: llvm-cov-14 gcov
 
           - name: Linux Clang 15
             os: ubuntu-22.04
             compiler: clang++-15
+            coverage: true
             gcov: llvm-cov-15 gcov
 
           - name: Linux ASan
             os: ubuntu-22.04
             compiler: clang++-15
             flags: "-DUAPP_ENABLE_SANITIZER_ADDRESS=ON"
-            gcov: llvm-cov-15 gcov
 
           - name: Linux TSan
             os: ubuntu-22.04
             compiler: clang++-15
             flags: "-DUAPP_ENABLE_SANITIZER_THREAD=ON"
-            gcov: llvm-cov-15 gcov
 
           - name: Linux UBSan
             os: ubuntu-22.04
             compiler: clang++-15
             flags: "-DUAPP_ENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON"
-            gcov: llvm-cov-15 gcov
 
           - name: macOS AppleClang 14
             os: macos-12
@@ -111,13 +116,8 @@ jobs:
         if: matrix.config.os == 'ubuntu-22.04'
         run: sudo sysctl vm.mmap_rnd_bits=28
 
-      - name: Enable coverage
-        id: coverage
-        if: ${{ runner.os == 'Linux' && matrix.build_type == 'Debug' }}
-        run: echo "enabled=1" >> "$GITHUB_OUTPUT"
-
       - name: Install gcovr
-        if: steps.coverage.outputs.enabled
+        if: matrix.config.coverage
         run: pipx install gcovr==7.2
 
       - name: Configure CMake
@@ -131,7 +131,7 @@ jobs:
           -DUA_ENABLE_SUBSCRIPTIONS_EVENTS=ON
           -DUAPP_BUILD_TESTS=ON
           -DUAPP_BUILD_EXAMPLES=ON
-          -DUAPP_ENABLE_COVERAGE=${{ matrix.build_type == 'Debug' }}
+          -DUAPP_ENABLE_COVERAGE=${{ matrix.config.coverage }}
           -DUAPP_WARNINGS_AS_ERRORS=ON
           ${{ matrix.config.flags }}
 
@@ -142,7 +142,7 @@ jobs:
         run: ctest --test-dir ./build --output-on-failure
 
       - name: Generate coverage reports
-        if: steps.coverage.outputs.enabled
+        if: matrix.config.coverage
         env:
           GCOV: ${{ matrix.config.gcov }}
         run: |
@@ -150,7 +150,7 @@ jobs:
           cmake --build ./build --target open62541pp_coverage_report_xml
 
       - name: Upload coverage reports to Codecov
-        if: steps.coverage.outputs.enabled
+        if: matrix.config.coverage
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
