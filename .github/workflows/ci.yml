@@ -15,49 +15,60 @@ jobs:
           - name: Linux GCC 9
             os: ubuntu-22.04
             compiler: g++-9
+            gcov: gcov-9
 
           - name: Linux GCC 10
             os: ubuntu-22.04
             compiler: g++-10
+            gcov: gcov-10
 
           - name: Linux GCC 11
             os: ubuntu-22.04
             compiler: g++-11
+            gcov: gcov-11
 
           - name: Linux GCC 12
             os: ubuntu-22.04
             compiler: g++-12
+            gcov: gcov-12
 
           - name: Linux GCC 13
             os: ubuntu-22.04
             compiler: g++-13
+            gcov: gcov-13
 
           - name: Linux Clang 13
             os: ubuntu-22.04
             compiler: clang++-13
+            gcov: llvm-cov-13 gcov
 
           - name: Linux Clang 14
             os: ubuntu-22.04
-            compiler: clang++-14
+            compiler: clang++-14´
+            gcov: llvm-cov-14 gcov
 
           - name: Linux Clang 15
             os: ubuntu-22.04
             compiler: clang++-15
+            gcov: llvm-cov-15 gcov
 
           - name: Linux ASan
             os: ubuntu-22.04
             compiler: clang++
             flags: "-DUAPP_ENABLE_SANITIZER_ADDRESS=ON"
+            gcov: llvm-cov gcov
 
           - name: Linux TSan
             os: ubuntu-22.04
             compiler: clang++
             flags: "-DUAPP_ENABLE_SANITIZER_THREAD=ON"
+            gcov: llvm-cov gcov
 
           - name: Linux UBSan
             os: ubuntu-22.04
             compiler: clang++
             flags: "-DUAPP_ENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON"
+            gcov: llvm-cov gcov
 
           - name: Windows Visual Studio 16
             os: windows-2019
@@ -98,7 +109,7 @@ jobs:
 
       - uses: aminya/setup-cpp@v1
         with:
-          gcovr: "6.0"
+          gcovr: "7.2"
 
       - uses: actions/checkout@v4
         with:
@@ -124,6 +135,8 @@ jobs:
 
       - name: Generate coverage reports
         if: ${{ runner.os != 'Windows' && matrix.build_type == 'Debug' }}
+        env:
+          GCOV: ${{ matrix.config.gcov }}
         run: |
           cmake --build ./build --target open62541pp_coverage_report
           cmake --build ./build --target open62541pp_coverage_report_xml
