@@ -61,7 +61,7 @@ else()
     target_compile_options(open62541pp_project_options INTERFACE ${warnings})
 
     if(UAPP_ENABLE_COVERAGE)
-        target_compile_options(open62541pp_project_options INTERFACE --coverage -O0 -g)
+        target_compile_options(open62541pp_project_options INTERFACE --coverage -g)
         target_link_libraries(open62541pp_project_options INTERFACE --coverage)
     endif()
 endif()
