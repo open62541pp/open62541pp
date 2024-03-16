@@ -17,23 +17,23 @@ jobs:
         config:
           - name: Linux GCC 9
             os: ubuntu-22.04
-            compiler: gcc++-9
+            compiler: g++-9
 
           - name: Linux GCC 10
             os: ubuntu-22.04
-            compiler: gcc++-10
+            compiler: g++-10
 
           - name: Linux GCC 11
             os: ubuntu-22.04
-            compiler: gcc++-11
+            compiler: g++-11
 
           - name: Linux GCC 12
             os: ubuntu-22.04
-            compiler: gcc++-12
+            compiler: g++-12
 
           - name: Linux GCC 13
             os: ubuntu-22.04
-            compiler: gcc++-13
+            compiler: g++-13
 
           - name: Linux Clang 13
             os: ubuntu-22.04
@@ -99,8 +99,8 @@ jobs:
       - name: Configure CMake
         run: >
           cmake -S . -B ./build
-          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
           -DCMAKE_CXX_COMPILER=${{ matrix.config.compiler }}
+          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
           -DUA_ENABLE_ENCRYPTION=OPENSSL
           -DUAPP_BUILD_TESTS=ON
           -DUAPP_BUILD_EXAMPLES=ON
