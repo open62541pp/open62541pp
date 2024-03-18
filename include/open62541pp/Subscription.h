@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <functional>
+#include <type_traits>
 #include <vector>
 
 #include "open62541pp/Config.h"
@@ -52,23 +53,32 @@ using EventCallback =
  * - @ref Subscription
  * - @ref MonitoredItem
  */
-template <typename ServerOrClient>
+template <typename Connection>
 class Subscription {
 public:
     /// Wrap an existing subscription.
     /// The `subscriptionId` is ignored and set to `0U` for servers.
-    Subscription(ServerOrClient& connection, uint32_t subscriptionId) noexcept;
+    Subscription(Connection& connection, uint32_t subscriptionId) noexcept
+        : connection_(connection),
+          subscriptionId_(std::is_same_v<Connection, Server> ? 0U : subscriptionId) {}
 
     /// Get the server/client instance.
-    ServerOrClient& getConnection() noexcept;
+    Connection& getConnection() noexcept {
+        return connection_;
+    }
+
     /// Get the server/client instance.
-    const ServerOrClient& getConnection() const noexcept;
+    const Connection& getConnection() const noexcept {
+        return connection_;
+    }
 
     /// Get the server-assigned identifier of this subscription.
-    uint32_t getSubscriptionId() const noexcept;
+    uint32_t getSubscriptionId() const noexcept {
+        return subscriptionId_;
+    }
 
     /// Get all local monitored items.
-    std::vector<MonitoredItem<ServerOrClient>> getMonitoredItems();
+    std::vector<MonitoredItem<Connection>> getMonitoredItems();
 
     /// Modify this subscription.
     /// @note Not implemented for Server.
@@ -84,36 +94,36 @@ public:
     /// The monitoring mode is set to MonitoringMode::Reporting and the default open62541
     /// MonitoringParametersEx are used.
     /// @see services::MonitoringParametersEx
-    MonitoredItem<ServerOrClient> subscribeDataChange(
-        const NodeId& id, AttributeId attribute, DataChangeCallback<ServerOrClient> onDataChange
+    MonitoredItem<Connection> subscribeDataChange(
+        const NodeId& id, AttributeId attribute, DataChangeCallback<Connection> onDataChange
     );
 
     /// Create a monitored item for data change notifications.
     /// @copydetails services::MonitoringParametersEx
-    MonitoredItem<ServerOrClient> subscribeDataChange(
+    MonitoredItem<Connection> subscribeDataChange(
         const NodeId& id,
         AttributeId attribute,
         MonitoringMode monitoringMode,
         MonitoringParametersEx& parameters,
-        DataChangeCallback<ServerOrClient> onDataChange
+        DataChangeCallback<Connection> onDataChange
     );
 
     /// Create a monitored item for event notifications (default settings).
     /// The monitoring mode is set to MonitoringMode::Reporting and the default open62541
     /// MonitoringParametersEx are used.
     /// @note Not implemented for Server.
-    MonitoredItem<ServerOrClient> subscribeEvent(
-        const NodeId& id, const EventFilter& eventFilter, EventCallback<ServerOrClient> onEvent
+    MonitoredItem<Connection> subscribeEvent(
+        const NodeId& id, const EventFilter& eventFilter, EventCallback<Connection> onEvent
     );
 
     /// Create a monitored item for event notifications.
     /// @copydetails services::MonitoringParametersEx
     /// @note Not implemented for Server.
-    MonitoredItem<ServerOrClient> subscribeEvent(
+    MonitoredItem<Connection> subscribeEvent(
         const NodeId& id,
         MonitoringMode monitoringMode,
         MonitoringParametersEx& parameters,
-        EventCallback<ServerOrClient> onEvent
+        EventCallback<Connection> onEvent
     );
 
     /// Delete this subscription.
@@ -122,7 +132,7 @@ public:
     void deleteSubscription();
 
 private:
-    ServerOrClient& connection_;
+    Connection& connection_;
     uint32_t subscriptionId_{0U};
 };
 

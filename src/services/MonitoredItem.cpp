@@ -24,7 +24,8 @@
 
 namespace opcua::services {
 
-uint32_t createMonitoredItemDataChange(
+template <>
+uint32_t createMonitoredItemDataChange<Client>(
     Client& client,
     uint32_t subscriptionId,
     const ReadValueId& itemToMonitor,
@@ -60,17 +61,21 @@ uint32_t createMonitoredItemDataChange(
     return monitoredItemId;
 }
 
-uint32_t createMonitoredItemDataChange(
+template <>
+uint32_t createMonitoredItemDataChange<Server>(
     Server& server,
+    [[maybe_unused]] uint32_t subscriptionId,
     const ReadValueId& itemToMonitor,
     MonitoringMode monitoringMode,
     MonitoringParametersEx& parameters,
-    DataChangeNotificationCallback dataChangeCallback
+    DataChangeNotificationCallback dataChangeCallback,
+    DeleteMonitoredItemCallback deleteCallback
 ) {
     auto context = std::make_unique<detail::MonitoredItemContext>();
     context->catcher = &opcua::detail::getContext(server).exceptionCatcher;
     context->itemToMonitor = itemToMonitor;
     context->dataChangeCallback = std::move(dataChangeCallback);
+    context->deleteCallback = std::move(deleteCallback);
 
     using Result = TypeWrapper<UA_MonitoredItemCreateResult, UA_TYPES_MONITOREDITEMCREATERESULT>;
     const Result result = UA_Server_createDataChangeMonitoredItem(
@@ -89,6 +94,18 @@ uint32_t createMonitoredItemDataChange(
     );
     contextPtr->inserted = true;
     return monitoredItemId;
+}
+
+[[nodiscard]] uint32_t createMonitoredItemDataChange(
+    Server& connection,
+    const ReadValueId& itemToMonitor,
+    MonitoringMode monitoringMode,
+    MonitoringParametersEx& parameters,
+    DataChangeNotificationCallback dataChangeCallback
+) {
+    return createMonitoredItemDataChange(
+        connection, 0U, itemToMonitor, monitoringMode, parameters, std::move(dataChangeCallback)
+    );
 }
 
 uint32_t createMonitoredItemEvent(
@@ -179,17 +196,27 @@ void setTriggering(
     );
 }
 
-void deleteMonitoredItem(Client& client, uint32_t subscriptionId, uint32_t monitoredItemId) {
+template <>
+void deleteMonitoredItem<Client>(
+    Client& client, uint32_t subscriptionId, uint32_t monitoredItemId
+) {
     const auto status = UA_Client_MonitoredItems_deleteSingle(
         client.handle(), subscriptionId, monitoredItemId
     );
     throwIfBad(status);
 }
 
-void deleteMonitoredItem(Server& server, uint32_t monitoredItemId) {
+template <>
+void deleteMonitoredItem<Server>(
+    Server& server, [[maybe_unused]] uint32_t subscriptionId, uint32_t monitoredItemId
+) {
     const auto status = UA_Server_deleteMonitoredItem(server.handle(), monitoredItemId);
     throwIfBad(status);
     opcua::detail::getContext(server).monitoredItems.erase({0U, monitoredItemId});
+}
+
+void deleteMonitoredItem(Server& connection, uint32_t monitoredItemId) {
+    deleteMonitoredItem(connection, 0U, monitoredItemId);
 }
 
 }  // namespace opcua::services

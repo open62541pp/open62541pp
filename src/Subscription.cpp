@@ -17,21 +17,6 @@
 namespace opcua {
 
 template <typename T>
-T& Subscription<T>::getConnection() noexcept {
-    return connection_;
-}
-
-template <typename T>
-const T& Subscription<T>::getConnection() const noexcept {
-    return connection_;
-}
-
-template <typename T>
-uint32_t Subscription<T>::getSubscriptionId() const noexcept {
-    return subscriptionId_;
-}
-
-template <typename T>
 MonitoredItem<T> Subscription<T>::subscribeDataChange(
     const NodeId& id, AttributeId attribute, DataChangeCallback<T> onDataChange
 ) {
@@ -61,13 +46,6 @@ std::vector<MonitoredItem<T>> Subscription<T>::getMonitoredItems() {
 /* ----------------------------------- Server specializations ----------------------------------- */
 
 template <>
-Subscription<Server>::Subscription(
-    Server& connection,
-    [[maybe_unused]] uint32_t subscriptionId  // ignore specified id and use default 0U
-) noexcept
-    : connection_(connection) {}
-
-template <>
 MonitoredItem<Server> Subscription<Server>::subscribeDataChange(
     const NodeId& id,
     AttributeId attribute,
@@ -91,11 +69,6 @@ MonitoredItem<Server> Subscription<Server>::subscribeDataChange(
 }
 
 /* ----------------------------------- Client specializations ----------------------------------- */
-
-template <>
-Subscription<Client>::Subscription(Client& connection, uint32_t subscriptionId) noexcept
-    : connection_(connection),
-      subscriptionId_(subscriptionId) {}
 
 template <>
 void Subscription<Client>::setSubscriptionParameters(SubscriptionParameters& parameters) {

@@ -15,39 +15,6 @@
 namespace opcua {
 
 template <typename T>
-MonitoredItem<T>::MonitoredItem(
-    T& connection, uint32_t subscriptionId, uint32_t monitoredItemId
-) noexcept
-    : connection_(connection),
-      subscriptionId_(subscriptionId),
-      monitoredItemId_(monitoredItemId) {}
-
-template <typename T>
-T& MonitoredItem<T>::getConnection() noexcept {
-    return connection_;
-}
-
-template <typename T>
-const T& MonitoredItem<T>::getConnection() const noexcept {
-    return connection_;
-}
-
-template <typename T>
-uint32_t MonitoredItem<T>::getSubscriptionId() const noexcept {
-    return subscriptionId_;
-}
-
-template <typename T>
-uint32_t MonitoredItem<T>::getMonitoredItemId() const noexcept {
-    return monitoredItemId_;
-}
-
-template <typename T>
-Subscription<T> MonitoredItem<T>::getSubscription() const {
-    return {connection_, subscriptionId_};
-}
-
-template <typename T>
 inline static auto& getMonitoredItemContext(
     T& connection, uint32_t subscriptionId, uint32_t monitoredItemId
 ) {
@@ -71,20 +38,6 @@ AttributeId MonitoredItem<T>::getAttributeId() const {
         .itemToMonitor.getAttributeId();
 }
 
-/* ----------------------------------- Server specializations ----------------------------------- */
-
-template <>
-MonitoredItem<Server>::MonitoredItem(
-    Server& connection, [[maybe_unused]] uint32_t subscriptionId, uint32_t monitoredItemId
-) noexcept
-    : connection_(connection),
-      monitoredItemId_(monitoredItemId) {}
-
-template <>
-void MonitoredItem<Server>::deleteMonitoredItem() {
-    services::deleteMonitoredItem(connection_, monitoredItemId_);
-}
-
 /* ----------------------------------- Client specializations ----------------------------------- */
 
 template <>
@@ -95,11 +48,6 @@ void MonitoredItem<Client>::setMonitoringParameters(MonitoringParametersEx& para
 template <>
 void MonitoredItem<Client>::setMonitoringMode(MonitoringMode monitoringMode) {
     services::setMonitoringMode(connection_, subscriptionId_, monitoredItemId_, monitoringMode);
-}
-
-template <>
-void MonitoredItem<Client>::deleteMonitoredItem() {
-    services::deleteMonitoredItem(connection_, subscriptionId_, monitoredItemId_);
 }
 
 /* ---------------------------------------------------------------------------------------------- */

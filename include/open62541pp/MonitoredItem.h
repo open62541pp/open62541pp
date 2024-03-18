@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <type_traits>
 
 #include "open62541pp/Config.h"
 #include "open62541pp/services/MonitoredItem.h"
@@ -13,7 +14,7 @@ namespace opcua {
 class Client;
 class Server;
 class NodeId;
-template <typename ServerOrClient>
+template <typename Connection>
 class Subscription;
 
 using MonitoringParametersEx = services::MonitoringParametersEx;
@@ -28,27 +29,40 @@ using MonitoringParameters
  * Use the free functions in the `services` namespace for more advanced usage:
  * - @ref MonitoredItem
  */
-template <typename ServerOrClient>
+template <typename Connection>
 class MonitoredItem {
 public:
     /// Wrap an existing monitored item.
-    /// The `subscriptionId` is ignored and set to `0U` for local monitored items within servers.
+    /// The `subscriptionId` is ignored and set to `0U` for servers.
     MonitoredItem(
-        ServerOrClient& connection, uint32_t subscriptionId, uint32_t monitoredItemId
-    ) noexcept;
+        Connection& connection, uint32_t subscriptionId, uint32_t monitoredItemId
+    ) noexcept
+        : connection_(connection),
+          subscriptionId_(std::is_same_v<Connection, Server> ? 0U : subscriptionId),
+          monitoredItemId_(monitoredItemId) {}
 
     /// Get the server/client instance.
-    ServerOrClient& getConnection() noexcept;
+    Connection& getConnection() noexcept {
+        return connection_;
+    }
+
     /// Get the server/client instance.
-    const ServerOrClient& getConnection() const noexcept;
+    const Connection& getConnection() const noexcept {
+        return connection_;
+    }
 
     /// Get the server-assigned identifier of the underlying subscription.
-    uint32_t getSubscriptionId() const noexcept;
+    uint32_t getSubscriptionId() const noexcept {
+        return subscriptionId_;
+    }
+
     /// Get the server-assigned identifier of this monitored item.
-    uint32_t getMonitoredItemId() const noexcept;
+    uint32_t getMonitoredItemId() const noexcept {
+        return monitoredItemId_;
+    }
 
     /// Get the underlying subscription.
-    Subscription<ServerOrClient> getSubscription() const;
+    Subscription<Connection> getSubscription() const;
 
     /// Get the monitored NodeId.
     const NodeId& getNodeId() const;
@@ -68,10 +82,12 @@ public:
 
     /// Delete this monitored item.
     /// @see services::deleteMonitoredItem
-    void deleteMonitoredItem();
+    void deleteMonitoredItem() {
+        services::deleteMonitoredItem(connection_, subscriptionId_, monitoredItemId_);
+    }
 
 private:
-    ServerOrClient& connection_;
+    Connection& connection_;
     uint32_t subscriptionId_{0U};
     uint32_t monitoredItemId_{0U};
 };
