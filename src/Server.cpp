@@ -40,10 +40,53 @@ namespace detail {
     return server;
 }
 
+static UA_StatusCode activateSession(
+    UA_Server* server,
+    UA_AccessControl* ac,
+    const UA_EndpointDescription* endpointDescription,
+    const UA_ByteString* secureChannelRemoteCertificate,
+    const UA_NodeId* sessionId,
+    const UA_ExtensionObject* userIdentityToken,
+    void** sessionContext
+) {
+    auto* context = getContext(server);
+    if (context == nullptr || context->sessionRegistry.activateSessionUser == nullptr) {
+        return UA_STATUSCODE_BADINTERNALERROR;
+    }
+    // call user-defined function
+    auto status = context->sessionRegistry.activateSessionUser(
+        server,
+        ac,
+        endpointDescription,
+        secureChannelRemoteCertificate,
+        sessionId,
+        userIdentityToken,
+        sessionContext
+    );
+    if (isGood(status) && sessionId != nullptr) {
+        context->sessionRegistry.sessionIds.insert(asWrapper<NodeId>(*sessionId));
+    }
+    return status;
+}
+
+static void closeSession(
+    UA_Server* server, UA_AccessControl* ac, const UA_NodeId* sessionId, void* sessionContext
+) {
+    auto* context = getContext(server);
+    if (context == nullptr || context->sessionRegistry.closeSessionUser == nullptr) {
+        return;
+    }
+    // call user-defined function
+    context->sessionRegistry.closeSessionUser(server, ac, sessionId, sessionContext);
+    if (sessionId != nullptr) {
+        context->sessionRegistry.sessionIds.erase(asWrapper<NodeId>(*sessionId));
+    }
+}
+
 struct ServerConnection : public ConnectionBase<Server> {
-    explicit ServerConnection(Server& parent)
+    explicit ServerConnection()
         : server(allocateServer()),
-          config(*detail::getConfig(server), parent) {}
+          config(*detail::getConfig(server)) {}
 
     ~ServerConnection() {
         // don't use stop method here because it might throw an exception
@@ -68,12 +111,20 @@ struct ServerConnection : public ConnectionBase<Server> {
 #endif
 #if UAPP_OPEN62541_VER_GE(1, 3)
         config->context = this;
+        if (config->accessControl.activateSession != &activateSession) {
+            context.sessionRegistry.activateSessionUser = config->accessControl.activateSession;
+            config->accessControl.activateSession = &activateSession;
+        }
+        if (config->accessControl.closeSession != &closeSession) {
+            context.sessionRegistry.closeSessionUser = config->accessControl.closeSession;
+            config->accessControl.closeSession = &closeSession;
+        }
 #endif
     }
 
     void runStartup() {
-        const auto status = UA_Server_run_startup(server);
-        throwIfBad(status);
+        applyDefaults();
+        throwIfBad(UA_Server_run_startup(server));
         running = true;
     }
 
@@ -108,8 +159,7 @@ struct ServerConnection : public ConnectionBase<Server> {
         running = false;
         // wait for run loop to complete
         const std::lock_guard<std::mutex> lock(mutexRun);
-        const auto status = UA_Server_run_shutdown(server);
-        throwIfBad(status);
+        throwIfBad(UA_Server_run_shutdown(server));
     }
 
     UA_Server* server;
@@ -124,16 +174,15 @@ struct ServerConnection : public ConnectionBase<Server> {
 /* ------------------------------------------- Server ------------------------------------------- */
 
 Server::Server(uint16_t port, ByteString certificate, Logger logger)
-    : connection_(std::make_shared<detail::ServerConnection>(*this)) {
+    : connection_(std::make_shared<detail::ServerConnection>()) {
     // The logger should be set as soon as possible, ideally even before UA_ServerConfig_setMinimal.
     // However, the logger gets overwritten by UA_ServerConfig_setMinimal() in older versions of
     // open62541. The best we can do in this case, is to first call UA_ServerConfig_setMinimal and
     // then setLogger.
     auto setConfig = [&] {
-        const auto status = UA_ServerConfig_setMinimal(
+        throwIfBad(UA_ServerConfig_setMinimal(
             detail::getConfig(handle()), port, certificate.empty() ? nullptr : certificate.handle()
-        );
-        throwIfBad(status);
+        ));
     };
 #if UAPP_OPEN62541_VER_GE(1, 1)
     setLogger(std::move(logger));
@@ -143,7 +192,6 @@ Server::Server(uint16_t port, ByteString certificate, Logger logger)
     setLogger(std::move(logger));
 #endif
     connection_->applyDefaults();
-    setAccessControl(std::make_unique<AccessControlDefault>());
 }
 
 #ifdef UA_ENABLE_ENCRYPTION
@@ -155,8 +203,8 @@ Server::Server(
     Span<const ByteString> issuerList,
     Span<const ByteString> revocationList
 )
-    : connection_(std::make_shared<detail::ServerConnection>(*this)) {
-    const auto status = UA_ServerConfig_setDefaultWithSecurityPolicies(
+    : connection_(std::make_shared<detail::ServerConnection>()) {
+    throwIfBad(UA_ServerConfig_setDefaultWithSecurityPolicies(
         detail::getConfig(handle()),
         port,
         certificate.handle(),
@@ -167,10 +215,8 @@ Server::Server(
         issuerList.size(),
         asNative(revocationList.data()),
         revocationList.size()
-    );
-    throwIfBad(status);
+    ));
     connection_->applyDefaults();
-    setAccessControl(std::make_unique<AccessControlDefault>());
 }
 #endif
 
@@ -214,14 +260,20 @@ void Server::setProductUri(std::string_view uri) {
 
 void Server::setAccessControl(AccessControlBase& accessControl) {
     connection_->config.setAccessControl(accessControl);
+    connection_->applyDefaults();
 }
 
 void Server::setAccessControl(std::unique_ptr<AccessControlBase> accessControl) {
     connection_->config.setAccessControl(std::move(accessControl));
+    connection_->applyDefaults();
 }
 
-std::vector<Session> Server::getSessions() const {
-    return connection_->config.getSessions();
+std::vector<Session> Server::getSessions() {
+    std::vector<Session> sessions;
+    for (auto&& id : connection_->context.sessionRegistry.sessionIds) {
+        sessions.emplace_back(*this, id);
+    }
+    return sessions;
 }
 
 std::vector<std::string> Server::getNamespaceArray() {

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <functional>  // invoke
+
 #include "open62541pp/Result.h"
 
 namespace opcua::detail {

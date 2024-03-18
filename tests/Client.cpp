@@ -6,6 +6,7 @@
 
 #include "open62541pp/AccessControl.h"
 #include "open62541pp/Client.h"
+#include "open62541pp/Config.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/detail/open62541/client.h"
 
@@ -75,6 +76,7 @@ TEST_CASE("Client anonymous login") {
     }
 }
 
+#if UAPP_OPEN62541_VER_GE(1, 3)
 TEST_CASE("Client username/password login") {
     AccessControlDefault accessControl(false, {{"username", "password"}});
     Server server;
@@ -92,6 +94,7 @@ TEST_CASE("Client username/password login") {
         CHECK_NOTHROW(client.disconnect());
     }
 }
+#endif
 
 #ifdef UA_ENABLE_ENCRYPTION
 TEST_CASE("Client encryption") {

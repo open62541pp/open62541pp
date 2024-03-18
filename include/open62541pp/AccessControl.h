@@ -5,8 +5,11 @@
 #include <vector>
 
 #include "open62541pp/Bitmask.h"
+#include "open62541pp/Span.h"
+#include "open62541pp/detail/open62541/common.h"  // UA_AccessControl
+#include "open62541pp/plugins/PluginAdapter.h"
 #include "open62541pp/types/Builtin.h"
-#include "open62541pp/types/Composed.h"
+#include "open62541pp/types/Composed.h"  // UserTokenPolicy, PerformUpdateType
 #include "open62541pp/types/NodeId.h"
 
 namespace opcua {
@@ -43,24 +46,15 @@ struct Login {
  * @see UA_AccessControl
  * @see https://www.open62541.org/doc/1.3/plugin_accesscontrol.html
  */
-class AccessControlBase {
+class AccessControlBase : public PluginAdapter<UA_AccessControl> {
 public:
-    AccessControlBase() = default;
-
-    virtual ~AccessControlBase() = default;
-
-    AccessControlBase(const AccessControlBase&) = default;
-    AccessControlBase(AccessControlBase&&) noexcept = default;
-
-    AccessControlBase& operator=(const AccessControlBase&) = default;
-    AccessControlBase& operator=(AccessControlBase&&) noexcept = default;
-
     /**
      * Get available user token policies.
      * If the `securityPolicyUri` is empty, the highest available security policy will be used to
      * transfer user tokens.
+     * @note The returned span must be valid throughout the lifetime of the instance.
      */
-    virtual std::vector<UserTokenPolicy> getUserTokenPolicies() = 0;
+    virtual Span<UserTokenPolicy> getUserTokenPolicies() = 0;
 
     /**
      * Authenticate a session.
@@ -124,6 +118,9 @@ public:
         DateTime endTimestamp,
         bool isDeleteModified
     ) = 0;
+
+    void clear(UA_AccessControl& ac) noexcept override;
+    UA_AccessControl create() override;
 };
 
 /* ----------------------------------- Default access control ----------------------------------- */
@@ -140,7 +137,7 @@ class AccessControlDefault : public AccessControlBase {
 public:
     explicit AccessControlDefault(bool allowAnonymous = true, std::vector<Login> logins = {});
 
-    std::vector<UserTokenPolicy> getUserTokenPolicies() override;
+    Span<UserTokenPolicy> getUserTokenPolicies() override;
 
     StatusCode activateSession(
         Session& session,
@@ -190,6 +187,7 @@ public:
 private:
     bool allowAnonymous_;
     std::vector<Login> logins_;
+    std::vector<UserTokenPolicy> userTokenPolicies_;
 };
 
 }  // namespace opcua

@@ -29,6 +29,7 @@ enum class NodeIdType : uint8_t {
 
 /**
  * UA_NodeId wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.2
  * @ingroup Wrapper
  */
 class NodeId : public TypeWrapper<UA_NodeId, UA_TYPES_NODEID> {
@@ -84,13 +85,21 @@ public:
     NodeId(MethodId id) noexcept  // NOLINT, implicit wanted
         : NodeId(0, static_cast<uint32_t>(id)) {}
 
-    bool isNull() const noexcept;
+    bool isNull() const noexcept {
+        return UA_NodeId_isNull(handle());
+    }
 
-    uint32_t hash() const noexcept;
+    uint32_t hash() const noexcept {
+        return UA_NodeId_hash(handle());
+    }
 
-    NamespaceIndex getNamespaceIndex() const noexcept;
+    NamespaceIndex getNamespaceIndex() const noexcept {
+        return handle()->namespaceIndex;
+    }
 
-    NodeIdType getIdentifierType() const noexcept;
+    NodeIdType getIdentifierType() const noexcept {
+        return static_cast<NodeIdType>(handle()->identifierType);
+    }
 
     /// Get identifier variant.
     std::variant<uint32_t, String, Guid, ByteString> getIdentifier() const;
@@ -149,6 +158,7 @@ inline bool operator>=(const UA_NodeId& lhs, const UA_NodeId& rhs) noexcept {
 
 /**
  * UA_ExpandedNodeId wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.16
  * @ingroup Wrapper
  */
 class ExpandedNodeId : public TypeWrapper<UA_ExpandedNodeId, UA_TYPES_EXPANDEDNODEID> {
@@ -156,19 +166,32 @@ public:
     // NOLINTNEXTLINE, false positive?
     using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
 
-    explicit ExpandedNodeId(const NodeId& id);
-    ExpandedNodeId(const NodeId& id, std::string_view namespaceUri, uint32_t serverIndex);
+    explicit ExpandedNodeId(NodeId id) noexcept;
+    ExpandedNodeId(NodeId id, std::string_view namespaceUri, uint32_t serverIndex);
 
-    bool isLocal() const noexcept;
+    bool isLocal() const noexcept {
+        return handle()->serverIndex == 0;
+    }
 
-    uint32_t hash() const noexcept;
+    uint32_t hash() const noexcept {
+        return UA_ExpandedNodeId_hash(handle());
+    }
 
-    NodeId& getNodeId() noexcept;
-    const NodeId& getNodeId() const noexcept;
+    NodeId& getNodeId() noexcept {
+        return asWrapper<NodeId>(handle()->nodeId);
+    }
 
-    std::string_view getNamespaceUri() const;
+    const NodeId& getNodeId() const noexcept {
+        return asWrapper<NodeId>(handle()->nodeId);
+    }
 
-    uint32_t getServerIndex() const noexcept;
+    std::string_view getNamespaceUri() const {
+        return detail::toStringView(handle()->namespaceUri);
+    }
+
+    uint32_t getServerIndex() const noexcept {
+        return handle()->serverIndex;
+    }
 
     /// Encode ExpandedNodeId as a string like `svr=1;nsu=http://test.org/UA/Data/;ns=2;i=10157`.
     /// @see https://reference.opcfoundation.org/Core/Part6/v105/docs/5.3.1.11

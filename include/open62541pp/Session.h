@@ -31,19 +31,19 @@ public:
     const NodeId& getSessionId() const noexcept;
 
     /// Get a session attribute by its key.
-    /// @note Only supported since open62541 v1.3
+    /// @note Supported since open62541 v1.3
     Variant getSessionAttribute(const QualifiedName& key);
 
     /// Attach a session attribute as a key-value pair.
-    /// @note Only supported since open62541 v1.3
+    /// @note Supported since open62541 v1.3
     void setSessionAttribute(const QualifiedName& key, const Variant& value);
 
     /// Delete a session attribute by its key.
-    /// @note Only supported since open62541 v1.3
+    /// @note Supported since open62541 v1.3
     void deleteSessionAttribute(const QualifiedName& key);
 
     /// Manually close this session.
-    /// @note Only supported since open62541 v1.3
+    /// @note Supported since open62541 v1.3
     void close();
 
 private:

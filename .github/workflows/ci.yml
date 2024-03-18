@@ -6,142 +6,156 @@ on:
   pull_request:
 
 jobs:
-  linux:
-    # https://github.com/actions/runner-images/blob/main/images/ubuntu/Ubuntu2204-Readme.md
-    name: Linux ${{ matrix.config.name }} (${{ matrix.build_type }})
-    runs-on: ubuntu-22.04
+  test:
+    name: ${{ matrix.config.name }} (${{ matrix.build_type }})
     strategy:
       fail-fast: false
       matrix:
-        build_type: ["Debug", "Release"]
         config:
-          # prettier-ignore
-          - { name: GCC 9,      CC: gcc-9,    CXX: g++-9,      flags: ""}
-          - { name: GCC 10,     CC: gcc-10,   CXX: g++-10,     flags: ""}
-          - { name: GCC 11,     CC: gcc-11,   CXX: g++-11,     flags: ""}
-          - { name: GCC 12,     CC: gcc-12,   CXX: g++-12,     flags: ""}
-          - { name: Clang 12,   CC: clang-12, CXX: clang++-12, flags: "" }
-          - { name: Clang 13,   CC: clang-13, CXX: clang++-13, flags: "" }
-          - { name: Clang 14,   CC: clang-14, CXX: clang++-14, flags: "" }
-          - { name: Clang-Tidy, CC: clang-14, CXX: clang++-14, flags: "-DUAPP_ENABLE_CLANG_TIDY=ON" }
-          - { name: ASan,       CC: clang-14, CXX: clang++-14, flags: "-DUAPP_ENABLE_SANITIZER_ADDRESS=ON" }
-          - { name: TSan,       CC: clang-14, CXX: clang++-14, flags: "-DUAPP_ENABLE_SANITIZER_THREAD=ON" }
-          - { name: UBSan,      CC: clang-14, CXX: clang++-14, flags: "-DUAPP_ENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON" }
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: recursive
-      - uses: aminya/setup-cpp@v1
-        with:
-          ninja: true
-      - name: Build
-        run: |
-          mkdir build
-          cd build
-          cmake -G Ninja \
-            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
-            -DUA_ENABLE_ENCRYPTION=OPENSSL \
-            -DUAPP_BUILD_TESTS=ON \
-            -DUAPP_BUILD_EXAMPLES=ON \
-            -DUAPP_WARNINGS_AS_ERRORS=ON \
-            ${{ matrix.config.flags }} \
-            ..
-          cmake --build .
-      - name: Run tests
-        run: ctest --test-dir build --output-on-failure
+          - name: Linux GCC 9
+            os: ubuntu-22.04
+            compiler: g++-9
+            coverage: true
+            gcov: gcov-9
 
-  linux-coverage:
-    name: Linux Coverage
-    runs-on: ubuntu-22.04
-    steps:
+          - name: Linux GCC 10
+            os: ubuntu-22.04
+            compiler: g++-10
+            coverage: true
+            gcov: gcov-10
+
+          - name: Linux GCC 11
+            os: ubuntu-22.04
+            compiler: g++-11
+            coverage: true
+            gcov: gcov-11
+
+          - name: Linux GCC 12
+            os: ubuntu-22.04
+            compiler: g++-12
+            coverage: true
+            gcov: gcov-12
+
+          - name: Linux GCC 13
+            os: ubuntu-22.04
+            compiler: g++-13
+            coverage: true
+            gcov: gcov-13
+
+          - name: Linux Clang 13
+            os: ubuntu-22.04
+            compiler: clang++-13
+            coverage: true
+            gcov: llvm-cov-13 gcov
+
+          - name: Linux Clang 14
+            os: ubuntu-22.04
+            compiler: clang++-14
+            coverage: true
+            gcov: llvm-cov-14 gcov
+
+          - name: Linux Clang 15
+            os: ubuntu-22.04
+            compiler: clang++-15
+            coverage: true
+            gcov: llvm-cov-15 gcov
+
+          - name: Linux ASan
+            os: ubuntu-22.04
+            compiler: clang++-15
+            flags: "-DUAPP_ENABLE_SANITIZER_ADDRESS=ON"
+
+          - name: Linux TSan
+            os: ubuntu-22.04
+            compiler: clang++-15
+            flags: "-DUAPP_ENABLE_SANITIZER_THREAD=ON"
+
+          - name: Linux UBSan
+            os: ubuntu-22.04
+            compiler: clang++-15
+            flags: "-DUAPP_ENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON"
+
+          - name: macOS AppleClang 14
+            os: macos-12
+            compiler: clang++
+
+          - name: macOS AppleClang 15
+            os: macos-13
+            compiler: clang++
+
+          - name: Windows Visual Studio 16
+            os: windows-2019
+            compiler: msvc
+
+          - name: Windows Visual Studio 17
+            os: windows-2022
+            compiler: msvc
+
+        build_type:
+          - Debug
+          - Release
+
+        include:
+          - config:
+              name: Clang-Tidy
+              os: ubuntu-22.04
+              compiler: clang++
+              flags: "-DUAPP_ENABLE_CLANG_TIDY=ON"
+            build_type: Debug
+
+    runs-on: ${{ matrix.config.os }}
+    steps: 
       - uses: actions/checkout@v4
         with:
           submodules: recursive
-      - uses: aminya/setup-cpp@v1
-        with:
-          ninja: true
-          gcovr: "6.0"
+
+      - name: Temporary workaround for sanitizer crashes
+        # https://github.com/actions/runner-images/issues/9491
+        # the issue should be fixed in the next runner image for Ubuntu 22.04:
+        # https://github.com/actions/runner-images/pull/9513
+        if: matrix.config.os == 'ubuntu-22.04'
+        run: sudo sysctl vm.mmap_rnd_bits=28
+
+      - name: Install gcovr
+        if: matrix.config.coverage
+        run: pipx install gcovr==7.2
+
+      - name: Configure CMake
+        run: >
+          cmake -S . -B ./build
+          -DCMAKE_CXX_COMPILER=${{ matrix.config.compiler }}
+          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+          -DUA_ENABLE_ENCRYPTION=${{ runner.os == 'Windows' && 'OFF' || 'OPENSSL' }}
+          -DUA_ENABLE_METHODCALLS=ON
+          -DUA_ENABLE_SUBSCRIPTIONS=ON
+          -DUA_ENABLE_SUBSCRIPTIONS_EVENTS=ON
+          -DUAPP_BUILD_TESTS=ON
+          -DUAPP_BUILD_EXAMPLES=ON
+          -DUAPP_ENABLE_COVERAGE=${{ matrix.config.coverage }}
+          -DUAPP_WARNINGS_AS_ERRORS=ON
+          ${{ matrix.config.flags }}
+
       - name: Build
-        run: |
-          mkdir build
-          cd build
-          cmake -G Ninja \
-            -DCMAKE_BUILD_TYPE=Debug \
-            -DUA_ENABLE_ENCRYPTION=OPENSSL \
-            -DUAPP_BUILD_TESTS=ON \
-            -DUAPP_ENABLE_COVERAGE=ON \
-            ..
-          cmake --build .
+        run: cmake --build ./build --config ${{ matrix.build_type }}
+
       - name: Run tests
-        run: ctest --test-dir build --output-on-failure
-      - name: Coverage report (text)
-        run: cmake --build build --target open62541pp_coverage_report
-      - name: Coverage report (xml)
-        run: cmake --build build --target open62541pp_coverage_report_xml
+        run: ctest --test-dir ./build --output-on-failure
+
+      - name: Generate coverage reports
+        if: matrix.config.coverage
+        env:
+          GCOV: ${{ matrix.config.gcov }}
+        run: |
+          cmake --build ./build --target open62541pp_coverage_report
+          cmake --build ./build --target open62541pp_coverage_report_xml
+
       - name: Upload coverage reports to Codecov
+        if: matrix.config.coverage
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: build/coverage.xml
-
-  windows:
-    # https://github.com/actions/runner-images/blob/main/images/windows/Windows2019-Readme.md
-    # https://github.com/actions/runner-images/blob/main/images/windows/Windows2022-Readme.md
-    name: Windows ${{ matrix.config.name }} (${{ matrix.build_type }}, ${{ matrix.library_type }})
-    runs-on: ${{ matrix.config.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        build_type: ["Debug", "Release"]
-        library_type: ["static", "shared"]
-        config:
-          - { name: Visual Studio 16 2019, os: windows-2019 }
-          - { name: Visual Studio 17 2022, os: windows-2022 }
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: recursive
-      - name: Build
-        run: |
-          mkdir build
-          cd build
-          cmake `
-            -DBUILD_SHARED_LIBS=${{ matrix.library_type == 'shared' }} `
-            -DUAPP_BUILD_TESTS=ON `
-            -DUAPP_BUILD_EXAMPLES=ON `
-            -DUAPP_WARNINGS_AS_ERRORS=ON `
-            ..
-          cmake --build . --config ${{ matrix.build_type }}
-      - name: Run tests
-        run: ctest --test-dir build --output-on-failure
-
-  macos:
-    # https://github.com/actions/runner-images/blob/main/images/macos/macos-12-Readme.md
-    name: macOS ${{ matrix.config.name }} (${{ matrix.build_type }})
-    runs-on: macos-12
-    strategy:
-      fail-fast: false
-      matrix:
-        build_type: ["Debug", "Release"]
-        config:
-          - { name: AppleClang 14, CC: clang, CXX: clang++ }
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: recursive
-      - name: Build
-        env:
-          CC: ${{ matrix.config.CC }}
-          CXX: ${{ matrix.config.CXX }}
-        run: |
-          mkdir build
-          cd build
-          cmake \
-            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
-            -DUAPP_BUILD_TESTS=ON \
-            -DUAPP_BUILD_EXAMPLES=ON \
-            -DUAPP_WARNINGS_AS_ERRORS=ON \
-            ..
-          cmake --build .
-      - name: Run tests
-        run: ctest --test-dir build --output-on-failure
+          file: ./build/coverage.xml
+          disable_search: true
+          flags: ${{ runner.os }}
+          name: ${{ matrix.config.name }}
+          verbose: true

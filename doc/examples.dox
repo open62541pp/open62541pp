@@ -2,6 +2,7 @@
 @example server_minimal.cpp
 @example server.cpp
 @example server_instantiation.cpp
+@example server_logger.cpp
 @example server_valuecallback.cpp
 @example server_datasource.cpp
 @example server_accesscontrol.cpp

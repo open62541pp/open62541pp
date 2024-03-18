@@ -172,8 +172,7 @@ struct ClientConnection : public ConnectionBase<Client> {
     }
 
     void runIterate(uint16_t timeoutMilliseconds) {
-        const auto status = UA_Client_run_iterate(client, timeoutMilliseconds);
-        throwIfBad(status);
+        throwIfBad(UA_Client_run_iterate(client, timeoutMilliseconds));
         context.exceptionCatcher.rethrow();
     }
 
@@ -213,10 +212,7 @@ Client::Client(Logger logger)
     // However, the logger gets overwritten by UA_ClientConfig_setDefault() in older versions of
     // open62541. The best we can do in this case, is to first call UA_ClientConfig_setDefault and
     // then setLogger.
-    auto setConfig = [&] {
-        const auto status = UA_ClientConfig_setDefault(detail::getConfig(handle()));
-        throwIfBad(status);
-    };
+    auto setConfig = [&] { throwIfBad(UA_ClientConfig_setDefault(detail::getConfig(handle()))); };
 #if UAPP_OPEN62541_VER_GE(1, 1)
     setLogger(std::move(logger));
     setConfig();
@@ -236,7 +232,7 @@ Client::Client(
     Span<const ByteString> revocationList
 )
     : connection_(std::make_shared<detail::ClientConnection>()) {
-    const auto status = UA_ClientConfig_setDefaultEncryption(
+    throwIfBad(UA_ClientConfig_setDefaultEncryption(
         detail::getConfig(handle()),
         certificate,
         privateKey,
@@ -244,8 +240,7 @@ Client::Client(
         trustList.size(),
         asNative(revocationList.data()),
         revocationList.size()
-    );
-    throwIfBad(status);
+    ));
     detail::getConfig(*this).securityMode = UA_MESSAGESECURITYMODE_SIGNANDENCRYPT;
     connection_->applyDefaults();
 }
@@ -328,8 +323,7 @@ void Client::onSessionClosed(StateCallback callback) {
 }
 
 void Client::connect(std::string_view endpointUrl) {
-    const auto status = UA_Client_connect(handle(), std::string(endpointUrl).c_str());
-    throwIfBad(status);
+    throwIfBad(UA_Client_connect(handle(), std::string(endpointUrl).c_str()));
 }
 
 void Client::connect(std::string_view endpointUrl, const Login& login) {
@@ -338,10 +332,9 @@ void Client::connect(std::string_view endpointUrl, const Login& login) {
 #else
     const auto func = UA_Client_connectUsername;
 #endif
-    const auto status = func(
+    throwIfBad(func(
         handle(), std::string(endpointUrl).c_str(), login.username.c_str(), login.password.c_str()
-    );
-    throwIfBad(status);
+    ));
 }
 
 void Client::disconnect() noexcept {

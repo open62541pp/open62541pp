@@ -18,6 +18,7 @@ struct UA_Server;
 namespace opcua::services::detail {
 
 struct MonitoredItemContext : CallbackAdapter, opcua::detail::Staleable {
+    bool inserted{false};
     ReadValueId itemToMonitor;
     std::function<void(uint32_t subId, uint32_t monId, const DataValue&)> dataChangeCallback;
     std::function<void(uint32_t subId, uint32_t monId, Span<const Variant>)> eventCallback;
@@ -34,6 +35,9 @@ struct MonitoredItemContext : CallbackAdapter, opcua::detail::Staleable {
     ) noexcept {
         if (monContext != nullptr && value != nullptr) {
             auto* self = static_cast<MonitoredItemContext*>(monContext);
+            if (!self->inserted) {
+                return;  // avoid immediate callbacks before insertion
+            }
             self->invoke(self->dataChangeCallback, 0U, monId, asWrapper<DataValue>(*value));
         }
     }
@@ -48,6 +52,9 @@ struct MonitoredItemContext : CallbackAdapter, opcua::detail::Staleable {
     ) noexcept {
         if (monContext != nullptr && value != nullptr) {
             auto* self = static_cast<MonitoredItemContext*>(monContext);
+            if (!self->inserted) {
+                return;  // avoid immediate callbacks before insertion
+            }
             self->invoke(self->dataChangeCallback, subId, monId, asWrapper<DataValue>(*value));
         }
     }
@@ -63,6 +70,9 @@ struct MonitoredItemContext : CallbackAdapter, opcua::detail::Staleable {
     ) noexcept {
         if (monContext != nullptr) {
             auto* self = static_cast<MonitoredItemContext*>(monContext);
+            if (!self->inserted) {
+                return;  // avoid immediate callbacks before insertion
+            }
             self->invoke(
                 self->eventCallback,
                 subId,

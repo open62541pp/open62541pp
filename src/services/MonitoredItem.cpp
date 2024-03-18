@@ -53,9 +53,10 @@ uint32_t createMonitoredItemDataChange(
     detail::reviseMonitoringParameters(parameters, asNative(result));
 
     const auto monitoredItemId = result->monitoredItemId;
-    opcua::detail::getContext(client).monitoredItems.insert(
+    auto* contextPtr = opcua::detail::getContext(client).monitoredItems.insert(
         {subscriptionId, monitoredItemId}, std::move(context)
     );
+    contextPtr->inserted = true;
     return monitoredItemId;
 }
 
@@ -83,9 +84,10 @@ uint32_t createMonitoredItemDataChange(
     detail::reviseMonitoringParameters(parameters, asNative(result));
 
     const auto monitoredItemId = result->monitoredItemId;
-    opcua::detail::getContext(server).monitoredItems.insert(
+    auto* contextPtr = opcua::detail::getContext(server).monitoredItems.insert(
         {0U, monitoredItemId}, std::move(context)
     );
+    contextPtr->inserted = true;
     return monitoredItemId;
 }
 
@@ -118,9 +120,10 @@ uint32_t createMonitoredItemEvent(
     detail::reviseMonitoringParameters(parameters, asNative(result));
 
     const auto monitoredItemId = result->monitoredItemId;
-    opcua::detail::getContext(client).monitoredItems.insert(
+    auto* contextPtr = opcua::detail::getContext(client).monitoredItems.insert(
         {subscriptionId, monitoredItemId}, std::move(context)
     );
+    contextPtr->inserted = true;
     return monitoredItemId;
 }
 

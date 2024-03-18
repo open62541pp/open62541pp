@@ -20,6 +20,7 @@ namespace fs = std::filesystem;
 #include "open62541pp/Common.h"  // NamespaceIndex
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/Wrapper.h"
 #include "open62541pp/detail/open62541/common.h"
 
 namespace opcua {
@@ -164,14 +165,14 @@ public:
     static ByteString fromFile(const fs::path& filepath);
 
     /// Parse ByteString from Base64 encoded string.
-    /// @note Only supported since open62541 v1.1
+    /// @note Supported since open62541 v1.1
     static ByteString fromBase64(std::string_view encoded);
 
     /// Write ByteString to binary file.
     void toFile(const fs::path& filepath) const;
 
     /// Convert to Base64 encoded string.
-    /// @note Only supported since open62541 v1.1
+    /// @note Supported since open62541 v1.1
     std::string toBase64() const;
 
     bool empty() const noexcept;
@@ -275,21 +276,61 @@ class DiagnosticInfo : public TypeWrapper<UA_DiagnosticInfo, UA_TYPES_DIAGNOSTIC
 public:
     using TypeWrapperBase::TypeWrapperBase;
 
-    bool hasSymbolicId() const noexcept;
-    bool hasNamespaceUri() const noexcept;
-    bool hasLocalizedText() const noexcept;
-    bool hasLocale() const noexcept;
-    bool hasAdditionalInfo() const noexcept;
-    bool hasInnerStatusCode() const noexcept;
-    bool hasInnerDiagnosticInfo() const noexcept;
+    bool hasSymbolicId() const noexcept {
+        return handle()->hasSymbolicId;
+    }
 
-    int32_t getSymbolicId() const noexcept;
-    int32_t getNamespaceUri() const noexcept;
-    int32_t getLocalizedText() const noexcept;
-    int32_t getLocale() const noexcept;
-    const String& getAdditionalInfo() const noexcept;
-    StatusCode getInnerStatusCode() const noexcept;
-    const DiagnosticInfo* getInnerDiagnosticInfo() const noexcept;
+    bool hasNamespaceUri() const noexcept {
+        return handle()->hasNamespaceUri;
+    }
+
+    bool hasLocalizedText() const noexcept {
+        return handle()->hasLocalizedText;
+    }
+
+    bool hasLocale() const noexcept {
+        return handle()->hasLocale;
+    }
+
+    bool hasAdditionalInfo() const noexcept {
+        return handle()->hasAdditionalInfo;
+    }
+
+    bool hasInnerStatusCode() const noexcept {
+        return handle()->hasInnerStatusCode;
+    }
+
+    bool hasInnerDiagnosticInfo() const noexcept {
+        return handle()->hasInnerDiagnosticInfo;
+    }
+
+    int32_t getSymbolicId() const noexcept {
+        return handle()->symbolicId;
+    }
+
+    int32_t getNamespaceUri() const noexcept {
+        return handle()->namespaceUri;
+    }
+
+    int32_t getLocalizedText() const noexcept {
+        return handle()->localizedText;
+    }
+
+    int32_t getLocale() const noexcept {
+        return handle()->locale;
+    }
+
+    const String& getAdditionalInfo() const noexcept {
+        return asWrapper<String>(handle()->additionalInfo);
+    }
+
+    StatusCode getInnerStatusCode() const noexcept {
+        return handle()->innerStatusCode;
+    }
+
+    const DiagnosticInfo* getInnerDiagnosticInfo() const noexcept {
+        return asWrapper<DiagnosticInfo>(handle()->innerDiagnosticInfo);
+    }
 };
 
 /* ---------------------------------------------------------------------------------------------- */

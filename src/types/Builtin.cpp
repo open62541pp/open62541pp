@@ -184,64 +184,6 @@ std::string_view LocalizedText::getLocale() const noexcept {
     return detail::toStringView(handle()->locale);
 }
 
-/* --------------------------------------- DiagnosticInfo --------------------------------------- */
-
-bool DiagnosticInfo::hasSymbolicId() const noexcept {
-    return handle()->hasSymbolicId;
-}
-
-bool DiagnosticInfo::hasNamespaceUri() const noexcept {
-    return handle()->hasNamespaceUri;
-}
-
-bool DiagnosticInfo::hasLocalizedText() const noexcept {
-    return handle()->hasLocalizedText;
-}
-
-bool DiagnosticInfo::hasLocale() const noexcept {
-    return handle()->hasLocale;
-}
-
-bool DiagnosticInfo::hasAdditionalInfo() const noexcept {
-    return handle()->hasAdditionalInfo;
-}
-
-bool DiagnosticInfo::hasInnerStatusCode() const noexcept {
-    return handle()->hasInnerStatusCode;
-}
-
-bool DiagnosticInfo::hasInnerDiagnosticInfo() const noexcept {
-    return handle()->hasInnerDiagnosticInfo;
-}
-
-int32_t DiagnosticInfo::getSymbolicId() const noexcept {
-    return handle()->symbolicId;
-}
-
-int32_t DiagnosticInfo::getNamespaceUri() const noexcept {
-    return handle()->namespaceUri;
-}
-
-int32_t DiagnosticInfo::getLocalizedText() const noexcept {
-    return handle()->localizedText;
-}
-
-int32_t DiagnosticInfo::getLocale() const noexcept {
-    return handle()->locale;
-}
-
-const String& DiagnosticInfo::getAdditionalInfo() const noexcept {
-    return asWrapper<String>(handle()->additionalInfo);
-}
-
-StatusCode DiagnosticInfo::getInnerStatusCode() const noexcept {
-    return handle()->innerStatusCode;
-}
-
-const DiagnosticInfo* DiagnosticInfo::getInnerDiagnosticInfo() const noexcept {
-    return asWrapper<DiagnosticInfo>(handle()->innerDiagnosticInfo);
-}
-
 /* ---------------------------------------- NumericRange ---------------------------------------- */
 
 NumericRange::NumericRange(std::string_view encodedRange) {

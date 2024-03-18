@@ -80,21 +80,10 @@ MonitoredItem<Server> Subscription<Server>::subscribeDataChange(
         {id, attribute},
         monitoringMode,
         parameters,
-        [&, callback = std::move(onDataChange)](
+        [connectionPtr = &connection_, callback = std::move(onDataChange)](
             uint32_t subId, uint32_t monId, const DataValue& value
         ) {
-            // workaround to prevent immediate callbacks, e.g. MonitoredItem::getNodeId() would
-            // throw an exception (BadMonitoredItemidInvalid)
-            // -> wait until inserted in map
-            static std::atomic<bool> initialized = false;
-            if (!initialized) {
-                if (!detail::getContext(connection_).monitoredItems.contains({subId, monId})) {
-                    return;  // not initialized yet, skip
-                }
-                initialized = true;
-            }
-
-            static const MonitoredItem<Server> monitoredItem(connection_, subId, monId);
+            const MonitoredItem<Server> monitoredItem(*connectionPtr, subId, monId);
             callback(monitoredItem, value);
         }
     );

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cassert>
 #include <map>
 #include <memory>
 #include <mutex>
@@ -72,15 +73,20 @@ public:
 
     /// Acquire the lock/mutex for unique access to the underlying map.
     [[nodiscard]] auto acquireLock() const {
-        return std::lock_guard(mutex_);
+        return std::unique_lock(mutex_);
     }
 
     /// Get access to the underlying map. Use `acquireLock` before any operation.
     const auto& underlying() const noexcept {
+        assertLocked();
         return map_;
     }
 
 private:
+    void assertLocked() const {
+        assert(std::unique_lock(mutex_, std::defer_lock).try_lock() == false);
+    }
+
     std::map<Key, std::unique_ptr<Item>> map_;
     mutable std::mutex mutex_;
 };
