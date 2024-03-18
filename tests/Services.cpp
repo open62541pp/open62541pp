@@ -846,6 +846,7 @@ TEST_CASE("MonitoredItem service set (client)") {
 
     services::SubscriptionParameters subscriptionParameters{};
     services::MonitoringParametersEx monitoringParameters{};
+    monitoringParameters.samplingInterval = 0.0;  // fastest
 
     SUBCASE("createMonitoredItemDataChange without subscription") {
         CHECK_THROWS(discard(services::createMonitoredItemDataChange(
@@ -1017,20 +1018,24 @@ TEST_CASE("MonitoredItem service set (client)") {
 
 TEST_CASE("MonitoredItem service set (server)") {
     Server server;
+    const NodeId id{1, 1000};
+    services::addVariable(server, {0, UA_NS0ID_OBJECTSFOLDER}, id, "Variable");
 
     services::MonitoringParametersEx monitoringParameters{};
+    monitoringParameters.samplingInterval = 0.0;  // fastest
 
     SUBCASE("createMonitoredItemDataChange") {
         size_t notificationCount = 0;
         const auto monId = services::createMonitoredItemDataChange(
             server,
-            {VariableId::Server_ServerStatus_CurrentTime, AttributeId::Value},
+            {id, AttributeId::Value},
             MonitoringMode::Reporting,
             monitoringParameters,
             [&](uint32_t, uint32_t, const DataValue&) { notificationCount++; }
         );
         CAPTURE(monId);
         std::this_thread::sleep_for(100ms);
+        services::writeValue(server, id, Variant::fromScalar(11.11));
         server.runIterate();
         CHECK(notificationCount > 0);
     }
@@ -1040,12 +1045,12 @@ TEST_CASE("MonitoredItem service set (server)") {
 
         const auto monId = services::createMonitoredItemDataChange(
             server,
-            {VariableId::Server_ServerStatus_CurrentTime, AttributeId::Value},
+            {id, AttributeId::Value},
             MonitoringMode::Reporting,
             monitoringParameters,
             {}
         );
-
+        CAPTURE(monId);
         CHECK_NOTHROW(services::deleteMonitoredItem(server, monId));
     }
 }
