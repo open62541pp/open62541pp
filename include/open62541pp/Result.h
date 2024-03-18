@@ -26,7 +26,7 @@ public:
     /**
      * Create a Result with the given code.
      */
-    constexpr Result(opcua::StatusCode code) noexcept  // NOLINT, implicit wanted
+    constexpr Result(StatusCode code) noexcept  // NOLINT, implicit wanted
         : code_(code) {}
 
     /**
@@ -95,7 +95,6 @@ public:
     // (https://developercommunity.visualstudio.com/t/c-shared-state-futuresstate-default-constructs-the/60897).
     constexpr Result() noexcept
         : code_(UA_STATUSCODE_BADINTERNALERROR) {}
-
 #endif
 
     // NOLINTNEXTLINE, implicit wanted

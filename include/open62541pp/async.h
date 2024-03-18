@@ -31,8 +31,7 @@ struct AsyncResult {
     static void initiate(Initiation&& initiation, CompletionHandler&& handler, Args&&... args) {
         static_assert(
             (std::is_invocable_v<CompletionHandler, Result<T>> ||
-             std::is_invocable_v<CompletionHandler, Result<T>&> ||
-             std::is_invocable_v<CompletionHandler, const Result<T>&>)
+             std::is_invocable_v<CompletionHandler, Result<T>&>)
         );
         std::invoke(
             std::forward<Initiation>(initiation),
