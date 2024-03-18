@@ -83,18 +83,7 @@ MonitoredItem<Server> Subscription<Server>::subscribeDataChange(
         [&, callback = std::move(onDataChange)](
             uint32_t subId, uint32_t monId, const DataValue& value
         ) {
-            // workaround to prevent immediate callbacks, e.g. MonitoredItem::getNodeId() would
-            // throw an exception (BadMonitoredItemidInvalid)
-            // -> wait until inserted in map
-            static std::atomic<bool> initialized = false;
-            if (!initialized) {
-                if (!detail::getContext(connection_).monitoredItems.contains({subId, monId})) {
-                    return;  // not initialized yet, skip
-                }
-                initialized = true;
-            }
-
-            static const MonitoredItem<Server> monitoredItem(connection_, subId, monId);
+            const MonitoredItem<Server> monitoredItem(connection_, subId, monId);
             callback(monitoredItem, value);
         }
     );
@@ -132,10 +121,10 @@ MonitoredItem<Client> Subscription<Client>::subscribeDataChange(
         {id, attribute},
         monitoringMode,
         parameters,
-        [connectionPtr = &connection_, callback = std::move(onDataChange)](
+        [&, callback = std::move(onDataChange)](
             uint32_t subId, uint32_t monId, const DataValue& value
         ) {
-            const MonitoredItem<Client> monitoredItem(*connectionPtr, subId, monId);
+            const MonitoredItem<Client> monitoredItem(connection_, subId, monId);
             callback(monitoredItem, value);
         }
     );
@@ -155,10 +144,10 @@ MonitoredItem<Client> Subscription<Client>::subscribeEvent(
         {id, AttributeId::EventNotifier},
         monitoringMode,
         parameters,
-        [connectionPtr = &connection_, callback = std::move(onEvent)](
+        [&, callback = std::move(onEvent)](
             uint32_t subId, uint32_t monId, Span<const Variant> eventFields
         ) {
-            const MonitoredItem<Client> monitoredItem(*connectionPtr, subId, monId);
+            const MonitoredItem<Client> monitoredItem(connection_, subId, monId);
             callback(monitoredItem, eventFields);
         }
     );
