@@ -21,9 +21,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.16.0")
-    option(UAPP_ENABLE_PCH "Use precompiled headers to speed up compilation" OFF)
-endif()
 option(UAPP_ENABLE_COVERAGE "Enable coverage reporting for gcc/clang" OFF)
 option(UAPP_WARNINGS_AS_ERRORS "Treat warnings as errors" OFF)
 
@@ -155,24 +152,6 @@ target_link_libraries(
         Threads::Threads
         $<BUILD_INTERFACE:open62541pp_project_options>
 )
-
-if(UAPP_ENABLE_PCH)
-    message(STATUS "PCH enabled")
-    target_precompile_headers(
-        open62541pp
-        PUBLIC
-            <chrono>
-            <functional>
-            <iterator>
-            <memory>
-            <string>
-            <string_view>
-            <vector>
-            ${PROJECT_SOURCE_DIR}/include/open62541pp/open62541.h
-        PRIVATE
-            ${PROJECT_SOURCE_DIR}/src/open62541_impl.h
-    )
-endif()
 
 # tests
 option(UAPP_BUILD_TESTS "Build unit tests" OFF)

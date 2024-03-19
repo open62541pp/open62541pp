@@ -44,13 +44,6 @@ function(add_example source)
                 CXX_CLANG_TIDY "${CMAKE_CXX_CLANG_TIDY};-checks=${checks}"
         )
     endif()
-    if(UAPP_ENABLE_PCH)
-        target_precompile_headers(
-            ${target_name}
-            REUSE_FROM
-                open62541pp::open62541pp
-        )
-    endif()
 endfunction()
 
 add_example(client_browse.cpp)
