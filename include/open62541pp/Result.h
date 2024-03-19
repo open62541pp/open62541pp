@@ -254,7 +254,7 @@ private:
     }
 
     StatusCode code_{};
-    std::optional<T> maybeValue_{};
+    std::optional<T> maybeValue_{std::nullopt};
 };
 
 }  // namespace opcua
