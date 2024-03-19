@@ -7,8 +7,6 @@ if(NOT TARGET open62541pp)
     find_package(open62541pp REQUIRED)
 endif()
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/examples)
-
 function(add_example source)
     # extract filename
     get_filename_component(name ${source} NAME_WE)
