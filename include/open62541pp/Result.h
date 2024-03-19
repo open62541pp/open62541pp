@@ -46,6 +46,13 @@ public:
     }
 
     /**
+     * Check if the Result has a value.
+     */
+    bool hasValue() const noexcept {
+        return !code().isBad();
+    }
+
+    /**
      * Get the value of the Result.
      */
     constexpr void value() const& {
