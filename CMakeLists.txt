@@ -176,7 +176,6 @@ endif()
 
 # tests
 option(UAPP_BUILD_TESTS "Build unit tests" OFF)
-option(UAPP_BUILD_TESTS_AUTORUN "Run unit tests after build" OFF)
 if(UAPP_BUILD_TESTS)
     message(STATUS "Unit tests enabled")
     enable_testing()
