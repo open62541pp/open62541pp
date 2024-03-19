@@ -90,12 +90,11 @@ class Result {
 public:
     using ValueType = T;
 
-#ifdef _MSC_VER
-    // Workaround required for MSVC
-    // (https://developercommunity.visualstudio.com/t/c-shared-state-futuresstate-default-constructs-the/60897).
+    /**
+     * Create a default Result (good status code and default-initialized value).
+     */
     constexpr Result() noexcept
-        : code_(UA_STATUSCODE_BADINTERNALERROR) {}
-#endif
+        : maybeValue_({}) {}
 
     // NOLINTNEXTLINE, implicit wanted
     constexpr Result(const T& value) noexcept(std::is_nothrow_copy_constructible_v<T>)

@@ -45,6 +45,9 @@ TEST_CASE("Result") {
     }
 
     SUBCASE("value") {
+        Result<int> resultDefault;
+        CHECK(resultDefault.value() == 0);
+
         Result<int> result(1);
         CHECK(result.value() == 1);
         CHECK(std::as_const(result).value() == 1);
