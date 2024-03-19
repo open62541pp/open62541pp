@@ -26,7 +26,7 @@ namespace opcua::services {
 
 template <>
 uint32_t createMonitoredItemDataChange<Client>(
-    Client& client,
+    Client& connection,
     uint32_t subscriptionId,
     const ReadValueId& itemToMonitor,
     MonitoringMode monitoringMode,
@@ -35,14 +35,15 @@ uint32_t createMonitoredItemDataChange<Client>(
     DeleteMonitoredItemCallback deleteCallback
 ) {
     auto context = std::make_unique<detail::MonitoredItemContext>();
-    context->catcher = &opcua::detail::getContext(client).exceptionCatcher;
+    context->catcher = &opcua::detail::getContext(connection).exceptionCatcher;
     context->itemToMonitor = itemToMonitor;
     context->dataChangeCallback = std::move(dataChangeCallback);
     context->deleteCallback = std::move(deleteCallback);
+    auto* contextPtr = context.get();
 
     using Result = TypeWrapper<UA_MonitoredItemCreateResult, UA_TYPES_MONITOREDITEMCREATERESULT>;
     const Result result = UA_Client_MonitoredItems_createDataChange(
-        client.handle(),
+        connection.handle(),
         subscriptionId,
         static_cast<UA_TimestampsToReturn>(parameters.timestamps),
         detail::createMonitoredItemCreateRequest(itemToMonitor, monitoringMode, parameters),
@@ -54,16 +55,15 @@ uint32_t createMonitoredItemDataChange<Client>(
     detail::reviseMonitoringParameters(parameters, asNative(result));
 
     const auto monitoredItemId = result->monitoredItemId;
-    auto* contextPtr = opcua::detail::getContext(client).monitoredItems.insert(
-        {subscriptionId, monitoredItemId}, std::move(context)
-    );
+    opcua::detail::getContext(connection)
+        .monitoredItems.insert({subscriptionId, monitoredItemId}, std::move(context));
     contextPtr->inserted = true;
     return monitoredItemId;
 }
 
 template <>
 uint32_t createMonitoredItemDataChange<Server>(
-    Server& server,
+    Server& connection,
     [[maybe_unused]] uint32_t subscriptionId,
     const ReadValueId& itemToMonitor,
     MonitoringMode monitoringMode,
@@ -72,14 +72,15 @@ uint32_t createMonitoredItemDataChange<Server>(
     DeleteMonitoredItemCallback deleteCallback
 ) {
     auto context = std::make_unique<detail::MonitoredItemContext>();
-    context->catcher = &opcua::detail::getContext(server).exceptionCatcher;
+    context->catcher = &opcua::detail::getContext(connection).exceptionCatcher;
     context->itemToMonitor = itemToMonitor;
     context->dataChangeCallback = std::move(dataChangeCallback);
     context->deleteCallback = std::move(deleteCallback);
+    auto* contextPtr = context.get();
 
     using Result = TypeWrapper<UA_MonitoredItemCreateResult, UA_TYPES_MONITOREDITEMCREATERESULT>;
     const Result result = UA_Server_createDataChangeMonitoredItem(
-        server.handle(),
+        connection.handle(),
         static_cast<UA_TimestampsToReturn>(parameters.timestamps),
         detail::createMonitoredItemCreateRequest(itemToMonitor, monitoringMode, parameters),
         context.get(),
@@ -89,9 +90,8 @@ uint32_t createMonitoredItemDataChange<Server>(
     detail::reviseMonitoringParameters(parameters, asNative(result));
 
     const auto monitoredItemId = result->monitoredItemId;
-    auto* contextPtr = opcua::detail::getContext(server).monitoredItems.insert(
-        {0U, monitoredItemId}, std::move(context)
-    );
+    opcua::detail::getContext(connection)
+        .monitoredItems.insert({0U, monitoredItemId}, std::move(context));
     contextPtr->inserted = true;
     return monitoredItemId;
 }
@@ -109,7 +109,7 @@ uint32_t createMonitoredItemDataChange<Server>(
 }
 
 uint32_t createMonitoredItemEvent(
-    Client& client,
+    Client& connection,
     uint32_t subscriptionId,
     const ReadValueId& itemToMonitor,
     MonitoringMode monitoringMode,
@@ -118,14 +118,15 @@ uint32_t createMonitoredItemEvent(
     DeleteMonitoredItemCallback deleteCallback
 ) {
     auto context = std::make_unique<detail::MonitoredItemContext>();
-    context->catcher = &opcua::detail::getContext(client).exceptionCatcher;
+    context->catcher = &opcua::detail::getContext(connection).exceptionCatcher;
     context->itemToMonitor = itemToMonitor;
     context->eventCallback = std::move(eventCallback);
     context->deleteCallback = std::move(deleteCallback);
+    auto* contextPtr = context.get();
 
     using Result = TypeWrapper<UA_MonitoredItemCreateResult, UA_TYPES_MONITOREDITEMCREATERESULT>;
     const Result result = UA_Client_MonitoredItems_createEvent(
-        client.handle(),
+        connection.handle(),
         subscriptionId,
         static_cast<UA_TimestampsToReturn>(parameters.timestamps),
         detail::createMonitoredItemCreateRequest(itemToMonitor, monitoringMode, parameters),
@@ -137,15 +138,14 @@ uint32_t createMonitoredItemEvent(
     detail::reviseMonitoringParameters(parameters, asNative(result));
 
     const auto monitoredItemId = result->monitoredItemId;
-    auto* contextPtr = opcua::detail::getContext(client).monitoredItems.insert(
-        {subscriptionId, monitoredItemId}, std::move(context)
-    );
+    opcua::detail::getContext(connection)
+        .monitoredItems.insert({subscriptionId, monitoredItemId}, std::move(context));
     contextPtr->inserted = true;
     return monitoredItemId;
 }
 
 void modifyMonitoredItem(
-    Client& client,
+    Client& connection,
     uint32_t subscriptionId,
     uint32_t monitoredItemId,
     MonitoringParametersEx& parameters
@@ -154,17 +154,20 @@ void modifyMonitoredItem(
     auto request = detail::createModifyMonitoredItemsRequest(subscriptionId, parameters, item);
     using Response =
         TypeWrapper<UA_ModifyMonitoredItemsResponse, UA_TYPES_MODIFYMONITOREDITEMSRESPONSE>;
-    const Response response = UA_Client_MonitoredItems_modify(client.handle(), request);
+    const Response response = UA_Client_MonitoredItems_modify(connection.handle(), request);
     auto& result = detail::getSingleResult(asNative(response));
     throwIfBad(result.statusCode);
     detail::reviseMonitoringParameters(parameters, result);
 }
 
 void setMonitoringMode(
-    Client& client, uint32_t subscriptionId, uint32_t monitoredItemId, MonitoringMode monitoringMode
+    Client& connection,
+    uint32_t subscriptionId,
+    uint32_t monitoredItemId,
+    MonitoringMode monitoringMode
 ) {
     detail::sendRequest<UA_SetMonitoringModeRequest, UA_SetMonitoringModeResponse>(
-        client,
+        connection,
         detail::createSetMonitoringModeRequest(
             subscriptionId, {&monitoredItemId, 1}, monitoringMode
         ),
@@ -176,14 +179,14 @@ void setMonitoringMode(
 }
 
 void setTriggering(
-    Client& client,
+    Client& connection,
     uint32_t subscriptionId,
     uint32_t triggeringItemId,
     Span<const uint32_t> linksToAdd,
     Span<const uint32_t> linksToRemove
 ) {
     detail::sendRequest<UA_SetTriggeringRequest, UA_SetTriggeringResponse>(
-        client,
+        connection,
         detail::createSetTriggeringRequest(
             subscriptionId, triggeringItemId, linksToAdd, linksToRemove
         ),
@@ -198,21 +201,21 @@ void setTriggering(
 
 template <>
 void deleteMonitoredItem<Client>(
-    Client& client, uint32_t subscriptionId, uint32_t monitoredItemId
+    Client& connection, uint32_t subscriptionId, uint32_t monitoredItemId
 ) {
     const auto status = UA_Client_MonitoredItems_deleteSingle(
-        client.handle(), subscriptionId, monitoredItemId
+        connection.handle(), subscriptionId, monitoredItemId
     );
     throwIfBad(status);
 }
 
 template <>
 void deleteMonitoredItem<Server>(
-    Server& server, [[maybe_unused]] uint32_t subscriptionId, uint32_t monitoredItemId
+    Server& connection, [[maybe_unused]] uint32_t subscriptionId, uint32_t monitoredItemId
 ) {
-    const auto status = UA_Server_deleteMonitoredItem(server.handle(), monitoredItemId);
+    const auto status = UA_Server_deleteMonitoredItem(connection.handle(), monitoredItemId);
     throwIfBad(status);
-    opcua::detail::getContext(server).monitoredItems.erase({0U, monitoredItemId});
+    opcua::detail::getContext(connection).monitoredItems.erase({0U, monitoredItemId});
 }
 
 void deleteMonitoredItem(Server& connection, uint32_t monitoredItemId) {
