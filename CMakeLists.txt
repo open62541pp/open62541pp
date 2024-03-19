@@ -61,7 +61,7 @@ else()
     target_compile_options(open62541pp_project_options INTERFACE ${warnings})
 
     if(UAPP_ENABLE_COVERAGE)
-        target_compile_options(open62541pp_project_options INTERFACE --coverage -g)
+        target_compile_options(open62541pp_project_options INTERFACE --coverage -O0 -g)
         target_link_libraries(open62541pp_project_options INTERFACE --coverage)
     endif()
 endif()
@@ -181,37 +181,6 @@ if(UAPP_BUILD_TESTS)
     message(STATUS "Unit tests enabled")
     enable_testing()
     add_subdirectory(tests)
-endif()
-
-# coverage report
-if(UAPP_BUILD_TESTS AND UAPP_ENABLE_COVERAGE)
-    find_program(GCOVR_EXE NAMES gcovr)
-    if(GCOVR_EXE)
-        message(STATUS "Found gcovr: ${GCOVR_EXE}")
-        set(gcovr_args "-f" "include/" "-f" "src/" "${CMAKE_BINARY_DIR}")
-        add_custom_target(
-            open62541pp_coverage_report
-            COMMAND ${GCOVR_EXE} ${gcovr_args}
-            COMMENT "Generate coverage report"
-            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-        )
-        add_custom_target(
-            open62541pp_coverage_report_xml
-            COMMAND ${GCOVR_EXE} ${gcovr_args} "--xml" "${CMAKE_BINARY_DIR}/coverage.xml"
-            COMMENT "Generate coverage report (xml/cobertura)"
-            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-        )
-        set(coverage_html_output_dir "${CMAKE_BINARY_DIR}/coverage_html")
-        file(MAKE_DIRECTORY ${coverage_html_output_dir})
-        add_custom_target(
-            open62541pp_coverage_report_html
-            COMMAND ${GCOVR_EXE} ${gcovr_args} "--html-details" "${coverage_html_output_dir}/index.html"
-            COMMENT "Generate coverage report (html)"
-            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-        )
-    else()
-        message(WARNING "gcovr requested but executable not found")
-    endif()
 endif()
 
 # examples

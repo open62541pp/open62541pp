@@ -116,10 +116,6 @@ jobs:
         if: matrix.config.os == 'ubuntu-22.04'
         run: sudo sysctl vm.mmap_rnd_bits=28
 
-      - name: Install gcovr
-        if: matrix.config.coverage && matrix.build_type == 'Debug'
-        run: pipx install gcovr==7.2
-
       - name: Configure CMake
         run: >
           cmake -S . -B ./build
@@ -131,7 +127,7 @@ jobs:
           -DUA_ENABLE_SUBSCRIPTIONS_EVENTS=ON
           -DUAPP_BUILD_TESTS=ON
           -DUAPP_BUILD_EXAMPLES=ON
-          -DUAPP_ENABLE_COVERAGE=${{ matrix.config.coverage }}
+          -DUAPP_ENABLE_COVERAGE=${{ matrix.config.coverage && matrix.build_type == 'Debug' }}
           -DUAPP_WARNINGS_AS_ERRORS=ON
           ${{ matrix.config.flags }}
 
@@ -146,8 +142,8 @@ jobs:
         env:
           GCOV: ${{ matrix.config.gcov }}
         run: |
-          cmake --build ./build --target open62541pp_coverage_report
-          cmake --build ./build --target open62541pp_coverage_report_xml
+          pipx install gcovr==7.2
+          gcovr ./build/ -f "include/" -f "src/" --txt --xml ./build/coverage.xml
 
       - name: Upload coverage reports to Codecov
         if: matrix.config.coverage && matrix.build_type == 'Debug'
