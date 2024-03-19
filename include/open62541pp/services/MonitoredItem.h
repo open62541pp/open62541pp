@@ -112,8 +112,9 @@ using EventNotificationCallback =
  * Create a monitored item with @ref createMonitoredItemEvent instead.
  * @copydetails MonitoringParametersEx
  *
- * @param client Instance of type Client
- * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
+ * @param connection Instance of type Server or Client
+ * @param subscriptionId Identifier of the subscription returned by @ref createSubscription.
+ *                       Use `0U` for a local server-side monitored item.
  * @param itemToMonitor Item to monitor
  * @param monitoringMode Monitoring mode
  * @param parameters Monitoring parameters, may be revised by server
@@ -121,8 +122,9 @@ using EventNotificationCallback =
  * @param deleteCallback Invoked when the monitored item is deleted
  * @returns Server-assigned identifier of the monitored item
  */
+template <typename T>
 [[nodiscard]] uint32_t createMonitoredItemDataChange(
-    Client& client,
+    T& connection,
     uint32_t subscriptionId,
     const ReadValueId& itemToMonitor,
     MonitoringMode monitoringMode,
@@ -136,7 +138,7 @@ using EventNotificationCallback =
  * Don't use this function to monitor the `EventNotifier` attribute.
  * @copydetails MonitoringParametersEx
  *
- * @param server Instance of type Server
+ * @param connection Instance of type Server
  * @param itemToMonitor Item to monitor
  * @param monitoringMode Monitoring mode
  * @param parameters Monitoring parameters, may be revised by server
@@ -144,7 +146,7 @@ using EventNotificationCallback =
  * @returns Server-assigned identifier of the monitored item
  */
 [[nodiscard]] uint32_t createMonitoredItemDataChange(
-    Server& server,
+    Server& connection,
     const ReadValueId& itemToMonitor,
     MonitoringMode monitoringMode,
     MonitoringParametersEx& parameters,
@@ -156,7 +158,7 @@ using EventNotificationCallback =
  * The `attributeId` of ReadValueId must be set to AttributeId::EventNotifier.
  * @copydetails MonitoringParametersEx
  *
- * @param client Instance of type Client
+ * @param connection Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @param itemToMonitor Item to monitor
  * @param monitoringMode Monitoring mode
@@ -166,7 +168,7 @@ using EventNotificationCallback =
  * @returns Server-assigned identifier of the monitored item
  */
 [[nodiscard]] uint32_t createMonitoredItemEvent(
-    Client& client,
+    Client& connection,
     uint32_t subscriptionId,
     const ReadValueId& itemToMonitor,
     MonitoringMode monitoringMode,
@@ -187,13 +189,13 @@ using EventNotificationCallback =
  * Modify a monitored item of a subscription.
  * @copydetails MonitoringParametersEx
  *
- * @param client Instance of type Client
+ * @param connection Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @param monitoredItemId Identifier of the monitored item
  * @param parameters Monitoring parameters, may be revised by server
  */
 void modifyMonitoredItem(
-    Client& client,
+    Client& connection,
     uint32_t subscriptionId,
     uint32_t monitoredItemId,
     MonitoringParametersEx& parameters
@@ -210,13 +212,13 @@ void modifyMonitoredItem(
 /**
  * Set the monitoring mode of a monitored item.
  *
- * @param client Instance of type Client
+ * @param connection Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @param monitoredItemId Identifier of the monitored item
  * @param monitoringMode Monitoring mode
  */
 void setMonitoringMode(
-    Client& client, uint32_t subscriptionId, uint32_t monitoredItemId, MonitoringMode monitoringMode
+    Client& connection, uint32_t subscriptionId, uint32_t monitoredItemId, MonitoringMode monitoringMode
 );
 
 /**
@@ -233,14 +235,14 @@ void setMonitoringMode(
  * The triggering item and the items to report shall belong to the same subscription.
  * @note Supported since open62541 v1.2
  *
- * @param client Instance of type Client
+ * @param connection Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @param triggeringItemId Identifier of the triggering monitored item
  * @param linksToAdd List of monitoring item identifiers to be added as triggering links
  * @param linksToRemove List of monitoring item identifiers to be removed as triggering links
  */
 void setTriggering(
-    Client& client,
+    Client& connection,
     uint32_t subscriptionId,
     uint32_t triggeringItemId,
     Span<const uint32_t> linksToAdd,
@@ -258,11 +260,13 @@ void setTriggering(
 /**
  * Delete a monitored item from a subscription.
  *
- * @param client Instance of type Client
- * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
+ * @param connection Instance of type Server or Client
+ * @param subscriptionId Identifier of the subscription returned by @ref createSubscription.
+ *                       Use `0U` for a local server-side monitored item.
  * @param monitoredItemId Identifier of the monitored item
  */
-void deleteMonitoredItem(Client& client, uint32_t subscriptionId, uint32_t monitoredItemId);
+template <typename T>
+void deleteMonitoredItem(T& connection, uint32_t subscriptionId, uint32_t monitoredItemId);
 
 /**
  * Delete a local monitored item.
@@ -270,7 +274,7 @@ void deleteMonitoredItem(Client& client, uint32_t subscriptionId, uint32_t monit
  * @param server Instance of type Server
  * @param monitoredItemId Identifier of the monitored item
  */
-void deleteMonitoredItem(Server& server, uint32_t monitoredItemId);
+void deleteMonitoredItem(Server& connection, uint32_t monitoredItemId);
 
 /**
  * @}

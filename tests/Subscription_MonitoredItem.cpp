@@ -20,34 +20,41 @@ using namespace std::literals::chrono_literals;
 TEST_CASE("Subscription & MonitoredItem (server)") {
     Server server;
 
-    auto sub = server.createSubscription();
+    SUBCASE("Create MonitoredItem with arbitrary ids") {
+        CHECK(MonitoredItem(server, 11U, 22U).getSubscriptionId() == 0U);
+        CHECK(MonitoredItem(server, 11U, 22U).getMonitoredItemId() == 22U);
+    }
 
-    CHECK(sub.getConnection() == server);
-    CHECK(sub.getMonitoredItems().empty());
+    SUBCASE("Create & delete subscription") {
+        auto sub = server.createSubscription();
 
-    MonitoringParametersEx monitoringParameters{};
-    monitoringParameters.samplingInterval = 0.0;  // = fastest practical
+        CHECK(sub.getConnection() == server);
+        CHECK(sub.getMonitoredItems().empty());
 
-    size_t notificationCount = 0;
-    auto mon = sub.subscribeDataChange(
-        VariableId::Server_ServerStatus_CurrentTime,
-        AttributeId::Value,
-        MonitoringMode::Reporting,
-        monitoringParameters,
-        [&](const auto& item, const DataValue&) {
-            CHECK(item.getNodeId() == NodeId(VariableId::Server_ServerStatus_CurrentTime));
-            CHECK(item.getAttributeId() == AttributeId::Value);
-            notificationCount++;
-        }
-    );
-    CHECK(sub.getMonitoredItems().size() == 1);
+        MonitoringParametersEx monitoringParameters{};
+        monitoringParameters.samplingInterval = 0.0;  // = fastest practical
 
-    std::this_thread::sleep_for(200ms);
-    server.runIterate();
-    CHECK(notificationCount > 0);
+        size_t notificationCount = 0;
+        auto mon = sub.subscribeDataChange(
+            VariableId::Server_ServerStatus_CurrentTime,
+            AttributeId::Value,
+            MonitoringMode::Reporting,
+            monitoringParameters,
+            [&](const auto& item, const DataValue&) {
+                CHECK(item.getNodeId() == NodeId(VariableId::Server_ServerStatus_CurrentTime));
+                CHECK(item.getAttributeId() == AttributeId::Value);
+                notificationCount++;
+            }
+        );
+        CHECK(sub.getMonitoredItems().size() == 1);
 
-    mon.deleteMonitoredItem();
-    CHECK(sub.getMonitoredItems().empty());
+        std::this_thread::sleep_for(200ms);
+        server.runIterate();
+        CHECK(notificationCount > 0);
+
+        mon.deleteMonitoredItem();
+        CHECK(sub.getMonitoredItems().empty());
+    }
 }
 
 TEST_CASE("Subscription & MonitoredItem (client)") {
