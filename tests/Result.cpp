@@ -86,22 +86,6 @@ TEST_CASE("Result (void template specialization)") {
         CHECK(Result<void>().code() == UA_STATUSCODE_GOOD);
         CHECK(Result<void>(badResult).code() == badCode);
     }
-
-    SUBCASE("hasValue") {
-        Result<void> result{};
-        CHECK(result.hasValue());
-
-        Result<void> resultError(badResult);
-        CHECK_FALSE(resultError.hasValue());
-    }
-
-    SUBCASE("value") {
-        Result<void> result{};
-        CHECK_NOTHROW(result.value());
-
-        Result<void> resultError(badResult);
-        CHECK_THROWS_AS(resultError.value(), BadStatus);
-    }
 }
 
 TEST_CASE("tryInvoke") {

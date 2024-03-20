@@ -8,74 +8,22 @@
 
 namespace opcua {
 
-template <typename T>
-class Result;
-
 /**
- * Result<void> type.
- * A result with void specialization contains only a status code.
+ * Represents a bad result stored in `Result`.
  */
-template <>
-class Result<void> {
+class BadResult {
 public:
-    /**
-     * Create a default Result (good status code).
-     */
-    constexpr Result() noexcept = default;
-
-    /**
-     * Create a Result with the given code.
-     */
-    constexpr Result(StatusCode code) noexcept  // NOLINT, implicit wanted
-        : code_(code) {}
-
-    /**
-     * Convert the Result to a StatusCode.
-     */
-    operator StatusCode() const noexcept {  // NOLINT, implicit wanted
-        return code_;
+    constexpr explicit BadResult(StatusCode code) noexcept
+        : code_(code) {
+        assert(code.isBad());
     }
 
-    constexpr void operator*() const noexcept {}
-
-    /**
-     * Get the code of the Result.
-     */
     constexpr StatusCode code() const noexcept {
         return code_;
     }
 
-    /**
-     * Check if the Result has a value.
-     */
-    bool hasValue() const noexcept {
-        return !code().isBad();
-    }
-
-    /**
-     * Get the value of the Result.
-     */
-    constexpr void value() const {
-        checkIsBad();
-    }
-
 private:
-    constexpr void checkIsBad() const {
-        code().throwIfBad();
-    }
-
-    StatusCode code_{};
-};
-
-/**
- * Represents a bad result stored in `Result`.
- */
-class BadResult : public Result<void> {
-public:
-    constexpr explicit BadResult(StatusCode code) noexcept
-        : Result(code) {
-        assert(code.isBad());
-    }
+    StatusCode code_;
 };
 
 /**
@@ -104,8 +52,10 @@ public:
     constexpr Result(T&& value) noexcept(std::is_nothrow_move_constructible_v<T>)
         : maybeValue_(std::move(value)) {}
 
-    // NOLINTNEXTLINE, implicit wanted
-    constexpr Result(BadResult error) noexcept
+    /**
+     * Create a Result with the given error.
+     */
+    constexpr Result(BadResult error) noexcept  // NOLINT, implicit wanted
         : code_(error.code()) {}
 
     constexpr Result(
@@ -255,6 +205,50 @@ private:
 
     StatusCode code_{};
     std::optional<T> maybeValue_{std::nullopt};
+};
+
+/**
+ * Result<void> type.
+ * A result with void specialization contains only a status code.
+ */
+template <>
+class Result<void> {
+public:
+    /**
+     * Create a default Result (good status code).
+     */
+    constexpr Result() noexcept = default;
+
+    /**
+     * Create a Result with the given code.
+     */
+    constexpr Result(StatusCode code) noexcept  // NOLINT, implicit wanted
+        : code_(code) {}
+
+    /**
+     * Create a Result with the given error.
+     */
+    constexpr Result(BadResult error) noexcept  // NOLINT, implicit wanted
+        : code_(error.code()) {}
+
+    /**
+     * Convert the Result to a StatusCode.
+     */
+    operator StatusCode() const noexcept {  // NOLINT, implicit wanted
+        return code_;
+    }
+
+    constexpr void operator*() const noexcept {}
+
+    /**
+     * Get the code of the Result.
+     */
+    constexpr StatusCode code() const noexcept {
+        return code_;
+    }
+
+private:
+    StatusCode code_{};
 };
 
 }  // namespace opcua

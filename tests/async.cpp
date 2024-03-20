@@ -45,7 +45,7 @@ TEST_CASE("Async (future completion token)") {
     SUBCASE("Void") {
         Result<void> result{};
         auto future = asyncTest(result, useFuture);
-        CHECK_NOTHROW(future.get().value());
+        CHECK(future.get().code().isGood());
     }
 
     SUBCASE("Result") {

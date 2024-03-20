@@ -188,7 +188,7 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
                     serverOrClient, {1, 1000}, {1, 1001}, ReferenceTypeId::Organizes
                 );
                 setup.client.runIterate();
-                future.get().value();
+                future.get().code().throwIfBad();
             } else {
                 services::addReference(
                     serverOrClient, {1, 1000}, {1, 1001}, ReferenceTypeId::Organizes
@@ -204,7 +204,7 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
                     serverOrClient, {1, 1000}, {1, 1001}, ReferenceTypeId::Organizes, true, true
                 );
                 setup.client.runIterate();
-                future.get().value();
+                future.get().code().throwIfBad();
             } else {
                 services::deleteReference(
                     serverOrClient, {1, 1000}, {1, 1001}, ReferenceTypeId::Organizes, true, true
@@ -222,7 +222,7 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
             if constexpr (isAsync<T>) {
                 auto future = services::deleteNodeAsync(serverOrClient, {1, 1000});
                 setup.client.runIterate();
-                future.get().value();
+                future.get().code().throwIfBad();
             } else {
                 services::deleteNode(serverOrClient, {1, 1000});
             }
@@ -485,7 +485,7 @@ TEST_CASE_TEMPLATE("Attribute service set write/read", T, Server, Client, Async<
             serverOrClient, id, AttributeId::Value, DataValue::fromScalar(value)
         );
         client.runIterate();
-        future.get().value();
+        future.get().code().throwIfBad();
     } else {
         services::writeAttribute(
             serverOrClient, id, AttributeId::Value, DataValue::fromScalar(value)
@@ -1044,11 +1044,7 @@ TEST_CASE("MonitoredItem service set (server)") {
         CHECK_THROWS_WITH(services::deleteMonitoredItem(server, 11U), "BadMonitoredItemIdInvalid");
 
         const auto monId = services::createMonitoredItemDataChange(
-            server,
-            {id, AttributeId::Value},
-            MonitoringMode::Reporting,
-            monitoringParameters,
-            {}
+            server, {id, AttributeId::Value}, MonitoringMode::Reporting, monitoringParameters, {}
         );
         CAPTURE(monId);
         CHECK_NOTHROW(services::deleteMonitoredItem(server, monId));
