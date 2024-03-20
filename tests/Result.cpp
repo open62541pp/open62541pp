@@ -101,11 +101,6 @@ TEST_CASE("Result (void template specialization)") {
 
         Result<void> resultError(badResult);
         CHECK_THROWS_AS(resultError.value(), BadStatus);
-
-        SUBCASE("rvalue") {
-            CHECK_NOTHROW(Result<void>().value());
-            CHECK_THROWS_AS(Result<void>(badResult).value(), BadStatus);
-        }
     }
 }
 
@@ -119,6 +114,11 @@ TEST_CASE("tryInvoke") {
     SUBCASE("Result<void>") {
         auto result = detail::tryInvoke([] { return; });
         CHECK(result.code() == UA_STATUSCODE_GOOD);
+    }
+
+    SUBCASE("Result<void> - implicit conversion to StatusCode") {
+        StatusCode code = detail::tryInvoke([] { return; });
+        CHECK(code == UA_STATUSCODE_GOOD);
     }
 
     SUBCASE("BadStatus exception") {

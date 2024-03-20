@@ -8,6 +8,7 @@
 
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
+#include "open62541pp/Result.h"
 #include "open62541pp/TypeRegistry.h"
 #include "open62541pp/async.h"
 #include "open62541pp/detail/ClientContext.h"

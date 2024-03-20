@@ -55,14 +55,7 @@ public:
     /**
      * Get the value of the Result.
      */
-    constexpr void value() const& {
-        checkIsBad();
-    }
-
-    /**
-     * Get the value of the Result.
-     */
-    constexpr void value() && {
+    constexpr void value() const {
         checkIsBad();
     }
 
