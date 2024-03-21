@@ -25,7 +25,8 @@ int main() {
         auto mon = sub.subscribeDataChange(
             opcua::VariableId::Server_ServerStatus_CurrentTime,  // monitored node id
             opcua::AttributeId::Value,  // monitored attribute
-            [&](const auto& item, const opcua::DataValue& value) {
+            [&](uint32_t subId, uint32_t monId, const opcua::DataValue& value) {
+                const opcua::MonitoredItem item(client, subId, monId);
                 std::cout
                     << "Data change notification:\n"
                     << "- subscription id:   " << item.getSubscriptionId() << "\n"
