@@ -161,7 +161,7 @@ public:
         const NodeId& id,
         MonitoringMode monitoringMode,
         MonitoringParametersEx& parameters,
-        EventNotificationCallback onEvent
+        EventNotificationCallback onEvent  // NOLINT(*-unnecessary-value-param), false positive?
     ) {
         const uint32_t monitoredItemId = services::createMonitoredItemEvent(
             connection_,
