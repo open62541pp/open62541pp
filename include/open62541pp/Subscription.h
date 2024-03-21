@@ -6,6 +6,7 @@
 #include <utility>  // move
 #include <vector>
 
+#include "open62541pp/Common.h"  // AttributeId, MonitoringMode
 #include "open62541pp/Config.h"
 #include "open62541pp/MonitoredItem.h"
 #include "open62541pp/Span.h"
@@ -19,7 +20,6 @@
 namespace opcua {
 
 // forward declarations
-class Client;
 class DataValue;
 class EventFilter;
 class Server;
