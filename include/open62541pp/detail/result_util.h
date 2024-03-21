@@ -19,7 +19,7 @@ struct ResultType<StatusCode> {
 };
 
 template <>
-struct ResultType<UA_StatusCode> {
+struct ResultType<BadResult> {
     using Type = opcua::Result<void>;
 };
 

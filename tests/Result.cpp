@@ -89,20 +89,25 @@ TEST_CASE("Result (void template specialization)") {
 }
 
 TEST_CASE("tryInvoke") {
-    SUBCASE("Result<int>") {
+    SUBCASE("int return") {
         auto result = detail::tryInvoke([] { return 1; });
         CHECK(result.code() == UA_STATUSCODE_GOOD);
         CHECK(result.value() == 1);
     }
 
-    SUBCASE("Result<void>") {
+    SUBCASE("void return") {
         auto result = detail::tryInvoke([] { return; });
         CHECK(result.code() == UA_STATUSCODE_GOOD);
     }
 
-    SUBCASE("Result<void> - implicit conversion to StatusCode") {
-        StatusCode code = detail::tryInvoke([] { return; });
-        CHECK(code == UA_STATUSCODE_GOOD);
+    SUBCASE("StatusCode return") {
+        auto result = detail::tryInvoke([] { return badCode; });
+        CHECK(result.code() == badCode);
+    }
+
+    SUBCASE("BadResult return") {
+        auto result = detail::tryInvoke([] { return badResult; });
+        CHECK(result.code() == badCode);
     }
 
     SUBCASE("BadStatus exception") {
