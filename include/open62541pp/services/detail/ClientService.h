@@ -8,13 +8,14 @@
 
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
+#include "open62541pp/Result.h"
 #include "open62541pp/TypeRegistry.h"
 #include "open62541pp/async.h"
 #include "open62541pp/detail/ClientContext.h"
 #include "open62541pp/detail/ExceptionCatcher.h"
-#include "open62541pp/detail/Result.h"
 #include "open62541pp/detail/ScopeExit.h"
 #include "open62541pp/detail/open62541/client.h"
+#include "open62541pp/detail/result_util.h"
 
 namespace opcua::services::detail {
 
@@ -47,19 +48,15 @@ struct AsyncServiceAdapter {
             auto& catcher = std::get<ExceptionCatcher&>(*context);
             auto& handler = std::get<CompletionHandler>(*context);
 
-            auto result = [&]() -> opcua::detail::Result<TransformResult> {
+            auto result = [&]() -> opcua::Result<TransformResult> {
                 if (responsePtr == nullptr) {
-                    return opcua::detail::BadResult(UA_STATUSCODE_BADUNEXPECTEDERROR);
+                    return opcua::BadResult(UA_STATUSCODE_BADUNEXPECTEDERROR);
                 }
                 Response& response = *static_cast<Response*>(responsePtr);
                 return opcua::detail::tryInvoke(std::get<TransformResponse>(*context), response);
             }();
 
-            if constexpr (std::is_void_v<TransformResult>) {
-                catcher.invoke(handler, result.code());
-            } else {
-                catcher.invoke(handler, result.code(), *result);
-            }
+            catcher.invoke(handler, result);
         };
 
         return CallbackAndContext<Context>{

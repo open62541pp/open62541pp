@@ -33,7 +33,7 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
         if constexpr (isAsync<T>) {
             auto future = services::addObjectAsync(serverOrClient, objectsId, newId, "object");
             setup.client.runIterate();
-            id = future.get();
+            id = future.get().value();
         } else {
             id = services::addObject(serverOrClient, objectsId, newId, "object");
         }
@@ -46,7 +46,7 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
         if constexpr (isAsync<T>) {
             auto future = services::addFolderAsync(serverOrClient, objectsId, newId, "folder");
             setup.client.runIterate();
-            id = future.get();
+            id = future.get().value();
         } else {
             id = services::addFolder(serverOrClient, objectsId, newId, "folder");
         }
@@ -59,7 +59,7 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
         if constexpr (isAsync<T>) {
             auto future = services::addVariableAsync(serverOrClient, objectsId, newId, "variable");
             setup.client.runIterate();
-            id = future.get();
+            id = future.get().value();
         } else {
             id = services::addVariable(serverOrClient, objectsId, newId, "variable");
         }
@@ -72,7 +72,7 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
         if constexpr (isAsync<T>) {
             auto future = services::addPropertyAsync(serverOrClient, objectsId, newId, "property");
             setup.client.runIterate();
-            id = future.get();
+            id = future.get().value();
         } else {
             id = services::addProperty(serverOrClient, objectsId, newId, "property");
         }
@@ -88,7 +88,7 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
                 serverOrClient, objectsId, newId, "method", {}, {}, {}
             );
             setup.client.runIterate();
-            id = future.get();
+            id = future.get().value();
         } else {
             id = services::addMethod(serverOrClient, objectsId, newId, "method", {}, {}, {});
         }
@@ -104,7 +104,7 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
                 serverOrClient, {0, UA_NS0ID_BASEOBJECTTYPE}, newId, "objecttype"
             );
             setup.client.runIterate();
-            id = future.get();
+            id = future.get().value();
         } else {
             id = services::addObjectType(
                 serverOrClient, {0, UA_NS0ID_BASEOBJECTTYPE}, newId, "objecttype"
@@ -121,7 +121,7 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
                 serverOrClient, {0, UA_NS0ID_BASEVARIABLETYPE}, newId, "variabletype"
             );
             setup.client.runIterate();
-            id = future.get();
+            id = future.get().value();
         } else {
             id = services::addVariableType(
                 serverOrClient, {0, UA_NS0ID_BASEVARIABLETYPE}, newId, "variabletype"
@@ -138,7 +138,7 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
                 serverOrClient, {0, UA_NS0ID_ORGANIZES}, newId, "referencetype"
             );
             setup.client.runIterate();
-            id = future.get();
+            id = future.get().value();
         } else {
             id = services::addReferenceType(
                 serverOrClient, {0, UA_NS0ID_ORGANIZES}, newId, "referencetype"
@@ -155,7 +155,7 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
                 serverOrClient, {0, UA_NS0ID_STRUCTURE}, newId, "datatype"
             );
             setup.client.runIterate();
-            id = future.get();
+            id = future.get().value();
         } else {
             id = services::addDataType(serverOrClient, {0, UA_NS0ID_STRUCTURE}, newId, "datatype");
         }
@@ -170,7 +170,7 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
                 serverOrClient, {0, UA_NS0ID_VIEWSFOLDER}, newId, "view"
             );
             setup.client.runIterate();
-            id = future.get();
+            id = future.get().value();
         } else {
             id = services::addView(serverOrClient, {0, UA_NS0ID_VIEWSFOLDER}, newId, "view");
         }
@@ -188,7 +188,7 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
                     serverOrClient, {1, 1000}, {1, 1001}, ReferenceTypeId::Organizes
                 );
                 setup.client.runIterate();
-                future.get();
+                future.get().code().throwIfBad();
             } else {
                 services::addReference(
                     serverOrClient, {1, 1000}, {1, 1001}, ReferenceTypeId::Organizes
@@ -204,7 +204,7 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
                     serverOrClient, {1, 1000}, {1, 1001}, ReferenceTypeId::Organizes, true, true
                 );
                 setup.client.runIterate();
-                future.get();
+                future.get().code().throwIfBad();
             } else {
                 services::deleteReference(
                     serverOrClient, {1, 1000}, {1, 1001}, ReferenceTypeId::Organizes, true, true
@@ -222,7 +222,7 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
             if constexpr (isAsync<T>) {
                 auto future = services::deleteNodeAsync(serverOrClient, {1, 1000});
                 setup.client.runIterate();
-                future.get();
+                future.get().code().throwIfBad();
             } else {
                 services::deleteNode(serverOrClient, {1, 1000});
             }
@@ -485,7 +485,7 @@ TEST_CASE_TEMPLATE("Attribute service set write/read", T, Server, Client, Async<
             serverOrClient, id, AttributeId::Value, DataValue::fromScalar(value)
         );
         client.runIterate();
-        future.get();
+        future.get().code().throwIfBad();
     } else {
         services::writeAttribute(
             serverOrClient, id, AttributeId::Value, DataValue::fromScalar(value)
@@ -496,7 +496,7 @@ TEST_CASE_TEMPLATE("Attribute service set write/read", T, Server, Client, Async<
     if constexpr (isAsync<T>) {
         auto future = services::readAttributeAsync(serverOrClient, id, AttributeId::Value);
         client.runIterate();
-        result = future.get();
+        result = future.get().value();
     } else {
         result = services::readAttribute(serverOrClient, id, AttributeId::Value);
     }
@@ -522,7 +522,7 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
         if constexpr (isAsync<T>) {
             auto future = services::browseAsync(serverOrClient, bd);
             client.runIterate();
-            result = future.get();
+            result = future.get().value();
         } else {
             result = services::browse(serverOrClient, bd);
         }
@@ -561,7 +561,7 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
                     serverOrClient, releaseContinuationPoint, result.getContinuationPoint()
                 );
                 client.runIterate();
-                result = future.get();
+                result = future.get().value();
             } else {
                 result = services::browseNext(
                     serverOrClient, releaseContinuationPoint, result.getContinuationPoint()
@@ -619,7 +619,7 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
                 serverOrClient, {0, UA_NS0ID_ROOTFOLDER}, {{0, "Objects"}, {1, "Variable"}}
             );
             client.runIterate();
-            result = future.get();
+            result = future.get().value();
         } else {
             result = services::browseSimplifiedBrowsePath(
                 serverOrClient, {0, UA_NS0ID_ROOTFOLDER}, {{0, "Objects"}, {1, "Variable"}}
@@ -640,7 +640,7 @@ TEST_CASE_TEMPLATE("View service set", T, Server, Client, Async<Client>) {
         if constexpr (isAsync<T>) {
             auto future = services::registerNodesAsync(client, requestRegister);
             client.runIterate();
-            response = future.get();
+            response = future.get().value();
         } else {
             response = services::registerNodes(client, requestRegister);
         }
@@ -694,7 +694,7 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
         if constexpr (isAsync<T>) {
             auto future = services::callAsync(std::forward<decltype(args)>(args)...);
             setup.client.runIterate();
-            return future.get();
+            return future.get().value();
         } else {
             return services::call(std::forward<decltype(args)>(args)...);
         }
@@ -1044,11 +1044,7 @@ TEST_CASE("MonitoredItem service set (server)") {
         CHECK_THROWS_WITH(services::deleteMonitoredItem(server, 11U), "BadMonitoredItemIdInvalid");
 
         const auto monId = services::createMonitoredItemDataChange(
-            server,
-            {id, AttributeId::Value},
-            MonitoringMode::Reporting,
-            monitoringParameters,
-            {}
+            server, {id, AttributeId::Value}, MonitoringMode::Reporting, monitoringParameters, {}
         );
         CAPTURE(monId);
         CHECK_NOTHROW(services::deleteMonitoredItem(server, monId));
