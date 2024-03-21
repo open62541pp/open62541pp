@@ -40,11 +40,7 @@ TEST_CASE("Subscription & MonitoredItem (server)") {
             AttributeId::Value,
             MonitoringMode::Reporting,
             monitoringParameters,
-            [&](const auto& item, const DataValue&) {
-                CHECK(item.getNodeId() == NodeId(VariableId::Server_ServerStatus_CurrentTime));
-                CHECK(item.getAttributeId() == AttributeId::Value);
-                notificationCount++;
-            }
+            [&](uint32_t, uint32_t, const DataValue&) { notificationCount++; }
         );
         CHECK(sub.getMonitoredItems().size() == 1);
 
@@ -105,11 +101,7 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
             AttributeId::Value,
             MonitoringMode::Sampling,  // won't trigger notifications
             monitoringParameters,
-            [&](const auto& item, const DataValue&) {
-                CHECK(item.getNodeId() == NodeId(VariableId::Server_ServerStatus_CurrentTime));
-                CHECK(item.getAttributeId() == AttributeId::Value);
-                notificationCount++;
-            }
+            [&](uint32_t, uint32_t, const DataValue&) { notificationCount++; }
         );
 
         CHECK(sub.getMonitoredItems().size() == 1);
@@ -137,22 +129,14 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
         auto monItem1 = sub.subscribeDataChange(
             VariableId::Server_ServerStatus_CurrentTime,
             AttributeId::Value,
-            [&](const auto& item, const DataValue&) {
-                CHECK(item.getNodeId() == NodeId(VariableId::Server_ServerStatus_CurrentTime));
-                CHECK(item.getAttributeId() == AttributeId::Value);
-                monId1 = item.getMonitoredItemId();
-            }
+            [&](uint32_t, uint32_t monId, const DataValue&) { monId1 = monId; }
         );
 
         uint32_t monId2 = 0;
         auto monItem2 = sub.subscribeDataChange(
             VariableId::Server_ServerStatus_CurrentTime,
             AttributeId::Value,
-            [&](const auto& item, const DataValue&) {
-                CHECK(item.getNodeId() == NodeId(VariableId::Server_ServerStatus_CurrentTime));
-                CHECK(item.getAttributeId() == AttributeId::Value);
-                monId2 = item.getMonitoredItemId();
-            }
+            [&](uint32_t, uint32_t monId, const DataValue&) { monId2 = monId; }
         );
 
         client.runIterate();
@@ -166,7 +150,9 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
     SUBCASE("Modify monitored item") {
         auto sub = client.createSubscription();
         auto mon = sub.subscribeDataChange(
-            VariableId::Server_ServerStatus_CurrentTime, AttributeId::Value, {}
+            VariableId::Server_ServerStatus_CurrentTime,
+            AttributeId::Value,
+            DataChangeNotificationCallback{}
         );
 
         mon.setMonitoringMode(MonitoringMode::Disabled);
@@ -192,9 +178,9 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
         auto mon = sub.subscribeEvent(
             ObjectId::Server,
             eventFilter,
-            [](const auto& item, const auto& eventFields) {
-                CAPTURE(item.getSubscriptionId());
-                CAPTURE(item.getMonitoredItemId());
+            [](uint32_t subId, uint32_t monId, const auto& eventFields) {
+                CAPTURE(subId);
+                CAPTURE(monId);
                 CAPTURE(eventFields.size());
             }
         );
