@@ -3,17 +3,17 @@
 #include <cstdint>
 #include <type_traits>
 
+#include "open62541pp/Common.h"  // AttributeId
 #include "open62541pp/Config.h"
 #include "open62541pp/services/MonitoredItem.h"
+#include "open62541pp/types/NodeId.h"
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 
 namespace opcua {
 
 // forward declarations
-class Client;
 class Server;
-class NodeId;
 template <typename Connection>
 class Subscription;
 
@@ -73,12 +73,16 @@ public:
     /// Modify this monitored item.
     /// @note Not implemented for Server.
     /// @see services::modifyMonitoredItem
-    void setMonitoringParameters(MonitoringParametersEx& parameters);
+    void setMonitoringParameters(MonitoringParametersEx& parameters) {
+        services::modifyMonitoredItem(connection_, subscriptionId_, monitoredItemId_, parameters);
+    }
 
     /// Set the monitoring mode of this monitored item.
     /// @note Not implemented for Server.
     /// @see services::setMonitoringMode
-    void setMonitoringMode(MonitoringMode monitoringMode);
+    void setMonitoringMode(MonitoringMode monitoringMode) {
+        services::setMonitoringMode(connection_, subscriptionId_, monitoredItemId_, monitoringMode);
+    }
 
     /// Delete this monitored item.
     /// @see services::deleteMonitoredItem

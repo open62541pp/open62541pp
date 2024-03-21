@@ -2,15 +2,12 @@
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 
-#include <cassert>
-
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
-#include "open62541pp/Subscription.h"
 #include "open62541pp/detail/ClientContext.h"
 #include "open62541pp/detail/ServerContext.h"
-#include "open62541pp/detail/open62541/common.h"
+#include "open62541pp/detail/open62541/common.h"  // UA_STATUSCODE_BADMONITOREDITEMIDINVALID
 
 namespace opcua {
 
@@ -38,23 +35,11 @@ AttributeId MonitoredItem<T>::getAttributeId() const {
         .itemToMonitor.getAttributeId();
 }
 
-/* ----------------------------------- Client specializations ----------------------------------- */
-
-template <>
-void MonitoredItem<Client>::setMonitoringParameters(MonitoringParametersEx& parameters) {
-    services::modifyMonitoredItem(connection_, subscriptionId_, monitoredItemId_, parameters);
-}
-
-template <>
-void MonitoredItem<Client>::setMonitoringMode(MonitoringMode monitoringMode) {
-    services::setMonitoringMode(connection_, subscriptionId_, monitoredItemId_, monitoringMode);
-}
-
-/* ---------------------------------------------------------------------------------------------- */
-
-// explicit template instantiation
-template class MonitoredItem<Server>;
-template class MonitoredItem<Client>;
+// explicit template instantiations
+template const NodeId& MonitoredItem<Client>::getNodeId() const;
+template const NodeId& MonitoredItem<Server>::getNodeId() const;
+template AttributeId MonitoredItem<Client>::getAttributeId() const;
+template AttributeId MonitoredItem<Server>::getAttributeId() const;
 
 }  // namespace opcua
 
