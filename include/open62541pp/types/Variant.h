@@ -17,6 +17,7 @@
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/detail/traits.h"
+#include "open62541pp/types/NodeId.h"
 
 namespace opcua {
 
@@ -34,8 +35,6 @@ enum class VariantPolicy {
 };
 
 // forward declarations
-class NodeId;
-
 namespace detail {
 template <VariantPolicy>
 struct VariantHandler;
