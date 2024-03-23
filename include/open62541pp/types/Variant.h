@@ -371,7 +371,8 @@ private:
 
     template <typename T>
     void checkIsDataType() const {
-        if (getDataType() != &opcua::getDataType<T>()) {
+        const auto* dt = getDataType();
+        if (dt == nullptr || dt->typeId != opcua::getDataType<T>().typeId) {
             throw BadVariantAccess("Variant does not contain a value convertible to template type");
         }
     }

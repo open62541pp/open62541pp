@@ -94,19 +94,13 @@ public:
     /// ExtensionObject is either encoded or the decoded data not of type `T`.
     template <typename T>
     T* getDecodedData() noexcept {
-        if (getDecodedDataType() == &getDataType<T>()) {
-            return static_cast<T*>(getDecodedData());
-        }
-        return nullptr;
+        return isDecodedDataType<T>() ? static_cast<T*>(getDecodedData()) : nullptr;
     }
 
     /// @copydoc getDecodedData
     template <typename T>
     const T* getDecodedData() const noexcept {
-        if (getDecodedDataType() == &getDataType<T>()) {
-            return static_cast<const T*>(getDecodedData());
-        }
-        return nullptr;
+        return isDecodedDataType<T>() ? static_cast<const T*>(getDecodedData()) : nullptr;
     }
 
     /// Get pointer to the decoded data. Returns `nullptr` if the ExtensionObject is encoded.
@@ -115,6 +109,13 @@ public:
 
     /// @copydoc getDecodedData
     const void* getDecodedData() const noexcept;
+
+private:
+    template <typename T>
+    bool isDecodedDataType() const noexcept {
+        const auto* dt = getDecodedDataType();
+        return (dt != nullptr) && (dt->typeId == getDataType<T>().typeId);
+    }
 };
 
 }  // namespace opcua
