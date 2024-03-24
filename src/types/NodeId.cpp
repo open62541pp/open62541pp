@@ -1,55 +1,6 @@
 #include "open62541pp/types/NodeId.h"
 
-#include <cassert>
-
-#include "open62541pp/detail/helper.h"
-
 namespace opcua {
-
-NodeId::NodeId(NamespaceIndex namespaceIndex, uint32_t identifier) noexcept {
-    handle()->namespaceIndex = namespaceIndex;
-    handle()->identifierType = UA_NODEIDTYPE_NUMERIC;
-    handle()->identifier.numeric = identifier;  // NOLINT
-}
-
-NodeId::NodeId(NamespaceIndex namespaceIndex, std::string_view identifier) {
-    handle()->namespaceIndex = namespaceIndex;
-    handle()->identifierType = UA_NODEIDTYPE_STRING;
-    handle()->identifier.string = detail::allocNativeString(identifier);  // NOLINT
-}
-
-NodeId::NodeId(NamespaceIndex namespaceIndex, String identifier) noexcept {
-    handle()->namespaceIndex = namespaceIndex;
-    handle()->identifierType = UA_NODEIDTYPE_STRING;
-    handle()->identifier.string = std::exchange(asNative(identifier), {});  // NOLINT
-}
-
-NodeId::NodeId(NamespaceIndex namespaceIndex, Guid identifier) noexcept {
-    handle()->namespaceIndex = namespaceIndex;
-    handle()->identifierType = UA_NODEIDTYPE_GUID;
-    handle()->identifier.guid = identifier;  // NOLINT
-}
-
-NodeId::NodeId(NamespaceIndex namespaceIndex, ByteString identifier) noexcept {
-    handle()->namespaceIndex = namespaceIndex;
-    handle()->identifierType = UA_NODEIDTYPE_BYTESTRING;
-    handle()->identifier.byteString = std::exchange(asNative(identifier), {});  // NOLINT
-}
-
-std::variant<uint32_t, String, Guid, ByteString> NodeId::getIdentifier() const {
-    switch (handle()->identifierType) {
-    case UA_NODEIDTYPE_NUMERIC:
-        return handle()->identifier.numeric;  // NOLINT
-    case UA_NODEIDTYPE_STRING:
-        return String(handle()->identifier.string);  // NOLINT
-    case UA_NODEIDTYPE_GUID:
-        return Guid(handle()->identifier.guid);  // NOLINT
-    case UA_NODEIDTYPE_BYTESTRING:
-        return ByteString(handle()->identifier.byteString);  // NOLINT
-    default:
-        return {};
-    }
-}
 
 std::string NodeId::toString() const {
     std::string result;
@@ -75,16 +26,6 @@ std::string NodeId::toString() const {
 }
 
 /* --------------------------------------- ExpandedNodeId --------------------------------------- */
-
-ExpandedNodeId::ExpandedNodeId(NodeId id) noexcept {
-    asWrapper<NodeId>(handle()->nodeId) = std::move(id);
-}
-
-ExpandedNodeId::ExpandedNodeId(NodeId id, std::string_view namespaceUri, uint32_t serverIndex) {
-    asWrapper<NodeId>(handle()->nodeId) = std::move(id);
-    handle()->namespaceUri = detail::allocNativeString(namespaceUri);
-    handle()->serverIndex = serverIndex;
-}
 
 std::string ExpandedNodeId::toString() const {
     std::string result;
