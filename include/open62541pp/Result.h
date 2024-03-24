@@ -27,10 +27,16 @@ private:
 };
 
 /**
- * Result encapsulates a status code and a result value.
+ * The template class Result encapsulates a status code and optionally a value.
+ *
  * A result may have one of the following contents:
  * - a value and a good or uncertain status code
  * - no value and a bad status code
+ *
+ * The design is inspired by:
+ * - C++ 23's `std::expected`: https://en.cppreference.com/w/cpp/utility/expected
+ * - Rust's `Result`: https://doc.rust-lang.org/std/result
+ * - Swift's `Result`: https://developer.apple.com/documentation/swift/result
  */
 template <typename T>
 class Result {
@@ -40,7 +46,9 @@ public:
     /**
      * Default constructor (default-initialized value and good status code).
      */
-    constexpr Result() noexcept(std::is_nothrow_constructible_v<T>) = default;
+    constexpr Result() noexcept(std::is_nothrow_default_constructible_v<T>)
+        : code_(UA_STATUSCODE_GOOD),
+          maybeValue_({}) {}
 
     // NOLINTBEGIN(*-explicit-conversions)
 
@@ -204,13 +212,13 @@ private:
         code().throwIfBad();
     }
 
-    StatusCode code_{UA_STATUSCODE_GOOD};
-    std::optional<T> maybeValue_{};
+    StatusCode code_;
+    std::optional<T> maybeValue_;
 };
 
 /**
- * Result<void> type.
- * A result with void specialization contains only a status code.
+ * Template specialization of Result class for `void` types.
+ * Result<void> contains only a status code.
  */
 template <>
 class Result<void> {
@@ -218,7 +226,8 @@ public:
     /**
      * Create a default Result (good status code).
      */
-    constexpr Result() noexcept = default;
+    constexpr Result() noexcept
+        : code_(UA_STATUSCODE_GOOD) {}
 
     /**
      * Create a Result with the given code.
@@ -249,7 +258,7 @@ public:
     }
 
 private:
-    StatusCode code_{UA_STATUSCODE_GOOD};
+    StatusCode code_;
 };
 
 }  // namespace opcua
