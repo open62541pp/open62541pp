@@ -15,7 +15,7 @@ class BadResult {
 public:
     constexpr explicit BadResult(StatusCode code) noexcept
         : code_(code) {
-        assert(code.isBad());
+        assert(code_.isBad());
     }
 
     constexpr StatusCode code() const noexcept {
@@ -51,7 +51,9 @@ public:
         const T& value, StatusCode code = UA_STATUSCODE_GOOD
     ) noexcept(std::is_nothrow_copy_constructible_v<T>)
         : code_(code),
-          maybeValue_(value) {}
+          maybeValue_(value) {
+        assert(!code_.isBad());
+    }
 
     /**
      * Construct a Result with a value and a status code (good or uncertain).
@@ -60,7 +62,9 @@ public:
         T&& value, StatusCode code = UA_STATUSCODE_GOOD
     ) noexcept(std::is_nothrow_move_constructible_v<T>)
         : code_(code),
-          maybeValue_(std::move(value)) {}
+          maybeValue_(std::move(value)) {
+        assert(!code_.isBad());
+    }
 
     /**
      * Create a Result with the given error.
