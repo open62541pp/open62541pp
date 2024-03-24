@@ -104,17 +104,10 @@ jobs:
             build_type: Debug
 
     runs-on: ${{ matrix.config.os }}
-    steps: 
+    steps:
       - uses: actions/checkout@v4
         with:
           submodules: recursive
-
-      - name: Temporary workaround for sanitizer crashes
-        # https://github.com/actions/runner-images/issues/9491
-        # the issue should be fixed in the next runner image for Ubuntu 22.04:
-        # https://github.com/actions/runner-images/pull/9513
-        if: matrix.config.os == 'ubuntu-22.04'
-        run: sudo sysctl vm.mmap_rnd_bits=28
 
       - name: Configure CMake
         run: >
