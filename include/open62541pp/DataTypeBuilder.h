@@ -8,7 +8,6 @@
 
 #include "open62541pp/DataType.h"
 #include "open62541pp/TypeRegistry.h"  // getDataType
-#include "open62541pp/detail/helper.h"
 #include "open62541pp/detail/traits.h"
 #include "open62541pp/types/NodeId.h"
 

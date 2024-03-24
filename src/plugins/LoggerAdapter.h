@@ -3,8 +3,8 @@
 #include <cassert>
 
 #include "open62541pp/Logger.h"  // Logger
-#include "open62541pp/detail/helper.h"  // toString
 #include "open62541pp/detail/open62541/common.h"  // UA_Logger
+#include "open62541pp/detail/string_utils.h"  // detail::toString
 #include "open62541pp/plugins/PluginAdapter.h"
 
 namespace opcua {

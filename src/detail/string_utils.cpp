@@ -1,7 +1,7 @@
-#include "open62541pp/detail/helper.h"
+#include "open62541pp/detail/string_utils.h"
 
-#include <cstring>
 #include <cstdio>  // vsnprintf
+#include <cstring>
 
 namespace opcua::detail {
 

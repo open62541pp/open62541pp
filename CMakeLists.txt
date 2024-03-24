@@ -123,7 +123,7 @@ add_library(
     src/Server.cpp
     src/Session.cpp
     src/Subscription.cpp
-    src/detail/helper.cpp
+    src/detail/string_utils.cpp
     src/services/Attribute.cpp
     src/services/Method.cpp
     src/services/MonitoredItem.cpp
