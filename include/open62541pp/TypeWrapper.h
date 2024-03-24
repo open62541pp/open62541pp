@@ -27,7 +27,7 @@ class TypeWrapper : public Wrapper<T> {
 public:
     static_assert(typeIndex < UA_TYPES_COUNT);
 
-    using TypeWrapperBase = TypeWrapper<T, typeIndex>;
+    using TypeWrapperBase [[deprecated("Use TypeWrapper instead")]] = TypeWrapper<T, typeIndex>;
 
     constexpr TypeWrapper() = default;
 

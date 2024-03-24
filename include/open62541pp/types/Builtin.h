@@ -82,8 +82,7 @@ public:
  */
 class String : public TypeWrapper<UA_String, UA_TYPES_STRING> {
 public:
-    // NOLINTNEXTLINE, false positive?
-    using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
+    using TypeWrapper::TypeWrapper;  // inherit constructors
 
     explicit String(std::string_view str);
 
@@ -129,8 +128,7 @@ std::ostream& operator<<(std::ostream& os, const String& string);
  */
 class Guid : public TypeWrapper<UA_Guid, UA_TYPES_GUID> {
 public:
-    // NOLINTNEXTLINE, false positive?
-    using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
+    using TypeWrapper::TypeWrapper;  // inherit constructors
 
     Guid(uint32_t data1, uint16_t data2, uint16_t data3, std::array<uint8_t, 8> data4) noexcept;
 
@@ -155,8 +153,7 @@ std::ostream& operator<<(std::ostream& os, const Guid& guid);
  */
 class ByteString : public TypeWrapper<UA_ByteString, UA_TYPES_BYTESTRING> {
 public:
-    // NOLINTNEXTLINE, false positive?
-    using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
+    using TypeWrapper::TypeWrapper;  // inherit constructors
 
     explicit ByteString(std::string_view str);
     explicit ByteString(const std::vector<uint8_t>& bytes);
@@ -202,8 +199,7 @@ inline bool operator!=(std::string_view lhs, const ByteString& rhs) noexcept {
  */
 class XmlElement : public TypeWrapper<UA_XmlElement, UA_TYPES_XMLELEMENT> {
 public:
-    // NOLINTNEXTLINE, false positive?
-    using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
+    using TypeWrapper::TypeWrapper;  // inherit constructors
 
     explicit XmlElement(std::string_view str);
 
@@ -220,8 +216,7 @@ std::ostream& operator<<(std::ostream& os, const XmlElement& xmlElement);
  */
 class QualifiedName : public TypeWrapper<UA_QualifiedName, UA_TYPES_QUALIFIEDNAME> {
 public:
-    // NOLINTNEXTLINE, false positive?
-    using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
+    using TypeWrapper::TypeWrapper;  // inherit constructors
 
     QualifiedName(NamespaceIndex namespaceIndex, std::string_view name);
 
@@ -249,8 +244,7 @@ inline bool operator!=(const UA_QualifiedName& lhs, const UA_QualifiedName& rhs)
  */
 class LocalizedText : public TypeWrapper<UA_LocalizedText, UA_TYPES_LOCALIZEDTEXT> {
 public:
-    // NOLINTNEXTLINE, false positive?
-    using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
+    using TypeWrapper::TypeWrapper;  // inherit constructors
 
     LocalizedText(std::string_view locale, std::string_view text, bool assertLocaleFormat = true);
 
@@ -274,7 +268,7 @@ inline bool operator!=(const UA_LocalizedText& lhs, const UA_LocalizedText& rhs)
  */
 class DiagnosticInfo : public TypeWrapper<UA_DiagnosticInfo, UA_TYPES_DIAGNOSTICINFO> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;  // inherit constructors
 
     bool hasSymbolicId() const noexcept {
         return handle()->hasSymbolicId;

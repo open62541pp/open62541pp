@@ -25,8 +25,7 @@ public:
     using DefaultClock = std::chrono::system_clock;
     using UaDuration = std::chrono::duration<int64_t, std::ratio<1, 10'000'000>>;
 
-    // NOLINTNEXTLINE, false positive?
-    using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
+    using TypeWrapper::TypeWrapper;  // inherit constructors
 
     template <typename Clock, typename Duration>
     DateTime(std::chrono::time_point<Clock, Duration> timePoint)  // NOLINT, implicit wanted
