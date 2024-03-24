@@ -99,10 +99,7 @@ public:
         return &(*maybeValue_);
     }
 
-    /**
-     * Get the value of the Result.
-     * Accessing a Result without a value leads to undefined behavior.
-     */
+    /// @copydoc operator->
     constexpr T* operator->() noexcept {
         return &(*maybeValue_);
     }
@@ -115,26 +112,17 @@ public:
         return *maybeValue_;
     }
 
-    /**
-     * Get the value of the Result.
-     * Accessing a Result without a value leads to undefined behavior.
-     */
+    /// @copydoc operator*
     constexpr T& operator*() & noexcept {
         return *maybeValue_;
     }
 
-    /**
-     * Get the value of the Result.
-     * Accessing a Result without a value leads to undefined behavior.
-     */
+    /// @copydoc operator*
     constexpr const T&& operator*() const&& noexcept {
         return std::move(*maybeValue_);
     }
 
-    /**
-     * Get the value of the Result.
-     * Accessing a Result without a value leads to undefined behavior.
-     */
+    /// @copydoc operator*
     constexpr T&& operator*() && noexcept {
         return std::move(*maybeValue_);
     }
@@ -155,31 +143,26 @@ public:
 
     /**
      * Get the value of the Result.
+     * @exception BadStatus If the Result does not have a value (bad status code).
      */
     constexpr const T& value() const& {
         checkIsBad();
         return **this;
     }
 
-    /**
-     * Get the value of the Result.
-     */
+    /// @copydoc value
     constexpr T& value() & {
         checkIsBad();
         return **this;
     }
 
-    /**
-     * Get the value of the Result.
-     */
+    /// @copydoc value
     constexpr const T&& value() const&& {
         checkIsBad();
         return std::move(**this);
     }
 
-    /**
-     * Get the value of the Result.
-     */
+    /// @copydoc value
     constexpr T&& value() && {
         checkIsBad();
         return std::move(**this);
@@ -187,17 +170,14 @@ public:
 
     /**
      * Get the value of the Result or a default value.
-     * The default value is returned in case of an error status code.
+     * The default value is returned in case of an bad status code.
      */
     template <typename U>
     constexpr T valueOr(U&& defaultValue) const& {
         return !isBad() ? **this : static_cast<T>(std::forward<U>(defaultValue));
     }
 
-    /**
-     * Get the value of the Result or a default value.
-     * The default value is returned in case of an error status code.
-     */
+    /// @copydoc valueOr
     template <typename U>
     constexpr T valueOr(U&& defaultValue) && {
         return !isBad() ? std::move(**this) : static_cast<T>(std::forward<U>(defaultValue));
