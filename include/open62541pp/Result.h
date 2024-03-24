@@ -29,9 +29,8 @@ private:
 /**
  * Result encapsulates a status code and a result value.
  * A result may have one of the following contents:
- * - just an error status code
- * - a good status code and a return value
- * - an uncertain status code and a return value
+ * - a value and a good or uncertain status code
+ * - no value and a bad status code
  */
 template <typename T>
 class Result {
@@ -39,48 +38,46 @@ public:
     using ValueType = T;
 
     /**
-     * Create a default Result (good status code and default-initialized value).
+     * Default constructor (default-initialized value and good status code).
      */
-    constexpr Result() noexcept
-        : maybeValue_({}) {}
+    constexpr Result() noexcept(std::is_nothrow_constructible_v<T>) = default;
 
-    // NOLINTNEXTLINE, implicit wanted
-    constexpr Result(const T& value) noexcept(std::is_nothrow_copy_constructible_v<T>)
-        : maybeValue_(value) {}
+    // NOLINTBEGIN(*-explicit-conversions)
 
-    // NOLINTNEXTLINE, implicit wanted
-    constexpr Result(T&& value) noexcept(std::is_nothrow_move_constructible_v<T>)
-        : maybeValue_(std::move(value)) {}
+    /**
+     * Construct a Result with a value and a status code (good or uncertain).
+     */
+    constexpr Result(
+        const T& value, StatusCode code = UA_STATUSCODE_GOOD
+    ) noexcept(std::is_nothrow_copy_constructible_v<T>)
+        : code_(code),
+          maybeValue_(value) {}
+
+    /**
+     * Construct a Result with a value and a status code (good or uncertain).
+     */
+    constexpr Result(
+        T&& value, StatusCode code = UA_STATUSCODE_GOOD
+    ) noexcept(std::is_nothrow_move_constructible_v<T>)
+        : code_(code),
+          maybeValue_(std::move(value)) {}
 
     /**
      * Create a Result with the given error.
      */
-    constexpr Result(BadResult error) noexcept  // NOLINT, implicit wanted
-        : code_(error.code()) {}
+    constexpr Result(BadResult error) noexcept
+        : code_(error.code()),
+          maybeValue_(std::nullopt) {}
 
-    constexpr Result(
-        StatusCode code, const T& value
-    ) noexcept(std::is_nothrow_copy_constructible_v<T>)
-        : code_(code),
-          maybeValue_(value) {
-        assert(!code.isBad());
-    }
-
-    constexpr Result(StatusCode code, T&& value) noexcept(std::is_nothrow_move_constructible_v<T>)
-        : code_(code),
-          maybeValue_(std::move(value)) {
-        assert(!code.isBad());
-    }
-
-    // NOLINTNEXTLINE, implicit wanted
     operator T&() {
         return value();
     }
 
-    // NOLINTNEXTLINE, implicit wanted
     operator const T&() const {
         return value();
     }
+
+    // NOLINTEND(*-explicit-conversions)
 
     /**
      * Get the value of the Result.
@@ -203,8 +200,8 @@ private:
         code().throwIfBad();
     }
 
-    StatusCode code_{};
-    std::optional<T> maybeValue_{std::nullopt};
+    StatusCode code_{UA_STATUSCODE_GOOD};
+    std::optional<T> maybeValue_{};
 };
 
 /**
@@ -248,7 +245,7 @@ public:
     }
 
 private:
-    StatusCode code_{};
+    StatusCode code_{UA_STATUSCODE_GOOD};
 };
 
 }  // namespace opcua
