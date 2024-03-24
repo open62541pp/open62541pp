@@ -134,7 +134,6 @@ add_library(
     src/types/Composed.cpp
     src/types/DateTime.cpp
     src/types/NodeId.cpp
-    src/types/Variant.cpp
 )
 add_library(open62541pp::open62541pp ALIAS open62541pp)
 target_include_directories(
