@@ -837,8 +837,8 @@ TEST_CASE("ExtensionObject") {
         CHECK_FALSE(obj.isEncoded());
         CHECK_FALSE(obj.isDecoded());
         CHECK(obj.getEncoding() == ExtensionObjectEncoding::EncodedNoBody);
-        CHECK(obj.getEncodedTypeId().value() == NodeId(0, 0));  // UA_NODEID_NULL
-        CHECK(obj.getEncodedBody().value().empty());
+        CHECK(obj.getEncodedTypeId() == nullptr);
+        CHECK(obj.getEncodedBody() == nullptr);
         CHECK(obj.getDecodedDataType() == nullptr);
         CHECK(obj.getDecodedData() == nullptr);
     }

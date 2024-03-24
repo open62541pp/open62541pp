@@ -2,15 +2,14 @@
 
 #include <optional>
 
+#include "open62541pp/ErrorHandling.h"
 #include "open62541pp/TypeRegistry.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/open62541/common.h"
+#include "open62541pp/types/Builtin.h"  // ByteString
 #include "open62541pp/types/NodeId.h"
 
 namespace opcua {
-
-// forward declarations
-class ByteString;
 
 /**
  * Extension object encoding.
@@ -41,7 +40,7 @@ class ExtensionObject : public TypeWrapper<UA_ExtensionObject, UA_TYPES_EXTENSIO
 public:
     using TypeWrapper::TypeWrapper;  // inherit constructors
 
-    /// Create an ExtensionObject from a decoded object (assign).
+    /// Create an ExtensionObject from a decoded object (reference).
     /// The data will *not* be deleted when the ExtensionObject is destructed.
     /// @param data Decoded data
     template <typename T>
@@ -49,12 +48,18 @@ public:
         return fromDecoded(&data, getDataType<T>());
     }
 
-    /// Create an ExtensionObject from a decoded object (assign).
+    /// Create an ExtensionObject from a decoded object (reference).
     /// The data will *not* be deleted when the ExtensionObject is destructed.
     /// @param data Decoded data
     /// @param type Data type of the decoded data
     /// @warning Type erased version, use with caution.
-    [[nodiscard]] static ExtensionObject fromDecoded(void* data, const UA_DataType& type) noexcept;
+    [[nodiscard]] static ExtensionObject fromDecoded(void* data, const UA_DataType& type) noexcept {
+        ExtensionObject obj;
+        obj->encoding = UA_EXTENSIONOBJECT_DECODED_NODELETE;
+        obj->content.decoded.type = &type;  // NOLINT
+        obj->content.decoded.data = data;  // NOLINT
+        return obj;
+    }
 
     /// Create an ExtensionObject from a decoded object (copy).
     /// Set the "decoded" data to a copy of the given object.
@@ -68,52 +73,99 @@ public:
     /// @param data Decoded data
     /// @param type Data type of the decoded data
     /// @warning Type erased version, use with caution.
-    [[nodiscard]] static ExtensionObject fromDecodedCopy(const void* data, const UA_DataType& type);
+    [[nodiscard]] static ExtensionObject fromDecodedCopy(
+        const void* data, const UA_DataType& type
+    ) {
+        // manual implementation instead of UA_ExtensionObject_setValueCopy to support open62541
+        // v1.0 https://github.com/open62541/open62541/blob/v1.3.5/src/ua_types.c#L503-L524
+        ExtensionObject obj;
+        obj->encoding = UA_EXTENSIONOBJECT_DECODED;
+        obj->content.decoded.data = detail::allocate<void>(type);  // NOLINT
+        obj->content.decoded.type = &type;  // NOLINT
+        throwIfBad(UA_copy(data, obj->content.decoded.data, &type));  // NOLINT
+        return obj;
+    }
 
     /// Check if the ExtensionObject is empty
-    bool isEmpty() const noexcept;
+    bool isEmpty() const noexcept {
+        return (handle()->encoding == UA_EXTENSIONOBJECT_ENCODED_NOBODY);
+    }
+
     /// Check if the ExtensionObject is encoded (usually if the data type is unknown).
-    bool isEncoded() const noexcept;
+    bool isEncoded() const noexcept {
+        return (handle()->encoding == UA_EXTENSIONOBJECT_ENCODED_BYTESTRING) ||
+               (handle()->encoding == UA_EXTENSIONOBJECT_ENCODED_XML);
+    }
+
     /// Check if the ExtensionObject is decoded.
-    bool isDecoded() const noexcept;
+    bool isDecoded() const noexcept {
+        return (handle()->encoding == UA_EXTENSIONOBJECT_DECODED) ||
+               (handle()->encoding == UA_EXTENSIONOBJECT_DECODED_NODELETE);
+    }
 
     /// Get the encoding.
-    ExtensionObjectEncoding getEncoding() const noexcept;
+    ExtensionObjectEncoding getEncoding() const noexcept {
+        return static_cast<ExtensionObjectEncoding>(handle()->encoding);
+    }
 
-    /// Get the encoded type id. Returns `std::nullopt` if ExtensionObject is decoded.
-    std::optional<NodeId> getEncodedTypeId() const noexcept;
+    /// Get the encoded type id.
+    /// Returns `nullptr` if ExtensionObject is not encoded.
+    const NodeId* getEncodedTypeId() const noexcept {
+        return isEncoded() ? asWrapper<NodeId>(&handle()->content.encoded.typeId)  // NOLINT
+                           : nullptr;
+    }
 
-    /// Get the encoded body. Returns `std::nullopt` if ExtensionObject is decoded.
-    std::optional<ByteString> getEncodedBody() const noexcept;
+    /// Get the encoded body.
+    /// Returns `nullptr` if ExtensionObject is not encoded.
+    const ByteString* getEncodedBody() const noexcept {
+        return isEncoded() ? asWrapper<ByteString>(&handle()->content.encoded.body)  // NOLINT
+                           : nullptr;
+    }
 
-    /// Get the decoded data type. Returns `nullptr` if ExtensionObject is encoded.
-    const UA_DataType* getDecodedDataType() const noexcept;
+    /// Get the decoded data type.
+    /// Returns `nullptr` if ExtensionObject is not decoded.
+    const UA_DataType* getDecodedDataType() const noexcept {
+        return isDecoded() ? handle()->content.decoded.type  // NOLINT
+                           : nullptr;
+    }
 
-    /// Get pointer to the decoded data with given template type. Returns `nullptr` if the
-    /// ExtensionObject is either encoded or the decoded data not of type `T`.
+    /// Get pointer to the decoded data with given template type.
+    /// Returns `nullptr` if the ExtensionObject is either not decoded or the decoded data is not of
+    /// type `T`.
     template <typename T>
     T* getDecodedData() noexcept {
         return isDecodedDataType<T>() ? static_cast<T*>(getDecodedData()) : nullptr;
     }
 
-    /// @copydoc getDecodedData
+    /// Get const pointer to the decoded data with given template type.
+    /// Returns `nullptr` if the ExtensionObject is either not decoded or the decoded data is not of
+    /// type `T`.
     template <typename T>
     const T* getDecodedData() const noexcept {
         return isDecodedDataType<T>() ? static_cast<const T*>(getDecodedData()) : nullptr;
     }
 
-    /// Get pointer to the decoded data. Returns `nullptr` if the ExtensionObject is encoded.
+    /// Get pointer to the decoded data.
+    /// Returns `nullptr` if the ExtensionObject is not decoded.
     /// @warning Type erased version, use with caution.
-    void* getDecodedData() noexcept;
+    void* getDecodedData() noexcept {
+        return isDecoded() ? handle()->content.decoded.data  // NOLINT
+                           : nullptr;
+    }
 
-    /// @copydoc getDecodedData
-    const void* getDecodedData() const noexcept;
+    /// Get pointer to the decoded data.
+    /// Returns `nullptr` if the ExtensionObject is not decoded.
+    /// @warning Type erased version, use with caution.
+    const void* getDecodedData() const noexcept {
+        return isDecoded() ? handle()->content.decoded.data  // NOLINT
+                           : nullptr;
+    }
 
 private:
     template <typename T>
     bool isDecodedDataType() const noexcept {
-        const auto* dt = getDecodedDataType();
-        return (dt != nullptr) && (dt->typeId == getDataType<T>().typeId);
+        const auto* type = getDecodedDataType();
+        return (type != nullptr) && (type->typeId == getDataType<T>().typeId);
     }
 };
 
