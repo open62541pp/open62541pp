@@ -81,7 +81,7 @@ namespace opcua {
 class ApplicationDescription
     : public TypeWrapper<UA_ApplicationDescription, UA_TYPES_APPLICATIONDESCRIPTION> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     UAPP_COMPOSED_GETTER_WRAPPER(String, getApplicationUri, applicationUri)
     UAPP_COMPOSED_GETTER_WRAPPER(String, getProductUri, productUri)
@@ -98,7 +98,7 @@ public:
  */
 class RequestHeader : public TypeWrapper<UA_RequestHeader, UA_TYPES_REQUESTHEADER> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     RequestHeader(
         NodeId authenticationToken,
@@ -125,7 +125,7 @@ public:
  */
 class ResponseHeader : public TypeWrapper<UA_ResponseHeader, UA_TYPES_RESPONSEHEADER> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     UAPP_COMPOSED_GETTER_WRAPPER(DateTime, getTimestamp, timestamp)
     UAPP_COMPOSED_GETTER(uint32_t, getRequestHandle, requestHandle)
@@ -154,7 +154,7 @@ enum class UserTokenType : int32_t {
  */
 class UserTokenPolicy : public TypeWrapper<UA_UserTokenPolicy, UA_TYPES_USERTOKENPOLICY> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     UserTokenPolicy(
         std::string_view policyId,
@@ -178,7 +178,7 @@ public:
 class EndpointDescription
     : public TypeWrapper<UA_EndpointDescription, UA_TYPES_ENDPOINTDESCRIPTION> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     UAPP_COMPOSED_GETTER_WRAPPER(String, getEndpointUrl, endpointUrl)
     UAPP_COMPOSED_GETTER_WRAPPER(ApplicationDescription, getServer, server)
@@ -316,7 +316,7 @@ struct IsBitmaskEnum<NodeAttributesMask> : std::true_type {};
  */
 class NodeAttributes : public TypeWrapper<UA_NodeAttributes, UA_TYPES_NODEATTRIBUTES> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     UAPP_NODEATTR_COMMON
 };
@@ -327,7 +327,7 @@ public:
  */
 class ObjectAttributes : public TypeWrapper<UA_ObjectAttributes, UA_TYPES_OBJECTATTRIBUTES> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     /// Construct with default attribute definitions.
     ObjectAttributes();
@@ -344,7 +344,7 @@ public:
  */
 class VariableAttributes : public TypeWrapper<UA_VariableAttributes, UA_TYPES_VARIABLEATTRIBUTES> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     /// Construct with default attribute definitions.
     VariableAttributes();
@@ -405,7 +405,7 @@ public:
  */
 class MethodAttributes : public TypeWrapper<UA_MethodAttributes, UA_TYPES_METHODATTRIBUTES> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     /// Construct with default attribute definitions.
     MethodAttributes();
@@ -422,7 +422,7 @@ public:
 class ObjectTypeAttributes
     : public TypeWrapper<UA_ObjectTypeAttributes, UA_TYPES_OBJECTTYPEATTRIBUTES> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     /// Construct with default attribute definitions.
     ObjectTypeAttributes();
@@ -438,7 +438,7 @@ public:
 class VariableTypeAttributes
     : public TypeWrapper<UA_VariableTypeAttributes, UA_TYPES_VARIABLETYPEATTRIBUTES> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     /// Construct with default attribute definitions.
     VariableTypeAttributes();
@@ -485,7 +485,7 @@ public:
 class ReferenceTypeAttributes
     : public TypeWrapper<UA_ReferenceTypeAttributes, UA_TYPES_REFERENCETYPEATTRIBUTES> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     /// Construct with default attribute definitions.
     ReferenceTypeAttributes();
@@ -504,7 +504,7 @@ public:
  */
 class DataTypeAttributes : public TypeWrapper<UA_DataTypeAttributes, UA_TYPES_DATATYPEATTRIBUTES> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     /// Construct with default attribute definitions.
     DataTypeAttributes();
@@ -519,7 +519,7 @@ public:
  */
 class ViewAttributes : public TypeWrapper<UA_ViewAttributes, UA_TYPES_VIEWATTRIBUTES> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     /// Construct with default attribute definitions.
     ViewAttributes();
@@ -544,7 +544,7 @@ public:
  */
 class UserIdentityToken : public TypeWrapper<UA_UserIdentityToken, UA_TYPES_USERIDENTITYTOKEN> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     UAPP_COMPOSED_GETTER_WRAPPER(String, getPolicyId, policyId)
 };
@@ -556,7 +556,7 @@ public:
 class AnonymousIdentityToken
     : public TypeWrapper<UA_AnonymousIdentityToken, UA_TYPES_ANONYMOUSIDENTITYTOKEN> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     UAPP_COMPOSED_GETTER_WRAPPER(String, getPolicyId, policyId)
 };
@@ -568,7 +568,7 @@ public:
 class UserNameIdentityToken
     : public TypeWrapper<UA_UserNameIdentityToken, UA_TYPES_USERNAMEIDENTITYTOKEN> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     UAPP_COMPOSED_GETTER_WRAPPER(String, getPolicyId, policyId)
     UAPP_COMPOSED_GETTER_WRAPPER(String, getUserName, userName)
@@ -582,7 +582,7 @@ public:
  */
 class X509IdentityToken : public TypeWrapper<UA_X509IdentityToken, UA_TYPES_X509IDENTITYTOKEN> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     UAPP_COMPOSED_GETTER_WRAPPER(String, getPolicyId, policyId)
     UAPP_COMPOSED_GETTER_WRAPPER(ByteString, getCertificateData, certificateData)
@@ -595,7 +595,7 @@ public:
 class IssuedIdentityToken
     : public TypeWrapper<UA_IssuedIdentityToken, UA_TYPES_ISSUEDIDENTITYTOKEN> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     UAPP_COMPOSED_GETTER_WRAPPER(String, getPolicyId, policyId)
     UAPP_COMPOSED_GETTER_WRAPPER(ByteString, getTokenData, tokenData)
@@ -608,7 +608,7 @@ public:
  */
 class AddNodesItem : public TypeWrapper<UA_AddNodesItem, UA_TYPES_ADDNODESITEM> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     AddNodesItem(
         ExpandedNodeId parentNodeId,
@@ -635,7 +635,7 @@ public:
  */
 class AddNodesResult : public TypeWrapper<UA_AddNodesResult, UA_TYPES_ADDNODESRESULT> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     UAPP_COMPOSED_GETTER(StatusCode, getStatusCode, statusCode)
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getAddedNodeId, addedNodeId)
@@ -647,7 +647,7 @@ public:
  */
 class AddNodesRequest : public TypeWrapper<UA_AddNodesRequest, UA_TYPES_ADDNODESREQUEST> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     AddNodesRequest(RequestHeader requestHeader, Span<const AddNodesItem> nodesToAdd);
 
@@ -661,7 +661,7 @@ public:
  */
 class AddNodesResponse : public TypeWrapper<UA_AddNodesResponse, UA_TYPES_ADDNODESRESPONSE> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(AddNodesResult, getResults, results, resultsSize)
@@ -676,7 +676,7 @@ public:
  */
 class AddReferencesItem : public TypeWrapper<UA_AddReferencesItem, UA_TYPES_ADDREFERENCESITEM> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     AddReferencesItem(
         NodeId sourceNodeId,
@@ -702,7 +702,7 @@ public:
 class AddReferencesRequest
     : public TypeWrapper<UA_AddReferencesRequest, UA_TYPES_ADDREFERENCESREQUEST> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     AddReferencesRequest(
         RequestHeader requestHeader, Span<const AddReferencesItem> referencesToAdd
@@ -721,7 +721,7 @@ public:
 class AddReferencesResponse
     : public TypeWrapper<UA_AddReferencesResponse, UA_TYPES_ADDREFERENCESRESPONSE> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(StatusCode, getResults, results, resultsSize)
@@ -736,7 +736,7 @@ public:
  */
 class DeleteNodesItem : public TypeWrapper<UA_DeleteNodesItem, UA_TYPES_DELETENODESITEM> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     DeleteNodesItem(NodeId nodeId, bool deleteTargetReferences);
 
@@ -750,7 +750,7 @@ public:
  */
 class DeleteNodesRequest : public TypeWrapper<UA_DeleteNodesRequest, UA_TYPES_DELETENODESREQUEST> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     DeleteNodesRequest(RequestHeader requestHeader, Span<const DeleteNodesItem> nodesToDelete);
 
@@ -767,7 +767,7 @@ public:
 class DeleteNodesResponse
     : public TypeWrapper<UA_DeleteNodesResponse, UA_TYPES_DELETENODESRESPONSE> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(StatusCode, getResults, results, resultsSize)
@@ -783,7 +783,7 @@ public:
 class DeleteReferencesItem
     : public TypeWrapper<UA_DeleteReferencesItem, UA_TYPES_DELETEREFERENCESITEM> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     DeleteReferencesItem(
         NodeId sourceNodeId,
@@ -807,7 +807,7 @@ public:
 class DeleteReferencesRequest
     : public TypeWrapper<UA_DeleteReferencesRequest, UA_TYPES_DELETEREFERENCESREQUEST> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     DeleteReferencesRequest(
         RequestHeader requestHeader, Span<const DeleteReferencesItem> referencesToDelete
@@ -826,7 +826,7 @@ public:
 class DeleteReferencesResponse
     : public TypeWrapper<UA_DeleteReferencesResponse, UA_TYPES_DELETEREFERENCESRESPONSE> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(StatusCode, getResults, results, resultsSize)
@@ -840,7 +840,7 @@ public:
  */
 class ViewDescription : public TypeWrapper<UA_ViewDescription, UA_TYPES_VIEWDESCRIPTION> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     ViewDescription(NodeId viewId, DateTime timestamp, uint32_t viewVersion);
 
@@ -884,7 +884,7 @@ struct IsBitmaskEnum<BrowseResultMask> : std::true_type {};
  */
 class BrowseDescription : public TypeWrapper<UA_BrowseDescription, UA_TYPES_BROWSEDESCRIPTION> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     BrowseDescription(
         NodeId nodeId,
@@ -910,7 +910,7 @@ public:
 class ReferenceDescription
     : public TypeWrapper<UA_ReferenceDescription, UA_TYPES_REFERENCEDESCRIPTION> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getReferenceTypeId, referenceTypeId)
     UAPP_COMPOSED_GETTER(bool, getIsForward, isForward)
@@ -927,7 +927,7 @@ public:
  */
 class BrowseResult : public TypeWrapper<UA_BrowseResult, UA_TYPES_BROWSERESULT> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     UAPP_COMPOSED_GETTER(StatusCode, getStatusCode, statusCode)
     UAPP_COMPOSED_GETTER_WRAPPER(ByteString, getContinuationPoint, continuationPoint)
@@ -941,7 +941,7 @@ public:
  */
 class BrowseRequest : public TypeWrapper<UA_BrowseRequest, UA_TYPES_BROWSEREQUEST> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     BrowseRequest(
         RequestHeader requestHeader,
@@ -963,7 +963,7 @@ public:
  */
 class BrowseResponse : public TypeWrapper<UA_BrowseResponse, UA_TYPES_BROWSERESPONSE> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(BrowseResult, getResults, results, resultsSize)
@@ -977,7 +977,7 @@ public:
  */
 class BrowseNextRequest : public TypeWrapper<UA_BrowseNextRequest, UA_TYPES_BROWSENEXTREQUEST> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     BrowseNextRequest(
         RequestHeader requestHeader,
@@ -997,7 +997,7 @@ public:
  */
 class BrowseNextResponse : public TypeWrapper<UA_BrowseNextResponse, UA_TYPES_BROWSENEXTRESPONSE> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(BrowseResult, getResults, results, resultsSize)
@@ -1012,7 +1012,7 @@ public:
 class RelativePathElement
     : public TypeWrapper<UA_RelativePathElement, UA_TYPES_RELATIVEPATHELEMENT> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     RelativePathElement(
         NodeId referenceTypeId, bool isInverse, bool includeSubtypes, QualifiedName targetName
@@ -1029,7 +1029,7 @@ public:
  */
 class RelativePath : public TypeWrapper<UA_RelativePath, UA_TYPES_RELATIVEPATH> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     RelativePath(std::initializer_list<RelativePathElement> elements);
     explicit RelativePath(Span<const RelativePathElement> elements);
@@ -1042,7 +1042,7 @@ public:
  */
 class BrowsePath : public TypeWrapper<UA_BrowsePath, UA_TYPES_BROWSEPATH> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     BrowsePath(NodeId startingNode, RelativePath relativePath);
 
@@ -1055,7 +1055,7 @@ public:
  */
 class BrowsePathTarget : public TypeWrapper<UA_BrowsePathTarget, UA_TYPES_BROWSEPATHTARGET> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     UAPP_COMPOSED_GETTER_WRAPPER(ExpandedNodeId, getTargetId, targetId)
     UAPP_COMPOSED_GETTER(uint32_t, getRemainingPathIndex, remainingPathIndex)
@@ -1066,7 +1066,7 @@ public:
  */
 class BrowsePathResult : public TypeWrapper<UA_BrowsePathResult, UA_TYPES_BROWSEPATHRESULT> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     UAPP_COMPOSED_GETTER(StatusCode, getStatusCode, statusCode)
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(BrowsePathTarget, getTargets, targets, targetsSize)
@@ -1080,7 +1080,7 @@ class TranslateBrowsePathsToNodeIdsRequest
           UA_TranslateBrowsePathsToNodeIdsRequest,
           UA_TYPES_TRANSLATEBROWSEPATHSTONODEIDSREQUEST> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     TranslateBrowsePathsToNodeIdsRequest(
         RequestHeader requestHeader, Span<const BrowsePath> browsePaths
@@ -1098,7 +1098,7 @@ class TranslateBrowsePathsToNodeIdsResponse
           UA_TranslateBrowsePathsToNodeIdsResponse,
           UA_TYPES_TRANSLATEBROWSEPATHSTONODEIDSRESPONSE> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(BrowsePathResult, getResults, results, resultsSize)
@@ -1113,7 +1113,7 @@ public:
 class RegisterNodesRequest
     : public TypeWrapper<UA_RegisterNodesRequest, UA_TYPES_REGISTERNODESREQUEST> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     RegisterNodesRequest(RequestHeader requestHeader, Span<const NodeId> nodesToRegister);
 
@@ -1129,7 +1129,7 @@ public:
 class RegisterNodesResponse
     : public TypeWrapper<UA_RegisterNodesResponse, UA_TYPES_REGISTERNODESRESPONSE> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
@@ -1143,7 +1143,7 @@ public:
 class UnregisterNodesRequest
     : public TypeWrapper<UA_UnregisterNodesRequest, UA_TYPES_UNREGISTERNODESREQUEST> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     UnregisterNodesRequest(RequestHeader requestHeader, Span<const NodeId> nodesToUnregister);
 
@@ -1159,7 +1159,7 @@ public:
 class UnregisterNodesResponse
     : public TypeWrapper<UA_UnregisterNodesResponse, UA_TYPES_UNREGISTERNODESRESPONSE> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
 };
@@ -1170,7 +1170,7 @@ public:
  */
 class ReadValueId : public TypeWrapper<UA_ReadValueId, UA_TYPES_READVALUEID> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     ReadValueId(
         NodeId nodeId,
@@ -1191,7 +1191,7 @@ public:
  */
 class ReadRequest : public TypeWrapper<UA_ReadRequest, UA_TYPES_READREQUEST> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     ReadRequest(
         RequestHeader requestHeader,
@@ -1212,7 +1212,7 @@ public:
  */
 class ReadResponse : public TypeWrapper<UA_ReadResponse, UA_TYPES_READRESPONSE> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(DataValue, getResults, results, resultsSize)
@@ -1227,7 +1227,7 @@ public:
  */
 class WriteValue : public TypeWrapper<UA_WriteValue, UA_TYPES_WRITEVALUE> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     WriteValue(
         NodeId nodeId, AttributeId attributeId, std::string_view indexRange, DataValue value
@@ -1245,7 +1245,7 @@ public:
  */
 class WriteRequest : public TypeWrapper<UA_WriteRequest, UA_TYPES_WRITEREQUEST> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     WriteRequest(RequestHeader requestHeader, Span<const WriteValue> nodesToWrite);
 
@@ -1259,7 +1259,7 @@ public:
  */
 class WriteResponse : public TypeWrapper<UA_WriteResponse, UA_TYPES_WRITERESPONSE> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(StatusCode, getResults, results, resultsSize)
@@ -1274,7 +1274,7 @@ public:
  */
 class EnumValueType : public TypeWrapper<UA_EnumValueType, UA_TYPES_ENUMVALUETYPE> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     EnumValueType(int64_t value, LocalizedText displayName, LocalizedText description);
 
@@ -1293,7 +1293,7 @@ public:
  */
 class Argument : public TypeWrapper<UA_Argument, UA_TYPES_ARGUMENT> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     Argument(
         std::string_view name,
@@ -1316,7 +1316,7 @@ public:
  */
 class CallMethodRequest : public TypeWrapper<UA_CallMethodRequest, UA_TYPES_CALLMETHODREQUEST> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     CallMethodRequest(NodeId objectId, NodeId methodId, Span<const Variant> inputArguments);
 
@@ -1333,7 +1333,7 @@ public:
  */
 class CallMethodResult : public TypeWrapper<UA_CallMethodResult, UA_TYPES_CALLMETHODRESULT> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     UAPP_COMPOSED_GETTER_WRAPPER(StatusCode, getStatusCode, statusCode)
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
@@ -1356,7 +1356,7 @@ public:
  */
 class CallRequest : public TypeWrapper<UA_CallRequest, UA_TYPES_CALLREQUEST> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     CallRequest(RequestHeader requestHeader, Span<const CallMethodRequest> methodsToCall);
 
@@ -1372,7 +1372,7 @@ public:
  */
 class CallResponse : public TypeWrapper<UA_CallResponse, UA_TYPES_CALLRESPONSE> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(CallMethodResult, getResults, results, resultsSize)
@@ -1422,7 +1422,7 @@ enum class FilterOperator : int32_t {
  */
 class ElementOperand : public TypeWrapper<UA_ElementOperand, UA_TYPES_ELEMENTOPERAND> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     explicit ElementOperand(uint32_t index);
 
@@ -1440,7 +1440,7 @@ private:
         std::enable_if_t<!detail::IsOneOf<T, Variant, UA_LiteralOperand, LiteralOperand>::value>;
 
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     explicit LiteralOperand(Variant value);
 
@@ -1457,7 +1457,7 @@ public:
  */
 class AttributeOperand : public TypeWrapper<UA_AttributeOperand, UA_TYPES_ATTRIBUTEOPERAND> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     AttributeOperand(
         NodeId nodeId,
@@ -1481,7 +1481,7 @@ public:
 class SimpleAttributeOperand
     : public TypeWrapper<UA_SimpleAttributeOperand, UA_TYPES_SIMPLEATTRIBUTEOPERAND> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     SimpleAttributeOperand(
         NodeId typeDefinitionId,
@@ -1528,7 +1528,7 @@ using FilterOperand = std::variant<
 class ContentFilterElement
     : public TypeWrapper<UA_ContentFilterElement, UA_TYPES_CONTENTFILTERELEMENT> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     ContentFilterElement(FilterOperator filterOperator, Span<const FilterOperand> operands);
 
@@ -1551,7 +1551,7 @@ public:
  */
 class ContentFilter : public TypeWrapper<UA_ContentFilter, UA_TYPES_CONTENTFILTER> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     ContentFilter(std::initializer_list<ContentFilterElement> elements);
     explicit ContentFilter(Span<const ContentFilterElement> elements);
@@ -1602,7 +1602,7 @@ enum class DeadbandType : int32_t {
  */
 class DataChangeFilter : public TypeWrapper<UA_DataChangeFilter, UA_TYPES_DATACHANGEFILTER> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     DataChangeFilter(DataChangeTrigger trigger, DeadbandType deadbandType, double deadbandValue);
 
@@ -1617,7 +1617,7 @@ public:
  */
 class EventFilter : public TypeWrapper<UA_EventFilter, UA_TYPES_EVENTFILTER> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     EventFilter(Span<const SimpleAttributeOperand> selectClauses, ContentFilter whereClause);
 
@@ -1635,7 +1635,7 @@ using AggregateConfiguration = UA_AggregateConfiguration;
  */
 class AggregateFilter : public TypeWrapper<UA_AggregateFilter, UA_TYPES_AGGREGATEFILTER> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;
 
     AggregateFilter(
         DateTime startTime,

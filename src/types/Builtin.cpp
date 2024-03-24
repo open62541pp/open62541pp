@@ -168,7 +168,6 @@ LocalizedText::LocalizedText(
     handle()->locale = detail::allocNativeString(locale);
     handle()->text = detail::allocNativeString(text);
     if (assertLocaleFormat) {
-        // NOLINTNEXTLINE
         assert(
             (locale.empty() || locale.size() == 2 || locale.size() == 5) &&
             "locale must be of format <language>[-<country/region>]"

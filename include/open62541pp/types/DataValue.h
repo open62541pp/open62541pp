@@ -19,7 +19,7 @@ namespace opcua {
  */
 class DataValue : public TypeWrapper<UA_DataValue, UA_TYPES_DATAVALUE> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
+    using TypeWrapper::TypeWrapper;  // inherit constructors
 
     explicit DataValue(Variant value) noexcept {
         setValue(std::move(value));

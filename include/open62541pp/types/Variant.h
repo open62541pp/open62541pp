@@ -47,7 +47,7 @@ struct VariantHandler;
  */
 class Variant : public TypeWrapper<UA_Variant, UA_TYPES_VARIANT> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
+    using TypeWrapper::TypeWrapper;  // inherit constructors
 
     /// Create Variant from scalar value.
     /// @tparam Policy Policy (@ref VariantPolicy) how to store the scalar inside the variant
