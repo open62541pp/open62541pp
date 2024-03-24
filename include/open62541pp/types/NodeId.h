@@ -5,6 +5,7 @@
 #include <functional>  // hash
 #include <string>
 #include <string_view>
+#include <utility>  // move
 #include <variant>
 
 #include "open62541pp/Common.h"  // Type
@@ -37,19 +38,39 @@ public:
     using TypeWrapper::TypeWrapper;  // inherit constructors
 
     /// Create NodeId with numeric identifier.
-    NodeId(NamespaceIndex namespaceIndex, uint32_t identifier) noexcept;
+    NodeId(NamespaceIndex namespaceIndex, uint32_t identifier) noexcept {
+        handle()->namespaceIndex = namespaceIndex;
+        handle()->identifierType = UA_NODEIDTYPE_NUMERIC;
+        handle()->identifier.numeric = identifier;  // NOLINT
+    }
 
     /// Create NodeId with String identifier from standard strings.
-    NodeId(NamespaceIndex namespaceIndex, std::string_view identifier);
+    NodeId(NamespaceIndex namespaceIndex, std::string_view identifier) {
+        handle()->namespaceIndex = namespaceIndex;
+        handle()->identifierType = UA_NODEIDTYPE_STRING;
+        handle()->identifier.string = detail::allocNativeString(identifier);  // NOLINT
+    }
 
     /// Create NodeId with String identifier from String wrapper class.
-    NodeId(NamespaceIndex namespaceIndex, String identifier) noexcept;
+    NodeId(NamespaceIndex namespaceIndex, String identifier) noexcept {
+        handle()->namespaceIndex = namespaceIndex;
+        handle()->identifierType = UA_NODEIDTYPE_STRING;
+        handle()->identifier.string = std::exchange(asNative(identifier), {});  // NOLINT
+    }
 
     /// Create NodeId with Guid identifier.
-    NodeId(NamespaceIndex namespaceIndex, Guid identifier) noexcept;
+    NodeId(NamespaceIndex namespaceIndex, Guid identifier) noexcept {
+        handle()->namespaceIndex = namespaceIndex;
+        handle()->identifierType = UA_NODEIDTYPE_GUID;
+        handle()->identifier.guid = identifier;  // NOLINT
+    }
 
     /// Create NodeId with ByteString identifier.
-    NodeId(NamespaceIndex namespaceIndex, ByteString identifier) noexcept;
+    NodeId(NamespaceIndex namespaceIndex, ByteString identifier) noexcept {
+        handle()->namespaceIndex = namespaceIndex;
+        handle()->identifierType = UA_NODEIDTYPE_BYTESTRING;
+        handle()->identifier.byteString = std::exchange(asNative(identifier), {});  // NOLINT
+    }
 
     /// Create NodeId from Type (type id).
     [[deprecated("Use the constructor NodeId(DataTypeId) instead, the Type enum will be removed"
@@ -101,7 +122,20 @@ public:
     }
 
     /// Get identifier variant.
-    std::variant<uint32_t, String, Guid, ByteString> getIdentifier() const;
+    std::variant<uint32_t, String, Guid, ByteString> getIdentifier() const {
+        switch (handle()->identifierType) {
+        case UA_NODEIDTYPE_NUMERIC:
+            return handle()->identifier.numeric;  // NOLINT
+        case UA_NODEIDTYPE_STRING:
+            return String(handle()->identifier.string);  // NOLINT
+        case UA_NODEIDTYPE_GUID:
+            return Guid(handle()->identifier.guid);  // NOLINT
+        case UA_NODEIDTYPE_BYTESTRING:
+            return ByteString(handle()->identifier.byteString);  // NOLINT
+        default:
+            return {};
+        }
+    }
 
     /// Get identifier by template type.
     template <typename T>
@@ -164,8 +198,15 @@ class ExpandedNodeId : public TypeWrapper<UA_ExpandedNodeId, UA_TYPES_EXPANDEDNO
 public:
     using TypeWrapper::TypeWrapper;  // inherit constructors
 
-    explicit ExpandedNodeId(NodeId id) noexcept;
-    ExpandedNodeId(NodeId id, std::string_view namespaceUri, uint32_t serverIndex);
+    explicit ExpandedNodeId(NodeId id) noexcept {
+        asWrapper<NodeId>(handle()->nodeId) = std::move(id);
+    }
+
+    ExpandedNodeId(NodeId id, std::string_view namespaceUri, uint32_t serverIndex) {
+        asWrapper<NodeId>(handle()->nodeId) = std::move(id);
+        handle()->namespaceUri = detail::allocNativeString(namespaceUri);
+        handle()->serverIndex = serverIndex;
+    }
 
     bool isLocal() const noexcept {
         return handle()->serverIndex == 0;

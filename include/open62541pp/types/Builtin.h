@@ -1,10 +1,12 @@
 #pragma once
 
+#include <algorithm>  // copy
 #include <array>
 #include <cstdint>
 #include <iosfwd>  // forward declare ostream
 #include <string>
 #include <string_view>
+#include <utility>  // move
 #include <vector>
 
 // Workaround for GCC 7 with partial C++17 support
@@ -21,6 +23,7 @@ namespace fs = std::filesystem;
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/Wrapper.h"
+#include "open62541pp/detail/helper.h"
 #include "open62541pp/detail/open62541/common.h"
 
 namespace opcua {
@@ -84,16 +87,21 @@ class String : public TypeWrapper<UA_String, UA_TYPES_STRING> {
 public:
     using TypeWrapper::TypeWrapper;  // inherit constructors
 
-    explicit String(std::string_view str);
+    explicit String(std::string_view str)
+        : String(detail::allocNativeString(str)) {}
 
     /// Implicit conversion to std::string_view.
     operator std::string_view() const noexcept {  // NOLINT, implicit wanted
         return get();
     }
 
-    bool empty() const noexcept;
+    bool empty() const noexcept {
+        return handle()->length == 0U;
+    }
 
-    std::string_view get() const noexcept;
+    std::string_view get() const noexcept {
+        return detail::toStringView(*handle());
+    }
 };
 
 inline bool operator==(const UA_String& lhs, const UA_String& rhs) noexcept {
@@ -130,9 +138,17 @@ class Guid : public TypeWrapper<UA_Guid, UA_TYPES_GUID> {
 public:
     using TypeWrapper::TypeWrapper;  // inherit constructors
 
-    Guid(uint32_t data1, uint16_t data2, uint16_t data3, std::array<uint8_t, 8> data4) noexcept;
+    Guid(uint32_t data1, uint16_t data2, uint16_t data3, std::array<uint8_t, 8> data4) noexcept
+        : Guid(UA_Guid{
+              data1,
+              data2,
+              data3,
+              {data4[0], data4[1], data4[2], data4[3], data4[4], data4[5], data4[6], data4[7]},
+          }) {}
 
-    static Guid random() noexcept;
+    static Guid random() noexcept {
+        return Guid(UA_Guid_random());  // NOLINT
+    }
 
     std::string toString() const;
 };
@@ -155,8 +171,13 @@ class ByteString : public TypeWrapper<UA_ByteString, UA_TYPES_BYTESTRING> {
 public:
     using TypeWrapper::TypeWrapper;  // inherit constructors
 
-    explicit ByteString(std::string_view str);
-    explicit ByteString(const std::vector<uint8_t>& bytes);
+    explicit ByteString(std::string_view str)
+        : ByteString(detail::allocNativeString(str)) {}
+
+    explicit ByteString(const std::vector<uint8_t>& bytes) {
+        throwIfBad(UA_ByteString_allocBuffer(handle(), bytes.size()));
+        std::copy(bytes.begin(), bytes.end(), handle()->data);
+    }
 
     /// Read ByteString from binary file.
     static ByteString fromFile(const fs::path& filepath);
@@ -165,6 +186,10 @@ public:
     /// @note Supported since open62541 v1.1
     static ByteString fromBase64(std::string_view encoded);
 
+    bool empty() const noexcept {
+        return handle()->length == 0U;
+    }
+
     /// Write ByteString to binary file.
     void toFile(const fs::path& filepath) const;
 
@@ -172,9 +197,9 @@ public:
     /// @note Supported since open62541 v1.1
     std::string toBase64() const;
 
-    bool empty() const noexcept;
-
-    std::string_view get() const noexcept;
+    std::string_view get() const noexcept {
+        return detail::toStringView(*handle());
+    }
 };
 
 inline bool operator==(const ByteString& lhs, std::string_view rhs) noexcept {
@@ -201,11 +226,16 @@ class XmlElement : public TypeWrapper<UA_XmlElement, UA_TYPES_XMLELEMENT> {
 public:
     using TypeWrapper::TypeWrapper;  // inherit constructors
 
-    explicit XmlElement(std::string_view str);
+    explicit XmlElement(std::string_view str)
+        : XmlElement(detail::allocNativeString(str)) {}
 
-    bool empty() const noexcept;
+    bool empty() const noexcept {
+        return handle()->length == 0U;
+    }
 
-    std::string_view get() const noexcept;
+    std::string_view get() const noexcept {
+        return detail::toStringView(*handle());
+    }
 };
 
 std::ostream& operator<<(std::ostream& os, const XmlElement& xmlElement);
@@ -218,11 +248,18 @@ class QualifiedName : public TypeWrapper<UA_QualifiedName, UA_TYPES_QUALIFIEDNAM
 public:
     using TypeWrapper::TypeWrapper;  // inherit constructors
 
-    QualifiedName(NamespaceIndex namespaceIndex, std::string_view name);
+    QualifiedName(NamespaceIndex namespaceIndex, std::string_view name) {
+        handle()->namespaceIndex = namespaceIndex;
+        handle()->name = detail::allocNativeString(name);
+    }
 
-    NamespaceIndex getNamespaceIndex() const noexcept;
+    NamespaceIndex getNamespaceIndex() const noexcept {
+        return handle()->namespaceIndex;
+    }
 
-    std::string_view getName() const noexcept;
+    std::string_view getName() const noexcept {
+        return detail::toStringView(handle()->name);
+    }
 };
 
 inline bool operator==(const UA_QualifiedName& lhs, const UA_QualifiedName& rhs) noexcept {
@@ -246,11 +283,18 @@ class LocalizedText : public TypeWrapper<UA_LocalizedText, UA_TYPES_LOCALIZEDTEX
 public:
     using TypeWrapper::TypeWrapper;  // inherit constructors
 
-    LocalizedText(std::string_view locale, std::string_view text, bool assertLocaleFormat = true);
+    LocalizedText(std::string_view locale, std::string_view text) {
+        handle()->locale = detail::allocNativeString(locale);
+        handle()->text = detail::allocNativeString(text);
+    }
 
-    std::string_view getText() const noexcept;
+    std::string_view getLocale() const noexcept {
+        return detail::toStringView(handle()->locale);
+    }
 
-    std::string_view getLocale() const noexcept;
+    std::string_view getText() const noexcept {
+        return detail::toStringView(handle()->text);
+    }
 };
 
 inline bool operator==(const UA_LocalizedText& lhs, const UA_LocalizedText& rhs) noexcept {
@@ -353,9 +397,14 @@ inline bool operator!=(
 class NumericRange {
 public:
     NumericRange() = default;
+
     explicit NumericRange(std::string_view encodedRange);
-    explicit NumericRange(std::vector<NumericRangeDimension> dimensions);
-    explicit NumericRange(const UA_NumericRange& native);
+
+    explicit NumericRange(std::vector<NumericRangeDimension> dimensions)
+        : dimensions_(std::move(dimensions)) {}
+
+    explicit NumericRange(const UA_NumericRange& native)
+        : dimensions_(native.dimensions, native.dimensions + native.dimensionsSize) {}  // NOLINT
 
     bool empty() const noexcept {
         return dimensions_.empty();

@@ -130,15 +130,10 @@ UA_String toNativeString(std::string_view src) noexcept;
 /// Allocate UA_String from std::string_view
 [[nodiscard]] UA_String allocNativeString(std::string_view src);
 
-/// Check if UA_String is empty
-constexpr bool isEmpty(const UA_String& value) noexcept {
-    return (value.data == nullptr) || (value.length == 0U);
-}
-
 /// Convert UA_String to std::string_view
 /// Can be marked noexcept: https://stackoverflow.com/a/62061549/9967707
 inline std::string_view toStringView(const UA_String& src) noexcept {
-    if (isEmpty(src)) {
+    if (src.data == nullptr || src.length == 0U) {
         return {};
     }
     return {(const char*)src.data, src.length};  // NOLINT
@@ -160,6 +155,7 @@ inline std::string toString(const char* format, ...) {
     va_end(args);
     return result;
 }
+
 // NOLINTEND
 
 }  // namespace opcua::detail
