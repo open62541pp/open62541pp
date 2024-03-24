@@ -7,8 +7,8 @@
 #include "open62541pp/Node.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/ValueBackend.h"
-#include "open62541pp/detail/helper.h"
 #include "open62541pp/detail/open62541/server.h"
+#include "open62541pp/detail/string_utils.h"  // detail::toString
 #include "open62541pp/types/NodeId.h"
 
 using namespace std::chrono_literals;

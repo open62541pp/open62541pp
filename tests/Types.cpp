@@ -8,7 +8,7 @@
 
 #include "open62541pp/Config.h"
 #include "open62541pp/NodeIds.h"
-#include "open62541pp/detail/helper.h"  // detail::toString
+#include "open62541pp/detail/string_utils.h"  // detail::toString
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/DataValue.h"

@@ -8,8 +8,8 @@
 #include "open62541pp/Common.h"  // TypeIndex
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Wrapper.h"
-#include "open62541pp/detail/helper.h"
 #include "open62541pp/detail/open62541/common.h"
+#include "open62541pp/detail/types_handling.h"
 
 namespace opcua {
 

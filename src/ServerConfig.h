@@ -7,14 +7,14 @@
 #include "open62541pp/DataType.h"
 #include "open62541pp/Session.h"
 #include "open62541pp/Span.h"
-#include "open62541pp/detail/helper.h"
 #include "open62541pp/detail/open62541/server.h"  // UA_ServerConfig
+#include "open62541pp/detail/types_handling.h"  // detail::deallocateArray
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"  // UserTokenPolicy
 
 #include "CustomDataTypes.h"
-#include "plugins/PluginManager.h"
 #include "plugins/LoggerAdapter.h"
+#include "plugins/PluginManager.h"
 
 namespace opcua {
 

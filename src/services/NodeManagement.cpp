@@ -5,9 +5,9 @@
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/detail/ServerContext.h"
-#include "open62541pp/detail/helper.h"
 #include "open62541pp/detail/open62541/server.h"
 #include "open62541pp/detail/result_util.h"  // tryInvoke
+#include "open62541pp/detail/string_utils.h"  // detail::toNativeString
 
 namespace opcua::services {
 
