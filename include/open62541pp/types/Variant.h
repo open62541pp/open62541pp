@@ -17,6 +17,7 @@
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/detail/traits.h"
+#include "open62541pp/types/NodeId.h"
 
 namespace opcua {
 
@@ -34,8 +35,6 @@ enum class VariantPolicy {
 };
 
 // forward declarations
-class NodeId;
-
 namespace detail {
 template <VariantPolicy>
 struct VariantHandler;
@@ -371,7 +370,8 @@ private:
 
     template <typename T>
     void checkIsDataType() const {
-        if (getDataType() != &opcua::getDataType<T>()) {
+        const auto* dt = getDataType();
+        if (dt == nullptr || dt->typeId != opcua::getDataType<T>().typeId) {
             throw BadVariantAccess("Variant does not contain a value convertible to template type");
         }
     }
