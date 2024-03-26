@@ -13,11 +13,17 @@ namespace opcua {
  */
 class BadResult {
 public:
+    /**
+     * Construct a BadResult from a bad StatusCode.
+     */
     constexpr explicit BadResult(StatusCode code) noexcept
         : code_(code) {
-        assert(code.isBad());
+        assert(code_.isBad());
     }
 
+    /**
+     * Get the StatusCode.
+     */
     constexpr StatusCode code() const noexcept {
         return code_;
     }
@@ -27,11 +33,18 @@ private:
 };
 
 /**
- * Result encapsulates a status code and a result value.
+ * The template class Result encapsulates a StatusCode and optionally a value.
+ *
  * A result may have one of the following contents:
- * - just an error status code
- * - a good status code and a return value
- * - an uncertain status code and a return value
+ * - a value and a good or uncertain StatusCode
+ * - no value and a bad StatusCode
+ *
+ * Result<void> is a template specialization containing only a StatusCode.
+ *
+ * The design is inspired by:
+ * - [C++ 23's `std::expected` type](https://en.cppreference.com/w/cpp/utility/expected)
+ * - [Rust's `Result` type](https://doc.rust-lang.org/std/result)
+ * - [Swift's `Result` enumeration](https://developer.apple.com/documentation/swift/result)
  */
 template <typename T>
 class Result {
@@ -39,48 +52,52 @@ public:
     using ValueType = T;
 
     /**
-     * Create a default Result (good status code and default-initialized value).
+     * Default constructor (default-initialized value and good StatusCode).
      */
-    constexpr Result() noexcept
-        : maybeValue_({}) {}
+    constexpr Result() noexcept(std::is_nothrow_default_constructible_v<T>)
+        : code_(UA_STATUSCODE_GOOD),
+          maybeValue_({}) {}
 
-    // NOLINTNEXTLINE, implicit wanted
-    constexpr Result(const T& value) noexcept(std::is_nothrow_copy_constructible_v<T>)
-        : maybeValue_(value) {}
+    // NOLINTBEGIN(*-explicit-conversions)
 
-    // NOLINTNEXTLINE, implicit wanted
-    constexpr Result(T&& value) noexcept(std::is_nothrow_move_constructible_v<T>)
-        : maybeValue_(std::move(value)) {}
+    /**
+     * Construct a Result with a value and a StatusCode (good or uncertain).
+     */
+    constexpr Result(
+        const T& value, StatusCode code = UA_STATUSCODE_GOOD
+    ) noexcept(std::is_nothrow_copy_constructible_v<T>)
+        : code_(code),
+          maybeValue_(value) {
+        assert(!code_.isBad());
+    }
+
+    /**
+     * Construct a Result with a value and a StatusCode (good or uncertain).
+     */
+    constexpr Result(
+        T&& value, StatusCode code = UA_STATUSCODE_GOOD
+    ) noexcept(std::is_nothrow_move_constructible_v<T>)
+        : code_(code),
+          maybeValue_(std::move(value)) {
+        assert(!code_.isBad());
+    }
 
     /**
      * Create a Result with the given error.
      */
-    constexpr Result(BadResult error) noexcept  // NOLINT, implicit wanted
-        : code_(error.code()) {}
+    constexpr Result(BadResult error) noexcept
+        : code_(error.code()),
+          maybeValue_(std::nullopt) {}
 
-    constexpr Result(
-        StatusCode code, const T& value
-    ) noexcept(std::is_nothrow_copy_constructible_v<T>)
-        : code_(code),
-          maybeValue_(value) {
-        assert(!code.isBad());
-    }
-
-    constexpr Result(StatusCode code, T&& value) noexcept(std::is_nothrow_move_constructible_v<T>)
-        : code_(code),
-          maybeValue_(std::move(value)) {
-        assert(!code.isBad());
-    }
-
-    // NOLINTNEXTLINE, implicit wanted
     operator T&() {
         return value();
     }
 
-    // NOLINTNEXTLINE, implicit wanted
     operator const T&() const {
         return value();
     }
+
+    // NOLINTEND(*-explicit-conversions)
 
     /**
      * Get the value of the Result.
@@ -90,10 +107,7 @@ public:
         return &(*maybeValue_);
     }
 
-    /**
-     * Get the value of the Result.
-     * Accessing a Result without a value leads to undefined behavior.
-     */
+    /// @copydoc operator->
     constexpr T* operator->() noexcept {
         return &(*maybeValue_);
     }
@@ -106,32 +120,23 @@ public:
         return *maybeValue_;
     }
 
-    /**
-     * Get the value of the Result.
-     * Accessing a Result without a value leads to undefined behavior.
-     */
+    /// @copydoc operator*
     constexpr T& operator*() & noexcept {
         return *maybeValue_;
     }
 
-    /**
-     * Get the value of the Result.
-     * Accessing a Result without a value leads to undefined behavior.
-     */
+    /// @copydoc operator*
     constexpr const T&& operator*() const&& noexcept {
         return std::move(*maybeValue_);
     }
 
-    /**
-     * Get the value of the Result.
-     * Accessing a Result without a value leads to undefined behavior.
-     */
+    /// @copydoc operator*
     constexpr T&& operator*() && noexcept {
         return std::move(*maybeValue_);
     }
 
     /**
-     * Get the code of the Result.
+     * Get the StatusCode of the Result.
      */
     constexpr StatusCode code() const noexcept {
         return code_;
@@ -140,37 +145,32 @@ public:
     /**
      * Check if the Result has a value.
      */
-    bool hasValue() const noexcept {
+    constexpr bool hasValue() const noexcept {
         return maybeValue_.has_value();
     }
 
     /**
      * Get the value of the Result.
+     * @exception BadStatus If the Result does not have a value (bad StatusCode).
      */
     constexpr const T& value() const& {
         checkIsBad();
         return **this;
     }
 
-    /**
-     * Get the value of the Result.
-     */
+    /// @copydoc value
     constexpr T& value() & {
         checkIsBad();
         return **this;
     }
 
-    /**
-     * Get the value of the Result.
-     */
+    /// @copydoc value
     constexpr const T&& value() const&& {
         checkIsBad();
         return std::move(**this);
     }
 
-    /**
-     * Get the value of the Result.
-     */
+    /// @copydoc value
     constexpr T&& value() && {
         checkIsBad();
         return std::move(**this);
@@ -178,17 +178,14 @@ public:
 
     /**
      * Get the value of the Result or a default value.
-     * The default value is returned in case of an error status code.
+     * The default value is returned in case of an bad StatusCode.
      */
     template <typename U>
     constexpr T valueOr(U&& defaultValue) const& {
         return !isBad() ? **this : static_cast<T>(std::forward<U>(defaultValue));
     }
 
-    /**
-     * Get the value of the Result or a default value.
-     * The default value is returned in case of an error status code.
-     */
+    /// @copydoc valueOr
     template <typename U>
     constexpr T valueOr(U&& defaultValue) && {
         return !isBad() ? std::move(**this) : static_cast<T>(std::forward<U>(defaultValue));
@@ -203,24 +200,25 @@ private:
         code().throwIfBad();
     }
 
-    StatusCode code_{};
-    std::optional<T> maybeValue_{std::nullopt};
+    StatusCode code_;
+    std::optional<T> maybeValue_;
 };
 
 /**
- * Result<void> type.
- * A result with void specialization contains only a status code.
+ * Template specialization of Result class for `void` types.
+ * Result<void> contains only a StatusCode.
  */
 template <>
 class Result<void> {
 public:
     /**
-     * Create a default Result (good status code).
+     * Create a default Result (good StatusCode).
      */
-    constexpr Result() noexcept = default;
+    constexpr Result() noexcept
+        : code_(UA_STATUSCODE_GOOD) {}
 
     /**
-     * Create a Result with the given code.
+     * Create a Result with the given StatusCode.
      */
     constexpr Result(StatusCode code) noexcept  // NOLINT, implicit wanted
         : code_(code) {}
@@ -248,7 +246,7 @@ public:
     }
 
 private:
-    StatusCode code_{};
+    StatusCode code_;
 };
 
 }  // namespace opcua

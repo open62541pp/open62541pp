@@ -11,6 +11,17 @@ static constexpr StatusCode badCode(UA_STATUSCODE_BADUNEXPECTEDERROR);
 static constexpr BadResult badResult(badCode);
 
 TEST_CASE("Result") {
+    SUBCASE("Constructors") {
+        CHECK(Result<int>().value() == 0);
+        CHECK(Result<int>(1).value() == 1);
+        CHECK(Result<int>(1, UA_STATUSCODE_GOODCLAMPED).value() == 1);
+        CHECK(Result<int>(1, UA_STATUSCODE_GOODCLAMPED).code() == UA_STATUSCODE_GOODCLAMPED);
+        CHECK(
+            Result<int>(BadResult(UA_STATUSCODE_BADINTERNALERROR)).code() ==
+            UA_STATUSCODE_BADINTERNALERROR
+        );
+    }
+
     SUBCASE("operator->") {
         struct S {
             int a;
