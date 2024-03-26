@@ -47,12 +47,14 @@ TEST_CASE("Result") {
         CHECK(Result<int>(badResult).code() == badCode);
     }
 
-    SUBCASE("hasValue") {
-        Result<int> result(1);
-        CHECK(result.hasValue());
+    SUBCASE("operator bool") {
+        CHECK(static_cast<bool>(Result<int>(1)));
+        CHECK_FALSE(static_cast<bool>(Result<int>(badResult)));
+    }
 
-        Result<int> resultError(badResult);
-        CHECK_FALSE(resultError.hasValue());
+    SUBCASE("hasValue") {
+        CHECK(Result<int>().hasValue());
+        CHECK_FALSE(Result<int>(badResult).hasValue());
     }
 
     SUBCASE("value") {
@@ -88,11 +90,6 @@ TEST_CASE("Result") {
 }
 
 TEST_CASE("Result (void template specialization)") {
-    SUBCASE("operator StatusCode") {
-        CHECK(static_cast<StatusCode>(Result<void>()) == UA_STATUSCODE_GOOD);
-        CHECK(static_cast<StatusCode>(Result<void>(badResult)) == UA_STATUSCODE_BADUNEXPECTEDERROR);
-    }
-
     SUBCASE("code") {
         CHECK(Result<void>().code() == UA_STATUSCODE_GOOD);
         CHECK(Result<void>(badResult).code() == badCode);

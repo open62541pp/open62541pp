@@ -127,7 +127,7 @@ TEST_CASE("sendRequest") {
         SUBCASE("Exception in transform function") {
             sendReadRequest(
                 [](UA_ReadResponse&) { throw std::runtime_error("Error"); },
-                [](StatusCode code) { CHECK(code == UA_STATUSCODE_BADINTERNALERROR); }
+                [](Result<void> result) { CHECK(result.code() == UA_STATUSCODE_BADINTERNALERROR); }
             );
             CHECK_NOTHROW(client.runIterate());
         }
