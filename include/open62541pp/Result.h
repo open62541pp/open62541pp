@@ -145,7 +145,7 @@ public:
     /**
      * Check if the Result has a value.
      */
-    bool hasValue() const noexcept {
+    constexpr bool hasValue() const noexcept {
         return maybeValue_.has_value();
     }
 
