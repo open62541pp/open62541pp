@@ -48,7 +48,7 @@ BrowseResponse browse(Client& connection, const BrowseRequest& request);
 /**
  * Asynchronously discover the references of one or more nodes (client only).
  * @copydetails browse
- * @param token @completiontoken{void(opcua::StatusCode, opcua::BrowseResponse&)}
+ * @param token @completiontoken{void(Result<BrowseResponse>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto browseAsync(
@@ -77,7 +77,7 @@ BrowseResult browse(T& connection, const BrowseDescription& bd, uint32_t maxRefe
 /**
  * Asynchronously discover the references of a specified node.
  * @copydetails browse(T&, const BrowseDescription&, uint32_t)
- * @param token @completiontoken{void(opcua::StatusCode, opcua::BrowseResult&)}
+ * @param token @completiontoken{void(Result<BrowseResult>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto browseAsync(
@@ -117,7 +117,7 @@ BrowseNextResponse browseNext(Client& connection, const BrowseNextRequest& reque
 /**
  * Asynchronously request the next sets of @ref browse / @ref browseNext responses (client only).
  * @copydetails browseNext
- * @param token @completiontoken{void(opcua::StatusCode, opcua::BrowseNextResponse&)}
+ * @param token @completiontoken{void(Result<BrowseNextResponse>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto browseNextAsync(
@@ -149,7 +149,7 @@ BrowseResult browseNext(
 /**
  * Asynchronously request the next set of a @ref browse or @ref browseNext response.
  * @copydetails browseNext(T&, bool, const ByteString&)
- * @param token @completiontoken{void(opcua::StatusCode, opcua::BrowseResult&)}
+ * @param token @completiontoken{void(Result<BrowseResult>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto browseNextAsync(
@@ -190,9 +190,7 @@ TranslateBrowsePathsToNodeIdsResponse translateBrowsePathsToNodeIds(
 /**
  * Asynchronously translate browse paths to NodeIds (client only).
  * @copydetails translateBrowsePathsToNodeIds
- * @param token @completiontoken{
- *              void(opcua::StatusCode, opcua::TranslateBrowsePathsToNodeIdsResponse&)
- *              }
+ * @param token @completiontoken{void(Result<TranslateBrowsePathsToNodeIdsResponse>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto translateBrowsePathsToNodeIdsAsync(
@@ -222,7 +220,7 @@ BrowsePathResult translateBrowsePathToNodeIds(T& connection, const BrowsePath& b
 /**
  * Asynchronously translate a browse path to NodeIds.
  * @copydetails translateBrowsePathToNodeIds
- * @param token @completiontoken{void(opcua::StatusCode, opcua::BrowsePathResult&)}
+ * @param token @completiontoken{void(Result<BrowsePathResult>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto translateBrowsePathToNodeIdsAsync(
@@ -264,7 +262,7 @@ inline BrowsePathResult browseSimplifiedBrowsePath(
 /**
  * A simplified version of @ref translateBrowsePathToNodeIdsAsync.
  * @copydetails browseSimplifiedBrowsePath
- * @param token @completiontoken{void(opcua::StatusCode, opcua::BrowsePathResult&)}
+ * @param token @completiontoken{void(Result<BrowsePathResult>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto browseSimplifiedBrowsePathAsync(
@@ -299,7 +297,7 @@ RegisterNodesResponse registerNodes(Client& connection, const RegisterNodesReque
 /**
  * Asynchronously register nodes for efficient access operations (client only).
  * @copydetails registerNodes
- * @param token @completiontoken{void(opcua::StatusCode, opcua::RegisterNodesResponse&)}
+ * @param token @completiontoken{void(Result<RegisterNodesResponse>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto registerNodesAsync(
@@ -334,7 +332,7 @@ UnregisterNodesResponse unregisterNodes(Client& connection, const UnregisterNode
 /**
  * Asynchronously unregister nodes (client only).
  * @copydetails unregisterNodes
- * @param token @completiontoken{void(opcua::StatusCode, opcua::UnregisterNodesResponse&)}
+ * @param token @completiontoken{void(Result<UnregisterNodesResponse>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto unregisterNodesAsync(

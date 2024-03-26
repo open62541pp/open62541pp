@@ -41,7 +41,7 @@ CallResponse call(Client& client, const CallRequest& request);
 /**
  * Asynchronously call server methods.
  * @copydetails call
- * @param token @completiontoken{void(opcua::StatusCode, CallResponse&)}
+ * @param token @completiontoken{void(Result<CallResponse>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto callAsync(
@@ -80,7 +80,7 @@ std::vector<Variant> call(
  * @param objectId NodeId of the object on which the method is invoked
  * @param methodId NodeId of the method to invoke
  * @param inputArguments Input argument values
- * @param token @completiontoken{void(opcua::StatusCode, std::vector<opcua::Variant>&)}
+ * @param token @completiontoken{void(Result<std::vector<Variant>>&)}
  * @exception BadStatus
  */
 template <typename CompletionToken = DefaultCompletionToken>

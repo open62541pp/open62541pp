@@ -11,7 +11,7 @@ JAVADOC_AUTOBRIEF      = YES
 MARKDOWN_SUPPORT       = YES
 AUTOLINK_SUPPORT       = YES
 USE_MDFILE_AS_MAINPAGE = "${PROJECT_SOURCE_DIR}/README.md"
-ALIASES                = completiontoken{1}="@parblock ^^ @include{doc} alias_completiontoken.dox ^^ @code \1 @endcode ^^ @endparblock"
+ALIASES                = completiontoken{1}="@parblock ^^ @include{doc} alias_completiontoken.dox ^^ `\1` ^^ @endparblock"
 
 # Build-related options
 EXTRACT_ALL            = YES
