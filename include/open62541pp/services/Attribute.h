@@ -61,7 +61,7 @@ inline ReadResponse read(
 /**
  * Asynchronously read one or more attributes of one or more nodes (client only).
  * @copydetails read
- * @param token @completiontoken{void(opcua::StatusCode, opcua::ReadResponse&)}
+ * @param token @completiontoken{void(Result<ReadResponse>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto readAsync(
@@ -103,7 +103,7 @@ DataValue readAttribute(
 /**
  * Asynchronously read node attribute.
  * @copydetails readAttribute
- * @param token @completiontoken{void(opcua::StatusCode, opcua::DataValue&)}
+ * @param token @completiontoken{void(Result<DataValue>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto readAttributeAsync(
@@ -159,7 +159,7 @@ inline WriteResponse write(Client& client, Span<const WriteValue> nodesToWrite) 
 /**
  * Asynchronously write one or more attributes of one or more nodes (client only).
  * @copydetails write
- * @param token @completiontoken{void(opcua::StatusCode, opcua::WriteResponse&)}
+ * @param token @completiontoken{void(Result<WriteResponse>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto writeAsync(
@@ -195,7 +195,7 @@ void writeAttribute(
 /**
  * Asynchronously write node attribute.
  * @copydetails writeAttribute
- * @param token @completiontoken{void(opcua::StatusCode)}
+ * @param token @completiontoken{void(Result<void>)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto writeAttributeAsync(
@@ -277,7 +277,7 @@ inline DataValue readDataValue(T& serverOrClient, const NodeId& id) {
 
 /**
  * Asynchronously read the `AttributeId::Value` of a node as a DataValue object.
- * @param token @completiontoken{void(opcua::StatusCode, opcua::DataValue&)}
+ * @param token @completiontoken{void(Result<DataValue>&)}
  * @ingroup Read
  */
 template <typename T, typename CompletionToken = DefaultCompletionToken>
@@ -302,7 +302,7 @@ inline void writeDataValue(T& serverOrClient, const NodeId& id, const DataValue&
 
 /**
  * Asynchronously write the AttributeId::Value attribute of a node as a DataValue object.
- * @param token @completiontoken{void(opcua::StatusCode)}
+ * @param token @completiontoken{void(Result<void>)}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>

@@ -17,24 +17,24 @@ class Attribute:
 
 # fmt: off
 ATTRIBUTES = [
-    Attribute(name="NodeId", type_value="opcua::NodeId", copy=False, writeable=False),
-    Attribute(name="NodeClass", type_value="opcua::NodeClass", copy=True, writeable=False),
-    Attribute(name="BrowseName", type_value="opcua::QualifiedName", copy=False, writeable=True),
-    Attribute(name="DisplayName", type_value="opcua::LocalizedText", copy=False, writeable=True),
-    Attribute(name="Description", type_value="opcua::LocalizedText", copy=False, writeable=True),
-    Attribute(name="WriteMask", type_value="opcua::Bitmask<WriteMask>", copy=True, writeable=True),
-    Attribute(name="UserWriteMask", type_value="opcua::Bitmask<WriteMask>", copy=True, writeable=True),
+    Attribute(name="NodeId", type_value="NodeId", copy=False, writeable=False),
+    Attribute(name="NodeClass", type_value="NodeClass", copy=True, writeable=False),
+    Attribute(name="BrowseName", type_value="QualifiedName", copy=False, writeable=True),
+    Attribute(name="DisplayName", type_value="LocalizedText", copy=False, writeable=True),
+    Attribute(name="Description", type_value="LocalizedText", copy=False, writeable=True),
+    Attribute(name="WriteMask", type_value="Bitmask<WriteMask>", copy=True, writeable=True),
+    Attribute(name="UserWriteMask", type_value="Bitmask<WriteMask>", copy=True, writeable=True),
     Attribute(name="IsAbstract", type_value="bool", copy=True, writeable=True),
     Attribute(name="Symmetric", type_value="bool", copy=True, writeable=True),
-    Attribute(name="InverseName", type_value="opcua::LocalizedText", copy=False, writeable=True),
+    Attribute(name="InverseName", type_value="LocalizedText", copy=False, writeable=True),
     Attribute(name="ContainsNoLoops", type_value="bool", copy=False, writeable=True),
-    Attribute(name="EventNotifier", type_value="opcua::Bitmask<EventNotifier>", copy=True, writeable=True),
-    Attribute(name="Value", type_value="opcua::Variant", copy=False, writeable=True),
-    Attribute(name="DataType", type_value="opcua::NodeId", copy=False, writeable=True),
-    Attribute(name="ValueRank", type_value="opcua::ValueRank", copy=True, writeable=True),
+    Attribute(name="EventNotifier", type_value="Bitmask<EventNotifier>", copy=True, writeable=True),
+    Attribute(name="Value", type_value="Variant", copy=False, writeable=True),
+    Attribute(name="DataType", type_value="NodeId", copy=False, writeable=True),
+    Attribute(name="ValueRank", type_value="ValueRank", copy=True, writeable=True),
     Attribute(name="ArrayDimensions", type_value="std::vector<uint32_t>", type_view="Span<const uint32_t>", copy=False, writeable=True),
-    Attribute(name="AccessLevel", type_value="opcua::Bitmask<AccessLevel>", copy=True, writeable=True),
-    Attribute(name="UserAccessLevel", type_value="opcua::Bitmask<AccessLevel>", copy=True, writeable=True),
+    Attribute(name="AccessLevel", type_value="Bitmask<AccessLevel>", copy=True, writeable=True),
+    Attribute(name="UserAccessLevel", type_value="Bitmask<AccessLevel>", copy=True, writeable=True),
     Attribute(name="MinimumSamplingInterval", type_value="double", copy=True, writeable=True),
     Attribute(name="Historizing", type_value="bool", copy=True, writeable=True),
     Attribute(name="Executable", type_value="bool", copy=True, writeable=True),
@@ -64,13 +64,13 @@ TEMPLATE_READ = """
  * @ingroup Read
  */
 template <typename T>
-inline {type_without_ns} read{attr}(T& serverOrClient, const NodeId& id) {{
+inline {type} read{attr}(T& serverOrClient, const NodeId& id) {{
     return detail::readAttributeImpl<AttributeId::{attr}>(serverOrClient, id);
 }}
 
 /**
  * Asynchronously read the AttributeId::{attr} attribute of a node.
- * @param token @completiontoken{{void(opcua::StatusCode, {type_completion})}}
+ * @param token @completiontoken{{void({token_type})}}
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -89,21 +89,24 @@ TEMPLATE_WRITE = """
  * @ingroup Write
  */
 template <typename T>
-inline void write{attr}(T& serverOrClient, const NodeId& id, {type_parameter} {parameter_name}) {{
-    detail::writeAttributeImpl<AttributeId::{attr}>(serverOrClient, id, {parameter_name});
+inline void write{attr}(T& serverOrClient, const NodeId& id, {param_type} {param_name}) {{
+    detail::writeAttributeImpl<AttributeId::{attr}>(serverOrClient, id, {param_name});
 }}
 
 /**
  * Asynchronously write the AttributeId::{attr} attribute of a node.
- * @param token @completiontoken{{void(opcua::StatusCode)}}
+ * @param token @completiontoken{{void(Result<void>)}}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto write{attr}Async(
-    Client& client, const NodeId& id, {type_parameter} {parameter_name}, CompletionToken&& token
+    Client& client,
+    const NodeId& id,
+    {param_type} {param_name},
+    CompletionToken&& token = DefaultCompletionToken()
 ) {{
     detail::writeAttributeAsyncImpl<AttributeId::{attr}>(
-        client, id, {parameter_name}, std::forward<CompletionToken>(token)
+        client, id, {param_name}, std::forward<CompletionToken>(token)
     );
 }}
 """.lstrip()
@@ -111,19 +114,16 @@ inline auto write{attr}Async(
 
 def gen_functions():
     for attr in ATTRIBUTES:
-        pass_by_value = attr.copy
-        type_completion = attr.type_value if pass_by_value else f"{attr.type_value}&"
-        type_without_ns = attr.type_value.removeprefix("opcua::")
-        type_parameter = (
-            type_without_ns if pass_by_value else f"const {type_without_ns}&"
-        )
-        parameter_name = attr.name[0].lower() + attr.name[1:]
+        type_value = attr.type_value
+        token_type = f"Result<{type_value}>" if attr.copy else f"Result<{type_value}>&"
+        param_type = type_value if attr.copy else f"const {type_value}&"
+        param_name = attr.name[0].lower() + attr.name[1:]
         format_args = {
             "attr": attr.name,
-            "type_without_ns": type_without_ns,
-            "type_completion": type_completion,
-            "type_parameter": attr.type_view or type_parameter,
-            "parameter_name": parameter_name,
+            "type": attr.type_value,
+            "token_type": token_type,
+            "param_type": attr.type_view or param_type,
+            "param_name": param_name,
         }
         yield TEMPLATE_READ.format(**format_args)
         if attr.writeable is True:
