@@ -89,14 +89,6 @@ public:
         : code_(error.code()),
           maybeValue_(std::nullopt) {}
 
-    operator T&() {
-        return value();
-    }
-
-    operator const T&() const {
-        return value();
-    }
-
     // NOLINTEND(*-explicit-conversions)
 
     /**
@@ -140,6 +132,13 @@ public:
      */
     constexpr StatusCode code() const noexcept {
         return code_;
+    }
+
+    /**
+     * Check if the Result has a value.
+     */
+    constexpr explicit operator bool() const noexcept {
+        return hasValue();
     }
 
     /**
@@ -228,13 +227,6 @@ public:
      */
     constexpr Result(BadResult error) noexcept  // NOLINT, implicit wanted
         : code_(error.code()) {}
-
-    /**
-     * Convert the Result to a StatusCode.
-     */
-    operator StatusCode() const noexcept {  // NOLINT, implicit wanted
-        return code_;
-    }
 
     constexpr void operator*() const noexcept {}
 
