@@ -13,11 +13,17 @@ namespace opcua {
  */
 class BadResult {
 public:
+    /**
+     * Construct a BadResult from a bad StatusCode.
+     */
     constexpr explicit BadResult(StatusCode code) noexcept
         : code_(code) {
         assert(code_.isBad());
     }
 
+    /**
+     * Get the StatusCode.
+     */
     constexpr StatusCode code() const noexcept {
         return code_;
     }
@@ -27,16 +33,18 @@ private:
 };
 
 /**
- * The template class Result encapsulates a status code and optionally a value.
+ * The template class Result encapsulates a StatusCode and optionally a value.
  *
  * A result may have one of the following contents:
- * - a value and a good or uncertain status code
- * - no value and a bad status code
+ * - a value and a good or uncertain StatusCode
+ * - no value and a bad StatusCode
+ *
+ * Result<void> is a template specialization containing only a StatusCode.
  *
  * The design is inspired by:
- * - C++ 23's `std::expected`: https://en.cppreference.com/w/cpp/utility/expected
- * - Rust's `Result`: https://doc.rust-lang.org/std/result
- * - Swift's `Result`: https://developer.apple.com/documentation/swift/result
+ * - [C++ 23's `std::expected` type](https://en.cppreference.com/w/cpp/utility/expected)
+ * - [Rust's `Result` type](https://doc.rust-lang.org/std/result)
+ * - [Swift's `Result` enumeration](https://developer.apple.com/documentation/swift/result)
  */
 template <typename T>
 class Result {
@@ -44,7 +52,7 @@ public:
     using ValueType = T;
 
     /**
-     * Default constructor (default-initialized value and good status code).
+     * Default constructor (default-initialized value and good StatusCode).
      */
     constexpr Result() noexcept(std::is_nothrow_default_constructible_v<T>)
         : code_(UA_STATUSCODE_GOOD),
@@ -53,7 +61,7 @@ public:
     // NOLINTBEGIN(*-explicit-conversions)
 
     /**
-     * Construct a Result with a value and a status code (good or uncertain).
+     * Construct a Result with a value and a StatusCode (good or uncertain).
      */
     constexpr Result(
         const T& value, StatusCode code = UA_STATUSCODE_GOOD
@@ -64,7 +72,7 @@ public:
     }
 
     /**
-     * Construct a Result with a value and a status code (good or uncertain).
+     * Construct a Result with a value and a StatusCode (good or uncertain).
      */
     constexpr Result(
         T&& value, StatusCode code = UA_STATUSCODE_GOOD
@@ -128,7 +136,7 @@ public:
     }
 
     /**
-     * Get the code of the Result.
+     * Get the StatusCode of the Result.
      */
     constexpr StatusCode code() const noexcept {
         return code_;
@@ -143,7 +151,7 @@ public:
 
     /**
      * Get the value of the Result.
-     * @exception BadStatus If the Result does not have a value (bad status code).
+     * @exception BadStatus If the Result does not have a value (bad StatusCode).
      */
     constexpr const T& value() const& {
         checkIsBad();
@@ -170,7 +178,7 @@ public:
 
     /**
      * Get the value of the Result or a default value.
-     * The default value is returned in case of an bad status code.
+     * The default value is returned in case of an bad StatusCode.
      */
     template <typename U>
     constexpr T valueOr(U&& defaultValue) const& {
@@ -198,19 +206,19 @@ private:
 
 /**
  * Template specialization of Result class for `void` types.
- * Result<void> contains only a status code.
+ * Result<void> contains only a StatusCode.
  */
 template <>
 class Result<void> {
 public:
     /**
-     * Create a default Result (good status code).
+     * Create a default Result (good StatusCode).
      */
     constexpr Result() noexcept
         : code_(UA_STATUSCODE_GOOD) {}
 
     /**
-     * Create a Result with the given code.
+     * Create a Result with the given StatusCode.
      */
     constexpr Result(StatusCode code) noexcept  // NOLINT, implicit wanted
         : code_(code) {}
