@@ -118,11 +118,13 @@ TEST_CASE("ByteString") {
         CHECK(std::string(bs.get()) == "XYZ");
     }
 
+#ifdef UAPP_HAS_FILESYSTEM
     SUBCASE("toFile / fromFile") {
         const ByteString bs({88, 89, 90});
         CHECK_NOTHROW(bs.toFile("bytestring.bin"));
         CHECK(ByteString::fromFile("bytestring.bin") == bs);
     }
+#endif
 
 #if UAPP_OPEN62541_VER_GE(1, 1)
     SUBCASE("fromBase64 / to Base64") {
