@@ -75,6 +75,7 @@ PREDEFINED             = UA_ENABLE_DA \
                          UA_ENABLE_QUERY \
                          UA_ENABLE_SUBSCRIPTIONS \
                          UA_ENABLE_SUBSCRIPTIONS_EVENTS \
+                         UAPP_HAS_FILESYSTEM \
                          UAPP_CREATE_CERTIFICATE
 
 # Dot diagrams

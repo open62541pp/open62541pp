@@ -19,6 +19,12 @@
 #define UAPP_TSAN_ENABLED
 #endif
 
+// check std::filesystem support for compilers with partial C++17 support (e.g. GCC 7)
+// https://github.com/open62541pp/open62541pp/issues/109
+#if __has_include(<filesystem>)
+#define UAPP_HAS_FILESYSTEM
+#endif
+
 // NOLINTNEXTLINE
 #define UAPP_OPEN62541_VER_EQ(MAJOR, MINOR)                                                        \
     (UA_OPEN62541_VER_MAJOR == (MAJOR)) && (UA_OPEN62541_VER_MINOR == (MINOR))

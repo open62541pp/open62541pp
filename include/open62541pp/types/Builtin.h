@@ -9,22 +9,17 @@
 #include <utility>  // move
 #include <vector>
 
-// Workaround for GCC 7 with partial C++17 support
-// https://github.com/open62541pp/open62541pp/issues/109
-#if !__has_include(<filesystem>) && __has_include(<experimental/filesystem>)
-#include <experimental/filesystem>
-namespace fs = std::experimental::filesystem;
-#else
-#include <filesystem>
-namespace fs = std::filesystem;
-#endif
-
 #include "open62541pp/Common.h"  // NamespaceIndex
+#include "open62541pp/Config.h"  // UAPP_HAS_FILESYSTEM
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/Wrapper.h"
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/detail/string_utils.h"
+
+#ifdef UAPP_HAS_FILESYSTEM
+#include <filesystem>
+#endif
 
 namespace opcua {
 
@@ -179,8 +174,10 @@ public:
         std::copy(bytes.begin(), bytes.end(), handle()->data);
     }
 
+#ifdef UAPP_HAS_FILESYSTEM
     /// Read ByteString from binary file.
-    static ByteString fromFile(const fs::path& filepath);
+    static ByteString fromFile(const std::filesystem::path& filepath);
+#endif
 
     /// Parse ByteString from Base64 encoded string.
     /// @note Supported since open62541 v1.1
@@ -190,8 +187,10 @@ public:
         return handle()->length == 0U;
     }
 
+#ifdef UAPP_HAS_FILESYSTEM
     /// Write ByteString to binary file.
-    void toFile(const fs::path& filepath) const;
+    void toFile(const std::filesystem::path& filepath) const;
+#endif
 
     /// Convert to Base64 encoded string.
     /// @note Supported since open62541 v1.1
