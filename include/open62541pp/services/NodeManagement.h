@@ -67,7 +67,7 @@ auto addNodesAsync(
  */
 template <typename T>
 NodeId addNode(
-    T& serverOrClient,
+    T& connection,
     NodeClass nodeClass,
     const NodeId& parentId,
     const NodeId& id,
@@ -157,7 +157,7 @@ auto addReferencesAsync(
  */
 template <typename T>
 void addReference(
-    T& serverOrClient,
+    T& connection,
     const NodeId& sourceId,
     const NodeId& targetId,
     const NodeId& referenceType,
@@ -233,7 +233,7 @@ auto deleteNodesAsync(
  * Delete node.
  */
 template <typename T>
-void deleteNode(T& serverOrClient, const NodeId& id, bool deleteReferences = true);
+void deleteNode(T& connection, const NodeId& id, bool deleteReferences = true);
 
 /**
  * Asynchronously delete node.
@@ -300,7 +300,7 @@ auto deleteReferencesAsync(
  */
 template <typename T>
 void deleteReference(
-    T& serverOrClient,
+    T& connection,
     const NodeId& sourceId,
     const NodeId& targetId,
     const NodeId& referenceType,
@@ -358,7 +358,7 @@ auto deleteReferenceAsync(
  */
 template <typename T>
 inline NodeId addObject(
-    T& serverOrClient,
+    T& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -367,7 +367,7 @@ inline NodeId addObject(
     const NodeId& referenceType = ReferenceTypeId::HasComponent
 ) {
     return addNode(
-        serverOrClient,
+        connection,
         NodeClass::Object,
         parentId,
         id,
@@ -412,7 +412,7 @@ inline auto addObjectAsync(
  */
 template <typename T>
 inline NodeId addFolder(
-    T& serverOrClient,
+    T& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -420,13 +420,7 @@ inline NodeId addFolder(
     const NodeId& referenceType = ReferenceTypeId::HasComponent
 ) {
     return addObject(
-        serverOrClient,
-        parentId,
-        id,
-        browseName,
-        attributes,
-        ObjectTypeId::FolderType,
-        referenceType
+        connection, parentId, id, browseName, attributes, ObjectTypeId::FolderType, referenceType
     );
 }
 
@@ -462,7 +456,7 @@ inline auto addFolderAsync(
  */
 template <typename T>
 inline NodeId addVariable(
-    T& serverOrClient,
+    T& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -471,7 +465,7 @@ inline NodeId addVariable(
     const NodeId& referenceType = ReferenceTypeId::HasComponent
 ) {
     return addNode(
-        serverOrClient,
+        connection,
         NodeClass::Variable,
         parentId,
         id,
@@ -516,14 +510,14 @@ inline auto addVariableAsync(
  */
 template <typename T>
 inline NodeId addProperty(
-    T& serverOrClient,
+    T& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
     const VariableAttributes& attributes = {}
 ) {
     return addVariable(
-        serverOrClient,
+        connection,
         parentId,
         id,
         browseName,
@@ -573,7 +567,7 @@ using MethodCallback = std::function<void(Span<const Variant> input, Span<Varian
  */
 template <typename T>
 NodeId addMethod(
-    T& serverOrClient,
+    T& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -621,7 +615,7 @@ inline auto addMethodAsync(
  */
 template <typename T>
 inline NodeId addObjectType(
-    T& serverOrClient,
+    T& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -629,7 +623,7 @@ inline NodeId addObjectType(
     const NodeId& referenceType = ReferenceTypeId::HasSubtype
 ) {
     return addNode(
-        serverOrClient,
+        connection,
         NodeClass::ObjectType,
         parentId,
         id,
@@ -673,7 +667,7 @@ inline auto addObjectTypeAsync(
  */
 template <typename T>
 inline NodeId addVariableType(
-    T& serverOrClient,
+    T& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -682,7 +676,7 @@ inline NodeId addVariableType(
     const NodeId& referenceType = ReferenceTypeId::HasSubtype
 ) {
     return addNode(
-        serverOrClient,
+        connection,
         NodeClass::VariableType,
         parentId,
         id,
@@ -727,7 +721,7 @@ inline auto addVariableTypeAsync(
  */
 template <typename T>
 inline NodeId addReferenceType(
-    T& serverOrClient,
+    T& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -735,7 +729,7 @@ inline NodeId addReferenceType(
     const NodeId& referenceType = ReferenceTypeId::HasSubtype
 ) {
     return addNode(
-        serverOrClient,
+        connection,
         NodeClass::ReferenceType,
         parentId,
         id,
@@ -779,7 +773,7 @@ inline auto addReferenceTypeAsync(
  */
 template <typename T>
 inline NodeId addDataType(
-    T& serverOrClient,
+    T& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -787,7 +781,7 @@ inline NodeId addDataType(
     const NodeId& referenceType = ReferenceTypeId::HasSubtype
 ) {
     return addNode(
-        serverOrClient,
+        connection,
         NodeClass::DataType,
         parentId,
         id,
@@ -831,7 +825,7 @@ inline auto addDataTypeAsync(
  */
 template <typename T>
 inline NodeId addView(
-    T& serverOrClient,
+    T& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -839,7 +833,7 @@ inline NodeId addView(
     const NodeId& referenceType = ReferenceTypeId::Organizes
 ) {
     return addNode(
-        serverOrClient,
+        connection,
         NodeClass::View,
         parentId,
         id,
@@ -889,13 +883,9 @@ inline auto addViewAsync(
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/6.4.4
  */
 template <typename T>
-inline void addModellingRule(T& serverOrClient, const NodeId& id, ModellingRule rule) {
+inline void addModellingRule(T& connection, const NodeId& id, ModellingRule rule) {
     return addReference(
-        serverOrClient,
-        id,
-        {0, static_cast<uint32_t>(rule)},
-        ReferenceTypeId::HasModellingRule,
-        true
+        connection, id, {0, static_cast<uint32_t>(rule)}, ReferenceTypeId::HasModellingRule, true
     );
 }
 

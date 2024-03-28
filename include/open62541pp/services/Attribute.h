@@ -94,7 +94,7 @@ inline auto readAsync(
  */
 template <typename T>
 DataValue readAttribute(
-    T& serverOrClient,
+    T& connection,
     const NodeId& id,
     AttributeId attributeId,
     TimestampsToReturn timestamps = TimestampsToReturn::Neither
@@ -189,7 +189,7 @@ inline auto writeAsync(
  */
 template <typename T>
 void writeAttribute(
-    T& serverOrClient, const NodeId& id, AttributeId attributeId, const DataValue& value
+    T& connection, const NodeId& id, AttributeId attributeId, const DataValue& value
 );
 
 /**
@@ -224,9 +224,9 @@ auto writeAttributeAsync(
 namespace detail {
 
 template <AttributeId Attribute, typename T>
-inline auto readAttributeImpl(T& serverOrClient, const NodeId& id) {
+inline auto readAttributeImpl(T& connection, const NodeId& id) {
     using Handler = typename detail::AttributeHandler<Attribute>;
-    return Handler::fromDataValue(readAttribute(serverOrClient, id, Attribute));
+    return Handler::fromDataValue(readAttribute(connection, id, Attribute));
 }
 
 template <AttributeId Attribute, typename CompletionToken>
@@ -245,18 +245,18 @@ inline auto readAttributeAsyncImpl(Client& client, const NodeId& id, CompletionT
 }
 
 template <AttributeId Attribute, typename T, typename U>
-inline void writeAttributeImpl(T& serverOrClient, const NodeId& id, U&& value) {
+inline void writeAttributeImpl(T& connection, const NodeId& id, U&& value) {
     using Handler = detail::AttributeHandler<Attribute>;
-    writeAttribute(serverOrClient, id, Attribute, Handler::toDataValue(std::forward<U>(value)));
+    writeAttribute(connection, id, Attribute, Handler::toDataValue(std::forward<U>(value)));
 }
 
 template <AttributeId Attribute, typename T, typename U, typename CompletionToken>
 inline auto writeAttributeAsyncImpl(
-    T& serverOrClient, const NodeId& id, U&& value, CompletionToken&& token
+    T& connection, const NodeId& id, U&& value, CompletionToken&& token
 ) {
     using Handler = detail::AttributeHandler<Attribute>;
     return writeAttributeAsync(
-        serverOrClient,
+        connection,
         id,
         Attribute,
         Handler::toDataValue(std::forward<U>(value)),
@@ -271,8 +271,8 @@ inline auto writeAttributeAsyncImpl(
  * @ingroup Read
  */
 template <typename T>
-inline DataValue readDataValue(T& serverOrClient, const NodeId& id) {
-    return readAttribute(serverOrClient, id, AttributeId::Value, TimestampsToReturn::Both);
+inline DataValue readDataValue(T& connection, const NodeId& id) {
+    return readAttribute(connection, id, AttributeId::Value, TimestampsToReturn::Both);
 }
 
 /**
@@ -281,9 +281,9 @@ inline DataValue readDataValue(T& serverOrClient, const NodeId& id) {
  * @ingroup Read
  */
 template <typename T, typename CompletionToken = DefaultCompletionToken>
-inline auto readDataValueAsync(T& serverOrClient, const NodeId& id, CompletionToken&& token) {
+inline auto readDataValueAsync(T& connection, const NodeId& id, CompletionToken&& token) {
     return readAttributeAsync(
-        serverOrClient,
+        connection,
         id,
         AttributeId::Value,
         TimestampsToReturn::Both,
@@ -296,8 +296,8 @@ inline auto readDataValueAsync(T& serverOrClient, const NodeId& id, CompletionTo
  * @ingroup Write
  */
 template <typename T>
-inline void writeDataValue(T& serverOrClient, const NodeId& id, const DataValue& value) {
-    writeAttribute(serverOrClient, id, AttributeId::Value, value);
+inline void writeDataValue(T& connection, const NodeId& id, const DataValue& value) {
+    writeAttribute(connection, id, AttributeId::Value, value);
 }
 
 /**

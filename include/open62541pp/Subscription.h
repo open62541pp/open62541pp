@@ -52,6 +52,7 @@ using EventCallback =
  * are registered locally. Notifications are then forwarded to user-defined callbacks instead of a
  * remote client. The `subscriptionId` for servers is always `0U`.
  *
+ * @tparam Connection Server or Client
  * @note Not all methods are available and implemented for servers.
  *
  * Use the free functions in the opcua::services namespace for more advanced usage:

@@ -21,7 +21,7 @@ class Client;
 class DataType;
 class EndpointDescription;
 struct Login;
-template <typename ServerOrClient>
+template <typename Connection>
 class Node;
 class NodeId;
 

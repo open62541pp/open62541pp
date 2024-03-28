@@ -9,14 +9,14 @@
 using namespace opcua;
 
 TEST_CASE_TEMPLATE("Log with custom logger", T, Server, Client) {
-    T serverOrClient;
+    T connection;
 
     static size_t counter = 0;
     static LogLevel lastLogLevel{};
     static LogCategory lastLogCategory{};
     static std::string lastMessage{};
 
-    serverOrClient.setLogger([&](LogLevel level, LogCategory category, std::string_view message) {
+    connection.setLogger([&](LogLevel level, LogCategory category, std::string_view message) {
         counter++;
         lastLogLevel = level;
         lastLogCategory = category;
@@ -24,11 +24,11 @@ TEST_CASE_TEMPLATE("Log with custom logger", T, Server, Client) {
     });
 
     // passing a nullptr should do nothing
-    serverOrClient.setLogger(nullptr);
+    connection.setLogger(nullptr);
 
     SUBCASE("Wrapper") {
         counter = 0;
-        log(serverOrClient, LogLevel::Info, LogCategory::Server, "Message");
+        log(connection, LogLevel::Info, LogCategory::Server, "Message");
         CHECK(counter == 1);
         CHECK(lastLogLevel == LogLevel::Info);
         CHECK(lastLogCategory == LogCategory::Server);
@@ -36,7 +36,7 @@ TEST_CASE_TEMPLATE("Log with custom logger", T, Server, Client) {
     }
 
     SUBCASE("Native") {
-        auto native = serverOrClient.handle();
+        auto native = connection.handle();
         counter = 0;
         log(native, LogLevel::Warning, LogCategory::Server, "Message from native");
         CHECK(counter == 1);
@@ -46,7 +46,7 @@ TEST_CASE_TEMPLATE("Log with custom logger", T, Server, Client) {
     }
 
     SUBCASE("Native nullptr") {
-        auto native = serverOrClient.handle();
+        auto native = connection.handle();
         native = nullptr;
         counter = 0;
         log(native, LogLevel::Warning, LogCategory::Server, "Message from null");

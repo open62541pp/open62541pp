@@ -56,7 +56,7 @@ auto callAsync(
  * Call a server method and return outputs.
  * The `objectId` must have a `HasComponent` reference to the method specified in `methodId`.
  *
- * @param serverOrClient Instance of type Server or Client
+ * @param connection Instance of type Server or Client
  * @param objectId NodeId of the object on which the method is invoked
  * @param methodId NodeId of the method to invoke
  * @param inputArguments Input argument values
@@ -67,7 +67,7 @@ auto callAsync(
  */
 template <typename T>
 std::vector<Variant> call(
-    T& serverOrClient,
+    T& connection,
     const NodeId& objectId,
     const NodeId& methodId,
     Span<const Variant> inputArguments
