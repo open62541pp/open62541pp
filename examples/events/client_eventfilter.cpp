@@ -49,8 +49,8 @@ int main() {
             const opcua::MonitoredItem item(client, subId, monId);
             std::cout
                 << "Event notification:\n"
-                << "- subscription id:   " << item.getSubscriptionId() << "\n"
-                << "- monitored item id: " << item.getMonitoredItemId() << "\n"
+                << "- subscription id:   " << item.subscriptionId() << "\n"
+                << "- monitored item id: " << item.monitoredItemId() << "\n"
                 << "- node id:           " << item.getNodeId().toString() << "\n"
                 << "- attribute id:      " << static_cast<int>(item.getAttributeId()) << "\n";
 

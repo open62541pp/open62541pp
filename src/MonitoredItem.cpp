@@ -5,11 +5,17 @@
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
+#include "open62541pp/Subscription.h"
 #include "open62541pp/detail/ClientContext.h"
 #include "open62541pp/detail/ServerContext.h"
 #include "open62541pp/detail/open62541/common.h"  // UA_STATUSCODE_BADMONITOREDITEMIDINVALID
 
 namespace opcua {
+
+template <typename T>
+Subscription<T> MonitoredItem<T>::subscription() const noexcept {
+    return Subscription<T>(connection_, subscriptionId_);
+}
 
 template <typename T>
 inline static auto& getMonitoredItemContext(
@@ -36,6 +42,8 @@ AttributeId MonitoredItem<T>::getAttributeId() const {
 }
 
 // explicit template instantiations
+template Subscription<Client> MonitoredItem<Client>::subscription() const noexcept;
+template Subscription<Server> MonitoredItem<Server>::subscription() const noexcept;
 template const NodeId& MonitoredItem<Client>::getNodeId() const;
 template const NodeId& MonitoredItem<Server>::getNodeId() const;
 template AttributeId MonitoredItem<Client>::getAttributeId() const;
