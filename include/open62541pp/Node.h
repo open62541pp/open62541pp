@@ -28,12 +28,12 @@ namespace opcua {
 /**
  * High-level node class to access node attribute, browse and populate address space.
  *
- * The Node API is just a more convenient way of using the free functions in the `services`
+ * The Node API is just a more convenient way of using the free functions in the opcua::services
  * namespace.
  *
  * Node objects are useful as-is but they do not expose the entire OPC UA protocol. You can get
- * access to the associated NodeId instance with the getNodeId() method and apply the native
- * open62541 functions or the free functions in the `services` namespace.
+ * access to the associated NodeId instance with the Node::id() method and apply the native
+ * open62541 functions or the free functions in the opcua::services namespace.
  *
  * @see Services
  */
