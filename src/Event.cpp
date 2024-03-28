@@ -1,8 +1,8 @@
 #include "open62541pp/Event.h"
 
+#include "open62541pp/Config.h"  // UA_ENABLE_SUBSCRIPTIONS_EVENTS
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
-#include "open62541pp/detail/open62541/config.h"
 #include "open62541pp/detail/open62541/server.h"
 #include "open62541pp/types/DateTime.h"
 #include "open62541pp/types/NodeId.h"
@@ -14,24 +14,11 @@ namespace opcua {
 
 Event::Event(Server& server, const NodeId& eventType)
     : connection_(server) {
-    const auto status = UA_Server_createEvent(server.handle(), eventType, id_.handle());
-    throwIfBad(status);
+    throwIfBad(UA_Server_createEvent(server.handle(), eventType, id_.handle()));
 }
 
 Event::~Event() {
-    UA_Server_deleteNode(getConnection().handle(), getNodeId(), true /* deleteReferences */);
-}
-
-Server& Event::getConnection() noexcept {
-    return connection_;
-}
-
-const Server& Event::getConnection() const noexcept {
-    return connection_;
-}
-
-const NodeId& Event::getNodeId() const noexcept {
-    return id_;
+    UA_Server_deleteNode(connection().handle(), id(), true /* deleteReferences */);
 }
 
 Event& Event::writeSourceName(std::string_view sourceName) {
@@ -52,7 +39,7 @@ Event& Event::writeMessage(const LocalizedText& message) {
 
 Event& Event::writeProperty(const QualifiedName& propertyName, const Variant& value) {
     const auto status = UA_Server_writeObjectProperty(
-        getConnection().handle(), getNodeId(), propertyName, value
+        connection().handle(), id(), propertyName, value
     );
     throwIfBad(status);
     return *this;
@@ -61,8 +48,8 @@ Event& Event::writeProperty(const QualifiedName& propertyName, const Variant& va
 ByteString Event::trigger(const NodeId& originId) {
     ByteString eventId;
     const auto status = UA_Server_triggerEvent(
-        getConnection().handle(),
-        getNodeId(),
+        connection().handle(),
+        id(),
         originId,
         eventId.handle(),
         false  // deleteEventNode
@@ -74,7 +61,7 @@ ByteString Event::trigger(const NodeId& originId) {
 #endif
 
 bool operator==(const Event& lhs, const Event& rhs) noexcept {
-    return (lhs.getConnection() == rhs.getConnection()) && (lhs.getNodeId() == rhs.getNodeId());
+    return (lhs.connection() == rhs.connection()) && (lhs.id() == rhs.id());
 }
 
 bool operator!=(const Event& lhs, const Event& rhs) noexcept {

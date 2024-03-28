@@ -14,7 +14,7 @@ int main() {
 
     // Call method from parent node (Objects)
     const auto outputs = objNode.callMethod(
-        greetMethodNode.getNodeId(), {opcua::Variant::fromScalar("World")}
+        greetMethodNode.id(), {opcua::Variant::fromScalar("World")}
     );
     std::cout << outputs.at(0).getScalar<opcua::String>() << std::endl;
 }

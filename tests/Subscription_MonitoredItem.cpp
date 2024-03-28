@@ -12,6 +12,7 @@
 #include "open62541pp/types/Variant.h"
 
 #include "helper/Runner.h"
+#include "helper/ServerClientSetup.h"
 
 using namespace opcua;
 using namespace std::literals::chrono_literals;
@@ -20,15 +21,19 @@ using namespace std::literals::chrono_literals;
 TEST_CASE("Subscription & MonitoredItem (server)") {
     Server server;
 
+    SUBCASE("Create Subscription with arbitrary id") {
+        CHECK(Subscription(server, 11U).connection() == server);
+        CHECK(Subscription(server, 11U).subscriptionId() == 0U);
+    }
+
     SUBCASE("Create MonitoredItem with arbitrary ids") {
-        CHECK(MonitoredItem(server, 11U, 22U).getSubscriptionId() == 0U);
-        CHECK(MonitoredItem(server, 11U, 22U).getMonitoredItemId() == 22U);
+        CHECK(MonitoredItem(server, 11U, 22U).connection() == server);
+        CHECK(MonitoredItem(server, 11U, 22U).subscriptionId() == 0U);
+        CHECK(MonitoredItem(server, 11U, 22U).monitoredItemId() == 22U);
     }
 
     SUBCASE("Create & delete subscription") {
         auto sub = server.createSubscription();
-
-        CHECK(sub.getConnection() == server);
         CHECK(sub.getMonitoredItems().empty());
 
         MonitoringParametersEx monitoringParameters{};
@@ -54,22 +59,31 @@ TEST_CASE("Subscription & MonitoredItem (server)") {
 }
 
 TEST_CASE("Subscription & MonitoredItem (client)") {
-    Server server;
-    ServerRunner serverRunner(server);
-    Client client;
-    client.connect("opc.tcp://localhost:4840");
+    ServerClientSetup setup;
+    setup.client.connect(setup.endpointUrl);
+    auto& client = setup.client;
+
+    SUBCASE("Create Subscription with arbitrary id") {
+        CHECK(Subscription(client, 11U).connection() == client);
+        CHECK(Subscription(client, 11U).subscriptionId() == 11U);
+    }
+
+    SUBCASE("Create MonitoredItem with arbitrary ids") {
+        CHECK(MonitoredItem(client, 11U, 22U).connection() == client);
+        CHECK(MonitoredItem(client, 11U, 22U).subscriptionId() == 11U);
+        CHECK(MonitoredItem(client, 11U, 22U).monitoredItemId() == 22U);
+    }
 
     SUBCASE("Create & delete subscription") {
         CHECK(client.getSubscriptions().empty());
 
         SubscriptionParameters parameters{};
         auto sub = client.createSubscription(parameters);
-        CAPTURE(sub.getSubscriptionId());
+        CAPTURE(sub.subscriptionId());
 
         CHECK(client.getSubscriptions().size() == 1);
         CHECK(client.getSubscriptions().at(0) == sub);
 
-        CHECK(sub.getConnection() == client);
         CHECK(sub.getMonitoredItems().empty());
 
         sub.deleteSubscription();
@@ -143,8 +157,8 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
         CHECK(monId1 != 0);
         CHECK(monId2 != 0);
         CHECK(monId2 != monId1);
-        CHECK(monItem1.getMonitoredItemId() == monId1);
-        CHECK(monItem2.getMonitoredItemId() == monId2);
+        CHECK(monItem1.monitoredItemId() == monId1);
+        CHECK(monItem2.monitoredItemId() == monId2);
     }
 
     SUBCASE("Modify monitored item") {

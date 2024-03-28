@@ -124,10 +124,10 @@ TEST_CASE("Server configuration") {
 
     SUBCASE("Get default nodes") {
         // clang-format off
-            CHECK_EQ(server.getRootNode().getNodeId(),    NodeId{0, UA_NS0ID_ROOTFOLDER});
-            CHECK_EQ(server.getObjectsNode().getNodeId(), NodeId{0, UA_NS0ID_OBJECTSFOLDER});
-            CHECK_EQ(server.getTypesNode().getNodeId(),   NodeId{0, UA_NS0ID_TYPESFOLDER});
-            CHECK_EQ(server.getViewsNode().getNodeId(),   NodeId{0, UA_NS0ID_VIEWSFOLDER});
+        CHECK_EQ(server.getRootNode().id(),    NodeId{0, UA_NS0ID_ROOTFOLDER});
+        CHECK_EQ(server.getObjectsNode().id(), NodeId{0, UA_NS0ID_OBJECTSFOLDER});
+        CHECK_EQ(server.getTypesNode().id(),   NodeId{0, UA_NS0ID_TYPESFOLDER});
+        CHECK_EQ(server.getViewsNode().id(),   NodeId{0, UA_NS0ID_VIEWSFOLDER});
         // clang-format on
     }
 }

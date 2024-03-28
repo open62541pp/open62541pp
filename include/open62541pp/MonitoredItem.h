@@ -14,8 +14,6 @@ namespace opcua {
 
 // forward declarations
 class Server;
-template <typename Connection>
-class Subscription;
 
 using MonitoringParametersEx = services::MonitoringParametersEx;
 using MonitoringParameters
@@ -26,7 +24,7 @@ using MonitoringParameters
  *
  * @note Not all methods are available and implemented for servers.
  *
- * Use the free functions in the `services` namespace for more advanced usage:
+ * Use the free functions in the opcua::services namespace for more advanced usage:
  * - @ref MonitoredItem
  */
 template <typename Connection>
@@ -42,27 +40,44 @@ public:
           monitoredItemId_(monitoredItemId) {}
 
     /// Get the server/client instance.
-    Connection& getConnection() noexcept {
+    Connection& connection() noexcept {
         return connection_;
     }
 
     /// Get the server/client instance.
+    const Connection& connection() const noexcept {
+        return connection_;
+    }
+
+    [[deprecated("Use connection() instead")]]
+    Connection& getConnection() noexcept {
+        return connection_;
+    }
+
+    [[deprecated("Use connection() instead")]]
     const Connection& getConnection() const noexcept {
         return connection_;
     }
 
     /// Get the server-assigned identifier of the underlying subscription.
+    uint32_t subscriptionId() const noexcept {
+        return subscriptionId_;
+    }
+
+    [[deprecated("Use subscriptionId() instead")]]
     uint32_t getSubscriptionId() const noexcept {
         return subscriptionId_;
     }
 
     /// Get the server-assigned identifier of this monitored item.
-    uint32_t getMonitoredItemId() const noexcept {
+    uint32_t monitoredItemId() const noexcept {
         return monitoredItemId_;
     }
 
-    /// Get the underlying subscription.
-    Subscription<Connection> getSubscription() const;
+    [[deprecated("Use monitoredItemId() instead")]]
+    uint32_t getMonitoredItemId() const noexcept {
+        return monitoredItemId_;
+    }
 
     /// Get the monitored NodeId.
     const NodeId& getNodeId() const;
@@ -100,9 +115,9 @@ private:
 
 template <typename T>
 inline bool operator==(const MonitoredItem<T>& lhs, const MonitoredItem<T>& rhs) noexcept {
-    return (lhs.getConnection() == rhs.getConnection()) &&
-           (lhs.getSubscriptionId() == rhs.getSubscriptionId()) &&
-           (lhs.getMonitoredItemId() == rhs.getMonitoredItemId());
+    return (lhs.connection() == rhs.connection()) &&
+           (lhs.subscriptionId() == rhs.subscriptionId()) &&
+           (lhs.monitoredItemId() == rhs.monitoredItemId());
 }
 
 template <typename T>
