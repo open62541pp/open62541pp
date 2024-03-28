@@ -17,7 +17,7 @@ TEST_CASE("Event") {
     SUBCASE("Create and remove node representation") {
         auto event = std::make_unique<Event>(server);
 
-        const auto id = event->getNodeId();
+        const auto id = event->id();
         CHECK_FALSE(id.isNull());
         CHECK_NOTHROW(services::readNodeId(server, id));
 
@@ -29,8 +29,8 @@ TEST_CASE("Event") {
     SUBCASE("Create and trigger event") {
         Event event(server);
 
-        CHECK(&event.getConnection() == &server);
-        CHECK(&std::as_const(event).getConnection() == &server);
+        CHECK(&event.connection() == &server);
+        CHECK(&std::as_const(event).connection() == &server);
 
         CHECK_NOTHROW(event.writeSourceName("SourceName"));
         CHECK_NOTHROW(event.writeTime(DateTime::now()));

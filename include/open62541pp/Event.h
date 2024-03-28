@@ -35,12 +35,34 @@ public:
     Event& operator=(Event&&) noexcept = delete;
 
     /// Get the server instance.
-    Server& getConnection() noexcept;
+    Server& connection() noexcept {
+        return connection_;
+    }
+
     /// Get the server instance.
-    const Server& getConnection() const noexcept;
+    const Server& connection() const noexcept {
+        return connection_;
+    }
+
+    [[deprecated("Use connection() instead")]]
+    Server& getConnection() noexcept {
+        return connection_;
+    }
+
+    [[deprecated("Use connection() instead")]]
+    const Server& getConnection() const noexcept {
+        return connection_;
+    }
 
     /// Get the NodeId of the underlying node representation.
-    const NodeId& getNodeId() const noexcept;
+    const NodeId& id() const noexcept {
+        return id_;
+    }
+
+    [[deprecated("Use id() instead")]]
+    const NodeId& getNodeId() const noexcept {
+        return id_;
+    }
 
     /// Set the source name (optional).
     Event& writeSourceName(std::string_view sourceName);
