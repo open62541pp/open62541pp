@@ -44,6 +44,8 @@ namespace opcua::services {
 
 /**
  * Read one or more attributes of one or more nodes (client only).
+ * @param connection Instance of type Client
+ * @param request Read request
  */
 ReadResponse read(Client& connection, const ReadRequest& request);
 
@@ -96,6 +98,10 @@ inline auto readAsync(
 
 /**
  * Read node attribute.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to read
+ * @param attributeId Attribute to read
+ * @param timestamps Timestamps to return
  */
 template <typename T>
 DataValue readAttribute(
@@ -151,6 +157,8 @@ auto readAttributeAsync(
 
 /**
  * Write one or more attributes of one or more nodes (client only).
+ * @param connection Instance of type Client
+ * @param request Write request
  */
 WriteResponse write(Client& connection, const WriteRequest& request);
 
@@ -196,6 +204,10 @@ inline auto writeAsync(
 
 /**
  * Write node attribute.
+ * @param connection Instance of type Client
+ * @param id Node to write
+ * @param attributeId Attribute to write
+ * @param value Value to write
  */
 template <typename T>
 void writeAttribute(
@@ -278,6 +290,8 @@ inline auto writeAttributeAsyncImpl(
 
 /**
  * Read the `AttributeId::Value` attribute of a node as a DataValue object.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to read
  * @ingroup Read
  */
 template <typename T>
@@ -287,11 +301,12 @@ inline DataValue readDataValue(T& connection, const NodeId& id) {
 
 /**
  * Asynchronously read the `AttributeId::Value` of a node as a DataValue object.
+ * @copydetails readDataValue
  * @param token @completiontoken{void(Result<DataValue>&)}
  * @ingroup Read
  */
-template <typename T, typename CompletionToken = DefaultCompletionToken>
-inline auto readDataValueAsync(T& connection, const NodeId& id, CompletionToken&& token) {
+template <typename CompletionToken = DefaultCompletionToken>
+inline auto readDataValueAsync(Client& connection, const NodeId& id, CompletionToken&& token) {
     return readAttributeAsync(
         connection,
         id,
@@ -303,6 +318,9 @@ inline auto readDataValueAsync(T& connection, const NodeId& id, CompletionToken&
 
 /**
  * Write the AttributeId::Value attribute of a node as a DataValue object.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to write
+ * @param value Value to write
  * @ingroup Write
  */
 template <typename T>
@@ -312,6 +330,7 @@ inline void writeDataValue(T& connection, const NodeId& id, const DataValue& val
 
 /**
  * Asynchronously write the AttributeId::Value attribute of a node as a DataValue object.
+ * @copydetails writeDataValue
  * @param token @completiontoken{void(Result<void>)}
  * @ingroup Write
  */

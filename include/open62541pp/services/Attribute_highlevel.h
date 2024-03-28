@@ -10,6 +10,8 @@ namespace opcua::services {
 
 /**
  * Read the AttributeId::NodeId attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to read
  * @ingroup Read
  */
 template <typename T>
@@ -19,6 +21,7 @@ inline NodeId readNodeId(T& connection, const NodeId& id) {
 
 /**
  * Asynchronously read the AttributeId::NodeId attribute of a node.
+ * @copydetails readNodeId
  * @param token @completiontoken{void(Result<NodeId>&)}
  * @ingroup Read
  */
@@ -33,6 +36,8 @@ inline auto readNodeIdAsync(
 
 /**
  * Read the AttributeId::NodeClass attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to read
  * @ingroup Read
  */
 template <typename T>
@@ -42,6 +47,7 @@ inline NodeClass readNodeClass(T& connection, const NodeId& id) {
 
 /**
  * Asynchronously read the AttributeId::NodeClass attribute of a node.
+ * @copydetails readNodeClass
  * @param token @completiontoken{void(Result<NodeClass>)}
  * @ingroup Read
  */
@@ -56,6 +62,8 @@ inline auto readNodeClassAsync(
 
 /**
  * Read the AttributeId::BrowseName attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to read
  * @ingroup Read
  */
 template <typename T>
@@ -65,6 +73,7 @@ inline QualifiedName readBrowseName(T& connection, const NodeId& id) {
 
 /**
  * Asynchronously read the AttributeId::BrowseName attribute of a node.
+ * @copydetails readBrowseName
  * @param token @completiontoken{void(Result<QualifiedName>&)}
  * @ingroup Read
  */
@@ -79,6 +88,9 @@ inline auto readBrowseNameAsync(
 
 /**
  * Write the AttributeId::BrowseName attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to write
+ * @param browseName Value to write
  * @ingroup Write
  */
 template <typename T>
@@ -88,6 +100,7 @@ inline void writeBrowseName(T& connection, const NodeId& id, const QualifiedName
 
 /**
  * Asynchronously write the AttributeId::BrowseName attribute of a node.
+ * @copydetails writeBrowseName
  * @param token @completiontoken{void(Result<void>)}
  * @ingroup Write
  */
@@ -105,6 +118,8 @@ inline auto writeBrowseNameAsync(
 
 /**
  * Read the AttributeId::DisplayName attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to read
  * @ingroup Read
  */
 template <typename T>
@@ -114,6 +129,7 @@ inline LocalizedText readDisplayName(T& connection, const NodeId& id) {
 
 /**
  * Asynchronously read the AttributeId::DisplayName attribute of a node.
+ * @copydetails readDisplayName
  * @param token @completiontoken{void(Result<LocalizedText>&)}
  * @ingroup Read
  */
@@ -128,6 +144,9 @@ inline auto readDisplayNameAsync(
 
 /**
  * Write the AttributeId::DisplayName attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to write
+ * @param displayName Value to write
  * @ingroup Write
  */
 template <typename T>
@@ -137,6 +156,7 @@ inline void writeDisplayName(T& connection, const NodeId& id, const LocalizedTex
 
 /**
  * Asynchronously write the AttributeId::DisplayName attribute of a node.
+ * @copydetails writeDisplayName
  * @param token @completiontoken{void(Result<void>)}
  * @ingroup Write
  */
@@ -154,6 +174,8 @@ inline auto writeDisplayNameAsync(
 
 /**
  * Read the AttributeId::Description attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to read
  * @ingroup Read
  */
 template <typename T>
@@ -163,6 +185,7 @@ inline LocalizedText readDescription(T& connection, const NodeId& id) {
 
 /**
  * Asynchronously read the AttributeId::Description attribute of a node.
+ * @copydetails readDescription
  * @param token @completiontoken{void(Result<LocalizedText>&)}
  * @ingroup Read
  */
@@ -177,6 +200,9 @@ inline auto readDescriptionAsync(
 
 /**
  * Write the AttributeId::Description attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to write
+ * @param description Value to write
  * @ingroup Write
  */
 template <typename T>
@@ -186,6 +212,7 @@ inline void writeDescription(T& connection, const NodeId& id, const LocalizedTex
 
 /**
  * Asynchronously write the AttributeId::Description attribute of a node.
+ * @copydetails writeDescription
  * @param token @completiontoken{void(Result<void>)}
  * @ingroup Write
  */
@@ -203,6 +230,8 @@ inline auto writeDescriptionAsync(
 
 /**
  * Read the AttributeId::WriteMask attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to read
  * @ingroup Read
  */
 template <typename T>
@@ -212,6 +241,7 @@ inline Bitmask<WriteMask> readWriteMask(T& connection, const NodeId& id) {
 
 /**
  * Asynchronously read the AttributeId::WriteMask attribute of a node.
+ * @copydetails readWriteMask
  * @param token @completiontoken{void(Result<Bitmask<WriteMask>>)}
  * @ingroup Read
  */
@@ -226,6 +256,9 @@ inline auto readWriteMaskAsync(
 
 /**
  * Write the AttributeId::WriteMask attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to write
+ * @param writeMask Value to write
  * @ingroup Write
  */
 template <typename T>
@@ -235,6 +268,7 @@ inline void writeWriteMask(T& connection, const NodeId& id, Bitmask<WriteMask> w
 
 /**
  * Asynchronously write the AttributeId::WriteMask attribute of a node.
+ * @copydetails writeWriteMask
  * @param token @completiontoken{void(Result<void>)}
  * @ingroup Write
  */
@@ -252,6 +286,8 @@ inline auto writeWriteMaskAsync(
 
 /**
  * Read the AttributeId::UserWriteMask attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to read
  * @ingroup Read
  */
 template <typename T>
@@ -261,6 +297,7 @@ inline Bitmask<WriteMask> readUserWriteMask(T& connection, const NodeId& id) {
 
 /**
  * Asynchronously read the AttributeId::UserWriteMask attribute of a node.
+ * @copydetails readUserWriteMask
  * @param token @completiontoken{void(Result<Bitmask<WriteMask>>)}
  * @ingroup Read
  */
@@ -275,6 +312,9 @@ inline auto readUserWriteMaskAsync(
 
 /**
  * Write the AttributeId::UserWriteMask attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to write
+ * @param userWriteMask Value to write
  * @ingroup Write
  */
 template <typename T>
@@ -284,6 +324,7 @@ inline void writeUserWriteMask(T& connection, const NodeId& id, Bitmask<WriteMas
 
 /**
  * Asynchronously write the AttributeId::UserWriteMask attribute of a node.
+ * @copydetails writeUserWriteMask
  * @param token @completiontoken{void(Result<void>)}
  * @ingroup Write
  */
@@ -301,6 +342,8 @@ inline auto writeUserWriteMaskAsync(
 
 /**
  * Read the AttributeId::IsAbstract attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to read
  * @ingroup Read
  */
 template <typename T>
@@ -310,6 +353,7 @@ inline bool readIsAbstract(T& connection, const NodeId& id) {
 
 /**
  * Asynchronously read the AttributeId::IsAbstract attribute of a node.
+ * @copydetails readIsAbstract
  * @param token @completiontoken{void(Result<bool>)}
  * @ingroup Read
  */
@@ -324,6 +368,9 @@ inline auto readIsAbstractAsync(
 
 /**
  * Write the AttributeId::IsAbstract attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to write
+ * @param isAbstract Value to write
  * @ingroup Write
  */
 template <typename T>
@@ -333,6 +380,7 @@ inline void writeIsAbstract(T& connection, const NodeId& id, bool isAbstract) {
 
 /**
  * Asynchronously write the AttributeId::IsAbstract attribute of a node.
+ * @copydetails writeIsAbstract
  * @param token @completiontoken{void(Result<void>)}
  * @ingroup Write
  */
@@ -350,6 +398,8 @@ inline auto writeIsAbstractAsync(
 
 /**
  * Read the AttributeId::Symmetric attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to read
  * @ingroup Read
  */
 template <typename T>
@@ -359,6 +409,7 @@ inline bool readSymmetric(T& connection, const NodeId& id) {
 
 /**
  * Asynchronously read the AttributeId::Symmetric attribute of a node.
+ * @copydetails readSymmetric
  * @param token @completiontoken{void(Result<bool>)}
  * @ingroup Read
  */
@@ -373,6 +424,9 @@ inline auto readSymmetricAsync(
 
 /**
  * Write the AttributeId::Symmetric attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to write
+ * @param symmetric Value to write
  * @ingroup Write
  */
 template <typename T>
@@ -382,6 +436,7 @@ inline void writeSymmetric(T& connection, const NodeId& id, bool symmetric) {
 
 /**
  * Asynchronously write the AttributeId::Symmetric attribute of a node.
+ * @copydetails writeSymmetric
  * @param token @completiontoken{void(Result<void>)}
  * @ingroup Write
  */
@@ -399,6 +454,8 @@ inline auto writeSymmetricAsync(
 
 /**
  * Read the AttributeId::InverseName attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to read
  * @ingroup Read
  */
 template <typename T>
@@ -408,6 +465,7 @@ inline LocalizedText readInverseName(T& connection, const NodeId& id) {
 
 /**
  * Asynchronously read the AttributeId::InverseName attribute of a node.
+ * @copydetails readInverseName
  * @param token @completiontoken{void(Result<LocalizedText>&)}
  * @ingroup Read
  */
@@ -422,6 +480,9 @@ inline auto readInverseNameAsync(
 
 /**
  * Write the AttributeId::InverseName attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to write
+ * @param inverseName Value to write
  * @ingroup Write
  */
 template <typename T>
@@ -431,6 +492,7 @@ inline void writeInverseName(T& connection, const NodeId& id, const LocalizedTex
 
 /**
  * Asynchronously write the AttributeId::InverseName attribute of a node.
+ * @copydetails writeInverseName
  * @param token @completiontoken{void(Result<void>)}
  * @ingroup Write
  */
@@ -448,6 +510,8 @@ inline auto writeInverseNameAsync(
 
 /**
  * Read the AttributeId::ContainsNoLoops attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to read
  * @ingroup Read
  */
 template <typename T>
@@ -457,6 +521,7 @@ inline bool readContainsNoLoops(T& connection, const NodeId& id) {
 
 /**
  * Asynchronously read the AttributeId::ContainsNoLoops attribute of a node.
+ * @copydetails readContainsNoLoops
  * @param token @completiontoken{void(Result<bool>&)}
  * @ingroup Read
  */
@@ -471,6 +536,9 @@ inline auto readContainsNoLoopsAsync(
 
 /**
  * Write the AttributeId::ContainsNoLoops attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to write
+ * @param containsNoLoops Value to write
  * @ingroup Write
  */
 template <typename T>
@@ -480,6 +548,7 @@ inline void writeContainsNoLoops(T& connection, const NodeId& id, const bool& co
 
 /**
  * Asynchronously write the AttributeId::ContainsNoLoops attribute of a node.
+ * @copydetails writeContainsNoLoops
  * @param token @completiontoken{void(Result<void>)}
  * @ingroup Write
  */
@@ -497,6 +566,8 @@ inline auto writeContainsNoLoopsAsync(
 
 /**
  * Read the AttributeId::EventNotifier attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to read
  * @ingroup Read
  */
 template <typename T>
@@ -506,6 +577,7 @@ inline Bitmask<EventNotifier> readEventNotifier(T& connection, const NodeId& id)
 
 /**
  * Asynchronously read the AttributeId::EventNotifier attribute of a node.
+ * @copydetails readEventNotifier
  * @param token @completiontoken{void(Result<Bitmask<EventNotifier>>)}
  * @ingroup Read
  */
@@ -520,6 +592,9 @@ inline auto readEventNotifierAsync(
 
 /**
  * Write the AttributeId::EventNotifier attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to write
+ * @param eventNotifier Value to write
  * @ingroup Write
  */
 template <typename T>
@@ -531,6 +606,7 @@ inline void writeEventNotifier(
 
 /**
  * Asynchronously write the AttributeId::EventNotifier attribute of a node.
+ * @copydetails writeEventNotifier
  * @param token @completiontoken{void(Result<void>)}
  * @ingroup Write
  */
@@ -548,6 +624,8 @@ inline auto writeEventNotifierAsync(
 
 /**
  * Read the AttributeId::Value attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to read
  * @ingroup Read
  */
 template <typename T>
@@ -557,6 +635,7 @@ inline Variant readValue(T& connection, const NodeId& id) {
 
 /**
  * Asynchronously read the AttributeId::Value attribute of a node.
+ * @copydetails readValue
  * @param token @completiontoken{void(Result<Variant>&)}
  * @ingroup Read
  */
@@ -571,6 +650,9 @@ inline auto readValueAsync(
 
 /**
  * Write the AttributeId::Value attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to write
+ * @param value Value to write
  * @ingroup Write
  */
 template <typename T>
@@ -580,6 +662,7 @@ inline void writeValue(T& connection, const NodeId& id, const Variant& value) {
 
 /**
  * Asynchronously write the AttributeId::Value attribute of a node.
+ * @copydetails writeValue
  * @param token @completiontoken{void(Result<void>)}
  * @ingroup Write
  */
@@ -597,6 +680,8 @@ inline auto writeValueAsync(
 
 /**
  * Read the AttributeId::DataType attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to read
  * @ingroup Read
  */
 template <typename T>
@@ -606,6 +691,7 @@ inline NodeId readDataType(T& connection, const NodeId& id) {
 
 /**
  * Asynchronously read the AttributeId::DataType attribute of a node.
+ * @copydetails readDataType
  * @param token @completiontoken{void(Result<NodeId>&)}
  * @ingroup Read
  */
@@ -620,6 +706,9 @@ inline auto readDataTypeAsync(
 
 /**
  * Write the AttributeId::DataType attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to write
+ * @param dataType Value to write
  * @ingroup Write
  */
 template <typename T>
@@ -629,6 +718,7 @@ inline void writeDataType(T& connection, const NodeId& id, const NodeId& dataTyp
 
 /**
  * Asynchronously write the AttributeId::DataType attribute of a node.
+ * @copydetails writeDataType
  * @param token @completiontoken{void(Result<void>)}
  * @ingroup Write
  */
@@ -646,6 +736,8 @@ inline auto writeDataTypeAsync(
 
 /**
  * Read the AttributeId::ValueRank attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to read
  * @ingroup Read
  */
 template <typename T>
@@ -655,6 +747,7 @@ inline ValueRank readValueRank(T& connection, const NodeId& id) {
 
 /**
  * Asynchronously read the AttributeId::ValueRank attribute of a node.
+ * @copydetails readValueRank
  * @param token @completiontoken{void(Result<ValueRank>)}
  * @ingroup Read
  */
@@ -669,6 +762,9 @@ inline auto readValueRankAsync(
 
 /**
  * Write the AttributeId::ValueRank attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to write
+ * @param valueRank Value to write
  * @ingroup Write
  */
 template <typename T>
@@ -678,6 +774,7 @@ inline void writeValueRank(T& connection, const NodeId& id, ValueRank valueRank)
 
 /**
  * Asynchronously write the AttributeId::ValueRank attribute of a node.
+ * @copydetails writeValueRank
  * @param token @completiontoken{void(Result<void>)}
  * @ingroup Write
  */
@@ -695,6 +792,8 @@ inline auto writeValueRankAsync(
 
 /**
  * Read the AttributeId::ArrayDimensions attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to read
  * @ingroup Read
  */
 template <typename T>
@@ -704,6 +803,7 @@ inline std::vector<uint32_t> readArrayDimensions(T& connection, const NodeId& id
 
 /**
  * Asynchronously read the AttributeId::ArrayDimensions attribute of a node.
+ * @copydetails readArrayDimensions
  * @param token @completiontoken{void(Result<std::vector<uint32_t>>&)}
  * @ingroup Read
  */
@@ -718,6 +818,9 @@ inline auto readArrayDimensionsAsync(
 
 /**
  * Write the AttributeId::ArrayDimensions attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to write
+ * @param arrayDimensions Value to write
  * @ingroup Write
  */
 template <typename T>
@@ -729,6 +832,7 @@ inline void writeArrayDimensions(
 
 /**
  * Asynchronously write the AttributeId::ArrayDimensions attribute of a node.
+ * @copydetails writeArrayDimensions
  * @param token @completiontoken{void(Result<void>)}
  * @ingroup Write
  */
@@ -746,6 +850,8 @@ inline auto writeArrayDimensionsAsync(
 
 /**
  * Read the AttributeId::AccessLevel attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to read
  * @ingroup Read
  */
 template <typename T>
@@ -755,6 +861,7 @@ inline Bitmask<AccessLevel> readAccessLevel(T& connection, const NodeId& id) {
 
 /**
  * Asynchronously read the AttributeId::AccessLevel attribute of a node.
+ * @copydetails readAccessLevel
  * @param token @completiontoken{void(Result<Bitmask<AccessLevel>>)}
  * @ingroup Read
  */
@@ -769,6 +876,9 @@ inline auto readAccessLevelAsync(
 
 /**
  * Write the AttributeId::AccessLevel attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to write
+ * @param accessLevel Value to write
  * @ingroup Write
  */
 template <typename T>
@@ -778,6 +888,7 @@ inline void writeAccessLevel(T& connection, const NodeId& id, Bitmask<AccessLeve
 
 /**
  * Asynchronously write the AttributeId::AccessLevel attribute of a node.
+ * @copydetails writeAccessLevel
  * @param token @completiontoken{void(Result<void>)}
  * @ingroup Write
  */
@@ -795,6 +906,8 @@ inline auto writeAccessLevelAsync(
 
 /**
  * Read the AttributeId::UserAccessLevel attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to read
  * @ingroup Read
  */
 template <typename T>
@@ -804,6 +917,7 @@ inline Bitmask<AccessLevel> readUserAccessLevel(T& connection, const NodeId& id)
 
 /**
  * Asynchronously read the AttributeId::UserAccessLevel attribute of a node.
+ * @copydetails readUserAccessLevel
  * @param token @completiontoken{void(Result<Bitmask<AccessLevel>>)}
  * @ingroup Read
  */
@@ -818,6 +932,9 @@ inline auto readUserAccessLevelAsync(
 
 /**
  * Write the AttributeId::UserAccessLevel attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to write
+ * @param userAccessLevel Value to write
  * @ingroup Write
  */
 template <typename T>
@@ -829,6 +946,7 @@ inline void writeUserAccessLevel(
 
 /**
  * Asynchronously write the AttributeId::UserAccessLevel attribute of a node.
+ * @copydetails writeUserAccessLevel
  * @param token @completiontoken{void(Result<void>)}
  * @ingroup Write
  */
@@ -846,6 +964,8 @@ inline auto writeUserAccessLevelAsync(
 
 /**
  * Read the AttributeId::MinimumSamplingInterval attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to read
  * @ingroup Read
  */
 template <typename T>
@@ -855,6 +975,7 @@ inline double readMinimumSamplingInterval(T& connection, const NodeId& id) {
 
 /**
  * Asynchronously read the AttributeId::MinimumSamplingInterval attribute of a node.
+ * @copydetails readMinimumSamplingInterval
  * @param token @completiontoken{void(Result<double>)}
  * @ingroup Read
  */
@@ -869,6 +990,9 @@ inline auto readMinimumSamplingIntervalAsync(
 
 /**
  * Write the AttributeId::MinimumSamplingInterval attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to write
+ * @param minimumSamplingInterval Value to write
  * @ingroup Write
  */
 template <typename T>
@@ -882,6 +1006,7 @@ inline void writeMinimumSamplingInterval(
 
 /**
  * Asynchronously write the AttributeId::MinimumSamplingInterval attribute of a node.
+ * @copydetails writeMinimumSamplingInterval
  * @param token @completiontoken{void(Result<void>)}
  * @ingroup Write
  */
@@ -899,6 +1024,8 @@ inline auto writeMinimumSamplingIntervalAsync(
 
 /**
  * Read the AttributeId::Historizing attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to read
  * @ingroup Read
  */
 template <typename T>
@@ -908,6 +1035,7 @@ inline bool readHistorizing(T& connection, const NodeId& id) {
 
 /**
  * Asynchronously read the AttributeId::Historizing attribute of a node.
+ * @copydetails readHistorizing
  * @param token @completiontoken{void(Result<bool>)}
  * @ingroup Read
  */
@@ -922,6 +1050,9 @@ inline auto readHistorizingAsync(
 
 /**
  * Write the AttributeId::Historizing attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to write
+ * @param historizing Value to write
  * @ingroup Write
  */
 template <typename T>
@@ -931,6 +1062,7 @@ inline void writeHistorizing(T& connection, const NodeId& id, bool historizing) 
 
 /**
  * Asynchronously write the AttributeId::Historizing attribute of a node.
+ * @copydetails writeHistorizing
  * @param token @completiontoken{void(Result<void>)}
  * @ingroup Write
  */
@@ -948,6 +1080,8 @@ inline auto writeHistorizingAsync(
 
 /**
  * Read the AttributeId::Executable attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to read
  * @ingroup Read
  */
 template <typename T>
@@ -957,6 +1091,7 @@ inline bool readExecutable(T& connection, const NodeId& id) {
 
 /**
  * Asynchronously read the AttributeId::Executable attribute of a node.
+ * @copydetails readExecutable
  * @param token @completiontoken{void(Result<bool>)}
  * @ingroup Read
  */
@@ -971,6 +1106,9 @@ inline auto readExecutableAsync(
 
 /**
  * Write the AttributeId::Executable attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to write
+ * @param executable Value to write
  * @ingroup Write
  */
 template <typename T>
@@ -980,6 +1118,7 @@ inline void writeExecutable(T& connection, const NodeId& id, bool executable) {
 
 /**
  * Asynchronously write the AttributeId::Executable attribute of a node.
+ * @copydetails writeExecutable
  * @param token @completiontoken{void(Result<void>)}
  * @ingroup Write
  */
@@ -997,6 +1136,8 @@ inline auto writeExecutableAsync(
 
 /**
  * Read the AttributeId::UserExecutable attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to read
  * @ingroup Read
  */
 template <typename T>
@@ -1006,6 +1147,7 @@ inline bool readUserExecutable(T& connection, const NodeId& id) {
 
 /**
  * Asynchronously read the AttributeId::UserExecutable attribute of a node.
+ * @copydetails readUserExecutable
  * @param token @completiontoken{void(Result<bool>)}
  * @ingroup Read
  */
@@ -1020,6 +1162,9 @@ inline auto readUserExecutableAsync(
 
 /**
  * Write the AttributeId::UserExecutable attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to write
+ * @param userExecutable Value to write
  * @ingroup Write
  */
 template <typename T>
@@ -1029,6 +1174,7 @@ inline void writeUserExecutable(T& connection, const NodeId& id, bool userExecut
 
 /**
  * Asynchronously write the AttributeId::UserExecutable attribute of a node.
+ * @copydetails writeUserExecutable
  * @param token @completiontoken{void(Result<void>)}
  * @ingroup Write
  */

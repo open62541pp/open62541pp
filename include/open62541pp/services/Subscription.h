@@ -68,7 +68,7 @@ using DeleteSubscriptionCallback = std::function<void(uint32_t subId)>;
  * @param parameters Subscription parameters, may be revised by server
  * @param publishingEnabled Enable/disable publishing of the subscription
  * @param deleteCallback Invoked when the subscription is deleted
- * @returns Server-assigned identifier of the subscription
+ * @return Server-assigned identifier of the subscription
  */
 [[nodiscard]] uint32_t createSubscription(
     Client& connection,
