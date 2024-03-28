@@ -58,8 +58,8 @@ ByteString ByteString::fromBase64([[maybe_unused]] std::string_view encoded) {
 #endif
 }
 
-#ifdef UAPP_HAS_FILESYSTEM
-ByteString ByteString::fromFile(const std::filesystem::path& filepath) {
+#ifndef UAPP_NO_STD_FILESYSTEM
+ByteString ByteString::fromFile(const fs::path& filepath) {
     std::ifstream fp(filepath, std::ios::binary);
     const std::vector<uint8_t> bytes(
         (std::istreambuf_iterator<char>(fp)), (std::istreambuf_iterator<char>())
@@ -79,8 +79,8 @@ std::string ByteString::toBase64() const {
 #endif
 }
 
-#ifdef UAPP_HAS_FILESYSTEM
-void ByteString::toFile(const std::filesystem::path& filepath) const {
+#ifndef UAPP_NO_STD_FILESYSTEM
+void ByteString::toFile(const fs::path& filepath) const {
     std::ofstream fp(filepath, std::ios::binary);
     fp.write(reinterpret_cast<char*>(handle()->data), handle()->length);  // NOLINT
 }

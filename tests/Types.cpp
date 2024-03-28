@@ -118,7 +118,7 @@ TEST_CASE("ByteString") {
         CHECK(std::string(bs.get()) == "XYZ");
     }
 
-#ifdef UAPP_HAS_FILESYSTEM
+#ifndef UAPP_NO_STD_FILESYSTEM
     SUBCASE("toFile / fromFile") {
         const ByteString bs({88, 89, 90});
         CHECK_NOTHROW(bs.toFile("bytestring.bin"));
