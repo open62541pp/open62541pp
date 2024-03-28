@@ -5,17 +5,17 @@
 
 namespace opcua::services {
 
-ReadResponse read(Client& client, const ReadRequest& request) {
-    return readAsync(client, request, detail::SyncOperation{});
+ReadResponse read(Client& connection, const ReadRequest& request) {
+    return readAsync(connection, request, detail::SyncOperation{});
 }
 
 template <>
 DataValue readAttribute<Server>(
-    Server& server, const NodeId& id, AttributeId attributeId, TimestampsToReturn timestamps
+    Server& connection, const NodeId& id, AttributeId attributeId, TimestampsToReturn timestamps
 ) {
     const auto item = detail::createReadValueId(id, attributeId);
     auto result = UA_Server_read(
-        server.handle(), &item, static_cast<UA_TimestampsToReturn>(timestamps)
+        connection.handle(), &item, static_cast<UA_TimestampsToReturn>(timestamps)
     );
     detail::checkReadResult(result);
     return result;
@@ -23,29 +23,29 @@ DataValue readAttribute<Server>(
 
 template <>
 DataValue readAttribute<Client>(
-    Client& client, const NodeId& id, AttributeId attributeId, TimestampsToReturn timestamps
+    Client& connection, const NodeId& id, AttributeId attributeId, TimestampsToReturn timestamps
 ) {
-    return readAttributeAsync(client, id, attributeId, timestamps, detail::SyncOperation{});
+    return readAttributeAsync(connection, id, attributeId, timestamps, detail::SyncOperation{});
 }
 
-WriteResponse write(Client& client, const WriteRequest& request) {
-    return writeAsync(client, request, detail::SyncOperation{});
+WriteResponse write(Client& connection, const WriteRequest& request) {
+    return writeAsync(connection, request, detail::SyncOperation{});
 }
 
 template <>
 void writeAttribute<Server>(
-    Server& server, const NodeId& id, AttributeId attributeId, const DataValue& value
+    Server& connection, const NodeId& id, AttributeId attributeId, const DataValue& value
 ) {
     const auto item = detail::createWriteValue(id, attributeId, value);
-    const auto status = UA_Server_write(server.handle(), &item);
+    const auto status = UA_Server_write(connection.handle(), &item);
     throwIfBad(status);
 }
 
 template <>
 void writeAttribute<Client>(
-    Client& client, const NodeId& id, AttributeId attributeId, const DataValue& value
+    Client& connection, const NodeId& id, AttributeId attributeId, const DataValue& value
 ) {
-    writeAttributeAsync(client, id, attributeId, value, detail::SyncOperation{});
+    writeAttributeAsync(connection, id, attributeId, value, detail::SyncOperation{});
 }
 
 }  // namespace opcua::services

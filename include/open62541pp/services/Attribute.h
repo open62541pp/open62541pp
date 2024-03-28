@@ -45,17 +45,17 @@ namespace opcua::services {
 /**
  * Read one or more attributes of one or more nodes (client only).
  */
-ReadResponse read(Client& client, const ReadRequest& request);
+ReadResponse read(Client& connection, const ReadRequest& request);
 
 /**
  * @overload
  */
 inline ReadResponse read(
-    Client& client,
+    Client& connection,
     Span<const ReadValueId> nodesToRead,
     TimestampsToReturn timestamps = TimestampsToReturn::Neither
 ) {
-    return read(client, detail::createReadRequest(timestamps, nodesToRead));
+    return read(connection, detail::createReadRequest(timestamps, nodesToRead));
 }
 
 /**
@@ -65,10 +65,15 @@ inline ReadResponse read(
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto readAsync(
-    Client& client, const ReadRequest& request, CompletionToken&& token = DefaultCompletionToken()
+    Client& connection,
+    const ReadRequest& request,
+    CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::sendRequest<UA_ReadRequest, UA_ReadResponse>(
-        client, request, detail::WrapResponse<ReadResponse>{}, std::forward<CompletionToken>(token)
+        connection,
+        request,
+        detail::WrapResponse<ReadResponse>{},
+        std::forward<CompletionToken>(token)
     );
 }
 
@@ -77,13 +82,13 @@ auto readAsync(
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readAsync(
-    Client& client,
+    Client& connection,
     Span<const ReadValueId> nodesToRead,
     TimestampsToReturn timestamps = TimestampsToReturn::Neither,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return readAsync(
-        client,
+        connection,
         detail::createReadRequest(timestamps, nodesToRead),
         std::forward<CompletionToken>(token)
     );
@@ -107,7 +112,7 @@ DataValue readAttribute(
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto readAttributeAsync(
-    Client& client,
+    Client& connection,
     const NodeId& id,
     AttributeId attributeId,
     TimestampsToReturn timestamps = TimestampsToReturn::Neither,
@@ -116,7 +121,7 @@ auto readAttributeAsync(
     auto item = detail::createReadValueId(id, attributeId);
     auto request = detail::createReadRequest(timestamps, item);
     return detail::sendRequest<UA_ReadRequest, UA_ReadResponse>(
-        client,
+        connection,
         request,
         [](UA_ReadResponse& response) { return detail::getReadResult(response); },
         std::forward<CompletionToken>(token)
@@ -147,13 +152,13 @@ auto readAttributeAsync(
 /**
  * Write one or more attributes of one or more nodes (client only).
  */
-WriteResponse write(Client& client, const WriteRequest& request);
+WriteResponse write(Client& connection, const WriteRequest& request);
 
 /**
  * @overload
  */
-inline WriteResponse write(Client& client, Span<const WriteValue> nodesToWrite) {
-    return write(client, detail::createWriteRequest(nodesToWrite));
+inline WriteResponse write(Client& connection, Span<const WriteValue> nodesToWrite) {
+    return write(connection, detail::createWriteRequest(nodesToWrite));
 }
 
 /**
@@ -163,10 +168,15 @@ inline WriteResponse write(Client& client, Span<const WriteValue> nodesToWrite) 
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto writeAsync(
-    Client& client, const WriteRequest& request, CompletionToken&& token = DefaultCompletionToken()
+    Client& connection,
+    const WriteRequest& request,
+    CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::sendRequest<UA_WriteRequest, UA_WriteResponse>(
-        client, request, detail::WrapResponse<WriteResponse>{}, std::forward<CompletionToken>(token)
+        connection,
+        request,
+        detail::WrapResponse<WriteResponse>{},
+        std::forward<CompletionToken>(token)
     );
 }
 
@@ -175,12 +185,12 @@ auto writeAsync(
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeAsync(
-    Client& client,
+    Client& connection,
     Span<const WriteValue> nodesToWrite,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return writeAsync(
-        client, detail::createWriteRequest(nodesToWrite), std::forward<CompletionToken>(token)
+        connection, detail::createWriteRequest(nodesToWrite), std::forward<CompletionToken>(token)
     );
 }
 
@@ -199,7 +209,7 @@ void writeAttribute(
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto writeAttributeAsync(
-    Client& client,
+    Client& connection,
     const NodeId& id,
     AttributeId attributeId,
     const DataValue& value,
@@ -208,7 +218,7 @@ auto writeAttributeAsync(
     auto item = detail::createWriteValue(id, attributeId, value);
     auto request = detail::createWriteRequest(item);
     return detail::sendRequest<UA_WriteRequest, UA_WriteResponse>(
-        client,
+        connection,
         request,
         [](UA_WriteResponse& response) { throwIfBad(detail::getSingleResult(response)); },
         std::forward<CompletionToken>(token)
@@ -230,11 +240,11 @@ inline auto readAttributeImpl(T& connection, const NodeId& id) {
 }
 
 template <AttributeId Attribute, typename CompletionToken>
-inline auto readAttributeAsyncImpl(Client& client, const NodeId& id, CompletionToken&& token) {
+inline auto readAttributeAsyncImpl(Client& connection, const NodeId& id, CompletionToken&& token) {
     auto item = detail::createReadValueId(id, Attribute);
     auto request = detail::createReadRequest(TimestampsToReturn::Neither, item);
     return detail::sendRequest<UA_ReadRequest, UA_ReadResponse>(
-        client,
+        connection,
         request,
         [](UA_ReadResponse& response) {
             using Handler = typename detail::AttributeHandler<Attribute>;
@@ -307,13 +317,13 @@ inline void writeDataValue(T& connection, const NodeId& id, const DataValue& val
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeDataValueAsync(
-    Client& client,
+    Client& connection,
     const NodeId& id,
     const DataValue& value,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     writeAttributeAsync(
-        client, id, AttributeId::Value, value, std::forward<CompletionToken>(token)
+        connection, id, AttributeId::Value, value, std::forward<CompletionToken>(token)
     );
 }
 

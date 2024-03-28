@@ -11,25 +11,27 @@
 
 namespace opcua::services {
 
-AddNodesResponse addNodes(Client& client, const AddNodesRequest& request) {
-    return addNodesAsync(client, request, detail::SyncOperation{});
+AddNodesResponse addNodes(Client& connection, const AddNodesRequest& request) {
+    return addNodesAsync(connection, request, detail::SyncOperation{});
 }
 
-AddReferencesResponse addReferences(Client& client, const AddReferencesRequest& request) {
-    return addReferencesAsync(client, request, detail::SyncOperation{});
+AddReferencesResponse addReferences(Client& connection, const AddReferencesRequest& request) {
+    return addReferencesAsync(connection, request, detail::SyncOperation{});
 }
 
-DeleteNodesResponse deleteNodes(Client& client, const DeleteNodesRequest& request) {
-    return deleteNodesAsync(client, request, detail::SyncOperation{});
+DeleteNodesResponse deleteNodes(Client& connection, const DeleteNodesRequest& request) {
+    return deleteNodesAsync(connection, request, detail::SyncOperation{});
 }
 
-DeleteReferencesResponse deleteReferences(Client& client, const DeleteReferencesRequest& request) {
-    return deleteReferencesAsync(client, request, detail::SyncOperation{});
+DeleteReferencesResponse deleteReferences(
+    Client& connection, const DeleteReferencesRequest& request
+) {
+    return deleteReferencesAsync(connection, request, detail::SyncOperation{});
 }
 
 template <>
 NodeId addNode<Server>(
-    Server& server,
+    Server& connection,
     NodeClass nodeClass,
     const NodeId& parentId,
     const NodeId& id,
@@ -40,7 +42,7 @@ NodeId addNode<Server>(
 ) {
     NodeId addedNodeId;
     const auto status = __UA_Server_addNode(
-        server.handle(),
+        connection.handle(),
         static_cast<UA_NodeClass>(nodeClass),
         id.handle(),
         parentId.handle(),
@@ -58,7 +60,7 @@ NodeId addNode<Server>(
 
 template <>
 NodeId addNode<Client>(
-    Client& client,
+    Client& connection,
     NodeClass nodeClass,
     const NodeId& parentId,
     const NodeId& id,
@@ -68,7 +70,7 @@ NodeId addNode<Client>(
     const NodeId& referenceType
 ) {
     return addNodeAsync(
-        client,
+        connection,
         nodeClass,
         parentId,
         id,
@@ -111,7 +113,7 @@ static UA_StatusCode methodCallback(
 
 template <>
 NodeId addMethod(
-    Server& server,
+    Server& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -121,11 +123,11 @@ NodeId addMethod(
     const MethodAttributes& attributes,
     const NodeId& referenceType
 ) {
-    auto* nodeContext = opcua::detail::getContext(server).nodeContexts[id];
+    auto* nodeContext = opcua::detail::getContext(connection).nodeContexts[id];
     nodeContext->methodCallback = std::move(callback);
     NodeId outputNodeId;
     const auto status = UA_Server_addMethodNode(
-        server.handle(),
+        connection.handle(),
         id,
         parentId,
         referenceType,
@@ -145,7 +147,7 @@ NodeId addMethod(
 
 template <>
 NodeId addMethod(
-    Client& client,
+    Client& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -156,7 +158,7 @@ NodeId addMethod(
     const NodeId& referenceType
 ) {
     return addMethodAsync(
-        client,
+        connection,
         parentId,
         id,
         browseName,
@@ -172,14 +174,14 @@ NodeId addMethod(
 
 template <>
 void addReference<Server>(
-    Server& server,
+    Server& connection,
     const NodeId& sourceId,
     const NodeId& targetId,
     const NodeId& referenceType,
     bool forward
 ) {
     const auto status = UA_Server_addReference(
-        server.handle(),
+        connection.handle(),
         sourceId,
         referenceType,
         {targetId, {}, 0},
@@ -190,31 +192,31 @@ void addReference<Server>(
 
 template <>
 void addReference<Client>(
-    Client& client,
+    Client& connection,
     const NodeId& sourceId,
     const NodeId& targetId,
     const NodeId& referenceType,
     bool forward
 ) {
     return addReferenceAsync(
-        client, sourceId, targetId, referenceType, forward, detail::SyncOperation{}
+        connection, sourceId, targetId, referenceType, forward, detail::SyncOperation{}
     );
 }
 
 template <>
-void deleteNode<Server>(Server& server, const NodeId& id, bool deleteReferences) {
-    const auto status = UA_Server_deleteNode(server.handle(), id, deleteReferences);
+void deleteNode<Server>(Server& connection, const NodeId& id, bool deleteReferences) {
+    const auto status = UA_Server_deleteNode(connection.handle(), id, deleteReferences);
     throwIfBad(status);
 }
 
 template <>
-void deleteNode<Client>(Client& client, const NodeId& id, bool deleteReferences) {
-    return deleteNodeAsync(client, id, deleteReferences, detail::SyncOperation{});
+void deleteNode<Client>(Client& connection, const NodeId& id, bool deleteReferences) {
+    return deleteNodeAsync(connection, id, deleteReferences, detail::SyncOperation{});
 }
 
 template <>
 void deleteReference<Server>(
-    Server& server,
+    Server& connection,
     const NodeId& sourceId,
     const NodeId& targetId,
     const NodeId& referenceType,
@@ -222,14 +224,19 @@ void deleteReference<Server>(
     bool deleteBidirectional
 ) {
     const auto status = UA_Server_deleteReference(
-        server.handle(), sourceId, referenceType, isForward, {targetId, {}, 0}, deleteBidirectional
+        connection.handle(),
+        sourceId,
+        referenceType,
+        isForward,
+        {targetId, {}, 0},
+        deleteBidirectional
     );
     throwIfBad(status);
 }
 
 template <>
 void deleteReference<Client>(
-    Client& client,
+    Client& connection,
     const NodeId& sourceId,
     const NodeId& targetId,
     const NodeId& referenceType,
@@ -237,7 +244,7 @@ void deleteReference<Client>(
     bool deleteBidirectional
 ) {
     return deleteReferenceAsync(
-        client,
+        connection,
         sourceId,
         targetId,
         referenceType,

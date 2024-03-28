@@ -23,7 +23,7 @@ class Variant;
 class Event {
 public:
     /// Create an event with the underlying (abstract) node representation.
-    explicit Event(Server& server, const NodeId& eventType = ObjectTypeId::BaseEventType);
+    explicit Event(Server& connection, const NodeId& eventType = ObjectTypeId::BaseEventType);
 
     /// Delete the node representation of the event.
     ~Event();

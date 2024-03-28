@@ -38,10 +38,10 @@ namespace opcua::services {
 
 /**
  * Add one or more nodes (client only).
- * @param client Instance of type Client
+ * @param connection Instance of type Client
  * @param request Add nodes request
  */
-AddNodesResponse addNodes(Client& client, const AddNodesRequest& request);
+AddNodesResponse addNodes(Client& connection, const AddNodesRequest& request);
 
 /**
  * Asynchronously add one or more nodes (client only).
@@ -50,12 +50,12 @@ AddNodesResponse addNodes(Client& client, const AddNodesRequest& request);
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto addNodesAsync(
-    Client& client,
+    Client& connection,
     const AddNodesRequest& request,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::sendRequest<UA_AddNodesRequest, UA_AddNodesResponse>(
-        client,
+        connection,
         request,
         detail::WrapResponse<AddNodesResponse>{},
         std::forward<CompletionToken>(token)
@@ -84,7 +84,7 @@ NodeId addNode(
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto addNodeAsync(
-    Client& client,
+    Client& connection,
     NodeClass nodeClass,
     const NodeId& parentId,
     const NodeId& id,
@@ -107,7 +107,7 @@ auto addNodeAsync(
     request.nodesToAddSize = 1;
     request.nodesToAdd = &item;
     return detail::sendRequest<UA_AddNodesRequest, UA_AddNodesResponse>(
-        client,
+        connection,
         request,
         [](UA_AddNodesResponse& response) {
             auto& result = detail::getSingleResult(response);
@@ -128,10 +128,10 @@ auto addNodeAsync(
 
 /**
  * Add one or more references (client only).
- * @param client Instance of type Client
+ * @param connection Instance of type Client
  * @param request Add references request
  */
-AddReferencesResponse addReferences(Client& client, const AddReferencesRequest& request);
+AddReferencesResponse addReferences(Client& connection, const AddReferencesRequest& request);
 
 /**
  * Asynchronously add one or more references (client only).
@@ -140,12 +140,12 @@ AddReferencesResponse addReferences(Client& client, const AddReferencesRequest& 
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto addReferencesAsync(
-    Client& client,
+    Client& connection,
     const AddReferencesRequest& request,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::sendRequest<UA_AddReferencesRequest, UA_AddReferencesResponse>(
-        client,
+        connection,
         request,
         detail::WrapResponse<AddReferencesResponse>{},
         std::forward<CompletionToken>(token)
@@ -171,7 +171,7 @@ void addReference(
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto addReferenceAsync(
-    Client& client,
+    Client& connection,
     const NodeId& sourceId,
     const NodeId& targetId,
     const NodeId& referenceType,
@@ -188,7 +188,7 @@ auto addReferenceAsync(
     request.referencesToAddSize = 1;
     request.referencesToAdd = &item;
     return detail::sendRequest<UA_AddReferencesRequest, UA_AddReferencesResponse>(
-        client,
+        connection,
         request,
         [](UA_AddReferencesResponse& response) { throwIfBad(detail::getSingleResult(response)); },
         std::forward<CompletionToken>(token)
@@ -205,10 +205,10 @@ auto addReferenceAsync(
 
 /**
  * Delete one or more nodes (client only).
- * @param client Instance of type Client
+ * @param connection Instance of type Client
  * @param request Delete nodes request
  */
-DeleteNodesResponse deleteNodes(Client& client, const DeleteNodesRequest& request);
+DeleteNodesResponse deleteNodes(Client& connection, const DeleteNodesRequest& request);
 
 /**
  * Asynchronously delete one or more nodes (client only).
@@ -217,12 +217,12 @@ DeleteNodesResponse deleteNodes(Client& client, const DeleteNodesRequest& reques
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto deleteNodesAsync(
-    Client& client,
+    Client& connection,
     const DeleteNodesRequest& request,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::sendRequest<UA_DeleteNodesRequest, UA_DeleteNodesResponse>(
-        client,
+        connection,
         request,
         detail::WrapResponse<DeleteNodesResponse>{},
         std::forward<CompletionToken>(token)
@@ -242,7 +242,7 @@ void deleteNode(T& connection, const NodeId& id, bool deleteReferences = true);
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto deleteNodeAsync(
-    Client& client,
+    Client& connection,
     const NodeId& id,
     bool deleteReferences = true,
     CompletionToken&& token = DefaultCompletionToken()
@@ -254,7 +254,7 @@ auto deleteNodeAsync(
     request.nodesToDeleteSize = 1;
     request.nodesToDelete = &item;
     return detail::sendRequest<UA_DeleteNodesRequest, UA_DeleteNodesResponse>(
-        client,
+        connection,
         request,
         [](UA_DeleteNodesResponse& response) { throwIfBad(detail::getSingleResult(response)); },
         std::forward<CompletionToken>(token)
@@ -271,10 +271,12 @@ auto deleteNodeAsync(
 
 /**
  * Delete one or more references (client only).
- * @param client Instance of type Client
+ * @param connection Instance of type Client
  * @param request Delete references request
  */
-DeleteReferencesResponse deleteReferences(Client& client, const DeleteReferencesRequest& request);
+DeleteReferencesResponse deleteReferences(
+    Client& connection, const DeleteReferencesRequest& request
+);
 
 /**
  * Asynchronously delete one or more references (client only).
@@ -283,12 +285,12 @@ DeleteReferencesResponse deleteReferences(Client& client, const DeleteReferences
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto deleteReferencesAsync(
-    Client& client,
+    Client& connection,
     const DeleteReferencesRequest& request,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::sendRequest<UA_DeleteReferencesRequest, UA_DeleteReferencesResponse>(
-        client,
+        connection,
         request,
         detail::WrapResponse<DeleteReferencesResponse>{},
         std::forward<CompletionToken>(token)
@@ -315,7 +317,7 @@ void deleteReference(
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto deleteReferenceAsync(
-    Client& client,
+    Client& connection,
     const NodeId& sourceId,
     const NodeId& targetId,
     const NodeId& referenceType,
@@ -333,7 +335,7 @@ auto deleteReferenceAsync(
     request.referencesToDeleteSize = 1;
     request.referencesToDelete = &item;
     return detail::sendRequest<UA_DeleteReferencesRequest, UA_DeleteReferencesResponse>(
-        client,
+        connection,
         request,
         [](UA_DeleteReferencesResponse& response) {
             throwIfBad(detail::getSingleResult(response));
@@ -385,7 +387,7 @@ inline NodeId addObject(
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addObjectAsync(
-    Client& client,
+    Client& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -395,7 +397,7 @@ inline auto addObjectAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addNodeAsync(
-        client,
+        connection,
         NodeClass::Object,
         parentId,
         id,
@@ -431,7 +433,7 @@ inline NodeId addFolder(
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addFolderAsync(
-    Client& client,
+    Client& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -440,7 +442,7 @@ inline auto addFolderAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addObjectAsync(
-        client,
+        connection,
         parentId,
         id,
         browseName,
@@ -483,7 +485,7 @@ inline NodeId addVariable(
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addVariableAsync(
-    Client& client,
+    Client& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -493,7 +495,7 @@ inline auto addVariableAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addNodeAsync(
-        client,
+        connection,
         NodeClass::Variable,
         parentId,
         id,
@@ -534,7 +536,7 @@ inline NodeId addProperty(
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addPropertyAsync(
-    Client& client,
+    Client& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -542,7 +544,7 @@ inline auto addPropertyAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addVariableAsync(
-        client,
+        connection,
         parentId,
         id,
         browseName,
@@ -585,7 +587,7 @@ NodeId addMethod(
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addMethodAsync(
-    Client& client,
+    Client& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -597,7 +599,7 @@ inline auto addMethodAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addNodeAsync(
-        client,
+        connection,
         NodeClass::Method,
         parentId,
         id,
@@ -641,7 +643,7 @@ inline NodeId addObjectType(
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addObjectTypeAsync(
-    Client& client,
+    Client& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -650,7 +652,7 @@ inline auto addObjectTypeAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addNodeAsync(
-        client,
+        connection,
         NodeClass::ObjectType,
         parentId,
         id,
@@ -694,7 +696,7 @@ inline NodeId addVariableType(
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addVariableTypeAsync(
-    Client& client,
+    Client& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -704,7 +706,7 @@ inline auto addVariableTypeAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addNodeAsync(
-        client,
+        connection,
         NodeClass::VariableType,
         parentId,
         id,
@@ -747,7 +749,7 @@ inline NodeId addReferenceType(
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addReferenceTypeAsync(
-    Client& client,
+    Client& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -756,7 +758,7 @@ inline auto addReferenceTypeAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addNodeAsync(
-        client,
+        connection,
         NodeClass::ReferenceType,
         parentId,
         id,
@@ -799,7 +801,7 @@ inline NodeId addDataType(
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addDataTypeAsync(
-    Client& client,
+    Client& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -808,7 +810,7 @@ inline auto addDataTypeAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addNodeAsync(
-        client,
+        connection,
         NodeClass::DataType,
         parentId,
         id,
@@ -851,7 +853,7 @@ inline NodeId addView(
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addViewAsync(
-    Client& client,
+    Client& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -860,7 +862,7 @@ inline auto addViewAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addNodeAsync(
-        client,
+        connection,
         NodeClass::View,
         parentId,
         id,
@@ -896,13 +898,13 @@ inline void addModellingRule(T& connection, const NodeId& id, ModellingRule rule
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addModellingRuleAsync(
-    Client& client,
+    Client& connection,
     const NodeId& id,
     ModellingRule rule,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addReferenceAsync(
-        client,
+        connection,
         id,
         {0, static_cast<uint32_t>(rule)},
         ReferenceTypeId::HasModellingRule,
