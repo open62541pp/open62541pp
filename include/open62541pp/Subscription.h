@@ -68,16 +68,31 @@ public:
           subscriptionId_(std::is_same_v<Connection, Server> ? 0U : subscriptionId) {}
 
     /// Get the server/client instance.
-    Connection& getConnection() noexcept {
+    Connection& connection() noexcept {
         return connection_;
     }
 
     /// Get the server/client instance.
+    const Connection& connection() const noexcept {
+        return connection_;
+    }
+
+    [[deprecated("Use connection() instead")]]
+    Connection& getConnection() noexcept {
+        return connection_;
+    }
+
+    [[deprecated("Use connection() instead")]]
     const Connection& getConnection() const noexcept {
         return connection_;
     }
 
     /// Get the server-assigned identifier of this subscription.
+    uint32_t subscriptionId() const noexcept {
+        return subscriptionId_;
+    }
+
+    [[deprecated("Use subscriptionId() instead")]]
     uint32_t getSubscriptionId() const noexcept {
         return subscriptionId_;
     }
@@ -238,8 +253,7 @@ private:
 
 template <typename T>
 inline bool operator==(const Subscription<T>& lhs, const Subscription<T>& rhs) noexcept {
-    return (lhs.getConnection() == rhs.getConnection()) &&
-           (lhs.getSubscriptionId() == rhs.getSubscriptionId());
+    return (lhs.connection() == rhs.connection()) && (lhs.subscriptionId() == rhs.subscriptionId());
 }
 
 template <typename T>

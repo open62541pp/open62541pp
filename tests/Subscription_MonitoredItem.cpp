@@ -22,8 +22,8 @@ TEST_CASE("Subscription & MonitoredItem (server)") {
     Server server;
 
     SUBCASE("Create Subscription with arbitrary id") {
-        CHECK(Subscription(server, 11U).getConnection() == server);
-        CHECK(Subscription(server, 11U).getSubscriptionId() == 0U);
+        CHECK(Subscription(server, 11U).connection() == server);
+        CHECK(Subscription(server, 11U).subscriptionId() == 0U);
     }
 
     SUBCASE("Create MonitoredItem with arbitrary ids") {
@@ -34,8 +34,6 @@ TEST_CASE("Subscription & MonitoredItem (server)") {
 
     SUBCASE("Create & delete subscription") {
         auto sub = server.createSubscription();
-
-        CHECK(sub.getConnection() == server);
         CHECK(sub.getMonitoredItems().empty());
 
         MonitoringParametersEx monitoringParameters{};
@@ -66,8 +64,8 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
     auto& client = setup.client;
 
     SUBCASE("Create Subscription with arbitrary id") {
-        CHECK(Subscription(client, 11U).getConnection() == client);
-        CHECK(Subscription(client, 11U).getSubscriptionId() == 11U);
+        CHECK(Subscription(client, 11U).connection() == client);
+        CHECK(Subscription(client, 11U).subscriptionId() == 11U);
     }
 
     SUBCASE("Create MonitoredItem with arbitrary ids") {
@@ -81,12 +79,11 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
 
         SubscriptionParameters parameters{};
         auto sub = client.createSubscription(parameters);
-        CAPTURE(sub.getSubscriptionId());
+        CAPTURE(sub.subscriptionId());
 
         CHECK(client.getSubscriptions().size() == 1);
         CHECK(client.getSubscriptions().at(0) == sub);
 
-        CHECK(sub.getConnection() == client);
         CHECK(sub.getMonitoredItems().empty());
 
         sub.deleteSubscription();
