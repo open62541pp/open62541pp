@@ -30,7 +30,7 @@ namespace opcua::services {
  */
 
 /**
- * @defgroup AddNodes
+ * @defgroup AddNodes AddNodes service
  * Add nodes into the address space hierarchy.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.2
  * @{
@@ -120,7 +120,7 @@ auto addNodeAsync(
 
 /**
  * @}
- * @defgroup AddReferences
+ * @defgroup AddReferences AddReferences service
  * Add references to nodes.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.3
  * @{
@@ -197,7 +197,7 @@ auto addReferenceAsync(
 
 /**
  * @}
- * @defgroup DeleteNodes
+ * @defgroup DeleteNodes DeleteNodes service
  * Delete nodes from the address space.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.4
  * @{
@@ -263,7 +263,7 @@ auto deleteNodeAsync(
 
 /**
  * @}
- * @defgroup DeleteReferences
+ * @defgroup DeleteReferences DeleteReferences service
  * Delete references from nodes.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.5
  * @{

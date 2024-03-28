@@ -31,7 +31,7 @@ namespace opcua::services {
  */
 
 /**
- * @defgroup Browse
+ * @defgroup Browse Browse service
  * Discover references of nodes.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.2
  * @{
@@ -99,7 +99,7 @@ auto browseAsync(
 
 /**
  * @}
- * @defgroup BrowseNext
+ * @defgroup BrowseNext BrowseNext service
  * Request the next set of a Browse or BrowseNext response information that is too large to be sent
  * in a single response. Discover references of nodes.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.3
@@ -171,7 +171,7 @@ auto browseNextAsync(
 
 /**
  * @}
- * @defgroup TranslateBrowsePathsToNodeIds
+ * @defgroup TranslateBrowsePathsToNodeIds TranslateBrowsePathsToNodeIds service
  * Request that the server translates browse paths to node ids.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.4
  * @{
@@ -280,7 +280,7 @@ inline auto browseSimplifiedBrowsePathAsync(
 
 /**
  * @}
- * @defgroup RegisterNodes
+ * @defgroup RegisterNodes RegisterNodes service
  * Register nodes for efficient access operations.
  * Clients shall unregister unneeded nodes immediately to free up resources.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.5
@@ -315,7 +315,7 @@ auto registerNodesAsync(
 
 /**
  * @}
- * @defgroup UnregisterNodes
+ * @defgroup UnregisterNodes UnregisterNodes service
  * Unregister nodes that have been obtained via the RegisterNodes service.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.6
  * @{

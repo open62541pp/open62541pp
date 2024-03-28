@@ -75,7 +75,7 @@ using MonitoringParameters
     [[deprecated("Use alias MonitoringParametersEx instead")]] = MonitoringParametersEx;
 
 /**
- * @defgroup CreateMonitoredItems
+ * @defgroup CreateMonitoredItems CreateMonitoredItems service
  * Create and add a monitored item to a subscription.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.2
  * @{
@@ -179,7 +179,7 @@ template <typename T>
 
 /**
  * @}
- * @defgroup ModifyMonitoredItems
+ * @defgroup ModifyMonitoredItems ModifyMonitoredItems service
  * Modify a monitored items of a subscription.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.3
  * @{
@@ -203,7 +203,7 @@ void modifyMonitoredItem(
 
 /**
  * @}
- * @defgroup SetMonitoringMode
+ * @defgroup SetMonitoringMode SetMonitoringMode service
  * Set the monitoring mode of a monitored items.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.4
  * @{
@@ -226,7 +226,7 @@ void setMonitoringMode(
 
 /**
  * @}
- * @defgroup SetTriggering
+ * @defgroup SetTriggering SetTriggering service
  * Create and delete triggering links for a triggering item.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.1.6
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.5
@@ -254,7 +254,7 @@ void setTriggering(
 
 /**
  * @}
- * @defgroup DeleteMonitoredItems
+ * @defgroup DeleteMonitoredItems DeleteMonitoredItems service
  * Delete a monitored items from subscriptions.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.6
  * @{

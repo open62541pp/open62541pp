@@ -48,7 +48,7 @@ struct SubscriptionParameters {
 };
 
 /**
- * @defgroup CreateSubscription
+ * @defgroup CreateSubscription CreateSubscription service
  * Create subscriptions. Subscriptions monitor a set of monitored items for notifications and return
  * them to the client.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.2
@@ -79,7 +79,7 @@ using DeleteSubscriptionCallback = std::function<void(uint32_t subId)>;
 
 /**
  * @}
- * @defgroup ModifySubscription
+ * @defgroup ModifySubscription ModifySubscription service
  * Modify subscriptions.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.3
  * @{
@@ -98,7 +98,7 @@ void modifySubscription(
 
 /**
  * @}
- * @defgroup SetPublishingMode
+ * @defgroup SetPublishingMode SetPublishingMode service
  * Enable/disable sending of notifications on subscriptions.
  * Disable publishing of NotificationMessages of the subscription doesn't discontinue the sending
  * of keep-alive messages, nor change the monitoring mode.
@@ -116,7 +116,7 @@ void setPublishingMode(Client& connection, uint32_t subscriptionId, bool publish
 
 /**
  * @}
- * @defgroup DeleteSubscriptions
+ * @defgroup DeleteSubscriptions DeleteSubscriptions service
  * Delete subscriptions.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.8
  * @{

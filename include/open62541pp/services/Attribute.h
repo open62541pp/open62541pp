@@ -36,7 +36,7 @@ namespace opcua::services {
  */
 
 /**
- * @defgroup Read
+ * @defgroup Read Read service
  * This service is used to read attributes of nodes.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.10.2
  * @{
@@ -130,7 +130,7 @@ auto readAttributeAsync(
 
 /**
  * @}
- * @defgroup Write
+ * @defgroup Write Write service
  * This service is used to write attributes of nodes.
  *
  * The following node attributes cannot be changed once a node has been created:
