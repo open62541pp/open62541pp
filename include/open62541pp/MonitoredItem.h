@@ -14,8 +14,6 @@ namespace opcua {
 
 // forward declarations
 class Server;
-template <typename Connection>
-class Subscription;
 
 using MonitoringParametersEx = services::MonitoringParametersEx;
 using MonitoringParameters
