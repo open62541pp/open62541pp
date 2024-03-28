@@ -35,38 +35,39 @@ namespace opcua {
  * access to the associated NodeId instance with the Node::id() method and apply the native
  * open62541 functions or the free functions in the opcua::services namespace.
  *
+ * @tparam Connection Server or Client
  * @see Services
  */
-template <typename ServerOrClient>
+template <typename Connection>
 class Node {
 public:
     /// Create a Node object.
-    Node(ServerOrClient& connection, const NodeId& id)
+    Node(Connection& connection, const NodeId& id)
         : connection_(connection),
           id_(id) {}
 
     /// Create a Node object.
-    Node(ServerOrClient& connection, NodeId&& id)
+    Node(Connection& connection, NodeId&& id)
         : connection_(connection),
           id_(std::move(id)) {}
 
     /// Get the server/client instance.
-    ServerOrClient& connection() noexcept {
+    Connection& connection() noexcept {
         return connection_;
     }
 
     /// Get the server/client instance.
-    const ServerOrClient& connection() const noexcept {
+    const Connection& connection() const noexcept {
         return connection_;
     }
 
     [[deprecated("Use connection() instead")]]
-    ServerOrClient& getConnection() noexcept {
+    Connection& getConnection() noexcept {
         return connection_;
     }
 
     [[deprecated("Use connection() instead")]]
-    const ServerOrClient& getConnection() const noexcept {
+    const Connection& getConnection() const noexcept {
         return connection_;
     }
 
@@ -680,19 +681,19 @@ private:
         throw BadStatus(UA_STATUSCODE_BADNOTFOUND);
     }
 
-    ServerOrClient& connection_;
+    Connection& connection_;
     NodeId id_;
 };
 
 /* ---------------------------------------------------------------------------------------------- */
 
-template <typename ServerOrClient>
-bool operator==(const Node<ServerOrClient>& lhs, const Node<ServerOrClient>& rhs) noexcept {
+template <typename Connection>
+bool operator==(const Node<Connection>& lhs, const Node<Connection>& rhs) noexcept {
     return (lhs.connection() == rhs.connection()) && (lhs.id() == rhs.id());
 }
 
-template <typename ServerOrClient>
-bool operator!=(const Node<ServerOrClient>& lhs, const Node<ServerOrClient>& rhs) noexcept {
+template <typename Connection>
+bool operator!=(const Node<Connection>& lhs, const Node<Connection>& rhs) noexcept {
     return !(lhs == rhs);
 }
 

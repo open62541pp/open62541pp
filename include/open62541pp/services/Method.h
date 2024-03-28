@@ -33,10 +33,10 @@ namespace opcua::services {
 
 /**
  * Call server methods.
- * @param client Instance of type Client
+ * @param connection Instance of type Client
  * @param request Call request
  */
-CallResponse call(Client& client, const CallRequest& request);
+CallResponse call(Client& connection, const CallRequest& request);
 
 /**
  * Asynchronously call server methods.
@@ -45,10 +45,15 @@ CallResponse call(Client& client, const CallRequest& request);
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto callAsync(
-    Client& client, const CallRequest& request, CompletionToken&& token = DefaultCompletionToken()
+    Client& connection,
+    const CallRequest& request,
+    CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::sendRequest<UA_CallRequest, UA_CallResponse>(
-        client, request, detail::WrapResponse<CallResponse>{}, std::forward<CompletionToken>(token)
+        connection,
+        request,
+        detail::WrapResponse<CallResponse>{},
+        std::forward<CompletionToken>(token)
     );
 }
 
@@ -56,7 +61,7 @@ auto callAsync(
  * Call a server method and return outputs.
  * The `objectId` must have a `HasComponent` reference to the method specified in `methodId`.
  *
- * @param serverOrClient Instance of type Server or Client
+ * @param connection Instance of type Server or Client
  * @param objectId NodeId of the object on which the method is invoked
  * @param methodId NodeId of the method to invoke
  * @param inputArguments Input argument values
@@ -67,7 +72,7 @@ auto callAsync(
  */
 template <typename T>
 std::vector<Variant> call(
-    T& serverOrClient,
+    T& connection,
     const NodeId& objectId,
     const NodeId& methodId,
     Span<const Variant> inputArguments
@@ -76,7 +81,7 @@ std::vector<Variant> call(
 /**
  * Asynchronously call a server method and return outputs.
  *
- * @param client Instance of type Client
+ * @param connection Instance of type Client
  * @param objectId NodeId of the object on which the method is invoked
  * @param methodId NodeId of the method to invoke
  * @param inputArguments Input argument values
@@ -85,7 +90,7 @@ std::vector<Variant> call(
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto callAsync(
-    Client& client,
+    Client& connection,
     const NodeId& objectId,
     const NodeId& methodId,
     Span<const Variant> inputArguments,
@@ -96,7 +101,7 @@ auto callAsync(
     request.methodsToCall = &item;
     request.methodsToCallSize = 1;
     return detail::sendRequest<UA_CallRequest, UA_CallResponse>(
-        client,
+        connection,
         request,
         [](UA_CallResponse& response) {
             return detail::getOutputArguments(detail::getSingleResult(response));

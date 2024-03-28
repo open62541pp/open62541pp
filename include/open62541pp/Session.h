@@ -22,8 +22,8 @@ class Variant;
  */
 class Session {
 public:
-    Session(Server& server, NodeId sessionId) noexcept
-        : connection_(server),
+    Session(Server& connection, NodeId sessionId) noexcept
+        : connection_(connection),
           sessionId_(std::move(sessionId)) {}
 
     /// Get the server instance.

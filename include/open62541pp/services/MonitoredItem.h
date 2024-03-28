@@ -218,7 +218,10 @@ void modifyMonitoredItem(
  * @param monitoringMode Monitoring mode
  */
 void setMonitoringMode(
-    Client& connection, uint32_t subscriptionId, uint32_t monitoredItemId, MonitoringMode monitoringMode
+    Client& connection,
+    uint32_t subscriptionId,
+    uint32_t monitoredItemId,
+    MonitoringMode monitoringMode
 );
 
 /**
@@ -271,7 +274,7 @@ void deleteMonitoredItem(T& connection, uint32_t subscriptionId, uint32_t monito
 /**
  * Delete a local monitored item.
  *
- * @param server Instance of type Server
+ * @param connection Instance of type Server
  * @param monitoredItemId Identifier of the monitored item
  */
 void deleteMonitoredItem(Server& connection, uint32_t monitoredItemId);

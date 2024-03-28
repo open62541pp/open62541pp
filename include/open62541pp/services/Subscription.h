@@ -64,14 +64,14 @@ using DeleteSubscriptionCallback = std::function<void(uint32_t subId)>;
 /**
  * Create a subscription.
  * @copydetails SubscriptionParameters
- * @param client Instance of type Client
+ * @param connection Instance of type Client
  * @param parameters Subscription parameters, may be revised by server
  * @param publishingEnabled Enable/disable publishing of the subscription
  * @param deleteCallback Invoked when the subscription is deleted
  * @returns Server-assigned identifier of the subscription
  */
 [[nodiscard]] uint32_t createSubscription(
-    Client& client,
+    Client& connection,
     SubscriptionParameters& parameters,
     bool publishingEnabled = true,
     DeleteSubscriptionCallback deleteCallback = {}
@@ -88,12 +88,12 @@ using DeleteSubscriptionCallback = std::function<void(uint32_t subId)>;
 /**
  * Modify a subscription.
  * @copydetails SubscriptionParameters
- * @param client Instance of type Client
+ * @param connection Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @param parameters Subscription parameters, may be revised by server
  */
 void modifySubscription(
-    Client& client, uint32_t subscriptionId, SubscriptionParameters& parameters
+    Client& connection, uint32_t subscriptionId, SubscriptionParameters& parameters
 );
 
 /**
@@ -108,11 +108,11 @@ void modifySubscription(
 
 /**
  * Enable/disable publishing of notification messages.
- * @param client Instance of type Client
+ * @param connection Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @param publishing Enable/disable publishing
  */
-void setPublishingMode(Client& client, uint32_t subscriptionId, bool publishing);
+void setPublishingMode(Client& connection, uint32_t subscriptionId, bool publishing);
 
 /**
  * @}
@@ -124,10 +124,10 @@ void setPublishingMode(Client& client, uint32_t subscriptionId, bool publishing)
 
 /**
  * Delete a subscription.
- * @param client Instance of type Client
+ * @param connection Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  */
-void deleteSubscription(Client& client, uint32_t subscriptionId);
+void deleteSubscription(Client& connection, uint32_t subscriptionId);
 
 /**
  * @}

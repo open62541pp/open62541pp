@@ -22,6 +22,7 @@ using MonitoringParameters
 /**
  * High-level monitored item class.
  *
+ * @tparam Connection Server or Client
  * @note Not all methods are available and implemented for servers.
  *
  * Use the free functions in the opcua::services namespace for more advanced usage:

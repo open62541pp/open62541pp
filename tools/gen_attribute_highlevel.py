@@ -64,8 +64,8 @@ TEMPLATE_READ = """
  * @ingroup Read
  */
 template <typename T>
-inline {type} read{attr}(T& serverOrClient, const NodeId& id) {{
-    return detail::readAttributeImpl<AttributeId::{attr}>(serverOrClient, id);
+inline {type} read{attr}(T& connection, const NodeId& id) {{
+    return detail::readAttributeImpl<AttributeId::{attr}>(connection, id);
 }}
 
 /**
@@ -75,10 +75,10 @@ inline {type} read{attr}(T& serverOrClient, const NodeId& id) {{
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto read{attr}Async(
-    Client& client, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {{
     return detail::readAttributeAsyncImpl<AttributeId::{attr}>(
-        client, id, std::forward<CompletionToken>(token)
+        connection, id, std::forward<CompletionToken>(token)
     );
 }}
 """.lstrip()
@@ -89,8 +89,8 @@ TEMPLATE_WRITE = """
  * @ingroup Write
  */
 template <typename T>
-inline void write{attr}(T& serverOrClient, const NodeId& id, {param_type} {param_name}) {{
-    detail::writeAttributeImpl<AttributeId::{attr}>(serverOrClient, id, {param_name});
+inline void write{attr}(T& connection, const NodeId& id, {param_type} {param_name}) {{
+    detail::writeAttributeImpl<AttributeId::{attr}>(connection, id, {param_name});
 }}
 
 /**
@@ -100,13 +100,13 @@ inline void write{attr}(T& serverOrClient, const NodeId& id, {param_type} {param
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto write{attr}Async(
-    Client& client,
+    Client& connection,
     const NodeId& id,
     {param_type} {param_name},
     CompletionToken&& token = DefaultCompletionToken()
 ) {{
     detail::writeAttributeAsyncImpl<AttributeId::{attr}>(
-        client, id, {param_name}, std::forward<CompletionToken>(token)
+        connection, id, {param_name}, std::forward<CompletionToken>(token)
     );
 }}
 """.lstrip()

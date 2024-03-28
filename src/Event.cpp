@@ -12,9 +12,9 @@ namespace opcua {
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS_EVENTS
 
-Event::Event(Server& server, const NodeId& eventType)
-    : connection_(server) {
-    throwIfBad(UA_Server_createEvent(server.handle(), eventType, id_.handle()));
+Event::Event(Server& connection, const NodeId& eventType)
+    : connection_(connection) {
+    throwIfBad(UA_Server_createEvent(connection.handle(), eventType, id_.handle()));
 }
 
 Event::~Event() {

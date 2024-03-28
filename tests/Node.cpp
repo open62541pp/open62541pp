@@ -10,40 +10,40 @@
 
 using namespace opcua;
 
-TEST_CASE_TEMPLATE("Node", ServerOrClient, Server, Client) {
+TEST_CASE_TEMPLATE("Node", T, Server, Client) {
     ServerClientSetup setup;
     setup.client.connect(setup.endpointUrl);
-    auto& serverOrClient = setup.getInstance<ServerOrClient>();
+    auto& connection = setup.getInstance<T>();
 
     const NodeId varId{1, 1};
     services::addVariable(setup.server, {0, UA_NS0ID_OBJECTSFOLDER}, varId, "variable");
     services::writeAccessLevel(setup.server, varId, 0xFF);
     services::writeWriteMask(setup.server, varId, 0xFFFFFFFF);  // set all bits to 1 -> allow all
 
-    auto rootNode = serverOrClient.getRootNode();
-    auto objNode = serverOrClient.getObjectsNode();
-    auto varNode = serverOrClient.getNode(varId);
-    auto refNode = serverOrClient.getNode(ReferenceTypeId::References);
+    auto rootNode = connection.getRootNode();
+    auto objNode = connection.getObjectsNode();
+    auto varNode = connection.getNode(varId);
+    auto refNode = connection.getNode(ReferenceTypeId::References);
 
     SUBCASE("connection") {
-        CHECK(rootNode.connection() == serverOrClient);
+        CHECK(rootNode.connection() == connection);
     }
 
     SUBCASE("id") {
         const NodeId id(0, UA_NS0ID_OBJECTSFOLDER);
-        CHECK(Node(serverOrClient, id).id() == id);
+        CHECK(Node(connection, id).id() == id);
     }
 
     SUBCASE("exists") {
-        CHECK(Node(serverOrClient, NodeId(0, UA_NS0ID_OBJECTSFOLDER)).exists());
-        CHECK_FALSE(Node(serverOrClient, NodeId(0, "DoesNotExist")).exists());
+        CHECK(Node(connection, NodeId(0, UA_NS0ID_OBJECTSFOLDER)).exists());
+        CHECK_FALSE(Node(connection, NodeId(0, "DoesNotExist")).exists());
     }
 
     SUBCASE("Node class of default nodes") {
-        CHECK(serverOrClient.getRootNode().readNodeClass() == NodeClass::Object);
-        CHECK(serverOrClient.getObjectsNode().readNodeClass() == NodeClass::Object);
-        CHECK(serverOrClient.getTypesNode().readNodeClass() == NodeClass::Object);
-        CHECK(serverOrClient.getViewsNode().readNodeClass() == NodeClass::Object);
+        CHECK(connection.getRootNode().readNodeClass() == NodeClass::Object);
+        CHECK(connection.getObjectsNode().readNodeClass() == NodeClass::Object);
+        CHECK(connection.getTypesNode().readNodeClass() == NodeClass::Object);
+        CHECK(connection.getViewsNode().readNodeClass() == NodeClass::Object);
     }
 
     SUBCASE("Add non-type nodes") {
@@ -60,12 +60,12 @@ TEST_CASE_TEMPLATE("Node", ServerOrClient, Server, Client) {
 
     SUBCASE("Add type nodes") {
         CHECK(
-            serverOrClient.getNode(ObjectTypeId::BaseObjectType)
+            connection.getNode(ObjectTypeId::BaseObjectType)
                 .addObjectType({1, 1000}, "objecttype")
                 .readNodeClass() == NodeClass::ObjectType
         );
         CHECK(
-            serverOrClient.getNode(VariableTypeId::BaseVariableType)
+            connection.getNode(VariableTypeId::BaseVariableType)
                 .addVariableType({1, 1001}, "variabletype")
                 .readNodeClass() == NodeClass::VariableType
         );

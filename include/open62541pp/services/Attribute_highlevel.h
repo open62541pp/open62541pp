@@ -13,8 +13,8 @@ namespace opcua::services {
  * @ingroup Read
  */
 template <typename T>
-inline NodeId readNodeId(T& serverOrClient, const NodeId& id) {
-    return detail::readAttributeImpl<AttributeId::NodeId>(serverOrClient, id);
+inline NodeId readNodeId(T& connection, const NodeId& id) {
+    return detail::readAttributeImpl<AttributeId::NodeId>(connection, id);
 }
 
 /**
@@ -24,10 +24,10 @@ inline NodeId readNodeId(T& serverOrClient, const NodeId& id) {
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readNodeIdAsync(
-    Client& client, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::NodeId>(
-        client, id, std::forward<CompletionToken>(token)
+        connection, id, std::forward<CompletionToken>(token)
     );
 }
 
@@ -36,8 +36,8 @@ inline auto readNodeIdAsync(
  * @ingroup Read
  */
 template <typename T>
-inline NodeClass readNodeClass(T& serverOrClient, const NodeId& id) {
-    return detail::readAttributeImpl<AttributeId::NodeClass>(serverOrClient, id);
+inline NodeClass readNodeClass(T& connection, const NodeId& id) {
+    return detail::readAttributeImpl<AttributeId::NodeClass>(connection, id);
 }
 
 /**
@@ -47,10 +47,10 @@ inline NodeClass readNodeClass(T& serverOrClient, const NodeId& id) {
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readNodeClassAsync(
-    Client& client, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::NodeClass>(
-        client, id, std::forward<CompletionToken>(token)
+        connection, id, std::forward<CompletionToken>(token)
     );
 }
 
@@ -59,8 +59,8 @@ inline auto readNodeClassAsync(
  * @ingroup Read
  */
 template <typename T>
-inline QualifiedName readBrowseName(T& serverOrClient, const NodeId& id) {
-    return detail::readAttributeImpl<AttributeId::BrowseName>(serverOrClient, id);
+inline QualifiedName readBrowseName(T& connection, const NodeId& id) {
+    return detail::readAttributeImpl<AttributeId::BrowseName>(connection, id);
 }
 
 /**
@@ -70,10 +70,10 @@ inline QualifiedName readBrowseName(T& serverOrClient, const NodeId& id) {
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readBrowseNameAsync(
-    Client& client, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::BrowseName>(
-        client, id, std::forward<CompletionToken>(token)
+        connection, id, std::forward<CompletionToken>(token)
     );
 }
 
@@ -82,8 +82,8 @@ inline auto readBrowseNameAsync(
  * @ingroup Write
  */
 template <typename T>
-inline void writeBrowseName(T& serverOrClient, const NodeId& id, const QualifiedName& browseName) {
-    detail::writeAttributeImpl<AttributeId::BrowseName>(serverOrClient, id, browseName);
+inline void writeBrowseName(T& connection, const NodeId& id, const QualifiedName& browseName) {
+    detail::writeAttributeImpl<AttributeId::BrowseName>(connection, id, browseName);
 }
 
 /**
@@ -93,13 +93,13 @@ inline void writeBrowseName(T& serverOrClient, const NodeId& id, const Qualified
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeBrowseNameAsync(
-    Client& client,
+    Client& connection,
     const NodeId& id,
     const QualifiedName& browseName,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::BrowseName>(
-        client, id, browseName, std::forward<CompletionToken>(token)
+        connection, id, browseName, std::forward<CompletionToken>(token)
     );
 }
 
@@ -108,8 +108,8 @@ inline auto writeBrowseNameAsync(
  * @ingroup Read
  */
 template <typename T>
-inline LocalizedText readDisplayName(T& serverOrClient, const NodeId& id) {
-    return detail::readAttributeImpl<AttributeId::DisplayName>(serverOrClient, id);
+inline LocalizedText readDisplayName(T& connection, const NodeId& id) {
+    return detail::readAttributeImpl<AttributeId::DisplayName>(connection, id);
 }
 
 /**
@@ -119,10 +119,10 @@ inline LocalizedText readDisplayName(T& serverOrClient, const NodeId& id) {
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readDisplayNameAsync(
-    Client& client, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::DisplayName>(
-        client, id, std::forward<CompletionToken>(token)
+        connection, id, std::forward<CompletionToken>(token)
     );
 }
 
@@ -131,10 +131,8 @@ inline auto readDisplayNameAsync(
  * @ingroup Write
  */
 template <typename T>
-inline void writeDisplayName(
-    T& serverOrClient, const NodeId& id, const LocalizedText& displayName
-) {
-    detail::writeAttributeImpl<AttributeId::DisplayName>(serverOrClient, id, displayName);
+inline void writeDisplayName(T& connection, const NodeId& id, const LocalizedText& displayName) {
+    detail::writeAttributeImpl<AttributeId::DisplayName>(connection, id, displayName);
 }
 
 /**
@@ -144,13 +142,13 @@ inline void writeDisplayName(
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeDisplayNameAsync(
-    Client& client,
+    Client& connection,
     const NodeId& id,
     const LocalizedText& displayName,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::DisplayName>(
-        client, id, displayName, std::forward<CompletionToken>(token)
+        connection, id, displayName, std::forward<CompletionToken>(token)
     );
 }
 
@@ -159,8 +157,8 @@ inline auto writeDisplayNameAsync(
  * @ingroup Read
  */
 template <typename T>
-inline LocalizedText readDescription(T& serverOrClient, const NodeId& id) {
-    return detail::readAttributeImpl<AttributeId::Description>(serverOrClient, id);
+inline LocalizedText readDescription(T& connection, const NodeId& id) {
+    return detail::readAttributeImpl<AttributeId::Description>(connection, id);
 }
 
 /**
@@ -170,10 +168,10 @@ inline LocalizedText readDescription(T& serverOrClient, const NodeId& id) {
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readDescriptionAsync(
-    Client& client, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::Description>(
-        client, id, std::forward<CompletionToken>(token)
+        connection, id, std::forward<CompletionToken>(token)
     );
 }
 
@@ -182,10 +180,8 @@ inline auto readDescriptionAsync(
  * @ingroup Write
  */
 template <typename T>
-inline void writeDescription(
-    T& serverOrClient, const NodeId& id, const LocalizedText& description
-) {
-    detail::writeAttributeImpl<AttributeId::Description>(serverOrClient, id, description);
+inline void writeDescription(T& connection, const NodeId& id, const LocalizedText& description) {
+    detail::writeAttributeImpl<AttributeId::Description>(connection, id, description);
 }
 
 /**
@@ -195,13 +191,13 @@ inline void writeDescription(
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeDescriptionAsync(
-    Client& client,
+    Client& connection,
     const NodeId& id,
     const LocalizedText& description,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::Description>(
-        client, id, description, std::forward<CompletionToken>(token)
+        connection, id, description, std::forward<CompletionToken>(token)
     );
 }
 
@@ -210,8 +206,8 @@ inline auto writeDescriptionAsync(
  * @ingroup Read
  */
 template <typename T>
-inline Bitmask<WriteMask> readWriteMask(T& serverOrClient, const NodeId& id) {
-    return detail::readAttributeImpl<AttributeId::WriteMask>(serverOrClient, id);
+inline Bitmask<WriteMask> readWriteMask(T& connection, const NodeId& id) {
+    return detail::readAttributeImpl<AttributeId::WriteMask>(connection, id);
 }
 
 /**
@@ -221,10 +217,10 @@ inline Bitmask<WriteMask> readWriteMask(T& serverOrClient, const NodeId& id) {
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readWriteMaskAsync(
-    Client& client, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::WriteMask>(
-        client, id, std::forward<CompletionToken>(token)
+        connection, id, std::forward<CompletionToken>(token)
     );
 }
 
@@ -233,8 +229,8 @@ inline auto readWriteMaskAsync(
  * @ingroup Write
  */
 template <typename T>
-inline void writeWriteMask(T& serverOrClient, const NodeId& id, Bitmask<WriteMask> writeMask) {
-    detail::writeAttributeImpl<AttributeId::WriteMask>(serverOrClient, id, writeMask);
+inline void writeWriteMask(T& connection, const NodeId& id, Bitmask<WriteMask> writeMask) {
+    detail::writeAttributeImpl<AttributeId::WriteMask>(connection, id, writeMask);
 }
 
 /**
@@ -244,13 +240,13 @@ inline void writeWriteMask(T& serverOrClient, const NodeId& id, Bitmask<WriteMas
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeWriteMaskAsync(
-    Client& client,
+    Client& connection,
     const NodeId& id,
     Bitmask<WriteMask> writeMask,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::WriteMask>(
-        client, id, writeMask, std::forward<CompletionToken>(token)
+        connection, id, writeMask, std::forward<CompletionToken>(token)
     );
 }
 
@@ -259,8 +255,8 @@ inline auto writeWriteMaskAsync(
  * @ingroup Read
  */
 template <typename T>
-inline Bitmask<WriteMask> readUserWriteMask(T& serverOrClient, const NodeId& id) {
-    return detail::readAttributeImpl<AttributeId::UserWriteMask>(serverOrClient, id);
+inline Bitmask<WriteMask> readUserWriteMask(T& connection, const NodeId& id) {
+    return detail::readAttributeImpl<AttributeId::UserWriteMask>(connection, id);
 }
 
 /**
@@ -270,10 +266,10 @@ inline Bitmask<WriteMask> readUserWriteMask(T& serverOrClient, const NodeId& id)
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readUserWriteMaskAsync(
-    Client& client, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::UserWriteMask>(
-        client, id, std::forward<CompletionToken>(token)
+        connection, id, std::forward<CompletionToken>(token)
     );
 }
 
@@ -282,10 +278,8 @@ inline auto readUserWriteMaskAsync(
  * @ingroup Write
  */
 template <typename T>
-inline void writeUserWriteMask(
-    T& serverOrClient, const NodeId& id, Bitmask<WriteMask> userWriteMask
-) {
-    detail::writeAttributeImpl<AttributeId::UserWriteMask>(serverOrClient, id, userWriteMask);
+inline void writeUserWriteMask(T& connection, const NodeId& id, Bitmask<WriteMask> userWriteMask) {
+    detail::writeAttributeImpl<AttributeId::UserWriteMask>(connection, id, userWriteMask);
 }
 
 /**
@@ -295,13 +289,13 @@ inline void writeUserWriteMask(
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeUserWriteMaskAsync(
-    Client& client,
+    Client& connection,
     const NodeId& id,
     Bitmask<WriteMask> userWriteMask,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::UserWriteMask>(
-        client, id, userWriteMask, std::forward<CompletionToken>(token)
+        connection, id, userWriteMask, std::forward<CompletionToken>(token)
     );
 }
 
@@ -310,8 +304,8 @@ inline auto writeUserWriteMaskAsync(
  * @ingroup Read
  */
 template <typename T>
-inline bool readIsAbstract(T& serverOrClient, const NodeId& id) {
-    return detail::readAttributeImpl<AttributeId::IsAbstract>(serverOrClient, id);
+inline bool readIsAbstract(T& connection, const NodeId& id) {
+    return detail::readAttributeImpl<AttributeId::IsAbstract>(connection, id);
 }
 
 /**
@@ -321,10 +315,10 @@ inline bool readIsAbstract(T& serverOrClient, const NodeId& id) {
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readIsAbstractAsync(
-    Client& client, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::IsAbstract>(
-        client, id, std::forward<CompletionToken>(token)
+        connection, id, std::forward<CompletionToken>(token)
     );
 }
 
@@ -333,8 +327,8 @@ inline auto readIsAbstractAsync(
  * @ingroup Write
  */
 template <typename T>
-inline void writeIsAbstract(T& serverOrClient, const NodeId& id, bool isAbstract) {
-    detail::writeAttributeImpl<AttributeId::IsAbstract>(serverOrClient, id, isAbstract);
+inline void writeIsAbstract(T& connection, const NodeId& id, bool isAbstract) {
+    detail::writeAttributeImpl<AttributeId::IsAbstract>(connection, id, isAbstract);
 }
 
 /**
@@ -344,13 +338,13 @@ inline void writeIsAbstract(T& serverOrClient, const NodeId& id, bool isAbstract
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeIsAbstractAsync(
-    Client& client,
+    Client& connection,
     const NodeId& id,
     bool isAbstract,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::IsAbstract>(
-        client, id, isAbstract, std::forward<CompletionToken>(token)
+        connection, id, isAbstract, std::forward<CompletionToken>(token)
     );
 }
 
@@ -359,8 +353,8 @@ inline auto writeIsAbstractAsync(
  * @ingroup Read
  */
 template <typename T>
-inline bool readSymmetric(T& serverOrClient, const NodeId& id) {
-    return detail::readAttributeImpl<AttributeId::Symmetric>(serverOrClient, id);
+inline bool readSymmetric(T& connection, const NodeId& id) {
+    return detail::readAttributeImpl<AttributeId::Symmetric>(connection, id);
 }
 
 /**
@@ -370,10 +364,10 @@ inline bool readSymmetric(T& serverOrClient, const NodeId& id) {
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readSymmetricAsync(
-    Client& client, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::Symmetric>(
-        client, id, std::forward<CompletionToken>(token)
+        connection, id, std::forward<CompletionToken>(token)
     );
 }
 
@@ -382,8 +376,8 @@ inline auto readSymmetricAsync(
  * @ingroup Write
  */
 template <typename T>
-inline void writeSymmetric(T& serverOrClient, const NodeId& id, bool symmetric) {
-    detail::writeAttributeImpl<AttributeId::Symmetric>(serverOrClient, id, symmetric);
+inline void writeSymmetric(T& connection, const NodeId& id, bool symmetric) {
+    detail::writeAttributeImpl<AttributeId::Symmetric>(connection, id, symmetric);
 }
 
 /**
@@ -393,13 +387,13 @@ inline void writeSymmetric(T& serverOrClient, const NodeId& id, bool symmetric) 
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeSymmetricAsync(
-    Client& client,
+    Client& connection,
     const NodeId& id,
     bool symmetric,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::Symmetric>(
-        client, id, symmetric, std::forward<CompletionToken>(token)
+        connection, id, symmetric, std::forward<CompletionToken>(token)
     );
 }
 
@@ -408,8 +402,8 @@ inline auto writeSymmetricAsync(
  * @ingroup Read
  */
 template <typename T>
-inline LocalizedText readInverseName(T& serverOrClient, const NodeId& id) {
-    return detail::readAttributeImpl<AttributeId::InverseName>(serverOrClient, id);
+inline LocalizedText readInverseName(T& connection, const NodeId& id) {
+    return detail::readAttributeImpl<AttributeId::InverseName>(connection, id);
 }
 
 /**
@@ -419,10 +413,10 @@ inline LocalizedText readInverseName(T& serverOrClient, const NodeId& id) {
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readInverseNameAsync(
-    Client& client, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::InverseName>(
-        client, id, std::forward<CompletionToken>(token)
+        connection, id, std::forward<CompletionToken>(token)
     );
 }
 
@@ -431,10 +425,8 @@ inline auto readInverseNameAsync(
  * @ingroup Write
  */
 template <typename T>
-inline void writeInverseName(
-    T& serverOrClient, const NodeId& id, const LocalizedText& inverseName
-) {
-    detail::writeAttributeImpl<AttributeId::InverseName>(serverOrClient, id, inverseName);
+inline void writeInverseName(T& connection, const NodeId& id, const LocalizedText& inverseName) {
+    detail::writeAttributeImpl<AttributeId::InverseName>(connection, id, inverseName);
 }
 
 /**
@@ -444,13 +436,13 @@ inline void writeInverseName(
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeInverseNameAsync(
-    Client& client,
+    Client& connection,
     const NodeId& id,
     const LocalizedText& inverseName,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::InverseName>(
-        client, id, inverseName, std::forward<CompletionToken>(token)
+        connection, id, inverseName, std::forward<CompletionToken>(token)
     );
 }
 
@@ -459,8 +451,8 @@ inline auto writeInverseNameAsync(
  * @ingroup Read
  */
 template <typename T>
-inline bool readContainsNoLoops(T& serverOrClient, const NodeId& id) {
-    return detail::readAttributeImpl<AttributeId::ContainsNoLoops>(serverOrClient, id);
+inline bool readContainsNoLoops(T& connection, const NodeId& id) {
+    return detail::readAttributeImpl<AttributeId::ContainsNoLoops>(connection, id);
 }
 
 /**
@@ -470,10 +462,10 @@ inline bool readContainsNoLoops(T& serverOrClient, const NodeId& id) {
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readContainsNoLoopsAsync(
-    Client& client, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::ContainsNoLoops>(
-        client, id, std::forward<CompletionToken>(token)
+        connection, id, std::forward<CompletionToken>(token)
     );
 }
 
@@ -482,8 +474,8 @@ inline auto readContainsNoLoopsAsync(
  * @ingroup Write
  */
 template <typename T>
-inline void writeContainsNoLoops(T& serverOrClient, const NodeId& id, const bool& containsNoLoops) {
-    detail::writeAttributeImpl<AttributeId::ContainsNoLoops>(serverOrClient, id, containsNoLoops);
+inline void writeContainsNoLoops(T& connection, const NodeId& id, const bool& containsNoLoops) {
+    detail::writeAttributeImpl<AttributeId::ContainsNoLoops>(connection, id, containsNoLoops);
 }
 
 /**
@@ -493,13 +485,13 @@ inline void writeContainsNoLoops(T& serverOrClient, const NodeId& id, const bool
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeContainsNoLoopsAsync(
-    Client& client,
+    Client& connection,
     const NodeId& id,
     const bool& containsNoLoops,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::ContainsNoLoops>(
-        client, id, containsNoLoops, std::forward<CompletionToken>(token)
+        connection, id, containsNoLoops, std::forward<CompletionToken>(token)
     );
 }
 
@@ -508,8 +500,8 @@ inline auto writeContainsNoLoopsAsync(
  * @ingroup Read
  */
 template <typename T>
-inline Bitmask<EventNotifier> readEventNotifier(T& serverOrClient, const NodeId& id) {
-    return detail::readAttributeImpl<AttributeId::EventNotifier>(serverOrClient, id);
+inline Bitmask<EventNotifier> readEventNotifier(T& connection, const NodeId& id) {
+    return detail::readAttributeImpl<AttributeId::EventNotifier>(connection, id);
 }
 
 /**
@@ -519,10 +511,10 @@ inline Bitmask<EventNotifier> readEventNotifier(T& serverOrClient, const NodeId&
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readEventNotifierAsync(
-    Client& client, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::EventNotifier>(
-        client, id, std::forward<CompletionToken>(token)
+        connection, id, std::forward<CompletionToken>(token)
     );
 }
 
@@ -532,9 +524,9 @@ inline auto readEventNotifierAsync(
  */
 template <typename T>
 inline void writeEventNotifier(
-    T& serverOrClient, const NodeId& id, Bitmask<EventNotifier> eventNotifier
+    T& connection, const NodeId& id, Bitmask<EventNotifier> eventNotifier
 ) {
-    detail::writeAttributeImpl<AttributeId::EventNotifier>(serverOrClient, id, eventNotifier);
+    detail::writeAttributeImpl<AttributeId::EventNotifier>(connection, id, eventNotifier);
 }
 
 /**
@@ -544,13 +536,13 @@ inline void writeEventNotifier(
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeEventNotifierAsync(
-    Client& client,
+    Client& connection,
     const NodeId& id,
     Bitmask<EventNotifier> eventNotifier,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::EventNotifier>(
-        client, id, eventNotifier, std::forward<CompletionToken>(token)
+        connection, id, eventNotifier, std::forward<CompletionToken>(token)
     );
 }
 
@@ -559,8 +551,8 @@ inline auto writeEventNotifierAsync(
  * @ingroup Read
  */
 template <typename T>
-inline Variant readValue(T& serverOrClient, const NodeId& id) {
-    return detail::readAttributeImpl<AttributeId::Value>(serverOrClient, id);
+inline Variant readValue(T& connection, const NodeId& id) {
+    return detail::readAttributeImpl<AttributeId::Value>(connection, id);
 }
 
 /**
@@ -570,10 +562,10 @@ inline Variant readValue(T& serverOrClient, const NodeId& id) {
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readValueAsync(
-    Client& client, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::Value>(
-        client, id, std::forward<CompletionToken>(token)
+        connection, id, std::forward<CompletionToken>(token)
     );
 }
 
@@ -582,8 +574,8 @@ inline auto readValueAsync(
  * @ingroup Write
  */
 template <typename T>
-inline void writeValue(T& serverOrClient, const NodeId& id, const Variant& value) {
-    detail::writeAttributeImpl<AttributeId::Value>(serverOrClient, id, value);
+inline void writeValue(T& connection, const NodeId& id, const Variant& value) {
+    detail::writeAttributeImpl<AttributeId::Value>(connection, id, value);
 }
 
 /**
@@ -593,13 +585,13 @@ inline void writeValue(T& serverOrClient, const NodeId& id, const Variant& value
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeValueAsync(
-    Client& client,
+    Client& connection,
     const NodeId& id,
     const Variant& value,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::Value>(
-        client, id, value, std::forward<CompletionToken>(token)
+        connection, id, value, std::forward<CompletionToken>(token)
     );
 }
 
@@ -608,8 +600,8 @@ inline auto writeValueAsync(
  * @ingroup Read
  */
 template <typename T>
-inline NodeId readDataType(T& serverOrClient, const NodeId& id) {
-    return detail::readAttributeImpl<AttributeId::DataType>(serverOrClient, id);
+inline NodeId readDataType(T& connection, const NodeId& id) {
+    return detail::readAttributeImpl<AttributeId::DataType>(connection, id);
 }
 
 /**
@@ -619,10 +611,10 @@ inline NodeId readDataType(T& serverOrClient, const NodeId& id) {
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readDataTypeAsync(
-    Client& client, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::DataType>(
-        client, id, std::forward<CompletionToken>(token)
+        connection, id, std::forward<CompletionToken>(token)
     );
 }
 
@@ -631,8 +623,8 @@ inline auto readDataTypeAsync(
  * @ingroup Write
  */
 template <typename T>
-inline void writeDataType(T& serverOrClient, const NodeId& id, const NodeId& dataType) {
-    detail::writeAttributeImpl<AttributeId::DataType>(serverOrClient, id, dataType);
+inline void writeDataType(T& connection, const NodeId& id, const NodeId& dataType) {
+    detail::writeAttributeImpl<AttributeId::DataType>(connection, id, dataType);
 }
 
 /**
@@ -642,13 +634,13 @@ inline void writeDataType(T& serverOrClient, const NodeId& id, const NodeId& dat
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeDataTypeAsync(
-    Client& client,
+    Client& connection,
     const NodeId& id,
     const NodeId& dataType,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::DataType>(
-        client, id, dataType, std::forward<CompletionToken>(token)
+        connection, id, dataType, std::forward<CompletionToken>(token)
     );
 }
 
@@ -657,8 +649,8 @@ inline auto writeDataTypeAsync(
  * @ingroup Read
  */
 template <typename T>
-inline ValueRank readValueRank(T& serverOrClient, const NodeId& id) {
-    return detail::readAttributeImpl<AttributeId::ValueRank>(serverOrClient, id);
+inline ValueRank readValueRank(T& connection, const NodeId& id) {
+    return detail::readAttributeImpl<AttributeId::ValueRank>(connection, id);
 }
 
 /**
@@ -668,10 +660,10 @@ inline ValueRank readValueRank(T& serverOrClient, const NodeId& id) {
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readValueRankAsync(
-    Client& client, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::ValueRank>(
-        client, id, std::forward<CompletionToken>(token)
+        connection, id, std::forward<CompletionToken>(token)
     );
 }
 
@@ -680,8 +672,8 @@ inline auto readValueRankAsync(
  * @ingroup Write
  */
 template <typename T>
-inline void writeValueRank(T& serverOrClient, const NodeId& id, ValueRank valueRank) {
-    detail::writeAttributeImpl<AttributeId::ValueRank>(serverOrClient, id, valueRank);
+inline void writeValueRank(T& connection, const NodeId& id, ValueRank valueRank) {
+    detail::writeAttributeImpl<AttributeId::ValueRank>(connection, id, valueRank);
 }
 
 /**
@@ -691,13 +683,13 @@ inline void writeValueRank(T& serverOrClient, const NodeId& id, ValueRank valueR
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeValueRankAsync(
-    Client& client,
+    Client& connection,
     const NodeId& id,
     ValueRank valueRank,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::ValueRank>(
-        client, id, valueRank, std::forward<CompletionToken>(token)
+        connection, id, valueRank, std::forward<CompletionToken>(token)
     );
 }
 
@@ -706,8 +698,8 @@ inline auto writeValueRankAsync(
  * @ingroup Read
  */
 template <typename T>
-inline std::vector<uint32_t> readArrayDimensions(T& serverOrClient, const NodeId& id) {
-    return detail::readAttributeImpl<AttributeId::ArrayDimensions>(serverOrClient, id);
+inline std::vector<uint32_t> readArrayDimensions(T& connection, const NodeId& id) {
+    return detail::readAttributeImpl<AttributeId::ArrayDimensions>(connection, id);
 }
 
 /**
@@ -717,10 +709,10 @@ inline std::vector<uint32_t> readArrayDimensions(T& serverOrClient, const NodeId
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readArrayDimensionsAsync(
-    Client& client, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::ArrayDimensions>(
-        client, id, std::forward<CompletionToken>(token)
+        connection, id, std::forward<CompletionToken>(token)
     );
 }
 
@@ -730,9 +722,9 @@ inline auto readArrayDimensionsAsync(
  */
 template <typename T>
 inline void writeArrayDimensions(
-    T& serverOrClient, const NodeId& id, Span<const uint32_t> arrayDimensions
+    T& connection, const NodeId& id, Span<const uint32_t> arrayDimensions
 ) {
-    detail::writeAttributeImpl<AttributeId::ArrayDimensions>(serverOrClient, id, arrayDimensions);
+    detail::writeAttributeImpl<AttributeId::ArrayDimensions>(connection, id, arrayDimensions);
 }
 
 /**
@@ -742,13 +734,13 @@ inline void writeArrayDimensions(
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeArrayDimensionsAsync(
-    Client& client,
+    Client& connection,
     const NodeId& id,
     Span<const uint32_t> arrayDimensions,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::ArrayDimensions>(
-        client, id, arrayDimensions, std::forward<CompletionToken>(token)
+        connection, id, arrayDimensions, std::forward<CompletionToken>(token)
     );
 }
 
@@ -757,8 +749,8 @@ inline auto writeArrayDimensionsAsync(
  * @ingroup Read
  */
 template <typename T>
-inline Bitmask<AccessLevel> readAccessLevel(T& serverOrClient, const NodeId& id) {
-    return detail::readAttributeImpl<AttributeId::AccessLevel>(serverOrClient, id);
+inline Bitmask<AccessLevel> readAccessLevel(T& connection, const NodeId& id) {
+    return detail::readAttributeImpl<AttributeId::AccessLevel>(connection, id);
 }
 
 /**
@@ -768,10 +760,10 @@ inline Bitmask<AccessLevel> readAccessLevel(T& serverOrClient, const NodeId& id)
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readAccessLevelAsync(
-    Client& client, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::AccessLevel>(
-        client, id, std::forward<CompletionToken>(token)
+        connection, id, std::forward<CompletionToken>(token)
     );
 }
 
@@ -780,10 +772,8 @@ inline auto readAccessLevelAsync(
  * @ingroup Write
  */
 template <typename T>
-inline void writeAccessLevel(
-    T& serverOrClient, const NodeId& id, Bitmask<AccessLevel> accessLevel
-) {
-    detail::writeAttributeImpl<AttributeId::AccessLevel>(serverOrClient, id, accessLevel);
+inline void writeAccessLevel(T& connection, const NodeId& id, Bitmask<AccessLevel> accessLevel) {
+    detail::writeAttributeImpl<AttributeId::AccessLevel>(connection, id, accessLevel);
 }
 
 /**
@@ -793,13 +783,13 @@ inline void writeAccessLevel(
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeAccessLevelAsync(
-    Client& client,
+    Client& connection,
     const NodeId& id,
     Bitmask<AccessLevel> accessLevel,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::AccessLevel>(
-        client, id, accessLevel, std::forward<CompletionToken>(token)
+        connection, id, accessLevel, std::forward<CompletionToken>(token)
     );
 }
 
@@ -808,8 +798,8 @@ inline auto writeAccessLevelAsync(
  * @ingroup Read
  */
 template <typename T>
-inline Bitmask<AccessLevel> readUserAccessLevel(T& serverOrClient, const NodeId& id) {
-    return detail::readAttributeImpl<AttributeId::UserAccessLevel>(serverOrClient, id);
+inline Bitmask<AccessLevel> readUserAccessLevel(T& connection, const NodeId& id) {
+    return detail::readAttributeImpl<AttributeId::UserAccessLevel>(connection, id);
 }
 
 /**
@@ -819,10 +809,10 @@ inline Bitmask<AccessLevel> readUserAccessLevel(T& serverOrClient, const NodeId&
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readUserAccessLevelAsync(
-    Client& client, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::UserAccessLevel>(
-        client, id, std::forward<CompletionToken>(token)
+        connection, id, std::forward<CompletionToken>(token)
     );
 }
 
@@ -832,9 +822,9 @@ inline auto readUserAccessLevelAsync(
  */
 template <typename T>
 inline void writeUserAccessLevel(
-    T& serverOrClient, const NodeId& id, Bitmask<AccessLevel> userAccessLevel
+    T& connection, const NodeId& id, Bitmask<AccessLevel> userAccessLevel
 ) {
-    detail::writeAttributeImpl<AttributeId::UserAccessLevel>(serverOrClient, id, userAccessLevel);
+    detail::writeAttributeImpl<AttributeId::UserAccessLevel>(connection, id, userAccessLevel);
 }
 
 /**
@@ -844,13 +834,13 @@ inline void writeUserAccessLevel(
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeUserAccessLevelAsync(
-    Client& client,
+    Client& connection,
     const NodeId& id,
     Bitmask<AccessLevel> userAccessLevel,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::UserAccessLevel>(
-        client, id, userAccessLevel, std::forward<CompletionToken>(token)
+        connection, id, userAccessLevel, std::forward<CompletionToken>(token)
     );
 }
 
@@ -859,8 +849,8 @@ inline auto writeUserAccessLevelAsync(
  * @ingroup Read
  */
 template <typename T>
-inline double readMinimumSamplingInterval(T& serverOrClient, const NodeId& id) {
-    return detail::readAttributeImpl<AttributeId::MinimumSamplingInterval>(serverOrClient, id);
+inline double readMinimumSamplingInterval(T& connection, const NodeId& id) {
+    return detail::readAttributeImpl<AttributeId::MinimumSamplingInterval>(connection, id);
 }
 
 /**
@@ -870,10 +860,10 @@ inline double readMinimumSamplingInterval(T& serverOrClient, const NodeId& id) {
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readMinimumSamplingIntervalAsync(
-    Client& client, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::MinimumSamplingInterval>(
-        client, id, std::forward<CompletionToken>(token)
+        connection, id, std::forward<CompletionToken>(token)
     );
 }
 
@@ -883,10 +873,10 @@ inline auto readMinimumSamplingIntervalAsync(
  */
 template <typename T>
 inline void writeMinimumSamplingInterval(
-    T& serverOrClient, const NodeId& id, double minimumSamplingInterval
+    T& connection, const NodeId& id, double minimumSamplingInterval
 ) {
     detail::writeAttributeImpl<AttributeId::MinimumSamplingInterval>(
-        serverOrClient, id, minimumSamplingInterval
+        connection, id, minimumSamplingInterval
     );
 }
 
@@ -897,13 +887,13 @@ inline void writeMinimumSamplingInterval(
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeMinimumSamplingIntervalAsync(
-    Client& client,
+    Client& connection,
     const NodeId& id,
     double minimumSamplingInterval,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::MinimumSamplingInterval>(
-        client, id, minimumSamplingInterval, std::forward<CompletionToken>(token)
+        connection, id, minimumSamplingInterval, std::forward<CompletionToken>(token)
     );
 }
 
@@ -912,8 +902,8 @@ inline auto writeMinimumSamplingIntervalAsync(
  * @ingroup Read
  */
 template <typename T>
-inline bool readHistorizing(T& serverOrClient, const NodeId& id) {
-    return detail::readAttributeImpl<AttributeId::Historizing>(serverOrClient, id);
+inline bool readHistorizing(T& connection, const NodeId& id) {
+    return detail::readAttributeImpl<AttributeId::Historizing>(connection, id);
 }
 
 /**
@@ -923,10 +913,10 @@ inline bool readHistorizing(T& serverOrClient, const NodeId& id) {
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readHistorizingAsync(
-    Client& client, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::Historizing>(
-        client, id, std::forward<CompletionToken>(token)
+        connection, id, std::forward<CompletionToken>(token)
     );
 }
 
@@ -935,8 +925,8 @@ inline auto readHistorizingAsync(
  * @ingroup Write
  */
 template <typename T>
-inline void writeHistorizing(T& serverOrClient, const NodeId& id, bool historizing) {
-    detail::writeAttributeImpl<AttributeId::Historizing>(serverOrClient, id, historizing);
+inline void writeHistorizing(T& connection, const NodeId& id, bool historizing) {
+    detail::writeAttributeImpl<AttributeId::Historizing>(connection, id, historizing);
 }
 
 /**
@@ -946,13 +936,13 @@ inline void writeHistorizing(T& serverOrClient, const NodeId& id, bool historizi
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeHistorizingAsync(
-    Client& client,
+    Client& connection,
     const NodeId& id,
     bool historizing,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::Historizing>(
-        client, id, historizing, std::forward<CompletionToken>(token)
+        connection, id, historizing, std::forward<CompletionToken>(token)
     );
 }
 
@@ -961,8 +951,8 @@ inline auto writeHistorizingAsync(
  * @ingroup Read
  */
 template <typename T>
-inline bool readExecutable(T& serverOrClient, const NodeId& id) {
-    return detail::readAttributeImpl<AttributeId::Executable>(serverOrClient, id);
+inline bool readExecutable(T& connection, const NodeId& id) {
+    return detail::readAttributeImpl<AttributeId::Executable>(connection, id);
 }
 
 /**
@@ -972,10 +962,10 @@ inline bool readExecutable(T& serverOrClient, const NodeId& id) {
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readExecutableAsync(
-    Client& client, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::Executable>(
-        client, id, std::forward<CompletionToken>(token)
+        connection, id, std::forward<CompletionToken>(token)
     );
 }
 
@@ -984,8 +974,8 @@ inline auto readExecutableAsync(
  * @ingroup Write
  */
 template <typename T>
-inline void writeExecutable(T& serverOrClient, const NodeId& id, bool executable) {
-    detail::writeAttributeImpl<AttributeId::Executable>(serverOrClient, id, executable);
+inline void writeExecutable(T& connection, const NodeId& id, bool executable) {
+    detail::writeAttributeImpl<AttributeId::Executable>(connection, id, executable);
 }
 
 /**
@@ -995,13 +985,13 @@ inline void writeExecutable(T& serverOrClient, const NodeId& id, bool executable
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeExecutableAsync(
-    Client& client,
+    Client& connection,
     const NodeId& id,
     bool executable,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::Executable>(
-        client, id, executable, std::forward<CompletionToken>(token)
+        connection, id, executable, std::forward<CompletionToken>(token)
     );
 }
 
@@ -1010,8 +1000,8 @@ inline auto writeExecutableAsync(
  * @ingroup Read
  */
 template <typename T>
-inline bool readUserExecutable(T& serverOrClient, const NodeId& id) {
-    return detail::readAttributeImpl<AttributeId::UserExecutable>(serverOrClient, id);
+inline bool readUserExecutable(T& connection, const NodeId& id) {
+    return detail::readAttributeImpl<AttributeId::UserExecutable>(connection, id);
 }
 
 /**
@@ -1021,10 +1011,10 @@ inline bool readUserExecutable(T& serverOrClient, const NodeId& id) {
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto readUserExecutableAsync(
-    Client& client, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
+    Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::readAttributeAsyncImpl<AttributeId::UserExecutable>(
-        client, id, std::forward<CompletionToken>(token)
+        connection, id, std::forward<CompletionToken>(token)
     );
 }
 
@@ -1033,8 +1023,8 @@ inline auto readUserExecutableAsync(
  * @ingroup Write
  */
 template <typename T>
-inline void writeUserExecutable(T& serverOrClient, const NodeId& id, bool userExecutable) {
-    detail::writeAttributeImpl<AttributeId::UserExecutable>(serverOrClient, id, userExecutable);
+inline void writeUserExecutable(T& connection, const NodeId& id, bool userExecutable) {
+    detail::writeAttributeImpl<AttributeId::UserExecutable>(connection, id, userExecutable);
 }
 
 /**
@@ -1044,13 +1034,13 @@ inline void writeUserExecutable(T& serverOrClient, const NodeId& id, bool userEx
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto writeUserExecutableAsync(
-    Client& client,
+    Client& connection,
     const NodeId& id,
     bool userExecutable,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     detail::writeAttributeAsyncImpl<AttributeId::UserExecutable>(
-        client, id, userExecutable, std::forward<CompletionToken>(token)
+        connection, id, userExecutable, std::forward<CompletionToken>(token)
     );
 }
 

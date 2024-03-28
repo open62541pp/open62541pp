@@ -20,7 +20,7 @@ class AccessControlBase;
 class ByteString;
 class DataType;
 class Event;
-template <typename ServerOrClient>
+template <typename Connection>
 class Node;
 class NodeId;
 class Server;
@@ -32,7 +32,6 @@ namespace detail {
 struct ServerConnection;
 struct ServerContext;
 }  // namespace detail
-
 
 /* -------------------------------------- Helper functions -------------------------------------- */
 
