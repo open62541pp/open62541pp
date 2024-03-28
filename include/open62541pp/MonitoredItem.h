@@ -81,9 +81,6 @@ public:
         return monitoredItemId_;
     }
 
-    /// Get the underlying subscription.
-    Subscription<Connection> subscription() const noexcept;
-
     /// Get the monitored NodeId.
     const NodeId& getNodeId() const;
 
