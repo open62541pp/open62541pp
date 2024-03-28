@@ -9,14 +9,16 @@
 #include <utility>  // move
 #include <vector>
 
-// Workaround for GCC 7 with partial C++17 support
+// Workaround for GCC 7 with partial (or missing) C++17 support
 // https://github.com/open62541pp/open62541pp/issues/109
-#if !__has_include(<filesystem>) && __has_include(<experimental/filesystem>)
+#if __has_include(<filesystem>)
+#include <filesystem>
+namespace fs = std::filesystem;
+#elif __has_include(<experimental/filesystem>)
 #include <experimental/filesystem>
 namespace fs = std::experimental::filesystem;
 #else
-#include <filesystem>
-namespace fs = std::filesystem;
+#define UAPP_NO_STD_FILESYSTEM
 #endif
 
 #include "open62541pp/Common.h"  // NamespaceIndex
@@ -179,8 +181,10 @@ public:
         std::copy(bytes.begin(), bytes.end(), handle()->data);
     }
 
+#ifndef UAPP_NO_STD_FILESYSTEM
     /// Read ByteString from binary file.
     static ByteString fromFile(const fs::path& filepath);
+#endif
 
     /// Parse ByteString from Base64 encoded string.
     /// @note Supported since open62541 v1.1
@@ -190,8 +194,10 @@ public:
         return handle()->length == 0U;
     }
 
+#ifndef UAPP_NO_STD_FILESYSTEM
     /// Write ByteString to binary file.
     void toFile(const fs::path& filepath) const;
+#endif
 
     /// Convert to Base64 encoded string.
     /// @note Supported since open62541 v1.1

@@ -58,6 +58,7 @@ ByteString ByteString::fromBase64([[maybe_unused]] std::string_view encoded) {
 #endif
 }
 
+#ifndef UAPP_NO_STD_FILESYSTEM
 ByteString ByteString::fromFile(const fs::path& filepath) {
     std::ifstream fp(filepath, std::ios::binary);
     const std::vector<uint8_t> bytes(
@@ -65,6 +66,7 @@ ByteString ByteString::fromFile(const fs::path& filepath) {
     );
     return ByteString(bytes);
 }
+#endif
 
 // NOLINTNEXTLINE
 std::string ByteString::toBase64() const {
@@ -77,10 +79,12 @@ std::string ByteString::toBase64() const {
 #endif
 }
 
+#ifndef UAPP_NO_STD_FILESYSTEM
 void ByteString::toFile(const fs::path& filepath) const {
     std::ofstream fp(filepath, std::ios::binary);
     fp.write(reinterpret_cast<char*>(handle()->data), handle()->length);  // NOLINT
 }
+#endif
 
 /* ----------------------------------------- XmlElement ----------------------------------------- */
 
