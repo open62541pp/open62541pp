@@ -1,7 +1,6 @@
 #include "open62541pp/Session.h"
 
 #include <string>
-#include <utility>
 
 #include "open62541pp/Config.h"
 #include "open62541pp/ErrorHandling.h"
@@ -14,22 +13,6 @@
 
 namespace opcua {
 
-Session::Session(Server& server, NodeId sessionId) noexcept
-    : connection_(server),
-      sessionId_(std::move(sessionId)) {}
-
-Server& Session::getConnection() noexcept {
-    return connection_;
-}
-
-const Server& Session::getConnection() const noexcept {
-    return connection_;
-}
-
-const NodeId& Session::getSessionId() const noexcept {
-    return sessionId_;
-}
-
 // ignore namespace index for v1.3, v1.4 uses qualified keys
 [[maybe_unused]] inline static std::string unqualifiedKey(const QualifiedName& key) {
     return std::string{key.getName()};
@@ -39,10 +22,7 @@ Variant Session::getSessionAttribute([[maybe_unused]] const QualifiedName& key) 
     Variant variant;
 #if UAPP_OPEN62541_VER_EQ(1, 3)
     const auto status = UA_Server_getSessionParameter(
-        getConnection().handle(),
-        getSessionId().handle(),
-        unqualifiedKey(key).c_str(),
-        variant.handle()
+        connection().handle(), id().handle(), unqualifiedKey(key).c_str(), variant.handle()
     );
     throwIfBad(status);
 #endif
@@ -54,10 +34,7 @@ void Session::setSessionAttribute(
 ) {
 #if UAPP_OPEN62541_VER_EQ(1, 3)
     const auto status = UA_Server_setSessionParameter(
-        getConnection().handle(),
-        getSessionId().handle(),
-        unqualifiedKey(key).c_str(),
-        value.handle()
+        connection().handle(), id().handle(), unqualifiedKey(key).c_str(), value.handle()
     );
     throwIfBad(status);
 #endif
@@ -66,21 +43,20 @@ void Session::setSessionAttribute(
 void Session::deleteSessionAttribute([[maybe_unused]] const QualifiedName& key) {
 #if UAPP_OPEN62541_VER_EQ(1, 3)
     UA_Server_deleteSessionParameter(
-        getConnection().handle(), getSessionId().handle(), unqualifiedKey(key).c_str()
+        connection().handle(), id().handle(), unqualifiedKey(key).c_str()
     );
 #endif
 }
 
 void Session::close() {
 #if UAPP_OPEN62541_VER_EQ(1, 3)
-    const auto status = UA_Server_closeSession(getConnection().handle(), getSessionId().handle());
+    const auto status = UA_Server_closeSession(connection().handle(), id().handle());
     throwIfBad(status);
 #endif
 }
 
 bool operator==(const Session& lhs, const Session& rhs) noexcept {
-    return (lhs.getConnection() == rhs.getConnection()) &&
-           (lhs.getSessionId() == rhs.getSessionId());
+    return (lhs.connection() == rhs.connection()) && (lhs.id() == rhs.id());
 }
 
 bool operator!=(const Session& lhs, const Session& rhs) noexcept {
