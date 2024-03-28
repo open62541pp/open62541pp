@@ -25,13 +25,13 @@ TEST_CASE_TEMPLATE("Node", ServerOrClient, Server, Client) {
     auto varNode = serverOrClient.getNode(varId);
     auto refNode = serverOrClient.getNode(ReferenceTypeId::References);
 
-    SUBCASE("getConnection") {
-        CHECK(rootNode.getConnection() == serverOrClient);
+    SUBCASE("connection") {
+        CHECK(rootNode.connection() == serverOrClient);
     }
 
-    SUBCASE("getNodeId") {
+    SUBCASE("id") {
         const NodeId id(0, UA_NS0ID_OBJECTSFOLDER);
-        CHECK(Node(serverOrClient, id).getNodeId() == id);
+        CHECK(Node(serverOrClient, id).id() == id);
     }
 
     SUBCASE("exists") {
@@ -108,12 +108,9 @@ TEST_CASE_TEMPLATE("Node", ServerOrClient, Server, Client) {
 
     SUBCASE("Browse child") {
         CHECK_THROWS_WITH(rootNode.browseChild({{0, "Invalid"}}), "BadNoMatch");
+        CHECK_EQ(rootNode.browseChild({{0, "Objects"}}).id(), NodeId(0, UA_NS0ID_OBJECTSFOLDER));
         CHECK_EQ(
-            rootNode.browseChild({{0, "Objects"}}).getNodeId(), NodeId(0, UA_NS0ID_OBJECTSFOLDER)
-        );
-        CHECK_EQ(
-            rootNode.browseChild({{0, "Objects"}, {0, "Server"}}).getNodeId(),
-            NodeId(0, UA_NS0ID_SERVER)
+            rootNode.browseChild({{0, "Objects"}, {0, "Server"}}).id(), NodeId(0, UA_NS0ID_SERVER)
         );
     }
 

@@ -20,9 +20,10 @@ int main() {
     {
         auto future = opcua::services::callAsync(
             client,
-            objNode.getNodeId(),
-            greetMethodNode.getNodeId(),
-            {opcua::Variant::fromScalar("Future World")}
+            objNode.id(),
+            greetMethodNode.id(),
+            {opcua::Variant::fromScalar("Future World")},
+            opcua::useFuture  // default, can be omitted
         );
 
         std::cout << "Waiting for asynchronous operation to complete\n";
@@ -37,8 +38,8 @@ int main() {
     {
         opcua::services::callAsync(
             client,
-            objNode.getNodeId(),
-            greetMethodNode.getNodeId(),
+            objNode.id(),
+            greetMethodNode.id(),
             {opcua::Variant::fromScalar("Callback World")},
             [](const opcua::Result<std::vector<opcua::Variant>>& result) {
                 std::cout

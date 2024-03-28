@@ -90,7 +90,7 @@ int main() {
             .setDataType(dataTypePoint.getTypeId())
             .setValueRank(opcua::ValueRank::Scalar)
             .setValueScalar(point, dataTypePoint),
-        nodeVariableTypePoint.getNodeId()
+        nodeVariableTypePoint.id()
     );
 
     const std::vector<Point> pointVec{{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}};
@@ -102,7 +102,7 @@ int main() {
             .setArrayDimensions({0})  // single dimension but unknown in size
             .setValueRank(opcua::ValueRank::OneDimension)
             .setValueArray(pointVec, dataTypePoint),
-        nodeVariableTypePoint.getNodeId()
+        nodeVariableTypePoint.id()
     );
 
     std::vector<float> measurementsValues{19.1F, 20.2F, 19.7F};
@@ -118,7 +118,7 @@ int main() {
             .setDataType(dataTypeMeasurements.getTypeId())
             .setValueRank(opcua::ValueRank::Scalar)
             .setValueScalar(measurements, dataTypeMeasurements),
-        nodeVariableTypeMeasurement.getNodeId()
+        nodeVariableTypeMeasurement.id()
     );
 
     float optC = 10.10F;
@@ -130,7 +130,7 @@ int main() {
             .setDataType(dataTypeOpt.getTypeId())
             .setValueRank(opcua::ValueRank::Scalar)
             .setValueScalar(opt, dataTypeOpt),
-        nodeVariableTypeOpt.getNodeId()
+        nodeVariableTypeOpt.id()
     );
 
     Uni uni{};
@@ -143,7 +143,7 @@ int main() {
             .setDataType(dataTypeUni.getTypeId())
             .setValueRank(opcua::ValueRank::Scalar)
             .setValueScalar(uni, dataTypeUni),
-        nodeVariableTypeUni.getNodeId()
+        nodeVariableTypeUni.id()
     );
 
     nodeObjects.addVariable(
