@@ -1,7 +1,10 @@
 #pragma once
 
 #include <cassert>
+#include <functional>  // invoke
 #include <optional>
+#include <type_traits>
+#include <utility>  // forward, move
 
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/types/Builtin.h"  // StatusCode
@@ -95,12 +98,12 @@ public:
      * Get the value of the Result.
      * Accessing a Result without a value leads to undefined behavior.
      */
-    constexpr const T* operator->() const noexcept {
+    constexpr T* operator->() noexcept {
         return &(*maybeValue_);
     }
 
     /// @copydoc operator->
-    constexpr T* operator->() noexcept {
+    constexpr const T* operator->() const noexcept {
         return &(*maybeValue_);
     }
 
@@ -108,22 +111,22 @@ public:
      * Get the value of the Result.
      * Accessing a Result without a value leads to undefined behavior.
      */
-    constexpr const T& operator*() const& noexcept {
-        return *maybeValue_;
-    }
-
-    /// @copydoc operator*
     constexpr T& operator*() & noexcept {
         return *maybeValue_;
     }
 
     /// @copydoc operator*
-    constexpr const T&& operator*() const&& noexcept {
-        return std::move(*maybeValue_);
+    constexpr const T& operator*() const& noexcept {
+        return *maybeValue_;
     }
 
     /// @copydoc operator*
     constexpr T&& operator*() && noexcept {
+        return std::move(*maybeValue_);
+    }
+
+    /// @copydoc operator*
+    constexpr const T&& operator*() const&& noexcept {
         return std::move(*maybeValue_);
     }
 
@@ -152,25 +155,25 @@ public:
      * Get the value of the Result.
      * @exception BadStatus If the Result does not have a value (bad StatusCode).
      */
-    constexpr const T& value() const& {
-        checkIsBad();
-        return **this;
-    }
-
-    /// @copydoc value
     constexpr T& value() & {
         checkIsBad();
         return **this;
     }
 
     /// @copydoc value
-    constexpr const T&& value() const&& {
+    constexpr const T& value() const& {
+        checkIsBad();
+        return **this;
+    }
+
+    /// @copydoc value
+    constexpr T&& value() && {
         checkIsBad();
         return std::move(**this);
     }
 
     /// @copydoc value
-    constexpr T&& value() && {
+    constexpr const T&& value() const&& {
         checkIsBad();
         return std::move(**this);
     }
@@ -190,7 +193,135 @@ public:
         return !isBad() ? std::move(**this) : static_cast<T>(std::forward<U>(defaultValue));
     }
 
+    /**
+     * Transforms `Result<T>` to `Result<U>` using the given value transformation function.
+     * The function is only applied if the Result has a value.
+     * Otherwise `Result<U>` with the same bad StatusCode is returned.
+     * @param func Callable with the signature `U(T&&)`
+     */
+    template <typename F>
+    constexpr auto transform(F&& func) & {
+        return transformImpl(*this, std::forward<F>(func));
+    }
+
+    /// @copydoc transform
+    template <typename F>
+    constexpr auto transform(F&& func) const& {
+        return transformImpl(*this, std::forward<F>(func));
+    }
+
+    /// @copydoc transform
+    template <typename F>
+    constexpr auto transform(F&& func) && {
+        return transformImpl(std::move(*this), std::forward<F>(func));
+    }
+
+    /// @copydoc transform
+    template <typename F>
+    constexpr auto transform(F&& func) const&& {
+        return transformImpl(std::move(*this), std::forward<F>(func));
+    }
+
+    /**
+     * Transforms `Result<T>` to `Result<U>` using the given function.
+     * The function is only applied if the Result has a value.
+     * Otherwise `Result<U>` with the same bad StatusCode is returned.
+     * @param func Callable with the signature `Result<U>(T&&)` or `Result<U>(T&&, StatusCode)`
+     */
+    template <typename F>
+    constexpr auto andThen(F&& func) & {
+        return andThenImpl(*this, std::forward<F>(func));
+    }
+
+    /// @copydoc andThen
+    template <typename F>
+    constexpr auto andThen(F&& func) const& {
+        return andThenImpl(*this, std::forward<F>(func));
+    }
+
+    /// @copydoc andThen
+    template <typename F>
+    constexpr auto andThen(F&& func) && {
+        return andThenImpl(std::move(*this), std::forward<F>(func));
+    }
+
+    /// @copydoc andThen
+    template <typename F>
+    constexpr auto andThen(F&& func) const&& {
+        return andThenImpl(std::move(*this), std::forward<F>(func));
+    }
+
+    /**
+     * Transforms `Result<T>` with a bad StatusCode to `Result<T>` using the given function.
+     * The function is only applied if the Result has **no** value.
+     * Otherwise the same `Result<T>` is returned.
+     * @param func Callable with the signature `Result<T>(StatusCode)`
+     */
+    template <typename F>
+    constexpr auto orElse(F&& func) & {
+        return orElseImpl(*this, std::forward<F>(func));
+    }
+
+    /// @copydoc orElse
+    template <typename F>
+    constexpr auto orElse(F&& func) const& {
+        return orElseImpl(*this, std::forward<F>(func));
+    }
+
+    /// @copydoc orElse
+    template <typename F>
+    constexpr auto orElse(F&& func) && {
+        return orElseImpl(std::move(*this), std::forward<F>(func));
+    }
+
+    /// @copydoc orElse
+    template <typename F>
+    constexpr auto orElse(F&& func) const&& {
+        return orElseImpl(std::move(*this), std::forward<F>(func));
+    }
+
 private:
+    template <typename Self, typename F>
+    inline static auto transformImpl(Self&& self, F&& func) {
+        using Value = decltype(*std::forward<Self>(self));
+        using NewValue = std::remove_cv_t<std::invoke_result_t<F, Value>>;
+        if (self.hasValue()) {
+            if constexpr (std::is_void_v<NewValue>) {
+                return Result<NewValue>();
+            } else {
+                return Result<NewValue>(
+                    std::invoke(std::forward<F>(func), *std::forward<Self>(self)), self.code()
+                );
+            }
+        } else {
+            return Result<NewValue>(BadResult(self.code()));
+        }
+    }
+
+    template <typename Self, typename F>
+    inline static auto andThenImpl(Self&& self, F&& func) {
+        using Value = decltype(*std::forward<Self>(self));
+        if constexpr (std::is_invocable_v<F, Value, StatusCode>) {
+            using NewResult = std::remove_cv_t<std::invoke_result_t<F, Value, StatusCode>>;
+            return self.hasValue()
+                ? std::invoke(std::forward<F>(func), *std::forward<Self>(self), self.code())
+                : NewResult(BadResult(self.code()));
+        } else {
+            using NewResult = std::remove_cv_t<std::invoke_result_t<F, Value>>;
+            return self.hasValue()
+                ? std::invoke(std::forward<F>(func), *std::forward<Self>(self))
+                : NewResult(BadResult(self.code()));
+        }
+    }
+
+    template <typename Self, typename F>
+    inline static auto orElseImpl(Self&& self, F&& func) {
+        using NewResult = std::remove_cv_t<std::invoke_result_t<F, decltype(self.code())>>;
+        return self.hasValue()
+            ? std::forward<Self>(self)
+            : NewResult(std::invoke(std::forward<F>(func), self.code()));
+    }
+
     constexpr bool isBad() const noexcept {
         return code().isBad();
     }

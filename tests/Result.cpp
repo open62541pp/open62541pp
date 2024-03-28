@@ -87,6 +87,66 @@ TEST_CASE("Result") {
             CHECK(Result<int>(badResult).valueOr(2) == 2);
         }
     }
+
+    SUBCASE("transform") {
+        auto func = [](int value) { return 2 * value; };
+        CHECK(Result<int>(1).transform(func).value() == 2);
+        CHECK(Result<int>(1).transform(func).code().isGood());
+
+        CHECK_THROWS_AS(Result<int>(badResult).transform(func).value(), BadStatus);
+        CHECK(Result<int>(badResult).transform(func).code().isBad());
+
+        SUBCASE("void return") {
+            CHECK(Result<int>(1).transform([](auto&&) {}).code().isGood());
+            CHECK(Result<int>(badResult).transform([](auto&&) {}).code().isBad());
+        }
+    }
+
+    SUBCASE("andThen") {
+        auto func = [](int value) -> Result<double> {
+            if (value > 0) {
+                return 2.2 * value;
+            }
+            return badResult;
+        };
+
+        CHECK(Result<int>(1).andThen(func).value() == 2.2);
+        CHECK(Result<int>(1).andThen(func).code().isGood());
+
+        CHECK_THROWS_AS(Result<int>(badResult).andThen(func).value(), BadStatus);
+        CHECK(Result<int>(badResult).andThen(func).code().isBad());
+
+        CHECK_THROWS_AS(Result<int>(0).andThen(func).value(), BadStatus);
+        CHECK(Result<int>(0).andThen(func).code().isBad());
+    }
+
+    SUBCASE("andThen with StatusCode") {
+        auto func = [](int value, StatusCode) -> Result<double> {
+            if (value > 0) {
+                return 2.2 * value;
+            }
+            return badResult;
+        };
+
+        CHECK(Result<int>(1).andThen(func).value() == 2.2);
+        CHECK(Result<int>(1).andThen(func).code().isGood());
+
+        CHECK_THROWS_AS(Result<int>(badResult).andThen(func).value(), BadStatus);
+        CHECK(Result<int>(badResult).andThen(func).code().isBad());
+
+        CHECK_THROWS_AS(Result<int>(0).andThen(func).value(), BadStatus);
+        CHECK(Result<int>(0).andThen(func).code().isBad());
+    }
+
+    SUBCASE("orElse") {
+        auto func = [](StatusCode) -> Result<int> { return 0; };
+
+        CHECK(Result<int>(1).orElse(func).value() == 1);
+        CHECK(Result<int>(1).orElse(func).code().isGood());
+
+        CHECK(Result<int>(badResult).orElse(func).value() == 0);
+        CHECK(Result<int>(badResult).orElse(func).code().isGood());
+    }
 }
 
 TEST_CASE("Result (void template specialization)") {
