@@ -141,6 +141,7 @@ public:
     }
 
     /// Check if the variant type is equal to the provided type enum.
+    /// @deprecated Use isType<T>() instead, the Type enum will be removed
     [[deprecated("Use isType<T>() instead, the Type enum will be removed")]]
     bool isType(Type type) const noexcept {
         return isType(UA_TYPES[static_cast<TypeIndex>(type)]);  // NOLINT
@@ -163,6 +164,7 @@ public:
     }
 
     /// Get variant type.
+    /// @deprecated Use getDataType() or isType<T>() instead, the Type enum will be removed
     [[deprecated("Use getDataType() or isType<T>() instead, the Type enum will be removed")]]
     std::optional<Type> getVariantType() const noexcept {
         if (handle()->type != nullptr) {
@@ -186,12 +188,14 @@ public:
         return handle()->data;
     }
 
+    /// @deprecated Use the methods isScalar() and data() instead
     [[deprecated("Use the methods isScalar() and data() instead")]]
     void* getScalar() {
         checkIsScalar();
         return handle()->data;
     }
 
+    /// @deprecated Use the methods isScalar() and data() instead
     [[deprecated("Use the methods isScalar() and data() instead")]]
     const void* getScalar() const {
         checkIsScalar();
@@ -247,12 +251,14 @@ public:
         return {handle()->arrayDimensions, handle()->arrayDimensionsSize};
     }
 
+    /// @deprecated Use the methods isArray() and data() instead
     [[deprecated("Use the methods isArray() and data() instead")]]
     void* getArray() {
         checkIsArray();
         return handle()->data;
     }
 
+    /// @deprecated Use the methods isArray() and data() instead
     [[deprecated("Use the methods isArray() and data() instead")]]
     const void* getArray() const {
         checkIsArray();

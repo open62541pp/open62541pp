@@ -78,11 +78,13 @@ public:
         return connection_;
     }
 
+    /// @deprecated Use connection() instead
     [[deprecated("Use connection() instead")]]
     Connection& getConnection() noexcept {
         return connection_;
     }
 
+    /// @deprecated Use connection() instead
     [[deprecated("Use connection() instead")]]
     const Connection& getConnection() const noexcept {
         return connection_;
@@ -93,6 +95,7 @@ public:
         return subscriptionId_;
     }
 
+    /// @deprecated Use subscriptionId() instead
     [[deprecated("Use subscriptionId() instead")]]
     uint32_t getSubscriptionId() const noexcept {
         return subscriptionId_;
