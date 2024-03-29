@@ -86,7 +86,7 @@ public:
     /// If the instance is of type `Node<Client>`, an actual read request to the server is made.
     bool exists() noexcept;
 
-    /// @copydoc services::addFolder
+    /// @wrapper{services::addFolder}
     Node addFolder(
         const NodeId& id,
         std::string_view browseName,
@@ -99,7 +99,7 @@ public:
         return {connection_, resultingId};
     }
 
-    /// @copydoc services::addObject
+    /// @wrapper{services::addObject}
     Node addObject(
         const NodeId& id,
         std::string_view browseName,
@@ -113,7 +113,7 @@ public:
         return {connection_, resultingId};
     }
 
-    /// @copydoc services::addVariable
+    /// @wrapper{services::addVariable}
     Node addVariable(
         const NodeId& id,
         std::string_view browseName,
@@ -127,7 +127,7 @@ public:
         return {connection_, resultingId};
     }
 
-    /// @copydoc services::addProperty
+    /// @wrapper{services::addProperty}
     Node addProperty(
         const NodeId& id, std::string_view browseName, const VariableAttributes& attributes = {}
     ) {
@@ -136,7 +136,7 @@ public:
     }
 
 #ifdef UA_ENABLE_METHODCALLS
-    /// @copydoc services::addMethod
+    /// @wrapper{services::addMethod}
     Node addMethod(
         const NodeId& id,
         std::string_view browseName,
@@ -161,7 +161,7 @@ public:
     }
 #endif
 
-    /// @copydoc services::addObjectType
+    /// @wrapper{services::addObjectType}
     Node addObjectType(
         const NodeId& id,
         std::string_view browseName,
@@ -174,7 +174,7 @@ public:
         return {connection_, resultingId};
     }
 
-    /// @copydoc services::addVariableType
+    /// @wrapper{services::addVariableType}
     Node addVariableType(
         const NodeId& id,
         std::string_view browseName,
@@ -188,7 +188,7 @@ public:
         return {connection_, resultingId};
     }
 
-    /// @copydoc services::addReferenceType
+    /// @wrapper{services::addReferenceType}
     Node addReferenceType(
         const NodeId& id,
         std::string_view browseName,
@@ -201,7 +201,7 @@ public:
         return {connection_, resultingId};
     }
 
-    /// @copydoc services::addDataType
+    /// @wrapper{services::addDataType}
     Node addDataType(
         const NodeId& id,
         std::string_view browseName,
@@ -214,7 +214,7 @@ public:
         return {connection_, resultingId};
     }
 
-    /// @copydoc services::addView
+    /// @wrapper{services::addView}
     Node addView(
         const NodeId& id,
         std::string_view browseName,
@@ -227,27 +227,24 @@ public:
         return {connection_, resultingId};
     }
 
-    /// @copydoc services::addReference
-    /// @return Current node instance to chain multiple methods (fluent interface)
+    /// @wrapper{services::addReference}
     Node& addReference(const NodeId& targetId, const NodeId& referenceType, bool forward = true) {
         services::addReference(connection_, id_, targetId, referenceType, forward);
         return *this;
     }
 
-    /// @copydoc services::addModellingRule
-    /// @return Current node instance to chain multiple methods (fluent interface)
+    /// @wrapper{services::addModellingRule}
     Node& addModellingRule(ModellingRule rule) {
         services::addModellingRule(connection_, id_, rule);
         return *this;
     }
 
-    /// @copydoc services::deleteNode
+    /// @wrapper{services::deleteNode}
     void deleteNode(bool deleteReferences = true) {
         services::deleteNode(connection_, id_, deleteReferences);
     }
 
-    /// @copydoc services::deleteReference
-    /// @return Current node instance to chain multiple methods (fluent interface)
+    /// @wrapper{services::deleteReference}
     Node& deleteReference(
         const NodeId& targetId,
         const NodeId& referenceType,
@@ -354,67 +351,67 @@ public:
     }
 #endif
 
-    /// @copydoc services::readNodeClass
+    /// @wrapper{services::readNodeClass}
     NodeClass readNodeClass() {
         return services::readNodeClass(connection_, id_);
     }
 
-    /// @copydoc services::readBrowseName
+    /// @wrapper{services::readBrowseName}
     QualifiedName readBrowseName() {
         return services::readBrowseName(connection_, id_);
     }
 
-    /// @copydoc services::readDisplayName
+    /// @wrapper{services::readDisplayName}
     LocalizedText readDisplayName() {
         return services::readDisplayName(connection_, id_);
     }
 
-    /// @copydoc services::readDescription
+    /// @wrapper{services::readDescription}
     LocalizedText readDescription() {
         return services::readDescription(connection_, id_);
     }
 
-    /// @copydoc services::readWriteMask
+    /// @wrapper{services::readWriteMask}
     Bitmask<WriteMask> readWriteMask() {
         return services::readWriteMask(connection_, id_);
     }
 
-    /// @copydoc services::readUserWriteMask
+    /// @wrapper{services::readUserWriteMask}
     Bitmask<WriteMask> readUserWriteMask() {
         return services::readUserWriteMask(connection_, id_);
     }
 
-    /// @copydoc services::readIsAbstract
+    /// @wrapper{services::readIsAbstract}
     bool readIsAbstract() {
         return services::readIsAbstract(connection_, id_);
     }
 
-    /// @copydoc services::readSymmetric
+    /// @wrapper{services::readSymmetric}
     bool readSymmetric() {
         return services::readSymmetric(connection_, id_);
     }
 
-    /// @copydoc services::readInverseName
+    /// @wrapper{services::readInverseName}
     LocalizedText readInverseName() {
         return services::readInverseName(connection_, id_);
     }
 
-    /// @copydoc services::readContainsNoLoops
+    /// @wrapper{services::readContainsNoLoops}
     bool readContainsNoLoops() {
         return services::readContainsNoLoops(connection_, id_);
     }
 
-    /// @copydoc services::readEventNotifier
+    /// @wrapper{services::readEventNotifier}
     Bitmask<EventNotifier> readEventNotifier() {
         return services::readEventNotifier(connection_, id_);
     }
 
-    /// @copydoc services::readDataValue
+    /// @wrapper{services::readDataValue}
     DataValue readDataValue() {
         return services::readDataValue(connection_, id_);
     }
 
-    /// @copydoc services::readValue
+    /// @wrapper{services::readValue}
     Variant readValue() {
         return services::readValue(connection_, id_);
     }
@@ -431,47 +428,47 @@ public:
         return readValue().template getArrayCopy<T>();
     }
 
-    /// @copydoc services::readDataType
+    /// @wrapper{services::readDataType}
     NodeId readDataType() {
         return services::readDataType(connection_, id_);
     }
 
-    /// @copydoc services::readValueRank
+    /// @wrapper{services::readValueRank}
     ValueRank readValueRank() {
         return services::readValueRank(connection_, id_);
     }
 
-    /// @copydoc services::readArrayDimensions
+    /// @wrapper{services::readArrayDimensions}
     std::vector<uint32_t> readArrayDimensions() {
         return services::readArrayDimensions(connection_, id_);
     }
 
-    /// @copydoc services::readAccessLevel
+    /// @wrapper{services::readAccessLevel}
     Bitmask<AccessLevel> readAccessLevel() {
         return services::readAccessLevel(connection_, id_);
     }
 
-    /// @copydoc services::readUserAccessLevel
+    /// @wrapper{services::readUserAccessLevel}
     Bitmask<AccessLevel> readUserAccessLevel() {
         return services::readUserAccessLevel(connection_, id_);
     }
 
-    /// @copydoc services::readMinimumSamplingInterval
+    /// @wrapper{services::readMinimumSamplingInterval}
     double readMinimumSamplingInterval() {
         return services::readMinimumSamplingInterval(connection_, id_);
     }
 
-    /// @copydoc services::readHistorizing
+    /// @wrapper{services::readHistorizing}
     bool readHistorizing() {
         return services::readHistorizing(connection_, id_);
     }
 
-    /// @copydoc services::readExecutable
+    /// @wrapper{services::readExecutable}
     bool readExecutable() {
         return services::readExecutable(connection_, id_);
     }
 
-    /// @copydoc services::readUserExecutable
+    /// @wrapper{services::readUserExecutable}
     bool readUserExecutable() {
         return services::readUserExecutable(connection_, id_);
     }
@@ -482,85 +479,73 @@ public:
         return browseObjectProperty(propertyName).readValue();
     }
 
-    /// @copydoc services::writeDisplayName
-    /// @return Current node instance to chain multiple methods (fluent interface)
+    /// @wrapper{services::writeDisplayName}
     Node& writeDisplayName(const LocalizedText& name) {
         services::writeDisplayName(connection_, id_, name);
         return *this;
     }
 
-    /// @copydoc services::writeDescription
-    /// @return Current node instance to chain multiple methods (fluent interface)
+    /// @wrapper{services::writeDescription}
     Node& writeDescription(const LocalizedText& desc) {
         services::writeDescription(connection_, id_, desc);
         return *this;
     }
 
-    /// @copydoc services::writeWriteMask
-    /// @return Current node instance to chain multiple methods (fluent interface)
+    /// @wrapper{services::writeWriteMask}
     Node& writeWriteMask(Bitmask<WriteMask> mask) {
         services::writeWriteMask(connection_, id_, mask);
         return *this;
     }
 
-    /// @copydoc services::writeWriteMask
-    /// @return Current node instance to chain multiple methods (fluent interface)
+    /// @wrapper{services::writeWriteMask}
     Node& writeUserWriteMask(Bitmask<WriteMask> mask) {
         services::writeUserWriteMask(connection_, id_, mask);
         return *this;
     }
 
-    /// @copydoc services::writeIsAbstract
-    /// @return Current node instance to chain multiple methods (fluent interface)
+    /// @wrapper{services::writeIsAbstract}
     Node& writeIsAbstract(bool isAbstract) {
         services::writeIsAbstract(connection_, id_, isAbstract);
         return *this;
     }
 
-    /// @copydoc services::writeSymmetric
-    /// @return Current node instance to chain multiple methods (fluent interface)
+    /// @wrapper{services::writeSymmetric}
     Node& writeSymmetric(bool symmetric) {
         services::writeSymmetric(connection_, id_, symmetric);
         return *this;
     }
 
-    /// @copydoc services::writeInverseName
-    /// @return Current node instance to chain multiple methods (fluent interface)
+    /// @wrapper{services::writeInverseName}
     Node& writeInverseName(const LocalizedText& name) {
         services::writeInverseName(connection_, id_, name);
         return *this;
     }
 
-    /// @copydoc services::writeContainsNoLoops
-    /// @return Current node instance to chain multiple methods (fluent interface)
+    /// @wrapper{services::writeContainsNoLoops}
     Node& writeContainsNoLoops(bool containsNoLoops) {
         services::writeContainsNoLoops(connection_, id_, containsNoLoops);
         return *this;
     }
 
-    /// @copydoc services::writeEventNotifier
-    /// @return Current node instance to chain multiple methods (fluent interface)
+    /// @wrapper{services::writeEventNotifier}
     Node& writeEventNotifier(Bitmask<EventNotifier> mask) {
         services::writeEventNotifier(connection_, id_, mask);
         return *this;
     }
 
-    /// @copydoc services::writeDataValue
-    /// @return Current node instance to chain multiple methods (fluent interface)
+    /// @wrapper{services::writeDataValue}
     Node& writeDataValue(const DataValue& value) {
         services::writeDataValue(connection_, id_, value);
         return *this;
     }
 
-    /// @copydoc services::writeValue
-    /// @return Current node instance to chain multiple methods (fluent interface)
+    /// @wrapper{services::writeValue}
     Node& writeValue(const Variant& value) {
         services::writeValue(connection_, id_, value);
         return *this;
     }
 
     /// Write scalar to variable node.
-    /// @return Current node instance to chain multiple methods (fluent interface)
     template <typename T>
     Node& writeValueScalar(const T& value) {
         // NOLINTNEXTLINE, variant isn't modified, try to avoid copy
@@ -569,7 +554,6 @@ public:
     }
 
     /// Write array value to variable node.
-    /// @return Current node instance to chain multiple methods (fluent interface)
     template <typename ArrayLike>
     Node& writeValueArray(ArrayLike&& array) {
         writeValue(
@@ -579,15 +563,13 @@ public:
     }
 
     /// Write range of elements as array value to variable node.
-    /// @return Current node instance to chain multiple methods (fluent interface)
     template <typename InputIt>
     Node& writeValueArray(InputIt first, InputIt last) {
         writeValue(Variant::fromArray<VariantPolicy::ReferenceIfPossible>(first, last));
         return *this;
     }
 
-    /// @copydoc services::writeDataType
-    /// @return Current node instance to chain multiple methods (fluent interface)
+    /// @wrapper{services::writeDataType}
     Node& writeDataType(const NodeId& typeId) {
         services::writeDataType(connection_, id_, typeId);
         return *this;
@@ -595,63 +577,54 @@ public:
 
     /// @overload
     /// Deduce the `typeId` from the template type.
-    /// @return Current node instance to chain multiple methods (fluent interface)
     template <typename T>
     Node& writeDataType() {
         return writeDataType(asWrapper<NodeId>(getDataType<T>().typeId));
     }
 
-    /// @copydoc services::writeValueRank
-    /// @return Current node instance to chain multiple methods (fluent interface)
+    /// @wrapper{services::writeValueRank}
     Node& writeValueRank(ValueRank valueRank) {
         services::writeValueRank(connection_, id_, valueRank);
         return *this;
     }
 
-    /// @copydoc services::writeArrayDimensions
-    /// @return Current node instance to chain multiple methods (fluent interface)
+    /// @wrapper{services::writeArrayDimensions}
     Node& writeArrayDimensions(Span<const uint32_t> dimensions) {
         services::writeArrayDimensions(connection_, id_, dimensions);
         return *this;
     }
 
-    /// @copydoc services::writeAccessLevel
-    /// @return Current node instance to chain multiple methods (fluent interface)
+    /// @wrapper{services::writeAccessLevel}
     Node& writeAccessLevel(Bitmask<AccessLevel> mask) {
         services::writeAccessLevel(connection_, id_, mask);
         return *this;
     }
 
-    /// @copydoc services::writeUserAccessLevel
-    /// @return Current node instance to chain multiple methods (fluent interface)
+    /// @wrapper{services::writeUserAccessLevel}
     Node& writeUserAccessLevel(Bitmask<AccessLevel> mask) {
         services::writeUserAccessLevel(connection_, id_, mask);
         return *this;
     }
 
-    /// @copydoc services::writeMinimumSamplingInterval
-    /// @return Current node instance to chain multiple methods (fluent interface)
+    /// @wrapper{services::writeMinimumSamplingInterval}
     Node& writeMinimumSamplingInterval(double milliseconds) {
         services::writeMinimumSamplingInterval(connection_, id_, milliseconds);
         return *this;
     }
 
-    /// @copydoc services::writeHistorizing
-    /// @return Current node instance to chain multiple methods (fluent interface)
+    /// @wrapper{services::writeHistorizing}
     Node& writeHistorizing(bool historizing) {
         services::writeHistorizing(connection_, id_, historizing);
         return *this;
     }
 
-    /// @copydoc services::writeExecutable
-    /// @return Current node instance to chain multiple methods (fluent interface)
+    /// @wrapper{services::writeExecutable}
     Node& writeExecutable(bool executable) {
         services::writeExecutable(connection_, id_, executable);
         return *this;
     }
 
-    /// @copydoc services::writeUserExecutable
-    /// @return Current node instance to chain multiple methods (fluent interface)
+    /// @wrapper{services::writeUserExecutable}
     Node& writeUserExecutable(bool userExecutable) {
         services::writeUserExecutable(connection_, id_, userExecutable);
         return *this;
@@ -660,7 +633,6 @@ public:
     /// Write the value of an object property.
     /// @param propertyName Browse name of the property (variable node)
     /// @param value New value
-    /// @return Current node instance to chain multiple methods (fluent interface)
     Node& writeObjectProperty(const QualifiedName& propertyName, const Variant& value) {
         browseObjectProperty(propertyName).writeValue(value);
         return *this;

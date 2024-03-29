@@ -982,7 +982,7 @@ inline auto addViewAsync(
  * Add modelling rule.
  * @param connection Instance of type Client (or Server)
  * @param id Node
- * @param rule Modelling rule to apply
+ * @param rule Modelling rule to add
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/6.4.4
  */
 template <typename T>
