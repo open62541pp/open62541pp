@@ -10,8 +10,10 @@ BRIEF_MEMBER_DESC      = NO
 JAVADOC_AUTOBRIEF      = YES
 MARKDOWN_SUPPORT       = YES
 AUTOLINK_SUPPORT       = YES
+BUILTIN_STL_SUPPORT    = YES
 USE_MDFILE_AS_MAINPAGE = "${PROJECT_SOURCE_DIR}/README.md"
 ALIASES                = completiontoken{1}="@parblock ^^ @include{doc} alias_completiontoken.dox ^^ `\1` ^^ @endparblock"
+ALIASES               += wrapper{1}="@copybrief \1 ^^ @see \1"
 
 # Build-related options
 EXTRACT_ALL            = YES

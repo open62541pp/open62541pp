@@ -152,7 +152,7 @@ public:
 #endif
 
     /// Run a single iteration of the server's main loop.
-    /// @returns Maximum wait period until next Server::runIterate call (in ms)
+    /// @return Maximum wait period until next Server::runIterate call (in ms)
     uint16_t runIterate();
     /// Run the server's main loop. This method will block until Server::stop is called.
     void run();

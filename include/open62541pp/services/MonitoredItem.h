@@ -71,11 +71,12 @@ struct MonitoringParametersEx {
     bool discardOldest = true;
 };
 
+/// @deprecated Use alias MonitoringParametersEx instead
 using MonitoringParameters
     [[deprecated("Use alias MonitoringParametersEx instead")]] = MonitoringParametersEx;
 
 /**
- * @defgroup CreateMonitoredItems
+ * @defgroup CreateMonitoredItems CreateMonitoredItems service
  * Create and add a monitored item to a subscription.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.2
  * @{
@@ -112,6 +113,7 @@ using EventNotificationCallback =
  * Create a monitored item with @ref createMonitoredItemEvent instead.
  * @copydetails MonitoringParametersEx
  *
+ * @return Server-assigned identifier of the monitored item
  * @param connection Instance of type Server or Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription.
  *                       Use `0U` for a local server-side monitored item.
@@ -120,7 +122,6 @@ using EventNotificationCallback =
  * @param parameters Monitoring parameters, may be revised by server
  * @param dataChangeCallback Invoked when the monitored item is changed
  * @param deleteCallback Invoked when the monitored item is deleted
- * @returns Server-assigned identifier of the monitored item
  */
 template <typename T>
 [[nodiscard]] uint32_t createMonitoredItemDataChange(
@@ -138,12 +139,12 @@ template <typename T>
  * Don't use this function to monitor the `EventNotifier` attribute.
  * @copydetails MonitoringParametersEx
  *
+ * @return Server-assigned identifier of the monitored item
  * @param connection Instance of type Server
  * @param itemToMonitor Item to monitor
  * @param monitoringMode Monitoring mode
  * @param parameters Monitoring parameters, may be revised by server
  * @param dataChangeCallback Invoked when the monitored item is changed
- * @returns Server-assigned identifier of the monitored item
  */
 [[nodiscard]] uint32_t createMonitoredItemDataChange(
     Server& connection,
@@ -158,6 +159,7 @@ template <typename T>
  * The `attributeId` of ReadValueId must be set to AttributeId::EventNotifier.
  * @copydetails MonitoringParametersEx
  *
+ * @return Server-assigned identifier of the monitored item
  * @param connection Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @param itemToMonitor Item to monitor
@@ -165,7 +167,6 @@ template <typename T>
  * @param parameters Monitoring parameters, may be revised by server
  * @param eventCallback Invoked when an event is published
  * @param deleteCallback Invoked when the monitored item is deleted
- * @returns Server-assigned identifier of the monitored item
  */
 [[nodiscard]] uint32_t createMonitoredItemEvent(
     Client& connection,
@@ -179,7 +180,7 @@ template <typename T>
 
 /**
  * @}
- * @defgroup ModifyMonitoredItems
+ * @defgroup ModifyMonitoredItems ModifyMonitoredItems service
  * Modify a monitored items of a subscription.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.3
  * @{
@@ -203,7 +204,7 @@ void modifyMonitoredItem(
 
 /**
  * @}
- * @defgroup SetMonitoringMode
+ * @defgroup SetMonitoringMode SetMonitoringMode service
  * Set the monitoring mode of a monitored items.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.4
  * @{
@@ -226,7 +227,7 @@ void setMonitoringMode(
 
 /**
  * @}
- * @defgroup SetTriggering
+ * @defgroup SetTriggering SetTriggering service
  * Create and delete triggering links for a triggering item.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.1.6
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.5
@@ -254,7 +255,7 @@ void setTriggering(
 
 /**
  * @}
- * @defgroup DeleteMonitoredItems
+ * @defgroup DeleteMonitoredItems DeleteMonitoredItems service
  * Delete a monitored items from subscriptions.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.6
  * @{

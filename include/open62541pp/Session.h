@@ -36,11 +36,13 @@ public:
         return connection_;
     }
 
+    /// @deprecated Use connection() instead
     [[deprecated("Use connection() instead")]]
     Server& getConnection() noexcept {
         return connection_;
     }
 
+    /// @deprecated Use connection() instead
     [[deprecated("Use connection() instead")]]
     const Server& getConnection() const noexcept {
         return connection_;
@@ -51,6 +53,7 @@ public:
         return sessionId_;
     }
 
+    /// @deprecated Use id() instead
     [[deprecated("Use id() instead")]]
     const NodeId& getSessionId() const noexcept {
         return sessionId_;

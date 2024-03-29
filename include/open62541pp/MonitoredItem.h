@@ -16,6 +16,7 @@ namespace opcua {
 class Server;
 
 using MonitoringParametersEx = services::MonitoringParametersEx;
+/// @deprecated Use alias MonitoringParametersEx instead
 using MonitoringParameters
     [[deprecated("Use alias MonitoringParametersEx instead")]] = MonitoringParametersEx;
 
@@ -50,11 +51,13 @@ public:
         return connection_;
     }
 
+    /// @deprecated Use connection() instead
     [[deprecated("Use connection() instead")]]
     Connection& getConnection() noexcept {
         return connection_;
     }
 
+    /// @deprecated Use connection() instead
     [[deprecated("Use connection() instead")]]
     const Connection& getConnection() const noexcept {
         return connection_;
@@ -65,6 +68,7 @@ public:
         return subscriptionId_;
     }
 
+    /// @deprecated Use subscriptionId() instead
     [[deprecated("Use subscriptionId() instead")]]
     uint32_t getSubscriptionId() const noexcept {
         return subscriptionId_;
@@ -75,6 +79,7 @@ public:
         return monitoredItemId_;
     }
 
+    /// @deprecated Use monitoredItemId() instead
     [[deprecated("Use monitoredItemId() instead")]]
     uint32_t getMonitoredItemId() const noexcept {
         return monitoredItemId_;

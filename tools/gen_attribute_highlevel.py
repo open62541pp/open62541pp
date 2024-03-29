@@ -61,6 +61,8 @@ namespace opcua::services {{
 TEMPLATE_READ = """
 /**
  * Read the AttributeId::{attr} attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to read
  * @ingroup Read
  */
 template <typename T>
@@ -70,6 +72,7 @@ inline {type} read{attr}(T& connection, const NodeId& id) {{
 
 /**
  * Asynchronously read the AttributeId::{attr} attribute of a node.
+ * @copydetails read{attr}
  * @param token @completiontoken{{void({token_type})}}
  * @ingroup Read
  */
@@ -86,6 +89,9 @@ inline auto read{attr}Async(
 TEMPLATE_WRITE = """
 /**
  * Write the AttributeId::{attr} attribute of a node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to write
+ * @param {param_name} Value to write
  * @ingroup Write
  */
 template <typename T>
@@ -95,6 +101,7 @@ inline void write{attr}(T& connection, const NodeId& id, {param_type} {param_nam
 
 /**
  * Asynchronously write the AttributeId::{attr} attribute of a node.
+ * @copydetails write{attr}
  * @param token @completiontoken{{void(Result<void>)}}
  * @ingroup Write
  */

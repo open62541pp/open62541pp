@@ -73,6 +73,7 @@ public:
     }
 
     /// Create NodeId from Type (type id).
+    /// @deprecated Use the constructor NodeId(DataTypeId) instead, the Type enum will be removed
     [[deprecated("Use the constructor NodeId(DataTypeId) instead, the Type enum will be removed"
     )]] NodeId(Type type) noexcept  // NOLINT, implicit wanted
         : NodeId(UA_TYPES[static_cast<TypeIndex>(type)].typeId) {}  // NOLINT

@@ -25,7 +25,7 @@ namespace opcua::services {
  * @ingroup Services
  * @{
  *
- * @defgroup Call
+ * @defgroup Call Call service
  * This Service is used to call (invoke) a list of methods.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.11.2
  * @{

@@ -30,7 +30,7 @@ namespace opcua::services {
  */
 
 /**
- * @defgroup AddNodes
+ * @defgroup AddNodes AddNodes service
  * Add nodes into the address space hierarchy.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.2
  * @{
@@ -64,6 +64,15 @@ auto addNodesAsync(
 
 /**
  * Add a node.
+ * @return Server-assigned NodeId of the added node
+ * @param connection Instance of type Client (or Server)
+ * @param nodeClass Node class
+ * @param parentId Parent node
+ * @param id Requested NodeId of the node to add
+ * @param browseName Browse name
+ * @param nodeAttributes Node attributes
+ * @param typeDefinition NodeId of the type
+ * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
 NodeId addNode(
@@ -120,7 +129,7 @@ auto addNodeAsync(
 
 /**
  * @}
- * @defgroup AddReferences
+ * @defgroup AddReferences AddReferences service
  * Add references to nodes.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.3
  * @{
@@ -154,6 +163,11 @@ auto addReferencesAsync(
 
 /**
  * Add reference.
+ * @param connection Instance of type Client (or Server)
+ * @param sourceId Node to which the reference is to be added
+ * @param targetId Target node
+ * @param referenceType NodeId of the reference type that defines the reference
+ * @param forward Create a forward reference if `true` or a inverse reference if `false`
  */
 template <typename T>
 void addReference(
@@ -197,7 +211,7 @@ auto addReferenceAsync(
 
 /**
  * @}
- * @defgroup DeleteNodes
+ * @defgroup DeleteNodes DeleteNodes service
  * Delete nodes from the address space.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.4
  * @{
@@ -231,6 +245,9 @@ auto deleteNodesAsync(
 
 /**
  * Delete node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to delete
+ * @param deleteReferences Delete references in target nodes that reference the node to delete
  */
 template <typename T>
 void deleteNode(T& connection, const NodeId& id, bool deleteReferences = true);
@@ -263,7 +280,7 @@ auto deleteNodeAsync(
 
 /**
  * @}
- * @defgroup DeleteReferences
+ * @defgroup DeleteReferences DeleteReferences service
  * Delete references from nodes.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.5
  * @{
@@ -299,6 +316,12 @@ auto deleteReferencesAsync(
 
 /**
  * Delete reference.
+ * @param connection Instance of type Client (or Server)
+ * @param sourceId Node that contains the reference to delete
+ * @param targetId Target node of the reference to delete
+ * @param referenceType NodeId of the reference type that defines the reference to delete
+ * @param isForward Delete the forward reference if `true`, delete the inverse reference if `false`
+ * @param deleteBidirectional Delete the specified and opposite reference from the target node
  */
 template <typename T>
 void deleteReference(
@@ -357,6 +380,14 @@ auto deleteReferenceAsync(
 
 /**
  * Add object.
+ * @return Server-assigned NodeId of the added object node
+ * @param connection Instance of type Client (or Server)
+ * @param parentId Parent node
+ * @param id Requested NodeId of the object node to add
+ * @param browseName Browse name
+ * @param attributes Object attributes
+ * @param objectType NodeId of the object type
+ * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
 inline NodeId addObject(
@@ -411,6 +442,13 @@ inline auto addObjectAsync(
 
 /**
  * Add folder.
+ * @return Server-assigned NodeId of the added folder node
+ * @param connection Instance of type Client (or Server)
+ * @param parentId Parent node
+ * @param id Requested NodeId of the node to add
+ * @param browseName Browse name
+ * @param attributes Object attributes
+ * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
 inline NodeId addFolder(
@@ -455,6 +493,14 @@ inline auto addFolderAsync(
 
 /**
  * Add variable.
+ * @return Server-assigned NodeId of the added variable node
+ * @param connection Instance of type Client (or Server)
+ * @param parentId Parent node
+ * @param id Requested NodeId of the node to add
+ * @param browseName Browse name
+ * @param attributes Variable attributes
+ * @param variableType NodeId of the variable type
+ * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
 inline NodeId addVariable(
@@ -509,6 +555,12 @@ inline auto addVariableAsync(
 
 /**
  * Add property.
+ * @return Server-assigned NodeId of the added property node
+ * @param connection Instance of type Client (or Server)
+ * @param parentId Parent node
+ * @param id Requested NodeId of the node to add
+ * @param browseName Browse name
+ * @param attributes Property attributes
  */
 template <typename T>
 inline NodeId addProperty(
@@ -566,6 +618,16 @@ using MethodCallback = std::function<void(Span<const Variant> input, Span<Varian
 /**
  * Add method.
  * Callbacks can not be set by clients. Servers can assign callbacks to method nodes afterwards.
+ * @return Server-assigned NodeId of the added method node
+ * @param connection Instance of type Client (or Server)
+ * @param parentId Parent node
+ * @param id Requested NodeId of the node to add
+ * @param browseName Browse name
+ * @param callback Method callback
+ * @param inputArguments Input arguments
+ * @param outputArguments Output arguments
+ * @param attributes Method attributes
+ * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
 NodeId addMethod(
@@ -614,6 +676,13 @@ inline auto addMethodAsync(
 
 /**
  * Add object type.
+ * @return Server-assigned NodeId of the added object type node
+ * @param connection Instance of type Client (or Server)
+ * @param parentId Parent node
+ * @param id Requested NodeId of the node to add
+ * @param browseName Browse name
+ * @param attributes Object type attributes
+ * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
 inline NodeId addObjectType(
@@ -666,6 +735,14 @@ inline auto addObjectTypeAsync(
 
 /**
  * Add variable type.
+ * @return Server-assigned NodeId of the added variable type node
+ * @param connection Instance of type Client (or Server)
+ * @param parentId Parent node
+ * @param id Requested NodeId of the node to add
+ * @param browseName Browse name
+ * @param attributes Variable type attributes
+ * @param variableType NodeId of the variable type
+ * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
 inline NodeId addVariableType(
@@ -720,6 +797,13 @@ inline auto addVariableTypeAsync(
 
 /**
  * Add reference type.
+ * @return Server-assigned NodeId of the added reference type node
+ * @param connection Instance of type Client (or Server)
+ * @param parentId Parent node
+ * @param id Requested NodeId of the node to add
+ * @param browseName Browse name
+ * @param attributes Reference type attributes
+ * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
 inline NodeId addReferenceType(
@@ -772,6 +856,13 @@ inline auto addReferenceTypeAsync(
 
 /**
  * Add data type.
+ * @return Server-assigned NodeId of the added data type node
+ * @param connection Instance of type Client (or Server)
+ * @param parentId Parent node
+ * @param id Requested NodeId of the node to add
+ * @param browseName Browse name
+ * @param attributes Data type attributes
+ * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
 inline NodeId addDataType(
@@ -824,6 +915,13 @@ inline auto addDataTypeAsync(
 
 /**
  * Add view.
+ * @return Server-assigned NodeId of the added view node
+ * @param connection Instance of type Client (or Server)
+ * @param parentId Parent node
+ * @param id Requested NodeId of the node to add
+ * @param browseName Browse name
+ * @param attributes View attributes
+ * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
 inline NodeId addView(
@@ -882,6 +980,9 @@ inline auto addViewAsync(
 
 /**
  * Add modelling rule.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node
+ * @param rule Modelling rule to add
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/6.4.4
  */
 template <typename T>
