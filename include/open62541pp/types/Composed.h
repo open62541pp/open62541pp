@@ -1650,6 +1650,127 @@ public:
     UAPP_COMPOSED_GETTER(AggregateConfiguration, getAggregateConfiguration, aggregateConfiguration)
 };
 
+/**
+ * UA_CreateSubscriptionRequest wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.2
+ */
+class CreateSubscriptionRequest
+    : public TypeWrapper<UA_CreateSubscriptionRequest, UA_TYPES_CREATESUBSCRIPTIONREQUEST> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    CreateSubscriptionRequest(
+        RequestHeader requestHeader,
+        double requestedPublishingInterval,
+        uint32_t requestedLifetimeCount,
+        uint32_t requestedMaxKeepAliveCount,
+        uint32_t maxNotificationsPerPublish,
+        bool publishingEnabled,
+        uint8_t priority
+    );
+
+    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_COMPOSED_GETTER(double, getRequestedPublishingInterval, requestedPublishingInterval)
+    UAPP_COMPOSED_GETTER(uint32_t, getRequestedLifetimeCount, requestedLifetimeCount)
+    UAPP_COMPOSED_GETTER(uint32_t, getRequestedMaxKeepAliveCount, requestedMaxKeepAliveCount)
+    UAPP_COMPOSED_GETTER(uint32_t, getMaxNotificationsPerPublish, maxNotificationsPerPublish)
+    UAPP_COMPOSED_GETTER(bool, getPublishingEnabled, publishingEnabled)
+    UAPP_COMPOSED_GETTER(uint8_t, getPriority, priority)
+};
+
+/**
+ * UA_CreateSubscriptionResponse wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.2
+ */
+class CreateSubscriptionResponse
+    : public TypeWrapper<UA_CreateSubscriptionResponse, UA_TYPES_CREATESUBSCRIPTIONRESPONSE> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_COMPOSED_GETTER(uint32_t, getSubscriptionId, subscriptionId)
+    UAPP_COMPOSED_GETTER(bool, getRevisedPublishingInterval, revisedPublishingInterval)
+    UAPP_COMPOSED_GETTER(uint32_t, getRevisedLifetimeCount, revisedLifetimeCount)
+    UAPP_COMPOSED_GETTER(uint32_t, getRevisedMaxKeepAliveCount, revisedMaxKeepAliveCount)
+};
+
+/**
+ * UA_ModifySubscriptionRequest wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.3
+ */
+class ModifySubscriptionRequest
+    : public TypeWrapper<UA_ModifySubscriptionRequest, UA_TYPES_MODIFYSUBSCRIPTIONREQUEST> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    ModifySubscriptionRequest(
+        RequestHeader requestHeader,
+        uint32_t subscriptionId,
+        double requestedPublishingInterval,
+        uint32_t requestedLifetimeCount,
+        uint32_t requestedMaxKeepAliveCount,
+        uint32_t maxNotificationsPerPublish,
+        uint8_t priority
+    );
+
+    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_COMPOSED_GETTER(uint32_t, getSubscriptionId, subscriptionId)
+    UAPP_COMPOSED_GETTER(double, getRequestedPublishingInterval, requestedPublishingInterval)
+    UAPP_COMPOSED_GETTER(uint32_t, getRequestedLifetimeCount, requestedLifetimeCount)
+    UAPP_COMPOSED_GETTER(uint32_t, getRequestedMaxKeepAliveCount, requestedMaxKeepAliveCount)
+    UAPP_COMPOSED_GETTER(uint32_t, getMaxNotificationsPerPublish, maxNotificationsPerPublish)
+    UAPP_COMPOSED_GETTER(uint8_t, getPriority, priority)
+};
+
+/**
+ * UA_ModifySubscriptionResponse wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.3
+ */
+class ModifySubscriptionResponse
+    : public TypeWrapper<UA_ModifySubscriptionResponse, UA_TYPES_MODIFYSUBSCRIPTIONRESPONSE> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_COMPOSED_GETTER(bool, getRevisedPublishingInterval, revisedPublishingInterval)
+    UAPP_COMPOSED_GETTER(uint32_t, getRevisedLifetimeCount, revisedLifetimeCount)
+    UAPP_COMPOSED_GETTER(uint32_t, getRevisedMaxKeepAliveCount, revisedMaxKeepAliveCount)
+};
+
+/**
+ * UA_SetPublishingModeRequest wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.4
+ */
+class SetPublishingModeRequest
+    : public TypeWrapper<UA_SetPublishingModeRequest, UA_TYPES_SETPUBLISHINGMODEREQUEST> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    SetPublishingModeRequest(
+        RequestHeader requestHeader, bool publishingEnabled, Span<const uint32_t> subscriptionIds
+    );
+
+    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_COMPOSED_GETTER(bool, getPublishingEnabled, publishingEnabled)
+    UAPP_COMPOSED_GETTER_SPAN(uint32_t, getSubscriptionIds, subscriptionIds, subscriptionIdsSize)
+};
+
+/**
+ * UA_SetPublishingModeResponse wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.4
+ */
+class SetPublishingModeResponse
+    : public TypeWrapper<UA_SetPublishingModeResponse, UA_TYPES_SETPUBLISHINGMODERESPONSE> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(StatusCode, getResults, results, resultsSize)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        DiagnosticInfo, getDiagnosticInfos, diagnosticInfos, diagnosticInfosSize
+    )
+};
+
 #endif
 
 /* ----------------------------------------- Historizing ---------------------------------------- */
