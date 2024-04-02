@@ -25,6 +25,8 @@
 #include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"
 
+#ifndef UA_DEFAULT_ATTRIBUTES_DEFINED
+#define UA_DEFAULT_ATTRIBUTES_DEFINED
 extern "C" const UA_VariableAttributes UA_VariableAttributes_default;
 extern "C" const UA_VariableTypeAttributes UA_VariableTypeAttributes_default;
 extern "C" const UA_MethodAttributes UA_MethodAttributes_default;
@@ -33,6 +35,7 @@ extern "C" const UA_ObjectTypeAttributes UA_ObjectTypeAttributes_default;
 extern "C" const UA_ReferenceTypeAttributes UA_ReferenceTypeAttributes_default;
 extern "C" const UA_DataTypeAttributes UA_DataTypeAttributes_default;
 extern "C" const UA_ViewAttributes UA_ViewAttributes_default;
+#endif
 
 // NOLINTNEXTLINE
 #define UAPP_COMPOSED_GETTER(Type, getterName, member)                                             \
