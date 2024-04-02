@@ -1364,4 +1364,36 @@ TEST_CASE("AggregateFilter") {
     CHECK(aggregateFilter.getAggregateConfiguration().useSlopedExtrapolation == true);
 }
 
+TEST_CASE("CreateSubscriptionRequest") {
+    const CreateSubscriptionRequest request({}, 11.11, 2, 3, 4, true, 5);
+    CHECK_NOTHROW(request.getRequestHeader());
+    CHECK(request.getRequestedPublishingInterval() == 11.11);
+    CHECK(request.getRequestedLifetimeCount() == 2);
+    CHECK(request.getRequestedMaxKeepAliveCount() == 3);
+    CHECK(request.getMaxNotificationsPerPublish() == 4);
+    CHECK(request.getPublishingEnabled() == true);
+    CHECK(request.getPriority() == 5);
+}
+
+TEST_CASE("ModifySubscriptionRequest") {
+    const ModifySubscriptionRequest request({}, 1, 11.11, 2, 3, 4, 5);
+    CHECK_NOTHROW(request.getRequestHeader());
+    CHECK(request.getSubscriptionId() == 1);
+    CHECK(request.getRequestedPublishingInterval() == 11.11);
+    CHECK(request.getRequestedLifetimeCount() == 2);
+    CHECK(request.getRequestedMaxKeepAliveCount() == 3);
+    CHECK(request.getMaxNotificationsPerPublish() == 4);
+    CHECK(request.getPriority() == 5);
+}
+
+TEST_CASE("SetPublishingModeRequest") {
+    const SetPublishingModeRequest request({}, true, {1, 2, 3});
+    CHECK_NOTHROW(request.getRequestHeader());
+    CHECK(request.getPublishingEnabled() == true);
+    CHECK(request.getSubscriptionIds().size() == 3);
+    CHECK(request.getSubscriptionIds()[0] == 1);
+    CHECK(request.getSubscriptionIds()[1] == 2);
+    CHECK(request.getSubscriptionIds()[2] == 3);
+}
+
 #endif

@@ -1,14 +1,10 @@
 #include "open62541pp/types/Composed.h"
 
-#include <algorithm>
+#include <algorithm>  // copy
 #include <cassert>
-#include <cstddef>
-#include <string_view>
 #include <type_traits>
 
 #include "open62541pp/ErrorHandling.h"
-#include "open62541pp/TypeWrapper.h"
-#include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/detail/open62541/server.h"  // UA_*Attributes_default
 #include "open62541pp/detail/string_utils.h"  // detail::allocNativeString
 #include "open62541pp/detail/types_handling.h"
@@ -545,6 +541,50 @@ AggregateFilter::AggregateFilter(
     assign(std::move(aggregateType), handle()->aggregateType);
     assign(processingInterval, handle()->processingInterval);
     assign(aggregateConfiguration, handle()->aggregateConfiguration);  // TODO: make wrapper?
+}
+
+CreateSubscriptionRequest::CreateSubscriptionRequest(
+    RequestHeader requestHeader,
+    double requestedPublishingInterval,
+    uint32_t requestedLifetimeCount,
+    uint32_t requestedMaxKeepAliveCount,
+    uint32_t maxNotificationsPerPublish,
+    bool publishingEnabled,
+    uint8_t priority
+) {
+    assign(std::move(requestHeader), handle()->requestHeader);
+    assign(requestedPublishingInterval, handle()->requestedPublishingInterval);
+    assign(requestedLifetimeCount, handle()->requestedLifetimeCount);
+    assign(requestedMaxKeepAliveCount, handle()->requestedMaxKeepAliveCount);
+    assign(maxNotificationsPerPublish, handle()->maxNotificationsPerPublish);
+    assign(publishingEnabled, handle()->publishingEnabled);
+    assign(priority, handle()->priority);
+}
+
+ModifySubscriptionRequest::ModifySubscriptionRequest(
+    RequestHeader requestHeader,
+    uint32_t subscriptionId,
+    double requestedPublishingInterval,
+    uint32_t requestedLifetimeCount,
+    uint32_t requestedMaxKeepAliveCount,
+    uint32_t maxNotificationsPerPublish,
+    uint8_t priority
+) {
+    assign(std::move(requestHeader), handle()->requestHeader);
+    assign(subscriptionId, handle()->subscriptionId);
+    assign(requestedPublishingInterval, handle()->requestedPublishingInterval);
+    assign(requestedLifetimeCount, handle()->requestedLifetimeCount);
+    assign(requestedMaxKeepAliveCount, handle()->requestedMaxKeepAliveCount);
+    assign(maxNotificationsPerPublish, handle()->maxNotificationsPerPublish);
+    assign(priority, handle()->priority);
+}
+
+SetPublishingModeRequest::SetPublishingModeRequest(
+    RequestHeader requestHeader, bool publishingEnabled, Span<const uint32_t> subscriptionIds
+) {
+    assign(std::move(requestHeader), handle()->requestHeader);
+    assign(publishingEnabled, handle()->publishingEnabled);
+    assignArray(subscriptionIds, handle()->subscriptionIds, handle()->subscriptionIdsSize);
 }
 
 #endif
