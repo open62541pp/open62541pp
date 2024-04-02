@@ -38,34 +38,34 @@ extern "C" const UA_ViewAttributes UA_ViewAttributes_default;
 #endif
 
 // NOLINTNEXTLINE
-#define UAPP_COMPOSED_GETTER(Type, getterName, member)                                             \
+#define UAPP_GETTER(Type, getterName, member)                                                      \
     Type getterName() const noexcept {                                                             \
         return handle()->member;                                                                   \
     }
 
 // NOLINTNEXTLINE
-#define UAPP_COMPOSED_GETTER_CAST(Type, getterName, member)                                        \
+#define UAPP_GETTER_CAST(Type, getterName, member)                                                 \
     Type getterName() const noexcept {                                                             \
         return static_cast<Type>(handle()->member);                                                \
     }
 
 // NOLINTNEXTLINE
-#define UAPP_COMPOSED_GETTER_WRAPPER_CONST(Type, getterName, member)                               \
+#define UAPP_GETTER_WRAPPER_CONST(Type, getterName, member)                                        \
     const Type& getterName() const noexcept {                                                      \
         return asWrapper<Type>(handle()->member);                                                  \
     }
 // NOLINTNEXTLINE
-#define UAPP_COMPOSED_GETTER_WRAPPER_NONCONST(Type, getterName, member)                            \
+#define UAPP_GETTER_WRAPPER_NONCONST(Type, getterName, member)                                     \
     Type& getterName() noexcept {                                                                  \
         return asWrapper<Type>(handle()->member);                                                  \
     }
 // NOLINTNEXTLINE
-#define UAPP_COMPOSED_GETTER_WRAPPER(Type, getterName, member)                                     \
-    UAPP_COMPOSED_GETTER_WRAPPER_CONST(Type, getterName, member)                                   \
-    UAPP_COMPOSED_GETTER_WRAPPER_NONCONST(Type, getterName, member)
+#define UAPP_GETTER_WRAPPER(Type, getterName, member)                                              \
+    UAPP_GETTER_WRAPPER_CONST(Type, getterName, member)                                            \
+    UAPP_GETTER_WRAPPER_NONCONST(Type, getterName, member)
 
 // NOLINTNEXTLINE
-#define UAPP_COMPOSED_GETTER_SPAN(Type, getterName, memberArray, memberSize)                       \
+#define UAPP_GETTER_SPAN(Type, getterName, memberArray, memberSize)                                \
     Span<const Type> getterName() const noexcept {                                                 \
         return {handle()->memberArray, handle()->memberSize};                                      \
     }                                                                                              \
@@ -73,7 +73,7 @@ extern "C" const UA_ViewAttributes UA_ViewAttributes_default;
         return {handle()->memberArray, handle()->memberSize};                                      \
     }
 // NOLINTNEXTLINE
-#define UAPP_COMPOSED_GETTER_SPAN_WRAPPER(Type, getterName, memberArray, memberSize)               \
+#define UAPP_GETTER_SPAN_WRAPPER(Type, getterName, memberArray, memberSize)                        \
     Span<const Type> getterName() const noexcept {                                                 \
         return {asWrapper<Type>(handle()->memberArray), handle()->memberSize};                     \
     }                                                                                              \
@@ -97,13 +97,13 @@ class ApplicationDescription
 public:
     using TypeWrapper::TypeWrapper;
 
-    UAPP_COMPOSED_GETTER_WRAPPER(String, getApplicationUri, applicationUri)
-    UAPP_COMPOSED_GETTER_WRAPPER(String, getProductUri, productUri)
-    UAPP_COMPOSED_GETTER_WRAPPER(LocalizedText, getApplicationName, applicationName)
-    UAPP_COMPOSED_GETTER(UA_ApplicationType, getApplicationType, applicationType)
-    UAPP_COMPOSED_GETTER_WRAPPER(String, getGatewayServerUri, gatewayServerUri)
-    UAPP_COMPOSED_GETTER_WRAPPER(String, getDiscoveryProfileUri, discoveryProfileUri)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(String, getDiscoveryUrls, discoveryUrls, discoveryUrlsSize)
+    UAPP_GETTER_WRAPPER(String, getApplicationUri, applicationUri)
+    UAPP_GETTER_WRAPPER(String, getProductUri, productUri)
+    UAPP_GETTER_WRAPPER(LocalizedText, getApplicationName, applicationName)
+    UAPP_GETTER(UA_ApplicationType, getApplicationType, applicationType)
+    UAPP_GETTER_WRAPPER(String, getGatewayServerUri, gatewayServerUri)
+    UAPP_GETTER_WRAPPER(String, getDiscoveryProfileUri, discoveryProfileUri)
+    UAPP_GETTER_SPAN_WRAPPER(String, getDiscoveryUrls, discoveryUrls, discoveryUrlsSize)
 };
 
 /**
@@ -132,13 +132,13 @@ public:
         handle()->additionalHeader = detail::toNative(std::move(additionalHeader));
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getAuthenticationToken, authenticationToken)
-    UAPP_COMPOSED_GETTER_WRAPPER(DateTime, getTimestamp, timestamp)
-    UAPP_COMPOSED_GETTER(uint32_t, getRequestHandle, requestHandle)
-    UAPP_COMPOSED_GETTER(uint32_t, getReturnDiagnostics, returnDiagnostics)
-    UAPP_COMPOSED_GETTER_WRAPPER(String, getAuditEntryId, auditEntryId)
-    UAPP_COMPOSED_GETTER(uint32_t, getTimeoutHint, timeoutHint)
-    UAPP_COMPOSED_GETTER_WRAPPER(ExtensionObject, getAdditionalHeader, additionalHeader)
+    UAPP_GETTER_WRAPPER(NodeId, getAuthenticationToken, authenticationToken)
+    UAPP_GETTER_WRAPPER(DateTime, getTimestamp, timestamp)
+    UAPP_GETTER(uint32_t, getRequestHandle, requestHandle)
+    UAPP_GETTER(uint32_t, getReturnDiagnostics, returnDiagnostics)
+    UAPP_GETTER_WRAPPER(String, getAuditEntryId, auditEntryId)
+    UAPP_GETTER(uint32_t, getTimeoutHint, timeoutHint)
+    UAPP_GETTER_WRAPPER(ExtensionObject, getAdditionalHeader, additionalHeader)
 };
 
 /**
@@ -149,12 +149,12 @@ class ResponseHeader : public TypeWrapper<UA_ResponseHeader, UA_TYPES_RESPONSEHE
 public:
     using TypeWrapper::TypeWrapper;
 
-    UAPP_COMPOSED_GETTER_WRAPPER(DateTime, getTimestamp, timestamp)
-    UAPP_COMPOSED_GETTER(uint32_t, getRequestHandle, requestHandle)
-    UAPP_COMPOSED_GETTER(StatusCode, getServiceResult, serviceResult)
-    UAPP_COMPOSED_GETTER_WRAPPER(DiagnosticInfo, getServiceDiagnostics, serviceDiagnostics)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(String, getStringTable, stringTable, stringTableSize)
-    UAPP_COMPOSED_GETTER_WRAPPER(ExtensionObject, getAdditionalHeader, additionalHeader)
+    UAPP_GETTER_WRAPPER(DateTime, getTimestamp, timestamp)
+    UAPP_GETTER(uint32_t, getRequestHandle, requestHandle)
+    UAPP_GETTER(StatusCode, getServiceResult, serviceResult)
+    UAPP_GETTER_WRAPPER(DiagnosticInfo, getServiceDiagnostics, serviceDiagnostics)
+    UAPP_GETTER_SPAN_WRAPPER(String, getStringTable, stringTable, stringTableSize)
+    UAPP_GETTER_WRAPPER(ExtensionObject, getAdditionalHeader, additionalHeader)
 };
 
 /**
@@ -192,11 +192,11 @@ public:
         handle()->securityPolicyUri = detail::toNative(securityPolicyUri);
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(String, getPolicyId, policyId)
-    UAPP_COMPOSED_GETTER_CAST(UserTokenType, getTokenType, tokenType)
-    UAPP_COMPOSED_GETTER_WRAPPER(String, getIssuedTokenType, issuedTokenType)
-    UAPP_COMPOSED_GETTER_WRAPPER(String, getIssuerEndpointUrl, issuerEndpointUrl)
-    UAPP_COMPOSED_GETTER_WRAPPER(String, getSecurityPolicyUri, securityPolicyUri)
+    UAPP_GETTER_WRAPPER(String, getPolicyId, policyId)
+    UAPP_GETTER_CAST(UserTokenType, getTokenType, tokenType)
+    UAPP_GETTER_WRAPPER(String, getIssuedTokenType, issuedTokenType)
+    UAPP_GETTER_WRAPPER(String, getIssuerEndpointUrl, issuerEndpointUrl)
+    UAPP_GETTER_WRAPPER(String, getSecurityPolicyUri, securityPolicyUri)
 };
 
 /**
@@ -208,16 +208,16 @@ class EndpointDescription
 public:
     using TypeWrapper::TypeWrapper;
 
-    UAPP_COMPOSED_GETTER_WRAPPER(String, getEndpointUrl, endpointUrl)
-    UAPP_COMPOSED_GETTER_WRAPPER(ApplicationDescription, getServer, server)
-    UAPP_COMPOSED_GETTER_WRAPPER(ByteString, getServerCertificate, serverCertificate)
-    UAPP_COMPOSED_GETTER(UA_MessageSecurityMode, getSecurityMode, securityMode)
-    UAPP_COMPOSED_GETTER_WRAPPER(String, getSecurityPolicyUri, securityPolicyUri)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+    UAPP_GETTER_WRAPPER(String, getEndpointUrl, endpointUrl)
+    UAPP_GETTER_WRAPPER(ApplicationDescription, getServer, server)
+    UAPP_GETTER_WRAPPER(ByteString, getServerCertificate, serverCertificate)
+    UAPP_GETTER(UA_MessageSecurityMode, getSecurityMode, securityMode)
+    UAPP_GETTER_WRAPPER(String, getSecurityPolicyUri, securityPolicyUri)
+    UAPP_GETTER_SPAN_WRAPPER(
         UserTokenPolicy, getUserIdentityTokens, userIdentityTokens, userIdentityTokensSize
     )
-    UAPP_COMPOSED_GETTER_WRAPPER(String, getTransportProfileUri, transportProfileUri)
-    UAPP_COMPOSED_GETTER(UA_Byte, getSecurityLevel, securityLevel)
+    UAPP_GETTER_WRAPPER(String, getTransportProfileUri, transportProfileUri)
+    UAPP_GETTER(UA_Byte, getSecurityLevel, securityLevel)
 };
 
 /* --------------------------------------- Node attributes -------------------------------------- */
@@ -276,7 +276,7 @@ struct IsBitmaskEnum<NodeAttributesMask> : std::true_type {};
 
 // NOLINTNEXTLINE
 #define UAPP_NODEATTR(Type, suffix, member, flag)                                                  \
-    UAPP_COMPOSED_GETTER(Type, get##suffix, member)                                                \
+    UAPP_GETTER(Type, get##suffix, member)                                                         \
     auto& set##suffix(Type member) noexcept {                                                      \
         handle()->specifiedAttributes |= flag;                                                     \
         handle()->member = member;                                                                 \
@@ -285,7 +285,7 @@ struct IsBitmaskEnum<NodeAttributesMask> : std::true_type {};
 
 // NOLINTNEXTLINE
 #define UAPP_NODEATTR_BITMASK(Type, suffix, member, flag)                                          \
-    UAPP_COMPOSED_GETTER(Type, get##suffix, member)                                                \
+    UAPP_GETTER(Type, get##suffix, member)                                                         \
     auto& set##suffix(Type member) noexcept {                                                      \
         handle()->specifiedAttributes |= flag;                                                     \
         handle()->member = member.get();                                                           \
@@ -294,7 +294,7 @@ struct IsBitmaskEnum<NodeAttributesMask> : std::true_type {};
 
 // NOLINTNEXTLINE
 #define UAPP_NODEATTR_CAST(Type, suffix, member, flag)                                             \
-    UAPP_COMPOSED_GETTER_CAST(Type, get##suffix, member)                                           \
+    UAPP_GETTER_CAST(Type, get##suffix, member)                                                    \
     auto& set##suffix(Type member) noexcept {                                                      \
         handle()->specifiedAttributes |= flag;                                                     \
         handle()->member = static_cast<decltype(handle()->member)>(member);                        \
@@ -303,7 +303,7 @@ struct IsBitmaskEnum<NodeAttributesMask> : std::true_type {};
 
 // NOLINTNEXTLINE
 #define UAPP_NODEATTR_WRAPPER(Type, suffix, member, flag)                                          \
-    UAPP_COMPOSED_GETTER_WRAPPER_CONST(Type, get##suffix, member)                                  \
+    UAPP_GETTER_WRAPPER_CONST(Type, get##suffix, member)                                           \
     auto& set##suffix(const Type& member) {                                                        \
         handle()->specifiedAttributes |= flag;                                                     \
         asWrapper<Type>(handle()->member) = member;                                                \
@@ -312,7 +312,7 @@ struct IsBitmaskEnum<NodeAttributesMask> : std::true_type {};
 
 // NOLINTNEXTLINE
 #define UAPP_NODEATTR_ARRAY(Type, suffix, member, memberSize, flag)                                \
-    UAPP_COMPOSED_GETTER_SPAN(Type, get##suffix, member, memberSize)                               \
+    UAPP_GETTER_SPAN(Type, get##suffix, member, memberSize)                                        \
     auto& set##suffix(Span<const Type> member) {                                                   \
         const auto& dataType = opcua::getDataType<Type>();                                         \
         handle()->specifiedAttributes |= flag;                                                     \
@@ -324,7 +324,7 @@ struct IsBitmaskEnum<NodeAttributesMask> : std::true_type {};
 
 // NOLINTNEXTLINT
 #define UAPP_NODEATTR_COMMON                                                                       \
-    UAPP_COMPOSED_GETTER(Bitmask<NodeAttributesMask>, getSpecifiedAttributes, specifiedAttributes) \
+    UAPP_GETTER(Bitmask<NodeAttributesMask>, getSpecifiedAttributes, specifiedAttributes)          \
     UAPP_NODEATTR_WRAPPER(                                                                         \
         LocalizedText, DisplayName, displayName, UA_NODEATTRIBUTESMASK_DISPLAYNAME                 \
     )                                                                                              \
@@ -582,7 +582,7 @@ class UserIdentityToken : public TypeWrapper<UA_UserIdentityToken, UA_TYPES_USER
 public:
     using TypeWrapper::TypeWrapper;
 
-    UAPP_COMPOSED_GETTER_WRAPPER(String, getPolicyId, policyId)
+    UAPP_GETTER_WRAPPER(String, getPolicyId, policyId)
 };
 
 /**
@@ -594,7 +594,7 @@ class AnonymousIdentityToken
 public:
     using TypeWrapper::TypeWrapper;
 
-    UAPP_COMPOSED_GETTER_WRAPPER(String, getPolicyId, policyId)
+    UAPP_GETTER_WRAPPER(String, getPolicyId, policyId)
 };
 
 /**
@@ -606,10 +606,10 @@ class UserNameIdentityToken
 public:
     using TypeWrapper::TypeWrapper;
 
-    UAPP_COMPOSED_GETTER_WRAPPER(String, getPolicyId, policyId)
-    UAPP_COMPOSED_GETTER_WRAPPER(String, getUserName, userName)
-    UAPP_COMPOSED_GETTER_WRAPPER(ByteString, getPassword, password)
-    UAPP_COMPOSED_GETTER_WRAPPER(String, getEncryptionAlgorithm, encryptionAlgorithm)
+    UAPP_GETTER_WRAPPER(String, getPolicyId, policyId)
+    UAPP_GETTER_WRAPPER(String, getUserName, userName)
+    UAPP_GETTER_WRAPPER(ByteString, getPassword, password)
+    UAPP_GETTER_WRAPPER(String, getEncryptionAlgorithm, encryptionAlgorithm)
 };
 
 /**
@@ -620,8 +620,8 @@ class X509IdentityToken : public TypeWrapper<UA_X509IdentityToken, UA_TYPES_X509
 public:
     using TypeWrapper::TypeWrapper;
 
-    UAPP_COMPOSED_GETTER_WRAPPER(String, getPolicyId, policyId)
-    UAPP_COMPOSED_GETTER_WRAPPER(ByteString, getCertificateData, certificateData)
+    UAPP_GETTER_WRAPPER(String, getPolicyId, policyId)
+    UAPP_GETTER_WRAPPER(ByteString, getCertificateData, certificateData)
 };
 
 /**
@@ -633,9 +633,9 @@ class IssuedIdentityToken
 public:
     using TypeWrapper::TypeWrapper;
 
-    UAPP_COMPOSED_GETTER_WRAPPER(String, getPolicyId, policyId)
-    UAPP_COMPOSED_GETTER_WRAPPER(ByteString, getTokenData, tokenData)
-    UAPP_COMPOSED_GETTER_WRAPPER(String, getEncryptionAlgorithm, encryptionAlgorithm)
+    UAPP_GETTER_WRAPPER(String, getPolicyId, policyId)
+    UAPP_GETTER_WRAPPER(ByteString, getTokenData, tokenData)
+    UAPP_GETTER_WRAPPER(String, getEncryptionAlgorithm, encryptionAlgorithm)
 };
 
 /**
@@ -664,13 +664,13 @@ public:
         handle()->typeDefinition = detail::toNative(std::move(typeDefinition));
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(ExpandedNodeId, getParentNodeId, parentNodeId)
-    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getReferenceTypeId, referenceTypeId)
-    UAPP_COMPOSED_GETTER_WRAPPER(ExpandedNodeId, getRequestedNewNodeId, requestedNewNodeId)
-    UAPP_COMPOSED_GETTER_WRAPPER(QualifiedName, getBrowseName, browseName)
-    UAPP_COMPOSED_GETTER_CAST(NodeClass, getNodeClass, nodeClass)
-    UAPP_COMPOSED_GETTER_WRAPPER(ExtensionObject, getNodeAttributes, nodeAttributes)
-    UAPP_COMPOSED_GETTER_WRAPPER(ExpandedNodeId, getTypeDefinition, typeDefinition)
+    UAPP_GETTER_WRAPPER(ExpandedNodeId, getParentNodeId, parentNodeId)
+    UAPP_GETTER_WRAPPER(NodeId, getReferenceTypeId, referenceTypeId)
+    UAPP_GETTER_WRAPPER(ExpandedNodeId, getRequestedNewNodeId, requestedNewNodeId)
+    UAPP_GETTER_WRAPPER(QualifiedName, getBrowseName, browseName)
+    UAPP_GETTER_CAST(NodeClass, getNodeClass, nodeClass)
+    UAPP_GETTER_WRAPPER(ExtensionObject, getNodeAttributes, nodeAttributes)
+    UAPP_GETTER_WRAPPER(ExpandedNodeId, getTypeDefinition, typeDefinition)
 };
 
 /**
@@ -681,8 +681,8 @@ class AddNodesResult : public TypeWrapper<UA_AddNodesResult, UA_TYPES_ADDNODESRE
 public:
     using TypeWrapper::TypeWrapper;
 
-    UAPP_COMPOSED_GETTER(StatusCode, getStatusCode, statusCode)
-    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getAddedNodeId, addedNodeId)
+    UAPP_GETTER(StatusCode, getStatusCode, statusCode)
+    UAPP_GETTER_WRAPPER(NodeId, getAddedNodeId, addedNodeId)
 };
 
 /**
@@ -699,8 +699,8 @@ public:
         handle()->nodesToAdd = detail::toNativeArray(nodesToAdd);
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(AddNodesItem, getNodesToAdd, nodesToAdd, nodesToAddSize)
+    UAPP_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_GETTER_SPAN_WRAPPER(AddNodesItem, getNodesToAdd, nodesToAdd, nodesToAddSize)
 };
 
 /**
@@ -711,9 +711,9 @@ class AddNodesResponse : public TypeWrapper<UA_AddNodesResponse, UA_TYPES_ADDNOD
 public:
     using TypeWrapper::TypeWrapper;
 
-    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(AddNodesResult, getResults, results, resultsSize)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+    UAPP_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_GETTER_SPAN_WRAPPER(AddNodesResult, getResults, results, resultsSize)
+    UAPP_GETTER_SPAN_WRAPPER(
         DiagnosticInfo, getDiagnosticInfos, diagnosticInfos, diagnosticInfosSize
     )
 };
@@ -742,12 +742,12 @@ public:
         handle()->targetNodeClass = static_cast<UA_NodeClass>(targetNodeClass);
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getSourceNodeId, sourceNodeId)
-    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getReferenceTypeId, referenceTypeId)
-    UAPP_COMPOSED_GETTER(bool, getIsForward, isForward)
-    UAPP_COMPOSED_GETTER_WRAPPER(String, getTargetServerUri, targetServerUri)
-    UAPP_COMPOSED_GETTER_WRAPPER(ExpandedNodeId, getTargetNodeId, targetNodeId)
-    UAPP_COMPOSED_GETTER_CAST(NodeClass, getTargetNodeClass, targetNodeClass)
+    UAPP_GETTER_WRAPPER(NodeId, getSourceNodeId, sourceNodeId)
+    UAPP_GETTER_WRAPPER(NodeId, getReferenceTypeId, referenceTypeId)
+    UAPP_GETTER(bool, getIsForward, isForward)
+    UAPP_GETTER_WRAPPER(String, getTargetServerUri, targetServerUri)
+    UAPP_GETTER_WRAPPER(ExpandedNodeId, getTargetNodeId, targetNodeId)
+    UAPP_GETTER_CAST(NodeClass, getTargetNodeClass, targetNodeClass)
 };
 
 /**
@@ -767,8 +767,8 @@ public:
         handle()->referencesToAdd = detail::toNativeArray(referencesToAdd);
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+    UAPP_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_GETTER_SPAN_WRAPPER(
         AddReferencesItem, getReferencesToAdd, referencesToAdd, referencesToAddSize
     )
 };
@@ -782,9 +782,9 @@ class AddReferencesResponse
 public:
     using TypeWrapper::TypeWrapper;
 
-    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(StatusCode, getResults, results, resultsSize)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+    UAPP_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_GETTER_SPAN_WRAPPER(StatusCode, getResults, results, resultsSize)
+    UAPP_GETTER_SPAN_WRAPPER(
         DiagnosticInfo, getDiagnosticInfos, diagnosticInfos, diagnosticInfosSize
     )
 };
@@ -802,8 +802,8 @@ public:
         handle()->deleteTargetReferences = deleteTargetReferences;
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getNodeId, nodeId)
-    UAPP_COMPOSED_GETTER(bool, getDeleteTargetReferences, deleteTargetReferences)
+    UAPP_GETTER_WRAPPER(NodeId, getNodeId, nodeId)
+    UAPP_GETTER(bool, getDeleteTargetReferences, deleteTargetReferences)
 };
 
 /**
@@ -820,10 +820,8 @@ public:
         handle()->nodesToDelete = detail::toNativeArray(nodesToDelete);
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
-        DeleteNodesItem, getNodesToDelete, nodesToDelete, nodesToDeleteSize
-    )
+    UAPP_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_GETTER_SPAN_WRAPPER(DeleteNodesItem, getNodesToDelete, nodesToDelete, nodesToDeleteSize)
 };
 
 /**
@@ -835,9 +833,9 @@ class DeleteNodesResponse
 public:
     using TypeWrapper::TypeWrapper;
 
-    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(StatusCode, getResults, results, resultsSize)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+    UAPP_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_GETTER_SPAN_WRAPPER(StatusCode, getResults, results, resultsSize)
+    UAPP_GETTER_SPAN_WRAPPER(
         DiagnosticInfo, getDiagnosticInfos, diagnosticInfos, diagnosticInfosSize
     )
 };
@@ -865,11 +863,11 @@ public:
         handle()->deleteBidirectional = deleteBidirectional;
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getSourceNodeId, sourceNodeId)
-    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getReferenceTypeId, referenceTypeId)
-    UAPP_COMPOSED_GETTER(bool, getIsForward, isForward)
-    UAPP_COMPOSED_GETTER_WRAPPER(ExpandedNodeId, getTargetNodeId, targetNodeId)
-    UAPP_COMPOSED_GETTER(bool, getDeleteBidirectional, deleteBidirectional)
+    UAPP_GETTER_WRAPPER(NodeId, getSourceNodeId, sourceNodeId)
+    UAPP_GETTER_WRAPPER(NodeId, getReferenceTypeId, referenceTypeId)
+    UAPP_GETTER(bool, getIsForward, isForward)
+    UAPP_GETTER_WRAPPER(ExpandedNodeId, getTargetNodeId, targetNodeId)
+    UAPP_GETTER(bool, getDeleteBidirectional, deleteBidirectional)
 };
 
 /**
@@ -889,8 +887,8 @@ public:
         handle()->referencesToDelete = detail::toNativeArray(referencesToDelete);
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+    UAPP_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_GETTER_SPAN_WRAPPER(
         DeleteReferencesItem, getReferencesToDelete, referencesToDelete, referencesToDeleteSize
     )
 };
@@ -904,9 +902,9 @@ class DeleteReferencesResponse
 public:
     using TypeWrapper::TypeWrapper;
 
-    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(StatusCode, getResults, results, resultsSize)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+    UAPP_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_GETTER_SPAN_WRAPPER(StatusCode, getResults, results, resultsSize)
+    UAPP_GETTER_SPAN_WRAPPER(
         DiagnosticInfo, getDiagnosticInfos, diagnosticInfos, diagnosticInfosSize
     )
 };
@@ -924,9 +922,9 @@ public:
         handle()->viewVersion = viewVersion;
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getViewId, viewId)
-    UAPP_COMPOSED_GETTER_WRAPPER(DateTime, getTimestamp, timestamp)
-    UAPP_COMPOSED_GETTER(uint32_t, getViewVersion, viewVersion)
+    UAPP_GETTER_WRAPPER(NodeId, getViewId, viewId)
+    UAPP_GETTER_WRAPPER(DateTime, getTimestamp, timestamp)
+    UAPP_GETTER(uint32_t, getViewVersion, viewVersion)
 };
 
 /**
@@ -982,12 +980,12 @@ public:
         handle()->resultMask = resultMask.get();
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getNodeId, nodeId)
-    UAPP_COMPOSED_GETTER_CAST(BrowseDirection, getBrowseDirection, browseDirection)
-    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getReferenceTypeId, referenceTypeId)
-    UAPP_COMPOSED_GETTER(bool, getIncludeSubtypes, includeSubtypes)
-    UAPP_COMPOSED_GETTER(Bitmask<NodeClass>, getNodeClassMask, nodeClassMask)
-    UAPP_COMPOSED_GETTER(Bitmask<BrowseResultMask>, getResultMask, resultMask)
+    UAPP_GETTER_WRAPPER(NodeId, getNodeId, nodeId)
+    UAPP_GETTER_CAST(BrowseDirection, getBrowseDirection, browseDirection)
+    UAPP_GETTER_WRAPPER(NodeId, getReferenceTypeId, referenceTypeId)
+    UAPP_GETTER(bool, getIncludeSubtypes, includeSubtypes)
+    UAPP_GETTER(Bitmask<NodeClass>, getNodeClassMask, nodeClassMask)
+    UAPP_GETTER(Bitmask<BrowseResultMask>, getResultMask, resultMask)
 };
 
 /**
@@ -1010,12 +1008,10 @@ public:
         handle()->nodesToBrowse = detail::toNativeArray(nodesToBrowse);
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
-    UAPP_COMPOSED_GETTER_WRAPPER(ViewDescription, getView, view)
-    UAPP_COMPOSED_GETTER(uint32_t, getRequestedMaxReferencesPerNode, requestedMaxReferencesPerNode)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
-        BrowseDescription, getNodesToBrowse, nodesToBrowse, nodesToBrowseSize
-    )
+    UAPP_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_GETTER_WRAPPER(ViewDescription, getView, view)
+    UAPP_GETTER(uint32_t, getRequestedMaxReferencesPerNode, requestedMaxReferencesPerNode)
+    UAPP_GETTER_SPAN_WRAPPER(BrowseDescription, getNodesToBrowse, nodesToBrowse, nodesToBrowseSize)
 };
 
 /**
@@ -1027,13 +1023,13 @@ class ReferenceDescription
 public:
     using TypeWrapper::TypeWrapper;
 
-    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getReferenceTypeId, referenceTypeId)
-    UAPP_COMPOSED_GETTER(bool, getIsForward, isForward)
-    UAPP_COMPOSED_GETTER_WRAPPER(ExpandedNodeId, getNodeId, nodeId)
-    UAPP_COMPOSED_GETTER_WRAPPER(QualifiedName, getBrowseName, browseName)
-    UAPP_COMPOSED_GETTER_WRAPPER(LocalizedText, getDisplayName, displayName)
-    UAPP_COMPOSED_GETTER_CAST(NodeClass, getNodeClass, nodeClass)
-    UAPP_COMPOSED_GETTER_WRAPPER(ExpandedNodeId, getTypeDefinition, typeDefinition)
+    UAPP_GETTER_WRAPPER(NodeId, getReferenceTypeId, referenceTypeId)
+    UAPP_GETTER(bool, getIsForward, isForward)
+    UAPP_GETTER_WRAPPER(ExpandedNodeId, getNodeId, nodeId)
+    UAPP_GETTER_WRAPPER(QualifiedName, getBrowseName, browseName)
+    UAPP_GETTER_WRAPPER(LocalizedText, getDisplayName, displayName)
+    UAPP_GETTER_CAST(NodeClass, getNodeClass, nodeClass)
+    UAPP_GETTER_WRAPPER(ExpandedNodeId, getTypeDefinition, typeDefinition)
 };
 
 /**
@@ -1044,11 +1040,9 @@ class BrowseResult : public TypeWrapper<UA_BrowseResult, UA_TYPES_BROWSERESULT> 
 public:
     using TypeWrapper::TypeWrapper;
 
-    UAPP_COMPOSED_GETTER(StatusCode, getStatusCode, statusCode)
-    UAPP_COMPOSED_GETTER_WRAPPER(ByteString, getContinuationPoint, continuationPoint)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
-        ReferenceDescription, getReferences, references, referencesSize
-    )
+    UAPP_GETTER(StatusCode, getStatusCode, statusCode)
+    UAPP_GETTER_WRAPPER(ByteString, getContinuationPoint, continuationPoint)
+    UAPP_GETTER_SPAN_WRAPPER(ReferenceDescription, getReferences, references, referencesSize)
 };
 
 /**
@@ -1058,9 +1052,9 @@ class BrowseResponse : public TypeWrapper<UA_BrowseResponse, UA_TYPES_BROWSERESP
 public:
     using TypeWrapper::TypeWrapper;
 
-    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(BrowseResult, getResults, results, resultsSize)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+    UAPP_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_GETTER_SPAN_WRAPPER(BrowseResult, getResults, results, resultsSize)
+    UAPP_GETTER_SPAN_WRAPPER(
         DiagnosticInfo, getDiagnosticInfos, diagnosticInfos, diagnosticInfosSize
     )
 };
@@ -1083,9 +1077,9 @@ public:
         handle()->continuationPoints = detail::toNativeArray(continuationPoints);
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
-    UAPP_COMPOSED_GETTER(bool, getReleaseContinuationPoints, releaseContinuationPoints)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+    UAPP_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_GETTER(bool, getReleaseContinuationPoints, releaseContinuationPoints)
+    UAPP_GETTER_SPAN_WRAPPER(
         ByteString, getContinuationPoints, continuationPoints, continuationPointsSize
     )
 };
@@ -1097,9 +1091,9 @@ class BrowseNextResponse : public TypeWrapper<UA_BrowseNextResponse, UA_TYPES_BR
 public:
     using TypeWrapper::TypeWrapper;
 
-    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(BrowseResult, getResults, results, resultsSize)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+    UAPP_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_GETTER_SPAN_WRAPPER(BrowseResult, getResults, results, resultsSize)
+    UAPP_GETTER_SPAN_WRAPPER(
         DiagnosticInfo, getDiagnosticInfos, diagnosticInfos, diagnosticInfosSize
     )
 };
@@ -1121,10 +1115,10 @@ public:
         handle()->targetName = detail::toNative(std::move(targetName));
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getReferenceTypeId, referenceTypeId)
-    UAPP_COMPOSED_GETTER(bool, getIsInverse, isInverse)
-    UAPP_COMPOSED_GETTER(bool, getIncludeSubtypes, includeSubtypes)
-    UAPP_COMPOSED_GETTER_WRAPPER(QualifiedName, getTargetName, targetName)
+    UAPP_GETTER_WRAPPER(NodeId, getReferenceTypeId, referenceTypeId)
+    UAPP_GETTER(bool, getIsInverse, isInverse)
+    UAPP_GETTER(bool, getIncludeSubtypes, includeSubtypes)
+    UAPP_GETTER_WRAPPER(QualifiedName, getTargetName, targetName)
 };
 
 /**
@@ -1142,7 +1136,7 @@ public:
         handle()->elements = detail::toNativeArray(elements);
     }
 
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(RelativePathElement, getElements, elements, elementsSize)
+    UAPP_GETTER_SPAN_WRAPPER(RelativePathElement, getElements, elements, elementsSize)
 };
 
 /**
@@ -1157,8 +1151,8 @@ public:
         handle()->relativePath = detail::toNative(std::move(relativePath));
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getStartingNode, startingNode)
-    UAPP_COMPOSED_GETTER_WRAPPER(RelativePath, getRelativePath, relativePath)
+    UAPP_GETTER_WRAPPER(NodeId, getStartingNode, startingNode)
+    UAPP_GETTER_WRAPPER(RelativePath, getRelativePath, relativePath)
 };
 
 /**
@@ -1168,8 +1162,8 @@ class BrowsePathTarget : public TypeWrapper<UA_BrowsePathTarget, UA_TYPES_BROWSE
 public:
     using TypeWrapper::TypeWrapper;
 
-    UAPP_COMPOSED_GETTER_WRAPPER(ExpandedNodeId, getTargetId, targetId)
-    UAPP_COMPOSED_GETTER(uint32_t, getRemainingPathIndex, remainingPathIndex)
+    UAPP_GETTER_WRAPPER(ExpandedNodeId, getTargetId, targetId)
+    UAPP_GETTER(uint32_t, getRemainingPathIndex, remainingPathIndex)
 };
 
 /**
@@ -1179,8 +1173,8 @@ class BrowsePathResult : public TypeWrapper<UA_BrowsePathResult, UA_TYPES_BROWSE
 public:
     using TypeWrapper::TypeWrapper;
 
-    UAPP_COMPOSED_GETTER(StatusCode, getStatusCode, statusCode)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(BrowsePathTarget, getTargets, targets, targetsSize)
+    UAPP_GETTER(StatusCode, getStatusCode, statusCode)
+    UAPP_GETTER_SPAN_WRAPPER(BrowsePathTarget, getTargets, targets, targetsSize)
 };
 
 /**
@@ -1201,8 +1195,8 @@ public:
         handle()->browsePaths = detail::toNativeArray(browsePaths);
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(BrowsePath, getBrowsePaths, browsePaths, browsePathsSize)
+    UAPP_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_GETTER_SPAN_WRAPPER(BrowsePath, getBrowsePaths, browsePaths, browsePathsSize)
 };
 
 /**
@@ -1215,9 +1209,9 @@ class TranslateBrowsePathsToNodeIdsResponse
 public:
     using TypeWrapper::TypeWrapper;
 
-    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(BrowsePathResult, getResults, results, resultsSize)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+    UAPP_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_GETTER_SPAN_WRAPPER(BrowsePathResult, getResults, results, resultsSize)
+    UAPP_GETTER_SPAN_WRAPPER(
         DiagnosticInfo, getDiagnosticInfos, diagnosticInfos, diagnosticInfosSize
     )
 };
@@ -1236,10 +1230,8 @@ public:
         handle()->nodesToRegister = detail::toNativeArray(nodesToRegister);
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
-        NodeId, getNodesToRegister, nodesToRegister, nodesToRegisterSize
-    )
+    UAPP_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_GETTER_SPAN_WRAPPER(NodeId, getNodesToRegister, nodesToRegister, nodesToRegisterSize)
 };
 
 /**
@@ -1250,10 +1242,8 @@ class RegisterNodesResponse
 public:
     using TypeWrapper::TypeWrapper;
 
-    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
-        NodeId, getRegisteredNodeIds, registeredNodeIds, registeredNodeIdsSize
-    )
+    UAPP_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_GETTER_SPAN_WRAPPER(NodeId, getRegisteredNodeIds, registeredNodeIds, registeredNodeIdsSize)
 };
 
 /**
@@ -1270,10 +1260,8 @@ public:
         handle()->nodesToUnregister = detail::toNativeArray(nodesToUnregister);
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
-        NodeId, getNodesToUnregister, nodesToUnregister, nodesToUnregisterSize
-    )
+    UAPP_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_GETTER_SPAN_WRAPPER(NodeId, getNodesToUnregister, nodesToUnregister, nodesToUnregisterSize)
 };
 
 /**
@@ -1284,7 +1272,7 @@ class UnregisterNodesResponse
 public:
     using TypeWrapper::TypeWrapper;
 
-    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
 };
 
 /**
@@ -1307,10 +1295,10 @@ public:
         handle()->dataEncoding = detail::toNative(std::move(dataEncoding));
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getNodeId, nodeId)
-    UAPP_COMPOSED_GETTER_CAST(AttributeId, getAttributeId, attributeId)
-    UAPP_COMPOSED_GETTER_WRAPPER(String, getIndexRange, indexRange)
-    UAPP_COMPOSED_GETTER_WRAPPER(QualifiedName, getDataEncoding, dataEncoding)
+    UAPP_GETTER_WRAPPER(NodeId, getNodeId, nodeId)
+    UAPP_GETTER_CAST(AttributeId, getAttributeId, attributeId)
+    UAPP_GETTER_WRAPPER(String, getIndexRange, indexRange)
+    UAPP_GETTER_WRAPPER(QualifiedName, getDataEncoding, dataEncoding)
 };
 
 /**
@@ -1334,10 +1322,10 @@ public:
         handle()->nodesToRead = detail::toNativeArray(nodesToRead);
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
-    UAPP_COMPOSED_GETTER(double, getMaxAge, maxAge)
-    UAPP_COMPOSED_GETTER_CAST(TimestampsToReturn, getTimestampsToReturn, timestampsToReturn)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(ReadValueId, getNodesToRead, nodesToRead, nodesToReadSize)
+    UAPP_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_GETTER(double, getMaxAge, maxAge)
+    UAPP_GETTER_CAST(TimestampsToReturn, getTimestampsToReturn, timestampsToReturn)
+    UAPP_GETTER_SPAN_WRAPPER(ReadValueId, getNodesToRead, nodesToRead, nodesToReadSize)
 };
 
 /**
@@ -1348,9 +1336,9 @@ class ReadResponse : public TypeWrapper<UA_ReadResponse, UA_TYPES_READRESPONSE> 
 public:
     using TypeWrapper::TypeWrapper;
 
-    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(DataValue, getResults, results, resultsSize)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+    UAPP_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_GETTER_SPAN_WRAPPER(DataValue, getResults, results, resultsSize)
+    UAPP_GETTER_SPAN_WRAPPER(
         DiagnosticInfo, getDiagnosticInfos, diagnosticInfos, diagnosticInfosSize
     )
 };
@@ -1372,10 +1360,10 @@ public:
         handle()->value = detail::toNative(std::move(value));
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getNodeId, nodeId)
-    UAPP_COMPOSED_GETTER_CAST(AttributeId, getAttributeId, attributeId)
-    UAPP_COMPOSED_GETTER_WRAPPER(String, getIndexRange, indexRange)
-    UAPP_COMPOSED_GETTER_WRAPPER(DataValue, getValue, value)
+    UAPP_GETTER_WRAPPER(NodeId, getNodeId, nodeId)
+    UAPP_GETTER_CAST(AttributeId, getAttributeId, attributeId)
+    UAPP_GETTER_WRAPPER(String, getIndexRange, indexRange)
+    UAPP_GETTER_WRAPPER(DataValue, getValue, value)
 };
 
 /**
@@ -1392,8 +1380,8 @@ public:
         handle()->nodesToWrite = detail::toNativeArray(nodesToWrite);
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(WriteValue, getNodesToWrite, nodesToWrite, nodesToWriteSize)
+    UAPP_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_GETTER_SPAN_WRAPPER(WriteValue, getNodesToWrite, nodesToWrite, nodesToWriteSize)
 };
 
 /**
@@ -1404,9 +1392,9 @@ class WriteResponse : public TypeWrapper<UA_WriteResponse, UA_TYPES_WRITERESPONS
 public:
     using TypeWrapper::TypeWrapper;
 
-    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(StatusCode, getResults, results, resultsSize)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+    UAPP_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_GETTER_SPAN_WRAPPER(StatusCode, getResults, results, resultsSize)
+    UAPP_GETTER_SPAN_WRAPPER(
         DiagnosticInfo, getDiagnosticInfos, diagnosticInfos, diagnosticInfosSize
     )
 };
@@ -1425,9 +1413,9 @@ public:
         handle()->description = detail::toNative(std::move(description));
     }
 
-    UAPP_COMPOSED_GETTER(int64_t, getValue, value)
-    UAPP_COMPOSED_GETTER_WRAPPER(LocalizedText, getDisplayName, displayName)
-    UAPP_COMPOSED_GETTER_WRAPPER(LocalizedText, getDescription, description)
+    UAPP_GETTER(int64_t, getValue, value)
+    UAPP_GETTER_WRAPPER(LocalizedText, getDisplayName, displayName)
+    UAPP_GETTER_WRAPPER(LocalizedText, getDescription, description)
 };
 
 /* ------------------------------------------- Method ------------------------------------------- */
@@ -1457,11 +1445,11 @@ public:
         handle()->arrayDimensions = detail::toNativeArray(arrayDimensions);
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(String, getName, name)
-    UAPP_COMPOSED_GETTER_WRAPPER(LocalizedText, getDescription, description)
-    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getDataType, dataType)
-    UAPP_COMPOSED_GETTER_CAST(ValueRank, getValueRank, valueRank)
-    UAPP_COMPOSED_GETTER_SPAN(uint32_t, getArrayDimensions, arrayDimensions, arrayDimensionsSize)
+    UAPP_GETTER_WRAPPER(String, getName, name)
+    UAPP_GETTER_WRAPPER(LocalizedText, getDescription, description)
+    UAPP_GETTER_WRAPPER(NodeId, getDataType, dataType)
+    UAPP_GETTER_CAST(ValueRank, getValueRank, valueRank)
+    UAPP_GETTER_SPAN(uint32_t, getArrayDimensions, arrayDimensions, arrayDimensionsSize)
 };
 
 /**
@@ -1479,11 +1467,9 @@ public:
         handle()->inputArguments = detail::toNativeArray(inputArguments);
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getObjectId, objectId)
-    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getMethodId, methodId)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
-        Variant, getInputArguments, inputArguments, inputArgumentsSize
-    )
+    UAPP_GETTER_WRAPPER(NodeId, getObjectId, objectId)
+    UAPP_GETTER_WRAPPER(NodeId, getMethodId, methodId)
+    UAPP_GETTER_SPAN_WRAPPER(Variant, getInputArguments, inputArguments, inputArgumentsSize)
 };
 
 /**
@@ -1494,19 +1480,17 @@ class CallMethodResult : public TypeWrapper<UA_CallMethodResult, UA_TYPES_CALLME
 public:
     using TypeWrapper::TypeWrapper;
 
-    UAPP_COMPOSED_GETTER_WRAPPER(StatusCode, getStatusCode, statusCode)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+    UAPP_GETTER_WRAPPER(StatusCode, getStatusCode, statusCode)
+    UAPP_GETTER_SPAN_WRAPPER(
         StatusCode, getInputArgumentResults, inputArgumentResults, inputArgumentResultsSize
     )
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+    UAPP_GETTER_SPAN_WRAPPER(
         DiagnosticInfo,
         getInputArgumentDiagnosticInfos,
         inputArgumentDiagnosticInfos,
         inputArgumentDiagnosticInfosSize
     )
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
-        Variant, getOutputArguments, outputArguments, outputArgumentsSize
-    )
+    UAPP_GETTER_SPAN_WRAPPER(Variant, getOutputArguments, outputArguments, outputArgumentsSize)
 };
 
 /**
@@ -1523,10 +1507,8 @@ public:
         handle()->methodsToCall = detail::toNativeArray(methodsToCall);
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
-        CallMethodRequest, getMethodsToCall, methodsToCall, methodsToCallSize
-    )
+    UAPP_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_GETTER_SPAN_WRAPPER(CallMethodRequest, getMethodsToCall, methodsToCall, methodsToCallSize)
 };
 
 /**
@@ -1537,9 +1519,9 @@ class CallResponse : public TypeWrapper<UA_CallResponse, UA_TYPES_CALLRESPONSE> 
 public:
     using TypeWrapper::TypeWrapper;
 
-    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(CallMethodResult, getResults, results, resultsSize)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+    UAPP_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_GETTER_SPAN_WRAPPER(CallMethodResult, getResults, results, resultsSize)
+    UAPP_GETTER_SPAN_WRAPPER(
         DiagnosticInfo, getDiagnosticInfos, diagnosticInfos, diagnosticInfosSize
     )
 };
@@ -1591,7 +1573,7 @@ public:
         handle()->index = index;
     }
 
-    UAPP_COMPOSED_GETTER(uint32_t, getIndex, index)
+    UAPP_GETTER(uint32_t, getIndex, index)
 };
 
 /**
@@ -1615,7 +1597,7 @@ public:
     explicit LiteralOperand(T&& literal)
         : LiteralOperand(Variant::fromScalar(std::forward<T>(literal))) {}
 
-    UAPP_COMPOSED_GETTER_WRAPPER(Variant, getValue, value)
+    UAPP_GETTER_WRAPPER(Variant, getValue, value)
 };
 
 /**
@@ -1640,11 +1622,11 @@ public:
         handle()->indexRange = detail::toNative(indexRange);
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getNodeId, nodeId)
-    UAPP_COMPOSED_GETTER_WRAPPER(String, getAlias, alias)
-    UAPP_COMPOSED_GETTER_WRAPPER(RelativePath, getBrowsePath, browsePath)
-    UAPP_COMPOSED_GETTER_CAST(AttributeId, getAttributeId, attributeId)
-    UAPP_COMPOSED_GETTER_WRAPPER(String, getIndexRange, indexRange)
+    UAPP_GETTER_WRAPPER(NodeId, getNodeId, nodeId)
+    UAPP_GETTER_WRAPPER(String, getAlias, alias)
+    UAPP_GETTER_WRAPPER(RelativePath, getBrowsePath, browsePath)
+    UAPP_GETTER_CAST(AttributeId, getAttributeId, attributeId)
+    UAPP_GETTER_WRAPPER(String, getIndexRange, indexRange)
 };
 
 /**
@@ -1669,10 +1651,10 @@ public:
         handle()->indexRange = detail::toNative(indexRange);
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getTypeDefinitionId, typeDefinitionId)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(QualifiedName, getBrowsePath, browsePath, browsePathSize)
-    UAPP_COMPOSED_GETTER_CAST(AttributeId, getAttributeId, attributeId)
-    UAPP_COMPOSED_GETTER_WRAPPER(String, getIndexRange, indexRange)
+    UAPP_GETTER_WRAPPER(NodeId, getTypeDefinitionId, typeDefinitionId)
+    UAPP_GETTER_SPAN_WRAPPER(QualifiedName, getBrowsePath, browsePath, browsePathSize)
+    UAPP_GETTER_CAST(AttributeId, getAttributeId, attributeId)
+    UAPP_GETTER_WRAPPER(String, getIndexRange, indexRange)
 };
 
 /**
@@ -1711,10 +1693,8 @@ public:
 
     ContentFilterElement(FilterOperator filterOperator, Span<const FilterOperand> operands);
 
-    UAPP_COMPOSED_GETTER_CAST(FilterOperator, getFilterOperator, filterOperator)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
-        ExtensionObject, getFilterOperands, filterOperands, filterOperandsSize
-    )
+    UAPP_GETTER_CAST(FilterOperator, getFilterOperator, filterOperator)
+    UAPP_GETTER_SPAN_WRAPPER(ExtensionObject, getFilterOperands, filterOperands, filterOperandsSize)
 };
 
 /**
@@ -1735,7 +1715,7 @@ public:
     ContentFilter(std::initializer_list<ContentFilterElement> elements);
     explicit ContentFilter(Span<const ContentFilterElement> elements);
 
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(ContentFilterElement, getElements, elements, elementsSize)
+    UAPP_GETTER_SPAN_WRAPPER(ContentFilterElement, getElements, elements, elementsSize)
 };
 
 ContentFilter operator!(const ContentFilterElement& filterElement);
@@ -1789,9 +1769,9 @@ public:
         handle()->deadbandValue = deadbandValue;
     }
 
-    UAPP_COMPOSED_GETTER_CAST(DataChangeTrigger, getTrigger, trigger)
-    UAPP_COMPOSED_GETTER_CAST(DeadbandType, getDeadbandType, deadbandType)
-    UAPP_COMPOSED_GETTER(double, getDeadbandValue, deadbandValue)
+    UAPP_GETTER_CAST(DataChangeTrigger, getTrigger, trigger)
+    UAPP_GETTER_CAST(DeadbandType, getDeadbandType, deadbandType)
+    UAPP_GETTER(double, getDeadbandValue, deadbandValue)
 };
 
 /**
@@ -1808,10 +1788,10 @@ public:
         handle()->whereClause = detail::toNative(std::move(whereClause));
     }
 
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+    UAPP_GETTER_SPAN_WRAPPER(
         SimpleAttributeOperand, getSelectClauses, selectClauses, selectClausesSize
     )
-    UAPP_COMPOSED_GETTER_WRAPPER(ContentFilter, getWhereClause, whereClause)
+    UAPP_GETTER_WRAPPER(ContentFilter, getWhereClause, whereClause)
 };
 
 using AggregateConfiguration = UA_AggregateConfiguration;
@@ -1836,10 +1816,10 @@ public:
         handle()->aggregateConfiguration = aggregateConfiguration;  // TODO: make wrapper?
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(DateTime, getStartTime, startTime)
-    UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getAggregateType, aggregateType)
-    UAPP_COMPOSED_GETTER(double, getProcessingInterval, processingInterval)
-    UAPP_COMPOSED_GETTER(AggregateConfiguration, getAggregateConfiguration, aggregateConfiguration)
+    UAPP_GETTER_WRAPPER(DateTime, getStartTime, startTime)
+    UAPP_GETTER_WRAPPER(NodeId, getAggregateType, aggregateType)
+    UAPP_GETTER(double, getProcessingInterval, processingInterval)
+    UAPP_GETTER(AggregateConfiguration, getAggregateConfiguration, aggregateConfiguration)
 };
 
 /**
@@ -1869,13 +1849,13 @@ public:
         handle()->priority = priority;
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
-    UAPP_COMPOSED_GETTER(double, getRequestedPublishingInterval, requestedPublishingInterval)
-    UAPP_COMPOSED_GETTER(uint32_t, getRequestedLifetimeCount, requestedLifetimeCount)
-    UAPP_COMPOSED_GETTER(uint32_t, getRequestedMaxKeepAliveCount, requestedMaxKeepAliveCount)
-    UAPP_COMPOSED_GETTER(uint32_t, getMaxNotificationsPerPublish, maxNotificationsPerPublish)
-    UAPP_COMPOSED_GETTER(bool, getPublishingEnabled, publishingEnabled)
-    UAPP_COMPOSED_GETTER(uint8_t, getPriority, priority)
+    UAPP_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_GETTER(double, getRequestedPublishingInterval, requestedPublishingInterval)
+    UAPP_GETTER(uint32_t, getRequestedLifetimeCount, requestedLifetimeCount)
+    UAPP_GETTER(uint32_t, getRequestedMaxKeepAliveCount, requestedMaxKeepAliveCount)
+    UAPP_GETTER(uint32_t, getMaxNotificationsPerPublish, maxNotificationsPerPublish)
+    UAPP_GETTER(bool, getPublishingEnabled, publishingEnabled)
+    UAPP_GETTER(uint8_t, getPriority, priority)
 };
 
 /**
@@ -1887,11 +1867,11 @@ class CreateSubscriptionResponse
 public:
     using TypeWrapper::TypeWrapper;
 
-    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
-    UAPP_COMPOSED_GETTER(uint32_t, getSubscriptionId, subscriptionId)
-    UAPP_COMPOSED_GETTER(bool, getRevisedPublishingInterval, revisedPublishingInterval)
-    UAPP_COMPOSED_GETTER(uint32_t, getRevisedLifetimeCount, revisedLifetimeCount)
-    UAPP_COMPOSED_GETTER(uint32_t, getRevisedMaxKeepAliveCount, revisedMaxKeepAliveCount)
+    UAPP_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_GETTER(uint32_t, getSubscriptionId, subscriptionId)
+    UAPP_GETTER(bool, getRevisedPublishingInterval, revisedPublishingInterval)
+    UAPP_GETTER(uint32_t, getRevisedLifetimeCount, revisedLifetimeCount)
+    UAPP_GETTER(uint32_t, getRevisedMaxKeepAliveCount, revisedMaxKeepAliveCount)
 };
 
 /**
@@ -1921,13 +1901,13 @@ public:
         handle()->priority = priority;
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
-    UAPP_COMPOSED_GETTER(uint32_t, getSubscriptionId, subscriptionId)
-    UAPP_COMPOSED_GETTER(double, getRequestedPublishingInterval, requestedPublishingInterval)
-    UAPP_COMPOSED_GETTER(uint32_t, getRequestedLifetimeCount, requestedLifetimeCount)
-    UAPP_COMPOSED_GETTER(uint32_t, getRequestedMaxKeepAliveCount, requestedMaxKeepAliveCount)
-    UAPP_COMPOSED_GETTER(uint32_t, getMaxNotificationsPerPublish, maxNotificationsPerPublish)
-    UAPP_COMPOSED_GETTER(uint8_t, getPriority, priority)
+    UAPP_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_GETTER(uint32_t, getSubscriptionId, subscriptionId)
+    UAPP_GETTER(double, getRequestedPublishingInterval, requestedPublishingInterval)
+    UAPP_GETTER(uint32_t, getRequestedLifetimeCount, requestedLifetimeCount)
+    UAPP_GETTER(uint32_t, getRequestedMaxKeepAliveCount, requestedMaxKeepAliveCount)
+    UAPP_GETTER(uint32_t, getMaxNotificationsPerPublish, maxNotificationsPerPublish)
+    UAPP_GETTER(uint8_t, getPriority, priority)
 };
 
 /**
@@ -1939,10 +1919,10 @@ class ModifySubscriptionResponse
 public:
     using TypeWrapper::TypeWrapper;
 
-    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
-    UAPP_COMPOSED_GETTER(bool, getRevisedPublishingInterval, revisedPublishingInterval)
-    UAPP_COMPOSED_GETTER(uint32_t, getRevisedLifetimeCount, revisedLifetimeCount)
-    UAPP_COMPOSED_GETTER(uint32_t, getRevisedMaxKeepAliveCount, revisedMaxKeepAliveCount)
+    UAPP_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_GETTER(bool, getRevisedPublishingInterval, revisedPublishingInterval)
+    UAPP_GETTER(uint32_t, getRevisedLifetimeCount, revisedLifetimeCount)
+    UAPP_GETTER(uint32_t, getRevisedMaxKeepAliveCount, revisedMaxKeepAliveCount)
 };
 
 /**
@@ -1963,9 +1943,9 @@ public:
         handle()->subscriptionIds = detail::toNativeArray(subscriptionIds);
     }
 
-    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
-    UAPP_COMPOSED_GETTER(bool, getPublishingEnabled, publishingEnabled)
-    UAPP_COMPOSED_GETTER_SPAN(uint32_t, getSubscriptionIds, subscriptionIds, subscriptionIdsSize)
+    UAPP_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_GETTER(bool, getPublishingEnabled, publishingEnabled)
+    UAPP_GETTER_SPAN(uint32_t, getSubscriptionIds, subscriptionIds, subscriptionIdsSize)
 };
 
 /**
@@ -1977,9 +1957,9 @@ class SetPublishingModeResponse
 public:
     using TypeWrapper::TypeWrapper;
 
-    UAPP_COMPOSED_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(StatusCode, getResults, results, resultsSize)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+    UAPP_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_GETTER_SPAN_WRAPPER(StatusCode, getResults, results, resultsSize)
+    UAPP_GETTER_SPAN_WRAPPER(
         DiagnosticInfo, getDiagnosticInfos, diagnosticInfos, diagnosticInfosSize
     )
 };
