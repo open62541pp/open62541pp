@@ -4,7 +4,7 @@
 #include <initializer_list>
 #include <string_view>
 #include <type_traits>
-#include <utility>  // forward
+#include <utility>  // forward, move
 #include <variant>
 
 #include "open62541pp/Bitmask.h"
@@ -15,13 +15,24 @@
 #include "open62541pp/TypeRegistry.h"  // getDataType
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/open62541/common.h"
-#include "open62541pp/detail/traits.h"
+#include "open62541pp/detail/traits.h"  // IsOneOf
+#include "open62541pp/detail/types_conversion.h"  // toNative, toNativeArray
+#include "open62541pp/detail/types_handling.h"  // deallocateArray, copyArray
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/DateTime.h"
 #include "open62541pp/types/ExtensionObject.h"
 #include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"
+
+extern "C" const UA_VariableAttributes UA_VariableAttributes_default;
+extern "C" const UA_VariableTypeAttributes UA_VariableTypeAttributes_default;
+extern "C" const UA_MethodAttributes UA_MethodAttributes_default;
+extern "C" const UA_ObjectAttributes UA_ObjectAttributes_default;
+extern "C" const UA_ObjectTypeAttributes UA_ObjectTypeAttributes_default;
+extern "C" const UA_ReferenceTypeAttributes UA_ReferenceTypeAttributes_default;
+extern "C" const UA_DataTypeAttributes UA_DataTypeAttributes_default;
+extern "C" const UA_ViewAttributes UA_ViewAttributes_default;
 
 // NOLINTNEXTLINE
 #define UAPP_COMPOSED_GETTER(Type, getterName, member)                                             \
@@ -108,7 +119,15 @@ public:
         std::string_view auditEntryId,
         uint32_t timeoutHint,
         ExtensionObject additionalHeader
-    );
+    ) {
+        handle()->authenticationToken = detail::toNative(std::move(authenticationToken));
+        handle()->timestamp = timestamp;
+        handle()->requestHandle = requestHandle;
+        handle()->returnDiagnostics = returnDiagnostics;
+        handle()->auditEntryId = detail::toNative(auditEntryId);
+        handle()->timeoutHint = timeoutHint;
+        handle()->additionalHeader = detail::toNative(std::move(additionalHeader));
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getAuthenticationToken, authenticationToken)
     UAPP_COMPOSED_GETTER_WRAPPER(DateTime, getTimestamp, timestamp)
@@ -159,10 +178,16 @@ public:
     UserTokenPolicy(
         std::string_view policyId,
         UserTokenType tokenType,
-        std::string_view issuedTokenType = {},
-        std::string_view issuerEndpointUrl = {},
-        std::string_view securityPolicyUri = {}
-    );
+        std::string_view issuedTokenType,
+        std::string_view issuerEndpointUrl,
+        std::string_view securityPolicyUri
+    ) {
+        handle()->policyId = detail::toNative(policyId);
+        handle()->tokenType = static_cast<UA_UserTokenType>(tokenType);
+        handle()->issuedTokenType = detail::toNative(issuedTokenType);
+        handle()->issuerEndpointUrl = detail::toNative(issuerEndpointUrl);
+        handle()->securityPolicyUri = detail::toNative(securityPolicyUri);
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(String, getPolicyId, policyId)
     UAPP_COMPOSED_GETTER_CAST(UserTokenType, getTokenType, tokenType)
@@ -330,7 +355,8 @@ public:
     using TypeWrapper::TypeWrapper;
 
     /// Construct with default attribute definitions.
-    ObjectAttributes();
+    ObjectAttributes()
+        : TypeWrapper(UA_ObjectAttributes_default) {}
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR_BITMASK(
@@ -347,7 +373,8 @@ public:
     using TypeWrapper::TypeWrapper;
 
     /// Construct with default attribute definitions.
-    VariableAttributes();
+    VariableAttributes()
+        : TypeWrapper(UA_VariableAttributes_default) {}
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR_WRAPPER(Variant, Value, value, UA_NODEATTRIBUTESMASK_VALUE)
@@ -408,7 +435,8 @@ public:
     using TypeWrapper::TypeWrapper;
 
     /// Construct with default attribute definitions.
-    MethodAttributes();
+    MethodAttributes()
+        : TypeWrapper(UA_MethodAttributes_default) {}
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR(bool, Executable, executable, UA_NODEATTRIBUTESMASK_EXECUTABLE)
@@ -425,7 +453,8 @@ public:
     using TypeWrapper::TypeWrapper;
 
     /// Construct with default attribute definitions.
-    ObjectTypeAttributes();
+    ObjectTypeAttributes()
+        : TypeWrapper(UA_ObjectTypeAttributes_default) {}
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR(bool, IsAbstract, isAbstract, UA_NODEATTRIBUTESMASK_ISABSTRACT)
@@ -441,7 +470,8 @@ public:
     using TypeWrapper::TypeWrapper;
 
     /// Construct with default attribute definitions.
-    VariableTypeAttributes();
+    VariableTypeAttributes()
+        : TypeWrapper(UA_VariableTypeAttributes_default) {}
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR_WRAPPER(Variant, Value, value, UA_NODEATTRIBUTESMASK_VALUE)
@@ -488,7 +518,8 @@ public:
     using TypeWrapper::TypeWrapper;
 
     /// Construct with default attribute definitions.
-    ReferenceTypeAttributes();
+    ReferenceTypeAttributes()
+        : TypeWrapper(UA_ReferenceTypeAttributes_default) {}
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR(bool, IsAbstract, isAbstract, UA_NODEATTRIBUTESMASK_ISABSTRACT)
@@ -507,7 +538,8 @@ public:
     using TypeWrapper::TypeWrapper;
 
     /// Construct with default attribute definitions.
-    DataTypeAttributes();
+    DataTypeAttributes()
+        : TypeWrapper(UA_DataTypeAttributes_default) {}
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR(bool, IsAbstract, isAbstract, UA_NODEATTRIBUTESMASK_ISABSTRACT)
@@ -522,7 +554,8 @@ public:
     using TypeWrapper::TypeWrapper;
 
     /// Construct with default attribute definitions.
-    ViewAttributes();
+    ViewAttributes()
+        : TypeWrapper(UA_ViewAttributes_default) {}
 
     UAPP_NODEATTR_COMMON
     UAPP_NODEATTR(bool, IsAbstract, containsNoLoops, UA_NODEATTRIBUTESMASK_CONTAINSNOLOOPS)
@@ -618,7 +651,15 @@ public:
         NodeClass nodeClass,
         ExtensionObject nodeAttributes,
         ExpandedNodeId typeDefinition
-    );
+    ) {
+        handle()->parentNodeId = detail::toNative(std::move(parentNodeId));
+        handle()->referenceTypeId = detail::toNative(std::move(referenceTypeId));
+        handle()->requestedNewNodeId = detail::toNative(std::move(requestedNewNodeId));
+        handle()->browseName = detail::toNative(std::move(browseName));
+        handle()->nodeClass = static_cast<UA_NodeClass>(nodeClass);
+        handle()->nodeAttributes = detail::toNative(std::move(nodeAttributes));
+        handle()->typeDefinition = detail::toNative(std::move(typeDefinition));
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(ExpandedNodeId, getParentNodeId, parentNodeId)
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getReferenceTypeId, referenceTypeId)
@@ -649,7 +690,11 @@ class AddNodesRequest : public TypeWrapper<UA_AddNodesRequest, UA_TYPES_ADDNODES
 public:
     using TypeWrapper::TypeWrapper;
 
-    AddNodesRequest(RequestHeader requestHeader, Span<const AddNodesItem> nodesToAdd);
+    AddNodesRequest(RequestHeader requestHeader, Span<const AddNodesItem> nodesToAdd) {
+        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->nodesToAddSize = nodesToAdd.size();
+        handle()->nodesToAdd = detail::toNativeArray(nodesToAdd);
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(AddNodesItem, getNodesToAdd, nodesToAdd, nodesToAddSize)
@@ -685,7 +730,14 @@ public:
         std::string_view targetServerUri,
         ExpandedNodeId targetNodeId,
         NodeClass targetNodeClass
-    );
+    ) {
+        handle()->sourceNodeId = detail::toNative(std::move(sourceNodeId));
+        handle()->referenceTypeId = detail::toNative(std::move(referenceTypeId));
+        handle()->isForward = isForward;
+        handle()->targetServerUri = detail::toNative(targetServerUri);
+        handle()->targetNodeId = detail::toNative(std::move(targetNodeId));
+        handle()->targetNodeClass = static_cast<UA_NodeClass>(targetNodeClass);
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getSourceNodeId, sourceNodeId)
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getReferenceTypeId, referenceTypeId)
@@ -706,7 +758,11 @@ public:
 
     AddReferencesRequest(
         RequestHeader requestHeader, Span<const AddReferencesItem> referencesToAdd
-    );
+    ) {
+        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->referencesToAddSize = referencesToAdd.size();
+        handle()->referencesToAdd = detail::toNativeArray(referencesToAdd);
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
@@ -738,7 +794,10 @@ class DeleteNodesItem : public TypeWrapper<UA_DeleteNodesItem, UA_TYPES_DELETENO
 public:
     using TypeWrapper::TypeWrapper;
 
-    DeleteNodesItem(NodeId nodeId, bool deleteTargetReferences);
+    DeleteNodesItem(NodeId nodeId, bool deleteTargetReferences) {
+        handle()->nodeId = detail::toNative(std::move(nodeId));
+        handle()->deleteTargetReferences = deleteTargetReferences;
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getNodeId, nodeId)
     UAPP_COMPOSED_GETTER(bool, getDeleteTargetReferences, deleteTargetReferences)
@@ -752,7 +811,11 @@ class DeleteNodesRequest : public TypeWrapper<UA_DeleteNodesRequest, UA_TYPES_DE
 public:
     using TypeWrapper::TypeWrapper;
 
-    DeleteNodesRequest(RequestHeader requestHeader, Span<const DeleteNodesItem> nodesToDelete);
+    DeleteNodesRequest(RequestHeader requestHeader, Span<const DeleteNodesItem> nodesToDelete) {
+        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->nodesToDeleteSize = nodesToDelete.size();
+        handle()->nodesToDelete = detail::toNativeArray(nodesToDelete);
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
@@ -791,7 +854,13 @@ public:
         bool isForward,
         ExpandedNodeId targetNodeId,
         bool deleteBidirectional
-    );
+    ) {
+        handle()->sourceNodeId = detail::toNative(std::move(sourceNodeId));
+        handle()->referenceTypeId = detail::toNative(std::move(referenceTypeId));
+        handle()->isForward = isForward;
+        handle()->targetNodeId = detail::toNative(std::move(targetNodeId));
+        handle()->deleteBidirectional = deleteBidirectional;
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getSourceNodeId, sourceNodeId)
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getReferenceTypeId, referenceTypeId)
@@ -811,7 +880,11 @@ public:
 
     DeleteReferencesRequest(
         RequestHeader requestHeader, Span<const DeleteReferencesItem> referencesToDelete
-    );
+    ) {
+        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->referencesToDeleteSize = referencesToDelete.size();
+        handle()->referencesToDelete = detail::toNativeArray(referencesToDelete);
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
@@ -842,7 +915,11 @@ class ViewDescription : public TypeWrapper<UA_ViewDescription, UA_TYPES_VIEWDESC
 public:
     using TypeWrapper::TypeWrapper;
 
-    ViewDescription(NodeId viewId, DateTime timestamp, uint32_t viewVersion);
+    ViewDescription(NodeId viewId, DateTime timestamp, uint32_t viewVersion) {
+        handle()->viewId = detail::toNative(std::move(viewId));
+        handle()->timestamp = timestamp;
+        handle()->viewVersion = viewVersion;
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getViewId, viewId)
     UAPP_COMPOSED_GETTER_WRAPPER(DateTime, getTimestamp, timestamp)
@@ -893,7 +970,14 @@ public:
         bool includeSubtypes = true,
         Bitmask<NodeClass> nodeClassMask = NodeClass::Unspecified,
         Bitmask<BrowseResultMask> resultMask = BrowseResultMask::All
-    );
+    ) {
+        handle()->nodeId = detail::toNative(std::move(nodeId));
+        handle()->browseDirection = static_cast<UA_BrowseDirection>(browseDirection);
+        handle()->referenceTypeId = detail::toNative(std::move(referenceTypeId));
+        handle()->includeSubtypes = includeSubtypes;
+        handle()->nodeClassMask = nodeClassMask.get();
+        handle()->resultMask = resultMask.get();
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getNodeId, nodeId)
     UAPP_COMPOSED_GETTER_CAST(BrowseDirection, getBrowseDirection, browseDirection)
@@ -901,6 +985,34 @@ public:
     UAPP_COMPOSED_GETTER(bool, getIncludeSubtypes, includeSubtypes)
     UAPP_COMPOSED_GETTER(Bitmask<NodeClass>, getNodeClassMask, nodeClassMask)
     UAPP_COMPOSED_GETTER(Bitmask<BrowseResultMask>, getResultMask, resultMask)
+};
+
+/**
+ * UA_BrowseRequest wrapper class.
+ */
+class BrowseRequest : public TypeWrapper<UA_BrowseRequest, UA_TYPES_BROWSEREQUEST> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    BrowseRequest(
+        RequestHeader requestHeader,
+        ViewDescription view,
+        uint32_t requestedMaxReferencesPerNode,
+        Span<const BrowseDescription> nodesToBrowse
+    ) {
+        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->view = detail::toNative(std::move(view));
+        handle()->requestedMaxReferencesPerNode = requestedMaxReferencesPerNode;
+        handle()->nodesToBrowseSize = nodesToBrowse.size();
+        handle()->nodesToBrowse = detail::toNativeArray(nodesToBrowse);
+    }
+
+    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_COMPOSED_GETTER_WRAPPER(ViewDescription, getView, view)
+    UAPP_COMPOSED_GETTER(uint32_t, getRequestedMaxReferencesPerNode, requestedMaxReferencesPerNode)
+    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
+        BrowseDescription, getNodesToBrowse, nodesToBrowse, nodesToBrowseSize
+    )
 };
 
 /**
@@ -937,28 +1049,6 @@ public:
 };
 
 /**
- * UA_BrowseRequest wrapper class.
- */
-class BrowseRequest : public TypeWrapper<UA_BrowseRequest, UA_TYPES_BROWSEREQUEST> {
-public:
-    using TypeWrapper::TypeWrapper;
-
-    BrowseRequest(
-        RequestHeader requestHeader,
-        ViewDescription view,
-        uint32_t requestedMaxReferencesPerNode,
-        Span<const BrowseDescription> nodesToBrowse
-    );
-
-    UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
-    UAPP_COMPOSED_GETTER_WRAPPER(ViewDescription, getView, view)
-    UAPP_COMPOSED_GETTER(uint32_t, getRequestedMaxReferencesPerNode, requestedMaxReferencesPerNode)
-    UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
-        BrowseDescription, getNodesToBrowse, nodesToBrowse, nodesToBrowseSize
-    )
-};
-
-/**
  * UA_BrowseResponse wrapper class.
  */
 class BrowseResponse : public TypeWrapper<UA_BrowseResponse, UA_TYPES_BROWSERESPONSE> {
@@ -983,7 +1073,12 @@ public:
         RequestHeader requestHeader,
         bool releaseContinuationPoints,
         Span<const ByteString> continuationPoints
-    );
+    ) {
+        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->releaseContinuationPoints = releaseContinuationPoints;
+        handle()->continuationPointsSize = continuationPoints.size();
+        handle()->continuationPoints = detail::toNativeArray(continuationPoints);
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
     UAPP_COMPOSED_GETTER(bool, getReleaseContinuationPoints, releaseContinuationPoints)
@@ -1016,7 +1111,12 @@ public:
 
     RelativePathElement(
         NodeId referenceTypeId, bool isInverse, bool includeSubtypes, QualifiedName targetName
-    );
+    ) {
+        handle()->referenceTypeId = detail::toNative(std::move(referenceTypeId));
+        handle()->isInverse = isInverse;
+        handle()->includeSubtypes = includeSubtypes;
+        handle()->targetName = detail::toNative(std::move(targetName));
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getReferenceTypeId, referenceTypeId)
     UAPP_COMPOSED_GETTER(bool, getIsInverse, isInverse)
@@ -1031,8 +1131,13 @@ class RelativePath : public TypeWrapper<UA_RelativePath, UA_TYPES_RELATIVEPATH> 
 public:
     using TypeWrapper::TypeWrapper;
 
-    RelativePath(std::initializer_list<RelativePathElement> elements);
-    explicit RelativePath(Span<const RelativePathElement> elements);
+    RelativePath(std::initializer_list<RelativePathElement> elements)
+        : RelativePath({elements.begin(), elements.size()}) {}
+
+    explicit RelativePath(Span<const RelativePathElement> elements) {
+        handle()->elementsSize = elements.size();
+        handle()->elements = detail::toNativeArray(elements);
+    }
 
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(RelativePathElement, getElements, elements, elementsSize)
 };
@@ -1044,7 +1149,10 @@ class BrowsePath : public TypeWrapper<UA_BrowsePath, UA_TYPES_BROWSEPATH> {
 public:
     using TypeWrapper::TypeWrapper;
 
-    BrowsePath(NodeId startingNode, RelativePath relativePath);
+    BrowsePath(NodeId startingNode, RelativePath relativePath) {
+        handle()->startingNode = detail::toNative(std::move(startingNode));
+        handle()->relativePath = detail::toNative(std::move(relativePath));
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getStartingNode, startingNode)
     UAPP_COMPOSED_GETTER_WRAPPER(RelativePath, getRelativePath, relativePath)
@@ -1084,7 +1192,11 @@ public:
 
     TranslateBrowsePathsToNodeIdsRequest(
         RequestHeader requestHeader, Span<const BrowsePath> browsePaths
-    );
+    ) {
+        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->browsePathsSize = browsePaths.size();
+        handle()->browsePaths = detail::toNativeArray(browsePaths);
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(BrowsePath, getBrowsePaths, browsePaths, browsePathsSize)
@@ -1115,7 +1227,11 @@ class RegisterNodesRequest
 public:
     using TypeWrapper::TypeWrapper;
 
-    RegisterNodesRequest(RequestHeader requestHeader, Span<const NodeId> nodesToRegister);
+    RegisterNodesRequest(RequestHeader requestHeader, Span<const NodeId> nodesToRegister) {
+        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->nodesToRegisterSize = nodesToRegister.size();
+        handle()->nodesToRegister = detail::toNativeArray(nodesToRegister);
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
@@ -1145,7 +1261,11 @@ class UnregisterNodesRequest
 public:
     using TypeWrapper::TypeWrapper;
 
-    UnregisterNodesRequest(RequestHeader requestHeader, Span<const NodeId> nodesToUnregister);
+    UnregisterNodesRequest(RequestHeader requestHeader, Span<const NodeId> nodesToUnregister) {
+        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->nodesToUnregisterSize = nodesToUnregister.size();
+        handle()->nodesToUnregister = detail::toNativeArray(nodesToUnregister);
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
@@ -1177,7 +1297,12 @@ public:
         AttributeId attributeId,
         std::string_view indexRange = {},
         QualifiedName dataEncoding = {}
-    );
+    ) {
+        handle()->nodeId = detail::toNative(std::move(nodeId));
+        handle()->attributeId = detail::toNative(attributeId);
+        handle()->indexRange = detail::toNative(indexRange);
+        handle()->dataEncoding = detail::toNative(std::move(dataEncoding));
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getNodeId, nodeId)
     UAPP_COMPOSED_GETTER_CAST(AttributeId, getAttributeId, attributeId)
@@ -1198,7 +1323,13 @@ public:
         double maxAge,
         TimestampsToReturn timestampsToReturn,
         Span<const ReadValueId> nodesToRead
-    );
+    ) {
+        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->maxAge = maxAge;
+        handle()->timestampsToReturn = static_cast<UA_TimestampsToReturn>(timestampsToReturn);
+        handle()->nodesToReadSize = nodesToRead.size();
+        handle()->nodesToRead = detail::toNativeArray(nodesToRead);
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
     UAPP_COMPOSED_GETTER(double, getMaxAge, maxAge)
@@ -1231,7 +1362,12 @@ public:
 
     WriteValue(
         NodeId nodeId, AttributeId attributeId, std::string_view indexRange, DataValue value
-    );
+    ) {
+        handle()->nodeId = detail::toNative(std::move(nodeId));
+        handle()->attributeId = detail::toNative(attributeId);
+        handle()->indexRange = detail::toNative(indexRange);
+        handle()->value = detail::toNative(std::move(value));
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getNodeId, nodeId)
     UAPP_COMPOSED_GETTER_CAST(AttributeId, getAttributeId, attributeId)
@@ -1247,7 +1383,11 @@ class WriteRequest : public TypeWrapper<UA_WriteRequest, UA_TYPES_WRITEREQUEST> 
 public:
     using TypeWrapper::TypeWrapper;
 
-    WriteRequest(RequestHeader requestHeader, Span<const WriteValue> nodesToWrite);
+    WriteRequest(RequestHeader requestHeader, Span<const WriteValue> nodesToWrite) {
+        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->nodesToWriteSize = nodesToWrite.size();
+        handle()->nodesToWrite = detail::toNativeArray(nodesToWrite);
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(WriteValue, getNodesToWrite, nodesToWrite, nodesToWriteSize)
@@ -1276,7 +1416,11 @@ class EnumValueType : public TypeWrapper<UA_EnumValueType, UA_TYPES_ENUMVALUETYP
 public:
     using TypeWrapper::TypeWrapper;
 
-    EnumValueType(int64_t value, LocalizedText displayName, LocalizedText description);
+    EnumValueType(int64_t value, LocalizedText displayName, LocalizedText description) {
+        handle()->value = value;
+        handle()->displayName = detail::toNative(std::move(displayName));
+        handle()->description = detail::toNative(std::move(description));
+    }
 
     UAPP_COMPOSED_GETTER(int64_t, getValue, value)
     UAPP_COMPOSED_GETTER_WRAPPER(LocalizedText, getDisplayName, displayName)
@@ -1301,7 +1445,14 @@ public:
         NodeId dataType,
         ValueRank valueRank = {},
         Span<const uint32_t> arrayDimensions = {}
-    );
+    ) {
+        handle()->name = detail::toNative(name);
+        handle()->description = detail::toNative(std::move(description));
+        handle()->dataType = detail::toNative(std::move(dataType));
+        handle()->valueRank = detail::toNative(valueRank);
+        handle()->arrayDimensionsSize = arrayDimensions.size();
+        handle()->arrayDimensions = detail::toNativeArray(arrayDimensions);
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(String, getName, name)
     UAPP_COMPOSED_GETTER_WRAPPER(LocalizedText, getDescription, description)
@@ -1318,7 +1469,12 @@ class CallMethodRequest : public TypeWrapper<UA_CallMethodRequest, UA_TYPES_CALL
 public:
     using TypeWrapper::TypeWrapper;
 
-    CallMethodRequest(NodeId objectId, NodeId methodId, Span<const Variant> inputArguments);
+    CallMethodRequest(NodeId objectId, NodeId methodId, Span<const Variant> inputArguments) {
+        handle()->objectId = detail::toNative(std::move(objectId));
+        handle()->methodId = detail::toNative(std::move(methodId));
+        handle()->inputArgumentsSize = inputArguments.size();
+        handle()->inputArguments = detail::toNativeArray(inputArguments);
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getObjectId, objectId)
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getMethodId, methodId)
@@ -1358,7 +1514,11 @@ class CallRequest : public TypeWrapper<UA_CallRequest, UA_TYPES_CALLREQUEST> {
 public:
     using TypeWrapper::TypeWrapper;
 
-    CallRequest(RequestHeader requestHeader, Span<const CallMethodRequest> methodsToCall);
+    CallRequest(RequestHeader requestHeader, Span<const CallMethodRequest> methodsToCall) {
+        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->methodsToCallSize = methodsToCall.size();
+        handle()->methodsToCall = detail::toNativeArray(methodsToCall);
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
@@ -1424,7 +1584,9 @@ class ElementOperand : public TypeWrapper<UA_ElementOperand, UA_TYPES_ELEMENTOPE
 public:
     using TypeWrapper::TypeWrapper;
 
-    explicit ElementOperand(uint32_t index);
+    explicit ElementOperand(uint32_t index) {
+        handle()->index = index;
+    }
 
     UAPP_COMPOSED_GETTER(uint32_t, getIndex, index)
 };
@@ -1442,7 +1604,9 @@ private:
 public:
     using TypeWrapper::TypeWrapper;
 
-    explicit LiteralOperand(Variant value);
+    explicit LiteralOperand(Variant value) {
+        handle()->value = detail::toNative(std::move(value));
+    }
 
     template <typename T, typename = EnableIfLiteral<T>>
     explicit LiteralOperand(T&& literal)
@@ -1465,7 +1629,13 @@ public:
         RelativePath browsePath,
         AttributeId attributeId,
         std::string_view indexRange = {}
-    );
+    ) {
+        handle()->nodeId = detail::toNative(std::move(nodeId));
+        handle()->alias = detail::toNative(alias);
+        handle()->browsePath = detail::toNative(std::move(browsePath));
+        handle()->attributeId = detail::toNative(attributeId);
+        handle()->indexRange = detail::toNative(indexRange);
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getNodeId, nodeId)
     UAPP_COMPOSED_GETTER_WRAPPER(String, getAlias, alias)
@@ -1488,7 +1658,13 @@ public:
         Span<const QualifiedName> browsePath,
         AttributeId attributeId,
         std::string_view indexRange = {}
-    );
+    ) {
+        handle()->typeDefinitionId = detail::toNative(std::move(typeDefinitionId));
+        handle()->browsePathSize = browsePath.size();
+        handle()->browsePath = detail::toNativeArray(browsePath);
+        handle()->attributeId = detail::toNative(attributeId);
+        handle()->indexRange = detail::toNative(indexRange);
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getTypeDefinitionId, typeDefinitionId)
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(QualifiedName, getBrowsePath, browsePath, browsePathSize)
@@ -1604,7 +1780,11 @@ class DataChangeFilter : public TypeWrapper<UA_DataChangeFilter, UA_TYPES_DATACH
 public:
     using TypeWrapper::TypeWrapper;
 
-    DataChangeFilter(DataChangeTrigger trigger, DeadbandType deadbandType, double deadbandValue);
+    DataChangeFilter(DataChangeTrigger trigger, DeadbandType deadbandType, double deadbandValue) {
+        handle()->trigger = static_cast<UA_DataChangeTrigger>(trigger);
+        handle()->deadbandType = detail::toNative(deadbandType);
+        handle()->deadbandValue = deadbandValue;
+    }
 
     UAPP_COMPOSED_GETTER_CAST(DataChangeTrigger, getTrigger, trigger)
     UAPP_COMPOSED_GETTER_CAST(DeadbandType, getDeadbandType, deadbandType)
@@ -1619,7 +1799,11 @@ class EventFilter : public TypeWrapper<UA_EventFilter, UA_TYPES_EVENTFILTER> {
 public:
     using TypeWrapper::TypeWrapper;
 
-    EventFilter(Span<const SimpleAttributeOperand> selectClauses, ContentFilter whereClause);
+    EventFilter(Span<const SimpleAttributeOperand> selectClauses, ContentFilter whereClause) {
+        handle()->selectClausesSize = selectClauses.size();
+        handle()->selectClauses = detail::toNativeArray(selectClauses);
+        handle()->whereClause = detail::toNative(std::move(whereClause));
+    }
 
     UAPP_COMPOSED_GETTER_SPAN_WRAPPER(
         SimpleAttributeOperand, getSelectClauses, selectClauses, selectClausesSize
@@ -1642,7 +1826,12 @@ public:
         NodeId aggregateType,
         double processingInterval,
         AggregateConfiguration aggregateConfiguration
-    );
+    ) {
+        handle()->startTime = detail::toNative(std::move(startTime));
+        handle()->aggregateType = detail::toNative(std::move(aggregateType));
+        handle()->processingInterval = processingInterval;
+        handle()->aggregateConfiguration = aggregateConfiguration;  // TODO: make wrapper?
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(DateTime, getStartTime, startTime)
     UAPP_COMPOSED_GETTER_WRAPPER(NodeId, getAggregateType, aggregateType)
@@ -1667,7 +1856,15 @@ public:
         uint32_t maxNotificationsPerPublish,
         bool publishingEnabled,
         uint8_t priority
-    );
+    ) {
+        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->requestedPublishingInterval = requestedPublishingInterval;
+        handle()->requestedLifetimeCount = requestedLifetimeCount;
+        handle()->requestedMaxKeepAliveCount = requestedMaxKeepAliveCount;
+        handle()->maxNotificationsPerPublish = maxNotificationsPerPublish;
+        handle()->publishingEnabled = publishingEnabled;
+        handle()->priority = priority;
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
     UAPP_COMPOSED_GETTER(double, getRequestedPublishingInterval, requestedPublishingInterval)
@@ -1711,7 +1908,15 @@ public:
         uint32_t requestedMaxKeepAliveCount,
         uint32_t maxNotificationsPerPublish,
         uint8_t priority
-    );
+    ) {
+        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->subscriptionId = subscriptionId;
+        handle()->requestedPublishingInterval = requestedPublishingInterval;
+        handle()->requestedLifetimeCount = requestedLifetimeCount;
+        handle()->requestedMaxKeepAliveCount = requestedMaxKeepAliveCount;
+        handle()->maxNotificationsPerPublish = maxNotificationsPerPublish;
+        handle()->priority = priority;
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
     UAPP_COMPOSED_GETTER(uint32_t, getSubscriptionId, subscriptionId)
@@ -1748,7 +1953,12 @@ public:
 
     SetPublishingModeRequest(
         RequestHeader requestHeader, bool publishingEnabled, Span<const uint32_t> subscriptionIds
-    );
+    ) {
+        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->publishingEnabled = publishingEnabled;
+        handle()->subscriptionIdsSize = subscriptionIds.size();
+        handle()->subscriptionIds = detail::toNativeArray(subscriptionIds);
+    }
 
     UAPP_COMPOSED_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
     UAPP_COMPOSED_GETTER(bool, getPublishingEnabled, publishingEnabled)
