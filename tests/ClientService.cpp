@@ -138,6 +138,20 @@ TEST_CASE("sendRequest") {
             });
             CHECK_THROWS_AS_MESSAGE(client.runIterate(), std::runtime_error, "Error");
         }
+
+        SUBCASE("Disconnected") {
+            client.disconnect();
+            sendReadRequest(
+                services::detail::WrapResponse<ReadResponse>{},
+                [&](Result<ReadResponse> result) {
+                    CHECK(result.code().isGood());
+                    CHECK(
+                        result.value().getResponseHeader().getServiceResult() ==
+                        UA_STATUSCODE_BADSERVERNOTCONNECTED
+                    );
+                }
+            );
+        }
     }
 
     SUBCASE("Sync") {
@@ -156,6 +170,16 @@ TEST_CASE("sendRequest") {
                 ),
                 std::runtime_error,
                 "Error"
+            );
+        }
+
+        SUBCASE("Disconnected") {
+            client.disconnect();
+            const auto response = sendReadRequest(
+                services::detail::WrapResponse<ReadResponse>{}, services::detail::SyncOperation{}
+            );
+            CHECK(
+                response.getResponseHeader().getServiceResult() == UA_STATUSCODE_BADCONNECTIONCLOSED
             );
         }
     }

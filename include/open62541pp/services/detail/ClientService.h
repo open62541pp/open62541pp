@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <functional>  // invoke
+#include <memory>
 #include <tuple>
 #include <type_traits>
 #include <utility>  // forward
@@ -127,7 +128,11 @@ auto sendRequest(
                 userdata,
                 nullptr
             );
-            throwIfBad(status);
+            if (opcua::detail::isBad(status)) {
+                Response response{};
+                response.responseHeader.serviceResult = status;
+                callback(client.handle(), userdata, {}, &response);
+            }
         },
         std::forward<TransformResponse>(transformResponse),
         std::forward<CompletionToken>(token)
