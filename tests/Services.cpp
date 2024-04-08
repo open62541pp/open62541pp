@@ -13,7 +13,6 @@
 #include "open62541pp/types/ExtensionObject.h"
 
 #include "helper/ServerClientSetup.h"
-#include "helper/discard.h"
 #include "helper/stringify.h"
 
 using namespace opcua;
