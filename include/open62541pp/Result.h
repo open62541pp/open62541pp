@@ -368,6 +368,28 @@ public:
         return code_;
     }
 
+    /**
+     * Check if the Result has a non-bad StatusCode.
+     */
+    constexpr explicit operator bool() const noexcept {
+        return hasValue();
+    }
+
+    /*
+     * Check if the Result has a non-bad StatusCode.
+     */
+    constexpr bool hasValue() const noexcept {
+        return !code_.isBad();
+    }
+
+    /**
+     * Get the value of the Result.
+     * @exception BadStatus If the Result does have a bad StatusCode.
+     */
+    constexpr void value() const {
+        code().throwIfBad();
+    }
+
 private:
     StatusCode code_;
 };
