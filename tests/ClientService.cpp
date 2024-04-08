@@ -3,6 +3,7 @@
 #include <doctest/doctest.h>
 
 #include "open62541pp/Client.h"
+#include "open62541pp/Config.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/services/detail/ClientService.h"
@@ -132,15 +133,17 @@ TEST_CASE("sendRequest") {
             CHECK_THROWS_AS_MESSAGE(client.runIterate(), std::runtime_error, "Error");
         }
 
+#if UAPP_OPEN62541_VER_GE(1, 1)
         SUBCASE("Disconnected") {
             client.disconnect();
             sendReadRequest(services::detail::Wrap<ReadResponse>{}, [&](ReadResponse& response) {
                 CHECK(
-                    response.getResponseHeader().getServiceResult() ==
+                    response.getResponseHeader().getServiceResult().get() ==
                     UA_STATUSCODE_BADSERVERNOTCONNECTED
                 );
             });
         }
+#endif
     }
 
     SUBCASE("Sync") {
@@ -168,7 +171,8 @@ TEST_CASE("sendRequest") {
                 services::detail::Wrap<ReadResponse>{}, services::detail::SyncOperation{}
             );
             CHECK(
-                response.getResponseHeader().getServiceResult() == UA_STATUSCODE_BADCONNECTIONCLOSED
+                response.getResponseHeader().getServiceResult().get() ==
+                UA_STATUSCODE_BADCONNECTIONCLOSED
             );
         }
     }
