@@ -232,21 +232,19 @@ public:
 
     /// @wrapper{services::addReference}
     Node& addReference(const NodeId& targetId, const NodeId& referenceType, bool forward = true) {
-        services::addReference(connection_, id_, targetId, referenceType, forward)
-            .code()
-            .throwIfBad();
+        services::addReference(connection_, id_, targetId, referenceType, forward).value();
         return *this;
     }
 
     /// @wrapper{services::addModellingRule}
     Node& addModellingRule(ModellingRule rule) {
-        services::addModellingRule(connection_, id_, rule).code().throwIfBad();
+        services::addModellingRule(connection_, id_, rule).value();
         return *this;
     }
 
     /// @wrapper{services::deleteNode}
     void deleteNode(bool deleteReferences = true) {
-        services::deleteNode(connection_, id_, deleteReferences).code().throwIfBad();
+        services::deleteNode(connection_, id_, deleteReferences).value();
     }
 
     /// @wrapper{services::deleteReference}
@@ -259,8 +257,7 @@ public:
         services::deleteReference(
             connection_, id_, targetId, referenceType, isForward, deleteBidirectional
         )
-            .code()
-            .throwIfBad();
+            .value();
         return *this;
     }
 
@@ -484,67 +481,67 @@ public:
 
     /// @wrapper{services::writeDisplayName}
     Node& writeDisplayName(const LocalizedText& name) {
-        services::writeDisplayName(connection_, id_, name).code().throwIfBad();
+        services::writeDisplayName(connection_, id_, name).value();
         return *this;
     }
 
     /// @wrapper{services::writeDescription}
     Node& writeDescription(const LocalizedText& desc) {
-        services::writeDescription(connection_, id_, desc).code().throwIfBad();
+        services::writeDescription(connection_, id_, desc).value();
         return *this;
     }
 
     /// @wrapper{services::writeWriteMask}
     Node& writeWriteMask(Bitmask<WriteMask> mask) {
-        services::writeWriteMask(connection_, id_, mask).code().throwIfBad();
+        services::writeWriteMask(connection_, id_, mask).value();
         return *this;
     }
 
     /// @wrapper{services::writeWriteMask}
     Node& writeUserWriteMask(Bitmask<WriteMask> mask) {
-        services::writeUserWriteMask(connection_, id_, mask).code().throwIfBad();
+        services::writeUserWriteMask(connection_, id_, mask).value();
         return *this;
     }
 
     /// @wrapper{services::writeIsAbstract}
     Node& writeIsAbstract(bool isAbstract) {
-        services::writeIsAbstract(connection_, id_, isAbstract).code().throwIfBad();
+        services::writeIsAbstract(connection_, id_, isAbstract).value();
         return *this;
     }
 
     /// @wrapper{services::writeSymmetric}
     Node& writeSymmetric(bool symmetric) {
-        services::writeSymmetric(connection_, id_, symmetric).code().throwIfBad();
+        services::writeSymmetric(connection_, id_, symmetric).value();
         return *this;
     }
 
     /// @wrapper{services::writeInverseName}
     Node& writeInverseName(const LocalizedText& name) {
-        services::writeInverseName(connection_, id_, name).code().throwIfBad();
+        services::writeInverseName(connection_, id_, name).value();
         return *this;
     }
 
     /// @wrapper{services::writeContainsNoLoops}
     Node& writeContainsNoLoops(bool containsNoLoops) {
-        services::writeContainsNoLoops(connection_, id_, containsNoLoops).code().throwIfBad();
+        services::writeContainsNoLoops(connection_, id_, containsNoLoops).value();
         return *this;
     }
 
     /// @wrapper{services::writeEventNotifier}
     Node& writeEventNotifier(Bitmask<EventNotifier> mask) {
-        services::writeEventNotifier(connection_, id_, mask).code().throwIfBad();
+        services::writeEventNotifier(connection_, id_, mask).value();
         return *this;
     }
 
     /// @wrapper{services::writeDataValue}
     Node& writeDataValue(const DataValue& value) {
-        services::writeDataValue(connection_, id_, value).code().throwIfBad();
+        services::writeDataValue(connection_, id_, value).value();
         return *this;
     }
 
     /// @wrapper{services::writeValue}
     Node& writeValue(const Variant& value) {
-        services::writeValue(connection_, id_, value).code().throwIfBad();
+        services::writeValue(connection_, id_, value).value();
         return *this;
     }
 
@@ -574,7 +571,7 @@ public:
 
     /// @wrapper{services::writeDataType}
     Node& writeDataType(const NodeId& typeId) {
-        services::writeDataType(connection_, id_, typeId).code().throwIfBad();
+        services::writeDataType(connection_, id_, typeId).value();
         return *this;
     }
 
@@ -587,49 +584,49 @@ public:
 
     /// @wrapper{services::writeValueRank}
     Node& writeValueRank(ValueRank valueRank) {
-        services::writeValueRank(connection_, id_, valueRank).code().throwIfBad();
+        services::writeValueRank(connection_, id_, valueRank).value();
         return *this;
     }
 
     /// @wrapper{services::writeArrayDimensions}
     Node& writeArrayDimensions(Span<const uint32_t> dimensions) {
-        services::writeArrayDimensions(connection_, id_, dimensions).code().throwIfBad();
+        services::writeArrayDimensions(connection_, id_, dimensions).value();
         return *this;
     }
 
     /// @wrapper{services::writeAccessLevel}
     Node& writeAccessLevel(Bitmask<AccessLevel> mask) {
-        services::writeAccessLevel(connection_, id_, mask).code().throwIfBad();
+        services::writeAccessLevel(connection_, id_, mask).value();
         return *this;
     }
 
     /// @wrapper{services::writeUserAccessLevel}
     Node& writeUserAccessLevel(Bitmask<AccessLevel> mask) {
-        services::writeUserAccessLevel(connection_, id_, mask).code().throwIfBad();
+        services::writeUserAccessLevel(connection_, id_, mask).value();
         return *this;
     }
 
     /// @wrapper{services::writeMinimumSamplingInterval}
     Node& writeMinimumSamplingInterval(double milliseconds) {
-        services::writeMinimumSamplingInterval(connection_, id_, milliseconds).code().throwIfBad();
+        services::writeMinimumSamplingInterval(connection_, id_, milliseconds).value();
         return *this;
     }
 
     /// @wrapper{services::writeHistorizing}
     Node& writeHistorizing(bool historizing) {
-        services::writeHistorizing(connection_, id_, historizing).code().throwIfBad();
+        services::writeHistorizing(connection_, id_, historizing).value();
         return *this;
     }
 
     /// @wrapper{services::writeExecutable}
     Node& writeExecutable(bool executable) {
-        services::writeExecutable(connection_, id_, executable).code().throwIfBad();
+        services::writeExecutable(connection_, id_, executable).value();
         return *this;
     }
 
     /// @wrapper{services::writeUserExecutable}
     Node& writeUserExecutable(bool userExecutable) {
-        services::writeUserExecutable(connection_, id_, userExecutable).code().throwIfBad();
+        services::writeUserExecutable(connection_, id_, userExecutable).value();
         return *this;
     }
 

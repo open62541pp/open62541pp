@@ -96,8 +96,7 @@ public:
     /// @see services::modifyMonitoredItem
     void setMonitoringParameters(MonitoringParametersEx& parameters) {
         services::modifyMonitoredItem(connection_, subscriptionId_, monitoredItemId_, parameters)
-            .code()
-            .throwIfBad();
+            .value();
     }
 
     /// Set the monitoring mode of this monitored item.
@@ -105,16 +104,13 @@ public:
     /// @see services::setMonitoringMode
     void setMonitoringMode(MonitoringMode monitoringMode) {
         services::setMonitoringMode(connection_, subscriptionId_, monitoredItemId_, monitoringMode)
-            .code()
-            .throwIfBad();
+            .value();
     }
 
     /// Delete this monitored item.
     /// @see services::deleteMonitoredItem
     void deleteMonitoredItem() {
-        services::deleteMonitoredItem(connection_, subscriptionId_, monitoredItemId_)
-            .code()
-            .throwIfBad();
+        services::deleteMonitoredItem(connection_, subscriptionId_, monitoredItemId_).value();
     }
 
 private:

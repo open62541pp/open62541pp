@@ -194,7 +194,7 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
                 );
             }
         };
-        CHECK(addReference().code().isGood());
+        CHECK(addReference());
         CHECK(addReference().code() == UA_STATUSCODE_BADDUPLICATEREFERENCENOTALLOWED);
 
         auto deleteReference = [&] {
@@ -210,7 +210,7 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
                 );
             }
         };
-        CHECK(deleteReference().code().isGood());
+        CHECK(deleteReference());
     }
 
     SUBCASE("Delete node") {
@@ -225,7 +225,7 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
                 return services::deleteNode(connection, {1, 1000});
             }
         };
-        CHECK(deleteNode().code().isGood());
+        CHECK(deleteNode());
         CHECK(deleteNode().code() == UA_STATUSCODE_BADNODEIDUNKNOWN);
     }
 
@@ -309,7 +309,7 @@ TEST_CASE("Attribute service set (highlevel)") {
 
         // write new attributes
         const auto eventNotifier = EventNotifier::HistoryRead | EventNotifier::HistoryWrite;
-        CHECK(services::writeEventNotifier(server, id, eventNotifier).code().isGood());
+        CHECK(services::writeEventNotifier(server, id, eventNotifier));
 
         // read new attributes
         CHECK(services::readEventNotifier(server, id).value().allOf(eventNotifier));
@@ -320,16 +320,16 @@ TEST_CASE("Attribute service set (highlevel)") {
         services::addVariable(server, objectsId, id, "testAttributes").value();
 
         // write new attributes
-        CHECK(services::writeDisplayName(server, id, {"en-US", "newDisplayName"}).code().isGood());
-        CHECK(services::writeDescription(server, id, {"de-DE", "newDescription"}).code().isGood());
-        CHECK(services::writeWriteMask(server, id, WriteMask::Executable).code().isGood());
-        CHECK(services::writeDataType(server, id, NodeId{0, 2}).code().isGood());
-        CHECK(services::writeValueRank(server, id, ValueRank::TwoDimensions).code().isGood());
-        CHECK(services::writeArrayDimensions(server, id, {3, 2}).code().isGood());
+        CHECK(services::writeDisplayName(server, id, {"en-US", "newDisplayName"}));
+        CHECK(services::writeDescription(server, id, {"de-DE", "newDescription"}));
+        CHECK(services::writeWriteMask(server, id, WriteMask::Executable));
+        CHECK(services::writeDataType(server, id, NodeId{0, 2}));
+        CHECK(services::writeValueRank(server, id, ValueRank::TwoDimensions));
+        CHECK(services::writeArrayDimensions(server, id, {3, 2}));
         const auto newAccessLevel = AccessLevel::CurrentRead | AccessLevel::CurrentWrite;
-        CHECK(services::writeAccessLevel(server, id, newAccessLevel).code().isGood());
-        CHECK(services::writeMinimumSamplingInterval(server, id, 10.0).code().isGood());
-        CHECK(services::writeHistorizing(server, id, true).code().isGood());
+        CHECK(services::writeAccessLevel(server, id, newAccessLevel));
+        CHECK(services::writeMinimumSamplingInterval(server, id, 10.0));
+        CHECK(services::writeHistorizing(server, id, true));
 
         // read new attributes
         CHECK(
@@ -357,7 +357,7 @@ TEST_CASE("Attribute service set (highlevel)") {
         services::addMethod(server, objectsId, id, "testMethod", nullptr, {}, {}).value();
 
         // write new attributes
-        CHECK(services::writeExecutable(server, id, true).code().isGood());
+        CHECK(services::writeExecutable(server, id, true));
 
         // read new attributes
         CHECK(services::readExecutable(server, id));
@@ -374,9 +374,9 @@ TEST_CASE("Attribute service set (highlevel)") {
         CHECK(services::readInverseName(server, id).value() == LocalizedText("", "References"));
 
         // write new attributes
-        CHECK(services::writeIsAbstract(server, id, false).code().isGood());
-        CHECK(services::writeSymmetric(server, id, false).code().isGood());
-        CHECK(services::writeInverseName(server, id, LocalizedText("", "New")).code().isGood());
+        CHECK(services::writeIsAbstract(server, id, false));
+        CHECK(services::writeSymmetric(server, id, false));
+        CHECK(services::writeInverseName(server, id, LocalizedText("", "New")));
 
         // read new attributes
         CHECK(services::readIsAbstract(server, id).value() == false);
@@ -397,36 +397,36 @@ TEST_CASE("Attribute service set (highlevel)") {
             };
             for (auto valueRank : valueRanks) {
                 CAPTURE(valueRank);
-                CHECK(services::writeValueRank(server, id, valueRank).code().isGood());
-                CHECK(services::writeArrayDimensions(server, id, {}).code().isGood());
-                CHECK(services::writeArrayDimensions(server, id, {1}).code().isBad());
-                CHECK(services::writeArrayDimensions(server, id, {1, 2}).code().isBad());
-                CHECK(services::writeArrayDimensions(server, id, {1, 2, 3}).code().isBad());
+                CHECK(services::writeValueRank(server, id, valueRank));
+                CHECK(services::writeArrayDimensions(server, id, {}));
+                CHECK_FALSE(services::writeArrayDimensions(server, id, {1}));
+                CHECK_FALSE(services::writeArrayDimensions(server, id, {1, 2}));
+                CHECK_FALSE(services::writeArrayDimensions(server, id, {1, 2, 3}));
             }
         }
 
         SUBCASE("OneDimension") {
-            CHECK(services::writeValueRank(server, id, ValueRank::OneDimension).code().isGood());
-            CHECK(services::writeArrayDimensions(server, id, {1}).code().isGood());
-            CHECK(services::writeArrayDimensions(server, id, {}).code().isBad());
-            CHECK(services::writeArrayDimensions(server, id, {1, 2}).code().isBad());
-            CHECK(services::writeArrayDimensions(server, id, {1, 2, 3}).code().isBad());
+            CHECK(services::writeValueRank(server, id, ValueRank::OneDimension));
+            CHECK(services::writeArrayDimensions(server, id, {1}));
+            CHECK_FALSE(services::writeArrayDimensions(server, id, {}));
+            CHECK_FALSE(services::writeArrayDimensions(server, id, {1, 2}));
+            CHECK_FALSE(services::writeArrayDimensions(server, id, {1, 2, 3}));
         }
 
         SUBCASE("TwoDimensions") {
-            CHECK(services::writeValueRank(server, id, ValueRank::TwoDimensions).code().isGood());
-            CHECK(services::writeArrayDimensions(server, id, {1, 2}).code().isGood());
-            CHECK(services::writeArrayDimensions(server, id, {}).code().isBad());
-            CHECK(services::writeArrayDimensions(server, id, {1}).code().isBad());
-            CHECK(services::writeArrayDimensions(server, id, {1, 2, 3}).code().isBad());
+            CHECK(services::writeValueRank(server, id, ValueRank::TwoDimensions));
+            CHECK(services::writeArrayDimensions(server, id, {1, 2}));
+            CHECK_FALSE(services::writeArrayDimensions(server, id, {}));
+            CHECK_FALSE(services::writeArrayDimensions(server, id, {1}));
+            CHECK_FALSE(services::writeArrayDimensions(server, id, {1, 2, 3}));
         }
 
         SUBCASE("ThreeDimensions") {
-            CHECK(services::writeValueRank(server, id, ValueRank::ThreeDimensions).code().isGood());
-            CHECK(services::writeArrayDimensions(server, id, {1, 2, 3}).code().isGood());
-            CHECK(services::writeArrayDimensions(server, id, {}).code().isBad());
-            CHECK(services::writeArrayDimensions(server, id, {1}).code().isBad());
-            CHECK(services::writeArrayDimensions(server, id, {1, 2}).code().isBad());
+            CHECK(services::writeValueRank(server, id, ValueRank::ThreeDimensions));
+            CHECK(services::writeArrayDimensions(server, id, {1, 2, 3}));
+            CHECK_FALSE(services::writeArrayDimensions(server, id, {}));
+            CHECK_FALSE(services::writeArrayDimensions(server, id, {1}));
+            CHECK_FALSE(services::writeArrayDimensions(server, id, {1, 2}));
         }
     }
 
@@ -436,7 +436,7 @@ TEST_CASE("Attribute service set (highlevel)") {
 
         Variant variantWrite;
         variantWrite.setScalarCopy(11.11);
-        CHECK(services::writeValue(server, id, variantWrite).code().isGood());
+        services::writeValue(server, id, variantWrite).value();
 
         Variant variantRead = services::readValue(server, id).value();
         CHECK(variantRead.getScalar<double>() == 11.11);
@@ -449,7 +449,7 @@ TEST_CASE("Attribute service set (highlevel)") {
         Variant variant;
         variant.setScalarCopy<int>(11);
         DataValue valueWrite(variant, {}, DateTime::now(), {}, uint16_t{1}, UA_STATUSCODE_GOOD);
-        CHECK(services::writeDataValue(server, id, valueWrite).code().isGood());
+        services::writeDataValue(server, id, valueWrite).value();
 
         DataValue valueRead = services::readDataValue(server, id).value();
 
@@ -492,11 +492,10 @@ TEST_CASE_TEMPLATE("Attribute service set write/read", T, Server, Client, Async<
             connection, id, AttributeId::Value, DataValue::fromScalar(value)
         );
         client.runIterate();
-        future.get().code().throwIfBad();
+        future.get().value();
     } else {
         services::writeAttribute(connection, id, AttributeId::Value, DataValue::fromScalar(value))
-            .code()
-            .throwIfBad();
+            .value();
     }
 
     // read
@@ -813,7 +812,7 @@ TEST_CASE("Subscription service set (client)") {
         const auto subId = services::createSubscription(client, parameters).value();
 
         parameters.priority = 1;
-        CHECK(services::modifySubscription(client, subId, parameters).code().isGood());
+        CHECK(services::modifySubscription(client, subId, parameters));
         CHECK(
             services::modifySubscription(client, subId + 1, parameters).code() ==
             UA_STATUSCODE_BADSUBSCRIPTIONIDINVALID
@@ -822,12 +821,12 @@ TEST_CASE("Subscription service set (client)") {
 
     SUBCASE("setPublishingMode") {
         const auto subId = services::createSubscription(client, parameters).value();
-        CHECK(services::setPublishingMode(client, subId, false).code().isGood());
+        CHECK(services::setPublishingMode(client, subId, false));
     }
 
     SUBCASE("deleteSubscription") {
         const auto subId = services::createSubscription(client, parameters).value();
-        CHECK(services::deleteSubscription(client, subId).code().isGood());
+        CHECK(services::deleteSubscription(client, subId));
         CHECK(
             services::deleteSubscription(client, subId + 1).code() ==
             UA_STATUSCODE_BADSUBSCRIPTIONIDINVALID
@@ -840,7 +839,7 @@ TEST_CASE("Subscription service set (client)") {
                                deleted = true;
                            }).value();
 
-        CHECK(services::deleteSubscription(client, subId).code().isGood());
+        CHECK(services::deleteSubscription(client, subId));
         CHECK(deleted == true);
     }
 }
@@ -889,7 +888,7 @@ TEST_CASE("MonitoredItem service set (client)") {
         );
         CAPTURE(monId);
 
-        CHECK(services::writeValue(server, id, Variant::fromScalar(11.11)).code().isGood());
+        CHECK(services::writeValue(server, id, Variant::fromScalar(11.11)));
         client.runIterate();
         CHECK(notificationCount > 0);
         CHECK(changedValue.getValue().getScalar<double>() == 11.11);
@@ -948,9 +947,7 @@ TEST_CASE("MonitoredItem service set (client)") {
 
         services::MonitoringParametersEx modifiedParameters{};
         modifiedParameters.samplingInterval = 1000.0;
-        CHECK(
-            services::modifyMonitoredItem(client, subId, monId, modifiedParameters).code().isGood()
-        );
+        CHECK(services::modifyMonitoredItem(client, subId, monId, modifiedParameters));
         CHECK(modifiedParameters.samplingInterval == 1000.0);  // should not be revised
     }
 
@@ -966,9 +963,7 @@ TEST_CASE("MonitoredItem service set (client)") {
             )
                 .value();
         CAPTURE(monId);
-        CHECK(services::setMonitoringMode(client, subId, monId, MonitoringMode::Disabled)
-                  .code()
-                  .isGood());
+        CHECK(services::setMonitoringMode(client, subId, monId, MonitoringMode::Disabled));
     }
 
 #if UAPP_OPEN62541_VER_GE(1, 2)
@@ -1009,7 +1004,7 @@ TEST_CASE("MonitoredItem service set (client)") {
             {monId},  // links to add
             {}  // links to remove
         );
-        CHECK(result.code().isGood());
+        CHECK(result);
 
         client.runIterate();
         CHECK(notificationCount > 0);
@@ -1034,7 +1029,7 @@ TEST_CASE("MonitoredItem service set (client)") {
                 [&](uint32_t, uint32_t) { deleted = true; }
             ).value();
 
-        CHECK(services::deleteMonitoredItem(client, subId, monId).code().isGood());
+        CHECK(services::deleteMonitoredItem(client, subId, monId));
         client.runIterate();
         CHECK(deleted == true);
     }
@@ -1060,7 +1055,7 @@ TEST_CASE("MonitoredItem service set (server)") {
             ).value();
         CAPTURE(monId);
         std::this_thread::sleep_for(100ms);
-        services::writeValue(server, id, Variant::fromScalar(11.11)).code().throwIfBad();
+        services::writeValue(server, id, Variant::fromScalar(11.11)).value();
         server.runIterate();
         CHECK(notificationCount > 0);
     }
@@ -1081,7 +1076,7 @@ TEST_CASE("MonitoredItem service set (server)") {
             )
                 .value();
         CAPTURE(monId);
-        CHECK(services::deleteMonitoredItem(server, monId).code().isGood());
+        CHECK(services::deleteMonitoredItem(server, monId));
     }
 }
 #endif

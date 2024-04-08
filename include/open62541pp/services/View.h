@@ -367,14 +367,14 @@ Result<std::vector<ReferenceDescription>> browseAll(
         );
     };
     Result<BrowseResult> result = browse(connection, bd, maxReferences);
-    if (result.code().isBad()) {
+    if (!result) {
         return BadResult(result.code());
     }
     append(result->getReferences());
     while (!result.value().getContinuationPoint().empty()) {
         const bool release = (refs.size() >= maxReferences);
         result = browseNext(connection, release, result->getContinuationPoint());
-        if (result.code().isBad()) {
+        if (!result) {
             return BadResult(result.code());
         }
         append(result->getReferences());

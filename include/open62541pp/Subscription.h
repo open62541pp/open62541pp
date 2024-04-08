@@ -108,14 +108,14 @@ public:
     /// @note Not implemented for Server.
     /// @see services::modifySubscription
     void setSubscriptionParameters(SubscriptionParameters& parameters) {
-        services::modifySubscription(connection_, subscriptionId_, parameters).code().throwIfBad();
+        services::modifySubscription(connection_, subscriptionId_, parameters).value();
     }
 
     /// Enable/disable publishing of notification messages.
     /// @note Not implemented for Server.
     /// @see services::setPublishingMode
     void setPublishingMode(bool publishing) {
-        services::setPublishingMode(connection_, subscriptionId_, publishing).code().throwIfBad();
+        services::setPublishingMode(connection_, subscriptionId_, publishing).value();
     }
 
     /// Create a monitored item for data change notifications.
@@ -227,7 +227,7 @@ public:
     /// Delete this subscription.
     /// @note Not implemented for Server.
     void deleteSubscription() {
-        services::deleteSubscription(connection_, subscriptionId_).code().throwIfBad();
+        services::deleteSubscription(connection_, subscriptionId_).value();
     }
 
 private:
