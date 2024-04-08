@@ -137,10 +137,8 @@ TEST_CASE("sendRequest") {
         SUBCASE("Disconnected") {
             client.disconnect();
             sendReadRequest(services::detail::Wrap<ReadResponse>{}, [&](ReadResponse& response) {
-                CHECK(
-                    response.getResponseHeader().getServiceResult().get() ==
-                    UA_STATUSCODE_BADSERVERNOTCONNECTED
-                );
+                // UA_STATUSCODE_BADSERVERNOTCONNECTED since v1.1
+                CHECK(response.getResponseHeader().getServiceResult().isBad());
             });
         }
 #endif
@@ -170,10 +168,8 @@ TEST_CASE("sendRequest") {
             const auto response = sendReadRequest(
                 services::detail::Wrap<ReadResponse>{}, services::detail::SyncOperation{}
             );
-            CHECK(
-                response.getResponseHeader().getServiceResult().get() ==
-                UA_STATUSCODE_BADCONNECTIONCLOSED
-            );
+            // UA_STATUSCODE_BADCONNECTIONCLOSED or UA_STATUSCODE_BADINTERNALERROR (v1.0)
+            CHECK(response.getResponseHeader().getServiceResult().isBad());
         }
     }
 }
