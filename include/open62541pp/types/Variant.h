@@ -120,19 +120,23 @@ public:
 
     /// Check if the variant is a scalar.
     bool isScalar() const noexcept {
-        return (handle()->arrayLength == 0) &&
-               (handle()->data > UA_EMPTY_ARRAY_SENTINEL);  // NOLINT
+        return (
+            !isEmpty() && handle()->arrayLength == 0 &&
+            handle()->data > UA_EMPTY_ARRAY_SENTINEL  // NOLINT
+        );
     }
 
     /// Check if the variant is an array.
     bool isArray() const noexcept {
-        return (handle()->arrayLength > 0) && (handle()->data > UA_EMPTY_ARRAY_SENTINEL);  // NOLINT
+        return !isEmpty() && !isScalar();
     }
 
     /// Check if the variant type is equal to the provided data type.
     bool isType(const UA_DataType* dataType) const noexcept {
-        return (handle()->type != nullptr && dataType != nullptr) &&
-               (handle()->type->typeId == dataType->typeId);
+        return (
+            handle()->type != nullptr && dataType != nullptr &&
+            handle()->type->typeId == dataType->typeId
+        );
     }
 
     /// Check if the variant type is equal to the provided data type.
