@@ -278,6 +278,7 @@ std::vector<Session> Server::getSessions() {
 
 std::vector<std::string> Server::getNamespaceArray() {
     return services::readValue(*this, {0, UA_NS0ID_SERVER_NAMESPACEARRAY})
+        .value()
         .getArrayCopy<std::string>();
 }
 
@@ -349,10 +350,10 @@ static UA_StatusCode valueSourceRead(
     assert(nodeContext != nullptr && value != nullptr);
     auto& callback = static_cast<detail::NodeContext*>(nodeContext)->dataSource.read;
     if (callback) {
-        return detail::tryInvoke(
-                   callback, asWrapper<DataValue>(*value), asRange(range), includeSourceTimestamp
-        )
-            .code();
+        auto result = detail::tryInvoke(
+            callback, asWrapper<DataValue>(*value), asRange(range), includeSourceTimestamp
+        );
+        return result.code();
     }
     return UA_STATUSCODE_BADINTERNALERROR;
 }
@@ -369,7 +370,8 @@ static UA_StatusCode valueSourceWrite(
     assert(nodeContext != nullptr && value != nullptr);
     auto& callback = static_cast<detail::NodeContext*>(nodeContext)->dataSource.write;
     if (callback) {
-        return detail::tryInvoke(callback, asWrapper<DataValue>(*value), asRange(range)).code();
+        auto result = detail::tryInvoke(callback, asWrapper<DataValue>(*value), asRange(range));
+        return result.code();
     }
     return UA_STATUSCODE_BADINTERNALERROR;
 }

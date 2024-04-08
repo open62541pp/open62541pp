@@ -63,7 +63,7 @@ inline ReadResponse read(
 /**
  * Asynchronously read one or more attributes of one or more nodes (client only).
  * @copydetails read
- * @param token @completiontoken{void(Result<ReadResponse>&)}
+ * @param token @completiontoken{void(ReadResponse&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto readAsync(
@@ -72,10 +72,7 @@ auto readAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::sendRequest<UA_ReadRequest, UA_ReadResponse>(
-        connection,
-        request,
-        detail::WrapResponse<ReadResponse>{},
-        std::forward<CompletionToken>(token)
+        connection, request, detail::Wrap<ReadResponse>{}, std::forward<CompletionToken>(token)
     );
 }
 
@@ -104,7 +101,7 @@ inline auto readAsync(
  * @param timestamps Timestamps to return
  */
 template <typename T>
-DataValue readAttribute(
+Result<DataValue> readAttribute(
     T& connection,
     const NodeId& id,
     AttributeId attributeId,
@@ -129,7 +126,9 @@ auto readAttributeAsync(
     return detail::sendRequest<UA_ReadRequest, UA_ReadResponse>(
         connection,
         request,
-        [](UA_ReadResponse& response) { return detail::getReadResult(response); },
+        [](UA_ReadResponse& response) {
+            return detail::getSingleResult(response).transform(detail::Wrap<DataValue>{});
+        },
         std::forward<CompletionToken>(token)
     );
 }
@@ -181,10 +180,7 @@ auto writeAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::sendRequest<UA_WriteRequest, UA_WriteResponse>(
-        connection,
-        request,
-        detail::WrapResponse<WriteResponse>{},
-        std::forward<CompletionToken>(token)
+        connection, request, detail::Wrap<WriteResponse>{}, std::forward<CompletionToken>(token)
     );
 }
 
@@ -210,7 +206,7 @@ inline auto writeAsync(
  * @param value Value to write
  */
 template <typename T>
-void writeAttribute(
+Result<void> writeAttribute(
     T& connection, const NodeId& id, AttributeId attributeId, const DataValue& value
 );
 
@@ -232,7 +228,9 @@ auto writeAttributeAsync(
     return detail::sendRequest<UA_WriteRequest, UA_WriteResponse>(
         connection,
         request,
-        [](UA_WriteResponse& response) { throwIfBad(detail::getSingleResult(response)); },
+        [](UA_WriteResponse& response) {
+            return detail::getSingleResult(response).andThen(detail::asResult);
+        },
         std::forward<CompletionToken>(token)
     );
 }
@@ -248,7 +246,7 @@ namespace detail {
 template <AttributeId Attribute, typename T>
 inline auto readAttributeImpl(T& connection, const NodeId& id) {
     using Handler = typename detail::AttributeHandler<Attribute>;
-    return Handler::fromDataValue(readAttribute(connection, id, Attribute));
+    return readAttribute(connection, id, Attribute).andThen(Handler::fromDataValue);
 }
 
 template <AttributeId Attribute, typename CompletionToken>
@@ -260,16 +258,16 @@ inline auto readAttributeAsyncImpl(Client& connection, const NodeId& id, Complet
         request,
         [](UA_ReadResponse& response) {
             using Handler = typename detail::AttributeHandler<Attribute>;
-            return Handler::fromDataValue(detail::getReadResult(response));
+            return detail::getSingleResult(response).andThen(Handler::fromDataValue);
         },
         std::forward<CompletionToken>(token)
     );
 }
 
 template <AttributeId Attribute, typename T, typename U>
-inline void writeAttributeImpl(T& connection, const NodeId& id, U&& value) {
+inline Result<void> writeAttributeImpl(T& connection, const NodeId& id, U&& value) {
     using Handler = detail::AttributeHandler<Attribute>;
-    writeAttribute(connection, id, Attribute, Handler::toDataValue(std::forward<U>(value)));
+    return writeAttribute(connection, id, Attribute, Handler::toDataValue(std::forward<U>(value)));
 }
 
 template <AttributeId Attribute, typename T, typename U, typename CompletionToken>
@@ -295,7 +293,7 @@ inline auto writeAttributeAsyncImpl(
  * @ingroup Read
  */
 template <typename T>
-inline DataValue readDataValue(T& connection, const NodeId& id) {
+inline Result<DataValue> readDataValue(T& connection, const NodeId& id) {
     return readAttribute(connection, id, AttributeId::Value, TimestampsToReturn::Both);
 }
 
@@ -324,8 +322,8 @@ inline auto readDataValueAsync(Client& connection, const NodeId& id, CompletionT
  * @ingroup Write
  */
 template <typename T>
-inline void writeDataValue(T& connection, const NodeId& id, const DataValue& value) {
-    writeAttribute(connection, id, AttributeId::Value, value);
+inline Result<void> writeDataValue(T& connection, const NodeId& id, const DataValue& value) {
+    return writeAttribute(connection, id, AttributeId::Value, value);
 }
 
 /**
@@ -341,7 +339,7 @@ inline auto writeDataValueAsync(
     const DataValue& value,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
-    writeAttributeAsync(
+    return writeAttributeAsync(
         connection, id, AttributeId::Value, value, std::forward<CompletionToken>(token)
     );
 }

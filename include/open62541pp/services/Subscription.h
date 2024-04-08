@@ -4,6 +4,7 @@
 #include <functional>
 
 #include "open62541pp/Config.h"
+#include "open62541pp/Result.h"
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 
@@ -70,7 +71,7 @@ using DeleteSubscriptionCallback = std::function<void(uint32_t subId)>;
  * @param deleteCallback Invoked when the subscription is deleted
  * @return Server-assigned identifier of the subscription
  */
-[[nodiscard]] uint32_t createSubscription(
+[[nodiscard]] Result<uint32_t> createSubscription(
     Client& connection,
     SubscriptionParameters& parameters,
     bool publishingEnabled = true,
@@ -92,7 +93,7 @@ using DeleteSubscriptionCallback = std::function<void(uint32_t subId)>;
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @param parameters Subscription parameters, may be revised by server
  */
-void modifySubscription(
+Result<void> modifySubscription(
     Client& connection, uint32_t subscriptionId, SubscriptionParameters& parameters
 );
 
@@ -112,7 +113,7 @@ void modifySubscription(
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @param publishing Enable/disable publishing
  */
-void setPublishingMode(Client& connection, uint32_t subscriptionId, bool publishing);
+Result<void> setPublishingMode(Client& connection, uint32_t subscriptionId, bool publishing);
 
 /**
  * @}
@@ -127,7 +128,7 @@ void setPublishingMode(Client& connection, uint32_t subscriptionId, bool publish
  * @param connection Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  */
-void deleteSubscription(Client& connection, uint32_t subscriptionId);
+Result<void> deleteSubscription(Client& connection, uint32_t subscriptionId);
 
 /**
  * @}

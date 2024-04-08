@@ -6,8 +6,6 @@
 #include <type_traits>
 #include <utility>  // forward, move
 
-#include "open62541pp/ErrorHandling.h"
-#include "open62541pp/Result.h"
 #include "open62541pp/types/Builtin.h"  // StatusCode
 
 namespace opcua {
@@ -16,8 +14,8 @@ namespace opcua {
  * @defgroup Async Asynchronous operations
  * The asynchronous model is based on (Boost) Asio's universal model for asynchronous operations.
  * Each async function takes a `CompletionToken` as it's last parameter.
- * The completion token can be a callable with the signature `void(Result<T>)` where
- * `T` is a function-specific result type.
+ * The completion token can be a callable with the signature `void(T)` or `void(T&)` where `T` is a
+ * function-specific result type.
  *
  * @see https://think-async.com/asio/asio-1.28.0/doc/asio/overview/model/async_ops.html
  * @see https://think-async.com/asio/asio-1.28.0/doc/asio/overview/model/completion_tokens.html
@@ -29,10 +27,7 @@ template <class CompletionToken, typename T>
 struct AsyncResult {
     template <typename Initiation, typename CompletionHandler, typename... Args>
     static void initiate(Initiation&& initiation, CompletionHandler&& handler, Args&&... args) {
-        static_assert(
-            (std::is_invocable_v<CompletionHandler, Result<T>> ||
-             std::is_invocable_v<CompletionHandler, Result<T>&>)
-        );
+        static_assert(std::is_invocable_v<CompletionHandler, T> || std::is_invocable_v<CompletionHandler, T&>);
         std::invoke(
             std::forward<Initiation>(initiation),
             std::forward<CompletionHandler>(handler),
@@ -68,11 +63,11 @@ template <typename T>
 struct AsyncResult<UseFutureToken, T> {
     template <typename Initiation, typename... Args>
     static auto initiate(Initiation&& initiation, UseFutureToken /*unused*/, Args&&... args) {
-        std::promise<Result<T>> promise;
+        std::promise<T> promise;
         auto future = promise.get_future();
         std::invoke(
             std::forward<Initiation>(initiation),
-            [p = std::move(promise)](Result<T>& result) mutable { p.set_value(std::move(result)); },
+            [p = std::move(promise)](T& result) mutable { p.set_value(std::move(result)); },
             std::forward<Args>(args)...
         );
         return future;

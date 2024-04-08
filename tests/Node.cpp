@@ -16,9 +16,12 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client) {
     auto& connection = setup.getInstance<T>();
 
     const NodeId varId{1, 1};
-    services::addVariable(setup.server, {0, UA_NS0ID_OBJECTSFOLDER}, varId, "variable");
-    services::writeAccessLevel(setup.server, varId, 0xFF);
-    services::writeWriteMask(setup.server, varId, 0xFFFFFFFF);  // set all bits to 1 -> allow all
+    services::addVariable(setup.server, {0, UA_NS0ID_OBJECTSFOLDER}, varId, "variable")
+        .code()
+        .throwIfBad();
+    // set all bits to 1 -> allow all
+    services::writeAccessLevel(setup.server, varId, 0xFF).code().throwIfBad();
+    services::writeWriteMask(setup.server, varId, 0xFFFFFFFF).code().throwIfBad();
 
     auto rootNode = connection.getRootNode();
     auto objNode = connection.getObjectsNode();

@@ -19,11 +19,11 @@ TEST_CASE("Event") {
 
         const auto id = event->id();
         CHECK_FALSE(id.isNull());
-        CHECK_NOTHROW(services::readNodeId(server, id));
+        CHECK(services::readNodeId(server, id));
 
         // delete event
         event = nullptr;
-        CHECK_THROWS_WITH(services::readNodeId(server, id), "BadNodeIdUnknown");
+        CHECK(services::readNodeId(server, id).code() == UA_STATUSCODE_BADNODEIDUNKNOWN);
     }
 
     SUBCASE("Create and trigger event") {

@@ -6,7 +6,7 @@
 using namespace opcua;
 
 template <typename T, typename CompletionHandler>
-static auto asyncTest(Result<T> result, CompletionHandler&& completionHandler) {
+static auto asyncTest(T result, CompletionHandler&& completionHandler) {
     return asyncInitiate<T>(
         [](auto... args) { std::invoke(args...); },
         std::forward<CompletionHandler>(completionHandler),

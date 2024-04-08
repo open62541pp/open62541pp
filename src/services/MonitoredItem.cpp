@@ -10,6 +10,7 @@
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
+#include "open62541pp/Span.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/ClientContext.h"
 #include "open62541pp/detail/ServerContext.h"
@@ -25,7 +26,7 @@
 namespace opcua::services {
 
 template <>
-uint32_t createMonitoredItemDataChange<Client>(
+Result<uint32_t> createMonitoredItemDataChange<Client>(
     Client& connection,
     uint32_t subscriptionId,
     const ReadValueId& itemToMonitor,
@@ -51,7 +52,9 @@ uint32_t createMonitoredItemDataChange<Client>(
         context->dataChangeCallbackNativeClient,
         context->deleteCallbackNative
     );
-    throwIfBad(result->statusCode);
+    if (StatusCode code = result->statusCode; code.isBad()) {
+        return BadResult(code);
+    }
     detail::reviseMonitoringParameters(parameters, asNative(result));
 
     const auto monitoredItemId = result->monitoredItemId;
@@ -62,7 +65,7 @@ uint32_t createMonitoredItemDataChange<Client>(
 }
 
 template <>
-uint32_t createMonitoredItemDataChange<Server>(
+Result<uint32_t> createMonitoredItemDataChange<Server>(
     Server& connection,
     [[maybe_unused]] uint32_t subscriptionId,
     const ReadValueId& itemToMonitor,
@@ -86,7 +89,9 @@ uint32_t createMonitoredItemDataChange<Server>(
         context.get(),
         context->dataChangeCallbackNativeServer
     );
-    throwIfBad(result->statusCode);
+    if (StatusCode code = result->statusCode; code.isBad()) {
+        return BadResult(code);
+    }
     detail::reviseMonitoringParameters(parameters, asNative(result));
 
     const auto monitoredItemId = result->monitoredItemId;
@@ -96,7 +101,7 @@ uint32_t createMonitoredItemDataChange<Server>(
     return monitoredItemId;
 }
 
-[[nodiscard]] uint32_t createMonitoredItemDataChange(
+Result<uint32_t> createMonitoredItemDataChange(
     Server& connection,
     const ReadValueId& itemToMonitor,
     MonitoringMode monitoringMode,
@@ -108,7 +113,7 @@ uint32_t createMonitoredItemDataChange<Server>(
     );
 }
 
-uint32_t createMonitoredItemEvent(
+Result<uint32_t> createMonitoredItemEvent(
     Client& connection,
     uint32_t subscriptionId,
     const ReadValueId& itemToMonitor,
@@ -134,7 +139,9 @@ uint32_t createMonitoredItemEvent(
         context->eventCallbackNative,
         context->deleteCallbackNative
     );
-    throwIfBad(result->statusCode);
+    if (StatusCode code = result->statusCode; code.isBad()) {
+        return BadResult(code);
+    }
     detail::reviseMonitoringParameters(parameters, asNative(result));
 
     const auto monitoredItemId = result->monitoredItemId;
@@ -144,7 +151,7 @@ uint32_t createMonitoredItemEvent(
     return monitoredItemId;
 }
 
-void modifyMonitoredItem(
+Result<void> modifyMonitoredItem(
     Client& connection,
     uint32_t subscriptionId,
     uint32_t monitoredItemId,
@@ -155,71 +162,88 @@ void modifyMonitoredItem(
     using Response =
         TypeWrapper<UA_ModifyMonitoredItemsResponse, UA_TYPES_MODIFYMONITOREDITEMSRESPONSE>;
     const Response response = UA_Client_MonitoredItems_modify(connection.handle(), request);
-    auto& result = detail::getSingleResult(asNative(response));
-    throwIfBad(result.statusCode);
-    detail::reviseMonitoringParameters(parameters, result);
+    return detail::getSingleResult(asNative(response))
+        .andThen([&](UA_MonitoredItemModifyResult& result) -> Result<void> {
+            if (StatusCode code = result.statusCode; code.isBad()) {
+                return BadResult(code);
+            }
+            detail::reviseMonitoringParameters(parameters, result);
+            return {};
+        });
 }
 
-void setMonitoringMode(
+Result<void> setMonitoringMode(
     Client& connection,
     uint32_t subscriptionId,
     uint32_t monitoredItemId,
     MonitoringMode monitoringMode
 ) {
-    detail::sendRequest<UA_SetMonitoringModeRequest, UA_SetMonitoringModeResponse>(
+    return detail::sendRequest<UA_SetMonitoringModeRequest, UA_SetMonitoringModeResponse>(
         connection,
         detail::createSetMonitoringModeRequest(
             subscriptionId, {&monitoredItemId, 1}, monitoringMode
         ),
-        [](UA_SetMonitoringModeResponse& response) {
-            throwIfBad(detail::getSingleResult(response));
+        [](UA_SetMonitoringModeResponse& response) -> Result<void> {
+            return detail::getSingleResult(response).andThen(detail::asResult);
         },
         detail::SyncOperation{}
     );
 }
 
-void setTriggering(
+Result<void> setTriggering(
     Client& connection,
     uint32_t subscriptionId,
     uint32_t triggeringItemId,
     Span<const uint32_t> linksToAdd,
     Span<const uint32_t> linksToRemove
 ) {
-    detail::sendRequest<UA_SetTriggeringRequest, UA_SetTriggeringResponse>(
+    return detail::sendRequest<UA_SetTriggeringRequest, UA_SetTriggeringResponse>(
         connection,
         detail::createSetTriggeringRequest(
             subscriptionId, triggeringItemId, linksToAdd, linksToRemove
         ),
-        [](UA_SetTriggeringResponse& response) {
-            throwIfBad(response.responseHeader.serviceResult);
-            std::for_each_n(response.addResults, response.addResultsSize, throwIfBad);
-            std::for_each_n(response.removeResults, response.removeResultsSize, throwIfBad);
+        [](UA_SetTriggeringResponse& response) -> Result<void> {
+            if (StatusCode code = response.responseHeader.serviceResult; code.isBad()) {
+                return BadResult(code);
+            }
+            for (StatusCode code : Span(response.addResults, response.addResultsSize)) {
+                if (code.isBad()) {
+                    return BadResult(code);
+                }
+            }
+            for (StatusCode code : Span(response.removeResults, response.removeResultsSize)) {
+                if (code.isBad()) {
+                    return BadResult(code);
+                }
+            }
+            return {};
         },
         detail::SyncOperation{}
     );
 }
 
 template <>
-void deleteMonitoredItem<Client>(
+Result<void> deleteMonitoredItem<Client>(
     Client& connection, uint32_t subscriptionId, uint32_t monitoredItemId
 ) {
-    const auto status = UA_Client_MonitoredItems_deleteSingle(
-        connection.handle(), subscriptionId, monitoredItemId
+    return detail::asResult(
+        UA_Client_MonitoredItems_deleteSingle(connection.handle(), subscriptionId, monitoredItemId)
     );
-    throwIfBad(status);
 }
 
 template <>
-void deleteMonitoredItem<Server>(
+Result<void> deleteMonitoredItem<Server>(
     Server& connection, [[maybe_unused]] uint32_t subscriptionId, uint32_t monitoredItemId
 ) {
-    const auto status = UA_Server_deleteMonitoredItem(connection.handle(), monitoredItemId);
-    throwIfBad(status);
+    const auto result = detail::asResult(
+        UA_Server_deleteMonitoredItem(connection.handle(), monitoredItemId)
+    );
     opcua::detail::getContext(connection).monitoredItems.erase({0U, monitoredItemId});
+    return result;
 }
 
-void deleteMonitoredItem(Server& connection, uint32_t monitoredItemId) {
-    deleteMonitoredItem(connection, 0U, monitoredItemId);
+Result<void> deleteMonitoredItem(Server& connection, uint32_t monitoredItemId) {
+    return deleteMonitoredItem(connection, 0U, monitoredItemId);
 }
 
 }  // namespace opcua::services

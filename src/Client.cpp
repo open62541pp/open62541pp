@@ -353,6 +353,7 @@ bool Client::isConnected() noexcept {
 
 std::vector<std::string> Client::getNamespaceArray() {
     return services::readValue(*this, {0, UA_NS0ID_SERVER_NAMESPACEARRAY})
+        .value()
         .getArrayCopy<std::string>();
 }
 
@@ -363,7 +364,7 @@ Subscription<Client> Client::createSubscription() {
 }
 
 Subscription<Client> Client::createSubscription(SubscriptionParameters& parameters) {
-    const uint32_t subscriptionId = services::createSubscription(*this, parameters, true);
+    const uint32_t subscriptionId = services::createSubscription(*this, parameters, true).value();
     return {*this, subscriptionId};
 }
 

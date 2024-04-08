@@ -13,7 +13,7 @@ CallResponse call(Client& connection, const CallRequest& request) {
 }
 
 template <>
-std::vector<Variant> call(
+Result<std::vector<Variant>> call(
     Server& connection,
     const NodeId& objectId,
     const NodeId& methodId,
@@ -25,7 +25,7 @@ std::vector<Variant> call(
 }
 
 template <>
-std::vector<Variant> call(
+Result<std::vector<Variant>> call(
     Client& connection,
     const NodeId& objectId,
     const NodeId& methodId,

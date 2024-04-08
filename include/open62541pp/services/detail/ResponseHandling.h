@@ -7,21 +7,31 @@
 #include <vector>
 
 #include "open62541pp/ErrorHandling.h"
+#include "open62541pp/Result.h"
 #include "open62541pp/Span.h"
 #include "open62541pp/Wrapper.h"  // asWrapper, isWrapper
 #include "open62541pp/detail/open62541/common.h"
+#include "open62541pp/types/Builtin.h"  // StatusCode
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/Variant.h"
 
 namespace opcua::services::detail {
 
 template <typename WrapperType>
-struct WrapResponse {
+struct Wrap {
     static_assert(opcua::detail::isWrapper<WrapperType>);
+    using NativeType = typename WrapperType::NativeType;
 
-    template <typename Response = typename WrapperType::NativeType>
-    [[nodiscard]] constexpr WrapperType operator()(Response&& value) noexcept {
-        return {std::exchange(std::forward<Response>(value), {})};
+    [[nodiscard]] constexpr WrapperType operator()(const NativeType& native) noexcept {
+        return {native};
+    }
+
+    [[nodiscard]] constexpr WrapperType operator()(NativeType& native) noexcept {
+        return {std::exchange(native, {})};
+    }
+
+    [[nodiscard]] constexpr WrapperType operator()(NativeType&& native) noexcept {
+        return {std::exchange(std::move(native), {})};
     }
 };
 
@@ -40,53 +50,45 @@ inline UA_StatusCode getServiceResult(const Response& response) noexcept {
 }
 
 template <typename Response>
-inline void checkServiceResult(const Response& response) {
-    throwIfBad(getServiceResult(response));
-}
+using ResponseResultsType = std::remove_pointer_t<decltype(Response::results)>;
 
 template <typename Response>
-inline auto getResults(Response& response) {
-    checkServiceResult(response);
-    if constexpr (opcua::detail::isWrapper<Response>) {
-        return response.getResults();
-    } else {
-        return Span(response.results, response.resultsSize);
+inline Result<std::reference_wrapper<ResponseResultsType<Response>>> getSingleResult(
+    Response& response
+) {
+    if (StatusCode serviceResult = getServiceResult(response); serviceResult.isBad()) {
+        return BadResult(serviceResult);
     }
-}
-
-template <typename Response>
-inline auto& getSingleResult(Response& response) {
-    auto results = getResults(response);
-    if (results.data() == nullptr || results.size() != 1) {
-        throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
+    if (response.results == nullptr || response.resultsSize != 1) {
+        return BadResult(UA_STATUSCODE_BADUNEXPECTEDERROR);
     }
-    return results[0];
+    return {*response.results};
 }
 
-template <typename Response>
-inline auto getSingleResultMove(Response& response) {
-    return std::exchange(getSingleResult(response), {});
-}
-
-inline void checkReadResult(const UA_DataValue& dv) {
-    if (dv.hasStatus) {
-        throwIfBad(dv.status);
+inline Result<void> asResult(UA_StatusCode code) noexcept {
+    if (opcua::detail::isBad(code)) {
+        return BadResult(code);
     }
-    if (!dv.hasValue) {
-        throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
+    return {code};
+}
+
+inline Result<NodeId> getAddedNodeId(UA_AddNodesResult& result) noexcept {
+    if (StatusCode code = result.statusCode; code.isBad()) {
+        return BadResult(code);
     }
+    return {std::exchange(result.addedNodeId, {})};
 }
 
-inline DataValue getReadResult(UA_ReadResponse& response) {
-    auto& result = getSingleResult(response);
-    checkReadResult(result);
-    return {std::exchange(result, {})};
-}
-
-inline std::vector<Variant> getOutputArguments(UA_CallMethodResult& result) {
-    throwIfBad(result.statusCode);
-    std::for_each_n(result.inputArgumentResults, result.inputArgumentResultsSize, throwIfBad);
-    return {
+inline Result<std::vector<Variant>> getOutputArguments(UA_CallMethodResult& result) {
+    if (StatusCode code = result.statusCode; code.isBad()) {
+        return BadResult(result.statusCode);
+    }
+    for (StatusCode code : Span(result.inputArgumentResults, result.inputArgumentResultsSize)) {
+        if (code.isBad()) {
+            return BadResult(code);
+        }
+    }
+    return std::vector<Variant>{
         std::make_move_iterator(result.outputArguments),
         std::make_move_iterator(result.outputArguments + result.outputArgumentsSize)  // NOLINT
     };

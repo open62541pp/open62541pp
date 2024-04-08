@@ -18,7 +18,7 @@ TEST_CASE("AsyncServiceAdapter") {
         using Response = int;
         using Adapter = services::detail::AsyncServiceAdapter<Response>;
 
-        std::optional<Result<Response>> result;
+        std::optional<Response> result;
         bool throwInTransform = false;
         bool throwInCompletionHandler = false;
         detail::ExceptionCatcher catcher;
@@ -31,7 +31,7 @@ TEST_CASE("AsyncServiceAdapter") {
                 }
                 return val;
             },
-            [&](Result<Response> res) {
+            [&](Response res) {
                 result = res;
                 if (throwInCompletionHandler) {
                     throw std::runtime_error("CompletionHandler");
@@ -52,29 +52,27 @@ TEST_CASE("AsyncServiceAdapter") {
         SUBCASE("Success") {
             invokeCallback(&response);
             CHECK(result.has_value());
-            CHECK(result->code() == UA_STATUSCODE_GOOD);  // NOLINT, false positive
-            CHECK(result->value() == 5);  // NOLINT, false positive
+            CHECK(result.value() == response);
             CHECK_FALSE(catcher.hasException());
         }
         SUBCASE("Response nullptr") {
             invokeCallback(nullptr);
-            CHECK(result.has_value());
-            CHECK(result->code() == UA_STATUSCODE_BADUNEXPECTEDERROR);  // NOLINT, false positive
-            CHECK_FALSE(catcher.hasException());
+            CHECK_FALSE(result.has_value());
+            CHECK(catcher.hasException());
+            CHECK_THROWS_AS_MESSAGE(catcher.rethrow(), BadStatus, "BadUnexpectedError");
         }
         SUBCASE("Exception in transform function") {
             throwInTransform = true;
             invokeCallback(&response);
-            CHECK(result.has_value());
-            CHECK(result->code() == UA_STATUSCODE_BADINTERNALERROR);  // NOLINT, false positive
-            CHECK_FALSE(catcher.hasException());
+            CHECK_FALSE(result.has_value());
+            CHECK(catcher.hasException());
+            CHECK_THROWS_AS_MESSAGE(catcher.rethrow(), std::runtime_error, "Transform");
         }
         SUBCASE("Exception in completion handler") {
             throwInCompletionHandler = true;
             invokeCallback(&response);
             CHECK(result.has_value());
-            CHECK(result->code() == UA_STATUSCODE_GOOD);  // NOLINT, false positive
-            CHECK(result->value() == response);  // NOLINT, false positive
+            CHECK(result.value() == response);
             CHECK(catcher.hasException());
             CHECK_THROWS_AS_MESSAGE(catcher.rethrow(), std::runtime_error, "CompletionHandler");
         }
@@ -114,26 +112,21 @@ TEST_CASE("sendRequest") {
 
     SUBCASE("Async") {
         SUBCASE("Success") {
-            sendReadRequest(
-                services::detail::WrapResponse<ReadResponse>{},
-                [&](Result<ReadResponse> result) {
-                    CHECK(result.code().isGood());
-                    checkReadResponse(*result);
-                }
-            );
+            sendReadRequest(services::detail::Wrap<ReadResponse>{}, [&](ReadResponse& response) {
+                checkReadResponse(response);
+            });
             CHECK_NOTHROW(client.runIterate());
         }
 
         SUBCASE("Exception in transform function") {
             sendReadRequest(
-                [](UA_ReadResponse&) { throw std::runtime_error("Error"); },
-                [](Result<void> result) { CHECK(result.code() == UA_STATUSCODE_BADINTERNALERROR); }
+                [](UA_ReadResponse&) -> bool { throw std::runtime_error("Error"); }, [](bool) {}
             );
-            CHECK_NOTHROW(client.runIterate());
+            CHECK_THROWS_AS_MESSAGE(client.runIterate(), std::runtime_error, "Error");
         }
 
         SUBCASE("Exception in user callback") {
-            sendReadRequest(services::detail::WrapResponse<ReadResponse>{}, [](auto&&...) {
+            sendReadRequest(services::detail::Wrap<ReadResponse>{}, [](ReadResponse&) {
                 throw std::runtime_error("Error");
             });
             CHECK_THROWS_AS_MESSAGE(client.runIterate(), std::runtime_error, "Error");
@@ -141,23 +134,19 @@ TEST_CASE("sendRequest") {
 
         SUBCASE("Disconnected") {
             client.disconnect();
-            sendReadRequest(
-                services::detail::WrapResponse<ReadResponse>{},
-                [&](Result<ReadResponse> result) {
-                    CHECK(result.code().isGood());
-                    CHECK(
-                        result.value().getResponseHeader().getServiceResult() ==
-                        UA_STATUSCODE_BADSERVERNOTCONNECTED
-                    );
-                }
-            );
+            sendReadRequest(services::detail::Wrap<ReadResponse>{}, [&](ReadResponse& response) {
+                CHECK(
+                    response.getResponseHeader().getServiceResult() ==
+                    UA_STATUSCODE_BADSERVERNOTCONNECTED
+                );
+            });
         }
     }
 
     SUBCASE("Sync") {
         SUBCASE("Success") {
             const auto response = sendReadRequest(
-                services::detail::WrapResponse<ReadResponse>{}, services::detail::SyncOperation{}
+                services::detail::Wrap<ReadResponse>{}, services::detail::SyncOperation{}
             );
             checkReadResponse(response);
         }
@@ -165,7 +154,7 @@ TEST_CASE("sendRequest") {
         SUBCASE("Exception in transform function") {
             CHECK_THROWS_AS_MESSAGE(
                 sendReadRequest(
-                    [](UA_ReadResponse&) { throw std::runtime_error("Error"); },
+                    [](UA_ReadResponse&) -> int { throw std::runtime_error("Error"); },
                     services::detail::SyncOperation{}
                 ),
                 std::runtime_error,
@@ -176,7 +165,7 @@ TEST_CASE("sendRequest") {
         SUBCASE("Disconnected") {
             client.disconnect();
             const auto response = sendReadRequest(
-                services::detail::WrapResponse<ReadResponse>{}, services::detail::SyncOperation{}
+                services::detail::Wrap<ReadResponse>{}, services::detail::SyncOperation{}
             );
             CHECK(
                 response.getResponseHeader().getServiceResult() == UA_STATUSCODE_BADCONNECTIONCLOSED

@@ -2,11 +2,12 @@
 
 #include <cstdint>
 #include <type_traits>
-#include <utility>  // exchange
+#include <utility>  // exchange, move
 #include <vector>
 
 #include "open62541pp/Bitmask.h"
 #include "open62541pp/Common.h"  // AttributeId, WriteMask, EventNotifier, AccessLevel
+#include "open62541pp/ErrorHandling.h"
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/NodeId.h"
@@ -21,16 +22,31 @@ namespace opcua::services::detail {
 template <AttributeId Attribute>
 struct AttributeHandler;
 
+inline Result<Variant> getVariant(DataValue&& dv) {
+    if (dv.getStatus().isBad()) {
+        return BadResult(dv.getStatus());
+    }
+    if (!dv.hasValue()) {
+        return BadResult(UA_STATUSCODE_BADUNEXPECTEDERROR);
+    }
+    return std::move(dv).getValue();
+}
+
 template <typename T, typename Enable = void>
 struct AttributeHandlerScalar {
     using Type = T;
 
-    static auto fromDataValue(DataValue&& dv) {
-        return dv.getValue().getScalar<Type>();
+    static Result<Type> fromDataValue(DataValue&& dv) {
+        return getVariant(std::move(dv)).andThen([](Variant&& var) -> Result<Type> {
+            if (var.isScalar() && var.isType<Type>()) {
+                return var.getScalar<Type>();
+            }
+            return BadResult(UA_STATUSCODE_BADUNEXPECTEDERROR);
+        });
     }
 
     template <typename U>
-    static auto toDataValue(U&& value) {
+    static DataValue toDataValue(U&& value) {
         return DataValue::fromScalar(std::forward<U>(value));
     }
 };
@@ -40,11 +56,12 @@ struct AttributeHandlerScalar<T, std::enable_if_t<std::is_enum_v<T>>> {
     using Type = T;
     using UnderlyingType = std::underlying_type_t<Type>;
 
-    static auto fromDataValue(DataValue&& dv) {
-        return static_cast<Type>(dv.getValue().getScalar<UnderlyingType>());
+    static Result<Type> fromDataValue(DataValue&& dv) {
+        return AttributeHandlerScalar<UnderlyingType>::fromDataValue(std::move(dv))
+            .transform([](auto value) { return static_cast<Type>(value); });
     }
 
-    static auto toDataValue(Type value) {
+    static DataValue toDataValue(Type value) {
         return DataValue::fromScalar(static_cast<UnderlyingType>(value));
     }
 };
@@ -54,11 +71,12 @@ struct AttributeHandlerScalar<Bitmask<T>> {
     using Type = Bitmask<T>;
     using UnderlyingType = typename Bitmask<T>::Underlying;
 
-    static auto fromDataValue(DataValue&& dv) {
-        return Bitmask<T>(dv.getValue().getScalar<UnderlyingType>());
+    static Result<Type> fromDataValue(DataValue&& dv) {
+        return AttributeHandlerScalar<UnderlyingType>::fromDataValue(std::move(dv))
+            .transform([](auto value) { return Bitmask<T>(value); });
     }
 
-    static auto toDataValue(Type value) {
+    static DataValue toDataValue(Type value) {
         return DataValue::fromScalar(value.get());
     }
 };
@@ -70,9 +88,11 @@ template <>
 struct AttributeHandler<AttributeId::NodeClass> {
     using Type = NodeClass;
 
-    static auto fromDataValue(DataValue&& dv) noexcept {
-        // workaround to read enum from variant...
-        return *static_cast<NodeClass*>(dv.getValue().data());
+    static Result<Type> fromDataValue(DataValue&& dv) noexcept {
+        return getVariant(std::move(dv)).transform([](Variant&& var) {
+            // workaround to read enum from variant...
+            return *static_cast<NodeClass*>(var.data());
+        });
     }
 };
 
@@ -111,11 +131,11 @@ template <>
 struct AttributeHandler<AttributeId::Value> {
     using Type = Variant;
 
-    static Variant fromDataValue(DataValue&& dv) {
-        return std::exchange(dv->value, {});
+    static Result<Variant> fromDataValue(DataValue&& dv) {
+        return getVariant(std::move(dv));
     }
 
-    static auto toDataValue(const Variant& value) {
+    static DataValue toDataValue(const Variant& value) {
         DataValue dv;
         dv->value = value;  // shallow copy
         dv->value.storageType = UA_VARIANT_DATA_NODELETE;  // prevent double delete
@@ -134,14 +154,16 @@ template <>
 struct AttributeHandler<AttributeId::ArrayDimensions> {
     using Type = std::vector<uint32_t>;
 
-    static auto fromDataValue(DataValue&& dv) {
-        if (dv.getValue().isArray()) {
-            return dv.getValue().getArrayCopy<uint32_t>();
-        }
-        return std::vector<uint32_t>{};
+    static Result<Type> fromDataValue(DataValue&& dv) {
+        return getVariant(std::move(dv)).andThen([](Variant&& var) -> Result<Type> {
+            if (var.isArray() && var.isType<uint32_t>()) {
+                return std::move(var).getArrayCopy<uint32_t>();  // TODO: might throw
+            }
+            return BadResult(UA_STATUSCODE_BADUNEXPECTEDERROR);
+        });
     }
 
-    static auto toDataValue(Span<const uint32_t> dimensions) {
+    static DataValue toDataValue(Span<const uint32_t> dimensions) {
         return DataValue::fromArray(dimensions);
     }
 };

@@ -30,7 +30,7 @@ DeleteReferencesResponse deleteReferences(
 }
 
 template <>
-NodeId addNode<Server>(
+Result<NodeId> addNode<Server>(
     Server& connection,
     NodeClass nodeClass,
     const NodeId& parentId,
@@ -41,7 +41,7 @@ NodeId addNode<Server>(
     const NodeId& referenceType
 ) {
     NodeId addedNodeId;
-    const auto status = __UA_Server_addNode(
+    const StatusCode status = __UA_Server_addNode(
         connection.handle(),
         static_cast<UA_NodeClass>(nodeClass),
         id.handle(),
@@ -54,12 +54,14 @@ NodeId addNode<Server>(
         nullptr,  // nodeContext
         addedNodeId.handle()
     );
-    throwIfBad(status);
+    if (status.isBad()) {
+        return BadResult(status);
+    }
     return addedNodeId;
 }
 
 template <>
-NodeId addNode<Client>(
+Result<NodeId> addNode<Client>(
     Client& connection,
     NodeClass nodeClass,
     const NodeId& parentId,
@@ -112,7 +114,7 @@ static UA_StatusCode methodCallback(
 }
 
 template <>
-NodeId addMethod(
+Result<NodeId> addMethod(
     Server& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -146,7 +148,7 @@ NodeId addMethod(
 }
 
 template <>
-NodeId addMethod(
+Result<NodeId> addMethod(
     Client& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -173,25 +175,24 @@ NodeId addMethod(
 #endif
 
 template <>
-void addReference<Server>(
+Result<void> addReference<Server>(
     Server& connection,
     const NodeId& sourceId,
     const NodeId& targetId,
     const NodeId& referenceType,
     bool forward
 ) {
-    const auto status = UA_Server_addReference(
+    return detail::asResult(UA_Server_addReference(
         connection.handle(),
         sourceId,
         referenceType,
         {targetId, {}, 0},
         forward  // isForward
-    );
-    throwIfBad(status);
+    ));
 }
 
 template <>
-void addReference<Client>(
+Result<void> addReference<Client>(
     Client& connection,
     const NodeId& sourceId,
     const NodeId& targetId,
@@ -204,18 +205,17 @@ void addReference<Client>(
 }
 
 template <>
-void deleteNode<Server>(Server& connection, const NodeId& id, bool deleteReferences) {
-    const auto status = UA_Server_deleteNode(connection.handle(), id, deleteReferences);
-    throwIfBad(status);
+Result<void> deleteNode<Server>(Server& connection, const NodeId& id, bool deleteReferences) {
+    return detail::asResult(UA_Server_deleteNode(connection.handle(), id, deleteReferences));
 }
 
 template <>
-void deleteNode<Client>(Client& connection, const NodeId& id, bool deleteReferences) {
+Result<void> deleteNode<Client>(Client& connection, const NodeId& id, bool deleteReferences) {
     return deleteNodeAsync(connection, id, deleteReferences, detail::SyncOperation{});
 }
 
 template <>
-void deleteReference<Server>(
+Result<void> deleteReference<Server>(
     Server& connection,
     const NodeId& sourceId,
     const NodeId& targetId,
@@ -223,19 +223,18 @@ void deleteReference<Server>(
     bool isForward,
     bool deleteBidirectional
 ) {
-    const auto status = UA_Server_deleteReference(
+    return detail::asResult(UA_Server_deleteReference(
         connection.handle(),
         sourceId,
         referenceType,
         isForward,
         {targetId, {}, 0},
         deleteBidirectional
-    );
-    throwIfBad(status);
+    ));
 }
 
 template <>
-void deleteReference<Client>(
+Result<void> deleteReference<Client>(
     Client& connection,
     const NodeId& sourceId,
     const NodeId& targetId,

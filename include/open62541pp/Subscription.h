@@ -108,14 +108,14 @@ public:
     /// @note Not implemented for Server.
     /// @see services::modifySubscription
     void setSubscriptionParameters(SubscriptionParameters& parameters) {
-        services::modifySubscription(connection_, subscriptionId_, parameters);
+        services::modifySubscription(connection_, subscriptionId_, parameters).code().throwIfBad();
     }
 
     /// Enable/disable publishing of notification messages.
     /// @note Not implemented for Server.
     /// @see services::setPublishingMode
     void setPublishingMode(bool publishing) {
-        services::setPublishingMode(connection_, subscriptionId_, publishing);
+        services::setPublishingMode(connection_, subscriptionId_, publishing).code().throwIfBad();
     }
 
     /// Create a monitored item for data change notifications.
@@ -127,7 +127,7 @@ public:
         MonitoringParametersEx& parameters,
         DataChangeNotificationCallback onDataChange
     ) {
-        const uint32_t monitoredItemId = services::createMonitoredItemDataChange(
+        const auto result = services::createMonitoredItemDataChange(
             connection_,
             subscriptionId_,
             {id, attribute},
@@ -135,7 +135,7 @@ public:
             parameters,
             std::move(onDataChange)
         );
-        return {connection_, subscriptionId_, monitoredItemId};
+        return {connection_, subscriptionId_, result.value()};
     }
 
     /// @deprecated Use overload with DataChangeNotificationCallback instead
@@ -182,7 +182,7 @@ public:
         MonitoringParametersEx& parameters,
         EventNotificationCallback onEvent  // NOLINT(*-unnecessary-value-param), false positive?
     ) {
-        const uint32_t monitoredItemId = services::createMonitoredItemEvent(
+        const auto result = services::createMonitoredItemEvent(
             connection_,
             subscriptionId_,
             {id, AttributeId::EventNotifier},
@@ -190,7 +190,7 @@ public:
             parameters,
             std::move(onEvent)
         );
-        return {connection_, subscriptionId_, monitoredItemId};
+        return {connection_, subscriptionId_, result.value()};
     }
 
     /// @deprecated Use overload with EventNotificationCallback instead
@@ -227,7 +227,7 @@ public:
     /// Delete this subscription.
     /// @note Not implemented for Server.
     void deleteSubscription() {
-        services::deleteSubscription(connection_, subscriptionId_);
+        services::deleteSubscription(connection_, subscriptionId_).code().throwIfBad();
     }
 
 private:

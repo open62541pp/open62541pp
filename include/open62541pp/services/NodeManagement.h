@@ -55,10 +55,7 @@ auto addNodesAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::sendRequest<UA_AddNodesRequest, UA_AddNodesResponse>(
-        connection,
-        request,
-        detail::WrapResponse<AddNodesResponse>{},
-        std::forward<CompletionToken>(token)
+        connection, request, detail::Wrap<AddNodesResponse>{}, std::forward<CompletionToken>(token)
     );
 }
 
@@ -75,7 +72,7 @@ auto addNodesAsync(
  * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
-NodeId addNode(
+Result<NodeId> addNode(
     T& connection,
     NodeClass nodeClass,
     const NodeId& parentId,
@@ -119,9 +116,7 @@ auto addNodeAsync(
         connection,
         request,
         [](UA_AddNodesResponse& response) {
-            auto& result = detail::getSingleResult(response);
-            throwIfBad(result.statusCode);
-            return NodeId(std::exchange(result.addedNodeId, {}));
+            return detail::getSingleResult(response).andThen(detail::getAddedNodeId);
         },
         std::forward<CompletionToken>(token)
     );
@@ -156,7 +151,7 @@ auto addReferencesAsync(
     return detail::sendRequest<UA_AddReferencesRequest, UA_AddReferencesResponse>(
         connection,
         request,
-        detail::WrapResponse<AddReferencesResponse>{},
+        detail::Wrap<AddReferencesResponse>{},
         std::forward<CompletionToken>(token)
     );
 }
@@ -170,7 +165,7 @@ auto addReferencesAsync(
  * @param forward Create a forward reference if `true` or a inverse reference if `false`
  */
 template <typename T>
-void addReference(
+Result<void> addReference(
     T& connection,
     const NodeId& sourceId,
     const NodeId& targetId,
@@ -204,7 +199,9 @@ auto addReferenceAsync(
     return detail::sendRequest<UA_AddReferencesRequest, UA_AddReferencesResponse>(
         connection,
         request,
-        [](UA_AddReferencesResponse& response) { throwIfBad(detail::getSingleResult(response)); },
+        [](UA_AddReferencesResponse& response) {
+            return detail::getSingleResult(response).andThen(detail::asResult);
+        },
         std::forward<CompletionToken>(token)
     );
 }
@@ -238,7 +235,7 @@ auto deleteNodesAsync(
     return detail::sendRequest<UA_DeleteNodesRequest, UA_DeleteNodesResponse>(
         connection,
         request,
-        detail::WrapResponse<DeleteNodesResponse>{},
+        detail::Wrap<DeleteNodesResponse>{},
         std::forward<CompletionToken>(token)
     );
 }
@@ -250,7 +247,7 @@ auto deleteNodesAsync(
  * @param deleteReferences Delete references in target nodes that reference the node to delete
  */
 template <typename T>
-void deleteNode(T& connection, const NodeId& id, bool deleteReferences = true);
+Result<void> deleteNode(T& connection, const NodeId& id, bool deleteReferences = true);
 
 /**
  * Asynchronously delete node.
@@ -273,7 +270,9 @@ auto deleteNodeAsync(
     return detail::sendRequest<UA_DeleteNodesRequest, UA_DeleteNodesResponse>(
         connection,
         request,
-        [](UA_DeleteNodesResponse& response) { throwIfBad(detail::getSingleResult(response)); },
+        [](UA_DeleteNodesResponse& response) {
+            return detail::getSingleResult(response).andThen(detail::asResult);
+        },
         std::forward<CompletionToken>(token)
     );
 }
@@ -309,7 +308,7 @@ auto deleteReferencesAsync(
     return detail::sendRequest<UA_DeleteReferencesRequest, UA_DeleteReferencesResponse>(
         connection,
         request,
-        detail::WrapResponse<DeleteReferencesResponse>{},
+        detail::Wrap<DeleteReferencesResponse>{},
         std::forward<CompletionToken>(token)
     );
 }
@@ -324,7 +323,7 @@ auto deleteReferencesAsync(
  * @param deleteBidirectional Delete the specified and opposite reference from the target node
  */
 template <typename T>
-void deleteReference(
+Result<void> deleteReference(
     T& connection,
     const NodeId& sourceId,
     const NodeId& targetId,
@@ -361,7 +360,7 @@ auto deleteReferenceAsync(
         connection,
         request,
         [](UA_DeleteReferencesResponse& response) {
-            throwIfBad(detail::getSingleResult(response));
+            return detail::getSingleResult(response).andThen(detail::asResult);
         },
         std::forward<CompletionToken>(token)
     );
@@ -390,7 +389,7 @@ auto deleteReferenceAsync(
  * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
-inline NodeId addObject(
+inline Result<NodeId> addObject(
     T& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -451,7 +450,7 @@ inline auto addObjectAsync(
  * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
-inline NodeId addFolder(
+inline Result<NodeId> addFolder(
     T& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -503,7 +502,7 @@ inline auto addFolderAsync(
  * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
-inline NodeId addVariable(
+inline Result<NodeId> addVariable(
     T& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -563,7 +562,7 @@ inline auto addVariableAsync(
  * @param attributes Property attributes
  */
 template <typename T>
-inline NodeId addProperty(
+inline Result<NodeId> addProperty(
     T& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -630,7 +629,7 @@ using MethodCallback = std::function<void(Span<const Variant> input, Span<Varian
  * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
-NodeId addMethod(
+Result<NodeId> addMethod(
     T& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -685,7 +684,7 @@ inline auto addMethodAsync(
  * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
-inline NodeId addObjectType(
+inline Result<NodeId> addObjectType(
     T& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -745,7 +744,7 @@ inline auto addObjectTypeAsync(
  * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
-inline NodeId addVariableType(
+inline Result<NodeId> addVariableType(
     T& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -806,7 +805,7 @@ inline auto addVariableTypeAsync(
  * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
-inline NodeId addReferenceType(
+inline Result<NodeId> addReferenceType(
     T& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -865,7 +864,7 @@ inline auto addReferenceTypeAsync(
  * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
-inline NodeId addDataType(
+inline Result<NodeId> addDataType(
     T& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -924,7 +923,7 @@ inline auto addDataTypeAsync(
  * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
-inline NodeId addView(
+inline Result<NodeId> addView(
     T& connection,
     const NodeId& parentId,
     const NodeId& id,
@@ -986,7 +985,7 @@ inline auto addViewAsync(
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/6.4.4
  */
 template <typename T>
-inline void addModellingRule(T& connection, const NodeId& id, ModellingRule rule) {
+inline Result<void> addModellingRule(T& connection, const NodeId& id, ModellingRule rule) {
     return addReference(
         connection, id, {0, static_cast<uint32_t>(rule)}, ReferenceTypeId::HasModellingRule, true
     );
