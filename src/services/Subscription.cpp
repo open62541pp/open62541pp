@@ -48,7 +48,7 @@ Result<uint32_t> createSubscription(
 
 Result<void> modifySubscription(
     Client& connection, uint32_t subscriptionId, SubscriptionParameters& parameters
-) {
+) noexcept {
     const ModifySubscriptionResponse response = UA_Client_Subscriptions_modify(
         connection.handle(), detail::createModifySubscriptionRequest(subscriptionId, parameters)
     );
@@ -59,7 +59,9 @@ Result<void> modifySubscription(
     return {};
 }
 
-Result<void> setPublishingMode(Client& connection, uint32_t subscriptionId, bool publishing) {
+Result<void> setPublishingMode(
+    Client& connection, uint32_t subscriptionId, bool publishing
+) noexcept {
     return detail::sendRequest<UA_SetPublishingModeRequest, UA_SetPublishingModeResponse>(
         connection,
         detail::createSetPublishingModeRequest({&subscriptionId, 1}, publishing),
@@ -70,7 +72,7 @@ Result<void> setPublishingMode(Client& connection, uint32_t subscriptionId, bool
     );
 }
 
-Result<void> deleteSubscription(Client& connection, uint32_t subscriptionId) {
+Result<void> deleteSubscription(Client& connection, uint32_t subscriptionId) noexcept {
     return detail::asResult(
         UA_Client_Subscriptions_deleteSingle(connection.handle(), subscriptionId)
     );

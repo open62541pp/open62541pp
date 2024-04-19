@@ -22,7 +22,7 @@ namespace opcua::services::detail {
 template <AttributeId Attribute>
 struct AttributeHandler;
 
-inline Result<Variant> getVariant(DataValue&& dv) {
+inline Result<Variant> getVariant(DataValue&& dv) noexcept {
     if (dv.getStatus().isBad()) {
         return BadResult(dv.getStatus());
     }
@@ -36,18 +36,25 @@ template <typename T, typename Enable = void>
 struct AttributeHandlerScalar {
     using Type = T;
 
-    static Result<Type> fromDataValue(DataValue&& dv) {
+    static Result<Type> fromDataValue(DataValue&& dv) noexcept {
         return getVariant(std::move(dv)).andThen([](Variant&& var) -> Result<Type> {
-            if (var.isScalar() && var.isType<Type>()) {
-                return var.getScalar<Type>();
+            try {
+                return std::move(var).getScalar<Type>();
+            } catch (...) {
+                return BadResult(opcua::detail::getStatusCode(std::current_exception()));
             }
-            return BadResult(UA_STATUSCODE_BADUNEXPECTEDERROR);
         });
     }
 
     template <typename U>
-    static DataValue toDataValue(U&& value) {
-        return DataValue::fromScalar(std::forward<U>(value));
+    static DataValue toDataValue(U&& value) noexcept {
+        try {
+            return DataValue::fromScalar(std::forward<U>(value));
+        } catch (...) {
+            DataValue dv;
+            dv.setStatus(opcua::detail::getStatusCode(std::current_exception()));
+            return dv;
+        }
     }
 };
 
@@ -55,14 +62,16 @@ template <typename T>
 struct AttributeHandlerScalar<T, std::enable_if_t<std::is_enum_v<T>>> {
     using Type = T;
     using UnderlyingType = std::underlying_type_t<Type>;
+    using UnderlyingHandler = AttributeHandlerScalar<UnderlyingType>;
 
-    static Result<Type> fromDataValue(DataValue&& dv) {
-        return AttributeHandlerScalar<UnderlyingType>::fromDataValue(std::move(dv))
-            .transform([](auto value) { return static_cast<Type>(value); });
+    static Result<Type> fromDataValue(DataValue&& dv) noexcept {
+        return UnderlyingHandler::fromDataValue(std::move(dv)).transform([](auto value) {
+            return static_cast<Type>(value);
+        });
     }
 
-    static DataValue toDataValue(Type value) {
-        return DataValue::fromScalar(static_cast<UnderlyingType>(value));
+    static DataValue toDataValue(Type value) noexcept {
+        return UnderlyingHandler::toDataValue(static_cast<UnderlyingType>(value));
     }
 };
 
@@ -70,14 +79,16 @@ template <typename T>
 struct AttributeHandlerScalar<Bitmask<T>> {
     using Type = Bitmask<T>;
     using UnderlyingType = typename Bitmask<T>::Underlying;
+    using UnderlyingHandler = AttributeHandlerScalar<UnderlyingType>;
 
-    static Result<Type> fromDataValue(DataValue&& dv) {
-        return AttributeHandlerScalar<UnderlyingType>::fromDataValue(std::move(dv))
-            .transform([](auto value) { return Bitmask<T>(value); });
+    static Result<Type> fromDataValue(DataValue&& dv) noexcept {
+        return UnderlyingHandler::fromDataValue(std::move(dv)).transform([](auto value) {
+            return Bitmask<T>(value);
+        });
     }
 
-    static DataValue toDataValue(Type value) {
-        return DataValue::fromScalar(value.get());
+    static DataValue toDataValue(Type value) noexcept {
+        return UnderlyingHandler::toDataValue(value.get());
     }
 };
 
@@ -131,11 +142,11 @@ template <>
 struct AttributeHandler<AttributeId::Value> {
     using Type = Variant;
 
-    static Result<Variant> fromDataValue(DataValue&& dv) {
+    static Result<Variant> fromDataValue(DataValue&& dv) noexcept {
         return getVariant(std::move(dv));
     }
 
-    static DataValue toDataValue(const Variant& value) {
+    static DataValue toDataValue(const Variant& value) noexcept {
         DataValue dv;
         dv->value = value;  // shallow copy
         dv->value.storageType = UA_VARIANT_DATA_NODELETE;  // prevent double delete
@@ -154,17 +165,24 @@ template <>
 struct AttributeHandler<AttributeId::ArrayDimensions> {
     using Type = std::vector<uint32_t>;
 
-    static Result<Type> fromDataValue(DataValue&& dv) {
+    static Result<Type> fromDataValue(DataValue&& dv) noexcept {
         return getVariant(std::move(dv)).andThen([](Variant&& var) -> Result<Type> {
-            if (var.isArray() && var.isType<uint32_t>()) {
-                return std::move(var).getArrayCopy<uint32_t>();  // TODO: might throw
+            try {
+                return std::move(var).getArrayCopy<uint32_t>();
+            } catch (...) {
+                return BadResult(opcua::detail::getStatusCode(std::current_exception()));
             }
-            return BadResult(UA_STATUSCODE_BADUNEXPECTEDERROR);
         });
     }
 
-    static DataValue toDataValue(Span<const uint32_t> dimensions) {
-        return DataValue::fromArray(dimensions);
+    static DataValue toDataValue(Span<const uint32_t> dimensions) noexcept {
+        try {
+            return DataValue::fromArray(dimensions);
+        } catch (...) {
+            DataValue dv;
+            dv.setStatus(opcua::detail::getStatusCode(std::current_exception()));
+            return dv;
+        }
     }
 };
 

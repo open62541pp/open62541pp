@@ -201,7 +201,7 @@ Result<void> modifyMonitoredItem(
     uint32_t subscriptionId,
     uint32_t monitoredItemId,
     MonitoringParametersEx& parameters
-);
+) noexcept;
 
 /**
  * @}
@@ -224,7 +224,7 @@ Result<void> setMonitoringMode(
     uint32_t subscriptionId,
     uint32_t monitoredItemId,
     MonitoringMode monitoringMode
-);
+) noexcept;
 
 /**
  * @}
@@ -252,7 +252,7 @@ Result<void> setTriggering(
     uint32_t triggeringItemId,
     Span<const uint32_t> linksToAdd,
     Span<const uint32_t> linksToRemove
-);
+) noexcept;
 
 /**
  * @}

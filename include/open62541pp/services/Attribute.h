@@ -47,7 +47,7 @@ namespace opcua::services {
  * @param connection Instance of type Client
  * @param request Read request
  */
-ReadResponse read(Client& connection, const ReadRequest& request);
+ReadResponse read(Client& connection, const ReadRequest& request) noexcept;
 
 /**
  * @overload
@@ -56,7 +56,7 @@ inline ReadResponse read(
     Client& connection,
     Span<const ReadValueId> nodesToRead,
     TimestampsToReturn timestamps = TimestampsToReturn::Neither
-) {
+) noexcept {
     return read(connection, detail::createReadRequest(timestamps, nodesToRead));
 }
 
@@ -106,7 +106,7 @@ Result<DataValue> readAttribute(
     const NodeId& id,
     AttributeId attributeId,
     TimestampsToReturn timestamps = TimestampsToReturn::Neither
-);
+) noexcept;
 
 /**
  * Asynchronously read node attribute.
@@ -159,12 +159,12 @@ auto readAttributeAsync(
  * @param connection Instance of type Client
  * @param request Write request
  */
-WriteResponse write(Client& connection, const WriteRequest& request);
+WriteResponse write(Client& connection, const WriteRequest& request) noexcept;
 
 /**
  * @overload
  */
-inline WriteResponse write(Client& connection, Span<const WriteValue> nodesToWrite) {
+inline WriteResponse write(Client& connection, Span<const WriteValue> nodesToWrite) noexcept {
     return write(connection, detail::createWriteRequest(nodesToWrite));
 }
 
@@ -208,7 +208,7 @@ inline auto writeAsync(
 template <typename T>
 Result<void> writeAttribute(
     T& connection, const NodeId& id, AttributeId attributeId, const DataValue& value
-);
+) noexcept;
 
 /**
  * Asynchronously write node attribute.
@@ -244,7 +244,7 @@ auto writeAttributeAsync(
 namespace detail {
 
 template <AttributeId Attribute, typename T>
-inline auto readAttributeImpl(T& connection, const NodeId& id) {
+inline auto readAttributeImpl(T& connection, const NodeId& id) noexcept {
     using Handler = typename detail::AttributeHandler<Attribute>;
     return readAttribute(connection, id, Attribute).andThen(Handler::fromDataValue);
 }
@@ -265,7 +265,7 @@ inline auto readAttributeAsyncImpl(Client& connection, const NodeId& id, Complet
 }
 
 template <AttributeId Attribute, typename T, typename U>
-inline Result<void> writeAttributeImpl(T& connection, const NodeId& id, U&& value) {
+inline Result<void> writeAttributeImpl(T& connection, const NodeId& id, U&& value) noexcept {
     using Handler = detail::AttributeHandler<Attribute>;
     return writeAttribute(connection, id, Attribute, Handler::toDataValue(std::forward<U>(value)));
 }
@@ -293,7 +293,7 @@ inline auto writeAttributeAsyncImpl(
  * @ingroup Read
  */
 template <typename T>
-inline Result<DataValue> readDataValue(T& connection, const NodeId& id) {
+inline Result<DataValue> readDataValue(T& connection, const NodeId& id) noexcept {
     return readAttribute(connection, id, AttributeId::Value, TimestampsToReturn::Both);
 }
 
@@ -322,7 +322,9 @@ inline auto readDataValueAsync(Client& connection, const NodeId& id, CompletionT
  * @ingroup Write
  */
 template <typename T>
-inline Result<void> writeDataValue(T& connection, const NodeId& id, const DataValue& value) {
+inline Result<void> writeDataValue(
+    T& connection, const NodeId& id, const DataValue& value
+) noexcept {
     return writeAttribute(connection, id, AttributeId::Value, value);
 }
 

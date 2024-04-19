@@ -37,7 +37,7 @@ namespace opcua::services {
  * @param connection Instance of type Client
  * @param request Call request
  */
-CallResponse call(Client& connection, const CallRequest& request);
+CallResponse call(Client& connection, const CallRequest& request) noexcept;
 
 /**
  * Asynchronously call server methods.
@@ -74,7 +74,7 @@ Result<std::vector<Variant>> call(
     const NodeId& objectId,
     const NodeId& methodId,
     Span<const Variant> inputArguments
-);
+) noexcept;
 
 /**
  * Asynchronously call a server method and return outputs.

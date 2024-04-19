@@ -145,7 +145,7 @@ static auto sendRequest(
     const Request& request,
     TransformResponse&& transformResponse,
     SyncOperation /*unused*/
-) {
+) noexcept(std::is_nothrow_invocable_v<TransformResponse, Response&>) {
     Response response{};
     const auto responseDeleter = opcua::detail::ScopeExit([&] {
         opcua::detail::clear(response, getDataType<Response>());

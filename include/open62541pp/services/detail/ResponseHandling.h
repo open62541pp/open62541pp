@@ -50,19 +50,14 @@ inline UA_StatusCode getServiceResult(const Response& response) noexcept {
 }
 
 template <typename Response>
-using ResponseResultsType = std::remove_pointer_t<decltype(Response::results)>;
-
-template <typename Response>
-inline Result<std::reference_wrapper<ResponseResultsType<Response>>> getSingleResult(
-    Response& response
-) {
+auto getSingleResult(Response& response) noexcept -> Result<decltype(std::ref(*response.results))> {
     if (StatusCode serviceResult = getServiceResult(response); serviceResult.isBad()) {
         return BadResult(serviceResult);
     }
     if (response.results == nullptr || response.resultsSize != 1) {
         return BadResult(UA_STATUSCODE_BADUNEXPECTEDERROR);
     }
-    return {*response.results};
+    return std::ref(*response.results);
 }
 
 inline Result<void> asResult(UA_StatusCode code) noexcept {
@@ -79,7 +74,7 @@ inline Result<NodeId> getAddedNodeId(UA_AddNodesResult& result) noexcept {
     return {std::exchange(result.addedNodeId, {})};
 }
 
-inline Result<std::vector<Variant>> getOutputArguments(UA_CallMethodResult& result) {
+inline Result<std::vector<Variant>> getOutputArguments(UA_CallMethodResult& result) noexcept {
     if (StatusCode code = result.statusCode; code.isBad()) {
         return BadResult(result.statusCode);
     }
@@ -88,23 +83,29 @@ inline Result<std::vector<Variant>> getOutputArguments(UA_CallMethodResult& resu
             return BadResult(code);
         }
     }
-    return std::vector<Variant>{
-        std::make_move_iterator(result.outputArguments),
-        std::make_move_iterator(result.outputArguments + result.outputArgumentsSize)  // NOLINT
-    };
+    try {
+        return std::vector<Variant>{
+            std::make_move_iterator(result.outputArguments),
+            std::make_move_iterator(result.outputArguments + result.outputArgumentsSize)  // NOLINT
+        };
+    } catch (...) {
+        return BadResult(opcua::detail::getStatusCode(std::current_exception()));
+    }
 }
 
 template <typename SubscriptionParameters, typename Response>
 inline void reviseSubscriptionParameters(
     SubscriptionParameters& parameters, const Response& response
-) {
+) noexcept {
     parameters.publishingInterval = response.revisedPublishingInterval;
     parameters.lifetimeCount = response.revisedLifetimeCount;
     parameters.maxKeepAliveCount = response.revisedMaxKeepAliveCount;
 }
 
 template <typename MonitoringParameters, typename Result>
-inline void reviseMonitoringParameters(MonitoringParameters& parameters, const Result& result) {
+inline void reviseMonitoringParameters(
+    MonitoringParameters& parameters, const Result& result
+) noexcept {
     // result type may be UA_MonitoredItemCreateResult or UA_MonitoredItemModifyResult
     parameters.samplingInterval = result.revisedSamplingInterval;
     parameters.queueSize = result.revisedQueueSize;

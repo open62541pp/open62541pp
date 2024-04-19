@@ -41,7 +41,7 @@ namespace opcua::services {
  * @param connection Instance of type Client
  * @param request Add nodes request
  */
-AddNodesResponse addNodes(Client& connection, const AddNodesRequest& request);
+AddNodesResponse addNodes(Client& connection, const AddNodesRequest& request) noexcept;
 
 /**
  * Asynchronously add one or more nodes (client only).
@@ -81,7 +81,7 @@ Result<NodeId> addNode(
     const ExtensionObject& nodeAttributes,
     const NodeId& typeDefinition,
     const NodeId& referenceType
-);
+) noexcept;
 
 /**
  * Asynchronously add a node.
@@ -135,7 +135,9 @@ auto addNodeAsync(
  * @param connection Instance of type Client
  * @param request Add references request
  */
-AddReferencesResponse addReferences(Client& connection, const AddReferencesRequest& request);
+AddReferencesResponse addReferences(
+    Client& connection, const AddReferencesRequest& request
+) noexcept;
 
 /**
  * Asynchronously add one or more references (client only).
@@ -171,7 +173,7 @@ Result<void> addReference(
     const NodeId& targetId,
     const NodeId& referenceType,
     bool forward = true
-);
+) noexcept;
 
 /**
  * Asynchronously add reference.
@@ -219,7 +221,7 @@ auto addReferenceAsync(
  * @param connection Instance of type Client
  * @param request Delete nodes request
  */
-DeleteNodesResponse deleteNodes(Client& connection, const DeleteNodesRequest& request);
+DeleteNodesResponse deleteNodes(Client& connection, const DeleteNodesRequest& request) noexcept;
 
 /**
  * Asynchronously delete one or more nodes (client only).
@@ -247,7 +249,7 @@ auto deleteNodesAsync(
  * @param deleteReferences Delete references in target nodes that reference the node to delete
  */
 template <typename T>
-Result<void> deleteNode(T& connection, const NodeId& id, bool deleteReferences = true);
+Result<void> deleteNode(T& connection, const NodeId& id, bool deleteReferences = true) noexcept;
 
 /**
  * Asynchronously delete node.
@@ -292,7 +294,7 @@ auto deleteNodeAsync(
  */
 DeleteReferencesResponse deleteReferences(
     Client& connection, const DeleteReferencesRequest& request
-);
+) noexcept;
 
 /**
  * Asynchronously delete one or more references (client only).
@@ -330,7 +332,7 @@ Result<void> deleteReference(
     const NodeId& referenceType,
     bool isForward,
     bool deleteBidirectional
-);
+) noexcept;
 
 /**
  * Asynchronously delete reference.
@@ -397,7 +399,7 @@ inline Result<NodeId> addObject(
     const ObjectAttributes& attributes = {},
     const NodeId& objectType = ObjectTypeId::BaseObjectType,
     const NodeId& referenceType = ReferenceTypeId::HasComponent
-) {
+) noexcept {
     return addNode(
         connection,
         NodeClass::Object,
@@ -457,7 +459,7 @@ inline Result<NodeId> addFolder(
     std::string_view browseName,
     const ObjectAttributes& attributes = {},
     const NodeId& referenceType = ReferenceTypeId::HasComponent
-) {
+) noexcept {
     return addObject(
         connection, parentId, id, browseName, attributes, ObjectTypeId::FolderType, referenceType
     );
@@ -510,7 +512,7 @@ inline Result<NodeId> addVariable(
     const VariableAttributes& attributes = {},
     const NodeId& variableType = VariableTypeId::BaseDataVariableType,
     const NodeId& referenceType = ReferenceTypeId::HasComponent
-) {
+) noexcept {
     return addNode(
         connection,
         NodeClass::Variable,
@@ -568,7 +570,7 @@ inline Result<NodeId> addProperty(
     const NodeId& id,
     std::string_view browseName,
     const VariableAttributes& attributes = {}
-) {
+) noexcept {
     return addVariable(
         connection,
         parentId,
@@ -639,7 +641,7 @@ Result<NodeId> addMethod(
     Span<const Argument> outputArguments,
     const MethodAttributes& attributes = {},
     const NodeId& referenceType = ReferenceTypeId::HasComponent
-);
+) noexcept;
 
 /**
  * Asynchronously add method.
@@ -691,7 +693,7 @@ inline Result<NodeId> addObjectType(
     std::string_view browseName,
     const ObjectTypeAttributes& attributes = {},
     const NodeId& referenceType = ReferenceTypeId::HasSubtype
-) {
+) noexcept {
     return addNode(
         connection,
         NodeClass::ObjectType,
@@ -752,7 +754,7 @@ inline Result<NodeId> addVariableType(
     const VariableTypeAttributes& attributes = {},
     const NodeId& variableType = VariableTypeId::BaseDataVariableType,
     const NodeId& referenceType = ReferenceTypeId::HasSubtype
-) {
+) noexcept {
     return addNode(
         connection,
         NodeClass::VariableType,
@@ -812,7 +814,7 @@ inline Result<NodeId> addReferenceType(
     std::string_view browseName,
     const ReferenceTypeAttributes& attributes = {},
     const NodeId& referenceType = ReferenceTypeId::HasSubtype
-) {
+) noexcept {
     return addNode(
         connection,
         NodeClass::ReferenceType,
@@ -871,7 +873,7 @@ inline Result<NodeId> addDataType(
     std::string_view browseName,
     const DataTypeAttributes& attributes = {},
     const NodeId& referenceType = ReferenceTypeId::HasSubtype
-) {
+) noexcept {
     return addNode(
         connection,
         NodeClass::DataType,
@@ -930,7 +932,7 @@ inline Result<NodeId> addView(
     std::string_view browseName,
     const ViewAttributes& attributes = {},
     const NodeId& referenceType = ReferenceTypeId::Organizes
-) {
+) noexcept {
     return addNode(
         connection,
         NodeClass::View,
@@ -985,7 +987,7 @@ inline auto addViewAsync(
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/6.4.4
  */
 template <typename T>
-inline Result<void> addModellingRule(T& connection, const NodeId& id, ModellingRule rule) {
+inline Result<void> addModellingRule(T& connection, const NodeId& id, ModellingRule rule) noexcept {
     return addReference(
         connection, id, {0, static_cast<uint32_t>(rule)}, ReferenceTypeId::HasModellingRule, true
     );

@@ -44,7 +44,7 @@ namespace opcua::services {
  * @param connection Instance of type Client
  * @param request Browse request
  */
-BrowseResponse browse(Client& connection, const BrowseRequest& request);
+BrowseResponse browse(Client& connection, const BrowseRequest& request) noexcept;
 
 /**
  * Asynchronously discover the references of one or more nodes (client only).
@@ -70,7 +70,9 @@ auto browseAsync(
  * @param maxReferences The maximum number of references to return (0 if no limit)
  */
 template <typename T>
-Result<BrowseResult> browse(T& connection, const BrowseDescription& bd, uint32_t maxReferences = 0);
+Result<BrowseResult> browse(
+    T& connection, const BrowseDescription& bd, uint32_t maxReferences = 0
+) noexcept;
 
 /**
  * Asynchronously discover the references of a specified node.
@@ -109,7 +111,7 @@ auto browseAsync(
  * @param connection Instance of type Client
  * @param request Browse request
  */
-BrowseNextResponse browseNext(Client& connection, const BrowseNextRequest& request);
+BrowseNextResponse browseNext(Client& connection, const BrowseNextRequest& request) noexcept;
 
 /**
  * Asynchronously request the next sets of @ref browse / @ref browseNext responses (client only).
@@ -141,7 +143,7 @@ auto browseNextAsync(
 template <typename T>
 Result<BrowseResult> browseNext(
     T& connection, bool releaseContinuationPoint, const ByteString& continuationPoint
-);
+) noexcept;
 
 /**
  * Asynchronously request the next set of a @ref browse or @ref browseNext response.
@@ -181,7 +183,7 @@ auto browseNextAsync(
  */
 TranslateBrowsePathsToNodeIdsResponse translateBrowsePathsToNodeIds(
     Client& connection, const TranslateBrowsePathsToNodeIdsRequest& request
-);
+) noexcept;
 
 /**
  * Asynchronously translate browse paths to NodeIds (client only).
@@ -211,7 +213,9 @@ auto translateBrowsePathsToNodeIdsAsync(
  * @param browsePath Browse path (starting node & relative path)
  */
 template <typename T>
-Result<BrowsePathResult> translateBrowsePathToNodeIds(T& connection, const BrowsePath& browsePath);
+Result<BrowsePathResult> translateBrowsePathToNodeIds(
+    T& connection, const BrowsePath& browsePath
+) noexcept;
 
 /**
  * Asynchronously translate a browse path to NodeIds.
@@ -287,7 +291,9 @@ inline auto browseSimplifiedBrowsePathAsync(
  * @param connection Instance of type Client
  * @param request Request
  */
-RegisterNodesResponse registerNodes(Client& connection, const RegisterNodesRequest& request);
+RegisterNodesResponse registerNodes(
+    Client& connection, const RegisterNodesRequest& request
+) noexcept;
 
 /**
  * Asynchronously register nodes for efficient access operations (client only).
@@ -322,7 +328,9 @@ auto registerNodesAsync(
  * @param connection Instance of type Client
  * @param request Request
  */
-UnregisterNodesResponse unregisterNodes(Client& connection, const UnregisterNodesRequest& request);
+UnregisterNodesResponse unregisterNodes(
+    Client& connection, const UnregisterNodesRequest& request
+) noexcept;
 
 /**
  * Asynchronously unregister nodes (client only).

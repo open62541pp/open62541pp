@@ -156,7 +156,7 @@ Result<void> modifyMonitoredItem(
     uint32_t subscriptionId,
     uint32_t monitoredItemId,
     MonitoringParametersEx& parameters
-) {
+) noexcept {
     auto item = detail::createMonitoredItemModifyRequest(monitoredItemId, parameters);
     auto request = detail::createModifyMonitoredItemsRequest(subscriptionId, parameters, item);
     using Response =
@@ -177,7 +177,7 @@ Result<void> setMonitoringMode(
     uint32_t subscriptionId,
     uint32_t monitoredItemId,
     MonitoringMode monitoringMode
-) {
+) noexcept {
     return detail::sendRequest<UA_SetMonitoringModeRequest, UA_SetMonitoringModeResponse>(
         connection,
         detail::createSetMonitoringModeRequest(
@@ -196,7 +196,7 @@ Result<void> setTriggering(
     uint32_t triggeringItemId,
     Span<const uint32_t> linksToAdd,
     Span<const uint32_t> linksToRemove
-) {
+) noexcept {
     return detail::sendRequest<UA_SetTriggeringRequest, UA_SetTriggeringResponse>(
         connection,
         detail::createSetTriggeringRequest(

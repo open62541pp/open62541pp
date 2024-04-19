@@ -95,7 +95,7 @@ using DeleteSubscriptionCallback = std::function<void(uint32_t subId)>;
  */
 Result<void> modifySubscription(
     Client& connection, uint32_t subscriptionId, SubscriptionParameters& parameters
-);
+) noexcept;
 
 /**
  * @}
@@ -113,7 +113,9 @@ Result<void> modifySubscription(
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @param publishing Enable/disable publishing
  */
-Result<void> setPublishingMode(Client& connection, uint32_t subscriptionId, bool publishing);
+Result<void> setPublishingMode(
+    Client& connection, uint32_t subscriptionId, bool publishing
+) noexcept;
 
 /**
  * @}
@@ -128,7 +130,7 @@ Result<void> setPublishingMode(Client& connection, uint32_t subscriptionId, bool
  * @param connection Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  */
-Result<void> deleteSubscription(Client& connection, uint32_t subscriptionId);
+Result<void> deleteSubscription(Client& connection, uint32_t subscriptionId) noexcept;
 
 /**
  * @}
