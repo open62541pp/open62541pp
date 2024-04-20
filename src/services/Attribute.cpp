@@ -35,7 +35,7 @@ Result<void> writeAttribute<Server>(
     Server& connection, const NodeId& id, AttributeId attributeId, const DataValue& value
 ) noexcept {
     const auto item = detail::createWriteValue(id, attributeId, value);
-    return detail::asResult(UA_Server_write(connection.handle(), &item));
+    return detail::toResult(UA_Server_write(connection.handle(), &item));
 }
 
 template <>

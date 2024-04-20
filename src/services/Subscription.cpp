@@ -66,14 +66,14 @@ Result<void> setPublishingMode(
         connection,
         detail::createSetPublishingModeRequest({&subscriptionId, 1}, publishing),
         [](UA_SetPublishingModeResponse& response) {
-            return detail::getSingleResult(response).andThen(detail::asResult);
+            return detail::getSingleResult(response).andThen(detail::toResult);
         },
         detail::SyncOperation{}
     );
 }
 
 Result<void> deleteSubscription(Client& connection, uint32_t subscriptionId) noexcept {
-    return detail::asResult(
+    return detail::toResult(
         UA_Client_Subscriptions_deleteSingle(connection.handle(), subscriptionId)
     );
 }

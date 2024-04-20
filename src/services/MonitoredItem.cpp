@@ -184,7 +184,7 @@ Result<void> setMonitoringMode(
             subscriptionId, {&monitoredItemId, 1}, monitoringMode
         ),
         [](UA_SetMonitoringModeResponse& response) -> Result<void> {
-            return detail::getSingleResult(response).andThen(detail::asResult);
+            return detail::getSingleResult(response).andThen(detail::toResult);
         },
         detail::SyncOperation{}
     );
@@ -226,7 +226,7 @@ template <>
 Result<void> deleteMonitoredItem<Client>(
     Client& connection, uint32_t subscriptionId, uint32_t monitoredItemId
 ) {
-    return detail::asResult(
+    return detail::toResult(
         UA_Client_MonitoredItems_deleteSingle(connection.handle(), subscriptionId, monitoredItemId)
     );
 }
@@ -235,7 +235,7 @@ template <>
 Result<void> deleteMonitoredItem<Server>(
     Server& connection, [[maybe_unused]] uint32_t subscriptionId, uint32_t monitoredItemId
 ) {
-    const auto result = detail::asResult(
+    const auto result = detail::toResult(
         UA_Server_deleteMonitoredItem(connection.handle(), monitoredItemId)
     );
     opcua::detail::getContext(connection).monitoredItems.erase({0U, monitoredItemId});

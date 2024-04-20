@@ -186,7 +186,7 @@ Result<void> addReference<Server>(
     const NodeId& referenceType,
     bool forward
 ) noexcept {
-    return detail::asResult(UA_Server_addReference(
+    return detail::toResult(UA_Server_addReference(
         connection.handle(),
         sourceId,
         referenceType,
@@ -212,7 +212,7 @@ template <>
 Result<void> deleteNode<Server>(
     Server& connection, const NodeId& id, bool deleteReferences
 ) noexcept {
-    return detail::asResult(UA_Server_deleteNode(connection.handle(), id, deleteReferences));
+    return detail::toResult(UA_Server_deleteNode(connection.handle(), id, deleteReferences));
 }
 
 template <>
@@ -231,7 +231,7 @@ Result<void> deleteReference<Server>(
     bool isForward,
     bool deleteBidirectional
 ) noexcept {
-    return detail::asResult(UA_Server_deleteReference(
+    return detail::toResult(UA_Server_deleteReference(
         connection.handle(),
         sourceId,
         referenceType,

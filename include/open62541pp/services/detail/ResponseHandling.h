@@ -60,7 +60,7 @@ auto getSingleResult(Response& response) noexcept -> Result<decltype(std::ref(*r
     return std::ref(*response.results);
 }
 
-inline Result<void> asResult(UA_StatusCode code) noexcept {
+inline Result<void> toResult(UA_StatusCode code) noexcept {
     if (opcua::detail::isBad(code)) {
         return BadResult(code);
     }

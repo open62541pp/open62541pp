@@ -202,7 +202,7 @@ auto addReferenceAsync(
         connection,
         request,
         [](UA_AddReferencesResponse& response) {
-            return detail::getSingleResult(response).andThen(detail::asResult);
+            return detail::getSingleResult(response).andThen(detail::toResult);
         },
         std::forward<CompletionToken>(token)
     );
@@ -273,7 +273,7 @@ auto deleteNodeAsync(
         connection,
         request,
         [](UA_DeleteNodesResponse& response) {
-            return detail::getSingleResult(response).andThen(detail::asResult);
+            return detail::getSingleResult(response).andThen(detail::toResult);
         },
         std::forward<CompletionToken>(token)
     );
@@ -362,7 +362,7 @@ auto deleteReferenceAsync(
         connection,
         request,
         [](UA_DeleteReferencesResponse& response) {
-            return detail::getSingleResult(response).andThen(detail::asResult);
+            return detail::getSingleResult(response).andThen(detail::toResult);
         },
         std::forward<CompletionToken>(token)
     );

@@ -229,7 +229,7 @@ auto writeAttributeAsync(
         connection,
         request,
         [](UA_WriteResponse& response) {
-            return detail::getSingleResult(response).andThen(detail::asResult);
+            return detail::getSingleResult(response).andThen(detail::toResult);
         },
         std::forward<CompletionToken>(token)
     );
