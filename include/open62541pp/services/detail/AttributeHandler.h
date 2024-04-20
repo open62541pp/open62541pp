@@ -9,18 +9,12 @@
 #include "open62541pp/Common.h"  // AttributeId, WriteMask, EventNotifier, AccessLevel
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/detail/open62541/common.h"
+#include "open62541pp/detail/result_util.h"
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"
 
 namespace opcua::services::detail {
-
-/**
- * Attribute handler to convert DataValue objects to/from the attribute specific types.
- * Template specializations must be provided for all AttributeIds.
- */
-template <AttributeId Attribute>
-struct AttributeHandler;
 
 inline Result<Variant> getVariant(DataValue&& dv) noexcept {
     if (dv.getStatus().isBad()) {
@@ -32,29 +26,44 @@ inline Result<Variant> getVariant(DataValue&& dv) noexcept {
     return std::move(dv).getValue();
 }
 
+template <typename T>
+inline Result<T> tryGetScalar(Variant&& var) noexcept {
+    return opcua::detail::tryInvoke([&] { return std::move(var).getScalar<T>(); });
+}
+
+template <typename T>
+inline Result<std::vector<T>> tryGetArray(Variant&& var) noexcept {
+    return opcua::detail::tryInvoke([&] { return std::move(var).getArrayCopy<T>(); });
+}
+
+inline DataValue createDataValueFromStatus(StatusCode code) noexcept {
+    DataValue dv;
+    dv.setStatus(code);
+    return dv;
+}
+
+/**
+ * Attribute handler to convert DataValue objects to/from the attribute specific types.
+ * Template specializations must be provided for all AttributeIds.
+ */
+template <AttributeId Attribute>
+struct AttributeHandler;
+
 template <typename T, typename Enable = void>
 struct AttributeHandlerScalar {
     using Type = T;
 
     static Result<Type> fromDataValue(DataValue&& dv) noexcept {
-        return getVariant(std::move(dv)).andThen([](Variant&& var) -> Result<Type> {
-            try {
-                return std::move(var).getScalar<Type>();
-            } catch (...) {
-                return BadResult(opcua::detail::getStatusCode(std::current_exception()));
-            }
-        });
+        return getVariant(std::move(dv)).andThen(tryGetScalar<T>);
     }
 
     template <typename U>
     static DataValue toDataValue(U&& value) noexcept {
-        try {
-            return DataValue::fromScalar(std::forward<U>(value));
-        } catch (...) {
-            DataValue dv;
-            dv.setStatus(opcua::detail::getStatusCode(std::current_exception()));
-            return dv;
-        }
+        return opcua::detail::tryInvoke([&] {
+                   return DataValue::fromScalar(std::forward<U>(value));
+               })
+            .orElse(createDataValueFromStatus)
+            .value();
     }
 };
 
@@ -166,23 +175,13 @@ struct AttributeHandler<AttributeId::ArrayDimensions> {
     using Type = std::vector<uint32_t>;
 
     static Result<Type> fromDataValue(DataValue&& dv) noexcept {
-        return getVariant(std::move(dv)).andThen([](Variant&& var) -> Result<Type> {
-            try {
-                return std::move(var).getArrayCopy<uint32_t>();
-            } catch (...) {
-                return BadResult(opcua::detail::getStatusCode(std::current_exception()));
-            }
-        });
+        return getVariant(std::move(dv)).andThen(tryGetArray<uint32_t>);
     }
 
     static DataValue toDataValue(Span<const uint32_t> dimensions) noexcept {
-        try {
-            return DataValue::fromArray(dimensions);
-        } catch (...) {
-            DataValue dv;
-            dv.setStatus(opcua::detail::getStatusCode(std::current_exception()));
-            return dv;
-        }
+        return opcua::detail::tryInvoke([&] { return DataValue::fromArray(dimensions); })
+            .orElse(createDataValueFromStatus)
+            .value();
     }
 };
 
