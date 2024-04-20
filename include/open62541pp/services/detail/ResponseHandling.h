@@ -6,11 +6,11 @@
 #include <utility>  // exchange
 #include <vector>
 
-#include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Result.h"
 #include "open62541pp/Span.h"
 #include "open62541pp/Wrapper.h"  // asWrapper, isWrapper
 #include "open62541pp/detail/open62541/common.h"
+#include "open62541pp/detail/result_util.h"
 #include "open62541pp/types/Builtin.h"  // StatusCode
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/Variant.h"
@@ -83,14 +83,12 @@ inline Result<std::vector<Variant>> getOutputArguments(UA_CallMethodResult& resu
             return BadResult(code);
         }
     }
-    try {
+    return opcua::detail::tryInvoke([&] {
         return std::vector<Variant>{
             std::make_move_iterator(result.outputArguments),
             std::make_move_iterator(result.outputArguments + result.outputArgumentsSize)  // NOLINT
         };
-    } catch (...) {
-        return BadResult(opcua::detail::getStatusCode(std::current_exception()));
-    }
+    });
 }
 
 template <typename SubscriptionParameters, typename Response>
