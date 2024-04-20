@@ -5,6 +5,7 @@
 
 #include "open62541pp/Common.h"  // TimestampsToReturn, MonitoringMode
 #include "open62541pp/Config.h"
+#include "open62541pp/Result.h"
 #include "open62541pp/Span.h"
 #include "open62541pp/types/ExtensionObject.h"
 
@@ -124,7 +125,7 @@ using EventNotificationCallback =
  * @param deleteCallback Invoked when the monitored item is deleted
  */
 template <typename T>
-[[nodiscard]] uint32_t createMonitoredItemDataChange(
+[[nodiscard]] Result<uint32_t> createMonitoredItemDataChange(
     T& connection,
     uint32_t subscriptionId,
     const ReadValueId& itemToMonitor,
@@ -146,7 +147,7 @@ template <typename T>
  * @param parameters Monitoring parameters, may be revised by server
  * @param dataChangeCallback Invoked when the monitored item is changed
  */
-[[nodiscard]] uint32_t createMonitoredItemDataChange(
+[[nodiscard]] Result<uint32_t> createMonitoredItemDataChange(
     Server& connection,
     const ReadValueId& itemToMonitor,
     MonitoringMode monitoringMode,
@@ -168,7 +169,7 @@ template <typename T>
  * @param eventCallback Invoked when an event is published
  * @param deleteCallback Invoked when the monitored item is deleted
  */
-[[nodiscard]] uint32_t createMonitoredItemEvent(
+[[nodiscard]] Result<uint32_t> createMonitoredItemEvent(
     Client& connection,
     uint32_t subscriptionId,
     const ReadValueId& itemToMonitor,
@@ -195,12 +196,12 @@ template <typename T>
  * @param monitoredItemId Identifier of the monitored item
  * @param parameters Monitoring parameters, may be revised by server
  */
-void modifyMonitoredItem(
+Result<void> modifyMonitoredItem(
     Client& connection,
     uint32_t subscriptionId,
     uint32_t monitoredItemId,
     MonitoringParametersEx& parameters
-);
+) noexcept;
 
 /**
  * @}
@@ -218,12 +219,12 @@ void modifyMonitoredItem(
  * @param monitoredItemId Identifier of the monitored item
  * @param monitoringMode Monitoring mode
  */
-void setMonitoringMode(
+Result<void> setMonitoringMode(
     Client& connection,
     uint32_t subscriptionId,
     uint32_t monitoredItemId,
     MonitoringMode monitoringMode
-);
+) noexcept;
 
 /**
  * @}
@@ -245,13 +246,13 @@ void setMonitoringMode(
  * @param linksToAdd List of monitoring item identifiers to be added as triggering links
  * @param linksToRemove List of monitoring item identifiers to be removed as triggering links
  */
-void setTriggering(
+Result<void> setTriggering(
     Client& connection,
     uint32_t subscriptionId,
     uint32_t triggeringItemId,
     Span<const uint32_t> linksToAdd,
     Span<const uint32_t> linksToRemove
-);
+) noexcept;
 
 /**
  * @}
@@ -270,7 +271,7 @@ void setTriggering(
  * @param monitoredItemId Identifier of the monitored item
  */
 template <typename T>
-void deleteMonitoredItem(T& connection, uint32_t subscriptionId, uint32_t monitoredItemId);
+Result<void> deleteMonitoredItem(T& connection, uint32_t subscriptionId, uint32_t monitoredItemId);
 
 /**
  * Delete a local monitored item.
@@ -278,7 +279,7 @@ void deleteMonitoredItem(T& connection, uint32_t subscriptionId, uint32_t monito
  * @param connection Instance of type Server
  * @param monitoredItemId Identifier of the monitored item
  */
-void deleteMonitoredItem(Server& connection, uint32_t monitoredItemId);
+Result<void> deleteMonitoredItem(Server& connection, uint32_t monitoredItemId);
 
 /**
  * @}

@@ -14,41 +14,41 @@
 
 namespace opcua::services {
 
-BrowseResponse browse(Client& connection, const BrowseRequest& request) {
+BrowseResponse browse(Client& connection, const BrowseRequest& request) noexcept {
     return browseAsync(connection, request, detail::SyncOperation{});
 }
 
 template <>
-BrowseResult browse<Server>(
+Result<BrowseResult> browse<Server>(
     Server& connection, const BrowseDescription& bd, uint32_t maxReferences
-) {
-    return UA_Server_browse(connection.handle(), maxReferences, bd.handle());
+) noexcept {
+    return {UA_Server_browse(connection.handle(), maxReferences, bd.handle())};
 }
 
 template <>
-BrowseResult browse<Client>(
+Result<BrowseResult> browse<Client>(
     Client& connection, const BrowseDescription& bd, uint32_t maxReferences
-) {
+) noexcept {
     return browseAsync(connection, bd, maxReferences, detail::SyncOperation{});
 }
 
-BrowseNextResponse browseNext(Client& connection, const BrowseNextRequest& request) {
+BrowseNextResponse browseNext(Client& connection, const BrowseNextRequest& request) noexcept {
     return browseNextAsync(connection, request, detail::SyncOperation{});
 }
 
 template <>
-BrowseResult browseNext<Server>(
+Result<BrowseResult> browseNext<Server>(
     Server& connection, bool releaseContinuationPoint, const ByteString& continuationPoint
-) {
-    return UA_Server_browseNext(
+) noexcept {
+    return {UA_Server_browseNext(
         connection.handle(), releaseContinuationPoint, continuationPoint.handle()
-    );
+    )};
 }
 
 template <>
-BrowseResult browseNext<Client>(
+Result<BrowseResult> browseNext<Client>(
     Client& connection, bool releaseContinuationPoint, const ByteString& continuationPoint
-) {
+) noexcept {
     return browseNextAsync(
         connection, releaseContinuationPoint, continuationPoint, detail::SyncOperation{}
     );
@@ -56,36 +56,42 @@ BrowseResult browseNext<Client>(
 
 TranslateBrowsePathsToNodeIdsResponse translateBrowsePathsToNodeIds(
     Client& connection, const TranslateBrowsePathsToNodeIdsRequest& request
-) {
+) noexcept {
     return translateBrowsePathsToNodeIdsAsync(connection, request, detail::SyncOperation{});
 }
 
 template <>
-BrowsePathResult translateBrowsePathToNodeIds<Server>(
+Result<BrowsePathResult> translateBrowsePathToNodeIds<Server>(
     Server& connection, const BrowsePath& browsePath
-) {
-    return UA_Server_translateBrowsePathToNodeIds(connection.handle(), browsePath.handle());
+) noexcept {
+    return {UA_Server_translateBrowsePathToNodeIds(connection.handle(), browsePath.handle())};
 }
 
 template <>
-BrowsePathResult translateBrowsePathToNodeIds<Client>(
+Result<BrowsePathResult> translateBrowsePathToNodeIds<Client>(
     Client& connection, const BrowsePath& browsePath
-) {
+) noexcept {
     return translateBrowsePathToNodeIdsAsync(connection, browsePath, detail::SyncOperation{});
 }
 
-RegisterNodesResponse registerNodes(Client& connection, const RegisterNodesRequest& request) {
+RegisterNodesResponse registerNodes(
+    Client& connection, const RegisterNodesRequest& request
+) noexcept {
     return registerNodesAsync(connection, request, detail::SyncOperation{});
 }
 
-UnregisterNodesResponse unregisterNodes(Client& connection, const UnregisterNodesRequest& request) {
+UnregisterNodesResponse unregisterNodes(
+    Client& connection, const UnregisterNodesRequest& request
+) noexcept {
     return unregisterNodesAsync(connection, request, detail::SyncOperation{});
 }
 
-std::vector<ExpandedNodeId> browseRecursive(Server& connection, const BrowseDescription& bd) {
+Result<std::vector<ExpandedNodeId>> browseRecursive(
+    Server& connection, const BrowseDescription& bd
+) {
     size_t arraySize{};
     UA_ExpandedNodeId* array{};
-    const auto status = UA_Server_browseRecursive(
+    const StatusCode status = UA_Server_browseRecursive(
         connection.handle(), bd.handle(), &arraySize, &array
     );
     std::vector<ExpandedNodeId> result(
@@ -93,7 +99,9 @@ std::vector<ExpandedNodeId> browseRecursive(Server& connection, const BrowseDesc
         std::make_move_iterator(array + arraySize)  // NOLINT
     );
     UA_free(array);  // NOLINT
-    throwIfBad(status);
+    if (status.isBad()) {
+        return BadResult(status);
+    }
     return result;
 }
 

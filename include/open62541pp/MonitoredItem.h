@@ -95,20 +95,22 @@ public:
     /// @note Not implemented for Server.
     /// @see services::modifyMonitoredItem
     void setMonitoringParameters(MonitoringParametersEx& parameters) {
-        services::modifyMonitoredItem(connection_, subscriptionId_, monitoredItemId_, parameters);
+        services::modifyMonitoredItem(connection_, subscriptionId_, monitoredItemId_, parameters)
+            .value();
     }
 
     /// Set the monitoring mode of this monitored item.
     /// @note Not implemented for Server.
     /// @see services::setMonitoringMode
     void setMonitoringMode(MonitoringMode monitoringMode) {
-        services::setMonitoringMode(connection_, subscriptionId_, monitoredItemId_, monitoringMode);
+        services::setMonitoringMode(connection_, subscriptionId_, monitoredItemId_, monitoringMode)
+            .value();
     }
 
     /// Delete this monitored item.
     /// @see services::deleteMonitoredItem
     void deleteMonitoredItem() {
-        services::deleteMonitoredItem(connection_, subscriptionId_, monitoredItemId_);
+        services::deleteMonitoredItem(connection_, subscriptionId_, monitoredItemId_).value();
     }
 
 private:
@@ -122,8 +124,8 @@ private:
 template <typename T>
 inline bool operator==(const MonitoredItem<T>& lhs, const MonitoredItem<T>& rhs) noexcept {
     return (lhs.connection() == rhs.connection()) &&
-           (lhs.subscriptionId() == rhs.subscriptionId()) &&
-           (lhs.monitoredItemId() == rhs.monitoredItemId());
+        (lhs.subscriptionId() == rhs.subscriptionId()) &&
+        (lhs.monitoredItemId() == rhs.monitoredItemId());
 }
 
 template <typename T>

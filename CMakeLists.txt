@@ -38,6 +38,7 @@ if(MSVC)
         /w14640
         /wd4127  # conditional expression is constant
         /wd4661  # explicit template instantiations in cpp files
+        /wd4702  # unreachable code, false positive
         /wd4996  # deprecation gmtime, localtime
     )
     if(UAPP_WARNINGS_AS_ERRORS)

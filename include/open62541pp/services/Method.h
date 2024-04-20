@@ -5,6 +5,7 @@
 
 #include "open62541pp/Client.h"
 #include "open62541pp/Config.h"
+#include "open62541pp/Result.h"
 #include "open62541pp/Span.h"
 #include "open62541pp/async.h"
 #include "open62541pp/services/detail/ClientService.h"
@@ -36,12 +37,12 @@ namespace opcua::services {
  * @param connection Instance of type Client
  * @param request Call request
  */
-CallResponse call(Client& connection, const CallRequest& request);
+CallResponse call(Client& connection, const CallRequest& request) noexcept;
 
 /**
  * Asynchronously call server methods.
  * @copydetails call
- * @param token @completiontoken{void(Result<CallResponse>&)}
+ * @param token @completiontoken{void(CallResponse&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto callAsync(
@@ -50,10 +51,7 @@ auto callAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::sendRequest<UA_CallRequest, UA_CallResponse>(
-        connection,
-        request,
-        detail::WrapResponse<CallResponse>{},
-        std::forward<CompletionToken>(token)
+        connection, request, detail::Wrap<CallResponse>{}, std::forward<CompletionToken>(token)
     );
 }
 
@@ -71,12 +69,12 @@ auto callAsync(
  * @exception BadStatus (BadTooManyArguments) If too many input arguments provided
  */
 template <typename T>
-std::vector<Variant> call(
+Result<std::vector<Variant>> call(
     T& connection,
     const NodeId& objectId,
     const NodeId& methodId,
     Span<const Variant> inputArguments
-);
+) noexcept;
 
 /**
  * Asynchronously call a server method and return outputs.
@@ -104,7 +102,7 @@ auto callAsync(
         connection,
         request,
         [](UA_CallResponse& response) {
-            return detail::getOutputArguments(detail::getSingleResult(response));
+            return detail::getSingleResult(response).andThen(detail::getOutputArguments);
         },
         std::forward<CompletionToken>(token)
     );

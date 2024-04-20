@@ -15,10 +15,11 @@
 #include "open62541pp/services/detail/RequestHandling.h"
 #include "open62541pp/services/detail/ResponseHandling.h"
 #include "open62541pp/services/detail/SubscriptionContext.h"
+#include "open62541pp/types/Composed.h"
 
 namespace opcua::services {
 
-uint32_t createSubscription(
+Result<uint32_t> createSubscription(
     Client& connection,
     SubscriptionParameters& parameters,
     bool publishingEnabled,
@@ -28,49 +29,53 @@ uint32_t createSubscription(
     context->catcher = &opcua::detail::getContext(connection).exceptionCatcher;
     context->deleteCallback = std::move(deleteCallback);
 
-    using Response =
-        TypeWrapper<UA_CreateSubscriptionResponse, UA_TYPES_CREATESUBSCRIPTIONRESPONSE>;
-    const Response response = UA_Client_Subscriptions_create(
+    const CreateSubscriptionResponse response = UA_Client_Subscriptions_create(
         connection.handle(),
         detail::createCreateSubscriptionRequest(parameters, publishingEnabled),
         context.get(),
         nullptr,  // statusChangeCallback
         context->deleteCallbackNative
     );
-    throwIfBad(response->responseHeader.serviceResult);
+    if (StatusCode serviceResult = detail::getServiceResult(response); serviceResult.isBad()) {
+        return BadResult(serviceResult);
+    }
     detail::reviseSubscriptionParameters(parameters, asNative(response));
 
-    const auto subscriptionId = response->subscriptionId;
+    const auto subscriptionId = response.getSubscriptionId();
     opcua::detail::getContext(connection).subscriptions.insert(subscriptionId, std::move(context));
     return subscriptionId;
 }
 
-void modifySubscription(
+Result<void> modifySubscription(
     Client& connection, uint32_t subscriptionId, SubscriptionParameters& parameters
-) {
-    using Response =
-        TypeWrapper<UA_ModifySubscriptionResponse, UA_TYPES_MODIFYSUBSCRIPTIONRESPONSE>;
-    const Response response = UA_Client_Subscriptions_modify(
+) noexcept {
+    const ModifySubscriptionResponse response = UA_Client_Subscriptions_modify(
         connection.handle(), detail::createModifySubscriptionRequest(subscriptionId, parameters)
     );
-    throwIfBad(response->responseHeader.serviceResult);
+    if (StatusCode serviceResult = detail::getServiceResult(response); serviceResult.isBad()) {
+        return BadResult(serviceResult);
+    }
     detail::reviseSubscriptionParameters(parameters, asNative(response));
+    return {};
 }
 
-void setPublishingMode(Client& connection, uint32_t subscriptionId, bool publishing) {
-    detail::sendRequest<UA_SetPublishingModeRequest, UA_SetPublishingModeResponse>(
+Result<void> setPublishingMode(
+    Client& connection, uint32_t subscriptionId, bool publishing
+) noexcept {
+    return detail::sendRequest<UA_SetPublishingModeRequest, UA_SetPublishingModeResponse>(
         connection,
         detail::createSetPublishingModeRequest({&subscriptionId, 1}, publishing),
         [](UA_SetPublishingModeResponse& response) {
-            throwIfBad(detail::getSingleResult(response));
+            return detail::getSingleResult(response).andThen(detail::toResult);
         },
         detail::SyncOperation{}
     );
 }
 
-void deleteSubscription(Client& connection, uint32_t subscriptionId) {
-    const auto status = UA_Client_Subscriptions_deleteSingle(connection.handle(), subscriptionId);
-    throwIfBad(status);
+Result<void> deleteSubscription(Client& connection, uint32_t subscriptionId) noexcept {
+    return detail::toResult(
+        UA_Client_Subscriptions_deleteSingle(connection.handle(), subscriptionId)
+    );
 }
 
 }  // namespace opcua::services
