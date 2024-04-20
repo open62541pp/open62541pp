@@ -25,6 +25,44 @@
 
 namespace opcua::services {
 
+template <typename T>
+inline static auto createMonitoredItemContext(
+    T& connection,
+    const ReadValueId& itemToMonitor,
+    DataChangeNotificationCallback dataChangeCallback,
+    EventNotificationCallback eventCallback,
+    DeleteMonitoredItemCallback deleteCallback
+) {
+    auto context = std::make_unique<detail::MonitoredItemContext>();
+    context->catcher = &opcua::detail::getContext(connection).exceptionCatcher;
+    context->itemToMonitor = itemToMonitor;
+    context->dataChangeCallback = std::move(dataChangeCallback);
+    context->eventCallback = std::move(eventCallback);
+    context->deleteCallback = std::move(deleteCallback);
+    return context;
+}
+
+template <typename T>
+inline static Result<uint32_t> createMonitoredItem(
+    T& connection,
+    uint32_t subscriptionId,
+    MonitoringParametersEx& parameters,
+    std::unique_ptr<detail::MonitoredItemContext> context,
+    const UA_MonitoredItemCreateResult& result
+) {
+    if (StatusCode code = result.statusCode; code.isBad()) {
+        return BadResult(code);
+    }
+    detail::reviseMonitoringParameters(parameters, result);
+
+    const auto monitoredItemId = result.monitoredItemId;
+    auto* contextPtr = context.get();
+    opcua::detail::getContext(connection)
+        .monitoredItems.insert({subscriptionId, monitoredItemId}, std::move(context));
+    contextPtr->inserted = true;
+    return monitoredItemId;
+}
+
 template <>
 Result<uint32_t> createMonitoredItemDataChange<Client>(
     Client& connection,
@@ -35,13 +73,9 @@ Result<uint32_t> createMonitoredItemDataChange<Client>(
     DataChangeNotificationCallback dataChangeCallback,
     DeleteMonitoredItemCallback deleteCallback
 ) {
-    auto context = std::make_unique<detail::MonitoredItemContext>();
-    context->catcher = &opcua::detail::getContext(connection).exceptionCatcher;
-    context->itemToMonitor = itemToMonitor;
-    context->dataChangeCallback = std::move(dataChangeCallback);
-    context->deleteCallback = std::move(deleteCallback);
-    auto* contextPtr = context.get();
-
+    auto context = createMonitoredItemContext(
+        connection, itemToMonitor, std::move(dataChangeCallback), {}, std::move(deleteCallback)
+    );
     using Result = TypeWrapper<UA_MonitoredItemCreateResult, UA_TYPES_MONITOREDITEMCREATERESULT>;
     const Result result = UA_Client_MonitoredItems_createDataChange(
         connection.handle(),
@@ -52,16 +86,7 @@ Result<uint32_t> createMonitoredItemDataChange<Client>(
         context->dataChangeCallbackNativeClient,
         context->deleteCallbackNative
     );
-    if (StatusCode code = result->statusCode; code.isBad()) {
-        return BadResult(code);
-    }
-    detail::reviseMonitoringParameters(parameters, asNative(result));
-
-    const auto monitoredItemId = result->monitoredItemId;
-    opcua::detail::getContext(connection)
-        .monitoredItems.insert({subscriptionId, monitoredItemId}, std::move(context));
-    contextPtr->inserted = true;
-    return monitoredItemId;
+    return createMonitoredItem(connection, subscriptionId, parameters, std::move(context), result);
 }
 
 template <>
@@ -74,13 +99,9 @@ Result<uint32_t> createMonitoredItemDataChange<Server>(
     DataChangeNotificationCallback dataChangeCallback,
     DeleteMonitoredItemCallback deleteCallback
 ) {
-    auto context = std::make_unique<detail::MonitoredItemContext>();
-    context->catcher = &opcua::detail::getContext(connection).exceptionCatcher;
-    context->itemToMonitor = itemToMonitor;
-    context->dataChangeCallback = std::move(dataChangeCallback);
-    context->deleteCallback = std::move(deleteCallback);
-    auto* contextPtr = context.get();
-
+    auto context = createMonitoredItemContext(
+        connection, itemToMonitor, std::move(dataChangeCallback), {}, std::move(deleteCallback)
+    );
     using Result = TypeWrapper<UA_MonitoredItemCreateResult, UA_TYPES_MONITOREDITEMCREATERESULT>;
     const Result result = UA_Server_createDataChangeMonitoredItem(
         connection.handle(),
@@ -89,16 +110,7 @@ Result<uint32_t> createMonitoredItemDataChange<Server>(
         context.get(),
         context->dataChangeCallbackNativeServer
     );
-    if (StatusCode code = result->statusCode; code.isBad()) {
-        return BadResult(code);
-    }
-    detail::reviseMonitoringParameters(parameters, asNative(result));
-
-    const auto monitoredItemId = result->monitoredItemId;
-    opcua::detail::getContext(connection)
-        .monitoredItems.insert({0U, monitoredItemId}, std::move(context));
-    contextPtr->inserted = true;
-    return monitoredItemId;
+    return createMonitoredItem(connection, 0U, parameters, std::move(context), result);
 }
 
 Result<uint32_t> createMonitoredItemDataChange(
@@ -122,13 +134,9 @@ Result<uint32_t> createMonitoredItemEvent(
     EventNotificationCallback eventCallback,
     DeleteMonitoredItemCallback deleteCallback
 ) {
-    auto context = std::make_unique<detail::MonitoredItemContext>();
-    context->catcher = &opcua::detail::getContext(connection).exceptionCatcher;
-    context->itemToMonitor = itemToMonitor;
-    context->eventCallback = std::move(eventCallback);
-    context->deleteCallback = std::move(deleteCallback);
-    auto* contextPtr = context.get();
-
+    auto context = createMonitoredItemContext(
+        connection, itemToMonitor, {}, std::move(eventCallback), std::move(deleteCallback)
+    );
     using Result = TypeWrapper<UA_MonitoredItemCreateResult, UA_TYPES_MONITOREDITEMCREATERESULT>;
     const Result result = UA_Client_MonitoredItems_createEvent(
         connection.handle(),
@@ -139,16 +147,7 @@ Result<uint32_t> createMonitoredItemEvent(
         context->eventCallbackNative,
         context->deleteCallbackNative
     );
-    if (StatusCode code = result->statusCode; code.isBad()) {
-        return BadResult(code);
-    }
-    detail::reviseMonitoringParameters(parameters, asNative(result));
-
-    const auto monitoredItemId = result->monitoredItemId;
-    opcua::detail::getContext(connection)
-        .monitoredItems.insert({subscriptionId, monitoredItemId}, std::move(context));
-    contextPtr->inserted = true;
-    return monitoredItemId;
+    return createMonitoredItem(connection, subscriptionId, parameters, std::move(context), result);
 }
 
 Result<void> modifyMonitoredItem(
