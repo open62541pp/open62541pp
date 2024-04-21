@@ -1,10 +1,11 @@
 #pragma once
 
+#include "open62541pp/Config.h"
 #include "open62541pp/detail/open62541/client.h"  // UA_ClientConfig
 
 #include "CustomDataTypes.h"
-#include "plugins/PluginManager.h"
 #include "plugins/LoggerAdapter.h"
+#include "plugins/PluginManager.h"
 
 namespace opcua {
 
@@ -42,7 +43,11 @@ public:
 private:
     UA_ClientConfig& config_;
     CustomDataTypes customDataTypes_{config_.customDataTypes};
+#if UAPP_OPEN62541_VER_GE(1, 4)
+    PluginManager<UA_Logger*> logger_{config_.logging};
+#else
     PluginManager<UA_Logger> logger_{config_.logger};
+#endif
 };
 
 }  // namespace opcua

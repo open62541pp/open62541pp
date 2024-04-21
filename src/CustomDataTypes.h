@@ -4,6 +4,7 @@
 #include <utility>  // move
 #include <vector>
 
+#include "open62541pp/Config.h"
 #include "open62541pp/DataType.h"
 #include "open62541pp/Wrapper.h"  // asNative
 #include "open62541pp/detail/open62541/common.h"
@@ -22,6 +23,9 @@ public:
             nullptr,  // next
             dataTypes_.size(),
             asNative(dataTypes_.data()),
+#if UAPP_OPEN62541_VER_GE(1, 4)
+            false,  // cleanup
+#endif
         });
         wrapped_ = array_.get();
     }

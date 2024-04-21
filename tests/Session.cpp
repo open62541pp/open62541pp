@@ -33,14 +33,14 @@ TEST_CASE("Session") {
         const QualifiedName key(0, "testAttribute");
         CHECK_THROWS_WITH(session.getSessionAttribute(key), "BadNotFound");
 
-        CHECK_NOTHROW(session.setSessionAttribute(key, Variant::fromScalar(11.11)));
+        session.setSessionAttribute(key, Variant::fromScalar(11.11));
         CHECK(session.getSessionAttribute(key).getScalar<double>() == 11.11);
 
         // retry with newly created session object
         CHECK(server.getSessions().at(0).getSessionAttribute(key).getScalar<double>() == 11.11);
 
         // delete session attribute
-        CHECK_NOTHROW(session.deleteSessionAttribute(key));
+        session.deleteSessionAttribute(key);
         CHECK_THROWS_WITH(session.getSessionAttribute(key), "BadNotFound");
     }
 

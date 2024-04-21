@@ -20,7 +20,12 @@ namespace opcua {
 
 Variant Session::getSessionAttribute([[maybe_unused]] const QualifiedName& key) {
     Variant variant;
-#if UAPP_OPEN62541_VER_EQ(1, 3)
+#if UAPP_OPEN62541_VER_GE(1, 4)
+    const auto status = UA_Server_getSessionAttribute(
+        connection().handle(), id().handle(), key, variant.handle()
+    );
+    throwIfBad(status);
+#elif UAPP_OPEN62541_VER_GE(1, 3)
     const auto status = UA_Server_getSessionParameter(
         connection().handle(), id().handle(), unqualifiedKey(key).c_str(), variant.handle()
     );
@@ -32,7 +37,12 @@ Variant Session::getSessionAttribute([[maybe_unused]] const QualifiedName& key) 
 void Session::setSessionAttribute(
     [[maybe_unused]] const QualifiedName& key, [[maybe_unused]] const Variant& value
 ) {
-#if UAPP_OPEN62541_VER_EQ(1, 3)
+#if UAPP_OPEN62541_VER_GE(1, 4)
+    const auto status = UA_Server_setSessionAttribute(
+        connection().handle(), id().handle(), key, value.handle()
+    );
+    throwIfBad(status);
+#elif UAPP_OPEN62541_VER_GE(1, 3)
     const auto status = UA_Server_setSessionParameter(
         connection().handle(), id().handle(), unqualifiedKey(key).c_str(), value.handle()
     );
@@ -41,7 +51,10 @@ void Session::setSessionAttribute(
 }
 
 void Session::deleteSessionAttribute([[maybe_unused]] const QualifiedName& key) {
-#if UAPP_OPEN62541_VER_EQ(1, 3)
+#if UAPP_OPEN62541_VER_GE(1, 4)
+    const auto status = UA_Server_deleteSessionAttribute(connection().handle(), id().handle(), key);
+    throwIfBad(status);
+#elif UAPP_OPEN62541_VER_GE(1, 3)
     UA_Server_deleteSessionParameter(
         connection().handle(), id().handle(), unqualifiedKey(key).c_str()
     );
@@ -49,9 +62,8 @@ void Session::deleteSessionAttribute([[maybe_unused]] const QualifiedName& key) 
 }
 
 void Session::close() {
-#if UAPP_OPEN62541_VER_EQ(1, 3)
-    const auto status = UA_Server_closeSession(connection().handle(), id().handle());
-    throwIfBad(status);
+#if UAPP_OPEN62541_VER_GE(1, 3)
+    throwIfBad(UA_Server_closeSession(connection().handle(), id().handle()));
 #endif
 }
 

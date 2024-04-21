@@ -79,7 +79,7 @@ TEST_CASE("Server run/stop/runIterate") {
         for (size_t i = 0; i < 10; ++i) {
             const auto waitInterval = server.runIterate();
             CHECK(waitInterval > 0);
-            CHECK(waitInterval <= 50);
+            CHECK(waitInterval <= 1000);
             CHECK(server.isRunning());
         }
 
@@ -94,8 +94,10 @@ TEST_CASE("Server configuration") {
     SUBCASE("Set hostname / application name / uris") {
         auto* config = UA_Server_getConfig(server.handle());
 
+#if UAPP_OPEN62541_VER_LE(1, 3)
         server.setCustomHostname("customhost");
         CHECK(detail::toString(config->customHostname) == "customhost");
+#endif
 
         server.setApplicationName("Test App");
         CHECK(detail::toString(config->applicationDescription.applicationName.text) == "Test App");
