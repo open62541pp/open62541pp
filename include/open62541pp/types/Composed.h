@@ -25,7 +25,8 @@
 #include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"
 
-#ifndef UA_DEFAULT_ATTRIBUTES_DEFINED
+// default attributes defined in open62541/util.h since open62541 v1.4
+#if UAPP_OPEN62541_VER_LE(1, 3) && !defined(UA_DEFAULT_ATTRIBUTES_DEFINED)
 #define UA_DEFAULT_ATTRIBUTES_DEFINED
 extern "C" const UA_VariableAttributes UA_VariableAttributes_default;
 extern "C" const UA_VariableTypeAttributes UA_VariableTypeAttributes_default;
