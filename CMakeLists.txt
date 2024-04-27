@@ -21,9 +21,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.16.0")
-    option(UAPP_ENABLE_PCH "Use precompiled headers to speed up compilation" OFF)
-endif()
 option(UAPP_ENABLE_COVERAGE "Enable coverage reporting for gcc/clang" OFF)
 option(UAPP_WARNINGS_AS_ERRORS "Treat warnings as errors" OFF)
 
@@ -41,6 +38,7 @@ if(MSVC)
         /w14640
         /wd4127  # conditional expression is constant
         /wd4661  # explicit template instantiations in cpp files
+        /wd4702  # unreachable code, false positive
         /wd4996  # deprecation gmtime, localtime
     )
     if(UAPP_WARNINGS_AS_ERRORS)
@@ -96,7 +94,7 @@ if(UAPP_INTERNAL_OPEN62541)
         set(UA_FORCE_WERROR OFF OFF CACHE BOOL "")
     endif()
 
-    set(OPEN62541_VERSION v1.3.9)  # set manually for CI
+    set(OPEN62541_VERSION v1.3.10)  # set manually for CI
     add_subdirectory(3rdparty/open62541)  # target open62541::open62541
 else()
     find_package(open62541 REQUIRED)
@@ -118,8 +116,6 @@ add_library(
     src/AccessControl.cpp
     src/Client.cpp
     src/Crypto.cpp
-    src/CustomAccessControl.cpp
-    src/CustomLogger.cpp
     src/DataType.cpp
     src/Event.cpp
     src/Logger.cpp
@@ -128,7 +124,7 @@ add_library(
     src/Server.cpp
     src/Session.cpp
     src/Subscription.cpp
-    src/detail/helper.cpp
+    src/detail/string_utils.cpp
     src/services/Attribute.cpp
     src/services/Method.cpp
     src/services/MonitoredItem.cpp
@@ -138,9 +134,7 @@ add_library(
     src/types/Builtin.cpp
     src/types/Composed.cpp
     src/types/DateTime.cpp
-    src/types/ExtensionObject.cpp
     src/types/NodeId.cpp
-    src/types/Variant.cpp
 )
 add_library(open62541pp::open62541pp ALIAS open62541pp)
 target_include_directories(
@@ -158,59 +152,12 @@ target_link_libraries(
         $<BUILD_INTERFACE:open62541pp_project_options>
 )
 
-if(UAPP_ENABLE_PCH)
-    message(STATUS "PCH enabled")
-    target_precompile_headers(
-        open62541pp
-        PUBLIC
-            <chrono>
-            <functional>
-            <iterator>
-            <memory>
-            <string>
-            <string_view>
-            <vector>
-            ${PROJECT_SOURCE_DIR}/include/open62541pp/open62541.h
-        PRIVATE
-            ${PROJECT_SOURCE_DIR}/src/open62541_impl.h
-    )
-endif()
-
 # tests
 option(UAPP_BUILD_TESTS "Build unit tests" OFF)
-option(UAPP_BUILD_TESTS_AUTORUN "Run unit tests after build" OFF)
 if(UAPP_BUILD_TESTS)
     message(STATUS "Unit tests enabled")
     enable_testing()
     add_subdirectory(tests)
-endif()
-
-# coverage report
-if(UAPP_BUILD_TESTS AND UAPP_ENABLE_COVERAGE)
-    find_program(GCOVR_EXE NAMES gcovr)
-    if(GCOVR_EXE)
-        set(gcovr_args "-f" "include/" "-f" "src/" "${CMAKE_BINARY_DIR}")
-        add_custom_target(
-            open62541pp_coverage_report
-            COMMAND ${GCOVR_EXE} ${gcovr_args}
-            COMMENT "Generate coverage report"
-            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-        )
-        add_custom_target(
-            open62541pp_coverage_report_xml
-            COMMAND ${GCOVR_EXE} ${gcovr_args} "--xml" "${CMAKE_BINARY_DIR}/coverage.xml"
-            COMMENT "Generate coverage report (xml/cobertura)"
-            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-        )
-        set(coverage_html_output_dir "${CMAKE_BINARY_DIR}/coverage_html")
-        file(MAKE_DIRECTORY ${coverage_html_output_dir})
-        add_custom_target(
-            open62541pp_coverage_report_html
-            COMMAND ${GCOVR_EXE} ${gcovr_args} "--html-details" "${coverage_html_output_dir}/index.html"
-            COMMENT "Generate coverage report (html)"
-            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-        )
-    endif()
 endif()
 
 # examples

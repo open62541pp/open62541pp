@@ -2,14 +2,13 @@
 
 #include <algorithm>  // transform
 #include <cassert>
-#include <cstddef>
 #include <cstdint>
 #include <iterator>  // distance
 #include <optional>
-#include <utility>  // as_const
+#include <utility>  // move
 #include <vector>
 
-#include "open62541pp/Common.h"
+#include "open62541pp/Common.h"  // Type
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Span.h"
 #include "open62541pp/TypeConverter.h"
@@ -17,6 +16,7 @@
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/detail/traits.h"
+#include "open62541pp/types/NodeId.h"
 
 namespace opcua {
 
@@ -34,8 +34,6 @@ enum class VariantPolicy {
 };
 
 // forward declarations
-class NodeId;
-
 namespace detail {
 template <VariantPolicy>
 struct VariantHandler;
@@ -47,7 +45,7 @@ struct VariantHandler;
  */
 class Variant : public TypeWrapper<UA_Variant, UA_TYPES_VARIANT> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
+    using TypeWrapper::TypeWrapper;  // inherit constructors
 
     /// Create Variant from scalar value.
     /// @tparam Policy Policy (@ref VariantPolicy) how to store the scalar inside the variant
@@ -116,21 +114,47 @@ public:
     }
 
     /// Check if the variant is empty.
-    bool isEmpty() const noexcept;
+    bool isEmpty() const noexcept {
+        return handle()->type == nullptr;
+    }
+
     /// Check if the variant is a scalar.
-    bool isScalar() const noexcept;
+    bool isScalar() const noexcept {
+        return (
+            !isEmpty() && handle()->arrayLength == 0 &&
+            handle()->data > UA_EMPTY_ARRAY_SENTINEL  // NOLINT
+        );
+    }
+
     /// Check if the variant is an array.
-    bool isArray() const noexcept;
+    bool isArray() const noexcept {
+        return !isEmpty() && !isScalar();
+    }
 
     /// Check if the variant type is equal to the provided data type.
-    bool isType(const UA_DataType* dataType) const noexcept;
+    bool isType(const UA_DataType* dataType) const noexcept {
+        return (
+            handle()->type != nullptr && dataType != nullptr &&
+            handle()->type->typeId == dataType->typeId
+        );
+    }
+
     /// Check if the variant type is equal to the provided data type.
-    bool isType(const UA_DataType& dataType) const noexcept;
+    bool isType(const UA_DataType& dataType) const noexcept {
+        return isType(&dataType);
+    }
+
     /// Check if the variant type is equal to the provided type enum.
+    /// @deprecated Use isType<T>() instead, the Type enum will be removed
     [[deprecated("Use isType<T>() instead, the Type enum will be removed")]]
-    bool isType(Type type) const noexcept;
+    bool isType(Type type) const noexcept {
+        return isType(UA_TYPES[static_cast<TypeIndex>(type)]);  // NOLINT
+    }
+
     /// Check if the variant type is equal to the provided data type node id.
-    bool isType(const NodeId& id) const noexcept;
+    bool isType(const NodeId& id) const noexcept {
+        return (handle()->type != nullptr) && (handle()->type->typeId == id);
+    }
 
     /// Check if the variant type is equal to the provided template type.
     template <typename T>
@@ -139,31 +163,57 @@ public:
     }
 
     /// Get data type.
-    const UA_DataType* getDataType() const noexcept;
+    const UA_DataType* getDataType() const noexcept {
+        return handle()->type;
+    }
 
     /// Get variant type.
+    /// @deprecated Use getDataType() or isType<T>() instead, the Type enum will be removed
     [[deprecated("Use getDataType() or isType<T>() instead, the Type enum will be removed")]]
-    std::optional<Type> getVariantType() const noexcept;
+    std::optional<Type> getVariantType() const noexcept {
+        if (handle()->type != nullptr) {
+            const auto typeIndex = handle()->type->typeKind;
+            if (typeIndex <= UA_DATATYPEKIND_DIAGNOSTICINFO) {
+                return static_cast<Type>(typeIndex);
+            }
+        }
+        return {};
+    }
 
     /// Get pointer to the underlying data.
     /// Check the properties and data type before casting it to the actual type.
     /// Use the methods @ref isScalar, @ref isArray, @ref isType / @ref getDataType.
-    void* data() noexcept;
+    void* data() noexcept {
+        return handle()->data;
+    }
 
     /// @copydoc data
-    const void* data() const noexcept;
+    const void* data() const noexcept {
+        return handle()->data;
+    }
 
+    /// @deprecated Use the methods isScalar() and data() instead
     [[deprecated("Use the methods isScalar() and data() instead")]]
-    void* getScalar();
+    void* getScalar() {
+        checkIsScalar();
+        return handle()->data;
+    }
 
+    /// @deprecated Use the methods isScalar() and data() instead
     [[deprecated("Use the methods isScalar() and data() instead")]]
-    const void* getScalar() const;
+    const void* getScalar() const {
+        checkIsScalar();
+        return handle()->data;
+    }
 
     /// Get reference to scalar value with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not a scalar or not of type `T`.
     template <typename T>
     T& getScalar() & {
-        return const_cast<T&>(std::as_const(*this).getScalar<T>());  // NOLINT
+        assertIsNative<T>();
+        checkIsScalar();
+        checkIsDataType<T>();
+        return *static_cast<T*>(handle()->data);
     }
 
     /// @copydoc getScalar()&
@@ -196,16 +246,28 @@ public:
     }
 
     /// Get array length or 0 if variant is not an array.
-    size_t getArrayLength() const noexcept;
+    size_t getArrayLength() const noexcept {
+        return handle()->arrayLength;
+    }
 
     /// Get array dimensions.
-    Span<const uint32_t> getArrayDimensions() const noexcept;
+    Span<const uint32_t> getArrayDimensions() const noexcept {
+        return {handle()->arrayDimensions, handle()->arrayDimensionsSize};
+    }
 
+    /// @deprecated Use the methods isArray() and data() instead
     [[deprecated("Use the methods isArray() and data() instead")]]
-    void* getArray();
+    void* getArray() {
+        checkIsArray();
+        return handle()->data;
+    }
 
+    /// @deprecated Use the methods isArray() and data() instead
     [[deprecated("Use the methods isArray() and data() instead")]]
-    const void* getArray() const;
+    const void* getArray() const {
+        checkIsArray();
+        return handle()->data;
+    }
 
     /// Get array with given template type (only native or wrapper types).
     /// @exception BadVariantAccess If the variant is not an array or not of type `T`.
@@ -366,12 +428,22 @@ private:
         );
     }
 
-    void checkIsScalar() const;
-    void checkIsArray() const;
+    void checkIsScalar() const {
+        if (!isScalar()) {
+            throw BadVariantAccess("Variant is not a scalar");
+        }
+    }
+
+    void checkIsArray() const {
+        if (!isArray()) {
+            throw BadVariantAccess("Variant is not an array");
+        }
+    }
 
     template <typename T>
     void checkIsDataType() const {
-        if (getDataType() != &opcua::getDataType<T>()) {
+        const auto* dt = getDataType();
+        if (dt == nullptr || dt->typeId != opcua::getDataType<T>().typeId) {
             throw BadVariantAccess("Variant does not contain a value convertible to template type");
         }
     }

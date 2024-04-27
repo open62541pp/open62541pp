@@ -11,9 +11,8 @@ TEST_CASE("CustomDataTypes") {
     const UA_DataTypeArray* dataTypeArray{};
     CHECK(dataTypeArray == nullptr);
 
-    CustomDataTypes customDataTypes;
-    customDataTypes.set(
-        dataTypeArray,
+    CustomDataTypes customDataTypes(dataTypeArray);
+    customDataTypes.assign(
         {
             DataType{UA_TYPES[UA_TYPES_INT32]},
             DataType{UA_TYPES[UA_TYPES_FLOAT]},

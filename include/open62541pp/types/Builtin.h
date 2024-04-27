@@ -1,25 +1,32 @@
 #pragma once
 
+#include <algorithm>  // copy
 #include <array>
 #include <cstdint>
 #include <iosfwd>  // forward declare ostream
 #include <string>
 #include <string_view>
+#include <utility>  // move
 #include <vector>
 
-// Workaround for GCC 7 with partial C++17 support
+// Workaround for GCC 7 with partial (or missing) C++17 support
 // https://github.com/open62541pp/open62541pp/issues/109
-#if !__has_include(<filesystem>) && __has_include(<experimental/filesystem>)
+#if __has_include(<filesystem>)
+#include <filesystem>
+namespace fs = std::filesystem;
+#elif __has_include(<experimental/filesystem>)
 #include <experimental/filesystem>
 namespace fs = std::experimental::filesystem;
 #else
-#include <filesystem>
-namespace fs = std::filesystem;
+#define UAPP_NO_STD_FILESYSTEM
 #endif
 
+#include "open62541pp/Common.h"  // NamespaceIndex
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/TypeWrapper.h"
+#include "open62541pp/Wrapper.h"
 #include "open62541pp/detail/open62541/common.h"
+#include "open62541pp/detail/string_utils.h"
 
 namespace opcua {
 
@@ -80,19 +87,23 @@ public:
  */
 class String : public TypeWrapper<UA_String, UA_TYPES_STRING> {
 public:
-    // NOLINTNEXTLINE, false positive?
-    using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
+    using TypeWrapper::TypeWrapper;  // inherit constructors
 
-    explicit String(std::string_view str);
+    explicit String(std::string_view str)
+        : String(detail::allocNativeString(str)) {}
 
     /// Implicit conversion to std::string_view.
     operator std::string_view() const noexcept {  // NOLINT, implicit wanted
         return get();
     }
 
-    bool empty() const noexcept;
+    bool empty() const noexcept {
+        return handle()->length == 0U;
+    }
 
-    std::string_view get() const noexcept;
+    std::string_view get() const noexcept {
+        return detail::toStringView(*handle());
+    }
 };
 
 inline bool operator==(const UA_String& lhs, const UA_String& rhs) noexcept {
@@ -127,12 +138,19 @@ std::ostream& operator<<(std::ostream& os, const String& string);
  */
 class Guid : public TypeWrapper<UA_Guid, UA_TYPES_GUID> {
 public:
-    // NOLINTNEXTLINE, false positive?
-    using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
+    using TypeWrapper::TypeWrapper;  // inherit constructors
 
-    Guid(uint32_t data1, uint16_t data2, uint16_t data3, std::array<uint8_t, 8> data4) noexcept;
+    Guid(uint32_t data1, uint16_t data2, uint16_t data3, std::array<uint8_t, 8> data4) noexcept
+        : Guid(UA_Guid{
+              data1,
+              data2,
+              data3,
+              {data4[0], data4[1], data4[2], data4[3], data4[4], data4[5], data4[6], data4[7]},
+          }) {}
 
-    static Guid random() noexcept;
+    static Guid random() noexcept {
+        return Guid(UA_Guid_random());  // NOLINT
+    }
 
     std::string toString() const;
 };
@@ -153,29 +171,41 @@ std::ostream& operator<<(std::ostream& os, const Guid& guid);
  */
 class ByteString : public TypeWrapper<UA_ByteString, UA_TYPES_BYTESTRING> {
 public:
-    // NOLINTNEXTLINE, false positive?
-    using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
+    using TypeWrapper::TypeWrapper;  // inherit constructors
 
-    explicit ByteString(std::string_view str);
-    explicit ByteString(const std::vector<uint8_t>& bytes);
+    explicit ByteString(std::string_view str)
+        : ByteString(detail::allocNativeString(str)) {}
 
+    explicit ByteString(const std::vector<uint8_t>& bytes) {
+        throwIfBad(UA_ByteString_allocBuffer(handle(), bytes.size()));
+        std::copy(bytes.begin(), bytes.end(), handle()->data);
+    }
+
+#ifndef UAPP_NO_STD_FILESYSTEM
     /// Read ByteString from binary file.
     static ByteString fromFile(const fs::path& filepath);
+#endif
 
     /// Parse ByteString from Base64 encoded string.
-    /// @note Only supported since open62541 v1.1
+    /// @note Supported since open62541 v1.1
     static ByteString fromBase64(std::string_view encoded);
 
+    bool empty() const noexcept {
+        return handle()->length == 0U;
+    }
+
+#ifndef UAPP_NO_STD_FILESYSTEM
     /// Write ByteString to binary file.
     void toFile(const fs::path& filepath) const;
+#endif
 
     /// Convert to Base64 encoded string.
-    /// @note Only supported since open62541 v1.1
+    /// @note Supported since open62541 v1.1
     std::string toBase64() const;
 
-    bool empty() const noexcept;
-
-    std::string_view get() const noexcept;
+    std::string_view get() const noexcept {
+        return detail::toStringView(*handle());
+    }
 };
 
 inline bool operator==(const ByteString& lhs, std::string_view rhs) noexcept {
@@ -200,14 +230,18 @@ inline bool operator!=(std::string_view lhs, const ByteString& rhs) noexcept {
  */
 class XmlElement : public TypeWrapper<UA_XmlElement, UA_TYPES_XMLELEMENT> {
 public:
-    // NOLINTNEXTLINE, false positive?
-    using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
+    using TypeWrapper::TypeWrapper;  // inherit constructors
 
-    explicit XmlElement(std::string_view str);
+    explicit XmlElement(std::string_view str)
+        : XmlElement(detail::allocNativeString(str)) {}
 
-    bool empty() const noexcept;
+    bool empty() const noexcept {
+        return handle()->length == 0U;
+    }
 
-    std::string_view get() const noexcept;
+    std::string_view get() const noexcept {
+        return detail::toStringView(*handle());
+    }
 };
 
 std::ostream& operator<<(std::ostream& os, const XmlElement& xmlElement);
@@ -218,14 +252,20 @@ std::ostream& operator<<(std::ostream& os, const XmlElement& xmlElement);
  */
 class QualifiedName : public TypeWrapper<UA_QualifiedName, UA_TYPES_QUALIFIEDNAME> {
 public:
-    // NOLINTNEXTLINE, false positive?
-    using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
+    using TypeWrapper::TypeWrapper;  // inherit constructors
 
-    QualifiedName(uint16_t namespaceIndex, std::string_view name);
+    QualifiedName(NamespaceIndex namespaceIndex, std::string_view name) {
+        handle()->namespaceIndex = namespaceIndex;
+        handle()->name = detail::allocNativeString(name);
+    }
 
-    uint16_t getNamespaceIndex() const noexcept;
+    NamespaceIndex getNamespaceIndex() const noexcept {
+        return handle()->namespaceIndex;
+    }
 
-    std::string_view getName() const noexcept;
+    std::string_view getName() const noexcept {
+        return detail::toStringView(handle()->name);
+    }
 };
 
 inline bool operator==(const UA_QualifiedName& lhs, const UA_QualifiedName& rhs) noexcept {
@@ -247,14 +287,20 @@ inline bool operator!=(const UA_QualifiedName& lhs, const UA_QualifiedName& rhs)
  */
 class LocalizedText : public TypeWrapper<UA_LocalizedText, UA_TYPES_LOCALIZEDTEXT> {
 public:
-    // NOLINTNEXTLINE, false positive?
-    using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
+    using TypeWrapper::TypeWrapper;  // inherit constructors
 
-    LocalizedText(std::string_view locale, std::string_view text, bool assertLocaleFormat = true);
+    LocalizedText(std::string_view locale, std::string_view text) {
+        handle()->locale = detail::allocNativeString(locale);
+        handle()->text = detail::allocNativeString(text);
+    }
 
-    std::string_view getText() const noexcept;
+    std::string_view getLocale() const noexcept {
+        return detail::toStringView(handle()->locale);
+    }
 
-    std::string_view getLocale() const noexcept;
+    std::string_view getText() const noexcept {
+        return detail::toStringView(handle()->text);
+    }
 };
 
 inline bool operator==(const UA_LocalizedText& lhs, const UA_LocalizedText& rhs) noexcept {
@@ -272,23 +318,63 @@ inline bool operator!=(const UA_LocalizedText& lhs, const UA_LocalizedText& rhs)
  */
 class DiagnosticInfo : public TypeWrapper<UA_DiagnosticInfo, UA_TYPES_DIAGNOSTICINFO> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;
+    using TypeWrapper::TypeWrapper;  // inherit constructors
 
-    bool hasSymbolicId() const noexcept;
-    bool hasNamespaceUri() const noexcept;
-    bool hasLocalizedText() const noexcept;
-    bool hasLocale() const noexcept;
-    bool hasAdditionalInfo() const noexcept;
-    bool hasInnerStatusCode() const noexcept;
-    bool hasInnerDiagnosticInfo() const noexcept;
+    bool hasSymbolicId() const noexcept {
+        return handle()->hasSymbolicId;
+    }
 
-    int32_t getSymbolicId() const noexcept;
-    int32_t getNamespaceUri() const noexcept;
-    int32_t getLocalizedText() const noexcept;
-    int32_t getLocale() const noexcept;
-    const String& getAdditionalInfo() const noexcept;
-    StatusCode getInnerStatusCode() const noexcept;
-    const DiagnosticInfo* getInnerDiagnosticInfo() const noexcept;
+    bool hasNamespaceUri() const noexcept {
+        return handle()->hasNamespaceUri;
+    }
+
+    bool hasLocalizedText() const noexcept {
+        return handle()->hasLocalizedText;
+    }
+
+    bool hasLocale() const noexcept {
+        return handle()->hasLocale;
+    }
+
+    bool hasAdditionalInfo() const noexcept {
+        return handle()->hasAdditionalInfo;
+    }
+
+    bool hasInnerStatusCode() const noexcept {
+        return handle()->hasInnerStatusCode;
+    }
+
+    bool hasInnerDiagnosticInfo() const noexcept {
+        return handle()->hasInnerDiagnosticInfo;
+    }
+
+    int32_t getSymbolicId() const noexcept {
+        return handle()->symbolicId;
+    }
+
+    int32_t getNamespaceUri() const noexcept {
+        return handle()->namespaceUri;
+    }
+
+    int32_t getLocalizedText() const noexcept {
+        return handle()->localizedText;
+    }
+
+    int32_t getLocale() const noexcept {
+        return handle()->locale;
+    }
+
+    const String& getAdditionalInfo() const noexcept {
+        return asWrapper<String>(handle()->additionalInfo);
+    }
+
+    StatusCode getInnerStatusCode() const noexcept {
+        return handle()->innerStatusCode;
+    }
+
+    const DiagnosticInfo* getInnerDiagnosticInfo() const noexcept {
+        return asWrapper<DiagnosticInfo>(handle()->innerDiagnosticInfo);
+    }
 };
 
 /* ---------------------------------------------------------------------------------------------- */
@@ -317,9 +403,14 @@ inline bool operator!=(
 class NumericRange {
 public:
     NumericRange() = default;
+
     explicit NumericRange(std::string_view encodedRange);
-    explicit NumericRange(std::vector<NumericRangeDimension> dimensions);
-    explicit NumericRange(const UA_NumericRange& native);
+
+    explicit NumericRange(std::vector<NumericRangeDimension> dimensions)
+        : dimensions_(std::move(dimensions)) {}
+
+    explicit NumericRange(const UA_NumericRange& native)
+        : dimensions_(native.dimensions, native.dimensions + native.dimensionsSize) {}  // NOLINT
 
     bool empty() const noexcept {
         return dimensions_.empty();

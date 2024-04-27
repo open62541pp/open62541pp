@@ -9,8 +9,6 @@
 #include "open62541pp/Config.h"
 #include "open62541pp/detail/ContextMap.h"
 #include "open62541pp/detail/ExceptionCatcher.h"
-#include "open62541pp/detail/open62541/client.h"
-#include "open62541pp/detail/open62541/config.h"
 #include "open62541pp/services/detail/MonitoredItemContext.h"
 #include "open62541pp/services/detail/SubscriptionContext.h"
 
@@ -28,14 +26,13 @@ inline constexpr size_t clientStateCount = 4;
  * Internal storage for Client class.
  * Mainly used to store stateful function pointers.
  */
-class ClientContext {
-public:
+struct ClientContext {
 #ifdef UA_ENABLE_SUBSCRIPTIONS
     using SubId = uint32_t;
     using MonId = uint32_t;
     using SubMonId = std::pair<uint32_t, uint32_t>;
-    detail::ContextMap<SubId, services::detail::SubscriptionContext> subscriptions;
-    detail::ContextMap<SubMonId, services::detail::MonitoredItemContext> monitoredItems;
+    ContextMap<SubId, services::detail::SubscriptionContext> subscriptions;
+    ContextMap<SubMonId, services::detail::MonitoredItemContext> monitoredItems;
 #endif
 
 #if UAPP_OPEN62541_VER_LE(1, 0)
@@ -46,16 +43,7 @@ public:
 #endif
     std::array<StateCallback, clientStateCount> stateCallbacks;
 
-    detail::ExceptionCatcher exceptionCatcher;
+    ExceptionCatcher exceptionCatcher;
 };
-
-/* ---------------------------------------------------------------------------------------------- */
-
-inline ClientContext& getContext(UA_Client* client) {
-    assert(client != nullptr);
-    void* context = UA_Client_getConfig(client)->clientContext;
-    assert(context != nullptr);
-    return *static_cast<ClientContext*>(context);
-}
 
 }  // namespace opcua::detail

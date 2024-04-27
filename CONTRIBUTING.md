@@ -38,10 +38,6 @@ cmake --build .
 
 # run tests
 ctest --output-on-failure
-
-# generate coverage reports (text or html) with UAPP_ENABLE_COVERAGE option enabled
-cmake --build . --target open62541pp_coverage_report
-cmake --build . --target open62541pp_coverage_report_html
 ```
 
 Defined checks can be automatically executed before committing with [pre-commit](https://pre-commit.com):

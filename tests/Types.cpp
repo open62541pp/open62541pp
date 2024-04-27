@@ -6,10 +6,9 @@
 
 #include <doctest/doctest.h>
 
-#include "open62541pp/Common.h"
 #include "open62541pp/Config.h"
 #include "open62541pp/NodeIds.h"
-#include "open62541pp/detail/helper.h"  // detail::toString
+#include "open62541pp/detail/string_utils.h"  // detail::toString
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/DataValue.h"
@@ -119,11 +118,13 @@ TEST_CASE("ByteString") {
         CHECK(std::string(bs.get()) == "XYZ");
     }
 
+#ifndef UAPP_NO_STD_FILESYSTEM
     SUBCASE("toFile / fromFile") {
         const ByteString bs({88, 89, 90});
         CHECK_NOTHROW(bs.toFile("bytestring.bin"));
         CHECK(ByteString::fromFile("bytestring.bin") == bs);
     }
+#endif
 
 #if UAPP_OPEN62541_VER_GE(1, 1)
     SUBCASE("fromBase64 / to Base64") {
@@ -282,7 +283,6 @@ TEST_CASE("NodeId") {
         CHECK(id.getIdentifierAs<String>().get() == sv);
     }
 
-#ifndef __APPLE__  // weird SIGABRT in macOS test runner
     SUBCASE("Constructor with string identifier") {
         String str("Test456");
         NodeId id(2, str);
@@ -290,7 +290,6 @@ TEST_CASE("NodeId") {
         CHECK(id.getNamespaceIndex() == 2);
         CHECK(id.getIdentifierAs<String>() == str);
     }
-#endif
 
     SUBCASE("Constructor with guid identifier") {
         Guid guid(11, 22, 33, {1, 2, 3, 4, 5, 6, 7, 8});
@@ -840,8 +839,8 @@ TEST_CASE("ExtensionObject") {
         CHECK_FALSE(obj.isEncoded());
         CHECK_FALSE(obj.isDecoded());
         CHECK(obj.getEncoding() == ExtensionObjectEncoding::EncodedNoBody);
-        CHECK(obj.getEncodedTypeId().value() == NodeId(0, 0));  // UA_NODEID_NULL
-        CHECK(obj.getEncodedBody().value().empty());
+        CHECK(obj.getEncodedTypeId() == nullptr);
+        CHECK(obj.getEncodedBody() == nullptr);
         CHECK(obj.getDecodedDataType() == nullptr);
         CHECK(obj.getDecodedData() == nullptr);
     }
@@ -1363,6 +1362,38 @@ TEST_CASE("AggregateFilter") {
     CHECK(aggregateFilter.getAggregateType() == NodeId(ObjectId::AggregateFunction_Average));
     CHECK(aggregateFilter.getProcessingInterval() == 11.11);
     CHECK(aggregateFilter.getAggregateConfiguration().useSlopedExtrapolation == true);
+}
+
+TEST_CASE("CreateSubscriptionRequest") {
+    const CreateSubscriptionRequest request({}, 11.11, 2, 3, 4, true, 5);
+    CHECK_NOTHROW(request.getRequestHeader());
+    CHECK(request.getRequestedPublishingInterval() == 11.11);
+    CHECK(request.getRequestedLifetimeCount() == 2);
+    CHECK(request.getRequestedMaxKeepAliveCount() == 3);
+    CHECK(request.getMaxNotificationsPerPublish() == 4);
+    CHECK(request.getPublishingEnabled() == true);
+    CHECK(request.getPriority() == 5);
+}
+
+TEST_CASE("ModifySubscriptionRequest") {
+    const ModifySubscriptionRequest request({}, 1, 11.11, 2, 3, 4, 5);
+    CHECK_NOTHROW(request.getRequestHeader());
+    CHECK(request.getSubscriptionId() == 1);
+    CHECK(request.getRequestedPublishingInterval() == 11.11);
+    CHECK(request.getRequestedLifetimeCount() == 2);
+    CHECK(request.getRequestedMaxKeepAliveCount() == 3);
+    CHECK(request.getMaxNotificationsPerPublish() == 4);
+    CHECK(request.getPriority() == 5);
+}
+
+TEST_CASE("SetPublishingModeRequest") {
+    const SetPublishingModeRequest request({}, true, {1, 2, 3});
+    CHECK_NOTHROW(request.getRequestHeader());
+    CHECK(request.getPublishingEnabled() == true);
+    CHECK(request.getSubscriptionIds().size() == 3);
+    CHECK(request.getSubscriptionIds()[0] == 1);
+    CHECK(request.getSubscriptionIds()[1] == 2);
+    CHECK(request.getSubscriptionIds()[2] == 3);
 }
 
 #endif

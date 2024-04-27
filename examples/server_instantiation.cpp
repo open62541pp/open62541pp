@@ -59,7 +59,7 @@ int main() {
         opcua::ObjectAttributes{}
             .setDisplayName({"en-US", "Bello"})
             .setDescription({"en-US", "A dog named Bello"}),
-        nodeDogType.getNodeId()
+        nodeDogType.id()
     );
 
     // Set variables Age and Name

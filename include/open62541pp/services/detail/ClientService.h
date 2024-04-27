@@ -2,17 +2,17 @@
 
 #include <cassert>
 #include <functional>  // invoke
+#include <memory>
 #include <tuple>
 #include <type_traits>
 #include <utility>  // forward
 
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
-#include "open62541pp/TypeRegistry.h"
+#include "open62541pp/TypeRegistry.h"  // getDataType
 #include "open62541pp/async.h"
 #include "open62541pp/detail/ClientContext.h"
 #include "open62541pp/detail/ExceptionCatcher.h"
-#include "open62541pp/detail/Result.h"
 #include "open62541pp/detail/ScopeExit.h"
 #include "open62541pp/detail/open62541/client.h"
 
@@ -39,27 +39,21 @@ struct AsyncServiceAdapter {
     ) {
         static_assert(std::is_invocable_v<TransformResponse, Response&>);
         using TransformResult = std::invoke_result_t<TransformResponse, Response&>;
+        static_assert(std::is_invocable_v<CompletionHandler, TransformResult&>);
         using Context = std::tuple<ExceptionCatcher&, TransformResponse, CompletionHandler>;
 
         auto callback = [](UA_Client*, void* userdata, uint32_t /* reqId */, void* responsePtr) {
             assert(userdata != nullptr);
             std::unique_ptr<Context> context{static_cast<Context*>(userdata)};
             auto& catcher = std::get<ExceptionCatcher&>(*context);
-            auto& handler = std::get<CompletionHandler>(*context);
-
-            auto result = [&]() -> opcua::detail::Result<TransformResult> {
+            catcher.invoke([&] {
                 if (responsePtr == nullptr) {
-                    return opcua::detail::BadResult(UA_STATUSCODE_BADUNEXPECTEDERROR);
+                    throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
                 }
                 Response& response = *static_cast<Response*>(responsePtr);
-                return opcua::detail::tryInvoke(std::get<TransformResponse>(*context), response);
-            }();
-
-            if constexpr (std::is_void_v<TransformResult>) {
-                catcher.invoke(handler, result.code());
-            } else {
-                catcher.invoke(handler, result.code(), *result);
-            }
+                auto result = std::invoke(std::get<TransformResponse>(*context), response);
+                std::invoke(std::get<CompletionHandler>(*context), result);
+            });
         };
 
         return CallbackAndContext<Context>{
@@ -130,7 +124,11 @@ auto sendRequest(
                 userdata,
                 nullptr
             );
-            throwIfBad(status);
+            if (opcua::detail::isBad(status)) {
+                Response response{};
+                response.responseHeader.serviceResult = status;
+                callback(client.handle(), userdata, {}, &response);
+            }
         },
         std::forward<TransformResponse>(transformResponse),
         std::forward<CompletionToken>(token)
@@ -147,7 +145,7 @@ static auto sendRequest(
     const Request& request,
     TransformResponse&& transformResponse,
     SyncOperation /*unused*/
-) {
+) noexcept(std::is_nothrow_invocable_v<TransformResponse, Response&>) {
     Response response{};
     const auto responseDeleter = opcua::detail::ScopeExit([&] {
         opcua::detail::clear(response, getDataType<Response>());

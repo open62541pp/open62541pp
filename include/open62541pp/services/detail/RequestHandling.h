@@ -4,7 +4,7 @@
 #include <type_traits>  // remove_const_t
 #include <vector>
 
-#include "open62541pp/Common.h"
+#include "open62541pp/Common.h"  // AttributeId, TimestampsToReturn, MonitoringMode
 #include "open62541pp/Span.h"
 #include "open62541pp/TypeWrapper.h"  // asNative
 #include "open62541pp/detail/open62541/common.h"
@@ -17,21 +17,31 @@
 namespace opcua::services::detail {
 
 template <typename T>
-inline ExtensionObject wrapNodeAttributes(const T& attributes) {
+inline ExtensionObject wrapNodeAttributes(const T& attributes) noexcept {
     // NOLINTNEXTLINE, won't be modified
     return ExtensionObject::fromDecoded(const_cast<T&>(attributes));
 }
 
 template <typename T>
-inline auto* getNativePointer(T& wrapper) noexcept {
+inline auto* getPointer(T& value) noexcept {
     // NOLINTNEXTLINE, request object won't be modified
-    return asNative(const_cast<std::remove_const_t<T>*>(&wrapper));
+    return const_cast<std::remove_const_t<T>*>(&value);
+}
+
+template <typename T>
+inline auto* getPointer(Span<T> array) noexcept {
+    // NOLINTNEXTLINE, request object won't be modified
+    return const_cast<std::remove_const_t<T>*>(array.data());
+}
+
+template <typename T>
+inline auto* getNativePointer(T& wrapper) noexcept {
+    return asNative(getPointer(wrapper));
 }
 
 template <typename T>
 inline auto* getNativePointer(Span<T> array) noexcept {
-    // NOLINTNEXTLINE, request object won't be modified
-    return asNative(const_cast<std::remove_const_t<T>*>(array.data()));
+    return asNative(getPointer(array));
 }
 
 inline UA_ReadValueId createReadValueId(const NodeId& id, AttributeId attributeId) noexcept {
@@ -119,7 +129,7 @@ inline UA_BrowseNextRequest createBrowseNextRequest(
 
 inline UA_TranslateBrowsePathsToNodeIdsRequest createTranslateBrowsePathsToNodeIdsRequest(
     const BrowsePath& browsePath
-) {
+) noexcept {
     UA_TranslateBrowsePathsToNodeIdsRequest request{};
     request.browsePathsSize = 1;
     request.browsePaths = getNativePointer(browsePath);
@@ -144,7 +154,7 @@ inline BrowsePath createBrowsePath(const NodeId& origin, Span<const QualifiedNam
 template <typename SubscriptionParameters>
 inline UA_CreateSubscriptionRequest createCreateSubscriptionRequest(
     const SubscriptionParameters& parameters, bool publishingEnabled
-) {
+) noexcept {
     UA_CreateSubscriptionRequest request{};
     request.requestedPublishingInterval = parameters.publishingInterval;
     request.requestedLifetimeCount = parameters.lifetimeCount;
@@ -158,7 +168,7 @@ inline UA_CreateSubscriptionRequest createCreateSubscriptionRequest(
 template <typename SubscriptionParameters>
 inline UA_ModifySubscriptionRequest createModifySubscriptionRequest(
     uint32_t subscriptionId, const SubscriptionParameters& parameters
-) {
+) noexcept {
     UA_ModifySubscriptionRequest request{};
     request.subscriptionId = subscriptionId;
     request.requestedPublishingInterval = parameters.publishingInterval;
@@ -171,18 +181,18 @@ inline UA_ModifySubscriptionRequest createModifySubscriptionRequest(
 
 inline UA_SetPublishingModeRequest createSetPublishingModeRequest(
     Span<const uint32_t> subscriptionIds, bool publishing
-) {
+) noexcept {
     UA_SetPublishingModeRequest request{};
     request.publishingEnabled = publishing;
     request.subscriptionIdsSize = subscriptionIds.size();
-    request.subscriptionIds = const_cast<uint32_t*>(subscriptionIds.data());  // NOLINT
+    request.subscriptionIds = getPointer(subscriptionIds);
     return request;
 }
 
 template <typename MonitoringParameters>
 inline void copyMonitoringParametersToNative(
     const MonitoringParameters& parameters, UA_MonitoringParameters& native
-) {
+) noexcept {
     native.samplingInterval = parameters.samplingInterval;
     native.filter = parameters.filter;
     native.queueSize = parameters.queueSize;
@@ -194,7 +204,7 @@ inline UA_MonitoredItemCreateRequest createMonitoredItemCreateRequest(
     const ReadValueId& itemToMonitor,
     MonitoringMode monitoringMode,
     MonitoringParameters& parameters
-) {
+) noexcept {
     UA_MonitoredItemCreateRequest request{};
     request.itemToMonitor = itemToMonitor;
     request.monitoringMode = static_cast<UA_MonitoringMode>(monitoringMode);
@@ -205,7 +215,7 @@ inline UA_MonitoredItemCreateRequest createMonitoredItemCreateRequest(
 template <typename MonitoringParameters>
 inline UA_MonitoredItemModifyRequest createMonitoredItemModifyRequest(
     uint32_t monitoredItemId, MonitoringParameters& parameters
-) {
+) noexcept {
     UA_MonitoredItemModifyRequest item{};
     item.monitoredItemId = monitoredItemId;
     copyMonitoringParametersToNative(parameters, item.requestedParameters);
@@ -215,7 +225,7 @@ inline UA_MonitoredItemModifyRequest createMonitoredItemModifyRequest(
 template <typename MonitoringParameters>
 inline UA_ModifyMonitoredItemsRequest createModifyMonitoredItemsRequest(
     uint32_t subscriptionId, MonitoringParameters& parameters, UA_MonitoredItemModifyRequest& item
-) {
+) noexcept {
     UA_ModifyMonitoredItemsRequest request{};
     request.subscriptionId = subscriptionId;
     request.timestampsToReturn = static_cast<UA_TimestampsToReturn>(parameters.timestamps);
@@ -226,12 +236,12 @@ inline UA_ModifyMonitoredItemsRequest createModifyMonitoredItemsRequest(
 
 inline UA_SetMonitoringModeRequest createSetMonitoringModeRequest(
     uint32_t subscriptionId, Span<const uint32_t> monitoredItemIds, MonitoringMode monitoringMode
-) {
+) noexcept {
     UA_SetMonitoringModeRequest request{};
     request.subscriptionId = subscriptionId;
     request.monitoringMode = static_cast<UA_MonitoringMode>(monitoringMode);
     request.monitoredItemIdsSize = monitoredItemIds.size();
-    request.monitoredItemIds = const_cast<uint32_t*>(monitoredItemIds.data());  // NOLINT
+    request.monitoredItemIds = getPointer(monitoredItemIds);
     return request;
 }
 
@@ -240,14 +250,14 @@ inline UA_SetTriggeringRequest createSetTriggeringRequest(
     uint32_t triggeringItemId,
     Span<const uint32_t> linksToAdd,
     Span<const uint32_t> linksToRemove
-) {
+) noexcept {
     UA_SetTriggeringRequest request{};
     request.subscriptionId = subscriptionId;
     request.triggeringItemId = triggeringItemId;
     request.linksToAddSize = linksToAdd.size();
-    request.linksToAdd = const_cast<uint32_t*>(linksToAdd.data());  // NOLINT
+    request.linksToAdd = getPointer(linksToAdd);
     request.linksToRemoveSize = linksToRemove.size();
-    request.linksToRemove = const_cast<uint32_t*>(linksToRemove.data());  // NOLINT
+    request.linksToRemove = getPointer(linksToRemove);
     return request;
 }
 

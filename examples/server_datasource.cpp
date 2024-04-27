@@ -37,7 +37,7 @@ int main() {
     };
 
     // Define data source as variable node backend
-    server.setVariableNodeValueBackend(nodeCounter.getNodeId(), dataSource);
+    server.setVariableNodeValueBackend(nodeCounter.id(), dataSource);
 
     server.run();
 }

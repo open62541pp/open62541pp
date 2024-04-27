@@ -25,11 +25,12 @@ int main() {
         auto mon = sub.subscribeDataChange(
             opcua::VariableId::Server_ServerStatus_CurrentTime,  // monitored node id
             opcua::AttributeId::Value,  // monitored attribute
-            [&](const auto& item, const opcua::DataValue& value) {
+            [&](uint32_t subId, uint32_t monId, const opcua::DataValue& value) {
+                const opcua::MonitoredItem item(client, subId, monId);
                 std::cout
                     << "Data change notification:\n"
-                    << "- subscription id:   " << item.getSubscriptionId() << "\n"
-                    << "- monitored item id: " << item.getMonitoredItemId() << "\n"
+                    << "- subscription id:   " << item.subscriptionId() << "\n"
+                    << "- monitored item id: " << item.monitoredItemId() << "\n"
                     << "- node id:           " << item.getNodeId().toString() << "\n"
                     << "- attribute id:      " << static_cast<int>(item.getAttributeId()) << "\n";
 
@@ -39,7 +40,7 @@ int main() {
         );
 
         // Modify and delete the monitored item via the returned MonitoredItem<T> object
-        opcua::MonitoringParameters monitoringParameters{};
+        opcua::MonitoringParametersEx monitoringParameters{};
         monitoringParameters.samplingInterval = 100.0;
         mon.setMonitoringParameters(monitoringParameters);
         mon.setMonitoringMode(opcua::MonitoringMode::Reporting);

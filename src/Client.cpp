@@ -13,26 +13,17 @@
 #include "open62541pp/Node.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/ClientContext.h"
-#include "open62541pp/detail/open62541/client.h"
+#include "open62541pp/detail/ConnectionBase.h"
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/services/Attribute.h"  // readValue
 #include "open62541pp/services/Subscription.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
+#include "open62541pp/types/NodeId.h"
 
 #include "ClientConfig.h"
 
 namespace opcua {
-
-/* ------------------------------------------- Helper ------------------------------------------- */
-
-inline static UA_ClientConfig* getConfig(UA_Client* client) noexcept {
-    return UA_Client_getConfig(client);
-}
-
-inline static UA_ClientConfig* getConfig(Client* client) noexcept {
-    return getConfig(client->handle());
-}
 
 /* --------------------------------------- State callbacks -------------------------------------- */
 
@@ -80,26 +71,29 @@ inline static void invokeStateCallback(
 #if UAPP_OPEN62541_VER_LE(1, 0)
 // state callback for v1.0
 static void stateCallback(UA_Client* client, UA_ClientState clientState) noexcept {
-    auto& context = detail::getContext(client);
-    if (clientState != context.lastClientState) {
+    auto* context = detail::getContext(client);
+    if (context == nullptr) {
+        return;
+    }
+    if (clientState != context->lastClientState) {
         switch (clientState) {
         case UA_CLIENTSTATE_DISCONNECTED:
-            invokeStateCallback(context, detail::ClientState::Disconnected);
+            invokeStateCallback(*context, detail::ClientState::Disconnected);
             break;
         case UA_CLIENTSTATE_CONNECTED:
-            invokeStateCallback(context, detail::ClientState::Connected);
+            invokeStateCallback(*context, detail::ClientState::Connected);
             break;
         case UA_CLIENTSTATE_SESSION:
-            invokeStateCallback(context, detail::ClientState::SessionActivated);
+            invokeStateCallback(*context, detail::ClientState::SessionActivated);
             break;
         case UA_CLIENTSTATE_SESSION_DISCONNECTED:
-            invokeStateCallback(context, detail::ClientState::SessionClosed);
+            invokeStateCallback(*context, detail::ClientState::SessionClosed);
             break;
         default:
             break;
         };
     }
-    context.lastClientState = clientState;
+    context->lastClientState = clientState;
 }
 #else
 // state callback for >= v1.1
@@ -109,65 +103,76 @@ static void stateCallback(
     UA_SessionState sessionState,
     [[maybe_unused]] UA_StatusCode connectStatus
 ) noexcept {
-    auto& context = detail::getContext(client);
+    auto* context = detail::getContext(client);
+    if (context == nullptr) {
+        return;
+    }
     // handle session state first, mainly to handle SessionClosed before Disconnected
-    if (sessionState != context.lastSessionState) {
+    if (sessionState != context->lastSessionState) {
         switch (sessionState) {
         case UA_SESSIONSTATE_ACTIVATED:
-            invokeStateCallback(context, detail::ClientState::SessionActivated);
+            invokeStateCallback(*context, detail::ClientState::SessionActivated);
             break;
         case UA_SESSIONSTATE_CLOSED:
-            invokeStateCallback(context, detail::ClientState::SessionClosed);
+            invokeStateCallback(*context, detail::ClientState::SessionClosed);
             break;
         default:
             break;
         }
     }
-    if (channelState != context.lastChannelState) {
+    if (channelState != context->lastChannelState) {
         switch (channelState) {
         case UA_SECURECHANNELSTATE_OPEN:
-            invokeStateCallback(context, detail::ClientState::Connected);
+            invokeStateCallback(*context, detail::ClientState::Connected);
             break;
         case UA_SECURECHANNELSTATE_CLOSED:
-            invokeStateCallback(context, detail::ClientState::Disconnected);
+            invokeStateCallback(*context, detail::ClientState::Disconnected);
             break;
         default:
             break;
         }
     }
-    context.lastChannelState = channelState;
-    context.lastSessionState = sessionState;
+    context->lastChannelState = channelState;
+    context->lastSessionState = sessionState;
 }
 #endif
 
-/* ----------------------------------------- Connection ----------------------------------------- */
+/* -------------------------------------- Connection state -------------------------------------- */
 
-struct Client::Connection {
-    Connection()
-        : client(UA_Client_new()),
-          config(*getConfig(client)) {
+namespace detail {
+
+[[nodiscard]] static UA_Client* allocateClient() {
+    auto* client = UA_Client_new();
+    if (client == nullptr) {
+        throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
+    }
+    return client;
+}
+
+struct ClientConnection : public ConnectionBase<Client> {
+    ClientConnection()
+        : client(allocateClient()),
+          config(*detail::getConfig(client)) {
         applyDefaults();
     }
 
-    ~Connection() {
+    ~ClientConnection() {
         UA_Client_disconnect(client);
         UA_Client_delete(client);
     }
 
-    // prevent copy & move
-    Connection(const Connection&) = delete;
-    Connection(Connection&&) noexcept = delete;
-    Connection& operator=(const Connection&) = delete;
-    Connection& operator=(Connection&&) noexcept = delete;
+    ClientConnection(const ClientConnection&) = delete;
+    ClientConnection(ClientConnection&&) noexcept = delete;
+    ClientConnection& operator=(const ClientConnection&) = delete;
+    ClientConnection& operator=(ClientConnection&&) noexcept = delete;
 
     void applyDefaults() {
-        config->clientContext = &context;
+        config->clientContext = this;
         config->stateCallback = stateCallback;
     }
 
     void runIterate(uint16_t timeoutMilliseconds) {
-        const auto status = UA_Client_run_iterate(client, timeoutMilliseconds);
-        throwIfBad(status);
+        throwIfBad(UA_Client_run_iterate(client, timeoutMilliseconds));
         context.exceptionCatcher.rethrow();
     }
 
@@ -197,18 +202,17 @@ struct Client::Connection {
     std::atomic<bool> running{false};
 };
 
+}  // namespace detail
+
 /* ------------------------------------------- Client ------------------------------------------- */
 
 Client::Client(Logger logger)
-    : connection_(std::make_unique<Connection>()) {
+    : connection_(std::make_unique<detail::ClientConnection>()) {
     // The logger should be set as soon as possible, ideally even before UA_ClientConfig_setDefault.
     // However, the logger gets overwritten by UA_ClientConfig_setDefault() in older versions of
     // open62541. The best we can do in this case, is to first call UA_ClientConfig_setDefault and
     // then setLogger.
-    auto setConfig = [&] {
-        const auto status = UA_ClientConfig_setDefault(getConfig(this));
-        throwIfBad(status);
-    };
+    auto setConfig = [&] { throwIfBad(UA_ClientConfig_setDefault(detail::getConfig(handle()))); };
 #if UAPP_OPEN62541_VER_GE(1, 1)
     setLogger(std::move(logger));
     setConfig();
@@ -216,7 +220,7 @@ Client::Client(Logger logger)
     setConfig();
     setLogger(std::move(logger));
 #endif
-    getConfig(this)->securityMode = UA_MESSAGESECURITYMODE_NONE;
+    detail::getConfig(*this).securityMode = UA_MESSAGESECURITYMODE_NONE;
     connection_->applyDefaults();
 }
 
@@ -227,18 +231,17 @@ Client::Client(
     Span<const ByteString> trustList,
     Span<const ByteString> revocationList
 )
-    : connection_(std::make_unique<Connection>()) {
-    const auto status = UA_ClientConfig_setDefaultEncryption(
-        getConfig(this),
+    : connection_(std::make_unique<detail::ClientConnection>()) {
+    throwIfBad(UA_ClientConfig_setDefaultEncryption(
+        detail::getConfig(handle()),
         certificate,
         privateKey,
         asNative(trustList.data()),
         trustList.size(),
         asNative(revocationList.data()),
         revocationList.size()
-    );
-    throwIfBad(status);
-    getConfig(this)->securityMode = UA_MESSAGESECURITYMODE_SIGNANDENCRYPT;
+    ));
+    detail::getConfig(*this).securityMode = UA_MESSAGESECURITYMODE_SIGNANDENCRYPT;
     connection_->applyDefaults();
 }
 #endif
@@ -290,11 +293,11 @@ void Client::setLogger(Logger logger) {
 }
 
 void Client::setTimeout(uint32_t milliseconds) {
-    getConfig(this)->timeout = milliseconds;
+    detail::getConfig(*this).timeout = milliseconds;
 }
 
 void Client::setSecurityMode(MessageSecurityMode mode) {
-    getConfig(this)->securityMode = static_cast<UA_MessageSecurityMode>(mode);
+    detail::getConfig(*this).securityMode = static_cast<UA_MessageSecurityMode>(mode);
 }
 
 void Client::setCustomDataTypes(std::vector<DataType> dataTypes) {
@@ -322,8 +325,7 @@ void Client::onSessionClosed(StateCallback callback) {
 }
 
 void Client::connect(std::string_view endpointUrl) {
-    const auto status = UA_Client_connect(handle(), std::string(endpointUrl).c_str());
-    throwIfBad(status);
+    throwIfBad(UA_Client_connect(handle(), std::string(endpointUrl).c_str()));
 }
 
 void Client::connect(std::string_view endpointUrl, const Login& login) {
@@ -332,10 +334,9 @@ void Client::connect(std::string_view endpointUrl, const Login& login) {
 #else
     const auto func = UA_Client_connectUsername;
 #endif
-    const auto status = func(
+    throwIfBad(func(
         handle(), std::string(endpointUrl).c_str(), login.username.c_str(), login.password.c_str()
-    );
-    throwIfBad(status);
+    ));
 }
 
 void Client::disconnect() noexcept {
@@ -354,6 +355,7 @@ bool Client::isConnected() noexcept {
 
 std::vector<std::string> Client::getNamespaceArray() {
     return services::readValue(*this, {0, UA_NS0ID_SERVER_NAMESPACEARRAY})
+        .value()
         .getArrayCopy<std::string>();
 }
 
@@ -364,7 +366,7 @@ Subscription<Client> Client::createSubscription() {
 }
 
 Subscription<Client> Client::createSubscription(SubscriptionParameters& parameters) {
-    const uint32_t subscriptionId = services::createSubscription(*this, parameters, true);
+    const uint32_t subscriptionId = services::createSubscription(*this, parameters, true).value();
     return {*this, subscriptionId};
 }
 
@@ -426,12 +428,53 @@ const UA_Client* Client::handle() const noexcept {
     return connection_->client;
 }
 
-/* ------------------------------------------- Context ------------------------------------------ */
+/* -------------------------------------- Helper functions -------------------------------------- */
 
 namespace detail {
 
+UA_ClientConfig* getConfig(UA_Client* client) noexcept {
+    return UA_Client_getConfig(client);
+}
+
+UA_ClientConfig& getConfig(Client& client) noexcept {
+    return *getConfig(client.handle());
+}
+
+ClientConnection* getConnection(UA_Client* client) noexcept {
+    auto* config = getConfig(client);
+    if (config == nullptr) {
+        return nullptr;
+    }
+    auto* state = static_cast<detail::ClientConnection*>(config->clientContext);
+    assert(state != nullptr);
+    assert(state->client == client);
+    return state;
+}
+
+ClientConnection& getConnection(Client& client) noexcept {
+    auto* state = client.connection_.get();
+    assert(state != nullptr);
+    return *state;
+}
+
+Client* getWrapper(UA_Client* client) noexcept {
+    auto* state = getConnection(client);
+    if (state == nullptr) {
+        return nullptr;
+    }
+    return state->wrapperPtr();
+}
+
+ClientContext* getContext(UA_Client* client) noexcept {
+    auto* state = getConnection(client);
+    if (state == nullptr) {
+        return nullptr;
+    }
+    return &state->context;
+}
+
 ClientContext& getContext(Client& client) noexcept {
-    return client.connection_->context;
+    return getConnection(client).context;
 }
 
 }  // namespace detail

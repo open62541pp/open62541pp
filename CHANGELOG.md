@@ -7,13 +7,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Async functions in `services` namespace (client only), adapting the well-proven [asynchronous model of (Boost) Asio](https://think-async.com/asio/asio-1.28.0/doc/asio/overview/model.html) (#111)
+  - Example `client_method_async`
+- Raw `services::call` functions (#215)
+- `NamespaceIndex` alias for `uint16_t` (#219)
+- Symmetric implementation of `services::createMonitoredItemDataChange`, `services::deleteMonitoredItem` for `Server` and `Client`
+- Deprecate high-level `DataChangeCallback<T>` and `EventCallback<T>`, use `DataChangeNotificationCallback` and `EventNotificationCallback` instead and create `MonitoredItem<T>` on demand (#245)
+- `Result<T>` class to encapsulate both the status code and the result of type `T`, similar to `std::expected` (#207, #264)
+- Subscription service request/response wrapper classes (#270)
+
+### Changed
+
+- Rename `MonitoringParameters` -> `MonitoringParametersEx` to avoid shadowing of OPC UA type [`MonitoringParameter`](https://reference.opcfoundation.org/Core/Part4/v104/docs/7.16) (#214)
+- Remove logger utility functions `getLogLevelName`, `getLogCategoryName` (#221)
+- Change return type of `AccessControlBase::getUserTokenPolicies()` to `Span<Span<UserTokenPolicy>` (#223)
+- Deprecate `TypeWrapper::TypeWrapperBase` alias, use `TypeWrapper::TypeWrapper` instead (#253)
+- Return `ExtensionObject` encoded members by pointer, not optional (#254)
+- Strip `get` prefix of simple getters, deprecate old member functions (#267)
+
+### Fixed
+
+- Error handling in `client_subscription` example (#203)
+- Compare `DataType` only by `typeId` (#217)
+
+
 ## [0.12.0] - 2024-02-10
 
 ### Added
 
 - Raw `NodeManagement` functions in `opcua::services` (#121, #124)
 - Raw `View` functions in `opcua::services` (#125)
-- Pass `NodeId` identifier by value in constructors, mark as noexcept (#133) 
+- Pass `NodeId` identifier by value in constructors, mark as noexcept (#133)
 - `TypeRegistry<T>` to derive the corresponding `UA_DataType` object from template types.
   Custom data types can be registered with template specializations. (#136)
 - Check `Variant` data type by template type, e.g. `var.isType<int>()` (#139)

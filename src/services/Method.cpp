@@ -8,26 +8,30 @@
 
 namespace opcua::services {
 
+CallResponse call(Client& connection, const CallRequest& request) noexcept {
+    return callAsync(connection, request, detail::SyncOperation{});
+}
+
 template <>
-std::vector<Variant> call(
-    Server& server,
+Result<std::vector<Variant>> call(
+    Server& connection,
     const NodeId& objectId,
     const NodeId& methodId,
     Span<const Variant> inputArguments
-) {
+) noexcept {
     UA_CallMethodRequest item = detail::createCallMethodRequest(objectId, methodId, inputArguments);
-    CallMethodResult result = UA_Server_call(server.handle(), &item);
+    CallMethodResult result = UA_Server_call(connection.handle(), &item);
     return detail::getOutputArguments(result);
 }
 
 template <>
-std::vector<Variant> call(
-    Client& client,
+Result<std::vector<Variant>> call(
+    Client& connection,
     const NodeId& objectId,
     const NodeId& methodId,
     Span<const Variant> inputArguments
-) {
-    return callAsync(client, objectId, methodId, inputArguments, detail::SyncOperation{});
+) noexcept {
+    return callAsync(connection, objectId, methodId, inputArguments, detail::SyncOperation{});
 }
 
 }  // namespace opcua::services

@@ -2,13 +2,17 @@
 
 #include <cstdint>
 #include <functional>
+#include <type_traits>
+#include <utility>  // move
 #include <vector>
 
-#include "open62541pp/Common.h"
+#include "open62541pp/Common.h"  // AttributeId, MonitoringMode
 #include "open62541pp/Config.h"
 #include "open62541pp/MonitoredItem.h"
+#include "open62541pp/Span.h"
 #include "open62541pp/services/MonitoredItem.h"
 #include "open62541pp/services/Subscription.h"
+#include "open62541pp/types/ExtensionObject.h"
 #include "open62541pp/types/NodeId.h"
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
@@ -16,24 +20,25 @@
 namespace opcua {
 
 // forward declarations
-class Client;
 class DataValue;
 class EventFilter;
 class Server;
-template <typename T>
-class Span;
 class Variant;
 
 using SubscriptionParameters = services::SubscriptionParameters;
-using MonitoringParameters = services::MonitoringParameters;
+using MonitoringParametersEx = services::MonitoringParametersEx;
+using DataChangeNotificationCallback = services::DataChangeNotificationCallback;
+using EventNotificationCallback = services::EventNotificationCallback;
 
 /// Data change notification callback.
+/// @deprecated Use DataChangeNotificationCallback instead
 /// @tparam T Server or Client
 template <typename T>
 using DataChangeCallback =
     std::function<void(const MonitoredItem<T>& item, const DataValue& value)>;
 
 /// Event notification callback.
+/// @deprecated Use EventNotificationCallback instead
 /// @tparam T Server or Client
 template <typename T>
 using EventCallback =
@@ -47,83 +52,204 @@ using EventCallback =
  * are registered locally. Notifications are then forwarded to user-defined callbacks instead of a
  * remote client. The `subscriptionId` for servers is always `0U`.
  *
+ * @tparam Connection Server or Client
  * @note Not all methods are available and implemented for servers.
  *
- * Use the free functions in the `services` namespace for more advanced usage:
+ * Use the free functions in the opcua::services namespace for more advanced usage:
  * - @ref Subscription
  * - @ref MonitoredItem
  */
-template <typename ServerOrClient>
+template <typename Connection>
 class Subscription {
 public:
     /// Wrap an existing subscription.
     /// The `subscriptionId` is ignored and set to `0U` for servers.
-    Subscription(ServerOrClient& connection, uint32_t subscriptionId) noexcept;
+    Subscription(Connection& connection, uint32_t subscriptionId) noexcept
+        : connection_(connection),
+          subscriptionId_(std::is_same_v<Connection, Server> ? 0U : subscriptionId) {}
 
     /// Get the server/client instance.
-    ServerOrClient& getConnection() noexcept;
+    Connection& connection() noexcept {
+        return connection_;
+    }
+
     /// Get the server/client instance.
-    const ServerOrClient& getConnection() const noexcept;
+    const Connection& connection() const noexcept {
+        return connection_;
+    }
+
+    /// @deprecated Use connection() instead
+    [[deprecated("Use connection() instead")]]
+    Connection& getConnection() noexcept {
+        return connection_;
+    }
+
+    /// @deprecated Use connection() instead
+    [[deprecated("Use connection() instead")]]
+    const Connection& getConnection() const noexcept {
+        return connection_;
+    }
 
     /// Get the server-assigned identifier of this subscription.
-    uint32_t getSubscriptionId() const noexcept;
+    uint32_t subscriptionId() const noexcept {
+        return subscriptionId_;
+    }
+
+    /// @deprecated Use subscriptionId() instead
+    [[deprecated("Use subscriptionId() instead")]]
+    uint32_t getSubscriptionId() const noexcept {
+        return subscriptionId_;
+    }
 
     /// Get all local monitored items.
-    std::vector<MonitoredItem<ServerOrClient>> getMonitoredItems();
+    std::vector<MonitoredItem<Connection>> getMonitoredItems();
 
     /// Modify this subscription.
     /// @note Not implemented for Server.
     /// @see services::modifySubscription
-    void setSubscriptionParameters(SubscriptionParameters& parameters);
+    void setSubscriptionParameters(SubscriptionParameters& parameters) {
+        services::modifySubscription(connection_, subscriptionId_, parameters).value();
+    }
 
     /// Enable/disable publishing of notification messages.
     /// @note Not implemented for Server.
     /// @see services::setPublishingMode
-    void setPublishingMode(bool publishing);
-
-    /// Create a monitored item for data change notifications (default settings).
-    /// The monitoring mode is set to MonitoringMode::Reporting and the default open62541
-    /// MonitoringParameters are used.
-    /// @see services::MonitoringParameters
-    MonitoredItem<ServerOrClient> subscribeDataChange(
-        const NodeId& id, AttributeId attribute, DataChangeCallback<ServerOrClient> onDataChange
-    );
+    void setPublishingMode(bool publishing) {
+        services::setPublishingMode(connection_, subscriptionId_, publishing).value();
+    }
 
     /// Create a monitored item for data change notifications.
-    /// @copydetails services::MonitoringParameters
-    MonitoredItem<ServerOrClient> subscribeDataChange(
+    /// @copydetails services::MonitoringParametersEx
+    MonitoredItem<Connection> subscribeDataChange(
         const NodeId& id,
         AttributeId attribute,
         MonitoringMode monitoringMode,
-        MonitoringParameters& parameters,
-        DataChangeCallback<ServerOrClient> onDataChange
-    );
+        MonitoringParametersEx& parameters,
+        DataChangeNotificationCallback onDataChange
+    ) {
+        const auto result = services::createMonitoredItemDataChange(
+            connection_,
+            subscriptionId_,
+            {id, attribute},
+            monitoringMode,
+            parameters,
+            std::move(onDataChange)
+        );
+        return {connection_, subscriptionId_, result.value()};
+    }
+
+    /// @deprecated Use overload with DataChangeNotificationCallback instead
+    [[deprecated("Use overload with DataChangeNotificationCallback instead")]]
+    MonitoredItem<Connection> subscribeDataChange(
+        const NodeId& id,
+        AttributeId attribute,
+        MonitoringMode monitoringMode,
+        MonitoringParametersEx& parameters,
+        DataChangeCallback<Connection> onDataChange
+    ) {
+        return subscribeDataChange(
+            id, attribute, monitoringMode, parameters, createCallback(std::move(onDataChange))
+        );
+    }
+
+    /// Create a monitored item for data change notifications (default settings).
+    /// The monitoring mode is set to MonitoringMode::Reporting and the default open62541
+    /// MonitoringParametersEx are used.
+    /// @see services::MonitoringParametersEx
+    MonitoredItem<Connection> subscribeDataChange(
+        const NodeId& id, AttributeId attribute, DataChangeNotificationCallback onDataChange
+    ) {
+        MonitoringParametersEx parameters;
+        return subscribeDataChange(
+            id, attribute, MonitoringMode::Reporting, parameters, std::move(onDataChange)
+        );
+    }
+
+    /// @deprecated Use overload with DataChangeNotificationCallback instead
+    [[deprecated("Use overload with DataChangeNotificationCallback instead")]]
+    MonitoredItem<Connection> subscribeDataChange(
+        const NodeId& id, AttributeId attribute, DataChangeCallback<Connection> onDataChange
+    ) {
+        return subscribeDataChange(id, attribute, createCallback(std::move(onDataChange)));
+    }
+
+    /// Create a monitored item for event notifications.
+    /// @copydetails services::MonitoringParametersEx
+    /// @note Not implemented for Server.
+    MonitoredItem<Connection> subscribeEvent(
+        const NodeId& id,
+        MonitoringMode monitoringMode,
+        MonitoringParametersEx& parameters,
+        EventNotificationCallback onEvent  // NOLINT(*-unnecessary-value-param), false positive?
+    ) {
+        const auto result = services::createMonitoredItemEvent(
+            connection_,
+            subscriptionId_,
+            {id, AttributeId::EventNotifier},
+            monitoringMode,
+            parameters,
+            std::move(onEvent)
+        );
+        return {connection_, subscriptionId_, result.value()};
+    }
+
+    /// @deprecated Use overload with EventNotificationCallback instead
+    [[deprecated("Use overload with EventNotificationCallback instead")]]
+    MonitoredItem<Connection> subscribeEvent(
+        const NodeId& id,
+        MonitoringMode monitoringMode,
+        MonitoringParametersEx& parameters,
+        EventCallback<Connection> onEvent
+    ) {
+        return subscribeEvent(id, monitoringMode, parameters, createCallback(std::move(onEvent)));
+    }
 
     /// Create a monitored item for event notifications (default settings).
     /// The monitoring mode is set to MonitoringMode::Reporting and the default open62541
-    /// MonitoringParameters are used.
+    /// MonitoringParametersEx are used.
     /// @note Not implemented for Server.
-    MonitoredItem<ServerOrClient> subscribeEvent(
-        const NodeId& id, const EventFilter& eventFilter, EventCallback<ServerOrClient> onEvent
-    );
+    MonitoredItem<Connection> subscribeEvent(
+        const NodeId& id, const EventFilter& eventFilter, EventNotificationCallback onEvent
+    ) {
+        MonitoringParametersEx parameters;
+        parameters.filter = ExtensionObject::fromDecodedCopy(eventFilter);
+        return subscribeEvent(id, MonitoringMode::Reporting, parameters, std::move(onEvent));
+    }
 
-    /// Create a monitored item for event notifications.
-    /// @copydetails services::MonitoringParameters
-    /// @note Not implemented for Server.
-    MonitoredItem<ServerOrClient> subscribeEvent(
-        const NodeId& id,
-        MonitoringMode monitoringMode,
-        MonitoringParameters& parameters,
-        EventCallback<ServerOrClient> onEvent
-    );
+    /// @deprecated Use overload with EventNotificationCallback instead
+    [[deprecated("Use overload with EventNotificationCallback instead")]]
+    MonitoredItem<Connection> subscribeEvent(
+        const NodeId& id, const EventFilter& eventFilter, EventCallback<Connection> onEvent
+    ) {
+        return subscribeEvent(id, eventFilter, createCallback(std::move(onEvent)));
+    }
 
     /// Delete this subscription.
     /// @note Not implemented for Server.
-    /// @see services::deleteSubscription
-    void deleteSubscription();
+    void deleteSubscription() {
+        services::deleteSubscription(connection_, subscriptionId_).value();
+    }
 
 private:
-    ServerOrClient& connection_;
+    DataChangeNotificationCallback createCallback(DataChangeCallback<Connection> onDataChange) {
+        return [connectionPtr = &connection_, callback = std::move(onDataChange)](
+                   uint32_t subId, uint32_t monId, const DataValue& value
+               ) {
+            const MonitoredItem<Connection> monitoredItem(*connectionPtr, subId, monId);
+            callback(monitoredItem, value);
+        };
+    }
+
+    EventNotificationCallback createCallback(EventCallback<Connection> onEvent) {
+        return [connectionPtr = &connection_, callback = std::move(onEvent)](
+                   uint32_t subId, uint32_t monId, Span<const Variant> eventFields
+               ) {
+            const MonitoredItem<Connection> monitoredItem(*connectionPtr, subId, monId);
+            callback(monitoredItem, eventFields);
+        };
+    }
+
+    Connection& connection_;
     uint32_t subscriptionId_{0U};
 };
 
@@ -131,8 +257,7 @@ private:
 
 template <typename T>
 inline bool operator==(const Subscription<T>& lhs, const Subscription<T>& rhs) noexcept {
-    return (lhs.getConnection() == rhs.getConnection()) &&
-           (lhs.getSubscriptionId() == rhs.getSubscriptionId());
+    return (lhs.connection() == rhs.connection()) && (lhs.subscriptionId() == rhs.subscriptionId());
 }
 
 template <typename T>

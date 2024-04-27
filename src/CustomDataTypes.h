@@ -12,7 +12,10 @@ namespace opcua {
 
 class CustomDataTypes {
 public:
-    void set(const UA_DataTypeArray*& array, std::vector<DataType> dataTypes) {
+    explicit CustomDataTypes(const UA_DataTypeArray*& array)
+        : wrapped_(array) {}
+
+    void assign(std::vector<DataType> dataTypes) {
         dataTypes_ = std::move(dataTypes);
         // NOLINTNEXTLINE
         array_ = std::unique_ptr<UA_DataTypeArray>(new UA_DataTypeArray{
@@ -20,12 +23,13 @@ public:
             dataTypes_.size(),
             asNative(dataTypes_.data()),
         });
-        array = array_.get();
+        wrapped_ = array_.get();
     }
 
 private:
-    std::unique_ptr<UA_DataTypeArray> array_;
+    const UA_DataTypeArray*& wrapped_;
     std::vector<DataType> dataTypes_;
+    std::unique_ptr<UA_DataTypeArray> array_;
 };
 
 }  // namespace opcua

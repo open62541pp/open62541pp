@@ -4,6 +4,7 @@
 #include <functional>
 
 #include "open62541pp/Config.h"
+#include "open62541pp/Result.h"
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 
@@ -48,7 +49,7 @@ struct SubscriptionParameters {
 };
 
 /**
- * @defgroup CreateSubscription
+ * @defgroup CreateSubscription CreateSubscription service
  * Create subscriptions. Subscriptions monitor a set of monitored items for notifications and return
  * them to the client.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.2
@@ -64,14 +65,14 @@ using DeleteSubscriptionCallback = std::function<void(uint32_t subId)>;
 /**
  * Create a subscription.
  * @copydetails SubscriptionParameters
- * @param client Instance of type Client
+ * @param connection Instance of type Client
  * @param parameters Subscription parameters, may be revised by server
  * @param publishingEnabled Enable/disable publishing of the subscription
  * @param deleteCallback Invoked when the subscription is deleted
- * @returns Server-assigned identifier of the subscription
+ * @return Server-assigned identifier of the subscription
  */
-[[nodiscard]] uint32_t createSubscription(
-    Client& client,
+[[nodiscard]] Result<uint32_t> createSubscription(
+    Client& connection,
     SubscriptionParameters& parameters,
     bool publishingEnabled = true,
     DeleteSubscriptionCallback deleteCallback = {}
@@ -79,7 +80,7 @@ using DeleteSubscriptionCallback = std::function<void(uint32_t subId)>;
 
 /**
  * @}
- * @defgroup ModifySubscription
+ * @defgroup ModifySubscription ModifySubscription service
  * Modify subscriptions.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.3
  * @{
@@ -88,17 +89,17 @@ using DeleteSubscriptionCallback = std::function<void(uint32_t subId)>;
 /**
  * Modify a subscription.
  * @copydetails SubscriptionParameters
- * @param client Instance of type Client
+ * @param connection Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @param parameters Subscription parameters, may be revised by server
  */
-void modifySubscription(
-    Client& client, uint32_t subscriptionId, SubscriptionParameters& parameters
-);
+Result<void> modifySubscription(
+    Client& connection, uint32_t subscriptionId, SubscriptionParameters& parameters
+) noexcept;
 
 /**
  * @}
- * @defgroup SetPublishingMode
+ * @defgroup SetPublishingMode SetPublishingMode service
  * Enable/disable sending of notifications on subscriptions.
  * Disable publishing of NotificationMessages of the subscription doesn't discontinue the sending
  * of keep-alive messages, nor change the monitoring mode.
@@ -108,15 +109,17 @@ void modifySubscription(
 
 /**
  * Enable/disable publishing of notification messages.
- * @param client Instance of type Client
+ * @param connection Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @param publishing Enable/disable publishing
  */
-void setPublishingMode(Client& client, uint32_t subscriptionId, bool publishing);
+Result<void> setPublishingMode(
+    Client& connection, uint32_t subscriptionId, bool publishing
+) noexcept;
 
 /**
  * @}
- * @defgroup DeleteSubscriptions
+ * @defgroup DeleteSubscriptions DeleteSubscriptions service
  * Delete subscriptions.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.8
  * @{
@@ -124,10 +127,10 @@ void setPublishingMode(Client& client, uint32_t subscriptionId, bool publishing)
 
 /**
  * Delete a subscription.
- * @param client Instance of type Client
+ * @param connection Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  */
-void deleteSubscription(Client& client, uint32_t subscriptionId);
+Result<void> deleteSubscription(Client& connection, uint32_t subscriptionId) noexcept;
 
 /**
  * @}

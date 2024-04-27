@@ -19,7 +19,7 @@ namespace opcua {
  */
 class DataValue : public TypeWrapper<UA_DataValue, UA_TYPES_DATAVALUE> {
 public:
-    using TypeWrapperBase::TypeWrapperBase;  // inherit constructors
+    using TypeWrapper::TypeWrapper;  // inherit constructors
 
     explicit DataValue(Variant value) noexcept {
         setValue(std::move(value));
@@ -88,6 +88,7 @@ public:
         return handle()->hasStatus;
     }
 
+    /// @deprecated Use hasStatus() instead
     [[deprecated("Use hasStatus() instead")]]
     bool hasStatusCode() const noexcept {
         return hasStatus();
@@ -138,6 +139,7 @@ public:
         return handle()->status;
     }
 
+    /// @deprecated Use getStatus() instead
     [[deprecated("Use getStatus() instead")]]
     StatusCode getStatusCode() const noexcept {
         return getStatus();
@@ -185,6 +187,7 @@ public:
         handle()->hasStatus = true;
     }
 
+    /// @deprecated Use setStatus(StatusCode) instead
     [[deprecated("Use setStatus(StatusCode) instead.")]]
     void setStatusCode(StatusCode statusCode) noexcept {
         setStatus(statusCode);

@@ -30,7 +30,7 @@ namespace opcua::services {
  */
 
 /**
- * @defgroup AddNodes
+ * @defgroup AddNodes AddNodes service
  * Add nodes into the address space hierarchy.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.2
  * @{
@@ -38,36 +38,42 @@ namespace opcua::services {
 
 /**
  * Add one or more nodes (client only).
- * @param client Instance of type Client
+ * @param connection Instance of type Client
  * @param request Add nodes request
  */
-AddNodesResponse addNodes(Client& client, const AddNodesRequest& request);
+AddNodesResponse addNodes(Client& connection, const AddNodesRequest& request) noexcept;
 
 /**
  * Asynchronously add one or more nodes (client only).
  * @copydetails addNodes
- * @param token @completiontoken{void(opcua::StatusCode, opcua::AddNodesResponse&)}
+ * @param token @completiontoken{void(Result<AddNodesResponse>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto addNodesAsync(
-    Client& client,
+    Client& connection,
     const AddNodesRequest& request,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::sendRequest<UA_AddNodesRequest, UA_AddNodesResponse>(
-        client,
-        request,
-        detail::WrapResponse<AddNodesResponse>{},
-        std::forward<CompletionToken>(token)
+        connection, request, detail::Wrap<AddNodesResponse>{}, std::forward<CompletionToken>(token)
     );
 }
 
 /**
  * Add a node.
+ * @return Server-assigned NodeId of the added node
+ * @param connection Instance of type Client (or Server)
+ * @param nodeClass Node class
+ * @param parentId Parent node
+ * @param id Requested NodeId of the node to add
+ * @param browseName Browse name
+ * @param nodeAttributes Node attributes
+ * @param typeDefinition NodeId of the type
+ * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
-NodeId addNode(
-    T& serverOrClient,
+Result<NodeId> addNode(
+    T& connection,
     NodeClass nodeClass,
     const NodeId& parentId,
     const NodeId& id,
@@ -75,16 +81,16 @@ NodeId addNode(
     const ExtensionObject& nodeAttributes,
     const NodeId& typeDefinition,
     const NodeId& referenceType
-);
+) noexcept;
 
 /**
  * Asynchronously add a node.
  * @copydetails addNode
- * @param token @completiontoken{void(opcua::StatusCode, opcua::NodeId&)}
+ * @param token @completiontoken{void(Result<NodeId>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto addNodeAsync(
-    Client& client,
+    Client& connection,
     NodeClass nodeClass,
     const NodeId& parentId,
     const NodeId& id,
@@ -107,12 +113,10 @@ auto addNodeAsync(
     request.nodesToAddSize = 1;
     request.nodesToAdd = &item;
     return detail::sendRequest<UA_AddNodesRequest, UA_AddNodesResponse>(
-        client,
+        connection,
         request,
         [](UA_AddNodesResponse& response) {
-            auto& result = detail::getSingleResult(response);
-            throwIfBad(result.statusCode);
-            return NodeId(std::exchange(result.addedNodeId, {}));
+            return detail::getSingleResult(response).andThen(detail::getAddedNodeId);
         },
         std::forward<CompletionToken>(token)
     );
@@ -120,7 +124,7 @@ auto addNodeAsync(
 
 /**
  * @}
- * @defgroup AddReferences
+ * @defgroup AddReferences AddReferences service
  * Add references to nodes.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.3
  * @{
@@ -128,50 +132,57 @@ auto addNodeAsync(
 
 /**
  * Add one or more references (client only).
- * @param client Instance of type Client
+ * @param connection Instance of type Client
  * @param request Add references request
  */
-AddReferencesResponse addReferences(Client& client, const AddReferencesRequest& request);
+AddReferencesResponse addReferences(
+    Client& connection, const AddReferencesRequest& request
+) noexcept;
 
 /**
  * Asynchronously add one or more references (client only).
  * @copydetails addReferences
- * @param token @completiontoken{void(opcua::StatusCode, opcua::AddReferencesResponse&)}
+ * @param token @completiontoken{void(Result<AddReferencesResponse>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto addReferencesAsync(
-    Client& client,
+    Client& connection,
     const AddReferencesRequest& request,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::sendRequest<UA_AddReferencesRequest, UA_AddReferencesResponse>(
-        client,
+        connection,
         request,
-        detail::WrapResponse<AddReferencesResponse>{},
+        detail::Wrap<AddReferencesResponse>{},
         std::forward<CompletionToken>(token)
     );
 }
 
 /**
  * Add reference.
+ * @param connection Instance of type Client (or Server)
+ * @param sourceId Node to which the reference is to be added
+ * @param targetId Target node
+ * @param referenceType NodeId of the reference type that defines the reference
+ * @param forward Create a forward reference if `true` or a inverse reference if `false`
  */
 template <typename T>
-void addReference(
-    T& serverOrClient,
+Result<void> addReference(
+    T& connection,
     const NodeId& sourceId,
     const NodeId& targetId,
     const NodeId& referenceType,
     bool forward = true
-);
+) noexcept;
 
 /**
  * Asynchronously add reference.
  * @copydetails addReference
- * @param token @completiontoken{void(opcua::StatusCode)}
+ * @param token @completiontoken{void(Result<void>)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto addReferenceAsync(
-    Client& client,
+    Client& connection,
     const NodeId& sourceId,
     const NodeId& targetId,
     const NodeId& referenceType,
@@ -188,16 +199,18 @@ auto addReferenceAsync(
     request.referencesToAddSize = 1;
     request.referencesToAdd = &item;
     return detail::sendRequest<UA_AddReferencesRequest, UA_AddReferencesResponse>(
-        client,
+        connection,
         request,
-        [](UA_AddReferencesResponse& response) { throwIfBad(detail::getSingleResult(response)); },
+        [](UA_AddReferencesResponse& response) {
+            return detail::getSingleResult(response).andThen(detail::toResult);
+        },
         std::forward<CompletionToken>(token)
     );
 }
 
 /**
  * @}
- * @defgroup DeleteNodes
+ * @defgroup DeleteNodes DeleteNodes service
  * Delete nodes from the address space.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.4
  * @{
@@ -205,44 +218,47 @@ auto addReferenceAsync(
 
 /**
  * Delete one or more nodes (client only).
- * @param client Instance of type Client
+ * @param connection Instance of type Client
  * @param request Delete nodes request
  */
-DeleteNodesResponse deleteNodes(Client& client, const DeleteNodesRequest& request);
+DeleteNodesResponse deleteNodes(Client& connection, const DeleteNodesRequest& request) noexcept;
 
 /**
  * Asynchronously delete one or more nodes (client only).
  * @copydetails deleteNodes
- * @param token @completiontoken{void(opcua::StatusCode, opcua::DeleteNodesResponse&)}
+ * @param token @completiontoken{void(Result<DeleteNodesResponse>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto deleteNodesAsync(
-    Client& client,
+    Client& connection,
     const DeleteNodesRequest& request,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::sendRequest<UA_DeleteNodesRequest, UA_DeleteNodesResponse>(
-        client,
+        connection,
         request,
-        detail::WrapResponse<DeleteNodesResponse>{},
+        detail::Wrap<DeleteNodesResponse>{},
         std::forward<CompletionToken>(token)
     );
 }
 
 /**
  * Delete node.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to delete
+ * @param deleteReferences Delete references in target nodes that reference the node to delete
  */
 template <typename T>
-void deleteNode(T& serverOrClient, const NodeId& id, bool deleteReferences = true);
+Result<void> deleteNode(T& connection, const NodeId& id, bool deleteReferences = true) noexcept;
 
 /**
  * Asynchronously delete node.
  * @copydetails deleteNode
- * @param token @completiontoken{void(opcua::StatusCode)}
+ * @param token @completiontoken{void(Result<void>)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto deleteNodeAsync(
-    Client& client,
+    Client& connection,
     const NodeId& id,
     bool deleteReferences = true,
     CompletionToken&& token = DefaultCompletionToken()
@@ -254,16 +270,18 @@ auto deleteNodeAsync(
     request.nodesToDeleteSize = 1;
     request.nodesToDelete = &item;
     return detail::sendRequest<UA_DeleteNodesRequest, UA_DeleteNodesResponse>(
-        client,
+        connection,
         request,
-        [](UA_DeleteNodesResponse& response) { throwIfBad(detail::getSingleResult(response)); },
+        [](UA_DeleteNodesResponse& response) {
+            return detail::getSingleResult(response).andThen(detail::toResult);
+        },
         std::forward<CompletionToken>(token)
     );
 }
 
 /**
  * @}
- * @defgroup DeleteReferences
+ * @defgroup DeleteReferences DeleteReferences service
  * Delete references from nodes.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.7.5
  * @{
@@ -271,51 +289,59 @@ auto deleteNodeAsync(
 
 /**
  * Delete one or more references (client only).
- * @param client Instance of type Client
+ * @param connection Instance of type Client
  * @param request Delete references request
  */
-DeleteReferencesResponse deleteReferences(Client& client, const DeleteReferencesRequest& request);
+DeleteReferencesResponse deleteReferences(
+    Client& connection, const DeleteReferencesRequest& request
+) noexcept;
 
 /**
  * Asynchronously delete one or more references (client only).
  * @copydetails deleteReferences
- * @param token @completiontoken{void(opcua::StatusCode, opcua::DeleteReferencesResponse&)}
+ * @param token @completiontoken{void(Result<DeleteReferencesResponse>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto deleteReferencesAsync(
-    Client& client,
+    Client& connection,
     const DeleteReferencesRequest& request,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::sendRequest<UA_DeleteReferencesRequest, UA_DeleteReferencesResponse>(
-        client,
+        connection,
         request,
-        detail::WrapResponse<DeleteReferencesResponse>{},
+        detail::Wrap<DeleteReferencesResponse>{},
         std::forward<CompletionToken>(token)
     );
 }
 
 /**
  * Delete reference.
+ * @param connection Instance of type Client (or Server)
+ * @param sourceId Node that contains the reference to delete
+ * @param targetId Target node of the reference to delete
+ * @param referenceType NodeId of the reference type that defines the reference to delete
+ * @param isForward Delete the forward reference if `true`, delete the inverse reference if `false`
+ * @param deleteBidirectional Delete the specified and opposite reference from the target node
  */
 template <typename T>
-void deleteReference(
-    T& serverOrClient,
+Result<void> deleteReference(
+    T& connection,
     const NodeId& sourceId,
     const NodeId& targetId,
     const NodeId& referenceType,
     bool isForward,
     bool deleteBidirectional
-);
+) noexcept;
 
 /**
  * Asynchronously delete reference.
  * @copydetails deleteReference
- * @param token @completiontoken{void(opcua::StatusCode)}
+ * @param token @completiontoken{void(Result<void>)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto deleteReferenceAsync(
-    Client& client,
+    Client& connection,
     const NodeId& sourceId,
     const NodeId& targetId,
     const NodeId& referenceType,
@@ -333,10 +359,10 @@ auto deleteReferenceAsync(
     request.referencesToDeleteSize = 1;
     request.referencesToDelete = &item;
     return detail::sendRequest<UA_DeleteReferencesRequest, UA_DeleteReferencesResponse>(
-        client,
+        connection,
         request,
         [](UA_DeleteReferencesResponse& response) {
-            throwIfBad(detail::getSingleResult(response));
+            return detail::getSingleResult(response).andThen(detail::toResult);
         },
         std::forward<CompletionToken>(token)
     );
@@ -355,19 +381,27 @@ auto deleteReferenceAsync(
 
 /**
  * Add object.
+ * @return Server-assigned NodeId of the added object node
+ * @param connection Instance of type Client (or Server)
+ * @param parentId Parent node
+ * @param id Requested NodeId of the object node to add
+ * @param browseName Browse name
+ * @param attributes Object attributes
+ * @param objectType NodeId of the object type
+ * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
-inline NodeId addObject(
-    T& serverOrClient,
+inline Result<NodeId> addObject(
+    T& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
     const ObjectAttributes& attributes = {},
     const NodeId& objectType = ObjectTypeId::BaseObjectType,
     const NodeId& referenceType = ReferenceTypeId::HasComponent
-) {
+) noexcept {
     return addNode(
-        serverOrClient,
+        connection,
         NodeClass::Object,
         parentId,
         id,
@@ -381,11 +415,11 @@ inline NodeId addObject(
 /**
  * Asynchronously add object.
  * @copydetails addObject
- * @param token @completiontoken{void(opcua::StatusCode, opcua::NodeId&)}
+ * @param token @completiontoken{void(Result<NodeId>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addObjectAsync(
-    Client& client,
+    Client& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -395,7 +429,7 @@ inline auto addObjectAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addNodeAsync(
-        client,
+        connection,
         NodeClass::Object,
         parentId,
         id,
@@ -409,35 +443,36 @@ inline auto addObjectAsync(
 
 /**
  * Add folder.
+ * @return Server-assigned NodeId of the added folder node
+ * @param connection Instance of type Client (or Server)
+ * @param parentId Parent node
+ * @param id Requested NodeId of the node to add
+ * @param browseName Browse name
+ * @param attributes Object attributes
+ * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
-inline NodeId addFolder(
-    T& serverOrClient,
+inline Result<NodeId> addFolder(
+    T& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
     const ObjectAttributes& attributes = {},
     const NodeId& referenceType = ReferenceTypeId::HasComponent
-) {
+) noexcept {
     return addObject(
-        serverOrClient,
-        parentId,
-        id,
-        browseName,
-        attributes,
-        ObjectTypeId::FolderType,
-        referenceType
+        connection, parentId, id, browseName, attributes, ObjectTypeId::FolderType, referenceType
     );
 }
 
 /**
  * Asynchronously add folder.
  * @copydetails addFolder
- * @param token @completiontoken{void(opcua::StatusCode, opcua::NodeId&)}
+ * @param token @completiontoken{void(Result<NodeId>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addFolderAsync(
-    Client& client,
+    Client& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -446,7 +481,7 @@ inline auto addFolderAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addObjectAsync(
-        client,
+        connection,
         parentId,
         id,
         browseName,
@@ -459,19 +494,27 @@ inline auto addFolderAsync(
 
 /**
  * Add variable.
+ * @return Server-assigned NodeId of the added variable node
+ * @param connection Instance of type Client (or Server)
+ * @param parentId Parent node
+ * @param id Requested NodeId of the node to add
+ * @param browseName Browse name
+ * @param attributes Variable attributes
+ * @param variableType NodeId of the variable type
+ * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
-inline NodeId addVariable(
-    T& serverOrClient,
+inline Result<NodeId> addVariable(
+    T& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
     const VariableAttributes& attributes = {},
     const NodeId& variableType = VariableTypeId::BaseDataVariableType,
     const NodeId& referenceType = ReferenceTypeId::HasComponent
-) {
+) noexcept {
     return addNode(
-        serverOrClient,
+        connection,
         NodeClass::Variable,
         parentId,
         id,
@@ -485,11 +528,11 @@ inline NodeId addVariable(
 /**
  * Asynchronously add variable.
  * @copydetails addVariable
- * @param token @completiontoken{void(opcua::StatusCode, opcua::NodeId&)}
+ * @param token @completiontoken{void(Result<NodeId>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addVariableAsync(
-    Client& client,
+    Client& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -499,7 +542,7 @@ inline auto addVariableAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addNodeAsync(
-        client,
+        connection,
         NodeClass::Variable,
         parentId,
         id,
@@ -513,17 +556,23 @@ inline auto addVariableAsync(
 
 /**
  * Add property.
+ * @return Server-assigned NodeId of the added property node
+ * @param connection Instance of type Client (or Server)
+ * @param parentId Parent node
+ * @param id Requested NodeId of the node to add
+ * @param browseName Browse name
+ * @param attributes Property attributes
  */
 template <typename T>
-inline NodeId addProperty(
-    T& serverOrClient,
+inline Result<NodeId> addProperty(
+    T& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
     const VariableAttributes& attributes = {}
-) {
+) noexcept {
     return addVariable(
-        serverOrClient,
+        connection,
         parentId,
         id,
         browseName,
@@ -536,11 +585,11 @@ inline NodeId addProperty(
 /**
  * Asynchronously add property.
  * @copydetails addProperty
- * @param token @completiontoken{void(opcua::StatusCode, opcua::NodeId&)}
+ * @param token @completiontoken{void(Result<NodeId>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addPropertyAsync(
-    Client& client,
+    Client& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -548,7 +597,7 @@ inline auto addPropertyAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addVariableAsync(
-        client,
+        connection,
         parentId,
         id,
         browseName,
@@ -570,10 +619,20 @@ using MethodCallback = std::function<void(Span<const Variant> input, Span<Varian
 /**
  * Add method.
  * Callbacks can not be set by clients. Servers can assign callbacks to method nodes afterwards.
+ * @return Server-assigned NodeId of the added method node
+ * @param connection Instance of type Client (or Server)
+ * @param parentId Parent node
+ * @param id Requested NodeId of the node to add
+ * @param browseName Browse name
+ * @param callback Method callback
+ * @param inputArguments Input arguments
+ * @param outputArguments Output arguments
+ * @param attributes Method attributes
+ * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
-NodeId addMethod(
-    T& serverOrClient,
+Result<NodeId> addMethod(
+    T& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -582,16 +641,16 @@ NodeId addMethod(
     Span<const Argument> outputArguments,
     const MethodAttributes& attributes = {},
     const NodeId& referenceType = ReferenceTypeId::HasComponent
-);
+) noexcept;
 
 /**
  * Asynchronously add method.
  * @copydetails addMethod
- * @param token @completiontoken{void(opcua::StatusCode, opcua::NodeId&)}
+ * @param token @completiontoken{void(Result<NodeId>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addMethodAsync(
-    Client& client,
+    Client& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -603,7 +662,7 @@ inline auto addMethodAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addNodeAsync(
-        client,
+        connection,
         NodeClass::Method,
         parentId,
         id,
@@ -618,18 +677,25 @@ inline auto addMethodAsync(
 
 /**
  * Add object type.
+ * @return Server-assigned NodeId of the added object type node
+ * @param connection Instance of type Client (or Server)
+ * @param parentId Parent node
+ * @param id Requested NodeId of the node to add
+ * @param browseName Browse name
+ * @param attributes Object type attributes
+ * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
-inline NodeId addObjectType(
-    T& serverOrClient,
+inline Result<NodeId> addObjectType(
+    T& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
     const ObjectTypeAttributes& attributes = {},
     const NodeId& referenceType = ReferenceTypeId::HasSubtype
-) {
+) noexcept {
     return addNode(
-        serverOrClient,
+        connection,
         NodeClass::ObjectType,
         parentId,
         id,
@@ -643,11 +709,11 @@ inline NodeId addObjectType(
 /**
  * Asynchronously add object type.
  * @copydetails addObjectType
- * @param token @completiontoken{void(opcua::StatusCode, opcua::NodeId&)}
+ * @param token @completiontoken{void(Result<NodeId>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addObjectTypeAsync(
-    Client& client,
+    Client& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -656,7 +722,7 @@ inline auto addObjectTypeAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addNodeAsync(
-        client,
+        connection,
         NodeClass::ObjectType,
         parentId,
         id,
@@ -670,19 +736,27 @@ inline auto addObjectTypeAsync(
 
 /**
  * Add variable type.
+ * @return Server-assigned NodeId of the added variable type node
+ * @param connection Instance of type Client (or Server)
+ * @param parentId Parent node
+ * @param id Requested NodeId of the node to add
+ * @param browseName Browse name
+ * @param attributes Variable type attributes
+ * @param variableType NodeId of the variable type
+ * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
-inline NodeId addVariableType(
-    T& serverOrClient,
+inline Result<NodeId> addVariableType(
+    T& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
     const VariableTypeAttributes& attributes = {},
     const NodeId& variableType = VariableTypeId::BaseDataVariableType,
     const NodeId& referenceType = ReferenceTypeId::HasSubtype
-) {
+) noexcept {
     return addNode(
-        serverOrClient,
+        connection,
         NodeClass::VariableType,
         parentId,
         id,
@@ -696,11 +770,11 @@ inline NodeId addVariableType(
 /**
  * Asynchronously add variable type.
  * @copydetails addVariableType
- * @param token @completiontoken{void(opcua::StatusCode, opcua::NodeId&)}
+ * @param token @completiontoken{void(Result<NodeId>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addVariableTypeAsync(
-    Client& client,
+    Client& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -710,7 +784,7 @@ inline auto addVariableTypeAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addNodeAsync(
-        client,
+        connection,
         NodeClass::VariableType,
         parentId,
         id,
@@ -724,18 +798,25 @@ inline auto addVariableTypeAsync(
 
 /**
  * Add reference type.
+ * @return Server-assigned NodeId of the added reference type node
+ * @param connection Instance of type Client (or Server)
+ * @param parentId Parent node
+ * @param id Requested NodeId of the node to add
+ * @param browseName Browse name
+ * @param attributes Reference type attributes
+ * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
-inline NodeId addReferenceType(
-    T& serverOrClient,
+inline Result<NodeId> addReferenceType(
+    T& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
     const ReferenceTypeAttributes& attributes = {},
     const NodeId& referenceType = ReferenceTypeId::HasSubtype
-) {
+) noexcept {
     return addNode(
-        serverOrClient,
+        connection,
         NodeClass::ReferenceType,
         parentId,
         id,
@@ -749,11 +830,11 @@ inline NodeId addReferenceType(
 /**
  * Asynchronously add reference type.
  * @copydetails addReferenceType
- * @param token @completiontoken{void(opcua::StatusCode, opcua::NodeId&)}
+ * @param token @completiontoken{void(Result<NodeId>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addReferenceTypeAsync(
-    Client& client,
+    Client& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -762,7 +843,7 @@ inline auto addReferenceTypeAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addNodeAsync(
-        client,
+        connection,
         NodeClass::ReferenceType,
         parentId,
         id,
@@ -776,18 +857,25 @@ inline auto addReferenceTypeAsync(
 
 /**
  * Add data type.
+ * @return Server-assigned NodeId of the added data type node
+ * @param connection Instance of type Client (or Server)
+ * @param parentId Parent node
+ * @param id Requested NodeId of the node to add
+ * @param browseName Browse name
+ * @param attributes Data type attributes
+ * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
-inline NodeId addDataType(
-    T& serverOrClient,
+inline Result<NodeId> addDataType(
+    T& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
     const DataTypeAttributes& attributes = {},
     const NodeId& referenceType = ReferenceTypeId::HasSubtype
-) {
+) noexcept {
     return addNode(
-        serverOrClient,
+        connection,
         NodeClass::DataType,
         parentId,
         id,
@@ -801,11 +889,11 @@ inline NodeId addDataType(
 /**
  * Asynchronously add data type.
  * @copydetails addDataType
- * @param token @completiontoken{void(opcua::StatusCode, opcua::NodeId&)}
+ * @param token @completiontoken{void(Result<NodeId>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addDataTypeAsync(
-    Client& client,
+    Client& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -814,7 +902,7 @@ inline auto addDataTypeAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addNodeAsync(
-        client,
+        connection,
         NodeClass::DataType,
         parentId,
         id,
@@ -828,18 +916,25 @@ inline auto addDataTypeAsync(
 
 /**
  * Add view.
+ * @return Server-assigned NodeId of the added view node
+ * @param connection Instance of type Client (or Server)
+ * @param parentId Parent node
+ * @param id Requested NodeId of the node to add
+ * @param browseName Browse name
+ * @param attributes View attributes
+ * @param referenceType Hierarchical reference type from the parent node to the new node
  */
 template <typename T>
-inline NodeId addView(
-    T& serverOrClient,
+inline Result<NodeId> addView(
+    T& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
     const ViewAttributes& attributes = {},
     const NodeId& referenceType = ReferenceTypeId::Organizes
-) {
+) noexcept {
     return addNode(
-        serverOrClient,
+        connection,
         NodeClass::View,
         parentId,
         id,
@@ -853,11 +948,11 @@ inline NodeId addView(
 /**
  * Asynchronously add view.
  * @copydetails addView
- * @param token @completiontoken{void(opcua::StatusCode, opcua::NodeId&)}
+ * @param token @completiontoken{void(Result<NodeId>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addViewAsync(
-    Client& client,
+    Client& connection,
     const NodeId& parentId,
     const NodeId& id,
     std::string_view browseName,
@@ -866,7 +961,7 @@ inline auto addViewAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addNodeAsync(
-        client,
+        connection,
         NodeClass::View,
         parentId,
         id,
@@ -886,33 +981,32 @@ inline auto addViewAsync(
 
 /**
  * Add modelling rule.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node
+ * @param rule Modelling rule to add
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/6.4.4
  */
 template <typename T>
-inline void addModellingRule(T& serverOrClient, const NodeId& id, ModellingRule rule) {
+inline Result<void> addModellingRule(T& connection, const NodeId& id, ModellingRule rule) noexcept {
     return addReference(
-        serverOrClient,
-        id,
-        {0, static_cast<uint32_t>(rule)},
-        ReferenceTypeId::HasModellingRule,
-        true
+        connection, id, {0, static_cast<uint32_t>(rule)}, ReferenceTypeId::HasModellingRule, true
     );
 }
 
 /**
  * Asynchronously add modelling rule.
  * @copydetails addModellingRule
- * @param token @completiontoken{void(opcua::StatusCode)}
+ * @param token @completiontoken{void(Result<void>)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addModellingRuleAsync(
-    Client& client,
+    Client& connection,
     const NodeId& id,
     ModellingRule rule,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return addReferenceAsync(
-        client,
+        connection,
         id,
         {0, static_cast<uint32_t>(rule)},
         ReferenceTypeId::HasModellingRule,

@@ -6,20 +6,18 @@ int main() {
     opcua::Server server(4840 /* port */);
 
     server.setApplicationName("open62541pp server example");
-    server.setLogger([](auto level, auto category, auto msg) {
-        std::cout << "[" << opcua::getLogLevelName(level) << "] "
-                  << "[" << opcua::getLogCategoryName(category) << "] " << msg << std::endl;
-    });
+    server.setApplicationUri("urn:open62541pp.server.application");
+    server.setProductUri("https://open62541pp.github.io");
 
     // Add a variable node to the Objects node
     auto parentNode = server.getObjectsNode();
     auto myIntegerNode = parentNode.addVariable(
-        {1, "the.answer"},
-        "the answer",
+        {1, "TheAnswer"},
+        "The Answer",
         opcua::VariableAttributes{}
+            .setDisplayName({"en-US", "The Answer"})
+            .setDescription({"en-US", "Answer to the Ultimate Question of Life"})
             .setDataType<int>()
-            .setDisplayName({"en-US", "the answer"})
-            .setDescription({"en-US", "the answer"})
     );
 
     // Write a value (attribute) to the node

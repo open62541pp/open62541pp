@@ -2,16 +2,16 @@
 
 #ifdef UA_ENABLE_ENCRYPTION
 
+#include <optional>
 #include <string>
 #include <string_view>
-#include <vector>
 
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Logger.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/open62541/common.h"
 
-#include "CustomLogger.h"
+#include "plugins/LoggerAdapter.h"
 
 namespace opcua::crypto {
 
@@ -32,17 +32,15 @@ CreateCertificateResult createCertificate(
 
     // OpenSSL errors will generate a generic UA_STATUSCODE_BADINTERNALERROR status code
     // detailed errors are reported through error log messages -> capture log messages
-    UA_Logger logger{};
-    CustomLogger customLogger;
-    std::vector<std::string> errorMessages;
-    customLogger.set(
-        logger,
+    std::optional<std::string> error;
+    LoggerAdapter loggerAdapter(
         [&](LogLevel level, [[maybe_unused]] LogCategory category, std::string_view msg) {
-            if (level >= LogLevel::Error) {
-                errorMessages.emplace_back(msg);
+            if (level >= LogLevel::Error && !error /* keep first error */) {
+                error = msg;
             }
         }
     );
+    UA_Logger logger = loggerAdapter.create();
 
     CreateCertificateResult result;
     const auto status = UA_CreateCertificate(
@@ -57,8 +55,8 @@ CreateCertificateResult createCertificate(
         result.certificate.handle()
     );
 
-    if (!errorMessages.empty()) {
-        throw CreateCertificateError(errorMessages.front());  // throw first error
+    if (error) {
+        throw CreateCertificateError(error.value());
     }
     // handle errors without error logging
     throwIfBad(status);

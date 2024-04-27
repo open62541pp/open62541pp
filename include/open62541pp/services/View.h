@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <iterator>  // make_move_iterator
 #include <vector>
 
 #include "open62541pp/Client.h"
@@ -31,7 +32,7 @@ namespace opcua::services {
  */
 
 /**
- * @defgroup Browse
+ * @defgroup Browse Browse service
  * Discover references of nodes.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.2
  * @{
@@ -43,12 +44,12 @@ namespace opcua::services {
  * @param connection Instance of type Client
  * @param request Browse request
  */
-BrowseResponse browse(Client& connection, const BrowseRequest& request);
+BrowseResponse browse(Client& connection, const BrowseRequest& request) noexcept;
 
 /**
  * Asynchronously discover the references of one or more nodes (client only).
  * @copydetails browse
- * @param token @completiontoken{void(opcua::StatusCode, opcua::BrowseResponse&)}
+ * @param token @completiontoken{void(BrowseResponse&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto browseAsync(
@@ -57,10 +58,7 @@ auto browseAsync(
     CompletionToken&& token = DefaultCompletionToken()
 ) {
     return detail::sendRequest<UA_BrowseRequest, UA_BrowseResponse>(
-        connection,
-        request,
-        detail::WrapResponse<BrowseResponse>{},
-        std::forward<CompletionToken>(token)
+        connection, request, detail::Wrap<BrowseResponse>{}, std::forward<CompletionToken>(token)
     );
 }
 
@@ -72,12 +70,14 @@ auto browseAsync(
  * @param maxReferences The maximum number of references to return (0 if no limit)
  */
 template <typename T>
-BrowseResult browse(T& connection, const BrowseDescription& bd, uint32_t maxReferences = 0);
+Result<BrowseResult> browse(
+    T& connection, const BrowseDescription& bd, uint32_t maxReferences = 0
+) noexcept;
 
 /**
  * Asynchronously discover the references of a specified node.
  * @copydetails browse(T&, const BrowseDescription&, uint32_t)
- * @param token @completiontoken{void(opcua::StatusCode, opcua::BrowseResult&)}
+ * @param token @completiontoken{void(Result<BrowseResult>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto browseAsync(
@@ -86,12 +86,11 @@ auto browseAsync(
     uint32_t maxReferences = 0,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
-    auto request = detail::createBrowseRequest(bd, maxReferences);
     return detail::sendRequest<UA_BrowseRequest, UA_BrowseResponse>(
         connection,
-        request,
+        detail::createBrowseRequest(bd, maxReferences),
         [](UA_BrowseResponse& response) {
-            return BrowseResult(detail::getSingleResultMove(response));
+            return detail::getSingleResult(response).transform(detail::Wrap<BrowseResult>{});
         },
         std::forward<CompletionToken>(token)
     );
@@ -99,7 +98,7 @@ auto browseAsync(
 
 /**
  * @}
- * @defgroup BrowseNext
+ * @defgroup BrowseNext BrowseNext service
  * Request the next set of a Browse or BrowseNext response information that is too large to be sent
  * in a single response. Discover references of nodes.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.3
@@ -112,12 +111,12 @@ auto browseAsync(
  * @param connection Instance of type Client
  * @param request Browse request
  */
-BrowseNextResponse browseNext(Client& connection, const BrowseNextRequest& request);
+BrowseNextResponse browseNext(Client& connection, const BrowseNextRequest& request) noexcept;
 
 /**
  * Asynchronously request the next sets of @ref browse / @ref browseNext responses (client only).
  * @copydetails browseNext
- * @param token @completiontoken{void(opcua::StatusCode, opcua::BrowseNextResponse&)}
+ * @param token @completiontoken{void(BrowseNextResponse&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto browseNextAsync(
@@ -128,7 +127,7 @@ auto browseNextAsync(
     return detail::sendRequest<UA_BrowseNextRequest, UA_BrowseNextResponse>(
         connection,
         request,
-        detail::WrapResponse<BrowseNextResponse>{},
+        detail::Wrap<BrowseNextResponse>{},
         std::forward<CompletionToken>(token)
     );
 }
@@ -142,14 +141,14 @@ auto browseNextAsync(
  * @param continuationPoint Continuation point from a preview browse/browseNext request
  */
 template <typename T>
-BrowseResult browseNext(
+Result<BrowseResult> browseNext(
     T& connection, bool releaseContinuationPoint, const ByteString& continuationPoint
-);
+) noexcept;
 
 /**
  * Asynchronously request the next set of a @ref browse or @ref browseNext response.
  * @copydetails browseNext(T&, bool, const ByteString&)
- * @param token @completiontoken{void(opcua::StatusCode, opcua::BrowseResult&)}
+ * @param token @completiontoken{void(Result<BrowseResult>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto browseNextAsync(
@@ -158,12 +157,11 @@ auto browseNextAsync(
     const ByteString& continuationPoint,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
-    auto request = detail::createBrowseNextRequest(releaseContinuationPoint, continuationPoint);
     return detail::sendRequest<UA_BrowseNextRequest, UA_BrowseNextResponse>(
         connection,
-        request,
+        detail::createBrowseNextRequest(releaseContinuationPoint, continuationPoint),
         [](UA_BrowseNextResponse& response) {
-            return BrowseResult(detail::getSingleResultMove(response));
+            return detail::getSingleResult(response).transform(detail::Wrap<BrowseResult>{});
         },
         std::forward<CompletionToken>(token)
     );
@@ -171,7 +169,7 @@ auto browseNextAsync(
 
 /**
  * @}
- * @defgroup TranslateBrowsePathsToNodeIds
+ * @defgroup TranslateBrowsePathsToNodeIds TranslateBrowsePathsToNodeIds service
  * Request that the server translates browse paths to node ids.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.4
  * @{
@@ -185,14 +183,12 @@ auto browseNextAsync(
  */
 TranslateBrowsePathsToNodeIdsResponse translateBrowsePathsToNodeIds(
     Client& connection, const TranslateBrowsePathsToNodeIdsRequest& request
-);
+) noexcept;
 
 /**
  * Asynchronously translate browse paths to NodeIds (client only).
  * @copydetails translateBrowsePathsToNodeIds
- * @param token @completiontoken{
- *              void(opcua::StatusCode, opcua::TranslateBrowsePathsToNodeIdsResponse&)
- *              }
+ * @param token @completiontoken{void(TranslateBrowsePathsToNodeIdsResponse&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto translateBrowsePathsToNodeIdsAsync(
@@ -205,7 +201,7 @@ auto translateBrowsePathsToNodeIdsAsync(
         UA_TranslateBrowsePathsToNodeIdsResponse>(
         connection,
         request,
-        detail::WrapResponse<TranslateBrowsePathsToNodeIdsResponse>{},
+        detail::Wrap<TranslateBrowsePathsToNodeIdsResponse>{},
         std::forward<CompletionToken>(token)
     );
 }
@@ -217,12 +213,14 @@ auto translateBrowsePathsToNodeIdsAsync(
  * @param browsePath Browse path (starting node & relative path)
  */
 template <typename T>
-BrowsePathResult translateBrowsePathToNodeIds(T& connection, const BrowsePath& browsePath);
+Result<BrowsePathResult> translateBrowsePathToNodeIds(
+    T& connection, const BrowsePath& browsePath
+) noexcept;
 
 /**
  * Asynchronously translate a browse path to NodeIds.
  * @copydetails translateBrowsePathToNodeIds
- * @param token @completiontoken{void(opcua::StatusCode, opcua::BrowsePathResult&)}
+ * @param token @completiontoken{void(Result<BrowsePathResult>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto translateBrowsePathToNodeIdsAsync(
@@ -230,14 +228,13 @@ auto translateBrowsePathToNodeIdsAsync(
     const BrowsePath& browsePath,
     CompletionToken&& token = DefaultCompletionToken()
 ) {
-    auto request = detail::createTranslateBrowsePathsToNodeIdsRequest(browsePath);
     return detail::sendRequest<
         UA_TranslateBrowsePathsToNodeIdsRequest,
         UA_TranslateBrowsePathsToNodeIdsResponse>(
         connection,
-        request,
+        detail::createTranslateBrowsePathsToNodeIdsRequest(browsePath),
         [](UA_TranslateBrowsePathsToNodeIdsResponse& response) {
-            return BrowsePathResult(detail::getSingleResultMove(response));
+            return detail::getSingleResult(response).transform(detail::Wrap<BrowsePathResult>{});
         },
         std::forward<CompletionToken>(token)
     );
@@ -255,7 +252,7 @@ auto translateBrowsePathToNodeIdsAsync(
  * @param browsePath Browse path as a list of browse names
  */
 template <typename T>
-inline BrowsePathResult browseSimplifiedBrowsePath(
+inline Result<BrowsePathResult> browseSimplifiedBrowsePath(
     T& connection, const NodeId& origin, Span<const QualifiedName> browsePath
 ) {
     return translateBrowsePathToNodeIds(connection, detail::createBrowsePath(origin, browsePath));
@@ -264,7 +261,7 @@ inline BrowsePathResult browseSimplifiedBrowsePath(
 /**
  * A simplified version of @ref translateBrowsePathToNodeIdsAsync.
  * @copydetails browseSimplifiedBrowsePath
- * @param token @completiontoken{void(opcua::StatusCode, opcua::BrowsePathResult&)}
+ * @param token @completiontoken{void(Result<BrowsePathResult>&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto browseSimplifiedBrowsePathAsync(
@@ -282,7 +279,7 @@ inline auto browseSimplifiedBrowsePathAsync(
 
 /**
  * @}
- * @defgroup RegisterNodes
+ * @defgroup RegisterNodes RegisterNodes service
  * Register nodes for efficient access operations.
  * Clients shall unregister unneeded nodes immediately to free up resources.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.5
@@ -294,12 +291,14 @@ inline auto browseSimplifiedBrowsePathAsync(
  * @param connection Instance of type Client
  * @param request Request
  */
-RegisterNodesResponse registerNodes(Client& connection, const RegisterNodesRequest& request);
+RegisterNodesResponse registerNodes(
+    Client& connection, const RegisterNodesRequest& request
+) noexcept;
 
 /**
  * Asynchronously register nodes for efficient access operations (client only).
  * @copydetails registerNodes
- * @param token @completiontoken{void(opcua::StatusCode, opcua::RegisterNodesResponse&)}
+ * @param token @completiontoken{void(RegisterNodesResponse&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto registerNodesAsync(
@@ -310,14 +309,14 @@ auto registerNodesAsync(
     return detail::sendRequest<UA_RegisterNodesRequest, UA_RegisterNodesResponse>(
         connection,
         request,
-        detail::WrapResponse<RegisterNodesResponse>{},
+        detail::Wrap<RegisterNodesResponse>{},
         std::forward<CompletionToken>(token)
     );
 }
 
 /**
  * @}
- * @defgroup UnregisterNodes
+ * @defgroup UnregisterNodes UnregisterNodes service
  * Unregister nodes that have been obtained via the RegisterNodes service.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.8.6
  * @{
@@ -329,12 +328,14 @@ auto registerNodesAsync(
  * @param connection Instance of type Client
  * @param request Request
  */
-UnregisterNodesResponse unregisterNodes(Client& connection, const UnregisterNodesRequest& request);
+UnregisterNodesResponse unregisterNodes(
+    Client& connection, const UnregisterNodesRequest& request
+) noexcept;
 
 /**
  * Asynchronously unregister nodes (client only).
  * @copydetails unregisterNodes
- * @param token @completiontoken{void(opcua::StatusCode, opcua::UnregisterNodesResponse&)}
+ * @param token @completiontoken{void(UnregisterNodesResponse&)}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto unregisterNodesAsync(
@@ -345,7 +346,7 @@ auto unregisterNodesAsync(
     return detail::sendRequest<UA_UnregisterNodesRequest, UA_UnregisterNodesResponse>(
         connection,
         request,
-        detail::WrapResponse<UnregisterNodesResponse>{},
+        detail::Wrap<UnregisterNodesResponse>{},
         std::forward<CompletionToken>(token)
     );
 }
@@ -362,16 +363,29 @@ auto unregisterNodesAsync(
  * @ingroup Browse
  */
 template <typename T>
-std::vector<ReferenceDescription> browseAll(
+Result<std::vector<ReferenceDescription>> browseAll(
     T& connection, const BrowseDescription& bd, uint32_t maxReferences = 0
 ) {
-    auto response = browse(connection, bd, maxReferences);
-    std::vector<ReferenceDescription> refs(response.getReferences());
-    while (!response.getContinuationPoint().empty()) {
+    std::vector<ReferenceDescription> refs;
+    auto append = [&](Span<ReferenceDescription> refsNew) {
+        refs.insert(
+            refs.end(),
+            std::make_move_iterator(refsNew.begin()),
+            std::make_move_iterator(refsNew.end())
+        );
+    };
+    Result<BrowseResult> result = browse(connection, bd, maxReferences);
+    if (!result) {
+        return BadResult(result.code());
+    }
+    append(result->getReferences());
+    while (!result.value().getContinuationPoint().empty()) {
         const bool release = (refs.size() >= maxReferences);
-        response = browseNext(connection, release, response.getContinuationPoint());
-        auto refsNext = response.getReferences();
-        refs.insert(refs.end(), refsNext.begin(), refsNext.end());
+        result = browseNext(connection, release, result->getContinuationPoint());
+        if (!result) {
+            return BadResult(result.code());
+        }
+        append(result->getReferences());
     }
     if ((maxReferences > 0) && (refs.size() > maxReferences)) {
         refs.resize(maxReferences);
@@ -395,7 +409,9 @@ std::vector<ReferenceDescription> browseAll(
  * @see UA_Server_browseRecursive
  * @ingroup Browse
  */
-std::vector<ExpandedNodeId> browseRecursive(Server& connection, const BrowseDescription& bd);
+Result<std::vector<ExpandedNodeId>> browseRecursive(
+    Server& connection, const BrowseDescription& bd
+);
 
 /**
  * @}

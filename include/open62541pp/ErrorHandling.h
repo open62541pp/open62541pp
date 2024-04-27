@@ -1,5 +1,6 @@
 #pragma once
 
+#include <new>
 #include <stdexcept>
 
 #include "open62541pp/detail/open62541/common.h"
@@ -69,6 +70,8 @@ namespace detail {
         }
     } catch (const BadStatus& e) {
         return e.code();
+    } catch (const std::bad_alloc& /*e*/) {
+        return UA_STATUSCODE_BADOUTOFMEMORY;
     } catch (...) {
         return UA_STATUSCODE_BADINTERNALERROR;
     }

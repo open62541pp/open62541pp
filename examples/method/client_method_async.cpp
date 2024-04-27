@@ -20,29 +20,31 @@ int main() {
     {
         auto future = opcua::services::callAsync(
             client,
-            objNode.getNodeId(),
-            greetMethodNode.getNodeId(),
-            {opcua::Variant::fromScalar("Future World")}
+            objNode.id(),
+            greetMethodNode.id(),
+            {opcua::Variant::fromScalar("Future World")},
+            opcua::useFuture  // default, can be omitted
         );
 
         std::cout << "Waiting for asynchronous operation to complete\n";
         future.wait();
 
         std::cout << "Future ready, get method output\n";
-        auto output = future.get();
-        std::cout << output.at(0).getScalar<opcua::String>() << std::endl;
+        auto result = future.get();
+        std::cout << result.value().at(0).getScalar<opcua::String>() << std::endl;
     }
 
     // Asynchronously call method (callback variant)
     {
         opcua::services::callAsync(
             client,
-            objNode.getNodeId(),
-            greetMethodNode.getNodeId(),
+            objNode.id(),
+            greetMethodNode.id(),
             {opcua::Variant::fromScalar("Callback World")},
-            [](opcua::StatusCode code, std::vector<opcua::Variant>& output) {
-                std::cout << "Callback with status code " << code << ", get method output\n";
-                std::cout << output.at(0).getScalar<opcua::String>() << std::endl;
+            [](const opcua::Result<std::vector<opcua::Variant>>& result) {
+                std::cout
+                    << "Callback with status code " << result.code() << ", get method output\n";
+                std::cout << result.value().at(0).getScalar<opcua::String>() << std::endl;
             }
         );
     }

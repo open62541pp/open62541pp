@@ -15,62 +15,67 @@
 #include "open62541pp/services/detail/RequestHandling.h"
 #include "open62541pp/services/detail/ResponseHandling.h"
 #include "open62541pp/services/detail/SubscriptionContext.h"
+#include "open62541pp/types/Composed.h"
 
 namespace opcua::services {
 
-uint32_t createSubscription(
-    Client& client,
+Result<uint32_t> createSubscription(
+    Client& connection,
     SubscriptionParameters& parameters,
     bool publishingEnabled,
     DeleteSubscriptionCallback deleteCallback
 ) {
     auto context = std::make_unique<detail::SubscriptionContext>();
-    context->catcher = &opcua::detail::getContext(client).exceptionCatcher;
+    context->catcher = &opcua::detail::getContext(connection).exceptionCatcher;
     context->deleteCallback = std::move(deleteCallback);
 
-    using Response =
-        TypeWrapper<UA_CreateSubscriptionResponse, UA_TYPES_CREATESUBSCRIPTIONRESPONSE>;
-    const Response response = UA_Client_Subscriptions_create(
-        client.handle(),
+    const CreateSubscriptionResponse response = UA_Client_Subscriptions_create(
+        connection.handle(),
         detail::createCreateSubscriptionRequest(parameters, publishingEnabled),
         context.get(),
         nullptr,  // statusChangeCallback
         context->deleteCallbackNative
     );
-    throwIfBad(response->responseHeader.serviceResult);
+    if (StatusCode serviceResult = detail::getServiceResult(response); serviceResult.isBad()) {
+        return BadResult(serviceResult);
+    }
     detail::reviseSubscriptionParameters(parameters, asNative(response));
 
-    const auto subscriptionId = response->subscriptionId;
-    opcua::detail::getContext(client).subscriptions.insert(subscriptionId, std::move(context));
+    const auto subscriptionId = response.getSubscriptionId();
+    opcua::detail::getContext(connection).subscriptions.insert(subscriptionId, std::move(context));
     return subscriptionId;
 }
 
-void modifySubscription(
-    Client& client, uint32_t subscriptionId, SubscriptionParameters& parameters
-) {
-    using Response =
-        TypeWrapper<UA_ModifySubscriptionResponse, UA_TYPES_MODIFYSUBSCRIPTIONRESPONSE>;
-    const Response response = UA_Client_Subscriptions_modify(
-        client.handle(), detail::createModifySubscriptionRequest(subscriptionId, parameters)
+Result<void> modifySubscription(
+    Client& connection, uint32_t subscriptionId, SubscriptionParameters& parameters
+) noexcept {
+    const ModifySubscriptionResponse response = UA_Client_Subscriptions_modify(
+        connection.handle(), detail::createModifySubscriptionRequest(subscriptionId, parameters)
     );
-    throwIfBad(response->responseHeader.serviceResult);
+    if (StatusCode serviceResult = detail::getServiceResult(response); serviceResult.isBad()) {
+        return BadResult(serviceResult);
+    }
     detail::reviseSubscriptionParameters(parameters, asNative(response));
+    return {};
 }
 
-void setPublishingMode(Client& client, uint32_t subscriptionId, bool publishing) {
-    detail::sendRequest<UA_SetPublishingModeRequest, UA_SetPublishingModeResponse>(
-        client,
+Result<void> setPublishingMode(
+    Client& connection, uint32_t subscriptionId, bool publishing
+) noexcept {
+    return detail::sendRequest<UA_SetPublishingModeRequest, UA_SetPublishingModeResponse>(
+        connection,
         detail::createSetPublishingModeRequest({&subscriptionId, 1}, publishing),
         [](UA_SetPublishingModeResponse& response) {
-            throwIfBad(detail::getSingleResult(response));
+            return detail::getSingleResult(response).andThen(detail::toResult);
         },
         detail::SyncOperation{}
     );
 }
 
-void deleteSubscription(Client& client, uint32_t subscriptionId) {
-    const auto status = UA_Client_Subscriptions_deleteSingle(client.handle(), subscriptionId);
-    throwIfBad(status);
+Result<void> deleteSubscription(Client& connection, uint32_t subscriptionId) noexcept {
+    return detail::toResult(
+        UA_Client_Subscriptions_deleteSingle(connection.handle(), subscriptionId)
+    );
 }
 
 }  // namespace opcua::services

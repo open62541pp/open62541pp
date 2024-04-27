@@ -7,14 +7,14 @@
 #include "open62541pp/DataType.h"
 #include "open62541pp/Session.h"
 #include "open62541pp/Span.h"
-#include "open62541pp/detail/helper.h"
 #include "open62541pp/detail/open62541/server.h"  // UA_ServerConfig
+#include "open62541pp/detail/types_handling.h"  // detail::deallocateArray
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"  // UserTokenPolicy
 
-#include "CustomAccessControl.h"
 #include "CustomDataTypes.h"
-#include "CustomLogger.h"
+#include "plugins/LoggerAdapter.h"
+#include "plugins/PluginManager.h"
 
 namespace opcua {
 
@@ -23,34 +23,29 @@ class AccessControlBase;
 
 class ServerConfig {
 public:
-    ServerConfig(UA_ServerConfig& config, Server& server /* TODO: remove dependency */)
-        : config_(config) {
-        customAccessControl_.setServer(server);
-    }
+    ServerConfig(UA_ServerConfig& config)
+        : config_(config) {}
 
     void setLogger(Logger logger) {
-        customLogger_.set(config_.logger, std::move(logger));
+        if (logger) {
+            logger_.assign(LoggerAdapter(std::move(logger)));
+        }
     }
 
     void setCustomDataTypes(std::vector<DataType> dataTypes) {
-        customDataTypes_.set(config_.customDataTypes, std::move(dataTypes));
+        customDataTypes_.assign(std::move(dataTypes));
     }
 
     void setAccessControl(AccessControlBase& accessControl) {
-        customAccessControl_.setAccessControl(config_.accessControl, accessControl);
+        accessControl_.assign(&accessControl);
         setHighestSecurityPolicyForUserTokenTransfer();
         copyUserTokenPoliciesToEndpoints();
     }
 
     void setAccessControl(std::unique_ptr<AccessControlBase> accessControl) {
-        customAccessControl_.setAccessControl(config_.accessControl, std::move(accessControl));
+        accessControl_.assign(std::move(accessControl));
         setHighestSecurityPolicyForUserTokenTransfer();
         copyUserTokenPoliciesToEndpoints();
-    }
-
-    // TODO: decouple from CustomAccessControl and ServerConfig
-    std::vector<Session> getSessions() const {
-        return customAccessControl_.getSessions();
     }
 
     constexpr UA_ServerConfig* operator->() noexcept {
@@ -105,9 +100,9 @@ private:
     }
 
     UA_ServerConfig& config_;
-    CustomLogger customLogger_;
-    CustomDataTypes customDataTypes_;
-    CustomAccessControl customAccessControl_;
+    CustomDataTypes customDataTypes_{config_.customDataTypes};
+    PluginManager<UA_Logger> logger_{config_.logger};
+    PluginManager<UA_AccessControl> accessControl_{config_.accessControl};
 };
 
 }  // namespace opcua

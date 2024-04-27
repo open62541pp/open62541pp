@@ -8,7 +8,6 @@
 
 #include "open62541pp/DataType.h"
 #include "open62541pp/TypeRegistry.h"  // getDataType
-#include "open62541pp/detail/helper.h"
 #include "open62541pp/detail/traits.h"
 #include "open62541pp/types/NodeId.h"
 
@@ -93,7 +92,7 @@ public:
      * Add a structure array field.
      * Arrays must consists of two fields: its size (of type `size_t`) and the pointer to the data.
      * No padding allowed between the size field and the array field.
-     * @tparam fieldSize Member pointer to the size field, e.g. `&S::lenth`
+     * @tparam fieldSize Member pointer to the size field, e.g. `&S::length`
      * @tparam fieldArray Member pointer to the array field, e.g. `&S::data`
      * @param fieldName Human-readable field name
      * @param fieldType Member data type
@@ -241,7 +240,6 @@ auto& DataTypeBuilder<T, Tag, U>::addField(const char* fieldName, const UA_DataT
     );
     static_assert(std::is_integral_v<TSize>, "TSize must be an integral type");
     static_assert(std::is_pointer_v<TArray>, "TArray must be a pointer");
-    // NOLINTNEXTLINE
     assert(
         detail::offsetOfMember(fieldArray) == detail::offsetOfMember(fieldSize) + sizeof(TSize) &&
         "No padding between members size and array allowed"

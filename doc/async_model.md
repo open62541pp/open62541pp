@@ -9,7 +9,7 @@ Open62541++ adapts the well-proven [asynchronous model of (Boost) Asio](https://
 Open62541++ accepts completion tokens as the final argument of asynchronous operations.
 
 ```cpp
-// Function signature of the completion handler: void(opcua::StatusCode, opcua::Variant&)
+// Function signature of the completion handler: void(opcua::Result<opcua::Variant>&)
 template <typename CompletionToken = opcua::DefaultCompletionToken>
 auto opcua::services::readValueAsync(
     opcua::Client& client,
@@ -21,7 +21,7 @@ auto opcua::services::readValueAsync(
 Following completion tokens can be used (and described in more detail below):
 
 - A callback function (object) with the expected completion signature
-- `opcua::useFuture` to return a future object `std::future<T>`
+- `opcua::useFuture` to return a future object `std::future<opcua::Result<T>>`
 - `opcua::useDeferred` to return a callable for deferred execution
 - `opcua::useDetached` to detach the asynchronous operation
 - Custom tokens by providing template specializations for `opcua::AsyncResult`
@@ -31,31 +31,29 @@ Following completion tokens can be used (and described in more detail below):
 If the user passes a function object as the completion token, the asynchronous operation behaves as previously described: the operation begins, and when the operation completes the result is passed to the callback. The callback function must match the expected signature:
 
 ```cpp
-void(opcua::StatusCode code)              // for void result types
-void(opcua::StatusCode code, T& result);  // for non-void result types
-void(opcua::StatusCode code, T result);   // for non-void result types (trivially-copyable)
+void(opcua::Result<T>);   // for void and non-void, trivially-copyable value types
+void(opcua::Result<T>&);  // for non-void value types
 ```
 
 ```cpp
 opcua::services::readValueAsync(
     client,
     id,
-    [](opcua::StatusCode code, opcua::Variant& result) {
+    [](opcua::Result<opcua::Variant>& result) {
         // ...
     }
 );
 ```
 
-The status code `opcua::StatusCode` needs to be checked to determine the validity of the result.
 The callback is executed within the client's or server's event loop. Please make sure not to block the event loop. Waiting for asynchronous results within the callback will block the further execution of the event loop.
 
 ### Future completion token
 
-The special token `opcua::useFuture` can be passed as completion token to return a future object `std::future<T>`.
+The special token `opcua::useFuture` can be passed as completion token to return a future object `std::future<opcua::Result<T>>`.
 
 ```cpp
-std::future<opcua::Variant> future = opcua::services::readValueAsync(client, id, opcua::useFuture);
-auto result = future.get();  // throws an exception if an error occurred
+std::future<opcua::Result<opcua::Variant>> future = opcua::services::readValueAsync(client, id, opcua::useFuture);
+auto value = future.get().value();  // throws an exception if an error occurred
 ```
 
 ### Deferred completion token
@@ -66,7 +64,7 @@ The token `opcua::useDeferred` is used to indicate that an asynchronous operatio
 auto func = opcua::services::readValueAsync(client, id, opcua::useDeferred);
 
 // start operation with provided completion token
-func([](auto code, auto&& result) {
+func([](auto&& result) {
     // ...
 });
 ```
@@ -90,14 +88,14 @@ struct PrintResultToken {};
 
 namespace opcua {
 
-template <typename Result>
-struct AsyncResult<PrintResultToken, Result> {
+template <typename T>
+struct AsyncResult<PrintResultToken, T> {
     template <typename Initiation, typename CompletionHandler, typename... Args>
     static void initiate(Initiation&& initiation, PrintResultToken, Args&&... args) {
         std::invoke(
             std::forward<Initiation>(initiation),
-            [](StatusCode code, auto& result) {
-                std::cout << "Async operation completed: code=" << code << ", result=" << result << std::endl;
+            [](opcua::Result<T>& result) {
+                std::cout << "Async operation completed: code=" << result.code() << ", value=" << result.value() << std::endl;
             },
             std::forward<Args>(args)...
         );
@@ -107,12 +105,9 @@ struct AsyncResult<PrintResultToken, Result> {
 }
 ```
 
-The `Result` template parameter specifies the result type of the asynchronous operation.
-If `Result` is `void`, the expected signature of the completion handler is `void(opcua::StatusCode)`, otherwise it is `void(opcua::StatusCode, Result&)`.
-
 The trait's `opcua::AsyncResult::initiate` member function is called with three arguments:
 1. A function object that launches the async operation (initiating function)
-2. A concrete completion handler with the signature `void(opcua::StatusCode, Result)`
+2. A concrete completion handler with the signature `void(opcua::Result<T>)` or `void(opcua::Result<T>&)`
 3. Any additional arguments for the function object
 
 Please have a look at implementations in @ref async.h for further details.
