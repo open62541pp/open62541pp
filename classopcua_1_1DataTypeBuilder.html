@@ -24,7 +24,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.12.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.13.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -92,7 +92,7 @@ $(function() {
 class opcua::DataTypeBuilder&lt; T, Tag, U &gt;</div><p>Builder to create <a class="el" href="classopcua_1_1DataType.html" title="UA_DataType wrapper class.">DataType</a> definitions of custom types. </p>
 <p>The attributes <code>memSize</code>, <code>padding</code>, <code>pointerFree</code>, <code>isArray</code> and <code>isOptional</code> are automatically deduced from the types itself. </p>
 
-<p class="definition">Definition at line <a class="el" href="DataTypeBuilder_8h_source.html#l00046">46</a> of file <a class="el" href="DataTypeBuilder_8h_source.html">DataTypeBuilder.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DataTypeBuilder_8h_source.html#l00045">45</a> of file <a class="el" href="DataTypeBuilder_8h_source.html">DataTypeBuilder.h</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -179,7 +179,7 @@ template&lt;typename T , typename Tag , typename U &gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2custom_datatypes_8h-example.html#a7">custom_datatypes/custom_datatypes.h</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="DataTypeBuilder_8h_source.html#l00157">157</a> of file <a class="el" href="DataTypeBuilder_8h_source.html">DataTypeBuilder.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DataTypeBuilder_8h_source.html#l00156">156</a> of file <a class="el" href="DataTypeBuilder_8h_source.html">DataTypeBuilder.h</a>.</p>
 
 </div>
 </div>
@@ -229,7 +229,7 @@ template&lt;typename T , typename Tag , typename U &gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2custom_datatypes_8h-example.html#a1">custom_datatypes/custom_datatypes.h</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="DataTypeBuilder_8h_source.html#l00173">173</a> of file <a class="el" href="DataTypeBuilder_8h_source.html">DataTypeBuilder.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DataTypeBuilder_8h_source.html#l00172">172</a> of file <a class="el" href="DataTypeBuilder_8h_source.html">DataTypeBuilder.h</a>.</p>
 
 </div>
 </div>
@@ -279,7 +279,7 @@ template&lt;typename T , typename Tag , typename U &gt; </div>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="custom_datatypes_2custom_datatypes_8h-example.html#a4">custom_datatypes/custom_datatypes.h</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="DataTypeBuilder_8h_source.html#l00189">189</a> of file <a class="el" href="DataTypeBuilder_8h_source.html">DataTypeBuilder.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DataTypeBuilder_8h_source.html#l00188">188</a> of file <a class="el" href="DataTypeBuilder_8h_source.html">DataTypeBuilder.h</a>.</p>
 
 </div>
 </div>
@@ -321,7 +321,7 @@ template&lt;auto U::* field&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="DataTypeBuilder_8h_source.html#l00206">206</a> of file <a class="el" href="DataTypeBuilder_8h_source.html">DataTypeBuilder.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DataTypeBuilder_8h_source.html#l00205">205</a> of file <a class="el" href="DataTypeBuilder_8h_source.html">DataTypeBuilder.h</a>.</p>
 
 </div>
 </div>
@@ -355,7 +355,7 @@ template&lt;auto U::* field&gt; </div>
 <p>Add a structure field (derive <a class="el" href="classopcua_1_1DataType.html" title="UA_DataType wrapper class.">DataType</a> from <code>field</code>). </p>
 <p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
 
-<p class="definition">Definition at line <a class="el" href="DataTypeBuilder_8h_source.html#l00088">88</a> of file <a class="el" href="DataTypeBuilder_8h_source.html">DataTypeBuilder.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DataTypeBuilder_8h_source.html#l00087">87</a> of file <a class="el" href="DataTypeBuilder_8h_source.html">DataTypeBuilder.h</a>.</p>
 
 </div>
 </div>
@@ -385,7 +385,7 @@ template&lt;auto U::* fieldSize, auto U::* fieldArray&gt; </div>
 <p>Add a structure array field. </p>
 <p>Arrays must consists of two fields: its size (of type <code>size_t</code>) and the pointer to the data. No padding allowed between the size field and the array field. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">fieldSize</td><td>Member pointer to the size field, e.g. <code>&amp;S::lenth</code> </td></tr>
+    <tr><td class="paramname">fieldSize</td><td>Member pointer to the size field, e.g. <code>&amp;S::length</code> </td></tr>
     <tr><td class="paramname">fieldArray</td><td>Member pointer to the array field, e.g. <code>&amp;S::data</code> </td></tr>
   </table>
   </dd>
@@ -398,7 +398,7 @@ template&lt;auto U::* fieldSize, auto U::* fieldArray&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="DataTypeBuilder_8h_source.html#l00235">235</a> of file <a class="el" href="DataTypeBuilder_8h_source.html">DataTypeBuilder.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DataTypeBuilder_8h_source.html#l00234">234</a> of file <a class="el" href="DataTypeBuilder_8h_source.html">DataTypeBuilder.h</a>.</p>
 
 </div>
 </div>
@@ -432,7 +432,7 @@ template&lt;auto U::* fieldSize, auto U::* fieldArray&gt; </div>
 <p>Add a structure array field (derive <a class="el" href="classopcua_1_1DataType.html" title="UA_DataType wrapper class.">DataType</a> from <code>fieldArray</code>). </p>
 <p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
 
-<p class="definition">Definition at line <a class="el" href="DataTypeBuilder_8h_source.html#l00109">109</a> of file <a class="el" href="DataTypeBuilder_8h_source.html">DataTypeBuilder.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DataTypeBuilder_8h_source.html#l00108">108</a> of file <a class="el" href="DataTypeBuilder_8h_source.html">DataTypeBuilder.h</a>.</p>
 
 </div>
 </div>
@@ -475,7 +475,7 @@ template&lt;auto U::* memberUnion, typename TField &gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="DataTypeBuilder_8h_source.html#l00267">267</a> of file <a class="el" href="DataTypeBuilder_8h_source.html">DataTypeBuilder.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DataTypeBuilder_8h_source.html#l00265">265</a> of file <a class="el" href="DataTypeBuilder_8h_source.html">DataTypeBuilder.h</a>.</p>
 
 </div>
 </div>
@@ -509,7 +509,7 @@ template&lt;auto U::* memberUnion, typename TField &gt; </div>
 <p>Add a union field (derive <a class="el" href="classopcua_1_1DataType.html" title="UA_DataType wrapper class.">DataType</a> from <code>TField</code>). </p>
 <p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
 
-<p class="definition">Definition at line <a class="el" href="DataTypeBuilder_8h_source.html#l00128">128</a> of file <a class="el" href="DataTypeBuilder_8h_source.html">DataTypeBuilder.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DataTypeBuilder_8h_source.html#l00127">127</a> of file <a class="el" href="DataTypeBuilder_8h_source.html">DataTypeBuilder.h</a>.</p>
 
 </div>
 </div>
@@ -532,7 +532,7 @@ template&lt;typename T , typename Tag , typename U &gt; </div>
 
 <p>Create the actual <a class="el" href="classopcua_1_1DataType.html" title="UA_DataType wrapper class.">DataType</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="DataTypeBuilder_8h_source.html#l00298">298</a> of file <a class="el" href="DataTypeBuilder_8h_source.html">DataTypeBuilder.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DataTypeBuilder_8h_source.html#l00296">296</a> of file <a class="el" href="DataTypeBuilder_8h_source.html">DataTypeBuilder.h</a>.</p>
 
 </div>
 </div>
@@ -561,7 +561,7 @@ template&lt;typename , typename , typename &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DataTypeBuilder_8h_source.html#l00139">139</a> of file <a class="el" href="DataTypeBuilder_8h_source.html">DataTypeBuilder.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DataTypeBuilder_8h_source.html#l00138">138</a> of file <a class="el" href="DataTypeBuilder_8h_source.html">DataTypeBuilder.h</a>.</p>
 
 </div>
 </div>

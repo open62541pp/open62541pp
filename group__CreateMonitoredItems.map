@@ -1,0 +1,4 @@
+<map id="CreateMonitoredItems service" name="CreateMonitoredItems service">
+<area shape="rect" id="Node000001" title="Create and add a monitored item to a subscription." alt="" coords="247,5,415,45"/>
+<area shape="rect" id="Node000002" href="$group__MonitoredItem.html" title="Subscribe to data and events." alt="" coords="5,13,199,38"/>
+</map>

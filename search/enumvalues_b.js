@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['lessthan_0',['LessThan',['../group__TypeWrapper.html#gga240d33d34b407018b5e1b2c213556e47ac6d9d7bb9939f62f01c80f8b1251501c',1,'opcua']]],
-  ['lessthanorequal_1',['LessThanOrEqual',['../group__TypeWrapper.html#gga240d33d34b407018b5e1b2c213556e47a4ab671acbbaacb0db7d8477cfe4f4e0b',1,'opcua']]],
-  ['like_2',['Like',['../group__TypeWrapper.html#gga240d33d34b407018b5e1b2c213556e47a98b82c200a2e309b24cb481970f3fcc4',1,'opcua']]],
+  ['lessthan_0',['LessThan',['../group__Wrapper.html#gga240d33d34b407018b5e1b2c213556e47ac6d9d7bb9939f62f01c80f8b1251501c',1,'opcua']]],
+  ['lessthanorequal_1',['LessThanOrEqual',['../group__Wrapper.html#gga240d33d34b407018b5e1b2c213556e47a4ab671acbbaacb0db7d8477cfe4f4e0b',1,'opcua']]],
+  ['like_2',['Like',['../group__Wrapper.html#gga240d33d34b407018b5e1b2c213556e47a98b82c200a2e309b24cb481970f3fcc4',1,'opcua']]],
   ['limitalarmtype_3',['LimitAlarmType',['../group__NodeIds.html#ggafdc54bd43cfb42b3b67045de3968aa22a177a54c61676c463970445d417df126d',1,'opcua']]],
   ['limitalarmtype_5fackedstate_4',['LimitAlarmType_AckedState',['../group__NodeIds.html#ggab93e889b7152d5a78a993070276d1a70a686a6e8b7a5baa8495fe794a5ac98351',1,'opcua']]],
   ['limitalarmtype_5fackedstate_5feffectivedisplayname_5',['LimitAlarmType_AckedState_EffectiveDisplayName',['../group__NodeIds.html#ggab93e889b7152d5a78a993070276d1a70a8c5293bc26e407df378ceaec94c8e05c',1,'opcua']]],

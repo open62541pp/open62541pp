@@ -1,0 +1,4 @@
+<map id="SetPublishingMode service" name="SetPublishingMode service">
+<area shape="rect" id="Node000001" title="Enable/disable sending of notifications on subscriptions." alt="" coords="231,5,428,31"/>
+<area shape="rect" id="Node000002" href="$group__Subscription.html" title="Report notifications to the client." alt="" coords="5,5,183,31"/>
+</map>

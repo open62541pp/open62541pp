@@ -24,7 +24,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.12.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.13.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -89,16 +89,17 @@ $(function() {
 <code>#include &lt;string&gt;</code><br />
 <code>#include &lt;string_view&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
+<code>#include &quot;<a class="el" href="Common_8h_source.html">open62541pp/Common.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Config_8h_source.html">open62541pp/Config.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Logger_8h_source.html">open62541pp/Logger.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="NodeIds_8h_source.html">open62541pp/NodeIds.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Span_8h_source.html">open62541pp/Span.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Subscription_8h_source.html">open62541pp/Subscription.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="NodeId_8h_source.html">open62541pp/types/NodeId.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="server_8h_source.html">open62541pp/detail/open62541/server.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Server.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="Server_8h__incl.svg" width="3227" height="872"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="Server_8h__incl.svg" width="3375" height="975"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
@@ -117,9 +118,25 @@ Classes</h2></td></tr>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespaceopcua" id="r_namespaceopcua"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html">opcua</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespaceopcua_1_1detail" id="r_namespaceopcua_1_1detail"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html">opcua::detail</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a8befd7f636a8d43f7c354ed8a2a22e6c" id="r_a8befd7f636a8d43f7c354ed8a2a22e6c"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__ServerConfig.html">UA_ServerConfig</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a8befd7f636a8d43f7c354ed8a2a22e6c">opcua::detail::getConfig</a> (<a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> *server) noexcept</td></tr>
+<tr class="separator:a8befd7f636a8d43f7c354ed8a2a22e6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0a4be20790d577d531ec37f81cb7729" id="r_ab0a4be20790d577d531ec37f81cb7729"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__ServerConfig.html">UA_ServerConfig</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#ab0a4be20790d577d531ec37f81cb7729">opcua::detail::getConfig</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server) noexcept</td></tr>
+<tr class="separator:ab0a4be20790d577d531ec37f81cb7729"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae7f3133800ecf4953a41e37a53c3e6c" id="r_aae7f3133800ecf4953a41e37a53c3e6c"><td class="memItemLeft" align="right" valign="top">ServerConnection *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#aae7f3133800ecf4953a41e37a53c3e6c">opcua::detail::getConnection</a> (<a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> *server) noexcept</td></tr>
+<tr class="separator:aae7f3133800ecf4953a41e37a53c3e6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfa954bda53272801ba18b6560010e49" id="r_adfa954bda53272801ba18b6560010e49"><td class="memItemLeft" align="right" valign="top">ServerConnection &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#adfa954bda53272801ba18b6560010e49">opcua::detail::getConnection</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server) noexcept</td></tr>
+<tr class="separator:adfa954bda53272801ba18b6560010e49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ed28dd5b65dc2ef772e87a5ccfde854" id="r_a0ed28dd5b65dc2ef772e87a5ccfde854"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Server.html">Server</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a0ed28dd5b65dc2ef772e87a5ccfde854">opcua::detail::getWrapper</a> (<a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> *server) noexcept</td></tr>
+<tr class="separator:a0ed28dd5b65dc2ef772e87a5ccfde854"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61422bbd096142223b16a74af5c6f962" id="r_a61422bbd096142223b16a74af5c6f962"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structopcua_1_1detail_1_1ServerContext.html">ServerContext</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a61422bbd096142223b16a74af5c6f962">opcua::detail::getContext</a> (<a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> *server) noexcept</td></tr>
+<tr class="separator:a61422bbd096142223b16a74af5c6f962"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0902f9c9aafa640b75e683aba56a789" id="r_aa0902f9c9aafa640b75e683aba56a789"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structopcua_1_1detail_1_1ServerContext.html">ServerContext</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#aa0902f9c9aafa640b75e683aba56a789">opcua::detail::getContext</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server) noexcept</td></tr>
+<tr class="separator:aa0902f9c9aafa640b75e683aba56a789"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a964ae97b41c35da2dd3da278687a90f1" id="r_a964ae97b41c35da2dd3da278687a90f1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a964ae97b41c35da2dd3da278687a90f1">opcua::operator==</a> (const <a class="el" href="classopcua_1_1Server.html">Server</a> &amp;lhs, const <a class="el" href="classopcua_1_1Server.html">Server</a> &amp;rhs) noexcept</td></tr>
 <tr class="separator:a964ae97b41c35da2dd3da278687a90f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1296c8e8dc39b6835300cf59f032bd4c" id="r_a1296c8e8dc39b6835300cf59f032bd4c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#a1296c8e8dc39b6835300cf59f032bd4c">opcua::operator!=</a> (const <a class="el" href="classopcua_1_1Server.html">Server</a> &amp;lhs, const <a class="el" href="classopcua_1_1Server.html">Server</a> &amp;rhs) noexcept</td></tr>

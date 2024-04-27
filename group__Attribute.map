@@ -1,4 +1,6 @@
 <map id="Attribute service set" name="Attribute service set">
-<area shape="rect" id="Node000001" title="Read and write node attributes." alt="" coords="131,5,285,31"/>
-<area shape="rect" id="Node000002" href="$group__Services.html" title="OPC UA services as free functions." alt="" coords="5,5,83,31"/>
+<area shape="rect" id="Node000001" title="Read and write node attributes." alt="" coords="131,31,285,56"/>
+<area shape="rect" id="Node000003" href="$group__Read.html" title="This service is used to read attributes of nodes." alt="" coords="334,5,441,31"/>
+<area shape="rect" id="Node000004" href="$group__Write.html" title="This service is used to write attributes of nodes." alt="" coords="333,55,441,80"/>
+<area shape="rect" id="Node000002" href="$group__Services.html" title="OPC UA services as free functions." alt="" coords="5,31,83,56"/>
 </map>

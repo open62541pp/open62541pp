@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.10.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>open62541++: opcua::Subscription&lt; ServerOrClient &gt; Class Template Reference</title>
+<title>open62541++: opcua::Subscription&lt; Connection &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -24,7 +24,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.12.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.13.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -80,66 +80,86 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classopcua_1_1Subscription-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">opcua::Subscription&lt; ServerOrClient &gt; Class Template Reference</div></div>
+  <div class="headertitle"><div class="title">opcua::Subscription&lt; Connection &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p><code>#include &lt;<a class="el" href="Subscription_8h_source.html">Subscription.h</a>&gt;</code></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename ServerOrClient&gt;<br />
-class opcua::Subscription&lt; ServerOrClient &gt;</div><p>High-level subscription class. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename Connection&gt;<br />
+class opcua::Subscription&lt; Connection &gt;</div><p>High-level subscription class. </p>
 <p>The API is symmetric for both <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a> and <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a>, although servers don't use the subscription mechanism of OPC UA to transport notifications of data changes and events. Instead MonitoredItems are registered locally. Notifications are then forwarded to user-defined callbacks instead of a remote client. The <code>subscriptionId</code> for servers is always <code>0U</code>.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Connection</td><td><a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a> or <a class="el" href="classopcua_1_1Client.html" title="High-level client class.">Client</a> </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section note"><dt>Note</dt><dd>Not all methods are available and implemented for servers.</dd></dl>
-<p>Use the free functions in the <code>services</code> namespace for more advanced usage:</p><ul>
+<p>Use the free functions in the <a class="el" href="namespaceopcua_1_1services.html" title="OPC UA services as free functions.">opcua::services</a> namespace for more advanced usage:</p><ul>
 <li><a class="el" href="group__Subscription.html">Subscription service set</a></li>
 <li><a class="el" href="group__MonitoredItem.html">MonitoredItem service set</a> </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="Subscription_8h_source.html#l00057">57</a> of file <a class="el" href="Subscription_8h_source.html">Subscription.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Subscription_8h_source.html#l00063">63</a> of file <a class="el" href="Subscription_8h_source.html">Subscription.h</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa269931bc6742c8384d9cc49867273c2" id="r_aa269931bc6742c8384d9cc49867273c2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa269931bc6742c8384d9cc49867273c2">Subscription</a> (ServerOrClient &amp;connection, uint32_t subscriptionId) noexcept</td></tr>
-<tr class="separator:aa269931bc6742c8384d9cc49867273c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29299d3e032cba1478c57b656576960c" id="r_a29299d3e032cba1478c57b656576960c"><td class="memItemLeft" align="right" valign="top">ServerOrClient &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a29299d3e032cba1478c57b656576960c">getConnection</a> () noexcept</td></tr>
-<tr class="separator:a29299d3e032cba1478c57b656576960c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a5500ecf7bea6a2e6f2da52e7f009f1" id="r_a6a5500ecf7bea6a2e6f2da52e7f009f1"><td class="memItemLeft" align="right" valign="top">const ServerOrClient &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6a5500ecf7bea6a2e6f2da52e7f009f1">getConnection</a> () const noexcept</td></tr>
-<tr class="separator:a6a5500ecf7bea6a2e6f2da52e7f009f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a476a433e5fc17675a8b4c10c16e23b96" id="r_a476a433e5fc17675a8b4c10c16e23b96"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a476a433e5fc17675a8b4c10c16e23b96">getSubscriptionId</a> () const noexcept</td></tr>
-<tr class="separator:a476a433e5fc17675a8b4c10c16e23b96"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a414d28b4e6bde2ffdaa1c72ac6df6903" id="r_a414d28b4e6bde2ffdaa1c72ac6df6903"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; ServerOrClient &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a414d28b4e6bde2ffdaa1c72ac6df6903">getMonitoredItems</a> ()</td></tr>
-<tr class="separator:a414d28b4e6bde2ffdaa1c72ac6df6903"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2be955f3eb26c7dcc9dd61979b5d3d7b" id="r_a2be955f3eb26c7dcc9dd61979b5d3d7b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2be955f3eb26c7dcc9dd61979b5d3d7b">setSubscriptionParameters</a> (<a class="el" href="namespaceopcua.html#a781fb70e471735fd9a6f80e9f0677c99">SubscriptionParameters</a> &amp;parameters)</td></tr>
-<tr class="separator:a2be955f3eb26c7dcc9dd61979b5d3d7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9bd5cff80431adb322fce04f4e1e39d9" id="r_a9bd5cff80431adb322fce04f4e1e39d9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9bd5cff80431adb322fce04f4e1e39d9">setPublishingMode</a> (bool publishing)</td></tr>
-<tr class="separator:a9bd5cff80431adb322fce04f4e1e39d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45de2bdbb14e9bdd505d4cc5d3d689ae" id="r_a45de2bdbb14e9bdd505d4cc5d3d689ae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; ServerOrClient &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a45de2bdbb14e9bdd505d4cc5d3d689ae">subscribeDataChange</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917">AttributeId</a> attribute, <a class="el" href="namespaceopcua.html#a713876b9dc6f9a53405b2917481a3743">DataChangeCallback</a>&lt; ServerOrClient &gt; onDataChange)</td></tr>
-<tr class="separator:a45de2bdbb14e9bdd505d4cc5d3d689ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a213cd3d862d3a7fc97c55633d1520ddc" id="r_a213cd3d862d3a7fc97c55633d1520ddc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; ServerOrClient &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a213cd3d862d3a7fc97c55633d1520ddc">subscribeDataChange</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917">AttributeId</a> attribute, <a class="el" href="namespaceopcua.html#a78a3c3ace4c759ec414715466928ee81">MonitoringMode</a> monitoringMode, <a class="el" href="namespaceopcua.html#a5f1e4e6ef9276c10da93131886455ef9">MonitoringParameters</a> &amp;parameters, <a class="el" href="namespaceopcua.html#a713876b9dc6f9a53405b2917481a3743">DataChangeCallback</a>&lt; ServerOrClient &gt; onDataChange)</td></tr>
-<tr class="separator:a213cd3d862d3a7fc97c55633d1520ddc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52d1e840118188e79e27a86697e2c1a3" id="r_a52d1e840118188e79e27a86697e2c1a3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; ServerOrClient &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a52d1e840118188e79e27a86697e2c1a3">subscribeEvent</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, const <a class="el" href="classopcua_1_1EventFilter.html">EventFilter</a> &amp;eventFilter, <a class="el" href="namespaceopcua.html#a06640861e78cd111c769ed3a6ac9aed7">EventCallback</a>&lt; ServerOrClient &gt; onEvent)</td></tr>
-<tr class="separator:a52d1e840118188e79e27a86697e2c1a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a889d7a71f80323ec01977a5f280de821" id="r_a889d7a71f80323ec01977a5f280de821"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; ServerOrClient &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a889d7a71f80323ec01977a5f280de821">subscribeEvent</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="namespaceopcua.html#a78a3c3ace4c759ec414715466928ee81">MonitoringMode</a> monitoringMode, <a class="el" href="namespaceopcua.html#a5f1e4e6ef9276c10da93131886455ef9">MonitoringParameters</a> &amp;parameters, <a class="el" href="namespaceopcua.html#a06640861e78cd111c769ed3a6ac9aed7">EventCallback</a>&lt; ServerOrClient &gt; onEvent)</td></tr>
-<tr class="separator:a889d7a71f80323ec01977a5f280de821"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4a2f23ecdf60d1d4756d26426870880" id="r_ae4a2f23ecdf60d1d4756d26426870880"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae4a2f23ecdf60d1d4756d26426870880">deleteSubscription</a> ()</td></tr>
-<tr class="separator:ae4a2f23ecdf60d1d4756d26426870880"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeced3376404ec9d37b50563e6ac4ff54" id="r_aeced3376404ec9d37b50563e6ac4ff54"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeced3376404ec9d37b50563e6ac4ff54">Subscription</a> (Connection &amp;<a class="el" href="#a5259633d043095bec11279acacec1f10">connection</a>, uint32_t <a class="el" href="#a1bb7f7a6536eccd575c47d304b599194">subscriptionId</a>) noexcept</td></tr>
+<tr class="separator:aeced3376404ec9d37b50563e6ac4ff54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5259633d043095bec11279acacec1f10" id="r_a5259633d043095bec11279acacec1f10"><td class="memItemLeft" align="right" valign="top">Connection &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5259633d043095bec11279acacec1f10">connection</a> () noexcept</td></tr>
+<tr class="separator:a5259633d043095bec11279acacec1f10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a305fc7f073504c4ef89aa19f7e660ddc" id="r_a305fc7f073504c4ef89aa19f7e660ddc"><td class="memItemLeft" align="right" valign="top">const Connection &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a305fc7f073504c4ef89aa19f7e660ddc">connection</a> () const noexcept</td></tr>
+<tr class="separator:a305fc7f073504c4ef89aa19f7e660ddc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf4a906782bf49e89f5db3cf02718b34" id="r_abf4a906782bf49e89f5db3cf02718b34"><td class="memItemLeft" align="right" valign="top">Connection &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abf4a906782bf49e89f5db3cf02718b34">getConnection</a> () noexcept</td></tr>
+<tr class="separator:abf4a906782bf49e89f5db3cf02718b34"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b8f43c16559e4002f07d12b936bf230" id="r_a4b8f43c16559e4002f07d12b936bf230"><td class="memItemLeft" align="right" valign="top">const Connection &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4b8f43c16559e4002f07d12b936bf230">getConnection</a> () const noexcept</td></tr>
+<tr class="separator:a4b8f43c16559e4002f07d12b936bf230"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bb7f7a6536eccd575c47d304b599194" id="r_a1bb7f7a6536eccd575c47d304b599194"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1bb7f7a6536eccd575c47d304b599194">subscriptionId</a> () const noexcept</td></tr>
+<tr class="separator:a1bb7f7a6536eccd575c47d304b599194"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab455700f2e09e670aed161ec63b35aa4" id="r_ab455700f2e09e670aed161ec63b35aa4"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab455700f2e09e670aed161ec63b35aa4">getSubscriptionId</a> () const noexcept</td></tr>
+<tr class="separator:ab455700f2e09e670aed161ec63b35aa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb1edd9c6dacd554f5ef4ed958649ce2" id="r_afb1edd9c6dacd554f5ef4ed958649ce2"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; Connection &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afb1edd9c6dacd554f5ef4ed958649ce2">getMonitoredItems</a> ()</td></tr>
+<tr class="separator:afb1edd9c6dacd554f5ef4ed958649ce2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75c65d904ebe354daf1ba5d40d6c5c84" id="r_a75c65d904ebe354daf1ba5d40d6c5c84"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a75c65d904ebe354daf1ba5d40d6c5c84">setSubscriptionParameters</a> (<a class="el" href="namespaceopcua.html#a781fb70e471735fd9a6f80e9f0677c99">SubscriptionParameters</a> &amp;parameters)</td></tr>
+<tr class="separator:a75c65d904ebe354daf1ba5d40d6c5c84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae93cbad3a365a2226432e93dde44fbe1" id="r_ae93cbad3a365a2226432e93dde44fbe1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae93cbad3a365a2226432e93dde44fbe1">setPublishingMode</a> (bool publishing)</td></tr>
+<tr class="separator:ae93cbad3a365a2226432e93dde44fbe1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b405d901bfe59c6c378671120eacd00" id="r_a5b405d901bfe59c6c378671120eacd00"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; Connection &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5b405d901bfe59c6c378671120eacd00">subscribeDataChange</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917">AttributeId</a> attribute, <a class="el" href="namespaceopcua.html#a78a3c3ace4c759ec414715466928ee81">MonitoringMode</a> monitoringMode, <a class="el" href="structopcua_1_1services_1_1MonitoringParametersEx.html">MonitoringParametersEx</a> &amp;parameters, <a class="el" href="namespaceopcua.html#ab12c1c1b6e4b1cbaac1c1b21060320c1">DataChangeNotificationCallback</a> onDataChange)</td></tr>
+<tr class="separator:a5b405d901bfe59c6c378671120eacd00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2bc8b0b3910ec8972f48cb5a87fd6cc" id="r_ab2bc8b0b3910ec8972f48cb5a87fd6cc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; Connection &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab2bc8b0b3910ec8972f48cb5a87fd6cc">subscribeDataChange</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917">AttributeId</a> attribute, <a class="el" href="namespaceopcua.html#a78a3c3ace4c759ec414715466928ee81">MonitoringMode</a> monitoringMode, <a class="el" href="structopcua_1_1services_1_1MonitoringParametersEx.html">MonitoringParametersEx</a> &amp;parameters, <a class="el" href="namespaceopcua.html#a713876b9dc6f9a53405b2917481a3743">DataChangeCallback</a>&lt; Connection &gt; onDataChange)</td></tr>
+<tr class="separator:ab2bc8b0b3910ec8972f48cb5a87fd6cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae0205cb6b40558991fb170487944b50" id="r_aae0205cb6b40558991fb170487944b50"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; Connection &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aae0205cb6b40558991fb170487944b50">subscribeDataChange</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917">AttributeId</a> attribute, <a class="el" href="namespaceopcua.html#ab12c1c1b6e4b1cbaac1c1b21060320c1">DataChangeNotificationCallback</a> onDataChange)</td></tr>
+<tr class="separator:aae0205cb6b40558991fb170487944b50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9ddcdbbfc8856426e4c3af4ae0212dc" id="r_ac9ddcdbbfc8856426e4c3af4ae0212dc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; Connection &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac9ddcdbbfc8856426e4c3af4ae0212dc">subscribeDataChange</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917">AttributeId</a> attribute, <a class="el" href="namespaceopcua.html#a713876b9dc6f9a53405b2917481a3743">DataChangeCallback</a>&lt; Connection &gt; onDataChange)</td></tr>
+<tr class="separator:ac9ddcdbbfc8856426e4c3af4ae0212dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79a23448012a7a3ebe051851e61f3d3e" id="r_a79a23448012a7a3ebe051851e61f3d3e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; Connection &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a79a23448012a7a3ebe051851e61f3d3e">subscribeEvent</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="namespaceopcua.html#a78a3c3ace4c759ec414715466928ee81">MonitoringMode</a> monitoringMode, <a class="el" href="structopcua_1_1services_1_1MonitoringParametersEx.html">MonitoringParametersEx</a> &amp;parameters, <a class="el" href="namespaceopcua.html#a7a9209bf23bbb7c6446fd29701bb2490">EventNotificationCallback</a> onEvent)</td></tr>
+<tr class="separator:a79a23448012a7a3ebe051851e61f3d3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ec44fc9d6ab2f422c237df2ab5f2030" id="r_a7ec44fc9d6ab2f422c237df2ab5f2030"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; Connection &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7ec44fc9d6ab2f422c237df2ab5f2030">subscribeEvent</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, <a class="el" href="namespaceopcua.html#a78a3c3ace4c759ec414715466928ee81">MonitoringMode</a> monitoringMode, <a class="el" href="structopcua_1_1services_1_1MonitoringParametersEx.html">MonitoringParametersEx</a> &amp;parameters, <a class="el" href="namespaceopcua.html#a06640861e78cd111c769ed3a6ac9aed7">EventCallback</a>&lt; Connection &gt; onEvent)</td></tr>
+<tr class="separator:a7ec44fc9d6ab2f422c237df2ab5f2030"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad73249ca431810a51640d9d8dd69fa8d" id="r_ad73249ca431810a51640d9d8dd69fa8d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; Connection &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad73249ca431810a51640d9d8dd69fa8d">subscribeEvent</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, const <a class="el" href="classopcua_1_1EventFilter.html">EventFilter</a> &amp;eventFilter, <a class="el" href="namespaceopcua.html#a7a9209bf23bbb7c6446fd29701bb2490">EventNotificationCallback</a> onEvent)</td></tr>
+<tr class="separator:ad73249ca431810a51640d9d8dd69fa8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8519467227c9fd7bd3752e02ca60ac2" id="r_aa8519467227c9fd7bd3752e02ca60ac2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; Connection &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa8519467227c9fd7bd3752e02ca60ac2">subscribeEvent</a> (const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;id, const <a class="el" href="classopcua_1_1EventFilter.html">EventFilter</a> &amp;eventFilter, <a class="el" href="namespaceopcua.html#a06640861e78cd111c769ed3a6ac9aed7">EventCallback</a>&lt; Connection &gt; onEvent)</td></tr>
+<tr class="separator:aa8519467227c9fd7bd3752e02ca60ac2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0eedd9ae5361667d0c8402bc52495d66" id="r_a0eedd9ae5361667d0c8402bc52495d66"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0eedd9ae5361667d0c8402bc52495d66">deleteSubscription</a> ()</td></tr>
+<tr class="separator:a0eedd9ae5361667d0c8402bc52495d66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aa269931bc6742c8384d9cc49867273c2" name="aa269931bc6742c8384d9cc49867273c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa269931bc6742c8384d9cc49867273c2">&#9670;&#160;</a></span>Subscription()</h2>
+<a id="aeced3376404ec9d37b50563e6ac4ff54" name="aeced3376404ec9d37b50563e6ac4ff54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeced3376404ec9d37b50563e6ac4ff54">&#9670;&#160;</a></span>Subscription()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename ServerOrClient &gt; </div>
+template&lt;typename Connection &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; ServerOrClient &gt;::Subscription </td>
+          <td class="memname"><a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; Connection &gt;::Subscription </td>
           <td>(</td>
-          <td class="paramtype">ServerOrClient &amp;</td>          <td class="paramname"><span class="paramname"><em>connection</em>, </span></td>
+          <td class="paramtype">Connection &amp;</td>          <td class="paramname"><span class="paramname"><em>connection</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -149,7 +169,7 @@ template&lt;typename ServerOrClient &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -157,22 +177,24 @@ template&lt;typename ServerOrClient &gt; </div>
 <p>Wrap an existing subscription. </p>
 <p>The <code>subscriptionId</code> is ignored and set to <code>0U</code> for servers. </p>
 
+<p class="definition">Definition at line <a class="el" href="Subscription_8h_source.html#l00067">67</a> of file <a class="el" href="Subscription_8h_source.html">Subscription.h</a>.</p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a29299d3e032cba1478c57b656576960c" name="a29299d3e032cba1478c57b656576960c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a29299d3e032cba1478c57b656576960c">&#9670;&#160;</a></span>getConnection() <span class="overload">[1/2]</span></h2>
+<a id="a5259633d043095bec11279acacec1f10" name="a5259633d043095bec11279acacec1f10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5259633d043095bec11279acacec1f10">&#9670;&#160;</a></span>connection() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename ServerOrClient &gt; </div>
+template&lt;typename Connection &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">ServerOrClient &amp; <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; ServerOrClient &gt;::getConnection </td>
+          <td class="memname">Connection &amp; <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; Connection &gt;::connection </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td></td>
@@ -180,28 +202,30 @@ template&lt;typename ServerOrClient &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Get the server/client instance. </p>
 
+<p class="definition">Definition at line <a class="el" href="Subscription_8h_source.html#l00072">72</a> of file <a class="el" href="Subscription_8h_source.html">Subscription.h</a>.</p>
+
 </div>
 </div>
-<a id="a6a5500ecf7bea6a2e6f2da52e7f009f1" name="a6a5500ecf7bea6a2e6f2da52e7f009f1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a5500ecf7bea6a2e6f2da52e7f009f1">&#9670;&#160;</a></span>getConnection() <span class="overload">[2/2]</span></h2>
+<a id="a305fc7f073504c4ef89aa19f7e660ddc" name="a305fc7f073504c4ef89aa19f7e660ddc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a305fc7f073504c4ef89aa19f7e660ddc">&#9670;&#160;</a></span>connection() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename ServerOrClient &gt; </div>
+template&lt;typename Connection &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">const ServerOrClient &amp; <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; ServerOrClient &gt;::getConnection </td>
+          <td class="memname">const Connection &amp; <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; Connection &gt;::connection </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td> const</td>
@@ -209,28 +233,60 @@ template&lt;typename ServerOrClient &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Get the server/client instance. </p>
 
+<p class="definition">Definition at line <a class="el" href="Subscription_8h_source.html#l00077">77</a> of file <a class="el" href="Subscription_8h_source.html">Subscription.h</a>.</p>
+
 </div>
 </div>
-<a id="a476a433e5fc17675a8b4c10c16e23b96" name="a476a433e5fc17675a8b4c10c16e23b96"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a476a433e5fc17675a8b4c10c16e23b96">&#9670;&#160;</a></span>getSubscriptionId()</h2>
+<a id="abf4a906782bf49e89f5db3cf02718b34" name="abf4a906782bf49e89f5db3cf02718b34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abf4a906782bf49e89f5db3cf02718b34">&#9670;&#160;</a></span>getConnection() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename ServerOrClient &gt; </div>
+template&lt;typename Connection &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint32_t <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; ServerOrClient &gt;::getSubscriptionId </td>
+          <td class="memname">Connection &amp; <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; Connection &gt;::getConnection </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000019">Deprecated</a></b></dt><dd>Use <a class="el" href="#a5259633d043095bec11279acacec1f10" title="Get the server/client instance.">connection()</a> instead </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Subscription_8h_source.html#l00083">83</a> of file <a class="el" href="Subscription_8h_source.html">Subscription.h</a>.</p>
+
+</div>
+</div>
+<a id="a4b8f43c16559e4002f07d12b936bf230" name="a4b8f43c16559e4002f07d12b936bf230"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b8f43c16559e4002f07d12b936bf230">&#9670;&#160;</a></span>getConnection() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Connection &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const Connection &amp; <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; Connection &gt;::getConnection </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td> const</td>
@@ -238,25 +294,87 @@ template&lt;typename ServerOrClient &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000020">Deprecated</a></b></dt><dd>Use <a class="el" href="#a5259633d043095bec11279acacec1f10" title="Get the server/client instance.">connection()</a> instead </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Subscription_8h_source.html#l00089">89</a> of file <a class="el" href="Subscription_8h_source.html">Subscription.h</a>.</p>
+
+</div>
+</div>
+<a id="a1bb7f7a6536eccd575c47d304b599194" name="a1bb7f7a6536eccd575c47d304b599194"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1bb7f7a6536eccd575c47d304b599194">&#9670;&#160;</a></span>subscriptionId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Connection &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; Connection &gt;::subscriptionId </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Get the server-assigned identifier of this subscription. </p>
 
+<p class="definition">Definition at line <a class="el" href="Subscription_8h_source.html#l00094">94</a> of file <a class="el" href="Subscription_8h_source.html">Subscription.h</a>.</p>
+
 </div>
 </div>
-<a id="a414d28b4e6bde2ffdaa1c72ac6df6903" name="a414d28b4e6bde2ffdaa1c72ac6df6903"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a414d28b4e6bde2ffdaa1c72ac6df6903">&#9670;&#160;</a></span>getMonitoredItems()</h2>
+<a id="ab455700f2e09e670aed161ec63b35aa4" name="ab455700f2e09e670aed161ec63b35aa4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab455700f2e09e670aed161ec63b35aa4">&#9670;&#160;</a></span>getSubscriptionId()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename ServerOrClient &gt; </div>
+template&lt;typename Connection &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; <a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; ServerOrClient &gt; &gt; <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; ServerOrClient &gt;::getMonitoredItems </td>
+          <td class="memname">uint32_t <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; Connection &gt;::getSubscriptionId </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000021">Deprecated</a></b></dt><dd>Use <a class="el" href="#a1bb7f7a6536eccd575c47d304b599194" title="Get the server-assigned identifier of this subscription.">subscriptionId()</a> instead </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Subscription_8h_source.html#l00100">100</a> of file <a class="el" href="Subscription_8h_source.html">Subscription.h</a>.</p>
+
+</div>
+</div>
+<a id="afb1edd9c6dacd554f5ef4ed958649ce2" name="afb1edd9c6dacd554f5ef4ed958649ce2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb1edd9c6dacd554f5ef4ed958649ce2">&#9670;&#160;</a></span>getMonitoredItems()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Connection &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; Connection &gt; &gt; <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; Connection &gt;::getMonitoredItems </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td></td>
@@ -268,93 +386,85 @@ template&lt;typename ServerOrClient &gt; </div>
 
 </div>
 </div>
-<a id="a2be955f3eb26c7dcc9dd61979b5d3d7b" name="a2be955f3eb26c7dcc9dd61979b5d3d7b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2be955f3eb26c7dcc9dd61979b5d3d7b">&#9670;&#160;</a></span>setSubscriptionParameters()</h2>
+<a id="a75c65d904ebe354daf1ba5d40d6c5c84" name="a75c65d904ebe354daf1ba5d40d6c5c84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75c65d904ebe354daf1ba5d40d6c5c84">&#9670;&#160;</a></span>setSubscriptionParameters()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename ServerOrClient &gt; </div>
+template&lt;typename Connection &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; ServerOrClient &gt;::setSubscriptionParameters </td>
+          <td class="memname">void <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; Connection &gt;::setSubscriptionParameters </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceopcua.html#a781fb70e471735fd9a6f80e9f0677c99">SubscriptionParameters</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>parameters</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Modify this subscription. </p>
 <dl class="section note"><dt>Note</dt><dd>Not implemented for <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>. </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__Subscription.html#gaaf599cc8de212e459f6dae28463af7e4" title="Modify a subscription.">services::modifySubscription</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__ModifySubscription.html#ga104bdd5f6f21a75554224451c159eb4e" title="Modify a subscription.">services::modifySubscription</a> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Subscription_8h_source.html#l00110">110</a> of file <a class="el" href="Subscription_8h_source.html">Subscription.h</a>.</p>
 
 </div>
 </div>
-<a id="a9bd5cff80431adb322fce04f4e1e39d9" name="a9bd5cff80431adb322fce04f4e1e39d9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9bd5cff80431adb322fce04f4e1e39d9">&#9670;&#160;</a></span>setPublishingMode()</h2>
+<a id="ae93cbad3a365a2226432e93dde44fbe1" name="ae93cbad3a365a2226432e93dde44fbe1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae93cbad3a365a2226432e93dde44fbe1">&#9670;&#160;</a></span>setPublishingMode()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename ServerOrClient &gt; </div>
+template&lt;typename Connection &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; ServerOrClient &gt;::setPublishingMode </td>
+          <td class="memname">void <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; Connection &gt;::setPublishingMode </td>
           <td>(</td>
           <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>publishing</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Enable/disable publishing of notification messages. </p>
 <dl class="section note"><dt>Note</dt><dd>Not implemented for <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>. </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__Subscription.html#ga80719d2520f347ac1db551ec37c2513c" title="Enable/disable publishing of notification messages.">services::setPublishingMode</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__SetPublishingMode.html#gae8f8af46aaee0365d06d285356f0961f" title="Enable/disable publishing of notification messages.">services::setPublishingMode</a> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Subscription_8h_source.html#l00117">117</a> of file <a class="el" href="Subscription_8h_source.html">Subscription.h</a>.</p>
 
 </div>
 </div>
-<a id="a45de2bdbb14e9bdd505d4cc5d3d689ae" name="a45de2bdbb14e9bdd505d4cc5d3d689ae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a45de2bdbb14e9bdd505d4cc5d3d689ae">&#9670;&#160;</a></span>subscribeDataChange() <span class="overload">[1/2]</span></h2>
+<a id="a5b405d901bfe59c6c378671120eacd00" name="a5b405d901bfe59c6c378671120eacd00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b405d901bfe59c6c378671120eacd00">&#9670;&#160;</a></span>subscribeDataChange() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename ServerOrClient &gt; </div>
+template&lt;typename Connection &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; ServerOrClient &gt; <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; ServerOrClient &gt;::subscribeDataChange </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>id</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917">AttributeId</a></td>          <td class="paramname"><span class="paramname"><em>attribute</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespaceopcua.html#a713876b9dc6f9a53405b2917481a3743">DataChangeCallback</a>&lt; ServerOrClient &gt;</td>          <td class="paramname"><span class="paramname"><em>onDataChange</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Create a monitored item for data change notifications (default settings). </p>
-<p>The monitoring mode is set to <a class="el" href="namespaceopcua.html#a78a3c3ace4c759ec414715466928ee81ac5562ce2e22a86c247849904ecef3dc8">MonitoringMode::Reporting</a> and the default open62541 MonitoringParameters are used. </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="structopcua_1_1services_1_1MonitoringParameters.html" title="Monitoring parameters with default values from open62541.">services::MonitoringParameters</a> </dd></dl>
-
-</div>
-</div>
-<a id="a213cd3d862d3a7fc97c55633d1520ddc" name="a213cd3d862d3a7fc97c55633d1520ddc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a213cd3d862d3a7fc97c55633d1520ddc">&#9670;&#160;</a></span>subscribeDataChange() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename ServerOrClient &gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; ServerOrClient &gt; <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; ServerOrClient &gt;::subscribeDataChange </td>
+          <td class="memname"><a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; Connection &gt; <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; Connection &gt;::subscribeDataChange </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>id</em>, </span></td>
         </tr>
@@ -371,31 +481,265 @@ template&lt;typename ServerOrClient &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceopcua.html#a5f1e4e6ef9276c10da93131886455ef9">MonitoringParameters</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>parameters</em>, </span></td>
+          <td class="paramtype"><a class="el" href="structopcua_1_1services_1_1MonitoringParametersEx.html">MonitoringParametersEx</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>parameters</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceopcua.html#a713876b9dc6f9a53405b2917481a3743">DataChangeCallback</a>&lt; ServerOrClient &gt;</td>          <td class="paramname"><span class="paramname"><em>onDataChange</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#ab12c1c1b6e4b1cbaac1c1b21060320c1">DataChangeNotificationCallback</a></td>          <td class="paramname"><span class="paramname"><em>onDataChange</em></span>&#160;)</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Create a monitored item for data change notifications. </p>
-<p>Parameters are passed by reference because illegal parameters can be revised by the server. The updated parameters reflect the actual values that the server will use. </p><dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/Core/Part4/v105/docs/7.21">https://reference.opcfoundation.org/Core/Part4/v105/docs/7.21</a>   </dd></dl>
+<p>This is an extended version of <code><a class="elRef" target="_blank" href="open62541/structUA__MonitoringParameters.html">UA_MonitoringParameters</a></code> with the <code>timestamps</code> parameter. Parameters are passed by reference because illegal parameters can be revised by the server. The updated parameters reflect the actual values that the server will use. </p><dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/Core/Part4/v105/docs/7.21">https://reference.opcfoundation.org/Core/Part4/v105/docs/7.21</a>   </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Subscription_8h_source.html#l00123">123</a> of file <a class="el" href="Subscription_8h_source.html">Subscription.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Subscription_8h_source.html#l00170">opcua::Subscription&lt; Connection &gt;::subscribeDataChange()</a>, <a class="el" href="Subscription_8h_source.html#l00159">opcua::Subscription&lt; Connection &gt;::subscribeDataChange()</a>, and <a class="el" href="Subscription_8h_source.html#l00143">opcua::Subscription&lt; Connection &gt;::subscribeDataChange()</a>.</p>
 
 </div>
 </div>
-<a id="a52d1e840118188e79e27a86697e2c1a3" name="a52d1e840118188e79e27a86697e2c1a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52d1e840118188e79e27a86697e2c1a3">&#9670;&#160;</a></span>subscribeEvent() <span class="overload">[1/2]</span></h2>
+<a id="ab2bc8b0b3910ec8972f48cb5a87fd6cc" name="ab2bc8b0b3910ec8972f48cb5a87fd6cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2bc8b0b3910ec8972f48cb5a87fd6cc">&#9670;&#160;</a></span>subscribeDataChange() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename ServerOrClient &gt; </div>
+template&lt;typename Connection &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; ServerOrClient &gt; <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; ServerOrClient &gt;::subscribeEvent </td>
+          <td class="memname"><a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; Connection &gt; <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; Connection &gt;::subscribeDataChange </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>id</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917">AttributeId</a></td>          <td class="paramname"><span class="paramname"><em>attribute</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#a78a3c3ace4c759ec414715466928ee81">MonitoringMode</a></td>          <td class="paramname"><span class="paramname"><em>monitoringMode</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structopcua_1_1services_1_1MonitoringParametersEx.html">MonitoringParametersEx</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>parameters</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#a713876b9dc6f9a53405b2917481a3743">DataChangeCallback</a>&lt; Connection &gt;</td>          <td class="paramname"><span class="paramname"><em>onDataChange</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000022">Deprecated</a></b></dt><dd>Use overload with DataChangeNotificationCallback instead </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Subscription_8h_source.html#l00143">143</a> of file <a class="el" href="Subscription_8h_source.html">Subscription.h</a>.</p>
+
+</div>
+</div>
+<a id="aae0205cb6b40558991fb170487944b50" name="aae0205cb6b40558991fb170487944b50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae0205cb6b40558991fb170487944b50">&#9670;&#160;</a></span>subscribeDataChange() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Connection &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; Connection &gt; <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; Connection &gt;::subscribeDataChange </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>id</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917">AttributeId</a></td>          <td class="paramname"><span class="paramname"><em>attribute</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#ab12c1c1b6e4b1cbaac1c1b21060320c1">DataChangeNotificationCallback</a></td>          <td class="paramname"><span class="paramname"><em>onDataChange</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create a monitored item for data change notifications (default settings). </p>
+<p>The monitoring mode is set to <a class="el" href="namespaceopcua.html#a78a3c3ace4c759ec414715466928ee81ac5562ce2e22a86c247849904ecef3dc8">MonitoringMode::Reporting</a> and the default open62541 MonitoringParametersEx are used. </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="structopcua_1_1services_1_1MonitoringParametersEx.html" title="Extended monitoring parameters with default values from open62541.">services::MonitoringParametersEx</a> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Subscription_8h_source.html#l00159">159</a> of file <a class="el" href="Subscription_8h_source.html">Subscription.h</a>.</p>
+
+</div>
+</div>
+<a id="ac9ddcdbbfc8856426e4c3af4ae0212dc" name="ac9ddcdbbfc8856426e4c3af4ae0212dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9ddcdbbfc8856426e4c3af4ae0212dc">&#9670;&#160;</a></span>subscribeDataChange() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Connection &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; Connection &gt; <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; Connection &gt;::subscribeDataChange </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>id</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#ac702b87ae822429bbdde24595a526917">AttributeId</a></td>          <td class="paramname"><span class="paramname"><em>attribute</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#a713876b9dc6f9a53405b2917481a3743">DataChangeCallback</a>&lt; Connection &gt;</td>          <td class="paramname"><span class="paramname"><em>onDataChange</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000023">Deprecated</a></b></dt><dd>Use overload with DataChangeNotificationCallback instead </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Subscription_8h_source.html#l00170">170</a> of file <a class="el" href="Subscription_8h_source.html">Subscription.h</a>.</p>
+
+</div>
+</div>
+<a id="a79a23448012a7a3ebe051851e61f3d3e" name="a79a23448012a7a3ebe051851e61f3d3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79a23448012a7a3ebe051851e61f3d3e">&#9670;&#160;</a></span>subscribeEvent() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Connection &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; Connection &gt; <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; Connection &gt;::subscribeEvent </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>id</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#a78a3c3ace4c759ec414715466928ee81">MonitoringMode</a></td>          <td class="paramname"><span class="paramname"><em>monitoringMode</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structopcua_1_1services_1_1MonitoringParametersEx.html">MonitoringParametersEx</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>parameters</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#a7a9209bf23bbb7c6446fd29701bb2490">EventNotificationCallback</a></td>          <td class="paramname"><span class="paramname"><em>onEvent</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Create a monitored item for event notifications. </p>
+<p>This is an extended version of <code><a class="elRef" target="_blank" href="open62541/structUA__MonitoringParameters.html">UA_MonitoringParameters</a></code> with the <code>timestamps</code> parameter. Parameters are passed by reference because illegal parameters can be revised by the server. The updated parameters reflect the actual values that the server will use. </p><dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/Core/Part4/v105/docs/7.21">https://reference.opcfoundation.org/Core/Part4/v105/docs/7.21</a>   </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Not implemented for <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Subscription_8h_source.html#l00179">179</a> of file <a class="el" href="Subscription_8h_source.html">Subscription.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Subscription_8h_source.html#l00221">opcua::Subscription&lt; Connection &gt;::subscribeEvent()</a>, <a class="el" href="Subscription_8h_source.html#l00211">opcua::Subscription&lt; Connection &gt;::subscribeEvent()</a>, and <a class="el" href="Subscription_8h_source.html#l00198">opcua::Subscription&lt; Connection &gt;::subscribeEvent()</a>.</p>
+
+</div>
+</div>
+<a id="a7ec44fc9d6ab2f422c237df2ab5f2030" name="a7ec44fc9d6ab2f422c237df2ab5f2030"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ec44fc9d6ab2f422c237df2ab5f2030">&#9670;&#160;</a></span>subscribeEvent() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Connection &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; Connection &gt; <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; Connection &gt;::subscribeEvent </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>id</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#a78a3c3ace4c759ec414715466928ee81">MonitoringMode</a></td>          <td class="paramname"><span class="paramname"><em>monitoringMode</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structopcua_1_1services_1_1MonitoringParametersEx.html">MonitoringParametersEx</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>parameters</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#a06640861e78cd111c769ed3a6ac9aed7">EventCallback</a>&lt; Connection &gt;</td>          <td class="paramname"><span class="paramname"><em>onEvent</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000024">Deprecated</a></b></dt><dd>Use overload with EventNotificationCallback instead </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Subscription_8h_source.html#l00198">198</a> of file <a class="el" href="Subscription_8h_source.html">Subscription.h</a>.</p>
+
+</div>
+</div>
+<a id="ad73249ca431810a51640d9d8dd69fa8d" name="ad73249ca431810a51640d9d8dd69fa8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad73249ca431810a51640d9d8dd69fa8d">&#9670;&#160;</a></span>subscribeEvent() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Connection &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; Connection &gt; <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; Connection &gt;::subscribeEvent </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>id</em>, </span></td>
         </tr>
@@ -407,73 +751,91 @@ template&lt;typename ServerOrClient &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceopcua.html#a06640861e78cd111c769ed3a6ac9aed7">EventCallback</a>&lt; ServerOrClient &gt;</td>          <td class="paramname"><span class="paramname"><em>onEvent</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#a7a9209bf23bbb7c6446fd29701bb2490">EventNotificationCallback</a></td>          <td class="paramname"><span class="paramname"><em>onEvent</em></span>&#160;)</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Create a monitored item for event notifications (default settings). </p>
-<p>The monitoring mode is set to <a class="el" href="namespaceopcua.html#a78a3c3ace4c759ec414715466928ee81ac5562ce2e22a86c247849904ecef3dc8">MonitoringMode::Reporting</a> and the default open62541 MonitoringParameters are used. </p><dl class="section note"><dt>Note</dt><dd>Not implemented for <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>. </dd></dl>
+<p>The monitoring mode is set to <a class="el" href="namespaceopcua.html#a78a3c3ace4c759ec414715466928ee81ac5562ce2e22a86c247849904ecef3dc8">MonitoringMode::Reporting</a> and the default open62541 MonitoringParametersEx are used. </p><dl class="section note"><dt>Note</dt><dd>Not implemented for <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Subscription_8h_source.html#l00211">211</a> of file <a class="el" href="Subscription_8h_source.html">Subscription.h</a>.</p>
 
 </div>
 </div>
-<a id="a889d7a71f80323ec01977a5f280de821" name="a889d7a71f80323ec01977a5f280de821"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a889d7a71f80323ec01977a5f280de821">&#9670;&#160;</a></span>subscribeEvent() <span class="overload">[2/2]</span></h2>
+<a id="aa8519467227c9fd7bd3752e02ca60ac2" name="aa8519467227c9fd7bd3752e02ca60ac2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8519467227c9fd7bd3752e02ca60ac2">&#9670;&#160;</a></span>subscribeEvent() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename ServerOrClient &gt; </div>
+template&lt;typename Connection &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; ServerOrClient &gt; <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; ServerOrClient &gt;::subscribeEvent </td>
+          <td class="memname"><a class="el" href="classopcua_1_1MonitoredItem.html">MonitoredItem</a>&lt; Connection &gt; <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; Connection &gt;::subscribeEvent </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>id</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceopcua.html#a78a3c3ace4c759ec414715466928ee81">MonitoringMode</a></td>          <td class="paramname"><span class="paramname"><em>monitoringMode</em>, </span></td>
+          <td class="paramtype">const <a class="el" href="classopcua_1_1EventFilter.html">EventFilter</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>eventFilter</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="namespaceopcua.html#a5f1e4e6ef9276c10da93131886455ef9">MonitoringParameters</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>parameters</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="namespaceopcua.html#a06640861e78cd111c769ed3a6ac9aed7">EventCallback</a>&lt; ServerOrClient &gt;</td>          <td class="paramname"><span class="paramname"><em>onEvent</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="namespaceopcua.html#a06640861e78cd111c769ed3a6ac9aed7">EventCallback</a>&lt; Connection &gt;</td>          <td class="paramname"><span class="paramname"><em>onEvent</em></span>&#160;)</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000025">Deprecated</a></b></dt><dd>Use overload with EventNotificationCallback instead </dd></dl>
 
-<p>Create a monitored item for event notifications. </p>
-<p>Parameters are passed by reference because illegal parameters can be revised by the server. The updated parameters reflect the actual values that the server will use. </p><dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/Core/Part4/v105/docs/7.21">https://reference.opcfoundation.org/Core/Part4/v105/docs/7.21</a>   </dd></dl>
-<dl class="section note"><dt>Note</dt><dd>Not implemented for <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>. </dd></dl>
+<p class="definition">Definition at line <a class="el" href="Subscription_8h_source.html#l00221">221</a> of file <a class="el" href="Subscription_8h_source.html">Subscription.h</a>.</p>
 
 </div>
 </div>
-<a id="ae4a2f23ecdf60d1d4756d26426870880" name="ae4a2f23ecdf60d1d4756d26426870880"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4a2f23ecdf60d1d4756d26426870880">&#9670;&#160;</a></span>deleteSubscription()</h2>
+<a id="a0eedd9ae5361667d0c8402bc52495d66" name="a0eedd9ae5361667d0c8402bc52495d66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0eedd9ae5361667d0c8402bc52495d66">&#9670;&#160;</a></span>deleteSubscription()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename ServerOrClient &gt; </div>
+template&lt;typename Connection &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; ServerOrClient &gt;::deleteSubscription </td>
+          <td class="memname">void <a class="el" href="classopcua_1_1Subscription.html">opcua::Subscription</a>&lt; Connection &gt;::deleteSubscription </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Delete this subscription. </p>
 <dl class="section note"><dt>Note</dt><dd>Not implemented for <a class="el" href="classopcua_1_1Server.html" title="High-level server class.">Server</a>. </dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__Subscription.html#gafa3988fe5d0c5ce694d0ff506a4b4edd" title="Delete a subscription.">services::deleteSubscription</a> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Subscription_8h_source.html#l00229">229</a> of file <a class="el" href="Subscription_8h_source.html">Subscription.h</a>.</p>
 
 </div>
 </div>

@@ -1,4 +1,9 @@
 <map id="View service set" name="View service set">
-<area shape="rect" id="Node000002" href="$group__Services.html" title="OPC UA services as free functions." alt="" coords="5,5,83,31"/>
-<area shape="rect" id="Node000001" title="Browse the address space / view created by a server." alt="" coords="131,5,260,31"/>
+<area shape="rect" id="Node000003" href="$group__Browse.html" title="Discover references of nodes." alt="" coords="353,5,475,31"/>
+<area shape="rect" id="Node000004" href="$group__BrowseNext.html" title="Request the next set of a Browse or BrowseNext response information that is too large to be sent in a..." alt="" coords="338,55,490,80"/>
+<area shape="rect" id="Node000006" href="$group__RegisterNodes.html" title="Register nodes for efficient access operations." alt="" coords="330,104,498,129"/>
+<area shape="rect" id="Node000002" href="$group__Services.html" title="OPC UA services as free functions." alt="" coords="5,104,83,129"/>
+<area shape="rect" id="Node000001" title="Browse the address space / view created by a server." alt="" coords="131,104,260,129"/>
+<area shape="rect" id="Node000005" href="$group__TranslateBrowsePathsToNodeIds.html" title="Request that the server translates browse paths to node ids." alt="" coords="308,154,520,194"/>
+<area shape="rect" id="Node000007" href="$group__UnregisterNodes.html" title="Unregister nodes that have been obtained via the RegisterNodes service." alt="" coords="323,219,505,244"/>
 </map>

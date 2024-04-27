@@ -1,4 +1,8 @@
 <map id="NodeManagement service set" name="NodeManagement service set">
-<area shape="rect" id="Node000001" title="Add/delete nodes and references." alt="" coords="131,5,348,31"/>
-<area shape="rect" id="Node000002" href="$group__Services.html" title="OPC UA services as free functions." alt="" coords="5,5,83,31"/>
+<area shape="rect" id="Node000003" href="$group__AddNodes.html" title="Add nodes into the address space hierarchy." alt="" coords="421,5,560,31"/>
+<area shape="rect" id="Node000004" href="$group__AddReferences.html" title="Add references to nodes." alt="" coords="405,55,576,80"/>
+<area shape="rect" id="Node000005" href="$group__DeleteNodes.html" title="Delete nodes from the address space." alt="" coords="412,104,569,129"/>
+<area shape="rect" id="Node000006" href="$group__DeleteReferences.html" title="Delete references from nodes." alt="" coords="396,153,585,179"/>
+<area shape="rect" id="Node000001" title="Add/delete nodes and references." alt="" coords="131,80,348,105"/>
+<area shape="rect" id="Node000002" href="$group__Services.html" title="OPC UA services as free functions." alt="" coords="5,80,83,105"/>
 </map>

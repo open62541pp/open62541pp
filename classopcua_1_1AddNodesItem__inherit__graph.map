@@ -1,5 +1,7 @@
 <map id="opcua::AddNodesItem" name="opcua::AddNodesItem">
-<area shape="rect" id="Node000001" title="UA_AddNodesItem wrapper class." alt="" coords="22,108,187,133"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,5,204,60"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="107,74,107,108,102,108,102,74"/>
+<area shape="rect" id="Node000001" title="UA_AddNodesItem wrapper class." alt="" coords="22,181,187,207"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,79,204,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="107,147,107,181,102,181,102,147"/>
+<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap native objects." alt="" coords="23,5,186,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="107,44,107,79,102,79,102,44"/>
 </map>

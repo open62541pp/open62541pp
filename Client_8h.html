@@ -24,7 +24,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.12.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.13.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -91,21 +91,20 @@ $(function() {
 <code>#include &lt;string&gt;</code><br />
 <code>#include &lt;string_view&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
-<code>#include &quot;<a class="el" href="Common_8h_source.html">open62541pp/Common.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Config_8h_source.html">open62541pp/Config.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Logger_8h_source.html">open62541pp/Logger.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Span_8h_source.html">open62541pp/Span.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Subscription_8h_source.html">open62541pp/Subscription.h</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="NodeId_8h_source.html">open62541pp/types/NodeId.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="client_8h_source.html">open62541pp/detail/open62541/client.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Client.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="Client_8h__incl.svg" width="3279" height="872"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="Client_8h__incl.svg" width="3324" height="975"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="Client_8h__dep__incl.svg" width="268" height="168"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="Client_8h__dep__incl.svg" width="1160" height="579"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="Client_8h_source.html">Go to the source code of this file.</a></p>
@@ -119,6 +118,8 @@ Classes</h2></td></tr>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespaceopcua" id="r_namespaceopcua"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html">opcua</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespaceopcua_1_1detail" id="r_namespaceopcua_1_1detail"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html">opcua::detail</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -127,6 +128,20 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a51c646dfe23d85100a7f8d8c6ebc4d3a" id="r_a51c646dfe23d85100a7f8d8c6ebc4d3a"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__ClientConfig.html">UA_ClientConfig</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a51c646dfe23d85100a7f8d8c6ebc4d3a">opcua::detail::getConfig</a> (<a class="elRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a> *client) noexcept</td></tr>
+<tr class="separator:a51c646dfe23d85100a7f8d8c6ebc4d3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a160b862a4502af42010d2d23c158ad84" id="r_a160b862a4502af42010d2d23c158ad84"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__ClientConfig.html">UA_ClientConfig</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a160b862a4502af42010d2d23c158ad84">opcua::detail::getConfig</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;client) noexcept</td></tr>
+<tr class="separator:a160b862a4502af42010d2d23c158ad84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0ad9a98c32f2b75d15a06549e69aa05" id="r_af0ad9a98c32f2b75d15a06549e69aa05"><td class="memItemLeft" align="right" valign="top">ClientConnection *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#af0ad9a98c32f2b75d15a06549e69aa05">opcua::detail::getConnection</a> (<a class="elRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a> *client) noexcept</td></tr>
+<tr class="separator:af0ad9a98c32f2b75d15a06549e69aa05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b4e0b247487978c0769df833cd493ed" id="r_a5b4e0b247487978c0769df833cd493ed"><td class="memItemLeft" align="right" valign="top">ClientConnection &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a5b4e0b247487978c0769df833cd493ed">opcua::detail::getConnection</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;client) noexcept</td></tr>
+<tr class="separator:a5b4e0b247487978c0769df833cd493ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7935eb93c264076a2d34605e5ad6e7f3" id="r_a7935eb93c264076a2d34605e5ad6e7f3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Client.html">Client</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a7935eb93c264076a2d34605e5ad6e7f3">opcua::detail::getWrapper</a> (<a class="elRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a> *client) noexcept</td></tr>
+<tr class="separator:a7935eb93c264076a2d34605e5ad6e7f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1575bfb8c58ba7ffe1e053a2dbc750b5" id="r_a1575bfb8c58ba7ffe1e053a2dbc750b5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structopcua_1_1detail_1_1ClientContext.html">ClientContext</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a1575bfb8c58ba7ffe1e053a2dbc750b5">opcua::detail::getContext</a> (<a class="elRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a> *client) noexcept</td></tr>
+<tr class="separator:a1575bfb8c58ba7ffe1e053a2dbc750b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a017b8eb3b179c137cfe1316dd90bad33" id="r_a017b8eb3b179c137cfe1316dd90bad33"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structopcua_1_1detail_1_1ClientContext.html">ClientContext</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua_1_1detail.html#a017b8eb3b179c137cfe1316dd90bad33">opcua::detail::getContext</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;client) noexcept</td></tr>
+<tr class="separator:a017b8eb3b179c137cfe1316dd90bad33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0e5a6398e45b32585e329f8685867c4" id="r_ae0e5a6398e45b32585e329f8685867c4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#ae0e5a6398e45b32585e329f8685867c4">opcua::operator==</a> (const <a class="el" href="classopcua_1_1Client.html">Client</a> &amp;lhs, const <a class="el" href="classopcua_1_1Client.html">Client</a> &amp;rhs) noexcept</td></tr>
 <tr class="separator:ae0e5a6398e45b32585e329f8685867c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abcf304697d5a73fe6ae8dd828c71555a" id="r_abcf304697d5a73fe6ae8dd828c71555a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceopcua.html#abcf304697d5a73fe6ae8dd828c71555a">opcua::operator!=</a> (const <a class="el" href="classopcua_1_1Client.html">Client</a> &amp;lhs, const <a class="el" href="classopcua_1_1Client.html">Client</a> &amp;rhs) noexcept</td></tr>

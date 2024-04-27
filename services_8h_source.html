@@ -24,7 +24,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.12.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.13.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -86,30 +86,32 @@ $(function() { codefold.init(0); });
 </div><!--header-->
 <div class="contents">
 <a href="services_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="comment"></span> </div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment"> * @defgroup Services Services</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="comment"> * OPC UA services as free functions.</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment"> * Functions are overloaded for both Server and Client.</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="comment"> * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="Attribute_8h.html">open62541pp/services/Attribute.h</a>&quot;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="Method_8h.html">open62541pp/services/Method.h</a>&quot;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="services_2MonitoredItem_8h.html">open62541pp/services/MonitoredItem.h</a>&quot;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="NodeManagement_8h.html">open62541pp/services/NodeManagement.h</a>&quot;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="services_2Subscription_8h.html">open62541pp/services/Subscription.h</a>&quot;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="View_8h.html">open62541pp/services/View.h</a>&quot;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"></span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">/**</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"> * OPC UA services as free functions.</span></div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceopcua_1_1services.html">opcua::services</a> {}</div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="Attribute_8h.html">open62541pp/services/Attribute.h</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="Method_8h.html">open62541pp/services/Method.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="services_2MonitoredItem_8h.html">open62541pp/services/MonitoredItem.h</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="NodeManagement_8h.html">open62541pp/services/NodeManagement.h</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="services_2Subscription_8h.html">open62541pp/services/Subscription.h</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="View_8h.html">open62541pp/services/View.h</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="comment"></span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="comment"> * OPC UA services as free functions.</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceopcua_1_1services.html">opcua::services</a> {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"></span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">/**</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment"> * @defgroup Services Services</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment"> * OPC UA services as free functions.</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment"> * Functions are overloaded for both Client and Server (if possible).</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="comment"> * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"> */</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>}  <span class="comment">// namespace opcua::services</span></div>
 <div class="ttc" id="aAttribute_8h_html"><div class="ttname"><a href="Attribute_8h.html">Attribute.h</a></div></div>
 <div class="ttc" id="aMethod_8h_html"><div class="ttname"><a href="Method_8h.html">Method.h</a></div></div>
 <div class="ttc" id="aNodeManagement_8h_html"><div class="ttname"><a href="NodeManagement_8h.html">NodeManagement.h</a></div></div>
 <div class="ttc" id="aView_8h_html"><div class="ttname"><a href="View_8h.html">View.h</a></div></div>
-<div class="ttc" id="anamespaceopcua_1_1services_html"><div class="ttname"><a href="namespaceopcua_1_1services.html">opcua::services</a></div><div class="ttdoc">OPC UA services as free functions.</div><div class="ttdef"><b>Definition</b> <a href="Attribute_8h_source.html#l00022">Attribute.h:22</a></div></div>
+<div class="ttc" id="anamespaceopcua_1_1services_html"><div class="ttname"><a href="namespaceopcua_1_1services.html">opcua::services</a></div><div class="ttdoc">OPC UA services as free functions.</div><div class="ttdef"><b>Definition</b> <a href="Attribute_8h_source.html#l00026">Attribute.h:26</a></div></div>
 <div class="ttc" id="aservices_2MonitoredItem_8h_html"><div class="ttname"><a href="services_2MonitoredItem_8h.html">MonitoredItem.h</a></div></div>
 <div class="ttc" id="aservices_2Subscription_8h_html"><div class="ttname"><a href="services_2Subscription_8h.html">Subscription.h</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

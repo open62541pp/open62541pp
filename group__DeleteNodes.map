@@ -1,0 +1,4 @@
+<map id="DeleteNodes service" name="DeleteNodes service">
+<area shape="rect" id="Node000001" title="Delete nodes from the address space." alt="" coords="271,5,428,31"/>
+<area shape="rect" id="Node000002" href="$group__NodeManagement.html" title="Add/delete nodes and references." alt="" coords="5,5,223,31"/>
+</map>

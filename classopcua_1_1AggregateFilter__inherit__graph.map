@@ -1,5 +1,7 @@
 <map id="opcua::AggregateFilter" name="opcua::AggregateFilter">
-<area shape="rect" id="Node000001" title="UA_AggregateFilter wrapper class." alt="" coords="39,108,209,133"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,5,243,60"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,74,127,108,121,108,121,74"/>
+<area shape="rect" id="Node000001" title="UA_AggregateFilter wrapper class." alt="" coords="39,181,209,207"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,79,243,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,147,127,181,121,181,121,147"/>
+<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap native objects." alt="" coords="43,5,205,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="127,44,127,79,121,79,121,44"/>
 </map>

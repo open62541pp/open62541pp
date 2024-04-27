@@ -5,7 +5,7 @@ var searchData=
   ['parsingresult_5fencoding_5fdefaultjson_2',['ParsingResult_Encoding_DefaultJson',['../group__NodeIds.html#gga6b06d7222b3fa4b8831080ac76bb6016a425970a3b002ab06cc892655d1c1195e',1,'opcua']]],
   ['parsingresult_5fencoding_5fdefaultxml_3',['ParsingResult_Encoding_DefaultXml',['../group__NodeIds.html#gga6b06d7222b3fa4b8831080ac76bb6016aa07fc90f0e252db9513c84573084c351',1,'opcua']]],
   ['pem_4',['PEM',['../namespaceopcua_1_1crypto.html#a15882ccfa0ebebfd7ac52fb1a3840094ac888957bb6d2fe3bdac6000656d3e2fe',1,'opcua::crypto']]],
-  ['percent_5',['Percent',['../group__TypeWrapper.html#ggae0dc9a333e88500f625a7c3747b4d9e0aadaaee4b22041c27198d410c68d952c9',1,'opcua']]],
+  ['percent_5',['Percent',['../group__Wrapper.html#ggae0dc9a333e88500f625a7c3747b4d9e0aadaaee4b22041c27198d410c68d952c9',1,'opcua']]],
   ['performupdatetype_6',['PerformUpdateType',['../group__NodeIds.html#gga5d7e0b8d020dc1893a646f9ea8ae780aabcd88aa3ba5b854f5b2d7742251ab5f1',1,'opcua']]],
   ['performupdatetype_5fenumvalues_7',['PerformUpdateType_EnumValues',['../group__NodeIds.html#ggab93e889b7152d5a78a993070276d1a70ad624a2c1d4246aeeab5b8a8283c1a57c',1,'opcua']]],
   ['permissiontype_8',['PermissionType',['../group__NodeIds.html#gga5d7e0b8d020dc1893a646f9ea8ae780aab22a0b466dba9910d3c644a42b865ebd',1,'opcua']]],

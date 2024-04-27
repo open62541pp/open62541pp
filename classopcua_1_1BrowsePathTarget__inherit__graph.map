@@ -1,5 +1,7 @@
 <map id="opcua::BrowsePathTarget" name="opcua::BrowsePathTarget">
-<area shape="rect" id="Node000001" title="UA_BrowsePathTarget wrapper class." alt="" coords="40,108,225,133"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,5,260,60"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="135,74,135,108,130,108,130,74"/>
+<area shape="rect" id="Node000001" title="UA_BrowsePathTarget wrapper class." alt="" coords="40,181,225,207"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,79,260,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="135,147,135,181,130,181,130,147"/>
+<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap native objects." alt="" coords="51,5,214,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="135,44,135,79,130,79,130,44"/>
 </map>

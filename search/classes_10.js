@@ -14,5 +14,10 @@ var searchData=
   ['relativepathelement_11',['RelativePathElement',['../classopcua_1_1RelativePathElement.html',1,'opcua']]],
   ['requestheader_12',['RequestHeader',['../classopcua_1_1RequestHeader.html',1,'opcua']]],
   ['resource_13',['resource',['open62541/structresource.html',0,'']]],
-  ['responseheader_14',['ResponseHeader',['../classopcua_1_1ResponseHeader.html',1,'opcua']]]
+  ['responseheader_14',['ResponseHeader',['../classopcua_1_1ResponseHeader.html',1,'opcua']]],
+  ['result_15',['Result',['../classopcua_1_1Result.html',1,'opcua']]],
+  ['result_3c_20void_20_3e_16',['Result&lt; void &gt;',['../classopcua_1_1Result_3_01void_01_4.html',1,'opcua']]],
+  ['resulttype_17',['ResultType',['../structopcua_1_1detail_1_1ResultType.html',1,'opcua::detail']]],
+  ['resulttype_3c_20badresult_20_3e_18',['ResultType&lt; BadResult &gt;',['../structopcua_1_1detail_1_1ResultType_3_01BadResult_01_4.html',1,'opcua::detail']]],
+  ['resulttype_3c_20statuscode_20_3e_19',['ResultType&lt; StatusCode &gt;',['../structopcua_1_1detail_1_1ResultType_3_01StatusCode_01_4.html',1,'opcua::detail']]]
 ];

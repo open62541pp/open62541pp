@@ -1,0 +1,4 @@
+<map id="Call service" name="Call service">
+<area shape="rect" id="Node000001" title="This Service is used to call (invoke) a list of methods." alt="" coords="200,5,299,31"/>
+<area shape="rect" id="Node000002" href="$group__Method.html" title="Call (invoke) methods." alt="" coords="5,5,152,31"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="DeleteMonitoredItems service" name="DeleteMonitoredItems service">
+<area shape="rect" id="Node000001" title="Delete a monitored items from subscriptions." alt="" coords="247,5,415,45"/>
+<area shape="rect" id="Node000002" href="$group__MonitoredItem.html" title="Subscribe to data and events." alt="" coords="5,13,199,38"/>
+</map>

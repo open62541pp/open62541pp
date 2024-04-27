@@ -51,8 +51,8 @@ var searchData=
   ['getsecuritykeysmethodtype_48',['GetSecurityKeysMethodType',['../group__NodeIds.html#ggac0a2d410d3bfad4769fc49900afc640ca72238f999fc4c418b11a3cb62ec33638',1,'opcua']]],
   ['getsecuritykeysmethodtype_5finputarguments_49',['GetSecurityKeysMethodType_InputArguments',['../group__NodeIds.html#ggab93e889b7152d5a78a993070276d1a70a59287658de4aefecc9bfef76d1fde624',1,'opcua']]],
   ['getsecuritykeysmethodtype_5foutputarguments_50',['GetSecurityKeysMethodType_OutputArguments',['../group__NodeIds.html#ggab93e889b7152d5a78a993070276d1a70a1f0fac0d5d7406930e1343e34a2959f4',1,'opcua']]],
-  ['greaterthan_51',['GreaterThan',['../group__TypeWrapper.html#gga240d33d34b407018b5e1b2c213556e47af6d044fe1f01fb0c956b80099e2a3072',1,'opcua']]],
-  ['greaterthanorequal_52',['GreaterThanOrEqual',['../group__TypeWrapper.html#gga240d33d34b407018b5e1b2c213556e47a25c44812e9d75f685d2a0b815dea1ebe',1,'opcua']]],
+  ['greaterthan_51',['GreaterThan',['../group__Wrapper.html#gga240d33d34b407018b5e1b2c213556e47af6d044fe1f01fb0c956b80099e2a3072',1,'opcua']]],
+  ['greaterthanorequal_52',['GreaterThanOrEqual',['../group__Wrapper.html#gga240d33d34b407018b5e1b2c213556e47a25c44812e9d75f685d2a0b815dea1ebe',1,'opcua']]],
   ['guardvariabletype_53',['GuardVariableType',['../group__NodeIds.html#gga3d11d26a1267284e457117a61229de7bab447fd5efb65a9b5003e8a0a29123166',1,'opcua']]],
   ['guid_54',['Guid',['../namespaceopcua.html#a83669427d4f4639c57ec0b499c5fdc10ac195f641dd597766b98e4ffa9e2f0e75',1,'opcua::Guid'],['../group__NodeIds.html#gga5d7e0b8d020dc1893a646f9ea8ae780aac195f641dd597766b98e4ffa9e2f0e75',1,'opcua::Guid'],['../namespaceopcua.html#a05d617e4c64656fa2ef6baf2af636f90ac195f641dd597766b98e4ffa9e2f0e75',1,'opcua::Guid']]]
 ];

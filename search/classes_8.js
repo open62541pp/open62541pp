@@ -16,6 +16,9 @@ var searchData=
   ['isregisteredtype_3c_20t_2c_20std_3a_3avoid_5ft_3c_20decltype_28typeregistry_3c_20t_20_3e_7b_7d_29_3e_20_3e_13',['IsRegisteredType&lt; T, std::void_t&lt; decltype(TypeRegistry&lt; T &gt;{})&gt; &gt;',['../structopcua_1_1detail_1_1IsRegisteredType_3_01T_00_01std_1_1void__t_3_01decltype_07TypeRegistry_3_01T_01_4_02_03_08_4_01_4.html',1,'opcua::detail']]],
   ['isspan_14',['IsSpan',['../structopcua_1_1detail_1_1IsSpan.html',1,'opcua::detail']]],
   ['isspan_3c_20span_3c_20t_20_3e_20_3e_15',['IsSpan&lt; Span&lt; T &gt; &gt;',['../structopcua_1_1detail_1_1IsSpan_3_01Span_3_01T_01_4_01_4.html',1,'opcua::detail']]],
-  ['issuedidentitytoken_16',['IssuedIdentityToken',['../classopcua_1_1IssuedIdentityToken.html',1,'opcua']]],
-  ['istypewrapper_17',['IsTypeWrapper',['../structopcua_1_1detail_1_1IsTypeWrapper.html',1,'opcua::detail']]]
+  ['isstaleable_16',['IsStaleable',['../structopcua_1_1detail_1_1IsStaleable.html',1,'opcua::detail']]],
+  ['isstaleable_3c_20t_2c_20std_3a_3avoid_5ft_3c_20decltype_28std_3a_3adeclval_3c_20t_20_3e_28_29_2estale_29_3e_20_3e_17',['IsStaleable&lt; T, std::void_t&lt; decltype(std::declval&lt; T &gt;().stale)&gt; &gt;',['../structopcua_1_1detail_1_1IsStaleable_3_01T_00_01std_1_1void__t_3_01decltype_07std_1_1declval_3_01T_01_4_07_08_8stale_08_4_01_4.html',1,'opcua::detail']]],
+  ['issuedidentitytoken_18',['IssuedIdentityToken',['../classopcua_1_1IssuedIdentityToken.html',1,'opcua']]],
+  ['istypewrapper_19',['IsTypeWrapper',['../structopcua_1_1detail_1_1IsTypeWrapper.html',1,'opcua::detail']]],
+  ['iswrapper_20',['IsWrapper',['../structopcua_1_1detail_1_1IsWrapper.html',1,'opcua::detail']]]
 ];

@@ -1,4 +1,8 @@
 <map id="Subscription service set" name="Subscription service set">
-<area shape="rect" id="Node000002" href="$group__Services.html" title="OPC UA services as free functions." alt="" coords="5,5,83,31"/>
-<area shape="rect" id="Node000001" title="Report notifications to the client." alt="" coords="131,5,308,31"/>
+<area shape="rect" id="Node000003" href="$group__CreateSubscription.html" title="Create subscriptions." alt="" coords="382,5,527,45"/>
+<area shape="rect" id="Node000006" href="$group__DeleteSubscriptions.html" title="Delete subscriptions." alt="" coords="379,69,531,109"/>
+<area shape="rect" id="Node000004" href="$group__ModifySubscription.html" title="Modify subscriptions." alt="" coords="381,133,528,173"/>
+<area shape="rect" id="Node000002" href="$group__Services.html" title="OPC UA services as free functions." alt="" coords="5,109,83,134"/>
+<area shape="rect" id="Node000001" title="Report notifications to the client." alt="" coords="131,109,308,134"/>
+<area shape="rect" id="Node000005" href="$group__SetPublishingMode.html" title="Enable/disable sending of notifications on subscriptions." alt="" coords="356,198,553,223"/>
 </map>

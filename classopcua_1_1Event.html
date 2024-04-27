@@ -24,7 +24,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.12.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.13.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -97,8 +97,8 @@ $(function() {
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae4298e8df81467f7a3b399b85a790831" id="r_ae4298e8df81467f7a3b399b85a790831"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae4298e8df81467f7a3b399b85a790831">Event</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;eventType=<a class="el" href="group__NodeIds.html#ggafdc54bd43cfb42b3b67045de3968aa22acc7ef590a2991f9788e9dfc0bd12d143">ObjectTypeId::BaseEventType</a>)</td></tr>
-<tr class="separator:ae4298e8df81467f7a3b399b85a790831"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89f3f3662caa539af98ec1a04fe31b52" id="r_a89f3f3662caa539af98ec1a04fe31b52"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a89f3f3662caa539af98ec1a04fe31b52">Event</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;<a class="el" href="#a7756cc69a32f4c7a0876cf9ff24d4dab">connection</a>, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;eventType=<a class="el" href="group__NodeIds.html#ggafdc54bd43cfb42b3b67045de3968aa22acc7ef590a2991f9788e9dfc0bd12d143">ObjectTypeId::BaseEventType</a>)</td></tr>
+<tr class="separator:a89f3f3662caa539af98ec1a04fe31b52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af21896132a14aff814cf530dd93f1bcd" id="r_af21896132a14aff814cf530dd93f1bcd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af21896132a14aff814cf530dd93f1bcd">~Event</a> ()</td></tr>
 <tr class="separator:af21896132a14aff814cf530dd93f1bcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa1e42d914ad7af3f1d2ee7251ab31f5" id="r_aaa1e42d914ad7af3f1d2ee7251ab31f5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaa1e42d914ad7af3f1d2ee7251ab31f5">Event</a> (const <a class="el" href="classopcua_1_1Event.html">Event</a> &amp;)=default</td></tr>
@@ -109,10 +109,16 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a0c6e0e324db902a31fc14cd5961d3f4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9bdbb1b15a4dcb56d56e4a1488683ece" id="r_a9bdbb1b15a4dcb56d56e4a1488683ece"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Event.html">Event</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9bdbb1b15a4dcb56d56e4a1488683ece">operator=</a> (<a class="el" href="classopcua_1_1Event.html">Event</a> &amp;&amp;) noexcept=delete</td></tr>
 <tr class="separator:a9bdbb1b15a4dcb56d56e4a1488683ece"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7756cc69a32f4c7a0876cf9ff24d4dab" id="r_a7756cc69a32f4c7a0876cf9ff24d4dab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Server.html">Server</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7756cc69a32f4c7a0876cf9ff24d4dab">connection</a> () noexcept</td></tr>
+<tr class="separator:a7756cc69a32f4c7a0876cf9ff24d4dab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fd145fe55cfe4b22895803a11685741" id="r_a1fd145fe55cfe4b22895803a11685741"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classopcua_1_1Server.html">Server</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1fd145fe55cfe4b22895803a11685741">connection</a> () const noexcept</td></tr>
+<tr class="separator:a1fd145fe55cfe4b22895803a11685741"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4c584be937c1ff25e1ce324be8905d5" id="r_ad4c584be937c1ff25e1ce324be8905d5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Server.html">Server</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad4c584be937c1ff25e1ce324be8905d5">getConnection</a> () noexcept</td></tr>
 <tr class="separator:ad4c584be937c1ff25e1ce324be8905d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4f174c2a62b16edd5921193292f72dc4" id="r_a4f174c2a62b16edd5921193292f72dc4"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classopcua_1_1Server.html">Server</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4f174c2a62b16edd5921193292f72dc4">getConnection</a> () const noexcept</td></tr>
 <tr class="separator:a4f174c2a62b16edd5921193292f72dc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72d585bc3272af0a786a59567005e642" id="r_a72d585bc3272af0a786a59567005e642"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a72d585bc3272af0a786a59567005e642">id</a> () const noexcept</td></tr>
+<tr class="separator:a72d585bc3272af0a786a59567005e642"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7b7e15346b6be9829f05b34aad267ee2" id="r_a7b7e15346b6be9829f05b34aad267ee2"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7b7e15346b6be9829f05b34aad267ee2">getNodeId</a> () const noexcept</td></tr>
 <tr class="separator:a7b7e15346b6be9829f05b34aad267ee2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05d721b75dc0a56e54d7313fe815a2ca" id="r_a05d721b75dc0a56e54d7313fe815a2ca"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Event.html">Event</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a05d721b75dc0a56e54d7313fe815a2ca">writeSourceName</a> (std::string_view sourceName)</td></tr>
@@ -129,8 +135,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:af007f5771dbe022ee167e7d37f09bba8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ae4298e8df81467f7a3b399b85a790831" name="ae4298e8df81467f7a3b399b85a790831"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4298e8df81467f7a3b399b85a790831">&#9670;&#160;</a></span>Event() <span class="overload">[1/3]</span></h2>
+<a id="a89f3f3662caa539af98ec1a04fe31b52" name="a89f3f3662caa539af98ec1a04fe31b52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89f3f3662caa539af98ec1a04fe31b52">&#9670;&#160;</a></span>Event() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -141,7 +147,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">opcua::Event::Event </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Server.html">Server</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>server</em>, </span></td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Server.html">Server</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>connection</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -280,6 +286,64 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a7756cc69a32f4c7a0876cf9ff24d4dab" name="a7756cc69a32f4c7a0876cf9ff24d4dab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7756cc69a32f4c7a0876cf9ff24d4dab">&#9670;&#160;</a></span>connection() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1Server.html">Server</a> &amp; opcua::Event::connection </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the server instance. </p>
+
+<p class="definition">Definition at line <a class="el" href="Event_8h_source.html#l00038">38</a> of file <a class="el" href="Event_8h_source.html">Event.h</a>.</p>
+
+</div>
+</div>
+<a id="a1fd145fe55cfe4b22895803a11685741" name="a1fd145fe55cfe4b22895803a11685741"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fd145fe55cfe4b22895803a11685741">&#9670;&#160;</a></span>connection() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classopcua_1_1Server.html">Server</a> &amp; opcua::Event::connection </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the server instance. </p>
+
+<p class="definition">Definition at line <a class="el" href="Event_8h_source.html#l00043">43</a> of file <a class="el" href="Event_8h_source.html">Event.h</a>.</p>
+
+</div>
+</div>
 <a id="ad4c584be937c1ff25e1ce324be8905d5" name="ad4c584be937c1ff25e1ce324be8905d5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad4c584be937c1ff25e1ce324be8905d5">&#9670;&#160;</a></span>getConnection() <span class="overload">[1/2]</span></h2>
 
@@ -298,12 +362,13 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000002">Deprecated</a></b></dt><dd>Use <a class="el" href="#a7756cc69a32f4c7a0876cf9ff24d4dab" title="Get the server instance.">connection()</a> instead </dd></dl>
 
-<p>Get the server instance. </p>
+<p class="definition">Definition at line <a class="el" href="Event_8h_source.html#l00049">49</a> of file <a class="el" href="Event_8h_source.html">Event.h</a>.</p>
 
 </div>
 </div>
@@ -325,12 +390,42 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000003">Deprecated</a></b></dt><dd>Use <a class="el" href="#a7756cc69a32f4c7a0876cf9ff24d4dab" title="Get the server instance.">connection()</a> instead </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Event_8h_source.html#l00055">55</a> of file <a class="el" href="Event_8h_source.html">Event.h</a>.</p>
+
+</div>
+</div>
+<a id="a72d585bc3272af0a786a59567005e642" name="a72d585bc3272af0a786a59567005e642"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72d585bc3272af0a786a59567005e642">&#9670;&#160;</a></span>id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp; opcua::Event::id </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get the server instance. </p>
+<p>Get the <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> of the underlying node representation. </p>
+
+<p class="definition">Definition at line <a class="el" href="Event_8h_source.html#l00060">60</a> of file <a class="el" href="Event_8h_source.html">Event.h</a>.</p>
 
 </div>
 </div>
@@ -352,12 +447,13 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000004">Deprecated</a></b></dt><dd>Use <a class="el" href="#a72d585bc3272af0a786a59567005e642" title="Get the NodeId of the underlying node representation.">id()</a> instead </dd></dl>
 
-<p>Get the <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a> of the underlying node representation. </p>
+<p class="definition">Definition at line <a class="el" href="Event_8h_source.html#l00066">66</a> of file <a class="el" href="Event_8h_source.html">Event.h</a>.</p>
 
 </div>
 </div>

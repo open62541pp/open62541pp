@@ -1,5 +1,7 @@
 <map id="opcua::ByteString" name="opcua::ByteString">
-<area shape="rect" id="Node000001" title="UA_ByteString wrapper class." alt="" coords="23,108,160,133"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,5,177,60"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="94,74,94,108,89,108,89,74"/>
+<area shape="rect" id="Node000001" title="UA_ByteString wrapper class." alt="" coords="23,181,160,207"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,79,177,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="94,147,94,181,89,181,89,147"/>
+<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap native objects." alt="" coords="10,5,173,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="94,44,94,79,89,79,89,44"/>
 </map>

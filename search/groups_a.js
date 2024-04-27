@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['view_20service_20set_0',['View service set',['../group__View.html',1,'']]]
+  ['translatebrowsepathstonodeids_20service_0',['TranslateBrowsePathsToNodeIds service',['../group__TranslateBrowsePathsToNodeIds.html',1,'']]]
 ];

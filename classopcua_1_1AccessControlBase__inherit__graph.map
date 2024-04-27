@@ -1,5 +1,7 @@
 <map id="opcua::AccessControlBase" name="opcua::AccessControlBase">
-<area shape="rect" id="Node000001" title="Access control base class." alt="" coords="13,5,207,31"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1AccessControlDefault.html" title="Default access control." alt="" coords="5,79,215,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,44,113,79,107,79,107,44"/>
+<area shape="rect" id="Node000001" title="Access control base class." alt="" coords="13,93,207,119"/>
+<area shape="rect" id="Node000003" href="$classopcua_1_1AccessControlDefault.html" title="Default access control." alt="" coords="5,167,215,192"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="113,132,113,167,107,167,107,132"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1PluginAdapter.html" title=" " alt="" coords="25,5,195,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,59,113,93,107,93,107,59"/>
 </map>

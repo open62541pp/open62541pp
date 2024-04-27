@@ -1,12 +1,20 @@
 var searchData=
 [
-  ['server_0',['Server',['../classopcua_1_1Server.html',1,'opcua']]],
-  ['session_1',['Session',['../classopcua_1_1Session.html',1,'opcua']]],
-  ['session_5flist_5fentry_2',['session_list_entry',['open62541/structsession__list__entry.html',0,'']]],
-  ['simpleattributeoperand_3',['SimpleAttributeOperand',['../classopcua_1_1SimpleAttributeOperand.html',1,'opcua']]],
-  ['span_4',['Span',['../classopcua_1_1Span.html',1,'opcua']]],
-  ['statuscode_5',['StatusCode',['../classopcua_1_1StatusCode.html',1,'opcua']]],
-  ['string_6',['String',['../classopcua_1_1String.html',1,'opcua']]],
-  ['subscription_7',['Subscription',['../classopcua_1_1Subscription.html',1,'opcua']]],
-  ['subscriptionparameters_8',['SubscriptionParameters',['../structopcua_1_1services_1_1SubscriptionParameters.html',1,'opcua::services']]]
+  ['scopeexit_0',['ScopeExit',['../classopcua_1_1detail_1_1ScopeExit.html',1,'opcua::detail']]],
+  ['server_1',['Server',['../classopcua_1_1Server.html',1,'opcua']]],
+  ['servercontext_2',['ServerContext',['../structopcua_1_1detail_1_1ServerContext.html',1,'opcua::detail']]],
+  ['session_3',['Session',['../classopcua_1_1Session.html',1,'opcua']]],
+  ['session_5flist_5fentry_4',['session_list_entry',['open62541/structsession__list__entry.html',0,'']]],
+  ['sessionregistry_5',['SessionRegistry',['../structopcua_1_1detail_1_1SessionRegistry.html',1,'opcua::detail']]],
+  ['setpublishingmoderequest_6',['SetPublishingModeRequest',['../classopcua_1_1SetPublishingModeRequest.html',1,'opcua']]],
+  ['setpublishingmoderesponse_7',['SetPublishingModeResponse',['../classopcua_1_1SetPublishingModeResponse.html',1,'opcua']]],
+  ['simpleattributeoperand_8',['SimpleAttributeOperand',['../classopcua_1_1SimpleAttributeOperand.html',1,'opcua']]],
+  ['span_9',['Span',['../classopcua_1_1Span.html',1,'opcua']]],
+  ['staleable_10',['Staleable',['../structopcua_1_1detail_1_1Staleable.html',1,'opcua::detail']]],
+  ['statuscode_11',['StatusCode',['../classopcua_1_1StatusCode.html',1,'opcua']]],
+  ['string_12',['String',['../classopcua_1_1String.html',1,'opcua']]],
+  ['subscription_13',['Subscription',['../classopcua_1_1Subscription.html',1,'opcua']]],
+  ['subscriptioncontext_14',['SubscriptionContext',['../structopcua_1_1services_1_1detail_1_1SubscriptionContext.html',1,'opcua::services::detail']]],
+  ['subscriptionparameters_15',['SubscriptionParameters',['../structopcua_1_1services_1_1SubscriptionParameters.html',1,'opcua::services']]],
+  ['syncoperation_16',['SyncOperation',['../structopcua_1_1services_1_1detail_1_1SyncOperation.html',1,'opcua::services::detail']]]
 ];

@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['nodeids_0',['Generated NodeIds',['../group__NodeIds.html',1,'']]],
-  ['nodemanagement_20service_20set_1',['NodeManagement service set',['../group__NodeManagement.html',1,'']]]
+  ['method_20service_20set_0',['Method service set',['../group__Method.html',1,'']]],
+  ['modifymonitoreditems_20service_1',['ModifyMonitoredItems service',['../group__ModifyMonitoredItems.html',1,'']]],
+  ['modifysubscription_20service_2',['ModifySubscription service',['../group__ModifySubscription.html',1,'']]],
+  ['monitoreditem_20service_20set_3',['MonitoredItem service set',['../group__MonitoredItem.html',1,'']]]
 ];

@@ -1,5 +1,7 @@
 <map id="opcua::UnregisterNodesRequest" name="opcua::UnregisterNodesRequest">
-<area shape="rect" id="Node000001" title="UA_UnregisterNodesRequest wrapper class." alt="" coords="43,108,273,133"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,5,311,60"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,74,161,108,155,108,155,74"/>
+<area shape="rect" id="Node000001" title="UA_UnregisterNodesRequest wrapper class." alt="" coords="43,181,273,207"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,79,311,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="161,147,161,181,155,181,155,147"/>
+<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap native objects." alt="" coords="77,5,239,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="161,44,161,79,155,79,155,44"/>
 </map>

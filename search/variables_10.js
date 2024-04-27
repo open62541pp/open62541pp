@@ -9,7 +9,7 @@ var searchData=
   ['querynextcount_6',['QueryNextCount',['open62541/struct__OpcUa__SessionDiagnosticsDataType.html#a4eb7a8411f6b19206b2ddf2026e5ce5f',0,'_OpcUa_SessionDiagnosticsDataType']]],
   ['queue_7',['queue',['open62541/structUA__MonitoredItem.html#accf1448924276df7c624c0a572a87ff9',0,'UA_MonitoredItem']]],
   ['queue_5ftail_8',['queue_tail',['open62541/structmqtt__message__queue.html#a7b3bbfe183900ced02927b883486d522',0,'mqtt_message_queue']]],
-  ['queuesize_9',['QueueSize',['open62541/struct__OpcUa__MonitoringParameters.html#a3e7bb46cf95a666f429acf24aede495c',0,'_OpcUa_MonitoringParameters']]],
-  ['queuesize_10',['queueSize',['open62541/structUA__MonitoredItem.html#a3e85bcbbbaf831ea4b86d58c055d10a3',0,'UA_MonitoredItem::queueSize'],['open62541/structUA__MonitoringParameters.html#a3d2faace93a35e76c106f7af7be23b9d',0,'UA_MonitoringParameters::queueSize'],['../structopcua_1_1services_1_1MonitoringParameters.html#a6b350c4b5ad90d83745d50957a8e8502',1,'opcua::services::MonitoringParameters::queueSize']]],
+  ['queuesize_9',['queueSize',['open62541/structUA__MonitoredItem.html#a3e85bcbbbaf831ea4b86d58c055d10a3',0,'UA_MonitoredItem::queueSize'],['open62541/structUA__MonitoringParameters.html#a3d2faace93a35e76c106f7af7be23b9d',0,'UA_MonitoringParameters::queueSize'],['../structopcua_1_1services_1_1MonitoringParametersEx.html#a02dd294ccfb0b509958b8aeeff18f5ec',1,'opcua::services::MonitoringParametersEx::queueSize']]],
+  ['queuesize_10',['QueueSize',['open62541/struct__OpcUa__MonitoringParameters.html#a3e7bb46cf95a666f429acf24aede495c',0,'_OpcUa_MonitoringParameters']]],
   ['queuesizelimits_11',['queueSizeLimits',['open62541/structUA__ServerConfig.html#ab156741f91ae1fab57864a116d75e1d4',0,'UA_ServerConfig']]]
 ];

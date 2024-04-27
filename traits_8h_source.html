@@ -24,7 +24,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.12.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.13.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -91,66 +91,83 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceopcua_1_1detail.html">opcua::detail</a> {</div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span>...&gt;</div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="structopcua_1_1detail_1_1AlwaysFalse.html">    8</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1detail_1_1AlwaysFalse.html">AlwaysFalse</a> : std::false_type {};</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Ts&gt;</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#ac0d6cbb3b0e3542b582052e179f65b6d">   11</a></span><span class="keyword">using </span><a class="code hl_typedef" href="namespaceopcua_1_1detail.html#ac0d6cbb3b0e3542b582052e179f65b6d">IsOneOf</a> = std::disjunction&lt;std::is_same&lt;T, Ts&gt;...&gt;;</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="comment"></span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">/// Derive member type from member pointer</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="structopcua_1_1detail_1_1MemberType.html">   15</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1detail_1_1MemberType.html">MemberType</a>;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> C, <span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00018" data-start="{" data-end="};">
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="structopcua_1_1detail_1_1MemberType_3_01T_01C_1_1_5_01_4.html">   18</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1detail_1_1MemberType.html">MemberType</a>&lt;T C::*&gt; {</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="structopcua_1_1detail_1_1MemberType_3_01T_01C_1_1_5_01_4.html#aca57ddf92ff5eb4881e713dd0ea50e80">   19</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="structopcua_1_1detail_1_1MemberType_3_01T_01C_1_1_5_01_4.html#aca57ddf92ff5eb4881e713dd0ea50e80">type</a> = T;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>};</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Ts&gt;</div>
+<div class="foldopen" id="foldopen00008" data-start="{" data-end="};">
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="structopcua_1_1detail_1_1Overload.html">    8</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1detail_1_1Overload.html">Overload</a> : Ts... {</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    <span class="keyword">using </span>Ts::operator()...;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>};</div>
 </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#afdf92dcf178ca83ebdac01c2a0c8f48c">   23</a></span><span class="keyword">using </span><a class="code hl_typedef" href="namespaceopcua_1_1detail.html#afdf92dcf178ca83ebdac01c2a0c8f48c">MemberTypeT</a> = <span class="keyword">typename</span> <a class="code hl_struct" href="structopcua_1_1detail_1_1MemberType.html">MemberType&lt;T&gt;::type</a>;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span>... Ts&gt;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#a8d446417e8ef20d19247adf533543833">   13</a></span><a class="code hl_function" href="namespaceopcua_1_1detail.html#a8d446417e8ef20d19247adf533543833">Overload</a>(Ts...) -&gt; <a class="code hl_struct" href="structopcua_1_1detail_1_1Overload.html">Overload</a>&lt;Ts...&gt;;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span>...&gt;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="structopcua_1_1detail_1_1AlwaysFalse.html">   16</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1detail_1_1AlwaysFalse.html">AlwaysFalse</a> : std::false_type {};</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Ts&gt;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#ac0d6cbb3b0e3542b582052e179f65b6d">   19</a></span><span class="keyword">using </span><a class="code hl_typedef" href="namespaceopcua_1_1detail.html#ac0d6cbb3b0e3542b582052e179f65b6d">IsOneOf</a> = std::disjunction&lt;std::is_same&lt;T, Ts&gt;...&gt;;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="comment"></span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="comment">/// Derive member type from member pointer</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment"></span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="structopcua_1_1detail_1_1MemberType.html">   23</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1detail_1_1MemberType.html">MemberType</a>;</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> = <span class="keywordtype">void</span>&gt;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="structopcua_1_1detail_1_1IsContiguousContainer.html">   26</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1detail_1_1IsContiguousContainer.html">IsContiguousContainer</a> : std::false_type {};</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00029" data-start="{" data-end="};">
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="structopcua_1_1detail_1_1IsContiguousContainer_3_01T_00_01std_1_1void__t_3_01decltype_07std_1_1de9f866bf4ee62095afcf3e91d3b4c0f7.html">   29</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1detail_1_1IsContiguousContainer.html">IsContiguousContainer</a>&lt;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    T,</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    std::void_t&lt;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        decltype(std::declval&lt;T&gt;().data()),</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        decltype(std::declval&lt;T&gt;().size()),</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        decltype(std::declval&lt;T&gt;().begin()),</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        decltype(std::declval&lt;T&gt;().end())&gt;&gt;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    : std::is_pointer&lt;decltype(std::declval&lt;T&gt;().data())&gt;  <span class="comment">// detect proxy iterator of vector&lt;bool&gt;</span></div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>{};</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> C, <span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00026" data-start="{" data-end="};">
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="structopcua_1_1detail_1_1MemberType_3_01T_01C_1_1_5_01_4.html">   26</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1detail_1_1MemberType.html">MemberType</a>&lt;T C::*&gt; {</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="structopcua_1_1detail_1_1MemberType_3_01T_01C_1_1_5_01_4.html#aca57ddf92ff5eb4881e713dd0ea50e80">   27</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="structopcua_1_1detail_1_1MemberType_3_01T_01C_1_1_5_01_4.html#aca57ddf92ff5eb4881e713dd0ea50e80">type</a> = T;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>};</div>
 </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="foldopen" id="foldopen00040" data-start="{" data-end="};">
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="structopcua_1_1detail_1_1IsMutableContainer.html">   40</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1detail_1_1IsMutableContainer.html">IsMutableContainer</a></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    : std::conjunction&lt;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>          std::is_same&lt;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>              decltype(std::declval&lt;T&gt;().begin()),</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>              typename std::remove_reference_t&lt;T&gt;::iterator&gt;,</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>          std::is_same&lt;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>              decltype(std::declval&lt;T&gt;().end()),</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>              typename std::remove_reference_t&lt;T&gt;::iterator&gt;,</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>          std::negation&lt;std::is_same&lt;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>              typename std::remove_reference_t&lt;T&gt;::iterator,</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>              typename std::remove_reference_t&lt;T&gt;::const_iterator&gt;&gt;&gt; {};</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="namespaceopcua_1_1detail.html#afdf92dcf178ca83ebdac01c2a0c8f48c">   31</a></span><span class="keyword">using </span><a class="code hl_typedef" href="namespaceopcua_1_1detail.html#afdf92dcf178ca83ebdac01c2a0c8f48c">MemberTypeT</a> = <span class="keyword">typename</span> <a class="code hl_struct" href="structopcua_1_1detail_1_1MemberType.html">MemberType&lt;T&gt;::type</a>;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> = <span class="keywordtype">void</span>&gt;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="structopcua_1_1detail_1_1IsContiguousContainer.html">   34</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1detail_1_1IsContiguousContainer.html">IsContiguousContainer</a> : std::false_type {};</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00037" data-start="{" data-end="};">
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="structopcua_1_1detail_1_1IsContiguousContainer_3_01T_00_01std_1_1void__t_3_01decltype_07std_1_1de9f866bf4ee62095afcf3e91d3b4c0f7.html">   37</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1detail_1_1IsContiguousContainer.html">IsContiguousContainer</a>&lt;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    T,</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    std::void_t&lt;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        decltype(std::declval&lt;T&gt;().data()),</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        decltype(std::declval&lt;T&gt;().size()),</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        decltype(std::declval&lt;T&gt;().begin()),</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        decltype(std::declval&lt;T&gt;().end())&gt;&gt; : std::true_type {</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="structopcua_1_1detail_1_1IsContiguousContainer_3_01T_00_01std_1_1void__t_3_01decltype_07std_1_1de9f866bf4ee62095afcf3e91d3b4c0f7.html#a5e1a98846a8e46bbf79df7c2f0af1e78">   44</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="structopcua_1_1detail_1_1IsContiguousContainer_3_01T_00_01std_1_1void__t_3_01decltype_07std_1_1de9f866bf4ee62095afcf3e91d3b4c0f7.html#a5e1a98846a8e46bbf79df7c2f0af1e78">value_type</a> = bool;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="comment">// detect vector&lt;bool&gt;::data() void return type</span></div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="structopcua_1_1detail_1_1IsContiguousContainer_3_01T_00_01std_1_1void__t_3_01decltype_07std_1_1de9f866bf4ee62095afcf3e91d3b4c0f7.html#a961dde496a0ba90835da14f5fb583347">   46</a></span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> value = std::is_pointer_v&lt;decltype(std::declval&lt;T&gt;().data())&gt;;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="structopcua_1_1detail_1_1IsContiguousContainer_3_01T_00_01std_1_1void__t_3_01decltype_07std_1_1de9f866bf4ee62095afcf3e91d3b4c0f7.html#a5e8061ebabbba9aa5f9e7399ce0e4d20">   47</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="structopcua_1_1detail_1_1IsContiguousContainer_3_01T_00_01std_1_1void__t_3_01decltype_07std_1_1de9f866bf4ee62095afcf3e91d3b4c0f7.html#a5e8061ebabbba9aa5f9e7399ce0e4d20">type</a> = std::bool_constant&lt;value&gt;;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>};</div>
 </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>}  <span class="comment">// namespace opcua::detail</span></div>
-<div class="ttc" id="anamespaceopcua_1_1detail_html"><div class="ttname"><a href="namespaceopcua_1_1detail.html">opcua::detail</a></div><div class="ttdef"><b>Definition</b> <a href="DataType_8h_source.html#l00094">DataType.h:94</a></div></div>
-<div class="ttc" id="anamespaceopcua_1_1detail_html_ac0d6cbb3b0e3542b582052e179f65b6d"><div class="ttname"><a href="namespaceopcua_1_1detail.html#ac0d6cbb3b0e3542b582052e179f65b6d">opcua::detail::IsOneOf</a></div><div class="ttdeci">std::disjunction&lt; std::is_same&lt; T, Ts &gt;... &gt; IsOneOf</div><div class="ttdef"><b>Definition</b> <a href="#l00011">traits.h:11</a></div></div>
-<div class="ttc" id="anamespaceopcua_1_1detail_html_afdf92dcf178ca83ebdac01c2a0c8f48c"><div class="ttname"><a href="namespaceopcua_1_1detail.html#afdf92dcf178ca83ebdac01c2a0c8f48c">opcua::detail::MemberTypeT</a></div><div class="ttdeci">typename MemberType&lt; T &gt;::type MemberTypeT</div><div class="ttdef"><b>Definition</b> <a href="#l00023">traits.h:23</a></div></div>
-<div class="ttc" id="astructopcua_1_1detail_1_1AlwaysFalse_html"><div class="ttname"><a href="structopcua_1_1detail_1_1AlwaysFalse.html">opcua::detail::AlwaysFalse</a></div><div class="ttdef"><b>Definition</b> <a href="#l00008">traits.h:8</a></div></div>
-<div class="ttc" id="astructopcua_1_1detail_1_1IsContiguousContainer_html"><div class="ttname"><a href="structopcua_1_1detail_1_1IsContiguousContainer.html">opcua::detail::IsContiguousContainer</a></div><div class="ttdef"><b>Definition</b> <a href="#l00026">traits.h:26</a></div></div>
-<div class="ttc" id="astructopcua_1_1detail_1_1IsMutableContainer_html"><div class="ttname"><a href="structopcua_1_1detail_1_1IsMutableContainer.html">opcua::detail::IsMutableContainer</a></div><div class="ttdef"><b>Definition</b> <a href="#l00040">traits.h:50</a></div></div>
-<div class="ttc" id="astructopcua_1_1detail_1_1MemberType_3_01T_01C_1_1_5_01_4_html_aca57ddf92ff5eb4881e713dd0ea50e80"><div class="ttname"><a href="structopcua_1_1detail_1_1MemberType_3_01T_01C_1_1_5_01_4.html#aca57ddf92ff5eb4881e713dd0ea50e80">opcua::detail::MemberType&lt; T C::* &gt;::type</a></div><div class="ttdeci">T type</div><div class="ttdef"><b>Definition</b> <a href="#l00019">traits.h:19</a></div></div>
-<div class="ttc" id="astructopcua_1_1detail_1_1MemberType_html"><div class="ttname"><a href="structopcua_1_1detail_1_1MemberType.html">opcua::detail::MemberType</a></div><div class="ttdoc">Derive member type from member pointer.</div><div class="ttdef"><b>Definition</b> <a href="#l00015">traits.h:15</a></div></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00051" data-start="{" data-end="};">
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="structopcua_1_1detail_1_1IsMutableContainer.html">   51</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structopcua_1_1detail_1_1IsMutableContainer.html">IsMutableContainer</a></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    : std::conjunction&lt;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>          std::is_same&lt;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>              decltype(std::declval&lt;T&gt;().begin()),</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>              typename std::remove_reference_t&lt;T&gt;::iterator&gt;,</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>          std::is_same&lt;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>              decltype(std::declval&lt;T&gt;().end()),</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>              typename std::remove_reference_t&lt;T&gt;::iterator&gt;,</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>          std::negation&lt;std::is_same&lt;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>              typename std::remove_reference_t&lt;T&gt;::iterator,</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>              typename std::remove_reference_t&lt;T&gt;::const_iterator&gt;&gt;&gt; {};</div>
+</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>}  <span class="comment">// namespace opcua::detail</span></div>
+<div class="ttc" id="anamespaceopcua_1_1detail_html"><div class="ttname"><a href="namespaceopcua_1_1detail.html">opcua::detail</a></div><div class="ttdef"><b>Definition</b> <a href="Client_8h_source.html#l00028">Client.h:28</a></div></div>
+<div class="ttc" id="anamespaceopcua_1_1detail_html_a8d446417e8ef20d19247adf533543833"><div class="ttname"><a href="namespaceopcua_1_1detail.html#a8d446417e8ef20d19247adf533543833">opcua::detail::Overload</a></div><div class="ttdeci">Overload(Ts...) -&gt; Overload&lt; Ts... &gt;</div></div>
+<div class="ttc" id="anamespaceopcua_1_1detail_html_ac0d6cbb3b0e3542b582052e179f65b6d"><div class="ttname"><a href="namespaceopcua_1_1detail.html#ac0d6cbb3b0e3542b582052e179f65b6d">opcua::detail::IsOneOf</a></div><div class="ttdeci">std::disjunction&lt; std::is_same&lt; T, Ts &gt;... &gt; IsOneOf</div><div class="ttdef"><b>Definition</b> <a href="#l00019">traits.h:19</a></div></div>
+<div class="ttc" id="anamespaceopcua_1_1detail_html_afdf92dcf178ca83ebdac01c2a0c8f48c"><div class="ttname"><a href="namespaceopcua_1_1detail.html#afdf92dcf178ca83ebdac01c2a0c8f48c">opcua::detail::MemberTypeT</a></div><div class="ttdeci">typename MemberType&lt; T &gt;::type MemberTypeT</div><div class="ttdef"><b>Definition</b> <a href="#l00031">traits.h:31</a></div></div>
+<div class="ttc" id="astructopcua_1_1detail_1_1AlwaysFalse_html"><div class="ttname"><a href="structopcua_1_1detail_1_1AlwaysFalse.html">opcua::detail::AlwaysFalse</a></div><div class="ttdef"><b>Definition</b> <a href="#l00016">traits.h:16</a></div></div>
+<div class="ttc" id="astructopcua_1_1detail_1_1IsContiguousContainer_3_01T_00_01std_1_1void__t_3_01decltype_07std_1_1de9f866bf4ee62095afcf3e91d3b4c0f7_html_a5e1a98846a8e46bbf79df7c2f0af1e78"><div class="ttname"><a href="structopcua_1_1detail_1_1IsContiguousContainer_3_01T_00_01std_1_1void__t_3_01decltype_07std_1_1de9f866bf4ee62095afcf3e91d3b4c0f7.html#a5e1a98846a8e46bbf79df7c2f0af1e78">opcua::detail::IsContiguousContainer&lt; T, std::void_t&lt; decltype(std::declval&lt; T &gt;().data()), decltype(std::declval&lt; T &gt;().size()), decltype(std::declval&lt; T &gt;().begin()), decltype(std::declval&lt; T &gt;().end())&gt; &gt;::value_type</a></div><div class="ttdeci">bool value_type</div><div class="ttdef"><b>Definition</b> <a href="#l00044">traits.h:44</a></div></div>
+<div class="ttc" id="astructopcua_1_1detail_1_1IsContiguousContainer_3_01T_00_01std_1_1void__t_3_01decltype_07std_1_1de9f866bf4ee62095afcf3e91d3b4c0f7_html_a5e8061ebabbba9aa5f9e7399ce0e4d20"><div class="ttname"><a href="structopcua_1_1detail_1_1IsContiguousContainer_3_01T_00_01std_1_1void__t_3_01decltype_07std_1_1de9f866bf4ee62095afcf3e91d3b4c0f7.html#a5e8061ebabbba9aa5f9e7399ce0e4d20">opcua::detail::IsContiguousContainer&lt; T, std::void_t&lt; decltype(std::declval&lt; T &gt;().data()), decltype(std::declval&lt; T &gt;().size()), decltype(std::declval&lt; T &gt;().begin()), decltype(std::declval&lt; T &gt;().end())&gt; &gt;::type</a></div><div class="ttdeci">std::bool_constant&lt; value &gt; type</div><div class="ttdef"><b>Definition</b> <a href="#l00047">traits.h:47</a></div></div>
+<div class="ttc" id="astructopcua_1_1detail_1_1IsContiguousContainer_html"><div class="ttname"><a href="structopcua_1_1detail_1_1IsContiguousContainer.html">opcua::detail::IsContiguousContainer</a></div><div class="ttdef"><b>Definition</b> <a href="#l00034">traits.h:34</a></div></div>
+<div class="ttc" id="astructopcua_1_1detail_1_1IsMutableContainer_html"><div class="ttname"><a href="structopcua_1_1detail_1_1IsMutableContainer.html">opcua::detail::IsMutableContainer</a></div><div class="ttdef"><b>Definition</b> <a href="#l00051">traits.h:61</a></div></div>
+<div class="ttc" id="astructopcua_1_1detail_1_1MemberType_3_01T_01C_1_1_5_01_4_html_aca57ddf92ff5eb4881e713dd0ea50e80"><div class="ttname"><a href="structopcua_1_1detail_1_1MemberType_3_01T_01C_1_1_5_01_4.html#aca57ddf92ff5eb4881e713dd0ea50e80">opcua::detail::MemberType&lt; T C::* &gt;::type</a></div><div class="ttdeci">T type</div><div class="ttdef"><b>Definition</b> <a href="#l00027">traits.h:27</a></div></div>
+<div class="ttc" id="astructopcua_1_1detail_1_1MemberType_html"><div class="ttname"><a href="structopcua_1_1detail_1_1MemberType.html">opcua::detail::MemberType</a></div><div class="ttdoc">Derive member type from member pointer.</div><div class="ttdef"><b>Definition</b> <a href="#l00023">traits.h:23</a></div></div>
+<div class="ttc" id="astructopcua_1_1detail_1_1Overload_html"><div class="ttname"><a href="structopcua_1_1detail_1_1Overload.html">opcua::detail::Overload</a></div><div class="ttdef"><b>Definition</b> <a href="#l00008">traits.h:8</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

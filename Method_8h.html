@@ -24,7 +24,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.12.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.13.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -83,13 +83,23 @@ $(function() {
   <div class="headertitle"><div class="title">Method.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;vector&gt;</code><br />
+<div class="textblock"><code>#include &lt;utility&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &quot;<a class="el" href="Client_8h_source.html">open62541pp/Client.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Config_8h_source.html">open62541pp/Config.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Result_8h_source.html">open62541pp/Result.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="Span_8h_source.html">open62541pp/Span.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="async_8h_source.html">open62541pp/async.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="ClientService_8h_source.html">open62541pp/services/detail/ClientService.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="RequestHandling_8h_source.html">open62541pp/services/detail/RequestHandling.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="ResponseHandling_8h_source.html">open62541pp/services/detail/ResponseHandling.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Composed_8h_source.html">open62541pp/types/Composed.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="NodeId_8h_source.html">open62541pp/types/NodeId.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Variant_8h_source.html">open62541pp/types/Variant.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Method.h:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="Method_8h__incl.svg" width="1459" height="286"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="Method_8h__incl.svg" width="5975" height="990"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
@@ -108,9 +118,17 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga11aae571348f7b856f084f18cab692d8" id="r_ga11aae571348f7b856f084f18cab692d8"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="group__Attribute.html#gad8524562cd27c1e0e393e566ce84aa02">typename</a> <a class="el" href="group__Attribute.html#gad8524562cd27c1e0e393e566ce84aa02">T</a> &gt; </td></tr>
-<tr class="memitem:ga11aae571348f7b856f084f18cab692d8"><td class="memTemplItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classopcua_1_1Variant.html">Variant</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Method.html#ga11aae571348f7b856f084f18cab692d8">opcua::services::call</a> (<a class="el" href="group__Attribute.html#gad8524562cd27c1e0e393e566ce84aa02">T</a> &amp;<a class="el" href="group__Attribute.html#gad8524562cd27c1e0e393e566ce84aa02">serverOrClient</a>, <a class="el" href="group__Attribute.html#gad8524562cd27c1e0e393e566ce84aa02">const</a> <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;objectId, <a class="el" href="group__Attribute.html#gad8524562cd27c1e0e393e566ce84aa02">const</a> <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;methodId, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; <a class="el" href="group__Attribute.html#gad8524562cd27c1e0e393e566ce84aa02">const</a> <a class="el" href="classopcua_1_1Variant.html">Variant</a> &gt; inputArguments)</td></tr>
-<tr class="separator:ga11aae571348f7b856f084f18cab692d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9c90d9c5b4330db47fd3301c4693022b" id="r_ga9c90d9c5b4330db47fd3301c4693022b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1CallResponse.html">CallResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__Call.html#ga9c90d9c5b4330db47fd3301c4693022b">opcua::services::call</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1CallRequest.html">CallRequest</a> &amp;request) noexcept</td></tr>
+<tr class="separator:ga9c90d9c5b4330db47fd3301c4693022b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac14fa503d57ec9fdf8f591296b5332f9" id="r_gac14fa503d57ec9fdf8f591296b5332f9"><td class="memTemplParams" colspan="2">template&lt;typename CompletionToken  = DefaultCompletionToken&gt; </td></tr>
+<tr class="memitem:gac14fa503d57ec9fdf8f591296b5332f9"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Call.html#gac14fa503d57ec9fdf8f591296b5332f9">opcua::services::callAsync</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1CallRequest.html">CallRequest</a> &amp;request, CompletionToken &amp;&amp;token=<a class="el" href="group__Async.html#gade3fccc6425d7e77d67aba7ed3baa15a">DefaultCompletionToken</a>())</td></tr>
+<tr class="separator:gac14fa503d57ec9fdf8f591296b5332f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga510a2c3b6f695ccbb9add97e76963382" id="r_ga510a2c3b6f695ccbb9add97e76963382"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ga510a2c3b6f695ccbb9add97e76963382"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Result.html">Result</a>&lt; std::vector&lt; <a class="el" href="classopcua_1_1Variant.html">Variant</a> &gt; &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Call.html#ga510a2c3b6f695ccbb9add97e76963382">opcua::services::call</a> (T &amp;connection, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;objectId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;methodId, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1Variant.html">Variant</a> &gt; inputArguments) noexcept</td></tr>
+<tr class="separator:ga510a2c3b6f695ccbb9add97e76963382"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad01703e48fd3d7817a7aa588f2a0e840" id="r_gad01703e48fd3d7817a7aa588f2a0e840"><td class="memTemplParams" colspan="2">template&lt;typename CompletionToken  = DefaultCompletionToken&gt; </td></tr>
+<tr class="memitem:gad01703e48fd3d7817a7aa588f2a0e840"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__Call.html#gad01703e48fd3d7817a7aa588f2a0e840">opcua::services::callAsync</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;connection, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;objectId, const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;methodId, <a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const <a class="el" href="classopcua_1_1Variant.html">Variant</a> &gt; inputArguments, CompletionToken &amp;&amp;token=<a class="el" href="group__Async.html#gade3fccc6425d7e77d67aba7ed3baa15a">DefaultCompletionToken</a>())</td></tr>
+<tr class="separator:gad01703e48fd3d7817a7aa588f2a0e840"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 <!-- start footer part -->

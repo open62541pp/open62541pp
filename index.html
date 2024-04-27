@@ -24,7 +24,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.12.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.13.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -92,6 +92,7 @@ $(function() {
 <li><a href="https://open62541pp.github.io/open62541pp/group__TypeWrapper.html" target="_blank">Safe wrapper classes</a> for open62541 <code>UA_*</code> types to prevent memory leaks</li>
 <li>Native open62541 objects can be accessed using the <code>handle()</code> method of the wrapping classes</li>
 <li>Extensible type conversion system to convert arbitrary types to/from native <code>UA_*</code> types</li>
+<li><a href="https://open62541pp.github.io/open62541pp/async_model.html" target="_blank">Asynchronous model</a> similar to (Boost) Asio</li>
 <li>Cross-platform (tested on Windows, Linux and macOS)</li>
 <li>Compatible with all stable open62541 versions ≥ v1.0</li>
 <li>Easy installation and integration with CMake</li>
@@ -99,7 +100,7 @@ $(function() {
 <li>Less hurdle to get started with OPC UA</li>
 </ul>
 <p>The latest stable open62541 release is integrated as a submodule. Depending on the value of the CMake flag <code>UAPP_INTERNAL_OPEN62541</code>, the submodule or an external open62541 installation is used. All open62541 releases since v1.0 are supported and tested in a <a href="https://github.com/open62541pp/open62541pp/actions/workflows/open62541-compatibility.yml" target="_blank">CI pipeline</a> with debug/release builds and as static/dynamic library.</p>
-<p>The project is currently in <code>beta</code> stage but already used in production. Version <a href="https://github.com/open62541pp/open62541pp/milestone/1" target="_blank"><code>v1.0.0</code> is planned for the beginning of 2024</a>. No (major) breaking changes are expected.</p>
+<p>The project is currently in <code>beta</code> stage but already used in production. Version <a href="https://github.com/open62541pp/open62541pp/milestone/1" target="_blank"><code>v1.0.0</code> is planned for 2024</a>. No major breaking changes are expected.</p>
 <h2><a class="anchor" id="autotoc_md1"></a>
 ✍ Examples</h2>
 <p><a href="https://github.com/open62541pp/open62541pp/tree/master/examples" target="_blank">Explore all examples in the <code>examples/</code> directory</a>.</p>
@@ -112,22 +113,22 @@ Server</h3>
 <div class="line"> </div>
 <div class="line">    <span class="comment">// Add a variable node to the Objects node</span></div>
 <div class="line">    <a class="code hl_class" href="classopcua_1_1Node.html">opcua::Node</a> parentNode = server.<a class="code hl_function" href="classopcua_1_1Server.html#a2f0b2aea96301c20affba76c6e441492">getObjectsNode</a>();</div>
-<div class="line">    <a class="code hl_class" href="classopcua_1_1Node.html">opcua::Node</a> myIntegerNode = parentNode.<a class="code hl_function" href="classopcua_1_1Node.html#a475744803b5460be83062d92326bff75">addVariable</a>({1, 1000}, <span class="stringliteral">&quot;TheAnswer&quot;</span>);</div>
+<div class="line">    <a class="code hl_class" href="classopcua_1_1Node.html">opcua::Node</a> myIntegerNode = parentNode.<a class="code hl_function" href="classopcua_1_1Node.html#ad7fab8b5a5060a46b62efcfb3980910a">addVariable</a>({1, 1000}, <span class="stringliteral">&quot;TheAnswer&quot;</span>);</div>
 <div class="line">    <span class="comment">// Write some node attributes</span></div>
-<div class="line">    myIntegerNode.<a class="code hl_function" href="classopcua_1_1Node.html#a5a700d1fd37fb563652d712c6da61de9">writeDisplayName</a>({<span class="stringliteral">&quot;en-US&quot;</span>, <span class="stringliteral">&quot;The Answer&quot;</span>})</div>
-<div class="line">        .<a class="code hl_function" href="group__Attribute.html#gad8524562cd27c1e0e393e566ce84aa02">writeDataType</a>(<a class="code hl_enumvalue" href="group__NodeIds.html#gga5d7e0b8d020dc1893a646f9ea8ae780aac06129f6e6e15c09328365e553f1dc31">opcua::DataTypeId::Int32</a>)</div>
+<div class="line">    myIntegerNode.<a class="code hl_function" href="classopcua_1_1Node.html#a255bd46ebe862010229fe7498d02ba61">writeDisplayName</a>({<span class="stringliteral">&quot;en-US&quot;</span>, <span class="stringliteral">&quot;The Answer&quot;</span>})</div>
+<div class="line">        .<a class="code hl_function" href="group__Write.html#gabdd0fbb128b97289c2ffdaec39ac77e5">writeDataType</a>(<a class="code hl_enumvalue" href="group__NodeIds.html#gga5d7e0b8d020dc1893a646f9ea8ae780aac06129f6e6e15c09328365e553f1dc31">opcua::DataTypeId::Int32</a>)</div>
 <div class="line">        .writeValueScalar(42);</div>
 <div class="line"> </div>
 <div class="line">    server.<a class="code hl_function" href="classopcua_1_1Server.html#a7346a714c85e2d99fc8bc9fd1dd31d6d">run</a>();</div>
 <div class="line">}</div>
-<div class="ttc" id="aclassopcua_1_1Node_html"><div class="ttname"><a href="classopcua_1_1Node.html">opcua::Node</a></div><div class="ttdoc">High-level node class to access node attribute, browse and populate address space.</div><div class="ttdef"><b>Definition</b> <a href="Node_8h_source.html#l00041">Node.h:41</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Node_html_a475744803b5460be83062d92326bff75"><div class="ttname"><a href="classopcua_1_1Node.html#a475744803b5460be83062d92326bff75">opcua::Node::addVariable</a></div><div class="ttdeci">Node addVariable(const NodeId &amp;id, std::string_view browseName, const VariableAttributes &amp;attributes={}, const NodeId &amp;variableType=VariableTypeId::BaseDataVariableType, const NodeId &amp;referenceType=ReferenceTypeId::HasComponent)</div><div class="ttdoc">Add variable.</div><div class="ttdef"><b>Definition</b> <a href="Node_8h_source.html#l00101">Node.h:101</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Node_html_a5a700d1fd37fb563652d712c6da61de9"><div class="ttname"><a href="classopcua_1_1Node.html#a5a700d1fd37fb563652d712c6da61de9">opcua::Node::writeDisplayName</a></div><div class="ttdeci">Node &amp; writeDisplayName(const LocalizedText &amp;name)</div><div class="ttdoc">Write the DisplayName attribute of a node.</div><div class="ttdef"><b>Definition</b> <a href="Node_8h_source.html#l00473">Node.h:473</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Server_html"><div class="ttname"><a href="classopcua_1_1Server.html">opcua::Server</a></div><div class="ttdoc">High-level server class.</div><div class="ttdef"><b>Definition</b> <a href="Server_8h_source.html#l00039">Server.h:39</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Node_html"><div class="ttname"><a href="classopcua_1_1Node.html">opcua::Node</a></div><div class="ttdoc">High-level node class to access node attribute, browse and populate address space.</div><div class="ttdef"><b>Definition</b> <a href="Node_8h_source.html#l00042">Node.h:42</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Node_html_a255bd46ebe862010229fe7498d02ba61"><div class="ttname"><a href="classopcua_1_1Node.html#a255bd46ebe862010229fe7498d02ba61">opcua::Node::writeDisplayName</a></div><div class="ttdeci">Node &amp; writeDisplayName(const LocalizedText &amp;name)</div><div class="ttdoc">Write the AttributeId::DisplayName attribute of a node.</div><div class="ttdef"><b>Definition</b> <a href="Node_8h_source.html#l00483">Node.h:483</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Node_html_ad7fab8b5a5060a46b62efcfb3980910a"><div class="ttname"><a href="classopcua_1_1Node.html#ad7fab8b5a5060a46b62efcfb3980910a">opcua::Node::addVariable</a></div><div class="ttdeci">Node addVariable(const NodeId &amp;id, std::string_view browseName, const VariableAttributes &amp;attributes={}, const NodeId &amp;variableType=VariableTypeId::BaseDataVariableType, const NodeId &amp;referenceType=ReferenceTypeId::HasComponent)</div><div class="ttdoc">Add variable.</div><div class="ttdef"><b>Definition</b> <a href="Node_8h_source.html#l00120">Node.h:120</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Server_html"><div class="ttname"><a href="classopcua_1_1Server.html">opcua::Server</a></div><div class="ttdoc">High-level server class.</div><div class="ttdef"><b>Definition</b> <a href="Server_8h_source.html#l00061">Server.h:61</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Server_html_a2f0b2aea96301c20affba76c6e441492"><div class="ttname"><a href="classopcua_1_1Server.html#a2f0b2aea96301c20affba76c6e441492">opcua::Server::getObjectsNode</a></div><div class="ttdeci">Node&lt; Server &gt; getObjectsNode()</div></div>
 <div class="ttc" id="aclassopcua_1_1Server_html_a7346a714c85e2d99fc8bc9fd1dd31d6d"><div class="ttname"><a href="classopcua_1_1Server.html#a7346a714c85e2d99fc8bc9fd1dd31d6d">opcua::Server::run</a></div><div class="ttdeci">void run()</div><div class="ttdoc">Run the server's main loop. This method will block until Server::stop is called.</div></div>
-<div class="ttc" id="agroup__Attribute_html_gad8524562cd27c1e0e393e566ce84aa02"><div class="ttname"><a href="group__Attribute.html#gad8524562cd27c1e0e393e566ce84aa02">opcua::services::writeDataType</a></div><div class="ttdeci">void writeDataType(T &amp;serverOrClient, const NodeId &amp;id, const NodeId &amp;typeId)</div><div class="ttdoc">Write the DataType attribute of a variable (type) node.</div><div class="ttdef"><b>Definition</b> <a href="Attribute_8h_source.html#l00441">Attribute.h:441</a></div></div>
 <div class="ttc" id="agroup__NodeIds_html_gga5d7e0b8d020dc1893a646f9ea8ae780aac06129f6e6e15c09328365e553f1dc31"><div class="ttname"><a href="group__NodeIds.html#gga5d7e0b8d020dc1893a646f9ea8ae780aac06129f6e6e15c09328365e553f1dc31">opcua::DataTypeId::Int32</a></div><div class="ttdeci">@ Int32</div></div>
+<div class="ttc" id="agroup__Write_html_gabdd0fbb128b97289c2ffdaec39ac77e5"><div class="ttname"><a href="group__Write.html#gabdd0fbb128b97289c2ffdaec39ac77e5">opcua::services::writeDataType</a></div><div class="ttdeci">Result&lt; void &gt; writeDataType(T &amp;connection, const NodeId &amp;id, const NodeId &amp;dataType) noexcept</div><div class="ttdoc">Write the AttributeId::DataType attribute of a node.</div><div class="ttdef"><b>Definition</b> <a href="Attribute__highlevel_8h_source.html#l00731">Attribute_highlevel.h:731</a></div></div>
 <div class="ttc" id="aopen62541pp_8h_html"><div class="ttname"><a href="open62541pp_8h.html">open62541pp.h</a></div></div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md3"></a>
 Client</h3>
@@ -140,16 +141,16 @@ Client</h3>
 <div class="line">    client.<a class="code hl_function" href="classopcua_1_1Client.html#a6dbd84c74a6214369470379a355555ab">connect</a>(<span class="stringliteral">&quot;opc.tcp://localhost:4840&quot;</span>);</div>
 <div class="line"> </div>
 <div class="line">    <a class="code hl_class" href="classopcua_1_1Node.html">opcua::Node</a> node = client.<a class="code hl_function" href="classopcua_1_1Client.html#a7bef4f1e154507040d175ca40f317ff8">getNode</a>(<a class="code hl_enumvalue" href="group__NodeIds.html#ggab93e889b7152d5a78a993070276d1a70a0d8ba6d48210c58515c100ffcdc9b1b2">opcua::VariableId::Server_ServerStatus_CurrentTime</a>);</div>
-<div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> dt = node.<a class="code hl_function" href="classopcua_1_1Node.html#abdbbefd6dd9ac0d96a4c22a71a6d643a">readValueScalar</a>&lt;<a class="code hl_class" href="classopcua_1_1DateTime.html">opcua::DateTime</a>&gt;();</div>
+<div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> dt = node.<a class="code hl_function" href="classopcua_1_1Node.html#a846a2a3e80817ea7ea62f58f733716f3">readValueScalar</a>&lt;<a class="code hl_class" href="classopcua_1_1DateTime.html">opcua::DateTime</a>&gt;();</div>
 <div class="line"> </div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Server date (UTC): &quot;</span> &lt;&lt; dt.<a class="code hl_function" href="classopcua_1_1DateTime.html#adc058b53ee4123c5ea3be4bba633cb2a">format</a>(<span class="stringliteral">&quot;%Y-%m-%d %H:%M:%S&quot;</span>) &lt;&lt; std::endl;</div>
 <div class="line">}</div>
-<div class="ttc" id="aclassopcua_1_1Client_html"><div class="ttname"><a href="classopcua_1_1Client.html">opcua::Client</a></div><div class="ttdoc">High-level client class.</div><div class="ttdef"><b>Definition</b> <a href="Client_8h_source.html#l00040">Client.h:40</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Client_html"><div class="ttname"><a href="classopcua_1_1Client.html">opcua::Client</a></div><div class="ttdoc">High-level client class.</div><div class="ttdef"><b>Definition</b> <a href="Client_8h_source.html#l00060">Client.h:60</a></div></div>
 <div class="ttc" id="aclassopcua_1_1Client_html_a6dbd84c74a6214369470379a355555ab"><div class="ttname"><a href="classopcua_1_1Client.html#a6dbd84c74a6214369470379a355555ab">opcua::Client::connect</a></div><div class="ttdeci">void connect(std::string_view endpointUrl)</div><div class="ttdoc">Connect to the selected server.</div></div>
 <div class="ttc" id="aclassopcua_1_1Client_html_a7bef4f1e154507040d175ca40f317ff8"><div class="ttname"><a href="classopcua_1_1Client.html#a7bef4f1e154507040d175ca40f317ff8">opcua::Client::getNode</a></div><div class="ttdeci">Node&lt; Client &gt; getNode(NodeId id)</div></div>
 <div class="ttc" id="aclassopcua_1_1DateTime_html"><div class="ttname"><a href="classopcua_1_1DateTime.html">opcua::DateTime</a></div><div class="ttdoc">UA_DateTime wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="DateTime_8h_source.html#l00023">DateTime.h:23</a></div></div>
 <div class="ttc" id="aclassopcua_1_1DateTime_html_adc058b53ee4123c5ea3be4bba633cb2a"><div class="ttname"><a href="classopcua_1_1DateTime.html#adc058b53ee4123c5ea3be4bba633cb2a">opcua::DateTime::format</a></div><div class="ttdeci">std::string format(std::string_view format, bool localtime=false) const</div><div class="ttdoc">Convert to string with given format (same format codes as strftime).</div></div>
-<div class="ttc" id="aclassopcua_1_1Node_html_abdbbefd6dd9ac0d96a4c22a71a6d643a"><div class="ttname"><a href="classopcua_1_1Node.html#abdbbefd6dd9ac0d96a4c22a71a6d643a">opcua::Node::readValueScalar</a></div><div class="ttdeci">T readValueScalar()</div><div class="ttdoc">Read scalar value from variable node.</div><div class="ttdef"><b>Definition</b> <a href="Node_8h_source.html#l00410">Node.h:410</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Node_html_a846a2a3e80817ea7ea62f58f733716f3"><div class="ttname"><a href="classopcua_1_1Node.html#a846a2a3e80817ea7ea62f58f733716f3">opcua::Node::readValueScalar</a></div><div class="ttdeci">T readValueScalar()</div><div class="ttdoc">Read scalar value from variable node.</div><div class="ttdef"><b>Definition</b> <a href="Node_8h_source.html#l00421">Node.h:421</a></div></div>
 <div class="ttc" id="agroup__NodeIds_html_ggab93e889b7152d5a78a993070276d1a70a0d8ba6d48210c58515c100ffcdc9b1b2"><div class="ttname"><a href="group__NodeIds.html#ggab93e889b7152d5a78a993070276d1a70a0d8ba6d48210c58515c100ffcdc9b1b2">opcua::VariableId::Server_ServerStatus_CurrentTime</a></div><div class="ttdeci">@ Server_ServerStatus_CurrentTime</div></div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md4"></a>
 ⇆ Type conversion</h2>
@@ -168,10 +169,10 @@ Client</h3>
 <div class="line"> </div>
 <div class="line"><span class="comment">// will compile</span></div>
 <div class="line">var.<a class="code hl_function" href="classopcua_1_1Variant.html#a787f981c8cbd8048b090b64e7aea9ee2">setScalarCopy</a>(str);</div>
-<div class="ttc" id="aclassopcua_1_1Variant_html"><div class="ttname"><a href="classopcua_1_1Variant.html">opcua::Variant</a></div><div class="ttdoc">UA_Variant wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="Variant_8h_source.html#l00048">Variant.h:48</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Variant_html_a3715e61166916a10146ea6a704e1dc49"><div class="ttname"><a href="classopcua_1_1Variant.html#a3715e61166916a10146ea6a704e1dc49">opcua::Variant::setArrayCopy</a></div><div class="ttdeci">void setArrayCopy(const ArrayLike &amp;array)</div><div class="ttdoc">Copy array to variant.</div><div class="ttdef"><b>Definition</b> <a href="Variant_8h_source.html#l00298">Variant.h:298</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Variant_html_a787f981c8cbd8048b090b64e7aea9ee2"><div class="ttname"><a href="classopcua_1_1Variant.html#a787f981c8cbd8048b090b64e7aea9ee2">opcua::Variant::setScalarCopy</a></div><div class="ttdeci">void setScalarCopy(const T &amp;value)</div><div class="ttdoc">Copy scalar value to variant.</div><div class="ttdef"><b>Definition</b> <a href="Variant_8h_source.html#l00253">Variant.h:253</a></div></div>
-<div class="ttc" id="aclassopcua_1_1Variant_html_a7e3a2d65d098b7ef39d775044ca80a0b"><div class="ttname"><a href="classopcua_1_1Variant.html#a7e3a2d65d098b7ef39d775044ca80a0b">opcua::Variant::setScalar</a></div><div class="ttdeci">void setScalar(T &amp;value) noexcept</div><div class="ttdoc">Assign scalar value to variant (no copy).</div><div class="ttdef"><b>Definition</b> <a href="Variant_8h_source.html#l00240">Variant.h:240</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html"><div class="ttname"><a href="classopcua_1_1Variant.html">opcua::Variant</a></div><div class="ttdoc">UA_Variant wrapper class.</div><div class="ttdef"><b>Definition</b> <a href="Variant_8h_source.html#l00046">Variant.h:46</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html_a3715e61166916a10146ea6a704e1dc49"><div class="ttname"><a href="classopcua_1_1Variant.html#a3715e61166916a10146ea6a704e1dc49">opcua::Variant::setArrayCopy</a></div><div class="ttdeci">void setArrayCopy(const ArrayLike &amp;array)</div><div class="ttdoc">Copy array to variant.</div><div class="ttdef"><b>Definition</b> <a href="Variant_8h_source.html#l00360">Variant.h:360</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html_a787f981c8cbd8048b090b64e7aea9ee2"><div class="ttname"><a href="classopcua_1_1Variant.html#a787f981c8cbd8048b090b64e7aea9ee2">opcua::Variant::setScalarCopy</a></div><div class="ttdeci">void setScalarCopy(const T &amp;value)</div><div class="ttdoc">Copy scalar value to variant.</div><div class="ttdef"><b>Definition</b> <a href="Variant_8h_source.html#l00315">Variant.h:315</a></div></div>
+<div class="ttc" id="aclassopcua_1_1Variant_html_a7e3a2d65d098b7ef39d775044ca80a0b"><div class="ttname"><a href="classopcua_1_1Variant.html#a7e3a2d65d098b7ef39d775044ca80a0b">opcua::Variant::setScalar</a></div><div class="ttdeci">void setScalar(T &amp;value) noexcept</div><div class="ttdoc">Assign scalar value to variant (no copy).</div><div class="ttdef"><b>Definition</b> <a href="Variant_8h_source.html#l00302">Variant.h:302</a></div></div>
 </div><!-- fragment --><p>You can add template specializations to add conversions for arbitrary types:</p>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceopcua.html">opcua</a> {</div>
 <div class="line"> </div>
@@ -185,13 +186,13 @@ Client</h3>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line">}  <span class="comment">// namespace opcua</span></div>
-<div class="ttc" id="anamespaceopcua_html"><div class="ttname"><a href="namespaceopcua.html">opcua</a></div><div class="ttdef"><b>Definition</b> <a href="AccessControl_8h_source.html#l00013">AccessControl.h:13</a></div></div>
+<div class="ttc" id="anamespaceopcua_html"><div class="ttname"><a href="namespaceopcua.html">opcua</a></div><div class="ttdef"><b>Definition</b> <a href="AccessControl_8h_source.html#l00015">AccessControl.h:15</a></div></div>
 <div class="ttc" id="atypes_8h_html_ac31865e6fcb9a042b5eaf5a5bd4ed30d"><div class="ttname"><a href="open62541/types_8h.html#ac31865e6fcb9a042b5eaf5a5bd4ed30d">UA_Byte</a></div><div class="ttdeci">uint8_t UA_Byte</div></div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md5"></a>
 Type map of built-in types</h3>
 <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Type Enum <code><a class="el" href="namespaceopcua.html#a83669427d4f4639c57ec0b499c5fdc10" title="Built-in types.">opcua::Type</a></code>   </th><th class="markdownTableHeadNone">Type   </th><th class="markdownTableHeadNone">Typedef   </th><th class="markdownTableHeadNone">Wrapper   </th><th class="markdownTableHeadNone">Conversions    </th></tr>
+<th class="markdownTableHeadNone">Type   </th><th class="markdownTableHeadNone">Type open62541   </th><th class="markdownTableHeadNone">Typedef   </th><th class="markdownTableHeadNone">Wrapper   </th><th class="markdownTableHeadNone">Conversions    </th></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Boolean   </td><td class="markdownTableBodyNone"><code>UA_Boolean</code>   </td><td class="markdownTableBodyNone"><code>bool</code>   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowEven">
@@ -271,6 +272,14 @@ Integrate as a pre-compiled library</h3>
 <div class="fragment"><div class="line">find_package(open62541pp CONFIG REQUIRED)</div>
 <div class="line">target_link_libraries(myexecutable PRIVATE open62541pp::open62541pp)</div>
 </div><!-- fragment --><h3><a class="anchor" id="autotoc_md9"></a>
+Integrate via package managers</h3>
+<p>The library is available through the following package managers:</p>
+<ul>
+<li><p class="startli"><a href="https://vcpkg.io" target="_blank"><b>vcpkg</b></a>: Please refer to the <a href="https://vcpkg.io/en/getting-started" target="_blank">vcpkg documentation</a> how to use it within your project. You can easily use vcpkg to build and install open62541pp:</p>
+<div class="fragment"><div class="line">vcpkg install open62541pp</div>
+</div><!-- fragment --></li>
+</ul>
+<h3><a class="anchor" id="autotoc_md10"></a>
 Build and install</h3>
 <div class="fragment"><div class="line"># clone repository</div>
 <div class="line">git clone --recursive https://github.com/open62541pp/open62541pp.git</div>
@@ -279,25 +288,22 @@ Build and install</h3>
 <div class="line"># build</div>
 <div class="line">mkdir build</div>
 <div class="line">cd build</div>
-<div class="line">cmake -DCMAKE_BUILD_TYPE=Debug -DUAPP_BUILD_EXAMPLES=ON -DUAPP_BUILD_TESTS=ON ..</div>
-<div class="line">cmake --build .</div>
+<div class="line">cmake -DCMAKE_BUILD_TYPE=Release -DUAPP_BUILD_EXAMPLES=ON -DUAPP_BUILD_TESTS=ON ..</div>
+<div class="line">cmake --build .                   # single-configuration generator like Make or Ninja</div>
+<div class="line">cmake --build . --config Release  # multi-configuration generator like Visual Studio, Xcode</div>
 <div class="line"> </div>
 <div class="line"># run tests</div>
 <div class="line">ctest --output-on-failure</div>
 <div class="line"> </div>
-<div class="line"># generate coverage reports (text or html) with UAPP_ENABLE_COVERAGE option enabled</div>
-<div class="line">cmake --build . --target open62541pp_coverage_report</div>
-<div class="line">cmake --build . --target open62541pp_coverage_report_html</div>
-<div class="line"> </div>
 <div class="line"># install to system</div>
 <div class="line">cmake --install .</div>
-</div><!-- fragment --><h3><a class="anchor" id="autotoc_md10"></a>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md11"></a>
 Dependencies</h3>
 <ul>
 <li><a href="https://github.com/open62541/open62541" target="_blank">open62541</a> as integrated submodule or external dependency</li>
 <li><a href="https://github.com/doctest/doctest" target="_blank">doctest</a> for tests as integrated submodule</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md11"></a>
+<h2><a class="anchor" id="autotoc_md12"></a>
 🤝 Contribute</h2>
 <p>Contributions and feature requests are very welcome. Please have a look at the <a href="https://github.com/open62541pp/open62541pp/blob/master/CONTRIBUTING.md" target="_blank">contribution guidelines</a>. </p>
 </div></div><!-- PageDoc -->

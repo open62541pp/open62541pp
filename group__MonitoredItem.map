@@ -1,4 +1,9 @@
 <map id="MonitoredItem service set" name="MonitoredItem service set">
-<area shape="rect" id="Node000001" title="Subscribe to data and events." alt="" coords="131,5,324,31"/>
-<area shape="rect" id="Node000002" href="$group__Services.html" title="OPC UA services as free functions." alt="" coords="5,5,83,31"/>
+<area shape="rect" id="Node000003" href="$group__CreateMonitoredItems.html" title="Create and add a monitored item to a subscription." alt="" coords="388,5,556,45"/>
+<area shape="rect" id="Node000007" href="$group__DeleteMonitoredItems.html" title="Delete a monitored items from subscriptions." alt="" coords="388,69,556,109"/>
+<area shape="rect" id="Node000004" href="$group__ModifyMonitoredItems.html" title="Modify a monitored items of a subscription." alt="" coords="387,133,557,173"/>
+<area shape="rect" id="Node000001" title="Subscribe to data and events." alt="" coords="131,141,324,166"/>
+<area shape="rect" id="Node000005" href="$group__SetMonitoringMode.html" title="Set the monitoring mode of a monitored items." alt="" coords="372,198,572,223"/>
+<area shape="rect" id="Node000006" href="$group__SetTriggering.html" title="Create and delete triggering links for a triggering item." alt="" coords="393,247,551,273"/>
+<area shape="rect" id="Node000002" href="$group__Services.html" title="OPC UA services as free functions." alt="" coords="5,141,83,166"/>
 </map>

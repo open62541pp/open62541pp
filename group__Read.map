@@ -1,0 +1,4 @@
+<map id="Read service" name="Read service">
+<area shape="rect" id="Node000002" href="$group__Attribute.html" title="Read and write node attributes." alt="" coords="5,5,160,31"/>
+<area shape="rect" id="Node000001" title="This service is used to read attributes of nodes." alt="" coords="208,5,315,31"/>
+</map>

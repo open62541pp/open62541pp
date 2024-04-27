@@ -24,7 +24,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.12.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.13.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -84,13 +84,16 @@ $(function() {
 <p>This is the complete list of members for <a class="el" href="classopcua_1_1Session.html">opcua::Session</a>, including all inherited members.</p>
 <table class="directory">
   <tr class="even"><td class="entry"><a class="el" href="classopcua_1_1Session.html#aaabe21d666a063b2b4a753fd2831b60e">close</a>()</td><td class="entry"><a class="el" href="classopcua_1_1Session.html">opcua::Session</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classopcua_1_1Session.html#a8922af144f9d49c2544be8cbf325e34a">connection</a>() noexcept</td><td class="entry"><a class="el" href="classopcua_1_1Session.html">opcua::Session</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classopcua_1_1Session.html#a6ca3e1e75f0d8e54e629fdfc6c34ae83">connection</a>() const noexcept</td><td class="entry"><a class="el" href="classopcua_1_1Session.html">opcua::Session</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classopcua_1_1Session.html#ae39b29659ac821354ce4bb24233f2b87">deleteSessionAttribute</a>(const QualifiedName &amp;key)</td><td class="entry"><a class="el" href="classopcua_1_1Session.html">opcua::Session</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classopcua_1_1Session.html#aad6b1c24bf9a32a9833c21fefd92009b">getConnection</a>() noexcept</td><td class="entry"><a class="el" href="classopcua_1_1Session.html">opcua::Session</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classopcua_1_1Session.html#a56bdd8aabd2a062734a620a5d08da688">getConnection</a>() const noexcept</td><td class="entry"><a class="el" href="classopcua_1_1Session.html">opcua::Session</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classopcua_1_1Session.html#aad6b1c24bf9a32a9833c21fefd92009b">getConnection</a>() noexcept</td><td class="entry"><a class="el" href="classopcua_1_1Session.html">opcua::Session</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classopcua_1_1Session.html#a56bdd8aabd2a062734a620a5d08da688">getConnection</a>() const noexcept</td><td class="entry"><a class="el" href="classopcua_1_1Session.html">opcua::Session</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classopcua_1_1Session.html#a72211283db8536005f89cfdf06d39402">getSessionAttribute</a>(const QualifiedName &amp;key)</td><td class="entry"><a class="el" href="classopcua_1_1Session.html">opcua::Session</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classopcua_1_1Session.html#ad7412b913dff226964d0d06b0b956ecf">getSessionId</a>() const noexcept</td><td class="entry"><a class="el" href="classopcua_1_1Session.html">opcua::Session</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classopcua_1_1Session.html#aebf3ad9831f9825b37711e3e43c0baaf">Session</a>(Server &amp;server, NodeId sessionId) noexcept</td><td class="entry"><a class="el" href="classopcua_1_1Session.html">opcua::Session</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classopcua_1_1Session.html#a39106e290ce13536e6f36a129109ce0c">setSessionAttribute</a>(const QualifiedName &amp;key, const Variant &amp;value)</td><td class="entry"><a class="el" href="classopcua_1_1Session.html">opcua::Session</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classopcua_1_1Session.html#ad7412b913dff226964d0d06b0b956ecf">getSessionId</a>() const noexcept</td><td class="entry"><a class="el" href="classopcua_1_1Session.html">opcua::Session</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classopcua_1_1Session.html#a4bc254d40dffad4631819325be9ffec4">id</a>() const noexcept</td><td class="entry"><a class="el" href="classopcua_1_1Session.html">opcua::Session</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classopcua_1_1Session.html#a4a2ab4a25f6ec8b80b43fa1e59eb9093">Session</a>(Server &amp;connection, NodeId sessionId) noexcept</td><td class="entry"><a class="el" href="classopcua_1_1Session.html">opcua::Session</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classopcua_1_1Session.html#a39106e290ce13536e6f36a129109ce0c">setSessionAttribute</a>(const QualifiedName &amp;key, const Variant &amp;value)</td><td class="entry"><a class="el" href="classopcua_1_1Session.html">opcua::Session</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

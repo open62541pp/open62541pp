@@ -1,0 +1,7 @@
+<map id="opcua::detail::Staleable" name="opcua::detail::Staleable">
+<area shape="rect" id="Node000001" title="Object that can mark itself as stale (to be removed)." alt="" coords="5,45,180,70"/>
+<area shape="rect" id="Node000002" href="$structopcua_1_1services_1_1detail_1_1MonitoredItemContext.html" title=" " alt="" coords="228,5,405,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="193,40,228,35,228,41,194,46"/>
+<area shape="rect" id="Node000003" href="$structopcua_1_1services_1_1detail_1_1SubscriptionContext.html" title=" " alt="" coords="233,69,401,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="194,69,233,75,232,80,193,74"/>
+</map>

@@ -1,0 +1,17 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,191,124,216"/>
+<area shape="rect" id="Node000001" href="$structopcua_1_1IsBitmaskEnum.html" title="Trait to define an enum (class) as a bitmask and allow bitwise operations." alt="" coords="172,5,381,31"/>
+<area shape="poly" id="edge219_Node000000_Node000001" title=" " alt="" coords="73,177,88,146,109,109,136,72,170,41,195,28,198,33,174,46,140,76,113,112,93,148,78,179"/>
+<area shape="rect" id="Node000002" href="$structopcua_1_1detail_1_1AlwaysFalse.html" title=" " alt="" coords="179,55,374,95"/>
+<area shape="poly" id="edge220_Node000000_Node000002" title=" " alt="" coords="84,178,122,141,171,105,196,93,198,98,173,110,126,145,88,182"/>
+<area shape="rect" id="Node000003" href="$structopcua_1_1detail_1_1IsContiguousContainer.html" title=" " alt="" coords="177,119,376,159"/>
+<area shape="poly" id="edge221_Node000000_Node000003" title=" " alt="" coords="120,184,209,157,210,162,121,189"/>
+<area shape="rect" id="Node000004" href="$structopcua_1_1detail_1_1IsConvertibleType.html" title=" " alt="" coords="177,183,377,223"/>
+<area shape="poly" id="edge222_Node000000_Node000004" title=" " alt="" coords="138,201,176,201,176,206,138,206"/>
+<area shape="rect" id="Node000005" href="$structopcua_1_1detail_1_1IsRegisteredType.html" title=" " alt="" coords="179,247,374,287"/>
+<area shape="poly" id="edge223_Node000000_Node000005" title=" " alt="" coords="121,218,210,245,209,250,120,223"/>
+<area shape="rect" id="Node000006" href="$structopcua_1_1detail_1_1IsSpan.html" title=" " alt="" coords="198,311,355,351"/>
+<area shape="poly" id="edge224_Node000000_Node000006" title=" " alt="" coords="88,225,126,262,173,297,199,309,196,314,171,302,122,266,84,229"/>
+<area shape="rect" id="Node000007" href="$structopcua_1_1detail_1_1IsStaleable.html" title="Check if an object as a boolean stale flag." alt="" coords="183,375,370,415"/>
+<area shape="poly" id="edge225_Node000000_Node000007" title=" " alt="" coords="79,227,114,294,141,330,174,361,194,373,191,378,170,365,137,334,110,297,74,230"/>
+</map>

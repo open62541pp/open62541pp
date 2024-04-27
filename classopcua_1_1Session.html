@@ -24,7 +24,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.12.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.13.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -87,21 +87,27 @@ $(function() {
 <p><code>#include &lt;<a class="el" href="Session_8h_source.html">Session.h</a>&gt;</code></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>High-level session class to manage client sessions. </p>
-<p>Sessions are identified by a server-assigned <code>sessionId</code> (of type <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a>). A session carries attributes in a key-value list. Custom attributes/meta-data can be attached to a session as key-value pairs of <a class="el" href="classopcua_1_1QualifiedName.html" title="UA_QualifiedName wrapper class.">QualifiedName</a> and <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a>.</p>
+<p>Sessions are identified by a server-assigned session id (of type <a class="el" href="classopcua_1_1NodeId.html" title="UA_NodeId wrapper class.">NodeId</a>). A session carries attributes in a key-value list. Custom attributes/meta-data can be attached to a session as key-value pairs of <a class="el" href="classopcua_1_1QualifiedName.html" title="UA_QualifiedName wrapper class.">QualifiedName</a> and <a class="el" href="classopcua_1_1Variant.html" title="UA_Variant wrapper class.">Variant</a>.</p>
 <dl class="section see"><dt>See also</dt><dd><a href="https://reference.opcfoundation.org/Core/Part4/v105/docs/5.6">https://reference.opcfoundation.org/Core/Part4/v105/docs/5.6</a> </dd></dl>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_accesscontrol_8cpp-example.html#_a2">server_accesscontrol.cpp</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="Session_8h_source.html#l00021">21</a> of file <a class="el" href="Session_8h_source.html">Session.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Session_8h_source.html#l00023">23</a> of file <a class="el" href="Session_8h_source.html">Session.h</a>.</p>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aebf3ad9831f9825b37711e3e43c0baaf" id="r_aebf3ad9831f9825b37711e3e43c0baaf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aebf3ad9831f9825b37711e3e43c0baaf">Session</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server, <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> sessionId) noexcept</td></tr>
-<tr class="separator:aebf3ad9831f9825b37711e3e43c0baaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a2ab4a25f6ec8b80b43fa1e59eb9093" id="r_a4a2ab4a25f6ec8b80b43fa1e59eb9093"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4a2ab4a25f6ec8b80b43fa1e59eb9093">Session</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;<a class="el" href="#a8922af144f9d49c2544be8cbf325e34a">connection</a>, <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> sessionId) noexcept</td></tr>
+<tr class="separator:a4a2ab4a25f6ec8b80b43fa1e59eb9093"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8922af144f9d49c2544be8cbf325e34a" id="r_a8922af144f9d49c2544be8cbf325e34a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Server.html">Server</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8922af144f9d49c2544be8cbf325e34a">connection</a> () noexcept</td></tr>
+<tr class="separator:a8922af144f9d49c2544be8cbf325e34a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ca3e1e75f0d8e54e629fdfc6c34ae83" id="r_a6ca3e1e75f0d8e54e629fdfc6c34ae83"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classopcua_1_1Server.html">Server</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6ca3e1e75f0d8e54e629fdfc6c34ae83">connection</a> () const noexcept</td></tr>
+<tr class="separator:a6ca3e1e75f0d8e54e629fdfc6c34ae83"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad6b1c24bf9a32a9833c21fefd92009b" id="r_aad6b1c24bf9a32a9833c21fefd92009b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Server.html">Server</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aad6b1c24bf9a32a9833c21fefd92009b">getConnection</a> () noexcept</td></tr>
 <tr class="separator:aad6b1c24bf9a32a9833c21fefd92009b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a56bdd8aabd2a062734a620a5d08da688" id="r_a56bdd8aabd2a062734a620a5d08da688"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classopcua_1_1Server.html">Server</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a56bdd8aabd2a062734a620a5d08da688">getConnection</a> () const noexcept</td></tr>
 <tr class="separator:a56bdd8aabd2a062734a620a5d08da688"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bc254d40dffad4631819325be9ffec4" id="r_a4bc254d40dffad4631819325be9ffec4"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4bc254d40dffad4631819325be9ffec4">id</a> () const noexcept</td></tr>
+<tr class="separator:a4bc254d40dffad4631819325be9ffec4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7412b913dff226964d0d06b0b956ecf" id="r_ad7412b913dff226964d0d06b0b956ecf"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad7412b913dff226964d0d06b0b956ecf">getSessionId</a> () const noexcept</td></tr>
 <tr class="separator:ad7412b913dff226964d0d06b0b956ecf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72211283db8536005f89cfdf06d39402" id="r_a72211283db8536005f89cfdf06d39402"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Variant.html">Variant</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a72211283db8536005f89cfdf06d39402">getSessionAttribute</a> (const <a class="el" href="classopcua_1_1QualifiedName.html">QualifiedName</a> &amp;key)</td></tr>
@@ -114,8 +120,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aaabe21d666a063b2b4a753fd2831b60e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aebf3ad9831f9825b37711e3e43c0baaf" name="aebf3ad9831f9825b37711e3e43c0baaf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aebf3ad9831f9825b37711e3e43c0baaf">&#9670;&#160;</a></span>Session()</h2>
+<a id="a4a2ab4a25f6ec8b80b43fa1e59eb9093" name="a4a2ab4a25f6ec8b80b43fa1e59eb9093"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a2ab4a25f6ec8b80b43fa1e59eb9093">&#9670;&#160;</a></span>Session()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -126,7 +132,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">opcua::Session::Session </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Server.html">Server</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>server</em>, </span></td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Server.html">Server</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>connection</em>, </span></td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -136,14 +142,74 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="Session_8h_source.html#l00025">25</a> of file <a class="el" href="Session_8h_source.html">Session.h</a>.</p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a8922af144f9d49c2544be8cbf325e34a" name="a8922af144f9d49c2544be8cbf325e34a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8922af144f9d49c2544be8cbf325e34a">&#9670;&#160;</a></span>connection() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1Server.html">Server</a> &amp; opcua::Session::connection </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the server instance. </p>
+
+<p class="definition">Definition at line <a class="el" href="Session_8h_source.html#l00030">30</a> of file <a class="el" href="Session_8h_source.html">Session.h</a>.</p>
+
+</div>
+</div>
+<a id="a6ca3e1e75f0d8e54e629fdfc6c34ae83" name="a6ca3e1e75f0d8e54e629fdfc6c34ae83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ca3e1e75f0d8e54e629fdfc6c34ae83">&#9670;&#160;</a></span>connection() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classopcua_1_1Server.html">Server</a> &amp; opcua::Session::connection </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the server instance. </p>
+
+<p class="definition">Definition at line <a class="el" href="Session_8h_source.html#l00035">35</a> of file <a class="el" href="Session_8h_source.html">Session.h</a>.</p>
+
+</div>
+</div>
 <a id="aad6b1c24bf9a32a9833c21fefd92009b" name="aad6b1c24bf9a32a9833c21fefd92009b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aad6b1c24bf9a32a9833c21fefd92009b">&#9670;&#160;</a></span>getConnection() <span class="overload">[1/2]</span></h2>
 
@@ -162,12 +228,13 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000014">Deprecated</a></b></dt><dd>Use <a class="el" href="#a8922af144f9d49c2544be8cbf325e34a" title="Get the server instance.">connection()</a> instead </dd></dl>
 
-<p>Get the server instance. </p>
+<p class="definition">Definition at line <a class="el" href="Session_8h_source.html#l00041">41</a> of file <a class="el" href="Session_8h_source.html">Session.h</a>.</p>
 
 </div>
 </div>
@@ -189,12 +256,42 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000015">Deprecated</a></b></dt><dd>Use <a class="el" href="#a8922af144f9d49c2544be8cbf325e34a" title="Get the server instance.">connection()</a> instead </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Session_8h_source.html#l00047">47</a> of file <a class="el" href="Session_8h_source.html">Session.h</a>.</p>
+
+</div>
+</div>
+<a id="a4bc254d40dffad4631819325be9ffec4" name="a4bc254d40dffad4631819325be9ffec4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4bc254d40dffad4631819325be9ffec4">&#9670;&#160;</a></span>id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classopcua_1_1NodeId.html">NodeId</a> &amp; opcua::Session::id </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get the server instance. </p>
+<p>Get the session identifier. </p>
+
+<p class="definition">Definition at line <a class="el" href="Session_8h_source.html#l00052">52</a> of file <a class="el" href="Session_8h_source.html">Session.h</a>.</p>
 
 </div>
 </div>
@@ -216,12 +313,13 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000016">Deprecated</a></b></dt><dd>Use <a class="el" href="#a4bc254d40dffad4631819325be9ffec4" title="Get the session identifier.">id()</a> instead </dd></dl>
 
-<p>Get the session identifier. </p>
+<p class="definition">Definition at line <a class="el" href="Session_8h_source.html#l00058">58</a> of file <a class="el" href="Session_8h_source.html">Session.h</a>.</p>
 
 </div>
 </div>
@@ -241,7 +339,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get a session attribute by its key. </p>
-<dl class="section note"><dt>Note</dt><dd>Only supported since open62541 v1.3 </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Supported since open62541 v1.3 </dd></dl>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_accesscontrol_8cpp-example.html#a11">server_accesscontrol.cpp</a>.</dd>
 </dl>
 
@@ -267,7 +365,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Attach a session attribute as a key-value pair. </p>
-<dl class="section note"><dt>Note</dt><dd>Only supported since open62541 v1.3 </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Supported since open62541 v1.3 </dd></dl>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="server_accesscontrol_8cpp-example.html#a8">server_accesscontrol.cpp</a>.</dd>
 </dl>
 
@@ -289,7 +387,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Delete a session attribute by its key. </p>
-<dl class="section note"><dt>Note</dt><dd>Only supported since open62541 v1.3 </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Supported since open62541 v1.3 </dd></dl>
 
 </div>
 </div>
@@ -309,7 +407,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Manually close this session. </p>
-<dl class="section note"><dt>Note</dt><dd>Only supported since open62541 v1.3 </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Supported since open62541 v1.3 </dd></dl>
 
 </div>
 </div>

@@ -24,7 +24,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.12.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.13.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -80,6 +80,7 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">opcua::detail Namespace Reference</div></div>
@@ -89,6 +90,12 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1AlwaysFalse.html">AlwaysFalse</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1ClientContext.html">ClientContext</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1detail_1_1ConnectionBase.html">ConnectionBase</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1detail_1_1ContextMap.html">ContextMap</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1detail_1_1ExceptionCatcher.html">ExceptionCatcher</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -110,11 +117,35 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1IsSpan_3_01Span_3_01T_01_4_01_4.html">IsSpan&lt; Span&lt; T &gt; &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1IsStaleable.html">IsStaleable</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1IsStaleable_3_01T_00_01std_1_1void__t_3_01decltype_07std_1_1declval_3_01T_01_4_07_08_8stale_08_4_01_4.html">IsStaleable&lt; T, std::void_t&lt; decltype(std::declval&lt; T &gt;().stale)&gt; &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1IsTypeWrapper.html">IsTypeWrapper</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1IsWrapper.html">IsWrapper</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1MemberType.html">MemberType</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1MemberType_3_01T_01C_1_1_5_01_4.html">MemberType&lt; T C::* &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1NodeContext.html">NodeContext</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1Overload.html">Overload</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1ResultType.html">ResultType</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1ResultType_3_01BadResult_01_4.html">ResultType&lt; BadResult &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1ResultType_3_01StatusCode_01_4.html">ResultType&lt; StatusCode &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classopcua_1_1detail_1_1ScopeExit.html">ScopeExit</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1ServerContext.html">ServerContext</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1SessionRegistry.html">SessionRegistry</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1Staleable.html">Staleable</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1VariantHandler.html">VariantHandler</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -123,6 +154,8 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1VariantHandler_3_01VariantPolicy_1_1Reference_01_4.html">VariantHandler&lt; VariantPolicy::Reference &gt;</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1VariantHandler_3_01VariantPolicy_1_1ReferenceIfPossible_01_4.html">VariantHandler&lt; VariantPolicy::ReferenceIfPossible &gt;</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structopcua_1_1detail_1_1WrapperConversion.html">WrapperConversion</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
@@ -137,10 +170,29 @@ Typedefs</h2></td></tr>
 <tr class="memitem:ad70007bcf2dc74dad63796f58b4f30b6"><td class="memTemplItemLeft" align="right" valign="top">using&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ad70007bcf2dc74dad63796f58b4f30b6">EnableIfEqualityComparable</a></td></tr>
 <tr class="separator:ad70007bcf2dc74dad63796f58b4f30b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a20e33153f9bdce7da488ae12ee0ebc26" id="r_a20e33153f9bdce7da488ae12ee0ebc26"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a20e33153f9bdce7da488ae12ee0ebc26">ClientState</a> </td></tr>
+<tr class="separator:a20e33153f9bdce7da488ae12ee0ebc26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:afdefd5014eb6cf87a14543b53cec358f" id="r_afdefd5014eb6cf87a14543b53cec358f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceopcua.html#ad9413a25cc79acbae79a9fac66bbcf27">DataTypeMember</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afdefd5014eb6cf87a14543b53cec358f">createDataTypeMember</a> (const char *memberName, const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;memberType, uint8_t padding, bool isArray, bool isOptional) noexcept</td></tr>
-<tr class="separator:afdefd5014eb6cf87a14543b53cec358f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51c646dfe23d85100a7f8d8c6ebc4d3a" id="r_a51c646dfe23d85100a7f8d8c6ebc4d3a"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__ClientConfig.html">UA_ClientConfig</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a51c646dfe23d85100a7f8d8c6ebc4d3a">getConfig</a> (<a class="elRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a> *client) noexcept</td></tr>
+<tr class="separator:a51c646dfe23d85100a7f8d8c6ebc4d3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a160b862a4502af42010d2d23c158ad84" id="r_a160b862a4502af42010d2d23c158ad84"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__ClientConfig.html">UA_ClientConfig</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a160b862a4502af42010d2d23c158ad84">getConfig</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;client) noexcept</td></tr>
+<tr class="separator:a160b862a4502af42010d2d23c158ad84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0ad9a98c32f2b75d15a06549e69aa05" id="r_af0ad9a98c32f2b75d15a06549e69aa05"><td class="memItemLeft" align="right" valign="top">ClientConnection *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af0ad9a98c32f2b75d15a06549e69aa05">getConnection</a> (<a class="elRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a> *client) noexcept</td></tr>
+<tr class="separator:af0ad9a98c32f2b75d15a06549e69aa05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b4e0b247487978c0769df833cd493ed" id="r_a5b4e0b247487978c0769df833cd493ed"><td class="memItemLeft" align="right" valign="top">ClientConnection &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5b4e0b247487978c0769df833cd493ed">getConnection</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;client) noexcept</td></tr>
+<tr class="separator:a5b4e0b247487978c0769df833cd493ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7935eb93c264076a2d34605e5ad6e7f3" id="r_a7935eb93c264076a2d34605e5ad6e7f3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Client.html">Client</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7935eb93c264076a2d34605e5ad6e7f3">getWrapper</a> (<a class="elRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a> *client) noexcept</td></tr>
+<tr class="separator:a7935eb93c264076a2d34605e5ad6e7f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1575bfb8c58ba7ffe1e053a2dbc750b5" id="r_a1575bfb8c58ba7ffe1e053a2dbc750b5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structopcua_1_1detail_1_1ClientContext.html">ClientContext</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1575bfb8c58ba7ffe1e053a2dbc750b5">getContext</a> (<a class="elRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a> *client) noexcept</td></tr>
+<tr class="separator:a1575bfb8c58ba7ffe1e053a2dbc750b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a017b8eb3b179c137cfe1316dd90bad33" id="r_a017b8eb3b179c137cfe1316dd90bad33"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structopcua_1_1detail_1_1ClientContext.html">ClientContext</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a017b8eb3b179c137cfe1316dd90bad33">getContext</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;client) noexcept</td></tr>
+<tr class="separator:a017b8eb3b179c137cfe1316dd90bad33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26e6cc3815fbdff1a063e330004338d7" id="r_a26e6cc3815fbdff1a063e330004338d7"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__DataTypeMember.html">UA_DataTypeMember</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a26e6cc3815fbdff1a063e330004338d7">createDataTypeMember</a> (const char *memberName, const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;memberType, uint8_t padding, bool isArray, bool isOptional) noexcept</td></tr>
+<tr class="separator:a26e6cc3815fbdff1a063e330004338d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa48bf20af106cd14395c4e9425504862" id="r_aa48bf20af106cd14395c4e9425504862"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa48bf20af106cd14395c4e9425504862">createDataType</a> (const char *typeName, <a class="elRef" target="_blank" href="open62541/structUA__NodeId.html">UA_NodeId</a> typeId, <a class="elRef" target="_blank" href="open62541/structUA__NodeId.html">UA_NodeId</a> binaryEncodingId, uint16_t memSize, uint8_t typeKind, bool pointerFree, bool overlayable, uint32_t membersSize, <a class="el" href="namespaceopcua.html#ad9413a25cc79acbae79a9fac66bbcf27">DataTypeMember</a> *members) noexcept</td></tr>
 <tr class="separator:aa48bf20af106cd14395c4e9425504862"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa5aac2b384c5edbd228045f15e2913c5" id="r_aa5aac2b384c5edbd228045f15e2913c5"><td class="memTemplParams" colspan="2">template&lt;auto memberPtr&gt; </td></tr>
@@ -149,14 +201,35 @@ Functions</h2></td></tr>
 <tr class="memitem:ac3b1427a9f12b718c1705276fb398329" id="r_ac3b1427a9f12b718c1705276fb398329"><td class="memTemplParams" colspan="2">template&lt;typename T , typename TMember &gt; </td></tr>
 <tr class="memitem:ac3b1427a9f12b718c1705276fb398329"><td class="memTemplItemLeft" align="right" valign="top">size_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ac3b1427a9f12b718c1705276fb398329">offsetOfMember</a> (TMember T::*member)</td></tr>
 <tr class="separator:ac3b1427a9f12b718c1705276fb398329"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a268817782041ba65de0f2f439f716bc8" id="r_a268817782041ba65de0f2f439f716bc8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1detail_1_1ExceptionCatcher.html">ExceptionCatcher</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a268817782041ba65de0f2f439f716bc8">getExceptionCatcher</a> (ClientContext &amp;context) noexcept</td></tr>
-<tr class="separator:a268817782041ba65de0f2f439f716bc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac6f0fc5ab558b440b8404ccf45b97eb7" id="r_ac6f0fc5ab558b440b8404ccf45b97eb7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1detail_1_1ExceptionCatcher.html">ExceptionCatcher</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac6f0fc5ab558b440b8404ccf45b97eb7">getExceptionCatcher</a> (<a class="el" href="classopcua_1_1Client.html">Client</a> &amp;client) noexcept</td></tr>
-<tr class="separator:ac6f0fc5ab558b440b8404ccf45b97eb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe11aa0f1f91fe7d5e063ec37ca0b0fd" id="r_afe11aa0f1f91fe7d5e063ec37ca0b0fd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1detail_1_1ExceptionCatcher.html">ExceptionCatcher</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afe11aa0f1f91fe7d5e063ec37ca0b0fd">getExceptionCatcher</a> (ServerContext &amp;context) noexcept</td></tr>
-<tr class="separator:afe11aa0f1f91fe7d5e063ec37ca0b0fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a68baaa0dd57127585a682d88af59807d" id="r_a68baaa0dd57127585a682d88af59807d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1detail_1_1ExceptionCatcher.html">ExceptionCatcher</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a68baaa0dd57127585a682d88af59807d">getExceptionCatcher</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server) noexcept</td></tr>
-<tr class="separator:a68baaa0dd57127585a682d88af59807d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1eefaf9c8fbed596779c308657fb2449" id="r_a1eefaf9c8fbed596779c308657fb2449"><td class="memTemplParams" colspan="2">template&lt;typename F , typename... Args&gt; </td></tr>
+<tr class="memitem:a1eefaf9c8fbed596779c308657fb2449"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a1eefaf9c8fbed596779c308657fb2449">tryInvoke</a> (F &amp;&amp;func, Args &amp;&amp;... <a class="elRef" target="_blank" href="open62541/log_8h.html#a17b7d23b263b56363b9cd3364b529284">args</a>) noexcept -&gt; typename <a class="el" href="structopcua_1_1detail_1_1ResultType.html">ResultType</a>&lt; std::invoke_result_t&lt; F, Args... &gt; &gt;<a class="el" href="namespaceopcua.html#a83669427d4f4639c57ec0b499c5fdc10">::Type</a></td></tr>
+<tr class="separator:a1eefaf9c8fbed596779c308657fb2449"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38dda15ba05306cc970dcaa6f198700b" id="r_a38dda15ba05306cc970dcaa6f198700b"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a38dda15ba05306cc970dcaa6f198700b">toNativeString</a> (std::string_view src) noexcept</td></tr>
+<tr class="separator:a38dda15ba05306cc970dcaa6f198700b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0339ee3dcc067c0547be0f20e266aa8f" id="r_a0339ee3dcc067c0547be0f20e266aa8f"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0339ee3dcc067c0547be0f20e266aa8f">allocNativeString</a> (std::string_view src)</td></tr>
+<tr class="separator:a0339ee3dcc067c0547be0f20e266aa8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cde346e0e5ecf66fe61ead69b6ce244" id="r_a3cde346e0e5ecf66fe61ead69b6ce244"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3cde346e0e5ecf66fe61ead69b6ce244">toStringView</a> (const <a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> &amp;src) noexcept</td></tr>
+<tr class="separator:a3cde346e0e5ecf66fe61ead69b6ce244"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab875dad9e8b6ae20d73250943b6df298" id="r_ab875dad9e8b6ae20d73250943b6df298"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab875dad9e8b6ae20d73250943b6df298">toString</a> (const <a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> &amp;src)</td></tr>
+<tr class="separator:ab875dad9e8b6ae20d73250943b6df298"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa61e6eefedf3d5fd392e41bb23525b97" id="r_aa61e6eefedf3d5fd392e41bb23525b97"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa61e6eefedf3d5fd392e41bb23525b97">toString</a> (const char *format, va_list <a class="elRef" target="_blank" href="open62541/log_8h.html#a17b7d23b263b56363b9cd3364b529284">args</a>)</td></tr>
+<tr class="separator:aa61e6eefedf3d5fd392e41bb23525b97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a462c980e788ae8fc793da26ef0ee1433" id="r_a462c980e788ae8fc793da26ef0ee1433"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a462c980e788ae8fc793da26ef0ee1433">toString</a> (const char *format,...)</td></tr>
+<tr class="separator:a462c980e788ae8fc793da26ef0ee1433"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d446417e8ef20d19247adf533543833" id="r_a8d446417e8ef20d19247adf533543833"><td class="memTemplParams" colspan="2">template&lt;typename... Ts&gt; </td></tr>
+<tr class="memitem:a8d446417e8ef20d19247adf533543833"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a8d446417e8ef20d19247adf533543833">Overload</a> (Ts...) -&gt; Overload&lt; Ts... &gt;</td></tr>
+<tr class="separator:a8d446417e8ef20d19247adf533543833"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5f446cc2f5f8982ee7b6b49a4b23d36" id="r_ab5f446cc2f5f8982ee7b6b49a4b23d36"><td class="memTemplParams" colspan="2">template&lt;typename T , typename  = std::enable_if_t&lt;std::is_enum_v&lt;T&gt;&gt;&gt; </td></tr>
+<tr class="memitem:ab5f446cc2f5f8982ee7b6b49a4b23d36"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ab5f446cc2f5f8982ee7b6b49a4b23d36">toNative</a> (T value) noexcept</td></tr>
+<tr class="separator:ab5f446cc2f5f8982ee7b6b49a4b23d36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ceb3dcc7da5e224423f31e8e1d5b604" id="r_a8ceb3dcc7da5e224423f31e8e1d5b604"><td class="memItemLeft" align="right" valign="top">auto&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8ceb3dcc7da5e224423f31e8e1d5b604">toNative</a> (std::string_view value)</td></tr>
+<tr class="separator:a8ceb3dcc7da5e224423f31e8e1d5b604"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27a2b178144d949d5a8712c45d1a210d" id="r_a27a2b178144d949d5a8712c45d1a210d"><td class="memTemplParams" colspan="2">template&lt;typename T , typename  = std::enable_if_t&lt;isWrapper&lt;T&gt;&gt;&gt; </td></tr>
+<tr class="memitem:a27a2b178144d949d5a8712c45d1a210d"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a27a2b178144d949d5a8712c45d1a210d">toNative</a> (T &amp;&amp;value)</td></tr>
+<tr class="separator:a27a2b178144d949d5a8712c45d1a210d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a762c666b9bcda19608623770b96af4c9" id="r_a762c666b9bcda19608623770b96af4c9"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a762c666b9bcda19608623770b96af4c9"><td class="memTemplItemLeft" align="right" valign="top">auto *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a762c666b9bcda19608623770b96af4c9">toNativeArray</a> (<a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const T &gt; array)</td></tr>
+<tr class="separator:a762c666b9bcda19608623770b96af4c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4646000cf6e99b3c6d09915169a33e1e" id="r_a4646000cf6e99b3c6d09915169a33e1e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a4646000cf6e99b3c6d09915169a33e1e"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a4646000cf6e99b3c6d09915169a33e1e">isValidTypeCombination</a> (const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;type)</td></tr>
 <tr class="separator:a4646000cf6e99b3c6d09915169a33e1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -187,37 +260,33 @@ Functions</h2></td></tr>
 <tr class="memitem:a50b7a1a1c56c1311c4365d0a71005cc3" id="r_a50b7a1a1c56c1311c4365d0a71005cc3"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a50b7a1a1c56c1311c4365d0a71005cc3"><td class="memTemplItemLeft" align="right" valign="top">T *&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a50b7a1a1c56c1311c4365d0a71005cc3">copyArray</a> (const T *src, size_t size, const <a class="elRef" target="_blank" href="open62541/structUA__DataType.html">UA_DataType</a> &amp;type)</td></tr>
 <tr class="separator:a50b7a1a1c56c1311c4365d0a71005cc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a38dda15ba05306cc970dcaa6f198700b" id="r_a38dda15ba05306cc970dcaa6f198700b"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a38dda15ba05306cc970dcaa6f198700b">toNativeString</a> (std::string_view src) noexcept</td></tr>
-<tr class="separator:a38dda15ba05306cc970dcaa6f198700b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0339ee3dcc067c0547be0f20e266aa8f" id="r_a0339ee3dcc067c0547be0f20e266aa8f"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0339ee3dcc067c0547be0f20e266aa8f">allocNativeString</a> (std::string_view src)</td></tr>
-<tr class="separator:a0339ee3dcc067c0547be0f20e266aa8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a84b0bf54a7b5af0f9f46b050fbed8ea3" id="r_a84b0bf54a7b5af0f9f46b050fbed8ea3"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a84b0bf54a7b5af0f9f46b050fbed8ea3">isEmpty</a> (const <a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> &amp;value) noexcept</td></tr>
-<tr class="separator:a84b0bf54a7b5af0f9f46b050fbed8ea3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3cde346e0e5ecf66fe61ead69b6ce244" id="r_a3cde346e0e5ecf66fe61ead69b6ce244"><td class="memItemLeft" align="right" valign="top">std::string_view&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3cde346e0e5ecf66fe61ead69b6ce244">toStringView</a> (const <a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> &amp;src) noexcept</td></tr>
-<tr class="separator:a3cde346e0e5ecf66fe61ead69b6ce244"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab875dad9e8b6ae20d73250943b6df298" id="r_ab875dad9e8b6ae20d73250943b6df298"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab875dad9e8b6ae20d73250943b6df298">toString</a> (const <a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> &amp;src)</td></tr>
-<tr class="separator:ab875dad9e8b6ae20d73250943b6df298"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a494f0b1553cf916ba64654a7da0614be" id="r_a494f0b1553cf916ba64654a7da0614be"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a494f0b1553cf916ba64654a7da0614be">isGood</a> (<a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> code) noexcept</td></tr>
 <tr class="separator:a494f0b1553cf916ba64654a7da0614be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a624676834243bca22e6f601e1073e4ef" id="r_a624676834243bca22e6f601e1073e4ef"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a624676834243bca22e6f601e1073e4ef">isUncertain</a> (<a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> code) noexcept</td></tr>
 <tr class="separator:a624676834243bca22e6f601e1073e4ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af614e080b1109e5000aad0f0fb1c2ab9" id="r_af614e080b1109e5000aad0f0fb1c2ab9"><td class="memItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af614e080b1109e5000aad0f0fb1c2ab9">isBad</a> (<a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> code) noexcept</td></tr>
 <tr class="separator:af614e080b1109e5000aad0f0fb1c2ab9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae31d2c1c59eb66c2fcae5c56f2e2c4d4" id="r_ae31d2c1c59eb66c2fcae5c56f2e2c4d4"><td class="memTemplParams" colspan="2">template&lt;typename F , typename... Args&gt; </td></tr>
-<tr class="memitem:ae31d2c1c59eb66c2fcae5c56f2e2c4d4"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ae31d2c1c59eb66c2fcae5c56f2e2c4d4">invokeCatchIgnore</a> (F &amp;&amp;fn, Args &amp;&amp;... <a class="elRef" target="_blank" href="open62541/log_8h.html#a17b7d23b263b56363b9cd3364b529284">args</a>) noexcept</td></tr>
-<tr class="separator:ae31d2c1c59eb66c2fcae5c56f2e2c4d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0b944ce55f73591be83957aff48d51b2" id="r_a0b944ce55f73591be83957aff48d51b2"><td class="memTemplParams" colspan="2">template&lt;typename F , typename... Args&gt; </td></tr>
-<tr class="memitem:a0b944ce55f73591be83957aff48d51b2"><td class="memTemplItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a0b944ce55f73591be83957aff48d51b2">invokeCatchStatus</a> (F &amp;&amp;fn, Args &amp;&amp;... <a class="elRef" target="_blank" href="open62541/log_8h.html#a17b7d23b263b56363b9cd3364b529284">args</a>) noexcept</td></tr>
-<tr class="separator:a0b944ce55f73591be83957aff48d51b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa61a881a92088fa01e02db076d405706" id="r_aa61a881a92088fa01e02db076d405706"><td class="memTemplParams" colspan="2">template&lt;typename T1 , typename T2 &gt; </td></tr>
-<tr class="memitem:aa61a881a92088fa01e02db076d405706"><td class="memTemplItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#aa61a881a92088fa01e02db076d405706">assertIsPointerInterconvertible</a> () noexcept</td></tr>
-<tr class="separator:aa61a881a92088fa01e02db076d405706"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27e45c1fc19db57f057fe185c817b01c" id="r_a27e45c1fc19db57f057fe185c817b01c"><td class="memTemplParams" colspan="2">template&lt;typename WrapperType , typename NativeType &gt; </td></tr>
-<tr class="memitem:a27e45c1fc19db57f057fe185c817b01c"><td class="memTemplItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a27e45c1fc19db57f057fe185c817b01c">assertIsWrappedType</a> () noexcept</td></tr>
-<tr class="separator:a27e45c1fc19db57f057fe185c817b01c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4eedfcef11d3711853d9aeff7c48a23d" id="r_a4eedfcef11d3711853d9aeff7c48a23d"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4eedfcef11d3711853d9aeff7c48a23d">getStatusCode</a> (std::exception_ptr eptr) noexcept</td></tr>
+<tr class="separator:a4eedfcef11d3711853d9aeff7c48a23d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8befd7f636a8d43f7c354ed8a2a22e6c" id="r_a8befd7f636a8d43f7c354ed8a2a22e6c"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__ServerConfig.html">UA_ServerConfig</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8befd7f636a8d43f7c354ed8a2a22e6c">getConfig</a> (<a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> *server) noexcept</td></tr>
+<tr class="separator:a8befd7f636a8d43f7c354ed8a2a22e6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0a4be20790d577d531ec37f81cb7729" id="r_ab0a4be20790d577d531ec37f81cb7729"><td class="memItemLeft" align="right" valign="top"><a class="elRef" target="_blank" href="open62541/structUA__ServerConfig.html">UA_ServerConfig</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab0a4be20790d577d531ec37f81cb7729">getConfig</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server) noexcept</td></tr>
+<tr class="separator:ab0a4be20790d577d531ec37f81cb7729"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae7f3133800ecf4953a41e37a53c3e6c" id="r_aae7f3133800ecf4953a41e37a53c3e6c"><td class="memItemLeft" align="right" valign="top">ServerConnection *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aae7f3133800ecf4953a41e37a53c3e6c">getConnection</a> (<a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> *server) noexcept</td></tr>
+<tr class="separator:aae7f3133800ecf4953a41e37a53c3e6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfa954bda53272801ba18b6560010e49" id="r_adfa954bda53272801ba18b6560010e49"><td class="memItemLeft" align="right" valign="top">ServerConnection &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adfa954bda53272801ba18b6560010e49">getConnection</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server) noexcept</td></tr>
+<tr class="separator:adfa954bda53272801ba18b6560010e49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ed28dd5b65dc2ef772e87a5ccfde854" id="r_a0ed28dd5b65dc2ef772e87a5ccfde854"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classopcua_1_1Server.html">Server</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0ed28dd5b65dc2ef772e87a5ccfde854">getWrapper</a> (<a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> *server) noexcept</td></tr>
+<tr class="separator:a0ed28dd5b65dc2ef772e87a5ccfde854"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61422bbd096142223b16a74af5c6f962" id="r_a61422bbd096142223b16a74af5c6f962"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structopcua_1_1detail_1_1ServerContext.html">ServerContext</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a61422bbd096142223b16a74af5c6f962">getContext</a> (<a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> *server) noexcept</td></tr>
+<tr class="separator:a61422bbd096142223b16a74af5c6f962"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0902f9c9aafa640b75e683aba56a789" id="r_aa0902f9c9aafa640b75e683aba56a789"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structopcua_1_1detail_1_1ServerContext.html">ServerContext</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa0902f9c9aafa640b75e683aba56a789">getContext</a> (<a class="el" href="classopcua_1_1Server.html">Server</a> &amp;server) noexcept</td></tr>
+<tr class="separator:aa0902f9c9aafa640b75e683aba56a789"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
+<tr class="memitem:a15f5a076ed892e14ac830d64364b5186" id="r_a15f5a076ed892e14ac830d64364b5186"><td class="memItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a15f5a076ed892e14ac830d64364b5186">clientStateCount</a> = 4</td></tr>
+<tr class="separator:a15f5a076ed892e14ac830d64364b5186"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2551600f6cb98793afa727b0d98486e9" id="r_a2551600f6cb98793afa727b0d98486e9"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a2551600f6cb98793afa727b0d98486e9"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a2551600f6cb98793afa727b0d98486e9">isPointerFree</a></td></tr>
 <tr class="separator:a2551600f6cb98793afa727b0d98486e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -230,6 +299,9 @@ Variables</h2></td></tr>
 <tr class="memitem:a3077d34846df21697da11bed55cb2252" id="r_a3077d34846df21697da11bed55cb2252"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:a3077d34846df21697da11bed55cb2252"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a3077d34846df21697da11bed55cb2252">isTypeWrapper</a> = <a class="el" href="structopcua_1_1detail_1_1IsTypeWrapper.html">IsTypeWrapper</a>&lt;T&gt;::value</td></tr>
 <tr class="separator:a3077d34846df21697da11bed55cb2252"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73057b05274c24daad4e1a1086aa0c94" id="r_a73057b05274c24daad4e1a1086aa0c94"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:a73057b05274c24daad4e1a1086aa0c94"><td class="memTemplItemLeft" align="right" valign="top">constexpr bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a73057b05274c24daad4e1a1086aa0c94">isWrapper</a> = <a class="el" href="structopcua_1_1detail_1_1IsWrapper.html">IsWrapper</a>&lt;T&gt;::value</td></tr>
+<tr class="separator:a73057b05274c24daad4e1a1086aa0c94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="ac0d6cbb3b0e3542b582052e179f65b6d" name="ac0d6cbb3b0e3542b582052e179f65b6d"></a>
@@ -246,7 +318,7 @@ template&lt;typename T , typename... Ts&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="traits_8h_source.html#l00011">11</a> of file <a class="el" href="traits_8h_source.html">traits.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="traits_8h_source.html#l00019">19</a> of file <a class="el" href="traits_8h_source.html">traits.h</a>.</p>
 
 </div>
 </div>
@@ -264,7 +336,7 @@ template&lt;typename T &gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="traits_8h_source.html#l00023">23</a> of file <a class="el" href="traits_8h_source.html">traits.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="traits_8h_source.html#l00031">31</a> of file <a class="el" href="traits_8h_source.html">traits.h</a>.</p>
 
 </div>
 </div>
@@ -289,9 +361,9 @@ template&lt;typename T , typename U &gt; </div>
 
 </div>
 </div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="afdefd5014eb6cf87a14543b53cec358f" name="afdefd5014eb6cf87a14543b53cec358f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afdefd5014eb6cf87a14543b53cec358f">&#9670;&#160;</a></span>createDataTypeMember()</h2>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="a20e33153f9bdce7da488ae12ee0ebc26" name="a20e33153f9bdce7da488ae12ee0ebc26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20e33153f9bdce7da488ae12ee0ebc26">&#9670;&#160;</a></span>ClientState</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -300,7 +372,215 @@ template&lt;typename T , typename U &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceopcua.html#ad9413a25cc79acbae79a9fac66bbcf27">DataTypeMember</a> opcua::detail::createDataTypeMember </td>
+          <td class="memname">enum class <a class="el" href="#a20e33153f9bdce7da488ae12ee0ebc26">opcua::detail::ClientState</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a20e33153f9bdce7da488ae12ee0ebc26aef70e46fd3bbc21e3e1f0b6815e750c0" name="a20e33153f9bdce7da488ae12ee0ebc26aef70e46fd3bbc21e3e1f0b6815e750c0"></a>Disconnected&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a20e33153f9bdce7da488ae12ee0ebc26a2ec0d16e4ca169baedb9b2d50ec5c6d7" name="a20e33153f9bdce7da488ae12ee0ebc26a2ec0d16e4ca169baedb9b2d50ec5c6d7"></a>Connected&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a20e33153f9bdce7da488ae12ee0ebc26a2e12f49936e5aa33602d1e1887919b73" name="a20e33153f9bdce7da488ae12ee0ebc26a2e12f49936e5aa33602d1e1887919b73"></a>SessionActivated&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a20e33153f9bdce7da488ae12ee0ebc26a3a22f7e4622b1244bab4aacde5350514" name="a20e33153f9bdce7da488ae12ee0ebc26a3a22f7e4622b1244bab4aacde5350514"></a>SessionClosed&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="ClientContext_8h_source.html#l00017">17</a> of file <a class="el" href="ClientContext_8h_source.html">ClientContext.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a51c646dfe23d85100a7f8d8c6ebc4d3a" name="a51c646dfe23d85100a7f8d8c6ebc4d3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51c646dfe23d85100a7f8d8c6ebc4d3a">&#9670;&#160;</a></span>getConfig() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__ClientConfig.html">UA_ClientConfig</a> * opcua::detail::getConfig </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a> *</td>          <td class="paramname"><span class="paramname"><em>client</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a160b862a4502af42010d2d23c158ad84" name="a160b862a4502af42010d2d23c158ad84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a160b862a4502af42010d2d23c158ad84">&#9670;&#160;</a></span>getConfig() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__ClientConfig.html">UA_ClientConfig</a> &amp; opcua::detail::getConfig </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>client</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af0ad9a98c32f2b75d15a06549e69aa05" name="af0ad9a98c32f2b75d15a06549e69aa05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0ad9a98c32f2b75d15a06549e69aa05">&#9670;&#160;</a></span>getConnection() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ClientConnection * opcua::detail::getConnection </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a> *</td>          <td class="paramname"><span class="paramname"><em>client</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5b4e0b247487978c0769df833cd493ed" name="a5b4e0b247487978c0769df833cd493ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b4e0b247487978c0769df833cd493ed">&#9670;&#160;</a></span>getConnection() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ClientConnection &amp; opcua::detail::getConnection </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>client</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7935eb93c264076a2d34605e5ad6e7f3" name="a7935eb93c264076a2d34605e5ad6e7f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7935eb93c264076a2d34605e5ad6e7f3">&#9670;&#160;</a></span>getWrapper() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1Client.html">Client</a> * opcua::detail::getWrapper </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a> *</td>          <td class="paramname"><span class="paramname"><em>client</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1575bfb8c58ba7ffe1e053a2dbc750b5" name="a1575bfb8c58ba7ffe1e053a2dbc750b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1575bfb8c58ba7ffe1e053a2dbc750b5">&#9670;&#160;</a></span>getContext() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structopcua_1_1detail_1_1ClientContext.html">ClientContext</a> * opcua::detail::getContext </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" target="_blank" href="open62541/structUA__Client.html">UA_Client</a> *</td>          <td class="paramname"><span class="paramname"><em>client</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="ClientService_8h_source.html#l00078">opcua::services::detail::AsyncServiceAdapter&lt; Response &gt;::initiate()</a>.</p>
+
+</div>
+</div>
+<a id="a017b8eb3b179c137cfe1316dd90bad33" name="a017b8eb3b179c137cfe1316dd90bad33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a017b8eb3b179c137cfe1316dd90bad33">&#9670;&#160;</a></span>getContext() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structopcua_1_1detail_1_1ClientContext.html">ClientContext</a> &amp; opcua::detail::getContext </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>client</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a26e6cc3815fbdff1a063e330004338d7" name="a26e6cc3815fbdff1a063e330004338d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26e6cc3815fbdff1a063e330004338d7">&#9670;&#160;</a></span>createDataTypeMember()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__DataTypeMember.html">UA_DataTypeMember</a> opcua::detail::createDataTypeMember </td>
           <td>(</td>
           <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>memberName</em>, </span></td>
         </tr>
@@ -332,7 +612,7 @@ template&lt;typename T , typename U &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="DataTypeBuilder_8h_source.html#l00206">opcua::DataTypeBuilder&lt; T, Tag, U &gt;::addField()</a>, and <a class="el" href="DataTypeBuilder_8h_source.html#l00267">opcua::DataTypeBuilder&lt; T, Tag, U &gt;::addUnionField()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="DataTypeBuilder_8h_source.html#l00205">opcua::DataTypeBuilder&lt; T, Tag, U &gt;::addField()</a>, and <a class="el" href="DataTypeBuilder_8h_source.html#l00265">opcua::DataTypeBuilder&lt; T, Tag, U &gt;::addUnionField()</a>.</p>
 
 </div>
 </div>
@@ -425,7 +705,7 @@ template&lt;auto memberPtr&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DataTypeBuilder_8h_source.html#l00020">20</a> of file <a class="el" href="DataTypeBuilder_8h_source.html">DataTypeBuilder.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DataTypeBuilder_8h_source.html#l00019">19</a> of file <a class="el" href="DataTypeBuilder_8h_source.html">DataTypeBuilder.h</a>.</p>
 
 </div>
 </div>
@@ -454,14 +734,52 @@ template&lt;typename T , typename TMember &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DataTypeBuilder_8h_source.html#l00027">27</a> of file <a class="el" href="DataTypeBuilder_8h_source.html">DataTypeBuilder.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DataTypeBuilder_8h_source.html#l00026">26</a> of file <a class="el" href="DataTypeBuilder_8h_source.html">DataTypeBuilder.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="DataTypeBuilder_8h_source.html#l00206">opcua::DataTypeBuilder&lt; T, Tag, U &gt;::addField()</a>, and <a class="el" href="DataTypeBuilder_8h_source.html#l00267">opcua::DataTypeBuilder&lt; T, Tag, U &gt;::addUnionField()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="DataTypeBuilder_8h_source.html#l00205">opcua::DataTypeBuilder&lt; T, Tag, U &gt;::addField()</a>, and <a class="el" href="DataTypeBuilder_8h_source.html#l00265">opcua::DataTypeBuilder&lt; T, Tag, U &gt;::addUnionField()</a>.</p>
 
 </div>
 </div>
-<a id="a268817782041ba65de0f2f439f716bc8" name="a268817782041ba65de0f2f439f716bc8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a268817782041ba65de0f2f439f716bc8">&#9670;&#160;</a></span>getExceptionCatcher() <span class="overload">[1/4]</span></h2>
+<a id="a1eefaf9c8fbed596779c308657fb2449" name="a1eefaf9c8fbed596779c308657fb2449"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1eefaf9c8fbed596779c308657fb2449">&#9670;&#160;</a></span>tryInvoke()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename F , typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto opcua::detail::tryInvoke </td>
+          <td>(</td>
+          <td class="paramtype">F &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>func</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;) -&gt; typename <a class="el" href="structopcua_1_1detail_1_1ResultType.html">ResultType</a>&lt;std::invoke_result_t&lt;F, Args...&gt;&gt;<a class="el" href="namespaceopcua.html#a83669427d4f4639c57ec0b499c5fdc10">::Type</a> </td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Invoke a function and capture its <a class="el" href="classopcua_1_1Result.html" title="The template class Result encapsulates a StatusCode and optionally a value.">Result</a> (value or status code). </p>
+<p>This is especially useful for C-API callbacks, that are executed within the open62541 event loop. </p>
+
+<p class="definition">Definition at line <a class="el" href="result__util_8h_source.html#l00031">31</a> of file <a class="el" href="result__util_8h_source.html">result_util.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="ResponseHandling_8h_source.html#l00077">opcua::services::detail::getOutputArguments()</a>, <a class="el" href="AttributeHandler_8h_source.html#l00181">opcua::services::detail::AttributeHandler&lt; AttributeId::ArrayDimensions &gt;::toDataValue()</a>, <a class="el" href="AttributeHandler_8h_source.html#l00061">opcua::services::detail::AttributeHandlerScalar&lt; T, Enable &gt;::toDataValue()</a>, <a class="el" href="AttributeHandler_8h_source.html#l00035">opcua::services::detail::tryGetArray()</a>, and <a class="el" href="AttributeHandler_8h_source.html#l00030">opcua::services::detail::tryGetScalar()</a>.</p>
+
+</div>
+</div>
+<a id="a38dda15ba05306cc970dcaa6f198700b" name="a38dda15ba05306cc970dcaa6f198700b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38dda15ba05306cc970dcaa6f198700b">&#9670;&#160;</a></span>toNativeString()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -470,9 +788,9 @@ template&lt;typename T , typename TMember &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1detail_1_1ExceptionCatcher.html">ExceptionCatcher</a> &amp; opcua::detail::getExceptionCatcher </td>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> opcua::detail::toNativeString </td>
           <td>(</td>
-          <td class="paramtype">ClientContext &amp;</td>          <td class="paramname"><span class="paramname"><em>context</em></span></td><td>)</td>
+          <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>src</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -483,10 +801,35 @@ template&lt;typename T , typename TMember &gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>Convert std::string_view to <a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> (no copy) </p>
+
+<p class="reference">Referenced by <a class="el" href="NodeManagement_8h_source.html#l00092">opcua::services::addNodeAsync()</a>.</p>
+
 </div>
 </div>
-<a id="ac6f0fc5ab558b440b8404ccf45b97eb7" name="ac6f0fc5ab558b440b8404ccf45b97eb7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac6f0fc5ab558b440b8404ccf45b97eb7">&#9670;&#160;</a></span>getExceptionCatcher() <span class="overload">[2/4]</span></h2>
+<a id="a0339ee3dcc067c0547be0f20e266aa8f" name="a0339ee3dcc067c0547be0f20e266aa8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0339ee3dcc067c0547be0f20e266aa8f">&#9670;&#160;</a></span>allocNativeString()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> opcua::detail::allocNativeString </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>src</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Allocate <a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> from std::string_view. </p>
+
+<p class="reference">Referenced by <a class="el" href="NodeId_8h_source.html#l00206">opcua::ExpandedNodeId::ExpandedNodeId()</a>, <a class="el" href="Builtin_8h_source.html#l00292">opcua::LocalizedText::LocalizedText()</a>, <a class="el" href="NodeId_8h_source.html#l00048">opcua::NodeId::NodeId()</a>, <a class="el" href="Builtin_8h_source.html#l00257">opcua::QualifiedName::QualifiedName()</a>, and <a class="el" href="types__conversion_8h_source.html#l00019">toNative()</a>.</p>
+
+</div>
+</div>
+<a id="a3cde346e0e5ecf66fe61ead69b6ce244" name="a3cde346e0e5ecf66fe61ead69b6ce244"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cde346e0e5ecf66fe61ead69b6ce244">&#9670;&#160;</a></span>toStringView()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -495,23 +838,29 @@ template&lt;typename T , typename TMember &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1detail_1_1ExceptionCatcher.html">ExceptionCatcher</a> &amp; opcua::detail::getExceptionCatcher </td>
+          <td class="memname">std::string_view opcua::detail::toStringView </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Client.html">Client</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>client</em></span></td><td>)</td>
+          <td class="paramtype">const <a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>src</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
+<p>Convert <a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> to std::string_view Can be marked noexcept: <a href="https://stackoverflow.com/a/62061549/9967707">https://stackoverflow.com/a/62061549/9967707</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="string__utils_8h_source.html#l00019">19</a> of file <a class="el" href="string__utils_8h_source.html">string_utils.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Builtin_8h_source.html#l00104">opcua::String::get()</a>, <a class="el" href="Builtin_8h_source.html#l00206">opcua::ByteString::get()</a>, <a class="el" href="Builtin_8h_source.html#l00242">opcua::XmlElement::get()</a>, <a class="el" href="Builtin_8h_source.html#l00297">opcua::LocalizedText::getLocale()</a>, <a class="el" href="Builtin_8h_source.html#l00266">opcua::QualifiedName::getName()</a>, <a class="el" href="NodeId_8h_source.html#l00228">opcua::ExpandedNodeId::getNamespaceUri()</a>, <a class="el" href="Builtin_8h_source.html#l00301">opcua::LocalizedText::getText()</a>, and <a class="el" href="string__utils_8h_source.html#l00027">toString()</a>.</p>
+
 </div>
 </div>
-<a id="afe11aa0f1f91fe7d5e063ec37ca0b0fd" name="afe11aa0f1f91fe7d5e063ec37ca0b0fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe11aa0f1f91fe7d5e063ec37ca0b0fd">&#9670;&#160;</a></span>getExceptionCatcher() <span class="overload">[3/4]</span></h2>
+<a id="ab875dad9e8b6ae20d73250943b6df298" name="ab875dad9e8b6ae20d73250943b6df298"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab875dad9e8b6ae20d73250943b6df298">&#9670;&#160;</a></span>toString() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -520,23 +869,52 @@ template&lt;typename T , typename TMember &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1detail_1_1ExceptionCatcher.html">ExceptionCatcher</a> &amp; opcua::detail::getExceptionCatcher </td>
+          <td class="memname">std::string opcua::detail::toString </td>
           <td>(</td>
-          <td class="paramtype">ServerContext &amp;</td>          <td class="paramname"><span class="paramname"><em>context</em></span></td><td>)</td>
+          <td class="paramtype">const <a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>src</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
+<p>Convert <a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> to std::string. </p>
+
+<p class="definition">Definition at line <a class="el" href="string__utils_8h_source.html#l00027">27</a> of file <a class="el" href="string__utils_8h_source.html">string_utils.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="string__utils_8h_source.html#l00035">toString()</a>.</p>
+
 </div>
 </div>
-<a id="a68baaa0dd57127585a682d88af59807d" name="a68baaa0dd57127585a682d88af59807d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a68baaa0dd57127585a682d88af59807d">&#9670;&#160;</a></span>getExceptionCatcher() <span class="overload">[4/4]</span></h2>
+<a id="aa61e6eefedf3d5fd392e41bb23525b97" name="aa61e6eefedf3d5fd392e41bb23525b97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa61e6eefedf3d5fd392e41bb23525b97">&#9670;&#160;</a></span>toString() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string opcua::detail::toString </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>format</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">va_list</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convert format string with args to std::string. </p>
+
+</div>
+</div>
+<a id="a462c980e788ae8fc793da26ef0ee1433" name="a462c980e788ae8fc793da26ef0ee1433"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a462c980e788ae8fc793da26ef0ee1433">&#9670;&#160;</a></span>toString() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -545,18 +923,159 @@ template&lt;typename T , typename TMember &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classopcua_1_1detail_1_1ExceptionCatcher.html">ExceptionCatcher</a> &amp; opcua::detail::getExceptionCatcher </td>
+          <td class="memname">std::string opcua::detail::toString </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classopcua_1_1Server.html">Server</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>server</em></span></td><td>)</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>format</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>...</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="string__utils_8h_source.html#l00035">35</a> of file <a class="el" href="string__utils_8h_source.html">string_utils.h</a>.</p>
+
+</div>
+</div>
+<a id="a8d446417e8ef20d19247adf533543833" name="a8d446417e8ef20d19247adf533543833"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d446417e8ef20d19247adf533543833">&#9670;&#160;</a></span>Overload()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Ts&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">opcua::detail::Overload </td>
+          <td>(</td>
+          <td class="paramtype">Ts...</td>          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> -&gt;  Overload&lt; Ts... &gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab5f446cc2f5f8982ee7b6b49a4b23d36" name="ab5f446cc2f5f8982ee7b6b49a4b23d36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5f446cc2f5f8982ee7b6b49a4b23d36">&#9670;&#160;</a></span>toNative() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename  = std::enable_if_t&lt;std::is_enum_v&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto opcua::detail::toNative </td>
+          <td>(</td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types__conversion_8h_source.html#l00015">15</a> of file <a class="el" href="types__conversion_8h_source.html">types_conversion.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Composed_8h_source.html#l00117">opcua::RequestHeader::RequestHeader()</a>.</p>
+
+</div>
+</div>
+<a id="a8ceb3dcc7da5e224423f31e8e1d5b604" name="a8ceb3dcc7da5e224423f31e8e1d5b604"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ceb3dcc7da5e224423f31e8e1d5b604">&#9670;&#160;</a></span>toNative() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto opcua::detail::toNative </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types__conversion_8h_source.html#l00019">19</a> of file <a class="el" href="types__conversion_8h_source.html">types_conversion.h</a>.</p>
+
+</div>
+</div>
+<a id="a27a2b178144d949d5a8712c45d1a210d" name="a27a2b178144d949d5a8712c45d1a210d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27a2b178144d949d5a8712c45d1a210d">&#9670;&#160;</a></span>toNative() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , typename  = std::enable_if_t&lt;isWrapper&lt;T&gt;&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto opcua::detail::toNative </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types__conversion_8h_source.html#l00024">24</a> of file <a class="el" href="types__conversion_8h_source.html">types_conversion.h</a>.</p>
+
+</div>
+</div>
+<a id="a762c666b9bcda19608623770b96af4c9" name="a762c666b9bcda19608623770b96af4c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a762c666b9bcda19608623770b96af4c9">&#9670;&#160;</a></span>toNativeArray()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto * opcua::detail::toNativeArray </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Span.html">Span</a>&lt; const T &gt;</td>          <td class="paramname"><span class="paramname"><em>array</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="types__conversion_8h_source.html#l00032">32</a> of file <a class="el" href="types__conversion_8h_source.html">types_conversion.h</a>.</p>
 
 </div>
 </div>
@@ -585,7 +1104,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="helper_8h_source.html#l00037">37</a> of file <a class="el" href="helper_8h_source.html">helper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types__handling_8h_source.html#l00034">34</a> of file <a class="el" href="types__handling_8h_source.html">types_handling.h</a>.</p>
 
 </div>
 </div>
@@ -618,9 +1137,9 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="helper_8h_source.html#l00046">46</a> of file <a class="el" href="helper_8h_source.html">helper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types__handling_8h_source.html#l00043">43</a> of file <a class="el" href="types__handling_8h_source.html">types_handling.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="TypeWrapper_8h_source.html#l00150">opcua::TypeWrapper&lt; T, typeIndex &gt;::clear()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="TypeWrapper_8h_source.html#l00109">opcua::TypeWrapper&lt; T, typeIndex &gt;::clear()</a>.</p>
 
 </div>
 </div>
@@ -653,9 +1172,9 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="helper_8h_source.html#l00054">54</a> of file <a class="el" href="helper_8h_source.html">helper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types__handling_8h_source.html#l00051">51</a> of file <a class="el" href="types__handling_8h_source.html">types_handling.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helper_8h_source.html#l00070">allocateUniquePtr()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="types__handling_8h_source.html#l00067">allocateUniquePtr()</a>.</p>
 
 </div>
 </div>
@@ -684,7 +1203,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="helper_8h_source.html#l00060">60</a> of file <a class="el" href="helper_8h_source.html">helper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types__handling_8h_source.html#l00057">57</a> of file <a class="el" href="types__handling_8h_source.html">types_handling.h</a>.</p>
 
 </div>
 </div>
@@ -713,7 +1232,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="helper_8h_source.html#l00070">70</a> of file <a class="el" href="helper_8h_source.html">helper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types__handling_8h_source.html#l00067">67</a> of file <a class="el" href="types__handling_8h_source.html">types_handling.h</a>.</p>
 
 </div>
 </div>
@@ -746,9 +1265,9 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="helper_8h_source.html#l00076">76</a> of file <a class="el" href="helper_8h_source.html">helper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types__handling_8h_source.html#l00073">73</a> of file <a class="el" href="types__handling_8h_source.html">types_handling.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="TypeWrapper_8h_source.html#l00077">opcua::TypeWrapper&lt; T, typeIndex &gt;::operator=()</a>, and <a class="el" href="TypeWrapper_8h_source.html#l00068">opcua::TypeWrapper&lt; T, typeIndex &gt;::operator=()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="TypeWrapper_8h_source.html#l00065">opcua::TypeWrapper&lt; T, typeIndex &gt;::operator=()</a>, and <a class="el" href="TypeWrapper_8h_source.html#l00056">opcua::TypeWrapper&lt; T, typeIndex &gt;::operator=()</a>.</p>
 
 </div>
 </div>
@@ -786,9 +1305,9 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="helper_8h_source.html#l00090">90</a> of file <a class="el" href="helper_8h_source.html">helper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types__handling_8h_source.html#l00087">87</a> of file <a class="el" href="types__handling_8h_source.html">types_handling.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="helper_8h_source.html#l00106">allocateArrayUniquePtr()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="types__handling_8h_source.html#l00103">allocateArrayUniquePtr()</a>.</p>
 
 </div>
 </div>
@@ -821,7 +1340,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="helper_8h_source.html#l00096">96</a> of file <a class="el" href="helper_8h_source.html">helper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types__handling_8h_source.html#l00093">93</a> of file <a class="el" href="types__handling_8h_source.html">types_handling.h</a>.</p>
 
 </div>
 </div>
@@ -854,7 +1373,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="helper_8h_source.html#l00106">106</a> of file <a class="el" href="helper_8h_source.html">helper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types__handling_8h_source.html#l00103">103</a> of file <a class="el" href="types__handling_8h_source.html">types_handling.h</a>.</p>
 
 </div>
 </div>
@@ -892,144 +1411,9 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="helper_8h_source.html#l00112">112</a> of file <a class="el" href="helper_8h_source.html">helper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types__handling_8h_source.html#l00109">109</a> of file <a class="el" href="types__handling_8h_source.html">types_handling.h</a>.</p>
 
-</div>
-</div>
-<a id="a38dda15ba05306cc970dcaa6f198700b" name="a38dda15ba05306cc970dcaa6f198700b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a38dda15ba05306cc970dcaa6f198700b">&#9670;&#160;</a></span>toNativeString()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> opcua::detail::toNativeString </td>
-          <td>(</td>
-          <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>src</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Convert std::string_view to <a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> (no copy) </p>
-
-</div>
-</div>
-<a id="a0339ee3dcc067c0547be0f20e266aa8f" name="a0339ee3dcc067c0547be0f20e266aa8f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0339ee3dcc067c0547be0f20e266aa8f">&#9670;&#160;</a></span>allocNativeString()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> opcua::detail::allocNativeString </td>
-          <td>(</td>
-          <td class="paramtype">std::string_view</td>          <td class="paramname"><span class="paramname"><em>src</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Allocate <a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> from std::string_view. </p>
-
-</div>
-</div>
-<a id="a84b0bf54a7b5af0f9f46b050fbed8ea3" name="a84b0bf54a7b5af0f9f46b050fbed8ea3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a84b0bf54a7b5af0f9f46b050fbed8ea3">&#9670;&#160;</a></span>isEmpty()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr bool opcua::detail::isEmpty </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Check if <a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> is empty. </p>
-
-<p class="definition">Definition at line <a class="el" href="helper_8h_source.html#l00134">134</a> of file <a class="el" href="helper_8h_source.html">helper.h</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="helper_8h_source.html#l00140">toStringView()</a>.</p>
-
-</div>
-</div>
-<a id="a3cde346e0e5ecf66fe61ead69b6ce244" name="a3cde346e0e5ecf66fe61ead69b6ce244"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3cde346e0e5ecf66fe61ead69b6ce244">&#9670;&#160;</a></span>toStringView()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string_view opcua::detail::toStringView </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>src</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Convert <a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> to std::string_view Can be marked noexcept: <a href="https://stackoverflow.com/a/62061549/9967707">https://stackoverflow.com/a/62061549/9967707</a>. </p>
-
-<p class="definition">Definition at line <a class="el" href="helper_8h_source.html#l00140">140</a> of file <a class="el" href="helper_8h_source.html">helper.h</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="helper_8h_source.html#l00148">toString()</a>.</p>
-
-</div>
-</div>
-<a id="ab875dad9e8b6ae20d73250943b6df298" name="ab875dad9e8b6ae20d73250943b6df298"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab875dad9e8b6ae20d73250943b6df298">&#9670;&#160;</a></span>toString()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string opcua::detail::toString </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>src</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Convert <a class="elRef" target="_blank" href="open62541/structUA__String.html">UA_String</a> to std::string. </p>
-
-<p class="definition">Definition at line <a class="el" href="helper_8h_source.html#l00148">148</a> of file <a class="el" href="helper_8h_source.html">helper.h</a>.</p>
+<p class="reference">Referenced by <a class="el" href="types__conversion_8h_source.html#l00032">toNativeArray()</a>.</p>
 
 </div>
 </div>
@@ -1056,9 +1440,9 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ErrorHandling_8h_source.html#l00055">55</a> of file <a class="el" href="ErrorHandling_8h_source.html">ErrorHandling.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ErrorHandling_8h_source.html#l00053">53</a> of file <a class="el" href="ErrorHandling_8h_source.html">ErrorHandling.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Builtin_8h_source.html#l00064">opcua::StatusCode::isGood()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Builtin_8h_source.html#l00063">opcua::StatusCode::isGood()</a>.</p>
 
 </div>
 </div>
@@ -1085,9 +1469,9 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ErrorHandling_8h_source.html#l00059">59</a> of file <a class="el" href="ErrorHandling_8h_source.html">ErrorHandling.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ErrorHandling_8h_source.html#l00057">57</a> of file <a class="el" href="ErrorHandling_8h_source.html">ErrorHandling.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Builtin_8h_source.html#l00069">opcua::StatusCode::isUncertain()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Builtin_8h_source.html#l00068">opcua::StatusCode::isUncertain()</a>.</p>
 
 </div>
 </div>
@@ -1114,32 +1498,55 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ErrorHandling_8h_source.html#l00063">63</a> of file <a class="el" href="ErrorHandling_8h_source.html">ErrorHandling.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ErrorHandling_8h_source.html#l00061">61</a> of file <a class="el" href="ErrorHandling_8h_source.html">ErrorHandling.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Builtin_8h_source.html#l00074">opcua::StatusCode::isBad()</a>, and <a class="el" href="ErrorHandling_8h_source.html#l00115">opcua::throwIfBad()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Builtin_8h_source.html#l00073">opcua::StatusCode::isBad()</a>, <a class="el" href="ClientService_8h_source.html#l00109">opcua::services::detail::sendRequest()</a>, <a class="el" href="ErrorHandling_8h_source.html#l00086">opcua::throwIfBad()</a>, and <a class="el" href="ResponseHandling_8h_source.html#l00063">opcua::services::detail::toResult()</a>.</p>
 
 </div>
 </div>
-<a id="ae31d2c1c59eb66c2fcae5c56f2e2c4d4" name="ae31d2c1c59eb66c2fcae5c56f2e2c4d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae31d2c1c59eb66c2fcae5c56f2e2c4d4">&#9670;&#160;</a></span>invokeCatchIgnore()</h2>
+<a id="a4eedfcef11d3711853d9aeff7c48a23d" name="a4eedfcef11d3711853d9aeff7c48a23d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4eedfcef11d3711853d9aeff7c48a23d">&#9670;&#160;</a></span>getStatusCode()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename F , typename... Args&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void opcua::detail::invokeCatchIgnore </td>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> opcua::detail::getStatusCode </td>
           <td>(</td>
-          <td class="paramtype">F &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>fn</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">std::exception_ptr</td>          <td class="paramname"><span class="paramname"><em>eptr</em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ErrorHandling_8h_source.html#l00066">66</a> of file <a class="el" href="ErrorHandling_8h_source.html">ErrorHandling.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="result__util_8h_source.html#l00031">tryInvoke()</a>.</p>
+
+</div>
+</div>
+<a id="a8befd7f636a8d43f7c354ed8a2a22e6c" name="a8befd7f636a8d43f7c354ed8a2a22e6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8befd7f636a8d43f7c354ed8a2a22e6c">&#9670;&#160;</a></span>getConfig() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__ServerConfig.html">UA_ServerConfig</a> * opcua::detail::getConfig </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> *</td>          <td class="paramname"><span class="paramname"><em>server</em></span></td><td>)</td>
+          <td></td>
         </tr>
       </table>
   </td>
@@ -1149,33 +1556,22 @@ template&lt;typename F , typename... Args&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Invoke a function (with <code>void</code> return type), catch and ignore exceptions. </p>
-<p>This is especially useful for C-API callbacks, that are executed within the open62541 event loop. </p>
-
-<p class="definition">Definition at line <a class="el" href="ErrorHandling_8h_source.html#l00072">72</a> of file <a class="el" href="ErrorHandling_8h_source.html">ErrorHandling.h</a>.</p>
-
 </div>
 </div>
-<a id="a0b944ce55f73591be83957aff48d51b2" name="a0b944ce55f73591be83957aff48d51b2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0b944ce55f73591be83957aff48d51b2">&#9670;&#160;</a></span>invokeCatchStatus()</h2>
+<a id="ab0a4be20790d577d531ec37f81cb7729" name="ab0a4be20790d577d531ec37f81cb7729"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0a4be20790d577d531ec37f81cb7729">&#9670;&#160;</a></span>getConfig() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename F , typename... Args&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="elRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a> opcua::detail::invokeCatchStatus </td>
+          <td class="memname"><a class="elRef" target="_blank" href="open62541/structUA__ServerConfig.html">UA_ServerConfig</a> &amp; opcua::detail::getConfig </td>
           <td>(</td>
-          <td class="paramtype">F &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>fn</em>, </span></td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Server.html">Server</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>server</em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -1185,72 +1581,158 @@ template&lt;typename F , typename... Args&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Invoke a function (with <code>void</code> or <code>UA_StatusCode</code> return type) and catch exceptions. </p>
-<p>This is especially useful for C-API callbacks, that are executed within the open62541 event loop. If no exception is thrown, the generated status code or <code>UA_STATUSCODE_GOOD</code> is returned. If the exception if of type <a class="el" href="classopcua_1_1BadStatus.html" title="Exception for bad status codes from open62541 UA_STATUSCODE_*.">BadStatus</a>, the underlying status code will be returned. All other exception types will yield <code>UA_STATUSCODE_BADINTERNALERROR</code>. </p>
-
-<p class="definition">Definition at line <a class="el" href="ErrorHandling_8h_source.html#l00090">90</a> of file <a class="el" href="ErrorHandling_8h_source.html">ErrorHandling.h</a>.</p>
-
 </div>
 </div>
-<a id="aa61a881a92088fa01e02db076d405706" name="aa61a881a92088fa01e02db076d405706"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa61a881a92088fa01e02db076d405706">&#9670;&#160;</a></span>assertIsPointerInterconvertible()</h2>
+<a id="aae7f3133800ecf4953a41e37a53c3e6c" name="aae7f3133800ecf4953a41e37a53c3e6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae7f3133800ecf4953a41e37a53c3e6c">&#9670;&#160;</a></span>getConnection() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename T1 , typename T2 &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr void opcua::detail::assertIsPointerInterconvertible </td>
+          <td class="memname">ServerConnection * opcua::detail::getConnection </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td class="paramtype"><a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> *</td>          <td class="paramname"><span class="paramname"><em>server</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00184">184</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
-
 </div>
 </div>
-<a id="a27e45c1fc19db57f057fe185c817b01c" name="a27e45c1fc19db57f057fe185c817b01c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a27e45c1fc19db57f057fe185c817b01c">&#9670;&#160;</a></span>assertIsWrappedType()</h2>
+<a id="adfa954bda53272801ba18b6560010e49" name="adfa954bda53272801ba18b6560010e49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfa954bda53272801ba18b6560010e49">&#9670;&#160;</a></span>getConnection() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename WrapperType , typename NativeType &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr void opcua::detail::assertIsWrappedType </td>
+          <td class="memname">ServerConnection &amp; opcua::detail::getConnection </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Server.html">Server</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>server</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00191">191</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+</div>
+</div>
+<a id="a0ed28dd5b65dc2ef772e87a5ccfde854" name="a0ed28dd5b65dc2ef772e87a5ccfde854"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ed28dd5b65dc2ef772e87a5ccfde854">&#9670;&#160;</a></span>getWrapper() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classopcua_1_1Server.html">Server</a> * opcua::detail::getWrapper </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> *</td>          <td class="paramname"><span class="paramname"><em>server</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a61422bbd096142223b16a74af5c6f962" name="a61422bbd096142223b16a74af5c6f962"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61422bbd096142223b16a74af5c6f962">&#9670;&#160;</a></span>getContext() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structopcua_1_1detail_1_1ServerContext.html">ServerContext</a> * opcua::detail::getContext </td>
+          <td>(</td>
+          <td class="paramtype"><a class="elRef" target="_blank" href="open62541/structUA__Server.html">UA_Server</a> *</td>          <td class="paramname"><span class="paramname"><em>server</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa0902f9c9aafa640b75e683aba56a789" name="aa0902f9c9aafa640b75e683aba56a789"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0902f9c9aafa640b75e683aba56a789">&#9670;&#160;</a></span>getContext() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structopcua_1_1detail_1_1ServerContext.html">ServerContext</a> &amp; opcua::detail::getContext </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classopcua_1_1Server.html">Server</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>server</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
+<a id="a15f5a076ed892e14ac830d64364b5186" name="a15f5a076ed892e14ac830d64364b5186"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15f5a076ed892e14ac830d64364b5186">&#9670;&#160;</a></span>clientStateCount</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr size_t opcua::detail::clientStateCount = 4</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ClientContext_8h_source.html#l00023">23</a> of file <a class="el" href="ClientContext_8h_source.html">ClientContext.h</a>.</p>
+
+</div>
+</div>
 <a id="a2551600f6cb98793afa727b0d98486e9" name="a2551600f6cb98793afa727b0d98486e9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2551600f6cb98793afa727b0d98486e9">&#9670;&#160;</a></span>isPointerFree</h2>
 
@@ -1288,7 +1770,7 @@ template&lt;typename T &gt; </div>
 <div class="line">    <a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#a6cfbce46cf586a305e4c9b9455c37eea">UA_DateTime</a>,</div>
 <div class="line">    <a class="code hl_structRef" target="_blank" href="open62541/structUA__Guid.html">UA_Guid</a>,</div>
 <div class="line">    <a class="code hl_typedefRef" target="_blank" href="open62541/types_8h.html#a8beaefc7873465d6baa54a21634b6ea7">UA_StatusCode</a>&gt;::value</div>
-<div class="ttc" id="anamespaceopcua_1_1detail_html_ac0d6cbb3b0e3542b582052e179f65b6d"><div class="ttname"><a href="#ac0d6cbb3b0e3542b582052e179f65b6d">opcua::detail::IsOneOf</a></div><div class="ttdeci">std::disjunction&lt; std::is_same&lt; T, Ts &gt;... &gt; IsOneOf</div><div class="ttdef"><b>Definition</b> <a href="traits_8h_source.html#l00011">traits.h:11</a></div></div>
+<div class="ttc" id="anamespaceopcua_1_1detail_html_ac0d6cbb3b0e3542b582052e179f65b6d"><div class="ttname"><a href="#ac0d6cbb3b0e3542b582052e179f65b6d">opcua::detail::IsOneOf</a></div><div class="ttdeci">std::disjunction&lt; std::is_same&lt; T, Ts &gt;... &gt; IsOneOf</div><div class="ttdef"><b>Definition</b> <a href="traits_8h_source.html#l00019">traits.h:19</a></div></div>
 <div class="ttc" id="astructUA__Guid_html"><div class="ttname"><a href="open62541/structUA__Guid.html">UA_Guid</a></div></div>
 <div class="ttc" id="atypes_8h_html_a01ce3c3b2fb34ef81c97c313f516004e"><div class="ttname"><a href="open62541/types_8h.html#a01ce3c3b2fb34ef81c97c313f516004e">UA_Int32</a></div><div class="ttdeci">int32_t UA_Int32</div></div>
 <div class="ttc" id="atypes_8h_html_a0a44d61c7e7e9107300c8e477c54bd47"><div class="ttname"><a href="open62541/types_8h.html#a0a44d61c7e7e9107300c8e477c54bd47">UA_Boolean</a></div><div class="ttdeci">_UA_BEGIN_DECLS typedef bool UA_Boolean</div></div>
@@ -1304,7 +1786,7 @@ template&lt;typename T &gt; </div>
 <div class="ttc" id="atypes_8h_html_ad0d8e52a357b7fbe50a0b93a2b688b51"><div class="ttname"><a href="open62541/types_8h.html#ad0d8e52a357b7fbe50a0b93a2b688b51">UA_UInt64</a></div><div class="ttdeci">uint64_t UA_UInt64</div></div>
 <div class="ttc" id="atypes_8h_html_ae5c13df54009d7a3e374bfc594af8059"><div class="ttname"><a href="open62541/types_8h.html#ae5c13df54009d7a3e374bfc594af8059">UA_Int64</a></div><div class="ttdeci">int64_t UA_Int64</div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="helper_8h_source.html#l00019">19</a> of file <a class="el" href="helper_8h_source.html">helper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="types__handling_8h_source.html#l00016">16</a> of file <a class="el" href="types__handling_8h_source.html">types_handling.h</a>.</p>
 
 </div>
 </div>
@@ -1330,7 +1812,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00079">79</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeConverter_8h_source.html#l00078">78</a> of file <a class="el" href="TypeConverter_8h_source.html">TypeConverter.h</a>.</p>
 
 </div>
 </div>
@@ -1356,7 +1838,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeRegistry_8h_source.html#l00043">43</a> of file <a class="el" href="TypeRegistry_8h_source.html">TypeRegistry.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeRegistry_8h_source.html#l00042">42</a> of file <a class="el" href="TypeRegistry_8h_source.html">TypeRegistry.h</a>.</p>
 
 </div>
 </div>
@@ -1382,7 +1864,33 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00175">175</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="TypeWrapper_8h_source.html#l00131">131</a> of file <a class="el" href="TypeWrapper_8h_source.html">TypeWrapper.h</a>.</p>
+
+</div>
+</div>
+<a id="a73057b05274c24daad4e1a1086aa0c94" name="a73057b05274c24daad4e1a1086aa0c94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73057b05274c24daad4e1a1086aa0c94">&#9670;&#160;</a></span>isWrapper</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr bool opcua::detail::isWrapper = <a class="el" href="structopcua_1_1detail_1_1IsWrapper.html">IsWrapper</a>&lt;T&gt;::value</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Wrapper_8h_source.html#l00103">103</a> of file <a class="el" href="Wrapper_8h_source.html">Wrapper.h</a>.</p>
 
 </div>
 </div>
