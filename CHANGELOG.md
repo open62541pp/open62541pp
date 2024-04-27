@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.13.0] - 2024-04-27
+
 ### Added
 
 - Async functions in `services` namespace (client only), adapting the well-proven [asynchronous model of (Boost) Asio](https://think-async.com/asio/asio-1.28.0/doc/asio/overview/model.html) (#111)
@@ -480,7 +482,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial public release
 
-[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.12.0...HEAD
+[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.13.0...HEAD
+[0.13.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.13.0
 [0.12.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.12.0
 [0.11.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.11.0
 [0.10.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.10.0
