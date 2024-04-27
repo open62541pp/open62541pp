@@ -17,7 +17,10 @@ template <typename WrapperType>
 class ConnectionBase {
 public:
     static_assert(sizeof(WrapperType) == sizeof(std::unique_ptr<ConnectionBase>));
-    static_assert(std::is_standard_layout_v<WrapperType>);
+
+    // unique_ptr<T> is standard layout but clang disagrees:
+    // https://github.com/llvm/llvm-project/issues/53021
+    // static_assert(std::is_standard_layout_v<WrapperType>);
 
     ConnectionBase() noexcept
         : connectionPtr_(this) {}
@@ -39,11 +42,11 @@ public:
     }
 
 private:
-    struct NoDelete {
-        constexpr void operator()(ConnectionBase*) noexcept {};
+    struct NoDeleter {
+        constexpr void operator()(ConnectionBase* /* unused */) noexcept {};
     };
 
-    std::unique_ptr<ConnectionBase, NoDelete> connectionPtr_;
+    std::unique_ptr<ConnectionBase, NoDeleter> connectionPtr_;
 };
 
 }  // namespace opcua::detail
