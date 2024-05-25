@@ -7,7 +7,7 @@ on:
 
 jobs:
   test:
-    name: ${{ matrix.config.name }} (${{ matrix.build_type }})
+    name: ${{ matrix.config.name }} (${{ matrix.build_type }}, ${{ matrix.library_type }})
     strategy:
       fail-fast: false
       matrix:
@@ -95,6 +95,10 @@ jobs:
           - Debug
           - Release
 
+        library_type:
+          - static
+          - shared
+
         include:
           - config:
               name: Clang-Tidy
@@ -102,6 +106,7 @@ jobs:
               compiler: clang++
               flags: "-DUAPP_ENABLE_CLANG_TIDY=ON"
             build_type: Debug
+            library_type: static
 
     runs-on: ${{ matrix.config.os }}
     steps:
@@ -114,6 +119,7 @@ jobs:
           cmake -S . -B ./build
           -DCMAKE_CXX_COMPILER=${{ matrix.config.compiler }}
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+          -DBUILD_SHARED_LIBS=${{ matrix.library_type == 'shared' }}
           -DUA_ENABLE_ENCRYPTION=${{ runner.os == 'Windows' && 'OFF' || 'OPENSSL' }}
           -DUA_ENABLE_METHODCALLS=ON
           -DUA_ENABLE_SUBSCRIPTIONS=ON
