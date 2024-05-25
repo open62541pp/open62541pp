@@ -28,7 +28,7 @@ jobs:
           mkdir build
           cd build
           cmake -G Ninja \
-            -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}} \
+            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
             -DBUILD_SHARED_LIBS=${{ matrix.library_type == 'shared' }} \
             ..
           cmake --build .
