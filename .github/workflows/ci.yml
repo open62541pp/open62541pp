@@ -37,7 +37,7 @@ jobs:
             gcov: gcov-12
 
           - name: Linux GCC 13
-            os: ubuntu-22.04
+            os: ubuntu-24.04
             compiler: g++-13
             coverage: true
             gcov: gcov-13
