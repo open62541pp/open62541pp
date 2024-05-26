@@ -31,7 +31,7 @@ jobs:
             gcov: gcov-11
 
           - name: Linux GCC 12
-            os: ubuntu-22.04
+            os: ubuntu-24.04
             compiler: g++-12
             coverage: true
             gcov: gcov-12
@@ -41,6 +41,12 @@ jobs:
             compiler: g++-13
             coverage: true
             gcov: gcov-13
+
+          - name: Linux GCC 14
+            os: ubuntu-24.04
+            compiler: g++-14
+            coverage: true
+            gcov: gcov-14
 
           - name: Linux Clang 13
             os: ubuntu-22.04
@@ -60,19 +66,37 @@ jobs:
             coverage: true
             gcov: llvm-cov-15 gcov
 
+          - name: Linux Clang 16
+            os: ubuntu-24.04
+            compiler: clang++-16
+            coverage: true
+            gcov: llvm-cov-16 gcov
+
+          - name: Linux Clang 17
+            os: ubuntu-24.04
+            compiler: clang++-17
+            coverage: true
+            gcov: llvm-cov-17 gcov
+
+          - name: Linux Clang 18
+            os: ubuntu-24.04
+            compiler: clang++-18
+            coverage: true
+            gcov: llvm-cov-18 gcov
+
           - name: Linux ASan
-            os: ubuntu-22.04
-            compiler: clang++-15
+            os: ubuntu-24.04
+            compiler: clang++-18
             flags: "-DUAPP_ENABLE_SANITIZER_ADDRESS=ON"
 
           - name: Linux TSan
-            os: ubuntu-22.04
-            compiler: clang++-15
+            os: ubuntu-24.04
+            compiler: clang++-18
             flags: "-DUAPP_ENABLE_SANITIZER_THREAD=ON"
 
           - name: Linux UBSan
-            os: ubuntu-22.04
-            compiler: clang++-15
+            os: ubuntu-24.04
+            compiler: clang++-18
             flags: "-DUAPP_ENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON"
 
           - name: macOS AppleClang 14
