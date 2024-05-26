@@ -102,6 +102,7 @@ struct ServerConnection : public ConnectionBase<Server> {
     ServerConnection& operator=(ServerConnection&&) noexcept = delete;
 
     void applySessionRegistry() {
+#if UAPP_OPEN62541_VER_GE(1, 3)
         if (config->accessControl.activateSession != &activateSession) {
             context.sessionRegistry.activateSessionUser = config->accessControl.activateSession;
             config->accessControl.activateSession = &activateSession;
@@ -110,6 +111,7 @@ struct ServerConnection : public ConnectionBase<Server> {
             context.sessionRegistry.closeSessionUser = config->accessControl.closeSession;
             config->accessControl.closeSession = &closeSession;
         }
+#endif
     }
 
     void applyDefaults() {
