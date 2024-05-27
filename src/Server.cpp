@@ -103,6 +103,11 @@ struct ServerConnection : public ConnectionBase<Server> {
 
     void applySessionRegistry() {
 #if UAPP_OPEN62541_VER_GE(1, 3)
+        // Make sure to call this function only once after access control is initialized or changed.
+        // The function pointers to activateSession / closeSession might not be unique and the
+        // the pointer comparison might fail resulting in stack overflows:
+        // - https://github.com/open62541pp/open62541pp/issues/285
+        // - https://stackoverflow.com/questions/31209693/static-library-linked-two-times
         if (config->accessControl.activateSession != &activateSession) {
             context.sessionRegistry.activateSessionUser = config->accessControl.activateSession;
             config->accessControl.activateSession = &activateSession;
