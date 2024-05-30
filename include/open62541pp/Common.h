@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <string_view>
 
 #include "open62541pp/Bitmask.h"
 
@@ -9,6 +10,12 @@ namespace opcua {
 /// Namespace index.
 /// @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.2.2
 using NamespaceIndex = uint16_t;
+
+/// Namespace with index and URI.
+struct Namespace {
+    NamespaceIndex index;
+    std::string_view uri;
+};
 
 /// Type index of the ::UA_TYPES array.
 using TypeIndex = uint16_t;
