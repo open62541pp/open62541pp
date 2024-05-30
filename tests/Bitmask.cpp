@@ -18,9 +18,23 @@ template <>
 struct IsBitmaskEnum<Bit> : std::true_type {};
 }  // namespace opcua
 
-TEST_CASE("Bitwise operations with enum (enabled with IsBitmaskEnum trait)") {
+TEST_CASE("Enable bitwise operations (IsBitmaskEnum trait)") {
     CHECK(IsBitmaskEnum<Bit>::value == true);
+}
 
+namespace nested {
+enum class Bit2 : int {
+    One = 1,
+    Two = 2,
+};
+constexpr std::true_type isBitmaskEnum(Bit2);
+}  // namespace nested
+
+TEST_CASE("Enable bitwise operations (isBitmaskEnum function overload)") {
+    CHECK(IsBitmaskEnum<nested::Bit2>::value == true);
+}
+
+TEST_CASE("Bitwise operations with enum (enabled with IsBitmaskEnum trait)") {
     SUBCASE("AND") {
         CHECK(static_cast<int>(Bit::One & Bit::One) == 1);
         CHECK(static_cast<int>(Bit::One & Bit::Two) == 0);
