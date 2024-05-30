@@ -309,7 +309,7 @@ TEST_CASE("NodeId") {
     }
 #endif
 
-    SUBCASE("Construct from ids") {
+    SUBCASE("Construct from node id enums") {
         CHECK(NodeId(DataTypeId::Boolean) == NodeId(0, UA_NS0ID_BOOLEAN));
         CHECK(NodeId(ReferenceTypeId::References) == NodeId(0, UA_NS0ID_REFERENCES));
         CHECK(NodeId(ObjectTypeId::BaseObjectType) == NodeId(0, UA_NS0ID_BASEOBJECTTYPE));
