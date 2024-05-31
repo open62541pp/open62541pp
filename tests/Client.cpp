@@ -78,9 +78,10 @@ TEST_CASE("Client anonymous login") {
 
 #if UAPP_OPEN62541_VER_GE(1, 3)
 TEST_CASE("Client username/password login") {
-    AccessControlDefault accessControl(false, {{"username", "password"}});
     Server server;
-    server.setAccessControl(accessControl);
+    server.setAccessControl(
+        std::make_unique<AccessControlDefault>(false, std::vector<Login>{{"username", "password"}})
+    );
     ServerRunner serverRunner(server);
     Client client;
 

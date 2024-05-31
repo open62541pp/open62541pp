@@ -28,8 +28,7 @@ TEST_CASE("ServerConfig") {
                 endpoint.userIdentityTokensSize = 0;
             }
 
-            AccessControlDefault accessControl;
-            config.setAccessControl(accessControl);
+            config.setAccessControl(std::make_unique<AccessControlDefault>());
             auto& ac = config->accessControl;
 
             for (size_t i = 0; i < config->endpointsSize; ++i) {
@@ -39,8 +38,9 @@ TEST_CASE("ServerConfig") {
         }
 
         SUBCASE("Use highest security policy to transfer user tokens") {
-            AccessControlDefault accessControl(true, {{"user", "password"}});
-            config.setAccessControl(accessControl);
+            config.setAccessControl(std::make_unique<AccessControlDefault>(
+                true, std::vector<Login>{{"user", "password"}}
+            ));
             auto& ac = config->accessControl;
 
             CHECK(ac.userTokenPoliciesSize == 2);
