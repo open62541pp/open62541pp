@@ -7,7 +7,7 @@ on:
 
 jobs:
   test:
-    name: ${{ matrix.config.name }} (${{ matrix.build_type }})
+    name: ${{ matrix.config.name }} (${{ matrix.build_type }}, ${{ matrix.library_type }})
     strategy:
       fail-fast: false
       matrix:
@@ -31,16 +31,22 @@ jobs:
             gcov: gcov-11
 
           - name: Linux GCC 12
-            os: ubuntu-22.04
+            os: ubuntu-24.04
             compiler: g++-12
             coverage: true
             gcov: gcov-12
 
           - name: Linux GCC 13
-            os: ubuntu-22.04
+            os: ubuntu-24.04
             compiler: g++-13
             coverage: true
             gcov: gcov-13
+
+          - name: Linux GCC 14
+            os: ubuntu-24.04
+            compiler: g++-14
+            coverage: true
+            gcov: gcov-14
 
           - name: Linux Clang 13
             os: ubuntu-22.04
@@ -60,19 +66,37 @@ jobs:
             coverage: true
             gcov: llvm-cov-15 gcov
 
+          - name: Linux Clang 16
+            os: ubuntu-24.04
+            compiler: clang++-16
+            coverage: true
+            gcov: llvm-cov-16 gcov
+
+          - name: Linux Clang 17
+            os: ubuntu-24.04
+            compiler: clang++-17
+            coverage: true
+            gcov: llvm-cov-17 gcov
+
+          - name: Linux Clang 18
+            os: ubuntu-24.04
+            compiler: clang++-18
+            coverage: true
+            gcov: llvm-cov-18 gcov
+
           - name: Linux ASan
-            os: ubuntu-22.04
-            compiler: clang++-15
+            os: ubuntu-24.04
+            compiler: clang++-18
             flags: "-DUAPP_ENABLE_SANITIZER_ADDRESS=ON"
 
           - name: Linux TSan
-            os: ubuntu-22.04
-            compiler: clang++-15
+            os: ubuntu-24.04
+            compiler: clang++-18
             flags: "-DUAPP_ENABLE_SANITIZER_THREAD=ON"
 
           - name: Linux UBSan
-            os: ubuntu-22.04
-            compiler: clang++-15
+            os: ubuntu-24.04
+            compiler: clang++-18
             flags: "-DUAPP_ENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON"
 
           - name: macOS AppleClang 14
@@ -95,6 +119,10 @@ jobs:
           - Debug
           - Release
 
+        library_type:
+          - static
+          - shared
+
         include:
           - config:
               name: Clang-Tidy
@@ -102,6 +130,7 @@ jobs:
               compiler: clang++
               flags: "-DUAPP_ENABLE_CLANG_TIDY=ON"
             build_type: Debug
+            library_type: static
 
     runs-on: ${{ matrix.config.os }}
     steps:
@@ -114,6 +143,7 @@ jobs:
           cmake -S . -B ./build
           -DCMAKE_CXX_COMPILER=${{ matrix.config.compiler }}
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+          -DBUILD_SHARED_LIBS=${{ matrix.library_type == 'shared' }}
           -DUA_ENABLE_ENCRYPTION=${{ runner.os == 'Windows' && 'OFF' || 'OPENSSL' }}
           -DUA_ENABLE_METHODCALLS=ON
           -DUA_ENABLE_SUBSCRIPTIONS=ON

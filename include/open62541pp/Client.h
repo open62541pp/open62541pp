@@ -94,6 +94,13 @@ public:
     );
 #endif
 
+    ~Client();
+
+    Client(const Client&) = delete;
+    Client(Client&&) noexcept = default;
+    Client& operator=(const Client&) = delete;
+    Client& operator=(Client&&) noexcept = default;
+
     /**
      * Gets a list of all registered servers at the given server.
      * @param serverUrl Server URL (for example `opc.tcp://localhost:4840`)
@@ -187,7 +194,7 @@ public:
 private:
     friend detail::ClientConnection& detail::getConnection(Client& client) noexcept;
 
-    std::shared_ptr<detail::ClientConnection> connection_;
+    std::unique_ptr<detail::ClientConnection> connection_;
 };
 
 inline bool operator==(const Client& lhs, const Client& rhs) noexcept {

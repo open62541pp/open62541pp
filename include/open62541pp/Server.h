@@ -103,6 +103,13 @@ public:
     );
 #endif
 
+    ~Server();
+
+    Server(const Server&) = delete;
+    Server(Server&&) noexcept = default;
+    Server& operator=(const Server&) = delete;
+    Server& operator=(Server&&) noexcept = default;
+
     /// Set custom logging function.
     /// Does nothing if the passed function is empty or a nullptr.
     void setLogger(Logger logger);
@@ -173,7 +180,7 @@ public:
 private:
     friend detail::ServerConnection& detail::getConnection(Server& server) noexcept;
 
-    std::shared_ptr<detail::ServerConnection> connection_;
+    std::unique_ptr<detail::ServerConnection> connection_;
 };
 
 inline bool operator==(const Server& lhs, const Server& rhs) noexcept {

@@ -8,7 +8,7 @@ on:
 jobs:
   cmake:
     name: CMake package (${{ matrix.build_type }}, ${{ matrix.library_type }})
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
@@ -28,7 +28,7 @@ jobs:
           mkdir build
           cd build
           cmake -G Ninja \
-            -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}} \
+            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
             -DBUILD_SHARED_LIBS=${{ matrix.library_type == 'shared' }} \
             ..
           cmake --build .

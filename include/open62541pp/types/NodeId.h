@@ -8,14 +8,22 @@
 #include <utility>  // move
 #include <variant>
 
-#include "open62541pp/Common.h"  // Type
-#include "open62541pp/NodeIds.h"
+#include "open62541pp/Common.h"  // NamespaceIndex, Namespace, Type
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/detail/string_utils.h"  // detail::allocNativeString
 #include "open62541pp/types/Builtin.h"
 
 namespace opcua {
+
+namespace detail {
+template <typename T, typename = void>
+struct IsNodeIdEnum : std::false_type {};
+
+template <typename T>
+struct IsNodeIdEnum<T, std::void_t<decltype(getNamespace(std::declval<T>()))>> : std::true_type {};
+
+}  // namespace detail
 
 /**
  * NodeId types.
@@ -78,33 +86,12 @@ public:
     )]] NodeId(Type type) noexcept  // NOLINT, implicit wanted
         : NodeId(UA_TYPES[static_cast<TypeIndex>(type)].typeId) {}  // NOLINT
 
-    /// Create NodeId from DataTypeId.
-    NodeId(DataTypeId id) noexcept  // NOLINT, implicit wanted
-        : NodeId(0, static_cast<uint32_t>(id)) {}
-
-    /// Create NodeId from ReferenceTypeId.
-    NodeId(ReferenceTypeId id) noexcept  // NOLINT, implicit wanted
-        : NodeId(0, static_cast<uint32_t>(id)) {}
-
-    /// Create NodeId from ObjectTypeId.
-    NodeId(ObjectTypeId id) noexcept  // NOLINT, implicit wanted
-        : NodeId(0, static_cast<uint32_t>(id)) {}
-
-    /// Create NodeId from VariableTypeId.
-    NodeId(VariableTypeId id) noexcept  // NOLINT, implicit wanted
-        : NodeId(0, static_cast<uint32_t>(id)) {}
-
-    /// Create NodeId from ObjectId.
-    NodeId(ObjectId id) noexcept  // NOLINT, implicit wanted
-        : NodeId(0, static_cast<uint32_t>(id)) {}
-
-    /// Create NodeId from VariableId.
-    NodeId(VariableId id) noexcept  // NOLINT, implicit wanted
-        : NodeId(0, static_cast<uint32_t>(id)) {}
-
-    /// Create NodeId from MethodId.
-    NodeId(MethodId id) noexcept  // NOLINT, implicit wanted
-        : NodeId(0, static_cast<uint32_t>(id)) {}
+    /// Create NodeId from enum class with numeric identifiers like `opcua::ObjectId`.
+    /// The namespace is retrieved by calling e.g. `getNamespace(opcua::ObjectId)`.
+    /// Make sure to provide an overload for custom enum types.
+    template <typename T, typename = std::enable_if_t<detail::IsNodeIdEnum<T>::value>>
+    NodeId(T identifier) noexcept  // NOLINT, implicit wanted
+        : NodeId(getNamespace(identifier).index, static_cast<uint32_t>(identifier)) {}
 
     bool isNull() const noexcept {
         return UA_NodeId_isNull(handle());

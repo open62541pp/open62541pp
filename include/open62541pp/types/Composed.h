@@ -28,14 +28,16 @@
 // default attributes defined in open62541/util.h since open62541 v1.4
 #if UAPP_OPEN62541_VER_LE(1, 3) && !defined(UA_DEFAULT_ATTRIBUTES_DEFINED)
 #define UA_DEFAULT_ATTRIBUTES_DEFINED
-extern "C" const UA_VariableAttributes UA_VariableAttributes_default;
-extern "C" const UA_VariableTypeAttributes UA_VariableTypeAttributes_default;
-extern "C" const UA_MethodAttributes UA_MethodAttributes_default;
-extern "C" const UA_ObjectAttributes UA_ObjectAttributes_default;
-extern "C" const UA_ObjectTypeAttributes UA_ObjectTypeAttributes_default;
-extern "C" const UA_ReferenceTypeAttributes UA_ReferenceTypeAttributes_default;
-extern "C" const UA_DataTypeAttributes UA_DataTypeAttributes_default;
-extern "C" const UA_ViewAttributes UA_ViewAttributes_default;
+extern "C" {
+UA_EXPORT extern const UA_VariableAttributes UA_VariableAttributes_default;
+UA_EXPORT extern const UA_VariableTypeAttributes UA_VariableTypeAttributes_default;
+UA_EXPORT extern const UA_MethodAttributes UA_MethodAttributes_default;
+UA_EXPORT extern const UA_ObjectAttributes UA_ObjectAttributes_default;
+UA_EXPORT extern const UA_ObjectTypeAttributes UA_ObjectTypeAttributes_default;
+UA_EXPORT extern const UA_ReferenceTypeAttributes UA_ReferenceTypeAttributes_default;
+UA_EXPORT extern const UA_DataTypeAttributes UA_DataTypeAttributes_default;
+UA_EXPORT extern const UA_ViewAttributes UA_ViewAttributes_default;
+}
 #endif
 
 // NOLINTNEXTLINE

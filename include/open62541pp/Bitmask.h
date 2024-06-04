@@ -10,6 +10,16 @@ namespace opcua {
  */
 
 /**
+ * Function template to define an enum (class) as a bitmask and allow bitwise operations.
+ * The function must be overloaded for a specific enum type to return `std::true_type`.
+ *
+ * This is an additional opt-in mechanism to specializations of the IsBitmaskEnum trait and can also
+ * be used in other namespaces.
+ */
+template <typename T>
+constexpr std::false_type isBitmaskEnum(T);
+
+/**
  * Trait to define an enum (class) as a bitmask and allow bitwise operations.
  *
  * @code{.cpp}
@@ -20,15 +30,18 @@ namespace opcua {
  * };
  *
  * // allow bitwise operations
+ * // 1. with template specialization of IsBitmaskEnum trait
  * template <>
  * struct IsBitmaskEnum<Access> : std::true_type {};
+ * // 2. with overload of function isBitmaskEnum
+ * constexpr std::true_type isBitmaskEnum(Access);
  *
  * // use bitwise operations
  * Access mask = Access::Read | Access::Write;
  * @endcode
  */
 template <typename T>
-struct IsBitmaskEnum : std::false_type {};
+struct IsBitmaskEnum : std::is_same<decltype(isBitmaskEnum(std::declval<T>())), std::true_type> {};
 
 /* -------------------------------------- Bitwise operators ------------------------------------- */
 

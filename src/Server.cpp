@@ -102,6 +102,24 @@ struct ServerConnection : public ConnectionBase<Server> {
     ServerConnection& operator=(const ServerConnection&) = delete;
     ServerConnection& operator=(ServerConnection&&) noexcept = delete;
 
+    void applySessionRegistry() {
+#if UAPP_OPEN62541_VER_GE(1, 3)
+        // Make sure to call this function only once after access control is initialized or changed.
+        // The function pointers to activateSession / closeSession might not be unique and the
+        // the pointer comparison might fail resulting in stack overflows:
+        // - https://github.com/open62541pp/open62541pp/issues/285
+        // - https://stackoverflow.com/questions/31209693/static-library-linked-two-times
+        if (config->accessControl.activateSession != &activateSession) {
+            context.sessionRegistry.activateSessionUser = config->accessControl.activateSession;
+            config->accessControl.activateSession = &activateSession;
+        }
+        if (config->accessControl.closeSession != &closeSession) {
+            context.sessionRegistry.closeSessionUser = config->accessControl.closeSession;
+            config->accessControl.closeSession = &closeSession;
+        }
+#endif
+    }
+
     void applyDefaults() {
 #ifdef UA_ENABLE_SUBSCRIPTIONS
         config->publishingIntervalLimits.min = 10;  // ms
@@ -112,14 +130,6 @@ struct ServerConnection : public ConnectionBase<Server> {
 #endif
 #if UAPP_OPEN62541_VER_GE(1, 3)
         config->context = this;
-        if (config->accessControl.activateSession != &activateSession) {
-            context.sessionRegistry.activateSessionUser = config->accessControl.activateSession;
-            config->accessControl.activateSession = &activateSession;
-        }
-        if (config->accessControl.closeSession != &closeSession) {
-            context.sessionRegistry.closeSessionUser = config->accessControl.closeSession;
-            config->accessControl.closeSession = &closeSession;
-        }
 #endif
     }
 
@@ -175,7 +185,7 @@ struct ServerConnection : public ConnectionBase<Server> {
 /* ------------------------------------------- Server ------------------------------------------- */
 
 Server::Server(uint16_t port, ByteString certificate, Logger logger)
-    : connection_(std::make_shared<detail::ServerConnection>()) {
+    : connection_(std::make_unique<detail::ServerConnection>()) {
     // The logger should be set as soon as possible, ideally even before UA_ServerConfig_setMinimal.
     // However, the logger gets overwritten by UA_ServerConfig_setMinimal() in older versions of
     // open62541. The best we can do in this case, is to first call UA_ServerConfig_setMinimal and
@@ -192,6 +202,7 @@ Server::Server(uint16_t port, ByteString certificate, Logger logger)
     setConfig();
     setLogger(std::move(logger));
 #endif
+    connection_->applySessionRegistry();
     connection_->applyDefaults();
 }
 
@@ -204,7 +215,7 @@ Server::Server(
     Span<const ByteString> issuerList,
     Span<const ByteString> revocationList
 )
-    : connection_(std::make_shared<detail::ServerConnection>()) {
+    : connection_(std::make_unique<detail::ServerConnection>()) {
     throwIfBad(UA_ServerConfig_setDefaultWithSecurityPolicies(
         detail::getConfig(handle()),
         port,
@@ -217,9 +228,12 @@ Server::Server(
         asNative(revocationList.data()),
         revocationList.size()
     ));
+    connection_->applySessionRegistry();
     connection_->applyDefaults();
 }
 #endif
+
+Server::~Server() = default;
 
 void Server::setLogger(Logger logger) {
     connection_->config.setLogger(std::move(logger));
@@ -263,12 +277,12 @@ void Server::setProductUri(std::string_view uri) {
 
 void Server::setAccessControl(AccessControlBase& accessControl) {
     connection_->config.setAccessControl(accessControl);
-    connection_->applyDefaults();
+    connection_->applySessionRegistry();
 }
 
 void Server::setAccessControl(std::unique_ptr<AccessControlBase> accessControl) {
     connection_->config.setAccessControl(std::move(accessControl));
-    connection_->applyDefaults();
+    connection_->applySessionRegistry();
 }
 
 std::vector<Session> Server::getSessions() {

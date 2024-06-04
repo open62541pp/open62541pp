@@ -7,7 +7,7 @@ on:
 
 jobs:
   linux:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
         with:
@@ -22,4 +22,4 @@ jobs:
           cmake -G Ninja -DUAPP_BUILD_EXAMPLES=ON ..
           cmake --build .
       - name: Run examples
-        run: python3 ./tools/run_examples.py ./build/bin/examples/
+        run: python3 ./tools/run_examples.py ./build/bin/

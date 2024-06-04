@@ -7,30 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.13.0] - 2024-04-27
+
 ### Added
 
 - Async functions in `services` namespace (client only), adapting the well-proven [asynchronous model of (Boost) Asio](https://think-async.com/asio/asio-1.28.0/doc/asio/overview/model.html) (#111)
   - Example `client_method_async`
+- `Result<T>` class to encapsulate both the status code and the result of type `T`, similar to `std::expected` (#207, #264, #276)
 - Raw `services::call` functions (#215)
 - `NamespaceIndex` alias for `uint16_t` (#219)
-- Symmetric implementation of `services::createMonitoredItemDataChange`, `services::deleteMonitoredItem` for `Server` and `Client`
+- Symmetric implementation of `services::createMonitoredItemDataChange`, `services::deleteMonitoredItem` for `Server` and `Client` (#238)
 - Deprecate high-level `DataChangeCallback<T>` and `EventCallback<T>`, use `DataChangeNotificationCallback` and `EventNotificationCallback` instead and create `MonitoredItem<T>` on demand (#245)
-- `Result<T>` class to encapsulate both the status code and the result of type `T`, similar to `std::expected` (#207, #264)
 - Subscription service request/response wrapper classes (#270)
+- Update open62541 to v1.3.10 (#278)
 
 ### Changed
 
+- Move-only `Client` and `Server` (#211)
 - Rename `MonitoringParameters` -> `MonitoringParametersEx` to avoid shadowing of OPC UA type [`MonitoringParameter`](https://reference.opcfoundation.org/Core/Part4/v104/docs/7.16) (#214)
 - Remove logger utility functions `getLogLevelName`, `getLogCategoryName` (#221)
 - Change return type of `AccessControlBase::getUserTokenPolicies()` to `Span<Span<UserTokenPolicy>` (#223)
 - Deprecate `TypeWrapper::TypeWrapperBase` alias, use `TypeWrapper::TypeWrapper` instead (#253)
 - Return `ExtensionObject` encoded members by pointer, not optional (#254)
 - Strip `get` prefix of simple getters, deprecate old member functions (#267)
+- Use `Result<T>` return type for all functions in `services` namespace (#275)
 
 ### Fixed
 
 - Error handling in `client_subscription` example (#203)
 - Compare `DataType` only by `typeId` (#217)
+- `Variant::isArray` check (#274)
 
 
 ## [0.12.0] - 2024-02-10
@@ -476,7 +482,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial public release
 
-[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.12.0...HEAD
+[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.13.0...HEAD
+[0.13.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.13.0
 [0.12.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.12.0
 [0.11.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.11.0
 [0.10.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.10.0

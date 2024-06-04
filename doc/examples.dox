@@ -15,6 +15,7 @@
 
 @example method/server_method.cpp
 @example method/client_method.cpp
+@example method/client_method_async.cpp
 
 @example events/server_events.cpp
 @example events/client_eventfilter.cpp
