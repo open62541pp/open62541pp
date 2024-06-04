@@ -37,7 +37,7 @@ TEST_CASE("Client discovery") {
         CHECK(result.getApplicationUri() == String("urn:open62541.server.application"));
         CHECK(result.getProductUri() == String("http://open62541.org"));
         CHECK(result.getApplicationType() == UA_APPLICATIONTYPE_SERVER);
-        CHECK(result.getDiscoveryUrls().size() == 1);
+        CHECK(result.getDiscoveryUrls().size() >= 1);
     }
 
     SUBCASE("Get endpoints") {

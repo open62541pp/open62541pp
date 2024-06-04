@@ -101,7 +101,11 @@ private:
 
     UA_ServerConfig& config_;
     CustomDataTypes customDataTypes_{config_.customDataTypes};
+#if UAPP_OPEN62541_VER_GE(1, 4)
+    PluginManager<UA_Logger*> logger_{config_.logging};
+#else
     PluginManager<UA_Logger> logger_{config_.logger};
+#endif
     PluginManager<UA_AccessControl> accessControl_{config_.accessControl};
 };
 
