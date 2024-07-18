@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.14.0] - 2024-07-18
+
+### Added
+
+- Update open62541 to v1.3.11 (#294)
+- Define `enum` as `Bitmask` by function overload (#295)
+
+### Fixed
+
+- Trigger value change in `server_datasource` example (#282)
+- Linking shared library on Windows (#290)
+- Stack overflow in session registry when running from different translation units (#292)
+
 ## [0.13.0] - 2024-04-27
 
 ### Added
@@ -482,7 +495,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial public release
 
-[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.13.0...HEAD
+[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.14.0...HEAD
+[0.14.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.14.0
 [0.13.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.13.0
 [0.12.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.12.0
 [0.11.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.11.0
