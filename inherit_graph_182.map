@@ -1,23 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" title=" " alt="" coords="5,301,117,326"/>
-<area shape="rect" id="Node000001" href="$structopcua_1_1IsBitmaskEnum_3_01AccessLevel_01_4.html" title=" " alt="" coords="191,5,362,45"/>
-<area shape="poly" id="edge227_Node000000_Node000001" title=" " alt="" coords="63,287,72,238,90,175,119,111,139,81,164,55,190,39,193,43,167,59,144,85,124,114,95,177,77,239,68,288"/>
-<area shape="rect" id="Node000002" href="$structopcua_1_1IsBitmaskEnum_3_01BrowseResultMask_01_4.html" title=" " alt="" coords="189,69,365,109"/>
-<area shape="poly" id="edge228_Node000000_Node000002" title=" " alt="" coords="67,287,79,249,99,204,127,158,164,119,187,105,190,110,167,123,131,162,104,207,84,251,72,288"/>
-<area shape="rect" id="Node000003" href="$structopcua_1_1IsBitmaskEnum_3_01EventNotifier_01_4.html" title=" " alt="" coords="191,133,362,173"/>
-<area shape="poly" id="edge229_Node000000_Node000003" title=" " alt="" coords="74,287,110,235,135,207,164,183,190,170,192,174,167,188,139,211,114,238,78,290"/>
-<area shape="rect" id="Node000004" href="$structopcua_1_1IsBitmaskEnum_3_01NodeAttributesMask_01_4.html" title=" " alt="" coords="184,197,369,237"/>
-<area shape="poly" id="edge230_Node000000_Node000004" title=" " alt="" coords="90,290,125,268,164,247,195,235,197,240,166,252,127,272,93,295"/>
-<area shape="rect" id="Node000005" href="$structopcua_1_1IsBitmaskEnum_3_01NodeClass_01_4.html" title=" " alt="" coords="191,261,362,301"/>
-<area shape="poly" id="edge231_Node000000_Node000005" title=" " alt="" coords="131,300,191,291,191,297,131,306"/>
-<area shape="rect" id="Node000006" href="$structopcua_1_1IsBitmaskEnum_3_01WriteMask_01_4.html" title=" " alt="" coords="191,325,362,365"/>
-<area shape="poly" id="edge232_Node000000_Node000006" title=" " alt="" coords="131,321,191,330,191,335,131,326"/>
-<area shape="rect" id="Node000007" href="$structopcua_1_1detail_1_1IsContiguousContainer_3_01T_00_01std_1_1void__t_3_01decltype_07std_1_1de9f866bf4ee62095afcf3e91d3b4c0f7.html" title=" " alt="" coords="177,389,376,517"/>
-<area shape="poly" id="edge233_Node000000_Node000007" title=" " alt="" coords="95,331,179,387,176,391,92,336"/>
-<area shape="rect" id="Node000008" href="$structopcua_1_1detail_1_1IsConvertibleType_3_01T_00_01std_1_1void__t_3_01decltype_07TypeConverter_3_01T_01_4_02_03_08_4_01_4.html" title=" " alt="" coords="165,542,388,597"/>
-<area shape="poly" id="edge234_Node000000_Node000008" title=" " alt="" coords="71,339,82,380,102,430,129,482,147,506,167,527,184,540,181,544,164,531,143,510,125,485,97,433,77,381,66,340"/>
-<area shape="rect" id="Node000009" href="$structopcua_1_1detail_1_1IsRegisteredType_3_01T_00_01std_1_1void__t_3_01decltype_07TypeRegistry_3_01T_01_4_02_03_08_4_01_4.html" title=" " alt="" coords="165,621,388,675"/>
-<area shape="poly" id="edge235_Node000000_Node000009" title=" " alt="" coords="67,340,75,395,91,466,104,504,121,541,142,575,167,606,182,618,179,622,163,610,137,578,116,543,99,506,86,468,69,396,62,341"/>
-<area shape="rect" id="Node000010" href="$structopcua_1_1detail_1_1IsSpan_3_01Span_3_01T_01_4_01_4.html" title=" " alt="" coords="198,700,355,740"/>
-<area shape="poly" id="edge236_Node000000_Node000010" title=" " alt="" coords="64,340,67,408,80,501,93,550,111,599,135,645,167,685,182,696,199,705,196,710,179,701,163,689,131,648,106,601,87,552,75,502,61,409,59,340"/>
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,37,109,63"/>
+<area shape="rect" id="Node000001" href="$structopcua_1_1IsBitmaskEnum.html" title="Trait to define an enum (class) as a bitmask and allow bitwise operations." alt="" coords="161,5,371,31"/>
+<area shape="poly" id="edge226_Node000000_Node000001" title=" " alt="" coords="123,37,183,28,183,33,123,43"/>
+<area shape="rect" id="Node000002" href="$structopcua_1_1detail_1_1IsStaleable_3_01T_00_01std_1_1void__t_3_01decltype_07std_1_1declval_3_01T_01_4_07_08_8stale_08_4_01_4.html" title=" " alt="" coords="157,55,375,109"/>
+<area shape="poly" id="edge227_Node000000_Node000002" title=" " alt="" coords="123,57,158,63,157,68,123,63"/>
 </map>

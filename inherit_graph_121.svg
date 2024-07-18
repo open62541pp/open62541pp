@@ -14,7 +14,7 @@
 <g id="a_Node000000"><a xlink:href="classopcua_1_1Wrapper.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="#666666" points="143,-30 0,-30 0,0 143,0 143,-30"/>
 <text text-anchor="start" x="8" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">opcua::Wrapper&lt; UA</text>
-<text text-anchor="middle" x="71.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">_DeleteReferencesItem &gt;</text>
+<text text-anchor="middle" x="71.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">_DeleteNodesResponse &gt;</text>
 </a>
 </g>
 </g>

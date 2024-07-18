@@ -24,7 +24,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">open62541++<span id="projectnumber">&#160;0.13.0</span>
+   <div id="projectname">open62541++<span id="projectnumber">&#160;0.14.0</span>
    </div>
    <div id="projectbrief">C++ wrapper of open62541</div>
   </td>
@@ -90,6 +90,9 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:ga4be2e13b6c648cfa5070fa61b9201168" id="r_ga4be2e13b6c648cfa5070fa61b9201168"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ga4be2e13b6c648cfa5070fa61b9201168"><td class="memTemplItemLeft" align="right" valign="top">constexpr std::false_type&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ga4be2e13b6c648cfa5070fa61b9201168">opcua::isBitmaskEnum</a> (T)</td></tr>
+<tr class="separator:ga4be2e13b6c648cfa5070fa61b9201168"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga5342da9dc7df067bc08accab02298e2e" id="r_ga5342da9dc7df067bc08accab02298e2e"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ga5342da9dc7df067bc08accab02298e2e"><td class="memTemplItemLeft" align="right" valign="top">constexpr std::enable_if_t&lt; <a class="el" href="structopcua_1_1IsBitmaskEnum.html">IsBitmaskEnum</a>&lt; T &gt;::value, T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ga5342da9dc7df067bc08accab02298e2e">operator&amp;</a> (T lhs, T rhs) noexcept</td></tr>
 <tr class="separator:ga5342da9dc7df067bc08accab02298e2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,6 +128,37 @@ Functions</h2></td></tr>
 <tr class="separator:gab01b1cf68467567e8c8e0ac4364cad77"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="ga4be2e13b6c648cfa5070fa61b9201168" name="ga4be2e13b6c648cfa5070fa61b9201168"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4be2e13b6c648cfa5070fa61b9201168">&#9670;&#160;</a></span>isBitmaskEnum()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr std::false_type opcua::isBitmaskEnum </td>
+          <td>(</td>
+          <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Function template to define an enum (class) as a bitmask and allow bitwise operations. </p>
+<p>The function must be overloaded for a specific enum type to return <code>std::true_type</code>.</p>
+<p>This is an additional opt-in mechanism to specializations of the <a class="el" href="structopcua_1_1IsBitmaskEnum.html" title="Trait to define an enum (class) as a bitmask and allow bitwise operations.">IsBitmaskEnum</a> trait and can also be used in other namespaces. </p>
+
+</div>
+</div>
 <a id="ga5342da9dc7df067bc08accab02298e2e" name="ga5342da9dc7df067bc08accab02298e2e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga5342da9dc7df067bc08accab02298e2e">&#9670;&#160;</a></span>operator&amp;()</h2>
 
@@ -154,7 +188,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Bitmask_8h_source.html#l00037">37</a> of file <a class="el" href="Bitmask_8h_source.html">Bitmask.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Bitmask_8h_source.html#l00050">50</a> of file <a class="el" href="Bitmask_8h_source.html">Bitmask.h</a>.</p>
 
 </div>
 </div>
@@ -187,7 +221,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Bitmask_8h_source.html#l00044">44</a> of file <a class="el" href="Bitmask_8h_source.html">Bitmask.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Bitmask_8h_source.html#l00057">57</a> of file <a class="el" href="Bitmask_8h_source.html">Bitmask.h</a>.</p>
 
 </div>
 </div>
@@ -220,7 +254,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Bitmask_8h_source.html#l00051">51</a> of file <a class="el" href="Bitmask_8h_source.html">Bitmask.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Bitmask_8h_source.html#l00064">64</a> of file <a class="el" href="Bitmask_8h_source.html">Bitmask.h</a>.</p>
 
 </div>
 </div>
@@ -249,7 +283,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Bitmask_8h_source.html#l00058">58</a> of file <a class="el" href="Bitmask_8h_source.html">Bitmask.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Bitmask_8h_source.html#l00071">71</a> of file <a class="el" href="Bitmask_8h_source.html">Bitmask.h</a>.</p>
 
 </div>
 </div>
@@ -282,7 +316,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Bitmask_8h_source.html#l00067">67</a> of file <a class="el" href="Bitmask_8h_source.html">Bitmask.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Bitmask_8h_source.html#l00080">80</a> of file <a class="el" href="Bitmask_8h_source.html">Bitmask.h</a>.</p>
 
 </div>
 </div>
@@ -315,7 +349,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Bitmask_8h_source.html#l00075">75</a> of file <a class="el" href="Bitmask_8h_source.html">Bitmask.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Bitmask_8h_source.html#l00088">88</a> of file <a class="el" href="Bitmask_8h_source.html">Bitmask.h</a>.</p>
 
 </div>
 </div>
@@ -348,7 +382,7 @@ template&lt;typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Bitmask_8h_source.html#l00083">83</a> of file <a class="el" href="Bitmask_8h_source.html">Bitmask.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Bitmask_8h_source.html#l00096">96</a> of file <a class="el" href="Bitmask_8h_source.html">Bitmask.h</a>.</p>
 
 </div>
 </div>
@@ -381,7 +415,7 @@ template&lt;typename T , typename U &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Bitmask_8h_source.html#l00215">215</a> of file <a class="el" href="Bitmask_8h_source.html">Bitmask.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Bitmask_8h_source.html#l00228">228</a> of file <a class="el" href="Bitmask_8h_source.html">Bitmask.h</a>.</p>
 
 </div>
 </div>
@@ -414,7 +448,7 @@ template&lt;typename T , typename U &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Bitmask_8h_source.html#l00221">221</a> of file <a class="el" href="Bitmask_8h_source.html">Bitmask.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Bitmask_8h_source.html#l00234">234</a> of file <a class="el" href="Bitmask_8h_source.html">Bitmask.h</a>.</p>
 
 </div>
 </div>
@@ -447,7 +481,7 @@ template&lt;typename T , typename U &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Bitmask_8h_source.html#l00227">227</a> of file <a class="el" href="Bitmask_8h_source.html">Bitmask.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Bitmask_8h_source.html#l00240">240</a> of file <a class="el" href="Bitmask_8h_source.html">Bitmask.h</a>.</p>
 
 </div>
 </div>
@@ -480,7 +514,7 @@ template&lt;typename T , typename U &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Bitmask_8h_source.html#l00233">233</a> of file <a class="el" href="Bitmask_8h_source.html">Bitmask.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Bitmask_8h_source.html#l00246">246</a> of file <a class="el" href="Bitmask_8h_source.html">Bitmask.h</a>.</p>
 
 </div>
 </div>

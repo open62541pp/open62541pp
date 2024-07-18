@@ -1,9 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$structopcua_1_1services_1_1detail_1_1AttributeHandlerScalar.html" title=" " alt="" coords="5,84,184,139"/>
-<area shape="rect" id="Node000001" href="$structopcua_1_1services_1_1detail_1_1AttributeHandler_3_01AttributeId_1_1Description_01_4.html" title=" " alt="" coords="232,5,443,60"/>
-<area shape="poly" id="edge17_Node000000_Node000001" title=" " alt="" coords="192,77,251,58,253,63,193,82"/>
-<area shape="rect" id="Node000002" href="$structopcua_1_1services_1_1detail_1_1AttributeHandler_3_01AttributeId_1_1DisplayName_01_4.html" title=" " alt="" coords="232,84,443,139"/>
-<area shape="poly" id="edge18_Node000000_Node000002" title=" " alt="" coords="198,109,232,109,232,114,198,114"/>
-<area shape="rect" id="Node000003" href="$structopcua_1_1services_1_1detail_1_1AttributeHandler_3_01AttributeId_1_1InverseName_01_4.html" title=" " alt="" coords="232,163,443,217"/>
-<area shape="poly" id="edge19_Node000000_Node000003" title=" " alt="" coords="193,140,253,160,251,165,192,145"/>
+<area shape="rect" id="Node000000" href="$structopcua_1_1services_1_1detail_1_1AttributeHandlerScalar.html" title=" " alt="" coords="5,5,184,60"/>
+<area shape="rect" id="Node000001" href="$structopcua_1_1services_1_1detail_1_1AttributeHandler_3_01AttributeId_1_1MinimumSamplingInterval_01_4.html" title=" " alt="" coords="232,5,463,60"/>
+<area shape="poly" id="edge16_Node000000_Node000001" title=" " alt="" coords="198,30,232,30,232,35,198,35"/>
 </map>

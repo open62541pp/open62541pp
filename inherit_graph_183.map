@@ -1,0 +1,25 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,333,117,358"/>
+<area shape="rect" id="Node000001" href="$structopcua_1_1IsBitmaskEnum_3_01AccessLevel_01_4.html" title=" " alt="" coords="191,5,362,45"/>
+<area shape="poly" id="edge228_Node000000_Node000001" title=" " alt="" coords="62,318,69,264,85,193,99,156,116,119,137,85,164,55,189,38,192,43,167,59,141,89,120,122,104,158,91,195,74,265,67,319"/>
+<area shape="rect" id="Node000002" href="$structopcua_1_1IsBitmaskEnum_3_01BrowseResultMask_01_4.html" title=" " alt="" coords="189,69,365,109"/>
+<area shape="poly" id="edge229_Node000000_Node000002" title=" " alt="" coords="65,319,75,275,94,222,123,167,142,141,164,119,187,105,190,109,167,123,146,145,128,170,99,224,81,277,70,320"/>
+<area shape="rect" id="Node000003" href="$structopcua_1_1IsBitmaskEnum_3_01EventNotifier_01_4.html" title=" " alt="" coords="191,133,362,173"/>
+<area shape="poly" id="edge230_Node000000_Node000003" title=" " alt="" coords="70,319,104,251,131,214,164,183,190,168,192,173,167,187,135,218,109,254,75,321"/>
+<area shape="rect" id="Node000004" href="$structopcua_1_1IsBitmaskEnum_3_01NodeAttributesMask_01_4.html" title=" " alt="" coords="184,197,369,237"/>
+<area shape="poly" id="edge231_Node000000_Node000004" title=" " alt="" coords="80,320,117,282,164,247,190,235,192,240,167,252,120,286,84,324"/>
+<area shape="rect" id="Node000005" href="$structopcua_1_1IsBitmaskEnum_3_01NodeClass_01_4.html" title=" " alt="" coords="191,261,362,301"/>
+<area shape="poly" id="edge232_Node000000_Node000005" title=" " alt="" coords="115,326,165,311,205,299,206,304,166,316,117,331"/>
+<area shape="rect" id="Node000006" href="$structopcua_1_1IsBitmaskEnum_3_01WriteMask_01_4.html" title=" " alt="" coords="191,325,362,365"/>
+<area shape="poly" id="edge233_Node000000_Node000006" title=" " alt="" coords="131,343,191,343,191,348,131,348"/>
+<area shape="rect" id="Node000007" href="$structopcua_1_1detail_1_1IsContiguousContainer_3_01T_00_01std_1_1void__t_3_01decltype_07std_1_1de9f866bf4ee62095afcf3e91d3b4c0f7.html" title=" " alt="" coords="177,389,376,517"/>
+<area shape="poly" id="edge234_Node000000_Node000007" title=" " alt="" coords="102,362,179,401,176,406,99,367"/>
+<area shape="rect" id="Node000008" href="$structopcua_1_1detail_1_1IsConvertibleType_3_01T_00_01std_1_1void__t_3_01decltype_07TypeConverter_3_01T_01_4_02_03_08_4_01_4.html" title=" " alt="" coords="165,542,388,597"/>
+<area shape="poly" id="edge235_Node000000_Node000008" title=" " alt="" coords="73,370,86,405,106,447,133,490,167,527,185,540,182,544,164,531,129,493,101,450,81,407,68,372"/>
+<area shape="rect" id="Node000009" href="$structopcua_1_1detail_1_1IsNodeIdEnum_3_01T_00_01std_1_1void__t_3_01decltype_07getNamespace_07st4a05bf6a910f187a76785e5dfc4b5743.html" title=" " alt="" coords="173,621,381,691"/>
+<area shape="poly" id="edge236_Node000000_Node000009" title=" " alt="" coords="69,371,78,420,97,482,125,548,145,579,167,606,182,619,179,623,163,610,140,582,121,551,91,484,73,421,64,372"/>
+<area shape="rect" id="Node000010" href="$structopcua_1_1detail_1_1IsRegisteredType_3_01T_00_01std_1_1void__t_3_01decltype_07TypeRegistry_3_01T_01_4_02_03_08_4_01_4.html" title=" " alt="" coords="165,715,388,770"/>
+<area shape="poly" id="edge237_Node000000_Node000010" title=" " alt="" coords="65,371,69,437,83,525,96,572,114,618,137,662,167,701,182,713,179,717,163,705,133,665,109,621,91,574,78,526,64,437,60,372"/>
+<area shape="rect" id="Node000011" href="$structopcua_1_1detail_1_1IsSpan_3_01Span_3_01T_01_4_01_4.html" title=" " alt="" coords="198,795,355,835"/>
+<area shape="poly" id="edge238_Node000000_Node000011" title=" " alt="" coords="68,372,80,463,100,585,130,703,147,749,167,780,182,791,199,800,197,805,179,796,163,783,143,751,125,705,95,587,74,464,63,372"/>
+</map>

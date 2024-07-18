@@ -1052,6 +1052,12 @@
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1MonitoredItem-members.html</loc>
   </url>
   <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1Namespace.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1Namespace-members.html</loc>
+  </url>
+  <url>
     <loc>https://open62541pp.github.io/open62541pp/classopcua_1_1Node.html</loc>
   </url>
   <url>
@@ -1470,6 +1476,12 @@
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1IsMutableContainer.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1IsNodeIdEnum.html</loc>
+  </url>
+  <url>
+    <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1IsNodeIdEnum_3_01T_00_01std_1_1void__t_3_01decltype_07getNamespace_07st4a05bf6a910f187a76785e5dfc4b5743.html</loc>
   </url>
   <url>
     <loc>https://open62541pp.github.io/open62541pp/structopcua_1_1detail_1_1IsRegisteredType.html</loc>

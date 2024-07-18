@@ -1,9 +1,11 @@
 <map id="/home/runner/work/open62541pp/open62541pp/include/open62541pp/Common.h" name="/home/runner/work/open62541pp/open62541pp/include/open62541pp/Common.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,263,60"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="27,108,94,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="114,62,82,99,78,96,110,58"/>
-<area shape="rect" id="Node000003" href="$Bitmask_8h.html" title=" " alt="" coords="119,108,299,133"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="159,58,191,96,187,99,155,62"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="163,181,255,207"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="211,134,211,168,206,168,206,134"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="17,5,274,60"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,108,72,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="114,62,66,101,62,97,111,58"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="97,108,194,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="148,60,148,94,143,94,143,60"/>
+<area shape="rect" id="Node000004" href="$Bitmask_8h.html" title=" " alt="" coords="218,108,398,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="196,58,276,99,273,104,194,62"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="262,181,354,207"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="311,134,311,168,305,168,305,134"/>
 </map>

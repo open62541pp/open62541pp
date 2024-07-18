@@ -1,13 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" title=" " alt="" coords="5,31,120,56"/>
-<area shape="rect" id="Node000001" href="$classopcua_1_1BadStatus.html" title="Exception for bad status codes from open62541 UA_STATUSCODE_*." alt="" coords="170,5,305,31"/>
-<area shape="poly" id="edge214_Node000000_Node000001" title=" " alt="" coords="133,30,170,25,170,30,134,36"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="168,55,307,80"/>
-<area shape="poly" id="edge216_Node000000_Node000003" title=" " alt="" coords="134,50,168,55,167,60,133,56"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1BadDisconnect.html" title="Specific exception for open62541 status code UA_STATUSCODE_BADDISCONNECT." alt="" coords="364,5,531,31"/>
-<area shape="poly" id="edge215_Node000001_Node000002" title=" " alt="" coords="318,15,364,15,364,21,318,21"/>
-<area shape="rect" id="Node000004" href="$classopcua_1_1BadVariantAccess.html" title=" " alt="" coords="355,55,540,80"/>
-<area shape="poly" id="edge217_Node000003_Node000004" title=" " alt="" coords="320,65,354,65,354,70,320,70"/>
-<area shape="rect" id="Node000005" href="$classopcua_1_1CreateCertificateError.html" title=" " alt="" coords="358,105,537,145"/>
-<area shape="poly" id="edge218_Node000003_Node000005" title=" " alt="" coords="299,81,374,102,373,107,297,86"/>
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,13,131,38"/>
+<area shape="rect" id="Node000001" href="$structopcua_1_1detail_1_1IsMutableContainer.html" title=" " alt="" coords="179,5,357,45"/>
+<area shape="poly" id="edge213_Node000000_Node000001" title=" " alt="" coords="144,23,179,23,179,28,144,28"/>
 </map>
