@@ -467,10 +467,17 @@ TEST_CASE("Attribute service set (highlevel)") {
 
 #ifdef UA_ENABLE_TYPEDESCRIPTION
 
-    SUBCASE("Data type definition (read only)") {
+    SUBCASE("Data type definition (read)") {
         const NodeId id{0, UA_NS0ID_BUILDINFO};
-        const Variant definition = services::readDataTypeDefinition(server, id).value();
-        CHECK(definition.getDataType() == &UA_TYPES[UA_TYPES_STRUCTUREDEFINITION]);
+        const Variant variant = services::readDataTypeDefinition(server, id).value();
+        CHECK(variant.isScalar());
+        CHECK(variant.getDataType() == &UA_TYPES[UA_TYPES_STRUCTUREDEFINITION]);
+
+        const auto definition = variant.getScalar<StructureDefinition>();
+        CHECK(definition.getDefaultEncodingId() == NodeId(0, 340));
+        CHECK(definition.getBaseDataType() == NodeId(0, 22));
+        CHECK(definition.getStructureType() == StructureType::Structure);
+        CHECK(definition.getFields().size() == 6);
     }
 
     // SUBCASE("Data type definition (write/read EnumDefinition, not supported yet)") {
