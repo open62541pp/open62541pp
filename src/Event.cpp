@@ -1,45 +1,31 @@
 #include "open62541pp/Event.h"
 
+#include "open62541pp/Config.h"  // UA_ENABLE_SUBSCRIPTIONS_EVENTS
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
-#include "open62541pp/TypeWrapper.h"  // operator==
-#include "open62541pp/overloads/comparison.h"  // operator==
+#include "open62541pp/detail/open62541/server.h"
 #include "open62541pp/types/DateTime.h"
+#include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"
-
-#include "open62541_impl.h"
 
 namespace opcua {
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS_EVENTS
 
-Event::Event(Server& server, const NodeId& eventType)
-    : connection_(server) {
-    const auto status = UA_Server_createEvent(server.handle(), eventType, id_.handle());
-    detail::throwOnBadStatus(status);
+Event::Event(Server& connection, const NodeId& eventType)
+    : connection_(connection) {
+    throwIfBad(UA_Server_createEvent(connection.handle(), eventType, id_.handle()));
 }
 
 Event::~Event() {
-    UA_Server_deleteNode(getConnection().handle(), getNodeId(), true /* deleteReferences */);
-}
-
-Server& Event::getConnection() noexcept {
-    return connection_;
-}
-
-const Server& Event::getConnection() const noexcept {
-    return connection_;
-}
-
-const NodeId& Event::getNodeId() const noexcept {
-    return id_;
+    UA_Server_deleteNode(connection().handle(), id(), true /* deleteReferences */);
 }
 
 Event& Event::writeSourceName(std::string_view sourceName) {
-    return writeProperty({0, "SourceName"}, Variant::fromScalar(String(sourceName)));
+    return writeProperty({0, "SourceName"}, Variant::fromScalar(sourceName));
 }
 
-Event& Event::writeTime(DateTime time) {
+Event& Event::writeTime(DateTime time) {  // NOLINT
     return writeProperty({0, "Time"}, Variant::fromScalar(time));
 }
 
@@ -53,29 +39,29 @@ Event& Event::writeMessage(const LocalizedText& message) {
 
 Event& Event::writeProperty(const QualifiedName& propertyName, const Variant& value) {
     const auto status = UA_Server_writeObjectProperty(
-        getConnection().handle(), getNodeId(), propertyName, value
+        connection().handle(), id(), propertyName, value
     );
-    detail::throwOnBadStatus(status);
+    throwIfBad(status);
     return *this;
 }
 
 ByteString Event::trigger(const NodeId& originId) {
     ByteString eventId;
     const auto status = UA_Server_triggerEvent(
-        getConnection().handle(),
-        getNodeId(),
+        connection().handle(),
+        id(),
         originId,
         eventId.handle(),
         false  // deleteEventNode
     );
-    detail::throwOnBadStatus(status);
+    throwIfBad(status);
     return eventId;
 }
 
 #endif
 
 bool operator==(const Event& lhs, const Event& rhs) noexcept {
-    return (lhs.getConnection() == rhs.getConnection()) && (lhs.getNodeId() == rhs.getNodeId());
+    return (lhs.connection() == rhs.connection()) && (lhs.id() == rhs.id());
 }
 
 bool operator!=(const Event& lhs, const Event& rhs) noexcept {

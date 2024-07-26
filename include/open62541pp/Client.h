@@ -7,27 +7,47 @@
 #include <string_view>
 #include <vector>
 
-#include "open62541pp/Common.h"
 #include "open62541pp/Config.h"
 #include "open62541pp/Logger.h"
 #include "open62541pp/Span.h"
 #include "open62541pp/Subscription.h"
-#include "open62541pp/types/NodeId.h"
-
-// forward declaration open62541
-struct UA_Client;
-
-namespace opcua {
+#include "open62541pp/detail/open62541/client.h"
 
 // forward declaration
+namespace opcua {
 class ApplicationDescription;
 class ByteString;
-class ClientContext;
+class Client;
 class DataType;
 class EndpointDescription;
 struct Login;
-template <typename ServerOrClient>
+template <typename Connection>
 class Node;
+class NodeId;
+
+namespace detail {
+struct ClientConnection;
+struct ClientContext;
+}  // namespace detail
+
+/* -------------------------------------- Helper functions -------------------------------------- */
+
+namespace detail {
+
+UA_ClientConfig* getConfig(UA_Client* client) noexcept;
+UA_ClientConfig& getConfig(Client& client) noexcept;
+
+ClientConnection* getConnection(UA_Client* client) noexcept;
+ClientConnection& getConnection(Client& client) noexcept;
+
+Client* getWrapper(UA_Client* client) noexcept;
+
+ClientContext* getContext(UA_Client* client) noexcept;
+ClientContext& getContext(Client& client) noexcept;
+
+}  // namespace detail
+
+/* ------------------------------------------- Client ------------------------------------------- */
 
 using StateCallback = std::function<void()>;
 
@@ -43,8 +63,10 @@ public:
      * Create client with default configuration (no encryption).
      * Security policies:
      * - [None](http://opcfoundation.org/UA/SecurityPolicy#None)
+     * @param logger Custom log function. If the passed function is empty, the default logger is
+     * used.
      */
-    Client();
+    explicit Client(Logger logger = nullptr);
 
 #ifdef UA_ENABLE_ENCRYPTION
     /**
@@ -72,6 +94,13 @@ public:
     );
 #endif
 
+    ~Client();
+
+    Client(const Client&) = delete;
+    Client(Client&&) noexcept = default;
+    Client& operator=(const Client&) = delete;
+    Client& operator=(Client&&) noexcept = default;
+
     /**
      * Gets a list of all registered servers at the given server.
      * @param serverUrl Server URL (for example `opc.tcp://localhost:4840`)
@@ -86,6 +115,7 @@ public:
     std::vector<EndpointDescription> getEndpoints(std::string_view serverUrl);
 
     /// Set custom logging function.
+    /// Does nothing if the passed function is empty or a nullptr.
     void setLogger(Logger logger);
 
     /// Set response timeout in milliseconds.
@@ -161,18 +191,18 @@ public:
     UA_Client* handle() noexcept;
     const UA_Client* handle() const noexcept;
 
-    /// Get client context (for internal use only).
-    /// @private
-    ClientContext& getContext() noexcept;
-
 private:
-    class Connection;
-    std::shared_ptr<Connection> connection_;
+    friend detail::ClientConnection& detail::getConnection(Client& client) noexcept;
+
+    std::unique_ptr<detail::ClientConnection> connection_;
 };
 
-/* ---------------------------------------------------------------------------------------------- */
+inline bool operator==(const Client& lhs, const Client& rhs) noexcept {
+    return (lhs.handle() == rhs.handle());
+}
 
-bool operator==(const Client& lhs, const Client& rhs) noexcept;
-bool operator!=(const Client& lhs, const Client& rhs) noexcept;
+inline bool operator!=(const Client& lhs, const Client& rhs) noexcept {
+    return !(lhs == rhs);
+}
 
 }  // namespace opcua

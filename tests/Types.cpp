@@ -6,10 +6,9 @@
 
 #include <doctest/doctest.h>
 
-#include "open62541pp/Common.h"
 #include "open62541pp/Config.h"
 #include "open62541pp/NodeIds.h"
-#include "open62541pp/detail/helper.h"  // detail::toString
+#include "open62541pp/detail/string_utils.h"  // detail::toString
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/DataValue.h"
@@ -95,7 +94,7 @@ TEST_CASE_TEMPLATE("StringLike ostream overloads", T, String, XmlElement) {
     CHECK(ss.str() == "test123");
 }
 
-TEST_CASE_TEMPLATE("StringLike implicit conversion to string_view", T, String, XmlElement) {
+TEST_CASE_TEMPLATE("StringLike implicit conversion to string_view", T, String) {
     T str("test123");
     std::string_view view = str;
     CHECK(view == str.get());
@@ -119,11 +118,13 @@ TEST_CASE("ByteString") {
         CHECK(std::string(bs.get()) == "XYZ");
     }
 
+#ifndef UAPP_NO_STD_FILESYSTEM
     SUBCASE("toFile / fromFile") {
         const ByteString bs({88, 89, 90});
         CHECK_NOTHROW(bs.toFile("bytestring.bin"));
         CHECK(ByteString::fromFile("bytestring.bin") == bs);
     }
+#endif
 
 #if UAPP_OPEN62541_VER_GE(1, 1)
     SUBCASE("fromBase64 / to Base64") {
@@ -283,11 +284,11 @@ TEST_CASE("NodeId") {
     }
 
     SUBCASE("Constructor with string identifier") {
-        String string("Test456");
-        NodeId id(2, string);
+        String str("Test456");
+        NodeId id(2, str);
         CHECK(id.getIdentifierType() == NodeIdType::String);
         CHECK(id.getNamespaceIndex() == 2);
-        CHECK(id.getIdentifierAs<String>() == string);
+        CHECK(id.getIdentifierAs<String>() == str);
     }
 
     SUBCASE("Constructor with guid identifier") {
@@ -298,16 +299,17 @@ TEST_CASE("NodeId") {
         CHECK(id.getIdentifierAs<Guid>() == guid);
     }
 
+#ifndef __APPLE__  // weird SIGABRT in macOS test runner
     SUBCASE("Constructor with byte string identifier") {
-        ByteString byteString("Test789");
-        NodeId id(4, byteString);
+        ByteString byteStr("Test789");
+        NodeId id(4, byteStr);
         CHECK(id.getIdentifierType() == NodeIdType::ByteString);
         CHECK(id.getNamespaceIndex() == 4);
-        CHECK(id.getIdentifierAs<ByteString>() == byteString);
+        CHECK(id.getIdentifierAs<ByteString>() == byteStr);
     }
+#endif
 
-    SUBCASE("Construct from ids") {
-        CHECK(NodeId(Type::Boolean) == NodeId(0, UA_NS0ID_BOOLEAN));
+    SUBCASE("Construct from node id enums") {
         CHECK(NodeId(DataTypeId::Boolean) == NodeId(0, UA_NS0ID_BOOLEAN));
         CHECK(NodeId(ReferenceTypeId::References) == NodeId(0, UA_NS0ID_REFERENCES));
         CHECK(NodeId(ObjectTypeId::BaseObjectType) == NodeId(0, UA_NS0ID_BASEOBJECTTYPE));
@@ -402,13 +404,101 @@ TEST_CASE("ExpandedNodeId") {
 }
 
 TEST_CASE("Variant") {
+    SUBCASE("fromScalar (ReferenceIfPossible)") {
+        constexpr auto policy = VariantPolicy::ReferenceIfPossible;
+        String value("test");
+        Variant var;
+        SUBCASE("Reference if mutable") {
+            SUBCASE("Deduce data type") {
+                var = Variant::fromScalar<policy>(value);
+            }
+            SUBCASE("Custom data type") {
+                var = Variant::fromScalar<policy>(value, UA_TYPES[UA_TYPES_STRING]);
+            }
+            CHECK(var->data == value.handle());
+        }
+        SUBCASE("Copy if rvalue") {
+            SUBCASE("Deduce data type") {
+                var = Variant::fromScalar<policy>(std::move(value));
+            }
+            SUBCASE("Custom data type") {
+                var = Variant::fromScalar<policy>(std::move(value), UA_TYPES[UA_TYPES_STRING]);
+            }
+            CHECK(var->data != value.handle());
+        }
+        SUBCASE("Copy if const") {
+            SUBCASE("Deduce data type") {
+                var = Variant::fromScalar<policy>(std::as_const(value));
+            }
+            SUBCASE("Custom data type") {
+                var = Variant::fromScalar<policy>(std::as_const(value), UA_TYPES[UA_TYPES_STRING]);
+            }
+            CHECK(var->data != value.handle());
+        }
+        SUBCASE("Copy if conversion needed") {
+            std::string str{"test"};
+            var = Variant::fromScalar<policy>(str);
+            CHECK(var->data != &str);
+        }
+        CHECK(var.isScalar());
+        CHECK(var->type == &UA_TYPES[UA_TYPES_STRING]);
+    }
+
+    SUBCASE("fromArray (ReferenceIfPossible)") {
+        constexpr auto policy = VariantPolicy::ReferenceIfPossible;
+        Variant var;
+        std::vector<String> vec{String("1"), String("2"), String("3")};
+        SUBCASE("Reference if mutable") {
+            SUBCASE("Deduce data type") {
+                var = Variant::fromArray<policy>(vec);
+            }
+            SUBCASE("Custom data type") {
+                var = Variant::fromArray<policy>(vec, UA_TYPES[UA_TYPES_STRING]);
+            }
+            CHECK(var->data == vec.data());
+        }
+        SUBCASE("Copy if rvalue") {
+            SUBCASE("Deduce data type") {
+                var = Variant::fromArray<policy>(std::move(vec));
+            }
+            SUBCASE("Custom data type") {
+                var = Variant::fromArray<policy>(std::move(vec), UA_TYPES[UA_TYPES_STRING]);
+            }
+            CHECK(var->data != vec.data());
+        }
+        SUBCASE("Copy if const") {
+            SUBCASE("Deduce data type") {
+                var = Variant::fromArray<policy>(std::as_const(vec));
+            }
+            SUBCASE("Custom data type") {
+                var = Variant::fromArray<policy>(std::as_const(vec), UA_TYPES[UA_TYPES_STRING]);
+            }
+            CHECK(var->data != vec.data());
+        }
+        SUBCASE("Copy if conversion needed") {
+            std::vector<std::string> vecStr{"1", "2", "3"};
+            var = Variant::fromArray<policy>(vecStr);
+            CHECK(var->data != vec.data());
+        }
+        SUBCASE("Copy iterator pair") {
+            SUBCASE("Deduce data type") {
+                var = Variant::fromArray<policy>(vec.begin(), vec.end());
+            }
+            SUBCASE("Custom data type") {
+                var = Variant::fromArray<policy>(vec.begin(), vec.end());
+            }
+            CHECK(var->data != vec.data());
+        }
+        CHECK(var.isArray());
+        CHECK(var->type == &UA_TYPES[UA_TYPES_STRING]);
+    }
+
     SUBCASE("Empty variant") {
         Variant var;
         CHECK(var.isEmpty());
         CHECK(!var.isScalar());
         CHECK(!var.isArray());
         CHECK(var.getDataType() == nullptr);
-        CHECK(var.getVariantType() == std::nullopt);
         CHECK(var.data() == nullptr);
         CHECK(std::as_const(var).data() == nullptr);
         CHECK(var.getArrayLength() == 0);
@@ -423,107 +513,14 @@ TEST_CASE("Variant") {
         Variant var;
         CHECK_FALSE(var.isType(UA_TYPES[UA_TYPES_STRING]));
         CHECK_FALSE(var.isType(DataTypeId::String));
-        CHECK_FALSE(var.isType(Type::String));
         CHECK_FALSE(var.isType<String>());
         CHECK(var.getDataType() == nullptr);
-        CHECK(var.getVariantType() == std::nullopt);
 
         var->type = &UA_TYPES[UA_TYPES_STRING];
         CHECK(var.isType(UA_TYPES[UA_TYPES_STRING]));
         CHECK(var.isType(DataTypeId::String));
-        CHECK(var.isType(Type::String));
         CHECK(var.isType<String>());
         CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_STRING]);
-        CHECK(var.getVariantType().value() == Type::String);
-    }
-
-    SUBCASE("Create from scalar") {
-        SUBCASE("Assign if possible") {
-            double value = 11.11;
-            const auto var = Variant::fromScalar(value);
-            CHECK(var.isScalar());
-            CHECK(var->type == &UA_TYPES[UA_TYPES_DOUBLE]);
-            CHECK(var->data == &value);
-        }
-        SUBCASE("Assign with custom datatype") {
-            double value = 11.11;
-            const auto var = Variant::fromScalar(value, UA_TYPES[UA_TYPES_DOUBLE]);
-            CHECK(var.isScalar());
-            CHECK(var->type == &UA_TYPES[UA_TYPES_DOUBLE]);
-            CHECK(var->data == &value);
-        }
-        SUBCASE("Copy if const") {
-            const double value = 11.11;
-            const auto var = Variant::fromScalar(value);
-            CHECK(var.isScalar());
-            CHECK(var->type == &UA_TYPES[UA_TYPES_DOUBLE]);
-            CHECK(var->data != &value);
-        }
-        SUBCASE("Copy rvalue") {
-            auto var = Variant::fromScalar(11.11);
-            CHECK(var.isScalar());
-            CHECK(var->type == &UA_TYPES[UA_TYPES_DOUBLE]);
-            CHECK(var.getScalar<double>() == 11.11);
-        }
-        SUBCASE("Copy if not assignable (const or conversion check failed)") {
-            std::string value{"test"};
-            const auto var = Variant::fromScalar<std::string>(value);
-            CHECK(var.isScalar());
-            CHECK(var->type == &UA_TYPES[UA_TYPES_STRING]);
-            CHECK(var->data != &value);
-        }
-        SUBCASE("Copy with custom data type") {
-            const double value = 11.11;
-            const auto var = Variant::fromScalar(value, UA_TYPES[UA_TYPES_DOUBLE]);
-            CHECK(var.isScalar());
-            CHECK(var->type == &UA_TYPES[UA_TYPES_DOUBLE]);
-            CHECK(var->data != &value);
-        }
-    }
-
-    SUBCASE("Create from array") {
-        SUBCASE("Assign if possible") {
-            std::vector<double> vec{1.1, 2.2, 3.3};
-            const auto var = Variant::fromArray(vec);
-            CHECK(var.isArray());
-            CHECK(var->type == &UA_TYPES[UA_TYPES_DOUBLE]);
-            CHECK(var->data == vec.data());
-        }
-        SUBCASE("Assign with custom data type") {
-            std::vector<UA_WriteValue> vec{{}, {}};
-            const auto var = Variant::fromArray(vec, UA_TYPES[UA_TYPES_WRITEVALUE]);
-            CHECK(var.isArray());
-            CHECK(var->type == &UA_TYPES[UA_TYPES_WRITEVALUE]);
-            CHECK(var->data == vec.data());
-        }
-        SUBCASE("Copy if const") {
-            const std::vector<double> vec{1.1, 2.2, 3.3};
-            const auto var = Variant::fromArray(vec);
-            CHECK(var.isArray());
-            CHECK(var->type == &UA_TYPES[UA_TYPES_DOUBLE]);
-            CHECK(var->data != vec.data());
-        }
-        SUBCASE("Copy with custom data type") {
-            const std::vector<UA_WriteValue> vec{{}, {}};
-            const auto var = Variant::fromArray(vec, UA_TYPES[UA_TYPES_WRITEVALUE]);
-            CHECK(var.isArray());
-            CHECK(var->type == &UA_TYPES[UA_TYPES_WRITEVALUE]);
-            CHECK(var->data != vec.data());
-        }
-        SUBCASE("Copy from iterator") {
-            const std::vector<double> vec{1.1, 2.2, 3.3};
-            const auto var = Variant::fromArray(vec.begin(), vec.end());
-            CHECK(var.isArray());
-            CHECK(var->type == &UA_TYPES[UA_TYPES_DOUBLE]);
-            CHECK(var->data != vec.data());
-        }
-        SUBCASE("Copy from iterator with custom data type") {
-            const std::vector<double> vec{1.1, 2.2, 3.3};
-            const auto var = Variant::fromArray(vec.begin(), vec.end(), UA_TYPES[UA_TYPES_DOUBLE]);
-            CHECK(var.isArray());
-            CHECK(var->type == &UA_TYPES[UA_TYPES_DOUBLE]);
-            CHECK(var->data != vec.data());
-        }
     }
 
     SUBCASE("Set/get scalar") {
@@ -589,10 +586,8 @@ TEST_CASE("Variant") {
         var.setArrayCopy(value);
 
         CHECK(var.isArray());
-        CHECK(var.isType(Type::String));
         CHECK(var.isType(NodeId{0, UA_NS0ID_STRING}));
         CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_STRING]);
-        CHECK(var.getVariantType().value() == Type::String);
 
         CHECK_THROWS(var.getScalarCopy<std::string>());
         CHECK_THROWS(var.getArrayCopy<int32_t>());
@@ -606,10 +601,8 @@ TEST_CASE("Variant") {
         var.setArrayCopy(array);
 
         CHECK(var.isArray());
-        CHECK(var.isType(Type::Float));
         CHECK(var.isType(NodeId{0, UA_NS0ID_FLOAT}));
         CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_FLOAT]);
-        CHECK(var.getVariantType().value() == Type::Float);
         CHECK(var.data() != array.data());
         CHECK(var.getArrayLength() == array.size());
 
@@ -620,7 +613,30 @@ TEST_CASE("Variant") {
 
     SUBCASE("Set array from initializer list (copy)") {
         Variant var;
-        var.setArrayCopy<const int>({1, 2, 3});  // TODO: avoid manual template types
+        var.setArrayCopy(Span<const int>{1, 2, 3});  // TODO: avoid manual template types
+    }
+
+    SUBCASE("Set/get array with std::vector<bool> (copy)") {
+        // std::vector<bool> is a possibly space optimized template specialization which caused
+        // several problems: https://github.com/open62541pp/open62541pp/issues/164
+        Variant var;
+        std::vector<bool> array{true, false, true};
+
+        SUBCASE("From vector") {
+            var = Variant::fromArray(array);
+        }
+
+        SUBCASE("Copy from iterator") {
+            var.setArrayCopy(array.begin(), array.end());
+        }
+
+        SUBCASE("Copy directly") {
+            var.setArrayCopy(array);
+        }
+
+        CHECK(var.getArrayLength() == array.size());
+        CHECK(var.isType<bool>());
+        CHECK(var.getArrayCopy<bool>() == array);
     }
 
     SUBCASE("Set/get non-builtin data types") {
@@ -667,6 +683,29 @@ TEST_CASE("Variant") {
             CHECK(var.getArray<CustomType>().data() != array.data());
         }
     }
+
+    SUBCASE("getScalar (lvalue & rvalue)") {
+        auto var = Variant::fromScalar("test");
+        void* data = var.getScalar<String>()->data;
+
+        String str;
+        SUBCASE("rvalue") {
+            str = var.getScalar<String>();
+            CHECK(str->data != data);  // copy
+        }
+        SUBCASE("const rvalue") {
+            str = std::as_const(var).getScalar<String>();
+            CHECK(str->data != data);  // copy
+        }
+        SUBCASE("lvalue") {
+            str = std::move(var).getScalar<String>();
+            CHECK(str->data == data);  // move
+        }
+        SUBCASE("const lvalue") {
+            str = std::move(std::as_const(var)).getScalar<String>();
+            CHECK(str->data != data);  // can not move const -> copy
+        }
+    }
 }
 
 TEST_CASE("DataValue") {
@@ -686,7 +725,7 @@ TEST_CASE("DataValue") {
         CHECK_FALSE(dv.hasServerTimestamp());
         CHECK_FALSE(dv.hasSourcePicoseconds());
         CHECK_FALSE(dv.hasServerPicoseconds());
-        CHECK_FALSE(dv.hasStatusCode());
+        CHECK_FALSE(dv.hasStatus());
     }
 
     SUBCASE("Constructor with all optional parameter empty") {
@@ -696,7 +735,7 @@ TEST_CASE("DataValue") {
         CHECK_FALSE(dv.hasServerTimestamp());
         CHECK_FALSE(dv.hasSourcePicoseconds());
         CHECK_FALSE(dv.hasServerPicoseconds());
-        CHECK_FALSE(dv.hasStatusCode());
+        CHECK_FALSE(dv.hasStatus());
     }
 
     SUBCASE("Constructor with all optional parameter specified") {
@@ -713,7 +752,7 @@ TEST_CASE("DataValue") {
         CHECK(dv.getServerTimestamp() == DateTime{2});
         CHECK(dv.getSourcePicoseconds() == 3);
         CHECK(dv.getServerPicoseconds() == 4);
-        CHECK(dv.getStatusCode() == UA_STATUSCODE_BADINTERNALERROR);
+        CHECK(dv.getStatus() == UA_STATUSCODE_BADINTERNALERROR);
     }
 
     SUBCASE("Setter methods") {
@@ -724,6 +763,7 @@ TEST_CASE("DataValue") {
             var.setScalar(value);
             CHECK(var->data == &value);
             dv.setValue(std::move(var));
+            CHECK(dv.hasValue());
             CHECK(dv.getValue().getScalar<float>() == value);
             CHECK(dv->value.data == &value);
         }
@@ -732,33 +772,63 @@ TEST_CASE("DataValue") {
             Variant var;
             var.setScalar(value);
             dv.setValue(var);
+            CHECK(dv.hasValue());
             CHECK(dv.getValue().getScalar<float>() == value);
         }
         SUBCASE("Source timestamp") {
             DateTime dt{123};
             dv.setSourceTimestamp(dt);
+            CHECK(dv.hasSourceTimestamp());
             CHECK(dv.getSourceTimestamp() == dt);
         }
         SUBCASE("Server timestamp") {
             DateTime dt{456};
             dv.setServerTimestamp(dt);
+            CHECK(dv.hasServerTimestamp());
             CHECK(dv.getServerTimestamp() == dt);
         }
         SUBCASE("Source picoseconds") {
             const uint16_t ps = 123;
             dv.setSourcePicoseconds(ps);
+            CHECK(dv.hasSourcePicoseconds());
             CHECK(dv.getSourcePicoseconds() == ps);
         }
         SUBCASE("Server picoseconds") {
             const uint16_t ps = 456;
             dv.setServerPicoseconds(ps);
+            CHECK(dv.hasServerPicoseconds());
             CHECK(dv.getServerPicoseconds() == ps);
         }
-        SUBCASE("Status code") {
+        SUBCASE("Status") {
             const UA_StatusCode statusCode = UA_STATUSCODE_BADALREADYEXISTS;
-            dv.setStatusCode(statusCode);
-            CHECK(dv.getStatusCode() == statusCode);
+            dv.setStatus(statusCode);
+            CHECK(dv.hasStatus());
+            CHECK(dv.getStatus() == statusCode);
         }
+    }
+
+    SUBCASE("getValue (lvalue & rvalue)") {
+        DataValue dv(Variant::fromScalar(11));
+        void* data = dv.getValue().data();
+
+        Variant var;
+        SUBCASE("rvalue") {
+            var = dv.getValue();
+            CHECK(var.data() != data);  // copy
+        }
+        SUBCASE("const rvalue") {
+            var = std::as_const(dv).getValue();
+            CHECK(var.data() != data);  // copy
+        }
+        SUBCASE("lvalue") {
+            var = std::move(dv).getValue();
+            CHECK(var.data() == data);  // move
+        }
+        SUBCASE("const lvalue") {
+            var = std::move(std::as_const(dv)).getValue();
+            CHECK(var.data() != data);  // can not move const -> copy
+        }
+        CHECK(var.getScalar<int>() == 11);
     }
 }
 
@@ -769,8 +839,8 @@ TEST_CASE("ExtensionObject") {
         CHECK_FALSE(obj.isEncoded());
         CHECK_FALSE(obj.isDecoded());
         CHECK(obj.getEncoding() == ExtensionObjectEncoding::EncodedNoBody);
-        CHECK(obj.getEncodedTypeId().value() == NodeId(0, 0));  // UA_NODEID_NULL
-        CHECK(obj.getEncodedBody().value().empty());
+        CHECK(obj.getEncodedTypeId() == nullptr);
+        CHECK(obj.getEncodedBody() == nullptr);
         CHECK(obj.getDecodedDataType() == nullptr);
         CHECK(obj.getDecodedData() == nullptr);
     }
@@ -864,10 +934,10 @@ TEST_CASE("NodeAttributes") {
     // getters/setters are generated by specialized macros
     // just test the macros with VariableAttributes here
     VariableAttributes attr;
-    CHECK(attr.getSpecifiedAttributes() == 0U);
+    CHECK(attr.getSpecifiedAttributes() == UA_NODEATTRIBUTESMASK_NONE);
 
     SUBCASE("Primitive type") {
-        attr.setWriteMask(UA_WRITEMASK_DATATYPE);
+        attr.setWriteMask(WriteMask::DataType);
         CHECK(attr.getWriteMask() == UA_WRITEMASK_DATATYPE);
         CHECK(attr.getSpecifiedAttributes() == UA_NODEATTRIBUTESMASK_WRITEMASK);
     }
@@ -1117,6 +1187,15 @@ TEST_CASE("Argument") {
     CHECK(argument.getArrayDimensions()[1] == 3);
 }
 
+TEST_CASE("CallMethodRequest / CallRequest") {
+    const CallMethodRequest item({1, 1000}, {1, 1001}, {Variant::fromScalar(11)});
+    const CallRequest request({}, {item});
+    CHECK(request.getMethodsToCall().size() == 1);
+    CHECK(request.getMethodsToCall()[0].getObjectId() == NodeId(1, 1000));
+    CHECK(request.getMethodsToCall()[0].getMethodId() == NodeId(1, 1001));
+    CHECK(request.getMethodsToCall()[0].getInputArguments().size() == 1);
+}
+
 #endif
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
@@ -1298,6 +1377,38 @@ TEST_CASE("AggregateFilter") {
     CHECK(aggregateFilter.getAggregateType() == NodeId(ObjectId::AggregateFunction_Average));
     CHECK(aggregateFilter.getProcessingInterval() == 11.11);
     CHECK(aggregateFilter.getAggregateConfiguration().useSlopedExtrapolation == true);
+}
+
+TEST_CASE("CreateSubscriptionRequest") {
+    const CreateSubscriptionRequest request({}, 11.11, 2, 3, 4, true, 5);
+    CHECK_NOTHROW(request.getRequestHeader());
+    CHECK(request.getRequestedPublishingInterval() == 11.11);
+    CHECK(request.getRequestedLifetimeCount() == 2);
+    CHECK(request.getRequestedMaxKeepAliveCount() == 3);
+    CHECK(request.getMaxNotificationsPerPublish() == 4);
+    CHECK(request.getPublishingEnabled() == true);
+    CHECK(request.getPriority() == 5);
+}
+
+TEST_CASE("ModifySubscriptionRequest") {
+    const ModifySubscriptionRequest request({}, 1, 11.11, 2, 3, 4, 5);
+    CHECK_NOTHROW(request.getRequestHeader());
+    CHECK(request.getSubscriptionId() == 1);
+    CHECK(request.getRequestedPublishingInterval() == 11.11);
+    CHECK(request.getRequestedLifetimeCount() == 2);
+    CHECK(request.getRequestedMaxKeepAliveCount() == 3);
+    CHECK(request.getMaxNotificationsPerPublish() == 4);
+    CHECK(request.getPriority() == 5);
+}
+
+TEST_CASE("SetPublishingModeRequest") {
+    const SetPublishingModeRequest request({}, true, {1, 2, 3});
+    CHECK_NOTHROW(request.getRequestHeader());
+    CHECK(request.getPublishingEnabled() == true);
+    CHECK(request.getSubscriptionIds().size() == 3);
+    CHECK(request.getSubscriptionIds()[0] == 1);
+    CHECK(request.getSubscriptionIds()[1] == 2);
+    CHECK(request.getSubscriptionIds()[2] == 3);
 }
 
 #endif

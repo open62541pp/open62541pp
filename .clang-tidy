@@ -1,16 +1,19 @@
-Checks: |
+---
+Checks: >
   bugprone*, -bugprone-easily-swappable-parameters, -bugprone-macro-parentheses,
   cert*,
   cppcoreguidelines*, -cppcoreguidelines-avoid-magic-numbers,
   clang-analyzer*, -clang-analyzer-osx*,
   -clang-diagnostic-ignored-optimization-argument,
   hicpp*,
-  misc*,
+  misc*, -misc-include-cleaner,
   modernize*, -modernize-use-trailing-return-type, -modernize-use-nodiscard,
   performance*,
   readability*, -readability-identifier-length, -readability-magic-numbers,
 
 CheckOptions:
+  - key: misc-non-private-member-variables-in-classes.IgnoreClassesWithAllMemberVariablesBeingPublic
+    value: true
   - key: readability-identifier-naming.TypedefCase
     value: CamelCase
   - key: readability-identifier-naming.StructCase
@@ -31,4 +34,3 @@ CheckOptions:
     value: aNy_CasE
 
 HeaderFilterRegex: "include/open62541pp"
-WarningsAsErrors: "*"

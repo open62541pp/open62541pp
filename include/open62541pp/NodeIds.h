@@ -4,6 +4,10 @@
 
 #pragma once
 
+#include <cstdint>
+
+#include "open62541pp/Common.h"  // Namespace
+
 // ignore (false-positive?) warning of GCC:
 // declaration of ‘MonitoringParameters’ shadows a global declaration
 #ifndef _MSC_VER
@@ -26,7 +30,7 @@ namespace opcua {
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/A.3
  * @ingroup NodeIds
  */
-enum class DataTypeId : uint32_t {
+enum class DataTypeId : int32_t {
     Boolean = 1,
     SByte = 2,
     Byte = 3,
@@ -437,11 +441,19 @@ enum class DataTypeId : uint32_t {
 };
 
 /**
+ * Get namespace of DataTypeId.
+ * @ingroup NodeIds
+ */
+constexpr Namespace getNamespace(DataTypeId /* unused */) noexcept {
+    return {0, "http://opcfoundation.org/UA/"};
+}
+
+/**
  * ReferenceType node ids defined by the OPC UA specification (generated).
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/A.3
  * @ingroup NodeIds
  */
-enum class ReferenceTypeId : uint32_t {
+enum class ReferenceTypeId : int32_t {
     References = 31,
     NonHierarchicalReferences = 32,
     HierarchicalReferences = 33,
@@ -491,11 +503,19 @@ enum class ReferenceTypeId : uint32_t {
 };
 
 /**
+ * Get namespace of ReferenceTypeId.
+ * @ingroup NodeIds
+ */
+constexpr Namespace getNamespace(ReferenceTypeId /* unused */) noexcept {
+    return {0, "http://opcfoundation.org/UA/"};
+}
+
+/**
  * ObjectType node ids defined by the OPC UA specification (generated).
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/A.3
  * @ingroup NodeIds
  */
-enum class ObjectTypeId : uint32_t {
+enum class ObjectTypeId : int32_t {
     BaseObjectType = 58,
     FolderType = 61,
     DataTypeSystemType = 75,
@@ -732,11 +752,19 @@ enum class ObjectTypeId : uint32_t {
 };
 
 /**
+ * Get namespace of ObjectTypeId.
+ * @ingroup NodeIds
+ */
+constexpr Namespace getNamespace(ObjectTypeId /* unused */) noexcept {
+    return {0, "http://opcfoundation.org/UA/"};
+}
+
+/**
  * VariableType node ids defined by the OPC UA specification (generated).
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/A.3
  * @ingroup NodeIds
  */
-enum class VariableTypeId : uint32_t {
+enum class VariableTypeId : int32_t {
     BaseVariableType = 62,
     BaseDataVariableType = 63,
     PropertyType = 68,
@@ -799,11 +827,19 @@ enum class VariableTypeId : uint32_t {
 };
 
 /**
+ * Get namespace of VariableTypeId.
+ * @ingroup NodeIds
+ */
+constexpr Namespace getNamespace(VariableTypeId /* unused */) noexcept {
+    return {0, "http://opcfoundation.org/UA/"};
+}
+
+/**
  * Object node ids defined by the OPC UA specification (generated).
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/A.3
  * @ingroup NodeIds
  */
-enum class ObjectId : uint32_t {
+enum class ObjectId : int32_t {
     ModellingRule_Mandatory = 78,
     ModellingRule_Optional = 80,
     ModellingRule_ExposesItsArray = 83,
@@ -2176,11 +2212,19 @@ enum class ObjectId : uint32_t {
 };
 
 /**
+ * Get namespace of ObjectId.
+ * @ingroup NodeIds
+ */
+constexpr Namespace getNamespace(ObjectId /* unused */) noexcept {
+    return {0, "http://opcfoundation.org/UA/"};
+}
+
+/**
  * Variable node ids defined by the OPC UA specification (generated).
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/A.3
  * @ingroup NodeIds
  */
-enum class VariableId : uint32_t {
+enum class VariableId : int32_t {
     DataTypeDescriptionType_DataTypeVersion = 104,
     DataTypeDescriptionType_DictionaryFragment = 105,
     DataTypeDictionaryType_DataTypeVersion = 106,
@@ -13402,11 +13446,19 @@ enum class VariableId : uint32_t {
 };
 
 /**
+ * Get namespace of VariableId.
+ * @ingroup NodeIds
+ */
+constexpr Namespace getNamespace(VariableId /* unused */) noexcept {
+    return {0, "http://opcfoundation.org/UA/"};
+}
+
+/**
  * Method node ids defined by the OPC UA specification (generated).
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/A.3
  * @ingroup NodeIds
  */
-enum class MethodId : uint32_t {
+enum class MethodId : int32_t {
     ProgramStateMachineType_Start = 2426,
     ProgramStateMachineType_Suspend = 2427,
     ProgramStateMachineType_Resume = 2428,
@@ -14578,6 +14630,14 @@ enum class MethodId : uint32_t {
     ServerConfiguration_CertificateGroups_DefaultHttpsGroup_GetRejectedList = 23552,
     ServerConfiguration_CertificateGroups_DefaultUserTokenGroup_GetRejectedList = 23554,
 };
+
+/**
+ * Get namespace of MethodId.
+ * @ingroup NodeIds
+ */
+constexpr Namespace getNamespace(MethodId /* unused */) noexcept {
+    return {0, "http://opcfoundation.org/UA/"};
+}
 
 // clang-format on
 

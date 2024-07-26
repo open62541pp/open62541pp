@@ -13,6 +13,10 @@ TEMPLATE_HEADER = """
 
 #pragma once
 
+#include <cstdint>
+
+#include "open62541pp/Common.h"  // Namespace
+
 // ignore (false-positive?) warning of GCC:
 // declaration of ‘MonitoringParameters’ shadows a global declaration
 #ifndef _MSC_VER
@@ -47,9 +51,17 @@ TEMPLATE_ENUM = """
  * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/A.3
  * @ingroup NodeIds
  */
-enum class {enum_name} : uint32_t {{
+enum class {enum_name} : int32_t {{
 {body}
 }};
+
+/**
+ * Get namespace of {enum_name}.
+ * @ingroup NodeIds
+ */
+constexpr Namespace getNamespace({enum_name} /* unused */) noexcept {{
+    return {{0, "http://opcfoundation.org/UA/"}};
+}}
 """.strip()
 
 

@@ -3,15 +3,16 @@ name: Doc
 on:
   push:
     branches: [master]
+  pull_request:
   release:
     types: [published]
   workflow_dispatch:
 
 jobs:
   doc:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
       - uses: aminya/setup-cpp@v1
@@ -30,3 +31,8 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: build/doc_html
+      - uses: actions/upload-artifact@v4
+        with:
+          name: doc-html
+          path: build/doc_html/
+          compression-level: 1

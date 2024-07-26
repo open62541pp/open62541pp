@@ -7,11 +7,13 @@ AccessModifierOffset: -4
 AlignAfterOpenBracket: BlockIndent # version >= 14 required
 # AlignConsecutiveAssignments: true
 # AlignConsecutiveDeclarations: true
-AlignTrailingComments: false
+AlignOperands: DontAlign
 AllowShortFunctionsOnASingleLine: Empty
+AlignTrailingComments: false
 AlwaysBreakTemplateDeclarations: Yes
 BinPackArguments: false
 BinPackParameters: false
+BreakAfterAttributes: Leave
 ColumnLimit: 100
 FixNamespaceComments: true
 IndentWidth: 4

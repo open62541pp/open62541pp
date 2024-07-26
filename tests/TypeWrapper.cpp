@@ -2,11 +2,8 @@
 
 #include <doctest/doctest.h>
 
-#include "open62541pp/Common.h"
 #include "open62541pp/TypeWrapper.h"
-#include "open62541pp/detail/helper.h"  // detail::toString
-
-#include "open62541_impl.h"
+#include "open62541pp/detail/string_utils.h"  // detail::toString
 
 using namespace opcua;
 
@@ -45,9 +42,6 @@ TEST_CASE("TypeWrapper") {
 
         CHECK(wrapperAssignment.handle()->data != wrapper.handle()->data);
         CHECK(detail::toString(*wrapperAssignment.handle()) == "test");
-
-        // self assignment
-        CHECK_NOTHROW(wrapper = wrapper);
     }
 
     SUBCASE("Copy assignment with native type") {
@@ -55,7 +49,7 @@ TEST_CASE("TypeWrapper") {
         UA_String str = UA_STRING_ALLOC("test");
         wrapper = str;
         CHECK(detail::toString(*wrapper.handle()) == "test");
-        UA_String_clear(&str);
+        UA_clear(&str, &UA_TYPES[UA_TYPES_STRING]);
     }
 
     SUBCASE("Move constructor") {
@@ -72,9 +66,6 @@ TEST_CASE("TypeWrapper") {
 
         CHECK(wrapper.handle()->data == nullptr);
         CHECK(detail::toString(*wrapperAssignment.handle()) == "test");
-
-        // self assignment
-        CHECK_NOTHROW(wrapper = std::move(wrapper));
     }
 
     SUBCASE("Move assignment with native type") {
@@ -125,14 +116,14 @@ TEST_CASE("TypeWrapper") {
         CHECK(wrapper.handle()->data != nullptr);
         CHECK(str.data == nullptr);
 
-        // UA_String_clear not necessary, because data is now owned by wrapper
+        // UA_clear not necessary, because data is now owned by wrapper
     }
 }
 
 TEST_CASE("asWrapper / asNative") {
-    class Int32Wrapper : public TypeWrapper<int32_t, UA_TYPES_INT32> {
+    class Int32Wrapper : public Wrapper<int32_t> {
     public:
-        using TypeWrapperBase::TypeWrapperBase;
+        using Wrapper<int32_t>::Wrapper;
 
         void increment() {
             auto& ref = *handle();

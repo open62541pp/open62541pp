@@ -4,6 +4,7 @@
 [doc-node]: https://open62541pp.github.io/open62541pp/classopcua_1_1Node.html
 [doc-typewrapper]: https://open62541pp.github.io/open62541pp/group__TypeWrapper.html
 [doc-services]: https://open62541pp.github.io/open62541pp/group__Services.html
+[doc-async-model]: https://open62541pp.github.io/open62541pp/async_model.html
 [ci]: https://github.com/open62541pp/open62541pp/actions/workflows/ci.yml
 [ci-compatibility]: https://github.com/open62541pp/open62541pp/actions/workflows/open62541-compatibility.yml
 
@@ -40,6 +41,7 @@
 - [Safe wrapper classes][doc-typewrapper] for open62541 `UA_*` types to prevent memory leaks
 - Native open62541 objects can be accessed using the `handle()` method of the wrapping classes
 - [Extensible type conversion system](#-type-conversion) to convert arbitrary types to/from native `UA_*` types
+- [Asynchronous model][doc-async-model] similar to (Boost) Asio
 - Cross-platform (tested on Windows, Linux and macOS)
 - Compatible with all stable open62541 versions ≥ v1.0
 - [Easy installation and integration with CMake](#-getting-started)
@@ -50,7 +52,7 @@ The latest stable open62541 release is integrated as a submodule. Depending on t
 All open62541 releases since v1.0 are supported and tested in a [CI pipeline][ci-compatibility] with debug/release builds and as static/dynamic library.
 
 The project is currently in `beta` stage but already used in production.
-Version [`v1.0.0` is planned for the beginning of 2024](https://github.com/open62541pp/open62541pp/milestone/1). No (major) breaking changes are expected.
+Version [`v1.0.0` is planned for 2024](https://github.com/open62541pp/open62541pp/milestone/1). No major breaking changes are expected.
 
 ## ✍ Examples
 
@@ -152,33 +154,33 @@ struct TypeConverter<std::byte> {
 
 ### Type map of built-in types
 
-| Type Enum `opcua::Type`  | Type                 | Typedef     | Wrapper                           | Conversions                                                 |
+| Type                     | Type open62541       | Typedef     | Wrapper                           | Conversions                                                 |
 | ------------------------ | -------------------- | ----------- | --------------------------------- | ----------------------------------------------------------- |
-| Boolean         | `UA_Boolean`         | `bool`      |                          |                                                             |
-| SByte           | `UA_SByte`           | `int8_t`    |                          |                                                             |
-| Byte            | `UA_Byte`            | `uint8_t`   |                          |                                                             |
-| Int16           | `UA_Int16`           | `int16_t`   |                          |                                                             |
-| UInt16          | `UA_UInt16`          | `uint16_t`  |                          |                                                             |
-| Int32           | `UA_Int32`           | `int32_t`   |                          |                                                             |
-| UInt32          | `UA_UInt32`          | `uint32_t`  |                          |                                                             |
-| Int64           | `UA_Int64`           | `int64_t`   |                          |                                                             |
-| UInt64          | `UA_UInt64`          | `uint64_t`  |                          |                                                             |
-| Float           | `UA_Float`           | `float`     |                          |                                                             |
-| Double          | `UA_Double`          | `double`    |                          |                                                             |
-| String          | `UA_String`          |             | `opcua::String`          | `std::string`, `std::string_view`, `const char*`, `char[N]` |
-| DateTime        | `UA_DateTime`        | `int64_t`   | `opcua::DateTime`        | `std::chrono::time_point`                                   |
-| Guid            | `UA_Guid`            |             | `opcua::Guid`            |                                                             |
-| ByteString      | `UA_ByteString`      | `UA_String` | `opcua::ByteString`      |                                                             |
-| XmlElement      | `UA_XmlElement`      | `UA_String` | `opcua::XmlElement`      |                                                             |
-| NodeId          | `UA_NodeId`          |             | `opcua::NodeId`          |                                                             |
-| ExpandedNodeId  | `UA_ExpandedNodeId`  |             | `opcua::ExpandedNodeId`  |                                                             |
-| StatusCode      | `UA_StatusCode`      | `uint32_t`  | `opcua::StatusCode`      |                                                             |
-| QualifiedName   | `UA_QualifiedName`   |             | `opcua::QualifiedName`   |                                                             |
-| LocalizedText   | `UA_LocalizedText`   |             | `opcua::LocalizedText`   |                                                             |
-| ExtensionObject | `UA_ExtensionObject` |             | `opcua::ExtensionObject` |                                                             |
-| DataValue       | `UA_DataValue`       |             | `opcua::DataValue`       |                                                             |
-| Variant         | `UA_Variant`         |             | `opcua::Variant`         |                                                             |
-| DiagnosticInfo  | `UA_DiagnosticInfo`  |             | `opcua::DiagnosticInfo`  |                                                             |
+| Boolean                  | `UA_Boolean`         | `bool`      |                                   |                                                             |
+| SByte                    | `UA_SByte`           | `int8_t`    |                                   |                                                             |
+| Byte                     | `UA_Byte`            | `uint8_t`   |                                   |                                                             |
+| Int16                    | `UA_Int16`           | `int16_t`   |                                   |                                                             |
+| UInt16                   | `UA_UInt16`          | `uint16_t`  |                                   |                                                             |
+| Int32                    | `UA_Int32`           | `int32_t`   |                                   |                                                             |
+| UInt32                   | `UA_UInt32`          | `uint32_t`  |                                   |                                                             |
+| Int64                    | `UA_Int64`           | `int64_t`   |                                   |                                                             |
+| UInt64                   | `UA_UInt64`          | `uint64_t`  |                                   |                                                             |
+| Float                    | `UA_Float`           | `float`     |                                   |                                                             |
+| Double                   | `UA_Double`          | `double`    |                                   |                                                             |
+| String                   | `UA_String`          |             | `opcua::String`                   | `std::string`, `std::string_view`, `const char*`, `char[N]` |
+| DateTime                 | `UA_DateTime`        | `int64_t`   | `opcua::DateTime`                 | `std::chrono::time_point`                                   |
+| Guid                     | `UA_Guid`            |             | `opcua::Guid`                     |                                                             |
+| ByteString               | `UA_ByteString`      | `UA_String` | `opcua::ByteString`               |                                                             |
+| XmlElement               | `UA_XmlElement`      | `UA_String` | `opcua::XmlElement`               |                                                             |
+| NodeId                   | `UA_NodeId`          |             | `opcua::NodeId`                   |                                                             |
+| ExpandedNodeId           | `UA_ExpandedNodeId`  |             | `opcua::ExpandedNodeId`           |                                                             |
+| StatusCode               | `UA_StatusCode`      | `uint32_t`  | `opcua::StatusCode`               |                                                             |
+| QualifiedName            | `UA_QualifiedName`   |             | `opcua::QualifiedName`            |                                                             |
+| LocalizedText            | `UA_LocalizedText`   |             | `opcua::LocalizedText`            |                                                             |
+| ExtensionObject          | `UA_ExtensionObject` |             | `opcua::ExtensionObject`          |                                                             |
+| DataValue                | `UA_DataValue`       |             | `opcua::DataValue`                |                                                             |
+| Variant                  | `UA_Variant`         |             | `opcua::Variant`                  |                                                             |
+| DiagnosticInfo           | `UA_DiagnosticInfo`  |             | `opcua::DiagnosticInfo`           |                                                             |
 
 ## 🚀 Getting started
 
@@ -213,10 +215,21 @@ target_link_libraries(myexecutable PRIVATE open62541pp::open62541pp)
 If you build and install this package to your system, a `open62541ppConfig.cmake` file will be generated and installed to your system.
 The installed library can be found and linked within CMake:
 
-```cmake 
-find_package(open62541pp::open62541pp CONFIG REQUIRED)
+```cmake
+find_package(open62541pp CONFIG REQUIRED)
 target_link_libraries(myexecutable PRIVATE open62541pp::open62541pp)
 ```
+
+### Integrate via package managers
+
+The library is available through the following package managers:
+
+- [**vcpkg**](https://vcpkg.io): Please refer to the [vcpkg documentation](https://vcpkg.io/en/getting-started) how to use it within your project.
+  You can easily use vcpkg to build and install open62541pp:
+
+  ```shell
+  vcpkg install open62541pp
+  ```
 
 ### Build and install
 
@@ -228,15 +241,12 @@ cd open62541pp
 # build
 mkdir build
 cd build
-cmake -DCMAKE_BUILD_TYPE=Debug -DUAPP_BUILD_EXAMPLES=ON -DUAPP_BUILD_TESTS=ON ..
-cmake --build .
+cmake -DCMAKE_BUILD_TYPE=Release -DUAPP_BUILD_EXAMPLES=ON -DUAPP_BUILD_TESTS=ON ..
+cmake --build .                   # single-configuration generator like Make or Ninja
+cmake --build . --config Release  # multi-configuration generator like Visual Studio, Xcode
 
 # run tests
 ctest --output-on-failure
-
-# generate coverage reports (text or html) with UAPP_ENABLE_COVERAGE option enabled
-cmake --build . --target open62541pp_coverage_report
-cmake --build . --target open62541pp_coverage_report_html
 
 # install to system
 cmake --install .

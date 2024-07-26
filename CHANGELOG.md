@@ -7,18 +7,106 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.14.0] - 2024-07-18
+
 ### Added
 
+- Update open62541 to v1.3.11 (#294)
+- Define `enum` as `Bitmask` by function overload (#295)
+
+### Fixed
+
+- Trigger value change in `server_datasource` example (#282)
+- Linking shared library on Windows (#290)
+- Stack overflow in session registry when running from different translation units (#292)
+
+## [0.13.0] - 2024-04-27
+
+### Added
+
+- Async functions in `services` namespace (client only), adapting the well-proven [asynchronous model of (Boost) Asio](https://think-async.com/asio/asio-1.28.0/doc/asio/overview/model.html) (#111)
+  - Example `client_method_async`
+- `Result<T>` class to encapsulate both the status code and the result of type `T`, similar to `std::expected` (#207, #264, #276)
+- Raw `services::call` functions (#215)
+- `NamespaceIndex` alias for `uint16_t` (#219)
+- Symmetric implementation of `services::createMonitoredItemDataChange`, `services::deleteMonitoredItem` for `Server` and `Client` (#238)
+- Deprecate high-level `DataChangeCallback<T>` and `EventCallback<T>`, use `DataChangeNotificationCallback` and `EventNotificationCallback` instead and create `MonitoredItem<T>` on demand (#245)
+- Subscription service request/response wrapper classes (#270)
+- Update open62541 to v1.3.10 (#278)
+
+### Changed
+
+- Move-only `Client` and `Server` (#211)
+- Rename `MonitoringParameters` -> `MonitoringParametersEx` to avoid shadowing of OPC UA type [`MonitoringParameter`](https://reference.opcfoundation.org/Core/Part4/v104/docs/7.16) (#214)
+- Remove logger utility functions `getLogLevelName`, `getLogCategoryName` (#221)
+- Change return type of `AccessControlBase::getUserTokenPolicies()` to `Span<Span<UserTokenPolicy>` (#223)
+- Deprecate `TypeWrapper::TypeWrapperBase` alias, use `TypeWrapper::TypeWrapper` instead (#253)
+- Return `ExtensionObject` encoded members by pointer, not optional (#254)
+- Strip `get` prefix of simple getters, deprecate old member functions (#267)
+- Use `Result<T>` return type for all functions in `services` namespace (#275)
+
+### Fixed
+
+- Error handling in `client_subscription` example (#203)
+- Compare `DataType` only by `typeId` (#217)
+- `Variant::isArray` check (#274)
+
+
+## [0.12.0] - 2024-02-10
+
+### Added
+
+- Raw `NodeManagement` functions in `opcua::services` (#121, #124)
+- Raw `View` functions in `opcua::services` (#125)
+- Pass `NodeId` identifier by value in constructors, mark as noexcept (#133)
 - `TypeRegistry<T>` to derive the corresponding `UA_DataType` object from template types.
   Custom data types can be registered with template specializations. (#136)
 - Check `Variant` data type by template type, e.g. `var.isType<int>()` (#139)
-- Update open62541 to v1.3.9
+- Update open62541 to v1.3.9 (#140)
+- Pass custom logger to constructor of `Server` and `Client` (#150, #155)
+- New function `void throwIfBad(UA_StatusCode)` (#153)
+- New function `UA_DataType& getDataType<T>()` (#154)
+- `AccessLevel`, `WriteMask` and `EventNotifier` enum classes (#163)
+- `Bitmask<T>` type to allow both enum classes and native enums/ints to define bitmasks (#163)
+- Propagate callback exceptions to event loop run method (#179)
+- Policy template parameter for `Variant` factory functions `Variant::fromScalar`, `Variant::fromArray` (#174)
+  - `VariantPolicy::Copy`: Store copy of scalar/array inside the variant (**default**)
+  - `VariantPolicy::Reference`: Store reference to scalar/array inside the variant
+  - `VariantPolicy::ReferenceIfPossible`: Favor referencing but fall back to copying if necessary
 
 ### Changed
 
 - Deprecate `TypeIndexList` (`TypeConverter::ValidTypes`) because it's not required anymore.
   Just remove `TypeConverter<T>::ValidTypes` from your template specializations.
   The `UA_DataType` is retrieved from the `TypeRegistry<NativeType>` specialization. (#136)
+- Passing an empty function to `setLogger` does nothing (#150)
+- Deprecate `Type` enum (#157)
+- Remove implicit conversion from `XmlElement` to `std::string_view` (#159)
+- Remove deprecated functions to read/write attributes (#166):
+  - `Node::readDataValue(DataValue&)`, use `Node::readDataValue()` instead
+  - `Node::readValue(DataValue&)`, use `Node::readValue()` instead
+  - `Node::readScalar<T>()`, use `Node::readValueScalar<T>()` instead
+  - `Node::readArray<T>()`, use `Node::readValueArray<T>()` instead
+  - `services::readDataValue(T&, const NodeId&, DataValue&)`, use `services::readDataValue(T&, const NodeId&)` instead
+  - `services::readValue(T&, const NodeId&, Variant&)`, use `services::readValue(T&, const NodeId&)` instead
+- Use `Bitmask<Enum>` instead of integers (#163)
+  - Use `Bitmask<AccessLevel>` instead of `uint8_t` with implicit conversions to/from `uint8_t`
+  - Use `Bitmask<WriteMask>` instead of `uint32_t` with implicit conversions to/from `uint32_t`
+  - Virtual function `AccessControlBase::getUserRightsMask` returns `Bitmask<WriteMask>` instead of `uint32_t`
+  - Virtual function `AccessControlBase::getUserAccessLevel` returns `Bitmask<AccessLevel>` instead of `uint8_t`
+  - Implicit conversion from `Bitmask<T>` to underlying integer are deprecated and will be made explicit in the future.
+    Please migrate to `Bitmask<T>::get()`.
+- Rename DataValue methods from has/get/setStatusCode to has/get/setStatus (#177)
+- `Variant` factory functions `Variant::fromScalar` and `Variant::fromArray` will create copies by default.
+  Choose other policies, `VariantPolicy::Reference` or `VariantPolicy::ReferenceIfPossible`, if needed. (#174)
+
+### Fixed
+
+- `setLogger` memory leak (#127)
+- `DataTypeBuilder::createEnum` (#143)
+- Underlying data type of enums (#152)
+- Add missing `noexcept` specifiers (#160)
+- Internal deletion of native arrays (#181)
 
 ## [0.11.0] - 2023-11-01
 
@@ -407,7 +495,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial public release
 
-[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.11.0...HEAD
+[unreleased]: https://github.com/open62541pp/open62541pp/compare/v0.14.0...HEAD
+[0.14.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.14.0
+[0.13.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.13.0
+[0.12.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.12.0
 [0.11.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.11.0
 [0.10.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.10.0
 [0.9.0]: https://github.com/open62541pp/open62541pp/releases/tag/v0.9.0

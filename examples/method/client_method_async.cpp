@@ -1,0 +1,54 @@
+// This example requires the server example `server_method` to be running.
+
+#include <iostream>
+#include <thread>
+
+#include "open62541pp/open62541pp.h"
+
+int main() {
+    opcua::Client client;
+    client.connect("opc.tcp://localhost:4840");
+
+    // Browse method node
+    auto objNode = client.getObjectsNode();
+    auto greetMethodNode = objNode.browseChild({{1, "Greet"}});
+
+    // Run client event loop in separate thread
+    auto clientThread = std::thread([&] { client.run(); });
+
+    // Asynchronously call method (future variant - default)
+    {
+        auto future = opcua::services::callAsync(
+            client,
+            objNode.id(),
+            greetMethodNode.id(),
+            {opcua::Variant::fromScalar("Future World")},
+            opcua::useFuture  // default, can be omitted
+        );
+
+        std::cout << "Waiting for asynchronous operation to complete\n";
+        future.wait();
+
+        std::cout << "Future ready, get method output\n";
+        auto result = future.get();
+        std::cout << result.value().at(0).getScalar<opcua::String>() << std::endl;
+    }
+
+    // Asynchronously call method (callback variant)
+    {
+        opcua::services::callAsync(
+            client,
+            objNode.id(),
+            greetMethodNode.id(),
+            {opcua::Variant::fromScalar("Callback World")},
+            [](const opcua::Result<std::vector<opcua::Variant>>& result) {
+                std::cout
+                    << "Callback with status code " << result.code() << ", get method output\n";
+                std::cout << result.value().at(0).getScalar<opcua::String>() << std::endl;
+            }
+        );
+    }
+
+    client.stop();
+    clientThread.join();
+}

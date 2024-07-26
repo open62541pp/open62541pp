@@ -6,29 +6,51 @@
 #include <string_view>
 #include <vector>
 
+#include "open62541pp/Common.h"  // NamespaceIndex
 #include "open62541pp/Config.h"
 #include "open62541pp/Logger.h"
 #include "open62541pp/NodeIds.h"
 #include "open62541pp/Span.h"
 #include "open62541pp/Subscription.h"
-#include "open62541pp/types/NodeId.h"
-
-// forward declaration open62541
-struct UA_Server;
-
-namespace opcua {
+#include "open62541pp/detail/open62541/server.h"
 
 // forward declaration
+namespace opcua {
 class AccessControlBase;
 class ByteString;
 class DataType;
 class Event;
-template <typename ServerOrClient>
+template <typename Connection>
 class Node;
-class ServerContext;
+class NodeId;
+class Server;
 class Session;
 struct ValueBackendDataSource;
 struct ValueCallback;
+
+namespace detail {
+struct ServerConnection;
+struct ServerContext;
+}  // namespace detail
+
+/* -------------------------------------- Helper functions -------------------------------------- */
+
+namespace detail {
+
+UA_ServerConfig* getConfig(UA_Server* server) noexcept;
+UA_ServerConfig& getConfig(Server& server) noexcept;
+
+ServerConnection* getConnection(UA_Server* server) noexcept;
+ServerConnection& getConnection(Server& server) noexcept;
+
+Server* getWrapper(UA_Server* server) noexcept;
+
+ServerContext* getContext(UA_Server* server) noexcept;
+ServerContext& getContext(Server& server) noexcept;
+
+}  // namespace detail
+
+/* ------------------------------------------- Server ------------------------------------------- */
 
 /**
  * High-level server class.
@@ -45,8 +67,10 @@ public:
      *
      * @param port Port number
      * @param certificate Optional X.509 v3 certificate in `DER` encoded format
+     * @param logger Custom log function. If the passed function is empty, the default logger is
+     * used.
      */
-    explicit Server(uint16_t port = 4840, ByteString certificate = {});
+    explicit Server(uint16_t port = 4840, ByteString certificate = {}, Logger logger = nullptr);
 
 #ifdef UA_ENABLE_ENCRYPTION
     /**
@@ -79,12 +103,22 @@ public:
     );
 #endif
 
+    ~Server();
+
+    Server(const Server&) = delete;
+    Server(Server&&) noexcept = default;
+    Server& operator=(const Server&) = delete;
+    Server& operator=(Server&&) noexcept = default;
+
     /// Set custom logging function.
+    /// Does nothing if the passed function is empty or a nullptr.
     void setLogger(Logger logger);
 
     /// Set custom access control.
+    /// @note Supported since open62541 v1.3
     void setAccessControl(AccessControlBase& accessControl);
     /// Set custom access control (transfer ownership to Server).
+    /// @note Supported since open62541 v1.3
     void setAccessControl(std::unique_ptr<AccessControlBase> accessControl);
 
     /// Set custom hostname, default: system's host name.
@@ -96,13 +130,14 @@ public:
     /// Set product URI, default: `http://open62541.org`.
     void setProductUri(std::string_view uri);
 
-    /// Get active client session.
-    std::vector<Session> getSessions() const;
+    /// Get active server session.
+    /// @note Supported since open62541 v1.3
+    std::vector<Session> getSessions();
 
     /// Get all defined namespaces.
     std::vector<std::string> getNamespaceArray();
     /// Register namespace. The new namespace index will be returned.
-    [[nodiscard]] uint16_t registerNamespace(std::string_view uri);
+    [[nodiscard]] NamespaceIndex registerNamespace(std::string_view uri);
 
     /// Set custom data types.
     /// All data types provided are automatically considered for decoding of received messages.
@@ -124,7 +159,7 @@ public:
 #endif
 
     /// Run a single iteration of the server's main loop.
-    /// @returns Maximum wait period until next Server::runIterate call (in ms)
+    /// @return Maximum wait period until next Server::runIterate call (in ms)
     uint16_t runIterate();
     /// Run the server's main loop. This method will block until Server::stop is called.
     void run();
@@ -142,18 +177,18 @@ public:
     UA_Server* handle() noexcept;
     const UA_Server* handle() const noexcept;
 
-    /// Get client context (for internal use only).
-    /// @private
-    ServerContext& getContext() noexcept;
-
 private:
-    class Connection;
-    std::shared_ptr<Connection> connection_;
+    friend detail::ServerConnection& detail::getConnection(Server& server) noexcept;
+
+    std::unique_ptr<detail::ServerConnection> connection_;
 };
 
-/* ---------------------------------------------------------------------------------------------- */
+inline bool operator==(const Server& lhs, const Server& rhs) noexcept {
+    return (lhs.handle() == rhs.handle());
+}
 
-bool operator==(const Server& lhs, const Server& rhs) noexcept;
-bool operator!=(const Server& lhs, const Server& rhs) noexcept;
+inline bool operator!=(const Server& lhs, const Server& rhs) noexcept {
+    return !(lhs == rhs);
+}
 
 }  // namespace opcua

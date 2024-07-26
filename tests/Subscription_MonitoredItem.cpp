@@ -12,6 +12,7 @@
 #include "open62541pp/types/Variant.h"
 
 #include "helper/Runner.h"
+#include "helper/ServerClientSetup.h"
 
 using namespace opcua;
 using namespace std::literals::chrono_literals;
@@ -20,53 +21,69 @@ using namespace std::literals::chrono_literals;
 TEST_CASE("Subscription & MonitoredItem (server)") {
     Server server;
 
-    auto sub = server.createSubscription();
+    SUBCASE("Create Subscription with arbitrary id") {
+        CHECK(Subscription(server, 11U).connection() == server);
+        CHECK(Subscription(server, 11U).subscriptionId() == 0U);
+    }
 
-    CHECK(sub.getConnection() == server);
-    CHECK(sub.getMonitoredItems().empty());
+    SUBCASE("Create MonitoredItem with arbitrary ids") {
+        CHECK(MonitoredItem(server, 11U, 22U).connection() == server);
+        CHECK(MonitoredItem(server, 11U, 22U).subscriptionId() == 0U);
+        CHECK(MonitoredItem(server, 11U, 22U).monitoredItemId() == 22U);
+    }
 
-    MonitoringParameters monitoringParameters{};
-    monitoringParameters.samplingInterval = 0.0;  // = fastest practical
+    SUBCASE("Create & delete subscription") {
+        auto sub = server.createSubscription();
+        CHECK(sub.getMonitoredItems().empty());
 
-    size_t notificationCount = 0;
-    auto mon = sub.subscribeDataChange(
-        VariableId::Server_ServerStatus_CurrentTime,
-        AttributeId::Value,
-        MonitoringMode::Reporting,
-        monitoringParameters,
-        [&](const auto& item, const DataValue&) {
-            CHECK(item.getNodeId() == NodeId(VariableId::Server_ServerStatus_CurrentTime));
-            CHECK(item.getAttributeId() == AttributeId::Value);
-            notificationCount++;
-        }
-    );
-    CHECK(sub.getMonitoredItems().size() == 1);
+        MonitoringParametersEx monitoringParameters{};
+        monitoringParameters.samplingInterval = 0.0;  // = fastest practical
 
-    std::this_thread::sleep_for(100ms);
-    server.runIterate();
-    CHECK(notificationCount > 0);
+        size_t notificationCount = 0;
+        auto mon = sub.subscribeDataChange(
+            VariableId::Server_ServerStatus_CurrentTime,
+            AttributeId::Value,
+            MonitoringMode::Reporting,
+            monitoringParameters,
+            [&](uint32_t, uint32_t, const DataValue&) { notificationCount++; }
+        );
+        CHECK(sub.getMonitoredItems().size() == 1);
 
-    mon.deleteMonitoredItem();
-    CHECK(sub.getMonitoredItems().empty());
+        std::this_thread::sleep_for(200ms);
+        server.runIterate();
+        CHECK(notificationCount > 0);
+
+        mon.deleteMonitoredItem();
+        CHECK(sub.getMonitoredItems().empty());
+    }
 }
 
 TEST_CASE("Subscription & MonitoredItem (client)") {
-    Server server;
-    ServerRunner serverRunner(server);
-    Client client;
-    client.connect("opc.tcp://localhost:4840");
+    ServerClientSetup setup;
+    setup.client.connect(setup.endpointUrl);
+    auto& client = setup.client;
+
+    SUBCASE("Create Subscription with arbitrary id") {
+        CHECK(Subscription(client, 11U).connection() == client);
+        CHECK(Subscription(client, 11U).subscriptionId() == 11U);
+    }
+
+    SUBCASE("Create MonitoredItem with arbitrary ids") {
+        CHECK(MonitoredItem(client, 11U, 22U).connection() == client);
+        CHECK(MonitoredItem(client, 11U, 22U).subscriptionId() == 11U);
+        CHECK(MonitoredItem(client, 11U, 22U).monitoredItemId() == 22U);
+    }
 
     SUBCASE("Create & delete subscription") {
         CHECK(client.getSubscriptions().empty());
 
         SubscriptionParameters parameters{};
         auto sub = client.createSubscription(parameters);
-        CAPTURE(sub.getSubscriptionId());
+        CAPTURE(sub.subscriptionId());
 
         CHECK(client.getSubscriptions().size() == 1);
         CHECK(client.getSubscriptions().at(0) == sub);
 
-        CHECK(sub.getConnection() == client);
         CHECK(sub.getMonitoredItems().empty());
 
         sub.deleteSubscription();
@@ -87,7 +104,7 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
 
     SUBCASE("Monitor data change") {
         SubscriptionParameters subscriptionParameters{};
-        MonitoringParameters monitoringParameters{};
+        MonitoringParametersEx monitoringParameters{};
 
         auto sub = client.createSubscription(subscriptionParameters);
         sub.setPublishingMode(false);  // enable later
@@ -98,11 +115,7 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
             AttributeId::Value,
             MonitoringMode::Sampling,  // won't trigger notifications
             monitoringParameters,
-            [&](const auto& item, const DataValue&) {
-                CHECK(item.getNodeId() == NodeId(VariableId::Server_ServerStatus_CurrentTime));
-                CHECK(item.getAttributeId() == AttributeId::Value);
-                notificationCount++;
-            }
+            [&](uint32_t, uint32_t, const DataValue&) { notificationCount++; }
         );
 
         CHECK(sub.getMonitoredItems().size() == 1);
@@ -130,41 +143,35 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
         auto monItem1 = sub.subscribeDataChange(
             VariableId::Server_ServerStatus_CurrentTime,
             AttributeId::Value,
-            [&](const auto& item, const DataValue&) {
-                CHECK(item.getNodeId() == NodeId(VariableId::Server_ServerStatus_CurrentTime));
-                CHECK(item.getAttributeId() == AttributeId::Value);
-                monId1 = item.getMonitoredItemId();
-            }
+            [&](uint32_t, uint32_t monId, const DataValue&) { monId1 = monId; }
         );
 
         uint32_t monId2 = 0;
         auto monItem2 = sub.subscribeDataChange(
             VariableId::Server_ServerStatus_CurrentTime,
             AttributeId::Value,
-            [&](const auto& item, const DataValue&) {
-                CHECK(item.getNodeId() == NodeId(VariableId::Server_ServerStatus_CurrentTime));
-                CHECK(item.getAttributeId() == AttributeId::Value);
-                monId2 = item.getMonitoredItemId();
-            }
+            [&](uint32_t, uint32_t monId, const DataValue&) { monId2 = monId; }
         );
 
         client.runIterate();
         CHECK(monId1 != 0);
         CHECK(monId2 != 0);
         CHECK(monId2 != monId1);
-        CHECK(monItem1.getMonitoredItemId() == monId1);
-        CHECK(monItem2.getMonitoredItemId() == monId2);
+        CHECK(monItem1.monitoredItemId() == monId1);
+        CHECK(monItem2.monitoredItemId() == monId2);
     }
 
     SUBCASE("Modify monitored item") {
         auto sub = client.createSubscription();
         auto mon = sub.subscribeDataChange(
-            VariableId::Server_ServerStatus_CurrentTime, AttributeId::Value, {}
+            VariableId::Server_ServerStatus_CurrentTime,
+            AttributeId::Value,
+            DataChangeNotificationCallback{}
         );
 
         mon.setMonitoringMode(MonitoringMode::Disabled);
 
-        MonitoringParameters monitoringParameters{};
+        MonitoringParametersEx monitoringParameters{};
         monitoringParameters.samplingInterval = 0.0;  // = fastest practical rate
         mon.setMonitoringParameters(monitoringParameters);
         CHECK(monitoringParameters.samplingInterval > 0.0);
@@ -185,9 +192,9 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
         auto mon = sub.subscribeEvent(
             ObjectId::Server,
             eventFilter,
-            [](const auto& item, const auto& eventFields) {
-                CAPTURE(item.getSubscriptionId());
-                CAPTURE(item.getMonitoredItemId());
+            [](uint32_t subId, uint32_t monId, const auto& eventFields) {
+                CAPTURE(subId);
+                CAPTURE(monId);
                 CAPTURE(eventFields.size());
             }
         );

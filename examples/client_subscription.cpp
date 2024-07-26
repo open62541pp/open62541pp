@@ -25,11 +25,12 @@ int main() {
         auto mon = sub.subscribeDataChange(
             opcua::VariableId::Server_ServerStatus_CurrentTime,  // monitored node id
             opcua::AttributeId::Value,  // monitored attribute
-            [&](const auto& item, const opcua::DataValue& value) {
+            [&](uint32_t subId, uint32_t monId, const opcua::DataValue& value) {
+                const opcua::MonitoredItem item(client, subId, monId);
                 std::cout
                     << "Data change notification:\n"
-                    << "- subscription id:   " << item.getSubscriptionId() << "\n"
-                    << "- monitored item id: " << item.getMonitoredItemId() << "\n"
+                    << "- subscription id:   " << item.subscriptionId() << "\n"
+                    << "- monitored item id: " << item.monitoredItemId() << "\n"
                     << "- node id:           " << item.getNodeId().toString() << "\n"
                     << "- attribute id:      " << static_cast<int>(item.getAttributeId()) << "\n";
 
@@ -39,7 +40,7 @@ int main() {
         );
 
         // Modify and delete the monitored item via the returned MonitoredItem<T> object
-        opcua::MonitoringParameters monitoringParameters{};
+        opcua::MonitoringParametersEx monitoringParameters{};
         monitoringParameters.samplingInterval = 100.0;
         mon.setMonitoringParameters(monitoringParameters);
         mon.setMonitoringMode(opcua::MonitoringMode::Reporting);
@@ -53,11 +54,11 @@ int main() {
             // Run the client's main loop to process callbacks and events.
             // This will block until client.stop() is called or an exception is thrown.
             client.run();
-        } catch (const opcua::BadDisconnect&) {
+        } catch (const opcua::BadStatus& e) {
             // Workaround to enforce a new session
             // https://github.com/open62541pp/open62541pp/issues/51
             client.disconnect();
-            std::cout << "Disconnected. Retry to connect in 3 seconds\n";
+            std::cout << "Error: " << e.what() << "\nRetry to connect in 3 seconds\n";
             std::this_thread::sleep_for(std::chrono::seconds(3));
         }
     }

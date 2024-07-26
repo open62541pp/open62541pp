@@ -7,7 +7,6 @@
 #include <type_traits>
 
 #include "open62541pp/Common.h"  // TypeIndex
-#include "open62541pp/open62541.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/DateTime.h"
 
@@ -28,6 +27,7 @@ struct [[deprecated(
         return ((typeIndex == typeIndexes) || ...);
     }
 
+    [[deprecated("The Type enum will be removed in the future")]]
     static constexpr bool contains(Type type) {
         return contains(static_cast<TypeIndex>(type));
     }

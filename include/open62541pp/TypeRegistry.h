@@ -2,10 +2,9 @@
 
 #include <type_traits>
 
-#include "open62541pp/Common.h"
 #include "open62541pp/TypeWrapper.h"
-#include "open62541pp/detail/traits.h"
-#include "open62541pp/open62541.h"
+#include "open62541pp/detail/open62541/common.h"
+#include "open62541pp/detail/traits.h"  // AlwaysFalse
 
 namespace opcua {
 
@@ -42,18 +41,18 @@ struct IsRegisteredType<T, std::void_t<decltype(TypeRegistry<T>{})>> : std::true
 template <typename T>
 inline constexpr bool isRegisteredType = IsRegisteredType<T>::value;
 
+}  // namespace detail
+
 template <typename T>
 inline const UA_DataType& getDataType() noexcept {
     using ValueType = typename std::remove_cv_t<T>;
     static_assert(
-        isRegisteredType<ValueType>,
+        detail::isRegisteredType<ValueType>,
         "The provided template type is not registered. "
         "Specify the data type manually or add a template specialization for TypeRegistry."
     );
     return TypeRegistry<ValueType>::getDataType();
 }
-
-}  // namespace detail
 
 /* ---------------------------------- Template specializations ---------------------------------- */
 

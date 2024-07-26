@@ -7,8 +7,6 @@ if(NOT TARGET open62541pp)
     find_package(open62541pp REQUIRED)
 endif()
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin/examples)
-
 function(add_example source)
     # extract filename
     get_filename_component(name ${source} NAME_WE)
@@ -44,13 +42,6 @@ function(add_example source)
                 CXX_CLANG_TIDY "${CMAKE_CXX_CLANG_TIDY};-checks=${checks}"
         )
     endif()
-    if(UAPP_ENABLE_PCH)
-        target_precompile_headers(
-            ${target_name}
-            REUSE_FROM
-                open62541pp::open62541pp
-        )
-    endif()
 endfunction()
 
 add_example(client_browse.cpp)
@@ -62,6 +53,7 @@ add_example(server.cpp)
 add_example(server_accesscontrol.cpp)
 add_example(server_datasource.cpp)
 add_example(server_instantiation.cpp)
+add_example(server_logger.cpp)
 add_example(server_minimal.cpp)
 add_example(server_valuecallback.cpp)
 
@@ -70,6 +62,7 @@ add_example(custom_datatypes/server_custom_datatypes.cpp)
 
 if(UA_ENABLE_METHODCALLS)
     add_example(method/client_method.cpp)
+    add_example(method/client_method_async.cpp)
     add_example(method/server_method.cpp)
 endif()
 

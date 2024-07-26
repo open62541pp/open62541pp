@@ -4,8 +4,12 @@
 #include <string>
 #include <vector>
 
+#include "open62541pp/Bitmask.h"
+#include "open62541pp/Span.h"
+#include "open62541pp/detail/open62541/common.h"  // UA_AccessControl
+#include "open62541pp/plugins/PluginAdapter.h"
 #include "open62541pp/types/Builtin.h"
-#include "open62541pp/types/Composed.h"
+#include "open62541pp/types/Composed.h"  // UserTokenPolicy, PerformUpdateType
 #include "open62541pp/types/NodeId.h"
 
 namespace opcua {
@@ -30,8 +34,8 @@ struct Login {
  * control callbacks.
  *
  * If exceptions are thrown within the access control callbacks, they are caught in the C callbacks
- * and will return the most restrictive access rights, e.g. `0x00` in `getUserAccessLevel` or
- * `false` in `allowAddNode`. A warning log message with the exception will be generated.
+ * and will return the most restrictive access rights, e.g. `AccessLevel::None` in
+ * `getUserAccessLevel` or `false` in `allowAddNode`. The exception will be logged (warning level).
  *
  * The `sessionId` can originally be both `NULL` in open62541.
  * This is the case when, for example, a MonitoredItem (the underlying Subscription) is detached
@@ -42,24 +46,15 @@ struct Login {
  * @see UA_AccessControl
  * @see https://www.open62541.org/doc/1.3/plugin_accesscontrol.html
  */
-class AccessControlBase {
+class AccessControlBase : public PluginAdapter<UA_AccessControl> {
 public:
-    AccessControlBase() = default;
-
-    virtual ~AccessControlBase() = default;
-
-    AccessControlBase(const AccessControlBase&) = default;
-    AccessControlBase(AccessControlBase&&) noexcept = default;
-
-    AccessControlBase& operator=(const AccessControlBase&) = default;
-    AccessControlBase& operator=(AccessControlBase&&) noexcept = default;
-
     /**
      * Get available user token policies.
      * If the `securityPolicyUri` is empty, the highest available security policy will be used to
      * transfer user tokens.
+     * @note The returned span must be valid throughout the lifetime of the instance.
      */
-    virtual std::vector<UserTokenPolicy> getUserTokenPolicies() = 0;
+    virtual Span<UserTokenPolicy> getUserTokenPolicies() = 0;
 
     /**
      * Authenticate a session.
@@ -76,10 +71,10 @@ public:
     virtual void closeSession(Session& session) = 0;
 
     /// Access control for all nodes.
-    virtual uint32_t getUserRightsMask(Session& session, const NodeId& nodeId) = 0;
+    virtual Bitmask<WriteMask> getUserRightsMask(Session& session, const NodeId& nodeId) = 0;
 
     /// Additional access control for variable nodes.
-    virtual uint8_t getUserAccessLevel(Session& session, const NodeId& nodeId) = 0;
+    virtual Bitmask<AccessLevel> getUserAccessLevel(Session& session, const NodeId& nodeId) = 0;
 
     /// Additional access control for method nodes.
     virtual bool getUserExecutable(Session& session, const NodeId& methodId) = 0;
@@ -123,6 +118,9 @@ public:
         DateTime endTimestamp,
         bool isDeleteModified
     ) = 0;
+
+    void clear(UA_AccessControl& ac) noexcept override;
+    UA_AccessControl create() override;
 };
 
 /* ----------------------------------- Default access control ----------------------------------- */
@@ -139,7 +137,7 @@ class AccessControlDefault : public AccessControlBase {
 public:
     explicit AccessControlDefault(bool allowAnonymous = true, std::vector<Login> logins = {});
 
-    std::vector<UserTokenPolicy> getUserTokenPolicies() override;
+    Span<UserTokenPolicy> getUserTokenPolicies() override;
 
     StatusCode activateSession(
         Session& session,
@@ -150,9 +148,9 @@ public:
 
     void closeSession(Session& session) override;
 
-    uint32_t getUserRightsMask(Session& session, const NodeId& nodeId) override;
+    Bitmask<WriteMask> getUserRightsMask(Session& session, const NodeId& nodeId) override;
 
-    uint8_t getUserAccessLevel(Session& session, const NodeId& nodeId) override;
+    Bitmask<AccessLevel> getUserAccessLevel(Session& session, const NodeId& nodeId) override;
 
     bool getUserExecutable(Session& session, const NodeId& methodId) override;
 
@@ -189,6 +187,7 @@ public:
 private:
     bool allowAnonymous_;
     std::vector<Login> logins_;
+    std::vector<UserTokenPolicy> userTokenPolicies_;
 };
 
 }  // namespace opcua

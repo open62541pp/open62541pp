@@ -6,9 +6,9 @@
 
 #include "open62541pp/AccessControl.h"
 #include "open62541pp/Client.h"
+#include "open62541pp/Config.h"
 #include "open62541pp/Server.h"
-
-#include "open62541_impl.h"
+#include "open62541pp/detail/open62541/client.h"
 
 #include "helper/Runner.h"
 
@@ -16,6 +16,13 @@ using namespace std::chrono_literals;
 using namespace opcua;
 
 constexpr std::string_view localServerUrl{"opc.tcp://localhost:4840"};
+
+TEST_CASE("Client with custom logger") {
+    bool gotMessage = false;
+    Client client([&gotMessage](auto&&...) { gotMessage = true; });
+    log(client, LogLevel::Error, LogCategory::Client, "Message");
+    CHECK(gotMessage);
+}
 
 TEST_CASE("Client discovery") {
     Server server;
@@ -69,6 +76,7 @@ TEST_CASE("Client anonymous login") {
     }
 }
 
+#if UAPP_OPEN62541_VER_GE(1, 3)
 TEST_CASE("Client username/password login") {
     AccessControlDefault accessControl(false, {{"username", "password"}});
     Server server;
@@ -86,6 +94,7 @@ TEST_CASE("Client username/password login") {
         CHECK_NOTHROW(client.disconnect());
     }
 }
+#endif
 
 #ifdef UA_ENABLE_ENCRYPTION
 TEST_CASE("Client encryption") {
@@ -184,4 +193,22 @@ TEST_CASE("Client methods") {
         CHECK(namespaces.at(0) == "http://opcfoundation.org/UA/");
         CHECK(namespaces.at(1) == "urn:open62541.server.application");
     }
+}
+
+TEST_CASE("Client helper functions") {
+    UA_Client* clientNull{nullptr};
+    Client client;
+
+    CHECK(detail::getConfig(clientNull) == nullptr);
+    CHECK(&detail::getConfig(client) == detail::getConfig(client.handle()));
+
+    CHECK(detail::getConnection(clientNull) == nullptr);
+    CHECK(&detail::getConnection(client) == detail::getConnection(client.handle()));
+
+    CHECK(detail::getWrapper(clientNull) == nullptr);
+    CHECK(detail::getWrapper(client.handle()) != nullptr);
+    CHECK(detail::getWrapper(client.handle())->handle() == client.handle());
+
+    CHECK(detail::getContext(clientNull) == nullptr);
+    CHECK(&detail::getContext(client) == detail::getContext(client.handle()));
 }

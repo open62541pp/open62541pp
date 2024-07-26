@@ -1,0 +1,28 @@
+/*!
+@example server_minimal.cpp
+@example server.cpp
+@example server_instantiation.cpp
+@example server_logger.cpp
+@example server_valuecallback.cpp
+@example server_datasource.cpp
+@example server_accesscontrol.cpp
+
+@example client_minimal.cpp
+@example client_connect.cpp
+@example client_find_servers.cpp
+@example client_browse.cpp
+@example client_subscription.cpp
+
+@example method/server_method.cpp
+@example method/client_method.cpp
+@example method/client_method_async.cpp
+
+@example events/server_events.cpp
+@example events/client_eventfilter.cpp
+
+@example custom_datatypes/custom_datatypes.h
+@example custom_datatypes/server_custom_datatypes.cpp
+@example custom_datatypes/client_custom_datatypes.cpp
+
+@example typeconversion.cpp
+*/

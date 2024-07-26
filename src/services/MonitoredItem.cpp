@@ -2,314 +2,247 @@
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 
+#include <algorithm>  // for_each_n
 #include <cstddef>
 #include <memory>
-#include <type_traits>  // is_same_v
 #include <utility>  // move
 
 #include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
+#include "open62541pp/Span.h"
 #include "open62541pp/TypeWrapper.h"
-#include "open62541pp/types/Composed.h"
+#include "open62541pp/detail/ClientContext.h"
+#include "open62541pp/detail/ServerContext.h"
+#include "open62541pp/detail/open62541/client.h"
+#include "open62541pp/detail/open62541/server.h"
+#include "open62541pp/services/detail/ClientService.h"
+#include "open62541pp/services/detail/RequestHandling.h"
+#include "open62541pp/services/detail/ResponseHandling.h"
+#include "open62541pp/types/Composed.h"  // ReadValueId
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/Variant.h"
 
-#include "../ClientContext.h"
-#include "../ServerContext.h"
-#include "../open62541_impl.h"
-
 namespace opcua::services {
 
-static void dataChangeNotificationCallback(
-    [[maybe_unused]] UA_Server* server,
-    uint32_t monitoredItemId,
-    void* monitoredItemContext,
-    [[maybe_unused]] const UA_NodeId* nodeId,
-    [[maybe_unused]] void* nodeContext,
-    [[maybe_unused]] uint32_t attributeId,
-    const UA_DataValue* value
-) noexcept {
-    if (monitoredItemContext == nullptr) {
-        return;
-    }
-    auto* monitoredItem = static_cast<ServerContext::MonitoredItem*>(monitoredItemContext);
-    auto& callback = monitoredItem->dataChangeCallback;
-    if (callback) {
-        detail::invokeCatchIgnore([&] {
-            callback(0U, monitoredItemId, asWrapper<DataValue>(*value));
-        });
-    }
-}
-
-static void dataChangeNotificationCallback(
-    [[maybe_unused]] UA_Client* client,
-    uint32_t subId,
-    [[maybe_unused]] void* subContext,
-    uint32_t monId,
-    void* monContext,
-    UA_DataValue* value
-) noexcept {
-    if (monContext == nullptr) {
-        return;
-    }
-    auto* monitoredItem = static_cast<ClientContext::MonitoredItem*>(monContext);
-    auto& callback = monitoredItem->dataChangeCallback;
-    if (callback) {
-        detail::invokeCatchIgnore([&] { callback(subId, monId, asWrapper<DataValue>(*value)); });
-    }
-}
-
-static void eventNotificationCallback(
-    [[maybe_unused]] UA_Client* client,
-    uint32_t subId,
-    [[maybe_unused]] void* subContext,
-    uint32_t monId,
-    void* monContext,
-    size_t nEventFields,
-    UA_Variant* eventFields
-) noexcept {
-    if (monContext == nullptr) {
-        return;
-    }
-    auto* monitoredItem = static_cast<ClientContext::MonitoredItem*>(monContext);
-    auto& callback = monitoredItem->eventCallback;
-    if (callback) {
-        detail::invokeCatchIgnore([&] {
-            callback(subId, monId, {asWrapper<Variant>(eventFields), nEventFields});
-        });
-    }
-}
-
-static void deleteMonitoredItemCallback(
-    [[maybe_unused]] UA_Client* client,
-    uint32_t subId,
-    [[maybe_unused]] void* subContext,
-    uint32_t monId,
-    void* monContext
-) noexcept {
-    if (monContext != nullptr) {
-        auto* monitoredItem = static_cast<ClientContext::MonitoredItem*>(monContext);
-        if (monitoredItem->deleteCallback) {
-            monitoredItem->deleteCallback(subId, monId);
-        }
-    }
-    ClientContext& clientContext = getContext(client);
-    clientContext.monitoredItems.erase({subId, monId});
-}
-
-inline static void copyMonitoringParametersToNative(
-    const MonitoringParameters& parameters, UA_MonitoringParameters& native
-) {
-    native.samplingInterval = parameters.samplingInterval;
-    native.filter = parameters.filter;
-    native.queueSize = parameters.queueSize;
-    native.discardOldest = parameters.discardOldest;
-}
-
 template <typename T>
-inline static void reviseMonitoringParameters(MonitoringParameters& parameters, const T& result) {
-    // response type may be UA_MonitoredItemCreateResult or UA_MonitoredItemModifyResult
-    parameters.samplingInterval = result->revisedSamplingInterval;
-    parameters.queueSize = result->revisedQueueSize;
-    parameters.filter = asWrapper<ExtensionObject>(result->filterResult);
-}
-
-uint32_t createMonitoredItemDataChange(
-    Client& client,
-    uint32_t subscriptionId,
+inline static auto createMonitoredItemContext(
+    T& connection,
     const ReadValueId& itemToMonitor,
-    MonitoringMode monitoringMode,
-    MonitoringParameters& parameters,
     DataChangeNotificationCallback dataChangeCallback,
-    DeleteMonitoredItemCallback deleteCallback
-) {
-    UA_MonitoredItemCreateRequest request{};
-    request.itemToMonitor = *itemToMonitor.handle();
-    request.monitoringMode = static_cast<UA_MonitoringMode>(monitoringMode);
-    copyMonitoringParametersToNative(parameters, request.requestedParameters);
-
-    auto monitoredItemContext = std::make_unique<ClientContext::MonitoredItem>();
-    monitoredItemContext->itemToMonitor = itemToMonitor;
-    monitoredItemContext->dataChangeCallback = std::move(dataChangeCallback);
-    monitoredItemContext->deleteCallback = std::move(deleteCallback);
-
-    using Result = TypeWrapper<UA_MonitoredItemCreateResult, UA_TYPES_MONITOREDITEMCREATERESULT>;
-    const Result result = UA_Client_MonitoredItems_createDataChange(
-        client.handle(),
-        subscriptionId,
-        static_cast<UA_TimestampsToReturn>(parameters.timestamps),
-        request,
-        monitoredItemContext.get(),
-        dataChangeNotificationCallback,
-        deleteMonitoredItemCallback
-    );
-    detail::throwOnBadStatus(result->statusCode);
-    reviseMonitoringParameters(parameters, result);
-
-    const auto monitoredItemId = result->monitoredItemId;
-    client.getContext().monitoredItems.insert_or_assign(
-        {subscriptionId, monitoredItemId}, std::move(monitoredItemContext)
-    );
-    return monitoredItemId;
-}
-
-uint32_t createMonitoredItemDataChange(
-    Server& server,
-    const ReadValueId& itemToMonitor,
-    MonitoringMode monitoringMode,
-    MonitoringParameters& parameters,
-    DataChangeNotificationCallback dataChangeCallback
-) {
-    UA_MonitoredItemCreateRequest request{};
-    request.itemToMonitor = *itemToMonitor.handle();
-    request.monitoringMode = static_cast<UA_MonitoringMode>(monitoringMode);
-    copyMonitoringParametersToNative(parameters, request.requestedParameters);
-
-    auto monitoredItemContext = std::make_unique<ServerContext::MonitoredItem>();
-    monitoredItemContext->itemToMonitor = itemToMonitor;
-    monitoredItemContext->dataChangeCallback = std::move(dataChangeCallback);
-
-    using Result = TypeWrapper<UA_MonitoredItemCreateResult, UA_TYPES_MONITOREDITEMCREATERESULT>;
-    const Result result = UA_Server_createDataChangeMonitoredItem(
-        server.handle(),
-        static_cast<UA_TimestampsToReturn>(parameters.timestamps),
-        request,
-        monitoredItemContext.get(),
-        dataChangeNotificationCallback
-    );
-    detail::throwOnBadStatus(result->statusCode);
-    reviseMonitoringParameters(parameters, result);
-
-    const auto monitoredItemId = result->monitoredItemId;
-    server.getContext().monitoredItems.insert_or_assign(
-        monitoredItemId, std::move(monitoredItemContext)
-    );
-    return monitoredItemId;
-}
-
-uint32_t createMonitoredItemEvent(
-    Client& client,
-    uint32_t subscriptionId,
-    const ReadValueId& itemToMonitor,
-    MonitoringMode monitoringMode,
-    MonitoringParameters& parameters,
     EventNotificationCallback eventCallback,
     DeleteMonitoredItemCallback deleteCallback
 ) {
-    UA_MonitoredItemCreateRequest request{};
-    request.itemToMonitor = *itemToMonitor.handle();
-    request.monitoringMode = static_cast<UA_MonitoringMode>(monitoringMode);
-    copyMonitoringParametersToNative(parameters, request.requestedParameters);
+    auto context = std::make_unique<detail::MonitoredItemContext>();
+    context->catcher = &opcua::detail::getContext(connection).exceptionCatcher;
+    context->itemToMonitor = itemToMonitor;
+    context->dataChangeCallback = std::move(dataChangeCallback);
+    context->eventCallback = std::move(eventCallback);
+    context->deleteCallback = std::move(deleteCallback);
+    return context;
+}
 
-    auto monitoredItemContext = std::make_unique<ClientContext::MonitoredItem>();
-    monitoredItemContext->itemToMonitor = itemToMonitor;
-    monitoredItemContext->eventCallback = std::move(eventCallback);
-    monitoredItemContext->deleteCallback = std::move(deleteCallback);
+template <typename T>
+inline static Result<uint32_t> createMonitoredItem(
+    T& connection,
+    uint32_t subscriptionId,
+    MonitoringParametersEx& parameters,
+    std::unique_ptr<detail::MonitoredItemContext> context,
+    const UA_MonitoredItemCreateResult& result
+) {
+    if (StatusCode code = result.statusCode; code.isBad()) {
+        return BadResult(code);
+    }
+    detail::reviseMonitoringParameters(parameters, result);
 
-    using Result = TypeWrapper<UA_MonitoredItemCreateResult, UA_TYPES_MONITOREDITEMCREATERESULT>;
-    const Result result = UA_Client_MonitoredItems_createEvent(
-        client.handle(),
-        subscriptionId,
-        static_cast<UA_TimestampsToReturn>(parameters.timestamps),
-        request,
-        monitoredItemContext.get(),
-        eventNotificationCallback,
-        deleteMonitoredItemCallback
-    );
-    detail::throwOnBadStatus(result->statusCode);
-    reviseMonitoringParameters(parameters, result);
-
-    const auto monitoredItemId = result->monitoredItemId;
-    client.getContext().monitoredItems.insert_or_assign(
-        {subscriptionId, monitoredItemId}, std::move(monitoredItemContext)
-    );
+    const auto monitoredItemId = result.monitoredItemId;
+    auto* contextPtr = context.get();
+    opcua::detail::getContext(connection)
+        .monitoredItems.insert({subscriptionId, monitoredItemId}, std::move(context));
+    contextPtr->inserted = true;
     return monitoredItemId;
 }
 
-void modifyMonitoredItem(
-    Client& client,
+template <>
+Result<uint32_t> createMonitoredItemDataChange<Client>(
+    Client& connection,
+    uint32_t subscriptionId,
+    const ReadValueId& itemToMonitor,
+    MonitoringMode monitoringMode,
+    MonitoringParametersEx& parameters,
+    DataChangeNotificationCallback dataChangeCallback,
+    DeleteMonitoredItemCallback deleteCallback
+) {
+    auto context = createMonitoredItemContext(
+        connection, itemToMonitor, std::move(dataChangeCallback), {}, std::move(deleteCallback)
+    );
+    using Result = TypeWrapper<UA_MonitoredItemCreateResult, UA_TYPES_MONITOREDITEMCREATERESULT>;
+    const Result result = UA_Client_MonitoredItems_createDataChange(
+        connection.handle(),
+        subscriptionId,
+        static_cast<UA_TimestampsToReturn>(parameters.timestamps),
+        detail::createMonitoredItemCreateRequest(itemToMonitor, monitoringMode, parameters),
+        context.get(),
+        context->dataChangeCallbackNativeClient,
+        context->deleteCallbackNative
+    );
+    return createMonitoredItem(connection, subscriptionId, parameters, std::move(context), result);
+}
+
+template <>
+Result<uint32_t> createMonitoredItemDataChange<Server>(
+    Server& connection,
+    [[maybe_unused]] uint32_t subscriptionId,
+    const ReadValueId& itemToMonitor,
+    MonitoringMode monitoringMode,
+    MonitoringParametersEx& parameters,
+    DataChangeNotificationCallback dataChangeCallback,
+    DeleteMonitoredItemCallback deleteCallback
+) {
+    auto context = createMonitoredItemContext(
+        connection, itemToMonitor, std::move(dataChangeCallback), {}, std::move(deleteCallback)
+    );
+    using Result = TypeWrapper<UA_MonitoredItemCreateResult, UA_TYPES_MONITOREDITEMCREATERESULT>;
+    const Result result = UA_Server_createDataChangeMonitoredItem(
+        connection.handle(),
+        static_cast<UA_TimestampsToReturn>(parameters.timestamps),
+        detail::createMonitoredItemCreateRequest(itemToMonitor, monitoringMode, parameters),
+        context.get(),
+        context->dataChangeCallbackNativeServer
+    );
+    return createMonitoredItem(connection, 0U, parameters, std::move(context), result);
+}
+
+Result<uint32_t> createMonitoredItemDataChange(
+    Server& connection,
+    const ReadValueId& itemToMonitor,
+    MonitoringMode monitoringMode,
+    MonitoringParametersEx& parameters,
+    DataChangeNotificationCallback dataChangeCallback
+) {
+    return createMonitoredItemDataChange(
+        connection, 0U, itemToMonitor, monitoringMode, parameters, std::move(dataChangeCallback)
+    );
+}
+
+Result<uint32_t> createMonitoredItemEvent(
+    Client& connection,
+    uint32_t subscriptionId,
+    const ReadValueId& itemToMonitor,
+    MonitoringMode monitoringMode,
+    MonitoringParametersEx& parameters,
+    EventNotificationCallback eventCallback,
+    DeleteMonitoredItemCallback deleteCallback
+) {
+    auto context = createMonitoredItemContext(
+        connection, itemToMonitor, {}, std::move(eventCallback), std::move(deleteCallback)
+    );
+    using Result = TypeWrapper<UA_MonitoredItemCreateResult, UA_TYPES_MONITOREDITEMCREATERESULT>;
+    const Result result = UA_Client_MonitoredItems_createEvent(
+        connection.handle(),
+        subscriptionId,
+        static_cast<UA_TimestampsToReturn>(parameters.timestamps),
+        detail::createMonitoredItemCreateRequest(itemToMonitor, monitoringMode, parameters),
+        context.get(),
+        context->eventCallbackNative,
+        context->deleteCallbackNative
+    );
+    return createMonitoredItem(connection, subscriptionId, parameters, std::move(context), result);
+}
+
+Result<void> modifyMonitoredItem(
+    Client& connection,
     uint32_t subscriptionId,
     uint32_t monitoredItemId,
-    MonitoringParameters& parameters
-) {
-    UA_MonitoredItemModifyRequest itemToModify{};
-    itemToModify.monitoredItemId = monitoredItemId;
-    copyMonitoringParametersToNative(parameters, itemToModify.requestedParameters);
-
-    UA_ModifyMonitoredItemsRequest request{};
-    request.subscriptionId = subscriptionId;
-    request.timestampsToReturn = static_cast<UA_TimestampsToReturn>(parameters.timestamps);
-    request.itemsToModifySize = 1;
-    request.itemsToModify = &itemToModify;
-
+    MonitoringParametersEx& parameters
+) noexcept {
+    auto item = detail::createMonitoredItemModifyRequest(monitoredItemId, parameters);
+    auto request = detail::createModifyMonitoredItemsRequest(subscriptionId, parameters, item);
     using Response =
         TypeWrapper<UA_ModifyMonitoredItemsResponse, UA_TYPES_MODIFYMONITOREDITEMSRESPONSE>;
-    const Response response = UA_Client_MonitoredItems_modify(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
-    if (response->resultsSize != 1) {
-        throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
-    }
-    auto* result = response->results;
-    detail::throwOnBadStatus(result->statusCode);
-    reviseMonitoringParameters(parameters, result);
+    const Response response = UA_Client_MonitoredItems_modify(connection.handle(), request);
+    return detail::getSingleResult(asNative(response))
+        .andThen([&](UA_MonitoredItemModifyResult& result) -> Result<void> {
+            if (StatusCode code = result.statusCode; code.isBad()) {
+                return BadResult(code);
+            }
+            detail::reviseMonitoringParameters(parameters, result);
+            return {};
+        });
 }
 
-void setMonitoringMode(
-    Client& client, uint32_t subscriptionId, uint32_t monitoredItemId, MonitoringMode monitoringMode
-) {
-    UA_SetMonitoringModeRequest request{};
-    request.subscriptionId = subscriptionId;
-    request.monitoringMode = static_cast<UA_MonitoringMode>(monitoringMode);
-    request.monitoredItemIdsSize = 1;
-    request.monitoredItemIds = &monitoredItemId;
-
-    using Response = TypeWrapper<UA_SetMonitoringModeResponse, UA_TYPES_SETMONITORINGMODERESPONSE>;
-    const Response response = UA_Client_MonitoredItems_setMonitoringMode(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
-    if (response->resultsSize != 1) {
-        throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
-    }
-    detail::throwOnBadStatus(*response->results);
+Result<void> setMonitoringMode(
+    Client& connection,
+    uint32_t subscriptionId,
+    uint32_t monitoredItemId,
+    MonitoringMode monitoringMode
+) noexcept {
+    return detail::sendRequest<UA_SetMonitoringModeRequest, UA_SetMonitoringModeResponse>(
+        connection,
+        detail::createSetMonitoringModeRequest(
+            subscriptionId, {&monitoredItemId, 1}, monitoringMode
+        ),
+        [](UA_SetMonitoringModeResponse& response) -> Result<void> {
+            return detail::getSingleResult(response).andThen(detail::toResult);
+        },
+        detail::SyncOperation{}
+    );
 }
 
-void setTriggering(
-    Client& client,
+Result<void> setTriggering(
+    Client& connection,
     uint32_t subscriptionId,
     uint32_t triggeringItemId,
     Span<const uint32_t> linksToAdd,
     Span<const uint32_t> linksToRemove
-) {
-    UA_SetTriggeringRequest request{};
-    request.subscriptionId = subscriptionId;
-    request.triggeringItemId = triggeringItemId;
-    request.linksToAddSize = linksToAdd.size();
-    request.linksToAdd = const_cast<uint32_t*>(linksToAdd.data());  // NOLINT
-    request.linksToRemoveSize = linksToRemove.size();
-    request.linksToRemove = const_cast<uint32_t*>(linksToRemove.data());  // NOLINT
-
-    using Response = TypeWrapper<UA_SetTriggeringResponse, UA_TYPES_SETTRIGGERINGRESPONSE>;
-    const Response response = UA_Client_MonitoredItems_setTriggering(client.handle(), request);
-    detail::throwOnBadStatus(response->responseHeader.serviceResult);
-    for (auto&& status : Span(response->addResults, response->addResultsSize)) {
-        detail::throwOnBadStatus(status);
-    }
-    for (auto&& status : Span(response->removeResults, response->removeResultsSize)) {
-        detail::throwOnBadStatus(status);
-    }
-}
-
-void deleteMonitoredItem(Client& client, uint32_t subscriptionId, uint32_t monitoredItemId) {
-    const auto status = UA_Client_MonitoredItems_deleteSingle(
-        client.handle(), subscriptionId, monitoredItemId
+) noexcept {
+    return detail::sendRequest<UA_SetTriggeringRequest, UA_SetTriggeringResponse>(
+        connection,
+        detail::createSetTriggeringRequest(
+            subscriptionId, triggeringItemId, linksToAdd, linksToRemove
+        ),
+        [](UA_SetTriggeringResponse& response) -> Result<void> {
+            if (StatusCode code = response.responseHeader.serviceResult; code.isBad()) {
+                return BadResult(code);
+            }
+            for (StatusCode code : Span(response.addResults, response.addResultsSize)) {
+                if (code.isBad()) {
+                    return BadResult(code);
+                }
+            }
+            for (StatusCode code : Span(response.removeResults, response.removeResultsSize)) {
+                if (code.isBad()) {
+                    return BadResult(code);
+                }
+            }
+            return {};
+        },
+        detail::SyncOperation{}
     );
-    detail::throwOnBadStatus(status);
 }
 
-void deleteMonitoredItem(Server& server, uint32_t monitoredItemId) {
-    const auto status = UA_Server_deleteMonitoredItem(server.handle(), monitoredItemId);
-    detail::throwOnBadStatus(status);
-    server.getContext().monitoredItems.erase(monitoredItemId);
+template <>
+Result<void> deleteMonitoredItem<Client>(
+    Client& connection, uint32_t subscriptionId, uint32_t monitoredItemId
+) {
+    return detail::toResult(
+        UA_Client_MonitoredItems_deleteSingle(connection.handle(), subscriptionId, monitoredItemId)
+    );
+}
+
+template <>
+Result<void> deleteMonitoredItem<Server>(
+    Server& connection, [[maybe_unused]] uint32_t subscriptionId, uint32_t monitoredItemId
+) {
+    const auto result = detail::toResult(
+        UA_Server_deleteMonitoredItem(connection.handle(), monitoredItemId)
+    );
+    opcua::detail::getContext(connection).monitoredItems.erase({0U, monitoredItemId});
+    return result;
+}
+
+Result<void> deleteMonitoredItem(Server& connection, uint32_t monitoredItemId) {
+    return deleteMonitoredItem(connection, 0U, monitoredItemId);
 }
 
 }  // namespace opcua::services

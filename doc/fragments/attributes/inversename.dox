@@ -1,0 +1,2 @@
+The inverse name describes the reference type as seen from the target node.
+For example, the reference type `HasSubtype` has the inverse name `HasSupertype`.

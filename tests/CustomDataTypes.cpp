@@ -1,7 +1,7 @@
 #include <doctest/doctest.h>
 
 #include "open62541pp/DataType.h"
-#include "open62541pp/open62541.h"
+#include "open62541pp/detail/open62541/common.h"
 
 #include "CustomDataTypes.h"
 
@@ -11,12 +11,14 @@ TEST_CASE("CustomDataTypes") {
     const UA_DataTypeArray* dataTypeArray{};
     CHECK(dataTypeArray == nullptr);
 
-    CustomDataTypes customDataTypes(&dataTypeArray);
-    customDataTypes.setCustomDataTypes({
-        DataType{UA_TYPES[UA_TYPES_INT32]},
-        DataType{UA_TYPES[UA_TYPES_FLOAT]},
-        DataType{UA_TYPES[UA_TYPES_STRING]},
-    });
+    CustomDataTypes customDataTypes(dataTypeArray);
+    customDataTypes.assign(
+        {
+            DataType{UA_TYPES[UA_TYPES_INT32]},
+            DataType{UA_TYPES[UA_TYPES_FLOAT]},
+            DataType{UA_TYPES[UA_TYPES_STRING]},
+        }
+    );
 
     CHECK(dataTypeArray != nullptr);
     CHECK(dataTypeArray->next == nullptr);

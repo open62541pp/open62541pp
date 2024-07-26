@@ -4,23 +4,31 @@ add_executable(
     open62541pp_tests
     main.cpp
     AccessControl.cpp
+    async.cpp
+    Bitmask.cpp
     Client.cpp
+    ClientService.cpp
+    Config.cpp
     Crypto.cpp
-    CustomAccessControl.cpp
     CustomDataTypes.cpp
     DataType.cpp
+    ExceptionCatcher.cpp
     ErrorHandling.cpp
     Event.cpp
-    helper.cpp
     Logger.cpp
     Node.cpp
+    Result.cpp
+    ScopeExit.cpp
     Server.cpp
     Services.cpp
     Session.cpp
     Span.cpp
+    string_utils.cpp
     Subscription_MonitoredItem.cpp
+    traits.cpp
     TypeConverter.cpp
     TypeRegistry.cpp
+    types_handling.cpp
     Types.cpp
     TypeWrapper.cpp
 )
@@ -47,23 +55,7 @@ if(MSVC)
             LINK_FLAGS "/NODEFAULTLIB:libcmt.lib /NODEFAULTLIB:libcmtd.lib"
     )
 endif()
-if(UAPP_ENABLE_PCH)
-    target_precompile_headers(
-        open62541pp_tests
-        REUSE_FROM
-            open62541pp
-    )
-endif()
 
 # discover tests for ctest
 include(${PROJECT_SOURCE_DIR}/3rdparty/doctest/scripts/cmake/doctest.cmake)
 doctest_discover_tests(open62541pp_tests)
-
-if(UAPP_BUILD_TESTS_AUTORUN)
-    add_custom_command(
-        TARGET open62541pp_tests POST_BUILD
-        COMMAND ${CMAKE_CTEST_COMMAND} "--output-on-failure"
-        COMMENT "Run ctest"
-        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-    )
-endif()
