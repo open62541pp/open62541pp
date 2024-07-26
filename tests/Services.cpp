@@ -465,6 +465,8 @@ TEST_CASE("Attribute service set (highlevel)") {
         CHECK(valueRead->sourcePicoseconds == valueWrite->sourcePicoseconds);
     }
 
+#ifdef UA_ENABLE_TYPEDESCRIPTION
+
     SUBCASE("Data type definition (read only)") {
         const NodeId id{0, UA_NS0ID_BUILDINFO};
         const Variant definition = services::readDataTypeDefinition(server, id).value();
@@ -481,6 +483,8 @@ TEST_CASE("Attribute service set (highlevel)") {
     //     const auto definitionRead = services::readDataTypeDefinition(server, id);
     //     CHECK(definitionRead.value().isType<EnumDefinition>());
     // }
+
+#endif
 }
 
 TEST_CASE_TEMPLATE("Attribute service set write/read", T, Server, Client, Async<Client>) {

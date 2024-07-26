@@ -891,19 +891,6 @@ TEST_CASE("EnumValueType") {
     CHECK(enumValueType.getDescription() == LocalizedText("", "Description"));
 }
 
-TEST_CASE("EnumField / EnumDefinition") {
-    const EnumDefinition enumDefinition{{0, "Zero"}, {1, "One"}};
-    CHECK(enumDefinition.getFields().size() == 2);
-    CHECK(enumDefinition.getFields()[0].getValue() == 0);
-    CHECK(enumDefinition.getFields()[0].getDisplayName() == LocalizedText("", "Zero"));
-    CHECK(enumDefinition.getFields()[0].getDescription() == LocalizedText());
-    CHECK(enumDefinition.getFields()[0].getName() == "Zero");
-    CHECK(enumDefinition.getFields()[1].getValue() == 1);
-    CHECK(enumDefinition.getFields()[1].getDisplayName() == LocalizedText("", "One"));
-    CHECK(enumDefinition.getFields()[1].getDescription() == LocalizedText());
-    CHECK(enumDefinition.getFields()[1].getName() == "One");
-}
-
 TEST_CASE("RequestHeader") {
     const auto now = DateTime::now();
     const RequestHeader header({1, 1000}, now, 1, 2, "auditEntryId", 10, {});
@@ -1409,6 +1396,23 @@ TEST_CASE("SetPublishingModeRequest") {
     CHECK(request.getSubscriptionIds()[0] == 1);
     CHECK(request.getSubscriptionIds()[1] == 2);
     CHECK(request.getSubscriptionIds()[2] == 3);
+}
+
+#endif
+
+#ifdef UA_ENABLE_TYPEDESCRIPTION
+
+TEST_CASE("EnumField / EnumDefinition") {
+    const EnumDefinition enumDefinition{{0, "Zero"}, {1, "One"}};
+    CHECK(enumDefinition.getFields().size() == 2);
+    CHECK(enumDefinition.getFields()[0].getValue() == 0);
+    CHECK(enumDefinition.getFields()[0].getDisplayName() == LocalizedText("", "Zero"));
+    CHECK(enumDefinition.getFields()[0].getDescription() == LocalizedText());
+    CHECK(enumDefinition.getFields()[0].getName() == "Zero");
+    CHECK(enumDefinition.getFields()[1].getValue() == 1);
+    CHECK(enumDefinition.getFields()[1].getDisplayName() == LocalizedText("", "One"));
+    CHECK(enumDefinition.getFields()[1].getDescription() == LocalizedText());
+    CHECK(enumDefinition.getFields()[1].getName() == "One");
 }
 
 #endif

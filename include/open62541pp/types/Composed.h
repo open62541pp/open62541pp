@@ -110,51 +110,6 @@ public:
 };
 
 /**
- * UA_EnumField wrapper class.
- * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.52
- */
-class EnumField : public TypeWrapper<UA_EnumField, UA_TYPES_ENUMFIELD> {
-public:
-    using TypeWrapper::TypeWrapper;
-
-    EnumField(int64_t value, std::string_view name)
-        : EnumField(value, {"", name}, {}, name) {}
-
-    EnumField(
-        int64_t value, LocalizedText displayName, LocalizedText description, std::string_view name
-    ) {
-        handle()->value = value;
-        handle()->displayName = detail::toNative(std::move(displayName));
-        handle()->description = detail::toNative(std::move(description));
-        handle()->name = detail::toNative(name);
-    }
-
-    UAPP_GETTER(int64_t, getValue, value)
-    UAPP_GETTER_WRAPPER(LocalizedText, getDisplayName, displayName)
-    UAPP_GETTER_WRAPPER(LocalizedText, getDescription, description)
-    UAPP_GETTER_WRAPPER(String, getName, name)
-};
-
-/**
- * UA_EnumDefinition wrapper class.
- * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.50
- */
-class EnumDefinition : public TypeWrapper<UA_EnumDefinition, UA_TYPES_ENUMDEFINITION> {
-public:
-    using TypeWrapper::TypeWrapper;
-
-    EnumDefinition(std::initializer_list<EnumField> fields)
-        : EnumDefinition({fields.begin(), fields.size()}) {}
-
-    explicit EnumDefinition(Span<const EnumField> fields) {
-        handle()->fieldsSize = fields.size();
-        handle()->fields = detail::toNativeArray(fields);
-    }
-
-    UAPP_GETTER_SPAN_WRAPPER(EnumField, getFields, fields, fieldsSize)
-};
-
-/**
  * UA_ApplicationDescription wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.2
  */
@@ -2028,6 +1983,57 @@ enum class PerformUpdateType : int32_t {
     Remove  = 4,
     // clang-format on
 };
+
+/* -------------------------------------- Type description -------------------------------------- */
+
+#ifdef UA_ENABLE_TYPEDESCRIPTION
+
+/**
+ * UA_EnumField wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.52
+ */
+class EnumField : public TypeWrapper<UA_EnumField, UA_TYPES_ENUMFIELD> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    EnumField(int64_t value, std::string_view name)
+        : EnumField(value, {"", name}, {}, name) {}
+
+    EnumField(
+        int64_t value, LocalizedText displayName, LocalizedText description, std::string_view name
+    ) {
+        handle()->value = value;
+        handle()->displayName = detail::toNative(std::move(displayName));
+        handle()->description = detail::toNative(std::move(description));
+        handle()->name = detail::toNative(name);
+    }
+
+    UAPP_GETTER(int64_t, getValue, value)
+    UAPP_GETTER_WRAPPER(LocalizedText, getDisplayName, displayName)
+    UAPP_GETTER_WRAPPER(LocalizedText, getDescription, description)
+    UAPP_GETTER_WRAPPER(String, getName, name)
+};
+
+/**
+ * UA_EnumDefinition wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.50
+ */
+class EnumDefinition : public TypeWrapper<UA_EnumDefinition, UA_TYPES_ENUMDEFINITION> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    EnumDefinition(std::initializer_list<EnumField> fields)
+        : EnumDefinition({fields.begin(), fields.size()}) {}
+
+    explicit EnumDefinition(Span<const EnumField> fields) {
+        handle()->fieldsSize = fields.size();
+        handle()->fields = detail::toNativeArray(fields);
+    }
+
+    UAPP_GETTER_SPAN_WRAPPER(EnumField, getFields, fields, fieldsSize)
+};
+
+#endif
 
 /**
  * @}
