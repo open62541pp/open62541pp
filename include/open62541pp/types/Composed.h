@@ -1989,6 +1989,49 @@ enum class PerformUpdateType : int32_t {
 #ifdef UA_ENABLE_TYPEDESCRIPTION
 
 /**
+ * Structure type.
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.49
+ */
+enum class StructureType : int32_t {
+    // clang-format off
+    Structure                   = 0,
+    StructureWithOptionalFields = 1,
+    Union                       = 2,
+    // clang-format on
+};
+
+/**
+ * UA_StructureField wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.51
+ */
+class StructureField : public TypeWrapper<UA_StructureField, UA_TYPES_STRUCTUREFIELD> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    UAPP_GETTER_WRAPPER(String, getName, name)
+    UAPP_GETTER_WRAPPER(LocalizedText, getDescription, description)
+    UAPP_GETTER_WRAPPER(NodeId, getDataType, dataType)
+    UAPP_GETTER_CAST(ValueRank, getValueRank, valueRank)
+    UAPP_GETTER_SPAN(uint32_t, getArrayDimensions, arrayDimensions, arrayDimensionsSize)
+    UAPP_GETTER(uint32_t, getMaxStringLength, maxStringLength)
+    UAPP_GETTER(bool, getIsOptional, isOptional)
+};
+
+/**
+ * UA_StructureDefinition wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.48
+ */
+class StructureDefinition : public TypeWrapper<UA_StructureDefinition, UA_TYPES_STRUCTUREDEFINITION> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    UAPP_GETTER_WRAPPER(NodeId, getDefaultEncodingId, defaultEncodingId)
+    UAPP_GETTER_WRAPPER(NodeId, getBaseDataType, baseDataType)
+    UAPP_GETTER_CAST(StructureType, getStructureType, structureType)
+    UAPP_GETTER_SPAN_WRAPPER(StructureField, getFields, fields, fieldsSize)
+};
+
+/**
  * UA_EnumField wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.52
  */
