@@ -347,20 +347,6 @@ inline auto writeDataValueAsync(
 }
 
 /**
- * Write the `DataTypeDefinition` attribute of a data type node.
- * The data type definition can be e.g. of type `EnumDefinition`.
- */
-template <typename T>
-inline void writeDataTypeDefinition(
-    T& serverOrClient, const NodeId& id, const Variant& definition
-) {
-    UA_DataValue dv{};
-    dv.value = *definition.handle();  // shallow copy
-    dv.hasValue = true;
-    writeAttribute(serverOrClient, id, AttributeId::DataTypeDefinition, asWrapper<DataValue>(dv));
-}
-
-/**
  * @}
  */
 
