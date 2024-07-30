@@ -13,6 +13,7 @@ class Attribute:
     type_view: Optional[str] = None
     copy: bool = False
     writeable: bool = True
+    details: Optional[str] = None
 
 
 # fmt: off
@@ -39,6 +40,7 @@ ATTRIBUTES = [
     Attribute(name="Historizing", type_value="bool", copy=True, writeable=True),
     Attribute(name="Executable", type_value="bool", copy=True, writeable=True),
     Attribute(name="UserExecutable", type_value="bool", copy=True, writeable=True),
+    Attribute(name="DataTypeDefinition", type_value="Variant", copy=False, writeable=False, details="The attribute value can be of type EnumDefinition or StructureDefinition."),
 ]
 # fmt: on
 
@@ -61,6 +63,7 @@ namespace opcua::services {{
 TEMPLATE_READ = """
 /**
  * Read the AttributeId::{attr} attribute of a node.
+ * {details}
  * @param connection Instance of type Client (or Server)
  * @param id Node to read
  * @ingroup Read
@@ -89,6 +92,7 @@ inline auto read{attr}Async(
 TEMPLATE_WRITE = """
 /**
  * Write the AttributeId::{attr} attribute of a node.
+ * {details}
  * @param connection Instance of type Client (or Server)
  * @param id Node to write
  * @param {param_name} Value to write
@@ -119,6 +123,17 @@ inline auto write{attr}Async(
 """.lstrip()
 
 
+
+
+def postprocess(code: str) -> str:
+    def strip_empty_doc_lines(code: str) -> str:
+        lines = code.splitlines()
+        lines_filtered = filter(lambda line: line.strip() != "*", lines)
+        return "\n".join(lines_filtered)
+
+    return strip_empty_doc_lines(code)
+
+
 def gen_functions():
     for attr in ATTRIBUTES:
         type_value = attr.type_value
@@ -131,10 +146,11 @@ def gen_functions():
             "token_type": token_type,
             "param_type": attr.type_view or param_type,
             "param_name": param_name,
+            "details": attr.details or "",
         }
-        yield TEMPLATE_READ.format(**format_args)
+        yield postprocess(TEMPLATE_READ.format(**format_args))
         if attr.writeable is True:
-            yield TEMPLATE_WRITE.format(**format_args)
+            yield postprocess(TEMPLATE_WRITE.format(**format_args))
 
 
 def main():

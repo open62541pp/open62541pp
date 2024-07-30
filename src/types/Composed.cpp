@@ -29,7 +29,7 @@ ContentFilterElement::ContentFilterElement(
 }
 
 ContentFilter::ContentFilter(std::initializer_list<ContentFilterElement> elements)
-    : ContentFilter(Span<const ContentFilterElement>(elements)) {}
+    : ContentFilter({elements.begin(), elements.size()}) {}
 
 ContentFilter::ContentFilter(Span<const ContentFilterElement> elements) {
     handle()->elementsSize = elements.size();

@@ -473,6 +473,11 @@ public:
         return services::readUserExecutable(connection_, id_).value();
     }
 
+    /// @wrapper{services::readDataTypeDefinition}
+    Variant readDataTypeDefinition() {
+        return services::readDataTypeDefinition(connection_, id_).value();
+    }
+
     /// Read the value of an object property.
     /// @param propertyName Browse name of the property (variable node)
     Variant readObjectProperty(const QualifiedName& propertyName) {

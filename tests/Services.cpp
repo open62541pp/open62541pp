@@ -464,6 +464,34 @@ TEST_CASE("Attribute service set (highlevel)") {
         CHECK(valueRead->sourceTimestamp == valueWrite->sourceTimestamp);
         CHECK(valueRead->sourcePicoseconds == valueWrite->sourcePicoseconds);
     }
+
+#ifdef UA_ENABLE_TYPEDESCRIPTION
+
+    SUBCASE("Data type definition (read)") {
+        const NodeId id{0, UA_NS0ID_BUILDINFO};
+        const Variant variant = services::readDataTypeDefinition(server, id).value();
+        CHECK(variant.isScalar());
+        CHECK(variant.getDataType() == &UA_TYPES[UA_TYPES_STRUCTUREDEFINITION]);
+
+        const auto definition = variant.getScalar<StructureDefinition>();
+        CHECK(definition.getDefaultEncodingId() == NodeId(0, 340));
+        CHECK(definition.getBaseDataType() == NodeId(0, 22));
+        CHECK(definition.getStructureType() == StructureType::Structure);
+        CHECK(definition.getFields().size() == 6);
+    }
+
+    // SUBCASE("Data type definition (write/read EnumDefinition, not supported yet)") {
+    //     const NodeId id{1, "MyEnum"};
+    //     services::addDataType(server, {0, UA_NS0ID_ENUMERATION}, id, "MyEnum");
+
+    //     const EnumDefinition definition{{0, "Zero"}, {1, "One"}};
+    //     services::writeDataTypeDefinition(server, id, Variant::fromScalar(definition)).value();
+
+    //     const auto definitionRead = services::readDataTypeDefinition(server, id);
+    //     CHECK(definitionRead.value().isType<EnumDefinition>());
+    // }
+
+#endif
 }
 
 TEST_CASE_TEMPLATE("Attribute service set write/read", T, Server, Client, Async<Client>) {

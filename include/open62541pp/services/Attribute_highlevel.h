@@ -1216,4 +1216,31 @@ inline auto writeUserExecutableAsync(
     );
 }
 
+/**
+ * Read the AttributeId::DataTypeDefinition attribute of a node.
+ * The attribute value can be of type EnumDefinition or StructureDefinition.
+ * @param connection Instance of type Client (or Server)
+ * @param id Node to read
+ * @ingroup Read
+ */
+template <typename T>
+inline Result<Variant> readDataTypeDefinition(T& connection, const NodeId& id) noexcept {
+    return detail::readAttributeImpl<AttributeId::DataTypeDefinition>(connection, id);
+}
+
+/**
+ * Asynchronously read the AttributeId::DataTypeDefinition attribute of a node.
+ * @copydetails readDataTypeDefinition
+ * @param token @completiontoken{void(Result<Variant>&)}
+ * @ingroup Read
+ */
+template <typename CompletionToken = DefaultCompletionToken>
+inline auto readDataTypeDefinitionAsync(
+    Client& connection, const NodeId& id, CompletionToken&& token = DefaultCompletionToken()
+) {
+    return detail::readAttributeAsyncImpl<AttributeId::DataTypeDefinition>(
+        connection, id, std::forward<CompletionToken>(token)
+    );
+}
+
 }  // namespace opcua::services

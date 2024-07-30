@@ -49,6 +49,22 @@ inline DataValue createDataValueFromStatus(StatusCode code) noexcept {
 template <AttributeId Attribute>
 struct AttributeHandler;
 
+struct AttributeHandlerVariant {
+    using Type = Variant;
+
+    static Result<Variant> fromDataValue(DataValue&& dv) noexcept {
+        return getVariant(std::move(dv));
+    }
+
+    static DataValue toDataValue(const Variant& value) noexcept {
+        DataValue dv;
+        dv->value = value;  // shallow copy
+        dv->value.storageType = UA_VARIANT_DATA_NODELETE;  // prevent double delete
+        dv->hasValue = true;
+        return dv;
+    }
+};
+
 template <typename T, typename Enable = void>
 struct AttributeHandlerScalar {
     using Type = T;
@@ -148,21 +164,7 @@ struct AttributeHandler<AttributeId::EventNotifier>
     : AttributeHandlerScalar<Bitmask<EventNotifier>> {};
 
 template <>
-struct AttributeHandler<AttributeId::Value> {
-    using Type = Variant;
-
-    static Result<Variant> fromDataValue(DataValue&& dv) noexcept {
-        return getVariant(std::move(dv));
-    }
-
-    static DataValue toDataValue(const Variant& value) noexcept {
-        DataValue dv;
-        dv->value = value;  // shallow copy
-        dv->value.storageType = UA_VARIANT_DATA_NODELETE;  // prevent double delete
-        dv->hasValue = true;
-        return dv;
-    }
-};
+struct AttributeHandler<AttributeId::Value> : AttributeHandlerVariant {};
 
 template <>
 struct AttributeHandler<AttributeId::DataType> : AttributeHandlerScalar<NodeId> {};
@@ -203,5 +205,8 @@ struct AttributeHandler<AttributeId::Executable> : AttributeHandlerScalar<bool> 
 
 template <>
 struct AttributeHandler<AttributeId::UserExecutable> : AttributeHandlerScalar<bool> {};
+
+template <>
+struct AttributeHandler<AttributeId::DataTypeDefinition> : AttributeHandlerVariant {};
 
 }  // namespace opcua::services::detail
