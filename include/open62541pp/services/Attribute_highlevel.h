@@ -1218,6 +1218,7 @@ inline auto writeUserExecutableAsync(
 
 /**
  * Read the AttributeId::DataTypeDefinition attribute of a node.
+ * The attribute value can be of type EnumDefinition or StructureDefinition.
  * @param connection Instance of type Client (or Server)
  * @param id Node to read
  * @ingroup Read
