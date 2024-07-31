@@ -258,7 +258,9 @@ inline auto readAttributeAsyncImpl(Client& connection, const NodeId& id, Complet
         request,
         [](UA_ReadResponse& response) {
             using Handler = typename detail::AttributeHandler<Attribute>;
-            return detail::getSingleResult(response).andThen(Handler::fromDataValue);
+            return detail::getSingleResult(response)
+                .transform(detail::Wrap<DataValue>{})
+                .andThen(Handler::fromDataValue);
         },
         std::forward<CompletionToken>(token)
     );
