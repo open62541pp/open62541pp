@@ -494,6 +494,46 @@ TEST_CASE("Attribute service set (highlevel)") {
 #endif
 }
 
+TEST_CASE("Attribute service set (highlevel, async)") {
+    ServerClientSetup setup;
+    setup.client.connect(setup.endpointUrl);
+    auto& server = setup.server;
+    auto& client = setup.client;
+    const NodeId objectsId{0, UA_NS0ID_OBJECTSFOLDER};
+
+    SUBCASE("Read/write value") {
+        // create variable node
+        const NodeId id{1, 1000};
+        services::addVariable(
+            server,
+            objectsId,
+            id,
+            "variable",
+            VariableAttributes{}.setAccessLevel(
+                AccessLevel::CurrentRead | AccessLevel::CurrentWrite
+            )
+        )
+            .value();
+
+        // write
+        {
+            auto variant = Variant::fromScalar(11.11);
+            auto future = services::writeValueAsync(client, id, variant);
+            client.runIterate();
+            future.get().value();
+        }
+
+        // read
+        {
+            auto future = services::readValueAsync(client, id);
+            client.runIterate();
+            CHECK(future.get().value().getScalar<double>() == 11.11);
+        }
+    }
+
+    // sync and async functions use the same attribute handlers, so testing one attribute is enough
+}
+
 TEST_CASE_TEMPLATE("Attribute service set write/read", T, Server, Client, Async<Client>) {
     ServerClientSetup setup;
     setup.client.connect(setup.endpointUrl);
