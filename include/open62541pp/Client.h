@@ -50,6 +50,7 @@ ClientContext& getContext(Client& client) noexcept;
 /* ------------------------------------------- Client ------------------------------------------- */
 
 using StateCallback = std::function<void()>;
+using InactivityCallback = std::function<void()>;
 
 /**
  * High-level client class.
@@ -136,6 +137,10 @@ public:
     void onSessionActivated(StateCallback callback);
     /// Set a state callback that will be called after the session is closed.
     void onSessionClosed(StateCallback callback);
+    /// Set an inactivity callback.
+    /// Every UA_ClientConfig::connectivityCheckInterval (in ms), an async read request is performed
+    /// on the server. The callback is called when the client receives no response for this request.
+    void onInactive(InactivityCallback callback);
 
     /**
      * Connect to the selected server.

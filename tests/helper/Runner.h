@@ -21,9 +21,15 @@ public:
         });
     }
 
+    void stop() {
+        if (!stopFlag_) {
+            stopFlag_ = true;
+            thread_.join();
+        }
+    }
+
     ~ServerRunner() {
-        stopFlag_ = true;
-        thread_.join();
+        stop();
     }
 
 private:
