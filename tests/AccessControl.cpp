@@ -17,7 +17,7 @@ TEST_CASE("AccessControlDefault") {
     Server server;
 
     SUBCASE("getUserTokenPolicies") {
-        AccessControlDefault ac(true, {{"username", "password"}});
+        AccessControlDefault ac(true, std::vector<Login>{{"username", "password"}});
 
         CHECK(ac.getUserTokenPolicies().size() == 2);
         CHECK(ac.getUserTokenPolicies()[0].getPolicyId() == "open62541-anonymous-policy");

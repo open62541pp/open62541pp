@@ -36,6 +36,7 @@ public:
         customDataTypes_.assign(std::move(dataTypes));
     }
 
+    // deprecated in server interface
     void setAccessControl(AccessControlBase& accessControl) {
         accessControl_.assign(&accessControl);
         setHighestSecurityPolicyForUserTokenTransfer();
