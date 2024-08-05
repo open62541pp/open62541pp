@@ -327,7 +327,6 @@ void Client::onSessionClosed(StateCallback callback) {
 void Client::onInactive(InactivityCallback callback) {
     detail::getContext(*this).inactivityCallback = std::move(callback);
     detail::getConfig(*this).inactivityCallback = [](UA_Client* client) noexcept {
-        log(client, LogLevel::Info, LogCategory::Client, "lalala");
         auto* context = detail::getContext(client);
         if (context != nullptr && context->inactivityCallback != nullptr) {
             context->exceptionCatcher.invoke(context->inactivityCallback);
