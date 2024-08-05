@@ -113,18 +113,6 @@ Result<uint32_t> createMonitoredItemDataChange<Server>(
     return createMonitoredItem(connection, 0U, parameters, std::move(context), result);
 }
 
-Result<uint32_t> createMonitoredItemDataChange(
-    Server& connection,
-    const ReadValueId& itemToMonitor,
-    MonitoringMode monitoringMode,
-    MonitoringParametersEx& parameters,
-    DataChangeNotificationCallback dataChangeCallback
-) {
-    return createMonitoredItemDataChange(
-        connection, 0U, itemToMonitor, monitoringMode, parameters, std::move(dataChangeCallback)
-    );
-}
-
 Result<uint32_t> createMonitoredItemEvent(
     Client& connection,
     uint32_t subscriptionId,
@@ -239,10 +227,6 @@ Result<void> deleteMonitoredItem<Server>(
     );
     opcua::detail::getContext(connection).monitoredItems.erase({0U, monitoredItemId});
     return result;
-}
-
-Result<void> deleteMonitoredItem(Server& connection, uint32_t monitoredItemId) {
-    return deleteMonitoredItem(connection, 0U, monitoredItemId);
 }
 
 }  // namespace opcua::services

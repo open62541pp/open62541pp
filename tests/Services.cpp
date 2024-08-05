@@ -1116,6 +1116,7 @@ TEST_CASE("MonitoredItem service set (server)") {
         const auto monId =
             services::createMonitoredItemDataChange(
                 server,
+                0U,
                 {id, AttributeId::Value},
                 MonitoringMode::Reporting,
                 monitoringParameters,
@@ -1130,13 +1131,14 @@ TEST_CASE("MonitoredItem service set (server)") {
 
     SUBCASE("deleteMonitoredItem") {
         CHECK(
-            services::deleteMonitoredItem(server, 11U).code() ==
+            services::deleteMonitoredItem(server, 0U, 11U).code() ==
             UA_STATUSCODE_BADMONITOREDITEMIDINVALID
         );
 
         const auto monId =
             services::createMonitoredItemDataChange(
                 server,
+                0U,
                 {id, AttributeId::Value},
                 MonitoringMode::Reporting,
                 monitoringParameters,
@@ -1144,7 +1146,7 @@ TEST_CASE("MonitoredItem service set (server)") {
             )
                 .value();
         CAPTURE(monId);
-        CHECK(services::deleteMonitoredItem(server, monId));
+        CHECK(services::deleteMonitoredItem(server, 0U, monId));
     }
 }
 #endif

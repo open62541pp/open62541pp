@@ -132,26 +132,6 @@ template <typename T>
 );
 
 /**
- * Create a local monitored item for data change notifications.
- * Don't use this function to monitor the `EventNotifier` attribute.
- * @copydetails MonitoringParametersEx
- *
- * @return Server-assigned identifier of the monitored item
- * @param connection Instance of type Server
- * @param itemToMonitor Item to monitor
- * @param monitoringMode Monitoring mode
- * @param parameters Monitoring parameters, may be revised by server
- * @param dataChangeCallback Invoked when the monitored item is changed
- */
-[[nodiscard]] Result<uint32_t> createMonitoredItemDataChange(
-    Server& connection,
-    const ReadValueId& itemToMonitor,
-    MonitoringMode monitoringMode,
-    MonitoringParametersEx& parameters,
-    DataChangeNotificationCallback dataChangeCallback
-);
-
-/**
  * Create and add a monitored item to a subscription for event notifications.
  * The `attributeId` of ReadValueId must be set to AttributeId::EventNotifier.
  * @copydetails MonitoringParametersEx
@@ -268,14 +248,6 @@ Result<void> setTriggering(
  */
 template <typename T>
 Result<void> deleteMonitoredItem(T& connection, uint32_t subscriptionId, uint32_t monitoredItemId);
-
-/**
- * Delete a local monitored item.
- *
- * @param connection Instance of type Server
- * @param monitoredItemId Identifier of the monitored item
- */
-Result<void> deleteMonitoredItem(Server& connection, uint32_t monitoredItemId);
 
 /**
  * @}
