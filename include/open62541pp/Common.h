@@ -21,40 +21,6 @@ struct Namespace {
 using TypeIndex = uint16_t;
 
 /**
- * Built-in types.
- * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/5.1.2
- */
-enum class Type : TypeIndex {
-    // clang-format off
-    Boolean         = 0,   // UA_TYPES_BOOLEAN
-    SByte           = 1,   // UA_TYPES_SBYTE
-    Byte            = 2,   // UA_TYPES_BYTE
-    Int16           = 3,   // UA_TYPES_INT16
-    UInt16          = 4,   // UA_TYPES_UINT16
-    Int32           = 5,   // UA_TYPES_INT32
-    UInt32          = 6,   // UA_TYPES_UINT32
-    Int64           = 7,   // UA_TYPES_INT64
-    UInt64          = 8,   // UA_TYPES_UINT64
-    Float           = 9,   // UA_TYPES_FLOAT
-    Double          = 10,  // UA_TYPES_DOUBLE
-    String          = 11,  // UA_TYPES_STRING
-    DateTime        = 12,  // UA_TYPES_DATETIME
-    Guid            = 13,  // UA_TYPES_GUID
-    ByteString      = 14,  // UA_TYPES_BYTESTRING
-    XmlElement      = 15,  // UA_TYPES_XMLELEMENT
-    NodeId          = 16,  // UA_TYPES_NODEID
-    ExpandedNodeId  = 17,  // UA_TYPES_EXPANDEDNODEID
-    StatusCode      = 18,  // UA_TYPES_STATUSCODE
-    QualifiedName   = 19,  // UA_TYPES_QUALIFIEDNAME
-    LocalizedText   = 20,  // UA_TYPES_LOCALIZEDTEXT
-    ExtensionObject = 21,  // UA_TYPES_EXTENSIONOBJECT
-    DataValue       = 22,  // UA_TYPES_DATAVALUE
-    Variant         = 23,  // UA_TYPES_VARIANT
-    DiagnosticInfo  = 24,  // UA_TYPES_DIAGNOSTICINF
-    // clang-format on
-};
-
-/**
  * Attribute identifiers.
  * @see UA_AttributeId
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/5.9

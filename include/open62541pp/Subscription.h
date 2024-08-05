@@ -30,20 +30,6 @@ using MonitoringParametersEx = services::MonitoringParametersEx;
 using DataChangeNotificationCallback = services::DataChangeNotificationCallback;
 using EventNotificationCallback = services::EventNotificationCallback;
 
-/// Data change notification callback.
-/// @deprecated Use DataChangeNotificationCallback instead
-/// @tparam T Server or Client
-template <typename T>
-using DataChangeCallback =
-    std::function<void(const MonitoredItem<T>& item, const DataValue& value)>;
-
-/// Event notification callback.
-/// @deprecated Use EventNotificationCallback instead
-/// @tparam T Server or Client
-template <typename T>
-using EventCallback =
-    std::function<void(const MonitoredItem<T>& item, Span<const Variant> eventFields)>;
-
 /**
  * High-level subscription class.
  *
@@ -78,26 +64,8 @@ public:
         return connection_;
     }
 
-    /// @deprecated Use connection() instead
-    [[deprecated("Use connection() instead")]]
-    Connection& getConnection() noexcept {
-        return connection_;
-    }
-
-    /// @deprecated Use connection() instead
-    [[deprecated("Use connection() instead")]]
-    const Connection& getConnection() const noexcept {
-        return connection_;
-    }
-
     /// Get the server-assigned identifier of this subscription.
     uint32_t subscriptionId() const noexcept {
-        return subscriptionId_;
-    }
-
-    /// @deprecated Use subscriptionId() instead
-    [[deprecated("Use subscriptionId() instead")]]
-    uint32_t getSubscriptionId() const noexcept {
         return subscriptionId_;
     }
 
@@ -138,20 +106,6 @@ public:
         return {connection_, subscriptionId_, result.value()};
     }
 
-    /// @deprecated Use overload with DataChangeNotificationCallback instead
-    [[deprecated("Use overload with DataChangeNotificationCallback instead")]]
-    MonitoredItem<Connection> subscribeDataChange(
-        const NodeId& id,
-        AttributeId attribute,
-        MonitoringMode monitoringMode,
-        MonitoringParametersEx& parameters,
-        DataChangeCallback<Connection> onDataChange
-    ) {
-        return subscribeDataChange(
-            id, attribute, monitoringMode, parameters, createCallback(std::move(onDataChange))
-        );
-    }
-
     /// Create a monitored item for data change notifications (default settings).
     /// The monitoring mode is set to MonitoringMode::Reporting and the default open62541
     /// MonitoringParametersEx are used.
@@ -163,14 +117,6 @@ public:
         return subscribeDataChange(
             id, attribute, MonitoringMode::Reporting, parameters, std::move(onDataChange)
         );
-    }
-
-    /// @deprecated Use overload with DataChangeNotificationCallback instead
-    [[deprecated("Use overload with DataChangeNotificationCallback instead")]]
-    MonitoredItem<Connection> subscribeDataChange(
-        const NodeId& id, AttributeId attribute, DataChangeCallback<Connection> onDataChange
-    ) {
-        return subscribeDataChange(id, attribute, createCallback(std::move(onDataChange)));
     }
 
     /// Create a monitored item for event notifications.
@@ -193,17 +139,6 @@ public:
         return {connection_, subscriptionId_, result.value()};
     }
 
-    /// @deprecated Use overload with EventNotificationCallback instead
-    [[deprecated("Use overload with EventNotificationCallback instead")]]
-    MonitoredItem<Connection> subscribeEvent(
-        const NodeId& id,
-        MonitoringMode monitoringMode,
-        MonitoringParametersEx& parameters,
-        EventCallback<Connection> onEvent
-    ) {
-        return subscribeEvent(id, monitoringMode, parameters, createCallback(std::move(onEvent)));
-    }
-
     /// Create a monitored item for event notifications (default settings).
     /// The monitoring mode is set to MonitoringMode::Reporting and the default open62541
     /// MonitoringParametersEx are used.
@@ -216,14 +151,6 @@ public:
         return subscribeEvent(id, MonitoringMode::Reporting, parameters, std::move(onEvent));
     }
 
-    /// @deprecated Use overload with EventNotificationCallback instead
-    [[deprecated("Use overload with EventNotificationCallback instead")]]
-    MonitoredItem<Connection> subscribeEvent(
-        const NodeId& id, const EventFilter& eventFilter, EventCallback<Connection> onEvent
-    ) {
-        return subscribeEvent(id, eventFilter, createCallback(std::move(onEvent)));
-    }
-
     /// Delete this subscription.
     /// @note Not implemented for Server.
     void deleteSubscription() {
@@ -231,24 +158,6 @@ public:
     }
 
 private:
-    DataChangeNotificationCallback createCallback(DataChangeCallback<Connection> onDataChange) {
-        return [connectionPtr = &connection_, callback = std::move(onDataChange)](
-                   uint32_t subId, uint32_t monId, const DataValue& value
-               ) {
-            const MonitoredItem<Connection> monitoredItem(*connectionPtr, subId, monId);
-            callback(monitoredItem, value);
-        };
-    }
-
-    EventNotificationCallback createCallback(EventCallback<Connection> onEvent) {
-        return [connectionPtr = &connection_, callback = std::move(onEvent)](
-                   uint32_t subId, uint32_t monId, Span<const Variant> eventFields
-               ) {
-            const MonitoredItem<Connection> monitoredItem(*connectionPtr, subId, monId);
-            callback(monitoredItem, eventFields);
-        };
-    }
-
     Connection& connection_;
     uint32_t subscriptionId_{0U};
 };

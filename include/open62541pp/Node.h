@@ -61,26 +61,8 @@ public:
         return connection_;
     }
 
-    /// @deprecated Use connection() instead
-    [[deprecated("Use connection() instead")]]
-    Connection& getConnection() noexcept {
-        return connection_;
-    }
-
-    /// @deprecated Use connection() instead
-    [[deprecated("Use connection() instead")]]
-    const Connection& getConnection() const noexcept {
-        return connection_;
-    }
-
     /// Get the node id.
     const NodeId& id() const noexcept {
-        return id_;
-    }
-
-    /// @deprecated Use id() instead
-    [[deprecated("Use id() instead")]]
-    const NodeId& getNodeId() const noexcept {
         return id_;
     }
 

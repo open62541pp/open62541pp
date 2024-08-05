@@ -88,12 +88,6 @@ public:
         return handle()->hasStatus;
     }
 
-    /// @deprecated Use hasStatus() instead
-    [[deprecated("Use hasStatus() instead")]]
-    bool hasStatusCode() const noexcept {
-        return hasStatus();
-    }
-
     /// Get value.
     Variant& getValue() & noexcept {
         return asWrapper<Variant>(handle()->value);
@@ -139,12 +133,6 @@ public:
         return handle()->status;
     }
 
-    /// @deprecated Use getStatus() instead
-    [[deprecated("Use getStatus() instead")]]
-    StatusCode getStatusCode() const noexcept {
-        return getStatus();
-    }
-
     /// Set value (copy).
     void setValue(const Variant& value) {
         asWrapper<Variant>(handle()->value) = value;
@@ -185,12 +173,6 @@ public:
     void setStatus(StatusCode status) noexcept {
         handle()->status = status;
         handle()->hasStatus = true;
-    }
-
-    /// @deprecated Use setStatus(StatusCode) instead
-    [[deprecated("Use setStatus(StatusCode) instead.")]]
-    void setStatusCode(StatusCode statusCode) noexcept {
-        setStatus(statusCode);
     }
 };
 
