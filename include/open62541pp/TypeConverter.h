@@ -12,31 +12,6 @@
 
 namespace opcua {
 
-template <TypeIndex... typeIndexes>
-struct [[deprecated(
-    "Not required anymore. Remove TypeConverter<T>::ValidTypes from your template specializations. "
-    "The type index / UA_DataType is retrieved from the TypeRegistry<NativeType> specialization."
-)]] TypeIndexList {
-    using TypeIndexes = std::integer_sequence<TypeIndex, typeIndexes...>;
-
-    static constexpr size_t size() {
-        return sizeof...(typeIndexes);
-    }
-
-    static constexpr bool contains(TypeIndex typeIndex) {
-        return ((typeIndex == typeIndexes) || ...);
-    }
-
-    [[deprecated("The Type enum will be removed in the future")]]
-    static constexpr bool contains(Type type) {
-        return contains(static_cast<TypeIndex>(type));
-    }
-
-    static constexpr auto toArray() {
-        return std::array<TypeIndex, sizeof...(typeIndexes)>{typeIndexes...};
-    }
-};
-
 /**
  * Type conversion from and to native types.
  *

@@ -48,37 +48,13 @@ public:
         return connection_;
     }
 
-    /// @deprecated Use connection() instead
-    [[deprecated("Use connection() instead")]]
-    Connection& getConnection() noexcept {
-        return connection_;
-    }
-
-    /// @deprecated Use connection() instead
-    [[deprecated("Use connection() instead")]]
-    const Connection& getConnection() const noexcept {
-        return connection_;
-    }
-
     /// Get the server-assigned identifier of the underlying subscription.
     uint32_t subscriptionId() const noexcept {
         return subscriptionId_;
     }
 
-    /// @deprecated Use subscriptionId() instead
-    [[deprecated("Use subscriptionId() instead")]]
-    uint32_t getSubscriptionId() const noexcept {
-        return subscriptionId_;
-    }
-
     /// Get the server-assigned identifier of this monitored item.
     uint32_t monitoredItemId() const noexcept {
-        return monitoredItemId_;
-    }
-
-    /// @deprecated Use monitoredItemId() instead
-    [[deprecated("Use monitoredItemId() instead")]]
-    uint32_t getMonitoredItemId() const noexcept {
         return monitoredItemId_;
     }
 

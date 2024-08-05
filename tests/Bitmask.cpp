@@ -94,8 +94,7 @@ TEST_CASE("Bitmask") {
     }
 
     SUBCASE("Conversion to int") {
-        // deprecated, enable when deprecation is removed and conversion marked explicit
-        // CHECK(static_cast<int>(Bitmask<Bit>(2)) == 2);
+        CHECK(static_cast<int>(Bitmask<Bit>(2)) == 2);
     }
 
     SUBCASE("get") {

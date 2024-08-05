@@ -144,13 +144,6 @@ public:
         return isType(&dataType);
     }
 
-    /// Check if the variant type is equal to the provided type enum.
-    /// @deprecated Use isType<T>() instead, the Type enum will be removed
-    [[deprecated("Use isType<T>() instead, the Type enum will be removed")]]
-    bool isType(Type type) const noexcept {
-        return isType(UA_TYPES[static_cast<TypeIndex>(type)]);  // NOLINT
-    }
-
     /// Check if the variant type is equal to the provided data type node id.
     bool isType(const NodeId& id) const noexcept {
         return (handle()->type != nullptr) && (handle()->type->typeId == id);
@@ -167,19 +160,6 @@ public:
         return handle()->type;
     }
 
-    /// Get variant type.
-    /// @deprecated Use getDataType() or isType<T>() instead, the Type enum will be removed
-    [[deprecated("Use getDataType() or isType<T>() instead, the Type enum will be removed")]]
-    std::optional<Type> getVariantType() const noexcept {
-        if (handle()->type != nullptr) {
-            const auto typeIndex = handle()->type->typeKind;
-            if (typeIndex <= UA_DATATYPEKIND_DIAGNOSTICINFO) {
-                return static_cast<Type>(typeIndex);
-            }
-        }
-        return {};
-    }
-
     /// Get pointer to the underlying data.
     /// Check the properties and data type before casting it to the actual type.
     /// Use the methods @ref isScalar, @ref isArray, @ref isType / @ref getDataType.
@@ -189,20 +169,6 @@ public:
 
     /// @copydoc data
     const void* data() const noexcept {
-        return handle()->data;
-    }
-
-    /// @deprecated Use the methods isScalar() and data() instead
-    [[deprecated("Use the methods isScalar() and data() instead")]]
-    void* getScalar() {
-        checkIsScalar();
-        return handle()->data;
-    }
-
-    /// @deprecated Use the methods isScalar() and data() instead
-    [[deprecated("Use the methods isScalar() and data() instead")]]
-    const void* getScalar() const {
-        checkIsScalar();
         return handle()->data;
     }
 
@@ -253,20 +219,6 @@ public:
     /// Get array dimensions.
     Span<const uint32_t> getArrayDimensions() const noexcept {
         return {handle()->arrayDimensions, handle()->arrayDimensionsSize};
-    }
-
-    /// @deprecated Use the methods isArray() and data() instead
-    [[deprecated("Use the methods isArray() and data() instead")]]
-    void* getArray() {
-        checkIsArray();
-        return handle()->data;
-    }
-
-    /// @deprecated Use the methods isArray() and data() instead
-    [[deprecated("Use the methods isArray() and data() instead")]]
-    const void* getArray() const {
-        checkIsArray();
-        return handle()->data;
     }
 
     /// Get array with given template type (only native or wrapper types).
