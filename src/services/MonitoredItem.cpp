@@ -76,8 +76,7 @@ Result<uint32_t> createMonitoredItemDataChange<Client>(
     auto context = createMonitoredItemContext(
         connection, itemToMonitor, std::move(dataChangeCallback), {}, std::move(deleteCallback)
     );
-    using Result = TypeWrapper<UA_MonitoredItemCreateResult, UA_TYPES_MONITOREDITEMCREATERESULT>;
-    const Result result = UA_Client_MonitoredItems_createDataChange(
+    const MonitoredItemCreateResult result = UA_Client_MonitoredItems_createDataChange(
         connection.handle(),
         subscriptionId,
         static_cast<UA_TimestampsToReturn>(parameters.timestamps),
@@ -102,8 +101,7 @@ Result<uint32_t> createMonitoredItemDataChange<Server>(
     auto context = createMonitoredItemContext(
         connection, itemToMonitor, std::move(dataChangeCallback), {}, std::move(deleteCallback)
     );
-    using Result = TypeWrapper<UA_MonitoredItemCreateResult, UA_TYPES_MONITOREDITEMCREATERESULT>;
-    const Result result = UA_Server_createDataChangeMonitoredItem(
+    const MonitoredItemCreateResult result = UA_Server_createDataChangeMonitoredItem(
         connection.handle(),
         static_cast<UA_TimestampsToReturn>(parameters.timestamps),
         detail::createMonitoredItemCreateRequest(itemToMonitor, monitoringMode, parameters),
@@ -125,8 +123,7 @@ Result<uint32_t> createMonitoredItemEvent(
     auto context = createMonitoredItemContext(
         connection, itemToMonitor, {}, std::move(eventCallback), std::move(deleteCallback)
     );
-    using Result = TypeWrapper<UA_MonitoredItemCreateResult, UA_TYPES_MONITOREDITEMCREATERESULT>;
-    const Result result = UA_Client_MonitoredItems_createEvent(
+    const MonitoredItemCreateResult result = UA_Client_MonitoredItems_createEvent(
         connection.handle(),
         subscriptionId,
         static_cast<UA_TimestampsToReturn>(parameters.timestamps),
@@ -146,9 +143,9 @@ Result<void> modifyMonitoredItem(
 ) noexcept {
     auto item = detail::createMonitoredItemModifyRequest(monitoredItemId, parameters);
     auto request = detail::createModifyMonitoredItemsRequest(subscriptionId, parameters, item);
-    using Response =
-        TypeWrapper<UA_ModifyMonitoredItemsResponse, UA_TYPES_MODIFYMONITOREDITEMSRESPONSE>;
-    const Response response = UA_Client_MonitoredItems_modify(connection.handle(), request);
+    const ModifyMonitoredItemsResponse response = UA_Client_MonitoredItems_modify(
+        connection.handle(), request
+    );
     return detail::getSingleResult(asNative(response))
         .andThen([&](UA_MonitoredItemModifyResult& result) -> Result<void> {
             if (StatusCode code = result.statusCode; code.isBad()) {
