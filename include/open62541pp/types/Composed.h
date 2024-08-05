@@ -1825,6 +1825,339 @@ public:
 };
 
 /**
+ * UA_MonitoringParameters wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.21
+ */
+class MonitoringParameters
+    : public TypeWrapper<UA_MonitoringParameters, UA_TYPES_MONITORINGPARAMETERS> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    /// Construct with default values from open62541.
+    /// The `clientHandle` parameter cannot be set by the user, any value will be replaced by the
+    /// client before sending the request to the server.
+    // NOLINTNEXTLINE
+    MonitoringParameters(
+        double samplingInterval = 250.0,
+        ExtensionObject filter = {},
+        uint32_t queueSize = 1U,
+        bool discardOldest = true
+    ) {
+        handle()->samplingInterval = samplingInterval;
+        handle()->filter = detail::toNative(std::move(filter));
+        handle()->queueSize = queueSize;
+        handle()->discardOldest = discardOldest;
+    }
+
+    UAPP_GETTER(double, getSamplingInterval, samplingInterval)
+    UAPP_GETTER_WRAPPER(ExtensionObject, getFilter, filter)
+    UAPP_GETTER(uint32_t, getQueueSize, queueSize)
+    UAPP_GETTER(bool, getDiscardOldest, discardOldest)
+};
+
+/**
+ * UA_MonitoredItemCreateRequest wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.2
+ */
+class MonitoredItemCreateRequest
+    : public TypeWrapper<UA_MonitoredItemCreateRequest, UA_TYPES_MONITOREDITEMCREATEREQUEST> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    explicit MonitoredItemCreateRequest(
+        ReadValueId itemToMonitor,
+        MonitoringMode monitoringMode = MonitoringMode::Reporting,
+        MonitoringParameters requestedParameters = {}
+    ) {
+        handle()->itemToMonitor = detail::toNative(std::move(itemToMonitor));
+        handle()->monitoringMode = static_cast<UA_MonitoringMode>(monitoringMode);
+        handle()->requestedParameters = detail::toNative(std::move(requestedParameters));
+    }
+
+    UAPP_GETTER_WRAPPER(ReadValueId, getItemToMonitor, itemToMonitor)
+    UAPP_GETTER_CAST(MonitoringMode, getMonitoringMode, monitoringMode)
+    UAPP_GETTER_WRAPPER(MonitoringParameters, getRequestedParameters, requestedParameters)
+};
+
+/**
+ * UA_MonitoredItemCreateResult wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.2
+ */
+class MonitoredItemCreateResult
+    : public TypeWrapper<UA_MonitoredItemCreateResult, UA_TYPES_MONITOREDITEMCREATERESULT> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    UAPP_GETTER_WRAPPER(StatusCode, getStatusCode, statusCode);
+    UAPP_GETTER(uint32_t, getMonitoredItemId, monitoredItemId);
+    UAPP_GETTER(double, getRevisedSamplingInterval, revisedSamplingInterval);
+    UAPP_GETTER(uint32_t, getRevisedQueueSize, revisedQueueSize);
+    UAPP_GETTER_WRAPPER(ExtensionObject, getFilterResult, filterResult);
+};
+
+/**
+ * UA_CreateMonitoredItemsRequest wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.2
+ */
+class CreateMonitoredItemsRequest
+    : public TypeWrapper<UA_CreateMonitoredItemsRequest, UA_TYPES_CREATEMONITOREDITEMSREQUEST> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    CreateMonitoredItemsRequest(
+        RequestHeader requestHeader,
+        uint32_t subscriptionId,
+        TimestampsToReturn timestampsToReturn,
+        Span<const MonitoredItemCreateRequest> itemsToCreate
+    ) {
+        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->subscriptionId = subscriptionId;
+        handle()->timestampsToReturn = static_cast<UA_TimestampsToReturn>(timestampsToReturn);
+        handle()->itemsToCreateSize = itemsToCreate.size();
+        handle()->itemsToCreate = detail::toNativeArray(itemsToCreate);
+    }
+
+    UAPP_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_GETTER(uint32_t, getSubscriptionId, subscriptionId)
+    UAPP_GETTER_CAST(TimestampsToReturn, getTimestampsToReturn, timestampsToReturn)
+    UAPP_GETTER_SPAN_WRAPPER(
+        MonitoredItemCreateRequest, getItemsToCreate, itemsToCreate, itemsToCreateSize
+    )
+};
+
+/**
+ * UA_CreateMonitoredItemsResponse wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.2
+ */
+class CreateMonitoredItemsResponse
+    : public TypeWrapper<UA_CreateMonitoredItemsResponse, UA_TYPES_CREATEMONITOREDITEMSRESPONSE> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    UAPP_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_GETTER_SPAN_WRAPPER(MonitoredItemCreateResult, getResults, results, resultsSize);
+    UAPP_GETTER_SPAN_WRAPPER(
+        DiagnosticInfo, getDiagnosticInfos, diagnosticInfos, diagnosticInfosSize
+    )
+};
+
+/**
+ * UA_MonitoredItemModifyRequest wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.3
+ */
+class MonitoredItemModifyRequest
+    : public TypeWrapper<UA_MonitoredItemModifyRequest, UA_TYPES_MONITOREDITEMMODIFYREQUEST> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    MonitoredItemModifyRequest(uint32_t monitoredItemId, MonitoringParameters requestedParameters) {
+        handle()->monitoredItemId = monitoredItemId;
+        handle()->requestedParameters = detail::toNative(std::move(requestedParameters));
+    }
+
+    UAPP_GETTER(uint32_t, getMonitoredItemId, monitoredItemId);
+    UAPP_GETTER_WRAPPER(MonitoringParameters, getRequestedParameters, requestedParameters)
+};
+
+/**
+ * UA_MonitoredItemModifyResult wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.3
+ */
+class MonitoredItemModifyResult
+    : public TypeWrapper<UA_MonitoredItemModifyResult, UA_TYPES_MONITOREDITEMMODIFYRESULT> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    UAPP_GETTER_WRAPPER(StatusCode, getStatusCode, statusCode);
+    UAPP_GETTER(double, getRevisedSamplingInterval, revisedSamplingInterval);
+    UAPP_GETTER(uint32_t, getRevisedQueueSize, revisedQueueSize);
+    UAPP_GETTER_WRAPPER(ExtensionObject, getFilterResult, filterResult);
+};
+
+/**
+ * UA_ModifyMonitoredItemsRequest wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.3
+ */
+class ModifyMonitoredItemsRequest
+    : public TypeWrapper<UA_ModifyMonitoredItemsRequest, UA_TYPES_MODIFYMONITOREDITEMSREQUEST> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    ModifyMonitoredItemsRequest(
+        RequestHeader requestHeader,
+        uint32_t subscriptionId,
+        TimestampsToReturn timestampsToReturn,
+        Span<const MonitoredItemModifyRequest> itemsToModify
+    ) {
+        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->subscriptionId = subscriptionId;
+        handle()->timestampsToReturn = static_cast<UA_TimestampsToReturn>(timestampsToReturn);
+        handle()->itemsToModifySize = itemsToModify.size();
+        handle()->itemsToModify = detail::toNativeArray(itemsToModify);
+    }
+
+    UAPP_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_GETTER(uint32_t, getSubscriptionId, subscriptionId)
+    UAPP_GETTER_CAST(TimestampsToReturn, getTimestampsToReturn, timestampsToReturn)
+    UAPP_GETTER_SPAN_WRAPPER(
+        MonitoredItemModifyRequest, getItemsToModify, itemsToModify, itemsToModifySize
+    )
+};
+
+/**
+ * UA_CreateMonitoredItemsResponse wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.3
+ */
+class ModifyMonitoredItemsResponse
+    : public TypeWrapper<UA_ModifyMonitoredItemsResponse, UA_TYPES_MODIFYMONITOREDITEMSRESPONSE> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    UAPP_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_GETTER_SPAN_WRAPPER(MonitoredItemModifyResult, getResults, results, resultsSize);
+    UAPP_GETTER_SPAN_WRAPPER(
+        DiagnosticInfo, getDiagnosticInfos, diagnosticInfos, diagnosticInfosSize
+    )
+};
+
+/**
+ * UA_SetMonitoringModeRequest wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.4
+ */
+class SetMonitoringModeRequest
+    : public TypeWrapper<UA_SetMonitoringModeRequest, UA_TYPES_SETMONITORINGMODEREQUEST> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    SetMonitoringModeRequest(
+        RequestHeader requestHeader,
+        uint32_t subscriptionId,
+        MonitoringMode monitoringMode,
+        Span<const uint32_t> monitoredItemIds
+    ) {
+        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->subscriptionId = subscriptionId;
+        handle()->monitoringMode = static_cast<UA_MonitoringMode>(monitoringMode);
+        handle()->monitoredItemIdsSize = monitoredItemIds.size();
+        handle()->monitoredItemIds = detail::toNativeArray(monitoredItemIds);
+    }
+
+    UAPP_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_GETTER(uint32_t, getSubscriptionId, subscriptionId)
+    UAPP_GETTER_CAST(MonitoringMode, getMonitoringMode, monitoringMode)
+    UAPP_GETTER_SPAN(uint32_t, getMonitoredItemIds, monitoredItemIds, monitoredItemIdsSize)
+};
+
+/**
+ * UA_SetMonitoringModeResponse wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.4
+ */
+class SetMonitoringModeResponse
+    : public TypeWrapper<UA_SetMonitoringModeResponse, UA_TYPES_SETMONITORINGMODERESPONSE> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    UAPP_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_GETTER_SPAN_WRAPPER(StatusCode, getResults, results, resultsSize);
+    UAPP_GETTER_SPAN_WRAPPER(
+        DiagnosticInfo, getDiagnosticInfos, diagnosticInfos, diagnosticInfosSize
+    )
+};
+
+/**
+ * UA_SetTriggeringRequest wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.5
+ */
+class SetTriggeringRequest
+    : public TypeWrapper<UA_SetTriggeringRequest, UA_TYPES_SETTRIGGERINGREQUEST> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    SetTriggeringRequest(
+        RequestHeader requestHeader,
+        uint32_t subscriptionId,
+        uint32_t triggeringItemId,
+        Span<const uint32_t> linksToAdd,
+        Span<const uint32_t> linksToRemove
+    ) {
+        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->subscriptionId = subscriptionId;
+        handle()->triggeringItemId = triggeringItemId;
+        handle()->linksToAddSize = linksToAdd.size();
+        handle()->linksToAdd = detail::toNativeArray(linksToAdd);
+        handle()->linksToRemoveSize = linksToRemove.size();
+        handle()->linksToRemove = detail::toNativeArray(linksToRemove);
+    }
+
+    UAPP_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_GETTER(uint32_t, getSubscriptionId, subscriptionId)
+    UAPP_GETTER(uint32_t, getTriggeringItemId, triggeringItemId)
+    UAPP_GETTER_SPAN(uint32_t, getLinksToAdd, linksToAdd, linksToAddSize)
+    UAPP_GETTER_SPAN(uint32_t, getLinksToRemove, linksToRemove, linksToRemoveSize)
+};
+
+/**
+ * UA_SetTriggeringResponse wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.5
+ */
+class SetTriggeringResponse
+    : public TypeWrapper<UA_SetTriggeringResponse, UA_TYPES_SETTRIGGERINGRESPONSE> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    UAPP_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_GETTER_SPAN_WRAPPER(StatusCode, getAddResults, addResults, addResultsSize);
+    UAPP_GETTER_SPAN_WRAPPER(
+        DiagnosticInfo, getAddDiagnosticInfos, addDiagnosticInfos, addDiagnosticInfosSize
+    )
+    UAPP_GETTER_SPAN_WRAPPER(StatusCode, getRemoveResults, removeResults, removeResultsSize);
+    UAPP_GETTER_SPAN_WRAPPER(
+        DiagnosticInfo, getRemoveDiagnosticInfos, removeDiagnosticInfos, removeDiagnosticInfosSize
+    )
+};
+
+/**
+ * UA_DeleteMonitoredItemsRequest wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.6
+ */
+class DeleteMonitoredItemsRequest
+    : public TypeWrapper<UA_DeleteMonitoredItemsRequest, UA_TYPES_DELETEMONITOREDITEMSREQUEST> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    DeleteMonitoredItemsRequest(
+        RequestHeader requestHeader,
+        uint32_t subscriptionId,
+        Span<const uint32_t> monitoredItemIds
+    ) {
+        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->subscriptionId = subscriptionId;
+        handle()->monitoredItemIdsSize = monitoredItemIds.size();
+        handle()->monitoredItemIds = detail::toNativeArray(monitoredItemIds);
+    }
+
+    UAPP_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_GETTER(uint32_t, getSubscriptionId, subscriptionId)
+    UAPP_GETTER_SPAN(uint32_t, getMonitoredItemIds, monitoredItemIds, monitoredItemIdsSize)
+};
+
+/**
+ * UA_DeleteMonitoredItemsResponse wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.6
+ */
+class DeleteMonitoredItemsResponse
+    : public TypeWrapper<UA_DeleteMonitoredItemsResponse, UA_TYPES_DELETEMONITOREDITEMSRESPONSE> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    UAPP_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_GETTER_SPAN_WRAPPER(StatusCode, getResults, results, resultsSize);
+    UAPP_GETTER_SPAN_WRAPPER(
+        DiagnosticInfo, getDiagnosticInfos, diagnosticInfos, diagnosticInfosSize
+    )
+};
+
+/**
  * UA_CreateSubscriptionRequest wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.2
  */
@@ -2021,7 +2354,8 @@ public:
  * UA_StructureDefinition wrapper class.
  * @see https://reference.opcfoundation.org/Core/Part3/v105/docs/8.48
  */
-class StructureDefinition : public TypeWrapper<UA_StructureDefinition, UA_TYPES_STRUCTUREDEFINITION> {
+class StructureDefinition
+    : public TypeWrapper<UA_StructureDefinition, UA_TYPES_STRUCTUREDEFINITION> {
 public:
     using TypeWrapper::TypeWrapper;
 

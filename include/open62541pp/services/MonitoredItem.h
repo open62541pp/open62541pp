@@ -72,10 +72,6 @@ struct MonitoringParametersEx {
     bool discardOldest = true;
 };
 
-/// @deprecated Use alias MonitoringParametersEx instead
-using MonitoringParameters
-    [[deprecated("Use alias MonitoringParametersEx instead")]] = MonitoringParametersEx;
-
 /**
  * @defgroup CreateMonitoredItems CreateMonitoredItems service
  * Create and add a monitored item to a subscription.

@@ -1366,6 +1366,68 @@ TEST_CASE("AggregateFilter") {
     CHECK(aggregateFilter.getAggregateConfiguration().useSlopedExtrapolation == true);
 }
 
+TEST_CASE("MonitoringParameters") {
+    const MonitoringParameters params(11.11, {}, 10, false);
+    CHECK(params.getSamplingInterval() == 11.11);
+    CHECK(params.getFilter().isEmpty());
+    CHECK(params.getQueueSize() == 10);
+    CHECK(params.getDiscardOldest() == false);
+}
+
+TEST_CASE("MonitoredItemCreateRequest / CreateMonitoredItemsRequest") {
+    const MonitoredItemCreateRequest item({{1, 1000}, AttributeId::Value});
+    CHECK(item.getItemToMonitor().getNodeId() == NodeId(1, 1000));
+    CHECK(item.getItemToMonitor().getAttributeId() == AttributeId::Value);
+    CHECK(item.getMonitoringMode() == MonitoringMode::Reporting);
+
+    const CreateMonitoredItemsRequest request({}, 1U, TimestampsToReturn::Both, {item});
+    CHECK(request.getSubscriptionId() == 1U);
+    CHECK(request.getTimestampsToReturn() == TimestampsToReturn::Both);
+    CHECK(request.getItemsToCreate().size() == 1);
+}
+
+TEST_CASE("MonitoredItemModifyRequest / ModifyMonitoredItemsRequest") {
+    const MonitoredItemModifyRequest item(1U, MonitoringParameters(11.11));
+    CHECK(item.getMonitoredItemId() == 1U);
+    CHECK(item.getRequestedParameters().getSamplingInterval() == 11.11);
+
+    const ModifyMonitoredItemsRequest request({}, 1U, TimestampsToReturn::Both, {item});
+    CHECK(request.getSubscriptionId() == 1U);
+    CHECK(request.getTimestampsToReturn() == TimestampsToReturn::Both);
+    CHECK(request.getItemsToModify().size() == 1);
+}
+
+TEST_CASE("SetMonitoringModeRequest") {
+    const SetMonitoringModeRequest request({}, 1U, MonitoringMode::Reporting, {0U, 1U});
+    CHECK_NOTHROW(request.getRequestHeader());
+    CHECK(request.getSubscriptionId() == 1U);
+    CHECK(request.getMonitoringMode() == MonitoringMode::Reporting);
+    CHECK(request.getMonitoredItemIds().size() == 2);
+    CHECK(request.getMonitoredItemIds()[0] == 0U);
+    CHECK(request.getMonitoredItemIds()[1] == 1U);
+}
+
+TEST_CASE("SetTriggeringRequest") {
+    const SetTriggeringRequest request({}, 1U, 2U, {3U}, {4U, 5U});
+    CHECK_NOTHROW(request.getRequestHeader());
+    CHECK(request.getSubscriptionId() == 1U);
+    CHECK(request.getTriggeringItemId() == 2U);
+    CHECK(request.getLinksToAdd().size() == 1);
+    CHECK(request.getLinksToAdd()[0] == 3U);
+    CHECK(request.getLinksToRemove().size() == 2);
+    CHECK(request.getLinksToRemove()[0] == 4U);
+    CHECK(request.getLinksToRemove()[1] == 5U);
+}
+
+TEST_CASE("DeleteMonitoredItemsRequest") {
+    const DeleteMonitoredItemsRequest request({}, 1U, {0U, 1U});
+    CHECK_NOTHROW(request.getRequestHeader());
+    CHECK(request.getSubscriptionId() == 1U);
+    CHECK(request.getMonitoredItemIds().size() == 2);
+    CHECK(request.getMonitoredItemIds()[0] == 0U);
+    CHECK(request.getMonitoredItemIds()[1] == 1U);
+}
+
 TEST_CASE("CreateSubscriptionRequest") {
     const CreateSubscriptionRequest request({}, 11.11, 2, 3, 4, true, 5);
     CHECK_NOTHROW(request.getRequestHeader());

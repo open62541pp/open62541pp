@@ -16,9 +16,6 @@ namespace opcua {
 class Server;
 
 using MonitoringParametersEx = services::MonitoringParametersEx;
-/// @deprecated Use alias MonitoringParametersEx instead
-using MonitoringParameters
-    [[deprecated("Use alias MonitoringParametersEx instead")]] = MonitoringParametersEx;
 
 /**
  * High-level monitored item class.
