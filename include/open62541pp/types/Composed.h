@@ -1836,6 +1836,7 @@ public:
     /// Construct with default values from open62541.
     /// The `clientHandle` parameter cannot be set by the user, any value will be replaced by the
     /// client before sending the request to the server.
+    // NOLINTNEXTLINE
     MonitoringParameters(
         double samplingInterval = 250.0,
         ExtensionObject filter = {},
@@ -1863,7 +1864,7 @@ class MonitoredItemCreateRequest
 public:
     using TypeWrapper::TypeWrapper;
 
-    MonitoredItemCreateRequest(
+    explicit MonitoredItemCreateRequest(
         ReadValueId itemToMonitor,
         MonitoringMode monitoringMode = MonitoringMode::Reporting,
         MonitoringParameters requestedParameters = {}
