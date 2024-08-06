@@ -73,6 +73,20 @@ using StatusChangeNotificationCallback =
 
 /**
  * Create a subscription.
+ * @param connection Instance of type Client
+ * @param request Create subscription request
+ * @param statusChangeCallback Invoked when the status of a subscription is changed
+ * @param deleteCallback Invoked when the subscription is deleted
+ */
+CreateSubscriptionResponse createSubscription(
+    Client& connection,
+    const CreateSubscriptionRequest& request,
+    StatusChangeNotificationCallback statusChangeCallback = {},
+    DeleteSubscriptionCallback deleteCallback = {}
+);
+
+/**
+ * Create a subscription.
  * @copydetails SubscriptionParameters
  * @param connection Instance of type Client
  * @param parameters Subscription parameters, may be revised by server
@@ -87,7 +101,7 @@ using StatusChangeNotificationCallback =
     bool publishingEnabled = true,
     StatusChangeNotificationCallback statusChangeCallback = {},
     DeleteSubscriptionCallback deleteCallback = {}
-);
+) noexcept;
 
 /**
  * @}
@@ -96,6 +110,15 @@ using StatusChangeNotificationCallback =
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.3
  * @{
  */
+
+/**
+ * Modify a subscription.
+ * @param connection Instance of type Client
+ * @param request Modify subscription request
+ */
+ModifySubscriptionResponse modifySubscription(
+    Client& connection, const ModifySubscriptionRequest& request
+) noexcept;
 
 /**
  * Modify a subscription.
@@ -121,6 +144,15 @@ Result<void> modifySubscription(
 /**
  * Enable/disable publishing of notification messages.
  * @param connection Instance of type Client
+ * @param request Set publishing mode request
+ */
+SetPublishingModeResponse setPublishingMode(
+    Client& connection, const SetPublishingModeRequest& request
+) noexcept;
+
+/**
+ * Enable/disable publishing of notification messages.
+ * @param connection Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @param publishing Enable/disable publishing
  */
@@ -137,7 +169,16 @@ Result<void> setPublishingMode(
  */
 
 /**
- * Delete a subscription.
+ * Delete subscriptions.
+ * @param connection Instance of type Client
+ * @param request Delete subscriptions request
+ */
+DeleteSubscriptionsResponse deleteSubscriptions(
+    Client& connection, const DeleteSubscriptionsRequest& request
+) noexcept;
+
+/**
+ * Delete a single subscription.
  * @param connection Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  */
