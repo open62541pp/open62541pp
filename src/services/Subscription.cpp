@@ -23,17 +23,19 @@ Result<uint32_t> createSubscription(
     Client& connection,
     SubscriptionParameters& parameters,
     bool publishingEnabled,
+    StatusChangeNotificationCallback statusChangeCallback,
     DeleteSubscriptionCallback deleteCallback
 ) {
     auto context = std::make_unique<detail::SubscriptionContext>();
     context->catcher = &opcua::detail::getContext(connection).exceptionCatcher;
+    context->statusChangeCallback = std::move(statusChangeCallback);
     context->deleteCallback = std::move(deleteCallback);
 
     const CreateSubscriptionResponse response = UA_Client_Subscriptions_create(
         connection.handle(),
         detail::createCreateSubscriptionRequest(parameters, publishingEnabled),
         context.get(),
-        nullptr,  // statusChangeCallback
+        context->statusChangeCallbackNative,
         context->deleteCallbackNative
     );
     if (StatusCode serviceResult = detail::getServiceResult(response); serviceResult.isBad()) {

@@ -2126,9 +2126,7 @@ public:
     using TypeWrapper::TypeWrapper;
 
     DeleteMonitoredItemsRequest(
-        RequestHeader requestHeader,
-        uint32_t subscriptionId,
-        Span<const uint32_t> monitoredItemIds
+        RequestHeader requestHeader, uint32_t subscriptionId, Span<const uint32_t> monitoredItemIds
     ) {
         handle()->requestHeader = detail::toNative(std::move(requestHeader));
         handle()->subscriptionId = subscriptionId;
@@ -2297,6 +2295,19 @@ public:
     UAPP_GETTER_SPAN_WRAPPER(
         DiagnosticInfo, getDiagnosticInfos, diagnosticInfos, diagnosticInfosSize
     )
+};
+
+/**
+ * UA_StatusChangeNotification wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.25.4
+ */
+class StatusChangeNotification
+    : public TypeWrapper<UA_StatusChangeNotification, UA_TYPES_STATUSCHANGENOTIFICATION> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    UAPP_GETTER_WRAPPER(StatusCode, getStatus, status)
+    UAPP_GETTER_WRAPPER(DiagnosticInfo, getDiagnosticInfo, diagnosticInfo)
 };
 
 #endif

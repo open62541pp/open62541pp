@@ -5,6 +5,7 @@
 
 #include "open62541pp/detail/Staleable.h"
 #include "open62541pp/services/detail/CallbackAdapter.h"
+#include "open62541pp/types/Composed.h"  // StatusChangeNotification
 
 // forward declare
 struct UA_Client;
@@ -12,7 +13,24 @@ struct UA_Client;
 namespace opcua::services::detail {
 
 struct SubscriptionContext : CallbackAdapter, opcua::detail::Staleable {
+    std::function<void(uint32_t subId, StatusChangeNotification&)> statusChangeCallback;
     std::function<void(uint32_t subId)> deleteCallback;
+
+    static void statusChangeCallbackNative(
+        [[maybe_unused]] UA_Client* client,
+        uint32_t subId,
+        void* subContext,
+        UA_StatusChangeNotification* notification
+    ) noexcept {
+        if (subContext != nullptr && notification != nullptr) {
+            auto* self = static_cast<SubscriptionContext*>(subContext);
+            self->invoke(
+                self->statusChangeCallback,
+                subId,
+                asWrapper<StatusChangeNotification>(*notification)
+            );
+        }
+    }
 
     static void deleteCallbackNative(
         [[maybe_unused]] UA_Client* client, uint32_t subId, void* subContext

@@ -903,9 +903,9 @@ TEST_CASE("Subscription service set (client)") {
 
     SUBCASE("deleteSubscription with callback") {
         bool deleted = false;
-        const auto subId = services::createSubscription(client, parameters, true, [&](uint32_t) {
-                               deleted = true;
-                           }).value();
+        const auto deleteCallback = [&](uint32_t) { deleted = true; };
+        const auto subId =
+            services::createSubscription(client, parameters, true, {}, deleteCallback).value();
 
         CHECK(services::deleteSubscription(client, subId));
         CHECK(deleted == true);
