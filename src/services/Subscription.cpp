@@ -30,7 +30,7 @@ CreateSubscriptionResponse createSubscription(
     context->statusChangeCallback = std::move(statusChangeCallback);
     context->deleteCallback = std::move(deleteCallback);
 
-    const CreateSubscriptionResponse response = UA_Client_Subscriptions_create(
+    CreateSubscriptionResponse response = UA_Client_Subscriptions_create(
         connection.handle(),
         request,
         context.get(),
