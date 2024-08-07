@@ -42,6 +42,7 @@ struct ClientContext {
     UA_SessionState lastSessionState{};
 #endif
     std::array<StateCallback, clientStateCount> stateCallbacks;
+    InactivityCallback inactivityCallback;
 
     ExceptionCatcher exceptionCatcher;
 };

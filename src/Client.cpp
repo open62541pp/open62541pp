@@ -324,6 +324,16 @@ void Client::onSessionClosed(StateCallback callback) {
     setStateCallback(*this, detail::ClientState::SessionClosed, std::move(callback));
 }
 
+void Client::onInactive(InactivityCallback callback) {
+    detail::getContext(*this).inactivityCallback = std::move(callback);
+    detail::getConfig(*this).inactivityCallback = [](UA_Client* client) noexcept {
+        auto* context = detail::getContext(client);
+        if (context != nullptr && context->inactivityCallback != nullptr) {
+            context->exceptionCatcher.invoke(context->inactivityCallback);
+        }
+    };
+}
+
 void Client::connect(std::string_view endpointUrl) {
     throwIfBad(UA_Client_connect(handle(), std::string(endpointUrl).c_str()));
 }

@@ -170,6 +170,23 @@ TEST_CASE("Client state callbacks") {
     CHECK(states.at(states.size() - 1) == States::Disconnected);
 }
 
+TEST_CASE("Client inactivity callback") {
+    Server server;
+    ServerRunner serverRunner(server);
+    Client client;
+
+    UA_ClientConfig* config = UA_Client_getConfig(client.handle());
+    config->timeout = 50;  // ms
+    config->connectivityCheckInterval = 10;  // ms
+
+    bool inactive = false;
+    client.onInactive([&] { inactive = true; });
+    client.connect(localServerUrl);
+    serverRunner.stop();
+    client.runIterate(100);
+    CHECK(inactive);
+}
+
 TEST_CASE("Client configuration") {
     Client client;
     UA_ClientConfig* config = UA_Client_getConfig(client.handle());
