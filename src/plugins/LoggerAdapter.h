@@ -2,6 +2,7 @@
 
 #include <cassert>
 
+#include "open62541pp/Config.h"
 #include "open62541pp/Logger.h"  // Logger
 #include "open62541pp/detail/open62541/common.h"  // UA_Logger
 #include "open62541pp/detail/string_utils.h"  // detail::toString
@@ -16,7 +17,11 @@ public:
 
     void clear(UA_Logger& native) noexcept override {
         if (native.clear != nullptr) {
+#if UAPP_OPEN62541_VER_GE(1, 4)
+            native.clear(&native);
+#else
             native.clear(native.context);
+#endif
             native.context = nullptr;
         }
     }
