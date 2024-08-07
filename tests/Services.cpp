@@ -864,10 +864,9 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 TEST_CASE("Subscription service set (client)") {
-    Server server;
-    ServerRunner serverRunner(server);
-    Client client;
-    client.connect("opc.tcp://localhost:4840");
+    ServerClientSetup setup;
+    setup.client.connect(setup.endpointUrl);
+    auto& client = setup.client;
 
     services::SubscriptionParameters parameters{};
 
@@ -903,9 +902,9 @@ TEST_CASE("Subscription service set (client)") {
 
     SUBCASE("deleteSubscription with callback") {
         bool deleted = false;
-        const auto subId = services::createSubscription(client, parameters, true, [&](uint32_t) {
-                               deleted = true;
-                           }).value();
+        const auto deleteCallback = [&](uint32_t) { deleted = true; };
+        const auto subId =
+            services::createSubscription(client, parameters, true, {}, deleteCallback).value();
 
         CHECK(services::deleteSubscription(client, subId));
         CHECK(deleted == true);
@@ -913,10 +912,10 @@ TEST_CASE("Subscription service set (client)") {
 }
 
 TEST_CASE("MonitoredItem service set (client)") {
-    Server server;
-    ServerRunner serverRunner(server);
-    Client client;
-    client.connect("opc.tcp://localhost:4840");
+    ServerClientSetup setup;
+    setup.client.connect(setup.endpointUrl);
+    auto& server = setup.server;
+    auto& client = setup.client;
 
     // add variable node to test data change notifications
     const NodeId id{1, 1000};

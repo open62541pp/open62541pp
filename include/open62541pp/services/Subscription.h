@@ -5,6 +5,7 @@
 
 #include "open62541pp/Config.h"
 #include "open62541pp/Result.h"
+#include "open62541pp/types/Composed.h"  // StatusChangeNotification
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 
@@ -62,12 +63,21 @@ struct SubscriptionParameters {
  */
 using DeleteSubscriptionCallback = std::function<void(uint32_t subId)>;
 
+/**s
+ * Subscription status change notification callback.
+ * @param subId Subscription identifier
+ * @param notification Status change notification
+ */
+using StatusChangeNotificationCallback =
+    std::function<void(uint32_t subId, StatusChangeNotification& notification)>;
+
 /**
  * Create a subscription.
  * @copydetails SubscriptionParameters
  * @param connection Instance of type Client
  * @param parameters Subscription parameters, may be revised by server
  * @param publishingEnabled Enable/disable publishing of the subscription
+ * @param statusChangeCallback Invoked when the status of a subscription is changed
  * @param deleteCallback Invoked when the subscription is deleted
  * @return Server-assigned identifier of the subscription
  */
@@ -75,6 +85,7 @@ using DeleteSubscriptionCallback = std::function<void(uint32_t subId)>;
     Client& connection,
     SubscriptionParameters& parameters,
     bool publishingEnabled = true,
+    StatusChangeNotificationCallback statusChangeCallback = {},
     DeleteSubscriptionCallback deleteCallback = {}
 );
 
