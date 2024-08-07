@@ -1460,6 +1460,15 @@ TEST_CASE("SetPublishingModeRequest") {
     CHECK(request.getSubscriptionIds()[2] == 3);
 }
 
+TEST_CASE("DeleteSubscriptionsRequest") {
+    const DeleteSubscriptionsRequest request({}, {1, 2, 3});
+    CHECK_NOTHROW(request.getRequestHeader());
+    CHECK(request.getSubscriptionIds().size() == 3);
+    CHECK(request.getSubscriptionIds()[0] == 1);
+    CHECK(request.getSubscriptionIds()[1] == 2);
+    CHECK(request.getSubscriptionIds()[2] == 3);
+}
+
 #endif
 
 #ifdef UA_ENABLE_TYPEDESCRIPTION

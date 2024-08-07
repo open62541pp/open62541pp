@@ -2310,6 +2310,41 @@ public:
     UAPP_GETTER_WRAPPER(DiagnosticInfo, getDiagnosticInfo, diagnosticInfo)
 };
 
+/**
+ * UA_DeleteSubscriptionsRequest wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.8
+ */
+class DeleteSubscriptionsRequest
+    : public TypeWrapper<UA_DeleteSubscriptionsRequest, UA_TYPES_DELETESUBSCRIPTIONSREQUEST> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    DeleteSubscriptionsRequest(RequestHeader requestHeader, Span<const uint32_t> subscriptionIds) {
+        handle()->requestHeader = detail::toNative(std::move(requestHeader));
+        handle()->subscriptionIdsSize = subscriptionIds.size();
+        handle()->subscriptionIds = detail::toNativeArray(subscriptionIds);
+    }
+
+    UAPP_GETTER_WRAPPER(RequestHeader, getRequestHeader, requestHeader)
+    UAPP_GETTER_SPAN(uint32_t, getSubscriptionIds, subscriptionIds, subscriptionIdsSize)
+};
+
+/**
+ * UA_DeleteSubscriptionsResponse wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.13.8
+ */
+class DeleteSubscriptionsResponse
+    : public TypeWrapper<UA_DeleteSubscriptionsResponse, UA_TYPES_DELETESUBSCRIPTIONSRESPONSE> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    UAPP_GETTER_WRAPPER(ResponseHeader, getResponseHeader, responseHeader)
+    UAPP_GETTER_SPAN_WRAPPER(StatusCode, getResults, results, resultsSize)
+    UAPP_GETTER_SPAN_WRAPPER(
+        DiagnosticInfo, getDiagnosticInfos, diagnosticInfos, diagnosticInfosSize
+    )
+};
+
 #endif
 
 /* ----------------------------------------- Historizing ---------------------------------------- */
