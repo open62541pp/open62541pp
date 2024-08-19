@@ -24,9 +24,9 @@ template <typename T>
 inline static auto createMonitoredItemContext(
     T& connection,
     const ReadValueId& itemToMonitor,
-    DataChangeNotificationCallback&& dataChangeCallback,
-    EventNotificationCallback&& eventCallback,
-    DeleteMonitoredItemCallback&& deleteCallback
+    DataChangeNotificationCallback dataChangeCallback,
+    EventNotificationCallback eventCallback,
+    DeleteMonitoredItemCallback deleteCallback
 ) {
     auto context = std::make_unique<detail::MonitoredItemContext>();
     context->catcher = &opcua::detail::getContext(connection).exceptionCatcher;
@@ -41,18 +41,14 @@ template <typename T>
 inline static auto createMonitoredItemContexts(
     T& connection,
     const CreateMonitoredItemsRequest& request,
-    DataChangeNotificationCallback&& dataChangeCallback,
-    EventNotificationCallback&& eventCallback,
-    DeleteMonitoredItemCallback&& deleteCallback
+    const DataChangeNotificationCallback& dataChangeCallback,
+    const EventNotificationCallback& eventCallback,
+    const DeleteMonitoredItemCallback& deleteCallback
 ) {
     std::vector<std::unique_ptr<detail::MonitoredItemContext>> contexts;
     for (const auto& item : request.getItemsToCreate()) {
         contexts.push_back(createMonitoredItemContext(
-            connection,
-            item.getItemToMonitor(),
-            std::move(dataChangeCallback),
-            std::move(eventCallback),
-            std::move(deleteCallback)
+            connection, item.getItemToMonitor(), dataChangeCallback, eventCallback, deleteCallback
         ));
     }
     return contexts;
@@ -97,7 +93,7 @@ CreateMonitoredItemsResponse createMonitoredItemsDataChange(
     DeleteMonitoredItemCallback deleteCallback
 ) {
     auto contexts = createMonitoredItemContexts(
-        connection, request, std::move(dataChangeCallback), {}, std::move(deleteCallback)
+        connection, request, dataChangeCallback, {}, deleteCallback
     );
     std::vector<void*> contextsRaw;
     std::vector<UA_Client_DataChangeNotificationCallback> dataChangeCallbacks;
