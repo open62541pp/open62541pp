@@ -997,19 +997,38 @@ TEST_CASE("MonitoredItem service set (client)") {
 
         size_t notificationCount = 0;
         size_t eventFieldsSize = 0;
-        const auto monId =
-            services::createMonitoredItemEvent(
+        const auto callback = [&](uint32_t, uint32_t, Span<const Variant> eventFields) {
+            notificationCount++;
+            eventFieldsSize = eventFields.size();
+        };
+
+        SUBCASE("Raw") {
+            const CreateMonitoredItemsRequest request(
+                {},
+                subId,
+                TimestampsToReturn::Both,
+                {
+                    MonitoredItemCreateRequest(
+                        {ObjectId::Server, AttributeId::EventNotifier},
+                        MonitoringMode::Reporting,
+                        MonitoringParameters(250, ExtensionObject::fromDecodedCopy(eventFilter))
+                    ),
+                }
+            );
+            const auto response = services::createMonitoredItemsEvent(client, request, callback);
+            CHECK(response.getResponseHeader().getServiceResult().isGood());
+        }
+        SUBCASE("Single") {
+            const auto monId = services::createMonitoredItemEvent(
                 client,
                 subId,
                 {ObjectId::Server, AttributeId::EventNotifier},
                 MonitoringMode::Reporting,
                 monitoringParameters,
-                [&](uint32_t, uint32_t, Span<const Variant> eventFields) {
-                    notificationCount++;
-                    eventFieldsSize = eventFields.size();
-                }
+                callback
             ).value();
-        CAPTURE(monId);
+            CAPTURE(monId);
+        }
 
         Event event(server);
         event.writeTime(DateTime::now());
