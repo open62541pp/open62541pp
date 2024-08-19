@@ -89,8 +89,8 @@ inline static void storeMonitoredItemContexts(
 CreateMonitoredItemsResponse createMonitoredItemsDataChange(
     Client& connection,
     const CreateMonitoredItemsRequest& request,
-    DataChangeNotificationCallback dataChangeCallback,
-    DeleteMonitoredItemCallback deleteCallback
+    DataChangeNotificationCallback dataChangeCallback,  // NOLINT
+    DeleteMonitoredItemCallback deleteCallback  // NOLINT
 ) {
     auto contexts = createMonitoredItemContexts(
         connection, request, dataChangeCallback, {}, deleteCallback
@@ -169,11 +169,11 @@ Result<uint32_t> createMonitoredItemDataChange<Server>(
 CreateMonitoredItemsResponse createMonitoredItemsEvent(
     Client& connection,
     const CreateMonitoredItemsRequest& request,
-    EventNotificationCallback eventCallback,
-    DeleteMonitoredItemCallback deleteCallback
+    EventNotificationCallback eventCallback,  // NOLINT
+    DeleteMonitoredItemCallback deleteCallback  // NOLINT
 ) {
     auto contexts = createMonitoredItemContexts(
-        connection, request, {}, std::move(eventCallback), std::move(deleteCallback)
+        connection, request, {}, eventCallback, deleteCallback
     );
     std::vector<void*> contextsRaw;
     std::vector<UA_Client_EventNotificationCallback> eventCallbacks;
