@@ -45,7 +45,7 @@ inline const UA_ResponseHeader& getResponseHeader(const Response& response) noex
 }
 
 template <typename Response>
-inline UA_StatusCode getServiceResult(const Response& response) noexcept {
+inline StatusCode getServiceResult(const Response& response) noexcept {
     return getResponseHeader(response).serviceResult;
 }
 
@@ -108,6 +108,13 @@ inline void reviseMonitoringParameters(
     parameters.samplingInterval = result.revisedSamplingInterval;
     parameters.queueSize = result.revisedQueueSize;
     parameters.filter = asWrapper<ExtensionObject>(result.filterResult);
+}
+
+inline Result<uint32_t> getMonitoredItemId(const UA_MonitoredItemCreateResult& result) noexcept {
+    if (StatusCode code = result.statusCode; code.isBad()) {
+        return BadResult(code);
+    }
+    return result.monitoredItemId;
 }
 
 }  // namespace opcua::services::detail

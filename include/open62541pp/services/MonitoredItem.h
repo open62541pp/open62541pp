@@ -7,7 +7,10 @@
 #include "open62541pp/Config.h"
 #include "open62541pp/Result.h"
 #include "open62541pp/Span.h"
+#include "open62541pp/types/Composed.h"
+#include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/ExtensionObject.h"
+#include "open62541pp/types/Variant.h"
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 
@@ -15,9 +18,6 @@
 namespace opcua {
 class Client;
 class Server;
-class DataValue;
-class ReadValueId;
-class Variant;
 }  // namespace opcua
 
 namespace opcua::services {
@@ -105,6 +105,23 @@ using EventNotificationCallback =
     std::function<void(uint32_t subId, uint32_t monId, Span<const Variant> eventFields)>;
 
 /**
+ * Create and add monitored items to a subscription for data change notifications.
+ * Don't use this function to monitor the `EventNotifier` attribute.
+ * Create monitored items with @ref createMonitoredItemsEvent instead.
+ *
+ * @param connection Instance of type Client
+ * @param request Create monitored items request
+ * @param dataChangeCallback Invoked when the monitored item is changed
+ * @param deleteCallback Invoked when the monitored item is deleted
+ */
+CreateMonitoredItemsResponse createMonitoredItemsDataChange(
+    Client& connection,
+    const CreateMonitoredItemsRequest& request,
+    DataChangeNotificationCallback dataChangeCallback,
+    DeleteMonitoredItemCallback deleteCallback = {}
+);
+
+/**
  * Create and add a monitored item to a subscription for data change notifications.
  * Don't use this function to monitor the `EventNotifier` attribute.
  * Create a monitored item with @ref createMonitoredItemEvent instead.
@@ -128,6 +145,22 @@ template <typename T>
     MonitoringMode monitoringMode,
     MonitoringParametersEx& parameters,
     DataChangeNotificationCallback dataChangeCallback,
+    DeleteMonitoredItemCallback deleteCallback = {}
+);
+
+/**
+ * Create and add monitored items to a subscription for event notifications.
+ * The `attributeId` of ReadValueId must be set to AttributeId::EventNotifier.
+ *
+ * @param connection Instance of type Client
+ * @param request Create monitored items request
+ * @param eventCallback Invoked when an event is published
+ * @param deleteCallback Invoked when the monitored item is deleted
+ */
+CreateMonitoredItemsResponse createMonitoredItemsEvent(
+    Client& connection,
+    const CreateMonitoredItemsRequest& request,
+    EventNotificationCallback eventCallback,
     DeleteMonitoredItemCallback deleteCallback = {}
 );
 
@@ -164,6 +197,16 @@ template <typename T>
  */
 
 /**
+ * Modify monitored items of a subscription.
+ *
+ * @param connection Instance of type Client
+ * @param request Modify monitored items request
+ */
+ModifyMonitoredItemsResponse modifyMonitoredItems(
+    Client& connection, const ModifyMonitoredItemsRequest& request
+) noexcept;
+
+/**
  * Modify a monitored item of a subscription.
  * @copydetails MonitoringParametersEx
  *
@@ -188,6 +231,16 @@ Result<void> modifyMonitoredItem(
  */
 
 /**
+ * Set the monitoring mode of monitored items.
+ *
+ * @param connection Instance of type Client
+ * @param request Set monitoring mode request
+ */
+SetMonitoringModeResponse setMonitoringMode(
+    Client& connection, const SetMonitoringModeRequest& request
+) noexcept;
+
+/**
  * Set the monitoring mode of a monitored item.
  *
  * @param connection Instance of type Client
@@ -210,6 +263,18 @@ Result<void> setMonitoringMode(
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.5
  * @{
  */
+
+/**
+ * Add and delete triggering links of monitored items.
+ * The triggering item and the items to report shall belong to the same subscription.
+ * @note Supported since open62541 v1.2
+ *
+ * @param connection Instance of type Client
+ * @param request Set triggering request
+ */
+SetTriggeringResponse setTriggering(
+    Client& connection, const SetTriggeringRequest& request
+) noexcept;
 
 /**
  * Add and delete triggering links of a monitored item.
@@ -237,6 +302,16 @@ Result<void> setTriggering(
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.6
  * @{
  */
+
+/**
+ * Delete monitored items from subscriptions.
+ *
+ * @param connection Instance of type Client
+ * @param request Delete monitored items request
+ */
+DeleteMonitoredItemsResponse deleteMonitoredItems(
+    Client& connection, const DeleteMonitoredItemsRequest& request
+) noexcept;
 
 /**
  * Delete a monitored item from a subscription.

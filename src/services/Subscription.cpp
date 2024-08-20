@@ -37,7 +37,7 @@ CreateSubscriptionResponse createSubscription(
         context->statusChangeCallbackNative,
         context->deleteCallbackNative
     );
-    if (response.getResponseHeader().getServiceResult().isGood()) {
+    if (detail::getServiceResult(response).isGood()) {
         opcua::detail::getContext(connection)
             .subscriptions.insert(response.getSubscriptionId(), std::move(context));
     }
