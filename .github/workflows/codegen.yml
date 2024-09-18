@@ -1,0 +1,24 @@
+name: Codegen
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  linux:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12' 
+      - name: Run codegen scripts
+        run: |
+          python3 tools/gen_attribute_highlevel.py
+          python3 tools/gen_nodeids.py
+          python3 tools/gen_typeregistry_native.py
+      - name: Check diff
+        run: git diff --exit-code

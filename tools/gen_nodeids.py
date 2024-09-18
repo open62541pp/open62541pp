@@ -1,6 +1,7 @@
 import urllib.request
 from collections import defaultdict
 from pathlib import Path
+from subprocess import check_call
 
 URL = "http://www.opcfoundation.org/UA/schemas/1.04/NodeIds.csv"
 HERE = Path(__file__).parent
@@ -100,6 +101,7 @@ def main():
     ]
     header = TEMPLATE_HEADER.format(body="\n\n".join(enums))
     HEADER_FILE.write_text(header)
+    check_call(("clang-format", "-i", HEADER_FILE))
 
 
 if __name__ == "__main__":

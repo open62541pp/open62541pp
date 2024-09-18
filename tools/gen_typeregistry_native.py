@@ -1,4 +1,5 @@
 from pathlib import Path
+from subprocess import check_call
 
 HERE = Path(__file__).parent
 SCHEMA_DIR = HERE.parent / "3rdparty" / "open62541" / "tools" / "schema"
@@ -100,6 +101,7 @@ def main():
     )
     header = TEMPLATE_HEADER.format(body=body)
     HEADER_FILE.write_text(header)
+    check_call(("clang-format", "-i", HEADER_FILE))
 
 
 if __name__ == "__main__":

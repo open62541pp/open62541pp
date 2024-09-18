@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
+from subprocess import check_call
 
 HERE = Path(__file__).parent
 HEADER_FILE = HERE.parent / "include/open62541pp/services/Attribute_highlevel.h"
@@ -157,6 +158,7 @@ def main():
     body = "\n".join(gen_functions()).strip()
     content = TEMPLATE_HEADER.format(body=body)
     HEADER_FILE.write_text(content)
+    check_call(("clang-format", "-i", HEADER_FILE))
 
 
 if __name__ == "__main__":
