@@ -44,14 +44,10 @@ TEST_CASE("Session") {
     }
 
     SUBCASE("Close session") {
-        // thread sanitizer error in UA_Server_closeSession function despite mutex
-        // false? bug in open62541?
-#ifndef UAPP_TSAN_ENABLED
         client.connect(localServerUrl);
         auto session = server.getSessions().at(0);
         CHECK_NOTHROW(session.close());
         CHECK_THROWS_WITH(session.close(), "BadSessionIdInvalid");
-#endif
     }
 #endif
 
