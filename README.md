@@ -24,9 +24,9 @@
 
   <p>
     <b>
-      <a href="https://open62541pp.github.io/open62541pp">Documentation</a>
+      <a href="https://open62541pp.github.io/open62541pp">📖 Documentation</a>
       •
-      <a href="https://github.com/open62541pp/open62541pp/tree/master/examples">Examples</a>
+      <a href="https://github.com/open62541pp/open62541pp/tree/master/examples">📝 Examples</a>
     </b>
   </p>
 </div>
@@ -54,7 +54,7 @@ All open62541 releases since v1.0 are supported and tested in a [CI pipeline][ci
 The project is currently in `beta` stage but already used in production.
 Version [`v1.0.0` is planned for 2024](https://github.com/open62541pp/open62541pp/milestone/1). No major breaking changes are expected.
 
-## ✍ Examples
+## 📝 Examples
 
 [Explore all examples in the `examples/` directory](https://github.com/open62541pp/open62541pp/tree/master/examples).
 
