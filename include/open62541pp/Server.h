@@ -155,6 +155,7 @@ public:
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS_EVENTS
     /// Create an event object to generate and trigger events.
+    [[deprecated("use Event constructor")]]
     Event createEvent(const NodeId& eventType = ObjectTypeId::BaseEventType);
 #endif
 
