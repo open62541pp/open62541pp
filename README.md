@@ -9,7 +9,7 @@
 [ci-compatibility]: https://github.com/open62541pp/open62541pp/actions/workflows/open62541-compatibility.yml
 
 <div align="center">
-  <h1>open62541++</h1>
+  <h1>open62541pp</h1>
 
   [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-blue.svg)](https://github.com/open62541pp/open62541pp/blob/master/LICENSE)
   [![CI](https://github.com/open62541pp/open62541pp/actions/workflows/ci.yml/badge.svg)][ci]
@@ -188,7 +188,7 @@ The library can be built, integrated and installed using [CMake](https://cmake.o
 
 Please check out the open62541 build options here: https://www.open62541.org/doc/1.3/building.html#build-options
 
-open62541++ provides additional build options:
+Open62541pp provides additional build options:
 
 - `UAPP_INTERNAL_OPEN62541`: Use internal open62541 library if `ON` or search for installed open62541 library if `OFF`
 - `UAPP_BUILD_DOCUMENTATION`: Build documentation

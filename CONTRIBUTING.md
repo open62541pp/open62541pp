@@ -1,6 +1,6 @@
-# Contributing to open62541++
+# Contributing to open62541pp
 
-Thank you for your interest in contributing to open62541++! There are many ways to contribute, and all of them are appreciated.
+Thank you for your interest in contributing to open62541pp! There are many ways to contribute, and all of them are appreciated.
 
 1. [Fork](https://github.com/open62541pp/open62541pp/fork) the open62541pp repository on GitHub
 2. Clone your fork of open62541pp `git clone --recursive https://github.com/<your-username>/open62541pp.git`

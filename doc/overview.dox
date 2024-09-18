@@ -1,7 +1,7 @@
 /*!
 @page overview Overview
 
-An overview of core concepts and the features included in open62541++.
+An overview of open62541pp's core concepts and the features.
 
 - @subpage async_model
 */
