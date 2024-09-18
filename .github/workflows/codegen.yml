@@ -6,19 +6,23 @@ on:
   pull_request:
 
 jobs:
-  linux:
+  codegen:
     runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        script:
+          - tools/gen_attribute_highlevel.py
+          - tools/gen_nodeids.py
+          - tools/gen_typeregistry_native.py
     steps:
       - uses: actions/checkout@v4
         with:
           submodules: recursive
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.12' 
-      - name: Run codegen scripts
-        run: |
-          python3 tools/gen_attribute_highlevel.py
-          python3 tools/gen_nodeids.py
-          python3 tools/gen_typeregistry_native.py
+          python-version: "3.12"
+      - name: Run codegen script
+        run: python ${{ matrix.script }}
       - name: Check diff
         run: git diff --exit-code
