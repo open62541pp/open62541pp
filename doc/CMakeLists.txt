@@ -68,7 +68,7 @@ add_custom_target(
     DEPENDS ${doxygen_open62541_html_dir}/index.html
 )
 
-# -------------------------------------- Doxygen open62541++ ------------------------------------- #
+# -------------------------------------- Doxygen open62541pp ------------------------------------- #
 
 set(doxygen_output_dir ${PROJECT_BINARY_DIR}/doxygen)
 set(doxygen_html_dir   ${PROJECT_BINARY_DIR}/doc_html)
