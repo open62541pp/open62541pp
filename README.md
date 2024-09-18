@@ -24,9 +24,9 @@
 
   <p>
     <b>
-      <a href="https://open62541pp.github.io/open62541pp">📖 Documentation</a>
+      📖 <a href="https://open62541pp.github.io/open62541pp">Documentation</a>
       •
-      <a href="https://github.com/open62541pp/open62541pp/tree/master/examples">📝 Examples</a>
+      📝 <a href="https://github.com/open62541pp/open62541pp/tree/master/examples">Examples</a>
     </b>
   </p>
 </div>
