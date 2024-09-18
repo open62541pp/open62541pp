@@ -10,8 +10,8 @@ int main() {
     client.connect("opc.tcp://localhost:4840");
 
     // Browse method node
-    auto objNode = client.getObjectsNode();
-    auto greetMethodNode = objNode.browseChild({{1, "Greet"}});
+    opcua::Node objectsNode(client, opcua::ObjectId::ObjectsFolder);
+    opcua::Node greetMethodNode = objectsNode.browseChild({{1, "Greet"}});
 
     // Run client event loop in separate thread
     auto clientThread = std::thread([&] { client.run(); });
@@ -20,7 +20,7 @@ int main() {
     {
         auto future = opcua::services::callAsync(
             client,
-            objNode.id(),
+            objectsNode.id(),
             greetMethodNode.id(),
             {opcua::Variant::fromScalar("Future World")},
             opcua::useFuture  // default, can be omitted
@@ -38,7 +38,7 @@ int main() {
     {
         opcua::services::callAsync(
             client,
-            objNode.id(),
+            objectsNode.id(),
             greetMethodNode.id(),
             {opcua::Variant::fromScalar("Callback World")},
             [](const opcua::Result<std::vector<opcua::Variant>>& result) {

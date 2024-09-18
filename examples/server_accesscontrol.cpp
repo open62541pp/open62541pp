@@ -35,8 +35,9 @@ public:
         const bool isAdmin = session.getSessionAttribute({0, "isAdmin"}).getScalar<bool>();
         std::cout << "Get user access level of node id " << nodeId.toString() << std::endl;
         std::cout << "Admin rights granted: " << isAdmin << std::endl;
-        return isAdmin ? AccessLevel::CurrentRead | AccessLevel::CurrentWrite
-                       : AccessLevel::CurrentRead;
+        return isAdmin
+            ? AccessLevel::CurrentRead | AccessLevel::CurrentWrite
+            : AccessLevel::CurrentRead;
     }
 };
 
@@ -55,15 +56,16 @@ int main() {
     server.setAccessControl(accessControl);
 
     // Add variable node. Try to change its value as a client with different logins.
-    server.getObjectsNode().addVariable(
-        {1, 1000},
-        "Variable",
-        VariableAttributes{}
-            .setAccessLevel(AccessLevel::CurrentRead | AccessLevel::CurrentWrite)
-            .setDataType(DataTypeId::Int32)
-            .setValueRank(ValueRank::Scalar)
-            .setValueScalar(0)
-    );
+    Node(server, ObjectId::ObjectsFolder)
+        .addVariable(
+            {1, 1000},
+            "Variable",
+            VariableAttributes{}
+                .setAccessLevel(AccessLevel::CurrentRead | AccessLevel::CurrentWrite)
+                .setDataType(DataTypeId::Int32)
+                .setValueRank(ValueRank::Scalar)
+                .setValueScalar(0)
+        );
 
     server.run();
 }

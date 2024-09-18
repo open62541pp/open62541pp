@@ -187,11 +187,11 @@ public:
     /// Check if the client's main loop is running.
     bool isRunning() const noexcept;
 
-    Node<Client> getNode(NodeId id);
-    Node<Client> getRootNode();
-    Node<Client> getObjectsNode();
-    Node<Client> getTypesNode();
-    Node<Client> getViewsNode();
+    [[deprecated("use Node constructor")]] Node<Client> getNode(NodeId id);
+    [[deprecated("use Node constructor")]] Node<Client> getRootNode();
+    [[deprecated("use Node constructor")]] Node<Client> getObjectsNode();
+    [[deprecated("use Node constructor")]] Node<Client> getTypesNode();
+    [[deprecated("use Node constructor")]] Node<Client> getViewsNode();
 
     UA_Client* handle() noexcept;
     const UA_Client* handle() const noexcept;

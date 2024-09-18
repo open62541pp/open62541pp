@@ -168,11 +168,11 @@ public:
     /// Check if the server is running.
     bool isRunning() const noexcept;
 
-    Node<Server> getNode(NodeId id);
-    Node<Server> getRootNode();
-    Node<Server> getObjectsNode();
-    Node<Server> getTypesNode();
-    Node<Server> getViewsNode();
+    [[deprecated("use Node constructor")]] Node<Server> getNode(NodeId id);
+    [[deprecated("use Node constructor")]] Node<Server> getRootNode();
+    [[deprecated("use Node constructor")]] Node<Server> getObjectsNode();
+    [[deprecated("use Node constructor")]] Node<Server> getTypesNode();
+    [[deprecated("use Node constructor")]] Node<Server> getViewsNode();
 
     UA_Server* handle() noexcept;
     const UA_Server* handle() const noexcept;

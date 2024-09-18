@@ -10,8 +10,8 @@ int main() {
     server.setProductUri("https://open62541pp.github.io");
 
     // Add a variable node to the Objects node
-    auto parentNode = server.getObjectsNode();
-    auto myIntegerNode = parentNode.addVariable(
+    opcua::Node parentNode(server, opcua::ObjectId::ObjectsFolder);
+    opcua::Node myIntegerNode = parentNode.addVariable(
         {1, "TheAnswer"},
         "The Answer",
         opcua::VariableAttributes{}

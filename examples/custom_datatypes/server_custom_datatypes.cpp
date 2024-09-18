@@ -22,13 +22,13 @@ int main() {
     });
 
     // Add data type nodes
-    auto nodeStructureDataType = server.getNode(opcua::DataTypeId::Structure);
-    nodeStructureDataType.addDataType(dataTypePoint.getTypeId(), "PointDataType");
-    nodeStructureDataType.addDataType(dataTypeMeasurements.getTypeId(), "MeasurementsDataType");
-    nodeStructureDataType.addDataType(dataTypeOpt.getTypeId(), "OptDataType");
-    nodeStructureDataType.addDataType(dataTypeUni.getTypeId(), "UniDataType");
-    auto nodeEnumerationDataType = server.getNode(opcua::DataTypeId::Enumeration);
-    nodeEnumerationDataType.addDataType(dataTypeColor.getTypeId(), "Color")
+    opcua::Node structureDataTypeNode(server, opcua::DataTypeId::Structure);
+    structureDataTypeNode.addDataType(dataTypePoint.getTypeId(), "PointDataType");
+    structureDataTypeNode.addDataType(dataTypeMeasurements.getTypeId(), "MeasurementsDataType");
+    structureDataTypeNode.addDataType(dataTypeOpt.getTypeId(), "OptDataType");
+    structureDataTypeNode.addDataType(dataTypeUni.getTypeId(), "UniDataType");
+    opcua::Node enumerationDataTypeNode(server, opcua::DataTypeId::Enumeration);
+    enumerationDataTypeNode.addDataType(dataTypeColor.getTypeId(), "Color")
         .addProperty(
             {0, 0},  // auto-generate node id
             "EnumValues",
@@ -45,8 +45,8 @@ int main() {
         .addModellingRule(opcua::ModellingRule::Mandatory);
 
     // Add variable type nodes (optional)
-    auto nodeBaseDataVariableType = server.getNode(opcua::VariableTypeId::BaseDataVariableType);
-    auto nodeVariableTypePoint = nodeBaseDataVariableType.addVariableType(
+    opcua::Node baseDataVariableTypeNode(server, opcua::VariableTypeId::BaseDataVariableType);
+    auto variableTypePointNode = baseDataVariableTypeNode.addVariableType(
         {1, 4243},
         "PointType",
         opcua::VariableTypeAttributes{}
@@ -54,7 +54,7 @@ int main() {
             .setValueRank(opcua::ValueRank::ScalarOrOneDimension)
             .setValueScalar(Point{1, 2, 3}, dataTypePoint)
     );
-    auto nodeVariableTypeMeasurement = nodeBaseDataVariableType.addVariableType(
+    auto variableTypeMeasurementNode = baseDataVariableTypeNode.addVariableType(
         {1, 4444},
         "MeasurementsType",
         opcua::VariableTypeAttributes{}
@@ -62,7 +62,7 @@ int main() {
             .setValueRank(opcua::ValueRank::Scalar)
             .setValueScalar(Measurements{}, dataTypeMeasurements)
     );
-    auto nodeVariableTypeOpt = nodeBaseDataVariableType.addVariableType(
+    auto variableTypeOptNode = baseDataVariableTypeNode.addVariableType(
         {1, 4645},
         "OptType",
         opcua::VariableTypeAttributes{}
@@ -70,7 +70,7 @@ int main() {
             .setValueRank(opcua::ValueRank::Scalar)
             .setValueScalar(Opt{}, dataTypeOpt)
     );
-    auto nodeVariableTypeUni = nodeBaseDataVariableType.addVariableType(
+    auto variableTypeUniNode = baseDataVariableTypeNode.addVariableType(
         {1, 4846},
         "UniType",
         opcua::VariableTypeAttributes{}
@@ -80,21 +80,21 @@ int main() {
     );
 
     // Add variable nodes with some values
-    auto nodeObjects = server.getObjectsNode();
+    opcua::Node objectsNode(server, opcua::ObjectId::ObjectsFolder);
 
     const Point point{3.0, 4.0, 5.0};
-    nodeObjects.addVariable(
+    objectsNode.addVariable(
         {1, "Point"},
         "Point",
         opcua::VariableAttributes{}
             .setDataType(dataTypePoint.getTypeId())
             .setValueRank(opcua::ValueRank::Scalar)
             .setValueScalar(point, dataTypePoint),
-        nodeVariableTypePoint.id()
+        variableTypePointNode.id()
     );
 
     const std::vector<Point> pointVec{{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}};
-    nodeObjects.addVariable(
+    objectsNode.addVariable(
         {1, "PointVec"},
         "PointVec",
         opcua::VariableAttributes{}
@@ -102,7 +102,7 @@ int main() {
             .setArrayDimensions({0})  // single dimension but unknown in size
             .setValueRank(opcua::ValueRank::OneDimension)
             .setValueArray(pointVec, dataTypePoint),
-        nodeVariableTypePoint.id()
+        variableTypePointNode.id()
     );
 
     std::vector<float> measurementsValues{19.1F, 20.2F, 19.7F};
@@ -111,42 +111,42 @@ int main() {
         measurementsValues.size(),
         measurementsValues.data(),
     };
-    nodeObjects.addVariable(
+    objectsNode.addVariable(
         {1, "Measurements"},
         "Measurements",
         opcua::VariableAttributes{}
             .setDataType(dataTypeMeasurements.getTypeId())
             .setValueRank(opcua::ValueRank::Scalar)
             .setValueScalar(measurements, dataTypeMeasurements),
-        nodeVariableTypeMeasurement.id()
+        variableTypeMeasurementNode.id()
     );
 
     float optC = 10.10F;
     const Opt opt{3, nullptr, &optC};
-    nodeObjects.addVariable(
+    objectsNode.addVariable(
         {1, "Opt"},
         "Opt",
         opcua::VariableAttributes{}
             .setDataType(dataTypeOpt.getTypeId())
             .setValueRank(opcua::ValueRank::Scalar)
             .setValueScalar(opt, dataTypeOpt),
-        nodeVariableTypeOpt.id()
+        variableTypeOptNode.id()
     );
 
     Uni uni{};
     uni.switchField = UniSwitch::OptionB;
     uni.fields.optionB = UA_STRING_STATIC("test string");  // NOLINT
-    nodeObjects.addVariable(
+    objectsNode.addVariable(
         {1, "Uni"},
         "Uni",
         opcua::VariableAttributes{}
             .setDataType(dataTypeUni.getTypeId())
             .setValueRank(opcua::ValueRank::Scalar)
             .setValueScalar(uni, dataTypeUni),
-        nodeVariableTypeUni.id()
+        variableTypeUniNode.id()
     );
 
-    nodeObjects.addVariable(
+    objectsNode.addVariable(
         {1, "Color"},
         "Color",
         opcua::VariableAttributes{}

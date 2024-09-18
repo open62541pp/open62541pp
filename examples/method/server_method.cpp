@@ -5,10 +5,10 @@
 int main() {
     opcua::Server server;
 
-    auto objectNode = server.getObjectsNode();
+    opcua::Node objectsNode(server, opcua::ObjectId::ObjectsFolder);
 
     // Add a method to return "Hello " + provided name.
-    objectNode.addMethod(
+    objectsNode.addMethod(
         {1, 1000},
         "Greet",
         [](opcua::Span<const opcua::Variant> input, opcua::Span<opcua::Variant> output) {
@@ -22,7 +22,7 @@ int main() {
 
     // Add a method that takes an array of 5 integers and a scalar as input.
     // It returns a copy of the array with every entry increased by the scalar.
-    objectNode.addMethod(
+    objectsNode.addMethod(
         {1, 1001},
         "IncInt32ArrayValues",
         [](opcua::Span<const opcua::Variant> input, opcua::Span<opcua::Variant> output) {

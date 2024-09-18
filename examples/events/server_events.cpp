@@ -4,11 +4,12 @@ int main() {
     opcua::Server server;
 
     // Objects node can be used to subscribe to events.
-    server.getObjectsNode().writeEventNotifier(opcua::EventNotifier::SubscribeToEvents);
+    opcua::Node objectsNode(server, opcua::ObjectId::ObjectsFolder);
+    objectsNode.writeEventNotifier(opcua::EventNotifier::SubscribeToEvents);
 
     // Add a method to generate and trigger events.
     opcua::Event event(server);
-    server.getObjectsNode().addMethod(
+    objectsNode.addMethod(
         {1, 1000},
         "GenerateEvent",
         [&](opcua::Span<const opcua::Variant> input, opcua::Span<opcua::Variant>) {
