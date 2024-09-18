@@ -121,15 +121,6 @@ TEST_CASE("Server configuration") {
         CHECK(server.registerNamespace("test2") == 3);
         CHECK(server.getNamespaceArray().at(3) == "test2");
     }
-
-    SUBCASE("Get default nodes") {
-        // clang-format off
-        CHECK_EQ(server.getRootNode().id(),    NodeId{0, UA_NS0ID_ROOTFOLDER});
-        CHECK_EQ(server.getObjectsNode().id(), NodeId{0, UA_NS0ID_OBJECTSFOLDER});
-        CHECK_EQ(server.getTypesNode().id(),   NodeId{0, UA_NS0ID_TYPESFOLDER});
-        CHECK_EQ(server.getViewsNode().id(),   NodeId{0, UA_NS0ID_VIEWSFOLDER});
-        // clang-format on
-    }
 }
 
 TEST_CASE("Server helper functions") {
@@ -156,7 +147,7 @@ TEST_CASE("ValueCallback") {
     Server server;
 
     NodeId id{1, 1000};
-    auto node = server.getObjectsNode().addVariable(id, "testVariable");
+    auto node = Node(server, ObjectId::ObjectsFolder).addVariable(id, "testVariable");
     node.writeValueScalar<int>(1);
 
     bool onBeforeReadCalled = false;
@@ -192,7 +183,7 @@ TEST_CASE("ValueCallback") {
 TEST_CASE("DataSource") {
     Server server;
     NodeId id{1, 1000};
-    auto node = server.getObjectsNode().addVariable(id, "testVariable");
+    auto node = Node(server, ObjectId::ObjectsFolder).addVariable(id, "testVariable");
 
     // primitive data source
     int data = 0;
@@ -220,7 +211,7 @@ TEST_CASE("DataSource") {
 TEST_CASE("DataSource with empty callbacks") {
     Server server;
     NodeId id{1, 1000};
-    auto node = server.getObjectsNode().addVariable(id, "testVariable");
+    auto node = Node(server, ObjectId::ObjectsFolder).addVariable(id, "testVariable");
 
     server.setVariableNodeValueBackend(id, ValueBackendDataSource{});
 
@@ -232,7 +223,7 @@ TEST_CASE("DataSource with empty callbacks") {
 TEST_CASE("DataSource with exception in callback") {
     Server server;
     NodeId id{1, 1000};
-    auto node = server.getObjectsNode().addVariable(id, "testVariable");
+    auto node = Node(server, ObjectId::ObjectsFolder).addVariable(id, "testVariable");
 
     SUBCASE("BadStatus exception") {
         ValueBackendDataSource dataSource;

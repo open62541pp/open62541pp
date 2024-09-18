@@ -7,7 +7,7 @@ int main() {
 
     const opcua::NodeId currentTimeId(1, "CurrentTime");
     auto currentTimeNode =
-        server.getObjectsNode()
+        opcua::Node(server, opcua::ObjectId::ObjectsFolder)
             .addVariable(currentTimeId, "CurrentTime")
             .writeDisplayName({"en-US", "Current time"})
             .writeDescription({"en-US", "Current time"})

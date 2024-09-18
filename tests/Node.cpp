@@ -21,10 +21,10 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client) {
     services::writeAccessLevel(setup.server, varId, 0xFF).value();
     services::writeWriteMask(setup.server, varId, 0xFFFFFFFF).value();
 
-    auto rootNode = connection.getRootNode();
-    auto objNode = connection.getObjectsNode();
-    auto varNode = connection.getNode(varId);
-    auto refNode = connection.getNode(ReferenceTypeId::References);
+    opcua::Node rootNode(connection, opcua::ObjectId::RootFolder);
+    opcua::Node objNode(connection, opcua::ObjectId::ObjectsFolder);
+    opcua::Node varNode(connection, varId);
+    opcua::Node refNode(connection, ReferenceTypeId::References);
 
     SUBCASE("connection") {
         CHECK(rootNode.connection() == connection);
@@ -38,13 +38,6 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client) {
     SUBCASE("exists") {
         CHECK(Node(connection, NodeId(0, UA_NS0ID_OBJECTSFOLDER)).exists());
         CHECK_FALSE(Node(connection, NodeId(0, "DoesNotExist")).exists());
-    }
-
-    SUBCASE("Node class of default nodes") {
-        CHECK(connection.getRootNode().readNodeClass() == NodeClass::Object);
-        CHECK(connection.getObjectsNode().readNodeClass() == NodeClass::Object);
-        CHECK(connection.getTypesNode().readNodeClass() == NodeClass::Object);
-        CHECK(connection.getViewsNode().readNodeClass() == NodeClass::Object);
     }
 
     SUBCASE("Add non-type nodes") {
@@ -61,12 +54,12 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client) {
 
     SUBCASE("Add type nodes") {
         CHECK(
-            connection.getNode(ObjectTypeId::BaseObjectType)
+            opcua::Node(connection, ObjectTypeId::BaseObjectType)
                 .addObjectType({1, 1000}, "objecttype")
                 .readNodeClass() == NodeClass::ObjectType
         );
         CHECK(
-            connection.getNode(VariableTypeId::BaseVariableType)
+            opcua::Node(connection, VariableTypeId::BaseVariableType)
                 .addVariableType({1, 1001}, "variabletype")
                 .readNodeClass() == NodeClass::VariableType
         );

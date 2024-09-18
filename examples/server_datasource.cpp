@@ -9,14 +9,16 @@ int main() {
     int counter = 0;
 
     // Add variable node
-    auto nodeCounter = server.getObjectsNode().addVariable(
+    const auto counterId = opcua::services::addVariable(
+        server,
+        opcua::ObjectId::ObjectsFolder,
         {1, 1000},
         "Counter",
         opcua::VariableAttributes{}
             .setAccessLevel(UA_ACCESSLEVELMASK_READ | UA_ACCESSLEVELMASK_WRITE)
             .setDataType<int>()
             .setValueScalar(counter)
-    );
+    ).value();
 
     // Define data source with its read and write callbacks
     opcua::ValueBackendDataSource dataSource;
@@ -37,7 +39,7 @@ int main() {
     };
 
     // Define data source as variable node backend
-    server.setVariableNodeValueBackend(nodeCounter.id(), dataSource);
+    server.setVariableNodeValueBackend(counterId, dataSource);
 
     server.run();
 }

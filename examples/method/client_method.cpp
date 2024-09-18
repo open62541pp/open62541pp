@@ -9,11 +9,11 @@ int main() {
     client.connect("opc.tcp://localhost:4840");
 
     // Browse method node
-    auto objNode = client.getObjectsNode();
-    auto greetMethodNode = objNode.browseChild({{1, "Greet"}});
+    opcua::Node objectsNode(client, opcua::ObjectId::ObjectsFolder);
+    opcua::Node greetMethodNode = objectsNode.browseChild({{1, "Greet"}});
 
     // Call method from parent node (Objects)
-    const auto outputs = objNode.callMethod(
+    const auto outputs = objectsNode.callMethod(
         greetMethodNode.id(), {opcua::Variant::fromScalar("World")}
     );
     std::cout << outputs.at(0).getScalar<opcua::String>() << std::endl;

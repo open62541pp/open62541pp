@@ -2,7 +2,6 @@
 
 #include "open62541pp/Client.h"
 #include "open62541pp/Config.h"
-#include "open62541pp/Node.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/Session.h"
 
@@ -49,8 +48,9 @@ TEST_CASE("Session") {
         // false? bug in open62541?
 #ifndef UAPP_TSAN_ENABLED
         client.connect(localServerUrl);
-        server.getSessions().at(0).close();
-        CHECK_THROWS_WITH(client.getRootNode().readNodeClass(), "BadSessionIdInvalid");
+        auto session = server.getSessions().at(0);
+        CHECK_NOTHROW(session.close());
+        CHECK_THROWS_WITH(session.close(), "BadSessionIdInvalid");
 #endif
     }
 #endif
