@@ -293,18 +293,22 @@ void Client::setTimeout(uint32_t milliseconds) {
     detail::getConfig(*this).timeout = milliseconds;
 }
 
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
 void Client::setUserIdentityToken(AnonymousIdentityToken token) {
     connection_->config.setUserIdentityToken(std::move(token));
 }
 
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
 void Client::setUserIdentityToken(UserNameIdentityToken token) {
     connection_->config.setUserIdentityToken(std::move(token));
 }
 
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
 void Client::setUserIdentityToken(X509IdentityToken token) {
     connection_->config.setUserIdentityToken(std::move(token));
 }
 
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
 void Client::setUserIdentityToken(IssuedIdentityToken token) {
     connection_->config.setUserIdentityToken(std::move(token));
 }
