@@ -17,9 +17,6 @@
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/services/Attribute.h"  // readValue
 #include "open62541pp/services/Subscription.h"
-#include "open62541pp/types/Builtin.h"
-#include "open62541pp/types/Composed.h"
-#include "open62541pp/types/NodeId.h"
 
 #include "ClientConfig.h"
 
@@ -294,6 +291,22 @@ void Client::setLogger(Logger logger) {
 
 void Client::setTimeout(uint32_t milliseconds) {
     detail::getConfig(*this).timeout = milliseconds;
+}
+
+void Client::setUserIdentityToken(AnonymousIdentityToken token) {
+    connection_->config.setUserIdentityToken(std::move(token));
+}
+
+void Client::setUserIdentityToken(UserNameIdentityToken token) {
+    connection_->config.setUserIdentityToken(std::move(token));
+}
+
+void Client::setUserIdentityToken(X509IdentityToken token) {
+    connection_->config.setUserIdentityToken(std::move(token));
+}
+
+void Client::setUserIdentityToken(IssuedIdentityToken token) {
+    connection_->config.setUserIdentityToken(std::move(token));
 }
 
 void Client::setSecurityMode(MessageSecurityMode mode) {

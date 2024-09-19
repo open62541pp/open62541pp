@@ -1,10 +1,14 @@
 #pragma once
 
+#include <utility>  // forward, move
+
+#include "open62541pp/Wrapper.h"
 #include "open62541pp/detail/open62541/client.h"  // UA_ClientConfig
+#include "open62541pp/types/ExtensionObject.h"
 
 #include "CustomDataTypes.h"
-#include "plugins/PluginManager.h"
 #include "plugins/LoggerAdapter.h"
+#include "plugins/PluginManager.h"
 
 namespace opcua {
 
@@ -12,6 +16,15 @@ class ClientConfig {
 public:
     ClientConfig(UA_ClientConfig& config)
         : config_(config) {}
+
+    void setUserIdentityToken(ExtensionObject token) {
+        asWrapper<ExtensionObject>(handle()->userIdentityToken) = std::move(token);
+    }
+
+    template <typename T>
+    void setUserIdentityToken(T&& token) {
+        setUserIdentityToken(ExtensionObject::fromDecodedCopy(std::forward<T>(token)));
+    }
 
     void setLogger(Logger logger) {
         if (logger) {

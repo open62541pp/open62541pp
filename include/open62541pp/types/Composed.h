@@ -627,6 +627,16 @@ class UserNameIdentityToken
 public:
     using TypeWrapper::TypeWrapper;
 
+    UserNameIdentityToken(
+        std::string_view userName,
+        std::string_view password,
+        std::string_view encryptionAlgorithm = {}
+    ) {
+        handle()->userName = detail::toNative(userName);
+        handle()->password = detail::toNative(password);
+        handle()->encryptionAlgorithm = detail::toNative(encryptionAlgorithm);
+    }
+
     UAPP_GETTER_WRAPPER(String, getPolicyId, policyId)
     UAPP_GETTER_WRAPPER(String, getUserName, userName)
     UAPP_GETTER_WRAPPER(ByteString, getPassword, password)
@@ -641,6 +651,10 @@ class X509IdentityToken : public TypeWrapper<UA_X509IdentityToken, UA_TYPES_X509
 public:
     using TypeWrapper::TypeWrapper;
 
+    explicit X509IdentityToken(ByteString certificateData) {
+        handle()->certificateData = detail::toNative(std::move(certificateData));
+    }
+
     UAPP_GETTER_WRAPPER(String, getPolicyId, policyId)
     UAPP_GETTER_WRAPPER(ByteString, getCertificateData, certificateData)
 };
@@ -653,6 +667,11 @@ class IssuedIdentityToken
     : public TypeWrapper<UA_IssuedIdentityToken, UA_TYPES_ISSUEDIDENTITYTOKEN> {
 public:
     using TypeWrapper::TypeWrapper;
+
+    explicit IssuedIdentityToken(ByteString tokenData, std::string_view encryptionAlgorithm = {}) {
+        handle()->tokenData = detail::toNative(std::move(tokenData));
+        handle()->encryptionAlgorithm = detail::toNative(encryptionAlgorithm);
+    }
 
     UAPP_GETTER_WRAPPER(String, getPolicyId, policyId)
     UAPP_GETTER_WRAPPER(ByteString, getTokenData, tokenData)

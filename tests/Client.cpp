@@ -59,25 +59,25 @@ TEST_CASE("Client discovery") {
     }
 }
 
-TEST_CASE("Client anonymous login") {
+TEST_CASE("Client connect with AnonymousIdentityToken") {
     Server server;
     ServerRunner serverRunner(server);
     Client client;
 
-    SUBCASE("Connect/disconnect") {
-        CHECK_FALSE(client.isConnected());
+    SUBCASE("Connect with anonymous should succeed") {
+        client.setUserIdentityToken(AnonymousIdentityToken{});
         CHECK_NOTHROW(client.connect(localServerUrl));
         CHECK(client.isConnected());
-        CHECK_NOTHROW(client.disconnect());
     }
 
     SUBCASE("Connect with username/password should fail") {
-        CHECK_THROWS(client.connect(localServerUrl, {"username", "password"}));
+        client.setUserIdentityToken(UserNameIdentityToken("username", "password"));
+        CHECK_THROWS(client.connect(localServerUrl));
     }
 }
 
 #if UAPP_OPEN62541_VER_GE(1, 3)
-TEST_CASE("Client username/password login") {
+TEST_CASE("Client connect with UserNameIdentityToken") {
     AccessControlDefault accessControl(false, {{"username", "password"}});
     Server server;
     server.setAccessControl(accessControl);
@@ -89,9 +89,9 @@ TEST_CASE("Client username/password login") {
     }
 
     SUBCASE("Connect with username/password should succeed") {
-        CHECK_NOTHROW(client.connect(localServerUrl, {"username", "password"}));
+        client.setUserIdentityToken(UserNameIdentityToken("username", "password"));
+        CHECK_NOTHROW(client.connect(localServerUrl));
         CHECK(client.isConnected());
-        CHECK_NOTHROW(client.disconnect());
     }
 }
 #endif
