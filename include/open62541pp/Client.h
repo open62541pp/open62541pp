@@ -163,6 +163,7 @@ public:
      * @param endpointUrl Endpoint URL (for example `opc.tcp://localhost:4840/open62541/server/`)
      * @param login       Login credentials with username and password
      */
+    [[deprecated("use Client::setUserIdentityToken(UserNameIdentityToken) instead")]]
     void connect(std::string_view endpointUrl, const Login& login);
 
     /// Disconnect and close a connection to the server (async, without blocking).
