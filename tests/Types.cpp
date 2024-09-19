@@ -903,18 +903,18 @@ TEST_CASE("RequestHeader") {
 }
 
 TEST_CASE("UserTokenPolicy") {
-    UserTokenPolicy userTokenPolicy(
+    UserTokenPolicy token(
         "policyId",
         UserTokenType::Username,
         "issuedTokenType",
         "issuerEndpointUrl",
         "securityPolicyUri"
     );
-    CHECK(userTokenPolicy.getPolicyId() == String("policyId"));
-    CHECK(userTokenPolicy.getTokenType() == UserTokenType::Username);
-    CHECK(userTokenPolicy.getIssuedTokenType() == String("issuedTokenType"));
-    CHECK(userTokenPolicy.getIssuerEndpointUrl() == String("issuerEndpointUrl"));
-    CHECK(userTokenPolicy.getSecurityPolicyUri() == String("securityPolicyUri"));
+    CHECK(token.getPolicyId() == String("policyId"));
+    CHECK(token.getTokenType() == UserTokenType::Username);
+    CHECK(token.getIssuedTokenType() == String("issuedTokenType"));
+    CHECK(token.getIssuerEndpointUrl() == String("issuerEndpointUrl"));
+    CHECK(token.getSecurityPolicyUri() == String("securityPolicyUri"));
 }
 
 TEST_CASE("NodeAttributes") {
@@ -960,6 +960,27 @@ TEST_CASE("NodeAttributes fluent interface") {
 TEST_CASE_TEMPLATE("NodeAttributes setDataType", T, VariableAttributes, VariableTypeAttributes) {
     CHECK(T{}.setDataType(DataTypeId::Boolean).getDataType() == NodeId(DataTypeId::Boolean));
     CHECK(T{}.template setDataType<bool>().getDataType() == NodeId(DataTypeId::Boolean));
+}
+
+TEST_CASE("UserNameIdentityToken") {
+    const UserNameIdentityToken token("userName", "password", "encryptionAlgorithm");
+    CHECK(token.getPolicyId().empty());
+    CHECK(token.getUserName() == String("userName"));
+    CHECK(token.getPassword() == ByteString("password"));
+    CHECK(token.getEncryptionAlgorithm() == String("encryptionAlgorithm"));
+}
+
+TEST_CASE("X509IdentityToken") {
+    const X509IdentityToken token(ByteString("certificateData"));
+    CHECK(token.getPolicyId().empty());
+    CHECK(token.getCertificateData() == ByteString("certificateData"));
+}
+
+TEST_CASE("IssuedIdentityToken") {
+    const IssuedIdentityToken token(ByteString("tokenData"), "encryptionAlgorithm");
+    CHECK(token.getPolicyId().empty());
+    CHECK(token.getTokenData() == ByteString("tokenData"));
+    CHECK(token.getEncryptionAlgorithm() == String("encryptionAlgorithm"));
 }
 
 TEST_CASE("AddNodesItem / AddNodesRequest") {

@@ -12,18 +12,17 @@
 #include "open62541pp/Span.h"
 #include "open62541pp/Subscription.h"
 #include "open62541pp/detail/open62541/client.h"
+#include "open62541pp/types/Builtin.h"
+#include "open62541pp/types/Composed.h"
+#include "open62541pp/types/NodeId.h"
 
 // forward declaration
 namespace opcua {
-class ApplicationDescription;
-class ByteString;
 class Client;
 class DataType;
-class EndpointDescription;
 struct Login;
 template <typename Connection>
 class Node;
-class NodeId;
 
 namespace detail {
 struct ClientConnection;
@@ -122,6 +121,15 @@ public:
     /// Set response timeout in milliseconds.
     void setTimeout(uint32_t milliseconds);
 
+    /// Set anonymous identity token.
+    void setUserIdentityToken(AnonymousIdentityToken token);
+    /// Set username/password identity token.
+    void setUserIdentityToken(UserNameIdentityToken token);
+    /// Set X.509 identity token.
+    void setUserIdentityToken(X509IdentityToken token);
+    /// Set issued identity token.
+    void setUserIdentityToken(IssuedIdentityToken token);
+
     /// Set message security mode.
     void setSecurityMode(MessageSecurityMode mode);
 
@@ -144,6 +152,8 @@ public:
 
     /**
      * Connect to the selected server.
+     * The session authentification method is defined by the UserIdentityToken and is set with 
+     * Client::setUserIdentityToken.
      * @param endpointUrl Endpoint URL (for example `opc.tcp://localhost:4840/open62541/server/`)
      */
     void connect(std::string_view endpointUrl);

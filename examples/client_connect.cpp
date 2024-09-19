@@ -21,15 +21,12 @@ int main(int argc, char* argv[]) {
     const auto password = parser.getValue("--password");
 
     opcua::Client client;
-
     if (username) {
-        opcua::Login login;
-        login.username = username.value();
-        login.password = password.value_or("");
-        client.connect(serverUrl, login);
-    } else {
-        client.connect(serverUrl);
+        client.setUserIdentityToken(
+            opcua::UserNameIdentityToken(username.value(), password.value_or(""))
+        );
     }
+    client.connect(serverUrl);
 
     opcua::Node node(client, opcua::VariableId::Server_ServerStatus_CurrentTime);
     const auto dt = node.readValueScalar<opcua::DateTime>();
