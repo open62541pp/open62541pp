@@ -13,8 +13,8 @@ namespace opcua {
 
 /* ------------------------------------------- String ------------------------------------------- */
 
-std::ostream& operator<<(std::ostream& os, const String& string) {
-    os << string.get();
+std::ostream& operator<<(std::ostream& os, const String& str) {
+    os << static_cast<std::string_view>(str);
     return os;
 }
 
@@ -73,7 +73,7 @@ std::string ByteString::toBase64() const {
 #if UAPP_OPEN62541_VER_GE(1, 1)
     String output;
     UA_ByteString_toBase64(handle(), output.handle());
-    return std::string(output.get());
+    return std::string(output);
 #else
     return {};
 #endif
