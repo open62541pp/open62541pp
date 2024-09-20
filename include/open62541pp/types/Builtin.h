@@ -245,6 +245,11 @@ public:
         return detail::toStringView(native());
     }
 
+    /// Explicit conversion to std::string.
+    explicit operator std::string() const {
+        return detail::toString(native());
+    }
+
     bool empty() const noexcept {
         return handle()->length == 0U;
     }
