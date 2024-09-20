@@ -89,7 +89,7 @@ void ByteString::toFile(const fs::path& filepath) const {
 /* ----------------------------------------- XmlElement ----------------------------------------- */
 
 std::ostream& operator<<(std::ostream& os, const XmlElement& xmlElement) {
-    os << xmlElement.get();
+    os << static_cast<std::string_view>(xmlElement);
     return os;
 }
 
