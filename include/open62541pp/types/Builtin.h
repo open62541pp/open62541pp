@@ -94,7 +94,12 @@ public:
 
     /// Implicit conversion to std::string_view.
     operator std::string_view() const noexcept {  // NOLINT, implicit wanted
-        return get();
+        return detail::toStringView(native());
+    }
+
+    /// Explicit conversion to std::string.
+    explicit operator std::string() const {
+        return detail::toString(native());
     }
 
     bool empty() const noexcept {
@@ -102,7 +107,7 @@ public:
     }
 
     std::string_view get() const noexcept {
-        return detail::toStringView(*handle());
+        return detail::toStringView(native());
     }
 };
 
@@ -234,6 +239,16 @@ public:
 
     explicit XmlElement(std::string_view str)
         : XmlElement(detail::allocNativeString(str)) {}
+
+    /// Implicit conversion to std::string_view.
+    operator std::string_view() const noexcept {  // NOLINT, implicit wanted
+        return detail::toStringView(native());
+    }
+
+    /// Explicit conversion to std::string.
+    explicit operator std::string() const {
+        return detail::toString(native());
+    }
 
     bool empty() const noexcept {
         return handle()->length == 0U;

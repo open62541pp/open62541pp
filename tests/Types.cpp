@@ -94,10 +94,15 @@ TEST_CASE_TEMPLATE("StringLike ostream overloads", T, String, XmlElement) {
     CHECK(ss.str() == "test123");
 }
 
-TEST_CASE_TEMPLATE("StringLike implicit conversion to string_view", T, String) {
+TEST_CASE_TEMPLATE("StringLike implicit conversion to string_view", T, String, XmlElement) {
     T str("test123");
     std::string_view view = str;
-    CHECK(view == str.get());
+    CHECK(view == "test123");
+}
+
+TEST_CASE_TEMPLATE("StringLike explicit conversion to string", T, String, XmlElement) {
+    T str("test123");
+    CHECK(static_cast<std::string>(str) == "test123");
 }
 
 TEST_CASE("ByteString") {
