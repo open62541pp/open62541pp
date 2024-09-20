@@ -240,6 +240,11 @@ public:
     explicit XmlElement(std::string_view str)
         : XmlElement(detail::allocNativeString(str)) {}
 
+    /// Implicit conversion to std::string_view.
+    operator std::string_view() const noexcept {  // NOLINT, implicit wanted
+        return detail::toStringView(native());
+    }
+
     bool empty() const noexcept {
         return handle()->length == 0U;
     }
