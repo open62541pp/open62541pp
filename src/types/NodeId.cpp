@@ -13,7 +13,7 @@ std::string NodeId::toString() const {
         result.append("i=").append(std::to_string(getIdentifierAs<uint32_t>()));
         break;
     case NodeIdType::String:
-        result.append("s=").append(getIdentifierAs<String>().get());
+        result.append("s=").append(getIdentifierAs<String>());
         break;
     case NodeIdType::Guid:
         result.append("g=").append(getIdentifierAs<Guid>().toString());

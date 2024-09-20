@@ -50,7 +50,7 @@ TEST_CASE("ServerConfig") {
 
             CHECK(ac.userTokenPolicies[1].tokenType == UA_USERTOKENTYPE_USERNAME);
             CHECK(
-                asWrapper<String>(ac.userTokenPolicies[1].securityPolicyUri).get() ==
+                asWrapper<String>(ac.userTokenPolicies[1].securityPolicyUri) ==
                 "http://opcfoundation.org/UA/SecurityPolicy#None"
             );
         }

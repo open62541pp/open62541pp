@@ -106,6 +106,7 @@ public:
         return handle()->length == 0U;
     }
 
+    [[deprecated("use conversion function with static_cast instead")]]
     std::string_view get() const noexcept {
         return detail::toStringView(native());
     }
@@ -120,22 +121,22 @@ inline bool operator!=(const UA_String& lhs, const UA_String& rhs) noexcept {
 }
 
 inline bool operator==(const String& lhs, std::string_view rhs) noexcept {
-    return (lhs.get() == rhs);
+    return (static_cast<std::string_view>(lhs) == rhs);
 }
 
 inline bool operator!=(const String& lhs, std::string_view rhs) noexcept {
-    return (lhs.get() != rhs);
+    return (static_cast<std::string_view>(lhs) != rhs);
 }
 
 inline bool operator==(std::string_view lhs, const String& rhs) noexcept {
-    return (lhs == rhs.get());
+    return (lhs == static_cast<std::string_view>(rhs));
 }
 
 inline bool operator!=(std::string_view lhs, const String& rhs) noexcept {
-    return (lhs != rhs.get());
+    return (lhs != static_cast<std::string_view>(rhs));
 }
 
-std::ostream& operator<<(std::ostream& os, const String& string);
+std::ostream& operator<<(std::ostream& os, const String& str);
 
 /**
  * UA_Guid wrapper class.

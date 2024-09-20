@@ -60,14 +60,14 @@ TEST_CASE_TEMPLATE("StringLike", T, String, ByteString, XmlElement) {
     SUBCASE("Construct with const char*") {
         T wrapper("test");
         CHECK(wrapper.handle()->length == 4);
-        CHECK(std::string(wrapper.get()) == "test");
+        CHECK(detail::toStringView(*wrapper.handle()) == "test");
     }
 
     SUBCASE("Construct from non-null-terminated view") {
         std::string str("test123");
         std::string_view sv(str.c_str(), 4);
         T wrapper(sv);
-        CHECK(std::string(wrapper.get()) == "test");
+        CHECK(detail::toStringView(*wrapper.handle()) == "test");
     }
 
     SUBCASE("Empty") {
@@ -285,7 +285,7 @@ TEST_CASE("NodeId") {
         NodeId id(1, sv);
         CHECK(id.getIdentifierType() == NodeIdType::String);
         CHECK(id.getNamespaceIndex() == 1);
-        CHECK(id.getIdentifierAs<String>().get() == sv);
+        CHECK(id.getIdentifierAs<String>() == sv);
     }
 
     SUBCASE("Constructor with string identifier") {

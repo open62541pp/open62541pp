@@ -62,7 +62,7 @@ struct TypeConverter<std::string_view> {
     using NativeType = String;
 
     static void fromNative(const NativeType& src, std::string_view& dst) {
-        dst = src.get();
+        dst = static_cast<std::string_view>(src);
     }
 
     static void toNative(std::string_view src, NativeType& dst) {
@@ -76,7 +76,7 @@ struct TypeConverter<std::string> {
     using NativeType = String;
 
     static void fromNative(const NativeType& src, ValueType& dst) {
-        dst = src.get();
+        dst = std::string(src);
     }
 
     static void toNative(const ValueType& src, NativeType& dst) {
