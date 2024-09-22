@@ -176,9 +176,9 @@ TEST_CASE_TEMPLATE("StringLike implicit conversion to string_view", T, String, X
     CHECK(view == "test123");
 }
 
-TEST_CASE_TEMPLATE("StringLike explicit conversion to string", T, String, XmlElement) {
+TEST_CASE_TEMPLATE("StringLike in string constructor", T, String, XmlElement) {
     T str("test123");
-    CHECK(static_cast<std::string>(str) == "test123");
+    CHECK(std::string(str) == "test123");
 }
 
 TEST_CASE_TEMPLATE("StringLike equality overloads", T, String, ByteString, XmlElement) {
