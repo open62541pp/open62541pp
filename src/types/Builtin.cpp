@@ -1,8 +1,6 @@
 #include "open62541pp/types/Builtin.h"
 
-#include <fstream>
 #include <iomanip>
-#include <iterator>  // istreambuf_iterator
 #include <ostream>
 #include <sstream>
 #include <utility>  // move
@@ -58,16 +56,6 @@ ByteString ByteString::fromBase64([[maybe_unused]] std::string_view encoded) {
 #endif
 }
 
-#ifndef UAPP_NO_STD_FILESYSTEM
-ByteString ByteString::fromFile(const fs::path& filepath) {
-    std::ifstream fp(filepath, std::ios::binary);
-    const std::vector<uint8_t> bytes(
-        (std::istreambuf_iterator<char>(fp)), (std::istreambuf_iterator<char>())
-    );
-    return ByteString(bytes);
-}
-#endif
-
 // NOLINTNEXTLINE
 std::string ByteString::toBase64() const {
 #if UAPP_OPEN62541_VER_GE(1, 1)
@@ -78,13 +66,6 @@ std::string ByteString::toBase64() const {
     return {};
 #endif
 }
-
-#ifndef UAPP_NO_STD_FILESYSTEM
-void ByteString::toFile(const fs::path& filepath) const {
-    std::ofstream fp(filepath, std::ios::binary);
-    fp.write(reinterpret_cast<char*>(handle()->data), handle()->length);  // NOLINT
-}
-#endif
 
 /* ----------------------------------------- XmlElement ----------------------------------------- */
 
