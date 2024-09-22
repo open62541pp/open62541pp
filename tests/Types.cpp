@@ -297,22 +297,22 @@ TEST_CASE("NumericRangeDimension") {
 }
 
 TEST_CASE("NumericRange") {
+    SUBCASE("Empty") {
+        const NumericRange nr;
+        CHECK(nr.empty());
+        CHECK(nr.dimensions().size() == 0);
+    }
+
     SUBCASE("Construct from native") {
         UA_NumericRange native{};
         std::vector<UA_NumericRangeDimension> dimensions{{1, 2}, {3, 4}};
         native.dimensionsSize = dimensions.size();
         native.dimensions = dimensions.data();
         const NumericRange nr(native);
-        CHECK(!nr.empty());
-        CHECK(nr.get().size() == 2);
-        CHECK(nr.get()[0] == NumericRangeDimension{1, 2});
-        CHECK(nr.get()[1] == NumericRangeDimension{3, 4});
-    }
-
-    SUBCASE("Empty") {
-        const NumericRange nr;
-        CHECK(nr.empty());
-        CHECK(nr.get().size() == 0);
+        CHECK_FALSE(nr.empty());
+        CHECK(nr.dimensions().size() == 2);
+        CHECK(nr.dimensions()[0] == NumericRangeDimension{1, 2});
+        CHECK(nr.dimensions()[1] == NumericRangeDimension{3, 4});
     }
 
     SUBCASE("Parse invalid") {
@@ -321,10 +321,10 @@ TEST_CASE("NumericRange") {
 
     SUBCASE("Parse") {
         const NumericRange nr("1:2,0:3,5");
-        CHECK(nr.get().size() == 3);
-        CHECK(nr.get()[0] == NumericRangeDimension{1, 2});
-        CHECK(nr.get()[1] == NumericRangeDimension{0, 3});
-        CHECK(nr.get()[2] == NumericRangeDimension{5, 5});
+        CHECK(nr.dimensions().size() == 3);
+        CHECK(nr.dimensions()[0] == NumericRangeDimension{1, 2});
+        CHECK(nr.dimensions()[1] == NumericRangeDimension{0, 3});
+        CHECK(nr.dimensions()[2] == NumericRangeDimension{5, 5});
     }
 
     SUBCASE("toString") {

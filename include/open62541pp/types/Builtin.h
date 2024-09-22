@@ -568,7 +568,7 @@ public:
         return dimensions_.empty();
     }
 
-    Span<const NumericRangeDimension> get() const noexcept {
+    Span<const NumericRangeDimension> dimensions() const noexcept {
         return dimensions_;
     }
 
