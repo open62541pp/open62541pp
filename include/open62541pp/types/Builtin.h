@@ -337,6 +337,11 @@ public:
     /// @note Supported since open62541 v1.1
     static ByteString fromBase64(std::string_view encoded);
 
+    /// Explicit conversion to std::string_view.
+    explicit operator std::string_view() const noexcept {
+        return {reinterpret_cast<const char*>(data()), size()};  // NOLINT
+    }
+
 #ifndef UAPP_NO_STD_FILESYSTEM
     /// Write ByteString to binary file.
     void toFile(const fs::path& filepath) const;
@@ -346,25 +351,26 @@ public:
     /// @note Supported since open62541 v1.1
     std::string toBase64() const;
 
+    [[deprecated("use conversion function with static_cast instead")]]
     std::string_view get() const noexcept {
-        return detail::toStringView(*handle());
+        return {reinterpret_cast<const char*>(data()), size()};  // NOLINT
     }
 };
 
 inline bool operator==(const ByteString& lhs, std::string_view rhs) noexcept {
-    return (lhs.get() == rhs);
+    return (static_cast<std::string_view>(lhs) == rhs);
 }
 
 inline bool operator!=(const ByteString& lhs, std::string_view rhs) noexcept {
-    return (lhs.get() != rhs);
+    return (static_cast<std::string_view>(lhs) != rhs);
 }
 
 inline bool operator==(std::string_view lhs, const ByteString& rhs) noexcept {
-    return (lhs == rhs.get());
+    return (lhs == static_cast<std::string_view>(rhs));
 }
 
 inline bool operator!=(std::string_view lhs, const ByteString& rhs) noexcept {
-    return (lhs != rhs.get());
+    return (lhs != static_cast<std::string_view>(rhs));
 }
 
 /**
