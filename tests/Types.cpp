@@ -235,19 +235,34 @@ TEST_CASE("ByteString") {
 
 TEST_CASE("Guid") {
     SUBCASE("Construct") {
-        UA_UInt32 data1{11};
-        UA_UInt16 data2{22};
-        UA_UInt16 data3{33};
-        std::array<UA_Byte, 8> data4{1, 2, 3, 4, 5, 6, 7, 8};
+        const Guid wrapper(11, 22, 33, {0, 1, 2, 3, 4, 5, 6, 7});
+        CHECK(wrapper.handle()->data1 == 11);
+        CHECK(wrapper.handle()->data2 == 22);
+        CHECK(wrapper.handle()->data3 == 33);
+        CHECK(wrapper.handle()->data4[0] == 0);
+        CHECK(wrapper.handle()->data4[1] == 1);
+        CHECK(wrapper.handle()->data4[2] == 2);
+        CHECK(wrapper.handle()->data4[3] == 3);
+        CHECK(wrapper.handle()->data4[4] == 4);
+        CHECK(wrapper.handle()->data4[5] == 5);
+        CHECK(wrapper.handle()->data4[6] == 6);
+        CHECK(wrapper.handle()->data4[7] == 7);
+    }
 
-        const Guid wrapper(data1, data2, data3, data4);
-
-        CHECK(wrapper.handle()->data1 == data1);
-        CHECK(wrapper.handle()->data2 == data2);
-        CHECK(wrapper.handle()->data3 == data3);
-        for (int i = 0; i < 8; ++i) {
-            CHECK(wrapper.handle()->data4[i] == data4[i]);  // NOLINT
-        }
+    SUBCASE("Construct from single array") {
+        std::array<UA_Byte, 16> data{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+        const Guid wrapper(data);
+        CHECK(wrapper.handle()->data1 == 0x00010203);
+        CHECK(wrapper.handle()->data2 == 0x0405);
+        CHECK(wrapper.handle()->data3 == 0x0607);
+        CHECK(wrapper.handle()->data4[0] == 8);
+        CHECK(wrapper.handle()->data4[1] == 9);
+        CHECK(wrapper.handle()->data4[2] == 10);
+        CHECK(wrapper.handle()->data4[3] == 11);
+        CHECK(wrapper.handle()->data4[4] == 12);
+        CHECK(wrapper.handle()->data4[5] == 13);
+        CHECK(wrapper.handle()->data4[6] == 14);
+        CHECK(wrapper.handle()->data4[7] == 15);
     }
 
     SUBCASE("Random") {
@@ -261,8 +276,10 @@ TEST_CASE("Guid") {
             CHECK(guid.toString() == "00000000-0000-0000-0000-000000000000");
         }
         {
-            const Guid guid{3298187146, 3582, 19343, {135, 10, 116, 82, 56, 198, 174, 174}};
-            CHECK(guid.toString() == "C496578A-0DFE-4B8F-870A-745238C6AEAE");
+            const Guid guid{
+                0x12345678, 0x1234, 0x5678, {0x12, 0x34, 0x56, 0x78, 0x90, 0xAB, 0xCD, 0xEF}
+            };
+            CHECK(guid.toString() == "12345678-1234-5678-1234-567890ABCDEF");
         }
     }
 
