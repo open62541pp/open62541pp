@@ -67,6 +67,15 @@ TEST_CASE_TEMPLATE("StringWrapper constructors", T, StringWrapper, const StringW
         CHECK(str.data() == nullptr);
     }
 
+    SUBCASE("From empty iterator pair") {
+        std::string_view sv;
+        T str(sv.begin(), sv.end());
+        CHECK(str.size() == 0);
+        CHECK(str.length() == 0);
+        CHECK(str.empty());
+        CHECK(str.data() == nullptr);
+    }
+
     SUBCASE("From iterator pair") {
         std::string_view sv("abc");
         T str(sv.begin(), sv.end());
@@ -132,7 +141,7 @@ TEST_CASE_TEMPLATE("StringWrapper iterators", T, StringWrapper, const StringWrap
     }
 }
 
-TEST_CASE_TEMPLATE("StringLike constructor", T, String, XmlElement) {
+TEST_CASE_TEMPLATE("StringLike constructors", T, String, XmlElement) {
     SUBCASE("From const char*") {
         T str("hello");
         CHECK(str.size() == 5);
