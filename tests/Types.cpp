@@ -86,6 +86,17 @@ TEST_CASE_TEMPLATE("StringWrapper constructors", T, StringWrapper, const StringW
         CHECK(std::string_view(str.data(), str.size()) == sv);
     }
 
+    SUBCASE("From iterator pair (input iterator, single-pass)") {
+        std::istringstream ss("abc");  // allows only single-pass reading
+        std::istream_iterator<char> first(ss), last;
+        StringWrapper str(first, last);
+        CHECK(str.size() == 3);
+        CHECK(str.length() == 3);
+        CHECK_FALSE(str.empty());
+        CHECK(str.data() != nullptr);
+        CHECK(std::string_view(str.data(), str.size()) == "abc");
+    }
+
     SUBCASE("From initializer list") {
         T str{'a', 'b', 'c'};
         CHECK(str.size() == 3);

@@ -111,12 +111,24 @@ public:
 
     template <typename InputIt>
     StringWrapper(InputIt first, InputIt last) {
-        this->native().length = std::distance(first, last);
-        if (size() > 0) {
-            this->native().data = static_cast<uint8_t*>(UA_malloc(size()));  // NOLINT
-            if (data() == nullptr) {
-                throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
+        auto init = [&](size_t length) {
+            this->native().length = length;
+            if (length > 0) {
+                this->native().data = static_cast<uint8_t*>(UA_malloc(length));  // NOLINT
+                if (data() == nullptr) {
+                    throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
+                }
             }
+        };
+
+        using IteratorCategory = typename std::iterator_traits<InputIt>::iterator_category;
+        if constexpr (std::is_same_v<IteratorCategory, std::input_iterator_tag>) {
+            // input iterator can only be read once -> buffer data in vector
+            std::vector<uint8_t> buffer(first, last);
+            init(buffer.size());
+            std::copy(buffer.begin(), buffer.end(), data());
+        } else {
+            init(std::distance(first, last));
             std::copy(first, last, data());
         }
     }
