@@ -2,10 +2,13 @@
 
 #include <algorithm>  // copy
 #include <array>
+#include <cassert>
 #include <cstdint>
 #include <iosfwd>  // forward declare ostream
+#include <iterator>  // reverse_iterator
 #include <string>
 #include <string_view>
+#include <type_traits>  // is_same_v
 #include <utility>  // move
 #include <vector>
 
@@ -81,34 +84,166 @@ public:
     }
 };
 
+namespace detail {
+
+template <typename T, TypeIndex typeIndex, typename CharT>
+class StringWrapper : public TypeWrapper<T, typeIndex> {
+public:
+    static_assert(std::is_same_v<T, UA_String>);
+
+    // clang-format off
+    using value_type             = CharT;
+    using size_type              = size_t;
+    using difference_type        = std::ptrdiff_t;
+    using pointer                = value_type*;
+    using const_pointer          = const value_type*;
+    using reference              = value_type&;
+    using const_reference        = const value_type&;
+    using iterator               = pointer;
+    using const_iterator         = const_pointer;
+    using reverse_iterator       = std::reverse_iterator<iterator>;
+    using const_reverse_iterator = std::reverse_iterator<const_iterator>;
+    // clang-format on
+
+    using TypeWrapper<T, typeIndex>::TypeWrapper;  // inherit constructors
+
+    template <typename InputIt>
+    StringWrapper(InputIt first, InputIt last) {
+        this->native().length = std::distance(first, last);
+        if (size() > 0) {
+            this->native().data = static_cast<uint8_t*>(UA_malloc(size()));
+            if (data() == nullptr) {
+                throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
+            }
+            std::copy(first, last, data());
+        }
+    }
+
+    size_t size() const noexcept {
+        return this->native().length;
+    }
+
+    size_t length() const noexcept {
+        return size();
+    }
+
+    bool empty() const noexcept {
+        return size() == 0;
+    }
+
+    pointer data() noexcept {
+        return reinterpret_cast<pointer>(this->native().data);  // NOLINT
+    }
+
+    const_pointer data() const noexcept {
+        return reinterpret_cast<const_pointer>(this->native().data);  // NOLINT
+    }
+
+    reference operator[](size_t index) noexcept {
+        assert(index < size());
+        return data()[index];
+    }
+
+    const_reference operator[](size_t index) const noexcept {
+        assert(index < size());
+        return data()[index];
+    }
+
+    reference front() noexcept {
+        assert(!empty());
+        return *data();
+    }
+
+    const_reference front() const noexcept {
+        assert(!empty());
+        return *data();
+    }
+
+    reference back() noexcept {
+        assert(!empty());
+        return *(data() + size() - 1);
+    }
+
+    const_reference back() const noexcept {
+        assert(!empty());
+        return *(data() + size() - 1);
+    }
+
+    iterator begin() noexcept {
+        return {data()};
+    }
+
+    const_iterator begin() const noexcept {
+        return {data()};
+    }
+
+    const_iterator cbegin() const noexcept {
+        return {data()};
+    }
+
+    iterator end() noexcept {
+        return {data() + size()};
+    }
+
+    const_iterator end() const noexcept {
+        return {data() + size()};
+    }
+
+    const_iterator cend() const noexcept {
+        return {data() + size()};
+    }
+
+    reverse_iterator rbegin() noexcept {
+        return reverse_iterator(end());
+    }
+
+    const_reverse_iterator rbegin() const noexcept {
+        return const_reverse_iterator(end());
+    }
+
+    const_reverse_iterator crbegin() const noexcept {
+        return const_reverse_iterator(cend());
+    }
+
+    reverse_iterator rend() noexcept {
+        return reverse_iterator(begin());
+    }
+
+    const_reverse_iterator rend() const noexcept {
+        return const_reverse_iterator(begin());
+    }
+
+    const_reverse_iterator crend() const noexcept {
+        return const_reverse_iterator(cbegin());
+    }
+};
+
+}  // namespace detail
+
 /**
  * UA_String wrapper class.
  * @ingroup Wrapper
  */
-class String : public TypeWrapper<UA_String, UA_TYPES_STRING> {
+class String : public detail::StringWrapper<UA_String, UA_TYPES_STRING, char> {
 public:
-    using TypeWrapper::TypeWrapper;  // inherit constructors
+    using StringWrapper::StringWrapper;  // inherit constructors
 
     explicit String(std::string_view str)
-        : String(detail::allocNativeString(str)) {}
+        : StringWrapper(detail::allocNativeString(str)) {}
 
     /// Implicit conversion to std::string_view.
     operator std::string_view() const noexcept {  // NOLINT, implicit wanted
-        return detail::toStringView(native());
+        return {data(), size()};
     }
 
     /// Explicit conversion to std::string.
     explicit operator std::string() const {
-        return detail::toString(native());
-    }
-
-    bool empty() const noexcept {
-        return handle()->length == 0U;
+        return {begin(), end()};
     }
 
     [[deprecated("use conversion function with static_cast instead")]]
     std::string_view get() const noexcept {
-        return detail::toStringView(native());
+        return {data(), size()};
     }
 };
 
@@ -175,17 +310,15 @@ std::ostream& operator<<(std::ostream& os, const Guid& guid);
  * UA_ByteString wrapper class.
  * @ingroup Wrapper
  */
-class ByteString : public TypeWrapper<UA_ByteString, UA_TYPES_BYTESTRING> {
+class ByteString : public detail::StringWrapper<UA_ByteString, UA_TYPES_BYTESTRING, uint8_t> {
 public:
-    using TypeWrapper::TypeWrapper;  // inherit constructors
+    using StringWrapper::StringWrapper;  // inherit constructors
 
     explicit ByteString(std::string_view str)
-        : ByteString(detail::allocNativeString(str)) {}
+        : StringWrapper(detail::allocNativeString(str)) {}
 
-    explicit ByteString(const std::vector<uint8_t>& bytes) {
-        throwIfBad(UA_ByteString_allocBuffer(handle(), bytes.size()));
-        std::copy(bytes.begin(), bytes.end(), handle()->data);
-    }
+    explicit ByteString(const std::vector<uint8_t>& bytes)
+        : StringWrapper(bytes.begin(), bytes.end()) {}
 
 #ifndef UAPP_NO_STD_FILESYSTEM
     /// Read ByteString from binary file.
@@ -195,10 +328,6 @@ public:
     /// Parse ByteString from Base64 encoded string.
     /// @note Supported since open62541 v1.1
     static ByteString fromBase64(std::string_view encoded);
-
-    bool empty() const noexcept {
-        return handle()->length == 0U;
-    }
 
 #ifndef UAPP_NO_STD_FILESYSTEM
     /// Write ByteString to binary file.
@@ -234,21 +363,21 @@ inline bool operator!=(std::string_view lhs, const ByteString& rhs) noexcept {
  * UA_XmlElement wrapper class.
  * @ingroup Wrapper
  */
-class XmlElement : public TypeWrapper<UA_XmlElement, UA_TYPES_XMLELEMENT> {
+class XmlElement : public detail::StringWrapper<UA_XmlElement, UA_TYPES_XMLELEMENT, char> {
 public:
-    using TypeWrapper::TypeWrapper;  // inherit constructors
+    using StringWrapper::StringWrapper;  // inherit constructors
 
     explicit XmlElement(std::string_view str)
-        : XmlElement(detail::allocNativeString(str)) {}
+        : StringWrapper(detail::allocNativeString(str)) {}
 
     /// Implicit conversion to std::string_view.
     operator std::string_view() const noexcept {  // NOLINT, implicit wanted
-        return detail::toStringView(native());
+        return {data(), size()};
     }
 
     /// Explicit conversion to std::string.
     explicit operator std::string() const {
-        return detail::toString(native());
+        return {begin(), end()};
     }
 
     bool empty() const noexcept {
@@ -257,7 +386,7 @@ public:
 
     [[deprecated("use conversion function with static_cast instead")]]
     std::string_view get() const noexcept {
-        return detail::toStringView(*handle());
+        return {data(), size()};
     }
 };
 

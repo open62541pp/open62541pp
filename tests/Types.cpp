@@ -56,42 +56,98 @@ TEST_CASE("StatusCode") {
     }
 }
 
-TEST_CASE_TEMPLATE("StringLike", T, String, ByteString, XmlElement) {
-    SUBCASE("Construct with const char*") {
-        T wrapper("test");
-        CHECK(wrapper.handle()->length == 4);
-        CHECK(detail::toStringView(*wrapper.handle()) == "test");
+TEST_CASE_TEMPLATE("StringWrapper constructors", T, String, const String) {
+    SUBCASE("Default") {
+        T str;
+        CHECK(str.size() == 0);
+        CHECK(str.length() == 0);
+        CHECK(str.empty());
+        CHECK(str.data() == nullptr);
     }
 
-    SUBCASE("Construct from non-null-terminated view") {
-        std::string str("test123");
-        std::string_view sv(str.c_str(), 4);
-        T wrapper(sv);
-        CHECK(detail::toStringView(*wrapper.handle()) == "test");
-    }
-
-    SUBCASE("Empty") {
-        CHECK(T().empty());
-        CHECK_FALSE(T("test").empty());
-    }
-
-    SUBCASE("Equality") {
-        CHECK(T("test") == T("test"));
-        CHECK(T("test") != T());
+    SUBCASE("From iterator pair") {
+        std::string_view sv("abc");
+        T str(sv.begin(), sv.end());
+        CHECK(str.size() == 3);
+        CHECK(str.length() == 3);
+        CHECK_FALSE(str.empty());
+        CHECK(str.data() != nullptr);
+        CHECK(std::string_view(str.data(), str.size()) == sv);
     }
 }
 
-TEST_CASE_TEMPLATE("StringLike equality overloads", T, String, ByteString) {
-    CHECK(T("test") == std::string("test"));
-    CHECK(T("test") != std::string("abc"));
-    CHECK(std::string("test") == T("test"));
-    CHECK(std::string("test") != T("abc"));
+TEST_CASE_TEMPLATE("StringWrapper element access", T, String, const String) {
+    T str("abc");
+
+    SUBCASE("operator[]") {
+        CHECK(str[0] == 'a');
+        CHECK(str[1] == 'b');
+        CHECK(str[2] == 'c');
+    }
+
+    SUBCASE("front() and back()") {
+        CHECK(str.front() == 'a');
+        CHECK(str.back() == 'c');
+    }
 }
 
-TEST_CASE_TEMPLATE("StringLike ostream overloads", T, String, XmlElement) {
-    std::ostringstream ss;
-    ss << T("test123");
-    CHECK(ss.str() == "test123");
+TEST_CASE_TEMPLATE("StringWrapper iterators", T, String, const String) {
+    T str("abc");
+
+    SUBCASE("begin(), end() iterators") {
+        CHECK(*str.begin() == 'a');
+        CHECK(*(str.begin() + 1) == 'b');
+        CHECK(*(str.begin() + 2) == 'c');
+        CHECK(str.end() - str.begin() == 3);
+
+        std::string result;
+        for (auto it = str.begin(); it != str.end(); ++it) {
+            result += *it;
+        }
+        CHECK(result == "abc");
+    }
+
+    SUBCASE("rbegin(), rend() reverse iterators") {
+        CHECK(*str.rbegin() == 'c');
+        CHECK(*(str.rbegin() + 1) == 'b');
+        CHECK(*(str.rbegin() + 2) == 'a');
+        CHECK(str.rend() - str.rbegin() == 3);
+
+        std::string result;
+        for (auto it = str.rbegin(); it != str.rend(); ++it) {
+            result += *it;
+        }
+        CHECK(result == "cba");
+    }
+}
+
+TEST_CASE_TEMPLATE("StringLike constructor", T, String, XmlElement) {
+    SUBCASE("From const char*") {
+        T str("hello");
+        CHECK(str.size() == 5);
+        CHECK(str.length() == 5);
+        CHECK_FALSE(str.empty());
+        CHECK(str.data() != nullptr);
+        CHECK(std::string_view(str.data(), str.size()) == "hello");
+    }
+
+    SUBCASE("From std::string_view") {
+        std::string_view sv = "world";
+        T str(sv);
+        CHECK(str.size() == 5);
+        CHECK(str.length() == 5);
+        CHECK_FALSE(str.empty());
+        CHECK(str.data() != nullptr);
+        CHECK(std::string_view(str.data(), str.size()) == "world");
+    }
+
+    SUBCASE("From empty string") {
+        T str("");
+        CHECK(str.size() == 0);
+        CHECK(str.length() == 0);
+        CHECK(str.empty());
+        CHECK(str.data() != nullptr);
+    }
 }
 
 TEST_CASE_TEMPLATE("StringLike implicit conversion to string_view", T, String, XmlElement) {
@@ -103,6 +159,24 @@ TEST_CASE_TEMPLATE("StringLike implicit conversion to string_view", T, String, X
 TEST_CASE_TEMPLATE("StringLike explicit conversion to string", T, String, XmlElement) {
     T str("test123");
     CHECK(static_cast<std::string>(str) == "test123");
+}
+
+TEST_CASE_TEMPLATE("StringLike equality overloads", T, String, ByteString, XmlElement) {
+    CHECK(T("test") == T("test"));
+    CHECK(T("test") != T());
+}
+
+TEST_CASE_TEMPLATE("StringLike equality overloads with std::string_view", T, String, ByteString) {
+    CHECK(T("test") == std::string("test"));
+    CHECK(T("test") != std::string("abc"));
+    CHECK(std::string("test") == T("test"));
+    CHECK(std::string("test") != T("abc"));
+}
+
+TEST_CASE_TEMPLATE("StringLike ostream overloads", T, String, XmlElement) {
+    std::ostringstream ss;
+    ss << T("test123");
+    CHECK(ss.str() == "test123");
 }
 
 TEST_CASE("ByteString") {
