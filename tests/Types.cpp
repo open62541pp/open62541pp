@@ -8,6 +8,7 @@
 
 #include "open62541pp/Config.h"
 #include "open62541pp/NodeIds.h"
+#include "open62541pp/detail/string_utils.h"  // toNativeString
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/DataValue.h"
@@ -651,9 +652,9 @@ TEST_CASE("Variant") {
     SUBCASE("Set array of native strings") {
         Variant var;
         std::array array{
-            UA_String_fromChars("item1"),
-            UA_String_fromChars("item2"),
-            UA_String_fromChars("item3"),
+            detail::toNativeString("item1"),
+            detail::toNativeString("item2"),
+            detail::toNativeString("item3"),
         };
         var.setArray(Span{array.data(), array.size()}, UA_TYPES[UA_TYPES_STRING]);
         CHECK(var.data() == array.data());
