@@ -176,9 +176,9 @@ TEST_CASE_TEMPLATE("StringLike implicit conversion to string_view", T, String, X
     CHECK(view == "test123");
 }
 
-TEST_CASE_TEMPLATE("StringLike in string constructor", T, String, XmlElement) {
+TEST_CASE_TEMPLATE("StringLike explicit conversion to string_view", T, ByteString) {
     T str("test123");
-    CHECK(std::string(str) == "test123");
+    CHECK(static_cast<std::string_view>(str) == "test123");
 }
 
 TEST_CASE_TEMPLATE("StringLike equality overloads", T, String, ByteString, XmlElement) {
@@ -214,7 +214,6 @@ TEST_CASE("ByteString") {
         CHECK(bs->data[0] == 88);
         CHECK(bs->data[1] == 89);
         CHECK(bs->data[2] == 90);
-        CHECK(std::string(bs.get()) == "XYZ");
     }
 
 #ifndef UAPP_NO_STD_FILESYSTEM
