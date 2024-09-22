@@ -13,18 +13,6 @@
 #include <utility>  // move
 #include <vector>
 
-// Workaround for GCC 7 with partial (or missing) C++17 support
-// https://github.com/open62541pp/open62541pp/issues/109
-#if __has_include(<filesystem>)
-#include <filesystem>
-namespace fs = std::filesystem;
-#elif __has_include(<experimental/filesystem>)
-#include <experimental/filesystem>
-namespace fs = std::experimental::filesystem;
-#else
-#define UAPP_NO_STD_FILESYSTEM
-#endif
-
 #include "open62541pp/Common.h"  // NamespaceIndex
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Span.h"
@@ -328,11 +316,6 @@ public:
     explicit ByteString(const std::vector<uint8_t>& bytes)
         : StringWrapper(bytes.begin(), bytes.end()) {}
 
-#ifndef UAPP_NO_STD_FILESYSTEM
-    /// Read ByteString from binary file.
-    static ByteString fromFile(const fs::path& filepath);
-#endif
-
     /// Parse ByteString from Base64 encoded string.
     /// @note Supported since open62541 v1.1
     static ByteString fromBase64(std::string_view encoded);
@@ -341,11 +324,6 @@ public:
     explicit operator std::string_view() const noexcept {
         return {reinterpret_cast<const char*>(data()), size()};  // NOLINT
     }
-
-#ifndef UAPP_NO_STD_FILESYSTEM
-    /// Write ByteString to binary file.
-    void toFile(const fs::path& filepath) const;
-#endif
 
     /// Convert to Base64 encoded string.
     /// @note Supported since open62541 v1.1

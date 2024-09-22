@@ -216,14 +216,6 @@ TEST_CASE("ByteString") {
         CHECK(bs->data[2] == 90);
     }
 
-#ifndef UAPP_NO_STD_FILESYSTEM
-    SUBCASE("toFile / fromFile") {
-        const ByteString bs({88, 89, 90});
-        CHECK_NOTHROW(bs.toFile("bytestring.bin"));
-        CHECK(ByteString::fromFile("bytestring.bin") == bs);
-    }
-#endif
-
 #if UAPP_OPEN62541_VER_GE(1, 1)
     SUBCASE("fromBase64 / to Base64") {
         CHECK(ByteString::fromBase64("dGVzdDEyMw==") == ByteString("test123"));
