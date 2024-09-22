@@ -288,8 +288,8 @@ TEST_CASE("NumericRange") {
         const NumericRange nr(native);
         CHECK(!nr.empty());
         CHECK(nr.get().size() == 2);
-        CHECK(nr.get().at(0) == NumericRangeDimension{1, 2});
-        CHECK(nr.get().at(1) == NumericRangeDimension{3, 4});
+        CHECK(nr.get()[0] == NumericRangeDimension{1, 2});
+        CHECK(nr.get()[1] == NumericRangeDimension{3, 4});
     }
 
     SUBCASE("Empty") {
@@ -305,9 +305,9 @@ TEST_CASE("NumericRange") {
     SUBCASE("Parse") {
         const NumericRange nr("1:2,0:3,5");
         CHECK(nr.get().size() == 3);
-        CHECK(nr.get().at(0) == NumericRangeDimension{1, 2});
-        CHECK(nr.get().at(1) == NumericRangeDimension{0, 3});
-        CHECK(nr.get().at(2) == NumericRangeDimension{5, 5});
+        CHECK(nr.get()[0] == NumericRangeDimension{1, 2});
+        CHECK(nr.get()[1] == NumericRangeDimension{0, 3});
+        CHECK(nr.get()[2] == NumericRangeDimension{5, 5});
     }
 
     SUBCASE("toString") {

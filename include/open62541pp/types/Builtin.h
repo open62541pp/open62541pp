@@ -27,6 +27,7 @@ namespace fs = std::experimental::filesystem;
 
 #include "open62541pp/Common.h"  // NamespaceIndex
 #include "open62541pp/ErrorHandling.h"
+#include "open62541pp/Span.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/Wrapper.h"
 #include "open62541pp/detail/open62541/common.h"
@@ -556,17 +557,20 @@ public:
 
     explicit NumericRange(std::string_view encodedRange);
 
-    explicit NumericRange(std::vector<NumericRangeDimension> dimensions)
-        : dimensions_(std::move(dimensions)) {}
+    explicit NumericRange(const char* encodedRange)  // required to avoid ambiguity
+        : NumericRange(std::string_view(encodedRange)) {}
+
+    explicit NumericRange(Span<const NumericRangeDimension> dimensions)
+        : dimensions_(dimensions.begin(), dimensions.end()) {}
 
     explicit NumericRange(const UA_NumericRange& native)
-        : dimensions_(native.dimensions, native.dimensions + native.dimensionsSize) {}  // NOLINT
+        : NumericRange({native.dimensions, native.dimensionsSize}) {}
 
     bool empty() const noexcept {
         return dimensions_.empty();
     }
 
-    const std::vector<NumericRangeDimension>& get() const noexcept {
+    Span<const NumericRangeDimension> get() const noexcept {
         return dimensions_;
     }
 
