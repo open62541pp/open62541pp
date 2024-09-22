@@ -288,9 +288,9 @@ public:
 
     explicit Guid(std::array<uint8_t, 16> data) noexcept
         : Guid(UA_Guid{
-              static_cast<uint32_t>((data[0] << 24) | (data[1] << 16) | (data[2] << 8) | data[3]),
-              static_cast<uint16_t>((data[4] << 8) | data[5]),
-              static_cast<uint16_t>((data[6] << 8) | data[7]),
+              static_cast<uint32_t>((data[0] << 24U) | (data[1] << 16U) | (data[2] << 8U) | data[3]),  // NOLINT
+              static_cast<uint16_t>((data[4] << 8U) | data[5]),  // NOLINT
+              static_cast<uint16_t>((data[6] << 8U) | data[7]),  // NOLINT
               {data[8], data[9], data[10], data[11], data[12], data[13], data[14], data[15]},
           }) {}
 
