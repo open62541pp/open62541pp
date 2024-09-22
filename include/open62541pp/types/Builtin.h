@@ -4,6 +4,7 @@
 #include <array>
 #include <cassert>
 #include <cstdint>
+#include <initializer_list>
 #include <iosfwd>  // forward declare ostream
 #include <iterator>  // reverse_iterator
 #include <string>
@@ -118,6 +119,9 @@ public:
             std::copy(first, last, data());
         }
     }
+
+    StringWrapper(std::initializer_list<CharT> init)
+        : StringWrapper(init.begin(), init.end()) {}
 
     size_t size() const noexcept {
         return this->native().length;

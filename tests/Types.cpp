@@ -8,7 +8,6 @@
 
 #include "open62541pp/Config.h"
 #include "open62541pp/NodeIds.h"
-#include "open62541pp/detail/string_utils.h"  // detail::toString
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/DataValue.h"
@@ -56,7 +55,9 @@ TEST_CASE("StatusCode") {
     }
 }
 
-TEST_CASE_TEMPLATE("StringWrapper constructors", T, String, const String) {
+using StringWrapper = detail::StringWrapper<UA_String, UA_TYPES_STRING, char>;
+
+TEST_CASE_TEMPLATE("StringWrapper constructors", T, StringWrapper, const StringWrapper) {
     SUBCASE("Default") {
         T str;
         CHECK(str.size() == 0);
@@ -74,10 +75,19 @@ TEST_CASE_TEMPLATE("StringWrapper constructors", T, String, const String) {
         CHECK(str.data() != nullptr);
         CHECK(std::string_view(str.data(), str.size()) == sv);
     }
+
+    SUBCASE("From initializer list") {
+        T str{'a', 'b', 'c'};
+        CHECK(str.size() == 3);
+        CHECK(str.length() == 3);
+        CHECK_FALSE(str.empty());
+        CHECK(str.data() != nullptr);
+        CHECK(std::string_view(str.data(), str.size()) == "abc");
+    }
 }
 
-TEST_CASE_TEMPLATE("StringWrapper element access", T, String, const String) {
-    T str("abc");
+TEST_CASE_TEMPLATE("StringWrapper element access", T, StringWrapper, const StringWrapper) {
+    T str{'a', 'b', 'c'};
 
     SUBCASE("operator[]") {
         CHECK(str[0] == 'a');
@@ -91,8 +101,8 @@ TEST_CASE_TEMPLATE("StringWrapper element access", T, String, const String) {
     }
 }
 
-TEST_CASE_TEMPLATE("StringWrapper iterators", T, String, const String) {
-    T str("abc");
+TEST_CASE_TEMPLATE("StringWrapper iterators", T, StringWrapper, const StringWrapper) {
+    T str{'a', 'b', 'c'};
 
     SUBCASE("begin(), end() iterators") {
         CHECK(*str.begin() == 'a');
@@ -641,9 +651,9 @@ TEST_CASE("Variant") {
     SUBCASE("Set array of native strings") {
         Variant var;
         std::array array{
-            detail::toNativeString("item1"),
-            detail::toNativeString("item2"),
-            detail::toNativeString("item3"),
+            UA_String_fromChars("item1"),
+            UA_String_fromChars("item2"),
+            UA_String_fromChars("item3"),
         };
         var.setArray(Span{array.data(), array.size()}, UA_TYPES[UA_TYPES_STRING]);
         CHECK(var.data() == array.data());
