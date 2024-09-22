@@ -111,6 +111,10 @@ endif()
 
 # open62541pp library (static/shared depending on option BUILD_SHARED_LIBS)
 include(GNUInstallDirs)
+configure_file(
+    include/open62541pp/Config.h.in
+    ${PROJECT_BINARY_DIR}/include_generated/open62541pp/Config.h
+)
 add_library(
     open62541pp
     src/AccessControl.cpp
@@ -141,6 +145,7 @@ target_include_directories(
     open62541pp
     PUBLIC
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+        $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/include_generated>
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
 target_link_libraries(
@@ -183,6 +188,13 @@ install(
 install(
     DIRECTORY "${PROJECT_SOURCE_DIR}/include/"
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+    FILES_MATCHING PATTERN "*.h"
+)
+
+install(
+    DIRECTORY "${PROJECT_BINARY_DIR}/include_generated/"
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+    FILES_MATCHING PATTERN "*.h"
 )
 
 # install cmake config files
