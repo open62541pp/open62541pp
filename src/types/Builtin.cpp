@@ -1,8 +1,6 @@
 #include "open62541pp/types/Builtin.h"
 
-#include <fstream>
 #include <iomanip>
-#include <iterator>  // istreambuf_iterator
 #include <ostream>
 #include <sstream>
 #include <utility>  // move
