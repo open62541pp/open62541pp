@@ -111,7 +111,7 @@ public:
     StringWrapper(InputIt first, InputIt last) {
         this->native().length = std::distance(first, last);
         if (size() > 0) {
-            this->native().data = static_cast<uint8_t*>(UA_malloc(size()));
+            this->native().data = static_cast<uint8_t*>(UA_malloc(size()));  // NOLINT
             if (data() == nullptr) {
                 throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
             }
