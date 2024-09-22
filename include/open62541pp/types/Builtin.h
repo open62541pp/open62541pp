@@ -286,6 +286,14 @@ class Guid : public TypeWrapper<UA_Guid, UA_TYPES_GUID> {
 public:
     using TypeWrapper::TypeWrapper;  // inherit constructors
 
+    explicit Guid(std::array<uint8_t, 16> data) noexcept
+        : Guid(UA_Guid{
+              static_cast<uint32_t>((data[0] << 24U) | (data[1] << 16U) | (data[2] << 8U) | data[3]),  // NOLINT
+              static_cast<uint16_t>((data[4] << 8U) | data[5]),  // NOLINT
+              static_cast<uint16_t>((data[6] << 8U) | data[7]),  // NOLINT
+              {data[8], data[9], data[10], data[11], data[12], data[13], data[14], data[15]},
+          }) {}
+
     Guid(uint32_t data1, uint16_t data2, uint16_t data3, std::array<uint8_t, 8> data4) noexcept
         : Guid(UA_Guid{
               data1,
