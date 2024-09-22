@@ -241,11 +241,6 @@ public:
         return {data(), size()};
     }
 
-    /// Explicit conversion to std::string.
-    explicit operator std::string() const {
-        return {begin(), end()};
-    }
-
     [[deprecated("use conversion function with static_cast instead")]]
     std::string_view get() const noexcept {
         return {data(), size()};
@@ -386,11 +381,6 @@ public:
     /// Implicit conversion to std::string_view.
     operator std::string_view() const noexcept {  // NOLINT, implicit wanted
         return {data(), size()};
-    }
-
-    /// Explicit conversion to std::string.
-    explicit operator std::string() const {
-        return {begin(), end()};
     }
 
     bool empty() const noexcept {
