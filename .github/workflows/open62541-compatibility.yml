@@ -21,6 +21,7 @@ jobs:
           - v1.1.6
           - v1.2.9
           - v1.3.11
+          - v1.4.4
         build_type: ["Debug", "Release"]
         library_type: ["static", "shared"]
         amalgamation: [false, true]
