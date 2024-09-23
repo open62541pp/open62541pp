@@ -253,8 +253,10 @@ inline static void copyApplicationDescriptionToEndpoints(Server& server) {
     }
 }
 
-void Server::setCustomHostname(std::string_view hostname) {
+void Server::setCustomHostname([[maybe_unused]] std::string_view hostname) {
+#if UAPP_OPEN62541_VER_LE(1, 3)
     asWrapper<String>(detail::getConfig(*this).customHostname) = String(hostname);
+#endif
 }
 
 void Server::setApplicationName(std::string_view name) {

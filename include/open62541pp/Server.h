@@ -122,6 +122,7 @@ public:
     void setAccessControl(std::unique_ptr<AccessControlBase> accessControl);
 
     /// Set custom hostname, default: system's host name.
+    [[deprecated("not supported since open62541 v1.4")]]
     void setCustomHostname(std::string_view hostname);
     /// Set application name, default: `open62541-based OPC UA Application`.
     void setApplicationName(std::string_view name);
