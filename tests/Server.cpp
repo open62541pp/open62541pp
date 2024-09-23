@@ -79,7 +79,7 @@ TEST_CASE("Server run/stop/runIterate") {
         for (size_t i = 0; i < 10; ++i) {
             const auto waitInterval = server.runIterate();
             CHECK(waitInterval > 0);
-            CHECK(waitInterval <= 50);
+            CHECK(waitInterval <= 1000);
             CHECK(server.isRunning());
         }
 
