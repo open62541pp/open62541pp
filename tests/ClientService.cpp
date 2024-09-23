@@ -81,10 +81,7 @@ TEST_CASE("AsyncServiceAdapter") {
 }
 
 TEST_CASE("sendRequest") {
-    Server server;
-    ServerRunner serverRunner(server);
     Client client;
-    client.connect("opc.tcp://localhost:4840");
 
     auto sendReadRequest = [&](auto&& transform, auto&& token) {
         UA_ReadValueId item{};
@@ -102,6 +99,25 @@ TEST_CASE("sendRequest") {
             std::forward<decltype(token)>(token)
         );
     };
+
+    SUBCASE("Async disconnected") {
+        sendReadRequest(services::detail::Wrap<ReadResponse>{}, [&](ReadResponse& response) {
+            // UA_STATUSCODE_BADSERVERNOTCONNECTED since v1.1
+            CHECK(response.getResponseHeader().getServiceResult().isBad());
+        });
+    }
+
+    SUBCASE("Sync disconnected") {
+        const auto response = sendReadRequest(
+            services::detail::Wrap<ReadResponse>{}, services::detail::SyncOperation{}
+        );
+        // UA_STATUSCODE_BADCONNECTIONCLOSED or UA_STATUSCODE_BADINTERNALERROR (v1.0)
+        CHECK(response.getResponseHeader().getServiceResult().isBad());
+    }
+
+    Server server;
+    ServerRunner serverRunner(server);
+    client.connect("opc.tcp://localhost:4840");
 
     auto checkReadResponse = [](const ReadResponse& response) {
         CHECK(response.getResponseHeader().getServiceResult().isGood());
@@ -132,16 +148,6 @@ TEST_CASE("sendRequest") {
             });
             CHECK_THROWS_AS_MESSAGE(client.runIterate(), std::runtime_error, "Error");
         }
-
-#if UAPP_OPEN62541_VER_GE(1, 1)
-        SUBCASE("Disconnected") {
-            client.disconnect();
-            sendReadRequest(services::detail::Wrap<ReadResponse>{}, [&](ReadResponse& response) {
-                // UA_STATUSCODE_BADSERVERNOTCONNECTED since v1.1
-                CHECK(response.getResponseHeader().getServiceResult().isBad());
-            });
-        }
-#endif
     }
 
     SUBCASE("Sync") {
@@ -161,15 +167,6 @@ TEST_CASE("sendRequest") {
                 std::runtime_error,
                 "Error"
             );
-        }
-
-        SUBCASE("Disconnected") {
-            client.disconnect();
-            const auto response = sendReadRequest(
-                services::detail::Wrap<ReadResponse>{}, services::detail::SyncOperation{}
-            );
-            // UA_STATUSCODE_BADCONNECTIONCLOSED or UA_STATUSCODE_BADINTERNALERROR (v1.0)
-            CHECK(response.getResponseHeader().getServiceResult().isBad());
         }
     }
 }
