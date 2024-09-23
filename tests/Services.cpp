@@ -332,10 +332,13 @@ TEST_CASE("Attribute service set (highlevel)") {
         CHECK(services::writeHistorizing(server, id, true));
 
         // read new attributes
+#if UAPP_OPEN62541_VER_LE(1, 3)
+        // TODO: fails with v1.4: https://github.com/open62541/open62541/issues/6723
         CHECK(
             services::readDisplayName(server, id).value() ==
             LocalizedText("en-US", "newDisplayName")
         );
+#endif
         CHECK(
             services::readDescription(server, id).value() ==
             LocalizedText("de-DE", "newDescription")

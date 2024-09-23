@@ -114,10 +114,13 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client) {
     }
 
     SUBCASE("Read/write variable node attributes") {
+#if UAPP_OPEN62541_VER_LE(1, 3)
+        // TODO: fails with v1.4: https://github.com/open62541/open62541/issues/6723
         CHECK_EQ(
             varNode.writeDisplayName({"en-US", "name"}).readDisplayName(),
             LocalizedText({"en-US", "name"})
         );
+#endif
         CHECK_EQ(
             varNode.writeDescription({"en-US", "desc"}).readDescription(),
             LocalizedText({"en-US", "desc"})
