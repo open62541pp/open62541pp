@@ -325,7 +325,10 @@ public:
     explicit ByteString(std::string_view str)
         : StringWrapper(detail::allocNativeString(str)) {}
 
-    explicit ByteString(const std::vector<uint8_t>& bytes)
+    explicit ByteString(const char* str)  // required to avoid ambiguity
+        : ByteString(std::string_view(str)) {}
+
+    explicit ByteString(Span<const uint8_t> bytes)
         : StringWrapper(bytes.begin(), bytes.end()) {}
 
     /// Parse ByteString from Base64 encoded string.
