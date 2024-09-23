@@ -379,10 +379,6 @@ public:
         return {data(), size()};
     }
 
-    bool empty() const noexcept {
-        return handle()->length == 0U;
-    }
-
     [[deprecated("use conversion function with static_cast instead")]]
     std::string_view get() const noexcept {
         return {data(), size()};
