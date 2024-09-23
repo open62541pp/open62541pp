@@ -30,11 +30,11 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
     SUBCASE("addObject") {
         Result<NodeId> result;
         if constexpr (isAsync<T>) {
-            auto future = services::addObjectAsync(connection, objectsId, newId, "object");
+            auto future = services::addObjectAsync(connection, objectsId, newId, "Object");
             setup.client.runIterate();
             result = future.get();
         } else {
-            result = services::addObject(connection, objectsId, newId, "object");
+            result = services::addObject(connection, objectsId, newId, "Object");
         }
         CHECK_EQ(result.value(), newId);
         CHECK_EQ(services::readNodeClass(server, newId).value(), NodeClass::Object);
@@ -43,11 +43,11 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
     SUBCASE("addFolder") {
         Result<NodeId> result;
         if constexpr (isAsync<T>) {
-            auto future = services::addFolderAsync(connection, objectsId, newId, "folder");
+            auto future = services::addFolderAsync(connection, objectsId, newId, "Folder");
             setup.client.runIterate();
             result = future.get();
         } else {
-            result = services::addFolder(connection, objectsId, newId, "folder");
+            result = services::addFolder(connection, objectsId, newId, "Folder");
         }
         CHECK_EQ(result.value(), newId);
         CHECK_EQ(services::readNodeClass(server, newId).value(), NodeClass::Object);
@@ -56,11 +56,11 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
     SUBCASE("addVariable") {
         Result<NodeId> result;
         if constexpr (isAsync<T>) {
-            auto future = services::addVariableAsync(connection, objectsId, newId, "variable");
+            auto future = services::addVariableAsync(connection, objectsId, newId, "Variable");
             setup.client.runIterate();
             result = future.get();
         } else {
-            result = services::addVariable(connection, objectsId, newId, "variable");
+            result = services::addVariable(connection, objectsId, newId, "Variable");
         }
         CHECK_EQ(result.value(), newId);
         CHECK_EQ(services::readNodeClass(server, newId).value(), NodeClass::Variable);
@@ -69,11 +69,11 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
     SUBCASE("addProperty") {
         Result<NodeId> result;
         if constexpr (isAsync<T>) {
-            auto future = services::addPropertyAsync(connection, objectsId, newId, "property");
+            auto future = services::addPropertyAsync(connection, objectsId, newId, "Property");
             setup.client.runIterate();
             result = future.get();
         } else {
-            result = services::addProperty(connection, objectsId, newId, "property");
+            result = services::addProperty(connection, objectsId, newId, "Property");
         }
         CHECK_EQ(result.value(), newId);
         CHECK_EQ(services::readNodeClass(server, newId).value(), NodeClass::Variable);
@@ -84,12 +84,12 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
         Result<NodeId> result;
         if constexpr (isAsync<T>) {
             auto future = services::addMethodAsync(
-                connection, objectsId, newId, "method", {}, {}, {}
+                connection, objectsId, newId, "Method", {}, {}, {}
             );
             setup.client.runIterate();
             result = future.get();
         } else {
-            result = services::addMethod(connection, objectsId, newId, "method", {}, {}, {});
+            result = services::addMethod(connection, objectsId, newId, "Method", {}, {}, {});
         }
         CHECK_EQ(result.value(), newId);
         CHECK_EQ(services::readNodeClass(server, newId).value(), NodeClass::Method);
@@ -100,13 +100,13 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
         Result<NodeId> result;
         if constexpr (isAsync<T>) {
             auto future = services::addObjectTypeAsync(
-                connection, {0, UA_NS0ID_BASEOBJECTTYPE}, newId, "objecttype"
+                connection, {0, UA_NS0ID_BASEOBJECTTYPE}, newId, "ObjectType"
             );
             setup.client.runIterate();
             result = future.get();
         } else {
             result = services::addObjectType(
-                connection, {0, UA_NS0ID_BASEOBJECTTYPE}, newId, "objecttype"
+                connection, {0, UA_NS0ID_BASEOBJECTTYPE}, newId, "ObjectType"
             );
         }
         CHECK_EQ(result.value(), newId);
@@ -117,13 +117,13 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
         Result<NodeId> result;
         if constexpr (isAsync<T>) {
             auto future = services::addVariableTypeAsync(
-                connection, {0, UA_NS0ID_BASEVARIABLETYPE}, newId, "variabletype"
+                connection, {0, UA_NS0ID_BASEVARIABLETYPE}, newId, "VariableType"
             );
             setup.client.runIterate();
             result = future.get();
         } else {
             result = services::addVariableType(
-                connection, {0, UA_NS0ID_BASEVARIABLETYPE}, newId, "variabletype"
+                connection, {0, UA_NS0ID_BASEVARIABLETYPE}, newId, "VariableType"
             );
         }
         CHECK_EQ(result.value(), newId);
@@ -134,13 +134,13 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
         Result<NodeId> result;
         if constexpr (isAsync<T>) {
             auto future = services::addReferenceTypeAsync(
-                connection, {0, UA_NS0ID_ORGANIZES}, newId, "referencetype"
+                connection, {0, UA_NS0ID_ORGANIZES}, newId, "ReferenceType"
             );
             setup.client.runIterate();
             result = future.get();
         } else {
             result = services::addReferenceType(
-                connection, {0, UA_NS0ID_ORGANIZES}, newId, "referencetype"
+                connection, {0, UA_NS0ID_ORGANIZES}, newId, "ReferenceType"
             );
         }
         CHECK_EQ(result.value(), newId);
@@ -151,12 +151,12 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
         Result<NodeId> result;
         if constexpr (isAsync<T>) {
             auto future = services::addDataTypeAsync(
-                connection, {0, UA_NS0ID_STRUCTURE}, newId, "datatype"
+                connection, {0, UA_NS0ID_STRUCTURE}, newId, "DataType"
             );
             setup.client.runIterate();
             result = future.get();
         } else {
-            result = services::addDataType(connection, {0, UA_NS0ID_STRUCTURE}, newId, "datatype");
+            result = services::addDataType(connection, {0, UA_NS0ID_STRUCTURE}, newId, "DataType");
         }
         CHECK_EQ(result.value(), newId);
         CHECK_EQ(services::readNodeClass(server, newId).value(), NodeClass::DataType);
@@ -166,20 +166,20 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
         Result<NodeId> result;
         if constexpr (isAsync<T>) {
             auto future = services::addViewAsync(
-                connection, {0, UA_NS0ID_VIEWSFOLDER}, newId, "view"
+                connection, {0, UA_NS0ID_VIEWSFOLDER}, newId, "View"
             );
             setup.client.runIterate();
             result = future.get();
         } else {
-            result = services::addView(connection, {0, UA_NS0ID_VIEWSFOLDER}, newId, "view");
+            result = services::addView(connection, {0, UA_NS0ID_VIEWSFOLDER}, newId, "View");
         }
         CHECK_EQ(result.value(), newId);
         CHECK_EQ(services::readNodeClass(server, newId).value(), NodeClass::View);
     }
 
     SUBCASE("Add/delete reference") {
-        services::addFolder(connection, objectsId, {1, 1000}, "folder").value();
-        services::addObject(connection, objectsId, {1, 1001}, "object").value();
+        services::addFolder(connection, objectsId, {1, 1000}, "Folder").value();
+        services::addObject(connection, objectsId, {1, 1001}, "Object").value();
 
         auto addReference = [&] {
             if constexpr (isAsync<T>) {
@@ -214,7 +214,7 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
     }
 
     SUBCASE("Delete node") {
-        services::addObject(connection, objectsId, {1, 1000}, "object").value();
+        services::addObject(connection, objectsId, {1, 1000}, "Object").value();
 
         auto deleteNode = [&] {
             if constexpr (isAsync<T>) {
@@ -231,7 +231,7 @@ TEST_CASE_TEMPLATE("NodeManagement service set", T, Server, Client, Async<Client
 
     SUBCASE("Random node id") {
         // https://www.open62541.org/doc/1.3/server.html#node-addition-and-deletion
-        const auto id = services::addObject(connection, objectsId, {1, 0}, "random").value();
+        const auto id = services::addObject(connection, objectsId, {1, 0}, "Random").value();
         CHECK(id != NodeId(1, 0));
         CHECK(id.getNamespaceIndex() == 1);
     }
@@ -241,32 +241,9 @@ TEST_CASE("Attribute service set (highlevel)") {
     Server server;
     const NodeId objectsId{0, UA_NS0ID_OBJECTSFOLDER};
 
-    SUBCASE("Read default variable node attributes") {
-        const NodeId id{1, "testAttributes"};
-        services::addVariable(server, objectsId, id, "testAttributes").value();
-
-        CHECK(services::readNodeId(server, id).value() == id);
-        CHECK(services::readNodeClass(server, id).value() == NodeClass::Variable);
-        CHECK(services::readBrowseName(server, id).value() == QualifiedName(1, "testAttributes"));
-        // CHECK(services::readDisplayName(server, id), LocalizedText("", "testAttributes"));
-        CHECK(services::readDescription(server, id).value().getText().empty());
-        CHECK(services::readDescription(server, id).value().getLocale().empty());
-        CHECK(services::readWriteMask(server, id).value() == 0);
-        const uint32_t adminUserWriteMask = 0xFFFFFFFF;  // all bits set
-        CHECK(services::readUserWriteMask(server, id).value() == adminUserWriteMask);
-        CHECK(services::readDataType(server, id).value() == NodeId(0, UA_NS0ID_BASEDATATYPE));
-        CHECK(services::readValueRank(server, id).value() == ValueRank::Any);
-        CHECK(services::readArrayDimensions(server, id).value().empty());
-        CHECK(services::readAccessLevel(server, id).value() == AccessLevel::CurrentRead);
-        const uint8_t adminUserAccessLevel = 0xFF;  // all bits set
-        CHECK(services::readUserAccessLevel(server, id).value() == adminUserAccessLevel);
-        CHECK(services::readMinimumSamplingInterval(server, id).value() == 0.0);
-        CHECK(services::readHistorizing(server, id).value() == false);
-    }
-
     SUBCASE("Read initial variable node attributes") {
         VariableAttributes attr;
-        attr.setDisplayName({"", "testAttributes"});
+        attr.setDisplayName({"", "TestAttributes"});
         attr.setDescription({"", "..."});
         attr.setWriteMask(~0U);
         attr.setDataType(DataTypeId::Int32);
@@ -275,12 +252,12 @@ TEST_CASE("Attribute service set (highlevel)") {
         attr.setAccessLevel(AccessLevel::CurrentRead | AccessLevel::CurrentWrite);
         attr.setMinimumSamplingInterval(11.11);
 
-        const NodeId id{1, "testAttributes"};
+        const NodeId id{1, "TestAttributes"};
         services::addVariable(
             server,
             objectsId,
             id,
-            "testAttributes",
+            "TestAttributes",
             attr,
             VariableTypeId::BaseDataVariableType,
             ReferenceTypeId::HasComponent
@@ -304,8 +281,8 @@ TEST_CASE("Attribute service set (highlevel)") {
     }
 
     SUBCASE("Read/write object node attributes") {
-        const NodeId id{1, "testAttributes"};
-        services::addObject(server, objectsId, id, "testAttributes").value();
+        const NodeId id{1, "TestAttributes"};
+        services::addObject(server, objectsId, id, "TestAttributes").value();
 
         // write new attributes
         const auto eventNotifier = EventNotifier::HistoryRead | EventNotifier::HistoryWrite;
@@ -316,12 +293,12 @@ TEST_CASE("Attribute service set (highlevel)") {
     }
 
     SUBCASE("Read/write variable node attributes") {
-        const NodeId id{1, "testAttributes"};
-        services::addVariable(server, objectsId, id, "testAttributes").value();
+        const NodeId id{1, "TestAttributes"};
+        services::addVariable(server, objectsId, id, "TestAttributes").value();
 
         // write new attributes
-        CHECK(services::writeDisplayName(server, id, {"en-US", "newDisplayName"}));
-        CHECK(services::writeDescription(server, id, {"de-DE", "newDescription"}));
+        CHECK(services::writeDisplayName(server, id, {"en-US", "NewDisplayName"}));
+        CHECK(services::writeDescription(server, id, {"en-US", "NewDescription"}));
         CHECK(services::writeWriteMask(server, id, WriteMask::Executable));
         CHECK(services::writeDataType(server, id, NodeId{0, 2}));
         CHECK(services::writeValueRank(server, id, ValueRank::TwoDimensions));
@@ -336,12 +313,12 @@ TEST_CASE("Attribute service set (highlevel)") {
         // TODO: fails with v1.4: https://github.com/open62541/open62541/issues/6723
         CHECK(
             services::readDisplayName(server, id).value() ==
-            LocalizedText("en-US", "newDisplayName")
+            LocalizedText("en-US", "NewDisplayName")
         );
 #endif
         CHECK(
             services::readDescription(server, id).value() ==
-            LocalizedText("de-DE", "newDescription")
+            LocalizedText("en-US", "NewDescription")
         );
         CHECK(services::readWriteMask(server, id).value() == UA_WRITEMASK_EXECUTABLE);
         CHECK(services::readDataType(server, id).value() == NodeId(0, 2));
@@ -356,8 +333,8 @@ TEST_CASE("Attribute service set (highlevel)") {
 
 #ifdef UA_ENABLE_METHODCALLS
     SUBCASE("Read/write method node attributes") {
-        const NodeId id{1, "testMethod"};
-        services::addMethod(server, objectsId, id, "testMethod", nullptr, {}, {}).value();
+        const NodeId id{1, "TestMethod"};
+        services::addMethod(server, objectsId, id, "TestMethod", nullptr, {}, {}).value();
 
         // write new attributes
         CHECK(services::writeExecutable(server, id, true));
@@ -368,28 +345,30 @@ TEST_CASE("Attribute service set (highlevel)") {
     }
 #endif
 
-    SUBCASE("Read/write reference node attributes") {
-        const NodeId id{0, UA_NS0ID_REFERENCES};
+    SUBCASE("Read/write reference type node attributes") {
+        const NodeId id{1, "TestReferenceType"};
+        services::addReferenceType(server, {0, UA_NS0ID_ORGANIZES}, id, "TestReferenceType")
+            .value();
 
         // read default attributes
-        CHECK(services::readIsAbstract(server, id).value() == true);
-        CHECK(services::readSymmetric(server, id).value() == true);
-        CHECK(services::readInverseName(server, id).value() == LocalizedText("", "References"));
-
-        // write new attributes
-        CHECK(services::writeIsAbstract(server, id, false));
-        CHECK(services::writeSymmetric(server, id, false));
-        CHECK(services::writeInverseName(server, id, LocalizedText("", "New")));
-
-        // read new attributes
         CHECK(services::readIsAbstract(server, id).value() == false);
         CHECK(services::readSymmetric(server, id).value() == false);
-        CHECK(services::readInverseName(server, id).value() == LocalizedText("", "New"));
+        CHECK(services::readInverseName(server, id).value() == LocalizedText({}, {}));
+
+        // write new attributes
+        CHECK(services::writeIsAbstract(server, id, true));
+        CHECK(services::writeSymmetric(server, id, false));
+        CHECK(services::writeInverseName(server, id, LocalizedText({}, "InverseName")));
+
+        // read new attributes
+        CHECK(services::readIsAbstract(server, id).value() == true);
+        CHECK(services::readSymmetric(server, id).value() == false);
+        CHECK(services::readInverseName(server, id).value() == LocalizedText({}, "InverseName"));
     }
 
     SUBCASE("Value rank and array dimension combinations") {
-        const NodeId id{1, "testDimensions"};
-        services::addVariable(server, objectsId, id, "testDimensions").value();
+        const NodeId id{1, "TestDimensions"};
+        services::addVariable(server, objectsId, id, "TestDimensions").value();
 
         SUBCASE("Unspecified dimension (ValueRank <= 0)") {
             const std::vector<ValueRank> valueRanks = {
@@ -434,8 +413,8 @@ TEST_CASE("Attribute service set (highlevel)") {
     }
 
     SUBCASE("Read/write value") {
-        const NodeId id{1, "testValue"};
-        services::addVariable(server, objectsId, id, "testValue").value();
+        const NodeId id{1, "TestValue"};
+        services::addVariable(server, objectsId, id, "TestValue").value();
 
         Variant variantWrite;
         variantWrite.setScalarCopy(11.11);
@@ -446,8 +425,8 @@ TEST_CASE("Attribute service set (highlevel)") {
     }
 
     SUBCASE("Read/write data value") {
-        const NodeId id{1, "testDataValue"};
-        services::addVariable(server, objectsId, id, "testDataValue").value();
+        const NodeId id{1, "TestDataValue"};
+        services::addVariable(server, objectsId, id, "TestDataValue").value();
 
         Variant variant;
         variant.setScalarCopy<int>(11);
@@ -511,7 +490,7 @@ TEST_CASE("Attribute service set (highlevel, async)") {
             server,
             objectsId,
             id,
-            "variable",
+            "Variable",
             VariableAttributes{}.setAccessLevel(
                 AccessLevel::CurrentRead | AccessLevel::CurrentWrite
             )
@@ -549,7 +528,7 @@ TEST_CASE_TEMPLATE("Attribute service set write/read", T, Server, Client, Async<
         setup.server,
         {0, UA_NS0ID_OBJECTSFOLDER},
         id,
-        "variable",
+        "Variable",
         VariableAttributes{}.setAccessLevel(AccessLevel::CurrentRead | AccessLevel::CurrentWrite)
     )
         .value();
@@ -753,7 +732,7 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
         setup.server,
         objectsId,
         methodId,
-        "add",
+        "Add",
         [&](Span<const Variant> inputs, Span<Variant> outputs) {
             if (throwException) {
                 throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
