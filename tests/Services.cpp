@@ -297,8 +297,8 @@ TEST_CASE("Attribute service set (highlevel)") {
         services::addVariable(server, objectsId, id, "TestAttributes").value();
 
         // write new attributes
-        CHECK(services::writeDisplayName(server, id, {"en-US", "NewDisplayName"}));
-        CHECK(services::writeDescription(server, id, {"en-US", "NewDescription"}));
+        CHECK(services::writeDisplayName(server, id, {{}, "NewDisplayName"}));
+        CHECK(services::writeDescription(server, id, {{}, "NewDescription"}));
         CHECK(services::writeWriteMask(server, id, WriteMask::Executable));
         CHECK(services::writeDataType(server, id, NodeId{0, 2}));
         CHECK(services::writeValueRank(server, id, ValueRank::TwoDimensions));
@@ -309,17 +309,9 @@ TEST_CASE("Attribute service set (highlevel)") {
         CHECK(services::writeHistorizing(server, id, true));
 
         // read new attributes
-#if UAPP_OPEN62541_VER_LE(1, 3)
-        // TODO: fails with v1.4: https://github.com/open62541/open62541/issues/6723
-        CHECK(
-            services::readDisplayName(server, id).value() ==
-            LocalizedText("en-US", "NewDisplayName")
-        );
-#endif
-        CHECK(
-            services::readDescription(server, id).value() ==
-            LocalizedText("en-US", "NewDescription")
-        );
+        // https://github.com/open62541/open62541/issues/6723
+        CHECK(services::readDisplayName(server, id).value() == LocalizedText({}, "NewDisplayName"));
+        CHECK(services::readDescription(server, id).value() == LocalizedText({}, "NewDescription"));
         CHECK(services::readWriteMask(server, id).value() == UA_WRITEMASK_EXECUTABLE);
         CHECK(services::readDataType(server, id).value() == NodeId(0, 2));
         CHECK(services::readValueRank(server, id).value() == ValueRank::TwoDimensions);
@@ -1001,14 +993,16 @@ TEST_CASE("MonitoredItem service set (client)") {
             CHECK(response.getResponseHeader().getServiceResult().isGood());
         }
         SUBCASE("Single") {
-            const auto monId = services::createMonitoredItemEvent(
-                client,
-                subId,
-                {ObjectId::Server, AttributeId::EventNotifier},
-                MonitoringMode::Reporting,
-                monitoringParameters,
-                callback
-            ).value();
+            const auto monId =
+                services::createMonitoredItemEvent(
+                    client,
+                    subId,
+                    {ObjectId::Server, AttributeId::EventNotifier},
+                    MonitoringMode::Reporting,
+                    monitoringParameters,
+                    callback
+                )
+                    .value();
             CAPTURE(monId);
         }
 
