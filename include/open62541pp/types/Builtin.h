@@ -98,28 +98,8 @@ public:
     using TypeWrapper<T, typeIndex>::TypeWrapper;  // inherit constructors
 
     template <typename InputIt>
-    StringWrapper(InputIt first, InputIt last) {
-        auto init = [&](size_t length) {
-            this->native().length = length;
-            if (length > 0) {
-                this->native().data = static_cast<uint8_t*>(UA_malloc(length));  // NOLINT
-                if (data() == nullptr) {
-                    throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
-                }
-            }
-        };
-
-        using IteratorCategory = typename std::iterator_traits<InputIt>::iterator_category;
-        if constexpr (std::is_same_v<IteratorCategory, std::input_iterator_tag>) {
-            // input iterator can only be read once -> buffer data in vector
-            std::vector<uint8_t> buffer(first, last);
-            init(buffer.size());
-            std::copy(buffer.begin(), buffer.end(), data());
-        } else {
-            init(std::distance(first, last));
-            std::copy(first, last, data());
-        }
-    }
+    StringWrapper(InputIt first, InputIt last)
+        : StringWrapper(first, last, typename std::iterator_traits<InputIt>::iterator_category{}) {}
 
     StringWrapper(std::initializer_list<CharT> init)
         : StringWrapper(init.begin(), init.end()) {}
@@ -220,6 +200,31 @@ public:
 
     const_reverse_iterator crend() const noexcept {
         return const_reverse_iterator(cbegin());
+    }
+
+protected:
+    void init(size_t length) {
+        this->native().length = length;
+        if (length > 0) {
+            this->native().data = static_cast<uint8_t*>(UA_malloc(length));  // NOLINT
+            if (data() == nullptr) {
+                throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
+            }
+        }
+    }
+
+    template <typename InputIt, typename Tag>
+    StringWrapper(InputIt first, InputIt last, Tag /* unused */) {
+        init(std::distance(first, last));
+        std::copy(first, last, data());
+    }
+
+    template <typename InputIt>
+    StringWrapper(InputIt first, InputIt last, std::input_iterator_tag /* unused */) {
+        // input iterator can only be read once -> buffer data in vector
+        std::vector<uint8_t> buffer(first, last);
+        init(buffer.size());
+        std::copy(buffer.begin(), buffer.end(), data());
     }
 };
 
