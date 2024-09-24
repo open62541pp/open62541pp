@@ -1,4 +1,4 @@
-#include <cstdint>
+#include <type_traits>  // true_type
 
 #include <doctest/doctest.h>
 

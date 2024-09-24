@@ -8,11 +8,13 @@
 #include "open62541pp/Bitmask.h"
 #include "open62541pp/Common.h"  // BrowseDirection
 #include "open62541pp/Config.h"
+#include "open62541pp/ErrorHandling.h"
 #include "open62541pp/NodeIds.h"
 #include "open62541pp/Span.h"
 #include "open62541pp/TypeRegistry.h"  // getDataType
 #include "open62541pp/Wrapper.h"  // asWrapper
 #include "open62541pp/detail/open62541/common.h"
+#include "open62541pp/services/Attribute.h"
 #include "open62541pp/services/Attribute_highlevel.h"
 #include "open62541pp/services/Method.h"
 #include "open62541pp/services/NodeManagement.h"

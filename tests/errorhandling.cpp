@@ -1,6 +1,8 @@
-#include <doctest/doctest.h>
-
+#include <exception>
+#include <new>
 #include <stdexcept>
+
+#include <doctest/doctest.h>
 
 #include "open62541pp/ErrorHandling.h"
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <exception>
-#include <new>
+#include <new>  // bad_alloc
 #include <stdexcept>
 
 #include "open62541pp/detail/open62541/common.h"

@@ -6,13 +6,11 @@
 #include <utility>  // move
 
 #include "open62541pp/Client.h"
-#include "open62541pp/ErrorHandling.h"
-#include "open62541pp/TypeWrapper.h"
+#include "open62541pp/Wrapper.h"  // asNative
 #include "open62541pp/detail/ClientContext.h"
 #include "open62541pp/detail/open62541/client.h"
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/services/detail/ClientService.h"
-#include "open62541pp/services/detail/RequestHandling.h"
 #include "open62541pp/services/detail/ResponseHandling.h"
 #include "open62541pp/services/detail/SubscriptionContext.h"
 #include "open62541pp/types/Composed.h"

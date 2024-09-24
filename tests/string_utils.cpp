@@ -1,5 +1,4 @@
 #include <cstring>
-#include <stdexcept>
 
 #include <doctest/doctest.h>
 

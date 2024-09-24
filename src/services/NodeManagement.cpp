@@ -2,6 +2,7 @@
 
 #include <cassert>
 
+#include "open62541pp/Client.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/detail/ServerContext.h"

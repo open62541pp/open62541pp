@@ -1,3 +1,5 @@
+#include <memory>  // make_unique
+
 #include <doctest/doctest.h>
 
 #include "open62541pp/plugins/PluginAdapter.h"

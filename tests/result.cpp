@@ -1,6 +1,7 @@
-#include <doctest/doctest.h>
-
 #include <stdexcept>
+#include <utility>  // as_const
+
+#include <doctest/doctest.h>
 
 #include "open62541pp/Result.h"
 #include "open62541pp/detail/result_util.h"

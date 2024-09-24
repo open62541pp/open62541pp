@@ -1,3 +1,8 @@
+#include <functional>  // invoke
+#include <future>
+#include <optional>
+#include <utility>  // forward
+
 #include <doctest/doctest.h>
 
 #include "open62541pp/Result.h"
