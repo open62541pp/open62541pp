@@ -79,7 +79,7 @@ public:
         const NodeId& referenceType = ReferenceTypeId::HasComponent
     ) {
         auto result = services::addFolder(
-            connection(), id_, id, browseName, attributes, referenceType
+            connection(), this->id(), id, browseName, attributes, referenceType
         );
         return {connection(), result.value()};
     }
@@ -93,7 +93,7 @@ public:
         const NodeId& referenceType = ReferenceTypeId::HasComponent
     ) {
         auto result = services::addObject(
-            connection(), id_, id, browseName, attributes, objectType, referenceType
+            connection(), this->id(), id, browseName, attributes, objectType, referenceType
         );
         return {connection(), result.value()};
     }
@@ -107,7 +107,7 @@ public:
         const NodeId& referenceType = ReferenceTypeId::HasComponent
     ) {
         auto result = services::addVariable(
-            connection(), id_, id, browseName, attributes, variableType, referenceType
+            connection(), this->id(), id, browseName, attributes, variableType, referenceType
         );
         return {connection(), result.value()};
     }
@@ -116,7 +116,7 @@ public:
     Node addProperty(
         const NodeId& id, std::string_view browseName, const VariableAttributes& attributes = {}
     ) {
-        auto result = services::addProperty(connection(), id_, id, browseName, attributes);
+        auto result = services::addProperty(connection(), this->id(), id, browseName, attributes);
         return {connection(), result.value()};
     }
 
@@ -133,7 +133,7 @@ public:
     ) {
         auto result = services::addMethod(
             connection(),
-            id_,
+            this->id(),
             id,
             browseName,
             std::move(callback),
@@ -154,7 +154,7 @@ public:
         const NodeId& referenceType = ReferenceTypeId::HasSubtype
     ) {
         auto result = services::addObjectType(
-            connection(), id_, id, browseName, attributes, referenceType
+            connection(), this->id(), id, browseName, attributes, referenceType
         );
         return {connection(), result.value()};
     }
@@ -168,7 +168,7 @@ public:
         const NodeId& referenceType = ReferenceTypeId::HasSubtype
     ) {
         auto result = services::addVariableType(
-            connection(), id_, id, browseName, attributes, variableType, referenceType
+            connection(), this->id(), id, browseName, attributes, variableType, referenceType
         );
         return {connection(), result.value()};
     }
@@ -181,7 +181,7 @@ public:
         const NodeId& referenceType = ReferenceTypeId::HasSubtype
     ) {
         auto result = services::addReferenceType(
-            connection(), id_, id, browseName, attributes, referenceType
+            connection(), this->id(), id, browseName, attributes, referenceType
         );
         return {connection(), result.value()};
     }
@@ -194,7 +194,7 @@ public:
         const NodeId& referenceType = ReferenceTypeId::HasSubtype
     ) {
         auto result = services::addDataType(
-            connection(), id_, id, browseName, attributes, referenceType
+            connection(), this->id(), id, browseName, attributes, referenceType
         );
         return {connection(), result.value()};
     }
@@ -207,26 +207,26 @@ public:
         const NodeId& referenceType = ReferenceTypeId::Organizes
     ) {
         auto result = services::addView(
-            connection(), id_, id, browseName, attributes, referenceType
+            connection(), this->id(), id, browseName, attributes, referenceType
         );
         return {connection(), result.value()};
     }
 
     /// @wrapper{services::addReference}
     Node& addReference(const NodeId& targetId, const NodeId& referenceType, bool forward = true) {
-        services::addReference(connection(), id_, targetId, referenceType, forward).value();
+        services::addReference(connection(), id(), targetId, referenceType, forward).value();
         return *this;
     }
 
     /// @wrapper{services::addModellingRule}
     Node& addModellingRule(ModellingRule rule) {
-        services::addModellingRule(connection(), id_, rule).value();
+        services::addModellingRule(connection(), id(), rule).value();
         return *this;
     }
 
     /// @wrapper{services::deleteNode}
     void deleteNode(bool deleteReferences = true) {
-        services::deleteNode(connection(), id_, deleteReferences).value();
+        services::deleteNode(connection(), id(), deleteReferences).value();
     }
 
     /// @wrapper{services::deleteReference}
@@ -237,7 +237,7 @@ public:
         bool deleteBidirectional
     ) {
         services::deleteReference(
-            connection(), id_, targetId, referenceType, isForward, deleteBidirectional
+            connection(), id(), targetId, referenceType, isForward, deleteBidirectional
         )
             .value();
         return *this;
@@ -251,7 +251,7 @@ public:
         Bitmask<NodeClass> nodeClassMask = NodeClass::Unspecified
     ) {
         const BrowseDescription bd(
-            id_,
+            id(),
             browseDirection,
             referenceType,
             includeSubtypes,
@@ -269,7 +269,7 @@ public:
         Bitmask<NodeClass> nodeClassMask = NodeClass::Unspecified
     ) {
         const BrowseDescription bd(
-            id_,
+            id(),
             browseDirection,
             referenceType,
             includeSubtypes,
@@ -299,7 +299,7 @@ public:
     /// The relative path is specified using browse names.
     /// @exception BadStatus (BadNoMatch) If path not found
     Node browseChild(Span<const QualifiedName> path) {
-        auto result = services::browseSimplifiedBrowsePath(connection(), id_, path).value();
+        auto result = services::browseSimplifiedBrowsePath(connection(), id(), path).value();
         for (auto&& target : result.getTargets()) {
             if (target.getTargetId().isLocal()) {
                 return {connection(), std::move(target.getTargetId().getNodeId())};
@@ -329,73 +329,73 @@ public:
     /// @param methodId NodeId of the method (`HasComponent` reference to current node required)
     /// @param inputArguments Input argument values
     std::vector<Variant> callMethod(const NodeId& methodId, Span<const Variant> inputArguments) {
-        return services::call(connection(), id_, methodId, inputArguments).value();
+        return services::call(connection(), id(), methodId, inputArguments).value();
     }
 #endif
 
     /// @wrapper{services::readNodeClass}
     NodeClass readNodeClass() {
-        return services::readNodeClass(connection(), id_).value();
+        return services::readNodeClass(connection(), id()).value();
     }
 
     /// @wrapper{services::readBrowseName}
     QualifiedName readBrowseName() {
-        return services::readBrowseName(connection(), id_).value();
+        return services::readBrowseName(connection(), id()).value();
     }
 
     /// @wrapper{services::readDisplayName}
     LocalizedText readDisplayName() {
-        return services::readDisplayName(connection(), id_).value();
+        return services::readDisplayName(connection(), id()).value();
     }
 
     /// @wrapper{services::readDescription}
     LocalizedText readDescription() {
-        return services::readDescription(connection(), id_).value();
+        return services::readDescription(connection(), id()).value();
     }
 
     /// @wrapper{services::readWriteMask}
     Bitmask<WriteMask> readWriteMask() {
-        return services::readWriteMask(connection(), id_).value();
+        return services::readWriteMask(connection(), id()).value();
     }
 
     /// @wrapper{services::readUserWriteMask}
     Bitmask<WriteMask> readUserWriteMask() {
-        return services::readUserWriteMask(connection(), id_).value();
+        return services::readUserWriteMask(connection(), id()).value();
     }
 
     /// @wrapper{services::readIsAbstract}
     bool readIsAbstract() {
-        return services::readIsAbstract(connection(), id_).value();
+        return services::readIsAbstract(connection(), id()).value();
     }
 
     /// @wrapper{services::readSymmetric}
     bool readSymmetric() {
-        return services::readSymmetric(connection(), id_).value();
+        return services::readSymmetric(connection(), id()).value();
     }
 
     /// @wrapper{services::readInverseName}
     LocalizedText readInverseName() {
-        return services::readInverseName(connection(), id_).value();
+        return services::readInverseName(connection(), id()).value();
     }
 
     /// @wrapper{services::readContainsNoLoops}
     bool readContainsNoLoops() {
-        return services::readContainsNoLoops(connection(), id_).value();
+        return services::readContainsNoLoops(connection(), id()).value();
     }
 
     /// @wrapper{services::readEventNotifier}
     Bitmask<EventNotifier> readEventNotifier() {
-        return services::readEventNotifier(connection(), id_).value();
+        return services::readEventNotifier(connection(), id()).value();
     }
 
     /// @wrapper{services::readDataValue}
     DataValue readDataValue() {
-        return services::readDataValue(connection(), id_).value();
+        return services::readDataValue(connection(), id()).value();
     }
 
     /// @wrapper{services::readValue}
     Variant readValue() {
-        return services::readValue(connection(), id_).value();
+        return services::readValue(connection(), id()).value();
     }
 
     /// Read scalar value from variable node.
@@ -412,52 +412,52 @@ public:
 
     /// @wrapper{services::readDataType}
     NodeId readDataType() {
-        return services::readDataType(connection(), id_).value();
+        return services::readDataType(connection(), id()).value();
     }
 
     /// @wrapper{services::readValueRank}
     ValueRank readValueRank() {
-        return services::readValueRank(connection(), id_).value();
+        return services::readValueRank(connection(), id()).value();
     }
 
     /// @wrapper{services::readArrayDimensions}
     std::vector<uint32_t> readArrayDimensions() {
-        return services::readArrayDimensions(connection(), id_).value();
+        return services::readArrayDimensions(connection(), id()).value();
     }
 
     /// @wrapper{services::readAccessLevel}
     Bitmask<AccessLevel> readAccessLevel() {
-        return services::readAccessLevel(connection(), id_).value();
+        return services::readAccessLevel(connection(), id()).value();
     }
 
     /// @wrapper{services::readUserAccessLevel}
     Bitmask<AccessLevel> readUserAccessLevel() {
-        return services::readUserAccessLevel(connection(), id_).value();
+        return services::readUserAccessLevel(connection(), id()).value();
     }
 
     /// @wrapper{services::readMinimumSamplingInterval}
     double readMinimumSamplingInterval() {
-        return services::readMinimumSamplingInterval(connection(), id_).value();
+        return services::readMinimumSamplingInterval(connection(), id()).value();
     }
 
     /// @wrapper{services::readHistorizing}
     bool readHistorizing() {
-        return services::readHistorizing(connection(), id_).value();
+        return services::readHistorizing(connection(), id()).value();
     }
 
     /// @wrapper{services::readExecutable}
     bool readExecutable() {
-        return services::readExecutable(connection(), id_).value();
+        return services::readExecutable(connection(), id()).value();
     }
 
     /// @wrapper{services::readUserExecutable}
     bool readUserExecutable() {
-        return services::readUserExecutable(connection(), id_).value();
+        return services::readUserExecutable(connection(), id()).value();
     }
 
     /// @wrapper{services::readDataTypeDefinition}
     Variant readDataTypeDefinition() {
-        return services::readDataTypeDefinition(connection(), id_).value();
+        return services::readDataTypeDefinition(connection(), id()).value();
     }
 
     /// Read the value of an object property.
@@ -468,67 +468,67 @@ public:
 
     /// @wrapper{services::writeDisplayName}
     Node& writeDisplayName(const LocalizedText& name) {
-        services::writeDisplayName(connection(), id_, name).value();
+        services::writeDisplayName(connection(), id(), name).value();
         return *this;
     }
 
     /// @wrapper{services::writeDescription}
     Node& writeDescription(const LocalizedText& desc) {
-        services::writeDescription(connection(), id_, desc).value();
+        services::writeDescription(connection(), id(), desc).value();
         return *this;
     }
 
     /// @wrapper{services::writeWriteMask}
     Node& writeWriteMask(Bitmask<WriteMask> mask) {
-        services::writeWriteMask(connection(), id_, mask).value();
+        services::writeWriteMask(connection(), id(), mask).value();
         return *this;
     }
 
     /// @wrapper{services::writeWriteMask}
     Node& writeUserWriteMask(Bitmask<WriteMask> mask) {
-        services::writeUserWriteMask(connection(), id_, mask).value();
+        services::writeUserWriteMask(connection(), id(), mask).value();
         return *this;
     }
 
     /// @wrapper{services::writeIsAbstract}
     Node& writeIsAbstract(bool isAbstract) {
-        services::writeIsAbstract(connection(), id_, isAbstract).value();
+        services::writeIsAbstract(connection(), id(), isAbstract).value();
         return *this;
     }
 
     /// @wrapper{services::writeSymmetric}
     Node& writeSymmetric(bool symmetric) {
-        services::writeSymmetric(connection(), id_, symmetric).value();
+        services::writeSymmetric(connection(), id(), symmetric).value();
         return *this;
     }
 
     /// @wrapper{services::writeInverseName}
     Node& writeInverseName(const LocalizedText& name) {
-        services::writeInverseName(connection(), id_, name).value();
+        services::writeInverseName(connection(), id(), name).value();
         return *this;
     }
 
     /// @wrapper{services::writeContainsNoLoops}
     Node& writeContainsNoLoops(bool containsNoLoops) {
-        services::writeContainsNoLoops(connection(), id_, containsNoLoops).value();
+        services::writeContainsNoLoops(connection(), id(), containsNoLoops).value();
         return *this;
     }
 
     /// @wrapper{services::writeEventNotifier}
     Node& writeEventNotifier(Bitmask<EventNotifier> mask) {
-        services::writeEventNotifier(connection(), id_, mask).value();
+        services::writeEventNotifier(connection(), id(), mask).value();
         return *this;
     }
 
     /// @wrapper{services::writeDataValue}
     Node& writeDataValue(const DataValue& value) {
-        services::writeDataValue(connection(), id_, value).value();
+        services::writeDataValue(connection(), id(), value).value();
         return *this;
     }
 
     /// @wrapper{services::writeValue}
     Node& writeValue(const Variant& value) {
-        services::writeValue(connection(), id_, value).value();
+        services::writeValue(connection(), id(), value).value();
         return *this;
     }
 
@@ -558,7 +558,7 @@ public:
 
     /// @wrapper{services::writeDataType}
     Node& writeDataType(const NodeId& typeId) {
-        services::writeDataType(connection(), id_, typeId).value();
+        services::writeDataType(connection(), id(), typeId).value();
         return *this;
     }
 
@@ -571,49 +571,49 @@ public:
 
     /// @wrapper{services::writeValueRank}
     Node& writeValueRank(ValueRank valueRank) {
-        services::writeValueRank(connection(), id_, valueRank).value();
+        services::writeValueRank(connection(), id(), valueRank).value();
         return *this;
     }
 
     /// @wrapper{services::writeArrayDimensions}
     Node& writeArrayDimensions(Span<const uint32_t> dimensions) {
-        services::writeArrayDimensions(connection(), id_, dimensions).value();
+        services::writeArrayDimensions(connection(), id(), dimensions).value();
         return *this;
     }
 
     /// @wrapper{services::writeAccessLevel}
     Node& writeAccessLevel(Bitmask<AccessLevel> mask) {
-        services::writeAccessLevel(connection(), id_, mask).value();
+        services::writeAccessLevel(connection(), id(), mask).value();
         return *this;
     }
 
     /// @wrapper{services::writeUserAccessLevel}
     Node& writeUserAccessLevel(Bitmask<AccessLevel> mask) {
-        services::writeUserAccessLevel(connection(), id_, mask).value();
+        services::writeUserAccessLevel(connection(), id(), mask).value();
         return *this;
     }
 
     /// @wrapper{services::writeMinimumSamplingInterval}
     Node& writeMinimumSamplingInterval(double milliseconds) {
-        services::writeMinimumSamplingInterval(connection(), id_, milliseconds).value();
+        services::writeMinimumSamplingInterval(connection(), id(), milliseconds).value();
         return *this;
     }
 
     /// @wrapper{services::writeHistorizing}
     Node& writeHistorizing(bool historizing) {
-        services::writeHistorizing(connection(), id_, historizing).value();
+        services::writeHistorizing(connection(), id(), historizing).value();
         return *this;
     }
 
     /// @wrapper{services::writeExecutable}
     Node& writeExecutable(bool executable) {
-        services::writeExecutable(connection(), id_, executable).value();
+        services::writeExecutable(connection(), id(), executable).value();
         return *this;
     }
 
     /// @wrapper{services::writeUserExecutable}
     Node& writeUserExecutable(bool userExecutable) {
-        services::writeUserExecutable(connection(), id_, userExecutable).value();
+        services::writeUserExecutable(connection(), id(), userExecutable).value();
         return *this;
     }
 
@@ -630,7 +630,7 @@ private:
         auto result =
             services::translateBrowsePathToNodeIds(
                 connection(),
-                BrowsePath(id_, {{ReferenceTypeId::HasProperty, false, true, propertyName}})
+                BrowsePath(id(), {{ReferenceTypeId::HasProperty, false, true, propertyName}})
             ).value();
         result.getStatusCode().throwIfBad();
         for (auto&& target : result.getTargets()) {
