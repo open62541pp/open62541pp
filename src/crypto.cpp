@@ -12,7 +12,7 @@
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/open62541/common.h"
 
-#include "plugins/LoggerAdapter.h"
+#include "plugins/logger_adapter.h"
 
 namespace opcua::crypto {
 

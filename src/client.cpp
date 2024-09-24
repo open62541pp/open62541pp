@@ -18,7 +18,7 @@
 #include "open62541pp/services/Attribute_highlevel.h"  // readValue
 #include "open62541pp/services/Subscription.h"
 
-#include "ClientConfig.h"
+#include "client_config.h"
 
 namespace opcua {
 

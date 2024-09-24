@@ -117,28 +117,26 @@ configure_file(
 )
 add_library(
     open62541pp
-    src/AccessControl.cpp
-    src/Client.cpp
-    src/Crypto.cpp
-    src/DataType.cpp
-    src/Event.cpp
-    src/Logger.cpp
-    src/MonitoredItem.cpp
-    src/Node.cpp
-    src/Server.cpp
-    src/Session.cpp
-    src/Subscription.cpp
-    src/detail/string_utils.cpp
-    src/services/Attribute.cpp
-    src/services/Method.cpp
-    src/services/MonitoredItem.cpp
-    src/services/NodeManagement.cpp
-    src/services/Subscription.cpp
-    src/services/View.cpp
-    src/types/Builtin.cpp
-    src/types/Composed.cpp
-    src/types/DateTime.cpp
-    src/types/NodeId.cpp
+    src/client.cpp
+    src/crypto.cpp
+    src/datatype.cpp
+    src/event.cpp
+    src/log.cpp
+    src/monitoreditem.cpp
+    src/node.cpp
+    src/plugins/accesscontrol.cpp
+    src/server.cpp
+    src/services_attribute.cpp
+    src/services_method.cpp
+    src/services_monitoreditem.cpp
+    src/services_nodemanagement.cpp
+    src/services_subscription.cpp
+    src/services_view.cpp
+    src/session.cpp
+    src/string_utils.cpp
+    src/subscription.cpp
+    src/types_builtin.cpp
+    src/types_composed.cpp
 )
 add_library(open62541pp::open62541pp ALIAS open62541pp)
 target_include_directories(

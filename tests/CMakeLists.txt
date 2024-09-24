@@ -16,7 +16,7 @@ add_executable(
     exceptioncatcher.cpp
     logger.cpp
     node.cpp
-    pluginmanager.cpp
+    plugin_manager.cpp
     result.cpp
     scopeexit.cpp
     server.cpp
