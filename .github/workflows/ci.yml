@@ -126,7 +126,7 @@ jobs:
         include:
           - config:
               name: Clang-Tidy
-              os: ubuntu-22.04
+              os: ubuntu-24.04
               compiler: clang++
               flags: "-DUAPP_ENABLE_CLANG_TIDY=ON"
             build_type: Debug
