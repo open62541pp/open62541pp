@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cassert>
 #include <memory>
 #include <type_traits>
 #include <variant>
@@ -21,7 +22,7 @@ public:
     void assign(std::unique_ptr<AdapterType> adapter) {
         if (adapter != nullptr) {
             adapter_ = std::move(adapter);
-            assign();
+            create();
         }
     }
 
@@ -29,7 +30,7 @@ public:
     void assign(AdapterType* adapter) {
         if (adapter != nullptr) {
             adapter_ = adapter;
-            assign();
+            create();
         }
     }
 
@@ -39,15 +40,26 @@ public:
     }
 
 private:
-    void assign() {
+    void create() {
         assert(adapter() != nullptr);
-        adapter()->clear(managed_);
+        clear();
+        managed() = adapter()->create();
+    }
+
+    void clear() noexcept {
+        if (adapter() != nullptr) {
+            adapter()->clear(managed_);
+        }
+    }
+
+    PluginType& managed() {
         if constexpr (std::is_pointer_v<T>) {
-            adapter()->clear(plugin_.get());
-            plugin_ = std::make_unique<PluginType>(adapter()->create());
-            managed_ = plugin_.get();
+            if (managed_ == nullptr) {
+                managed_ = std::make_unique<PluginType>(PluginType{}).release();
+            }
+            return *managed_;
         } else {
-            managed_ = adapter()->create();
+            return managed_;
         }
     }
 
@@ -63,7 +75,6 @@ private:
 
     T& managed_;
     std::variant<AdapterType*, std::unique_ptr<AdapterType>> adapter_;
-    std::unique_ptr<PluginType> plugin_;  // store the plugin here if T is a pointer
 };
 
 }  // namespace opcua

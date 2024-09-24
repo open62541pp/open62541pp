@@ -28,15 +28,15 @@ public:
     PluginAdapter& operator=(const PluginAdapter&) = default;
     PluginAdapter& operator=(PluginAdapter&&) noexcept = default;
 
+    virtual T create() = 0;
+
     virtual void clear(T& plugin) noexcept = 0;
 
-    void clear(T* plugin) noexcept {
+    virtual void clear(T*& plugin) noexcept {
         if (plugin != nullptr) {
             clear(*plugin);
         }
     }
-
-    virtual T create() = 0;
 };
 
 }  // namespace opcua

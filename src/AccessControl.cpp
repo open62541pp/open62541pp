@@ -299,19 +299,6 @@ static UA_Boolean allowHistoryUpdateDeleteRawModifiedNative(
 }
 #endif
 
-void AccessControlBase::clear(UA_AccessControl& ac) noexcept {
-#if UAPP_OPEN62541_VER_GE(1, 1)
-    if (ac.clear != nullptr) {
-        ac.clear(&ac);
-    }
-#else
-    if (ac.deleteMembers != nullptr) {
-        ac.deleteMembers(&ac);
-    }
-#endif
-    ac = UA_AccessControl{};
-}
-
 UA_AccessControl AccessControlBase::create() {
     UA_AccessControl ac{};
     ac.context = this;
@@ -338,6 +325,19 @@ UA_AccessControl AccessControlBase::create() {
     ac.allowHistoryUpdateDeleteRawModified = allowHistoryUpdateDeleteRawModifiedNative;
 #endif
     return ac;
+}
+
+void AccessControlBase::clear(UA_AccessControl& ac) noexcept {
+#if UAPP_OPEN62541_VER_GE(1, 1)
+    if (ac.clear != nullptr) {
+        ac.clear(&ac);
+    }
+#else
+    if (ac.deleteMembers != nullptr) {
+        ac.deleteMembers(&ac);
+    }
+#endif
+    ac = UA_AccessControl{};
 }
 
 /* ----------------------------------- Default access control ----------------------------------- */
