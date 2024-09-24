@@ -52,7 +52,7 @@ static ContentFilter concatFilterElements(
         totalSize, UA_TYPES[UA_TYPES_CONTENTFILTERELEMENT]
     );
 
-    Span<ContentFilterElement> resultElements(
+    const Span<ContentFilterElement> resultElements(
         asWrapper<ContentFilterElement>(result->elements), totalSize
     );
 

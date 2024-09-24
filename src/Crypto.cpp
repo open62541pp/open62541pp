@@ -40,7 +40,7 @@ CreateCertificateResult createCertificate(
             }
         }
     );
-    UA_Logger logger = loggerAdapter.create();
+    const UA_Logger logger = loggerAdapter.create();
 
     CreateCertificateResult result;
     const auto status = UA_CreateCertificate(

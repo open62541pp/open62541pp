@@ -125,9 +125,9 @@ struct AttributeHandler<AttributeId::NodeClass> {
     using Type = NodeClass;
 
     static Result<Type> fromDataValue(DataValue&& dv) noexcept {
-        return getVariant(std::move(dv)).transform([](Variant&& var) {
+        return getVariant(std::move(dv)).transform([](const Variant& var) {
             // workaround to read enum from variant...
-            return *static_cast<NodeClass*>(var.data());
+            return *static_cast<const NodeClass*>(var.data());
         });
     }
 };

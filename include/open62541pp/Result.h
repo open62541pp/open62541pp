@@ -94,6 +94,8 @@ public:
 
     // NOLINTEND(*-explicit-conversions)
 
+    // NOLINTBEGIN(bugprone-unchecked-optional-access)
+
     /**
      * Get the value of the Result.
      * Accessing a Result without a value leads to undefined behavior.
@@ -129,6 +131,8 @@ public:
     constexpr const T&& operator*() const&& noexcept {
         return std::move(*maybeValue_);
     }
+
+    // NOLINTEND(bugprone-unchecked-optional-access)
 
     /**
      * Get the StatusCode of the Result.
@@ -282,7 +286,7 @@ public:
 
 private:
     template <typename Self, typename F>
-    inline static auto transformImpl(Self&& self, F&& func) {
+    static auto transformImpl(Self&& self, F&& func) {
         using Value = decltype(*std::forward<Self>(self));
         using NewValue = std::remove_cv_t<std::invoke_result_t<F, Value>>;
         if (self.hasValue()) {
@@ -299,7 +303,7 @@ private:
     }
 
     template <typename Self, typename F>
-    inline static auto andThenImpl(Self&& self, F&& func) {
+    static auto andThenImpl(Self&& self, F&& func) {
         using Value = decltype(*std::forward<Self>(self));
         if constexpr (std::is_invocable_v<F, Value, StatusCode>) {
             using NewResult = std::remove_cv_t<std::invoke_result_t<F, Value, StatusCode>>;
@@ -315,7 +319,7 @@ private:
     }
 
     template <typename Self, typename F>
-    inline static auto orElseImpl(Self&& self, F&& func) {
+    static auto orElseImpl(Self&& self, F&& func) {
         using NewResult = std::remove_cv_t<std::invoke_result_t<F, decltype(self.code())>>;
         return self.hasValue()
             ? std::forward<Self>(self)

@@ -92,7 +92,7 @@ static void closeSessionNative(
 ) {
     try {
         auto session = getSession(server, sessionId);
-        getAdapter(ac).closeSession(session.value());
+        getAdapter(ac).closeSession(session.value());  // NOLINT(bugprone-unchecked-optional-access)
     } catch (const std::exception& e) {
         logException(server, "closeSession", e.what());
     }
@@ -348,9 +348,9 @@ constexpr std::string_view policyIdUsername = "open62541-username-policy";
 AccessControlDefault::AccessControlDefault(bool allowAnonymous, std::vector<Login> logins)
     : allowAnonymous_(allowAnonymous),
       logins_(std::move(logins)) {
-    std::string_view issuedTokenType{};
-    std::string_view issuerEndpointUrl{};
-    std::string_view securityPolicyUri{};
+    const std::string_view issuedTokenType{};
+    const std::string_view issuerEndpointUrl{};
+    const std::string_view securityPolicyUri{};
     if (allowAnonymous_) {
         userTokenPolicies_.emplace_back(
             policyIdAnonymous,

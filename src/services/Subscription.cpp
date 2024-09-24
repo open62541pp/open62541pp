@@ -64,7 +64,7 @@ Result<uint32_t> createSubscription(
         std::move(statusChangeCallback),
         std::move(deleteCallback)
     );
-    if (StatusCode serviceResult = detail::getServiceResult(response); serviceResult.isBad()) {
+    if (const StatusCode serviceResult = detail::getServiceResult(response); serviceResult.isBad()) {
         return BadResult(serviceResult);
     }
     detail::reviseSubscriptionParameters(parameters, asNative(response));
@@ -90,7 +90,7 @@ Result<void> modifySubscription(
     const ModifySubscriptionResponse response = UA_Client_Subscriptions_modify(
         connection.handle(), request
     );
-    if (StatusCode serviceResult = detail::getServiceResult(response); serviceResult.isBad()) {
+    if (const StatusCode serviceResult = detail::getServiceResult(response); serviceResult.isBad()) {
         return BadResult(serviceResult);
     }
     detail::reviseSubscriptionParameters(parameters, asNative(response));

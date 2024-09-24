@@ -17,7 +17,7 @@
 #include "open62541pp/detail/ConnectionBase.h"
 #include "open62541pp/detail/ServerContext.h"
 #include "open62541pp/detail/result_util.h"  // tryInvoke
-#include "open62541pp/services/Attribute.h"
+#include "open62541pp/services/Attribute_highlevel.h"
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/DataValue.h"

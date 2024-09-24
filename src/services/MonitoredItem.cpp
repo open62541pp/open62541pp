@@ -239,7 +239,7 @@ Result<void> modifyMonitoredItem(
     );
     return detail::getSingleResult(asNative(response))
         .andThen([&](UA_MonitoredItemModifyResult& result) -> Result<void> {
-            if (StatusCode code = result.statusCode; code.isBad()) {
+            if (const StatusCode code = result.statusCode; code.isBad()) {
                 return BadResult(code);
             }
             detail::reviseMonitoringParameters(parameters, result);
@@ -294,15 +294,15 @@ Result<void> setTriggering(
             subscriptionId, triggeringItemId, linksToAdd, linksToRemove
         ),
         [](UA_SetTriggeringResponse& response) -> Result<void> {
-            if (StatusCode code = response.responseHeader.serviceResult; code.isBad()) {
+            if (const StatusCode code = response.responseHeader.serviceResult; code.isBad()) {
                 return BadResult(code);
             }
-            for (StatusCode code : Span(response.addResults, response.addResultsSize)) {
+            for (const StatusCode code : Span(response.addResults, response.addResultsSize)) {
                 if (code.isBad()) {
                     return BadResult(code);
                 }
             }
-            for (StatusCode code : Span(response.removeResults, response.removeResultsSize)) {
+            for (const StatusCode code : Span(response.removeResults, response.removeResultsSize)) {
                 if (code.isBad()) {
                     return BadResult(code);
                 }

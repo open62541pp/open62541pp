@@ -10,7 +10,7 @@ int main() {
 
     // Browse method node
     opcua::Node objectsNode(client, opcua::ObjectId::ObjectsFolder);
-    opcua::Node greetMethodNode = objectsNode.browseChild({{1, "Greet"}});
+    const opcua::Node greetMethodNode = objectsNode.browseChild({{1, "Greet"}});
 
     // Call method from parent node (Objects)
     const auto outputs = objectsNode.callMethod(

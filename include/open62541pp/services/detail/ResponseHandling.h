@@ -51,7 +51,7 @@ inline StatusCode getServiceResult(const Response& response) noexcept {
 
 template <typename Response>
 auto getSingleResult(Response& response) noexcept -> Result<decltype(std::ref(*response.results))> {
-    if (StatusCode serviceResult = getServiceResult(response); serviceResult.isBad()) {
+    if (const StatusCode serviceResult = getServiceResult(response); serviceResult.isBad()) {
         return BadResult(serviceResult);
     }
     if (response.results == nullptr || response.resultsSize != 1) {
@@ -68,17 +68,17 @@ inline Result<void> toResult(UA_StatusCode code) noexcept {
 }
 
 inline Result<NodeId> getAddedNodeId(UA_AddNodesResult& result) noexcept {
-    if (StatusCode code = result.statusCode; code.isBad()) {
+    if (const StatusCode code = result.statusCode; code.isBad()) {
         return BadResult(code);
     }
     return {std::exchange(result.addedNodeId, {})};
 }
 
 inline Result<std::vector<Variant>> getOutputArguments(UA_CallMethodResult& result) noexcept {
-    if (StatusCode code = result.statusCode; code.isBad()) {
+    if (const StatusCode code = result.statusCode; code.isBad()) {
         return BadResult(result.statusCode);
     }
-    for (StatusCode code : Span(result.inputArgumentResults, result.inputArgumentResultsSize)) {
+    for (const StatusCode code : Span(result.inputArgumentResults, result.inputArgumentResultsSize)) {
         if (code.isBad()) {
             return BadResult(code);
         }
@@ -111,7 +111,7 @@ inline void reviseMonitoringParameters(
 }
 
 inline Result<uint32_t> getMonitoredItemId(const UA_MonitoredItemCreateResult& result) noexcept {
-    if (StatusCode code = result.statusCode; code.isBad()) {
+    if (const StatusCode code = result.statusCode; code.isBad()) {
         return BadResult(code);
     }
     return result.monitoredItemId;
