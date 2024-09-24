@@ -11,7 +11,7 @@ namespace opcua {
 
 template <typename T>
 std::vector<MonitoredItem<T>> Subscription<T>::getMonitoredItems() {
-    auto& monitoredItems = opcua::detail::getContext(connection_).monitoredItems;
+    auto& monitoredItems = opcua::detail::getContext(connection()).monitoredItems;
     monitoredItems.eraseStale();
     auto lock = monitoredItems.acquireLock();
     const auto& map = monitoredItems.underlying();
@@ -19,8 +19,8 @@ std::vector<MonitoredItem<T>> Subscription<T>::getMonitoredItems() {
     result.reserve(map.size());
     for (const auto& [subMonId, _] : map) {
         const auto [subId, monId] = subMonId;
-        if (subId == subscriptionId_) {
-            result.emplace_back(connection_, subId, monId);
+        if (subId == subscriptionId()) {
+            result.emplace_back(connection(), subId, monId);
         }
     }
     return result;

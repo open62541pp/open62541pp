@@ -51,17 +51,17 @@ public:
     /// Wrap an existing subscription.
     /// The `subscriptionId` is ignored and set to `0U` for servers.
     Subscription(Connection& connection, uint32_t subscriptionId) noexcept
-        : connection_(connection),
+        : connection_(&connection),
           subscriptionId_(std::is_same_v<Connection, Server> ? 0U : subscriptionId) {}
 
     /// Get the server/client instance.
     Connection& connection() noexcept {
-        return connection_;
+        return *connection_;
     }
 
     /// Get the server/client instance.
     const Connection& connection() const noexcept {
-        return connection_;
+        return *connection_;
     }
 
     /// Get the server-assigned identifier of this subscription.
@@ -76,14 +76,14 @@ public:
     /// @note Not implemented for Server.
     /// @see services::modifySubscription
     void setSubscriptionParameters(SubscriptionParameters& parameters) {
-        services::modifySubscription(connection_, subscriptionId_, parameters).value();
+        services::modifySubscription(connection(), subscriptionId(), parameters).value();
     }
 
     /// Enable/disable publishing of notification messages.
     /// @note Not implemented for Server.
     /// @see services::setPublishingMode
     void setPublishingMode(bool publishing) {
-        services::setPublishingMode(connection_, subscriptionId_, publishing).value();
+        services::setPublishingMode(connection(), subscriptionId(), publishing).value();
     }
 
     /// Create a monitored item for data change notifications.
@@ -96,14 +96,14 @@ public:
         DataChangeNotificationCallback onDataChange
     ) {
         const auto result = services::createMonitoredItemDataChange(
-            connection_,
-            subscriptionId_,
+            connection(),
+            subscriptionId(),
             {id, attribute},
             monitoringMode,
             parameters,
             std::move(onDataChange)
         );
-        return {connection_, subscriptionId_, result.value()};
+        return {connection(), subscriptionId(), result.value()};
     }
 
     /// Create a monitored item for data change notifications (default settings).
@@ -129,14 +129,14 @@ public:
         EventNotificationCallback onEvent  // NOLINT(*-unnecessary-value-param), false positive?
     ) {
         const auto result = services::createMonitoredItemEvent(
-            connection_,
-            subscriptionId_,
+            connection(),
+            subscriptionId(),
             {id, AttributeId::EventNotifier},
             monitoringMode,
             parameters,
             std::move(onEvent)
         );
-        return {connection_, subscriptionId_, result.value()};
+        return {connection(), subscriptionId(), result.value()};
     }
 
     /// Create a monitored item for event notifications (default settings).
@@ -154,11 +154,11 @@ public:
     /// Delete this subscription.
     /// @note Not implemented for Server.
     void deleteSubscription() {
-        services::deleteSubscription(connection_, subscriptionId_).value();
+        services::deleteSubscription(connection(), subscriptionId()).value();
     }
 
 private:
-    Connection& connection_;
+    Connection* connection_;
     uint32_t subscriptionId_{0U};
 };
 
