@@ -5,8 +5,7 @@
 #include "open62541pp/Config.h"
 #include "open62541pp/Node.h"
 
-#include "helper/ServerClientSetup.h"
-#include "helper/stringify.h"
+#include "helper/server_client_setup.h"
 
 using namespace opcua;
 

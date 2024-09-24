@@ -7,8 +7,8 @@
 #include "open62541pp/Client.h"
 #include "open62541pp/Server.h"
 
-#include "AsyncTrait.h"
-#include "Runner.h"
+#include "async_trait.h"
+#include "server_runner.h"
 
 template <typename T>
 inline constexpr bool isServer = std::is_same_v<std::remove_reference_t<T>, opcua::Server>;

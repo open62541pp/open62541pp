@@ -10,7 +10,7 @@
 #include "open62541pp/Server.h"
 #include "open62541pp/detail/open62541/client.h"
 
-#include "helper/Runner.h"
+#include "helper/server_runner.h"
 
 using namespace std::chrono_literals;
 using namespace opcua;
