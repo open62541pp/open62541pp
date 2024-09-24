@@ -1,7 +1,6 @@
 #pragma once
 
 #include <cstdint>
-#include <functional>
 #include <type_traits>
 #include <utility>  // move
 #include <vector>
@@ -9,7 +8,6 @@
 #include "open62541pp/Common.h"  // AttributeId, MonitoringMode
 #include "open62541pp/Config.h"
 #include "open62541pp/MonitoredItem.h"
-#include "open62541pp/Span.h"
 #include "open62541pp/services/MonitoredItem.h"
 #include "open62541pp/services/Subscription.h"
 #include "open62541pp/types/ExtensionObject.h"
@@ -20,10 +18,8 @@
 namespace opcua {
 
 // forward declarations
-class DataValue;
 class EventFilter;
 class Server;
-class Variant;
 
 using SubscriptionParameters = services::SubscriptionParameters;
 using MonitoringParametersEx = services::MonitoringParametersEx;

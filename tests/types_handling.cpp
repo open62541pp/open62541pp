@@ -1,5 +1,4 @@
-#include <cstring>
-#include <stdexcept>
+#include <new>  // bad_alloc
 
 #include <doctest/doctest.h>
 

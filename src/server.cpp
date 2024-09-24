@@ -2,7 +2,6 @@
 
 #include <atomic>
 #include <cassert>
-#include <cstddef>
 #include <mutex>
 #include <utility>  // move
 

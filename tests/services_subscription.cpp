@@ -1,8 +1,6 @@
 #include <doctest/doctest.h>
 
 #include "open62541pp/Config.h"
-#include "open62541pp/NodeIds.h"
-#include "open62541pp/services/NodeManagement.h" // addVariable
 #include "open62541pp/services/Subscription.h"
 
 #include "helper/server_client_setup.h"

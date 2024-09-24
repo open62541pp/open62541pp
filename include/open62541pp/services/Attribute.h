@@ -1,27 +1,20 @@
 #pragma once
 
-#include <cassert>
-#include <cstdint>
 #include <utility>
-#include <vector>
 
-#include "open62541pp/Bitmask.h"
 #include "open62541pp/Client.h"
 #include "open62541pp/Common.h"  // TimestampsToReturn
-#include "open62541pp/ErrorHandling.h"
+#include "open62541pp/Result.h"
 #include "open62541pp/Span.h"
-#include "open62541pp/TypeWrapper.h"
 #include "open62541pp/async.h"
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/services/detail/AttributeHandler.h"
 #include "open62541pp/services/detail/ClientService.h"
 #include "open62541pp/services/detail/RequestHandling.h"
 #include "open62541pp/services/detail/ResponseHandling.h"
-#include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/DataValue.h"
 #include "open62541pp/types/NodeId.h"
-#include "open62541pp/types/Variant.h"
 
 namespace opcua::services {
 

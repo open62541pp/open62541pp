@@ -6,7 +6,6 @@
 #include <iomanip>  // put_time
 #include <ostream>
 #include <sstream>
-#include <utility>  // move
 
 #include "open62541pp/Config.h"
 

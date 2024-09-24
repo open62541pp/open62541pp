@@ -1,12 +1,23 @@
 [
-  { include: ["\"open62541/config.h\"", private, "\"open62541pp/Config.h\"", public] },
-  { include: ["\"open62541/config.h\"", private, "\"open62541pp/open62541.h\"", public] },
-  { include: ["\"open62541/common.h\"", private, "\"open62541pp/open62541.h\"", public] },
-  { include: ["\"open62541/nodeids.h\"", private, "\"open62541pp/open62541.h\"", public] },
-  { include: ["\"open62541/statuscodes.h\"", private, "\"open62541pp/open62541.h\"", public] },
-  { include: ["\"open62541/types.h\"", private, "\"open62541pp/open62541.h\"", public] },
-  { include: ["\"open62541/types_generated.h\"", private, "\"open62541pp/open62541.h\"", public] },
+  { include: ["\"open62541/client.h\"", private, "\"open62541pp/detail/open62541/client.h\"", public] },
+  { include: ["\"open62541/client_config.h\"", private, "\"open62541pp/detail/open62541/client.h\"", public] },
+  { include: ["\"open62541/client_config_default.h\"", private, "\"open62541pp/detail/open62541/client.h\"", public] },
+  { include: ["\"open62541/client_subscriptions.h\"", private, "\"open62541pp/detail/open62541/client.h\"", public] },
 
-  { include: ["@\"open62541/.*\"", private, "\"open62541_impl.h\"", public] },
-  { include: ["@\"open62541/.*\"", private, "\"../open62541_impl.h\"", public] },
+  { include: ["\"open62541/common.h\"", private, "\"open62541pp/detail/open62541/common.h\"", public] },
+  { include: ["\"open62541/constants.h\"", private, "\"open62541pp/detail/open62541/common.h\"", public] },
+  { include: ["\"open62541/nodeids.h\"", private, "\"open62541pp/detail/open62541/common.h\"", public] },
+  { include: ["\"open62541/statuscodes.h\"", private, "\"open62541pp/detail/open62541/common.h\"", public] },
+  { include: ["\"open62541/types.h\"", private, "\"open62541pp/detail/open62541/common.h\"", public] },
+  { include: ["\"open62541/types_generated.h\"", private, "\"open62541pp/detail/open62541/common.h\"", public] },
+  { include: ["\"open62541/util.h\"", private, "\"open62541pp/detail/open62541/common.h\"", public] },
+  { include: ["\"open62541/plugin/accesscontrol.h\"", private, "\"open62541pp/detail/open62541/common.h\"", public] },
+  { include: ["\"open62541/plugin/log.h\"", private, "\"open62541pp/detail/open62541/common.h\"", public] },
+
+  { include: ["\"open62541/config.h\"", private, "\"open62541pp/detail/open62541/config.h\"", public] },
+  { include: ["\"open62541/config.h\"", private, "\"open62541pp/Config.h\"", public] },
+
+  { include: ["\"open62541/server.h\"", private, "\"open62541pp/detail/open62541/server.h\"", public] },
+  { include: ["\"open62541/server_config.h\"", private, "\"open62541pp/detail/open62541/server.h\"", public] },
+  { include: ["\"open62541/server_config_default.h\"", private, "\"open62541pp/detail/open62541/server.h\"", public] },
 ]

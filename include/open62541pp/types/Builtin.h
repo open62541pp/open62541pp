@@ -10,7 +10,6 @@
 #include <string>
 #include <string_view>
 #include <type_traits>  // is_same_v
-#include <utility>  // move
 #include <vector>
 
 #include "open62541pp/Common.h"  // NamespaceIndex

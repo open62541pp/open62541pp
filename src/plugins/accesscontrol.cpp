@@ -1,12 +1,16 @@
 #include "open62541pp/AccessControl.h"
 
+#include <cassert>
+#include <cstdint>
+#include <exception>
 #include <functional>  // invoke
+#include <optional>
 #include <string>
 #include <string_view>
+#include <type_traits>  // invoke_result_t
 #include <utility>  // move
 
 #include "open62541pp/Config.h"
-#include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Logger.h"
 #include "open62541pp/Server.h"  // getWrapper
 #include "open62541pp/Session.h"

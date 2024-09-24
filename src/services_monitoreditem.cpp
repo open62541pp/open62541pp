@@ -2,13 +2,12 @@
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 
-#include <algorithm>  // for_each_n
 #include <cstddef>
 #include <memory>
 #include <utility>  // move
+#include <vector>
 
 #include "open62541pp/Client.h"
-#include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Server.h"
 #include "open62541pp/detail/ClientContext.h"
 #include "open62541pp/detail/ServerContext.h"
@@ -17,6 +16,7 @@
 #include "open62541pp/services/detail/ClientService.h"
 #include "open62541pp/services/detail/RequestHandling.h"
 #include "open62541pp/services/detail/ResponseHandling.h"
+#include "open62541pp/types/Builtin.h"  // StatusCode
 
 namespace opcua::services {
 
