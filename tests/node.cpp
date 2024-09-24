@@ -20,13 +20,13 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client) {
     services::writeAccessLevel(setup.server, varId, 0xFF).value();
     services::writeWriteMask(setup.server, varId, 0xFFFFFFFF).value();
 
-    opcua::Node rootNode(connection, opcua::ObjectId::RootFolder);
-    opcua::Node objNode(connection, opcua::ObjectId::ObjectsFolder);
-    opcua::Node varNode(connection, varId);
-    opcua::Node refNode(connection, ReferenceTypeId::References);
+    Node rootNode(connection, ObjectId::RootFolder);
+    Node objNode(connection, ObjectId::ObjectsFolder);
+    Node varNode(connection, varId);
+    Node refNode(connection, ReferenceTypeId::References);
 
     SUBCASE("connection") {
-        CHECK(rootNode.connection() == connection);
+        CHECK(Node(connection, {}).connection() == connection);
     }
 
     SUBCASE("id") {
@@ -53,12 +53,12 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client) {
 
     SUBCASE("Add type nodes") {
         CHECK(
-            opcua::Node(connection, ObjectTypeId::BaseObjectType)
+            Node(connection, ObjectTypeId::BaseObjectType)
                 .addObjectType({1, 1000}, "objecttype")
                 .readNodeClass() == NodeClass::ObjectType
         );
         CHECK(
-            opcua::Node(connection, VariableTypeId::BaseVariableType)
+            Node(connection, VariableTypeId::BaseVariableType)
                 .addVariableType({1, 1001}, "variabletype")
                 .readNodeClass() == NodeClass::VariableType
         );
@@ -115,8 +115,7 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client) {
     SUBCASE("Read/write variable node attributes") {
         // https://github.com/open62541/open62541/issues/6723
         CHECK_EQ(
-            varNode.writeDisplayName({{}, "name"}).readDisplayName(),
-            LocalizedText({{}, "name"})
+            varNode.writeDisplayName({{}, "name"}).readDisplayName(), LocalizedText({{}, "name"})
         );
         CHECK_EQ(
             varNode.writeDescription({"en-US", "desc"}).readDescription(),
