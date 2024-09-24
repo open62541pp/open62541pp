@@ -46,7 +46,7 @@ int main() {
         opcua::ObjectId::Server,
         eventFilter,
         [&](uint32_t subId, uint32_t monId, opcua::Span<const opcua::Variant> eventFields) {
-            const opcua::MonitoredItem item(client, subId, monId);
+            opcua::MonitoredItem item(client, subId, monId);
             std::cout
                 << "Event notification:\n"
                 << "- subscription id:   " << item.subscriptionId() << "\n"

@@ -59,10 +59,10 @@ public:
     }
 
     /// Get the monitored NodeId.
-    const NodeId& getNodeId() const;
+    const NodeId& getNodeId();
 
     /// Get the monitored AttributeId.
-    AttributeId getAttributeId() const;
+    AttributeId getAttributeId();
 
     /// Modify this monitored item.
     /// @note Not implemented for Server.
