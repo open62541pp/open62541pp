@@ -46,7 +46,6 @@ struct CreateCertificateResult {
 CreateCertificateResult createCertificate(
     Span<const String> subject,
     Span<const String> subjectAltName,
-    size_t keySizeBits = 2048,
     CertificateFormat certificateFormat = CertificateFormat::DER
 );
 

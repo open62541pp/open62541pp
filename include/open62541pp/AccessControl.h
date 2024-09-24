@@ -119,8 +119,8 @@ public:
         bool isDeleteModified
     ) = 0;
 
-    void clear(UA_AccessControl& ac) noexcept override;
     UA_AccessControl create() override;
+    void clear(UA_AccessControl& ac) noexcept override;
 };
 
 /* ----------------------------------- Default access control ----------------------------------- */

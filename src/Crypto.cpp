@@ -6,6 +6,7 @@
 #include <string>
 #include <string_view>
 
+#include "open62541pp/Config.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Logger.h"
 #include "open62541pp/TypeWrapper.h"
@@ -23,7 +24,6 @@ static_assert(static_cast<int>(CertificateFormat::PEM) == UA_CERTIFICATEFORMAT_P
 CreateCertificateResult createCertificate(
     Span<const String> subject,
     Span<const String> subjectAltName,
-    size_t keySizeBits,
     CertificateFormat certificateFormat
 ) {
     if (subject.empty() || subjectAltName.empty()) {
@@ -49,8 +49,13 @@ CreateCertificateResult createCertificate(
         subject.size(),
         asNative(subjectAltName.data()),
         subjectAltName.size(),
-        keySizeBits,
+#if UAPP_OPEN62541_VER_LE(1, 3)
+        0,  // keySizeBits, 0 = maximum
+#endif
         static_cast<UA_CertificateFormat>(certificateFormat),
+#if UAPP_OPEN62541_VER_GE(1, 4)
+        nullptr,  // key value map with optional parameters
+#endif
         result.privateKey.handle(),
         result.certificate.handle()
     );

@@ -114,9 +114,10 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client) {
     }
 
     SUBCASE("Read/write variable node attributes") {
+        // https://github.com/open62541/open62541/issues/6723
         CHECK_EQ(
-            varNode.writeDisplayName({"en-US", "name"}).readDisplayName(),
-            LocalizedText({"en-US", "name"})
+            varNode.writeDisplayName({{}, "name"}).readDisplayName(),
+            LocalizedText({{}, "name"})
         );
         CHECK_EQ(
             varNode.writeDescription({"en-US", "desc"}).readDescription(),

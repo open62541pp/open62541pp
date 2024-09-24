@@ -22,6 +22,9 @@ public:
             nullptr,  // next
             dataTypes_.size(),
             asNative(dataTypes_.data()),
+#if UAPP_OPEN62541_VER_GE(1, 4)
+            false,  // cleanup
+#endif
         });
         wrapped_ = array_.get();
     }

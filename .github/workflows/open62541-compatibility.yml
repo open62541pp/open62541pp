@@ -21,9 +21,12 @@ jobs:
           - v1.1.6
           - v1.2.9
           - v1.3.12
+          - v1.4.4
         build_type: ["Debug", "Release"]
         library_type: ["static", "shared"]
         amalgamation: [false, true]
+        exclude:
+            - { version: "v1.4.4", amalgamation: true } # installation with UA_ENABLE_AMALGAMATION=ON is not possible in v1.4
     steps:
       - uses: actions/checkout@v4
         with:

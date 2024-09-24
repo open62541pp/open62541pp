@@ -17,6 +17,7 @@ add_executable(
     Event.cpp
     Logger.cpp
     Node.cpp
+    PluginManager.cpp
     Result.cpp
     ScopeExit.cpp
     Server.cpp
