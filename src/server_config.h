@@ -12,9 +12,9 @@
 #include "open62541pp/types/Builtin.h"
 #include "open62541pp/types/Composed.h"  // UserTokenPolicy
 
-#include "CustomDataTypes.h"
-#include "plugins/LoggerAdapter.h"
-#include "plugins/PluginManager.h"
+#include "customdatatypes.h"
+#include "plugins/logger_adapter.h"
+#include "plugins/plugin_manager.h"
 
 namespace opcua {
 

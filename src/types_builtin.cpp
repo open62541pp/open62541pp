@@ -1,6 +1,9 @@
 #include "open62541pp/types/Builtin.h"
+#include "open62541pp/types/DateTime.h"
+#include "open62541pp/types/NodeId.h"
 
-#include <iomanip>
+#include <ctime>  // gmtime, localtime
+#include <iomanip>  // put_time
 #include <ostream>
 #include <sstream>
 
@@ -41,6 +44,18 @@ std::string Guid::toString() const {
 std::ostream& operator<<(std::ostream& os, const Guid& guid) {
     os << guid.toString();
     return os;
+}
+
+/* ------------------------------------------ DateTime ------------------------------------------ */
+
+std::string DateTime::format(std::string_view format, bool localtime) const {
+    const std::time_t unixTime = toUnixTime();
+    std::ostringstream ss;
+    const auto* timeinfo = localtime ? std::localtime(&unixTime) : std::gmtime(&unixTime);
+    if (timeinfo != nullptr) {
+        ss << std::put_time(timeinfo, std::string(format).c_str());
+    }
+    return ss.str();
 }
 
 /* ----------------------------------------- ByteString ----------------------------------------- */
@@ -104,6 +119,47 @@ std::string NumericRange::toString() const {
         }
     }
     return ss.str();
+}
+
+/* ------------------------------------------- NodeId ------------------------------------------- */
+
+std::string NodeId::toString() const {
+    std::string result;
+    const auto ns = getNamespaceIndex();
+    if (ns > 0) {
+        result.append("ns=").append(std::to_string(ns)).append(";");
+    }
+    switch (getIdentifierType()) {
+    case NodeIdType::Numeric:
+        result.append("i=").append(std::to_string(getIdentifierAs<uint32_t>()));
+        break;
+    case NodeIdType::String:
+        result.append("s=").append(getIdentifierAs<String>());
+        break;
+    case NodeIdType::Guid:
+        result.append("g=").append(getIdentifierAs<Guid>().toString());
+        break;
+    case NodeIdType::ByteString:
+        result.append("b=").append(getIdentifierAs<ByteString>().toBase64());
+        break;
+    }
+    return result;
+}
+
+/* --------------------------------------- ExpandedNodeId --------------------------------------- */
+
+std::string ExpandedNodeId::toString() const {
+    std::string result;
+    const auto svr = getServerIndex();
+    if (svr > 0) {
+        result.append("svr=").append(std::to_string(svr)).append(";");
+    }
+    const auto nsu = getNamespaceUri();
+    if (!nsu.empty()) {
+        result.append("nsu=").append(nsu).append(";");
+    }
+    result.append(getNodeId().toString());
+    return result;
 }
 
 }  // namespace opcua

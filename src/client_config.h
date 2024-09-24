@@ -6,9 +6,9 @@
 #include "open62541pp/detail/open62541/client.h"  // UA_ClientConfig
 #include "open62541pp/types/ExtensionObject.h"
 
-#include "CustomDataTypes.h"
-#include "plugins/LoggerAdapter.h"
-#include "plugins/PluginManager.h"
+#include "customdatatypes.h"
+#include "plugins/logger_adapter.h"
+#include "plugins/plugin_manager.h"
 
 namespace opcua {
 

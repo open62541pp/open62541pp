@@ -4,7 +4,7 @@
 
 #include "open62541pp/plugins/PluginAdapter.h"
 
-#include "plugins/PluginManager.h"
+#include "plugins/plugin_manager.h"
 
 using namespace opcua;
 

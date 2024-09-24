@@ -23,7 +23,7 @@
 #include "open62541pp/types/NodeId.h"
 #include "open62541pp/types/Variant.h"
 
-#include "ServerConfig.h"
+#include "server_config.h"
 
 namespace opcua {
 

@@ -12,7 +12,7 @@
 #include "open62541pp/AccessControl.h"
 #include "open62541pp/types/NodeId.h"
 
-#include "ServerConfig.h"
+#include "server_config.h"
 
 using namespace opcua;
 
