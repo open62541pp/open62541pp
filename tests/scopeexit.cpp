@@ -1,3 +1,5 @@
+#include <utility>  // move
+
 #include <doctest/doctest.h>
 
 #include "open62541pp/detail/ScopeExit.h"

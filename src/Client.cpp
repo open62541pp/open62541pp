@@ -1,6 +1,7 @@
 #include "open62541pp/Client.h"
 
 #include <atomic>
+#include <cassert>
 #include <cstddef>
 #include <iterator>
 #include <string>
@@ -11,6 +12,7 @@
 #include "open62541pp/DataType.h"
 #include "open62541pp/ErrorHandling.h"
 #include "open62541pp/Node.h"
+#include "open62541pp/Result.h"
 #include "open62541pp/TypeWrapper.h"
 #include "open62541pp/detail/ClientContext.h"
 #include "open62541pp/detail/ConnectionBase.h"

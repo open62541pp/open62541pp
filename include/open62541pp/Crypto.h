@@ -1,7 +1,5 @@
 #pragma once
 
-#include <cstddef>
-
 #include "open62541pp/Config.h"
 #include "open62541pp/Span.h"
 #include "open62541pp/types/Builtin.h"

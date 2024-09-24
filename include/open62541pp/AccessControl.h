@@ -1,10 +1,10 @@
 #pragma once
 
-#include <cstdint>
 #include <string>
 #include <vector>
 
 #include "open62541pp/Bitmask.h"
+#include "open62541pp/Common.h"  // AccessLevel, WriteMask
 #include "open62541pp/Span.h"
 #include "open62541pp/detail/open62541/common.h"  // UA_AccessControl
 #include "open62541pp/plugins/PluginAdapter.h"

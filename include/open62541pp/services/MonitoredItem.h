@@ -17,7 +17,6 @@
 // forward declarations
 namespace opcua {
 class Client;
-class Server;
 }  // namespace opcua
 
 namespace opcua::services {

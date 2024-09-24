@@ -9,13 +9,11 @@
 #include "open62541pp/Server.h"
 #include "open62541pp/Subscription.h"
 #include "open62541pp/types/Composed.h"
-#include "open62541pp/types/Variant.h"
 
 #include "helper/server_runner.h"
 #include "helper/server_client_setup.h"
 
 using namespace opcua;
-using namespace std::literals::chrono_literals;
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 TEST_CASE("Subscription & MonitoredItem (server)") {
@@ -49,7 +47,7 @@ TEST_CASE("Subscription & MonitoredItem (server)") {
         );
         CHECK(sub.getMonitoredItems().size() == 1);
 
-        std::this_thread::sleep_for(200ms);
+        std::this_thread::sleep_for(std::chrono::milliseconds(200));
         server.runIterate();
         CHECK(notificationCount > 0);
 

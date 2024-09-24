@@ -3,7 +3,6 @@
 #include <iomanip>
 #include <ostream>
 #include <sstream>
-#include <utility>  // move
 
 #include "open62541pp/Config.h"
 

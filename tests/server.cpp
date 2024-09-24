@@ -14,7 +14,6 @@
 
 #include "ServerConfig.h"
 
-using namespace std::chrono_literals;
 using namespace opcua;
 
 TEST_CASE("ServerConfig") {
@@ -119,7 +118,7 @@ TEST_CASE("Server run/stop/runIterate") {
         CHECK_FALSE(server.isRunning());
 
         auto t = std::thread([&] { server.run(); });
-        std::this_thread::sleep_for(100ms);  // wait for thread to execute run method
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));  // wait for thread to execute run method
 
         CHECK(server.isRunning());
 
