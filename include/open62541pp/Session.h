@@ -23,17 +23,17 @@ class Variant;
 class Session {
 public:
     Session(Server& connection, NodeId sessionId) noexcept
-        : connection_(connection),
+        : connection_(&connection),
           sessionId_(std::move(sessionId)) {}
 
     /// Get the server instance.
     Server& connection() noexcept {
-        return connection_;
+        return *connection_;
     }
 
     /// Get the server instance.
     const Server& connection() const noexcept {
-        return connection_;
+        return *connection_;
     }
 
     /// Get the session identifier.
@@ -58,7 +58,7 @@ public:
     void close();
 
 private:
-    Server& connection_;
+    Server* connection_;
     NodeId sessionId_;
 };
 
