@@ -2,6 +2,7 @@
 
 #include <algorithm>  // copy_n
 #include <cassert>
+#include <utility>  // exchange
 
 namespace opcua {
 
@@ -34,8 +35,8 @@ static void copyMembers(const DataTypeMember* members, size_t membersSize, UA_Da
 DataType::DataType(const UA_DataType& native)
     : Wrapper(copy(native)) {}
 
-DataType::DataType(UA_DataType&& native)
-    : Wrapper(native) {}
+DataType::DataType(UA_DataType&& native)  // NOLINT
+    : Wrapper(std::exchange(native, {})) {}
 
 DataType::DataType(TypeIndex typeIndex)
     : DataType(UA_TYPES[typeIndex]) {  // NOLINT

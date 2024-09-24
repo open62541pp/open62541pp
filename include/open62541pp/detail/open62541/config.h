@@ -8,7 +8,7 @@
 
 #else
 
-#include <open62541/config.h>
+#include <open62541/config.h>  // NOLINT(misc-header-include-cycle)
 
 #endif
 

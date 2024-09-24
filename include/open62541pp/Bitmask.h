@@ -45,6 +45,8 @@ struct IsBitmaskEnum : std::is_same<decltype(isBitmaskEnum(std::declval<T>())), 
 
 /* -------------------------------------- Bitwise operators ------------------------------------- */
 
+// NOLINTBEGIN(clang-analyzer-optin.core.EnumCastOutOfRange)
+
 /// @relates IsBitmaskEnum
 template <typename T>
 constexpr typename std::enable_if_t<IsBitmaskEnum<T>::value, T> operator&(T lhs, T rhs) noexcept {
@@ -98,6 +100,8 @@ constexpr typename std::enable_if_t<IsBitmaskEnum<T>::value, T> operator^=(T& lh
     lhs = static_cast<T>(static_cast<U>(lhs) ^ static_cast<U>(rhs));
     return lhs;
 }
+
+// NOLINTEND(clang-analyzer-optin.core.EnumCastOutOfRange)
 
 /* ---------------------------------------- Bitmask class --------------------------------------- */
 

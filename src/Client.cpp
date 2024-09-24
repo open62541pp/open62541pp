@@ -15,7 +15,7 @@
 #include "open62541pp/detail/ClientContext.h"
 #include "open62541pp/detail/ConnectionBase.h"
 #include "open62541pp/detail/open62541/common.h"
-#include "open62541pp/services/Attribute.h"  // readValue
+#include "open62541pp/services/Attribute_highlevel.h"  // readValue
 #include "open62541pp/services/Subscription.h"
 
 #include "ClientConfig.h"

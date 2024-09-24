@@ -25,7 +25,7 @@ struct CallbackAdapter {
             } else {
                 try {
                     std::invoke(std::forward<F>(callback), std::forward<Args>(args)...);
-                } catch (...) {
+                } catch (...) {  // NOLINT(bugprone-empty-catch)
                     // ignore exceptions
                 }
             }

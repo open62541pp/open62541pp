@@ -19,7 +19,7 @@ Result<std::vector<Variant>> call(
     const NodeId& methodId,
     Span<const Variant> inputArguments
 ) noexcept {
-    UA_CallMethodRequest item = detail::createCallMethodRequest(objectId, methodId, inputArguments);
+    const auto item = detail::createCallMethodRequest(objectId, methodId, inputArguments);
     CallMethodResult result = UA_Server_call(connection.handle(), &item);
     return detail::getOutputArguments(result);
 }

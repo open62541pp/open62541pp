@@ -77,7 +77,7 @@ std::ostream& operator<<(std::ostream& os, const XmlElement& xmlElement) {
 /* ---------------------------------------- NumericRange ---------------------------------------- */
 
 NumericRange::NumericRange(std::string_view encodedRange) {
-    UA_String encodedRangeNative = detail::toNativeString(encodedRange);
+    const UA_String encodedRangeNative = detail::toNativeString(encodedRange);
     UA_NumericRange native{};
 #if UAPP_OPEN62541_VER_GE(1, 1)
     const auto status = UA_NumericRange_parse(&native, encodedRangeNative);

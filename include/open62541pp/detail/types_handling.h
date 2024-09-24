@@ -13,7 +13,7 @@ namespace opcua::detail {
 /* ------------------------------------ Generic type handling ----------------------------------- */
 
 template <typename T>
-inline constexpr bool isPointerFree = IsOneOf<
+inline constexpr bool isPointerFree = IsOneOf<  // NOLINT(modernize-type-traits)
     T,
     UA_Boolean,
     UA_SByte,

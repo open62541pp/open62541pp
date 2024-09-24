@@ -4,7 +4,9 @@
 
 #pragma once
 
+#ifndef UAPP_TYPEREGISTRY_NATIVE
 #include "open62541pp/TypeRegistry.h"
+#endif
 #include "open62541pp/detail/open62541/common.h"
 
 namespace opcua {

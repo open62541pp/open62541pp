@@ -1,6 +1,7 @@
 #pragma once
 
 #include "open62541pp/services/Attribute.h"
+#include "open62541pp/services/Attribute_highlevel.h"
 #include "open62541pp/services/Method.h"
 #include "open62541pp/services/MonitoredItem.h"
 #include "open62541pp/services/NodeManagement.h"

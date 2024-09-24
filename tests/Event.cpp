@@ -5,7 +5,7 @@
 #include "open62541pp/Config.h"
 #include "open62541pp/Event.h"
 #include "open62541pp/Server.h"
-#include "open62541pp/services/Attribute.h"
+#include "open62541pp/services/Attribute_highlevel.h"
 
 using namespace opcua;
 

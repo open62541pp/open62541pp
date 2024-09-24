@@ -11,7 +11,7 @@ int main() {
 
     // Browse method node
     opcua::Node objectsNode(client, opcua::ObjectId::ObjectsFolder);
-    opcua::Node greetMethodNode = objectsNode.browseChild({{1, "Greet"}});
+    const opcua::Node greetMethodNode = objectsNode.browseChild({{1, "Greet"}});
 
     // Run client event loop in separate thread
     auto clientThread = std::thread([&] { client.run(); });

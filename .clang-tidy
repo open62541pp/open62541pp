@@ -1,15 +1,36 @@
 ---
 Checks: >
-  bugprone*, -bugprone-easily-swappable-parameters, -bugprone-macro-parentheses,
+  bugprone*,
+  -bugprone-easily-swappable-parameters,
+  -bugprone-macro-parentheses,
+
   cert*,
-  cppcoreguidelines*, -cppcoreguidelines-avoid-magic-numbers,
-  clang-analyzer*, -clang-analyzer-osx*,
+
+  cppcoreguidelines*,
+  -cppcoreguidelines-avoid-const-or-ref-data-members,
+  -cppcoreguidelines-avoid-magic-numbers,
+
+  clang-analyzer*,
+  -clang-analyzer-osx*,
   -clang-diagnostic-ignored-optimization-argument,
+
   hicpp*,
-  misc*, -misc-include-cleaner,
-  modernize*, -modernize-use-trailing-return-type, -modernize-use-nodiscard,
+
+  misc*,
+  -misc-include-cleaner,
+  -misc-use-anonymous-namespace,
+
+  modernize*,
+  -modernize-use-nodiscard,
+  -modernize-use-trailing-return-type,
+
   performance*,
-  readability*, -readability-identifier-length, -readability-magic-numbers,
+  -performance-avoid-endl,
+  -performance-enum-size,
+
+  readability*,
+  -readability-identifier-length,
+  -readability-magic-numbers,
 
 CheckOptions:
   - key: misc-non-private-member-variables-in-classes.IgnoreClassesWithAllMemberVariablesBeingPublic

@@ -34,6 +34,7 @@ public:
 
     [[nodiscard]] WrapperType* wrapperPtr() noexcept {
         assert(connectionPtr_ != nullptr);
+        // NOLINTNEXTLINE(bugprone-casting-through-void)
         return static_cast<WrapperType*>(static_cast<void*>(&connectionPtr_));
     };
 

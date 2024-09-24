@@ -115,6 +115,7 @@ struct WrapperConversion {
 
     using NativeType = typename WrapperType::NativeType;
 
+    // NOLINTBEGIN(bugprone-casting-through-void)
     static constexpr WrapperType* asWrapper(NativeType* native) noexcept {
         return static_cast<WrapperType*>(static_cast<void*>(native));
     }
@@ -146,6 +147,7 @@ struct WrapperConversion {
     static constexpr const NativeType& asNative(const WrapperType& wrapper) noexcept {
         return *asNative(&wrapper);
     }
+    // NOLINTEND(bugprone-casting-through-void)
 };
 
 }  // namespace detail

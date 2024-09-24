@@ -300,7 +300,12 @@ public:
     template <typename ArrayLike>
     void setArray(ArrayLike&& array, const UA_DataType& dataType) noexcept {
         static_assert(!isTemporaryArray<decltype(array)>());
-        setArrayImpl(std::data(array), std::size(array), dataType, UA_VARIANT_DATA_NODELETE);
+        setArrayImpl(
+            std::data(std::forward<ArrayLike>(array)),
+            std::size(std::forward<ArrayLike>(array)),
+            dataType,
+            UA_VARIANT_DATA_NODELETE
+        );
     }
 
     /**

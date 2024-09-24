@@ -77,7 +77,7 @@ public:
     }
 
     /// Move assignment with native object.
-    constexpr TypeWrapper& operator=(T&& native) noexcept {
+    constexpr TypeWrapper& operator=(T&& native) noexcept {  // NOLINT(cppcoreguidelines-rvalue-reference-param-not-moved)
         if (&this->native() != &native) {
             clear();
             this->native() = std::exchange(native, {});
