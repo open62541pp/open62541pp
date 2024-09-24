@@ -34,18 +34,18 @@ public:
     MonitoredItem(
         Connection& connection, uint32_t subscriptionId, uint32_t monitoredItemId
     ) noexcept
-        : connection_(connection),
+        : connection_(&connection),
           subscriptionId_(std::is_same_v<Connection, Server> ? 0U : subscriptionId),
           monitoredItemId_(monitoredItemId) {}
 
     /// Get the server/client instance.
     Connection& connection() noexcept {
-        return connection_;
+        return *connection_;
     }
 
     /// Get the server/client instance.
     const Connection& connection() const noexcept {
-        return connection_;
+        return *connection_;
     }
 
     /// Get the server-assigned identifier of the underlying subscription.
@@ -68,7 +68,7 @@ public:
     /// @note Not implemented for Server.
     /// @see services::modifyMonitoredItem
     void setMonitoringParameters(MonitoringParametersEx& parameters) {
-        services::modifyMonitoredItem(connection_, subscriptionId_, monitoredItemId_, parameters)
+        services::modifyMonitoredItem(connection(), subscriptionId(), monitoredItemId(), parameters)
             .value();
     }
 
@@ -76,18 +76,18 @@ public:
     /// @note Not implemented for Server.
     /// @see services::setMonitoringMode
     void setMonitoringMode(MonitoringMode monitoringMode) {
-        services::setMonitoringMode(connection_, subscriptionId_, monitoredItemId_, monitoringMode)
+        services::setMonitoringMode(connection(), subscriptionId(), monitoredItemId(), monitoringMode)
             .value();
     }
 
     /// Delete this monitored item.
     /// @see services::deleteMonitoredItem
     void deleteMonitoredItem() {
-        services::deleteMonitoredItem(connection_, subscriptionId_, monitoredItemId_).value();
+        services::deleteMonitoredItem(connection(), subscriptionId(), monitoredItemId()).value();
     }
 
 private:
-    Connection& connection_;
+    Connection* connection_;
     uint32_t subscriptionId_{0U};
     uint32_t monitoredItemId_{0U};
 };
