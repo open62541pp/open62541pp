@@ -1,3 +1,4 @@
+#include <ostream>  // required by doctest to stringify
 #include <string_view>
 #include <utility>  // move
 
