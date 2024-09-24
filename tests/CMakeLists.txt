@@ -3,35 +3,39 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/3rdparty/doctest doctest EXCLUDE_FROM_ALL
 add_executable(
     open62541pp_tests
     main.cpp
-    AccessControl.cpp
+    accesscontrol.cpp
     async.cpp
-    Bitmask.cpp
-    Client.cpp
-    ClientService.cpp
-    Config.cpp
-    Crypto.cpp
-    CustomDataTypes.cpp
-    DataType.cpp
-    ExceptionCatcher.cpp
-    ErrorHandling.cpp
-    Event.cpp
-    Logger.cpp
-    Node.cpp
-    PluginManager.cpp
-    Result.cpp
-    ScopeExit.cpp
-    Server.cpp
-    Services.cpp
-    Session.cpp
-    Span.cpp
+    bitmask.cpp
+    client.cpp
+    clientservice.cpp
+    crypto.cpp
+    customdatatypes.cpp
+    datatype.cpp
+    errorhandling.cpp
+    event.cpp
+    exceptioncatcher.cpp
+    logger.cpp
+    node.cpp
+    pluginmanager.cpp
+    result.cpp
+    scopeexit.cpp
+    server.cpp
+    services_attribute.cpp
+    services_method.cpp
+    services_monitoreditem.cpp
+    services_nodemanagement.cpp
+    services_subscription.cpp
+    session.cpp
+    span.cpp
     string_utils.cpp
-    Subscription_MonitoredItem.cpp
+    subscription_monitoreditem.cpp
     traits.cpp
-    TypeConverter.cpp
-    TypeRegistry.cpp
+    typeconverter.cpp
+    typeregistry.cpp
+    types_builtin.cpp
+    types_composed.cpp
     types_handling.cpp
-    Types.cpp
-    TypeWrapper.cpp
+    wrapper.cpp
 )
 target_link_libraries(
     open62541pp_tests

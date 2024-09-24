@@ -8,10 +8,7 @@
 #include "open62541pp/Session.h"
 #include "open62541pp/types/DataValue.h"
 
-#include "helper/stringify.h"
-
 using namespace opcua;
-
 
 TEST_CASE("AccessControlDefault") {
     Server server;

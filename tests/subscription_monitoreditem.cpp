@@ -11,8 +11,8 @@
 #include "open62541pp/types/Composed.h"
 #include "open62541pp/types/Variant.h"
 
-#include "helper/Runner.h"
-#include "helper/ServerClientSetup.h"
+#include "helper/server_runner.h"
+#include "helper/server_client_setup.h"
 
 using namespace opcua;
 using namespace std::literals::chrono_literals;

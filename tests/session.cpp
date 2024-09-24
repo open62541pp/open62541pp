@@ -5,7 +5,7 @@
 #include "open62541pp/Server.h"
 #include "open62541pp/Session.h"
 
-#include "helper/Runner.h"
+#include "helper/server_runner.h"
 
 using namespace opcua;
 
