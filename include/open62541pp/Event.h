@@ -36,12 +36,12 @@ public:
 
     /// Get the server instance.
     Server& connection() noexcept {
-        return connection_;
+        return *connection_;
     }
 
     /// Get the server instance.
     const Server& connection() const noexcept {
-        return connection_;
+        return *connection_;
     }
 
     /// Get the NodeId of the underlying node representation.
@@ -70,7 +70,7 @@ public:
     ByteString trigger(const NodeId& originId = ObjectId::Server);
 
 private:
-    Server& connection_;
+    Server* connection_;
     NodeId id_;
 };
 
