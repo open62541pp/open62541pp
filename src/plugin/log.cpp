@@ -1,5 +1,6 @@
 #include "open62541pp/plugin/log.hpp"
 
+#include <cassert>
 #include <cstdarg>  // va_list
 #include <string>
 
