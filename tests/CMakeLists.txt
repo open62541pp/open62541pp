@@ -8,7 +8,6 @@ add_executable(
     bitmask.cpp
     client.cpp
     clientservice.cpp
-    plugins_create_certificate.cpp
     customdatatypes.cpp
     datatype.cpp
     event.cpp
@@ -16,6 +15,7 @@ add_executable(
     exceptioncatcher.cpp
     logger.cpp
     node.cpp
+    plugin_create_certificate.cpp
     pluginmanager.cpp
     result.cpp
     scope.cpp

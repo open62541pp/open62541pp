@@ -3,7 +3,7 @@
 #include <doctest/doctest.h>
 
 #include "open62541pp/client.hpp"
-#include "open62541pp/plugins/log.hpp"
+#include "open62541pp/plugin/log.hpp"
 #include "open62541pp/server.hpp"
 
 using namespace opcua;

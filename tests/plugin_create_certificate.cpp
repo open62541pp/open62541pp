@@ -4,7 +4,7 @@
 
 #include "open62541pp/client.hpp"
 #include "open62541pp/config.hpp"
-#include "open62541pp/plugins/create_certificate.hpp"
+#include "open62541pp/plugin/create_certificate.hpp"
 #include "open62541pp/server.hpp"
 
 #include "helper/server_runner.hpp"

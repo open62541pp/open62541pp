@@ -2,9 +2,9 @@
 
 #include <doctest/doctest.h>
 
-#include "open62541pp/plugins/pluginadapter.hpp"
+#include "open62541pp/plugin/pluginadapter.hpp"
 
-#include "plugins/pluginmanager.hpp"
+#include "plugin/pluginmanager.hpp"
 
 using namespace opcua;
 

@@ -8,7 +8,7 @@
 #include "open62541pp/detail/contextmap.hpp"
 #include "open62541pp/detail/exceptioncatcher.hpp"
 #include "open62541pp/detail/open62541/common.h"  // UA_AccessControl
-#include "open62541pp/plugins/nodestore.hpp"
+#include "open62541pp/plugin/nodestore.hpp"
 #include "open62541pp/services/detail/monitoreditem_context.hpp"
 #include "open62541pp/types.hpp"
 

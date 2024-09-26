@@ -1,4 +1,4 @@
-#include "open62541pp/plugins/log.hpp"
+#include "open62541pp/plugin/log.hpp"
 
 #include <cstdarg>  // va_list
 #include <string>

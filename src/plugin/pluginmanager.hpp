@@ -6,7 +6,7 @@
 #include <variant>
 
 #include "open62541pp/detail/traits.hpp"  // Overload
-#include "open62541pp/plugins/pluginadapter.hpp"
+#include "open62541pp/plugin/pluginadapter.hpp"
 
 namespace opcua {
 

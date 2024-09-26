@@ -9,7 +9,7 @@
 
 #include "open62541pp/config.hpp"
 #include "open62541pp/detail/open62541/client.h"
-#include "open62541pp/plugins/log.hpp"
+#include "open62541pp/plugin/log.hpp"
 #include "open62541pp/span.hpp"
 #include "open62541pp/subscription.hpp"
 #include "open62541pp/types.hpp"

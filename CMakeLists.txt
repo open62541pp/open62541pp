@@ -122,7 +122,7 @@ function(deprecated_header header_old header_new)
         ${PROJECT_BINARY_DIR}/include_generated/open62541pp/${header_old}
     )
 endfunction()
-deprecated_header(plugins/PluginAdapter.h plugins/pluginadapter.hpp)
+deprecated_header(plugins/PluginAdapter.h plugin/pluginadapter.hpp)
 deprecated_header(services/Attribute_highlevel.h services/attribute_highlevel.hpp)
 deprecated_header(services/Attribute.h services/attribute.hpp)
 deprecated_header(services/Method.h services/method.hpp)
@@ -138,18 +138,18 @@ deprecated_header(types/DateTime.h types.hpp)
 deprecated_header(types/ExtensionObject.h types.hpp)
 deprecated_header(types/NodeId.h types.hpp)
 deprecated_header(types/Variant.h types.hpp)
-deprecated_header(AccessControl.h plugins/accesscontrol.hpp)
+deprecated_header(AccessControl.h plugin/accesscontrol.hpp)
 deprecated_header(async.h async.hpp)
 deprecated_header(Bitmask.h bitmask.hpp)
 deprecated_header(Client.h client.hpp)
 deprecated_header(Common.h common.hpp)
 deprecated_header(Config.h config.hpp)
-deprecated_header(Crypto.h plugins/create_certificate.hpp)
+deprecated_header(Crypto.h plugin/create_certificate.hpp)
 deprecated_header(DataType.h datatype.hpp)
 deprecated_header(DataTypeBuilder.h datatype.hpp)
 deprecated_header(ErrorHandling.h exception.hpp)
 deprecated_header(Event.h event.hpp)
-deprecated_header(Logger.h plugins/log.hpp)
+deprecated_header(Logger.h plugin/log.hpp)
 deprecated_header(MonitoredItem.h monitoreditem.hpp)
 deprecated_header(Node.h node.hpp)
 deprecated_header(NodeIds.h nodeids.hpp)
@@ -163,7 +163,7 @@ deprecated_header(TypeConverter.h typeconverter.hpp)
 deprecated_header(TypeRegistry.h typeregistry.hpp)
 deprecated_header(TypeRegistryNative.h typeregistry_generated.hpp)
 deprecated_header(TypeWrapper.h typewrapper.hpp)
-deprecated_header(ValueBackend.h plugins/nodestore.hpp)
+deprecated_header(ValueBackend.h plugin/nodestore.hpp)
 deprecated_header(Wrapper.h wrapper.hpp)
 
 add_library(
@@ -173,9 +173,9 @@ add_library(
     src/event.cpp
     src/monitoreditem.cpp
     src/node.cpp
-    src/plugins/accesscontrol.cpp
-    src/plugins/create_certificate.cpp
-    src/plugins/log.cpp
+    src/plugin/accesscontrol.cpp
+    src/plugin/create_certificate.cpp
+    src/plugin/log.cpp
     src/server.cpp
     src/services_attribute.cpp
     src/services_method.cpp

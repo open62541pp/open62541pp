@@ -5,8 +5,8 @@
 #include "open62541pp/config.hpp"
 #include "open62541pp/detail/open62541/common.h"  // UA_Logger
 #include "open62541pp/detail/string_utils.hpp"  // detail::toString
-#include "open62541pp/plugins/log.hpp"  // Logger
-#include "open62541pp/plugins/pluginadapter.hpp"
+#include "open62541pp/plugin/log.hpp"  // Logger
+#include "open62541pp/plugin/pluginadapter.hpp"
 
 namespace opcua {
 

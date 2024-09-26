@@ -1,4 +1,4 @@
-#include "open62541pp/plugins/accesscontrol.hpp"
+#include "open62541pp/plugin/accesscontrol.hpp"
 
 #include <cassert>
 #include <cstdint>
@@ -12,7 +12,7 @@
 
 #include "open62541pp/config.hpp"
 #include "open62541pp/detail/open62541/common.h"
-#include "open62541pp/plugins/log.hpp"
+#include "open62541pp/plugin/log.hpp"
 #include "open62541pp/server.hpp"  // getWrapper
 #include "open62541pp/session.hpp"
 #include "open62541pp/types.hpp"

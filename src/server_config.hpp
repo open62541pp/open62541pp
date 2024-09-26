@@ -13,8 +13,8 @@
 #include "open62541pp/types_composed.hpp"  // UserTokenPolicy
 
 #include "customdatatypes.hpp"
-#include "plugins/log_default.hpp"
-#include "plugins/pluginmanager.hpp"
+#include "plugin/log_default.hpp"
+#include "plugin/pluginmanager.hpp"
 
 namespace opcua {
 

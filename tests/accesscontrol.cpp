@@ -3,7 +3,7 @@
 #include <doctest/doctest.h>
 
 #include "open62541pp/config.hpp"
-#include "open62541pp/plugins/accesscontrol.hpp"
+#include "open62541pp/plugin/accesscontrol.hpp"
 #include "open62541pp/server.hpp"
 #include "open62541pp/session.hpp"
 

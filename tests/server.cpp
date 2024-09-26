@@ -7,8 +7,8 @@
 #include "open62541pp/detail/open62541/server.h"
 #include "open62541pp/detail/string_utils.hpp"  // detail::toString
 #include "open62541pp/node.hpp"
-#include "open62541pp/plugins/accesscontrol.hpp"
-#include "open62541pp/plugins/nodestore.hpp"
+#include "open62541pp/plugin/accesscontrol.hpp"
+#include "open62541pp/plugin/nodestore.hpp"
 #include "open62541pp/server.hpp"
 #include "open62541pp/types.hpp"
 
