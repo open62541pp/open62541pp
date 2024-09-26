@@ -1,13 +1,11 @@
-#include "open62541pp/types/Builtin.h"
-#include "open62541pp/types/DateTime.h"
-#include "open62541pp/types/NodeId.h"
+#include "open62541pp/types.hpp"
 
 #include <ctime>  // gmtime, localtime
 #include <iomanip>  // put_time
 #include <ostream>
 #include <sstream>
 
-#include "open62541pp/Config.h"
+#include "open62541pp/config.hpp"
 
 namespace opcua {
 

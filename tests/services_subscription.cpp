@@ -1,9 +1,9 @@
 #include <doctest/doctest.h>
 
-#include "open62541pp/Config.h"
-#include "open62541pp/services/Subscription.h"
+#include "open62541pp/config.hpp"
+#include "open62541pp/services/subscription.hpp"
 
-#include "helper/server_client_setup.h"
+#include "helper/server_client_setup.hpp"
 
 using namespace opcua;
 

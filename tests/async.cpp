@@ -5,8 +5,8 @@
 
 #include <doctest/doctest.h>
 
-#include "open62541pp/Result.h"
-#include "open62541pp/async.h"
+#include "open62541pp/async.hpp"
+#include "open62541pp/result.hpp"
 
 using namespace opcua;
 

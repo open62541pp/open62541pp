@@ -2,14 +2,14 @@
 
 #include <doctest/doctest.h>
 
-#include "open62541pp/Config.h"
-#include "open62541pp/NodeIds.h"
-#include "open62541pp/services/Attribute.h"
-#include "open62541pp/services/Attribute_highlevel.h"
-#include "open62541pp/services/NodeManagement.h"  // add*
-#include "open62541pp/types/Composed.h"
+#include "open62541pp/config.hpp"
+#include "open62541pp/nodeids.hpp"
+#include "open62541pp/services/attribute.hpp"
+#include "open62541pp/services/attribute_highlevel.hpp"
+#include "open62541pp/services/nodemanagement.hpp"  // add*
+#include "open62541pp/types_composed.hpp"
 
-#include "helper/server_client_setup.h"
+#include "helper/server_client_setup.hpp"
 
 using namespace opcua;
 

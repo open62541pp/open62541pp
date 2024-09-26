@@ -1,4 +1,4 @@
-#include "open62541pp/DataType.h"
+#include "open62541pp/datatype.hpp"
 
 #include <algorithm>  // copy_n
 #include <cassert>

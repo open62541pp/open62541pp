@@ -1,6 +1,7 @@
 #include <doctest/doctest.h>
 
-#include "open62541pp/TypeConverter.h"
+#include "open62541pp/typeconverter.hpp"
+#include "open62541pp/types.hpp"
 
 using namespace opcua;
 

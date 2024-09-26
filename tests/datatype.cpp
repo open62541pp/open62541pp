@@ -4,11 +4,9 @@
 
 #include <doctest/doctest.h>
 
-#include "open62541pp/Config.h"
-#include "open62541pp/DataType.h"
-#include "open62541pp/DataTypeBuilder.h"
-#include "open62541pp/types/Builtin.h"
-#include "open62541pp/types/NodeId.h"
+#include "open62541pp/config.hpp"
+#include "open62541pp/datatype.hpp"
+#include "open62541pp/types.hpp"
 
 using namespace opcua;
 

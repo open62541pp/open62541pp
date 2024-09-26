@@ -1,12 +1,10 @@
-#include "open62541pp/Event.h"
+#include "open62541pp/event.hpp"
 
-#include "open62541pp/Config.h"  // UA_ENABLE_SUBSCRIPTIONS_EVENTS
-#include "open62541pp/ErrorHandling.h"
-#include "open62541pp/Server.h"
+#include "open62541pp/config.hpp"  // UA_ENABLE_SUBSCRIPTIONS_EVENTS
 #include "open62541pp/detail/open62541/server.h"
-#include "open62541pp/types/DateTime.h"
-#include "open62541pp/types/NodeId.h"
-#include "open62541pp/types/Variant.h"
+#include "open62541pp/exception.hpp"
+#include "open62541pp/server.hpp"
+#include "open62541pp/types.hpp"
 
 namespace opcua {
 

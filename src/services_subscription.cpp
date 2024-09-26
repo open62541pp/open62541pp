@@ -1,19 +1,19 @@
-#include "open62541pp/services/Subscription.h"
+#include "open62541pp/services/subscription.hpp"
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 
 #include <memory>
 #include <utility>  // move
 
-#include "open62541pp/Client.h"
-#include "open62541pp/Wrapper.h"  // asNative
-#include "open62541pp/detail/ClientContext.h"
+#include "open62541pp/client.hpp"
+#include "open62541pp/detail/client_context.hpp"
 #include "open62541pp/detail/open62541/client.h"
 #include "open62541pp/detail/open62541/common.h"
-#include "open62541pp/services/detail/ClientService.h"
-#include "open62541pp/services/detail/ResponseHandling.h"
-#include "open62541pp/services/detail/SubscriptionContext.h"
-#include "open62541pp/types/Composed.h"
+#include "open62541pp/services/detail/client_services.hpp"
+#include "open62541pp/services/detail/response_handling.hpp"
+#include "open62541pp/services/detail/subscription_context.hpp"
+#include "open62541pp/types_composed.hpp"
+#include "open62541pp/wrapper.hpp"  // asNative
 
 namespace opcua::services {
 
@@ -62,7 +62,8 @@ Result<uint32_t> createSubscription(
         std::move(statusChangeCallback),
         std::move(deleteCallback)
     );
-    if (const StatusCode serviceResult = detail::getServiceResult(response); serviceResult.isBad()) {
+    if (const StatusCode serviceResult = detail::getServiceResult(response);
+        serviceResult.isBad()) {
         return BadResult(serviceResult);
     }
     detail::reviseSubscriptionParameters(parameters, asNative(response));
@@ -88,7 +89,8 @@ Result<void> modifySubscription(
     const ModifySubscriptionResponse response = UA_Client_Subscriptions_modify(
         connection.handle(), request
     );
-    if (const StatusCode serviceResult = detail::getServiceResult(response); serviceResult.isBad()) {
+    if (const StatusCode serviceResult = detail::getServiceResult(response);
+        serviceResult.isBad()) {
         return BadResult(serviceResult);
     }
     detail::reviseSubscriptionParameters(parameters, asNative(response));

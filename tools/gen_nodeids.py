@@ -5,7 +5,7 @@ from subprocess import check_call
 
 URL = "http://www.opcfoundation.org/UA/schemas/1.04/NodeIds.csv"
 HERE = Path(__file__).parent
-HEADER_FILE = HERE.parent / "include" / "open62541pp" / "NodeIds.h"
+HEADER_FILE = HERE.parent / "include" / "open62541pp" / "nodeids.hpp"
 
 TEMPLATE_HEADER = """
 /* ---------------------------------------------------------------------------------------------- */
@@ -16,7 +16,7 @@ TEMPLATE_HEADER = """
 
 #include <cstdint>
 
-#include "open62541pp/Common.h"  // Namespace
+#include "open62541pp/common.hpp"  // Namespace
 
 // ignore (false-positive?) warning of GCC:
 // declaration of ‘MonitoringParameters’ shadows a global declaration

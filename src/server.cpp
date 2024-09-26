@@ -1,29 +1,26 @@
-#include "open62541pp/Server.h"
+#include "open62541pp/server.hpp"
 
 #include <atomic>
 #include <cassert>
 #include <mutex>
 #include <utility>  // move
 
-#include "open62541pp/AccessControl.h"
-#include "open62541pp/DataType.h"
-#include "open62541pp/ErrorHandling.h"
-#include "open62541pp/Event.h"
-#include "open62541pp/Node.h"
-#include "open62541pp/Session.h"
-#include "open62541pp/ValueBackend.h"
-#include "open62541pp/Wrapper.h"  // asWrapper
-#include "open62541pp/detail/ConnectionBase.h"
-#include "open62541pp/detail/ServerContext.h"
-#include "open62541pp/detail/result_util.h"  // tryInvoke
-#include "open62541pp/services/Attribute_highlevel.h"
-#include "open62541pp/types/Builtin.h"
-#include "open62541pp/types/Composed.h"
-#include "open62541pp/types/DataValue.h"
-#include "open62541pp/types/NodeId.h"
-#include "open62541pp/types/Variant.h"
+#include "open62541pp/datatype.hpp"
+#include "open62541pp/detail/connection.hpp"
+#include "open62541pp/detail/result_utils.hpp"  // tryInvoke
+#include "open62541pp/detail/server_context.hpp"
+#include "open62541pp/event.hpp"
+#include "open62541pp/exception.hpp"
+#include "open62541pp/node.hpp"
+#include "open62541pp/plugins/accesscontrol.hpp"
+#include "open62541pp/plugins/nodestore.hpp"
+#include "open62541pp/services/attribute_highlevel.hpp"
+#include "open62541pp/session.hpp"
+#include "open62541pp/types.hpp"
+#include "open62541pp/types_composed.hpp"
+#include "open62541pp/wrapper.hpp"  // asWrapper
 
-#include "server_config.h"
+#include "server_config.hpp"
 
 namespace opcua {
 

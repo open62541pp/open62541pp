@@ -1,4 +1,4 @@
-#include "open62541pp/open62541pp.h"
+#include "open62541pp/open62541pp.hpp"
 
 int main() {
     opcua::Server server;

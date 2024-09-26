@@ -2,10 +2,10 @@
 
 #include <algorithm>  // any_of
 
-#include "open62541pp/Config.h"
-#include "open62541pp/Node.h"
+#include "open62541pp/config.hpp"
+#include "open62541pp/node.hpp"
 
-#include "helper/server_client_setup.h"
+#include "helper/server_client_setup.hpp"
 
 using namespace opcua;
 

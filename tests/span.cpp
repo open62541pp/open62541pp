@@ -3,7 +3,7 @@
 
 #include <doctest/doctest.h>
 
-#include "open62541pp/Span.h"
+#include "open62541pp/span.hpp"
 
 using namespace opcua;
 

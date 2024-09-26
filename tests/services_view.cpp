@@ -1,9 +1,9 @@
 #include <doctest/doctest.h>
 
-#include "open62541pp/NodeIds.h"
-#include "open62541pp/services/View.h"
+#include "open62541pp/nodeids.hpp"
+#include "open62541pp/services/view.hpp"
 
-#include "helper/server_client_setup.h"
+#include "helper/server_client_setup.hpp"
 
 using namespace opcua;
 

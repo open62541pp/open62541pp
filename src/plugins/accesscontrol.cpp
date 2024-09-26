@@ -1,4 +1,4 @@
-#include "open62541pp/AccessControl.h"
+#include "open62541pp/plugins/accesscontrol.hpp"
 
 #include <cassert>
 #include <cstdint>
@@ -10,14 +10,13 @@
 #include <type_traits>  // invoke_result_t
 #include <utility>  // move
 
-#include "open62541pp/Config.h"
-#include "open62541pp/Logger.h"
-#include "open62541pp/Server.h"  // getWrapper
-#include "open62541pp/Session.h"
-#include "open62541pp/Wrapper.h"  // asWrapper, asNative
+#include "open62541pp/config.hpp"
 #include "open62541pp/detail/open62541/common.h"
-#include "open62541pp/types/DateTime.h"
-#include "open62541pp/types/ExtensionObject.h"
+#include "open62541pp/plugins/log.hpp"
+#include "open62541pp/server.hpp"  // getWrapper
+#include "open62541pp/session.hpp"
+#include "open62541pp/types.hpp"
+#include "open62541pp/wrapper.hpp"  // asWrapper, asNative
 
 namespace opcua {
 
@@ -144,9 +143,7 @@ static UA_Boolean getUserExecutableNative(
 ) {
     return invokeAccessCallback(server, "getUserExecutable", false, [&] {
         auto session = getSession(server, sessionId);
-        return getAdapter(ac).getUserExecutable(
-            session.value(), asWrapperRef<NodeId>(methodId)
-        );
+        return getAdapter(ac).getUserExecutable(session.value(), asWrapperRef<NodeId>(methodId));
     });
 }
 
@@ -205,9 +202,7 @@ static UA_Boolean allowDeleteNodeNative(
 ) {
     return invokeAccessCallback(server, "allowDeleteNode", false, [&] {
         auto session = getSession(server, sessionId);
-        return getAdapter(ac).allowDeleteNode(
-            session.value(), asWrapperRef<DeleteNodesItem>(item)
-        );
+        return getAdapter(ac).allowDeleteNode(session.value(), asWrapperRef<DeleteNodesItem>(item));
     });
 }
 
@@ -252,9 +247,7 @@ static UA_Boolean allowDeleteReferenceNative(
     return invokeAccessCallback(server, "allowTransferSubscription", false, [&] {
         auto oldSession = getSession(server, oldSessionId);
         auto newSession = getSession(server, newSessionId);
-        return getAdapter(ac).allowTransferSubscription(
-            oldSession.value(), newSession.value()
-        );
+        return getAdapter(ac).allowTransferSubscription(oldSession.value(), newSession.value());
     });
 }
 #endif

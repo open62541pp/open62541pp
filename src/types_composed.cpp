@@ -1,4 +1,4 @@
-#include "open62541pp/types/Composed.h"
+#include "open62541pp/types_composed.hpp"
 
 #include <algorithm>  // copy, transform
 

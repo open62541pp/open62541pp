@@ -2,8 +2,8 @@
 
 #include <doctest/doctest.h>
 
-#include "open62541pp/TypeWrapper.h"
-#include "open62541pp/detail/string_utils.h"  // detail::toString
+#include "open62541pp/detail/string_utils.hpp"  // detail::toString
+#include "open62541pp/typewrapper.hpp"
 
 using namespace opcua;
 

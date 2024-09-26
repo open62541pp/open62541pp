@@ -3,7 +3,7 @@ from subprocess import check_call
 
 HERE = Path(__file__).parent
 SCHEMA_DIR = HERE.parent / "3rdparty" / "open62541" / "tools" / "schema"
-HEADER_FILE = HERE.parent / "include" / "open62541pp" / "TypeRegistryNative.h"
+HEADER_FILE = HERE.parent / "include" / "open62541pp" / "typeregistry_generated.hpp"
 
 FILES_DATATYPES = [
     SCHEMA_DIR / "datatypes_minimal.txt",
@@ -25,7 +25,7 @@ TEMPLATE_HEADER = """
 #pragma once
 
 #ifndef UAPP_TYPEREGISTRY_NATIVE
-#include "open62541pp/TypeRegistry.h"
+#include "open62541pp/typeregistry.hpp"
 #endif
 #include "open62541pp/detail/open62541/common.h"
 

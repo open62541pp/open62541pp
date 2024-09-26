@@ -1,10 +1,10 @@
 #include <doctest/doctest.h>
 
-#include "open62541pp/Config.h"
-#include "open62541pp/services/NodeManagement.h"
-#include "open62541pp/services/Attribute_highlevel.h"  // readNodeClass
+#include "open62541pp/config.hpp"
+#include "open62541pp/services/attribute_highlevel.hpp"  // readNodeClass
+#include "open62541pp/services/nodemanagement.hpp"
 
-#include "helper/server_client_setup.h"
+#include "helper/server_client_setup.hpp"
 
 using namespace opcua;
 

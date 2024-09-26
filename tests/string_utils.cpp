@@ -2,7 +2,7 @@
 
 #include <doctest/doctest.h>
 
-#include "open62541pp/detail/string_utils.h"
+#include "open62541pp/detail/string_utils.hpp"
 
 using namespace opcua;
 

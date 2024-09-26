@@ -2,10 +2,10 @@
 
 #include <doctest/doctest.h>
 
-#include "open62541pp/Config.h"
-#include "open62541pp/Event.h"
-#include "open62541pp/Server.h"
-#include "open62541pp/services/Attribute_highlevel.h"
+#include "open62541pp/config.hpp"
+#include "open62541pp/event.hpp"
+#include "open62541pp/server.hpp"
+#include "open62541pp/services/attribute_highlevel.hpp"
 
 using namespace opcua;
 

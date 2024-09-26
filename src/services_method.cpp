@@ -1,10 +1,10 @@
-#include "open62541pp/services/Method.h"
+#include "open62541pp/services/method.hpp"
 
 #ifdef UA_ENABLE_METHODCALLS
 
-#include "open62541pp/Server.h"
 #include "open62541pp/detail/open62541/server.h"
-#include "open62541pp/types/Composed.h"
+#include "open62541pp/server.hpp"
+#include "open62541pp/types_composed.hpp"
 
 namespace opcua::services {
 

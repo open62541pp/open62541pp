@@ -1,11 +1,11 @@
-#include "open62541pp/Subscription.h"
+#include "open62541pp/subscription.hpp"
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 
-#include "open62541pp/Client.h"
-#include "open62541pp/Server.h"
-#include "open62541pp/detail/ClientContext.h"
-#include "open62541pp/detail/ServerContext.h"
+#include "open62541pp/client.hpp"
+#include "open62541pp/detail/client_context.hpp"
+#include "open62541pp/detail/server_context.hpp"
+#include "open62541pp/server.hpp"
 
 namespace opcua {
 

@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string_view>
 
-#include "open62541pp/open62541pp.h"
+#include "open62541pp/open62541pp.hpp"
 
 /// Get name of node class.
 constexpr std::string_view getEnumName(opcua::NodeClass nodeClass) {

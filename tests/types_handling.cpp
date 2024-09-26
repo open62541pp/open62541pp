@@ -2,7 +2,7 @@
 
 #include <doctest/doctest.h>
 
-#include "open62541pp/detail/types_handling.h"
+#include "open62541pp/detail/types_handling.hpp"
 
 using namespace opcua;
 
