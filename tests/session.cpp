@@ -1,11 +1,12 @@
 #include <doctest/doctest.h>
 
-#include "open62541pp/Client.h"
-#include "open62541pp/Config.h"
-#include "open62541pp/Server.h"
-#include "open62541pp/Session.h"
+#include "open62541pp/client.hpp"
+#include "open62541pp/config.hpp"
+#include "open62541pp/server.hpp"
+#include "open62541pp/session.hpp"
 
-#include "helper/server_runner.h"
+#include "helper/macros.hpp"  // UAPP_TSAN_ENABLED
+#include "helper/server_runner.hpp"
 
 using namespace opcua;
 

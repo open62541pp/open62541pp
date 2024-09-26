@@ -4,7 +4,7 @@ from typing import Optional
 from subprocess import check_call
 
 HERE = Path(__file__).parent
-HEADER_FILE = HERE.parent / "include/open62541pp/services/Attribute_highlevel.h"
+HEADER_FILE = HERE.parent / "include/open62541pp/services/attribute_highlevel.hpp"
 
 
 @dataclass
@@ -52,7 +52,7 @@ TEMPLATE_HEADER = """
 
 #pragma once
 
-#include "open62541pp/services/Attribute.h"
+#include "open62541pp/services/attribute.hpp"
 
 namespace opcua::services {{
 

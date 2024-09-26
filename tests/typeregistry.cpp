@@ -1,7 +1,7 @@
 #include <doctest/doctest.h>
 
-#include "open62541pp/TypeRegistry.h"
-#include "open62541pp/TypeWrapper.h"
+#include "open62541pp/typeregistry.hpp"
+#include "open62541pp/typewrapper.hpp"
 
 using namespace opcua;
 

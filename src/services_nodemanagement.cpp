@@ -1,14 +1,14 @@
-#include "open62541pp/services/NodeManagement.h"
+#include "open62541pp/services/nodemanagement.hpp"
 
 #include <cassert>
 
-#include "open62541pp/Client.h"
-#include "open62541pp/ErrorHandling.h"
-#include "open62541pp/Server.h"
-#include "open62541pp/detail/ServerContext.h"
+#include "open62541pp/client.hpp"
 #include "open62541pp/detail/open62541/server.h"
-#include "open62541pp/detail/result_util.h"  // tryInvoke
-#include "open62541pp/detail/string_utils.h"  // detail::toNativeString
+#include "open62541pp/detail/result_utils.hpp"  // tryInvoke
+#include "open62541pp/detail/server_context.hpp"
+#include "open62541pp/detail/string_utils.hpp"  // detail::toNativeString
+#include "open62541pp/exception.hpp"
+#include "open62541pp/server.hpp"
 
 namespace opcua::services {
 

@@ -3,7 +3,7 @@
 
 #include <doctest/doctest.h>
 
-#include "open62541pp/detail/ExceptionCatcher.h"
+#include "open62541pp/detail/exceptioncatcher.hpp"
 
 TEST_CASE("ExceptionCatcher") {
     opcua::detail::ExceptionCatcher catcher;

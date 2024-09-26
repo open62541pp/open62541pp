@@ -3,17 +3,16 @@
 
 #include <doctest/doctest.h>
 
-#include "open62541pp/Config.h"
-#include "open62541pp/Event.h"
-#include "open62541pp/NodeIds.h"
-#include "open62541pp/services/Attribute_highlevel.h"  // writeValue
-#include "open62541pp/services/MonitoredItem.h"
-#include "open62541pp/services/NodeManagement.h" // addVariable
-#include "open62541pp/services/Subscription.h"
-#include "open62541pp/types/DateTime.h"
-#include "open62541pp/types/ExtensionObject.h"
+#include "open62541pp/config.hpp"
+#include "open62541pp/event.hpp"
+#include "open62541pp/nodeids.hpp"
+#include "open62541pp/services/attribute_highlevel.hpp"  // writeValue
+#include "open62541pp/services/monitoreditem.hpp"
+#include "open62541pp/services/nodemanagement.hpp"  // addVariable
+#include "open62541pp/services/subscription.hpp"
+#include "open62541pp/types.hpp"
 
-#include "helper/server_client_setup.h"
+#include "helper/server_client_setup.hpp"
 
 using namespace opcua;
 

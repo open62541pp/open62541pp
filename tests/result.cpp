@@ -3,8 +3,8 @@
 
 #include <doctest/doctest.h>
 
-#include "open62541pp/Result.h"
-#include "open62541pp/detail/result_util.h"
+#include "open62541pp/detail/result_utils.hpp"
+#include "open62541pp/result.hpp"
 
 using namespace opcua;
 

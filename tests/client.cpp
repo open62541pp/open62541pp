@@ -4,13 +4,13 @@
 
 #include <doctest/doctest.h>
 
-#include "open62541pp/AccessControl.h"
-#include "open62541pp/Client.h"
-#include "open62541pp/Config.h"
-#include "open62541pp/Server.h"
+#include "open62541pp/client.hpp"
+#include "open62541pp/config.hpp"
 #include "open62541pp/detail/open62541/client.h"
+#include "open62541pp/plugin/accesscontrol.hpp"
+#include "open62541pp/server.hpp"
 
-#include "helper/server_runner.h"
+#include "helper/server_runner.hpp"
 
 using namespace std::chrono_literals;
 using namespace opcua;

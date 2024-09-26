@@ -5,8 +5,8 @@
 
 #include <doctest/doctest.h>
 
-#include "open62541pp/Result.h"
-#include "open62541pp/async.h"
+#include "open62541pp/async.hpp"
+#include "open62541pp/result.hpp"
 
 using namespace opcua;
 
@@ -25,7 +25,7 @@ TEST_CASE("Async (callback completion token)") {
         std::optional<Result<void>> retrievedResult;
         asyncTest(result, [&](Result<void> res) { retrievedResult = res; });
         CHECK(retrievedResult.has_value());
-        CHECK_EQ(retrievedResult->code(), result.code());  // NOLINT, false positive
+        CHECK_EQ(retrievedResult->code(), result.code());
     }
 
     SUBCASE("Value") {
@@ -33,8 +33,8 @@ TEST_CASE("Async (callback completion token)") {
         std::optional<Result<int>> retrievedResult;
         asyncTest(result, [&](Result<int> res) { retrievedResult = res; });
         CHECK(retrievedResult.has_value());
-        CHECK_EQ(retrievedResult->code(), result.code());  // NOLINT, false positive
-        CHECK_EQ(retrievedResult->value(), result.value());  // NOLINT, false positive
+        CHECK_EQ(retrievedResult->code(), result.code());
+        CHECK_EQ(retrievedResult->value(), result.value());
     }
 
     SUBCASE("Error") {
@@ -42,7 +42,7 @@ TEST_CASE("Async (callback completion token)") {
         std::optional<Result<int>> retrievedResult;
         asyncTest(result, [&](Result<int> res) { retrievedResult = res; });
         CHECK(retrievedResult.has_value());
-        CHECK_EQ(retrievedResult->code(), result.code());  // NOLINT, false positive
+        CHECK_EQ(retrievedResult->code(), result.code());
     }
 }
 

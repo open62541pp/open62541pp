@@ -8,17 +8,17 @@ add_executable(
     bitmask.cpp
     client.cpp
     clientservice.cpp
-    crypto.cpp
     customdatatypes.cpp
     datatype.cpp
-    errorhandling.cpp
     event.cpp
+    exception.cpp
     exceptioncatcher.cpp
     logger.cpp
     node.cpp
-    plugin_manager.cpp
+    plugin_create_certificate.cpp
+    pluginmanager.cpp
     result.cpp
-    scopeexit.cpp
+    scope.cpp
     server.cpp
     services_attribute.cpp
     services_method.cpp

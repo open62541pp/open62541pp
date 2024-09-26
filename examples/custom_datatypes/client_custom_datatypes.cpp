@@ -1,9 +1,9 @@
 #include <iostream>
 #include <string>
 
-#include "open62541pp/open62541pp.h"
+#include "open62541pp/open62541pp.hpp"
 
-#include "custom_datatypes.h"
+#include "custom_datatypes.hpp"
 
 int main() {
     opcua::Client client;

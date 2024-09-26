@@ -1,4 +1,4 @@
-#include "open62541pp/services/MonitoredItem.h"
+#include "open62541pp/services/monitoreditem.hpp"
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 
@@ -7,16 +7,16 @@
 #include <utility>  // move
 #include <vector>
 
-#include "open62541pp/Client.h"
-#include "open62541pp/Server.h"
-#include "open62541pp/detail/ClientContext.h"
-#include "open62541pp/detail/ServerContext.h"
+#include "open62541pp/client.hpp"
+#include "open62541pp/detail/client_context.hpp"
 #include "open62541pp/detail/open62541/client.h"
 #include "open62541pp/detail/open62541/server.h"
-#include "open62541pp/services/detail/ClientService.h"
-#include "open62541pp/services/detail/RequestHandling.h"
-#include "open62541pp/services/detail/ResponseHandling.h"
-#include "open62541pp/types/Builtin.h"  // StatusCode
+#include "open62541pp/detail/server_context.hpp"
+#include "open62541pp/server.hpp"
+#include "open62541pp/services/detail/client_services.hpp"
+#include "open62541pp/services/detail/request_handling.hpp"
+#include "open62541pp/services/detail/response_handling.hpp"
+#include "open62541pp/types.hpp"  // StatusCode
 
 namespace opcua::services {
 

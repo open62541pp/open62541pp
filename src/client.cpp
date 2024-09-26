@@ -1,4 +1,4 @@
-#include "open62541pp/Client.h"
+#include "open62541pp/client.hpp"
 
 #include <atomic>
 #include <cassert>
@@ -7,20 +7,20 @@
 #include <string>
 #include <utility>  // move
 
-#include "open62541pp/AccessControl.h"  // Login
-#include "open62541pp/Config.h"
-#include "open62541pp/DataType.h"
-#include "open62541pp/ErrorHandling.h"
-#include "open62541pp/Node.h"
-#include "open62541pp/Result.h"
-#include "open62541pp/TypeWrapper.h"
-#include "open62541pp/detail/ClientContext.h"
-#include "open62541pp/detail/ConnectionBase.h"
+#include "open62541pp/config.hpp"
+#include "open62541pp/datatype.hpp"
+#include "open62541pp/detail/client_context.hpp"
+#include "open62541pp/detail/connection.hpp"
 #include "open62541pp/detail/open62541/common.h"
-#include "open62541pp/services/Attribute_highlevel.h"  // readValue
-#include "open62541pp/services/Subscription.h"
+#include "open62541pp/exception.hpp"
+#include "open62541pp/node.hpp"
+#include "open62541pp/plugin/accesscontrol.hpp"  // Login
+#include "open62541pp/result.hpp"
+#include "open62541pp/services/attribute_highlevel.hpp"  // readValue
+#include "open62541pp/services/subscription.hpp"
+#include "open62541pp/typewrapper.hpp"
 
-#include "client_config.h"
+#include "client_config.hpp"
 
 namespace opcua {
 

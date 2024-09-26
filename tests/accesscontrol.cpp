@@ -2,11 +2,10 @@
 
 #include <doctest/doctest.h>
 
-#include "open62541pp/AccessControl.h"
-#include "open62541pp/Config.h"
-#include "open62541pp/Server.h"
-#include "open62541pp/Session.h"
-#include "open62541pp/types/DataValue.h"
+#include "open62541pp/config.hpp"
+#include "open62541pp/plugin/accesscontrol.hpp"
+#include "open62541pp/server.hpp"
+#include "open62541pp/session.hpp"
 
 using namespace opcua;
 

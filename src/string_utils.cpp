@@ -1,4 +1,4 @@
-#include "open62541pp/detail/string_utils.h"
+#include "open62541pp/detail/string_utils.hpp"
 
 #include <cstdio>  // vsnprintf
 #include <cstring>

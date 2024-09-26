@@ -3,15 +3,15 @@
 
 #include <doctest/doctest.h>
 
-#include "open62541pp/Client.h"
-#include "open62541pp/Config.h"
-#include "open62541pp/MonitoredItem.h"
-#include "open62541pp/Server.h"
-#include "open62541pp/Subscription.h"
-#include "open62541pp/types/Composed.h"
+#include "open62541pp/client.hpp"
+#include "open62541pp/config.hpp"
+#include "open62541pp/monitoreditem.hpp"
+#include "open62541pp/server.hpp"
+#include "open62541pp/subscription.hpp"
+#include "open62541pp/types_composed.hpp"
 
-#include "helper/server_runner.h"
-#include "helper/server_client_setup.h"
+#include "helper/server_client_setup.hpp"
+#include "helper/server_runner.hpp"
 
 using namespace opcua;
 

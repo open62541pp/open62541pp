@@ -10,7 +10,7 @@
 #include <cstddef>  // byte, to_integer
 #include <iostream>
 
-#include "open62541pp/open62541pp.h"
+#include "open62541pp/open62541pp.hpp"
 
 namespace opcua {
 

@@ -2,7 +2,7 @@
 
 #include <doctest/doctest.h>
 
-#include "open62541pp/Bitmask.h"
+#include "open62541pp/bitmask.hpp"
 
 using namespace opcua;
 

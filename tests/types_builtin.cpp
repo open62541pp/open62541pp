@@ -2,15 +2,10 @@
 
 #include <doctest/doctest.h>
 
-#include "open62541pp/Config.h"
-#include "open62541pp/NodeIds.h"
-#include "open62541pp/detail/string_utils.h"  // toNativeString
-#include "open62541pp/types/Builtin.h"
-#include "open62541pp/types/DataValue.h"
-#include "open62541pp/types/DateTime.h"
-#include "open62541pp/types/ExtensionObject.h"
-#include "open62541pp/types/NodeId.h"
-#include "open62541pp/types/Variant.h"
+#include "open62541pp/config.hpp"
+#include "open62541pp/detail/string_utils.hpp"  // toNativeString
+#include "open62541pp/nodeids.hpp"
+#include "open62541pp/types.hpp"
 
 using namespace opcua;
 

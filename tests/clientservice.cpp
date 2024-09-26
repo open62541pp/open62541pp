@@ -2,15 +2,15 @@
 
 #include <doctest/doctest.h>
 
-#include "open62541pp/Client.h"
-#include "open62541pp/Config.h"
-#include "open62541pp/Server.h"
+#include "open62541pp/client.hpp"
+#include "open62541pp/config.hpp"
 #include "open62541pp/detail/open62541/common.h"
-#include "open62541pp/services/detail/ClientService.h"
-#include "open62541pp/services/detail/ResponseHandling.h"
-#include "open62541pp/types/Composed.h"  // ReadResponse
+#include "open62541pp/server.hpp"
+#include "open62541pp/services/detail/client_services.hpp"
+#include "open62541pp/services/detail/response_handling.hpp"
+#include "open62541pp/types_composed.hpp"  // ReadResponse
 
-#include "helper/server_runner.h"
+#include "helper/server_runner.hpp"
 
 using namespace opcua;
 

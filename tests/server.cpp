@@ -3,16 +3,16 @@
 
 #include <doctest/doctest.h>
 
-#include "open62541pp/Config.h"
-#include "open62541pp/Node.h"
-#include "open62541pp/Server.h"
-#include "open62541pp/ValueBackend.h"
+#include "open62541pp/config.hpp"
 #include "open62541pp/detail/open62541/server.h"
-#include "open62541pp/detail/string_utils.h"  // detail::toString
-#include "open62541pp/AccessControl.h"
-#include "open62541pp/types/NodeId.h"
+#include "open62541pp/detail/string_utils.hpp"  // detail::toString
+#include "open62541pp/node.hpp"
+#include "open62541pp/plugin/accesscontrol.hpp"
+#include "open62541pp/plugin/nodestore.hpp"
+#include "open62541pp/server.hpp"
+#include "open62541pp/types.hpp"
 
-#include "server_config.h"
+#include "server_config.hpp"
 
 using namespace opcua;
 
@@ -118,7 +118,8 @@ TEST_CASE("Server run/stop/runIterate") {
         CHECK_FALSE(server.isRunning());
 
         auto t = std::thread([&] { server.run(); });
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));  // wait for thread to execute run method
+        std::this_thread::sleep_for(std::chrono::milliseconds(100)
+        );  // wait for thread to execute run method
 
         CHECK(server.isRunning());
 

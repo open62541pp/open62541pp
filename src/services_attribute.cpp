@@ -1,7 +1,8 @@
-#include "open62541pp/services/Attribute.h"
+#include "open62541pp/services/attribute.hpp"
 
-#include "open62541pp/Server.h"
+#include "open62541pp/client.hpp"
 #include "open62541pp/detail/open62541/server.h"
+#include "open62541pp/server.hpp"
 
 namespace opcua::services {
 

@@ -15,7 +15,7 @@
   { include: ["\"open62541/plugin/log.h\"", private, "\"open62541pp/detail/open62541/common.h\"", public] },
 
   { include: ["\"open62541/config.h\"", private, "\"open62541pp/detail/open62541/config.h\"", public] },
-  { include: ["\"open62541/config.h\"", private, "\"open62541pp/Config.h\"", public] },
+  { include: ["\"open62541/config.h\"", private, "\"open62541pp/config.hpp\"", public] },
 
   { include: ["\"open62541/server.h\"", private, "\"open62541pp/detail/open62541/server.h\"", public] },
   { include: ["\"open62541/server_config.h\"", private, "\"open62541pp/detail/open62541/server.h\"", public] },

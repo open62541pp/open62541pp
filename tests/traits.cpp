@@ -4,8 +4,8 @@
 
 #include "doctest/doctest.h"
 
-#include "open62541pp/Span.h"
-#include "open62541pp/detail/traits.h"
+#include "open62541pp/detail/traits.hpp"
+#include "open62541pp/span.hpp"
 
 using namespace opcua;
 

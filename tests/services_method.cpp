@@ -1,10 +1,10 @@
 #include <doctest/doctest.h>
 
-#include "open62541pp/Config.h"
-#include "open62541pp/services/Method.h"
-#include "open62541pp/services/NodeManagement.h"  // addMethod
+#include "open62541pp/config.hpp"
+#include "open62541pp/services/method.hpp"
+#include "open62541pp/services/nodemanagement.hpp"  // addMethod
 
-#include "helper/server_client_setup.h"
+#include "helper/server_client_setup.hpp"
 
 using namespace opcua;
 

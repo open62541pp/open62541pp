@@ -112,19 +112,70 @@ endif()
 # open62541pp library (static/shared depending on option BUILD_SHARED_LIBS)
 include(GNUInstallDirs)
 configure_file(
-    include/open62541pp/Config.h.in
-    ${PROJECT_BINARY_DIR}/include_generated/open62541pp/Config.h
+    include/open62541pp/config.hpp.in
+    ${PROJECT_BINARY_DIR}/include_generated/open62541pp/config.hpp
 )
+
+function(deprecated_header header_old header_new)
+    configure_file(
+        ${PROJECT_SOURCE_DIR}/include/open62541pp/deprecated.hpp.in
+        ${PROJECT_BINARY_DIR}/include_generated/open62541pp/${header_old}
+    )
+endfunction()
+deprecated_header(plugins/PluginAdapter.h plugin/pluginadapter.hpp)
+deprecated_header(services/Attribute_highlevel.h services/attribute_highlevel.hpp)
+deprecated_header(services/Attribute.h services/attribute.hpp)
+deprecated_header(services/Method.h services/method.hpp)
+deprecated_header(services/MonitoredItem.h services/monitoreditem.hpp)
+deprecated_header(services/NodeManagement.h services/nodemanagement.hpp)
+deprecated_header(services/Subscription.h services/subscription.hpp)
+deprecated_header(services/View.h services/view.hpp)
+deprecated_header(services/services.h services/services.hpp)
+deprecated_header(types/Builtin.h types.hpp)
+deprecated_header(types/Composed.h types_composed.hpp)
+deprecated_header(types/DataValue.h types.hpp)
+deprecated_header(types/DateTime.h types.hpp)
+deprecated_header(types/ExtensionObject.h types.hpp)
+deprecated_header(types/NodeId.h types.hpp)
+deprecated_header(types/Variant.h types.hpp)
+deprecated_header(AccessControl.h plugin/accesscontrol.hpp)
+deprecated_header(async.h async.hpp)
+deprecated_header(Bitmask.h bitmask.hpp)
+deprecated_header(Client.h client.hpp)
+deprecated_header(Common.h common.hpp)
+deprecated_header(Config.h config.hpp)
+deprecated_header(Crypto.h plugin/create_certificate.hpp)
+deprecated_header(DataType.h datatype.hpp)
+deprecated_header(DataTypeBuilder.h datatype.hpp)
+deprecated_header(ErrorHandling.h exception.hpp)
+deprecated_header(Event.h event.hpp)
+deprecated_header(Logger.h plugin/log.hpp)
+deprecated_header(MonitoredItem.h monitoreditem.hpp)
+deprecated_header(Node.h node.hpp)
+deprecated_header(NodeIds.h nodeids.hpp)
+deprecated_header(open62541pp.h open62541pp.hpp)
+deprecated_header(Result.h result.hpp)
+deprecated_header(Server.h server.hpp)
+deprecated_header(Session.h session.hpp)
+deprecated_header(Span.h span.hpp)
+deprecated_header(Subscription.h subscription.hpp)
+deprecated_header(TypeConverter.h typeconverter.hpp)
+deprecated_header(TypeRegistry.h typeregistry.hpp)
+deprecated_header(TypeRegistryNative.h typeregistry_generated.hpp)
+deprecated_header(TypeWrapper.h typewrapper.hpp)
+deprecated_header(ValueBackend.h plugin/nodestore.hpp)
+deprecated_header(Wrapper.h wrapper.hpp)
+
 add_library(
     open62541pp
     src/client.cpp
-    src/crypto.cpp
     src/datatype.cpp
     src/event.cpp
-    src/log.cpp
     src/monitoreditem.cpp
     src/node.cpp
-    src/plugins/accesscontrol.cpp
+    src/plugin/accesscontrol.cpp
+    src/plugin/create_certificate.cpp
+    src/plugin/log.cpp
     src/server.cpp
     src/services_attribute.cpp
     src/services_method.cpp
@@ -186,13 +237,17 @@ install(
 install(
     DIRECTORY "${PROJECT_SOURCE_DIR}/include/"
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-    FILES_MATCHING PATTERN "*.h"
+    FILES_MATCHING
+        PATTERN "*.h"
+        PATTERN "*.hpp"
 )
 
 install(
     DIRECTORY "${PROJECT_BINARY_DIR}/include_generated/"
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-    FILES_MATCHING PATTERN "*.h"
+    FILES_MATCHING
+        PATTERN "*.h"
+        PATTERN "*.hpp" 
 )
 
 # install cmake config files
