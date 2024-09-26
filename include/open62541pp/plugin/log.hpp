@@ -7,15 +7,7 @@
 #include "open62541pp/detail/open62541/common.h"  // UA_LogLevel, UA_LogCategory, UA_Logger
 #include "open62541pp/plugin/pluginadapter.hpp"
 
-// forward declare
-struct UA_Client;
-struct UA_Server;
-
 namespace opcua {
-
-// forward declare
-class Client;
-class Server;
 
 /**
  * Log level.
@@ -85,17 +77,5 @@ void log(const UA_Logger* logger, LogLevel level, LogCategory category, std::str
 
 /// Log a message with a UA_Logger instance (reference).
 void log(const UA_Logger& logger, LogLevel level, LogCategory category, std::string_view msg);
-
-/// Generate log message with client's logger.
-void log(UA_Client* client, LogLevel level, LogCategory category, std::string_view msg);
-
-/// Generate log message with client's logger.
-void log(Client& client, LogLevel level, LogCategory category, std::string_view msg);
-
-/// Generate log message with servers's logger.
-void log(UA_Server* server, LogLevel level, LogCategory category, std::string_view msg);
-
-/// Generate log message with servers's logger.
-void log(Server& server, LogLevel level, LogCategory category, std::string_view msg);
 
 }  // namespace opcua

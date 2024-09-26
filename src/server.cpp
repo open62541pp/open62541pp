@@ -467,6 +467,22 @@ UA_ServerConfig& getConfig(Server& server) noexcept {
     return *getConfig(server.handle());
 }
 
+UA_Logger* getLogger(UA_Server* server) noexcept {
+    auto* config = detail::getConfig(server);
+    if (config == nullptr) {
+        return nullptr;
+    }
+#if UAPP_OPEN62541_VER_GE(1, 4)
+    return config->logging;
+#else
+    return &config->logger;
+#endif
+}
+
+UA_Logger* getLogger(Server& server) noexcept {
+    return getLogger(server.handle());
+}
+
 ServerConnection* getConnection([[maybe_unused]] UA_Server* server) noexcept {
 #if UAPP_OPEN62541_VER_GE(1, 3)
     auto* config = getConfig(server);

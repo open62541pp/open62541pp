@@ -4,10 +4,8 @@
 #include <string>
 
 #include "open62541pp/config.hpp"
-#include "open62541pp/client.hpp"
 #include "open62541pp/config.hpp"
 #include "open62541pp/detail/string_utils.hpp"  // detail::toString
-#include "open62541pp/server.hpp"
 
 namespace opcua {
 
@@ -75,35 +73,6 @@ void log(const UA_Logger* logger, LogLevel level, LogCategory category, std::str
 
 void log(const UA_Logger& logger, LogLevel level, LogCategory category, std::string_view msg) {
     log(&logger, level, category, msg);
-}
-
-template <typename T>
-static UA_Logger* getLogger(T* connection) noexcept {
-    auto* config = detail::getConfig(connection);
-    if (config == nullptr) {
-        return nullptr;
-    }
-#if UAPP_OPEN62541_VER_GE(1, 4)
-    return config->logging;
-#else
-    return &config->logger;
-#endif
-}
-
-void log(UA_Client* client, LogLevel level, LogCategory category, std::string_view msg) {
-    log(getLogger(client), level, category, msg);
-}
-
-void log(Client& client, LogLevel level, LogCategory category, std::string_view msg) {
-    log(client.handle(), level, category, msg);
-}
-
-void log(UA_Server* server, LogLevel level, LogCategory category, std::string_view msg) {
-    log(getLogger(server), level, category, msg);
-}
-
-void log(Server& server, LogLevel level, LogCategory category, std::string_view msg) {
-    log(server.handle(), level, category, msg);
 }
 
 }  // namespace opcua

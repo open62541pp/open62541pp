@@ -469,6 +469,22 @@ UA_ClientConfig& getConfig(Client& client) noexcept {
     return *getConfig(client.handle());
 }
 
+UA_Logger* getLogger(UA_Client* client) noexcept {
+    auto* config = detail::getConfig(client);
+    if (config == nullptr) {
+        return nullptr;
+    }
+#if UAPP_OPEN62541_VER_GE(1, 4)
+    return config->logging;
+#else
+    return &config->logger;
+#endif
+}
+
+UA_Logger* getLogger(Client& client) noexcept {
+    return getLogger(client.handle());
+}
+
 ClientConnection* getConnection(UA_Client* client) noexcept {
     auto* config = getConfig(client);
     if (config == nullptr) {
