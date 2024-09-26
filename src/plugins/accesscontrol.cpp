@@ -504,8 +504,8 @@ bool AccessControlDefault::allowHistoryUpdate(
 bool AccessControlDefault::allowHistoryDelete(
     [[maybe_unused]] Session& session,
     [[maybe_unused]] const NodeId& nodeId,
-    [[maybe_unused]] DateTime startTimestamp,  // NOLINT
-    [[maybe_unused]] DateTime endTimestamp,  // NOLINT
+    [[maybe_unused]] DateTime startTimestamp,
+    [[maybe_unused]] DateTime endTimestamp,
     [[maybe_unused]] bool isDeleteModified
 ) {
     return true;

@@ -68,7 +68,6 @@ ByteString ByteString::fromBase64([[maybe_unused]] std::string_view encoded) {
 #endif
 }
 
-// NOLINTNEXTLINE
 std::string ByteString::toBase64() const {
 #if UAPP_OPEN62541_VER_GE(1, 1)
     String output;

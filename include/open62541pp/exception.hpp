@@ -63,7 +63,7 @@ namespace detail {
     return (code >> 30U) >= 0x02;
 }
 
-// NOLINTNEXTLINE, pass by value ok
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
 [[nodiscard]] inline UA_StatusCode getStatusCode(std::exception_ptr eptr) noexcept {
     try {
         if (eptr) {
@@ -86,7 +86,7 @@ namespace detail {
  */
 constexpr void throwIfBad(UA_StatusCode code) {
     if (detail::isBad(code)) {
-        // NOLINTNEXTLINE
+        // NOLINTNEXTLINE(hicpp-multiway-paths-covered)
         switch (code) {
         case UA_STATUSCODE_BADDISCONNECT:
             throw BadDisconnect();

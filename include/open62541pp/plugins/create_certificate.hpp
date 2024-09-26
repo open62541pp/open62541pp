@@ -32,8 +32,6 @@ struct CreateCertificateResult {
  *        e.g. {"C=DE", "O=SampleOrganization", "CN=Open62541Server@localhost"}
  * @param subjectAltName Elements for SubjectAltName,
  *        e.g. {"DNS:localhost", "URI:urn:open62541.server.application"}
- * @param keySizeBits Size of the generated key in bits. If set to 0, the maximum key size is used.
- *        Possible values are: 0, 1024 (deprecated), 2048, 4096
  * @param certificateFormat Certificate format, either DER or PEM
  *
  * @exception BadStatus (BadOutOfMemory)

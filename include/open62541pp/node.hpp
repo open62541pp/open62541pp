@@ -534,7 +534,7 @@ public:
     /// Write scalar to variable node.
     template <typename T>
     Node& writeValueScalar(const T& value) {
-        // NOLINTNEXTLINE, variant isn't modified, try to avoid copy
+        // NOLINTNEXTLINE(*-const-cast), variant isn't modified, try to avoid copy
         writeValue(Variant::fromScalar<VariantPolicy::ReferenceIfPossible>(const_cast<T&>(value)));
         return *this;
     }

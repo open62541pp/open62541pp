@@ -31,10 +31,10 @@ public:
         : Wrapper<T>(detail::copy(native, UA_TYPES[typeIndex])) {}
 
     /// Constructor with native object (move rvalue).
-    constexpr TypeWrapper(T&& native) noexcept  // NOLINT, implicit wanted
+    constexpr TypeWrapper(T&& native) noexcept  // NOLINT
         : Wrapper<T>(std::exchange(native, {})) {}
 
-    ~TypeWrapper() {  // NOLINT
+    ~TypeWrapper() {
         clear();
     };
 
@@ -47,7 +47,7 @@ public:
         : Wrapper<T>(std::exchange(other.native(), {})) {}
 
     /// Copy assignment (deep copy).
-    constexpr TypeWrapper& operator=(const TypeWrapper& other) {  // NOLINT, false positive
+    constexpr TypeWrapper& operator=(const TypeWrapper& other) {
         if (this != &other) {
             clear();
             this->native() = detail::copy(other.native(), UA_TYPES[typeIndex]);
@@ -74,8 +74,7 @@ public:
     }
 
     /// Move assignment with native object.
-    constexpr TypeWrapper& operator=(T&& native
-    ) noexcept {  // NOLINT(cppcoreguidelines-rvalue-reference-param-not-moved)
+    constexpr TypeWrapper& operator=(T&& native) noexcept {  // NOLINT
         if (&this->native() != &native) {
             clear();
             this->native() = std::exchange(native, {});
@@ -118,7 +117,7 @@ struct IsTypeWrapper {
 
     static std::false_type check(...);
 
-    using type = decltype(check(std::declval<T&>()));  // NOLINT
+    using type = decltype(check(std::declval<T&>()));  // NOLINT, false positive?
     static constexpr bool value = type::value;
 };
 

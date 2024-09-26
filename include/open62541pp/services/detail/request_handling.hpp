@@ -15,19 +15,19 @@ namespace opcua::services::detail {
 
 template <typename T>
 inline ExtensionObject wrapNodeAttributes(const T& attributes) noexcept {
-    // NOLINTNEXTLINE, won't be modified
+    // NOLINTNEXTLINE(*-const-cast), won't be modified
     return ExtensionObject::fromDecoded(const_cast<T&>(attributes));
 }
 
 template <typename T>
 inline auto* getPointer(T& value) noexcept {
-    // NOLINTNEXTLINE, request object won't be modified
+    // NOLINTNEXTLINE(*-const-cast), request object won't be modified
     return const_cast<std::remove_const_t<T>*>(&value);
 }
 
 template <typename T>
 inline auto* getPointer(Span<T> array) noexcept {
-    // NOLINTNEXTLINE, request object won't be modified
+    // NOLINTNEXTLINE(*-const-cast), request object won't be modified
     return const_cast<std::remove_const_t<T>*>(array.data());
 }
 

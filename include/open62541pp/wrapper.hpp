@@ -42,12 +42,12 @@ public:
         : native_(std::move(native)) {}
 
     /// Implicit conversion to native object.
-    constexpr operator T&() noexcept {  // NOLINT
+    constexpr operator T&() noexcept {  // NOLINT(hicpp-explicit-conversions)
         return native_;
     }
 
     /// Implicit conversion to native object.
-    constexpr operator const T&() const noexcept {  // NOLINT
+    constexpr operator const T&() const noexcept {  // NOLINT(hicpp-explicit-conversions)
         return native_;
     }
 
@@ -95,7 +95,7 @@ struct IsWrapper {
     static std::true_type check(const Wrapper<U>&);
     static std::false_type check(...);
 
-    using type = decltype(check(std::declval<T&>()));  // NOLINT
+    using type = decltype(check(std::declval<T&>()));
     static constexpr bool value = type::value;
 };
 

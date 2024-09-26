@@ -133,11 +133,11 @@ public:
     constexpr Bitmask() noexcept = default;
 
     /// Create a bitmask from the enumeration type.
-    constexpr Bitmask(T mask) noexcept  // NOLINT, implicit wanted
+    constexpr Bitmask(T mask) noexcept  // NOLINT(hicpp-explicit-conversions)
         : mask_(toUnderlying(mask)) {}
 
     /// Create a bitmask from the underlying type.
-    constexpr Bitmask(Underlying mask) noexcept  // NOLINT, implicit wanted
+    constexpr Bitmask(Underlying mask) noexcept  // NOLINT(hicpp-explicit-conversions)
         : mask_(mask) {}
 
     /// Conversion to the enum type.
@@ -146,7 +146,7 @@ public:
     }
 
     /// Conversion to the underlying type.
-    constexpr explicit operator Underlying() const noexcept {  // NOLINT
+    constexpr explicit operator Underlying() const noexcept {  // NOLINT(abc)
         return mask_;
     }
 

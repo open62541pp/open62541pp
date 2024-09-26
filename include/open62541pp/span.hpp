@@ -68,14 +68,14 @@ public:
      * Implicit constructor from a container like `std::array` or `std::vector`.
      */
     template <typename Container, typename = EnableIfHasSizeAndData<Container>>
-    constexpr Span(Container& container) noexcept  // NOLINT
+    constexpr Span(Container& container) noexcept  // NOLINT(hicpp-explicit-conversions)
         : Span(std::data(container), std::size(container)) {}
 
     /**
      * Implicit constructor from a container like `std::array` or `std::vector` (const).
      */
     template <typename Container, typename = EnableIfHasSizeAndData<Container>>
-    constexpr Span(const Container& container) noexcept  // NOLINT
+    constexpr Span(const Container& container) noexcept  // NOLINT(hicpp-explicit-conversions)
         : Span(std::data(container), std::size(container)) {}
 
     /**
@@ -91,7 +91,7 @@ public:
      * takeView(values);
      * @endcode
      */
-    constexpr Span(std::initializer_list<value_type> values) noexcept  // NOLINT
+    constexpr Span(std::initializer_list<value_type> values) noexcept
         : Span(values.begin(), values.size()) {}
 
     /// Explicit conversion to `std::vector`.

@@ -34,34 +34,28 @@ UA_EXPORT extern const UA_ViewAttributes UA_ViewAttributes_default;
 }
 #endif
 
-// NOLINTNEXTLINE
+// NOLINTBEGIN(cppcoreguidelines-macro-usage)
 #define UAPP_GETTER(Type, getterName, member)                                                      \
     Type getterName() const noexcept {                                                             \
         return handle()->member;                                                                   \
     }
-
-// NOLINTNEXTLINE
 #define UAPP_GETTER_CAST(Type, getterName, member)                                                 \
     Type getterName() const noexcept {                                                             \
         return static_cast<Type>(handle()->member);                                                \
     }
 
-// NOLINTNEXTLINE
 #define UAPP_GETTER_WRAPPER_CONST(Type, getterName, member)                                        \
     const Type& getterName() const noexcept {                                                      \
         return asWrapper<Type>(handle()->member);                                                  \
     }
-// NOLINTNEXTLINE
 #define UAPP_GETTER_WRAPPER_NONCONST(Type, getterName, member)                                     \
     Type& getterName() noexcept {                                                                  \
         return asWrapper<Type>(handle()->member);                                                  \
     }
-// NOLINTNEXTLINE
 #define UAPP_GETTER_WRAPPER(Type, getterName, member)                                              \
     UAPP_GETTER_WRAPPER_CONST(Type, getterName, member)                                            \
     UAPP_GETTER_WRAPPER_NONCONST(Type, getterName, member)
 
-// NOLINTNEXTLINE
 #define UAPP_GETTER_SPAN(Type, getterName, memberArray, memberSize)                                \
     Span<const Type> getterName() const noexcept {                                                 \
         return {handle()->memberArray, handle()->memberSize};                                      \
@@ -69,7 +63,6 @@ UA_EXPORT extern const UA_ViewAttributes UA_ViewAttributes_default;
     Span<Type> getterName() noexcept {                                                             \
         return {handle()->memberArray, handle()->memberSize};                                      \
     }
-// NOLINTNEXTLINE
 #define UAPP_GETTER_SPAN_WRAPPER(Type, getterName, memberArray, memberSize)                        \
     Span<const Type> getterName() const noexcept {                                                 \
         return {asWrapper<Type>(handle()->memberArray), handle()->memberSize};                     \
@@ -77,6 +70,7 @@ UA_EXPORT extern const UA_ViewAttributes UA_ViewAttributes_default;
     Span<Type> getterName() noexcept {                                                             \
         return {asWrapper<Type>(handle()->memberArray), handle()->memberSize};                     \
     }
+// NOLINTEND(cppcoreguidelines-macro-usage)
 
 namespace opcua {
 
@@ -290,7 +284,7 @@ struct IsBitmaskEnum<NodeAttributesMask> : std::true_type {};
 // The `specifiedAttributes` mask is automatically updated in the setter methods.
 // A fluent interface is used for the setter methods.
 
-// NOLINTNEXTLINE
+// NOLINTBEGIN(cppcoreguidelines-macro-usage)
 #define UAPP_NODEATTR(Type, suffix, member, flag)                                                  \
     UAPP_GETTER(Type, get##suffix, member)                                                         \
     auto& set##suffix(Type member) noexcept {                                                      \
@@ -298,8 +292,6 @@ struct IsBitmaskEnum<NodeAttributesMask> : std::true_type {};
         handle()->member = member;                                                                 \
         return *this;                                                                              \
     }
-
-// NOLINTNEXTLINE
 #define UAPP_NODEATTR_BITMASK(Type, suffix, member, flag)                                          \
     UAPP_GETTER(Type, get##suffix, member)                                                         \
     auto& set##suffix(Type member) noexcept {                                                      \
@@ -307,8 +299,6 @@ struct IsBitmaskEnum<NodeAttributesMask> : std::true_type {};
         handle()->member = member.get();                                                           \
         return *this;                                                                              \
     }
-
-// NOLINTNEXTLINE
 #define UAPP_NODEATTR_CAST(Type, suffix, member, flag)                                             \
     UAPP_GETTER_CAST(Type, get##suffix, member)                                                    \
     auto& set##suffix(Type member) noexcept {                                                      \
@@ -316,8 +306,6 @@ struct IsBitmaskEnum<NodeAttributesMask> : std::true_type {};
         handle()->member = static_cast<decltype(handle()->member)>(member);                        \
         return *this;                                                                              \
     }
-
-// NOLINTNEXTLINE
 #define UAPP_NODEATTR_WRAPPER(Type, suffix, member, flag)                                          \
     UAPP_GETTER_WRAPPER_CONST(Type, get##suffix, member)                                           \
     auto& set##suffix(const Type& member) {                                                        \
@@ -325,8 +313,6 @@ struct IsBitmaskEnum<NodeAttributesMask> : std::true_type {};
         asWrapper<Type>(handle()->member) = member;                                                \
         return *this;                                                                              \
     }
-
-// NOLINTNEXTLINE
 #define UAPP_NODEATTR_ARRAY(Type, suffix, member, memberSize, flag)                                \
     UAPP_GETTER_SPAN(Type, get##suffix, member, memberSize)                                        \
     auto& set##suffix(Span<const Type> member) {                                                   \
@@ -337,8 +323,6 @@ struct IsBitmaskEnum<NodeAttributesMask> : std::true_type {};
         handle()->memberSize = member.size();                                                      \
         return *this;                                                                              \
     }
-
-// NOLINTNEXTLINT
 #define UAPP_NODEATTR_COMMON                                                                       \
     UAPP_GETTER(Bitmask<NodeAttributesMask>, getSpecifiedAttributes, specifiedAttributes)          \
     UAPP_NODEATTR_WRAPPER(                                                                         \
@@ -353,6 +337,7 @@ struct IsBitmaskEnum<NodeAttributesMask> : std::true_type {};
     UAPP_NODEATTR_BITMASK(                                                                         \
         Bitmask<WriteMask>, UserWriteMask, userWriteMask, UA_NODEATTRIBUTESMASK_USERWRITEMASK      \
     )
+// NOLINTEND(cppcoreguidelines-macro-usage)
 
 /**
  * UA_NodeAttributes wrapper class.
@@ -1850,7 +1835,7 @@ public:
     /// Construct with default values from open62541.
     /// The `clientHandle` parameter cannot be set by the user, any value will be replaced by the
     /// client before sending the request to the server.
-    // NOLINTNEXTLINE
+    // NOLINTNEXTLINE(hicpp-explicit-conversions)
     MonitoringParameters(
         double samplingInterval = 250.0,
         ExtensionObject filter = {},

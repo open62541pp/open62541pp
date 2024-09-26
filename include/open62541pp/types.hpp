@@ -46,7 +46,7 @@ public:
     /// Create a StatusCode with the default status code `UA_STATUSCODE_GOOD`.
     constexpr StatusCode() noexcept = default;
 
-    constexpr StatusCode(UA_StatusCode code) noexcept  // NOLINT, implicit wanted
+    constexpr StatusCode(UA_StatusCode code) noexcept  // NOLINT(hicpp-explicit-conversions)
         : Wrapper(code) {}
 
     /// Explicitly get underlying UA_StatusCode.
@@ -256,7 +256,7 @@ public:
         : StringWrapper(detail::allocNativeString(str)) {}
 
     /// Implicit conversion to std::string_view.
-    operator std::string_view() const noexcept {  // NOLINT, implicit wanted
+    operator std::string_view() const noexcept {  // NOLINT(hicpp-explicit-conversions)
         return {data(), size()};
     }
 
@@ -359,7 +359,7 @@ public:
     using TypeWrapper::TypeWrapper;  // inherit constructors
 
     template <typename Clock, typename Duration>
-    DateTime(std::chrono::time_point<Clock, Duration> timePoint)  // NOLINT, implicit wanted
+    DateTime(std::chrono::time_point<Clock, Duration> timePoint)  // NOLINT(*-explicit-conversions)
         : DateTime(fromTimePoint(timePoint)) {}
 
     /// Get current DateTime.
@@ -446,11 +446,13 @@ public:
 
     explicit Guid(std::array<uint8_t, 16> data) noexcept
         : Guid(UA_Guid{
+              // NOLINTBEGIN(hicpp-signed-bitwise)
               static_cast<uint32_t>(
                   (data[0] << 24U) | (data[1] << 16U) | (data[2] << 8U) | data[3]
-              ),  // NOLINT
-              static_cast<uint16_t>((data[4] << 8U) | data[5]),  // NOLINT
-              static_cast<uint16_t>((data[6] << 8U) | data[7]),  // NOLINT
+              ),
+              static_cast<uint16_t>((data[4] << 8U) | data[5]),
+              static_cast<uint16_t>((data[6] << 8U) | data[7]),
+              // NOLINTEND(hicpp-signed-bitwise)
               {data[8], data[9], data[10], data[11], data[12], data[13], data[14], data[15]},
           }) {}
 
@@ -547,7 +549,7 @@ public:
         : StringWrapper(detail::allocNativeString(str)) {}
 
     /// Implicit conversion to std::string_view.
-    operator std::string_view() const noexcept {  // NOLINT, implicit wanted
+    operator std::string_view() const noexcept {  // NOLINT(hicpp-explicit-conversions)
         return {data(), size()};
     }
 
@@ -628,7 +630,7 @@ public:
     /// The namespace is retrieved by calling e.g. `getNamespace(opcua::ObjectId)`.
     /// Make sure to provide an overload for custom enum types.
     template <typename T, typename = std::enable_if_t<detail::IsNodeIdEnum<T>::value>>
-    NodeId(T identifier) noexcept  // NOLINT, implicit wanted
+    NodeId(T identifier) noexcept  // NOLINT(hicpp-explicit-conversions)
         : NodeId(getNamespace(identifier).index, static_cast<uint32_t>(identifier)) {}
 
     bool isNull() const noexcept {
@@ -859,7 +861,6 @@ inline bool operator!=(const UA_LocalizedText& lhs, const UA_LocalizedText& rhs)
 }
 
 /* ------------------------------------------- Variant ------------------------------------------ */
-
 
 /**
  * Policies for variant factory methods Variant::fromScalar, Variant::fromArray.

@@ -17,8 +17,7 @@ public:
 
     void assign(std::vector<DataType> dataTypes) {
         dataTypes_ = std::move(dataTypes);
-        // NOLINTNEXTLINE
-        array_ = std::unique_ptr<UA_DataTypeArray>(new UA_DataTypeArray{
+        array_ = std::make_unique<UA_DataTypeArray>(UA_DataTypeArray{
             nullptr,  // next
             dataTypes_.size(),
             asNative(dataTypes_.data()),

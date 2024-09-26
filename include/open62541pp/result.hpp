@@ -61,7 +61,7 @@ public:
         : code_(UA_STATUSCODE_GOOD),
           maybeValue_({}) {}
 
-    // NOLINTBEGIN(*-explicit-conversions)
+    // NOLINTBEGIN(hicpp-explicit-conversions)
 
     /**
      * Construct a Result with a value and a StatusCode (good or uncertain).
@@ -92,7 +92,7 @@ public:
         : code_(error.code()),
           maybeValue_(std::nullopt) {}
 
-    // NOLINTEND(*-explicit-conversions)
+    // NOLINTEND(hicpp-explicit-conversions)
 
     // NOLINTBEGIN(bugprone-unchecked-optional-access)
 
@@ -354,13 +354,13 @@ public:
     /**
      * Create a Result with the given StatusCode.
      */
-    constexpr Result(StatusCode code) noexcept  // NOLINT, implicit wanted
+    constexpr Result(StatusCode code) noexcept  // NOLINT(hicpp-explicit-conversions)
         : code_(code) {}
 
     /**
      * Create a Result with the given error.
      */
-    constexpr Result(BadResult error) noexcept  // NOLINT, implicit wanted
+    constexpr Result(BadResult error) noexcept  // NOLINT(hicpp-explicit-conversions)
         : code_(error.code()) {}
 
     constexpr void operator*() const noexcept {}

@@ -86,7 +86,7 @@ struct AsyncServiceAdapter {
 
         return asyncInitiate<TransformResult>(
             [&](auto&& completionHandler, auto&& transform) {
-                // NOLINTNEXTLINE, false positive?
+                // NOLINTNEXTLINE(clang-analyzer-cplusplus.NewDeleteLeaks), false positive?
                 auto callbackAndContext = createCallbackAndContext(
                     opcua::detail::getContext(client).exceptionCatcher,
                     std::forward<decltype(transform)>(transform),
