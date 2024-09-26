@@ -4,7 +4,6 @@
 #include <vector>
 
 #include "open62541pp/async.hpp"
-#include "open62541pp/client.hpp"
 #include "open62541pp/config.hpp"
 #include "open62541pp/result.hpp"
 #include "open62541pp/services/detail/client_services.hpp"
@@ -15,6 +14,10 @@
 #include "open62541pp/types_composed.hpp"
 
 #ifdef UA_ENABLE_METHODCALLS
+
+namespace opcua {
+class Client;
+}  // namespace opcua
 
 namespace opcua::services {
 

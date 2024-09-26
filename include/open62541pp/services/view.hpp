@@ -15,7 +15,6 @@
 #include "open62541pp/types.hpp"
 #include "open62541pp/types_composed.hpp"
 
-// forward declarations
 namespace opcua {
 class Client;
 class Server;

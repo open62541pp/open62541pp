@@ -9,7 +9,6 @@
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 
-// forward declarations
 namespace opcua {
 class Client;
 }  // namespace opcua
