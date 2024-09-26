@@ -47,7 +47,7 @@ TEST_CASE("Attribute service set (highlevel)") {
         CHECK(services::readValueRank(server, id).value() == attr.getValueRank());
         CHECK(
             services::readArrayDimensions(server, id).value() ==
-            std::vector<uint32_t>(attr.getArrayDimensions())
+            std::vector(attr.getArrayDimensions().begin(), attr.getArrayDimensions().end())
         );
         CHECK(services::readAccessLevel(server, id).value() == attr.getAccessLevel());
         CHECK(

@@ -8,7 +8,6 @@
 #include <limits>
 #include <type_traits>
 #include <utility>  // swap
-#include <vector>
 
 namespace opcua {
 
@@ -93,12 +92,6 @@ public:
      */
     constexpr Span(std::initializer_list<value_type> values) noexcept
         : Span(values.begin(), values.size()) {}
-
-    /// Explicit conversion to `std::vector`.
-    template <typename Allocator>
-    explicit operator std::vector<value_type, Allocator>() const {
-        return {cbegin(), cend()};
-    }
 
     constexpr void swap(Span& other) noexcept {
         std::swap(data_, other.data_);
