@@ -1,8 +1,5 @@
 #pragma once
 
-#include <string>
-#include <vector>
-
 #include "open62541pp/bitmask.hpp"
 #include "open62541pp/common.hpp"  // AccessLevel, WriteMask
 #include "open62541pp/detail/open62541/common.h"  // UA_AccessControl
@@ -13,12 +10,6 @@
 #include "open62541pp/types_composed.hpp"  // UserTokenPolicy, PerformUpdateType
 
 namespace opcua {
-
-/// Login credentials.
-struct Login {
-    std::string username;
-    std::string password;
-};
 
 /**
  * Access control base class.
@@ -115,73 +106,6 @@ public:
 
     UA_AccessControl create() override;
     void clear(UA_AccessControl& ac) noexcept override;
-};
-
-/* ----------------------------------- Default access control ----------------------------------- */
-
-/**
- * Default access control.
- *
- * This class implements the same logic as @ref UA_AccessControl_default().
- * The log-in can be anonymous or username-password. A logged-in user has all access rights.
- *
- * @warning Use less permissive access control in production!
- */
-class AccessControlDefault : public AccessControlBase {
-public:
-    explicit AccessControlDefault(bool allowAnonymous = true, std::vector<Login> logins = {});
-
-    Span<UserTokenPolicy> getUserTokenPolicies() override;
-
-    StatusCode activateSession(
-        Session& session,
-        const EndpointDescription& endpointDescription,
-        const ByteString& secureChannelRemoteCertificate,
-        const ExtensionObject& userIdentityToken
-    ) override;
-
-    void closeSession(Session& session) override;
-
-    Bitmask<WriteMask> getUserRightsMask(Session& session, const NodeId& nodeId) override;
-
-    Bitmask<AccessLevel> getUserAccessLevel(Session& session, const NodeId& nodeId) override;
-
-    bool getUserExecutable(Session& session, const NodeId& methodId) override;
-
-    bool getUserExecutableOnObject(Session& session, const NodeId& methodId, const NodeId& objectId)
-        override;
-
-    bool allowAddNode(Session& session, const AddNodesItem& item) override;
-
-    bool allowAddReference(Session& session, const AddReferencesItem& item) override;
-
-    bool allowDeleteNode(Session& session, const DeleteNodesItem& item) override;
-
-    bool allowDeleteReference(Session& session, const DeleteReferencesItem& item) override;
-
-    bool allowBrowseNode(Session& session, const NodeId& nodeId) override;
-
-    bool allowTransferSubscription(Session& oldSession, Session& newSession) override;
-
-    bool allowHistoryUpdate(
-        Session& session,
-        const NodeId& nodeId,
-        PerformUpdateType performInsertReplace,
-        const DataValue& value
-    ) override;
-
-    bool allowHistoryDelete(
-        Session& session,
-        const NodeId& nodeId,
-        DateTime startTimestamp,
-        DateTime endTimestamp,
-        bool isDeleteModified
-    ) override;
-
-private:
-    bool allowAnonymous_;
-    std::vector<Login> logins_;
-    std::vector<UserTokenPolicy> userTokenPolicies_;
 };
 
 }  // namespace opcua
