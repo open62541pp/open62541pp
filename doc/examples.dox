@@ -20,7 +20,7 @@
 @example events/server_events.cpp
 @example events/client_eventfilter.cpp
 
-@example custom_datatypes/custom_datatypes.h
+@example custom_datatypes/custom_datatypes.hpp
 @example custom_datatypes/server_custom_datatypes.cpp
 @example custom_datatypes/client_custom_datatypes.cpp
 

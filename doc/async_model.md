@@ -110,4 +110,4 @@ The trait's `opcua::AsyncResult::initiate` member function is called with three 
 2. A concrete completion handler with the signature `void(opcua::Result<T>)` or `void(opcua::Result<T>&)`
 3. Any additional arguments for the function object
 
-Please have a look at implementations in @ref async.h for further details.
+Please have a look at implementations in @ref async.hpp for further details.
