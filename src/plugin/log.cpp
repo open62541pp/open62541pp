@@ -5,7 +5,6 @@
 #include <string>
 
 #include "open62541pp/config.hpp"
-#include "open62541pp/config.hpp"
 #include "open62541pp/detail/string_utils.hpp"  // detail::toString
 
 namespace opcua {
