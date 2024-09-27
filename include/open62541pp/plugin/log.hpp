@@ -60,7 +60,7 @@ public:
     explicit LoggerHandler(Logger logger)
         : logger_(std::move(logger)) {}
 
-    virtual void log(LogLevel level, LogCategory category, std::string_view msg) {
+    void log(LogLevel level, LogCategory category, std::string_view msg) override {
         if (logger_) {
             logger_(level, category, msg);
         }
