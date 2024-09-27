@@ -6,10 +6,7 @@
 
 namespace opcua {
 
-// forward declare
-class QualifiedName;
 class Server;
-class Variant;
 
 /**
  * High-level session class to manage client sessions.

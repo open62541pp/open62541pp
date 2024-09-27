@@ -7,17 +7,12 @@
 #include "open62541pp/common.hpp"  // AccessLevel, WriteMask
 #include "open62541pp/detail/open62541/common.h"  // UA_AccessControl
 #include "open62541pp/plugin/pluginadapter.hpp"
+#include "open62541pp/session.hpp"
 #include "open62541pp/span.hpp"
 #include "open62541pp/types.hpp"
 #include "open62541pp/types_composed.hpp"  // UserTokenPolicy, PerformUpdateType
 
 namespace opcua {
-
-// forward declare
-class DataValue;
-class DateTime;
-class ExtensionObject;
-class Session;
 
 /// Login credentials.
 struct Login {

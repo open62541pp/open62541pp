@@ -875,7 +875,6 @@ enum class VariantPolicy {
     // clang-format on
 };
 
-// forward declarations
 namespace detail {
 template <VariantPolicy>
 struct VariantHandler;

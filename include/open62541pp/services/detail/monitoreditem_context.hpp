@@ -8,7 +8,6 @@
 #include "open62541pp/types_composed.hpp"  // DataValue, Variant
 #include "open62541pp/wrapper.hpp"  // asWrapper
 
-// forward declare
 struct UA_Client;
 struct UA_Server;
 

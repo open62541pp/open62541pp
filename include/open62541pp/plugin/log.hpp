@@ -57,10 +57,10 @@ using Logger = std::function<void(LogLevel, LogCategory, std::string_view msg)>;
  */
 class LoggerHandler : public LoggerBase {
 public:
-    LoggerHandler(Logger logger)
+    explicit LoggerHandler(Logger logger)
         : logger_(std::move(logger)) {}
 
-    virtual void log(LogLevel level, LogCategory category, std::string_view msg) {
+    void log(LogLevel level, LogCategory category, std::string_view msg) override {
         if (logger_) {
             logger_(level, category, msg);
         }

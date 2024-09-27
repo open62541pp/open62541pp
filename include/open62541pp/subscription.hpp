@@ -16,7 +16,6 @@
 
 namespace opcua {
 
-// forward declarations
 class EventFilter;
 class Server;
 
