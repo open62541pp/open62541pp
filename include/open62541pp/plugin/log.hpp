@@ -1,8 +1,6 @@
 #pragma once
 
-#include <functional>
 #include <string_view>
-#include <utility>  // move
 
 #include "open62541pp/detail/open62541/common.h"  // UA_LogLevel, UA_LogCategory, UA_Logger
 #include "open62541pp/plugin/pluginadapter.hpp"
@@ -47,27 +45,6 @@ public:
 
     UA_Logger create() override;
     void clear(UA_Logger& native) noexcept override;
-};
-
-/// Log function signature.
-using Logger = std::function<void(LogLevel, LogCategory, std::string_view msg)>;
-
-/**
- * Logger class that wraps a log handler.
- */
-class LoggerHandler : public LoggerBase {
-public:
-    explicit LoggerHandler(Logger logger)
-        : logger_(std::move(logger)) {}
-
-    void log(LogLevel level, LogCategory category, std::string_view msg) override {
-        if (logger_) {
-            logger_(level, category, msg);
-        }
-    }
-
-private:
-    Logger logger_;
 };
 
 /* ---------------------------------------------------------------------------------------------- */

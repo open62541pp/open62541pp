@@ -16,6 +16,7 @@
 #include "open62541pp/types_composed.hpp"
 
 #include "open62541pp/plugin/log.hpp"
+#include "open62541pp/plugin/log_default.hpp"  // LogFunction
 
 namespace opcua {
 class Client;

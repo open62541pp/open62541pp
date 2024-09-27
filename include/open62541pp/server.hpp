@@ -12,13 +12,14 @@
 #include "open62541pp/detail/open62541/server.h"
 #include "open62541pp/event.hpp"
 #include "open62541pp/nodeids.hpp"
+#include "open62541pp/session.hpp"
 #include "open62541pp/span.hpp"
 #include "open62541pp/subscription.hpp"
 #include "open62541pp/types.hpp"
-#include "open62541pp/session.hpp"
 
-#include "open62541pp/plugin/log.hpp"
 #include "open62541pp/plugin/accesscontrol.hpp"
+#include "open62541pp/plugin/log.hpp"
+#include "open62541pp/plugin/log_default.hpp"  // LogFunction
 #include "open62541pp/plugin/nodestore.hpp"
 
 namespace opcua {

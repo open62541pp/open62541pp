@@ -9,7 +9,7 @@
 #include "open62541pp/config.hpp"
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/exception.hpp"
-#include "open62541pp/plugin/log.hpp"
+#include "open62541pp/plugin/log_default.hpp"
 #include "open62541pp/typewrapper.hpp"
 
 namespace opcua::crypto {
@@ -31,7 +31,7 @@ CreateCertificateResult createCertificate(
     // OpenSSL errors will generate a generic UA_STATUSCODE_BADINTERNALERROR status code
     // detailed errors are reported through error log messages -> capture log messages
     std::optional<std::string> error;
-    LoggerHandler loggerAdapter(
+    LoggerDefault loggerAdapter(
         [&](LogLevel level, [[maybe_unused]] LogCategory category, std::string_view msg) {
             if (level >= LogLevel::Error && !error /* keep first error */) {
                 error = msg;
