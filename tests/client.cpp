@@ -17,13 +17,6 @@ using namespace opcua;
 
 constexpr std::string_view localServerUrl{"opc.tcp://localhost:4840"};
 
-TEST_CASE("Client with custom logger") {
-    bool gotMessage = false;
-    Client client([&gotMessage](auto&&...) { gotMessage = true; });
-    log(client, LogLevel::Error, LogCategory::Client, "Message");
-    CHECK(gotMessage);
-}
-
 TEST_CASE("Client discovery") {
     Server server;
     ServerRunner serverRunner(server);

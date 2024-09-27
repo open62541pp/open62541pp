@@ -40,6 +40,9 @@ namespace detail {
 UA_ServerConfig* getConfig(UA_Server* server) noexcept;
 UA_ServerConfig& getConfig(Server& server) noexcept;
 
+UA_Logger* getLogger(UA_Server* server) noexcept;
+UA_Logger* getLogger(Server& server) noexcept;
+
 ServerConnection* getConnection(UA_Server* server) noexcept;
 ServerConnection& getConnection(Server& server) noexcept;
 
@@ -191,6 +194,16 @@ inline bool operator==(const Server& lhs, const Server& rhs) noexcept {
 
 inline bool operator!=(const Server& lhs, const Server& rhs) noexcept {
     return !(lhs == rhs);
+}
+
+/// Log a message with UA_Server's logger.
+inline void log(UA_Server* server, LogLevel level, LogCategory category, std::string_view msg) {
+    log(detail::getLogger(server), level, category, msg);
+}
+
+/// Log a message with Server's logger.
+inline void log(Server& server, LogLevel level, LogCategory category, std::string_view msg) {
+    log(detail::getLogger(server), level, category, msg);
 }
 
 }  // namespace opcua

@@ -7,13 +7,13 @@
 #include "open62541pp/datatype.hpp"
 #include "open62541pp/detail/open62541/server.h"  // UA_ServerConfig
 #include "open62541pp/detail/types_handling.hpp"  // detail::deallocateArray
+#include "open62541pp/plugin/log.hpp"
 #include "open62541pp/session.hpp"
 #include "open62541pp/span.hpp"
 #include "open62541pp/types.hpp"
 #include "open62541pp/types_composed.hpp"  // UserTokenPolicy
 
 #include "customdatatypes.hpp"
-#include "plugin/log_default.hpp"
 #include "plugin/pluginmanager.hpp"
 
 namespace opcua {
@@ -28,7 +28,7 @@ public:
 
     void setLogger(Logger logger) {
         if (logger) {
-            logger_.assign(LoggerAdapter(std::move(logger)));
+            logger_.assign(LoggerHandler(std::move(logger)));
         }
     }
 

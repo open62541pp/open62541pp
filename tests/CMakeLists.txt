@@ -3,7 +3,6 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/3rdparty/doctest doctest EXCLUDE_FROM_ALL
 add_executable(
     open62541pp_tests
     main.cpp
-    accesscontrol.cpp
     async.cpp
     bitmask.cpp
     client.cpp
@@ -15,7 +14,9 @@ add_executable(
     exceptioncatcher.cpp
     logger.cpp
     node.cpp
+    plugin_accesscontrol.cpp
     plugin_create_certificate.cpp
+    plugin_log.cpp
     pluginmanager.cpp
     result.cpp
     scope.cpp
