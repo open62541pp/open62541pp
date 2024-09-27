@@ -138,7 +138,7 @@ deprecated_header(types/DateTime.h types.hpp)
 deprecated_header(types/ExtensionObject.h types.hpp)
 deprecated_header(types/NodeId.h types.hpp)
 deprecated_header(types/Variant.h types.hpp)
-deprecated_header(AccessControl.h plugin/accesscontrol.hpp)
+deprecated_header(AccessControl.h plugin/accesscontrol_default.hpp)
 deprecated_header(async.h async.hpp)
 deprecated_header(Bitmask.h bitmask.hpp)
 deprecated_header(Client.h client.hpp)
@@ -174,6 +174,7 @@ add_library(
     src/monitoreditem.cpp
     src/node.cpp
     src/plugin/accesscontrol.cpp
+    src/plugin/accesscontrol_default.cpp
     src/plugin/create_certificate.cpp
     src/plugin/log.cpp
     src/server.cpp

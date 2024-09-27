@@ -4,6 +4,7 @@
 
 #include "open62541pp/config.hpp"
 #include "open62541pp/plugin/accesscontrol.hpp"
+#include "open62541pp/plugin/accesscontrol_default.hpp"
 #include "open62541pp/server.hpp"
 #include "open62541pp/session.hpp"
 
@@ -135,7 +136,7 @@ public:
 };
 
 #if UAPP_OPEN62541_VER_GE(1, 3)
-TEST_CASE("AccessControl plugin adapter") {
+TEST_CASE("AccessControlBase") {
     Server server;
     AccessControlTest accessControl;
     UA_AccessControl native = accessControl.create();

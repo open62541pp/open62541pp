@@ -7,7 +7,7 @@
 #include "open62541pp/client.hpp"
 #include "open62541pp/config.hpp"
 #include "open62541pp/detail/open62541/client.h"
-#include "open62541pp/plugin/accesscontrol.hpp"
+#include "open62541pp/plugin/accesscontrol_default.hpp"
 #include "open62541pp/server.hpp"
 
 #include "helper/server_runner.hpp"
