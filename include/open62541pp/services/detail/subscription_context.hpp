@@ -7,7 +7,6 @@
 #include "open62541pp/types_composed.hpp"  // StatusChangeNotification
 #include "open62541pp/wrapper.hpp"  // asWrapper
 
-// forward declare
 struct UA_Client;
 
 namespace opcua::services::detail {

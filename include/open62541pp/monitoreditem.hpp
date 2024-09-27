@@ -12,7 +12,6 @@
 
 namespace opcua {
 
-// forward declarations
 class Server;
 
 using MonitoringParametersEx = services::MonitoringParametersEx;

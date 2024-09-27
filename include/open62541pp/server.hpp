@@ -8,25 +8,22 @@
 
 #include "open62541pp/common.hpp"  // NamespaceIndex
 #include "open62541pp/config.hpp"
+#include "open62541pp/datatype.hpp"
 #include "open62541pp/detail/open62541/server.h"
+#include "open62541pp/event.hpp"
 #include "open62541pp/nodeids.hpp"
 #include "open62541pp/plugin/log.hpp"
+#include "open62541pp/plugin/accesscontrol.hpp"
+#include "open62541pp/plugin/nodestore.hpp"
 #include "open62541pp/span.hpp"
 #include "open62541pp/subscription.hpp"
+#include "open62541pp/types.hpp"
+#include "open62541pp/session.hpp"
 
-// forward declaration
 namespace opcua {
-class AccessControlBase;
-class ByteString;
-class DataType;
-class Event;
 template <typename Connection>
 class Node;
-class NodeId;
 class Server;
-class Session;
-struct ValueBackendDataSource;
-struct ValueCallback;
 
 namespace detail {
 struct ServerConnection;

@@ -8,10 +8,7 @@
 
 namespace opcua {
 
-// forward declare
-class DateTime;
 class Server;
-class Variant;
 
 /**
  * Create and trigger events.

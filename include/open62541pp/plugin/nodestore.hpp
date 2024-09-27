@@ -2,11 +2,9 @@
 
 #include <functional>
 
-namespace opcua {
+#include "open62541pp/types.hpp"
 
-// forward declaration
-class NodeId;
-class DataValue;
+namespace opcua {
 
 /**
  * Value callbacks for variable nodes.
