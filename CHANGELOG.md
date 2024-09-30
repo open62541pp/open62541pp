@@ -7,6 +7,229 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Read `DataTypeDefinition` attribute from data type nodes (#145)
+- Client inactivity callback (#304)
+- Create subscription with `StatusChangeNotificationCallback` (#309)
+- Raw Subscription services (#310)
+- Raw MonitoredItem services (#312)
+- Version macros `UAPP_VERSION`, `UAPP_VERSION_MAJOR`, `UAPP_VERSION_MINOR`, `UAPP_VERSION_PATCH` (#316)
+- `Client::setUserIdentityToken` (#325)
+- STL-compatible interface for `String`, `ByteString`, `XmlElement` (#330)
+- Construct `Guid` from `std::array<uint8_t, 16>` (#332)
+- Compatibility for open62541 v1.4 (#341)
+- Update open62541 to v1.3.12 (#342)
+- Copyable/movable `Node`, `Session`, `Event`, `Subscription`, `MonitoredItem` (#344)
+
+### Changed
+
+- Remove all deprecated functions/types (#305, 308)
+- Remove special `Server` overloads in MonitoredItem service set (#306)
+- Deprecate `Client::get*Node`, `Server::get*Node`, use `Node` constructor instead (#320)
+- Deprecate `Server::createEvent`, use `Event` constructor instead (#321)
+- Deprecate `Client::connect` with `Login`, use `Client::setUserIdentityToken` instead (#326)
+- Deprecate `String::get()`, `ByteString::get()` and `XmlElement::get()`, use `static_cast<std::string_view>(...)` instead (#328, #329, #335)
+- Rename `NumericRange::get` -> `NumericRange::dimensions`
+- Remove `ByteString::fromFile`, `ByteString::toFile` (#337)
+- Rename `Logger` -> `LogFunction` (#355)
+- Remove `log(...)` overloads (#356)
+- New header file structure (#348, #353): The header file structure became quite complex and tangled over time. The new structure is similar to open62541. All headers are now snake case with the extension `.hpp`. When coming from open62541, usually you just have to make a small adjustment in your includes:
+
+  ```diff
+  - #include <open62541/server.h>
+  + #include <open62541pp/server.hpp>
+  - #include <open62541/plugin/accesscontrol_default.h>
+  + #include <open62541pp/plugin/accesscontrol_default.hpp>
+  ```
+
+  We tried to keep the migration as smooth as possible. The old headers are generated via CMake, include the new header and raise a compiler warning.
+  The Python script [`tools/update_deprecated_includes.py`](https://github.com/open62541pp/open62541pp/blob/master/tools/update_deprecated_includes.py) can be used to automatically replace the includes in your project.
+
+  <details>
+    <summary>Summary of the <code>#include</code> changes</summary>
+    <table>
+      <thead>
+        <tr>
+          <th>Old Header File(s)</th>
+          <th>New Header File(s)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>open62541pp/plugins/PluginAdapter.h</code></td>
+          <td><code>open62541pp/plugin/pluginadapter.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/services/Attribute_highlevel.h</code></td>
+          <td><code>open62541pp/services/attribute_highlevel.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/services/Attribute.h</code></td>
+          <td><code>open62541pp/services/attribute.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/services/Method.h</code></td>
+          <td><code>open62541pp/services/method.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/services/MonitoredItem.h</code></td>
+          <td><code>open62541pp/services/monitoreditem.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/services/NodeManagement.h</code></td>
+          <td><code>open62541pp/services/nodemanagement.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/services/Subscription.h</code></td>
+          <td><code>open62541pp/services/subscription.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/services/View.h</code></td>
+          <td><code>open62541pp/services/view.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/services/services.h</code></td>
+          <td><code>open62541pp/services/services.hpp</code></td>
+        </tr>
+        <tr>
+          <td>
+            <code>open62541pp/types/Builtin.h</code><br>
+            <code>open62541pp/types/DataValue.h</code><br>
+            <code>open62541pp/types/DateTime.h</code><br>
+            <code>open62541pp/types/ExtensionObject.h</code><br>
+            <code>open62541pp/types/NodeId.h</code><br>
+            <code>open62541pp/types/Variant.h</code>
+          </td>
+          <td><code>open62541pp/types.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/types/Composed.h</code></td>
+          <td><code>open62541pp/types_composed.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/AccessControl.h</code></td>
+          <td>
+            <code>open62541pp/plugin/accesscontrol.hpp</code>
+            <code>open62541pp/plugin/accesscontrol_default.hpp</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/async.h</code></td>
+          <td><code>open62541pp/async.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/Bitmask.h</code></td>
+          <td><code>open62541pp/bitmask.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/Client.h</code></td>
+          <td><code>open62541pp/client.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/Common.h</code></td>
+          <td><code>open62541pp/common.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/Config.h</code></td>
+          <td><code>open62541pp/config.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/Crypto.h</code></td>
+          <td><code>open62541pp/plugin/create_certificate.hpp</code></td>
+        </tr>
+        <tr>
+          <td>
+            <code>open62541pp/DataType.h</code><br>
+            <code>open62541pp/DataTypeBuilder.h</code>
+          </td>
+          <td><code>open62541pp/datatype.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/ErrorHandling.h</code></td>
+          <td><code>open62541pp/exception.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/Event.h</code></td>
+          <td><code>open62541pp/event.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/Logger.h</code></td>
+          <td>
+            <code>open62541pp/plugin/log.hpp</code><br>
+            <code>open62541pp/plugin/log_default.hpp</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/MonitoredItem.h</code></td>
+          <td><code>open62541pp/monitoreditem.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/Node.h</code></td>
+          <td><code>open62541pp/node.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/NodeIds.h</code></td>
+          <td><code>open62541pp/nodeids.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/open62541pp.h</code></td>
+          <td><code>open62541pp/open62541pp.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/Result.h</code></td>
+          <td><code>open62541pp/result.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/Server.h</code></td>
+          <td><code>open62541pp/server.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/Session.h</code></td>
+          <td><code>open62541pp/session.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/Span.h</code></td>
+          <td><code>open62541pp/span.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/Subscription.h</code></td>
+          <td><code>open62541pp/subscription.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/TypeConverter.h</code></td>
+          <td><code>open62541pp/typeconverter.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/TypeRegistry.h</code></td>
+          <td><code>open62541pp/typeregistry.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/TypeRegistryNative.h</code></td>
+          <td><code>open62541pp/typeregistry_generated.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/TypeWrapper.h</code></td>
+          <td><code>open62541pp/typewrapper.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/ValueBackend.h</code></td>
+          <td><code>open62541pp/plugin/nodestore.hpp</code></td>
+        </tr>
+        <tr>
+          <td><code>open62541pp/Wrapper.h</code></td>
+          <td><code>open62541pp/wrapper.hpp</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </details>
+
+### Fixed
+
+- Type error in highlevel attribute async read functions (#303)
+- Add missing `<exception>` include for `std::exception_ptr` (#317)
+- Clang-tidy v18 errors (#343)
+
 ## [0.14.0] - 2024-07-18
 
 ### Added
