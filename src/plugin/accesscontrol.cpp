@@ -4,7 +4,6 @@
 #include <exception>
 #include <functional>  // invoke
 #include <optional>
-#include <string>
 #include <string_view>
 #include <type_traits>  // invoke_result_t
 
@@ -40,12 +39,16 @@ inline static std::optional<Session> getSession(
 static void logException(
     UA_Server* server, std::string_view callbackName, std::string_view exceptionMessage
 ) {
-    const auto message =
-        std::string("Exception in access control callback ")
-            .append(callbackName)
-            .append(": ")
-            .append(exceptionMessage);
-    log(server, LogLevel::Warning, LogCategory::Server, message);
+    // NOLINTNEXTLINE
+    UA_LOG_WARNING(
+        detail::getLogger(server),
+        UA_LOGCATEGORY_SERVER,
+        "Exception in access control callback %.*s: %.*s",
+        static_cast<int>(callbackName.size()),
+        callbackName.data(),
+        static_cast<int>(exceptionMessage.size()),
+        exceptionMessage.data()
+    );
 }
 
 template <typename F, typename ReturnType = std::invoke_result_t<F>>

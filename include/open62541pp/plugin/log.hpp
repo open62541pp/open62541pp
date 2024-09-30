@@ -47,12 +47,4 @@ public:
     void clear(UA_Logger& native) noexcept override;
 };
 
-/* ---------------------------------------------------------------------------------------------- */
-
-/// Log a message with a UA_Logger instance (pointer).
-void log(const UA_Logger* logger, LogLevel level, LogCategory category, std::string_view msg);
-
-/// Log a message with a UA_Logger instance (reference).
-void log(const UA_Logger& logger, LogLevel level, LogCategory category, std::string_view msg);
-
 }  // namespace opcua

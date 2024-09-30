@@ -26,30 +26,9 @@ TEST_CASE_TEMPLATE("Log with custom logger", T, Server, Client) {
     // passing a nullptr should do nothing
     connection.setLogger(nullptr);
 
-    SUBCASE("Wrapper") {
-        counter = 0;
-        log(connection, LogLevel::Info, LogCategory::Server, "Message");
-        CHECK(counter == 1);
-        CHECK(lastLogLevel == LogLevel::Info);
-        CHECK(lastLogCategory == LogCategory::Server);
-        CHECK(lastMessage == "Message");
-    }
-
-    SUBCASE("Native") {
-        auto native = connection.handle();
-        counter = 0;
-        log(native, LogLevel::Warning, LogCategory::Server, "Message from native");
-        CHECK(counter == 1);
-        CHECK(lastLogLevel == LogLevel::Warning);
-        CHECK(lastLogCategory == LogCategory::Server);
-        CHECK(lastMessage == "Message from native");
-    }
-
-    SUBCASE("Native nullptr") {
-        auto native = connection.handle();
-        native = nullptr;
-        counter = 0;
-        log(native, LogLevel::Warning, LogCategory::Server, "Message from null");
-        CHECK(counter == 0);
-    }
+    UA_LOG_INFO(detail::getLogger(connection), UA_LOGCATEGORY_SERVER, "Message");
+    CHECK(counter == 1);
+    CHECK(lastLogLevel == LogLevel::Info);
+    CHECK(lastLogCategory == LogCategory::Server);
+    CHECK(lastMessage == "Message");
 }

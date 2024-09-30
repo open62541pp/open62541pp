@@ -2,7 +2,6 @@
 
 #include <cassert>
 #include <cstdarg>  // va_list
-#include <string>
 
 #include "open62541pp/config.hpp"
 #include "open62541pp/detail/string_utils.hpp"  // detail::toString
@@ -54,25 +53,5 @@ void LoggerBase::clear(UA_Logger& native) noexcept {
 //         plugin = nullptr;
 //     }
 // }
-
-/* ---------------------------------------------------------------------------------------------- */
-
-void log(const UA_Logger* logger, LogLevel level, LogCategory category, std::string_view msg) {
-    if (logger == nullptr || logger->log == nullptr) {
-        return;
-    }
-    va_list args{};  // NOLINT
-    logger->log(
-        logger->context,
-        static_cast<UA_LogLevel>(level),
-        static_cast<UA_LogCategory>(category),
-        std::string(msg).c_str(),
-        args  // NOLINT
-    );
-}
-
-void log(const UA_Logger& logger, LogLevel level, LogCategory category, std::string_view msg) {
-    log(&logger, level, category, msg);
-}
 
 }  // namespace opcua
