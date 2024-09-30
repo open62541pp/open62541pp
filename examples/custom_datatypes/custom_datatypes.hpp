@@ -2,7 +2,8 @@
 
 #include <cstdint>
 
-#include "open62541pp/open62541pp.hpp"
+#include <open62541pp/datatype.hpp>
+#include <open62541pp/types.hpp>
 
 // Example struct
 struct Point {

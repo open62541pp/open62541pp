@@ -1,6 +1,7 @@
 #include <iostream>
 
-#include "open62541pp/open62541pp.hpp"
+#include <open62541pp/node.hpp>
+#include <open62541pp/server.hpp>
 
 int main() {
     opcua::Server server(4840 /* port */);

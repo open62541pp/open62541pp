@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string_view>
 
-#include "open62541pp/open62541pp.hpp"
+#include <open62541pp/server.hpp>
 
 constexpr std::string_view getLogLevelName(opcua::LogLevel level) {
     switch (level) {

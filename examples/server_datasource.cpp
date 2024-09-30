@@ -1,6 +1,7 @@
 #include <iostream>
 
-#include "open62541pp/open62541pp.hpp"
+#include <open62541pp/server.hpp>
+#include <open62541pp/services/nodemanagement.hpp>
 
 int main() {
     opcua::Server server(4840);

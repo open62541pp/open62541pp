@@ -11,16 +11,17 @@
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/exception.hpp"
 #include "open62541pp/nodeids.hpp"
-#include "open62541pp/services/attribute.hpp"
-#include "open62541pp/services/attribute_highlevel.hpp"
-#include "open62541pp/services/method.hpp"
-#include "open62541pp/services/nodemanagement.hpp"
-#include "open62541pp/services/view.hpp"
 #include "open62541pp/span.hpp"
 #include "open62541pp/typeregistry.hpp"  // getDataType
 #include "open62541pp/types.hpp"
 #include "open62541pp/types_composed.hpp"
 #include "open62541pp/wrapper.hpp"  // asWrapper
+
+#include "open62541pp/services/attribute.hpp"
+#include "open62541pp/services/attribute_highlevel.hpp"
+#include "open62541pp/services/method.hpp"
+#include "open62541pp/services/nodemanagement.hpp"
+#include "open62541pp/services/view.hpp"
 
 namespace opcua {
 

@@ -1,6 +1,8 @@
 #include <iostream>
 
-#include "open62541pp/open62541pp.hpp"
+#include <open62541pp/node.hpp>
+#include <open62541pp/plugin/accesscontrol_default.hpp>
+#include <open62541pp/server.hpp>
 
 using namespace opcua;
 

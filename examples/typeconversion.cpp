@@ -10,7 +10,8 @@
 #include <cstddef>  // byte, to_integer
 #include <iostream>
 
-#include "open62541pp/open62541pp.hpp"
+#include <open62541pp/typeconverter.hpp>
+#include <open62541pp/types.hpp>
 
 namespace opcua {
 

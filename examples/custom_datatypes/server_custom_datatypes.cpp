@@ -1,4 +1,5 @@
-#include "open62541pp/open62541pp.hpp"
+#include <open62541pp/server.hpp>
+#include <open62541pp/node.hpp>
 
 #include "custom_datatypes.hpp"
 

@@ -1,6 +1,7 @@
 #include <algorithm>
 
-#include "open62541pp/open62541pp.hpp"
+#include <open62541pp/server.hpp>
+#include <open62541pp/node.hpp>
 
 int main() {
     opcua::Server server;

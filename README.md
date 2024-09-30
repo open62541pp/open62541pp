@@ -68,7 +68,7 @@ cog.out(Path("examples/server_minimal.cpp").read_text())
 cog.outl("```")
 ]]] -->
 ```cpp
-#include "open62541pp/open62541pp.hpp"
+#include <open62541pp/open62541pp.hpp>
 
 int main() {
     opcua::Server server;
@@ -96,7 +96,7 @@ cog.outl("```")
 ```cpp
 #include <iostream>
 
-#include "open62541pp/open62541pp.hpp"
+#include <open62541pp/open62541pp.hpp>
 
 int main() {
     opcua::Client client;
