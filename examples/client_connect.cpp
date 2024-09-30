@@ -1,7 +1,9 @@
 #include <iostream>
 
+#include <open62541pp/client.hpp>
+#include <open62541pp/node.hpp>
+
 #include "helper.hpp"  // CliParser
-#include "open62541pp/open62541pp.hpp"
 
 int main(int argc, char* argv[]) {
     const CliParser parser(argc, argv);

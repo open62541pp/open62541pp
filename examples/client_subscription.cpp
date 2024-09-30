@@ -2,7 +2,7 @@
 #include <iostream>
 #include <thread>
 
-#include "open62541pp/open62541pp.hpp"
+#include <open62541pp/client.hpp>
 
 int main() {
     opcua::Client client;
