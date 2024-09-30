@@ -26,7 +26,7 @@ public:
         setUserIdentityToken(ExtensionObject::fromDecodedCopy(std::forward<T>(token)));
     }
 
-    void setLogger(Logger logger) {
+    void setLogger(LogFunction logger) {
         if (logger) {
             logger_.assign(LoggerDefault(std::move(logger)));
         }

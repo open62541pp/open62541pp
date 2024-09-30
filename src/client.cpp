@@ -205,7 +205,7 @@ struct ClientConnection : public ConnectionBase<Client> {
 
 /* ------------------------------------------- Client ------------------------------------------- */
 
-Client::Client(Logger logger)
+Client::Client(LogFunction logger)
     : connection_(std::make_unique<detail::ClientConnection>()) {
     // The logger should be set as soon as possible, ideally even before UA_ClientConfig_setDefault.
     // However, the logger gets overwritten by UA_ClientConfig_setDefault() in older versions of
@@ -287,7 +287,7 @@ std::vector<EndpointDescription> Client::getEndpoints(std::string_view serverUrl
     return result;
 }
 
-void Client::setLogger(Logger logger) {
+void Client::setLogger(LogFunction logger) {
     connection_->config.setLogger(std::move(logger));
 }
 

@@ -72,7 +72,9 @@ public:
      * @param logger Custom log function. If the passed function is empty, the default logger is
      * used.
      */
-    explicit Server(uint16_t port = 4840, ByteString certificate = {}, Logger logger = nullptr);
+    explicit Server(
+        uint16_t port = 4840, ByteString certificate = {}, LogFunction logger = nullptr
+    );
 
 #ifdef UA_ENABLE_ENCRYPTION
     /**
@@ -112,9 +114,9 @@ public:
     Server& operator=(const Server&) = delete;
     Server& operator=(Server&&) noexcept = default;
 
-    /// Set custom logging function.
+    /// Set custom log function.
     /// Does nothing if the passed function is empty or a nullptr.
-    void setLogger(Logger logger);
+    void setLogger(LogFunction logger);
 
     /// Set custom access control.
     /// @note Supported since open62541 v1.3
