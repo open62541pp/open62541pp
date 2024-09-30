@@ -81,13 +81,6 @@ TEST_CASE("Server constructors") {
     SUBCASE("Custom port and certificate") {
         Server server(4850, ByteString("certificate"));
     }
-
-    SUBCASE("Custom logger") {
-        bool gotMessage = false;
-        Server server(4850, {}, [&gotMessage](auto&&...) { gotMessage = true; });
-        log(server, LogLevel::Error, LogCategory::Server, "Message");
-        CHECK(gotMessage);
-    }
 }
 
 #ifdef UA_ENABLE_ENCRYPTION

@@ -195,14 +195,4 @@ inline bool operator!=(const Server& lhs, const Server& rhs) noexcept {
     return !(lhs == rhs);
 }
 
-/// Log a message with UA_Server's logger.
-inline void log(UA_Server* server, LogLevel level, LogCategory category, std::string_view msg) {
-    log(detail::getLogger(server), level, category, msg);
-}
-
-/// Log a message with Server's logger.
-inline void log(Server& server, LogLevel level, LogCategory category, std::string_view msg) {
-    log(detail::getLogger(server), level, category, msg);
-}
-
 }  // namespace opcua

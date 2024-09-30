@@ -224,14 +224,4 @@ inline bool operator!=(const Client& lhs, const Client& rhs) noexcept {
     return !(lhs == rhs);
 }
 
-/// Log a message with UA_Client's logger.
-inline void log(UA_Client* client, LogLevel level, LogCategory category, std::string_view msg) {
-    log(detail::getLogger(client), level, category, msg);
-}
-
-/// Log a message with Client's logger.
-inline void log(Client& client, LogLevel level, LogCategory category, std::string_view msg) {
-    log(detail::getLogger(client), level, category, msg);
-}
-
 }  // namespace opcua
