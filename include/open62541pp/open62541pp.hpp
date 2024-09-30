@@ -28,6 +28,7 @@
 #include "open62541pp/plugin/accesscontrol_default.hpp"
 #include "open62541pp/plugin/create_certificate.hpp"
 #include "open62541pp/plugin/log.hpp"
+#include "open62541pp/plugin/log_default.hpp"
 #include "open62541pp/plugin/nodestore.hpp"
 #include "open62541pp/plugin/pluginadapter.hpp"
 

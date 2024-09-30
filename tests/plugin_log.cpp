@@ -3,6 +3,7 @@
 #include <doctest/doctest.h>
 
 #include "open62541pp/plugin/log.hpp"
+#include "open62541pp/plugin/log_default.hpp"
 
 using namespace opcua;
 
