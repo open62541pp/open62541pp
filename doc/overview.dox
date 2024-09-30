@@ -3,5 +3,6 @@
 
 An overview of open62541pp's core concepts and the features.
 
+- @subpage error_handling
 - @subpage async_model
 */

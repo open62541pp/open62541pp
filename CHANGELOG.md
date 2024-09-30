@@ -35,17 +35,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rename `Logger` -> `LogFunction` (#355)
 - Remove `log(...)` overloads (#356)
 - New header file structure (#348, #353): The header file structure became quite complex and tangled over time. The new structure is similar to open62541. All headers are now snake case with the extension `.hpp`. When coming from open62541, usually you just have to make a small adjustment in your includes:
-
   ```diff
   - #include <open62541/server.h>
   + #include <open62541pp/server.hpp>
   - #include <open62541/plugin/accesscontrol_default.h>
   + #include <open62541pp/plugin/accesscontrol_default.hpp>
   ```
-
   We tried to keep the migration as smooth as possible. The old headers are generated via CMake, include the new header and raise a compiler warning.
   The Python script [`tools/update_deprecated_includes.py`](https://github.com/open62541pp/open62541pp/blob/master/tools/update_deprecated_includes.py) can be used to automatically replace the includes in your project.
-
   <details>
     <summary>Summary of the <code>#include</code> changes</summary>
     <table>
