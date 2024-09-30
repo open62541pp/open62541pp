@@ -69,7 +69,7 @@ public:
      * @param logger Custom log function. If the passed function is empty, the default logger is
      * used.
      */
-    explicit Client(Logger logger = nullptr);
+    explicit Client(LogFunction logger = nullptr);
 
 #ifdef UA_ENABLE_ENCRYPTION
     /**
@@ -117,9 +117,9 @@ public:
      */
     std::vector<EndpointDescription> getEndpoints(std::string_view serverUrl);
 
-    /// Set custom logging function.
+    /// Set custom log function.
     /// Does nothing if the passed function is empty or a nullptr.
-    void setLogger(Logger logger);
+    void setLogger(LogFunction logger);
 
     /// Set response timeout in milliseconds.
     void setTimeout(uint32_t milliseconds);

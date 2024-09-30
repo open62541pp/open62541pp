@@ -26,7 +26,7 @@ public:
     ServerConfig(UA_ServerConfig& config)
         : config_(config) {}
 
-    void setLogger(Logger logger) {
+    void setLogger(LogFunction logger) {
         if (logger) {
             logger_.assign(LoggerDefault(std::move(logger)));
         }

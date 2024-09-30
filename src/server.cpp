@@ -179,7 +179,7 @@ struct ServerConnection : public ConnectionBase<Server> {
 
 /* ------------------------------------------- Server ------------------------------------------- */
 
-Server::Server(uint16_t port, ByteString certificate, Logger logger)
+Server::Server(uint16_t port, ByteString certificate, LogFunction logger)
     : connection_(std::make_unique<detail::ServerConnection>()) {
     // The logger should be set as soon as possible, ideally even before UA_ServerConfig_setMinimal.
     // However, the logger gets overwritten by UA_ServerConfig_setMinimal() in older versions of
@@ -230,7 +230,7 @@ Server::Server(
 
 Server::~Server() = default;
 
-void Server::setLogger(Logger logger) {
+void Server::setLogger(LogFunction logger) {
     connection_->config.setLogger(std::move(logger));
 }
 
