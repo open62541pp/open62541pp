@@ -37,7 +37,7 @@ var searchData=
   ['bitfieldmaskdatatype_34',['BitFieldMaskDataType',['../group__NodeIds.html#gga5d7e0b8d020dc1893a646f9ea8ae780aa76b0ab0bf7be01086bb00f115e8f70fb',1,'opcua']]],
   ['bitwiseand_35',['BitwiseAnd',['../group__Wrapper.html#gga240d33d34b407018b5e1b2c213556e47a50c15b40bc46de3e3528e17fe119209e',1,'opcua']]],
   ['bitwiseor_36',['BitwiseOr',['../group__Wrapper.html#gga240d33d34b407018b5e1b2c213556e47a8041b508037c30ae59fe353b74918a1b',1,'opcua']]],
-  ['boolean_37',['Boolean',['../namespaceopcua.html#a83669427d4f4639c57ec0b499c5fdc10a27226c864bac7454a8504f8edb15d95b',1,'opcua::Boolean'],['../group__NodeIds.html#gga5d7e0b8d020dc1893a646f9ea8ae780aa27226c864bac7454a8504f8edb15d95b',1,'opcua::Boolean']]],
+  ['boolean_37',['Boolean',['../group__NodeIds.html#gga5d7e0b8d020dc1893a646f9ea8ae780aa27226c864bac7454a8504f8edb15d95b',1,'opcua']]],
   ['both_38',['Both',['../namespaceopcua.html#a48413b17f689df1df40a1d3fdc0c7d80a130c5b3473c57faa76e2a1c54e26f88e',1,'opcua::Both'],['../namespaceopcua.html#a68cb6a5e2027c6b73055cb2f4eaeb36da130c5b3473c57faa76e2a1c54e26f88e',1,'opcua::Both']]],
   ['brokerconnectiontransportdatatype_39',['BrokerConnectionTransportDataType',['../group__NodeIds.html#gga5d7e0b8d020dc1893a646f9ea8ae780aab94d8c1790d88d1436cdd2f5f1786f82',1,'opcua']]],
   ['brokerconnectiontransportdatatype_5fencoding_5fdefaultbinary_40',['BrokerConnectionTransportDataType_Encoding_DefaultBinary',['../group__NodeIds.html#gga6b06d7222b3fa4b8831080ac76bb6016ad015c739f8a031778186939f74a36084',1,'opcua']]],
@@ -130,6 +130,6 @@ var searchData=
   ['buildinfotype_5fproductname_127',['BuildInfoType_ProductName',['../group__NodeIds.html#ggab93e889b7152d5a78a993070276d1a70afeed72e46cc29e148a8abb0139afe4ce',1,'opcua']]],
   ['buildinfotype_5fproducturi_128',['BuildInfoType_ProductUri',['../group__NodeIds.html#ggab93e889b7152d5a78a993070276d1a70a2e12b76b533bf8fe090e6154216d43b7',1,'opcua']]],
   ['buildinfotype_5fsoftwareversion_129',['BuildInfoType_SoftwareVersion',['../group__NodeIds.html#ggab93e889b7152d5a78a993070276d1a70a7fd36cc192044f417115fd78aca97fe6',1,'opcua']]],
-  ['byte_130',['Byte',['../namespaceopcua.html#a83669427d4f4639c57ec0b499c5fdc10aa245c3230debe5c956484ecc6fa93877',1,'opcua::Byte'],['../group__NodeIds.html#gga5d7e0b8d020dc1893a646f9ea8ae780aaa245c3230debe5c956484ecc6fa93877',1,'opcua::Byte']]],
-  ['bytestring_131',['ByteString',['../namespaceopcua.html#a83669427d4f4639c57ec0b499c5fdc10a58efa9e8b8491c4a42cbf3bead1b06b6',1,'opcua::ByteString'],['../group__NodeIds.html#gga5d7e0b8d020dc1893a646f9ea8ae780aa58efa9e8b8491c4a42cbf3bead1b06b6',1,'opcua::ByteString'],['../namespaceopcua.html#a05d617e4c64656fa2ef6baf2af636f90a58efa9e8b8491c4a42cbf3bead1b06b6',1,'opcua::ByteString']]]
+  ['byte_130',['Byte',['../group__NodeIds.html#gga5d7e0b8d020dc1893a646f9ea8ae780aaa245c3230debe5c956484ecc6fa93877',1,'opcua']]],
+  ['bytestring_131',['ByteString',['../group__NodeIds.html#gga5d7e0b8d020dc1893a646f9ea8ae780aa58efa9e8b8491c4a42cbf3bead1b06b6',1,'opcua::ByteString'],['../namespaceopcua.html#a05d617e4c64656fa2ef6baf2af636f90a58efa9e8b8491c4a42cbf3bead1b06b6',1,'opcua::ByteString']]]
 ];

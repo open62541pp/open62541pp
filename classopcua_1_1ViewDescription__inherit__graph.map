@@ -1,7 +1,7 @@
 <map id="opcua::ViewDescription" name="opcua::ViewDescription">
-<area shape="rect" id="Node000001" title="UA_ViewDescription wrapper class." alt="" coords="36,181,211,207"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,79,241,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="126,147,126,181,121,181,121,147"/>
-<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap native objects." alt="" coords="42,5,205,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="126,44,126,79,121,79,121,44"/>
+<area shape="rect" id="Node000001" title="UA_ViewDescription wrapper class." alt="" coords="36,196,211,221"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,93,241,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="126,162,126,196,121,196,121,162"/>
+<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="44,5,203,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="126,59,126,93,121,93,121,59"/>
 </map>

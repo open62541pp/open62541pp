@@ -1,7 +1,5 @@
 <map id="opcua::services::detail::MonitoredItemContext" name="opcua::services::detail::MonitoredItemContext">
-<area shape="rect" id="Node000001" title=" " alt="" coords="98,93,275,133"/>
-<area shape="rect" id="Node000002" href="$structopcua_1_1services_1_1detail_1_1CallbackAdapter.html" title="Helper class to map open62541 / C&#45;style callbacks to std::function objects." alt="" coords="5,5,173,45"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="123,52,167,91,163,95,119,56"/>
-<area shape="rect" id="Node000003" href="$structopcua_1_1detail_1_1Staleable.html" title="Object that can mark itself as stale (to be removed)." alt="" coords="198,13,373,38"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="264,49,210,95,207,91,260,45"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,93,183,133"/>
+<area shape="rect" id="Node000002" href="$structopcua_1_1services_1_1detail_1_1CallbackAdapter.html" title="Helper class to map open62541 / C&#45;style callbacks to std::function objects." alt="" coords="10,5,178,45"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="97,59,97,93,91,93,91,59"/>
 </map>

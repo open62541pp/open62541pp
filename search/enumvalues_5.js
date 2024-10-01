@@ -216,7 +216,7 @@ var searchData=
   ['finitetransitionvariabletype_5fname_213',['FiniteTransitionVariableType_Name',['../group__NodeIds.html#ggab93e889b7152d5a78a993070276d1a70aca18b87412c2189ad9e8e89e60ea5cb9',1,'opcua']]],
   ['finitetransitionvariabletype_5fnumber_214',['FiniteTransitionVariableType_Number',['../group__NodeIds.html#ggab93e889b7152d5a78a993070276d1a70ac07842c20232da12826ee0eb2bb14b5f',1,'opcua']]],
   ['finitetransitionvariabletype_5ftransitiontime_215',['FiniteTransitionVariableType_TransitionTime',['../group__NodeIds.html#ggab93e889b7152d5a78a993070276d1a70a6b346bc80f610eac56488c832e5aaed4',1,'opcua']]],
-  ['float_216',['Float',['../namespaceopcua.html#a83669427d4f4639c57ec0b499c5fdc10a22ae0e2b89e5e3d477f988cc36d3272b',1,'opcua::Float'],['../group__NodeIds.html#gga5d7e0b8d020dc1893a646f9ea8ae780aa22ae0e2b89e5e3d477f988cc36d3272b',1,'opcua::Float']]],
+  ['float_216',['Float',['../group__NodeIds.html#gga5d7e0b8d020dc1893a646f9ea8ae780aa22ae0e2b89e5e3d477f988cc36d3272b',1,'opcua']]],
   ['foldertype_217',['FolderType',['../group__NodeIds.html#ggafdc54bd43cfb42b3b67045de3968aa22ab5018bad0131db51cc3cd6969057151a',1,'opcua']]],
   ['forward_218',['Forward',['../namespaceopcua.html#a48413b17f689df1df40a1d3fdc0c7d80a67d2f6740a8eaebf4d5c6f79be8da481',1,'opcua']]],
   ['frame_219',['Frame',['../group__NodeIds.html#gga5d7e0b8d020dc1893a646f9ea8ae780aa3bb3e8c8a24891ba0f7608bcc96f8b0a',1,'opcua']]],

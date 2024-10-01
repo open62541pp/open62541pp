@@ -1,0 +1,14 @@
+<map id="/home/runner/work/open62541pp/open62541pp/include/open62541pp/nodeids.hpp" name="/home/runner/work/open62541pp/open62541pp/include/open62541pp/nodeids.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,263,60"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="47,181,114,207"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="118,61,94,109,87,139,84,168,79,167,82,138,89,107,113,59"/>
+<area shape="rect" id="Node000003" href="$common_8hpp.html" title=" " alt="" coords="103,108,301,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="157,58,186,95,182,99,153,62"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="184,136,113,177,111,172,181,131"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="145,181,243,207"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="203,134,199,168,194,168,198,133"/>
+<area shape="rect" id="Node000005" href="$bitmask_8hpp.html" title=" " alt="" coords="267,181,462,207"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="229,131,327,173,324,178,227,136"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="319,255,411,280"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="367,207,367,241,362,241,362,207"/>
+</map>

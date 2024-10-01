@@ -165,6 +165,6 @@ var searchData=
   ['literaloperand_5fencoding_5fdefaultjson_162',['LiteralOperand_Encoding_DefaultJson',['../group__NodeIds.html#gga6b06d7222b3fa4b8831080ac76bb6016a79d50470624ceca13ab2c7220e2fb68e',1,'opcua']]],
   ['literaloperand_5fencoding_5fdefaultxml_163',['LiteralOperand_Encoding_DefaultXml',['../group__NodeIds.html#gga6b06d7222b3fa4b8831080ac76bb6016a6263cc1e89892702c642c8b0fff53d5d',1,'opcua']]],
   ['localeid_164',['LocaleId',['../group__NodeIds.html#gga5d7e0b8d020dc1893a646f9ea8ae780aafcbbf6b867f1880343ef3d14915dfe5f',1,'opcua']]],
-  ['localizedtext_165',['LocalizedText',['../namespaceopcua.html#a83669427d4f4639c57ec0b499c5fdc10a26889eee67d7ccc649f6188d0c20ad2b',1,'opcua::LocalizedText'],['../group__NodeIds.html#gga5d7e0b8d020dc1893a646f9ea8ae780aa26889eee67d7ccc649f6188d0c20ad2b',1,'opcua::LocalizedText']]],
+  ['localizedtext_165',['LocalizedText',['../group__NodeIds.html#gga5d7e0b8d020dc1893a646f9ea8ae780aa26889eee67d7ccc649f6188d0c20ad2b',1,'opcua']]],
   ['localtime_166',['LocalTime',['../group__NodeIds.html#ggab93e889b7152d5a78a993070276d1a70a622ebefe0ba9d681db9aa5703d2fbd42',1,'opcua']]]
 ];

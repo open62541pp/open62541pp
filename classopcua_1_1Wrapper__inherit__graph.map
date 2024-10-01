@@ -1,0 +1,7 @@
+<map id="opcua::Wrapper&lt; T &gt;" name="opcua::Wrapper&lt; T &gt;">
+<area shape="rect" id="Node000001" title="Template base class to wrap native objects." alt="" coords="27,5,190,31"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title="Template base class to wrap UA_* type objects." alt="" coords="31,79,186,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="111,44,111,79,106,79,106,44"/>
+<area shape="rect" id="Node000003" href="$classopcua_1_1detail_1_1StringWrapper.html" title=" " alt="" coords="5,167,212,207"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="111,133,111,166,106,166,106,133"/>
+</map>

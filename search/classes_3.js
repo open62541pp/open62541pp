@@ -18,8 +18,10 @@ var searchData=
   ['contextmap_3c_20submonid_2c_20opcua_3a_3aservices_3a_3adetail_3a_3amonitoreditemcontext_20_3e_15',['ContextMap&lt; SubMonId, opcua::services::detail::MonitoredItemContext &gt;',['../classopcua_1_1detail_1_1ContextMap.html',1,'opcua::detail']]],
   ['createcertificateerror_16',['CreateCertificateError',['../classopcua_1_1CreateCertificateError.html',1,'opcua']]],
   ['createcertificateresult_17',['CreateCertificateResult',['../structopcua_1_1crypto_1_1CreateCertificateResult.html',1,'opcua::crypto']]],
-  ['createsubscriptionrequest_18',['CreateSubscriptionRequest',['../classopcua_1_1CreateSubscriptionRequest.html',1,'opcua']]],
-  ['createsubscriptionresponse_19',['CreateSubscriptionResponse',['../classopcua_1_1CreateSubscriptionResponse.html',1,'opcua']]],
-  ['ctxjson_20',['CtxJson',['open62541/structCtxJson.html',0,'']]],
-  ['customcallback_21',['CustomCallback',['open62541/structCustomCallback.html',0,'']]]
+  ['createmonitoreditemsrequest_18',['CreateMonitoredItemsRequest',['../classopcua_1_1CreateMonitoredItemsRequest.html',1,'opcua']]],
+  ['createmonitoreditemsresponse_19',['CreateMonitoredItemsResponse',['../classopcua_1_1CreateMonitoredItemsResponse.html',1,'opcua']]],
+  ['createsubscriptionrequest_20',['CreateSubscriptionRequest',['../classopcua_1_1CreateSubscriptionRequest.html',1,'opcua']]],
+  ['createsubscriptionresponse_21',['CreateSubscriptionResponse',['../classopcua_1_1CreateSubscriptionResponse.html',1,'opcua']]],
+  ['ctxjson_22',['CtxJson',['open62541/structCtxJson.html',0,'']]],
+  ['customcallback_23',['CustomCallback',['open62541/structCustomCallback.html',0,'']]]
 ];

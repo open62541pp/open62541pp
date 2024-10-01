@@ -1,0 +1,17 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,205,124,230"/>
+<area shape="rect" id="Node000001" href="$structopcua_1_1detail_1_1AlwaysFalse.html" title=" " alt="" coords="179,5,373,45"/>
+<area shape="poly" id="edge268_Node000000_Node000001" title=" " alt="" coords="74,191,110,123,137,87,170,55,191,43,193,48,174,59,141,90,114,126,79,193"/>
+<area shape="rect" id="Node000002" href="$structopcua_1_1detail_1_1IsContiguousContainer.html" title=" " alt="" coords="177,69,375,109"/>
+<area shape="poly" id="edge269_Node000000_Node000002" title=" " alt="" coords="84,192,122,155,171,119,196,107,199,112,173,124,126,159,88,196"/>
+<area shape="rect" id="Node000003" href="$structopcua_1_1detail_1_1IsConvertibleType.html" title=" " alt="" coords="176,133,376,173"/>
+<area shape="poly" id="edge270_Node000000_Node000003" title=" " alt="" coords="120,198,208,171,210,176,121,203"/>
+<area shape="rect" id="Node000004" href="$structopcua_1_1detail_1_1IsNodeIdEnum.html" title=" " alt="" coords="172,197,380,237"/>
+<area shape="poly" id="edge271_Node000000_Node000004" title=" " alt="" coords="138,215,172,215,172,220,138,220"/>
+<area shape="rect" id="Node000005" href="$structopcua_1_1detail_1_1IsRegisteredType.html" title=" " alt="" coords="179,261,373,301"/>
+<area shape="poly" id="edge272_Node000000_Node000005" title=" " alt="" coords="121,232,210,259,208,264,120,237"/>
+<area shape="rect" id="Node000006" href="$structopcua_1_1detail_1_1IsSpan.html" title=" " alt="" coords="197,325,355,365"/>
+<area shape="poly" id="edge273_Node000000_Node000006" title=" " alt="" coords="88,239,126,276,173,311,199,323,196,328,171,316,122,280,84,243"/>
+<area shape="rect" id="Node000007" href="$structopcua_1_1detail_1_1IsStaleable.html" title="Check if an object as a boolean stale flag." alt="" coords="183,389,369,429"/>
+<area shape="poly" id="edge274_Node000000_Node000007" title=" " alt="" coords="79,241,114,308,141,344,174,375,193,387,191,392,170,379,137,348,110,311,74,244"/>
+</map>

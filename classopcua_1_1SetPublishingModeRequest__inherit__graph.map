@@ -1,7 +1,7 @@
 <map id="opcua::SetPublishingModeRequest" name="opcua::SetPublishingModeRequest">
-<area shape="rect" id="Node000001" title="UA_SetPublishingModeRequest wrapper class." alt="" coords="583,13,776,53"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="216,5,535,60"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="548,30,582,30,582,35,548,35"/>
-<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap native objects." alt="" coords="5,20,168,45"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="182,30,216,30,216,35,182,35"/>
+<area shape="rect" id="Node000001" title="UA_SetPublishingModeRequest wrapper class." alt="" coords="641,13,835,53"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="275,5,593,60"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="607,30,641,30,641,35,607,35"/>
+<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="5,13,227,53"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="240,30,275,30,275,35,240,35"/>
 </map>

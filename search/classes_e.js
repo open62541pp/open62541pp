@@ -5,5 +5,6 @@ var searchData=
   ['periodicserverregistercallback_2',['PeriodicServerRegisterCallback',['open62541/structPeriodicServerRegisterCallback.html',0,'']]],
   ['periodicserverregistercallback_5fentry_3',['periodicServerRegisterCallback_entry',['open62541/structperiodicServerRegisterCallback__entry.html',0,'']]],
   ['pluginadapter_4',['PluginAdapter',['../classopcua_1_1PluginAdapter.html',1,'opcua']]],
-  ['pluginadapter_3c_20ua_5faccesscontrol_20_3e_5',['PluginAdapter&lt; UA_AccessControl &gt;',['../classopcua_1_1PluginAdapter.html',1,'opcua']]]
+  ['pluginadapter_3c_20ua_5faccesscontrol_20_3e_5',['PluginAdapter&lt; UA_AccessControl &gt;',['../classopcua_1_1PluginAdapter.html',1,'opcua']]],
+  ['pluginadapter_3c_20ua_5flogger_20_3e_6',['PluginAdapter&lt; UA_Logger &gt;',['../classopcua_1_1PluginAdapter.html',1,'opcua']]]
 ];

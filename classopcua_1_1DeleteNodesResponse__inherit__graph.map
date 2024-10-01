@@ -1,7 +1,7 @@
 <map id="opcua::DeleteNodesResponse" name="opcua::DeleteNodesResponse">
-<area shape="rect" id="Node000001" title="UA_DeleteNodesResponse wrapper class." alt="" coords="37,181,253,207"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,79,284,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="147,147,147,181,142,181,142,147"/>
-<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap native objects." alt="" coords="63,5,226,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="147,44,147,79,142,79,142,44"/>
+<area shape="rect" id="Node000001" title="UA_DeleteNodesResponse wrapper class." alt="" coords="37,196,253,221"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,93,284,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="147,162,147,196,142,196,142,162"/>
+<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="49,5,240,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="147,59,147,93,142,93,142,59"/>
 </map>

@@ -1,8 +1,8 @@
 var searchData=
 [
   ['readme_2emd_0',['README.md',['../README_8md.html',1,'(Global Namespace)'],['open62541/README_8md.html',0,'(Global Namespace)']]],
-  ['requesthandling_2eh_1',['RequestHandling.h',['../RequestHandling_8h.html',1,'']]],
-  ['responsehandling_2eh_2',['ResponseHandling.h',['../ResponseHandling_8h.html',1,'']]],
-  ['result_2eh_3',['Result.h',['../Result_8h.html',1,'']]],
-  ['result_5futil_2eh_4',['result_util.h',['../result__util_8h.html',1,'']]]
+  ['request_5fhandling_2ehpp_1',['request_handling.hpp',['../request__handling_8hpp.html',1,'']]],
+  ['response_5fhandling_2ehpp_2',['response_handling.hpp',['../response__handling_8hpp.html',1,'']]],
+  ['result_2ehpp_3',['result.hpp',['../result_8hpp.html',1,'']]],
+  ['result_5futils_2ehpp_4',['result_utils.hpp',['../result__utils_8hpp.html',1,'']]]
 ];

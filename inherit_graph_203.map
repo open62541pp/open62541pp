@@ -1,0 +1,7 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,37,109,63"/>
+<area shape="rect" id="Node000001" href="$structopcua_1_1IsBitmaskEnum.html" title="Trait to define an enum (class) as a bitmask and allow bitwise operations." alt="" coords="161,5,371,31"/>
+<area shape="poly" id="edge275_Node000000_Node000001" title=" " alt="" coords="123,37,183,28,183,33,123,43"/>
+<area shape="rect" id="Node000002" href="$structopcua_1_1detail_1_1IsStaleable_3_01T_00_01std_1_1void__t_3_01decltype_07std_1_1declval_3_01T_01_4_07_08_8stale_08_4_01_4.html" title=" " alt="" coords="157,55,375,109"/>
+<area shape="poly" id="edge276_Node000000_Node000002" title=" " alt="" coords="123,57,158,63,157,68,123,63"/>
+</map>

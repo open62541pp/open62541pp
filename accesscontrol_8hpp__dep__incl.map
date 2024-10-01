@@ -1,0 +1,11 @@
+<map id="/home/runner/work/open62541pp/open62541pp/include/open62541pp/plugin/accesscontrol.hpp" name="/home/runner/work/open62541pp/open62541pp/include/open62541pp/plugin/accesscontrol.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="27,5,285,60"/>
+<area shape="rect" id="Node000002" href="$open62541pp_8hpp.html" title=" " alt="" coords="27,211,285,265"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="61,69,36,87,17,109,10,123,8,135,10,147,17,161,41,188,73,208,70,213,38,192,13,164,5,149,3,135,5,122,13,107,33,83,58,64"/>
+<area shape="rect" id="Node000003" href="$accesscontrol__default_8hpp.html" title=" " alt="" coords="27,108,285,163"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="159,74,159,108,153,108,153,74"/>
+<area shape="rect" id="Node000004" href="$server_8hpp.html" title=" " alt="" coords="309,108,566,163"/>
+<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="243,62,365,105,363,110,241,67"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="159,176,159,211,153,211,153,176"/>
+<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="352,170,230,213,229,208,350,165"/>
+</map>

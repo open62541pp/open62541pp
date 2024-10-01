@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['qualifiedname_0',['QualifiedName',['../namespaceopcua.html#a83669427d4f4639c57ec0b499c5fdc10ab4a75c1b2cfd3cb752898835cad346b0',1,'opcua::QualifiedName'],['../group__NodeIds.html#gga5d7e0b8d020dc1893a646f9ea8ae780aab4a75c1b2cfd3cb752898835cad346b0',1,'opcua::QualifiedName']]],
+  ['qualifiedname_0',['QualifiedName',['../group__NodeIds.html#gga5d7e0b8d020dc1893a646f9ea8ae780aab4a75c1b2cfd3cb752898835cad346b0',1,'opcua']]],
   ['querydatadescription_1',['QueryDataDescription',['../group__NodeIds.html#gga5d7e0b8d020dc1893a646f9ea8ae780aa06618a8a89f198c5f2f7a1dee86fc5f3',1,'opcua']]],
   ['querydatadescription_5fencoding_5fdefaultbinary_2',['QueryDataDescription_Encoding_DefaultBinary',['../group__NodeIds.html#gga6b06d7222b3fa4b8831080ac76bb6016a089928207c543c374fa0df5d06cee677',1,'opcua']]],
   ['querydatadescription_5fencoding_5fdefaultjson_3',['QueryDataDescription_Encoding_DefaultJson',['../group__NodeIds.html#gga6b06d7222b3fa4b8831080ac76bb6016a5d8ed85891da721b4b541de49f5326c2',1,'opcua']]],

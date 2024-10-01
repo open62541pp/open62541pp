@@ -1,7 +1,9 @@
 <map id="opcua::XmlElement" name="opcua::XmlElement">
-<area shape="rect" id="Node000001" title="UA_XmlElement wrapper class." alt="" coords="21,181,170,207"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,79,185,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="98,147,98,181,93,181,93,147"/>
-<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap native objects." alt="" coords="14,5,177,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="98,44,98,79,93,79,93,44"/>
+<area shape="rect" id="Node000001" title="UA_XmlElement wrapper class." alt="" coords="46,284,195,309"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1detail_1_1StringWrapper.html" title=" " alt="" coords="12,181,229,236"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="123,250,123,284,118,284,118,250"/>
+<area shape="rect" id="Node000003" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,93,236,133"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="123,147,123,181,118,181,118,147"/>
+<area shape="rect" id="Node000004" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="41,5,200,45"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="123,59,123,93,118,93,118,59"/>
 </map>

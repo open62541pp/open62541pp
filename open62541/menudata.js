@@ -198,5 +198,5 @@ var menudata={children:[
 {text:"x",url:"globals_defs_x.html#index_x"},
 {text:"z",url:"globals_defs_z.html#index_z"}]}]}]},
 {text:"Links",url:"usergroup0.html",children:[
-{text:"open62541++ API",url:"../index.html"},
+{text:"open62541pp API",url:"../index.html"},
 {text:"GitHub",url:"^https://github.com/open62541/open62541"}]}]}

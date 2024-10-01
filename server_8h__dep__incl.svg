@@ -22,11 +22,11 @@
 <!-- Node2 -->
 <g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_Node000002"><a xlink:href="Server_8h.html" target="_top" xlink:title=" ">
+<g id="a_Node000002"><a xlink:href="server_8hpp.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="#666666" points="193,-118 0,-118 0,-77 193,-77 193,-118"/>
 <text text-anchor="start" x="8" y="-106" font-family="Helvetica,sans-Serif" font-size="10.00">/home/runner/work/open62541pp</text>
 <text text-anchor="start" x="8" y="-95" font-family="Helvetica,sans-Serif" font-size="10.00">/open62541pp/include/open62541pp</text>
-<text text-anchor="middle" x="96.5" y="-84" font-family="Helvetica,sans-Serif" font-size="10.00">/Server.h</text>
+<text text-anchor="middle" x="96.5" y="-84" font-family="Helvetica,sans-Serif" font-size="10.00">/server.hpp</text>
 </a>
 </g>
 </g>
@@ -42,11 +42,11 @@
 <!-- Node3 -->
 <g id="Node000003" class="node">
 <title>Node3</title>
-<g id="a_Node000003"><a xlink:href="open62541pp_8h.html" target="_top" xlink:title=" ">
+<g id="a_Node000003"><a xlink:href="open62541pp_8hpp.html" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="#666666" points="193,-41 0,-41 0,0 193,0 193,-41"/>
 <text text-anchor="start" x="8" y="-29" font-family="Helvetica,sans-Serif" font-size="10.00">/home/runner/work/open62541pp</text>
 <text text-anchor="start" x="8" y="-18" font-family="Helvetica,sans-Serif" font-size="10.00">/open62541pp/include/open62541pp</text>
-<text text-anchor="middle" x="96.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">/open62541pp.h</text>
+<text text-anchor="middle" x="96.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">/open62541pp.hpp</text>
 </a>
 </g>
 </g>

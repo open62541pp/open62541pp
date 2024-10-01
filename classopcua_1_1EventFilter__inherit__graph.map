@@ -1,7 +1,7 @@
 <map id="opcua::EventFilter" name="opcua::EventFilter">
-<area shape="rect" id="Node000001" title="UA_EventFilter wrapper class." alt="" coords="25,181,163,207"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,79,183,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="97,147,97,181,91,181,91,147"/>
-<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap native objects." alt="" coords="13,5,175,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="97,44,97,79,91,79,91,44"/>
+<area shape="rect" id="Node000001" title="UA_EventFilter wrapper class." alt="" coords="25,196,163,221"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,93,183,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="97,162,97,196,91,196,91,162"/>
+<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="15,5,173,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="97,59,97,93,91,93,91,59"/>
 </map>

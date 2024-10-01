@@ -1,0 +1,15 @@
+<map id="/home/runner/work/open62541pp/open62541pp/include/open62541pp/session.hpp" name="/home/runner/work/open62541pp/open62541pp/include/open62541pp/session.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="89,5,347,60"/>
+<area shape="rect" id="Node000002" href="$open62541pp_8hpp.html" title=" " alt="" coords="5,313,263,368"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="126,69,100,87,79,110,57,149,49,184,53,221,67,264,82,290,102,311,98,315,78,293,62,266,47,222,43,184,52,147,75,106,96,83,123,64"/>
+<area shape="rect" id="Node000003" href="$accesscontrol_8hpp.html" title=" " alt="" coords="89,108,347,163"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="221,74,221,108,215,108,215,74"/>
+<area shape="rect" id="Node000005" href="$server_8hpp.html" title=" " alt="" coords="371,211,628,265"/>
+<area shape="poly" id="edge8_Node000001_Node000005" title=" " alt="" coords="289,64,361,106,425,158,477,208,473,212,422,162,358,110,287,68"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="123,171,98,189,79,212,74,224,72,237,78,264,92,289,110,312,106,315,88,292,73,266,67,237,69,223,74,209,94,185,120,167"/>
+<area shape="rect" id="Node000004" href="$accesscontrol__default_8hpp.html" title=" " alt="" coords="89,211,347,265"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="221,176,221,211,215,211,215,176"/>
+<area shape="poly" id="edge6_Node000003_Node000005" title=" " alt="" coords="305,165,427,208,425,213,303,170"/>
+<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="189,278,158,315,154,312,185,274"/>
+<area shape="poly" id="edge7_Node000005_Node000002" title=" " alt="" coords="392,271,230,316,228,311,391,266"/>
+</map>

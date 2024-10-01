@@ -1,7 +1,7 @@
 <map id="opcua::TranslateBrowsePathsToNodeIdsResponse" name="opcua::TranslateBrowsePathsToNodeIdsResponse">
-<area shape="rect" id="Node000001" title="UA_TranslateBrowsePathsToNodeIdsResponse wrapper class." alt="" coords="629,20,840,60"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="216,5,581,75"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="595,37,629,37,629,43,595,43"/>
-<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap native objects." alt="" coords="5,27,168,53"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="182,37,215,37,215,43,182,43"/>
+<area shape="rect" id="Node000001" title="UA_TranslateBrowsePathsToNodeIdsResponse wrapper class." alt="" coords="685,20,896,60"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="272,5,637,75"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="651,37,685,37,685,43,651,43"/>
+<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="5,13,224,67"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="238,37,271,37,271,43,238,43"/>
 </map>

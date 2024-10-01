@@ -1,0 +1,7 @@
+<map id="opcua::LoggerDefault" name="opcua::LoggerDefault">
+<area shape="rect" id="Node000001" title="Logger class that wraps a LogFunction." alt="" coords="5,167,167,192"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1LoggerBase.html" title="Logger base class." alt="" coords="13,93,159,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="89,132,89,167,83,167,83,132"/>
+<area shape="rect" id="Node000003" href="$classopcua_1_1PluginAdapter.html" title=" " alt="" coords="6,5,166,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="89,59,89,93,83,93,83,59"/>
+</map>

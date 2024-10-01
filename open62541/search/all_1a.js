@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['x_0',['x',['../structUA__XVType.html#a7261d77838fa03112a041eaf4ce20d31',1,'UA_XVType']]],
-  ['x_1',['X',['../struct__OpcUa__XVType.html#ad58a84b48af37032bbc317c7f0e554db',1,'_OpcUa_XVType']]],
+  ['x_0',['X',['../struct__OpcUa__XVType.html#ad58a84b48af37032bbc317c7f0e554db',1,'_OpcUa_XVType']]],
+  ['x_1',['x',['../structUA__XVType.html#a7261d77838fa03112a041eaf4ce20d31',1,'UA_XVType']]],
   ['xht_2eh_2',['xht.h',['../xht_8h.html',1,'']]],
   ['xht_5ffree_3',['xht_free',['../xht_8h.html#a0b80185ab76e2b04ef269f3bc18e1f4f',1,'xht.h']]],
   ['xht_5fget_4',['xht_get',['../xht_8h.html#aea42e90fb2b018712823c6b692306ff2',1,'xht.h']]],

@@ -808,7 +808,7 @@ var searchData=
   ['exclusiverateofchangealarmtype_5ftime_805',['ExclusiveRateOfChangeAlarmType_Time',['../group__NodeIds.html#ggab93e889b7152d5a78a993070276d1a70abc8bce11d0e7a2ea9fd8ffc3a184b084',1,'opcua']]],
   ['exclusiverateofchangealarmtype_5funsuppress_806',['ExclusiveRateOfChangeAlarmType_Unsuppress',['../group__NodeIds.html#ggac0a2d410d3bfad4769fc49900afc640ca32eee56e4507452a4e104121309561b2',1,'opcua']]],
   ['executable_807',['Executable',['../namespaceopcua.html#ac702b87ae822429bbdde24595a526917a38492e6b60e40c59a376e2151778e2c7',1,'opcua::Executable'],['../namespaceopcua.html#aa348a84f0c1993df6edaea06a949b010a38492e6b60e40c59a376e2151778e2c7',1,'opcua::Executable'],['../group__Wrapper.html#gga42262d028eb09bfea46b80cc454c6784a38492e6b60e40c59a376e2151778e2c7',1,'opcua::Executable']]],
-  ['expandednodeid_808',['ExpandedNodeId',['../namespaceopcua.html#a83669427d4f4639c57ec0b499c5fdc10a10dfa5f7ec4062dfb11461f88a30713d',1,'opcua::ExpandedNodeId'],['../group__NodeIds.html#gga5d7e0b8d020dc1893a646f9ea8ae780aa10dfa5f7ec4062dfb11461f88a30713d',1,'opcua::ExpandedNodeId']]],
+  ['expandednodeid_808',['ExpandedNodeId',['../group__NodeIds.html#gga5d7e0b8d020dc1893a646f9ea8ae780aa10dfa5f7ec4062dfb11461f88a30713d',1,'opcua']]],
   ['exposesitsarray_809',['ExposesItsArray',['../namespaceopcua.html#ad32e0c353b427fd8b7788a85a78335aaa9ef8b4a7f1d9137746c489caa1697988',1,'opcua']]],
   ['expressionguardvariabletype_810',['ExpressionGuardVariableType',['../group__NodeIds.html#gga3d11d26a1267284e457117a61229de7ba9d07c5abe58cb6914db68bd7c7c9006d',1,'opcua']]],
   ['expressionguardvariabletype_5fexpression_811',['ExpressionGuardVariableType_Expression',['../group__NodeIds.html#ggab93e889b7152d5a78a993070276d1a70a452969bbea24b2251aa3f438e04a5c67',1,'opcua']]],
@@ -818,6 +818,5 @@ var searchData=
   ['extensionfieldstype_5faddextensionfield_5foutputarguments_815',['ExtensionFieldsType_AddExtensionField_OutputArguments',['../group__NodeIds.html#ggab93e889b7152d5a78a993070276d1a70a1fe4812c09b280833596c261cef0ac9d',1,'opcua']]],
   ['extensionfieldstype_5fextensionfieldname_5fplaceholder_816',['ExtensionFieldsType_ExtensionFieldName_Placeholder',['../group__NodeIds.html#ggab93e889b7152d5a78a993070276d1a70a5e0e13980a31dae7e3fa5220a0322d69',1,'opcua']]],
   ['extensionfieldstype_5fremoveextensionfield_817',['ExtensionFieldsType_RemoveExtensionField',['../group__NodeIds.html#ggac0a2d410d3bfad4769fc49900afc640cac8a7c56def655034181d413821bfe60e',1,'opcua']]],
-  ['extensionfieldstype_5fremoveextensionfield_5finputarguments_818',['ExtensionFieldsType_RemoveExtensionField_InputArguments',['../group__NodeIds.html#ggab93e889b7152d5a78a993070276d1a70ae362dafd9708eca5847d7f3842ccf405',1,'opcua']]],
-  ['extensionobject_819',['ExtensionObject',['../namespaceopcua.html#a83669427d4f4639c57ec0b499c5fdc10a1adf19f65f9aa28f3b51d77b73f6b688',1,'opcua']]]
+  ['extensionfieldstype_5fremoveextensionfield_5finputarguments_818',['ExtensionFieldsType_RemoveExtensionField_InputArguments',['../group__NodeIds.html#ggab93e889b7152d5a78a993070276d1a70ae362dafd9708eca5847d7f3842ccf405',1,'opcua']]]
 ];

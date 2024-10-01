@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['back_0',['back',['../classopcua_1_1Span.html#ab022c76ab55cfb12f963394f4d362c10',1,'opcua::Span']]],
+  ['back_0',['back',['../classopcua_1_1Span.html#ab022c76ab55cfb12f963394f4d362c10',1,'opcua::Span::back()'],['../classopcua_1_1detail_1_1StringWrapper.html#a1b3785213018f03f723713bff3732450',1,'opcua::detail::StringWrapper::back() noexcept'],['../classopcua_1_1detail_1_1StringWrapper.html#ab875fe89bcb5ae1acb7067bf02ab0975',1,'opcua::detail::StringWrapper::back() const noexcept']]],
   ['baddisconnect_1',['BadDisconnect',['../classopcua_1_1BadDisconnect.html#a05f40cb7d011d86a826ab05c8b1822b6',1,'opcua::BadDisconnect']]],
   ['badresult_2',['BadResult',['../classopcua_1_1BadResult.html#aff7a0401e59cd303482c346aca1f5fa3',1,'opcua::BadResult']]],
   ['badstatus_3',['BadStatus',['../classopcua_1_1BadStatus.html#a5a621aadcf026462f72ca35f385a17e8',1,'opcua::BadStatus']]],
-  ['begin_4',['begin',['../classopcua_1_1Span.html#a3770bea5b309654c6dd317f423254d45',1,'opcua::Span']]],
+  ['begin_4',['begin',['../classopcua_1_1Span.html#a3770bea5b309654c6dd317f423254d45',1,'opcua::Span::begin()'],['../classopcua_1_1detail_1_1StringWrapper.html#a402a5af26a3e76c2658f219f5b00263b',1,'opcua::detail::StringWrapper::begin() noexcept'],['../classopcua_1_1detail_1_1StringWrapper.html#a4925727df0434e37dcc3846b1fc7a83c',1,'opcua::detail::StringWrapper::begin() const noexcept']]],
   ['bitmask_5',['Bitmask',['../classopcua_1_1Bitmask.html#ae3f7e29d716599c0038c42f29c2646ab',1,'opcua::Bitmask::Bitmask() noexcept=default'],['../classopcua_1_1Bitmask.html#a7bb32cd311338c2d397ae4ac99a2bba6',1,'opcua::Bitmask::Bitmask(T mask) noexcept'],['../classopcua_1_1Bitmask.html#a4026a7376682a848e5772089d4a8f353',1,'opcua::Bitmask::Bitmask(Underlying mask) noexcept']]],
   ['browse_6',['browse',['../group__Browse.html#ga6bb964f2ffdd62521792d0092d02e7fd',1,'opcua::services::browse(Client &amp;connection, const BrowseRequest &amp;request) noexcept'],['../group__Browse.html#ga97184f2c32dcbc0fbffbc362ee62d9b3',1,'opcua::services::browse(T &amp;connection, const BrowseDescription &amp;bd, uint32_t maxReferences=0) noexcept']]],
   ['browseall_7',['browseAll',['../group__Browse.html#ga2cd1b022d079483efd235e7d8d74ede7',1,'opcua::services']]],
@@ -24,5 +24,5 @@ var searchData=
   ['browsesimplifiedbrowsepath_21',['browseSimplifiedBrowsePath',['../group__TranslateBrowsePathsToNodeIds.html#ga41cd1be808b317c72bd150b9bdece0bc',1,'opcua::services']]],
   ['browsesimplifiedbrowsepathasync_22',['browseSimplifiedBrowsePathAsync',['../group__TranslateBrowsePathsToNodeIds.html#ga202bee6785bd509147d6b4248ed5fb43',1,'opcua::services']]],
   ['build_23',['build',['../classopcua_1_1DataTypeBuilder.html#a21252f141b10723044b37a40473709d9',1,'opcua::DataTypeBuilder']]],
-  ['bytestring_24',['ByteString',['../classopcua_1_1ByteString.html#a70f01be183a1da6ca80d4d6eddad65df',1,'opcua::ByteString::ByteString(std::string_view str)'],['../classopcua_1_1ByteString.html#a6ff43a288b6dc2c4896cbbdd0eca9d6b',1,'opcua::ByteString::ByteString(const std::vector&lt; uint8_t &gt; &amp;bytes)']]]
+  ['bytestring_24',['ByteString',['../classopcua_1_1ByteString.html#a70f01be183a1da6ca80d4d6eddad65df',1,'opcua::ByteString::ByteString(std::string_view str)'],['../classopcua_1_1ByteString.html#aeb43e411a728660f0c381d0f493a8d67',1,'opcua::ByteString::ByteString(const char *str)'],['../classopcua_1_1ByteString.html#ab737ef61cadb0bf7b5f8e9100bfd77bc',1,'opcua::ByteString::ByteString(Span&lt; const uint8_t &gt; bytes)']]]
 ];

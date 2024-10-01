@@ -1,7 +1,7 @@
 <map id="opcua::WriteResponse" name="opcua::WriteResponse">
-<area shape="rect" id="Node000001" title="UA_WriteResponse wrapper class." alt="" coords="35,181,201,207"/>
-<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,79,231,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="121,147,121,181,115,181,115,147"/>
-<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title="Template base class to wrap native objects." alt="" coords="37,5,199,31"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="121,44,121,79,115,79,115,44"/>
+<area shape="rect" id="Node000001" title="UA_WriteResponse wrapper class." alt="" coords="35,196,201,221"/>
+<area shape="rect" id="Node000002" href="$classopcua_1_1TypeWrapper.html" title=" " alt="" coords="5,93,231,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="121,162,121,196,115,196,115,162"/>
+<area shape="rect" id="Node000003" href="$classopcua_1_1Wrapper.html" title=" " alt="" coords="39,5,197,45"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="121,59,121,93,115,93,115,59"/>
 </map>
