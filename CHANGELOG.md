@@ -32,7 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Deprecate `String::get()`, `ByteString::get()` and `XmlElement::get()`, use `static_cast<std::string_view>(...)` instead (#328, #329, #335)
 - Rename `NumericRange::get` -> `NumericRange::dimensions`
 - Remove `ByteString::fromFile`, `ByteString::toFile` (#337)
-- Rename `Logger` -> `LogFunction` (#355)
+- Rename `Logger` -> `LogFunction` (#355, #360)
 - Remove `log(...)` overloads (#356)
 - New header file structure (#348, #353): The header file structure became quite complex and tangled over time. The new structure is similar to open62541. All headers are now snake case with the extension `.hpp`. When coming from open62541, usually you just have to make a small adjustment in your includes:
   ```diff
