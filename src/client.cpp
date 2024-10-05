@@ -400,15 +400,12 @@ Subscription<Client> Client::createSubscription(SubscriptionParameters& paramete
 }
 
 std::vector<Subscription<Client>> Client::getSubscriptions() {
+    std::vector<Subscription<Client>> result;
     auto& subscriptions = detail::getContext(*this).subscriptions;
     subscriptions.eraseStale();
-    auto lock = subscriptions.acquireLock();
-    const auto& map = subscriptions.underlying();
-    std::vector<Subscription<Client>> result;
-    result.reserve(map.size());
-    for (const auto& [subId, _] : map) {
-        result.emplace_back(*this, subId);
-    }
+    subscriptions.iterate([&](const auto& pair) {
+        result.emplace_back(*this, pair.first);
+    });
     return result;
 }
 #endif
