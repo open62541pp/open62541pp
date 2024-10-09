@@ -98,7 +98,6 @@ struct ServerConnection : public ConnectionBase<Server> {
     ServerConnection& operator=(ServerConnection&&) noexcept = delete;
 
     void applySessionRegistry() {
-#if UAPP_OPEN62541_VER_GE(1, 3)
         // Make sure to call this function only once after access control is initialized or changed.
         // The function pointers to activateSession / closeSession might not be unique and the
         // the pointer comparison might fail resulting in stack overflows:
@@ -112,19 +111,23 @@ struct ServerConnection : public ConnectionBase<Server> {
             context.sessionRegistry.closeSessionUser = config->accessControl.closeSession;
             config->accessControl.closeSession = &closeSession;
         }
-#endif
     }
 
     void applyDefaults() {
+#if UAPP_OPEN62541_VER_GE(1, 3)
+        config->context = this;
+#else
+        const auto status = UA_Server_setNodeContext(
+            server, UA_NODEID_NUMERIC(0, UA_NS0ID_SERVER), this
+        );
+        assert(status == UA_STATUSCODE_GOOD);
+#endif
 #ifdef UA_ENABLE_SUBSCRIPTIONS
         config->publishingIntervalLimits.min = 10;  // ms
         config->samplingIntervalLimits.min = 10;  // ms
 #endif
 #if UAPP_OPEN62541_VER_GE(1, 2)
         config->allowEmptyVariables = UA_RULEHANDLING_ACCEPT;  // allow empty variables
-#endif
-#if UAPP_OPEN62541_VER_GE(1, 3)
-        config->context = this;
 #endif
     }
 
@@ -483,42 +486,51 @@ UA_Logger* getLogger(Server& server) noexcept {
     return getLogger(server.handle());
 }
 
-ServerConnection* getConnection([[maybe_unused]] UA_Server* server) noexcept {
+ServerConnection* getConnection(UA_Server* server) noexcept {
 #if UAPP_OPEN62541_VER_GE(1, 3)
     auto* config = getConfig(server);
     if (config == nullptr) {
         return nullptr;
     }
     // UA_ServerConfig.context pointer available since open62541 v1.3
-    auto* state = static_cast<detail::ServerConnection*>(config->context);
-    assert(state != nullptr);
-    assert(state->server == server);
-    return state;
+    auto* connection = static_cast<detail::ServerConnection*>(config->context);
 #else
-    return nullptr;
+    if (server == nullptr) {
+        return nullptr;
+    }
+    // use node context of server object as fallback
+    void* nodeContext = nullptr;
+    const auto status = UA_Server_getNodeContext(
+        server, UA_NODEID_NUMERIC(0, UA_NS0ID_SERVER), &nodeContext
+    );
+    assert(status == UA_STATUSCODE_GOOD);
+    auto* connection = static_cast<detail::ServerConnection*>(nodeContext);
 #endif
+    assert(connection != nullptr);
+    assert(connection->server == server);
+    return connection;
 }
 
 ServerConnection& getConnection(Server& server) noexcept {
-    auto* state = server.connection_.get();
-    assert(state != nullptr);
-    return *state;
+    auto* connection = server.connection_.get();
+    assert(connection != nullptr);
+    return *connection;
 }
 
 Server* getWrapper(UA_Server* server) noexcept {
-    auto* state = getConnection(server);
-    if (state == nullptr) {
+    auto* connection = getConnection(server);
+    if (connection == nullptr) {
         return nullptr;
     }
-    return state->wrapperPtr();
+    return connection->wrapperPtr();
 }
 
 ServerContext* getContext(UA_Server* server) noexcept {
-    auto* state = getConnection(server);
-    if (state == nullptr) {
+    auto* connection = getConnection(server);
+    if (connection == nullptr) {
         return nullptr;
     }
-    return &state->context;
+    return &connection->context;
 }
 
 ServerContext& getContext(Server& server) noexcept {

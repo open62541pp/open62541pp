@@ -487,32 +487,32 @@ ClientConnection* getConnection(UA_Client* client) noexcept {
     if (config == nullptr) {
         return nullptr;
     }
-    auto* state = static_cast<detail::ClientConnection*>(config->clientContext);
-    assert(state != nullptr);
-    assert(state->client == client);
-    return state;
+    auto* connection = static_cast<detail::ClientConnection*>(config->clientContext);
+    assert(connection != nullptr);
+    assert(connection->client == client);
+    return connection;
 }
 
 ClientConnection& getConnection(Client& client) noexcept {
-    auto* state = client.connection_.get();
-    assert(state != nullptr);
-    return *state;
+    auto* connection = client.connection_.get();
+    assert(connection != nullptr);
+    return *connection;
 }
 
 Client* getWrapper(UA_Client* client) noexcept {
-    auto* state = getConnection(client);
-    if (state == nullptr) {
+    auto* connection = getConnection(client);
+    if (connection == nullptr) {
         return nullptr;
     }
-    return state->wrapperPtr();
+    return connection->wrapperPtr();
 }
 
 ClientContext* getContext(UA_Client* client) noexcept {
-    auto* state = getConnection(client);
-    if (state == nullptr) {
+    auto* connection = getConnection(client);
+    if (connection == nullptr) {
         return nullptr;
     }
-    return &state->context;
+    return &connection->context;
 }
 
 ClientContext& getContext(Client& client) noexcept {

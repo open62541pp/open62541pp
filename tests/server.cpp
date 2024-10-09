@@ -174,19 +174,20 @@ TEST_CASE("Server helper functions") {
     Server server;
 
     CHECK(detail::getConfig(serverNull) == nullptr);
-    CHECK(&detail::getConfig(server) == detail::getConfig(server.handle()));
+    CHECK(detail::getConfig(server.handle()) != nullptr);
+    CHECK(detail::getConfig(server.handle()) == &detail::getConfig(server));
 
-#if UAPP_OPEN62541_VER_GE(1, 3)
     CHECK(detail::getConnection(serverNull) == nullptr);
-    CHECK(&detail::getConnection(server) == detail::getConnection(server.handle()));
+    CHECK(detail::getConnection(server.handle()) != nullptr);
+    CHECK(detail::getConnection(server.handle()) == &detail::getConnection(server));
 
     CHECK(detail::getWrapper(serverNull) == nullptr);
     CHECK(detail::getWrapper(server.handle()) != nullptr);
     CHECK(detail::getWrapper(server.handle())->handle() == server.handle());
 
     CHECK(detail::getContext(serverNull) == nullptr);
-    CHECK(&detail::getContext(server) == detail::getContext(server.handle()));
-#endif
+    CHECK(detail::getContext(server.handle()) != nullptr);
+    CHECK(detail::getContext(server.handle()) == &detail::getContext(server));
 }
 
 TEST_CASE("ValueCallback") {

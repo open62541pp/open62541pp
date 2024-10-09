@@ -214,15 +214,18 @@ TEST_CASE("Client helper functions") {
     Client client;
 
     CHECK(detail::getConfig(clientNull) == nullptr);
-    CHECK(&detail::getConfig(client) == detail::getConfig(client.handle()));
+    CHECK(detail::getConfig(client.handle()) != nullptr);
+    CHECK(detail::getConfig(client.handle()) == &detail::getConfig(client));
 
     CHECK(detail::getConnection(clientNull) == nullptr);
-    CHECK(&detail::getConnection(client) == detail::getConnection(client.handle()));
+    CHECK(detail::getConnection(client.handle()) != nullptr);
+    CHECK(detail::getConnection(client.handle()) == &detail::getConnection(client));
 
     CHECK(detail::getWrapper(clientNull) == nullptr);
     CHECK(detail::getWrapper(client.handle()) != nullptr);
     CHECK(detail::getWrapper(client.handle())->handle() == client.handle());
 
     CHECK(detail::getContext(clientNull) == nullptr);
-    CHECK(&detail::getContext(client) == detail::getContext(client.handle()));
+    CHECK(detail::getContext(client.handle()) != nullptr);
+    CHECK(detail::getContext(client.handle()) == &detail::getContext(client));
 }
