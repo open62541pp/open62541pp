@@ -119,10 +119,8 @@ public:
     void setLogger(LogFunction logger);
 
     /// Set custom access control.
-    /// @note Supported since open62541 v1.3
     void setAccessControl(AccessControlBase& accessControl);
     /// Set custom access control (transfer ownership to Server).
-    /// @note Supported since open62541 v1.3
     void setAccessControl(std::unique_ptr<AccessControlBase> accessControl);
 
     /// Set custom hostname, default: system's host name.

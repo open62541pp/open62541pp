@@ -116,15 +116,20 @@ struct ServerConnection : public ConnectionBase<Server> {
     }
 
     void applyDefaults() {
+#if UAPP_OPEN62541_VER_GE(1, 3)
+        config->context = this;
+#else
+        const auto status = UA_Server_setNodeContext(
+            server, UA_NODEID_NUMERIC(0, UA_NS0ID_SERVER), this
+        );
+        assert(status == UA_STATUSCODE_GOOD);
+#endif
 #ifdef UA_ENABLE_SUBSCRIPTIONS
         config->publishingIntervalLimits.min = 10;  // ms
         config->samplingIntervalLimits.min = 10;  // ms
 #endif
 #if UAPP_OPEN62541_VER_GE(1, 2)
         config->allowEmptyVariables = UA_RULEHANDLING_ACCEPT;  // allow empty variables
-#endif
-#if UAPP_OPEN62541_VER_GE(1, 3)
-        config->context = this;
 #endif
     }
 
@@ -490,35 +495,40 @@ ServerConnection* getConnection([[maybe_unused]] UA_Server* server) noexcept {
         return nullptr;
     }
     // UA_ServerConfig.context pointer available since open62541 v1.3
-    auto* state = static_cast<detail::ServerConnection*>(config->context);
-    assert(state != nullptr);
-    assert(state->server == server);
-    return state;
+    auto* connection = static_cast<detail::ServerConnection*>(config->context);
 #else
-    return nullptr;
+    // use node context of server object as fallback
+    detail::ServerConnection* connection = nullptr;
+    const auto status = UA_Server_getNodeContext(
+        server, UA_NODEID_NUMERIC(0, UA_NS0ID_SERVER), &connection
+    );
+    assert(status == UA_STATUSCODE_GOOD);
 #endif
+    assert(connection != nullptr);
+    assert(connection->server == server);
+    return connection;
 }
 
 ServerConnection& getConnection(Server& server) noexcept {
-    auto* state = server.connection_.get();
-    assert(state != nullptr);
-    return *state;
+    auto* connection = server.connection_.get();
+    assert(connection != nullptr);
+    return *connection;
 }
 
 Server* getWrapper(UA_Server* server) noexcept {
-    auto* state = getConnection(server);
-    if (state == nullptr) {
+    auto* connection = getConnection(server);
+    if (connection == nullptr) {
         return nullptr;
     }
-    return state->wrapperPtr();
+    return connection->wrapperPtr();
 }
 
 ServerContext* getContext(UA_Server* server) noexcept {
-    auto* state = getConnection(server);
-    if (state == nullptr) {
+    auto* connection = getConnection(server);
+    if (connection == nullptr) {
         return nullptr;
     }
-    return &state->context;
+    return &connection->context;
 }
 
 ServerContext& getContext(Server& server) noexcept {

@@ -91,12 +91,11 @@ static void closeSessionNative(
     const UA_NodeId* sessionId,
     [[maybe_unused]] void* sessionContext
 ) {
-    try {
+    invokeAccessCallback(server, "activateSession", UA_STATUSCODE_GOOD, [&] {
         auto session = getSession(server, sessionId);
         getAdapter(ac).closeSession(session.value());  // NOLINT(bugprone-unchecked-optional-access)
-    } catch (const std::exception& e) {
-        logException(server, "closeSession", e.what());
-    }
+        return UA_STATUSCODE_GOOD;
+    });
 }
 
 static UA_UInt32 getUserRightsMaskNative(

@@ -135,7 +135,6 @@ public:
     }
 };
 
-#if UAPP_OPEN62541_VER_GE(1, 3)
 TEST_CASE("AccessControlBase") {
     Server server;
     AccessControlTest accessControl;
@@ -316,4 +315,3 @@ TEST_CASE("AccessControlBase") {
     );
 #endif
 }
-#endif

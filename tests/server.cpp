@@ -176,7 +176,6 @@ TEST_CASE("Server helper functions") {
     CHECK(detail::getConfig(serverNull) == nullptr);
     CHECK(&detail::getConfig(server) == detail::getConfig(server.handle()));
 
-#if UAPP_OPEN62541_VER_GE(1, 3)
     CHECK(detail::getConnection(serverNull) == nullptr);
     CHECK(&detail::getConnection(server) == detail::getConnection(server.handle()));
 
@@ -186,7 +185,6 @@ TEST_CASE("Server helper functions") {
 
     CHECK(detail::getContext(serverNull) == nullptr);
     CHECK(&detail::getContext(server) == detail::getContext(server.handle()));
-#endif
 }
 
 TEST_CASE("ValueCallback") {
