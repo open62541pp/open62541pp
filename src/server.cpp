@@ -486,7 +486,7 @@ UA_Logger* getLogger(Server& server) noexcept {
     return getLogger(server.handle());
 }
 
-ServerConnection* getConnection([[maybe_unused]] UA_Server* server) noexcept {
+ServerConnection* getConnection(UA_Server* server) noexcept {
 #if UAPP_OPEN62541_VER_GE(1, 3)
     auto* config = getConfig(server);
     if (config == nullptr) {
