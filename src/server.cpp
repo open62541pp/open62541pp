@@ -117,20 +117,10 @@ struct ServerConnection : public ConnectionBase<Server> {
 #if UAPP_OPEN62541_VER_GE(1, 3)
         config->context = this;
 #else
-        {
-            const auto status = UA_Server_setNodeContext(
-                server, UA_NODEID_NUMERIC(0, UA_NS0ID_SERVER), this
-            );
-            assert(status == UA_STATUSCODE_GOOD);
-        }
-        {
-            void* nodeContext = nullptr;
-            const auto status = UA_Server_getNodeContext(
-                server, UA_NODEID_NUMERIC(0, UA_NS0ID_SERVER), &nodeContext
-            );
-            assert(status == UA_STATUSCODE_GOOD);
-            assert(nodeContext == this);
-        }
+        const auto status = UA_Server_setNodeContext(
+            server, UA_NODEID_NUMERIC(0, UA_NS0ID_SERVER), this
+        );
+        assert(status == UA_STATUSCODE_GOOD);
 #endif
 #ifdef UA_ENABLE_SUBSCRIPTIONS
         config->publishingIntervalLimits.min = 10;  // ms
