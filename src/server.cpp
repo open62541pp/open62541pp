@@ -495,6 +495,9 @@ ServerConnection* getConnection(UA_Server* server) noexcept {
     // UA_ServerConfig.context pointer available since open62541 v1.3
     auto* connection = static_cast<detail::ServerConnection*>(config->context);
 #else
+    if (server == nullptr) {
+        return nullptr;
+    }
     // use node context of server object as fallback
     void* nodeContext = nullptr;
     const auto status = UA_Server_getNodeContext(

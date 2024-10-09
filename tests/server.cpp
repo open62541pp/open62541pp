@@ -177,15 +177,6 @@ TEST_CASE("Server helper functions") {
     CHECK(detail::getConfig(server.handle()) != nullptr);
     CHECK(detail::getConfig(server.handle()) == &detail::getConfig(server));
 
-#if UAPP_OPEN62541_VER_LE(1, 2)
-    void* nodeContext = nullptr;
-    const auto status = UA_Server_getNodeContext(
-        server.handle(), UA_NODEID_NUMERIC(0, UA_NS0ID_SERVER), &nodeContext
-    );
-    CHECK(status == UA_STATUSCODE_GOOD);
-    CHECK(nodeContext == &detail::getConnection(server));
-#endif
-
     CHECK(detail::getConnection(serverNull) == nullptr);
     CHECK(detail::getConnection(server.handle()) != nullptr);
     CHECK(detail::getConnection(server.handle()) == &detail::getConnection(server));
