@@ -98,7 +98,6 @@ struct ServerConnection : public ConnectionBase<Server> {
     ServerConnection& operator=(ServerConnection&&) noexcept = delete;
 
     void applySessionRegistry() {
-#if UAPP_OPEN62541_VER_GE(1, 3)
         // Make sure to call this function only once after access control is initialized or changed.
         // The function pointers to activateSession / closeSession might not be unique and the
         // the pointer comparison might fail resulting in stack overflows:
@@ -112,7 +111,6 @@ struct ServerConnection : public ConnectionBase<Server> {
             context.sessionRegistry.closeSessionUser = config->accessControl.closeSession;
             config->accessControl.closeSession = &closeSession;
         }
-#endif
     }
 
     void applyDefaults() {
@@ -500,7 +498,7 @@ ServerConnection* getConnection([[maybe_unused]] UA_Server* server) noexcept {
     // use node context of server object as fallback
     detail::ServerConnection* connection = nullptr;
     const auto status = UA_Server_getNodeContext(
-        server, UA_NODEID_NUMERIC(0, UA_NS0ID_SERVER), &connection
+        server, UA_NODEID_NUMERIC(0, UA_NS0ID_SERVER), &static_cast<void*>(connection)
     );
     assert(status == UA_STATUSCODE_GOOD);
 #endif

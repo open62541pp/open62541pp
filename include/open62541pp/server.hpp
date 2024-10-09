@@ -134,7 +134,6 @@ public:
     void setProductUri(std::string_view uri);
 
     /// Get active server session.
-    /// @note Supported since open62541 v1.3
     std::vector<Session> getSessions();
 
     /// Get all defined namespaces.

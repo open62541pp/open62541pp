@@ -46,7 +46,7 @@ public:
 #endif
     }
 
-    void setTypeName(const char* typeName) noexcept {
+    void setTypeName([[maybe_unused]] const char* typeName) noexcept {
 #ifdef UA_ENABLE_TYPEDESCRIPTION
         handle()->typeName = typeName;
 #endif
