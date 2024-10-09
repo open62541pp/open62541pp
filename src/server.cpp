@@ -496,11 +496,12 @@ ServerConnection* getConnection([[maybe_unused]] UA_Server* server) noexcept {
     auto* connection = static_cast<detail::ServerConnection*>(config->context);
 #else
     // use node context of server object as fallback
-    detail::ServerConnection* connection = nullptr;
+    void* nodeContext = nullptr;
     const auto status = UA_Server_getNodeContext(
-        server, UA_NODEID_NUMERIC(0, UA_NS0ID_SERVER), &static_cast<void*>(connection)
+        server, UA_NODEID_NUMERIC(0, UA_NS0ID_SERVER), &nodeContext
     );
     assert(status == UA_STATUSCODE_GOOD);
+    auto* connection = static_cast<detail::ServerConnection*>(nodeContext);
 #endif
     assert(connection != nullptr);
     assert(connection->server == server);
