@@ -2,12 +2,11 @@
 
 #include <utility>  // forward, move
 
+#include "open62541pp/datatype.hpp"
 #include "open62541pp/detail/open62541/client.h"  // UA_ClientConfig
 #include "open62541pp/plugin/log.hpp"
 #include "open62541pp/types.hpp"
 #include "open62541pp/wrapper.hpp"
-
-#include "datatypearray.hpp"
 
 namespace opcua {
 
@@ -36,10 +35,10 @@ public:
         }
     }
 
-    void setCustomDataTypes(std::vector<DataType> dataTypes) {
-        dataTypes_ = std::move(dataTypes);
-        customDataTypes_ = std::make_unique<DataTypeArray>(dataTypes_);
-        handle()->customDataTypes = customDataTypes_->handle();
+    void setCustomDataTypes(std::vector<DataType> types) {
+        types_ = std::make_unique<std::vector<DataType>>(std::move(types));
+        customDataTypes_ = std::make_unique<UA_DataTypeArray>(detail::createDataTypeArray(*types_));
+        handle()->customDataTypes = customDataTypes_.get();
     }
 
     constexpr UA_ClientConfig* operator->() noexcept {
@@ -60,8 +59,8 @@ public:
 
 private:
     UA_ClientConfig& config_;
-    std::vector<DataType> dataTypes_;
-    std::unique_ptr<DataTypeArray> customDataTypes_;
+    std::unique_ptr<std::vector<DataType>> types_;
+    std::unique_ptr<UA_DataTypeArray> customDataTypes_;
     std::unique_ptr<LoggerBase> logger_;
 };
 

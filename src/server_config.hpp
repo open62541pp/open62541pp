@@ -1,5 +1,6 @@
 #pragma once
 
+#include <algorithm>  // copy
 #include <memory>  // unique_ptr
 #include <utility>  // move
 #include <vector>
@@ -13,8 +14,6 @@
 #include "open62541pp/span.hpp"
 #include "open62541pp/types.hpp"
 #include "open62541pp/types_composed.hpp"  // UserTokenPolicy
-
-#include "datatypearray.hpp"
 
 namespace opcua {
 
@@ -37,10 +36,10 @@ public:
         }
     }
 
-    void setCustomDataTypes(std::vector<DataType> dataTypes) {
-        dataTypes_ = std::move(dataTypes);
-        customDataTypes_ = std::make_unique<DataTypeArray>(dataTypes_);
-        handle()->customDataTypes = customDataTypes_->handle();
+    void setCustomDataTypes(std::vector<DataType> types) {
+        types_ = std::make_unique<std::vector<DataType>>(std::move(types));
+        customDataTypes_ = std::make_unique<UA_DataTypeArray>(detail::createDataTypeArray(*types_));
+        handle()->customDataTypes = customDataTypes_.get();
     }
 
     void setAccessControl(AccessControlBase& accessControl) {
@@ -108,8 +107,8 @@ private:
     }
 
     UA_ServerConfig& config_;
-    std::vector<DataType> dataTypes_;
-    std::unique_ptr<DataTypeArray> customDataTypes_;
+    std::unique_ptr<std::vector<DataType>> types_;
+    std::unique_ptr<UA_DataTypeArray> customDataTypes_;
     std::unique_ptr<LoggerBase> logger_;
     std::unique_ptr<AccessControlBase> accessControl_;
 };

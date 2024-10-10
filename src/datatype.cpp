@@ -19,11 +19,7 @@ static void clear(UA_DataType& native) noexcept {
 static void copyMembers(const DataTypeMember* members, size_t membersSize, UA_DataType& dst) {
     dst.members = new DataTypeMember[membersSize];  // NOLINT
     dst.membersSize = membersSize;
-    std::copy_n(
-        members,
-        membersSize,
-        dst.members
-    );
+    std::copy_n(members, membersSize, dst.members);
 }
 
 [[nodiscard]] static UA_DataType copy(const UA_DataType& other) {
@@ -131,6 +127,19 @@ UA_DataType createDataType(
     result.membersSize = membersSize;
     result.members = members;
     return result;
+}
+
+UA_DataTypeArray createDataTypeArray(
+    Span<const DataType> types, const UA_DataTypeArray* next
+) noexcept {
+    return UA_DataTypeArray {
+        next,
+        types.size(),
+        asNative(types.data()),
+#if UAPP_OPEN62541_VER_GE(1, 4)
+        false,  // cleanup
+#endif
+    };
 }
 
 }  // namespace detail
