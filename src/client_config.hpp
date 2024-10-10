@@ -8,7 +8,6 @@
 #include "open62541pp/wrapper.hpp"
 
 #include "customdatatypes.hpp"
-#include "plugin/pluginmanager.hpp"
 
 namespace opcua {
 
@@ -28,7 +27,12 @@ public:
 
     void setLogger(LogFunction logger) {
         if (logger) {
-            logger_.assign(LoggerDefault(std::move(logger)));
+            logger_ = std::make_unique<LoggerDefault>(std::move(logger));
+#if UAPP_OPEN62541_VER_GE(1, 4)
+            logger_->assign(handle()->logging);
+#else
+            logger_->assign(handle()->logger);
+#endif
         }
     }
 
@@ -55,11 +59,7 @@ public:
 private:
     UA_ClientConfig& config_;
     CustomDataTypes customDataTypes_{config_.customDataTypes};
-#if UAPP_OPEN62541_VER_GE(1, 4)
-    PluginManager<UA_Logger*> logger_{config_.logging};
-#else
-    PluginManager<UA_Logger> logger_{config_.logger};
-#endif
+    std::unique_ptr<LoggerBase> logger_;
 };
 
 }  // namespace opcua

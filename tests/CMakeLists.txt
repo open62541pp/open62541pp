@@ -17,7 +17,6 @@ add_executable(
     plugin_accesscontrol.cpp
     plugin_create_certificate.cpp
     plugin_log.cpp
-    pluginmanager.cpp
     result.cpp
     scope.cpp
     server.cpp
