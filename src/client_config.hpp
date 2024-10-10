@@ -7,7 +7,7 @@
 #include "open62541pp/types.hpp"
 #include "open62541pp/wrapper.hpp"
 
-#include "customdatatypes.hpp"
+#include "datatypearray.hpp"
 
 namespace opcua {
 
@@ -37,7 +37,9 @@ public:
     }
 
     void setCustomDataTypes(std::vector<DataType> dataTypes) {
-        customDataTypes_.assign(std::move(dataTypes));
+        dataTypes_ = std::move(dataTypes);
+        customDataTypes_ = std::make_unique<DataTypeArray>(dataTypes_);
+        handle()->customDataTypes = customDataTypes_->handle();
     }
 
     constexpr UA_ClientConfig* operator->() noexcept {
@@ -58,7 +60,8 @@ public:
 
 private:
     UA_ClientConfig& config_;
-    CustomDataTypes customDataTypes_{config_.customDataTypes};
+    std::vector<DataType> dataTypes_;
+    std::unique_ptr<DataTypeArray> customDataTypes_;
     std::unique_ptr<LoggerBase> logger_;
 };
 

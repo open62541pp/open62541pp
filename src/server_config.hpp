@@ -14,7 +14,7 @@
 #include "open62541pp/types.hpp"
 #include "open62541pp/types_composed.hpp"  // UserTokenPolicy
 
-#include "customdatatypes.hpp"
+#include "datatypearray.hpp"
 
 namespace opcua {
 
@@ -38,7 +38,9 @@ public:
     }
 
     void setCustomDataTypes(std::vector<DataType> dataTypes) {
-        customDataTypes_.assign(std::move(dataTypes));
+        dataTypes_ = std::move(dataTypes);
+        customDataTypes_ = std::make_unique<DataTypeArray>(dataTypes_);
+        handle()->customDataTypes = customDataTypes_->handle();
     }
 
     void setAccessControl(AccessControlBase& accessControl) {
@@ -106,7 +108,8 @@ private:
     }
 
     UA_ServerConfig& config_;
-    CustomDataTypes customDataTypes_{config_.customDataTypes};
+    std::vector<DataType> dataTypes_;
+    std::unique_ptr<DataTypeArray> customDataTypes_;
     std::unique_ptr<LoggerBase> logger_;
     std::unique_ptr<AccessControlBase> accessControl_;
 };

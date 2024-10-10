@@ -7,8 +7,8 @@ add_executable(
     bitmask.cpp
     client.cpp
     clientservice.cpp
-    customdatatypes.cpp
     datatype.cpp
+    datatypearray.cpp
     event.cpp
     exception.cpp
     exceptioncatcher.cpp
