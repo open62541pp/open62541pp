@@ -1,6 +1,8 @@
 #pragma once
 
+#include <memory>  // unique_ptr
 #include <utility>  // forward, move
+#include <vector>
 
 #include "open62541pp/datatype.hpp"
 #include "open62541pp/detail/open62541/client.h"  // UA_ClientConfig

@@ -1,6 +1,5 @@
 #pragma once
 
-#include <algorithm>  // copy
 #include <memory>  // unique_ptr
 #include <utility>  // move
 #include <vector>
@@ -10,15 +9,11 @@
 #include "open62541pp/detail/types_handling.hpp"  // detail::deallocateArray
 #include "open62541pp/plugin/accesscontrol.hpp"
 #include "open62541pp/plugin/log.hpp"
-#include "open62541pp/session.hpp"
 #include "open62541pp/span.hpp"
 #include "open62541pp/types.hpp"
 #include "open62541pp/types_composed.hpp"  // UserTokenPolicy
 
 namespace opcua {
-
-class Server;
-class AccessControlBase;
 
 class ServerConfig {
 public:
@@ -50,9 +45,7 @@ public:
 
     void setAccessControl(std::unique_ptr<AccessControlBase> accessControl) {
         accessControl_ = std::move(accessControl);
-        accessControl_->assign(handle()->accessControl);
-        setHighestSecurityPolicyForUserTokenTransfer();
-        copyUserTokenPoliciesToEndpoints();
+        setAccessControl(*accessControl_);
     }
 
     constexpr UA_ServerConfig* operator->() noexcept {
