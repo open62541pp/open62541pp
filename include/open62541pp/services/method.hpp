@@ -71,7 +71,7 @@ auto callAsync(
  * @exception BadStatus (BadTooManyArguments) If too many input arguments provided
  */
 template <typename T>
-Result<std::vector<Variant>> call(
+Result<CallMethodResult> call(
     T& connection,
     const NodeId& objectId,
     const NodeId& methodId,
@@ -85,7 +85,7 @@ Result<std::vector<Variant>> call(
  * @param objectId NodeId of the object on which the method is invoked
  * @param methodId NodeId of the method to invoke
  * @param inputArguments Input argument values
- * @param token @completiontoken{void(Result<std::vector<Variant>>&)}
+ * @param token @completiontoken{void(Result<CallMethodResult>&)}
  * @exception BadStatus
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -104,7 +104,7 @@ auto callAsync(
         connection,
         request,
         [](UA_CallResponse& response) {
-            return detail::getSingleResult(response).andThen(detail::getOutputArguments);
+            return detail::getSingleResult(response).transform(detail::Wrap<CallMethodResult>{});
         },
         std::forward<CompletionToken>(token)
     );

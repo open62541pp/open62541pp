@@ -32,7 +32,8 @@ int main() {
 
         std::cout << "Future ready, get method output\n";
         auto result = future.get();
-        std::cout << result.value().at(0).getScalar<opcua::String>() << std::endl;
+        auto outputs = result.value().getOutputArguments();
+        std::cout << outputs[0].getScalar<opcua::String>() << std::endl;
     }
 
     // Asynchronously call method (callback variant)
@@ -42,10 +43,10 @@ int main() {
             objectsNode.id(),
             greetMethodNode.id(),
             {opcua::Variant::fromScalar("Callback World")},
-            [](const opcua::Result<std::vector<opcua::Variant>>& result) {
-                std::cout
-                    << "Callback with status code " << result.code() << ", get method output\n";
-                std::cout << result.value().at(0).getScalar<opcua::String>() << std::endl;
+            [](const opcua::Result<opcua::CallMethodResult>& result) {
+                std::cout << "Callback invoked, get method output\n";
+                auto outputs = result.value().getOutputArguments();
+                std::cout << outputs[0].getScalar<opcua::String>() << std::endl;
             }
         );
     }

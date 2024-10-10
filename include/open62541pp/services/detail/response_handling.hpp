@@ -72,24 +72,6 @@ inline Result<NodeId> getAddedNodeId(UA_AddNodesResult& result) noexcept {
     return {std::exchange(result.addedNodeId, {})};
 }
 
-inline Result<std::vector<Variant>> getOutputArguments(UA_CallMethodResult& result) noexcept {
-    if (const StatusCode code = result.statusCode; code.isBad()) {
-        return BadResult(result.statusCode);
-    }
-    for (const StatusCode code :
-         Span(result.inputArgumentResults, result.inputArgumentResultsSize)) {
-        if (code.isBad()) {
-            return BadResult(code);
-        }
-    }
-    return opcua::detail::tryInvoke([&] {
-        return std::vector<Variant>{
-            std::make_move_iterator(result.outputArguments),
-            std::make_move_iterator(result.outputArguments + result.outputArgumentsSize)  // NOLINT
-        };
-    });
-}
-
 template <typename SubscriptionParameters, typename Response>
 inline void reviseSubscriptionParameters(
     SubscriptionParameters& parameters, const Response& response

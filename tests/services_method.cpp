@@ -73,7 +73,7 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
     }
 
     SUBCASE("Check result") {
-        Result<std::vector<Variant>> result = call(
+        Result<CallMethodResult> result = call(
             connection,
             objectsId,
             methodId,
@@ -82,8 +82,8 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
                 Variant::fromScalar(int32_t{2}),
             }
         );
-        CHECK(result.value().size() == 1);
-        CHECK(result.value()[0].getScalarCopy<int32_t>() == 3);
+        CHECK(result.value().getOutputArguments().size() == 1);
+        CHECK(result.value().getOutputArguments()[0].getScalarCopy<int32_t>() == 3);
     }
 
     SUBCASE("Propagate exception") {

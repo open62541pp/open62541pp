@@ -14,7 +14,7 @@ CallResponse call(Client& connection, const CallRequest& request) noexcept {
 }
 
 template <>
-Result<std::vector<Variant>> call(
+Result<CallMethodResult> call(
     Server& connection,
     const NodeId& objectId,
     const NodeId& methodId,
@@ -22,11 +22,11 @@ Result<std::vector<Variant>> call(
 ) noexcept {
     const auto item = detail::createCallMethodRequest(objectId, methodId, inputArguments);
     CallMethodResult result = UA_Server_call(connection.handle(), &item);
-    return detail::getOutputArguments(result);
+    return result;
 }
 
 template <>
-Result<std::vector<Variant>> call(
+Result<CallMethodResult> call(
     Client& connection,
     const NodeId& objectId,
     const NodeId& methodId,
