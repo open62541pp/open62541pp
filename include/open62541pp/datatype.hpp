@@ -162,6 +162,10 @@ namespace detail {
     DataTypeMember* members
 ) noexcept;
 
+[[nodiscard]] UA_DataTypeArray createDataTypeArray(
+    Span<const DataType> types, const UA_DataTypeArray* next = nullptr
+) noexcept;
+
 }  // namespace detail
 
 /* --------------------------------------- DataTypeBuilder -------------------------------------- */

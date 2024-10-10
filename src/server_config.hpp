@@ -7,19 +7,13 @@
 #include "open62541pp/datatype.hpp"
 #include "open62541pp/detail/open62541/server.h"  // UA_ServerConfig
 #include "open62541pp/detail/types_handling.hpp"  // detail::deallocateArray
+#include "open62541pp/plugin/accesscontrol.hpp"
 #include "open62541pp/plugin/log.hpp"
-#include "open62541pp/session.hpp"
 #include "open62541pp/span.hpp"
 #include "open62541pp/types.hpp"
 #include "open62541pp/types_composed.hpp"  // UserTokenPolicy
 
-#include "customdatatypes.hpp"
-#include "plugin/pluginmanager.hpp"
-
 namespace opcua {
-
-class Server;
-class AccessControlBase;
 
 class ServerConfig {
 public:
@@ -28,24 +22,30 @@ public:
 
     void setLogger(LogFunction logger) {
         if (logger) {
-            logger_.assign(LoggerDefault(std::move(logger)));
+            logger_ = std::make_unique<LoggerDefault>(std::move(logger));
+#if UAPP_OPEN62541_VER_GE(1, 4)
+            logger_->assign(handle()->logging);
+#else
+            logger_->assign(handle()->logger);
+#endif
         }
     }
 
-    void setCustomDataTypes(std::vector<DataType> dataTypes) {
-        customDataTypes_.assign(std::move(dataTypes));
+    void setCustomDataTypes(std::vector<DataType> types) {
+        types_ = std::make_unique<std::vector<DataType>>(std::move(types));
+        customDataTypes_ = std::make_unique<UA_DataTypeArray>(detail::createDataTypeArray(*types_));
+        handle()->customDataTypes = customDataTypes_.get();
     }
 
     void setAccessControl(AccessControlBase& accessControl) {
-        accessControl_.assign(&accessControl);
+        accessControl.assign(handle()->accessControl);
         setHighestSecurityPolicyForUserTokenTransfer();
         copyUserTokenPoliciesToEndpoints();
     }
 
     void setAccessControl(std::unique_ptr<AccessControlBase> accessControl) {
-        accessControl_.assign(std::move(accessControl));
-        setHighestSecurityPolicyForUserTokenTransfer();
-        copyUserTokenPoliciesToEndpoints();
+        accessControl_ = std::move(accessControl);
+        setAccessControl(*accessControl_);
     }
 
     constexpr UA_ServerConfig* operator->() noexcept {
@@ -100,13 +100,10 @@ private:
     }
 
     UA_ServerConfig& config_;
-    CustomDataTypes customDataTypes_{config_.customDataTypes};
-#if UAPP_OPEN62541_VER_GE(1, 4)
-    PluginManager<UA_Logger*> logger_{config_.logging};
-#else
-    PluginManager<UA_Logger> logger_{config_.logger};
-#endif
-    PluginManager<UA_AccessControl> accessControl_{config_.accessControl};
+    std::unique_ptr<std::vector<DataType>> types_;
+    std::unique_ptr<UA_DataTypeArray> customDataTypes_;
+    std::unique_ptr<LoggerBase> logger_;
+    std::unique_ptr<AccessControlBase> accessControl_;
 };
 
 }  // namespace opcua

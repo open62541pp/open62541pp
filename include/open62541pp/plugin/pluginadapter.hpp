@@ -4,7 +4,7 @@ namespace opcua {
 
 /**
  * Base class to implement plugin adapters.
- * 
+ *
  * Plugin adapters will provide a different (modern) interface for open62541's native plugins.
  * For example AccessControlBase is the plugin adapter for UA_AccessControl.
  *
@@ -36,6 +36,20 @@ public:
         if (plugin != nullptr) {
             clear(*plugin);
         }
+    }
+
+    void assign(T& plugin) {
+        clear(plugin);
+        plugin = create();
+    }
+
+    void assign(T*& plugin) {
+        if (plugin == nullptr) {
+            plugin = new T{};  // NOLINT
+        } else {
+            clear(plugin);
+        }
+        *plugin = create();
     }
 };
 

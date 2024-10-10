@@ -7,7 +7,6 @@ add_executable(
     bitmask.cpp
     client.cpp
     clientservice.cpp
-    customdatatypes.cpp
     datatype.cpp
     event.cpp
     exception.cpp
@@ -17,7 +16,6 @@ add_executable(
     plugin_accesscontrol.cpp
     plugin_create_certificate.cpp
     plugin_log.cpp
-    pluginmanager.cpp
     result.cpp
     scope.cpp
     server.cpp

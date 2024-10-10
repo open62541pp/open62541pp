@@ -1,14 +1,14 @@
 #pragma once
 
+#include <memory>  // unique_ptr
 #include <utility>  // forward, move
+#include <vector>
 
+#include "open62541pp/datatype.hpp"
 #include "open62541pp/detail/open62541/client.h"  // UA_ClientConfig
 #include "open62541pp/plugin/log.hpp"
 #include "open62541pp/types.hpp"
 #include "open62541pp/wrapper.hpp"
-
-#include "customdatatypes.hpp"
-#include "plugin/pluginmanager.hpp"
 
 namespace opcua {
 
@@ -28,12 +28,19 @@ public:
 
     void setLogger(LogFunction logger) {
         if (logger) {
-            logger_.assign(LoggerDefault(std::move(logger)));
+            logger_ = std::make_unique<LoggerDefault>(std::move(logger));
+#if UAPP_OPEN62541_VER_GE(1, 4)
+            logger_->assign(handle()->logging);
+#else
+            logger_->assign(handle()->logger);
+#endif
         }
     }
 
-    void setCustomDataTypes(std::vector<DataType> dataTypes) {
-        customDataTypes_.assign(std::move(dataTypes));
+    void setCustomDataTypes(std::vector<DataType> types) {
+        types_ = std::make_unique<std::vector<DataType>>(std::move(types));
+        customDataTypes_ = std::make_unique<UA_DataTypeArray>(detail::createDataTypeArray(*types_));
+        handle()->customDataTypes = customDataTypes_.get();
     }
 
     constexpr UA_ClientConfig* operator->() noexcept {
@@ -54,12 +61,9 @@ public:
 
 private:
     UA_ClientConfig& config_;
-    CustomDataTypes customDataTypes_{config_.customDataTypes};
-#if UAPP_OPEN62541_VER_GE(1, 4)
-    PluginManager<UA_Logger*> logger_{config_.logging};
-#else
-    PluginManager<UA_Logger> logger_{config_.logger};
-#endif
+    std::unique_ptr<std::vector<DataType>> types_;
+    std::unique_ptr<UA_DataTypeArray> customDataTypes_;
+    std::unique_ptr<LoggerBase> logger_;
 };
 
 }  // namespace opcua
