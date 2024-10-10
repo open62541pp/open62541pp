@@ -8,7 +8,6 @@ add_executable(
     client.cpp
     clientservice.cpp
     datatype.cpp
-    datatypearray.cpp
     event.cpp
     exception.cpp
     exceptioncatcher.cpp
