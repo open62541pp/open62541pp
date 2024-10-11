@@ -11,6 +11,10 @@ using namespace opcua;
 class ServerRunner {
 public:
     explicit ServerRunner(Server& server) {
+        // disable logging to prevent data races
+        if (auto* logger = detail::getLogger(&detail::getConfig(server)); logger != nullptr) {
+            getEmptyLogger().assign(*logger);
+        }
         server.runIterate();  // make sure server is running within constructor
         thread_ = std::thread([&] {
             while (!stopFlag_) {
@@ -32,6 +36,11 @@ public:
     }
 
 private:
+    LoggerDefault& getEmptyLogger() {
+        static LoggerDefault logger([](auto&&...) {});
+        return logger;
+    }
+
     std::atomic<bool> stopFlag_{false};
     std::thread thread_;
 };
