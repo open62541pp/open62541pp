@@ -71,13 +71,13 @@ TEST_CASE("ServerConfig") {
 
     SUBCASE("ApplicationDescription") {
         config.setApplicationName("Test App");
-        CHECK(detail::toStringView(config->applicationDescription.applicationName.text) == "Test App");
+        CHECK(detail::toString(config->applicationDescription.applicationName.text) == "Test App");
 
         config.setApplicationUri("http://app.com");
-        CHECK(detail::toStringView(config->applicationDescription.applicationUri) == "http://app.com");
+        CHECK(detail::toString(config->applicationDescription.applicationUri) == "http://app.com");
 
         config.setProductUri("http://product.com");
-        CHECK(detail::toStringView(config->applicationDescription.productUri) == "http://product.com");
+        CHECK(detail::toString(config->applicationDescription.productUri) == "http://product.com");
     }
 
     SUBCASE("AccessControl") {
