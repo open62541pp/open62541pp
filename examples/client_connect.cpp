@@ -22,12 +22,13 @@ int main(int argc, char* argv[]) {
     const auto username = parser.getValue("--username");
     const auto password = parser.getValue("--password");
 
-    opcua::Client client;
+    opcua::ClientConfig config;
     if (username) {
-        client.setUserIdentityToken(
+        config.setUserIdentityToken(
             opcua::UserNameIdentityToken(username.value(), password.value_or(""))
         );
     }
+    opcua::Client client(std::move(config));
     client.connect(serverUrl);
 
     opcua::Node node(client, opcua::VariableId::Server_ServerStatus_CurrentTime);

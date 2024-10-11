@@ -5,13 +5,13 @@
 #include <open62541pp/client.hpp>
 
 int main() {
-    opcua::Client client;
+    opcua::ClientConfig config;
 
     // Add a state callback (session activated) to create subscription(s) and monitored items(s) in
     // a newly activated session. If the client is disconnected, the subscriptions and monitored
     // items are deleted. This approach with the state callback assures, that the subscriptions are
     // recreated whenever the client reconnects to the server.
-    client.onSessionActivated([&] {
+    config.onSessionActivated([&](opcua::Client& client) {
         auto sub = client.createSubscription();
 
         // Modify and delete the subscription via the returned Subscription<T> object
@@ -46,6 +46,8 @@ int main() {
         mon.setMonitoringMode(opcua::MonitoringMode::Reporting);
         // mon.deleteMonitoredItem();
     });
+
+    opcua::Client client(std::move(config));
 
     // Endless loop to automatically (try to) reconnect to server.
     while (true) {

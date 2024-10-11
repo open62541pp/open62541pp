@@ -135,11 +135,11 @@ public:
 
 private:
     friend struct detail::ServerConnection;
-    explicit ServerConfig(UA_ServerConfig& config, detail::ServerContext& context);
 
     detail::ServerContext& context() noexcept;
 
     // TODO: remove workaround with external config & context (2nd variant alternative)
+    ServerConfig(UA_ServerConfig& config, detail::ServerContext& context);
     std::variant<UA_ServerConfig, UA_ServerConfig*> config_;
     std::variant<std::unique_ptr<detail::ServerContext>, detail::ServerContext*> context_;
 };
@@ -167,7 +167,7 @@ public:
     explicit Server(ServerConfig&& config);
 
     /// @copydoc ServerConfig::ServerConfig(uint16_t, const ByteString&)
-    [[deprecated("use ServerConfig constructor an pass config to Server constructor")]]
+    [[deprecated("use ServerConfig constructor and construct Server with ServerConfig")]]
     explicit Server(uint16_t port, const ByteString& certificate = {});
 
 #ifdef UA_ENABLE_ENCRYPTION

@@ -36,8 +36,7 @@ namespace detail {
 UA_ClientConfig* getConfig(UA_Client* client) noexcept;
 UA_ClientConfig& getConfig(Client& client) noexcept;
 
-UA_Logger* getLogger(UA_Client* client) noexcept;
-UA_Logger* getLogger(Client& client) noexcept;
+UA_Logger* getLogger(UA_ClientConfig* config) noexcept;
 
 ClientConnection* getConnection(UA_Client* client) noexcept;
 ClientConnection& getConnection(Client& client) noexcept;
@@ -49,31 +48,23 @@ ClientContext& getContext(Client& client) noexcept;
 
 }  // namespace detail
 
-/* ------------------------------------------- Client ------------------------------------------- */
+/* ---------------------------------------- ClientConfig ---------------------------------------- */
 
-using StateCallback = std::function<void()>;
-using InactivityCallback = std::function<void()>;
+using ClientStateCallback = std::function<void(Client&)>;
+using ClientInactivityCallback = std::function<void(Client&)>;
 
-/**
- * High-level client class.
- *
- * Exposes the most common functionality. Use the handle() method to get access the underlying
- * UA_Client instance and use the full power of open6254.
- */
-class Client {
+class ClientConfig {
 public:
     /**
-     * Create client with default configuration (no encryption).
+     * Create client config with default configuration (no encryption).
      * Security policies:
      * - [None](http://opcfoundation.org/UA/SecurityPolicy#None)
-     * @param logger Custom log function. If the passed function is empty, the default logger is
-     * used.
      */
-    explicit Client(LogFunction logger = nullptr);
+    ClientConfig();
 
 #ifdef UA_ENABLE_ENCRYPTION
     /**
-     * Create client with encryption enabled (PKI).
+     * Create client config with encryption enabled (PKI).
      * Security policies:
      * - [None](http://opcfoundation.org/UA/SecurityPolicy#None)
      * - [Basic128Rsa15](http://opcfoundation.org/UA/SecurityPolicy#Basic128Rsa15)
@@ -89,6 +80,107 @@ public:
      * @see https://reference.opcfoundation.org/Core/Part2/v105/docs/8
      * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/6.2
      */
+    ClientConfig(
+        const ByteString& certificate,
+        const ByteString& privateKey,
+        Span<const ByteString> trustList,
+        Span<const ByteString> revocationList = {}
+    );
+#endif
+
+    explicit ClientConfig(UA_ClientConfig&& config);
+
+    ~ClientConfig();
+
+    ClientConfig(const ClientConfig&) = delete;
+    ClientConfig(ClientConfig&&) noexcept = default;
+    ClientConfig& operator=(const ClientConfig&) = delete;
+    ClientConfig& operator=(ClientConfig&&) noexcept = default;
+
+    UA_ClientConfig* operator->() noexcept;
+    const UA_ClientConfig* operator->() const noexcept;
+
+    /// Set custom log function.
+    /// Does nothing if the passed function is empty or a nullptr.
+    void setLogger(LogFunction logger);
+
+    /// Set response timeout in milliseconds.
+    void setTimeout(uint32_t milliseconds) noexcept;
+
+    /// Set anonymous identity token.
+    void setUserIdentityToken(AnonymousIdentityToken token);
+    /// Set username/password identity token.
+    void setUserIdentityToken(UserNameIdentityToken token);
+    /// Set X.509 identity token.
+    void setUserIdentityToken(X509IdentityToken token);
+    /// Set issued identity token.
+    void setUserIdentityToken(IssuedIdentityToken token);
+
+    /// Set message security mode.
+    void setSecurityMode(MessageSecurityMode mode) noexcept;
+
+    /// Set custom data types.
+    /// All data types provided are automatically considered for decoding of received messages.
+    void setCustomDataTypes(std::vector<DataType> types);
+
+    /// Set a state callback that will be called after the client is connected.
+    void onConnected(ClientStateCallback callback);
+    /// Set a state callback that will be called after the client is disconnected.
+    void onDisconnected(ClientStateCallback callback);
+    /// Set a state callback that will be called after the session is activated.
+    void onSessionActivated(ClientStateCallback callback);
+    /// Set a state callback that will be called after the session is closed.
+    void onSessionClosed(ClientStateCallback callback);
+    /// Set an inactivity callback.
+    /// Every UA_ClientConfig::connectivityCheckInterval (in ms), an async read request is performed
+    /// on the server. The callback is called when the client receives no response for this request.
+    void onInactive(ClientInactivityCallback callback);
+
+    UA_ClientConfig* handle() noexcept;
+    const UA_ClientConfig* handle() const noexcept;
+
+private:
+    friend struct detail::ClientConnection;
+
+    detail::ClientContext& context() noexcept;
+
+    // TODO: remove workaround with external config & context (2nd variant alternative)
+    ClientConfig(UA_ClientConfig& config, detail::ClientContext& context);
+    std::variant<UA_ClientConfig, UA_ClientConfig*> config_;
+    std::variant<std::unique_ptr<detail::ClientContext>, detail::ClientContext*> context_;
+};
+
+/* ------------------------------------------- Client ------------------------------------------- */
+
+using StateCallback = std::function<void()>;
+using InactivityCallback = std::function<void()>;
+
+/**
+ * High-level client class.
+ *
+ * A client is usually created in two steps:
+ * 1. Create and modify a client configuration (ClientConfig)
+ * 2. Create a Client with a ClientConfig (move ownership to the Client instance)
+ *
+ * Once a client is connected to an `endpointUrl`, it is not possible to switch to another server.
+ * A new client has to be created for that.
+ *
+ * Use the handle() method to get access the underlying UA_Server instance and use the full power
+ * of open62541.
+ */
+class Client {
+public:
+    /// Create server with default configuration.
+    Client();
+
+    /// Create client with given configuration (move ownership to client).
+    explicit Client(ClientConfig&& config);
+
+#ifdef UA_ENABLE_ENCRYPTION
+    /// @copydoc ClientConfig::ClientConfig(
+    ///     const ByteString&, const ByteString&, Span<const ByteString>, Span<const ByteString>
+    /// )
+    [[deprecated("use ClientConfig constructor and construct Client with ClientConfig")]]
     Client(
         const ByteString& certificate,
         const ByteString& privateKey,
@@ -117,40 +209,49 @@ public:
      */
     std::vector<EndpointDescription> getEndpoints(std::string_view serverUrl);
 
-    /// Set custom log function.
-    /// Does nothing if the passed function is empty or a nullptr.
+    /// @copydoc ClientConfig::setLogger
+    [[deprecated("use ClientConfig::setLogger and pass config to Client constructor")]]
     void setLogger(LogFunction logger);
 
-    /// Set response timeout in milliseconds.
+    /// @copydoc ClientConfig::setTimeout
+    [[deprecated("use ClientConfig::setLogger and pass config to Client constructor")]]
     void setTimeout(uint32_t milliseconds);
 
-    /// Set anonymous identity token.
+    /// @copydoc ClientConfig::setUserIdentityToken(AnonymousIdentityToken)
+    [[deprecated("use ClientConfig::setUserIdentityToken and pass config to Client constructor")]]
     void setUserIdentityToken(AnonymousIdentityToken token);
-    /// Set username/password identity token.
+    /// @copydoc ClientConfig::setUserIdentityToken(UserNameIdentityToken)
+    [[deprecated("use ClientConfig::setUserIdentityToken and pass config to Client constructor")]]
     void setUserIdentityToken(UserNameIdentityToken token);
-    /// Set X.509 identity token.
+    /// @copydoc ClientConfig::setUserIdentityToken(X509IdentityToken)
+    [[deprecated("use ClientConfig::setUserIdentityToken and pass config to Client constructor")]]
     void setUserIdentityToken(X509IdentityToken token);
-    /// Set issued identity token.
+    /// @copydoc ClientConfig::setUserIdentityToken(IssuedIdentityToken)
+    [[deprecated("use ClientConfig::setUserIdentityToken and pass config to Client constructor")]]
     void setUserIdentityToken(IssuedIdentityToken token);
 
-    /// Set message security mode.
+    /// @copydoc ClientConfig::setSecurityMode
+    [[deprecated("use ClientConfig::setSecurityMode and pass config to Client constructor")]]
     void setSecurityMode(MessageSecurityMode mode);
 
-    /// Set custom data types.
-    /// All data types provided are automatically considered for decoding of received messages.
+    /// @copydoc ClientConfig::setCustomDataTypes
+    [[deprecated("use ClientConfig::setCustomDataTypes and pass config to Client constructor")]]
     void setCustomDataTypes(std::vector<DataType> dataTypes);
 
-    /// Set a state callback that will be called after the client is connected.
+    /// @copydoc ClientConfig::onConnected
+    [[deprecated("use ClientConfig::onConnected and pass config to Client constructor")]]
     void onConnected(StateCallback callback);
-    /// Set a state callback that will be called after the client is disconnected.
+    /// @copydoc ClientConfig::onDisconnected
+    [[deprecated("use ClientConfig::onDisconnected and pass config to Client constructor")]]
     void onDisconnected(StateCallback callback);
-    /// Set a state callback that will be called after the session is activated.
+    /// @copydoc ClientConfig::onSessionActivated
+    [[deprecated("use ClientConfig::onSessionActivated and pass config to Client constructor")]]
     void onSessionActivated(StateCallback callback);
-    /// Set a state callback that will be called after the session is closed.
+    /// @copydoc ClientConfig::onSessionClosed
+    [[deprecated("use ClientConfig::onSessionClosed and pass config to Client constructor")]]
     void onSessionClosed(StateCallback callback);
-    /// Set an inactivity callback.
-    /// Every UA_ClientConfig::connectivityCheckInterval (in ms), an async read request is performed
-    /// on the server. The callback is called when the client receives no response for this request.
+    /// @copydoc ClientConfig::onInactive
+    [[deprecated("use ClientConfig::onInactive and pass config to Client constructor")]]
     void onInactive(InactivityCallback callback);
 
     /**

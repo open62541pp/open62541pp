@@ -20,8 +20,6 @@
 #include "open62541pp/services/subscription.hpp"
 #include "open62541pp/typewrapper.hpp"
 
-#include "client_config.hpp"
-
 namespace opcua {
 
 /* --------------------------------------- State callbacks -------------------------------------- */
@@ -58,12 +56,20 @@ namespace opcua {
 // |             | UA_SECURECHANNELSTATE_FRESH        | UA_SESSIONSTATE_CREATED            | 2158821376    |
 // clang-format on
 
-inline static void invokeStateCallback(
-    detail::ClientContext& context, detail::ClientState state
-) noexcept {
-    const auto& callback = context.stateCallbacks.at(static_cast<size_t>(state));
-    if (callback) {
-        context.exceptionCatcher.invoke(callback);
+inline static void invokeStateCallback(UA_Client* client, detail::ClientState state) noexcept {
+    auto* context = detail::getContext(client);
+    if (context == nullptr) {
+        return;
+    }
+    const auto stateIndex = static_cast<size_t>(state);
+    if (const auto& callback = context->stateCallbacks.at(stateIndex)) {
+        context->exceptionCatcher.invoke(callback);
+    }
+    if (const auto& callback = context->clientStateCallbacks.at(stateIndex)) {
+        auto* wrapper = detail::getWrapper(client);
+        if (wrapper != nullptr) {
+            context->exceptionCatcher.invoke(callback, *wrapper);
+        }
     }
 }
 
@@ -77,16 +83,16 @@ static void stateCallback(UA_Client* client, UA_ClientState clientState) noexcep
     if (clientState != context->lastClientState) {
         switch (clientState) {
         case UA_CLIENTSTATE_DISCONNECTED:
-            invokeStateCallback(*context, detail::ClientState::Disconnected);
+            invokeStateCallback(client, detail::ClientState::Disconnected);
             break;
         case UA_CLIENTSTATE_CONNECTED:
-            invokeStateCallback(*context, detail::ClientState::Connected);
+            invokeStateCallback(client, detail::ClientState::Connected);
             break;
         case UA_CLIENTSTATE_SESSION:
-            invokeStateCallback(*context, detail::ClientState::SessionActivated);
+            invokeStateCallback(client, detail::ClientState::SessionActivated);
             break;
         case UA_CLIENTSTATE_SESSION_DISCONNECTED:
-            invokeStateCallback(*context, detail::ClientState::SessionClosed);
+            invokeStateCallback(client, detail::ClientState::SessionClosed);
             break;
         default:
             break;
@@ -110,10 +116,10 @@ static void stateCallback(
     if (sessionState != context->lastSessionState) {
         switch (sessionState) {
         case UA_SESSIONSTATE_ACTIVATED:
-            invokeStateCallback(*context, detail::ClientState::SessionActivated);
+            invokeStateCallback(client, detail::ClientState::SessionActivated);
             break;
         case UA_SESSIONSTATE_CLOSED:
-            invokeStateCallback(*context, detail::ClientState::SessionClosed);
+            invokeStateCallback(client, detail::ClientState::SessionClosed);
             break;
         default:
             break;
@@ -122,10 +128,10 @@ static void stateCallback(
     if (channelState != context->lastChannelState) {
         switch (channelState) {
         case UA_SECURECHANNELSTATE_OPEN:
-            invokeStateCallback(*context, detail::ClientState::Connected);
+            invokeStateCallback(client, detail::ClientState::Connected);
             break;
         case UA_SECURECHANNELSTATE_CLOSED:
-            invokeStateCallback(*context, detail::ClientState::Disconnected);
+            invokeStateCallback(client, detail::ClientState::Disconnected);
             break;
         default:
             break;
@@ -136,23 +142,225 @@ static void stateCallback(
 }
 #endif
 
-/* -------------------------------------- Connection state -------------------------------------- */
+/* ---------------------------------------- ClientConfig ---------------------------------------- */
+
+ClientConfig::ClientConfig()
+    : ClientConfig(UA_ClientConfig{}) {
+    throwIfBad(UA_ClientConfig_setDefault(handle()));
+}
+
+ClientConfig::ClientConfig(
+    const ByteString& certificate,
+    const ByteString& privateKey,
+    Span<const ByteString> trustList,
+    Span<const ByteString> revocationList
+)
+    : ClientConfig(UA_ClientConfig{}) {
+    throwIfBad(UA_ClientConfig_setDefaultEncryption(
+        handle(),
+        certificate,
+        privateKey,
+        asNative(trustList.data()),
+        trustList.size(),
+        asNative(revocationList.data()),
+        revocationList.size()
+    ));
+}
+
+// NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
+ClientConfig::ClientConfig(UA_ClientConfig&& config)
+    : config_(std::exchange(config, {})),
+      context_(std::make_unique<detail::ClientContext>()) {}
+
+ClientConfig::ClientConfig(UA_ClientConfig& config, detail::ClientContext& context)
+    : config_(&config),
+      context_(&context) {}
+
+ClientConfig::~ClientConfig() {
+    if (std::holds_alternative<UA_ClientConfig>(config_)) {
+        // create temporary client to free config
+        // reset callbacks to avoid notifications
+        handle()->stateCallback = nullptr;
+        handle()->inactivityCallback = nullptr;
+        handle()->subscriptionInactivityCallback = nullptr;
+        auto* client = UA_Client_newWithConfig(handle());
+        if (client != nullptr) {
+            UA_Client_delete(client);
+        }
+    }
+}
+
+void ClientConfig::setLogger(LogFunction logger) {
+    if (logger) {
+        context().logger = std::make_unique<LoggerDefault>(std::move(logger));
+#if UAPP_OPEN62541_VER_GE(1, 4)
+        context().logger->assign(handle()->logging);
+#else
+        context().logger->assign(handle()->logger);
+#endif
+    }
+}
+
+void ClientConfig::setTimeout(uint32_t milliseconds) noexcept {
+    handle()->timeout = milliseconds;
+}
+
+template <typename T>
+static void setUserIdentityTokenHelper(UA_ClientConfig* config, T&& token) {
+    auto& wrapper = asWrapper<ExtensionObject>(config->userIdentityToken);
+    wrapper = ExtensionObject::fromDecodedCopy(std::forward<T>(token));
+}
+
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
+void ClientConfig::setUserIdentityToken(AnonymousIdentityToken token) {
+    setUserIdentityTokenHelper(handle(), std::move(token));
+}
+
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
+void ClientConfig::setUserIdentityToken(UserNameIdentityToken token) {
+    setUserIdentityTokenHelper(handle(), std::move(token));
+}
+
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
+void ClientConfig::setUserIdentityToken(X509IdentityToken token) {
+    setUserIdentityTokenHelper(handle(), std::move(token));
+}
+
+// NOLINTNEXTLINE(performance-unnecessary-value-param)
+void ClientConfig::setUserIdentityToken(IssuedIdentityToken token) {
+    setUserIdentityTokenHelper(handle(), std::move(token));
+}
+
+void ClientConfig::setSecurityMode(MessageSecurityMode mode) noexcept {
+    handle()->securityMode = static_cast<UA_MessageSecurityMode>(mode);
+}
+
+void ClientConfig::setCustomDataTypes(std::vector<DataType> types) {
+    context().types = std::move(types);
+    context().customDataTypes = std::make_unique<UA_DataTypeArray>(
+        detail::createDataTypeArray(context().types)
+    );
+    handle()->customDataTypes = context().customDataTypes.get();
+}
+
+inline static void setStateCallback(
+    detail::ClientContext& context, detail::ClientState state, StateCallback&& callback
+) {
+    context.stateCallbacks.at(static_cast<size_t>(state)) = std::move(callback);
+}
+
+inline static void setStateCallback(
+    detail::ClientContext& context, detail::ClientState state, ClientStateCallback&& callback
+) {
+    context.clientStateCallbacks.at(static_cast<size_t>(state)) = std::move(callback);
+}
+
+void ClientConfig::onConnected(ClientStateCallback callback) {
+    setStateCallback(context(), detail::ClientState::Connected, std::move(callback));
+}
+
+void ClientConfig::onDisconnected(ClientStateCallback callback) {
+    setStateCallback(context(), detail::ClientState::Disconnected, std::move(callback));
+}
+
+void ClientConfig::onSessionActivated(ClientStateCallback callback) {
+    setStateCallback(context(), detail::ClientState::SessionActivated, std::move(callback));
+}
+
+void ClientConfig::onSessionClosed(ClientStateCallback callback) {
+    setStateCallback(context(), detail::ClientState::SessionClosed, std::move(callback));
+}
+
+static void inactivityCallback(UA_Client* client) noexcept {
+    auto* context = detail::getContext(client);
+    if (context == nullptr) {
+        return;
+    }
+    if (context->inactivityCallback != nullptr) {
+        context->exceptionCatcher.invoke(context->inactivityCallback);
+    }
+    if (context->clientInactivityCallback != nullptr) {
+        auto* wrapper = detail::getWrapper(client);
+        if (wrapper != nullptr) {
+            context->exceptionCatcher.invoke(context->clientInactivityCallback, *wrapper);
+        }
+    }
+}
+
+void ClientConfig::onInactive(ClientInactivityCallback callback) {
+    context().clientInactivityCallback = std::move(callback);
+    handle()->inactivityCallback = inactivityCallback;
+}
+
+UA_ClientConfig* ClientConfig::operator->() noexcept {
+    return handle();
+}
+
+const UA_ClientConfig* ClientConfig::operator->() const noexcept {
+    return handle();
+}
+
+// NOLINTNEXTLINE(bugprone-exception-escape)
+UA_ClientConfig* ClientConfig::handle() noexcept {
+    return std::visit(
+        detail::Overload{
+            [](UA_ClientConfig& cfg) { return &cfg; },
+            [](UA_ClientConfig* cfg) { return cfg; },
+        },
+        config_
+    );
+}
+
+// NOLINTNEXTLINE(bugprone-exception-escape)
+const UA_ClientConfig* ClientConfig::handle() const noexcept {
+    return std::visit(
+        detail::Overload{
+            [](const UA_ClientConfig& cfg) { return &cfg; },
+            [](const UA_ClientConfig* cfg) { return cfg; },
+        },
+        config_
+    );
+}
+
+// NOLINTNEXTLINE(bugprone-exception-escape)
+detail::ClientContext& ClientConfig::context() noexcept {
+    auto* context = std::visit(
+        detail::Overload{
+            [](std::unique_ptr<detail::ClientContext>& ctx) { return ctx.get(); },
+            [](detail::ClientContext* ctx) { return ctx; },
+        },
+        context_
+    );
+    assert(context != nullptr);
+    return *context;
+}
+
+/* -------------------------------------- ClientConnection -------------------------------------- */
 
 namespace detail {
 
-[[nodiscard]] static UA_Client* allocateClient() {
-    auto* client = UA_Client_new();
-    if (client == nullptr) {
-        throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
-    }
-    return client;
-}
-
 struct ClientConnection : public ConnectionBase<Client> {
-    ClientConnection()
-        : client(allocateClient()),
-          config(*detail::getConfig(client)) {
+    // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
+    explicit ClientConnection(ClientConfig&& cfg)
+        : client(allocateClient(cfg)),
+          context(moveContext(cfg)),
+          config(*detail::getConfig(client), *context) {
         applyDefaults();
+    }
+
+    static UA_Client* allocateClient(ClientConfig& config) {
+        auto* client = UA_Client_newWithConfig(config.handle());  // shallow copy
+        if (client == nullptr) {
+            throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
+        }
+        config.config_ = {};  // empty config
+        return client;
+    }
+
+    static std::unique_ptr<detail::ClientContext> moveContext(ClientConfig& config) {
+        std::unique_ptr<detail::ClientContext> context;
+        context.swap(std::get<std::unique_ptr<detail::ClientContext>>(config.context_));
+        return context;
     }
 
     ~ClientConnection() {
@@ -170,9 +378,10 @@ struct ClientConnection : public ConnectionBase<Client> {
         config->stateCallback = stateCallback;
     }
 
+    // NOLINTNEXTLINE(readability-make-member-function-const), false positive?
     void runIterate(uint16_t timeoutMilliseconds) {
         throwIfBad(UA_Client_run_iterate(client, timeoutMilliseconds));
-        context.exceptionCatcher.rethrow();
+        context->exceptionCatcher.rethrow();
     }
 
     void run() {
@@ -183,7 +392,7 @@ struct ClientConnection : public ConnectionBase<Client> {
         try {
             while (running) {
                 runIterate(1000);
-                context.exceptionCatcher.rethrow();
+                context->exceptionCatcher.rethrow();
             }
         } catch (...) {
             running = false;
@@ -196,8 +405,8 @@ struct ClientConnection : public ConnectionBase<Client> {
     }
 
     UA_Client* client;
+    std::unique_ptr<detail::ClientContext> context;
     ClientConfig config;
-    detail::ClientContext context;
     std::atomic<bool> running{false};
 };
 
@@ -205,23 +414,11 @@ struct ClientConnection : public ConnectionBase<Client> {
 
 /* ------------------------------------------- Client ------------------------------------------- */
 
-Client::Client(LogFunction logger)
-    : connection_(std::make_unique<detail::ClientConnection>()) {
-    // The logger should be set as soon as possible, ideally even before UA_ClientConfig_setDefault.
-    // However, the logger gets overwritten by UA_ClientConfig_setDefault() in older versions of
-    // open62541. The best we can do in this case, is to first call UA_ClientConfig_setDefault and
-    // then setLogger.
-    auto setConfig = [&] { throwIfBad(UA_ClientConfig_setDefault(detail::getConfig(handle()))); };
-#if UAPP_OPEN62541_VER_GE(1, 1)
-    setLogger(std::move(logger));
-    setConfig();
-#else
-    setConfig();
-    setLogger(std::move(logger));
-#endif
-    detail::getConfig(*this).securityMode = UA_MESSAGESECURITYMODE_NONE;
-    connection_->applyDefaults();
-}
+Client::Client()
+    : connection_(std::make_unique<detail::ClientConnection>(ClientConfig())) {}
+
+Client::Client(ClientConfig&& config)
+    : connection_(std::make_unique<detail::ClientConnection>(std::move(config))) {}
 
 #ifdef UA_ENABLE_ENCRYPTION
 Client::Client(
@@ -230,19 +427,9 @@ Client::Client(
     Span<const ByteString> trustList,
     Span<const ByteString> revocationList
 )
-    : connection_(std::make_unique<detail::ClientConnection>()) {
-    throwIfBad(UA_ClientConfig_setDefaultEncryption(
-        detail::getConfig(handle()),
-        certificate,
-        privateKey,
-        asNative(trustList.data()),
-        trustList.size(),
-        asNative(revocationList.data()),
-        revocationList.size()
-    ));
-    detail::getConfig(*this).securityMode = UA_MESSAGESECURITYMODE_SIGNANDENCRYPT;
-    connection_->applyDefaults();
-}
+    : connection_(std::make_unique<detail::ClientConnection>(
+          ClientConfig(certificate, privateKey, trustList, revocationList)
+      )) {}
 #endif
 
 Client::~Client() = default;
@@ -292,7 +479,7 @@ void Client::setLogger(LogFunction logger) {
 }
 
 void Client::setTimeout(uint32_t milliseconds) {
-    detail::getConfig(*this).timeout = milliseconds;
+    connection_->config.setTimeout(milliseconds);
 }
 
 // NOLINTNEXTLINE(performance-unnecessary-value-param)
@@ -316,41 +503,40 @@ void Client::setUserIdentityToken(IssuedIdentityToken token) {
 }
 
 void Client::setSecurityMode(MessageSecurityMode mode) {
-    detail::getConfig(*this).securityMode = static_cast<UA_MessageSecurityMode>(mode);
+    connection_->config.setSecurityMode(mode);
 }
 
 void Client::setCustomDataTypes(std::vector<DataType> dataTypes) {
     connection_->config.setCustomDataTypes(std::move(dataTypes));
 }
 
-static void setStateCallback(Client& client, detail::ClientState state, StateCallback&& callback) {
-    detail::getContext(client).stateCallbacks.at(static_cast<size_t>(state)) = std::move(callback);
-}
-
 void Client::onConnected(StateCallback callback) {
-    setStateCallback(*this, detail::ClientState::Connected, std::move(callback));
+    setStateCallback(
+        detail::getContext(*this), detail::ClientState::Connected, std::move(callback)
+    );
 }
 
 void Client::onDisconnected(StateCallback callback) {
-    setStateCallback(*this, detail::ClientState::Disconnected, std::move(callback));
+    setStateCallback(
+        detail::getContext(*this), detail::ClientState::Disconnected, std::move(callback)
+    );
 }
 
 void Client::onSessionActivated(StateCallback callback) {
-    setStateCallback(*this, detail::ClientState::SessionActivated, std::move(callback));
+    setStateCallback(
+        detail::getContext(*this), detail::ClientState::SessionActivated, std::move(callback)
+    );
 }
 
 void Client::onSessionClosed(StateCallback callback) {
-    setStateCallback(*this, detail::ClientState::SessionClosed, std::move(callback));
+    setStateCallback(
+        detail::getContext(*this), detail::ClientState::SessionClosed, std::move(callback)
+    );
 }
 
 void Client::onInactive(InactivityCallback callback) {
     detail::getContext(*this).inactivityCallback = std::move(callback);
-    detail::getConfig(*this).inactivityCallback = [](UA_Client* client) noexcept {
-        auto* context = detail::getContext(client);
-        if (context != nullptr && context->inactivityCallback != nullptr) {
-            context->exceptionCatcher.invoke(context->inactivityCallback);
-        }
-    };
+    detail::getConfig(*this).inactivityCallback = inactivityCallback;
 }
 
 void Client::connect(std::string_view endpointUrl) {
@@ -403,9 +589,7 @@ std::vector<Subscription<Client>> Client::getSubscriptions() {
     std::vector<Subscription<Client>> result;
     auto& subscriptions = detail::getContext(*this).subscriptions;
     subscriptions.eraseStale();
-    subscriptions.iterate([&](const auto& pair) {
-        result.emplace_back(*this, pair.first);
-    });
+    subscriptions.iterate([&](const auto& pair) { result.emplace_back(*this, pair.first); });
     return result;
 }
 #endif
@@ -466,8 +650,7 @@ UA_ClientConfig& getConfig(Client& client) noexcept {
     return *getConfig(client.handle());
 }
 
-UA_Logger* getLogger(UA_Client* client) noexcept {
-    auto* config = detail::getConfig(client);
+UA_Logger* getLogger(UA_ClientConfig* config) noexcept {
     if (config == nullptr) {
         return nullptr;
     }
@@ -476,10 +659,6 @@ UA_Logger* getLogger(UA_Client* client) noexcept {
 #else
     return &config->logger;
 #endif
-}
-
-UA_Logger* getLogger(Client& client) noexcept {
-    return getLogger(client.handle());
 }
 
 ClientConnection* getConnection(UA_Client* client) noexcept {
@@ -512,11 +691,13 @@ ClientContext* getContext(UA_Client* client) noexcept {
     if (connection == nullptr) {
         return nullptr;
     }
-    return &connection->context;
+    return connection->context.get();
 }
 
 ClientContext& getContext(Client& client) noexcept {
-    return getConnection(client).context;
+    auto* context = getConnection(client).context.get();
+    assert(context != nullptr);
+    return *context;
 }
 
 }  // namespace detail

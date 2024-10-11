@@ -17,6 +17,74 @@ using namespace opcua;
 
 constexpr std::string_view localServerUrl{"opc.tcp://localhost:4840"};
 
+TEST_CASE("ClientConfig constructors") {
+    SUBCASE("From native") {
+        ClientConfig config(UA_ClientConfig{});
+    }
+
+    SUBCASE("Default") {
+        ClientConfig config;
+    }
+
+#ifdef UA_ENABLE_ENCRYPTION
+    SUBCASE("Default with encryption") {
+        ClientConfig config(
+            {},  // certificate
+            {},  // privateKey
+            {},  // trustList
+            {}  // revocationList
+        );
+    }
+#endif
+}
+
+TEST_CASE("ClientConfig") {
+    ClientConfig config;
+
+    SUBCASE("Logger") {
+        static size_t counter = 0;
+        static LogLevel lastLogLevel{};
+        static LogCategory lastLogCategory{};
+        static std::string lastMessage{};
+
+        config.setLogger([&](LogLevel level, LogCategory category, std::string_view message) {
+            counter++;
+            lastLogLevel = level;
+            lastLogCategory = category;
+            lastMessage = message;
+        });
+
+        // passing a nullptr should do nothing
+        config.setLogger(nullptr);
+
+        UA_LOG_INFO(detail::getLogger(config.handle()), UA_LOGCATEGORY_CLIENT, "Message");
+        CHECK(counter == 1);
+        CHECK(lastLogLevel == LogLevel::Info);
+        CHECK(lastLogCategory == LogCategory::Client);
+        CHECK(lastMessage == "Message");
+    }
+
+    SUBCASE("Timeout") {
+        config.setTimeout(333);
+        CHECK(config->timeout == 333);
+    }
+
+    SUBCASE("SecurityMode") {
+        config.setSecurityMode(MessageSecurityMode::Sign);
+        CHECK(config->securityMode == UA_MESSAGESECURITYMODE_SIGN);
+    }
+
+    SUBCASE("CustomDataTypes") {
+        CHECK(config->customDataTypes == nullptr);
+
+        config.setCustomDataTypes({DataType(UA_TYPES[UA_TYPES_STRING])});
+        CHECK(config->customDataTypes->next == nullptr);
+        CHECK(config->customDataTypes->typesSize == 1);
+        CHECK(config->customDataTypes->types != nullptr);
+        CHECK(config->customDataTypes->types[0].typeId == UA_TYPES[UA_TYPES_STRING].typeId);
+    }
+}
+
 TEST_CASE("Client discovery") {
     Server server;
     ServerRunner serverRunner(server);
@@ -55,16 +123,19 @@ TEST_CASE("Client discovery") {
 TEST_CASE("Client connect with AnonymousIdentityToken") {
     Server server;
     ServerRunner serverRunner(server);
-    Client client;
 
     SUBCASE("Connect with anonymous should succeed") {
-        client.setUserIdentityToken(AnonymousIdentityToken{});
+        ClientConfig config;
+        config.setUserIdentityToken(AnonymousIdentityToken{});
+        Client client(std::move(config));
         CHECK_NOTHROW(client.connect(localServerUrl));
         CHECK(client.isConnected());
     }
 
     SUBCASE("Connect with username/password should fail") {
-        client.setUserIdentityToken(UserNameIdentityToken("username", "password"));
+        ClientConfig config;
+        config.setUserIdentityToken(UserNameIdentityToken("username", "password"));
+        Client client(std::move(config));
         CHECK_THROWS(client.connect(localServerUrl));
     }
 }
@@ -72,40 +143,24 @@ TEST_CASE("Client connect with AnonymousIdentityToken") {
 #if UAPP_OPEN62541_VER_GE(1, 3)
 TEST_CASE("Client connect with UserNameIdentityToken") {
     AccessControlDefault accessControl(false, {{"username", "password"}});
-    ServerConfig config;
-    config.setAccessControl(accessControl);
+    ServerConfig serverConfig;
+    serverConfig.setAccessControl(accessControl);
 
-    Server server(std::move(config));
+    Server server(std::move(serverConfig));
     ServerRunner serverRunner(server);
-    Client client;
 
     SUBCASE("Connect with anonymous should fail") {
+        Client client;
         CHECK_THROWS(client.connect(localServerUrl));
     }
 
     SUBCASE("Connect with username/password should succeed") {
-        client.setUserIdentityToken(UserNameIdentityToken("username", "password"));
+        ClientConfig clientConfig;
+        clientConfig.setUserIdentityToken(UserNameIdentityToken("username", "password"));
+        Client client(std::move(clientConfig));
         CHECK_NOTHROW(client.connect(localServerUrl));
         CHECK(client.isConnected());
     }
-}
-#endif
-
-#ifdef UA_ENABLE_ENCRYPTION
-TEST_CASE("Client encryption") {
-    SUBCASE("Connect to unencrypted server") {
-        Server server;
-        ServerRunner serverRunner(server);
-        Client client(ByteString{}, ByteString{}, {}, {});
-
-        client.setSecurityMode(MessageSecurityMode::SignAndEncrypt);
-        CHECK_THROWS(client.connect(localServerUrl));
-
-        client.setSecurityMode(MessageSecurityMode::None);
-        CHECK_NOTHROW(client.connect(localServerUrl));
-    }
-
-    // TODO...
 }
 #endif
 
@@ -131,7 +186,6 @@ TEST_CASE("Client run/stop") {
 TEST_CASE("Client state callbacks") {
     Server server;
     ServerRunner serverRunner(server);
-    Client client;
 
     enum class States {
         Connected,
@@ -141,11 +195,14 @@ TEST_CASE("Client state callbacks") {
     };
 
     std::vector<States> states;
-    client.onConnected([&] { states.push_back(States::Connected); });
-    client.onDisconnected([&] { states.push_back(States::Disconnected); });
-    client.onSessionActivated([&] { states.push_back(States::SessionActivated); });
-    client.onSessionClosed([&] { states.push_back(States::SessionClosed); });
 
+    ClientConfig config;
+    config.onConnected([&](Client&) { states.push_back(States::Connected); });
+    config.onDisconnected([&](Client&) { states.push_back(States::Disconnected); });
+    config.onSessionActivated([&](Client&) { states.push_back(States::SessionActivated); });
+    config.onSessionClosed([&](Client&) { states.push_back(States::SessionClosed); });
+
+    Client client(std::move(config));
     client.connect(localServerUrl);
     std::this_thread::sleep_for(100ms);
 
@@ -168,14 +225,15 @@ TEST_CASE("Client state callbacks") {
 TEST_CASE("Client inactivity callback") {
     Server server;
     ServerRunner serverRunner(server);
-    Client client;
 
-    UA_ClientConfig* config = UA_Client_getConfig(client.handle());
+    ClientConfig config;
     config->timeout = 50;  // ms
     config->connectivityCheckInterval = 10;  // ms
 
     bool inactive = false;
-    client.onInactive([&] { inactive = true; });
+    config.onInactive([&](Client&) { inactive = true; });
+
+    Client client(std::move(config));
     client.connect(localServerUrl);
     serverRunner.stop();
     client.runIterate(100);
@@ -184,17 +242,6 @@ TEST_CASE("Client inactivity callback") {
 #if UAPP_OPEN62541_VER_LE(1, 3)
     CHECK(inactive);
 #endif
-}
-
-TEST_CASE("Client configuration") {
-    Client client;
-    UA_ClientConfig* config = UA_Client_getConfig(client.handle());
-    CHECK(config != nullptr);
-
-    SUBCASE("Set timeout") {
-        client.setTimeout(333);
-        CHECK(config->timeout == 333);
-    }
 }
 
 TEST_CASE("Client methods") {

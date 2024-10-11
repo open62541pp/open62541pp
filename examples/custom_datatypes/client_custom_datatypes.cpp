@@ -7,8 +7,6 @@
 #include "custom_datatypes.hpp"
 
 int main() {
-    opcua::Client client;
-
     // Get custom type definitions from common header
     const auto& dataTypePoint = getPointDataType();
     const auto& dataTypeMeasurements = getMeasurementsDataType();
@@ -16,14 +14,16 @@ int main() {
     const auto& dataTypeUni = getUniDataType();
     const auto& dataTypeColor = getColorDataType();
 
+    opcua::ClientConfig config;
     // Provide custom data type definitions to client
-    client.setCustomDataTypes({
+    config.setCustomDataTypes({
         dataTypePoint,
         dataTypeMeasurements,
         dataTypeOpt,
         dataTypeUni,
         dataTypeColor,
     });
+    opcua::Client client(std::move(config));
 
     client.connect("opc.tcp://localhost:4840");
 

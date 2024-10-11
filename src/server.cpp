@@ -250,14 +250,6 @@ static void closeSession(
 }
 
 struct ServerConnection : public ConnectionBase<Server> {
-    ServerConnection()
-        : server(allocateServer()),
-          context(std::make_unique<detail::ServerContext>()),
-          config(*detail::getConfig(server), *context) {
-        applyDefaults();
-        applySessionRegistry();
-    }
-
     // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
     explicit ServerConnection(ServerConfig&& cfg)
         : server(allocateServer(cfg)),
@@ -265,14 +257,6 @@ struct ServerConnection : public ConnectionBase<Server> {
           config(*detail::getConfig(server), *context) {
         applyDefaults();
         applySessionRegistry();
-    }
-
-    static UA_Server* allocateServer() {
-        auto* server = UA_Server_new();
-        if (server == nullptr) {
-            throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
-        }
-        return server;
     }
 
     static UA_Server* allocateServer(ServerConfig& config) {

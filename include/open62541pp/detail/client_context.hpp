@@ -24,9 +24,12 @@ inline constexpr size_t clientStateCount = 4;
 
 /**
  * Internal storage for Client class.
- * Mainly used to store stateful function pointers.
  */
 struct ClientContext {
+    std::vector<DataType> types;
+    std::unique_ptr<UA_DataTypeArray> customDataTypes;
+    std::unique_ptr<LoggerBase> logger;
+
 #ifdef UA_ENABLE_SUBSCRIPTIONS
     using SubId = uint32_t;
     using MonId = uint32_t;
@@ -41,8 +44,10 @@ struct ClientContext {
     UA_SecureChannelState lastChannelState{};
     UA_SessionState lastSessionState{};
 #endif
-    std::array<StateCallback, clientStateCount> stateCallbacks;
-    InactivityCallback inactivityCallback;
+    std::array<StateCallback, clientStateCount> stateCallbacks;  // TODO: remove
+    std::array<ClientStateCallback, clientStateCount> clientStateCallbacks;
+    InactivityCallback inactivityCallback;  // TODO: remove
+    ClientInactivityCallback clientInactivityCallback;
 
     ExceptionCatcher exceptionCatcher;
 };
