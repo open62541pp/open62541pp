@@ -11,7 +11,6 @@ using namespace opcua;
 class ServerRunner {
 public:
     explicit ServerRunner(Server& server) {
-        server.setLogger([](auto&&...) {});  // disable logging to prevent data races
         server.runIterate();  // make sure server is running within constructor
         thread_ = std::thread([&] {
             while (!stopFlag_) {

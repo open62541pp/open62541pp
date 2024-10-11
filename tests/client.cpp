@@ -72,8 +72,10 @@ TEST_CASE("Client connect with AnonymousIdentityToken") {
 #if UAPP_OPEN62541_VER_GE(1, 3)
 TEST_CASE("Client connect with UserNameIdentityToken") {
     AccessControlDefault accessControl(false, {{"username", "password"}});
-    Server server;
-    server.setAccessControl(accessControl);
+    ServerConfig config;
+    config.setAccessControl(accessControl);
+
+    Server server(std::move(config));
     ServerRunner serverRunner(server);
     Client client;
 

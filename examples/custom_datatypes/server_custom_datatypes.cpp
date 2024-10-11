@@ -4,8 +4,6 @@
 #include "custom_datatypes.hpp"
 
 int main() {
-    opcua::Server server;
-
     // Get custom type definitions from common header
     const auto& dataTypePoint = getPointDataType();
     const auto& dataTypeMeasurements = getMeasurementsDataType();
@@ -13,14 +11,16 @@ int main() {
     const auto& dataTypeUni = getUniDataType();
     const auto& dataTypeColor = getColorDataType();
 
+    opcua::ServerConfig config;
     // Provide custom data type definitions to server
-    server.setCustomDataTypes({
+    config.setCustomDataTypes({
         dataTypePoint,
         dataTypeMeasurements,
         dataTypeOpt,
         dataTypeUni,
         dataTypeColor,
     });
+    opcua::Server server(std::move(config));
 
     // Add data type nodes
     opcua::Node structureDataTypeNode(server, opcua::DataTypeId::Structure);

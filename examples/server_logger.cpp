@@ -44,16 +44,13 @@ constexpr std::string_view getLogCategoryName(opcua::LogCategory category) {
 }
 
 int main() {
-    auto logger = [](auto level, auto category, auto msg) {
+    opcua::ServerConfig config;
+    config.setLogger([](auto level, auto category, auto msg) {
         std::cout << "[" << getLogLevelName(level) << "] "
                   << "[" << getLogCategoryName(category) << "] " << msg << std::endl;
-    };
+    });
 
-    // Set logger in constructor
-    opcua::Server server(4840, {}, logger);
-
-    // Set logger after construction
-    server.setLogger(logger);
+    opcua::Server server(std::move(config));
 
     server.run();
 }

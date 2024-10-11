@@ -39,8 +39,7 @@ namespace detail {
 UA_ServerConfig* getConfig(UA_Server* server) noexcept;
 UA_ServerConfig& getConfig(Server& server) noexcept;
 
-UA_Logger* getLogger(UA_Server* server) noexcept;
-UA_Logger* getLogger(Server& server) noexcept;
+UA_Logger* getLogger(UA_ServerConfig* config) noexcept;
 
 ServerConnection* getConnection(UA_Server* server) noexcept;
 ServerConnection& getConnection(Server& server) noexcept;
@@ -52,33 +51,27 @@ ServerContext& getContext(Server& server) noexcept;
 
 }  // namespace detail
 
-/* ------------------------------------------- Server ------------------------------------------- */
+/* ---------------------------------------- ServerConfig ---------------------------------------- */
 
 /**
- * High-level server class.
- *
- * Exposes the most common functionality. Use the handle() method to get access the underlying
- * UA_Server instance and use the full power of open6254.
+ * Server configuration.
+ * @see UA_ServerConfig
  */
-class Server {
+class ServerConfig {
 public:
     /**
-     * Create server with default configuration (no encryption).
+     * Create server config with default configuration (no encryption).
      * Security policies:
      * - [None](http://opcfoundation.org/UA/SecurityPolicy#None)
      *
      * @param port Port number
      * @param certificate Optional X.509 v3 certificate in `DER` encoded format
-     * @param logger Custom log function. If the passed function is empty, the default logger is
-     * used.
      */
-    explicit Server(
-        uint16_t port = 4840, ByteString certificate = {}, LogFunction logger = nullptr
-    );
+    explicit ServerConfig(uint16_t port = 4840, const ByteString& certificate = {});
 
 #ifdef UA_ENABLE_ENCRYPTION
     /**
-     * Create server with encryption enabled (PKI).
+     * Create server config with encryption enabled (PKI).
      * Security policies:
      * - [None](http://opcfoundation.org/UA/SecurityPolicy#None)
      * - [Basic128Rsa15](http://opcfoundation.org/UA/SecurityPolicy#Basic128Rsa15)
@@ -97,6 +90,96 @@ public:
      * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/6.1
      * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/6.2
      */
+    ServerConfig(
+        uint16_t port,
+        const ByteString& certificate,
+        const ByteString& privateKey,
+        Span<const ByteString> trustList,
+        Span<const ByteString> issuerList,
+        Span<const ByteString> revocationList = {}
+    );
+#endif
+
+    explicit ServerConfig(UA_ServerConfig&& config);
+
+    ~ServerConfig();
+
+    ServerConfig(const ServerConfig&) = delete;
+    ServerConfig(ServerConfig&&) noexcept = default;
+    ServerConfig& operator=(const ServerConfig&) = delete;
+    ServerConfig& operator=(ServerConfig&&) noexcept = default;
+
+    UA_ServerConfig* operator->() noexcept;
+    const UA_ServerConfig* operator->() const noexcept;
+
+    /// Set custom log function.
+    /// Does nothing if the passed function is empty or a nullptr.
+    void setLogger(LogFunction logger);
+
+    /// Set custom access control.
+    void setAccessControl(AccessControlBase& accessControl);
+
+    /// Set application name, default: `open62541-based OPC UA Application`.
+    void setApplicationName(std::string_view name);
+    /// Set application URI, default: `urn:open62541.server.application`.
+    void setApplicationUri(std::string_view uri);
+    /// Set product URI, default: `http://open62541.org`.
+    void setProductUri(std::string_view uri);
+
+    /// Set custom data types.
+    /// All data types provided are automatically considered for decoding of received messages.
+    void setCustomDataTypes(std::vector<DataType> types);
+
+    UA_ServerConfig* handle() noexcept;
+    const UA_ServerConfig* handle() const noexcept;
+
+private:
+    friend struct detail::ServerConnection;
+    explicit ServerConfig(UA_ServerConfig& config, detail::ServerContext& context);
+
+    detail::ServerContext& context() noexcept;
+
+    // TODO: remove workaround with external config & context (2nd variant alternative)
+    std::variant<UA_ServerConfig, UA_ServerConfig*> config_;
+    std::variant<std::unique_ptr<detail::ServerContext>, detail::ServerContext*> context_;
+};
+
+/* ------------------------------------------- Server ------------------------------------------- */
+
+/**
+ * High-level server class.
+ *
+ * A server is usually created in two steps:
+ * 1. Create and modify a server configuration (ServerConfig)
+ * 2. Create a Server with a ServerConfig (move ownership to the Server instance)
+ *
+ * The server expects that the configuration is not modified during runtime.
+ *
+ * Use the handle() method to get access the underlying UA_Server instance and use the full power
+ * of open62541.
+ */
+class Server {
+public:
+    /// Create server with default configuration.
+    Server();
+
+    /// Create server with given configuration (move ownership to server).
+    explicit Server(ServerConfig&& config);
+
+    /// @copydoc ServerConfig::ServerConfig(uint16_t, const ByteString&)
+    [[deprecated("use ServerConfig constructor an pass config to Server constructor")]]
+    explicit Server(uint16_t port, const ByteString& certificate = {});
+
+#ifdef UA_ENABLE_ENCRYPTION
+    /// @copydoc ServerConfig::ServerConfig(
+    ///     uint16_t,
+    ///     const ByteString&,
+    ///     const ByteString&,
+    ///     Span<const ByteString>,
+    ///     Span<const ByteString>,
+    ///     Span<const ByteString>
+    /// )
+    [[deprecated("use ServerConfig constructor an pass config to Server constructor")]]
     Server(
         uint16_t port,
         const ByteString& certificate,
@@ -114,24 +197,32 @@ public:
     Server& operator=(const Server&) = delete;
     Server& operator=(Server&&) noexcept = default;
 
-    /// Set custom log function.
-    /// Does nothing if the passed function is empty or a nullptr.
+    /// @copydoc ServerConfig::setLogger
+    [[deprecated("use ServerConfig::setLogger and pass config to Server constructor")]]
     void setLogger(LogFunction logger);
-
-    /// Set custom access control.
-    void setAccessControl(AccessControlBase& accessControl);
-    /// Set custom access control (transfer ownership to Server).
-    void setAccessControl(std::unique_ptr<AccessControlBase> accessControl);
 
     /// Set custom hostname, default: system's host name.
     [[deprecated("not supported since open62541 v1.4")]]
     void setCustomHostname(std::string_view hostname);
-    /// Set application name, default: `open62541-based OPC UA Application`.
+    /// @copydoc ServerConfig::setApplicationName
+    [[deprecated("use ServerConfig::setApplicationName and pass config to Server constructor")]]
     void setApplicationName(std::string_view name);
-    /// Set application URI, default: `urn:open62541.server.application`.
+    /// @copydoc ServerConfig::setApplicationUri
+    [[deprecated("use ServerConfig::setApplicationUri and pass config to Server constructor")]]
     void setApplicationUri(std::string_view uri);
-    /// Set product URI, default: `http://open62541.org`.
+    /// @copydoc ServerConfig::setProductUri
+    [[deprecated("use ServerConfig::setProductUri and pass config to Server constructor")]]
     void setProductUri(std::string_view uri);
+
+    /// @copydoc ServerConfig::setCustomDataTypes
+    [[deprecated("use ServerConfig::setCustomDataTypes and pass config to Server constructor")]]
+    void setCustomDataTypes(std::vector<DataType> dataTypes);
+
+    /// @copydoc ServerConfig::setAccessControl
+    [[deprecated("use ServerConfig::setAccessControl and pass config to Server constructor")]]
+    void setAccessControl(AccessControlBase& accessControl);
+    [[deprecated("use ServerConfig::setAccessControl and pass config to Server constructor")]]
+    void setAccessControl(std::unique_ptr<AccessControlBase> accessControl);
 
     /// Get active server session.
     std::vector<Session> getSessions();
@@ -140,10 +231,6 @@ public:
     std::vector<std::string> getNamespaceArray();
     /// Register namespace. The new namespace index will be returned.
     [[nodiscard]] NamespaceIndex registerNamespace(std::string_view uri);
-
-    /// Set custom data types.
-    /// All data types provided are automatically considered for decoding of received messages.
-    void setCustomDataTypes(std::vector<DataType> dataTypes);
 
     /// Set value callbacks to execute before every read and after every write operation.
     void setVariableNodeValueCallback(const NodeId& id, ValueCallback callback);

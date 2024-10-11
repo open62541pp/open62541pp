@@ -12,15 +12,73 @@
 #include "open62541pp/server.hpp"
 #include "open62541pp/types.hpp"
 
-#include "server_config.hpp"
-
 using namespace opcua;
 
-TEST_CASE("ServerConfig") {
-    UA_ServerConfig native{};
-    UA_ServerConfig_setDefault(&native);
+TEST_CASE("ServerConfig constructors") {
+    SUBCASE("From native") {
+        ServerConfig config(UA_ServerConfig{});
+    }
 
-    ServerConfig config(native);
+    SUBCASE("Default") {
+        ServerConfig config;
+    }
+
+    SUBCASE("Default with port and certificate") {
+        ServerConfig config(4850, ByteString{});
+    }
+
+#ifdef UA_ENABLE_ENCRYPTION
+    SUBCASE("Default with encryption") {
+        ServerConfig config(
+            4850,
+            {},  // certificate, invalid
+            {},  // privateKey, invalid
+            {},  // trustList
+            {},  // issuerList
+            {}  // revocationList
+        );
+        // no encrypting security policies enabled due to invalid certificate and key
+        CHECK(config->securityPoliciesSize >= 1);
+    }
+#endif
+}
+
+TEST_CASE("ServerConfig") {
+    ServerConfig config;
+
+    SUBCASE("Logger") {
+        static size_t counter = 0;
+        static LogLevel lastLogLevel{};
+        static LogCategory lastLogCategory{};
+        static std::string lastMessage{};
+
+        config.setLogger([&](LogLevel level, LogCategory category, std::string_view message) {
+            counter++;
+            lastLogLevel = level;
+            lastLogCategory = category;
+            lastMessage = message;
+        });
+
+        // passing a nullptr should do nothing
+        config.setLogger(nullptr);
+
+        UA_LOG_INFO(detail::getLogger(config.handle()), UA_LOGCATEGORY_SERVER, "Message");
+        CHECK(counter == 1);
+        CHECK(lastLogLevel == LogLevel::Info);
+        CHECK(lastLogCategory == LogCategory::Server);
+        CHECK(lastMessage == "Message");
+    }
+
+    SUBCASE("ApplicationDescription") {
+        config.setApplicationName("Test App");
+        CHECK(detail::toStringView(config->applicationDescription.applicationName.text) == "Test App");
+
+        config.setApplicationUri("http://app.com");
+        CHECK(detail::toStringView(config->applicationDescription.applicationUri) == "http://app.com");
+
+        config.setProductUri("http://product.com");
+        CHECK(detail::toStringView(config->applicationDescription.productUri) == "http://product.com");
+    }
 
     SUBCASE("AccessControl") {
         SUBCASE("Copy user token policies to endpoints") {
@@ -65,43 +123,16 @@ TEST_CASE("ServerConfig") {
             );
         }
     }
-
-    UA_ServerConfig_clean(&native);
 }
 
 TEST_CASE("Server constructors") {
-    SUBCASE("Construct") {
+    SUBCASE("Construct with default config") {
         Server server;
     }
 
-    SUBCASE("Construct with custom port") {
-        Server server(4850);
+    SUBCASE("Construct with config") {
+        Server server(ServerConfig{});
     }
-
-    SUBCASE("Custom port and certificate") {
-        Server server(4850, ByteString("certificate"));
-    }
-}
-
-#ifdef UA_ENABLE_ENCRYPTION
-TEST_CASE("Server encryption") {
-    Server server(
-        4850,
-        {},  // certificate, invalid
-        {},  // privateKey, invalid
-        {},  // trustList
-        {},  // issuerList
-        {}  // revocationList
-    );
-    // no encrypting security policies enabled due to invalid certificate and key
-    CHECK(UA_Server_getConfig(server.handle())->securityPoliciesSize >= 1);
-}
-#endif
-
-TEST_CASE("Server equality operators") {
-    Server server;
-    CHECK(server == server);
-    CHECK(server != Server{});
 }
 
 TEST_CASE("Server run/stop/runIterate") {
@@ -137,21 +168,8 @@ TEST_CASE("Server run/stop/runIterate") {
     }
 }
 
-TEST_CASE("Server configuration") {
+TEST_CASE("Server methods") {
     Server server;
-
-    SUBCASE("Set hostname / application name / uris") {
-        auto* config = UA_Server_getConfig(server.handle());
-
-        server.setApplicationName("Test App");
-        CHECK(detail::toString(config->applicationDescription.applicationName.text) == "Test App");
-
-        server.setApplicationUri("http://app.com");
-        CHECK(detail::toString(config->applicationDescription.applicationUri) == "http://app.com");
-
-        server.setProductUri("http://product.com");
-        CHECK(detail::toString(config->applicationDescription.productUri) == "http://product.com");
-    }
 
     SUBCASE("Namespace array") {
         const auto namespaces = server.getNamespaceArray();
@@ -167,6 +185,12 @@ TEST_CASE("Server configuration") {
         CHECK(server.registerNamespace("test2") == 3);
         CHECK(server.getNamespaceArray().at(3) == "test2");
     }
+}
+
+TEST_CASE("Server equality operators") {
+    Server server;
+    CHECK(server == server);
+    CHECK(server != Server{});
 }
 
 TEST_CASE("Server helper functions") {

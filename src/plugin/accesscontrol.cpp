@@ -41,7 +41,7 @@ static void logException(
 ) {
     // NOLINTNEXTLINE
     UA_LOG_WARNING(
-        detail::getLogger(server),
+        detail::getLogger(detail::getConfig(server)),
         UA_LOGCATEGORY_SERVER,
         "Exception in access control callback %.*s: %.*s",
         static_cast<int>(callbackName.size()),

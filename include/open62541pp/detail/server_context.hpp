@@ -2,12 +2,17 @@
 
 #include <cstdint>
 #include <functional>
+#include <memory>  // unique_ptr
 #include <set>
+#include <vector>
 
 #include "open62541pp/config.hpp"
+#include "open62541pp/datatype.hpp"
 #include "open62541pp/detail/contextmap.hpp"
 #include "open62541pp/detail/exceptioncatcher.hpp"
 #include "open62541pp/detail/open62541/common.h"  // UA_AccessControl
+#include "open62541pp/plugin/accesscontrol.hpp"
+#include "open62541pp/plugin/log.hpp"
 #include "open62541pp/plugin/nodestore.hpp"
 #include "open62541pp/services/detail/monitoreditem_context.hpp"
 #include "open62541pp/types.hpp"
@@ -30,9 +35,13 @@ struct SessionRegistry {
 
 /**
  * Internal storage for Server class.
- * Mainly used to store stateful function pointers.
  */
 struct ServerContext {
+    std::vector<DataType> types;
+    std::unique_ptr<UA_DataTypeArray> customDataTypes;
+    std::unique_ptr<LoggerBase> logger;
+    std::unique_ptr<AccessControlBase> accessControl;
+
 #ifdef UA_ENABLE_SUBSCRIPTIONS
     using SubId = uint32_t;  // always 0
     using MonId = uint32_t;
