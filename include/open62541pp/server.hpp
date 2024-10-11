@@ -116,9 +116,6 @@ public:
     /// Does nothing if the passed function is empty or a nullptr.
     void setLogger(LogFunction logger);
 
-    /// Set custom access control.
-    void setAccessControl(AccessControlBase& accessControl);
-
     /// Set application name, default: `open62541-based OPC UA Application`.
     void setApplicationName(std::string_view name);
     /// Set application URI, default: `urn:open62541.server.application`.
@@ -129,6 +126,9 @@ public:
     /// Set custom data types.
     /// All data types provided are automatically considered for decoding of received messages.
     void setCustomDataTypes(std::vector<DataType> types);
+
+    /// Set custom access control.
+    void setAccessControl(AccessControlBase& accessControl);
 
     UA_ServerConfig* handle() noexcept;
     const UA_ServerConfig* handle() const noexcept;

@@ -91,6 +91,33 @@ void ServerConfig::setLogger(LogFunction logger) {
     }
 }
 
+static ApplicationDescription& getApplicationDescription(UA_ServerConfig* config) noexcept {
+    return asWrapper<ApplicationDescription>(config->applicationDescription);
+}
+
+// copy to endpoints needed, see: https://github.com/open62541/open62541/issues/1175
+static void copyApplicationDescriptionToEndpoints(UA_ServerConfig* config) {
+    auto endpoints = Span(asWrapper<EndpointDescription>(config->endpoints), config->endpointsSize);
+    for (auto& endpoint : endpoints) {
+        endpoint.getServer() = getApplicationDescription(config);
+    }
+}
+
+void ServerConfig::setApplicationName(std::string_view name) {
+    getApplicationDescription(handle()).getApplicationName() = LocalizedText("", name);
+    copyApplicationDescriptionToEndpoints(handle());
+}
+
+void ServerConfig::setApplicationUri(std::string_view uri) {
+    getApplicationDescription(handle()).getApplicationUri() = String(uri);
+    copyApplicationDescriptionToEndpoints(handle());
+}
+
+void ServerConfig::setProductUri(std::string_view uri) {
+    getApplicationDescription(handle()).getProductUri() = String(uri);
+    copyApplicationDescriptionToEndpoints(handle());
+}
+
 void ServerConfig::setCustomDataTypes(std::vector<DataType> types) {
     context().types = std::move(types);
     context().customDataTypes = std::make_unique<UA_DataTypeArray>(
@@ -138,33 +165,6 @@ void ServerConfig::setAccessControl(AccessControlBase& accessControl) {
     accessControl.assign(handle()->accessControl);
     setHighestSecurityPolicyForUserTokenTransfer(handle());
     copyUserTokenPoliciesToEndpoints(handle());
-}
-
-static ApplicationDescription& getApplicationDescription(UA_ServerConfig* config) noexcept {
-    return asWrapper<ApplicationDescription>(config->applicationDescription);
-}
-
-// copy to endpoints needed, see: https://github.com/open62541/open62541/issues/1175
-static void copyApplicationDescriptionToEndpoints(UA_ServerConfig* config) {
-    auto endpoints = Span(asWrapper<EndpointDescription>(config->endpoints), config->endpointsSize);
-    for (auto& endpoint : endpoints) {
-        endpoint.getServer() = getApplicationDescription(config);
-    }
-}
-
-void ServerConfig::setApplicationName(std::string_view name) {
-    getApplicationDescription(handle()).getApplicationName() = LocalizedText("", name);
-    copyApplicationDescriptionToEndpoints(handle());
-}
-
-void ServerConfig::setApplicationUri(std::string_view uri) {
-    getApplicationDescription(handle()).getApplicationUri() = String(uri);
-    copyApplicationDescriptionToEndpoints(handle());
-}
-
-void ServerConfig::setProductUri(std::string_view uri) {
-    getApplicationDescription(handle()).getProductUri() = String(uri);
-    copyApplicationDescriptionToEndpoints(handle());
 }
 
 // NOLINTNEXTLINE(bugprone-exception-escape)

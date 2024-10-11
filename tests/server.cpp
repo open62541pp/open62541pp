@@ -80,6 +80,16 @@ TEST_CASE("ServerConfig") {
         CHECK(detail::toString(config->applicationDescription.productUri) == "http://product.com");
     }
 
+    SUBCASE("CustomDataTypes") {
+        CHECK(config->customDataTypes == nullptr);
+
+        config.setCustomDataTypes({DataType(UA_TYPES[UA_TYPES_STRING])});
+        CHECK(config->customDataTypes->next == nullptr);
+        CHECK(config->customDataTypes->typesSize == 1);
+        CHECK(config->customDataTypes->types != nullptr);
+        CHECK(config->customDataTypes->types[0].typeId == UA_TYPES[UA_TYPES_STRING].typeId);
+    }
+
     SUBCASE("AccessControl") {
         SUBCASE("Copy user token policies to endpoints") {
             CHECK(config->endpointsSize > 0);
