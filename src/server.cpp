@@ -259,9 +259,9 @@ struct ServerConnection : public ConnectionBase<Server> {
     }
 
     // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
-    explicit ServerConnection(ServerConfig&& config)
-        : server(allocateServer(config)),
-          context(moveContext(config)),
+    explicit ServerConnection(ServerConfig&& cfg)
+        : server(allocateServer(cfg)),
+          context(moveContext(cfg)),
           config(*detail::getConfig(server), *context) {
         applyDefaults();
         applySessionRegistry();
