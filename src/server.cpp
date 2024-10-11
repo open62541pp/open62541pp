@@ -448,7 +448,8 @@ void Server::setAccessControl(AccessControlBase& accessControl) {
 void Server::setAccessControl(std::unique_ptr<AccessControlBase> accessControl) {
     if (accessControl) {
         connection_->context->accessControl = std::move(accessControl);
-        setAccessControl(*connection_->context->accessControl);
+        connection_->config.setAccessControl(*connection_->context->accessControl);
+        connection_->applySessionRegistry();
     }
 }
 
