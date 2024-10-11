@@ -280,14 +280,13 @@ struct ServerConnection : public ConnectionBase<Server> {
         if (server == nullptr) {
             throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
         }
-        config.config_ = detail::getConfig(server);  // non-owning
+        config.config_ = {};  // empty config
         return server;
     }
 
     static std::unique_ptr<detail::ServerContext> moveContext(ServerConfig& config) {
         std::unique_ptr<detail::ServerContext> context;
         context.swap(std::get<std::unique_ptr<detail::ServerContext>>(config.context_));
-        config.context_ = context.get();  // non-owning
         return context;
     }
 
