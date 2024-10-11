@@ -149,6 +149,7 @@ ClientConfig::ClientConfig()
     throwIfBad(UA_ClientConfig_setDefault(handle()));
 }
 
+#ifdef UA_ENABLE_ENCRYPTION
 ClientConfig::ClientConfig(
     const ByteString& certificate,
     const ByteString& privateKey,
@@ -166,6 +167,7 @@ ClientConfig::ClientConfig(
         revocationList.size()
     ));
 }
+#endif
 
 // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
 ClientConfig::ClientConfig(UA_ClientConfig&& config)
