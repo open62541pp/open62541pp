@@ -888,6 +888,19 @@ class Variant : public TypeWrapper<UA_Variant, UA_TYPES_VARIANT> {
 public:
     using TypeWrapper::TypeWrapper;  // inherit constructors
 
+    /// Create Variant from value.
+    /// The characteristic scalar or array is deduced from the value's type.
+    /// @tparam Policy Policy (@ref VariantPolicy) how to store the scalar inside the variant
+    template <VariantPolicy Policy = VariantPolicy::Copy, typename T>
+    [[nodiscard]] static Variant fromValue(T&& value) {
+        using Decayed = std::decay_t<T>;
+        if constexpr (detail::IsContainerV<Decayed> && !detail::isRegisteredType<Decayed> && !std::is_same_v<Decayed, std::string>) {
+            return fromArray<Policy>(std::forward<T>(value));
+        } else {
+            return fromScalar<Policy>(std::forward<T>(value));
+        }
+    }
+
     /// Create Variant from scalar value.
     /// @tparam Policy Policy (@ref VariantPolicy) how to store the scalar inside the variant
     template <VariantPolicy Policy = VariantPolicy::Copy, typename T>
@@ -1011,6 +1024,18 @@ public:
     /// @copydoc data
     const void* data() const noexcept {
         return handle()->data;
+    }
+
+    /// Get copy of value with given template type.
+    /// The characteristic scalar or array is deduced from the value's type.
+    /// @exception BadVariantAccess If the variant is not convertible to `T`.
+    template <typename T>
+    T getValueCopy() {
+        if constexpr (detail::IsContainerV<T> && !detail::isRegisteredType<T> && !std::is_same_v<T, std::string>) {
+            return getArrayCopy<typename T::value_type>();
+        } else {
+            return getScalarCopy<T>();
+        }
     }
 
     /// Get reference to scalar value with given template type (only native or wrapper types).

@@ -194,6 +194,69 @@ TEST_CASE_TEMPLATE("Node", T, Server, Client) {
         }
     }
 
+    SUBCASE("Read/write value (unified API)") {
+        SUBCASE("Try read/write node classes other than Variable") {
+            CHECK_THROWS(rootNode.template readValue<int>());
+            CHECK_THROWS(rootNode.template writeValue<int>({}));
+        }
+
+        SUBCASE("Scalar") {
+            CHECK_NOTHROW(varNode.writeDataType(DataTypeId::Float));
+
+            // write with wrong data type
+            CHECK_THROWS(varNode.writeValue(bool{}));
+            CHECK_THROWS(varNode.writeValue(int{}));
+
+            // write with correct data type
+            float value = 11.11f;
+            CHECK_NOTHROW(varNode.writeValue(value));
+            CHECK(varNode.template readValue<float>() == value);
+        }
+
+        SUBCASE("String") {
+            CHECK_NOTHROW(varNode.writeDataType(DataTypeId::String));
+
+            SUBCASE("Use opcua::String") {
+                String str("test");
+                CHECK_NOTHROW(varNode.writeValue(str));
+                CHECK(varNode.template readValue<String>() == "test");
+            }
+
+            SUBCASE("Use std::string") {
+                std::string str("test");
+                CHECK_NOTHROW(varNode.writeValue(str));
+                CHECK(varNode.template readValue<std::string>() == "test");
+            }
+        }
+
+        SUBCASE("Array") {
+            CHECK_NOTHROW(varNode.writeDataType(DataTypeId::Double));
+
+            // write with wrong data type
+            CHECK_THROWS(varNode.writeValue(std::vector<int>{}));
+            CHECK_THROWS(varNode.writeValue(std::vector<float>{}));
+
+            // write with correct data type
+            std::vector<double> array{11.11, 22.22, 33.33};
+
+            SUBCASE("Write as std::vector") {
+                CHECK_NOTHROW(varNode.writeValue(array));
+                CHECK(varNode.template readValue<std::vector<double>>() == array);
+            }
+
+            SUBCASE("Write as raw array") {
+                CHECK_NOTHROW(varNode.writeValue(Span{array.data(), array.size()}));
+                CHECK(varNode.template readValue<std::vector<double>>() == array);
+            }
+
+            // TODO
+            // SUBCASE("Write as iterator pair") {
+            //     CHECK_NOTHROW(varNode.writeValue(array.begin(), array.end()));
+            //     CHECK(varNode.template readValue<std::vector<double>>() == array);
+            // }
+        }
+    }
+
     SUBCASE("Read/write object property") {
         auto node = objNode.addObject({1, 1000}, "Object");
         node.addProperty(
