@@ -105,7 +105,7 @@ public:
     ) = 0;
 
     UA_AccessControl create(bool ownsAdapter) override;
-    void clear(UA_AccessControl& ac) const noexcept override;
+    void clear(UA_AccessControl& native) const noexcept override;
 };
 
 }  // namespace opcua

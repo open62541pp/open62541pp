@@ -334,13 +334,17 @@ UA_AccessControl AccessControlBase::create(bool ownsAdapter) {
     return native;
 }
 
-void AccessControlBase::clear(UA_AccessControl& ac) const noexcept {
+void AccessControlBase::clear(UA_AccessControl& native) const noexcept {
 #if UAPP_OPEN62541_VER_GE(1, 1)
-    ac.clear(&ac);
+    if (native.clear != nullptr) {
+        native.clear(&native);
+    }
 #else
-    ac.deleteMembers(&ac);
+    if (native.deleteMembers != nullptr) {
+        native.deleteMembers(&native);
+    }
 #endif
-    ac = {};
+    native = {};
 }
 
 }  // namespace opcua
