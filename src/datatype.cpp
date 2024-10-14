@@ -132,7 +132,7 @@ UA_DataType createDataType(
 UA_DataTypeArray createDataTypeArray(
     Span<const DataType> types, const UA_DataTypeArray* next
 ) noexcept {
-    return UA_DataTypeArray {
+    return UA_DataTypeArray{
         next,
         types.size(),
         asNative(types.data()),

@@ -104,8 +104,8 @@ public:
         bool isDeleteModified
     ) = 0;
 
-    UA_AccessControl create() override;
-    void clear(UA_AccessControl& ac) noexcept override;
+    UA_AccessControl create(bool ownsAdapter) override;
+    void clear(UA_AccessControl& ac) const noexcept override;
 };
 
 }  // namespace opcua

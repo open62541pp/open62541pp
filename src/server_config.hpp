@@ -22,12 +22,13 @@ public:
 
     void setLogger(LogFunction logger) {
         if (logger) {
-            logger_ = std::make_unique<LoggerDefault>(std::move(logger));
+            auto adapter = std::make_unique<LoggerDefault>(std::move(logger));
 #if UAPP_OPEN62541_VER_GE(1, 4)
-            logger_->assign(handle()->logging);
+            detail::assignPlugin(handle()->logging, *adapter, true);
 #else
-            logger_->assign(handle()->logger);
+            detail::assignPlugin(handle()->logger, *adapter, true);
 #endif
+            adapter.release();
         }
     }
 
@@ -38,14 +39,18 @@ public:
     }
 
     void setAccessControl(AccessControlBase& accessControl) {
-        accessControl.assign(handle()->accessControl);
+        detail::assignPlugin(handle()->accessControl, accessControl, false);
         setHighestSecurityPolicyForUserTokenTransfer();
         copyUserTokenPoliciesToEndpoints();
     }
 
-    void setAccessControl(std::unique_ptr<AccessControlBase> accessControl) {
-        accessControl_ = std::move(accessControl);
-        setAccessControl(*accessControl_);
+    void setAccessControl(std::unique_ptr<AccessControlBase>&& accessControl) {
+        if (accessControl != nullptr) {
+            detail::assignPlugin(handle()->accessControl, *accessControl, true);
+            accessControl.release();
+            setHighestSecurityPolicyForUserTokenTransfer();
+            copyUserTokenPoliciesToEndpoints();
+        }
     }
 
     constexpr UA_ServerConfig* operator->() noexcept {
@@ -102,8 +107,6 @@ private:
     UA_ServerConfig& config_;
     std::unique_ptr<std::vector<DataType>> types_;
     std::unique_ptr<UA_DataTypeArray> customDataTypes_;
-    std::unique_ptr<LoggerBase> logger_;
-    std::unique_ptr<AccessControlBase> accessControl_;
 };
 
 }  // namespace opcua

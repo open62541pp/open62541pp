@@ -43,8 +43,8 @@ class LoggerBase : public PluginAdapter<UA_Logger> {
 public:
     virtual void log(LogLevel level, LogCategory category, std::string_view msg) = 0;
 
-    UA_Logger create() override;
-    void clear(UA_Logger& native) noexcept override;
+    UA_Logger create(bool ownsAdapter) override;
+    void clear(UA_Logger& native) const noexcept override;
 };
 
 }  // namespace opcua

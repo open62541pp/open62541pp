@@ -19,17 +19,38 @@ static void logNative(
     );
 }
 
-UA_Logger LoggerBase::create() {
+UA_Logger LoggerBase::create(bool ownsAdapter) {
     UA_Logger native{};
     native.log = logNative;
     native.context = this;
 #if UAPP_OPEN62541_VER_GE(1, 4)
-    native.clear = [](UA_Logger* ptr) { UA_free(ptr); };
+    if (ownsAdapter) {
+        native.clear = [](UA_Logger* logger) {
+            if (logger != nullptr) {
+                delete static_cast<LoggerBase*>(logger->context);  // NOLINT
+                logger->context = nullptr;
+                UA_free(logger);
+                logger = nullptr;
+            }
+        };
+    } else {
+        native.clear = [](UA_Logger* logger) {
+            UA_free(logger);
+            logger = nullptr
+        };
+    }
+#else
+    if (ownsAdapter) {
+        native.clear = [](void* context) {
+            delete static_cast<LoggerBase*>(context);  // NOLINT
+            context = nullptr;
+        };
+    }
 #endif
     return native;
 }
 
-void LoggerBase::clear(UA_Logger& native) noexcept {
+void LoggerBase::clear(UA_Logger& native) const noexcept {
     if (native.clear != nullptr) {
 #if UAPP_OPEN62541_VER_GE(1, 4)
         // TODO:
@@ -47,7 +68,7 @@ void LoggerBase::clear(UA_Logger& native) noexcept {
     }
 }
 
-// void LoggerBase::clear(UA_Logger*& plugin) noexcept override {
+// void LoggerBase::clear(UA_Logger*& plugin) const noexcept override {
 //     if (plugin != nullptr) {
 //         clear(*plugin);
 //         plugin = nullptr;
