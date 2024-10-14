@@ -293,11 +293,19 @@ static UA_Boolean allowHistoryUpdateDeleteRawModifiedNative(
 }
 #endif
 
+inline static auto& clearFunction(UA_AccessControl& ac) noexcept {
+#if UAPP_OPEN62541_VER_GE(1, 1)
+    return ac.clear;
+#else
+    return ac.deleteMembers;
+#endif
+}
+
 UA_AccessControl AccessControlBase::create(bool ownsAdapter) {
     UA_AccessControl native{};
     native.context = this;
     if (ownsAdapter) {
-        native.clear = [](UA_AccessControl* ac) {
+        clearFunction(native) = [](UA_AccessControl* ac) {
             if (ac != nullptr) {
                 delete static_cast<AccessControlBase*>(ac->context);  // NOLINT
                 ac->context = nullptr;
@@ -330,15 +338,9 @@ UA_AccessControl AccessControlBase::create(bool ownsAdapter) {
 }
 
 void AccessControlBase::clear(UA_AccessControl& ac) const noexcept {
-#if UAPP_OPEN62541_VER_GE(1, 1)
-    if (ac.clear != nullptr) {
-        ac.clear(&ac);
+    if (clearFunction(ac) != nullptr) {
+        clearFunction(ac)(&ac);
     }
-#else
-    if (ac.deleteMembers != nullptr) {
-        ac.deleteMembers(&ac);
-    }
-#endif
     ac = UA_AccessControl{};
 }
 
