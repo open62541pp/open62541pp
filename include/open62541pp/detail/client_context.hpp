@@ -27,6 +27,9 @@ inline constexpr size_t clientStateCount = 4;
  * Mainly used to store stateful function pointers.
  */
 struct ClientContext {
+    std::vector<DataType> dataTypes;
+    std::unique_ptr<UA_DataTypeArray> dataTypeArray;
+
 #ifdef UA_ENABLE_SUBSCRIPTIONS
     using SubId = uint32_t;
     using MonId = uint32_t;

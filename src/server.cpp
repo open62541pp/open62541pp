@@ -81,8 +81,7 @@ static void closeSession(
 
 struct ServerConnection : public ConnectionBase<Server> {
     explicit ServerConnection()
-        : server(allocateServer()),
-          config(*detail::getConfig(server)) {}
+        : server(allocateServer()) {}
 
     ~ServerConnection() {
         // don't use stop method here because it might throw an exception
@@ -97,25 +96,32 @@ struct ServerConnection : public ConnectionBase<Server> {
     ServerConnection& operator=(const ServerConnection&) = delete;
     ServerConnection& operator=(ServerConnection&&) noexcept = delete;
 
+    // NOLINTNEXTLINE(readability-make-member-function-const)
+    ServerConfig& config() noexcept {
+        auto* config = detail::getConfig(server);
+        assert(config != nullptr);
+        return asWrapper<ServerConfig>(*config);
+    }
+
     void applySessionRegistry() {
         // Make sure to call this function only once after access control is initialized or changed.
         // The function pointers to activateSession / closeSession might not be unique and the
         // the pointer comparison might fail resulting in stack overflows:
         // - https://github.com/open62541pp/open62541pp/issues/285
         // - https://stackoverflow.com/questions/31209693/static-library-linked-two-times
-        if (config->accessControl.activateSession != &activateSession) {
-            context.sessionRegistry.activateSessionUser = config->accessControl.activateSession;
-            config->accessControl.activateSession = &activateSession;
+        if (config()->accessControl.activateSession != &activateSession) {
+            context.sessionRegistry.activateSessionUser = config()->accessControl.activateSession;
+            config()->accessControl.activateSession = &activateSession;
         }
-        if (config->accessControl.closeSession != &closeSession) {
-            context.sessionRegistry.closeSessionUser = config->accessControl.closeSession;
-            config->accessControl.closeSession = &closeSession;
+        if (config()->accessControl.closeSession != &closeSession) {
+            context.sessionRegistry.closeSessionUser = config()->accessControl.closeSession;
+            config()->accessControl.closeSession = &closeSession;
         }
     }
 
     void applyDefaults() {
 #if UAPP_OPEN62541_VER_GE(1, 3)
-        config->context = this;
+        config()->context = this;
 #else
         const auto status = UA_Server_setNodeContext(
             server, UA_NODEID_NUMERIC(0, UA_NS0ID_SERVER), this
@@ -123,11 +129,11 @@ struct ServerConnection : public ConnectionBase<Server> {
         assert(status == UA_STATUSCODE_GOOD);
 #endif
 #ifdef UA_ENABLE_SUBSCRIPTIONS
-        config->publishingIntervalLimits.min = 10;  // ms
-        config->samplingIntervalLimits.min = 10;  // ms
+        config()->publishingIntervalLimits.min = 10;  // ms
+        config()->samplingIntervalLimits.min = 10;  // ms
 #endif
 #if UAPP_OPEN62541_VER_GE(1, 2)
-        config->allowEmptyVariables = UA_RULEHANDLING_ACCEPT;  // allow empty variables
+        config()->allowEmptyVariables = UA_RULEHANDLING_ACCEPT;  // allow empty variables
 #endif
     }
 
@@ -172,7 +178,6 @@ struct ServerConnection : public ConnectionBase<Server> {
     }
 
     UA_Server* server;
-    ServerConfig config;
     detail::ServerContext context;
     std::atomic<bool> running{false};
     std::mutex mutexRun;
@@ -234,7 +239,7 @@ Server::Server(
 Server::~Server() = default;
 
 void Server::setLogger(LogFunction logger) {
-    connection_->config.setLogger(std::move(logger));
+    connection_->config().setLogger(std::move(logger));
 }
 
 inline static ApplicationDescription& getApplicationDescription(Server& server) noexcept {
@@ -274,12 +279,12 @@ void Server::setProductUri(std::string_view uri) {
 }
 
 void Server::setAccessControl(AccessControlBase& accessControl) {
-    connection_->config.setAccessControl(accessControl);
+    connection_->config().setAccessControl(accessControl);
     connection_->applySessionRegistry();
 }
 
 void Server::setAccessControl(std::unique_ptr<AccessControlBase> accessControl) {
-    connection_->config.setAccessControl(std::move(accessControl));
+    connection_->config().setAccessControl(std::move(accessControl));
     connection_->applySessionRegistry();
 }
 
@@ -302,7 +307,12 @@ NamespaceIndex Server::registerNamespace(std::string_view uri) {
 }
 
 void Server::setCustomDataTypes(std::vector<DataType> dataTypes) {
-    connection_->config.setCustomDataTypes(std::move(dataTypes));
+    auto& context = connection_->context;
+    context.dataTypes = std::move(dataTypes);
+    context.dataTypeArray = std::make_unique<UA_DataTypeArray>(
+        detail::createDataTypeArray(context.dataTypes)
+    );
+    connection_->config()->customDataTypes = context.dataTypeArray.get();
 }
 
 static void valueCallbackOnRead(
