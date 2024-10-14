@@ -31,7 +31,7 @@ public:
         auto* client = UA_Client_new();
         auto* config = UA_Client_getConfig(client);
         detail::clear(config->logger);
-        *config = std::exchange(native(), {});
+        *config = native();
 #else
         auto* client = UA_Client_newWithConfig(handle());
 #endif

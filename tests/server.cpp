@@ -22,7 +22,7 @@ TEST_CASE("ServerConfig constructors") {
     }
 
     SUBCASE("From native") {
-        UA_ServerConfig native;
+        UA_ServerConfig native{};
         UA_ServerConfig_setDefault(&native);
         ServerConfig config(std::move(native));
     }
