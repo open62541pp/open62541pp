@@ -138,7 +138,7 @@ public:
 TEST_CASE("AccessControlBase") {
     Server server;
     AccessControlTest accessControl;
-    UA_AccessControl native = accessControl.create();
+    UA_AccessControl native = accessControl.create(false);
 
     CHECK(native.context != nullptr);
     CHECK(native.userTokenPoliciesSize == 1);  // anonymous only
@@ -316,4 +316,11 @@ TEST_CASE("AccessControlBase") {
         ) == true
     );
 #endif
+}
+
+TEST_CASE("AccessControlBase move adapter ownership") {
+    auto ac = std::make_unique<AccessControlTest>();
+    auto native = ac->create(true);
+    ac.release();
+    detail::clear(native);
 }

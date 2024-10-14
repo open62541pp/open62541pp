@@ -19,39 +19,57 @@ static void logNative(
     );
 }
 
-UA_Logger LoggerBase::create() {
+UA_Logger LoggerBase::create(bool ownsAdapter) {
     UA_Logger native{};
     native.log = logNative;
     native.context = this;
 #if UAPP_OPEN62541_VER_GE(1, 4)
-    native.clear = [](UA_Logger* ptr) { UA_free(ptr); };
+    if (ownsAdapter) {
+        native.clear = [](UA_Logger* logger) {
+            if (logger != nullptr) {
+                delete static_cast<LoggerBase*>(logger->context);  // NOLINT
+                logger->context = nullptr;
+                UA_free(logger);
+                logger = nullptr;
+            }
+        };
+    } else {
+        native.clear = [](UA_Logger* logger) {
+            UA_free(logger);
+            logger = nullptr;
+        };
+    }
+#else
+    if (ownsAdapter) {
+        native.clear = [](void* context) {
+            delete static_cast<LoggerBase*>(context);  // NOLINT
+            context = nullptr;
+        };
+    }
 #endif
     return native;
 }
 
-void LoggerBase::clear(UA_Logger& native) noexcept {
-    if (native.clear != nullptr) {
+namespace detail {
+void clear(UA_Logger& logger) noexcept {
+    if (logger.clear != nullptr) {
 #if UAPP_OPEN62541_VER_GE(1, 4)
-        // TODO:
         // Open62541 v1.4 transitioned to pointers for UA_Logger instances.
         // The clear function doesn't clear the context anymore but frees the memory and
         // consequently invalidates pointers like UA_EventLoop.logger.
-        // Neighter the open62541 loggers UA_Log_Syslog_log, UA_Log_Syslog_log, nor the
-        // opcua::Logger needs to be cleared, so skip this for now.
-
-        // native.clear(&native);
+        // Workaround to free dynamic context but not the existing logger instance:
+        // 1. allocate new logger instance
+        // 2. shallow copy the existing logger
+        // 3. clear & free logger copy
+        auto* loggerCopy = static_cast<UA_Logger*>(UA_malloc(sizeof(UA_Logger)));
+        *loggerCopy = logger;  // shallow copy
+        logger.clear(loggerCopy);
 #else
-        native.clear(native.context);
-        native.context = nullptr;
+        logger.clear(logger.context);
 #endif
+        logger = {};
     }
 }
-
-// void LoggerBase::clear(UA_Logger*& plugin) noexcept override {
-//     if (plugin != nullptr) {
-//         clear(*plugin);
-//         plugin = nullptr;
-//     }
-// }
+}  // namespace detail
 
 }  // namespace opcua

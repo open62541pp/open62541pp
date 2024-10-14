@@ -148,6 +148,21 @@ namespace detail {
     return client;
 }
 
+static void deleteClient(UA_Client* client) {
+    if (client == nullptr) {
+        return;
+    }
+#if UAPP_OPEN62541_VER_LE(1, 0)
+    // UA_ClientConfig_deleteMembers won't delete the logger in v1.0
+    auto& logger = getConfig(client)->logger;
+    if (logger.clear != nullptr) {
+        logger.clear(logger.context);
+    }
+    logger = {};
+#endif
+    UA_Client_delete(client);
+}
+
 struct ClientConnection : public ConnectionBase<Client> {
     ClientConnection()
         : client(allocateClient()),
@@ -157,7 +172,7 @@ struct ClientConnection : public ConnectionBase<Client> {
 
     ~ClientConnection() {
         UA_Client_disconnect(client);
-        UA_Client_delete(client);
+        deleteClient(client);
     }
 
     ClientConnection(const ClientConnection&) = delete;
@@ -403,9 +418,7 @@ std::vector<Subscription<Client>> Client::getSubscriptions() {
     std::vector<Subscription<Client>> result;
     auto& subscriptions = detail::getContext(*this).subscriptions;
     subscriptions.eraseStale();
-    subscriptions.iterate([&](const auto& pair) {
-        result.emplace_back(*this, pair.first);
-    });
+    subscriptions.iterate([&](const auto& pair) { result.emplace_back(*this, pair.first); });
     return result;
 }
 #endif

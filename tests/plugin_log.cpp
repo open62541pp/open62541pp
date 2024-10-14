@@ -1,4 +1,5 @@
 #include <string>
+#include <memory>
 
 #include <doctest/doctest.h>
 
@@ -22,8 +23,8 @@ public:
 
 TEST_CASE("LoggerBase") {
     LoggerTest logger;
-    auto native = logger.create();
-    
+    auto native = logger.create(false);
+
     CHECK(native.context == &logger);
     CHECK(native.log != nullptr);
 
@@ -34,5 +35,12 @@ TEST_CASE("LoggerBase") {
     CHECK(logger.lastCategory == LogCategory::Userland);
     CHECK(logger.lastMessage == "message");
 
-    logger.clear(native);
+    detail::clear(native);
+}
+
+TEST_CASE("LoggerBase move adapter ownership") {
+    auto logger = std::make_unique<LoggerTest>();
+    auto native = logger->create(true);
+    logger.release();
+    detail::clear(native);
 }

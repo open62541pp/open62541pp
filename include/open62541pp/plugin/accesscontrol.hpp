@@ -104,8 +104,11 @@ public:
         bool isDeleteModified
     ) = 0;
 
-    UA_AccessControl create() override;
-    void clear(UA_AccessControl& ac) noexcept override;
+    UA_AccessControl create(bool ownsAdapter) override;
 };
+
+namespace detail {
+void clear(UA_AccessControl& ac) noexcept;
+}  // namespace detail
 
 }  // namespace opcua

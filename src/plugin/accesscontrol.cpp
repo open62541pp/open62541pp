@@ -293,35 +293,49 @@ static UA_Boolean allowHistoryUpdateDeleteRawModifiedNative(
 }
 #endif
 
-UA_AccessControl AccessControlBase::create() {
-    UA_AccessControl ac{};
-    ac.context = this;
-    ac.userTokenPoliciesSize = getUserTokenPolicies().size();
-    ac.userTokenPolicies = asNative(getUserTokenPolicies().data());
-    ac.activateSession = activateSessionNative;
-    ac.closeSession = closeSessionNative;
-    ac.getUserRightsMask = getUserRightsMaskNative;
-    ac.getUserAccessLevel = getUserAccessLevelNative;
-    ac.getUserExecutable = getUserExecutableNative;
-    ac.getUserExecutableOnObject = getUserExecutableOnObjectNative;
-    ac.allowAddNode = allowAddNodeNative;
-    ac.allowAddReference = allowAddReferenceNative;
-    ac.allowDeleteNode = allowDeleteNodeNative;
-    ac.allowDeleteReference = allowDeleteReferenceNative;
+UA_AccessControl AccessControlBase::create(bool ownsAdapter) {
+    UA_AccessControl native{};
+    native.context = this;
+    if (ownsAdapter) {
+        auto clear = [](UA_AccessControl* ac) {
+            if (ac != nullptr) {
+                delete static_cast<AccessControlBase*>(ac->context);  // NOLINT
+                ac->context = nullptr;
+            }
+        };
 #if UAPP_OPEN62541_VER_GE(1, 1)
-    ac.allowBrowseNode = allowBrowseNodeNative;
+        native.clear = clear;
+#else
+        native.deleteMembers = clear;
+#endif
+    }
+    native.userTokenPoliciesSize = getUserTokenPolicies().size();
+    native.userTokenPolicies = asNative(getUserTokenPolicies().data());
+    native.activateSession = activateSessionNative;
+    native.closeSession = closeSessionNative;
+    native.getUserRightsMask = getUserRightsMaskNative;
+    native.getUserAccessLevel = getUserAccessLevelNative;
+    native.getUserExecutable = getUserExecutableNative;
+    native.getUserExecutableOnObject = getUserExecutableOnObjectNative;
+    native.allowAddNode = allowAddNodeNative;
+    native.allowAddReference = allowAddReferenceNative;
+    native.allowDeleteNode = allowDeleteNodeNative;
+    native.allowDeleteReference = allowDeleteReferenceNative;
+#if UAPP_OPEN62541_VER_GE(1, 1)
+    native.allowBrowseNode = allowBrowseNodeNative;
 #endif
 #if UAPP_OPEN62541_VER_GE(1, 2) && defined(UA_ENABLE_SUBSCRIPTIONS)
-    ac.allowTransferSubscription = allowTransferSubscriptionNative;
+    native.allowTransferSubscription = allowTransferSubscriptionNative;
 #endif
 #ifdef UA_ENABLE_HISTORIZING
-    ac.allowHistoryUpdateUpdateData = allowHistoryUpdateUpdateDataNative;
-    ac.allowHistoryUpdateDeleteRawModified = allowHistoryUpdateDeleteRawModifiedNative;
+    native.allowHistoryUpdateUpdateData = allowHistoryUpdateUpdateDataNative;
+    native.allowHistoryUpdateDeleteRawModified = allowHistoryUpdateDeleteRawModifiedNative;
 #endif
-    return ac;
+    return native;
 }
 
-void AccessControlBase::clear(UA_AccessControl& ac) noexcept {
+namespace detail {
+void clear(UA_AccessControl& ac) noexcept {
 #if UAPP_OPEN62541_VER_GE(1, 1)
     if (ac.clear != nullptr) {
         ac.clear(&ac);
@@ -331,7 +345,8 @@ void AccessControlBase::clear(UA_AccessControl& ac) noexcept {
         ac.deleteMembers(&ac);
     }
 #endif
-    ac = UA_AccessControl{};
+    ac = {};
 }
+}  // namespace detail
 
 }  // namespace opcua

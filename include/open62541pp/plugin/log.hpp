@@ -36,15 +36,18 @@ enum class LogCategory {
 
 /**
  * Logger base class.
- * 
+ *
  * Custom logger can be implemented by deriving from this class and overwriting the log function.
  */
 class LoggerBase : public PluginAdapter<UA_Logger> {
 public:
     virtual void log(LogLevel level, LogCategory category, std::string_view msg) = 0;
 
-    UA_Logger create() override;
-    void clear(UA_Logger& native) noexcept override;
+    UA_Logger create(bool ownsAdapter) override;
 };
+
+namespace detail {
+void clear(UA_Logger& logger) noexcept;
+}  // namespace detail
 
 }  // namespace opcua

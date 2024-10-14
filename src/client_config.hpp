@@ -28,12 +28,16 @@ public:
 
     void setLogger(LogFunction logger) {
         if (logger) {
-            logger_ = std::make_unique<LoggerDefault>(std::move(logger));
+            auto adapter = std::make_unique<LoggerDefault>(std::move(logger));
 #if UAPP_OPEN62541_VER_GE(1, 4)
-            logger_->assign(handle()->logging);
+            assert(handle()->logging != nullptr);
+            auto& native = *handle()->logging;
 #else
-            logger_->assign(handle()->logger);
+            auto& native = handle()->logger;
 #endif
+            detail::clear(native);
+            native = adapter->create(true);
+            adapter.release();
         }
     }
 
@@ -63,7 +67,6 @@ private:
     UA_ClientConfig& config_;
     std::unique_ptr<std::vector<DataType>> types_;
     std::unique_ptr<UA_DataTypeArray> customDataTypes_;
-    std::unique_ptr<LoggerBase> logger_;
 };
 
 }  // namespace opcua

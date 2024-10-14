@@ -23,6 +23,15 @@ TEST_CASE("ServerConfig") {
     ServerConfig config(native);
 
     SUBCASE("AccessControl") {
+        SUBCASE("Set by ref or owning") {
+            AccessControlDefault accessControl;
+            config.setAccessControl(accessControl);
+            config.setAccessControl(accessControl);
+
+            config.setAccessControl(std::unique_ptr<AccessControlDefault>{});
+            config.setAccessControl(std::make_unique<AccessControlDefault>());
+        }
+
         SUBCASE("Copy user token policies to endpoints") {
             CHECK(config->endpointsSize > 0);
 
