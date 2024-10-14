@@ -165,8 +165,7 @@ static void deleteClient(UA_Client* client) {
 
 struct ClientConnection : public ConnectionBase<Client> {
     ClientConnection()
-        : client(allocateClient()),
-          config(*detail::getConfig(client)) {
+        : client(allocateClient()) {
         applyDefaults();
     }
 
@@ -180,9 +179,16 @@ struct ClientConnection : public ConnectionBase<Client> {
     ClientConnection& operator=(const ClientConnection&) = delete;
     ClientConnection& operator=(ClientConnection&&) noexcept = delete;
 
+    // NOLINTNEXTLINE(readability-make-member-function-const)
+    ClientConfig& config() noexcept {
+        auto* config = detail::getConfig(client);
+        assert(config != nullptr);
+        return asWrapper<ClientConfig>(*config);
+    }
+
     void applyDefaults() {
-        config->clientContext = this;
-        config->stateCallback = stateCallback;
+        config()->clientContext = this;
+        config()->stateCallback = stateCallback;
     }
 
     void runIterate(uint16_t timeoutMilliseconds) {
@@ -211,7 +217,6 @@ struct ClientConnection : public ConnectionBase<Client> {
     }
 
     UA_Client* client;
-    ClientConfig config;
     detail::ClientContext context;
     std::atomic<bool> running{false};
 };
@@ -303,39 +308,44 @@ std::vector<EndpointDescription> Client::getEndpoints(std::string_view serverUrl
 }
 
 void Client::setLogger(LogFunction logger) {
-    connection_->config.setLogger(std::move(logger));
+    connection_->config().setLogger(std::move(logger));
 }
 
 void Client::setTimeout(uint32_t milliseconds) {
-    detail::getConfig(*this).timeout = milliseconds;
+    connection_->config()->timeout = milliseconds;
 }
 
 // NOLINTNEXTLINE(performance-unnecessary-value-param)
 void Client::setUserIdentityToken(AnonymousIdentityToken token) {
-    connection_->config.setUserIdentityToken(std::move(token));
+    connection_->config().setUserIdentityToken(std::move(token));
 }
 
 // NOLINTNEXTLINE(performance-unnecessary-value-param)
 void Client::setUserIdentityToken(UserNameIdentityToken token) {
-    connection_->config.setUserIdentityToken(std::move(token));
+    connection_->config().setUserIdentityToken(std::move(token));
 }
 
 // NOLINTNEXTLINE(performance-unnecessary-value-param)
 void Client::setUserIdentityToken(X509IdentityToken token) {
-    connection_->config.setUserIdentityToken(std::move(token));
+    connection_->config().setUserIdentityToken(std::move(token));
 }
 
 // NOLINTNEXTLINE(performance-unnecessary-value-param)
 void Client::setUserIdentityToken(IssuedIdentityToken token) {
-    connection_->config.setUserIdentityToken(std::move(token));
+    connection_->config().setUserIdentityToken(std::move(token));
 }
 
 void Client::setSecurityMode(MessageSecurityMode mode) {
-    detail::getConfig(*this).securityMode = static_cast<UA_MessageSecurityMode>(mode);
+    connection_->config()->securityMode = static_cast<UA_MessageSecurityMode>(mode);
 }
 
 void Client::setCustomDataTypes(std::vector<DataType> dataTypes) {
-    connection_->config.setCustomDataTypes(std::move(dataTypes));
+    auto& context = connection_->context;
+    context.dataTypes = std::move(dataTypes);
+    context.dataTypeArray = std::make_unique<UA_DataTypeArray>(
+        detail::createDataTypeArray(context.dataTypes)
+    );
+    connection_->config()->customDataTypes = context.dataTypeArray.get();
 }
 
 static void setStateCallback(Client& client, detail::ClientState state, StateCallback&& callback) {

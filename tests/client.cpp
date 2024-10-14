@@ -10,12 +10,26 @@
 #include "open62541pp/plugin/accesscontrol_default.hpp"
 #include "open62541pp/server.hpp"
 
+#include "client_config.hpp"
+
 #include "helper/server_runner.hpp"
 
 using namespace std::chrono_literals;
 using namespace opcua;
 
 constexpr std::string_view localServerUrl{"opc.tcp://localhost:4840"};
+
+TEST_CASE("ClientConfig constructors") {
+    SUBCASE("Default") {
+        ClientConfig config;
+    }
+
+    SUBCASE("From native") {
+        UA_ClientConfig native{};
+        UA_ClientConfig_setDefault(&native);
+        ClientConfig config(std::move(native));
+    }
+}
 
 TEST_CASE("Client discovery") {
     Server server;

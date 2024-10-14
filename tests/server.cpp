@@ -16,11 +16,20 @@
 
 using namespace opcua;
 
-TEST_CASE("ServerConfig") {
-    UA_ServerConfig native{};
-    UA_ServerConfig_setDefault(&native);
+TEST_CASE("ServerConfig constructors") {
+    SUBCASE("Default") {
+        ServerConfig config;
+    }
 
-    ServerConfig config(native);
+    SUBCASE("From native") {
+        UA_ServerConfig native{};
+        UA_ServerConfig_setDefault(&native);
+        ServerConfig config(std::move(native));
+    }
+}
+
+TEST_CASE("ServerConfig") {
+    ServerConfig config;
 
     SUBCASE("AccessControl") {
         SUBCASE("Set by ref or owning") {
@@ -74,8 +83,6 @@ TEST_CASE("ServerConfig") {
             );
         }
     }
-
-    UA_ServerConfig_clean(&native);
 }
 
 TEST_CASE("Server constructors") {

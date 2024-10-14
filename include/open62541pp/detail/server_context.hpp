@@ -3,8 +3,10 @@
 #include <cstdint>
 #include <functional>
 #include <set>
+#include <vector>
 
 #include "open62541pp/config.hpp"
+#include "open62541pp/datatype.hpp"
 #include "open62541pp/detail/contextmap.hpp"
 #include "open62541pp/detail/exceptioncatcher.hpp"
 #include "open62541pp/detail/open62541/common.h"  // UA_AccessControl
@@ -33,6 +35,9 @@ struct SessionRegistry {
  * Mainly used to store stateful function pointers.
  */
 struct ServerContext {
+    std::vector<DataType> dataTypes;
+    std::unique_ptr<UA_DataTypeArray> dataTypeArray;
+
 #ifdef UA_ENABLE_SUBSCRIPTIONS
     using SubId = uint32_t;  // always 0
     using MonId = uint32_t;
