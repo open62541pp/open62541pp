@@ -321,6 +321,6 @@ TEST_CASE("AccessControlBase") {
 TEST_CASE("AccessControlBase move adapter ownership") {
     auto ac = std::make_unique<AccessControlTest>();
     auto native = ac->create(true);
-    auto* acPtr = ac.release();
-    acPtr->clear(native);
+    ac.release();
+    detail::clear(native);
 }

@@ -30,10 +30,13 @@ public:
         if (logger) {
             auto adapter = std::make_unique<LoggerDefault>(std::move(logger));
 #if UAPP_OPEN62541_VER_GE(1, 4)
-            detail::assignPlugin(handle()->logging, *adapter, true);
+            assert(handle()->logging != nullptr);
+            auto& native = *handle()->logging;
 #else
-            detail::assignPlugin(handle()->logger, *adapter, true);
+            auto& native = handle()->logger;
 #endif
+            detail::clear(native);
+            native = adapter->create(true);
             adapter.release();
         }
     }

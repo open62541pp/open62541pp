@@ -50,8 +50,9 @@ UA_Logger LoggerBase::create(bool ownsAdapter) {
     return native;
 }
 
-void LoggerBase::clear(UA_Logger& native) const noexcept {
-    if (native.clear != nullptr) {
+namespace detail {
+void clear(UA_Logger& logger) noexcept {
+    if (logger.clear != nullptr) {
 #if UAPP_OPEN62541_VER_GE(1, 4)
         // Open62541 v1.4 transitioned to pointers for UA_Logger instances.
         // The clear function doesn't clear the context anymore but frees the memory and
@@ -60,21 +61,15 @@ void LoggerBase::clear(UA_Logger& native) const noexcept {
         // 1. allocate new logger instance
         // 2. shallow copy the existing logger
         // 3. clear & free logger copy
-        auto* nativeCopy = static_cast<UA_Logger*>(UA_malloc(sizeof(UA_Logger)));
-        *nativeCopy = native;  // shallow copy
-        native.clear(nativeCopy);
+        auto* loggerCopy = static_cast<UA_Logger*>(UA_malloc(sizeof(UA_Logger)));
+        *loggerCopy = logger;  // shallow copy
+        logger.clear(loggerCopy);
 #else
-        native.clear(native.context);
+        logger.clear(logger.context);
 #endif
-        native = {};
+        logger = {};
     }
 }
-
-// void LoggerBase::clear(UA_Logger*& plugin) const noexcept override {
-//     if (plugin != nullptr) {
-//         clear(*plugin);
-//         plugin = nullptr;
-//     }
-// }
+}  // namespace detail
 
 }  // namespace opcua

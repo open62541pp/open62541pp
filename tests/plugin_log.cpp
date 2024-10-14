@@ -35,12 +35,12 @@ TEST_CASE("LoggerBase") {
     CHECK(logger.lastCategory == LogCategory::Userland);
     CHECK(logger.lastMessage == "message");
 
-    logger.clear(native);
+    detail::clear(native);
 }
 
 TEST_CASE("LoggerBase move adapter ownership") {
     auto logger = std::make_unique<LoggerTest>();
     auto native = logger->create(true);
-    auto* loggerPtr = logger.release();
-    loggerPtr->clear(native);
+    logger.release();
+    detail::clear(native);
 }
