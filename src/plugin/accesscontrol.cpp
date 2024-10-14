@@ -340,7 +340,7 @@ void AccessControlBase::clear(UA_AccessControl& ac) const noexcept {
 #else
     ac.deleteMembers(&ac);
 #endif
-    ac = UA_AccessControl{};
+    ac = {};
 }
 
 }  // namespace opcua

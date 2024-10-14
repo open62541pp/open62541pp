@@ -53,18 +53,20 @@ UA_Logger LoggerBase::create(bool ownsAdapter) {
 void LoggerBase::clear(UA_Logger& native) const noexcept {
     if (native.clear != nullptr) {
 #if UAPP_OPEN62541_VER_GE(1, 4)
-        // TODO:
         // Open62541 v1.4 transitioned to pointers for UA_Logger instances.
         // The clear function doesn't clear the context anymore but frees the memory and
         // consequently invalidates pointers like UA_EventLoop.logger.
-        // Neighter the open62541 loggers UA_Log_Syslog_log, UA_Log_Syslog_log, nor the
-        // opcua::Logger needs to be cleared, so skip this for now.
-
-        // native.clear(&native);
+        // Workaround to free dynamic context but not the existing logger instance:
+        // 1. allocate new logger instance
+        // 2. shallow copy the existing logger
+        // 3. clear & free logger copy
+        auto* nativeCopy = static_cast<UA_Logger*>(UA_malloc(sizeof(UA_Logger)));
+        *nativeCopy = native;  // shallow copy
+        native.clear(nativeCopy);
 #else
         native.clear(native.context);
-        native.context = nullptr;
 #endif
+        native = {};
     }
 }
 
