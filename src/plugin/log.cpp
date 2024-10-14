@@ -36,7 +36,7 @@ UA_Logger LoggerBase::create(bool ownsAdapter) {
     } else {
         native.clear = [](UA_Logger* logger) {
             UA_free(logger);
-            logger = nullptr
+            logger = nullptr;
         };
     }
 #else
