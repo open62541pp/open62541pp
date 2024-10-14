@@ -27,7 +27,14 @@ public:
         native().stateCallback = nullptr;
         native().inactivityCallback = nullptr;
         native().subscriptionInactivityCallback = nullptr;
+#if UAPP_OPEN62541_VER_LE(1, 0)
+        auto* client = UA_Client_new();
+        auto* config = UA_Client_getConfig(client);
+        detail::clear(config->logger);
+        *config = std::exchange(native(), {});
+#else
         auto* client = UA_Client_newWithConfig(handle());
+#endif
         if (client != nullptr) {
             UA_Client_delete(client);
         }
