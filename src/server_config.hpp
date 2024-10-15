@@ -30,8 +30,8 @@ public:
 
     ServerConfig(const ServerConfig&) = delete;
 
-    ServerConfig(ServerConfig&& config) noexcept
-        : Wrapper(std::exchange(config.native(), {})) {}
+    ServerConfig(ServerConfig&& other) noexcept
+        : Wrapper(std::exchange(other.native(), {})) {}
 
     ServerConfig& operator=(const ServerConfig&) = delete;
 
@@ -45,15 +45,10 @@ public:
     void setLogger(LogFunction func) {
         if (func) {
             auto adapter = std::make_unique<LoggerDefault>(std::move(func));
-#if UAPP_OPEN62541_VER_GE(1, 4)
-            assert(native().logging != nullptr);
-            auto& logger = *native().logging;
-#else
-            auto& logger = native().logger;
-#endif
-            detail::clear(logger);
-            logger = adapter->create(true);
-            adapter.release();
+            auto* logger = detail::getLogger(handle());
+            assert(logger != nullptr);
+            detail::clear(*logger);
+            *logger = adapter.release()->create(true);
         }
     }
 

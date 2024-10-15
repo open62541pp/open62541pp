@@ -483,8 +483,7 @@ UA_ServerConfig& getConfig(Server& server) noexcept {
     return *getConfig(server.handle());
 }
 
-UA_Logger* getLogger(UA_Server* server) noexcept {
-    auto* config = detail::getConfig(server);
+UA_Logger* getLogger(UA_ServerConfig* config) noexcept {
     if (config == nullptr) {
         return nullptr;
     }
@@ -493,10 +492,6 @@ UA_Logger* getLogger(UA_Server* server) noexcept {
 #else
     return &config->logger;
 #endif
-}
-
-UA_Logger* getLogger(Server& server) noexcept {
-    return getLogger(server.handle());
 }
 
 ServerConnection* getConnection(UA_Server* server) noexcept {

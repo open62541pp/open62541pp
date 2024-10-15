@@ -39,8 +39,7 @@ namespace detail {
 UA_ServerConfig* getConfig(UA_Server* server) noexcept;
 UA_ServerConfig& getConfig(Server& server) noexcept;
 
-UA_Logger* getLogger(UA_Server* server) noexcept;
-UA_Logger* getLogger(Server& server) noexcept;
+UA_Logger* getLogger(UA_ServerConfig* config) noexcept;
 
 ServerConnection* getConnection(UA_Server* server) noexcept;
 ServerConnection& getConnection(Server& server) noexcept;

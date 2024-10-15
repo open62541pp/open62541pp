@@ -14,6 +14,7 @@
 #include "open62541pp/subscription.hpp"
 #include "open62541pp/types.hpp"
 #include "open62541pp/types_composed.hpp"
+#include "open62541pp/wrapper.hpp"
 
 #include "open62541pp/plugin/log.hpp"
 #include "open62541pp/plugin/log_default.hpp"  // LogFunction
@@ -36,8 +37,7 @@ namespace detail {
 UA_ClientConfig* getConfig(UA_Client* client) noexcept;
 UA_ClientConfig& getConfig(Client& client) noexcept;
 
-UA_Logger* getLogger(UA_Client* client) noexcept;
-UA_Logger* getLogger(Client& client) noexcept;
+UA_Logger* getLogger(UA_ClientConfig* config) noexcept;
 
 ClientConnection* getConnection(UA_Client* client) noexcept;
 ClientConnection& getConnection(Client& client) noexcept;
@@ -49,31 +49,26 @@ ClientContext& getContext(Client& client) noexcept;
 
 }  // namespace detail
 
-/* ------------------------------------------- Client ------------------------------------------- */
-
-using StateCallback = std::function<void()>;
-using InactivityCallback = std::function<void()>;
+/* ---------------------------------------- ClientConfig ---------------------------------------- */
 
 /**
- * High-level client class.
- *
- * Exposes the most common functionality. Use the handle() method to get access the underlying
- * UA_Client instance and use the full power of open6254.
+ * Client configuration.
+ * @see UA_ClientConfig
  */
-class Client {
+class ClientConfig : public Wrapper<UA_ClientConfig> {
 public:
     /**
-     * Create client with default configuration (no encryption).
+     * Create client config with default configuration (no encryption).
      * Security policies:
      * - [None](http://opcfoundation.org/UA/SecurityPolicy#None)
      * @param logger Custom log function. If the passed function is empty, the default logger is
      * used.
      */
-    explicit Client(LogFunction logger = nullptr);
+    ClientConfig();
 
 #ifdef UA_ENABLE_ENCRYPTION
     /**
-     * Create client with encryption enabled (PKI).
+     * Create client config with encryption enabled (PKI).
      * Security policies:
      * - [None](http://opcfoundation.org/UA/SecurityPolicy#None)
      * - [Basic128Rsa15](http://opcfoundation.org/UA/SecurityPolicy#Basic128Rsa15)
@@ -89,6 +84,74 @@ public:
      * @see https://reference.opcfoundation.org/Core/Part2/v105/docs/8
      * @see https://reference.opcfoundation.org/Core/Part6/v105/docs/6.2
      */
+    ClientConfig(
+        const ByteString& certificate,
+        const ByteString& privateKey,
+        Span<const ByteString> trustList,
+        Span<const ByteString> revocationList = {}
+    );
+#endif
+
+    explicit ClientConfig(UA_ClientConfig&& native);
+
+    ~ClientConfig();
+
+    ClientConfig(const ClientConfig&) = delete;
+    ClientConfig(ClientConfig&& other) noexcept;
+    ClientConfig& operator=(const ClientConfig&) = delete;
+    ClientConfig& operator=(ClientConfig&& other) noexcept;
+
+    /// Set custom log function.
+    /// Does nothing if the passed function is empty or a nullptr.
+    void setLogger(LogFunction func);
+
+    /// Set response timeout in milliseconds.
+    void setTimeout(uint32_t milliseconds) noexcept;
+
+    /// Set anonymous identity token.
+    void setUserIdentityToken(const AnonymousIdentityToken& token);
+    /// Set username/password identity token.
+    void setUserIdentityToken(const UserNameIdentityToken& token);
+    /// Set X.509 identity token.
+    void setUserIdentityToken(const X509IdentityToken& token);
+    /// Set issued identity token.
+    void setUserIdentityToken(const IssuedIdentityToken& token);
+
+    /// Set message security mode.
+    void setSecurityMode(MessageSecurityMode mode) noexcept;
+};
+
+/* ------------------------------------------- Client ------------------------------------------- */
+
+using StateCallback = std::function<void()>;
+using InactivityCallback = std::function<void()>;
+
+/**
+ * High-level client class.
+ *
+ * A client is usually created in two steps:
+ * 1. Create and modify a client configuration (ClientConfig)
+ * 2. Create a Client with a ClientConfig (move ownership to the Client instance)
+ *
+ * Once a client is connected to an `endpointUrl`, it is not possible to switch to another server.
+ * A new client has to be created for that.
+ *
+ * Use the handle() method to get access the underlying UA_Server instance and use the full power
+ * of open62541.
+ */
+class Client {
+public:
+    /// Create client with default configuration.
+    Client();
+
+    /// Create client with given configuration (move ownership to client).
+    explicit Client(ClientConfig&& config);
+
+#ifdef UA_ENABLE_ENCRYPTION
+    /// @copydoc ClientConfig::ClientConfig(
+    ///     const ByteString&, const ByteString&, Span<const ByteString>, Span<const ByteString>
+    /// )
+    [[deprecated("use ClientConfig constructor and construct Client with ClientConfig")]]
     Client(
         const ByteString& certificate,
         const ByteString& privateKey,
@@ -104,6 +167,9 @@ public:
     Client& operator=(const Client&) = delete;
     Client& operator=(Client&&) noexcept;
 
+    ClientConfig& config() noexcept;
+    const ClientConfig& config() const noexcept;
+
     /**
      * Gets a list of all registered servers at the given server.
      * @param serverUrl Server URL (for example `opc.tcp://localhost:4840`)
@@ -117,24 +183,26 @@ public:
      */
     std::vector<EndpointDescription> getEndpoints(std::string_view serverUrl);
 
-    /// Set custom log function.
-    /// Does nothing if the passed function is empty or a nullptr.
-    void setLogger(LogFunction logger);
+    [[deprecated("use ServerConfig::setLogger via config() or pass config to Server")]]
+    void setLogger(LogFunction logger) {
+        config().setLogger(std::move(logger));
+    }
 
-    /// Set response timeout in milliseconds.
-    void setTimeout(uint32_t milliseconds);
+    [[deprecated("use ServerConfig::setTimeout via config() or pass config to Server")]]
+    void setTimeout(uint32_t milliseconds) noexcept {
+        config().setTimeout(milliseconds);
+    }
 
-    /// Set anonymous identity token.
-    void setUserIdentityToken(AnonymousIdentityToken token);
-    /// Set username/password identity token.
-    void setUserIdentityToken(UserNameIdentityToken token);
-    /// Set X.509 identity token.
-    void setUserIdentityToken(X509IdentityToken token);
-    /// Set issued identity token.
-    void setUserIdentityToken(IssuedIdentityToken token);
+    template <typename Token>
+    [[deprecated("use ServerConfig::setUserIdentityToken via config() or pass config to Server")]]
+    void setUserIdentityToken(const Token& token) {
+        config().setUserIdentityToken(token);
+    }
 
-    /// Set message security mode.
-    void setSecurityMode(MessageSecurityMode mode);
+    [[deprecated("use ServerConfig::setSecurityMode via config() or pass config to Server")]]
+    void setSecurityMode(MessageSecurityMode mode) noexcept {
+        config().setSecurityMode(mode);
+    }
 
     /// Set custom data types.
     /// All data types provided are automatically considered for decoding of received messages.

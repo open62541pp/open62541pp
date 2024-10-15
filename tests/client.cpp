@@ -10,14 +10,35 @@
 #include "open62541pp/plugin/accesscontrol_default.hpp"
 #include "open62541pp/server.hpp"
 
-#include "client_config.hpp"
-
 #include "helper/server_runner.hpp"
 
 using namespace std::chrono_literals;
 using namespace opcua;
 
 constexpr std::string_view localServerUrl{"opc.tcp://localhost:4840"};
+
+TEST_CASE("ClientConfig") {
+    ClientConfig config;
+
+    SUBCASE("setTimeout") {
+        config.setTimeout(333);
+        CHECK(config->timeout == 333);
+    }
+
+    SUBCASE("setUserIdentityToken") {
+        const auto& token = asWrapper<ExtensionObject>(config->userIdentityToken);
+        CHECK(token.isEmpty());
+
+        config.setUserIdentityToken(AnonymousIdentityToken{});
+        CHECK_FALSE(token.isEmpty());
+        CHECK(token.getDecodedData<AnonymousIdentityToken>() != nullptr);
+    }
+
+    SUBCASE("setSecurityMode") {
+        config.setSecurityMode(MessageSecurityMode::Sign);
+        CHECK(config->securityMode == UA_MESSAGESECURITYMODE_SIGN);
+    }
+}
 
 TEST_CASE("Client discovery") {
     Server server;
@@ -60,13 +81,13 @@ TEST_CASE("Client connect with AnonymousIdentityToken") {
     Client client;
 
     SUBCASE("Connect with anonymous should succeed") {
-        client.setUserIdentityToken(AnonymousIdentityToken{});
+        client.config().setUserIdentityToken(AnonymousIdentityToken{});
         CHECK_NOTHROW(client.connect(localServerUrl));
         CHECK(client.isConnected());
     }
 
     SUBCASE("Connect with username/password should fail") {
-        client.setUserIdentityToken(UserNameIdentityToken("username", "password"));
+        client.config().setUserIdentityToken(UserNameIdentityToken("username", "password"));
         CHECK_THROWS(client.connect(localServerUrl));
     }
 }
@@ -84,7 +105,7 @@ TEST_CASE("Client connect with UserNameIdentityToken") {
     }
 
     SUBCASE("Connect with username/password should succeed") {
-        client.setUserIdentityToken(UserNameIdentityToken("username", "password"));
+        client.config().setUserIdentityToken(UserNameIdentityToken("username", "password"));
         CHECK_NOTHROW(client.connect(localServerUrl));
         CHECK(client.isConnected());
     }
@@ -96,12 +117,12 @@ TEST_CASE("Client encryption") {
     SUBCASE("Connect to unencrypted server") {
         Server server;
         ServerRunner serverRunner(server);
-        Client client(ByteString{}, ByteString{}, {}, {});
+        Client client(ClientConfig(ByteString{}, ByteString{}, {}, {}));
 
-        client.setSecurityMode(MessageSecurityMode::SignAndEncrypt);
+        client.config().setSecurityMode(MessageSecurityMode::SignAndEncrypt);
         CHECK_THROWS(client.connect(localServerUrl));
 
-        client.setSecurityMode(MessageSecurityMode::None);
+        client.config().setSecurityMode(MessageSecurityMode::None);
         CHECK_NOTHROW(client.connect(localServerUrl));
     }
 
@@ -184,17 +205,6 @@ TEST_CASE("Client inactivity callback") {
 #if UAPP_OPEN62541_VER_LE(1, 3)
     CHECK(inactive);
 #endif
-}
-
-TEST_CASE("Client configuration") {
-    Client client;
-    UA_ClientConfig* config = UA_Client_getConfig(client.handle());
-    CHECK(config != nullptr);
-
-    SUBCASE("Set timeout") {
-        client.setTimeout(333);
-        CHECK(config->timeout == 333);
-    }
 }
 
 TEST_CASE("Client methods") {

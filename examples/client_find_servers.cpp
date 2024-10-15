@@ -35,7 +35,7 @@ constexpr std::string_view getEnumName(UA_MessageSecurityMode securityMode) {
 
 int main() {
     opcua::Client client;
-    client.setLogger([](auto&&...) {});  // disable logging
+    client.config().setLogger([](auto&&...) {});  // disable logging
 
     const auto servers = client.findServers("opc.tcp://localhost:4840");
     size_t serverIndex = 0;

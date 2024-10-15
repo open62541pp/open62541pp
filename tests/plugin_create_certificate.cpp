@@ -80,8 +80,9 @@ TEST_CASE("Encrypted connection server/client") {
         Server server(4840, certServer.certificate, certServer.privateKey, {}, {}, {});
         ServerRunner serverRunner(server);
 
-        Client client(certClient.certificate, certClient.privateKey, {}, {});
-        client.setSecurityMode(MessageSecurityMode::SignAndEncrypt);
+        ClientConfig clientConfig(certClient.certificate, certClient.privateKey, {}, {});
+        clientConfig.setSecurityMode(MessageSecurityMode::SignAndEncrypt);
+        Client client(std::move(clientConfig));
         CHECK_THROWS(client.connect("opc.tcp://localhost:4840"));
     }
 
@@ -91,8 +92,11 @@ TEST_CASE("Encrypted connection server/client") {
         );
         ServerRunner serverRunner(server);
 
-        Client client(certClient.certificate, certClient.privateKey, {certServer.certificate}, {});
-        client.setSecurityMode(MessageSecurityMode::SignAndEncrypt);
+        ClientConfig clientConfig(
+            certClient.certificate, certClient.privateKey, {certServer.certificate}, {}
+        );
+        clientConfig.setSecurityMode(MessageSecurityMode::SignAndEncrypt);
+        Client client(std::move(clientConfig));
         CHECK_NOTHROW(client.connect("opc.tcp://localhost:4840"));
     }
 }
