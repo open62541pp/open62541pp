@@ -22,6 +22,34 @@
 
 namespace opcua {
 
+static UA_Client* allocateClient(UA_ClientConfig* config) noexcept {
+    if (config == nullptr) {
+        return nullptr;
+    }
+#if UAPP_OPEN62541_VER_LE(1, 0)
+    auto* client = UA_Client_new();
+    auto* clientConfig = UA_Client_getConfig(client);
+    if (clientConfig != nullptr) {
+        detail::clear(clientConfig->logger);
+        *clientConfig = *config;
+    }
+#else
+    auto* client = UA_Client_newWithConfig(config);
+#endif
+    return client;
+}
+
+static void deleteClient(UA_Client* client) noexcept {
+    if (client == nullptr) {
+        return;
+    }
+#if UAPP_OPEN62541_VER_LE(1, 0)
+    // UA_ClientConfig_deleteMembers won't delete the logger in v1.0
+    detail::clear(UA_Client_getConfig(client)->logger);
+#endif
+    UA_Client_delete(client);
+}
+
 /* ---------------------------------------- ClientConfig ---------------------------------------- */
 
 ClientConfig::ClientConfig() {
@@ -57,17 +85,8 @@ ClientConfig::~ClientConfig() {
     native().stateCallback = nullptr;
     native().inactivityCallback = nullptr;
     native().subscriptionInactivityCallback = nullptr;
-#if UAPP_OPEN62541_VER_LE(1, 0)
-    auto* client = UA_Client_new();
-    auto* config = UA_Client_getConfig(client);
-    clear(config->logger);
-    *config = native();
-#else
-    auto* client = UA_Client_newWithConfig(handle());
-#endif
-    if (client != nullptr) {
-        UA_Client_delete(client);
-    }
+    auto* client = allocateClient(handle());
+    deleteClient(client);
 }
 
 ClientConfig::ClientConfig(ClientConfig&& other) noexcept
@@ -235,34 +254,14 @@ static void stateCallback(
 
 namespace detail {
 
-// NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
-[[nodiscard]] static UA_Client* allocateClient(ClientConfig&& config) {
-    auto* client = UA_Client_newWithConfig(config.handle());
-    if (client == nullptr) {
-        throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
-    }
-    config = {};
-    return client;
-}
-
-static void deleteClient(UA_Client* client) {
-    if (client == nullptr) {
-        return;
-    }
-#if UAPP_OPEN62541_VER_LE(1, 0)
-    // UA_ClientConfig_deleteMembers won't delete the logger in v1.0
-    auto& logger = getConfig(client)->logger;
-    if (logger.clear != nullptr) {
-        logger.clear(logger.context);
-    }
-    logger = {};
-#endif
-    UA_Client_delete(client);
-}
-
 struct ClientConnection : public ConnectionBase<Client> {
+    // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
     explicit ClientConnection(ClientConfig&& config)
-        : client(allocateClient(std::move(config))) {
+        : client(allocateClient(config.handle())) {
+        if (client == nullptr) {
+            throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
+        }
+        config = {};
         applyDefaults();
     }
 
