@@ -24,7 +24,7 @@ inline void clear(UA_ClientConfig& config) noexcept {
 #if UAPP_OPEN62541_VER_LE(1, 0)
     auto* client = UA_Client_new();
     auto* configClient = UA_Client_getConfig(client);
-    clear(config->logger);
+    clear(configClient->logger);
     *configClient = config;
 #else
     auto* client = UA_Client_newWithConfig(&config);
@@ -40,6 +40,25 @@ public:
     ClientConfig() {
         throwIfBad(UA_ClientConfig_setDefault(handle()));
     }
+
+#ifdef UA_ENABLE_ENCRYPTION
+    ClientConfig(
+        const ByteString& certificate,
+        const ByteString& privateKey,
+        Span<const ByteString> trustList,
+        Span<const ByteString> revocationList = {}
+    ) {
+        throwIfBad(UA_ClientConfig_setDefaultEncryption(
+            handle(),
+            certificate,
+            privateKey,
+            asNative(trustList.data()),
+            trustList.size(),
+            asNative(revocationList.data()),
+            revocationList.size()
+        ));
+    }
+#endif
 
     explicit ClientConfig(UA_ClientConfig&& native)
         : Wrapper(std::exchange(native, {})) {}
