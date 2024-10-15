@@ -96,7 +96,7 @@ TEST_CASE("Client connect with AnonymousIdentityToken") {
 TEST_CASE("Client connect with UserNameIdentityToken") {
     AccessControlDefault accessControl(false, {{"username", "password"}});
     Server server;
-    server.setAccessControl(accessControl);
+    server.config().setAccessControl(accessControl);
     ServerRunner serverRunner(server);
     Client client;
 

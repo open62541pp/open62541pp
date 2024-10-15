@@ -8,8 +8,6 @@
 #include "open62541pp/plugin/log.hpp"
 #include "open62541pp/server.hpp"
 
-#include "server_config.hpp"
-
 using namespace opcua;
 
 TEST_CASE_TEMPLATE("Config", T, ClientConfig, ServerConfig) {

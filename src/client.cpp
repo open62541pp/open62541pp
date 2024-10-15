@@ -89,6 +89,7 @@ ClientConfig::~ClientConfig() {
     deleteClient(client);
 }
 
+// NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
 ClientConfig::ClientConfig(ClientConfig&& other) noexcept
     : Wrapper(std::exchange(other.native(), {})) {}
 

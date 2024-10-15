@@ -61,8 +61,6 @@ public:
      * Create client config with default configuration (no encryption).
      * Security policies:
      * - [None](http://opcfoundation.org/UA/SecurityPolicy#None)
-     * @param logger Custom log function. If the passed function is empty, the default logger is
-     * used.
      */
     ClientConfig();
 
@@ -183,23 +181,23 @@ public:
      */
     std::vector<EndpointDescription> getEndpoints(std::string_view serverUrl);
 
-    [[deprecated("use ServerConfig::setLogger via config() or pass config to Server")]]
+    [[deprecated("use ClientConfig::setLogger via config() or pass config to Client")]]
     void setLogger(LogFunction logger) {
         config().setLogger(std::move(logger));
     }
 
-    [[deprecated("use ServerConfig::setTimeout via config() or pass config to Server")]]
+    [[deprecated("use ClientConfig::setTimeout via config() or pass config to Client")]]
     void setTimeout(uint32_t milliseconds) noexcept {
         config().setTimeout(milliseconds);
     }
 
     template <typename Token>
-    [[deprecated("use ServerConfig::setUserIdentityToken via config() or pass config to Server")]]
+    [[deprecated("use ClientConfig::setUserIdentityToken via config() or pass config to Client")]]
     void setUserIdentityToken(const Token& token) {
         config().setUserIdentityToken(token);
     }
 
-    [[deprecated("use ServerConfig::setSecurityMode via config() or pass config to Server")]]
+    [[deprecated("use ClientConfig::setSecurityMode via config() or pass config to Client")]]
     void setSecurityMode(MessageSecurityMode mode) noexcept {
         config().setSecurityMode(mode);
     }

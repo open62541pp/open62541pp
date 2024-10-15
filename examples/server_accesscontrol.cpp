@@ -46,8 +46,6 @@ public:
 int main() {
     // Exchanging usernames/passwords without encryption as plain text is dangerous.
     // We are doing this just for demonstration, don't use it in production!
-    Server server;
-
     AccessControlCustom accessControl(
         true,  // allow anonymous
         {
@@ -55,7 +53,11 @@ int main() {
             {"user", "user"},
         }
     );
-    server.setAccessControl(accessControl);
+
+    ServerConfig config;
+    config.setAccessControl(accessControl);
+
+    Server server(std::move(config));
 
     // Add variable node. Try to change its value as a client with different logins.
     Node(server, ObjectId::ObjectsFolder)

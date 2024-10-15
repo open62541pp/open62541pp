@@ -12,12 +12,44 @@
 #include "open62541pp/server.hpp"
 #include "open62541pp/types.hpp"
 
-#include "server_config.hpp"
-
 using namespace opcua;
 
 TEST_CASE("ServerConfig") {
+    SUBCASE("Construct with custom port") {
+        CHECK_NOTHROW(ServerConfig(4850));
+    }
+
+    SUBCASE("Construct with custom port and certificate") {
+        CHECK_NOTHROW(ServerConfig(4850, ByteString("certificate")));
+    }
+
+#ifdef UA_ENABLE_ENCRYPTION
+    SUBCASE("Construct with encryption") {
+        ServerConfig config(
+            4850,
+            {},  // certificate, invalid
+            {},  // privateKey, invalid
+            {},  // trustList
+            {},  // issuerList
+            {}  // revocationList
+        );
+        // no encrypting security policies enabled due to invalid certificate and key
+        CHECK(config->securityPoliciesSize >= 1);
+    }
+#endif
+
     ServerConfig config;
+
+    SUBCASE("ApplicationDescription") {
+        config.setApplicationUri("http://app.com");
+        CHECK(detail::toString(config->applicationDescription.applicationUri) == "http://app.com");
+
+        config.setProductUri("http://product.com");
+        CHECK(detail::toString(config->applicationDescription.productUri) == "http://product.com");
+
+        config.setApplicationName("Test App");
+        CHECK(detail::toString(config->applicationDescription.applicationName.text) == "Test App");
+    }
 
     SUBCASE("AccessControl") {
         SUBCASE("Set by ref or owning") {
@@ -73,35 +105,6 @@ TEST_CASE("ServerConfig") {
     }
 }
 
-TEST_CASE("Server constructors") {
-    SUBCASE("Construct") {
-        Server server;
-    }
-
-    SUBCASE("Construct with custom port") {
-        Server server(4850);
-    }
-
-    SUBCASE("Custom port and certificate") {
-        Server server(4850, ByteString("certificate"));
-    }
-}
-
-#ifdef UA_ENABLE_ENCRYPTION
-TEST_CASE("Server encryption") {
-    Server server(
-        4850,
-        {},  // certificate, invalid
-        {},  // privateKey, invalid
-        {},  // trustList
-        {},  // issuerList
-        {}  // revocationList
-    );
-    // no encrypting security policies enabled due to invalid certificate and key
-    CHECK(UA_Server_getConfig(server.handle())->securityPoliciesSize >= 1);
-}
-#endif
-
 TEST_CASE("Server run/stop/runIterate") {
     Server server;
 
@@ -135,21 +138,8 @@ TEST_CASE("Server run/stop/runIterate") {
     }
 }
 
-TEST_CASE("Server configuration") {
+TEST_CASE("Server methods") {
     Server server;
-
-    SUBCASE("Set hostname / application name / uris") {
-        auto* config = UA_Server_getConfig(server.handle());
-
-        server.setApplicationName("Test App");
-        CHECK(detail::toString(config->applicationDescription.applicationName.text) == "Test App");
-
-        server.setApplicationUri("http://app.com");
-        CHECK(detail::toString(config->applicationDescription.applicationUri) == "http://app.com");
-
-        server.setProductUri("http://product.com");
-        CHECK(detail::toString(config->applicationDescription.productUri) == "http://product.com");
-    }
 
     SUBCASE("Namespace array") {
         const auto namespaces = server.getNamespaceArray();

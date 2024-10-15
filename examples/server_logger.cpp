@@ -49,11 +49,15 @@ int main() {
                   << "[" << getLogCategoryName(category) << "] " << msg << std::endl;
     };
 
-    // Set logger in constructor
-    opcua::Server server(4840, {}, logger);
+    // Create server configuration and set logger
+    opcua::ServerConfig config(4840, {});
+    config.setLogger(logger);
 
-    // Set logger after construction
-    server.setLogger(logger);
+    // Construct server with config
+    opcua::Server server(std::move(config));
+
+    // Alternatively, set logger after construction
+    server.config().setLogger(logger);
 
     server.run();
 }

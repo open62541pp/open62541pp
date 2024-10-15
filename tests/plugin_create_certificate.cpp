@@ -77,7 +77,8 @@ TEST_CASE("Encrypted connection server/client") {
     );
 
     SUBCASE("Connect without trusting each others certificate") {
-        Server server(4840, certServer.certificate, certServer.privateKey, {}, {}, {});
+        ServerConfig serverConfig(4840, certServer.certificate, certServer.privateKey, {}, {}, {});
+        Server server(std::move(serverConfig));
         ServerRunner serverRunner(server);
 
         ClientConfig clientConfig(certClient.certificate, certClient.privateKey, {}, {});
@@ -87,9 +88,10 @@ TEST_CASE("Encrypted connection server/client") {
     }
 
     SUBCASE("Connect with trust lists") {
-        Server server(
+        ServerConfig serverConfig(
             4840, certServer.certificate, certServer.privateKey, {certClient.certificate}, {}, {}
         );
+        Server server(std::move(serverConfig));
         ServerRunner serverRunner(server);
 
         ClientConfig clientConfig(
