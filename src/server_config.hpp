@@ -28,6 +28,20 @@ public:
         UA_ServerConfig_clean(handle());
     }
 
+    ServerConfig(const ServerConfig&) = delete;
+
+    ServerConfig(ServerConfig&& config) noexcept
+        : Wrapper(std::exchange(config.native(), {})) {}
+
+    ServerConfig& operator=(const ServerConfig&) = delete;
+
+    ServerConfig& operator=(ServerConfig&& other) noexcept {
+        if (this != &other) {
+            native() = std::exchange(other.native(), {});
+        }
+        return *this;
+    }
+
     void setLogger(LogFunction func) {
         if (func) {
             auto adapter = std::make_unique<LoggerDefault>(std::move(func));
