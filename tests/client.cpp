@@ -78,18 +78,18 @@ TEST_CASE("Client discovery") {
 TEST_CASE("Client connect with AnonymousIdentityToken") {
     Server server;
     ServerRunner serverRunner(server);
-    // Client client;
+    Client client;
 
-    // SUBCASE("Connect with anonymous should succeed") {
-    //     client.config().setUserIdentityToken(AnonymousIdentityToken{});
-    //     CHECK_NOTHROW(client.connect(localServerUrl));
-    //     CHECK(client.isConnected());
-    // }
+    SUBCASE("Connect with anonymous should succeed") {
+        client.config().setUserIdentityToken(AnonymousIdentityToken{});
+        CHECK_NOTHROW(client.connect(localServerUrl));
+        CHECK(client.isConnected());
+    }
 
-    // SUBCASE("Connect with username/password should fail") {
-    //     client.config().setUserIdentityToken(UserNameIdentityToken("username", "password"));
-    //     CHECK_THROWS(client.connect(localServerUrl));
-    // }
+    SUBCASE("Connect with username/password should fail") {
+        client.config().setUserIdentityToken(UserNameIdentityToken("username", "password"));
+        CHECK_THROWS(client.connect(localServerUrl));
+    }
 }
 
 #if UAPP_OPEN62541_VER_GE(1, 3)
