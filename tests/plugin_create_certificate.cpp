@@ -82,10 +82,7 @@ TEST_CASE("Encrypted connection server/client") {
 
         Client client(certClient.certificate, certClient.privateKey, {}, {});
         client.setSecurityMode(MessageSecurityMode::SignAndEncrypt);
-#if UAPP_OPEN62541_VER_LE(1, 3)
-        // TODO: doesn't throw with v1.4
         CHECK_THROWS(client.connect("opc.tcp://localhost:4840"));
-#endif
     }
 
     SUBCASE("Connect with trust lists") {

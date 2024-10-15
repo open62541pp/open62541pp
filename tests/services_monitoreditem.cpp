@@ -142,11 +142,8 @@ TEST_CASE("MonitoredItem service set (client)") {
         event.writeTime(DateTime::now());
         event.trigger();
         client.runIterate();
-#if UAPP_OPEN62541_VER_LE(1, 3)
-        // TODO: fails with v1.4, why?
         CHECK(notificationCount == 1);
         CHECK(eventFieldsSize == 3);
-#endif
     }
 #endif
 
