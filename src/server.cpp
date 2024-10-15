@@ -220,6 +220,7 @@ struct ServerConnection : public ConnectionBase<Server> {
             throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
         }
         config = {};
+        updateLoggerStackPointer();
         applyDefaults();
     }
 
@@ -241,6 +242,18 @@ struct ServerConnection : public ConnectionBase<Server> {
         auto* config = detail::getConfig(server);
         assert(config != nullptr);
         return asWrapper<ServerConfig>(*config);
+    }
+
+    void updateLoggerStackPointer() noexcept {
+#if UAPP_OPEN62541_VER_LE(1, 2)
+        for (auto& layer : Span(config()->networkLayers, config()->networkLayersSize)) {
+            // https://github.com/open62541/open62541/blob/v1.0.6/arch/network_tcp.c#L556-L563
+            *static_cast<UA_Logger**>(layer.handle) = &config()->logger;
+        }
+        for (auto& policy : Span(config()->securityPolicies, config()->securityPoliciesSize)) {
+            policy.logger = &config()->logger;
+        }
+#endif
     }
 
     void applyDefaults() {

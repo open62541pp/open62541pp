@@ -263,6 +263,7 @@ struct ClientConnection : public ConnectionBase<Client> {
             throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
         }
         config = {};
+        updateLoggerStackPointer();
         applyDefaults();
     }
 
@@ -281,6 +282,14 @@ struct ClientConnection : public ConnectionBase<Client> {
         auto* config = detail::getConfig(client);
         assert(config != nullptr);
         return asWrapper<ClientConfig>(*config);
+    }
+
+    void updateLoggerStackPointer() noexcept {
+#if UAPP_OPEN62541_VER_LE(1, 2)
+        for (auto& policy : Span(config()->securityPolicies, config()->securityPoliciesSize)) {
+            policy.logger = &config()->logger;
+        }
+#endif
     }
 
     void applyDefaults() {
