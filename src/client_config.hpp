@@ -6,11 +6,34 @@
 
 #include "open62541pp/datatype.hpp"
 #include "open62541pp/detail/open62541/client.h"  // UA_ClientConfig
+#include "open62541pp/exception.hpp"
 #include "open62541pp/plugin/log.hpp"
+#include "open62541pp/span.hpp"
 #include "open62541pp/types.hpp"
 #include "open62541pp/wrapper.hpp"
 
 namespace opcua {
+
+namespace detail {
+inline void clear(UA_ClientConfig& config) noexcept {
+    // create temporary client to free config
+    // reset callbacks to avoid notifications
+    config.stateCallback = nullptr;
+    config.inactivityCallback = nullptr;
+    config.subscriptionInactivityCallback = nullptr;
+#if UAPP_OPEN62541_VER_LE(1, 0)
+    auto* client = UA_Client_new();
+    auto* configClient = UA_Client_getConfig(client);
+    clear(config->logger);
+    *configClient = config;
+#else
+    auto* client = UA_Client_newWithConfig(&config);
+#endif
+    if (client != nullptr) {
+        UA_Client_delete(client);
+    }
+}
+}  // namespace detail
 
 class ClientConfig : public Wrapper<UA_ClientConfig> {
 public:
@@ -22,22 +45,21 @@ public:
         : Wrapper(std::exchange(native, {})) {}
 
     ~ClientConfig() {
-        // create temporary client to free config
-        // reset callbacks to avoid notifications
-        native().stateCallback = nullptr;
-        native().inactivityCallback = nullptr;
-        native().subscriptionInactivityCallback = nullptr;
-#if UAPP_OPEN62541_VER_LE(1, 0)
-        auto* client = UA_Client_new();
-        auto* config = UA_Client_getConfig(client);
-        detail::clear(config->logger);
-        *config = native();
-#else
-        auto* client = UA_Client_newWithConfig(handle());
-#endif
-        if (client != nullptr) {
-            UA_Client_delete(client);
+        detail::clear(native());
+    }
+
+    ClientConfig(const ClientConfig&) = delete;
+
+    ClientConfig(ClientConfig&& config) noexcept
+        : Wrapper(std::exchange(config.native(), {})) {}
+
+    ClientConfig& operator=(const ClientConfig&) = delete;
+
+    ClientConfig& operator=(ClientConfig&& other) noexcept {
+        if (this != &other) {
+            native() = std::exchange(other.native(), {});
         }
+        return *this;
     }
 
     void setUserIdentityToken(ExtensionObject token) {

@@ -5,13 +5,13 @@ add_executable(
     main.cpp
     async.cpp
     bitmask.cpp
+    client_server_common.cpp
     client.cpp
     clientservice.cpp
     datatype.cpp
     event.cpp
     exception.cpp
     exceptioncatcher.cpp
-    logger.cpp
     node.cpp
     plugin_accesscontrol.cpp
     plugin_create_certificate.cpp

@@ -110,9 +110,9 @@ public:
     ~Server();
 
     Server(const Server&) = delete;
-    Server(Server&&) noexcept = default;
+    Server(Server&&) noexcept;
     Server& operator=(const Server&) = delete;
-    Server& operator=(Server&&) noexcept = default;
+    Server& operator=(Server&&) noexcept;
 
     /// Set custom log function.
     /// Does nothing if the passed function is empty or a nullptr.

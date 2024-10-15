@@ -100,9 +100,9 @@ public:
     ~Client();
 
     Client(const Client&) = delete;
-    Client(Client&&) noexcept = default;
+    Client(Client&&) noexcept;
     Client& operator=(const Client&) = delete;
-    Client& operator=(Client&&) noexcept = default;
+    Client& operator=(Client&&) noexcept;
 
     /**
      * Gets a list of all registered servers at the given server.

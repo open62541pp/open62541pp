@@ -267,6 +267,9 @@ Client::Client(
 
 Client::~Client() = default;
 
+Client::Client(Client&&) noexcept = default;
+Client& Client::operator=(Client&&) noexcept = default;
+
 std::vector<ApplicationDescription> Client::findServers(std::string_view serverUrl) {
     size_t arraySize{};
     UA_ApplicationDescription* array{};

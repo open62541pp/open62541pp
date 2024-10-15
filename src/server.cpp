@@ -238,6 +238,9 @@ Server::Server(
 
 Server::~Server() = default;
 
+Server::Server(Server&&) noexcept = default;
+Server& Server::operator=(Server&&) noexcept = default;
+
 void Server::setLogger(LogFunction logger) {
     connection_->config().setLogger(std::move(logger));
 }
