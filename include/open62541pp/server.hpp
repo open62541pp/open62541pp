@@ -125,9 +125,6 @@ public:
     void setProductUri(std::string_view uri);
     /// Set application name, default: `open62541-based OPC UA Application`.
     void setApplicationName(std::string_view name);
-    /// Set custom hostname, default: system's host name.
-    [[deprecated("not supported since open62541 v1.4")]]
-    void setCustomHostname(std::string_view hostname);
 
     /// Set custom access control.
     void setAccessControl(AccessControlBase& accessControl);
@@ -214,10 +211,9 @@ public:
         config().setApplicationName(name);
     }
 
+    /// Set custom hostname, default: system's host name.
     [[deprecated("not supported since open62541 v1.4")]]
-    void setCustomHostname(std::string_view hostname) {
-        config().setCustomHostname(hostname);
-    }
+    void setCustomHostname(std::string_view hostname);
 
     [[deprecated("use ServerConfig::setAccessControl via config() or pass config to Server")]]
     void setAccessControl(AccessControlBase& accessControl) {
