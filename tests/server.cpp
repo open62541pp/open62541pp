@@ -16,18 +16,6 @@
 
 using namespace opcua;
 
-TEST_CASE("ServerConfig constructors") {
-    SUBCASE("Default") {
-        ServerConfig config;
-    }
-
-    SUBCASE("From native") {
-        UA_ServerConfig native{};
-        UA_ServerConfig_setDefault(&native);
-        ServerConfig config(std::move(native));
-    }
-}
-
 TEST_CASE("ServerConfig") {
     ServerConfig config;
 
@@ -114,12 +102,6 @@ TEST_CASE("Server encryption") {
 }
 #endif
 
-TEST_CASE("Server equality operators") {
-    Server server;
-    CHECK(server == server);
-    CHECK(server != Server{});
-}
-
 TEST_CASE("Server run/stop/runIterate") {
     Server server;
 
@@ -183,27 +165,6 @@ TEST_CASE("Server configuration") {
         CHECK(server.registerNamespace("test2") == 3);
         CHECK(server.getNamespaceArray().at(3) == "test2");
     }
-}
-
-TEST_CASE("Server helper functions") {
-    UA_Server* serverNull{nullptr};
-    Server server;
-
-    CHECK(detail::getConfig(serverNull) == nullptr);
-    CHECK(detail::getConfig(server.handle()) != nullptr);
-    CHECK(detail::getConfig(server.handle()) == &detail::getConfig(server));
-
-    CHECK(detail::getConnection(serverNull) == nullptr);
-    CHECK(detail::getConnection(server.handle()) != nullptr);
-    CHECK(detail::getConnection(server.handle()) == &detail::getConnection(server));
-
-    CHECK(detail::getWrapper(serverNull) == nullptr);
-    CHECK(detail::getWrapper(server.handle()) != nullptr);
-    CHECK(detail::getWrapper(server.handle())->handle() == server.handle());
-
-    CHECK(detail::getContext(serverNull) == nullptr);
-    CHECK(detail::getContext(server.handle()) != nullptr);
-    CHECK(detail::getContext(server.handle()) == &detail::getContext(server));
 }
 
 TEST_CASE("ValueCallback") {

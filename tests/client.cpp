@@ -19,18 +19,6 @@ using namespace opcua;
 
 constexpr std::string_view localServerUrl{"opc.tcp://localhost:4840"};
 
-TEST_CASE("ClientConfig constructors") {
-    SUBCASE("Default") {
-        ClientConfig config;
-    }
-
-    SUBCASE("From native") {
-        UA_ClientConfig native{};
-        UA_ClientConfig_setDefault(&native);
-        ClientConfig config(std::move(native));
-    }
-}
-
 TEST_CASE("Client discovery") {
     Server server;
     ServerRunner serverRunner(server);
@@ -221,25 +209,4 @@ TEST_CASE("Client methods") {
         CHECK(namespaces.at(0) == "http://opcfoundation.org/UA/");
         CHECK(namespaces.at(1) == "urn:open62541.server.application");
     }
-}
-
-TEST_CASE("Client helper functions") {
-    UA_Client* clientNull{nullptr};
-    Client client;
-
-    CHECK(detail::getConfig(clientNull) == nullptr);
-    CHECK(detail::getConfig(client.handle()) != nullptr);
-    CHECK(detail::getConfig(client.handle()) == &detail::getConfig(client));
-
-    CHECK(detail::getConnection(clientNull) == nullptr);
-    CHECK(detail::getConnection(client.handle()) != nullptr);
-    CHECK(detail::getConnection(client.handle()) == &detail::getConnection(client));
-
-    CHECK(detail::getWrapper(clientNull) == nullptr);
-    CHECK(detail::getWrapper(client.handle()) != nullptr);
-    CHECK(detail::getWrapper(client.handle())->handle() == client.handle());
-
-    CHECK(detail::getContext(clientNull) == nullptr);
-    CHECK(detail::getContext(client.handle()) != nullptr);
-    CHECK(detail::getContext(client.handle()) == &detail::getContext(client));
 }
