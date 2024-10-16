@@ -71,6 +71,7 @@ ServerConfig::ServerConfig(ServerConfig&& other) noexcept
 
 ServerConfig& ServerConfig::operator=(ServerConfig&& other) noexcept {
     if (this != &other) {
+        // UA_ServerConfig_clean(handle());  // TODO
         native() = std::exchange(other.native(), {});
     }
     return *this;
@@ -246,14 +247,6 @@ struct ServerConnection {
             throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
         }
         config = {};
-#if UAPP_OPEN62541_VER_GE(1, 3)
-        getConfig(server)->context = this;
-#else
-        const auto status = UA_Server_setNodeContext(
-            server, UA_NODEID_NUMERIC(0, UA_NS0ID_SERVER), this
-        );
-        assert(status == UA_STATUSCODE_GOOD);
-#endif
 #if UAPP_OPEN62541_VER_GE(1, 2)
         getConfig(server)->allowEmptyVariables = UA_RULEHANDLING_ACCEPT;  // allow empty variables
 #endif
@@ -279,7 +272,7 @@ struct ServerConnection {
 
 /* ------------------------------------------- Server ------------------------------------------- */
 
-static void setWrapperAsContextPointer(Server& server) {
+static void setWrapperAsContextPointer(Server& server) noexcept {
 #if UAPP_OPEN62541_VER_GE(1, 3)
     server.config()->context = &server;
 #else
@@ -538,12 +531,10 @@ const UA_Server* Server::handle() const noexcept {
 }
 
 detail::ServerContext& Server::context() noexcept {
-    assert(connection_);
     return connection_->context;
 }
 
 const detail::ServerContext& Server::context() const noexcept {
-    assert(connection_);
     return connection_->context;
 }
 
