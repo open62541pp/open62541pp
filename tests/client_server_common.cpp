@@ -133,3 +133,20 @@ TEST_CASE_TEMPLATE("Connection", T, Client, Server) {
         CHECK(other == other);
     }
 }
+
+TEST_CASE_TEMPLATE("Connection getWrapper", T, Client, Server) {
+    T connection;
+    auto* native = connection.handle();
+
+    CHECK(detail::getWrapper(native) == &connection);
+
+    SUBCASE("Move construct") {
+        T connectionMoved(std::move(connection));
+        CHECK(detail::getWrapper(native) == &connectionMoved);
+    }
+    SUBCASE("Move assignment") {
+        T connectionMoved;
+        connectionMoved = std::move(connection);
+        CHECK(detail::getWrapper(native) == &connectionMoved);
+    }
+}

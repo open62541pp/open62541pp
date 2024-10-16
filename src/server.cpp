@@ -6,7 +6,6 @@
 #include <utility>  // move
 
 #include "open62541pp/datatype.hpp"
-#include "open62541pp/detail/connection.hpp"
 #include "open62541pp/detail/result_utils.hpp"  // tryInvoke
 #include "open62541pp/detail/server_context.hpp"
 #include "open62541pp/event.hpp"
@@ -239,7 +238,7 @@ static void updateLoggerStackPointer([[maybe_unused]] UA_ServerConfig& config) n
 #endif
 }
 
-struct ServerConnection : public ConnectionBase<Server> {
+struct ServerConnection {
     // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
     explicit ServerConnection(ServerConfig&& config)
         : server(UA_Server_newWithConfig(config.handle())) {
@@ -280,16 +279,39 @@ struct ServerConnection : public ConnectionBase<Server> {
 
 /* ------------------------------------------- Server ------------------------------------------- */
 
+static void setWrapperAsContextPointer(Server& server) {
+#if UAPP_OPEN62541_VER_GE(1, 3)
+    server.config()->context = &server;
+#else
+    const auto status = UA_Server_setNodeContext(
+        server.handle(), UA_NODEID_NUMERIC(0, UA_NS0ID_SERVER), &server
+    );
+    assert(status == UA_STATUSCODE_GOOD);
+#endif
+}
+
 Server::Server()
     : Server(ServerConfig()) {}
 
 Server::Server(ServerConfig&& config)
-    : connection_(std::make_unique<detail::ServerConnection>(std::move(config))) {}
+    : connection_(std::make_unique<detail::ServerConnection>(std::move(config))) {
+    setWrapperAsContextPointer(*this);
+}
 
 Server::~Server() = default;
 
-Server::Server(Server&&) noexcept = default;
-Server& Server::operator=(Server&&) noexcept = default;
+Server::Server(Server&& other) noexcept
+    : connection_(std::move(other.connection_)) {
+    setWrapperAsContextPointer(*this);
+}
+
+Server& Server::operator=(Server&& other) noexcept {
+    if (this != &other) {
+        connection_ = std::move(other.connection_);
+        setWrapperAsContextPointer(*this);
+    }
+    return *this;
+}
 
 ServerConfig& Server::config() noexcept {
     auto* config = detail::getConfig(handle());
@@ -443,7 +465,6 @@ Event Server::createEvent(const NodeId& eventType) {
 }
 #endif
 
-
 static void runStartup(Server& server, detail::ServerContext& context) {
     applySessionRegistry(server.config(), context);
     throwIfBad(UA_Server_run_startup(server.handle()));
@@ -547,14 +568,14 @@ UA_Logger* getLogger(UA_ServerConfig* config) noexcept {
 #endif
 }
 
-ServerConnection* getConnection(UA_Server* server) noexcept {
+Server* getWrapper(UA_Server* server) noexcept {
 #if UAPP_OPEN62541_VER_GE(1, 3)
     auto* config = getConfig(server);
     if (config == nullptr) {
         return nullptr;
     }
-    // UA_ServerConfig.context pointer available since open62541 v1.3
-    auto* connection = static_cast<detail::ServerConnection*>(config->context);
+    assert(config->context != nullptr);
+    return static_cast<Server*>(config->context);
 #else
     if (server == nullptr) {
         return nullptr;
@@ -565,25 +586,23 @@ ServerConnection* getConnection(UA_Server* server) noexcept {
         server, UA_NODEID_NUMERIC(0, UA_NS0ID_SERVER), &nodeContext
     );
     assert(status == UA_STATUSCODE_GOOD);
-    auto* connection = static_cast<detail::ServerConnection*>(nodeContext);
+    assert(nodeContext != nullptr);
+    return static_cast<Server*>(nodeContext);
 #endif
-    assert(connection != nullptr);
-    assert(connection->server == server);
-    return connection;
+}
+
+ServerConnection* getConnection(UA_Server* server) noexcept {
+    auto* wrapper = getWrapper(server);
+    if (wrapper == nullptr) {
+        return nullptr;
+    }
+    return wrapper->connection_.get();
 }
 
 ServerConnection& getConnection(Server& server) noexcept {
     auto* connection = server.connection_.get();
     assert(connection != nullptr);
     return *connection;
-}
-
-Server* getWrapper(UA_Server* server) noexcept {
-    auto* connection = getConnection(server);
-    if (connection == nullptr) {
-        return nullptr;
-    }
-    return connection->wrapperPtr();
 }
 
 ServerContext* getContext(UA_Server* server) noexcept {

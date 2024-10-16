@@ -39,10 +39,10 @@ UA_ClientConfig& getConfig(Client& client) noexcept;
 
 UA_Logger* getLogger(UA_ClientConfig* config) noexcept;
 
+Client* getWrapper(UA_Client* client) noexcept;
+
 ClientConnection* getConnection(UA_Client* client) noexcept;
 ClientConnection& getConnection(Client& client) noexcept;
-
-Client* getWrapper(UA_Client* client) noexcept;
 
 ClientContext* getContext(UA_Client* client) noexcept;
 ClientContext& getContext(Client& client) noexcept;
@@ -161,9 +161,9 @@ public:
     ~Client();
 
     Client(const Client&) = delete;
-    Client(Client&&) noexcept;
+    Client(Client&& other) noexcept;
     Client& operator=(const Client&) = delete;
-    Client& operator=(Client&&) noexcept;
+    Client& operator=(Client&& other) noexcept;
 
     ClientConfig& config() noexcept;
     const ClientConfig& config() const noexcept;
@@ -280,6 +280,7 @@ private:
     detail::ClientContext& context() noexcept;
     const detail::ClientContext& context() const noexcept;
 
+    friend detail::ClientConnection* detail::getConnection(UA_Client* client) noexcept;
     friend detail::ClientConnection& detail::getConnection(Client& client) noexcept;
 
     std::unique_ptr<detail::ClientConnection> connection_;

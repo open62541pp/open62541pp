@@ -7,7 +7,6 @@
 #include "open62541pp/config.hpp"
 #include "open62541pp/datatype.hpp"
 #include "open62541pp/detail/client_context.hpp"
-#include "open62541pp/detail/connection.hpp"
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/exception.hpp"
 #include "open62541pp/node.hpp"
@@ -260,7 +259,7 @@ static void updateLoggerStackPointer([[maybe_unused]] UA_ClientConfig& config) n
 
 namespace detail {
 
-struct ClientConnection : public ConnectionBase<Client> {
+struct ClientConnection {
     // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
     explicit ClientConnection(ClientConfig&& config)
         : client(allocateClient(config.handle())) {
@@ -291,11 +290,17 @@ struct ClientConnection : public ConnectionBase<Client> {
 
 /* ------------------------------------------- Client ------------------------------------------- */
 
+static void setWrapperAsContextPointer(Client& client) {
+    client.config()->clientContext = &client;
+}
+
 Client::Client()
     : Client(ClientConfig()) {}
 
 Client::Client(ClientConfig&& config)
-    : connection_(std::make_unique<detail::ClientConnection>(std::move(config))) {}
+    : connection_(std::make_unique<detail::ClientConnection>(std::move(config))) {
+    setWrapperAsContextPointer(*this);
+}
 
 #ifdef UA_ENABLE_ENCRYPTION
 Client::Client(
@@ -309,8 +314,18 @@ Client::Client(
 
 Client::~Client() = default;
 
-Client::Client(Client&&) noexcept = default;
-Client& Client::operator=(Client&&) noexcept = default;
+Client::Client(Client&& other) noexcept
+    : connection_(std::move(other.connection_)) {
+    setWrapperAsContextPointer(*this);
+}
+
+Client& Client::operator=(Client&& other) noexcept {
+    if (this != &other) {
+        connection_ = std::move(other.connection_);
+        setWrapperAsContextPointer(*this);
+    }
+    return *this;
+}
 
 ClientConfig& Client::config() noexcept {
     auto* config = detail::getConfig(handle());
@@ -538,29 +553,27 @@ UA_Logger* getLogger(UA_ClientConfig* config) noexcept {
 #endif
 }
 
-ClientConnection* getConnection(UA_Client* client) noexcept {
+Client* getWrapper(UA_Client* client) noexcept {
     auto* config = getConfig(client);
     if (config == nullptr) {
         return nullptr;
     }
-    auto* connection = static_cast<detail::ClientConnection*>(config->clientContext);
-    assert(connection != nullptr);
-    assert(connection->client == client);
-    return connection;
+    assert(config->clientContext != nullptr);
+    return static_cast<Client*>(config->clientContext);
+}
+
+ClientConnection* getConnection(UA_Client* client) noexcept {
+    auto* wrapper = getWrapper(client);
+    if (wrapper == nullptr) {
+        return nullptr;
+    }
+    return wrapper->connection_.get();
 }
 
 ClientConnection& getConnection(Client& client) noexcept {
     auto* connection = client.connection_.get();
     assert(connection != nullptr);
     return *connection;
-}
-
-Client* getWrapper(UA_Client* client) noexcept {
-    auto* connection = getConnection(client);
-    if (connection == nullptr) {
-        return nullptr;
-    }
-    return connection->wrapperPtr();
 }
 
 ClientContext* getContext(UA_Client* client) noexcept {
