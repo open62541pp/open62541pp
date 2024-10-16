@@ -211,6 +211,34 @@ static void closeSession(
     }
 }
 
+static void applySessionRegistry(UA_ServerConfig& config, ServerContext& context) {
+    // Make sure to call this function only once after access control is initialized or changed.
+    // The function pointers to activateSession / closeSession might not be unique and the
+    // the pointer comparison might fail resulting in stack overflows:
+    // - https://github.com/open62541pp/open62541pp/issues/285
+    // - https://stackoverflow.com/questions/31209693/static-library-linked-two-times
+    if (config.accessControl.activateSession != &activateSession) {
+        context.sessionRegistry.activateSessionUser = config.accessControl.activateSession;
+        config.accessControl.activateSession = &activateSession;
+    }
+    if (config.accessControl.closeSession != &closeSession) {
+        context.sessionRegistry.closeSessionUser = config.accessControl.closeSession;
+        config.accessControl.closeSession = &closeSession;
+    }
+}
+
+static void updateLoggerStackPointer([[maybe_unused]] UA_ServerConfig& config) noexcept {
+#if UAPP_OPEN62541_VER_LE(1, 2)
+    for (auto& layer : Span(config.networkLayers, config.networkLayersSize)) {
+        // https://github.com/open62541/open62541/blob/v1.0.6/arch/network_tcp.c#L556-L563
+        *static_cast<UA_Logger**>(layer.handle) = &config.logger;
+    }
+    for (auto& policy : Span(config.securityPolicies, config.securityPoliciesSize)) {
+        policy.logger = &config.logger;
+    }
+#endif
+}
+
 struct ServerConnection : public ConnectionBase<Server> {
     // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
     explicit ServerConnection(ServerConfig&& config)
@@ -219,15 +247,23 @@ struct ServerConnection : public ConnectionBase<Server> {
             throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
         }
         config = {};
-        updateLoggerStackPointer();
-        applyDefaults();
+#if UAPP_OPEN62541_VER_GE(1, 3)
+        getConfig(server)->context = this;
+#else
+        const auto status = UA_Server_setNodeContext(
+            server, UA_NODEID_NUMERIC(0, UA_NS0ID_SERVER), this
+        );
+        assert(status == UA_STATUSCODE_GOOD);
+#endif
+#if UAPP_OPEN62541_VER_GE(1, 2)
+        getConfig(server)->allowEmptyVariables = UA_RULEHANDLING_ACCEPT;  // allow empty variables
+#endif
+        updateLoggerStackPointer(*getConfig(server));
     }
 
     ~ServerConnection() {
         // don't use stop method here because it might throw an exception
-        if (running) {
-            UA_Server_run_shutdown(server);
-        }
+        UA_Server_run_shutdown(server);
         UA_Server_delete(server);
     }
 
@@ -236,104 +272,8 @@ struct ServerConnection : public ConnectionBase<Server> {
     ServerConnection& operator=(const ServerConnection&) = delete;
     ServerConnection& operator=(ServerConnection&&) noexcept = delete;
 
-    // NOLINTNEXTLINE(readability-make-member-function-const)
-    ServerConfig& config() noexcept {
-        auto* config = detail::getConfig(server);
-        assert(config != nullptr);
-        return asWrapper<ServerConfig>(*config);
-    }
-
-    void updateLoggerStackPointer() noexcept {
-#if UAPP_OPEN62541_VER_LE(1, 2)
-        for (auto& layer : Span(config()->networkLayers, config()->networkLayersSize)) {
-            // https://github.com/open62541/open62541/blob/v1.0.6/arch/network_tcp.c#L556-L563
-            *static_cast<UA_Logger**>(layer.handle) = &config()->logger;
-        }
-        for (auto& policy : Span(config()->securityPolicies, config()->securityPoliciesSize)) {
-            policy.logger = &config()->logger;
-        }
-#endif
-    }
-
-    void applyDefaults() {
-#if UAPP_OPEN62541_VER_GE(1, 3)
-        config()->context = this;
-#else
-        const auto status = UA_Server_setNodeContext(
-            server, UA_NODEID_NUMERIC(0, UA_NS0ID_SERVER), this
-        );
-        assert(status == UA_STATUSCODE_GOOD);
-#endif
-#ifdef UA_ENABLE_SUBSCRIPTIONS
-        config()->publishingIntervalLimits.min = 10;  // ms
-        config()->samplingIntervalLimits.min = 10;  // ms
-#endif
-#if UAPP_OPEN62541_VER_GE(1, 2)
-        config()->allowEmptyVariables = UA_RULEHANDLING_ACCEPT;  // allow empty variables
-#endif
-    }
-
-    void applySessionRegistry() {
-        // Make sure to call this function only once after access control is initialized or changed.
-        // The function pointers to activateSession / closeSession might not be unique and the
-        // the pointer comparison might fail resulting in stack overflows:
-        // - https://github.com/open62541pp/open62541pp/issues/285
-        // - https://stackoverflow.com/questions/31209693/static-library-linked-two-times
-        if (config()->accessControl.activateSession != &activateSession) {
-            context.sessionRegistry.activateSessionUser = config()->accessControl.activateSession;
-            config()->accessControl.activateSession = &activateSession;
-        }
-        if (config()->accessControl.closeSession != &closeSession) {
-            context.sessionRegistry.closeSessionUser = config()->accessControl.closeSession;
-            config()->accessControl.closeSession = &closeSession;
-        }
-    }
-
-    void runStartup() {
-        applyDefaults();
-        applySessionRegistry();
-        throwIfBad(UA_Server_run_startup(server));
-        running = true;
-    }
-
-    uint16_t runIterate() {
-        if (!running) {
-            runStartup();
-        }
-        auto interval = UA_Server_run_iterate(server, false /* don't wait */);
-        context.exceptionCatcher.rethrow();
-        return interval;
-    }
-
-    void run() {
-        if (running) {
-            return;
-        }
-        runStartup();
-        const std::lock_guard lock(mutexRun);
-        try {
-            while (running) {
-                // https://github.com/open62541/open62541/blob/master/examples/server_mainloop.c
-                UA_Server_run_iterate(server, true /* wait for messages in the networklayer */);
-                context.exceptionCatcher.rethrow();
-            }
-        } catch (...) {
-            running = false;
-            throw;
-        }
-    }
-
-    void stop() {
-        running = false;
-        // wait for run loop to complete
-        const std::lock_guard<std::mutex> lock(mutexRun);
-        throwIfBad(UA_Server_run_shutdown(server));
-    }
-
     UA_Server* server;
     detail::ServerContext context;
-    std::atomic<bool> running{false};
-    std::mutex mutexRun;
 };
 
 }  // namespace detail
@@ -352,7 +292,9 @@ Server::Server(Server&&) noexcept = default;
 Server& Server::operator=(Server&&) noexcept = default;
 
 ServerConfig& Server::config() noexcept {
-    return connection_->config();
+    auto* config = detail::getConfig(handle());
+    assert(config != nullptr);
+    return asWrapper<ServerConfig>(*config);
 }
 
 const ServerConfig& Server::config() const noexcept {
@@ -501,20 +443,49 @@ Event Server::createEvent(const NodeId& eventType) {
 }
 #endif
 
+
+static void runStartup(Server& server, detail::ServerContext& context) {
+    applySessionRegistry(server.config(), context);
+    throwIfBad(UA_Server_run_startup(server.handle()));
+    context.running = true;
+}
+
 uint16_t Server::runIterate() {
-    return connection_->runIterate();
+    if (!context().running) {
+        runStartup(*this, context());
+    }
+    auto interval = UA_Server_run_iterate(handle(), false /* don't wait */);
+    context().exceptionCatcher.rethrow();
+    return interval;
 }
 
 void Server::run() {
-    connection_->run();
+    if (context().running) {
+        return;
+    }
+    runStartup(*this, context());
+    const std::lock_guard lock(context().mutexRun);
+    try {
+        while (context().running) {
+            // https://github.com/open62541/open62541/blob/master/examples/server_mainloop.c
+            UA_Server_run_iterate(handle(), true /* wait for messages in the networklayer */);
+            context().exceptionCatcher.rethrow();
+        }
+    } catch (...) {
+        context().running = false;
+        throw;
+    }
 }
 
 void Server::stop() {
-    connection_->stop();
+    context().running = false;
+    // wait for run loop to complete
+    const std::lock_guard<std::mutex> lock(context().mutexRun);
+    throwIfBad(UA_Server_run_shutdown(handle()));
 }
 
 bool Server::isRunning() const noexcept {
-    return connection_->running;
+    return context().running;
 }
 
 Node<Server> Server::getNode(NodeId id) {
@@ -543,6 +514,14 @@ UA_Server* Server::handle() noexcept {
 
 const UA_Server* Server::handle() const noexcept {
     return connection_->server;
+}
+
+detail::ServerContext& Server::context() noexcept {
+    return connection_->context;
+}
+
+const detail::ServerContext& Server::context() const noexcept {
+    return connection_->context;
 }
 
 /* -------------------------------------- Helper functions -------------------------------------- */

@@ -35,6 +35,11 @@ struct SessionRegistry {
  * Mainly used to store stateful function pointers.
  */
 struct ServerContext {
+    ExceptionCatcher exceptionCatcher;
+    SessionRegistry sessionRegistry;
+    std::atomic<bool> running{false};
+    std::mutex mutexRun;
+
     std::vector<DataType> dataTypes;
     std::unique_ptr<UA_DataTypeArray> dataTypeArray;
 
@@ -46,8 +51,6 @@ struct ServerContext {
 #endif
 
     ContextMap<NodeId, NodeContext> nodeContexts;
-    SessionRegistry sessionRegistry;
-    ExceptionCatcher exceptionCatcher;
 };
 
 }  // namespace opcua::detail

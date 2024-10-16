@@ -1,10 +1,7 @@
 #include "open62541pp/client.hpp"
 
-#include <atomic>
 #include <cassert>
-#include <cstddef>
 #include <iterator>
-#include <string>
 #include <utility>  // move
 
 #include "open62541pp/config.hpp"
@@ -253,6 +250,14 @@ static void stateCallback(
 
 /* -------------------------------------- Connection state -------------------------------------- */
 
+static void updateLoggerStackPointer([[maybe_unused]] UA_ClientConfig& config) noexcept {
+#if UAPP_OPEN62541_VER_LE(1, 2)
+    for (auto& policy : Span(config.securityPolicies, config.securityPoliciesSize)) {
+        policy.logger = &config.logger;
+    }
+#endif
+}
+
 namespace detail {
 
 struct ClientConnection : public ConnectionBase<Client> {
@@ -263,8 +268,9 @@ struct ClientConnection : public ConnectionBase<Client> {
             throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
         }
         config = {};
-        updateLoggerStackPointer();
-        applyDefaults();
+        getConfig(client)->clientContext = this;
+        getConfig(client)->stateCallback = stateCallback;
+        updateLoggerStackPointer(*getConfig(client));
     }
 
     ~ClientConnection() {
@@ -277,54 +283,8 @@ struct ClientConnection : public ConnectionBase<Client> {
     ClientConnection& operator=(const ClientConnection&) = delete;
     ClientConnection& operator=(ClientConnection&&) noexcept = delete;
 
-    // NOLINTNEXTLINE(readability-make-member-function-const)
-    ClientConfig& config() noexcept {
-        auto* config = detail::getConfig(client);
-        assert(config != nullptr);
-        return asWrapper<ClientConfig>(*config);
-    }
-
-    void updateLoggerStackPointer() noexcept {
-#if UAPP_OPEN62541_VER_LE(1, 2)
-        for (auto& policy : Span(config()->securityPolicies, config()->securityPoliciesSize)) {
-            policy.logger = &config()->logger;
-        }
-#endif
-    }
-
-    void applyDefaults() {
-        config()->clientContext = this;
-        config()->stateCallback = stateCallback;
-    }
-
-    void runIterate(uint16_t timeoutMilliseconds) {
-        throwIfBad(UA_Client_run_iterate(client, timeoutMilliseconds));
-        context.exceptionCatcher.rethrow();
-    }
-
-    void run() {
-        if (running) {
-            return;
-        }
-        running = true;
-        try {
-            while (running) {
-                runIterate(1000);
-                context.exceptionCatcher.rethrow();
-            }
-        } catch (...) {
-            running = false;
-            throw;
-        }
-    }
-
-    void stop() {
-        running = false;
-    }
-
     UA_Client* client;
     detail::ClientContext context;
-    std::atomic<bool> running{false};
 };
 
 }  // namespace detail
@@ -353,7 +313,9 @@ Client::Client(Client&&) noexcept = default;
 Client& Client::operator=(Client&&) noexcept = default;
 
 ClientConfig& Client::config() noexcept {
-    return connection_->config();
+    auto* config = detail::getConfig(handle());
+    assert(config != nullptr);
+    return asWrapper<ClientConfig>(*config);
 }
 
 const ClientConfig& Client::config() const noexcept {
@@ -430,7 +392,7 @@ void Client::onSessionClosed(StateCallback callback) {
 }
 
 void Client::onInactive(InactivityCallback callback) {
-    detail::getContext(*this).inactivityCallback = std::move(callback);
+    context().inactivityCallback = std::move(callback);
     detail::getConfig(*this).inactivityCallback = [](UA_Client* client) noexcept {
         auto* context = detail::getContext(client);
         if (context != nullptr && context->inactivityCallback != nullptr) {
@@ -481,7 +443,7 @@ Subscription<Client> Client::createSubscription(SubscriptionParameters& paramete
 
 std::vector<Subscription<Client>> Client::getSubscriptions() {
     std::vector<Subscription<Client>> result;
-    auto& subscriptions = detail::getContext(*this).subscriptions;
+    auto& subscriptions = context().subscriptions;
     subscriptions.eraseStale();
     subscriptions.iterate([&](const auto& pair) { result.emplace_back(*this, pair.first); });
     return result;
@@ -489,19 +451,32 @@ std::vector<Subscription<Client>> Client::getSubscriptions() {
 #endif
 
 void Client::runIterate(uint16_t timeoutMilliseconds) {
-    connection_->runIterate(timeoutMilliseconds);
+    throwIfBad(UA_Client_run_iterate(handle(), timeoutMilliseconds));
+    context().exceptionCatcher.rethrow();
 }
 
 void Client::run() {
-    connection_->run();
+    if (context().running) {
+        return;
+    }
+    context().running = true;
+    try {
+        while (context().running) {
+            runIterate(1000);
+            context().exceptionCatcher.rethrow();
+        }
+    } catch (...) {
+        context().running = false;
+        throw;
+    }
 }
 
 void Client::stop() {
-    connection_->stop();
+    context().running = false;
 }
 
 bool Client::isRunning() const noexcept {
-    return connection_->running;
+    return context().running;
 }
 
 Node<Client> Client::getNode(NodeId id) {
@@ -530,6 +505,14 @@ UA_Client* Client::handle() noexcept {
 
 const UA_Client* Client::handle() const noexcept {
     return connection_->client;
+}
+
+detail::ClientContext& Client::context() noexcept {
+    return connection_->context;
+}
+
+const detail::ClientContext& Client::context() const noexcept {
+    return connection_->context;
 }
 
 /* -------------------------------------- Helper functions -------------------------------------- */

@@ -277,6 +277,9 @@ public:
     const UA_Client* handle() const noexcept;
 
 private:
+    detail::ClientContext& context() noexcept;
+    const detail::ClientContext& context() const noexcept;
+
     friend detail::ClientConnection& detail::getConnection(Client& client) noexcept;
 
     std::unique_ptr<detail::ClientConnection> connection_;

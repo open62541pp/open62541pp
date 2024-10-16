@@ -273,6 +273,9 @@ public:
     const UA_Server* handle() const noexcept;
 
 private:
+    detail::ServerContext& context() noexcept;
+    const detail::ServerContext& context() const noexcept;
+
     friend detail::ServerConnection& detail::getConnection(Server& server) noexcept;
 
     std::unique_ptr<detail::ServerConnection> connection_;

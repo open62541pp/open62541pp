@@ -1,6 +1,7 @@
 #pragma once
 
 #include <array>
+#include <atomic>
 #include <cassert>
 #include <cstdint>
 #include <utility>  // pair
@@ -27,6 +28,9 @@ inline constexpr size_t clientStateCount = 4;
  * Mainly used to store stateful function pointers.
  */
 struct ClientContext {
+    ExceptionCatcher exceptionCatcher;
+    std::atomic<bool> running{false};
+
     std::vector<DataType> dataTypes;
     std::unique_ptr<UA_DataTypeArray> dataTypeArray;
 
@@ -46,8 +50,6 @@ struct ClientContext {
 #endif
     std::array<StateCallback, clientStateCount> stateCallbacks;
     InactivityCallback inactivityCallback;
-
-    ExceptionCatcher exceptionCatcher;
 };
 
 }  // namespace opcua::detail
