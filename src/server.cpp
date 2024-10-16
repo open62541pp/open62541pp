@@ -115,10 +115,9 @@ void ServerConfig::setApplicationName(std::string_view name) {
 }
 
 static void copyUserTokenPoliciesToEndpoints(UA_ServerConfig& config) {
-    // copy config->accessControl.userTokenPolicies -> config->endpoints[i].userIdentityTokens
+    // copy config.accessControl.userTokenPolicies -> config.endpoints[i].userIdentityTokens
     auto& ac = config.accessControl;
-    for (size_t i = 0; i < config.endpointsSize; ++i) {
-        auto& endpoint = config.endpoints[i];  // NOLINT
+    for (auto& endpoint : Span(config.endpoints, config.endpointsSize)) {
         detail::deallocateArray(
             endpoint.userIdentityTokens,
             endpoint.userIdentityTokensSize,

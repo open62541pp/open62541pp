@@ -444,14 +444,8 @@ void Client::connect(std::string_view endpointUrl) {
 }
 
 void Client::connect(std::string_view endpointUrl, const Login& login) {
-#if UAPP_OPEN62541_VER_LE(1, 0)
-    const auto func = UA_Client_connect_username;
-#else
-    const auto func = UA_Client_connectUsername;
-#endif
-    throwIfBad(func(
-        handle(), std::string(endpointUrl).c_str(), login.username.c_str(), login.password.c_str()
-    ));
+    config().setUserIdentityToken(UserNameIdentityToken(login.username, login.password));
+    connect(endpointUrl);
 }
 
 void Client::disconnect() noexcept {

@@ -223,7 +223,7 @@ TEST_CASE("Client methods") {
     Client client;
     client.connect(localServerUrl);
 
-    SUBCASE("Namespace array") {
+    SUBCASE("getNamespaceArray") {
         const auto namespaces = client.getNamespaceArray();
         CHECK(namespaces.size() == 2);
         CHECK(namespaces.at(0) == "http://opcfoundation.org/UA/");
