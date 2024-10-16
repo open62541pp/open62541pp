@@ -113,10 +113,6 @@ TEST_CASE_TEMPLATE("Connection", T, Client, Server) {
         CHECK(detail::getConfig(connection.handle()) != nullptr);
         CHECK(detail::getConfig(connection.handle()) == &detail::getConfig(connection));
 
-        CHECK(detail::getConnection(nativeNull) == nullptr);
-        CHECK(detail::getConnection(connection.handle()) != nullptr);
-        CHECK(detail::getConnection(connection.handle()) == &detail::getConnection(connection));
-
         CHECK(detail::getWrapper(nativeNull) == nullptr);
         CHECK(detail::getWrapper(connection.handle()) != nullptr);
         CHECK(detail::getWrapper(connection.handle())->handle() == connection.handle());

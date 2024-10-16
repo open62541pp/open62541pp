@@ -523,10 +523,12 @@ const UA_Client* Client::handle() const noexcept {
 }
 
 detail::ClientContext& Client::context() noexcept {
+    assert(connection_);
     return connection_->context;
 }
 
 const detail::ClientContext& Client::context() const noexcept {
+    assert(connection_);
     return connection_->context;
 }
 
@@ -562,30 +564,16 @@ Client* getWrapper(UA_Client* client) noexcept {
     return static_cast<Client*>(config->clientContext);
 }
 
-ClientConnection* getConnection(UA_Client* client) noexcept {
+ClientContext* getContext(UA_Client* client) noexcept {
     auto* wrapper = getWrapper(client);
     if (wrapper == nullptr) {
         return nullptr;
     }
-    return wrapper->connection_.get();
-}
-
-ClientConnection& getConnection(Client& client) noexcept {
-    auto* connection = client.connection_.get();
-    assert(connection != nullptr);
-    return *connection;
-}
-
-ClientContext* getContext(UA_Client* client) noexcept {
-    auto* connection = getConnection(client);
-    if (connection == nullptr) {
-        return nullptr;
-    }
-    return &connection->context;
+    return &getContext(*wrapper);
 }
 
 ClientContext& getContext(Client& client) noexcept {
-    return getConnection(client).context;
+    return client.context();
 }
 
 }  // namespace detail

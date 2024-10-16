@@ -538,10 +538,12 @@ const UA_Server* Server::handle() const noexcept {
 }
 
 detail::ServerContext& Server::context() noexcept {
+    assert(connection_);
     return connection_->context;
 }
 
 const detail::ServerContext& Server::context() const noexcept {
+    assert(connection_);
     return connection_->context;
 }
 
@@ -591,30 +593,16 @@ Server* getWrapper(UA_Server* server) noexcept {
 #endif
 }
 
-ServerConnection* getConnection(UA_Server* server) noexcept {
+ServerContext* getContext(UA_Server* server) noexcept {
     auto* wrapper = getWrapper(server);
     if (wrapper == nullptr) {
         return nullptr;
     }
-    return wrapper->connection_.get();
-}
-
-ServerConnection& getConnection(Server& server) noexcept {
-    auto* connection = server.connection_.get();
-    assert(connection != nullptr);
-    return *connection;
-}
-
-ServerContext* getContext(UA_Server* server) noexcept {
-    auto* connection = getConnection(server);
-    if (connection == nullptr) {
-        return nullptr;
-    }
-    return &connection->context;
+    return &getContext(*wrapper);
 }
 
 ServerContext& getContext(Server& server) noexcept {
-    return getConnection(server).context;
+    return server.context();
 }
 
 }  // namespace detail

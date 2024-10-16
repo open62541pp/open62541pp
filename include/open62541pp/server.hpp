@@ -44,9 +44,6 @@ UA_Logger* getLogger(UA_ServerConfig* config) noexcept;
 
 Server* getWrapper(UA_Server* server) noexcept;
 
-ServerConnection* getConnection(UA_Server* server) noexcept;
-ServerConnection& getConnection(Server& server) noexcept;
-
 ServerContext* getContext(UA_Server* server) noexcept;
 ServerContext& getContext(Server& server) noexcept;
 
@@ -276,8 +273,7 @@ private:
     detail::ServerContext& context() noexcept;
     const detail::ServerContext& context() const noexcept;
 
-    friend detail::ServerConnection* detail::getConnection(UA_Server* server) noexcept;
-    friend detail::ServerConnection& detail::getConnection(Server& server) noexcept;
+    friend detail::ServerContext& detail::getContext(Server& server) noexcept;
 
     std::unique_ptr<detail::ServerConnection> connection_;
 };

@@ -41,9 +41,6 @@ UA_Logger* getLogger(UA_ClientConfig* config) noexcept;
 
 Client* getWrapper(UA_Client* client) noexcept;
 
-ClientConnection* getConnection(UA_Client* client) noexcept;
-ClientConnection& getConnection(Client& client) noexcept;
-
 ClientContext* getContext(UA_Client* client) noexcept;
 ClientContext& getContext(Client& client) noexcept;
 
@@ -280,8 +277,7 @@ private:
     detail::ClientContext& context() noexcept;
     const detail::ClientContext& context() const noexcept;
 
-    friend detail::ClientConnection* detail::getConnection(UA_Client* client) noexcept;
-    friend detail::ClientConnection& detail::getConnection(Client& client) noexcept;
+    friend detail::ClientContext& detail::getContext(Client& client) noexcept;
 
     std::unique_ptr<detail::ClientConnection> connection_;
 };
