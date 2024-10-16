@@ -36,7 +36,6 @@ static void deleteClient(UA_Client* client) noexcept {
     if (client == nullptr) {
         return;
     }
-    UA_Client_disconnect(client);
 #if UAPP_OPEN62541_VER_LE(1, 0)
     // UA_ClientConfig_deleteMembers won't delete the logger in v1.0
     detail::clear(UA_Client_getConfig(client)->logger);
@@ -270,8 +269,8 @@ Client::Client()
 
 // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
 Client::Client(ClientConfig&& config)
-    : client_(allocateClient(config)),
-      context_(std::make_unique<detail::ClientContext>()) {
+    : context_(std::make_unique<detail::ClientContext>()),
+      client_(allocateClient(config)) {
     if (handle() == nullptr) {
         throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
     }
@@ -291,21 +290,18 @@ Client::Client(
     : Client(ClientConfig(certificate, privateKey, trustList, revocationList)) {}
 #endif
 
-Client::~Client() {
-    deleteClient(handle());
-}
+Client::~Client() = default;
 
 Client::Client(Client&& other) noexcept
-    : client_(std::exchange(other.client_, {})),
-      context_(std::move(other.context_)) {
+    : context_(std::move(other.context_)),
+      client_(std::move(other.client_)) {
     setWrapperAsContextPointer(*this);
 }
 
 Client& Client::operator=(Client&& other) noexcept {
     if (this != &other) {
-        deleteClient(handle());
-        client_ = std::exchange(other.client_, {});
         context_ = std::move(other.context_);
+        client_ = std::move(other.client_);
         setWrapperAsContextPointer(*this);
     }
     return *this;
@@ -496,11 +492,11 @@ Node<Client> Client::getViewsNode() {
 }
 
 UA_Client* Client::handle() noexcept {
-    return client_;
+    return client_.get();
 }
 
 const UA_Client* Client::handle() const noexcept {
-    return client_;
+    return client_.get();
 }
 
 detail::ClientContext& Client::context() noexcept {
@@ -509,6 +505,13 @@ detail::ClientContext& Client::context() noexcept {
 
 const detail::ClientContext& Client::context() const noexcept {
     return *context_;
+}
+
+void Client::Deleter::operator()(UA_Client* client) noexcept {
+    if (client != nullptr) {
+        UA_Client_disconnect(client);
+        deleteClient(client);
+    }
 }
 
 /* -------------------------------------- Helper functions -------------------------------------- */

@@ -253,8 +253,8 @@ Server::Server()
 
 // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
 Server::Server(ServerConfig&& config)
-    : server_(UA_Server_newWithConfig(config.handle())),
-      context_(std::make_unique<detail::ServerContext>()) {
+    : context_(std::make_unique<detail::ServerContext>()),
+      server_(UA_Server_newWithConfig(config.handle())) {
     if (handle() == nullptr) {
         throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
     }
@@ -266,28 +266,18 @@ Server::Server(ServerConfig&& config)
     setWrapperAsContextPointer(*this);
 }
 
-static void deleteServer(UA_Server* server) {
-    if (server != nullptr) {
-        UA_Server_run_shutdown(server);
-        UA_Server_delete(server);
-    }
-}
-
-Server::~Server() {
-    deleteServer(handle());
-}
+Server::~Server() = default;
 
 Server::Server(Server&& other) noexcept
-    : server_(std::exchange(other.server_, {})),
-      context_(std::move(other.context_)) {
+    : context_(std::move(other.context_)),
+      server_(std::move(other.server_)) {
     setWrapperAsContextPointer(*this);
 }
 
 Server& Server::operator=(Server&& other) noexcept {
     if (this != &other) {
-        deleteServer(handle());
-        server_ = std::exchange(other.server_, {});
         context_ = std::move(other.context_);
+        server_ = std::move(other.server_);
         setWrapperAsContextPointer(*this);
     }
     return *this;
@@ -507,11 +497,11 @@ Node<Server> Server::getViewsNode() {
 }
 
 UA_Server* Server::handle() noexcept {
-    return server_;
+    return server_.get();
 }
 
 const UA_Server* Server::handle() const noexcept {
-    return server_;
+    return server_.get();
 }
 
 detail::ServerContext& Server::context() noexcept {
@@ -520,6 +510,13 @@ detail::ServerContext& Server::context() noexcept {
 
 const detail::ServerContext& Server::context() const noexcept {
     return *context_;
+}
+
+void Server::Deleter::operator()(UA_Server* server) noexcept {
+    if (server != nullptr) {
+        UA_Server_run_shutdown(server);
+        UA_Server_delete(server);
+    }
 }
 
 /* -------------------------------------- Helper functions -------------------------------------- */

@@ -271,8 +271,12 @@ private:
 
     friend detail::ServerContext& detail::getContext(Server& server) noexcept;
 
-    UA_Server* server_;
+    struct Deleter {
+        void operator()(UA_Server* server) noexcept;
+    };
+
     std::unique_ptr<detail::ServerContext> context_;
+    std::unique_ptr<UA_Server, Deleter> server_;
 };
 
 inline bool operator==(const Server& lhs, const Server& rhs) noexcept {

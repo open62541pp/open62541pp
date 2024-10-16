@@ -275,8 +275,12 @@ private:
 
     friend detail::ClientContext& detail::getContext(Client& client) noexcept;
 
-    UA_Client* client_;
+    struct Deleter {
+        void operator()(UA_Client* client) noexcept;
+    };
+
     std::unique_ptr<detail::ClientContext> context_;
+    std::unique_ptr<UA_Client, Deleter> client_;
 };
 
 inline bool operator==(const Client& lhs, const Client& rhs) noexcept {
