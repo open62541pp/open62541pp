@@ -78,6 +78,12 @@ TEST_CASE_TEMPLATE("Connection", T, Client, Server) {
 
     T connection;
 
+    SUBCASE("config") {
+        auto& config = detail::getConfig(connection);
+        CHECK(connection.config().handle() == &config);
+        CHECK(std::as_const(connection).config().handle() == &config);
+    }
+
     SUBCASE("handle") {
         CHECK(connection.handle() != nullptr);
         CHECK(std::as_const(connection).handle() != nullptr);
