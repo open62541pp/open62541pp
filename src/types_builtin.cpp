@@ -19,7 +19,7 @@ std::ostream& operator<<(std::ostream& os, const String& str) {
 /* -------------------------------------------- Guid -------------------------------------------- */
 
 std::string Guid::toString() const {
-    // <Data1>-<Data2>-<Data3>-<Data4[0:1]>-<Data4[2:7]>
+    // <Data1>-<Data2>-<Data3>-<Data4[0:2]>-<Data4[2:8]>
     // each value is formatted as a hexadecimal number with padded zeros
     std::ostringstream ss;
     ss << std::hex << std::uppercase << std::setfill('0');
@@ -28,13 +28,11 @@ std::string Guid::toString() const {
     ss << std::setw(4) << handle()->data2 << "-";
     ss << std::setw(4) << handle()->data3 << "-";
 
-    const auto writeBit = [&](uint8_t bit) { ss << std::setw(2) << static_cast<int>(bit); };
-    for (size_t i = 0; i <= 1; ++i) {
-        writeBit(handle()->data4[i]);  // NOLINT
-    }
-    ss << "-";
-    for (size_t i = 2; i <= 7; ++i) {
-        writeBit(handle()->data4[i]);  // NOLINT
+    for (size_t i = 0; i < 8; ++i) {
+        ss << std::setw(2) << static_cast<int>(handle()->data4[i]);  // NOLINT
+        if (i == 1) {
+            ss << "-";
+        }
     }
     return ss.str();
 }

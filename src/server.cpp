@@ -20,21 +20,153 @@
 #include "open62541pp/types_composed.hpp"
 #include "open62541pp/wrapper.hpp"  // asWrapper
 
-#include "server_config.hpp"
-
 namespace opcua {
+
+/* ---------------------------------------- ServerConfig ---------------------------------------- */
+
+ServerConfig::ServerConfig() {
+    throwIfBad(UA_ServerConfig_setDefault(handle()));
+}
+
+ServerConfig::ServerConfig(uint16_t port, const ByteString& certificate) {
+    throwIfBad(UA_ServerConfig_setMinimal(
+        handle(), port, certificate.empty() ? nullptr : certificate.handle()
+    ));
+}
+
+#ifdef UA_ENABLE_ENCRYPTION
+ServerConfig::ServerConfig(
+    uint16_t port,
+    const ByteString& certificate,
+    const ByteString& privateKey,
+    Span<const ByteString> trustList,
+    Span<const ByteString> issuerList,
+    Span<const ByteString> revocationList
+) {
+    throwIfBad(UA_ServerConfig_setDefaultWithSecurityPolicies(
+        handle(),
+        port,
+        certificate.handle(),
+        privateKey.handle(),
+        asNative(trustList.data()),
+        trustList.size(),
+        asNative(issuerList.data()),
+        issuerList.size(),
+        asNative(revocationList.data()),
+        revocationList.size()
+    ));
+}
+#endif
+
+// NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
+ServerConfig::ServerConfig(UA_ServerConfig&& native)
+    : Wrapper(std::exchange(native, {})) {}
+
+ServerConfig::~ServerConfig() {
+    UA_ServerConfig_clean(handle());
+}
+
+// NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
+ServerConfig::ServerConfig(ServerConfig&& other) noexcept
+    : Wrapper(std::exchange(other.native(), {})) {}
+
+ServerConfig& ServerConfig::operator=(ServerConfig&& other) noexcept {
+    if (this != &other) {
+        native() = std::exchange(other.native(), {});
+    }
+    return *this;
+}
+
+void ServerConfig::setLogger(LogFunction func) {
+    if (func) {
+        auto adapter = std::make_unique<LoggerDefault>(std::move(func));
+        auto* logger = detail::getLogger(handle());
+        assert(logger != nullptr);
+        detail::clear(*logger);
+        *logger = adapter.release()->create(true);
+    }
+}
+
+inline static ApplicationDescription& getApplicationDescription(UA_ServerConfig& config) noexcept {
+    return asWrapper<ApplicationDescription>(config.applicationDescription);
+}
+
+// copy to endpoints needed, see: https://github.com/open62541/open62541/issues/1175
+inline static void copyApplicationDescriptionToEndpoints(UA_ServerConfig& config) {
+    auto endpoints = Span(asWrapper<EndpointDescription>(config.endpoints), config.endpointsSize);
+    for (auto& endpoint : endpoints) {
+        endpoint.getServer() = getApplicationDescription(config);
+    }
+}
+
+void ServerConfig::setApplicationUri(std::string_view uri) {
+    getApplicationDescription(native()).getApplicationUri() = String(uri);
+    copyApplicationDescriptionToEndpoints(native());
+}
+
+void ServerConfig::setProductUri(std::string_view uri) {
+    getApplicationDescription(native()).getProductUri() = String(uri);
+    copyApplicationDescriptionToEndpoints(native());
+}
+
+void ServerConfig::setApplicationName(std::string_view name) {
+    getApplicationDescription(native()).getApplicationName() = LocalizedText("", name);
+    copyApplicationDescriptionToEndpoints(native());
+}
+
+static void copyUserTokenPoliciesToEndpoints(UA_ServerConfig& config) {
+    // copy config.accessControl.userTokenPolicies -> config.endpoints[i].userIdentityTokens
+    auto& ac = config.accessControl;
+    for (auto& endpoint : Span(config.endpoints, config.endpointsSize)) {
+        detail::deallocateArray(
+            endpoint.userIdentityTokens,
+            endpoint.userIdentityTokensSize,
+            UA_TYPES[UA_TYPES_USERTOKENPOLICY]
+        );
+        endpoint.userIdentityTokens = detail::copyArray(
+            ac.userTokenPolicies, ac.userTokenPoliciesSize, UA_TYPES[UA_TYPES_USERTOKENPOLICY]
+        );
+        endpoint.userIdentityTokensSize = ac.userTokenPoliciesSize;
+    }
+}
+
+static void setHighestSecurityPolicyForUserTokenTransfer(UA_ServerConfig& config) {
+    auto& ac = config.accessControl;
+    const Span securityPolicies(config.securityPolicies, config.securityPoliciesSize);
+    Span userTokenPolicies(
+        asWrapper<UserTokenPolicy>(ac.userTokenPolicies), ac.userTokenPoliciesSize
+    );
+    if (!securityPolicies.empty()) {
+        const auto& highestSecurityPoliciyUri = securityPolicies.back().policyUri;
+        for (auto& userTokenPolicy : userTokenPolicies) {
+            if (userTokenPolicy.getTokenType() != UserTokenType::Anonymous &&
+                userTokenPolicy.getSecurityPolicyUri().empty()) {
+                userTokenPolicy.getSecurityPolicyUri() = String(highestSecurityPoliciyUri);
+            }
+        }
+    }
+}
+
+void ServerConfig::setAccessControl(AccessControlBase& accessControl) {
+    detail::clear(native().accessControl);
+    native().accessControl = accessControl.create(false);
+    setHighestSecurityPolicyForUserTokenTransfer(native());
+    copyUserTokenPoliciesToEndpoints(native());
+}
+
+// NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
+void ServerConfig::setAccessControl(std::unique_ptr<AccessControlBase>&& accessControl) {
+    if (accessControl != nullptr) {
+        detail::clear(native().accessControl);
+        native().accessControl = accessControl.release()->create(true);
+        setHighestSecurityPolicyForUserTokenTransfer(native());
+        copyUserTokenPoliciesToEndpoints(native());
+    }
+}
 
 /* --------------------------------------- ConnectionBase -------------------------------------- */
 
 namespace detail {
-
-[[nodiscard]] static UA_Server* allocateServer() {
-    auto* server = UA_Server_new();
-    if (server == nullptr) {
-        throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
-    }
-    return server;
-}
 
 static UA_StatusCode activateSession(
     UA_Server* server,
@@ -80,8 +212,16 @@ static void closeSession(
 }
 
 struct ServerConnection : public ConnectionBase<Server> {
-    explicit ServerConnection()
-        : server(allocateServer()) {}
+    // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
+    explicit ServerConnection(ServerConfig&& config)
+        : server(UA_Server_newWithConfig(config.handle())) {
+        if (server == nullptr) {
+            throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
+        }
+        config = {};
+        updateLoggerStackPointer();
+        applyDefaults();
+    }
 
     ~ServerConnection() {
         // don't use stop method here because it might throw an exception
@@ -103,20 +243,16 @@ struct ServerConnection : public ConnectionBase<Server> {
         return asWrapper<ServerConfig>(*config);
     }
 
-    void applySessionRegistry() {
-        // Make sure to call this function only once after access control is initialized or changed.
-        // The function pointers to activateSession / closeSession might not be unique and the
-        // the pointer comparison might fail resulting in stack overflows:
-        // - https://github.com/open62541pp/open62541pp/issues/285
-        // - https://stackoverflow.com/questions/31209693/static-library-linked-two-times
-        if (config()->accessControl.activateSession != &activateSession) {
-            context.sessionRegistry.activateSessionUser = config()->accessControl.activateSession;
-            config()->accessControl.activateSession = &activateSession;
+    void updateLoggerStackPointer() noexcept {
+#if UAPP_OPEN62541_VER_LE(1, 2)
+        for (auto& layer : Span(config()->networkLayers, config()->networkLayersSize)) {
+            // https://github.com/open62541/open62541/blob/v1.0.6/arch/network_tcp.c#L556-L563
+            *static_cast<UA_Logger**>(layer.handle) = &config()->logger;
         }
-        if (config()->accessControl.closeSession != &closeSession) {
-            context.sessionRegistry.closeSessionUser = config()->accessControl.closeSession;
-            config()->accessControl.closeSession = &closeSession;
+        for (auto& policy : Span(config()->securityPolicies, config()->securityPoliciesSize)) {
+            policy.logger = &config()->logger;
         }
+#endif
     }
 
     void applyDefaults() {
@@ -137,8 +273,25 @@ struct ServerConnection : public ConnectionBase<Server> {
 #endif
     }
 
+    void applySessionRegistry() {
+        // Make sure to call this function only once after access control is initialized or changed.
+        // The function pointers to activateSession / closeSession might not be unique and the
+        // the pointer comparison might fail resulting in stack overflows:
+        // - https://github.com/open62541pp/open62541pp/issues/285
+        // - https://stackoverflow.com/questions/31209693/static-library-linked-two-times
+        if (config()->accessControl.activateSession != &activateSession) {
+            context.sessionRegistry.activateSessionUser = config()->accessControl.activateSession;
+            config()->accessControl.activateSession = &activateSession;
+        }
+        if (config()->accessControl.closeSession != &closeSession) {
+            context.sessionRegistry.closeSessionUser = config()->accessControl.closeSession;
+            config()->accessControl.closeSession = &closeSession;
+        }
+    }
+
     void runStartup() {
         applyDefaults();
+        applySessionRegistry();
         throwIfBad(UA_Server_run_startup(server));
         running = true;
     }
@@ -187,108 +340,38 @@ struct ServerConnection : public ConnectionBase<Server> {
 
 /* ------------------------------------------- Server ------------------------------------------- */
 
-Server::Server(uint16_t port, ByteString certificate, LogFunction logger)
-    : connection_(std::make_unique<detail::ServerConnection>()) {
-    // The logger should be set as soon as possible, ideally even before UA_ServerConfig_setMinimal.
-    // However, the logger gets overwritten by UA_ServerConfig_setMinimal() in older versions of
-    // open62541. The best we can do in this case, is to first call UA_ServerConfig_setMinimal and
-    // then setLogger.
-    auto setConfig = [&] {
-        throwIfBad(UA_ServerConfig_setMinimal(
-            detail::getConfig(handle()), port, certificate.empty() ? nullptr : certificate.handle()
-        ));
-    };
-#if UAPP_OPEN62541_VER_GE(1, 1)
-    setLogger(std::move(logger));
-    setConfig();
-#else
-    setConfig();
-    setLogger(std::move(logger));
-#endif
-    connection_->applySessionRegistry();
-    connection_->applyDefaults();
-}
+Server::Server()
+    : Server(ServerConfig()) {}
 
-#ifdef UA_ENABLE_ENCRYPTION
-Server::Server(
-    uint16_t port,
-    const ByteString& certificate,
-    const ByteString& privateKey,
-    Span<const ByteString> trustList,
-    Span<const ByteString> issuerList,
-    Span<const ByteString> revocationList
-)
-    : connection_(std::make_unique<detail::ServerConnection>()) {
-    throwIfBad(UA_ServerConfig_setDefaultWithSecurityPolicies(
-        detail::getConfig(handle()),
-        port,
-        certificate.handle(),
-        privateKey.handle(),
-        asNative(trustList.data()),
-        trustList.size(),
-        asNative(issuerList.data()),
-        issuerList.size(),
-        asNative(revocationList.data()),
-        revocationList.size()
-    ));
-    connection_->applySessionRegistry();
-    connection_->applyDefaults();
-}
-#endif
+Server::Server(ServerConfig&& config)
+    : connection_(std::make_unique<detail::ServerConnection>(std::move(config))) {}
 
 Server::~Server() = default;
 
 Server::Server(Server&&) noexcept = default;
 Server& Server::operator=(Server&&) noexcept = default;
 
-void Server::setLogger(LogFunction logger) {
-    connection_->config().setLogger(std::move(logger));
+ServerConfig& Server::config() noexcept {
+    return connection_->config();
 }
 
-inline static ApplicationDescription& getApplicationDescription(Server& server) noexcept {
-    return asWrapper<ApplicationDescription>(detail::getConfig(server).applicationDescription);
-}
-
-// copy to endpoints needed, see: https://github.com/open62541/open62541/issues/1175
-inline static void copyApplicationDescriptionToEndpoints(Server& server) {
-    auto endpoints = Span(
-        asWrapper<EndpointDescription>(detail::getConfig(server).endpoints),
-        detail::getConfig(server).endpointsSize
-    );
-    for (auto& endpoint : endpoints) {
-        endpoint.getServer() = getApplicationDescription(server);
-    }
+const ServerConfig& Server::config() const noexcept {
+    return const_cast<Server*>(this)->config();  // NOLINT
 }
 
 void Server::setCustomHostname([[maybe_unused]] std::string_view hostname) {
 #if UAPP_OPEN62541_VER_LE(1, 3)
-    asWrapper<String>(detail::getConfig(*this).customHostname) = String(hostname);
+    asWrapper<String>(config()->customHostname) = String(hostname);
 #endif
 }
 
-void Server::setApplicationName(std::string_view name) {
-    getApplicationDescription(*this).getApplicationName() = LocalizedText("", name);
-    copyApplicationDescriptionToEndpoints(*this);
-}
-
-void Server::setApplicationUri(std::string_view uri) {
-    getApplicationDescription(*this).getApplicationUri() = String(uri);
-    copyApplicationDescriptionToEndpoints(*this);
-}
-
-void Server::setProductUri(std::string_view uri) {
-    getApplicationDescription(*this).getProductUri() = String(uri);
-    copyApplicationDescriptionToEndpoints(*this);
-}
-
-void Server::setAccessControl(AccessControlBase& accessControl) {
-    connection_->config().setAccessControl(accessControl);
-    connection_->applySessionRegistry();
-}
-
-void Server::setAccessControl(std::unique_ptr<AccessControlBase> accessControl) {
-    connection_->config().setAccessControl(std::move(accessControl));
-    connection_->applySessionRegistry();
+void Server::setCustomDataTypes(std::vector<DataType> dataTypes) {
+    auto& context = connection_->context;
+    context.dataTypes = std::move(dataTypes);
+    context.dataTypeArray = std::make_unique<UA_DataTypeArray>(
+        detail::createDataTypeArray(context.dataTypes)
+    );
+    config()->customDataTypes = context.dataTypeArray.get();
 }
 
 std::vector<Session> Server::getSessions() {
@@ -307,15 +390,6 @@ std::vector<std::string> Server::getNamespaceArray() {
 
 NamespaceIndex Server::registerNamespace(std::string_view uri) {
     return UA_Server_addNamespace(handle(), std::string(uri).c_str());
-}
-
-void Server::setCustomDataTypes(std::vector<DataType> dataTypes) {
-    auto& context = connection_->context;
-    context.dataTypes = std::move(dataTypes);
-    context.dataTypeArray = std::make_unique<UA_DataTypeArray>(
-        detail::createDataTypeArray(context.dataTypes)
-    );
-    connection_->config()->customDataTypes = context.dataTypeArray.get();
 }
 
 static void valueCallbackOnRead(
@@ -483,8 +557,7 @@ UA_ServerConfig& getConfig(Server& server) noexcept {
     return *getConfig(server.handle());
 }
 
-UA_Logger* getLogger(UA_Server* server) noexcept {
-    auto* config = detail::getConfig(server);
+UA_Logger* getLogger(UA_ServerConfig* config) noexcept {
     if (config == nullptr) {
         return nullptr;
     }
@@ -493,10 +566,6 @@ UA_Logger* getLogger(UA_Server* server) noexcept {
 #else
     return &config->logger;
 #endif
-}
-
-UA_Logger* getLogger(Server& server) noexcept {
-    return getLogger(server.handle());
 }
 
 ServerConnection* getConnection(UA_Server* server) noexcept {

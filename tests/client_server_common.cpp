@@ -8,9 +8,6 @@
 #include "open62541pp/plugin/log.hpp"
 #include "open62541pp/server.hpp"
 
-#include "client_config.hpp"
-#include "server_config.hpp"
-
 using namespace opcua;
 
 TEST_CASE_TEMPLATE("Config", T, ClientConfig, ServerConfig) {
@@ -33,6 +30,29 @@ TEST_CASE_TEMPLATE("Config", T, ClientConfig, ServerConfig) {
     }
 
     T config;
+
+    SUBCASE("setLogger") {
+        static size_t counter = 0;
+        static LogLevel lastLogLevel{};
+        static LogCategory lastLogCategory{};
+        static std::string lastMessage{};
+
+        config.setLogger([&](LogLevel level, LogCategory category, std::string_view message) {
+            counter++;
+            lastLogLevel = level;
+            lastLogCategory = category;
+            lastMessage = message;
+        });
+
+        // passing a nullptr should do nothing
+        config.setLogger(nullptr);
+
+        UA_LOG_INFO(detail::getLogger(config.handle()), UA_LOGCATEGORY_USERLAND, "Message");
+        CHECK(counter == 1);
+        CHECK(lastLogLevel == LogLevel::Info);
+        CHECK(lastLogCategory == LogCategory::Userland);
+        CHECK(lastMessage == "Message");
+    }
 
     SUBCASE("handle") {
         CHECK(config.handle() != nullptr);
@@ -58,32 +78,15 @@ TEST_CASE_TEMPLATE("Connection", T, Client, Server) {
 
     T connection;
 
+    SUBCASE("config") {
+        auto& config = detail::getConfig(connection);
+        CHECK(connection.config().handle() == &config);
+        CHECK(std::as_const(connection).config().handle() == &config);
+    }
+
     SUBCASE("handle") {
         CHECK(connection.handle() != nullptr);
         CHECK(std::as_const(connection).handle() != nullptr);
-    }
-
-    SUBCASE("setLogger") {
-        static size_t counter = 0;
-        static LogLevel lastLogLevel{};
-        static LogCategory lastLogCategory{};
-        static std::string lastMessage{};
-
-        connection.setLogger([&](LogLevel level, LogCategory category, std::string_view message) {
-            counter++;
-            lastLogLevel = level;
-            lastLogCategory = category;
-            lastMessage = message;
-        });
-
-        // passing a nullptr should do nothing
-        connection.setLogger(nullptr);
-
-        UA_LOG_INFO(detail::getLogger(connection), UA_LOGCATEGORY_USERLAND, "Message");
-        CHECK(counter == 1);
-        CHECK(lastLogLevel == LogLevel::Info);
-        CHECK(lastLogCategory == LogCategory::Userland);
-        CHECK(lastMessage == "Message");
     }
 
     SUBCASE("setCustomDataTypes") {
@@ -109,10 +112,6 @@ TEST_CASE_TEMPLATE("Connection", T, Client, Server) {
         CHECK(detail::getConfig(nativeNull) == nullptr);
         CHECK(detail::getConfig(connection.handle()) != nullptr);
         CHECK(detail::getConfig(connection.handle()) == &detail::getConfig(connection));
-
-        CHECK(detail::getLogger(nativeNull) == nullptr);
-        CHECK(detail::getLogger(connection.handle()) != nullptr);
-        CHECK(detail::getLogger(connection.handle()) == detail::getLogger(connection));
 
         CHECK(detail::getConnection(nativeNull) == nullptr);
         CHECK(detail::getConnection(connection.handle()) != nullptr);

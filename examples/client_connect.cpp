@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
 
     opcua::Client client;
     if (username) {
-        client.setUserIdentityToken(
+        client.config().setUserIdentityToken(
             opcua::UserNameIdentityToken(username.value(), password.value_or(""))
         );
     }

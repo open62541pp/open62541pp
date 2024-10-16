@@ -4,7 +4,7 @@
 #include <open62541pp/services/nodemanagement.hpp>
 
 int main() {
-    opcua::Server server(4840);
+    opcua::Server server;
 
     // Counter variable as an example of a simple data source
     int counter = 0;

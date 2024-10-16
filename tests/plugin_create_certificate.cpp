@@ -77,23 +77,35 @@ TEST_CASE("Encrypted connection server/client") {
     );
 
     SUBCASE("Connect without trusting each others certificate") {
-        Server server(4840, certServer.certificate, certServer.privateKey, {}, {}, {});
-        ServerRunner serverRunner(server);
+        ServerConfig serverConfig(4840, certServer.certificate, certServer.privateKey, {}, {}, {});
+        Server server(std::move(serverConfig));
 
-        Client client(certClient.certificate, certClient.privateKey, {}, {});
-        client.setSecurityMode(MessageSecurityMode::SignAndEncrypt);
-        CHECK_THROWS(client.connect("opc.tcp://localhost:4840"));
+        ClientConfig clientConfig(certClient.certificate, certClient.privateKey, {}, {});
+        clientConfig.setSecurityMode(MessageSecurityMode::SignAndEncrypt);
+        Client client(std::move(clientConfig));
+
+        {
+            ServerRunner serverRunner(server);
+            CHECK_THROWS(client.connect("opc.tcp://localhost:4840"));
+        }
     }
 
     SUBCASE("Connect with trust lists") {
-        Server server(
+        ServerConfig serverConfig(
             4840, certServer.certificate, certServer.privateKey, {certClient.certificate}, {}, {}
         );
-        ServerRunner serverRunner(server);
+        Server server(std::move(serverConfig));
 
-        Client client(certClient.certificate, certClient.privateKey, {certServer.certificate}, {});
-        client.setSecurityMode(MessageSecurityMode::SignAndEncrypt);
-        CHECK_NOTHROW(client.connect("opc.tcp://localhost:4840"));
+        ClientConfig clientConfig(
+            certClient.certificate, certClient.privateKey, {certServer.certificate}, {}
+        );
+        clientConfig.setSecurityMode(MessageSecurityMode::SignAndEncrypt);
+        Client client(std::move(clientConfig));
+
+        {
+            ServerRunner serverRunner(server);
+            CHECK_NOTHROW(client.connect("opc.tcp://localhost:4840"));
+        }
     }
 }
 

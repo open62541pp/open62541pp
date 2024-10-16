@@ -4,11 +4,12 @@
 #include <open62541pp/server.hpp>
 
 int main() {
-    opcua::Server server(4840 /* port */);
+    opcua::ServerConfig config;
+    config.setApplicationName("open62541pp server example");
+    config.setApplicationUri("urn:open62541pp.server.application");
+    config.setProductUri("https://open62541pp.github.io");
 
-    server.setApplicationName("open62541pp server example");
-    server.setApplicationUri("urn:open62541pp.server.application");
-    server.setProductUri("https://open62541pp.github.io");
+    opcua::Server server(std::move(config));
 
     // Add a variable node to the Objects node
     opcua::Node parentNode(server, opcua::ObjectId::ObjectsFolder);

@@ -20,9 +20,124 @@
 #include "open62541pp/services/subscription.hpp"
 #include "open62541pp/typewrapper.hpp"
 
-#include "client_config.hpp"
-
 namespace opcua {
+
+static UA_Client* allocateClient(UA_ClientConfig* config) noexcept {
+    if (config == nullptr) {
+        return nullptr;
+    }
+#if UAPP_OPEN62541_VER_LE(1, 0)
+    auto* client = UA_Client_new();
+    auto* clientConfig = UA_Client_getConfig(client);
+    if (clientConfig != nullptr) {
+        detail::clear(clientConfig->logger);
+        *clientConfig = *config;
+    }
+#else
+    auto* client = UA_Client_newWithConfig(config);
+#endif
+    return client;
+}
+
+static void deleteClient(UA_Client* client) noexcept {
+    if (client == nullptr) {
+        return;
+    }
+#if UAPP_OPEN62541_VER_LE(1, 0)
+    // UA_ClientConfig_deleteMembers won't delete the logger in v1.0
+    detail::clear(UA_Client_getConfig(client)->logger);
+#endif
+    UA_Client_delete(client);
+}
+
+/* ---------------------------------------- ClientConfig ---------------------------------------- */
+
+ClientConfig::ClientConfig() {
+    throwIfBad(UA_ClientConfig_setDefault(handle()));
+}
+
+#ifdef UA_ENABLE_ENCRYPTION
+ClientConfig::ClientConfig(
+    const ByteString& certificate,
+    const ByteString& privateKey,
+    Span<const ByteString> trustList,
+    Span<const ByteString> revocationList
+) {
+    throwIfBad(UA_ClientConfig_setDefaultEncryption(
+        handle(),
+        certificate,
+        privateKey,
+        asNative(trustList.data()),
+        trustList.size(),
+        asNative(revocationList.data()),
+        revocationList.size()
+    ));
+}
+#endif
+
+// NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
+ClientConfig::ClientConfig(UA_ClientConfig&& native)
+    : Wrapper(std::exchange(native, {})) {}
+
+ClientConfig::~ClientConfig() {
+    // create temporary client to free config
+    // reset callbacks to avoid notifications
+    native().stateCallback = nullptr;
+    native().inactivityCallback = nullptr;
+    native().subscriptionInactivityCallback = nullptr;
+    auto* client = allocateClient(handle());
+    deleteClient(client);
+}
+
+// NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
+ClientConfig::ClientConfig(ClientConfig&& other) noexcept
+    : Wrapper(std::exchange(other.native(), {})) {}
+
+ClientConfig& ClientConfig::operator=(ClientConfig&& other) noexcept {
+    if (this != &other) {
+        native() = std::exchange(other.native(), {});
+    }
+    return *this;
+}
+
+void ClientConfig::setLogger(LogFunction func) {
+    if (func) {
+        auto adapter = std::make_unique<LoggerDefault>(std::move(func));
+        auto* logger = detail::getLogger(handle());
+        assert(logger != nullptr);
+        detail::clear(*logger);
+        *logger = adapter.release()->create(true);
+    }
+}
+
+void ClientConfig::setTimeout(uint32_t milliseconds) noexcept {
+    native().timeout = milliseconds;
+}
+
+template <typename T>
+static void setUserIdentityTokenHelper(UA_ClientConfig& config, const T& token) {
+    asWrapper<ExtensionObject>(config.userIdentityToken) = ExtensionObject::fromDecodedCopy(token);
+}
+
+void ClientConfig::setUserIdentityToken(const AnonymousIdentityToken& token) {
+    setUserIdentityTokenHelper(native(), token);
+}
+
+void ClientConfig::setUserIdentityToken(const UserNameIdentityToken& token) {
+    setUserIdentityTokenHelper(native(), token);
+}
+
+void ClientConfig::setUserIdentityToken(const X509IdentityToken& token) {
+    setUserIdentityTokenHelper(native(), token);
+}
+
+void ClientConfig::setUserIdentityToken(const IssuedIdentityToken& token) {
+    setUserIdentityTokenHelper(native(), token);
+}
+
+void ClientConfig::setSecurityMode(MessageSecurityMode mode) noexcept {
+    native().securityMode = static_cast<UA_MessageSecurityMode>(mode);
+}
 
 /* --------------------------------------- State callbacks -------------------------------------- */
 
@@ -140,32 +255,15 @@ static void stateCallback(
 
 namespace detail {
 
-[[nodiscard]] static UA_Client* allocateClient() {
-    auto* client = UA_Client_new();
-    if (client == nullptr) {
-        throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
-    }
-    return client;
-}
-
-static void deleteClient(UA_Client* client) {
-    if (client == nullptr) {
-        return;
-    }
-#if UAPP_OPEN62541_VER_LE(1, 0)
-    // UA_ClientConfig_deleteMembers won't delete the logger in v1.0
-    auto& logger = getConfig(client)->logger;
-    if (logger.clear != nullptr) {
-        logger.clear(logger.context);
-    }
-    logger = {};
-#endif
-    UA_Client_delete(client);
-}
-
 struct ClientConnection : public ConnectionBase<Client> {
-    ClientConnection()
-        : client(allocateClient()) {
+    // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
+    explicit ClientConnection(ClientConfig&& config)
+        : client(allocateClient(config.handle())) {
+        if (client == nullptr) {
+            throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
+        }
+        config = {};
+        updateLoggerStackPointer();
         applyDefaults();
     }
 
@@ -184,6 +282,14 @@ struct ClientConnection : public ConnectionBase<Client> {
         auto* config = detail::getConfig(client);
         assert(config != nullptr);
         return asWrapper<ClientConfig>(*config);
+    }
+
+    void updateLoggerStackPointer() noexcept {
+#if UAPP_OPEN62541_VER_LE(1, 2)
+        for (auto& policy : Span(config()->securityPolicies, config()->securityPoliciesSize)) {
+            policy.logger = &config()->logger;
+        }
+#endif
     }
 
     void applyDefaults() {
@@ -225,23 +331,11 @@ struct ClientConnection : public ConnectionBase<Client> {
 
 /* ------------------------------------------- Client ------------------------------------------- */
 
-Client::Client(LogFunction logger)
-    : connection_(std::make_unique<detail::ClientConnection>()) {
-    // The logger should be set as soon as possible, ideally even before UA_ClientConfig_setDefault.
-    // However, the logger gets overwritten by UA_ClientConfig_setDefault() in older versions of
-    // open62541. The best we can do in this case, is to first call UA_ClientConfig_setDefault and
-    // then setLogger.
-    auto setConfig = [&] { throwIfBad(UA_ClientConfig_setDefault(detail::getConfig(handle()))); };
-#if UAPP_OPEN62541_VER_GE(1, 1)
-    setLogger(std::move(logger));
-    setConfig();
-#else
-    setConfig();
-    setLogger(std::move(logger));
-#endif
-    detail::getConfig(*this).securityMode = UA_MESSAGESECURITYMODE_NONE;
-    connection_->applyDefaults();
-}
+Client::Client()
+    : Client(ClientConfig()) {}
+
+Client::Client(ClientConfig&& config)
+    : connection_(std::make_unique<detail::ClientConnection>(std::move(config))) {}
 
 #ifdef UA_ENABLE_ENCRYPTION
 Client::Client(
@@ -250,25 +344,21 @@ Client::Client(
     Span<const ByteString> trustList,
     Span<const ByteString> revocationList
 )
-    : connection_(std::make_unique<detail::ClientConnection>()) {
-    throwIfBad(UA_ClientConfig_setDefaultEncryption(
-        detail::getConfig(handle()),
-        certificate,
-        privateKey,
-        asNative(trustList.data()),
-        trustList.size(),
-        asNative(revocationList.data()),
-        revocationList.size()
-    ));
-    detail::getConfig(*this).securityMode = UA_MESSAGESECURITYMODE_SIGNANDENCRYPT;
-    connection_->applyDefaults();
-}
+    : Client(ClientConfig(certificate, privateKey, trustList, revocationList)) {}
 #endif
 
 Client::~Client() = default;
 
 Client::Client(Client&&) noexcept = default;
 Client& Client::operator=(Client&&) noexcept = default;
+
+ClientConfig& Client::config() noexcept {
+    return connection_->config();
+}
+
+const ClientConfig& Client::config() const noexcept {
+    return const_cast<Client*>(this)->config();  // NOLINT
+}
 
 std::vector<ApplicationDescription> Client::findServers(std::string_view serverUrl) {
     size_t arraySize{};
@@ -310,45 +400,13 @@ std::vector<EndpointDescription> Client::getEndpoints(std::string_view serverUrl
     return result;
 }
 
-void Client::setLogger(LogFunction logger) {
-    connection_->config().setLogger(std::move(logger));
-}
-
-void Client::setTimeout(uint32_t milliseconds) {
-    connection_->config()->timeout = milliseconds;
-}
-
-// NOLINTNEXTLINE(performance-unnecessary-value-param)
-void Client::setUserIdentityToken(AnonymousIdentityToken token) {
-    connection_->config().setUserIdentityToken(std::move(token));
-}
-
-// NOLINTNEXTLINE(performance-unnecessary-value-param)
-void Client::setUserIdentityToken(UserNameIdentityToken token) {
-    connection_->config().setUserIdentityToken(std::move(token));
-}
-
-// NOLINTNEXTLINE(performance-unnecessary-value-param)
-void Client::setUserIdentityToken(X509IdentityToken token) {
-    connection_->config().setUserIdentityToken(std::move(token));
-}
-
-// NOLINTNEXTLINE(performance-unnecessary-value-param)
-void Client::setUserIdentityToken(IssuedIdentityToken token) {
-    connection_->config().setUserIdentityToken(std::move(token));
-}
-
-void Client::setSecurityMode(MessageSecurityMode mode) {
-    connection_->config()->securityMode = static_cast<UA_MessageSecurityMode>(mode);
-}
-
 void Client::setCustomDataTypes(std::vector<DataType> dataTypes) {
     auto& context = connection_->context;
     context.dataTypes = std::move(dataTypes);
     context.dataTypeArray = std::make_unique<UA_DataTypeArray>(
         detail::createDataTypeArray(context.dataTypes)
     );
-    connection_->config()->customDataTypes = context.dataTypeArray.get();
+    config()->customDataTypes = context.dataTypeArray.get();
 }
 
 static void setStateCallback(Client& client, detail::ClientState state, StateCallback&& callback) {
@@ -386,14 +444,8 @@ void Client::connect(std::string_view endpointUrl) {
 }
 
 void Client::connect(std::string_view endpointUrl, const Login& login) {
-#if UAPP_OPEN62541_VER_LE(1, 0)
-    const auto func = UA_Client_connect_username;
-#else
-    const auto func = UA_Client_connectUsername;
-#endif
-    throwIfBad(func(
-        handle(), std::string(endpointUrl).c_str(), login.username.c_str(), login.password.c_str()
-    ));
+    config().setUserIdentityToken(UserNameIdentityToken(login.username, login.password));
+    connect(endpointUrl);
 }
 
 void Client::disconnect() noexcept {
@@ -492,8 +544,7 @@ UA_ClientConfig& getConfig(Client& client) noexcept {
     return *getConfig(client.handle());
 }
 
-UA_Logger* getLogger(UA_Client* client) noexcept {
-    auto* config = detail::getConfig(client);
+UA_Logger* getLogger(UA_ClientConfig* config) noexcept {
     if (config == nullptr) {
         return nullptr;
     }
@@ -502,10 +553,6 @@ UA_Logger* getLogger(UA_Client* client) noexcept {
 #else
     return &config->logger;
 #endif
-}
-
-UA_Logger* getLogger(Client& client) noexcept {
-    return getLogger(client.handle());
 }
 
 ClientConnection* getConnection(UA_Client* client) noexcept {

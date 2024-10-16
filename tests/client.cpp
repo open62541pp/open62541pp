@@ -10,14 +10,44 @@
 #include "open62541pp/plugin/accesscontrol_default.hpp"
 #include "open62541pp/server.hpp"
 
-#include "client_config.hpp"
-
 #include "helper/server_runner.hpp"
 
-using namespace std::chrono_literals;
 using namespace opcua;
 
 constexpr std::string_view localServerUrl{"opc.tcp://localhost:4840"};
+
+TEST_CASE("ClientConfig") {
+    ClientConfig config;
+
+    SUBCASE("setTimeout") {
+        config.setTimeout(333);
+        CHECK(config->timeout == 333);
+    }
+
+    SUBCASE("setUserIdentityToken") {
+        const auto& token = asWrapper<ExtensionObject>(config->userIdentityToken);
+        CHECK(token.isEmpty());
+
+        config.setUserIdentityToken(AnonymousIdentityToken{});
+        CHECK(token.getDecodedData<AnonymousIdentityToken>() != nullptr);
+
+        config.setUserIdentityToken(UserNameIdentityToken{});
+        CHECK(token.getDecodedData<UserNameIdentityToken>() != nullptr);
+
+        config.setUserIdentityToken(X509IdentityToken{});
+        CHECK(token.getDecodedData<X509IdentityToken>() != nullptr);
+
+        config.setUserIdentityToken(IssuedIdentityToken{});
+        CHECK(token.getDecodedData<IssuedIdentityToken>() != nullptr);
+
+        CHECK_FALSE(token.isEmpty());
+    }
+
+    SUBCASE("setSecurityMode") {
+        config.setSecurityMode(MessageSecurityMode::Sign);
+        CHECK(config->securityMode == UA_MESSAGESECURITYMODE_SIGN);
+    }
+}
 
 TEST_CASE("Client discovery") {
     Server server;
@@ -60,13 +90,13 @@ TEST_CASE("Client connect with AnonymousIdentityToken") {
     Client client;
 
     SUBCASE("Connect with anonymous should succeed") {
-        client.setUserIdentityToken(AnonymousIdentityToken{});
+        client.config().setUserIdentityToken(AnonymousIdentityToken{});
         CHECK_NOTHROW(client.connect(localServerUrl));
         CHECK(client.isConnected());
     }
 
     SUBCASE("Connect with username/password should fail") {
-        client.setUserIdentityToken(UserNameIdentityToken("username", "password"));
+        client.config().setUserIdentityToken(UserNameIdentityToken("username", "password"));
         CHECK_THROWS(client.connect(localServerUrl));
     }
 }
@@ -75,7 +105,7 @@ TEST_CASE("Client connect with AnonymousIdentityToken") {
 TEST_CASE("Client connect with UserNameIdentityToken") {
     AccessControlDefault accessControl(false, {{"username", "password"}});
     Server server;
-    server.setAccessControl(accessControl);
+    server.config().setAccessControl(accessControl);
     ServerRunner serverRunner(server);
     Client client;
 
@@ -84,7 +114,7 @@ TEST_CASE("Client connect with UserNameIdentityToken") {
     }
 
     SUBCASE("Connect with username/password should succeed") {
-        client.setUserIdentityToken(UserNameIdentityToken("username", "password"));
+        client.config().setUserIdentityToken(UserNameIdentityToken("username", "password"));
         CHECK_NOTHROW(client.connect(localServerUrl));
         CHECK(client.isConnected());
     }
@@ -96,12 +126,12 @@ TEST_CASE("Client encryption") {
     SUBCASE("Connect to unencrypted server") {
         Server server;
         ServerRunner serverRunner(server);
-        Client client(ByteString{}, ByteString{}, {}, {});
+        Client client(ClientConfig(ByteString{}, ByteString{}, {}, {}));
 
-        client.setSecurityMode(MessageSecurityMode::SignAndEncrypt);
+        client.config().setSecurityMode(MessageSecurityMode::SignAndEncrypt);
         CHECK_THROWS(client.connect(localServerUrl));
 
-        client.setSecurityMode(MessageSecurityMode::None);
+        client.config().setSecurityMode(MessageSecurityMode::None);
         CHECK_NOTHROW(client.connect(localServerUrl));
     }
 
@@ -118,7 +148,8 @@ TEST_CASE("Client run/stop") {
     CHECK_FALSE(client.isRunning());
 
     auto t = std::thread([&] { client.run(); });
-    std::this_thread::sleep_for(100ms);  // wait for thread to execute run method
+    // wait for thread to execute run method
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
     CHECK(client.isRunning());
 
@@ -129,72 +160,61 @@ TEST_CASE("Client run/stop") {
 }
 
 TEST_CASE("Client state callbacks") {
-    Server server;
-    ServerRunner serverRunner(server);
     Client client;
 
-    enum class States {
-        Connected,
-        Disconnected,
-        SessionActivated,
-        SessionClosed,
-    };
+    enum class State { Connected, Disconnected, SessionActivated, SessionClosed };
+    std::vector<State> states;
+    client.onConnected([&] { states.push_back(State::Connected); });
+    client.onDisconnected([&] { states.push_back(State::Disconnected); });
+    client.onSessionActivated([&] { states.push_back(State::SessionActivated); });
+    client.onSessionClosed([&] { states.push_back(State::SessionClosed); });
 
-    std::vector<States> states;
-    client.onConnected([&] { states.push_back(States::Connected); });
-    client.onDisconnected([&] { states.push_back(States::Disconnected); });
-    client.onSessionActivated([&] { states.push_back(States::SessionActivated); });
-    client.onSessionClosed([&] { states.push_back(States::SessionClosed); });
+    SUBCASE("SecureChannel connect/disconnect") {
+#if UAPP_OPEN62541_VER_LE(1, 0)
+        client.config()->stateCallback(client.handle(), UA_CLIENTSTATE_CONNECTED);
+        client.config()->stateCallback(client.handle(), UA_CLIENTSTATE_DISCONNECTED);
+#else
+        client.config()->stateCallback(client.handle(), UA_SECURECHANNELSTATE_OPEN, {}, {});
+        client.config()->stateCallback(client.handle(), UA_SECURECHANNELSTATE_CLOSED, {}, {});
+#endif
+        CHECK(states.size() == 2);
+        CHECK(states.at(0) == State::Connected);
+        CHECK(states.at(1) == State::Disconnected);
+    }
 
-    client.connect(localServerUrl);
-    std::this_thread::sleep_for(100ms);
+    SUBCASE("Session activate/close") {
+#if UAPP_OPEN62541_VER_LE(1, 0)
+        client.config()->stateCallback(client.handle(), UA_CLIENTSTATE_SESSION);
+        client.config()->stateCallback(client.handle(), UA_CLIENTSTATE_SESSION_DISCONNECTED);
+#else
+        client.config()->stateCallback(client.handle(), {}, UA_SESSIONSTATE_ACTIVATED, {});
+        client.config()->stateCallback(client.handle(), {}, UA_SESSIONSTATE_CLOSED, {});
+#endif
+        CHECK(states.size() == 2);
+        CHECK(states.at(0) == State::SessionActivated);
+        CHECK(states.at(1) == State::SessionClosed);
+    }
 
-    // Endpoints can be discovered with FindServers (without session) before connection.
-    // This will trigger the connect/disconnect before the actual connection happens.
-    // -> Look at the last two states:
-    CHECK(states.size() >= 2);
-    CHECK(states.at(states.size() - 2) == States::Connected);
-    CHECK(states.at(states.size() - 1) == States::SessionActivated);
+    SUBCASE("Combined") {
+#if UAPP_OPEN62541_VER_GE(1, 1)
+        client.config()->stateCallback(
+            client.handle(), UA_SECURECHANNELSTATE_OPEN, UA_SESSIONSTATE_ACTIVATED, {}
+        );
+        CHECK(states.size() == 2);
+        CHECK(states.at(0) == State::SessionActivated);  // session state handled first
+        CHECK(states.at(1) == State::Connected);
+#endif
+    }
 
-    states.clear();
-    client.disconnect();
-    std::this_thread::sleep_for(100ms);
-
-    // v1.0 will not trigger session closed
-    CHECK(states.size() >= 1);
-    CHECK(states.at(states.size() - 1) == States::Disconnected);
+    client.config()->stateCallback = nullptr;
 }
 
 TEST_CASE("Client inactivity callback") {
-    Server server;
-    ServerRunner serverRunner(server);
     Client client;
-
-    UA_ClientConfig* config = UA_Client_getConfig(client.handle());
-    config->timeout = 50;  // ms
-    config->connectivityCheckInterval = 10;  // ms
-
     bool inactive = false;
     client.onInactive([&] { inactive = true; });
-    client.connect(localServerUrl);
-    serverRunner.stop();
-    client.runIterate(100);
-    // TODO: v1.4 seems to ignore connectivityCheckInterval
-    // check is executed after a few seconds, too slow for tests
-#if UAPP_OPEN62541_VER_LE(1, 3)
+    client.config()->inactivityCallback(client.handle());
     CHECK(inactive);
-#endif
-}
-
-TEST_CASE("Client configuration") {
-    Client client;
-    UA_ClientConfig* config = UA_Client_getConfig(client.handle());
-    CHECK(config != nullptr);
-
-    SUBCASE("Set timeout") {
-        client.setTimeout(333);
-        CHECK(config->timeout == 333);
-    }
 }
 
 TEST_CASE("Client methods") {
@@ -203,7 +223,7 @@ TEST_CASE("Client methods") {
     Client client;
     client.connect(localServerUrl);
 
-    SUBCASE("Namespace array") {
+    SUBCASE("getNamespaceArray") {
         const auto namespaces = client.getNamespaceArray();
         CHECK(namespaces.size() == 2);
         CHECK(namespaces.at(0) == "http://opcfoundation.org/UA/");
