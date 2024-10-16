@@ -35,11 +35,8 @@ namespace detail {
 
 UA_ClientConfig* getConfig(UA_Client* client) noexcept;
 UA_ClientConfig& getConfig(Client& client) noexcept;
-
 UA_Logger* getLogger(UA_ClientConfig* config) noexcept;
-
 Client* getWrapper(UA_Client* client) noexcept;
-
 ClientContext* getContext(UA_Client* client) noexcept;
 ClientContext& getContext(Client& client) noexcept;
 

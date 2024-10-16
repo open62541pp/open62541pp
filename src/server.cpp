@@ -294,9 +294,7 @@ Server& Server::operator=(Server&& other) noexcept {
 }
 
 ServerConfig& Server::config() noexcept {
-    auto* config = detail::getConfig(handle());
-    assert(config != nullptr);
-    return asWrapper<ServerConfig>(*config);
+    return asWrapper<ServerConfig>(*detail::getConfig(handle()));
 }
 
 const ServerConfig& Server::config() const noexcept {

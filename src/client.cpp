@@ -18,19 +18,16 @@
 
 namespace opcua {
 
-static UA_Client* allocateClient(UA_ClientConfig* config) noexcept {
-    if (config == nullptr) {
-        return nullptr;
-    }
+static UA_Client* allocateClient(UA_ClientConfig& config) noexcept {
 #if UAPP_OPEN62541_VER_LE(1, 0)
     auto* client = UA_Client_new();
     auto* clientConfig = UA_Client_getConfig(client);
     if (clientConfig != nullptr) {
         detail::clear(clientConfig->logger);
-        *clientConfig = *config;
+        *clientConfig = config;
     }
 #else
-    auto* client = UA_Client_newWithConfig(config);
+    auto* client = UA_Client_newWithConfig(&config);
 #endif
     return client;
 }
@@ -48,13 +45,16 @@ static void deleteClient(UA_Client* client) noexcept {
 }
 
 static void clearConfig(UA_ClientConfig& config) noexcept {
-    // create temporary client to free config
+#if UAPP_OPEN62541_VER_GE(1, 4)
+    UA_ClientConfig_clear(&config);
+#else
+    // create temporary client to clear config
     // reset callbacks to avoid notifications
     config.stateCallback = nullptr;
     config.inactivityCallback = nullptr;
     config.subscriptionInactivityCallback = nullptr;
-    auto* client = allocateClient(&config);
-    deleteClient(client);
+    deleteClient(allocateClient(config));
+#endif
 }
 
 /* ---------------------------------------- ClientConfig ---------------------------------------- */
@@ -270,7 +270,7 @@ Client::Client()
 
 // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
 Client::Client(ClientConfig&& config)
-    : client_(allocateClient(config.handle())),
+    : client_(allocateClient(config)),
       context_(std::make_unique<detail::ClientContext>()) {
     if (handle() == nullptr) {
         throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
@@ -312,9 +312,7 @@ Client& Client::operator=(Client&& other) noexcept {
 }
 
 ClientConfig& Client::config() noexcept {
-    auto* config = detail::getConfig(handle());
-    assert(config != nullptr);
-    return asWrapper<ClientConfig>(*config);
+    return asWrapper<ClientConfig>(*detail::getConfig(handle()));
 }
 
 const ClientConfig& Client::config() const noexcept {
@@ -391,7 +389,7 @@ void Client::onSessionClosed(StateCallback callback) {
 
 void Client::onInactive(InactivityCallback callback) {
     context().inactivityCallback = std::move(callback);
-    detail::getConfig(*this).inactivityCallback = [](UA_Client* client) noexcept {
+    config()->inactivityCallback = [](UA_Client* client) noexcept {
         auto* context = detail::getContext(client);
         if (context != nullptr && context->inactivityCallback != nullptr) {
             context->exceptionCatcher.invoke(context->inactivityCallback);
