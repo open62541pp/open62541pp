@@ -29,7 +29,6 @@ class Node;
 class Server;
 
 namespace detail {
-struct ServerConnection;
 struct ServerContext;
 }  // namespace detail
 
@@ -275,7 +274,8 @@ private:
 
     friend detail::ServerContext& detail::getContext(Server& server) noexcept;
 
-    std::unique_ptr<detail::ServerConnection> connection_;
+    UA_Server* server_;
+    std::unique_ptr<detail::ServerContext> context_;
 };
 
 inline bool operator==(const Server& lhs, const Server& rhs) noexcept {

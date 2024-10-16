@@ -164,9 +164,7 @@ void ServerConfig::setAccessControl(std::unique_ptr<AccessControlBase>&& accessC
     }
 }
 
-/* --------------------------------------- ConnectionBase -------------------------------------- */
-
-namespace detail {
+/* ------------------------------------------- Server ------------------------------------------- */
 
 static UA_StatusCode activateSession(
     UA_Server* server,
@@ -177,7 +175,7 @@ static UA_StatusCode activateSession(
     const UA_ExtensionObject* userIdentityToken,
     void** sessionContext
 ) {
-    auto* context = getContext(server);
+    auto* context = detail::getContext(server);
     if (context == nullptr || context->sessionRegistry.activateSessionUser == nullptr) {
         return UA_STATUSCODE_BADINTERNALERROR;
     }
@@ -191,7 +189,7 @@ static UA_StatusCode activateSession(
         userIdentityToken,
         sessionContext
     );
-    if (isGood(status) && sessionId != nullptr) {
+    if (detail::isGood(status) && sessionId != nullptr) {
         context->sessionRegistry.sessionIds.insert(asWrapper<NodeId>(*sessionId));
     }
     return status;
@@ -200,7 +198,7 @@ static UA_StatusCode activateSession(
 static void closeSession(
     UA_Server* server, UA_AccessControl* ac, const UA_NodeId* sessionId, void* sessionContext
 ) {
-    auto* context = getContext(server);
+    auto* context = detail::getContext(server);
     if (context == nullptr || context->sessionRegistry.closeSessionUser == nullptr) {
         return;
     }
@@ -211,7 +209,7 @@ static void closeSession(
     }
 }
 
-static void applySessionRegistry(UA_ServerConfig& config, ServerContext& context) {
+static void applySessionRegistry(UA_ServerConfig& config, detail::ServerContext& context) {
     // Make sure to call this function only once after access control is initialized or changed.
     // The function pointers to activateSession / closeSession might not be unique and the
     // the pointer comparison might fail resulting in stack overflows:
@@ -239,39 +237,6 @@ static void updateLoggerStackPointer([[maybe_unused]] UA_ServerConfig& config) n
 #endif
 }
 
-struct ServerConnection {
-    // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
-    explicit ServerConnection(ServerConfig&& config)
-        : server(UA_Server_newWithConfig(config.handle())) {
-        if (server == nullptr) {
-            throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
-        }
-        config = {};
-#if UAPP_OPEN62541_VER_GE(1, 2)
-        getConfig(server)->allowEmptyVariables = UA_RULEHANDLING_ACCEPT;  // allow empty variables
-#endif
-        updateLoggerStackPointer(*getConfig(server));
-    }
-
-    ~ServerConnection() {
-        // don't use stop method here because it might throw an exception
-        UA_Server_run_shutdown(server);
-        UA_Server_delete(server);
-    }
-
-    ServerConnection(const ServerConnection&) = delete;
-    ServerConnection(ServerConnection&&) noexcept = delete;
-    ServerConnection& operator=(const ServerConnection&) = delete;
-    ServerConnection& operator=(ServerConnection&&) noexcept = delete;
-
-    UA_Server* server;
-    detail::ServerContext context;
-};
-
-}  // namespace detail
-
-/* ------------------------------------------- Server ------------------------------------------- */
-
 static void setWrapperAsContextPointer(Server& server) noexcept {
 #if UAPP_OPEN62541_VER_GE(1, 3)
     server.config()->context = &server;
@@ -286,21 +251,43 @@ static void setWrapperAsContextPointer(Server& server) noexcept {
 Server::Server()
     : Server(ServerConfig()) {}
 
+// NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
 Server::Server(ServerConfig&& config)
-    : connection_(std::make_unique<detail::ServerConnection>(std::move(config))) {
+    : server_(UA_Server_newWithConfig(config.handle())),
+      context_(std::make_unique<detail::ServerContext>()) {
+    if (handle() == nullptr) {
+        throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
+    }
+    config = {};
+#if UAPP_OPEN62541_VER_GE(1, 2)
+    this->config()->allowEmptyVariables = UA_RULEHANDLING_ACCEPT;  // allow empty variables
+#endif
+    updateLoggerStackPointer(this->config());
     setWrapperAsContextPointer(*this);
 }
 
-Server::~Server() = default;
+static void deleteServer(UA_Server* server) {
+    if (server != nullptr) {
+        UA_Server_run_shutdown(server);
+        UA_Server_delete(server);
+    }
+}
+
+Server::~Server() {
+    deleteServer(handle());
+}
 
 Server::Server(Server&& other) noexcept
-    : connection_(std::move(other.connection_)) {
+    : server_(std::exchange(other.server_, {})),
+      context_(std::move(other.context_)) {
     setWrapperAsContextPointer(*this);
 }
 
 Server& Server::operator=(Server&& other) noexcept {
     if (this != &other) {
-        connection_ = std::move(other.connection_);
+        deleteServer(handle());
+        server_ = std::exchange(other.server_, {});
+        context_ = std::move(other.context_);
         setWrapperAsContextPointer(*this);
     }
     return *this;
@@ -323,17 +310,16 @@ void Server::setCustomHostname([[maybe_unused]] std::string_view hostname) {
 }
 
 void Server::setCustomDataTypes(std::vector<DataType> dataTypes) {
-    auto& context = connection_->context;
-    context.dataTypes = std::move(dataTypes);
-    context.dataTypeArray = std::make_unique<UA_DataTypeArray>(
-        detail::createDataTypeArray(context.dataTypes)
+    context().dataTypes = std::move(dataTypes);
+    context().dataTypeArray = std::make_unique<UA_DataTypeArray>(
+        detail::createDataTypeArray(context().dataTypes)
     );
-    config()->customDataTypes = context.dataTypeArray.get();
+    config()->customDataTypes = context().dataTypeArray.get();
 }
 
 std::vector<Session> Server::getSessions() {
     std::vector<Session> sessions;
-    for (auto&& id : connection_->context.sessionRegistry.sessionIds) {
+    for (auto&& id : context().sessionRegistry.sessionIds) {
         sessions.emplace_back(*this, id);
     }
     return sessions;
@@ -523,19 +509,19 @@ Node<Server> Server::getViewsNode() {
 }
 
 UA_Server* Server::handle() noexcept {
-    return connection_->server;
+    return server_;
 }
 
 const UA_Server* Server::handle() const noexcept {
-    return connection_->server;
+    return server_;
 }
 
 detail::ServerContext& Server::context() noexcept {
-    return connection_->context;
+    return *context_;
 }
 
 const detail::ServerContext& Server::context() const noexcept {
-    return connection_->context;
+    return *context_;
 }
 
 /* -------------------------------------- Helper functions -------------------------------------- */

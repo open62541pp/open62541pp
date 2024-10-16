@@ -26,7 +26,6 @@ template <typename Connection>
 class Node;
 
 namespace detail {
-struct ClientConnection;
 struct ClientContext;
 }  // namespace detail
 
