@@ -279,7 +279,8 @@ private:
 
     friend detail::ClientContext& detail::getContext(Client& client) noexcept;
 
-    std::unique_ptr<detail::ClientConnection> connection_;
+    UA_Client* client_;
+    std::unique_ptr<detail::ClientContext> context_;
 };
 
 inline bool operator==(const Client& lhs, const Client& rhs) noexcept {

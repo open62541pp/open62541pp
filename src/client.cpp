@@ -39,11 +39,22 @@ static void deleteClient(UA_Client* client) noexcept {
     if (client == nullptr) {
         return;
     }
+    UA_Client_disconnect(client);
 #if UAPP_OPEN62541_VER_LE(1, 0)
     // UA_ClientConfig_deleteMembers won't delete the logger in v1.0
     detail::clear(UA_Client_getConfig(client)->logger);
 #endif
     UA_Client_delete(client);
+}
+
+static void clearConfig(UA_ClientConfig& config) noexcept {
+    // create temporary client to free config
+    // reset callbacks to avoid notifications
+    config.stateCallback = nullptr;
+    config.inactivityCallback = nullptr;
+    config.subscriptionInactivityCallback = nullptr;
+    auto* client = allocateClient(&config);
+    deleteClient(client);
 }
 
 /* ---------------------------------------- ClientConfig ---------------------------------------- */
@@ -76,13 +87,7 @@ ClientConfig::ClientConfig(UA_ClientConfig&& native)
     : Wrapper(std::exchange(native, {})) {}
 
 ClientConfig::~ClientConfig() {
-    // create temporary client to free config
-    // reset callbacks to avoid notifications
-    native().stateCallback = nullptr;
-    native().inactivityCallback = nullptr;
-    native().subscriptionInactivityCallback = nullptr;
-    auto* client = allocateClient(handle());
-    deleteClient(client);
+    clearConfig(native());
 }
 
 // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
@@ -91,6 +96,7 @@ ClientConfig::ClientConfig(ClientConfig&& other) noexcept
 
 ClientConfig& ClientConfig::operator=(ClientConfig&& other) noexcept {
     if (this != &other) {
+        // clearConfig(native());  // TODO
         native() = std::exchange(other.native(), {});
     }
     return *this;
@@ -247,8 +253,6 @@ static void stateCallback(
 }
 #endif
 
-/* -------------------------------------- Connection state -------------------------------------- */
-
 static void updateLoggerStackPointer([[maybe_unused]] UA_ClientConfig& config) noexcept {
 #if UAPP_OPEN62541_VER_LE(1, 2)
     for (auto& policy : Span(config.securityPolicies, config.securityPoliciesSize)) {
@@ -257,48 +261,23 @@ static void updateLoggerStackPointer([[maybe_unused]] UA_ClientConfig& config) n
 #endif
 }
 
-namespace detail {
-
-struct ClientConnection {
-    // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
-    explicit ClientConnection(ClientConfig&& config)
-        : client(allocateClient(config.handle())) {
-        if (client == nullptr) {
-            throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
-        }
-        config = {};
-        getConfig(client)->clientContext = this;
-        getConfig(client)->stateCallback = stateCallback;
-        updateLoggerStackPointer(*getConfig(client));
-    }
-
-    ~ClientConnection() {
-        UA_Client_disconnect(client);
-        deleteClient(client);
-    }
-
-    ClientConnection(const ClientConnection&) = delete;
-    ClientConnection(ClientConnection&&) noexcept = delete;
-    ClientConnection& operator=(const ClientConnection&) = delete;
-    ClientConnection& operator=(ClientConnection&&) noexcept = delete;
-
-    UA_Client* client;
-    detail::ClientContext context;
-};
-
-}  // namespace detail
-
-/* ------------------------------------------- Client ------------------------------------------- */
-
-static void setWrapperAsContextPointer(Client& client) {
+static void setWrapperAsContextPointer(Client& client) noexcept {
     client.config()->clientContext = &client;
 }
 
 Client::Client()
     : Client(ClientConfig()) {}
 
+// NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
 Client::Client(ClientConfig&& config)
-    : connection_(std::make_unique<detail::ClientConnection>(std::move(config))) {
+    : client_(allocateClient(config.handle())),
+      context_(std::make_unique<detail::ClientContext>()) {
+    if (handle() == nullptr) {
+        throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
+    }
+    config = {};
+    this->config()->stateCallback = stateCallback;
+    updateLoggerStackPointer(this->config());
     setWrapperAsContextPointer(*this);
 }
 
@@ -312,16 +291,21 @@ Client::Client(
     : Client(ClientConfig(certificate, privateKey, trustList, revocationList)) {}
 #endif
 
-Client::~Client() = default;
+Client::~Client() {
+    deleteClient(handle());
+}
 
 Client::Client(Client&& other) noexcept
-    : connection_(std::move(other.connection_)) {
+    : client_(std::exchange(other.client_, {})),
+      context_(std::move(other.context_)) {
     setWrapperAsContextPointer(*this);
 }
 
 Client& Client::operator=(Client&& other) noexcept {
     if (this != &other) {
-        connection_ = std::move(other.connection_);
+        deleteClient(handle());
+        client_ = std::exchange(other.client_, {});
+        context_ = std::move(other.context_);
         setWrapperAsContextPointer(*this);
     }
     return *this;
@@ -378,12 +362,11 @@ std::vector<EndpointDescription> Client::getEndpoints(std::string_view serverUrl
 }
 
 void Client::setCustomDataTypes(std::vector<DataType> dataTypes) {
-    auto& context = connection_->context;
-    context.dataTypes = std::move(dataTypes);
-    context.dataTypeArray = std::make_unique<UA_DataTypeArray>(
-        detail::createDataTypeArray(context.dataTypes)
+    context().dataTypes = std::move(dataTypes);
+    context().dataTypeArray = std::make_unique<UA_DataTypeArray>(
+        detail::createDataTypeArray(context().dataTypes)
     );
-    config()->customDataTypes = context.dataTypeArray.get();
+    config()->customDataTypes = context().dataTypeArray.get();
 }
 
 static void setStateCallback(Client& client, detail::ClientState state, StateCallback&& callback) {
@@ -515,21 +498,19 @@ Node<Client> Client::getViewsNode() {
 }
 
 UA_Client* Client::handle() noexcept {
-    return connection_->client;
+    return client_;
 }
 
 const UA_Client* Client::handle() const noexcept {
-    return connection_->client;
+    return client_;
 }
 
 detail::ClientContext& Client::context() noexcept {
-    assert(connection_);
-    return connection_->context;
+    return *context_;
 }
 
 const detail::ClientContext& Client::context() const noexcept {
-    assert(connection_);
-    return connection_->context;
+    return *context_;
 }
 
 /* -------------------------------------- Helper functions -------------------------------------- */
