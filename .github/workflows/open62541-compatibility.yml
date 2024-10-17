@@ -14,7 +14,7 @@ jobs:
       ${{ matrix.amalgamation && 'amalgamated' || 'default' }})
     runs-on: ubuntu-24.04
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         version:
           - v1.0.6
