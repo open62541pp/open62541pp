@@ -79,9 +79,9 @@ TEST_CASE_TEMPLATE("Connection", T, Client, Server) {
     T connection;
 
     SUBCASE("config") {
-        auto& config = detail::getConfig(connection);
-        CHECK(connection.config().handle() == &config);
-        CHECK(std::as_const(connection).config().handle() == &config);
+        auto* config = detail::getConfig(connection.handle());
+        CHECK(connection.config().handle() == config);
+        CHECK(std::as_const(connection).config().handle() == config);
     }
 
     SUBCASE("handle") {
@@ -90,19 +90,18 @@ TEST_CASE_TEMPLATE("Connection", T, Client, Server) {
     }
 
     SUBCASE("setCustomDataTypes") {
-        auto& config = detail::getConfig(connection);
-        CHECK(config.customDataTypes == nullptr);
+        CHECK(connection.config()->customDataTypes == nullptr);
 
         connection.setCustomDataTypes({
             DataType(UA_TYPES[UA_TYPES_STRING]),
             DataType(UA_TYPES[UA_TYPES_INT32]),
         });
-        CHECK(config.customDataTypes != nullptr);
-        CHECK(config.customDataTypes->next == nullptr);
-        CHECK(config.customDataTypes->typesSize == 2);
-        CHECK(config.customDataTypes->types != nullptr);
-        CHECK(config.customDataTypes->types[0] == UA_TYPES[UA_TYPES_STRING]);
-        CHECK(config.customDataTypes->types[1] == UA_TYPES[UA_TYPES_INT32]);
+        CHECK(connection.config()->customDataTypes != nullptr);
+        CHECK(connection.config()->customDataTypes->next == nullptr);
+        CHECK(connection.config()->customDataTypes->typesSize == 2);
+        CHECK(connection.config()->customDataTypes->types != nullptr);
+        CHECK(connection.config()->customDataTypes->types[0] == UA_TYPES[UA_TYPES_STRING]);
+        CHECK(connection.config()->customDataTypes->types[1] == UA_TYPES[UA_TYPES_INT32]);
         
     }
 
@@ -111,7 +110,7 @@ TEST_CASE_TEMPLATE("Connection", T, Client, Server) {
 
         CHECK(detail::getConfig(nativeNull) == nullptr);
         CHECK(detail::getConfig(connection.handle()) != nullptr);
-        CHECK(detail::getConfig(connection.handle()) == &detail::getConfig(connection));
+        CHECK(detail::getConfig(connection.handle()) == connection.config().handle());
 
         CHECK(detail::getContext(nativeNull) == nullptr);
         CHECK(detail::getContext(connection.handle()) != nullptr);

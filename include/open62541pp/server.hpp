@@ -37,7 +37,6 @@ struct ServerContext;
 namespace detail {
 
 UA_ServerConfig* getConfig(UA_Server* server) noexcept;
-UA_ServerConfig& getConfig(Server& server) noexcept;
 UA_Logger* getLogger(UA_ServerConfig* config) noexcept;
 ServerContext* getContext(UA_Server* server) noexcept;
 ServerContext& getContext(Server& server) noexcept;
