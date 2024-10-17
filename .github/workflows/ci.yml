@@ -100,7 +100,11 @@ jobs:
             flags: "-DUAPP_ENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON"
 
           - name: macOS AppleClang 15
-            os: macos-13
+            os: macos-14
+            compiler: clang++
+
+          - name: macOS AppleClang 16
+            os: macos-15
             compiler: clang++
 
           - name: Windows Visual Studio 16
