@@ -99,10 +99,6 @@ jobs:
             compiler: clang++-18
             flags: "-DUAPP_ENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON"
 
-          - name: macOS AppleClang 14
-            os: macos-12
-            compiler: clang++
-
           - name: macOS AppleClang 15
             os: macos-13
             compiler: clang++
