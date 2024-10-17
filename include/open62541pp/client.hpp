@@ -26,7 +26,6 @@ template <typename Connection>
 class Node;
 
 namespace detail {
-struct ClientConnection;
 struct ClientContext;
 }  // namespace detail
 
@@ -36,14 +35,8 @@ namespace detail {
 
 UA_ClientConfig* getConfig(UA_Client* client) noexcept;
 UA_ClientConfig& getConfig(Client& client) noexcept;
-
 UA_Logger* getLogger(UA_ClientConfig* config) noexcept;
-
-ClientConnection* getConnection(UA_Client* client) noexcept;
-ClientConnection& getConnection(Client& client) noexcept;
-
 Client* getWrapper(UA_Client* client) noexcept;
-
 ClientContext* getContext(UA_Client* client) noexcept;
 ClientContext& getContext(Client& client) noexcept;
 
@@ -161,9 +154,9 @@ public:
     ~Client();
 
     Client(const Client&) = delete;
-    Client(Client&&) noexcept;
+    Client(Client&& other) noexcept;
     Client& operator=(const Client&) = delete;
-    Client& operator=(Client&&) noexcept;
+    Client& operator=(Client&& other) noexcept;
 
     ClientConfig& config() noexcept;
     const ClientConfig& config() const noexcept;
@@ -277,9 +270,17 @@ public:
     const UA_Client* handle() const noexcept;
 
 private:
-    friend detail::ClientConnection& detail::getConnection(Client& client) noexcept;
+    detail::ClientContext& context() noexcept;
+    const detail::ClientContext& context() const noexcept;
 
-    std::unique_ptr<detail::ClientConnection> connection_;
+    friend detail::ClientContext& detail::getContext(Client& client) noexcept;
+
+    struct Deleter {
+        void operator()(UA_Client* client) noexcept;
+    };
+
+    std::unique_ptr<detail::ClientContext> context_;
+    std::unique_ptr<UA_Client, Deleter> client_;
 };
 
 inline bool operator==(const Client& lhs, const Client& rhs) noexcept {

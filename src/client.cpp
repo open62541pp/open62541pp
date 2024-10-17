@@ -1,16 +1,12 @@
 #include "open62541pp/client.hpp"
 
-#include <atomic>
 #include <cassert>
-#include <cstddef>
 #include <iterator>
-#include <string>
 #include <utility>  // move
 
 #include "open62541pp/config.hpp"
 #include "open62541pp/datatype.hpp"
 #include "open62541pp/detail/client_context.hpp"
-#include "open62541pp/detail/connection.hpp"
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/exception.hpp"
 #include "open62541pp/node.hpp"
@@ -22,19 +18,16 @@
 
 namespace opcua {
 
-static UA_Client* allocateClient(UA_ClientConfig* config) noexcept {
-    if (config == nullptr) {
-        return nullptr;
-    }
+static UA_Client* allocateClient(UA_ClientConfig& config) noexcept {
 #if UAPP_OPEN62541_VER_LE(1, 0)
     auto* client = UA_Client_new();
     auto* clientConfig = UA_Client_getConfig(client);
     if (clientConfig != nullptr) {
         detail::clear(clientConfig->logger);
-        *clientConfig = *config;
+        *clientConfig = config;
     }
 #else
-    auto* client = UA_Client_newWithConfig(config);
+    auto* client = UA_Client_newWithConfig(&config);
 #endif
     return client;
 }
@@ -48,6 +41,19 @@ static void deleteClient(UA_Client* client) noexcept {
     detail::clear(UA_Client_getConfig(client)->logger);
 #endif
     UA_Client_delete(client);
+}
+
+static void clearConfig(UA_ClientConfig& config) noexcept {
+#if UAPP_OPEN62541_VER_GE(1, 4)
+    UA_ClientConfig_clear(&config);
+#else
+    // create temporary client to clear config
+    // reset callbacks to avoid notifications
+    config.stateCallback = nullptr;
+    config.inactivityCallback = nullptr;
+    config.subscriptionInactivityCallback = nullptr;
+    deleteClient(allocateClient(config));
+#endif
 }
 
 /* ---------------------------------------- ClientConfig ---------------------------------------- */
@@ -80,13 +86,7 @@ ClientConfig::ClientConfig(UA_ClientConfig&& native)
     : Wrapper(std::exchange(native, {})) {}
 
 ClientConfig::~ClientConfig() {
-    // create temporary client to free config
-    // reset callbacks to avoid notifications
-    native().stateCallback = nullptr;
-    native().inactivityCallback = nullptr;
-    native().subscriptionInactivityCallback = nullptr;
-    auto* client = allocateClient(handle());
-    deleteClient(client);
+    clearConfig(native());
 }
 
 // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
@@ -95,6 +95,7 @@ ClientConfig::ClientConfig(ClientConfig&& other) noexcept
 
 ClientConfig& ClientConfig::operator=(ClientConfig&& other) noexcept {
     if (this != &other) {
+        // clearConfig(native());  // TODO
         native() = std::exchange(other.native(), {});
     }
     return *this;
@@ -251,91 +252,33 @@ static void stateCallback(
 }
 #endif
 
-/* -------------------------------------- Connection state -------------------------------------- */
-
-namespace detail {
-
-struct ClientConnection : public ConnectionBase<Client> {
-    // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
-    explicit ClientConnection(ClientConfig&& config)
-        : client(allocateClient(config.handle())) {
-        if (client == nullptr) {
-            throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
-        }
-        config = {};
-        updateLoggerStackPointer();
-        applyDefaults();
-    }
-
-    ~ClientConnection() {
-        UA_Client_disconnect(client);
-        deleteClient(client);
-    }
-
-    ClientConnection(const ClientConnection&) = delete;
-    ClientConnection(ClientConnection&&) noexcept = delete;
-    ClientConnection& operator=(const ClientConnection&) = delete;
-    ClientConnection& operator=(ClientConnection&&) noexcept = delete;
-
-    // NOLINTNEXTLINE(readability-make-member-function-const)
-    ClientConfig& config() noexcept {
-        auto* config = detail::getConfig(client);
-        assert(config != nullptr);
-        return asWrapper<ClientConfig>(*config);
-    }
-
-    void updateLoggerStackPointer() noexcept {
+static void updateLoggerStackPointer([[maybe_unused]] UA_ClientConfig& config) noexcept {
 #if UAPP_OPEN62541_VER_LE(1, 2)
-        for (auto& policy : Span(config()->securityPolicies, config()->securityPoliciesSize)) {
-            policy.logger = &config()->logger;
-        }
+    for (auto& policy : Span(config.securityPolicies, config.securityPoliciesSize)) {
+        policy.logger = &config.logger;
+    }
 #endif
-    }
+}
 
-    void applyDefaults() {
-        config()->clientContext = this;
-        config()->stateCallback = stateCallback;
-    }
-
-    void runIterate(uint16_t timeoutMilliseconds) {
-        throwIfBad(UA_Client_run_iterate(client, timeoutMilliseconds));
-        context.exceptionCatcher.rethrow();
-    }
-
-    void run() {
-        if (running) {
-            return;
-        }
-        running = true;
-        try {
-            while (running) {
-                runIterate(1000);
-                context.exceptionCatcher.rethrow();
-            }
-        } catch (...) {
-            running = false;
-            throw;
-        }
-    }
-
-    void stop() {
-        running = false;
-    }
-
-    UA_Client* client;
-    detail::ClientContext context;
-    std::atomic<bool> running{false};
-};
-
-}  // namespace detail
-
-/* ------------------------------------------- Client ------------------------------------------- */
+static void setWrapperAsContextPointer(Client& client) noexcept {
+    client.config()->clientContext = &client;
+}
 
 Client::Client()
     : Client(ClientConfig()) {}
 
+// NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
 Client::Client(ClientConfig&& config)
-    : connection_(std::make_unique<detail::ClientConnection>(std::move(config))) {}
+    : context_(std::make_unique<detail::ClientContext>()),
+      client_(allocateClient(config)) {
+    if (handle() == nullptr) {
+        throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
+    }
+    config = {};
+    this->config()->stateCallback = stateCallback;
+    updateLoggerStackPointer(this->config());
+    setWrapperAsContextPointer(*this);
+}
 
 #ifdef UA_ENABLE_ENCRYPTION
 Client::Client(
@@ -349,11 +292,23 @@ Client::Client(
 
 Client::~Client() = default;
 
-Client::Client(Client&&) noexcept = default;
-Client& Client::operator=(Client&&) noexcept = default;
+Client::Client(Client&& other) noexcept
+    : context_(std::move(other.context_)),
+      client_(std::move(other.client_)) {
+    setWrapperAsContextPointer(*this);
+}
+
+Client& Client::operator=(Client&& other) noexcept {
+    if (this != &other) {
+        context_ = std::move(other.context_);
+        client_ = std::move(other.client_);
+        setWrapperAsContextPointer(*this);
+    }
+    return *this;
+}
 
 ClientConfig& Client::config() noexcept {
-    return connection_->config();
+    return asWrapper<ClientConfig>(*detail::getConfig(handle()));
 }
 
 const ClientConfig& Client::config() const noexcept {
@@ -401,12 +356,11 @@ std::vector<EndpointDescription> Client::getEndpoints(std::string_view serverUrl
 }
 
 void Client::setCustomDataTypes(std::vector<DataType> dataTypes) {
-    auto& context = connection_->context;
-    context.dataTypes = std::move(dataTypes);
-    context.dataTypeArray = std::make_unique<UA_DataTypeArray>(
-        detail::createDataTypeArray(context.dataTypes)
+    context().dataTypes = std::move(dataTypes);
+    context().dataTypeArray = std::make_unique<UA_DataTypeArray>(
+        detail::createDataTypeArray(context().dataTypes)
     );
-    config()->customDataTypes = context.dataTypeArray.get();
+    config()->customDataTypes = context().dataTypeArray.get();
 }
 
 static void setStateCallback(Client& client, detail::ClientState state, StateCallback&& callback) {
@@ -430,8 +384,8 @@ void Client::onSessionClosed(StateCallback callback) {
 }
 
 void Client::onInactive(InactivityCallback callback) {
-    detail::getContext(*this).inactivityCallback = std::move(callback);
-    detail::getConfig(*this).inactivityCallback = [](UA_Client* client) noexcept {
+    context().inactivityCallback = std::move(callback);
+    config()->inactivityCallback = [](UA_Client* client) noexcept {
         auto* context = detail::getContext(client);
         if (context != nullptr && context->inactivityCallback != nullptr) {
             context->exceptionCatcher.invoke(context->inactivityCallback);
@@ -481,7 +435,7 @@ Subscription<Client> Client::createSubscription(SubscriptionParameters& paramete
 
 std::vector<Subscription<Client>> Client::getSubscriptions() {
     std::vector<Subscription<Client>> result;
-    auto& subscriptions = detail::getContext(*this).subscriptions;
+    auto& subscriptions = context().subscriptions;
     subscriptions.eraseStale();
     subscriptions.iterate([&](const auto& pair) { result.emplace_back(*this, pair.first); });
     return result;
@@ -489,19 +443,32 @@ std::vector<Subscription<Client>> Client::getSubscriptions() {
 #endif
 
 void Client::runIterate(uint16_t timeoutMilliseconds) {
-    connection_->runIterate(timeoutMilliseconds);
+    throwIfBad(UA_Client_run_iterate(handle(), timeoutMilliseconds));
+    context().exceptionCatcher.rethrow();
 }
 
 void Client::run() {
-    connection_->run();
+    if (context().running) {
+        return;
+    }
+    context().running = true;
+    try {
+        while (context().running) {
+            runIterate(1000);
+            context().exceptionCatcher.rethrow();
+        }
+    } catch (...) {
+        context().running = false;
+        throw;
+    }
 }
 
 void Client::stop() {
-    connection_->stop();
+    context().running = false;
 }
 
 bool Client::isRunning() const noexcept {
-    return connection_->running;
+    return context().running;
 }
 
 Node<Client> Client::getNode(NodeId id) {
@@ -525,11 +492,26 @@ Node<Client> Client::getViewsNode() {
 }
 
 UA_Client* Client::handle() noexcept {
-    return connection_->client;
+    return client_.get();
 }
 
 const UA_Client* Client::handle() const noexcept {
-    return connection_->client;
+    return client_.get();
+}
+
+detail::ClientContext& Client::context() noexcept {
+    return *context_;
+}
+
+const detail::ClientContext& Client::context() const noexcept {
+    return *context_;
+}
+
+void Client::Deleter::operator()(UA_Client* client) noexcept {
+    if (client != nullptr) {
+        UA_Client_disconnect(client);
+        deleteClient(client);
+    }
 }
 
 /* -------------------------------------- Helper functions -------------------------------------- */
@@ -555,41 +537,25 @@ UA_Logger* getLogger(UA_ClientConfig* config) noexcept {
 #endif
 }
 
-ClientConnection* getConnection(UA_Client* client) noexcept {
+Client* getWrapper(UA_Client* client) noexcept {
     auto* config = getConfig(client);
     if (config == nullptr) {
         return nullptr;
     }
-    auto* connection = static_cast<detail::ClientConnection*>(config->clientContext);
-    assert(connection != nullptr);
-    assert(connection->client == client);
-    return connection;
-}
-
-ClientConnection& getConnection(Client& client) noexcept {
-    auto* connection = client.connection_.get();
-    assert(connection != nullptr);
-    return *connection;
-}
-
-Client* getWrapper(UA_Client* client) noexcept {
-    auto* connection = getConnection(client);
-    if (connection == nullptr) {
-        return nullptr;
-    }
-    return connection->wrapperPtr();
+    assert(config->clientContext != nullptr);
+    return static_cast<Client*>(config->clientContext);
 }
 
 ClientContext* getContext(UA_Client* client) noexcept {
-    auto* connection = getConnection(client);
-    if (connection == nullptr) {
+    auto* wrapper = getWrapper(client);
+    if (wrapper == nullptr) {
         return nullptr;
     }
-    return &connection->context;
+    return &getContext(*wrapper);
 }
 
 ClientContext& getContext(Client& client) noexcept {
-    return getConnection(client).context;
+    return client.context();
 }
 
 }  // namespace detail

@@ -29,7 +29,6 @@ class Node;
 class Server;
 
 namespace detail {
-struct ServerConnection;
 struct ServerContext;
 }  // namespace detail
 
@@ -39,14 +38,8 @@ namespace detail {
 
 UA_ServerConfig* getConfig(UA_Server* server) noexcept;
 UA_ServerConfig& getConfig(Server& server) noexcept;
-
 UA_Logger* getLogger(UA_ServerConfig* config) noexcept;
-
-ServerConnection* getConnection(UA_Server* server) noexcept;
-ServerConnection& getConnection(Server& server) noexcept;
-
 Server* getWrapper(UA_Server* server) noexcept;
-
 ServerContext* getContext(UA_Server* server) noexcept;
 ServerContext& getContext(Server& server) noexcept;
 
@@ -184,9 +177,9 @@ public:
     ~Server();
 
     Server(const Server&) = delete;
-    Server(Server&&) noexcept;
+    Server(Server&& other) noexcept;
     Server& operator=(const Server&) = delete;
-    Server& operator=(Server&&) noexcept;
+    Server& operator=(Server&& other) noexcept;
 
     ServerConfig& config() noexcept;
     const ServerConfig& config() const noexcept;
@@ -273,9 +266,17 @@ public:
     const UA_Server* handle() const noexcept;
 
 private:
-    friend detail::ServerConnection& detail::getConnection(Server& server) noexcept;
+    detail::ServerContext& context() noexcept;
+    const detail::ServerContext& context() const noexcept;
 
-    std::unique_ptr<detail::ServerConnection> connection_;
+    friend detail::ServerContext& detail::getContext(Server& server) noexcept;
+
+    struct Deleter {
+        void operator()(UA_Server* server) noexcept;
+    };
+
+    std::unique_ptr<detail::ServerContext> context_;
+    std::unique_ptr<UA_Server, Deleter> server_;
 };
 
 inline bool operator==(const Server& lhs, const Server& rhs) noexcept {

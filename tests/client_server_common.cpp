@@ -113,10 +113,6 @@ TEST_CASE_TEMPLATE("Connection", T, Client, Server) {
         CHECK(detail::getConfig(connection.handle()) != nullptr);
         CHECK(detail::getConfig(connection.handle()) == &detail::getConfig(connection));
 
-        CHECK(detail::getConnection(nativeNull) == nullptr);
-        CHECK(detail::getConnection(connection.handle()) != nullptr);
-        CHECK(detail::getConnection(connection.handle()) == &detail::getConnection(connection));
-
         CHECK(detail::getWrapper(nativeNull) == nullptr);
         CHECK(detail::getWrapper(connection.handle()) != nullptr);
         CHECK(detail::getWrapper(connection.handle())->handle() == connection.handle());
@@ -131,5 +127,22 @@ TEST_CASE_TEMPLATE("Connection", T, Client, Server) {
         CHECK(connection == connection);
         CHECK(connection != other);
         CHECK(other == other);
+    }
+}
+
+TEST_CASE_TEMPLATE("Connection getWrapper", T, Client, Server) {
+    T connection;
+    auto* native = connection.handle();
+
+    CHECK(detail::getWrapper(native) == &connection);
+
+    SUBCASE("Move construct") {
+        T connectionMoved(std::move(connection));
+        CHECK(detail::getWrapper(native) == &connectionMoved);
+    }
+    SUBCASE("Move assignment") {
+        T connectionMoved;
+        connectionMoved = std::move(connection);
+        CHECK(detail::getWrapper(native) == &connectionMoved);
     }
 }

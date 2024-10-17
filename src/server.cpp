@@ -6,7 +6,6 @@
 #include <utility>  // move
 
 #include "open62541pp/datatype.hpp"
-#include "open62541pp/detail/connection.hpp"
 #include "open62541pp/detail/result_utils.hpp"  // tryInvoke
 #include "open62541pp/detail/server_context.hpp"
 #include "open62541pp/event.hpp"
@@ -72,6 +71,7 @@ ServerConfig::ServerConfig(ServerConfig&& other) noexcept
 
 ServerConfig& ServerConfig::operator=(ServerConfig&& other) noexcept {
     if (this != &other) {
+        // UA_ServerConfig_clean(handle());  // TODO
         native() = std::exchange(other.native(), {});
     }
     return *this;
@@ -164,9 +164,7 @@ void ServerConfig::setAccessControl(std::unique_ptr<AccessControlBase>&& accessC
     }
 }
 
-/* --------------------------------------- ConnectionBase -------------------------------------- */
-
-namespace detail {
+/* ------------------------------------------- Server ------------------------------------------- */
 
 static UA_StatusCode activateSession(
     UA_Server* server,
@@ -177,7 +175,7 @@ static UA_StatusCode activateSession(
     const UA_ExtensionObject* userIdentityToken,
     void** sessionContext
 ) {
-    auto* context = getContext(server);
+    auto* context = detail::getContext(server);
     if (context == nullptr || context->sessionRegistry.activateSessionUser == nullptr) {
         return UA_STATUSCODE_BADINTERNALERROR;
     }
@@ -191,7 +189,7 @@ static UA_StatusCode activateSession(
         userIdentityToken,
         sessionContext
     );
-    if (isGood(status) && sessionId != nullptr) {
+    if (detail::isGood(status) && sessionId != nullptr) {
         context->sessionRegistry.sessionIds.insert(asWrapper<NodeId>(*sessionId));
     }
     return status;
@@ -200,7 +198,7 @@ static UA_StatusCode activateSession(
 static void closeSession(
     UA_Server* server, UA_AccessControl* ac, const UA_NodeId* sessionId, void* sessionContext
 ) {
-    auto* context = getContext(server);
+    auto* context = detail::getContext(server);
     if (context == nullptr || context->sessionRegistry.closeSessionUser == nullptr) {
         return;
     }
@@ -211,148 +209,82 @@ static void closeSession(
     }
 }
 
-struct ServerConnection : public ConnectionBase<Server> {
-    // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
-    explicit ServerConnection(ServerConfig&& config)
-        : server(UA_Server_newWithConfig(config.handle())) {
-        if (server == nullptr) {
-            throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
-        }
-        config = {};
-        updateLoggerStackPointer();
-        applyDefaults();
+static void applySessionRegistry(UA_ServerConfig& config, detail::ServerContext& context) {
+    // Make sure to call this function only once after access control is initialized or changed.
+    // The function pointers to activateSession / closeSession might not be unique and the
+    // the pointer comparison might fail resulting in stack overflows:
+    // - https://github.com/open62541pp/open62541pp/issues/285
+    // - https://stackoverflow.com/questions/31209693/static-library-linked-two-times
+    if (config.accessControl.activateSession != &activateSession) {
+        context.sessionRegistry.activateSessionUser = config.accessControl.activateSession;
+        config.accessControl.activateSession = &activateSession;
     }
-
-    ~ServerConnection() {
-        // don't use stop method here because it might throw an exception
-        if (running) {
-            UA_Server_run_shutdown(server);
-        }
-        UA_Server_delete(server);
+    if (config.accessControl.closeSession != &closeSession) {
+        context.sessionRegistry.closeSessionUser = config.accessControl.closeSession;
+        config.accessControl.closeSession = &closeSession;
     }
+}
 
-    ServerConnection(const ServerConnection&) = delete;
-    ServerConnection(ServerConnection&&) noexcept = delete;
-    ServerConnection& operator=(const ServerConnection&) = delete;
-    ServerConnection& operator=(ServerConnection&&) noexcept = delete;
-
-    // NOLINTNEXTLINE(readability-make-member-function-const)
-    ServerConfig& config() noexcept {
-        auto* config = detail::getConfig(server);
-        assert(config != nullptr);
-        return asWrapper<ServerConfig>(*config);
-    }
-
-    void updateLoggerStackPointer() noexcept {
+static void updateLoggerStackPointer([[maybe_unused]] UA_ServerConfig& config) noexcept {
 #if UAPP_OPEN62541_VER_LE(1, 2)
-        for (auto& layer : Span(config()->networkLayers, config()->networkLayersSize)) {
-            // https://github.com/open62541/open62541/blob/v1.0.6/arch/network_tcp.c#L556-L563
-            *static_cast<UA_Logger**>(layer.handle) = &config()->logger;
-        }
-        for (auto& policy : Span(config()->securityPolicies, config()->securityPoliciesSize)) {
-            policy.logger = &config()->logger;
-        }
-#endif
+    for (auto& layer : Span(config.networkLayers, config.networkLayersSize)) {
+        // https://github.com/open62541/open62541/blob/v1.0.6/arch/network_tcp.c#L556-L563
+        *static_cast<UA_Logger**>(layer.handle) = &config.logger;
     }
+    for (auto& policy : Span(config.securityPolicies, config.securityPoliciesSize)) {
+        policy.logger = &config.logger;
+    }
+#endif
+}
 
-    void applyDefaults() {
+static void setWrapperAsContextPointer(Server& server) noexcept {
 #if UAPP_OPEN62541_VER_GE(1, 3)
-        config()->context = this;
+    server.config()->context = &server;
 #else
-        const auto status = UA_Server_setNodeContext(
-            server, UA_NODEID_NUMERIC(0, UA_NS0ID_SERVER), this
-        );
-        assert(status == UA_STATUSCODE_GOOD);
+    const auto status = UA_Server_setNodeContext(
+        server.handle(), UA_NODEID_NUMERIC(0, UA_NS0ID_SERVER), &server
+    );
+    assert(status == UA_STATUSCODE_GOOD);
 #endif
-#ifdef UA_ENABLE_SUBSCRIPTIONS
-        config()->publishingIntervalLimits.min = 10;  // ms
-        config()->samplingIntervalLimits.min = 10;  // ms
-#endif
-#if UAPP_OPEN62541_VER_GE(1, 2)
-        config()->allowEmptyVariables = UA_RULEHANDLING_ACCEPT;  // allow empty variables
-#endif
-    }
-
-    void applySessionRegistry() {
-        // Make sure to call this function only once after access control is initialized or changed.
-        // The function pointers to activateSession / closeSession might not be unique and the
-        // the pointer comparison might fail resulting in stack overflows:
-        // - https://github.com/open62541pp/open62541pp/issues/285
-        // - https://stackoverflow.com/questions/31209693/static-library-linked-two-times
-        if (config()->accessControl.activateSession != &activateSession) {
-            context.sessionRegistry.activateSessionUser = config()->accessControl.activateSession;
-            config()->accessControl.activateSession = &activateSession;
-        }
-        if (config()->accessControl.closeSession != &closeSession) {
-            context.sessionRegistry.closeSessionUser = config()->accessControl.closeSession;
-            config()->accessControl.closeSession = &closeSession;
-        }
-    }
-
-    void runStartup() {
-        applyDefaults();
-        applySessionRegistry();
-        throwIfBad(UA_Server_run_startup(server));
-        running = true;
-    }
-
-    uint16_t runIterate() {
-        if (!running) {
-            runStartup();
-        }
-        auto interval = UA_Server_run_iterate(server, false /* don't wait */);
-        context.exceptionCatcher.rethrow();
-        return interval;
-    }
-
-    void run() {
-        if (running) {
-            return;
-        }
-        runStartup();
-        const std::lock_guard lock(mutexRun);
-        try {
-            while (running) {
-                // https://github.com/open62541/open62541/blob/master/examples/server_mainloop.c
-                UA_Server_run_iterate(server, true /* wait for messages in the networklayer */);
-                context.exceptionCatcher.rethrow();
-            }
-        } catch (...) {
-            running = false;
-            throw;
-        }
-    }
-
-    void stop() {
-        running = false;
-        // wait for run loop to complete
-        const std::lock_guard<std::mutex> lock(mutexRun);
-        throwIfBad(UA_Server_run_shutdown(server));
-    }
-
-    UA_Server* server;
-    detail::ServerContext context;
-    std::atomic<bool> running{false};
-    std::mutex mutexRun;
-};
-
-}  // namespace detail
-
-/* ------------------------------------------- Server ------------------------------------------- */
+}
 
 Server::Server()
     : Server(ServerConfig()) {}
 
+// NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
 Server::Server(ServerConfig&& config)
-    : connection_(std::make_unique<detail::ServerConnection>(std::move(config))) {}
+    : context_(std::make_unique<detail::ServerContext>()),
+      server_(UA_Server_newWithConfig(config.handle())) {
+    if (handle() == nullptr) {
+        throw BadStatus(UA_STATUSCODE_BADOUTOFMEMORY);
+    }
+    config = {};
+#if UAPP_OPEN62541_VER_GE(1, 2)
+    this->config()->allowEmptyVariables = UA_RULEHANDLING_ACCEPT;  // allow empty variables
+#endif
+    updateLoggerStackPointer(this->config());
+    setWrapperAsContextPointer(*this);
+}
 
 Server::~Server() = default;
 
-Server::Server(Server&&) noexcept = default;
-Server& Server::operator=(Server&&) noexcept = default;
+Server::Server(Server&& other) noexcept
+    : context_(std::move(other.context_)),
+      server_(std::move(other.server_)) {
+    setWrapperAsContextPointer(*this);
+}
+
+Server& Server::operator=(Server&& other) noexcept {
+    if (this != &other) {
+        context_ = std::move(other.context_);
+        server_ = std::move(other.server_);
+        setWrapperAsContextPointer(*this);
+    }
+    return *this;
+}
 
 ServerConfig& Server::config() noexcept {
-    return connection_->config();
+    return asWrapper<ServerConfig>(*detail::getConfig(handle()));
 }
 
 const ServerConfig& Server::config() const noexcept {
@@ -366,17 +298,16 @@ void Server::setCustomHostname([[maybe_unused]] std::string_view hostname) {
 }
 
 void Server::setCustomDataTypes(std::vector<DataType> dataTypes) {
-    auto& context = connection_->context;
-    context.dataTypes = std::move(dataTypes);
-    context.dataTypeArray = std::make_unique<UA_DataTypeArray>(
-        detail::createDataTypeArray(context.dataTypes)
+    context().dataTypes = std::move(dataTypes);
+    context().dataTypeArray = std::make_unique<UA_DataTypeArray>(
+        detail::createDataTypeArray(context().dataTypes)
     );
-    config()->customDataTypes = context.dataTypeArray.get();
+    config()->customDataTypes = context().dataTypeArray.get();
 }
 
 std::vector<Session> Server::getSessions() {
     std::vector<Session> sessions;
-    for (auto&& id : connection_->context.sessionRegistry.sessionIds) {
+    for (auto&& id : context().sessionRegistry.sessionIds) {
         sessions.emplace_back(*this, id);
     }
     return sessions;
@@ -501,20 +432,48 @@ Event Server::createEvent(const NodeId& eventType) {
 }
 #endif
 
+static void runStartup(Server& server, detail::ServerContext& context) {
+    applySessionRegistry(server.config(), context);
+    throwIfBad(UA_Server_run_startup(server.handle()));
+    context.running = true;
+}
+
 uint16_t Server::runIterate() {
-    return connection_->runIterate();
+    if (!context().running) {
+        runStartup(*this, context());
+    }
+    auto interval = UA_Server_run_iterate(handle(), false /* don't wait */);
+    context().exceptionCatcher.rethrow();
+    return interval;
 }
 
 void Server::run() {
-    connection_->run();
+    if (context().running) {
+        return;
+    }
+    runStartup(*this, context());
+    const std::lock_guard lock(context().mutexRun);
+    try {
+        while (context().running) {
+            // https://github.com/open62541/open62541/blob/master/examples/server_mainloop.c
+            UA_Server_run_iterate(handle(), true /* wait for messages in the networklayer */);
+            context().exceptionCatcher.rethrow();
+        }
+    } catch (...) {
+        context().running = false;
+        throw;
+    }
 }
 
 void Server::stop() {
-    connection_->stop();
+    context().running = false;
+    // wait for run loop to complete
+    const std::lock_guard<std::mutex> lock(context().mutexRun);
+    throwIfBad(UA_Server_run_shutdown(handle()));
 }
 
 bool Server::isRunning() const noexcept {
-    return connection_->running;
+    return context().running;
 }
 
 Node<Server> Server::getNode(NodeId id) {
@@ -538,11 +497,26 @@ Node<Server> Server::getViewsNode() {
 }
 
 UA_Server* Server::handle() noexcept {
-    return connection_->server;
+    return server_.get();
 }
 
 const UA_Server* Server::handle() const noexcept {
-    return connection_->server;
+    return server_.get();
+}
+
+detail::ServerContext& Server::context() noexcept {
+    return *context_;
+}
+
+const detail::ServerContext& Server::context() const noexcept {
+    return *context_;
+}
+
+void Server::Deleter::operator()(UA_Server* server) noexcept {
+    if (server != nullptr) {
+        UA_Server_run_shutdown(server);
+        UA_Server_delete(server);
+    }
 }
 
 /* -------------------------------------- Helper functions -------------------------------------- */
@@ -568,14 +542,14 @@ UA_Logger* getLogger(UA_ServerConfig* config) noexcept {
 #endif
 }
 
-ServerConnection* getConnection(UA_Server* server) noexcept {
+Server* getWrapper(UA_Server* server) noexcept {
 #if UAPP_OPEN62541_VER_GE(1, 3)
     auto* config = getConfig(server);
     if (config == nullptr) {
         return nullptr;
     }
-    // UA_ServerConfig.context pointer available since open62541 v1.3
-    auto* connection = static_cast<detail::ServerConnection*>(config->context);
+    assert(config->context != nullptr);
+    return static_cast<Server*>(config->context);
 #else
     if (server == nullptr) {
         return nullptr;
@@ -586,37 +560,21 @@ ServerConnection* getConnection(UA_Server* server) noexcept {
         server, UA_NODEID_NUMERIC(0, UA_NS0ID_SERVER), &nodeContext
     );
     assert(status == UA_STATUSCODE_GOOD);
-    auto* connection = static_cast<detail::ServerConnection*>(nodeContext);
+    assert(nodeContext != nullptr);
+    return static_cast<Server*>(nodeContext);
 #endif
-    assert(connection != nullptr);
-    assert(connection->server == server);
-    return connection;
-}
-
-ServerConnection& getConnection(Server& server) noexcept {
-    auto* connection = server.connection_.get();
-    assert(connection != nullptr);
-    return *connection;
-}
-
-Server* getWrapper(UA_Server* server) noexcept {
-    auto* connection = getConnection(server);
-    if (connection == nullptr) {
-        return nullptr;
-    }
-    return connection->wrapperPtr();
 }
 
 ServerContext* getContext(UA_Server* server) noexcept {
-    auto* connection = getConnection(server);
-    if (connection == nullptr) {
+    auto* wrapper = getWrapper(server);
+    if (wrapper == nullptr) {
         return nullptr;
     }
-    return &connection->context;
+    return &getContext(*wrapper);
 }
 
 ServerContext& getContext(Server& server) noexcept {
-    return getConnection(server).context;
+    return server.context();
 }
 
 }  // namespace detail
