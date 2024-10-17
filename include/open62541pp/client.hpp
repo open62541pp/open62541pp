@@ -36,7 +36,6 @@ namespace detail {
 UA_ClientConfig* getConfig(UA_Client* client) noexcept;
 UA_ClientConfig& getConfig(Client& client) noexcept;
 UA_Logger* getLogger(UA_ClientConfig* config) noexcept;
-Client* getWrapper(UA_Client* client) noexcept;
 ClientContext* getContext(UA_Client* client) noexcept;
 ClientContext& getContext(Client& client) noexcept;
 
@@ -129,6 +128,10 @@ using InactivityCallback = std::function<void()>;
  *
  * Use the handle() method to get access the underlying UA_Server instance and use the full power
  * of open62541.
+ *
+ * Don't overwrite the UA_ClientConfig::clientContext pointer! The context pointer is used to store
+ * a pointer to the Client instance (for asWrapper(UA_Client*)) and to get access to the underlying
+ * client context.
  */
 class Client {
 public:
@@ -282,6 +285,10 @@ private:
     std::unique_ptr<detail::ClientContext> context_;
     std::unique_ptr<UA_Client, Deleter> client_;
 };
+
+/// Convert native UA_Client pointer to its wrapper instance.
+/// The native client must be owned by a Client instance.
+Client* asWrapper(UA_Client* client) noexcept;
 
 inline bool operator==(const Client& lhs, const Client& rhs) noexcept {
     return (lhs.handle() == rhs.handle());

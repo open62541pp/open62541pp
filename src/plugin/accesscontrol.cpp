@@ -29,7 +29,7 @@ inline static const WrapperType& asWrapperRef(const NativeType* nativePtr) {
 inline static std::optional<Session> getSession(
     UA_Server* server, const UA_NodeId* sessionId
 ) noexcept {
-    auto* wrapper = detail::getWrapper(server);
+    auto* wrapper = asWrapper(server);
     if (wrapper == nullptr) {
         return std::nullopt;
     }

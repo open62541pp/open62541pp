@@ -519,6 +519,29 @@ void Server::Deleter::operator()(UA_Server* server) noexcept {
     }
 }
 
+Server* asWrapper(UA_Server* server) noexcept {
+#if UAPP_OPEN62541_VER_GE(1, 3)
+    auto* config = detail::getConfig(server);
+    if (config == nullptr) {
+        return nullptr;
+    }
+    return static_cast<Server*>(config->context);
+#else
+    if (server == nullptr) {
+        return nullptr;
+    }
+    // use node context of server object as fallback
+    void* nodeContext = nullptr;
+    const auto status = UA_Server_getNodeContext(
+        server, UA_NODEID_NUMERIC(0, UA_NS0ID_SERVER), &nodeContext
+    );
+    if (status != UA_STATUSCODE_GOOD) {
+        return nullptr;
+    }
+    return static_cast<Server*>(nodeContext);
+#endif
+}
+
 /* -------------------------------------- Helper functions -------------------------------------- */
 
 namespace detail {
@@ -542,31 +565,8 @@ UA_Logger* getLogger(UA_ServerConfig* config) noexcept {
 #endif
 }
 
-Server* getWrapper(UA_Server* server) noexcept {
-#if UAPP_OPEN62541_VER_GE(1, 3)
-    auto* config = getConfig(server);
-    if (config == nullptr) {
-        return nullptr;
-    }
-    assert(config->context != nullptr);
-    return static_cast<Server*>(config->context);
-#else
-    if (server == nullptr) {
-        return nullptr;
-    }
-    // use node context of server object as fallback
-    void* nodeContext = nullptr;
-    const auto status = UA_Server_getNodeContext(
-        server, UA_NODEID_NUMERIC(0, UA_NS0ID_SERVER), &nodeContext
-    );
-    assert(status == UA_STATUSCODE_GOOD);
-    assert(nodeContext != nullptr);
-    return static_cast<Server*>(nodeContext);
-#endif
-}
-
 ServerContext* getContext(UA_Server* server) noexcept {
-    auto* wrapper = getWrapper(server);
+    auto* wrapper = asWrapper(server);
     if (wrapper == nullptr) {
         return nullptr;
     }

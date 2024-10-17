@@ -80,7 +80,7 @@ configure_file(
     ${doxygen_output_dir}/Doxyfile
 )
 
-file(GLOB_RECURSE open62541pp_headers "${PROJECT_SOURCE_DIR}/include/*.h")
+file(GLOB_RECURSE open62541pp_headers "${PROJECT_SOURCE_DIR}/include/*.hpp")
 file(GLOB_RECURSE open62541pp_examples "${PROJECT_SOURCE_DIR}/examples/*.cpp")
 file(GLOB_RECURSE open62541pp_doc_files "*.dox" "*.html" "*.md" "fragments/*")
 

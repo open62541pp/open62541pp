@@ -39,7 +39,6 @@ namespace detail {
 UA_ServerConfig* getConfig(UA_Server* server) noexcept;
 UA_ServerConfig& getConfig(Server& server) noexcept;
 UA_Logger* getLogger(UA_ServerConfig* config) noexcept;
-Server* getWrapper(UA_Server* server) noexcept;
 ServerContext* getContext(UA_Server* server) noexcept;
 ServerContext& getContext(Server& server) noexcept;
 
@@ -138,6 +137,10 @@ public:
  *
  * Use the handle() method to get access the underlying UA_Server instance and use the full power
  * of open62541.
+ *
+ * Don't overwrite the UA_ServerConfig::context pointer! The context pointer is used to store a
+ * pointer to the Server instance (for asWrapper(UA_Server*)) and to get access to the underlying
+ * server context.
  */
 class Server {
 public:
@@ -278,6 +281,10 @@ private:
     std::unique_ptr<detail::ServerContext> context_;
     std::unique_ptr<UA_Server, Deleter> server_;
 };
+
+/// Convert native UA_Server pointer to its wrapper instance.
+/// The native server must be owned by a Server instance.
+Server* asWrapper(UA_Server* server) noexcept;
 
 inline bool operator==(const Server& lhs, const Server& rhs) noexcept {
     return (lhs.handle() == rhs.handle());

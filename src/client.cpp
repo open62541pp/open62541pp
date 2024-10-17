@@ -514,6 +514,14 @@ void Client::Deleter::operator()(UA_Client* client) noexcept {
     }
 }
 
+Client* asWrapper(UA_Client* client) noexcept {
+    auto* config = detail::getConfig(client);
+    if (config == nullptr) {
+        return nullptr;
+    }
+    return static_cast<Client*>(config->clientContext);
+}
+
 /* -------------------------------------- Helper functions -------------------------------------- */
 
 namespace detail {
@@ -537,17 +545,8 @@ UA_Logger* getLogger(UA_ClientConfig* config) noexcept {
 #endif
 }
 
-Client* getWrapper(UA_Client* client) noexcept {
-    auto* config = getConfig(client);
-    if (config == nullptr) {
-        return nullptr;
-    }
-    assert(config->clientContext != nullptr);
-    return static_cast<Client*>(config->clientContext);
-}
-
 ClientContext* getContext(UA_Client* client) noexcept {
-    auto* wrapper = getWrapper(client);
+    auto* wrapper = asWrapper(client);
     if (wrapper == nullptr) {
         return nullptr;
     }
