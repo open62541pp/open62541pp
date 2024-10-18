@@ -530,10 +530,6 @@ UA_ClientConfig* getConfig(UA_Client* client) noexcept {
     return UA_Client_getConfig(client);
 }
 
-UA_ClientConfig& getConfig(Client& client) noexcept {
-    return *getConfig(client.handle());
-}
-
 UA_Logger* getLogger(UA_ClientConfig* config) noexcept {
     if (config == nullptr) {
         return nullptr;
