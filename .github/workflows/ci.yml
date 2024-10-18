@@ -9,7 +9,7 @@ jobs:
   test:
     name: ${{ matrix.config.name }} (${{ matrix.build_type }}, ${{ matrix.library_type }})
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         config:
           - name: Linux GCC 9
