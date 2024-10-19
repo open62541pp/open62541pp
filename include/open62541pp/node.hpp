@@ -402,7 +402,7 @@ public:
     /// The characteristic scalar or array is deduced from the value's type.
     template <typename T>
     T readValue() {
-        return readValue().template getValueCopy<T>();
+        return readValue().template getValue<T, VariantPolicy::Copy>();
     }
 
     /// Read scalar value from variable node.

@@ -40,7 +40,7 @@ struct IsContainer<
     : std::true_type {};
 
 template <typename T>
-inline constexpr bool IsContainerV = IsContainer<T>::value;
+inline constexpr bool isContainer = IsContainer<T>::value;
 
 template <typename T, typename = void>
 struct IsContiguousContainer : std::false_type {};

@@ -875,6 +875,21 @@ enum class VariantPolicy {
     // clang-format on
 };
 
+/**
+ * Token used for selecting the policy when constructing variants.
+ *
+ * TODO:
+ * Consider alternatives:
+ * - A: If the VariantPolicy is changed from enum to a struct (or namespace) with sub-structs, then
+ *   these could be directly used as tokens. Could be seen as unconvential, though.
+ * - B: Use explicit names for tokens, e.g. "ConstructWithCopy, ConstructWithReference,
+ *   ConstructWithReferenceIfPossible". Could be seen as verbose, though.
+ */
+template <VariantPolicy Policy>
+struct ConstructorToken {
+    static constexpr VariantPolicy policy = Policy;
+};
+
 namespace detail {
 template <VariantPolicy>
 struct VariantHandler;
@@ -888,72 +903,87 @@ class Variant : public TypeWrapper<UA_Variant, UA_TYPES_VARIANT> {
 public:
     using TypeWrapper::TypeWrapper;  // inherit constructors
 
+    // Universal constructors with default copy policy
+
+    template <typename ConstructorToken = ConstructorToken<VariantPolicy::Copy>, typename T>
+    Variant(T&& value, ConstructorToken /*unused*/) {
+        setValue<ConstructorToken::policy>(std::forward<T>(value));
+    }
+
+    template <typename ConstructorToken = ConstructorToken<VariantPolicy::Copy>, typename T>
+    Variant(T&& value, const UA_DataType& dataType, ConstructorToken /*unused*/) {
+        setValue<ConstructorToken::policy>(std::forward<T>(value), dataType);
+    }
+
+    template <typename ConstructorToken = ConstructorToken<VariantPolicy::Copy>, typename InputIt>
+    Variant(InputIt first, InputIt last, ConstructorToken /*unused*/) {
+        setValue<ConstructorToken::policy>(first, last);
+    }
+
+    template <typename ConstructorToken = ConstructorToken<VariantPolicy::Copy>, typename InputIt>
+    Variant(InputIt first, InputIt last, const UA_DataType& dataType, ConstructorToken /*unused*/) {
+        setValue<ConstructorToken::policy>(first, last, dataType);
+    }
+
+    // TODO:
+    // Do not add fromValue methods? As we the constructors above.
+
     /// Create Variant from value.
     /// The characteristic scalar or array is deduced from the value's type.
     /// @tparam Policy Policy (@ref VariantPolicy) how to store the scalar inside the variant
     template <VariantPolicy Policy = VariantPolicy::Copy, typename T>
     [[nodiscard]] static Variant fromValue(T&& value) {
-        using Decayed = std::decay_t<T>;
-        if constexpr (detail::IsContainerV<Decayed> && !detail::isRegisteredType<Decayed> && !std::is_same_v<Decayed, std::string>) {
-            return fromArray<Policy>(std::forward<T>(value));
-        } else {
-            return fromScalar<Policy>(std::forward<T>(value));
-        }
+        return Variant{std::forward<T>(value), ConstructorToken<Policy>{}};
+    }
+
+    /// Create Variant from value with custom data type.
+    /// The characteristic scalar or array is deduced from the value's type.
+    /// @tparam Policy Policy (@ref VariantPolicy) how to store the scalar inside the variant
+    template <VariantPolicy Policy = VariantPolicy::Copy, typename T>
+    [[nodiscard]] static Variant fromValue(T&& value, const UA_DataType& dataType) {
+        return Variant{std::forward<T>(value), dataType, ConstructorToken<Policy>{}};
+    }
+
+    /// Create Variant from range of elements (copy required).
+    /// @tparam Policy Policy (@ref VariantPolicy) how to store the array inside the variant
+    template <VariantPolicy Policy = VariantPolicy::Copy, typename InputIt>
+    [[nodiscard]] static Variant fromValue(InputIt first, InputIt last) {
+        return Variant{first, last, ConstructorToken<Policy>{}};
     }
 
     /// Create Variant from scalar value.
     /// @tparam Policy Policy (@ref VariantPolicy) how to store the scalar inside the variant
     template <VariantPolicy Policy = VariantPolicy::Copy, typename T>
     [[nodiscard]] static Variant fromScalar(T&& value) {
-        Variant var;
-        detail::VariantHandler<Policy>::setScalar(var, std::forward<T>(value));
-        return var;
+        return Variant{std::forward<T>(value), ConstructorToken<Policy>{}};
     }
 
     /// Create Variant from scalar value with custom data type.
     /// @tparam Policy Policy (@ref VariantPolicy) how to store the scalar inside the variant
     template <VariantPolicy Policy = VariantPolicy::Copy, typename T>
     [[nodiscard]] static Variant fromScalar(T&& value, const UA_DataType& dataType) {
-        Variant var;
-        detail::VariantHandler<Policy>::setScalar(var, std::forward<T>(value), dataType);
-        return var;
+        return Variant{std::forward<T>(value), dataType, ConstructorToken<Policy>{}};
     }
 
     /// Create Variant from array.
     /// @tparam Policy Policy (@ref VariantPolicy) how to store the array inside the variant
     template <VariantPolicy Policy = VariantPolicy::Copy, typename ArrayLike>
     [[nodiscard]] static Variant fromArray(ArrayLike&& array) {
-        using Handler = detail::VariantHandler<Policy>;
-        Variant var;
-        if constexpr (detail::IsContiguousContainer<ArrayLike>::value) {
-            Handler::setArray(var, Span{std::forward<ArrayLike>(array)});
-        } else {
-            Handler::setArray(var, array.begin(), array.end());
-        }
-        return var;
+        return Variant{std::forward<ArrayLike>(array), ConstructorToken<Policy>{}};
     }
 
     /// Create Variant from array with custom data type.
     /// @tparam Policy Policy (@ref VariantPolicy) how to store the array inside the variant
     template <VariantPolicy Policy = VariantPolicy::Copy, typename ArrayLike>
     [[nodiscard]] static Variant fromArray(ArrayLike&& array, const UA_DataType& dataType) {
-        using Handler = detail::VariantHandler<Policy>;
-        Variant var;
-        if constexpr (detail::IsContiguousContainer<ArrayLike>::value) {
-            Handler::setArray(var, Span{std::forward<ArrayLike>(array)}, dataType);
-        } else {
-            Handler::setArray(var, array.begin(), array.end(), dataType);
-        }
-        return var;
+        return Variant{std::forward<ArrayLike>(array), dataType, ConstructorToken<Policy>{}};
     }
 
     /// Create Variant from range of elements (copy required).
     /// @tparam Policy Policy (@ref VariantPolicy) how to store the array inside the variant
     template <VariantPolicy Policy = VariantPolicy::Copy, typename InputIt>
     [[nodiscard]] static Variant fromArray(InputIt first, InputIt last) {
-        Variant var;
-        detail::VariantHandler<Policy>::setArray(var, first, last);
-        return var;
+        return Variant{first, last, ConstructorToken<Policy>{}};
     }
 
     /// Create Variant from range of elements with custom data type (copy required).
@@ -962,9 +992,7 @@ public:
     [[nodiscard]] static Variant fromArray(
         InputIt first, InputIt last, const UA_DataType& dataType
     ) {
-        Variant var;
-        detail::VariantHandler<Policy>::setArray(var, first, last, dataType);
-        return var;
+        return Variant{first, last, dataType, ConstructorToken<Policy>{}};
     }
 
     /// Check if the variant is empty.
@@ -1026,15 +1054,97 @@ public:
         return handle()->data;
     }
 
-    /// Get copy of value with given template type.
-    /// The characteristic scalar or array is deduced from the value's type.
-    /// @exception BadVariantAccess If the variant is not convertible to `T`.
     template <typename T>
-    T getValueCopy() {
-        if constexpr (detail::IsContainerV<T> && !detail::isRegisteredType<T> && !std::is_same_v<T, std::string>) {
-            return getArrayCopy<typename T::value_type>();
+    struct IsVector : std::false_type {};
+
+    template <class T>
+    struct IsVector<std::vector<T>> : std::true_type {};
+
+    // Unified API for getting a value.
+    // A template parameter is used to select the variant
+    // policy instead of using additional functions with "Copy" suffix.
+    // Default policy is ReferenceIfPossible, which should work fine for most reference as well as
+    // copy scenarios. In most cases whether to copy or reference is decided by the variable
+    // data type that is assigned to.
+    // TODO:
+    // Clean up.
+
+    template <typename T, VariantPolicy Policy = VariantPolicy::ReferenceIfPossible>
+    decltype(auto) getValue() & {
+        if constexpr (Policy == VariantPolicy::Copy) {
+            if constexpr (isCopyableOrConvertible<T>) {
+                return getScalarCopy<T>();
+            } else {
+                return getArrayCopy<typename T::value_type>();
+            }
+        } else if constexpr (Policy == VariantPolicy::ReferenceIfPossible) {
+            if constexpr (detail::isRegisteredType<T>) {
+                return getScalar<T>();
+            } else if constexpr (detail::isConvertibleType<T>) {
+                return getScalarCopy<T>();
+            } else if constexpr (IsVector<T>::value) {
+                return getArrayCopy<typename T::value_type>();
+            } else {
+                return getArray<typename T::value_type>();
+            }
         } else {
-            return getScalarCopy<T>();
+            if constexpr (isCopyableOrConvertible<T>) {
+                return getScalar<T>();
+            } else {
+                return getArray<typename T::value_type>();
+            }
+        }
+    }
+
+    template <typename T, VariantPolicy Policy = VariantPolicy::ReferenceIfPossible>
+    decltype(auto) getValue() && {
+        if constexpr (Policy == VariantPolicy::Copy) {
+            if constexpr (isCopyableOrConvertible<T>) {
+                return getScalarCopy<T>();
+            } else {
+                return getArrayCopy<typename T::value_type>();
+            }
+        } else if constexpr (Policy == VariantPolicy::ReferenceIfPossible) {
+            if constexpr (detail::isRegisteredType<T>) {
+                return std::move(getScalar<T>());
+            } else if constexpr (detail::isConvertibleType<T>) {
+                return getScalarCopy<T>();
+            } else if constexpr (IsVector<T>::value) {
+                return getArrayCopy<typename T::value_type>();
+            } else {
+                return getArray<typename T::value_type>();
+            }
+        } else {
+            if constexpr (isCopyableOrConvertible<T>) {
+                return std::move(getScalar<T>());
+            } else {
+                return getArray<typename T::value_type>();
+            }
+        }
+    }
+
+    template <typename T, VariantPolicy Policy = VariantPolicy::ReferenceIfPossible>
+    decltype(auto) getValue() const& {
+        if constexpr (Policy == VariantPolicy::Copy) {
+            if constexpr (isCopyableOrConvertible<T>) {
+                return getScalarCopy<T>();
+            } else {
+                return getArrayCopy<typename T::value_type>();
+            }
+        } else if constexpr (Policy == VariantPolicy::ReferenceIfPossible) {
+            if constexpr (detail::isRegisteredType<T>) {
+                return getScalar<T>();
+            } else if constexpr (detail::isConvertibleType<T>) {
+                return getScalarCopy<T>();
+            } else {
+                return getArray<typename T::value_type>();
+            }
+        } else {
+            if constexpr (isCopyableOrConvertible<T>) {
+                return getScalar<T>();
+            } else {
+                return getArray<typename T::value_type>();
+            }
         }
     }
 
@@ -1113,6 +1223,60 @@ public:
     std::vector<T> getArrayCopy() const {
         assertIsCopyableOrConvertible<T>();
         return getArrayCopyImpl<T>();
+    }
+
+    // Unified API for setting a value.
+    // A template parameter is used to select the variant
+    // policy instead of using additional functions with "Copy" suffix.
+    // Default policy is Copy for more robust behavior (avoid potential dangling references and
+    // opt-in for memory optimization).
+
+    template <VariantPolicy Policy = VariantPolicy::Copy, typename T>
+    void setValue(T&& value) {
+        using Decayed = std::decay_t<T>;
+        using VariantHandler = detail::VariantHandler<Policy>;
+
+        if constexpr (isCopyableOrConvertible<Decayed>) {
+            VariantHandler::setScalar(*this, std::forward<T>(value));
+        } else if constexpr (detail::isContainer<Decayed>) {
+            if constexpr (detail::IsContiguousContainer<Decayed>::value) {
+                VariantHandler::setArray(*this, Span{std::forward<T>(value)});
+            } else {
+                VariantHandler::setArray(*this, value.begin(), value.end());
+            }
+        } else {
+            assertIsCopyableOrConvertible<Decayed>();
+        }
+    }
+
+    template <VariantPolicy Policy = VariantPolicy::Copy, typename T>
+    void setValue(T&& value, const UA_DataType& dataType) {
+        using Decayed = std::decay_t<T>;
+        using VariantHandler = detail::VariantHandler<Policy>;
+
+        if constexpr (isCopyableOrConvertible<Decayed>) {
+            VariantHandler::setScalar(*this, std::forward<T>(value), dataType);
+        } else if constexpr (detail::isContainer<Decayed>) {
+            if constexpr (detail::IsContiguousContainer<Decayed>::value) {
+                VariantHandler::setArray(*this, Span{std::forward<T>(value)}, dataType);
+            } else {
+                VariantHandler::setArray(*this, value.begin(), value.end(), dataType);
+            }
+        } else {
+            assertIsCopyableOrConvertible<Decayed>();
+        }
+    }
+
+    template <VariantPolicy Policy = VariantPolicy::Copy, typename InputIt>
+    void setValue(InputIt first, InputIt last) {
+        using VariantHandler = detail::VariantHandler<Policy>;
+        VariantHandler::setArray(*this, first, last);
+    }
+
+    template <VariantPolicy Policy = VariantPolicy::Copy, typename InputIt>
+    void setValue(InputIt first, InputIt last, const UA_DataType& dataType) {
+        using VariantHandler = detail::VariantHandler<Policy>;
+        VariantHandler::setArray(*this, first, last, dataType);
     }
 
     /// Assign scalar value to variant (no copy).
@@ -1233,10 +1397,15 @@ private:
     }
 
     template <typename T>
+    static constexpr bool isCopyableOrConvertible = detail::isRegisteredType<T> ||
+        detail::isConvertibleType<T>;
+
+    template <typename T>
     static constexpr void assertIsCopyableOrConvertible() {
         static_assert(
-            detail::isRegisteredType<T> || detail::isConvertibleType<T>,
-            "Template type must be either a native/wrapper type (copyable) or a convertible type. "
+            isCopyableOrConvertible<T>,
+            "Template type must be either a native/wrapper type (copyable) or a convertible "
+            "type. "
             "If the type is a native type: Provide the data type (UA_DataType) manually "
             "or register the type with a TypeRegistry template specialization. "
             "If the type should be converted: Add a template specialization for TypeConverter."
@@ -1490,6 +1659,31 @@ struct VariantHandler<VariantPolicy::ReferenceIfPossible> : VariantHandler<Varia
         var.setArrayCopy(array.begin(), array.end(), dtype);
     }
 };
+
+// TODO:
+// Put more functionality into VariantHandler?
+// - Resolving a value to scalar or array?
+// - Include also functions to get a value?
+
+// template <VariantPolicy Policy>
+// struct VariantHandlerNew : public VariantHandler<Policy> {
+//     template <typename T>
+//     static void setValue(Variant& var, T&& value) {
+//         using Decayed = std::decay_t<T>;
+
+//         if constexpr (isCopyableOrConvertible<Decayed>) {
+//             setScalar(var, std::forward<T>(value));
+//         } else if constexpr (detail::isContainer<Decayed>) {
+//             if constexpr (detail::IsContiguousContainer<Decayed>::value) {
+//                 setArray(var, Span{std::forward<T>(value)});
+//             } else {
+//                 setArray(var, value.begin(), value.end());
+//             }
+//         } else {
+//             assertIsCopyableOrConvertible<Decayed>();
+//         }
+//     }
+// };
 
 }  // namespace detail
 
