@@ -901,6 +901,11 @@ struct ConstructorToken {
 };
 
 namespace detail {
+
+template <typename T>
+static constexpr bool isCopyableOrConvertible = detail::isRegisteredType<T> ||
+    detail::isConvertibleType<T>;
+
 template <VariantPolicy>
 struct VariantHandler;
 }  // namespace detail
@@ -1070,40 +1075,25 @@ public:
     // Default policy is ReferenceIfPossible, which should work fine for most reference as well as
     // copy scenarios. In most cases whether to copy or reference is decided by the variable
     // data type that is assigned to.
-    // TODO:
-    // Clean up.
 
     template <typename T, VariantPolicy Policy = VariantPolicy::ReferenceIfPossible>
     decltype(auto) getValue() & {
-        using VariantHandler = detail::VariantHandler<Policy>;
-
-        if constexpr (detail::isContainer<T> && !isCopyableOrConvertible<T>) {
-            return VariantHandler::template getArray<T>(*this);
-        } else {
-            return VariantHandler::template getScalar<T>(*this);
-        }
-    }
-
-    template <typename T, VariantPolicy Policy = VariantPolicy::ReferenceIfPossible>
-    decltype(auto) getValue() && {
-        using VariantHandler = detail::VariantHandler<Policy>;
-
-        if constexpr (detail::isContainer<T> && !isCopyableOrConvertible<T>) {
-            return VariantHandler::template getArray<T>(std::move(*this));
-        } else {
-            return VariantHandler::template getScalar<T>(std::move(*this));
-        }
+        return detail::VariantHandler<Policy>::template getValue<T>(*this);
     }
 
     template <typename T, VariantPolicy Policy = VariantPolicy::ReferenceIfPossible>
     decltype(auto) getValue() const& {
-        using VariantHandler = detail::VariantHandler<Policy>;
+        return detail::VariantHandler<Policy>::template getValue<T>(*this);
+    }
 
-        if constexpr (detail::isContainer<T> && !isCopyableOrConvertible<T>) {
-            return VariantHandler::template getArray<T>(*this);
-        } else {
-            return VariantHandler::template getScalar<T>(*this);
-        }
+    template <typename T, VariantPolicy Policy = VariantPolicy::ReferenceIfPossible>
+    decltype(auto) getValue() && {
+        return detail::VariantHandler<Policy>::template getValue<T>(std::move(*this));
+    }
+
+    template <typename T, VariantPolicy Policy = VariantPolicy::ReferenceIfPossible>
+    decltype(auto) getValue() const&& {
+        return detail::VariantHandler<Policy>::template getValue<T>(*this);
     }
 
     /// Get reference to scalar value with given template type (only native or wrapper types).
@@ -1191,48 +1181,22 @@ public:
 
     template <VariantPolicy Policy = VariantPolicy::Copy, typename T>
     void setValue(T&& value) {
-        using Decayed = std::decay_t<T>;
-        using VariantHandler = detail::VariantHandler<Policy>;
-
-        if constexpr (detail::isContainer<Decayed> && !isCopyableOrConvertible<Decayed>) {
-            if constexpr (detail::IsContiguousContainer<Decayed>::value) {
-                VariantHandler::setArray(*this, Span{std::forward<T>(value)});
-            } else {
-                VariantHandler::setArray(*this, value.begin(), value.end());
-            }
-        } else {
-            VariantHandler::setScalar(*this, std::forward<T>(value));
-        }
+        detail::VariantHandler<Policy>::setValue(*this, std::forward<T>(value));
     }
 
     template <VariantPolicy Policy = VariantPolicy::Copy, typename T>
     void setValue(T&& value, const UA_DataType& dataType) {
-        using Decayed = std::decay_t<T>;
-        using VariantHandler = detail::VariantHandler<Policy>;
-
-        if constexpr (detail::isContainer<Decayed> && !isCopyableOrConvertible<Decayed>) {
-            if constexpr (detail::IsContiguousContainer<Decayed>::value) {
-                VariantHandler::setArray(*this, Span{std::forward<T>(value)}, dataType);
-            } else {
-                VariantHandler::setArray(*this, value.begin(), value.end(), dataType);
-            }
-        } else {
-            VariantHandler::setScalar(*this, std::forward<T>(value), dataType);
-        }
+        detail::VariantHandler<Policy>::setValue(*this, std::forward<T>(value), dataType);
     }
 
     template <VariantPolicy Policy = VariantPolicy::Copy, typename InputIt>
     void setValue(InputIt first, InputIt last) {
-        using VariantHandler = detail::VariantHandler<Policy>;
-
-        VariantHandler::setArray(*this, first, last);
+        detail::VariantHandler<Policy>::setArray(*this, first, last);
     }
 
     template <VariantPolicy Policy = VariantPolicy::Copy, typename InputIt>
     void setValue(InputIt first, InputIt last, const UA_DataType& dataType) {
-        using VariantHandler = detail::VariantHandler<Policy>;
-
-        VariantHandler::setArray(*this, first, last, dataType);
+        detail::VariantHandler<Policy>::setArray(*this, first, last, dataType);
     }
 
     /// Assign scalar value to variant (no copy).
@@ -1353,13 +1317,9 @@ private:
     }
 
     template <typename T>
-    static constexpr bool isCopyableOrConvertible = detail::isRegisteredType<T> ||
-        detail::isConvertibleType<T>;
-
-    template <typename T>
     static constexpr void assertIsCopyableOrConvertible() {
         static_assert(
-            isCopyableOrConvertible<T>,
+            detail::isCopyableOrConvertible<T>,
             "Template type must be either a native/wrapper type (copyable) or a convertible "
             "type. "
             "If the type is a native type: Provide the data type (UA_DataType) manually "
@@ -1516,8 +1476,11 @@ void Variant::setArrayCopyConvertImpl(InputIt first, InputIt last) {
 
 namespace detail {
 
+template <VariantPolicy Policy>
+struct VariantHandlerBase;
+
 template <>
-struct VariantHandler<VariantPolicy::Copy> {
+struct VariantHandlerBase<VariantPolicy::Copy> {
     template <typename T, typename Variant>
     static decltype(auto) getScalar(Variant&& var) {
         return std::forward<Variant>(var).template getScalarCopy<T>();
@@ -1560,7 +1523,7 @@ struct VariantHandler<VariantPolicy::Copy> {
 };
 
 template <>
-struct VariantHandler<VariantPolicy::Reference> {
+struct VariantHandlerBase<VariantPolicy::Reference> {
     template <typename T, typename Variant>
     static decltype(auto) getScalar(Variant&& var) {
         return std::forward<Variant>(var).template getScalar<T>();
@@ -1593,9 +1556,10 @@ struct VariantHandler<VariantPolicy::Reference> {
 };
 
 template <>
-struct VariantHandler<VariantPolicy::ReferenceIfPossible> : VariantHandler<VariantPolicy::Copy> {
-    using VariantHandler<VariantPolicy::Copy>::setScalar;
-    using VariantHandler<VariantPolicy::Copy>::setArray;
+struct VariantHandlerBase<VariantPolicy::ReferenceIfPossible>
+    : VariantHandlerBase<VariantPolicy::Copy> {
+    using VariantHandlerBase<VariantPolicy::Copy>::setScalar;
+    using VariantHandlerBase<VariantPolicy::Copy>::setArray;
 
     template <typename T, typename Variant>
     static decltype(auto) getScalar(Variant&& var) {
@@ -1654,30 +1618,38 @@ struct VariantHandler<VariantPolicy::ReferenceIfPossible> : VariantHandler<Varia
     }
 };
 
-// TODO:
-// Put more functionality into VariantHandler?
-// - Resolving a value to scalar or array?
-// - Include also functions to get a value?
+template <VariantPolicy Policy>
+struct VariantHandler : public VariantHandlerBase<Policy> {
+    template <typename T, typename Variant>
+    static decltype(auto) getValue(Variant&& var) {
+        if constexpr (detail::isContainer<T> && !detail::isCopyableOrConvertible<T>) {
+            return VariantHandlerBase<Policy>::template getArray<T>(std::forward<Variant>(var));
+        } else {
+            return VariantHandlerBase<Policy>::template getScalar<T>(std::forward<Variant>(var));
+        }
+    }
 
-// template <VariantPolicy Policy>
-// struct VariantHandlerNew : public VariantHandler<Policy> {
-//     template <typename T>
-//     static void setValue(Variant& var, T&& value) {
-//         using Decayed = std::decay_t<T>;
+    template <typename T, typename... Args>
+    static void setValue(Variant& var, T&& value, Args&&... args) {
+        using Decayed = std::decay_t<T>;
 
-//         if constexpr (isCopyableOrConvertible<Decayed>) {
-//             setScalar(var, std::forward<T>(value));
-//         } else if constexpr (detail::isContainer<Decayed>) {
-//             if constexpr (detail::IsContiguousContainer<Decayed>::value) {
-//                 setArray(var, Span{std::forward<T>(value)});
-//             } else {
-//                 setArray(var, value.begin(), value.end());
-//             }
-//         } else {
-//             assertIsCopyableOrConvertible<Decayed>();
-//         }
-//     }
-// };
+        if constexpr (isContainer<Decayed> && !isCopyableOrConvertible<Decayed>) {
+            if constexpr (detail::IsContiguousContainer<Decayed>::value) {
+                VariantHandlerBase<Policy>::setArray(
+                    var, Span{std::forward<T>(value)}, std::forward<Args>(args)...
+                );
+            } else {
+                VariantHandlerBase<Policy>::setArray(
+                    var, value.begin(), value.end(), std::forward<Args>(args)...
+                );
+            }
+        } else {
+            VariantHandlerBase<Policy>::setScalar(
+                var, std::forward<T>(value), std::forward<Args>(args)...
+            );
+        }
+    }
+};
 
 }  // namespace detail
 
