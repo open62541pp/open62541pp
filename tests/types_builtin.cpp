@@ -975,7 +975,7 @@ TEST_CASE("Variant") {
             CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_STRING]);
 
             CHECK_THROWS(var.getValue<std::string>());
-            CHECK_THROWS(var.getValue<int32_t, VariantPolicy::Copy>());
+            CHECK_THROWS(var.getValue<std::vector<int32_t>, VariantPolicy::Copy>());
             CHECK_THROWS(var.getValue<std::vector<bool>>());
             CHECK(var.getValue<std::vector<std::string>>() == value);
         }

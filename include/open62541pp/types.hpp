@@ -330,6 +330,16 @@ struct TypeConverter<const char*> {
     }
 };
 
+template <>
+struct TypeConverter<char*> {
+    using ValueType = char*;
+    using NativeType = String;
+
+    static void toNative(const char* src, NativeType& dst) {
+        dst = String(src);
+    }
+};
+
 template <size_t N>
 struct TypeConverter<char[N]> {  // NOLINT
     using ValueType = char[N];  // NOLINT
@@ -1236,9 +1246,7 @@ public:
         using Decayed = std::decay_t<T>;
         using VariantHandler = detail::VariantHandler<Policy>;
 
-        if constexpr (isCopyableOrConvertible<Decayed>) {
-            VariantHandler::setScalar(*this, std::forward<T>(value));
-        } else if constexpr (detail::isContainer<Decayed>) {
+        if constexpr (detail::isContainer<Decayed> && !isCopyableOrConvertible<Decayed>) {
             if constexpr (detail::IsContiguousContainer<Decayed>::value) {
                 VariantHandler::setArray(*this, Span{std::forward<T>(value)});
             } else {
@@ -1246,6 +1254,7 @@ public:
             }
         } else {
             assertIsCopyableOrConvertible<Decayed>();
+            VariantHandler::setScalar(*this, std::forward<T>(value));
         }
     }
 
@@ -1254,28 +1263,28 @@ public:
         using Decayed = std::decay_t<T>;
         using VariantHandler = detail::VariantHandler<Policy>;
 
-        if constexpr (isCopyableOrConvertible<Decayed>) {
-            VariantHandler::setScalar(*this, std::forward<T>(value), dataType);
-        } else if constexpr (detail::isContainer<Decayed>) {
+        if constexpr (detail::isContainer<Decayed> && !isCopyableOrConvertible<Decayed>) {
             if constexpr (detail::IsContiguousContainer<Decayed>::value) {
                 VariantHandler::setArray(*this, Span{std::forward<T>(value)}, dataType);
             } else {
                 VariantHandler::setArray(*this, value.begin(), value.end(), dataType);
             }
         } else {
-            assertIsCopyableOrConvertible<Decayed>();
+            VariantHandler::setScalar(*this, std::forward<T>(value), dataType);
         }
     }
 
     template <VariantPolicy Policy = VariantPolicy::Copy, typename InputIt>
     void setValue(InputIt first, InputIt last) {
         using VariantHandler = detail::VariantHandler<Policy>;
+
         VariantHandler::setArray(*this, first, last);
     }
 
     template <VariantPolicy Policy = VariantPolicy::Copy, typename InputIt>
     void setValue(InputIt first, InputIt last, const UA_DataType& dataType) {
         using VariantHandler = detail::VariantHandler<Policy>;
+
         VariantHandler::setArray(*this, first, last, dataType);
     }
 
