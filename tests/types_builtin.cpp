@@ -930,6 +930,7 @@ TEST_CASE("Variant") {
             var.setValue(11.11);
             CHECK(var.getValue<double>() == 11.11);
             CHECK(var.getValue<double, VariantPolicy::Copy>() == 11.11);
+            CHECK(std::as_const(var).getValue<double, VariantPolicy::Copy>() == 11.11);
         }
 
         SUBCASE("Set/get array") {
