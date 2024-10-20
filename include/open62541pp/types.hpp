@@ -1091,9 +1091,20 @@ public:
         return detail::VariantHandler<Policy>::template getValue<T>(std::move(*this));
     }
 
+    // Additional API option with output param, to remove the need for specifying T.
     template <typename T, VariantPolicy Policy = VariantPolicy::ReferenceIfPossible>
-    decltype(auto) getValue() const&& {
-        return detail::VariantHandler<Policy>::template getValue<T>(*this);
+    void getValue(T& value) & {
+        value = detail::VariantHandler<Policy>::template getValue<T>(*this);
+    }
+
+    template <typename T, VariantPolicy Policy = VariantPolicy::ReferenceIfPossible>
+    void getValue(T& value) const& {
+        value = detail::VariantHandler<Policy>::template getValue<T>(*this);
+    }
+
+    template <typename T, VariantPolicy Policy = VariantPolicy::ReferenceIfPossible>
+    void getValue(T& value) && {
+        value = std::move(detail::VariantHandler<Policy>::template getValue<T>(std::move(*this)));
     }
 
     /// Get reference to scalar value with given template type (only native or wrapper types).
@@ -1620,12 +1631,14 @@ struct VariantHandlerBase<VariantPolicy::ReferenceIfPossible>
 
 template <VariantPolicy Policy>
 struct VariantHandler : public VariantHandlerBase<Policy> {
+    using Base = VariantHandlerBase<Policy>;
+
     template <typename T, typename Variant>
     static decltype(auto) getValue(Variant&& var) {
         if constexpr (detail::isContainer<T> && !detail::isCopyableOrConvertible<T>) {
-            return VariantHandlerBase<Policy>::template getArray<T>(std::forward<Variant>(var));
+            return Base::template getArray<T>(std::forward<Variant>(var));
         } else {
-            return VariantHandlerBase<Policy>::template getScalar<T>(std::forward<Variant>(var));
+            return Base::template getScalar<T>(std::forward<Variant>(var));
         }
     }
 
@@ -1635,18 +1648,12 @@ struct VariantHandler : public VariantHandlerBase<Policy> {
 
         if constexpr (isContainer<Decayed> && !isCopyableOrConvertible<Decayed>) {
             if constexpr (detail::IsContiguousContainer<Decayed>::value) {
-                VariantHandlerBase<Policy>::setArray(
-                    var, Span{std::forward<T>(value)}, std::forward<Args>(args)...
-                );
+                Base::setArray(var, Span{std::forward<T>(value)}, std::forward<Args>(args)...);
             } else {
-                VariantHandlerBase<Policy>::setArray(
-                    var, value.begin(), value.end(), std::forward<Args>(args)...
-                );
+                Base::setArray(var, value.begin(), value.end(), std::forward<Args>(args)...);
             }
         } else {
-            VariantHandlerBase<Policy>::setScalar(
-                var, std::forward<T>(value), std::forward<Args>(args)...
-            );
+            Base::setScalar(var, std::forward<T>(value), std::forward<Args>(args)...);
         }
     }
 };

@@ -1092,6 +1092,24 @@ TEST_CASE("Variant") {
                 CHECK(str->data != data);  // can not move const -> copy
             }
         }
+        SUBCASE("getScalar with output param (lvalue & rvalue)") {
+            auto var = Variant::fromValue("test");
+            void* data = var.getValue<String, VariantPolicy::Reference>()->data;
+
+            String str;
+            SUBCASE("rvalue") {
+                var.getValue(str);
+                CHECK(str->data != data);  // copy
+            }
+            SUBCASE("const rvalue") {
+                std::as_const(var).getValue(str);
+                CHECK(str->data != data);  // copy
+            }
+            SUBCASE("lvalue") {
+                std::move(var).getValue(str);
+                CHECK(str->data == data);  // move
+            }
+        }
     }
 }
 

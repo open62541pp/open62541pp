@@ -543,8 +543,10 @@ public:
     /// The characteristic scalar or array is deduced from the value's type.
     template <typename T>
     Node& writeValue(const T& value) {
-        // NOLINTNEXTLINE(*-const-cast), variant isn't modified, try to avoid copy
-        writeValue(Variant::fromValue<VariantPolicy::ReferenceIfPossible>(const_cast<T&>(value)));
+        writeValue(
+            // NOLINTNEXTLINE(*-const-cast), variant isn't modified, try to avoid copy
+            Variant{const_cast<T&>(value), ConstructorToken<VariantPolicy::ReferenceIfPossible>{}}
+        );
         return *this;
     }
 
