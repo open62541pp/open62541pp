@@ -1419,6 +1419,38 @@ public:
     )
 };
 
+/**
+ * UA_BuildInfo wrapper class.
+ * @see https://reference.opcfoundation.org/Core/Part5/v105/docs/12.4
+ */
+class BuildInfo : public TypeWrapper<UA_BuildInfo, UA_TYPES_BUILDINFO> {
+public:
+    using TypeWrapper::TypeWrapper;
+
+    BuildInfo(
+        std::string_view productUri,
+        std::string_view manufacturerName,
+        std::string_view productName,
+        std::string_view softwareVersion,
+        std::string_view buildNumber,
+        DateTime buildDate
+    ) {
+        handle()->productUri = detail::toNative(productUri);
+        handle()->manufacturerName = detail::toNative(manufacturerName);
+        handle()->productName = detail::toNative(productName);
+        handle()->softwareVersion = detail::toNative(softwareVersion);
+        handle()->buildNumber = detail::toNative(buildNumber);
+        handle()->buildDate = detail::toNative(std::move(buildDate));
+    }
+
+    UAPP_GETTER_WRAPPER(String, getProductUri, productUri);
+    UAPP_GETTER_WRAPPER(String, getManufacturerName, manufacturerName);
+    UAPP_GETTER_WRAPPER(String, getProductName, productName);
+    UAPP_GETTER_WRAPPER(String, getSoftwareVersion, softwareVersion);
+    UAPP_GETTER_WRAPPER(String, getBuildNumber, buildNumber);
+    UAPP_GETTER_WRAPPER(DateTime, getBuildDate, buildDate)
+};
+
 /* ------------------------------------------- Method ------------------------------------------- */
 
 #ifdef UA_ENABLE_METHODCALLS
