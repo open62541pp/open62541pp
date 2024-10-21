@@ -48,6 +48,29 @@ constexpr void clear(T& native, const UA_DataType& type) noexcept {
     }
 }
 
+// Overloads for types that allow borrowing
+
+constexpr void clear(UA_Variant& native, const UA_DataType& type) noexcept {
+    assert(isValidTypeCombination<UA_Variant>(type));
+    if (native.storageType != UA_VARIANT_DATA_NODELETE) {
+        UA_clear(&native, &type);
+    }
+}
+
+constexpr void clear(UA_DataValue& native, const UA_DataType& type) noexcept {
+    assert(isValidTypeCombination<UA_DataValue>(type));
+    if (native.value.storageType != UA_VARIANT_DATA_NODELETE) {
+        UA_clear(&native, &type);
+    }
+}
+
+constexpr void clear(UA_ExtensionObject& native, const UA_DataType& type) noexcept {
+    assert(isValidTypeCombination<UA_ExtensionObject>(type));
+    if (native.encoding != UA_EXTENSIONOBJECT_DECODED_NODELETE) {
+        UA_clear(&native, &type);
+    }
+}
+
 template <typename T>
 inline void deallocate(T* native, const UA_DataType& type) noexcept {
     assert(isValidTypeCombination<T>(type));
