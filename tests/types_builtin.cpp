@@ -512,96 +512,6 @@ TEST_CASE("ExpandedNodeId") {
 }
 
 TEST_CASE("Variant") {
-    SUBCASE("fromValue (ReferenceIfPossible)") {
-        constexpr auto policy = VariantPolicy::ReferenceIfPossible;
-        Variant var;
-        SUBCASE("Scalar") {
-            String value("test");
-            SUBCASE("Reference if mutable") {
-                SUBCASE("Deduce data type") {
-                    var = Variant::fromValue<policy>(value);
-                }
-                SUBCASE("Custom data type") {
-                    var = Variant::fromValue<policy>(value, UA_TYPES[UA_TYPES_STRING]);
-                }
-                CHECK(var->data == value.handle());
-            }
-            SUBCASE("Copy if rvalue") {
-                SUBCASE("Deduce data type") {
-                    var = Variant::fromValue<policy>(std::move(value));
-                }
-                SUBCASE("Custom data type") {
-                    var = Variant::fromValue<policy>(std::move(value), UA_TYPES[UA_TYPES_STRING]);
-                }
-                CHECK(var->data != value.handle());
-            }
-            SUBCASE("Copy if const") {
-                SUBCASE("Deduce data type") {
-                    var = Variant::fromValue<policy>(std::as_const(value));
-                }
-                SUBCASE("Custom data type") {
-                    var = Variant::fromValue<policy>(
-                        std::as_const(value), UA_TYPES[UA_TYPES_STRING]
-                    );
-                }
-                CHECK(var->data != value.handle());
-            }
-            SUBCASE("Copy if conversion needed") {
-                std::string str{"test"};
-                var = Variant::fromValue<policy>(str);
-                CHECK(var->data != &str);
-            }
-            CHECK(var.isScalar());
-            CHECK(var->type == &UA_TYPES[UA_TYPES_STRING]);
-        }
-        SUBCASE("Array") {
-            std::vector<String> vec{String("1"), String("2"), String("3")};
-            SUBCASE("Reference if mutable") {
-                SUBCASE("Deduce data type") {
-                    var = Variant::fromValue<policy>(vec);
-                }
-                SUBCASE("Custom data type") {
-                    var = Variant::fromValue<policy>(vec, UA_TYPES[UA_TYPES_STRING]);
-                }
-                CHECK(var->data == vec.data());
-            }
-            SUBCASE("Copy if rvalue") {
-                SUBCASE("Deduce data type") {
-                    var = Variant::fromValue<policy>(std::move(vec));
-                }
-                SUBCASE("Custom data type") {
-                    var = Variant::fromValue<policy>(std::move(vec), UA_TYPES[UA_TYPES_STRING]);
-                }
-                CHECK(var->data != vec.data());
-            }
-            SUBCASE("Copy if const") {
-                SUBCASE("Deduce data type") {
-                    var = Variant::fromValue<policy>(std::as_const(vec));
-                }
-                SUBCASE("Custom data type") {
-                    var = Variant::fromValue<policy>(std::as_const(vec), UA_TYPES[UA_TYPES_STRING]);
-                }
-                CHECK(var->data != vec.data());
-            }
-            SUBCASE("Copy if conversion needed") {
-                std::vector<std::string> vecStr{"1", "2", "3"};
-                var = Variant::fromValue<policy>(vecStr);
-                CHECK(var->data != vec.data());
-            }
-            SUBCASE("Copy iterator pair") {
-                SUBCASE("Deduce data type") {
-                    var = Variant::fromValue<policy>(vec.begin(), vec.end());
-                }
-                SUBCASE("Custom data type") {
-                    var = Variant::fromValue<policy>(vec.begin(), vec.end());
-                }
-                CHECK(var->data != vec.data());
-            }
-            CHECK(var.isArray());
-            CHECK(var->type == &UA_TYPES[UA_TYPES_STRING]);
-        }
-    }
-
     SUBCASE("fromScalar (ReferenceIfPossible)") {
         constexpr auto policy = VariantPolicy::ReferenceIfPossible;
         String value("test");
@@ -1009,7 +919,7 @@ TEST_CASE("Variant") {
             std::vector<bool> array{true, false, true};
 
             SUBCASE("From vector") {
-                var = Variant::fromValue(array);
+                var = Variant{array};
             }
 
             SUBCASE("Copy from iterator") {
@@ -1071,7 +981,7 @@ TEST_CASE("Variant") {
         }
 
         SUBCASE("getScalar (lvalue & rvalue)") {
-            auto var = Variant::fromValue("test");
+            auto var = Variant{"test"};
             void* data = var.getValue<String, VariantPolicy::Reference>()->data;
 
             String str;
@@ -1093,7 +1003,7 @@ TEST_CASE("Variant") {
             }
         }
         SUBCASE("getScalar with output param (lvalue & rvalue)") {
-            auto var = Variant::fromValue("test");
+            auto var = Variant{"test"};
             void* data = var.getValue<String, VariantPolicy::Reference>()->data;
 
             String str;

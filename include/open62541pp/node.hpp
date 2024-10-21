@@ -398,13 +398,6 @@ public:
         return services::readValue(connection(), id()).value();
     }
 
-    /// Read value from variable node.
-    /// The characteristic scalar or array is deduced from the value's type.
-    template <typename T>
-    T readValue() {
-        return readValue().template getValue<T, VariantPolicy::Copy>();
-    }
-
     /// Read scalar value from variable node.
     template <typename T>
     T readValueScalar() {
@@ -536,17 +529,6 @@ public:
     /// @wrapper{services::writeValue}
     Node& writeValue(const Variant& value) {
         services::writeValue(connection(), id(), value).value();
-        return *this;
-    }
-
-    /// Write value to variable node.
-    /// The characteristic scalar or array is deduced from the value's type.
-    template <typename T>
-    Node& writeValue(const T& value) {
-        writeValue(
-            // NOLINTNEXTLINE(*-const-cast), variant isn't modified, try to avoid copy
-            Variant{const_cast<T&>(value), ConstructorToken<VariantPolicy::ReferenceIfPossible>{}}
-        );
         return *this;
     }
 

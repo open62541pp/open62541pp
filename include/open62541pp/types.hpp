@@ -896,7 +896,7 @@ enum class VariantPolicy {
  *   ConstructWithReferenceIfPossible". Could be seen as verbose, though.
  */
 template <VariantPolicy Policy>
-struct ConstructorToken {
+struct ConstructorTag {
     static constexpr VariantPolicy policy = Policy;
 };
 
@@ -910,6 +910,65 @@ template <VariantPolicy>
 struct VariantHandler;
 }  // namespace detail
 
+// TODO:
+// Preparations for constructor tags.
+
+struct CopyTag {};
+
+// TODO conflict if we want to use copy with opcua::copy(const UA_)
+static constexpr CopyTag copyTag{};
+
+struct ReferenceTag {};
+
+static constexpr ReferenceTag reference{};
+
+struct ReferenceIfPossibleTag {};
+
+static constexpr ReferenceIfPossibleTag referenceIfPossible{};
+
+namespace detail {
+
+template <typename T>
+struct VariantPolicySelector;
+
+template <>
+struct VariantPolicySelector<CopyTag> {
+    static constexpr VariantPolicy policy = VariantPolicy::Copy;
+};
+
+template <>
+struct VariantPolicySelector<ReferenceTag> {
+    static constexpr VariantPolicy policy = VariantPolicy::Reference;
+};
+
+template <>
+struct VariantPolicySelector<ReferenceIfPossibleTag> {
+    static constexpr VariantPolicy policy = VariantPolicy::ReferenceIfPossible;
+};
+
+template <VariantPolicy Policy>
+struct ConstructorTagSelector;
+
+template <>
+struct ConstructorTagSelector<VariantPolicy::Copy> {
+    using Tag = CopyTag;
+    static constexpr Tag tag = opcua::copyTag;
+};
+
+template <>
+struct ConstructorTagSelector<VariantPolicy::Reference> {
+    using Tag = ReferenceTag;
+    static constexpr Tag tag = reference;
+};
+
+template <>
+struct ConstructorTagSelector<VariantPolicy::ReferenceIfPossible> {
+    using Tag = ReferenceIfPossibleTag;
+    static constexpr Tag tag = referenceIfPossible;
+};
+
+}  // namespace detail
+
 /**
  * UA_Variant wrapper class.
  * @ingroup Wrapper
@@ -920,85 +979,84 @@ public:
 
     // Universal constructors with default copy policy
 
-    template <typename ConstructorToken = ConstructorToken<VariantPolicy::Copy>, typename T>
-    Variant(T&& value, ConstructorToken /*unused*/) {
-        setValue<ConstructorToken::policy>(std::forward<T>(value));
+    template <typename ConstructorTag, typename T>
+    Variant(ConstructorTag /*unused*/, T&& value) {
+        constexpr auto policy = detail::VariantPolicySelector<ConstructorTag>::policy;
+        setValue<policy>(std::forward<T>(value));
     }
 
-    template <typename ConstructorToken = ConstructorToken<VariantPolicy::Copy>, typename T>
-    Variant(T&& value, const UA_DataType& dataType, ConstructorToken /*unused*/) {
-        setValue<ConstructorToken::policy>(std::forward<T>(value), dataType);
+    template <typename T, typename X = std::enable_if_t<!std::is_same_v<T, Variant>, void>>
+    explicit Variant(T&& value)
+        : Variant(copyTag, std::forward<T>(value)) {}
+
+    template <typename ConstructorTag, typename T>
+    Variant(ConstructorTag /*unused*/, T&& value, const UA_DataType& dataType) {
+        constexpr auto policy = detail::VariantPolicySelector<ConstructorTag>::policy;
+        setValue<policy>(std::forward<T>(value), dataType);
     }
 
-    template <typename ConstructorToken = ConstructorToken<VariantPolicy::Copy>, typename InputIt>
-    Variant(InputIt first, InputIt last, ConstructorToken /*unused*/) {
-        setValue<ConstructorToken::policy>(first, last);
+    template <typename T>
+    Variant(T&& value, const UA_DataType& dataType)
+        : Variant(copyTag, std::forward<T>(value), dataType) {}
+
+    template <typename ConstructorTag, typename InputIt>
+    Variant(ConstructorTag /*unused*/, InputIt first, InputIt last) {
+        constexpr auto policy = detail::VariantPolicySelector<ConstructorTag>::policy;
+        setValue<policy>(first, last);
     }
 
-    template <typename ConstructorToken = ConstructorToken<VariantPolicy::Copy>, typename InputIt>
-    Variant(InputIt first, InputIt last, const UA_DataType& dataType, ConstructorToken /*unused*/) {
-        setValue<ConstructorToken::policy>(first, last, dataType);
+    template <typename InputIt>
+    Variant(InputIt first, InputIt last)
+        : Variant(copyTag, first, last) {}
+
+    template <typename ConstructorTag, typename InputIt>
+    Variant(ConstructorTag /*unused*/, InputIt first, InputIt last, const UA_DataType& dataType) {
+        constexpr auto policy = detail::VariantPolicySelector<ConstructorTag>::policy;
+        setValue<policy>(first, last, dataType);
     }
 
-    // TODO:
-    // Do not add fromValue methods? As we the constructors above.
-
-    /// Create Variant from value.
-    /// The characteristic scalar or array is deduced from the value's type.
-    /// @tparam Policy Policy (@ref VariantPolicy) how to store the scalar inside the variant
-    template <VariantPolicy Policy = VariantPolicy::Copy, typename T>
-    [[nodiscard]] static Variant fromValue(T&& value) {
-        return Variant{std::forward<T>(value), ConstructorToken<Policy>{}};
-    }
-
-    /// Create Variant from value with custom data type.
-    /// The characteristic scalar or array is deduced from the value's type.
-    /// @tparam Policy Policy (@ref VariantPolicy) how to store the scalar inside the variant
-    template <VariantPolicy Policy = VariantPolicy::Copy, typename T>
-    [[nodiscard]] static Variant fromValue(T&& value, const UA_DataType& dataType) {
-        return Variant{std::forward<T>(value), dataType, ConstructorToken<Policy>{}};
-    }
-
-    /// Create Variant from range of elements (copy required).
-    /// @tparam Policy Policy (@ref VariantPolicy) how to store the array inside the variant
-    template <VariantPolicy Policy = VariantPolicy::Copy, typename InputIt>
-    [[nodiscard]] static Variant fromValue(InputIt first, InputIt last) {
-        return Variant{first, last, ConstructorToken<Policy>{}};
-    }
+    template <typename InputIt>
+    Variant(InputIt first, InputIt last, const UA_DataType& dataType)
+        : Variant(copyTag, first, last, dataType) {}
 
     /// Create Variant from scalar value.
     /// @tparam Policy Policy (@ref VariantPolicy) how to store the scalar inside the variant
     template <VariantPolicy Policy = VariantPolicy::Copy, typename T>
     [[nodiscard]] static Variant fromScalar(T&& value) {
-        return Variant{std::forward<T>(value), ConstructorToken<Policy>{}};
+        constexpr auto tag = detail::ConstructorTagSelector<Policy>::tag;
+        return Variant{tag, std::forward<T>(value)};
     }
 
     /// Create Variant from scalar value with custom data type.
     /// @tparam Policy Policy (@ref VariantPolicy) how to store the scalar inside the variant
     template <VariantPolicy Policy = VariantPolicy::Copy, typename T>
     [[nodiscard]] static Variant fromScalar(T&& value, const UA_DataType& dataType) {
-        return Variant{std::forward<T>(value), dataType, ConstructorToken<Policy>{}};
+        constexpr auto tag = detail::ConstructorTagSelector<Policy>::tag;
+        return Variant{tag, std::forward<T>(value), dataType};
     }
 
     /// Create Variant from array.
     /// @tparam Policy Policy (@ref VariantPolicy) how to store the array inside the variant
     template <VariantPolicy Policy = VariantPolicy::Copy, typename ArrayLike>
     [[nodiscard]] static Variant fromArray(ArrayLike&& array) {
-        return Variant{std::forward<ArrayLike>(array), ConstructorToken<Policy>{}};
+        constexpr auto tag = detail::ConstructorTagSelector<Policy>::tag;
+        return Variant{tag, std::forward<ArrayLike>(array)};
     }
 
     /// Create Variant from array with custom data type.
     /// @tparam Policy Policy (@ref VariantPolicy) how to store the array inside the variant
     template <VariantPolicy Policy = VariantPolicy::Copy, typename ArrayLike>
     [[nodiscard]] static Variant fromArray(ArrayLike&& array, const UA_DataType& dataType) {
-        return Variant{std::forward<ArrayLike>(array), dataType, ConstructorToken<Policy>{}};
+        constexpr auto tag = detail::ConstructorTagSelector<Policy>::tag;
+        return Variant{tag, std::forward<ArrayLike>(array), dataType};
     }
 
     /// Create Variant from range of elements (copy required).
     /// @tparam Policy Policy (@ref VariantPolicy) how to store the array inside the variant
     template <VariantPolicy Policy = VariantPolicy::Copy, typename InputIt>
     [[nodiscard]] static Variant fromArray(InputIt first, InputIt last) {
-        return Variant{first, last, ConstructorToken<Policy>{}};
+        constexpr auto tag = detail::ConstructorTagSelector<Policy>::tag;
+        return Variant{tag, first, last};
     }
 
     /// Create Variant from range of elements with custom data type (copy required).
@@ -1007,7 +1065,8 @@ public:
     [[nodiscard]] static Variant fromArray(
         InputIt first, InputIt last, const UA_DataType& dataType
     ) {
-        return Variant{first, last, dataType, ConstructorToken<Policy>{}};
+        constexpr auto tag = detail::ConstructorTagSelector<Policy>::tag;
+        return Variant{tag, first, last, dataType};
     }
 
     /// Check if the variant is empty.
