@@ -301,6 +301,23 @@ TEST_CASE("WriteResponse") {
     CHECK(response.getDiagnosticInfos().empty());
 }
 
+TEST_CASE("BuildInfo") {
+    const BuildInfo buildInfo(
+        "productUri",
+        "manufacturerName",
+        "productName",
+        "softwareVersion",
+        "buildNumber",
+        DateTime(1234)
+    );
+    CHECK(buildInfo.getProductUri() == "productUri");
+    CHECK(buildInfo.getManufacturerName() == "manufacturerName");
+    CHECK(buildInfo.getProductName() == "productName");
+    CHECK(buildInfo.getSoftwareVersion() == "softwareVersion");
+    CHECK(buildInfo.getBuildNumber() == "buildNumber");
+    CHECK(buildInfo.getBuildDate().get() == 1234);
+}
+
 #ifdef UA_ENABLE_METHODCALLS
 
 TEST_CASE("Argument") {

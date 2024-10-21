@@ -40,6 +40,19 @@ TEST_CASE("ServerConfig") {
 
     ServerConfig config;
 
+    SUBCASE("BuildInfo") {
+        config.setBuildInfo(BuildInfo(
+            "productUri",
+            "manufacturerName",
+            "productName",
+            "softwareVersion",
+            "buildNumber",
+            DateTime(1234)
+        ));
+        CHECK(detail::toString(config->buildInfo.productUri) == "productUri");
+        // ...
+    }
+
     SUBCASE("ApplicationDescription") {
         config.setApplicationUri("http://app.com");
         CHECK(detail::toString(config->applicationDescription.applicationUri) == "http://app.com");

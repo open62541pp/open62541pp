@@ -110,6 +110,8 @@ public:
 
     void setLogger(LogFunction func);
 
+    void setBuildInfo(BuildInfo buildInfo);
+
     /// Set application URI, default: `urn:open62541.server.application`.
     void setApplicationUri(std::string_view uri);
     /// Set product URI, default: `http://open62541.org`.

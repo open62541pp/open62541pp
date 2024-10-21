@@ -87,6 +87,10 @@ void ServerConfig::setLogger(LogFunction func) {
     }
 }
 
+void ServerConfig::setBuildInfo(BuildInfo buildInfo) {
+    asWrapper<BuildInfo>(native().buildInfo) = std::move(buildInfo);
+}
+
 inline static ApplicationDescription& getApplicationDescription(UA_ServerConfig& config) noexcept {
     return asWrapper<ApplicationDescription>(config.applicationDescription);
 }
