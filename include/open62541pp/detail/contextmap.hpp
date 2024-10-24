@@ -1,6 +1,5 @@
 #pragma once
 
-#include <cassert>
 #include <functional>  // invoke
 #include <map>
 #include <memory>

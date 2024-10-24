@@ -2,7 +2,10 @@
 
 #include <cstdint>
 #include <functional>
+#include <memory>
+#include <mutex>
 #include <set>
+#include <utility>  // pair
 #include <vector>
 
 #include "open62541pp/config.hpp"
@@ -12,7 +15,7 @@
 #include "open62541pp/detail/open62541/common.h"  // UA_AccessControl
 #include "open62541pp/plugin/nodestore.hpp"
 #include "open62541pp/services/detail/monitoreditem_context.hpp"
-#include "open62541pp/types.hpp"
+#include "open62541pp/types.hpp"  // NodeId, Variant
 
 namespace opcua::detail {
 
@@ -32,7 +35,6 @@ struct SessionRegistry {
 
 /**
  * Internal storage for Server class.
- * Mainly used to store stateful function pointers.
  */
 struct ServerContext {
     ExceptionCatcher exceptionCatcher;

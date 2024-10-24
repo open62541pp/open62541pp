@@ -2,14 +2,16 @@
 
 #include <array>
 #include <atomic>
-#include <cassert>
 #include <cstdint>
+#include <functional>
+#include <memory>
 #include <utility>  // pair
+#include <vector>
 
-#include "open62541pp/client.hpp"
 #include "open62541pp/config.hpp"
 #include "open62541pp/detail/contextmap.hpp"
 #include "open62541pp/detail/exceptioncatcher.hpp"
+#include "open62541pp/detail/open62541/client.h"  // UA_SessionState, UA_SecureChannelState
 #include "open62541pp/services/detail/monitoreditem_context.hpp"
 #include "open62541pp/services/detail/subscription_context.hpp"
 
@@ -25,7 +27,6 @@ inline constexpr size_t clientStateCount = 4;
 
 /**
  * Internal storage for Client class.
- * Mainly used to store stateful function pointers.
  */
 struct ClientContext {
     ExceptionCatcher exceptionCatcher;
@@ -45,11 +46,11 @@ struct ClientContext {
 #if UAPP_OPEN62541_VER_LE(1, 0)
     UA_ClientState lastClientState{};
 #else
-    UA_SecureChannelState lastChannelState{};
     UA_SessionState lastSessionState{};
+    UA_SecureChannelState lastChannelState{};
 #endif
-    std::array<StateCallback, clientStateCount> stateCallbacks;
-    InactivityCallback inactivityCallback;
+    std::array<std::function<void()>, clientStateCount> stateCallbacks;
+    std::function<void()> inactivityCallback;
 };
 
 }  // namespace opcua::detail
