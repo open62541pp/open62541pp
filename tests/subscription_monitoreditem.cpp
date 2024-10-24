@@ -75,7 +75,7 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
     SUBCASE("Create & delete subscription") {
         CHECK(client.getSubscriptions().empty());
 
-        SubscriptionParameters parameters{};
+        const SubscriptionParameters parameters{};
         auto sub = client.createSubscription(parameters);
         CAPTURE(sub.subscriptionId());
 
@@ -101,7 +101,7 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
     }
 
     SUBCASE("Monitor data change") {
-        SubscriptionParameters subscriptionParameters{};
+        const SubscriptionParameters subscriptionParameters{};
         MonitoringParametersEx monitoringParameters{};
 
         auto sub = client.createSubscription(subscriptionParameters);

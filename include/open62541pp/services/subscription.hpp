@@ -31,9 +31,6 @@ namespace opcua::services {
 
 /**
  * Subscription parameters with default values from open62541.
- *
- * Parameters are passed by reference because illegal parameters can be revised by the server.
- * The updated parameters reflect the actual values that the server will use.
  */
 struct SubscriptionParameters {
     /// Cyclic interval in milliseconds that the subscription is requested to return notifications.
@@ -86,7 +83,6 @@ CreateSubscriptionResponse createSubscription(
 
 /**
  * Create a subscription.
- * @copydetails SubscriptionParameters
  * @param connection Instance of type Client
  * @param parameters Subscription parameters, may be revised by server
  * @param publishingEnabled Enable/disable publishing of the subscription
@@ -96,7 +92,7 @@ CreateSubscriptionResponse createSubscription(
  */
 [[nodiscard]] Result<uint32_t> createSubscription(
     Client& connection,
-    SubscriptionParameters& parameters,
+    const SubscriptionParameters& parameters,
     bool publishingEnabled = true,
     StatusChangeNotificationCallback statusChangeCallback = {},
     DeleteSubscriptionCallback deleteCallback = {}
@@ -121,13 +117,12 @@ ModifySubscriptionResponse modifySubscription(
 
 /**
  * Modify a subscription.
- * @copydetails SubscriptionParameters
  * @param connection Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @param parameters Subscription parameters, may be revised by server
  */
 Result<void> modifySubscription(
-    Client& connection, uint32_t subscriptionId, SubscriptionParameters& parameters
+    Client& connection, uint32_t subscriptionId, const SubscriptionParameters& parameters
 ) noexcept;
 
 /**

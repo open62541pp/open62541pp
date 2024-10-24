@@ -90,15 +90,6 @@ inline Result<std::vector<Variant>> getOutputArguments(UA_CallMethodResult& resu
     });
 }
 
-template <typename SubscriptionParameters, typename Response>
-inline void reviseSubscriptionParameters(
-    SubscriptionParameters& parameters, const Response& response
-) noexcept {
-    parameters.publishingInterval = response.revisedPublishingInterval;
-    parameters.lifetimeCount = response.revisedLifetimeCount;
-    parameters.maxKeepAliveCount = response.revisedMaxKeepAliveCount;
-}
-
 inline Result<uint32_t> getMonitoredItemId(const UA_MonitoredItemCreateResult& result) noexcept {
     if (const StatusCode code = result.statusCode; code.isBad()) {
         return BadResult(code);

@@ -69,7 +69,7 @@ public:
     /// Modify this subscription.
     /// @note Not implemented for Server.
     /// @see services::modifySubscription
-    void setSubscriptionParameters(SubscriptionParameters& parameters) {
+    void setSubscriptionParameters(const SubscriptionParameters& parameters) {
         services::modifySubscription(connection(), subscriptionId(), parameters).value();
     }
 

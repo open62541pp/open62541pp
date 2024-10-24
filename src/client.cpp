@@ -424,11 +424,10 @@ std::vector<std::string> Client::getNamespaceArray() {
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS
 Subscription<Client> Client::createSubscription() {
-    SubscriptionParameters parameters{};
-    return createSubscription(parameters);
+    return createSubscription({});
 }
 
-Subscription<Client> Client::createSubscription(SubscriptionParameters& parameters) {
+Subscription<Client> Client::createSubscription(const SubscriptionParameters& parameters) {
     const uint32_t subscriptionId = services::createSubscription(*this, parameters, true).value();
     return {*this, subscriptionId};
 }

@@ -27,7 +27,7 @@ TEST_CASE("MonitoredItem service set (client)") {
     const NodeId id{1, 1000};
     services::addVariable(server, {0, UA_NS0ID_OBJECTSFOLDER}, id, "Variable").value();
 
-    services::SubscriptionParameters subscriptionParameters{};
+    const services::SubscriptionParameters subscriptionParameters{};
     services::MonitoringParametersEx monitoringParameters{};
     monitoringParameters.samplingInterval = 0.0;  // fastest
 
