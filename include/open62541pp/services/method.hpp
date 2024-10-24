@@ -1,7 +1,6 @@
 #pragma once
 
 #include <utility>  // forward
-#include <vector>
 
 #include "open62541pp/async.hpp"
 #include "open62541pp/config.hpp"
@@ -59,20 +58,16 @@ auto callAsync(
 }
 
 /**
- * Call a server method and return outputs.
+ * Call a server method.
  * The `objectId` must have a `HasComponent` reference to the method specified in `methodId`.
  *
  * @param connection Instance of type Server or Client
  * @param objectId NodeId of the object on which the method is invoked
  * @param methodId NodeId of the method to invoke
  * @param inputArguments Input argument values
- * @exception BadStatus
- * @exception BadStatus (BadInvalidArgument) If input arguments don't match expected variant types
- * @exception BadStatus (BadArgumentsMissing) If input arguments are missing
- * @exception BadStatus (BadTooManyArguments) If too many input arguments provided
  */
 template <typename T>
-Result<std::vector<Variant>> call(
+CallMethodResult call(
     T& connection,
     const NodeId& objectId,
     const NodeId& methodId,
@@ -80,15 +75,14 @@ Result<std::vector<Variant>> call(
 ) noexcept;
 
 /**
- * Asynchronously call a server method and return outputs.
+ * Asynchronously call a server method.
  *
  * @param connection Instance of type Client
  * @param objectId NodeId of the object on which the method is invoked
  * @param methodId NodeId of the method to invoke
  * @param inputArguments Input argument values
- * @param token @completiontoken{void(Result<std::vector<Variant>>&)}
- * @return @asyncresult{Result<std::vector<Variant>>}
- * @exception BadStatus
+ * @param token @completiontoken{void(CallMethodResult&)}
+ * @return @asyncresult{CallMethodResult}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto callAsync(
@@ -106,7 +100,7 @@ auto callAsync(
         connection,
         request,
         [](UA_CallResponse& response) {
-            return detail::getSingleResult(response).andThen(detail::getOutputArguments);
+            return CallMethodResult(detail::moveSingleResultWithStatus(response));
         },
         std::forward<CompletionToken>(token)
     );

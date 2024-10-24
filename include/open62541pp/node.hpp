@@ -325,11 +325,11 @@ public:
     }
 
 #ifdef UA_ENABLE_METHODCALLS
-    /// Call a server method and return results.
+    /// Call a server method.
     /// @param methodId NodeId of the method (`HasComponent` reference to current node required)
     /// @param inputArguments Input argument values
-    std::vector<Variant> callMethod(const NodeId& methodId, Span<const Variant> inputArguments) {
-        return services::call(connection(), id(), methodId, inputArguments).value();
+    CallMethodResult callMethod(const NodeId& methodId, Span<const Variant> inputArguments) {
+        return services::call(connection(), id(), methodId, inputArguments);
     }
 #endif
 

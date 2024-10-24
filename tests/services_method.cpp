@@ -73,7 +73,7 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
     }
 
     SUBCASE("Check result") {
-        Result<std::vector<Variant>> result = call(
+        const CallMethodResult result = call(
             connection,
             objectsId,
             methodId,
@@ -82,13 +82,14 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
                 Variant::fromScalar(int32_t{2}),
             }
         );
-        CHECK(result.value().size() == 1);
-        CHECK(result.value()[0].getScalarCopy<int32_t>() == 3);
+        CHECK(result.getStatusCode().isGood());
+        CHECK(result.getOutputArguments().size() == 1);
+        CHECK(result.getOutputArguments()[0].getScalarCopy<int32_t>() == 3);
     }
 
     SUBCASE("Propagate exception") {
         throwException = true;
-        auto result = call(
+        const CallMethodResult result = call(
             connection,
             objectsId,
             methodId,
@@ -97,11 +98,11 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
                 Variant::fromScalar(int32_t{2}),
             }
         );
-        CHECK(result.code() == UA_STATUSCODE_BADUNEXPECTEDERROR);
+        CHECK(result.getStatusCode() == UA_STATUSCODE_BADUNEXPECTEDERROR);
     }
 
     SUBCASE("Invalid input arguments") {
-        auto result = call(
+        const CallMethodResult result = call(
             connection,
             objectsId,
             methodId,
@@ -110,16 +111,18 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
                 Variant::fromScalar(11.11f),
             }
         );
-        CHECK(result.code() == UA_STATUSCODE_BADINVALIDARGUMENT);
+        CHECK(result.getStatusCode() == UA_STATUSCODE_BADINVALIDARGUMENT);
     }
 
     SUBCASE("Missing arguments") {
-        auto result = call(connection, objectsId, methodId, Span<const Variant>{});
-        CHECK(result.code() == UA_STATUSCODE_BADARGUMENTSMISSING);
+        const CallMethodResult result = call(
+            connection, objectsId, methodId, Span<const Variant>{}
+        );
+        CHECK(result.getStatusCode() == UA_STATUSCODE_BADARGUMENTSMISSING);
     }
 
     SUBCASE("Too many arguments") {
-        auto result = call(
+        const CallMethodResult result = call(
             connection,
             objectsId,
             methodId,
@@ -129,7 +132,7 @@ TEST_CASE_TEMPLATE("Method service set", T, Server, Client, Async<Client>) {
                 Variant::fromScalar(int32_t{3}),
             }
         );
-        CHECK(result.code() == UA_STATUSCODE_BADTOOMANYARGUMENTS);
+        CHECK(result.getStatusCode() == UA_STATUSCODE_BADTOOMANYARGUMENTS);
     }
 }
 #endif
