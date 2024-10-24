@@ -70,7 +70,7 @@ ModifySubscriptionResponse modifySubscription(
     return UA_Client_Subscriptions_modify(connection.handle(), request);
 }
 
-Result<void> modifySubscription(
+ModifySubscriptionResponse modifySubscription(
     Client& connection, uint32_t subscriptionId, const SubscriptionParameters& parameters
 ) noexcept {
     UA_ModifySubscriptionRequest request{};
@@ -80,10 +80,7 @@ Result<void> modifySubscription(
     request.requestedMaxKeepAliveCount = parameters.maxKeepAliveCount;
     request.maxNotificationsPerPublish = parameters.maxNotificationsPerPublish;
     request.priority = parameters.priority;
-    const ModifySubscriptionResponse response = UA_Client_Subscriptions_modify(
-        connection.handle(), request
-    );
-    return detail::toResult(detail::getServiceResult(response));
+    return modifySubscription(connection, asWrapper<ModifySubscriptionRequest>(request));
 }
 
 SetPublishingModeResponse setPublishingMode(

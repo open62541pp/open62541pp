@@ -70,7 +70,10 @@ public:
     /// @note Not implemented for Server.
     /// @see services::modifySubscription
     void setSubscriptionParameters(const SubscriptionParameters& parameters) {
-        services::modifySubscription(connection(), subscriptionId(), parameters).value();
+        const auto response = services::modifySubscription(
+            connection(), subscriptionId(), parameters
+        );
+        response.getResponseHeader().getServiceResult().throwIfBad();
     }
 
     /// Enable/disable publishing of notification messages.

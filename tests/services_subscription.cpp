@@ -25,11 +25,17 @@ TEST_CASE("Subscription service set (client)") {
         const auto subId = services::createSubscription(client, parameters).getSubscriptionId();
 
         parameters.priority = 1;
-        CHECK(services::modifySubscription(client, subId, parameters));
-        CHECK(
-            services::modifySubscription(client, subId + 1, parameters).code() ==
-            UA_STATUSCODE_BADSUBSCRIPTIONIDINVALID
-        );
+        {
+            const auto response = services::modifySubscription(client, subId, parameters);
+            CHECK(response.getResponseHeader().getServiceResult().isGood());
+        }
+        {
+            const auto response = services::modifySubscription(client, subId + 1, parameters);
+            CHECK(
+                response.getResponseHeader().getServiceResult() ==
+                UA_STATUSCODE_BADSUBSCRIPTIONIDINVALID
+            );
+        }
     }
 
     SUBCASE("setPublishingMode") {

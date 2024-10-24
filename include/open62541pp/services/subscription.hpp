@@ -110,12 +110,9 @@ ModifySubscriptionResponse modifySubscription(
 ) noexcept;
 
 /**
- * Modify a subscription.
- * @param connection Instance of type Client
- * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
- * @param parameters Subscription parameters
+ * @overload
  */
-Result<void> modifySubscription(
+ModifySubscriptionResponse modifySubscription(
     Client& connection, uint32_t subscriptionId, const SubscriptionParameters& parameters
 ) noexcept;
 
