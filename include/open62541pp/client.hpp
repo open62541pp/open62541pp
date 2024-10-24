@@ -243,7 +243,7 @@ public:
     /// Create a subscription to monitor data changes and events (default subscription parameters).
     Subscription<Client> createSubscription();
     /// Create a subscription to monitor data changes and events.
-    Subscription<Client> createSubscription(SubscriptionParameters& parameters);
+    Subscription<Client> createSubscription(const SubscriptionParameters& parameters);
     /// Get all active subscriptions
     std::vector<Subscription<Client>> getSubscriptions();
 #endif

@@ -44,7 +44,7 @@ CreateSubscriptionResponse createSubscription(
 
 Result<uint32_t> createSubscription(
     Client& connection,
-    SubscriptionParameters& parameters,
+    const SubscriptionParameters& parameters,
     bool publishingEnabled,
     StatusChangeNotificationCallback statusChangeCallback,
     DeleteSubscriptionCallback deleteCallback
@@ -66,7 +66,6 @@ Result<uint32_t> createSubscription(
         serviceResult.isBad()) {
         return BadResult(serviceResult);
     }
-    detail::reviseSubscriptionParameters(parameters, asNative(response));
     return response.getSubscriptionId();
 }
 
@@ -77,7 +76,7 @@ ModifySubscriptionResponse modifySubscription(
 }
 
 Result<void> modifySubscription(
-    Client& connection, uint32_t subscriptionId, SubscriptionParameters& parameters
+    Client& connection, uint32_t subscriptionId, const SubscriptionParameters& parameters
 ) noexcept {
     UA_ModifySubscriptionRequest request{};
     request.subscriptionId = subscriptionId;
@@ -89,12 +88,7 @@ Result<void> modifySubscription(
     const ModifySubscriptionResponse response = UA_Client_Subscriptions_modify(
         connection.handle(), request
     );
-    if (const StatusCode serviceResult = detail::getServiceResult(response);
-        serviceResult.isBad()) {
-        return BadResult(serviceResult);
-    }
-    detail::reviseSubscriptionParameters(parameters, asNative(response));
-    return {};
+    return detail::toResult(detail::getServiceResult(response));
 }
 
 SetPublishingModeResponse setPublishingMode(
