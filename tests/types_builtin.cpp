@@ -814,6 +814,213 @@ TEST_CASE("Variant") {
             CHECK(str->data != data);  // can not move const -> copy
         }
     }
+
+    SUBCASE("Set/get value") {
+        SUBCASE("Set/get scalar") {
+            Variant var;
+            int32_t value = 5;
+            var.setValue<VariantPolicy::Reference>(value);
+            CHECK(var.isScalar());
+            CHECK(var.data() == &value);
+            CHECK(&var.getValue<int32_t>() == &value);
+            CHECK(&std::as_const(var).getValue<int32_t>() == &value);
+            CHECK(var.getValue<int32_t, VariantPolicy::Copy>() == value);
+        }
+
+        SUBCASE("Set/get wrapped scalar types") {
+            Variant var;
+            LocalizedText value("en-US", "text");
+            var.setValue<VariantPolicy::Reference>(value);
+            CHECK(var.getValue<LocalizedText>() == value);
+            CHECK(var.getValue<LocalizedText, VariantPolicy::Copy>() == value);
+        }
+
+        SUBCASE("Set/get scalar (copy)") {
+            Variant var;
+            var.setValue(11.11);
+            CHECK(var.getValue<double>() == 11.11);
+            CHECK(var.getValue<double, VariantPolicy::Copy>() == 11.11);
+            CHECK(std::as_const(var).getValue<double, VariantPolicy::Copy>() == 11.11);
+        }
+
+        SUBCASE("Set/get array") {
+            Variant var;
+            std::vector<float> array{0, 1, 2};
+            var.setValue<VariantPolicy::Reference>(array);
+            CHECK(var.data() == array.data());
+            CHECK(var.getValue<opcua::Span<float>>().data() == array.data());
+            CHECK(std::as_const(var).getValue<opcua::Span<float>>().data() == array.data());
+            CHECK(var.getValue<std::vector<float>>() == array);
+        }
+
+        SUBCASE("Set array of native strings") {
+            Variant var;
+            std::array array{
+                detail::toNativeString("item1"),
+                detail::toNativeString("item2"),
+                detail::toNativeString("item3"),
+            };
+            var.setValue<VariantPolicy::Reference>(
+                Span{array.data(), array.size()}, UA_TYPES[UA_TYPES_STRING]
+            );
+            CHECK(var.data() == array.data());
+            CHECK(var.getArrayLength() == array.size());
+        }
+
+        SUBCASE("Set array of string wrapper") {
+            Variant var;
+            std::vector<String> array{String{"item1"}, String{"item2"}, String{"item3"}};
+            var.setValue<VariantPolicy::Reference>(array);
+            CHECK(var.data() == array.data());
+            CHECK(var.getArrayLength() == array.size());
+            CHECK(var.getArray<String>().data() == array.data());
+        }
+
+        SUBCASE("Set/get array of std::string (conversion)") {
+            Variant var;
+            std::vector<std::string> value{"a", "b", "c"};
+            var.setValue(value);
+
+            CHECK(var.isArray());
+            CHECK(var.isType(NodeId{0, UA_NS0ID_STRING}));
+            CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_STRING]);
+
+            CHECK_THROWS(var.getValue<std::string>());
+            CHECK_THROWS(var.getValue<std::vector<int32_t>, VariantPolicy::Copy>());
+            CHECK_THROWS(var.getValue<std::vector<bool>>());
+            CHECK(var.getValue<std::vector<std::string>>() == value);
+        }
+
+        SUBCASE("Set/get array (copy)") {
+            Variant var;
+            std::vector<float> array{0, 1, 2, 3, 4, 5};
+            var.setValue(array);
+
+            CHECK(var.isArray());
+            CHECK(var.isType(NodeId{0, UA_NS0ID_FLOAT}));
+            CHECK(var.getDataType() == &UA_TYPES[UA_TYPES_FLOAT]);
+            CHECK(var.data() != array.data());
+            CHECK(var.getArrayLength() == array.size());
+
+            CHECK_THROWS(var.getValue<std::vector<int32_t>>());
+            CHECK_THROWS(var.getValue<std::vector<bool>>());
+            CHECK(var.getValue<std::vector<float>>() == array);
+        }
+
+        SUBCASE("Set array from initializer list (copy)") {
+            Variant var;
+            var.setValue(Span<const int>{1, 2, 3});  // TODO: avoid manual template types
+        }
+
+        SUBCASE("Set/get array with std::vector<bool> (copy)") {
+            // std::vector<bool> is a possibly space optimized template specialization which caused
+            // several problems: https://github.com/open62541pp/open62541pp/issues/164
+            Variant var;
+            std::vector<bool> array{true, false, true};
+
+            SUBCASE("From vector") {
+                var = Variant{array};
+            }
+
+            SUBCASE("Copy from iterator") {
+                var.setValue(array.begin(), array.end());
+            }
+
+            SUBCASE("Copy directly") {
+                var.setValue(array);
+            }
+
+            CHECK(var.getArrayLength() == array.size());
+            CHECK(var.isType<bool>());
+            CHECK(var.getValue<std::vector<bool>>() == array);
+        }
+
+        SUBCASE("Set/get non-builtin data types") {
+            using CustomType = UA_WriteValue;
+            const auto& dt = UA_TYPES[UA_TYPES_WRITEVALUE];
+
+            Variant var;
+            CustomType value{};
+            value.attributeId = 1;
+
+            SUBCASE("Scalar") {
+                var.setValue<VariantPolicy::Reference>(value, dt);
+                CHECK(var.isScalar());
+                CHECK(var.getDataType() == &dt);
+                CHECK(var.data() == &value);
+                CHECK(var.getValue<CustomType>().attributeId == 1);
+            }
+
+            SUBCASE("Scalar (copy)") {
+                var.setValue(value, dt);
+                CHECK(var.isScalar());
+                CHECK(var.getDataType() == &dt);
+                CHECK(var.data() != &value);
+                CHECK(var.getScalar<CustomType>().attributeId == 1);
+            }
+
+            std::vector<CustomType> array(3);
+
+            SUBCASE("Array") {
+                var.setValue<VariantPolicy::Reference>(array, dt);
+                CHECK(var.isArray());
+                CHECK(var.getDataType() == &dt);
+                CHECK(var.data() == array.data());
+                CHECK(var.getArrayLength() == 3);
+                CHECK(var.getValue<opcua::Span<CustomType>>().data() == array.data());
+            }
+
+            SUBCASE("Array (copy)") {
+                var.setValue(array, dt);
+                CHECK(var.isArray());
+                CHECK(var.getDataType() == &dt);
+                CHECK(var.data() != array.data());
+                CHECK(var.getArrayLength() == 3);
+                CHECK(var.getValue<opcua::Span<CustomType>>().data() != array.data());
+            }
+        }
+
+        SUBCASE("getScalar (lvalue & rvalue)") {
+            auto var = Variant{"test"};
+            void* data = var.getValue<String, VariantPolicy::Reference>()->data;
+
+            String str;
+            SUBCASE("rvalue") {
+                str = var.getValue<String>();
+                CHECK(str->data != data);  // copy
+            }
+            SUBCASE("const rvalue") {
+                str = std::as_const(var).getValue<String>();
+                CHECK(str->data != data);  // copy
+            }
+            SUBCASE("lvalue") {
+                str = std::move(var).getValue<String>();
+                CHECK(str->data == data);  // move
+            }
+            SUBCASE("const lvalue") {
+                str = std::move(std::as_const(var)).getScalar<String>();
+                CHECK(str->data != data);  // can not move const -> copy
+            }
+        }
+        SUBCASE("getScalar with output param (lvalue & rvalue)") {
+            auto var = Variant{"test"};
+            void* data = var.getValue<String, VariantPolicy::Reference>()->data;
+
+            String str;
+            SUBCASE("rvalue") {
+                var.getValue(str);
+                CHECK(str->data != data);  // copy
+            }
+            SUBCASE("const rvalue") {
+                std::as_const(var).getValue(str);
+                CHECK(str->data != data);  // copy
+            }
+            SUBCASE("lvalue") {
+                std::move(var).getValue(str);
+                CHECK(str->data == data);  // move
+            }
+        }
+    }
 }
 
 TEST_CASE("DataValue") {
