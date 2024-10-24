@@ -90,15 +90,6 @@ inline Result<std::vector<Variant>> getOutputArguments(UA_CallMethodResult& resu
     });
 }
 
-template <typename SubscriptionParameters, typename Response>
-inline void reviseSubscriptionParameters(
-    SubscriptionParameters& parameters, const Response& response
-) noexcept {
-    parameters.publishingInterval = response.revisedPublishingInterval;
-    parameters.lifetimeCount = response.revisedLifetimeCount;
-    parameters.maxKeepAliveCount = response.revisedMaxKeepAliveCount;
-}
-
 template <typename MonitoringParameters, typename Result>
 inline void reviseMonitoringParameters(
     MonitoringParameters& parameters, const Result& result
