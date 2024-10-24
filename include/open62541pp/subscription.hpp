@@ -81,12 +81,11 @@ public:
     }
 
     /// Create a monitored item for data change notifications.
-    /// @copydetails services::MonitoringParametersEx
     MonitoredItem<Connection> subscribeDataChange(
         const NodeId& id,
         AttributeId attribute,
         MonitoringMode monitoringMode,
-        MonitoringParametersEx& parameters,
+        const MonitoringParametersEx& parameters,
         DataChangeNotificationCallback onDataChange
     ) {
         const auto result = services::createMonitoredItemDataChange(
@@ -103,23 +102,21 @@ public:
     /// Create a monitored item for data change notifications (default settings).
     /// The monitoring mode is set to MonitoringMode::Reporting and the default open62541
     /// MonitoringParametersEx are used.
-    /// @see services::MonitoringParametersEx
     MonitoredItem<Connection> subscribeDataChange(
         const NodeId& id, AttributeId attribute, DataChangeNotificationCallback onDataChange
     ) {
-        MonitoringParametersEx parameters;
+        const MonitoringParametersEx parameters;
         return subscribeDataChange(
             id, attribute, MonitoringMode::Reporting, parameters, std::move(onDataChange)
         );
     }
 
     /// Create a monitored item for event notifications.
-    /// @copydetails services::MonitoringParametersEx
     /// @note Not implemented for Server.
     MonitoredItem<Connection> subscribeEvent(
         const NodeId& id,
         MonitoringMode monitoringMode,
-        MonitoringParametersEx& parameters,
+        const MonitoringParametersEx& parameters,
         EventNotificationCallback onEvent  // NOLINT(*-unnecessary-value-param), false positive?
     ) {
         const auto result = services::createMonitoredItemEvent(

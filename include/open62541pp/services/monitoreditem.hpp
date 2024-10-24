@@ -38,8 +38,6 @@ namespace opcua::services {
 /**
  * Extended monitoring parameters with default values from open62541.
  * This is an extended version of `UA_MonitoringParameters` with the `timestamps` parameter.
- * Parameters are passed by reference because illegal parameters can be revised by the server.
- * The updated parameters reflect the actual values that the server will use.
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.21
  */
 struct MonitoringParametersEx {
@@ -121,7 +119,6 @@ CreateMonitoredItemsResponse createMonitoredItemsDataChange(
  * Create and add a monitored item to a subscription for data change notifications.
  * Don't use this function to monitor the `EventNotifier` attribute.
  * Create a monitored item with @ref createMonitoredItemEvent instead.
- * @copydetails MonitoringParametersEx
  *
  * @return Server-assigned identifier of the monitored item
  * @param connection Instance of type Server or Client
@@ -139,7 +136,7 @@ template <typename T>
     uint32_t subscriptionId,
     const ReadValueId& itemToMonitor,
     MonitoringMode monitoringMode,
-    MonitoringParametersEx& parameters,
+    const MonitoringParametersEx& parameters,
     DataChangeNotificationCallback dataChangeCallback,
     DeleteMonitoredItemCallback deleteCallback = {}
 );
@@ -163,7 +160,6 @@ CreateMonitoredItemsResponse createMonitoredItemsEvent(
 /**
  * Create and add a monitored item to a subscription for event notifications.
  * The `attributeId` of ReadValueId must be set to AttributeId::EventNotifier.
- * @copydetails MonitoringParametersEx
  *
  * @return Server-assigned identifier of the monitored item
  * @param connection Instance of type Client
@@ -179,7 +175,7 @@ CreateMonitoredItemsResponse createMonitoredItemsEvent(
     uint32_t subscriptionId,
     const ReadValueId& itemToMonitor,
     MonitoringMode monitoringMode,
-    MonitoringParametersEx& parameters,
+    const MonitoringParametersEx& parameters,
     EventNotificationCallback eventCallback,
     DeleteMonitoredItemCallback deleteCallback = {}
 );
@@ -204,7 +200,6 @@ ModifyMonitoredItemsResponse modifyMonitoredItems(
 
 /**
  * Modify a monitored item of a subscription.
- * @copydetails MonitoringParametersEx
  *
  * @param connection Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
@@ -215,7 +210,7 @@ Result<void> modifyMonitoredItem(
     Client& connection,
     uint32_t subscriptionId,
     uint32_t monitoredItemId,
-    MonitoringParametersEx& parameters
+    const MonitoringParametersEx& parameters
 ) noexcept;
 
 /**
