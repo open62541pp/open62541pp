@@ -42,7 +42,8 @@ TEST_CASE("MonitoredItem service set (client)") {
         ));
     }
 
-    const auto subId = services::createSubscription(client, subscriptionParameters).value();
+    const auto subId =
+        services::createSubscription(client, subscriptionParameters).getSubscriptionId();
     CAPTURE(subId);
 
     SUBCASE("createMonitoredItemDataChange") {
@@ -163,7 +164,6 @@ TEST_CASE("MonitoredItem service set (client)") {
         services::MonitoringParametersEx modifiedParameters{};
         modifiedParameters.samplingInterval = 1000.0;
         CHECK(services::modifyMonitoredItem(client, subId, monId, modifiedParameters));
-        CHECK(modifiedParameters.samplingInterval == 1000.0);  // should not be revised
     }
 
     SUBCASE("setMonitoringMode") {

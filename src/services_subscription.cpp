@@ -42,7 +42,7 @@ CreateSubscriptionResponse createSubscription(
     return response;
 }
 
-Result<uint32_t> createSubscription(
+CreateSubscriptionResponse createSubscription(
     Client& connection,
     const SubscriptionParameters& parameters,
     bool publishingEnabled,
@@ -56,17 +56,12 @@ Result<uint32_t> createSubscription(
     request.maxNotificationsPerPublish = parameters.maxNotificationsPerPublish;
     request.publishingEnabled = publishingEnabled;
     request.priority = parameters.priority;
-    const auto response = createSubscription(
+    return createSubscription(
         connection,
         asWrapper<CreateSubscriptionRequest>(request),
         std::move(statusChangeCallback),
         std::move(deleteCallback)
     );
-    if (const StatusCode serviceResult = detail::getServiceResult(response);
-        serviceResult.isBad()) {
-        return BadResult(serviceResult);
-    }
-    return response.getSubscriptionId();
 }
 
 ModifySubscriptionResponse modifySubscription(
@@ -75,7 +70,7 @@ ModifySubscriptionResponse modifySubscription(
     return UA_Client_Subscriptions_modify(connection.handle(), request);
 }
 
-Result<void> modifySubscription(
+ModifySubscriptionResponse modifySubscription(
     Client& connection, uint32_t subscriptionId, const SubscriptionParameters& parameters
 ) noexcept {
     UA_ModifySubscriptionRequest request{};
@@ -85,10 +80,7 @@ Result<void> modifySubscription(
     request.requestedMaxKeepAliveCount = parameters.maxKeepAliveCount;
     request.maxNotificationsPerPublish = parameters.maxNotificationsPerPublish;
     request.priority = parameters.priority;
-    const ModifySubscriptionResponse response = UA_Client_Subscriptions_modify(
-        connection.handle(), request
-    );
-    return detail::toResult(detail::getServiceResult(response));
+    return modifySubscription(connection, asWrapper<ModifySubscriptionRequest>(request));
 }
 
 SetPublishingModeResponse setPublishingMode(

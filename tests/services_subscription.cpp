@@ -16,28 +16,35 @@ TEST_CASE("Subscription service set (client)") {
     services::SubscriptionParameters parameters{};
 
     SUBCASE("createSubscription") {
-        const auto subId = services::createSubscription(client, parameters).value();
-        CAPTURE(subId);
+        const auto response = services::createSubscription(client, parameters);
+        CHECK(response.getResponseHeader().getServiceResult().isGood());
+        CAPTURE(response.getSubscriptionId());
     }
 
     SUBCASE("modifySubscription") {
-        const auto subId = services::createSubscription(client, parameters).value();
+        const auto subId = services::createSubscription(client, parameters).getSubscriptionId();
 
         parameters.priority = 1;
-        CHECK(services::modifySubscription(client, subId, parameters));
-        CHECK(
-            services::modifySubscription(client, subId + 1, parameters).code() ==
-            UA_STATUSCODE_BADSUBSCRIPTIONIDINVALID
-        );
+        {
+            const auto response = services::modifySubscription(client, subId, parameters);
+            CHECK(response.getResponseHeader().getServiceResult().isGood());
+        }
+        {
+            const auto response = services::modifySubscription(client, subId + 1, parameters);
+            CHECK(
+                response.getResponseHeader().getServiceResult() ==
+                UA_STATUSCODE_BADSUBSCRIPTIONIDINVALID
+            );
+        }
     }
 
     SUBCASE("setPublishingMode") {
-        const auto subId = services::createSubscription(client, parameters).value();
+        const auto subId = services::createSubscription(client, parameters).getSubscriptionId();
         CHECK(services::setPublishingMode(client, subId, false));
     }
 
     SUBCASE("deleteSubscription") {
-        const auto subId = services::createSubscription(client, parameters).value();
+        const auto subId = services::createSubscription(client, parameters).getSubscriptionId();
         CHECK(services::deleteSubscription(client, subId));
         CHECK(
             services::deleteSubscription(client, subId + 1).code() ==
@@ -49,7 +56,8 @@ TEST_CASE("Subscription service set (client)") {
         bool deleted = false;
         const auto deleteCallback = [&](uint32_t) { deleted = true; };
         const auto subId =
-            services::createSubscription(client, parameters, true, {}, deleteCallback).value();
+            services::createSubscription(client, parameters, true, {}, deleteCallback)
+                .getSubscriptionId();
 
         CHECK(services::deleteSubscription(client, subId));
         CHECK(deleted == true);
