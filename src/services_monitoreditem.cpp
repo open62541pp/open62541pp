@@ -120,7 +120,7 @@ Result<uint32_t> createMonitoredItemDataChange<Client>(
     uint32_t subscriptionId,
     const ReadValueId& itemToMonitor,
     MonitoringMode monitoringMode,
-    MonitoringParametersEx& parameters,
+    const MonitoringParametersEx& parameters,
     DataChangeNotificationCallback dataChangeCallback,
     DeleteMonitoredItemCallback deleteCallback
 ) {
@@ -136,7 +136,6 @@ Result<uint32_t> createMonitoredItemDataChange<Client>(
         context->dataChangeCallbackNativeClient,
         context->deleteCallbackNative
     );
-    detail::reviseMonitoringParameters(parameters, asNative(result));
     storeMonitoredItemContext(connection, subscriptionId, result, context);
     return detail::getMonitoredItemId(result);
 }
@@ -147,7 +146,7 @@ Result<uint32_t> createMonitoredItemDataChange<Server>(
     [[maybe_unused]] uint32_t subscriptionId,
     const ReadValueId& itemToMonitor,
     MonitoringMode monitoringMode,
-    MonitoringParametersEx& parameters,
+    const MonitoringParametersEx& parameters,
     DataChangeNotificationCallback dataChangeCallback,
     DeleteMonitoredItemCallback deleteCallback
 ) {
@@ -161,7 +160,6 @@ Result<uint32_t> createMonitoredItemDataChange<Server>(
         context.get(),
         context->dataChangeCallbackNativeServer
     );
-    detail::reviseMonitoringParameters(parameters, asNative(result));
     storeMonitoredItemContext(connection, 0U, result, context);
     return detail::getMonitoredItemId(result);
 }
@@ -199,7 +197,7 @@ Result<uint32_t> createMonitoredItemEvent(
     uint32_t subscriptionId,
     const ReadValueId& itemToMonitor,
     MonitoringMode monitoringMode,
-    MonitoringParametersEx& parameters,
+    const MonitoringParametersEx& parameters,
     EventNotificationCallback eventCallback,
     DeleteMonitoredItemCallback deleteCallback
 ) {
@@ -215,7 +213,6 @@ Result<uint32_t> createMonitoredItemEvent(
         context->eventCallbackNative,
         context->deleteCallbackNative
     );
-    detail::reviseMonitoringParameters(parameters, asNative(result));
     storeMonitoredItemContext(connection, subscriptionId, result, context);
     return detail::getMonitoredItemId(result);
 }
@@ -230,7 +227,7 @@ Result<void> modifyMonitoredItem(
     Client& connection,
     uint32_t subscriptionId,
     uint32_t monitoredItemId,
-    MonitoringParametersEx& parameters
+    const MonitoringParametersEx& parameters
 ) noexcept {
     auto item = detail::createMonitoredItemModifyRequest(monitoredItemId, parameters);
     auto request = detail::createModifyMonitoredItemsRequest(subscriptionId, parameters, item);
@@ -238,12 +235,8 @@ Result<void> modifyMonitoredItem(
         connection.handle(), request
     );
     return detail::getSingleResult(asNative(response))
-        .andThen([&](UA_MonitoredItemModifyResult& result) -> Result<void> {
-            if (const StatusCode code = result.statusCode; code.isBad()) {
-                return BadResult(code);
-            }
-            detail::reviseMonitoringParameters(parameters, result);
-            return {};
+        .andThen([&](UA_MonitoredItemModifyResult& result) {
+            return detail::toResult(result.statusCode);
         });
 }
 

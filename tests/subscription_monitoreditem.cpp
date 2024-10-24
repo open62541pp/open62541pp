@@ -175,7 +175,6 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
         MonitoringParametersEx monitoringParameters{};
         monitoringParameters.samplingInterval = 0.0;  // = fastest practical rate
         mon.setMonitoringParameters(monitoringParameters);
-        CHECK(monitoringParameters.samplingInterval > 0.0);
     }
 
 #ifdef UA_ENABLE_SUBSCRIPTIONS_EVENTS

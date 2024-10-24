@@ -99,16 +99,6 @@ inline void reviseSubscriptionParameters(
     parameters.maxKeepAliveCount = response.revisedMaxKeepAliveCount;
 }
 
-template <typename MonitoringParameters, typename Result>
-inline void reviseMonitoringParameters(
-    MonitoringParameters& parameters, const Result& result
-) noexcept {
-    // result type may be UA_MonitoredItemCreateResult or UA_MonitoredItemModifyResult
-    parameters.samplingInterval = result.revisedSamplingInterval;
-    parameters.queueSize = result.revisedQueueSize;
-    parameters.filter = asWrapper<ExtensionObject>(result.filterResult);
-}
-
 inline Result<uint32_t> getMonitoredItemId(const UA_MonitoredItemCreateResult& result) noexcept {
     if (const StatusCode code = result.statusCode; code.isBad()) {
         return BadResult(code);

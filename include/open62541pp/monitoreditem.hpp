@@ -66,7 +66,7 @@ public:
     /// Modify this monitored item.
     /// @note Not implemented for Server.
     /// @see services::modifyMonitoredItem
-    void setMonitoringParameters(MonitoringParametersEx& parameters) {
+    void setMonitoringParameters(const MonitoringParametersEx& parameters) {
         services::modifyMonitoredItem(connection(), subscriptionId(), monitoredItemId(), parameters)
             .value();
     }
