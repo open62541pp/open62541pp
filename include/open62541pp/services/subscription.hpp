@@ -74,7 +74,7 @@ using StatusChangeNotificationCallback =
  * @param statusChangeCallback Invoked when the status of a subscription is changed
  * @param deleteCallback Invoked when the subscription is deleted
  */
-CreateSubscriptionResponse createSubscription(
+[[nodiscard]] CreateSubscriptionResponse createSubscription(
     Client& connection,
     const CreateSubscriptionRequest& request,
     StatusChangeNotificationCallback statusChangeCallback = {},
@@ -82,15 +82,9 @@ CreateSubscriptionResponse createSubscription(
 );
 
 /**
- * Create a subscription.
- * @param connection Instance of type Client
- * @param parameters Subscription parameters, may be revised by server
- * @param publishingEnabled Enable/disable publishing of the subscription
- * @param statusChangeCallback Invoked when the status of a subscription is changed
- * @param deleteCallback Invoked when the subscription is deleted
- * @return Server-assigned identifier of the subscription
+ * @overload
  */
-[[nodiscard]] Result<uint32_t> createSubscription(
+[[nodiscard]] CreateSubscriptionResponse createSubscription(
     Client& connection,
     const SubscriptionParameters& parameters,
     bool publishingEnabled = true,
@@ -119,7 +113,7 @@ ModifySubscriptionResponse modifySubscription(
  * Modify a subscription.
  * @param connection Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
- * @param parameters Subscription parameters, may be revised by server
+ * @param parameters Subscription parameters
  */
 Result<void> modifySubscription(
     Client& connection, uint32_t subscriptionId, const SubscriptionParameters& parameters

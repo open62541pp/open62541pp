@@ -42,7 +42,7 @@ CreateSubscriptionResponse createSubscription(
     return response;
 }
 
-Result<uint32_t> createSubscription(
+CreateSubscriptionResponse createSubscription(
     Client& connection,
     const SubscriptionParameters& parameters,
     bool publishingEnabled,
@@ -56,17 +56,12 @@ Result<uint32_t> createSubscription(
     request.maxNotificationsPerPublish = parameters.maxNotificationsPerPublish;
     request.publishingEnabled = publishingEnabled;
     request.priority = parameters.priority;
-    const auto response = createSubscription(
+    return createSubscription(
         connection,
         asWrapper<CreateSubscriptionRequest>(request),
         std::move(statusChangeCallback),
         std::move(deleteCallback)
     );
-    if (const StatusCode serviceResult = detail::getServiceResult(response);
-        serviceResult.isBad()) {
-        return BadResult(serviceResult);
-    }
-    return response.getSubscriptionId();
 }
 
 ModifySubscriptionResponse modifySubscription(

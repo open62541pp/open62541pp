@@ -428,8 +428,9 @@ Subscription<Client> Client::createSubscription() {
 }
 
 Subscription<Client> Client::createSubscription(const SubscriptionParameters& parameters) {
-    const uint32_t subscriptionId = services::createSubscription(*this, parameters, true).value();
-    return {*this, subscriptionId};
+    const auto response = services::createSubscription(*this, parameters, true);
+    response.getResponseHeader().getServiceResult().throwIfBad();
+    return {*this, response.getSubscriptionId()};
 }
 
 std::vector<Subscription<Client>> Client::getSubscriptions() {

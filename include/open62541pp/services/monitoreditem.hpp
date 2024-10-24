@@ -41,7 +41,7 @@ namespace opcua::services {
  * @see https://reference.opcfoundation.org/Core/Part4/v105/docs/7.21
  */
 struct MonitoringParametersEx {
-    /// Timestamps to be transmitted. Won't be revised by the server.
+    /// Timestamps to be transmitted.
     TimestampsToReturn timestamps = TimestampsToReturn::Both;
     /// Interval in milliseconds that defines the fastest rate at which the MonitoredItem should be
     /// accessed and evaluated. The following values have special meaning:
@@ -126,7 +126,7 @@ CreateMonitoredItemsResponse createMonitoredItemsDataChange(
  *                       Use `0U` for a local server-side monitored item.
  * @param itemToMonitor Item to monitor
  * @param monitoringMode Monitoring mode
- * @param parameters Monitoring parameters, may be revised by server
+ * @param parameters Monitoring parameters
  * @param dataChangeCallback Invoked when the monitored item is changed
  * @param deleteCallback Invoked when the monitored item is deleted
  */
@@ -166,7 +166,7 @@ CreateMonitoredItemsResponse createMonitoredItemsEvent(
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @param itemToMonitor Item to monitor
  * @param monitoringMode Monitoring mode
- * @param parameters Monitoring parameters, may be revised by server
+ * @param parameters Monitoring parameters
  * @param eventCallback Invoked when an event is published
  * @param deleteCallback Invoked when the monitored item is deleted
  */
@@ -204,7 +204,7 @@ ModifyMonitoredItemsResponse modifyMonitoredItems(
  * @param connection Instance of type Client
  * @param subscriptionId Identifier of the subscription returned by @ref createSubscription
  * @param monitoredItemId Identifier of the monitored item
- * @param parameters Monitoring parameters, may be revised by server
+ * @param parameters Monitoring parameters
  */
 Result<void> modifyMonitoredItem(
     Client& connection,

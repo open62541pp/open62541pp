@@ -96,8 +96,6 @@ TEST_CASE("Subscription & MonitoredItem (client)") {
         SubscriptionParameters parameters{};
         parameters.priority = 10;
         sub.setSubscriptionParameters(parameters);
-
-        CHECK(parameters.priority == 10);  // not revised by server
     }
 
     SUBCASE("Monitor data change") {
