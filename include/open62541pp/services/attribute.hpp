@@ -59,6 +59,7 @@ inline ReadResponse read(
  * Asynchronously read one or more attributes of one or more nodes (client only).
  * @copydetails read
  * @param token @completiontoken{void(ReadResponse&)}
+ * @return @asyncresult{ReadResponse}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto readAsync(
@@ -107,6 +108,7 @@ Result<DataValue> readAttribute(
  * Asynchronously read node attribute.
  * @copydetails readAttribute
  * @param token @completiontoken{void(Result<DataValue>&)}
+ * @return @asyncresult{Result<DataValue>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto readAttributeAsync(
@@ -166,7 +168,8 @@ inline WriteResponse write(Client& connection, Span<const WriteValue> nodesToWri
 /**
  * Asynchronously write one or more attributes of one or more nodes (client only).
  * @copydetails write
- * @param token @completiontoken{void(Result<WriteResponse>&)}
+ * @param token @completiontoken{void(WriteResponse&)}
+ * @return @asyncresult{WriteResponse}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto writeAsync(
@@ -209,6 +212,7 @@ Result<void> writeAttribute(
  * Asynchronously write node attribute.
  * @copydetails writeAttribute
  * @param token @completiontoken{void(Result<void>)}
+ * @return @asyncresult{Result<void>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto writeAttributeAsync(
@@ -298,6 +302,7 @@ inline Result<DataValue> readDataValue(T& connection, const NodeId& id) noexcept
  * Asynchronously read the `AttributeId::Value` of a node as a DataValue object.
  * @copydetails readDataValue
  * @param token @completiontoken{void(Result<DataValue>&)}
+ * @return @asyncresult{Result<DataValue>}
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -329,6 +334,7 @@ inline Result<void> writeDataValue(
  * Asynchronously write the AttributeId::Value attribute of a node as a DataValue object.
  * @copydetails writeDataValue
  * @param token @completiontoken{void(Result<void>)}
+ * @return @asyncresult{Result<void>}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>

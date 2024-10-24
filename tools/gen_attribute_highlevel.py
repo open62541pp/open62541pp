@@ -10,7 +10,7 @@ HEADER_FILE = HERE.parent / "include/open62541pp/services/attribute_highlevel.hp
 @dataclass
 class Attribute:
     name: str
-    type_value: str
+    type: str
     type_view: Optional[str] = None
     copy: bool = False
     writeable: bool = True
@@ -19,29 +19,29 @@ class Attribute:
 
 # fmt: off
 ATTRIBUTES = [
-    Attribute(name="NodeId", type_value="NodeId", copy=False, writeable=False),
-    Attribute(name="NodeClass", type_value="NodeClass", copy=True, writeable=False),
-    Attribute(name="BrowseName", type_value="QualifiedName", copy=False, writeable=True),
-    Attribute(name="DisplayName", type_value="LocalizedText", copy=False, writeable=True),
-    Attribute(name="Description", type_value="LocalizedText", copy=False, writeable=True),
-    Attribute(name="WriteMask", type_value="Bitmask<WriteMask>", copy=True, writeable=True),
-    Attribute(name="UserWriteMask", type_value="Bitmask<WriteMask>", copy=True, writeable=True),
-    Attribute(name="IsAbstract", type_value="bool", copy=True, writeable=True),
-    Attribute(name="Symmetric", type_value="bool", copy=True, writeable=True),
-    Attribute(name="InverseName", type_value="LocalizedText", copy=False, writeable=True),
-    Attribute(name="ContainsNoLoops", type_value="bool", copy=False, writeable=True),
-    Attribute(name="EventNotifier", type_value="Bitmask<EventNotifier>", copy=True, writeable=True),
-    Attribute(name="Value", type_value="Variant", copy=False, writeable=True),
-    Attribute(name="DataType", type_value="NodeId", copy=False, writeable=True),
-    Attribute(name="ValueRank", type_value="ValueRank", copy=True, writeable=True),
-    Attribute(name="ArrayDimensions", type_value="std::vector<uint32_t>", type_view="Span<const uint32_t>", copy=False, writeable=True),
-    Attribute(name="AccessLevel", type_value="Bitmask<AccessLevel>", copy=True, writeable=True),
-    Attribute(name="UserAccessLevel", type_value="Bitmask<AccessLevel>", copy=True, writeable=True),
-    Attribute(name="MinimumSamplingInterval", type_value="double", copy=True, writeable=True),
-    Attribute(name="Historizing", type_value="bool", copy=True, writeable=True),
-    Attribute(name="Executable", type_value="bool", copy=True, writeable=True),
-    Attribute(name="UserExecutable", type_value="bool", copy=True, writeable=True),
-    Attribute(name="DataTypeDefinition", type_value="Variant", copy=False, writeable=False, details="The attribute value can be of type EnumDefinition or StructureDefinition."),
+    Attribute(name="NodeId", type="NodeId", copy=False, writeable=False),
+    Attribute(name="NodeClass", type="NodeClass", copy=True, writeable=False),
+    Attribute(name="BrowseName", type="QualifiedName", copy=False, writeable=True),
+    Attribute(name="DisplayName", type="LocalizedText", copy=False, writeable=True),
+    Attribute(name="Description", type="LocalizedText", copy=False, writeable=True),
+    Attribute(name="WriteMask", type="Bitmask<WriteMask>", copy=True, writeable=True),
+    Attribute(name="UserWriteMask", type="Bitmask<WriteMask>", copy=True, writeable=True),
+    Attribute(name="IsAbstract", type="bool", copy=True, writeable=True),
+    Attribute(name="Symmetric", type="bool", copy=True, writeable=True),
+    Attribute(name="InverseName", type="LocalizedText", copy=False, writeable=True),
+    Attribute(name="ContainsNoLoops", type="bool", copy=False, writeable=True),
+    Attribute(name="EventNotifier", type="Bitmask<EventNotifier>", copy=True, writeable=True),
+    Attribute(name="Value", type="Variant", copy=False, writeable=True),
+    Attribute(name="DataType", type="NodeId", copy=False, writeable=True),
+    Attribute(name="ValueRank", type="ValueRank", copy=True, writeable=True),
+    Attribute(name="ArrayDimensions", type="std::vector<uint32_t>", type_view="Span<const uint32_t>", copy=False, writeable=True),
+    Attribute(name="AccessLevel", type="Bitmask<AccessLevel>", copy=True, writeable=True),
+    Attribute(name="UserAccessLevel", type="Bitmask<AccessLevel>", copy=True, writeable=True),
+    Attribute(name="MinimumSamplingInterval", type="double", copy=True, writeable=True),
+    Attribute(name="Historizing", type="bool", copy=True, writeable=True),
+    Attribute(name="Executable", type="bool", copy=True, writeable=True),
+    Attribute(name="UserExecutable", type="bool", copy=True, writeable=True),
+    Attribute(name="DataTypeDefinition", type="Variant", copy=False, writeable=False, details="The attribute value can be of type EnumDefinition or StructureDefinition."),
 ]
 # fmt: on
 
@@ -77,7 +77,8 @@ inline Result<{type}> read{attr}(T& connection, const NodeId& id) noexcept {{
 /**
  * Asynchronously read the AttributeId::{attr} attribute of a node.
  * @copydetails read{attr}
- * @param token @completiontoken{{void({token_type})}}
+ * @param token @completiontoken{{void({param_type_callback})}}
+ * @return @asyncresult{{Result<{type}>}}
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -108,6 +109,7 @@ inline Result<void> write{attr}(T& connection, const NodeId& id, {param_type} {p
  * Asynchronously write the AttributeId::{attr} attribute of a node.
  * @copydetails write{attr}
  * @param token @completiontoken{{void(Result<void>)}}
+ * @return @asyncresult{{Result<void>}}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -137,16 +139,12 @@ def postprocess(code: str) -> str:
 
 def gen_functions():
     for attr in ATTRIBUTES:
-        type_value = attr.type_value
-        token_type = f"Result<{type_value}>" if attr.copy else f"Result<{type_value}>&"
-        param_type = type_value if attr.copy else f"const {type_value}&"
-        param_name = attr.name[0].lower() + attr.name[1:]
         format_args = {
             "attr": attr.name,
-            "type": attr.type_value,
-            "token_type": token_type,
-            "param_type": attr.type_view or param_type,
-            "param_name": param_name,
+            "type": attr.type,
+            "param_type_callback": f"Result<{attr.type}>" if attr.copy else f"Result<{attr.type}>&",
+            "param_type": attr.type_view or (attr.type if attr.copy else f"const {attr.type}&"),
+            "param_name": attr.name[0].lower() + attr.name[1:],
             "details": attr.details or "",
         }
         yield postprocess(TEMPLATE_READ.format(**format_args))

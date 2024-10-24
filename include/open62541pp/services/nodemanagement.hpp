@@ -51,7 +51,8 @@ AddNodesResponse addNodes(Client& connection, const AddNodesRequest& request) no
 /**
  * Asynchronously add one or more nodes (client only).
  * @copydetails addNodes
- * @param token @completiontoken{void(Result<AddNodesResponse>&)}
+ * @param token @completiontoken{void(AddNodesResponse&)}
+ * @return @asyncresult{AddNodesResponse}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto addNodesAsync(
@@ -92,6 +93,7 @@ Result<NodeId> addNode(
  * Asynchronously add a node.
  * @copydetails addNode
  * @param token @completiontoken{void(Result<NodeId>&)}
+ * @return @asyncresult{Result<NodeId>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto addNodeAsync(
@@ -147,7 +149,8 @@ AddReferencesResponse addReferences(
 /**
  * Asynchronously add one or more references (client only).
  * @copydetails addReferences
- * @param token @completiontoken{void(Result<AddReferencesResponse>&)}
+ * @param token @completiontoken{void(AddReferencesResponse&)}
+ * @return @asyncresult{AddReferencesReponse}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto addReferencesAsync(
@@ -184,6 +187,7 @@ Result<void> addReference(
  * Asynchronously add reference.
  * @copydetails addReference
  * @param token @completiontoken{void(Result<void>)}
+ * @return @asyncresult{Result<void>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto addReferenceAsync(
@@ -231,7 +235,8 @@ DeleteNodesResponse deleteNodes(Client& connection, const DeleteNodesRequest& re
 /**
  * Asynchronously delete one or more nodes (client only).
  * @copydetails deleteNodes
- * @param token @completiontoken{void(Result<DeleteNodesResponse>&)}
+ * @param token @completiontoken{void(DeleteNodesResponse&)}
+ * @return @asyncresult{DeleteNodesResponse}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto deleteNodesAsync(
@@ -260,6 +265,7 @@ Result<void> deleteNode(T& connection, const NodeId& id, bool deleteReferences =
  * Asynchronously delete node.
  * @copydetails deleteNode
  * @param token @completiontoken{void(Result<void>)}
+ * @return @asyncresult{Result<void>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto deleteNodeAsync(
@@ -304,7 +310,8 @@ DeleteReferencesResponse deleteReferences(
 /**
  * Asynchronously delete one or more references (client only).
  * @copydetails deleteReferences
- * @param token @completiontoken{void(Result<DeleteReferencesResponse>&)}
+ * @param token @completiontoken{void(DeleteReferencesResponse&)}
+ * @return @asyncresult{DeleteReferencesResponse}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto deleteReferencesAsync(
@@ -343,6 +350,7 @@ Result<void> deleteReference(
  * Asynchronously delete reference.
  * @copydetails deleteReference
  * @param token @completiontoken{void(Result<void>)}
+ * @return @asyncresult{Result<void>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto deleteReferenceAsync(
@@ -421,6 +429,7 @@ inline Result<NodeId> addObject(
  * Asynchronously add object.
  * @copydetails addObject
  * @param token @completiontoken{void(Result<NodeId>&)}
+ * @return @asyncresult{Result<NodeId>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addObjectAsync(
@@ -474,6 +483,7 @@ inline Result<NodeId> addFolder(
  * Asynchronously add folder.
  * @copydetails addFolder
  * @param token @completiontoken{void(Result<NodeId>&)}
+ * @return @asyncresult{Result<NodeId>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addFolderAsync(
@@ -534,6 +544,7 @@ inline Result<NodeId> addVariable(
  * Asynchronously add variable.
  * @copydetails addVariable
  * @param token @completiontoken{void(Result<NodeId>&)}
+ * @return @asyncresult{Result<NodeId>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addVariableAsync(
@@ -591,6 +602,7 @@ inline Result<NodeId> addProperty(
  * Asynchronously add property.
  * @copydetails addProperty
  * @param token @completiontoken{void(Result<NodeId>&)}
+ * @return @asyncresult{Result<NodeId>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addPropertyAsync(
@@ -652,6 +664,7 @@ Result<NodeId> addMethod(
  * Asynchronously add method.
  * @copydetails addMethod
  * @param token @completiontoken{void(Result<NodeId>&)}
+ * @return @asyncresult{Result<NodeId>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addMethodAsync(
@@ -715,6 +728,7 @@ inline Result<NodeId> addObjectType(
  * Asynchronously add object type.
  * @copydetails addObjectType
  * @param token @completiontoken{void(Result<NodeId>&)}
+ * @return @asyncresult{Result<NodeId>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addObjectTypeAsync(
@@ -776,6 +790,7 @@ inline Result<NodeId> addVariableType(
  * Asynchronously add variable type.
  * @copydetails addVariableType
  * @param token @completiontoken{void(Result<NodeId>&)}
+ * @return @asyncresult{Result<NodeId>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addVariableTypeAsync(
@@ -836,6 +851,7 @@ inline Result<NodeId> addReferenceType(
  * Asynchronously add reference type.
  * @copydetails addReferenceType
  * @param token @completiontoken{void(Result<NodeId>&)}
+ * @return @asyncresult{Result<NodeId>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addReferenceTypeAsync(
@@ -895,6 +911,7 @@ inline Result<NodeId> addDataType(
  * Asynchronously add data type.
  * @copydetails addDataType
  * @param token @completiontoken{void(Result<NodeId>&)}
+ * @return @asyncresult{Result<NodeId>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addDataTypeAsync(
@@ -954,6 +971,7 @@ inline Result<NodeId> addView(
  * Asynchronously add view.
  * @copydetails addView
  * @param token @completiontoken{void(Result<NodeId>&)}
+ * @return @asyncresult{Result<NodeId>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addViewAsync(
@@ -1002,6 +1020,7 @@ inline Result<void> addModellingRule(T& connection, const NodeId& id, ModellingR
  * Asynchronously add modelling rule.
  * @copydetails addModellingRule
  * @param token @completiontoken{void(Result<void>)}
+ * @return @asyncresult{Result<void>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto addModellingRuleAsync(
