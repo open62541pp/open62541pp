@@ -49,6 +49,7 @@ BrowseResponse browse(Client& connection, const BrowseRequest& request) noexcept
  * Asynchronously discover the references of one or more nodes (client only).
  * @copydetails browse
  * @param token @completiontoken{void(BrowseResponse&)}
+ * @return @asyncresult{BrowseResponse}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto browseAsync(
@@ -77,6 +78,7 @@ Result<BrowseResult> browse(
  * Asynchronously discover the references of a specified node.
  * @copydetails browse(T&, const BrowseDescription&, uint32_t)
  * @param token @completiontoken{void(Result<BrowseResult>&)}
+ * @return @asyncresult{Result<BrowseResult>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto browseAsync(
@@ -116,6 +118,7 @@ BrowseNextResponse browseNext(Client& connection, const BrowseNextRequest& reque
  * Asynchronously request the next sets of @ref browse / @ref browseNext responses (client only).
  * @copydetails browseNext
  * @param token @completiontoken{void(BrowseNextResponse&)}
+ * @return @asyncresult{BrowseNextResponse}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto browseNextAsync(
@@ -148,6 +151,7 @@ Result<BrowseResult> browseNext(
  * Asynchronously request the next set of a @ref browse or @ref browseNext response.
  * @copydetails browseNext(T&, bool, const ByteString&)
  * @param token @completiontoken{void(Result<BrowseResult>&)}
+ * @return @asyncresult{Result<BrowseResult>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto browseNextAsync(
@@ -188,6 +192,7 @@ TranslateBrowsePathsToNodeIdsResponse translateBrowsePathsToNodeIds(
  * Asynchronously translate browse paths to NodeIds (client only).
  * @copydetails translateBrowsePathsToNodeIds
  * @param token @completiontoken{void(TranslateBrowsePathsToNodeIdsResponse&)}
+ * @return @asyncresult{TranslateBrowsePathsToNodeIdsResponse}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto translateBrowsePathsToNodeIdsAsync(
@@ -220,6 +225,7 @@ Result<BrowsePathResult> translateBrowsePathToNodeIds(
  * Asynchronously translate a browse path to NodeIds.
  * @copydetails translateBrowsePathToNodeIds
  * @param token @completiontoken{void(Result<BrowsePathResult>&)}
+ * @return @asyncresult{Result<BrowsePathResult>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto translateBrowsePathToNodeIdsAsync(
@@ -261,6 +267,7 @@ inline Result<BrowsePathResult> browseSimplifiedBrowsePath(
  * A simplified version of @ref translateBrowsePathToNodeIdsAsync.
  * @copydetails browseSimplifiedBrowsePath
  * @param token @completiontoken{void(Result<BrowsePathResult>&)}
+ * @return @asyncresult{Result<BrowsePathResult>}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 inline auto browseSimplifiedBrowsePathAsync(
@@ -298,6 +305,7 @@ RegisterNodesResponse registerNodes(
  * Asynchronously register nodes for efficient access operations (client only).
  * @copydetails registerNodes
  * @param token @completiontoken{void(RegisterNodesResponse&)}
+ * @return @asyncresult{RegisterNodesResponse}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto registerNodesAsync(
@@ -335,6 +343,7 @@ UnregisterNodesResponse unregisterNodes(
  * Asynchronously unregister nodes (client only).
  * @copydetails unregisterNodes
  * @param token @completiontoken{void(UnregisterNodesResponse&)}
+ * @return @asyncresult{UnregisterNodesResponse}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto unregisterNodesAsync(

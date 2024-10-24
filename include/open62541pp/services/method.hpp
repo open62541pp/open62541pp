@@ -45,6 +45,7 @@ CallResponse call(Client& connection, const CallRequest& request) noexcept;
  * Asynchronously call server methods.
  * @copydetails call
  * @param token @completiontoken{void(CallResponse&)}
+ * @return @asyncresult{CallResponse}
  */
 template <typename CompletionToken = DefaultCompletionToken>
 auto callAsync(
@@ -86,6 +87,7 @@ Result<std::vector<Variant>> call(
  * @param methodId NodeId of the method to invoke
  * @param inputArguments Input argument values
  * @param token @completiontoken{void(Result<std::vector<Variant>>&)}
+ * @return @asyncresult{Result<std::vector<Variant>>}
  * @exception BadStatus
  */
 template <typename CompletionToken = DefaultCompletionToken>

@@ -23,6 +23,7 @@ inline Result<NodeId> readNodeId(T& connection, const NodeId& id) noexcept {
  * Asynchronously read the AttributeId::NodeId attribute of a node.
  * @copydetails readNodeId
  * @param token @completiontoken{void(Result<NodeId>&)}
+ * @return @asyncresult{Result<NodeId>}
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -49,6 +50,7 @@ inline Result<NodeClass> readNodeClass(T& connection, const NodeId& id) noexcept
  * Asynchronously read the AttributeId::NodeClass attribute of a node.
  * @copydetails readNodeClass
  * @param token @completiontoken{void(Result<NodeClass>)}
+ * @return @asyncresult{Result<NodeClass>}
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -75,6 +77,7 @@ inline Result<QualifiedName> readBrowseName(T& connection, const NodeId& id) noe
  * Asynchronously read the AttributeId::BrowseName attribute of a node.
  * @copydetails readBrowseName
  * @param token @completiontoken{void(Result<QualifiedName>&)}
+ * @return @asyncresult{Result<QualifiedName>}
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -104,6 +107,7 @@ inline Result<void> writeBrowseName(
  * Asynchronously write the AttributeId::BrowseName attribute of a node.
  * @copydetails writeBrowseName
  * @param token @completiontoken{void(Result<void>)}
+ * @return @asyncresult{Result<void>}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -133,6 +137,7 @@ inline Result<LocalizedText> readDisplayName(T& connection, const NodeId& id) no
  * Asynchronously read the AttributeId::DisplayName attribute of a node.
  * @copydetails readDisplayName
  * @param token @completiontoken{void(Result<LocalizedText>&)}
+ * @return @asyncresult{Result<LocalizedText>}
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -162,6 +167,7 @@ inline Result<void> writeDisplayName(
  * Asynchronously write the AttributeId::DisplayName attribute of a node.
  * @copydetails writeDisplayName
  * @param token @completiontoken{void(Result<void>)}
+ * @return @asyncresult{Result<void>}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -191,6 +197,7 @@ inline Result<LocalizedText> readDescription(T& connection, const NodeId& id) no
  * Asynchronously read the AttributeId::Description attribute of a node.
  * @copydetails readDescription
  * @param token @completiontoken{void(Result<LocalizedText>&)}
+ * @return @asyncresult{Result<LocalizedText>}
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -220,6 +227,7 @@ inline Result<void> writeDescription(
  * Asynchronously write the AttributeId::Description attribute of a node.
  * @copydetails writeDescription
  * @param token @completiontoken{void(Result<void>)}
+ * @return @asyncresult{Result<void>}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -249,6 +257,7 @@ inline Result<Bitmask<WriteMask>> readWriteMask(T& connection, const NodeId& id)
  * Asynchronously read the AttributeId::WriteMask attribute of a node.
  * @copydetails readWriteMask
  * @param token @completiontoken{void(Result<Bitmask<WriteMask>>)}
+ * @return @asyncresult{Result<Bitmask<WriteMask>>}
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -278,6 +287,7 @@ inline Result<void> writeWriteMask(
  * Asynchronously write the AttributeId::WriteMask attribute of a node.
  * @copydetails writeWriteMask
  * @param token @completiontoken{void(Result<void>)}
+ * @return @asyncresult{Result<void>}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -307,6 +317,7 @@ inline Result<Bitmask<WriteMask>> readUserWriteMask(T& connection, const NodeId&
  * Asynchronously read the AttributeId::UserWriteMask attribute of a node.
  * @copydetails readUserWriteMask
  * @param token @completiontoken{void(Result<Bitmask<WriteMask>>)}
+ * @return @asyncresult{Result<Bitmask<WriteMask>>}
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -336,6 +347,7 @@ inline Result<void> writeUserWriteMask(
  * Asynchronously write the AttributeId::UserWriteMask attribute of a node.
  * @copydetails writeUserWriteMask
  * @param token @completiontoken{void(Result<void>)}
+ * @return @asyncresult{Result<void>}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -365,6 +377,7 @@ inline Result<bool> readIsAbstract(T& connection, const NodeId& id) noexcept {
  * Asynchronously read the AttributeId::IsAbstract attribute of a node.
  * @copydetails readIsAbstract
  * @param token @completiontoken{void(Result<bool>)}
+ * @return @asyncresult{Result<bool>}
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -392,6 +405,7 @@ inline Result<void> writeIsAbstract(T& connection, const NodeId& id, bool isAbst
  * Asynchronously write the AttributeId::IsAbstract attribute of a node.
  * @copydetails writeIsAbstract
  * @param token @completiontoken{void(Result<void>)}
+ * @return @asyncresult{Result<void>}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -421,6 +435,7 @@ inline Result<bool> readSymmetric(T& connection, const NodeId& id) noexcept {
  * Asynchronously read the AttributeId::Symmetric attribute of a node.
  * @copydetails readSymmetric
  * @param token @completiontoken{void(Result<bool>)}
+ * @return @asyncresult{Result<bool>}
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -448,6 +463,7 @@ inline Result<void> writeSymmetric(T& connection, const NodeId& id, bool symmetr
  * Asynchronously write the AttributeId::Symmetric attribute of a node.
  * @copydetails writeSymmetric
  * @param token @completiontoken{void(Result<void>)}
+ * @return @asyncresult{Result<void>}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -477,6 +493,7 @@ inline Result<LocalizedText> readInverseName(T& connection, const NodeId& id) no
  * Asynchronously read the AttributeId::InverseName attribute of a node.
  * @copydetails readInverseName
  * @param token @completiontoken{void(Result<LocalizedText>&)}
+ * @return @asyncresult{Result<LocalizedText>}
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -506,6 +523,7 @@ inline Result<void> writeInverseName(
  * Asynchronously write the AttributeId::InverseName attribute of a node.
  * @copydetails writeInverseName
  * @param token @completiontoken{void(Result<void>)}
+ * @return @asyncresult{Result<void>}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -535,6 +553,7 @@ inline Result<bool> readContainsNoLoops(T& connection, const NodeId& id) noexcep
  * Asynchronously read the AttributeId::ContainsNoLoops attribute of a node.
  * @copydetails readContainsNoLoops
  * @param token @completiontoken{void(Result<bool>&)}
+ * @return @asyncresult{Result<bool>}
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -566,6 +585,7 @@ inline Result<void> writeContainsNoLoops(
  * Asynchronously write the AttributeId::ContainsNoLoops attribute of a node.
  * @copydetails writeContainsNoLoops
  * @param token @completiontoken{void(Result<void>)}
+ * @return @asyncresult{Result<void>}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -595,6 +615,7 @@ inline Result<Bitmask<EventNotifier>> readEventNotifier(T& connection, const Nod
  * Asynchronously read the AttributeId::EventNotifier attribute of a node.
  * @copydetails readEventNotifier
  * @param token @completiontoken{void(Result<Bitmask<EventNotifier>>)}
+ * @return @asyncresult{Result<Bitmask<EventNotifier>>}
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -624,6 +645,7 @@ inline Result<void> writeEventNotifier(
  * Asynchronously write the AttributeId::EventNotifier attribute of a node.
  * @copydetails writeEventNotifier
  * @param token @completiontoken{void(Result<void>)}
+ * @return @asyncresult{Result<void>}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -653,6 +675,7 @@ inline Result<Variant> readValue(T& connection, const NodeId& id) noexcept {
  * Asynchronously read the AttributeId::Value attribute of a node.
  * @copydetails readValue
  * @param token @completiontoken{void(Result<Variant>&)}
+ * @return @asyncresult{Result<Variant>}
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -680,6 +703,7 @@ inline Result<void> writeValue(T& connection, const NodeId& id, const Variant& v
  * Asynchronously write the AttributeId::Value attribute of a node.
  * @copydetails writeValue
  * @param token @completiontoken{void(Result<void>)}
+ * @return @asyncresult{Result<void>}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -709,6 +733,7 @@ inline Result<NodeId> readDataType(T& connection, const NodeId& id) noexcept {
  * Asynchronously read the AttributeId::DataType attribute of a node.
  * @copydetails readDataType
  * @param token @completiontoken{void(Result<NodeId>&)}
+ * @return @asyncresult{Result<NodeId>}
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -738,6 +763,7 @@ inline Result<void> writeDataType(
  * Asynchronously write the AttributeId::DataType attribute of a node.
  * @copydetails writeDataType
  * @param token @completiontoken{void(Result<void>)}
+ * @return @asyncresult{Result<void>}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -767,6 +793,7 @@ inline Result<ValueRank> readValueRank(T& connection, const NodeId& id) noexcept
  * Asynchronously read the AttributeId::ValueRank attribute of a node.
  * @copydetails readValueRank
  * @param token @completiontoken{void(Result<ValueRank>)}
+ * @return @asyncresult{Result<ValueRank>}
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -794,6 +821,7 @@ inline Result<void> writeValueRank(T& connection, const NodeId& id, ValueRank va
  * Asynchronously write the AttributeId::ValueRank attribute of a node.
  * @copydetails writeValueRank
  * @param token @completiontoken{void(Result<void>)}
+ * @return @asyncresult{Result<void>}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -823,6 +851,7 @@ inline Result<std::vector<uint32_t>> readArrayDimensions(T& connection, const No
  * Asynchronously read the AttributeId::ArrayDimensions attribute of a node.
  * @copydetails readArrayDimensions
  * @param token @completiontoken{void(Result<std::vector<uint32_t>>&)}
+ * @return @asyncresult{Result<std::vector<uint32_t>>}
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -854,6 +883,7 @@ inline Result<void> writeArrayDimensions(
  * Asynchronously write the AttributeId::ArrayDimensions attribute of a node.
  * @copydetails writeArrayDimensions
  * @param token @completiontoken{void(Result<void>)}
+ * @return @asyncresult{Result<void>}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -883,6 +913,7 @@ inline Result<Bitmask<AccessLevel>> readAccessLevel(T& connection, const NodeId&
  * Asynchronously read the AttributeId::AccessLevel attribute of a node.
  * @copydetails readAccessLevel
  * @param token @completiontoken{void(Result<Bitmask<AccessLevel>>)}
+ * @return @asyncresult{Result<Bitmask<AccessLevel>>}
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -912,6 +943,7 @@ inline Result<void> writeAccessLevel(
  * Asynchronously write the AttributeId::AccessLevel attribute of a node.
  * @copydetails writeAccessLevel
  * @param token @completiontoken{void(Result<void>)}
+ * @return @asyncresult{Result<void>}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -941,6 +973,7 @@ inline Result<Bitmask<AccessLevel>> readUserAccessLevel(T& connection, const Nod
  * Asynchronously read the AttributeId::UserAccessLevel attribute of a node.
  * @copydetails readUserAccessLevel
  * @param token @completiontoken{void(Result<Bitmask<AccessLevel>>)}
+ * @return @asyncresult{Result<Bitmask<AccessLevel>>}
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -972,6 +1005,7 @@ inline Result<void> writeUserAccessLevel(
  * Asynchronously write the AttributeId::UserAccessLevel attribute of a node.
  * @copydetails writeUserAccessLevel
  * @param token @completiontoken{void(Result<void>)}
+ * @return @asyncresult{Result<void>}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -1001,6 +1035,7 @@ inline Result<double> readMinimumSamplingInterval(T& connection, const NodeId& i
  * Asynchronously read the AttributeId::MinimumSamplingInterval attribute of a node.
  * @copydetails readMinimumSamplingInterval
  * @param token @completiontoken{void(Result<double>)}
+ * @return @asyncresult{Result<double>}
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -1032,6 +1067,7 @@ inline Result<void> writeMinimumSamplingInterval(
  * Asynchronously write the AttributeId::MinimumSamplingInterval attribute of a node.
  * @copydetails writeMinimumSamplingInterval
  * @param token @completiontoken{void(Result<void>)}
+ * @return @asyncresult{Result<void>}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -1061,6 +1097,7 @@ inline Result<bool> readHistorizing(T& connection, const NodeId& id) noexcept {
  * Asynchronously read the AttributeId::Historizing attribute of a node.
  * @copydetails readHistorizing
  * @param token @completiontoken{void(Result<bool>)}
+ * @return @asyncresult{Result<bool>}
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -1088,6 +1125,7 @@ inline Result<void> writeHistorizing(T& connection, const NodeId& id, bool histo
  * Asynchronously write the AttributeId::Historizing attribute of a node.
  * @copydetails writeHistorizing
  * @param token @completiontoken{void(Result<void>)}
+ * @return @asyncresult{Result<void>}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -1117,6 +1155,7 @@ inline Result<bool> readExecutable(T& connection, const NodeId& id) noexcept {
  * Asynchronously read the AttributeId::Executable attribute of a node.
  * @copydetails readExecutable
  * @param token @completiontoken{void(Result<bool>)}
+ * @return @asyncresult{Result<bool>}
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -1144,6 +1183,7 @@ inline Result<void> writeExecutable(T& connection, const NodeId& id, bool execut
  * Asynchronously write the AttributeId::Executable attribute of a node.
  * @copydetails writeExecutable
  * @param token @completiontoken{void(Result<void>)}
+ * @return @asyncresult{Result<void>}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -1173,6 +1213,7 @@ inline Result<bool> readUserExecutable(T& connection, const NodeId& id) noexcept
  * Asynchronously read the AttributeId::UserExecutable attribute of a node.
  * @copydetails readUserExecutable
  * @param token @completiontoken{void(Result<bool>)}
+ * @return @asyncresult{Result<bool>}
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -1202,6 +1243,7 @@ inline Result<void> writeUserExecutable(
  * Asynchronously write the AttributeId::UserExecutable attribute of a node.
  * @copydetails writeUserExecutable
  * @param token @completiontoken{void(Result<void>)}
+ * @return @asyncresult{Result<void>}
  * @ingroup Write
  */
 template <typename CompletionToken = DefaultCompletionToken>
@@ -1232,6 +1274,7 @@ inline Result<Variant> readDataTypeDefinition(T& connection, const NodeId& id) n
  * Asynchronously read the AttributeId::DataTypeDefinition attribute of a node.
  * @copydetails readDataTypeDefinition
  * @param token @completiontoken{void(Result<Variant>&)}
+ * @return @asyncresult{Result<Variant>}
  * @ingroup Read
  */
 template <typename CompletionToken = DefaultCompletionToken>
