@@ -55,7 +55,7 @@ jobs:
             -DUA_ENABLE_SUBSCRIPTIONS=ON \
             -DUA_ENABLE_SUBSCRIPTIONS_EVENTS=ON \
             ..
-          cmake --build . --parallel 4
+          cmake --build . --parallel
           sudo cmake --install .
       - name: Build
         run: |
@@ -69,6 +69,6 @@ jobs:
             -DUAPP_ENABLE_SANITIZER_UNDEFINED_BEHAVIOR=ON \
             -DUAPP_ENABLE_SANITIZER_ADDRESS=ON \
             ..
-          cmake --build . --parallel 4
+          cmake --build . --parallel
       - name: Run tests
         run: ctest --test-dir build --output-on-failure
