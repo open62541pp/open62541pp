@@ -546,10 +546,6 @@ Server* asWrapper(UA_Server* server) noexcept {
 #endif
 }
 
-UA_Server* asNative(Server* server) noexcept {
-    return server == nullptr ? nullptr : server->handle();
-}
-
 /* -------------------------------------- Helper functions -------------------------------------- */
 
 namespace detail {

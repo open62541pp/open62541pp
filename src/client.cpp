@@ -522,10 +522,6 @@ Client* asWrapper(UA_Client* client) noexcept {
     return static_cast<Client*>(config->clientContext);
 }
 
-UA_Client* asNative(Client* client) noexcept {
-    return client == nullptr ? nullptr : client->handle();
-}
-
 /* -------------------------------------- Helper functions -------------------------------------- */
 
 namespace detail {
