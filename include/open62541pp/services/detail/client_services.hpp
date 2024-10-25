@@ -3,7 +3,6 @@
 #include <cassert>
 #include <functional>  // invoke
 #include <memory>
-#include <tuple>
 #include <type_traits>
 #include <utility>  // forward
 
@@ -40,29 +39,34 @@ struct AsyncServiceAdapter {
         static_assert(std::is_invocable_v<TransformResponse, Response&>);
         using TransformResult = std::invoke_result_t<TransformResponse, Response&>;
         static_assert(std::is_invocable_v<CompletionHandler, TransformResult&>);
-        using Context = std::tuple<ExceptionCatcher&, TransformResponse, CompletionHandler>;
+
+        struct Context {
+            ExceptionCatcher* catcher;
+            TransformResponse transform;
+            CompletionHandler handler;
+        };
 
         auto callback = [](UA_Client*, void* userdata, uint32_t /* reqId */, void* responsePtr) {
-            assert(userdata != nullptr);
             std::unique_ptr<Context> context{static_cast<Context*>(userdata)};
-            auto& catcher = std::get<ExceptionCatcher&>(*context);
-            catcher.invoke([&] {
+            assert(context != nullptr);
+            assert(context->catcher != nullptr);
+            context->catcher->invoke([&] {
                 if (responsePtr == nullptr) {
                     throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
                 }
                 Response& response = *static_cast<Response*>(responsePtr);
-                auto result = std::invoke(std::get<TransformResponse>(*context), response);
-                std::invoke(std::get<CompletionHandler>(*context), result);
+                auto result = std::invoke(context->transform, response);
+                std::invoke(context->handler, result);
             });
         };
 
         return CallbackAndContext<Context>{
             callback,
-            std::make_unique<Context>(
-                exceptionCatcher,
+            std::make_unique<Context>(Context{
+                &exceptionCatcher,
                 std::forward<TransformResponse>(transformResponse),
                 std::forward<CompletionHandler>(completionHandler)
-            )
+            })
         };
     }
 
