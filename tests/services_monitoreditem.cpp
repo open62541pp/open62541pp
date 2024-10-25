@@ -32,14 +32,15 @@ TEST_CASE("MonitoredItem service set (client)") {
     monitoringParameters.samplingInterval = 0.0;  // fastest
 
     SUBCASE("createMonitoredItemDataChange without subscription") {
-        CHECK_FALSE(services::createMonitoredItemDataChange(
+        const auto result = services::createMonitoredItemDataChange(
             client,
             11U,  // random subId
             {id, AttributeId::Value},
             MonitoringMode::Reporting,
             monitoringParameters,
             {}
-        ));
+        );
+        CHECK(result.getStatusCode().isBad());
     }
 
     const auto subId =
@@ -69,17 +70,16 @@ TEST_CASE("MonitoredItem service set (client)") {
             CHECK(response.getResponseHeader().getServiceResult().isGood());
         }
         SUBCASE("Single") {
-            const auto monId =
-                services::createMonitoredItemDataChange(
-                    client,
-                    subId,
-                    {id, AttributeId::Value},
-                    MonitoringMode::Reporting,
-                    monitoringParameters,
-                    callback
-                )
-                    .value();
-            CAPTURE(monId);
+            const auto result = services::createMonitoredItemDataChange(
+                client,
+                subId,
+                {id, AttributeId::Value},
+                MonitoringMode::Reporting,
+                monitoringParameters,
+                callback
+            );
+            CHECK(result.getStatusCode().isGood());
+            CAPTURE(result.getMonitoredItemId());
         }
 
         services::writeValue(server, id, Variant::fromScalar(11.11)).value();
@@ -126,17 +126,16 @@ TEST_CASE("MonitoredItem service set (client)") {
             CHECK(response.getResponseHeader().getServiceResult().isGood());
         }
         SUBCASE("Single") {
-            const auto monId =
-                services::createMonitoredItemEvent(
-                    client,
-                    subId,
-                    {ObjectId::Server, AttributeId::EventNotifier},
-                    MonitoringMode::Reporting,
-                    monitoringParameters,
-                    callback
-                )
-                    .value();
-            CAPTURE(monId);
+            const auto result = services::createMonitoredItemEvent(
+                client,
+                subId,
+                {ObjectId::Server, AttributeId::EventNotifier},
+                MonitoringMode::Reporting,
+                monitoringParameters,
+                callback
+            );
+            CHECK(result.getStatusCode().isGood());
+            CAPTURE(result.getMonitoredItemId());
         }
 
         Event event(server);
@@ -158,7 +157,7 @@ TEST_CASE("MonitoredItem service set (client)") {
                 monitoringParameters,
                 {}
             )
-                .value();
+                .getMonitoredItemId();
         CAPTURE(monId);
 
         services::MonitoringParametersEx modifiedParameters{};
@@ -176,7 +175,7 @@ TEST_CASE("MonitoredItem service set (client)") {
                 monitoringParameters,
                 {}
             )
-                .value();
+                .getMonitoredItemId();
         CAPTURE(monId);
         CHECK(services::setMonitoringMode(client, subId, monId, MonitoringMode::Disabled));
     }
@@ -194,7 +193,8 @@ TEST_CASE("MonitoredItem service set (client)") {
                 MonitoringMode::Reporting,
                 monitoringParameters,
                 [&](uint32_t, uint32_t, const DataValue&) { notificationCountTriggering++; }
-            ).value();
+            ).getMonitoredItemId();
+        CAPTURE(monIdTriggering);
         // set triggered item's monitoring mode to sampling
         // -> will only report if triggered by triggering item
         // https://reference.opcfoundation.org/Core/Part4/v105/docs/5.12.1.6
@@ -206,7 +206,8 @@ TEST_CASE("MonitoredItem service set (client)") {
                 MonitoringMode::Sampling,
                 monitoringParameters,
                 [&](uint32_t, uint32_t, const DataValue&) { notificationCount++; }
-            ).value();
+            ).getMonitoredItemId();
+        CAPTURE(monId);
 
         client.runIterate();
         CHECK(notificationCountTriggering > 0);
@@ -245,7 +246,7 @@ TEST_CASE("MonitoredItem service set (client)") {
                 monitoringParameters,
                 {},
                 [&](uint32_t, uint32_t) { deleted = true; }
-            ).value();
+            ).getMonitoredItemId();
 
         CHECK(services::deleteMonitoredItem(client, subId, monId));
         client.runIterate();
@@ -271,7 +272,7 @@ TEST_CASE("MonitoredItem service set (server)") {
                 MonitoringMode::Reporting,
                 monitoringParameters,
                 [&](uint32_t, uint32_t, const DataValue&) { notificationCount++; }
-            ).value();
+            ).getMonitoredItemId();
         CAPTURE(monId);
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
         services::writeValue(server, id, Variant::fromScalar(11.11)).value();
@@ -294,7 +295,7 @@ TEST_CASE("MonitoredItem service set (server)") {
                 monitoringParameters,
                 {}
             )
-                .value();
+                .getMonitoredItemId();
         CAPTURE(monId);
         CHECK(services::deleteMonitoredItem(server, 0U, monId));
     }

@@ -108,7 +108,7 @@ using EventNotificationCallback =
  * @param dataChangeCallback Invoked when the monitored item is changed
  * @param deleteCallback Invoked when the monitored item is deleted
  */
-CreateMonitoredItemsResponse createMonitoredItemsDataChange(
+[[nodiscard]] CreateMonitoredItemsResponse createMonitoredItemsDataChange(
     Client& connection,
     const CreateMonitoredItemsRequest& request,
     DataChangeNotificationCallback dataChangeCallback,
@@ -131,7 +131,7 @@ CreateMonitoredItemsResponse createMonitoredItemsDataChange(
  * @param deleteCallback Invoked when the monitored item is deleted
  */
 template <typename T>
-[[nodiscard]] Result<uint32_t> createMonitoredItemDataChange(
+[[nodiscard]] MonitoredItemCreateResult createMonitoredItemDataChange(
     T& connection,
     uint32_t subscriptionId,
     const ReadValueId& itemToMonitor,
@@ -150,7 +150,7 @@ template <typename T>
  * @param eventCallback Invoked when an event is published
  * @param deleteCallback Invoked when the monitored item is deleted
  */
-CreateMonitoredItemsResponse createMonitoredItemsEvent(
+[[nodiscard]] CreateMonitoredItemsResponse createMonitoredItemsEvent(
     Client& connection,
     const CreateMonitoredItemsRequest& request,
     EventNotificationCallback eventCallback,
@@ -170,7 +170,7 @@ CreateMonitoredItemsResponse createMonitoredItemsEvent(
  * @param eventCallback Invoked when an event is published
  * @param deleteCallback Invoked when the monitored item is deleted
  */
-[[nodiscard]] Result<uint32_t> createMonitoredItemEvent(
+[[nodiscard]] MonitoredItemCreateResult createMonitoredItemEvent(
     Client& connection,
     uint32_t subscriptionId,
     const ReadValueId& itemToMonitor,
