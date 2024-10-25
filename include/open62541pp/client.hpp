@@ -287,9 +287,12 @@ private:
     std::unique_ptr<UA_Client, Deleter> client_;
 };
 
-/// Convert native UA_Client pointer to its wrapper instance.
+/// Convert native UA_Client pointer to its wrapper pointer.
 /// The native client must be owned by a Client instance.
 Client* asWrapper(UA_Client* client) noexcept;
+
+/// Convert Client wrapper pointer to native pointer.
+UA_Client* asNative(Client* client) noexcept;
 
 inline bool operator==(const Client& lhs, const Client& rhs) noexcept {
     return (lhs.handle() == rhs.handle());

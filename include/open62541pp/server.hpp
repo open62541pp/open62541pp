@@ -283,9 +283,12 @@ private:
     std::unique_ptr<UA_Server, Deleter> server_;
 };
 
-/// Convert native UA_Server pointer to its wrapper instance.
+/// Convert native UA_Server pointer to its wrapper pointer.
 /// The native server must be owned by a Server instance.
 Server* asWrapper(UA_Server* server) noexcept;
+
+/// Convert Server wrapper pointer to native pointer.
+UA_Server* asNative(Server* server) noexcept;
 
 inline bool operator==(const Server& lhs, const Server& rhs) noexcept {
     return (lhs.handle() == rhs.handle());
