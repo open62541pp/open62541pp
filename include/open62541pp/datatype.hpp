@@ -1,7 +1,9 @@
 #pragma once
 
-#include <algorithm>
+#include <algorithm>  // transform
+#include <cassert>
 #include <cstdint>
+#include <iterator>  // prev
 #include <type_traits>
 #include <utility>  // move
 #include <vector>

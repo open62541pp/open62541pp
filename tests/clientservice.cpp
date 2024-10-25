@@ -1,9 +1,6 @@
-#include <future>
-
 #include <doctest/doctest.h>
 
 #include "open62541pp/client.hpp"
-#include "open62541pp/config.hpp"
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/server.hpp"
 #include "open62541pp/services/detail/client_services.hpp"

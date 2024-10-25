@@ -14,7 +14,6 @@
 #include "open62541pp/result.hpp"
 #include "open62541pp/services/attribute_highlevel.hpp"  // readValue
 #include "open62541pp/services/subscription.hpp"
-#include "open62541pp/typewrapper.hpp"
 
 namespace opcua {
 

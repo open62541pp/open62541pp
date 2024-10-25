@@ -10,7 +10,6 @@
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/exception.hpp"
 #include "open62541pp/plugin/log_default.hpp"
-#include "open62541pp/typewrapper.hpp"
 
 namespace opcua::crypto {
 
