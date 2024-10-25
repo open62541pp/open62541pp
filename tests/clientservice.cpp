@@ -25,7 +25,7 @@ TEST_CASE("AsyncServiceAdapter") {
         detail::ExceptionCatcher catcher;
 
         auto callbackAndContext = Adapter::createCallbackAndContext(
-            catcher,
+            &catcher,
             [&](int val) {
                 if (throwInTransform) {
                     throw std::runtime_error("Transform");

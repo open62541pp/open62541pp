@@ -8,10 +8,10 @@
 
 #include "open62541pp/async.hpp"
 #include "open62541pp/client.hpp"
-#include "open62541pp/detail/client_context.hpp"
 #include "open62541pp/detail/exceptioncatcher.hpp"
 #include "open62541pp/detail/open62541/client.h"
 #include "open62541pp/detail/scope.hpp"
+#include "open62541pp/detail/types_handling.hpp"  // clear
 #include "open62541pp/exception.hpp"
 #include "open62541pp/typeregistry.hpp"  // getDataType
 
@@ -32,10 +32,11 @@ struct AsyncServiceAdapter {
 
     template <typename CompletionHandler, typename TransformResponse>
     static auto createCallbackAndContext(
-        ExceptionCatcher& exceptionCatcher,
+        ExceptionCatcher* exceptionCatcher,
         TransformResponse&& transformResponse,
         CompletionHandler&& completionHandler
     ) {
+        assert(exceptionCatcher != nullptr);
         static_assert(std::is_invocable_v<TransformResponse, Response&>);
         using TransformResult = std::invoke_result_t<TransformResponse, Response&>;
         static_assert(std::is_invocable_v<CompletionHandler, TransformResult&>);
@@ -63,7 +64,7 @@ struct AsyncServiceAdapter {
         return CallbackAndContext<Context>{
             callback,
             std::make_unique<Context>(Context{
-                &exceptionCatcher,
+                exceptionCatcher,
                 std::forward<TransformResponse>(transformResponse),
                 std::forward<CompletionHandler>(completionHandler)
             })
@@ -92,7 +93,7 @@ struct AsyncServiceAdapter {
             [&](auto&& completionHandler, auto&& transform) {
                 // NOLINTNEXTLINE(clang-analyzer-cplusplus.NewDeleteLeaks), false positive?
                 auto callbackAndContext = createCallbackAndContext(
-                    opcua::detail::getContext(client).exceptionCatcher,
+                    opcua::detail::getExceptionCatcher(client.handle()),
                     std::forward<decltype(transform)>(transform),
                     std::forward<decltype(completionHandler)>(completionHandler)
                 );
