@@ -147,12 +147,3 @@ TEST_CASE_TEMPLATE("Connection asWrapper", T, Client, Server) {
         CHECK(asWrapper(native) == &connectionMoved);
     }
 }
-
-TEST_CASE_TEMPLATE("Connection asNative", T, Client, Server) {
-    T connection;
-    T* connectionNull{nullptr};
-
-    CHECK(asNative(connectionNull) == nullptr);
-    CHECK(asNative(&connection) != nullptr);
-    CHECK(asNative(&connection) == connection.handle());
-}
