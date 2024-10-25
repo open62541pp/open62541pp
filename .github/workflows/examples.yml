@@ -20,6 +20,6 @@ jobs:
           mkdir build
           cd build
           cmake -G Ninja -DUAPP_BUILD_EXAMPLES=ON ..
-          cmake --build . --parallel
+          cmake --build . --parallel 4
       - name: Run examples
         run: python3 ./tools/run_examples.py ./build/bin/
