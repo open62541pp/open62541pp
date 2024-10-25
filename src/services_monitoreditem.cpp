@@ -115,7 +115,7 @@ CreateMonitoredItemsResponse createMonitoredItemsDataChange(
 }
 
 template <>
-Result<uint32_t> createMonitoredItemDataChange<Client>(
+MonitoredItemCreateResult createMonitoredItemDataChange<Client>(
     Client& connection,
     uint32_t subscriptionId,
     const ReadValueId& itemToMonitor,
@@ -127,7 +127,7 @@ Result<uint32_t> createMonitoredItemDataChange<Client>(
     auto context = createMonitoredItemContext(
         connection, itemToMonitor, std::move(dataChangeCallback), {}, std::move(deleteCallback)
     );
-    const MonitoredItemCreateResult result = UA_Client_MonitoredItems_createDataChange(
+    MonitoredItemCreateResult result = UA_Client_MonitoredItems_createDataChange(
         connection.handle(),
         subscriptionId,
         static_cast<UA_TimestampsToReturn>(parameters.timestamps),
@@ -137,11 +137,11 @@ Result<uint32_t> createMonitoredItemDataChange<Client>(
         context->deleteCallbackNative
     );
     storeMonitoredItemContext(connection, subscriptionId, result, context);
-    return detail::getMonitoredItemId(result);
+    return result;
 }
 
 template <>
-Result<uint32_t> createMonitoredItemDataChange<Server>(
+MonitoredItemCreateResult createMonitoredItemDataChange<Server>(
     Server& connection,
     [[maybe_unused]] uint32_t subscriptionId,
     const ReadValueId& itemToMonitor,
@@ -153,7 +153,7 @@ Result<uint32_t> createMonitoredItemDataChange<Server>(
     auto context = createMonitoredItemContext(
         connection, itemToMonitor, std::move(dataChangeCallback), {}, std::move(deleteCallback)
     );
-    const MonitoredItemCreateResult result = UA_Server_createDataChangeMonitoredItem(
+    MonitoredItemCreateResult result = UA_Server_createDataChangeMonitoredItem(
         connection.handle(),
         static_cast<UA_TimestampsToReturn>(parameters.timestamps),
         detail::createMonitoredItemCreateRequest(itemToMonitor, monitoringMode, parameters),
@@ -161,7 +161,7 @@ Result<uint32_t> createMonitoredItemDataChange<Server>(
         context->dataChangeCallbackNativeServer
     );
     storeMonitoredItemContext(connection, 0U, result, context);
-    return detail::getMonitoredItemId(result);
+    return result;
 }
 
 CreateMonitoredItemsResponse createMonitoredItemsEvent(
@@ -192,7 +192,7 @@ CreateMonitoredItemsResponse createMonitoredItemsEvent(
     return response;
 }
 
-Result<uint32_t> createMonitoredItemEvent(
+MonitoredItemCreateResult createMonitoredItemEvent(
     Client& connection,
     uint32_t subscriptionId,
     const ReadValueId& itemToMonitor,
@@ -204,7 +204,7 @@ Result<uint32_t> createMonitoredItemEvent(
     auto context = createMonitoredItemContext(
         connection, itemToMonitor, {}, std::move(eventCallback), std::move(deleteCallback)
     );
-    const MonitoredItemCreateResult result = UA_Client_MonitoredItems_createEvent(
+    MonitoredItemCreateResult result = UA_Client_MonitoredItems_createEvent(
         connection.handle(),
         subscriptionId,
         static_cast<UA_TimestampsToReturn>(parameters.timestamps),
@@ -214,7 +214,7 @@ Result<uint32_t> createMonitoredItemEvent(
         context->deleteCallbackNative
     );
     storeMonitoredItemContext(connection, subscriptionId, result, context);
-    return detail::getMonitoredItemId(result);
+    return result;
 }
 
 ModifyMonitoredItemsResponse modifyMonitoredItems(

@@ -99,7 +99,8 @@ public:
             parameters,
             std::move(onDataChange)
         );
-        return {connection(), subscriptionId(), result.value()};
+        result.getStatusCode().throwIfBad();
+        return {connection(), subscriptionId(), result.getMonitoredItemId()};
     }
 
     /// Create a monitored item for data change notifications (default settings).
@@ -130,7 +131,8 @@ public:
             parameters,
             std::move(onEvent)
         );
-        return {connection(), subscriptionId(), result.value()};
+        result.getStatusCode().throwIfBad();
+        return {connection(), subscriptionId(), result.getMonitoredItemId()};
     }
 
     /// Create a monitored item for event notifications (default settings).
