@@ -3,16 +3,15 @@
 #include <cassert>
 #include <functional>  // invoke
 #include <memory>
-#include <tuple>
 #include <type_traits>
 #include <utility>  // forward
 
 #include "open62541pp/async.hpp"
-#include "open62541pp/client.hpp"
-#include "open62541pp/detail/client_context.hpp"
+#include "open62541pp/detail/client_utils.hpp"
 #include "open62541pp/detail/exceptioncatcher.hpp"
 #include "open62541pp/detail/open62541/client.h"
 #include "open62541pp/detail/scope.hpp"
+#include "open62541pp/detail/types_handling.hpp"  // clear
 #include "open62541pp/exception.hpp"
 #include "open62541pp/typeregistry.hpp"  // getDataType
 
@@ -40,29 +39,34 @@ struct AsyncServiceAdapter {
         static_assert(std::is_invocable_v<TransformResponse, Response&>);
         using TransformResult = std::invoke_result_t<TransformResponse, Response&>;
         static_assert(std::is_invocable_v<CompletionHandler, TransformResult&>);
-        using Context = std::tuple<ExceptionCatcher&, TransformResponse, CompletionHandler>;
+
+        struct Context {
+            ExceptionCatcher* catcher;
+            TransformResponse transform;
+            CompletionHandler handler;
+        };
 
         auto callback = [](UA_Client*, void* userdata, uint32_t /* reqId */, void* responsePtr) {
-            assert(userdata != nullptr);
             std::unique_ptr<Context> context{static_cast<Context*>(userdata)};
-            auto& catcher = std::get<ExceptionCatcher&>(*context);
-            catcher.invoke([&] {
+            assert(context != nullptr);
+            assert(context->catcher != nullptr);
+            context->catcher->invoke([&] {
                 if (responsePtr == nullptr) {
                     throw BadStatus(UA_STATUSCODE_BADUNEXPECTEDERROR);
                 }
                 Response& response = *static_cast<Response*>(responsePtr);
-                auto result = std::invoke(std::get<TransformResponse>(*context), response);
-                std::invoke(std::get<CompletionHandler>(*context), result);
+                auto result = std::invoke(context->transform, response);
+                std::invoke(context->handler, result);
             });
         };
 
         return CallbackAndContext<Context>{
             callback,
-            std::make_unique<Context>(
-                exceptionCatcher,
+            std::make_unique<Context>(Context{
+                &exceptionCatcher,
                 std::forward<TransformResponse>(transformResponse),
                 std::forward<CompletionHandler>(completionHandler)
-            )
+            })
         };
     }
 
@@ -88,7 +92,7 @@ struct AsyncServiceAdapter {
             [&](auto&& completionHandler, auto&& transform) {
                 // NOLINTNEXTLINE(clang-analyzer-cplusplus.NewDeleteLeaks), false positive?
                 auto callbackAndContext = createCallbackAndContext(
-                    opcua::detail::getContext(client).exceptionCatcher,
+                    opcua::detail::getExceptionCatcher(client),
                     std::forward<decltype(transform)>(transform),
                     std::forward<decltype(completionHandler)>(completionHandler)
                 );
@@ -116,7 +120,7 @@ auto sendRequest(
         client,
         [&](UA_ClientAsyncServiceCallback callback, void* userdata) {
             const auto status = __UA_Client_AsyncService(
-                client.handle(),
+                opcua::detail::getHandle(client),
                 &request,
                 &getDataType<Request>(),
                 callback,
@@ -127,7 +131,7 @@ auto sendRequest(
             if (opcua::detail::isBad(status)) {
                 Response response{};
                 response.responseHeader.serviceResult = status;
-                callback(client.handle(), userdata, {}, &response);
+                callback(opcua::detail::getHandle(client), userdata, {}, &response);
             }
         },
         std::forward<TransformResponse>(transformResponse),
@@ -152,7 +156,11 @@ static auto sendRequest(
     });
 
     __UA_Client_Service(
-        client.handle(), &request, &getDataType<Request>(), &response, &getDataType<Response>()
+        opcua::detail::getHandle(client),
+        &request,
+        &getDataType<Request>(),
+        &response,
+        &getDataType<Response>()
     );
 
     return std::invoke(std::forward<TransformResponse>(transformResponse), response);

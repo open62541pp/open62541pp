@@ -516,13 +516,10 @@ void Client::Deleter::operator()(UA_Client* client) noexcept {
 
 Client* asWrapper(UA_Client* client) noexcept {
     auto* config = detail::getConfig(client);
-    if (config == nullptr) {
-        return nullptr;
-    }
-    return static_cast<Client*>(config->clientContext);
+    return config == nullptr ? nullptr : static_cast<Client*>(config->clientContext);
 }
 
-/* -------------------------------------- Helper functions -------------------------------------- */
+/* -------------------------------------- Utility functions ------------------------------------- */
 
 namespace detail {
 
@@ -531,26 +528,33 @@ UA_ClientConfig* getConfig(UA_Client* client) noexcept {
 }
 
 UA_Logger* getLogger(UA_ClientConfig* config) noexcept {
-    if (config == nullptr) {
-        return nullptr;
-    }
 #if UAPP_OPEN62541_VER_GE(1, 4)
-    return config->logging;
+    return config == nullptr ? nullptr : config->logging;
 #else
-    return &config->logger;
+    return config == nullptr ? nullptr : &config->logger;
 #endif
 }
 
 ClientContext* getContext(UA_Client* client) noexcept {
     auto* wrapper = asWrapper(client);
-    if (wrapper == nullptr) {
-        return nullptr;
-    }
-    return &getContext(*wrapper);
+    return wrapper == nullptr ? nullptr : &getContext(*wrapper);
 }
 
 ClientContext& getContext(Client& client) noexcept {
     return client.context();
+}
+
+ExceptionCatcher* getExceptionCatcher(UA_Client* client) noexcept {
+    auto* context = getContext(client);
+    return context == nullptr ? nullptr : &context->exceptionCatcher;
+}
+
+ExceptionCatcher& getExceptionCatcher(Client& client) noexcept {
+    return getContext(client).exceptionCatcher;
+}
+
+UA_Client* getHandle(Client& client) noexcept {
+    return client.handle();
 }
 
 }  // namespace detail
