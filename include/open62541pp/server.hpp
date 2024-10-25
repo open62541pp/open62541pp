@@ -4,6 +4,7 @@
 #include <memory>
 #include <string>
 #include <string_view>
+#include <utility>  // move
 #include <vector>
 
 #include "open62541pp/common.hpp"  // NamespaceIndex

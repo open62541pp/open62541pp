@@ -8,7 +8,6 @@
 #include <type_traits>  // invoke_result_t
 
 #include "open62541pp/config.hpp"
-#include "open62541pp/plugin/log.hpp"
 #include "open62541pp/server.hpp"  // getWrapper
 #include "open62541pp/wrapper.hpp"  // asWrapper, asNative
 
