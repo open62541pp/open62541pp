@@ -10,6 +10,7 @@
 #include "open62541pp/config.hpp"
 #include "open62541pp/datatype.hpp"
 #include "open62541pp/detail/open62541/server.h"
+#include "open62541pp/detail/server_utils.hpp"
 #include "open62541pp/event.hpp"
 #include "open62541pp/nodeids.hpp"
 #include "open62541pp/session.hpp"
@@ -26,22 +27,6 @@
 namespace opcua {
 template <typename Connection>
 class Node;
-class Server;
-
-namespace detail {
-struct ServerContext;
-}  // namespace detail
-
-/* -------------------------------------- Helper functions -------------------------------------- */
-
-namespace detail {
-
-UA_ServerConfig* getConfig(UA_Server* server) noexcept;
-UA_Logger* getLogger(UA_ServerConfig* config) noexcept;
-ServerContext* getContext(UA_Server* server) noexcept;
-ServerContext& getContext(Server& server) noexcept;
-
-}  // namespace detail
 
 /* ---------------------------------------- ServerConfig ---------------------------------------- */
 

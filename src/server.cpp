@@ -547,7 +547,7 @@ UA_Server* asNative(Server* server) noexcept {
     return server == nullptr ? nullptr : server->handle();
 }
 
-/* -------------------------------------- Helper functions -------------------------------------- */
+/* -------------------------------------- Utility functions ------------------------------------- */
 
 namespace detail {
 
@@ -570,6 +570,19 @@ ServerContext* getContext(UA_Server* server) noexcept {
 
 ServerContext& getContext(Server& server) noexcept {
     return server.context();
+}
+
+ExceptionCatcher* getExceptionCatcher(UA_Server* server) noexcept {
+    auto* context = getContext(server);
+    return context == nullptr ? nullptr : &context->exceptionCatcher;
+}
+
+ExceptionCatcher& getExceptionCatcher(Server& server) noexcept {
+    return getContext(server).exceptionCatcher;
+}
+
+UA_Server* getHandle(Server& server) noexcept {
+    return server.handle();
 }
 
 }  // namespace detail

@@ -9,6 +9,7 @@
 
 #include "open62541pp/config.hpp"
 #include "open62541pp/datatype.hpp"
+#include "open62541pp/detail/client_utils.hpp"
 #include "open62541pp/detail/open62541/client.h"
 #include "open62541pp/span.hpp"
 #include "open62541pp/subscription.hpp"
@@ -20,27 +21,9 @@
 #include "open62541pp/plugin/log_default.hpp"  // LogFunction
 
 namespace opcua {
-class Client;
 struct Login;
 template <typename Connection>
 class Node;
-
-namespace detail {
-class ExceptionCatcher;
-struct ClientContext;
-}  // namespace detail
-
-/* -------------------------------------- Helper functions -------------------------------------- */
-
-namespace detail {
-
-UA_ClientConfig* getConfig(UA_Client* client) noexcept;
-UA_Logger* getLogger(UA_ClientConfig* config) noexcept;
-ClientContext* getContext(UA_Client* client) noexcept;
-ClientContext& getContext(Client& client) noexcept;
-ExceptionCatcher* getExceptionCatcher(UA_Client* client) noexcept;
-
-}  // namespace detail
 
 /* ---------------------------------------- ClientConfig ---------------------------------------- */
 

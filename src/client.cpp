@@ -523,7 +523,7 @@ UA_Client* asNative(Client* client) noexcept {
     return client == nullptr ? nullptr : client->handle();
 }
 
-/* -------------------------------------- Helper functions -------------------------------------- */
+/* -------------------------------------- Utility functions ------------------------------------- */
 
 namespace detail {
 
@@ -551,6 +551,14 @@ ClientContext& getContext(Client& client) noexcept {
 ExceptionCatcher* getExceptionCatcher(UA_Client* client) noexcept {
     auto* context = getContext(client);
     return context == nullptr ? nullptr : &context->exceptionCatcher;
+}
+
+ExceptionCatcher& getExceptionCatcher(Client& client) noexcept {
+    return getContext(client).exceptionCatcher;
+}
+
+UA_Client* getHandle(Client& client) noexcept {
+    return client.handle();
 }
 
 }  // namespace detail
