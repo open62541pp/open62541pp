@@ -1,10 +1,7 @@
 #pragma once
 
-#include <algorithm>  // for_each_n
-#include <iterator>  // make_move_iterator
 #include <type_traits>
 #include <utility>  // exchange
-#include <vector>
 
 #include "open62541pp/detail/open62541/common.h"
 #include "open62541pp/detail/result_utils.hpp"
@@ -58,6 +55,19 @@ auto getSingleResult(Response& response) noexcept -> Result<decltype(std::ref(*r
     return std::ref(*response.results);
 }
 
+// Get single result from response and save response status code in result type's statusCode member.
+template <typename WrapperType, typename Response>
+[[nodiscard]] auto wrapSingleResultWithStatus(Response& response) noexcept {
+    return getSingleResult(response)
+        .transform(Wrap<WrapperType>{})
+        .orElse([](UA_StatusCode& code) {
+            Result<WrapperType> result;
+            result->handle()->statusCode = code;
+            return result;
+        })
+        .value();
+}
+
 inline Result<void> toResult(UA_StatusCode code) noexcept {
     if (opcua::detail::isBad(code)) {
         return BadResult(code);
@@ -70,24 +80,6 @@ inline Result<NodeId> getAddedNodeId(UA_AddNodesResult& result) noexcept {
         return BadResult(code);
     }
     return {std::exchange(result.addedNodeId, {})};
-}
-
-inline Result<std::vector<Variant>> getOutputArguments(UA_CallMethodResult& result) noexcept {
-    if (const StatusCode code = result.statusCode; code.isBad()) {
-        return BadResult(result.statusCode);
-    }
-    for (const StatusCode code :
-         Span(result.inputArgumentResults, result.inputArgumentResultsSize)) {
-        if (code.isBad()) {
-            return BadResult(code);
-        }
-    }
-    return opcua::detail::tryInvoke([&] {
-        return std::vector<Variant>{
-            std::make_move_iterator(result.outputArguments),
-            std::make_move_iterator(result.outputArguments + result.outputArgumentsSize)  // NOLINT
-        };
-    });
 }
 
 inline Result<uint32_t> getMonitoredItemId(const UA_MonitoredItemCreateResult& result) noexcept {
