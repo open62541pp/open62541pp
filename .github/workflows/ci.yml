@@ -155,7 +155,7 @@ jobs:
           ${{ matrix.config.flags }}
 
       - name: Build
-        run: cmake --build ./build --config ${{ matrix.build_type }}
+        run: cmake --build ./build --config ${{ matrix.build_type }} --parallel
 
       - name: Run tests
         run: ctest --test-dir ./build --build-config ${{ matrix.build_type }} --output-on-failure
